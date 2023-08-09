@@ -8,8 +8,8 @@ const enum Assets {
 	Logo = "https://cdn.discordapp.com/attachments/459040398527037441/1133604869589180436/feh.png",
 }
 
-function truncateText(text: string) {
-	if (text.length > 127) return text.slice(0, 124) + "...";
+function truncateText(text: string): string {
+	if (text.length > 127) return `${text.slice(0, 124)}...`;
 	return text;
 }
 
@@ -316,17 +316,14 @@ function applySupportDetails(
 						...document.querySelectorAll(".body-section-tournament"),
 					].filter(section => !!section.querySelector("h2"));
 					for (let i = roundSections.length - 1; i >= 0; i--) {
-						const section = roundSections[i],
-							title =
-								section.querySelector<HTMLHeadingElement>("h2").textContent,
-							battles = [
-								...section.querySelectorAll<HTMLDivElement>(
-									".tournaments-battle"
-								),
-							];
-						for (let j = 0; j < battles.length; j++) {
-							const battle = battles[j],
-								nameElements = [
+						const section = roundSections[i];
+
+						for (const [j, battle] of [
+							...section.querySelectorAll<HTMLDivElement>(
+								".tournaments-battle"
+							),
+						].entries()) {
+							const nameElements = [
 									...battle.querySelectorAll<HTMLParagraphElement>(".name"),
 								],
 								names = nameElements.map(name => name.textContent),
@@ -337,12 +334,13 @@ function applySupportDetails(
 									battle.querySelector<HTMLDivElement>(".tournaments-art-win"),
 									"::after"
 								).backgroundImage.match(/url\((.+)\)/)[1],
-								tmpData: PresenceData = Object.assign({}, presenceData),
-								id = `round${i}battle${j}`;
-							tmpData.state = `${title}: ${names[0]} vs. ${names[1]}`;
+								tmpData: PresenceData = Object.assign({}, presenceData);
+							tmpData.state = `${
+								section.querySelector<HTMLHeadingElement>("h2").textContent
+							}: ${names[0]} vs. ${names[1]}`;
 							tmpData.smallImageKey = winningImage;
 							tmpData.smallImageText = `${scores[0]} vs. ${scores[1]}`;
-							slideshow.addSlide(id, tmpData, 5e3);
+							slideshow.addSlide(`round${i}battle${j}`, tmpData, 5e3);
 						}
 					}
 					break;
@@ -353,7 +351,10 @@ function applySupportDetails(
 	}
 }
 
-function applyFehPassDetails(presenceData: PresenceData, pathList: string[]) {
+function applyFehPassDetails(
+	presenceData: PresenceData,
+	pathList: string[]
+): void {
 	switch (pathList[0] ?? "") {
 		case "faq": {
 			presenceData.details = "Reading FEH Pass FAQ";
@@ -381,9 +382,7 @@ function applyFehPassDetails(presenceData: PresenceData, pathList: string[]) {
 				presenceData.buttons = [
 					{ label: "View Talk", url: document.location.href },
 				];
-			} else {
-				presenceData.details = "Browsing FEH Pass Talk";
-			}
+			} else presenceData.details = "Browsing FEH Pass Talk";
 			break;
 		}
 		default: {
@@ -407,7 +406,10 @@ function applyFehPassDetails(presenceData: PresenceData, pathList: string[]) {
 	}
 }
 
-function applyGuideDetails(presenceData: PresenceData, pathList: string[]) {
+function applyGuideDetails(
+	presenceData: PresenceData,
+	pathList: string[]
+): void {
 	switch (pathList[0] ?? "") {
 		case "": {
 			presenceData.details = "Browsing the Guide";
@@ -448,27 +450,23 @@ function applyGuideDetails(presenceData: PresenceData, pathList: string[]) {
 			break;
 		}
 		default: {
-			const characterSubName =
-					document.querySelector<HTMLParagraphElement>(
-						".sec_charanick"
-					).textContent,
-				characterName =
-					document.querySelector<HTMLHeadingElement>(
-						".sec_charaname"
-					).textContent,
-				characterImage =
+			const characterImage =
 					document.querySelector<HTMLImageElement>(".sec_gif > img").src,
-				largeCharacterImage = document.querySelector<HTMLImageElement>(
-					".slick-slide.slick-current img"
-				).src,
 				characterDescriptions = [...document.querySelectorAll("dl dt")].map(
 					dt => ({
 						text: dt.textContent,
 						image: dt.nextElementSibling.querySelector("img").src,
 					})
 				);
-			presenceData.details = `Reading about ${characterName}: ${characterSubName}`;
-			presenceData.largeImageKey = largeCharacterImage;
+			presenceData.details = `Reading about ${
+				document.querySelector<HTMLHeadingElement>(".sec_charaname").textContent
+			}: ${
+				document.querySelector<HTMLParagraphElement>(".sec_charanick")
+					.textContent
+			}`;
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+				".slick-slide.slick-current img"
+			).src;
 			presenceData.smallImageKey = characterImage;
 			presenceData.buttons = [
 				{ label: "View Character", url: document.location.href },
@@ -484,7 +482,7 @@ function applyGuideDetails(presenceData: PresenceData, pathList: string[]) {
 	}
 }
 
-function applyNewGuideDetails(presenceData: PresenceData) {
+function applyNewGuideDetails(presenceData: PresenceData): void {
 	presenceData.details = "Browsing the Guide";
 	presenceData.state = document.querySelector("h1").textContent;
 	presenceData.buttons = [{ label: "Read Guide", url: document.location.href }];
