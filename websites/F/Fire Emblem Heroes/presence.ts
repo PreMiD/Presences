@@ -5,12 +5,76 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://cdn.discordapp.com/attachments/459040398527037441/1133604869589180436/feh.png",
+	Logo = "https://i.imgur.com/Wrd78TA.png",
 }
 
 function truncateText(text: string): string {
 	if (text.length > 127) return `${text.slice(0, 124)}...`;
 	return text;
+}
+
+function loadImage(image: HTMLImageElement, url: string): Promise<void> {
+	return new Promise(resolve => {
+		image.addEventListener("load", () => resolve());
+		image.src = url;
+	});
+}
+
+function getCanvasBlob(): Promise<Blob> {
+	return new Promise((resolve, reject) => {
+		canvas.toBlob(blob => {
+			if (!blob) reject();
+			resolve(blob);
+		}, "image/png");
+	});
+}
+
+const canvas = document.createElement("canvas"),
+	ctx = canvas.getContext("2d");
+
+canvas.height = 512;
+canvas.width = 512;
+
+const squareImageCache: Record<string, string> = {};
+let isUploading = false;
+
+async function squareImage(url: string) {
+	if (squareImageCache[url]) return squareImageCache[url];
+	if (isUploading) return Assets.Logo;
+	isUploading = true;
+	const image = document.createElement("img");
+	image.crossOrigin = "anonymous";
+	presence.info(`Loading ${url}`);
+	await loadImage(image, url);
+	presence.info(`Done loading ${url}`);
+	const canvasWidth = canvas.width,
+		canvasHeight = canvas.height,
+		imageWidth = image.naturalWidth,
+		imageHeight = image.naturalHeight,
+		scale = Math.min(canvasWidth / imageWidth, canvasHeight / imageHeight),
+		scaledWidth = imageWidth * scale,
+		scaledHeight = imageHeight * scale;
+
+	ctx.clearRect(0, 0, 512, 512);
+	ctx.drawImage(
+		image,
+		(canvasWidth - scaledWidth) / 2,
+		(canvasHeight - scaledHeight) / 2,
+		scaledWidth,
+		scaledHeight
+	);
+
+	const file = await getCanvasBlob(),
+		formData = new FormData();
+	formData.append("file", file, "file");
+
+	const resultURL = await fetch("https://pd.premid.app/create/image", {
+		method: "POST",
+		body: formData,
+	}).then(r => r.text());
+	isUploading = false;
+	squareImageCache[url] = resultURL;
+	return resultURL;
 }
 
 function applyMainHostDetails(
@@ -28,7 +92,7 @@ function applyMainHostDetails(
 				case "cont2": {
 					presenceData.details = "Reading FEH Lore";
 					presenceData.state =
-						document.querySelector<HTMLImageElement>("#storySlide .on").alt;
+						document.querySelector<HTMLImageElement>("#storySlide .flex-active .on").alt;
 					break;
 				}
 				case "cont4": {
@@ -113,11 +177,16 @@ let section = "",
 	oldPath = "";
 const observer = new IntersectionObserver(
 	entries => {
-		let visibleSection = "";
+		let visibleSection = section;
 		for (const entry of entries) {
-			if (entry.intersectionRatio > 0) {
-				visibleSection = entry.target.id;
+			const id = entry.target.id,
+				ratio = entry.intersectionRatio;
+			if (ratio > 0.05) {
+				visibleSection = id;
 				break;
+			}
+			if (visibleSection === id && ratio < 0.05) {
+				visibleSection = "";
 			}
 		}
 		if (visibleSection !== section) section = visibleSection;
@@ -143,9 +212,14 @@ function activateMainIntersectionObservers(pathList: string[]): void {
 	intersectionObserversActivated = true;
 }
 
-function applyCYLDetails(presenceData: PresenceData, pathList: string[]): void {
+async function applyCYLDetails(
+	presenceData: PresenceData,
+	pathList: string[]
+): Promise<void> {
 	const campaignTitle =
-		document.querySelector<HTMLDivElement>(".campaigns-title").textContent;
+		document.querySelector<HTMLDivElement>(".campaigns-title")?.textContent ??
+		document.title.match(/(?<=-\s).+?(?=$|\s-)/)?.[0] ??
+		document.title;
 	presenceData.buttons = [
 		{ label: "View Campaign", url: document.location.href },
 	];
@@ -174,7 +248,7 @@ function applyCYLDetails(presenceData: PresenceData, pathList: string[]): void {
 		case "results": {
 			if (
 				new URLSearchParams(document.location.search).get("overall") ||
-				pathList[0] !== "result" ||
+				pathList[0].indexOf("detail") !== -1 ||
 				(pathList[0] === "result" && pathList[1])
 			)
 				presenceData.details = `Viewing ${campaignTitle} results`;
@@ -182,54 +256,66 @@ function applyCYLDetails(presenceData: PresenceData, pathList: string[]): void {
 				// Note to future maintainers: The pages for each event look the same, but seem to keep changing
 				// the class names for the elements between events.
 				// I've tried to make this as future-proof as possible, but if it breaks, this is probably why.
-				const winnerData = [
-					...document.querySelectorAll<HTMLDivElement>(
-						".result-special-character [class*=result-special-character-wrap], .HeroItem.-golden"
-					),
-				].map<PresenceData>(winner => {
-					let mainImage = winner.querySelector<HTMLImageElement>(
-						".result-stand > img, .hero-image, .HeroItem__Image"
-					)?.src;
-					if (!mainImage) {
-						mainImage = getComputedStyle(
-							winner.querySelector<HTMLParagraphElement>(
-								"[class*=result-stand]"
-							)
-						)?.backgroundImage.match(/url\((.+)\)/)[1];
-					}
-					let rankImage = winner.querySelector<HTMLImageElement>(
-						".star > img, .icon-rank, .HeroItem__Rank"
-					).src;
-					if (!rankImage) {
-						rankImage = getComputedStyle(
-							winner,
-							"::after"
-						).backgroundImage.match(/url\((.+)\)/)[1];
-					}
-					return {
-						...presenceData,
-						details: `Viewing winners of ${campaignTitle}`,
-						state: `${
-							winner.querySelector(
-								".hero-result-hero-name, .hero-name, .HeroItem__Name"
-							).textContent
-						} - ${
-							winner.querySelector(
-								".hero-result-series-name, .series-name, .HeroItem__SeriesName"
-							).textContent
-						}`,
-						largeImageKey: mainImage,
-						smallImageKey: rankImage,
-						smallImageText: `${
-							winner.querySelector(
-								".hero-result-vote-count, .HeroItem__VoteCount, .vote-count"
-							).textContent
-						} votes}`,
-						buttons: [{ label: "View Results", url: document.location.href }],
-					};
-				});
-				for (const winner of winnerData)
-					slideshow.addSlide(winner.largeImageKey, winner, 5e3);
+				const winnerData = await Promise.all(
+					[
+						...document.querySelectorAll<HTMLDivElement>(
+							".result-special-character [class*=result-special-character-wrap]"
+						),
+						...document.querySelectorAll<HTMLDivElement>(".HeroItem.-golden"),
+						...document.querySelectorAll<HTMLDivElement>(
+							".result-stand-heroes .hero"
+						),
+					].map<Promise<PresenceData>>(async winner => {
+						let mainImage = (
+							winner.querySelector<HTMLImageElement>(".result-stand > img") ??
+							winner.querySelector<HTMLImageElement>(".hero-image") ??
+							winner.querySelector<HTMLImageElement>(".HeroItem__Image") ??
+							winner.querySelector<HTMLImageElement>("p > img")
+						)?.src;
+						if (!mainImage) {
+							mainImage = getComputedStyle(
+								winner.querySelector<HTMLParagraphElement>(
+									"[class*=result-stand]"
+								)
+							)?.backgroundImage.match(/url\(["']?(.+?)["']?\)/)[1];
+						}
+						let rankImage = (
+							winner.querySelector<HTMLImageElement>(".star > img") ??
+							winner.querySelector<HTMLImageElement>(".icon-rank") ??
+							winner.querySelector<HTMLImageElement>(".HeroItem__Rank")
+						)?.src;
+						if (!rankImage) {
+							rankImage = getComputedStyle(
+								winner,
+								"::after"
+							).backgroundImage.match(/url\(['"]?(.+?)['"]?\)/)[1];
+						}
+						return {
+							...presenceData,
+							details: `Viewing winners of ${campaignTitle}`,
+							state: `${
+								winner.querySelector(
+									".hero-result-hero-name, .hero-name, .HeroItem__Name"
+								).textContent
+							} - ${
+								winner.querySelector(
+									".hero-result-series-name, .series-name, .HeroItem__SeriesName"
+								).textContent
+							}`,
+							largeImageKey: await squareImage(mainImage),
+							smallImageKey: rankImage,
+							smallImageText: `${
+								winner.querySelector(
+									".hero-result-vote-count, .HeroItem__VoteCount, .vote-count"
+								).textContent
+							} votes`,
+							buttons: [{ label: "View Results", url: document.location.href }],
+						};
+					})
+				);
+				for (let i = 0; i < winnerData.length; i++) {
+					slideshow.addSlide(`${i}`, winnerData[i], 5e3);
+				}
 			}
 			break;
 		}
@@ -333,7 +419,7 @@ function applySupportDetails(
 								winningImage = getComputedStyle(
 									battle.querySelector<HTMLDivElement>(".tournaments-art-win"),
 									"::after"
-								).backgroundImage.match(/url\((.+)\)/)[1],
+								).backgroundImage.match(/url\(['"]?(.+?)["']?\)/)[1],
 								tmpData: PresenceData = Object.assign({}, presenceData);
 							tmpData.state = `${
 								section.querySelector<HTMLHeadingElement>("h2").textContent
@@ -494,10 +580,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname } = document.location,
-		pathList = pathname
-			.split("/")
-			.filter(path => path)
-			.slice(1);
+		pathList = pathname.split("/").filter(path => path);
 
 	if (oldPath !== pathname) {
 		oldPath = pathname;
@@ -509,18 +592,18 @@ presence.on("UpdateData", async () => {
 
 	switch (true) {
 		case hostname === "fire-emblem-heroes.com":
-			applyMainHostDetails(presenceData, pathList);
+			applyMainHostDetails(presenceData, pathList.slice(1));
 			break;
 		case hostname === "events.fire-emblem-heroes.com":
 		case /vote\d+[.]campaigns[.]fire-emblem-heroes[.]com/.test(hostname):
 		case hostname === "support.fire-emblem-heroes.com": {
 			if (hostname.startsWith("support")) {
 				if (pathList[0] === "vote" || pathList[0] === "vote2")
-					applyCYLDetails(presenceData, pathList.slice(1));
+					await applyCYLDetails(presenceData, pathList.slice(1));
 				else applySupportDetails(presenceData, pathList);
 			} else if (hostname.startsWith("vote3"))
-				applyCYLDetails(presenceData, pathList);
-			else applyCYLDetails(presenceData, pathList.slice(1));
+				await applyCYLDetails(presenceData, pathList);
+			else await applyCYLDetails(presenceData, pathList.slice(1));
 			break;
 		}
 		case hostname === "fehpass.fire-emblem-heroes.com": {
@@ -537,7 +620,18 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
+	debugData = presenceData;
+	debugCount++;
+
 	if (slideshow.getSlides().length) presence.setActivity(slideshow);
 	else if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
+
+let debugData: PresenceData = {};
+let debugCount = 0;
+
+setInterval(() => {
+	console.log(debugData, debugCount);
+	console.log(slideshow.currentSlide);
+}, 2500);
