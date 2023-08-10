@@ -18,14 +18,14 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.includes("/anime_list/")) {
 		presenceData.details = "Przegląda listę Anime";
 		presenceData.buttons = [
-			{ label: "Lista Anime", url: document.location.href },
+			{ label: "Zobacz Listę Anime", url: document.location.href },
 		];
 	} else if (document.location.pathname.includes("/anime")) {
 		if (anime) {
 			presenceData.details = anime.textContent;
 			presenceData.smallImageKey = "https://i.imgur.com/xHce23t.png";
 			presenceData.buttons = [
-				{ label: "Obejrzyj teraz", url: document.location.href },
+				{ label: "Obejrzyj Teraz", url: document.location.href },
 			];
 
 			const episodeNumber =
