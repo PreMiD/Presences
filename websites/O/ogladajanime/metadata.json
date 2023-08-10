@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "954843951297351771",
+		"name": "_eki"
+	},
+	"service": "ogladajanime",
+	"description": {
+		"en": "Watch anime with Polish subtitles. All free and no ads.",
+		"pl": "Oglądaj anime z polskimi napisami. Wszystko za darmo i bez reklam."
+	},
+	"url": [
+		"ogladajanime.pl",
+		"www.ogladajanime.pl"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/9bardgu.png",
+	"thumbnail": "https://i.imgur.com/oI9te4V.png",
+	"color": "#29C5F6",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"ogladajanime",
+		"ogladajanimepl"
+	]
+}
