@@ -1,7 +1,6 @@
-export const presence = new Presence({
-		clientId: "1133602327476047873",
-	}),
-	slideshow = presence.createSlideshow();
+export const slideshow = new Presence({
+	clientId: "1133602327476047873",
+}).createSlideshow();
 
 export const enum Assets {
 	Logo = "https://i.imgur.com/Wrd78TA.png",
