@@ -37,7 +37,7 @@ canvas.width = 512;
 const squareImageCache: Record<string, string> = {};
 let isUploading = false;
 
-export async function squareImage(url: string) {
+export async function squareImage(url: string): Promise<string> {
 	if (squareImageCache[url]) return squareImageCache[url];
 	if (isUploading) return Assets.Logo;
 	isUploading = true;
