@@ -1,9 +1,10 @@
-export const slideshow = new Presence({
+export const presence = new Presence({
 	clientId: "1133602327476047873",
-}).createSlideshow();
+});
+export const slideshow = presence.createSlideshow();
 
 export const enum Assets {
-	Logo = "https://i.imgur.com/Wrd78TA.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/F/Fire%20Emblem%20Heroes/assets/logo.png",
 }
 
 export function truncateText(text: string): string {

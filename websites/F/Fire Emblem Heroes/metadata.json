@@ -19,8 +19,8 @@
 	],
 	"regExp": "(.*[.])?fire-emblem-heroes[.]com[/]",
 	"version": "1.0.1",
-	"logo": "https://i.imgur.com/Wrd78TA.png",
-	"thumbnail": "https://cdn.discordapp.com/attachments/459040398527037441/1133604869945704588/feh2.jpg",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Fire%20Emblem%20Heroes/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Fire%20Emblem%20Heroes/assets/thumbnail.jpg",
 	"color": "#f8d230",
 	"category": "games",
 	"tags": [
