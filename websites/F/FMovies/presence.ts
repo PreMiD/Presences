@@ -64,23 +64,13 @@ presence.on("UpdateData", async () => {
 		]);
 
 	if (pathname.includes("/series/") || pathname.includes("/tv/")) {
-		const season =
-				document
-					.querySelector(".watch[data-season]")
-					?.getAttribute("data-season") || null,
-			episode =
-				document.querySelector(".watch[data-ep]")?.getAttribute("data-ep") ||
-				null;
+		const matches = href.match(/\/(\d+-\d+)/);
 
-		if (season !== null || episode !== null) {
-			presenceData.state =
-				episode && season
-					? `S${season}:E${episode}`
-					: episode && !season
-					? `Episode ${episode}`
-					: !episode && season
-					? `Season ${season}`
-					: "";
+		if (matches) {
+			const [season, episode] = matches[1].split("-");
+			presenceData.state = `S${season}:E${episode}`;
+		} else {
+			presenceData.state = "";
 		}
 		setCommonData(presenceData, document, iFrameData, href);
 	} else if (pathname.startsWith("/movie/"))
