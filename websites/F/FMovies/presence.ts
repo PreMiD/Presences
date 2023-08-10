@@ -69,9 +69,8 @@ presence.on("UpdateData", async () => {
 		if (matches) {
 			const [season, episode] = matches[1].split("-");
 			presenceData.state = `S${season}:E${episode}`;
-		} else 
-			presenceData.state = "";
-		
+		} else presenceData.state = "";
+
 		setCommonData(presenceData, document, iFrameData, href);
 	} else if (pathname.startsWith("/movie/"))
 		setCommonData(presenceData, document, iFrameData, href);
