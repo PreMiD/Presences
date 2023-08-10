@@ -40,7 +40,7 @@ function setCommonData(
 		} else presenceData.smallImageKey = Assets.Pause;
 		presenceData.buttons = [
 			{
-				label: href.includes("movie") ? "Watch Movie" : "Watch Series",
+				label: href.includes("/movie") ? "Watch Movie" : "Watch Series",
 				url: href,
 			},
 		];
@@ -65,20 +65,14 @@ presence.on("UpdateData", async () => {
 
 	if (pathname.includes("/series/") || pathname.includes("/tv/")) {
 		const season =
-			document.querySelector<HTMLSpanElement>(".value")?.textContent ??
-			document
-				.querySelector('[class="season-view"]')
-				?.textContent?.match(/[0-9]{1,}/gm)?.[0];
-		let episode =
-			document.querySelector<HTMLAnchorElement>("a.active")?.textContent ??
-			document.querySelector('[class="watch"]')?.getAttribute("data-ep");
-		if (season || episode) {
-			if (episode.includes(":")) {
-				episode = episode
-					.split(":")?.[0]
-					.replace(/episode(s)?/gi, "")
-					.trim();
-			}
+				document
+					.querySelector(".watch[data-season]")
+					?.getAttribute("data-season") || null,
+			episode =
+				document.querySelector(".watch[data-ep]")?.getAttribute("data-ep") ||
+				null;
+
+		if (season !== null || episode !== null) {
 			presenceData.state =
 				episode && season
 					? `S${season}:E${episode}`
