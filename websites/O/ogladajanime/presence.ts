@@ -7,7 +7,8 @@ const presence = new Presence({ clientId: "1137362720254074972" }),
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		startTimestamp: browsingTimestamp,
-		largeImageKey: "https://i.imgur.com/xHce23t.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/O/ogladajanime/assets/0.png",
 	};
 
 	if (pathname === "/main2") presenceData.details = "Przegląda stronę główną";
@@ -21,11 +22,13 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.includes("/anime")) {
 		if (anime) {
 			presenceData.details = anime.textContent;
-			presenceData.smallImageKey = "https://i.imgur.com/xHce23t.png";
+			presenceData.smallImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/O/ogladajanime/assets/0.png";
 			presenceData.buttons = [{ label: "Obejrzyj Teraz", url: href }];
 
-			const episodeNumber = parseInt(href.split("/").pop() || "1", 10) || 1;
-			presenceData.state = `Odcinek : ${episodeNumber}`;
+			presenceData.state = `Odcinek : ${
+				parseInt(href.split("/").pop() || "1", 10) || 1
+			}`;
 		}
 
 		if (animeicon) {
