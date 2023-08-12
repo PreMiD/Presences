@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "408039555296395264",
+		"name": "indium."
+	},
+	"service": "KEXP",
+	"description": {
+		"en": "KEXP operates one of the world's most influential listener-supported music radio stations. Broadcasting on 90.3 KEXP-FM in Seattle, it also reaches audiences through its website and mobile apps.",
+		"es": "KEXP opera una de las estaciones de radio de música más influyentes en el mundo. Respaldada por los oyentes, transmite en 90.3 KEXP-FM en Seattle, además de a través de su sitio web y aplicaciones móviles."
+	},
+	"url": "kexp.org",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/RBf6mDU.png",
+	"thumbnail": "https://i.imgur.com/GJT7mBf.png",
+	"color": "#fbab2c",
+	"category": "music",
+	"tags": [
+		"radio",
+		"music",
+		"kexp",
+		"seattle"
+	]
+}
