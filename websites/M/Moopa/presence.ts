@@ -10,13 +10,13 @@ const enum Assets {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
 		},
 		[titleLang] = await Promise.all([presence.getSetting("title")]),
 		{ pathname, href } = document.location;
 
 	if (pathname === "/" || pathname === "/en/") {
 		presenceData.details = "Browsing Homepage";
-		presenceData.startTimestamp = browsingTimestamp;
 	} else if (pathname.includes("/id/"))
 		presenceData.details = "Browsing Anime/Manga";
 	else if (pathname.includes("/profile/")) {
@@ -26,10 +26,8 @@ presence.on("UpdateData", async () => {
 		presenceData.state = "Viewing profile";
 	} else if (pathname === "/en/anime/trending/") {
 		presenceData.details = "Browsing trending Anime";
-		presenceData.startTimestamp = browsingTimestamp;
 	} else if (pathname === "/en/anime/popular/") {
 		presenceData.details = "Browsing popular Anime";
-		presenceData.startTimestamp = browsingTimestamp;
 	} else if (
 		pathname.includes("/anime/") &&
 		!pathname.includes("/watch/") &&
@@ -39,6 +37,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "404 | Not Found";
 			presenceData.details = "Browsing Anime/Manga";
 		} else {
+			delete presenceData.startTimestamp;
 			let title;
 			switch (titleLang) {
 				case 0: {
@@ -97,6 +96,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "404 | Not Found";
 			presenceData.details = "Browsing Anime/Manga";
 		} else {
+			delete presenceData.startTimestamp;
 			const title = document.querySelector("h1.title")?.textContent;
 			presenceData.largeImageKey =
 				document.querySelector('img[alt="cover image"]')?.getAttribute("src") ||
