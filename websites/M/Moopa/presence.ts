@@ -15,20 +15,20 @@ presence.on("UpdateData", async () => {
 		[titleLang] = await Promise.all([presence.getSetting("title")]),
 		{ pathname, href } = document.location;
 
-	if (pathname === "/" || pathname === "/en/") {
+	if (pathname === "/" || pathname === "/en/")
 		presenceData.details = "Browsing Homepage";
-	} else if (pathname.includes("/id/"))
+	else if (pathname.includes("/id/"))
 		presenceData.details = "Browsing Anime/Manga";
 	else if (pathname.includes("/profile/")) {
 		presenceData.details =
 			document.querySelector("h1.font-karla.font-bold.text-2xl.pt-7")
 				?.textContent || "Getting data...";
 		presenceData.state = "Viewing profile";
-	} else if (pathname === "/en/anime/trending/") {
+	} else if (pathname === "/en/anime/trending/")
 		presenceData.details = "Browsing trending Anime";
-	} else if (pathname === "/en/anime/popular/") {
+	else if (pathname === "/en/anime/popular/")
 		presenceData.details = "Browsing popular Anime";
-	} else if (
+	else if (
 		pathname.includes("/anime/") &&
 		!pathname.includes("/watch/") &&
 		!pathname.includes("/search/")
