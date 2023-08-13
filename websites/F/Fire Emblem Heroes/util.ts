@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-one-time-vars/no-one-time-vars
 export const presence = new Presence({
 	clientId: "1133602327476047873",
 });
