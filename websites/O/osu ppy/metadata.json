@@ -37,12 +37,22 @@
 		"vi_VN": "Giai điệu bắt đầu bằng một cái *click* chuột! Với Ouendan/EBA, Taiko và các chế độ trò chơi độc nhất, cũng như một bộ chỉnh sửa trò chơi."
 	},
 	"url": "osu.ppy.sh",
-	"version": "2.0.19",
+	"version": "2.1.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/osu%20ppy/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/osu%20ppy/assets/thumbnail.png",
 	"color": "#FF66AA",
 	"category": "games",
-	"tags": [
-		"games"
+	"tags": ["games"],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
 	]
 }
