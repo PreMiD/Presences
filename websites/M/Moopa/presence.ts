@@ -225,7 +225,6 @@ presence.on("UpdateData", async () => {
 		presenceData.state = "Searching...";
 		presenceData.smallImageKey = Assets.Search;
 	} else {
-		presence.clearActivity();
 		presenceData.details = "Browsing Anime/Manga";
 	}
 
