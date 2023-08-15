@@ -157,18 +157,11 @@ presence.on("UpdateData", () => {
 				break;
 			}
 			case "dashboard": {
+				const reviews = document.querySelector<HTMLDivElement>(
+					"article li:last-child a div:nth-child(2)"
+				).textContent;
 				presenceData.details = "Viewing dashboard";
-				presenceData.state = `${
-					document
-						.querySelector<HTMLAnchorElement>(".reviews-link")
-						.textContent.match(/\d+/)[0]
-				} review${
-					document
-						.querySelector<HTMLAnchorElement>(".reviews-link")
-						.textContent.match(/\d+/)[0] === "1"
-						? ""
-						: "s"
-				}`;
+				presenceData.state = `${reviews} review${reviews === "1" ? "" : "s"}`;
 				break;
 			}
 			case "grammar_points": {
