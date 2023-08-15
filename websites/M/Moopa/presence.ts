@@ -7,12 +7,32 @@ const enum Assets {
 	Logo = "https://i.imgur.com/lelaLhp.png",
 }
 
+function getTitle(titleLang: number) {
+	const metaTitle = document.querySelector('meta[name="title"]'),
+		romajiTitle = metaTitle?.getAttribute("data-title-romaji");
+
+	switch (titleLang) {
+		case 0: {
+			return romajiTitle;
+		}
+		case 1: {
+			return metaTitle?.getAttribute("data-title-english") || romajiTitle;
+		}
+		case 2: {
+			return metaTitle?.getAttribute("data-title-native") || romajiTitle;
+		}
+		default: {
+			return null;
+		}
+	}
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		[titleLang] = await Promise.all([presence.getSetting("title")]),
+		titleLang = (await presence.getSetting("title")) as number,
 		{ pathname, href } = document.location;
 
 	if (pathname === "/" || pathname === "/en/")
@@ -38,38 +58,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing Anime/Manga";
 		} else {
 			delete presenceData.startTimestamp;
-			let title;
-			switch (titleLang) {
-				case 0: {
-					title = document
-						.querySelector('meta[name="title"]')
-						?.getAttribute("data-title-romaji");
-
-					break;
-				}
-				case 1: {
-					title =
-						document
-							.querySelector('meta[name="title"]')
-							?.getAttribute("data-title-english") ||
-						document
-							.querySelector('meta[name="title"]')
-							?.getAttribute("data-title-romaji");
-
-					break;
-				}
-				case 2: {
-					title =
-						document
-							.querySelector('meta[name="title"]')
-							?.getAttribute("data-title-native") ||
-						document
-							.querySelector('meta[name="title"]')
-							?.getAttribute("data-title-romaji");
-
-					break;
-				}
-			}
+			const title = getTitle(titleLang);
 
 			presenceData.largeImageKey =
 				document
@@ -138,41 +127,9 @@ presence.on("UpdateData", async () => {
 			}
 
 			const total = document
-				.querySelector("div.grid.w-full.pl-5")
-				?.getAttribute("data-episode");
-
-			let title;
-			switch (titleLang) {
-				case 0: {
-					title = document
-						.querySelector('meta[name="title"]')
-						?.getAttribute("data-title-romaji");
-
-					break;
-				}
-				case 1: {
-					title =
-						document
-							.querySelector('meta[name="title"]')
-							?.getAttribute("data-title-english") ||
-						document
-							.querySelector('meta[name="title"]')
-							?.getAttribute("data-title-romaji");
-
-					break;
-				}
-				case 2: {
-					title =
-						document
-							.querySelector('meta[name="title"]')
-							?.getAttribute("data-title-native") ||
-						document
-							.querySelector('meta[name="title"]')
-							?.getAttribute("data-title-romaji");
-
-					break;
-				}
-			}
+					.querySelector("div.grid.w-full.pl-5")
+					?.getAttribute("data-episode"),
+				title = getTitle(titleLang);
 
 			if (title) {
 				presenceData.buttons = [
@@ -224,9 +181,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Browsing Manga";
 		presenceData.state = "Searching...";
 		presenceData.smallImageKey = Assets.Search;
-	} else {
-		presenceData.details = "Browsing Anime/Manga";
-	}
+	} else presenceData.details = "Browsing Anime/Manga";
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
