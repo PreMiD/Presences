@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: LOGO_URL,
 		},
 		songTitle = document.querySelector<HTMLAnchorElement>(
-			".footerTrackTitleInformationContainer--w2bJS > a"
+			"[data-test='footer-track-title'] > div > a"
 		),
 		currentTime = document
 			.querySelector<HTMLElement>('time[data-test="current-time"]')
