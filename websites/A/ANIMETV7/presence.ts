@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/hwnprna.jpg",
+	Logo = "https://i.imgur.com/WYI9kyx.png",
 }
 
 function getTitle(titleLang: number) {
