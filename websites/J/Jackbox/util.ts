@@ -8,13 +8,13 @@ export async function uploadFile(
 	uploadedFiles[url] = defaultImage;
 
 	try {
-		const data = await fetch(url).then(res => res.blob()),
-			resultURL = await fetch("https://bashupload.com/", {
-				method: "POST",
-				body: data,
-			})
-				.then(res => res.text())
-				.then(text => text.match(/https(.*)/)?.[0]);
+		const imageData = await fetch(url).then(res => res.blob()),
+			formData = new FormData();
+		formData.append("file", imageData, "file");
+		const resultURL = await fetch("https://pd.premid.com/create/image", {
+			method: "POST",
+			body: imageData,
+		}).then(res => res.text());
 
 		presence.info(resultURL);
 		uploadedFiles[url] = resultURL;
