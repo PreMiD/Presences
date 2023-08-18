@@ -11,9 +11,6 @@ export function getPresenceData({
 		case "postGame": {
 			return { state: "Viewing the results" };
 		}
-		case "voting": {
-			return { state: "Voting" };
-		}
 		case "assembling": {
 			return { state: "Assembling a T-Shirt" };
 		}
