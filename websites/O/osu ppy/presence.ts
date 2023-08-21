@@ -67,7 +67,7 @@ let beatmapTitle: string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/O/osu%20ppy/assets/logo.png",
 		},
 		[buttons, newLang] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
