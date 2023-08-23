@@ -42,7 +42,9 @@
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/osu%20ppy/assets/thumbnail.png",
 	"color": "#FF66AA",
 	"category": "games",
-	"tags": ["games"],
+	"tags": [
+		"games"
+	],
 	"settings": [
 		{
 			"id": "lang",
