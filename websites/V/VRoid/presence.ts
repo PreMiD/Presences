@@ -65,14 +65,104 @@ function applyArtworkSlideshow(presenceData: PresenceData): void {
 	}
 }
 
+let fetchingStrings = false,
+	lastFetchAttempt = 0;
+function getStrings(lang: string): Promise<Record<string, string>> {
+	return new Promise((resolve, reject) => {
+		const timeout = setTimeout(() => {
+			if (Date.now() - lastFetchAttempt > 5e3) {
+				presence.error("Fetching strings timed out. Retrying...");
+				fetchingStrings = false;
+				lastFetchAttempt = Date.now();
+			}
+			reject();
+		}, 5e3);
+		if (fetchingStrings) {
+			if (strings) {
+				presence.info("Fetching new strings, but using old ones.");
+				clearTimeout(timeout);
+				resolve(strings);
+			}
+			return;
+		}
+		fetchingStrings = true;
+		presence.info("Fetching new strings.");
+		presence
+			.getStrings(
+				{
+					browsing: "general.browsing",
+					buttonReadArticle: "general.buttonReadArticle",
+					buttonViewPage: "general.buttonViewPage",
+					buttonViewProfile: "general.buttonViewProfile",
+					readingAbout: "general.readingAbout",
+					readingAPost: "general.readingAPost",
+					readingAnArticle: "general.readingAnArticle",
+					viewAProduct: "general.viewAProduct",
+					viewAProfile: "general.viewAProfile",
+					viewCategory: "general.viewCategory",
+					viewHome: "general.viewHome",
+					viewList: "general.viewList",
+					viewing: "general.viewing",
+				},
+				lang
+			)
+			.then(result => {
+				clearTimeout(timeout);
+				fetchingStrings = false;
+				presence.info("Fetched new strings.");
+				resolve(result);
+			})
+			.catch(() => {
+				presence.error(
+					"Fetching strings failed. Likely a network issue. Retrying..."
+				);
+				fetchingStrings = false;
+				clearTimeout(timeout);
+				reject();
+			});
+	});
+}
+
+let fetchingSetting = false,
+	lastSettingFetchAttempt = 0;
+function getSetting<E extends string | boolean | number>(
+	setting: string
+): Promise<E> {
+	return new Promise(resolve => {
+		const timeout = setTimeout(() => {
+			if (Date.now() - lastSettingFetchAttempt > 5e3) {
+				presence.error("Fetching setting timed out. Retrying...");
+				fetchingSetting = false;
+				lastSettingFetchAttempt = Date.now();
+			}
+			resolve(null);
+		}, 5e3);
+		if (fetchingSetting) return;
+		fetchingSetting = true;
+		presence
+			.getSetting<E>(setting)
+			.then(result => {
+				clearTimeout(timeout);
+				fetchingSetting = false;
+				resolve(result);
+			})
+			.catch(() => null);
+	});
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		lang = await presence.getSetting<string>("lang"),
+		lang = await getSetting<string>("language"),
 		pathList = getImportantPath(),
 		{ hostname, href, pathname } = document.location;
+
+	if (!lang) {
+		presence.info("Failed to fetch language, trying again.");
+		return;
+	}
 
 	if (pathname !== oldPath) {
 		oldPath = pathname;
@@ -80,25 +170,12 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (lang !== oldLang) {
-		oldLang = lang;
-		strings = await presence.getStrings(
-			{
-				browsing: "general.browsing",
-				buttonReadArticle: "general.buttonReadArticle",
-				buttonViewPage: "general.buttonViewPage",
-				buttonViewProfile: "general.buttonViewProfile",
-				readingAbout: "general.readingAbout",
-				readingAPost: "general.readingAPost",
-				readingAnArticle: "general.readingAnArticle",
-				viewAProduct: "general.viewAProduct",
-				viewAProfile: "general.viewAProfile",
-				viewCategory: "general.viewCategory",
-				viewHome: "general.viewHome",
-				viewList: "general.viewList",
-				viewing: "general.viewing",
-			},
-			lang
-		);
+		try {
+			strings = await getStrings(lang);
+			oldLang = lang;
+		} catch {
+			return;
+		}
 	}
 
 	switch (hostname) {
@@ -115,6 +192,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = `VRoid Hub - ${strings.browsing}`;
 					break;
 				}
+				case "capture-application":
 				case "apps": {
 					const [selectedTab] = [
 							...document.querySelectorAll<HTMLAnchorElement>("[role=nav] a"),
@@ -199,7 +277,7 @@ presence.on("UpdateData", async () => {
 				case "tags": {
 					presenceData.details = `VRoid Hub - ${strings.viewCategory}`;
 					presenceData.state = `#${pathList[1]} - ${
-						(pathList[3] === "artworks"
+						(pathList[2] === "artworks"
 							? document.querySelector<HTMLAnchorElement>(
 									"section + div a:nth-of-type(2)"
 							  )
@@ -208,7 +286,7 @@ presence.on("UpdateData", async () => {
 							  )
 						).textContent
 					}`;
-					if (pathList[3] === "artworks") applyArtworkSlideshow(presenceData);
+					if (pathList[2] === "artworks") applyArtworkSlideshow(presenceData);
 					else applyCharacterSlideshow(presenceData);
 					break;
 				}

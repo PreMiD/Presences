@@ -30,9 +30,7 @@
 	"settings": [
 		{
 			"multiLanguage": true,
-			"id": "language",
-			"title": "Language",
-			"icon": "fas fa-language"
+			"id": "language"
 		}
 	]
 }
