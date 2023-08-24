@@ -143,6 +143,23 @@ presence.on("UpdateData", async () => {
 						presenceData.details = `VRoid Hub - ${strings.viewing}`;
 						presenceData.state = getTitle();
 					}
+					break;
+				}
+				case "characters": {
+					const container =
+						document.querySelector<HTMLImageElement>(
+							"canvas + div img"
+						).parentElement;
+					presenceData.details = `VRoid Hub - ${strings.viewAProduct}`;
+					presenceData.state = `${container.querySelector("a").textContent} / ${
+						container.nextElementSibling.textContent
+					}`;
+					presenceData.largeImageKey = container.querySelector("img").src;
+					presenceData.buttons = [{ label: strings.buttonViewPage, url: href }];
+					break;
+				}
+				case "artworks": {
+					break;
 				}
 			}
 			break;
