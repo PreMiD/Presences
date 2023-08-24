@@ -126,9 +126,8 @@ function startSettingGetter(setting: string) {
 	if (!settingsFetchStatus[setting]) {
 		let success = false;
 		settingsFetchStatus[setting] = setTimeout(() => {
-			if (!success) {
+			if (!success)
 				presence.error(`Failed to fetch setting '${setting}' in time.`);
-			}
 			delete settingsFetchStatus[setting];
 		}, 2000);
 		presence
