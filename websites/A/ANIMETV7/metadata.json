@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "1105891230191206432",
+		"name": "ep_1073"
+	},
+	"service": "ANIMETV7",
+	"description": {
+		"en": "ANIMETV7 is a free Anime and Manga streaming website with AniList integration."
+	},
+	"url": "animetv7.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/WYI9kyx.png",
+	"thumbnail": "https://i.imgur.com/ZDVYs2G.png",
+	"color": "#FF7F57",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"manga",
+		"streaming"
+	],
+	"settings": [
+		{
+			"id": "title",
+			"title": "Title Language",
+			"icon": "fa-solid fa-language",
+			"value": 0,
+			"values": [
+				"Romaji",
+				"English",
+				"Native"
+			]
+		}
+	]
+}
