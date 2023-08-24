@@ -4,10 +4,6 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	slideshow = presence.createSlideshow();
 
-let oldLang: string,
-	strings: Awaited<ReturnType<typeof presence.getStrings>>,
-	oldPath: string;
-
 const enum Assets {
 	Logo = "https://i.imgur.com/RAxM8Tw.png",
 }
@@ -65,89 +61,87 @@ function applyArtworkSlideshow(presenceData: PresenceData): void {
 	}
 }
 
-let fetchingStrings = false,
-	lastFetchAttempt = 0;
-function getStrings(lang: string): Promise<Record<string, string>> {
-	return new Promise((resolve, reject) => {
-		const timeout = setTimeout(() => {
-			if (Date.now() - lastFetchAttempt > 5e3) {
-				presence.error("Fetching strings timed out. Retrying...");
-				fetchingStrings = false;
-				lastFetchAttempt = Date.now();
-			}
-			reject();
-		}, 5e3);
-		if (fetchingStrings) {
-			if (strings) {
-				presence.info("Fetching new strings, but using old ones.");
-				clearTimeout(timeout);
-				resolve(strings);
-			}
-			return;
-		}
-		fetchingStrings = true;
-		presence.info("Fetching new strings.");
-		presence
-			.getStrings(
-				{
-					browsing: "general.browsing",
-					buttonReadArticle: "general.buttonReadArticle",
-					buttonViewPage: "general.buttonViewPage",
-					buttonViewProfile: "general.buttonViewProfile",
-					readingAbout: "general.readingAbout",
-					readingAPost: "general.readingAPost",
-					readingAnArticle: "general.readingAnArticle",
-					viewAProduct: "general.viewAProduct",
-					viewAProfile: "general.viewAProfile",
-					viewCategory: "general.viewCategory",
-					viewHome: "general.viewHome",
-					viewList: "general.viewList",
-					viewing: "general.viewing",
-				},
-				lang
-			)
-			.then(result => {
-				clearTimeout(timeout);
-				fetchingStrings = false;
-				presence.info("Fetched new strings.");
-				resolve(result);
-			})
-			.catch(() => {
-				presence.error(
-					"Fetching strings failed. Likely a network issue. Retrying..."
-				);
-				fetchingStrings = false;
-				clearTimeout(timeout);
-				reject();
-			});
-	});
+let oldLang: string = null,
+	currentTargetLang: string = null,
+	oldPath: string = null,
+	strings: Awaited<ReturnType<typeof presence.getStrings>> = null,
+	fetchingStrings = false,
+	stringFetchTimeout: number = null;
+
+setInterval(() => {
+	if (oldLang === currentTargetLang && strings) return;
+	if (fetchingStrings) return;
+	const targetLang = currentTargetLang;
+	fetchingStrings = true;
+	stringFetchTimeout = setTimeout(() => {
+		presence.error(`Failed to fetch strings for ${targetLang}.`);
+		fetchingStrings = false;
+	}, 5e3);
+	presence.info(`Fetching strings for ${targetLang}.`);
+	presence
+		.getStrings(
+			{
+				browsing: "general.browsing",
+				buttonReadArticle: "general.buttonReadArticle",
+				buttonViewPage: "general.buttonViewPage",
+				buttonViewProfile: "general.buttonViewProfile",
+				readingAbout: "general.readingAbout",
+				readingAPost: "general.readingAPost",
+				readingAnArticle: "general.readingAnArticle",
+				viewAProduct: "general.viewAProduct",
+				viewAProfile: "general.viewAProfile",
+				viewCategory: "general.viewCategory",
+				viewHome: "general.viewHome",
+				viewList: "general.viewList",
+				viewing: "general.viewing",
+			},
+			targetLang
+		)
+		.then(result => {
+			if (targetLang !== currentTargetLang) return;
+			clearTimeout(stringFetchTimeout);
+			strings = result;
+			fetchingStrings = false;
+			oldLang = targetLang;
+		})
+		.catch(() => null);
+}, 5000);
+
+/**
+ * Sets the current language to fetch strings for and returns whether any strings are loaded.
+ */
+function checkStringLanguage(lang: string) {
+	currentTargetLang = lang;
+	return !!strings;
 }
 
-let fetchingSetting = false,
-	lastSettingFetchAttempt = 0;
-function getSetting<E extends string | boolean | number>(
-	setting: string
-): Promise<E> {
-	return new Promise(resolve => {
-		const timeout = setTimeout(() => {
-			if (Date.now() - lastSettingFetchAttempt > 5e3) {
-				presence.error("Fetching setting timed out. Retrying...");
-				fetchingSetting = false;
-				lastSettingFetchAttempt = Date.now();
-			}
-			resolve(null);
-		}, 5e3);
-		if (fetchingSetting) return;
-		fetchingSetting = true;
+const settingsFetchStatus: Record<string, number> = {},
+	cachedSettings: Record<string, unknown> = {};
+
+function startSettingGetter(setting: string) {
+	if (!settingsFetchStatus[setting]) {
+		settingsFetchStatus[setting] = setTimeout(() => {
+			presence.error(`Failed to fetch setting ${setting} in time.`);
+			delete settingsFetchStatus[setting];
+		}, 3000);
+		presence.info(`Fetching setting ${setting}.`);
 		presence
-			.getSetting<E>(setting)
+			.getSetting(setting)
 			.then(result => {
-				clearTimeout(timeout);
-				fetchingSetting = false;
-				resolve(result);
+				cachedSettings[setting] = result;
+				clearTimeout(settingsFetchStatus[setting]);
+				delete settingsFetchStatus[setting];
 			})
 			.catch(() => null);
-	});
+	}
+}
+
+function getSetting<E extends string | boolean | number>(
+	setting: string,
+	fallback: E = null
+): E {
+	startSettingGetter(setting);
+	return (cachedSettings[setting] as E) ?? fallback;
 }
 
 presence.on("UpdateData", async () => {
@@ -155,28 +149,18 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		lang = await getSetting<string>("language"),
+		lang = getSetting<string>("language"),
 		pathList = getImportantPath(),
 		{ hostname, href, pathname } = document.location;
 
-	if (!lang) {
-		presence.info("Failed to fetch language, trying again.");
-		return;
-	}
+	if (!lang) presence.info("[WARN] Failed to fetch language, using default.");
 
 	if (pathname !== oldPath) {
 		oldPath = pathname;
 		slideshow.deleteAllSlides();
 	}
 
-	if (lang !== oldLang) {
-		try {
-			strings = await getStrings(lang);
-			oldLang = lang;
-		} catch {
-			return;
-		}
-	}
+	if (!checkStringLanguage(lang)) return;
 
 	switch (hostname) {
 		case "developer.vroid.com": {
