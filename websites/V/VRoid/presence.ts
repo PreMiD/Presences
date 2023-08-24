@@ -36,11 +36,15 @@ function applyCharacterSlideshow(presenceData: PresenceData): void {
 			"[data-background-image-url]"
 		).dataset.backgroundImageUrl;
 		slide.largeImageKey = imageUrl;
-		slide.smallImageKey = character.children[3].querySelector<HTMLDivElement>(
-			"[data-background-image-url]"
-		).dataset.backgroundImageUrl;
 		slide.smallImageText =
 			character.children[1].firstElementChild.childNodes[0].textContent;
+		try {
+			slide.smallImageKey = character.children[3].querySelector<HTMLDivElement>(
+				"[data-background-image-url]"
+			).dataset.backgroundImageUrl;
+		} catch {
+			/* ignore */
+		}
 		slideshow.addSlide(imageUrl, slide, 5000);
 	}
 }
@@ -196,16 +200,45 @@ presence.on("UpdateData", async () => {
 				case "tags": {
 					presenceData.details = `VRoid Hub - ${strings.viewCategory}`;
 					presenceData.state = `#${pathList[1]} - ${
-						[
-							...document.querySelectorAll<HTMLAnchorElement>(
-								"section + div a"
-							),
-						].find(link => !getComputedStyle(link).borderTop.startsWith("0px"))
-							.textContent
+						(pathList[3] === "artworks"
+							? document.querySelector<HTMLAnchorElement>(
+									"section + div a:nth-of-type(2)"
+							  )
+							: document.querySelector<HTMLAnchorElement>(
+									"section + div a:nth-of-type(1)"
+							  )
+						).textContent
 					}`;
 					if (pathList[3] === "artworks") applyArtworkSlideshow(presenceData);
 					else applyCharacterSlideshow(presenceData);
 					break;
+				}
+				case "users": {
+					const username =
+						document.querySelector<HTMLHeadingElement>("a > h1").textContent;
+					presenceData.details = `VRoid Hub - ${strings.viewAProfile}`;
+					presenceData.state = username;
+					presenceData.smallImageKey = document
+						.querySelector<HTMLDivElement>("header > a > div[style]")
+						.style.backgroundImage.match(/url\("(.*)"\)/)[1];
+					presenceData.smallImageText = username;
+					presenceData.buttons = [
+						{ label: strings.buttonViewProfile, url: href },
+					];
+					if (pathList[2] === "artworks") {
+						presenceData.state += ` - ${
+							document.querySelector<HTMLAnchorElement>(
+								"header + div header + div a:nth-of-type(2)"
+							).textContent
+						}`;
+						applyArtworkSlideshow(presenceData);
+					} else {
+						applyCharacterSlideshow(presenceData);
+					}
+					break;
+				}
+				case "hearts": {
+					presenceData.details = `VRoid Hub - ${strings.viewList}`;
 				}
 			}
 			break;
