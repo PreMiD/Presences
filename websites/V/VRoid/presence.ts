@@ -45,6 +45,22 @@ function applyCharacterSlideshow(presenceData: PresenceData): void {
 	}
 }
 
+function applyArtworkSlideshow(presenceData: PresenceData): void {
+	const artworks = [
+		...document.querySelectorAll<HTMLAnchorElement>(
+			"a[href*='/artworks/']:nth-of-type(1)"
+		),
+	].map(link => link.parentElement);
+	for (const artwork of artworks) {
+		const slide = Object.assign({}, presenceData);
+		const imageUrl = artwork.querySelector<HTMLDivElement>(
+			"[data-background-image-url]"
+		).dataset.backgroundImageUrl;
+		slide.largeImageKey = imageUrl;
+		slideshow.addSlide(imageUrl, slide, 5000);
+	}
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
@@ -127,19 +143,7 @@ presence.on("UpdateData", async () => {
 							}
 							case "artworks": {
 								presenceData.state = `${appTitle} - ${selectedTab.textContent}`;
-								const characters = [
-									...document.querySelectorAll<HTMLAnchorElement>(
-										"li a[href*='/artworks/']:nth-of-type(1)"
-									),
-								].map(link => link.parentElement);
-								for (const character of characters) {
-									const slide = Object.assign({}, presenceData);
-									const imageUrl = character.querySelector<HTMLDivElement>(
-										"[data-background-image-url]"
-									).dataset.backgroundImageUrl;
-									slide.largeImageKey = imageUrl;
-									slideshow.addSlide(imageUrl, slide, 5000);
-								}
+								applyArtworkSlideshow(presenceData);
 								break;
 							}
 						}
@@ -165,14 +169,7 @@ presence.on("UpdateData", async () => {
 				case "artworks": {
 					presenceData.details = `VRoid Hub - ${strings.readingAPost}`;
 					presenceData.buttons = [{ label: strings.buttonViewPage, url: href }];
-					const images = [
-						...document.querySelectorAll<HTMLImageElement>("figure img"),
-					];
-					for (const image of images) {
-						const slide = Object.assign({}, presenceData);
-						slide.largeImageKey = image.src;
-						slideshow.addSlide(image.src, slide, 5000);
-					}
+					applyArtworkSlideshow(presenceData);
 					break;
 				}
 				case "model_assets": {
@@ -198,8 +195,16 @@ presence.on("UpdateData", async () => {
 				}
 				case "tags": {
 					presenceData.details = `VRoid Hub - ${strings.viewCategory}`;
-					presenceData.state = `#${pathList[1]}`;
-					applyCharacterSlideshow(presenceData);
+					presenceData.state = `#${pathList[1]} - ${
+						[
+							...document.querySelectorAll<HTMLAnchorElement>(
+								"section + div a"
+							),
+						].find(link => !getComputedStyle(link).borderTop.startsWith("0px"))
+							.textContent
+					}`;
+					if (pathList[3] === "artworks") applyArtworkSlideshow(presenceData);
+					else applyCharacterSlideshow(presenceData);
 					break;
 				}
 			}
