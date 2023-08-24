@@ -238,7 +238,17 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case "hearts": {
+					const container =
+						document.querySelector<HTMLHeadingElement>("header + div h1");
 					presenceData.details = `VRoid Hub - ${strings.viewList}`;
+					presenceData.state = [...container.childNodes]
+						.map(node => {
+							return node.nodeName === "svg" ? "❤️" : node.textContent;
+						})
+						.join("");
+					if (pathList[1] === "artworks") applyArtworkSlideshow(presenceData);
+					else applyCharacterSlideshow(presenceData);
+					break;
 				}
 			}
 			break;
