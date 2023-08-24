@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "193714715631812608",
+		"name": "theusaf"
+	},
+	"service": "VRoid",
+	"description": {
+		"en": "The VRoid project is a 3D business by Pixiv Inc. with the philosophy of \"Make Creativities More Enjoyable\"",
+		"jp": "VRoidプロジェクトは、「創作活動がもっと楽しくなる場所を創る」を理念とするピクシブ株式会社による3D事業です。誰もが個性豊かな自分の3Dキャラクターモデルを持ち、そのキャラクターを創作活動やコミュニケーションに活用することができる「1人1アバター」の世界。私たちのミッションは、その未来をテクノロジーとクリエイティブの力で実現することです。"
+	},
+	"url": [
+		"vroid.com",
+		"www.vroid.com",
+		"hub.vroid.com",
+		"developer.vroid.com"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/RAxM8Tw.png",
+	"thumbnail": "https://cdn.discordapp.com/attachments/459040398527037441/1144327742096150568/2023-08-24_10_36_51.png",
+	"color": "#ffec00",
+	"category": "other",
+	"tags": [
+		"3d",
+		"anime",
+		"modeling",
+		"studio",
+		"character"
+	],
+	"settings": [
+		{
+			"multiLanguage": true,
+			"id": "language",
+			"title": "Language",
+			"icon": "fas fa-language"
+		}
+	]
+}
