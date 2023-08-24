@@ -24,6 +24,27 @@ function getTitle(): string {
 	return split ? split[1].trim() : document.title;
 }
 
+function applyCharacterSlideshow(presenceData: PresenceData): void {
+	const characters = [
+		...document.querySelectorAll<HTMLAnchorElement>(
+			"a[href*='/characters/']:nth-of-type(1)"
+		),
+	].map(link => link.parentElement);
+	for (const character of characters) {
+		const slide = Object.assign({}, presenceData);
+		const imageUrl = character.querySelector<HTMLDivElement>(
+			"[data-background-image-url]"
+		).dataset.backgroundImageUrl;
+		slide.largeImageKey = imageUrl;
+		slide.smallImageKey = character.children[3].querySelector<HTMLDivElement>(
+			"[data-background-image-url]"
+		).dataset.backgroundImageUrl;
+		slide.smallImageText =
+			character.children[1].firstElementChild.childNodes[0].textContent;
+		slideshow.addSlide(imageUrl, slide, 5000);
+	}
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
@@ -53,6 +74,7 @@ presence.on("UpdateData", async () => {
 				viewAProfile: "general.viewAProfile",
 				viewCategory: "general.viewCategory",
 				viewHome: "general.viewHome",
+				viewList: "general.viewList",
 				viewPage: "general.viewPage",
 				viewing: "general.viewing",
 			},
@@ -100,25 +122,7 @@ presence.on("UpdateData", async () => {
 							}
 							case "character_models": {
 								presenceData.state = `${appTitle} - ${selectedTab.textContent}`;
-								const characters = [
-									...document.querySelectorAll<HTMLAnchorElement>(
-										"section a[href*='/characters/']:nth-of-type(1)"
-									),
-								].map(link => link.parentElement);
-								for (const character of characters) {
-									const slide = Object.assign({}, presenceData);
-									const imageUrl = character.querySelector<HTMLDivElement>(
-										"[data-background-image-url]"
-									).dataset.backgroundImageUrl;
-									slide.largeImageKey = imageUrl;
-									slide.smallImageKey =
-										character.children[3].querySelector<HTMLDivElement>(
-											"[data-background-image-url]"
-										).dataset.backgroundImageUrl;
-									slide.smallImageText =
-										character.children[1].firstElementChild.childNodes[0].textContent;
-									slideshow.addSlide(imageUrl, slide, 5000);
-								}
+								applyCharacterSlideshow(presenceData);
 								break;
 							}
 							case "artworks": {
@@ -183,6 +187,19 @@ presence.on("UpdateData", async () => {
 						container.querySelector<HTMLDivElement>("div[style]")
 					).backgroundImage.match(/url\("(.*)"\)/)[1];
 					presenceData.buttons = [{ label: strings.buttonViewPage, url: href }];
+					break;
+				}
+				case "models": {
+					presenceData.details = `VRoid Hub - ${strings.viewList}`;
+					presenceData.state =
+						document.querySelector("header > h1").textContent;
+					applyCharacterSlideshow(presenceData);
+					break;
+				}
+				case "tags": {
+					presenceData.details = `VRoid Hub - ${strings.viewCategory}`;
+					presenceData.state = `#${pathList[1]}`;
+					applyCharacterSlideshow(presenceData);
 					break;
 				}
 			}
