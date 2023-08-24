@@ -190,7 +190,9 @@ presence.on("UpdateData", async () => {
 				case "models": {
 					presenceData.details = `VRoid Hub - ${strings.viewList}`;
 					presenceData.state =
-						document.querySelector("header > h1").textContent;
+						document.querySelector<HTMLHeadingElement>(
+							"header > h1"
+						).textContent;
 					applyCharacterSlideshow(presenceData);
 					break;
 				}
