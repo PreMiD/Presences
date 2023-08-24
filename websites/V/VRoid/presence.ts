@@ -20,7 +20,7 @@ function getImportantPath(): string[] {
 }
 
 function getTitle(): string {
-	let split = document.title.match(/(.*) [|-]/);
+	const split = document.title.match(/(.*) [|-]/);
 	return split ? split[1].trim() : document.title;
 }
 
@@ -31,10 +31,10 @@ function applyCharacterSlideshow(presenceData: PresenceData): void {
 		),
 	].map(link => link.parentElement);
 	for (const character of characters) {
-		const slide = Object.assign({}, presenceData);
-		const imageUrl = character.querySelector<HTMLDivElement>(
-			"[data-background-image-url]"
-		).dataset.backgroundImageUrl;
+		const slide = Object.assign({}, presenceData),
+			imageUrl = character.querySelector<HTMLDivElement>(
+				"[data-background-image-url]"
+			).dataset.backgroundImageUrl;
 		slide.largeImageKey = imageUrl;
 		slide.smallImageText =
 			character.children[1].firstElementChild.childNodes[0].textContent;
@@ -56,10 +56,10 @@ function applyArtworkSlideshow(presenceData: PresenceData): void {
 		),
 	].map(link => link.parentElement);
 	for (const artwork of artworks) {
-		const slide = Object.assign({}, presenceData);
-		const imageUrl = artwork.querySelector<HTMLDivElement>(
-			"[data-background-image-url]"
-		).dataset.backgroundImageUrl;
+		const slide = Object.assign({}, presenceData),
+			imageUrl = artwork.querySelector<HTMLDivElement>(
+				"[data-background-image-url]"
+			).dataset.backgroundImageUrl;
 		slide.largeImageKey = imageUrl;
 		slideshow.addSlide(imageUrl, slide, 5000);
 	}
@@ -95,7 +95,6 @@ presence.on("UpdateData", async () => {
 				viewCategory: "general.viewCategory",
 				viewHome: "general.viewHome",
 				viewList: "general.viewList",
-				viewPage: "general.viewPage",
 				viewing: "general.viewing",
 			},
 			lang
@@ -107,9 +106,7 @@ presence.on("UpdateData", async () => {
 			if (pathList[1] === "docs") {
 				presenceData.details = `VRoid SDK - ${strings.readingAbout}`;
 				presenceData.state = document.querySelector("h1").textContent.trim();
-			} else {
-				presenceData.details = `VRoid SDK - ${strings.browsing}`;
-			}
+			} else presenceData.details = `VRoid SDK - ${strings.browsing}`;
 			break;
 		}
 		case "hub.vroid.com": {
@@ -232,16 +229,15 @@ presence.on("UpdateData", async () => {
 							).textContent
 						}`;
 						applyArtworkSlideshow(presenceData);
-					} else {
-						applyCharacterSlideshow(presenceData);
-					}
+					} else applyCharacterSlideshow(presenceData);
 					break;
 				}
 				case "hearts": {
-					const container =
-						document.querySelector<HTMLHeadingElement>("header + div h1");
 					presenceData.details = `VRoid Hub - ${strings.viewList}`;
-					presenceData.state = [...container.childNodes]
+					presenceData.state = [
+						...document.querySelector<HTMLHeadingElement>("header + div h1")
+							.childNodes,
+					]
 						.map(node => {
 							return node.nodeName === "svg" ? "❤️" : node.textContent;
 						})
@@ -304,13 +300,9 @@ presence.on("UpdateData", async () => {
 
 	const slides = slideshow.getSlides();
 	if (slides.length) {
-		if (!slideshow.currentSlide.details) {
+		if (!slideshow.currentSlide.details)
 			slideshow.currentSlide = slides[0].data;
-		}
 		presence.setActivity(slideshow);
-	} else if (presenceData.details) {
-		presence.setActivity(presenceData);
-	} else {
-		presence.setActivity();
-	}
+	} else if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
