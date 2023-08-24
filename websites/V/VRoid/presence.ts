@@ -149,7 +149,7 @@ function getSetting<E extends string | boolean | number>(
 	return (cachedSettings[setting] as E) ?? fallback;
 }
 
-presence.on("UpdateData", async () => {
+presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
