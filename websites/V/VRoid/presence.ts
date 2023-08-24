@@ -4,7 +4,9 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	slideshow = presence.createSlideshow();
 
-let oldLang: string, strings: Awaited<ReturnType<typeof presence.getStrings>>;
+let oldLang: string,
+	strings: Awaited<ReturnType<typeof presence.getStrings>>,
+	oldPath: string;
 
 const enum Assets {
 	Logo = "https://i.imgur.com/RAxM8Tw.png",
@@ -13,8 +15,14 @@ const enum Assets {
 function getImportantPath(): string[] {
 	const pathList = document.location.pathname.split("/").filter(Boolean);
 	if (pathList[0] === "en") pathList.shift();
-	if (pathList.length === 0) pathList.push("");
+	if (pathList[pathList.length - 1] !== "") pathList.push("");
 	return pathList;
+}
+
+function getTitle(): string {
+	const split = document.title.split("|");
+	if (split.length > 1) split.pop();
+	return split.join("|").trim();
 }
 
 presence.on("UpdateData", async () => {
@@ -24,7 +32,12 @@ presence.on("UpdateData", async () => {
 		},
 		lang = await presence.getSetting<string>("lang"),
 		pathList = getImportantPath(),
-		{ hostname, href } = document.location;
+		{ hostname, href, pathname } = document.location;
+
+	if (pathname !== oldPath) {
+		oldPath = pathname;
+		slideshow.deleteAllSlides();
+	}
 
 	if (lang !== oldLang) {
 		oldLang = lang;
@@ -58,6 +71,80 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "hub.vroid.com": {
+			switch (pathList[0]) {
+				case "": {
+					presenceData.details = `VRoid Hub - ${strings.browsing}`;
+					break;
+				}
+				case "apps": {
+					const [selectedTab] = [
+							...document.querySelectorAll<HTMLAnchorElement>("[role=nav] a"),
+						].sort((a, b) => {
+							return +![...a.classList].every(name =>
+								[...b.classList].includes(name)
+							);
+						}),
+						appTitle =
+							document.querySelector<HTMLHeadingElement>(
+								"header > h1"
+							).textContent;
+					if (pathList[1]) {
+						presenceData.details = `VRoid Hub - ${strings.viewAProduct}`;
+						presenceData.buttons = [
+							{ label: strings.buttonViewPage, url: href },
+						];
+						switch (pathList[2]) {
+							case "": {
+								presenceData.state = appTitle;
+								break;
+							}
+							case "character_models": {
+								presenceData.state = `${appTitle} - ${selectedTab.textContent}`;
+								const characters = [
+									...document.querySelectorAll<HTMLAnchorElement>(
+										"section a[href*='/characters/']:nth-of-type(1)"
+									),
+								].map(link => link.parentElement);
+								for (const character of characters) {
+									const slide = Object.assign({}, presenceData);
+									const imageUrl = character.querySelector<HTMLDivElement>(
+										"[data-background-image-url]"
+									).dataset.backgroundImageUrl;
+									slide.largeImageKey = imageUrl;
+									slide.smallImageKey =
+										character.children[3].querySelector<HTMLDivElement>(
+											"[data-background-image-url]"
+										).dataset.backgroundImageUrl;
+									slide.smallImageText =
+										character.children[1].firstElementChild.childNodes[0].textContent;
+									slideshow.addSlide(imageUrl, slide, 5000);
+								}
+								break;
+							}
+							case "artworks": {
+								presenceData.state = `${appTitle} - ${selectedTab.textContent}`;
+								const characters = [
+									...document.querySelectorAll<HTMLAnchorElement>(
+										"li a[href*='/artworks/']:nth-of-type(1)"
+									),
+								].map(link => link.parentElement);
+								for (const character of characters) {
+									const slide = Object.assign({}, presenceData);
+									const imageUrl = character.querySelector<HTMLDivElement>(
+										"[data-background-image-url]"
+									).dataset.backgroundImageUrl;
+									slide.largeImageKey = imageUrl;
+									slideshow.addSlide(imageUrl, slide, 5000);
+								}
+								break;
+							}
+						}
+					} else {
+						presenceData.details = `VRoid Hub - ${strings.viewing}`;
+						presenceData.state = getTitle();
+					}
+				}
+			}
 			break;
 		}
 		default: {
@@ -79,7 +166,7 @@ presence.on("UpdateData", async () => {
 				case "wear": {
 					if (pathList[1]) {
 						presenceData.details = strings.viewing;
-						presenceData.state = document.title;
+						presenceData.state = getTitle();
 					} else {
 						presenceData.details = strings.readingAbout;
 						presenceData.state = "VRoid Wear";
