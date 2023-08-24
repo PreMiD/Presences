@@ -68,7 +68,7 @@ let oldLang: string = null,
 	fetchingStrings = false,
 	stringFetchTimeout: number = null;
 
-setInterval(() => {
+function fetchStrings() {
 	if (oldLang === currentTargetLang && strings) return;
 	if (fetchingStrings) return;
 	const targetLang = currentTargetLang;
@@ -103,9 +103,13 @@ setInterval(() => {
 			strings = result;
 			fetchingStrings = false;
 			oldLang = targetLang;
+			presence.info(`Fetched strings for ${targetLang}.`);
 		})
 		.catch(() => null);
-}, 5000);
+}
+
+setInterval(fetchStrings, 3000);
+fetchStrings();
 
 /**
  * Sets the current language to fetch strings for and returns whether any strings are loaded.
@@ -120,17 +124,18 @@ const settingsFetchStatus: Record<string, number> = {},
 
 function startSettingGetter(setting: string) {
 	if (!settingsFetchStatus[setting]) {
+		let success = false;
 		settingsFetchStatus[setting] = setTimeout(() => {
-			presence.error(`Failed to fetch setting ${setting} in time.`);
+			if (!success) {
+				presence.error(`Failed to fetch setting '${setting}' in time.`);
+			}
 			delete settingsFetchStatus[setting];
-		}, 3000);
-		presence.info(`Fetching setting ${setting}.`);
+		}, 2000);
 		presence
 			.getSetting(setting)
 			.then(result => {
 				cachedSettings[setting] = result;
-				clearTimeout(settingsFetchStatus[setting]);
-				delete settingsFetchStatus[setting];
+				success = true;
 			})
 			.catch(() => null);
 	}
@@ -153,7 +158,8 @@ presence.on("UpdateData", async () => {
 		pathList = getImportantPath(),
 		{ hostname, href, pathname } = document.location;
 
-	if (!lang) presence.info("[WARN] Failed to fetch language, using default.");
+	if (!lang)
+		presence.info("[WARN] Language setting not loaded, using default.");
 
 	if (pathname !== oldPath) {
 		oldPath = pathname;
