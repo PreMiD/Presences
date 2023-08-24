@@ -20,9 +20,8 @@ function getImportantPath(): string[] {
 }
 
 function getTitle(): string {
-	const split = document.title.split("|");
-	if (split.length > 1) split.pop();
-	return split.join("|").trim();
+	let split = document.title.match(/(.*) [|-]/);
+	return split ? split[1].trim() : document.title;
 }
 
 presence.on("UpdateData", async () => {
@@ -48,6 +47,7 @@ presence.on("UpdateData", async () => {
 				buttonViewPage: "general.buttonViewPage",
 				buttonViewProfile: "general.buttonViewProfile",
 				readingAbout: "general.readingAbout",
+				readingAPost: "general.readingAPost",
 				readingAnArticle: "general.readingAnArticle",
 				viewAProduct: "general.viewAProduct",
 				viewAProfile: "general.viewAProfile",
@@ -159,6 +159,30 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case "artworks": {
+					presenceData.details = `VRoid Hub - ${strings.readingAPost}`;
+					presenceData.buttons = [{ label: strings.buttonViewPage, url: href }];
+					const images = [
+						...document.querySelectorAll<HTMLImageElement>("figure img"),
+					];
+					for (const image of images) {
+						const slide = Object.assign({}, presenceData);
+						slide.largeImageKey = image.src;
+						slideshow.addSlide(image.src, slide, 5000);
+					}
+					break;
+				}
+				case "model_assets": {
+					const container = document.querySelector<HTMLDivElement>(
+						"header > div[style]"
+					).parentElement;
+					presenceData.details = `VRoid Hub - ${strings.viewAProduct}`;
+					presenceData.state = container.querySelector<HTMLDivElement>(
+						"div:nth-of-type(2) > div > div"
+					).textContent;
+					presenceData.largeImageKey = getComputedStyle(
+						container.querySelector<HTMLDivElement>("div[style]")
+					).backgroundImage.match(/url\("(.*)"\)/)[1];
+					presenceData.buttons = [{ label: strings.buttonViewPage, url: href }];
 					break;
 				}
 			}
