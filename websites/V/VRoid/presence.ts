@@ -5,7 +5,7 @@ const presence = new Presence({
 	slideshow = presence.createSlideshow();
 
 const enum Assets {
-	Logo = "https://i.imgur.com/RAxM8Tw.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/V/VRoid/assets/logo.png",
 }
 
 function getImportantPath(): string[] {
