@@ -24,7 +24,8 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-	let strs = await strings;
+	const strs = await strings;
+
 	const presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
 	};
@@ -45,11 +46,11 @@ presence.on("UpdateData", async () => {
 		if (firstH3Title) {
 			const originalText = firstH3Title.textContent;
 
-			const movpattern = /^([^\n]+)/; // Movie/Series name
-			const movmatch = originalText.match(movpattern)[1];
+			// Movie/Series name
+			const movmatch = originalText.match(/^([^\n]+)/)[1];
 
-			const epipattern = /\d+x\d+/; // Episode number
-			const epimatch = originalText.match(epipattern);
+			// Episode number
+			const epimatch = originalText.match(/\d+x\d+/);
 
 			const result = epimatch ? epimatch[0] : " ";
 			presenceData.details = "" + movmatch + " " + result;
