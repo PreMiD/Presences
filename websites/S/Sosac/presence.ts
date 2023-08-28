@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: "1079537235076071524",
-}),
+		clientId: "1079537235076071524",
+	}),
 	strings = presence.getStrings({
 		play: "general.playing",
 		pause: "general.paused",
@@ -24,11 +24,10 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-	const strs = await strings;
-
-	const presenceData: PresenceData = {
-		largeImageKey: Assets.Logo,
-	};
+	const strs = await strings,
+		presenceData: PresenceData = {
+			largeImageKey: Assets.Logo,
+		};
 
 	if (
 		video &&
@@ -44,22 +43,19 @@ presence.on("UpdateData", async () => {
 		const firstH3Title = document.querySelector("h3");
 
 		if (firstH3Title) {
-			const originalText = firstH3Title.textContent;
+			const originalText = firstH3Title.textContent,
+				// Movie/Series name
 
-			// Movie/Series name
-			const movmatch = originalText.match(/^([^\n]+)/)[1];
+				// Episode number
+				epimatch = originalText.match(/\d+x\d+/);
 
-			// Episode number
-			const epimatch = originalText.match(/\d+x\d+/);
-
-			const result = epimatch ? epimatch[0] : " ";
-			presenceData.details = "" + movmatch + " " + result;
+			presenceData.details = `${originalText.match(/^([^\n]+)/)[1]} ${
+				epimatch ? epimatch[0] : " "
+			}`;
 		}
 
 		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
-		presenceData.smallImageText = video.paused
-			? strs.pause
-			: strs.play;
+		presenceData.smallImageText = video.paused ? strs.pause : strs.play;
 
 		if (video.paused) {
 			delete presenceData.startTimestamp;
