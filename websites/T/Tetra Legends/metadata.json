@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "300707889717444608",
+		"name": "dxl44"
+	},
+	"service": "Tetra Legends",
+	"description": {
+		"en": "A browser-based clone of Tetris with both new and classic gamemodes."
+	},
+	"url": "tetralegends.app",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/9c3lJCA.png",
+	"thumbnail": "https://i.imgur.com/Su9t23q.png",
+	"color": "#000000",
+	"category": "games",
+	"tags": [
+		"game",
+		"gaming",
+		"puzzle"
+	]
+}
