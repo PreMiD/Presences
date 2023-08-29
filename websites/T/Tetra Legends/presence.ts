@@ -12,10 +12,11 @@ presence.on("UpdateData", async () => {
 
 	if (document.querySelector("#game-container").classList[0] === "hidden")
 		presenceData.details = "In Menus";
-	else {
+	else if (document.querySelector("header.header")) {
 		presenceData.details = `Mode: ${
 			document.querySelector("header.header").innerHTML
 		}`;
-	}
+	} else presenceData.details = "Mode: Marathon";
+
 	presence.setActivity(presenceData);
 });
