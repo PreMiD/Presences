@@ -37,7 +37,7 @@ const presence = new Presence({
 	}): Route => {
 		const routes: Route[] = [
 				{
-					path: /^\/my\// || /^\//,
+					path: /^\/my\//,
 					details: () => "On Homepage",
 					state: () => {
 						return "Dashboard";
