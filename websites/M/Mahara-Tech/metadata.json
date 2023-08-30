@@ -1,0 +1,40 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "605894319408283678",
+		"name": "eljooker"
+	},
+	"service": "Mahara-Tech",
+	"description": {
+		"en": "information technology learning platform"
+	},
+	"url": "maharatech.gov.eg",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/SjtqzAF.png",
+	"thumbnail": "https://i.imgur.com/dmO42Up.png",
+	"color": "#FFFFFF",
+	"category": "other",
+	"tags": [
+		"academic",
+		"learning",
+		"programming",
+		"course",
+		"education"
+	],
+	"iframe": true,
+	"iFrameRegExp": ".*",
+	"settings": [
+		{
+			"id": "timestamp",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}
