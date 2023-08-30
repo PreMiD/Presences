@@ -89,6 +89,17 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing spaces";
 			break;
 		}
+		case "user": {
+			presenceData.details = "Viewing a user's profile";
+			presenceData.state = document
+				.querySelector<HTMLDivElement>(".large-font")
+				.childNodes[1].textContent.trim();
+			presenceData.smallImageKey = document
+				.querySelector<HTMLDivElement>(".user-image")
+				.style.backgroundImage.match(/url\("(.+)"\)/)[1];
+			presenceData.buttons = [{ label: "View Profile", url: href }];
+			break;
+		}
 	}
 
 	presence.setActivity(presenceData);
