@@ -54,6 +54,14 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "news": {
+			presenceData.details = "Reading a news post";
+			presenceData.state = document
+				.querySelector<HTMLDivElement>(".top-title-text")
+				.textContent.trim();
+			presenceData.buttons = [{ label: "View Post", url: href }];
+			break;
+		}
 		case "space": {
 			const spaceTitle = document
 				.querySelector<HTMLDivElement>(".community-title")
