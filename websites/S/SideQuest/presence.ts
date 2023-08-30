@@ -50,9 +50,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing a giveaway";
 				presenceData.state = document.querySelector("h4").textContent;
 				presenceData.buttons = [{ label: "View Giveaway", url: href }];
-			} else {
-				presenceData.details = "Browsing giveaways";
-			}
+			} else presenceData.details = "Browsing giveaways";
 			break;
 		}
 		case "news": {
