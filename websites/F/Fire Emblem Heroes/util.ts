@@ -1,7 +1,6 @@
-export const presence = new Presence({
+export const slideshow = new Presence({
 	clientId: "1133602327476047873",
-});
-export const slideshow = presence.createSlideshow();
+}).createSlideshow();
 
 export const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/F/Fire%20Emblem%20Heroes/assets/logo.png",
