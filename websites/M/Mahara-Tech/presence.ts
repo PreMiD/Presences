@@ -53,7 +53,7 @@ const presence = new Presence({
 				
 				buttons: () => [
 					{
-						label: "Visit profile",
+						label: "Visit Profile",
 						url: (() => {
 							return document.location.href;
 						})(),
