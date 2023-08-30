@@ -20,6 +20,30 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing home page";
 			break;
 		}
+		case "app": {
+			presenceData.details = "Viewing an app";
+			presenceData.state =
+				document.querySelector<HTMLDivElement>(".large-font").textContent;
+			presenceData.buttons = [{ label: "View App", url: href }];
+			break;
+		}
+		case "apps": {
+			presenceData.details = "Browsing apps by category";
+			presenceData.state = document
+				.querySelector("div > a[class*=active]")
+				.textContent.split(" ")
+				.slice(1)
+				.join("");
+			break;
+		}
+		case "all-apps": {
+			presenceData.details = "Browsing all apps";
+			presenceData.state = document
+				.querySelector<HTMLAnchorElement>("sq-button > a[class*=active]")
+				.textContent.substring(5)
+				.trim();
+			break;
+		}
 		case "giveaways": {
 			if (pathList[1]) {
 				presenceData.details = "Viewing a giveaway";
