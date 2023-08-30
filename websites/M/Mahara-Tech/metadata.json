@@ -22,7 +22,7 @@
 		"education"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*",
+	"iFrameRegExp": "www[.]youtube[.]com[/]",
 	"settings": [
 		{
 			"id": "timestamp",
