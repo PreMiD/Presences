@@ -87,9 +87,9 @@ const presence = new Presence({
 						url: (() => {
 							const 
 								href = document
-									.querySelectorAll(
+									.querySelector(
 										".btn.btn-primary.ccn-btn-backtocourse.float-left"
-									)[0]
+									)
 									.getAttribute("href");
 							return href;
 						})(),
