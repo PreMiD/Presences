@@ -47,8 +47,8 @@ const presence = new Presence({
 				path: /^\/user\//,
 				details: () => "Viewing a profile",
 				state: () => {
-					const profile = document.querySelector("h4.breadcrumb_title").textContent + "'s profile";
-					return profile;
+					
+					return `${document.querySelector("h4.breadcrumb_title").textContent}'s profile`;
 				},
 				smallImageKey: () => Assets.Reading,
 				
