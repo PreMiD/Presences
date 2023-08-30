@@ -110,7 +110,7 @@ const presence = new Presence({
 					{
 						label: "View Course",
 						url: (() => {
-							return window.location.href;
+							return document.location.href;
 						})(),
 					},
 				],
@@ -124,7 +124,7 @@ const presence = new Presence({
 					{
 						label: "Search with me?",
 						url: (() => {
-							return window.location.href;
+							return document.location.href;
 						})(),
 					},
 				],
