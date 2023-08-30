@@ -100,6 +100,9 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [{ label: "View Profile", url: href }];
 			break;
 		}
+		default: {
+			presenceData.details = "Browsing...";
+		}
 	}
 
 	presence.setActivity(presenceData);
