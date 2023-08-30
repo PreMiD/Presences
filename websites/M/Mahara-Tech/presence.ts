@@ -171,7 +171,7 @@ presence.on("UpdateData", async () => {
 
 	const route = router({
 		presenceData,
-		path: location.href.replace(`https://${location.hostname}`, ""),
+		path: document.location.href.replace(`https://${document.location.hostname}`, ""),
 	});
 
 	if (!route) return presence.setActivity(presenceData);
