@@ -10,7 +10,7 @@ async function getStrings() {
 			beatMapLooking: "osu!ppy.beatMapLooking",
 			beatMapPacks: "osu!ppy.beatMapPacks",
 			browsing: "general.browsing",
-			buttonReadNews: "general.buttonReadNews",
+			buttonReadArticle: "general.buttonReadArticle",
 			buttonViewBeatmap: "osu!ppy.buttonViewBeatmap",
 			buttonViewProfile: "general.buttonViewProfile",
 			changelog: "osu!ppy.changelog",
@@ -29,6 +29,8 @@ async function getStrings() {
 			performanceRankings: "osu!ppy.performanceRankings",
 			rank: "osu!ppy.rank",
 			reading: "general.reading",
+			readingAnArticle: "general.readingAnArticle",
+			readingArticle: "general.readingArticle",
 			readingForum: "osu!ppy.readingForum",
 			readingNews: "general.readingNews",
 			scoreRankings: "osu!ppy.scoreRankings",
@@ -39,11 +41,9 @@ async function getStrings() {
 			theirProfile: "osu!ppy.theirProfile",
 			tournaments: "osu!ppy.tournaments",
 			unsupportedPage: "osu!ppy.unsupportedPage",
-			viewNews: "osu!ppy.viewNews",
 			viewing: "general.viewing",
 			viewingForum: "osu!ppy.viewingForum",
 			viewingHome: "general.viewHome",
-			viewingNews: "osu!ppy.viewingNews",
 			watchLists: "osu!ppy.watchLists",
 			wikiMainPage: "general.wikiMainPage",
 		},
@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname.startsWith("/home/news")) {
 		if (pathname.split("/")[3]) {
-			presenceData.details = strings.readingNews;
+			presenceData.details = strings.readingArticle;
 			presenceData.state = document.querySelector(
 				"div.news-show__info > h1"
 			).textContent;
@@ -105,12 +105,12 @@ presence.on("UpdateData", async () => {
 
 			presenceData.buttons = [
 				{
-					label: strings.buttonReadNews,
+					label: strings.buttonReadArticle,
 					url: href,
 				},
 			];
 		} else {
-			presenceData.details = strings.viewingNews;
+			presenceData.details = strings.readingAnArticle;
 			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (pathname.startsWith("/home/support")) {
