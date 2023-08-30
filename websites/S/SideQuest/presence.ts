@@ -20,6 +20,16 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing home page";
 			break;
 		}
+		case "giveaways": {
+			if (pathList[1]) {
+				presenceData.details = "Viewing a giveaway";
+				presenceData.state = document.querySelector("h4").textContent;
+				presenceData.buttons = [{ label: "View Giveaway", url: href }];
+			} else {
+				presenceData.details = "Browsing giveaways";
+			}
+			break;
+		}
 		case "space": {
 			const spaceTitle = document
 				.querySelector<HTMLDivElement>(".community-title")
