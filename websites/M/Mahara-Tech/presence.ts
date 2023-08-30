@@ -10,7 +10,6 @@ interface Route extends Functionlize<Partial<PresenceData>> {
 
 const enum LoAssets {
 	Logo = "https://i.imgur.com/QRBVWsG.png",
-
 }
 
 enum Settings {
@@ -32,8 +31,6 @@ const presence = new Presence({
 		presenceData: PresenceData;
 	}): Route => {
 		const routes: Route[] = [
-
-			
 			{
 				path: /^\/my\//,
 				details: () => "On Homepage",
@@ -47,11 +44,12 @@ const presence = new Presence({
 				path: /^\/user\//,
 				details: () => "Viewing a profile",
 				state: () => {
-					
-					return `${document.querySelector("h4.breadcrumb_title").textContent}'s profile`;
+					return `${
+						document.querySelector("h4.breadcrumb_title").textContent
+					}'s profile`;
 				},
 				smallImageKey: () => Assets.Reading,
-				
+
 				buttons: () => [
 					{
 						label: "Visit Profile",
@@ -86,12 +84,11 @@ const presence = new Presence({
 					{
 						label: "View Course",
 						url: (() => {
-							const 
-								href = document
-									.querySelector(
-										".btn.btn-primary.ccn-btn-backtocourse.float-left"
-									)
-									.getAttribute("href");
+							const href = document
+								.querySelector(
+									".btn.btn-primary.ccn-btn-backtocourse.float-left"
+								)
+								.getAttribute("href");
 							return href;
 						})(),
 					},
@@ -117,9 +114,9 @@ const presence = new Presence({
 				],
 			},
 			{
-				path: /^\/mod\/*/, 
+				path: /^\/mod\/*/,
 				details: () => "Browsing Courses",
-				state: ()=>"Choosing a Course",
+				state: () => "Choosing a Course",
 				smallImageKey: () => Assets.Search,
 				buttons: () => [
 					{
@@ -129,20 +126,17 @@ const presence = new Presence({
 						})(),
 					},
 				],
-			  },
+			},
 			{
-				path: /.*$/, 
+				path: /.*$/,
 				details: () => "On Homepage",
-				
+
 				smallImageKey: () => Assets.Search,
 				smallImageText: () => "Browsing website",
-			  },
-			 
-			
+			},
 		];
 
-    return routes.find(route => route.path?.test(path));
-  
+		return routes.find(route => route.path?.test(path));
 	};
 
 presence.on(
@@ -166,7 +160,10 @@ presence.on("UpdateData", async () => {
 
 	const route = router({
 		presenceData,
-		path: document.location.href.replace(`https://${document.location.hostname}`, ""),
+		path: document.location.href.replace(
+			`https://${document.location.hostname}`,
+			""
+		),
 	});
 
 	if (!route) return presence.setActivity(presenceData);
