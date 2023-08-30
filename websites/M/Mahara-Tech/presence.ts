@@ -47,7 +47,7 @@ const presence = new Presence({
 				path: /^\/user\//,
 				details: () => "Viewing a profile",
 				state: () => {
-					return document.querySelector("h4.breadcrumb_title").textContent + "'s profile";
+					return (document.querySelector("h4.breadcrumb_title").textContent + "'s profile");
 				},
 				smallImageKey: () => Assets.Reading,
 				
@@ -118,7 +118,7 @@ const presence = new Presence({
 			{
 				path: /^\/mod\/*/, 
 				details: () => "Browsing Courses",
-				state:()=>"Choosing a Course",
+				state: ()=>"Choosing a Course",
 				smallImageKey: () => Assets.Search,
 				buttons: () => [
 					{
@@ -141,9 +141,9 @@ const presence = new Presence({
 		];
 
 		const matchedRoute = routes.find(route => route.path?.test(path));
-  if (matchedRoute) {
+  if (matchedRoute) 
     return matchedRoute;
-  }
+  
 
   
   const defaultRoute = routes[routes.length - 1];
