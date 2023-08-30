@@ -22,8 +22,9 @@ presence.on("UpdateData", async () => {
 		}
 		case "app": {
 			presenceData.details = "Viewing an app";
-			presenceData.state =
-				document.querySelector<HTMLDivElement>(".large-font").textContent;
+			presenceData.state = document.querySelector<HTMLDivElement>(
+				".right-section .large-font"
+			).textContent;
 			presenceData.buttons = [{ label: "View App", url: href }];
 			break;
 		}
