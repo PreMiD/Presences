@@ -97,7 +97,6 @@ const presence = new Presence({
 			{
 				path: /^\/mod\/quiz\/*/,
 
-				
 				smallImageKey: () => Assets.Writing,
 				smallImageText: () => "taking a quiz...",
 
