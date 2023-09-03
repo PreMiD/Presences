@@ -14,13 +14,22 @@
 	"description": {
 		"en": "Watch movies and series online in high quality!"
 	},
-	"url": ["tv.sosac.tv", "movies.sosac.tv", "sosac.tv"],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/iOYRQjm.png",
-	"thumbnail": "https://i.imgur.com/T87paIy.png",
+	"url": [
+		"tv.sosac.tv",
+		"movies.sosac.tv",
+		"sosac.tv"
+	],
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Sosac/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Sosac/assets/thumbnail.png",
 	"color": "#ff5600",
 	"category": "videos",
-	"tags": ["movies", "media", "sosac", "series"],
+	"tags": [
+		"movies",
+		"media",
+		"sosac",
+		"series"
+	],
 	"iframe": true,
-	"iFrameRegExp": "https://www[.]streamuj[.]tv/video/"
+	"iFrameRegExp": "www[.]streamuj[.]tv[/]video[/]"
 }
