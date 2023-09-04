@@ -9,7 +9,9 @@ interface Route extends Functionlize<Partial<PresenceData>> {
 }
 
 const enum LoAssets {
-	Logo = "https://i.imgur.com/1WJ0kS9.png",
+
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/Mahara-Tech/assets/logo.png",
+
 }
 
 enum Settings {
@@ -94,6 +96,7 @@ const presence = new Presence({
 					},
 				],
 			},
+
 			{
 				path: /^\/mod\/quiz\/*/,
 
@@ -118,6 +121,8 @@ const presence = new Presence({
 					},
 				],
 			},
+
+
 
 			{
 				path: /^\/course\/(.*)/,

@@ -9,9 +9,11 @@
 		"en": "Maharatech is an online learning platform, offering high-quality courses authored by Information Technology Institute ITI"
 	},
 	"url": "maharatech.gov.eg",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/1WJ0kS9.png",
-	"thumbnail": "https://i.imgur.com/dmO42Up.png",
+
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Mahara-Tech/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Mahara-Tech/assets/thumbnail.png",
+
 	"color": "#8d1f28",
 	"category": "other",
 	"tags": [
@@ -37,4 +39,6 @@
 			"value": true
 		}
 	]
+
 }
+
