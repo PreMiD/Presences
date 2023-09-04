@@ -122,8 +122,6 @@ const presence = new Presence({
 				],
 			},
 
-
-
 			{
 				path: /^\/course\/(.*)/,
 
