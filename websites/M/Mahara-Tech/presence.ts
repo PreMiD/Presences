@@ -9,9 +9,7 @@ interface Route extends Functionlize<Partial<PresenceData>> {
 }
 
 const enum LoAssets {
-
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/Mahara-Tech/assets/logo.png",
-
 }
 
 enum Settings {
