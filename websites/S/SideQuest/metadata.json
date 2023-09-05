@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "193714715631812608",
+		"name": "theusaf"
+	},
+	"service": "SideQuest",
+	"description": {
+		"en": "SideQuest is the early access layer for Virtual Reality. Get access to the latest Oculus Quest Games, Oculus App Lab games & lots of free apps on applab and sideload."
+	},
+	"url": "sidequestvr.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/GnK79kd.png",
+	"thumbnail": "https://sidequestvr.com/assets/images/home-picks.jpg",
+	"color": "#1a1d3c",
+	"category": "games",
+	"tags": [
+		"vr",
+		"quest",
+		"oculus",
+		"store",
+		"sideload",
+		"game",
+		"reviews"
+	]
+}
