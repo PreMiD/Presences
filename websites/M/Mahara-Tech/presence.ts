@@ -96,6 +96,31 @@ const presence = new Presence({
 			},
 
 			{
+				path: /^\/mod\/quiz\/*/,
+
+				smallImageKey: () => Assets.Writing,
+				smallImageText: () => "taking a quiz...",
+
+				details: () => document.title,
+				state: () => {
+					return document.querySelector("h4.title.float-left").textContent;
+				},
+				buttons: () => [
+					{
+						label: "View Course",
+						url: (() => {
+							const href = document
+								.querySelector(
+									".btn.btn-primary.ccn-btn-backtocourse.float-left"
+								)
+								.getAttribute("href");
+							return href;
+						})(),
+					},
+				],
+			},
+
+			{
 				path: /^\/course\/(.*)/,
 
 				smallImageKey: () => Assets.Viewing,
