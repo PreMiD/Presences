@@ -137,18 +137,18 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (state.type === "loading") {
+			delete presenceData.smallImageKey;
 			presenceData = {
 				...defaultData,
 				details: (await strings).loading,
-				smallImageKey: "",
 			};
 		}
 
 		if (state.type.startsWith("other")) {
+			delete presenceData.startTimestamp;
 			presenceData = {
 				...defaultData,
 				details: state.title,
-				smallImageKey: "",
 			};
 		}
 
