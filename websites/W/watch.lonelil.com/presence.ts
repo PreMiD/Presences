@@ -1,31 +1,38 @@
 const presence = new Presence({
 		clientId: "1147910465134002276",
 	}),
-	strings = presence.getStrings({
-		play: "general.playing",
-		pause: "general.paused",
-		viewAMovie: "general.viewAMovie",
-		viewAShow: "general.viewAShow",
-		viewAnime: "general.viewAnime",
-		watchingMovie: "general.watchingMovie",
-		watchingShow: "general.watchingShow",
-		watchingLive: "general.watchingLive",
-		viewingHomePage: "general.viewHome",
-		loading: "kahoot.loadingPage",
-		buttonWatchMovie: "general.buttonWatchMovie",
-		buttonWatchEpisode: "general.buttonViewEpisode",
-		buttonWatchStream: "general.buttonWatchStream",
-		buttonViewMovie: "general.buttonViewMovie",
-		buttonViewShow: "general.buttonViewShow",
-	});
+	getStrings = async () => {
+		return presence.getStrings(
+			{
+				play: "general.playing",
+				pause: "general.paused",
+				viewAMovie: "general.viewAMovie",
+				viewAShow: "general.viewAShow",
+				viewAnime: "general.viewAnime",
+				watchingMovie: "general.watchingMovie",
+				watchingShow: "general.watchingShow",
+				watchingLive: "general.watchingLive",
+				viewingHomePage: "general.viewHome",
+				loading: "kahoot.loadingPage",
+				buttonWatchMovie: "general.buttonWatchMovie",
+				buttonWatchEpisode: "general.buttonViewEpisode",
+				buttonWatchStream: "general.buttonWatchStream",
+				buttonViewMovie: "general.buttonViewMovie",
+				buttonViewShow: "general.buttonViewShow",
+			},
+			await presence.getSetting<string>("lang").catch(() => "en")
+		);
+	};
 
-enum logos {
-	logo = "https://i.imgur.com/Niuxx4z.png",
-	home = "https://i.imgur.com/RPr5zwZ.png",
+const enum Assets {
+	Logo = "https://i.imgur.com/Niuxx4z.png",
+	Home = "https://i.imgur.com/RPr5zwZ.png",
 }
 
 let since = Math.floor(Date.now() / 1000),
-	lastType = "";
+	lastType = "",
+	strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
 	if (document.querySelector("#state")) {
@@ -55,30 +62,34 @@ presence.on("UpdateData", async () => {
 		}
 
 		const defaultData: PresenceData = {
-			largeImageKey: logos.logo,
-			smallImageText: "watch.lonelil.com",
-			smallImageKey: logos.logo,
-			startTimestamp: since,
-		};
+				largeImageKey: Assets.Logo,
+				smallImageText: "watch.lonelil.com",
+				smallImageKey: Assets.Logo,
+				startTimestamp: since,
+			},
+			newLang = await presence.getSetting<string>("lang").catch(() => "en");
 		let presenceData: PresenceData = {};
+
+		if (oldLang !== newLang || !strings) {
+			oldLang = newLang;
+			strings = await getStrings();
+		}
 
 		if (state.type.startsWith("home")) {
 			presenceData = {
 				...defaultData,
-				details: (await strings).viewingHomePage,
-				largeImageKey: logos.home,
+				details: strings.viewingHomePage,
+				largeImageKey: Assets.Home,
 			};
-		}
-
-		if (state.type.startsWith("details")) {
+		} else if (state.type.startsWith("details")) {
 			presenceData = {
 				...defaultData,
 				details:
 					state.item.type === "anime"
-						? (await strings).viewAnime.replace(":", "")
+						? strings.viewAnime.replace(":", "")
 						: state.item.type === "movie"
-						? (await strings).viewAMovie
-						: (await strings).viewAShow,
+						? strings.viewAMovie
+						: strings.viewAShow,
 				state: state.item.title,
 				largeImageKey: state.item.poster,
 				smallImageText: state.item.shownType,
@@ -86,35 +97,33 @@ presence.on("UpdateData", async () => {
 					{
 						label:
 							state.item.type === "movie"
-								? (await strings).buttonViewMovie
-								: (await strings).buttonViewShow,
+								? strings.buttonViewMovie
+								: strings.buttonViewShow,
 						url: `https://watch.lonelil.com/${state.item.type}/${state.item.id}`,
 					},
 				],
 			};
-		}
-
-		if (state.type.startsWith("watch")) {
+		} else if (state.type.startsWith("watch")) {
 			const props: PresenceData = {
 				details:
 					state.item.details ||
 					(state.item.type === "movie"
-						? (await strings).watchingMovie
+						? strings.watchingMovie
 						: state.item.type === "tv"
-						? (await strings).watchingLive
-						: (await strings).watchingShow),
+						? strings.watchingLive
+						: strings.watchingShow),
 				state: state.item.title,
 				largeImageKey: state.item.poster,
 				smallImageKey: Assets.Play,
-				smallImageText: (await strings).play,
+				smallImageText: strings.play,
 				buttons: [
 					{
 						label:
 							state.item.type === "movie"
-								? (await strings).buttonWatchMovie
+								? strings.buttonWatchMovie
 								: state.item.type === "tv"
-								? (await strings).buttonWatchStream
-								: (await strings).buttonWatchEpisode,
+								? strings.buttonWatchStream
+								: strings.buttonWatchEpisode,
 						url: `https://watch.lonelil.com/watch/${state.item.type}/${state.item.id}`,
 					},
 				],
@@ -124,7 +133,7 @@ presence.on("UpdateData", async () => {
 				presenceData = {
 					...props,
 					smallImageKey: Assets.Pause,
-					smallImageText: (await strings).pause,
+					smallImageText: strings.pause,
 				};
 			} else if (state.duration) {
 				const endDate = new Date(since);
@@ -134,17 +143,13 @@ presence.on("UpdateData", async () => {
 					endTimestamp: Math.floor(endDate.getTime() / 1000),
 				};
 			} else presenceData = props;
-		}
-
-		if (state.type === "loading") {
+		} else if (state.type === "loading") {
 			delete presenceData.smallImageKey;
 			presenceData = {
 				...defaultData,
-				details: (await strings).loading,
+				details: strings.loading,
 			};
-		}
-
-		if (state.type.startsWith("other")) {
+		} else if (state.type.startsWith("other")) {
 			delete presenceData.startTimestamp;
 			presenceData = {
 				...defaultData,
