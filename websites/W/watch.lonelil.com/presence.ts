@@ -25,7 +25,7 @@ const presence = new Presence({
 	};
 
 const enum Assets {
-	Logo = "https://i.imgur.com/Niuxx4z.png",
+	Logo = "https://i.imgur.com/GGwZHfz.png",
 	Home = "https://i.imgur.com/RPr5zwZ.png",
 }
 
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
 
 		if (state.type !== lastType) {
 			lastType = state.type;
-			since = Date.now();
+			since = Math.floor(Date.now() / 1000);
 		}
 
 		const defaultData: PresenceData = {
