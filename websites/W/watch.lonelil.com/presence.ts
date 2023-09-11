@@ -144,13 +144,13 @@ presence.on("UpdateData", async () => {
 				};
 			} else presenceData = props;
 		} else if (state.type === "loading") {
-			delete presenceData.smallImageKey;
+			delete defaultData.smallImageKey;
 			presenceData = {
 				...defaultData,
 				details: strings.loading,
 			};
 		} else if (state.type.startsWith("other")) {
-			delete presenceData.startTimestamp;
+			delete defaultData.smallImageKey;
 			presenceData = {
 				...defaultData,
 				details: state.title,
