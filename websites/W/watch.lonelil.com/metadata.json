@@ -9,9 +9,9 @@
 		"en": "watch.lonelil.com is your one-stop destination for free movies, anime, TV shows, and Live TV. With a vast collection of content and easy-to-use interface, you'll never run out of entertainment options."
 	},
 	"url": "watch.lonelil.com",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/JrHjvjY.png",
-	"thumbnail": "https://i.imgur.com/GXqXKi9.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/watch.lonelil.com/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/watch.lonelil.com/assets/thumbnail.png",
 	"color": "#0A0A0A",
 	"category": "videos",
 	"tags": [

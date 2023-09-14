@@ -25,8 +25,8 @@ const presence = new Presence({
 	};
 
 const enum Assets {
-	Logo = "https://i.imgur.com/JrHjvjY.png",
-	Home = "https://i.imgur.com/ygYYxn8.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/W/watch.lonelil.com/assets/logo.png",
+	Home = "https://cdn.rcd.gg/PreMiD/websites/W/watch.lonelil.com/assets/0.png",
 }
 
 let since = Math.floor(Date.now() / 1000),
