@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "199605025914224641",
+		"name": "pokestarfan"
+	},
+	"service": "Zybooks",
+	"description": {
+		"en": "Share progress on Zybooks activities."
+	},
+	"url": "learn.zybooks.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/1lSQQh1.png",
+	"thumbnail": "https://i.imgur.com/I4RTS73.png",
+	"color": "#f57c00",
+	"category": "other",
+	"tags": [
+		"educational",
+		"textbook"
+	]
+}
