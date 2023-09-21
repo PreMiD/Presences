@@ -14,8 +14,6 @@ async function getStrings() {
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	// Pre-declare variable
 	oldLang: string = null,
-	newLang: string = null,
-	isTimeVisible: boolean = null,
 	radioStation = "",
 	startTimeStamp = Date.now();
 
