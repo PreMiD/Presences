@@ -24,6 +24,9 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/R/Radiko/assets/logo.png",
+			buttons: [
+				{ label: `Listen to ${codeChannel}`, url: document.location.href },
+			],
 		},
 		[newLang] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
