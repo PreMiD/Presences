@@ -15,6 +15,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	// Pre-declare variable
 	oldLang: string = null,
 	newLang: string = null,
+	isTimeVisible: boolean = null,
 	radioStation = "",
 	startTimeStamp = Date.now();
 
@@ -28,8 +29,9 @@ presence.on("UpdateData", async () => {
 				{ label: `Listen to ${codeChannel}`, url: document.location.href },
 			],
 		},
-		[newLang] = await Promise.all([
+		[newLang, isTimeVisible] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
+			presence.getSetting<boolean>("isTimeVisible"),
 		]);
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
@@ -54,7 +56,7 @@ presence.on("UpdateData", async () => {
 			).textContent;
 			presenceData.smallImageKey = "spiriteplay";
 			presenceData.smallImageText = strings.play;
-			presenceData.startTimestamp = startTimeStamp;
+			presenceData.startTimestamp = isTimeVisible ? startTimeStamp : null;
 		} else {
 			// If pause
 			if (codeChannel !== "___PAUSED___") {
