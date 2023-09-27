@@ -1,19 +1,23 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.7",
-    "author": {
-      "name": "Extra",
-      "id": "351816851380109332"
-    },
-    "service": "OpenFING",
-    "description": {
-      "en": "OpenFING is a student project dedicated to digitizing courses by the UdelaR's Engineering Faculty (Uruguay)"
-    },
-    "url": "open.fing.edu.uy",
-    "version": "1.0.0",
-    "logo": "https://i.imgur.com/7mO4xCK.png",
-    "thumbnail": "https://i.imgur.com/guoaeqg.png",
-    "color": "#4384fa",
-    "tags": ["Education", "Math", "Uruguay"],
-    "category": "videos",
-    "iframe": true
-  }
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Extra",
+		"id": "351816851380109332"
+	},
+	"service": "OpenFING",
+	"description": {
+		"en": "OpenFING is a student project dedicated to digitizing courses by the UdelaR's Engineering Faculty (Uruguay)"
+	},
+	"url": "open.fing.edu.uy",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/7mO4xCK.png",
+	"thumbnail": "https://i.imgur.com/guoaeqg.png",
+	"color": "#4384fa",
+	"category": "videos",
+	"tags": [
+		"Education",
+		"Math",
+		"Uruguay"
+	],
+	"iframe": true
+}

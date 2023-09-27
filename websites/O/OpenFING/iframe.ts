@@ -1,7 +1,5 @@
 const iframe = new iFrame();
 iframe.on("UpdateData", async () => {
-	if(document.querySelector("video") != null){
-  	let time = Math.floor(document.querySelector("video").currentTime);
-  	iframe.send(time);
-	}
+	if (document.querySelector("video") !== null)
+		iframe.send(Math.floor(document.querySelector("video").currentTime));
 });
