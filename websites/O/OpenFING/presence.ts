@@ -1,7 +1,6 @@
 const presence = new Presence({
-		clientId: "968736771061985410"
-	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	clientId: "968736771061985410"
+})
 
 let iFrameTime = -1;
 
@@ -15,11 +14,11 @@ presence.on("UpdateData", async () => {
 		details: ""
 	};
 
-	if (document.location.pathname == "/") {
+	if (document.location.pathname == "/")
 		presenceData.details = "En la pantalla de Inicio";
-	} else if (document.location.pathname == "/courses") {
+	else if (document.location.pathname == "/courses")
 		presenceData.details = "Viendo los Cursos";
-	} else if (document.location.pathname.includes("/courses")) {
+	else if (document.location.pathname.includes("/courses")) {
 		presenceData.details = `${
 			document.querySelector("title").textContent.split(" - OpenFING")[0]
 		}`;
@@ -41,12 +40,13 @@ presence.on("UpdateData", async () => {
 			let time = 0;
 			if (iFrameTime > -1) {
 				time = iFrameTime;
-			} else if (document.querySelector("video") != null) {
+			} else if (document.querySelector("video") !== null) {
 				time = Math.floor(document.querySelector("video").currentTime);
 			}
 			presenceData.startTimestamp = Math.floor(Date.now() / 1000) - time;
 		}
 	}
-	if (presenceData.details) presence.setActivity(presenceData);
+	if (presenceData.details) 
+		presence.setActivity(presenceData);
 	else presence.setActivity();
 });
