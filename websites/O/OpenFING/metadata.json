@@ -6,7 +6,8 @@
 	},
 	"service": "OpenFING",
 	"description": {
-		"en": "OpenFING is a student project dedicated to digitizing courses by the UdelaR's Engineering Faculty (Uruguay)"
+		"en": "OpenFING is a student project dedicated to digitizing courses by the UdelaR's Engineering Faculty (Uruguay)",
+		"es": "OpenFING es un proyecto estudiantil dedicado a digitalizar los cursos impartidos en la Facultad de Ingeniería de la UdelaR (Uruguay)."
 	},
 	"url": "open.fing.edu.uy",
 	"version": "1.0.0",
@@ -15,9 +16,11 @@
 	"color": "#4384fa",
 	"category": "videos",
 	"tags": [
-		"Education",
-		"Math",
-		"Uruguay"
+		"education",
+		"math",
+		"uruguay",
+		"openfing",
+		"engineering"
 	],
 	"iframe": true
 }
