@@ -10,8 +10,7 @@ presence.on("iFrameData", (data: number) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "openfing",
-		details: "",
+		largeImageKey: "https://i.imgur.com/7mO4xCK.png",
 	};
 
 	if (document.location.pathname === "/")
