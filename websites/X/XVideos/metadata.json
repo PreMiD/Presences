@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "TheDrop.",
+		"id": "293828021134295040"
+	},
+	"service": "XVideos",
+	"description": {
+		"en": "XVideos is a free hosting service for porn videos.",
+		"ro": "XVideos este un serviciu gratuit de hostare pentru filme porno.",
+		"pt_BR": "XVideos é um serviço gratuito de hospedagem para vídeos pornô.",
+		"fr": "XVideos est un service d'hébergement de vidéos pornographiques gratuit.",
+		"uk_UA": "XVideos — це безкоштовний сервіс хостингу для порно відео.",
+		"nl": "XVideos is een gratis hostingservice voor pornovideo's.",
+		"ga_IE": "Is seirbhís óstála saor in aisce é XVideos le haghaidh físeáin porn."
+	},
+	"url": "www.xvideos.com",
+	"version": "2.3.22",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/X/XVideos/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/X/XVideos/assets/thumbnail.png",
+	"color": "#d90e15",
+	"category": "videos",
+	"tags": [
+		"video",
+		"nsfw"
+	]
+}

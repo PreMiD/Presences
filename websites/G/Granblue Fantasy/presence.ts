@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "632983924414349333"
+		clientId: "632983924414349333",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	script = document.createElement("script"),
@@ -55,13 +55,14 @@ addEventListener(eventId, (data: CustomEvent) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		{ href } = document.location,
 		[health, djeeta] = await Promise.all([
 			presence.getSetting<number>("health"),
-			presence.getSetting<boolean>("djeeta")
+			presence.getSetting<boolean>("djeeta"),
 		]);
 	if (href.includes("/#mypage")) presenceData.details = "Home page";
 	else if (href.includes("/#quest")) {

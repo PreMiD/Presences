@@ -1,15 +1,17 @@
 /* eslint-disable no-one-time-vars/no-one-time-vars */
 const presence = new Presence({
-	clientId: "792094839414980639"
+	clientId: "792094839414980639",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "main",
-		startTimestamp: Math.floor(Date.now() / 1000)
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/SuperiorServers.co/assets/logo.png",
+		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 	if (document.location.hostname === "superiorservers.co") {
-		presenceData.largeImageKey = "main";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/S/SuperiorServers.co/assets/logo.png";
 		presenceData.details = "Portal";
 		if (
 			(document.location.pathname === "/" || !document.location.pathname) &&

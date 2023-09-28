@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "682218734391394338"
+		clientId: "682218734391394338",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "lg",
-		startTimestamp: browsingTimestamp
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/Gitea/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 	switch (document.location.pathname) {
 		case "/": {

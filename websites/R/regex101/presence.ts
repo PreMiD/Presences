@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "959518817573302323"
+		clientId: "959518817573302323",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "icon",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/regex101/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = location;
 

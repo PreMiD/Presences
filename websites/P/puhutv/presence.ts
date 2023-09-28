@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "628341182581440531"
+		clientId: "628341182581440531",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 presence.on("UpdateData", async () => {
@@ -17,11 +17,12 @@ presence.on("UpdateData", async () => {
 		(category && category.textContent !== "")
 	) {
 		presence.setActivity({
-			largeImageKey: "puhu-logo",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/puhutv/assets/logo.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
 			details: "Geziniyor...",
 			state:
-				category && category.textContent ? category.textContent : "Ana Sayfa"
+				category && category.textContent ? category.textContent : "Ana Sayfa",
 		});
 	} else {
 		const video = document.querySelector(
@@ -52,7 +53,8 @@ presence.on("UpdateData", async () => {
 			if (!title || title.textContent === "") return;
 
 			const presenceData: PresenceData = {
-				largeImageKey: "puhu-logo",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/P/puhutv/assets/logo.png",
 				details: title.textContent,
 				state:
 					episode !== ""
@@ -71,7 +73,7 @@ presence.on("UpdateData", async () => {
 				smallImageKey: video.paused ? "paused" : "playing",
 				smallImageText: video.paused
 					? (await strings).pause
-					: (await strings).play
+					: (await strings).play,
 			};
 
 			if (!isNaN(timestamps[0]) && !isNaN(timestamps[1]))

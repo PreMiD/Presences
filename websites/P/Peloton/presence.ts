@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "712294190339588209"
+		clientId: "712294190339588209",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,13 +7,14 @@ let path, strings, clipTitle, clipAuthor, clipTimeLeft;
 
 presence.on("UpdateData", async () => {
 	strings = await presence.getStrings({
-		live: "presence.activity.live",
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		live: "general.live",
+		play: "general.playing",
+		pause: "general.paused",
 	});
 	const presenceData: PresenceData = {
-		largeImageKey: "peloton",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/P/Peloton/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (window.location.hostname.includes("www.onepeloton")) {
@@ -120,14 +121,14 @@ presence.on("UpdateData", async () => {
 
 				switch (!video.paused) {
 					case true:
-						presenceData.smallImageKey = "play";
+						presenceData.smallImageKey = Assets.Play;
 						presenceData.smallImageText = strings.play;
 						presenceData.endTimestamp = new Date(
 							Date.now() + (video.duration - video.currentTime) * 1000
 						).getTime();
 						break;
 					case false:
-						presenceData.smallImageKey = "pause";
+						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = strings.pause;
 						presenceData.endTimestamp = new Date(
 							Date.now() + (video.duration - video.currentTime) * 1000

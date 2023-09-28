@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "630790482804473857"
+		clientId: "630790482804473857",
 	}),
 	crossover: unknown[] = [],
 	tags = [
@@ -11,7 +11,7 @@ const presence = new Presence({
 		"/misc/",
 		"/movie/",
 		"/play/",
-		"tv"
+		"tv",
 	],
 	browsingTimetsamp = Math.floor(Date.now() / 1000);
 let anime;
@@ -19,8 +19,9 @@ for (let i = 0; i < tags.length; i++) crossover.push([`/crossovers${tags[i]}`]);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "banner",
-		startTimestamp: browsingTimetsamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/F/Fanfiction/assets/logo.png",
+		startTimestamp: browsingTimetsamp,
 	};
 
 	if (document.location.pathname === "/") {

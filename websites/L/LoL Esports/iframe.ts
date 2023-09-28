@@ -6,7 +6,7 @@ iframe.on("UpdateData", async () => {
 			iframevideo: true,
 			currentTime: video.currentTime,
 			duration: video.duration,
-			paused: video.paused
+			paused: video.paused,
 		});
 	} else iframe.send({ iframevideo: false });
 });

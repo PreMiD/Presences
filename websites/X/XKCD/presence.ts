@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "754549450772316160"
+		clientId: "754549450772316160",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/X/XKCD/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (
@@ -27,8 +27,8 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{
 				url: `https://xkcd.com/${comicNumber}`,
-				label: "View Comic"
-			}
+				label: "View Comic",
+			},
 		];
 		presenceData.state = document.querySelector("#ctitle").textContent;
 	} else presenceData.details = "Browsing XKCD";

@@ -28,7 +28,8 @@ async function getStrings() {
 			watching: "general.watching",
 			readButton: "general.buttonReadArticle",
 			viewProfileButton: "general.buttonViewProfile",
-			streamButton: "general.buttonWatchStream"
+			streamButton: "general.buttonWatchStream",
+			insubreddit: "In a subreddit",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -39,8 +40,11 @@ const startTimestamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 	setPresence();
-	const newLang = await presence.getSetting<string>("lang").catch(() => "en"),
-		buttons = await presence.getSetting<boolean>("buttons");
+	const [newLang, buttons, privacy] = await Promise.all([
+		presence.getSetting<string>("lang").catch(() => "en"),
+		presence.getSetting<boolean>("buttons"),
+		presence.getSetting<boolean>("privacy"),
+	]);
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
@@ -48,107 +52,142 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-			largeImageKey: "reddit_lg",
-			startTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Reddit/assets/logo.png",
+			startTimestamp,
 		},
 		{ pathname } = window.location;
 	if (oldReddit) {
 		subReddit = document.querySelector(".redditname")
-			? `r/${document.querySelector(".redditname").textContent}`
+			? `${
+					!privacy
+						? `r/${document.querySelector(".redditname").textContent}`
+						: strings.insubreddit
+			  }`
 			: "Home";
 		if (pathname.includes("/comments/")) {
-			postTitle = document.querySelector("p.title > a").textContent;
-			presenceData.details = `${(await strings).reading} '${postTitle}'`;
-			presenceData.state = subReddit;
-			presenceData.buttons = [
-				{
-					url: `https://www.reddit.com${pathname}`,
-					label: (await strings).readButton
-				}
-			];
+			if (!privacy) {
+				postTitle = document.querySelector("p.title > a").textContent;
+				presenceData.details = `${strings.reading} '${postTitle}'`;
+				presenceData.state = subReddit;
+				presenceData.buttons = [
+					{
+						url: `https://www.reddit.com${pathname}`,
+						label: strings.readButton,
+					},
+				];
+			} else {
+				presenceData.details = strings.reading.slice(0, -1);
+				presenceData.state = subReddit;
+			}
 		} else if (pathname.startsWith("/user/")) {
-			username = document.querySelector(".titlebox > h1").textContent;
-			presenceData.details = (await strings).profile;
-			presenceData.state = username;
-			presenceData.buttons = [
-				{
-					url: `https://www.reddit.com${pathname}`,
-					label: (await strings).viewProfileButton
-				}
-			];
+			if (!privacy) {
+				presenceData.state =
+					document.querySelector(".titlebox > h1").textContent;
+				presenceData.details = strings.profile;
+				presenceData.buttons = [
+					{
+						url: `https://www.reddit.com${pathname}`,
+						label: strings.viewProfileButton,
+					},
+				];
+			} else presenceData.details = strings.profile.slice(0, -4);
 		} else if (pathname.startsWith("/search")) {
-			presenceData.details = (await strings).searchSomething;
-			presenceData.smallImageKey = "search";
-			presenceData.smallImageText = (await strings).searching;
+			presenceData.details = strings.searchSomething;
+			presenceData.smallImageKey = Assets.Search;
+			presenceData.smallImageText = strings.searching;
 		} else {
-			presenceData.details = (await strings).browsing;
+			presenceData.details = strings.browsing;
 			presenceData.state = subReddit;
 		}
 	} else if (pathname.includes("/comments/")) {
-		postTitle =
-			document.querySelector(
-				"div._2SdHzo12ISmrC8H86TgSCp._29WrubtjAcKqzJSPdQqQ4h"
-			)?.textContent || "";
-		subReddit = document.querySelector(
-			"span._1GieMuLljOrqnVpRAwz7VP"
-		).textContent;
-		subReddit =
-			subReddit === "Home" &&
-			document.querySelectorAll("._19bCWnxeTjqzBElWZfIlJb")[1] !== null
-				? document.querySelectorAll("._19bCWnxeTjqzBElWZfIlJb")[1].textContent
-				: subReddit;
-		presenceData.details = `${(await strings).reading} '${postTitle}'`;
-		presenceData.state = subReddit;
-		presenceData.buttons = [
-			{
-				url: `https://www.reddit.com${pathname}`,
-				label: (await strings).readButton
-			}
-		];
+		if (!privacy) {
+			postTitle =
+				document.querySelector(
+					"div._2SdHzo12ISmrC8H86TgSCp._29WrubtjAcKqzJSPdQqQ4h"
+				)?.textContent || "";
+			subReddit = document.querySelector(
+				"span._19bCWnxeTjqzBElWZfIlJb"
+			).textContent;
+			subReddit =
+				subReddit === "Home" &&
+				document.querySelectorAll("._19bCWnxeTjqzBElWZfIlJb")[1] !== null
+					? document.querySelectorAll("._19bCWnxeTjqzBElWZfIlJb")[1].textContent
+					: subReddit;
+			presenceData.details = `${strings.reading} '${postTitle}'`;
+			presenceData.state = subReddit;
+			presenceData.buttons = [
+				{
+					url: `https://www.reddit.com${pathname}`,
+					label: strings.readButton,
+				},
+			];
+		} else presenceData.details = strings.reading.slice(0, -1);
 	} else if (pathname.startsWith("/user/")) {
-		username = document.querySelector(
-			"span._1GieMuLljOrqnVpRAwz7VP"
-		).textContent;
-		nickname = document.querySelector("h4._3W1eUu5jHdcamkzFiJDITJ")
-			? document.querySelector("h4._3W1eUu5jHdcamkzFiJDITJ").textContent
-			: "";
-		presenceData.details = (await strings).profile;
-		presenceData.state = nickname !== "" ? nickname : username;
-		presenceData.buttons = [
-			{
-				url: `https://www.reddit.com${pathname}`,
-				label: (await strings).viewProfileButton
-			}
-		];
+		if (!privacy) {
+			username = document.querySelector("span._1LCAhi_8JjayVo7pJ0KIh0")
+				? document.querySelector("span._1LCAhi_8JjayVo7pJ0KIh0").textContent
+				: document
+						.querySelector("span._28nEhn86_R1ENZ59eAru8S")
+						.textContent.match(/u\/[A-Za-z0-9_-]+/i)[0]
+						.slice(2);
+			nickname = document.querySelector("h4._3W1eUu5jHdcamkzFiJDITJ")
+				? document.querySelector("h4._3W1eUu5jHdcamkzFiJDITJ").textContent
+				: "";
+			presenceData.details = strings.profile;
+			presenceData.state = nickname !== "" ? nickname : username;
+			presenceData.buttons = [
+				{
+					url: `https://www.reddit.com${pathname}`,
+					label: strings.viewProfileButton,
+				},
+			];
+		} else presenceData.details = strings.profile.slice(0, -4);
 	} else if (pathname.startsWith("/search")) {
-		presenceData.details = (await strings).searchSomething;
-		presenceData.smallImageKey = "search";
-		presenceData.smallImageText = (await strings).searching;
+		presenceData.details = strings.searchSomething;
+		presenceData.smallImageKey = Assets.Search;
+		presenceData.smallImageText = strings.searching;
 	} else if (pathname.startsWith("/rpan")) {
-		rpanTitle = document.querySelector("h1")
-			? document.querySelector("h1").textContent
-			: "Loading title...";
-		presenceData.details = `${(await strings).watching} (RPAN)`;
-		presenceData.state = rpanTitle;
+		presenceData.details = `${strings.watching} (RPAN)`;
+		if (!privacy) {
+			rpanTitle = document.querySelector("h1")
+				? document.querySelector("h1").textContent
+				: "Loading title...";
+			presenceData.state = rpanTitle;
+			presenceData.buttons = [
+				{
+					url: `https://www.reddit.com${pathname}`,
+					label: strings.streamButton,
+				},
+			];
+		}
 		presenceData.smallImageKey = "live";
-		presenceData.smallImageText = (await strings).live;
-		presenceData.buttons = [
-			{
-				url: `https://www.reddit.com${pathname}`,
-				label: (await strings).streamButton
-			}
-		];
-	} else {
+		presenceData.smallImageText = strings.live;
+	} else if (!privacy) {
 		const sub = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP");
 		if (sub === null) {
 			const sub2 = document.querySelector(
-				"#SHORTCUT_FOCUSABLE_DIV > div:nth-child(4) > div > div > div > div._3ozFtOe6WpJEMUtxDOIvtU > div.q4a8asWOWdfdniAbgNhMh > div > div.QscnL9OySMkHhGudEvEya > div > div._3TG57N4WQtubLLo8SbAXVF > h2"
+				"#SHORTCUT_FOCUSABLE_DIV > div:nth-child(4) > div > div > div > div._3ozFtOe6WpJEMUtxDOIvtU > div.MSTY2ZpsdupobywLEfx9u > div._3JDs8KEQIXSMn1bTF2ZqJ_ > div.QscnL9OySMkHhGudEvEya > div._3I4Wpl_rl6oTm02aWPZayD > div._3TG57N4WQtubLLo8SbAXVF > h2"
 			);
-			presenceData.details = (await strings).browsing;
+			presenceData.details = strings.browsing;
 			presenceData.state = !sub2 ? "Home" : sub2.textContent;
 		} else {
-			presenceData.details = (await strings).browsing;
+			presenceData.details = strings.browsing;
 			presenceData.state = sub.textContent;
+		}
+	} else {
+		const sub = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP");
+		if (!sub) {
+			const sub2 = document.querySelector(
+				"#SHORTCUT_FOCUSABLE_DIV > div:nth-child(4) > div > div > div > div._3ozFtOe6WpJEMUtxDOIvtU > div.MSTY2ZpsdupobywLEfx9u > div._3JDs8KEQIXSMn1bTF2ZqJ_ > div.QscnL9OySMkHhGudEvEya > div._3I4Wpl_rl6oTm02aWPZayD > div._3TG57N4WQtubLLo8SbAXVF > h2"
+			);
+			presenceData.details = strings.browsing;
+			presenceData.state = !sub2 ? "Home" : sub2.textContent;
+		} else {
+			presenceData.details = strings.browsing;
+			if (sub.textContent.includes("r/"))
+				presenceData.state = strings.insubreddit;
+			else presenceData.state = sub.textContent;
 		}
 	}
 	if (pathname.includes("/r/netflix")) {
@@ -156,21 +195,21 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					url: "https://www.reddit.com/r/netflix",
-					label: "View r/Netflix Subreddit"
+					label: "View r/Netflix Subreddit",
 				},
 				{
 					url: "https://discord.gg/bDumw325vX",
-					label: "Join r/Netflix Discord"
-				}
+					label: "Join r/Netflix Discord",
+				},
 			];
 		}
 		if (presenceData.buttons.length === 1) {
 			presenceData.buttons.push({
 				url: "https://discord.gg/bDumw325vX",
-				label: "Join r/Netflix Discord"
+				label: "Join r/Netflix Discord",
 			});
 		}
 	}
-	if (!buttons) delete presenceData.buttons;
-	presence.setActivity(presenceData, true);
+	if (!buttons || privacy) delete presenceData.buttons;
+	presence.setActivity(presenceData);
 });

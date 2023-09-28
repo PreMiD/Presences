@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "612299892764966923"
+		clientId: "612299892764966923",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	subsection = new URL(document.location.href).searchParams.get("subsection");
@@ -15,7 +15,7 @@ let AppName: HTMLElement,
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "Unknown page",
-		largeImageKey: "lg"
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Steam/assets/logo.png",
 	};
 
 	if (document.location.hostname === "steamcommunity.com") {
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.startTimestamp = browsingTimestamp;
 
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else if (document.location.pathname.includes("/app/")) {
 			if (document.location.pathname.includes("/workshop/")) {
 				AppName = document.querySelector(
@@ -329,7 +329,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.startTimestamp = browsingTimestamp;
 
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	}
 

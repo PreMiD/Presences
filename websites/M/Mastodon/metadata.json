@@ -1,0 +1,49 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "533014724569333770",
+		"name": "Hikki"
+	},
+	"service": "Mastodon",
+	"description": {
+		"en": "From breaking news to entertainment, from technology to politics, mastodon is a social that empowers users without tracking them."
+	},
+	"url": [
+		"mastodon.social",
+		"mstdn.social",
+		"techhub.social",
+		"mastodon.uno",
+		"securitymastod.one",
+		"linuxrocks.online",
+		"universeodon.com",
+		"indieweb.social",
+		"infosec.exchange",
+		"aus.social",
+		"social.network.europa.eu",
+		"masto.ai",
+		"social.vivaldi.net"
+	],
+	"version": "1.1.2",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Mastodon/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Mastodon/assets/thumbnail.png",
+	"color": "#6364ff",
+	"category": "socials",
+	"tags": [
+		"mastodon",
+		"social"
+	],
+	"settings": [
+		{
+			"id": "time",
+			"title": "Show timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		}
+	]
+}

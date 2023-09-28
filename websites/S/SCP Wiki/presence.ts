@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "639208971806310441"
+		clientId: "639208971806310441",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/SCP%20Wiki/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "scp-int.wikidot.com")

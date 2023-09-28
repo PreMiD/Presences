@@ -18,7 +18,7 @@ if (document.location.href.includes("https://skystudioapps.com")) {
 			playing: Boolean(document.querySelector("#play-button.fas.fa-pause")),
 			duration: document
 				.querySelector("#stats")
-				?.firstChild?.textContent.split(" ")[1]
+				?.firstChild?.textContent.split(" ")[1],
 		});
 	});
 }

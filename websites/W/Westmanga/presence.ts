@@ -1,9 +1,10 @@
 const presence = new Presence({
-		clientId: "848082293427273748"
+		clientId: "848082293427273748",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: Math.floor(Date.now() / 1000)
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/W/Westmanga/assets/logo.png",
+		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 
 presence.on("UpdateData", async () => {
@@ -50,7 +51,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector("div.wrapper > div > div > div.releases > h1")
 						.textContent
 				}`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 			if (document.location.pathname.startsWith("/manga")) {
 				const type = document.querySelector(
@@ -61,7 +62,7 @@ presence.on("UpdateData", async () => {
 					"div.seriestucon > div.seriestuheader > h1"
 				).textContent;
 				presenceData.buttons = [
-					{ label: `View ${type}`, url: document.location.href }
+					{ label: `View ${type}`, url: document.location.href },
 				];
 			}
 			if (document.querySelector(".chapterbody")) {
@@ -75,7 +76,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector("#chapter > option:nth-child(2)").textContent
 				}`;
 				presenceData.buttons = [
-					{ label: "Read Manga", url: document.location.href }
+					{ label: "Read Manga", url: document.location.href },
 				];
 			}
 			break;

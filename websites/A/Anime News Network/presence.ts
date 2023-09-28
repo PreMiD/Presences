@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "631523770988888074"
+	clientId: "631523770988888074",
 });
 
 function capitalize(string: string): string {
@@ -11,8 +11,9 @@ let data;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Anime%20News%20Network/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/") {

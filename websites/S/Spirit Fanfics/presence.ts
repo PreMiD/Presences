@@ -1,18 +1,19 @@
 const presence = new Presence({
-		clientId: "628786533587091490"
+		clientId: "628786533587091490",
 	}),
 	{ pathname } = window.location,
 	strings = presence.getStrings({
-		browsing: "presence.activity.browsing",
-		searching: "presence.activity.searching",
-		reading: "presence.activity.reading"
+		browsing: "general.browsing",
+		searching: "general.searching",
+		reading: "general.reading",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "spirit_lg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Spirit%20Fanfics/assets/logo.png",
 			startTimestamp: Math.floor(Date.now() / 1000),
-			details: (await strings).browsing
+			details: (await strings).browsing,
 		},
 		nav = document.querySelector("#secaoNav").lastChild.textContent;
 	if (pathname.startsWith("/historia")) {
@@ -38,7 +39,7 @@ presence.on("UpdateData", async () => {
 					.querySelector(".tituloPrincipal")
 					.textContent.replace("História ", "")
 					.split(" - ");
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 				presenceData.smallImageText = "Escrevendo";
 			}
 		} else if (pathname.startsWith("/historia/editar")) {
@@ -59,7 +60,7 @@ presence.on("UpdateData", async () => {
 			if (pathname.match(/\/historia\/(\w+-)+\d+\/\w+/)) {
 				[presenceData.details] = title;
 				presenceData.state = `${title[1]} - ${nav}`;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = (await strings).reading;
 			} else {
 				presenceData.details = "Vendo uma história";
@@ -87,7 +88,7 @@ presence.on("UpdateData", async () => {
 	else if (pathname.startsWith("/grupos")) presenceData.state = "Vendo grupos";
 	else if (pathname.startsWith("/busca")) {
 		presenceData.details = `${(await strings).searching}...`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).searching;
 	} else presenceData.state = nav;
 

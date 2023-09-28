@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "651455140477272065"
+		clientId: "651455140477272065",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -28,7 +28,7 @@ function pushMusicPresence(presenceData: PresenceData): void {
 	presenceData.state = `Listening to ${currentDj}`;
 	presenceData.smallImageText =
 		currentListeners !== 0 ? `Listeners: ${currentListeners}` : "";
-	presenceData.smallImageKey = "play";
+	presenceData.smallImageKey = Assets.Play;
 
 	if (lastTitle !== currentTitle) {
 		lastTitle = currentTitle;
@@ -46,7 +46,8 @@ let lastTitle = "",
 
 presence.on("UpdateData", function () {
 	const presenceData: PresenceData = {
-		largeImageKey: "srlogo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Simulator%20Radio/assets/logo.png",
 	};
 
 	if (
@@ -57,7 +58,7 @@ presence.on("UpdateData", function () {
 
 		if (document.location.pathname.includes("/request")) {
 			presenceData.details = "Requesting...";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (document.location.pathname.includes("/timetable")) {
 			presenceData.details = "Viewing the Timetable";
 			presenceData.state = document.querySelector("#timetable-day").textContent;
@@ -76,12 +77,12 @@ presence.on("UpdateData", function () {
 			presenceData.state =
 				document.querySelector(".blog-title")?.textContent ??
 				document.querySelector(".blog-page-title").textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/team"))
 			presenceData.details = "Viewing the Team";
 		else if (document.location.pathname.includes("/changelog")) {
 			presenceData.details = "Reading the Changelog";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 	} else pushMusicPresence(presenceData);
 

@@ -1,13 +1,14 @@
 const presence = new Presence({
-		clientId: "918832169823125555"
+		clientId: "918832169823125555",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			details: "Browsing...",
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/C/CSGO%20Stash/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		shortTitle = document.title.substring(
 			0,
@@ -134,7 +135,7 @@ presence.on("UpdateData", () => {
 			presenceData.state = `Steam price: ${priceMiddle.textContent}`;
 			presenceData.largeImageKey = leftImage.src;
 			presenceData.buttons = [
-				{ label: "View Graffiti Box", url: document.URL }
+				{ label: "View Graffiti Box", url: document.URL },
 			];
 		} else {
 			presenceData.details = `Viewing graffiti: ${shortTitle}`;

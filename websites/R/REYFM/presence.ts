@@ -10,7 +10,7 @@ interface Channel {
 }
 
 const presence = new Presence({
-		clientId: "748660637021896835"
+		clientId: "748660637021896835",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -33,7 +33,7 @@ function newStats(): void {
 					cover: "",
 					listeners: 0,
 					timeStart: "",
-					timeEnd: ""
+					timeEnd: "",
 				});
 			}
 			for (const channel of channelArray) {
@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
 				presence.getSetting<string>("sFormat2"),
 				presence.getSetting<string>("sListeners"),
 				presence.getSetting<boolean>("buttons"),
-				presence.getSetting<number>("logo")
+				presence.getSetting<number>("logo"),
 			]),
 		logoArr = [
 			"reywhitebacksmall",
@@ -97,34 +97,34 @@ presence.on("UpdateData", async () => {
 			"reycolorback",
 			"reywhite",
 			"reyblack",
-			"rey"
+			"rey",
 		],
 		presenceData: PresenceData = {
 			largeImageKey: logoArr[logo] || "reywhitebacksmall",
-			smallImageKey: "reading"
+			smallImageKey: "reading",
 		};
 
 	let showFormat3 = false;
 
 	if (info) {
-		if (document.location.hostname === "status.reyfm.de")
+		if (document.location.hostname === "status.rey.fm")
 			presenceData.details = "Viewing status page";
-		else if (document.location.hostname === "www.reyfm.de") {
+		else if (document.location.hostname === "rey.fm") {
 			if (document.location.pathname.includes("/bots")) {
 				presenceData.details = "Viewing bots";
 				presenceData.buttons = [
 					{
 						label: "View Bots",
-						url: "https://www.reyfm.de/bots"
-					}
+						url: "https://rey.fm/bots",
+					},
 				];
 			} else if (document.location.pathname.includes("/discord-bot")) {
 				presenceData.details = "Viewing the Discord bot";
 				presenceData.buttons = [
 					{
 						label: "View Bot",
-						url: "https://www.reyfm.de/discord-bot"
-					}
+						url: "https://rey.fm/discord-bot",
+					},
 				];
 			} else if (document.location.pathname.includes("/partner"))
 				presenceData.details = "Viewing partners";
@@ -146,7 +146,7 @@ presence.on("UpdateData", async () => {
 	if (elapsed) presenceData.startTimestamp = browsingTimestamp;
 
 	if (
-		document.location.hostname === "www.reyfm.de" &&
+		document.location.hostname === "rey.fm" &&
 		document.location.pathname === "/"
 	) {
 		if (
@@ -165,7 +165,7 @@ presence.on("UpdateData", async () => {
 					const channel = channels.find(channel => channel.id === channelID);
 					({ track, artist, cover } = channel);
 
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.smallImageText = format3
 						.replace("%listeners%", `${channel.listeners}`)
 						.replace("%totalListeners%", `${totalListeners}`);
@@ -173,7 +173,10 @@ presence.on("UpdateData", async () => {
 					presenceData.endTimestamp = Date.parse(channel.timeEnd);
 					showFormat3 = true;
 					presenceData.buttons = [
-						{ label: "Listen along!", url: `https://reyfm.de/${channel.name}` }
+						{
+							label: "Listen along!",
+							url: `https://rey.fm/station/${channel.name}`,
+						},
 					];
 				} else {
 					artist = document.querySelector(
@@ -187,7 +190,7 @@ presence.on("UpdateData", async () => {
 							"#player > div.wrapper > div.cover > img#player-coverart"
 						)
 						.getAttribute("src");
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.smallImageText = "Loading statistics...";
 				}
 			} else {
@@ -202,7 +205,7 @@ presence.on("UpdateData", async () => {
 						"#player > div.wrapper > div.cover > img#player-coverart"
 					)
 					.getAttribute("src");
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = `Total Listeners: ${totalListeners}`;
 				delete presenceData.startTimestamp;
 			}
@@ -216,7 +219,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = cover;
 		}
 	} else if (
-		document.location.hostname === "www.reyfm.de" &&
+		document.location.hostname === "rey.fm" &&
 		document.querySelector("#channel-player") !== null
 	) {
 		const channel = channels.find(

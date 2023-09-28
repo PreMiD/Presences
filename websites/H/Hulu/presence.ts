@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "607719679011848220"
+		clientId: "607719679011848220",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		live: "presence.activity.live",
-		search: "presence.activity.searching"
+		play: "general.playing",
+		pause: "general.paused",
+		live: "general.live",
+		search: "general.searching",
 	});
 
 function capitalize(text: string): string {
@@ -128,7 +128,7 @@ presence.on("UpdateData", async () => {
 			if (content && content.textContent.length > 0)
 				state = content.textContent;
 
-			smallImageKey = live ? "live" : video.paused ? "pause" : "play";
+			smallImageKey = live ? "live" : video.paused ? Assets.Pause : Assets.Play;
 			smallImageText = live
 				? (await strings).live
 				: video.paused
@@ -159,7 +159,11 @@ presence.on("UpdateData", async () => {
 				if (content && content.textContent.length > 0)
 					state = content.textContent;
 
-				smallImageKey = live ? "live" : video.paused ? "pause" : "play";
+				smallImageKey = live
+					? "live"
+					: video.paused
+					? Assets.Pause
+					: Assets.Play;
 				smallImageText = live
 					? (await strings).live
 					: video.paused
@@ -177,11 +181,12 @@ presence.on("UpdateData", async () => {
 		{
 			details,
 			state,
-			largeImageKey: "hulu",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/Hulu/assets/logo.png",
 			smallImageKey,
 			smallImageText,
 			startTimestamp,
-			endTimestamp
+			endTimestamp,
 		},
 		video ? !video.paused : true
 	);

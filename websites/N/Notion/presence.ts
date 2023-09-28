@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "926386695354609684"
+		clientId: "926386695354609684",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	shortenedURLs: Record<string, string> = {};
@@ -19,13 +19,14 @@ async function shortenURL(url: string, fallback?: string): Promise<string> {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/N/Notion/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname,
 		[title, showPageIcon] = await Promise.all([
 			presence.getSetting<boolean>("title"),
-			presence.getSetting<boolean>("icon")
+			presence.getSetting<boolean>("icon"),
 		]),
 		overlayTitle = document.querySelector<HTMLDivElement>(
 			"div.notion-overlay-container.notion-default-overlay-container div[class='notranslate'][contenteditable='true']"
@@ -90,7 +91,7 @@ presence.on("UpdateData", async () => {
 							.toString(16)}.png`
 					: await shortenURL(pageIcon.src, "read")
 				: "read";
-		} else presenceData.smallImageKey = "read";
+		} else presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 	}
 	presence.setActivity(presenceData);

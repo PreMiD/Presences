@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "660519861742731264"
+	clientId: "660519861742731264",
 });
 
 let oldLang: string,
@@ -10,7 +10,8 @@ let oldLang: string,
 presence.on("UpdateData", async () => {
 	const path = window.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "logo_big"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/RadioMe/assets/logo.png",
 		};
 
 	oldLang = newLang;
@@ -26,7 +27,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state =
 				document.querySelector<HTMLHeadingElement>("h1").textContent;
 			presenceData.smallImageText = strings.search;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			break;
 		// Privacy policy, Imprint
 		case "c":
@@ -35,7 +36,7 @@ presence.on("UpdateData", async () => {
 		// Startpage, Radio station, Region, Unknown
 		default: {
 			const region = [
-					...document.querySelectorAll<HTMLAnchorElement>(".region-btn")
+					...document.querySelectorAll<HTMLAnchorElement>(".region-btn"),
 				]
 					.find(e => e.classList.contains("active"))
 					.pathname?.slice(1),
@@ -61,7 +62,7 @@ presence.on("UpdateData", async () => {
 						).children[0] as HTMLImageElement
 					).src;
 					presenceData.smallImageText = strings.play;
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.startTimestamp = timestamp;
 				} else {
 					// Radio is paused
@@ -74,7 +75,7 @@ presence.on("UpdateData", async () => {
 						).children[0] as HTMLImageElement
 					).src;
 					presenceData.smallImageText = strings.pause;
-					presenceData.smallImageKey = "pause";
+					presenceData.smallImageKey = Assets.Pause;
 				}
 			}
 			break;
@@ -90,7 +91,7 @@ async function getStrings(lang: string) {
 			play: "general.playing",
 			pause: "general.paused",
 			search: "general.searching",
-			browsing: "general.browsing"
+			browsing: "general.browsing",
 		},
 		lang
 	);

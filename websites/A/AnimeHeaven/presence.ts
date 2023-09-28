@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "816042675626442783"
+		clientId: "816042675626442783",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -31,8 +31,8 @@ const paths = {
 			presenceData.buttons = [
 				{
 					label: "Current Episode",
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 
 			const link =
@@ -40,7 +40,7 @@ const paths = {
 			if (link) {
 				presenceData.buttons.push({
 					label: "Episode List",
-					url: link
+					url: link,
 				});
 			}
 		}
@@ -48,7 +48,7 @@ const paths = {
 		if (iFrameVideo) {
 			const video = iFrameVideo;
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;
@@ -67,7 +67,7 @@ const paths = {
 	},
 	"/search"(presenceData: PresenceData) {
 		presenceData.state = "Searching...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		let searchQuery = new URLSearchParams(window.location.search).get("q");
 
@@ -114,15 +114,16 @@ const paths = {
 	},
 	"/"(presenceData: PresenceData) {
 		presenceData.state = "Viewing landing page...";
-	}
+	},
 };
 
 presence.on("UpdateData", async () => {
 	const buttons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/AnimeHeaven/assets/logo.png",
 			state: "Browsing...",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	let playback = true;

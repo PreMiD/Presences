@@ -1,6 +1,6 @@
 const PREMID_DEBUG_LOGGING = true,
 	presence = new Presence({
-		clientId: "676560908578717702"
+		clientId: "676560908578717702",
 	});
 
 function getNumberWithOrdinal(n: number): string {
@@ -14,11 +14,12 @@ presence.on("UpdateData", () => {
 		//log("UpdateData called")
 		const loggedIn = !!document.querySelector(".dropdown--account span"),
 			presenceData: PresenceData = {
-				largeImageKey: "nt",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/logo.png",
 				smallImageKey: loggedIn ? "user" : "guest",
 				smallImageText: loggedIn
 					? document.querySelector(".dropdown--account span").textContent
-					: "Racing as a guest"
+					: "Racing as a guest",
 			},
 			path = location.pathname;
 		try {

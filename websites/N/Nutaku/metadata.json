@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Cascade",
+		"id": "442612628104151040"
+	},
+	"service": "Nutaku",
+	"description": {
+		"en": "The best Hentai Games online on Nutaku. Your number 1 destination for uncensored browser, mobile and downloadable hentai games.",
+		"nl": "De beste Hentai-spellen online op Nutaku. Uw nummer 1 bestemming voor ongecensureerde browser-, mobiele en downloadbare hentai-spellen."
+	},
+	"url": [
+		"nutaku.net",
+		"www.nutaku.net"
+	],
+	"regExp": "([a-z]+[.])nutaku.net[/]",
+	"version": "1.0.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Nutaku/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Nutaku/assets/thumbnail.jpg",
+	"color": "#E53155",
+	"category": "games",
+	"tags": [
+		"anime",
+		"games",
+		"video",
+		"media",
+		"nsfw"
+	],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		}
+	]
+}

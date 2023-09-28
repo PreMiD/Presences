@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "809748404963770398"
+		clientId: "809748404963770398",
 	}),
 	getStrings = async () =>
 		presence.getStrings(
@@ -17,7 +17,7 @@ const presence = new Presence({
 				viewingHistory: "amazon.history",
 				viewingList: "netflix.viewList",
 				viewAccount: "general.viewAccount",
-				viewPage: "general.viewPage"
+				viewPage: "general.viewPage",
 			},
 			await presence.getSetting<string>("lang").catch(() => "en")
 		),
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 		presence.getSetting<boolean>("buttons"),
 		presence.getSetting<boolean>("searchQuery"),
 		presence.getSetting<number>("logo"),
-		presence.getSetting<boolean>("cover")
+		presence.getSetting<boolean>("cover"),
 	]);
 
 	if (oldLang !== newLang || !strings) {
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey: ["iqiyi_logo_b", "iqiyi_logo"][logo],
 		details: strings.browse,
 		smallImageKey: "search",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/") {
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 				)?.textContent.replace(
 					document.querySelector("h1 a")?.textContent || "",
 					""
-				)
+				),
 			},
 			coverImage: string = JSON.parse(
 				document.querySelectorAll('script[type="application/ld+json"]')[0]
@@ -136,7 +136,7 @@ presence.on("UpdateData", async () => {
 
 			if (cover && coverImage) presenceData.largeImageKey = coverImage;
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 
 			presenceData.endTimestamp = presence.getTimestampsfromMedia(video).pop();
@@ -151,8 +151,8 @@ presence.on("UpdateData", async () => {
 							: strings.watchEpisode,
 						url: `https://www.iq.com/play/${
 							document.URL.split("?")[0].split("/")[4]
-						}`
-					}
+						}`,
+					},
 				];
 			} else delete presenceData.buttons;
 
@@ -174,7 +174,7 @@ presence.on("UpdateData", async () => {
 				? decodeURI(new URLSearchParams(document.location.search).get("query"))
 				: "( Hidden )"
 		}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		if (result) {
 			presenceData.state = `${result} matching ${

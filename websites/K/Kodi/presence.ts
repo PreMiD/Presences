@@ -1,12 +1,12 @@
 const presence = new Presence({
-	clientId: "706585201479909476"
+	clientId: "706585201479909476",
 });
 
 let Name: Element, Artist: Element, timeDuration: Element, timeElapsed: Element;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/K/Kodi/assets/logo.png",
 	};
 
 	if (

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "840169707297832970"
+		clientId: "840169707297832970",
 	}),
 	data: {
 		startedSince?: number;
@@ -16,21 +16,22 @@ const presence = new Presence({
 		};
 	} = {
 		presence: {},
-		startedSince: ~~(Date.now() / 1000)
+		startedSince: ~~(Date.now() / 1000),
 	};
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "everskies",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/E/Everskies/assets/logo.png",
 		smallImageKey: "browse",
-		startTimestamp: data.startedSince
+		startTimestamp: data.startedSince,
 	};
 
 	data.presence = {
 		"/community": {
 			setPresenceData() {
 				presenceData.details = "Browsing forums...";
-			}
+			},
 		},
 		"/community/forums/": {
 			setPresenceData() {
@@ -38,7 +39,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document.querySelector(
 					"span.ng-star-inserted"
 				).textContent;
-			}
+			},
 		},
 		"/community/forums/([a-z]+)/([a-z0-9]+)": {
 			setPresenceData() {
@@ -50,10 +51,10 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Forum",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
-			}
+			},
 		},
 		"/chatroom": {
 			setPresenceData() {
@@ -67,12 +68,12 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "In chat room:";
 					presenceData.state = roomTitle;
 				}
-			}
+			},
 		},
 		"/club": {
 			setPresenceData() {
 				presenceData.details = "Browsing clubs...";
-			}
+			},
 		},
 		"/club/([a-z0-9-])": {
 			setPresenceData() {
@@ -84,10 +85,10 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Club",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
-			}
+			},
 		},
 		"/users": {
 			setPresenceData() {
@@ -100,7 +101,7 @@ presence.on("UpdateData", async () => {
 						: "Searching for user:";
 					if (searchParams.get("q")) presenceData.state = searchParams.get("q");
 				}
-			}
+			},
 		},
 		"/user/([a-zA-Z0-9-]+)": {
 			setPresenceData() {
@@ -111,15 +112,15 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View User",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
-			}
+			},
 		},
 		"/competitions": {
 			setPresenceData() {
 				presenceData.details = "Browsing competitions...";
-			}
+			},
 		},
 		"/shop/([a-z-]+)": {
 			setPresenceData() {
@@ -133,15 +134,15 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Shop",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
-			}
+			},
 		},
 		"/games": {
 			setPresenceData() {
 				presenceData.details = "Browsing games...";
-			}
+			},
 		},
 		"/games/": {
 			setPresenceData() {
@@ -152,22 +153,22 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Play Game",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
-			}
+			},
 		},
 		"/wardrobe": {
 			setPresenceData() {
 				presenceData.details = "Looking at:";
 				presenceData.state =
 					document.querySelector("div.box-title").textContent;
-			}
+			},
 		},
 		"/magazine": {
 			setPresenceData() {
 				presenceData.details = "Viewing their magazines";
-			}
+			},
 		},
 		"/profile/": {
 			setPresenceData() {
@@ -175,28 +176,28 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `Prfile • ${
 					document.querySelector("div.box-title").textContent
 				}`;
-			}
+			},
 		},
 		"/page/([a-z-])": {
 			setPresenceData() {
 				presenceData.details = "Viewing page:";
 				presenceData.state =
 					document.querySelector("div.box-title").textContent;
-			}
-		}
+			},
+		},
 	};
 
 	data.settings = [
 		{
 			id: "timestamp",
 			delete: true,
-			uses: ["startTimestamp", "endTimestamp"]
+			uses: ["startTimestamp", "endTimestamp"],
 		},
 		{
 			id: "buttons",
 			delete: true,
-			uses: ["buttons"]
-		}
+			uses: ["buttons"],
+		},
 	];
 
 	for (const [k, v] of Object.entries(data.presence))

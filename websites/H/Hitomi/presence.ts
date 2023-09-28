@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "738809940696629270"
+	clientId: "738809940696629270",
 });
 
 interface interfaceMapping {
@@ -11,7 +11,7 @@ const hitomiTypeMapping: interfaceMapping = {
 		doujinshi: "dj",
 		cg: "acg",
 		gamecg: "cg",
-		anime: "anime"
+		anime: "anime",
 	},
 	pathMapping: interfaceMapping = {
 		"/index-indonesian.html": "indonesian",
@@ -53,7 +53,7 @@ const hitomiTypeMapping: interfaceMapping = {
 		"/index-thai.html": "thai",
 		"/index-korean.html": "korean",
 		"/index-chinese.html": "chinese",
-		"/index-japanese.html": "japanese"
+		"/index-japanese.html": "japanese",
 	},
 	// /(type)/(title)-(lang)-(number).html
 	validateInfoUrl = /\/(.+)\/(.+)-(.+)-(\d+).html/,
@@ -62,7 +62,8 @@ const hitomiTypeMapping: interfaceMapping = {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "app"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/H/Hitomi/assets/logo.png",
 	};
 
 	presenceData.details = "Viewing recently added list";
@@ -89,7 +90,7 @@ presence.on("UpdateData", async () => {
 			).textContent
 		} (${parsedUrl[4]})`;
 		presenceData.buttons = [
-			{ label: "View Page", url: document.location.href }
+			{ label: "View Page", url: document.location.href },
 		];
 	}
 
@@ -109,7 +110,7 @@ presence.on("UpdateData", async () => {
 			validateReaderUrl.exec(document.location.pathname)[1]
 		})`;
 		presenceData.buttons = [
-			{ label: "View Page", url: document.location.href }
+			{ label: "View Page", url: document.location.href },
 		];
 	}
 

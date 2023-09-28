@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "703697546794631209"
+		clientId: "703697546794631209",
 	}),
 	elapsed = Math.floor(Date.now() / 1000);
 
@@ -7,9 +7,10 @@ presence.on("UpdateData", () => {
 	let video: HTMLVideoElement, live;
 	const path = window.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "roosterteeth",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Rooster%20Teeth/assets/logo.png",
 			details: "Browsing Rooster Teeth",
-			startTimestamp: elapsed
+			startTimestamp: elapsed,
 		};
 	if (window.location.hash.includes("#search?term=")) {
 		presenceData.details = "Searching For:";
@@ -119,7 +120,7 @@ presence.on("UpdateData", () => {
 				? "Live Playback paused"
 				: "Live";
 		} else {
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? "Playback paused"
 				: "Playing back";

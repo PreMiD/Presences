@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "EGGSY",
+		"id": "162969778699501569"
+	},
+	"service": "Trendyol",
+	"description": {
+		"en": "Trendyol is a popular shopping website in Turkey.",
+		"tr": "Trendyol, Türkiye'de hizmet gösteren en büyük alışveriş sitelerinden birisidir.",
+		"nl": "Trendyol is een populaire winkelwebsite in Turkije."
+	},
+	"url": "www.trendyol.com",
+	"version": "1.1.18",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Trendyol/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Trendyol/assets/thumbnail.png",
+	"color": "#f28232",
+	"category": "other",
+	"tags": [
+		"trendyol",
+		"shopping",
+		"turkish"
+	]
+}

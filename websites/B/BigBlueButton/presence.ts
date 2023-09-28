@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "768028596035649536"
+	clientId: "768028596035649536",
 });
 
 let roomName: string,
@@ -93,7 +93,8 @@ setInterval(getData, 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData = {
-		largeImageKey: "logo",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/B/BigBlueButton/assets/logo.png",
 		smallImageKey: inCall ? userState : "logo",
 		smallImageText: inCall
 			? userState === "screen"
@@ -110,9 +111,9 @@ presence.on("UpdateData", async () => {
 				? "Listening..."
 				: "Disconnected"
 			: userState,
-		details: roomName ? roomName : userState,
+		details: roomName ?? userState,
 		state: inCall ? `${userCount} users` : roomName ? userState : null,
-		startTimestamp: joinedRoomTimestamp ? joinedRoomTimestamp : Date.now()
+		startTimestamp: joinedRoomTimestamp ?? Date.now(),
 	};
 
 	if (!presenceData.details) delete presenceData.details;

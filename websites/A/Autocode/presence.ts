@@ -7,20 +7,21 @@ const presence = new Presence({ clientId: "858292108195921920" }),
 		"gitignore",
 		"txt",
 		"html",
-		"css"
+		"css",
 	];
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "autocode",
-			startTimestamp: startedAt
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/logo.jpg",
+			startTimestamp: startedAt,
 		},
 		{ pathname, hostname } = window.location,
 		path = pathname.split("/").slice(1),
 		[details, state, timestamp] = await Promise.all([
 			presence.getSetting<string>("editingDetails"),
 			presence.getSetting<string>("editingState"),
-			presence.getSetting<boolean>("timestamp")
+			presence.getSetting<boolean>("timestamp"),
 		]);
 
 	if (pathname.includes("/snippet")) {

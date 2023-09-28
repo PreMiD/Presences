@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "868465354014359672"
+		clientId: "868465354014359672",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	setCookie = (name: string, value: string, days: number) => {
@@ -25,8 +25,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "rco_logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/ReadComicsOnline/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = location,
 		input = document.querySelector<HTMLInputElement>("input#keyword"),
@@ -140,7 +141,7 @@ presence.on("UpdateData", async () => {
 							6,
 							title.textContent.indexOf("information")
 						);
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 						if (episode) {
 							presenceData.state =
 								episode.selectedOptions[0].textContent.trim();
@@ -151,12 +152,12 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: "Read Comic",
-									url: href
+									url: href,
 								},
 								{
 									label: "Check Description",
-									url: title.href
-								}
+									url: title.href,
+								},
 							];
 						}
 					}
@@ -168,8 +169,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "Check Description",
-								url: href
-							}
+								url: href,
+							},
 						];
 					}
 				}

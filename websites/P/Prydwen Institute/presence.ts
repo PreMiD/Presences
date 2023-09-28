@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "918337184929546322"
+		clientId: "918337184929546322",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		[shortTitle] = document.title.split(/[|/]/, 1);
 

@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "607651992567021580"
+	clientId: "607651992567021580",
 });
 
 let oldLang: string = null,
@@ -10,7 +10,8 @@ let oldLang: string = null,
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-			largeImageKey: "deezer"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Deezer/assets/logo.png",
 		},
 		strings = await getStrings(),
 		paused = false;
@@ -18,7 +19,7 @@ presence.on("UpdateData", async () => {
 	const [buttons, newLang, cover] = await Promise.all([
 		presence.getSetting<boolean>("buttons"),
 		presence.getSetting<string>("lang").catch(() => "en"),
-		presence.getSetting<boolean>("cover")
+		presence.getSetting<boolean>("cover"),
 	]);
 
 	oldLang ??= newLang;
@@ -29,35 +30,35 @@ presence.on("UpdateData", async () => {
 
 	const pages: Record<string, PresenceData> = {
 		shows: {
-			details: "Browsing shows"
+			details: "Browsing shows",
 		},
 		channels: {
-			details: "Browsing channels"
+			details: "Browsing channels",
 		},
 		loved: {
-			details: "Browsing user's loved"
+			details: "Browsing user's loved",
 		},
 		playlists: {
-			details: "Browsing user's playlists"
+			details: "Browsing user's playlists",
 		},
 		albums: {
-			details: "Browsing user's albums"
+			details: "Browsing user's albums",
 		},
 		artists: {
-			details: "Browsing user's artists"
+			details: "Browsing user's artists",
 		},
 		podcasts: {
-			details: "Browsing user's podcasts"
+			details: "Browsing user's podcasts",
 		},
 		playlist: {
-			details: "Looking at a playlist"
+			details: "Looking at a playlist",
 		},
 		album: {
-			details: "Looking at an album"
+			details: "Looking at an album",
 		},
 		artist: {
-			details: "Looking at an artist"
-		}
+			details: "Looking at an artist",
+		},
 	};
 
 	for (const [path, data] of Object.entries(pages)) {
@@ -84,9 +85,9 @@ presence.on("UpdateData", async () => {
 		if (
 			document
 				.querySelector(
-					"#page_player > div > div.player-controls > ul > li:nth-child(3) > button > svg > g > path"
+					"#page_player > div > div.player-controls > ul > li:nth-child(3) > button > svg > path"
 				)
-				.outerHTML.match('<path d="m5 2 18 10L5 22V2z"></path>')
+				.outerHTML.match('<path d="m3 1 12 7-12 7V1z"></path>')
 		)
 			paused = true;
 
@@ -111,7 +112,7 @@ presence.on("UpdateData", async () => {
 			}
 
 			presenceData.largeImageKey = cover ? albumCoverURL : "deezer";
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? strings.pause : strings.play;
 			[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
@@ -124,12 +125,12 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.viewArtist,
-						url: (artistLink as HTMLAnchorElement).href
+						url: (artistLink as HTMLAnchorElement).href,
 					},
 					{
 						label: strings.viewAlbum,
-						url: (albumLink as HTMLAnchorElement).href
-					}
+						url: (albumLink as HTMLAnchorElement).href,
+					},
 				];
 			}
 		} else {
@@ -158,7 +159,7 @@ presence.on("UpdateData", async () => {
 			}
 
 			presenceData.largeImageKey = cover ? podcastCoverURL : "deezer";
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? strings.pause : strings.play;
 			[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
@@ -171,8 +172,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: (await strings).viewPodcast,
-						url: (podcastLink as HTMLAnchorElement).href
-					}
+						url: (podcastLink as HTMLAnchorElement).href,
+					},
 				];
 			}
 		}
@@ -188,7 +189,7 @@ async function getStrings() {
 			pause: "general.paused",
 			viewAlbum: "general.buttonViewAlbum",
 			viewArtist: "general.buttonViewArtist",
-			viewPodcast: "general.buttonViewPodcast"
+			viewPodcast: "general.buttonViewPodcast",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);

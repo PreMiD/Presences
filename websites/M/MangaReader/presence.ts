@@ -1,19 +1,20 @@
 const presence = new Presence({
-		clientId: "901608545743683674"
+		clientId: "901608545743683674",
 	}),
 	strings = presence.getStrings({
 		homepage: "general.viewHome",
 		reading: "general.reading",
 		searchSomething: "general.searchSomething",
 		searchFor: "general.searchFor",
-		genre: "general.viewGenre"
+		genre: "general.viewGenre",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		details: (await strings).searchFor
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/MangaReader/assets/logo.png",
+		details: (await strings).searchFor,
 	};
 
 	if (document.location.pathname === "/" || !document.location.pathname)
@@ -54,8 +55,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Read Manga",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 
 		if (document.location.pathname.includes("/read")) {

@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "701201789365518337"
+	clientId: "701201789365518337",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "overbuff"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/O/Overbuff/assets/logo.png",
 	};
 
 	if (window.location.pathname.includes("/players/")) {

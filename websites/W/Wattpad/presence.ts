@@ -1,11 +1,12 @@
 const presence = new Presence({
-		clientId: "808753360152559716"
+		clientId: "808753360152559716",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/W/Wattpad/assets/logo.png",
 	};
 
 	let story;

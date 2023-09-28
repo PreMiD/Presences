@@ -1,6 +1,6 @@
 /* eslint-disable no-eval */
 const presence = new Presence({
-		clientId: "799885664538853417"
+		clientId: "799885664538853417",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	URLMap: { [index: string]: string[] } = {
@@ -12,7 +12,7 @@ const presence = new Presence({
 		Disconnect: ['"Disconnected"', '""'],
 		Profile: [
 			'"Viewing profile"',
-			'getText(".mainContent > h2:nth-child(2)") + "(" + getText(".mainContent > p:nth-child(3) > span:nth-child(1)") + ")"'
+			'getText(".mainContent > h2:nth-child(2)") + "(" + getText(".mainContent > p:nth-child(3) > span:nth-child(1)") + ")"',
 		],
 		History: ['"Viewing history"', '""'],
 		Avatars: ['"Customizing avatar"', '""'],
@@ -37,8 +37,8 @@ const presence = new Presence({
 		Game: ['"Playing a game"', '"vs "+ getText("#enemyUsername")'],
 		Spectate: [
 			'"Spectating a game"',
-			'(getText("#yourUsername") || "Loading...") + " vs " + (getText("#enemyUsername") || "Loading...")'
-		]
+			'(getText("#yourUsername") || "Loading...") + " vs " + (getText("#enemyUsername") || "Loading...")',
+		],
 	};
 function getText(selector: string) {
 	return document.querySelector(selector).textContent;
@@ -46,8 +46,9 @@ function getText(selector: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/U/Undercards/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing homepage";

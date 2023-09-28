@@ -1,15 +1,15 @@
 const presence = new Presence({
-		clientId: "629473655218241557"
+		clientId: "629473655218241557",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 function getTime(timegone: string[], timetotal: string[]): number[] {
 	return [
 		parseInt(timegone[0]) + parseInt(timegone[1]) * 60,
-		parseInt(timetotal[0]) + parseInt(timetotal[1]) * 60
+		parseInt(timetotal[0]) + parseInt(timetotal[1]) * 60,
 	];
 }
 
@@ -23,7 +23,8 @@ function getTimeLeft(Time: string[]): number[] {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "musescore"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/Musescore/assets/logo.png",
 	};
 
 	// ALL ON THE .ORG website
@@ -159,7 +160,7 @@ presence.on("UpdateData", async () => {
 				)
 				.getAttribute("state")}` === "default"
 		) {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.details = "Looking at";
 			presenceData.state = document.querySelector(
 				"body > div.page.page-score > div.container > div.row > main > article > div > div.score-right > h1"
@@ -182,11 +183,11 @@ presence.on("UpdateData", async () => {
 					.querySelector(
 						"#jmuse-container > div:nth-child(1) > div > div > div > div._1DDmo.undefined > div:nth-child(1) > div > div > div._3vWaq > span"
 					)
-					.textContent.split("/")[1]
+					.textContent.split("/")[1],
 			]);
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(time[0], time[1]);
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.details = "Listening to";
 			presenceData.state = document.querySelector(
 				"body > div.page.page-score > div.container > div.row > main > article > div > div.score-right > h1"

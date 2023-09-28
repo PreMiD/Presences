@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "724289548015763578"
+		clientId: "724289548015763578",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	});
 
 let video = {
 	current: 0,
 	duration: 0,
-	paused: true
+	paused: true,
 };
 
 // Const thing
@@ -26,7 +26,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "icon"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/F/FairyAnime/assets/logo.png",
 	};
 
 	// Presence

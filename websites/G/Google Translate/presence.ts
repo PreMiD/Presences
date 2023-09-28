@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "705033229719175179"
+	clientId: "705033229719175179",
 });
 
 function languageCode(language: string): string {
@@ -489,7 +489,8 @@ presence.on("UpdateData", async () => {
 		tDetail = await presence.getSetting<string>("tDetail"),
 		tState = await presence.getSetting<string>("tState"),
 		presenceData: PresenceData = {
-			largeImageKey: "gt"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Google%20Translate/assets/logo.png",
 		};
 
 	if (document.location.href.includes("about")) {
@@ -501,7 +502,7 @@ presence.on("UpdateData", async () => {
 		if (document.location.href.includes("forbusiness"))
 			presenceData.state = "Tools";
 	} else if (document.location.href.includes("contribute")) {
-		const contr = document.querySelector("span[role=img]");
+		const contr = document.querySelector("div.Xxlgbc > span[role=img]");
 		presenceData.details = "Contribute";
 		if (contr) {
 			const langs = document

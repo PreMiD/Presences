@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "641394369651277834"
+		clientId: "641394369651277834",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -11,39 +11,38 @@ let user: HTMLElement, title: HTMLElement | string, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "globo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/globoplay/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "globoplay.globo.com") {
 		if (document.location.pathname === "/")
 			presenceData.details = "Página inicial";
 		else if (document.location.pathname.includes("/categorias/")) {
-			if (document.querySelector("div.highlight__header > p")) {
-				user = document.querySelector("div.highlight__header > p");
-				presenceData.details = "Vendo a categoria:";
-				presenceData.state = user.textContent;
-				presenceData.smallImageKey = "reading";
-			} else if (
-				document.querySelector(
-					"div.application-controller__view > span > div > div > div > h1"
-				)
-			) {
-				presenceData.details = "Vendo a categoria:";
-				user = document.querySelector(
+			const categoryName = document.title.match(
+					new RegExp("Assistir (.+) online no Globoplay")
+				)[1],
+				categoryNamealt = document.querySelector(
 					"div.application-controller__view > span > div > div > div > h1"
 				);
-				presenceData.state = user.textContent;
-				presenceData.smallImageKey = "reading";
+			if (categoryName) {
+				presenceData.details = "Vendo a categoria:";
+				presenceData.state = categoryName;
+				presenceData.smallImageKey = Assets.Reading;
+			} else if (categoryNamealt) {
+				presenceData.details = "Vendo a categoria:";
+				presenceData.state = categoryNamealt.textContent;
+				presenceData.smallImageKey = Assets.Reading;
 			} else presenceData.details = "Categorias";
-		} else if (document.location.pathname.includes("/busca")) {
+		} else if (document.location.pathname.includes("/busca/")) {
 			presenceData.details = "Se preparando para";
 			presenceData.state = "pesquisar algo...";
 			search = document.querySelector("#search-bar-input");
-			if (search.textContent.length > 2) {
+			if (search.value.length > 2) {
 				presenceData.details = "Pesquisando por:";
 				presenceData.state = search.value;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 		} else if (document.location.pathname.includes("/programacao"))
 			presenceData.details = "Programação";
@@ -57,27 +56,27 @@ presence.on("UpdateData", async () => {
 		else if (document.location.pathname.includes("/minha-lista"))
 			presenceData.details = "Minha Lista";
 		else if (document.location.pathname.includes("/t/")) {
-			user = document.querySelector(".playkit-media-cover__header-text");
+			user = document.querySelector(".media-cover__header-text");
 			presenceData.details = "Vendo o programa/filme:";
 			presenceData.state = user.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/v/")) {
 			const video = document.querySelector<HTMLVideoElement>(
-				".id-playback > video"
-			);
-
-			if (document.location.pathname.includes("/programa/")) {
-				(title as string) = document.querySelector(
-					".video-info__data-program, .playkit-video-info__link-text"
-				).textContent;
+					".id-playback > video"
+				),
+				episodeTitle = document.querySelector(
+					":is(.video-info__data-program, .playkit-video-info__link-text)"
+				)?.textContent;
+			if (
+				episodeTitle &&
+				episodeTitle !==
+					document.querySelector(".video-info__data-title")?.textContent
+			) {
+				title = episodeTitle;
 				presenceData.state = document.querySelector(
 					".video-info__data-title"
 				).textContent;
-			} else {
-				title = document.querySelector(
-					".playkit-video-info__ep-title"
-				).textContent;
-			}
+			} else if (episodeTitle) title = episodeTitle;
 
 			if (!isNaN(video.duration)) {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
@@ -85,7 +84,7 @@ presence.on("UpdateData", async () => {
 						Math.floor(video.currentTime),
 						Math.floor(video.duration)
 					);
-				presenceData.smallImageKey = video.paused ? "pause" : "play";
+				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
 					? (await strings).pause
 					: (await strings).play;
@@ -100,23 +99,129 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Olhando para:";
 				presenceData.state = title as string;
 			}
-		} else if (document.location.pathname.includes("/agora-na-tv/")) {
-			presenceData.details = document.querySelector(
-				".playkit-channels-navigation__program-name"
-			).textContent;
-			presenceData.state = document.querySelector(
-				".playkit-channels-navigation__program-time"
-			).textContent;
-			presenceData.smallImageKey = "live";
-			presenceData.largeImageKey = "tvglobo";
+		} else if (document.location.pathname.includes("/podcasts/")) {
+			const podcastTitle = document.querySelector(
+					"div > div.podcast-view__header-info > h1"
+				)?.textContent,
+				podcastTitlealt = document.querySelector(
+					"div.podcast-episode-view__header-info > div:nth-child(1) > a"
+				)?.textContent,
+				podcastCover = (<HTMLImageElement>(
+					document.querySelector("div.podcast-view__podcast-thumb > div > img")
+				))?.srcset.match(new RegExp("(https.+[.](png|jpg)) 360w"))[1],
+				podcastCoveralt = (<HTMLImageElement>(
+					document.querySelector("div.podcast-episode-view__thumb > div > img")
+				))?.src,
+				playingPodcast = Array.from(
+					document.querySelectorAll(".episode-card")
+				).find(element => element.querySelector("button[aria-label=Pausar]"));
+			if (document.location.pathname.includes("/episode/")) {
+				const playingPodcastalt = Array.from(
+					document.querySelectorAll(".podcast-episode-view__header")
+				).find(element => element.querySelector("button[aria-label=Pausar]"));
+				presenceData.details = `Vendo o episódio do podcast ${podcastTitlealt}`;
+				presenceData.state = document.querySelector(
+					"div.podcast-episode-view__header-info > h1"
+				).textContent;
+				presenceData.largeImageKey = podcastCoveralt;
+				if (playingPodcastalt instanceof HTMLElement) {
+					presenceData.largeImageKey = playingPodcastalt
+						.querySelector<HTMLImageElement>("img")
+						?.srcset.match(new RegExp("(https.+[.](png|jpg)) 360w"))[1];
+
+					presenceData.details = podcastTitlealt;
+
+					// Podcast name
+					presenceData.state = document.querySelector(
+						"div.podcast-episode-view__header-info > h1"
+					).textContent;
+
+					// Boolean if podcast is playing or paused
+					const playing =
+						playingPodcastalt.querySelector<HTMLButtonElement>(
+							"button[aria-label=Pausar]"
+						)?.style.display !== "none";
+
+					delete presenceData.startTimestamp;
+
+					if (playing) {
+						const currentTime =
+								playingPodcastalt.querySelector<HTMLSpanElement>(
+									"[data-testid='current-time'"
+								)?.textContent,
+							totalTime = playingPodcastalt.querySelector<HTMLSpanElement>(
+								"[data-testid='total-time'"
+							)?.textContent;
+
+						if (currentTime && totalTime) {
+							presenceData.endTimestamp =
+								Date.now() / 1000 -
+								presence.timestampFromFormat(currentTime) +
+								presence.timestampFromFormat(totalTime);
+						}
+					}
+
+					presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
+					presenceData.smallImageText = playing ? "Playing" : "Paused";
+				}
+			} else if (playingPodcast instanceof HTMLElement) {
+				// Podcast image
+				presenceData.largeImageKey = playingPodcast
+					.querySelector<HTMLImageElement>("img")
+					?.srcset.match(new RegExp("(https.+[.](png|jpg)) 360w"))[1];
+
+				presenceData.details = podcastTitle;
+
+				// Podcast name
+				presenceData.state = playingPodcast.querySelector<HTMLHeadingElement>(
+					".episode-card__headline"
+				)?.textContent;
+
+				// Boolean if podcast is playing or paused
+				const playing =
+					playingPodcast.querySelector<HTMLButtonElement>(
+						"button[aria-label=Pausar]"
+					)?.style.display !== "none";
+
+				delete presenceData.startTimestamp;
+
+				if (playing) {
+					const currentTime = playingPodcast.querySelector<HTMLSpanElement>(
+							"[data-testid='current-time'"
+						)?.textContent,
+						totalTime = playingPodcast.querySelector<HTMLSpanElement>(
+							"[data-testid='total-time'"
+						)?.textContent;
+
+					if (currentTime && totalTime) {
+						presenceData.endTimestamp =
+							Date.now() / 1000 -
+							presence.timestampFromFormat(currentTime) +
+							presence.timestampFromFormat(totalTime);
+					}
+				}
+
+				presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
+				presenceData.smallImageText = playing ? "Playing" : "Paused";
+			} else if (podcastTitle) {
+				presenceData.details = "Vendo o podcast:";
+				presenceData.state = podcastTitle;
+				presenceData.largeImageKey = podcastCover;
+			} else presenceData.details = "Podcasts";
 		} else if (document.location.pathname.includes("/ao-vivo/")) {
 			const programTitle = document.querySelector(
 					"span.playkit-channels-navigation__program-name"
 				),
 				programMetadata = document.querySelector(
-					"span.playkit-channels-navigation__program-metadata"
+					"div.playkit-channels-navigation__program-metadata__text"
 				);
-			if (document.location.pathname.includes("/7339131/")) {
+
+			if (document.location.pathname.includes("/6120663/")) {
+				presenceData.details = `TV Globo - ${programTitle.textContent}`;
+				presenceData.state = programMetadata.textContent;
+				presenceData.smallImageKey = "live";
+				presenceData.largeImageKey = "tvglobo";
+			} else if (document.location.pathname.includes("/7339131/")) {
 				presenceData.details = `Multishow - ${programTitle.textContent}`;
 				presenceData.state = programMetadata.textContent;
 				presenceData.smallImageKey = "live";
@@ -127,17 +232,17 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "live";
 				presenceData.largeImageKey = "globonews";
 			} else if (document.location.pathname.includes("/7339108/")) {
-				presenceData.details = `SporTV - ${programTitle.textContent}`;
+				presenceData.details = `sportv - ${programTitle.textContent}`;
 				presenceData.state = programMetadata.textContent;
 				presenceData.smallImageKey = "live";
 				presenceData.largeImageKey = "sportv";
 			} else if (document.location.pathname.includes("/7339117/")) {
-				presenceData.details = `SporTV 2 - ${programTitle.textContent}`;
+				presenceData.details = `sportv2 - ${programTitle.textContent}`;
 				presenceData.state = programMetadata.textContent;
 				presenceData.smallImageKey = "live";
 				presenceData.largeImageKey = "sportv2";
 			} else if (document.location.pathname.includes("/7339123/")) {
-				presenceData.details = `SporTV 3 - ${programTitle.textContent}`;
+				presenceData.details = `sportv3 - ${programTitle.textContent}`;
 				presenceData.state = programMetadata.textContent;
 				presenceData.smallImageKey = "live";
 				presenceData.largeImageKey = "sportv3";
@@ -197,10 +302,10 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = "live";
 				presenceData.largeImageKey = "bis";
 			} else if (document.location.pathname.includes("/7339135/")) {
-				presenceData.details = `Mais na Tela - ${programTitle.textContent}`;
+				presenceData.details = `Modo Viagem - ${programTitle.textContent}`;
 				presenceData.state = programMetadata.textContent;
 				presenceData.smallImageKey = "live";
-				presenceData.largeImageKey = "maisnatela";
+				presenceData.largeImageKey = "modoviagem";
 			} else if (document.location.pathname.includes("/7420604/")) {
 				presenceData.details = `Futura - ${programTitle.textContent}`;
 				presenceData.state = programMetadata.textContent;
@@ -211,11 +316,50 @@ presence.on("UpdateData", async () => {
 				presenceData.state = programMetadata.textContent;
 				presenceData.smallImageKey = "live";
 				presenceData.largeImageKey = "premiere";
+			} else if (document.location.pathname.includes("/8221785/")) {
+				presenceData.details = `Premiere 2 - ${programTitle.textContent}`;
+				presenceData.state = programMetadata.textContent;
+				presenceData.smallImageKey = "live";
+				presenceData.largeImageKey = "premiere";
+			} else if (document.location.pathname.includes("/8221838/")) {
+				presenceData.details = "Mosaico Premiere";
+				presenceData.smallImageKey = "live";
+				presenceData.largeImageKey = "premiere";
 			} else if (document.location.pathname.includes("/8310612/")) {
 				presenceData.details = `Combate - ${programTitle.textContent}`;
 				presenceData.state = programMetadata.textContent;
 				presenceData.smallImageKey = "live";
 				presenceData.largeImageKey = "combate";
+			} else if (document.location.pathname.includes("/10221110/")) {
+				presenceData.details = `Telecine Premium - ${programTitle.textContent}`;
+				presenceData.state = programMetadata.textContent;
+				presenceData.smallImageKey = "live";
+				presenceData.largeImageKey = "tcpremium";
+			} else if (document.location.pathname.includes("/10221184/")) {
+				presenceData.details = `Telecine Action - ${programTitle.textContent}`;
+				presenceData.state = programMetadata.textContent;
+				presenceData.smallImageKey = "live";
+				presenceData.largeImageKey = "tcaction";
+			} else if (document.location.pathname.includes("/10221239/")) {
+				presenceData.details = `Telecine Touch - ${programTitle.textContent}`;
+				presenceData.state = programMetadata.textContent;
+				presenceData.smallImageKey = "live";
+				presenceData.largeImageKey = "tctouch";
+			} else if (document.location.pathname.includes("/10223522/")) {
+				presenceData.details = `Telecine Fun - ${programTitle.textContent}`;
+				presenceData.state = programMetadata.textContent;
+				presenceData.smallImageKey = "live";
+				presenceData.largeImageKey = "tcfun";
+			} else if (document.location.pathname.includes("/10221225/")) {
+				presenceData.details = `Telecine Pipoca - ${programTitle.textContent}`;
+				presenceData.state = programMetadata.textContent;
+				presenceData.smallImageKey = "live";
+				presenceData.largeImageKey = "tcpipoca";
+			} else if (document.location.pathname.includes("/10221109/")) {
+				presenceData.details = `Telecine Cult - ${programTitle.textContent}`;
+				presenceData.state = programMetadata.textContent;
+				presenceData.smallImageKey = "live";
+				presenceData.largeImageKey = "tccult";
 			} else if (document.location.pathname.includes("/9182156/")) {
 				presenceData.details = "CBN São Paulo";
 				presenceData.smallImageKey = "live";
@@ -224,61 +368,6 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "CBN Rio de Janeiro";
 				presenceData.smallImageKey = "live";
 				presenceData.largeImageKey = "cbn";
-			} else if (document.location.pathname.includes("/244881/")) {
-				presenceData.details = "Big Brother Brasil";
-				presenceData.state = "Acompanhe a Casa";
-				presenceData.smallImageKey = "live";
-				presenceData.largeImageKey = "bbb";
-			} else if (document.location.pathname.includes("/772202/")) {
-				presenceData.details = "Big Brother Brasil";
-				presenceData.state = "Acompanhe a Casa 2";
-				presenceData.smallImageKey = "live";
-				presenceData.largeImageKey = "bbb";
-			} else if (document.location.pathname.includes("/2255000/")) {
-				presenceData.details = "Big Brother Brasil";
-				presenceData.state = "Acompanhe a Casa Extra";
-				presenceData.smallImageKey = "live";
-				presenceData.largeImageKey = "bbb";
-			} else if (document.location.pathname.includes("/244890/")) {
-				presenceData.details = "Big Brother Brasil";
-				presenceData.state = "Cozinha VIP/Xepa";
-				presenceData.smallImageKey = "live";
-				presenceData.largeImageKey = "bbb";
-			} else if (document.location.pathname.includes("/6349747/")) {
-				presenceData.details = "Big Brother Brasil";
-				presenceData.state = "Quarto Cordel";
-				presenceData.smallImageKey = "live";
-				presenceData.largeImageKey = "bbb";
-			} else if (document.location.pathname.includes("/2254997/")) {
-				presenceData.details = "Big Brother Brasil";
-				presenceData.state = "Quarto Colorido";
-				presenceData.smallImageKey = "live";
-				presenceData.largeImageKey = "bbb";
-			} else if (document.location.pathname.includes("/244889/")) {
-				presenceData.details = "Big Brother Brasil";
-				presenceData.state = "Sala de Estar";
-				presenceData.smallImageKey = "live";
-				presenceData.largeImageKey = "bbb";
-			} else if (document.location.pathname.includes("/244887/")) {
-				presenceData.details = "Big Brother Brasil";
-				presenceData.state = "Sala da Casa Extra";
-				presenceData.smallImageKey = "live";
-				presenceData.largeImageKey = "bbb";
-			} else if (document.location.pathname.includes("/2254996/")) {
-				presenceData.details = "Big Brother Brasil";
-				presenceData.state = "Piscina";
-				presenceData.smallImageKey = "live";
-				presenceData.largeImageKey = "bbb";
-			} else if (document.location.pathname.includes("/2254993/")) {
-				presenceData.details = "Big Brother Brasil";
-				presenceData.state = "Jardim";
-				presenceData.smallImageKey = "live";
-				presenceData.largeImageKey = "bbb";
-			} else if (document.location.pathname.includes("/772205/")) {
-				presenceData.details = "Big Brother Brasil";
-				presenceData.state = "Confessionário";
-				presenceData.smallImageKey = "live";
-				presenceData.largeImageKey = "bbb";
 			}
 		} else if (document.location.pathname.includes("/canais/")) {
 			if (document.location.pathname.includes("/globo/")) {
@@ -291,7 +380,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "GloboNews";
 				presenceData.largeImageKey = "globonews";
 			} else if (document.location.pathname.includes("/sportv/")) {
-				presenceData.details = "SporTV";
+				presenceData.details = "sportv";
 				presenceData.largeImageKey = "sportv";
 			} else if (document.location.pathname.includes("/gnt/")) {
 				presenceData.details = "GNT";
@@ -320,9 +409,9 @@ presence.on("UpdateData", async () => {
 			} else if (document.location.pathname.includes("/bis/")) {
 				presenceData.details = "BIS";
 				presenceData.largeImageKey = "bis";
-			} else if (document.location.pathname.includes("/mais-na-tela/")) {
-				presenceData.details = "Mais na Tela";
-				presenceData.largeImageKey = "maisnatela";
+			} else if (document.location.pathname.includes("/modo-viagem/")) {
+				presenceData.details = "Modo Viagem";
+				presenceData.largeImageKey = "modoviagem";
 			} else if (document.location.pathname.includes("/futura/")) {
 				presenceData.details = "Futura";
 				presenceData.largeImageKey = "futura";
@@ -332,10 +421,15 @@ presence.on("UpdateData", async () => {
 			} else if (document.location.pathname.includes("/combate/")) {
 				presenceData.details = "Combate";
 				presenceData.largeImageKey = "combate";
+			} else if (document.location.pathname.includes("/telecine/")) {
+				presenceData.details = "Telecine";
+				presenceData.largeImageKey = "telecine";
+			} else if (document.location.pathname.includes("/starzplay/")) {
+				presenceData.details = "STARZPLAY";
+				presenceData.largeImageKey = "starzplay";
 			} else presenceData.details = "Canais";
 		}
 	}
-
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "904304152048439296"
+		clientId: "904304152048439296",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "tenor",
-		startTimestamp: browsingTimestamp
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/Tenor/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname === "/") presenceData.details = "In home page";
 	else if (document.location.pathname.includes("/view/")) {
@@ -21,8 +21,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View User",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else {
 		switch (document.location.pathname) {

@@ -1,21 +1,20 @@
 const presence = new Presence({
-		clientId: "440182142694064129"
+		clientId: "440182142694064129",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
-
-async function getStrings() {
-	return presence.getStrings(
-		{
-			buttonViewPage: "general.buttonViewPage",
-			listeningMusic: "general.listeningMusic",
-			readingPost: "general.readingPost",
-			viewPage: "general.viewPage",
-			viewUser: "general.viewUser",
-			watchingVid: "general.watchingVid"
-		},
-		await presence.getSetting<string>("lang").catch(() => "en")
-	);
-}
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	getStrings = async () => {
+		return presence.getStrings(
+			{
+				buttonViewPage: "general.buttonViewPage",
+				listeningMusic: "general.listeningMusic",
+				readingPost: "general.readingPost",
+				viewPage: "general.viewPage",
+				viewUser: "general.viewUser",
+				watchingVid: "general.watchingVid",
+			},
+			await presence.getSetting<string>("lang").catch(() => "en")
+		);
+	};
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
@@ -30,6 +29,7 @@ presence.on("UpdateData", async () => {
 		buttons = await presence.getSetting<boolean>("buttons"),
 		{ hostname, pathname, search, hash } = document.location,
 		etrnl = "eternalnetworktm.com",
+		etrnltm = "etrnltm.com",
 		ttl = document.title;
 
 	if (oldLang !== newLang || !strings) {
@@ -43,16 +43,16 @@ presence.on("UpdateData", async () => {
 			[
 				"eternalnetworktm_logo",
 				"eternalnetworktm_logo_2",
-				"eternalnetworktm_logo_3"
+				"eternalnetworktm_logo_3",
 			][bigicon] || "eternalnetworktm_logo",
 		smallImageText: hostname + pathname,
 		startTimestamp: browsingTimestamp,
 		buttons: [
 			{
 				label: (await strings).buttonViewPage,
-				url: window.location.href
-			}
-		]
+				url: window.location.href,
+			},
+		],
 	};
 
 	if (!showTimestamps) delete presenceData.startTimestamp;
@@ -65,8 +65,8 @@ presence.on("UpdateData", async () => {
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
 			if (pathname.includes("/wp-admin")) {
-				presenceData.state = "Using administrating power over the website !";
-				presenceData.smallImageText = "Admin Panel";
+				presenceData.state = "Viewing the Admin panel";
+				delete presenceData.smallImageText;
 				delete presenceData.buttons;
 			}
 
@@ -79,22 +79,22 @@ presence.on("UpdateData", async () => {
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
 			if (pathname.includes("/memberlist.php"))
-				presenceData.state = "Sneaking into member list !";
+				presenceData.state = "Viewing Forum Members";
 
 			if (search.includes("?mode=team"))
-				presenceData.state = "Checking out team list !";
+				presenceData.state = "Viewing Forum Staff";
 
 			if (pathname.includes("/partner"))
-				presenceData.state = "Cheking our partners !";
+				presenceData.state = "Viewing Forum Partners";
 
 			if (pathname.includes("/donation"))
-				presenceData.state = "Trying to make donation for the forum !";
+				presenceData.state = "Viewing the donations page";
 
 			if (pathname.includes("/imageupload"))
 				presenceData.state = "Uploading images!";
 
 			if (pathname.includes("/video"))
-				presenceData.state = "Checking video gallery";
+				presenceData.state = "Viewing Forum Videos";
 
 			if (search.includes("?mode=view&id=")) {
 				presenceData.details = `${(await strings).watchingVid}:`;
@@ -102,14 +102,14 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: (await strings).buttonViewPage,
-						url: window.location.href
+						url: window.location.href,
 					},
 					{
 						label: document
 							.querySelector("div.postbody > div > a > span")
 							.getAttribute("title"),
-						url: document.querySelector("#video_title").getAttribute("value")
-					}
+						url: document.querySelector("#video_title").getAttribute("value"),
+					},
 				];
 			}
 
@@ -119,13 +119,13 @@ presence.on("UpdateData", async () => {
 			}
 
 			if (pathname.includes("/posting.php")) {
-				presenceData.details = "Making a new post";
+				presenceData.details = "Writing a post";
 				presenceData.state = ttl;
 			}
 
 			if (pathname.includes("/adm/")) {
-				presenceData.state = "Using administrating power over the forum !";
-				presenceData.smallImageText = "Admin Panel";
+				presenceData.state = "Viewing the Admin panel";
+				delete presenceData.smallImageText;
 				delete presenceData.buttons;
 			}
 
@@ -138,16 +138,17 @@ presence.on("UpdateData", async () => {
 
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
-			if (hash.includes("page_ABOUT")) presenceData.state = "About info page !";
+			if (hash.includes("page_ABOUT"))
+				presenceData.state = "Viewing About Page";
 
 			if (hash.includes("page_PROGRAMS"))
-				presenceData.state = "Checking radio program !";
+				presenceData.state = "Viewing radio program";
 
 			if (hash.includes("page_REQUEST"))
-				presenceData.state = "Requesting a song !";
+				presenceData.state = "Requesting a song";
 
 			if (hash.includes("page_CONTACTS"))
-				presenceData.state = "Contact us page !";
+				presenceData.state = "Viewing contact page";
 
 			break;
 		}
@@ -158,14 +159,87 @@ presence.on("UpdateData", async () => {
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
 			if (pathname.includes("/admin")) {
-				presenceData.state = "Adding new incident 😥 !";
+				presenceData.state = "Adding new incident";
 				presenceData.smallImageText = "Admin Panel";
 				delete presenceData.buttons;
 			}
 
 			if (search.includes("?do=settings"))
-				presenceData.state = "Adding new service !";
+				presenceData.state = "Adding new service";
 			delete presenceData.buttons;
+
+			break;
+		}
+		case `et-log.${etrnl}`:
+		case `www.et-log.${etrnl}`: {
+			presenceData.smallImageKey = "eternallogistic_logo";
+
+			if (pathname.startsWith("/")) presenceData.state = ttl;
+
+			if (pathname.includes("/about.php")) {
+				presenceData.details = "Viewing about page";
+				presenceData.state = ttl;
+			}
+
+			if (pathname.includes("/gallery.php")) {
+				presenceData.details = "Viewing gallery";
+				presenceData.state = ttl;
+			}
+
+			if (pathname.includes("/applications.php")) {
+				presenceData.details = "Applying for the VTC";
+				presenceData.state = ttl;
+			}
+
+			break;
+		}
+		case `dev.${etrnl}`:
+		case `www.dev.${etrnl}`: {
+			presenceData.smallImageKey = "eternalnetworktm_dev";
+
+			if (pathname.includes("/etlog")) {
+				presenceData.state = "Working on ET-LOG system";
+				presenceData.smallImageText = "Updating the website";
+				delete presenceData.buttons;
+			}
+
+			if (pathname.includes("/radio")) {
+				presenceData.state = "Working on radio page";
+				presenceData.smallImageText = "Updating the website";
+				delete presenceData.buttons;
+			}
+
+			break;
+		}
+		case `shortener.${etrnltm}`:
+		case `www.shortener.${etrnltm}`: {
+			presenceData.smallImageKey = "eternalshortener_logo";
+
+			if (pathname.startsWith("/")) presenceData.state = ttl;
+
+			if (pathname.includes("/home")) {
+				presenceData.state = ttl;
+				presenceData.smallImageText = "Adding a new shortened url";
+				delete presenceData.buttons;
+			}
+
+			if (pathname.includes("/profile")) {
+				presenceData.state = "Viewing profile";
+				presenceData.smallImageText = "User profile";
+				delete presenceData.buttons;
+			}
+
+			if (pathname.includes("/dashboard")) {
+				presenceData.state = "Checking URLs statistics";
+				presenceData.smallImageText = "Dashboard";
+				delete presenceData.buttons;
+			}
+
+			if (pathname.includes("/admin")) {
+				presenceData.state = "Viewing the Admin panel";
+				delete presenceData.smallImageText;
+				delete presenceData.buttons;
+			}
 
 			break;
 		}

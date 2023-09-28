@@ -1,11 +1,13 @@
 const presence = new Presence({
-		clientId: "735314055861895288"
+		clientId: "735314055861895288",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "icon",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/Take%20B1nzy%20To%20Space/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	presenceData.details = `Playing ${

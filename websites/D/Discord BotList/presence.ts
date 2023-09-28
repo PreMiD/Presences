@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "819122551435296818"
+		clientId: "819122551435296818",
 	}),
 	botBrowsing = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: botBrowsing
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Discord%20BotList/assets/logo.jpg",
+			startTimestamp: botBrowsing,
 		},
 		botPage = document.location.pathname,
 		botHost = document.location.hostname,
@@ -27,8 +28,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Search",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 
 				break;
@@ -41,8 +42,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Tag",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 
 				break;
@@ -58,8 +59,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Profile",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				} else if (botPage.includes("/bots/")) {
 					if (botPage.includes("/new")) presenceData.details = "Adding a Bot";
@@ -72,8 +73,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: `Vote for ${voteBotName}`,
-								url: document.URL
-							}
+								url: document.URL,
+							},
 						];
 					} else if (botPage.includes("/edit"))
 						presenceData.details = "Editing a Bot";
@@ -82,8 +83,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Bots",
-								url: document.URL
-							}
+								url: document.URL,
+							},
 						];
 					} else {
 						presenceData.details = "Viewing Bot:";
@@ -91,8 +92,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Bot",
-								url: document.URL
-							}
+								url: document.URL,
+							},
 						];
 					}
 				} else {

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "633419305836347393"
+		clientId: "633419305836347393",
 	}),
 	pages: { [k: string]: string } = {
 		"/games": "Games",
@@ -18,14 +18,14 @@ const presence = new Presence({
 		"/settings": "Settings",
 		"/dashboard/games/add": "Add a Game",
 		"/firesides": "Searching for a Fireside",
-		"/dashboard/fireside/add": "Staring a Fireside"
+		"/dashboard/fireside/add": "Staring a Fireside",
 	},
 	creatingNow = [
 		"Gathering Wood",
 		"Lighting the Fire",
 		"Getting the Flint & Steel",
 		"Searching how to start a campfire",
-		"Creating"
+		"Creating",
 	][Math.floor(Math.random() * (4 - 0 + 1)) + 0];
 
 presence.on("UpdateData", async () => {
@@ -40,8 +40,9 @@ presence.on("UpdateData", async () => {
 			"#content > div > div > header > section > div > div.row > div > div > h1 > small"
 		) as HTMLElement,
 		presenceData: PresenceData = {
-			largeImageKey: "gj-logo",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Game%20Jolt/assets/logo.png",
+			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 
 	if (page.includes("/games/tag-")) {
@@ -67,8 +68,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Join Them!",
-					url: `https://gamejolt.com${page}`
-				}
+					url: `https://gamejolt.com${page}`,
+				},
 			];
 		} else {
 			presenceData.details = pages[page];
@@ -98,7 +99,7 @@ presence.on("UpdateData", async () => {
 		}:`;
 		presenceData.state =
 			fixedSearchName[0].toUpperCase() + fixedSearchName.slice(1);
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (profile && profile.textContent !== "") {
 		presenceData.details = "Viewing a user:";
 		presenceData.state = profile.textContent;

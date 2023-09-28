@@ -1,6 +1,7 @@
 const presence = new Presence({
-	clientId: "715045665796915250"
+	clientId: "715045665796915250",
 });
+
 function NotFound(): boolean {
 	const q = document.querySelector("#content>div>div>h1");
 	if (window.location.pathname === "/404") return true;
@@ -15,7 +16,7 @@ enum PathNames {
 	forum = "/forum",
 	history = "/minha-lista",
 	newTopic = "/novo-topico",
-	room = "/sala"
+	room = "/sala",
 }
 enum SettingsId {
 	/* PathNames.profile */
@@ -49,7 +50,7 @@ enum SettingsId {
 	showRoomEpisode = "showRoomEpisode",
 	showRoomName = "showRoomName",
 	showRoomUsers = "showRoomUsers",
-	showRoomLTime = "showRoomLTime"
+	showRoomLTime = "showRoomLTime",
 }
 enum ResourceNames {
 	logo = "logo_shadow",
@@ -60,13 +61,13 @@ enum ResourceNames {
 	writing = "writing",
 	reading = "reading",
 	info = "info",
-	group = "group"
+	group = "group",
 }
 const browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: ResourceNames.logo,
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		pathName = window.location.pathname,
 		video = document.querySelector("video");
@@ -380,7 +381,7 @@ presence.on("UpdateData", async () => {
 					"/politica=Políticas do Site",
 					"/equipe-membros=Membros da Equipe",
 					"/conquistas=Lista de Conquistas",
-					"/animes=Lista de Animes"
+					"/animes=Lista de Animes",
 				],
 				customPaths = await presence.getSetting<string>("customPaths"),
 				pathsFromCustom = [customPaths.toLowerCase().replace(/[\s\n]+/g, "")];

@@ -1,11 +1,12 @@
 const presence = new Presence({
-		clientId: "754149249335296010"
+		clientId: "754149249335296010",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "bigdefault"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/J/Jstris/assets/logo.png",
 		},
 		pathname = document.location.pathname.split("/").splice(1),
 		queryString = document.location.search.substring(1);
@@ -23,7 +24,7 @@ presence.on("UpdateData", async () => {
 	if (joinLinkArr.length !== 0) {
 		tempButtons.push({
 			label: "Join",
-			url: joinLinkArr[joinLinkArr.length - 1].textContent
+			url: joinLinkArr[joinLinkArr.length - 1].textContent,
 		});
 	}
 	//Sets button for viewing profile.
@@ -31,14 +32,14 @@ presence.on("UpdateData", async () => {
 	if (typeof username !== "undefined") {
 		tempButtons.push({
 			label: "View Profile",
-			url: `${BaseUrl}/u/${username}`
+			url: `${BaseUrl}/u/${username}`,
 		});
 	}
 
 	switch (pathname[0]) {
 		//Play Modes
 		case "":
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Ingame...";
 			if (queryString) {
 				const queryObj = parseQuery(queryString);
@@ -67,7 +68,7 @@ presence.on("UpdateData", async () => {
 						if (tempButtons.length !== 2) {
 							tempButtons.unshift({
 								label: "Play Map",
-								url: `${BaseUrl}/?play=6&map=${queryObj.map}`
+								url: `${BaseUrl}/?play=6&map=${queryObj.map}`,
 							});
 						}
 						break;

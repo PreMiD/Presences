@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "684174415415476240"
+		clientId: "684174415415476240",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "nwbig",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/N/Niantic%20Wayfarer/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname.includes("/review")) {
@@ -35,7 +36,7 @@ presence.on("UpdateData", async () => {
 		const article = document.querySelector(
 			"#help-section-breadcrumbs > span.ng-binding"
 		).textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		if (article !== "") {
 			presenceData.details = "Reading article:";
 			presenceData.state = article;

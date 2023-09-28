@@ -1,13 +1,14 @@
 const presence = new Presence({
-	clientId: "747683982279180359"
+	clientId: "747683982279180359",
 });
 
 presence.on("UpdateData", async () => {
 	const browsingTimestamp = Math.floor(Date.now() / 1000),
 		presenceData: PresenceData = {
 			details: "Rustlabs",
-			largeImageKey: "logo_big",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Rustlabs/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		};
 
 	switch (window.location.pathname.split("/").slice(1)[0]) {

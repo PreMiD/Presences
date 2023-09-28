@@ -1,11 +1,13 @@
 const presence = new Presence({
-		clientId: "713726722671116330"
+		clientId: "713726722671116330",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/GTAForums/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/") {
@@ -58,7 +60,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/search/")) {
 		delete presenceData.details;
 		presenceData.details = "Searching...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.state = `Looking${
 			document
 				.querySelectorAll(".ipsType_reset.ipsType_large")[0]

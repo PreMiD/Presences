@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "719974375188725770"
+		clientId: "719974375188725770",
 	}),
 	gameModeMap: ItemMap = {
 		":battleroyale": "Battle Royale",
@@ -7,7 +7,7 @@ const presence = new Presence({
 		":ffa": "Free-For-All",
 		":party": "Party",
 		":teamrush": "Team Rush",
-		":teams": "Teams"
+		":teams": "Teams",
 	};
 
 interface AgarData {
@@ -26,7 +26,8 @@ let gameStartTimestamp: number = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "agar"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Agar.io/assets/logo.png",
 		},
 		buttons = await presence.getSetting<boolean>("buttons");
 
@@ -62,8 +63,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Join Party",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 			}
 		}

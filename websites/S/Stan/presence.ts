@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "835732953844940822"
+		clientId: "835732953844940822",
 	}),
 	getStrings = async () => {
 		return presence.getStrings(
@@ -12,7 +12,7 @@ const presence = new Presence({
 				searchSomething: "general.searchSomething",
 				viewEpisode: "general.buttonViewEpisode",
 				watchVideo: "general.buttonWatchVideo",
-				viewList: "netflix.viewList"
+				viewList: "netflix.viewList",
 			},
 			await presence.getSetting<string>("lang").catch(() => "en")
 		);
@@ -55,7 +55,7 @@ const presence = new Presence({
 		strings: null,
 		meta: {},
 		startedSince: Math.round(Date.now() / 1000),
-		oldLang: null
+		oldLang: null,
 	};
 
 async function getShortURL(url: string) {
@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
 	const [newLang, privacy, cover] = await Promise.all([
 		presence.getSetting<string>("lang").catch(() => "en"),
 		presence.getSetting<boolean>("privacy"),
-		presence.getSetting<boolean>("cover")
+		presence.getSetting<boolean>("cover"),
 	]);
 
 	if (data.oldLang !== newLang || !data.strings) {
@@ -86,10 +86,10 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-		largeImageKey: "stan",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Stan/assets/logo.png",
 		details: data.strings.browse,
 		smallImageKey: "browse",
-		startTimestamp: data.startedSince
+		startTimestamp: data.startedSince,
 	};
 
 	data.presence = {
@@ -108,7 +108,9 @@ presence.on("UpdateData", async () => {
 						.querySelector<HTMLElement>(".vjs-end-slate-image")
 						?.style?.backgroundImage?.match(/url\("(.*)"\)/)?.[1];
 
-					presenceData.smallImageKey = video.paused ? "pause" : "play";
+					presenceData.smallImageKey = video.paused
+						? Assets.Pause
+						: Assets.Play;
 					presenceData.smallImageText = video.paused
 						? data.strings.pause
 						: data.strings.play;
@@ -122,8 +124,8 @@ presence.on("UpdateData", async () => {
 							label: data.meta.episode
 								? data.strings.viewEpisode
 								: data.strings.watchVideo,
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 
 					if (video.paused) {
@@ -131,7 +133,7 @@ presence.on("UpdateData", async () => {
 						delete presenceData.startTimestamp;
 					}
 				}
-			}
+			},
 		},
 		"/programs/([0-9]+)": {
 			disabled: privacy,
@@ -145,22 +147,22 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Program",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
-			}
+			},
 		},
 		"/my/list": {
 			disabled: privacy,
 			async setPresenceData() {
 				presenceData.details = data.strings.viewList;
-			}
+			},
 		},
 		"/my/history": {
 			disabled: privacy,
 			async setPresenceData() {
 				presenceData.details = "Viewing their watch history";
-			}
+			},
 		},
 		"/search": {
 			async setPresenceData() {
@@ -168,26 +170,26 @@ presence.on("UpdateData", async () => {
 				presenceData.state = new URLSearchParams(document.location.search).get(
 					"q"
 				);
-			}
-		}
+			},
+		},
 	};
 
 	data.settings = [
 		{
 			id: "timestamp",
 			deleteEntry: true,
-			uses: ["startTimestamp", "endTimestamp"]
+			uses: ["startTimestamp", "endTimestamp"],
 		},
 		{
 			id: "buttons",
 			deleteEntry: true,
-			uses: ["buttons"]
+			uses: ["buttons"],
 		},
 		{
 			id: "privacy",
 			deleteEntry: true,
 			value: true,
-			uses: ["buttons"]
+			uses: ["buttons"],
 		},
 		{
 			presence: [
@@ -196,16 +198,16 @@ presence.on("UpdateData", async () => {
 					uses: "state",
 					condition: {
 						ifTrue: privacy,
-						deleteEntry: true
-					}
+						deleteEntry: true,
+					},
 				},
 				{
 					page: "/search",
 					uses: "details",
 					condition: {
 						ifTrue: privacy,
-						setTo: data.strings.searchSomething
-					}
+						setTo: data.strings.searchSomething,
+					},
 				},
 				{
 					page: "/programs/([0-9]+)/play",
@@ -213,18 +215,18 @@ presence.on("UpdateData", async () => {
 					setTo: await presence.getSetting<string>("seriesDetail"),
 					condition: {
 						ifTrue: privacy,
-						setTo: "Watching something"
+						setTo: "Watching something",
 					},
 					replace: [
 						{
 							input: "%title%",
-							output: data.meta.title
+							output: data.meta.title,
 						},
 						{
 							input: "%episode%",
-							output: data.meta.episode
-						}
-					]
+							output: data.meta.episode,
+						},
+					],
 				},
 				{
 					page: "/programs/([0-9]+)/play",
@@ -232,29 +234,29 @@ presence.on("UpdateData", async () => {
 					setTo: await presence.getSetting<string>("seriesState"),
 					condition: {
 						ifTrue: privacy,
-						deleteEntry: true
+						deleteEntry: true,
 					},
 					replace: [
 						{
 							input: "%title%",
-							output: data.meta.title
+							output: data.meta.title,
 						},
 						{
 							input: "%episode%",
-							output: data.meta.episode
-						}
-					]
+							output: data.meta.episode,
+						},
+					],
 				},
 				{
 					page: "/programs/([0-9]+)/play",
 					uses: "largeImageKey",
 					condition: {
 						ifTrue: cover && !privacy,
-						setTo: await getShortURL(data.meta.coverUrl)
-					}
-				}
-			]
-		}
+						setTo: await getShortURL(data.meta.coverUrl),
+					},
+				},
+			],
+		},
 	];
 
 	for (const [k, v] of Object.entries(data.presence)) {

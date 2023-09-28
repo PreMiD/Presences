@@ -5,9 +5,10 @@ presence.on("UpdateData", async () => {
 	const { title } = document,
 		{ href, pathname } = document.location,
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/L/Light%20Novel%20Pub/assets/logo.png",
 			details: "Browsing...",
-			startTimestamp: browsingStamp
+			startTimestamp: browsingStamp,
 		};
 	if (pathname.startsWith("/novel/")) {
 		presenceData.largeImageKey = document
@@ -24,8 +25,8 @@ presence.on("UpdateData", async () => {
 							title.split(" | Light")[0].length >= 30
 								? "View Novel"
 								: title.split(" | Light")[0],
-						url: `${document.location}`
-					}
+						url: `${document.location}`,
+					},
 				];
 				break;
 			case pathname.endsWith("/reviews"):
@@ -37,8 +38,8 @@ presence.on("UpdateData", async () => {
 							presenceData.state.length >= 30
 								? "View Novel"
 								: presenceData.state,
-						url: `${document.location}`
-					}
+						url: `${document.location}`,
+					},
 				];
 				break;
 			case pathname.endsWith("/chapters"):
@@ -52,8 +53,8 @@ presence.on("UpdateData", async () => {
 							presenceData.state.length >= 30
 								? "View Novel"
 								: presenceData.state,
-						url: `${document.location}`
-					}
+						url: `${document.location}`,
+					},
 				];
 				break;
 			default:
@@ -69,15 +70,15 @@ presence.on("UpdateData", async () => {
 							presenceData.details.length >= 30
 								? "View Novel"
 								: presenceData.details,
-						url: `${href.split("12032016/")[0]}12032016`
+						url: `${href.split("12032016/")[0]}12032016`,
 					},
 					{
 						label:
 							presenceData.state.length >= 30
 								? "View Chapter"
 								: presenceData.state,
-						url: href
-					}
+						url: href,
+					},
 				];
 				break;
 		}

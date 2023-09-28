@@ -1,12 +1,14 @@
 const presence = new Presence({
-		clientId: "709526684428271687"
+		clientId: "709526684428271687",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let owner, title, presenceprivate;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/GitLab/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		lock = await presence.getSetting<boolean>("lock");
 	presenceprivate = document.querySelector(
@@ -84,7 +86,7 @@ presence.on("UpdateData", async () => {
 					) as HTMLTextAreaElement;
 					presenceData.details = "Searching";
 					presenceData.state = title.textContent;
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					presenceData.smallImageText = "Searching";
 
 					break;

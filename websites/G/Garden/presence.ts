@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "714194261679276094"
+		clientId: "714194261679276094",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "gardenpresence",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Garden/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname === "/")
 		presenceData.details = "play.gardenmc.fr";

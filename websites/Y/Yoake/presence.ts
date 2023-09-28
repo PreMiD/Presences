@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "787715073007026187"
+		clientId: "787715073007026187",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let lastPlaybackState: boolean,
@@ -17,7 +17,8 @@ presence.on("UpdateData", async () => {
 				document.querySelectorAll("video")[0].className !== "previewVideo"),
 		curPath = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/Y/Yoake/assets/logo.png",
 		};
 
 	if (lastPath !== curPath || lastPlaybackState !== playback) {
@@ -74,7 +75,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
 			);
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;

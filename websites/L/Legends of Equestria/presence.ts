@@ -1,8 +1,10 @@
 const presence = new Presence({
-	clientId: "651406405093425152"
+	clientId: "651406405093425152",
 });
+
 let presenceData: PresenceData = {
-	largeImageKey: "logo"
+	largeImageKey:
+		"https://cdn.rcd.gg/PreMiD/websites/L/Legends%20of%20Equestria/assets/logo.png",
 };
 
 presence.on("UpdateData", async () => {
@@ -23,7 +25,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Looking at the download page";
 	else {
 		presenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/L/Legends%20of%20Equestria/assets/logo.png",
 		};
 	}
 	presence.setActivity(presenceData);

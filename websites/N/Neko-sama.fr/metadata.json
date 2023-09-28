@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Mokocchi",
+		"id": "503568040001273877"
+	},
+	"service": "Neko-sama.fr",
+	"description": {
+		"en": "Neko-sama is a VOSTFR and VF anime streaming website",
+		"fr": "Neko-sama est un site de streaming d'animes en VOSTFR et VF"
+	},
+	"url": [
+		"www.neko-sama.fr",
+		"neko-sama.fr"
+	],
+	"version": "1.0.9",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Neko-sama.fr/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Neko-sama.fr/assets/thumbnail.png",
+	"color": "#1CB9F4",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"vostfr",
+		"vf"
+	],
+	"iframe": true,
+	"iFrameRegExp": ".*"
+}

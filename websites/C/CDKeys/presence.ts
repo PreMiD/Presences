@@ -1,61 +1,91 @@
 const presence = new Presence({
-		clientId: "940892975502856232"
+		clientId: "940892975502856232",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/C/CDKeys/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
-		page = window.location.pathname;
-	search = document.querySelector("#search");
-	if (search.value && search.value !== "__empty__") {
-		presenceData.details = "Searching for:";
+		{ pathname, href } = document.location,
+		[buttons, covers] = await Promise.all([
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("cover"),
+		]),
+		search = document.querySelector<HTMLInputElement>('[id="search"]'),
+		active = document.querySelector('[class="navigation__link current"]'),
+		series = document.querySelector(
+			"#maincontent > div.columns > div > div.wrap.cms-content"
+		),
+		game = document.querySelector(
+			"#maincontent > div.pathname-title-wrapper > h1 > span"
+		);
+	if (search?.value) {
+		presenceData.details = "Searching for";
 		presenceData.state = search.value;
-		presenceData.smallImageKey = "search";
-	} else if (page === "/") presenceData.details = "Homepage";
-	else if (
-		document.querySelector("#maincontent > div.page-title-wrapper > h1 > span")
-	) {
-		presenceData.details = document.querySelector(
-			"#maincontent > div.page-title-wrapper > h1 > span"
-		).textContent;
+		presenceData.smallImageKey = Assets.Search;
+	} else if (game) {
+		presenceData.buttons = [
+			{
+				label: "View Game",
+				url: href,
+			},
+		];
+		presenceData.largeImageKey =
+			document
+				.querySelector<HTMLImageElement>('[alt="main product photo"]')
+				?.getAttribute("src") ?? "logo";
+		presenceData.details = "Viewing product";
+		presenceData.state = game.textContent;
 	} else if (document.querySelector("#product-addtocart-button")) {
-		presenceData.details = document.querySelector<HTMLMetaElement>(
+		presenceData.largeImageKey =
+			document
+				.querySelector<HTMLImageElement>('[alt="main product photo"]')
+				?.getAttribute("src") ?? "logo";
+		presenceData.buttons = [
+			{
+				label: "View Product",
+				url: href,
+			},
+		];
+		presenceData.details = "Viewing product";
+		presenceData.state = document.querySelector<HTMLMetaElement>(
 			"meta[property='og:title']"
 		).content;
-	} else if (page.includes("/pc")) {
+	} else if (series) {
+		presenceData.buttons = [
+			{
+				label: "View Product Series",
+				url: href,
+			},
+		];
+		presenceData.details = "Viewing product series";
+		presenceData.state = series.querySelector('[alt*=" "]').getAttribute("alt");
+	} else if (active || pathname.includes("/coming-soon")) {
+		presenceData.buttons = [
+			{
+				label: "View Category",
+				url: href,
+			},
+		];
 		presenceData.details = "Viewing Category:";
-		presenceData.state = "Pc Games";
-	} else if (page.includes("-psn")) {
-		presenceData.details = "Viewing Category:";
-		presenceData.state = "Playstation Games";
-	} else if (page.includes("/xbox-live")) {
-		presenceData.details = "Viewing Category:";
-		presenceData.state = "Xbox Games";
-	} else if (page.includes("/nintendo")) {
-		presenceData.details = "Viewing Category:";
-		presenceData.state = "Nintendo Games";
-	} else if (page.includes("/top-up-cards")) {
-		presenceData.details = "Viewing Category:";
-		presenceData.state = "Top Up Cards";
-	} else if (page.includes("/sale")) {
-		presenceData.details = "Viewing Category:";
-		presenceData.state = "Sale";
-	} else if (page.includes("/daily-deals")) {
-		presenceData.details = "Viewing Category:";
-		presenceData.state = "Daily Deals";
-	} else if (page.includes("/new")) {
-		presenceData.details = "Viewing Category:";
-		presenceData.state = "New Products";
-	} else if (page.includes("/coming-soon"))
-		presenceData.details = "Coming Soon";
-	else if (page.includes("/wishlist")) presenceData.details = "Wishlist";
-	else if (page.includes("/cart")) presenceData.details = "Cart";
-	else if (page.includes("order/history"))
+		presenceData.state = active?.textContent ?? "Coming soon";
+	} else if (pathname.includes("-sale")) {
+		presenceData.details =
+			document.querySelector<HTMLMetaElement>('[name="title"]').content;
+	} else if (pathname.includes("order/history"))
 		presenceData.details = "Order History";
+	else if (pathname.includes("/cart")) presenceData.details = "Cart";
+	else if (pathname === "/") presenceData.details = "Home page";
+	else if (pathname.includes("/wishlist")) presenceData.details = "Wishlist";
+
+	if (!buttons) delete presenceData.buttons;
+	if (!covers) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/C/CDKeys/assets/logo.png";
+	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

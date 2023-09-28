@@ -1,30 +1,30 @@
 const presence = new Presence({
-		clientId: "920135248006754394"
+		clientId: "920135248006754394",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	pathData = {
 		user: [
 			{
 				name: "supports",
-				state: "My subscriptions history"
+				state: "My subscriptions history",
 			},
 			{
 				name: "edit",
-				state: "Editing my details"
-			}
+				state: "Editing my details",
+			},
 		],
 		dashboard: [
 			{
 				name: "overview",
-				state: "My overview"
+				state: "My overview",
 			},
 			{
 				name: "onboarding",
-				state: "Starting up"
+				state: "Starting up",
 			},
 			{
 				name: "goal",
-				state: "My goal"
+				state: "My goal",
 			},
 			{
 				name: "tiers",
@@ -32,17 +32,17 @@ const presence = new Presence({
 				paths: [
 					{
 						name: "setup",
-						state: "Setting up supporter tiers..."
+						state: "Setting up supporter tiers...",
 					},
 					{
 						name: "add",
-						state: "Adding new supporter tier..."
+						state: "Adding new supporter tier...",
 					},
 					{
 						name: "*",
-						state: "Editing supporter tier..."
-					}
-				]
+						state: "Editing supporter tier...",
+					},
+				],
 			},
 			{
 				name: "posts",
@@ -50,13 +50,13 @@ const presence = new Presence({
 				paths: [
 					{
 						name: "add",
-						state: "Making new post..."
+						state: "Making new post...",
 					},
 					{
 						name: "*",
-						state: "Editing my post..."
-					}
-				]
+						state: "Editing my post...",
+					},
+				],
 			},
 			{
 				name: "vouchers",
@@ -64,35 +64,35 @@ const presence = new Presence({
 				paths: [
 					{
 						name: "add",
-						state: "Making new voucher..."
+						state: "Making new voucher...",
 					},
 					{
 						name: "*",
-						state: "Editing my voucher..."
-					}
-				]
+						state: "Editing my voucher...",
+					},
+				],
 			},
 			{
 				name: "overlay",
-				state: "Stream overlay"
+				state: "Stream overlay",
 			},
 			{
 				name: "supports",
-				state: "Supports history"
+				state: "Supports history",
 			},
 			{
 				name: "bank",
-				state: "Payment"
+				state: "Payment",
 			},
 			{
 				name: "profile",
-				state: "Editing profile"
+				state: "Editing profile",
 			},
 			{
 				name: "settings",
-				state: "Settings"
-			}
-		]
+				state: "Settings",
+			},
+		],
 	},
 	getUserHeader = ".q-page-container.q-pb-xl.main",
 	getUserHeaderHome =
@@ -121,8 +121,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "main",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/K/KaryaKarsa/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		paths: string[] = window.location.pathname.split("/").splice(1);
 
@@ -177,8 +178,8 @@ presence.on("UpdateData", () => {
 					presenceData.buttons = [
 						{
 							label: "Visit Creator",
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 			}
@@ -200,8 +201,8 @@ presence.on("UpdateData", () => {
 					presenceData.buttons = [
 						{
 							label: "View post",
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 			}

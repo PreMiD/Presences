@@ -1,5 +1,5 @@
 const presence: Presence = new Presence({
-	clientId: "897325334200975360"
+	clientId: "897325334200975360",
 });
 
 async function getStrings() {
@@ -14,7 +14,7 @@ async function getStrings() {
 			watchEpisode: "general.buttonViewEpisode",
 			watchVideo: "general.buttonWatchVideo",
 			watchLive: "general.live",
-			watchStream: "general.buttonWatchStream"
+			watchStream: "general.buttonWatchStream",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -46,7 +46,10 @@ presence.on("UpdateData", async () => {
 		strings = await getStrings();
 	}
 
-	if (isHostSP) presenceData.largeImageKey = "starplus-logo";
+	if (isHostSP) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/S/Star+/assets/logo.png";
+	}
 
 	// Star+ videos
 	if (isHostSP && location.pathname.includes("/video/")) {
@@ -86,7 +89,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = subtitle || "Movie";
 			}
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;
@@ -112,15 +115,15 @@ presence.on("UpdateData", async () => {
 						label: subtitle
 							? (await strings).watchEpisode
 							: (await strings).watchVideo,
-						url: `https://www.starplus.com${location.pathname}`
-					}
+						url: `https://www.starplus.com${location.pathname}`,
+					},
 				];
 
 				// change button if GroupWatch is active and user enabled the button
 				if (groupWatchId && groupWatchBtn) {
 					presenceData.buttons.push({
 						label: "Join GroupWatch",
-						url: `https://www.starplus.com/groupwatch/${groupWatchId}`
+						url: `https://www.starplus.com/groupwatch/${groupWatchId}`,
 					});
 				}
 			}
@@ -147,7 +150,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = (await strings).watchLive;
 			} else if (privacy) presenceData.state = (await strings).watchingLive;
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;
@@ -157,8 +160,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: (await strings).watchStream,
-						url: `https://www.starplus.com${location.pathname}`
-					}
+						url: `https://www.starplus.com${location.pathname}`,
+					},
 				];
 			}
 			if (title) presence.setActivity(presenceData, !video.paused);
@@ -199,8 +202,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Join GroupWatch",
-					url: location.pathname
-				}
+					url: location.pathname,
+				},
 			];
 		}
 

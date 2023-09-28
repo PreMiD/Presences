@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "691534544301457449"
+	clientId: "691534544301457449",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/DuckDuckGo/assets/logo.png",
 	};
 
 	// Get search query from HTML form input.
@@ -43,7 +44,7 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = setTimestamp();
 	} else if (document.location.href.includes("?q=")) {
 		presenceData.startTimestamp = setTimestamp();
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		if (document.location.href.includes("iaxm=maps"))
 			presenceData.details = await handleFormatting("mapSearch");

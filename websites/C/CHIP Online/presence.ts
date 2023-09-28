@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "651438286962688044"
+	clientId: "651438286962688044",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo-chip"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/C/CHIP%20Online/assets/logo.png",
 	};
 
 	if (window.location.pathname.startsWith("/haber/")) {

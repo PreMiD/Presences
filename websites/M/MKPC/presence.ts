@@ -1,13 +1,13 @@
 const presence = new Presence({
-		clientId: "812176837748457483"
+		clientId: "812176837748457483",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let user;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/MKPC/assets/logo.jpeg",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (
@@ -19,32 +19,32 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing home page";
 	else if (document.location.pathname === "/forum.php") {
 		presenceData.details = "Viewing the Forum's menu";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.buttons = [
-			{ label: "View Forum", url: document.location.href }
+			{ label: "View Forum", url: document.location.href },
 		];
 	}
 	const elt = document.querySelector("#compteur0 > div") as HTMLElement;
 	if (elt) {
 		presenceData.details = `Lap ${elt.textContent.replace(/.+? /g, "")}`;
 		presenceData.buttons = [
-			{ label: "Play Game", url: "https://mkpc.malahieude.net/mariokart.php" }
+			{ label: "Play Game", url: "https://mkpc.malahieude.net/mariokart.php" },
 		];
 		presenceData.smallImageKey = "wheel";
 	} else {
 		switch (document.location.pathname) {
 			case "/mariokart.php": {
 				presenceData.details = "browsing map's";
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 
 				break;
 			}
 			case "/category.php": {
 				user = document.querySelector("html > body > main > h1");
 				presenceData.details = `Viewing the following category: ${user.textContent}`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.buttons = [
-					{ label: "View category", url: document.location.href }
+					{ label: "View category", url: document.location.href },
 				];
 
 				break;
@@ -52,9 +52,9 @@ presence.on("UpdateData", async () => {
 			case "/topic.php": {
 				user = document.querySelector("html > body > main > h1");
 				presenceData.details = `Viewing: ${user.textContent}`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.buttons = [
-					{ label: "View topic", url: document.location.href }
+					{ label: "View topic", url: document.location.href },
 				];
 
 				break;
@@ -70,9 +70,9 @@ presence.on("UpdateData", async () => {
 					"body > main > div > div.profile-summary > h1"
 				);
 				presenceData.details = `Viewing: ${user.textContent}`;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.buttons = [
-					{ label: "View profile", url: document.location.href }
+					{ label: "View profile", url: document.location.href },
 				];
 
 				break;

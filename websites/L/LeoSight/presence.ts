@@ -1,15 +1,16 @@
 const presence = new Presence({
-		clientId: "888141162488143893"
+		clientId: "888141162488143893",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let item, item2;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lslogo",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/L/LeoSight/assets/logo.png",
 			smallImageKey: "lsminilogo",
 			smallImageText: "leosight.cz",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;
 	if (

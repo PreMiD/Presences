@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-one-time-vars/no-one-time-vars
 const presence = new Presence({
-		clientId: "631259475038175232"
+		clientId: "631259475038175232",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,8 +8,8 @@ let x: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/TCRF/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname === "/The_Cutting_Room_Floor") {
 		presenceData.details = "browsing TCRF";

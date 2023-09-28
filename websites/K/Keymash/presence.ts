@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "719415069460529163"
+	clientId: "719415069460529163",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/K/Keymash/assets/logo.png",
 		},
 		[, path, query] = document.location.pathname.split("/");
 

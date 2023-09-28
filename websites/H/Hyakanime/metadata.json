@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Dem0nx309",
+		"id": "145559039173066752"
+	},
+	"service": "Hyakanime",
+	"description": {
+		"en": "Create your own library of anime!",
+		"fr": "Crée ta bibliothèque d'animés !"
+	},
+	"url": [
+		"hyakanime.fr",
+		"www.hyakanime.fr"
+	],
+	"version": "1.0.9",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Hyakanime/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Hyakanime/assets/thumbnail.png",
+	"color": "#089BEF",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"hyakanime"
+	]
+}

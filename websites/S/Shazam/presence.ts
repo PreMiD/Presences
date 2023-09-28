@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "735588731637203080"
+		clientId: "735588731637203080",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browse: "presence.activity.browsing"
+		play: "general.playing",
+		pause: "general.paused",
+		browse: "general.browsing",
 	}),
 	getElement = (query: string): string | undefined => {
 		return document.querySelector(query)?.textContent;
@@ -16,28 +16,28 @@ let elapsed = Math.floor(Date.now() / 1000),
 const statics = {
 	"/": {
 		details: "Browsing...",
-		state: "Home"
+		state: "Home",
 	},
 	"/myshazam/": {
 		details: "Viewing Page...",
-		state: "My Shazam"
+		state: "My Shazam",
 	},
 	"/apps/": {
 		details: "Viewing Page...",
-		state: "Mobile App"
+		state: "Mobile App",
 	},
 	"/company/": {
 		details: "Viewing Page...",
-		state: "About Shazam"
+		state: "About Shazam",
 	},
 	"/terms/": {
 		details: "Viewing Page...",
-		state: "Terms of Service"
+		state: "Terms of Service",
 	},
 	"/privacy/": {
 		details: "Viewing Page...",
-		state: "Privacy Policy"
-	}
+		state: "Privacy Policy",
+	},
 };
 
 presence.on("UpdateData", async () => {
@@ -48,8 +48,9 @@ presence.on("UpdateData", async () => {
 		songPlaying = song ? !song.paused : false;
 
 	let presenceData: PresenceData = {
-		largeImageKey: "shazam",
-		startTimestamp: elapsed
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Shazam/assets/logo.png",
+		startTimestamp: elapsed,
 	};
 
 	if (document.location.href !== prevUrl) {
@@ -63,7 +64,7 @@ presence.on("UpdateData", async () => {
 	if (showSong && songPlaying) {
 		presenceData.details = getElement(".track .heading");
 		presenceData.state = getElement(".track .subheading");
-		presenceData.smallImageKey = "play";
+		presenceData.smallImageKey = Assets.Play;
 		presenceData.smallImageText = (await strings).play;
 
 		const [startTimestamp, endTimestamp] = presence.getTimestamps(
@@ -97,7 +98,7 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) {
 		if (presenceData.details.match("(Browsing|Viewing)")) {
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = (await strings).browse;
 		}
 		if (!showTimestamps) {

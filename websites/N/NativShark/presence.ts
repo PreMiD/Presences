@@ -1,5 +1,5 @@
 const presence: Presence = new Presence({
-		clientId: "787034842084016158"
+		clientId: "787034842084016158",
 	}),
 	startTimestamp: number = Math.floor(Date.now() / 1000),
 	pathDescriptors = [
@@ -17,13 +17,14 @@ const presence: Presence = new Presence({
 		["/tools/stats", "Viewing their stats"],
 		["/tools/extra-credit", "Earning some extra credits"],
 		["/tools/using-nativshark", "Reading 'Using NativShark'"],
-		["/faq", "Reading the FAQ"]
+		["/faq", "Reading the FAQ"],
 	];
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "nativshark_logo_lg",
-			startTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/N/NativShark/assets/logo.png",
+			startTimestamp,
 		},
 		{ pathname } = window.location;
 

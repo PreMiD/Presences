@@ -1,13 +1,17 @@
 const presence = new Presence({
-		clientId: "842486883128705024"
+		clientId: "842486883128705024",
 	}),
 	path = location.pathname,
 	timeElapsed = ~~(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Codeforces/assets/logo.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: timeElapsed
+		largeImageKey: Assets.Logo,
+		startTimestamp: timeElapsed,
 	};
 
 	switch (path.split("/")[1]) {
@@ -31,7 +35,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `By ${
 					document.querySelector(".info > a").textContent
 				}`;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else {
 				presenceData.details = "Browsing through";
 				presenceData.state = document
@@ -81,7 +85,7 @@ presence.on("UpdateData", async () => {
 			if (path.includes("problem")) {
 				presenceData.details = contestTitle;
 				presenceData.state = document.querySelector(".title").textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Solving";
 			} else if (path.includes("submit"))
 				presenceData.details = "Submitting Solution for";
@@ -125,7 +129,7 @@ presence.on("UpdateData", async () => {
 			if (path.includes("problem")) {
 				presenceData.details = gymTitle;
 				presenceData.state = document.querySelector(".title").textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Solving";
 			} else if (path.includes("submit"))
 				presenceData.details = "Submitting Solution for";
@@ -162,7 +166,7 @@ presence.on("UpdateData", async () => {
 			if (path.includes("problem")) {
 				presenceData.details = document.querySelector(".left").textContent;
 				presenceData.state = document.querySelector(".title").textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Solving";
 			} else if (path.includes("submit")) {
 				presenceData.details = "Submitting Solution for";
@@ -196,7 +200,7 @@ presence.on("UpdateData", async () => {
 			} else if (path.includes("problem")) {
 				presenceData.details = groupTitle;
 				presenceData.state = document.querySelector(".title").textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Solving";
 			} else if (path.includes("submit")) {
 				presenceData.details = "Submitting Solution for";
@@ -255,7 +259,7 @@ presence.on("UpdateData", async () => {
 					.querySelector(".eduCoursePath")
 					.textContent.trim();
 				presenceData.state = document.querySelector(".title").textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Solving";
 			} else if (path.includes("submit")) {
 				presenceData.details = "Submitting Solution for";
@@ -294,7 +298,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document
 					.querySelector(".eduLessonPath")
 					.textContent.trim();
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (path.split("/")[2] === "courses") {
 				presenceData.details = "Browsing through";
 				presenceData.state = "Edu (Courses)";
@@ -306,7 +310,7 @@ presence.on("UpdateData", async () => {
 		case "apiHelp": {
 			presenceData.details = "Reading";
 			presenceData.state = "API Help";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			break;
 		}
 

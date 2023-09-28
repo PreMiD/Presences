@@ -1,6 +1,7 @@
 const presence = new Presence({
-	clientId: "812025934617509949"
+	clientId: "812025934617509949",
 });
+
 let points: string, progress: string;
 presence.on("iFrameData", (data: IFrameData) => {
 	({ points, progress } = data.info);
@@ -8,7 +9,8 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/F/Folding@home/assets/logo.png",
 	};
 
 	presenceData.details = `Contributing to: ${points}`;

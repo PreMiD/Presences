@@ -7,7 +7,7 @@
 		"eslint:recommended",
 		"plugin:@typescript-eslint/eslint-recommended",
 		"plugin:@typescript-eslint/recommended",
-		"plugin:prettier/recommended"
+		"prettier"
 	],
 	"globals": {
 		"Atomics": "readonly",
@@ -27,7 +27,7 @@
 		"quotes": ["error", "double", { "avoidEscape": true }],
 		"camelcase": ["error", { "properties": "always" }],
 		"curly": ["error", "multi-or-nest"],
-		"comma-dangle": ["error", "never"],
+		"eqeqeq": ["error", "always", { "null": "ignore" }],
 		"one-var": ["error", "consecutive"],
 		"linebreak-style": ["error", "unix"],
 		"prefer-const": "error",
@@ -59,14 +59,13 @@
 		"no-eq-null": "error",
 		"@typescript-eslint/array-type": ["error", { "default": "array" }],
 		"no-lonely-if": "error",
-		"prettier/prettier": "error",
 		"arrow-body-style": "off",
 		"prefer-arrow-callback": "off",
 		"no-one-time-vars/no-one-time-vars": [
-			2,
-			{ 
-				"ignoredVariables": ["browsingTimestamp"], 
-				"ignoreObjectDestructuring": true 
+			"warn",
+			{
+				"ignoredVariables": ["browsingTimestamp"],
+				"ignoreObjectDestructuring": true
 			}
 		],
 		"radix": "off",
@@ -84,7 +83,6 @@
 		"unicorn/prefer-date-now": "error",
 		"unicorn/prefer-default-parameters": "error",
 		"unicorn/prefer-includes": "error",
-		"unicorn/prefer-string-replace-all": "error",
 		"unicorn/prefer-string-starts-ends-with": "error",
 		"unicorn/prefer-string-trim-start-end": "error",
 		"unicorn/prefer-switch": "error",
@@ -92,7 +90,8 @@
 		"unicorn/throw-new-error": "error",
 		"unicorn/no-unreadable-array-destructuring": "error",
 		"unicorn/prefer-query-selector": "error",
-		"unicorn/prefer-dom-node-text-content": "error"
+		"unicorn/prefer-dom-node-text-content": "error",
+		"unicorn/prefer-logical-operator-over-ternary": "error"
 	},
 	"overrides": [
 		{
@@ -109,5 +108,5 @@
 	],
 	"reportUnusedDisableDirectives": true,
 	"noInlineConfig": false,
-	"plugins": ["@typescript-eslint", "prettier", "no-one-time-vars", "unicorn"]
+	"plugins": ["@typescript-eslint", "no-one-time-vars", "unicorn"]
 }

@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "662841394171346955"
+		clientId: "662841394171346955",
 	}),
 	strings = presence.getStrings({
-		browsing: "presence.activity.browsing",
-		paused: "presence.playback.paused",
-		playing: "presence.playback.playing"
+		browsing: "general.browsing",
+		paused: "general.paused",
+		playing: "general.playing",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -40,14 +40,14 @@ presence.on("UpdateData", async () => {
 			presenceData.state = capitalize(subtitle.textContent);
 
 		if (video.paused) {
-			presenceData.smallImageKey = "paused";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = (await strings).paused;
 		} else {
 			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 			presenceData.endTimestamp = Math.floor(
 				presenceData.startTimestamp + (video.duration - video.currentTime)
 			);
-			presenceData.smallImageKey = "playing";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = (await strings).playing;
 		}
 	} else {

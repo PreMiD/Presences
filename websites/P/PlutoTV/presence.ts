@@ -1,11 +1,12 @@
 const presence = new Presence({
-		clientId: "640292045117980713"
+		clientId: "640292045117980713",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let title: HTMLElement,
 	playing: boolean,
 	paused: boolean,
@@ -21,7 +22,8 @@ oldTitle = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "plutotv"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/P/PlutoTV/assets/logo.png",
 	};
 
 	if (document.location.hostname === "pluto.tv") {
@@ -54,7 +56,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.details = title.textContent;
 			presenceData.state = `${progress}% progressed`;
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Playing";
 		} else if (playing === true && paused === true) {
 			title = document.querySelector(
@@ -62,7 +64,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.details = title.textContent;
 			presenceData.state = `${progress}% progressed`;
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Playing";
 		} else if (document.location.pathname.includes("/on-demand/movies/")) {
 			video = document.querySelector(
@@ -73,7 +75,7 @@ presence.on("UpdateData", async () => {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
 			if (!isNaN(duration)) {
-				presenceData.smallImageKey = paused ? "pause" : "play";
+				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = paused
 					? (await strings).pause
 					: (await strings).play;
@@ -110,7 +112,7 @@ presence.on("UpdateData", async () => {
 					oldTitle = title.textContent;
 				}
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			}
 		} else if (document.location.pathname.includes("/trending")) {
 			presenceData.startTimestamp = browsingTimestamp;

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "639107568672702484"
+		clientId: "639107568672702484",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -15,7 +15,7 @@ async function getStrings() {
 			readArticle: "general.readingArticle",
 			btnReadArticle: "general.buttonReadArticle",
 			viewProfile: "general.viewProfile",
-			btnViewProfile: "general.buttonViewProfile"
+			btnViewProfile: "general.buttonViewProfile",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -26,8 +26,9 @@ let strings: Awaited<ReturnType<typeof getStrings>> = null,
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "tsr",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/TruckStopRadio/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	const [newLang, details, state, browse, timestamp, buttons, cover] =
@@ -38,7 +39,7 @@ presence.on("UpdateData", async () => {
 				presence.getSetting<boolean>("browse"),
 				presence.getSetting<boolean>("timestamp"),
 				presence.getSetting<boolean>("buttons"),
-				presence.getSetting<boolean>("cover")
+				presence.getSetting<boolean>("cover"),
 			]),
 		playing = document
 			.querySelector(".play-btn")
@@ -54,7 +55,7 @@ presence.on("UpdateData", async () => {
 		if (details !== "{0}") presenceData.details = replacePlaceholders(details);
 		if (state !== "{0}") presenceData.state = replacePlaceholders(state);
 
-		presenceData.smallImageKey = playing ? "play" : "pause";
+		presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
 		presenceData.smallImageText = playing ? strings.play : strings.pause;
 
 		if (cover) {
@@ -66,8 +67,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: strings.listen,
-				url: "https://truckstopradio.co.uk/"
-			}
+				url: "https://truckstopradio.co.uk/",
+			},
 		];
 	} else {
 		for (const [k, v] of Object.entries(
@@ -75,7 +76,7 @@ presence.on("UpdateData", async () => {
 				[name: string]: PresenceData;
 			} => ({
 				"/": {
-					details: strings.browse
+					details: strings.browse,
 				},
 				"/timetable": {
 					details: strings.viewPage,
@@ -83,9 +84,9 @@ presence.on("UpdateData", async () => {
 					buttons: [
 						{
 							label: strings.btnViewPage,
-							url: location.href
-						}
-					]
+							url: location.href,
+						},
+					],
 				},
 				"/team": {
 					details: strings.viewPage,
@@ -93,9 +94,9 @@ presence.on("UpdateData", async () => {
 					buttons: [
 						{
 							label: strings.btnViewPage,
-							url: location.href
-						}
-					]
+							url: location.href,
+						},
+					],
 				},
 				"/applications": {
 					details: strings.viewPage,
@@ -103,9 +104,9 @@ presence.on("UpdateData", async () => {
 					buttons: [
 						{
 							label: strings.btnViewPage,
-							url: location.href
-						}
-					]
+							url: location.href,
+						},
+					],
 				},
 				"/contact": {
 					details: strings.viewPage,
@@ -113,9 +114,9 @@ presence.on("UpdateData", async () => {
 					buttons: [
 						{
 							label: strings.btnViewPage,
-							url: location.href
-						}
-					]
+							url: location.href,
+						},
+					],
 				},
 				"/news": {
 					details: strings.viewPage,
@@ -123,9 +124,9 @@ presence.on("UpdateData", async () => {
 					buttons: [
 						{
 							label: strings.btnViewPage,
-							url: location.href
-						}
-					]
+							url: location.href,
+						},
+					],
 				},
 				"/article": {
 					details: strings.readArticle,
@@ -134,9 +135,9 @@ presence.on("UpdateData", async () => {
 					buttons: [
 						{
 							label: strings.btnReadArticle,
-							url: location.href
-						}
-					]
+							url: location.href,
+						},
+					],
 				},
 				"/presenter": {
 					details: strings.viewProfile,
@@ -144,10 +145,10 @@ presence.on("UpdateData", async () => {
 					buttons: [
 						{
 							label: strings.btnViewProfile,
-							url: location.href
-						}
-					]
-				}
+							url: location.href,
+						},
+					],
+				},
 			}))()
 		)) {
 			if (
@@ -158,7 +159,7 @@ presence.on("UpdateData", async () => {
 					.replace("=", "/")
 					.match(k)
 			) {
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = strings.browse;
 				presenceData = { ...presenceData, ...v };
 			}
@@ -176,7 +177,7 @@ function replacePlaceholders(string: string): string {
 		"%artist%": ".now-playing-artist",
 		"%title%": ".now-playing-title",
 		"%presenter%": ".live-presenter",
-		"%description%": ".live-description"
+		"%description%": ".live-description",
 	}))
 		string = string.replace(k, document.querySelector(v).textContent);
 

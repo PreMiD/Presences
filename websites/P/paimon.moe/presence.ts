@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "859781231351693312"
+		clientId: "859781231351693312",
 	}),
 	timer = Math.floor(Date.now() / 1000),
 	characterList = [
@@ -45,14 +45,15 @@ const presence = new Presence({
 		"traveler_electro",
 		"sangonomiya_kokomi",
 		"sayu",
-		"aloy"
+		"aloy",
 	],
 	validCharacter = characterList.includes(document.URL.match(/\w+/gi).pop());
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: timer
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/paimon.moe/assets/logo.png",
+			startTimestamp: timer,
 		},
 		// {hostname} = document.location,
 		{ pathname } = window.location;

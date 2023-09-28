@@ -1,8 +1,9 @@
 const presence = new Presence({
-		clientId: "792696743686307861"
+		clientId: "792696743686307861",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/E/exaroton/assets/logo.png",
 	},
 	paths = {
 		":": "Home Page",
@@ -18,7 +19,7 @@ const presence = new Presence({
 		addons: "Panel - Plugins",
 		worlds: "Panel - Worlds",
 		backups: "Panel - Backups",
-		access: "Panel - Access"
+		access: "Panel - Access",
 	};
 
 presence.on("UpdateData", async () => {

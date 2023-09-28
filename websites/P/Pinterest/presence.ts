@@ -1,14 +1,16 @@
 const presence = new Presence({
-		clientId: "629428243061145640"
+		clientId: "629428243061145640",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let user: Element | HTMLElement | string,
 	search: Element | HTMLElement | string,
 	title: Element | HTMLElement | string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "pinterest"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/P/Pinterest/assets/logo.png",
 	};
 	presenceData.startTimestamp = browsingTimestamp;
 	if (document.location.hostname === "help.pinterest.com") {
@@ -25,7 +27,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Searching for:";
 		presenceData.state = (search as HTMLInputElement).textContent;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		presence.setActivity(presenceData);
 	} else if (

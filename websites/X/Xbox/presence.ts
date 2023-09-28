@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "860159948234817536"
+		clientId: "860159948234817536",
 	}),
 	timestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "app",
-		startTimestamp: timestamp
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/X/Xbox/assets/logo.png",
+		startTimestamp: timestamp,
 	};
 
 	if (document.location.href.includes("/game-pass")) {
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.state = document.title.split("|")[0];
 			presenceData.buttons = [
-				{ label: "View this console", url: document.location.href }
+				{ label: "View this console", url: document.location.href },
 			];
 		} else if (document.location.href.includes("backward-compatibility"))
 			presenceData.details = "Reading about backward compatible games";
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.state = document.title.split("|")[0];
 			presenceData.buttons = [
-				{ label: "View this accessory", url: document.location.href }
+				{ label: "View this accessory", url: document.location.href },
 			];
 		} else if (document.location.href.includes("backward-compatibility"))
 			presenceData.details = "Reading about backward compatible games";
@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.state = document.title.split("|")[0];
 			presenceData.buttons = [
-				{ label: "Play this game (Game Pass)", url: document.location.href }
+				{ label: "Play this game (Game Pass)", url: document.location.href },
 			];
 			if (document.querySelector('[class^="Provisioning"'))
 				presenceData.details += " (setting up)";

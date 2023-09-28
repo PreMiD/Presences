@@ -1,13 +1,14 @@
 const presence = new Presence({
-		clientId: "867452106016161822"
+		clientId: "867452106016161822",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "large_image",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/L/LABY.net/assets/logo.png",
 		details: "LABY.net",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname.startsWith("/skins"))
 		presenceData.details = "Viewing Skins";
@@ -29,16 +30,16 @@ presence.on("UpdateData", () => {
 				label: `View ${
 					document.querySelector("div.col-12>h1")?.textContent ?? "Unknown"
 				}'s profile`,
-				url: window.location.href
-			}
+				url: window.location.href,
+			},
 		];
 	} else if (document.location.pathname.startsWith("/skin")) {
 		presenceData.details = "Viewing a Minecraft Skin";
 		presenceData.buttons = [
 			{
 				label: "View this Minecraft Skin",
-				url: window.location.href
-			}
+				url: window.location.href,
+			},
 		];
 	} else if (document.location.pathname.startsWith("/cape")) {
 		presenceData.details = "Viewing Cape:";
@@ -49,16 +50,16 @@ presence.on("UpdateData", () => {
 				label: `View ${
 					document.querySelector("div.mb-1>h1")?.textContent ?? "Unknown"
 				} cape`,
-				url: window.location.href
-			}
+				url: window.location.href,
+			},
 		];
 	} else if (document.location.pathname.startsWith("/cloak")) {
 		presenceData.details = "Viewing a LabyMod Cloak";
 		presenceData.buttons = [
 			{
 				label: "View this Cloak",
-				url: window.location.href
-			}
+				url: window.location.href,
+			},
 		];
 	} else if (document.location.pathname.startsWith("/badge")) {
 		presenceData.details = "Viewing badge:";
@@ -69,8 +70,8 @@ presence.on("UpdateData", () => {
 				label: `View ${
 					document.querySelector("div.mb-1>h1")?.textContent ?? "Unknown Badge"
 				} badge`,
-				url: window.location.href
-			}
+				url: window.location.href,
+			},
 		];
 	} else if (document.location.pathname.startsWith("/server")) {
 		presenceData.details = "Viewing Server:";
@@ -83,8 +84,8 @@ presence.on("UpdateData", () => {
 					document.querySelector("div.server-info-wrapper>h1")?.textContent ??
 					"Unknown Cape"
 				}`,
-				url: window.location.href
-			}
+				url: window.location.href,
+			},
 		];
 	}
 

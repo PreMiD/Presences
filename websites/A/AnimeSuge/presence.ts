@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "863949633009090580"
+		clientId: "863949633009090580",
 	}),
 	pages: { [k: string]: string } = {
 		"/anime": "Watching an anime",
@@ -22,8 +22,12 @@ const presence = new Presence({
 		"/special": "Searching for special anime episodes",
 		"/az-list": "Seaching all animes",
 		"/most-watched": "Searching most watched animes",
-		"/upcoming": "Searching upcoming animes"
+		"/upcoming": "Searching upcoming animes",
 	};
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeSuge/assets/logo.png",
+}
 
 let timeEnd: number, currentTime: number, paused: boolean;
 
@@ -38,8 +42,8 @@ presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
 		epNumber = page.slice(page.length - 5).replace(/^\D+/g, ""),
 		presenceData: PresenceData = {
-			largeImageKey: "animesuge",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			largeImageKey: Assets.Logo,
+			startTimestamp: Math.floor(Date.now() / 1000),
 		},
 		search: URLSearchParams = new URLSearchParams(
 			document.location.search.substring(1)
@@ -58,11 +62,11 @@ presence.on("UpdateData", async () => {
 		else presenceData.state = `Episode ${epNumber}`;
 
 		if (!paused) {
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(currentTime, timeEnd);
 		} else {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Paused";
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
@@ -70,8 +74,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Watch Episode",
-				url: `http://animesuge.to${page}`
-			}
+				url: `http://animesuge.to${page}`,
+			},
 		];
 	} else if (page.includes("/genre")) {
 		const genre = page.slice("/genre/".length);
@@ -82,19 +86,21 @@ presence.on("UpdateData", async () => {
 	} else if (page.includes("/search")) {
 		presenceData.details = pages[page];
 		presenceData.state = `Searching: "${search.get("keyword")}"`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 	} else {
 		switch (page) {
 			case "/faq": {
 				presenceData.details = pages[page];
 				presenceData.state = "Reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				break;
 			}
 			case "/contact": {
 				presenceData.details = pages[page];
 				presenceData.state = "Reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				break;
 			}

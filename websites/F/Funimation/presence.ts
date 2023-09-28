@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "640161890059812865"
+		clientId: "640161890059812865",
 	}),
 	getStrings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -11,8 +11,9 @@ let prevTitle: string, prevEpisode: string, strings: Awaited<typeof getStrings>;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "fun",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/Funimation/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		showPoster = await presence.getSetting("poster"),
 		video = document.querySelector<HTMLVideoElement>("video.vjs-tech");
@@ -36,7 +37,7 @@ presence.on("UpdateData", async () => {
 				poster.style.backgroundImage.match(/"(.*)"/)[1];
 		}
 
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? strings.pause : strings.play;
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			presence.getTimestampsfromMedia(video);
@@ -66,40 +67,40 @@ presence.on("UpdateData", async () => {
 				'h1[data-test="content-hero__title"]'
 			).textContent;
 		} else {
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.details = "Browsing shows...";
 		}
 	} else if (document.location.pathname.includes("/whats-new")) {
 		presenceData.details = "Viewing what's new";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/new-releases")) {
 		presenceData.details = "Viewing new shows";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/schedule")) {
 		presenceData.details = "Viewing the schedule";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/shop"))
 		presenceData.details = "Viewing the shop";
 	else if (document.location.pathname.includes("/events")) {
 		presenceData.details = "Viewing the";
 		presenceData.state = "upcoming events";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/discover"))
 		presenceData.details = "Discovering new anime";
 	else if (document.location.pathname.includes("/recommended-for-you")) {
 		presenceData.details = "Viewing their recommended";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/trendingbuzz")) {
 		presenceData.details = "Viewing what's trending";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/guides")) {
 		presenceData.details = "Reading the guides";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/moods"))
 		presenceData.details = "Finding out their mood";
 	else if (document.location.pathname.includes("/games")) {
 		presenceData.details = "Looking at the games";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/blog")) {
 		if (
 			document.querySelector(
@@ -110,7 +111,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				"body > div.site-container > div.site-inner > div > main > article > h2"
 			).textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else presenceData.details = "Browsing through articles";
 	} else if (document.location.pathname.includes("/forum")) {
 		if (document.location.pathname.includes("/topic/")) {
@@ -118,7 +119,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				"#content > div.row > div > h1 > span"
 			).textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/user/")) {
 			presenceData.details = "Forums - Viewing user:";
 			presenceData.state = document.querySelector(

@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "madmendes",
+		"id": "559097551362457607"
+	},
+	"contributors": [
+		{
+			"name": "lucas-ga",
+			"id": "855988388216700938"
+		}
+	],
+	"service": "Alura",
+	"description": {
+		"en": "The largest online technology school in Brazil.",
+		"pt_BR": "A maior escola online de tecnologia do Brasil."
+	},
+	"url": "www.alura.com.br",
+	"regExp": "([a-z0-9]+)[.]alura.com.br",
+	"version": "1.1.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/thumbnail.png",
+	"color": "#051932",
+	"category": "other",
+	"tags": [
+		"coding",
+		"courses"
+	]
+}

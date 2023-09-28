@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "633985961604415519"
+		clientId: "633985961604415519",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 presence.on("UpdateData", async () => {
@@ -12,7 +12,8 @@ presence.on("UpdateData", async () => {
 		) as HTMLAudioElement,
 		playing = player ? (player.paused ? false : true) : false,
 		data: { [k: string]: string | number } = {
-			largeImageKey: "fizy-logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/fizy/assets/logo.png",
 		},
 		songName = document.querySelector(
 			"body > div.main-wrapper.ng-scope > ui-view > main > div > media-player > div > div.player > div.player__wrapper > div.player__metadata > div > div.player__media-name.radio__media-name > a"

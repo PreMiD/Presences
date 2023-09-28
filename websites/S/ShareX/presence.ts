@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "888726220571811914"
+		clientId: "888726220571811914",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,15 +7,16 @@ presence.on("UpdateData", async () => {
 	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
-			largeImageKey: "sharex-logo",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/ShareX/assets/logo.png",
 			smallImageKey: "sharex-white-logo",
 			smallImageText: "Navigating on getsharex.com",
 			buttons: [
 				{
 					label: "View Page",
-					url: document.location.href
-				}
-			]
+					url: document.location.href,
+				},
+			],
 		};
 	// Main Pages
 	if (document.location.pathname === "/") {
@@ -23,7 +24,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.buttons;
 	} else if (document.location.pathname.includes("/downloads")) {
 		presenceData.state = "Browsing Downloads Page";
-		presenceData.smallImageKey = "download";
+		presenceData.smallImageKey = Assets.Downloading;
 	} else if (document.location.pathname.includes("/screenshots")) {
 		presenceData.state = "Viewing Screenshots";
 		presenceData.smallImageKey = "screenshot";

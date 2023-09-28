@@ -1,8 +1,9 @@
 const presence = new Presence({
-		clientId: "622436057866043434"
+		clientId: "622436057866043434",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/B/Brony%20Radio%20Germany/assets/logo.png",
 	};
 
 presence.on("UpdateData", async () => {
@@ -13,13 +14,15 @@ presence.on("UpdateData", async () => {
 		presenceData.details = title
 			? (title as HTMLElement).textContent
 			: "Title not found...";
-		presenceData.largeImageKey = "logo";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/B/Brony%20Radio%20Germany/assets/logo.png";
 
 		if (title) presence.setActivity(presenceData, !audio.paused);
 	} else {
 		presence.setActivity({
 			details: "Browsing..",
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/Brony%20Radio%20Germany/assets/logo.png",
 		});
 	}
 });

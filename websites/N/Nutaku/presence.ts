@@ -54,7 +54,7 @@ const timers: { [key: string]: Date } = {},
 			exec: (context, data, { strings, images }: ExecutionArguments) => {
 				if (!context) return null;
 				const game = {
-					name: document.title.replace(/ \| Nutaku$/g, "")
+					name: document.title.replace(/ \| Nutaku$/g, ""),
 				};
 				timers.playing ??= new Date();
 				data.startTimestamp = timers.playing.getTime();
@@ -65,15 +65,15 @@ const timers: { [key: string]: Date } = {},
 				data.buttons = [
 					{
 						label: strings.viewPageButton,
-						url: document.location.href.replace(/play\/$/, "")
-					}
+						url: document.location.href.replace(/play\/$/, ""),
+					},
 				];
 				return data;
 			},
 			destroy(data) {
 				delete timers.playing;
 				if (data?.buttons) delete data.buttons;
-			}
+			},
 		},
 		{
 			middleware: ref =>
@@ -94,7 +94,7 @@ const timers: { [key: string]: Date } = {},
 				}
 				data.smallImageKey = images.BROWSE;
 				return data;
-			}
+			},
 		},
 		{
 			middleware: ref => !!ref.location.pathname.match(/^\/games\/(.*)\/$/i),
@@ -109,11 +109,11 @@ const timers: { [key: string]: Date } = {},
 				data.buttons = [
 					{
 						label: strings.viewPageButton,
-						url: document.location.href.replace(/play\/$/, "")
-					}
+						url: document.location.href.replace(/play\/$/, ""),
+					},
 				];
 				return data;
-			}
+			},
 		},
 		{
 			middleware: ref =>
@@ -129,15 +129,15 @@ const timers: { [key: string]: Date } = {},
 				data.buttons = [
 					{
 						label: strings.readingArticleButton,
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 				return data;
 			},
 			destroy(data) {
 				delete timers.readingArticle;
 				if (data?.buttons) delete data.buttons;
-			}
+			},
 		},
 		{
 			middleware: ref =>
@@ -149,7 +149,7 @@ const timers: { [key: string]: Date } = {},
 				data.smallImageKey = images.BROWSE;
 				data.smallImageText = "News";
 				return data;
-			}
+			},
 		},
 		{
 			middleware: ref => !!ref.location.hostname.match(/nutaku.net/i),
@@ -159,11 +159,11 @@ const timers: { [key: string]: Date } = {},
 				delete data.state;
 				if (data.smallImageKey) delete data.smallImageKey;
 				return data;
-			}
-		}
+			},
+		},
 	],
 	presence = new Presence({
-		clientId: "823951719331004426"
+		clientId: "823951719331004426",
 	});
 
 let lastPageIndex: number,
@@ -173,21 +173,21 @@ const IMAGES = {
 	LOGO: "logox1024",
 	PLAY: "playx1024",
 	PAUSE: "pausex1024",
-	BROWSE: "browsex1024"
+	BROWSE: "browsex1024",
 };
 presence.on("UpdateData", async () => {
-	const newLang = await presence.getSetting<string>("lang");
+	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	if (newLang !== currentLang) {
 		currentLang = newLang;
 		localizedStrings = await presence.getStrings(
 			{
-				browsing: "presence.activity.browsing",
+				browsing: "general.browsing",
 				playing: "general.playing",
 				readingArticle: "general.readingArticle",
 				readingArticleButton: "general.buttonReadArticle",
 				searching: "general.search",
 				searchFor: "general.searchFor",
-				viewPageButton: "general.buttonViewPage"
+				viewPageButton: "general.buttonViewPage",
 			},
 			newLang
 		);
@@ -201,12 +201,12 @@ presence.on("UpdateData", async () => {
 		context.exec(
 			presence,
 			{
-				largeImageKey: IMAGES.LOGO
+				largeImageKey: IMAGES.LOGO,
 			},
 			{
 				strings: localizedStrings,
 				query,
-				images: IMAGES
+				images: IMAGES,
 			}
 		)
 	)
@@ -223,7 +223,7 @@ presence.on("UpdateData", async () => {
 			if (!data) {
 				presence.setActivity({
 					largeImageKey: IMAGES.LOGO,
-					state: localizedStrings.browsing
+					state: localizedStrings.browsing,
 				});
 			} else {
 				if (data.details) presence.setActivity(data);

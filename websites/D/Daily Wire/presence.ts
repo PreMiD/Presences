@@ -1,16 +1,17 @@
 const presence = new Presence({
-		clientId: "843781235494486046"
+		clientId: "843781235494486046",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async function () {
 	const setting = {
 			timeElapsed: await presence.getSetting<boolean>("timeElapsed"),
-			showButtons: await presence.getSetting<boolean>("showButtons")
+			showButtons: await presence.getSetting<boolean>("showButtons"),
 		},
 		urlpath = window.location.pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Daily%20Wire/assets/logo.png",
 		};
 
 	if (setting.timeElapsed) presenceData.startTimestamp = browsingTimestamp;
@@ -26,8 +27,8 @@ presence.on("UpdateData", async function () {
 			presenceData.buttons = [
 				{
 					label: "Read Article",
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 		}
 	} else {
@@ -44,8 +45,8 @@ presence.on("UpdateData", async function () {
 					presenceData.buttons = [
 						{
 							label: "Watch Episode",
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 
@@ -60,8 +61,8 @@ presence.on("UpdateData", async function () {
 					presenceData.buttons = [
 						{
 							label: "Watch Show",
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 
@@ -77,8 +78,8 @@ presence.on("UpdateData", async function () {
 					presenceData.buttons = [
 						{
 							label: "View Discussion",
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 
@@ -94,8 +95,8 @@ presence.on("UpdateData", async function () {
 					presenceData.buttons = [
 						{
 							label: "View Author",
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 

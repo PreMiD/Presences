@@ -1,16 +1,17 @@
 const presence = new Presence({
-	clientId: "805070274847440916"
+	clientId: "805070274847440916",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/BuildTheEarth/assets/logo.png",
 		},
 		browsingTimestamp = Math.floor(Date.now() / 1000),
 		[privacy, button, pmap] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("button"),
-			presence.getSetting<boolean>("pmap")
+			presence.getSetting<boolean>("pmap"),
 		]);
 
 	presenceData.startTimestamp = browsingTimestamp;
@@ -64,8 +65,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View the team",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 			}
 		}

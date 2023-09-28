@@ -1,14 +1,15 @@
 const presence = new Presence({
-		clientId: "918248582459555871"
+		clientId: "918248582459555871",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "icon",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/V/Vukkybox/assets/logo.png",
 		smallImageKey: "vukky",
 		smallImageText: "Playing Vukkybox",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/gallery") {
@@ -94,7 +95,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Redeeming a coupon!";
 					if (
 						document.body.style.backgroundImage ===
-						'url("https://i.imgur.com/NlGok01.png")'
+						'url("https://cdn.rcd.gg/PreMiD/websites/V/Vukkybox/assets/0.png")'
 					)
 						presenceData.state = "Yay, it's a valid coupon!";
 					else presenceData.state = "Uh oh, the coupon is invalid!";

@@ -1,13 +1,14 @@
 const presence = new Presence({
-	clientId: "808756700022702120"
+	clientId: "808756700022702120",
 });
+
 async function getStrings() {
 	return presence.getStrings(
 		{
 			play: "general.playing",
 			pause: "general.paused",
 			viewPlaylist: "general.buttonViewPlaylist",
-			viewArtist: "general.buttonViewArtist"
+			viewArtist: "general.buttonViewArtist",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -18,13 +19,14 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Amazon%20Music/assets/logo.png",
 		},
 		[buttons, newLang, showPlaylist, cover] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("showPlaylist"),
-			presence.getSetting<boolean>("cover")
+			presence.getSetting<boolean>("cover"),
 		]);
 
 	if (oldLang !== newLang || !strings) {
@@ -53,26 +55,26 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.viewArtist,
-						url: artistLink
+						url: artistLink,
 					},
 					{
 						label: strings.viewPlaylist,
-						url: playlistLink
-					}
+						url: playlistLink,
+					},
 				];
 			} else if (artistLink && buttons) {
 				presenceData.buttons = [
 					{
 						label: strings.viewArtist,
-						url: artistLink
-					}
+						url: artistLink,
+					},
 				];
 			}
 		}
 
 		presenceData.details = navigator.mediaSession.metadata.title;
 		presenceData.state = navigator.mediaSession.metadata.artist;
-		presenceData.smallImageKey = paused ? "pause" : "play";
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused ? strings.pause : strings.play;
 		presenceData.endTimestamp =
 			Date.now() / 1000 +

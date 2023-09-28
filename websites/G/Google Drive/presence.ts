@@ -1,11 +1,12 @@
 const presence = new Presence({
-	clientId: "630494559956107285"
+	clientId: "630494559956107285",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "drivenewlogo",
-			details: "Viewing page:"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Google%20Drive/assets/logo.png",
+			details: "Viewing page:",
 		},
 		path = document.location.pathname
 			.toLowerCase()

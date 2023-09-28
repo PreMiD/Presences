@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "639534386538348565"
+		clientId: "639534386538348565",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let timestamps: number[],
@@ -35,12 +35,13 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lr"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/L/ListenOnRepeat/assets/logo.png",
 		},
 		[sGlobalRepeat, sFormatRepeat, sFormatGlobalRepeat] = await Promise.all([
 			presence.getSetting<boolean>("sGlobalRepeat"),
 			presence.getSetting<string>("sFormatRepeat"),
-			presence.getSetting<string>("sFormatGlobalRepeat")
+			presence.getSetting<string>("sFormatGlobalRepeat"),
 		]),
 		//TODO language selector and translation strings
 		repeatsTrans = "Repeats",
@@ -102,7 +103,7 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = "Loading video...";
 		[presenceData.state] = document.title.split(" - Listen On Repeat");
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

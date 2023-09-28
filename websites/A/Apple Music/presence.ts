@@ -1,18 +1,19 @@
 const presence = new Presence({
-		clientId: "842112189618978897"
+		clientId: "842112189618978897",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "applemusic-logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Apple%20Music/assets/logo.png",
 		},
 		[timestamps, cover] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),
-			presence.getSetting<boolean>("cover")
+			presence.getSetting<boolean>("cover"),
 		]),
 		audio = document.querySelector<HTMLAudioElement>(
 			"audio#apple-music-player"
@@ -27,15 +28,17 @@ presence.on("UpdateData", async () => {
 			?.querySelector<HTMLVideoElement>("video#apple-music-video-player");
 	if (video?.title || audio?.title) {
 		const media = video || audio,
-			timestamp = document.querySelector<HTMLInputElement>(
-				"input[aria-valuenow][aria-valuemax]"
-			),
+			timestamp = document
+				.querySelector("amp-lcd.lcd.lcd__music")
+				?.shadowRoot.querySelector<HTMLInputElement>(
+					"input#playback-progress[aria-valuenow][aria-valuemax]"
+				),
 			paused = media.paused || media.readyState <= 2;
 
 		presenceData.details = navigator.mediaSession.metadata.title;
 		presenceData.state = navigator.mediaSession.metadata.artist;
 
-		presenceData.smallImageKey = paused ? "pause" : "play";
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused
 			? (await strings).pause
 			: (await strings).play;
@@ -50,12 +53,9 @@ presence.on("UpdateData", async () => {
 
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			presence.getTimestamps(
-				Number(timestamp.ariaValueNow),
-				Number(timestamp.ariaValueMax)
+				Number(timestamp ? timestamp.ariaValueNow : media.currentTime),
+				Number(timestamp ? timestamp.ariaValueMax : media.duration)
 			);
-
-		if (presenceData.endTimestamp === Infinity)
-			presenceData.smallImageKey = "premiere-live";
 
 		if (paused || !timestamps) {
 			delete presenceData.startTimestamp;

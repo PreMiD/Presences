@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "827892428266274857"
+		clientId: "827892428266274857",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -9,7 +9,7 @@ let video = {
 	paused: true,
 	title: "Unknown",
 	channel: "Unknown",
-	url: <string>null
+	url: <string>null,
 };
 
 presence.on("UpdateData", async function () {
@@ -19,10 +19,10 @@ presence.on("UpdateData", async function () {
 				presence.getSetting<boolean>("moreDetails"),
 				presence.getSetting<boolean>("showButtons"),
 				presence.getSetting<boolean>("privacy"),
-				presence.getSetting<number>("logo")
+				presence.getSetting<number>("logo"),
 			]),
 		presenceData: PresenceData = {
-			largeImageKey: logo === 0 ? "logo" : "logo2"
+			largeImageKey: logo === 0 ? "logo" : "logo2",
 		},
 		urlpath = window.location.pathname.split("/");
 
@@ -54,14 +54,14 @@ presence.on("UpdateData", async function () {
 				presenceData.buttons = [
 					{
 						label: "Join Room",
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 
 				if (!privacy && video.url) {
 					presenceData.buttons.push({
 						label: "Watch Video",
-						url: video.url
+						url: video.url,
 					});
 				}
 			}

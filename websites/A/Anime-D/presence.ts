@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "872656825890254849"
+		clientId: "872656825890254849",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	});
 
 let video = {
 		current: 0,
 		duration: 0,
-		paused: true
+		paused: true,
 	},
 	Sub: string;
 // Const thing
@@ -39,11 +39,12 @@ presence.on("UpdateData", async () => {
 	const [time, privacy, buttons] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "site",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Anime-D/assets/logo.jpg",
+			startTimestamp: browsingTimestamp,
 		};
 
 	// Presence
@@ -117,8 +118,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "ดูอนิเมะ",
-					url: document.location.href.replace(/#\d+/, "")
-				}
+					url: document.location.href.replace(/#\d+/, ""),
+				},
 			];
 		}
 	} else if (path.href) {

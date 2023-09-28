@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "775333674563403838"
+	clientId: "775333674563403838",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "webflow_logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/W/Webflow/assets/logo.png",
 	};
 
 	if (document.location.hostname.includes("preview.webflow.com")) {
@@ -34,8 +35,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Creating a new project";
 	else if (document.location.pathname.includes("dashboard/sites")) {
 		presenceData.details = "Editing project settings";
-		const projectName = document.title.replace(" - Webflow", "");
-		presenceData.state = projectName ? projectName : "Unknown Project";
+		presenceData.state =
+			document.title.replace(" - Webflow", "") ?? "Unknown Project";
 	} else if (document.location.pathname.includes("designers")) {
 		presenceData.details = "Browsing Designers";
 		if (document.location.pathname.includes("popular"))

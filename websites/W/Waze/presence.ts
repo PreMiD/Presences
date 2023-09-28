@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "854718080433520661"
+		clientId: "854718080433520661",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: ~~(Date.now() / 1000)
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/Waze/assets/logo.png",
+		startTimestamp: ~~(Date.now() / 1000),
 	},
 	pages: { [key: string]: string } = {
 		"/": "Homepage",
@@ -23,10 +23,13 @@ const presence = new Presence({
 		"/communities": "Waze Communities",
 		"/legal/tos/": "Terms of Use",
 		"/legal/privacy/": "Privacy Policy",
-		"/legal/copyright/": "Copyright Policy"
+		"/legal/copyright/": "Copyright Policy",
+		"/ccp": "Waze for Cities",
+		"/forum/": "Forum",
+		"/press/": "Press",
 	};
 
-let path: string, start: string, end: string;
+let path: string, start: string, end: string, mapElem: string, mapLoc: string;
 
 function fnd() {
 	path = window.location.pathname;
@@ -45,6 +48,34 @@ function fnd() {
 
 		presenceData.details = "Planning a route";
 		presenceData.state = `From ${start} to ${end}`;
+	} else if (path.includes("/editor")) {
+		if (
+			document.querySelector<HTMLSpanElement>(
+				"#segment-edit-general > ul > li.length-attribute"
+			)
+		) {
+			const fullRoadName =
+				document.querySelector<HTMLSpanElement>(
+					"#segment-edit-general > div.address-edit > div > div.clearfix.preview > div.full-address-container > span"
+				)?.textContent ?? "Roads";
+			mapElem = fullRoadName.split(",")[0];
+		} else if (
+			document.querySelector<HTMLSpanElement>(
+				"#venue-edit-general > form > div:nth-child(1) > div:nth-child(2)"
+			)
+		) {
+			const placeCat = document.querySelector(".category-name");
+			if (!placeCat.textContent) mapElem = "a place";
+			else mapElem = `a ${placeCat.textContent.toLowerCase()}`;
+		} else mapElem = "something";
+
+		mapLoc =
+			document.querySelector<HTMLSpanElement>(
+				"#topbar-container > div > div > div.location-info-region > div > span"
+			)?.textContent ?? "somewhere";
+
+		presenceData.details = `Editing ${mapElem} on the map`;
+		presenceData.state = `Near ${mapLoc}`;
 	} else {
 		presenceData.details = "Browsing";
 		presenceData.state = pages[path] ?? null;
@@ -52,7 +83,6 @@ function fnd() {
 }
 fnd();
 setInterval(fnd, 5000);
-
 presence.on("UpdateData", async () => {
 	if (!presenceData.details) presence.setActivity();
 	else presence.setActivity(presenceData);

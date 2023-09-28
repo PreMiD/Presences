@@ -1,6 +1,6 @@
 name: Feature Request
 description: Request a new feature for an existing presence
-labels: [Feature Request]
+labels: [feature request]
 body:
   - type: markdown
     attributes:

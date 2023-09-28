@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "715536733227450379"
+		clientId: "715536733227450379",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	});
 
 let video = {
 	current: 0,
 	duration: 0,
-	paused: true
+	paused: true,
 };
 
 presence.on(
@@ -22,7 +22,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Animelizm/assets/logo.png",
 	};
 
 	if (isNaN(video.duration) || video.duration <= 0) {
@@ -48,7 +49,7 @@ presence.on("UpdateData", async () => {
 		[presenceData.details] = info;
 	} else presenceData.details = Info;
 
-	presenceData.smallImageKey = video.paused ? "pause" : "play";
+	presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 	presenceData.smallImageText = video.paused
 		? (await strings).pause
 		: (await strings).play;

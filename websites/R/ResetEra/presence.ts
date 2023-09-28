@@ -1,11 +1,12 @@
 const presence = new Presence({
-		clientId: "683031551193514047"
+		clientId: "683031551193514047",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/R/ResetEra/assets/logo.png",
 	};
 
 	if (document.location.pathname === "/") {
@@ -16,27 +17,27 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Help";
 	} else if (document.location.pathname.includes("/help/smilies/")) {
 		presenceData.startTimestamp = browsingTimestamp;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.details = "Help";
 		presenceData.state = "Smilies";
 	} else if (document.location.pathname.includes("/help/bb-codes/")) {
 		presenceData.startTimestamp = browsingTimestamp;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.details = "Help";
 		presenceData.state = "BB codes";
 	} else if (document.location.pathname.includes("/help/cookies/")) {
 		presenceData.startTimestamp = browsingTimestamp;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.details = "Help";
 		presenceData.state = "Cookie usage";
 	} else if (document.location.pathname.includes("/help/privacy-policy/")) {
 		presenceData.startTimestamp = browsingTimestamp;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.details = "Help";
 		presenceData.state = "Privacy Policy";
 	} else if (document.location.pathname.includes("/help/terms/")) {
 		presenceData.startTimestamp = browsingTimestamp;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.details = "Help";
 		presenceData.state = "Terms and rules";
 	} else if (document.location.pathname.includes("/misc/contact/")) {
@@ -47,7 +48,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Style chooser";
 	} else if (document.location.pathname.includes("/threads/")) {
 		presenceData.startTimestamp = browsingTimestamp;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.details = "Thread";
 		presenceData.state = document.querySelector("h1.p-title-value").textContent;
 	} else if (document.location.pathname.includes("/forums/gaming-forum.7/")) {

@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "732586216272429126"
+		clientId: "732586216272429126",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "erisly",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/E/Erisly/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	switch (document.location.hostname) {
@@ -19,12 +20,12 @@ presence.on("UpdateData", async () => {
 					.textContent.replace("- ", "")}`;
 			} else if (document.location.pathname.includes("/changelog")) {
 				presenceData.details = "Reading the latest changelog";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/premium"))
 				presenceData.details = "Viewing Premium perks";
 			else if (document.location.pathname.includes("/about")) {
 				presenceData.details = "Reading about Erisly";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/fanart"))
 				presenceData.details = "Viewing Erisly's Fan Art Collection";
 			else if (document.location.pathname.includes("/team"))

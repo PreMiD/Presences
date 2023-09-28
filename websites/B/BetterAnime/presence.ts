@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "839409255979155516"
+		clientId: "839409255979155516",
 	}),
 	getStrings = async () => {
 		return presence.getStrings(
@@ -16,7 +16,7 @@ const presence = new Presence({
 				viewMovie: "general.viewMovie",
 				buttonViewMovie: "general.buttonViewMovie",
 				watchMovie: "general.watchingMovie",
-				watchSeries: "general.watchingSeries"
+				watchSeries: "general.watchingSeries",
 			},
 			await presence.getSetting<string>("lang").catch(() => "en")
 		);
@@ -66,9 +66,10 @@ const presence = new Presence({
 		oldLang: "",
 		startedSince: ~~(Date.now() / 1000),
 		presenceData: {
-			largeImageKey: "betteranime",
-			smallImageKey: "browse"
-		}
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/BetterAnime/assets/logo.png",
+			smallImageKey: "browse",
+		},
 	};
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
@@ -91,7 +92,7 @@ presence.on("UpdateData", async () => {
 		browse,
 		timestamp,
 		AnimeState,
-		MovieState
+		MovieState,
 	] = await Promise.all([
 		presence.getSetting<string>("lang").catch(() => "en"),
 		presence.getSetting<boolean>("privacy"),
@@ -100,7 +101,7 @@ presence.on("UpdateData", async () => {
 		presence.getSetting<boolean>("browse"),
 		presence.getSetting<boolean>("timestamp"),
 		presence.getSetting<string>("AnimeState"),
-		presence.getSetting<string>("MovieState")
+		presence.getSetting<string>("MovieState"),
 	]);
 
 	if (data.oldLang !== newLang || !strings) {
@@ -127,7 +128,9 @@ presence.on("UpdateData", async () => {
 					.querySelector("div.anime-title")
 					.textContent.replace(data.meta.episode, "");
 
-				data.presenceData.smallImageKey = video.paused ? "pause" : "play";
+				data.presenceData.smallImageKey = video.paused
+					? Assets.Pause
+					: Assets.Play;
 				data.presenceData.smallImageText = video.paused
 					? (await strings).pause
 					: (await strings).play;
@@ -140,21 +143,21 @@ presence.on("UpdateData", async () => {
 				data.presenceData.buttons = [
 					{
 						label: (await strings).viewEpisode,
-						url: document.URL
+						url: document.URL,
 					},
 					{
 						label: (await strings).viewSeries,
 						url: document.querySelector<HTMLAnchorElement>(
 							"div.anime-title > h2 > a"
-						).href
-					}
+						).href,
+					},
 				];
 
 				if (video.paused) {
 					delete data.presenceData.endTimestamp;
 					delete data.presenceData.startTimestamp;
 				}
-			}
+			},
 		},
 		"/anime/(dublado|legendado)/([a-zA-Z0-9-]+)": {
 			disabled: privacy || !anime,
@@ -167,10 +170,10 @@ presence.on("UpdateData", async () => {
 				data.presenceData.buttons = [
 					{
 						label: (await strings).viewSeries,
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
-			}
+			},
 		},
 		"/filme/(dublado|legendado)/([a-zA-Z0-9-]+)/([a-z-]+)": {
 			disabled: !movie,
@@ -182,7 +185,9 @@ presence.on("UpdateData", async () => {
 						""
 					);
 
-				data.presenceData.smallImageKey = video.paused ? "pause" : "play";
+				data.presenceData.smallImageKey = video.paused
+					? Assets.Pause
+					: Assets.Play;
 				data.presenceData.smallImageText = video.paused
 					? (await strings).pause
 					: (await strings).play;
@@ -195,15 +200,15 @@ presence.on("UpdateData", async () => {
 				data.presenceData.buttons = [
 					{
 						label: (await strings).buttonViewMovie,
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 
 				if (video.paused) {
 					delete data.presenceData.endTimestamp;
 					delete data.presenceData.startTimestamp;
 				}
-			}
+			},
 		},
 		"/filme/(dublado|legendado)/([a-zA-Z0-9-]+)": {
 			disabled: privacy || !movie,
@@ -216,16 +221,16 @@ presence.on("UpdateData", async () => {
 				data.presenceData.buttons = [
 					{
 						label: (await strings).buttonViewMovie,
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
-			}
+			},
 		},
 		"/minha-conta": {
 			disabled: privacy,
 			async setPresenceData() {
 				data.presenceData.details = (await strings).viewAccount;
-			}
+			},
 		},
 		"/pesquisa": {
 			async setPresenceData() {
@@ -233,26 +238,26 @@ presence.on("UpdateData", async () => {
 				data.presenceData.state = new URLSearchParams(
 					document.location.search
 				).get("titulo");
-			}
-		}
+			},
+		},
 	};
 
 	data.settings = [
 		{
 			id: "timestamp",
 			delete: true,
-			uses: ["startTimestamp", "endTimestamp"]
+			uses: ["startTimestamp", "endTimestamp"],
 		},
 		{
 			id: "buttons",
 			delete: true,
-			uses: ["buttons"]
+			uses: ["buttons"],
 		},
 		{
 			id: "privacy",
 			delete: true,
 			value: true,
-			uses: ["buttons"]
+			uses: ["buttons"],
 		},
 		{
 			presence: [
@@ -261,16 +266,16 @@ presence.on("UpdateData", async () => {
 					uses: "state",
 					if: {
 						k: privacy,
-						delete: true
-					}
+						delete: true,
+					},
 				},
 				{
 					page: "/pesquisa",
 					uses: "details",
 					if: {
 						k: privacy,
-						v: (await strings).searchSomething
-					}
+						v: (await strings).searchSomething,
+					},
 				},
 				{
 					page: "/anime/(dublado|legendado)/([a-zA-Z0-9-]+)/([a-z-0-9]+)",
@@ -279,23 +284,23 @@ presence.on("UpdateData", async () => {
 					if: [
 						{
 							k: privacy && anime,
-							v: (await strings).watchSeries
+							v: (await strings).watchSeries,
 						},
 						{
 							k: !anime,
-							delete: true
-						}
+							delete: true,
+						},
 					],
 					replace: [
 						{
 							input: "%title%",
-							output: data.meta.title
+							output: data.meta.title,
 						},
 						{
 							input: "%episode%",
-							output: data.meta.episode
-						}
-					]
+							output: data.meta.episode,
+						},
+					],
 				},
 				{
 					page: "/anime/(dublado|legendado)/([a-zA-Z0-9-]+)/([a-z-0-9]+)",
@@ -303,18 +308,18 @@ presence.on("UpdateData", async () => {
 					setTo: AnimeState,
 					if: {
 						k: !anime || privacy || AnimeState.includes("{0}"),
-						delete: true
+						delete: true,
 					},
 					replace: [
 						{
 							input: "%title%",
-							output: data.meta.title
+							output: data.meta.title,
 						},
 						{
 							input: "%episode%",
-							output: data.meta.episode
-						}
-					]
+							output: data.meta.episode,
+						},
+					],
 				},
 				{
 					page: "/filme/(dublado|legendado)/([a-zA-Z0-9-]+)/([a-z-0-9]+)",
@@ -323,19 +328,19 @@ presence.on("UpdateData", async () => {
 					if: [
 						{
 							k: privacy && movie,
-							v: (await strings).watchMovie
+							v: (await strings).watchMovie,
 						},
 						{
 							k: !movie,
-							delete: true
-						}
+							delete: true,
+						},
 					],
 					replace: [
 						{
 							input: "%title%",
-							output: data.meta.title
-						}
-					]
+							output: data.meta.title,
+						},
+					],
 				},
 				{
 					page: "/filme/(dublado|legendado)/([a-zA-Z0-9-]+)/([a-z-0-9]+)",
@@ -343,17 +348,17 @@ presence.on("UpdateData", async () => {
 					setTo: MovieState,
 					if: {
 						k: !movie || privacy || MovieState.includes("{0}"),
-						delete: true
+						delete: true,
 					},
 					replace: [
 						{
 							input: "%title%",
-							output: data.meta.title
-						}
-					]
-				}
-			]
-		}
+							output: data.meta.title,
+						},
+					],
+				},
+			],
+		},
 	];
 
 	for (const [k, v] of Object.entries(data.presence)) {

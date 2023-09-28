@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "687426695417823238"
+	clientId: "687426695417823238",
 });
 
 let currentTime: number, duration: number, paused: boolean, playback;
@@ -18,7 +18,8 @@ presence.on("UpdateData", () => {
 			Math.floor(duration)
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/TVNZ%20OnDemand/assets/logo.png",
 		};
 
 	if (document.location.href.includes("login.tech.tvnz.co.nz")) {
@@ -55,10 +56,10 @@ presence.on("UpdateData", () => {
 			presenceData.details = "Watching a show";
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 		} else {
 			presenceData.details = "Watching a show";
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 		}
 	} else if (document.location.pathname.includes("/shows/")) {
 		presenceData.details = "Viewing a show";

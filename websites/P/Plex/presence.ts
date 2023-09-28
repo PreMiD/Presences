@@ -1,9 +1,5 @@
 const presence = new Presence({
-		clientId: "645028677033132033"
-	}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		clientId: "645028677033132033",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	{ language } = window.navigator; //Make this change-able with presence settings
@@ -137,11 +133,41 @@ function getTranslation(stringName: string): string {
 	}
 }
 
-let user, title, search;
+let isUploading = false;
+
+const uploadedImages: Record<string, string> = {};
+async function uploadImage(urlToUpload: string): Promise<string> {
+	if (isUploading) return "plex";
+
+	if (uploadedImages[urlToUpload]) return uploadedImages[urlToUpload];
+	isUploading = true;
+
+	const file = await fetch(urlToUpload).then(x => x.blob()),
+		formData = new FormData();
+
+	formData.append("file", file, "file");
+
+	const response = await fetch("https://pd.premid.app/create/image", {
+			method: "POST",
+			body: formData,
+		}),
+		responseUrl = await response.text();
+
+	isUploading = false;
+	uploadedImages[urlToUpload] = responseUrl;
+	return responseUrl;
+}
+function isPrivateIp(ip = location.hostname) {
+	return /^(?:(?:10|127|192(\.|-)168|172(\.|-)(?:1[6-9]|2\d|3[01]))(\.|-)|localhost)/.test(
+		ip
+	);
+}
 
 const shortenedURLs: Record<string, string> = {};
 async function getShortURL(url: string) {
+	if (url && isPrivateIp(new URL(url).hostname)) return await uploadImage(url);
 	if (!url || url.length < 256) return url;
+
 	if (shortenedURLs[url]) return shortenedURLs[url];
 	try {
 		const pdURL = await (
@@ -157,60 +183,52 @@ async function getShortURL(url: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "plex",
-		startTimestamp: browsingTimestamp
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/Plex/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.querySelector("#plex")) {
 		if (document.querySelector("#plex > div:nth-child(4) > div")) {
-			const { currentTime, duration, paused } = document.querySelector<
-					HTMLVideoElement | HTMLAudioElement
-				>(
+			const media = document.querySelector<HTMLVideoElement | HTMLAudioElement>(
 					"#plex > div:nth-child(4) > div > div:nth-child(1) > :is(video, audio)"
 				),
-				cover = await presence.getSetting("cover");
+				cover = await presence.getSetting<boolean>("cover");
 
-			[presenceData.startTimestamp, presenceData.endTimestamp] =
-				presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
-
-			presenceData.largeImageKey = cover
-				? await getShortURL(
-						navigator.mediaSession.metadata.artwork[0].src
-							.replace(/width=[0-9]{1,3}/, "width=1024")
-							.replace(/height=[0-9]{1,3}/, "height=1024")
-				  )
-				: "plex";
-
-			presenceData.smallImageKey = paused ? "pause" : "play";
-			presenceData.smallImageText = paused
-				? (await strings).pause
-				: (await strings).play;
-			user =
-				document.querySelector(
-					"#plex > div:nth-child(4) > div > div:nth-child(2) > div > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > a"
-				) ||
-				document.querySelector(
-					"#plex > div:nth-child(4) > div > div:nth-child(4) > div > div > div:nth-child(2) > div:nth-child(1) > div > a"
-				);
-			title =
-				document.querySelector(
-					"#plex > div:nth-child(4) > div > div:nth-child(2) > div > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > span"
-				) ||
-				document.querySelector(
-					"#plex > div:nth-child(4) > div > div:nth-child(4) > div > div > div:nth-child(2) > div:nth-child(1) > div > span"
-				);
-			presenceData.details = user?.textContent;
-			if (title) {
-				title = (title.textContent || "").split("—");
-				presenceData.state = title[1] || title[0];
-				if (title.length > 1) {
-					presenceData.state = `${title[0].replace("·", " - ")} - ${
-						presenceData.state
-					}`;
-				}
+			if (!media) return;
+			if (
+				document.querySelector("[class^=PlayerControls-buttonGroupCenter]")
+					.children.length > 1
+			) {
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(media);
 			}
 
-			if (paused) {
+			if (cover && navigator.mediaSession.metadata?.artwork[0].src) {
+				presenceData.largeImageKey = await getShortURL(
+					navigator.mediaSession.metadata.artwork[0].src
+						.replace(/width=[0-9]{1,3}/, "width=1024")
+						.replace(/height=[0-9]{1,3}/, "height=1024")
+				);
+			}
+
+			presenceData.smallImageKey = media.paused ? Assets.Pause : Assets.Play;
+			presenceData.smallImageText = media.paused ? "Paused" : "Playing";
+
+			const title = document.querySelector(
+					'[class^=PlayerControlsMetadata] [data-testid="metadataTitleLink"]'
+				).textContent,
+				subTitle = Array.from(
+					document.querySelector(
+						'[class^=PlayerControlsMetadata] :is([data-testid="metadataTitleLink"] + span, [data-testid="metadataTitleLink"] + div)'
+					).childNodes
+				)
+					.map(node => node.textContent)
+					.join(" ");
+
+			presenceData.details = title;
+			presenceData.state = subTitle;
+
+			if (media.paused) {
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
 			}
@@ -244,13 +262,13 @@ presence.on("UpdateData", async () => {
 				presenceData.state = title.textContent;
 			}
 		} else if (document.URL.includes("/search")) {
-			search = document.querySelector(
+			const search = document.querySelector(
 				"#plex > div:nth-child(3) > div > div:nth-child(2) > div > div:nth-child(2) > span"
 			);
 
 			presenceData.details = getTranslation("Search");
 			presenceData.state = search.textContent.split('"')[1].replace('"', "");
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else if (document.URL.includes("/com.plexapp.plugins.library")) {
 			presenceData.details = getTranslation("Library");
 			presenceData.state = document.querySelector(

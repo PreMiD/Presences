@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "809093093600133165"
+		clientId: "809093093600133165",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -12,7 +12,7 @@ async function getStrings() {
 			buttonViewProfile: "general.buttonViewProfile",
 			viewProfile: "general.viewProfile",
 			viewTikTok: "tiktok.viewing",
-			buttonViewTikTok: "tiktok.buttonViewTikTok"
+			buttonViewTikTok: "tiktok.buttonViewTikTok",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -23,8 +23,9 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "tiktok",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/TikTok/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
 		[, page, pageType] = location.pathname.split("/");
@@ -57,18 +58,18 @@ presence.on("UpdateData", async () => {
 				document.querySelector(".user-username")?.textContent ??
 				document.querySelector(".author-uniqueId")?.textContent
 			}`;
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			if (!video.paused)
 				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
 			presenceData.buttons = [
 				{
 					label: (await strings).buttonViewTikTok,
-					url: `https://www.tiktok.com${document.URL.split("#")[1]}/`
+					url: `https://www.tiktok.com${document.URL.split("#")[1]}/`,
 				},
 				{
 					label: (await strings).buttonViewProfile,
-					url: document.URL.split("?")[0]
-				}
+					url: document.URL.split("?")[0],
+				},
 			];
 		} else if (pageType === "live") {
 			//Live
@@ -82,25 +83,25 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: (await strings).buttonViewTikTok,
-					url: `https://www.tiktok.com${document.URL.split("#")[1]}/`
+					url: `https://www.tiktok.com${document.URL.split("#")[1]}/`,
 				},
 				{
 					label: (await strings).buttonViewProfile,
-					url: document.URL.split("?")[0]
-				}
+					url: document.URL.split("?")[0],
+				},
 			];
 		} else {
 			presenceData.details = (await strings).viewProfile;
-			presenceData.state = `${document
-				.querySelector(".share-sub-title")
-				?.textContent.trim()} (@${document
-				.querySelector(".share-title")
-				?.textContent.trim()})`;
+			presenceData.state = `${
+				document.querySelector('h2[data-e2e="user-title"]').textContent
+			} (@${
+				document.querySelector('h1[data-e2e="user-subtitle"]').textContent
+			})`;
 			presenceData.buttons = [
 				{
 					label: (await strings).buttonViewProfile,
-					url: document.URL.split("?")[0]
-				}
+					url: document.URL.split("?")[0],
+				},
 			];
 		}
 	} else if (page === "following") {
@@ -109,7 +110,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = detail;
 		presenceData.state = state;
 		presenceData.smallImageText = (await strings).browse;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	}
 
 	const buttons = await presence.getSetting<boolean>("buttons");

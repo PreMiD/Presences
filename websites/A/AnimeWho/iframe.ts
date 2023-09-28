@@ -7,7 +7,7 @@ videoFrame.on("UpdateData", async () => {
 		videoFrame.send({
 			paused: video.paused,
 			duration: video.duration,
-			currentTime: video.currentTime
+			currentTime: video.currentTime,
 		});
 	}
 });

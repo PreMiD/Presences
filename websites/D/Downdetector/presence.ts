@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "656574682916585473"
+		clientId: "656574682916585473",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -13,14 +13,15 @@ let title;
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Downdetector/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname.startsWith("/search/")) {
 		presenceData.details = "Searching for:";
 		[, presenceData.state] = document.location.href.split("?q=");
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.includes("/archive/")) {
 		presenceData.details = "Viewing an archive for:";
 		title = document.querySelector(

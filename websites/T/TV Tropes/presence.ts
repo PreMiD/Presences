@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "864573021762224129"
+		clientId: "864573021762224129",
 	}),
 	startTimestamp = Math.floor(Date.now() / 1e3),
 	whitespaceRegex = /^\s*|\n/gm;
@@ -8,8 +8,9 @@ presence.on("UpdateData", () => {
 	const [, pathCheck, mainPath, namespace] =
 			window.location.pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/TV%20Tropes/assets/logo.png",
+			startTimestamp,
 		};
 
 	function mainWikiPathDetails(namespace: string) {

@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "666412985513672715"
+		clientId: "666412985513672715",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 //! Songs timestamp will reset on new song (see further below)
@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 		[format1, format2, showElapsed] = await Promise.all([
 			presence.getSetting<string>("sFormat1"),
 			presence.getSetting<string>("sFormat2"),
-			presence.getSetting<boolean>("tElapsed")
+			presence.getSetting<boolean>("tElapsed"),
 		]);
 
 	//! Merch website
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 		if (showElapsed) presenceData.startTimestamp = browsingTimestamp;
 
 		presenceData.largeImageKey = "logo_onlyhit";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 
 		//* If they have site information enabled
 		if (document.location.hash.includes("/cart"))
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = format2
 			.replace("%song%", title)
 			.replace("%artist%", artist);
-		presenceData.smallImageKey = paused ? "pause" : "play";
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused
 			? (await strings).pause
 			: (await strings).play;
@@ -108,48 +108,48 @@ presence.on("UpdateData", async () => {
 			if (document.location.pathname.includes("/contact")) {
 				presenceData.details = "Contacting OnlyHit";
 				delete presenceData.state;
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 			} else if (page.includes("Request a Song")) {
 				presenceData.details = "Requesting a song";
 				presenceData.state = `for ${page.split(" - ")[0]}`;
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 			} else if (document.location.pathname.includes("/programs/")) {
 				presenceData.details = "Viewing program:";
 				presenceData.state = page;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/programs")) {
 				presenceData.details = "Browsing through";
 				presenceData.state = "the upcoming programs";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/played-tracks")) {
 				presenceData.details = "Browsing through the";
 				presenceData.state = "recently played tracks";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/team/")) {
 				presenceData.details = "Viewing OnlyHit team member:";
 				presenceData.state = page;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/team")) {
 				presenceData.details = "Viewing the OnlyHit Team";
 				delete presenceData.state;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/where-to-listen")) {
 				presenceData.details = "Viewing where you can";
 				presenceData.state = "listen to OnlyHit";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/discord-bot")) {
 				presenceData.details = "Viewing the Discord Bot";
 				delete presenceData.state;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/search")) {
 				presenceData.details = "Searching for:";
 				[, presenceData.state] = page.split('"');
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			} else {
 				//* Show normal page information if there isn't a "special" one set above
 				presenceData.details = "Viewing page:";
 				presenceData.state = page;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			}
 		}
 	}

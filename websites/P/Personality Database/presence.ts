@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "909403157686288414"
+		clientId: "909403157686288414",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "personality-database",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		useOnlyFirstPersonalityType = await presence.getSetting<boolean>(
 			"useOnlyFirstPersonalityType"
@@ -50,13 +51,13 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Visit profile",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (document.location.pathname === "/search") {
 		const urlParams = new URLSearchParams(window.location.search);
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.details = "Searching:";
 		presenceData.state = urlParams.get("keyword") || urlParams.get("q");
 	} else if (document.location.pathname === "/vote") {
@@ -85,8 +86,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: `Visit ${userName}'s profile`,
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		} else presenceData.details = "Viewing user's profile";
 		presenceData.smallImageKey = "user";

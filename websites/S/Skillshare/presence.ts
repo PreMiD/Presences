@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "642122988925485086"
+		clientId: "642122988925485086",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -11,7 +11,8 @@ let user: string, title: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "sh"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Skillshare/assets/logo.png",
 	};
 
 	if (document.location.hostname === "www.skillshare.com") {
@@ -52,7 +53,7 @@ presence.on("UpdateData", async () => {
 				);
 			}
 			if (!isNaN(duration)) {
-				presenceData.smallImageKey = paused ? "pause" : "play";
+				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = paused
 					? (await strings).pause
 					: (await strings).play;
@@ -70,7 +71,7 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "Viewing class:";
 				presenceData.state = title;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			}
 		} else if (document.location.pathname.includes("/profile/")) {
 			presenceData.startTimestamp = browsingTimestamp;
@@ -80,43 +81,43 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Viewing workshop:";
 			presenceData.state = document.querySelector(".header-text").textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/workshops")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Browsing for workshops...";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else if (document.location.pathname.includes("/browse")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Browsing in type:";
 			presenceData.state = document.querySelector(".main-header").textContent;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else if (document.location.pathname.includes("/search")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Searching for:";
 			presenceData.state = document.querySelector(
 				"#search-form > div > div > div.search-input-wrapper.clear > div.ellipsis.query-placeholder.left"
 			).textContent;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else if (document.location.pathname.includes("/your-classes")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Viewing their classes";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/my-workshops")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Viewing their workshops";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/teach")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Writing their teacher application";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 		} else if (document.location.pathname.includes("/lists/saved-classes")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Viewing their saved classes";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/lists/watch-history")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Viewing their watch history";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/settings")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Changing their settings...";

@@ -20,8 +20,9 @@ presenceSet();
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "dashnet",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/DashNet/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	presenceSet();
@@ -46,7 +47,7 @@ presence.on("UpdateData", () => {
 	} else if (document.location.pathname === "/") {
 		presenceData.details = "Browsing DashNet's";
 		presenceData.state = "video games and other fun things";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/legacy/"))
 		presenceData.details = "Playing Legacy";
 	else if (document.location.pathname.includes("/igm/"))

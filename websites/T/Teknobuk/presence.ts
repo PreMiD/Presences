@@ -1,8 +1,9 @@
 const presence = new Presence({ clientId: "658192386899312651" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	presenceData: PresenceData = {
-		largeImageKey: "buk-logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/Teknobuk/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 function makeRPC(title: string, category: string): void {
@@ -101,8 +102,9 @@ presence.on("UpdateData", () => {
 
 	if (!presenceData.details) {
 		presence.setActivity({
-			largeImageKey: "buk-logo",
-			details: "Bilinmeyen bir sayfada..."
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/Teknobuk/assets/logo.png",
+			details: "Bilinmeyen bir sayfada...",
 		});
 	} else presence.setActivity(presenceData);
 });

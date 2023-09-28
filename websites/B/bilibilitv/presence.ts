@@ -1,97 +1,146 @@
 const presence = new Presence({
-		clientId: "543380687466528772"
+		clientId: "972073369564483584",
 	}),
-	browsingStamp = Math.floor(Date.now() / 1000),
-	urlpath = document.location.pathname.split("/"),
-	getElement = (query: string): string | undefined => {
-		return document.querySelector(query)?.textContent;
-	},
-	getEpisode = (query: string): string | undefined => {
-		return document
-			.querySelector(query)
-			?.textContent.split("E")[1]
-			.replace(/- Bstation/gi, "");
-	};
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+async function getStrings() {
+	return presence.getStrings(
+		{
+			play: "general.playing",
+			pause: "general.paused",
+			search: "general.search",
+			episode: "general.episode",
+			browsing: "general.browsing",
+			viewHome: "general.viewHome",
+			viewChannel: "general.viewChannel",
+			watchingVid: "general.watchingVid",
+			viewCategory: "general.viewCategory",
+			readingAbout: "general.readingAbout",
+			searchSomething: "general.searchSomething",
+			buttonWatchVideo: "general.buttonWatchVideo",
+			buttonViewEpisode: "general.buttonViewEpisode",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-			largeImageKey: "icon",
-			details: "Idle"
+	const newLang = await presence.getSetting<string>("lang").catch(() => "en"),
+		presenceData: PresenceData = {
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/bilibilitv/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
-		path = document.location.pathname.toLowerCase();
-
-	// Main Site
-
-	if (path === "/en") {
-		presenceData.smallImageKey = "idle";
-		presenceData.details = "Currently browsing";
-		presenceData.state = "Homepage";
-	} else if (path.startsWith("/en/play")) {
-		presenceData.smallImageKey = "play";
-		presenceData.smallImageText = "Watching a show";
-		presenceData.details = getElement("h1.video-info__title");
-		presenceData.state = `Episode ${getEpisode("title")}`;
-		presenceData.startTimestamp = browsingStamp;
-		presenceData.buttons = [
-			{
-				label: "Watch this show",
-				url: `https://www.bilibili.tv/en/play/${urlpath[3]}`
-			}
-		];
-	} else if (path.startsWith("/en/video")) {
-		presenceData.smallImageKey = "play";
-		presenceData.smallImageText = "Watching a video";
-		presenceData.details = getElement("h1.video-info__title");
-		presenceData.state = `by ${getElement(".video-info__creator--nickname")}`;
-		presenceData.startTimestamp = browsingStamp;
-		presenceData.buttons = [
-			{
-				label: "Watch this video",
-				url: `https://www.bilibili.tv/en/video/${urlpath[3]}`
-			}
-		];
-	} else if (path.startsWith("/en/space")) {
-		presenceData.smallImageText = "Viewing Space";
-		presenceData.details = `Viewing ${getElement("h1.user-title")}`;
-		presenceData.state = getElement("p.user-data__number");
-		presenceData.buttons = [
-			{
-				label: "View this creator",
-				url: `https://www.bilibili.tv/en/space/${urlpath[3]}`
-			}
-		];
-	} else if (path.startsWith("/en/index")) {
-		presenceData.details = "Finding a show";
-		presenceData.state = "Index";
-	} else if (path.startsWith("/en/popular")) {
-		presenceData.details = "Finding popular videos";
-		presenceData.state = "Videos";
-	} else if (path.startsWith("/en/history")) {
-		presenceData.details = "Looking at their history";
-		presenceData.state = "History";
-	} else if (path.startsWith("/en/download")) {
-		presenceData.details = "App Download";
-		presenceData.state = "Download";
+		{ hostname, href, pathname } = document.location,
+		pathArray = pathname?.split("/"),
+		title = document.querySelector(".bstar-meta__title")?.textContent,
+		playing = !document.querySelector(
+			"img.player-mobile-icon.player-mobile-pause-icon.player-mobile-active"
+		),
+		thumbnail =
+			document
+				.querySelector<HTMLMetaElement>('meta[property="og:image"]')
+				?.content?.split("?")?.[0] ??
+			"https://cdn.rcd.gg/PreMiD/websites/B/bilibilitv/assets/logo.png";
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
 	}
-
-	// Studio
-	if (document.location.hostname === "studio.bilibili.tv") {
-		if (path.startsWith("/archive/new")) {
-			presenceData.details = "Uploading a video";
-			presenceData.state = "Bilibili Studio";
-		} else if (path.startsWith("/archive-list")) {
-			presenceData.details = "Viewing uploaded videos";
-			presenceData.state = "Bilibili Studio";
-		} else if (path.startsWith("/data-analysis")) {
-			presenceData.details = "Checking analytics";
-			presenceData.state = "Bilibili Studio";
-		} else if (path.startsWith("/reply")) {
-			presenceData.details = "Replying to comments";
-			presenceData.state = "Bilibili Studio";
-		} else {
-			presenceData.details = "Viewing dashboard";
-			presenceData.state = "Bilibili Studio";
+	// Main Site
+	if (hostname === "www.bilibili.tv") {
+		switch (pathArray[2]) {
+			case "video": {
+				presenceData.details = strings.watchingVid;
+				presenceData.state = title;
+				presenceData.buttons = [
+					{
+						label: strings.buttonWatchVideo,
+						url: href,
+					},
+				];
+				break;
+			}
+			case "play": {
+				presenceData.details = title;
+				presenceData.state = `${strings.episode} ${document
+					.querySelector("a.ep-item.ep-item--active")
+					.textContent?.replace(/\D/g, "")}`;
+				presenceData.buttons = [
+					{
+						label: strings.buttonViewEpisode,
+						url: href,
+					},
+				];
+				break;
+			}
+			case "media": {
+				presenceData.details = strings.readingAbout.replace(":", "");
+				presenceData.state = document.querySelector(
+					".media-detail__title"
+				).textContent;
+				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageText = strings.browsing;
+				break;
+			}
+			case "popular": {
+				presenceData.details = strings.viewCategory.replace(":", "");
+				presenceData.state = "Popular";
+				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageText = strings.browsing;
+				break;
+			}
+			case "space": {
+				presenceData.details = strings.viewChannel.replace(":", "");
+				presenceData.state =
+					document.querySelector(".space-info__name")?.textContent ??
+					strings.searchSomething;
+				break;
+			}
+			case "index": {
+				presenceData.details = strings.search;
+				presenceData.state =
+					document.querySelector(
+						"a.router-link-exact-active.router-link-active.anime-radio__tag.anime-radio__tag--active"
+					)?.textContent ?? strings.searchSomething;
+				presenceData.smallImageKey = Assets.Search;
+				presenceData.smallImageText = strings.browsing;
+				break;
+			}
+			default: {
+				presenceData.details = strings.viewHome;
+				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageText = strings.browsing;
+				break;
+			}
 		}
+		if (pathArray[2] === "video" || pathArray[2] === "play") {
+			presenceData.largeImageKey = thumbnail;
+			presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
+			if (playing) {
+				[, presenceData.endTimestamp] = presence.getTimestamps(
+					presence.timestampFromFormat(
+						document.querySelector(".player-mobile-time-current-text")
+							?.textContent ?? "00:00"
+					),
+					presence.timestampFromFormat(
+						document.querySelector(".player-mobile-time-total-text")
+							?.textContent ?? "00:00"
+					)
+				);
+			}
+		}
+		// Studio
+	} else if (hostname === "studio.bilibili.tv") {
+		if (pathArray[1])
+			presenceData.details = document.querySelector(".is-active").textContent;
+		else {
+			presenceData.details = document.querySelector(
+				".nav-menu__menu-title"
+			).textContent;
+		}
+		presenceData.state = "Bilibili Studio";
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

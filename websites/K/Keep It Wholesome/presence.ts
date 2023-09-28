@@ -1,13 +1,14 @@
 const presence = new Presence({
-		clientId: "748255086286733442"
+		clientId: "748255086286733442",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "Keep It Wholesome",
-		largeImageKey: "lg",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/K/Keep%20It%20Wholesome/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/" || !document.location.pathname) {

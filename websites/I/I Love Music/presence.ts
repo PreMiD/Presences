@@ -1,228 +1,117 @@
-//______________________________________________________________________________________
 const presence = new Presence({
-	clientId: "477919120789078026"
-});
-let { language } = navigator;
-
-switch (language) {
-	// By ACertainCoder#9011
-	//German
-	//---------------------------------------
-	case "de":
-	case "de-CH":
-	case "de-AT":
-	case "de-LU":
-	case "de-LI":
-		language = "de";
-		break;
-
-	//English / Unknown
-	//---------------------------------------
-	case "en":
-	case "en-US":
-	case "en-EG":
-	case "en-AU":
-	case "en-GB":
-	case "en-CA":
-	case "en-NZ":
-	case "en-IE":
-	case "en-ZA":
-	case "en-JM":
-	case "en-BZ":
-	case "en-TT":
-	default:
-		language = "en";
-		break;
+		clientId: "477919120789078026",
+	}),
+	browsingStamp = Math.floor(Date.now() / 1000);
+async function getStrings() {
+	return presence.getStrings(
+		{
+			browse: "general.browsing",
+			buttonViewPage: "general.buttonViewPage",
+			search: "general.searchFor",
+		},
+		await presence.getSetting<string>("lang").catch(() => "de")
+	);
 }
-//__________________________________________________________________________________________
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/I/I%20Love%20Music/assets/logo.png",
+}
+
+async function imgPath(path: string, hostname: string) {
+	if (path) {
+		if (path.includes(hostname)) return `https://${path.replace("//", "")}`;
+		else return `https://${hostname}${path}`;
+	} else return Assets.Logo;
+}
+function capitalizeFirstLetter(string: string) {
+	if (string) {
+		return (
+			string.trim().charAt(0).toUpperCase() +
+			string.trim().slice(1).toLowerCase()
+		);
+	}
+}
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
-	};
-	if (parseInt(document.querySelector("#playstop").textContent) > 0) {
-		switch (language) {
-			case "de":
-				presenceData.details = "Spielt gerade";
-				break;
-			case "en":
-				presenceData.details = "Listening to";
-				break;
-		}
-		presenceData.state =
-			document.querySelectorAll(".channelname")[0].textContent;
-		presenceData.smallImageKey = "live";
-		presence.setActivity(presenceData);
-	} else {
-		try {
-			switch (language) {
-				case "de":
-					presenceData.details = "Stöbert durch";
-					break;
-				case "en":
-					presenceData.details = "Browsing through";
-					break;
-			}
-			presenceData.state = document.querySelector("#content > h1").textContent;
-			presence.setActivity(presenceData);
-		} catch (e) {
-			//nothing
-		}
-		// __________________________________________________________________ Path's
-		switch (document.location.pathname) {
-			case "/": {
-				// --------------------- Home
-				switch (language) {
-					case "de":
-						presenceData.details = "Stöbert durch";
-						presenceData.state = "die Startseite";
-						break;
-					case "en":
-						presenceData.details = "Browsing through";
-						presenceData.state = "mainpage";
-						break;
-				}
-				presence.setActivity(presenceData);
-
-				break;
-			}
-			case "/voting/": {
-				//--------- Voting for Songs
-				switch (language) {
-					case "de":
-						presenceData.details = "Votet für";
-						presenceData.state = "neue Lieder";
-						break;
-					case "en":
-						presenceData.details = "Voting for";
-						presenceData.state = "new songs";
-						break;
-				}
-				presence.setActivity(presenceData);
-
-				break;
-			}
-			case "/the-battle/": {
-				//------- Voting for The Battle
-				switch (language) {
-					case "de":
-						presenceData.details = "Votet für";
-						presenceData.state = "The Battle";
-						break;
-					case "en":
-						presenceData.details = "Voting for";
-						presenceData.state = "the battlee";
-						break;
-				}
-				presence.setActivity(presenceData);
-
-				break;
-			}
-			case "/charts/": {
-				// ----------- Charts
-				switch (language) {
-					case "de":
-						presenceData.details = "Sucht in Charts...";
-						break;
-					case "en":
-						presenceData.details = "Looking for charts...";
-						break;
-				}
-				presence.setActivity(presenceData);
-
-				break;
-			}
-			case "/dance/": {
-				// ------------- Dance & DJ's
-				switch (language) {
-					case "de":
-						presenceData.details = "Sucht in Dance & DJ's...";
-						break;
-					case "en":
-						presenceData.details = "Looking for";
-						presenceData.state = "Dance & DJ's...";
-						break;
-				}
-				presence.setActivity(presenceData);
-
-				break;
-			}
-			case "/hiphop/": {
-				// ------------- Hip Hop
-				switch (language) {
-					case "de":
-						presenceData.details = "Sucht in Hip Hop...";
-						break;
-					case "en":
-						presenceData.details = "Looking for Hip Hop...";
-						break;
-				}
-				presence.setActivity(presenceData);
-
-				break;
-			}
-			case "/channels/": {
-				// ------------- Channellist
-				switch (language) {
-					case "de":
-						presenceData.details = "Durchsucht die";
-						presenceData.state = "Channelliste";
-						break;
-					case "en":
-						presenceData.details = "Search in";
-						presenceData.state = "Channel list";
-						break;
-				}
-				presence.setActivity(presenceData);
-
-				break;
-			}
-			case "/streams/": {
-				// --------------- Streams
-				switch (language) {
-					case "de":
-						presenceData.details = "Sucht nach";
-						presenceData.state = "Streamlinks";
-						break;
-					case "en":
-						presenceData.details = "Looking for";
-						presenceData.state = "stream links";
-						break;
-				}
-				presence.setActivity(presenceData);
-
-				break;
-			}
-			case "/datenschutz/": {
-				// ------------- Privacy policy
-				switch (language) {
-					case "de":
-						presenceData.details = "Liest den Datenschutz...";
-						break;
-					case "en":
-						presenceData.details = "Reading privacy policy";
-						break;
-				}
-				presence.setActivity(presenceData);
-
-				break;
-			}
-			case "/impressum/": {
-				// ---------------- Imprint
-				switch (language) {
-					case "de":
-						presenceData.details = "Liest das Impressum...";
-						break;
-					case "en":
-						presenceData.details = "Reading imprint...";
-						break;
-				}
-				presence.setActivity(presenceData);
-
-				break;
-			}
-			// No default
-		}
-		presence.setActivity(presenceData);
+			largeImageKey: Assets.Logo,
+			startTimestamp: browsingStamp,
+		},
+		{ pathname, hostname, href } = document.location,
+		playing = document.querySelector('section[class*="playing"]'),
+		currently = playing
+			?.querySelector('[class="bottom"]')
+			?.querySelectorAll("h2,h3"),
+		search = document.querySelector<HTMLInputElement>('[type="text"]'),
+		newLang = await presence.getSetting<string>("lang").catch(() => "de");
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
 	}
+	if (
+		search?.value &&
+		document.querySelector('[class="toggleMenu search display-menu"]')
+	) {
+		presenceData.details = strings.search;
+		presenceData.state =
+			search?.value ||
+			document
+				.querySelector(
+					"body > div.container.main-container.min-vh-100.px-3 > h3"
+				)
+				?.textContent.split('"')[1] ||
+			"Niks";
+		presenceData.smallImageKey = Assets.Search;
+		presence.setActivity(presenceData);
+		return;
+	}
+	if (document.querySelector('[class="toggleMenu left display-menu"]'))
+		presenceData.details = "Anzeige des Menüs";
+	else if (Number(document.querySelector("#playstop")?.textContent) === 1) {
+		presenceData.buttons = [
+			{
+				label: "Hören Sie Den Sender",
+				url: href,
+			},
+		];
+		presenceData.details = capitalizeFirstLetter(
+			document.querySelector(
+				"#content > div.single-outer.channelbgcolor > section.bottom.channelinfo > h2"
+			)?.textContent ??
+				currently?.[1]?.textContent ??
+				"Das Radio hören"
+		);
+		presenceData.state = capitalizeFirstLetter(
+			document.querySelector(
+				"#content > div.single-outer.channelbgcolor > section.bottom.channelinfo > h3"
+			)?.textContent ?? currently?.[0]?.textContent
+		);
+		presenceData.smallImageKey = Assets.Play;
+		presenceData.smallImageText = capitalizeFirstLetter(
+			document.querySelector('[class="channel-headline big"]')?.textContent ??
+				playing?.querySelector("h1")?.textContent
+		);
+		presenceData.largeImageKey = await imgPath(
+			document
+				.querySelector('[class="single-outer"]')
+				?.querySelector("img")
+				?.getAttribute("src") ??
+				playing?.querySelector("img")?.getAttribute("src"),
+			hostname
+		);
+	} else if (pathname !== "/") {
+		presenceData.details = `${capitalizeFirstLetter(
+			document.querySelector('[class="big "]')?.textContent
+		)} anschauen`;
+		presenceData.buttons = [
+			{
+				label: strings.buttonViewPage,
+				url: href,
+			},
+		];
+	} else presenceData.details = strings.browse;
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

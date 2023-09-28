@@ -1,13 +1,14 @@
 const browsingTimestamp = Math.floor(Date.now() / 1000),
 	presence = new Presence({
-		clientId: "759921592926339072"
+		clientId: "759921592926339072",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "destiny",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Destiny.gg/assets/logo.png",
 		smallImageKey: "really_bad_d_gg_logo_upscale",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (

@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "664216462038401066"
+		clientId: "664216462038401066",
 	}),
 	strings = presence.getStrings({
-		playing: "presence.playback.playing",
-		paused: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		playing: "general.playing",
+		paused: "general.paused",
+		browsing: "general.browsing",
 	});
 
 function seriesName(name: string): string {
@@ -47,7 +47,8 @@ presence.on("iFrameData", async (msg: Data | null) => {
 presence.on("UpdateData", async () => {
 	const path = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "blutv"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/BluTV/assets/logo.png",
 		};
 
 	if (!path.includes("izle")) {
@@ -57,9 +58,8 @@ presence.on("UpdateData", async () => {
 
 	if (data) {
 		if (data.series) {
-			presenceData.details = data.series.name
-				? data.series.name
-				: seriesName(path.split("/")[3].replace(/-/gi, " "));
+			presenceData.details =
+				data.series.name ?? seriesName(path.split("/")[3].replace(/-/gi, " "));
 			presenceData.state = `${data.series.season} | ${data.series.ep}`;
 		} else {
 			presenceData.details = path.startsWith("/canli-yayin")
@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (video) {
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).paused
 				: (await strings).playing;

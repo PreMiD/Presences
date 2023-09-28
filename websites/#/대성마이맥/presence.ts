@@ -1,15 +1,16 @@
 const presence = new Presence({
-		clientId: "867795822711013387"
+		clientId: "867795822711013387",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/%23/%EB%8C%80%EC%84%B1%EB%A7%88%EC%9D%B4%EB%A7%A5/assets/logo.png",
 	};
 
 	if (document.location.pathname.includes("/common/aquaplayer/")) {
@@ -25,11 +26,11 @@ presence.on("UpdateData", async () => {
 				video.currentTime,
 				video.duration
 			);
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = (await strings).play;
 		} else {
 			delete presenceData.endTimestamp;
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = (await strings).pause;
 		}
 	} else {
@@ -83,7 +84,7 @@ presence.on("UpdateData", async () => {
 			).textContent.split("\n");
 			[presenceData.details, presenceData.state] = [
 				temp[0].replace("영역", " 영역"),
-				temp[1].replace("선생님", " 선생님")
+				temp[1].replace("선생님", " 선생님"),
 			];
 		} else if (
 			document.location.pathname.includes("/myzone/mypage/myInfo/msgList.ds")

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "630478614894477337"
+		clientId: "630478614894477337",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -19,7 +19,7 @@ async function getStrings() {
 			browsingSheet: "google docs.browsingSheet",
 			editingPresentation: "google docs.editingPresentation",
 			browsingPresentation: "google docs.browsingPresentation",
-			vieiwngPresentation: "google docs.viewingPresentation"
+			vieiwngPresentation: "google docs.viewingPresentation",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -30,7 +30,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		privacy = await presence.getSetting<boolean>("privacy"),
 		newLang = await presence.getSetting<string>("lang").catch(() => "en");

@@ -38,7 +38,7 @@ class DaumPresence extends Presence {
 }
 
 const presence = new DaumPresence({
-		clientId: "829266476875120650"
+		clientId: "829266476875120650",
 	}),
 	data: {
 		settings?: {
@@ -66,7 +66,7 @@ const presence = new DaumPresence({
 			};
 		};
 	} = {
-		presence: null
+		presence: null,
 	},
 	startTime = Math.floor(Date.now() / 1000);
 
@@ -92,8 +92,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "daum",
-		startTimestamp: startTime
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Daum/assets/logo.png",
+		startTimestamp: startTime,
 	};
 
 	switch (presence.serviceName) {
@@ -120,8 +120,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						url: document.URL,
-						label: "Read Article"
-					}
+						label: "Read Article",
+					},
 				];
 
 				if (video) {
@@ -129,7 +129,9 @@ presence.on("UpdateData", async () => {
 					presenceData.state =
 						video.title ?? document.querySelector("h3.tit_view")?.textContent;
 
-					presenceData.smallImageKey = video.paused ? "pause" : "play";
+					presenceData.smallImageKey = video.paused
+						? Assets.Pause
+						: Assets.Play;
 					presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
 					[, presenceData.endTimestamp] = presence.getTimestamps(
@@ -140,8 +142,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Watch Video",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 
 					if (video.paused) {
@@ -149,7 +151,7 @@ presence.on("UpdateData", async () => {
 						delete presenceData.endTimestamp;
 					}
 				}
-			}
+			},
 		},
 		"/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)": {
 			service: "DAUM_BLOG",
@@ -161,10 +163,10 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Read Blog",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
-			}
+			},
 		},
 		"vod/view/([0-9a-zA-Z]+)": {
 			service: "DAUM_AUTO",
@@ -173,7 +175,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state =
 					document.querySelector("strong.tit_vod")?.textContent;
 
-				presenceData.smallImageKey = video?.paused ? "pause" : "play";
+				presenceData.smallImageKey = video?.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video?.paused ? "Paused" : "Playing";
 
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
@@ -182,15 +184,15 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Watch Video",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 
 				if (video?.paused) {
 					delete presenceData.startTimestamp;
 					delete presenceData.endTimestamp;
 				}
-			}
+			},
 		},
 		"/newcar/model/([0-9a-zA-Z]+)": {
 			service: "DAUM_AUTO",
@@ -202,10 +204,10 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Car",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
-			}
+			},
 		},
 		"/moviedb/": {
 			service: "DAUM_MOVIE",
@@ -217,10 +219,10 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Movie",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
-			}
+			},
 		},
 		"/person/": {
 			service: "DAUM_MOVIE",
@@ -232,10 +234,10 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Actor",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
-			}
+			},
 		},
 		"/moviedb/contents": {
 			service: "DAUM_MOVIE",
@@ -245,7 +247,9 @@ presence.on("UpdateData", async () => {
 					presenceData.state =
 						document.querySelector("strong.tit_player")?.textContent;
 
-					presenceData.smallImageKey = video.paused ? "pause" : "play";
+					presenceData.smallImageKey = video.paused
+						? Assets.Pause
+						: Assets.Play;
 					presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
 					[, presenceData.endTimestamp] = presence.getTimestamps(
@@ -256,8 +260,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Watch Video",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 
 					if (video.paused) {
@@ -265,7 +269,7 @@ presence.on("UpdateData", async () => {
 						delete presenceData.endTimestamp;
 					}
 				}
-			}
+			},
 		},
 		"/video/([0-9a-zA-Z]+)": {
 			service: "DAUM_SPORTS",
@@ -274,7 +278,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state =
 					document.querySelector("strong.tit_vod")?.textContent;
 
-				presenceData.smallImageKey = video?.paused ? "pause" : "play";
+				presenceData.smallImageKey = video?.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video?.paused ? "Paused" : "Playing";
 
 				[, presenceData.endTimestamp] = presence.getTimestamps(
@@ -285,15 +289,15 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Watch Video",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 
 				if (video?.paused) {
 					delete presenceData.startTimestamp;
 					delete presenceData.endTimestamp;
 				}
-			}
+			},
 		},
 		"/tv/([0-9]+)/video/([0-9]+)": {
 			service: "DAUM_ENTERTAIN",
@@ -305,7 +309,7 @@ presence.on("UpdateData", async () => {
 					.querySelector("a.link_txt")
 					?.textContent.trim();
 
-				presenceData.smallImageKey = video?.paused ? "pause" : "play";
+				presenceData.smallImageKey = video?.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video?.paused ? "Paused" : "Playing";
 
 				[, presenceData.endTimestamp] = presence.getTimestamps(
@@ -316,96 +320,96 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Watch Video",
-						url: document.URL
+						url: document.URL,
 					},
 					{
 						label: "View Channel",
-						url: document.querySelector<HTMLAnchorElement>("a.link_txt")?.href
-					}
+						url: document.querySelector<HTMLAnchorElement>("a.link_txt")?.href,
+					},
 				];
 
 				if (video?.paused) {
 					delete presenceData.startTimestamp;
 					delete presenceData.endTimestamp;
 				}
-			}
+			},
 		},
 		"#INBOX": {
 			service: "DAUM_MAIL",
 			hash: true,
 			setPresenceData() {
 				presenceData.details = "Viewing Inbox";
-			}
+			},
 		},
 		"#INBOX/": {
 			service: "DAUM_MAIL",
 			hash: true,
 			setPresenceData() {
 				presenceData.details = "Reading mail";
-			}
+			},
 		},
 		"#MINE": {
 			service: "DAUM_MAIL",
 			hash: true,
 			setPresenceData() {
 				presenceData.details = "Viewing Inbox";
-			}
+			},
 		},
 		"#DRAFT": {
 			service: "DAUM_MAIL",
 			hash: true,
 			setPresenceData() {
 				presenceData.details = "Viewing drafts";
-			}
+			},
 		},
 		"#SENT": {
 			service: "DAUM_MAIL",
 			hash: true,
 			setPresenceData() {
 				presenceData.details = "Viewing sent";
-			}
+			},
 		},
 		"#TRASH": {
 			service: "DAUM_MAIL",
 			hash: true,
 			setPresenceData() {
 				presenceData.details = "Viewing trash";
-			}
+			},
 		},
 		"#SPAM": {
 			service: "DAUM_MAIL",
 			hash: true,
 			setPresenceData() {
 				presenceData.details = "Viewing spam";
-			}
+			},
 		},
 		"#ALL": {
 			service: "DAUM_MAIL",
 			hash: true,
 			setPresenceData() {
 				presenceData.details = "Viewing all mail";
-			}
+			},
 		},
 		"#UNREAD": {
 			service: "DAUM_MAIL",
 			hash: true,
 			setPresenceData() {
 				presenceData.details = "Viewing unread mail";
-			}
+			},
 		},
 		"#setting": {
 			service: "DAUM_MAIL",
 			hash: true,
 			setPresenceData() {
 				presenceData.details = "Viewing thier settings";
-			}
+			},
 		},
 		"\\?composer": {
 			service: "DAUM_MAIL",
 			href: true,
 			setPresenceData() {
 				presenceData.details = "Composing a new mail";
-			}
+			},
 		},
 		"/([a-zA-Z0-9]+)": {
 			service: "DAUM_CAFE",
@@ -416,10 +420,10 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Cafe",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
-			}
+			},
 		},
 		"/([0-9a-zA-Z]+)/([0-9A-Za-z]+)": {
 			service: "DAUM_CAFE",
@@ -432,10 +436,10 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Page",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
-			}
+			},
 		},
 		"/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)": {
 			service: "DAUM_CAFE",
@@ -448,24 +452,24 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Read Article",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
-			}
-		}
+			},
+		},
 	};
 
 	data.settings = [
 		{
 			id: "timestamp",
 			delete: true,
-			data: ["startTimestamp", "endTimestamp"]
+			data: ["startTimestamp", "endTimestamp"],
 		},
 		{
 			id: "buttons",
 			delete: true,
-			data: ["buttons"]
-		}
+			data: ["buttons"],
+		},
 	];
 
 	for (const [pathname, PData] of Object.entries(data.presence)) {

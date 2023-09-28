@@ -1,8 +1,9 @@
 const presence = new Presence({
-		clientId: "631166262881550359"
+		clientId: "631166262881550359",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Aternos/assets/logo.jpg",
 	},
 	paths = {
 		":": "Home Page",
@@ -18,7 +19,7 @@ const presence = new Presence({
 		addons: "Panel - Plugins",
 		worlds: "Panel - Worlds",
 		backups: "Panel - Backups",
-		access: "Panel - Access"
+		access: "Panel - Access",
 	};
 
 presence.on("UpdateData", async () => {

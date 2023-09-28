@@ -1,21 +1,22 @@
 const presence = new Presence({
-		clientId: "609791567540256780"
+		clientId: "609791567540256780",
 	}),
 	startTimestamp = Math.floor(Date.now() / 1000),
 	{ pathname } = window.location,
 	strings = presence.getStrings({
-		browsing: "presence.activity.browsing"
+		browsing: "general.browsing",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "union_lg",
-		startTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/U/Union%20Mang%C3%A1s/assets/logo.png",
+		startTimestamp,
 	};
 
 	if (pathname.startsWith("/lista-mangas")) {
 		presenceData.details = "Procurando um mangá";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Procurando";
 	} else if (pathname.startsWith("/manga")) {
 		presenceData.details = "Olhando um mangá";
@@ -38,11 +39,11 @@ presence.on("UpdateData", async () => {
 			}`;
 		} else presenceData.state = mangaChapter;
 
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Lendo";
 	} else if (pathname.startsWith("/scans")) {
 		presenceData.details = "Procurando uma Scan";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Procurando";
 	} else presenceData.details = (await strings).browsing;
 

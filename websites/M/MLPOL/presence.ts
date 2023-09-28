@@ -1,12 +1,12 @@
 const browsingTimestamp = Math.floor(Date.now() / 1000),
 	presence = new Presence({
-		clientId: "781944209770151997"
+		clientId: "781944209770151997",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/MLPOL/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	//I was gonna do a bunch of DOM manipulation but I give up on life so I'm just gonna do the most spaghetti way of doing this humanly possible.

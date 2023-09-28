@@ -44,14 +44,14 @@ class WeTV extends Presence {
 }
 
 const presence = new WeTV({
-	clientId: "840271335183351902"
+	clientId: "840271335183351902",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "Browsing...",
-		largeImageKey: "wetv",
-		smallImageKey: "browse"
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/WeTV/assets/logo.png",
+		smallImageKey: "browse",
 	};
 
 	if (document.location.pathname.includes("/play/")) {
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = presence.getTitle();
 			presenceData.endTimestamp = presence.getTimestampsfromMedia(video).pop();
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
 			if (video.paused) delete presenceData.endTimestamp;

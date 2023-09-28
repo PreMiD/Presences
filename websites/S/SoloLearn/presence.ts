@@ -1,8 +1,8 @@
 const presence = new Presence({
-		clientId: "668173626775830529"
+		clientId: "668173626775830529",
 	}),
 	strings = presence.getStrings({
-		browsing: "presence.activity.browsing"
+		browsing: "general.browsing",
 	}),
 	getElement = (query: string): string | undefined =>
 		document.querySelector(query)?.textContent.trimStart().trimEnd(),
@@ -14,37 +14,37 @@ let elapsed = Math.floor(Date.now() / 1000),
 
 const statics = {
 	"/User/Login": {
-		details: "Logging In..."
+		details: "Logging In...",
 	},
 	"/User/Register": {
-		details: "Registering..."
+		details: "Registering...",
 	},
 	"/User/Logout": {
-		details: "Logging Out..."
+		details: "Logging Out...",
 	},
 	"/User/Edit": {
-		details: "Editing Profile..."
+		details: "Editing Profile...",
 	},
 	"/Courses/": {
 		details: "Browsing...",
-		state: "Courses"
+		state: "Courses",
 	},
 	"/Features/": {
 		details: "Viewing...",
-		state: "Features"
+		state: "Features",
 	},
 	"/Contact/": {
 		details: "Viewing...",
-		state: "Contact"
+		state: "Contact",
 	},
 	"/Terms-of-Use/": {
 		details: "Viewing...",
-		state: "Terms of Use"
+		state: "Terms of Use",
 	},
 	"/faq/": {
 		details: "Viewing...",
-		state: "FAQ"
-	}
+		state: "FAQ",
+	},
 };
 
 presence.on("UpdateData", async () => {
@@ -56,8 +56,9 @@ presence.on("UpdateData", async () => {
 		showTimestamps = await presence.getSetting<boolean>("timestamp");
 
 	let presenceData: PresenceData = {
-		largeImageKey: "sololearn",
-		startTimestamp: elapsed
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/SoloLearn/assets/logo.png",
+		startTimestamp: elapsed,
 	};
 
 	if (href !== prevUrl) {
@@ -133,7 +134,7 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) {
 		if (presenceData.details.match("(Browsing|Viewing)")) {
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = (await strings).browsing;
 		}
 		if (!showTimestamps) {

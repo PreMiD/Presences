@@ -1,11 +1,11 @@
 const presence = new Presence({
-	clientId: "811305223783448627"
+	clientId: "811305223783448627",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "juke-crown",
-		buttons: [{ label: "Radio luisteren", url: document.location.href }]
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/J/JUKE/assets/logo.png",
+		buttons: [{ label: "Radio luisteren", url: document.location.href }],
 	};
 
 	if (document.querySelector("span[class*=eC-title]")) {
@@ -35,16 +35,16 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (document.querySelector("rect")) {
-		presenceData.smallImageKey = "playing";
+		presenceData.smallImageKey = Assets.Play;
 		presenceData.smallImageText = "Wordt afgespeeld";
 		presenceData.buttons = [
-			{ label: "Ook radio luisteren", url: document.location.href }
+			{ label: "Ook radio luisteren", url: document.location.href },
 		];
 	} else if (document.querySelector("[class*=spinner]")) {
 		presenceData.smallImageKey = "waiting";
 		presenceData.smallImageText = "Wordt geladen";
 	} else if (document.querySelector("polygon")) {
-		presenceData.smallImageKey = "paused";
+		presenceData.smallImageKey = Assets.Pause;
 		presenceData.smallImageText = "Gepauzeerd";
 	}
 

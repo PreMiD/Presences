@@ -1,126 +1,108 @@
 const presence = new Presence({
-		clientId: "887975742812590120"
+		clientId: "887975742812590120",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
-		showButtons = await presence.getSetting<boolean>("buttons"),
-		presenceData: PresenceData = {
-			largeImageKey: "caards_logo",
-			details: "Viewing unsupported page"
+	let presenceData: PresenceData = {
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/C/Caards/assets/logo.png",
+		details: "Viewing unsupported page",
+	};
+	const { pathname, href, host } = document.location,
+		[showTimestamp, showButtons] = await Promise.all([
+			presence.getSetting<boolean>("timestamp"),
+			presence.getSetting<boolean>("buttons"),
+		]),
+		pages: Record<string, PresenceData> = {
+			"/popular": {
+				details: "Viewing",
+				state: "Popular caards",
+				buttons: [{ label: "View Popular Caards", url: href }],
+			},
+			"/feed": { details: "Viewing feed" },
+			"/partners": {
+				details: "Viewing page",
+				state: "Partners",
+				buttons: [{ label: "View Partners", url: href }],
+			},
+			"/privacy": { details: "Viewing", state: "Privacy Policy" },
+			"/tos": { details: "Viewing", state: "Terms of Service" },
+			"/signup": { details: "Signing up" },
 		};
 
-	switch (document.location.hostname) {
+	for (const [path, data] of Object.entries(pages))
+		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
+
+	switch (host) {
 		case "www.caards.me": {
-			if (document.location.pathname === "/")
-				presenceData.details = "Viewing home page";
-			else if (document.location.pathname.includes("partners")) {
-				presenceData.details = "Viewing page:";
-				presenceData.state = "Partners";
-				presenceData.buttons = [
-					{
-						label: "View Partners",
-						url: document.location.href
-					}
-				];
-			} else if (document.location.pathname === "/popular") {
-				presenceData.details = "Viewing:";
-				presenceData.state = "Popular caards";
-				presenceData.buttons = [
-					{
-						label: "View Popular Caards",
-						url: document.location.href
-					}
-				];
-			} else if (document.location.pathname.includes("feed"))
-				presenceData.details = "Viewing feed";
-			else if (document.location.pathname.includes("/u/")) {
-				presenceData.smallImageKey = "reading";
-				presenceData.details = "Viewing profile:";
+			if (pathname === "/") presenceData.details = "Viewing home page";
+			else if (pathname.includes("/u/")) {
+				presenceData.smallImageKey = Assets.Reading;
+				presenceData.details = "Viewing profile";
 				presenceData.state = `${
-					document.querySelector("span.Name.text-3xl")?.textContent || "Unknown"
+					document.querySelector("span.Name.text-3xl")?.textContent ?? "Unknown"
 				}`;
 				presenceData.buttons = [
 					{
 						label: "View Profile",
-						url: document.location.href
-					}
+						url: href,
+					},
 				];
-			} else if (document.location.pathname === "/me/settings") {
-				const tab = document.querySelector("button.B01")?.textContent;
+			} else if (pathname === "/me/settings") {
 				presenceData.details = "Editing Profile";
-				presenceData.state = `${"Tab:" + ` ${tab ? tab : "User"}`}`;
-			} else if (document.location.pathname === "/themes") {
-				presenceData.details = "Viewing page:";
+				presenceData.state = `${
+					"Tab:" +
+					` ${document.querySelector("button.B01")?.textContent ?? "User"}`
+				}`;
+			} else if (pathname === "/themes") {
+				presenceData.details = "Viewing page";
 				presenceData.state = "Themes";
 				presenceData.buttons = [
 					{
 						label: "View Themes",
-						url: document.location.href
-					}
+						url: href,
+					},
 				];
-			} else if (document.location.pathname.includes("/t/")) {
-				const [, theme] = document.location.href.split("/t/");
-				presenceData.details = "Viewing theme:";
+			} else if (pathname.includes("/t/")) {
+				const [, theme] = href.split("/t/");
+				presenceData.details = "Viewing theme";
 				presenceData.state = `${theme}`;
 				presenceData.buttons = [
 					{
 						label: `View ${theme}`,
-						url: document.location.href
-					}
+						url: href,
+					},
 				];
 			} else {
-				switch (document.location.pathname) {
-					case "/signup": {
-						presenceData.details = "Signing Up";
-						break;
-					}
+				switch (pathname) {
 					case "/signin": {
 						const username = document.querySelector("input")?.value;
-						presenceData.details = "Signing In:";
+						presenceData.details = "Signing In";
 						username
 							? (presenceData.state = `To ${username}`)
 							: (presenceData.state = "To Unknown");
 
 						break;
 					}
-					case "/privacy": {
-						presenceData.details = "Viewing:";
-						presenceData.state = "Privacy Policy";
-
-						break;
-					}
-					case "/tos": {
-						presenceData.details = "Viewing:";
-						presenceData.state = "Terms of Service";
-
-						break;
-					}
-					// No default
 				}
 			}
 			break;
 		}
 		case "help.caards.me": {
-			if (document.location.pathname === "/")
-				presenceData.details = "Viewing help page";
-			else if (document.location.pathname.includes("/widgets/")) {
+			if (pathname === "/") presenceData.details = "Viewing help page";
+			else if (pathname.includes("/widgets/")) {
 				presenceData.details = "Viewing help info...";
-				presenceData.state = `Widget: ${
-					document.location.href.split("/widgets/")[1]
-				}`;
+				presenceData.state = `Widget: ${href.split("/widgets/")[1]}`;
 			}
 
 			break;
 		}
 		case "status.caards.me": {
-			if (document.location.pathname === "/")
-				presenceData.details = "Viewing status page";
+			if (pathname === "/") presenceData.details = "Viewing status page";
 
 			break;
 		}
-		// No default
 	}
 
 	if (!showButtons) delete presenceData.buttons;

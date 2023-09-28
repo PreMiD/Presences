@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "786739998011293717"
+		clientId: "786739998011293717",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	userName = document.querySelector(
@@ -10,7 +10,8 @@ let item: HTMLElement, item2: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "grailedlogo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Grailed/assets/logo.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;

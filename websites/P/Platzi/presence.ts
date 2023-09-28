@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "834628404233240628"
+		clientId: "834628404233240628",
 	}),
 	estimatedTime = Math.floor(Date.now() / 1000);
 
@@ -17,14 +17,15 @@ const stripPlatziProfileFlags = (url: string) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lg-dark"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/Platzi/assets/logo.jpg",
 		},
 		{ pathname } = document.location,
 		pathNameSplit = pathname.split("/").filter(Boolean);
 
 	if (pathname.includes("/home")) {
 		const inputValues = [
-			...document.querySelectorAll<HTMLInputElement>(".SearchBar input")
+			...document.querySelectorAll<HTMLInputElement>(".SearchBar input"),
 		]
 			.map(input => input.value)
 			.filter(Boolean);
@@ -77,7 +78,7 @@ presence.on("UpdateData", async () => {
 					.textContent
 			}`;
 			presenceData.buttons = [
-				{ label: "Ver el Artículo", url: `https://platzi.com${pathname}` }
+				{ label: "Ver el Artículo", url: `https://platzi.com${pathname}` },
 			];
 		}
 	} else if (pathname.startsWith("/foro/")) {
@@ -140,7 +141,7 @@ presence.on("UpdateData", async () => {
 
 		if (userLink) {
 			presenceData.buttons = [
-				{ label: "Link personal", url: `${userLink.href}` }
+				{ label: "Link personal", url: `${userLink.href}` },
 			];
 		}
 
@@ -159,7 +160,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = "Viendo Platzi Live";
 		presenceData.startTimestamp = estimatedTime;
 		presenceData.buttons = [
-			{ label: "Ver Live", url: `https://platzi.com${pathname}` }
+			{ label: "Ver Live", url: `https://platzi.com${pathname}` },
 		];
 	} else if (pathname.includes("/clases/") && pathNameSplit.length === 2) {
 		presenceData.state = `de ${
@@ -172,8 +173,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Ver curso",
-				url: `https://platzi.com${pathname}`
-			}
+				url: `https://platzi.com${pathname}`,
+			},
 		];
 	} else if (
 		pathname.includes("/clases/") &&
@@ -196,9 +197,9 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Ver Curso",
-				url: `https://platzi.com${course.getAttribute("href")}`
+				url: `https://platzi.com${course.getAttribute("href")}`,
 			},
-			{ label: "Ver Clase", url: `https://platzi.com${pathname}` }
+			{ label: "Ver Clase", url: `https://platzi.com${pathname}` },
 		];
 
 		if (
@@ -316,8 +317,8 @@ presence.on("UpdateData", async () => {
 				label: "Referido",
 				url: `${
 					document.querySelector<HTMLInputElement>("#copyUrl").textContent
-				}`
-			}
+				}`,
+			},
 		];
 	} else if (pathname.startsWith("/mi--suscripcion/")) {
 		presenceData.details = "Viendo su suscripción";

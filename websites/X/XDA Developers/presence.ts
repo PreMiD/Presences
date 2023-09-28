@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "926847727894138901"
+		clientId: "926847727894138901",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/X/XDA%20Developers/assets/logo.jpg",
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;
 	if (document.location.hostname === "www.xda-developers.com") {
@@ -34,7 +35,7 @@ presence.on("UpdateData", () => {
 		} else {
 			presenceData.details = "Reading an article:";
 			presenceData.state = document.title;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 			presenceData.buttons = [{ label: "Read article", url: document.URL }];
 		}
@@ -45,7 +46,7 @@ presence.on("UpdateData", () => {
 			presenceData.details = "Reading conversations";
 		else if (path.includes("post-thread")) {
 			presenceData.details = "Writing a thread";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 			presenceData.smallImageText = "Writing";
 		} else if (path.startsWith("/c")) {
 			presenceData.details = "Browsing a category:";
@@ -68,7 +69,7 @@ presence.on("UpdateData", () => {
 			presenceData.state = document.querySelector<HTMLHeadingElement>(
 				"#top > div.p-body > div.p-body-inner > div > div.p-body-main.p-body-main--withSidebar > div.p-body-content > div.p-body-header > div > div > div.p-title > h1"
 			).textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading";
 		} else if (path.startsWith("/m")) {
 			if (path === "/m/") presenceData.details = "Browsing members list";

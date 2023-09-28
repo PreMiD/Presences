@@ -1,15 +1,44 @@
 const presence = new Presence({
-	clientId: "661889916635971616"
+	clientId: "661889916635971616",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "icon"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/P/Pocket%20Casts/assets/logo.png",
 	};
 
-	if (document.querySelectorAll(".player-controls").length === 0) {
-		presenceData.smallImageKey = "more";
+	if (document.querySelector(".controls").ariaLabel.includes("Playing")) {
+		presenceData.details =
+			document.querySelector("div.episode > span").textContent;
+		presenceData.state = document.querySelector(
+			"div.podcast-title-date > span"
+		).textContent;
 
+		const time = document
+			.querySelector(
+				".TimeTextstyled__TimeTextWrapper-sc-1yzkn0m-0.lmVDeu.current-time"
+			)
+			.textContent.split(":")
+			.map(Number);
+		presenceData.smallImageKey = Assets.Play;
+		if (time.length === 3) {
+			presenceData.startTimestamp =
+				Date.now() - (time[0] * 3600 + time[1] * 60 + time[2]) * 1000;
+		} else {
+			presenceData.startTimestamp =
+				Date.now() - (time[0] * 60 + time[1]) * 1000;
+		}
+	} else if (document.querySelector(".controls").ariaLabel.includes("Paused")) {
+		presenceData.details =
+			document.querySelector("div.episode > span").textContent;
+		presenceData.state = document.querySelector(
+			"div.podcast-title-date > span"
+		).textContent;
+		presenceData.smallImageKey = Assets.Pause;
+		delete presenceData.startTimestamp;
+	}
+	if (document.querySelector(".controls").ariaLabel.includes("Paused")) {
 		if (document.location.pathname === "/podcasts")
 			presenceData.details = "Viewing subscriptions";
 		else if (
@@ -66,31 +95,6 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Changing settings";
 			}
 		}
-	} else {
-		presenceData.details = document.querySelectorAll(
-			".episode-title.player_episode"
-		)[0].textContent;
-		presenceData.state = document.querySelectorAll(
-			".podcast-title.player_podcast_title"
-		)[0].textContent;
-
-		const time = document
-			.querySelectorAll(".time-text.current-time")[0]
-			.textContent.split(":")
-			.map(n => Number(n));
-		if (time.length === 3) {
-			presenceData.startTimestamp =
-				Date.now() - (time[0] * 3600 + time[1] * 60 + time[2]) * 1000;
-		} else {
-			presenceData.startTimestamp =
-				Date.now() - (time[0] * 60 + time[1]) * 1000;
-		}
-
-		if (document.querySelectorAll(".pause_button").length === 0) {
-			presenceData.smallImageKey = "pause";
-			delete presenceData.startTimestamp;
-		} else presenceData.smallImageKey = "play";
 	}
-
 	presence.setActivity(presenceData);
 });

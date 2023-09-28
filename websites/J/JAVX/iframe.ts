@@ -8,14 +8,14 @@ iframe.on("UpdateData", async () => {
 			playback: true,
 			currentTime: video.currentTime,
 			duration: video.duration,
-			paused: video.paused
+			paused: video.paused,
 		});
 	} else {
 		iframe.send({
 			playback: false,
 			currentTime: 0,
 			duration: 0,
-			paused: false
+			paused: false,
 		});
 	}
 });

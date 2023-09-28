@@ -1,15 +1,17 @@
 const presence = new Presence({
-		clientId: "626462884649500686" // CLIENT ID FOR YOUR PRESENCE
+		clientId: "626462884649500686", // CLIENT ID FOR YOUR PRESENCE
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let user: Element | HTMLElement | string,
 	search: Element | HTMLElement | string,
 	title: Element | HTMLElement | string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "forge",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/MinecraftForge/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	switch (document.location.hostname) {
@@ -33,7 +35,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Forums, searching for:";
 				[presenceData.state] = search.textContent.split("'");
 
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/profile/")) {
@@ -115,7 +117,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Docs, reading:";
 			presenceData.state = title.textContent;
 
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			presence.setActivity(presenceData);
 

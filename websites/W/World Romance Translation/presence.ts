@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "857964031700238356"
+		clientId: "857964031700238356",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "wrt_icon",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/World%20Romance%20Translation/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location;
 
@@ -28,7 +29,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector("div.wrapper > div > div > div.releases > h1")
 				.textContent
 		}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.querySelector("div#readerarea")) {
 		const mangaName =
 				document.querySelector<HTMLHeadingElement>("h1.entry-title"),
@@ -48,8 +49,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Lihat Manga",
-				url: href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/manga/")) {
 		const mangaName =
@@ -61,8 +62,8 @@ presence.on("UpdateData", async () => {
 			{
 				label:
 					pathname === "/manga/" ? "Lihat Daftar Manga" : "Lihat Detail Manga",
-				url: href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/bookmark/"))
 		presenceData.details = "Membuka Bookmarks";

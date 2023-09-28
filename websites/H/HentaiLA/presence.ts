@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "903690009633247252"
+		clientId: "903690009633247252",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let video = {
 	duration: 0,
 	currentTime: 0,
-	paused: true
+	paused: true,
 };
 
 presence.on(
@@ -18,8 +18,9 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "hentaila",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/H/HentaiLA/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname === "/")
 		presenceData.details = "En la página de inicio";
@@ -35,7 +36,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
 			);
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? "Capítulo pausado"
 			: "Reproduciendo capítulo";

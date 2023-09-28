@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "653372675166568481"
+		clientId: "653372675166568481",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "carllogo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/C/Carl-bot/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "carl.gg") {
@@ -28,7 +29,7 @@ presence.on("UpdateData", () => {
 	}
 
 	if (document.location.hostname === "docs.carl.gg") {
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.details = "Documentation";
 
 		presenceData.state = document.querySelector("h1").textContent;

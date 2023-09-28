@@ -1,11 +1,12 @@
 const presence = new Presence({
-	clientId: "647443051819565076"
+	clientId: "647443051819565076",
 });
 
 presence.on("UpdateData", async () => {
 	const path = window.location.hash.substr(1),
 		presenceData: PresenceData = {
-			largeImageKey: "icon"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/Horizon%20GO/assets/logo.jpg",
 		};
 
 	if (path === "action=watch") {

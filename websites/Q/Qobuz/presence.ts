@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "921861694190407730"
+	clientId: "921861694190407730",
 });
 
 async function getStrings() {
@@ -8,7 +8,7 @@ async function getStrings() {
 			play: "general.playing",
 			pause: "general.paused",
 			viewAlbum: "general.buttonViewAlbum",
-			viewPlaylist: "general.buttonViewPlaylist"
+			viewPlaylist: "general.buttonViewPlaylist",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 	const [newLang, timestamps, cover] = await Promise.all([
 		presence.getSetting<string>("lang").catch(() => "en"),
 		presence.getSetting<boolean>("timestamps"),
-		presence.getSetting<boolean>("cover")
+		presence.getSetting<boolean>("cover"),
 	]);
 
 	if (oldLang !== newLang) {
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 							'div[class="player__track-cover"] img'
 						)
 						.src.replaceAll("230", "600")
-				: "logo"
+				: "logo",
 		},
 		songTitle = document.querySelector<HTMLAnchorElement>(
 			'a[class="player__track-name"]'
@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
 				: "deactivated",
 			songPlaylist: document.querySelectorAll<HTMLAnchorElement>(
 				'div[class="player__track-album"] a'
-			)[2]
+			)[2],
 		};
 
 	let playliststring = "";
@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
 
 	if (currentTimeSec > 0 || !paused) {
 		presenceData.endTimestamp = Date.now() + (endTimeSec - currentTimeSec);
-		presenceData.smallImageKey = paused ? "pause" : "play";
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused ? strings.pause : strings.play;
 	}
 
@@ -103,13 +103,13 @@ presence.on("UpdateData", async () => {
 	presenceData.buttons = [
 		{
 			label: strings.viewAlbum,
-			url: songTitle.href
-		}
+			url: songTitle.href,
+		},
 	];
 	if (fromPlaylist) {
 		presenceData.buttons.push({
 			label: strings.viewPlaylist,
-			url: obj.songPlaylist.href
+			url: obj.songPlaylist.href,
 		});
 	}
 	presence.setActivity(presenceData);

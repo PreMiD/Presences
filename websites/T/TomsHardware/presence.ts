@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "889780989386170420"
+	clientId: "889780989386170420",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "tomshardware"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/TomsHardware/assets/logo.png",
 		},
 		{ href } = document.location;
 

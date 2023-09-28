@@ -16,8 +16,8 @@ iframe.on("UpdateData", async () => {
 					iFrameVideo: true,
 					currTime: video.currentTime,
 					dur: video.duration,
-					paused: video.paused
-				}
+					paused: video.paused,
+				},
 			});
 		}
 	} else if (document.querySelector("#myVideo")) {
@@ -28,8 +28,8 @@ iframe.on("UpdateData", async () => {
 					iFrameVideo: true,
 					currTime: video.currentTime,
 					dur: video.duration,
-					paused: video.paused
-				}
+					paused: video.paused,
+				},
 			});
 		}
 	}

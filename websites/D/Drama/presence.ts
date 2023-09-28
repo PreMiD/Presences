@@ -1,20 +1,21 @@
 const presence = new Presence({
-	clientId: "852245069984825394"
+	clientId: "852245069984825394",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "dramagg",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Drama/assets/logo.png",
 		smallImageKey: "search",
 		smallImageText: "Looking for a thread",
 		details: "Looking for drama!",
-		state: "Browsing"
+		state: "Browsing",
 	};
 
 	switch (true) {
 		case document.location.pathname.includes("/d/"):
-			presenceData.largeImageKey = "dramagg";
-			presenceData.smallImageKey = "reading";
+			presenceData.largeImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/D/Drama/assets/logo.png";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Reading a thread";
 			presenceData.details = `Viewing Thread: ${
 				document.querySelector("h2.DiscussionHero-title").textContent
@@ -25,12 +26,12 @@ presence.on("UpdateData", () => {
 			presenceData.buttons = [
 				{
 					label: "View Post",
-					url: `${document.URL}`
-				}
+					url: `${document.URL}`,
+				},
 			];
 			break;
 		case document.location.pathname.includes("/u/"):
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Viewing a profile";
 			presenceData.details = `Viewing Profile: ${document.URL.split("/")[4]}`;
 			presenceData.state = `Posts: ${
@@ -38,49 +39,49 @@ presence.on("UpdateData", () => {
 			} `;
 			break;
 		case document.location.pathname.includes("/meta"):
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Looking for a thread";
 			presenceData.details = "Looking for drama!";
 			presenceData.state = "Looking at meta threads";
 			break;
 		case document.location.pathname.includes("/resolved"):
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Looking for a thread";
 			presenceData.details = "Looking for drama!";
 			presenceData.state = "Looking at resolved threads";
 			break;
 		case document.location.pathname.includes("/confirmed"):
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Looking for a thread";
 			presenceData.details = "Looking for drama!";
 			presenceData.state = "Looking at confirmed threads";
 			break;
 		case document.location.pathname.includes("/discussion"):
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Looking for a thread";
 			presenceData.details = "Looking for drama!";
 			presenceData.state = "Looking at discussions";
 			break;
 		case document.location.pathname.includes("/users"):
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Looking at all users";
 			presenceData.details = "Looking for drama!";
 			presenceData.state = "Looking at all users";
 			break;
 		case document.location.pathname.includes("/trinkets"):
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Looking at trinkets";
 			presenceData.details = "Looking for drama!";
 			presenceData.state = "Looking at trinkets";
 			break;
 		case document.querySelector("div.Composer.visible") !== null:
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Writing a thread";
 			presenceData.details = "Starting some drama!";
 			presenceData.state = "Writing a post";
 			break;
 		default:
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Looking for a thread";
 			presenceData.details = "Looking for drama!";
 			presenceData.state = "Browsing";

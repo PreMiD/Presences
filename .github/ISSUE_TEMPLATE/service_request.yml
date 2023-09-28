@@ -1,7 +1,6 @@
 name: Service Request
 description: Request a new presence to be added to the store
-title: Service Name | Service URL
-labels: [Service Request]
+labels: [service request]
 body:
   - type: markdown
     attributes:

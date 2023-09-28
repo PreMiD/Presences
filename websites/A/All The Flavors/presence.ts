@@ -1,18 +1,19 @@
 const presence = new Presence({
-		clientId: "631122124630654979"
+		clientId: "631122124630654979",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/All%20The%20Flavors/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/") {
 		presenceData.details = "Browing Homepage";
 		presenceData.state = "at Homepage";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "browsing";
 	} else if (
 		[
@@ -21,7 +22,7 @@ presence.on("UpdateData", async () => {
 			"/users",
 			"/contests",
 			"/vendors",
-			"/top100"
+			"/top100",
 		].includes(document.location.pathname)
 	) {
 		let dstate;
@@ -37,14 +38,14 @@ presence.on("UpdateData", async () => {
 			""
 		)} `;
 		presenceData.state = dstate;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "browsing";
 	} else if (
 		[
 			"/getting_started",
 			"/help/how_to_mix",
 			"/go_pro",
-			"/help/report_recipe"
+			"/help/report_recipe",
 		].includes(document.location.pathname)
 	) {
 		presenceData.details = "Browing help ";
@@ -53,7 +54,7 @@ presence.on("UpdateData", async () => {
 			.split("_")
 			.join(" ")
 			.replace("/", "")}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "browsing";
 	} else if (document.location.pathname.startsWith("/flavors/")) {
 		presenceData.details = "Browing Flavors ";
@@ -66,7 +67,7 @@ presence.on("UpdateData", async () => {
 			.split("-")
 			.join(" ")
 			.replace("/", "")}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "browsing";
 	} else if (document.location.pathname.startsWith("/recipes/")) {
 		const data = document.location.hash
@@ -75,7 +76,7 @@ presence.on("UpdateData", async () => {
 			.split("_by_");
 		presenceData.details = `Recipe : ${data[0].split("_").join(" ")} `;
 		presenceData.state = `Creator: ${data[1].split("_").join(" ")}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "browsing";
 	}
 	if (presenceData.details) presence.setActivity(presenceData);

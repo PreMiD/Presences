@@ -1,14 +1,15 @@
 const presence = new Presence({
-		clientId: "630874255990587402"
+		clientId: "630874255990587402",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "gfycat"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Gfycat/assets/logo.png",
 	};
 
 	if (document.location.pathname.startsWith("/discover")) {
@@ -28,7 +29,7 @@ presence.on("UpdateData", async () => {
 		if (searchText) presenceData.state = searchText;
 
 		presenceData.startTimestamp = Date.now();
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 
 		presence.setActivity(presenceData);
@@ -70,7 +71,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				".gif-info .gif-views"
 			).textContent;
-			presenceData.smallImageKey = player.paused ? "pause" : "play";
+			presenceData.smallImageKey = player.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = player.paused
 				? (await strings).pause
 				: (await strings).play;

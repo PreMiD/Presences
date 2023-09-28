@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "863173597941727282"
+		clientId: "863173597941727282",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,8 +7,9 @@ let productName, productBrand, blogTitle, blogAuthor;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/L/Lime%20Pro%20Gaming/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (window.location.pathname === "/")
@@ -36,8 +37,8 @@ presence.on("UpdateData", async () => {
 							.querySelector(
 								"#same_product_height > div.tt-breadcrumb > div > ul > li:nth-child(2) > a"
 							)
-							.getAttribute("href")
-				}
+							.getAttribute("href"),
+				},
 			];
 		} else if (
 			window.location.pathname === "/collections" ||
@@ -67,7 +68,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = productName;
 
 		presenceData.buttons = [
-			{ label: "View Product", url: document.location.href }
+			{ label: "View Product", url: document.location.href },
 		];
 	} else if (window.location.pathname.includes("/pages")) {
 		presenceData.details = `Viewing: ${
@@ -79,8 +80,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Page",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
 	} else if (window.location.pathname.includes("/search")) {
 		presenceData.details = `Searching: ${
@@ -95,7 +96,7 @@ presence.on("UpdateData", async () => {
 			).textContent
 		} Results`;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else {
 		switch (window.location.pathname) {
 			case "/cart": {
@@ -126,7 +127,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = blogTitle;
 					if (blogAuthor) presenceData.state = blogAuthor;
 
-					if (blogAuthor) presenceData.smallImageKey = "reading";
+					if (blogAuthor) presenceData.smallImageKey = Assets.Reading;
 				} else presence.setActivity();
 		}
 	}

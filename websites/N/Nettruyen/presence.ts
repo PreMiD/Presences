@@ -1,14 +1,17 @@
 const presence = new Presence({
-	clientId: "817063719288700939"
+	clientId: "817063719288700939",
 });
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/N/Nettruyen/assets/logo.png",
+}
 let lastPath: string,
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const curPath = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey: Assets.Logo,
 		};
 
 	if (lastPath !== curPath) {

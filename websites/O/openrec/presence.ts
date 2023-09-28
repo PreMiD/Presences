@@ -1,13 +1,14 @@
 const presence = new Presence({
-		clientId: "612652426180296849"
+		clientId: "612652426180296849",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		live: "presence.activity.live"
+		play: "general.playing",
+		pause: "general.paused",
+		live: "general.live",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/O/openrec/assets/logo.jpg",
 	};
 
 presence.on("UpdateData", async () => {
@@ -27,7 +28,8 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = title ? title.textContent : "Title not found...";
 		presenceData.state = game ? game.textContent : "Game not found...";
-		presenceData.largeImageKey = "logo";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/O/openrec/assets/logo.jpg";
 		presenceData.smallImageKey = live
 			? "live"
 			: video.paused
@@ -53,7 +55,8 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity({
 			details: "Browsing..",
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/O/openrec/assets/logo.jpg",
 		});
 	}
 });

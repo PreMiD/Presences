@@ -1,11 +1,12 @@
 const presence = new Presence({
-	clientId: "650464804276011009"
+	clientId: "650464804276011009",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "large_logo",
-			startTimestamp: Date.now()
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Domino's%20Pizza%20(UK)/assets/logo.png",
+			startTimestamp: Date.now(),
 		},
 		path = document.location.pathname;
 

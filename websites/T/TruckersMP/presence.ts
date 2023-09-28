@@ -1,16 +1,17 @@
 const presence = new Presence({
-		clientId: "821104573329440848"
+		clientId: "821104573329440848",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/TruckersMP/assets/logo.png",
 	};
 	const [buttons, timestamp, privacy] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("timestamp"),
-			presence.getSetting<boolean>("privacy")
+			presence.getSetting<boolean>("privacy"),
 		]),
 		pages: Record<string, PresenceData> = {
 			"/team": { details: "Viewing the staff team" },
@@ -24,7 +25,7 @@ presence.on("UpdateData", async () => {
 			"/vtc/search": { details: "Searching for a VTC" },
 			"/vtc/create": { details: "Creating a VTC" },
 			"/blog": { details: "Browsing the blog" },
-			"/events": { details: "Viewing the events centre" },
+			"/events": { details: "Viewing the events system" },
 			"/events/manage": { details: "Managing their events" },
 			"/events/manage/past": { details: "Viewing their past events" },
 			"/events/create": { details: "Creating an event" },
@@ -32,7 +33,7 @@ presence.on("UpdateData", async () => {
 			"/api": { details: "Viewing the API" },
 			"/live": { details: "Viewing the live stats" },
 			"/history": { details: "Viewing the history" },
-			"/settings": { details: "Viewing the settings" }
+			"/settings": { details: "Viewing the settings" },
 		};
 
 	for (const [path, data] of Object.entries(pages)) {
@@ -81,7 +82,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [{ label: "Read Article", url: document.URL }];
 					break;
 				case document.location.pathname === "/":
-					presenceData.details = "Browsing the website";
+					presenceData.details = "Browsing the homepage";
 			}
 			break;
 		case "forum.truckersmp.com":
@@ -103,13 +104,13 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [{ label: "View Topic", url: document.URL }];
 					break;
 				case document.location.pathname.includes("/forum"):
-					presenceData.details = "Browing the forum";
+					presenceData.details = "Browsing the forum";
 					presenceData.state =
 						document.querySelector<HTMLHeadingElement>(
 							"header > h1"
 						).textContent;
 					presenceData.buttons = [
-						{ label: "View Forum Category", url: document.URL }
+						{ label: "View Forum Category", url: document.URL },
 					];
 					break;
 				default:

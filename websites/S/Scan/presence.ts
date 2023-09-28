@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "755542346367631362"
+		clientId: "755542346367631362",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,7 @@ let item;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "scan"
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Scan/assets/logo.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;
@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = "Browsing";
 		presenceData.state = item.textContent;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		presence.setActivity(presenceData);
 	} else if (
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = "Browsing";
 		presenceData.state = item.textContent;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.includes("/products/")) {
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = "Viewing";
 		presenceData.state = item.textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 
 		presence.setActivity(presenceData);
 	} else presence.setActivity();

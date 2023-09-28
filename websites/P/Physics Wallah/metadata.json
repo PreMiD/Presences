@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "847084634294059018",
+		"name": ".infinite_."
+	},
+	"service": "Physics Wallah",
+	"description": {
+		"en": "Physics Wallah is India's top online ed-tech platform that provides affordable and comprehensive learning experience to students of classes 6 to 12 and those preparing for JEE and NEET exams."
+	},
+	"url": "www.pw.live",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Physics%20Wallah/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Physics%20Wallah/assets/thumbnail.png",
+	"color": "#2596be",
+	"category": "other",
+	"tags": [
+		"video",
+		"media"
+	]
+}

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "891749178227695678"
+		clientId: "891749178227695678",
 	}),
 	path = document.location.pathname,
 	browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -25,8 +25,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/Myutaku/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (path.includes("/home")) presenceData.details = "Page d'accueil";

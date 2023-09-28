@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "822176609753628742"
+		clientId: "822176609753628742",
 	}),
 	monthsList = [
 		"January",
@@ -13,14 +13,15 @@ const presence = new Presence({
 		"September",
 		"October",
 		"November",
-		"December"
+		"December",
 	];
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "An overview of the Trackmania Live Services.",
-		largeImageKey: "logo",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/Trackmania.io/assets/logo.jpg",
 		state: `Unsupported page (${window.location.hash})`,
-		startTimestamp: Math.floor(Date.now() / 1000)
+		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 
 	if (window.location.hash.startsWith("#")) {

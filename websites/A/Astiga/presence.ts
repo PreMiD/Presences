@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "612746548631044116"
+		clientId: "612746548631044116",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	truncateBefore = function (str: string, pattern: string): string {
 		return str.slice(str.indexOf(pattern) + pattern.length);
@@ -36,7 +36,8 @@ let musicTitle: HTMLElement,
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "Unknown page",
-		largeImageKey: "lg"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Astiga/assets/logo.png",
 	};
 
 	currentUser = document.querySelector(
@@ -125,7 +126,7 @@ presence.on("UpdateData", async () => {
 		)
 			presenceData.state = "No artist / No album";
 
-		presenceData.smallImageKey = playback ? "play" : "pause";
+		presenceData.smallImageKey = playback ? Assets.Play : Assets.Pause;
 
 		presenceData.smallImageText = playback
 			? (await strings).play

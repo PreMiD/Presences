@@ -42,6 +42,6 @@ iframe.on("UpdateData", async () => {
 		gameMode: agar.home.$options.components.Home.store.getters.gameMode,
 		nick: agar.home.$options.components.Home.store.getters.settings.lastNick,
 		connecting:
-			agar.home.$options.components.Home.components.mainmenu.components.play.computed.connecting()
+			agar.home.$options.components.Home.components.mainmenu.components.play.computed.connecting(),
 	});
 });

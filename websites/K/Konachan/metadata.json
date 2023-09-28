@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Kyrie",
+		"id": "368399721494216706"
+	},
+	"service": "Konachan",
+	"description": {
+		"en": "Konachan - Image board site for Anime / Manga wallpapers. Unlimited and unrestricted downloads."
+	},
+	"url": [
+		"konachan.com",
+		"konachan.net"
+	],
+	"version": "1.0.12",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Konachan/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Konachan/assets/thumbnail.jpg",
+	"color": "#676894",
+	"category": "socials",
+	"tags": [
+		"art",
+		"anime",
+		"fanart",
+		"manga",
+		"board",
+		"nsfw"
+	]
+}

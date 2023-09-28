@@ -1,7 +1,8 @@
 const presence = new Presence({
-		clientId: "640561280800915456"
+		clientId: "640561280800915456",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let min: number,
 	sec: number,
 	time: number,
@@ -11,9 +12,11 @@ let min: number,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "bc",
-		startTimestamp: browsingTimestamp
-	};
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/Bandcamp/assets/logo.png",
+			startTimestamp: browsingTimestamp,
+		},
+		cover = await presence.getSetting<boolean>("cover");
 
 	if (document.location.hostname === "bandcamp.com") {
 		if (
@@ -87,9 +90,15 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.startTimestamp = startTimestamp;
 			presenceData.endTimestamp = endTimestamp;
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Playing";
 
+			if (cover) {
+				presenceData.largeImageKey =
+					document
+						.querySelector('[class="popupImage"]')
+						?.firstElementChild?.getAttribute("src") ?? "bc";
+			}
 			presenceData.details = document.querySelector(
 				"#discover > div:nth-child(9) > div:nth-child(2) > div > div.detail-player > div > table > tbody > tr:nth-child(1) > td.track_cell > div > span.title-section > span"
 			).textContent;
@@ -115,7 +124,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				"#content > div:nth-child(2) > h2"
 			).textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else {
 			presenceData.details = "Bandcamp Daily";
 			presenceData.state = "Browsing...";
@@ -166,9 +175,14 @@ presence.on("UpdateData", async () => {
 		const [startTimestamp, endTimestamp] = presence.getTimestamps(time, time2);
 		presenceData.startTimestamp = startTimestamp;
 		presenceData.endTimestamp = endTimestamp;
-		presenceData.smallImageKey = "play";
+		presenceData.smallImageKey = Assets.Play;
 		presenceData.smallImageText = "Playing";
-
+		if (cover) {
+			presenceData.largeImageKey =
+				document
+					.querySelector('[class="popupImage"]')
+					?.firstElementChild?.getAttribute("src") ?? "bc";
+		}
 		presenceData.details = document.querySelector(
 			"#trackInfoInner > div.inline_player > table > tbody > tr:nth-child(1) > td.track_cell > div > span.title-section > a > span"
 		).textContent;
@@ -230,9 +244,14 @@ presence.on("UpdateData", async () => {
 		const [startTimestamp, endTimestamp] = presence.getTimestamps(time, time2);
 		presenceData.startTimestamp = startTimestamp;
 		presenceData.endTimestamp = endTimestamp;
-		presenceData.smallImageKey = "play";
+		presenceData.smallImageKey = Assets.Play;
 		presenceData.smallImageText = "Playing";
-
+		if (cover) {
+			presenceData.largeImageKey =
+				document
+					.querySelector('[class="popupImage"]')
+					?.firstElementChild?.getAttribute("src") ?? "bc";
+		}
 		presenceData.details = document
 			.querySelector("#name-section > h2")
 			.textContent.trim();

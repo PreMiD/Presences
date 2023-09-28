@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "941798064694378557"
+		clientId: "941798064694378557",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location,
 		pathArr = pathname.split("/");
@@ -29,8 +30,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com${pathname}`
-				}
+					url: `https://www.homestuck.com${pathname}`,
+				},
 			];
 			break;
 
@@ -44,8 +45,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com${pathname}`
-				}
+					url: `https://www.homestuck.com${pathname}`,
+				},
 			];
 			break;
 
@@ -59,8 +60,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com${pathname}`
-				}
+					url: `https://www.homestuck.com${pathname}`,
+				},
 			];
 			break;
 
@@ -74,8 +75,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com${pathname}`
-				}
+					url: `https://www.homestuck.com${pathname}`,
+				},
 			];
 			break;
 
@@ -89,8 +90,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com${pathname}`
-				}
+					url: `https://www.homestuck.com${pathname}`,
+				},
 			];
 			break;
 
@@ -104,8 +105,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com${pathname}`
-				}
+					url: `https://www.homestuck.com${pathname}`,
+				},
 			];
 			break;
 
@@ -124,8 +125,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Read Along",
-					url: `https://www.homestuck.com${pathname}`
-				}
+					url: `https://www.homestuck.com${pathname}`,
+				},
 			];
 			break;
 
@@ -142,8 +143,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "Read Along",
-								url: `https://www.homestuck.com${pathname}`
-							}
+								url: `https://www.homestuck.com${pathname}`,
+							},
 						];
 					}
 					presenceData.smallImageText = "It starts with a crack.";
@@ -156,8 +157,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Read Along",
-							url: `https://www.homestuck.com${pathname}`
-						}
+							url: `https://www.homestuck.com${pathname}`,
+						},
 					];
 					break;
 				case "candy":
@@ -168,8 +169,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Read Along",
-							url: `https://www.homestuck.com${pathname}`
-						}
+							url: `https://www.homestuck.com${pathname}`,
+						},
 					];
 					break;
 			}

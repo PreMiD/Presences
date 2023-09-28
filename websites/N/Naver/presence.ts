@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "825307070584586250"
+		clientId: "825307070584586250",
 	}),
 	getServiceName = (url = document.location.hostname) => {
 		switch (true) {
@@ -78,7 +78,7 @@ const presence = new Presence({
 	} = {
 		isChecked: false,
 		service: null,
-		presence: null
+		presence: null,
 	};
 
 let blog: string, cafeTitle: string;
@@ -98,12 +98,12 @@ presence.on("UpdateData", async () => {
 			sChannelName: string;
 		} = {
 			sPageName: document.querySelector("div.ch_inf.open") ? "channel" : "",
-			sChannelName: document.querySelector("strong.rmc_name")?.textContent
+			sChannelName: document.querySelector("strong.rmc_name")?.textContent,
 		},
 		presenceData: PresenceData = {
 			largeImageKey: data.service?.toLowerCase(),
 			details: "Browsing...",
-			smallImageKey: `${data.service.toLowerCase()}_browse`
+			smallImageKey: `${data.service.toLowerCase()}_browse`,
 		},
 		getImageOrTimestamp = (
 			video: HTMLVideoElement,
@@ -126,7 +126,7 @@ presence.on("UpdateData", async () => {
 					startTimestamp: timestamps[0],
 					endTimestamp: timestamps[1],
 					smallImageKey: `${data.service.toLowerCase()}_play`,
-					smallImageText: "Playing"
+					smallImageText: "Playing",
 				};
 
 			if (video?.paused) {
@@ -144,8 +144,8 @@ presence.on("UpdateData", async () => {
 		{
 			id: "buttons",
 			delete: true,
-			data: ["buttons"]
-		}
+			data: ["buttons"],
+		},
 	];
 
 	data.presence = {
@@ -215,61 +215,61 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							url: document.baseURI,
-							label: "Watch Video"
+							label: "Watch Video",
 						},
 						{
 							url: document.querySelector<HTMLAnchorElement>("div.ch_tit > a")
 								?.href,
-							label: "View Channel"
-						}
+							label: "View Channel",
+						},
 					];
 				}
-			}
+			},
 		},
 		channel: {
 			env: true,
 			service: "NAVER_TV",
 			data: {
 				details: {
-					setTo: "Viewing channel:"
+					setTo: "Viewing channel:",
 				},
 				state: {
-					setTo: ghtEnv.sChannelName
+					setTo: ghtEnv.sChannelName,
 				},
 				buttons: {
 					setTo: [
 						{
 							url: document.baseURI,
-							label: "View Channel"
-						}
-					]
-				}
-			}
+							label: "View Channel",
+						},
+					],
+				},
+			},
 		},
 		"webnovel/list": {
 			service: "ANY",
 			data: {
 				details: {
-					setTo: "Viewing novel:"
+					setTo: "Viewing novel:",
 				},
 				state: {
-					setTo: document.querySelector("h2.book_title")?.textContent
+					setTo: document.querySelector("h2.book_title")?.textContent,
 				},
 				buttons: {
 					setTo: [
 						{
 							label: "View Novel",
-							url: document.baseURI
-						}
-					]
-				}
-			}
+							url: document.baseURI,
+						},
+					],
+				},
+			},
 		},
 		"/webtoon/list": {
 			service: "NAVER_WEBTOON",
 			data: {
 				details: {
-					setTo: "Viewing comic:"
+					setTo: "Viewing comic:",
 				},
 				state: {
 					setTo: document
@@ -278,17 +278,17 @@ presence.on("UpdateData", async () => {
 							document.querySelector("div.detail > h2 > span")?.textContent,
 							""
 						)
-						.trim()
+						.trim(),
 				},
 				buttons: {
 					setTo: [
 						{
 							label: "View Comic",
-							url: document.baseURI
-						}
-					]
-				}
-			}
+							url: document.baseURI,
+						},
+					],
+				},
+			},
 		},
 		"/webtoon/detail": {
 			service: "NAVER_WEBTOON",
@@ -296,69 +296,69 @@ presence.on("UpdateData", async () => {
 				details: {
 					setTo: (document
 						.querySelector<HTMLMetaElement>('[property="og:title"]')
-						?.content.split(" - ") || [])[0]
+						?.content.split(" - ") || [])[0],
 				},
 				state: {
 					setTo: (document
 						.querySelector<HTMLMetaElement>('[property="og:title"]')
-						?.content.split(" - ") || [])[1]
+						?.content.split(" - ") || [])[1],
 				},
 				buttons: {
 					setTo: [
 						{
 							url: document.baseURI,
-							label: "Read Episode"
-						}
-					]
+							label: "Read Episode",
+						},
+					],
 				},
 				smallImageKey: {
-					setTo: `${data.service.toLowerCase()}_book`
-				}
-			}
+					setTo: `${data.service.toLowerCase()}_book`,
+				},
+			},
 		},
 		"/webnovel/detail": {
 			service: "ANY",
 			data: {
 				details: {
-					setTo: document.querySelector("#menuFloatingLayer > a")?.textContent
+					setTo: document.querySelector("#menuFloatingLayer > a")?.textContent,
 				},
 				state: {
-					setTo: document.querySelector("#topVolumeList")?.textContent
+					setTo: document.querySelector("#topVolumeList")?.textContent,
 				},
 				buttons: {
 					setTo: [
 						{
 							url: document.baseURI,
-							label: "Read Episode"
-						}
-					]
+							label: "Read Episode",
+						},
+					],
 				},
 				smallImageKey: {
-					setTo: `${data.service.toLowerCase()}_book`
-				}
-			}
+					setTo: `${data.service.toLowerCase()}_book`,
+				},
+			},
 		},
 		"/read": {
 			service: "NAVER",
 			data: {
 				details: {
-					setTo: "Reading article:"
+					setTo: "Reading article:",
 				},
 				state: {
-					setTo: document.querySelector("h2.end_tit")?.textContent
+					setTo: document.querySelector("h2.end_tit")?.textContent,
 				},
 				buttons: {
 					setTo: [
 						{
 							url: document.baseURI,
-							label: "Read Article"
-						}
-					]
+							label: "Read Article",
+						},
+					],
 				},
 				smallImageKey: {
-					setTo: `${data.service.toLowerCase()}_book`
-				}
-			}
+					setTo: `${data.service.toLowerCase()}_book`,
+				},
+			},
 		},
 		"/player/([0-9]+)": {
 			service: "NAVER_NOW",
@@ -372,13 +372,13 @@ presence.on("UpdateData", async () => {
 								v: (
 									document.querySelector('[class="flow_text flow_text1"]') ||
 									document.querySelector('[class="episode_title"]')
-								)?.textContent
+								)?.textContent,
 							},
 							else: {
-								v: "Viewing show:"
-							}
-						}
-					}
+								v: "Viewing show:",
+							},
+						},
+					},
 				},
 				state: {
 					if: {
@@ -386,13 +386,13 @@ presence.on("UpdateData", async () => {
 							k: !!document.querySelector('[class="badge_live"]'),
 							v: true,
 							then: {
-								v: "• LIVE"
+								v: "• LIVE",
 							},
 							else: {
-								v: document.querySelector('[class="show_title"]')?.textContent
-							}
-						}
-					}
+								v: document.querySelector('[class="show_title"]')?.textContent,
+							},
+						},
+					},
 				},
 				buttons: {
 					setTo: [
@@ -400,9 +400,9 @@ presence.on("UpdateData", async () => {
 							label: document.querySelector('[class="badge_live"]')
 								? "Watch Stream"
 								: "View Show",
-							url: document.baseURI
-						}
-					]
+							url: document.baseURI,
+						},
+					],
 				},
 				smallImageKey: {
 					if: {
@@ -410,12 +410,12 @@ presence.on("UpdateData", async () => {
 							k: !!document.querySelector('[class="badge_live"]'),
 							v: true,
 							then: {
-								v: `${data.service.toLowerCase()}_live`
-							}
-						}
-					}
-				}
-			}
+								v: `${data.service.toLowerCase()}_live`,
+							},
+						},
+					},
+				},
+			},
 		},
 		"/show/([0-9]+)": {
 			service: "NAVER_NOW",
@@ -451,8 +451,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							url: document.baseURI,
-							label: "Watch Video"
-						}
+							label: "Watch Video",
+						},
 					];
 				} else {
 					presenceData.details = "Viewing show:";
@@ -463,17 +463,17 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							url: document.baseURI,
-							label: "View Show"
-						}
+							label: "View Show",
+						},
 					];
 				}
-			}
+			},
 		},
 		"/website": {
 			service: "NAVER_PAPAGO",
 			data: {
 				details: {
-					setTo: "Translating: Website"
+					setTo: "Translating: Website",
 				},
 				state: {
 					setTo: `From: ${
@@ -484,12 +484,12 @@ presence.on("UpdateData", async () => {
 						document.querySelector(
 							"div.tool_box___3AiUH.select_wrap___1U1Ds > div:nth-child(3) > button > span:nth-child(1)"
 						)?.textContent
-					}`
+					}`,
 				},
 				smallImageKey: {
-					setTo: `${data.service.toLowerCase()}_language`
-				}
-			}
+					setTo: `${data.service.toLowerCase()}_language`,
+				},
+			},
 		},
 		"/": {
 			service: "NAVER_PAPAGO",
@@ -498,31 +498,31 @@ presence.on("UpdateData", async () => {
 					setTo: `Translating from: ${
 						document.querySelector("#ddSourceLanguageButton > span")
 							?.textContent
-					}`
+					}`,
 				},
 				state: {
 					setTo: `To: ${
 						document.querySelector("#ddTargetLanguageButton > span")
 							?.textContent
-					}`
+					}`,
 				},
 				smallImageKey: {
-					setTo: `${data.service.toLowerCase()}_language`
-				}
-			}
+					setTo: `${data.service.toLowerCase()}_language`,
+				},
+			},
 		},
 		"/search.naver": {
 			service: "NAVER",
 			data: {
 				details: {
-					setTo: "Searching for:"
+					setTo: "Searching for:",
 				},
 				state: {
 					setTo:
 						new URLSearchParams(document.location.search).get("query") ||
-						"Something"
-				}
-			}
+						"Something",
+				},
+			},
 		},
 		"/([a-z])": {
 			service: "ANY",
@@ -534,8 +534,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							url: document.URL,
-							label: "Read Blog"
-						}
+							label: "Read Blog",
+						},
 					];
 				} else if (data.service === "NAVER_CAFE") {
 					cafeTitle ??= document.querySelector("h1.d-none")?.textContent;
@@ -546,8 +546,8 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "View Cafe",
-								url: document.URL
-							}
+								url: document.URL,
+							},
 						];
 					} else if (document.location.pathname.includes("/search/")) {
 						presenceData.details = "Searching for:";
@@ -556,8 +556,8 @@ presence.on("UpdateData", async () => {
 						).get("q");
 					}
 				}
-			}
-		}
+			},
+		},
 	};
 
 	for (const [k, v] of Object.entries(data.presence)) {

@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "654906151523057664"
+	clientId: "654906151523057664",
 });
 
 let currentURL = new URL(document.location.href),
@@ -9,8 +9,9 @@ let currentURL = new URL(document.location.href),
 const browsingTimestamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
 	details: "Viewing an unsupported page",
-	largeImageKey: "lg",
-	startTimestamp: browsingTimestamp
+	largeImageKey:
+		"https://cdn.rcd.gg/PreMiD/websites/G/GeoGuessr/assets/logo.png",
+	startTimestamp: browsingTimestamp,
 };
 const updateCallback = {
 		_function: null as () => void,
@@ -22,7 +23,7 @@ const updateCallback = {
 		},
 		get present(): boolean {
 			return this._function !== null;
-		}
+		},
 	},
 	/**
 	 * Initialize/reset presenceData.
@@ -30,8 +31,9 @@ const updateCallback = {
 	resetData = (
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
-			largeImageKey: "lg",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/GeoGuessr/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		}
 	): void => {
 		currentURL = new URL(document.location.href);
@@ -132,7 +134,7 @@ const updateCallback = {
 								likes: "Favorite maps",
 								badges: "Badges",
 								maps: "My maps",
-								"map-maker": "Map Maker"
+								"map-maker": "Map Maker",
 							}[currentURL.pathname.split("/")[2]];
 						}
 

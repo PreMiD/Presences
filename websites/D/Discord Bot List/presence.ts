@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "653644508507930645"
+		clientId: "653644508507930645",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo-dbl",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Bot%20List/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (window.location.pathname.endsWith("top")) {

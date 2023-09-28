@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "813680039354826784"
+	clientId: "813680039354826784",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "malltvlogo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/MALL.TV/assets/logo.png",
 		},
 		strings = await presence.getStrings({
 			browsing: "general.browsing",
@@ -14,7 +15,7 @@ presence.on("UpdateData", async () => {
 			homepage: "general.viewHome",
 			watchVideo: "general.buttonWatchVideo",
 			watchStream: "general.buttonWatchStream",
-			viewChannel: "general.buttonViewChannel"
+			viewChannel: "general.buttonViewChannel",
 		}),
 		channel = document.querySelector<HTMLHeadingElement>("h1.text-ellipsis"),
 		videoElement: HTMLVideoElement =
@@ -44,12 +45,12 @@ presence.on("UpdateData", async () => {
 					videoLive.style.display === "none"
 						? strings.watchVideo
 						: strings.watchStream,
-				url: document.URL.split("?")[0]
+				url: document.URL.split("?")[0],
 			},
 			{
 				label: strings.viewChannel,
-				url: videoChannel.href
-			}
+				url: videoChannel.href,
+			},
 		];
 		if (videoLive.style.display !== "none") {
 			presenceData.smallImageKey = "malltvlive";

@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "959487033963843594"
+		clientId: "959487033963843594",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Google%20Colab/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		notebookTitle =
 			document.querySelector<HTMLInputElement>("#doc-name")?.value,

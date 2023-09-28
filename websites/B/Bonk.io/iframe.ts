@@ -20,7 +20,7 @@ const iframe = new iFrame(),
 
 		// Game Canvas
 		"sm_connectingContainer",
-		"gamerenderer"
+		"gamerenderer",
 	],
 	selector = menuIDs
 		.map(
@@ -64,6 +64,6 @@ iframe.on("UpdateData", async () => {
 		lastGameMode,
 		id: element?.id,
 		state,
-		playerCount: document.querySelectorAll(".newbonklobby_playerentry").length
+		playerCount: document.querySelectorAll(".newbonklobby_playerentry").length,
 	});
 });

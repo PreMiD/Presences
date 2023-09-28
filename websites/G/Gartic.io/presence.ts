@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "808668919635247104"
+		clientId: "808668919635247104",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Gartic.io/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;
 	if (path === "/") presenceData.details = "Viewing the Homepage";

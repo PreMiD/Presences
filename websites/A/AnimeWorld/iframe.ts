@@ -11,8 +11,8 @@ iframe.on("UpdateData", async () => {
 					iFrameVideo: true,
 					currTime: video.currentTime,
 					duration: video.duration,
-					paused: video.paused
-				}
+					paused: video.paused,
+				},
 			});
 		}
 	}
@@ -26,8 +26,8 @@ iframe.on("UpdateData", async () => {
 					iFrameVideo: true,
 					currTime: video.currentTime,
 					duration: video.duration,
-					paused: video.paused
-				}
+					paused: video.paused,
+				},
 			});
 		}
 	}
@@ -41,8 +41,8 @@ iframe.on("UpdateData", async () => {
 					iFrameVideo: true,
 					currTime: video.currentTime,
 					duration: video.duration,
-					paused: video.paused
-				}
+					paused: video.paused,
+				},
 			});
 		}
 	}
@@ -56,8 +56,8 @@ iframe.on("UpdateData", async () => {
 					iFrameVideo: true,
 					currTime: video.currentTime,
 					duration: video.duration,
-					paused: video.paused
-				}
+					paused: video.paused,
+				},
 			});
 		}
 	}
@@ -71,8 +71,8 @@ iframe.on("UpdateData", async () => {
 					iFrameVideo: true,
 					currTime: video.currentTime,
 					duration: video.duration,
-					paused: video.paused
-				}
+					paused: video.paused,
+				},
 			});
 		}
 	}
@@ -86,8 +86,8 @@ iframe.on("UpdateData", async () => {
 					iFrameVideo: true,
 					currTime: video.currentTime,
 					duration: video.duration,
-					paused: video.paused
-				}
+					paused: video.paused,
+				},
 			});
 		}
 	}
@@ -101,8 +101,8 @@ iframe.on("UpdateData", async () => {
 					iFrameVideo: true,
 					currTime: video.currentTime,
 					duration: video.duration,
-					paused: video.paused
-				}
+					paused: video.paused,
+				},
 			});
 		}
 	}
@@ -116,8 +116,8 @@ iframe.on("UpdateData", async () => {
 					iFrameVideo: true,
 					currTime: video.currentTime,
 					duration: video.duration,
-					paused: video.paused
-				}
+					paused: video.paused,
+				},
 			});
 		}
 	}
@@ -131,8 +131,8 @@ iframe.on("UpdateData", async () => {
 					iFrameVideo: true,
 					currTime: video.currentTime,
 					duration: video.duration,
-					paused: video.paused
-				}
+					paused: video.paused,
+				},
 			});
 		}
 	}

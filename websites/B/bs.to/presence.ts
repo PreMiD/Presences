@@ -1,15 +1,21 @@
 const presence = new Presence({
-		clientId: "639568013590528030"
+		clientId: "639568013590528030",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let user: HTMLElement, title: HTMLElement, search: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "bs"
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/B/bs.to/assets/logo.png",
 	};
 
-	if (document.location.hostname === "bs.to") {
+	if (document.location.hostname === "burningseries.domains") {
+		presenceData.startTimestamp = browsingTimestamp;
+		presenceData.details = "Viewing burning series domains";
+	} else if (
+		document.location.hostname.match(/(bs|burningseries)[.]([a-z0-9-])+/g)
+	) {
 		presenceData.startTimestamp = browsingTimestamp;
 		if (document.location.pathname === "/")
 			presenceData.details = "Viewing home page";
@@ -17,7 +23,7 @@ presence.on("UpdateData", async () => {
 			user = document.querySelector("#sp_left > h2");
 			presenceData.details = "Viewing serie:";
 			presenceData.state = user.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/andere-serien"))
 			presenceData.details = "Viewing all series";
 		else if (document.location.pathname.includes("/search")) {
@@ -26,7 +32,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.details = "Searching for:";
 			presenceData.state = (search as HTMLInputElement).value;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (document.location.hostname === "board.bs.to") {
 		if (document.URL.includes("/topic/")) {
@@ -38,7 +44,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `${title.textContent.substring(0, 125)}...`;
 			else presenceData.state = title.textContent;
 
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presence.setActivity(presenceData);
 		} else if (document.URL.includes("/trending/")) {
 			presenceData.details = "Forums, Viewing the list of";
@@ -103,14 +109,14 @@ presence.on("UpdateData", async () => {
 					.replace("Showing results for '", "")
 					.replace("'.", "");
 
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 
 				presence.setActivity(presenceData);
 			} else {
 				presenceData.details = "Forums, about to search";
 				presenceData.state = "something up";
 
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 
 				presence.setActivity(presenceData);
 			}

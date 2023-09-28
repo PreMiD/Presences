@@ -1,15 +1,17 @@
 const presence = new Presence({
-		clientId: "643159616498171934"
+		clientId: "643159616498171934",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let title: string;
 const actionURL = new URL(document.location.href),
 	title2URL = new URL(document.location.href);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/U/Uncyclopedia/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	title = (

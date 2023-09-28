@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "661150919584514067"
+		clientId: "661150919584514067",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/U/Usercord.org/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.hostname === "usercord.org") {
 		presenceData.details = "Viewing Page:";

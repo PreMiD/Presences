@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "796810487177674822"
+		clientId: "796810487177674822",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "coinbase",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/C/Coinbase/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;
 	if (path === "/") presenceData.details = "Browsing...";

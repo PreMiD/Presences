@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "928611702638010398"
+		clientId: "928611702638010398",
 	}),
 	appCategories: Record<string, string> = {
 		LIBRARIES_AND_DEMO: "Browsing for libraries and demos",
@@ -35,12 +35,13 @@ const presence = new Presence({
 		FINANCE: "Browsing for financing apps",
 		PHOTOGRAPHY: "Browsing for photography apps",
 		FOOD_AND_DRINK: "Browsing for food apps",
-		WATCH_FACE: "Browisng for android watch faces"
+		WATCH_FACE: "Browisng for android watch faces",
 	};
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Google%20Play/assets/logo.png",
 		},
 		query = new URLSearchParams(document.location.search),
 		paths: string[] = document.location.pathname.split("/");
@@ -117,12 +118,12 @@ presence.on("UpdateData", async () => {
 
 								if (logo) presenceData.largeImageKey = await getShortURL(logo);
 
-								presenceData.details = `Viewing ${name ? name : "app"}`;
+								presenceData.details = `Viewing ${name ?? "app"}`;
 								presenceData.buttons = [
 									{
 										label: "View app",
-										url: await getShortURL(document.location.href)
-									}
+										url: await getShortURL(document.location.href),
+									},
 								];
 							}
 

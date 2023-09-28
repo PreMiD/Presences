@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "802958833214423081"
+		clientId: "802958833214423081",
 	}),
 	getStrings = async () => {
 		return presence.getStrings(
@@ -8,7 +8,7 @@ const presence = new Presence({
 				pause: "general.paused",
 				browse: "general.browsing",
 				search: "general.searchSomething",
-				listen: "general.buttonListenAlong"
+				listen: "general.buttonListenAlong",
 			},
 			await presence.getSetting<string>("lang").catch(() => "en")
 		);
@@ -36,89 +36,90 @@ let elapsed = Math.floor(Date.now() / 1000),
 const statics = {
 	"/stream/": {
 		details: "Browsing...",
-		state: "Latest Posts"
+		state: "Latest Posts",
 	},
 	"/terms-of-use/": {
 		details: "Viewing...",
-		state: "Terms of Service"
+		state: "Terms of Service",
 	},
 	"/pages/privacy/": {
 		details: "Viewing...",
-		state: "Privacy Policy"
+		state: "Privacy Policy",
 	},
 	"/pages/cookies/": {
 		details: "Viewing...",
-		state: "Cookies Policy"
+		state: "Cookies Policy",
 	},
 	"/pages/copyright/": {
 		details: "Viewing...",
-		state: "Copyright"
+		state: "Copyright",
 	},
 	"/pages/copyright/report": {
 		details: "Viewing...",
-		state: "Report Copyright Infringement"
+		state: "Report Copyright Infringement",
 	},
 	"/pages/contact": {
 		details: "Viewing...",
-		state: "Contact"
+		state: "Contact",
 	},
 	"/imprint/": {
 		details: "Viewing...",
-		state: "Imprint"
+		state: "Imprint",
 	},
 	"/community-guidelines/": {
 		details: "Viewing...",
-		state: "Community Guidelines"
+		state: "Community Guidelines",
 	},
 	"/law-enforcement-guidelines/": {
 		details: "Viewing...",
-		state: "Law Enforcement Guidelines"
+		state: "Law Enforcement Guidelines",
 	},
 	"/network-enforcement-act/": {
 		details: "Viewing...",
-		state: "Network Enforcement Act"
+		state: "Network Enforcement Act",
 	},
 	"/mobile/": {
 		details: "Viewing App...",
-		state: "SoundCloud Mobile"
+		state: "SoundCloud Mobile",
 	},
 	"/mobile/pulse/": {
 		details: "Viewing App...",
-		state: "Pulse"
+		state: "Pulse",
 	},
 	"/notifications/": {
 		details: "Browsing...",
-		state: "Notifications"
+		state: "Notifications",
 	},
 	"/messages/": {
 		details: "Browsing...",
-		state: "Messages"
+		state: "Messages",
 	},
 	"/popular/searches/": {
 		details: "Browsing...",
-		state: "Popular Searches"
+		state: "Popular Searches",
 	},
 	"/people/": {
 		details: "Viewing...",
-		state: "Who to Follow"
+		state: "Who to Follow",
 	},
 	"/upload": {
-		details: "Uploading..."
+		details: "Uploading...",
 	},
 	"/logout": {
-		details: "Logged Out"
-	}
+		details: "Logged Out",
+	},
 };
 
 presence.on("UpdateData", async () => {
 	const path = location.pathname.replace(/\/?$/, "/"),
-		[showBrowsing, showSong, showTimestamps, cover, newLang] =
+		[showBrowsing, showSong, showTimestamps, showCover, showButtons, newLang] =
 			await Promise.all([
 				presence.getSetting<boolean>("browse"),
 				presence.getSetting<boolean>("song"),
 				presence.getSetting<boolean>("timestamp"),
 				presence.getSetting<boolean>("cover"),
-				presence.getSetting<string>("lang").catch(() => "en")
+				presence.getSetting<boolean>("buttons"),
+				presence.getSetting<string>("lang").catch(() => "en"),
 			]),
 		playing = Boolean(document.querySelector(".playControls__play.playing"));
 
@@ -128,8 +129,9 @@ presence.on("UpdateData", async () => {
 	}
 
 	let presenceData: PresenceData = {
-		largeImageKey: "soundcloud",
-		startTimestamp: elapsed
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/SoundCloud/assets/logo.png",
+		startTimestamp: elapsed,
 	};
 
 	if (document.location.href !== prevUrl) {
@@ -160,7 +162,7 @@ presence.on("UpdateData", async () => {
 							presence.timestampFromFormat(timePassed)
 						);
 					}
-				})()
+				})(),
 			],
 			[startTimestamp, endTimestamp] = presence.getTimestamps(
 				currentTime,
@@ -175,7 +177,7 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = startTimestamp;
 		presenceData.endTimestamp = endTimestamp;
 
-		if (cover) {
+		if (showCover) {
 			presenceData.largeImageKey =
 				document
 					.querySelector<HTMLSpanElement>(
@@ -184,15 +186,17 @@ presence.on("UpdateData", async () => {
 					.style.backgroundImage.match(/"(.*)"/)?.[1]
 					.replace("-t50x50.jpg", "-t500x500.jpg") ?? "soundcloud";
 		}
-		presenceData.smallImageKey = playing ? "play" : "pause";
+		presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
 		presenceData.smallImageText = strings[playing ? "play" : "pause"];
 
-		presenceData.buttons = [
-			{
-				label: strings.listen,
-				url: `https://soundcloud.com${pathLinkSong}`
-			}
-		];
+		if (showButtons) {
+			presenceData.buttons = [
+				{
+					label: strings.listen,
+					url: `https://soundcloud.com${pathLinkSong}`,
+				},
+			];
+		}
 	}
 
 	if ((!playing || !showSong) && showBrowsing) {
@@ -259,13 +263,13 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) {
 		if (presenceData.details.match("(Browsing|Viewing|Discovering)")) {
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = strings.browse;
 		} else if (presenceData.details.match("(Searching)")) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.search;
 		} else if (presenceData.details.match("(Uploading)")) {
-			presenceData.smallImageKey = "uploading";
+			presenceData.smallImageKey = Assets.Uploading;
 			presenceData.smallImageText = "Uploading..."; // no string available
 		} else if (!showTimestamps || (!playing && !showBrowsing)) {
 			delete presenceData.startTimestamp;

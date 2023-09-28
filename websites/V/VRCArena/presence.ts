@@ -1,12 +1,13 @@
 /* Global variables */
 const presence = new Presence({
-	clientId: "795235371029233684"
+	clientId: "795235371029233684",
 });
 
 /* Main eventHandler */
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/V/VRCArena/assets/logo.jpg",
 		},
 		privacymode = await presence.getSetting<boolean>("privacy");
 
@@ -15,8 +16,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View on VRCArena",
-					url: document.URL.split("?")[0]
-				}
+					url: document.URL.split("?")[0],
+				},
 			];
 		}
 		// Categories

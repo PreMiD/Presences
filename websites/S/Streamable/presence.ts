@@ -1,14 +1,15 @@
 const presence = new Presence({
-		clientId: "630847999106482176"
+		clientId: "630847999106482176",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "streamable"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Streamable/assets/logo.png",
 		},
 		player = document.querySelector<HTMLVideoElement>(".video-player-tag");
 
@@ -23,7 +24,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector(".metadata #title").textContent;
 		presenceData.state =
 			document.querySelector(".metadata #visits").textContent;
-		presenceData.smallImageKey = player.paused ? "pause" : "play";
+		presenceData.smallImageKey = player.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = player.paused
 			? (await strings).pause
 			: (await strings).play;

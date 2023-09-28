@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "778092541836656712"
+		clientId: "778092541836656712",
 	}),
 	modePair: { [key: string]: string } = {
 		Arrows: "arrows2",
 		"Death Arrows": "arrows2",
-		Grapple: "grapple2"
+		Grapple: "grapple2",
 	};
 
 interface IFrameData {
@@ -19,7 +19,8 @@ let gameStartTimestamp: number = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "bonk"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/B/Bonk.io/assets/logo.png",
 	};
 
 	if (ifd?.id) {

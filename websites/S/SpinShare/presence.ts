@@ -1,11 +1,12 @@
 const presence = new Presence({
-		clientId: "752151960743837817"
+		clientId: "752151960743837817",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "bigdefault"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/SpinShare/assets/logo.png",
 	};
 
 	if (document.location.hostname === "spinsha.re") {
@@ -38,7 +39,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = document.querySelector(".song-title").textContent;
 			presenceData.state = document.querySelector(".song-artist").textContent;
 			if (document.querySelector(".player-active"))
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 		} else if (pathname.startsWith("/user")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Browsing User Profile:";

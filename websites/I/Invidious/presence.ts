@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "761617743593209869"
+	clientId: "761617743593209869",
 });
 
 function getTime() {
@@ -14,8 +14,9 @@ function getTime() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "icon",
-		smallImageKey: "more"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/I/Invidious/assets/logo.png",
+		smallImageKey: "more",
 	};
 	let clear = false;
 

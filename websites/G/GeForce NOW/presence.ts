@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "864631234339930132"
+		clientId: "864631234339930132",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -9,9 +9,10 @@ presence.on("UpdateData", async () => {
 	const privacy: boolean = await presence.getSetting<boolean>("privacy"),
 		showTimestamp: boolean = await presence.getSetting<boolean>("timestamp"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/GeForce%20NOW/assets/logo.png",
 			smallImageKey: "small",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		};
 
 	if (!showTimestamp) delete presenceData.startTimestamp;

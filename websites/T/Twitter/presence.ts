@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "802958757909889054"
+		clientId: "802958757909889054",
 	}),
 	capitalize = (text: string): string => {
 		return text
@@ -49,7 +49,7 @@ async function getStrings() {
 			search: "general.searchFor",
 			searchSomething: "general.searchSomething",
 			viewing: "general.viewing",
-			profile: "general.viewProfile"
+			profile: "general.viewProfile",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -177,7 +177,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: title,
 		state: info,
-		largeImageKey: image
+		largeImageKey: image,
 	};
 
 	if (time) presenceData.startTimestamp = elapsed;

@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "698217762660548799"
+		clientId: "698217762660548799",
 	}),
 	browsingTimestamp = ~~(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "mangakakalot",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/MangaKakalot/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	switch (location.hostname) {
@@ -18,7 +19,7 @@ presence.on("UpdateData", async () => {
 
 				presenceData.details = title;
 				presenceData.state = `CHAPTER ${chapterNum}`;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/manga_list")) {
 				const [, genre] = document
 					.querySelector(".breadcrumb.breadcrumbs > p > span:nth-child(3) > a")
@@ -42,7 +43,7 @@ presence.on("UpdateData", async () => {
 					.querySelector(".title.update-title")
 					.textContent.split(" ")[1]
 					.replaceAll("_", " ");
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			} else presenceData.details = "Browsing...";
 			break;
 		}
@@ -55,7 +56,7 @@ presence.on("UpdateData", async () => {
 
 				presenceData.details = title;
 				presenceData.state = `CHAPTER ${chapterNum}`;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (location.pathname.includes("/manga")) {
 				presenceData.details = "Viewing manga:";
 				presenceData.state = document.querySelector(
@@ -73,7 +74,7 @@ presence.on("UpdateData", async () => {
 					.childNodes[4].textContent.split(":")[1]
 					.trim()
 					.replaceAll("_", " ");
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			} else presenceData.details = "Browsing...";
 
 			break;

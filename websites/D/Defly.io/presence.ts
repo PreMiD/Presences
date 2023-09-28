@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "685054359200858241"
+		clientId: "685054359200858241",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "deflyicon",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Defly.io/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname.includes("/gamemode-rules"))

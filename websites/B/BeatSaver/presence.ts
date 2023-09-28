@@ -1,5 +1,5 @@
 ﻿const presence = new Presence({
-		clientId: "837997079208525835"
+		clientId: "837997079208525835",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -11,7 +11,7 @@ let preview = {
 	customDifficulty: "",
 	playing: false,
 	duration: "",
-	gameMode: ""
+	gameMode: "",
 };
 
 presence.on(
@@ -34,11 +34,12 @@ presence.on("UpdateData", async () => {
 	const [time, buttons, cover] = await Promise.all([
 			presence.getSetting<boolean>("time"),
 			presence.getSetting<boolean>("buttons"),
-			presence.getSetting<boolean>("cover")
+			presence.getSetting<boolean>("cover"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/BeatSaver/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		};
 
 	if (
@@ -52,7 +53,7 @@ presence.on("UpdateData", async () => {
 				? `${preview.gameMode} ${preview.difficulty}`
 				: `${preview.customDifficulty}`;
 		if (preview.playing) {
-			presenceData.smallImageKey = "playing";
+			presenceData.smallImageKey = Assets.Play;
 			if (preview.duration) {
 				const timestamps = presence.getTimestamps(
 					presence.timestampFromFormat(preview.currentTime),
@@ -62,7 +63,7 @@ presence.on("UpdateData", async () => {
 			}
 			presenceData.smallImageText = "Playing";
 		} else {
-			presenceData.smallImageKey = "paused";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Paused";
 		}
 		if (document.location.href.includes("/maps/")) {
@@ -72,14 +73,14 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Page",
-					url: document.location.href
+					url: document.location.href,
 				},
 				{
 					label: "View Uploader's Profile",
 					url: `https://beatsaver.com${document
 						.querySelector(".list-group-item.d-flex.justify-content-between")
-						.getAttribute("href")}`
-				}
+						.getAttribute("href")}`,
+				},
 			];
 		} else {
 			presenceData.largeImageKey = (
@@ -102,7 +103,7 @@ presence.on("UpdateData", async () => {
 									.src.split("=")[1]
 							}']`
 						)
-						.getAttribute("href")}`
+						.getAttribute("href")}`,
 				},
 				{
 					label: "View Uploader's Profile",
@@ -114,8 +115,8 @@ presence.on("UpdateData", async () => {
 									.src.split("=")[1]
 							}']`
 						)
-						.parentElement.children[1].firstElementChild.getAttribute("href")}`
-				}
+						.parentElement.children[1].firstElementChild.getAttribute("href")}`,
+				},
 			];
 		}
 	} else if (document.location.href.includes("/?q=")) {
@@ -176,15 +177,15 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Page",
-					url: document.location.href
+					url: document.location.href,
 				},
 				{
 					label: "View Uploader's Profile",
 					url: `https://beatsaver.com${document
 						.querySelectorAll(".list-group-item.d-flex.justify-content-between")
 						.item(0)
-						.getAttribute("href")}`
-				}
+						.getAttribute("href")}`,
+				},
 			];
 		}
 	} else if (document.location.pathname.includes("/profile")) {
@@ -193,9 +194,22 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Profile",
-				url: document.location.href
-			}
+				url: document.location.href,
+			},
 		];
+	} else if (document.location.pathname.includes("/playlists/")) {
+		presenceData.details = "Viewing Playlist";
+		presenceData.state = document.querySelector(".ms-4")?.textContent;
+		presenceData.buttons = [
+			{
+				label: "View Playlist",
+				url: document.location.href,
+			},
+		];
+		if (cover) {
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>("img[alt='Cover']")?.src;
+		}
 	} else if (document.location.pathname === "/") {
 		presenceData.details = "Browsing Beatmaps";
 		if (

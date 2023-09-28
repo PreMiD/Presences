@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "923958284032032818"
+		clientId: "923958284032032818",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/K/Konachan/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		[shortTitle] = document.title.split(/[|]/, 1),
 		path = document.location.pathname;
@@ -16,7 +17,7 @@ presence.on("UpdateData", () => {
 		presenceData.details = "Viewing an artwork";
 		presenceData.state = shortTitle;
 		presenceData.buttons = [
-			{ label: "View Artwork", url: document.location.href }
+			{ label: "View Artwork", url: document.location.href },
 		];
 	} else if (path.startsWith("/history"))
 		presenceData.details = "Viewing post history";
@@ -44,7 +45,7 @@ presence.on("UpdateData", () => {
 					presenceData.details = "Viewing an artist";
 					presenceData.state = shortTitle;
 					presenceData.buttons = [
-						{ label: "View Artist", url: document.location.href }
+						{ label: "View Artist", url: document.location.href },
 					];
 				} else if (path === "/user") presenceData.details = "Looking up users";
 				else if (path.startsWith("/user")) {

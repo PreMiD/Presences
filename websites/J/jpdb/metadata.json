@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "nut1414",
+		"id": "179876009615556609"
+	},
+	"service": "jpdb",
+	"description": {
+		"en": "Powerful Japanese dictionary and an all-in-one learning system for kanji and vocabulary."
+	},
+	"url": "jpdb.io",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/jpdb/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/jpdb/assets/thumbnail.png",
+	"color": "#fe0000",
+	"category": "other",
+	"tags": [
+		"japanese",
+		"english",
+		"dictionary",
+		"translator",
+		"language"
+	]
+}

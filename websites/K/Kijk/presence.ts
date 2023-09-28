@@ -1,110 +1,159 @@
 const presence = new Presence({
-		clientId: "812413011502825504"
+		clientId: "812413011502825504",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let title: HTMLElement, title2: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/K/Kijk/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		search = document.querySelector<HTMLInputElement>(
-			"#__next > div > div > div.SearchModalstyle__SearchModalStyle-sc-1h6b5wy-0.knmuVj > div.SearchModalstyle__SearchModalHeaderStyle-sc-1h6b5wy-1.kNvWZE > div > div:nth-child(2) > div.SearchModalstyle__SearchModalInputWrapperStyle-sc-1h6b5wy-5.iwOFOK > input"
+			'[data-testid="searchInput"]'
 		),
-		page = window.location.pathname,
-		[privacy, buttons] = await Promise.all([
+		{ href, pathname } = window.location,
+		[privacy, buttons, covers] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("buttons")
-		]);
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("covers"),
+		]),
+		check = document.querySelector(
+			'[class="NavItemstyle__ItemStyle-sc-1v7l1xb-1 hEDlux"]'
+		),
+		title =
+			document.querySelector('[data-testid="videoMetaDataTitle"]')
+				?.textContent ??
+			document.querySelector<HTMLMetaElement>('[name="og:title"]')?.content,
+		video = document.querySelector("video");
 	if (privacy) presenceData.details = "Browsing...";
-	else if (search.value) {
-		presenceData.details = "Zoekt voor:";
+	else if (search?.value) {
+		presenceData.details = "Zoekt naar";
 		presenceData.state = search.value;
-		presenceData.smallImageKey = "searching";
-	} else if (page === "/") presenceData.details = "Bekijkt de homepagina";
-	else if (page.includes("/films/")) {
-		delete presenceData.startTimestamp;
+		presenceData.smallImageKey = Assets.Search;
+	} else {
+		switch (pathname.split("/")[1]) {
+			case "": {
+				presenceData.details = "Bekijkt de home pagina";
+				break;
+			}
+			case "films": {
+				if (check?.textContent === "Films") {
+					presenceData.details = "Bekijkt alle films";
+					presenceData.buttons = [
+						{
+							label: "Bekijk Alle Films",
+							url: href,
+						},
+					];
+				} else {
+					delete presenceData.startTimestamp;
 
-		title2 = JSON.parse(document.querySelector("#__NEXT_DATA__").innerHTML)
-			.props.pageProps.initialMovies[0].title;
-		title = document.querySelector("#player");
-		if (buttons) {
-			presenceData.buttons = [
-				{
-					label: `Bekijk ${title2}`,
-					url: document.location.href
+					presenceData.buttons = [
+						{
+							label: "Bekijk Film",
+							url: href,
+						},
+					];
+					if (!video) {
+						presenceData.largeImageKey = document
+							.querySelector('[data-testid="imageMediaComponent"]')
+							?.getAttribute("src");
+						presenceData.details = "Bekijkt";
+						presenceData.state = title;
+					} else {
+						presenceData.largeImageKey =
+							document.querySelector<HTMLMetaElement>(
+								'[name="og:image"]'
+							).content;
+						if (!video.paused) {
+							[, presenceData.endTimestamp] =
+								presence.getTimestampsfromMedia(video);
+							presenceData.smallImageKey = Assets.Play;
+						} else presenceData.smallImageKey = Assets.Pause;
+						if (
+							!document
+								.querySelector('[class="jw-text jw-reset-text jw-text-alt"]')
+								?.textContent.includes("Adv.")
+						)
+							presenceData.details = title;
+						else presenceData.details = "Advertenties";
+					}
 				}
-			];
-		}
-		if (
-			!title.className.includes("paused") &&
-			!title.className.includes("playing")
-		) {
-			presenceData.details = "Bekijkt:";
-			presenceData.state = title2;
-		} else {
-			presenceData.details = title2;
-			if (title.className.includes("playing")) {
-				[, presenceData.endTimestamp] = presence.getTimestamps(
-					presence.timestampFromFormat(
-						document.querySelector(
-							"#player-jw-wrapper > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-elapsed"
-						).textContent
-					),
-					presence.timestampFromFormat(
-						document.querySelector(
-							"#player-jw-wrapper > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-duration"
-						).textContent
-					)
-				);
-				presenceData.smallImageKey = "play";
-			} else {
-				presenceData.details = "Bekijkt:";
-				presenceData.state = title2;
+				break;
+			}
+			case "programmas": {
+				if (
+					check?.textContent === "Programma's" ||
+					check?.textContent === "Gemist"
+				) {
+					if (check?.textContent.includes("Gemist"))
+						presenceData.details = "Bekijkt alle gemiste programma's";
+					else presenceData.details = `Bekijkt alle ${check?.textContent}`;
+					presenceData.buttons = [
+						{
+							label: "Bekijk Programma's",
+							url: href,
+						},
+					];
+				} else {
+					delete presenceData.startTimestamp;
+
+					presenceData.buttons = [
+						{
+							label: "Bekijk Programma",
+							url: href,
+						},
+					];
+					if (!video) {
+						presenceData.largeImageKey = document
+							.querySelector('[data-testid="imageMediaComponent"]')
+							?.getAttribute("src");
+						presenceData.details = "Bekijkt";
+						presenceData.state = title;
+					} else {
+						presenceData.largeImageKey =
+							document.querySelector<HTMLMetaElement>(
+								'[name="og:image"]'
+							).content;
+						if (!video.paused) {
+							[, presenceData.endTimestamp] =
+								presence.getTimestampsfromMedia(video);
+							presenceData.smallImageKey = Assets.Play;
+						} else presenceData.smallImageKey = Assets.Pause;
+						if (
+							!document
+								.querySelector('[class="jw-text jw-reset-text jw-text-alt"]')
+								?.textContent.includes("Adv.")
+						)
+							presenceData.details = title;
+						else presenceData.details = "Advertenties";
+					}
+				}
+				break;
+			}
+			case "fragmenten": {
+				presenceData.details = "Bekijkt alle fragmenten";
+				presenceData.buttons = [
+					{
+						label: "Bekijk Alle Fragmenten",
+						url: href,
+					},
+				];
+				break;
+			}
+			default: {
+				presenceData.details = `Bekijkt ${pathname.split("/")[1]}`;
+				break;
 			}
 		}
-	} else if (page.includes("/films")) presenceData.details = "Bekijkt Films";
-	else if (page.includes("/programmas/")) {
-		delete presenceData.startTimestamp;
+	}
 
-		title2 = JSON.parse(document.querySelector("#__NEXT_DATA__").innerHTML)
-			.props.pageProps.video.series.title;
-		title = document.querySelector("#player");
-		if (buttons) {
-			presenceData.buttons = [
-				{
-					label: `Bekijk ${title2}`,
-					url: document.location.href
-				}
-			];
-		}
-		if (title.className.includes("jw-state-paused")) {
-			presenceData.details = title2;
-			delete presenceData.endTimestamp;
-			presenceData.smallImageKey = "pause";
-		} else if (title.className.includes("jw-state-playing")) {
-			presenceData.details = title2;
-			[, presenceData.endTimestamp] = presence.getTimestamps(
-				presence.timestampFromFormat(
-					document.querySelector(
-						"#player-jw-wrapper > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-elapsed"
-					).textContent
-				),
-				presence.timestampFromFormat(
-					document.querySelector(
-						"#player-jw-wrapper > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-duration"
-					).textContent
-				)
-			);
-			presenceData.smallImageKey = "play";
-		} else {
-			presenceData.details = "Bekijkt:";
-			presenceData.state = title2;
-		}
-	} else if (page.includes("/programmas"))
-		presenceData.details = "Bekijkt Films";
-
+	if (!covers) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/K/Kijk/assets/logo.png";
+	}
+	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "unicornbetrayal",
+		"id": "377284540420587541"
+	},
+	"service": "Tanks.gg",
+	"description": {
+		"en": "World of Tanks tank info and models."
+	},
+	"url": "tanks.gg",
+	"version": "1.0.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tanks.gg/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tanks.gg/assets/thumbnail.png",
+	"color": "#481109",
+	"category": "games",
+	"tags": [
+		"world-of-tanks",
+		"tanks",
+		"gaming",
+		"stats",
+		"compare"
+	]
+}

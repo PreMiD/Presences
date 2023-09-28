@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Minx",
+		"id": "829346671544107088"
+	},
+	"service": "JAVX",
+	"description": {
+		"en": "JAVX - Watch JAV, Watch Porn, Watch Sex Video 18+ Full HD Uncensored",
+		"vi_VN": "JAVX - Xem JAV, Xem Porn, Xem Phim Sex 18+ Full HD Không Che Mới Nhất",
+		"nl": "JAVX - Bekijk JAV, bekijk porno, bekijk seksvideo 18+ Full HD ongecensureerd"
+	},
+	"url": "javx.net",
+	"regExp": "([a-z0-9-]+[.])*javx([.][a-z]+)+[/]",
+	"version": "1.1.16",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/JAVX/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/JAVX/assets/thumbnail.png",
+	"color": "#262626",
+	"category": "videos",
+	"tags": [
+		"jav",
+		"porn",
+		"nsfw"
+	],
+	"iframe": true,
+	"iFrameRegExp": "([a-z0-9-]+[.])*ijav.tv/play/([a-z0-9-])+"
+}

@@ -1,12 +1,13 @@
 const presence = new Presence({
-	clientId: "719757905888542730"
+	clientId: "719757905888542730",
 });
 
 let actionTimestamp: number = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "gitbookw"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Gitbook/assets/logo.png",
 	};
 
 	if (location.hostname === "app.gitbook.com") {
@@ -20,7 +21,7 @@ presence.on("UpdateData", async () => {
 				: "In a Dashboard";
 			actionTimestamp = null;
 		} else {
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 			presenceData.smallImageText = "Editing";
 
 			const docName = document.querySelector("[class*='logoText-'] span"),
@@ -32,7 +33,7 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = actionTimestamp;
 		}
 	} else {
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Viewing";
 
 		const docName = document.querySelector("[class*='logoText-'] span"),

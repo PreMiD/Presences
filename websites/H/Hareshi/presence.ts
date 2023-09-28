@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "944271713997324339"
+		clientId: "944271713997324339",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -9,35 +9,17 @@ presence.on("UpdateData", async () => {
 	const [timestamps, privacy, buttons] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		pathArray = document.location.toString().split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "hareshi",
-			startTimestamp: browsingTimestamp
-		};
-	if (document.location.hostname === "www.hareshi.net") {
-		switch (pathArray[3]) {
-			case "browse":
-				presenceData.details = "เรียกดู";
-				if (pathArray[4] === "anime") {
-					presenceData.state =
-						document.querySelector("#anipop")?.textContent ?? "ไม่พบข้อมูล";
-				} else {
-					presenceData.state =
-						document.querySelector(
-							"#__layout > div > div > div > div.container > h1"
-						)?.textContent ?? "ไม่พบข้อมูล";
-				}
-				break;
-			case "calendar":
-				presenceData.details = "ตารางออกอากาศ";
-				break;
-			default:
-				presenceData.details = "หน้าแรก";
-				break;
-		}
-	} else if (document.location.hostname === "forum.hareshi.net") {
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/Hareshi/assets/logo.jpg",
+			details: "หน้าแรก",
+			startTimestamp: browsingTimestamp,
+		},
+		{ hostname, href, search } = document.location;
+	if (hostname === "forum.hareshi.net") {
 		switch (pathArray[3]) {
 			case "forums":
 				page = "ฟอรั่ม";
@@ -65,9 +47,9 @@ presence.on("UpdateData", async () => {
 				break;
 			case "whats-new":
 				presenceData.details = "มีอะไรใหม่ ?";
-				presenceData.smallImageKey = "question";
+				presenceData.smallImageKey = Assets.Question;
 				if (!privacy && pathArray[4]) {
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					switch (pathArray[4]) {
 						case "posts":
 							presenceData.smallImageText = "ดูโพสต์ใหม่";
@@ -87,7 +69,7 @@ presence.on("UpdateData", async () => {
 			case "members":
 				presenceData.details = "สมาชิก";
 				if (!privacy && pathArray[5]) {
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 					switch (pathArray[5]) {
 						case "#latest-activity":
 							presenceData.smallImageText = "เคลื่อนไหวล่าสุด";
@@ -113,15 +95,15 @@ presence.on("UpdateData", async () => {
 							"#top > div.p-body-header > div > div > div > h1 > a > em"
 						)?.textContent ?? "ไม่พบข้อมูล";
 				}
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				break;
 			default:
 				presenceData.details = "ฟอรั่ม";
 				break;
 		}
 		if (!privacy && pathArray[4] === "find-source") {
-			presenceData.smallImageKey = "reading";
-			switch (document.location.search) {
+			presenceData.smallImageKey = Assets.Reading;
+			switch (search) {
 				case "?order=reply_count":
 					presenceData.smallImageText = "ยอดนิยม";
 					break;
@@ -149,9 +131,27 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: `ดู${page}`,
-					url: document.location.href.replace(/#\d+/, "")
-				}
+					url: href.replace(/#\d+/, ""),
+				},
 			];
+		}
+	} else {
+		switch (pathArray[3]) {
+			case "browse":
+				presenceData.details = "เรียกดู";
+				if (pathArray[4] === "anime") {
+					presenceData.state =
+						document.querySelector("#anipop")?.textContent ?? "ไม่พบข้อมูล";
+				} else {
+					presenceData.state =
+						document.querySelector(
+							"#__layout > div > div > div > div.container > h1"
+						)?.textContent ?? "ไม่พบข้อมูล";
+				}
+				break;
+			case "calendar":
+				presenceData.details = "ตารางออกอากาศ";
+				break;
 		}
 	}
 	if (!timestamps) {

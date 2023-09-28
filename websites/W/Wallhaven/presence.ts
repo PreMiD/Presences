@@ -27,7 +27,7 @@ const pages: PageContext[] = [
 				presenceData,
 				{
 					strings,
-					query
+					query,
 				}: {
 					strings: { [key: string]: string };
 					query: { page: number };
@@ -39,7 +39,7 @@ const pages: PageContext[] = [
 					.querySelector<HTMLElement>("header.listing-header>h1")
 					.textContent?.trim()}, Page ${query?.page || 1}`;
 				return presenceData;
-			}
+			},
 		},
 		{
 			middleware: ref =>
@@ -49,7 +49,7 @@ const pages: PageContext[] = [
 				context,
 				data,
 				{
-					strings
+					strings,
 				}: {
 					strings: { [key: string]: string };
 				}
@@ -66,7 +66,7 @@ const pages: PageContext[] = [
 				data.details = `${pageTitle}`;
 				delete data.buttons;
 				return data;
-			}
+			},
 		},
 		{
 			middleware: ref => !!ref.location.pathname.match(/\/search/gi),
@@ -75,7 +75,7 @@ const pages: PageContext[] = [
 				data,
 				{
 					strings,
-					query
+					query,
 				}: {
 					strings: { [key: string]: string };
 					query: { page: number; q: string };
@@ -91,7 +91,7 @@ const pages: PageContext[] = [
 				)}, Page ${query?.page || 1}`;
 
 				return data;
-			}
+			},
 		},
 		{
 			middleware: ref => !!ref.location.pathname.match(/\/w\/(\w+)/gi),
@@ -99,7 +99,7 @@ const pages: PageContext[] = [
 				context,
 				data,
 				{
-					showButton
+					showButton,
 				}: {
 					strings: { [key: string]: string };
 					showButton: boolean;
@@ -119,13 +119,13 @@ const pages: PageContext[] = [
 					data.buttons = [
 						{
 							label: "Open Wallpaper URL",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				} else delete data.buttons;
 
 				return data;
-			}
+			},
 		},
 		{
 			middleware: ref => !!ref.window,
@@ -134,25 +134,26 @@ const pages: PageContext[] = [
 				data.state = strings.browsing;
 				data.details = "";
 				return data;
-			}
-		}
+			},
+		},
 	],
 	presence = new Presence({
-		clientId: "813563332753752112"
+		clientId: "813563332753752112",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/W/Wallhaven/assets/logo.png",
 	};
 	if (document.location.hostname === "wallhaven.cc") {
 		const query: { [key: string]: unknown } = getQuery(),
 			strings: { [key: string]: string } = await presence.getStrings({
-				play: "presence.playback.playing",
-				pause: "presence.playback.paused",
-				browsing: "presence.activity.browsing",
-				searching: "presence.activity.searching",
-				reading: "presence.activity.reading"
+				play: "general.playing",
+				pause: "general.paused",
+				browsing: "general.browsing",
+				searching: "general.searching",
+				reading: "general.reading",
 			}),
 			context = pages.find(x => x.middleware(window, [query]));
 		if (!context) return;
@@ -162,7 +163,7 @@ presence.on("UpdateData", async () => {
 				query,
 				showButtons: await presence
 					.getSetting<boolean>("buttons")
-					.catch(() => true)
+					.catch(() => true),
 			})
 		);
 		if (!result?.details) {

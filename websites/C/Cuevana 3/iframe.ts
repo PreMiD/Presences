@@ -8,7 +8,7 @@ iframe.on("UpdateData", async () => {
 				iFrameVideo: true,
 				duration: video.duration,
 				currentTime: video.currentTime,
-				paused: video.paused
+				paused: video.paused,
 			});
 		}
 	}

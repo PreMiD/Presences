@@ -23,6 +23,6 @@ iframe.on("UpdateData", async () => {
 		aliveTime: ts.game.aliveTime,
 		pos: ts.game.lbPosition,
 		cellCount: ts.game.playerCells.size,
-		connected: !!ts.menuHandler.selectedServer
+		connected: !!ts.menuHandler.selectedServer,
 	});
 });

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "831432191120375829"
+		clientId: "831432191120375829",
 	}),
 	browsingTimestamp = Date.now() / 1000,
 	shortenedURLs: Record<string, string> = {};
@@ -21,14 +21,14 @@ async function getShortURL(url: string) {
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "tving",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/TVING/assets/logo.png",
 		smallImageKey: "browse",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	const [buttons, cover] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
-			presence.getSetting<boolean>("cover")
+			presence.getSetting<boolean>("cover"),
 		]),
 		pages: Record<
 			string,
@@ -37,13 +37,14 @@ presence.on("UpdateData", async () => {
 		> = {
 			"/(vod|movie)/player/": async video => {
 				const data: PresenceData = {
-					largeImageKey: "tving"
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/T/TVING/assets/logo.png",
 				};
 
 				if (video) {
 					const title = [
 							document.querySelector(".program-detail > h3").textContent.trim(),
-							document.querySelector(".title").textContent.trim()
+							document.querySelector(".title").textContent.trim(),
 						],
 						coverUrl = (
 							document.querySelector(".tags")
@@ -55,7 +56,7 @@ presence.on("UpdateData", async () => {
 						? title[0].replace(title[1], "").trim()
 						: "영화";
 
-					data.smallImageKey = video.paused ? "pause" : "play";
+					data.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 					data.smallImageText = video.paused ? "Paused" : "Playing";
 
 					if (cover && coverUrl) {
@@ -71,18 +72,19 @@ presence.on("UpdateData", async () => {
 							label: !location.pathname.includes("/movie/")
 								? "시리즈 보기"
 								: "영화 보기",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 
 					return data;
 				}
 			},
 			"/live/player/": video => ({
-				largeImageKey: "tving",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/T/TVING/assets/logo.png",
 				details: document.querySelector(".live-title__channel").textContent,
 				state: "라이브",
-				smallImageKey: video.paused ? "pause" : "play",
+				smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 				smallImageText: video.paused ? "일시 정지" : "재생 중",
 				endTimestamp: (() => {
 					if (!video.paused)
@@ -91,19 +93,19 @@ presence.on("UpdateData", async () => {
 				buttons: [
 					{
 						label: "라이브 보기",
-						url: document.URL
-					}
-				]
+						url: document.URL,
+					},
+				],
 			}),
 			"/schedule/": {
-				details: "일정을 보는 중"
+				details: "일정을 보는 중",
 			},
 			"/event/": {
-				details: "이벤트 보는 중"
+				details: "이벤트 보는 중",
 			},
 			"/faq/": {
-				details: "FAQ 보는 중"
-			}
+				details: "FAQ 보는 중",
+			},
 		};
 
 	for (const [path, data] of Object.entries(pages)) {

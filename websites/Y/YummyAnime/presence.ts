@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "639578071338582021"
+		clientId: "639578071338582021",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -47,13 +47,14 @@ presence.on("UpdateData", async () => {
 			Math.floor(duration)
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "ya",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/Y/YummyAnime/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		};
 
 	if (document.location.pathname.includes("/item")) {
 		if (iFrameVideo && !isNaN(duration)) {
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused
 				? (await strings).pause
 				: (await strings).play;
@@ -96,7 +97,7 @@ presence.on("UpdateData", async () => {
 				"body > div#main-page > div.content-block.container.clearfix > div.content > div > div.content-page.anime-page > h1"
 			);
 			presenceData.state = title.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 	} else if (document.location.pathname.includes("/movie")) {
 		presenceData.details = "Browsing through";
@@ -110,7 +111,7 @@ presence.on("UpdateData", async () => {
 		);
 		presenceData.details = "Searching for:";
 		presenceData.state = search.value;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.includes("/ongoing")) {
 		presenceData.details = "Browsing through";
 		presenceData.state = "ongoing animes";
@@ -128,14 +129,14 @@ presence.on("UpdateData", async () => {
 			);
 
 		presenceData.state = title.textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/post"))
 		presenceData.details = "Viewing posts";
 	else if (document.location.pathname.includes("/top"))
 		presenceData.details = "Viewing the top";
 	else if (document.URL === "https://otakustream.tv/") {
 		presenceData.details = "Browsing...";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

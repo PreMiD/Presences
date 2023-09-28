@@ -1,11 +1,15 @@
 const presence = new Presence({
-		clientId: "721740741570986016"
+		clientId: "721740741570986016",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	});
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Anghami/assets/logo.png",
+}
 
 function getTime(list: string[]): number {
 	let ret = 0;
@@ -20,13 +24,13 @@ function getTimestamps(audioTime: string, audioDuration: string): number[] {
 		Math.floor(Date.now() / 1000),
 		Math.floor(Date.now() / 1000) -
 			getTime(audioTime.split(":").reverse()) +
-			getTime(audioDuration.split(":").reverse())
+			getTime(audioDuration.split(":").reverse()),
 	];
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "anlg"
+			largeImageKey: Assets.Logo,
 		},
 		playback = !!document.querySelector("anghami-player");
 
@@ -43,7 +47,7 @@ presence.on("UpdateData", async () => {
 		selector = document.querySelector("anghami-player .action-artist .trim");
 		presenceData.state = (selector && selector.textContent) || null;
 
-		presenceData.smallImageKey = playing ? "play" : "pause";
+		presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
 		presenceData.smallImageText = playing
 			? (await strings).play
 			: (await strings).pause;
@@ -60,7 +64,7 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData, playback);
 	} else {
 		presenceData.details = (await strings).browsing;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).browsing;
 		presence.setActivity(presenceData);
 	}

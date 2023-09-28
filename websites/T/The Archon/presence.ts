@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "631990024719695901" // CLIENT ID FOR YOUR PRESENCE
+		clientId: "631990024719695901", // CLIENT ID FOR YOUR PRESENCE
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,8 @@ let user: HTMLElement, search: HTMLElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "archon"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/The%20Archon/assets/logo.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;
@@ -21,7 +22,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `${title.textContent.substring(0, 125)}...`;
 			else presenceData.state = title.textContent;
 
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/trending/")) {
 			presenceData.details = "Forums, Viewing the list of";
@@ -108,7 +109,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `${title.textContent.substring(0, 125)}...`;
 				else presenceData.state = title.textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else {
@@ -143,14 +144,14 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Forums, searching for:";
 				presenceData.state = search.textContent;
 
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 
 				presence.setActivity(presenceData);
 			} else {
 				presenceData.details = "Forums, about to search";
 				presenceData.state = "something up";
 
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 
 				presence.setActivity(presenceData);
 			}

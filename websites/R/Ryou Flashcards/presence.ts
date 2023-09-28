@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "794689032411283476"
+		clientId: "794689032411283476",
 	}),
 	startTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "ryou",
-			startTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Ryou%20Flashcards/assets/logo.png",
+			startTimestamp,
 		},
 		{ pathname } = window.location,
 		title = document.querySelector("title").textContent;

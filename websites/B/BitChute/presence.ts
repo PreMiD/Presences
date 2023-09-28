@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "875631338663870485"
+		clientId: "875631338663870485",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "bitchute_logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/BitChute/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
 		[privacy, buttons, time] = await Promise.all(
@@ -36,18 +37,18 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Watch Video",
-						url: href
+						url: href,
 					},
 					{
 						label: "View Channel",
-						url: channelName.href
-					}
+						url: channelName.href,
+					},
 				];
 			}
 		}
 		if (time && video && !video.paused) {
 			[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
-			presenceData.smallImageText = presenceData.smallImageKey = "play";
+			presenceData.smallImageText = presenceData.smallImageKey = Assets.Play;
 		}
 	} else if (pathname.startsWith("/channel")) {
 		const name = document.querySelector<HTMLAnchorElement>(

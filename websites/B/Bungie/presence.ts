@@ -1,11 +1,13 @@
 const presence = new Presence({
-		clientId: "711393222252822539"
+		clientId: "711393222252822539",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/Bungie/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;
 	if (

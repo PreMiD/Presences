@@ -1,7 +1,8 @@
 const presence = new Presence({
-		clientId: "641416608790609942"
+		clientId: "641416608790609942",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let search: HTMLInputElement,
 	min: number,
 	sec: number,
@@ -14,7 +15,8 @@ let search: HTMLInputElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "pia"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/P/piapro/assets/logo.png",
 	};
 
 	if (document.location.hostname === "piapro.jp") {
@@ -65,7 +67,7 @@ presence.on("UpdateData", async () => {
 
 			timestamps = presence.getTimestamps(time, time2);
 			[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Playing";
 
 			presenceData.details =
@@ -77,7 +79,7 @@ presence.on("UpdateData", async () => {
 			if (paused) {
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "Paused";
 			}
 		} else if (document.location.pathname.includes("/t/")) {
@@ -95,23 +97,23 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Browsing the";
 			presenceData.state = "music category";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/illust")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Browsing the";
 			presenceData.state = "illustrations category";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/text")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Browsing the";
 			presenceData.state = "text category";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/search/")) {
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Searching for:";
 			search = document.querySelector("#keyword");
 			presenceData.state = search.textContent;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else if (document.querySelector("#user_prof > p:nth-child(2)")) {
 			presenceData.details = "Viewing user:";
 			presenceData.state = document.querySelector(

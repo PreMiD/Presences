@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "723474173208297532"
+		clientId: "723474173208297532",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Gunivers/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		privacy = await presence.getSetting<boolean>("privacy"),
 		button = await presence.getSetting<boolean>("button");
@@ -35,8 +36,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View chronicle",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 			}
 		} else if (
@@ -86,8 +87,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View article",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 			}
 			if (window.location.pathname.includes("/author/")) {
@@ -97,8 +98,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View user",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			}
@@ -123,8 +124,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View project",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 			}
 		} else if (window.location.pathname.startsWith("/users/")) {
@@ -134,8 +135,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View user",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 			}
 		}

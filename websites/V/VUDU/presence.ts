@@ -1,6 +1,6 @@
 // Initialize the presence
 const presence = new Presence({
-	clientId: "697983563857002517"
+	clientId: "697983563857002517",
 });
 
 // Global variables
@@ -15,7 +15,7 @@ let startTime = Date.now(),
 	presenceData: PresenceData = {
 		largeImageKey:
 			"vudularge" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
-		details: "Browsing VUDU"
+		details: "Browsing VUDU",
 	};
 
 // Get the title
@@ -79,7 +79,7 @@ presence.on("UpdateData", () => {
 				largeImageKey:
 					"vudularge" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
 				details: `Watching ${metadata}`, //The upper section of the presence text
-				state: "Paused"
+				state: "Paused",
 			};
 		} else {
 			// Only run this once
@@ -94,7 +94,7 @@ presence.on("UpdateData", () => {
 				smallImageText: "Watching movies", //The text which is displayed when hovering over the small image
 				details: `Watching ${metadata}`, //The upper section of the presence text
 				startTimestamp: startTime, //The unix epoch timestamp for when to start counting from
-				endTimestamp: endTime //If you want to show Time Left instead of Elapsed, this is the unix epoch timestamp at which the timer ends
+				endTimestamp: endTime, //If you want to show Time Left instead of Elapsed, this is the unix epoch timestamp at which the timer ends
 			};
 		}
 

@@ -1,13 +1,14 @@
 const presence = new Presence({
-		clientId: "618212337895079996"
+		clientId: "618212337895079996",
 	}),
 	elapsed = Math.floor(Date.now() / 1000);
 let text;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "banner",
-		startTimestamp: elapsed
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Dueling%20Nexus/assets/logo.png",
+		startTimestamp: elapsed,
 	};
 
 	if (document.location.pathname === "/home") {

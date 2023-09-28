@@ -8,8 +8,8 @@ iframe.on("UpdateData", () => {
 					iFrameVideo: true,
 					currTime: hentai.currentTime,
 					duration: hentai.duration,
-					paused: hentai.paused
-				}
+					paused: hentai.paused,
+				},
 			});
 		}
 	}

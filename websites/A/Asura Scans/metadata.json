@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "theusaf",
+		"id": "193714715631812608"
+	},
+	"service": "Asura Scans",
+	"description": {
+		"en": "Read Comics on Asura Scans.",
+		"vi_VN": "Đọc truyện tranh tại Asura Scans."
+	},
+	"url": [
+		"asurascans.com",
+		"www.asurascans.com",
+		"asura.gg",
+		"asurascanstr.com",
+		"asura.nacm.xyz",
+		"asuracomics.com"
+	],
+	"version": "1.2.8",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Asura%20Scans/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Asura%20Scans/assets/thumbnail.png",
+	"color": "#6E3CAA",
+	"category": "other",
+	"tags": [
+		"comic",
+		"scanlation",
+		"manga",
+		"manhua",
+		"manhwa"
+	]
+}

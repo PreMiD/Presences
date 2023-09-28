@@ -11,7 +11,7 @@ const presence = new Presence({ clientId: "802246778010730548" }),
 		oddsRed: "span#lastbet.dynamic-view > span.redtext:nth-last-child(2)",
 		oddsBlue: "span#lastbet.dynamic-view > span.bluetext:nth-last-child(1)",
 		betsView: "span#lastbet.dynamic-view",
-		balance: "span#balance.dollar"
+		balance: "span#balance.dollar",
 	};
 
 let fightersCheck: string,
@@ -125,10 +125,11 @@ function abbrNum(number: number, decPlaces: number): string {
 presence.on("UpdateData", async () => {
 	const [bet, buttons] = await Promise.all([
 			presence.getSetting<boolean>("bet"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "salty"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Salty%20Bet/assets/logo.png",
 		};
 	switch (document.location.pathname) {
 		case "/":
@@ -158,16 +159,16 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "Tournament Bracket",
-								url: "https://www.saltybet.com/shaker?bracket=1"
-							}
+								url: "https://www.saltybet.com/shaker?bracket=1",
+							},
 						];
 						break;
 					case "saltgirl":
 						presenceData.buttons = [
 							{
 								label: "Exhibition Queue",
-								url: "https://www.saltybet.com/shaker?activerequests=1"
-							}
+								url: "https://www.saltybet.com/shaker?activerequests=1",
+							},
 						];
 						break;
 				}

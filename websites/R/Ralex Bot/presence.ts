@@ -1,10 +1,11 @@
 const presence = new Presence({
-		clientId: "715289275977039987"
+		clientId: "715289275977039987",
 	}),
 	browsedTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "ralexlogo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/R/Ralex%20Bot/assets/logo.jpg",
 	};
 	if (document.location.hostname === "bot.ralex.xyz") {
 		presenceData.startTimestamp = browsedTimestamp;
@@ -93,7 +94,7 @@ presence.on("UpdateData", async () => {
 				"yanitlayicilar",
 				"engelle",
 				"basvuru",
-				"logging"
+				"logging",
 			].includes(document.location.pathname)
 		)
 			presenceData.details = "Bir sunucusunun ayarlarına bakıyor";

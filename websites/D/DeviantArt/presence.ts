@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "664057766809436161"
+	clientId: "664057766809436161",
 });
 
 let currentURL = new URL(document.location.href),
@@ -7,8 +7,9 @@ let currentURL = new URL(document.location.href),
 const browsingTimestamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
 	details: "Viewing an unsupported page",
-	largeImageKey: "lg",
-	startTimestamp: browsingTimestamp
+	largeImageKey:
+		"https://cdn.rcd.gg/PreMiD/websites/D/DeviantArt/assets/logo.png",
+	startTimestamp: browsingTimestamp,
 };
 const updateCallback = {
 		_function: null as () => void,
@@ -20,7 +21,7 @@ const updateCallback = {
 		},
 		get present(): boolean {
 			return this._function !== null;
-		}
+		},
 	},
 	/**
 	 * Initialize/reset presenceData.
@@ -28,8 +29,9 @@ const updateCallback = {
 	resetData = (
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
-			largeImageKey: "lg",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/DeviantArt/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		}
 	): void => {
 		currentURL = new URL(document.location.href);
@@ -66,7 +68,7 @@ const updateCallback = {
 			);
 			presence.info(currentURL.href);
 			presence.info(error);
-		}
+		},
 	},
 	/**
 	 * Search for URL parameters.
@@ -101,7 +103,7 @@ const updateCallback = {
 
 		const presenceSettings = {
 			chatChannelNames: await presence.getSetting<boolean>("chatChannelNames"),
-			detailedSettings: await presence.getSetting<boolean>("detailedSettings")
+			detailedSettings: await presence.getSetting<boolean>("detailedSettings"),
 		};
 
 		switch (currentURL.hostname) {
@@ -227,7 +229,7 @@ const updateCallback = {
 										presenceData.details = "Viewing deviations";
 										presenceData.state = currentPath
 											.slice(1)
-											.concat(getURLParam("order") ? getURLParam("order") : [])
+											.concat(getURLParam("order") ?? [])
 											.join(" > ")
 											.trim()
 											.replaceAll("-", " ")
@@ -240,11 +242,10 @@ const updateCallback = {
 									}
 									case "daily-deviations": {
 										presenceData.details = "Viewing daily deviations";
-										presenceData.state = (
-											document.querySelector(
+										presenceData.state =
+											document.querySelector<HTMLSelectElement>(
 												"#daily-deviation-picker"
-											) as HTMLSelectElement
-										).textContent;
+											).textContent;
 
 										break;
 									}
@@ -479,7 +480,7 @@ const updateCallback = {
 																All: "Viewing a user's posts",
 																Journals: "Viewing a user's journals",
 																"Status Updates": "Viewing a user's statuses",
-																Polls: "Viewing a user's polls"
+																Polls: "Viewing a user's polls",
 															}[
 																document.querySelector(
 																	"._3xmU1 div a"

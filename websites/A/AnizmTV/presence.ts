@@ -1,9 +1,9 @@
-const presence = new Presence({ clientId: "778715860638367804" }),
+const presence = new Presence({ clientId: "980817205480550410" }),
 	strings = presence.getStrings({
-		playing: "presence.playback.playing",
-		paused: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
-		anime: "general.anime"
+		playing: "general.playing",
+		paused: "general.paused",
+		browsing: "general.browsing",
+		anime: "general.anime",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -16,7 +16,8 @@ presence.on("iFrameData", async (msg: HTMLVideoElement) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "anizm"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/AnizmTV/assets/logo.png",
 		},
 		title = document.querySelector(
 			"html > body > main > #pageContent > div > h2 > a"
@@ -81,15 +82,16 @@ presence.on("UpdateData", async () => {
 	if (title && episode) {
 		presenceData.details = title.textContent;
 		presenceData.state = episode.textContent.split("/ ").slice(1).join(" ");
+		presenceData.state += " İzliyor";
 		presenceData.buttons = [
 			{
 				label: "Bölümü İzle",
-				url: document.URL.split("&")[0]
+				url: document.URL.split("&")[0],
 			},
 			{
 				label: (await strings).anime,
-				url: animeSeries
-			}
+				url: animeSeries,
+			},
 		];
 	} else if (title) {
 		//Series part
@@ -97,8 +99,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: (await strings).anime,
-				url: animeSeries
-			}
+				url: animeSeries,
+			},
 		];
 	} else if (
 		document.location.pathname.includes("/SeriEkle") ||

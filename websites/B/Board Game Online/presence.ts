@@ -1,8 +1,8 @@
 const presence = new Presence({
-		clientId: "684570342085099546"
+		clientId: "684570342085099546",
 	}),
 	strings = presence.getStrings({
-		browse: "presence.activity.browsing"
+		browse: "general.browsing",
 	}),
 	getElement = (query: string): string => {
 		const element = document.querySelector(query);
@@ -10,93 +10,97 @@ const presence = new Presence({
 		else return;
 	};
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Online/assets/logo.png",
+}
+
 function setObject(path: string) {
 	switch (path) {
 		case "/": {
 			return {
-				details: "Browsing"
+				details: "Browsing",
 			};
 		}
 
 		case "forgot_login": {
 			return {
-				details: "Forgot Login"
+				details: "Forgot Login",
 			};
 		}
 
 		case "register": {
 			return {
-				details: "Registering..."
+				details: "Registering...",
 			};
 		}
 
 		case "newgame": {
 			return {
 				details: "Creating",
-				state: "New Game"
+				state: "New Game",
 			};
 		}
 
 		case "joingame": {
 			return {
 				details: "Joining",
-				state: "New Game"
+				state: "New Game",
 			};
 		}
 
 		case "shop": {
 			return {
 				details: "Viewing",
-				state: "Shop"
+				state: "Shop",
 			};
 		}
 
 		case "donations": {
 			return {
 				details: "Viewing",
-				state: "Donations"
+				state: "Donations",
 			};
 		}
 
 		case "info": {
 			return {
 				details: "Viewing",
-				state: "Game Info"
+				state: "Game Info",
 			};
 		}
 
 		case "recruit": {
 			return {
 				details: "Viewing",
-				state: "Recruit a Friend"
+				state: "Recruit a Friend",
 			};
 		}
 
 		case "terms": {
 			return {
 				details: "Viewing",
-				state: "Terms of Service"
+				state: "Terms of Service",
 			};
 		}
 
 		case "privacy": {
 			return {
 				details: "Viewing",
-				state: "Privacy Policy"
+				state: "Privacy Policy",
 			};
 		}
 
 		case "contact": {
 			return {
 				details: "Viewing",
-				state: "Contact"
+				state: "Contact",
 			};
 		}
 
 		case "/forum": {
 			return {
 				details: "Viewing Page",
-				state: "Forums"
+				state: "Forums",
 			};
 		}
 	}
@@ -104,7 +108,7 @@ function setObject(path: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "boardgameonline"
+			largeImageKey: Assets.Logo,
 		},
 		path = location.pathname,
 		query = location.search,
@@ -142,7 +146,7 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) {
 		if (presenceData.details.match("(Browsing|Viewing)")) {
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = (await strings).browse;
 		}
 		presence.setActivity(presenceData);

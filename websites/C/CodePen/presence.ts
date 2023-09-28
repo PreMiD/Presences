@@ -1,14 +1,15 @@
 const presence = new Presence({
-	clientId: "670111348130185267"
+	clientId: "670111348130185267",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/C/CodePen/assets/logo.png",
 		smallImageKey: "logo-outline",
 		smallImageText: "codepen.io",
 		details: "Codepen.io",
-		state: "Coding..."
+		state: "Coding...",
 	};
 
 	if (

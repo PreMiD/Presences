@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "650103083438702613"
+	clientId: "650103083438702613",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/V/VirusTotal/assets/logo.png",
 	};
 
 	switch (document.location.pathname) {

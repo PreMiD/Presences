@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "714733112499896343"
+		clientId: "714733112499896343",
 	}),
 	// Const thing
 	browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -7,8 +7,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "icon",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/B/Blockdit/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	// Presence
@@ -41,7 +42,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `${
 					document.querySelector("head > title").textContent ?? "Unknow page"
 				} | Articles`;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} // Videos
 		} else if (path.pathname.includes("videos")) {
 			if (path.href.includes("bookmark")) {
@@ -66,7 +67,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `${
 					document.querySelector("head > title").textContent ?? "Unknow page"
 				} | Videos`;
-				presenceData.smallImageKey = "playing";
+				presenceData.smallImageKey = Assets.Play;
 			} // Podcast
 		} else if (path.pathname.includes("podcasts")) {
 			if (path.href.includes("bookmark")) {
@@ -89,7 +90,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing on page";
 				presenceData.state =
 					document.querySelector("head > title").textContent ?? "Unknow page";
-				presenceData.smallImageKey = "playing";
+				presenceData.smallImageKey = Assets.Play;
 			} //Series
 		} else if (path.pathname.includes("series")) {
 			if (path.href.includes("bookmark")) {
@@ -116,7 +117,7 @@ presence.on("UpdateData", async () => {
 		) {
 			presenceData.details = "Viewing on exploring";
 			presenceData.state = `About ${path.pathname.replace("/explore/", "| ")}`;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else if (path.pathname.includes("notification"))
 			presenceData.details = "Viewing on notification";
 		else if (path.pathname.includes("activity-log"))
@@ -195,17 +196,17 @@ presence.on("UpdateData", async () => {
 		} else if (path.pathname.includes("terms")) {
 			if (path.pathname.includes("ads")) {
 				presenceData.details = "Terms of ads and boosts";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else {
 				presenceData.details = "Privacy Policy";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			}
 		} else if (path.pathname.includes("faqs")) {
 			presenceData.details = "FAQS";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (path.pathname.includes("brand")) {
 			presenceData.details = "Guild to use brand";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (path.pathname.includes("search")) {
 			presenceData.details = "Searching for:";
 			presenceData.state =
@@ -214,7 +215,7 @@ presence.on("UpdateData", async () => {
 						"#__next > div > div.container.flex-grow-1.d-flex.flex-column > div > div.jsx-3959159148.col-12.col-md-8.col-lg-6.col-xl-5.px-0 > div > div:nth-child(2) > div > form > div.jsx-1849148460.d-flex.align-items-center > label > input"
 					)
 					.getAttribute("value") ?? "Unknow search";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else if (path.pathname.includes("bookmark"))
 			presenceData.details = "Viewing on bookmark";
 		else if (path.pathname.includes("popular")) {

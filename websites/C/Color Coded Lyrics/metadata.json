@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "193714715631812608",
+		"name": "theusaf"
+	},
+	"service": "Color Coded Lyrics",
+	"description": {
+		"en": "Color-coded lyrics for songs from Korea, Japan, Taiwan, Thailand and China"
+	},
+	"url": "colorcodedlyrics.com",
+	"version": "1.0.6",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Color%20Coded%20Lyrics/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Color%20Coded%20Lyrics/assets/thumbnail.png",
+	"color": "#755fbf",
+	"category": "music",
+	"tags": [
+		"translation",
+		"song"
+	]
+}

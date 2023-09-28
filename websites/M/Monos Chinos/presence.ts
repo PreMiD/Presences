@@ -13,14 +13,13 @@ type VideoContext = {
 };
 
 const presence = new Presence({
-		clientId: "707389880505860156"
+		clientId: "707389880505860156",
 	}),
 	strings = presence.getStrings({
-		playing: "presence.playback.playing",
-		paused: "presence.playback.paused",
-		browsing: "presence.activity.browsing",
-		searching: "presence.activity.searching",
-		episode: "presence.media.info.episode"
+		playing: "general.playing",
+		paused: "general.paused",
+		browsing: "general.browsing",
+		episode: "presence.media.info.episode",
 	});
 let video: VideoContext = null,
 	lastVideoOption = 1;
@@ -31,44 +30,57 @@ presence.on("iFrameData", async (context: VideoContext) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/Monos%20Chinos/assets/logo.png",
 		},
 		browsingData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/Monos%20Chinos/assets/logo.png",
 			details: (await strings).browsing,
 			smallImageKey: "browsing",
-			smallImageText: (await strings).browsing
+			smallImageText: (await strings).browsing,
 		},
 		actions: PageAction[] = [
 			{
 				id: "episode",
-				path: "/ver",
-				text: (await strings).playing
+				path: "/ver/",
+				text: (await strings).playing,
 			},
 			{
 				id: "seasonList",
 				path: "/emision",
 				text: "viendo lista de emisión",
-				icon: "season"
+				icon: "season",
 			},
 			{
 				id: "directory",
 				path: "/animes",
 				text: "viendo el directorio",
-				icon: "directory"
+				icon: "directory",
+			},
+			{
+				id: "seasonCalendar",
+				path: "/calendario",
+				text: "viendo el calendario",
+				icon: "season",
 			},
 			{
 				id: "directoryAnime",
 				path: "/anime/",
 				text: "viendo lista de episodios",
-				icon: "directory"
+				icon: "directory",
 			},
 			{
 				id: "search",
-				path: "/search",
-				text: (await strings).searching,
-				icon: "search"
-			}
+				path: "/buscar",
+				text: "buscando animes:",
+				icon: "search",
+			},
+			{
+				id: "profile",
+				path: "/mi-perfil",
+				text: "Viendo perfil",
+			},
 		];
 	let action: PageAction = null;
 
@@ -82,7 +94,7 @@ presence.on("UpdateData", async () => {
 	if (action === null) Object.assign(presenceData, browsingData);
 	else if (action.id === "episode") {
 		const detailsMatch = document
-			.querySelector(".Title-epi")
+			.querySelector(".heromain_h1")
 			.textContent.match(/^([^\d]+).* (\d+).+$/);
 
 		if (!detailsMatch) return presence.setActivity(browsingData);
@@ -93,7 +105,7 @@ presence.on("UpdateData", async () => {
 			details: title,
 			state: (await strings).episode.replace("{0}", episode),
 			smallImageKey: "browsing",
-			smallImageText: "viendo el capitulo"
+			smallImageText: "viendo el capitulo",
 		});
 
 		const currentOptionElement = document.querySelector(
@@ -122,26 +134,47 @@ presence.on("UpdateData", async () => {
 
 		Object.assign(presenceData, {
 			smallImageKey: video.paused ? "paused" : "playing",
-			smallImageText: (await strings)[video.paused ? "paused" : "playing"]
+			smallImageText: (await strings)[video.paused ? "paused" : "playing"],
 		} as PresenceData);
 
 		if (!video.paused) {
 			Object.assign(presenceData, {
 				startTimestamp,
-				endTimestamp
+				endTimestamp,
 			});
 		}
 	} else {
 		if (
 			document.location.pathname.includes("/anime/") &&
-			document.querySelector("h1.Title")
-		)
-			presenceData.state = document.querySelector("h1.Title").textContent;
+			document.querySelector("div.chapterdetails h1")
+		) {
+			presenceData.state = document.querySelector(
+				"div.chapterdetails h1"
+			).textContent;
+		}
+
+		if (
+			document.location.pathname.includes("/buscar") &&
+			document.querySelector("div.heroarea h1 span")
+		) {
+			presenceData.state = document.querySelector(
+				"div.heroarea h1 span"
+			).textContent;
+		}
+
+		if (
+			document.location.pathname.includes("/mi-perfil") &&
+			document.querySelector("div.profile div.promain h1")
+		) {
+			presenceData.state = document.querySelector(
+				"div.profile div.promain h1"
+			).textContent;
+		}
 
 		Object.assign(presenceData, {
 			details: action.text,
 			smallImageKey: action.icon,
-			smallImageText: action.text
+			smallImageText: action.text,
 		} as PresenceData);
 	}
 

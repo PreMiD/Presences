@@ -1,0 +1,52 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Striker",
+		"id": "215509157837537280"
+	},
+	"service": "Anontpp",
+	"description": {
+		"en": "Anontpp is the home to the anime streaming service, GoPlay. You can watched free shows uninterupted in HD with no ads.",
+		"ga_IE": "Is é Anontpp an baile don tseirbhís sruthú anime, GoPlay. Is féidir leat féachaint ar thaispeántais saor in aisce gan bhriseadh i HD gan aon fhógraí.",
+		"nl": "Anontpp is de thuisbasis van de anime-streamingdienst GoPlay. U kunt ononderbroken gratis shows in HD bekijken zonder advertenties.",
+		"vi_VN": "Anontpp là nơi để xem anime trực tuyến, GoPlay. Bạn có thể xem các chương trình miễn phí, không bị gián đoạn bởi các quảng cáo."
+	},
+	"url": "goplay.ml",
+	"version": "1.1.9",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Anontpp/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Anontpp/assets/thumbnail.png",
+	"color": "#F4ADEE",
+	"category": "videos",
+	"tags": [
+		"goplay",
+		"movies",
+		"shows",
+		"entertainment"
+	],
+	"settings": [
+		{
+			"id": "search",
+			"title": "Display Search Info",
+			"icon": "fas fa-search",
+			"value": true
+		},
+		{
+			"id": "browse",
+			"title": "Display Browsing Info",
+			"icon": "fas fa-book-open",
+			"value": true
+		},
+		{
+			"id": "video",
+			"title": "Display Video Info",
+			"icon": "fas fa-video",
+			"value": true
+		},
+		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true
+		}
+	]
+}

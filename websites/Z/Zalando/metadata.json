@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Bas950",
+		"id": "241278257335500811"
+	},
+	"service": "Zalando",
+	"description": {
+		"en": "Zalando | Buy shoes online: Shoes from top brands.",
+		"nl": "Zalando online shop | Kleding, schoenen, sportartikelen, accessoires en meer | Jouw favoriete brands voor dames, heren en kids",
+		"zh_CN": "Zalando 是总部位于德国柏林的大型网络电子商城， 其主要产品是服装和鞋类。",
+		"ga_IE": "Zalando | Ceannaigh bróga ar líne: Bróga ó na brandaí is fearr."
+	},
+	"url": "www.zalando.com",
+	"regExp": "([a-z0-9-]+[.])*zalando([.][a-z]+)+[/]",
+	"version": "1.2.21",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Z/Zalando/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Z/Zalando/assets/thumbnail.png",
+	"color": "#f47127",
+	"category": "other",
+	"tags": [
+		"shop",
+		"fashion"
+	]
+}

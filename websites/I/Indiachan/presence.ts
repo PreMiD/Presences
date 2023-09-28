@@ -1,10 +1,11 @@
 const presence: Presence = new Presence({
-	clientId: "876813345699811328"
+	clientId: "876813345699811328",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/I/Indiachan/assets/logo.png",
 		},
 		p = document.location.pathname;
 	if (p === "/") {

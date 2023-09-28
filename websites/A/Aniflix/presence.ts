@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "630093952342687794" // CLIENT ID FOR YOUR PRESENCE
+		clientId: "630093952342687794", // CLIENT ID FOR YOUR PRESENCE
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -39,6 +39,10 @@ if (
 	});
 }
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Aniflix/assets/logo.png",
+}
+
 presence.on("UpdateData", async () => {
 	if (lastPlaybackState !== playback) {
 		lastPlaybackState = playback;
@@ -49,11 +53,11 @@ presence.on("UpdateData", async () => {
 			Math.floor(duration)
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "aniflix",
-			smallImageKey: paused ? "pause" : "play",
+			largeImageKey: Assets.Logo,
+			smallImageKey: paused ? Assets.Pause : Assets.Play,
 			smallImageText: paused ? (await strings).pause : (await strings).play,
 			startTimestamp,
-			endTimestamp
+			endTimestamp,
 		};
 
 	search = document.querySelector<HTMLInputElement>(
@@ -96,7 +100,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.state = `${title.textContent} (${views.textContent})`;
 			delete presenceData.smallImageText;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			presence.setActivity(presenceData);
 		}
@@ -106,7 +110,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.endTimestamp;
 		presenceData.startTimestamp = browsingTimestamp;
 		delete presenceData.smallImageText;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presence.setActivity(presenceData);
 	} else if (
 		document.location.pathname.includes("/show/") &&
@@ -167,7 +171,7 @@ presence.on("UpdateData", async () => {
 				delete presenceData.endTimestamp;
 				presenceData.startTimestamp = browsingTimestamp;
 				delete presenceData.smallImageText;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 
@@ -179,7 +183,7 @@ presence.on("UpdateData", async () => {
 				delete presenceData.endTimestamp;
 				presenceData.startTimestamp = browsingTimestamp;
 				delete presenceData.smallImageText;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 

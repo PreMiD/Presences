@@ -1,89 +1,110 @@
 const presence = new Presence({
-		clientId: "900717839713959967"
+		clientId: "900717839713959967",
 	}),
 	elapsed = Math.floor(Date.now() / 1e3);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Reaper%20Scans/assets/logo.png",
+}
+
+function capitalize(str: string) {
+	return `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
+}
+
 presence.on("UpdateData", () => {
-	const { pathname, origin } = window.location,
+	const { pathname, href } = window.location,
 		presenceData: PresenceData = {
 			startTimestamp: elapsed,
-			largeImageKey: "logo"
-		};
-	let comics: number;
+			largeImageKey: Assets.Logo,
+		},
+		pathSplit = pathname.split("/").slice(1);
 
-	if (
-		document.querySelector(".search-main-menu").classList.contains("active")
-	) {
-		presenceData.details = "Searching:";
-		presenceData.state = (
-			document.querySelector(".manga-search-field") as HTMLInputElement
-		).textContent;
-		presenceData.smallImageKey = "search";
-	} else if (/^\/$/.test(pathname)) presenceData.details = "Viewing Home Page";
-	else if (/^\/home1\/?$/.test(pathname)) {
-		// Counting comics
-		comics = document.querySelectorAll(".page-listing-item .row .col-4").length;
-		presenceData.details = "Viewing Comic List";
-		presenceData.state = `📋 ${comics.toString()} comics found`;
-	} else if (/^\/all-series\/novels+\/?$/.test(pathname)) {
-		// Counting novels
-		comics = document.querySelectorAll(".page-listing-item .row .col-6").length;
-		presenceData.details = "Viewing Novel List";
-		presenceData.state = `📋 ${comics.toString()} novels found`;
-	} else if (/^\/all-series\/comics\/manhwas\/?$/.test(pathname)) {
-		// Counting manhwa
-		comics = document.querySelectorAll(".page-listing-item .row .col-6").length;
-		presenceData.details = "Viewing Manhwa List";
-		presenceData.state = `📋 ${comics.toString()} manhwa found`;
-	} else if (/^\/all-series\/comics\/manhuas\/?$/.test(pathname)) {
-		// Counting manhua
-		comics = document.querySelectorAll(".page-listing-item .row .col-4").length;
-		presenceData.details = "Viewing Manhua List";
-		presenceData.state = `📋 ${comics.toString()} manhua found`;
-	} else if (/^\/series\/[0-9a-z-]+\/?$/i.test(pathname)) {
-		presenceData.details = "Viewing Comic";
-		presenceData.state = document.querySelector(".post-title h1").textContent;
-		presenceData.smallImageKey = "view";
-		presenceData.buttons = [
-			{
-				label: "Visit Comic Page",
-				url: origin + pathname
-			}
-		];
-	} else if (
-		/^\/series\/[0-9a-z-]+\/+(chapter|ch)-[0-9]+\/?$/i.test(pathname)
-	) {
-		let progress =
-			(document.documentElement.scrollTop /
-				(document.querySelector(".read-container").scrollHeight -
-					window.innerHeight)) *
-			100;
-		progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
+	switch (pathSplit[0] ?? "") {
+		case "": {
+			const searchInput = document.querySelector<HTMLInputElement>("#search");
+			if (searchInput === document.activeElement) {
+				presenceData.details = "Searching";
+				presenceData.state = searchInput.value;
+				presenceData.smallImageKey = Assets.Search;
+			} else presenceData.details = "Viewing Home Page";
+			break;
+		}
+		case "comics":
+		case "novels": {
+			const captitalizedPath = capitalize(pathSplit[0]).slice(
+				0,
+				pathSplit[0].length - 1
+			);
+			if (pathSplit[1]) {
+				if (pathSplit[2] === "chapters") {
+					let progress =
+						(document.documentElement.scrollTop /
+							(document.querySelector(
+								pathSplit[0] === "comics"
+									? "main > div:nth-of-type(2)"
+									: "article"
+							).scrollHeight -
+								window.innerHeight)) *
+						100;
+					progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
 
-		presenceData.details = document.querySelector(
-			"ol.breadcrumb li:nth-child(3)"
-		).textContent;
-		presenceData.state = `📖 ${
-			document.querySelector("ol.breadcrumb li:nth-child(4)").textContent
-		} 🔸 ${progress}%`;
-		presenceData.smallImageKey = "read";
-		presenceData.buttons = [
-			{
-				label: "Visit Comic Page",
-				url:
-					origin +
-					document.querySelector<HTMLAnchorElement>(
-						"ol.breadcrumb li:nth-child(3) a"
-					).href
-			},
-			{
-				label: "Visit Chapter",
-				url: origin + pathname
+					presenceData.details = `Reading ${document
+						.querySelector<HTMLParagraphElement>("main p")
+						.textContent.trim()}`;
+					presenceData.state = `${document
+						.querySelector<HTMLDivElement>("main nav > div:nth-child(2)")
+						.textContent.trim()} - ${progress}%`;
+					presenceData.smallImageKey = Assets.Reading;
+					presenceData.buttons = [
+						{
+							label: `View ${captitalizedPath} Page`,
+							url: document.querySelector<HTMLAnchorElement>(
+								"main nav > div:last-child > a"
+							).href,
+						},
+						{
+							label: "View Chapter",
+							url: href,
+						},
+					];
+				} else {
+					presenceData.details = `Viewing ${captitalizedPath} Page`;
+					presenceData.state = document.querySelector("h1").textContent;
+					presenceData.smallImageKey = Assets.Viewing;
+					presenceData.buttons = [
+						{
+							label: `View ${captitalizedPath} Page`,
+							url: href,
+						},
+					];
+				}
+			} else {
+				presenceData.details = `Viewing ${captitalizedPath} List`;
+				presenceData.state = `${
+					document.querySelectorAll<HTMLLIElement>("h2 + div li").length
+				} ${pathSplit[0]}s found`;
 			}
-		];
-	} else {
-		presenceData.details = "Browsing Reaper Scans";
-		presenceData.state = document.title;
+			break;
+		}
+		case "latest": {
+			presenceData.details = `Browsing Latest ${capitalize(pathSplit[1])}`;
+			break;
+		}
+		case "account": {
+			presenceData.details = "Managing Account Settings";
+			break;
+		}
+		case "blog": {
+			presenceData.details = "Reading a Blog Post";
+			presenceData.state = document.querySelector("h1").textContent.trim();
+			break;
+		}
+		default: {
+			presenceData.details = "Browsing Reaper Scans";
+			presenceData.state = document.title;
+		}
 	}
+
 	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

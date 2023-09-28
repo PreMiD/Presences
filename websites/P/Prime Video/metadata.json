@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Bas950",
+		"id": "241278257335500811"
+	},
+	"contributors": [
+		{
+			"name": "Spinne",
+			"id": "363790841636192259"
+		}
+	],
+	"service": "Prime Video",
+	"description": {
+		"en": "Enjoy exclusive Amazon Originals as well as popular movies and TV shows. Watch anytime, anywhere. Start your free trial.",
+		"de": "Spielfilme und Serien online streamen, als Einzelabruf online leihen oder kaufen bei Prime Video, Amazons großer Video on Demand Online-Videothek.",
+		"nl": "Geniet van exclusieve Amazon Originals en populaire films en tv-programma's. Bekijk altijd en overal. Start uw gratis proefperiode."
+	},
+	"url": "www.primevideo.com",
+	"regExp": "(([a-z0-9-]+[.])*amazon([.][a-z]+)+[/](-[/]([a-z0-9]+)[/])?(Prime-Video|Prime-Instant-Video|Amazon-Video|gp[/]video))|([a-z0-9-]+[.])*primevideo([.][a-z]+)+[/]",
+	"version": "2.1.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Prime%20Video/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Prime%20Video/assets/thumbnail.jpg",
+	"color": "#FFFFFF",
+	"category": "videos",
+	"tags": [
+		"video",
+		"amazon",
+		"prime"
+	]
+}

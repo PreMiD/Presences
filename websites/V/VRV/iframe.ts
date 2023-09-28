@@ -30,10 +30,10 @@ iframe.on("UpdateData", async () => {
 		iframe.send({
 			iframeVideo: {
 				iFrameVideo: true,
-				currTime: video.currentTime,
-				dur: video.duration,
-				paused: video.paused
-			}
+				currentTime: video.currentTime,
+				duration: video.duration,
+				paused: video.paused,
+			},
 		});
 	}
 });

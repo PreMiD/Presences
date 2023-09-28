@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "643777046731816962"
+		clientId: "643777046731816962",
 	}),
 	pages: { [key: string]: string } = {
 		"/giris": "Giriş",
@@ -70,7 +70,7 @@ const presence = new Presence({
 		"/favori-ilanlar": "Favori İlanlarım",
 		"/favori-aramalarim": "Favori Aramalarım",
 		"/favori-saticilarim": "Favori Satıcılarım",
-		"/en": "English Homepage"
+		"/en": "English Homepage",
 	};
 
 presence.on("UpdateData", async () => {
@@ -98,24 +98,26 @@ presence.on("UpdateData", async () => {
 		(category && category.textContent !== "")
 	) {
 		presence.setActivity({
-			largeImageKey: "s-logo",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
 			details: "Bir kategoriye göz atıyor:",
 			state: category.textContent.trim() || "Belirsiz",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (
 		page.includes("/kelime-ile-arama") ||
 		(searchingFor && searchingFor.textContent !== "")
 	) {
 		presence.setActivity({
-			largeImageKey: "s-logo",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
 			details: "Bir şey arıyor:",
 			state:
 				searchingFor && searchingFor.textContent
 					? searchingFor.textContent
 					: "Belirsiz",
 			smallImageKey: "search",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (page.includes("/ilan/")) {
 		const stuff = document.querySelector(
@@ -126,7 +128,8 @@ presence.on("UpdateData", async () => {
 			);
 
 		presence.setActivity({
-			largeImageKey: "s-logo",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
 			details: "Bir ilana göz atıyor:",
 			state:
 				stuff && stuff.textContent !== ""
@@ -136,31 +139,34 @@ presence.on("UpdateData", async () => {
 								: ""
 					  }`
 					: "Belirsiz",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (pages[page] || pages[page.slice(0, -1)]) {
 		presence.setActivity({
-			largeImageKey: "s-logo",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: pages[page] || pages[page.slice(0, -1)],
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (
 		document.location.hostname === "banaozel.sahibinden.com" &&
 		document.location.pathname === "/"
 	) {
 		presence.setActivity({
-			largeImageKey: "s-logo",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Bana Özel",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else {
 		presence.setActivity({
-			largeImageKey: "s-logo",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/sahibinden.com/assets/logo.png",
 			details: "Bir sayfaya göz atıyor:",
 			state: "Ana Sayfa",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}
 });

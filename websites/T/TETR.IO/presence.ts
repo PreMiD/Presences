@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "815006153066151998"
+		clientId: "815006153066151998",
 	}),
 	SelectorMap = {
 		header: "div#header_text.ns",
@@ -7,7 +7,7 @@ const presence = new Presence({
 		status: "div#social_status",
 		game: "div#social_status > b",
 		roomid: "div#roomid",
-		replay: "div#data_replay"
+		replay: "div#data_replay",
 	},
 	menuPrincipal = ["SOLO", "MULTIPLAYER"],
 	soloModes: { [key: string]: string } = {
@@ -15,7 +15,7 @@ const presence = new Presence({
 		bl: "BLITZ",
 		lines40: "40 LINES",
 		ct: "CUSTOM",
-		ctgame: "custom game"
+		ctgame: "custom game",
 	};
 let browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -30,7 +30,8 @@ function getText(selector: string): string {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/TETR.IO/assets/logo.jpg",
 		},
 		showPrivButton = await presence.getSetting<boolean>("privateRoom"),
 		showButtons = await presence.getSetting<boolean>("showButtons"),
@@ -74,15 +75,15 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Enter Public Room",
-					url: `https://tetr.io/${roomID}`
-				}
+					url: `https://tetr.io/${roomID}`,
+				},
 			];
 		} else if (showPrivButton) {
 			presenceData.buttons = [
 				{
 					label: "Enter Private Room",
-					url: `https://tetr.io/${roomID}`
-				}
+					url: `https://tetr.io/${roomID}`,
+				},
 			];
 		}
 	} else if (status.includes("QUICK")) {
@@ -134,8 +135,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Profile",
-				url: `https://ch.tetr.io/u/${getText(SelectorMap.username)}`
-			}
+				url: `https://ch.tetr.io/u/${getText(SelectorMap.username)}`,
+			},
 		];
 	} else delete presenceData.buttons;
 

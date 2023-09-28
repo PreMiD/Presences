@@ -1,11 +1,12 @@
 const presence = new Presence({
-	clientId: "620304668710535207"
+	clientId: "620304668710535207",
 });
 
 presence.on("UpdateData", () => {
 	const urlParams = new URLSearchParams(window.location.search);
 	let presenceData: PresenceData = {
-		largeImageKey: "lg"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/R/RealBooru/assets/logo.png",
 	};
 	if (document.location.pathname === "/") presence.setActivity(presenceData);
 	else if (
@@ -18,13 +19,15 @@ presence.on("UpdateData", () => {
 				presenceData = {
 					details: "Searching...",
 					state: urlParams.get("tags").replace(" ", ", "),
-					largeImageKey: "lg"
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/R/RealBooru/assets/logo.png",
 				};
 				presence.setActivity(presenceData);
 			} else {
 				presenceData = {
 					details: "Viewing Posts List...",
-					largeImageKey: "lg"
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/R/RealBooru/assets/logo.png",
 				};
 				presence.setActivity(presenceData);
 			}
@@ -32,18 +35,21 @@ presence.on("UpdateData", () => {
 			presenceData = {
 				details: "Viewing a Post...",
 				state: `Post ${urlParams.get("id")}`,
-				largeImageKey: "lg"
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/R/RealBooru/assets/logo.png",
 			};
 			presence.setActivity(presenceData);
 		} else {
 			presenceData = {
-				largeImageKey: "lg"
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/R/RealBooru/assets/logo.png",
 			};
 			presence.setActivity(presenceData);
 		}
 	} else {
 		presenceData = {
-			largeImageKey: "lg"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/RealBooru/assets/logo.png",
 		};
 		presence.setActivity(presenceData);
 	}

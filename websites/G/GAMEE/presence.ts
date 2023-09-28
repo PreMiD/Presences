@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "865212562130862120"
+		clientId: "865212562130862120",
 	}),
 	timer = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "gamee_logo",
-			startTimestamp: timer
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/GAMEE/assets/logo.png",
+			startTimestamp: timer,
 		},
 		{ pathname, href } = document.location,
 		IDs = pathname.split("/")[2];
@@ -27,17 +28,17 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing Contest Page";
 	else if (pathname.includes("/contest-rules")) {
 		presenceData.details = "Reading the contest rules";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 	} else if (pathname.includes("/squad"))
 		presenceData.details = "Viewing the squad";
 	else if (pathname.includes("/terms-of-use")) {
 		presenceData.details = "Reading the Terms Of Service";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 	} else if (pathname.includes("/privacy")) {
 		presenceData.details = "Reading the Privacy Policy";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 	} else if (pathname.includes(`/profile/${IDs}`)) {
 		const name = document.querySelector(
@@ -49,8 +50,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: `View ${name.textContent}'s profile`,
-				url: href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.includes(`/game/${IDs}`)) {
 		presenceData.details = "Playing a game:";

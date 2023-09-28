@@ -1,11 +1,12 @@
 const presence = new Presence({
-	clientId: "813110347165728849"
+	clientId: "813110347165728849",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "bol",
-		buttons: [{ label: "Pagina bekijken", url: document.location.href }]
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/B/bol.com/assets/logo.png",
+		buttons: [{ label: "Pagina bekijken", url: document.location.href }],
 	};
 	presenceData.details = "Bladert op bol.com";
 	presenceData.state = `Pagina '${
@@ -15,7 +16,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Zoekt voor:";
 		presenceData.state =
 			document.querySelector<HTMLInputElement>("#searchfor").textContent;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (
 		document.location.pathname === "/" ||
 		document.location.pathname === "/nl/"
@@ -39,7 +40,7 @@ presence.on("UpdateData", async () => {
 				.lastElementChild.textContent
 		}`;
 		presenceData.buttons = [
-			{ label: "Product bekijken", url: document.location.href }
+			{ label: "Product bekijken", url: document.location.href },
 		];
 	} else if (
 		document.querySelector("h1[class*=bol_header][data-test*=page-title]")
@@ -50,7 +51,7 @@ presence.on("UpdateData", async () => {
 		}`;
 		delete presenceData.state;
 		presenceData.buttons = [
-			{ label: "Categorie bekijken", url: document.location.href }
+			{ label: "Categorie bekijken", url: document.location.href },
 		];
 	} else if (document.location.pathname.toLowerCase().includes("basket"))
 		presenceData.details = "Bekijkt winkelwagentje";

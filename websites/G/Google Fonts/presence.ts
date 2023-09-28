@@ -1,13 +1,14 @@
 const presence = new Presence({
-		clientId: "814919836835905566"
+		clientId: "814919836835905566",
 	}),
 	tmb = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "favicon",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Google%20Fonts/assets/logo.png",
 			smallImageKey: "google",
-			startTimestamp: tmb
+			startTimestamp: tmb,
 		},
 		path = document.location.pathname.toLowerCase(),
 		showButton = await presence.getSetting<boolean>("showButton");
@@ -39,8 +40,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View font",
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		}
 	} else if (path === "/featured")
@@ -61,8 +62,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View featured font",
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		}
 	} else if (path === "/icons") {

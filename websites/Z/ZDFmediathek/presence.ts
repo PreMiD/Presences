@@ -2,21 +2,22 @@ let elapsed = Math.floor(Date.now() / 1000),
 	prevUrl = document.location.href;
 
 const presence = new Presence({
-		clientId: "854999470357217290"
+		clientId: "854999470357217290",
 	}),
 	// TODO: Add multiLang
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 		browsing: "general.browsing",
 		browsingThrough: "discord.browseThrough",
 		buttonWatchVideo: "general.buttonWatchVideo",
-		buttonWatchStream: "general.buttonWatchStream"
+		buttonWatchStream: "general.buttonWatchStream",
 	});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "zdf"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/logo.png",
 		},
 		video = document.querySelector<HTMLVideoElement>(
 			"div.zdfplayer-video_wrapper video"
@@ -63,7 +64,7 @@ presence.on("UpdateData", async () => {
 				.trim();
 			presenceData.startTimestamp = elapsed;
 			presenceData.buttons = [
-				{ label: (await strings).buttonWatchStream, url: prevUrl }
+				{ label: (await strings).buttonWatchStream, url: prevUrl },
 			];
 
 			if (
@@ -71,15 +72,16 @@ presence.on("UpdateData", async () => {
 					"div.item.livetv-item.js-livetv-scroller-cell.m-activated-done.m-activated.m-active.m-active-done div figure div video"
 				).paused
 			) {
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = (await strings).pause;
 				presenceData.startTimestamp = 0;
 				presenceData.endTimestamp = 0;
 			}
 		} else {
 			// Video-on-demand
-			presenceData.largeImageKey = "zdf";
-			presenceData.smallImageKey = "play";
+			presenceData.largeImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/logo.png";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = (await strings).play;
 
 			const videoInfoTag = document.querySelector(
@@ -104,17 +106,17 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.duration)
 			);
 			presenceData.buttons = [
-				{ label: (await strings).buttonWatchVideo, url: prevUrl }
+				{ label: (await strings).buttonWatchVideo, url: prevUrl },
 			];
 			if (video.paused) {
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = (await strings).pause;
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
 			}
 		}
 	} else {
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = (await strings).browsingThrough;
 		presenceData.details = (await strings).browsing;
 		presenceData.startTimestamp = elapsed;

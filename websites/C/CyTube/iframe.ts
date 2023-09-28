@@ -20,7 +20,7 @@ iframe.on("UpdateData", () => {
 			currentTime: video.currentTime,
 			duration: video.duration,
 			paused: video.paused,
-			site: document.location.href
+			site: document.location.href,
 		};
 	}
 	send();

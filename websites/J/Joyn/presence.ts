@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "799629862620758046"
+	clientId: "799629862620758046",
 });
 
 async function getStrings() {
@@ -14,7 +14,7 @@ async function getStrings() {
 			watchingMovie: "general.watchingMovie",
 			watchingSeries: "general.watchingSeries",
 			watchMovie: "general.buttonViewMovie",
-			watchSeries: "general.buttonViewSeries"
+			watchSeries: "general.buttonViewSeries",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -25,12 +25,13 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async function () {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/J/Joyn/assets/logo.jpg",
 		},
 		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
 		setting = {
 			timeRemaining: await presence.getSetting<boolean>("timeRemaining"),
-			showButtons: await presence.getSetting<boolean>("showButtons")
+			showButtons: await presence.getSetting<boolean>("showButtons"),
 		},
 		urlpath = window.location.pathname.split("/"),
 		video: HTMLVideoElement = document.querySelector("div video");
@@ -67,8 +68,8 @@ presence.on("UpdateData", async function () {
 						presenceData.buttons = [
 							{
 								label: "Watch Compilation",
-								url: `https://www.joyn.de/compilation/${urlpath[2]}`
-							}
+								url: `https://www.joyn.de/compilation/${urlpath[2]}`,
+							},
 						];
 					}
 
@@ -85,8 +86,8 @@ presence.on("UpdateData", async function () {
 						presenceData.buttons = [
 							{
 								label: (await strings).watchMovie,
-								url: `https://www.joyn.de/filme/${urlpath[2]}`
-							}
+								url: `https://www.joyn.de/filme/${urlpath[2]}`,
+							},
 						];
 					}
 
@@ -103,8 +104,8 @@ presence.on("UpdateData", async function () {
 						presenceData.buttons = [
 							{
 								label: (await strings).watchSeries,
-								url: `https://www.joyn.de/serien/${urlpath[2]}`
-							}
+								url: `https://www.joyn.de/serien/${urlpath[2]}`,
+							},
 						];
 					}
 
@@ -136,18 +137,18 @@ presence.on("UpdateData", async function () {
 									video.currentTime +
 									video.duration;
 							}
-							presenceData.smallImageKey = "play";
+							presenceData.smallImageKey = Assets.Play;
 							presenceData.smallImageText = (await strings).play;
 						} else {
-							presenceData.smallImageKey = "pause";
+							presenceData.smallImageKey = Assets.Pause;
 							presenceData.smallImageText = (await strings).pause;
 						}
 						if (setting.showButtons) {
 							presenceData.buttons = [
 								{
 									label: (await strings).watchMovie,
-									url: `https://www.joyn.de/filme/${urlpath[3]}`
-								}
+									url: `https://www.joyn.de/filme/${urlpath[3]}`,
+								},
 							];
 						}
 					} else if (urlpath[1] === "play" && urlpath[2] === "serien") {
@@ -163,10 +164,10 @@ presence.on("UpdateData", async function () {
 									video.currentTime +
 									video.duration;
 							}
-							presenceData.smallImageKey = "play";
+							presenceData.smallImageKey = Assets.Play;
 							presenceData.smallImageText = (await strings).play;
 						} else {
-							presenceData.smallImageKey = "pause";
+							presenceData.smallImageKey = Assets.Pause;
 							presenceData.smallImageText = (await strings).pause;
 						}
 
@@ -174,8 +175,8 @@ presence.on("UpdateData", async function () {
 							presenceData.buttons = [
 								{
 									label: (await strings).watchSeries,
-									url: `https://www.joyn.de/serien/${urlpath[3]}`
-								}
+									url: `https://www.joyn.de/serien/${urlpath[3]}`,
+								},
 							];
 						}
 					} else if (urlpath[1] === "play" && urlpath[2] === "trailer") {
@@ -190,10 +191,10 @@ presence.on("UpdateData", async function () {
 									video.currentTime +
 									video.duration;
 							}
-							presenceData.smallImageKey = "play";
+							presenceData.smallImageKey = Assets.Play;
 							presenceData.smallImageText = (await strings).play;
 						} else {
-							presenceData.smallImageKey = "pause";
+							presenceData.smallImageKey = Assets.Pause;
 							presenceData.smallImageText = (await strings).pause;
 						}
 					} else if (urlpath[1] === "play" && urlpath[2] === "live-tv") {
@@ -209,8 +210,8 @@ presence.on("UpdateData", async function () {
 							presenceData.buttons = [
 								{
 									label: "Watch show",
-									url: window.location.href
-								}
+									url: window.location.href,
+								},
 							];
 						}
 					} else if (urlpath[1] === "play" && urlpath[2] === "compilation") {
@@ -225,10 +226,10 @@ presence.on("UpdateData", async function () {
 									video.currentTime +
 									video.duration;
 							}
-							presenceData.smallImageKey = "play";
+							presenceData.smallImageKey = Assets.Play;
 							presenceData.smallImageText = (await strings).play;
 						} else {
-							presenceData.smallImageKey = "pause";
+							presenceData.smallImageKey = Assets.Pause;
 							presenceData.smallImageText = (await strings).pause;
 						}
 
@@ -236,8 +237,8 @@ presence.on("UpdateData", async function () {
 							presenceData.buttons = [
 								{
 									label: "Watch Compilation",
-									url: `https://www.joyn.de/compilation/${urlpath[3]}`
-								}
+									url: `https://www.joyn.de/compilation/${urlpath[3]}`,
+								},
 							];
 						}
 					} else if (urlpath[1] === "play" && urlpath[2] === "sport") {
@@ -253,10 +254,10 @@ presence.on("UpdateData", async function () {
 									video.currentTime +
 									video.duration;
 							}
-							presenceData.smallImageKey = "play";
+							presenceData.smallImageKey = Assets.Play;
 							presenceData.smallImageText = (await strings).play;
 						} else {
-							presenceData.smallImageKey = "pause";
+							presenceData.smallImageKey = Assets.Pause;
 							presenceData.smallImageText = (await strings).pause;
 						}
 
@@ -264,8 +265,8 @@ presence.on("UpdateData", async function () {
 							presenceData.buttons = [
 								{
 									label: "Watch sports show",
-									url: window.location.href
-								}
+									url: window.location.href,
+								},
 							];
 						}
 					} else if (urlpath[1] === "collections" && urlpath[2]) {

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "901821070263336971"
+		clientId: "901821070263336971",
 	}),
 	pages: Record<string, string> = {
 		"/": "Home",
@@ -9,15 +9,19 @@ const presence = new Presence({
 		"/wiki": "Wiki",
 		"/about": "About",
 		"/imprint": "Imprint",
-		"/privacy-policy": "Privacy Policy"
+		"/privacy-policy": "Privacy Policy",
 	},
 	browsingTimestamp = Math.round(Date.now() / 1000);
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/B/Blockbench/assets/logo.png",
+}
 
 presence.on("UpdateData", async () => {
 	const page = location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "blockbench-logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
 		},
 		pluginHeader = document.querySelector(
 			"#content_wrapper > div > div > h2"
@@ -79,7 +83,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [{ label: "View Plugin", url: location.href }];
 	} else if (page.includes("/wiki")) {
 		presenceData.details = "Blockbench Wiki";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 		presenceData.state =
 			document.querySelector(

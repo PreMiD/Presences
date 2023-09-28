@@ -1,19 +1,20 @@
 const presence = new Presence({
-		clientId: "651454408768487441"
+		clientId: "651454408768487441",
 	}),
 	pages: { [key: string]: string } = {
 		"/questions": "Questions ",
 		"/tags": "Tags ",
 		"/users": "Users ",
-		"/unanswered": "Unanswered "
+		"/unanswered": "Unanswered ",
 	};
 
 presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
 		title = document.querySelector("#question-header > h1"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/AskUbuntu/assets/logo.png",
+			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 
 	if (title && title.textContent !== "") {

@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "135058085386387457",
+		"name": "Extiriority"
+	},
+	"service": "MangaFire",
+	"description": {
+		"en": "MangaFire.to is a completely free online modern manga platform with zero pop-up ads where we offer an extensive collection of Manga, Light-Novel, Manhwa and many more to read.",
+		"nl": "MangaFire.to is een compleet gratis online moderne manga platform zonder pop-up advertentie waar wij een groot collectie aanbieden zoals Manga, Light-Novel, Manhwa en veel meer om te lezen."
+	},
+	"url": [
+		"mangafire.to",
+		"www.mangafire.to"
+	],
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaFire/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaFire/assets/thumbnail.png",
+	"color": "#007bff",
+	"category": "anime",
+	"tags": [
+		"manga",
+		"doujinshi",
+		"light-novel",
+		"one-shot",
+		"novel",
+		"manwha",
+		"manhua",
+		"reading",
+		"free",
+		"nsfw"
+	],
+	"settings": [
+		{
+			"id": "details",
+			"title": "Show details",
+			"icon": "fas fa-eye-slash",
+			"value": true
+		}
+	]
+}

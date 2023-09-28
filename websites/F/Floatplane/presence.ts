@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "889918462477095012"
+		clientId: "889918462477095012",
 	}),
 	browsingTimestamp = Date.now();
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		[, page, pageType, pageTypeType] = location.pathname.split("/");
 
@@ -42,7 +43,7 @@ presence.on("UpdateData", async () => {
 
 				presenceData.details = "Browsing";
 				presenceData.state = `${channelCount} Channels`;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Browsing";
 
 				if (searchTerm) {
@@ -63,7 +64,7 @@ presence.on("UpdateData", async () => {
 
 					presenceData.details = `Searching: ${searchTerm}`;
 					presenceData.state = stringFormated;
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					presenceData.smallImageText = "Searching";
 				}
 
@@ -97,13 +98,13 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Stream",
-							url: location.href
+							url: location.href,
 						},
 						{
 							label: "View Channel",
 							url: (document.querySelector(".channel-title") as HTMLLinkElement)
-								?.href
-						}
+								?.href,
+						},
 					];
 				}
 
@@ -168,7 +169,7 @@ presence.on("UpdateData", async () => {
 
 									presenceData.details = `Searching FAQ: ${searchTerm}`;
 									presenceData.state = stringFormated;
-									presenceData.smallImageKey = "search";
+									presenceData.smallImageKey = Assets.Search;
 									presenceData.smallImageText = "Searching";
 								}
 
@@ -180,12 +181,12 @@ presence.on("UpdateData", async () => {
 								presenceData.buttons = [
 									{
 										label: "Terms of Service",
-										url: "https://www.floatplane.com/legal/terms"
+										url: "https://www.floatplane.com/legal/terms",
 									},
 									{
 										label: "Privacy Policy",
-										url: "https://www.floatplane.com/legal/privacy"
-									}
+										url: "https://www.floatplane.com/legal/privacy",
+									},
 								];
 
 								break;
@@ -212,14 +213,16 @@ presence.on("UpdateData", async () => {
 									.slice(-1)[0];
 								[, presenceData.endTimestamp] =
 									presence.getTimestampsfromMedia(video);
-								presenceData.smallImageKey = video.paused ? "pause" : "play";
+								presenceData.smallImageKey = video.paused
+									? Assets.Pause
+									: Assets.Play;
 								presenceData.smallImageText = video.paused
 									? "Paused"
 									: "Playing";
 								presenceData.buttons = [
 									{
 										label: "View Video",
-										url: location.href
+										url: location.href,
 									},
 									{
 										label: "View Channel",
@@ -227,8 +230,8 @@ presence.on("UpdateData", async () => {
 											document.querySelector(
 												".channel-title"
 											) as HTMLLinkElement
-										).href
-									}
+										).href,
+									},
 								];
 
 								if (video.paused) {

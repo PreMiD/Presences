@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "736516965748834336"
+		clientId: "736516965748834336",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	start = Date.now();
 let videoTitle: string,
@@ -25,7 +25,8 @@ presence.on("iFrameData", (data: DataInterface) => {
 });
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/logo.png",
 		},
 		pathArray: string[] = window.location.pathname
 			.replace(/^\/|\/$/g, "")
@@ -105,7 +106,7 @@ presence.on("UpdateData", async () => {
 			if (videoTitle) {
 				presenceData.details = "Watching a video";
 				presenceData.state = videoTitle;
-				presenceData.smallImageKey = videoPaused ? "pause" : "play";
+				presenceData.smallImageKey = videoPaused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = videoPaused
 					? (await strings).pause
 					: (await strings).play;

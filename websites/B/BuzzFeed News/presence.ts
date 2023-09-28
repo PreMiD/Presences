@@ -1,12 +1,13 @@
 const presence = new Presence({
-	clientId: "651445584955310100"
+	clientId: "651445584955310100",
 });
 
 presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "bfnews-logo",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/BuzzFeed%20News/assets/logo.png",
+			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 
 	if (page.includes("/section")) {

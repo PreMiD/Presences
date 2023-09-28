@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "863345026498428968"
+		clientId: "863345026498428968",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Watch2Gether/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		{ hostname, pathname } = document.location;
 
@@ -22,7 +23,7 @@ presence.on("UpdateData", async () => {
 				chatMessages = [
 					...document.querySelectorAll<HTMLDivElement>(
 						"body > div.w2g-main-container.w2g-bind-layout > div.w2g-main-lower > div.w2g-main-right > div.w2g-content-right > div.w2g-menu-tab.w2g-chat.w2g-messages.w2g-panel-bottom > div.w2g-chat-messages.w2g-messages-container.w2g-scroll-vertical > div"
-					)
+					),
 				].reverse();
 
 			let title: string;
@@ -58,8 +59,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Join Room",
-						url: invite.value
-					}
+						url: invite.value,
+					},
 				];
 			}
 		} else if (pathname.startsWith("/users/")) {

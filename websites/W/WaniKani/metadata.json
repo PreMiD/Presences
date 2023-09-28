@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "theusaf",
+		"id": "193714715631812608"
+	},
+	"service": "WaniKani",
+	"description": {
+		"en": "WaniKani is a kanji learning application by Tofugu. 2,000 kanji. 6,000 vocabulary words. In just over a year.",
+		"ga_IE": "Is feidhmchlár foghlama kanji le Tofugu é WaniKani. 2,000 kanji. 6,000 focal foclóra. I mbeagán níos mó ná bliain.",
+		"nl": "WaniKani is een kanji-leerapplicatie van Tofugu. 2000 kanji. 6000 woordenschatwoorden. Over iets meer dan een jaar."
+	},
+	"url": [
+		"www.wanikani.com",
+		"community.wanikani.com",
+		"knowledge.wanikani.com"
+	],
+	"version": "1.2.3",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WaniKani/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WaniKani/assets/thumbnail.png",
+	"color": "#1BA0ED",
+	"category": "other",
+	"tags": [
+		"education",
+		"japanese",
+		"kanji",
+		"srs",
+		"vocabulary",
+		"language"
+	]
+}

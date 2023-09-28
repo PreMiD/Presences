@@ -1,11 +1,12 @@
 const presence = new Presence({
-		clientId: "690628469746434089"
+		clientId: "690628469746434089",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "fifa"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/F/FIFA%20Web%20App/assets/logo.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;
@@ -206,7 +207,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector(".ut-pinned-list-container.SearchResults")
 		) {
 			presenceData.details = "Transfers - Searching for new players";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		}
 	} else if (
 		document.querySelector(

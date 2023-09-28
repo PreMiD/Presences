@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "635876670146084880"
+	clientId: "635876670146084880",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "coin"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/GDBrowser/assets/logo.png",
 		},
 		q = new URLSearchParams(window.location.search);
 

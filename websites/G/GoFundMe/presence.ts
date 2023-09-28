@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "865564674326003712"
+		clientId: "865564674326003712",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "gofundme",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/GoFundMe/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = location;
 
@@ -19,8 +20,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View fundraiser",
-				url: href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname === "/sign-in" || pathname === "/sign-in/")
 		presenceData.details = "Logging In";

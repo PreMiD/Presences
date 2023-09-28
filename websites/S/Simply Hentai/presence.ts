@@ -1,6 +1,7 @@
 const presence = new Presence({
-	clientId: "608043966285348944"
+	clientId: "608043966285348944",
 });
+
 let lastPlaybackState = null,
 	reading,
 	browsingTimestamp = Math.floor(Date.now() / 1000);
@@ -25,11 +26,13 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `${b.textContent} [Page: ${
 			document.querySelector<HTMLInputElement>(".page-jump.text-center").value
 		}]`;
-		presenceData.largeImageKey = "lg";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/S/Simply%20Hentai/assets/logo.png";
 		presenceData.startTimestamp = browsingTimestamp;
 	} else {
 		const presenceData: PresenceData = {
-			largeImageKey: "lg"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Simply%20Hentai/assets/logo.png",
 		};
 
 		presenceData.details = "Browsing...";

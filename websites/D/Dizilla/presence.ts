@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "712838005165129728"
+		clientId: "712838005165129728",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	pages: { [k: string]: string } = {
 		"/": "Ana Sayfa",
@@ -21,7 +21,7 @@ const presence = new Presence({
 		"/imdb-top-100": "IMDb Top 100",
 		"/kanallar": "Kanallar",
 		"/dizi-onerileri": "Dizi Önerileri",
-		"/iletisim": "İletişim"
+		"/iletisim": "İletişim",
 	};
 
 interface IframeData {
@@ -37,15 +37,16 @@ presence.on("iFrameData", (data: IframeData) => {
 
 presence.on("UpdateData", async () => {
 	const path: string = document.location.pathname,
-		showName: HTMLLinkElement = document.querySelector(
+		showName = document.querySelector(
 			"div.content > div > div.top-sticky-content h1 > a"
-		),
+		)?.firstChild,
 		episode: HTMLSpanElement = document.querySelector(
 			"div.content > div > div.top-sticky-content span.text-white.text-small"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "dz-logo",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Dizilla/assets/logo.png",
+			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 
 	if (path.startsWith("/dizi/")) {
@@ -54,31 +55,23 @@ presence.on("UpdateData", async () => {
 			document.querySelector(
 				"div.content > div > div.top-sticky-content div > h1 > a"
 			)?.textContent || "Bilinmeyen Dizi";
-
-		presence.setActivity(presenceData);
 	} else if (path.startsWith("/oyuncular/")) {
 		presenceData.details = "Bir oyuncuya göz atıyor:";
 		presenceData.state =
 			document.querySelector(
 				"div.content > div > div.top-sticky-content div > span"
 			)?.textContent || "Bilinmeyen Oyuncu";
-
-		presence.setActivity(presenceData);
 	} else if (path.startsWith("/dizi-turu/")) {
 		presenceData.details = "Bir türe göz atıyor:";
 		presenceData.state =
 			document.querySelector(
 				"div.content > div > div.top-sticky-content div > h1"
 			)?.textContent || "Bilinmeyen Tür";
-
-		presence.setActivity(presenceData);
 	} else if (path.startsWith("/kanal/")) {
 		presenceData.details = "Bir kanala göz atıyor:";
 		presenceData.state =
 			document.title.slice(0, document.title.indexOf("arşivleri")) ||
 			"Bilinmeyen Kanal";
-
-		presence.setActivity(presenceData);
 	} else if (path.startsWith("/arsiv/")) {
 		const query = new URL(document.location.href).searchParams.get("q");
 
@@ -86,19 +79,15 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Bir şey arıyor:";
 			presenceData.state =
 				query[0].toUpperCase() + query.slice(1).toLowerCase();
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 		} else {
 			presenceData.details = "Bir sayfaya göz atıyor:";
 			presenceData.state = "Arşiv";
 		}
-
-		presence.setActivity(presenceData);
 	} else if (pages[path] || pages[path.slice(0, -1)]) {
 		presenceData.details = "Bir sayfaya göz atıyor:";
 		presenceData.state =
 			pages[path] || pages[path.slice(0, -1)] || "Bilinmeyen Sayfa";
-
-		presence.setActivity(presenceData);
 	} else if (
 		!isNaN(video?.duration) &&
 		showName?.textContent &&
@@ -112,7 +101,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = showName?.textContent || "Bilinmeyen Dizi";
 		presenceData.state = episode?.textContent || "Bilinmeyen Bölüm";
 
-		presenceData.smallImageKey = video?.paused ? "pause" : "play";
+		presenceData.smallImageKey = video?.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video?.paused
 			? (await strings).pause
 			: (await strings).play;
@@ -123,7 +112,13 @@ presence.on("UpdateData", async () => {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
-
-		presence.setActivity(presenceData);
-	} else presence.setActivity();
+	} else if (showName?.textContent && episode?.textContent) {
+		presenceData.details =
+			`${showName.textContent
+				.charAt(0)
+				.toUpperCase()}${showName.textContent.slice(0)}` || "Bilinmeyen Dizi";
+		presenceData.state = episode?.textContent || "Bilinmeyen Bölüm";
+	}
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

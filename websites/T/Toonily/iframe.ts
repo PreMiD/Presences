@@ -6,7 +6,7 @@ iframe.on("UpdateData", async () => {
 		iframe.send({
 			writing: comment.textContent.length > 1,
 			details: "Writing Comment",
-			smallImageKey: "writing"
+			smallImageKey: "writing",
 		});
 	}
 });

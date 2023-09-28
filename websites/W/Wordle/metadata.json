@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Kyrie",
+		"id": "368399721494216706"
+	},
+	"service": "Wordle",
+	"description": {
+		"en": "Guess the hidden word in 6 tries. A new puzzle is available each day."
+	},
+	"url": [
+		"www.nytimes.com",
+		"www.powerlanguage.co.uk"
+	],
+	"version": "1.1.11",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wordle/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wordle/assets/thumbnail.png",
+	"color": "#6AAA64",
+	"category": "games",
+	"tags": [
+		"word",
+		"guessing",
+		"game"
+	],
+	"settings": [
+		{
+			"id": "guess",
+			"title": "Show Number of Guesses",
+			"icon": "fas fa-comment-alt-edit",
+			"value": true
+		}
+	]
+}

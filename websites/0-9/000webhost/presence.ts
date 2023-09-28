@@ -1,87 +1,102 @@
 const presence = new Presence({
-		clientId: "840489095767261194"
+		clientId: "840489095767261194",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let title: HTMLElement, title2: HTMLElement, titleSite: HTMLElement;
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/0-9/000webhost/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
-		page = window.location.pathname,
-		buttons = await presence.getSetting<boolean>("buttons");
-
-	titleSite = document.querySelector(
-		"#nav-container > div > div.sidebar__header.flex.flex-col > a.sidebar-header__app-link.text-color-white.text-bold.disabled-link.sidebar-header__app-link--disabled > span"
-	);
+		{ href, pathname } = document.location,
+		[privacy, buttons] = await Promise.all([
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("buttons"),
+		]),
+		title = document.querySelector("head > title"),
+		titleSite = document.querySelector(
+			'[class="sidebar__header flex flex-col"]'
+		);
 	if (titleSite) presenceData.state = titleSite.textContent;
-	if (page === "/") presenceData.details = "Viewing the Homepage";
-	else if (page.includes("/forum")) {
-		if (page.includes("/t/")) {
-			title = document.querySelector("head > title");
-			title2 = document.querySelector(
-				"#suggested-topics > h3.suggested-topics-message > a.badge-wrapper.box > span.badge-category.clear-badge > span"
-			);
+	if (pathname === "/") presenceData.details = "Viewing the Homepage";
+	else if (pathname.includes("/forum")) {
+		if (pathname.includes("/t/")) {
 			presenceData.details = "Reading Forum Post:";
 			presenceData.state = title.textContent.replace(
-				`- ${title2.textContent} - 000webhost forum`,
+				`- ${
+					document.querySelector(
+						"#suggested-topics > h3.suggested-topics-message > a.badge-wrapper.box > span.badge-category.clear-badge > span"
+					).textContent
+				} - 000webhost forum`,
 				""
 			);
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: "View Forum Post",
-						url: document.location.href
-					}
-				];
-			}
-		} else if (page.includes("/c/")) {
-			title = document.querySelector("head > title");
+			presenceData.buttons = [
+				{
+					label: "View Forum Post",
+					url: href,
+				},
+			];
+		} else if (pathname.includes("/c/")) {
 			presenceData.details = "Browsing through Forum Category:";
 			presenceData.state = title.textContent
 				.replace(" topics - 000webhost forum", "")
 				.replace("Latest", "");
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: "View Forum Category",
-						url: document.location.href
-					}
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "View Forum Category",
+					url: href,
+				},
+			];
+		} else if (pathname.includes("/u/")) {
+			presenceData.details = `Viewing ${
+				document.querySelector('[class="username"]').firstChild.textContent
+			}'s Profile`;
+			presenceData.buttons = [
+				{
+					label: "View Profile",
+					url: href,
+				},
+			];
 		} else presenceData.details = "Browsing Through The Forum";
-	} else if (page.includes("/free-website-sign-up"))
-		presenceData.details = "Signing up";
-	else if (page.includes("members/website/list"))
+	} else if (pathname.includes("/cheap-web-hosting"))
+		presenceData.details = "Viewing webhosting";
+	else if (pathname.includes("members/website/list"))
 		presenceData.details = "Viewing All Websites";
-	else if (page.includes("/members/store"))
+	else if (pathname.includes("/members/store"))
 		presenceData.details = "Viewing the Store";
-	else if (page.endsWith("/build") && titleSite) {
+	else if (pathname.endsWith("/build") && titleSite) {
 		presenceData.details = "Managing Website:";
 		presenceData.state = titleSite.textContent;
-	} else if (page.endsWith("/domain") && titleSite)
+	} else if (pathname.endsWith("/domain") && titleSite)
 		presenceData.details = "Managing Domains For:";
-	else if (page.endsWith("/files"))
+	else if (pathname.endsWith("/files"))
 		presenceData.details = "Managing Files For:";
-	else if (page.endsWith("/database"))
+	else if (pathname.endsWith("/database"))
 		presenceData.details = "Managing Database For:";
-	else if (page.endsWith("/email"))
+	else if (pathname.endsWith("/email"))
 		presenceData.details = "Managing Email For:";
-	else if (page.endsWith("/settings"))
+	else if (pathname.endsWith("/settings"))
 		presenceData.details = "Managing Settings For:";
-	else if (page.endsWith("/stats")) presenceData.details = "Viewing Stats For:";
-	else if (page.endsWith("/security"))
+	else if (pathname.endsWith("/stats"))
+		presenceData.details = "Viewing Stats For:";
+	else if (pathname.endsWith("/security"))
 		presenceData.details = "Managing Security Settings For:";
-	else if (page.endsWith("/cron-jobs"))
+	else if (pathname.endsWith("/cron-jobs"))
 		presenceData.details = "Managing Cron-Jobs For:";
-	else if (page.endsWith("/redirect"))
+	else if (pathname.endsWith("/redirect"))
 		presenceData.details = "Managing Redirects For:";
-	else if (page.endsWith("/logs")) presenceData.details = "Viewing Logs For:";
-	else if (page.endsWith("/backup"))
+	else if (pathname.endsWith("/logs"))
+		presenceData.details = "Viewing Logs For:";
+	else if (pathname.endsWith("/backup"))
 		presenceData.details = "Managing Backups For:";
 
+	if (privacy) {
+		delete presenceData.buttons;
+		delete presenceData.state;
+		presenceData.details = "Browsing";
+	}
+	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

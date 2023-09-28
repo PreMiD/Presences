@@ -1,10 +1,12 @@
 const presence = new Presence({
-	clientId: "751285675277680811"
+	clientId: "751285675277680811",
 });
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: Math.floor(Date.now() / 1000),
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/Mark%20Scans/assets/logo.png",
 		},
 		path = document.location.pathname,
 		title: HTMLElement = document.querySelector("head title"),
@@ -55,7 +57,7 @@ presence.on("UpdateData", async () => {
 					title.textContent.indexOf("- Capítulo") + 2,
 					title.textContent.indexOf("- Mark") - 1
 				)} | ${paginacao[paginacao.selectedIndex].textContent}`;
-			}
+			},
 		};
 
 		if (

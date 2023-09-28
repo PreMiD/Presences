@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "908721185863397426"
+		clientId: "908721185863397426",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1e3);
 
@@ -7,14 +7,15 @@ presence.on("UpdateData", () => {
 	const { pathname, origin } = window.location,
 		presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Wuxiaworld/assets/logo.png",
 		};
 	if (document.querySelector(".navbar-form input") === document.activeElement) {
 		presenceData.details = "Searching:";
 		presenceData.state = (
 			document.querySelector(".navbar-form input") as HTMLInputElement
 		).value;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else {
 		if (pathname.includes("emperors-domination"))
 			presenceData.largeImageKey = "emperor";
@@ -32,8 +33,8 @@ presence.on("UpdateData", () => {
 			presenceData.buttons = [
 				{
 					label: "Visit Novel Page",
-					url: origin + pathname
-				}
+					url: origin + pathname,
+				},
 			];
 		} else if (
 			/^\/novel\/([^;]*)+\/+[a-zA-Z]+-chapter-[0-9]+\/?/i.test(pathname)
@@ -50,18 +51,18 @@ presence.on("UpdateData", () => {
 			presenceData.state = `📖 ${
 				document.querySelector("#chapter-outer .caption h4").textContent
 			} 🔸 ${progress}%`;
-			presenceData.smallImageKey = "read";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.buttons = [
 				{
 					label: "Visit Novel Page",
 					url:
 						origin +
-						(document.querySelector(".caption a") as HTMLAnchorElement).href
+						(document.querySelector(".caption a") as HTMLAnchorElement).href,
 				},
 				{
 					label: "Visit Chapter",
-					url: origin + pathname
-				}
+					url: origin + pathname,
+				},
 			];
 		} else {
 			presenceData.details = "Browsing Wuxiaworld";

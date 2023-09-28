@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "685491676155871281"
+	clientId: "685491676155871281",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "pypi"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/PyPi/assets/logo.png",
 		},
 		Path = document.location.pathname;
 	presenceData.startTimestamp = Math.floor(Date.now() / 1000);

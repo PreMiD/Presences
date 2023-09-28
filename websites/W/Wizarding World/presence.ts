@@ -1,16 +1,17 @@
 const presence = new Presence({
-		clientId: "843731213893107713"
+		clientId: "843731213893107713",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async function () {
 	const setting = {
 			timeElapsed: await presence.getSetting<boolean>("timeElapsed"),
-			showButtons: await presence.getSetting<boolean>("showButtons")
+			showButtons: await presence.getSetting<boolean>("showButtons"),
 		},
 		urlpath = window.location.pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Wizarding%20World/assets/logo.jpg",
 		};
 
 	if (setting.timeElapsed) presenceData.startTimestamp = browsingTimestamp;
@@ -32,8 +33,8 @@ presence.on("UpdateData", async function () {
 							presenceData.buttons = [
 								{
 									label: "View Article",
-									url: window.location.href
-								}
+									url: window.location.href,
+								},
 							];
 						}
 					}
@@ -52,8 +53,8 @@ presence.on("UpdateData", async function () {
 							presenceData.buttons = [
 								{
 									label: "View Quiz",
-									url: window.location.href
-								}
+									url: window.location.href,
+								},
 							];
 						}
 					}
@@ -76,8 +77,8 @@ presence.on("UpdateData", async function () {
 							presenceData.buttons = [
 								{
 									label: `View: ${label}`,
-									url: window.location.href
-								}
+									url: window.location.href,
+								},
 							];
 						}
 					}
@@ -126,8 +127,8 @@ presence.on("UpdateData", async function () {
 								presenceData.buttons = [
 									{
 										label: `View ${ctopic}`,
-										url: window.location.href
-									}
+										url: window.location.href,
+									},
 								];
 							}
 						} else {
@@ -151,8 +152,8 @@ presence.on("UpdateData", async function () {
 							presenceData.buttons = [
 								{
 									label: "View Collection",
-									url: window.location.href
-								}
+									url: window.location.href,
+								},
 							];
 						}
 					}

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "629588152679399424"
+		clientId: "629588152679399424",
 	}),
 	pages: {
 		[name: string]: string;
@@ -19,7 +19,7 @@ const presence = new Presence({
 		"/hesabim/sepetim": "Sepet",
 		"/sepetim": "Sepet",
 		"/moda11": "Moda11 (giybi)",
-		"/market11": "Market11"
+		"/market11": "Market11",
 	};
 presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
@@ -41,8 +41,9 @@ presence.on("UpdateData", async () => {
 			)?.content as unknown as Element
 		)?.textContent,
 		presenceData: PresenceData = {
-			largeImageKey: "n11-logo",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/N/n11.com/assets/logo.png",
+			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 
 	if (productName && productName.textContent !== "") {
@@ -62,7 +63,7 @@ presence.on("UpdateData", async () => {
 			document.title && document.title.includes(" - n11.com")
 				? document.title.replace(" - n11.com", "")
 				: "";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.search === "?s=GOB2CGlobal") {
 		presenceData.details = "Bir sayfaya göz atıyor:";
 		presenceData.state = "Yurt Dışından Ürünler";

@@ -1,7 +1,8 @@
 const presence = new Presence({
-		clientId: "623657389706444820" // CLIENT ID FOR YOUR PRESENCE
+		clientId: "623657389706444820", // CLIENT ID FOR YOUR PRESENCE
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let item: HTMLElement | Element | string,
 	user: HTMLElement | Element | string,
 	search: HTMLElement | Element | string | HTMLInputElement,
@@ -9,8 +10,8 @@ let item: HTMLElement | Element | string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "imgur",
-		startTimestamp: browsingTimestamp
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/I/Imgur/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	switch (document.location.hostname) {
@@ -255,7 +256,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Reading about Imgur";
 				delete presenceData.state;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			}
@@ -287,7 +288,7 @@ presence.on("UpdateData", async () => {
 					)}...`;
 				} else presenceData.state = (item as HTMLElement).textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else if (item) {
@@ -370,7 +371,7 @@ presence.on("UpdateData", async () => {
 					)}...`;
 				} else presenceData.state = (item as HTMLElement).textContent;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/categories")) {
@@ -398,7 +399,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Community, Reading rules";
 				delete presenceData.state;
 
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/c/")) {
@@ -429,7 +430,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Reading the API Docs";
 			delete presenceData.state;
 
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			presence.setActivity(presenceData);
 

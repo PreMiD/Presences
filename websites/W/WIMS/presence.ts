@@ -1,13 +1,16 @@
 const presence = new Presence({
-	clientId: "656959119118565406"
+	clientId: "656959119118565406",
 });
 
 // Redirect to iframe source, to prevent loss of progress
 if (
 	document.querySelectorAll("frame")[1] &&
-	document.baseURI !== document.querySelectorAll("frame")[1].src
-)
-	window.location.replace(document.querySelectorAll("frame")[1].src);
+	document.baseURI !== document.querySelectorAll("frame")[1].getAttribute("src")
+) {
+	window.location.replace(
+		document.querySelectorAll("frame")[1].getAttribute("src")
+	);
+}
 
 // Check whether loggedout
 let loggedout = false;
@@ -141,7 +144,7 @@ presence.on("UpdateData", async () => {
 		state: exercise,
 		startTimestamp: timestamp,
 		endTimestamp: timeleft,
-		largeImageKey: "wims_lg"
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/WIMS/assets/logo.png",
 	};
 	if (loggedout) presence.setActivity();
 	else presence.setActivity(presenceData);

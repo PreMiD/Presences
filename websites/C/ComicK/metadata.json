@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "वाह्य",
+		"id": "819696394180100106"
+	},
+	"contributors": [
+		{
+			"name": "Kyrie",
+			"id": "368399721494216706"
+		}
+	],
+	"service": "ComicK",
+	"description": {
+		"en": "🚀 ComicK - Fastest Comic Reader",
+		"vi_VN": "🚀 ComicK - Trang đọc truyện tranh nhanh nhất"
+	},
+	"url": "comick.app",
+	"version": "1.2.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/ComicK/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/ComicK/assets/thumbnail.png",
+	"color": "#f698c7",
+	"category": "other",
+	"tags": [
+		"manga",
+		"comic-reader"
+	],
+	"settings": [
+		{
+			"id": "image",
+			"title": "Show Image",
+			"icon": "fad fa-images",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}

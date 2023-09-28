@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "636659890927960064"
+		clientId: "636659890927960064",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,8 @@ let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "rlt"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/R/RLTracker.pro/assets/logo.png",
 	};
 
 	if (document.location.pathname === "/") {
@@ -16,7 +17,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/profiles/search")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = "Searching a profile";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.location.pathname.includes("/profiles/")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		title = document.querySelector(

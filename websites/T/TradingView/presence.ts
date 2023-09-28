@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "809817256686649344"
+		clientId: "809817256686649344",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/TradingView/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (window.location.hostname.startsWith("status"))

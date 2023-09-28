@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "869131200948756500"
+		clientId: "869131200948756500",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/WordProject/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = location,
 		buttons = await presence.getSetting<boolean>("buttons");
@@ -73,8 +74,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Listen",
-						url: href
-					}
+						url: href,
+					},
 				];
 			}
 		}
@@ -112,8 +113,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Listen",
-					url: href
-				}
+					url: href,
+				},
 			];
 		}
 	} else presenceData.details = document.title; // for resources in languages other than English

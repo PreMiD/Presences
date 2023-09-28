@@ -1,88 +1,171 @@
 const presence = new Presence({
-		clientId: "633637979952250881"
+		clientId: "633637979952250881",
 	}),
-	{ pathname } = window.location,
-	{ hostname } = window.location,
-	browsingTimeStamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let episode,
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeDao/assets/logo.png",
+}
+async function getStrings() {
+	return presence.getStrings(
+		{
+			browse: "general.browsing",
+			buttonWatchVideo: "general.buttonWatchVideo",
+			paused: "general.paused",
+			play: "general.playing",
+			search: "general.searchFor",
+			viewCategory: "general.viewCategory",
+			viewHome: "general.viewHome",
+			viewShow: "general.viewShow",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+async function imgPath(path: string, hostname: string) {
+	if (path) {
+		if (path.includes(hostname)) return `https://${path.replace("//", "")}`;
+		else return `https://${hostname}${path}`;
+	} else return Assets.Logo;
+}
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null,
 	current: number,
 	duration: number,
-	paused: boolean,
-	played: boolean;
+	isVideo = false,
+	paused: boolean;
 
 presence.on(
 	"iFrameData",
 	(data: {
 		current: number;
 		duration: number;
+		isVideo: boolean;
 		paused: boolean;
-		played: boolean;
 	}) => {
-		({ current, duration, paused, played } = data);
+		({ current, duration, isVideo, paused } = data);
 	}
 );
 
 presence.on("UpdateData", async () => {
-	const strings = await presence.getStrings({
-			playing: "presence.playback.playing",
-			paused: "presence.playback.paused",
-			browsing: "presence.activity.browsing"
-		}),
-		presenceData: PresenceData = {
-			largeImageKey: "animedao_lg"
-		};
-	if (pathname.startsWith("/view/")) {
-		const title: string = document.querySelector("h2").textContent.trim();
-		episode = title.match(/\WEpisode\W\d{1,3}/);
-		if (episode) {
-			presenceData.details = title.replace(episode[0], "");
-			presenceData.state = `${episode[0]} - ${
-				document.querySelector("h4").textContent
-			}`;
-		} else presenceData.details = title;
+	const presenceData: PresenceData = {
+			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname, hostname, href } = document.location,
+		[newLang, privacy, buttons, covers] = await Promise.all([
+			presence.getSetting<string>("lang").catch(() => "en"),
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("covers"),
+		]),
+		search = document.querySelector<HTMLInputElement>('input[type="text"]');
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
 
-		const video: HTMLVideoElement = document.querySelector("video");
-		if (video) {
-			played = video.currentTime !== 0;
-			({ duration, paused } = video);
-			current = video.currentTime;
+	if (privacy) {
+		presenceData.details = strings.browse;
+		presence.setActivity(presenceData);
+		return;
+	}
+	if (search?.value || pathname.includes("search")) {
+		presenceData.details = strings.search;
+		presenceData.state =
+			search?.value ||
+			document
+				.querySelector(
+					"body > div.container.main-container.min-vh-100.px-3 > h3"
+				)
+				?.textContent.split('"')[1] ||
+			"Nothing";
+		presenceData.smallImageKey = Assets.Search;
+		presence.setActivity(presenceData);
+		return;
+	}
+	switch (pathname.split("/")[1]) {
+		case "": {
+			const active = document.querySelector('[class="nav-link active"]');
+			if (active?.textContent) {
+				presenceData.details = `Viewing ${active.textContent
+					.trim()
+					.toLowerCase()} anime`;
+			} else strings.browse;
+			break;
 		}
-		if (played) {
-			if (!paused) {
-				[presenceData.startTimestamp, presenceData.endTimestamp] =
-					presence.getTimestamps(current, duration);
+		case "view": {
+			delete presenceData.startTimestamp;
+			const title =
+				document
+					.querySelector('[class="animename"]')
+					?.textContent?.split("Episode") ?? "";
+			presenceData.details = title[0];
+			presenceData.state = `Episode ${title[1]}`;
+			presenceData.largeImageKey =
+				(await imgPath(
+					document
+						.querySelector('[class="lozad img-fluid"]')
+						?.getAttribute("src"),
+					hostname
+				)) ?? Assets.Logo;
+			if (isVideo) {
+				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
+				presenceData.smallImageText = paused ? strings.paused : strings.play;
+				if (!isNaN(duration) && !paused) {
+					[, presenceData.endTimestamp] = presence.getTimestamps(
+						current,
+						duration
+					);
+				}
+				presenceData.buttons = [
+					{
+						label: "Watch Video",
+						url: href,
+					},
+				];
+			} else {
+				presenceData.buttons = [
+					{
+						label: "View Anime",
+						url: href,
+					},
+				];
 			}
-
-			presenceData.smallImageKey = paused ? "pause" : "play";
-			presenceData.smallImageText = paused ? strings.paused : strings.playing;
+			break;
 		}
-	} else if (hostname === "animedao.to") {
-		presenceData.startTimestamp = browsingTimeStamp;
-		if (pathname === "/") presenceData.details = (await strings).browsing;
-		else if (pathname.startsWith("/animelist"))
-			presenceData.details = "Viewing the Animelist";
-		else if (pathname.startsWith("/genre")) {
-			const genre: string = document.querySelector("h2").textContent.trim();
-			presenceData.details = "Viewing genres";
-			if (pathname !== "/genre") {
-				presenceData.state = `${genre.replace(
-					genre.match(/Genre\W-\W/)[0],
-					""
-				)}`;
-			}
-		} else if (pathname.startsWith("/popular-anime"))
-			presenceData.details = "Viewing popular anime";
-		else if (pathname.startsWith("/anime")) {
-			presenceData.details = "Viewing an anime";
-			presenceData.state = (
-				document.querySelector("h2") as HTMLHeadingElement
-			)?.textContent.trim();
-		} else if (pathname.startsWith("/search")) {
+		case "animelist": {
+			presenceData.details = "Viewing their anime list";
+			break;
+		}
+		case "search": {
 			presenceData.details = "Searching";
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Searching";
+			break;
+		}
+		case "anime": {
+			presenceData.buttons = [
+				{
+					label: "View Anime",
+					url: href,
+				},
+			];
+			presenceData.details = "Viewing an anime";
+			presenceData.state = document.querySelector("h2")?.textContent.trim();
+			presenceData.largeImageKey =
+				(await imgPath(
+					document
+						.querySelector('[class="lozad img-fluid main-poster"]')
+						?.getAttribute("src"),
+					hostname
+				)) ?? Assets.Logo;
+			break;
 		}
 	}
-	presence.setActivity(presenceData, true);
+	if (!buttons && presenceData.buttons) delete presenceData.buttons;
+	if (!covers && presenceData.largeImageKey !== Assets.Logo)
+		presenceData.largeImageKey = Assets.Logo;
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

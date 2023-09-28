@@ -1,17 +1,20 @@
 const presence = new Presence({
-		clientId: "708314580304003124"
+		clientId: "708314580304003124",
 	}),
 	newStrings = presence.getStrings({
 		play: "general.playing",
 		pause: "general.paused",
 		browse: "general.browsing",
-		search: "general.search"
+		search: "general.search",
 	}),
 	getElement = (query: string): string => {
 		const element = document.querySelector(query);
 		if (element) return element.textContent.replace(/^\s+|\s+$/g, "");
 		else return "Loading...";
 	};
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Anontpp/assets/logo.png",
+}
 
 let oldUrl: string, elapsed: number, strings: Awaited<typeof newStrings>;
 
@@ -22,10 +25,10 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("search"),
 			presence.getSetting<boolean>("browse"),
 			presence.getSetting<boolean>("video"),
-			presence.getSetting<boolean>("cover")
+			presence.getSetting<boolean>("cover"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "anontpp"
+			largeImageKey: Assets.Logo,
 		};
 
 	if (oldUrl !== path) {
@@ -44,7 +47,7 @@ presence.on("UpdateData", async () => {
 			).flatMap(node => node.textContent.trim() || []),
 			status = video.paused ? "pause" : "play";
 
-		presenceData.smallImageKey = status;
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = strings[status];
 		if (status === "play") {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
@@ -52,9 +55,9 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (getElement("#episodetitle") !== "Feature Film") {
-			presenceData.details = state[0];
-			presenceData.state = state[1];
-		} else presenceData.details = state[0];
+			presenceData.details = state[1];
+			presenceData.state = state[2];
+		} else presenceData.details = state[1];
 
 		if (cover) {
 			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
@@ -75,11 +78,11 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) {
 		if (presenceData.details.match("(Browsing|Viewing)")) {
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = strings.browse;
 		}
 		if (presenceData.details.includes("Searching")) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.search;
 		}
 

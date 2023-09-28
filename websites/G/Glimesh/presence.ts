@@ -1,13 +1,15 @@
 const presence = new Presence({
-	clientId: "825888886285795329"
+	clientId: "825888886285795329",
 });
+
 let elapsedTime: number = null;
 
 presence.on("UpdateData", async () => {
 	const locationHref = document.location.href,
 		locationPath = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "glimesh_logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Glimesh/assets/logo.png",
 		};
 
 	switch (document.location.host) {
@@ -78,8 +80,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Profile",
-							url: locationHref
-						}
+							url: locationHref,
+						},
 					];
 				}
 			} else if (document.querySelector("#video-column")) {
@@ -104,8 +106,8 @@ presence.on("UpdateData", async () => {
 								document.querySelector(
 									"#video-column > div > div.card-footer.p-1.d-none.d-sm-block > div > div.col-8.d-inline-flex.align-items-center > a"
 								) as HTMLAnchorElement
-							).href
-						}
+							).href,
+						},
 					];
 				}
 
@@ -116,7 +118,7 @@ presence.on("UpdateData", async () => {
 					) {
 						presenceData.buttons.unshift({
 							label: "Watch Stream",
-							url: locationHref
+							url: locationHref,
 						});
 					}
 
@@ -124,13 +126,13 @@ presence.on("UpdateData", async () => {
 						if (elapsedTime === null)
 							elapsedTime = Math.floor(Date.now() / 1000);
 
-						presenceData.smallImageKey = "playing";
+						presenceData.smallImageKey = Assets.Play;
 						presenceData.smallImageText = "Live!";
 
 						if (await presence.getSetting<boolean>("show_timestamps"))
 							presenceData.startTimestamp = elapsedTime;
 					} else {
-						presenceData.smallImageKey = "paused";
+						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = "Paused";
 
 						if (await presence.getSetting<boolean>("show_timestamps"))
@@ -169,8 +171,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Blog Post",
-							url: locationHref
-						}
+							url: locationHref,
+						},
 					];
 				}
 			}

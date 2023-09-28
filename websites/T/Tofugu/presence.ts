@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "958766344311025786"
+		clientId: "958766344311025786",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "icon",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/Tofugu/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	switch (location.host) {

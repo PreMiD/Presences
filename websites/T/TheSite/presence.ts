@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "702668334990098523"
+		clientId: "702668334990098523",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browse: "presence.activity.browsing",
-		search: "presence.activity.searching"
+		play: "general.playing",
+		pause: "general.paused",
+		browse: "general.browsing",
+		search: "general.searching",
 	}),
 	getElement = (query: string): string => {
 		const element = document.querySelector(query);
@@ -13,7 +13,7 @@ const presence = new Presence({
 		else return "Loading...";
 	},
 	videoStatus = (video: HTMLVideoElement): string => {
-		return video.paused ? "pause" : "play";
+		return video.paused ? Assets.Pause : Assets.Play;
 	};
 
 let oldUrl: string,
@@ -25,149 +25,149 @@ function setObject(path: string) {
 	switch (path) {
 		case "/": {
 			return {
-				details: "Browsing"
+				details: "Browsing",
 			};
 		}
 		case "/login/": {
 			return {
-				details: "Logging in"
+				details: "Logging in",
 			};
 		}
 		case "/password/forgot": {
 			return {
-				details: "Forgot Password"
+				details: "Forgot Password",
 			};
 		}
 		case "/pages/kodi_plugin": {
 			return {
 				details: "Viewing",
-				state: "Kodi Plugin"
+				state: "Kodi Plugin",
 			};
 		}
 		case "/pages/contact": {
 			return {
 				details: "Viewing",
-				state: "Contact"
+				state: "Contact",
 			};
 		}
 		case "/pages/faq": {
 			return {
 				details: "Viewing",
-				state: "FAQ"
+				state: "FAQ",
 			};
 		}
 		case "/pages/terms": {
 			return {
 				details: "Viewing",
-				state: "Terms of Service"
+				state: "Terms of Service",
 			};
 		}
 		case "/pages/privacy": {
 			return {
 				details: "Viewing",
-				state: "Privacy Info"
+				state: "Privacy Info",
 			};
 		}
 		case "/pages/cookies": {
 			return {
 				details: "Viewing",
-				state: "Cookie Info"
+				state: "Cookie Info",
 			};
 		}
 		case "/pages/social_terms": {
 			return {
 				details: "Viewing",
-				state: "Social Terms"
+				state: "Social Terms",
 			};
 		}
 		case "/account/gifts": {
 			return {
 				details: "Redeeming",
-				state: "Gift-Code"
+				state: "Gift-Code",
 			};
 		}
 		case "/account/favorites/": {
 			return {
 				details: "Viewing",
-				state: "Favorites"
+				state: "Favorites",
 			};
 		}
 		case "/account/playlist/wl/": {
 			return {
 				details: "Viewing",
-				state: "Watch Later"
+				state: "Watch Later",
 			};
 		}
 		case "/account/pin": {
 			return {
 				details: "Logging In",
-				state: "Via PIN"
+				state: "Via PIN",
 			};
 		}
 		case "/premium/primary": {
 			return {
 				details: "Buying",
-				state: "Premium"
+				state: "Premium",
 			};
 		}
 		case "/movies/": {
 			return {
 				details: "Browsing",
-				state: "Movies"
+				state: "Movies",
 			};
 		}
 		case "/shows/": {
 			return {
 				details: "Browsing",
-				state: "TV Shows"
+				state: "TV Shows",
 			};
 		}
 		case "/schedule/": {
 			return {
 				details: "Viewing",
-				state: "Schedule"
+				state: "Schedule",
 			};
 		}
 		case "/sets/children": {
 			return {
 				details: "Viewing Set",
-				state: "Children"
+				state: "Children",
 			};
 		}
 		case "/sets/comedies": {
 			return {
 				details: "Viewing Set",
-				state: "Comedies"
+				state: "Comedies",
 			};
 		}
 		case "/sets/action": {
 			return {
 				details: "Viewing Set",
-				state: "Action"
+				state: "Action",
 			};
 		}
 		case "/sets/dramas": {
 			return {
 				details: "Viewing Set",
-				state: "Dramas"
+				state: "Dramas",
 			};
 		}
 		case "/sets/romance": {
 			return {
 				details: "Viewing Set",
-				state: "Romance"
+				state: "Romance",
 			};
 		}
 		case "/sets/sci-fi": {
 			return {
 				details: "Viewing Set",
-				state: "Science Fiction"
+				state: "Science Fiction",
 			};
 		}
 		case "/sets/horror": {
 			return {
 				details: "Viewing Set",
-				state: "Horror"
+				state: "Horror",
 			};
 		}
 	}
@@ -182,11 +182,12 @@ presence.on("UpdateData", async () => {
 				presence.getSetting<boolean>("search"),
 				presence.getSetting<boolean>("browse"),
 				presence.getSetting<boolean>("video"),
-				presence.getSetting<string>("show-format")
+				presence.getSetting<string>("show-format"),
 			]
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "thesite"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/TheSite/assets/logo.png",
 		};
 
 	if (oldUrl !== path) {
@@ -340,11 +341,11 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) {
 		if (presenceData.details.match("(Browsing|Viewing)")) {
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = (await strings).browse;
 		}
 		if (presenceData.details.includes("Searching")) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = (await strings).search;
 		}
 

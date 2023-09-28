@@ -5,9 +5,15 @@ iframe.on("UpdateData", async () => {
 		const video: HTMLVideoElement = document.querySelector("video");
 		if (video && !isNaN(video.duration)) {
 			iframe.send({
+				exists: true,
 				duration: video.duration,
 				currentTime: video.currentTime,
-				paused: video.paused
+				paused: video.paused,
+			});
+		} else if (video) {
+			iframe.send({
+				exists: true,
+				paused: true,
 			});
 		}
 	}

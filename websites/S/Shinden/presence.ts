@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "694885187116597309"
+		clientId: "694885187116597309",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let iFrameVideo: boolean,
@@ -33,7 +33,8 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "shinden"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Shinden/assets/logo.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;
@@ -63,7 +64,7 @@ presence.on("UpdateData", async () => {
 							.textContent,
 						""
 					);
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else presenceData.details = "Viewing recent articles";
 		} else if (document.location.pathname.includes("/series")) {
 			if (document.querySelector(".page-title")) {
@@ -107,7 +108,7 @@ presence.on("UpdateData", async () => {
 					Math.floor(duration)
 				);
 
-				presenceData.smallImageKey = paused ? "pause" : "play";
+				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = paused
 					? (await strings).pause
 					: (await strings).play;

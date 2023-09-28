@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "813781191308083239"
+		clientId: "813781191308083239",
 	}),
 	time = Math.floor(Date.now() / 1000);
 
@@ -9,8 +9,9 @@ presence.on("UpdateData", async () => {
 		{ pathname, hostname, href, search } = window.location,
 		path = pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: time
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/The%20New%20York%20Times/assets/logo.jpg",
+			startTimestamp: time,
 		};
 
 	if (hostname === "www.nytimes.com") {
@@ -18,8 +19,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Page",
-					url: href
-				}
+					url: href,
+				},
 			];
 		}
 
@@ -56,8 +57,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Show Search Results",
-						url: href
-					}
+						url: href,
+					},
 				];
 			}
 		} else if (pathname.includes("/video/")) {
@@ -92,8 +93,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Listen to Podcast",
-						url: href
-					}
+						url: href,
+					},
 				];
 			}
 
@@ -145,8 +146,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Read Article",
-						url: href
-					}
+						url: href,
+					},
 				];
 			}
 
@@ -223,14 +224,14 @@ async function getSettings() {
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("podcastLogo"),
 			presence.getSetting<boolean>("articleAuthor"),
-			presence.getSetting<boolean>("moreDetails")
+			presence.getSetting<boolean>("moreDetails"),
 		]),
 		names = [
 			"privacy",
 			"buttons",
 			"podcastLogo",
 			"articleAuthor",
-			"moreDetails"
+			"moreDetails",
 		],
 		obj: {
 			[key: string]: boolean;

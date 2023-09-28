@@ -1,13 +1,14 @@
 const presence = new Presence({
-		clientId: "823408394098311178"
+		clientId: "823408394098311178",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const privacy = await presence.getSetting<boolean>("privacy"),
 		presenceData: PresenceData = {
-			largeImageKey: "malody",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/Mugzone/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		};
 	if (privacy) presenceData.details = "Browsing Malody Website";
 	else if (document.location.pathname === "/")
@@ -59,8 +60,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Song",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else if (document.location.href.includes("/chart")) {
 		presenceData.smallImageKey = "song";
@@ -73,8 +74,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Chart",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else if (document.location.pathname.startsWith("/store")) {
 		if (document.location.pathname.endsWith("/skin")) {
@@ -89,8 +90,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Skin",
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		} else if (document.location.pathname.endsWith("/all")) {
 			presenceData.smallImageKey = "store";
@@ -145,8 +146,8 @@ presence.on("UpdateData", async () => {
 						document.querySelector("#header > div > a:nth-child(4) > b")
 							.textContent
 					}`,
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		} else if (document.location.pathname.includes("/user")) {
 			if (
@@ -197,8 +198,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Visit My Profile!",
-						url: document.URL
-					}
+						url: document.URL,
+					},
 				];
 			} else {
 				presenceData.details = "Viewing User: ";
@@ -220,7 +221,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector("#content > div.g_title").textContent
 		}profile`;
 	} else if (document.location.pathname.includes("/page/search")) {
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.details = document.querySelector(
 			"#content > div.g_title"
 		).textContent;

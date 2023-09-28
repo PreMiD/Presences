@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "849684658563055627"
+		clientId: "849684658563055627",
 	}),
 	logRegex = /^.+ - \w+$/,
 	generalStartTime = Math.floor(Date.now() / 1000);
@@ -7,8 +7,9 @@ let lobbyStartTime: number, gameStartTime: number;
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: generalStartTime
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Dominion%20Online/assets/logo.jpg",
+		startTimestamp: generalStartTime,
 	};
 
 	if (

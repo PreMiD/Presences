@@ -1,12 +1,13 @@
 const presence = new Presence({
-	clientId: "662634921914925056"
+	clientId: "662634921914925056",
 });
 
 let login;
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Guilded.gg/assets/logo.png",
 	};
 
 	if (document.location.pathname === "/") {

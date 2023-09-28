@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "652773935829614592"
+	clientId: "652773935829614592",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/Tatsumaki/assets/logo.png",
 		},
 		page = window.location.pathname,
 		browsingTimestamp = Math.floor(Date.now() / 1000);

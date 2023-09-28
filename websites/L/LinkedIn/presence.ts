@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "785263902321541181" //Presence Application ID on Discord Developers.
+		clientId: "785263902321541181", //Presence Application ID on Discord Developers.
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -11,8 +11,9 @@ function unescapeHTML(string: string): string {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "linkedin_logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/L/LinkedIn/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;
 
@@ -34,13 +35,13 @@ presence.on("UpdateData", async () => {
 			enum feedSubSection {
 				"follow/" = "Browsing suggestions.",
 				"following/" = "Viewing Following:",
-				"followers/" = "Viewing Followers."
+				"followers/" = "Viewing Followers.",
 			}
 			enum filterType {
 				connection = "Connections",
 				member = "Members",
 				company = "Companies",
-				channel = "Hashtags"
+				channel = "Hashtags",
 			}
 			const subSection =
 				feedSubSection[
@@ -87,7 +88,7 @@ presence.on("UpdateData", async () => {
 				enum networkSubSection {
 					"connections/" = "Browsing Connections.",
 					"events/" = "Browsing Events.",
-					"newsletters/" = "Reading Newsletters."
+					"newsletters/" = "Reading Newsletters.",
 				}
 
 				presenceData.state =
@@ -184,7 +185,7 @@ presence.on("UpdateData", async () => {
 					"recent-activity" = "Activities",
 					skills = "Skills",
 					interests = "Interests",
-					"contact-info" = "Contact Info"
+					"contact-info" = "Contact Info",
 				}
 				//If the user is editing skills (the only edit related subsection with "detail" path).
 				if (path === "/in/luca-biagetti/detail/skills/add/") {
@@ -237,7 +238,7 @@ presence.on("UpdateData", async () => {
 					language = "Languages.",
 					organization = "Organizations.",
 					"secondary-language" = "Secondary language.",
-					"contact-info" = "Contact info."
+					"contact-info" = "Contact info.",
 				}
 
 				presenceData.details = "Editing profile:";

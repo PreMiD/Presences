@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "721748388143562852"
+		clientId: "721748388143562852",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	}),
 	media: MediaObj = {
 		// anyone is welcome to suggest more metadata via GH issues
@@ -20,7 +20,7 @@ const presence = new Presence({
 		trackNumber: null,
 		showName: null,
 		seasonNumber: null,
-		episodeNumber: null
+		episodeNumber: null,
 	};
 let isShow = false,
 	isSong = false,
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 		document.querySelector(".footer").textContent.includes("VLC")
 	) {
 		const presenceData: PresenceData = {
-			largeImageKey: "vlc"
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/VLC/assets/logo.png",
 		};
 
 		if (media.state !== prev) {
@@ -65,11 +65,9 @@ presence.on("UpdateData", async () => {
 					media.album = null;
 
 				presenceData.details =
-					(media.title
-						? media.title
-						: media.trackNumber
-						? `Track N°${media.trackNumber}`
-						: "A song") + (media.album ? ` on ${media.album}` : "");
+					((media.title ?? "") +
+						(media.trackNumber ? ` Track N°${media.trackNumber}` : "") ||
+						"A song") + (media.album ? ` on ${media.album}` : "");
 				media.artist
 					? (presenceData.state = `by ${media.artist}`)
 					: media.filename
@@ -271,9 +269,9 @@ const getStatus = setLoop(function () {
 							media.album = null;
 						}
 
-						req.responseXML.getElementsByName("trackNumber")[0]
+						req.responseXML.getElementsByName("track_number")[0]
 							? (media.trackNumber = decodeReq(
-									req.responseXML.getElementsByName("trackNumber")[0]
+									req.responseXML.getElementsByName("track_number")[0]
 							  ))
 							: (media.trackNumber = null);
 
@@ -294,6 +292,8 @@ const getStatus = setLoop(function () {
 							media.episodeNumber = null;
 						}
 					}
+					for (const key of Object.keys(media))
+						media[key] = media[key]?.replace("&#39;", "'");
 				} else {
 					i++;
 					if (i > 4) {
@@ -316,7 +316,7 @@ const getStatus = setLoop(function () {
 		req.open(
 			"GET",
 			`${document.location.protocol}//${document.location.hostname}:${
-				document.location.port ? document.location.port : ""
+				document.location.port ?? ""
 			}/requests/status.xml`,
 			true
 		);
@@ -338,4 +338,5 @@ interface MediaObj {
 	showName?: string;
 	seasonNumber?: string;
 	episodeNumber?: string;
+	[key: string]: string;
 }

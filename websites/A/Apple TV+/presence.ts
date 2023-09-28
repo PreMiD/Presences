@@ -4,53 +4,52 @@ class AppleTV extends Presence {
 	}
 
 	getVideo() {
-		return document
-			.querySelector("apple-tv-plus-player")
-			.shadowRoot.querySelector("amp-video-player-internal")
-			.shadowRoot.querySelector("amp-video-player")
-			.shadowRoot.querySelector<HTMLVideoElement>("#apple-music-video-player");
+		return document.querySelector<HTMLMediaElement>(
+			".video-player__content #apple-music-video-player"
+		);
+	}
+
+	getVideoType() {
+		return this.getEpisodeTitle() ? "show" : "movie";
 	}
 
 	getTitle(eyebrow = false) {
-		if (this.isWatching()) {
-			const title = document
-				.querySelector("apple-tv-plus-player")
-				.shadowRoot.querySelector("amp-video-player-internal")
-				.shadowRoot.querySelector("div.info__eyebrow")?.textContent;
+		if (this.isWatching() && eyebrow) return this.getVideoTitle();
 
-			if (title || eyebrow) return title;
-			else {
-				return document
-					.querySelector("apple-tv-plus-player")
-					.shadowRoot.querySelector("amp-video-player-internal")
-					.shadowRoot.querySelector("div.info__title")?.textContent;
-			}
-		}
 		const title = document.querySelector(
-			"div.product-header__image-logo.clr-primary-text-on-dark > a > h2"
+			"div.product-header__image-logo.clr-primary-text-on-dark > span"
 		)?.textContent;
 
-		if (title) return title;
-		else return document.querySelector<HTMLImageElement>("img").alt;
+		return (
+			title ??
+			document.querySelector(".review-card__title.typ-headline-emph > span")
+				?.textContent ??
+			document.querySelector(
+				"div.product-header__image-logo__show-title.typ-headline"
+			)?.textContent ??
+			"Unknown"
+		);
 	}
 
 	getEpisodeTitle() {
-		return document
-			.querySelector("apple-tv-plus-player")
-			.shadowRoot.querySelector("amp-video-player-internal")
-			.shadowRoot.querySelector("div.info__title")?.textContent;
+		return document.querySelector(
+			".video-player__content .scrim__footer .scrim-footer__info-subtitle-text"
+		)?.textContent;
+	}
+
+	getVideoTitle() {
+		return document.querySelector(
+			".video-player__content .scrim__footer #video-player-title"
+		)?.textContent;
 	}
 
 	isWatching() {
-		return !!document
-			.querySelector("apple-tv-plus-player")
-			.shadowRoot.querySelector("amp-video-player-internal")
-			.shadowRoot.querySelector("div.info__title")?.textContent;
+		return !!this.getVideoTitle();
 	}
 }
 
 const presence = new AppleTV({
-		clientId: "835157562432290836"
+		clientId: "835157562432290836",
 	}),
 	data: {
 		startedSince: number;
@@ -66,15 +65,16 @@ const presence = new AppleTV({
 		};
 	} = {
 		presence: {},
-		startedSince: Math.floor(Date.now() / 1000)
+		startedSince: Math.floor(Date.now() / 1000),
 	};
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "apple-tv",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Apple%20TV+/assets/logo.png",
 		details: "Browsing...",
 		smallImageKey: "browse",
-		startTimestamp: data.startedSince
+		startTimestamp: data.startedSince,
 	};
 
 	data.presence = {
@@ -85,24 +85,24 @@ presence.on("UpdateData", async () => {
 					[, presenceData.endTimestamp] =
 						presence.getTimestampsfromMedia(video);
 
-					if (presence.getTitle(true)) {
-						presenceData.details = presence.getTitle();
-						presenceData.state = `${presence.getEpisodeTitle()}`;
-					} else {
-						presenceData.details = document.querySelector(
-							"#about-footer > div.product-footer__info > div > div.review-card__title.typ-headline-emph > span"
-						).textContent;
-						presenceData.state = `Trailer • ${presence.getTitle()}`;
-					}
+					const title = presence.getTitle(),
+						videoTitle = presence.getTitle(true),
+						ep = presence.getEpisodeTitle();
+					presenceData.details = videoTitle || title;
+					presenceData.state = ep
+						? `${ep}`
+						: `Trailer • ${videoTitle || title}`;
 
 					presenceData.smallImageText = video.paused ? "Paused" : "Playing";
-					presenceData.smallImageKey = video.paused ? "pause" : "play";
+					presenceData.smallImageKey = video.paused
+						? Assets.Pause
+						: Assets.Play;
 
 					presenceData.buttons = [
 						{
 							label: "Watch Show",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 
 					if (video.paused) {
@@ -116,11 +116,11 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Show",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
-			}
+			},
 		},
 		"/movie/([a-zA-Z0-9-]+)": {
 			setPresenceData() {
@@ -133,13 +133,15 @@ presence.on("UpdateData", async () => {
 					presenceData.state = "Movie";
 
 					presenceData.smallImageText = video.paused ? "Paused" : "Playing";
-					presenceData.smallImageKey = video.paused ? "pause" : "play";
+					presenceData.smallImageKey = video.paused
+						? Assets.Pause
+						: Assets.Play;
 
 					presenceData.buttons = [
 						{
 							label: "Watch Movie",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 
 					if (video.paused) {
@@ -153,11 +155,11 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Movie",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
-			}
+			},
 		},
 		"/person/([a-zA-Z0-9-]+)": {
 			setPresenceData() {
@@ -165,30 +167,49 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document.querySelector(
 					"div.person-header__bio > h1"
 				)?.textContent;
-			}
+			},
 		},
 		"/settings": {
 			setPresenceData() {
 				presenceData.details = "Viewing their settings";
-			}
-		}
+			},
+		},
 	};
 
 	data.settings = [
 		{
 			id: "timestamp",
 			delete: true,
-			data: ["startTimestamp", "endTimestamp"]
+			data: ["startTimestamp", "endTimestamp"],
 		},
 		{
 			id: "buttons",
 			delete: true,
-			data: ["buttons"]
-		}
+			data: ["buttons"],
+		},
+		{
+			id: "smallImage",
+			delete: true,
+			data: ["smallImageKey"],
+		},
 	];
 
-	for (const [pathname, PData] of Object.entries(data.presence))
-		if (document.location.pathname.match(pathname)) PData.setPresenceData();
+	let presenceSelect;
+
+	for (const [pathname, PData] of Object.entries(data.presence)) {
+		if (new RegExp(pathname).test(document.location.pathname)) {
+			presenceSelect = pathname;
+			PData.setPresenceData();
+		}
+	}
+
+	if (!presenceSelect && presence.isWatching()) {
+		data.presence[
+			presence.getVideoType() === "movie"
+				? "/movie/([a-zA-Z0-9-]+)"
+				: "/(show|episode)/([a-zA-Z0-9-]+)"
+		].setPresenceData();
+	}
 
 	for (const setting of data.settings) {
 		const settingValue = await presence.getSetting<boolean>(setting.id);

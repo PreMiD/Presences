@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "837754527217877003"
+		clientId: "837754527217877003",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -11,8 +11,9 @@ let articleTitle: string,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Dice%20Sweden/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		showButtons = await presence.getSetting<boolean>("buttons"),
 		showTimestamps = await presence.getSetting<boolean>("timestamps");
@@ -24,19 +25,19 @@ presence.on("UpdateData", async () => {
 		case "/games":
 			presenceData.details = "Games";
 			presenceData.buttons = [
-				{ label: "View Games", url: "https://www.dice.se/games" }
+				{ label: "View Games", url: "https://www.dice.se/games" },
 			];
 			break;
 		case "/life-at-dice":
 			presenceData.details = "Life At Dice";
 			presenceData.buttons = [
-				{ label: "Life At Dice", url: "https://www.dice.se/life-at-dice" }
+				{ label: "Life At Dice", url: "https://www.dice.se/life-at-dice" },
 			];
 			break;
 		case "/our-values":
 			presenceData.details = "Our Values";
 			presenceData.buttons = [
-				{ label: "Our Values", url: "https://www.dice.se/our-values" }
+				{ label: "Our Values", url: "https://www.dice.se/our-values" },
 			];
 			break;
 		case "/how-we-work-how-we-play":
@@ -46,24 +47,24 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "How We Work",
-					url: "https://www.dice.se/how-we-work-how-we-play"
+					url: "https://www.dice.se/how-we-work-how-we-play",
 				},
 				{
 					label: "How We Play",
-					url: "https://www.dice.se/how-we-work-how-we-play#how-we-play"
-				}
+					url: "https://www.dice.se/how-we-work-how-we-play#how-we-play",
+				},
 			];
 			break;
 		case "/our-crafts":
 			presenceData.details = "Our Crafts";
 			presenceData.buttons = [
-				{ label: "Our Crafts", url: "https://www.dice.se/our-crafts" }
+				{ label: "Our Crafts", url: "https://www.dice.se/our-crafts" },
 			];
 			break;
 		case "/careers":
 			presenceData.details = "Careers";
 			presenceData.buttons = [
-				{ label: "View Careers", url: "https://www.dice.se/careers" }
+				{ label: "View Careers", url: "https://www.dice.se/careers" },
 			];
 			break;
 		case "/perks-benefits":
@@ -71,8 +72,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Perks & Benefits",
-					url: "https://www.dice.se/perks-benefits"
-				}
+					url: "https://www.dice.se/perks-benefits",
+				},
 			];
 			break;
 		case "/living-in-sweden":
@@ -80,8 +81,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Living In Sweden",
-					url: "https://www.dice.se/living-in-sweden"
-				}
+					url: "https://www.dice.se/living-in-sweden",
+				},
 			];
 			break;
 		case "/latest":
@@ -89,8 +90,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Latest News",
-					url: "https://www.dice.se/latest"
-				}
+					url: "https://www.dice.se/latest",
+				},
 			];
 			break;
 		case "/news-article":
@@ -98,8 +99,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "News",
-					url: "https://www.dice.se/news-articles"
-				}
+					url: "https://www.dice.se/news-articles",
+				},
 			];
 			break;
 		case "/contact":
@@ -107,8 +108,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Contacts",
-					url: "https://www.dice.se/contact"
-				}
+					url: "https://www.dice.se/contact",
+				},
 			];
 			break;
 		case "/students":
@@ -116,8 +117,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Students",
-					url: "https://www.dice.se/students"
-				}
+					url: "https://www.dice.se/students",
+				},
 			];
 			break;
 	}
@@ -133,7 +134,7 @@ presence.on("UpdateData", async () => {
 
 		delete presenceData.buttons;
 		presenceData.buttons = [
-			{ label: "View Article", url: window.location.href }
+			{ label: "View Article", url: window.location.href },
 		];
 	} else if (window.location.pathname.includes("/game/")) {
 		gameTitle = document.querySelector(".BlogItem-title").textContent.trim();
@@ -141,7 +142,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = gameTitle;
 
 		presenceData.buttons = [
-			{ label: `View ${gameTitle}`, url: window.location.href }
+			{ label: `View ${gameTitle}`, url: window.location.href },
 		];
 	} else if (window.location.pathname.includes("/people/")) {
 		profileTitle = document
@@ -160,7 +161,7 @@ presence.on("UpdateData", async () => {
 
 		delete presenceData.buttons;
 		presenceData.buttons = [
-			{ label: `View ${profileTitle}`, url: window.location.href }
+			{ label: `View ${profileTitle}`, url: window.location.href },
 		];
 	}
 

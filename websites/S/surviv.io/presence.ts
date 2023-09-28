@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "640711877609127976"
+	clientId: "640711877609127976",
 });
 
 let gametypequery: string,
@@ -14,7 +14,8 @@ const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/surviv.io/assets/logo.png",
 		},
 		broadcasttc = await presence.getSetting<boolean>("broadcasttc"),
 		active =
@@ -40,8 +41,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Join Game",
-						url: document.baseURI
-					}
+						url: document.baseURI,
+					},
 				];
 				presenceData.smallImageKey = gametype.toLowerCase();
 				presenceData.smallImageText =

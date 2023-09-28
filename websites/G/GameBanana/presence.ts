@@ -3,8 +3,9 @@ const presence = new Presence({ clientId: "958520351158050887" }),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "gblogo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/GameBanana/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		sections = [
 			"mods",
@@ -45,7 +46,7 @@ presence.on("UpdateData", async () => {
 			"flags",
 			"permits",
 			"generators",
-			"initiatives"
+			"initiatives",
 		],
 		nogamesections = [
 			"App",
@@ -59,7 +60,7 @@ presence.on("UpdateData", async () => {
 			"StatusUpdate",
 			"Support",
 			"Studio",
-			"Wiki"
+			"Wiki",
 		];
 
 	if (document.location.hostname === "gamebanana.com") {

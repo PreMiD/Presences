@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "796446671617130567"
+		clientId: "796446671617130567",
 	}),
 	timeS = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			smallImageKey: "teaching",
-			smallImageText: "OpenClassrooms"
+			smallImageText: "OpenClassrooms",
 		},
 		webpath = window.location.pathname.toLowerCase();
 
@@ -29,7 +29,8 @@ presence.on("UpdateData", async () => {
 					.querySelectorAll(".Mui-selected")[0]
 					.querySelectorAll("span")[0].textContent
 			}`;
-			presenceData.largeImageKey = "favicon";
+			presenceData.largeImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/O/OpenClassrooms/assets/logo.png";
 		} else if (
 			webpath === "/fr/dashboard/paths" ||
 			webpath === "/en/dashboard/paths"
@@ -38,7 +39,8 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `Browsing: ${
 				document.querySelectorAll(".jss326")[1].textContent
 			}`;
-			presenceData.largeImageKey = "favicon";
+			presenceData.largeImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/O/OpenClassrooms/assets/logo.png";
 		}
 		// Courses page
 	} else if (
@@ -49,12 +51,14 @@ presence.on("UpdateData", async () => {
 	) {
 		presenceData.details = "Courses main page";
 		presenceData.state = "Looking for a course";
-		presenceData.largeImageKey = "favicon";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/O/OpenClassrooms/assets/logo.png";
 		// Paths page
 	} else if (webpath === "/en/paths" || webpath === "/fr/paths") {
 		presenceData.details = "Paths main page";
 		presenceData.state = "Looking for a path";
-		presenceData.largeImageKey = "favicon";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/O/OpenClassrooms/assets/logo.png";
 		// Main page of a selected path
 	} else if (webpath.includes("/fr/paths") || webpath.includes("/en/paths")) {
 		presenceData.details = "Looking for a path";
@@ -62,7 +66,8 @@ presence.on("UpdateData", async () => {
 			" - OpenClassrooms",
 			""
 		)}`;
-		presenceData.largeImageKey = "favicon";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/O/OpenClassrooms/assets/logo.png";
 		// Reading a course
 	} else if (
 		webpath.includes("/fr/courses") ||
@@ -78,7 +83,8 @@ presence.on("UpdateData", async () => {
 				courseClass[2].querySelectorAll("span")[0].textContent
 			}`;
 			presenceData.state = `Chapter: ${courseClass[3].textContent}`;
-			presenceData.largeImageKey = "favicon";
+			presenceData.largeImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/O/OpenClassrooms/assets/logo.png";
 		} else if (
 			!document.body.contains(document.querySelectorAll(".breadcrumb__item")[3])
 		) {
@@ -87,9 +93,11 @@ presence.on("UpdateData", async () => {
 				document.querySelectorAll(".breadcrumb__item")[2].textContent
 			}`;
 			presenceData.state = "Chapter: First chapter";
-			presenceData.largeImageKey = "favicon";
+			presenceData.largeImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/O/OpenClassrooms/assets/logo.png";
 		}
-		presenceData.largeImageKey = "favicon";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/O/OpenClassrooms/assets/logo.png";
 	} else {
 		presenceData.details = "Browsing:";
 		presenceData.state = document.title.replace(" - OpenClassrooms", "");

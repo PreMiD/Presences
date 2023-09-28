@@ -8,11 +8,11 @@ iframe.on("UpdateData", async () => {
 			video: true,
 			duration: video.duration,
 			currentTime: video.currentTime,
-			paused: video.paused
+			paused: video.paused,
 		});
 	} else {
 		iframe.send({
-			video: false
+			video: false,
 		});
 	}
 });

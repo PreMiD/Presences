@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "775356824240128021"
+		clientId: "775356824240128021",
 	}),
 	skinNames = new Map<string, string>()
 		.set("Angel", "angel")
@@ -29,10 +29,11 @@ let lastlobbyName = "",
 	lastName = "Unnamed";
 
 const presenceData: PresenceData = {
-	largeImageKey: "index",
+	largeImageKey:
+		"https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/logo.png",
 	startTimestamp: Date.now(),
 	details: "Main Menu",
-	state: "Just Started Playing"
+	state: "Just Started Playing",
 };
 
 presence.on("UpdateData", async () => {

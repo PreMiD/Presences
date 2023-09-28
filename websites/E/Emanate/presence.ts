@@ -32,19 +32,20 @@ class Emanate extends Presence {
 					.textContent.split(" / ")[0]
 			),
 			paused: !document.querySelector("img.pause-button"),
-			href: document.querySelector<HTMLAnchorElement>("a.track-link").href
+			href: document.querySelector<HTMLAnchorElement>("a.track-link").href,
 		};
 	}
 }
 
 const emanate = new Emanate({
-	clientId: "843206620355625031"
+	clientId: "843206620355625031",
 });
 
 emanate.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: emanate.startTime
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/E/Emanate/assets/logo.png",
+			startTimestamp: emanate.startTime,
 		},
 		pages = {
 			"/dashboard/": () => {
@@ -76,7 +77,7 @@ emanate.on("UpdateData", async () => {
 			},
 			"/listen": () => {
 				presenceData.details = "Browsing...";
-			}
+			},
 		};
 
 	for (const [pathname, setData] of Object.entries(pages)) {
@@ -97,14 +98,14 @@ emanate.on("UpdateData", async () => {
 				songData.duration
 			);
 
-			presenceData.smallImageKey = songData.paused ? "pause" : "play";
+			presenceData.smallImageKey = songData.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = songData.paused ? "Paused" : "Playing";
 
 			presenceData.buttons = [
 				{
 					label: "Listen Along",
-					url: songData.href
-				}
+					url: songData.href,
+				},
 			];
 
 			if (songData.paused) {

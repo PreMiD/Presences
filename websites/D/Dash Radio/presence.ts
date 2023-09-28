@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "761889098490183691"
+		clientId: "761889098490183691",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let songName: HTMLElement,
@@ -13,7 +13,8 @@ let songName: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Dash%20Radio/assets/logo.png",
 	};
 
 	songName = document.querySelector(
@@ -41,12 +42,12 @@ presence.on("UpdateData", async () => {
 	}
 
 	if ((songNameS === "None" && songArtistS === "None") || songArtistS === "") {
-		presenceData.smallImageKey = "paused";
+		presenceData.smallImageKey = Assets.Pause;
 		presenceData.smallImageText = "PauseChamp";
 
 		presenceData.details = (await strings).pause;
 	} else {
-		presenceData.smallImageKey = "play";
+		presenceData.smallImageKey = Assets.Play;
 		presenceData.smallImageText = "Playing...";
 
 		presenceData.details = songNameS;

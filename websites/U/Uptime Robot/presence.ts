@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "650373069172375577"
+	clientId: "650373069172375577",
 });
 
 let user: HTMLElement;
@@ -7,8 +7,9 @@ const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "uptimerobot",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/U/Uptime%20Robot/assets/logo.jpg",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "uptimerobot.com") {

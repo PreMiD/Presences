@@ -1,22 +1,19 @@
+type LocalizedStrings = typeof localizedStrings;
 interface PageContext {
 	middleware: (ref: Window, ...args: unknown[]) => boolean;
 	exec: (
 		context: Presence,
 		presenceData: PresenceData,
-		options?: { [key: string]: unknown }
+		options?: { strings: LocalizedStrings; [key: string]: unknown }
 	) => Promise<PresenceData> | PresenceData;
 }
-interface LocalizedStrings {
-	[key: string]: string;
-}
-
 interface ExecutionArguments {
 	showWatch?: boolean;
+	showExternalImages?: boolean;
 	strings: LocalizedStrings;
 	images: { [key: string]: string };
 	[key: string]: unknown;
 }
-
 function getQuery() {
 	const queryString = location.search.split("?", 2),
 		query =
@@ -32,29 +29,12 @@ function getQuery() {
 function capitalizeFirstLetter(string: string) {
 	return string.charAt(0).toUpperCase() + string.slice(1);
 }
-function matchYoutubeUrl(url: string): boolean {
-	return !!url.match(
-		/^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?$/gm
-	);
-}
-function getSourceLink(url: string): { label: string; url: string }[] {
-	if (!url) return [];
-	if (matchYoutubeUrl(url)) {
-		return [
-			{
-				label: "Watch Youtube Source",
-				url
-			}
-		];
-	}
-	return [];
-}
 const pages: PageContext[] = [
 		{
 			middleware: ref =>
-				!!ref.location.pathname.match(
-					/^\/(hot|tags|rising|fresh|feed|rising|stories|random|bookmarks|likes|weekly|best|stories|royal\.coubs)/gi
-				) || ref.location.pathname === "/",
+				/^\/(hot|tags|rising|fresh|feed|rising|stories|random|bookmarks|likes|weekly|best|stories|royal\.coubs|\/)/gi.test(
+					ref.location.pathname
+				) || location.pathname === "/",
 			exec: (
 				context,
 				data,
@@ -118,22 +98,15 @@ const pages: PageContext[] = [
 						? images.PLAY
 						: images.PAUSE;
 				if (showWatch) {
-					data.buttons.push(
-						...[
-							{
-								label: strings.watchVideo,
-								url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
-							},
-							...getSourceLink(
-								activeMedia.querySelector<HTMLAnchorElement>(
-									".description__stamp a.description__stamp__source"
-								)?.href
-							)
-						]
-					);
+					data.buttons = [
+						{
+							label: strings.watchVideo,
+							url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`,
+						},
+					];
 				}
 				return data;
-			}
+			},
 		},
 		{
 			middleware: ref =>
@@ -141,7 +114,7 @@ const pages: PageContext[] = [
 			exec: (
 				context,
 				data,
-				{ showWatch, strings, images }: ExecutionArguments
+				{ showWatch, showExternalImages, strings, images }: ExecutionArguments
 			) => {
 				if (!context) return null;
 				const activeMedia = document.querySelector<HTMLElement>(
@@ -151,9 +124,13 @@ const pages: PageContext[] = [
 				const title = activeMedia
 						.querySelector(".description__title")
 						.textContent?.trim(),
-					userName = document.querySelector<HTMLHeadingElement>(
+					channelParent = document.querySelector<HTMLDivElement>(".channel"),
+					userName = channelParent.querySelector<HTMLHeadingElement>(
 						".channel__description > h1[title]"
 					).title,
+					userImage = channelParent.querySelector<HTMLImageElement>(
+						'.avatar-upload img[src*="coub_storage/channel"]'
+					)?.src,
 					activeTab =
 						document.querySelector<HTMLElement>(
 							".page__content .page-menu > .page-menu__inner > .page-menu__item.-active"
@@ -178,31 +155,31 @@ const pages: PageContext[] = [
 						? " (❤)"
 						: ""
 				}`;
+				if (showExternalImages && userImage?.startsWith("https://"))
+					data.largeImageKey = userImage;
 				data.smallImageKey =
 					activeMedia.querySelector("video")?.paused === false
 						? images.PLAY
 						: images.PAUSE;
 				if (showWatch) {
-					data.buttons.push(
-						...[
-							{
-								label: strings.watchVideo,
-								url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
-							},
-							{
-								label: strings.viewProfil,
-								url: `${document.location.origin}/${
-									document.location.pathname.split("/")[1]
-								}`
-							}
-						]
-					);
+					data.buttons = [
+						{
+							label: strings.watchVideo,
+							url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`,
+						},
+						{
+							label: strings.viewProfile,
+							url: `${document.location.origin}/${
+								document.location.pathname.split("/")[1]
+							}`,
+						},
+					];
 				}
 				return data;
-			}
+			},
 		},
 		{
-			middleware: ref => !!ref.location.pathname.match(/^\/view\/(.*)/gi),
+			middleware: ref => /^\/view\/(.*)/gi.test(ref.location.pathname),
 			exec: (
 				context,
 				data,
@@ -231,29 +208,22 @@ const pages: PageContext[] = [
 						: images.PAUSE;
 
 				if (showWatch) {
-					data.buttons.push(
-						...[
-							{
-								label: strings.watchVideo,
-								url: document.location.href
-							},
-							...getSourceLink(
-								activeMedia.parentElement.querySelector<HTMLAnchorElement>(
-									'.coub__info .media-block__item > a[type="embedPopup"]'
-								)?.href
-							)
-						]
-					);
+					data.buttons = [
+						{
+							label: strings.watchVideo,
+							url: document.location.href,
+						},
+					];
 				}
 				return data;
-			}
+			},
 		},
 		{
-			middleware: ref => !!ref.location.pathname.match(/^\/(community)/gi),
+			middleware: ref => /^\/(community)/gi.test(ref.location.pathname),
 			exec: (
 				context,
 				data,
-				{ showWatch, strings, images }: ExecutionArguments
+				{ showWatch, showExternalImages, strings, images }: ExecutionArguments
 			) => {
 				if (!context) return null;
 				const communityParent = document.querySelector(
@@ -265,6 +235,9 @@ const pages: PageContext[] = [
 				const communityTitle = communityParent
 						.querySelector(".description > .title > h2")
 						?.textContent?.trim(),
+					communityImage = communityParent.querySelector<HTMLImageElement>(
+						'img[src*="coub_storage/category"]'
+					)?.src,
 					title = activeMedia
 						.querySelector(".description__title")
 						?.textContent?.trim();
@@ -275,29 +248,24 @@ const pages: PageContext[] = [
 						".page-menu.hot__menu > .page-menu__inner > .page-menu__item.-active"
 					)?.dataset?.title || "Hot"
 				}`;
+				if (showExternalImages && communityImage?.startsWith("https://"))
+					data.largeImageKey = communityImage;
 				data.smallImageKey =
 					activeMedia.querySelector("video")?.paused === false
 						? images.PLAY
 						: images.PAUSE;
 				data.details = `${title}`;
 				if (showWatch) {
-					data.buttons.push(
-						...[
-							{
-								label: strings.watchVideo,
-								url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
-							},
-							...getSourceLink(
-								activeMedia.querySelector<HTMLAnchorElement>(
-									".description__stamp a.description__stamp__source"
-								)?.href
-							)
-						]
-					);
+					data.buttons = [
+						{
+							label: strings.watchVideo,
+							url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`,
+						},
+					];
 				}
 
 				return data;
-			}
+			},
 		},
 		{
 			middleware: ref => !!ref.window,
@@ -307,56 +275,68 @@ const pages: PageContext[] = [
 				data.details = "";
 				if (data.smallImageKey) delete data.smallImageKey;
 				return data;
-			}
-		}
+			},
+		},
 	],
 	presence = new Presence({
-		clientId: "818598086984728576"
-	});
-
-let currentLang: string, localizedStrings: { [key: string]: string };
-const IMAGES = {
-	PLAY: "playx1024",
-	PAUSE: "pausex1024"
-};
+		clientId: "818598086984728576",
+	}),
+	presenceImageKeys = {
+		PLAY: "playx1024",
+		PAUSE: "pausex1024",
+	};
+function getStrings(newLang?: string) {
+	return presence.getStrings(
+		{
+			browsing: "general.browsing",
+			watching: "general.playing",
+			watchVideo: "general.buttonWatchVideo",
+			viewProfile: "general.buttonViewProfile",
+		},
+		newLang
+	);
+}
+let currentLang: string,
+	localizedStrings: Awaited<ReturnType<typeof getStrings>>;
+const startedBrowsingAt = new Date();
 presence.on("UpdateData", async () => {
-	const newLang = await presence.getSetting<string>("lang");
-	if (newLang !== currentLang) {
+	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
+	if (!localizedStrings || newLang !== currentLang) {
 		currentLang = newLang;
-		localizedStrings = await presence.getStrings(
-			{
-				browsing: "presence.activity.browsing",
-				watching: "presence.playback.playing",
-				watchVideo: "general.buttonWatchVideo",
-				viewProfile: "general.buttonViewProfile"
-			},
-			newLang
-		);
+		localizedStrings = await getStrings(newLang);
 	}
 	const query: { [key: string]: unknown } = getQuery(),
 		context = pages.find(x => x.middleware(window, [query]));
 	if (!context) return;
+	const data: PresenceData = {
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/C/Coub/assets/logo.png",
+		},
+		showStartedBrowsing = await presence
+			.getSetting<boolean>("show_startedBrowsing")
+			.catch(() => true);
+
+	if (showStartedBrowsing && !data.startTimestamp)
+		data.startTimestamp = startedBrowsingAt.getTime();
 
 	const result = await Promise.resolve(
-		context.exec(
-			presence,
-			{
-				largeImageKey: "logo"
-			},
-			{
-				strings: localizedStrings,
-				query,
-				images: IMAGES,
-				showWatch: await presence
-					.getSetting<boolean>("show_button_watching")
-					.catch(() => true)
-			}
-		)
+		context.exec(presence, data, {
+			strings: localizedStrings,
+			query,
+			images: presenceImageKeys,
+			showWatch: await presence
+				.getSetting<boolean>("show_button_watching")
+				.catch(() => true),
+			showExternalImages: await presence
+				.getSetting<boolean>("show_externalLargeImage")
+				.catch(() => true),
+			showStartedBrowsing,
+		})
 	);
 	if (!result) {
 		presence.setActivity({
-			largeImageKey: "logo",
-			state: localizedStrings.browsing
+			...data,
+			state: localizedStrings.browsing,
 		});
 	} else if (result.details) presence.setActivity(result);
 });

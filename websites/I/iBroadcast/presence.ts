@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "861594094623129691"
+		clientId: "861594094623129691",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "ibroadcast_logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/I/iBroadcast/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		{ hostname } = document.location;
 
@@ -31,7 +32,7 @@ presence.on("UpdateData", async () => {
 
 			if (title && artist) {
 				presenceData.details = `${title.textContent} by ${artist.textContent}`;
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Listening";
 			}
 			if (currentTime && duration) {

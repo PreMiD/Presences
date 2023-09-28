@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "831262912815300638"
+		clientId: "831262912815300638",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "mangahere",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/MangaHere/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location,
 		ganres = [
@@ -46,7 +47,7 @@ presence.on("UpdateData", async () => {
 			"shounen",
 			"slice-of-life",
 			"tragedy",
-			"mecha"
+			"mecha",
 		];
 
 	switch (pathname) {
@@ -102,9 +103,9 @@ presence.on("UpdateData", async () => {
 					".detail-info-right-title-font"
 				).textContent;
 				presenceData.buttons = [
-					{ label: "View Manga", url: window.location.href }
+					{ label: "View Manga", url: window.location.href },
 				];
-				presenceData.smallImageKey = "viewing";
+				presenceData.smallImageKey = Assets.Viewing;
 			} else if (pathname.startsWith("/manga") && pathname.endsWith(".html")) {
 				//Manga Reading
 				const chapter = document.querySelector(
@@ -122,7 +123,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = document.querySelector(
 					".reader-header-title-1"
 				).textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (pathname.startsWith("/search")) {
 				//Searching
 				const urlParams = new URLSearchParams(window.location.search);
@@ -131,7 +132,7 @@ presence.on("UpdateData", async () => {
 					urlParams.get("title") === ""
 						? urlParams.get("name")
 						: urlParams.get("title");
-				presenceData.smallImageKey = "searching";
+				presenceData.smallImageKey = Assets.Search;
 			}
 	}
 	for (const ganre of ganres) {

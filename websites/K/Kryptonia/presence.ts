@@ -1,10 +1,12 @@
 const presence = new Presence({
-	clientId: "821810069733376022"
+	clientId: "821810069733376022",
 });
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: Math.floor(Date.now() / 1000)
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/K/Kryptonia/assets/logo.png",
+		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 	// Landing Site - kryptonia.fr
 	if (window.location.hostname === "kryptonia.fr") {

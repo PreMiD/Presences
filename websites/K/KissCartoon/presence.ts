@@ -1,11 +1,12 @@
 const presence = new Presence({
-		clientId: "698231292172435567"
+		clientId: "698231292172435567",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let currentTime: number,
 	duration: number,
 	paused: boolean,
@@ -27,7 +28,8 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "kisscartoon"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/K/KissCartoon/assets/logo.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;
@@ -43,7 +45,7 @@ presence.on("UpdateData", async () => {
 			Math.floor(duration)
 		);
 		if (!isNaN(duration)) {
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused
 				? (await strings).pause
 				: (await strings).play;
@@ -80,7 +82,7 @@ presence.on("UpdateData", async () => {
 		).textContent;
 	} else if (document.location.pathname.includes("/ReportError")) {
 		presenceData.details = "Reporting an error";
-		presenceData.smallImageKey = "writing";
+		presenceData.smallImageKey = Assets.Writing;
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "721473663987220500"
+		clientId: "721473663987220500",
 	}),
 	browseTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "osm",
-			startTimestamp: browseTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/O/Online%20Soccer%20Manager/assets/logo.png",
+			startTimestamp: browseTimestamp,
 		},
 		{ pathname } = document.location;
 

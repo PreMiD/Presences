@@ -1,12 +1,14 @@
 const presence = new Presence({
-		clientId: "636622538356686871"
+		clientId: "636622538356686871",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "rlg"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/R/Rocket%20League%20Garage/assets/logo.png",
 	};
 
 	title = document.querySelector("#offer-balance");
@@ -25,7 +27,7 @@ presence.on("UpdateData", async () => {
 			"body > main > section > div > div > div > div.col-2-3 > h1"
 		);
 		presenceData.state = title.textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/livefeed")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = "Browsing through";

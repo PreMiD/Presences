@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "824726477936656424"
+		clientId: "824726477936656424",
 	}),
 	data: {
 		presenceData?: PresenceData;
@@ -9,7 +9,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	data.privacyMode = await presence.getSetting<boolean>("privacy");
 	data.presenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Sickipedia/assets/logo.jpg",
 	};
 
 	if (matchPage("/")) updateData("Viewing page:", "Homepage", false);
@@ -97,7 +98,7 @@ function matchPage(href: string, option?: string) {
 function updateData(details?: string, state?: string, buttons = true) {
 	if (buttons && !data.privacyMode) {
 		data.presenceData.buttons = [
-			{ label: "View Page", url: window.location.href }
+			{ label: "View Page", url: window.location.href },
 		];
 	}
 	if (details && !data.privacyMode) data.presenceData.details = details;
@@ -106,7 +107,7 @@ function updateData(details?: string, state?: string, buttons = true) {
 		data.presenceData = {
 			...data.presenceData,
 			details: "Privacy mode enabled",
-			state: "Content hidden"
+			state: "Content hidden",
 		};
 	}
 }

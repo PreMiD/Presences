@@ -6,62 +6,63 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("cover"),
 			presence.getSetting<boolean>("timestamps"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		path = document.location.pathname,
 		pages: Record<string, PresenceData> = {
 			"/manga/": {
 				details: "Viewing a Manga...",
-				state: document.title.split(" | MangaLife")[0]
+				state: document.title.split(" | MangaLife")[0],
 			},
 			"/read-online/": {
-				smallImageKey: "reading"
+				smallImageKey: "reading",
 			},
 			"/search": {
 				smallImageKey: "search",
-				details: "Searching..."
+				details: "Searching...",
 			},
 			"/discussion": {
 				smallImageKey: !privacy ? "discussions" : "",
-				state: "Discussions"
+				state: "Discussions",
 			},
 			"hot.php": {
 				smallImageKey: !privacy ? "hot" : "",
 				state: "Hot Manga Updates",
-				buttons: [{ label: "Hot Manga Updates", url: `${document.location}` }]
+				buttons: [{ label: "Hot Manga Updates", url: `${document.location}` }],
 			},
 			"subscription.php": {
 				smallImageKey: !privacy ? "subscriptions" : "",
-				state: "Subscriptions"
+				state: "Subscriptions",
 			},
 			"feed.php": {
 				smallImageKey: !privacy ? "subscriptions" : "",
-				state: "Subscriptions Feed"
+				state: "Subscriptions Feed",
 			},
 			"bookmark.php": {
 				smallImageKey: !privacy ? "bookmark" : "",
-				state: "Bookmarks"
+				state: "Bookmarks",
 			},
 			"settings.php": {
 				smallImageKey: "settings",
 				details: "Editing...",
-				state: "User Settings"
+				state: "User Settings",
 			},
 			"/contact": {
 				smallImageKey: !privacy ? "contact" : "",
-				state: "Contact Page"
+				state: "Contact Page",
 			},
 			"/privacy": {
 				smallImageKey: !privacy ? "privacy" : "",
-				state: "Privacy Policy Page"
-			}
+				state: "Privacy Policy Page",
+			},
 		};
 	let presenceData: PresenceData = {
-		largeImageKey: "logo",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/logo.png",
 		smallImageKey: !privacy ? "home" : "",
 		details: "Browsing...",
 		state: "Home Page",
-		startTimestamp: browsingStamp
+		startTimestamp: browsingStamp,
 	};
 
 	for (const [path, data] of Object.entries(pages)) {
@@ -83,8 +84,8 @@ presence.on("UpdateData", async () => {
 				{
 					label:
 						presenceData.state.length >= 30 ? "View Manga" : presenceData.state,
-					url: `${document.location}`
-				}
+					url: `${document.location}`,
+				},
 			];
 			break;
 		case path.startsWith("/read-online/"):
@@ -110,12 +111,12 @@ presence.on("UpdateData", async () => {
 							: presenceData.details,
 					url: `${document.location.origin}/manga/${
 						path.split("/read-online/")[1].split("-chapter-")[0]
-					}`
+					}`,
 				},
 				{
 					label: `${presenceData.state.replace("|", " ")}`,
-					url: `${document.location}`
-				}
+					url: `${document.location}`,
+				},
 			];
 			break;
 		case path.startsWith("/search"):

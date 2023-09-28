@@ -1,28 +1,34 @@
 const presence = new Presence({
-		clientId: "689724677274337290"
+		clientId: "689724677274337290",
 	}),
-	timeElapsed = Math.floor(Date.now() / 1000);
+	timeElapsed = Math.floor(Date.now() / 1000),
+	slideshow = presence.createSlideshow();
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "clouds"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Sitting%20on%20Clouds%20Radio/assets/logo.png",
 		},
-		albumName = document.querySelector<HTMLElement>(
-			"p#cardAlbum.playerText.truncate"
-		);
-	if (albumName.textContent === "Press the Play button to start the radio") {
-		presenceData.details = "Not tuned in.";
-		presenceData.smallImageKey = "pause";
+		presenceDataSlide: PresenceData = {
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Sitting%20on%20Clouds%20Radio/assets/logo.png",
+		};
+
+	if (document.querySelector(".player_playing__N2IaC")) {
+		const songInfoArray = document.querySelectorAll(".marquee_marquee__1MS_n");
+		presenceData.details = presenceDataSlide.details =
+			songInfoArray[1].textContent;
+		presenceData.state = `By ${songInfoArray[0].textContent}`;
+		presenceDataSlide.state = `From ${songInfoArray[2].textContent}`;
+		presenceData.smallImageKey = presenceDataSlide.smallImageKey = "live";
+		presenceData.startTimestamp = presenceDataSlide.startTimestamp =
+			timeElapsed;
+		slideshow.addSlide("slideArtist", presenceData, 5000);
+		slideshow.addSlide("slideAlbum", presenceDataSlide, 5000);
 	} else {
-		presenceData.details = document.querySelector<HTMLElement>(
-			"span#cardTitle.card-title.playerText.truncate"
-		).textContent;
-		presenceData.state = `${
-			document.querySelector<HTMLElement>("p#cardArtist.playerText.truncate")
-				.textContent
-		} - ${albumName.textContent}`;
-		presenceData.smallImageKey = "live";
-		presenceData.startTimestamp = timeElapsed;
+		presenceData.details = "Not tuned in.";
+		presenceData.smallImageKey = Assets.Pause;
 	}
-	presence.setActivity(presenceData);
+	if (slideshow.getSlides().length > 0) presence.setActivity(slideshow);
+	else presence.setActivity(presenceData);
 });

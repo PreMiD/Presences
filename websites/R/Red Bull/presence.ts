@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "872712888375193680"
+		clientId: "872712888375193680",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Red%20Bull/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
 		buttons = await presence.getSetting<boolean>("buttons"),
@@ -37,7 +38,7 @@ presence.on("UpdateData", async () => {
 			const video = document.querySelector("video");
 			if (video) {
 				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
-				presenceData.smallImageKey = video.paused ? "pause" : "play";
+				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.details = "Watching";
 				presenceData.state = title.textContent;
 			} else {
@@ -49,8 +50,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Article",
-					url: href
-				}
+					url: href,
+				},
 			];
 		}
 	} else if (splitPath.length === 3) presenceData.details = "At homepage";
@@ -66,8 +67,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Event",
-					url: href
-				}
+					url: href,
+				},
 			];
 		}
 	} else if (pathname.includes("athlete")) {
@@ -81,8 +82,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Athlete",
-					url: href
-				}
+					url: href,
+				},
 			];
 		}
 	} else if (
@@ -118,8 +119,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Watch Video",
-					url: href
-				}
+					url: href,
+				},
 			];
 		}
 	}

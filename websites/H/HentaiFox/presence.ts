@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "732982987905302570"
+	clientId: "732982987905302570",
 });
 
 let lastPlaybackState = null,
@@ -27,6 +27,10 @@ const pattern = "- Page",
 		return str.slice(0, str.indexOf(pattern));
 	};
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/H/HentaiFox/assets/logo.png",
+}
+
 if (lastPlaybackState !== reading) {
 	lastPlaybackState = reading;
 	browsingTimestamp = Math.floor(Date.now() / 1000);
@@ -34,7 +38,7 @@ if (lastPlaybackState !== reading) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "largeimage"
+		largeImageKey: Assets.Logo,
 	};
 
 	tabTitle = document.title;

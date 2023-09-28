@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "792735245488488458"
+		clientId: "792735245488488458",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -43,7 +43,7 @@ async function getStrings() {
 			iframe: "premid.pageIframe",
 			metadata: "premid.pageMetadata",
 			ts: "premid.pageTs",
-			btnViewPage: "general.buttonViewPage"
+			btnViewPage: "general.buttonViewPage",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -55,12 +55,13 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lg"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/PreMiD/assets/logo.png",
 		},
 		[newLang, time, showButtons] = await Promise.all([
-			presence.getSetting<string>("lang"),
+			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<string>("time"),
-			presence.getSetting<string>("showButtons")
+			presence.getSetting<string>("showButtons"),
 		]);
 
 	if (oldLang !== newLang || !strings) {
@@ -72,8 +73,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: strings.btnViewPage,
-				url: window.location.href
-			}
+				url: window.location.href,
+			},
 		];
 	}
 
@@ -87,7 +88,7 @@ presence.on("UpdateData", async () => {
 			host.includes("beta")
 				? (presenceData.smallImageText = `BETA | ${strings.browsing}`)
 				: (presenceData.smallImageText = strings.browsing);
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 
 			let icon;
 
@@ -169,7 +170,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "docs.premid.app": {
 			presenceData.details = `${strings.docs} | ${strings.viewPage}`;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = strings.reading;
 
 			switch (true) {
@@ -248,7 +249,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "status.premid.app": {
 			presenceData.details = `Status page | ${strings.viewing}`;
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.browsing;
 
 			switch (true) {

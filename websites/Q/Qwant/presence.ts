@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "719331723560878091"
+		clientId: "719331723560878091",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	searchTypeMap: ItemMap = {
@@ -8,19 +8,19 @@ const presence = new Presence({
 		images: "Searching images",
 		videos: "Searching videos",
 		social: "Searching social media",
-		shopping: "Searching for products"
+		shopping: "Searching for products",
 	},
 	searchMusicTypeMap: ItemMap = {
 		overview: "Searching music",
 		albums: "Searching music albums",
 		artists: "Searching music artists",
-		songs: "Searching songs"
+		songs: "Searching songs",
 	},
 	searchJuniorTypeMap: ItemMap = {
 		web: "Searching on the web",
 		images: "Searching images",
 		videos: "Searching videos",
-		education: "Searching educational content"
+		education: "Searching educational content",
 	};
 
 interface ItemMap {
@@ -29,8 +29,8 @@ interface ItemMap {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "qwant",
-		startTimestamp: browsingTimestamp
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/Q/Qwant/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	let query: URLSearchParams = null;

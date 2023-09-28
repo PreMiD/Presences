@@ -1,11 +1,12 @@
 const presence = new Presence({
-		clientId: "719119956486258749"
+		clientId: "719119956486258749",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/TwitLonger/assets/logo.png",
 	};
 
 	if (document.location.pathname === "/") {
@@ -25,7 +26,7 @@ presence.on("UpdateData", async () => {
 				"#user-info > div > h4 > a:nth-child(2)"
 			).textContent
 		})`;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.includes("/about")) {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = "About";

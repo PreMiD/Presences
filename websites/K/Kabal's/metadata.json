@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Eren",
+		"id": "478937019758673931"
+	},
+	"service": "Kabal's",
+	"description": {
+		"en": "Kabal's bot is providing social aspects including member profile, fun stuff and moderation..",
+		"tr": "Kabal's bot Türkiye'de popüler olan bir bot.",
+		"nl": "De bot van Kabal biedt sociale aspecten, waaronder een ledenprofiel, leuke dingen en moderatie."
+	},
+	"url": "bot.emirkabal.com",
+	"version": "1.2.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kabal's/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kabal's/assets/thumbnail.png",
+	"color": "#2942BF",
+	"category": "other",
+	"tags": [
+		"discord",
+		"bot",
+		"turkish"
+	]
+}

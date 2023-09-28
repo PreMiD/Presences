@@ -1,15 +1,19 @@
 const presence = new Presence({
-	clientId: "806539630878261328"
+	clientId: "806539630878261328",
 });
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Animelon/assets/logo.png",
+}
 async function getStrings() {
 	return presence.getStrings(
 		{
 			play: "general.playing",
 			pause: "general.paused",
 			viewSeries: "general.buttonViewSeries",
-			watchEpisode: "general.buttonViewEpisode"
+			watchEpisode: "general.buttonViewEpisode",
 		},
-		await presence.getSetting<string>("lang")
+		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
 
@@ -17,7 +21,7 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
 	video = {
 		duration: 0,
 		currentTime: 0,
-		paused: true
+		paused: true,
 	},
 	currentTime: number,
 	duration: number,
@@ -47,12 +51,12 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "animelon",
-			startTimestamp: browsingTimestamp
+			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
 		},
 		[buttons, newLang] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
-			presence.getSetting<string>("lang")
+			presence.getSetting<string>("lang").catch(() => "en"),
 		]);
 
 	if (oldLang !== newLang || !strings) {
@@ -62,7 +66,7 @@ presence.on("UpdateData", async () => {
 
 	if (document.location.pathname.includes("/video/")) {
 		if (playback === true && !isNaN(duration)) {
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? strings.pause : strings.play;
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
@@ -79,12 +83,12 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.watchEpisode,
-						url: document.URL
+						url: document.URL,
 					},
 					{
 						label: strings.viewSeries,
-						url: `https://animelon.com/series/${encodeURI(currentAnimeTitle)}`
-					}
+						url: `https://animelon.com/series/${encodeURI(currentAnimeTitle)}`,
+					},
 				];
 			}
 
@@ -106,12 +110,12 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: strings.watchEpisode,
-						url: document.URL
+						url: document.URL,
 					},
 					{
 						label: strings.viewSeries,
-						url: `https://animelon.com/series/${encodeURI(currentAnimeTitle)}`
-					}
+						url: `https://animelon.com/series/${encodeURI(currentAnimeTitle)}`,
+					},
 				];
 			}
 
@@ -128,8 +132,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: strings.viewSeries,
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		}
 	} else presenceData.details = "Browsing...";

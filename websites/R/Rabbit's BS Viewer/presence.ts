@@ -1,5 +1,5 @@
 ﻿const presence = new Presence({
-		clientId: "839924185278840853"
+		clientId: "839924185278840853",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -9,8 +9,9 @@ presence.on("UpdateData", async () => {
 		privacy = await presence.getSetting<boolean>("privacy"),
 		buttons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Rabbit's%20BS%20Viewer/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		};
 
 	if (document.location.pathname.includes("/bs-viewer/")) {
@@ -30,15 +31,15 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Page",
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 			if (document.location.href === "https://skystudioapps.com/bs-viewer/")
 				delete presenceData.buttons;
 		}
 		switch (document.querySelector("#play-button").getAttribute("class")) {
 			case "fas fa-pause":
-				presenceData.smallImageKey = "playing";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.endTimestamp =
 					Date.now() +
 					(parseInt(
@@ -62,7 +63,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = "Playing";
 				break;
 			case "fas fa-play":
-				presenceData.smallImageKey = "paused";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "Paused";
 				break;
 		}

@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "715344422039977994"
+		clientId: "715344422039977994",
 	}),
 	strings = {
 		listen: "Listening",
 		mute: "Muted",
 		record: "Recording",
 		view: "Viewing",
-		read: "Reading"
+		read: "Reading",
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	modes = ["CW", "LSB", "USB", "AM", "FM", "AMsync"];
@@ -31,10 +31,11 @@ function updateMode(): void {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "favicon",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/W/WebSDR/assets/logo.png",
 		//smallImageKey: "key",
 		smallImageText: "University of Twente SDR",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	switch (document.location.pathname) {

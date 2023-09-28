@@ -1,19 +1,20 @@
 const presence = new Presence({
-		clientId: "687352219598585905"
+		clientId: "687352219598585905",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "animeradio",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/AnimeRadio.de/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	switch (document.location.host) {
 		case "www.animeradio.de": {
 			if (document.location.pathname.includes("/webplayer/")) {
 				presenceData.details = "Hört AnimeRadio";
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 			} else if (document.URL.includes("top100"))
 				presenceData.details = "Betrachtet Top100";
 			else if (document.URL.includes("events"))
@@ -27,7 +28,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = "animetreff";
 			if (document.URL.includes("/CustomPage/?id=1")) {
 				presenceData.details = "Chattet";
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 			} else if (document.location.pathname.includes("/gallery/")) {
 				if (document.location.pathname.includes("/Image/")) {
 					presenceData.details = "Betrachtet Bild";
@@ -59,7 +60,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document.querySelector(
 					"#content > header > h1 > a"
 				).textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			} else if (document.location.pathname.includes("/Board/")) {
 				presenceData.details = `Betrachtet ${
 					document.querySelector("#content > header > h1 > a").textContent
@@ -84,7 +85,7 @@ presence.on("UpdateData", async () => {
 		case "www.animenews.de": {
 			presenceData.largeImageKey = "animenews";
 			presenceData.details = "Liest Neuigkeiten";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			break;
 		}
@@ -118,7 +119,7 @@ presence.on("UpdateData", async () => {
 		case "www.animekultur.de": {
 			if (document.URL.includes("joinus")) {
 				presenceData.details = "Will ein Mitglied werden";
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 			} else if (document.URL.includes("projekte"))
 				presenceData.details = "Betrachtet Projekte";
 			else if (document.URL.includes("pressemitteilungen"))

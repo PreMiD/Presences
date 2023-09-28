@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const data: PresenceData = {
-      largeImageKey: "djs",
+      largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Discord.js/assets/logo.png",
       startTimestamp: browsingStamp
     },
     route = document.location.hash.split("/");

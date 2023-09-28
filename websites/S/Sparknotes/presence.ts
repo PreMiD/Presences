@@ -1,12 +1,14 @@
 const presence = new Presence({
-		clientId: "714628886222209105"
+		clientId: "714628886222209105",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let chapter, titlePage, title, subject;
 const path = document.location.pathname;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Sparknotes/assets/logo.png",
 	};
 	function subjectCondition(subject: string): string {
 		title = document.querySelector(
@@ -187,10 +189,11 @@ presence.on("UpdateData", async () => {
 							);
 							presenceData.startTimestamp = browsingTimestamp;
 							presenceData.details = `Viewing: ${title.textContent}`;
-							titlePage = document.querySelector(
-								"body > header.interior-header > div > div.interior-header__title > div"
-							);
-							if (titlePage) presenceData.state = titlePage.textContent;
+							presenceData.state = `${document
+								.querySelector(".interior-header__title__umbrella-label")
+								.textContent.trim()} ${document
+								.querySelector(".interior-header__title__text__pagetitle")
+								.textContent.trim()}`;
 						} else if (path === "/login/") {
 							presenceData.startTimestamp = browsingTimestamp;
 							presenceData.details = "Login Unavailable";

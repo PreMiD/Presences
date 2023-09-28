@@ -1,9 +1,10 @@
 const presence = new Presence({
-		clientId: "720139757363003455"
+		clientId: "720139757363003455",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "loritta",
-		startTimestamp: Date.now()
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/L/Loritta/assets/logo.png",
+		startTimestamp: Date.now(),
 	};
 
 presence.on("UpdateData", () => {

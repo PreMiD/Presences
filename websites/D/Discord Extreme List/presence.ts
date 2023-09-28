@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "568254611354419211"
+	clientId: "568254611354419211",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Extreme%20List/assets/logo.png",
 	};
 
 	if ((await presence.getSetting<boolean>("incognito")) === false) {

@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "607352899214901248"
+		clientId: "607352899214901248",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 presence.on("UpdateData", async () => {
@@ -24,12 +24,13 @@ presence.on("UpdateData", async () => {
 				presenceData: PresenceData = {
 					details: title ? title.textContent : "Title not found...",
 					state: uploader ? uploader.textContent : "Uploader not found...",
-					largeImageKey: "lg",
-					smallImageKey: video.paused ? "pause" : "play",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/P/PornHub/assets/logo.jpg",
+					smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 					smallImageText: video.paused
 						? (await strings).pause
 						: (await strings).play,
-					endTimestamp: presence.getTimestampsfromMedia(video)[1]
+					endTimestamp: presence.getTimestampsfromMedia(video)[1],
 				};
 
 			//* Remove timestamps if paused or not show timestamps

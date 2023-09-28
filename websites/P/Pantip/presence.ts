@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "714416728448434218"
+		clientId: "714416728448434218",
 	}),
 	// Const thing
 	browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -25,8 +25,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "icon",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/P/Pantip/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	// Presence
@@ -58,27 +59,27 @@ presence.on("UpdateData", async () => {
 			presenceData.state =
 				document.querySelector("#search-text").getAttribute("value") ??
 				"ไม่ทราบการค้นหา";
-			presenceData.smallImageKey = "searching";
+			presenceData.smallImageKey = Assets.Search;
 		} else if (path.pathname.includes("topic")) {
 			presenceData.details = "กำลังอ่าน ";
 			presenceData.state = topic1;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (path.pathname.includes("tos")) {
 			presenceData.details = "กำลังอ่าน ";
 			presenceData.state = "กฎ กติกา และมารยาท";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (path.pathname.includes("defamation")) {
 			presenceData.details = "กำลังอ่าน ";
 			presenceData.state = "การโพสต์ความคิดเห็นที่เข้าข่าย หมิ่นประมาท";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (path.pathname.includes("privacy")) {
 			presenceData.details = "กำลังอ่าน ";
 			presenceData.state = "นโยบายเกี่ยวกับข้อมูลส่วนบุคคล";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (path.pathname.includes("contect")) {
 			presenceData.details = "กำลังอ่าน ";
 			presenceData.state = "ติดต่อทีมงานพันทิป";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (path.pathname.includes("login"))
 			presenceData.details = "กำลังเข้าสู่ระบบ ";
 		else if (path.pathname.includes("register_member"))

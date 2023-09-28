@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "870850875562819595"
+		clientId: "870850875562819595",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -25,7 +25,7 @@ async function getStrings() {
 			watchingMovie: "general.watchingMovie",
 			searchSomething: "general.searchSomething",
 			buttonWatchMovie: "general.buttonWatchMovie",
-			buttonViewEpisode: "general.buttonViewEpisode"
+			buttonViewEpisode: "general.buttonViewEpisode",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
@@ -34,7 +34,7 @@ async function getStrings() {
 let video = {
 		current: 0,
 		duration: 0,
-		paused: true
+		paused: true,
 	},
 	movie,
 	episode,
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
 				presence.getSetting<boolean>("showepisode"),
 				presence.getSetting<boolean>("timestamps"),
 				presence.getSetting<boolean>("subtitle"),
-				presence.getSetting<boolean>("buttons")
+				presence.getSetting<boolean>("buttons"),
 			]),
 		title =
 			document.querySelector(
@@ -71,8 +71,9 @@ presence.on("UpdateData", async () => {
 		playvdo = document.querySelector("#info > h1")?.textContent ?? "?",
 		pathArray = document.location.toString().split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "site",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Animekimi/assets/logo.jpg",
+			startTimestamp: browsingTimestamp,
 		};
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
@@ -88,7 +89,7 @@ presence.on("UpdateData", async () => {
 		)
 			.split("ผลการค้นหา:")
 			.pop();
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (!privacy && (pathArray[4] === "page" || pathArray[5] === "page")) {
 		presenceData.details = `${strings.viewPage} ${
 			pathArray[pathArray.indexOf("page") + 1]
@@ -101,35 +102,35 @@ presence.on("UpdateData", async () => {
 					? strings.viewGenre.replace(":", "")
 					: strings.viewGenre;
 				presenceData.state = title;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				break;
 			case "catalog":
 				presenceData.details = privacy
 					? strings.viewCategory.replace(":", "")
 					: strings.viewList;
 				presenceData.state = title;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				break;
 			case "category":
 				presenceData.details = privacy
 					? strings.viewCategory.replace(":", "")
 					: strings.viewCategory;
 				presenceData.state = title;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				break;
 			case "tag":
 				presenceData.details = privacy
 					? strings.viewCategory.replace(":", "")
 					: strings.viewList;
 				presenceData.state = title.split("รวมอนิเมะ").pop();
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				break;
 			case "release":
 				presenceData.details = privacy
 					? strings.viewCategory.replace(":", "")
 					: strings.viewList;
 				presenceData.state = title;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				break;
 			case "movies":
 				if (!["เดอะมูฟวี่", "เดอะ", "มูฟวี่"].includes(titlemovies)) {
@@ -149,7 +150,7 @@ presence.on("UpdateData", async () => {
 						? strings.viewMovie.replace(":", "")
 						: strings.viewMovie;
 					presenceData.state = titlemovies;
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				}
 				presenceData.smallImageKey = video.paused ? "pause" : "playing";
 				presenceData.smallImageText = video.paused
@@ -165,8 +166,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: strings.buttonWatchMovie,
-							url: document.location.href.replace(/#\d+/, "")
-						}
+							url: document.location.href.replace(/#\d+/, ""),
+						},
 					];
 				}
 				delete presenceData.startTimestamp;
@@ -184,7 +185,7 @@ presence.on("UpdateData", async () => {
 						: strings.viewAnime;
 					presenceData.state = `${ep.split("ตอนที่")[0]}`;
 				} else presenceData.details = strings.browsing;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				break;
 			case "ep":
 				if (playvdo.includes("ตอนที่")) {
@@ -225,14 +226,14 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: strings.buttonViewEpisode,
-							url: document.location.href.replace(/#\d+/, "")
-						}
+							url: document.location.href.replace(/#\d+/, ""),
+						},
 					];
 				}
 				break;
 			default:
 				presenceData.details = strings.viewHome;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				break;
 		}
 	}

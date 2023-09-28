@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "691325899307483197"
+	clientId: "691325899307483197",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/K/Koya/assets/logo.png",
 	};
 
 	if (document.location.pathname === "/") presenceData.details = "Home";

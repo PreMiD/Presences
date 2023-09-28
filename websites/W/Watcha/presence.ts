@@ -1,4 +1,4 @@
-interface Assets {
+interface Assets2 {
 	logo: string;
 	play: string;
 	pause: string;
@@ -7,7 +7,7 @@ interface Assets {
 
 interface SetDataParams {
 	data: PresenceData;
-	assets: Assets;
+	Assets2: Assets2;
 	noStartTime?: boolean;
 }
 
@@ -58,20 +58,20 @@ class Watcha extends Presence {
 		this.defaultToReplace = [
 			{
 				input: "%episode%",
-				with: "episode"
+				with: "episode",
 			},
 			{
 				input: "%episodeTitle%",
-				with: "episodeTitle"
+				with: "episodeTitle",
 			},
 			{
 				input: "%title%",
-				with: "title"
-			}
+				with: "title",
+			},
 		];
 	}
 
-	async getAssets(): Promise<Assets> {
+	async getAssets2(): Promise<Assets2> {
 		const setting = await this.getSetting<number>("logo"),
 			images: Record<string, string> = {
 				"logo-0": "logo",
@@ -81,20 +81,20 @@ class Watcha extends Presence {
 				"logo-1": "logo-red",
 				"play-1": "play-red",
 				"pause-1": "pause-red",
-				"brwose-1": "browse-red"
+				"brwose-1": "browse-red",
 			};
 
 		return {
 			play: images[`play-${setting}`],
 			pause: images[`pause-${setting}`],
 			browse: images[`brwose-${setting}`],
-			logo: images[`logo-${setting}`]
+			logo: images[`logo-${setting}`],
 		};
 	}
 
 	async setData(params: SetDataParams) {
-		params.data.largeImageKey ??= params.assets.logo;
-		params.data.smallImageKey ??= params.assets.browse;
+		params.data.largeImageKey ??= params.Assets2.logo;
+		params.data.smallImageKey ??= params.Assets2.browse;
 
 		if (!params.noStartTime) params.data.startTimestamp = this.startedAt;
 
@@ -118,7 +118,7 @@ class Watcha extends Presence {
 }
 
 const app = new Watcha({
-	clientId: "905720213004222504"
+	clientId: "905720213004222504",
 });
 
 app.on("UpdateData", async () => {
@@ -131,60 +131,60 @@ app.on("UpdateData", async () => {
 				app.getSetting<string>("seriesDetail"),
 				app.getSetting<string>("movieDetail"),
 				app.getSetting<string>("seriesState"),
-				app.getSetting<string>("movieState")
+				app.getSetting<string>("movieState"),
 			]),
-		assets = await app.getAssets(),
+		Assets2 = await app.getAssets2(),
 		pages: Pages = {
 			"/home": {
 				presenceData: {
-					details: "브라우징..."
-				}
+					details: "브라우징...",
+				},
 			},
 			"/(watchings|watched|ratings)": {
 				presenceData: {
-					details: "목록 보는 중"
-				}
+					details: "목록 보는 중",
+				},
 			},
 			"/settings": {
 				presenceData: {
-					details: "설정 보는 중"
-				}
+					details: "설정 보는 중",
+				},
 			},
 			"/wishes": {
 				presenceData: {
-					details: "위시리스트 보기"
-				}
+					details: "위시리스트 보기",
+				},
 			},
 			"/notices": {
 				presenceData: {
-					details: "알림 보는 중"
-				}
+					details: "알림 보는 중",
+				},
 			},
 			"/manage_profile": {
 				presenceData: {
-					details: "프로필 관리"
-				}
+					details: "프로필 관리",
+				},
 			},
 			"/referer": {
 				presenceData: {
-					details: "참조 링크 가져오기"
-				}
+					details: "참조 링크 가져오기",
+				},
 			},
 			"/explore": {
 				presenceData: {
 					details: "검색 장르:",
-					state: document.querySelector("div.css-bdaabp")?.textContent
-				}
+					state: document.querySelector("div.css-bdaabp")?.textContent,
+				},
 			},
 			"/evaluate": {
 				presenceData: {
-					details: "권장 사항 가져오기"
-				}
+					details: "권장 사항 가져오기",
+				},
 			},
 			"/arrivals/latest": {
 				presenceData: {
-					details: "최신 도착물 보는 중"
-				}
+					details: "최신 도착물 보는 중",
+				},
 			},
 			"/staffmades/": {
 				setPresenceData: () => {
@@ -194,12 +194,12 @@ app.on("UpdateData", async () => {
 						app.setData({
 							data: {
 								details: "보기:",
-								state: title
+								state: title,
 							},
-							assets
+							Assets2,
 						});
 					}
-				}
+				},
 			},
 			"/people/": {
 				setPresenceData: () => {
@@ -208,24 +208,24 @@ app.on("UpdateData", async () => {
 					if (name) {
 						app.setData({
 							data: {
-								details: `${name}의 작품 탐색`
+								details: `${name}의 작품 탐색`,
 							},
-							assets
+							Assets2,
 						});
 					}
-				}
+				},
 			},
 			"/search": {
 				disabled: !search,
 				presenceData: {
 					details: "검색 중:",
-					state: decodeURI(new URLSearchParams(location.search).get("q"))
-				}
+					state: decodeURI(new URLSearchParams(location.search).get("q")),
+				},
 			},
 			"/parties": {
 				presenceData: {
-					details: "왓챠파티 탐색"
-				}
+					details: "왓챠파티 탐색",
+				},
 			},
 			"/watch/": {
 				setPresenceData: () => {
@@ -248,16 +248,16 @@ app.on("UpdateData", async () => {
 						else delete app.meta.episodeTitle;
 
 						const data: PresenceData = {
-							smallImageKey: video.paused ? assets.pause : assets.play,
-							endTimestamp: app.getTimestampsfromMedia(video).pop()
+							smallImageKey: video.paused ? Assets2.pause : Assets2.play,
+							endTimestamp: app.getTimestampsfromMedia(video).pop(),
 						};
 
 						if (video.paused) delete data.endTimestamp;
 
 						app.setData({
 							data,
-							assets,
-							noStartTime: true
+							Assets2,
+							noStartTime: true,
 						});
 					}
 				},
@@ -265,15 +265,15 @@ app.on("UpdateData", async () => {
 					largeImageKey: {
 						condition: {
 							ifTrue: !!app.meta.coverUrl && cover,
-							setTo: app.meta.coverUrl
-						}
+							setTo: app.meta.coverUrl,
+						},
 					},
 					details: {
 						condition: {
 							ifTrue: !!app.meta.episode,
 							setTo: seriesDetail,
 							replace: {
-								toReplace: app.defaultToReplace
+								toReplace: app.defaultToReplace,
 							},
 							ifNot: {
 								setTo: movieDetail,
@@ -281,19 +281,19 @@ app.on("UpdateData", async () => {
 									toReplace: [
 										{
 											input: "%title%",
-											with: "title"
-										}
-									]
-								}
-							}
-						}
+											with: "title",
+										},
+									],
+								},
+							},
+						},
 					},
 					state: {
 						condition: {
 							ifTrue: !!app.meta.episode,
 							setTo: seriesState,
 							replace: {
-								toReplace: app.defaultToReplace
+								toReplace: app.defaultToReplace,
 							},
 							ifNot: {
 								setTo: movieState,
@@ -301,20 +301,20 @@ app.on("UpdateData", async () => {
 									toReplace: [
 										{
 											input: "%title%",
-											with: "title"
-										}
-									]
-								}
-							}
-						}
-					}
-				}
-			}
+											with: "title",
+										},
+									],
+								},
+							},
+						},
+					},
+				},
+			},
 		};
 
 	for (const [path, data] of Object.entries(pages)) {
 		if (document.location.pathname.match(path) && !data.disabled) {
-			if (data.presenceData) app.setData({ data: data.presenceData, assets });
+			if (data.presenceData) app.setData({ data: data.presenceData, Assets2 });
 			else if (data.setPresenceData) data.setPresenceData();
 
 			if (data.presenceSettings) {

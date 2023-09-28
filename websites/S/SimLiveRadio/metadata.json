@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Bas950",
+		"id": "241278257335500811"
+	},
+	"service": "SimLiveRadio",
+	"description": {
+		"en": "SimLiveRadio is the most successful infotainment radio for simulation games in Germany, Austria and Switzerland!",
+		"nl": "SimLiveRadio is de meest succesvolle infotainment radio voor simulatiespellen in Duitsland, Oostenrijk en Zwitserland!",
+		"de": "Deutschlands Radio Nr. 1 für Simulationsspiele"
+	},
+	"url": [
+		"simliveradio.net",
+		"laut.fm"
+	],
+	"version": "1.0.17",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SimLiveRadio/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SimLiveRadio/assets/thumbnail.png",
+	"color": "#f87d04",
+	"category": "games",
+	"tags": [
+		"ets2",
+		"ats",
+		"tmp",
+		"fs19",
+		"german"
+	]
+}

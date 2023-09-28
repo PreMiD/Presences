@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "776479405009666098"
+		clientId: "776479405009666098",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -17,9 +17,10 @@ presence.on("iFrameData", (data: VideoData) => {
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "proxer_icon",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/Proxer/assets/logo.png",
 			details: "Idle",
-			state: "Browsing Proxer.me"
+			state: "Browsing Proxer.me",
 		},
 		path = document.location.pathname;
 

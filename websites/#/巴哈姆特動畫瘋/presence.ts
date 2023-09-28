@@ -1,17 +1,21 @@
 const presence = new Presence({
-		clientId: "640194732718292992"
+		clientId: "640194732718292992",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/%23/%E5%B7%B4%E5%93%88%E5%A7%86%E7%89%B9%E5%8B%95%E7%95%AB%E7%98%8B/assets/logo.png",
+}
 
 let user: HTMLElement | Element | string, title: HTMLElement | Element | string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "ani"
+		largeImageKey: Assets.Logo,
 	};
 
 	if (document.location.hostname === "ani.gamer.com.tw") {
@@ -28,7 +32,7 @@ presence.on("UpdateData", async () => {
 					Math.floor(video.duration)
 				);
 			if (!isNaN(video.duration)) {
-				presenceData.smallImageKey = video.paused ? "pause" : "play";
+				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
 					? (await strings).pause
 					: (await strings).play;
@@ -55,7 +59,7 @@ presence.on("UpdateData", async () => {
 					"#BH_background > div.container-player > div.anime-title > div.anime-option > section.videoname > div.anime_name > h1"
 				);
 				presenceData.state = title.textContent;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			}
 		} else if (document.location.pathname.includes("/animeList")) {
 			presenceData.startTimestamp = browsingTimestamp;

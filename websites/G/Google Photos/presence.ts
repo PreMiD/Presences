@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "925204937225416704"
+		clientId: "925204937225416704",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Google%20Photos/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;
 	if (path === "" || path === "/") presenceData.details = "Browsing photos";

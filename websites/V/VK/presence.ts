@@ -1,19 +1,19 @@
 const presence = new Presence({
-		clientId: "514771696134389760"
+		clientId: "514771696134389760",
 	}),
 	localeStrings: { [stringPath: string]: Record<string, string> } = {
 		en: {
 			Chatting: "Browsing PM's...",
 			Watching: "Watching",
 			Browsing: "Browsing",
-			BrowsingFeed: "Browsing feed..."
+			BrowsingFeed: "Browsing feed...",
 		},
 		ru: {
 			Chatting: "Смотрит сообщения...",
 			Watching: "Смотрит",
 			Browsing: "Просматривает",
-			BrowsingFeed: "Смотрит ленту..."
-		}
+			BrowsingFeed: "Смотрит ленту...",
+		},
 	};
 let isPlaying: boolean, timestamps;
 
@@ -78,11 +78,11 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "vk_logo"
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/VK/assets/logo.png",
 		},
 		gstrings = await presence.getStrings({
-			play: "presence.playback.playing",
-			pause: "presence.playback.paused"
+			play: "general.playing",
+			pause: "general.paused",
 		});
 
 	if (
@@ -108,10 +108,10 @@ presence.on("UpdateData", async () => {
 			".audio_page_player_title_performer a"
 		).textContent;
 		if (isPlaying) {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = gstrings.pause;
 		} else {
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = gstrings.play;
 			[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 		}
@@ -142,10 +142,10 @@ presence.on("UpdateData", async () => {
 		presenceData.state =
 			document.querySelector<HTMLElement>(".mv_author_name a").textContent;
 		if (isPlaying) {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = gstrings.pause;
 		} else {
-			presenceData.smallImageKey = "play";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = gstrings.play;
 			[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 		}

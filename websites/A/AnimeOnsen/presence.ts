@@ -20,15 +20,19 @@ const presence = new Presence({ clientId: "826806766033174568" }),
 			account: "icon-g-account",
 			browse: "icon-g-browse",
 			read: "icon-g-read",
-			search: "icon-g-search"
+			search: "icon-g-search",
 		},
-		player: { play: "icon-p-play", pause: "icon-p-pause" }
+		player: { play: "icon-p-play", pause: "icon-p-pause" },
 	},
 	toProperCase = (str: string) => str[0].toUpperCase() + str.slice(1);
 let playerData: PlayerData,
 	pageLoaded = false;
 
 presence.info("PreMiD extension has loaded");
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeOnsen/assets/logo.png",
+}
 
 function updateData() {
 	if (/^watch$/i.test(page)) {
@@ -47,7 +51,7 @@ function updateData() {
 			title,
 			episode,
 			episodeName: currentEpisodeOption.textContent,
-			playbackState: paused ? "paused" : "playing"
+			playbackState: paused ? "paused" : "playing",
 		};
 		if (document.body.contains(player) && !pageLoaded) pageLoaded = true;
 	} else pageLoaded = true;
@@ -57,11 +61,11 @@ setInterval(updateData, 1e3);
 presence.on("UpdateData", () => {
 	if (!pageLoaded) return;
 	const presenceData: PresenceData = {
-		largeImageKey: "main-logo",
+		largeImageKey: Assets.Logo,
 		smallImageKey: rpaImage.general.browse,
 		smallImageText: "Browsing",
 		details: "Browsing",
-		startTimestamp: initMillis
+		startTimestamp: initMillis,
 	};
 	switch (page.toLowerCase()) {
 		case "watch": {
@@ -70,7 +74,8 @@ presence.on("UpdateData", () => {
 			episodeUrl.searchParams.set("episode", episode.toString());
 
 			presenceData.smallImageKey =
-				rpaImage.player[playbackState === "paused" ? "pause" : "play"];
+				playbackState === "paused" ? Assets.Pause : Assets.Play;
+
 			presenceData.smallImageText = `Watching - ${toProperCase(playbackState)}`;
 			presenceData.details = title;
 			presenceData.state = episodeName || "";

@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "747190301676011550"
+		clientId: "747190301676011550",
 	}),
 	strings = presence.getStrings({
-		playing: "presence.playback.playing",
-		paused: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		playing: "general.playing",
+		paused: "general.paused",
+		browsing: "general.browsing",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -17,9 +17,10 @@ presence.on("iFrameData", async (msg: HTMLVideoElement) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "animewho",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/AnimeWho/assets/logo.jpg",
 		details: "Ana Sayfada Anime Arıyor",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 	presenceData.details = (
 		document.querySelector("head > title") as HTMLHeadElement
@@ -76,7 +77,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (video) {
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).paused
 			: (await strings).playing;

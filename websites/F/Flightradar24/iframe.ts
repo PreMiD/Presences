@@ -6,7 +6,7 @@ if (document.location.href.includes("player.blubrry.com")) {
 			elapsed: document.querySelector(".time-elapsed")?.textContent,
 			total: document.querySelector(".sm2-inline-duration.time-total")
 				?.textContent,
-			isPlaying: Boolean(document.querySelector("i.is-playing"))
+			isPlaying: Boolean(document.querySelector("i.is-playing")),
 		});
 	});
 }
@@ -21,7 +21,7 @@ if (document.location.href.includes("www.youtube.com")) {
 		iframe.send({
 			currentTime,
 			duration,
-			paused
+			paused,
 		});
 	});
 }

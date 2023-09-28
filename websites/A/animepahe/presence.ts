@@ -2,39 +2,43 @@
 //       maybe at some point he'll finish it and this will need updating.
 
 const presence = new Presence({
-		clientId: "629355416714739732" // Contact if you want me to edit the discord assets/keys/whatever
-	}),
-	waitStrings = async (lang: string) =>
-		presence.getStrings(
-			{
-				play: "presence.playback.playing",
-				pause: "presence.playback.paused",
-				browse: "general.browsing",
-				page: "general.page",
-				episode: "general.episode",
-				watching: "general.watching",
-				watchingMovie: "general.watchingMovie",
-				viewing: "general.viewing",
-				viewGenre: "general.viewGenre",
-				viewCategory: "general.viewCategory",
-				viewPage: "general.viewPage",
-				viewMovie: "general.viewMovie",
-				watchEpisode: "general.buttonViewEpisode",
-				watchMovie: "general.buttonViewMovie",
-				latest: "animepahe.latestRelease",
-				season: "animepahe.season",
-				special: "animepahe.special",
-				viewOn: "animepahe.view",
-				timeSeason: "animepahe.timeSeason"
-			},
-			lang
-		);
+	clientId: "629355416714739732",
+});
 
-let iframeResponse = {
-	paused: true,
-	duration: 0,
-	currentTime: 0
-};
+async function getStrings() {
+	return presence.getStrings(
+		{
+			play: "general.playing",
+			pause: "general.paused",
+			browse: "general.browsing",
+			page: "general.page",
+			episode: "general.episode",
+			watching: "general.watching",
+			watchingMovie: "general.watchingMovie",
+			viewing: "general.viewing",
+			viewGenre: "general.viewGenre",
+			viewCategory: "general.viewCategory",
+			viewPage: "general.viewPage",
+			viewMovie: "general.viewMovie",
+			watchEpisode: "general.buttonViewEpisode",
+			watchMovie: "general.buttonViewMovie",
+			latest: "animepahe.latestRelease",
+			season: "animepahe.season",
+			special: "animepahe.special",
+			viewOn: "animepahe.view",
+			timeSeason: "animepahe.timeSeason",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null,
+	iframeResponse = {
+		paused: true,
+		duration: 0,
+		currentTime: 0,
+	};
 
 type storeType = Record<
 	string,
@@ -49,9 +53,11 @@ class AnimeStorage {
 		else if (!listing) return;
 		else {
 			this.list[title] = {
-				id: Number(document.querySelector("meta[name=id]").content),
+				id: Number(
+					document.querySelector<HTMLMetaElement>("meta[name=id]").content
+				),
 				listing,
-				time: Date.now()
+				time: Date.now(),
 			};
 
 			// Removes the oldest stored anime if the store length has exceeded 10
@@ -96,7 +102,7 @@ function getTimes(time: number): Record<string, number> {
 	return {
 		sec: seconds,
 		min: minutes,
-		hrs: hours
+		hrs: hours,
 	};
 }
 
@@ -154,14 +160,19 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const path = document.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "animepahe",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/logo.png",
 			details: "loading",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000),
 		},
-		strings = await waitStrings(
-			await presence.getSetting<string>("lang").catch(() => "en")
-		),
-		viewing = strings.viewing.slice(0, -1);
+		newLang = await presence.getSetting<string>("lang").catch(() => "en");
+
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
+
+	const viewing = strings.viewing.slice(0, -1);
 	let playback = false;
 
 	switch (path[0]) {
@@ -280,12 +291,12 @@ presence.on("UpdateData", async () => {
 										label: strings.viewOn.replace("{0}", "Pahe"),
 										url: `https://pahe.win/a/${
 											animeStore.anime(title, listing).id
-										}`
+										}`,
 									},
 									{
 										label: strings.viewOn.replace("{0}", listing[0]),
-										url: listing[1]
-									}
+										url: listing[1],
+									},
 								];
 							}
 						}
@@ -347,12 +358,12 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: movie ? strings.watchMovie : strings.watchEpisode,
-							url: `https://pahe.win/a/${anime.id}/${episode}`
+							url: `https://pahe.win/a/${anime.id}/${episode}`,
 						},
 						{
 							label: strings.viewOn.replace("{0}", anime.listing[0]),
-							url: anime.listing[1]
-						}
+							url: anime.listing[1],
+						},
 					];
 				}
 

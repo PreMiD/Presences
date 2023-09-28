@@ -3,7 +3,7 @@ let elapsed = Math.floor(Date.now() / 1000),
 	prevUrl = document.location.href;
 
 const presence = new Presence({
-		clientId: "939877915032682576"
+		clientId: "939877915032682576",
 	}),
 	getElement = (query: string): string | undefined => {
 		return document.querySelector(query)?.textContent;
@@ -38,7 +38,7 @@ const presence = new Presence({
 				searchingSomething: "general.searchSomething",
 				search: "general.search",
 				watchStream: "general.buttonWatchStream",
-				watchVideo: "general.buttonWatchVideo"
+				watchVideo: "general.buttonWatchVideo",
 			},
 			oldLang
 		);
@@ -48,8 +48,9 @@ let strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: elapsed
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/N/Nimo/assets/logo.png",
+			startTimestamp: elapsed,
 		},
 		{ pathname, href } = document.location,
 		[
@@ -61,7 +62,7 @@ presence.on("UpdateData", async () => {
 			streamDetail,
 			streamState,
 			profilePic,
-			buttons
+			buttons,
 		] = await Promise.all([
 			presence.getSetting<boolean>("timestamp"),
 			presence.getSetting<string>("lang").catch(() => "en"),
@@ -71,13 +72,13 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<string>("streamDetail"),
 			presence.getSetting<string>("streamState"),
 			presence.getSetting<boolean>("profilePic"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		title = getElement(
-			":is(div.nimo-rm_title-text > h3, #meta-info > div.video-info h1)"
+			":is(div.nimo-rm_title-text > h3, #meta-info > div.video-info h1, .nimo-player__room-meta_title-text)"
 		),
 		streamer = getElement(
-			":is(div.nimo-rm_sub-title > h1, #meta-info div.anchor-name.n-as-text-over > a > h2)"
+			":is(div.nimo-rm_sub-title > h1, #meta-info div.anchor-name.n-as-text-over > a > h2, .nimo-player__room-meta__nick)"
 		),
 		game = getElement("div.nimo-anchor-broadcast-game > a > h4");
 
@@ -93,7 +94,7 @@ presence.on("UpdateData", async () => {
 
 	if (pathname === "/") presenceData.details = strings.viewHome;
 	else if (pathname.startsWith("/game")) {
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = strings.browse;
 		presenceData.details = strings.browse;
 		if (!privacy) {
@@ -103,13 +104,13 @@ presence.on("UpdateData", async () => {
 			).textContent;
 		}
 	} else if (pathname.startsWith("/esports")) {
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = strings.browse;
 		presenceData.details = strings.browse;
 		if (!privacy) presenceData.details = strings.esport;
 	} else if (pathname.startsWith("/search")) {
 		presenceData.details = strings.searchingSomething;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = strings.search;
 		if (!privacy) {
 			presenceData.details = strings.searchingFor;
@@ -118,7 +119,7 @@ presence.on("UpdateData", async () => {
 				.textContent.replaceAll('"', "");
 		}
 	} else if (pathname.startsWith("/i")) {
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = strings.browse;
 		presenceData.details = strings.browse;
 		if (!privacy) {
@@ -128,7 +129,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = strings.channelSettings;
 			if (pathname.includes("/streamercamp")) {
 				presenceData.details = strings.camp;
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = strings.browse;
 				delete presenceData.state;
 				if (pathname.includes("/quickstart"))
@@ -185,10 +186,10 @@ presence.on("UpdateData", async () => {
 				}
 
 				presenceData.buttons = [
-					{ label: strings.watchVideo, url: document.URL }
+					{ label: strings.watchVideo, url: document.URL },
 				];
 			} else presenceData.details = strings.watchingVid;
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? strings.pause : strings.play;
 		} else {
 			if (!privacy) {
@@ -201,7 +202,7 @@ presence.on("UpdateData", async () => {
 					.replace("%streamer%", streamer)
 					.replace("%game%", game);
 				presenceData.buttons = [
-					{ label: strings.watchStream, url: document.URL }
+					{ label: strings.watchStream, url: document.URL },
 				];
 			} else presenceData.details = strings.watchingLive;
 			presenceData.smallImageKey = "live";

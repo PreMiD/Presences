@@ -1,7 +1,8 @@
 const presence = new Presence({
-		clientId: "618138980273094695"
+		clientId: "618138980273094695",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let item: HTMLElement,
 	dropdown: string,
 	dropdownplus1: number,
@@ -11,8 +12,9 @@ let item: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "amazon",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Amazon/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	item = document.querySelector(
@@ -30,7 +32,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Searching for:"; //general.searchFor
 		presenceData.state = item.textContent;
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (document.querySelector("#gc-asin-title")) {
 		item = document.querySelector("#gc-asin-title");
 

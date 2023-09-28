@@ -1,9 +1,10 @@
 const presence = new Presence({
-		clientId: "794916348761210920"
+		clientId: "794916348761210920",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: Math.floor(Date.now() / 1000)
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/O/Otakudesu/assets/logo.png",
+		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 
 presence.on("UpdateData", async () => {
@@ -41,7 +42,7 @@ presence.on("UpdateData", async () => {
 				);
 				presenceData.details = "Searching for:";
 				presenceData.state = s;
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			}
 			if (document.location.pathname.startsWith("/anime")) {
 				presenceData.details = "Viewing anime";
@@ -49,7 +50,7 @@ presence.on("UpdateData", async () => {
 					.querySelector(".jdlrx > h1")
 					.textContent.replace(/Subtitle Indonesia/gi, "");
 				presenceData.buttons = [
-					{ label: "View anime", url: document.location.href }
+					{ label: "View anime", url: document.location.href },
 				];
 			}
 			if (document.querySelector(".mirrorstream")) {
@@ -63,8 +64,8 @@ presence.on("UpdateData", async () => {
 						label: "View Anime",
 						url: [...document.querySelectorAll("a")].find(x =>
 							/See All Episodes/gi.exec(x.textContent)
-						).href
-					}
+						).href,
+					},
 				];
 			}
 			break;

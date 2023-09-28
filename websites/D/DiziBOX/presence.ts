@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "643788489871196161"
+		clientId: "643788489871196161",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	pages: { [k: string]: string } = {
 		"/": "Ana Sayfa",
@@ -17,7 +17,7 @@ const presence = new Presence({
 		"/izlediklerim": "İzlediklerim",
 		"/izleyeceklerim": "İzleyeceklerim",
 		"/yorumlarim": "Yorumlarım",
-		"/hesap-ayarlari": "Hesap Ayarları"
+		"/hesap-ayarlari": "Hesap Ayarları",
 	},
 	video: {
 		dataAvailable?: boolean;
@@ -59,17 +59,19 @@ presence.on("UpdateData", async () => {
 			);
 
 			presence.setActivity({
-				largeImageKey: "db-logo",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
 				details: "Bir diziye göz atıyor:",
 				state:
 					showName && showName.textContent !== ""
 						? showName.textContent
 						: "Belirsiz",
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (document.location.search.includes("?s=")) {
 			presence.setActivity({
-				largeImageKey: "db-logo",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
 				details: "Bir dizi arıyor:",
 				state:
 					document.querySelector(
@@ -83,7 +85,7 @@ presence.on("UpdateData", async () => {
 								.replace(")", "")
 						: null || "Belirsiz",
 				smallImageKey: "search",
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (page.includes("/author/")) {
 			const user = document.querySelector(
@@ -91,17 +93,19 @@ presence.on("UpdateData", async () => {
 			);
 
 			presence.setActivity({
-				largeImageKey: "db-logo",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
 				details: "Bir üyenin profiline bakıyor:",
 				state: user && user.textContent ? user.textContent : "Belirsiz",
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (pages[page] || pages[page.slice(0, -1)]) {
 			presence.setActivity({
-				largeImageKey: "db-logo",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
 				details: "Bir sayfaya göz atıyor:",
 				state: pages[page] || pages[page.slice(0, -1)],
-				startTimestamp: Math.floor(Date.now() / 1000)
+				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		}
 	} else if (_video && _video.currentTime) {
@@ -116,14 +120,15 @@ presence.on("UpdateData", async () => {
 				Math.floor(_video.duration)
 			),
 			presenceData: PresenceData = {
-				largeImageKey: "db-logo",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
 				details: title && title.textContent ? title.textContent : "Belirsiz",
 				state:
 					episode && episode.textContent ? episode.textContent : "Belirsiz",
-				smallImageKey: _video.paused ? "pause" : "play",
+				smallImageKey: _video.paused ? Assets.Pause : Assets.Play,
 				smallImageText: _video.paused
 					? (await strings).pause
-					: (await strings).play
+					: (await strings).play,
 			};
 
 		if (!isNaN(timestamps[0]) && !isNaN(timestamps[1]))
@@ -147,14 +152,15 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.duration)
 			),
 			presenceData: PresenceData = {
-				largeImageKey: "db-logo",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
 				details: title && title.textContent ? title.textContent : "Belirsiz",
 				state:
 					episode && episode.textContent ? episode.textContent : "Belirsiz",
-				smallImageKey: video.paused ? "pause" : "play",
+				smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 				smallImageText: video.paused
 					? (await strings).pause
-					: (await strings).play
+					: (await strings).play,
 			};
 
 		if (!isNaN(timestamps[0]) && !isNaN(timestamps[1]))

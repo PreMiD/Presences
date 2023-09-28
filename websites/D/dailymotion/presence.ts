@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "611668948131512321"
+		clientId: "611668948131512321",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/dailymotion/assets/logo.png",
 	};
 
 presence.on("UpdateData", async () => {
@@ -20,8 +21,9 @@ presence.on("UpdateData", async () => {
 		presenceData.state = uploader
 			? (uploader as HTMLElement).textContent
 			: "Uploader not found...";
-		presenceData.largeImageKey = "logo";
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/D/dailymotion/assets/logo.png";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;
@@ -40,7 +42,8 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity({
 			details: "Browsing..",
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/dailymotion/assets/logo.png",
 		});
 	}
 });

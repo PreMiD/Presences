@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "708779444541849640"
+		clientId: "708779444541849640",
 	}),
 	nomeObraAnime: HTMLElement = document.querySelector(
 		"#weds > div > div.pageAnime > div > div > div.right > div.animeFirstContainer > h1"
@@ -27,7 +27,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/Meus%20Animes/assets/logo.png",
 		},
 		path = document.location.pathname;
 
@@ -65,7 +66,7 @@ presence.on("UpdateData", async () => {
 						Math.floor(video.currentTime),
 						Math.floor(video.duration)
 					);
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Assistindo";
 			}
 		}

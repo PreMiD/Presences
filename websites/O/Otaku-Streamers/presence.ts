@@ -1,14 +1,16 @@
 const presence = new Presence({
-		clientId: "719985436075753492"
+		clientId: "719985436075753492",
 	}),
 	path = window.location.pathname,
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let title, video, timestamps, chapter, blog;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/O/Otaku-Streamers/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 	if (window.location.hostname === "otaku-streamers.com") {
 		presenceData.largeImageKey = "betalogo";
@@ -22,7 +24,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = title.textContent;
 			} else {
 				presenceData.details = "Error";
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.smallImageText = "Error";
 			}
 		} else if (path.includes("/watch/")) {
@@ -35,14 +37,14 @@ presence.on("UpdateData", async () => {
 				timestamps = presence.getTimestamps(video.currentTime, video.duration);
 				if (video.paused && title && video.currentTime !== 0) {
 					presenceData.details = "Paused";
-					presenceData.smallImageKey = "pause";
+					presenceData.smallImageKey = Assets.Pause;
 					presenceData.smallImageText = "Paused";
 					delete presenceData.startTimestamp;
 					delete presenceData.endTimestamp;
 					presenceData.state = `${title.textContent} ${chapter.textContent}`;
 				} else if (!video.paused && title && video.currentTime !== 0) {
 					presenceData.details = "Playing";
-					presenceData.smallImageKey = "play";
+					presenceData.smallImageKey = Assets.Play;
 					presenceData.smallImageText = "Playing";
 					[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 					presenceData.state = `${title.textContent} ${chapter.textContent}`;
@@ -61,12 +63,13 @@ presence.on("UpdateData", async () => {
 					blog = document.querySelector("#blog_title") as HTMLTextAreaElement;
 					if (blog) presenceData.state = blog.textContent;
 				}
-				presenceData.smallImageKey = "read";
+				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Reading";
 			} else presenceData.details = "Unable to Read Page";
 		}
 	} else if (window.location.hostname === "beta.otaku-streamers.com") {
-		presenceData.largeImageKey = "logo";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/O/Otaku-Streamers/assets/logo.png";
 		switch (path) {
 			case "/":
 			case "/index.php":
@@ -101,7 +104,7 @@ presence.on("UpdateData", async () => {
 							" - Otaku-Streamers",
 							""
 						);
-						presenceData.smallImageKey = "read";
+						presenceData.smallImageKey = Assets.Reading;
 						presenceData.smallImageText = "Reading";
 					} else presenceData.details = "Reading a discusion";
 				} else if (path.includes("/title/")) {
@@ -132,7 +135,9 @@ presence.on("UpdateData", async () => {
 							video.duration
 						);
 						if (video.currentTime !== 0) {
-							presenceData.smallImageKey = video.paused ? "pause" : "play";
+							presenceData.smallImageKey = video.paused
+								? Assets.Pause
+								: Assets.Play;
 							presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 							if (!video.paused) {
 								[presenceData.startTimestamp, presenceData.endTimestamp] =

@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "EGGSY",
+		"id": "162969778699501569"
+	},
+	"service": "ShiftDelete.Net",
+	"description": {
+		"en": "ShiftDelete.Net is one of the biggest technology blogs in Turkey.",
+		"tr": "ShiftDelete.Net, Türkiye'nin en büyük teknoloji haberleri ve forum sitelerinden birisidir..",
+		"nl": "ShiftDelete.Net is een van de grootste technologie blogs in Turkije."
+	},
+	"url": [
+		"shiftdelete.net",
+		"forum.shiftdelete.net"
+	],
+	"version": "1.2.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/ShiftDelete.Net/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/ShiftDelete.Net/assets/thumbnail.png",
+	"color": "#fedd00",
+	"category": "other",
+	"tags": [
+		"shiftdelete",
+		"blog",
+		"technology",
+		"turkish"
+	]
+}

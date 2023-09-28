@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "719179907518693427"
+	clientId: "719179907518693427",
 });
 
 interface Data20XX {
@@ -54,7 +54,7 @@ const characterNameMap: ItemMap = {
 		blk: "Block",
 		crg: "Cargo",
 		inf: "Plus",
-		cub: "Cube"
+		cub: "Cube",
 	},
 	// A map of map IDs with their names.
 	mapNameMap: ItemMap = {
@@ -72,7 +72,7 @@ const characterNameMap: ItemMap = {
 		war: "War Ground",
 		dig: "Dig",
 		unearth: "Unearth",
-		excavate: "Excavate"
+		excavate: "Excavate",
 	};
 
 // The timestamp of the first time a game was detected.
@@ -80,7 +80,8 @@ let gameStartTimestamp: number = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "20xx"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/logo.png",
 	};
 
 	if (data20XX) {

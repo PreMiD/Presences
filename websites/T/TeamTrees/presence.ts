@@ -1,11 +1,12 @@
 const presence = new Presence({
-		clientId: "638344004085350400"
+		clientId: "638344004085350400",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "teamtrees"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/TeamTrees/assets/logo.png",
 		},
 		currentCount = await presence.getSetting<boolean>("count");
 
@@ -21,7 +22,7 @@ presence.on("UpdateData", async () => {
 
 	presenceData.startTimestamp = browsingTimestamp;
 	presenceData.buttons = [
-		{ label: "Visit #TeamSeas", url: "https://teamSeas.org" }
+		{ label: "Visit #TeamSeas", url: "https://teamSeas.org" },
 	];
 
 	presence.setActivity(presenceData);

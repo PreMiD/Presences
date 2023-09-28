@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "956341194131116072"
+		clientId: "956341194131116072",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -24,8 +24,9 @@ function getTitleText() {
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/E/Explain%20xkcd/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		path = window.location.pathname.split("/wiki/index.php/")[1] ?? "";
 	if (path === "Main_Page") {

@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "798312419260104705"
+		clientId: "798312419260104705",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,8 +7,9 @@ let user: HTMLElement, search: HTMLElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "perp",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/P/PERPHeads/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.hostname === "perpheads.com") {
 		title = document.querySelector(
@@ -80,7 +81,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Forums, searching for:";
 			presenceData.state = search.textContent;
 
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 
 			presence.setActivity(presenceData);
 		}

@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "808762696023146578"
+		clientId: "808762696023146578",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 presence.on("UpdateData", async () => {
@@ -11,7 +11,8 @@ presence.on("UpdateData", async () => {
 			".vp-video-wrapper .vp-video video"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/V/Vimeo/assets/logo.png",
 		};
 
 	if (document.location.pathname === "/") presenceData.details = "Browsing...";
@@ -25,8 +26,9 @@ presence.on("UpdateData", async () => {
 			);
 		presenceData.details = title;
 		presenceData.state = uploader;
-		presenceData.largeImageKey = "vimeo-logo";
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/V/Vimeo/assets/logo.png";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;

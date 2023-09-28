@@ -1,23 +1,23 @@
 const presence = new Presence({
-		clientId: "937439130613350480"
+		clientId: "937439130613350480",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	pathNameLocalize = [
 		{
 			hostname: "universal", //English, India, Philipine
 			subject: "/subject",
-			question: "/question"
+			question: "/question",
 		},
 		{
 			hostname: "brainly.co.id", //Indonesia
 			subject: "/mapel",
-			question: "/tugas"
+			question: "/tugas",
 		},
 		{
 			hostname: "brainly.ro", //Romania
 			subject: "/materie",
-			question: "/tema"
-		}
+			question: "/tema",
+		},
 	];
 let pathName: { hostname: string; subject: string; question: string };
 
@@ -36,13 +36,14 @@ function setPathName() {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Viewing an unsupported page",
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/Brainly/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		page = document.location.pathname,
 		[time, buttons] = await Promise.all([
 			presence.getSetting<boolean>("time"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]);
 
 	setPathName();
@@ -59,7 +60,7 @@ presence.on("UpdateData", async () => {
 			.join(" ");
 	} else if (page.includes(pathName.question)) {
 		presenceData.details = "Reading question:";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.state = document.title.replace(
 			`- ${
 				pathName.hostname.charAt(0).toUpperCase() + pathName.hostname.slice(1)
@@ -69,8 +70,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Question",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 
 		if (
@@ -78,17 +79,17 @@ presence.on("UpdateData", async () => {
 			document.querySelector("div[role=textbox]").innerHTML !== ""
 		) {
 			presenceData.details = "Answering question:";
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 			presenceData.state =
 				document.querySelector<HTMLDivElement>("div[role=textbox]").textContent;
 		}
 	} else if (page.includes("/app/ask")) {
 		presenceData.details = "Searching for a question:";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.state =
 			document.querySelector<HTMLInputElement>("input[type=search]").value;
 	} else if (page.includes("/question/add")) {
-		presenceData.smallImageKey = "writing";
+		presenceData.smallImageKey = Assets.Writing;
 		presenceData.details = "Writing a question:";
 		presenceData.state = document.querySelector<HTMLTextAreaElement>(
 			"textarea[name=task_content]"
@@ -99,8 +100,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Profile",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else if (page.includes("/users/profile"))
 		presenceData.details = "Editing profile";
@@ -113,7 +114,7 @@ presence.on("UpdateData", async () => {
 			"div.brn-attachment-grabber-container > textarea"
 		).value !== ""
 	) {
-		presenceData.smallImageKey = "writing";
+		presenceData.smallImageKey = Assets.Writing;
 		presenceData.details = "Writing a question:";
 		presenceData.state = document.querySelector<HTMLTextAreaElement>(
 			"div.brn-attachment-grabber-container > textarea"

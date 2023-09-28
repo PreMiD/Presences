@@ -1,33 +1,45 @@
 const presence = new Presence({
-		clientId: "736620343279484959"
-	}),
-	_preStrings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
-	});
-
-// Pre-declare variable
-let radioStation = "",
+	clientId: "736620343279484959",
+});
+async function getStrings() {
+	return presence.getStrings(
+		{
+			play: "general.playing",
+			pause: "general.paused",
+			browsing: "general.browsing",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	// Pre-declare variable
+	oldLang: string = null,
+	radioStation = "",
 	startTimeStamp = Date.now();
 
 presence.on("UpdateData", async () => {
-	// code
-	const preStrings = await _preStrings,
+	const [codeChannel] = document.location.hash.split("/").slice(-1),
+		// code
 		presenceData: PresenceData = {
-			largeImageKey: "largeimage"
-		};
-
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Radiko/assets/logo.png",
+			buttons: [
+				{ label: `Listen to ${codeChannel}`, url: document.location.href },
+			],
+		},
+		[newLang, isTimeVisible] = await Promise.all([
+			presence.getSetting<string>("lang").catch(() => "en"),
+			presence.getSetting<boolean>("isTimeVisible"),
+		]);
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
 	// In Radio
 	if (
 		(document.querySelector("#stream-player") as HTMLElement).style.display ===
 		"block"
 	) {
-		const [codeChannel] = document
-			.querySelector("a.slick-slide:nth-child(1)")
-			.getAttribute("href")
-			.split("/")
-			.slice(-1);
 		// If play
 		if (document.querySelector(".icon--play-02").classList.contains("on")) {
 			// This logic make timestamp can't changed.
@@ -37,12 +49,12 @@ presence.on("UpdateData", async () => {
 			}
 
 			presenceData.details = `Listening to ${radioStation} channel.`;
-			presenceData.state = document.querySelector<HTMLElement>(
-				"a.slick-slide:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)"
+			presenceData.state = document.querySelector(
+				"#now-programs-list > h1"
 			).textContent;
 			presenceData.smallImageKey = "spiriteplay";
-			presenceData.smallImageText = preStrings.play;
-			presenceData.startTimestamp = startTimeStamp;
+			presenceData.smallImageText = strings.play;
+			presenceData.startTimestamp = isTimeVisible ? startTimeStamp : null;
 		} else {
 			// If pause
 			if (codeChannel !== "___PAUSED___") {
@@ -53,13 +65,13 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Paused.";
 			presenceData.state = `${codeChannel} channel.`;
 			presenceData.smallImageKey = "spiritepause";
-			presenceData.smallImageText = preStrings.pause;
+			presenceData.smallImageText = strings.pause;
 		}
 	} else {
 		// Idling state
 		presenceData.details = "Idling";
 		presenceData.smallImageKey = "spiriteidling";
-		presenceData.smallImageText = preStrings.browsing;
+		presenceData.smallImageText = strings.browsing;
 	}
 
 	presence.setActivity(presenceData);

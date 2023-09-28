@@ -1,7 +1,7 @@
 const presence = new Presence({ clientId: "653156362548805652" }),
 	pages: { [key: string]: string } = {
 		"/docs": "Documention",
-		"/login": "Login Page"
+		"/login": "Login Page",
 	};
 
 presence.on("UpdateData", async () => {
@@ -10,8 +10,9 @@ presence.on("UpdateData", async () => {
 			"#page-wrapper > div > div > div > div > div.panel-heading"
 		),
 		presenceData: PresenceData = {
-			largeImageKey: "ap-logo_new",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/ApertureBot/assets/logo.png",
+			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 
 	if (pages[page] || pages[page.slice(0, -1)])

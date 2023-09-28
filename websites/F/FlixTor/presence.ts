@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "616754182858342426"
+		clientId: "1001112348192423946",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let lastPlaybackState,
@@ -18,7 +18,8 @@ if (lastPlaybackState !== playback) {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Unknown page",
-			largeImageKey: "lg"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/F/FlixTor/assets/logo.png",
 		},
 		video: HTMLVideoElement = document.querySelector(
 			"#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
@@ -45,9 +46,10 @@ presence.on("UpdateData", async () => {
 			);
 		presenceData.largeImageKey = document
 			.querySelector<HTMLMetaElement>('meta[property="og:image"]')
-			.getAttribute("content");
+			.getAttribute("content")
+			.replace("https:https:", "https:");
 
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;
@@ -68,12 +70,12 @@ presence.on("UpdateData", async () => {
 						presenceData.details.length >= 30
 							? "View Now"
 							: presenceData.details,
-					url: document.location.href.split("/season/")[0]
+					url: document.location.href.split("/season/")[0],
 				},
 				{
 					label: presenceData.state,
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		} else if (!season && episode) {
 			presenceData.details = videoTitle
@@ -86,12 +88,12 @@ presence.on("UpdateData", async () => {
 						presenceData.details.length >= 30
 							? "View Now"
 							: presenceData.details,
-					url: document.location.href.split("/episode/")[0]
+					url: document.location.href.split("/episode/")[0],
 				},
 				{
 					label: presenceData.state,
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		} else {
 			presenceData.details = "Watching";
@@ -102,8 +104,8 @@ presence.on("UpdateData", async () => {
 				{
 					label:
 						presenceData.state.length >= 30 ? "Watch Now" : presenceData.state,
-					url: document.location.href
-				}
+					url: document.location.href,
+				},
 			];
 		}
 
@@ -111,7 +113,6 @@ presence.on("UpdateData", async () => {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
-
 		if (videoTitle) presence.setActivity(presenceData, !video.paused);
 	}
 });

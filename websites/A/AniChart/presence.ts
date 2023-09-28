@@ -1,20 +1,21 @@
 const presence = new Presence({
-		clientId: "795125406264066099"
-	}),
-	presenceData: PresenceData = {
-		largeImageKey: "anichart",
-		startTimestamp: Math.floor(Date.now() / 1000)
-	};
+	clientId: "795125406264066099",
+});
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AniChart/assets/logo.png",
+}
 
 presence.on("UpdateData", async () => {
+	const presenceData: PresenceData = {
+			largeImageKey: Assets.Logo,
+			startTimestamp: Math.floor(Date.now() / 1000),
+		},
+		{ pathname } = document.location;
 	switch (
-		document.location.pathname.endsWith("/") &&
-		document.location.pathname.length > 1
-			? document.location.pathname.slice(
-					0,
-					document.location.pathname.length - 1
-			  )
-			: document.location.pathname
+		pathname.endsWith("/") && pathname.length > 1
+			? pathname.slice(0, pathname.length - 1)
+			: pathname
 	) {
 		case "/airing":
 			presenceData.details = "Viewing currently airing anime";
@@ -31,12 +32,12 @@ presence.on("UpdateData", async () => {
 		default: {
 			if ((document.querySelector(".input") as HTMLInputElement)?.value) {
 				presenceData.details = "Searching anime";
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.state = (
 					document.querySelector(".input") as HTMLInputElement
 				).value;
 			} else {
-				presenceData.details = `Viewing ${document.location.pathname
+				presenceData.details = `Viewing ${pathname
 					.substring(1)
 					.split("-")
 					.join(" ")} anime`;

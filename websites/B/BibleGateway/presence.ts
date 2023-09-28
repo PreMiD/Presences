@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "958805663532859473"
+		clientId: "958805663532859473",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "icon",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/BibleGateway/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, search } = location;
 	switch (pathname) {

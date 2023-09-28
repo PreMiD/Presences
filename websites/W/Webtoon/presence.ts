@@ -1,13 +1,14 @@
 const presence: Presence = new Presence({
-		clientId: "612415911877672971"
+		clientId: "612415911877672971",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	presenceData: PresenceData = {
-		largeImageKey: "webtoon_lg",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/W/Webtoon/assets/logo.jpg",
+		startTimestamp: browsingTimestamp,
 	},
 	strings = presence.getStrings({
-		browsing: "presence.activity.browsing"
+		browsing: "general.browsing",
 	}),
 	path: string = window.location.pathname;
 let webtoon: string, chapter: string, seriesPage: string;
@@ -42,7 +43,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.smallImageKey;
 	} else if (path.includes("search")) {
 		presenceData.details = "Searching...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (path.includes("about")) {
 		presenceData.details = "Reading the about page";
 		delete presenceData.smallImageKey;

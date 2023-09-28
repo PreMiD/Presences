@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "700596580218175548"
+		clientId: "700596580218175548",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	titulo = document.title,
@@ -18,7 +18,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "axn-logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/AnimeXNovel/assets/logo.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;

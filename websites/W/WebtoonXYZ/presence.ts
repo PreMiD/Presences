@@ -1,16 +1,16 @@
 const presence = new Presence({
-		clientId: "836962986451140609"
+		clientId: "836962986451140609",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const [logo, buttons] = await Promise.all([
 			presence.getSetting<number>("logo"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
 			largeImageKey: !logo ? "logo" : "logo-v2",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location;
 
@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 		} 🔸 ${
 			document.querySelector(".c-blog__heading > .h4").textContent.split(" ")[0]
 		} results`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname === "/") presenceData.details = "Viewing the homepage";
 	else if (pathname.endsWith("/webtoons/")) {
 		presenceData.details = "Browsing all webtoons";
@@ -37,11 +37,11 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `📋 ${
 			document.querySelector(".c-blog__heading > .h4").textContent
 		}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname === "/completed-webtoons/") {
 		presenceData.details = "Browsing:";
 		presenceData.state = "Completed webtoons";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname.startsWith("/read") && pathname.indexOf("/chapter") > 0) {
 		const [title, chapter] = document
 			.querySelector("#chapter-heading")
@@ -59,13 +59,13 @@ presence.on("UpdateData", async () => {
 			: logo === 0
 			? "logo"
 			: "logo-v2";
-		presenceData.smallImageKey = "read";
+		presenceData.smallImageKey = Assets.Reading;
 		if (buttons) {
 			presenceData.buttons = [
 				{
 					label: "Read Webtoon",
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 		}
 	} else if (pathname.startsWith("/read")) {
@@ -82,8 +82,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Webtoon",
-					url: window.location.href
-				}
+					url: window.location.href,
+				},
 			];
 		}
 	} else if (pathname === "/user-settings/") {

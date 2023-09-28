@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "717795432251654200"
+		clientId: "717795432251654200",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	// This is better than having a lot of (almost) empty switch cases
@@ -23,17 +23,17 @@ const presence = new Presence({
 		"/privacy/": "Reading the privacy policy",
 		"/terms/": "Reading the ToS",
 		"/log/": "Reading an adventure log",
-		"/search/": "Searching an adventure"
+		"/search/": "Searching an adventure",
 	};
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/M/MSPFA/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 	switch (document.location.pathname) {
 		case "/stories/":
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			break;
 		case "/user/":
 			presenceData.state = `User: ${
@@ -41,19 +41,19 @@ presence.on("UpdateData", async () => {
 			}`;
 			break;
 		case "/my/profile/":
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 			break;
 		case "/my/settings/":
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 			break;
 		case "/my/stories/":
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 			break;
 		case "/my/stories/info/":
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 			break;
 		case "/my/stories/pages/":
-			presenceData.smallImageKey = "writing";
+			presenceData.smallImageKey = Assets.Writing;
 			presenceData.state =
 				document.querySelector("a#storyname.major").textContent;
 			break;
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 	) {
 		presenceData.details = "Reading an adventure";
 		presenceData.state = document.querySelector("title").textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		let { search } = document.location;
 		search = new URLSearchParams(search).get("p");
 		presenceData.smallImageText = `On page ${search}`;

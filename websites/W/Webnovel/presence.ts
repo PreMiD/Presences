@@ -1,25 +1,26 @@
 const presence = new Presence({
-		clientId: "959109938779684874"
+		clientId: "959109938779684874",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Browsing",
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Webnovel/assets/logo.png",
 		},
 		[privacy, timestamp, cover, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<number>("timestamp"),
 			presence.getSetting<boolean>("cover"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]),
 		{ pathname, hostname, href, search } = document.location,
 		[book, comic, stories, ranking] = [
 			pathname.startsWith("/book/"),
 			pathname.startsWith("/comic/"),
 			pathname.startsWith("/stories/"),
-			pathname.startsWith("/ranking/")
+			pathname.startsWith("/ranking/"),
 		];
 	switch (hostname) {
 		case "www.webnovel.com": {
@@ -36,7 +37,7 @@ presence.on("UpdateData", async () => {
 					)}`;
 					presenceData.state = activeTab[1].title;
 				}
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			} else if (book || comic) {
 				if (cover) {
 					presenceData.largeImageKey = `https://img.webnovel.com/bookcover/${
@@ -52,14 +53,14 @@ presence.on("UpdateData", async () => {
 					if (!privacy) {
 						presenceData.details = novelInfo[0].trim();
 						presenceData.state = novelInfo[1].trim();
-						presenceData.smallImageKey = "reading";
+						presenceData.smallImageKey = Assets.Reading;
 						presenceData.smallImageText = "Reading";
 						presenceData.buttons = [
 							{ label: "Read Chapter", url: document.URL },
 							{
 								label: "Read Book",
-								url: document.querySelector<HTMLAnchorElement>(".dib.ell").href
-							}
+								url: document.querySelector<HTMLAnchorElement>(".dib.ell").href,
+							},
 						];
 					}
 				} else {
@@ -85,7 +86,7 @@ presence.on("UpdateData", async () => {
 				}
 			} else if (pathname.startsWith("/search")) {
 				presenceData.details = "Searching";
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 
 				if (!privacy) {
 					presenceData.details = "Searching for:";
@@ -98,7 +99,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing History";
 			else if (pathname.startsWith("/tags")) {
 				presenceData.details = "Browsing Tags";
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				if (!privacy) {
 					presenceData.state =
 						document.querySelector<HTMLHeadingElement>("h2").textContent;
@@ -111,7 +112,7 @@ presence.on("UpdateData", async () => {
 			const params = new URLSearchParams(search);
 			if (params.has("q") && pathname === "/") {
 				presenceData.details = "Searching Forum";
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				if (!privacy) {
 					presenceData.details = "Searching Forum for";
 					presenceData.state = params.get("q");
@@ -123,7 +124,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Browsing Tags";
 			else if (pathname.startsWith("/t")) {
 				presenceData.details = "Browsing Topics";
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				if (!privacy) {
 					presenceData.state =
 						document.querySelector<HTMLHeadingElement>(
@@ -132,15 +133,15 @@ presence.on("UpdateData", async () => {
 				}
 			} else if (pathname.startsWith("/d")) {
 				presenceData.details = "Reading Discussion";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				if (!privacy) {
 					presenceData.state =
 						document.querySelector<HTMLHeadingElement>("h2").textContent;
 					presenceData.buttons = [
 						{
 							label: "View Discussion",
-							url: href.split("/").splice(0, 5).join("/")
-						}
+							url: href.split("/").splice(0, 5).join("/"),
+						},
 					];
 				}
 			} else if (pathname.startsWith("/u")) {
@@ -157,13 +158,13 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Profile",
-							url: href.split("/").splice(0, 5).join("/")
-						}
+							url: href.split("/").splice(0, 5).join("/"),
+						},
 					];
 				}
 			} else if (pathname.startsWith("/p")) {
 				presenceData.details = "Reading a Post";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				if (!privacy) {
 					presenceData.state =
 						document.querySelector<HTMLHeadingElement>(
@@ -180,7 +181,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Author's Dashboard";
 			else if (pathname.startsWith("/academy")) {
 				presenceData.details = "Writers Academy";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				if (pathname.includes("/column")) {
 					presenceData.details = "Viewing a Column";
 					if (!privacy)
@@ -202,7 +203,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing their Novel List";
 			else if (pathname.includes("/create")) {
 				presenceData.details = "Making a Novel";
-				presenceData.smallImageKey = "writing";
+				presenceData.smallImageKey = Assets.Writing;
 			}
 
 			break;

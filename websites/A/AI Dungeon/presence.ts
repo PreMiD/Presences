@@ -1,7 +1,8 @@
 const presence = new Presence({
-		clientId: "713563682722021436"
+		clientId: "713563682722021436",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let login,
 	register,
 	target: string,
@@ -51,8 +52,9 @@ const path = document.location.pathname,
 	});
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "ailogo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/AI%20Dungeon/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 	if (window.location.hostname === "aidungeon.io") {
 		presence.info("Online");
@@ -190,11 +192,11 @@ presence.on("UpdateData", async () => {
 						if (playing.textContent === "" || playing.textContent === null) {
 							presenceData.details = "Playing";
 							presenceData.state = "Reading";
-							presenceData.smallImageKey = "read";
+							presenceData.smallImageKey = Assets.Reading;
 							presenceData.smallImageText = "Reading Current Message";
 						} else {
 							presenceData.details = "Playing";
-							presenceData.smallImageKey = "play";
+							presenceData.smallImageKey = Assets.Play;
 							presenceData.smallImageText = "Playing a Game";
 							if (action.getAttribute("aria-label") === "Do") {
 								presenceData.state = `Doing: ${playing.textContent}`;
@@ -215,11 +217,11 @@ presence.on("UpdateData", async () => {
 							if (playing.textContent === "" || playing.textContent === null) {
 								presenceData.details = "Playing";
 								presenceData.state = "Reading";
-								presenceData.smallImageKey = "read";
+								presenceData.smallImageKey = Assets.Reading;
 								presenceData.smallImageText = "Reading Current Message";
 							} else {
 								presenceData.details = "Playing";
-								presenceData.smallImageKey = "play";
+								presenceData.smallImageKey = Assets.Play;
 								presenceData.smallImageText = "Playing a Game";
 								action = document.querySelector(
 									"#root > div > div > div > div > div:nth-child(4) > div > div.css-1dbjc4n.r-13awgt0 > div > div:nth-child(2) > div.css-1dbjc4n.r-18u37iz.r-13qz1uu > div.css-1dbjc4n.r-13awgt0.r-18u37iz > div > div"

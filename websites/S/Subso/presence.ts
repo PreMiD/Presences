@@ -2,7 +2,7 @@ const presence = new Presence({ clientId: "870727282405306368" });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Subso/assets/logo.png",
 	};
 
 	switch (window.location.host) {
@@ -63,8 +63,8 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: "View Creator",
-									url: window.location.href
-								}
+									url: window.location.href,
+								},
 							];
 						}
 					} else if (window.location.pathname.startsWith("/settings/")) {

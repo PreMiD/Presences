@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "943391951611396106"
+	clientId: "943391951611396106",
 });
 
 let courseName: HTMLElement,
@@ -10,7 +10,8 @@ presence.on("UpdateData", async () => {
 	const info = await presence.getSetting<boolean>("eSI"),
 		classInfo = await presence.getSetting<boolean>("eCI"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/E/Edgenuity/assets/logo.png",
 		};
 	if (info) {
 		if (document.location.pathname === "/")

@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "735229766701154357"
+		clientId: "735229766701154357",
 	}),
 	strings = presence.getStrings({
-		browse: "presence.activity.browsing",
-		search: "presence.activity.searching"
+		browse: "general.browsing",
+		search: "general.searching",
 	}),
 	getElement = (query: string): string | undefined => {
 		return document.querySelector(query)?.textContent;
@@ -15,38 +15,38 @@ let elapsed = Math.floor(Date.now() / 1000),
 const statics = {
 	"/pages/global/pagegone.jsf/": {
 		details: "404",
-		state: "Not Found"
+		state: "Not Found",
 	},
 	"/page/login/": {
-		details: "Logging In..."
+		details: "Logging In...",
 	},
 	"/page/register/": {
-		details: "Registering..."
+		details: "Registering...",
 	},
 	"/page/about/": {
 		details: "Viewing Page...",
-		state: "About"
+		state: "About",
 	},
 	"/page/guide/": {
 		details: "Viewing Page...",
-		state: "User Guide"
+		state: "User Guide",
 	},
 	"/page/privacy/": {
 		details: "Viewing Page...",
-		state: "Privacy Policy"
+		state: "Privacy Policy",
 	},
 	"/page/developer/": {
 		details: "Viewing Page...",
-		state: "Developer Resources"
+		state: "Developer Resources",
 	},
 	"/Top/": {
 		details: "Viewing Page...",
-		state: "Top Hardware"
+		state: "Top Hardware",
 	},
 	"/Software/": {
 		details: "Viewing Page...",
-		state: "PC Software"
-	}
+		state: "PC Software",
+	},
 };
 
 presence.on("UpdateData", async () => {
@@ -56,8 +56,9 @@ presence.on("UpdateData", async () => {
 		showTimestamps = await presence.getSetting<boolean>("timestamp");
 
 	let presenceData: PresenceData = {
-		largeImageKey: "userbenchmark",
-		startTimestamp: elapsed
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/logo.png",
+		startTimestamp: elapsed,
 	};
 
 	if (href !== prevUrl) {
@@ -102,7 +103,7 @@ presence.on("UpdateData", async () => {
 			"Grand Theft Auto 5",
 			"Overwatch",
 			"PlayerUnknown's Battlegrounds",
-			"Fortnite"
+			"Fortnite",
 		][Array.from(activeBtn.parentNode.children).indexOf(activeBtn)];
 	}
 
@@ -168,11 +169,11 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details) {
 		if (presenceData.details.match("(Browsing|Viewing)")) {
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = (await strings).browse;
 		}
 		if (presenceData.details.match("(Searching)")) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = (await strings).search;
 		}
 		if (!showTimestamps) {

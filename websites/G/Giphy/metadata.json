@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Nekolen",
+		"id": "270125856679002113"
+	},
+	"service": "Giphy",
+	"description": {
+		"en": "Giphy is a Gif search and creation engine.",
+		"ro": "Giphy este un motor de căutare și creare Gif.",
+		"pt_BR": "Giphy é um mecanismo de pesquisa e criação de GIF.",
+		"fr": "Giphy est un moteur de recherche et création de GIF.",
+		"uk_UA": "Giphy - це система пошуку та створення GIF.",
+		"nl": "Giphy is een GIF-zoek- en creatiesysteem.",
+		"vi_VN": "Giphy là công cụ tìm kiếm và tạo Gif."
+	},
+	"url": "giphy.com",
+	"version": "1.2.20",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Giphy/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Giphy/assets/thumbnail.png",
+	"color": "#00FF00",
+	"category": "other",
+	"tags": [
+		"gif",
+		"editor",
+		"creator"
+	]
+}

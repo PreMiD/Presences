@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "656152542429839380"
+		clientId: "656152542429839380",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Altdentifier/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "altdentifier.com") {
@@ -20,17 +21,17 @@ presence.on("UpdateData", () => {
 			}
 		} else if (document.location.pathname.includes("/blog")) {
 			presenceData.details = "Reading a blog";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 			if (document.location.pathname.includes("/blog/")) {
 				presenceData.details = "Reading a blog article:";
 				presenceData.state = document
 					.querySelector("body > h1")
 					.textContent.toUpperCase();
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 			}
 		} else if (document.location.pathname.includes("/faq")) {
 			presenceData.details = "Reading a FAQ";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/commands")) {
 			presenceData.details = "Viewing a page:";
 			presenceData.state = "Commands";

@@ -4,10 +4,10 @@
 */
 
 const presence = new Presence({
-		clientId: "613417749489778689"
+		clientId: "613417749489778689",
 	}),
 	germanPresence = new Presence({
-		clientId: "613418400042975329"
+		clientId: "613418400042975329",
 	});
 
 presence.on("UpdateData", async () => {
@@ -28,7 +28,8 @@ presence.on("UpdateData", async () => {
 		presence.setActivity({
 			details: "Viewing a page...",
 			state: page,
-			largeImageKey: "lg-twiki"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/Toradora%20Wikia/assets/logo.png",
 		});
 	}
 	germanPresence.on("UpdateData", async () => {
@@ -49,7 +50,8 @@ presence.on("UpdateData", async () => {
 			germanPresence.setActivity({
 				details: "Schaut eine Seite an...",
 				state: page,
-				largeImageKey: "lg-twiki"
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/T/Toradora%20Wikia/assets/logo.png",
 			});
 		}
 	});

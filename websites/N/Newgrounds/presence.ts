@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "779342189884997633"
+		clientId: "779342189884997633",
 	}),
 	getTime = (list: string[]): number => {
 		let ret = 0;
@@ -14,7 +14,7 @@ const presence = new Presence({
 			Math.floor(startTime / 1000),
 			Math.floor(startTime / 1000) -
 				getTime(audioTime.split(":").reverse()) +
-				getTime(audioDuration.split(":").reverse())
+				getTime(audioDuration.split(":").reverse()),
 		];
 	};
 
@@ -23,7 +23,8 @@ let lastGameChange: number = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "ng"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/N/Newgrounds/assets/logo.jpeg",
 		},
 		itemName = document.querySelector('[itemprop="name"]')
 			? document.querySelector('[itemprop="name"]').textContent
@@ -42,8 +43,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Profile",
-						url: location.origin
-					}
+						url: location.origin,
+					},
 				];
 			}
 		}
@@ -88,8 +89,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Listen",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			}
@@ -122,8 +123,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			}
@@ -145,8 +146,8 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: "Watch",
-									url: document.URL
-								}
+									url: document.URL,
+								},
 							];
 						}
 					}
@@ -189,8 +190,8 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: "Play",
-									url: document.URL
-								}
+									url: document.URL,
+								},
 							];
 						}
 					}
@@ -226,8 +227,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Topic",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			}
@@ -248,8 +249,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Collection",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			}
@@ -276,8 +277,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Playlist",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 			}
@@ -304,7 +305,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = `Searching for ${
 			document.querySelector(".current").textContent
 		}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 		if (await presence.getSetting<boolean>("showsearchterm")) {
 			const query = new URLSearchParams(document.location.search).get("terms");

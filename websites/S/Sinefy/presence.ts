@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "817552908991594530"
+		clientId: "817552908991594530",
 	}),
 	strings = presence.getStrings(
 		{
 			play: "general.playing",
-			pause: "general.paused"
+			pause: "general.paused",
 		},
 		"tr"
 	),
@@ -27,7 +27,7 @@ const presence = new Presence({
 		"/istek": "İstek Yap",
 		"/profil/ayarlar": "Hesap Ayarları",
 		"/app": "Mobil Uygulama",
-		"/netflix-filmleri-izle": "Netflix Filmleri"
+		"/netflix-filmleri-izle": "Netflix Filmleri",
 	};
 
 interface iframeData {
@@ -45,11 +45,12 @@ const startTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
 	const page = location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey: "s-logo",
-			startTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Sinefy/assets/logo.jpg",
+			startTimestamp,
 		},
 		settings = {
-			buttons: await presence.getSetting<boolean>("buttons")
+			buttons: await presence.getSetting<boolean>("buttons"),
 		};
 
 	if (page.includes("/izle/")) {
@@ -82,12 +83,12 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Filmi/Diziyi İzle",
-						url: location.href
-					}
+						url: location.href,
+					},
 				];
 			}
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;
@@ -111,8 +112,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Kullanıcıyı Görüntüle",
-					url: location.href
-				}
+					url: location.href,
+				},
 			];
 		}
 
@@ -127,8 +128,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Oyuncuyu Görüntüle",
-					url: location.href
-				}
+					url: location.href,
+				},
 			];
 		}
 
@@ -143,8 +144,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Gönderiyi Görüntüle",
-					url: location.href
-				}
+					url: location.href,
+				},
 			];
 		}
 

@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "WilloIzCitron",
+		"id": "735410445409845251"
+	},
+	"service": "Tokopedia",
+	"description": {
+		"en": "The Indonesian E-Commerce Site",
+		"nl": "De Indonesische e-commerce-site"
+	},
+	"url": [
+		"www.tokopedia.com",
+		"seller.tokopedia.com"
+	],
+	"version": "1.1.7",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tokopedia/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tokopedia/assets/thumbnail.png",
+	"color": "#90ee90",
+	"category": "other",
+	"tags": [
+		"e-commerce",
+		"shopping"
+	]
+}

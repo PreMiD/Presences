@@ -1,13 +1,13 @@
 const presence = new Presence({
-		clientId: "812656134120931330"
+		clientId: "812656134120931330",
 	}),
 	getStrings = async () =>
 		presence.getStrings(
 			{
 				play: "general.playing",
-				pause: "general.paused"
+				pause: "general.paused",
 			},
-			await presence.getSetting<string>("lang")
+			await presence.getSetting<string>("lang").catch(() => "en")
 		),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -16,9 +16,10 @@ let oldLang: string = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "radiooooo_logo",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Radiooooo/assets/logo.png",
 			details: "Idling",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		audio = document.querySelector("audio");
 
@@ -33,7 +34,7 @@ presence.on("UpdateData", async () => {
 			[songDetails, songState, newLang] = await Promise.all([
 				presence.getSetting<string>("song1"),
 				presence.getSetting<string>("song2"),
-				presence.getSetting<string>("lang")
+				presence.getSetting<string>("lang").catch(() => "en"),
 			]);
 
 		if (oldLang !== newLang || !strings) {
@@ -41,7 +42,7 @@ presence.on("UpdateData", async () => {
 			strings = await getStrings();
 		}
 
-		presenceData.smallImageKey = paused ? "pause" : "play";
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused ? strings.pause : strings.play;
 
 		presenceData.details = songDetails

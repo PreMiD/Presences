@@ -1,7 +1,8 @@
 const presence = new Presence({
-		clientId: "767140375785111562"
+		clientId: "767140375785111562",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let currentTime: number, duration: number, paused: boolean;
 
 presence.on(
@@ -18,8 +19,9 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lolesports",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/L/LoL%20Esports/assets/logo.jpg",
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;
 
@@ -29,7 +31,9 @@ presence.on("UpdateData", async () => {
 	else if (path.includes("/schedule"))
 		presenceData.details = "Browsing the schedule";
 	else if (path.includes("/live/")) {
-		presenceData.details = "Watching Live";
+		if (path.includes("/worlds")) presenceData.details = "Watching Worlds";
+		else presenceData.details = "Watching Live";
+
 		presenceData.state = document
 			.querySelector("div.teams")
 			.textContent.replace("VS", " vs ");
@@ -37,14 +41,14 @@ presence.on("UpdateData", async () => {
 	} else if (path.includes("/article/")) {
 		presenceData.details = "Reading news article:";
 		presenceData.state = document.querySelector("div.title").textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (path.includes("/vods/")) {
 		presenceData.details = "VODS";
 		presenceData.state = "Looking at past matches";
 	} else if (path.includes("/vod/")) {
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
-		presenceData.smallImageKey = paused ? "pause" : "play";
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		if (paused) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
@@ -61,8 +65,8 @@ presence.on("UpdateData", async () => {
 	presenceData.buttons = [
 		{
 			label: "Watch Broadcast",
-			url: document.URL
-		}
+			url: document.URL,
+		},
 	];
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

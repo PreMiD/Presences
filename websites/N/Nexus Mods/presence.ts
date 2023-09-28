@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "683438933841018928"
+	clientId: "683438933841018928",
 });
 
 let presenceData: PresenceData;
@@ -914,7 +914,7 @@ function isValidGame(name: string): boolean {
 		"wolcenlordsofmayhem",
 		"metalunit",
 		"plagueincevolved",
-		"mountandblade2bannerlord"
+		"mountandblade2bannerlord",
 	];
 	return validGames.includes(name);
 }
@@ -978,7 +978,7 @@ function getCategorizedPresenceData(
 	) {
 		// Example: /game/mods/add
 		presenceData.details = `${gameTitle} - Uploading a new ${typeSingle}`;
-		presenceData.smallImageKey = "writing";
+		presenceData.smallImageKey = Assets.Writing;
 	} else if (
 		path.length > 2 &&
 		path[0] !== "" &&
@@ -1015,9 +1015,10 @@ const browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
 	const path = window.location.pathname.split("/").slice(1);
 	presenceData = {
-		largeImageKey: "logo",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/N/Nexus%20Mods/assets/logo.png",
 		smallImageKey: "reading",
-		startTimestamp: browsingTimestamp
+		startTimestamp: browsingTimestamp,
 	};
 
 	// Main entry point
@@ -1168,7 +1169,7 @@ presence.on("UpdateData", () => {
 					case "mods": {
 						if (path.length > 1 && path[1] === "add") {
 							presenceData.details = "Uploading a new mod";
-							presenceData.smallImageKey = "writing";
+							presenceData.smallImageKey = Assets.Writing;
 						} else presenceData.details = "Browsing mods";
 
 						break;
@@ -1180,7 +1181,7 @@ presence.on("UpdateData", () => {
 					case "images": {
 						if (path.length > 1 && path[1] === "add") {
 							presenceData.details = "Uploading a new image";
-							presenceData.smallImageKey = "writing";
+							presenceData.smallImageKey = Assets.Writing;
 						} else presenceData.details = "Browsing images";
 
 						break;
@@ -1189,7 +1190,7 @@ presence.on("UpdateData", () => {
 					case "videos": {
 						if (path.length > 1 && path[1] === "add") {
 							presenceData.details = "Uploading a new video";
-							presenceData.smallImageKey = "writing";
+							presenceData.smallImageKey = Assets.Writing;
 						} else presenceData.details = "Browsing videos";
 
 						break;

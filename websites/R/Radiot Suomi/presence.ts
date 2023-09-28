@@ -1,11 +1,12 @@
 const presence = new Presence({
-		clientId: "749977202275123362"
+		clientId: "749977202275123362",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "radiot"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/R/Radiot%20Suomi/assets/logo.png",
 	};
 	if (document.location.hostname === "www.radio-suomi.com") {
 		if (document.location.pathname === "/") {

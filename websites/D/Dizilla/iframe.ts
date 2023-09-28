@@ -7,7 +7,7 @@ iframe.on("UpdateData", () => {
 		return iframe.send({
 			duration: video.duration,
 			currentTime: video.currentTime,
-			paused: video.paused
+			paused: video.paused,
 		});
 	}
 });

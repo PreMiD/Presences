@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "779118675491815434"
+	clientId: "779118675491815434",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "bonkleagues"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/B/Bonk%20Leagues/assets/logo.png",
 	};
 
 	if (document.location.pathname.startsWith("/skins.html")) {

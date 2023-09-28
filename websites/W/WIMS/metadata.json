@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Migush",
+		"id": "123859829453357056"
+	},
+	"service": "WIMS",
+	"description": {
+		"en": "This presence is for WIMS' default theme. WIMS is a multipurpose server-project designed for mathematical exercises. Get it now to show people how hard you're working on your assignments.",
+		"ro": "Această prezență este pentru tema implicită a WIMS. WIMS este un server-proiect polivalent conceput pentru exerciții matematice. Obțineți-l acum pentru a le arăta oamenilor cât de greu lucrați la sarcinile dvs.",
+		"pt_BR": "Essa presença é para o tema padrão do WIMS. WIMS é um servidor de projeto de propósito geral projetado para exercícios matemáticos. Obtenha-o agora para mostrar para as pessoas o quão difícil você está trabalhando em sua tarefa matemática.",
+		"fr": "Cette présence est pour le thème par défaut de WIMS. WIMS est un projet de serveur polyvalent conçu pour des exercices mathématiques. Obtenez-le maintenant pour montrer aux gens à quel point vous travaillez dur sur vos devoirs.",
+		"uk_UA": "Ця присутність призначена для теми WIMS за замовчуванням. WIMS - це багатоцільовий серверний проект, призначений для математичних вправ. Поставте це прямо зараз, щоб показати людям, як ви наполегливо працюєте над своїми завданнями.",
+		"nl": "Deze presence is alleen voor WIMS' standaard thema. WIMS is een multifunctioneel server-project ontworpen voor wiskundige oefeningen. Download het nu om mensen te laten zien hoe hard je aan je opdrachten werkt.",
+		"ga_IE": "Tá an láithreacht seo do théama réamhshocraithe WIMS. Is tionscadal freastalaí ilchuspóireach é WIMS atá deartha le haghaidh cleachtaí matamaitice. Faigh é anois chun a thaispeáint do dhaoine cé chomh deacair agus atá tú ag obair ar do thascanna."
+	},
+	"url": [
+		"wims-schaersvoorde.nl",
+		"85.148.206.56"
+	],
+	"version": "2.3.23",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WIMS/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WIMS/assets/thumbnail.png",
+	"color": "#f4f8d7",
+	"category": "other",
+	"tags": [
+		"general",
+		"school"
+	]
+}

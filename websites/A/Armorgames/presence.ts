@@ -1,136 +1,84 @@
 const presence = new Presence({
-		clientId: "827910536049852488"
+		clientId: "827910536049852488",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-let search: HTMLInputElement, title: HTMLElement;
+
+let search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Armorgames/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
-		page = window.location.pathname;
-	if (page === "/") {
-		search = document.querySelector("#search-input");
-		if (!search || search.textContent === "")
-			presenceData.details = "Viewing The Homepage";
-		else {
-			presenceData.details = "Searching:";
-			presenceData.state = search.value;
-			presenceData.smallImageKey = "searching";
-		}
-	} else if (page.includes("/category/")) {
-		if (page === "/category/all")
+		{ pathname, href } = window.location,
+		buttons = await presence.getSetting("buttons");
+	search = document.querySelector<HTMLInputElement>('[id="search-input"]');
+	if (search?.value || pathname.includes("/search")) {
+		presenceData.details = "Searching for";
+		if (
+			document.querySelector<HTMLInputElement>('[class="input-xlarge"]')?.value
+		) {
+			presenceData.state = document.querySelector<HTMLInputElement>(
+				'[class="input-xlarge"]'
+			).value;
+		} else if (search?.value) presenceData.state = search?.value;
+		else delete presenceData.details;
+
+		presenceData.smallImageKey = Assets.Search;
+	} else if (pathname === "/") presenceData.details = "Viewing the Home page";
+	else if (pathname.includes("/category/")) {
+		if (pathname === "/category/all")
 			presenceData.details = "Viewing All Categories";
 		else {
-			title = document.querySelector(
+			presenceData.details = "Viewing Category";
+			presenceData.state = document.querySelector(
 				"#content-canvas > div.cap > div > h2 > a > span"
-			);
-			presenceData.details = "Viewing Category:";
-			presenceData.state = title.textContent;
-			presenceData.buttons = [
-				{ label: "View Category", url: window.location.href }
-			];
+			).textContent;
+			presenceData.buttons = [{ label: "View Category", url: href }];
 		}
-	} else if (page === "/community") presenceData.details = "Viewing the forums";
-	else if (page.includes("/forum/")) {
-		title = document.querySelector("#content-canvas > main > h1");
-		presenceData.details = "Viewing Forum:";
-		presenceData.state = title.textContent.replace("Forums → ", "");
-		presenceData.buttons = [{ label: "View Forum", url: window.location.href }];
-	} else if (page.includes("thread")) {
-		title = document.querySelector("#thread-title");
-		presenceData.details = "Reading Forum Thread:";
-		presenceData.state = title.textContent;
-		presenceData.buttons = [
-			{ label: "View Thread", url: window.location.href }
-		];
-	} else if (page.includes("/friends/")) {
-		title = document.querySelector("#main > h2");
-		if (title.textContent === "Your Friends") {
-			presenceData.details = "Viewing their friends";
-			presenceData.buttons = [
-				{ label: "View Friends", url: window.location.href }
-			];
-		} else {
-			presenceData.details = "Viewing the friends of:";
-			presenceData.state = title.textContent;
-			presenceData.buttons = [
-				{ label: "View Friends", url: window.location.href }
-			];
-		}
-	} else if (page.includes("/user/")) {
-		title = document.querySelector("#user-data > h1");
-		presenceData.details = "Viewing the profile of:";
-		presenceData.state = title.textContent;
-		presenceData.buttons = [
-			{ label: "View Profile", url: window.location.href }
-		];
-	} else if (page.includes("/author/")) {
-		title = document.querySelector("#categorylisting > h2 > a");
-		presenceData.details = "Viewing Games Made By:";
-		presenceData.state = title.textContent;
-		presenceData.buttons = [
-			{ label: "View Profile", url: window.location.href }
-		];
-	} else if (page === "/register" || page === "/register/")
+	} else if (pathname === "/community")
+		presenceData.details = "Viewing the forums";
+	else if (pathname.includes("/forum/")) {
+		presenceData.details = "Viewing forum";
+		presenceData.state = document
+			.querySelector("#content-canvas > main > h1")
+			.textContent.replace("Forums → ", "");
+		presenceData.buttons = [{ label: "View Forum", url: href }];
+	} else if (pathname.includes("thread")) {
+		presenceData.details = "Reading a forum thread";
+		presenceData.state = document.querySelector("#thread-title").textContent;
+		presenceData.buttons = [{ label: "View Thread", url: href }];
+	} else if (pathname.includes("/user/")) {
+		presenceData.details = "Viewing a user's profile";
+		presenceData.state = document.querySelector("#user-data > h1").textContent;
+		presenceData.buttons = [{ label: "View Profile", url: href }];
+	} else if (pathname.includes("/author/")) {
+		presenceData.details = "Viewing games created by";
+		presenceData.state = document.querySelector(
+			"#categorylisting > h2 > a"
+		).textContent;
+		presenceData.buttons = [{ label: "View Profile", url: href }];
+	} else if (pathname.includes("/register"))
 		presenceData.details = "Registering";
-	else if (page.includes("/settings")) {
-		presenceData.details = "Viewing:";
-		switch (page) {
-			case "/settings/general": {
-				presenceData.state = "General Settings";
-				break;
-			}
-			case "/settings/friends": {
-				presenceData.state = "Their Friends";
-				break;
-			}
-			case "/settings/quests": {
-				presenceData.state = "Quests";
-				break;
-			}
-			case "/settings/favs": {
-				presenceData.state = "Favs";
-				break;
-			}
-			case "/settings/contact": {
-				presenceData.state = "Contact Settings";
-				break;
-			}
-			case "/settings/accounts": {
-				presenceData.state = "Soicial Settings";
-				break;
-			}
-			case "/settings/purchases": {
-				presenceData.state = "My Purchases";
-				break;
-			}
-			case "/settings/password":
-				{
-					presenceData.state = "Password Settings";
-					// No default
-				}
-				break;
-		}
-	} else if (page.includes("/games/")) {
-		title = document.querySelector(
-			"#content-canvas > section.game-header.clearfix > h1"
-		);
-		presenceData.details = "Browsing:";
+	else if (pathname.includes("/settings")) {
+		presenceData.details = "Viewing";
+		presenceData.state = `${
+			document.querySelector('[class="active"]').textContent
+		} settings`;
+	} else if (pathname.includes("/games/")) {
+		presenceData.details = "Browsing";
 		presenceData.state = "All Games";
-		presenceData.buttons = [
-			{ label: "Browse Games", url: window.location.href }
-		];
-	} else if (page.includes("game")) {
-		title = document.querySelector(
+		presenceData.buttons = [{ label: "Browse Games", url: href }];
+	} else if (pathname.includes("game")) {
+		presenceData.details = "Playing";
+		presenceData.state = document.querySelector(
 			"#content-canvas > section.game-header.clearfix > h1"
-		);
-		presenceData.details = "Playing:";
-		presenceData.state = title.textContent;
-		presenceData.buttons = [{ label: "Play Game", url: window.location.href }];
+		).textContent;
+		presenceData.buttons = [{ label: "Play Game", url: href }];
 	} else presenceData.details = "Page Not Found";
 
+	if (!buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

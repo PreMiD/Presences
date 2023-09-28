@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "706574162331697163"
+	clientId: "706574162331697163",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/MixMods/assets/logo.png",
 	};
 
 	if (document.location.pathname === "/") {

@@ -1,11 +1,12 @@
 const presence = new Presence({
-		clientId: "704756386860499089"
+		clientId: "704756386860499089",
 	}),
 	time = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "championgg"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/C/Championgg/assets/logo.png",
 		},
 		path = document.location.pathname.toLowerCase();
 	if (path === "/") {

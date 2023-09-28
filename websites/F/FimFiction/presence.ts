@@ -1,13 +1,15 @@
 const presence = new Presence({
-		clientId: "642719342609432586"
+		clientId: "642719342609432586",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let title: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "ff",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/F/FimFiction/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "www.fimfiction.net") {
@@ -22,11 +24,11 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `Chapter: ${
 				document.querySelector("#chapter_title").textContent
 			}`;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/story/")) {
 			presenceData.details = "Viewing story:";
 			presenceData.state = document.querySelector(".story_name").textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/user/")) {
 			presenceData.details = "Viewing user:";
 			presenceData.state = document.querySelector(
@@ -47,7 +49,7 @@ presence.on("UpdateData", async () => {
 					"body > div.body-layout > div.body_container > div:nth-child(4) > div > div.content.mobile-no-margin > div > div.left > div > div.content_box.blog-post-content-box > h1 > span > a"
 				);
 			presenceData.state = title.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/news/story-reviews"))
 			presenceData.details = "Viewing story revies";
 		else if (document.location.pathname.includes("/group/")) {

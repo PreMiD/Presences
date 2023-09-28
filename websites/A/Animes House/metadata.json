@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Nanashin",
+		"id": "330030557457022986"
+	},
+	"service": "Animes House",
+	"description": {
+		"en": "One of the most confortable brazilian website for watch animes.",
+		"pt_BR": "Um dos sites brasileiros mais confortáveis para assistir animes.",
+		"pt": "Um dos sites brasileiros mais confortáveis para assistir animes.",
+		"ga_IE": "Ceann de na suíomhanna Gréasáin Brasaíle is compordaí chun féachaint ar anime.",
+		"nl": "Een van de meest comfortabele Braziliaanse websites om anime te bekijken",
+		"vi_VN": "Một trong những trang xem anime thoải mái nhất Brazil."
+	},
+	"url": "animeshouse.net",
+	"version": "1.0.25",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20House/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20House/assets/thumbnail.png",
+	"color": "#079ac7",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"animes",
+		"animeshouse"
+	],
+	"iframe": true,
+	"iFrameRegExp": ".*"
+}

@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "691867169251655758"
+	clientId: "691867169251655758",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/E/Emojipedia/assets/logo.png",
 	};
 
 	if (
@@ -38,7 +39,7 @@ presence.on("UpdateData", () => {
 				"https://emojipedia.org/activity",
 				"https://emojipedia.org/travel-places",
 				"https://emojipedia.org/symbols",
-				"https://emojipedia.org/flags"
+				"https://emojipedia.org/flags",
 			],
 			eventURLs = [
 				"https://emojipedia.org/australia-day",
@@ -82,7 +83,7 @@ presence.on("UpdateData", () => {
 				"https://emojipedia.org/winter",
 				"https://emojipedia.org/winter-olympics",
 				"https://emojipedia.org/world-cup",
-				"https://emojipedia.org/world-emoji-day"
+				"https://emojipedia.org/world-emoji-day",
 			];
 
 		let bypass = false,

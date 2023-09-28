@@ -1,0 +1,40 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Faelayis",
+		"id": "328731868096888833"
+	},
+	"service": "AnimesOnline",
+	"description": {
+		"en": "Animes Online in FULLHD, HD and SD, choose the anime of your choice and watch it subtitled or dubbed! Join now it's free!",
+		"pt_BR": "Animes Online em FULLHD, HD e SD, escolha o anime de sua preferencia e assista legendado ou dublado! Acesse agora é gratuito!",
+		"vi_VN": "Xem anime trực tuyến với chất lượng FULLHD, HD và SD, chọn anime của bạn và xem với phụ đề hoặc thuyết minh! Tham gia hoàn toàn miễn phí!"
+	},
+	"url": "animesonline.org",
+	"version": "1.0.19",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimesOnline/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimesOnline/assets/thumbnail.jpg",
+	"color": "#e74c3c",
+	"category": "anime",
+	"tags": [
+		"animesonline",
+		"videos",
+		"anime"
+	],
+	"iframe": true,
+	"iFrameRegExp": ".*",
+	"settings": [
+		{
+			"id": "timestamps",
+			"title": "Show timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}

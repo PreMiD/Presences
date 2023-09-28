@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "641409342566039558"
+		clientId: "641409342566039558",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "ml",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/Manga%20Livre/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "mangalivre.net") {
@@ -25,21 +26,22 @@ presence.on("UpdateData", async () => {
 				document.querySelector(".page-navigation > span > em:nth-child(1)")
 					.textContent
 			}`;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/manga/")) {
 			presenceData.details = "Viewing the manga:";
-			presenceData.state =
-				document.querySelector(".series-title > h1").textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.state = document.querySelector(
+				"#series-data > .series-info > .series-title > h1"
+			).textContent;
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/lista-de-mangas")) {
 			presenceData.details = "Viewing manga list";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/lista-de-categorias")) {
 			presenceData.details = "Viewing category list";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/grupos")) {
 			presenceData.details = "Viewing group list";
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else if (document.location.pathname.includes("/scanlator/")) {
 			presenceData.details = "Viewing group:";
 			presenceData.state = document.querySelector(".series-title").textContent;

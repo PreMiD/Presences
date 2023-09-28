@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "729035228324298852" // CLIENT ID FOR YOUR PRESENCE
+		clientId: "729035228324298852", // CLIENT ID FOR YOUR PRESENCE
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,8 +7,9 @@ let item: HTMLElement, user: HTMLElement, title: HTMLElement | string | Element;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "labymod",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/L/LabyMod/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 	switch (document.location.hostname) {
 		case "www.labymod.net": {

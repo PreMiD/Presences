@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "846385772688834591"
+	clientId: "846385772688834591",
 });
 
 interface interfaceMapping {
@@ -43,7 +43,7 @@ const boardTypeMapping: interfaceMapping = {
 		BlockHistory: "View Block History",
 		RandomPage: "View Random Page",
 		Upload: "Upload file",
-		License: "View License"
+		License: "View License",
 	},
 	// /member/(action)
 	validateMembershipUrl = /\/member\/(.+)/,
@@ -58,7 +58,7 @@ const boardTypeMapping: interfaceMapping = {
 		// eslint-disable-next-line camelcase
 		change_password: "Change Password",
 		// eslint-disable-next-line camelcase
-		activate_otp: "Activate OTP"
+		activate_otp: "Activate OTP",
 	},
 	// /RecentChanges?logtype=(search)
 	changesMapping: interfaceMapping = {
@@ -66,7 +66,7 @@ const boardTypeMapping: interfaceMapping = {
 		create: "Created Documents",
 		delete: "Deleted Documents",
 		move: "Moved Documents",
-		revert: "Reverted Documents"
+		revert: "Reverted Documents",
 	},
 	// /RecentDiscuss?logtype=(search)
 	discussMapping: interfaceMapping = {
@@ -83,7 +83,7 @@ const boardTypeMapping: interfaceMapping = {
 		// eslint-disable-next-line camelcase
 		closed_editrequest: "Closed Edit Request",
 		// eslint-disable-next-line camelcase
-		old_editrequest: "Old Edit Request"
+		old_editrequest: "Old Edit Request",
 	},
 	// /contribution/(type)/(username)/(contributeType)
 	validateContributeUrl = /\/contribution\/(.+)\/(.+)\/(.+)/;
@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
 	 * Setting Details & State
 	 *
 	 */
-	presenceData.details = !details ? "Unknown Action" : details;
+	presenceData.details = details ?? "Unknown Action";
 
 	let page: RegExpExecArray | string = validateContributeUrl.exec(path);
 	/* View Contribute */
@@ -150,7 +150,7 @@ presence.on("UpdateData", async () => {
 
 	if (action === "w") {
 		presenceData.buttons = [
-			{ label: "View Page", url: document.location.href }
+			{ label: "View Page", url: document.location.href },
 		];
 	}
 	if (page) {

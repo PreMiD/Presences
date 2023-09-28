@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "719784356725653504"
+	clientId: "719784356725653504",
 });
 
 interface QuizletData {
@@ -21,7 +21,8 @@ let qzData: QuizletData = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "quizlet"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/Q/Quizlet/assets/logo.png",
 		},
 		buttons = await presence.getSetting<boolean>("buttons");
 
@@ -45,8 +46,8 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Profile",
-							url: document.URL
-						}
+							url: document.URL,
+						},
 					];
 				}
 				actionTimestamp = null;
@@ -57,7 +58,7 @@ presence.on("UpdateData", async () => {
 				actionTimestamp = null;
 				break;
 			case "Search":
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.smallImageText = "Searching";
 				presenceData.details = "Searching";
 				presenceData.state = qzData.searchLayer.search_term;
@@ -73,8 +74,8 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: "View Set",
-									url: document.URL
-								}
+									url: document.URL,
+								},
 							];
 						}
 						break;
@@ -128,7 +129,7 @@ presence.on("UpdateData", async () => {
 				break;
 			case "Learn": // Set > Write
 				actionTimestamp ??= Date.now();
-				presenceData.smallImageKey = "write";
+				presenceData.smallImageKey = Assets.Writing;
 				presenceData.smallImageText = "Writing";
 				presenceData.details = "Writing";
 				presenceData.state = `on ${qzData.layer.studyableTitle}`;

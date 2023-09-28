@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "819942708604174376"
+		clientId: "819942708604174376",
 	}),
 	startTime = Math.floor(Date.now() / 1000);
 
@@ -13,10 +13,11 @@ presence.on("UpdateData", async () => {
 	SouthParkData ??= await presence.getPageletiable<Data>("__DATA__");
 
 	let presenceData: PresenceData = {
-		largeImageKey: "south_park_logo",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/South%20Park/assets/logo.jpg",
 		details: "Browsing...",
 		smallImageKey: "reading",
-		startTimestamp: startTime
+		startTimestamp: startTime,
 	};
 
 	if (path.includes("/episodes/") || path.includes("/episodios/")) {
@@ -31,7 +32,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `S${season}:E${episode} ${EpTitle}`;
 
 			presenceData.smallImageKey =
-				video.paused || isNaN(video.duration) ? "pause" : "play";
+				video.paused || isNaN(video.duration) ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText =
 				video.paused || isNaN(video.duration) ? "Paused" : "Playing";
 
@@ -52,8 +53,8 @@ presence.on("UpdateData", async () => {
 						path.includes("/episodios/")
 							? "https://www.southpark.lat/episodios"
 							: "https://www.southparkstudios.com/episodes"
-					}/${document.location.pathname.split("/")[2]}`
-				}
+					}/${document.location.pathname.split("/")[2]}`,
+				},
 			];
 
 			if (video.paused || isNaN(video.duration)) {
@@ -81,7 +82,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector("div.header > span").textContent
 			}`;
 
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
@@ -92,8 +93,8 @@ presence.on("UpdateData", async () => {
 					label: "Watch Episode",
 					url: `https://www.southparkstudios.com/collections/${
 						document.location.pathname.split("/")[2]
-					}`
-				}
+					}`,
+				},
 			];
 
 			if (video.paused) {
@@ -112,24 +113,24 @@ presence.on("UpdateData", async () => {
 		"/create-account/step-1": {
 			details: "Creating an account",
 			state: "Step 1 of 2",
-			smallImageKey: "writing"
+			smallImageKey: "writing",
 		},
 		"/create-account/step-2": {
 			details: "Creating an account",
 			state: "Step 2 of 2",
-			smallImageKey: "writing"
+			smallImageKey: "writing",
 		},
 		"/settings": {
 			details: "Viewing their:",
-			state: "Account details"
+			state: "Account details",
 		},
 		"/email-verification": {
 			details: "Viewing page:",
-			state: "Email verification"
+			state: "Email verification",
 		},
 		"/news": {
 			details: "Viewing page:",
-			state: "The news page"
+			state: "The news page",
 		},
 		"/news/": {
 			details: "Reading article:",
@@ -139,22 +140,22 @@ presence.on("UpdateData", async () => {
 					label: "Read article",
 					url: `https://www.southparkstudios.com/news/${
 						document.location.pathname.split("/")[2]
-					}`
-				}
-			]
+					}`,
+				},
+			],
 		},
 		"/avatar": {
 			details: "Viewing page:",
-			state: "Avatar creator"
+			state: "Avatar creator",
 		},
 		"/forum/v": {
 			details: "Reading forum:",
-			state: document.querySelector("h2")?.textContent
+			state: document.querySelector("h2")?.textContent,
 		},
 		"/wiki": {
 			details: "Viewing page:",
-			state: "Wiki"
-		}
+			state: "Wiki",
+		},
 	};
 
 	for (const [key, value] of Object.entries(pages))

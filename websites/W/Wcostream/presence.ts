@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "936985014560755753"
+		clientId: "936985014560755753",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let video = {
 	timeLeft: "",
-	paused: true
+	paused: true,
 };
 
 presence.on("iFrameData", (data: { timeLeft: string; paused: boolean }) => {
@@ -14,15 +14,16 @@ presence.on("iFrameData", (data: { timeLeft: string; paused: boolean }) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Wcostream/assets/logo.png",
 			details: "Browsing...",
-			startTimestamp: browsingTimestamp
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location,
 		[timestamps, cover, buttons] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),
 			presence.getSetting<boolean>("cover"),
-			presence.getSetting<boolean>("buttons")
+			presence.getSetting<boolean>("buttons"),
 		]);
 	if (video.timeLeft !== "") {
 		presenceData.details = "Watching:";
@@ -48,13 +49,13 @@ presence.on("UpdateData", async () => {
 
 		if (!video.paused) presenceData.endTimestamp = Date.now() / 1000 + timeLeft;
 
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 		presenceData.buttons = [{ label: "Watch Episode", url: document.URL }];
 	} else if (pathname === "/") presenceData.details = "Home page";
 	else if (pathname.startsWith("/search")) {
 		presenceData.details = "Searching...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname.startsWith("/anime")) {
 		presenceData.details = "Viewing a Series:";
 		presenceData.state = document.querySelector<HTMLHeadingElement>(
@@ -63,7 +64,7 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 			"#cat-img-desc > div:nth-child(1) > img"
 		).src;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.buttons = [{ label: "View Series", url: document.URL }];
 	} else if (
 		document.querySelector<HTMLAnchorElement>(
@@ -74,10 +75,13 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector<HTMLAnchorElement>(
 			"table > tbody > tr > td > h2 > a"
 		).textContent;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 	}
-	if (!cover) presenceData.largeImageKey = "logo";
+	if (!cover) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/W/Wcostream/assets/0.png";
+	}
 	if (!buttons) delete presenceData.buttons;
 	if (!timestamps) {
 		delete presenceData.startTimestamp;

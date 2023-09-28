@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "813038241451343882"
+		clientId: "813038241451343882",
 	}),
 	startsTime = Math.floor(Date.now() / 1000),
 	ShowData = {
@@ -7,7 +7,7 @@ const presence = new Presence({
 		ep: "",
 		duration: 0,
 		currentTime: 0,
-		paused: true
+		paused: true,
 	},
 	getStrings = async () =>
 		presence.getStrings(
@@ -22,11 +22,10 @@ const presence = new Presence({
 				viewEpisode: "general.buttonViewEpisode",
 				viewSeries: "general.viewSeries",
 				reading: "general.reading",
-				viewPage: "general.viewPage"
+				viewPage: "general.viewPage",
 			},
 			await presence.getSetting<string>("lang").catch(() => "en")
 		);
-
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
@@ -38,22 +37,24 @@ presence.on("iFrameData", (data: Data) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "dramacool_logo_b",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/DramaCool/assets/logo.png",
 			details: "Browsing",
 			smallImageText: "Browsing",
 			smallImageKey: "reading",
-			startTimestamp: startsTime
+			startTimestamp: startsTime,
 		},
-		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
-		showButtons = await presence.getSetting<boolean>("buttons"),
-		{ pathname, search } = document.location;
+		[covers, buttons, newLang] = await Promise.all([
+			presence.getSetting<boolean>("covers"),
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<string>("lang").catch(() => "en"),
+		]),
+		{ pathname, search, href } = document.location;
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
-
-	if (pathname.includes("running-man")) presenceData.largeImageKey = "rm";
 
 	if (pathname.includes("/drama-detail")) {
 		presenceData.smallImageText = strings.reading;
@@ -64,18 +65,23 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: strings.viewSeriesButton,
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	} else if (pathname.includes("/search")) {
 		presenceData.details = strings.searchFor;
 		presenceData.state = search.includes("movies") ? "Movies" : "Stars";
 
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = strings.searching;
 	} else if (pathname.match("/([a-z0-9-]+)-episode-([0-9]+)")) {
-		ShowData.title = document.querySelector("div.category a").textContent;
-
+		ShowData.title =
+			document.querySelector("div.category a")?.textContent ??
+			JSON.parse(
+				document
+					.querySelector('[class="yoast-schema-graph"]')
+					.innerHTML.replace(/@/gm, "")
+			).graph[3].itemListElement[1].name.replace(/Episode [0-9]*/gm, "");
 		if (ShowData.duration) {
 			ShowData.ep = (document.title.match(
 				/Episode ?([1-9][0-9]?[0-9]?)?( & )?([1-9][0-9]?[0-9]?)/g
@@ -84,7 +90,7 @@ presence.on("UpdateData", async () => {
 				""
 			);
 
-			presenceData.smallImageKey = ShowData.paused ? "pause" : "play";
+			presenceData.smallImageKey = ShowData.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = ShowData.paused
 				? strings.paused
 				: strings.play;
@@ -98,13 +104,21 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: strings.viewEpisode,
-					url: document.URL
+					url: href,
 				},
 				{
 					label: strings.viewSeriesButton,
-					url: document.querySelector<HTMLAnchorElement>("div.category a").href
-				}
+					url: document
+						.querySelector('[class="Category"]')
+						.firstElementChild.firstElementChild.getAttribute("href"),
+				},
 			];
+
+			if (covers) {
+				presenceData.largeImageKey =
+					document.querySelector<HTMLMetaElement>('meta[property="og:image"]')
+						?.content ?? "dramacool_logo_b";
+			}
 
 			if (ShowData.paused) {
 				delete presenceData.startTimestamp;
@@ -119,8 +133,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: strings.viewSeriesButton,
-					url: document.URL
-				}
+					url: document.URL,
+				},
 			];
 		}
 	} else if (pathname.includes("/calendar")) {
@@ -130,12 +144,12 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Calendar",
-				url: document.URL
-			}
+				url: document.URL,
+			},
 		];
 	}
 
-	if (!showButtons && presenceData.buttons) delete presenceData.buttons;
+	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 
 	presence.setActivity(presenceData);
 });

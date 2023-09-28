@@ -1,20 +1,29 @@
 const presence = new Presence({
-	clientId: "680498892651233310"
+	clientId: "680498892651233310",
 });
 
-let oldLang: string,
-	newLang: string,
-	strings: Awaited<ReturnType<typeof getStrings>>;
+async function getStrings() {
+	return presence.getStrings(
+		{
+			browsing: "general.browsing",
+			reading: "general.reading",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
 	const path = window.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey: "logo_big"
-		};
-
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/My%20Nintendo/assets/logo.png",
+		},
+		newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	oldLang = newLang;
-	newLang = await presence.getSetting<string>("lang").catch(() => "en");
-	if (!strings || oldLang !== newLang) strings = await getStrings(newLang);
+	if (!strings || oldLang !== newLang) strings = await getStrings();
 
 	switch (path[0]) {
 		// Reward Categories
@@ -23,7 +32,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
 				document.title;
 			presenceData.smallImageText = strings.browsing;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			if (path.length > 1) {
 				presenceData.state = document.querySelector<HTMLHeadingElement>(
@@ -37,7 +46,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
 				document.title;
 			presenceData.smallImageText = strings.browsing;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			if (path.length > 1) {
 				presenceData.state = document.querySelector<HTMLHeadingElement>(
@@ -69,7 +78,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
 				document.title;
 			presenceData.smallImageText = strings.reading;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 
 			if (path.length > 1) {
 				presenceData.state =
@@ -104,13 +113,3 @@ presence.on("UpdateData", async () => {
 			return presence.setActivity();
 	}
 });
-
-async function getStrings(lang: string) {
-	return presence.getStrings(
-		{
-			browsing: "general.browsing",
-			reading: "general.reading"
-		},
-		lang
-	);
-}

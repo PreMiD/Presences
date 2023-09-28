@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "857912880947265566"
+		clientId: "857912880947265566",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "pcpartpicker_logo_",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/PcPartPicker/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location;
 
@@ -25,8 +26,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Browse Guide",
-				url: href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/b/")) {
 		const build: HTMLHeadingElement = document.querySelector(
@@ -42,8 +43,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Build",
-				url: href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/product/")) {
 		const productType: HTMLAnchorElement = document.querySelector(
@@ -56,8 +57,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Look at product",
-				url: href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/products/")) {
 		presenceData.details =
@@ -76,8 +77,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View User",
-				url: href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/list/")) {
 		const price: HTMLTableDataCellElement = document.querySelector(
@@ -92,8 +93,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View System",
-					url: link.value
-				}
+					url: link.value,
+				},
 			];
 		}
 	} else if (pathname.startsWith("/forums/")) {
@@ -104,8 +105,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View Thread",
-					url: href
-				}
+					url: href,
+				},
 			];
 		}
 	} else if (pathname.startsWith("/trends/")) {
@@ -118,8 +119,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Trends",
-				url: href
-			}
+				url: href,
+			},
 		];
 	} else if (pathname.startsWith("/builds/"))
 		presenceData.details = "Viewing Completed Builds";

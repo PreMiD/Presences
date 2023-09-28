@@ -1,15 +1,16 @@
 const presence = new Presence({
-	clientId: "924791712944099389"
+	clientId: "924791712944099389",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png",
 		},
 		{ pathname, href } = document.location,
 		[showThumb, showMessaging] = await Promise.all([
 			presence.getSetting<boolean>("showthumb"),
-			presence.getSetting<boolean>("showmessaging")
+			presence.getSetting<boolean>("showmessaging"),
 		]),
 		paths: string[] = pathname.split("/");
 	if (!paths[0]) paths.shift();
@@ -81,8 +82,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View anime",
-					url: href
-				}
+					url: href,
+				},
 			];
 		} else if (uid && eid) {
 			const { name, episode, part } = getInfo(),
@@ -97,8 +98,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Watch anime",
-						url: href
-					}
+						url: href,
+					},
 				];
 
 				if (part) presenceData.state = presenceData.state += ` (part ${part})`;
@@ -161,8 +162,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Read manga",
-						url: href
-					}
+						url: href,
+					},
 				];
 			} else {
 				const name = document.querySelector<HTMLAnchorElement>(
@@ -175,8 +176,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Read manga",
-						url: href
-					}
+						url: href,
+					},
 				];
 			}
 		} else if (hasNumber(paths[1])) {
@@ -196,8 +197,8 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "View manga",
-					url: href
-				}
+					url: href,
+				},
 			];
 		} else if (paths[1])
 			presenceData.details = `Viewing manga starting with ${paths[1].toUpperCase()}`;
@@ -216,7 +217,8 @@ interface IFrameData {
 presence.on("iFrameData", async (data: IFrameData) => {
 	if (!data.currentTime || !data.duration) return;
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png",
 		},
 		showThumb = await presence.getSetting<boolean>("showthumb"),
 		epInfo = getInfo(),
@@ -241,8 +243,8 @@ presence.on("iFrameData", async (data: IFrameData) => {
 	presenceData.buttons = [
 		{
 			label: "Watch anime",
-			url: document.location.href
-		}
+			url: document.location.href,
+		},
 	];
 
 	if (epInfo.part)
@@ -278,7 +280,7 @@ function getInfo(): {
 	return {
 		name,
 		episode: parseInt(rep, 10),
-		part: parseInt(part, 10)
+		part: parseInt(part, 10),
 	};
 }
 

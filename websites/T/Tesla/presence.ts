@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "829056927227969596"
+		clientId: "829056927227969596",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -8,7 +8,7 @@ presence.on("UpdateData", async function () {
 			presence.getSetting<boolean>("timeElapsed"),
 			presence.getSetting<boolean>("showButtons"),
 			presence.getSetting<number>("logo"),
-			presence.getSetting<boolean>("showCheckout")
+			presence.getSetting<boolean>("showCheckout"),
 		]),
 		logoArr = ["logo_red", "logo_red_text", "logo_white", "logo_white_text"],
 		urlpath = window.location.pathname.split("/"),
@@ -50,11 +50,11 @@ presence.on("UpdateData", async function () {
 			"en_sg",
 			"ko_kr",
 			"en_au",
-			"en_nz"
+			"en_nz",
 		],
 		urlpNum = langs.includes(urlpath[1]) ? 2 : 1,
 		presenceData: PresenceData = {
-			largeImageKey: logoArr[logo] ?? "logo_red"
+			largeImageKey: logoArr[logo] ?? "logo_red",
 		};
 
 	if (timeElapsed) presenceData.startTimestamp = browsingTimestamp;
@@ -76,12 +76,12 @@ presence.on("UpdateData", async function () {
 							label: `View ${model}`,
 							url: window.location.href
 								.replace(urlpath[num], "")
-								.replace("#overview", "")
+								.replace("#overview", ""),
 						},
 						{
 							label: `Design ${model}`,
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 			} else {
@@ -94,8 +94,8 @@ presence.on("UpdateData", async function () {
 					presenceData.buttons = [
 						{
 							label: `View ${model}`,
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 			}
@@ -111,12 +111,12 @@ presence.on("UpdateData", async function () {
 					presenceData.buttons = [
 						{
 							label: "View Cybertruck",
-							url: window.location.href.replace(urlpath[num], "")
+							url: window.location.href.replace(urlpath[num], ""),
 						},
 						{
 							label: "Design Cybertruck",
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 			} else {
@@ -126,92 +126,134 @@ presence.on("UpdateData", async function () {
 					presenceData.buttons = [
 						{
 							label: "View Cybertruck",
-							url: window.location.href
-						}
+							url: window.location.href,
+						},
 					];
 				}
 			}
-		} else if (urlpath[urlpNum] === "teslaaccount") {
-			const num = urlpNum + 1;
-			presenceData.details = "Account";
+		} else {
+			switch (urlpath[urlpNum]) {
+				case "teslaaccount": {
+					presenceData.details = "Account";
 
-			if (urlpath[num] === "payment-history")
-				presenceData.state = "Payment History";
-			else if (urlpath[num] === "settings") presenceData.state = "Settings";
-			else if (urlpath[num] === "ownership") presenceData.state = "Ownership";
-		} else if (urlpath[urlpNum] === "solarroof") {
-			presenceData.details = "Solar Roof";
-
-			if (urlpath[urlpNum + 1] === "design") presenceData.state = "Designing";
-
-			if (showButtons) {
-				presenceData.buttons = [
-					{
-						label: "View Solar Roof",
-						url: window.location.href
+					switch (urlpath[urlpNum + 1]) {
+						case "payment-history": {
+							presenceData.state = "Payment History";
+							break;
+						}
+						case "settings": {
+							presenceData.state = "Settings";
+							break;
+						}
+						case "ownership":
+							{
+								presenceData.state = "Ownership";
+							}
+							break;
 					}
-				];
-			}
-		} else if (urlpath[urlpNum] === "solarpanels") {
-			presenceData.details = "Solar Panels";
 
-			if (showButtons) {
-				presenceData.buttons = [
-					{
-						label: "View Solar Panels",
-						url: window.location.href
+					break;
+				}
+				case "solarroof": {
+					presenceData.details = "Solar Roof";
+
+					if (urlpath[urlpNum + 1] === "design")
+						presenceData.state = "Designing";
+
+					if (showButtons) {
+						presenceData.buttons = [
+							{
+								label: "View Solar Roof",
+								url: window.location.href,
+							},
+						];
 					}
-				];
-			}
-		} else if (urlpath[urlpNum] === "energy") {
-			presenceData.details = "Energy";
 
-			if (urlpath[urlpNum + 1] === "design") presenceData.state = "Designing";
+					break;
+				}
+				case "solarpanels": {
+					presenceData.details = "Solar Panels";
 
-			if (showButtons) {
-				presenceData.buttons = [
-					{
-						label: "View Page",
-						url: window.location.href
+					if (showButtons) {
+						presenceData.buttons = [
+							{
+								label: "View Solar Panels",
+								url: window.location.href,
+							},
+						];
 					}
-				];
-			}
-		} else if (urlpath[urlpNum] === "powerwall") {
-			presenceData.details = "Powerwall";
 
-			if (showButtons) {
-				presenceData.buttons = [
-					{
-						label: "View Powerwall",
-						url: window.location.href
-					}
-				];
-			}
-		} else if (urlpath[urlpNum] === "inventory") {
-			presenceData.details = "Inventory";
+					break;
+				}
+				case "energy": {
+					presenceData.details = "Energy";
 
-			if (showButtons) {
-				presenceData.buttons = [
-					{
-						label: "View Inventory",
-						url: window.location.href
+					if (urlpath[urlpNum + 1] === "design")
+						presenceData.state = "Designing";
+
+					if (showButtons) {
+						presenceData.buttons = [
+							{
+								label: "View Page",
+								url: window.location.href,
+							},
+						];
 					}
-				];
+
+					break;
+				}
+				case "powerwall": {
+					presenceData.details = "Powerwall";
+
+					if (showButtons) {
+						presenceData.buttons = [
+							{
+								label: "View Powerwall",
+								url: window.location.href,
+							},
+						];
+					}
+
+					break;
+				}
+				case "inventory": {
+					presenceData.details = "Inventory";
+
+					if (showButtons) {
+						presenceData.buttons = [
+							{
+								label: "View Inventory",
+								url: window.location.href,
+							},
+						];
+					}
+
+					break;
+				}
+				case "drive": {
+					presenceData.details = "Test drive";
+					break;
+				}
+				case "charging": {
+					presenceData.details = "Charging";
+					break;
+				}
+				case "home-charging": {
+					presenceData.details = "Wall Connector";
+					break;
+				}
+				default:
+					if (document.querySelector(".error-container>.error-code")) {
+						if (
+							document.querySelector(".error-container>.error-code")
+								.textContent === "404"
+						) {
+							(presenceData.details = "Error 404"),
+								(presenceData.state = "Page not found");
+						}
+					} else presenceData.details = "Other";
 			}
-		} else if (urlpath[urlpNum] === "drive")
-			presenceData.details = "Test drive";
-		else if (urlpath[urlpNum] === "charging") presenceData.details = "Charging";
-		else if (urlpath[urlpNum] === "home-charging")
-			presenceData.details = "Wall Connector";
-		else if (document.querySelector(".error-container>.error-code")) {
-			if (
-				document.querySelector(".error-container>.error-code").textContent ===
-				"404"
-			) {
-				(presenceData.details = "Error 404"),
-					(presenceData.state = "Page not found");
-			}
-		} else presenceData.details = "Other";
+		}
 	} else if (window.location.hostname === "shop.tesla.com") {
 		const num = urlpNum + 1;
 
@@ -223,8 +265,8 @@ presence.on("UpdateData", async function () {
 				presenceData.buttons = [
 					{
 						label: "View Category",
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (urlpath[urlpNum] === "product" && urlpath[num]) {
@@ -236,8 +278,8 @@ presence.on("UpdateData", async function () {
 				presenceData.buttons = [
 					{
 						label: "View Product",
-						url: window.location.href
-					}
+						url: window.location.href,
+					},
 				];
 			}
 		} else if (

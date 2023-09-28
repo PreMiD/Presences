@@ -1,13 +1,15 @@
 const presence = new Presence({
-		clientId: "731069087031230487"
+		clientId: "731069087031230487",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let currentURL = new URL(document.location.href),
 	currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
 	presenceData: PresenceData = {
 		details: "Viewing an unsupported page",
-		largeImageKey: "lg",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 const updateCallback = {
 		_function: null as () => void,
@@ -19,7 +21,7 @@ const updateCallback = {
 		},
 		get present(): boolean {
 			return this._function !== null;
-		}
+		},
 	},
 	/**
 	 * Initialize/reset presenceData.
@@ -27,8 +29,9 @@ const updateCallback = {
 	resetData = (
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
-			largeImageKey: "lg",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		}
 	): void => {
 		currentURL = new URL(document.location.href);
@@ -51,7 +54,7 @@ const updateCallback = {
 		const startTime = Date.now();
 		return [
 			Math.floor(startTime / 1000),
-			Math.floor(startTime / 1000) - videoTime + videoDuration
+			Math.floor(startTime / 1000) - videoTime + videoDuration,
 		];
 	};
 
@@ -66,7 +69,7 @@ const updateCallback = {
 			presenceData.state = {
 				tac: "Terms and Conditions",
 				privacy: "Privacy Policy",
-				logos: "Logos & Signpacks"
+				logos: "Logos & Signpacks",
 			}[currentPath[0]];
 		}
 	} else if (
@@ -536,7 +539,7 @@ const updateCallback = {
 								.querySelector(".mejs__playpause-button button")
 								.getAttribute("aria-label") === "Pause"
 						) {
-							presenceData.smallImageKey = "play";
+							presenceData.smallImageKey = Assets.Play;
 							presenceData.smallImageText = "TMTube Archive — Playing";
 							const video: HTMLVideoElement = document.querySelector("video");
 							[, presenceData.endTimestamp] = getTimestamps(
@@ -544,7 +547,7 @@ const updateCallback = {
 								Math.floor(video.duration)
 							);
 						} else {
-							presenceData.smallImageKey = "pause";
+							presenceData.smallImageKey = Assets.Pause;
 							presenceData.smallImageText = "TMTube Archive — Paused";
 							delete presenceData.endTimestamp;
 						}
@@ -586,7 +589,7 @@ const updateCallback = {
 			}
 		}
 	} else if (currentURL.hostname.startsWith("blog")) {
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Blog";
 
 		if (currentPath[0] === "posts" && currentPath[1]) {

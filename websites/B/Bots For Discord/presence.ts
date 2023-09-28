@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "806926545771167774"
+		clientId: "806926545771167774",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/B/Bots%20For%20Discord/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 	if (window.location.hostname === "botsfordiscord.com") {
 		presenceData.details = "Viewing page:";

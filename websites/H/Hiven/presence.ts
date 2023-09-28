@@ -1,10 +1,10 @@
 const presence: Presence = new Presence({
-	clientId: "876835643983007754"
+	clientId: "876835643983007754",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "lg"
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/H/Hiven/assets/logo.jpg",
 	};
 
 	// Presence for Hiven's static landing page
@@ -65,8 +65,8 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "View Profile",
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 			}
 		}

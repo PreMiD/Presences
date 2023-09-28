@@ -1,0 +1,55 @@
+name: Assets Updater
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "**.ts"
+      - "**.json"
+jobs:
+  update:
+    if: github.repository_owner == 'PreMiD'
+    name: Update Assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: 16
+          cache: npm
+      - name: Install dependencies
+        run: HUSKY=0 npm ci
+      - name: Start assets updater
+        env:
+          CDN_TOKEN: ${{ secrets.CDN_TOKEN }}
+        run: |
+          git config --global core.quotePath false
+          git config --global core.precomposeunicode true
+          npm run assetsUpdater push
+          npm run format
+          npm run bumpChanged uncommitted
+      - name: Commit any changes
+        if: always()
+        run: |
+          git add .;
+          if git diff-index --quiet HEAD --; then
+            exit 0;
+          else
+            hub config --global hub.protocol https;
+            hub config --global user.email "${GITHUB_EMAIL}";
+            hub config --global user.name "${GITHUB_USER}";
+            hub remote set-url origin "https://${GITHUB_TOKEN}:x-oauth-basic@github.com/${GITHUB_REPOSITORY}.git";
+            git config --local user.email "${GITHUB_EMAIL}";
+            git config --local user.name "${GITHUB_USER}";
+            git checkout -b semid/au/`date +%F-%H-%M`;
+            git commit -sam "chore: update assets";
+            hub pull-request -b "PreMiD:main" -p -m "chore: update assets" -m "*beep boop* I've updated some assets..." -l chore;
+          fi
+        env:
+          GITHUB_USER: SeMiD
+          GITHUB_EMAIL: semid@premid.app
+          GITHUB_TOKEN: ${{ secrets.AUTOMERGE }}

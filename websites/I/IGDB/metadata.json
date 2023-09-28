@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Kyrie",
+		"id": "368399721494216706"
+	},
+	"service": "IGDB",
+	"description": {
+		"en": "IGDB.com is a video game database, intended for both game consumers and video game professionals alike.",
+		"vi_VN": "IGDB.com là cơ sở dữ liệu game, nhắm tới cả các người chơi và người chuyên nghiệp."
+	},
+	"url": "www.igdb.com",
+	"version": "1.0.12",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/IGDB/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/IGDB/assets/thumbnail.png",
+	"color": "#9146FF",
+	"category": "games",
+	"tags": [
+		"video",
+		"games",
+		"database",
+		"reviews",
+		"community",
+		"critics"
+	]
+}

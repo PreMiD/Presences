@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "845360129715994685"
+		clientId: "845360129715994685",
 	}),
 	timeElapsed: number = ~~(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: timeElapsed
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/AtCoder/assets/logo.png",
+		startTimestamp: timeElapsed,
 	};
 
 	if (!location.pathname.split("/")[1])

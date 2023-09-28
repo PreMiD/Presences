@@ -1,10 +1,10 @@
 const presence = new Presence({
-		clientId: "630462023003799583"
+		clientId: "630462023003799583",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		live: "presence.activity.live"
+		play: "general.playing",
+		pause: "general.paused",
+		live: "general.live",
 	});
 
 function getTime(list: string[]): number {
@@ -21,7 +21,7 @@ function getTimestamps(audioTime: string, audioDuration: string): number[] {
 		Math.floor(startTime / 1000),
 		Math.floor(startTime / 1000) -
 			getTime(audioTime.split(":").reverse()) +
-			getTime(audioDuration.split(":").reverse())
+			getTime(audioDuration.split(":").reverse()),
 	];
 }
 
@@ -132,11 +132,12 @@ presence.on("UpdateData", async () => {
 		{
 			details,
 			state,
-			largeImageKey: "metastream",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/Metastream/assets/logo.png",
 			smallImageKey,
 			smallImageText,
 			startTimestamp,
-			endTimestamp
+			endTimestamp,
 		},
 		playing
 	);

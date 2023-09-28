@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "691593596692070420"
+	clientId: "691593596692070420",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stuff.co.nz/assets/logo.png",
 	};
 
 	if (!document.querySelectorAll(".sics-component__headline__title")[0]) {

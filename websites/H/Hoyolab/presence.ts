@@ -1,94 +1,163 @@
 const presence = new Presence({
-		clientId: "836534947170353173"
+		clientId: "836534947170353173",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+async function getStrings() {
+	return presence.getStrings(
+		{
+			readingArticle: "general.readingArticle",
+			viewing: "general.viewing",
+			viewingList: "general.viewList",
+			viewingUser: "general.viewUser",
+			viewingHomepage: "general.viewHome",
+			searchingFor: "general.searchFor",
+			viewProfileButton: "general.buttonViewProfile",
+			readArticleButton: "general.buttonReadArticle",
 		},
-		{ pathname, search } = document.location;
-	if (pathname === "/genshin/") presenceData.details = "Viewing the Homepage";
-	else if (pathname.endsWith("/home/1")) {
-		switch (search?.substr(6)) {
-			case "create":
-				presenceData.details = "Viewing tavern page";
-				presenceData.state = "New";
-				break;
-			case "reply":
-				presenceData.details = "Viewing tavern page";
-				presenceData.state = "New replies";
-				break;
-			case "2":
-				presenceData.details = "Viewing tavern page";
-				presenceData.state = "Featured";
-				break;
-			default:
-				presenceData.details = "Viewing tavern page";
-				presenceData.state = "Hot";
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+
+presence.on("UpdateData", async () => {
+	const strings = await getStrings(),
+		circleName: Record<number, string> = {
+			1: "Honkai Impact 3rd",
+			2: "Genshin Impact",
+			4: "Tears of Themis",
+			5: "HoYoLAB",
+			6: "Honkai: Star Rail",
+			8: "Zenless Zone Zero",
+		},
+		circleTabName: Record<number, string> = {
+			// Genshin Impact
+			27: "Official posts",
+			28: "Player guides",
+			29: "Fan arts",
+			30: "the Tavern",
+			// Honkai Impact 3rd
+			31: "Official posts",
+			32: "Player guides",
+			33: "Fan arts",
+			34: "the Hyperion",
+			// Tears of Themis
+			35: "Official posts",
+			36: "Player guides",
+			37: "Fan arts",
+			38: "the Law Firm",
+			// Honkai: Star Rail
+			39: "Official posts",
+			40: "Player guides",
+			41: "Fan arts",
+			42: "the Astral Express",
+			// Zenless Zone Zero
+			46: "the Coff Cafe",
+			47: "Official posts",
+			48: "Fan arts",
+
+			// HoYoLAB
+			43: "Offical posts",
+			44: "the LAB",
+		},
+		accountCenterState: Record<string, string> = {
+			postList: "Posts",
+			replyList: "Comments",
+			favList: "Favorites",
+			topicList: "Topics",
+			followList: "Following",
+			fanList: "Followers",
+		},
+		homepageName: Record<string, string> = {
+			timeline: "Timeline",
+			events: "Events",
+		},
+		presenceData: PresenceData = {
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/Hoyolab/assets/logo.png",
+			startTimestamp: browsingTimestamp,
+		},
+		{ location } = document,
+		pathList = location.pathname.split("/");
+
+	pathList.shift();
+
+	switch (pathList[0]) {
+		case "home": {
+			if (!pathList[1]) presenceData.details = `${strings.viewingHomepage}`;
+			else {
+				presenceData.details = `${strings.viewing} ${
+					homepageName[pathList[1]]
+				}`;
+			}
+			homepageName;
+			break;
 		}
-	} else if (pathname.endsWith("/home/3")) {
-		switch (search?.substr(6)) {
-			case "1":
-				presenceData.details = "Viewing official page";
-				presenceData.state = "Notices";
-				break;
-			case "3":
-				presenceData.details = "Viewing official page";
-				presenceData.state = "Info";
-				break;
-			case "contribution":
-				presenceData.details = "Viewing official page";
-				presenceData.state = "Submission events";
-				break;
-			default:
-				presenceData.details = "Viewing official page";
-				presenceData.state = "Events";
+		case "circles": {
+			presenceData.details = `${circleName[parseInt(pathList[1])]} Circle`;
+			presenceData.state = `Scrolling through ${
+				circleTabName[parseInt(pathList[2])]
+			}`;
+			break;
 		}
-	} else if (pathname.endsWith("/home/2")) {
-		switch (search?.substr(6)) {
-			case "create":
-				presenceData.details = "Viewing billboards page";
-				presenceData.state = "New";
-				break;
-			case "reply":
-				presenceData.details = "Viewing billboards page";
-				presenceData.state = "New replies";
-				break;
-			case "2":
-				presenceData.details = "Viewing billboards page";
-				presenceData.state = "Featured";
-				break;
-			default:
-				presenceData.details = "Viewing billboards page";
-				presenceData.state = "Hot";
+		case "accountCenter": {
+			const username = document.querySelector(
+				"body > div > div > div > div.root-page-container > div > div > div > div > div > div.account-center-user-wrap > div > div > span.user-basic-nickname"
+			).textContent;
+
+			presenceData.details = `${strings.viewingUser} ${username}`;
+			presenceData.state = `${strings.viewingList} ${
+				accountCenterState[pathList[1]]
+			}`;
+			presenceData.buttons = [
+				{
+					label: strings.viewProfileButton,
+					url: location.search,
+				},
+			];
+
+			break;
 		}
-	} else if (pathname.startsWith("/genshin/article/")) {
-		presenceData.details = document.querySelector(
-			".mhy-article-page__title > h1"
-		).textContent;
-		presenceData.state = `by: ${
-			document.querySelector(
-				".mhy-article-page-author > .mhy-user-card__info > a > span"
-			).textContent
-		}`;
-		presenceData.buttons = [
-			{ label: "Visit Article", url: window.location.href }
-		];
-	} else if (pathname.endsWith("/topic"))
-		presenceData.details = "Browsing topics";
-	else if (pathname.startsWith("/genshin/topicDetail/")) {
-		presenceData.details = "Browsing topic:";
-		presenceData.state = document.querySelector(
-			".mhy-topic-card__name"
-		).textContent;
-	} else if (pathname.startsWith("/genshin/search")) {
-		presenceData.details = "Searching:";
-		presenceData.state = new URLSearchParams(window.location.search).get(
-			"keyword"
-		);
-		presenceData.smallImageKey = "search";
+		case "setting": {
+			presenceData.details = `${strings.viewing} Account settings`;
+			break;
+		}
+		case "search": {
+			presenceData.details = `${strings.searchingFor} ${new URLSearchParams(
+				location.search
+			).get("keyword")}`;
+			break;
+		}
+		case "article": {
+			presenceData.details = `${strings.readingArticle} ${
+				document.querySelector(
+					"body > div > div > div > div.root-page-container > div > div > div > div > div.mhy-article-page__body > div > div > h1"
+				).textContent
+			}`;
+			presenceData.buttons = [
+				{
+					label: strings.readArticleButton,
+					url: `https://www.hoyolab.com/article/${pathList[1]}`,
+				},
+			];
+			break;
+		}
+		case "topicDetail": {
+			const topicName = document
+				.querySelector(
+					"body > div > div > div > div.root-page-container > div > div > div > div > div > div > div.mhy-topic-basic > div > div.mhy-topic-basic-title > div"
+				)
+				.textContent.replaceAll("\n", "")
+				.trimEnd();
+
+			presenceData.details = `Viewing Topic: ${topicName}`;
+
+			break;
+		}
+		case "newArticle": {
+			presenceData.details = "Creating a new article";
+			break;
+		}
 	}
+
 	presence.setActivity(presenceData);
 });

@@ -10,6 +10,6 @@ iframe.on("UpdateData", () => {
 		elapsed: video.currentTime,
 		duration: video.duration,
 		ended: video.ended,
-		paused: video.paused
+		paused: video.paused,
 	});
 });

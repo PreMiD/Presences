@@ -1,10 +1,10 @@
 const presence = new Presence({
-	clientId: "463000750193246209"
+	clientId: "463000750193246209",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "sto"
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/s.to/assets/logo.png",
 	};
 
 	if (document.location.pathname === "/") {
@@ -31,20 +31,20 @@ presence.on("UpdateData", () => {
 	} else if (document.location.pathname === "/app") {
 		presenceData.details = "Schaut nach";
 		presenceData.state = "Streaming ToGo";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname === "/beliebte-serien") {
 		presenceData.details = "Schaut nach";
 		presenceData.state = "Beliebten Serien";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.includes("/team")) {
 		presenceData.details = "Zählt die Teammitglieder";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
@@ -53,7 +53,7 @@ presence.on("UpdateData", () => {
 		presenceData.state = document.querySelector(
 			"#wrapper > div.container > div.row > div:nth-child(1) > div.facts.row > div:nth-child(4) > h3"
 		).textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
@@ -65,7 +65,7 @@ presence.on("UpdateData", () => {
 		presenceData.state = document.querySelector(
 			"#wrapper > div.container > div.seriesListContainer.row > div.pageTitle45 > h2"
 		).textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
@@ -77,7 +77,7 @@ presence.on("UpdateData", () => {
 		presenceData.state = document.querySelector(
 			"#wrapper > div.container > div.seriesListContainer.row > div.pageTitle45 > h2"
 		).textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
@@ -89,7 +89,7 @@ presence.on("UpdateData", () => {
 		presenceData.state = document.querySelector(
 			"#wrapper > div.container > div.seriesListContainer.row > div.pageTitle45 > h2"
 		).textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
@@ -98,7 +98,7 @@ presence.on("UpdateData", () => {
 		presenceData.state = document.querySelector(
 			"#wrapper > div.container > div > div > div.col-lg-12 > div > h2"
 		).textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
@@ -107,7 +107,7 @@ presence.on("UpdateData", () => {
 		presenceData.state = document.querySelector(
 			"#userDetails > div > div > div.col-lg-6.col-md-6.col-xs-12.col-sm-6 > a > h1"
 		).textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
@@ -118,42 +118,42 @@ presence.on("UpdateData", () => {
 				"#wrapper > div.container.marginBottom > div.pageTitle > h1 > strong"
 			).textContent
 		}`;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.includes("/account/subscribed")) {
 		presenceData.details = "Informiert sich über";
 		presenceData.state = "Abonnierte Serien";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.includes("/account/watchlist")) {
 		presenceData.details = "Informiert sich über";
 		presenceData.state = "Watchlist";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.includes("/account/watched")) {
 		presenceData.details = "Liest den Log über";
 		presenceData.state = "Zuletzt geschaute Episoden";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.includes("/news")) {
 		presenceData.details = "Informiert sich über";
 		presenceData.state = "Neuigkeiten von S.To";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname === "/neu") {
 		presenceData.details = "Sucht neue Serien";
 		presenceData.state = "OwO";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
@@ -164,7 +164,7 @@ presence.on("UpdateData", () => {
 				"#wrapper > header > div > div.header-content > nav > div > div.dd > p > a > span.name"
 			).textContent
 		}`;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
@@ -173,7 +173,7 @@ presence.on("UpdateData", () => {
 		presenceData.state = document.querySelector(
 			"#wrapper > div.container.noPadding > div:nth-child(6) > h3"
 		).textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
@@ -182,13 +182,13 @@ presence.on("UpdateData", () => {
 		presenceData.state = document.querySelector(
 			"#wrapper > div.container > div.row > div.col-lg-8 > section:nth-child(1) > article > h1"
 		).textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname === "/support/fragen") {
 		presenceData.details = "Liest Fragen...";
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		delete presenceData.smallImageText;
 
 		presence.setActivity(presenceData);
@@ -269,7 +269,7 @@ presence.on("UpdateData", () => {
 					presenceData.details = "Sucht eine neue Serie";
 					presenceData.state =
 						document.querySelector<HTMLInputElement>("#serInput").value;
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					delete presenceData.smallImageText;
 
 					presence.setActivity(presenceData);
@@ -278,16 +278,16 @@ presence.on("UpdateData", () => {
 					presenceData.state = document.querySelector(
 						"#wrapper > div.container.marginBottom > div.seriesListSection > div.pageTitle.pageCenter.homeTitle > h1"
 					).textContent;
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					delete presenceData.smallImageText;
 
 					presence.setActivity(presenceData);
 				} else if (document.location.pathname.includes("/random")) {
 					presenceData.details = "Sucht eine random Serie";
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					presence.setActivity(presenceData);
 				} else if (document.location.pathname.includes("/search")) {
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					presenceData.details = "Sucht...";
 					presenceData.state =
 						document.querySelector<HTMLInputElement>("#search").value;

@@ -84,14 +84,14 @@ const pages: PageContext[] = [
 								{
 									movie: "buttonViewMovie",
 									series: "buttonViewSeries",
-									other: "buttonViewPage"
+									other: "buttonViewPage",
 								}[type]
 							],
-						url: document.location.href
-					}
+						url: document.location.href,
+					},
 				];
 				return data;
-			}
+			},
 		},
 		{
 			middleware: ref => !!ref.location.pathname.match(/^\/(cat)\//i),
@@ -112,7 +112,7 @@ const pages: PageContext[] = [
 
 				data.smallImageKey = images.SEARCH;
 				return data;
-			}
+			},
 		},
 		{
 			middleware: ref => !!ref.location.hostname.match(/streamkiste/i),
@@ -122,11 +122,11 @@ const pages: PageContext[] = [
 				delete data.state;
 				data.smallImageKey = images.BROWSE;
 				return data;
-			}
-		}
+			},
+		},
 	],
 	presence = new Presence({
-		clientId: "825531268581818419"
+		clientId: "825531268581818419",
 	});
 
 let lastPageIndex: number,
@@ -138,18 +138,18 @@ const IMAGES = {
 	PLAY: "playx1024",
 	PAUSE: "pausex1024",
 	BROWSE: "browsex1024",
-	SEARCH: "searchx1024"
+	SEARCH: "searchx1024",
 };
 presence.on("iFrameData", (data: VideoContext) => {
 	frameData = data;
 });
 presence.on("UpdateData", async () => {
-	const newLang = await presence.getSetting<string>("lang");
+	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	if (newLang !== currentLang) {
 		currentLang = newLang;
 		localizedStrings = await presence.getStrings(
 			{
-				browsing: "presence.activity.browsing",
+				browsing: "general.browsing",
 				watchingMovie: "general.watchingMovie",
 				watchingSeries: "general.watchingSeries",
 				buttonViewMovie: "general.buttonViewMovie",
@@ -158,7 +158,7 @@ presence.on("UpdateData", async () => {
 				viewGenre: "general.viewGenre",
 				playing: "general.playing",
 				searching: "general.search",
-				searchFor: "general.searchFor"
+				searchFor: "general.searchFor",
 			},
 			newLang
 		);
@@ -172,13 +172,13 @@ presence.on("UpdateData", async () => {
 		context.exec(
 			presence,
 			{
-				largeImageKey: IMAGES.LOGO
+				largeImageKey: IMAGES.LOGO,
 			},
 			{
 				frame: frameData,
 				strings: localizedStrings,
 				query,
-				images: IMAGES
+				images: IMAGES,
 			}
 		)
 	)
@@ -195,7 +195,7 @@ presence.on("UpdateData", async () => {
 			if (!data) {
 				presence.setActivity({
 					largeImageKey: IMAGES.LOGO,
-					state: localizedStrings.browsing
+					state: localizedStrings.browsing,
 				});
 			} else {
 				if (data.details) presence.setActivity(data);

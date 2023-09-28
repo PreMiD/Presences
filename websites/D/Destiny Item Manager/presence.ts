@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "811198714726449183"
+		clientId: "811198714726449183",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Destiny%20Item%20Manager/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (window.location.host === "destinyitemmanager.com")

@@ -1,16 +1,17 @@
 const presence: Presence = new Presence({
-		clientId: "631379801826918400"
+		clientId: "631379801826918400",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	startTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "large_img",
-			startTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/I/IMDb/assets/logo.png",
+			startTimestamp,
 		},
 		url = document.URL;
 	if (url.includes("/videoplayer/")) {
@@ -19,7 +20,8 @@ presence.on("UpdateData", async () => {
 		presenceData.state = (
 			document.querySelectorAll(".primary-relation-name")[0] as HTMLElement
 		).textContent;
-		presenceData.largeImageKey = "large_img";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/I/IMDb/assets/logo.png";
 		presenceData.smallImageKey = video.paused ? "paused" : "playing";
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
@@ -35,7 +37,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (url.includes("/find?")) {
 		presenceData.details = "Searching...";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (url.includes("/title/")) {
 		const tokens = document.title.split(" - ");
 		presenceData.details = tokens[0];

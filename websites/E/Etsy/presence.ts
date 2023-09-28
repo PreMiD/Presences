@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "620721262112538625" // CLIENT ID FOR YOUR PRESENCE
+		clientId: "620721262112538625", // CLIENT ID FOR YOUR PRESENCE
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,8 +7,8 @@ let item: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "etsy",
-		startTimestamp: browsingTimestamp
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Etsy/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	switch (document.location.hostname) {
@@ -116,7 +116,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Searching for:";
 				presenceData.state = (item as HTMLInputElement).value;
 
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 			} else if (document.location.pathname.includes("/sell")) {
 				presenceData.details = "Viewing page:";
 				presenceData.state = "Etsy Sell";
@@ -135,7 +135,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Reading DMs with:";
 					presenceData.state = item.textContent;
 
-					presenceData.smallImageKey = "reading";
+					presenceData.smallImageKey = Assets.Reading;
 				} else if (document.location.pathname.includes("/sent")) {
 					item = document.querySelector(
 						"#root > div > div > div > div > div > div > div > div > div > div > div > div > a"

@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "738522217221980222"
+		clientId: "738522217221980222",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "nm",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/N/Novel%20Mania/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname,
 		porcent: HTMLElement = document.querySelector(

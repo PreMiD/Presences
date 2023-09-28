@@ -1,7 +1,8 @@
 const presence = new Presence({
-		clientId: "660882722839068702"
+		clientId: "660882722839068702",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let iFrameVideo: boolean,
 	currentTime: number,
 	duration: number,
@@ -29,7 +30,8 @@ presence.on("iFrameData", (data: IFrameData) => {
 });
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "hwnew"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/H/HentaiWorld/assets/logo.png",
 	};
 
 	presenceData.startTimestamp = browsingTimestamp;
@@ -84,13 +86,13 @@ presence.on("UpdateData", () => {
 		} else if (document.location.pathname.startsWith("/genre")) {
 			// Genre
 			if (document.location.href.includes("?page=")) {
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.details = "Browsing the genre:";
 				presenceData.state = `${document.title.split('"')[1]}Page: ${
 					document.location.href.split("=")[1]
 				}`;
 			} else {
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.details = `Browsing the genre:${
 					document.title.split('"')[1]
 				}`;
@@ -166,14 +168,14 @@ presence.on("UpdateData", () => {
 			presenceData.state = "Page: 1";
 		} else if (document.location.pathname.startsWith("/search")) {
 			// Search
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Searching:";
 			presenceData.state = document.title.replace("HentaiWorld: ", "");
 		} else if (
 			document.location.href.startsWith("https://www.hentaiworld.eu/filter")
 		) {
 			// Accurate Research
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Doing an advanced";
 			presenceData.state = "search";
 		} else if (document.location.pathname.startsWith("/tv-series")) {
@@ -184,14 +186,14 @@ presence.on("UpdateData", () => {
 					"https://www.hentaiworld.eu/tv-series?page="
 				)
 			) {
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.details = "In the category: Hentai";
 				presenceData.state = `Page: ${document.location.href.replace(
 					"https://www.hentaiworld.eu/tv-series?page=",
 					""
 				)}`;
 			} else {
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.details = "In the category: Hentai";
 				presenceData.state = "Page: 1";
 			}
@@ -202,14 +204,14 @@ presence.on("UpdateData", () => {
 					"https://www.hentaiworld.eu/movies?page="
 				)
 			) {
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.details = "In the category: Movies";
 				presenceData.state = `Page: ${document.location.href.replace(
 					"https://www.hentaiworld.eu/movies?page=",
 					""
 				)}`;
 			} else {
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.details = "In the category: Movies";
 				presenceData.state = "Page: 1";
 			}
@@ -220,14 +222,14 @@ presence.on("UpdateData", () => {
 					"https://www.hentaiworld.eu/ova?page="
 				)
 			) {
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.details = "In the category: OVA";
 				presenceData.state = `Page: ${document.location.href.replace(
 					"https://www.hentaiworld.eu/ova?page=",
 					""
 				)}`;
 			} else {
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.details = "In the category: OVA";
 				presenceData.state = "Page: 1";
 			}
@@ -238,14 +240,14 @@ presence.on("UpdateData", () => {
 					"https://www.hentaiworld.eu/ona?page="
 				)
 			) {
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.details = "In the category: ONA";
 				presenceData.state = `Page: ${document.location.href.replace(
 					"https://www.hentaiworld.eu/ona?page=",
 					""
 				)}`;
 			} else {
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.details = "In the category: ONA";
 				presenceData.state = "Page: 1";
 			}
@@ -256,14 +258,14 @@ presence.on("UpdateData", () => {
 					"https://www.hentaiworld.eu/specials?page="
 				)
 			) {
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.details = "In the category: Specials";
 				presenceData.state = `Page: ${document.location.href.replace(
 					"https://www.hentaiworld.eu/specials?page=",
 					""
 				)}`;
 			} else {
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.details = "In the category: Specials";
 				presenceData.state = "Page: 1";
 			}
@@ -274,14 +276,14 @@ presence.on("UpdateData", () => {
 					"https://www.hentaiworld.eu/preview?page="
 				)
 			) {
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.details = "In the category: Preview";
 				presenceData.state = `Page: ${document.location.href.replace(
 					"https://www.hentaiworld.eu/preview?page=",
 					""
 				)}`;
 			} else {
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.details = "In the category: Preview";
 				presenceData.state = "Page: 1";
 			}
@@ -299,7 +301,7 @@ presence.on("UpdateData", () => {
 				Math.floor(duration)
 			);
 			if (iFrameVideo === true && !isNaN(duration)) {
-				presenceData.smallImageKey = paused ? "pause" : "play";
+				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 				presenceData.details = `Watching: ${hentainame}`;
 				presenceData.state = paused
 					? `Ep. ${episodenumber}｜Paused`
@@ -361,11 +363,11 @@ presence.on("UpdateData", () => {
 	} else if (document.location.pathname.startsWith("/genre")) {
 		// Genre
 		if (document.location.href.includes("?page=")) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = `Nel genere: ${document.title.split('"')[1]}`;
 			presenceData.state = `Pagina: ${document.location.href.split("=")[1]}`;
 		} else {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = `Nel genere: ${document.title.split('"')[1]}`;
 			presenceData.state = "Pagina: 1";
 		}
@@ -439,14 +441,14 @@ presence.on("UpdateData", () => {
 		presenceData.state = "Pagina: 1";
 	} else if (document.location.pathname.startsWith("/search")) {
 		// Search
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.details = "Sta cercando:";
 		presenceData.state = document.title.replace("HentaiWorld: ", "");
 	} else if (
 		document.location.href.startsWith("https://www.hentaiworld.eu/filter")
 	) {
 		// Accurate Research
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.details = "Sta facendo una ricerca";
 		presenceData.state = "avanzata";
 	} else if (document.location.pathname.startsWith("/tv-series")) {
@@ -457,14 +459,14 @@ presence.on("UpdateData", () => {
 				"https://www.hentaiworld.eu/tv-series?page="
 			)
 		) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Nella categoria: Hentai";
 			presenceData.state = `Pagina: ${document.location.href.replace(
 				"https://www.hentaiworld.eu/tv-series?page=",
 				""
 			)}`;
 		} else {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Nella categoria: Hentai";
 			presenceData.state = "Pagina: 1";
 		}
@@ -475,14 +477,14 @@ presence.on("UpdateData", () => {
 				"https://www.hentaiworld.eu/movies?page="
 			)
 		) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Nella categoria: Film";
 			presenceData.state = `Pagina: ${document.location.href.replace(
 				"https://www.hentaiworld.eu/movies?page=",
 				""
 			)}`;
 		} else {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Nella categoria: Film";
 			presenceData.state = "Pagina: 1";
 		}
@@ -491,14 +493,14 @@ presence.on("UpdateData", () => {
 		if (
 			document.location.href.startsWith("https://www.hentaiworld.eu/ova?page=")
 		) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Nella categoria: OVA";
 			presenceData.state = `Pagina: ${document.location.href.replace(
 				"https://www.hentaiworld.eu/ova?page=",
 				""
 			)}`;
 		} else {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Nella categoria: OVA";
 			presenceData.state = "Pagina: 1";
 		}
@@ -507,14 +509,14 @@ presence.on("UpdateData", () => {
 		if (
 			document.location.href.startsWith("https://www.hentaiworld.eu/ona?page=")
 		) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Nella categoria: ONA";
 			presenceData.state = `Pagina: ${document.location.href.replace(
 				"https://www.hentaiworld.eu/ona?page=",
 				""
 			)}`;
 		} else {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Nella categoria: ONA";
 			presenceData.state = "Pagina: 1";
 		}
@@ -525,14 +527,14 @@ presence.on("UpdateData", () => {
 				"https://www.hentaiworld.eu/specials?page="
 			)
 		) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Nella categoria: Specials";
 			presenceData.state = `Pagina: ${document.location.href.replace(
 				"https://www.hentaiworld.eu/specials?page=",
 				""
 			)}`;
 		} else {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Nella categoria: Specials";
 			presenceData.state = "Pagina: 1";
 		}
@@ -543,14 +545,14 @@ presence.on("UpdateData", () => {
 				"https://www.hentaiworld.eu/preview?page="
 			)
 		) {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Nella categoria: Preview";
 			presenceData.state = `Pagina: ${document.location.href.replace(
 				"https://www.hentaiworld.eu/preview?page=",
 				""
 			)}`;
 		} else {
-			presenceData.smallImageKey = "search";
+			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Nella categoria: Preview";
 			presenceData.state = "Pagina: 1";
 		}
@@ -568,7 +570,7 @@ presence.on("UpdateData", () => {
 			Math.floor(duration)
 		);
 		if (iFrameVideo === true && !isNaN(duration)) {
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.details = `Guardando: ${hentainame}`;
 			presenceData.state = paused
 				? `Ep. ${episodenumber}｜In pausa`

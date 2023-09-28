@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "818135576074387507"
+		clientId: "818135576074387507",
 	}),
 	getStrings = async () =>
 		presence.getStrings(
@@ -18,7 +18,7 @@ const presence = new Presence({
 				anime: "general.anime",
 				searchFor: "general.searchFor",
 				viewManga: "general.viewManga",
-				buttonViewProfile: "general.buttonViewProfile"
+				buttonViewProfile: "general.buttonViewProfile",
 			},
 			await presence.getSetting<string>("lang").catch(() => "en")
 		),
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 		MangaDetails,
 		MangaState,
 		timestamp,
-		buttons
+		buttons,
 	] = await Promise.all([
 		presence.getSetting<string>("lang").catch(() => "en"),
 		presence.getSetting<string>("AnimeDetails"),
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
 		presence.getSetting<string>("MangaDetails"),
 		presence.getSetting<string>("MangaState"),
 		presence.getSetting<boolean>("timestamp"),
-		presence.getSetting<boolean>("buttons")
+		presence.getSetting<boolean>("buttons"),
 	]);
 
 	if (oldLang !== newLang || !strings) {
@@ -62,10 +62,11 @@ presence.on("UpdateData", async () => {
 	}
 
 	let presenceData: PresenceData = {
-		largeImageKey: "animep_logo",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Planet/assets/logo.jpg",
 		details: strings.browse,
 		smallImageKey: "reading",
-		startTimestamp: startsTime
+		startTimestamp: startsTime,
 	};
 
 	const path = document.location.pathname,
@@ -77,7 +78,7 @@ presence.on("UpdateData", async () => {
 			)?.textContent.trim(),
 			episode: {
 				title: "",
-				ep: ""
+				ep: "",
 			},
 			titleAndEpisode: document
 				.querySelector("h2.sub")
@@ -86,18 +87,18 @@ presence.on("UpdateData", async () => {
 					""
 				)
 				.trim()
-				.split("-")
+				.split("-"),
 		},
 		animePlanetPages: {
 			[key: string]: PresenceData;
 		} = {
 			"/characters/(top-hated|all|top-loved)": {
 				details: strings.viewPage,
-				state: content.title
+				state: content.title,
 			},
 			"/characters/tags": {
 				details: strings.viewPage,
-				state: "Characters"
+				state: "Characters",
 			},
 			"/characters/": {
 				details: "Viewing character:",
@@ -107,9 +108,9 @@ presence.on("UpdateData", async () => {
 				buttons: [
 					{
 						label: "View Character",
-						url: document.baseURI
-					}
-				]
+						url: document.baseURI,
+					},
+				],
 			},
 			"/forum/forums/": {
 				details: "Reading forum:",
@@ -117,9 +118,9 @@ presence.on("UpdateData", async () => {
 				buttons: [
 					{
 						label: "Read Forum",
-						url: document.baseURI
-					}
-				]
+						url: document.baseURI,
+					},
+				],
 			},
 			"/forum/threads/": {
 				details: "Reading thread:",
@@ -127,27 +128,27 @@ presence.on("UpdateData", async () => {
 				buttons: [
 					{
 						label: "Read Thread",
-						url: document.baseURI
-					}
-				]
+						url: document.baseURI,
+					},
+				],
 			},
 			"/forum/": {
 				details: strings.viewPage,
-				state: "Forums"
+				state: "Forums",
 			},
 			"/challenges/": {
 				details: "Viewing challenge:",
-				state: content.title
+				state: content.title,
 			},
 			"/community/": {
 				details: strings.viewPage,
-				state: `Community • ${content.title}`
+				state: `Community • ${content.title}`,
 			},
 			"reviews.php": {
 				details: strings.viewPage,
 				state: `${content.title} • ${
 					location.search.endsWith("anime") ? "Anime" : "Manga"
-				}`
+				}`,
 			},
 			"/users/": {
 				details: strings.viewProfile,
@@ -157,47 +158,47 @@ presence.on("UpdateData", async () => {
 				buttons: [
 					{
 						label: strings.buttonViewProfile,
-						url: document.baseURI
-					}
-				]
+						url: document.baseURI,
+					},
+				],
 			},
 			"/studios/": {
 				details: "Viewing studio:",
-				state: content.title
+				state: content.title,
 			},
 			"/manga/(read-online|recommendations|light-novels|top-manga|all|magazines)":
 				{
 					details: strings.viewPage,
-					state: content.title
+					state: content.title,
 				},
 			"/manga/tags/": {
 				details: "Manga | Viewing tag:",
-				state: content.title
+				state: content.title,
 			},
 			"/manga/": {
 				details: strings.viewManga,
-				state: content.title
+				state: content.title,
 			},
 			"/anime/(watch-online|top-anime|seasons|all|recommendations)": {
 				details: strings.viewPage,
-				state: content.title
+				state: content.title,
 			},
 			"/anime/tags/": {
 				details: "Anime | Viewing tag:",
-				state: content.title
+				state: content.title,
 			},
 			"/anime/": {
 				details: strings.viewAnime,
-				state: content.title
+				state: content.title,
 			},
 			"/login": {
 				details: strings.viewPage,
-				state: "The login page"
+				state: "The login page",
 			},
 			"/sign-up": {
 				details: strings.viewPage,
-				state: "The sign up page"
-			}
+				state: "The sign up page",
+			},
 		};
 
 	for (const [key, value] of Object.entries(animePlanetPages)) {
@@ -246,18 +247,18 @@ presence.on("UpdateData", async () => {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(currentTime, duration);
 
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? strings.pause : strings.play;
 
 			presenceData.buttons = [
 				{
 					label: strings.viewEpisode,
-					url: document.baseURI
+					url: document.baseURI,
 				},
 				{
 					label: strings.viewSeries,
-					url: document.querySelector<HTMLAnchorElement>("h2.sub > a").href
-				}
+					url: document.querySelector<HTMLAnchorElement>("h2.sub > a").href,
+				},
 			];
 
 			if (paused) {
@@ -288,8 +289,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Read Chapter",
-				url: document.baseURI
-			}
+				url: document.baseURI,
+			},
 		];
 	}
 

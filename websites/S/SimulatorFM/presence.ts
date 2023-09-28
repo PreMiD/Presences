@@ -1,11 +1,12 @@
 const presence = new Presence({
-		clientId: "790721299126943744"
+		clientId: "790721299126943744",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "largelogo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/S/SimulatorFM/assets/logo.png",
 	};
 
 	if (document.querySelector<HTMLElement>(".fa-pause")) {
@@ -23,7 +24,7 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "Viewing";
 				presenceData.state = "Recently Played";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presence.setActivity(presenceData);
 
 				break;
@@ -32,7 +33,7 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "Typing";
 				presenceData.state = "A Request";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presence.setActivity(presenceData);
 
 				break;
@@ -41,7 +42,7 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "Viewing";
 				presenceData.state = "Timetable";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presence.setActivity(presenceData);
 
 				break;
@@ -50,7 +51,7 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "Viewing";
 				presenceData.state = "Team Page";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presence.setActivity(presenceData);
 
 				break;
@@ -59,7 +60,7 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "Viewing";
 				presenceData.state = "Apply to become a presenter";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presence.setActivity(presenceData);
 
 				break;
@@ -68,7 +69,7 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "Viewing";
 				presenceData.state = "Contact Page";
-				presenceData.smallImageKey = "reading";
+				presenceData.smallImageKey = Assets.Reading;
 				presence.setActivity(presenceData);
 
 				break;

@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "914354609370329098"
+		clientId: "914354609370329098",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "vyrnball",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy%20Wiki/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.pathname === "/Main_Page")
@@ -32,7 +33,7 @@ presence.on("UpdateData", () => {
 		presenceData.state = (
 			document.querySelector("input[type=search]") as HTMLInputElement
 		).value;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching";
 	} else if (document.location.href.includes("Special:Preferences"))
 		presenceData.details = "Editing preferences";
@@ -51,7 +52,7 @@ presence.on("UpdateData", () => {
 	} else if (document.querySelector(".firstHeading")) {
 		presenceData.details = "Viewing page:";
 		presenceData.state = document.querySelector(".firstHeading").textContent;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 	}
 

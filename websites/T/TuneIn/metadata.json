@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Dark_Ville",
+		"id": "638080361179512853"
+	},
+	"contributors": [
+		{
+			"name": "Alexx",
+			"id": "604182077088202784"
+		}
+	],
+	"service": "TuneIn",
+	"description": {
+		"en": "TuneIn In is an American audio streaming service delivering live news, radio, sports, music, and podcasts to over 60 million monthly active users. As of 2019, TuneIn has more than 75 million monthly active users. TuneIn is operated by company TuneIn Inc which is based in San Francisco, California.",
+		"nl": "TuneIn In is een Amerikaanse audiostreamingservice die live nieuws, radio, sport, muziek en podcasts levert aan meer dan 60 miljoen maandelijkse actieve gebruikers. Vanaf 2019 heeft TuneIn meer dan 75 miljoen maandelijkse actieve gebruikers. TuneIn wordt beheerd door het bedrijf TuneIn Inc, gevestigd in San Francisco, Californië."
+	},
+	"url": "tunein.com",
+	"version": "2.0.12",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TuneIn/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TuneIn/assets/thumbnail.png",
+	"color": "#33B6A8",
+	"category": "music",
+	"tags": [
+		"tunein",
+		"music",
+		"radio",
+		"media"
+	]
+}

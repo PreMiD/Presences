@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "633005889619755038"
+	clientId: "633005889619755038",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Wish/assets/logo.png",
 		},
 		itemsetting = await presence.getSetting<boolean>("items"),
 		languagesetting = await presence.getSetting<string>("language");

@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "630505174032449537"
+	clientId: "630505174032449537",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "virginmedia"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/V/Virgin%20Media/assets/logo.png",
 		},
 		pageTitle = document.title;
 	let currentPage;

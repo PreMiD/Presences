@@ -1,18 +1,19 @@
 const presence = new Presence({
-		clientId: "927785613309116476"
+		clientId: "927785613309116476",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lg",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/C/Chia%20S%E1%BA%BB%20Nh%E1%BA%A1c/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
 		[buttons, timestamps, cover] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("timestamps"),
-			presence.getSetting<boolean>("cover")
+			presence.getSetting<boolean>("cover"),
 		]);
 	if (pathname.startsWith("/hd")) {
 		if (pathname === "/hd/video.html") presenceData.details = "Đang tìm video";

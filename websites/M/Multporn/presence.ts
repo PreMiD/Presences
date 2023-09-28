@@ -1,12 +1,14 @@
 const presence = new Presence({
-		clientId: "791258115622305813"
+		clientId: "791258115622305813",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
 	const button = await presence.getSetting<boolean>("button"),
 		presenceData: PresenceData = {
-			largeImageKey: "mplogo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/Multporn/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		title = document.querySelector(
 			"body > div#page-wrapper > div#page > div#main-wrapper.clearfix > div#main.clearfix > div#content.column > div.section > h1#page-title.title"
@@ -81,7 +83,7 @@ presence.on("UpdateData", async () => {
 
 	if (button) {
 		presenceData.buttons = [
-			{ label: "Read Along", url: document.location.href }
+			{ label: "Read Along", url: document.location.href },
 		];
 	}
 

@@ -1,70 +1,242 @@
 const presence = new Presence({
-  clientId: "691080074006495303"
-});
+		clientId: "691080074006495303",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/N/Nuxt.js/assets/0.png",
+
+	
+}
+
+async function getStrings() {
+	return presence.getStrings(
+		{
+			browse: "general.browsing",
+			search: "general.searchFor",
+			viewHome: "general.viewHome",
+			buttonReadArticle: "general.buttonReadArticle",
+			buttonViewPage: "general.buttonViewPage",
+			buttonViewProfile: "general.buttonViewProfile",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+function capitalizeFirstLetter(string: string) {
+	if (!string) return "Undefined";
+	return (
+		string.trim().charAt(0).toUpperCase() + string.trim().slice(1).toLowerCase()
+	);
+}
+function imgPath(path: string, hostname: string) {
+	if (!path) return Assets.Logo;
+	if (path.includes(hostname)) return `https://${path.replace("//", "")}`;
+	else return `https://${hostname}${path}`;
+}
+
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {},
-   theme = getCookie("nuxt-theme");
+	let presenceData: PresenceData = {
+		startTimestamp: browsingTimestamp,
+		largeImageKey: Assets.Logo,
+	};
+	const [newLang, privacy, buttons, covers] = await Promise.all([
+			presence.getSetting<string>("lang").catch(() => "en"),
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("covers"),
+		]),
+		search = document.querySelector<HTMLInputElement>(
+			'input[id="docsearch-input"]'
+		),
+		ogTitle = document
+			.querySelector('meta[property="og:title"]')
+			?.getAttribute("content")
+			?.toLowerCase(),
+		docTitle = document.querySelector('[class="d-heading-title"]'),
+		subActive = document.querySelector('[class*="-text-active"]'),
+		docusContent = !document.querySelector('[class*="docus-content"]'),
+		{ pathname, hostname, href } = document.location;
 
-  if (!theme) 
-    presenceData.largeImageKey = "logo";
-   else 
-    presenceData.largeImageKey = `${theme}`;
-  
-  presenceData.smallImageKey = "reading";
-  
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
 
-  switch (document.location.hostname.split(".")[0]) {
-    case "fr":
-      presenceData.smallImageText = "Language: Français";
-      break;
-    case "zh":
-      presenceData.smallImageText = "Language: 简体中文";
-      break;
-    case "ja":
-      presenceData.smallImageText = "Language: 日本語";
-      break;
-    case "ko":
-      presenceData.smallImageText = "Language: 한국어";
-      break;
-    case "ru":
-      presenceData.smallImageText = "Language: Русский";
-      break;
-    case "id":
-      presenceData.smallImageText = "Language: Indonesian";
-      break;
-    default:
-      presenceData.smallImageText = "Language: English";
-  }
+	if (privacy) {
+		presenceData.details = strings.browse;
+		presence.setActivity(presenceData);
+		return;
+	}
+	if (search?.value) {
+		presenceData.details = strings.search;
+		presenceData.state = search.value;
+		presenceData.smallImageKey = Assets.Search;
+		presence.setActivity(presenceData);
+		return;
+	}
+	switch (pathname.split("/")[1].replace(/-/gm, "")) {
+		case "casestudies": {
+			if (!docusContent) {
+				presenceData.smallImageKey = Assets.Reading;
+				presenceData.details = "Reading a case studie about";
+				presenceData.state = ogTitle;
+				presenceData.buttons = [
+					{
+						label: "Read Case Studie",
+						url: href,
+					},
+				];
+			} else presenceData.details = "Viewing all case studies";
+			break;
+		}
+		case "deployments": {
+			if (!docusContent) {
+				presenceData.smallImageKey = Assets.Reading;
+				presenceData.details = `Reading about ${ogTitle} nuxt deployment`;
+				if (subActive?.textContent) presenceData.state = subActive.textContent;
+				presenceData.buttons = [
+					{
+						label: strings.buttonReadArticle,
+						url: href,
+					},
+				];
+			} else presenceData.details = "Viewing all deployment options";
 
-  if (document.location.pathname === "/") 
-    presenceData.details = "Home";
-   else if (document.location.pathname.includes("/guide")) {
-    presenceData.details = "Guide";
-    presenceData.state = document.querySelector<HTMLHeadingElement>("article h1").textContent;
-  } else if (document.location.pathname.includes("/api")) {
-    presenceData.details = "API";
-    presenceData.state = document.querySelector<HTMLHeadingElement>("article h1").textContent;
-  } else if (document.location.pathname.includes("/examples")) {
-    presenceData.details = "Examples";
-    presenceData.state = document.querySelector<HTMLHeadingElement>("article h1").textContent;
-  } else if (document.location.pathname.includes("/faq")) {
-    presenceData.details = "FAQ";
-    presenceData.state = document.querySelector<HTMLHeadingElement>("article h1").textContent;
-  } else 
-    presenceData.details = document.querySelector<HTMLTitleElement>("title").textContent;
-  
+			break;
+		}
+		case "announcements": {
+			if (!docusContent) {
+				presenceData.smallImageKey = Assets.Reading;
+				presenceData.details = "Reading announcement about";
+				if (subActive?.textContent)
+					presenceData.state = `${ogTitle} - ${subActive.textContent}`;
+				else presenceData.state = ogTitle;
+				presenceData.buttons = [
+					{
+						label: strings.buttonReadArticle,
+						url: href,
+					},
+				];
+				presenceData.largeImageKey = imgPath(
+					document.querySelector('[class="object-cover"]')?.getAttribute("src"),
+					hostname
+				);
+			} else presenceData.details = "Viewing all announcements";
 
-  if (!presenceData.details) 
-    presence.setActivity();
-   else {
-    if (!presenceData.state) presenceData.state = "Navigate...";
-    presence.setActivity(presenceData);
-  }
+			break;
+		}
+		case "docs": {
+			if (!docusContent && docTitle) {
+				presenceData.details = "Reading documentation about";
+				presenceData.state = `${document
+					.querySelector('li[class="active"] > h5')
+					?.textContent?.trim()} - ${docTitle.textContent}`;
+				presenceData.buttons = [
+					{
+						label: strings.buttonReadArticle,
+						url: href,
+					},
+				];
+			} else presenceData.details = "Browsing the docs";
+			break;
+		}
+		case "examples": {
+			if (!docusContent && docTitle) {
+				presenceData.details = "Viewing an example about";
+				presenceData.state = `${document
+					.querySelector('li[class="active"] > h5')
+					?.textContent?.trim()} - ${docTitle.textContent}`;
+				presenceData.buttons = [
+					{
+						label: strings.buttonReadArticle,
+						url: href,
+					},
+				];
+			} else presenceData.details = "Browsing examples";
+			break;
+		}
+		case "tutorials": {
+			if (!docusContent) {
+				presenceData.details = "Reading a tutorial about";
+				presenceData.state = capitalizeFirstLetter(ogTitle);
+				presenceData.buttons = [
+					{
+						label: "View Tutorial",
+						url: href,
+					},
+				];
+			} else presenceData.details = "Viewing all tutorials";
+			break;
+		}
+		default: {
+			const pages: Record<string, PresenceData> = {
+				"": {
+					details: strings.viewHome,
+				},
+				design: {
+					details: "Viewing design options",
+				},
+				faq: {
+					details: "Viewing FAQs",
+				},
+				partners: {
+					details: "Viewing partners",
+				},
+				support: {
+					details: "Viewing the support page",
+				},
+				teams: {
+					details: "Viewing the Nuxt.js team",
+				},
+				videocourses: {
+					details: "Viewing all video coruses",
+				},
+				sponsors: {
+					details: "Viewing all sponsors",
+				},
+				releases: {
+					details: "Viewing all releases",
+				},
+				themes: {
+					details: "Viewing all themes",
+				},
+				testimonials: {
+					smallImageKey: Assets.Reading,
+					details: "Reading all testimonials",
+					buttons: [
+						{
+							label: "Read Testimonials",
+							url: href,
+						},
+					],
+				},
+				showcase: {
+					details: `Viewing ${document
+						.querySelector('button[class*="rounded-md"]')
+						?.textContent?.toLowerCase()} showcases`,
+				},
+			};
+			for (const [path, data] of Object.entries(pages)) {
+				if (pathname.replace(/-/gm, "").includes(path))
+					presenceData = { ...presenceData, ...data };
+			}
+		}
+	}
+	if (buttons && !presenceData.buttons && pathname !== "/") {
+		presenceData.buttons = [
+			{
+				label: strings.buttonViewPage,
+				url: href,
+			},
+		];
+	}
+
+	if (!buttons && presenceData.buttons) delete presenceData.buttons;
+	if (!covers && presenceData.largeImageKey !== Assets.Logo)
+		presenceData.largeImageKey = Assets.Logo;
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
-
-function getCookie(name?: string) {
-  const 
-   parts = `; ${document.cookie}`.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(";").shift();
-}

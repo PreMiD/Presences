@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "642714892201230336"
+	clientId: "642714892201230336",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "time"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/Time.is/assets/logo.png",
 		},
 		clock =
 			document.querySelector("#clock0_bg") ||

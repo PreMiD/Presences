@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "719732079180644424"
+	clientId: "719732079180644424",
 });
 
 interface TrickSplitData {
@@ -15,7 +15,8 @@ let tsData: TrickSplitData = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "tricksplit"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/TrickSplit.io/assets/logo.png",
 	};
 
 	if (tsData && tsData.connected) {

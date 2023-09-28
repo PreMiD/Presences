@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "690635264124518493"
+	clientId: "690635264124518493",
 });
 
 function parseQueryString(queryString?: string): {
@@ -22,7 +22,8 @@ function parseQueryString(queryString?: string): {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/Y/Yarn/assets/logo.png",
 		},
 		route = document.location.pathname.split("/");
 
@@ -30,9 +31,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Home";
 		presenceData.state = parseQueryString(document.location.hash).q
 			? `Searching ${parseQueryString(document.location.hash).q} (page ${
-					parseQueryString(document.location.hash).p
-						? parseQueryString(document.location.hash).p
-						: "0"
+					parseQueryString(document.location.hash).p ?? "0"
 			  })`
 			: "Navigate...";
 		presenceData.smallImageKey = parseQueryString(document.location.hash).q

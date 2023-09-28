@@ -1,20 +1,21 @@
 const presence = new Presence({
-		clientId: "717563140300210196"
+		clientId: "717563140300210196",
 	}),
 	strings = presence.getStrings({
-		search: "presence.activity.searching"
+		search: "general.searching",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/0-9/8muses/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 	if (new URLSearchParams(window.location.search).has("s")) {
 		presenceData.details = "Searching for:";
 		presenceData.state = document.title.split(" -").shift();
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).search;
 	} else if (document.location.pathname === "/")
 		presenceData.details = "Browsing Homepage";
@@ -37,7 +38,7 @@ presence.on("UpdateData", async () => {
 				.split("/")[2]
 				.replaceAll("_", " ")}`;
 			presenceData.state = issueNumber;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		} else {
 			presenceData.details = comicName;
 			presenceData.state = issueNumber;

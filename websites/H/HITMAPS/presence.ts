@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "842704573877714974"
+	clientId: "842704573877714974",
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "app"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/H/HITMAPS/assets/logo.png",
 	};
 
 	if (document.location.hostname === "roulette.hitmaps.com") {

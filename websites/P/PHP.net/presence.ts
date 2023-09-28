@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "952575137180442626"
+		clientId: "952575137180442626",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "php_logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/PHP.net/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		route = document.location.pathname.split("/");
 
@@ -36,12 +37,12 @@ presence.on("UpdateData", () => {
 				.replaceAll("PHP: ", "")
 				.replaceAll(" - Manual", "");
 			presenceData.buttons = [
-				{ label: "Open Documentation", url: document.location.href }
+				{ label: "Open Documentation", url: document.location.href },
 			];
 			if (route[3].includes("function.")) {
 				presenceData.state = `Function: ${manualTitle}`;
 				presenceData.buttons = [
-					{ label: "View Function", url: document.location.href }
+					{ label: "View Function", url: document.location.href },
 				];
 			} else if (route[3].includes("language.")) {
 				const c = route[3].split(".")[1];
@@ -52,7 +53,7 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "releases":
-			if (route[2] != "") {
+			if (route[2]) {
 				presenceData.details = "Viewing an release version:";
 				presenceData.state = `PHP v${route[2]}`;
 			} else presenceData.details = "Viewing the releases";

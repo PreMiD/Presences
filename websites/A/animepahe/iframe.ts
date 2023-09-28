@@ -19,7 +19,7 @@ iframe.on("UpdateData", () => {
 		sendback = {
 			currentTime: video.currentTime,
 			duration: video.duration,
-			paused: video.paused
+			paused: video.paused,
 		};
 		send();
 	}

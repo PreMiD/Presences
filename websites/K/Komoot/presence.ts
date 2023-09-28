@@ -1,16 +1,17 @@
 const presence = new Presence({
-		clientId: "860131264034897951"
+		clientId: "860131264034897951",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async function () {
 	const setting = {
 			timeElapsed: await presence.getSetting<boolean>("timeElapsed"),
-			showButtons: await presence.getSetting<boolean>("showButtons")
+			showButtons: await presence.getSetting<boolean>("showButtons"),
 		},
 		urlpath = window.location.pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: "logo"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/K/Komoot/assets/logo.png",
 		};
 
 	if (setting.timeElapsed) presenceData.startTimestamp = browsingTimestamp;
@@ -68,8 +69,8 @@ presence.on("UpdateData", async function () {
 					presenceData.buttons = [
 						{
 							label: "View Tour",
-							url: document.location.href
-						}
+							url: document.location.href,
+						},
 					];
 				}
 
@@ -86,8 +87,8 @@ presence.on("UpdateData", async function () {
 						presenceData.buttons = [
 							{
 								label: "View Collection",
-								url: document.location.href
-							}
+								url: document.location.href,
+							},
 						];
 					}
 				} else if (urlpath[1] === "topic" && urlpath[2]) {
@@ -100,8 +101,8 @@ presence.on("UpdateData", async function () {
 						presenceData.buttons = [
 							{
 								label: "View Collection",
-								url: document.location.href
-							}
+								url: document.location.href,
+							},
 						];
 					}
 				} else if (urlpath[1] === "user" && urlpath[2]) {

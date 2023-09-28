@@ -1,12 +1,12 @@
 const presence = new Presence({
-		clientId: "855316349655711744"
+		clientId: "855316349655711744",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		startTimestamp: browsingTimestamp
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/K/Ko-Fi/assets/logo.png",
+		startTimestamp: browsingTimestamp,
 	};
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing the home page.";
@@ -79,8 +79,8 @@ presence.on("UpdateData", () => {
 					label: "View Item",
 					url: `https://ko-fi.com/s/${
 						document.location.pathname.split("/")[2]
-					}?ref=premid_discord_presence`
-				}
+					}?ref=premid_discord_presence`,
+				},
 			];
 		} catch {
 			presenceData.details = "Viewing a shop item.";
@@ -109,8 +109,8 @@ presence.on("UpdateData", () => {
 					label: "View Post",
 					url: `https://ko-fi.com/post/${
 						document.location.pathname.split("/")[2]
-					}?ref=premid_discord_presence`
-				}
+					}?ref=premid_discord_presence`,
+				},
 			];
 		} catch {
 			presenceData.details = "Viewing a post.";
@@ -149,8 +149,8 @@ presence.on("UpdateData", () => {
 				presenceData.buttons = [
 					{
 						label: "View Page",
-						url: `https://ko-fi.com/${userSplit[1]}?ref=premid_discord_presence`
-					}
+						url: `https://ko-fi.com/${userSplit[1]}?ref=premid_discord_presence`,
+					},
 				];
 			}
 

@@ -1,16 +1,20 @@
 const presence = new Presence({
-		clientId: "634081860972052490"
+		clientId: "634081860972052490",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		browsing: "presence.activity.browsing"
+		play: "general.playing",
+		pause: "general.paused",
+		browsing: "general.browsing",
 	});
 let video = {
 	duration: 0,
 	currentTime: 0,
-	paused: true
+	paused: true,
 };
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeFLV/assets/logo.jpg",
+}
 
 presence.on(
 	"iFrameData",
@@ -21,7 +25,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "animeflv"
+		largeImageKey: Assets.Logo,
 	};
 
 	if (
@@ -38,7 +42,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = document.querySelector(
 			"#XpndCn .Title, .CapiCnt .Title"
 		).textContent;
-		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;
@@ -51,7 +55,7 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData, !video.paused);
 	} else {
 		presenceData.details = (await strings).browsing;
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = (await strings).browsing;
 		presence.setActivity(presenceData);
 	}

@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "764916517895798796"
+		clientId: "764916517895798796",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-		live: "presence.activity.live",
-		search: "presence.activity.searching"
+		play: "general.playing",
+		pause: "general.paused",
+		live: "general.live",
+		search: "general.searching",
 	});
 
 /**
@@ -34,11 +34,12 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			details,
 			state,
-			largeImageKey: "slingtv",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Sling%20TV/assets/logo.png",
 			smallImageKey,
 			smallImageText,
 			startTimestamp,
-			endTimestamp
+			endTimestamp,
 		};
 
 	if (href !== oldUrl) {

@@ -1,11 +1,12 @@
 const presence = new Presence({
-		clientId: "630428033966276612"
+		clientId: "630428033966276612",
 	}),
 	strings = presence.getStrings({
-		pause: "presence.playback.paused"
+		pause: "general.paused",
 	}),
 	presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/P/Prambors%20Radio/assets/logo.png",
 	};
 
 let timestamp: number;
@@ -20,8 +21,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Listen to Prambors",
-				url: "https://live.pramborsfm.com"
-			}
+				url: "https://live.pramborsfm.com",
+			},
 		];
 		timestamp ??= Date.now();
 		switch (document.location.hostname) {
@@ -30,7 +31,7 @@ presence.on("UpdateData", async () => {
 				if (status === "stopped") {
 					timestamp = null;
 					delete presenceData.startTimestamp;
-					presenceData.smallImageKey = "pause";
+					presenceData.smallImageKey = Assets.Pause;
 					presenceData.smallImageText = pause;
 				} else if (status === "playing") {
 					presenceData.smallImageKey = "live";
@@ -47,7 +48,7 @@ presence.on("UpdateData", async () => {
 			}
 			case "live.pramborsfm.com": {
 				const buttonAction = [
-					...[...document.querySelectorAll("button")].pop().classList
+					...[...document.querySelectorAll("button")].pop().classList,
 				]
 					.pop()
 					.split("--")
@@ -55,7 +56,7 @@ presence.on("UpdateData", async () => {
 				if (buttonAction === "play") {
 					timestamp = null;
 					delete presenceData.startTimestamp;
-					presenceData.smallImageKey = "pause";
+					presenceData.smallImageKey = Assets.Pause;
 					presenceData.smallImageText = pause;
 				} else if (buttonAction === "pause") {
 					presenceData.smallImageKey = "live";

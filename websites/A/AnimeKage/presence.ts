@@ -1,9 +1,9 @@
 const presence = new Presence({
-		clientId: "640244531346014214"
+		clientId: "640244531346014214",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
+		play: "general.playing",
+		pause: "general.paused",
 	});
 
 let browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -31,10 +31,14 @@ presence.on("iFrameData", (data: IFrameData) => {
 			iFrameVideo,
 			paused,
 			currTime: currentTime,
-			dur: duration
+			dur: duration,
 		} = data.iframeVideo);
 	}
 });
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeKage/assets/logo.png",
+}
 
 presence.on("UpdateData", async () => {
 	if (lastPlaybackState !== playback) {
@@ -42,8 +46,8 @@ presence.on("UpdateData", async () => {
 		browsingTimestamp = Math.floor(Date.now() / 1000);
 	}
 	const presenceData: PresenceData = {
-		largeImageKey: "ak",
-		startTimestamp: browsingTimestamp
+		largeImageKey: Assets.Logo,
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (
@@ -52,7 +56,7 @@ presence.on("UpdateData", async () => {
 		)
 	) {
 		if (iFrameVideo && !isNaN(duration)) {
-			presenceData.smallImageKey = paused ? "pause" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused
 				? (await strings).pause
 				: (await strings).play;
@@ -78,7 +82,7 @@ presence.on("UpdateData", async () => {
 			);
 
 			presenceData.state = title.textContent;
-			presenceData.smallImageKey = "reading";
+			presenceData.smallImageKey = Assets.Reading;
 		}
 	} else if (document.location.pathname === "/")
 		presenceData.details = "Viewing main page";

@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "755666356141293568"
+	clientId: "755666356141293568",
 });
 
 let prev = "";
@@ -28,7 +28,8 @@ function getQuery() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/L/Laftel/assets/logo.png",
 	};
 
 	if (window.location.pathname === "/") presenceData.details = "메인";
@@ -47,8 +48,8 @@ presence.on("UpdateData", async () => {
 					}/detail/`,
 					{
 						headers: {
-							laftel: "TeJava"
-						}
+							laftel: "TeJava",
+						},
 					}
 				)
 			).json();
@@ -66,8 +67,8 @@ presence.on("UpdateData", async () => {
 						}`,
 						{
 							headers: {
-								laftel: "TeJava"
-							}
+								laftel: "TeJava",
+							},
 						}
 					)
 				).json();
@@ -86,12 +87,12 @@ presence.on("UpdateData", async () => {
 						Math.floor(video.currentTime),
 						Math.floor(video.duration)
 					);
-				presenceData.smallImageKey = "play";
+				presenceData.smallImageKey = Assets.Play;
 			} else {
 				presenceData.startTimestamp = null;
 				presenceData.endTimestamp = null;
 				presenceData.state = "일시 정지됨";
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = Assets.Pause;
 			}
 		}
 	}

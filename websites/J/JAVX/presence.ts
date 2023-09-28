@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "830476272978362408"
+		clientId: "830476272978362408",
 	}),
 	strings = presence.getStrings({
 		viewHome: "general.viewHome",
@@ -13,7 +13,7 @@ const presence = new Presence({
 		paused: "general.paused",
 		searchFor: "general.searchFor",
 		searchSomething: "general.searchSomething",
-		search: "general.search"
+		search: "general.search",
 	}),
 	getSearchKeyword = (): string =>
 		new URLSearchParams(location.search).get("s"),
@@ -59,8 +59,9 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "javx",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/J/JAVX/assets/logo.png",
+			startTimestamp: Math.floor(Date.now() / 1000),
 		},
 		{ pathname, search } = location,
 		pagesWithoutTermName = [
@@ -70,7 +71,7 @@ presence.on("UpdateData", async () => {
 			"/favorite",
 			"/actresses",
 			"/studios",
-			"/years"
+			"/years",
 		];
 	if (pathname === "/" && !search) {
 		presenceData.details = (await strings).viewHome;
@@ -146,7 +147,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
 			);
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).paused
 				: (await strings).playing;

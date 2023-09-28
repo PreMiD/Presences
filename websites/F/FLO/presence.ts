@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "857504781438681089"
+	clientId: "857504781438681089",
 });
 
 function getQuery() {
@@ -13,7 +13,7 @@ function getQuery() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "flo-logo"
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/FLO/assets/logo.png",
 		},
 		player = document.querySelector(".playbar_wrap");
 	if (!(player.querySelector("input.progress") as HTMLInputElement).disabled) {
@@ -44,10 +44,10 @@ presence.on("UpdateData", async () => {
 			player.querySelector("p.artist").textContent
 		}`;
 		if (playButton.className.includes("btn-player-play")) {
-			presenceData.smallImageKey = "pause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "일시 정지";
 		} else if (playButton.className.includes("btn-player-pause")) {
-			presenceData.smallImageKey = "playing";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "재생";
 		}
 	} else {
@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 		else {
 			switch (0) {
 				case location.pathname.indexOf("/search"): {
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					presenceData.details = "검색";
 					presenceData.state = getQuery().keyword;
 
@@ -88,7 +88,7 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case location.pathname.indexOf("/new"): {
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					presenceData.details = "최근 발매 음악";
 
 					if (location.pathname === "/new/track")
@@ -120,14 +120,14 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case location.pathname.indexOf("/detail/channel"): {
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					presenceData.details = "테마리스트";
 					presenceData.state = document.querySelector("p.title").textContent;
 
 					break;
 				}
 				case location.pathname.indexOf("/detail/album"): {
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					presenceData.details = "앨범";
 					presenceData.state = `${
 						document.querySelector("p.title").textContent
@@ -137,12 +137,12 @@ presence.on("UpdateData", async () => {
 				}
 				default:
 					if (location.pathname === "/browse") {
-						presenceData.smallImageKey = "search";
+						presenceData.smallImageKey = Assets.Search;
 						presenceData.details = document.querySelector(
 							".chart_content_head>h4"
 						).textContent;
 					} else if (location.pathname.indexOf("/storage") === 0) {
-						presenceData.smallImageKey = "search";
+						presenceData.smallImageKey = Assets.Search;
 						presenceData.smallImageText = "보관함";
 						presenceData.details = "보관함";
 					} else if (location.pathname.indexOf("/purchase") === 0)

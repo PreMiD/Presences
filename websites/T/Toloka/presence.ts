@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "798502531847421962"
+		clientId: "798502531847421962",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,8 @@ let title: HTMLElement, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "toloka"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/logo.png",
 		},
 		showUseramePM = await presence.getSetting<boolean>("name"),
 		showSearchQuery = await presence.getSetting<boolean>("search");
@@ -125,7 +126,7 @@ presence.on("UpdateData", async () => {
 			} else if (document.location.pathname.includes("/faq.php")) {
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.details = "Читаю FAQ";
-				presenceData.smallImageKey = "question";
+				presenceData.smallImageKey = Assets.Question;
 				presenceData.smallImageText = "FAQ";
 			} else if (document.location.pathname.includes("/tracker.php")) {
 				search = document.querySelector(
@@ -138,7 +139,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Шукаю:";
 					presenceData.state = search.value;
 				}
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.smallImageText = "Пошук";
 			} else if (document.location.pathname.includes("/featured")) {
 				presenceData.startTimestamp = browsingTimestamp;
@@ -224,7 +225,7 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = browsingTimestamp;
 				if (document.location.search.includes("?mode=searchuser")) {
 					presenceData.details = "Шукаю співрозмовника";
-					presenceData.smallImageKey = "search";
+					presenceData.smallImageKey = Assets.Search;
 					presenceData.smallImageText = "Пошук";
 				} else if (document.location.search.includes("?search_id=newposts")) {
 					presenceData.details = "Переглядаю нові";
@@ -258,7 +259,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Шукаю:";
 					presenceData.state = search.value;
 				}
-				presenceData.smallImageKey = "search";
+				presenceData.smallImageKey = Assets.Search;
 				presenceData.smallImageText = "Пошук";
 			} else if (document.location.pathname.includes("/release.php")) {
 				presenceData.startTimestamp = browsingTimestamp;

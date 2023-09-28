@@ -1,10 +1,11 @@
 const presence = new Presence({
-	clientId: "620294187878711313"
+	clientId: "620294187878711313",
 });
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "lg-gb"
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Gelbooru/assets/logo.png",
 		},
 		urlParams = new URLSearchParams(window.location.search);
 	if (document.location.pathname === "/")

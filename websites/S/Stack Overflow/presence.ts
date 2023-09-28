@@ -1,7 +1,8 @@
 const presence = new Presence({
-		clientId: "610123745033584651"
+		clientId: "610123745033584651",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 let title: HTMLAnchorElement,
 	pageNumber: HTMLElement,
 	jobPageNumber: HTMLAnchorElement,
@@ -13,9 +14,12 @@ let title: HTMLAnchorElement,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		details: "Unknown page",
-		largeImageKey: "lg"
-	};
+			details: "Unknown page",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Overflow/assets/logo.png",
+			startTimestamp: browsingTimestamp,
+		},
+		showButtons = await presence.getSetting<boolean>("buttons");
 
 	title = document.querySelector("div#question-header h1 a");
 
@@ -47,15 +51,12 @@ presence.on("UpdateData", async () => {
 
 	if (title && document.location.pathname.includes("/questions/")) {
 		presenceData.details = "Reading a question.";
-
 		presenceData.state = title.textContent;
-
-		presenceData.startTimestamp = browsingTimestamp;
+		presenceData.buttons = [
+			{ label: "View Question", url: document.location.href },
+		];
 	} else if (document.location.pathname === "/") {
 		presenceData.state = "Main Page | Home";
-
-		presenceData.startTimestamp = browsingTimestamp;
-
 		delete presenceData.details;
 	} else if (
 		document.location.pathname === "/questions" &&
@@ -66,15 +67,11 @@ presence.on("UpdateData", async () => {
 
 		if (lastquestionsPageNumber > lastPageNumber) {
 			presence.info(`${lastPageNumber} --- ${lastquestionsPageNumber}`);
-
 			lastPage = pageNumber.textContent;
 		}
 
 		presenceData.details = "Browsing all the questions.";
-
 		presenceData.state = `Current page: ${pageNumber.textContent}/${lastPage}`;
-
-		presenceData.startTimestamp = browsingTimestamp;
 	} else {
 		switch (document.location.pathname) {
 			case "/jobs": {
@@ -90,9 +87,6 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Browsing jobs.";
 
 				presenceData.state = `Current page: ${jobPageNumber.textContent}/${lastPage}`;
-
-				presenceData.startTimestamp = browsingTimestamp;
-
 				break;
 			}
 			case "/users": {
@@ -109,9 +103,6 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Browsing users.";
 
 				presenceData.state = `Current page: ${usersortagsPageNumber.textContent}/${lastPage}`;
-
-				presenceData.startTimestamp = browsingTimestamp;
-
 				break;
 			}
 			case "/tags": {
@@ -126,16 +117,12 @@ presence.on("UpdateData", async () => {
 				}
 
 				presenceData.details = "Browsing tags.";
-
 				presenceData.state = `Current page: ${usersortagsPageNumber.textContent}/${lastPage}`;
-
-				presenceData.startTimestamp = browsingTimestamp;
-
 				break;
 			}
-			// No default
 		}
 	}
 
+	if (!showButtons) delete presenceData.buttons;
 	presence.setActivity(presenceData);
 });

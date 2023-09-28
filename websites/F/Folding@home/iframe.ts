@@ -9,8 +9,8 @@ iframe.on("UpdateData", async () => {
 		iframe.send({
 			info: {
 				points: points.textContent,
-				progress: progress.textContent
-			}
+				progress: progress.textContent,
+			},
 		});
 	}
 });

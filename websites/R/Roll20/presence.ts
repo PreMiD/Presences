@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "761236386724446238"
+		clientId: "761236386724446238",
 	}),
 	websiteLoadTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "roll20_logo",
-			startTimestamp: websiteLoadTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/R/Roll20/assets/logo.png",
+			startTimestamp: websiteLoadTimestamp,
 		},
 		hideDetails = await presence.getSetting<boolean>("hideDetails");
 

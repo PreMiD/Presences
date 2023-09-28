@@ -1,6 +1,6 @@
 /* eslint-disable no-one-time-vars/no-one-time-vars */
 const presence = new Presence({
-		clientId: "909577563234508910"
+		clientId: "909577563234508910",
 	}),
 	FLAG_ICONS = [
 		"ar",
@@ -38,7 +38,7 @@ const presence = new Presence({
 		"tr",
 		"uk",
 		"vi",
-		"zs"
+		"zs",
 	],
 	INFO_PAGES = [
 		"approach",
@@ -50,7 +50,7 @@ const presence = new Presence({
 		"mobile",
 		"privacy",
 		"team",
-		"terms"
+		"terms",
 	],
 	API_ENDPOINTS = [
 		"2017-06-30",
@@ -59,15 +59,16 @@ const presence = new Presence({
 		"login",
 		"switch_language",
 		"users",
-		"vocabulary"
+		"vocabulary",
 	],
 	presenceData: PresenceData = {
-		largeImageKey: "icon",
-		startTimestamp: Math.floor(Date.now() / 1000)
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/logo.png",
+		startTimestamp: Math.floor(Date.now() / 1000),
 	},
 	language = {
 		imageKey: null as string,
-		name: null as string
+		name: null as string,
 	};
 
 function updateLanguage() {

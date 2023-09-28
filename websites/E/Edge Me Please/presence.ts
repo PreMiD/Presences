@@ -1,5 +1,5 @@
 const presence = new Presence({
-	clientId: "631199223735517185"
+	clientId: "631199223735517185",
 });
 
 function setTime(a: number): number {
@@ -22,7 +22,7 @@ const messages: {
 		[
 			"STOP! Sorry, no cumshot for you. <br />Try again, maybe you will get lucky next time... Now get your hands off your dick until this is over.",
 			30,
-			"Unable to Cum"
+			"Unable to Cum",
 		],
 		["CUM! DO IT NOW", 15, "Cumming"],
 		["CUM! Take your time, no rush ;)", 60, "Cumming Slowly"],
@@ -31,15 +31,15 @@ const messages: {
 		[
 			"You have 5 seconds to start cumming, otherwise it's game over!",
 			6,
-			"Cumming Faster than flash"
+			"Cumming Faster than flash",
 		],
-		["You can cum now. GO!", 25, "Cumming"]
+		["You can cum now. GO!", 25, "Cumming"],
 	],
 	stop: [
 		[
 			"STOP TOUCHING! Calm down, be ready for the next one...",
 			25,
-			"being ready for next instruction"
+			"being ready for next instruction",
 		],
 		["No touching!", 20, "isn't touching his dick"],
 		["STOP! Quick break ;-)", 10, "taking a quick break"],
@@ -52,7 +52,7 @@ const messages: {
 		["Flex your biceps", 25, "flexing biceps"],
 		["STOP NOW", 15, "is Stopped"],
 		["STOP", 25, "is Stopped"],
-		["DON'T CUM! Stop touching.", 25, "can't Cum yet"]
+		["DON'T CUM! Stop touching.", 25, "can't Cum yet"],
 	],
 	go: [
 		["You can jerk off now!", 30, "jerking off slowly"],
@@ -70,19 +70,19 @@ const messages: {
 		[
 			"Jerk off ONLY the tip, use only TWO FINGERS.",
 			25,
-			"Playing with penis tip with 2 fingers"
+			"Playing with penis tip with 2 fingers",
 		],
 		["Jerk off NOW", 30, "Jerking off close to cum"],
 		["Squeeze your balls", 10, "Squeezing balls"],
-		["Gently slap your balls", 10, "slapping his balls"]
+		["Gently slap your balls", 10, "slapping his balls"],
 	],
 	first: [
-		"This is the warm-up round. Start jerking off and try to get to the edge when the bar gets to 100% of the EDGE zone.<br>You should be ready to cum when the bar reaches the CUM zone.<br>Try to get as close as possible, it will make the rest of the game even more fun!"
+		"This is the warm-up round. Start jerking off and try to get to the edge when the bar gets to 100% of the EDGE zone.<br>You should be ready to cum when the bar reaches the CUM zone.<br>Try to get as close as possible, it will make the rest of the game even more fun!",
 	],
 	speed: [
 		"The game will go faster now, remember NOT to cum yet!",
-		"This is the final phase, you may be allowed to cum any moment now!"
-	]
+		"This is the final phase, you may be allowed to cum any moment now!",
+	],
 };
 
 let gomsgs: string, stopmsgs: string, finishmsgs: string, elapsed;
@@ -104,9 +104,10 @@ presence.on("UpdateData", async () => {
 			presence.setActivity({
 				details: "Preparing to Edge",
 				state: "choosing settings ",
-				//largeImageKey: "banner",
-				largeImageKey: "logo",
-				startTimestamp: elapsed
+				//largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+				startTimestamp: elapsed,
 			});
 		} else {
 			let presenceData;
@@ -115,9 +116,10 @@ presence.on("UpdateData", async () => {
 				const cr = findParents(messages.go, msg) as [string, number, string];
 				presenceData = {
 					details: cr[2],
-					//largeImageKey: "banner",
-					largeImageKey: "logo",
-					endTimestamp: setTime(cr[1])
+					//largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+					endTimestamp: setTime(cr[1]),
 				};
 				presence.setActivity(presenceData);
 			} else if (finishmsgs.includes(msg)) {
@@ -128,18 +130,20 @@ presence.on("UpdateData", async () => {
 				];
 				presenceData = {
 					details: cr[2],
-					//largeImageKey: "banner",
-					largeImageKey: "logo",
-					endTimestamp: setTime(cr[1])
+					//largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+					endTimestamp: setTime(cr[1]),
 				};
 				presence.setActivity(presenceData);
 			} else if (stopmsgs.includes(msg)) {
 				const cr = findParents(messages.stop, msg) as [string, number, string];
 				presenceData = {
 					details: cr[2],
-					//largeImageKey: "banner",
-					largeImageKey: "logo",
-					endTimestamp: setTime(cr[1])
+					//largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+					endTimestamp: setTime(cr[1]),
 				};
 
 				presence.setActivity(presenceData);
@@ -150,9 +154,10 @@ presence.on("UpdateData", async () => {
 				elapsed = Math.floor(Date.now() / 1000);
 				presence.setActivity({
 					details: "jerking of slowly for edging",
-					//largeImageKey: "banner",
-					largeImageKey: "logo",
-					startTimestamp: elapsed
+					//largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
+					startTimestamp: elapsed,
 				});
 			}
 		}

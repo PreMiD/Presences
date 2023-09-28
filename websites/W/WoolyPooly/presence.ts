@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "783702757021581352"
+		clientId: "783702757021581352",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -7,7 +7,8 @@ let currencyTitle, currencyEffort, effortType, wallet24Revenue: string;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/logo.png",
 	};
 
 	switch (window.location.pathname) {

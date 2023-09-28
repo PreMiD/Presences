@@ -1,12 +1,13 @@
 const presence = new Presence({
-		clientId: "889524311566725161"
+		clientId: "889524311566725161",
 	}),
 	browsingTimestamp = Date.now();
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/padlet/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		pathnames = location.pathname.split("/");
 
@@ -52,7 +53,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Creating a Padlet";
 		presenceData.state = "Choosing a template";
 
-		presenceData.smallImageKey = "writing";
+		presenceData.smallImageKey = Assets.Writing;
 		presenceData.smallImageText = "Creating";
 	} else if (document.querySelector("#wall-container")) {
 		//Padlet
@@ -63,12 +64,12 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = padletData.name;
 		presenceData.state = `By: ${padletData.author.name}`;
-		presenceData.smallImageKey = "reading";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 
 		presenceData.buttons = [
 			{ label: "View Padlet", url: padletData.url },
-			{ label: "View Author", url: padletData.author.url }
+			{ label: "View Author", url: padletData.author.url },
 		];
 	} else if (document.querySelector(".header-user-info")) {
 		//Author
@@ -82,7 +83,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(".header-user-bio").textContent;
 
 		presenceData.buttons = [
-			{ label: "View Author", url: `https://padlet.com/${padletData.url}` }
+			{ label: "View Author", url: `https://padlet.com/${padletData.url}` },
 		];
 	}
 

@@ -1,13 +1,14 @@
 const presence = new Presence({
-		clientId: "908758869470216203"
+		clientId: "908758869470216203",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			state: "All shots",
-			largeImageKey: "dribbble",
-			startTimestamp: browsingTimestamp
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Dribbble/assets/logo.png",
+			startTimestamp: browsingTimestamp,
 		},
 		shotsTypes = (type: string) => {
 			if (document.location.pathname.includes("/animation"))

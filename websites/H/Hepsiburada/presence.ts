@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "629650221634158592"
+		clientId: "629650221634158592",
 	}),
 	pages: {
 		[name: string]: string;
@@ -17,7 +17,7 @@ const presence = new Presence({
 		"/kampanyalar": "Kampanyalar",
 		"/girisimci-kadinlar": "Girişimci Kadınlar",
 		"/yardim": "Yardım & Destek",
-		"/hesabim/bize-sorun": "Bize Sorun"
+		"/hesabim/bize-sorun": "Bize Sorun",
 	};
 
 presence.on("UpdateData", async () => {
@@ -36,8 +36,9 @@ presence.on("UpdateData", async () => {
 			"#productResult > div > div > div > div.col.lg-1.md-1.sm-1.filter-content > section > div > div.title-wrapper.with-bg.for-desktop.brand > h1"
 		) as HTMLElement,
 		presenceData: PresenceData = {
-			largeImageKey: "hb-logo",
-			startTimestamp: Math.floor(Date.now() / 1000)
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/Hepsiburada/assets/logo.png",
+			startTimestamp: Math.floor(Date.now() / 1000),
 		};
 
 	if (productName && productName.textContent !== "") {
@@ -54,7 +55,7 @@ presence.on("UpdateData", async () => {
 			document.title && document.title.includes(" - Hepsiburada")
 				? document.title.replace(" - Hepsiburada", "")
 				: "";
-		presenceData.smallImageKey = "search";
+		presenceData.smallImageKey = Assets.Search;
 	} else if (seller && seller.textContent !== "") {
 		presenceData.details = "Bir mağazaya göz atıyor:";
 		presenceData.state = seller.textContent.trim();

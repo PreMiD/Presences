@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "768942376403075073" //Discord Client ID
+		clientId: "768942376403075073", //Discord Client ID
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "home" // Banner
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/logo.png", // Banner
 	};
 	presenceData.startTimestamp = browsingTimestamp;
 

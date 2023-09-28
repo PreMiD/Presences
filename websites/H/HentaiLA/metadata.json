@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Yelo",
+		"id": "425326889565945856"
+	},
+	"service": "HentaiLA",
+	"description": {
+		"en": "HentaiLa the best site to watch hentai in Latin America. We have uncensored hentai separated into genres and categories.",
+		"es": "HentaiLa el mejor sitio para ver hentai en Latinoamérica. Tenemos hidrógeno sin censura separado en géneros y categorías."
+	},
+	"url": "hentaila.com",
+	"version": "1.0.14",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HentaiLA/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HentaiLA/assets/thumbnail.png",
+	"color": "#EA4C89",
+	"category": "other",
+	"tags": [
+		"hentai",
+		"spanish",
+		"subtitle",
+		"nsfw"
+	],
+	"iframe": true,
+	"iFrameRegExp": ".*"
+}

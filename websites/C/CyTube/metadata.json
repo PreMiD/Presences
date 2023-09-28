@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "MulverineX",
+		"id": "178551656714076161"
+	},
+	"service": "CyTube",
+	"description": {
+		"en": "Content Sharing Platform with wide platform support of simultaneously enjoying videos/music with a live chat and tons of customization/moderation tools",
+		"nl": "Content Sharing Platform met brede platformondersteuning om tegelijkertijd te genieten van video's/muziek met een live chat en tal van aanpassingstools/moderatietools"
+	},
+	"url": "cytu.be",
+	"version": "1.1.25",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/CyTube/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/CyTube/assets/thumbnail.png",
+	"color": "#263144",
+	"category": "videos",
+	"tags": [
+		"video",
+		"music",
+		"media"
+	],
+	"iframe": true,
+	"iFrameRegExp": ".*"
+}
