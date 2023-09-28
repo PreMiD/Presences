@@ -22,5 +22,6 @@
 		"openfing",
 		"engineering"
 	],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
