@@ -23,5 +23,5 @@
 		"engineering"
 	],
 	"iframe": true,
-	"iFrameRegExp": "(https://open.fing.edu.uy/courses).*"
+	"iFrameRegExp": "https:[/][/]open[.]fing[.]edu[.]uy[/]courses.*"
 }
