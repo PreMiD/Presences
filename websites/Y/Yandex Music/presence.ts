@@ -21,34 +21,45 @@ setInterval(async () => {
 	const startedAt =
 			Date.now() -
 			getMillisecondsFromString(
-				(document.querySelectorAll(".progress__left")[0] as HTMLElement)
-					.textContent
+				document.querySelectorAll<HTMLElement>(".progress__left")[0].textContent
 			),
 		playing =
 			document.querySelectorAll(".player-controls__btn_pause").length === 2;
 
 	let artists;
 	if (isPodcast()) {
-		artists = (document.querySelectorAll(".track__podcast")[0] as HTMLElement)
-			.textContent;
+		artists =
+			document.querySelectorAll<HTMLElement>(".track__podcast")[0].textContent;
 	} else {
-		artists = (document.querySelectorAll(".track__artists")[0] as HTMLElement)
-			.textContent;
+		artists =
+			document.querySelectorAll<HTMLElement>(".track__artists")[0].textContent;
 	}
 
+	const coverImageSizes = document
+			.querySelector(".track")
+			.querySelector<HTMLImageElement>(".entity-cover__image")
+			.srcset // get all images of all sizes
+			.split(", "),
+		coverImage = coverImageSizes
+			.at(-1) // get the last one (the best one)
+			.split(" ")
+			.at(0),
+		largeImageKey = coverImage
+			? `https:${coverImage}`
+			: "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex%20Music/assets/logo.png";
+
 	presenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/Y/Yandex%20Music/assets/logo.png",
+		largeImageKey,
 		smallImageKey: playing ? "play" : "pause",
 		smallImageText: playing ? (await strings).playing : (await strings).pause,
-		details: (document.querySelectorAll(".track__title")[0] as HTMLElement)
-			.textContent,
+		details:
+			document.querySelectorAll<HTMLElement>(".track__title")[0].textContent,
 		state: artists,
 		startTimestamp: startedAt,
 		endTimestamp:
 			startedAt +
 			getMillisecondsFromString(
-				(document.querySelectorAll(".progress__right")[0] as HTMLElement)
+				document.querySelectorAll<HTMLElement>(".progress__right")[0]
 					.textContent
 			),
 	};

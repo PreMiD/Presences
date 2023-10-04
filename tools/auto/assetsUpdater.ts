@@ -74,12 +74,17 @@ if (deletedPresenceFolders.length) {
 	for (const folder of deletedPresenceFolders) {
 		const start = Date.now(),
 			assetsManager = new AssetsManager(folder),
-			allAssets = await assetsManager.allAssets(),
+			allAssets = await assetsManager.getCdnAssets(),
 			assets = [
 				allAssets.logo,
 				allAssets.thumbnail,
-				...allAssets.assets,
-			].filter(asset => asset.startsWith(assetsManager.assetBaseUrl));
+				allAssets.assets ? [...allAssets.assets.values()] : [],
+			]
+				.flat()
+				.filter(
+					(asset): asset is string =>
+						!!asset && asset.startsWith(assetsManager.assetBaseUrl)
+				);
 
 		if (!assets.length) {
 			actions.info(

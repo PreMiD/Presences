@@ -331,8 +331,11 @@ presence.on("UpdateData", async () => {
 				if (pathSplit[1]) {
 					switch (pathSplit[2] ?? "") {
 						case "": {
-							presenceData.details = "Viewing course";
-							presenceData.state = firstPath;
+							if (privacyMode) presenceData.details = "Viewing a course";
+							else {
+								presenceData.details = "Viewing course";
+								presenceData.state = firstPath;
+							}
 							break;
 						}
 						case "announcements": {
@@ -460,8 +463,12 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						case "external_tools": {
-							presenceData.details = `Viewing course: ${firstPath}`;
-							presenceData.state = topPath;
+							if (privacyMode)
+								presenceData.details = "Viewing external tools for a course";
+							else {
+								presenceData.details = `Viewing course: ${firstPath}`;
+								presenceData.state = topPath;
+							}
 							break;
 						}
 						case "files": {

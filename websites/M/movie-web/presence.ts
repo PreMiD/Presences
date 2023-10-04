@@ -256,9 +256,8 @@ presence.on("UpdateData", async () => {
 			const title = `${meta.meta.title} (${meta.meta.year})`;
 			if (meta.meta.type === "series" && episode) {
 				presenceData.details = `S${meta.meta.seasonData.number}E${
-					meta.meta.seasonData.episodes.find(
-						episode => episode.id === episode.id
-					).number
+					meta.meta.seasonData.episodes.find(e => e.id === episode.episodeId)
+						.number
 				} — ${title}`;
 			} else presenceData.details = title;
 
