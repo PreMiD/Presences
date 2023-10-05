@@ -18,7 +18,7 @@ presence.on("UpdateData", () => {
 					c.toUpperCase()
 				)} - ${Number(route[4][0]) ? `v${route[4]}` : `${route[4]}`}`;
 				if (route.length === 5) {
-					data.details = `Viewing:`;
+					data.details = "Viewing:";
 					data.state = `${route[3].replace(/^[a-z]/i, c =>
 						c.toUpperCase()
 					)} About`;
