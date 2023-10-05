@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
       largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Discord.js/assets/logo.png",
       startTimestamp: browsingStamp
   }
-  var route = document.location.pathname.split("/");
+  let route = document.location.pathname.split("/");
   switch (document.location.hostname) {
     case "discord.js.org": {
       if (route[1] === "docs") {
