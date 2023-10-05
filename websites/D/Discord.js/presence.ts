@@ -35,9 +35,6 @@ presence.on("UpdateData", () => {
         data.details = "Browsing the main page...";
       else if (route[1] === "docs") {
         [, , data.smallImageKey] = route;
-        // data.smallImageText = `${route[2].replace(/^[a-z]/i, (c) =>
-        //   c.toUpperCase()
-        // )} - ${Number(route[3][0]) ? `v${route[3]}` : `${route[3]}`}`;
         data.smallImageText = `a${data.smallImageKey}a`
       
         if (route[4].startsWith("search?q=")) {
