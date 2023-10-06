@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "638080361179512853",
+		"name": "dark_ville"
+	},
+	"service": "E-Pal",
+	"description": {
+		"en": "E-Pal is a social hub for gamers around the world to team up, make friends, and have fun."
+	},
+	"url": [
+		"www.epal.gg",
+		"epal.gg"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/1Ugsu4o.png",
+	"thumbnail": "https://i.imgur.com/K3UjWuJ.png",
+	"color": "#7041e6",
+	"category": "socials",
+	"tags": [
+		"epal",
+		"pals",
+		"friends",
+		"gaming",
+		"game"
+	]
+}
