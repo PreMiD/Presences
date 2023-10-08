@@ -20,5 +20,5 @@
 		"serie"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": "s[0-9]?[.]devcorp[.]me"
 }

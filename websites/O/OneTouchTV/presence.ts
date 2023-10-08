@@ -61,20 +61,19 @@ presence.on("UpdateData", async () => {
 		}
 		case pathname.includes("/detail/"): {
 			const title =
-					document
-						.querySelector("title")
-						.textContent.replace(/ - OneTouch TV/gm, "")
-						.trim() === ""
-						? document
-								.querySelector("body > flt-glass-pane")
-								.shadowRoot.querySelector(
-									"flt-scene-host > flt-scene > flt-transform > flt-offset > flt-offset > flt-clip > flt-clip-interior > flt-offset > flt-clip > flt-clip-interior > flt-clip > flt-clip-interior > flt-offset > flt-offset > flt-clip > flt-clip-interior > flt-offset:nth-child(2) > flt-picture:nth-child(3) > flt-canvas > flt-paragraph:nth-child(3) > flt-span:nth-child(1)"
-								)?.textContent
-						: document
-								.querySelector("title")
-								?.textContent.replace(/ - OneTouch TV/gm, ""),
-				episode = title?.includes("Episode");
-			if (episode) {
+				document
+					.querySelector("title")
+					.textContent.replace(/ - OneTouch TV/gm, "")
+					.trim() === ""
+					? document
+							.querySelector("body > flt-glass-pane")
+							.shadowRoot.querySelector(
+								"flt-scene-host > flt-scene > flt-transform > flt-offset > flt-offset > flt-clip > flt-clip-interior > flt-offset > flt-clip > flt-clip-interior > flt-clip > flt-clip-interior > flt-offset > flt-offset > flt-clip > flt-clip-interior > flt-offset:nth-child(2) > flt-picture:nth-child(3) > flt-canvas > flt-paragraph:nth-child(3) > flt-span:nth-child(1)"
+							)?.textContent
+					: document
+							.querySelector("title")
+							?.textContent.replace(/ - OneTouch TV/gm, "");
+			if (title?.includes("Episode")) {
 				presenceData.details = title.split("- Episode")[0];
 				presenceData.state = `Episode${title.split("- Episode")[1]}`;
 			} else presenceData.details = title;
