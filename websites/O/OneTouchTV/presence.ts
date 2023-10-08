@@ -60,22 +60,23 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case pathname.includes("/detail/"): {
-			const title =
-				document
+			const allElements = document
+				.querySelector("body > flt-glass-pane")
+				.shadowRoot.querySelectorAll("flt-paragraph");
+			let title: string;
+			for (const [, element] of allElements.entries()) {
+				if (element.textContent.includes(")") && !title)
+					title = element.textContent;
+			}
+			if (!title) {
+				title = document
 					.querySelector("title")
-					.textContent.replace(/ - OneTouch TV/gm, "")
-					.trim() === ""
-					? document
-							.querySelector("body > flt-glass-pane")
-							.shadowRoot.querySelector(
-								"flt-scene-host > flt-scene > flt-transform > flt-offset > flt-offset > flt-clip > flt-clip-interior > flt-offset > flt-clip > flt-clip-interior > flt-clip > flt-clip-interior > flt-offset > flt-offset > flt-clip > flt-clip-interior > flt-offset:nth-child(2) > flt-picture:nth-child(3) > flt-canvas > flt-paragraph:nth-child(3) > flt-span:nth-child(1)"
-							)?.textContent
-					: document
-							.querySelector("title")
-							?.textContent.replace(/ - OneTouch TV/gm, "");
+					?.textContent.replace(/( - )|(OneTouch TV)/gm, "");
+			}
+
 			if (title?.includes("Episode")) {
-				presenceData.details = title.split("- Episode")[0];
-				presenceData.state = `Episode${title.split("- Episode")[1]}`;
+				presenceData.details = title.split("Episode")[0];
+				presenceData.state = `Episode${title.split("Episode")[1]}`;
 			} else presenceData.details = title;
 
 			if (video) {
