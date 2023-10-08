@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "638080361179512853",
 		"name": "dark_ville"
@@ -14,7 +14,11 @@
 	"thumbnail": "https://i.imgur.com/VGiNeKD.png",
 	"color": "#000000",
 	"category": "videos",
-	"tags": ["tv", "movie", "serie"],
+	"tags": [
+		"tv",
+		"movie",
+		"serie"
+	],
 	"iframe": true,
 	"iFrameRegExp": ".*"
 }
