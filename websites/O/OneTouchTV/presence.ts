@@ -1,7 +1,6 @@
 const presence = new Presence({
-		clientId: "1160179473044476017",
-	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	clientId: "1160179473044476017",
+});
 
 class iframeData {
 	paused: boolean;
@@ -14,12 +13,26 @@ presence.on("iFrameData", (data: iframeData) => {
 	video = data;
 });
 
+const timestampCheck: {
+	hash: string;
+	timestamp: number;
+} = {
+	hash: "",
+	timestamp: Math.floor(Date.now() / 1000),
+};
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/v04o7nQ.png",
-			startTimestamp: browsingTimestamp,
+			startTimestamp: timestampCheck.timestamp,
 		},
 		{ href, pathname } = document.location;
+	let hash: string = href;
+
+	if (timestampCheck.hash !== hash) {
+		timestampCheck.hash = hash;
+		timestampCheck.timestamp = Math.floor(Date.now() / 1000);
+	}
 
 	switch (true) {
 		case pathname === "/": {
@@ -93,5 +106,6 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 	}
+
 	presence.setActivity(presenceData);
 });
