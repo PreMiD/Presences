@@ -1,6 +1,9 @@
+const enum Assets {
+	Logo = "https://i.imgur.com/UhCCRnQ.png"
+}
 const presence = new Presence({ clientId: "1160993221854380132" }),
 	presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/UhCCRnQ.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 
@@ -16,19 +19,19 @@ presence.on("UpdateData", async () => {
 	) {
 		case "/":
 			presenceData.details = "Viewing homepage";
-			presenceData.largeImageKey = "https://i.imgur.com/UhCCRnQ.png";
-			presenceData.smallImageKey = "";
+			presenceData.largeImageKey = Assets.Logo;
+			delete presenceData.smallImageKey;
 			break;
 		case `/r/${document.location.pathname.split("/")[2]}`:
 			presenceData.details = "Prompting a template";
 			presenceData.state = `User prompt: "${document
 				.querySelector("span.text-sm.line-clamp-1.text-ellipsis.text-left")
 				.textContent.slice(0, 50)}"`;
-			presenceData.buttons = null;
+				delete presenceData.buttons;
 			break;
 		case `/t/${document.location.pathname.split("/")[2]}`:
 			presenceData.details = `Viewing a template by @${
-				(document.querySelector("a.flex-none") as HTMLAnchorElement).href.split(
+				(document.querySelector<HTMLAnchorElement>("a.flex-none")).href.split(
 					"/"
 				)[3]
 			}`;
@@ -50,9 +53,9 @@ presence.on("UpdateData", async () => {
 				document.location.pathname.split("/")[1]
 			} profile`;
 			presenceData.largeImageKey = (
-				document.querySelector("img.rounded-full.h-12.w-12") as HTMLImageElement
+				document.querySelector<HTMLImageElement>("img.rounded-full.h-12.w-12")
 			).src;
-			presenceData.smallImageKey = "https://i.imgur.com/UhCCRnQ.png";
+			presenceData.smallImageKey = Assets.Logo;
 			presenceData.buttons = [
 				{
 					label: "View profile",
