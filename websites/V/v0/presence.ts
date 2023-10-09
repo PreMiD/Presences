@@ -1,5 +1,5 @@
 const enum Assets {
-	Logo = "https://i.imgur.com/UhCCRnQ.png"
+	Logo = "https://i.imgur.com/UhCCRnQ.png",
 }
 const presence = new Presence({ clientId: "1160993221854380132" }),
 	presenceData: PresenceData = {
@@ -27,13 +27,13 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `User prompt: "${document
 				.querySelector("span.text-sm.line-clamp-1.text-ellipsis.text-left")
 				.textContent.slice(0, 50)}"`;
-				delete presenceData.buttons;
+			delete presenceData.buttons;
 			break;
 		case `/t/${document.location.pathname.split("/")[2]}`:
 			presenceData.details = `Viewing a template by @${
-				(document.querySelector<HTMLAnchorElement>("a.flex-none")).href.split(
-					"/"
-				)[3]
+				document
+					.querySelector<HTMLAnchorElement>("a.flex-none")
+					.href.split("/")[3]
 			}`;
 			presenceData.state = `"${document
 				.querySelector(
@@ -47,13 +47,12 @@ presence.on("UpdateData", async () => {
 				},
 			];
 			break;
-		// v0.dev/{username}
 		case `/${document.location.pathname.split("/")[1]}`:
 			presenceData.details = `Viewing @${
 				document.location.pathname.split("/")[1]
 			} profile`;
-			presenceData.largeImageKey = (
-				document.querySelector<HTMLImageElement>("img.rounded-full.h-12.w-12")
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+				"img.rounded-full.h-12.w-12"
 			).src;
 			presenceData.smallImageKey = Assets.Logo;
 			presenceData.buttons = [
