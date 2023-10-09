@@ -26,8 +26,8 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/v04o7nQ.png",
 			startTimestamp: timestampCheck.timestamp,
 		},
-		{ href, pathname } = document.location;
-	let hash: string = href;
+		{ href, pathname } = document.location,
+	hash = href;
 
 	if (timestampCheck.hash !== hash) {
 		timestampCheck.hash = hash;
