@@ -2,7 +2,7 @@ const presence = new Presence({
 	clientId: "1160179473044476017",
 });
 
-class iframeData {
+interface iframeData {
 	paused: boolean;
 	duration: number;
 	currentTime: number;
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: timestampCheck.timestamp,
 		},
 		{ href, pathname } = document.location,
-	hash = href;
+		hash = href;
 
 	if (timestampCheck.hash !== hash) {
 		timestampCheck.hash = hash;
