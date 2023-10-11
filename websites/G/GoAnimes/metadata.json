@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "465329875792691201",
+		"name": "misakiix"
+	},
+	"service": "GoAnimes",
+	"description": {
+		"en": "GoAnimes is one of the most popular websites to watch anime content.",
+		"pt_BR": "GoAnimes é um dos sites populares para assistir conteúdo de anime."
+	},
+	"url": "goanimes.net",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/xdzfMcM.png",
+	"thumbnail": "https://i.imgur.com/JOMYemm.jpg",
+	"color": "#0c0b10",
+	"category": "anime",
+	"tags": ["animes", "goanimes"],
+	"iframe": true,
+	"iFrameRegExp": ".*"
+}
