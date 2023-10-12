@@ -17,5 +17,4 @@
 	"category": "anime",
 	"tags": ["animes", "goanimes"],
 	"iframe": true,
-	"iFrameRegExp": ".*"
 }
