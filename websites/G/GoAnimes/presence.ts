@@ -34,7 +34,7 @@ presence.on("iFrameData", (data: IFrameMetaData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/xdzfMcM.png",
+		largeImageKey: "https://i.imgur.com/WJzODPK.png",
 		startTimestamp: onBrowsingTimeStamp,
 	};
 
@@ -71,10 +71,10 @@ presence.on("UpdateData", async () => {
 				)),
 					([presenceData.startTimestamp, presenceData.endTimestamp] =
 						timestamps),
-					(presenceData.smallImageKey = "play"),
+					(presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/resources/play.png"),
 					(presenceData.smallImageText = "Asssitindo");
 			} else {
-				presenceData.smallImageKey = "pause";
+				presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/resources/pause.png";
 				presenceData.smallImageText = "Pausado";
 			}
 		}
