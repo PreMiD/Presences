@@ -71,10 +71,12 @@ presence.on("UpdateData", async () => {
 				)),
 					([presenceData.startTimestamp, presenceData.endTimestamp] =
 						timestamps),
-					(presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/resources/play.png"),
+					(presenceData.smallImageKey =
+						"https://cdn.rcd.gg/PreMiD/resources/play.png"),
 					(presenceData.smallImageText = "Asssitindo");
 			} else {
-				presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/resources/pause.png";
+				presenceData.smallImageKey =
+					"https://cdn.rcd.gg/PreMiD/resources/pause.png";
 				presenceData.smallImageText = "Pausado";
 			}
 		}
