@@ -34,11 +34,10 @@ presence.on("iFrameData", (data: IFrameMetaData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/WJzODPK.png",
-		startTimestamp: onBrowsingTimeStamp,
-	};
-
-	const { pathname } = document.location;
+			largeImageKey: "https://i.imgur.com/WJzODPK.png",
+			startTimestamp: onBrowsingTimeStamp,
+		},
+		{ pathname } = document.location;
 
 	if (pathname === "/") {
 		if (document.title.includes("Você pesquisou por ")) {
