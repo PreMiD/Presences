@@ -38,50 +38,46 @@ presence.on("UpdateData", async () => {
 		startTimestamp: onBrowsingTimeStamp,
 	};
 
-	if (document.location.pathname === "/") {
+	const { pathname } = document.location;
+
+	if (pathname === "/") {
 		if (document.title.includes("Você pesquisou por ")) {
 			presenceData.details = "Pesquisando por: ";
 			presenceData.state = searchTxt.value;
 		} else presenceData.details = "Explorando a homepage";
-	} else if (
-		document.location.pathname.includes("series") ||
-		document.location.pathname.includes("filme")
-	) {
+	} else if (pathname.includes("series") || pathname.includes("filme")) {
 		if (
-			document.location.pathname.split("/").length - 1 === 2 ||
-			document.location.pathname.split("/").length - 1 === 4
+			pathname.split("/").length - 1 === 2 ||
+			pathname.split("/").length - 1 === 4
 		) {
 			presenceData.details = "Explorando o catálogo";
 			presenceData.state = paginationTxt.textContent;
 		} else {
-			presenceData.details = document.location.pathname.includes("filme")
+			presenceData.details = pathname.includes("filme")
 				? "Assistindo um filme"
 				: animenameTxt.textContent;
-			presenceData.state = document.location.pathname.includes("filme")
+			presenceData.state = pathname.includes("filme")
 				? animenameTxt.textContent
 				: airdate.textContent;
 		}
-	} else if (document.location.pathname.includes("episodio")) {
+	} else if (pathname.includes("episodio")) {
 		presenceData.details = episodenameTxt.textContent;
 		if (played) {
 			if (!paused) {
-				(timestamps = presence.getTimestamps(
+				timestamps = presence.getTimestamps(
 					Math.floor(currentTime),
 					Math.floor(duration)
-				)),
-					([presenceData.startTimestamp, presenceData.endTimestamp] =
-						timestamps),
-					(presenceData.smallImageKey =
-						"https://cdn.rcd.gg/PreMiD/resources/play.png"),
-					(presenceData.smallImageText = "Asssitindo");
+				);
+				[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
+				presenceData.smallImageKey = Assets.Play;
+				presenceData.smallImageText = "Asssitindo";
 			} else {
-				presenceData.smallImageKey =
-					"https://cdn.rcd.gg/PreMiD/resources/pause.png";
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "Pausado";
 			}
 		}
-	} else if (document.location.pathname.includes("calendario"))
-		presenceData.details = "Vendo o calendario de lançamentos...";
+	} else if (pathname.includes("calendario"))
+		presenceData.details = "Vendo o calendario de lançamentos";
 
 	presence.setActivity(presenceData);
 });
