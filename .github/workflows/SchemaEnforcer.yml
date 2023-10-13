@@ -38,7 +38,7 @@ jobs:
             git checkout -b $branch;
             git commit -sam "chore: update assets";
             git push -u origin $branch;
-            gh pr create --fill --base main --head $branch --title "chore: update assets" --body "*beep boop* I've updated some assets..." --label chore;
+            gh pr create --fill --base main --head $branch --title "chore: update assets" --body "*beep boop* I've updated some assets...";
           fi
         env:
           GITHUB_USER: SeMiD
