@@ -16,5 +16,6 @@
 	"color": "#0c0b10",
 	"category": "anime",
 	"tags": ["animes", "goanimes"],
-	"iframe": true
+	"iframe": true,
+	"iFrameRegExp": "https://goanimes[.]net/multivideo/\\d+"
 }
