@@ -34,7 +34,8 @@ presence.on("iFrameData", (data: IFrameMetaData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/WJzODPK.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/GoAnimes/assets/logo.png",
 			startTimestamp: onBrowsingTimeStamp,
 		},
 		{ pathname } = document.location;
