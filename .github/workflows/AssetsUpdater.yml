@@ -39,6 +39,8 @@ jobs:
           if git diff-index --quiet HEAD --; then
             exit 0;
           else
+            git config --local user.email "${GITHUB_EMAIL}";
+            git config --local user.name "${GITHUB_USER}";
             branch=semid/au/`date +%F-%H-%M`;
             git checkout -b $branch;
             git commit -sam "chore: update assets";
