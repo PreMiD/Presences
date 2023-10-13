@@ -39,15 +39,15 @@ jobs:
           if git diff-index --quiet HEAD --; then
             exit 0;
           else
-            hub config --global hub.protocol https;
-            hub config --global user.email "${GITHUB_EMAIL}";
-            hub config --global user.name "${GITHUB_USER}";
-            hub remote set-url origin "https://${GITHUB_TOKEN}:x-oauth-basic@github.com/${GITHUB_REPOSITORY}.git";
+            gh config set git_protocol https;
+            gh config set prompt disabled;
+            gh auth login --with-token <<< "${GITHUB_TOKEN}";
             git config --local user.email "${GITHUB_EMAIL}";
             git config --local user.name "${GITHUB_USER}";
             git checkout -b semid/au/`date +%F-%H-%M`;
             git commit -sam "chore: update assets";
-            hub pull-request -b "PreMiD:main" -p -m "chore: update assets" -m "*beep boop* I've updated some assets..." -l chore;
+            git push -u origin semid/au/`date +%F-%H-%M`;
+            gh pr create --fill --base main --head semid/au/`date +%F-%H-%M` --title "chore: update assets" --body "*beep boop* I've updated some assets..." --label chore;
           fi
         env:
           GITHUB_USER: SeMiD
