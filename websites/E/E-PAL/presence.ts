@@ -41,10 +41,11 @@ presence.on("UpdateData", async () => {
 		pathSplit = pathname.split("/"),
 		epalName = document.querySelector('[class*="epal-name"]')?.textContent,
 		epalAvatar = document
-			.querySelector('[class="epal-avatar-image-loader"]')
+			.querySelector('[class="h-full w-full flex justify-center flex-col"]')
+			?.querySelector('[class="epal-avatar-image-loader"]')
 			?.querySelector("img")
 			?.getAttribute("src")
-			?.split("?")?.[0],
+			.replace(/_256/gm, "_512"),
 		extraDrawer = document.querySelector(
 			'[class="ant-drawer-content-wrapper"]'
 		),
@@ -119,8 +120,6 @@ presence.on("UpdateData", async () => {
 						.querySelector('[class*="bg-surface-element-normal"]')
 						?.querySelector("img")
 						?.getAttribute("src") ?? "";
-				if (presenceData.smallImageKey === "")
-					delete presenceData.smallImageKey;
 
 				if (audio && !audio.paused) {
 					[, presenceData.endTimestamp] =
@@ -226,5 +225,6 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
+	if (presenceData.smallImageKey === "") delete presenceData.smallImageKey;
 	presence.setActivity(presenceData);
 });
