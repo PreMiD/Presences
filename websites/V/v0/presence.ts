@@ -1,5 +1,5 @@
 const enum Assets {
-	Logo = "https://i.imgur.com/UhCCRnQ.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/V/v0/assets/logo.png",
 }
 const presence = new Presence({ clientId: "1160993221854380132" }),
 	presenceData: PresenceData = {

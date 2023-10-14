@@ -9,9 +9,9 @@
 		"en": "v0 is a generative user interface system by Vercel powered by AI. It generates copy-and-paste friendly React code based on shadcn/ui and Tailwind CSS that people can use in their projects."
 	},
 	"url": "v0.dev",
-	"version": "1.0.3",
-	"logo": "https://i.imgur.com/UhCCRnQ.png",
-	"thumbnail": "https://i.imgur.com/VFLkTnh.jpg",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/v0/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/v0/assets/thumbnail.jpg",
 	"color": "#1a1a1a",
 	"category": "other",
 	"tags": [
