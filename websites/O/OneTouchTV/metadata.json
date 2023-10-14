@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "638080361179512853",
+		"name": "dark_ville"
+	},
+	"service": "OneTouchTV",
+	"description": {
+		"en": "OneTouch TV is the hit Drama & Movie & TV app . OneTouch TV has it all in a single app. You can stream all your favorite movies & drama & TV for free."
+	},
+	"url": "onetouchtv.cc",
+	"regExp": "(ww(w)?[0-9]?[.])?onetouchtv[.].*",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/v04o7nQ.png",
+	"thumbnail": "https://i.imgur.com/VGiNeKD.png",
+	"color": "#000000",
+	"category": "videos",
+	"tags": [
+		"tv",
+		"movie",
+		"serie"
+	],
+	"iframe": true,
+	"iFrameRegExp": "s[0-9]?[.]devcorp[.]me"
+}
