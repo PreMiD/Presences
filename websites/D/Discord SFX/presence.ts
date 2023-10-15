@@ -4,9 +4,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			details: "Browsing",
-			largeImageKey: "https://i.imgur.com/T6CpbXk.png",
-		},
+		details: "Browsing",
+		largeImageKey: "https://i.imgur.com/T6CpbXk.png",
+	},
 		{ pathname } = document.location;
 
 	switch (pathname) {
@@ -17,17 +17,17 @@ presence.on("UpdateData", async () => {
 		case "/search": {
 			presenceData.details = "Browsing the search page";
 
-			const sorting = document.querySelector(
+			const sorting = document.querySelector<HTMLButtonElement>(
 				"[aria-haspopup='menu']"
-			) as HTMLSelectElement;
-			let sortingValue = null as string | null;
+			);
+			let sortingValue: string | null = null;
 
 			if (sorting) sortingValue = sorting.textContent;
 			if (sortingValue)
 				presenceData.state = `Looking for ${sortingValue} sounds`;
 			else presenceData.state = "Looking for sounds";
 
-			const searchingElement = document.querySelector("#searching-for-text");
+			const searchingElement = document.querySelector<HTMLSpanElement>("#searching-for-text");
 			if (searchingElement) {
 				const searchQuery = searchingElement.textContent?.split(
 					"Currently searching for "
@@ -67,9 +67,9 @@ presence.on("UpdateData", async () => {
 		];
 	}
 
-	const isPlayingSound = document.querySelector(
+	const isPlayingSound = document.querySelector<HTMLButtonElement>(
 		"button[data-state='playing']"
-	) as HTMLButtonElement;
+	);
 	if (isPlayingSound) {
 		const { name, id } = isPlayingSound.dataset;
 		let newState = "";
