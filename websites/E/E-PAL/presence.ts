@@ -1,10 +1,6 @@
 const presence = new Presence({
-		clientId: "1160565099883397211",
-	}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-	});
+	clientId: "1160565099883397211",
+});
 
 const enum Assets {
 	Likes = "https://i.imgur.com/79hLcdj.png",
@@ -61,8 +57,8 @@ presence.on("UpdateData", async () => {
 					Number(
 						document.querySelectorAll('[class="epal-menu"]')?.length ?? 1
 					) - 1
-				]?.querySelector('[class*="on"]')?.textContent;
-	let hash: string = href;
+				]?.querySelector('[class*="on"]')?.textContent,
+		hash: string = href;
 	if (timestampCheck.hash !== hash) {
 		timestampCheck.hash = hash;
 		timestampCheck.timestamp = Math.floor(Date.now() / 1000);
