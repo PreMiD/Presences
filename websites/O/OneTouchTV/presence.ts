@@ -23,7 +23,8 @@ const timestampCheck: {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/v04o7nQ.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/O/OneTouchTV/assets/logo.png",
 			startTimestamp: timestampCheck.timestamp,
 		},
 		{ href, pathname } = document.location,
