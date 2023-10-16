@@ -173,11 +173,10 @@ presence.on("UpdateData", async () => {
 		}
 		case pathname.includes("/epals/"): {
 			if (pathSplit[2]) {
-				const filters = document.querySelectorAll(
-						'[class*="epal-chip-active"]'
-					),
-					afilters = [];
-				for (const [, element] of filters.entries()) {
+				const afilters = [];
+				for (const [, element] of document
+					.querySelectorAll('[class*="epal-chip-active"]')
+					.entries()) {
 					if (!element.textContent.includes("filters"))
 						afilters.push(element.textContent);
 				}
@@ -221,6 +220,5 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (presenceData.smallImageKey === "") delete presenceData.smallImageKey;
 	presence.setActivity(presenceData);
 });
