@@ -28,7 +28,6 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 		};
-
 	if (
 		video &&
 		!isNaN(video.duration) &&
@@ -40,7 +39,9 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.duration)
 			);
 
-		const firstH3Title = document.querySelector("h3");
+		const firstH3Title = document.querySelector("h3"),
+			subdomain = document.location.href.match(/^(?:https?:\/\/)?([^/]+)/i)[1].split(".")[0];
+			
 
 		if (firstH3Title) {
 			const originalText = firstH3Title.textContent,
@@ -53,7 +54,11 @@ presence.on("UpdateData", async () => {
 				epimatch ? epimatch[0] : " "
 			}`;
 		}
-
+		presenceData.largeImageKey = await uploadImage(`https://${subdomain}.sosac.tv/images/75x109/${
+			subdomain === "movies" ? "movie" : "serial"
+		}-${
+			document.querySelector(".track").getAttribute("onclick").match(/\d+/)[0]
+		}.jpg`);
 		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? strs.pause : strs.play;
 
@@ -62,6 +67,7 @@ presence.on("UpdateData", async () => {
 			delete presenceData.endTimestamp;
 		}
 
+		presenceData.buttons = [{ label: "Watch on Sosac", url: document.location.href }];
 		presence.setActivity(presenceData, !video.paused);
 	} else {
 		presenceData.details = strs.browsing;
@@ -70,3 +76,28 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData);
 	}
 });
+
+let isUploading = false;
+
+const uploadedImages: Record<string, string> = {};
+async function uploadImage(urlToUpload: string): Promise<string> {
+	if (isUploading) return "plex";
+
+	if (uploadedImages[urlToUpload]) return uploadedImages[urlToUpload];
+	isUploading = true;
+
+	const file = await fetch(urlToUpload).then(x => x.blob()),
+		formData = new FormData();
+
+	formData.append("file", file, "file");
+
+	const response = await fetch("https://pd.premid.app/create/image", {
+			method: "POST",
+			body: formData,
+		}),
+		responseUrl = await response.text();
+
+	isUploading = false;
+	uploadedImages[urlToUpload] = responseUrl;
+	return responseUrl;
+}
