@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "dAn",
 		"id": "169516316124905473"
@@ -13,9 +13,9 @@
 		"www.itv.com",
 		"itv.com"
 	],
-	"version": "1.0.5",
-	"logo": "https://i.imgur.com/xUkE69G.png",
-	"thumbnail": "https://i.imgur.com/jqV7iTp.jpg",
+	"version": "1.0.9",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/ITVX/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/ITVX/assets/thumbnail.jpg",
 	"color": "#102C3D",
 	"category": "videos",
 	"tags": [
