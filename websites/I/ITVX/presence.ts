@@ -42,11 +42,11 @@ interface ProgrammeNextData {
 			programme: {
 				heroCtaLabel?: string;
 				title: string;
-			},
+			};
 			episode: {
-				productionType: string,
-				episode: number,
-				series: number
+				productionType: string;
+				episode: number;
+				series: number;
 			};
 		};
 	};
@@ -151,8 +151,10 @@ presence.on("UpdateData", async () => {
 					if (
 						nextData.props.pageProps.programme.heroCtaLabel &&
 						nextData.props.pageProps.episode.productionType !== "FILM"
-					)
-						presenceData.state = nextData.props.pageProps.programme.heroCtaLabel;
+					) {
+						presenceData.state =
+							nextData.props.pageProps.programme.heroCtaLabel;
+					}
 
 					const [video] = document.querySelectorAll("video");
 
