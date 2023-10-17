@@ -39,19 +39,21 @@ interface CategoriesNextData {
 interface ProgrammeNextData {
 	props: {
 		pageProps: {
-			title: {
-				CTAText?: string;
-				episodeNumber?: number;
-				programmeTitle: string;
-				seriesNumber?: number;
-				titleType: string;
+			programme: {
+				heroCtaLabel?: string;
+				title: string;
+			},
+			episode: {
+				productionType: string,
+				episode: number,
+				series: number
 			};
 		};
 	};
 }
 
 const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/I/ITVX/assets/logo.png",
+	Logo = "https://i.imgur.com/xUkE69G.png",
 }
 
 const presence = new Presence({
@@ -144,13 +146,13 @@ presence.on("UpdateData", async () => {
 					delete presenceData.startTimestamp;
 
 					const nextData = fetchNextData<ProgrammeNextData>();
-					presenceData.details = `Watching ${nextData.props.pageProps.title.programmeTitle}`;
+					presenceData.details = `Watching ${nextData.props.pageProps.programme.title}`;
 
 					if (
-						nextData.props.pageProps.title.CTAText &&
-						nextData.props.pageProps.title.titleType !== "FILM"
+						nextData.props.pageProps.programme.heroCtaLabel &&
+						nextData.props.pageProps.episode.productionType !== "FILM"
 					)
-						presenceData.state = nextData.props.pageProps.title.CTAText;
+						presenceData.state = nextData.props.pageProps.programme.heroCtaLabel;
 
 					const [video] = document.querySelectorAll("video");
 
