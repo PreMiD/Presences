@@ -53,7 +53,7 @@ interface ProgrammeNextData {
 }
 
 const enum Assets {
-	Logo = "https://i.imgur.com/xUkE69G.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/I/ITVX/assets/logo.png",
 }
 
 const presence = new Presence({
