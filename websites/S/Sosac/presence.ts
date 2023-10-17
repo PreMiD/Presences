@@ -40,8 +40,9 @@ presence.on("UpdateData", async () => {
 			);
 
 		const firstH3Title = document.querySelector("h3"),
-			subdomain = document.location.href.match(/^(?:https?:\/\/)?([^/]+)/i)[1].split(".")[0];
-			
+			subdomain = document.location.href
+				.match(/^(?:https?:\/\/)?([^/]+)/i)[1]
+				.split(".")[0];
 
 		if (firstH3Title) {
 			const originalText = firstH3Title.textContent,
@@ -54,11 +55,13 @@ presence.on("UpdateData", async () => {
 				epimatch ? epimatch[0] : " "
 			}`;
 		}
-		presenceData.largeImageKey = await uploadImage(`https://${subdomain}.sosac.tv/images/75x109/${
-			subdomain === "movies" ? "movie" : "serial"
-		}-${
-			document.querySelector(".track").getAttribute("onclick").match(/\d+/)[0]
-		}.jpg`);
+		presenceData.largeImageKey = await uploadImage(
+			`https://${subdomain}.sosac.tv/images/75x109/${
+				subdomain === "movies" ? "movie" : "serial"
+			}-${
+				document.querySelector(".track").getAttribute("onclick").match(/\d+/)[0]
+			}.jpg`
+		);
 		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? strs.pause : strs.play;
 
@@ -67,7 +70,9 @@ presence.on("UpdateData", async () => {
 			delete presenceData.endTimestamp;
 		}
 
-		presenceData.buttons = [{ label: "Watch on Sosac", url: document.location.href }];
+		presenceData.buttons = [
+			{ label: "Watch on Sosac", url: document.location.href },
+		];
 		presence.setActivity(presenceData, !video.paused);
 	} else {
 		presenceData.details = strs.browsing;
