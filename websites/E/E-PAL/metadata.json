@@ -4,15 +4,15 @@
 		"id": "638080361179512853",
 		"name": "dark_ville"
 	},
-	"service": "E-Pal",
+	"service": "E-PAL",
 	"description": {
-		"en": "E-Pal is a social hub for gamers around the world to team up, make friends, and have fun."
+		"en": "E-PAL is a social hub for gamers around the world to team up, make friends, and have fun."
 	},
 	"url": [
 		"www.epal.gg",
 		"epal.gg"
 	],
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/1Ugsu4o.png",
 	"thumbnail": "https://i.imgur.com/K3UjWuJ.png",
 	"color": "#7041e6",
