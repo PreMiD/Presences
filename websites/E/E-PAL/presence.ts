@@ -3,9 +3,9 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Likes = "https://i.imgur.com/79hLcdj.png",
-	Logo = "https://i.imgur.com/1Ugsu4o.png",
-	Loading = "https://i.imgur.com/uh6vSQm.gif",
+	Likes = "https://cdn.rcd.gg/PreMiD/websites/E/E-PAL/assets/0.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/E/E-PAL/assets/logo.png",
+	Loading = "https://cdn.rcd.gg/PreMiD/websites/E/E-PAL/assets/1.gif",
 }
 const timestampCheck: {
 		hash: string;
