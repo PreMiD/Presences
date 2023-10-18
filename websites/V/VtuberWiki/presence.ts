@@ -56,11 +56,12 @@ presence.on("UpdateData", async () => {
 						presenceData.smallImageText = `Written by github.com/${
 							document.querySelector<HTMLImageElement>(".author-avatar")?.alt
 						}`;
-					} else
+					} else {
 						presenceData.details = `Viewing ${fNumber(
 							document.querySelector(".amoumt-count")
 								?.textContent as unknown as number
 						)} Vtubers`;
+					}
 
 					break;
 				case "software":
@@ -77,11 +78,13 @@ presence.on("UpdateData", async () => {
 						presenceData.smallImageText = `Written by github.com/${
 							document.querySelector<HTMLImageElement>(".author-avatar")?.alt
 						}`;
-					} else
+					} else {
 						presenceData.details = `Viewing ${fNumber(
 							document.querySelector(".amoumt-count")
 								?.textContent as unknown as number
 						)} Software`;
+					}
+						
 					break;
 				case "guides":
 					if (pathSplit[2]) {
@@ -95,11 +98,12 @@ presence.on("UpdateData", async () => {
 						presenceData.smallImageText = `Written by github.com/${
 							document.querySelector<HTMLImageElement>(".author-avatar")?.alt
 						}`;
-					} else
+					} else {
 						presenceData.details = `Viewing ${fNumber(
 							document.querySelector(".amoumt-count")
 								?.textContent as unknown as number
 						)} Guides`;
+					}
 					break;
 				default:
 					presenceData.details = "Viewing The wiki";
