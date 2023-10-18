@@ -15,7 +15,7 @@ const timestampCheck: {
 };
 
 function fullURL(host: string, url: string) {
-	if (url == Assets.Logo) return Assets.Logo;
+	if (url === Assets.Logo) return Assets.Logo;
 	else if (url && host) return `https://${host}${url}`;
 }
 
@@ -64,19 +64,19 @@ presence.on("UpdateData", async () => {
 						null,
 						XPathResult.FIRST_ORDERED_NODE_TYPE,
 						null
-					)?.singleNodeValue?.textContent;
-				const img = matchingElement
-					? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
-							Number(matchingElement?.split("#")[1].at(0)) == 0
-								? matchingElement?.split("#")[1].slice(1)
-								: matchingElement?.split("#")[1]
-					  }.png`
-					: fullURL(
-							hostname,
-							document
-								.querySelector('[class="image"] > img')
-								?.getAttribute("src") ?? Assets.Logo
-					  );
+					)?.singleNodeValue?.textContent,
+					img = matchingElement
+						? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
+								Number(matchingElement?.split("#")[1].at(0)) === 0
+									? matchingElement?.split("#")[1].slice(1)
+									: matchingElement?.split("#")[1]
+						  }.png`
+						: fullURL(
+								hostname,
+								document
+									.querySelector('[class="image"] > img')
+									?.getAttribute("src") ?? Assets.Logo
+						  );
 				presenceData.largeImageKey = image === 0 ? img : Assets.Logo;
 				presenceData.smallImageKey =
 					image === 0 || image === 2 ? Assets.Reading : img;
