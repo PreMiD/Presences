@@ -86,7 +86,7 @@ let isUploading = false;
 
 const uploadedImages: Record<string, string> = {};
 async function uploadImage(urlToUpload: string): Promise<string> {
-	if (isUploading) return "plex";
+	if (isUploading) return Assets.Logo;
 
 	if (uploadedImages[urlToUpload]) return uploadedImages[urlToUpload];
 	isUploading = true;
