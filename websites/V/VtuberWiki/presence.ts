@@ -2,30 +2,35 @@ type StaticPagesType = Record<string, PresenceData>;
 
 const presence = new Presence({
 		clientId: "1164189020922843257",
-		appMode: true,
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	staticPages: StaticPagesType = {
 		"/": {
 			details: "Viewing the homepage",
-			buttons: [{ label: "View Website", url: "https://wiki.hylia.dev" }],
 		},
 		"/faq": {
 			details: "Viewing the FAQ",
-			buttons: [{ label: "View Website", url: "https://wiki.hylia.dev/faq" }],
+			buttons: [{ label: "View The FAQ", url: "https://wiki.hylia.dev/faq" }],
 		},
 		"/api": {
 			details: "Viewing the API",
-			buttons: [{ label: "View Website", url: "https://wiki.hylia.dev/api" }],
+			buttons: [{ label: "Browse the API", url: "https://wiki.hylia.dev/api" }],
 		},
-	}; // Took this from websites/S/Shoob but I rewrote some of it. :heart:
+	};
 
 function fNumber(number: number): string {
 	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+const enum Assets {
+	vtuber = "https://wiki.hylia.dev/images/premid/9081.png",
+	software = "https://wiki.hylia.dev/images/premid/8243.png",
+	guides = "https://wiki.hylia.dev/images/premid/8243.png",
+	wiki = "https://wiki.hylia.dev/images/premid/9081.png",
+}
+
 presence.on("UpdateData", async () => {
-	const { pathname, href } = window.location,
+	const { pathname, href } = document.location,
 		pathSplit = pathname.split("/").slice(1),
 		pageTitle = document.title.split(" | ")[0]?.trim();
 
@@ -66,8 +71,7 @@ presence.on("UpdateData", async () => {
 					break;
 				case "software":
 					if (pathSplit[2]) {
-						presenceData.largeImageKey =
-							"https://wiki.hylia.dev/images/premid/9081.png";
+						presenceData.largeImageKey = Assets.software;
 						presenceData.details = "Viewing Software";
 						presenceData.state = `${pageTitle}`;
 						presenceData.buttons = [
@@ -88,8 +92,7 @@ presence.on("UpdateData", async () => {
 					break;
 				case "guides":
 					if (pathSplit[2]) {
-						presenceData.largeImageKey =
-							"https://wiki.hylia.dev/images/premid/8243.png";
+						presenceData.largeImageKey = Assets.guides;
 						presenceData.details = "Viewing Guides";
 						presenceData.state = `${pageTitle}`;
 						presenceData.buttons = [{ label: "View Guide", url: href }];
