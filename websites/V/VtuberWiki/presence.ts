@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
 								?.textContent as unknown as number
 						)} Software`;
 					}
-						
+
 					break;
 				case "guides":
 					if (pathSplit[2]) {
