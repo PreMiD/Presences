@@ -18,10 +18,6 @@ const presence = new Presence({
 		},
 	};
 
-function fNumber(number: number): string {
-	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
 const enum Assets {
 	Vtuber = "https://wiki.hylia.dev/images/premid/9081.png",
 	Software = "https://wiki.hylia.dev/images/premid/8243.png",
@@ -61,17 +57,12 @@ presence.on("UpdateData", async () => {
 						presenceData.smallImageText = `Written by github.com/${
 							document.querySelector<HTMLImageElement>(".author-avatar")?.alt
 						}`;
-					} else {
-						presenceData.details = `Viewing ${fNumber(
-							document.querySelector(".amoumt-count")
-								?.textContent as unknown as number
-						)} Vtubers`;
-					}
+					} else presenceData.details = "Viewing All The Vtubers";
 
 					break;
 				case "software":
 					if (pathSplit[2]) {
-						presenceData.largeImageKey = Assets.software;
+						presenceData.largeImageKey = Assets.Software;
 						presenceData.details = "Viewing Software";
 						presenceData.state = `${pageTitle}`;
 						presenceData.buttons = [
@@ -82,17 +73,12 @@ presence.on("UpdateData", async () => {
 						presenceData.smallImageText = `Written by github.com/${
 							document.querySelector<HTMLImageElement>(".author-avatar")?.alt
 						}`;
-					} else {
-						presenceData.details = `Viewing ${fNumber(
-							document.querySelector(".amoumt-count")
-								?.textContent as unknown as number
-						)} Software`;
-					}
+					} else presenceData.details = "Viewing All The Software";
 
 					break;
 				case "guides":
 					if (pathSplit[2]) {
-						presenceData.largeImageKey = Assets.guides;
+						presenceData.largeImageKey = Assets.Guides;
 						presenceData.details = "Viewing Guides";
 						presenceData.state = `${pageTitle}`;
 						presenceData.buttons = [{ label: "View Guide", url: href }];
@@ -101,12 +87,7 @@ presence.on("UpdateData", async () => {
 						presenceData.smallImageText = `Written by github.com/${
 							document.querySelector<HTMLImageElement>(".author-avatar")?.alt
 						}`;
-					} else {
-						presenceData.details = `Viewing ${fNumber(
-							document.querySelector(".amoumt-count")
-								?.textContent as unknown as number
-						)} Guides`;
-					}
+					} else presenceData.details = "Viewing All The Guides";
 					break;
 				default:
 					presenceData.details = "Viewing The wiki";
