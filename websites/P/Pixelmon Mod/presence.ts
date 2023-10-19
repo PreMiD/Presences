@@ -78,11 +78,7 @@ presence.on("UpdateData", async () => {
 						  );
 				presenceData.largeImageKey = image === 0 ? img : Assets.Logo;
 				presenceData.smallImageKey =
-					image === 0 || image === 2
-						? Assets.Reading
-						: img
-						? img
-						: Assets.Reading;
+					image === 0 || image === 2 ? Assets.Reading : img ?? Assets.Reading;
 
 				presenceData.buttons = [{ label: "Read Wiki Page", url: href }];
 			} else presenceData.details = "Reading the wiki";
