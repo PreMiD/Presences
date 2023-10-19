@@ -23,10 +23,11 @@ function fNumber(number: number): string {
 }
 
 const enum Assets {
-	vtuber = "https://wiki.hylia.dev/images/premid/9081.png",
-	software = "https://wiki.hylia.dev/images/premid/8243.png",
-	guides = "https://wiki.hylia.dev/images/premid/8243.png",
-	wiki = "https://wiki.hylia.dev/images/premid/9081.png",
+	Vtuber = "https://wiki.hylia.dev/images/premid/9081.png",
+	Software = "https://wiki.hylia.dev/images/premid/8243.png",
+	Guides = "https://wiki.hylia.dev/images/premid/8243.png",
+	Wiki = "https://wiki.hylia.dev/images/premid/9081.png",
+	Logo = "https://i.imgur.com/svbsNmR.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -35,8 +36,7 @@ presence.on("UpdateData", async () => {
 		pageTitle = document.title.split(" | ")[0]?.trim();
 
 	let presenceData: PresenceData = {
-		largeImageKey:
-			"https://pbs.twimg.com/profile_images/1713923311858593792/doH2HOXp_400x400.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 	};
 
