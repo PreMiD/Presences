@@ -57,9 +57,8 @@ presence.on("UpdateData", async () => {
 				presenceData.state = firstChild.textContent;
 				presenceData.smallImageKey = Assets.Reading;
 				presenceData.details = "Reading wiki page";
-				const dexXPath = "//b[contains(text(),'#')]",
-					matchingElement = document.evaluate(
-						dexXPath,
+				const matchingElement = document.evaluate(
+						"//b[contains(text(),'#')]",
 						document,
 						null,
 						XPathResult.FIRST_ORDERED_NODE_TYPE,
@@ -79,7 +78,11 @@ presence.on("UpdateData", async () => {
 						  );
 				presenceData.largeImageKey = image === 0 ? img : Assets.Logo;
 				presenceData.smallImageKey =
-					image === 0 || image === 2 ? Assets.Reading : img;
+					image === 0 || image === 2
+						? Assets.Reading
+						: img
+						? img
+						: Assets.Reading;
 
 				presenceData.buttons = [{ label: "Read Wiki Page", url: href }];
 			} else presenceData.details = "Reading the wiki";
@@ -96,6 +99,7 @@ presence.on("UpdateData", async () => {
 		case pathname.includes("viewtopic.php"): {
 			presenceData.details = "Viewing post";
 			presenceData.state = title.textContent;
+			presenceData.buttons = [{ label: "Read Post", url: href }];
 			break;
 		}
 		case pathname.includes("team.php"): {
@@ -125,7 +129,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state =
 				document.querySelectorAll('[class="side-segment"]')?.[1]?.textContent ??
 				"";
-
+			presenceData.buttons = [{ label: "View Bug Report", url: href }];
 			break;
 		}
 		case !!document.querySelector(
