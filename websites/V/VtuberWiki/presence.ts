@@ -19,10 +19,8 @@ const presence = new Presence({
 	};
 
 const enum Assets {
-	Vtuber = "https://wiki.hylia.dev/images/premid/9081.png",
-	Software = "https://wiki.hylia.dev/images/premid/8243.png",
-	Guides = "https://wiki.hylia.dev/images/premid/8243.png",
-	Wiki = "https://wiki.hylia.dev/images/premid/9081.png",
+	Cog = "https://wiki.hylia.dev/images/premid/9081.png",
+	Book = "https://wiki.hylia.dev/images/premid/8243.png",
 	Logo = "https://i.imgur.com/svbsNmR.png",
 }
 
@@ -62,7 +60,7 @@ presence.on("UpdateData", async () => {
 					break;
 				case "software":
 					if (pathSplit[2]) {
-						presenceData.largeImageKey = Assets.Software;
+						presenceData.largeImageKey = Assets.Cog;
 						presenceData.details = "Viewing Software";
 						presenceData.state = `${pageTitle}`;
 						presenceData.buttons = [
@@ -78,7 +76,7 @@ presence.on("UpdateData", async () => {
 					break;
 				case "guides":
 					if (pathSplit[2]) {
-						presenceData.largeImageKey = Assets.Guides;
+						presenceData.largeImageKey = Assets.Book;
 						presenceData.details = "Viewing Guides";
 						presenceData.state = `${pageTitle}`;
 						presenceData.buttons = [{ label: "View Guide", url: href }];
