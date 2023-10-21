@@ -56,6 +56,18 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = `Address: ${location.textContent
 				.split(":")[1]
 				.trim()}`;
+		} else if (document.querySelector("app-review-photo")) {
+			presenceData.details = "Reviewing photos";
+			presenceData.state = `for ${
+				document.querySelector(
+					"app-review-photo .review-photo__info > div > div:first-child"
+				).textContent
+			}`;
+		} else if (document.querySelector("app-review-edit")) {
+			presenceData.details = "Reviewing a Wayspot edit";
+			presenceData.state = `for ${document
+				.querySelector("app-review-edit-info .review-edit-info__info")
+				.textContent.trim()}`;
 		} else {
 			presenceData.details = "Getting ready to";
 			presenceData.state = "review a location";
