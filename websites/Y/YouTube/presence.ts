@@ -426,7 +426,6 @@ presence.on("UpdateData", async () => {
 			delete presenceData.endTimestamp;
 		}
 
-		console.log(presenceData);
 		if (!presenceData.details) presence.setActivity();
 		else presence.setActivity(presenceData);
 	} else if (hostname === "www.youtube.com" || hostname === "youtube.com") {
