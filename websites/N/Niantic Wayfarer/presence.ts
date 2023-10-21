@@ -54,9 +54,31 @@ presence.on("UpdateData", async () => {
 			.querySelector("wf-subnavigation li li[class*=selected]")
 			.textContent.trim();
 	} else if (pathname.includes("/login")) presenceData.details = "Logging in";
-	else if (pathname.includes("/profile"))
+	else if (pathname.includes("/profile")) {
 		presenceData.details = "Viewing their profile";
-	else if (pathname.includes("/nominations"))
+		presenceData.state = `Rating: ${document
+			.querySelector("wf-rating-bar section[class*=active]")
+			.textContent.trim()}`;
+		presenceData.smallImageKey = document.querySelector<SVGImageElement>(
+			"wf-upgrade-visualization image"
+		).href.baseVal;
+		const agreements = [
+				...document.querySelectorAll(
+					"wf-profile-stats > div > div:not([class]):not(:last-child) .wf-profile-stats__stat"
+				),
+			].reduce((value, element) => {
+				return value + +element.children[1].textContent.trim();
+			}, 0),
+			total = +document
+				.querySelector(
+					"wf-profile-stats > div > .wf-profile-stats__stat > div:last-child"
+				)
+				.textContent.trim();
+		presenceData.smallImageText = `Total: ${total}, Agreements: ${agreements} (${(
+			(agreements / total) *
+			100
+		).toFixed(1)}%)`;
+	} else if (pathname.includes("/nominations"))
 		presenceData.details = "Viewing their nominations";
 	else if (pathname.includes("/showcase"))
 		presenceData.details = "Viewing the showcased wayspots";
