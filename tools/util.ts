@@ -26,9 +26,14 @@ export function getDiff(
 		)
 			.toString()
 			.split("\n")
-			.filter(file =>
-				["presence.ts", "iframe.ts", "metadata.json"].includes(basename(file))
-			);
+			.filter(file => {
+				if (type === "removed") return "metadata.json" === basename(file);
+				else {
+					return ["presence.ts", "iframe.ts", "metadata.json"].includes(
+						basename(file)
+					);
+				}
+			});
 
 	if (!changedPresenceFolders.length) return [];
 
