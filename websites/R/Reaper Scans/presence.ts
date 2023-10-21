@@ -41,7 +41,7 @@ presence.on("UpdateData", () => {
 						(document.documentElement.scrollTop /
 							(document.querySelector(
 								pathSplit[0] === "comics"
-									? "main > div:nth-of-type(2)"
+									? "main"
 									: "article"
 							).scrollHeight -
 								window.innerHeight)) *
