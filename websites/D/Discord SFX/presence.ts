@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.buttons = [
 			{
-				label: "View on Discord SFX",
+				label: "View Sound",
 				url: `https://discordsfx.com/sounds/${pathname.split("/")[2]}`,
 			},
 		];
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 			if (id) {
 				presenceData.buttons = [
 					{
-						label: "View on Discord SFX",
+						label: "View Sound",
 						url: `https://discordsfx.com/sounds/${id}`,
 					},
 				];
