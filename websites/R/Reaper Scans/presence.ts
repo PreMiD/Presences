@@ -40,9 +40,7 @@ presence.on("UpdateData", () => {
 					let progress =
 						(document.documentElement.scrollTop /
 							(document.querySelector(
-								pathSplit[0] === "comics"
-									? "main"
-									: "article"
+								pathSplit[0] === "comics" ? "main" : "article"
 							).scrollHeight -
 								window.innerHeight)) *
 						100;
