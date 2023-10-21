@@ -407,7 +407,7 @@ presence.on("UpdateData", async () => {
 						cached?.channelURL ??
 						(
 							document.querySelector(
-								"#top-row > ytd-video-owner-renderer > a"
+								"#top-row ytd-video-owner-renderer > a"
 							) as HTMLLinkElement
 						)?.href,
 				},
@@ -426,6 +426,7 @@ presence.on("UpdateData", async () => {
 			delete presenceData.endTimestamp;
 		}
 
+		console.log(presenceData);
 		if (!presenceData.details) presence.setActivity();
 		else presence.setActivity(presenceData);
 	} else if (hostname === "www.youtube.com" || hostname === "youtube.com") {
