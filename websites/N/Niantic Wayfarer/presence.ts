@@ -8,6 +8,23 @@ const enum Assets {
 	Pin = "https://cdn.discordapp.com/app-assets/684174415415476240/684175146973790208.png?size=512",
 }
 
+const shortenedURLs: Record<string, string> = {};
+async function getShortURL(url: string) {
+	if (url.length < 256) return url;
+	if (shortenedURLs[url]) return shortenedURLs[url];
+	try {
+		shortenedURLs[url] = Assets.Logo;
+		const pdURL = await (
+			await fetch(`https://pd.premid.app/create/${url}`)
+		).text();
+		shortenedURLs[url] = pdURL;
+		return pdURL;
+	} catch (err) {
+		presence.error(err);
+		return url;
+	}
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
@@ -26,6 +43,13 @@ presence.on("UpdateData", async () => {
 				"app-should-be-wayspot .wf-review-card__body > div > div:last-child"
 			);
 		if (title && description && location) {
+			presenceData.largeImageKey = await getShortURL(
+				document
+					.querySelector<HTMLDivElement>(
+						"app-should-be-wayspot .wf-image-modal"
+					)
+					.style.backgroundImage.match(/url\("(.+)"\)/)[1]
+			);
 			presenceData.smallImageKey = Assets.Pin;
 			presenceData.details = `Reviewing: ${title.textContent.trim()}`;
 			presenceData.state = `Description: ${description.textContent.trim()}`;
@@ -59,9 +83,10 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Rating: ${document
 			.querySelector("wf-rating-bar section[class*=active]")
 			.textContent.trim()}`;
-		presenceData.smallImageKey = document.querySelector<SVGImageElement>(
-			"wf-upgrade-visualization image"
-		).href.baseVal;
+		presenceData.smallImageKey = await getShortURL(
+			document.querySelector<SVGImageElement>("wf-upgrade-visualization image")
+				.href.baseVal
+		);
 		const agreements = [
 				...document.querySelectorAll(
 					"wf-profile-stats > div > div:not([class]):not(:last-child) .wf-profile-stats__stat"
