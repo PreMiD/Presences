@@ -1,9 +1,9 @@
 const presence = new Presence({
-	clientId: "640253556078673951",
-});
+		clientId: "640253556078673951",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let browsingTimestamp = Math.floor(Date.now() / 1000),
-	title: string,
+let title: string,
 	iFrameVideo = false,
 	currentTime = 0,
 	duration = 0,
