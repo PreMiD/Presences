@@ -16,7 +16,7 @@ let gamePlayerState: GamePlayerState = {
 	browsingTimestamp = Math.round(Date.now() / 1000),
 	gametag: string;
 
-if (window.location.hostname === "jackbox.tv") {
+if (document.location.hostname === "jackbox.tv") {
 	setInterval(async () => {
 		const playerStateLogs = await presence.getLogs(
 			/recv <- .*?("key": "(bc:customer|player|info):[a-z0-9-]+",)/s
@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("useTime"),
 			presence.getSetting<boolean>("useDetails"),
 		]),
-		{ href, hostname, pathname, search } = window.location,
+		{ href, hostname, pathname, search } = document.location,
 		pathSplit = pathname.split("/").slice(1);
 
 	if (useTime) presenceData.startTimestamp = browsingTimestamp;
