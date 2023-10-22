@@ -16,7 +16,10 @@
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/KimCartoon/assets/thumbnail.png",
 	"color": "#fdf5ad",
 	"category": "videos",
-	"tags": ["cartoon", "videos"],
+	"tags": [
+		"cartoon",
+		"videos"
+	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"settings": [
