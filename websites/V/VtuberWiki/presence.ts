@@ -50,11 +50,6 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{ label: `View ${pathSplit[2]}`, url: href },
 						];
-						presenceData.smallImageKey =
-							document.querySelector<HTMLImageElement>(".author-avatar")?.src;
-						presenceData.smallImageText = `Written by github.com/${
-							document.querySelector<HTMLImageElement>(".author-avatar")?.alt
-						}`;
 					} else presenceData.details = "Viewing All The Vtubers";
 
 					break;
@@ -66,11 +61,6 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{ label: `View ${pathSplit[2]}`, url: href },
 						];
-						presenceData.smallImageKey =
-							document.querySelector<HTMLImageElement>(".author-avatar")?.src;
-						presenceData.smallImageText = `Written by github.com/${
-							document.querySelector<HTMLImageElement>(".author-avatar")?.alt
-						}`;
 					} else presenceData.details = "Viewing All The Software";
 
 					break;
@@ -80,11 +70,6 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Viewing Guides";
 						presenceData.state = `${pageTitle}`;
 						presenceData.buttons = [{ label: "View Guide", url: href }];
-						presenceData.smallImageKey =
-							document.querySelector<HTMLImageElement>(".author-avatar")?.src;
-						presenceData.smallImageText = `Written by github.com/${
-							document.querySelector<HTMLImageElement>(".author-avatar")?.alt
-						}`;
 					} else presenceData.details = "Viewing All The Guides";
 					break;
 				default:
