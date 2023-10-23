@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"name": "VocalZero",
+		"id": "223891083724193792"
+	},
+	"service": "atomicradio",
+	"description": {
+		"en": "The future of radio is here. Experience 12 Spaces with non-stop music you'll love."
+	},
+	"url": "atomic.radio",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/16lVdWy.png",
+	"thumbnail": "https://i.imgur.com/qVZV8Bw.jpg",
+	"color": "#a9f923",
+	"category": "music",
+	"button": true,
+	"tags": [
+		"radio",
+		"webradio",
+		"music",
+		"atomicradio"
+	]
+}
