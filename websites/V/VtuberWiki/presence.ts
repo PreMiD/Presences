@@ -20,9 +20,12 @@ const presence = new Presence({
 			details: "Viewing the Changelog",
 			largeImageKey: Assets.Log,
 			buttons: [
-				{ label: "View the Changelog", url: "https://wiki.hylia.dev/changelog" },
+				{
+					label: "View the Changelog",
+					url: "https://wiki.hylia.dev/changelog",
+				},
 			],
-		}
+		},
 	};
 
 const enum Assets {
@@ -66,9 +69,7 @@ presence.on("UpdateData", async () => {
 						presenceData.largeImageKey = Assets.Cog;
 						presenceData.details = "Viewing Software";
 						presenceData.state = `${pageTitle}`;
-						presenceData.buttons = [
-							{ label: `View ${pageTitle}`, url: href },
-						];
+						presenceData.buttons = [{ label: `View ${pageTitle}`, url: href }];
 					} else presenceData.details = "Viewing All The Software";
 
 					break;
