@@ -4,6 +4,12 @@
 		"name": "Bas950",
 		"id": "241278257335500811"
 	},
+	"contributors": [
+		{
+			"id": "193714715631812608",
+			"name": "theusaf"
+		}
+	],
 	"service": "Niantic Wayfarer",
 	"description": {
 		"en": "By participating to Niantic Wayfarer you can help shape future adventures for yourself and others by reviewing interesting locations across the globe.",
@@ -11,7 +17,7 @@
 		"fr": "En participant à Niantic Wayfarer vous pouvez aider à créer de nouvelles aventures pour vous et les autres joueurs en passant en revue des points d'intérêt intéressants autour du monde."
 	},
 	"url": "wayfarer.nianticlabs.com",
-	"version": "1.0.17",
+	"version": "1.1.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Niantic%20Wayfarer/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Niantic%20Wayfarer/assets/thumbnail.jpg",
 	"color": "#fc4513",
