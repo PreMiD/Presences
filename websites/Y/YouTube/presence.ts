@@ -407,7 +407,7 @@ presence.on("UpdateData", async () => {
 						cached?.channelURL ??
 						(
 							document.querySelector(
-								"#top-row > ytd-video-owner-renderer > a"
+								"#top-row ytd-video-owner-renderer > a"
 							) as HTMLLinkElement
 						)?.href,
 				},
