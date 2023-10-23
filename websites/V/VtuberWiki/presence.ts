@@ -14,14 +14,22 @@ const presence = new Presence({
 		},
 		"/api": {
 			details: "Viewing the API",
-			buttons: [{ label: "Browse the API", url: "https://wiki.hylia.dev/api" }],
+			buttons: [{ label: "View the API", url: "https://wiki.hylia.dev/api" }],
 		},
+		"/changelog": {
+			details: "Viewing the Changelog",
+			largeImageKey: Assets.Log,
+			buttons: [
+				{ label: "View the Changelog", url: "https://wiki.hylia.dev/changelog" },
+			],
+		}
 	};
 
 const enum Assets {
 	Cog = "https://cdn.rcd.gg/PreMiD/websites/V/VtuberWiki/assets/0.png",
 	Book = "https://cdn.rcd.gg/PreMiD/websites/V/VtuberWiki/assets/1.png",
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/V/VtuberWiki/assets/logo.png",
+	Log = "https://wiki.hylia.dev/images/premid/3795.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -59,7 +67,7 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Viewing Software";
 						presenceData.state = `${pageTitle}`;
 						presenceData.buttons = [
-							{ label: `View ${pathSplit[2]}`, url: href },
+							{ label: `View ${pageTitle}`, url: href },
 						];
 					} else presenceData.details = "Viewing All The Software";
 
