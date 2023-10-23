@@ -11,9 +11,9 @@
 		"vi_VN": "Nhà cung cấp beatmap không chính thức #1 Beat Saber!"
 	},
 	"url": "beatsaver.com",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/1dBCcdI.png",
-	"thumbnail": "https://i.imgur.com/BpXZEqW.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BeatSaver/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BeatSaver/assets/thumbnail.png",
 	"color": "#FF0090",
 	"category": "games",
 	"tags": [
