@@ -19,9 +19,9 @@ const presence = new Presence({
 	};
 
 const enum Assets {
-	Cog = "https://wiki.hylia.dev/images/premid/9081.png",
-	Book = "https://wiki.hylia.dev/images/premid/8243.png",
-	Logo = "https://i.imgur.com/svbsNmR.png",
+	Cog = "https://cdn.rcd.gg/PreMiD/websites/V/VtuberWiki/assets/0.png",
+	Book = "https://cdn.rcd.gg/PreMiD/websites/V/VtuberWiki/assets/1.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/V/VtuberWiki/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {
