@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "VocalZero",
 		"id": "223891083724193792"
@@ -14,7 +14,6 @@
 	"thumbnail": "https://i.imgur.com/qVZV8Bw.jpg",
 	"color": "#a9f923",
 	"category": "music",
-	"button": true,
 	"tags": [
 		"radio",
 		"webradio",
