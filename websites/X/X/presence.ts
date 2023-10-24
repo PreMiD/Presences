@@ -69,8 +69,7 @@ presence.on("UpdateData", async () => {
 		strings = await getStrings();
 	}
 
-	let title: string,
-		info: string;
+	let title: string, info: string;
 
 	const path = window.location.pathname;
 
