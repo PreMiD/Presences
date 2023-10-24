@@ -23,7 +23,7 @@
 	"settings": [
 		{
 			"id": "lang",
-			"multiLanguage": true
+			"multiLanguage": "x"
 		},
 		{
 			"id": "privacy",
