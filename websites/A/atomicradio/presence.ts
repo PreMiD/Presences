@@ -12,26 +12,19 @@ presence.on("UpdateData", () => {
 		player = document.querySelector<HTMLDivElement>("div.player");
 
 	if (player) {
-		const spaceId = player.querySelector(
-			"div.container > #spaceId"
-		).textContent;
-		presenceData.largeImageKey = player.querySelector(
-			"div.container > #artwork"
-		).textContent;
+		const spaceId = player.querySelector("#spaceId").textContent;
+		presenceData.largeImageKey = player.querySelector("#artwork").textContent;
 		presenceData.smallImageKey =
-			player.querySelector<HTMLButtonElement>(
-				"div.container > div.center-controls > button"
-			).id === "play-button"
+			player.querySelector<HTMLButtonElement>('[id*="-button"]').id ===
+			"play-button"
 				? Assets.Pause
 				: Assets.Play;
-		presenceData.details = player.querySelector<HTMLAnchorElement>(
-			"div.container > a > div.track-info > a.track-title"
-		).textContent;
-		presenceData.state = player.querySelector<HTMLDivElement>(
-			"div.container > a > div.track-info > div.track-artist"
-		).textContent;
+		presenceData.details =
+			player.querySelector<HTMLAnchorElement>("a.track-title").textContent;
+		presenceData.state =
+			player.querySelector<HTMLDivElement>("div.track-artist").textContent;
 		presenceData.endTimestamp = new Date(
-			player.querySelector("div.container > #endingAt").textContent
+			player.querySelector("#endingAt").textContent
 		).getTime();
 		presenceData.smallImageText = spaceId.toUpperCase();
 		presenceData.buttons = [
