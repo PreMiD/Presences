@@ -19,69 +19,59 @@ presence.on("UpdateData", async () => {
 		case "accueil-thematique": {
 			presenceData.details = "Regarde la page d'accueil";
 
-			const offersType = (<HTMLHeadingElement>(
-				document.querySelector(".css-175oi2r.r-43z982.r-1udh08x")
-			))?.textContent;
+			const offersType = document.querySelector<HTMLHeadingElement>(
+				".css-175oi2r.r-43z982.r-1udh08x"
+			)?.textContent;
 			if (offersType) presenceData.state = offersType;
-
 			break;
 		}
 		case "profil":
 			presenceData.details = "Regarde son profil";
-
 			break;
 		case "recherche": {
 			presenceData.details = "Recherche :";
 
-			const query = (<HTMLInputElement>(
-					document.querySelector("input[type=search]")
-				))?.value,
+			const query =
+					document.querySelector<HTMLInputElement>("input[type=search]")?.value,
 				results = parseInt(document.title);
 			if (query && !isNaN(results))
 				presenceData.state = `${query} (${results} résultats)`;
-
 			break;
 		}
 		case "reservations": {
-			const reservationsCount = (<HTMLHeadingElement>(
-				document.querySelector(
-					'[data-testid="OnGoingBookingsList"] h2.css-1rynq56'
-				)
-			))?.textContent;
+			const reservationsCount = document.querySelector<HTMLHeadingElement>(
+				'[data-testid="OnGoingBookingsList"] h2.css-1rynq56'
+			)?.textContent;
 
 			presenceData.details = "Regarde ses réservations";
 			if (reservationsCount && showCounts)
 				presenceData.state = reservationsCount;
-
 			break;
 		}
 		case "reservations-terminees": {
-			const doneReservationsCount = (<HTMLHeadingElement>(
-				document.querySelector('[data-testid="EndedBookings"] h2.css-1rynq56')
-			))?.textContent;
+			const doneReservationsCount = document.querySelector<HTMLHeadingElement>(
+				'[data-testid="EndedBookings"] h2.css-1rynq56'
+			)?.textContent;
 
 			presenceData.details = "Regarde ses réservations terminées";
 			if (doneReservationsCount && showCounts)
 				presenceData.state = doneReservationsCount;
-
 			break;
 		}
 		case "reservation": {
 			presenceData.details = "Regarde une réservation";
 
-			const reservation = (<HTMLHeadingElement>(
-					document.querySelector(
-						".css-175oi2r.r-1777fci.r-cn4s0y h1.css-1rynq56.r-1rmcaf9.r-1gknse6"
-					)
-				))?.textContent,
-				reservationPrice = (<HTMLSpanElement>(
-					document.querySelector("span.css-1qaijid.r-1rmcaf9.r-yv33h5")
-				))?.textContent.trim(),
-				offerLink = (<HTMLAnchorElement>(
-					document.querySelector(
+			const reservation = document.querySelector<HTMLHeadingElement>(
+					".css-175oi2r.r-1777fci.r-cn4s0y h1.css-1rynq56.r-1rmcaf9.r-1gknse6"
+				)?.textContent,
+				reservationPrice = document
+					.querySelector<HTMLSpanElement>("span.css-1qaijid.r-1rmcaf9.r-yv33h5")
+					?.textContent.trim(),
+				offerLink = document
+					.querySelector<HTMLAnchorElement>(
 						"a.AppButtonweb__Link-sc-1veyq7-1.hTlNnp.sc-iGgWBj.kxRSZa"
 					)
-				))?.getAttribute("href");
+					?.getAttribute("href");
 			if (reservation && reservationPrice) {
 				presenceData.state = `${reservation} (${reservationPrice})`;
 				presenceData.buttons = [
@@ -102,7 +92,6 @@ presence.on("UpdateData", async () => {
 				'[data-testid="favoritesResultsFlatlist"] h2.css-1rynq56'
 			)?.textContent;
 			if (favoritesCount && showCounts) presenceData.state = favoritesCount;
-
 			break;
 		}
 		case "offre": {
@@ -111,14 +100,12 @@ presence.on("UpdateData", async () => {
 			else {
 				presenceData.details = "Regarde une offre";
 
-				const offer = (<HTMLHeadingElement>(
-						document.querySelector(
-							'.css-175oi2r.r-1hy1u7s h1[data-testid^="Nom de l’offre"]'
-						)
-					))?.textContent,
-					price = (<HTMLDivElement>(
-						document.querySelector("div[data-testid=caption-iconPrice]")
-					))?.textContent;
+				const offer = document.querySelector<HTMLHeadingElement>(
+						'.css-175oi2r.r-1hy1u7s h1[data-testid^="Nom de l’offre"]'
+					)?.textContent,
+					price = document.querySelector<HTMLDivElement>(
+						"div[data-testid=caption-iconPrice]"
+					)?.textContent;
 				if (offer && price) {
 					presenceData.state = `${offer} (${price})`;
 					presenceData.buttons = [
