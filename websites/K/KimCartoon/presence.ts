@@ -27,11 +27,9 @@ function capitalizeFirstLetter(string: string) {
 	);
 }
 
-function fullURL(covers: string, covers2: string, hostname: string) {
+function fullURL(covers: string, hostname: string) {
 	if (covers?.includes("https")) return covers;
-	else if (covers2?.includes("https")) return covers2;
-	else if (covers?.includes("Uploads") || covers2?.includes("Uploads"))
-		return `https://${hostname}${covers ?? covers2}`;
+	else if (covers?.includes("Uploads")) return `https://${hostname}${covers}`;
 	else return Assets.Logo;
 }
 
@@ -89,7 +87,6 @@ presence.on("UpdateData", async () => {
 				document
 					.querySelector('[property="og:image"]')
 					?.getAttribute("content"),
-				"",
 				hostname
 			);
 			if (iFrameVideo === true && !isNaN(duration)) {
