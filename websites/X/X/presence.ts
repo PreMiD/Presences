@@ -70,8 +70,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	let title: string,
-		info: string,
-		image = "x";
+		info: string
 
 	const path = window.location.pathname;
 
@@ -159,7 +158,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: title,
 		state: info,
-		largeImageKey: image,
+		largeImageKey: "x",
 	};
 
 	if (time) presenceData.startTimestamp = elapsed;
