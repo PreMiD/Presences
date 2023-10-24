@@ -71,20 +71,33 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (pathname.startsWith("/users/")) {
-		presenceData.details = `Viewing ${document.title.split(" Profile")[0].split(" | ")[1]} profile`;
-		const publishedSoundsCount = document.querySelector<HTMLSpanElement>('[data-premid-id="Published"')?.textContent,
-			downloadsReceivedCount = document.querySelector<HTMLSpanElement>('[data-premid-id="Downloads Received"')?.textContent;
+		presenceData.details = `Viewing ${
+			document.title.split(" Profile")[0].split(" | ")[1]
+		} profile`;
 
 		presenceData.buttons = [
 			{
-				label: `Published ${publishedSoundsCount} Sounds`,
+				label: `Published ${
+					document.querySelector<HTMLSpanElement>('[data-premid-id="Published"')
+						?.textContent
+				} Sounds`,
 				url: `https://discordsfx.com/users/${pathname.split("/")[2]}`,
 			},
 			{
-				label: `Received ${downloadsReceivedCount} Downloads`,
+				label: `Received ${
+					document.querySelector<HTMLSpanElement>(
+						'[data-premid-id="Downloads Received"'
+					)?.textContent
+				} Downloads`,
 				url: `https://discordsfx.com/users/${pathname.split("/")[2]}`,
-			}
+			},
 		];
+
+		const { searchParams } = new URL(
+			document.querySelector<HTMLImageElement>('[data-premid-id="avatar"]')
+				?.src || ""
+		);
+		presenceData.largeImageKey = searchParams.get("url");
 	}
 
 	const isPlayingSound = document.querySelector<HTMLButtonElement>(
