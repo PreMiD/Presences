@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	let title: string,
-		info: string
+		info: string;
 
 	const path = window.location.pathname;
 
