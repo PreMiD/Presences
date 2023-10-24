@@ -157,7 +157,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: title,
 		state: info,
-		largeImageKey: "x",
+		largeImageKey: "https://i.imgur.com/bTrsNge.png",
 	};
 
 	if (time) presenceData.startTimestamp = elapsed;
