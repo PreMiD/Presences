@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Regarde la page d'accueil";
 
 			const offersType = document.querySelector<HTMLHeadingElement>(
-				".css-175oi2r.r-43z982.r-1udh08x"
+				'[data-testid="ThematicHome"] [data-testid="homeBodyScrollView"] h1'
 			)?.textContent;
 			if (offersType) presenceData.state = offersType;
 			break;
@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "reservations": {
 			const reservationsCount = document.querySelector<HTMLHeadingElement>(
-				'[data-testid="OnGoingBookingsList"] h2.css-1rynq56'
+				'[data-testid="OnGoingBookingsList"] h2'
 			)?.textContent;
 
 			presenceData.details = "Regarde ses réservations";
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "reservations-terminees": {
 			const doneReservationsCount = document.querySelector<HTMLHeadingElement>(
-				'[data-testid="EndedBookings"] h2.css-1rynq56'
+				'[data-testid="EndedBookings"] h2'
 			)?.textContent;
 
 			presenceData.details = "Regarde ses réservations terminées";
@@ -62,14 +62,16 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Regarde une réservation";
 
 			const reservation = document.querySelector<HTMLHeadingElement>(
-					".css-175oi2r.r-1777fci.r-cn4s0y h1.css-1rynq56.r-1rmcaf9.r-1gknse6"
+					'[data-testid="BookingDetailsScrollView"] h1'
 				)?.textContent,
 				reservationPrice = document
-					.querySelector<HTMLSpanElement>("span.css-1qaijid.r-1rmcaf9.r-yv33h5")
+					.querySelector<HTMLSpanElement>(
+						'[data-testid="BookingDetailsScrollView"] button span'
+					)
 					?.textContent.trim(),
 				offerLink = document
 					.querySelector<HTMLAnchorElement>(
-						"a.AppButtonweb__Link-sc-1veyq7-1.hTlNnp.sc-iGgWBj.kxRSZa"
+						'a[data-testid="Voir le détail de l’offre"]'
 					)
 					?.getAttribute("href");
 			if (reservation && reservationPrice) {
@@ -89,7 +91,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Regarde ses favoris";
 
 			const favoritesCount = document.querySelector(
-				'[data-testid="favoritesResultsFlatlist"] h2.css-1rynq56'
+				'[data-testid="favoritesResultsFlatlist"] h2'
 			)?.textContent;
 			if (favoritesCount && showCounts) presenceData.state = favoritesCount;
 			break;
@@ -101,7 +103,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Regarde une offre";
 
 				const offer = document.querySelector<HTMLHeadingElement>(
-						'.css-175oi2r.r-1hy1u7s h1[data-testid^="Nom de l’offre"]'
+						'[data-testid="offer-container"] h1[data-testid^="Nom de l’offre"]'
 					)?.textContent,
 					price = document.querySelector<HTMLDivElement>(
 						"div[data-testid=caption-iconPrice]"
