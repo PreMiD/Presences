@@ -32,7 +32,7 @@ const enum Assets {
 	Cog = "https://cdn.rcd.gg/PreMiD/websites/V/VtuberWiki/assets/0.png",
 	Book = "https://cdn.rcd.gg/PreMiD/websites/V/VtuberWiki/assets/1.png",
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/V/VtuberWiki/assets/logo.png",
-	Log = "https://www.vtubers.wiki/images/premid/3795.png",
+	Log = "https://cdn.rcd.gg/PreMiD/websites/V/VtuberWiki/assets/2.png",
 }
 
 presence.on("UpdateData", async () => {
