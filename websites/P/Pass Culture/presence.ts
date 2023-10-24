@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Voir l'offre",
-						url: `${location.protocol}//${location.hostname}${
+						url: `${document.location.protocol}//${document.location.hostname}${
 							offerLink.split("?")[0]
 						}`,
 					},
@@ -124,7 +124,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Voir l'offre",
-							url: window.location.href.split("?")[0],
+							url: document.location.href.split("?")[0],
 						},
 					];
 				}
