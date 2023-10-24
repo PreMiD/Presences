@@ -10,11 +10,11 @@ const presence = new Presence({
 		},
 		"/faq": {
 			details: "Viewing the FAQ",
-			buttons: [{ label: "View The FAQ", url: "https://wiki.hylia.dev/faq" }],
+			buttons: [{ label: "View The FAQ", url: "https://www.vtubers.wiki/faq" }],
 		},
 		"/api": {
 			details: "Viewing the API",
-			buttons: [{ label: "View the API", url: "https://wiki.hylia.dev/api" }],
+			buttons: [{ label: "View the API", url: "https://www.vtubers.wiki/api" }],
 		},
 		"/changelog": {
 			details: "Viewing the Changelog",
@@ -22,7 +22,7 @@ const presence = new Presence({
 			buttons: [
 				{
 					label: "View the Changelog",
-					url: "https://wiki.hylia.dev/changelog",
+					url: "https://www.vtubers.wiki/changelog",
 				},
 			],
 		},
@@ -32,7 +32,7 @@ const enum Assets {
 	Cog = "https://cdn.rcd.gg/PreMiD/websites/V/VtuberWiki/assets/0.png",
 	Book = "https://cdn.rcd.gg/PreMiD/websites/V/VtuberWiki/assets/1.png",
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/V/VtuberWiki/assets/logo.png",
-	Log = "https://wiki.hylia.dev/images/premid/3795.png",
+	Log = "https://www.vtubers.wiki/images/premid/3795.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
 			switch (pathSplit[1]) {
 				case "vtubers":
 					if (pathSplit[2]) {
-						presenceData.largeImageKey = `https://wiki.hylia.dev/vtubers/${pathSplit[2]}/photo.jpg`;
+						presenceData.largeImageKey = `https://www.vtubers.wiki/vtubers/${pathSplit[2]}/photo.jpg`;
 						presenceData.details = "Viewing a Vuber";
 						presenceData.state = `${pageTitle} • ${
 							document.querySelector("#vtuber-desc")?.textContent
