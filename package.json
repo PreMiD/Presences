@@ -33,7 +33,7 @@
 		"json-to-ast": "2.1.0",
 		"jsonschema": "1.4.1",
 		"mime-types": "^2.1.35",
-		"mongodb": "4.12.1",
+		"mongodb": "4.17.0",
 		"semver": "7.5.2",
 		"sharp": "^0.32.1",
 		"ts-loader": "9.4.2",

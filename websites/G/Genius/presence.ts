@@ -77,21 +77,20 @@ presence.on("UpdateData", async () => {
 		presenceData.details = strings.lyrics;
 		presenceData.state = `${
 			document
-				.querySelector("a[class*='SongHeaderdesktop__Artist-sc-1effuo1-11']")
+				.querySelector("a[class*='SongHeaderdesktop__Artist']")
 				?.textContent.trim() ||
 			document
-				.querySelector("a[class*='SongHeadermobile__Artist-sc-1hu0heo-10']")
+				.querySelector("a[class*='SongHeadermobile__Artist']")
+				?.textContent.trim() ||
+			document
+				.querySelector("a[class*='HeaderArtistAndTracklistdesktop__Artist']")
 				?.textContent.trim()
 		} - ${
 			document
-				.querySelector(
-					"span[class*='SongHeaderdesktop__HiddenMask-sc-1effuo1-10']"
-				)
+				.querySelector('h1[class*="SongHeaderdesktop__Title"]')
 				?.textContent.trim() ||
 			document
-				.querySelector(
-					"span[class*='SongHeadermobile__HiddenMask-sc-1hu0heo-9']"
-				)
+				.querySelector('h1[class*="SongHeadermobile__Title"]')
 				?.textContent.trim()
 		}`;
 		if (buttons) {
