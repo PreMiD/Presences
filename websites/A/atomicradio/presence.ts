@@ -5,8 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
-			smallImageKey: "search",
+			largeImageKey: "https://i.imgur.com/16lVdWy.png",
+			smallImageKey: Assets.Search,
 			startTimestamp: browsingTimestamp,
 		},
 		player = document.querySelector<HTMLDivElement>("div.player");
@@ -22,8 +22,8 @@ presence.on("UpdateData", () => {
 			player.querySelector<HTMLButtonElement>(
 				"div.container > div.center-controls > button"
 			).id === "play-button"
-				? "pause"
-				: "play";
+				? Assets.Pause
+				: Assets.Play;
 		presenceData.details = player.querySelector<HTMLAnchorElement>(
 			"div.container > a > div.track-info > a.track-title"
 		).textContent;
