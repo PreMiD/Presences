@@ -70,6 +70,23 @@ presence.on("UpdateData", async () => {
 		];
 	}
 
+	if (pathname.startsWith("/users/")) {
+		presenceData.details = `Viewing ${document.title.split(" Profile")[0].split(" | ")[1]} profile`;
+		const publishedSoundsCount = document.querySelector<HTMLSpanElement>('[data-premid-id="Published"')?.textContent,
+			downloadsReceivedCount = document.querySelector<HTMLSpanElement>('[data-premid-id="Downloads Received"')?.textContent;
+
+		presenceData.buttons = [
+			{
+				label: `Published ${publishedSoundsCount} Sounds`,
+				url: `https://discordsfx.com/users/${pathname.split("/")[2]}`,
+			},
+			{
+				label: `Received ${downloadsReceivedCount} Downloads`,
+				url: `https://discordsfx.com/users/${pathname.split("/")[2]}`,
+			}
+		];
+	}
+
 	const isPlayingSound = document.querySelector<HTMLButtonElement>(
 		"button[data-state='playing']"
 	);
