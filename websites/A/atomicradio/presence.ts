@@ -9,7 +9,8 @@ presence.on("UpdateData", () => {
 			smallImageKey: Assets.Search,
 			startTimestamp: browsingTimestamp,
 		},
-		player = document.querySelector<HTMLDivElement>("div.player");
+		player = document.querySelector<HTMLDivElement>("div.player"),
+		{ pathname } = document.location;
 
 	if (player) {
 		const spaceId = player.querySelector("#spaceId").textContent;
@@ -32,23 +33,23 @@ presence.on("UpdateData", () => {
 		];
 	} else {
 		presenceData.details = "Browsing...";
-		if (document.location.pathname.includes("/statistics"))
+		if (pathname.includes("/statistics"))
 			presenceData.details = "Viewing statistics";
-		else if (document.location.pathname.includes("/streams"))
+		else if (pathname.includes("/streams"))
 			presenceData.details = "Viewing stream urls";
-		else if (document.location.pathname.includes("/about"))
+		else if (pathname.includes("/about"))
 			presenceData.details = "Viewing about us";
-		else if (document.location.pathname.includes("/apply"))
+		else if (pathname.includes("/apply"))
 			presenceData.details = "Viewing apply";
-		else if (document.location.pathname.includes("/contributors"))
+		else if (pathname.includes("/contributors"))
 			presenceData.details = "Viewing contributors";
-		else if (document.location.pathname.includes("/partners"))
+		else if (pathname.includes("/partners"))
 			presenceData.details = "Viewing partners";
-		else if (document.location.pathname.includes("/legal/imprint"))
+		else if (pathname.includes("/legal/imprint"))
 			presenceData.details = "Viewing imprint";
-		else if (document.location.pathname.includes("/legal/privacy"))
+		else if (pathname.includes("/legal/privacy"))
 			presenceData.details = "Viewing privacy";
-		else if (document.location.pathname.includes("/account"))
+		else if (pathname.includes("/account"))
 			presenceData.details = "Viewing account";
 	}
 
