@@ -53,16 +53,16 @@ presence.on("UpdateData", async () => {
 			switch (pathSplit[1]) {
 				case "vtubers":
 					if (pathSplit[2]) {
-						presenceData.largeImageKey = `https://vtubers.wiki/${document.querySelector<HTMLImageElement>("#vtuber-image")?.getAttribute("src")}`;
+						presenceData.largeImageKey = `https://vtubers.wiki/${document
+							.querySelector<HTMLImageElement>("#vtuber-image")
+							?.getAttribute("src")}`;
 						presenceData.details = "Viewing a Vtuber";
 						presenceData.state = `${pageTitle} • ${
 							document.querySelector("#vtuber-desc")?.textContent
 						}`;
 						presenceData.smallImageKey = Assets.Logo;
 						presenceData.smallImageText = "Vtuber Wiki";
-						presenceData.buttons = [
-							{ label: `View ${pageTitle}`, url: href },
-						];
+						presenceData.buttons = [{ label: `View ${pageTitle}`, url: href }];
 					} else presenceData.details = "Viewing All The Vtubers";
 
 					break;
