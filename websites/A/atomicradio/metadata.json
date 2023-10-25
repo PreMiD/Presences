@@ -9,9 +9,9 @@
 		"en": "The future of radio is here. Experience 12 Spaces with non-stop music you'll love."
 	},
 	"url": "atomic.radio",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/vPI68Ny.png",
-	"thumbnail": "https://i.imgur.com/qVZV8Bw.jpg",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/atomicradio/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/atomicradio/assets/thumbnail.jpg",
 	"color": "#a9f923",
 	"category": "music",
 	"tags": [
