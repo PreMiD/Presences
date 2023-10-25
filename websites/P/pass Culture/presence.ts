@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/ES9Hy84.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/P/pass%20Culture/assets/logo.png",
 		},
 		path = document.location.pathname.split("/"),
 		showCounts = await presence.getSetting<boolean>("show_counts");
