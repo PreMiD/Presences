@@ -45,14 +45,10 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		cover = await presence.getSetting<boolean>("cover"),
-		{ hostname, pathname, href } = document.location,
-		backupImg = document
-			.querySelector('[class="barContent"] > div > img')
-			?.getAttribute("src");
+		{ hostname, pathname, href } = document.location;
 
 	switch (true) {
-		case document.querySelector('[id="player_container"]') ??
-			document.querySelector('[id="myContainer"]') !== null: {
+		case iFrameVideo: {
 			const epsOrMovie =
 					document.querySelector('option[selected="selected"]')?.textContent ??
 					document.querySelector('[id="selectEpisode"] > [selected]')
@@ -78,10 +74,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state =
 				epsOrMovie?.includes("Episode") && titleSplit?.length > 1
 					? `Season ${titleSplit[1]} ${epsOrMovie}`
+					: epsOrMovie?.includes("Movie")
+					? "Movie"
 					: epsOrMovie?.includes("Episode") && titleSplit?.length === 1
 					? epsOrMovie
-					: epsOrMovie === "Movie"
-					? "Movie"
 					: `Episode ${epsOrMovie}`;
 			presenceData.largeImageKey = fullURL(
 				document
@@ -89,7 +85,7 @@ presence.on("UpdateData", async () => {
 					?.getAttribute("content"),
 				hostname
 			);
-			if (iFrameVideo === true && !isNaN(duration)) {
+			if (iFrameVideo && !isNaN(duration)) {
 				delete presenceData.startTimestamp;
 				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = paused ? "Paused" : "Playing";
@@ -120,13 +116,12 @@ presence.on("UpdateData", async () => {
 		case pathname.includes("/Cartoon/"): {
 			presenceData.details = "Viewing cartoon:";
 			presenceData.state =
-				document.querySelector('[class="bigChar"]')?.textContent;
+				document.querySelector('[class="bigChar"]')?.textContent ??
+				pathname.split("/")[2].replace("-", " ");
 			presenceData.largeImageKey =
 				document
 					.querySelector('[property="og:image"]')
-					?.getAttribute("content") ?? backupImg
-					? `https://${hostname}${backupImg}`
-					: Assets.Logo;
+					?.getAttribute("content") ?? Assets.Logo;
 			presenceData.buttons = [{ label: "View Cartoon", url: href }];
 			break;
 		}

@@ -12,6 +12,12 @@ iframe.on("UpdateData", async () => {
 					paused: video.paused,
 				},
 			});
+		} else if (video) {
+			iframe.send({
+				iframeVideo: {
+					iFrameVideo: true,
+				},
+			});
 		}
 	}
 });
