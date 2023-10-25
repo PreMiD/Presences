@@ -125,7 +125,7 @@ presence.on("UpdateData", async () => {
 					}
 					presenceData.details = `Browsing repository ${repository.owner}/${repository.name}`;
 					presenceData.state = `Viewing file ${document
-						.querySelector("h2#blob-path > strong")
+						.querySelector("#file-name-id-wide")
 						?.textContent.trim()} at ${repository.target}`;
 				} else if (pathname.includes("/issues")) {
 					if (pathname.includes("/issues/")) {
