@@ -10,9 +10,9 @@
 		"fr": "Le \"pass Culture\" est un dispositif d'accès aux activités culturelles mis en place par le gouvernement français à destination des jeunes entre 15 et 18 ans."
 	},
 	"url": "passculture.app",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/ES9Hy84.png",
-	"thumbnail": "https://i.imgur.com/cHjP0lK.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/pass%20Culture/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/pass%20Culture/assets/thumbnail.png",
 	"color": "#d6005c",
 	"category": "other",
 	"tags": [
