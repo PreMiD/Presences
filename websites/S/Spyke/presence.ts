@@ -4,14 +4,14 @@ const presence = new Presence({
     browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const postGQLAPI = async (operationName: string, query: string, vars: any) => {
-    const token = JSON.parse(JSON.parse(localStorage.getItem('persist:Token_Data_Persist')).jwtIdToken);
-    let response = await fetch(
+    const token = JSON.parse(JSON.parse(localStorage.getItem("persist:Token_Data_Persist")).jwtIdToken);
+    const response = await fetch(
         "https://api.spyke.social/graphql",
         {
             method: "POST",
             headers: {
                 authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 query,
@@ -20,14 +20,13 @@ const postGQLAPI = async (operationName: string, query: string, vars: any) => {
             })
         }
     )
-    return response.json()
-}
-
+    return response.json();
+};
 let url = "https://spyke.social/";
 
 
 presence.on("UpdateData", () => {
-    let nurl = document.URL;
+    const nurl = document.URL;
     if (nurl !== url) {
         const presenceData: PresenceData = {
             largeImageKey: "https://i.imgur.com/v10pkZA.png",
@@ -39,7 +38,7 @@ presence.on("UpdateData", () => {
         presenceData.buttons = [{ label: "View Spyke", url: "https://spyke.social/" }];
 
         if (document.URL.includes("/p/")) {
-            const post_id = document.URL.split('/p/')[1];
+            const PostId = document.URL.split("/p/")[1];
             postGQLAPI('presencepst', `query presencepst($id: ID!) {
   comments(ids: [$id]) {
     ... on Post {
@@ -57,9 +56,9 @@ presence.on("UpdateData", () => {
     }
   }
 }`,
-                { id: post_id }).then((res) => {
+                { id: PostId }).then((res) => {
 
-                    if (res.data.comments[0].content[0].__typename == `Image`) {
+                    if (res.data.comments[0].content[0].__typename == "Image") {
                         presenceData.largeImageKey = res.data.comments[0].content[0].data;
                         presenceData.smallImageKey = res.data.comments[0].communities[0].dp; //"https://i.imgur.com/v10pkZA.png";
                         presenceData.details = `Reading post in ${res.data.comments[0].communities[0].name}`;
@@ -76,9 +75,9 @@ presence.on("UpdateData", () => {
                     }
                 });
         } else if (document.URL.includes("/g/")) {
-            let group_Name = document.URL.split("/g/")[1];
-            postGQLAPI('presencegrp', "query presencegrp($name:String!){ communityByName(name:$name) { name dp cover}}",
-                { name: group_Name }).then((res) => {
+            const GroupName = document.URL.split("/g/")[1];
+            postGQLAPI("presencegrp", "query presencegrp($name:String!){ communityByName(name:$name) { name dp cover}}",
+                { name: GroupName }).then((res) => {
                     presenceData.largeImageKey = res.data.communityByName.cover;
                     presenceData.smallImageKey = res.data.communityByName.dp; //"https://i.imgur.com/v10pkZA.png";
                     presenceData.state = `${res.data.communityByName.name}`;
@@ -92,22 +91,20 @@ presence.on("UpdateData", () => {
             presenceData.details = "Uploading a post";
             presenceData.state = "";
             presence.setActivity(presenceData);
-
-}
-            else if (document.URL.includes("/u/")) {
-            let user_Name = document.URL.split("/u/")[1];
+}          else if (document.URL.includes("/u/")) {
+            const UserName = document.URL.split("/u/")[1];
             // postGQLAPI('a', ``,
             // { name: user_name }).then((res) => {
             presenceData.largeImageKey = "https://api.dicebear.com/7.x/avataaars/png"; //`https://i.imgur.com/v10pkZA.png`;
             presenceData.smallImageKey = "https://i.imgur.com/v10pkZA.png"; //`https://api.dicebear.com/7.x/avataaars/svg`;
             presenceData.details = "Viewing a user profile";
-            presenceData.state = `@${user_Name}`;
+            presenceData.state = `@${UserName}`;
             presenceData.buttons = [{ url: document.URL, label: "View User" }];
             presence.setActivity(presenceData);
             // });
         } else {
             presence.setActivity(presenceData);
         }
-        url = nurl
+        url = nurl;
     }
 });
