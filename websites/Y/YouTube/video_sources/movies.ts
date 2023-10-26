@@ -4,7 +4,7 @@ function isActive(): boolean {
 	return true;
 }
 
-function getTitle() {
+function getTitle(): string {
 	return (
 		document
 			.querySelector(".title.style-scope.ytd-video-primary-info-renderer")
@@ -13,7 +13,7 @@ function getTitle() {
 	);
 }
 
-function getUploader() {
+function getUploader(): string {
 	return document
 		.querySelector(".style-scope.ytd-channel-name > a")
 		?.textContent.trim();

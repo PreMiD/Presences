@@ -1,10 +1,10 @@
 import { Resolver } from "../util";
 
-function isActive() {
+function isActive(): boolean {
 	return document.location.pathname.includes("/embed");
 }
 
-function getTitle() {
+function getTitle(): string {
 	return document
 		.querySelector('[class="reel-video-in-sequence style-scope ytd-shorts"]')
 		?.querySelector(
@@ -13,7 +13,7 @@ function getTitle() {
 		?.textContent.trim();
 }
 
-function getUploader() {
+function getUploader(): string {
 	return document
 		.querySelector("div.ytp-title-expanded-heading > h2 > a")
 		?.textContent.trim();

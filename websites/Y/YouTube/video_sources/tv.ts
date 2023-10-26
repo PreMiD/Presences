@@ -4,18 +4,15 @@ function isActive(): boolean {
 	return !!document.querySelector(".player-video-title");
 }
 
-function getTitle() {
+function getTitle(): string {
 	return document.querySelector(".player-video-title")?.textContent.trim();
 }
 
-const YOUTUBE_TV_SEPERATOR = "•";
-function getUploader() {
+function getUploader(): string {
 	let title = document
 		.querySelector(".player-video-details")
 		?.textContent.trim();
-	if (title) {
-		title = truncateAfter(title, YOUTUBE_TV_SEPERATOR);
-	}
+	if (title) title = truncateAfter(title, "•");
 	return title;
 }
 

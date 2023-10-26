@@ -1,9 +1,6 @@
 let cachedTime = 0;
 export function adjustTimeError(time: number, acceptableError: number): number {
-	const diff = Math.abs(time - cachedTime);
-	if (diff > acceptableError) {
-		cachedTime = time;
-	}
+	if (Math.abs(time - cachedTime) > acceptableError) cachedTime = time;
 	return cachedTime;
 }
 

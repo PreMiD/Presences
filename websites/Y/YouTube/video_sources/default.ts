@@ -9,9 +9,8 @@ function getTitle() {
 		return document
 			.querySelector("h1 yt-formatted-string.ytd-video-primary-info-renderer")
 			?.textContent.trim();
-	} else {
+	} else
 		return document.querySelector(".ytd-miniplayer .title")?.textContent.trim();
-	}
 }
 
 function getUploader() {

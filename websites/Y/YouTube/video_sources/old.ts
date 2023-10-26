@@ -7,11 +7,11 @@ function isActive(): boolean {
 	);
 }
 
-function getTitle() {
+function getTitle(): string {
 	return document.querySelector(".watch-title")?.textContent.trim();
 }
 
-function getUploader() {
+function getUploader(): string {
 	return document.querySelector("#owner-name a")?.textContent.trim();
 }
 
