@@ -58,7 +58,7 @@ presence.on("UpdateData", () => {
 }`,
                 { id: PostId }).then((res) => {
 
-                    if (res.data.comments[0].content[0].__typename == "Image") {
+                    if (res.data.comments[0].content[0].__typename === "Image") {
                         presenceData.largeImageKey = res.data.comments[0].content[0].data;
                         presenceData.smallImageKey = res.data.comments[0].communities[0].dp; //"https://i.imgur.com/v10pkZA.png";
                         presenceData.details = `Reading post in ${res.data.comments[0].communities[0].name}`;
@@ -91,7 +91,7 @@ presence.on("UpdateData", () => {
             presenceData.details = "Uploading a post";
             presenceData.state = "";
             presence.setActivity(presenceData);
-}          else if (document.URL.includes("/u/")) {
+       } else if (document.URL.includes("/u/")) {
             const UserName = document.URL.split("/u/")[1];
             // postGQLAPI('a', ``,
             // { name: user_name }).then((res) => {
@@ -102,7 +102,8 @@ presence.on("UpdateData", () => {
             presenceData.buttons = [{ url: document.URL, label: "View User" }];
             presence.setActivity(presenceData);
             // });
-        } else 
+        } 
+	else 
             presence.setActivity(presenceData);
         url = nurl;
     }
