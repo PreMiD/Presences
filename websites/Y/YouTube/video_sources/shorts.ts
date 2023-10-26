@@ -38,7 +38,7 @@ export async function cacheShortData(hostname: string, shortsPath: string) {
 		cached = {
 			id: shortsPath,
 			uploader: `${closest
-				.querySelector("a")
+				?.querySelector("a")
 				?.getAttribute("href")
 				?.replace("/", "")
 				?.replace("@", "")} (${closest?.textContent})`,

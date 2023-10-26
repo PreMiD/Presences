@@ -4,7 +4,7 @@ function isActive(): boolean {
 	return !!getTitle() && !!getUploader();
 }
 
-function getTitle() {
+function getTitle(): string {
 	if (document.location.pathname.includes("/watch")) {
 		return document
 			.querySelector("h1 yt-formatted-string.ytd-video-primary-info-renderer")
@@ -13,7 +13,7 @@ function getTitle() {
 		return document.querySelector(".ytd-miniplayer .title")?.textContent.trim();
 }
 
-function getUploader() {
+function getUploader(): string {
 	return (
 		document
 			.querySelector("ytd-video-owner-renderer .ytd-channel-name a")
