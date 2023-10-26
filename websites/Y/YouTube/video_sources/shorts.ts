@@ -18,8 +18,17 @@ function delay(ms: number): Promise<void> {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-let cached: { id: string; uploader: string; channelURL: string };
-export async function cacheShortData(hostname: string, shortsPath: string) {
+interface Cache {
+	id: string;
+	uploader: string;
+	channelURL: string;
+}
+
+let cached: Cache;
+export async function cacheShortData(
+	hostname: string,
+	shortsPath: string
+): Promise<Cache> {
 	if (!cached?.id || cached.id !== shortsPath) {
 		await delay(300);
 		const closest =
@@ -47,7 +56,7 @@ export async function cacheShortData(hostname: string, shortsPath: string) {
 		return cached;
 	} else return cached;
 }
-export function getCache() {
+export function getCache(): Cache {
 	return cached;
 }
 
