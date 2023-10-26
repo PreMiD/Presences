@@ -1,7 +1,7 @@
 import { Resolver } from "../util";
 
 function isActive(): boolean {
-	return !!document.location.pathname.includes("/shorts/");
+	return document.location.pathname.includes("/shorts/");
 }
 
 function getTitle(): string {
@@ -48,7 +48,7 @@ export async function cacheShortData(hostname: string, shortsPath: string) {
 	} else return cached;
 }
 export function getCache() {
-  return cached;
+	return cached;
 }
 
 const resolver: Resolver = {

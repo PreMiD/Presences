@@ -18,7 +18,7 @@ function getUploader() {
 	return (
 		document
 			.querySelector("ytd-video-owner-renderer .ytd-channel-name a")
-			.textContent.trim() ||
+			?.textContent.trim() ||
 		document.querySelector("yt-formatted-string#owner-name")?.textContent.trim()
 	);
 }
