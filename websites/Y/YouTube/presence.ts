@@ -7,6 +7,7 @@ import youtubeEmbedResolver from "./video_sources/embed";
 import youtubeMoviesResolver from "./video_sources/movies";
 import youtubeTVResolver from "./video_sources/tv";
 import youtubeResolver from "./video_sources/default";
+import { adjustTimeError } from "./util";
 
 const presence = new Presence({
 		clientId: "463097721130188830",
@@ -166,15 +167,17 @@ presence.on("UpdateData", async () => {
 				)
 				?.src.replace(/=s\d+/, "=s512");
 		}
-		const unlistedVideo =
-				document
-					.querySelector<SVGPathElement>("g#privacy_unlisted > path")
-					?.getAttribute("d") ===
-				document
-					.querySelector<SVGPathElement>(
-						"h1.title+ytd-badge-supported-renderer path"
-					)
-					?.getAttribute("d"),
+		const unlistedPathElement = document.querySelector<SVGPathElement>(
+				"g#privacy_unlisted > path"
+			),
+			unlistedBadgeElement = document.querySelector<SVGPathElement>(
+				"h1.title+ytd-badge-supported-renderer path"
+			),
+			unlistedVideo =
+				unlistedPathElement &&
+				unlistedBadgeElement &&
+				unlistedPathElement?.getAttribute("d") ===
+					unlistedBadgeElement?.getAttribute("d"),
 			videoId =
 				document
 					.querySelector("#page-manager > ytd-watch-flexy")
@@ -210,7 +213,10 @@ presence.on("UpdateData", async () => {
 					: isPlaylistLoop
 					? "Playlist on loop"
 					: strings.play,
-				endTimestamp: presence.getTimestampsfromMedia(video)[1],
+				endTimestamp: adjustTimeError(
+					presence.getTimestampsfromMedia(video)[1],
+					0.75
+				),
 			};
 
 		if (vidState.includes("{0}")) delete presenceData.state;
@@ -377,13 +383,9 @@ presence.on("UpdateData", async () => {
 						logo === LogoMode.Thumbnail
 							? document
 									.querySelector('[id="post"]')
-									?.querySelectorAll("img")[1]
-									?.getAttribute("src")
+									?.querySelectorAll("img")[1]?.src
 							: logo === LogoMode.Channel
-							? document
-									.querySelector('[id="post"]')
-									?.querySelector("img")
-									?.getAttribute("src")
+							? document.querySelector('[id="post"]')?.querySelector("img")?.src
 							: YouTubeAssets.Logo;
 				} else if (pathname.includes("/about")) {
 					presenceData.details = strings.readChannel;
@@ -453,8 +455,11 @@ presence.on("UpdateData", async () => {
 				presenceData.details = strings.viewPlaylist;
 				const title =
 					document.querySelector("#text-displayed") ??
+					document.querySelector(
+						"ytd-playlist-header-renderer yt-dynamic-sizing-formatted-string.ytd-playlist-header-renderer"
+					) ??
 					document.querySelector("#title > yt-formatted-string > a");
-				presenceData.state = title.textContent;
+				presenceData.state = title.textContent.trim();
 				break;
 			}
 			case pathname.includes("/premium"): {
@@ -526,7 +531,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (!presenceData.details) presence.setActivity();
-		else presence.setActivity(presenceData);
+		else presence.setActivity(presenceData, true);
 	} else if (hostname === "studio.youtube.com") {
 		const presenceData: PresenceData = {
 			largeImageKey: YouTubeAssets.Logo,
