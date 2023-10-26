@@ -39,7 +39,7 @@ presence.on("UpdateData", () => {
 
         if (document.URL.includes("/p/")) {
             const PostId = document.URL.split("/p/")[1];
-            postGQLAPI('presencepst', `query presencepst($id: ID!) {
+            postGQLAPI("presencepst", `query presencepst($id: ID!) {
   comments(ids: [$id]) {
     ... on Post {
       title
@@ -102,9 +102,8 @@ presence.on("UpdateData", () => {
             presenceData.buttons = [{ url: document.URL, label: "View User" }];
             presence.setActivity(presenceData);
             // });
-        } else {
+        } else 
             presence.setActivity(presenceData);
-        }
         url = nurl;
     }
 });
