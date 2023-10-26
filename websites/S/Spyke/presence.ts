@@ -23,7 +23,7 @@ let postGQLAPI = async (operationName: string, query: string, vars: any) => {
     return response.json()
 }
 
-let url = `https://spyke.social/`;
+let url = "https://spyke.social/";
 
 
 presence.on("UpdateData", () => {
@@ -76,7 +76,7 @@ presence.on("UpdateData", () => {
                     }
                 });
         } else if (document.URL.includes("/g/")) {
-            let group_name = document.URL.split('/g/')[1];
+            let group_name = document.URL.split("/g/")[1];
             postGQLAPI('presencegrp', `query presencegrp($name:String!){ communityByName(name:$name) { name dp cover}}`,
                 { name: group_name }).then((res) => {
                     presenceData.largeImageKey = res.data.communityByName.cover;
@@ -87,20 +87,20 @@ presence.on("UpdateData", () => {
                     presence.setActivity(presenceData);
                 });
         } else if (document.URL.includes("/upload")){
-            presenceData.largeImageKey = `https://i.imgur.com/v10pkZA.png`;
-            presenceData.smallImageKey = `https://i.imgur.com/55dCzB1.png`;
-            presenceData.details = `Uploading a post`;
-            presenceData.state = ``;
+            presenceData.largeImageKey = "https://i.imgur.com/v10pkZA.png";
+            presenceData.smallImageKey = "https://i.imgur.com/55dCzB1.png";
+            presenceData.details = "Uploading a post";
+            presenceData.state = "";
             presence.setActivity(presenceData);
 
 }
             else if (document.URL.includes("/u/")) {
-            let user_name = document.URL.split('/u/')[1];
+            let user_name = document.URL.split("/u/")[1];
             // postGQLAPI('a', ``,
             // { name: user_name }).then((res) => {
-            presenceData.largeImageKey = `https://api.dicebear.com/7.x/avataaars/png`; //`https://i.imgur.com/v10pkZA.png`;
+            presenceData.largeImageKey = "https://api.dicebear.com/7.x/avataaars/png"; //`https://i.imgur.com/v10pkZA.png`;
             presenceData.smallImageKey = "https://i.imgur.com/v10pkZA.png"; //`https://api.dicebear.com/7.x/avataaars/svg`;
-            presenceData.details = `Viewing a user profile`;
+            presenceData.details = "Viewing a user profile";
             presenceData.state = `@${user_name}`;
             presenceData.buttons = [{ url: document.URL, label: "View User" }];
             presence.setActivity(presenceData);
