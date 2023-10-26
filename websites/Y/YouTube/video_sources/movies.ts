@@ -1,7 +1,7 @@
 import { Resolver } from "../util";
 
 function isActive(): boolean {
-	return true;
+	return !!getTitle() && !!getUploader();
 }
 
 function getTitle(): string {
