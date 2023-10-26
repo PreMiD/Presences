@@ -1,7 +1,7 @@
 import youtubeOldResolver from "./video_sources/old";
 import youtubeShortsResolver, {
 	cacheShortData,
-	getCache,
+	getCache as getShortsCache,
 } from "./video_sources/shorts";
 import youtubeEmbedResolver from "./video_sources/embed";
 import youtubeMoviesResolver from "./video_sources/movies";
@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<number>("logo"),
 			presence.getSetting<boolean>("buttons"),
 		]),
-		{ pathname, hostname } = document.location;
+		{ pathname, hostname, search, href } = document.location;
 
 	// Update strings if user selected another language.
 	if (oldLang !== newLang || !strings) {
@@ -113,7 +113,7 @@ presence.on("UpdateData", async () => {
 		strings = await getStrings();
 	}
 
-	//* If there is a vid playing
+	// If there is a vid playing
 	const video = Array.from(
 		document.querySelectorAll<HTMLVideoElement>(".video-stream")
 	).find(video => video.duration);
@@ -215,7 +215,7 @@ presence.on("UpdateData", async () => {
 
 		if (vidState.includes("{0}")) delete presenceData.state;
 
-		//* Remove timestamps if paused or live
+		// Remove timestamps if paused or live
 		if (video.paused || live) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
@@ -226,7 +226,7 @@ presence.on("UpdateData", async () => {
 			}
 		}
 
-		//* Update title to indicate when an ad is being played
+		// Update title to indicate when an ad is being played
 		if (document.querySelector(".ytp-ad-player-overlay")) {
 			presenceData.details = strings.ad;
 			delete presenceData.state;
@@ -242,14 +242,14 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: live ? strings.watchStreamButton : strings.watchVideoButton,
-					url: document.URL.includes("/watch?v=")
-						? document.URL.split("&")[0]
+					url: href.includes("/watch?v=")
+						? href.split("&")[0]
 						: `https://www.youtube.com/watch?v=${videoId}`,
 				},
 				{
 					label: strings.viewChannelButton,
 					url:
-						getCache()?.channelURL ??
+						getShortsCache()?.channelURL ??
 						document.querySelector<HTMLLinkElement>(
 							"#top-row ytd-video-owner-renderer > a"
 						)?.href,
@@ -393,7 +393,7 @@ presence.on("UpdateData", async () => {
 					searching = true;
 
 					presenceData.details = strings.searchChannel.replace("{0}", user);
-					presenceData.state = document.URL.split("search?query=")[1];
+					presenceData.state = new URLSearchParams(search).get("query");
 					presenceData.smallImageKey = Assets.Search;
 				} else {
 					presenceData.details = strings.viewChannel;
@@ -401,25 +401,22 @@ presence.on("UpdateData", async () => {
 				}
 				if (channelPic) {
 					const channelImg =
-						document //self channel
-							.querySelector<HTMLImageElement>(
+						// Self channel
+						(
+							document.querySelector<HTMLImageElement>(
 								"yt-img-shadow.ytd-channel-avatar-editor > img"
-							)
-							?.src.replace(/=s[0-9]+/, "=s512") ??
-						document
-							.querySelector<HTMLImageElement>(
+							) ??
+							document.querySelector<HTMLImageElement>(
 								"#avatar.ytd-c4-tabbed-header-renderer > img"
-							)
-							?.src.replace(/=s[0-9]+/, "=s512") ??
-						document //when viewing a community post
-							.querySelector<HTMLImageElement>(
+							) ??
+							// When viewing a community post
+							document.querySelector<HTMLImageElement>(
 								"#author-thumbnail > a > yt-img-shadow > img"
 							)
-							?.src.replace(/=s[0-9]+/, "=s512") ??
-						YouTubeAssets.Logo;
+						)?.src.replace(/=s[0-9]+/, "=s512") ?? YouTubeAssets.Logo;
 					if (channelImg) presenceData.largeImageKey = channelImg;
-					break;
 				}
+				break;
 			}
 			case pathname.includes("/post"): {
 				presenceData.details = strings.viewCPost;
@@ -538,37 +535,52 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		};
 
-		if (pathname.includes("/videos")) {
-			presenceData.details = strings.studioVid;
-		} else if (pathname.includes("/video")) {
-			const title = document.querySelector("#entity-name");
-			if (pathname.includes("/edit")) {
-				presenceData.details = strings.studioEdit;
-				presenceData.state = title.textContent;
-			} else if (pathname.includes("/analytics")) {
-				presenceData.details = strings.studioAnaly;
-				presenceData.state = title.textContent;
-			} else if (pathname.includes("/comments")) {
-				presenceData.details = strings.studioComments;
-				presenceData.state = title.textContent;
-			} else if (pathname.includes("/translations")) {
-				presenceData.details = strings.studioTranslate;
-				presenceData.state = title.textContent;
+		switch (true) {
+			case pathname.includes("/videos"): {
+				presenceData.details = strings.studioVid;
+				break;
 			}
-		} else if (pathname.includes("/analytics")) {
-			presenceData.details = strings.studioTheir;
-			presenceData.state = strings.studioCAnaly;
-		} else if (pathname.includes("/comments")) {
-			presenceData.details = strings.studioTheir;
-			presenceData.state = strings.studioCComments;
-		} else if (pathname.includes("/translations")) {
-			presenceData.details = strings.studioTheir;
-			presenceData.state = strings.studioCTranslate;
-		} else if (pathname.includes("/channel")) {
-			presenceData.details = strings.studioDash;
-		} else if (pathname.includes("/artist")) {
-			presenceData.details = strings.studioTheir;
-			presenceData.state = strings.studioArtist;
+			case pathname.includes("/video"): {
+				const title = document.querySelector("#entity-name");
+				if (pathname.includes("/edit")) {
+					presenceData.details = strings.studioEdit;
+					presenceData.state = title.textContent;
+				} else if (pathname.includes("/analytics")) {
+					presenceData.details = strings.studioAnaly;
+					presenceData.state = title.textContent;
+				} else if (pathname.includes("/comments")) {
+					presenceData.details = strings.studioComments;
+					presenceData.state = title.textContent;
+				} else if (pathname.includes("/translations")) {
+					presenceData.details = strings.studioTranslate;
+					presenceData.state = title.textContent;
+				}
+				break;
+			}
+			case pathname.includes("/analytics"): {
+				presenceData.details = strings.studioTheir;
+				presenceData.state = strings.studioCAnaly;
+				break;
+			}
+			case pathname.includes("/comments"): {
+				presenceData.details = strings.studioTheir;
+				presenceData.state = strings.studioCComments;
+				break;
+			}
+			case pathname.includes("/translations"): {
+				presenceData.details = strings.studioTheir;
+				presenceData.state = strings.studioCTranslate;
+				break;
+			}
+			case pathname.includes("/channel"): {
+				presenceData.details = strings.studioDash;
+				break;
+			}
+			case pathname.includes("/artist"): {
+				presenceData.details = strings.studioTheir;
+				presenceData.state = strings.studioArtist;
+				break;
+			}
 		}
 
 		if (privacy) {
