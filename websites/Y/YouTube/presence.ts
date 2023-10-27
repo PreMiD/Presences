@@ -7,7 +7,7 @@ import youtubeEmbedResolver from "./video_sources/embed";
 import youtubeMoviesResolver from "./video_sources/movies";
 import youtubeTVResolver from "./video_sources/tv";
 import youtubeResolver from "./video_sources/default";
-import { adjustTimeError } from "./util";
+import { Resolver, adjustTimeError } from "./util";
 
 const presence = new Presence({
 		clientId: "463097721130188830",
@@ -83,6 +83,12 @@ async function getStrings() {
 	);
 }
 
+const nullResolver: Resolver = {
+	isActive: () => true,
+	getTitle: () => document.title,
+	getUploader: () => "",
+}
+
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
@@ -127,6 +133,7 @@ presence.on("UpdateData", async () => {
 			youtubeTVResolver,
 			youtubeResolver,
 			youtubeMoviesResolver,
+			nullResolver,
 		].find(resolver => resolver.isActive());
 
 		if (resolver === youtubeShortsResolver)
