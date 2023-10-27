@@ -18,12 +18,10 @@ const presence = new Presence({
                 variables: vars,
                 operationName,
             })
-        }
-    )
-    return response.json();
-};
+        });
+    return response.json()
+}
 let url = "https://spyke.social/";
-
 
 presence.on("UpdateData", () => {
     const nurl = document.URL;
@@ -50,23 +48,21 @@ presence.on("UpdateData", () => {
       }
       communities {
         name
-        dp
-        
+        dp 
       }
     }
   }
 }`,
                 { id: PostId }).then((res) => {
-
                     if (res.data.comments[0].content[0].__typename === "Image") {
                         presenceData.largeImageKey = res.data.comments[0].content[0].data;
-                        presenceData.smallImageKey = res.data.comments[0].communities[0].dp; //"https://i.imgur.com/v10pkZA.png";
+                        presenceData.smallImageKey = res.data.comments[0].communities[0].dp; 
                         presenceData.details = `Reading post in ${res.data.comments[0].communities[0].name}`;
                         presenceData.state = res.data.comments[0].title;
                         presenceData.buttons = [{ url: document.URL, label: "View Post" }];
                         presence.setActivity(presenceData);
                     } else {
-                        presenceData.largeImageKey = res.data.comments[0].communities[0].dp; // `https://i.imgur.com/v10pkZA.png`;
+                        presenceData.largeImageKey = res.data.comments[0].communities[0].dp; 
                         presenceData.smallImageKey = "https://i.imgur.com/v10pkZA.png";
                         presenceData.details = `Reading post in ${res.data.comments[0].communities[0].name}`;
                         presenceData.state = res.data.comments[0].title;
@@ -79,7 +75,7 @@ presence.on("UpdateData", () => {
             postGQLAPI("presencegrp", "query presencegrp($name:String!){ communityByName(name:$name) { name dp cover}}",
                 { name: GroupName }).then((res) => {
                     presenceData.largeImageKey = res.data.communityByName.cover;
-                    presenceData.smallImageKey = res.data.communityByName.dp; //"https://i.imgur.com/v10pkZA.png";
+                    presenceData.smallImageKey = res.data.communityByName.dp; 
                     presenceData.state = `${res.data.communityByName.name}`;
                     presenceData.details = "Viewing a Clan";
                     presenceData.buttons = [{ url: document.URL, label: "View Clan" }];
@@ -93,17 +89,13 @@ presence.on("UpdateData", () => {
             presence.setActivity(presenceData);
        } else if (document.URL.includes("/u/")) {
             const UserName = document.URL.split("/u/")[1];
-            // postGQLAPI('a', ``,
-            // { name: user_name }).then((res) => {
             presenceData.largeImageKey = "https://api.dicebear.com/7.x/avataaars/png"; //`https://i.imgur.com/v10pkZA.png`;
-            presenceData.smallImageKey = "https://i.imgur.com/v10pkZA.png"; //`https://api.dicebear.com/7.x/avataaars/svg`;
+            presenceData.smallImageKey = "https://i.imgur.com/v10pkZA.png"; 
             presenceData.details = "Viewing a user profile";
             presenceData.state = `@${UserName}`;
             presenceData.buttons = [{ url: document.URL, label: "View User" }];
             presence.setActivity(presenceData);
-            // });
-        } 
-	else 
+        } else 
             presence.setActivity(presenceData);
         url = nurl;
     }
