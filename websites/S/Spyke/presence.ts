@@ -46,22 +46,7 @@ presence.on("UpdateData", () => {
       const PostId = document.URL.split("/p/")[1];
       postGQLAPI(
         "presencepst",
-        `query presencepst($id: ID!) {
-  comments(ids: [$id]) {
-    ... on Post {
-      title
-      content {
-        id
-        data
-        __typename
-      }
-      communities {
-        name
-        dp 
-      }
-    }
-  }
-}`,
+        `query presencepst($id: ID!) { comments(ids: [$id]) { ... on Post { title content { id data __typename } communities { name dp } } } }`,
         { id: PostId }
       ).then((res) => {
         if (res.data.comments[0].content[0].__typename === "Image") {
