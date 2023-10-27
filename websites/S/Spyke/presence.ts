@@ -3,10 +3,9 @@ const presence = new Presence({
 }),
     browsingTimestamp = Math.floor(Date.now() / 1000);
 
-const postGQLAPI, token, response;
-     postGQLAPI = async (operationName: string, query: string, vars: any) => {
-     token = JSON.parse(JSON.parse(localStorage.getItem("persist:Token_Data_Persist")).jwtIdToken);
-     response = await fetch(
+    const postGQLAPI = async (operationName: string, query: string, vars: any) => {
+    const token = JSON.parse(JSON.parse(localStorage.getItem("persist:Token_Data_Persist")).jwtIdToken);
+    const response = await fetch(
         "https://api.spyke.social/graphql",
         {
             method: "POST",
