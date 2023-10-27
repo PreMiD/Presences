@@ -77,7 +77,8 @@ presence.on("UpdateData", async () => {
 
 		const { searchParams } = new URL(
 			document.querySelector<HTMLImageElement>('[data-premid-id="avatar"]')
-				?.src || "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20SFX/assets/logo.png"
+				?.src ||
+				"https://cdn.rcd.gg/PreMiD/websites/D/Discord%20SFX/assets/logo.png"
 		);
 		presenceData.largeImageKey = searchParams.get("url");
 	}
