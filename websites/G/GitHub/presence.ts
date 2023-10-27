@@ -123,10 +123,18 @@ presence.on("UpdateData", async () => {
 						delete presenceData.buttons;
 						break;
 					}
+					const pathFolder = document
+							.querySelector("#repos-header-breadcrumb-wide > ol")
+							?.textContent.trim()
+							.split("/")
+							.slice(1)
+							.join("/"),
+						fileName = document.querySelector("#file-name-id-wide").textContent;
 					presenceData.details = `Browsing repository ${repository.owner}/${repository.name}`;
-					presenceData.state = `Viewing file ${document
-						.querySelector("h2#blob-path > strong")
-						?.textContent.trim()} at ${repository.target}`;
+					presenceData.state = `Viewing file ${(pathFolder
+						? `${pathFolder}/${fileName}`
+						: fileName
+					)?.trim()} at ${repository.target}`;
 				} else if (pathname.includes("/issues")) {
 					if (pathname.includes("/issues/")) {
 						if (pathname.includes("new")) {
