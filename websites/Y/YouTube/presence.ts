@@ -87,7 +87,7 @@ const nullResolver: Resolver = {
 	isActive: () => true,
 	getTitle: () => document.title,
 	getUploader: () => "",
-}
+};
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
