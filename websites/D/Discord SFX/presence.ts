@@ -75,27 +75,9 @@ presence.on("UpdateData", async () => {
 			document.title.split(" Profile")[0].split(" | ")[1]
 		} profile`;
 
-		presenceData.buttons = [
-			{
-				label: `Published ${
-					document.querySelector<HTMLSpanElement>('[data-premid-id="Published"')
-						?.textContent
-				} Sounds`,
-				url: `https://discordsfx.com/users/${pathname.split("/")[2]}`,
-			},
-			{
-				label: `Received ${
-					document.querySelector<HTMLSpanElement>(
-						'[data-premid-id="Downloads Received"'
-					)?.textContent
-				} Downloads`,
-				url: `https://discordsfx.com/users/${pathname.split("/")[2]}`,
-			},
-		];
-
 		const { searchParams } = new URL(
 			document.querySelector<HTMLImageElement>('[data-premid-id="avatar"]')
-				?.src || ""
+				?.src || "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20SFX/assets/logo.png"
 		);
 		presenceData.largeImageKey = searchParams.get("url");
 	}
