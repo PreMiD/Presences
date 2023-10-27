@@ -3,10 +3,12 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
+	const assets = {
+			Logo: "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20SFX/assets/logo.png",
+		},
+		presenceData: PresenceData = {
 			details: "Browsing",
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/D/Discord%20SFX/assets/logo.png",
+			largeImageKey: assets.Logo,
 		},
 		{ pathname } = document.location;
 
@@ -75,12 +77,15 @@ presence.on("UpdateData", async () => {
 			document.title.split(" Profile")[0].split(" | ")[1]
 		} profile`;
 
-		const { searchParams } = new URL(
-			document.querySelector<HTMLImageElement>('[data-premid-id="avatar"]')
-				?.src ||
-				"https://cdn.rcd.gg/PreMiD/websites/D/Discord%20SFX/assets/logo.png"
-		);
-		presenceData.largeImageKey = searchParams.get("url");
+		try {
+			const { searchParams } = new URL(
+				document.querySelector<HTMLImageElement>('[data-premid-id="avatar"]')
+					?.src || ""
+			);
+			presenceData.largeImageKey = searchParams.get("url");
+		} catch {
+			presenceData.largeImageKey = assets.Logo;
+		}
 	}
 
 	const isPlayingSound = document.querySelector<HTMLButtonElement>(
