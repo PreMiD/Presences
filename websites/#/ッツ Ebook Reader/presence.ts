@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 const enum Assets {
-	Logo = "https://github.com/ttu-ttu/ebook-reader/raw/main/assets/readme/icon.png",
+	Logo = "https://i.imgur.com/jQqmgCA.png",
 }
 
 presence.on("UpdateData", async () => {
