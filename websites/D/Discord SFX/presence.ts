@@ -2,13 +2,14 @@ const presence = new Presence({
 	clientId: "1119009771538882740",
 });
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20SFX/assets/logo.png",
+}
+
 presence.on("UpdateData", async () => {
-	const assets = {
-			Logo: "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20SFX/assets/logo.png",
-		},
-		presenceData: PresenceData = {
+	const presenceData: PresenceData = {
 			details: "Browsing",
-			largeImageKey: assets.Logo,
+			largeImageKey: Assets.Logo,
 		},
 		{ pathname } = document.location;
 
@@ -84,7 +85,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.largeImageKey = searchParams.get("url");
 		} catch {
-			presenceData.largeImageKey = assets.Logo;
+			presenceData.largeImageKey = Assets.Logo;
 		}
 	}
 
