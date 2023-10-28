@@ -4,14 +4,16 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/HuhO3kS.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/M/MonBureauNum%C3%A9rique/assets/logo.png",
 		},
 		searchParams = new URLSearchParams(document.location.search),
 		ACTION = searchParams.get("ACTION");
 
 	if (document.location.hostname.split(".")[1] === "moodle") {
 		presenceData.details = "Regarde un cours";
-		presenceData.largeImageKey = "https://i.imgur.com/YgilLQr.png";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/M/MonBureauNum%C3%A9rique/assets/0.png";
 	} else {
 		switch (document.location.pathname.split("/")[1]) {
 			case "sg.do":
