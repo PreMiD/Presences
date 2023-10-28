@@ -7,18 +7,20 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/uBFoZMP.jpg",
 		},
 		path = document.location.pathname.split("/"),
-		showUsername = await presence.getSetting<boolean>("show_profile"),
-		showPost = await presence.getSetting<boolean>("show_post"),
-		showFeed = await presence.getSetting<boolean>("show_feed");
+		[showUsername, showPost, showFeed] = await Promise.all([
+			presence.getSetting<boolean>("show_profile"),
+			presence.getSetting<boolean>("show_post"),
+			presence.getSetting<boolean>("show_feed"),
+		]);
 
 	switch (path[1]) {
 		case "profile":
 			switch (path[3]) {
 				case "feed":
-					presenceData.details = "Viewing a feed...";
+					presenceData.details = "Viewing a feed";
 					if (showFeed) {
 						presenceData.state = document.querySelector(
-							"a.css-1jxf684.r-1loqt21:not(.r-13awgt0)"
+							".css-175oi2r.r-1awozwy.r-18u37iz.r-1mmae3n.r-284m6k.r-1jj8364.r-lchren.r-1ye8kvj.r-13qz1uu .css-1jxf684.r-1loqt21"
 						)?.textContent;
 						presenceData.buttons = [
 							{
@@ -29,7 +31,7 @@ presence.on("UpdateData", async () => {
 					}
 					break;
 				case "post":
-					presenceData.details = "Viewing a post...";
+					presenceData.details = "Viewing a post";
 					if (showPost) {
 						presenceData.buttons = [
 							{
@@ -40,7 +42,7 @@ presence.on("UpdateData", async () => {
 					}
 					break;
 				default:
-					presenceData.details = "Viewing a profile...";
+					presenceData.details = "Viewing a profile";
 					if (showUsername) {
 						presenceData.state = document.querySelector(
 							'div[data-testid="profileHeaderDisplayName"]'
@@ -55,18 +57,18 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		case "feeds":
-			presenceData.details = "Browsing...";
+			presenceData.details = "Browsing";
 			presenceData.state = "Feeds";
 			break;
 		case "search":
-			presenceData.details = "Searching...";
+			presenceData.details = "Searching";
 			break;
 		case "notifications":
-			presenceData.details = "Browsing...";
+			presenceData.details = "Browsing";
 			presenceData.state = "Notifications";
 			break;
 		case "moderation":
-			presenceData.details = "Managing moderation settings...";
+			presenceData.details = "Managing moderation settings";
 			switch (path[2]) {
 				case "mute-lists":
 					presenceData.state = "Mute Lists";
@@ -80,7 +82,7 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		case "settings":
-			presenceData.details = "Managing settings...";
+			presenceData.details = "Managing settings";
 			switch (path[2]) {
 				case "home-feed":
 					presenceData.state = "Home Feed Preferences";
@@ -100,7 +102,7 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		default:
-			presenceData.details = "Browsing...";
+			presenceData.details = "Browsing";
 			presenceData.state = "Home";
 			break;
 	}
