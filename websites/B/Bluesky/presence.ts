@@ -30,13 +30,6 @@ presence.on("UpdateData", async () => {
 					break;
 				case "post":
 					presenceData.details = "Viewing a post...";
-					if (showUsername)
-						presenceData.state = `Posted by ${
-							document.querySelector(
-								".css-175oi2r.r-1loqt21.r-1otgn73.r-11isodc.r-19gegkz"
-							)?.textContent
-						}`;
-
 					if (showPost) {
 						presenceData.buttons = [
 							{

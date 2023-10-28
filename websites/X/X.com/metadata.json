@@ -5,7 +5,9 @@
 		"id": "241278257335500811"
 	},
 	"service": "X.com",
-	"altnames": ["Twitter"],
+	"altnames": [
+		"Twitter"
+	],
 	"description": {
 		"en": "From breaking news and entertainment to sports and politics, from big events to everyday interests. If it's happening anywhere, it's happening on X.",
 		"nl": "Van het laatste nieuws en entertainment tot sport en politiek, van grote evenementen tot dagelijkse interesses. Als het ergens gebeurt, gebeurt het op X.",
@@ -13,13 +15,20 @@
 		"zh_TW": "X是一個社群網路與微部落格服務。",
 		"vi_VN": "Từ các tin nóng, đến giải trí, đến các đề tài thể thao và chính trị, từ các sự kiện lớn tới các thú vui hằng ngày. Nếu nó đang xảy ra ở bất cứ đâu, nó đang xảy ra trên X."
 	},
-	"url": ["twitter.com", "x.com"],
+	"url": [
+		"twitter.com",
+		"x.com"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/M2cZMdq.png",
 	"thumbnail": "https://i.imgur.com/ogWoKqI.png",
 	"color": "#000000",
 	"category": "socials",
-	"tags": ["social", "media", "twitter"],
+	"tags": [
+		"social",
+		"media",
+		"twitter"
+	],
 	"settings": [
 		{
 			"id": "lang",
