@@ -19,9 +19,6 @@ presence.on("UpdateData", async () => {
 				case "feed":
 					presenceData.details = "Viewing a feed";
 					if (showFeed) {
-						presenceData.state = document.querySelector(
-							".css-175oi2r.r-1awozwy.r-18u37iz.r-1mmae3n.r-284m6k.r-1jj8364.r-lchren.r-1ye8kvj.r-13qz1uu .css-1jxf684.r-1loqt21"
-						)?.textContent;
 						presenceData.buttons = [
 							{
 								label: "View Feed",
