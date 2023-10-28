@@ -11,9 +11,9 @@
 	},
 	"url": "www.monbureaunumerique.fr",
 	"regExp": "\\b[a-zA-Z0-9.-]+\\.monbureaunumerique\\.fr\\b",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/HuhO3kS.png",
-	"thumbnail": "https://i.imgur.com/PTOmVUt.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MonBureauNum%C3%A9rique/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MonBureauNum%C3%A9rique/assets/thumbnail.png",
 	"color": "#426494",
 	"category": "other",
 	"tags": [
