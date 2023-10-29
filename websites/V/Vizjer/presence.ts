@@ -137,7 +137,7 @@ presence.on("UpdateData", async () => {
 		case pathname.startsWith("/serial-online/") ? pathname : null: {
 			// presenceData.largeImageKey = document.querySelector("div#single-poster>img").getAttribute("src");
 			if (document.querySelector("div.btn-group")) {
-				presenceData.details = document.querySelectorAll("h2")[1].textContent;
+				presenceData.details = document.querySelectorAll("h2")[1].textContent.split("/")[0];
 				const seasonepisode = document
 						.querySelector("h3")
 						.textContent.split(" ")[0],
@@ -167,7 +167,7 @@ presence.on("UpdateData", async () => {
 			} else {
 				const infos = document.querySelector("div.info>ul").children;
 				presenceData.details = `${
-					document.querySelectorAll("h2")[1].textContent
+					document.querySelectorAll("h2")[1].textContent.split("/")[0]
 				} (${infos[infos.length - 1].textContent})`;
 				presenceData.buttons = [{ label: "Zobacz serial", url: document.URL }];
 			}
