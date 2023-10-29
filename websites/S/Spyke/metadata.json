@@ -8,7 +8,10 @@
 	"description": {
 		"en": "Spyke - Community Discussion"
 	},
-	"url": "spyke.social",
+	"url": [
+		"spyke.social",
+		"www.spyke.social"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/v10pkZA.png",
 	"thumbnail": "https://i.imgur.com/55dCzB1.png",
