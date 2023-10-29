@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "1161544315105976342"
+    clientId: "1161544315105976342",
   }),
   browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -15,13 +15,13 @@ async function postGQLAPI(
         JSON.parse(localStorage.getItem("persist:Token_Data_Persist"))
           .jwtIdToken
       )}`,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       query,
       variables: vars,
-      operationName
-    })
+      operationName,
+    }),
   });
   return response.json();
 }
@@ -36,22 +36,21 @@ presence.on("UpdateData", () => {
       smallImageKey: "https://i.imgur.com/55dCzB1.png",
       details: "A Community Discussion Platform",
       state: "On Homepage",
-      startTimestamp: browsingTimestamp
+      startTimestamp: browsingTimestamp,
     };
-
     if (document.location.href.includes("/p/")) {
       postGQLAPI(
         "presencepst",
         "query presencepst($id: ID!) { comments(ids: [$id]) { ... on Post { title content { id data __typename } communities { name dp } } } }",
         { id: document.location.href.split("/p/")[1] }
-      ).then(res => {
+      ).then((res) => {
         if (res.data.comments[0].content[0].__typename === "Image") {
           presenceData.largeImageKey = res.data.comments[0].content[0].data;
           presenceData.smallImageKey = res.data.comments[0].communities[0].dp;
           presenceData.details = `Reading post in ${res.data.comments[0].communities[0].name}`;
           presenceData.state = res.data.comments[0].title;
           presenceData.buttons = [
-            { url: document.location.href, label: "View Post" }
+            { url: document.location.href, label: "View Post" },
           ];
           presence.setActivity(presenceData);
         } else {
@@ -60,7 +59,7 @@ presence.on("UpdateData", () => {
           presenceData.details = `Reading post in ${res.data.comments[0].communities[0].name}`;
           presenceData.state = res.data.comments[0].title;
           presenceData.buttons = [
-            { url: document.location.href, label: "View Post" }
+            { url: document.location.href, label: "View Post" },
           ];
           presence.setActivity(presenceData);
         }
@@ -70,13 +69,13 @@ presence.on("UpdateData", () => {
         "presencegrp",
         "query presencegrp($name:String!){ communityByName(name:$name) { name dp cover}}",
         { name: document.location.href.split("/g/")[1] }
-      ).then(res => {
+      ).then((res) => {
         presenceData.largeImageKey = res.data.communityByName.cover;
         presenceData.smallImageKey = res.data.communityByName.dp;
         presenceData.state = `${res.data.communityByName.name}`;
         presenceData.details = "Viewing a Clan";
         presenceData.buttons = [
-          { url: document.location.href, label: "View Clan" }
+          { url: document.location.href, label: "View Clan" },
         ];
         presence.setActivity(presenceData);
       });
@@ -92,7 +91,7 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing a user profile";
       presenceData.state = `@${document.location.href.split("/u/")[1]}`;
       presenceData.buttons = [
-        { url: document.location.href, label: "View User" }
+        { url: document.location.href, label: "View User" },
       ];
       presence.setActivity(presenceData);
     } else presence.setActivity(presenceData);
