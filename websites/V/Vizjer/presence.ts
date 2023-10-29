@@ -137,7 +137,9 @@ presence.on("UpdateData", async () => {
 		case pathname.startsWith("/serial-online/") ? pathname : null: {
 			// presenceData.largeImageKey = document.querySelector("div#single-poster>img").getAttribute("src");
 			if (document.querySelector("div.btn-group")) {
-				presenceData.details = document.querySelectorAll("h2")[1].textContent.split("/")[0];
+				presenceData.details = document
+					.querySelectorAll("h2")[1]
+					.textContent.split("/")[0];
 				const seasonepisode = document
 						.querySelector("h3")
 						.textContent.split(" ")[0],
