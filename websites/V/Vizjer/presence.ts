@@ -121,7 +121,6 @@ presence.on("UpdateData", async () => {
 					} (${info.children[1].textContent})`;
 				}
 			}
-			// presenceData.largeImageKey = document.querySelector("div#single-poster>img").getAttribute("src");
 			presenceData.buttons = [{ label: "Oglądaj", url: document.URL }];
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(video.current, video.duration);
@@ -135,7 +134,6 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		case pathname.startsWith("/serial-online/") ? pathname : null: {
-			// presenceData.largeImageKey = document.querySelector("div#single-poster>img").getAttribute("src");
 			if (document.querySelector("div.btn-group")) {
 				presenceData.details = document
 					.querySelectorAll("h2")[1]
@@ -180,7 +178,6 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Viewing;
 			break;
 	}
-	// console.log(pathname, `\nSearch: ${search}`);
 
 	if (!presenceData.details) presence.setActivity();
 	else presence.setActivity(presenceData);
