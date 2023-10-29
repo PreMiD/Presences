@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 const enum Assets {
 	Logo = "https://i.imgur.com/vosdvpf.jpg",
-	Avatar = "https://api.dicebear.com/7.x/avataaars/png",
+	Avatar = "https://i.imgur.com/b1B6qKC.png",
 }
 async function postGQLAPI(
 	operationName: string,
