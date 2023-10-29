@@ -2,6 +2,10 @@ const presence = new Presence({
 		clientId: "1161544315105976342",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+const enum Assets {
+	Logo = "https://i.imgur.com/vosdvpf.jpg",
+	Avatar = "https://api.dicebear.com/7.x/avataaars/png",
+}
 async function postGQLAPI(
 	operationName: string,
 	query: string,
@@ -29,7 +33,7 @@ presence.on("UpdateData", () => {
 	const nurl = document.location.href;
 	if (nurl !== url) {
 		const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/v10pkZA.png",
+			largeImageKey: Assets.Logo,
 			smallImageKey: "https://i.imgur.com/55dCzB1.png",
 			details: "A Community Discussion Platform",
 			state: "On Homepage",
@@ -77,13 +81,13 @@ presence.on("UpdateData", () => {
 				presence.setActivity(presenceData);
 			});
 		} else if (document.location.href.includes("/upload")) {
-			presenceData.largeImageKey = "https://i.imgur.com/v10pkZA.png";
+			presenceData.largeImageKey = Assets.Logo;
 			presenceData.smallImageKey = "https://i.imgur.com/55dCzB1.png";
 			presenceData.details = "Uploading a post";
 			presenceData.state = "";
 			presence.setActivity(presenceData);
 		} else if (document.location.href.includes("/u/")) {
-			presenceData.largeImageKey = "https://api.dicebear.com/7.x/avataaars/png"; //`https://i.imgur.com/v10pkZA.png`;
+			presenceData.largeImageKey = Assets.Avatar; //`https://i.imgur.com/v10pkZA.png`;
 			presenceData.smallImageKey = "https://i.imgur.com/v10pkZA.png";
 			presenceData.details = "Viewing a user profile";
 			presenceData.state = `@${document.location.href.split("/u/")[1]}`;
