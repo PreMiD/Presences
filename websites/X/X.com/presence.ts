@@ -24,7 +24,7 @@ function stripText(element: HTMLElement, id = "None", log = true): string {
 }
 
 presence.info(
-	"When using the Twitter presence for PreMiD, make sure you have the latest UI update. Twitter classic and any legacy versions before it will not work with this presence."
+	"When using the X presence for PreMiD, make sure you have the latest UI update. Twitter classic and any legacy versions before it will not work with this presence."
 );
 
 let oldUrl: string, elapsed: number;
@@ -32,17 +32,17 @@ let oldUrl: string, elapsed: number;
 async function getStrings() {
 	return presence.getStrings(
 		{
-			readTweet: "twitter.readTweet",
-			viewDms: "twitter.viewDms",
-			viewTweets: "twitter.viewTweets",
-			viewTweetsWithReplies: "twitter.viewTweetsWithReplies",
-			viewMedia: "twitter.viewMedia",
-			viewLiked: "twitter.viewLiked",
-			viewList: "twitter.viewList",
-			bookmarks: "twitter.bookmarks",
-			notifs: "twitter.notifs",
-			explore: "twitter.explore",
-			settings: "twitter.settings",
+			readPost: "x.readPost",
+			viewDms: "x.viewDms",
+			viewPosts: "x.viewPosts",
+			viewPostsWithReplies: "x.viewPostsWithReplies",
+			viewMedia: "x.viewMedia",
+			viewLiked: "x.viewLiked",
+			viewList: "x.viewList",
+			bookmarks: "x.bookmarks",
+			notifs: "x.notifs",
+			explore: "x.explore",
+			settings: "x.settings",
 			terms: "general.terms",
 			privacy: "general.privacy",
 			browsing: "general.browsing",
@@ -69,9 +69,7 @@ presence.on("UpdateData", async () => {
 		strings = await getStrings();
 	}
 
-	let title: string,
-		info: string,
-		image = "twitter";
+	let title: string, info: string;
 
 	const path = window.location.pathname;
 
@@ -113,13 +111,13 @@ presence.on("UpdateData", async () => {
 	)?.parentElement.children[1]?.children[1] as HTMLElement;
 
 	if (objHeader) {
-		title = (await strings).viewTweets;
+		title = (await strings).viewPosts;
 		info = `${
 			stripText(objHeader, "Object Header").split("@")[0]
 		} // ${capitalize(path.split("/")[1])}`;
 
 		if (path.match("/with_replies"))
-			title = (await strings).viewTweetsWithReplies;
+			title = (await strings).viewPostsWithReplies;
 
 		if (path.match("/media")) title = (await strings).viewMedia;
 
@@ -127,12 +125,12 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (!objHeader && path.match("/status/")) {
-		title = (await strings).readTweet;
+		title = (await strings).readPost;
 		[info] = stripText(
 			document.querySelectorAll(
 				`a[href='/${path.split("/")[1]}']`
 			)[1] as HTMLElement,
-			"Tweet"
+			"Post"
 		).split("@");
 	}
 
@@ -156,28 +154,10 @@ presence.on("UpdateData", async () => {
 		info = capitalize(path.split("/")[1]);
 	}
 
-	if (window.location.href.match("tweetdeck.twitter.com/")) {
-		title = `Tweetdeck (${
-			(
-				document.querySelector("#container > div") ||
-				document.createElement("HTMLDivElement")
-			).childElementCount
-		} Columns)`;
-		image = "tweetdeck";
-
-		const header = document.querySelector(".mdl-header-title"),
-			profile = document.querySelector(".js-action-url > .fullname");
-
-		if (header)
-			info = `${(await strings).viewing} ${capitalize(header.textContent)}`;
-
-		if (profile) info = `${(await strings).profile} ${profile.textContent}`;
-	}
-
 	const presenceData: PresenceData = {
 		details: title,
 		state: info,
-		largeImageKey: image,
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/X/X.com/assets/0.png",
 	};
 
 	if (time) presenceData.startTimestamp = elapsed;
