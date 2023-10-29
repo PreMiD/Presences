@@ -2,7 +2,6 @@ const presence = new Presence({
     clientId: "1161544315105976342",
   }),
   browsingTimestamp = Math.floor(Date.now() / 1000);
-
 async function postGQLAPI(
   operationName: string,
   query: string,
@@ -25,9 +24,7 @@ async function postGQLAPI(
   });
   return response.json();
 }
-
 let url = "https://spyke.social/";
-
 presence.on("UpdateData", () => {
   const nurl = document.location.href;
   if (nurl !== url) {
