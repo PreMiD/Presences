@@ -72,7 +72,7 @@ presence.on("UpdateData", () => {
       ).then((res) => {
         presenceData.largeImageKey = res.data.communityByName.cover;
         presenceData.smallImageKey = res.data.communityByName.dp;
-        presenceData.state = `${res.data.communityByName.name}`;
+        presenceData.state = res.data.communityByName.name;
         presenceData.details = "Viewing a Clan";
         presenceData.buttons = [
           { url: document.location.href, label: "View Clan" },
