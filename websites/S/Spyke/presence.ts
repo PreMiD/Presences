@@ -30,7 +30,7 @@ async function postGQLAPI(
 	return response.json();
 }
 let url = "https://spyke.social/";
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
 	const nurl = document.location.href;
 	if (nurl !== url) {
 		const presenceData: PresenceData = {
@@ -41,46 +41,44 @@ presence.on("UpdateData", () => {
 			startTimestamp: browsingTimestamp,
 		};
 		if (document.location.href.includes("/p/")) {
-			postGQLAPI(
+			const res = await postGQLAPI(
 				"presencepst",
 				"query presencepst($id: ID!) { comments(ids: [$id]) { ... on Post { title content { id data __typename } communities { name dp } } } }",
 				{ id: document.location.href.split("/p/")[1] }
-			).then(res => {
-				if (res.data.comments[0].content[0].__typename === "Image") {
-					presenceData.largeImageKey = res.data.comments[0].content[0].data;
-					presenceData.smallImageKey = res.data.comments[0].communities[0].dp;
-					presenceData.details = `Reading post in ${res.data.comments[0].communities[0].name}`;
-					presenceData.state = res.data.comments[0].title;
-					presenceData.buttons = [
-						{ url: document.location.href, label: "View Post" },
-					];
-					presence.setActivity(presenceData);
-				} else {
-					presenceData.largeImageKey = res.data.comments[0].communities[0].dp;
-					presenceData.smallImageKey = Assets.SmallImg;
-					presenceData.details = `Reading post in ${res.data.comments[0].communities[0].name}`;
-					presenceData.state = res.data.comments[0].title;
-					presenceData.buttons = [
-						{ url: document.location.href, label: "View Post" },
-					];
-					presence.setActivity(presenceData);
-				}
-			});
+			);
+			if (res.data.comments[0].content[0].__typename === "Image") {
+				presenceData.largeImageKey = res.data.comments[0].content[0].data;
+				presenceData.smallImageKey = res.data.comments[0].communities[0].dp;
+				presenceData.details = `Reading post in ${res.data.comments[0].communities[0].name}`;
+				presenceData.state = res.data.comments[0].title;
+				presenceData.buttons = [
+					{ url: document.location.href, label: "View Post" },
+				];
+				presence.setActivity(presenceData);
+			} else {
+				presenceData.largeImageKey = res.data.comments[0].communities[0].dp;
+				presenceData.smallImageKey = Assets.SmallImg;
+				presenceData.details = `Reading post in ${res.data.comments[0].communities[0].name}`;
+				presenceData.state = res.data.comments[0].title;
+				presenceData.buttons = [
+					{ url: document.location.href, label: "View Post" },
+				];
+				presence.setActivity(presenceData);
+			}
 		} else if (document.location.href.includes("/g/")) {
-			postGQLAPI(
+			const res = await postGQLAPI(
 				"presencegrp",
 				"query presencegrp($name:String!){ communityByName(name:$name) { name dp cover}}",
 				{ name: document.location.href.split("/g/")[1] }
-			).then(res => {
-				presenceData.largeImageKey = res.data.communityByName.cover;
-				presenceData.smallImageKey = res.data.communityByName.dp;
-				presenceData.state = res.data.communityByName.name;
-				presenceData.details = "Viewing a Clan";
-				presenceData.buttons = [
-					{ url: document.location.href, label: "View Clan" },
-				];
-				presence.setActivity(presenceData);
-			});
+			);
+			presenceData.largeImageKey = res.data.communityByName.cover;
+			presenceData.smallImageKey = res.data.communityByName.dp;
+			presenceData.state = res.data.communityByName.name;
+			presenceData.details = "Viewing a Clan";
+			presenceData.buttons = [
+				{ url: document.location.href, label: "View Clan" },
+			];
+			presence.setActivity(presenceData);
 		} else if (document.location.href.includes("/upload")) {
 			presenceData.largeImageKey = Assets.Logo;
 			presenceData.smallImageKey = Assets.SmallImg;
