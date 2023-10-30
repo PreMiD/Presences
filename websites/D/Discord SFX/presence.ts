@@ -78,12 +78,11 @@ presence.on("UpdateData", async () => {
 			document.title.split(" Profile")[0].split(" | ")[1]
 		} profile`;
 
-			const imgEl = document.querySelector<HTMLImageElement>('[data-premid-id="avatar"]')
-					?.src,
-			searchParams = (imgEl ? new URL(
-				imgEl 
-			) : null)?.searchParams;
-			presenceData.largeImageKey = searchParams?.get("url") ?? Assets.Logo;
+		const imgEl = document.querySelector<HTMLImageElement>(
+			'[data-premid-id="avatar"]'
+		)?.src;
+		presenceData.largeImageKey =
+			(imgEl ? new URL(imgEl) : null)?.searchParams?.get("url") ?? Assets.Logo;
 	}
 
 	const isPlayingSound = document.querySelector<HTMLButtonElement>(
