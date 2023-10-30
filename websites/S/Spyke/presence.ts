@@ -83,6 +83,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = Assets.Logo;
 			presenceData.smallImageKey = Assets.SmallImg;
 			presenceData.details = "Uploading a post";
+			delete presenceData.state;
 			presence.setActivity(presenceData);
 		} else if (document.location.href.includes("/u/")) {
 			presenceData.largeImageKey = Assets.Avatar;
