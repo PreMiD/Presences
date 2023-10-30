@@ -80,9 +80,9 @@ presence.on("UpdateData", async () => {
 
 			const imgEl = document.querySelector<HTMLImageElement>('[data-premid-id="avatar"]')
 					?.src,
-			{ searchParams } = imgEl ? new URL(
+			searchParams = (imgEl ? new URL(
 				imgEl 
-			) : "";
+			) : null)?.searchParams;
 			presenceData.largeImageKey = searchParams?.get("url") ?? Assets.Logo;
 	}
 
