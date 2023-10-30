@@ -83,10 +83,9 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = Assets.Logo;
 			presenceData.smallImageKey = Assets.SmallImg;
 			presenceData.details = "Uploading a post";
-			presenceData.state = "";
 			presence.setActivity(presenceData);
 		} else if (document.location.href.includes("/u/")) {
-			presenceData.largeImageKey = Assets.Avatar; //`https://i.imgur.com/v10pkZA.png`;
+			presenceData.largeImageKey = Assets.Avatar;
 			presenceData.smallImageKey = Assets.SmallImg;
 			presenceData.details = "Viewing a user profile";
 			presenceData.state = `@${document.location.href.split("/u/")[1]}`;
