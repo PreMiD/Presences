@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, search } = document.location,
+		{ pathname, search, href } = document.location,
 		series = pathname.startsWith("/series/index/") ? pathname : null,
 		movies = pathname.startsWith("/filmy-online/") ? pathname : null;
 	switch (pathname) {
@@ -121,7 +121,7 @@ presence.on("UpdateData", async () => {
 					} (${info.children[1].textContent})`;
 				}
 			}
-			presenceData.buttons = [{ label: "Oglądaj", url: document.URL }];
+			presenceData.buttons = [{ label: "Oglądaj", url: href }];
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(video.current, video.duration);
 			presenceData.smallImageKey = Assets.Play;
@@ -146,7 +146,7 @@ presence.on("UpdateData", async () => {
 					seasonepisode.match(regex)[1]
 				} | Odcinek: ${seasonepisode.match(regex)[2]}`;
 				presenceData.buttons = [
-					{ label: "Oglądaj", url: document.URL },
+					{ label: "Oglądaj", url: href },
 					{
 						label: "Cały serial",
 						url: document
@@ -169,7 +169,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `${
 					document.querySelectorAll("h2")[1].textContent.split("/")[0]
 				} (${infos[infos.length - 1].textContent})`;
-				presenceData.buttons = [{ label: "Zobacz serial", url: document.URL }];
+				presenceData.buttons = [{ label: "Zobacz serial", url: href }];
 			}
 			break;
 		}
