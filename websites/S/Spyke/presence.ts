@@ -5,6 +5,7 @@ const presence = new Presence({
 const enum Assets {
 	Logo = "https://i.imgur.com/vosdvpf.jpg",
 	Avatar = "https://i.imgur.com/b1B6qKC.png",
+	SmallImg = "https://i.imgur.com/BIovjJj.png", 
 }
 async function postGQLAPI(
 	operationName: string,
@@ -34,7 +35,7 @@ presence.on("UpdateData", () => {
 	if (nurl !== url) {
 		const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
-			smallImageKey: "https://i.imgur.com/55dCzB1.png",
+			smallImageKey: Assets.SmallImg,
 			details: "A Community Discussion Platform",
 			state: "On Homepage",
 			startTimestamp: browsingTimestamp,
@@ -56,7 +57,7 @@ presence.on("UpdateData", () => {
 					presence.setActivity(presenceData);
 				} else {
 					presenceData.largeImageKey = res.data.comments[0].communities[0].dp;
-					presenceData.smallImageKey = "https://i.imgur.com/v10pkZA.png";
+					presenceData.smallImageKey = Assets.SmallImg;
 					presenceData.details = `Reading post in ${res.data.comments[0].communities[0].name}`;
 					presenceData.state = res.data.comments[0].title;
 					presenceData.buttons = [
@@ -82,13 +83,13 @@ presence.on("UpdateData", () => {
 			});
 		} else if (document.location.href.includes("/upload")) {
 			presenceData.largeImageKey = Assets.Logo;
-			presenceData.smallImageKey = "https://i.imgur.com/55dCzB1.png";
+			presenceData.smallImageKey = Assets.SmallImg;
 			presenceData.details = "Uploading a post";
 			presenceData.state = "";
 			presence.setActivity(presenceData);
 		} else if (document.location.href.includes("/u/")) {
 			presenceData.largeImageKey = Assets.Avatar; //`https://i.imgur.com/v10pkZA.png`;
-			presenceData.smallImageKey = "https://i.imgur.com/v10pkZA.png";
+			presenceData.smallImageKey = Assets.SmallImg;
 			presenceData.details = "Viewing a user profile";
 			presenceData.state = `@${document.location.href.split("/u/")[1]}`;
 			presenceData.buttons = [
