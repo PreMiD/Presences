@@ -3,8 +3,8 @@ let elapsed = Math.floor(Date.now() / 1000),
 	prevUrl = document.location.href;
 
 const presence = new Presence({
-	clientId: "951488835718635600",
-}),
+		clientId: "951488835718635600",
+	}),
 	getStrings = async () => {
 		return presence.getStrings(
 			{
@@ -38,10 +38,10 @@ let strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/T/TwitCasting/assets/logo.png",
-		startTimestamp: elapsed,
-	},
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/TwitCasting/assets/logo.png",
+			startTimestamp: elapsed,
+		},
 		[
 			showTimestamps,
 			newLang,
