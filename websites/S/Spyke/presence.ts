@@ -3,9 +3,9 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 const enum Assets {
-	Logo = "https://i.imgur.com/vosdvpf.jpg", //The main logo of the site
-	Avatar = "https://i.imgur.com/b1B6qKC.png", //The avatar of the user will be using DOM in future
-	SmallImg = "https://i.imgur.com/BIovjJj.png", //The thumbnail basically
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Spyke/assets/logo.jpg", //The main logo of the site
+	Avatar = "https://cdn.rcd.gg/PreMiD/websites/S/Spyke/assets/0.png", //The avatar of the user will be using DOM in future
+	SmallImg = "https://cdn.rcd.gg/PreMiD/websites/S/Spyke/assets/1.png", //The thumbnail basically
 }
 async function postGQLAPI(
 	operationName: string,
