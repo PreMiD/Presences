@@ -2,11 +2,14 @@ const presence = new Presence({
 	clientId: "1119009771538882740",
 });
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20SFX/assets/logo.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Browsing",
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/D/Discord%20SFX/assets/logo.png",
+			largeImageKey: Assets.Logo,
 		},
 		{ pathname } = document.location;
 
@@ -68,6 +71,18 @@ presence.on("UpdateData", async () => {
 				url: `https://discordsfx.com/sounds/${pathname.split("/")[2]}`,
 			},
 		];
+	}
+
+	if (pathname.startsWith("/users/")) {
+		presenceData.details = `Viewing ${
+			document.title.split(" Profile")[0].split(" | ")[1]
+		} profile`;
+
+		const imgEl = document.querySelector<HTMLImageElement>(
+			'[data-premid-id="avatar"]'
+		)?.src;
+		presenceData.largeImageKey =
+			(imgEl ? new URL(imgEl) : null)?.searchParams?.get("url") ?? Assets.Logo;
 	}
 
 	const isPlayingSound = document.querySelector<HTMLButtonElement>(
