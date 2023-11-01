@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 		{ pathname, search, href } = document.location,
 		title = document
 			.querySelector<HTMLSpanElement>(
-				":is(#movie_title_content, .tw-player-page__title-editor-value)"
+				":is(#movie_title_content, .tw-player-page-title-title)"
 			)
 			?.innerText.split("\n")[0],
 		channelName =
