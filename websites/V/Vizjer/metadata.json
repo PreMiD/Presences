@@ -11,7 +11,7 @@
 	},
 	"url": "vizjer.pl",
 	"version": "1.0.0",
-	"logo": "https://i.imgur.com/zKFMrkt.png",
+	"logo": "https://i.imgur.com/T8Nd7lj.png",
 	"thumbnail": "https://i.imgur.com/D1i1HI1.png",
 	"color": "#BABABA",
 	"category": "videos",
@@ -23,5 +23,5 @@
 		"tv"
 	],
 	"iframe": true,
-	"iFrameRegExp": "prefulfilloverdoor[.]com|vidoza[.]net|vembed[.]net|upstream[.]to|streamvid[.]net|ds2play[.]com|doodstream[.]com|voe[.]sx|streamhide[.]to"
+	"iFrameRegExp": "prefulfilloverdoor[.]com|vidoza[.]net|vembed[.]net|upstream[.]to|streamvid[.]net|ds2play[.]com|doodstream[.]com|voe[.]sx|streamhide[.]to|vid-guard[.]com|mixdrop[.]co"
 }

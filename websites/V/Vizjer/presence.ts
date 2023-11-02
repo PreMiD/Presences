@@ -10,7 +10,7 @@ let video = {
 };
 
 const enum Assets {
-	Logo = "https://i.imgur.com/zKFMrkt.png",
+	Logo = "https://i.imgur.com/T8Nd7lj.png",
 }
 
 presence.on(
