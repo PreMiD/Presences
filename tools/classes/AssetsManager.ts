@@ -87,7 +87,7 @@ export default class AssetsManager {
 
 				//* A regex to match all image urls in the file
 				const regex =
-					/(?<=["'`])(https?:\/\/.*?\.(?:png|jpg|jpeg|gif|webp))(?=["'`])/g;
+					/(?<=["'`])(https?:\/\/.*?\.(?:png|jpg|jpeg|gif|webp)(?:[?][^'"`]+)?)(?=["'`])/g;
 				let match: RegExpExecArray | null;
 
 				while ((match = regex.exec(file)) !== null) {
