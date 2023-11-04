@@ -14,7 +14,6 @@ presence.on("UpdateData", () => {
 		{ pathname } = document.location;
 
 	if (player) {
-		const spaceId = player.querySelector("#spaceId").textContent;
 		presenceData.largeImageKey = player.querySelector("#artwork").textContent;
 		presenceData.smallImageKey =
 			player.querySelector<HTMLButtonElement>('[id*="-button"]').id ===
@@ -28,9 +27,15 @@ presence.on("UpdateData", () => {
 		presenceData.endTimestamp = new Date(
 			player.querySelector("#endingAt").textContent
 		).getTime();
-		presenceData.smallImageText = spaceId.toUpperCase();
+		presenceData.smallImageText =
+			player.querySelector("div.track-space").textContent;
 		presenceData.buttons = [
-			{ label: "Listen", url: `https://atomic.radio/${spaceId}` },
+			{
+				label: "Listen",
+				url: `https://atomic.radio/${
+					player.querySelector("#spaceId").textContent
+				}`,
+			},
 		];
 	} else {
 		presenceData.details = "Browsing...";
