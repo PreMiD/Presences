@@ -22,7 +22,7 @@ presence.on("UpdateData", () => {
 				? Assets.Pause
 				: Assets.Play;
 		presenceData.details =
-			player.querySelector<HTMLAnchorElement>("a.track-title").textContent;
+			player.querySelector<HTMLAnchorElement>("div.track-title").textContent;
 		presenceData.state =
 			player.querySelector<HTMLDivElement>("div.track-artist").textContent;
 		presenceData.endTimestamp = new Date(
