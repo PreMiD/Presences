@@ -10,7 +10,7 @@ let video = {
 };
 
 const enum Assets {
-	Logo = "https://i.imgur.com/T8Nd7lj.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/V/Vizjer/assets/logo.png",
 }
 
 presence.on(
