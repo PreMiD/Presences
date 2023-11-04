@@ -10,8 +10,7 @@ presence.on("UpdateData", () => {
 			smallImageKey: Assets.Search,
 			startTimestamp: browsingTimestamp,
 		},
-		player = document.querySelector<HTMLDivElement>("div.player"),
-		{ pathname } = document.location;
+		player = document.querySelector<HTMLDivElement>("div.player");
 
 	if (player) {
 		presenceData.largeImageKey = player.querySelector("#artwork").textContent;
@@ -37,27 +36,7 @@ presence.on("UpdateData", () => {
 				}`,
 			},
 		];
-	} else {
-		presenceData.details = "Browsing...";
-		if (pathname.includes("/statistics"))
-			presenceData.details = "Viewing statistics";
-		else if (pathname.includes("/streams"))
-			presenceData.details = "Viewing stream urls";
-		else if (pathname.includes("/about"))
-			presenceData.details = "Viewing about us";
-		else if (pathname.includes("/apply"))
-			presenceData.details = "Viewing apply";
-		else if (pathname.includes("/contributors"))
-			presenceData.details = "Viewing contributors";
-		else if (pathname.includes("/partners"))
-			presenceData.details = "Viewing partners";
-		else if (pathname.includes("/legal/imprint"))
-			presenceData.details = "Viewing imprint";
-		else if (pathname.includes("/legal/privacy"))
-			presenceData.details = "Viewing privacy";
-		else if (pathname.includes("/account"))
-			presenceData.details = "Viewing account";
-	}
+	} else presenceData.details = "Browsing...";
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
