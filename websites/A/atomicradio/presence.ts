@@ -19,8 +19,8 @@ presence.on("UpdateData", () => {
 		presenceData.smallImageKey =
 			player.querySelector<HTMLButtonElement>('[id*="-button"]').id ===
 			"play-button"
-				? Assets.Pause
-				: Assets.Play;
+				? Assets.Play
+				: Assets.Pause;
 		presenceData.details =
 			player.querySelector<HTMLAnchorElement>("div.track-title").textContent;
 		presenceData.state =
