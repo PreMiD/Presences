@@ -63,9 +63,7 @@ presence.on("UpdateData", async () => {
 				}
 				case pathname === "/": {
 					presenceData.details = "Bekijkt de homepagina";
-					presenceData.state = document.querySelector(
-						'[class*="hz-TabNext--active"]'
-					)?.textContent;
+					presenceData.state = active?.textContent;
 					break;
 				}
 				case pathname.includes("auto"): {
@@ -120,7 +118,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = privacy
 						? "Advertentie plaatsen"
 						: "Advertentie plaatsen voor";
-					presenceData.state = input?.value ? input.value : "Onbekend";
+					presenceData.state = input?.value ?? "Onbekend";
 					presenceData.smallImageKey = Assets.Writing;
 					break;
 				}
@@ -243,9 +241,14 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
+	if (privacy && presenceData.smallImageText)
+		delete presenceData.smallImageText;
+
 	if (privacy && presenceData.state) delete presenceData.state;
+
 	if ((!buttons || privacy) && presenceData.buttons)
 		delete presenceData.buttons;
+
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
