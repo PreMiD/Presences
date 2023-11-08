@@ -2,11 +2,7 @@ const presence = new Presence({
 	clientId: "607651992567021580",
 });
 
-let oldLang: string = null,
-	albumCoverURL: string,
-	albumCoverId: string,
-	podcastCoverURL: string,
-	podcastCoverId: string;
+let oldLang: string = null;
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Deezer/assets/logo.png",
