@@ -8,22 +8,50 @@ let oldLang: string = null,
 	podcastCoverURL: string,
 	podcastCoverId: string;
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Deezer/assets/logo.png",
+}
+
+function fullURL(originalURL: string, hostname: string) {
+	if (!originalURL) return "";
+	else if (originalURL?.includes("https")) return originalURL;
+	else if (originalURL.startsWith("/"))
+		return `https://${hostname}${originalURL}`;
+	else return "";
+}
+
+async function getStrings() {
+	return presence.getStrings(
+		{
+			play: "general.playing",
+			pause: "general.paused",
+			viewAlbum: "general.buttonViewAlbum",
+			viewArtist: "general.buttonViewArtist",
+			viewPodcast: "general.buttonViewPodcast",
+		},
+		await presence.getSetting<string>("lang").catch(() => "en")
+	);
+}
+
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/D/Deezer/assets/logo.png",
+			largeImageKey: Assets.Logo,
 		},
 		strings = await getStrings(),
 		paused = false;
 
-	const [buttons, newLang, cover] = await Promise.all([
-		presence.getSetting<boolean>("buttons"),
-		presence.getSetting<string>("lang").catch(() => "en"),
-		presence.getSetting<boolean>("cover"),
-	]);
+	const [buttons, newLang, cover, browseInfo] = await Promise.all([
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<string>("lang").catch(() => "en"),
+			presence.getSetting<boolean>("cover"),
+			presence.getSetting<boolean>("browseInfo"),
+		]),
+		{ pathname, hostname } = document.location,
+		remainingTest = document.querySelector(
+			'[data-testid="remaining_time"]'
+		)?.textContent;
 
-	oldLang ??= newLang;
-	if (oldLang !== newLang) {
+	if (oldLang !== newLang || !oldLang) {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
@@ -50,6 +78,9 @@ presence.on("UpdateData", async () => {
 		podcasts: {
 			details: "Browsing user's podcasts",
 		},
+		show: {
+			details: "Viewing a podcast",
+		},
 		playlist: {
 			details: "Looking at a playlist",
 		},
@@ -60,137 +91,77 @@ presence.on("UpdateData", async () => {
 			details: "Looking at an artist",
 		},
 	};
-
 	for (const [path, data] of Object.entries(pages)) {
-		if (location.pathname.includes(path))
+		if (pathname.includes(path)) {
 			presenceData = { ...presenceData, ...data };
+			if (browseInfo || !remainingTest || remainingTest === "00:00")
+				return presence.setActivity(presenceData);
+		}
 	}
 
-	if (document.querySelector(".page-player")) {
-		const [albumLink, artistLink] = document.querySelector<HTMLAnchorElement>(
-				"div.marquee-content"
-			).children as unknown as [HTMLAnchorElement, HTMLAnchorElement],
-			currentTime = document.querySelector(
-				"div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-current"
-			).textContent,
-			duration = document.querySelector(
-				"div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-max"
-			).textContent,
-			timestamps = presence.getTimestamps(
-				presence.timestampFromFormat(currentTime),
-				presence.timestampFromFormat(duration)
-			),
-			albumId = albumLink.href.split("/")[5];
+	const albumLink = document
+			.querySelector('[data-testid="item_title"] > a')
+			?.getAttribute("href"),
+		artistLink = document
+			.querySelector('[data-testid="item_subtitle"] > a')
+			?.getAttribute("href"),
+		currentTime = document.querySelector(
+			'[data-testid="elapsed_time"]'
+		).textContent,
+		duration = document.querySelector(
+			'[data-testid="remaining_time"]'
+		).textContent,
+		timestamps = presence.getTimestamps(
+			presence.timestampFromFormat(currentTime),
+			presence.timestampFromFormat(duration)
+		);
 
-		if (
-			document
-				.querySelector(
-					"#page_player > div > div.player-controls > ul > li:nth-child(3) > button > svg > path"
-				)
-				.outerHTML.match('<path d="m3 1 12 7-12 7V1z"></path>')
-		)
-			paused = true;
+	if (document.querySelector('[data-testid="play_button_play"]')) paused = true;
 
-		if (document.querySelector(".track-link:nth-child(2)")) {
-			presenceData.details = document.querySelector(
-				".track-link:nth-child(1)"
-			).textContent;
-			presenceData.state = document.querySelector(
-				".track-link:nth-child(2)"
-			).textContent;
+	presenceData.details = document.querySelector(
+		'[data-testid="item_title"]'
+	).textContent;
+	presenceData.state = document.querySelector(
+		'[data-testid="item_subtitle"]'
+	).textContent;
 
-			albumCoverId ??= albumId;
-			albumCoverURL ??= (
-				await fetch(`https://api.deezer.com/album/${albumCoverId}/image`)
-			).url;
+	presenceData.largeImageKey = cover
+		? document
+				.querySelector('[data-testid="item_cover"]')
+				?.querySelector("img")
+				?.getAttribute("src")
+				?.replace(/(264x264)|(48x48)/g, "512x512") ?? Assets.Logo
+		: Assets.Logo;
+	presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
+	presenceData.smallImageText = paused ? strings.pause : strings.play;
+	[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
 
-			if (albumCoverId !== albumId) {
-				albumCoverId = albumId;
-				albumCoverURL = (
-					await fetch(`https://api.deezer.com/album/${albumCoverId}/image`)
-				).url;
-			}
+	if (paused) {
+		delete presenceData.startTimestamp;
+		delete presenceData.endTimestamp;
+	}
 
-			presenceData.largeImageKey = cover ? albumCoverURL : "deezer";
-			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
-			presenceData.smallImageText = paused ? strings.pause : strings.play;
-			[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
-
-			if (paused) {
-				delete presenceData.startTimestamp;
-				delete presenceData.endTimestamp;
-			}
-
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: strings.viewArtist,
-						url: (artistLink as HTMLAnchorElement).href,
-					},
-					{
-						label: strings.viewAlbum,
-						url: (albumLink as HTMLAnchorElement).href,
-					},
-				];
-			}
+	if (buttons) {
+		if (albumLink?.includes("/")) {
+			presenceData.buttons = [
+				{
+					label: strings.viewArtist,
+					url: fullURL(artistLink, hostname),
+				},
+				{
+					label: strings.viewAlbum,
+					url: fullURL(albumLink, hostname),
+				},
+			];
 		} else {
-			const [podcastLink] = document.querySelector<HTMLAnchorElement>(
-					"div.marquee-content"
-				).children as unknown as [HTMLAnchorElement, HTMLAnchorElement],
-				podcastId = podcastLink.href.split("/")[5];
-			[presenceData.state, presenceData.details] = document
-				.querySelector("div.marquee-content")
-				.textContent.split(" · ");
-
-			podcastCoverId ??= podcastId;
-			podcastCoverURL ??= (
-				await (
-					await fetch(`https://api.deezer.com/podcast/${podcastCoverId}`)
-				).json()
-			).picture;
-
-			if (podcastCoverId !== podcastId) {
-				podcastCoverId = podcastId;
-				podcastCoverURL = (
-					await (
-						await fetch(`https://api.deezer.com/podcast/${podcastCoverId}`)
-					).json()
-				).picture;
-			}
-
-			presenceData.largeImageKey = cover ? podcastCoverURL : "deezer";
-			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
-			presenceData.smallImageText = paused ? strings.pause : strings.play;
-			[presenceData.startTimestamp, presenceData.endTimestamp] = timestamps;
-
-			if (paused) {
-				delete presenceData.startTimestamp;
-				delete presenceData.endTimestamp;
-			}
-
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: (await strings).viewPodcast,
-						url: (podcastLink as HTMLAnchorElement).href,
-					},
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: strings.viewPodcast,
+					url: fullURL(artistLink, hostname),
+				},
+			];
 		}
 	}
 
 	presence.setActivity(presenceData);
 });
-
-async function getStrings() {
-	return presence.getStrings(
-		{
-			play: "general.playing",
-			pause: "general.paused",
-			viewAlbum: "general.buttonViewAlbum",
-			viewArtist: "general.buttonViewArtist",
-			viewPodcast: "general.buttonViewPodcast",
-		},
-		await presence.getSetting<string>("lang").catch(() => "en")
-	);
-}
