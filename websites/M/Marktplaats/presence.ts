@@ -11,7 +11,7 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/Marktplaats/assets/logo.png",
-	Loading = "https://i.imgur.com/uh6vSQm.gif",
+	Loading = "https://cdn.rcd.gg/PreMiD/websites/M/Marktplaats/assets/0.gif",
 }
 
 presence.on("UpdateData", async () => {
