@@ -101,15 +101,13 @@ presence.on("UpdateData", async () => {
 		artistLink = document
 			.querySelector('[data-testid="item_subtitle"] > a')
 			?.getAttribute("href"),
-		currentTime = document.querySelector(
-			'[data-testid="elapsed_time"]'
-		).textContent,
-		duration = document.querySelector(
-			'[data-testid="remaining_time"]'
-		).textContent,
 		timestamps = presence.getTimestamps(
-			presence.timestampFromFormat(currentTime),
-			presence.timestampFromFormat(duration)
+			presence.timestampFromFormat(
+				document.querySelector('[data-testid="elapsed_time"]').textContent
+			),
+			presence.timestampFromFormat(
+				document.querySelector('[data-testid="remaining_time"]').textContent
+			)
 		);
 
 	if (document.querySelector('[data-testid="play_button_play"]')) paused = true;
