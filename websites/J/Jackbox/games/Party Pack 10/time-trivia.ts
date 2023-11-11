@@ -12,13 +12,25 @@ export function getPresenceData({
 			return { state: "Viewing the results" };
 		}
 		case "guessing": {
-			return { state: "Guessing the answer" };
+			return {
+				state: `Answering a prompt: "${
+					playerState.prompt
+				}"`
+			};
 		}
 		case "sussing": {
-			return { state: "Sussing out the answer" };
+			return {
+				state: `Sussing out the impostor: ${
+					playerState.prompt
+				}`
+			};
 		}
 		case "choosing": {
-			return { state: "Choosing an answer" };
+			return {
+				state: `Choosing an answer: ${
+					playerState.prompt
+				}`
+			};
 		}
 		default: {
 			return { state: "Waiting" };
