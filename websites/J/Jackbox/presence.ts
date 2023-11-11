@@ -4,11 +4,13 @@ const presence = new Presence({
 	clientId: "638118757453004820",
 });
 
+// The game state (usually contains the current game phase / 'kind')
 let gamePlayerState: GamePlayerState = {
 		playerName: null,
 		state: null,
 		username: null,
 	},
+	// The player's details, such as name. May be set only at the start.
 	gamePlayerInfoState: GameInfoState = {
 		name: null,
 	},
@@ -32,37 +34,50 @@ if (document.location.hostname === "jackbox.tv") {
 				i--
 			) {
 				const latestLog = playerStateLogs[i];
-				if (/recv <- .*?"entities": {\n/s.test(latestLog)) {
-					if (!updatedMainState) {
-						gamePlayerState = JSON.parse(latestLog.slice(8)).result.entities[
-							latestLog.match(
-								/"key": "((?:bc:customer|player):(?:[a-z0-9-]+))",/s
-							)[1]
-						][1].val;
+				let parsedLog;
+				try {
+					parsedLog = JSON.parse(latestLog.slice(8));
+				} catch {
+					presence.error(`Failed to parse log: ${latestLog}`);
+					continue;
+				}
+				switch (true) {
+					case /recv <- .*?"entities": {\n/s.test(latestLog): {
+						if (!updatedMainState) {
+							gamePlayerState =
+								parsedLog.result.entities[
+									latestLog.match(
+										/"key": "((?:bc:customer|player):(?:[a-z0-9-]+))",/s
+									)?.[1]
+								]?.[1].val ?? parsedLog.result.val;
+							updatedMainState = true;
+						}
+						if (!updatedInfoState) {
+							gamePlayerInfoState =
+								parsedLog.result.entities[
+									latestLog.match(/"key": "(info:\d+)",/s)?.[1]
+								]?.[1].val ??
+								parsedLog.result ??
+								{};
+							updatedInfoState = true;
+						}
+						break;
 					}
-					if (!updatedInfoState) {
-						gamePlayerInfoState =
-							JSON.parse(latestLog.slice(8)).result.entities[
-								latestLog.match(/"key": "(info:\d+)",/s)?.[1]
-							]?.[1].val ?? {};
-					}
-					updatedInfoState = true;
-					updatedMainState = true;
-				} else if (
-					/recv <- .*?"key": "((?:bc:customer|player):(?:[a-z0-9-]+))",/s.test(
+					case /recv <- .*?"key": "((?:bc:customer|player):(?:[a-z0-9-]+))",/s.test(
 						latestLog
-					)
-				) {
-					if (!updatedMainState) {
-						gamePlayerState = JSON.parse(latestLog.slice(8)).result.val;
-						updatedMainState = true;
+					): {
+						if (!updatedMainState) {
+							gamePlayerState = parsedLog.result.val;
+							updatedMainState = true;
+						}
+						break;
 					}
-				} else if (
-					/recv <- .*?"key": "info:\d+",/s.test(latestLog) &&
-					!updatedInfoState
-				) {
-					gamePlayerInfoState = JSON.parse(latestLog.slice(8)).result.val;
-					updatedInfoState = true;
+					case /recv <- .*?"key": "info:\d+",/s.test(latestLog): {
+						if (!updatedInfoState) {
+							gamePlayerInfoState = parsedLog.result.val;
+							updatedInfoState = true;
+						}
+					}
 				}
 			}
 		}

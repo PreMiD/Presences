@@ -1,9 +1,16 @@
+import { getSVGImageData, uploadFile } from "../../util";
+
 export const name = "Dodo Re Mi";
 export const logo = "https://i.imgur.com/KzAoFzz.png";
 
-export function getPresenceData({
+function getAvatarImageData(): Promise<string> {
+	return getSVGImageData(document.querySelector<SVGElement>(".avatar"));
+}
+
+export async function getPresenceData({
 	playerState,
-}: GameCallbackParams): PresenceData {
+	presence,
+}: GameCallbackParams): Promise<PresenceData> {
 	switch (playerState.kind) {
 		case "lobby": {
 			return { state: "Waiting in lobby" };
@@ -16,16 +23,60 @@ export function getPresenceData({
 		}
 		case "audienceRecording":
 		case "recording": {
-			return { state: "Recording a song" };
+			const instrumentImageData = await getSVGImageData(
+					document.querySelector<SVGElement>(".instrument")
+				),
+				instrumentImage = await uploadFile(
+					instrumentImageData,
+					Assets.Question,
+					presence
+				);
+			return {
+				state: "Recording a song",
+				smallImageText: `on the ${
+					document.querySelector<HTMLParagraphElement>(".instrument-name")
+						.textContent
+				}`,
+				smallImageKey: instrumentImage,
+			};
 		}
 		case "instrumentSelect": {
-			return { state: "Selecting an instrument" };
+			const instrumentImageData = await getSVGImageData(
+					document.querySelector<SVGElement>(".selected .instrument")
+				),
+				instrumentImage = await uploadFile(
+					instrumentImageData,
+					Assets.Question,
+					presence
+				);
+			return {
+				state: "Selecting an instrument",
+				smallImageText: `on the ${
+					document.querySelector<HTMLParagraphElement>(".name").textContent
+				}`,
+				smallImageKey: instrumentImage,
+			};
 		}
 		case "scoreboard": {
-			return { state: "Viewing the scoreboard" };
+			const avatarImageData = await getAvatarImageData(),
+				avatarImage = await uploadFile(
+					avatarImageData,
+					Assets.Question,
+					presence
+				);
+			return {
+				state: "Viewing the scoreboard",
+				smallImageText:
+					document.querySelector<HTMLHeadingElement>(".result").textContent,
+				smallImageKey: avatarImage,
+			};
 		}
 		case "songSelect": {
-			return { state: "Selecting a song" };
+			return {
+				state: "Selecting a song",
+				smallImageKey: "https://i.imgur.com/8RWP1LI.png",
+				smallImageText: document.querySelector(".name").textContent.trim(),
+			};
 		}
 		default: {
 			return { state: "Waiting" };
