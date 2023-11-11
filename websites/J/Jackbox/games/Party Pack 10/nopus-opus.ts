@@ -1,5 +1,5 @@
 export const name = "Dodo Re Mi";
-export const logo = "TODO";
+export const logo = "https://i.imgur.com/KzAoFzz.png";
 
 export function getPresenceData({
 	playerState,

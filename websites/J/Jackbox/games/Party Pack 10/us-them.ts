@@ -1,5 +1,5 @@
 export const name = "Hypnotorious";
-export const logo = "TODO";
+export const logo = "https://i.imgur.com/47yf1dr.png";
 
 export function getPresenceData({
 	playerState,

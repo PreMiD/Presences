@@ -1,5 +1,5 @@
 export const name = "TimeJinx";
-export const logo = "TODO";
+export const logo = "https://i.imgur.com/KZUZlz4.png";
 
 export function getPresenceData({
 	playerState,

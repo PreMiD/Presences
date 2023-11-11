@@ -1,5 +1,5 @@
 export const name = "Tee-K.O. 2";
-export const logo = "https://i.imgur.com/9XdnSqX.png";
+export const logo = "https://i.imgur.com/GxrBW3H.png";
 
 export function getPresenceData({
 	playerState,

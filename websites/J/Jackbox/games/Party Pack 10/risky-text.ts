@@ -1,5 +1,5 @@
 export const name = "FixyText";
-export const logo = "TODO";
+export const logo = "https://i.imgur.com/xZ2KVBa.png";
 
 export function getPresenceData({
 	playerState,
