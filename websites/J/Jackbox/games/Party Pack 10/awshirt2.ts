@@ -1,9 +1,15 @@
+import { uploadFile } from "../../util";
+
 export const name = "Tee-K.O. 2";
 export const logo = "https://i.imgur.com/GxrBW3H.png";
 
-export function getPresenceData({
+let lastImage: string,
+	lastImageTime: number = 0;
+
+export async function getPresenceData({
 	playerState,
-}: GameCallbackParams): PresenceData {
+	presence,
+}: GameCallbackParams): Promise<PresenceData> {
 	switch (playerState.kind) {
 		case "lobby": {
 			return { state: "Waiting in lobby" };
@@ -15,10 +21,23 @@ export function getPresenceData({
 			return { state: "Assembling a T-Shirt" };
 		}
 		case "remaking": {
-			return { state: "Remaking a T-Shirt" };
+			return { state: "Deciding whether to remake a T-Shirt" };
 		}
 		case "drawing": {
-			return { state: "Drawing a T-Shirt image" };
+			const now = Date.now();
+			if (now - lastImageTime > 2000) {
+				const canvas = document.querySelector("canvas");
+				lastImageTime = now;
+				lastImage = await uploadFile(
+					canvas.toDataURL("image/png"),
+					Assets.Writing,
+					presence,
+				);
+			}
+			return {
+				state: "Drawing a T-Shirt image",
+				largeImageKey: lastImage,
+			};
 		}
 		case "writing": {
 			return { state: "Writing a T-Shirt slogan" };
