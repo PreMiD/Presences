@@ -57,8 +57,7 @@ if (document.location.hostname === "jackbox.tv") {
 								parsedLog.result.entities[
 									latestLog.match(/"key": "(info:\d+)",/s)?.[1]
 								]?.[1].val ??
-								parsedLog.result ??
-								{};
+								parsedLog.result;
 							updatedInfoState = true;
 						}
 						break;
