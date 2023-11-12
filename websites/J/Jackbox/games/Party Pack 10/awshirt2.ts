@@ -4,7 +4,7 @@ export const name = "Tee-K.O. 2";
 export const logo = "https://i.imgur.com/GxrBW3H.png";
 
 let lastImage: string,
-	lastImageTime: number = 0;
+	lastImageTime = 0;
 
 export async function getPresenceData({
 	playerState,
@@ -30,7 +30,7 @@ export async function getPresenceData({
 				lastImageTime = now;
 				lastImage = await uploadFile(
 					canvas.toDataURL("image/png"),
-					Assets.Writing,
+					logo,
 					presence
 				);
 			}

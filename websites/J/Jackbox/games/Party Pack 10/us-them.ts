@@ -12,11 +12,9 @@ export function getPresenceData({
 			return { state: "Viewing the results" };
 		}
 		case "choices": {
-			if (playerState.category === "SKIP") {
+			if (playerState.category === "SKIP")
 				return { state: "Viewing the tutorial" };
-			} else {
-				return { state: "Choosing the outlier" };
-			}
+			else return { state: "Choosing the outlier" };
 		}
 		case "role": {
 			return { state: "Viewing their secret role" };

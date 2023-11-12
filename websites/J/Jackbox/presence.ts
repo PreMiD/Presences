@@ -95,7 +95,7 @@ if (document.location.hostname === "jackbox.tv") {
 				if (!game) game = games.unknown;
 			}
 		}
-	}, 2000);
+	}, 1000);
 }
 
 presence.on("UpdateData", async () => {
