@@ -1,7 +1,8 @@
 // This is required to retrieve the values from the Tetris game
 // The scores and other information is stored deep within a global
-// object, so we need to traverse the object to find the values.
-// Current methods for reading global variables are not sufficient.
+// object, and rendered on a canvas, so we need to traverse the object
+// to find the values. Current methods for reading global variables
+// are not sufficient.
 const customJavaScript = `{
     const searchingFor = new Set([
       "mLinesValueView",
