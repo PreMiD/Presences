@@ -12,16 +12,19 @@ export function getPresenceData({
 			return { state: "Viewing the results" };
 		}
 		case "choices": {
-			return { state: "Choosing the outlier" };
+			if (playerState.category === "SKIP") {
+				return { state: "Viewing the tutorial" };
+			} else {
+				return { state: "Choosing the outlier" };
+			}
 		}
 		case "role": {
-			return { state: "Viewing their role" };
-		}
-		case "playerPrompt": {
-			return { state: "Viewing their prompt" };
+			return { state: "Viewing their secret role" };
 		}
 		case "writing": {
-			return { state: "Answering a prompt" };
+			return {
+				state: `Answering a prompt: ${playerState.prompt}`,
+			};
 		}
 		case "grouping": {
 			return { state: "Grouping themselves" };
