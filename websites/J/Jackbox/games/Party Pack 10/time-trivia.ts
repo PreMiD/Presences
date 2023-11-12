@@ -13,23 +13,17 @@ export function getPresenceData({
 		}
 		case "guessing": {
 			return {
-				state: `Answering a prompt: "${
-					playerState.prompt
-				}"`
+				state: `Answering a prompt: "${playerState.prompt}"`,
 			};
 		}
 		case "sussing": {
 			return {
-				state: `Sussing out the impostor: ${
-					playerState.prompt
-				}`
+				state: `Sussing out the impostor: ${playerState.prompt}`,
 			};
 		}
 		case "choosing": {
 			return {
-				state: `Choosing an answer: ${
-					playerState.prompt
-				}`
+				state: `Choosing an answer: ${playerState.prompt}`,
 			};
 		}
 		default: {

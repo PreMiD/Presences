@@ -31,7 +31,7 @@ export async function getPresenceData({
 				lastImage = await uploadFile(
 					canvas.toDataURL("image/png"),
 					Assets.Writing,
-					presence,
+					presence
 				);
 			}
 			return {

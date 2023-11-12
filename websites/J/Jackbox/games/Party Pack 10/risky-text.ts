@@ -12,22 +12,19 @@ export function getPresenceData({
 			return { state: "Viewing the results" };
 		}
 		case "choices": {
-			return { state: "Choosing a text" };
-		}
-		case "chat-partner": {
-			return { state: "Chatting with a partner" };
+			return { state: "Choosing a category" };
 		}
 		case "inbox": {
-			return { state: "Viewing their inbox" };
+			return { state: "Viewing the initial message" };
 		}
 		case "task": {
-			return { state: "Completing a task" };
+			return { state: "Preparing to write text" };
 		}
 		case "writing": {
-			return { state: "Writing a text" };
+			return { state: "Writing text chaotically" };
 		}
 		case "favorites": {
-			return { state: "Voting on their favorite text" };
+			return { state: "Voting on their favorite words" };
 		}
 		default: {
 			return { state: "Waiting" };
