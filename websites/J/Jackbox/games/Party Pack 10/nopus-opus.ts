@@ -33,7 +33,7 @@ export async function getPresenceData({
 				);
 			return {
 				state: "Recording a song",
-				smallImageText: `on the ${
+				smallImageText: `on ${
 					document.querySelector<HTMLParagraphElement>(".instrument-name")
 						.textContent
 				}`,
@@ -51,7 +51,7 @@ export async function getPresenceData({
 				);
 			return {
 				state: "Selecting an instrument",
-				smallImageText: `on the ${
+				smallImageText: `on ${
 					document.querySelector<HTMLParagraphElement>(".name").textContent
 				}`,
 				smallImageKey: instrumentImage,
