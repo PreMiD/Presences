@@ -1,7 +1,8 @@
 import { getSVGImageData, uploadFile } from "../../util";
 
 export const name = "Dodo Re Mi";
-export const logo = "https://i.imgur.com/KzAoFzz.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/44.png";
 
 function getAvatarImageData(): Promise<string> {
 	return getSVGImageData(document.querySelector<SVGElement>(".avatar"));
@@ -74,7 +75,8 @@ export async function getPresenceData({
 		case "songSelect": {
 			return {
 				state: "Selecting a song",
-				smallImageKey: "https://i.imgur.com/8RWP1LI.png",
+				smallImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/45.png",
 				smallImageText: document.querySelector(".name").textContent.trim(),
 			};
 		}

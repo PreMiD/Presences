@@ -1,7 +1,8 @@
 import { uploadFile } from "../../util";
 
 export const name = "Tee-K.O. 2";
-export const logo = "https://i.imgur.com/GxrBW3H.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/43.png";
 
 let lastImage: string,
 	lastImageTime = 0;

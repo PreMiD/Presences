@@ -1,5 +1,6 @@
 export const name = "FixyText";
-export const logo = "https://i.imgur.com/xZ2KVBa.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/46.png";
 
 export function getPresenceData({
 	playerState,

@@ -1,5 +1,6 @@
 export const name = "TimeJinx";
-export const logo = "https://i.imgur.com/KZUZlz4.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/47.png";
 
 export function getPresenceData({
 	playerState,

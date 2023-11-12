@@ -1,5 +1,6 @@
 export const name = "Hypnotorious";
-export const logo = "https://i.imgur.com/47yf1dr.png";
+export const logo =
+	"https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/48.png";
 
 export function getPresenceData({
 	playerState,
