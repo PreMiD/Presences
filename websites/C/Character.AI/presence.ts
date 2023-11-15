@@ -1,0 +1,94 @@
+const presence = new Presence({
+		clientId: "939893082546114611",
+	}),
+	logo = "https://i.imgur.com/fvjZLpL.png",
+	button = {
+		label: "View Page",
+		url: document.location.href,
+	},
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+presence.on("UpdateData", async () => {
+	const presenceData: PresenceData = {
+			largeImageKey: logo,
+			startTimestamp: browsingTimestamp,
+		},
+		[time, buttons] = await Promise.all([
+			presence.getSetting<boolean>("time"),
+			presence.getSetting<boolean>("buttons"),
+		]);
+
+	switch (document.location.pathname.split("/")[1]) {
+		case "": {
+			presenceData.details = "Browsing Homepage";
+			break;
+		}
+		case "chat2": {
+			presenceData.details = "Chatting with";
+			presenceData.state = document.querySelector(
+				"div > div > div > div > div > div > div > div"
+			).textContent;
+			presenceData.buttons = [button];
+			break;
+		}
+		case "feed": {
+			presenceData.details = "Browsing feed";
+			break;
+		}
+		case "post": {
+			presenceData.details = "Viewing post";
+			presenceData.state = document.querySelector(
+				`a[href^='${document.location.href.replace(
+					document.location.origin,
+					""
+				)}']`
+			).textContent;
+			presenceData.buttons = [button];
+			break;
+		}
+		case "public-profile": {
+			presenceData.details = "Viewing profile";
+			presenceData.state =
+				document.querySelector("span").childNodes[1].textContent;
+			presenceData.buttons = [button];
+			break;
+		}
+		case "chats": {
+			presenceData.details = "Browsing chats";
+			break;
+		}
+		case "community": {
+			presenceData.details = "Browsing community";
+			break;
+		}
+		case "posts": {
+			presenceData.details = "Browsing posts";
+			presenceData.state = document.querySelector(
+				"div > div > div > div > div > div > div > div > div > div > div:last-child > div:last-child"
+			).textContent;
+			presenceData.buttons = [button];
+			break;
+		}
+		case "profile": {
+			presenceData.details = "Viewing their profile";
+			break;
+		}
+		case "character": {
+			presenceData.details = "Creating character";
+			break;
+		}
+		case "editing": {
+			presenceData.details = "Editing character";
+			break;
+		}
+	}
+
+	if (!time) {
+		delete presenceData.startTimestamp;
+		delete presenceData.endTimestamp;
+	}
+
+	if (!buttons && presenceData.buttons) delete presenceData.buttons;
+
+	presence.setActivity(presenceData);
+});
