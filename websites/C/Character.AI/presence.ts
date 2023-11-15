@@ -1,22 +1,25 @@
 const presence = new Presence({
 		clientId: "939893082546114611",
 	}),
-	logo = "https://i.imgur.com/fvjZLpL.png",
-	button = {
-		label: "View Page",
-		url: document.location.href,
-	},
 	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+const enum Assets {
+	Logo = "https://i.imgur.com/fvjZLpL.png",
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: logo,
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		[time, buttons] = await Promise.all([
 			presence.getSetting<boolean>("time"),
 			presence.getSetting<boolean>("buttons"),
-		]);
+		]),
+		button = {
+			label: "View Page",
+			url: document.location.href,
+		};
 
 	switch (document.location.pathname.split("/")[1]) {
 		case "": {
