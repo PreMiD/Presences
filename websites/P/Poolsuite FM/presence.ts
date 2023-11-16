@@ -18,12 +18,12 @@ presence.on("UpdateData", async () => {
 
 	// If next track is loading, replace current track text with "Tuning..." instead of track
 	if (artist === "We'll be right back") state = "Tuning...";
-	else
+	else {
 		state = `${artist} - ${
 			document.querySelector(".current-track").firstChild.nextSibling
 				.textContent
 		}`;
-
+	}
 	if (document.querySelector(".middle").firstChild.textContent === "Pause") {
 		// Set presence data for a playing song
 		const elapsed = Math.floor(Date.now() / 1000),
