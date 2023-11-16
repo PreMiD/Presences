@@ -16,11 +16,11 @@ let remaining = 0,
 	};
 
 enum OtherAssets {
-	airborne = "https://i.imgur.com/UcprMAS.png",
-	arriving = "https://i.imgur.com/P6fZLKA.png",
-	departing = "https://i.imgur.com/CeNst32.png",
-	diverting = "https://i.imgur.com/ZeYnoY1.png",
-	onground = "https://i.imgur.com/A9wDveo.png",
+	airborne = "https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/0.png",
+	arriving = "https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/1.png",
+	departing = "https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/2.png",
+	diverting = "https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/3.png",
+	onground = "https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/4.png",
 }
 
 presence.on(
