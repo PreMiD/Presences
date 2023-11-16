@@ -2,10 +2,14 @@ const presence = new Presence({
 	clientId: "1174478441450573924",
 });
 
-// Function to convert the site
+// Function to convert the site's duration timer to raw seconds
 function convertToSeconds(duration: string): number {
 	const [minutes, seconds] = duration.split(":").map(Number);
 	return minutes * 60 + seconds;
+}
+
+const enum Assets {
+	Logo = "https://i.imgur.com/u9dOCzX.jpg",
 }
 
 let details: string, state: string, artist: string;
@@ -30,7 +34,7 @@ presence.on("UpdateData", async () => {
 			presenceData: PresenceData = {
 				details,
 				state,
-				largeImageKey: "https://i.imgur.com/TpNi1Kf.jpeg",
+				largeImageKey: Assets.Logo,
 				startTimestamp: elapsed,
 				endTimestamp:
 					elapsed +
@@ -49,7 +53,7 @@ presence.on("UpdateData", async () => {
 		const presenceData: PresenceData = {
 			details,
 			state,
-			largeImageKey: "https://i.imgur.com/TpNi1Kf.jpeg",
+			largeImageKey: Assets.Logo,
 			endTimestamp: 0,
 			smallImageKey: Assets.Pause,
 			smallImageText: "Paused",
