@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "197422681530957824",
+		"name": "6co"
+	},
+	"service": "Poolsuite FM",
+	"description": {
+		"en": "Poolsuite FM is an 80s-themed music website bringing summer vibes year-round."
+	},
+	"url": "poolsuite.net",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/u9dOCzX.jpg",
+	"thumbnail": "https://i.imgur.com/HpZEVbG.png",
+	"color": "#03cafc",
+	"category": "music",
+	"tags": [
+		"music"
+	]
+}
