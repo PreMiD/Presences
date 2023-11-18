@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 	else {
 		presenceData.details = "Editing a diagram";
 		if (!(await presence.getSetting<boolean>("privacy")))
-			presenceData.state = document.title.replace(" - draw.io$", "");
+			presenceData.state = document.title.replace(/ - draw.io$/, "");
 	}
 	presence.setActivity(presenceData);
 });
