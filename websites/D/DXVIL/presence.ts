@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: "1177239603535675412",
-}),
+		clientId: "1177239603535675412",
+	}),
 	largeImage = "https://i.imgur.com/IgrY0YE.gif" || "dxvil_lg";
 
 presence.on("UpdateData", async () => {
