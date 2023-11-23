@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "681885446455689216",
+		"name": "dxvilmusic"
+	},
+	"service": "DXVIL",
+	"description": {
+		"en": "Presence for DXVIL's Website"
+	},
+	"url": [
+		"dxvil.com",
+		"www.dxvil.com"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/1rVVboi.png",
+	"thumbnail": "https://i.imgur.com/ZPgHu1V.jpg",
+	"color": "#000000",
+	"category": "other",
+	"tags": [
+		"music",
+		"artist",
+		"dxvil"
+	]
+}
