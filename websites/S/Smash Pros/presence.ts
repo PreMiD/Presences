@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 				.querySelector("div.v-list-item-subtitle")
 				?.textContent.split(" ")[0]
 		} MMR`;
-		presenceData.buttons = [{ label: "View this profile", url: href }];
+		presenceData.buttons = [{ label: "View profile", url: href }];
 	} else if (pathname === "/settings")
 		presenceData.details = "Viewing settings";
 

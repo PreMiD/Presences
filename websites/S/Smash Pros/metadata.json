@@ -8,7 +8,10 @@
 	"description": {
 		"en": "Smash Pros is a skill based matchmaking service for Super Smash Bros. Ultimate"
 	},
-	"url": "smashpros.gg",
+	"url": [
+		"smashpros.gg",
+		"www.smashpros.gg"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/DKytNmj.png",
 	"thumbnail": "https://i.imgur.com/NKFwxOY.jpg",
