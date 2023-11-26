@@ -147,8 +147,16 @@ async function updateData() {
 function setLang(code: string) {
 	language.code = code?.toLowerCase();
 	language.name = LANGUAGE_NAMES[language.code] || null;
-	if (language.name && language.code) {
-		presenceData.smallImageKey = `lang_${language.code}`;
+	if (!language.name && language.code) {
+		setLang(
+			{
+				dn: "nl-nl",
+				nb: "no-bo",
+				zc: "zh-hk",
+			}[language.code]
+		);
+	} else if (language.name && language.code) {
+		presenceData.smallImageKey = `lang_${language.code.split("-")[0]}`;
 		presenceData.smallImageText = `${language.name}`;
 		// TODO: | ${
 		// 	state?.courses[user.currentCourseId].xp
