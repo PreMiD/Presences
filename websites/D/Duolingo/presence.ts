@@ -51,7 +51,7 @@ const presence = new Presence({
 		zu: "Zulu",
 	},
 	presenceData: PresenceData = {
-		largeImageKey: "duolingo",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/logo.png",
 	},
 	settings = {
 		showTime: true as boolean,
