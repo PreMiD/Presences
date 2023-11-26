@@ -9,7 +9,7 @@ function convertToSeconds(duration: string): number {
 }
 
 const enum Assets {
-	Logo = "https://i.imgur.com/u9dOCzX.jpg",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/P/Poolsuite%20FM/assets/logo.jpg",
 }
 
 let details: string, state: string, artist: string;
