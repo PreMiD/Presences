@@ -12,26 +12,34 @@ const customJavaScript = `{
 
     const values = {};
 
-    function recursiveSearch(obj) {
+    function recursiveSearch(obj, seenAlready = new Set()) {
       for (var key in obj) {
-        if (obj.hasOwnProperty(key)) {
+        if (Object.hasOwnProperty.call(obj, key)) {
+          if (seenAlready.has(obj[key])) continue;
+          seenAlready.add(obj[key]);
           if (searchingFor.has(key)) {
             values[key] = obj[key];
           }
           if (obj[key] && (typeof obj[key] == "object")) {
-            recursiveSearch(obj[key]);
+            recursiveSearch(obj[key], seenAlready);
           }
         }
       }
     }
 
+    let found = false;
     setInterval(() => {
-      recursiveSearch(window.mmBPSApp);
-      document.getElementById("PreMiD-tetris-presence-output").value = JSON.stringify({
-        lines: values.mLinesValueView.mText,
-        score: values.mScoreValueView.mText,
-        level: values.mLevelValueView.mText,
-      });
+      if (!found) {
+        recursiveSearch(window.mBPSApp);
+      }
+      try {
+        document.getElementById("PreMiD-tetris-presence-output").value = JSON.stringify({
+          lines: values.mLinesValueView.mText,
+          score: values.mScoreValueView.mText,
+          level: values.mLevelValueView.mText,
+        });
+        found = true;
+      } catch (e) {}
     }, 2000);
 
   }`,
