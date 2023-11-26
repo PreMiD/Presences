@@ -16,12 +16,13 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("time"),
 			presence.getSetting<boolean>("buttons"),
 		]),
+		{ pathname, href, origin } = document.location,
 		button = {
 			label: "View Page",
-			url: document.location.href,
+			url: href,
 		};
 
-	switch (document.location.pathname.split("/")[1]) {
+	switch (pathname.split("/")[1]) {
 		case "": {
 			presenceData.details = "Browsing Homepage";
 			break;
@@ -34,6 +35,13 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [button];
 			break;
 		}
+		case "chat": {
+			presenceData.details = "Chatting with";
+			presenceData.state =
+				document.querySelector(".chattitle")?.childNodes[1]?.textContent;
+			presenceData.buttons = [button];
+			break;
+		}
 		case "feed": {
 			presenceData.details = "Browsing feed";
 			break;
@@ -41,10 +49,7 @@ presence.on("UpdateData", async () => {
 		case "post": {
 			presenceData.details = "Viewing post";
 			presenceData.state = document.querySelector(
-				`a[href^='${document.location.href.replace(
-					document.location.origin,
-					""
-				)}']`
+				`a[href^='${href.replace(origin, "")}']`
 			).textContent;
 			presenceData.buttons = [button];
 			break;
