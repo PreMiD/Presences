@@ -9,9 +9,9 @@
 		"en": "Poolsuite FM is an 80s-themed music website bringing summer vibes year-round."
 	},
 	"url": "poolsuite.net",
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/u9dOCzX.jpg",
-	"thumbnail": "https://i.imgur.com/HpZEVbG.png",
+	"version": "1.0.2",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Poolsuite%20FM/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Poolsuite%20FM/assets/thumbnail.png",
 	"color": "#03cafc",
 	"category": "music",
 	"tags": [
