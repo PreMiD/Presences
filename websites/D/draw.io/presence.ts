@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/1hI3nKp.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/draw.io/assets/logo.png",
 		startTimestamp: Date.now(),
 	};
 	if (document.title === "draw.io")
