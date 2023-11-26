@@ -69,7 +69,7 @@ const presence = new Presence({
 		lessonTimeStamp: null as number,
 	},
 	users: { username: string; displayName: string; img: string }[] = [];
-// lessons: { path: string; type: string }[] = [];
+
 let timeoutId: number;
 
 function newTimeStamp() {
@@ -136,9 +136,6 @@ async function updateData() {
 	settings.lastPath = "~";
 	clearTimeout(timeoutId);
 
-	// user.streak = state?.user?.streak ?? null;
-	// user.xp = state?.user?.totalXp ?? null;
-	// user.freezes = state?.items?.inventory?.streak_freeze?.quantity ?? null;
 	user.currentCourseId = state.user.currentCourseId ?? null;
 	if (user.currentCourseId) setLang(/_(.*?)_/.exec(user.currentCourseId)?.[1]);
 
