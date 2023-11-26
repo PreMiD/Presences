@@ -136,7 +136,7 @@ async function updateData() {
 	settings.lastPath = "~";
 	clearTimeout(timeoutId);
 
-	user.streak = state?.user?.streak ?? null;
+	// user.streak = state?.user?.streak ?? null;
 	// user.xp = state?.user?.totalXp ?? null;
 	// user.freezes = state?.items?.inventory?.streak_freeze?.quantity ?? null;
 	user.currentCourseId = state.user.currentCourseId ?? null;
@@ -148,7 +148,7 @@ async function updateData() {
 	settings.showTime = showTime;
 }
 function setLang(code: string) {
-	language.code = code.toLowerCase();
+	language.code = code?.toLowerCase();
 	language.name = LANGUAGE_NAMES[language.code] || null;
 	if (language.name && language.code) {
 		presenceData.smallImageKey = `lang_${language.code}`;
