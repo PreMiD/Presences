@@ -28,7 +28,6 @@ const presence = new Presence({
 		ja: "Japanese",
 		ko: "Korean",
 		la: "Latin",
-		dn: "Dutch",
 		"nl-nl": "Dutch",
 		"no-bo": "Norwegian (Bokmål)",
 		nv: "Navajo",
@@ -51,7 +50,8 @@ const presence = new Presence({
 		zu: "Zulu",
 	},
 	presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/logo.png",
 	},
 	settings = {
 		showTime: true as boolean,
@@ -86,10 +86,11 @@ function deEsser(word: string) {
 
 function makeProgressBar(value: number, maxValue: number, size: number) {
 	const percentage = value / maxValue,
-		progress = Math.min(size, Math.round(size * percentage));
-	let progressBar = `${"🟩".repeat(progress)}${"⬛".repeat(size - progress)}`;
-	if (percentage < 1) progressBar = `${progressBar.slice(0, -2)}⬛`;
-	return `${progressBar} ${Math.round(percentage * 100)}%`;
+		progress = Math.round(size * percentage);
+
+	return `${"🟩".repeat(progress)}${"⬛".repeat(
+		size - progress
+	)} ${`${Math.round(percentage * 100)}%`}`;
 }
 function handleLesson() {
 	if (
@@ -122,7 +123,7 @@ function handleLesson() {
 					)?.[1]
 				),
 				100,
-				presenceData.details.length / 2.6
+				presenceData.details.length / 3
 			)}`;
 		}
 	}
@@ -132,9 +133,6 @@ async function updateData() {
 	const state = JSON.parse(window.localStorage.getItem("duo.state")).state
 		.redux;
 	if (!state) return;
-
-	settings.lastPath = "~";
-	clearTimeout(timeoutId);
 
 	user.currentCourseId = state.user.currentCourseId ?? null;
 	if (user.currentCourseId) setLang(/_(.*?)_/.exec(user.currentCourseId)?.[1]);
@@ -182,6 +180,7 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "lesson":
+		case "practice":
 			updateData();
 			switch (true) {
 				case path.includes("legendary"):
@@ -193,7 +192,7 @@ presence.on("UpdateData", async () => {
 					break;
 
 				default:
-					presenceData.details = `Doing a ${language.name} lesson`;
+					presenceData.details = `Working on a ${language.name} lesson`;
 			}
 			handleLesson();
 			break;
