@@ -15,7 +15,7 @@ interface TetrisFrameData {
 let iframeData: TetrisFrameData = {
 	lines: "0",
 	score: "0",
-	level: "0",
+	level: "1",
 };
 
 presence.on("iFrameData", (data: TetrisFrameData) => {
@@ -24,11 +24,11 @@ presence.on("iFrameData", (data: TetrisFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: Assets.Logo,
-		startTimestamp: browsingTimestamp,
-	},
-	{ pathname } = document.location,
-	pathList = pathname.split("/").filter(Boolean);
+			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname } = document.location,
+		pathList = pathname.split("/").filter(Boolean);
 
 	switch (pathList[0] ?? "") {
 		case "play-tetris": {

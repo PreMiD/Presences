@@ -3,49 +3,83 @@
 // object, and rendered on a canvas, so we need to traverse the object
 // to find the values. Current methods for reading global variables
 // are not sufficient.
-const customJavaScript = `{
-    const searchingFor = new Set([
-      "mLinesValueView",
-      "mScoreValueView",
-      "mLevelValueView"
-    ]);
+// It also needs to use functions to determine the current scene.
+function iframeInject() {
+	const searchingFor = new Set([
+		"mLinesValueView",
+		"mScoreValueView",
+		"mLevelValueView",
+	]);
 
-    const values = {};
+	interface TetrisApp extends Record<string, unknown> {
+		mSceneMgr: {
+			getCurrentScene: () => {
+				mSceneName: string;
+			};
+		};
+	}
 
-    function recursiveSearch(obj, seenAlready = new Set()) {
-      for (var key in obj) {
-        if (Object.hasOwnProperty.call(obj, key)) {
-          if (seenAlready.has(obj[key])) continue;
-          seenAlready.add(obj[key]);
-          if (searchingFor.has(key)) {
-            values[key] = obj[key];
-          }
-          if (obj[key] && (typeof obj[key] == "object")) {
-            recursiveSearch(obj[key], seenAlready);
-          }
-        }
-      }
-    }
+	interface Window {
+		mBPSApp: TetrisApp;
+	}
 
-    let found = false;
-    setInterval(() => {
-      if (!found) {
-        recursiveSearch(window.mBPSApp);
-      }
-      try {
-        document.getElementById("PreMiD-tetris-presence-output").value = JSON.stringify({
-          lines: values.mLinesValueView.mText,
-          score: values.mScoreValueView.mText,
-          level: values.mLevelValueView.mText,
-        });
-        found = true;
-      } catch (e) {}
-    }, 2000);
+	let values: Record<
+		string,
+		{
+			mText: string;
+		}
+	> = {};
 
-  }`,
-  template = document.createElement("template"),
-  script = document.createElement("script"),
-  output = document.createElement("textarea");
+	function recursiveSearch(
+		obj: Record<string, unknown>,
+		seenAlready = new Set()
+	) {
+		for (var key in obj) {
+			if (Object.hasOwnProperty.call(obj, key)) {
+				if (seenAlready.has(obj[key])) continue;
+				seenAlready.add(obj[key]);
+				if (searchingFor.has(key)) {
+					values[key] = obj[key] as { mText: string };
+				}
+				if (obj[key] && typeof obj[key] == "object") {
+					recursiveSearch(obj[key] as Record<string, unknown>, seenAlready);
+				}
+			}
+		}
+	}
+
+	let found = false;
+	setInterval(() => {
+		const currentScene = (
+			window as unknown as Window
+		).mBPSApp.mSceneMgr.getCurrentScene().mSceneName;
+		if (!found && currentScene === "game") {
+			values = {};
+			recursiveSearch((window as unknown as Window).mBPSApp);
+			if (Object.keys(values).length === 3) {
+				found = true;
+			}
+		} else {
+			if (currentScene === "mainMenu" || currentScene === "gameOver") {
+				found = false;
+			}
+		}
+		try {
+			document.querySelector<HTMLTextAreaElement>(
+				"#PreMiD-tetris-presence-output"
+			).value = JSON.stringify({
+				lines: values.mLinesValueView.mText,
+				score: values.mScoreValueView.mText,
+				level: values.mLevelValueView.mText,
+			});
+		} catch (e) {}
+	}, 2000);
+}
+
+const customJavaScript = `{(${iframeInject.toString()})();}`,
+	template = document.createElement("template"),
+	script = document.createElement("script"),
+	output = document.createElement("textarea");
 
 output.id = "PreMiD-tetris-presence-output";
 output.style.display = "none";
@@ -57,9 +91,13 @@ document.head.append(template.cloneNode(true));
 const iframe = new iFrame();
 
 iframe.on("UpdateData", () => {
-  try {
-    const output = document.querySelector<HTMLTextAreaElement>("#PreMiD-tetris-presence-output"),
-      data = JSON.parse(output.value);
-    iframe.send(data);
-  } catch {/* ignore */}
+	try {
+		const output = document.querySelector<HTMLTextAreaElement>(
+				"#PreMiD-tetris-presence-output"
+			),
+			data = JSON.parse(output.value);
+		iframe.send(data);
+	} catch {
+		/* ignore */
+	}
 });
