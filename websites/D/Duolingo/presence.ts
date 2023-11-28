@@ -54,7 +54,7 @@ const presence = new Presence({
 			"https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/logo.png",
 	},
 	settings = {
-		showTime: true as boolean,
+		showTime: true,
 		lastPath: null as string,
 	},
 	language = {
@@ -67,6 +67,7 @@ const presence = new Presence({
 		xp: null as number,
 		freezes: null as number,
 		lessonTimeStamp: null as number,
+		inLesson: false,
 	},
 	users: { username: string; displayName: string; img: string }[] = [];
 
@@ -84,6 +85,16 @@ function deEsser(word: string) {
 	return word.endsWith("s") ? word.slice(0, -1) : word;
 }
 
+function giveArticle(word: string) {
+	return `${
+		["a", "e", "i", "o", "u"].some(vowel =>
+			word.toLowerCase().startsWith(vowel)
+		)
+			? "an"
+			: "a"
+	} ${word}`;
+}
+
 function makeProgressBar(value: number, maxValue: number, size: number) {
 	const percentage = value / maxValue,
 		progress = Math.round(size * percentage);
@@ -92,14 +103,15 @@ function makeProgressBar(value: number, maxValue: number, size: number) {
 		size - progress
 	)} ${`${Math.round(percentage * 100)}%`}`;
 }
+
 function handleLesson() {
+	user.inLesson = true;
 	if (
 		document.querySelector('[data-test="daily-quest-progress-slide"]') ||
 		document.querySelector('[data-test="session-complete-slide"]')
 	) {
 		const path = decodeURI(document.location.pathname).split("/");
 		switch (true) {
-			//TODO: add finish placement test (need to do more testing)
 			case path.includes("legendary"):
 				presenceData.details = `Finished ${language.name} legendary challenge`;
 				break;
@@ -129,6 +141,7 @@ function handleLesson() {
 	}
 	if (!user.lessonTimeStamp) user.lessonTimeStamp = newTimeStamp();
 }
+
 async function updateData() {
 	const state = JSON.parse(window.localStorage.getItem("duo.state")).state
 		.redux;
@@ -142,6 +155,7 @@ async function updateData() {
 	]);
 	settings.showTime = showTime;
 }
+
 function setLang(code: string) {
 	language.code = code?.toLowerCase();
 	language.name = LANGUAGE_NAMES[language.code] || null;
@@ -156,9 +170,6 @@ function setLang(code: string) {
 	} else if (language.name && language.code) {
 		presenceData.smallImageKey = `lang_${language.code.split("-")[0]}`;
 		presenceData.smallImageText = `${language.name}`;
-		// TODO: | ${
-		// 	state?.courses[user.currentCourseId].xp
-		// }xp`;
 	} else presenceData.smallImageKey = "duo_globe";
 }
 
@@ -172,11 +183,12 @@ presence.on("UpdateData", async () => {
 	delete presenceData.state;
 	delete presenceData.startTimestamp;
 
+	user.inLesson = false;
+
 	switch (path[1]) {
 		case "learn":
-			user.lessonTimeStamp = null;
 			updateData();
-			presenceData.details = `Choosing ${language.name} lesson`;
+			presenceData.details = `Choosing ${giveArticle(language.name)} lesson`;
 			break;
 
 		case "lesson":
@@ -184,26 +196,24 @@ presence.on("UpdateData", async () => {
 			updateData();
 			switch (true) {
 				case path.includes("legendary"):
-					presenceData.details = `Doing a ${language.name} legendary challenge`;
+					presenceData.details = `Doing ${giveArticle(
+						language.name
+					)} legendary challenge`;
 					break;
 
 				case path.includes("test"):
-					presenceData.details = `Taking a ${language.name} jump ahead test`;
+					presenceData.details = `Taking ${giveArticle(
+						language.name
+					)} jump ahead test`;
 					break;
 
 				default:
-					presenceData.details = `Working on a ${language.name} lesson`;
+					presenceData.details = `Working on ${giveArticle(
+						language.name
+					)} lesson`;
 			}
 			handleLesson();
 			break;
-
-		//TODO: (not used as frequent. will add in next PR; should be soon)
-		// case "practice-hub":
-		// 	updateData();
-		// 	presenceData.details = `Choosing ${language.name} practice method`;
-		// 	handleLesson();
-
-		// 	break;
 
 		case "placement":
 			setLang(path[2]);
@@ -212,12 +222,10 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "leaderboard":
-			//TODO: slideshow
 			presenceData.details = "Viewing leaderboard";
 			break;
 
 		case "quests":
-			//TODO: slideshow
 			presenceData.state = "Viewing quests";
 			break;
 
@@ -242,11 +250,8 @@ presence.on("UpdateData", async () => {
 					'h1[data-test="profile-username"] span'
 				)?.textContent,
 				img =
-					(
-						document.querySelector(
-							`img[alt="${displayName}"]`
-						) as HTMLImageElement
-					)?.src ?? "duo",
+					document.querySelector<HTMLImageElement>(`img[alt="${displayName}"]`)
+						?.src ?? "profile_duo",
 				existingUser = users.find(user => user.username === username);
 			if (!existingUser && displayName) {
 				users.push({ username, displayName, img });
@@ -267,6 +272,7 @@ presence.on("UpdateData", async () => {
 			break;
 	}
 
+	if (!user.inLesson) user.lessonTimeStamp = null;
 	if (settings.showTime)
 		presenceData.startTimestamp = user.lessonTimeStamp ?? timeStamp;
 
