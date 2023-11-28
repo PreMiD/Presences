@@ -45,10 +45,10 @@
 		"zh_CN": "学习外语，寓教于乐"
 	},
 	"url": "www.duolingo.com",
-	"regExp": "(www|(\\w{2}-)?\\w{2})\\.duolingo\\.(com|cn)",
+	"regExp": "www\\.duolingo\\.(com|cn)",
 	"version": "3.0.0",
-	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/logo.png",
-	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/thumbnail.png",
+	"logo": "https://cdn.verycrunchy.dev/premid/duolingo/logo.png",
+	"thumbnail": "https://blog.duolingo.com/content/images/2021/12/Blog-Banner.png",
 	"color": "#89E219",
 	"category": "other",
 	"tags": [
