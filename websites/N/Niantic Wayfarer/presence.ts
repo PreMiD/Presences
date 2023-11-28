@@ -5,7 +5,7 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/N/Niantic%20Wayfarer/assets/logo.png",
-	Pin = "https://cdn.discordapp.com/app-assets/684174415415476240/684175146973790208.png?size=512",
+	Pin = "https://i.imgur.com/1reWPnu.png",
 }
 
 const shortenedURLs: Record<string, string> = {};
@@ -34,24 +34,22 @@ presence.on("UpdateData", async () => {
 
 	if (pathname.includes("/review")) {
 		const title = document.querySelector(
-				"app-title-and-description .wf-review-card__body a"
+				"app-title-and-description-b .wf-review-card__body a > div"
 			),
 			description = document.querySelector(
-				"app-title-and-description .wf-review-card__body a+div"
+				"app-title-and-description-b .wf-review-card__body a+div"
 			),
 			location = document.querySelector(
-				"app-should-be-wayspot .wf-review-card__body > div > div:last-child"
+				"app-photo-b .wf-review-card__body > div > div:last-child"
 			);
 		if (title && description && location) {
 			presenceData.largeImageKey = await getShortURL(
-				document
-					.querySelector<HTMLDivElement>(
-						"app-should-be-wayspot .wf-image-modal"
-					)
-					.style.backgroundImage.match(/url\("(.+)"\)/)[1]
+				document.querySelector<HTMLImageElement>(
+					"app-photo-b .wf-image-modal > img"
+				).src
 			);
 			presenceData.smallImageKey = Assets.Pin;
-			presenceData.details = `Reviewing: ${title.textContent.trim()}`;
+			presenceData.details = `Reviewing: ${title.childNodes[0].textContent.trim()}`;
 			presenceData.state = `Description: ${description.textContent.trim()}`;
 			presenceData.smallImageText = `Address: ${location.textContent
 				.split(":")[1]
