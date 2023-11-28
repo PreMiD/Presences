@@ -51,7 +51,7 @@ const presence = new Presence({
 	},
 	presenceData: PresenceData = {
 		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/logo.png",
+			"https://cdn.verycrunchy.dev/premid/duolingo/logo.png",
 	},
 	settings = {
 		showTime: true,
@@ -253,15 +253,18 @@ presence.on("UpdateData", async () => {
 					document.querySelector<HTMLImageElement>(`img[alt="${displayName}"]`)
 						?.src ?? "profile_duo",
 				existingUser = users.find(user => user.username === username);
-			if (!existingUser && displayName) {
+			if (!displayName) {
+				settings.lastPath = "~";
+				return;
+			}
+
+			if (!existingUser) {
 				users.push({ username, displayName, img });
 				if (users.length > 4) users.pop();
 			}
-			if (path[1] !== "u") {
-				presenceData.details = `Viewing ${makePossessive(
-					existingUser?.displayName ?? displayName ?? username
-				)} ${path[3] ?? "profile"}`;
-			}
+			presenceData.details = `Viewing ${makePossessive(
+				existingUser?.displayName ?? displayName
+			)} ${path[3] ?? "profile"}`;
 			presenceData.smallImageKey = existingUser?.img ?? img;
 			presenceData.smallImageText = path[1] === "u" ? displayName : username;
 			break;
