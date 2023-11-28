@@ -50,8 +50,7 @@ const presence = new Presence({
 		zu: "Zulu",
 	},
 	presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.verycrunchy.dev/premid/duolingo/logo.png",
+		largeImageKey: "https://cdn.verycrunchy.dev/premid/duolingo/logo.png",
 	},
 	settings = {
 		showTime: true,
