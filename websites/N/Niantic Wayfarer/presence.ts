@@ -5,7 +5,7 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/N/Niantic%20Wayfarer/assets/logo.png",
-	Pin = "https://i.imgur.com/1reWPnu.png",
+	Pin = "https://cdn.rcd.gg/PreMiD/websites/N/Niantic%20Wayfarer/assets/0.png",
 }
 
 const shortenedURLs: Record<string, string> = {};
