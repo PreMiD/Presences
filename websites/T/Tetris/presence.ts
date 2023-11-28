@@ -31,11 +31,25 @@ presence.on("UpdateData", async () => {
 		pathList = pathname.split("/").filter(Boolean);
 
 	switch (pathList[0] ?? "") {
+		case "": {
+			presenceData.details = "Browsing home page";
+			break;
+		}
+		case "article": {
+			presenceData.details = "Reading an article";
+			presenceData.state = document.querySelector<HTMLHeadingElement>(".headline").textContent;
+			break;
+		}
 		case "play-tetris": {
 			presenceData.details = "Playing Tetris";
 			presenceData.state = `Level ${iframeData.level}`;
 			presenceData.smallImageKey = Assets.Question;
 			presenceData.smallImageText = `Lines: ${iframeData.lines} | Score: ${iframeData.score}`;
+			break;
+		}
+		default: {
+			presenceData.details = "Browsing";
+			presenceData.state = document.title;
 			break;
 		}
 	}
