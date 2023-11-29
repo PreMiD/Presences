@@ -108,7 +108,7 @@ fetchStrings();
 /**
  * Sets the current language to fetch strings for and returns whether any strings are loaded.
  */
-export function checkStringLanguage(lang: string) {
+export function checkStringLanguage(lang: string): boolean {
 	currentTargetLang = lang;
 	return !!strings;
 }
