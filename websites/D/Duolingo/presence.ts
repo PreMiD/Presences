@@ -149,9 +149,7 @@ async function updateData() {
 	user.currentCourseId = state.user.currentCourseId ?? null;
 	if (user.currentCourseId) setLang(/_(.*?)_/.exec(user.currentCourseId)?.[1]);
 
-	const [showTime] = await Promise.all([
-		presence.getSetting<boolean>("timestamps"),
-	]);
+	const showTime = await presence.getSetting<boolean>("timestamps");
 	settings.showTime = showTime;
 }
 
