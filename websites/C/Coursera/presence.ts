@@ -85,7 +85,7 @@ const presence = new Presence({
 				}
 					,
 					details: () =>{
-						return (`Viewing : ${(((document.location.href).split("/"))[6].split("-").join(" ")).toUpperCase() + " " + ((document.location.href).split("/"))[7]}'s content`);
+						return (`Viewing : ${(((document.location.href).split("/"))[6].split("-").join(" ")).toUpperCase()} ${((document.location.href).split("/"))[7]}'s content`);
 					},
 					buttons: () => [
 						{ label: "View Course", url: (()=>{
@@ -293,7 +293,7 @@ const presence = new Presence({
 				smallImageKey: () => Assets.Search,
 				smallImageText: () => "Searching",
 				details: () =>{
-					return("searching for \"" + (new URL(document.location.href)).searchParams.get("query") + "\"" ); 
+					return(`searching for \"${(new URL(document.location.href)).searchParams.get("query")}\"` ); 
 				},
 					
 				state: () =>{
@@ -305,11 +305,11 @@ const presence = new Presence({
 				path: /^\/+.*$/,
 				details: () =>{
 						const currentUrl = document.location.href;
-						if (currentUrl.indexOf("my-learning") !== - 1) {
+						if (currentUrl.indexOf("my-learning") !== - 1) 
  						 return "My Courses";
-							} else {
+							 else 
  						 return (currentUrl.split("/"))[3].split("-").join(" ");
-					}
+					
 
 					},
 				smallImageKey: () => Assets.Reading,
@@ -325,9 +325,7 @@ presence.on("UpdateData", async () => {
 	const [showTimestamp, showButtons] = await Promise.all([
 		presence.getSetting<boolean>(Settings.TIMESTAMP),
 		presence.getSetting<boolean>(Settings.BUTTONS),
-	]);
-
-	const presenceData: PresenceData = {
+	]),presenceData: PresenceData = {
 		largeImageKey: LoAssets.Logo,
 	};
 
