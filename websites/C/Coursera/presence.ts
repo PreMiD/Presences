@@ -297,7 +297,7 @@ const presence = new Presence({
 							.textContent.split(" ")[0]
 					} results`;
 				},
-				buttons: () => [{ label: "Results", url: location.href }],
+				buttons: () => [{ label: "Results", url: document.location.href }],
 			},
 			{
 				path: /^\/+.*$/,
