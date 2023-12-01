@@ -3,9 +3,9 @@ const presence = new Presence({
 	}),
 	timeStamp = newTimeStamp(),
 	IMAGE = {
-		duoTool: "https://cdn.verycrunchy.dev/premid/duolingo/duo_tool.png",
-		profileDuo: "https://cdn.verycrunchy.dev/premid/duolingo/profile_duo.png",
-		duoGlobe: "https://cdn.verycrunchy.dev/premid/duolingo/duo_globe.png",
+		duoTool: "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/0.png",
+		profileDuo: "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/1.png",
+		duoGlobe: "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/2.png",
 	},
 	LANGUAGE_NAMES: Record<string, string> = {
 		ar: "Arabic",
@@ -55,7 +55,8 @@ const presence = new Presence({
 		zu: "Zulu",
 	},
 	presenceData: PresenceData = {
-		largeImageKey: "https://cdn.verycrunchy.dev/premid/duolingo/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/logo.png",
 	},
 	settings = {
 		showTime: true,
