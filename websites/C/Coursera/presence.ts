@@ -52,7 +52,8 @@ const presence = new Presence({
 				},
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
-				buttons: () => [{ label: "Profile Link", url: location.href }],
+				buttons: () => [{ label: "Profile Link", url:
+					document.location.href }],
 			},
 			{
 				path: /^\/learn\/(?!.*\bhome\b).*\/$/,
@@ -271,7 +272,8 @@ const presence = new Presence({
 							return((document.querySelector("[data-e2e='hero-title']")).textContent); 
 					},
 					buttons: () => [
-						{ label: "Course Link", url: location.href },]
+						{ label: "Course Link", url: 
+							document.location.href },]
 				
 			},
 			{
@@ -285,7 +287,8 @@ const presence = new Presence({
 							return((document.querySelector("[data-e2e='hero-title']")).textContent);
 					},
 					buttons: () => [
-						{ label: "Course Link", url: location.href },]
+						{ label: "Course Link", url: 
+							document.location.href },]
 				
 			},
 			{
