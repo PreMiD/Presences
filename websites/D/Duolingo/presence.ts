@@ -2,6 +2,11 @@ const presence = new Presence({
 		clientId: "1177802176140156998",
 	}),
 	timeStamp = newTimeStamp(),
+	IMAGE = {
+		duoTool: "https://cdn.verycrunchy.dev/premid/duolingo/duo_tool.png",
+		profileDuo: "https://cdn.verycrunchy.dev/premid/duolingo/profile_duo.png",
+		duoGlobe: "https://cdn.verycrunchy.dev/premid/duolingo/duo_globe.png",
+	},
 	LANGUAGE_NAMES: Record<string, string> = {
 		ar: "Arabic",
 		ca: "Catalan",
@@ -167,7 +172,7 @@ function setLang(code: string) {
 	} else if (language.name && language.code) {
 		presenceData.smallImageKey = `lang_${language.code.split("-")[0]}`;
 		presenceData.smallImageText = `${language.name}`;
-	} else presenceData.smallImageKey = "duo_globe";
+	} else presenceData.smallImageKey = IMAGE.duoGlobe;
 }
 
 presence.on("UpdateData", async () => {
@@ -232,7 +237,7 @@ presence.on("UpdateData", async () => {
 
 		case "courses":
 			presenceData.details = "Viewing available courses";
-			presenceData.smallImageKey = "duo_globe";
+			presenceData.smallImageKey = IMAGE.duoGlobe;
 			presenceData.smallImageText = "viewing courses";
 			break;
 		case "enroll":
@@ -248,7 +253,7 @@ presence.on("UpdateData", async () => {
 				)?.textContent,
 				img =
 					document.querySelector<HTMLImageElement>(`img[alt="${displayName}"]`)
-						?.src ?? "profile_duo",
+						?.src ?? IMAGE.profileDuo,
 				existingUser = users.find(user => user.username === username);
 			if (!displayName) {
 				settings.lastPath = "~";
@@ -268,7 +273,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "settings":
 			presenceData.details = `Changing ${deEsser(path[2])} settings`;
-			presenceData.smallImageKey = "duo_tool";
+			presenceData.smallImageKey = IMAGE.duoTool;
 			break;
 	}
 
