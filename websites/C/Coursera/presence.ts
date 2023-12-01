@@ -337,7 +337,6 @@ presence.on("UpdateData", async () => {
 	});
 
 	if (!route) return presence.setActivity(presenceData);
-
 	if (route.state) presenceData.state = route.state();
 	if (route.details) presenceData.details = route.details();
 	if (showButtons && route.buttons) presenceData.buttons = route.buttons();
