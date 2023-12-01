@@ -47,7 +47,7 @@ const presence = new Presence({
 				},
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
-				buttons: () => [{ label: "Profile Link", url: location.href }],
+				buttons: () => [{ label: "Profile Link", url: document.location.href }],
 			},
 			{
 				path: /^\/learn\/(?!.*\bhome\b).*\/$/,
