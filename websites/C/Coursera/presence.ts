@@ -278,7 +278,7 @@ const presence = new Presence({
 				state: () => {
 					return document.querySelector("[data-e2e='hero-title']").textContent;
 				},
-				buttons: () => [{ label: "Course Link", url: location.href }],
+				buttons: () => [{ label: "Course Link", url: document.location.href }],
 			},
 			{
 				path: /^\/search*/,
