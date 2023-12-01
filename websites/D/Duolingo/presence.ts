@@ -100,12 +100,14 @@ function giveArticle(word: string) {
 }
 
 function makeProgressBar(value: number, maxValue: number, size: number) {
-	const percentage = value / maxValue,
-		progress = Math.round(size * percentage);
-
-	return `${"🟩".repeat(progress)}${"⬛".repeat(
-		size - progress
-	)} ${`${Math.round(percentage * 100)}%`}`;
+	const progressPercentage = Math.min(
+			100,
+			Math.max(0, Math.floor((value / maxValue) * 100))
+		),
+		completedSquares = Math.floor((progressPercentage * size) / 100);
+	return `${"🟩".repeat(completedSquares)}${"⬛".repeat(
+		size - completedSquares
+	)} ${progressPercentage}%`;
 }
 
 function handleLesson() {
