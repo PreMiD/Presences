@@ -71,15 +71,13 @@ const presence = new Presence({
 					,
 					details: () =>{
 						const currentUrl = document.location.href;
-						const parts = currentUrl.split("/");
-						const replaced = parts[4].split("-").join(" ");
+						const replaced = (currentUrl.split("/"))[4].split("-").join(" ");
 						return replaced;
 					},
 					buttons: () => [
 						{ label: "View Course", url: (()=>{
 							const currentUrl = document.location.href;
-						const parts = currentUrl.split("/").slice(0, 5);
-						const result = parts.join("/");
+							const result = (currentUrl.split("/").slice(0, 5)).join("/");
 						return result;
 						})() },
 						
@@ -92,24 +90,21 @@ const presence = new Presence({
 				smallImageText: () => "Learning",
 				state: () =>{
 					const currentUrl = document.location.href;
-						const parts = currentUrl.split("/");
-						const replaced = parts[4].split("-").join(" ");
+						const replaced = (currentUrl.split("/"))[4].split("-").join(" ");
 						return replaced;
 
 				}
 					,
 					details: () =>{
 						const currentUrl = document.location.href;
-						const parts = currentUrl.split("/");
-						const replaced = parts[6].split("-").join(" ");
-						const result = (`Viewing : ${replaced.toUpperCase() + " " + parts[7]}'s content`);
+						const replaced = (currentUrl.split("/"))[6].split("-").join(" ");
+						const result = (`Viewing : ${replaced.toUpperCase() + " " + (currentUrl.split("/"))[7]}'s content`);
 						return result;
 					},
 					buttons: () => [
 						{ label: "View Course", url: (()=>{
 							const currentUrl = document.location.href;
-						const parts = currentUrl.split("/").slice(0, 5);
-						const result = parts.join("/");
+							const result = (currentUrl.split("/").slice(0, 5)).join("/");
 						return result;
 						})() },
 						
@@ -122,8 +117,7 @@ const presence = new Presence({
 				smallImageText: () => "Learning",
 				state: () =>{
 					const currentUrl = document.location.href;
-						const parts = currentUrl.split("/");
-						const replaced = parts[6].toUpperCase().split("-").join(" ");
+					const replaced = (currentUrl.split("/"))[6].split("-").join(" ");
 						const result = `Viewing Course ${replaced}`;
 						return result;
 
@@ -131,15 +125,13 @@ const presence = new Presence({
 					,
 					details: () =>{
 						const currentUrl = document.location.href;
-						const parts = currentUrl.split("/");
-						const replaced = parts[4].split("-").join(" ");
+						const replaced = (currentUrl.split("/"))[4].split("-").join(" ");
 						return replaced;
 					},
 					buttons: () => [
 						{ label: "View Course", url: (()=>{
 							const currentUrl = document.location.href;
-						const parts = currentUrl.split("/").slice(0, 5);
-						const result = parts.join("/");
+							const result = (currentUrl.split("/").slice(0, 5)).join("/");
 						return result;
 						})() },
 						
@@ -158,15 +150,13 @@ const presence = new Presence({
 					,
 					details: () =>{
 						const currentUrl = document.location.href;
-						const parts = currentUrl.split("/");
-						const replaced = parts[4].split("-").join(" ");
+						const replaced = (currentUrl.split("/"))[4].split("-").join(" ");
 						return replaced;
 					},
 					buttons: () => [
 						{ label: "View Course", url:(()=>{
 							const currentUrl = document.location.href;
-						const parts = currentUrl.split("/").slice(0, 5);
-						const result = parts.join("/");
+						const result = (currentUrl.split("/").slice(0, 5)).join("/");
 						return result;
 						})() },
 						
@@ -185,15 +175,13 @@ const presence = new Presence({
 					,
 					details: () =>{
 						const currentUrl = document.location.href;
-						const parts = currentUrl.split("/");
-						const replaced = parts[4].split("-").join(" ");
+						const replaced = (currentUrl.split("/"))[4].split("-").join(" ");
 						return replaced;
 					},
 					buttons: () => [
 						{ label: "View Course", url: (()=>{
 							const currentUrl = document.location.href;
-						const parts = currentUrl.split("/").slice(0, 5);
-						const result = parts.join("/");
+							const result = (currentUrl.split("/").slice(0, 5)).join("/");
 						return result;
 						})() },
 						
@@ -212,15 +200,13 @@ const presence = new Presence({
 					,
 					details: () =>{
 						const currentUrl = document.location.href;
-						const parts = currentUrl.split("/");
-						const replaced = parts[4].split("-").join(" ");
+						const replaced = (currentUrl.split("/"))[4].split("-").join(" ");
 						return replaced;
 					},
 					buttons: () => [
 						{ label: "View Course", url: (()=>{
 							const currentUrl = document.location.href;
-						const parts = currentUrl.split("/").slice(0, 5);
-						const result = parts.join("/");
+							const result = (currentUrl.split("/").slice(0, 5)).join("/");
 						return result;
 						})() },
 						
@@ -242,15 +228,13 @@ const presence = new Presence({
 					,
 					details: () =>{
 						const currentUrl = document.location.href;
-						const parts = currentUrl.split("/");
-						const replaced = parts[4].split("-").join(" ");
+						const replaced = (currentUrl.split("/"))[4].split("-").join(" ");
 						return replaced;
 					},
 					buttons: () => [
 						{ label: "View Course", url: (()=>{
 							const currentUrl = document.location.href;
-						const parts = currentUrl.split("/").slice(0, 5);
-						const result = parts.join("/");
+							const result = (currentUrl.split("/").slice(0, 5)).join("/");
 						return result;
 						})() },
 						
@@ -268,15 +252,13 @@ const presence = new Presence({
 					,
 					details: () =>{
 						const currentUrl = document.location.href;
-						const parts = currentUrl.split("/");
-						const replaced = parts[4].split("-").join(" ");
+						const replaced = (currentUrl.split("/"))[4].split("-").join(" ");
 						return replaced;
 					},
 					buttons: () => [
 						{ label: "View Course", url: (()=>{
 							const currentUrl = document.location.href;
-						const parts = currentUrl.split("/").slice(0, 5);
-						const result = parts.join("/");
+							const result = (currentUrl.split("/").slice(0, 5)).join("/");
 						return result;
 						})() },
 						
@@ -294,15 +276,13 @@ const presence = new Presence({
 					,
 					details: () =>{
 						const currentUrl = document.location.href;
-						const parts = currentUrl.split("/");
-						const replaced = parts[4].split("-").join(" ");
+						const replaced = (currentUrl.split("/"))[4].split("-").join(" ");
 						return replaced;
 					},
 					buttons: () => [
 						{ label: "View Course", url: (()=>{
 							const currentUrl = document.location.href;
-						const parts = currentUrl.split("/").slice(0, 5);
-						const result = parts.join("/");
+							const result = (currentUrl.split("/").slice(0, 5)).join("/");
 						return result;
 						})() },
 						
@@ -323,15 +303,13 @@ const presence = new Presence({
 					,
 					details: () =>{
 						const currentUrl = document.location.href;
-						const parts = currentUrl.split("/");
-						const replaced = parts[4].split("-").join(" ");
+						const replaced = (currentUrl.split("/"))[4].split("-").join(" ");
 						return replaced;
 					},
 					buttons: () => [
 						{ label: "View Course", url: (()=>{
 							const currentUrl = document.location.href;
-						const parts = currentUrl.split("/").slice(0, 5);
-						const result = parts.join("/");
+							const result = (currentUrl.split("/").slice(0, 5)).join("/");
 						return result;
 						})() },
 						
@@ -398,8 +376,7 @@ const presence = new Presence({
  						 return "My Courses";
 							} else {
  							 // if no, continue with the original code
- 							 const parts = currentUrl.split("/");
- 							 const replaced = parts[3].toUpperCase().split("-").join(" ");
+ 							 const replaced = (currentUrl.split("/"))[3].split("-").join(" ");
  						 return replaced;
 					}
 
