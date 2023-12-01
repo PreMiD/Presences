@@ -1,8 +1,8 @@
 {
 	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
-		"name": "Luke",
-		"id": "279622919242514432"
+		"name": "veryCrunchy",
+		"id": "576097150359044106"
 	},
 	"contributors": [
 		{
@@ -12,6 +12,10 @@
 		{
 			"name": "narpi",
 			"id": "321665259842830336"
+		},
+		{
+			"name": "Luke",
+			"id": "279622919242514432"
 		}
 	],
 	"service": "Duolingo",
@@ -41,15 +45,23 @@
 		"zh_CN": "学习外语，寓教于乐"
 	},
 	"url": "www.duolingo.com",
-	"regExp": "(www|(\\w{2}-)?\\w{2})\\.duolingo\\.(com|cn)",
-	"version": "2.0.12",
-	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/logo.png",
-	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/thumbnail.png",
-	"color": "#58cc02",
+	"regExp": "www\\.duolingo\\.(com|cn)",
+	"version": "3.0.0",
+	"logo": "https://cdn.verycrunchy.dev/premid/duolingo/logo.png",
+	"thumbnail": "https://blog.duolingo.com/content/images/2021/12/Blog-Banner.png",
+	"color": "#89E219",
 	"category": "other",
 	"tags": [
 		"education",
-		"games",
-		"languages"
+		"learning",
+		"language"
+	],
+	"settings": [
+		{
+			"id": "timestamps",
+			"title": "Show timestamps",
+			"icon": "fas fa-stopwatch",
+			"value": true
+		}
 	]
 }
