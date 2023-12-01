@@ -85,10 +85,7 @@ const presence = new Presence({
 				}
 					,
 					details: () =>{
-						const currentUrl = document.location.href;
-						const replaced = ((currentUrl).split("/"))[6].split("-").join(" ");
-						const result = (`Viewing : ${replaced.toUpperCase() + " " + (currentUrl.split("/"))[7]}'s content`);
-						return result;
+						return (`Viewing : ${(((document.location.href).split("/"))[6].split("-").join(" ")).toUpperCase() + " " + ((document.location.href).split("/"))[7]}'s content`);;
 					},
 					buttons: () => [
 						{ label: "View Course", url: (()=>{
