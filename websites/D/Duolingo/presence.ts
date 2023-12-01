@@ -117,15 +117,15 @@ function handleLesson() {
 		const path = decodeURI(document.location.pathname).split("/");
 		switch (true) {
 			case path.includes("legendary"):
-				presenceData.details = `Finished ${language.name} legendary challenge`;
+				presenceData.details = `Finished ${giveArticle(language.name)} legendary challenge`;
 				break;
 
 			case path.includes("test"):
-				presenceData.details = `Passed ${language.name} jump ahead test`;
+				presenceData.details = `Passed ${giveArticle(language.name)} jump ahead test`;
 				break;
 
 			default:
-				presenceData.details = `Finished ${language.name} lesson`;
+				presenceData.details = `Finished ${giveArticle(language.name)} lesson`;
 		}
 	} else {
 		const progressBarElement = document
