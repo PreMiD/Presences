@@ -187,10 +187,7 @@ const presence = new Presence({
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Learning",
 				state: () =>{
-					const title =document.title;
-					const index = title.lastIndexOf(" ") - 1;
-					const result =  `Lecture: ${title.substring(0, index)}`;
-					return(result);
+					return(`Lecture: ${(document.title).substring(0, ((document.title).lastIndexOf(" ") - 1))}`);
 
 				}
 					,
@@ -250,10 +247,7 @@ const presence = new Presence({
 				smallImageKey: () => Assets.Writing,
 				smallImageText: () => "Learning",
 				state: () =>{
-					const title =document.title;
-					const index = title.lastIndexOf(" ") - 1;
-					const result =  `Subject: ${title.substring(0, index)}`;
-					return(result);
+					return(`Subject: ${(document.title).substring(0, ((document.title).lastIndexOf(" ") - 1))}`);
 
 				}
 					,
@@ -304,17 +298,11 @@ const presence = new Presence({
 				smallImageKey: () => Assets.Search,
 				smallImageText: () => "Searching",
 				details: () =>{
-					const url = document.location.href;
-						const urlObj = new URL(url);
-					const query = urlObj.searchParams.get("query");
-					return("searching for \"" + query +"\"" ); 
-
+					return("searching for \"" + (new URL(document.location.href)).searchParams.get("query") +"\"" ); 
 				}
 					,
 				state: () =>{
-					const element = document.querySelector("[data-e2e='NumberOfResultsSection']")
-					const text = element.textContent.split(" ");
-					return(`Found ${text[0]} results`);}
+					return(`Found ${((document.querySelector("[data-e2e='NumberOfResultsSection']")).textContent.split(" "))[0]} results`);}
 					,
 				buttons: () => [{ label: "Results", url: location.href }],
 			},
