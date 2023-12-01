@@ -26,6 +26,31 @@ const presence = new Presence({
 				},
 			],
 		},
+		"/about": {
+			details: "Viewing the About Page",
+			buttons: [
+				{ label: "View the About Page", url: "https://www.vtubers.wiki/about" },
+			],
+		},
+		"/donate": {
+			details: "Viewing the Donate Page",
+			buttons: [
+				{
+					label: "View the Donate Page",
+					url: "https://www.vtubers.wiki/donate",
+				},
+			],
+		},
+		"/search": {
+			details: "Searching the wiki via the Search Engine",
+			state: "Searching...",
+			buttons: [
+				{
+					label: "View the Search Engine",
+					url: "https://www.vtubers.wiki/search",
+				},
+			],
+		},
 	};
 
 const enum Assets {
@@ -89,6 +114,18 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Viewing The wiki";
 					presenceData.state = pageTitle;
 					presenceData.buttons = [{ label: "View Wiki", url: href }];
+			}
+			break;
+		case "blog":
+			if (pathSplit[1]) {
+				presenceData.largeImageKey = Assets.Log;
+				presenceData.details = "Viewing a Blog Post";
+				presenceData.state = pageTitle;
+				presenceData.buttons = [{ label: "View Blog Post", url: href }];
+			} else {
+				presenceData.largeImageKey = Assets.Log;
+				presenceData.details = "Viewing The Blog";
+				presenceData.buttons = [{ label: "View Blog", url: href }];
 			}
 			break;
 	}
