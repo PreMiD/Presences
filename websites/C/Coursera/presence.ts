@@ -296,7 +296,7 @@ const presence = new Presence({
 				smallImageKey: () => Assets.Search,
 				smallImageText: () => "Searching",
 				details: () =>{
-					return(`searching for \"${(new URL(document.location.href)).searchParams.get("query")}\"` ); 
+					return(`searching for "${(new URL(document.location.href)).searchParams.get("query")}"` ); 
 				},
 					
 				state: () =>{
