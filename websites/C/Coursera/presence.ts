@@ -85,7 +85,7 @@ const presence = new Presence({
 				}
 					,
 					details: () =>{
-						return (`Viewing : ${(((document.location.href).split("/"))[6].split("-").join(" ")).toUpperCase() + " " + ((document.location.href).split("/"))[7]}'s content`);;
+						return (`Viewing : ${(((document.location.href).split("/"))[6].split("-").join(" ")).toUpperCase() + " " + ((document.location.href).split("/"))[7]}'s content`);
 					},
 					buttons: () => [
 						{ label: "View Course", url: (()=>{
@@ -129,7 +129,7 @@ const presence = new Presence({
 						return ((document.location.href).split("/"))[4].split("-").join(" ");
 					},
 					buttons: () => [
-						{ label: "View Course", url:(()=>{
+						{ label: "View Course", url: (()=>{
 							return ((document.location.href).split("/").slice(0, 5)).join("/");
 						})() },
 						
@@ -204,7 +204,7 @@ const presence = new Presence({
 				smallImageKey: () => Assets.Writing,
 				smallImageText: () => "Learning",
 				state: () =>{
-					return("Taking a Quiz")
+					return("Taking a Quiz");
 
 				}
 					,
@@ -224,7 +224,7 @@ const presence = new Presence({
 				smallImageKey: () => Assets.Writing,
 				smallImageText: () => "Learning",
 				state: () =>{
-					return("Solving an Exam")
+					return("Solving an Exam");
 
 				}
 					,
@@ -268,8 +268,7 @@ const presence = new Presence({
 				Viewing a Course`
 					,
 				state: () =>{
-					const element = document.querySelector("[data-e2e='hero-title']");
-							return(element.textContent); 
+							return((document.querySelector("[data-e2e='hero-title']")).textContent); 
 					},
 					buttons: () => [
 						{ label: "Course Link", url: location.href },]
@@ -283,8 +282,7 @@ const presence = new Presence({
 				Viewing a Course`
 					,
 				state: () =>{
-					const element = document.querySelector("[data-e2e='hero-title']");
-							return(element.textContent); 
+							return((document.querySelector("[data-e2e='hero-title']")).textContent);
 					},
 					buttons: () => [
 						{ label: "Course Link", url: location.href },]
@@ -295,26 +293,22 @@ const presence = new Presence({
 				smallImageKey: () => Assets.Search,
 				smallImageText: () => "Searching",
 				details: () =>{
-					return("searching for \"" + (new URL(document.location.href)).searchParams.get("query") +"\"" ); 
-				}
-					,
+					return("searching for \"" + (new URL(document.location.href)).searchParams.get("query") + "\"" ); 
+				},
+					
 				state: () =>{
-					return(`Found ${((document.querySelector("[data-e2e='NumberOfResultsSection']")).textContent.split(" "))[0]} results`);}
-					,
+					return(`Found ${((document.querySelector("[data-e2e='NumberOfResultsSection']")).textContent.split(" "))[0]} results`);
+				},
 				buttons: () => [{ label: "Results", url: location.href }],
 			},
 			{
 				path: /^\/+.*$/,
 				details: () =>{
 						const currentUrl = document.location.href;
-						// check if currentUrl contains "my-learning"
 						if (currentUrl.indexOf("my-learning") !== - 1) {
- 						 // if yes, return "My courses"
  						 return "My Courses";
 							} else {
- 							 // if no, continue with the original code
- 							 const replaced = (currentUrl.split("/"))[3].split("-").join(" ");
- 						 return replaced;
+ 						 return (currentUrl.split("/"))[3].split("-").join(" ");
 					}
 
 					},
