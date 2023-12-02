@@ -4,6 +4,12 @@
 		"id": "393773835620712461",
 		"name": "yourelosingme"
 	},
+	"contributors": [
+		{
+			"name": "veryCrunchy",
+			"id": "576097150359044106"
+		}
+	],
 	"service": "watch.lonelil.com",
 	"description": {
 		"en": "watch.lonelil.com is your one-stop destination for free movies, anime, TV shows, and Live TV. With a vast collection of content and easy-to-use interface, you'll never run out of entertainment options."
@@ -25,7 +31,7 @@
 	"settings": [
 		{
 			"id": "lang",
-			"multiLanguage": "kahoot"
+			"multiLanguage": true
 		}
 	]
 }

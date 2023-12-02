@@ -14,6 +14,7 @@ const presence = new Presence({
 				watchingLive: "general.watchingLive",
 				viewingHomePage: "general.viewHome",
 				loading: "kahoot.loadingPage",
+				browsing: "general.browsing",
 				buttonWatchMovie: "general.buttonWatchMovie",
 				buttonWatchEpisode: "general.buttonViewEpisode",
 				buttonWatchStream: "general.buttonWatchStream",
@@ -49,6 +50,7 @@ function calculateEndTime(elapsedTime: string, durationTime: string): number {
 		);
 	return Date.now() - elapsedSeconds * 1000 + durationSeconds * 1000;
 }
+
 presence.on("UpdateData", async () => {
 	if (document.querySelector("#state")) {
 		const state = JSON.parse(
@@ -58,7 +60,7 @@ presence.on("UpdateData", async () => {
 			since: number;
 			item: {
 				shownType: string;
-				type: "anime" | "movie" | "show" | "tv";
+				type: "movie" | "show" | "anime" | "tv" | "pokemon";
 				id: string;
 				title: string;
 				description: string;
@@ -92,11 +94,19 @@ presence.on("UpdateData", async () => {
 
 		switch (true) {
 			case state.type.startsWith("home"):
-				presenceData = {
-					...defaultData,
-					details: strings.viewingHomePage,
-					largeImageKey: Assets.Home,
-				};
+				if (state.type.includes("-")) {
+					presenceData = {
+						...defaultData,
+						details: `${strings.browsing.slice(0, -3)} ${state.shownType}`,
+						largeImageKey: Assets.Home,
+					};
+				} else {
+					presenceData = {
+						...defaultData,
+						details: strings.viewingHomePage,
+						largeImageKey: Assets.Home,
+					};
+				}
 				break;
 
 			case state.type.startsWith("details"):
