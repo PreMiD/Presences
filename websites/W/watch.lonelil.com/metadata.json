@@ -32,7 +32,7 @@
 	"settings": [
 		{
 			"id": "lang",
-			"multiLanguage": true
+			"multiLanguage": "kahoot"
 		}
 	]
 }
