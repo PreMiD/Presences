@@ -8,7 +8,7 @@ interface Route extends Functionlize<Partial<PresenceData>> {
 	run?(): PresenceData;
 }
 
-const enum LoAssets {
+const enum Assets {
 	Logo = "https://i.imgur.com/P4XquqE.png",
 }
 
