@@ -1,15 +1,27 @@
-const presence = new Presence({
-		clientId: "802958757909889054",
-	}),
-	capitalize = (text: string): string => {
-		return text
-			.replace(/[[{(_)}\]]/g, " ")
-			.split(" ")
-			.map(str => {
-				return str.charAt(0).toUpperCase() + str.slice(1);
-			})
-			.join(" ");
-	};
+let presence = new Presence({
+	clientId: "802958757909889054",
+});
+
+let twitterCheck: boolean;
+
+const capitalize = (text: string): string => {
+	return text
+		.replace(/[[{(_)}\]]/g, " ")
+		.split(" ")
+		.map(str => {
+			return str.charAt(0).toUpperCase() + str.slice(1);
+		})
+		.join(" ");
+};
+
+function setClient(options: PresenceOptions) {
+	if (Number(presence.getExtensionVersion()) < 224) {
+		presence.hideSetting("twitter");
+		return;
+	}
+	presence.clearActivity();
+	presence = new Presence(options);
+}
 
 function stripText(element: HTMLElement, id = "None", log = true): string {
 	if (element && element.firstChild) return element.firstChild.textContent;
@@ -62,7 +74,17 @@ presence.on("UpdateData", async () => {
 	//* Update strings if user selected another language.
 	const newLang = await presence.getSetting<string>("lang").catch(() => "en"),
 		privacy = await presence.getSetting<boolean>("privacy"),
-		time = await presence.getSetting<boolean>("time");
+		time = await presence.getSetting<boolean>("time"),
+		twitter = await presence.getSetting<boolean>("twitter");
+
+	if (!twitterCheck || twitterCheck !== twitter) {
+		twitterCheck = twitter;
+		setClient({
+			clientId: "802958757909889054",
+		});
+	} else {
+		setClient({ clientId: "1172850898624581652" });
+	}
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
@@ -157,7 +179,9 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: title,
 		state: info,
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/X/X.com/assets/0.png",
+		largeImageKey: !twitter
+			? "https://cdn.rcd.gg/PreMiD/websites/X/X.com/assets/0.png"
+			: "https://i.imgur.com/xA0jg0s.png",
 	};
 
 	if (time) presenceData.startTimestamp = elapsed;
