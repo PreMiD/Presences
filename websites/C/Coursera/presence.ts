@@ -321,7 +321,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>(Settings.BUTTONS),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: LoAssets.Logo,
+			largeImageKey: Assets.Logo,
 		};
 
 	if (showTimestamp) presenceData.startTimestamp = startTimestamp;
