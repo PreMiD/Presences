@@ -24,9 +24,10 @@ let profileName,
 	talentUserData: [string, string] = ["0", "0"];
 
 presence.on("UpdateData", async () => {
-	const [buttons, imagesEnabled] = await Promise.all([
+	const [buttons, imagesEnabled, onlyDevForums] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("images"),
+			presence.getSetting<boolean>("only-devforum"),
 		]),
 		presenceData: PresenceData = {
 			details: "Unknown page",
@@ -654,5 +655,6 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	presence.setActivity(presenceData);
+	if (onlyDevForums && !hostname.includes("devforum")) presence.clearActivity();
+	else presence.setActivity(presenceData);
 });
