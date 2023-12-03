@@ -15,6 +15,7 @@ const capitalize = (text: string): string => {
 
 function setClient(options: PresenceOptions) {
 	if (Number(presence.getExtensionVersion()) < 224) {
+		//Extensions below this version, don't support this feature.
 		presence.hideSetting("twitter");
 		return;
 	}
