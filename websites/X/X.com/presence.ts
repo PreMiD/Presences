@@ -1,8 +1,7 @@
 let presence = new Presence({
-	clientId: "802958757909889054",
-});
-
-let twitterCheck: boolean;
+		clientId: "802958757909889054",
+	}),
+	twitterCheck: boolean;
 
 const capitalize = (text: string): string => {
 	return text
@@ -82,9 +81,7 @@ presence.on("UpdateData", async () => {
 		setClient({
 			clientId: "802958757909889054",
 		});
-	} else {
-		setClient({ clientId: "1172850898624581652" });
-	}
+	} else setClient({ clientId: "1172850898624581652" });
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
