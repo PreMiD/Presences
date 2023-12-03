@@ -342,9 +342,4 @@ presence.on("UpdateData", async () => {
 	if (route.smallImageKey) presenceData.smallImageKey = route.smallImageKey();
 	if (route.smallImageText)
 		presenceData.smallImageText = route.smallImageText();
-
-	if (showTimestamp && route.endTimestamp)
-		presenceData.endTimestamp = route.endTimestamp();
-
-	presence.setActivity(presenceData, route.playback ? route.playback() : false);
 });
