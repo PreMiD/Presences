@@ -179,7 +179,7 @@ presence.on("UpdateData", async () => {
 		state: info,
 		largeImageKey: !twitter
 			? "https://cdn.rcd.gg/PreMiD/websites/X/X.com/assets/0.png"
-			: "https://i.imgur.com/xA0jg0s.png",
+			: "https://cdn.rcd.gg/PreMiD/websites/X/X.com/assets/1.png",
 	};
 
 	if (time) presenceData.startTimestamp = elapsed;
