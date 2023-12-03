@@ -34,7 +34,7 @@
 		"talent.roblox.com",
 		"devforum.roblox.com"
 	],
-	"version": "3.0.12",
+	"version": "3.0.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/thumbnail.png",
 	"color": "#1b1d1e",
@@ -55,6 +55,12 @@
 			"id": "images",
 			"title": "Show Images",
 			"icon": "fad fa-images",
+			"value": false
+		},
+		{
+			"id": "only-devforum",
+			"title": "Show Only DevForum",
+			"icon": "fad fa-eye-slash",
 			"value": false
 		}
 	]
