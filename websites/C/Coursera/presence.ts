@@ -66,9 +66,7 @@ const { href } = document.location,
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url:  href.split("/").slice(0, 5).join("/")
 					},
 				],
 			},
@@ -123,9 +121,7 @@ const { href } = document.location,
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url:href.split("/").slice(0, 5).join("/")					
 					},
 				],
 			},
@@ -142,9 +138,7 @@ const { href } = document.location,
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/")
 					},
 				],
 			},
@@ -161,9 +155,7 @@ const { href } = document.location,
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/")
 					},
 				],
 			},
@@ -184,9 +176,7 @@ const { href } = document.location,
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/")
 					},
 				],
 			},
@@ -203,9 +193,7 @@ const { href } = document.location,
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/")
 					},
 				],
 			},
@@ -222,9 +210,7 @@ const { href } = document.location,
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/")
 					},
 				],
 			},
@@ -244,9 +230,7 @@ const { href } = document.location,
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/")
 					},
 				],
 			},
