@@ -66,7 +66,7 @@ const { href } = document.location,
 				buttons: () => [
 					{
 						label: "View Course",
-						url:  href.split("/").slice(0, 5).join("/")
+						url: href.split("/").slice(0, 5).join("/")
 					},
 				],
 			},
@@ -121,7 +121,7 @@ const { href } = document.location,
 				buttons: () => [
 					{
 						label: "View Course",
-						url:href.split("/").slice(0, 5).join("/")					
+						url: href.split("/").slice(0, 5).join("/")					
 					},
 				],
 			},
@@ -301,7 +301,7 @@ presence.on("UpdateData", async () => {
 
 	const route = router({
 		presenceData,
-		path: document.location.href.replace(`https://${location.hostname}`, ""),
+		path: location.href.replace(`https://${location.hostname}`, ""),
 	});
 
 	if (!route) return presence.setActivity(presenceData);
