@@ -329,7 +329,7 @@ presence.on("UpdateData", async () => {
 
 	const route = router({
 		presenceData,
-		path: href.replace(
+		path: document.location.href.replace(
 			`https://${document.location.hostname}`,
 			""
 		),
