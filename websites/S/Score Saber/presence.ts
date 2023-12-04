@@ -102,6 +102,8 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (document.location.pathname.includes("/u/")) {
 		presenceData.details = "Viewing User";
+		presenceData.smallImageKey =
+			document.querySelector<HTMLImageElement>(".country").src;
 		presenceData.buttons = [
 			{
 				label: "View Page",
@@ -128,6 +130,11 @@ presence.on("UpdateData", async () => {
 					"[class^='title is-5 player has-text-centered-mobile'] > span"
 				).textContent
 			} (${document.querySelector("[class^='title-header pp']").textContent})`;
+		}
+		if (cover) {
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+				".profile-picture img"
+			).src;
 		}
 	} else if (document.location.pathname.includes("/legal/privacy"))
 		presenceData.details = "Viewing Privacy Policy";
