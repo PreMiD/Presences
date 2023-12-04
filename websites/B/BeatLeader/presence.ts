@@ -12,7 +12,7 @@ const presence = new Presence({
 		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/79.png", //Poodleader
 		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/80.png", //GladdePaling
 		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/81.gif", //EarthDay
-		"https://i.imgur.com" + "/Kf8bXNc.gif", //Christmas
+		`https://i.imgur.com${"/Kf8bXNc.gif"}`, //Christmas
 	];
 
 const enum Assets {
@@ -450,7 +450,7 @@ presence.on("UpdateData", async () => {
 				];
 				if (cover) {
 					presenceData.largeImageKey =
-						document.querySelector<HTMLImageElement>("section > img")?.src;
+						document.querySelector<HTMLImageElement>(".event > img")?.src;
 				}
 				break;
 			}
@@ -471,8 +471,14 @@ presence.on("UpdateData", async () => {
 			}
 			case "playlist": {
 				presenceData.details = "Viewing playlist";
-				presenceData.state =
-					document.querySelector(".playlistTitle")?.textContent;
+				presenceData.state = document.querySelector(
+					".content-box .playlistTitle"
+				)?.textContent;
+				if (cover) {
+					presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+						".content-box .playlistImage"
+					).src;
+				}
 				presenceData.buttons = [
 					{
 						label: "View Page",
