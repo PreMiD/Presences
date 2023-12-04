@@ -292,19 +292,18 @@ presence.on("UpdateData", async () => {
 				let user = getElement(".home-header-sticky .tw-title");
 				if (user) {
 					const tab = getElement('a[aria-selected="true"] > div > div > p'),
-						profilePic = document
-							.querySelector<HTMLImageElement>(
-								".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
-							)
-							.src.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600");
+						profilePic =
+							document
+								.querySelector<HTMLImageElement>(
+									".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
+								)
+								?.src?.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600") ??
+							(logoArr[logo] || "twitch");
 					user += tab ? ` (${tab})` : "";
 
 					presenceData.details = strings.viewProfile;
 					presenceData.state = user;
-					if (pfp) {
-						presenceData.largeImageKey =
-							profilePic ?? (logoArr[logo] || "twitch");
-					}
+					if (pfp) presenceData.largeImageKey = profilePic;
 				}
 
 				if (path.includes("/team/")) {
@@ -439,33 +438,38 @@ presence.on("UpdateData", async () => {
 				if (showLive && live) {
 					//* Live
 					const title = getElement(".channel-info-content h2"),
-						streamer = getElement(".channel-info-content h1"),
+						streamer =
+							document.querySelector(".channel-info-content h1")?.textContent ??
+							document
+								.querySelector('[class*="metadata-layout__support"]')
+								?.querySelector("a")?.textContent,
 						game =
 							getElement("a[data-a-target='stream-game-link']") ||
 							"Just Chatting",
-						profilePic = document
-							.querySelector<HTMLImageElement>(
-								".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
-							)
-							.src.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600");
-					if (title && streamer) {
-						presenceData.details = streamDetail
-							.replace("%title%", title)
-							.replace("%streamer%", streamer)
-							.replace("%game%", game);
-					}
-					if (title && streamer) {
-						presenceData.state = streamState
-							.replace("%title%", title)
-							.replace("%streamer%", streamer)
-							.replace("%game%", game);
-					}
+						profilePic =
+							document
+								.querySelector<HTMLImageElement>(
+									".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
+								)
+								?.src?.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600") ??
+							(logoArr[logo] || "twitch");
+					presenceData.details = streamDetail
+						.replace("%title%", title ?? "")
+						.replace("%streamer%", streamer ?? "")
+						.replace("%game%", game);
+
+					presenceData.state = streamState
+						.replace("%title%", title ?? "")
+						.replace("%streamer%", streamer ?? "")
+						.replace("%game%", game);
+
+					if (!presenceData.details)
+						presenceData.details = strings.watchingLive;
+
 					presenceData.smallImageKey = "live";
 					presenceData.smallImageText = strings.live;
-					if (pfp) {
-						presenceData.largeImageKey =
-							profilePic ?? (logoArr[logo] || "twitch");
-					}
+					if (pfp) presenceData.largeImageKey = profilePic;
+
 					presenceData.buttons = [
 						{
 							label: strings.watchStream,
@@ -479,33 +483,33 @@ presence.on("UpdateData", async () => {
 					const title = getElement(".channel-info-content h2")
 							.split("•")
 							.shift(),
-						uploader = getElement(".channel-info-content h1"),
+						uploader =
+							document.querySelector(".channel-info-content h1")?.textContent ??
+							document
+								.querySelector('[class*="metadata-layout__support"]')
+								?.querySelector("a")?.textContent,
 						game =
 							getElement("a[data-a-target='stream-game-link']") ||
 							"Just Chatting",
-						profilePic = document
-							.querySelector<HTMLImageElement>(
-								".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
-							)
-							.src.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600");
-					if (title && uploader) {
-						presenceData.details = vidDetail
-							.replace("%title%", title)
-							.replace("%uploader%", uploader)
-							.replace("%game%", game);
-					}
-					if (title && uploader) {
-						presenceData.state = vidState
-							.replace("%title%", title)
-							.replace("%uploader%", uploader)
-							.replace("%game%", game);
-					}
+						profilePic =
+							document
+								.querySelector<HTMLImageElement>(
+									".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
+								)
+								?.src?.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600") ??
+							(logoArr[logo] || "twitch");
+					presenceData.details = vidDetail
+						.replace("%title%", title ?? "")
+						.replace("%uploader%", uploader ?? "")
+						.replace("%game%", game);
+					presenceData.state = vidState
+						.replace("%title%", title ?? "")
+						.replace("%uploader%", uploader ?? "")
+						.replace("%game%", game);
 					presenceData.smallImageKey = Assets.Play;
 					presenceData.smallImageText = strings.play;
-					if (pfp) {
-						presenceData.largeImageKey =
-							profilePic ?? (logoArr[logo] || "twitch");
-					}
+					if (pfp) presenceData.largeImageKey = profilePic;
+
 					const [startTimestamp, endTimestamp] =
 						presence.getTimestampsfromMedia(video);
 					presenceData.startTimestamp = startTimestamp;
