@@ -9,7 +9,7 @@ interface Route extends Functionlize<Partial<PresenceData>> {
 }
 
 const enum Assets {
-	Logo = "https://i.imgur.com/P4XquqE.png",
+	Logo = "https://i.imgur.com/4EddbBx.png",
 }
 
 enum Settings {
@@ -17,12 +17,11 @@ enum Settings {
 	BUTTONS = "buttons",
 }
 const { href } = document.location,
-presence = new Presence({
+	presence = new Presence({
 		clientId: "1179996601327026227",
 	}),
 	startTimestamp: number = Math.floor(Date.now() / 1000),
 	router = ({ path }: { path: string; presenceData: PresenceData }): Route => {
-		
 		const routes: Route[] = [
 			{
 				path: /^\/$/,
@@ -48,7 +47,7 @@ presence = new Presence({
 				},
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
-				buttons: () => [{ label: "Profile Link", url: href }],
+				buttons: () => [{ label: "View Profile", url: href }],
 			},
 			{
 				path: /^\/learn\/(?!.*\bhome\b).*\/$/,
@@ -67,9 +66,7 @@ presence = new Presence({
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/"),
 					},
 				],
 			},
@@ -90,9 +87,7 @@ presence = new Presence({
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/"),
 					},
 				],
 			},
@@ -101,10 +96,7 @@ presence = new Presence({
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Learning",
 				state: () => {
-					return `Viewing Course ${href
-						.split("/")[6]
-						.split("-")
-						.join(" ")}`;
+					return `Viewing Course ${href.split("/")[6].split("-").join(" ")}`;
 				},
 				details: () => {
 					return href.split("/")[4].split("-").join(" ");
@@ -112,9 +104,7 @@ presence = new Presence({
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/"),
 					},
 				],
 			},
@@ -131,9 +121,7 @@ presence = new Presence({
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/"),
 					},
 				],
 			},
@@ -150,9 +138,7 @@ presence = new Presence({
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/"),
 					},
 				],
 			},
@@ -169,9 +155,7 @@ presence = new Presence({
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/"),
 					},
 				],
 			},
@@ -192,9 +176,7 @@ presence = new Presence({
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/"),
 					},
 				],
 			},
@@ -211,9 +193,7 @@ presence = new Presence({
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/"),
 					},
 				],
 			},
@@ -230,9 +210,7 @@ presence = new Presence({
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/"),
 					},
 				],
 			},
@@ -252,9 +230,7 @@ presence = new Presence({
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/"),
 					},
 				],
 			},
@@ -263,32 +239,28 @@ presence = new Presence({
 				path: /^\/learn\/.*\/?$/,
 				smallImageKey: () => Assets.Viewing,
 				smallImageText: () => "Viewing",
-				details: () => `
-				Viewing a Course`,
+				details: () => "Viewing a Course",
 				state: () => {
 					return document.querySelector("[data-e2e='hero-title']").textContent;
 				},
-				buttons: () => [{ label: "Course Link", url: href }],
+				buttons: () => [{ label: "View Course", url: href }],
 			},
 			{
 				path: /^\/specializations\/.+$/,
 				smallImageKey: () => Assets.Viewing,
 				smallImageText: () => "Viewing",
-				details: () => `
-				Viewing a Course`,
+				details: () => "Viewing a Course",
 				state: () => {
 					return document.querySelector("[data-e2e='hero-title']").textContent;
 				},
-				buttons: () => [{ label: "Course Link", url: href }],
+				buttons: () => [{ label: "View Course", url: href }],
 			},
 			{
 				path: /^\/search*/,
 				smallImageKey: () => Assets.Search,
 				smallImageText: () => "Searching",
 				details: () => {
-					return `searching for "${new URL(
-						href
-					).searchParams.get("query")}"`;
+					return `Searching for "${new URL(href).searchParams.get("query")}"`;
 				},
 
 				state: () => {
@@ -298,7 +270,7 @@ presence = new Presence({
 							.textContent.split(" ")[0]
 					} results`;
 				},
-				buttons: () => [{ label: "Results", url: href }],
+				buttons: () => [{ label: "View Results", url: href }],
 			},
 			{
 				path: /^\/+.*$/,
@@ -329,10 +301,7 @@ presence.on("UpdateData", async () => {
 
 	const route = router({
 		presenceData,
-		path: location.href.replace(
-			`https://${location.hostname}`,
-			""
-		),
+		path: location.href.replace(`https://${location.hostname}`, ""),
 	});
 
 	if (!route) return presence.setActivity(presenceData);
@@ -346,5 +315,5 @@ presence.on("UpdateData", async () => {
 	if (showTimestamp && route.endTimestamp)
 		presenceData.endTimestamp = route.endTimestamp();
 
-	presence.setActivity(presenceData, route.playback ? route.playback() : false);
+	presence.setActivity(presenceData);
 });
