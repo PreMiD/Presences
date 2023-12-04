@@ -4,8 +4,6 @@ type Functionlize<T> = {
 
 interface Route extends Functionlize<Partial<PresenceData>> {
 	path: RegExp;
-	playback?(): boolean;
-	run?(): PresenceData;
 }
 
 const enum Assets {
