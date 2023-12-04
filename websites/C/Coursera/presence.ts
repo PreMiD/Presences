@@ -89,9 +89,7 @@ const { href } = document.location,
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/"),
 					},
 				],
 			},
@@ -108,9 +106,7 @@ const { href } = document.location,
 				buttons: () => [
 					{
 						label: "View Course",
-						url: (() => {
-							return href.split("/").slice(0, 5).join("/");
-						})(),
+						url: href.split("/").slice(0, 5).join("/"),
 					},
 				],
 			},
@@ -259,30 +255,28 @@ const { href } = document.location,
 				path: /^\/learn\/.*\/?$/,
 				smallImageKey: () => Assets.Viewing,
 				smallImageText: () => "Viewing",
-				details: () => `
-				Viewing a Course`,
+				details: () => "Viewing a Course",
 				state: () => {
 					return document.querySelector("[data-e2e='hero-title']").textContent;
 				},
-				buttons: () => [{ label: "Course Link", url: href }],
+				buttons: () => [{ label: "View Course", url: href }],
 			},
 			{
 				path: /^\/specializations\/.+$/,
 				smallImageKey: () => Assets.Viewing,
 				smallImageText: () => "Viewing",
-				details: () => `
-				Viewing a Course`,
+				details: () => "Viewing a Course",
 				state: () => {
 					return document.querySelector("[data-e2e='hero-title']").textContent;
 				},
-				buttons: () => [{ label: "Course Link", url: href }],
+				buttons: () => [{ label: "View Course", url: href }],
 			},
 			{
 				path: /^\/search*/,
 				smallImageKey: () => Assets.Search,
 				smallImageText: () => "Searching",
 				details: () => {
-					return `searching for "${new URL(href).searchParams.get("query")}"`;
+					return `Searching for "${new URL(href).searchParams.get("query")}"`;
 				},
 
 				state: () => {
@@ -292,7 +286,7 @@ const { href } = document.location,
 							.textContent.split(" ")[0]
 					} results`;
 				},
-				buttons: () => [{ label: "Results", url: href }],
+				buttons: () => [{ label: "View Results", url: href }],
 			},
 			{
 				path: /^\/+.*$/,
@@ -323,7 +317,7 @@ presence.on("UpdateData", async () => {
 
 	const route = router({
 		presenceData,
-		path: location.href.replace(`https://${location.hostname}`, ""),
+		path: document.location.href.replace(`https://${location.hostname}`, ""),
 	});
 
 	if (!route) return presence.setActivity(presenceData);
@@ -337,5 +331,5 @@ presence.on("UpdateData", async () => {
 	if (showTimestamp && route.endTimestamp)
 		presenceData.endTimestamp = route.endTimestamp();
 
-	presence.setActivity(presenceData, route.playback ? route.playback() : false);
+	presence.setActivity(presenceData);
 });
