@@ -396,15 +396,11 @@ presence.on("UpdateData", async () => {
 				if (mapSmallImages !== 3) {
 					presenceData.smallImageText = `${
 						mapSmallImages === 0 || mapSmallImages === 1
-							? document.querySelector<HTMLAnchorElement>(
-									".diff-switch .primary > .icon > div"
-							  )?.title
+							? previewURL.searchParams.get("mode")
 							: ""
 					} ${
 						mapSmallImages === 0 || mapSmallImages === 2
-							? document.querySelector(
-									".diff-switch .primary > span:nth-of-type(2)"
-							  )?.textContent
+							? previewURL.searchParams.get("difficulty").replace("Plus", "+")
 							: ""
 					}`;
 					presenceData.smallImageKey =
