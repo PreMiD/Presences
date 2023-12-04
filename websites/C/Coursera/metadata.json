@@ -15,7 +15,9 @@
 	"color": "#294cff",
 	"category": "other",
 	"tags": [
-		"learning" , "course" , "education"
+		"learning",
+		"course",
+		"education"
 	],
 	"settings": [
 		{
@@ -31,5 +33,4 @@
 			"value": true
 		}
 	]
-	
 }
