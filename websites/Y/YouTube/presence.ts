@@ -101,9 +101,9 @@ presence.on("UpdateData", async () => {
 			);
 		let playlistQueue = "";
 		if (playlistTitle) {
-			if (playlistQueueElements.length > 1) {
+			if (playlistQueueElements.length > 1)
 				playlistQueue = `${playlistQueueElements[0].textContent} / ${playlistQueueElements[2].textContent}`;
-			} else {
+			else {
 				playlistQueue = document.querySelector<HTMLSpanElement>(
 					"#content #publisher-container > div > span"
 				).textContent;
