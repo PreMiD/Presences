@@ -16,8 +16,8 @@ enum Settings {
 	TIMESTAMP = "timestamp",
 	BUTTONS = "buttons",
 }
-const { href } = document.location;
-const presence = new Presence({
+const { href } = document.location,
+presence = new Presence({
 		clientId: "1179996601327026227",
 	}),
 	startTimestamp: number = Math.floor(Date.now() / 1000),
