@@ -14,7 +14,7 @@ enum Settings {
 	TIMESTAMP = "timestamp",
 	BUTTONS = "buttons",
 }
-const { href } = document.location,
+const { href, hostname } = document.location,
 	presence = new Presence({
 		clientId: "1179996601327026227",
 	}),
