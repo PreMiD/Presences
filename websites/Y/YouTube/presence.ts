@@ -96,17 +96,19 @@ presence.on("UpdateData", async () => {
 						"#content #header-description > h3:nth-child(1) > yt-formatted-string > a"
 					)
 					?.textContent.trim() ?? "",
-			playlistQueue = playlistTitle
-				? `${
-						document.querySelector(
-							"#content #publisher-container > div > yt-formatted-string > span:nth-child(1)"
-						).textContent
-				  } / ${
-						document.querySelector(
-							"#content #publisher-container > div > yt-formatted-string > span:nth-child(3)"
-						).textContent
-				  }`
-				: "";
+			playlistQueueElements = document.querySelectorAll<HTMLSpanElement>(
+				"#content #publisher-container > div > yt-formatted-string > span"
+			);
+		let playlistQueue = "";
+		if (playlistTitle) {
+			if (playlistQueueElements.length > 1) {
+				playlistQueue = `${playlistQueueElements[0].textContent} / ${playlistQueueElements[2].textContent}`;
+			} else {
+				playlistQueue = document.querySelector<HTMLSpanElement>(
+					"#content #publisher-container > div > span"
+				).textContent;
+			}
+		}
 
 		if (logo === LogoMode.Channel) {
 			pfp = document
