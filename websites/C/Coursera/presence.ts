@@ -47,7 +47,7 @@ const { href } = document.location,
 				},
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
-				buttons: () => [{ label: "Profile Link", url: href }],
+				buttons: () => [{ label: "View Profile", url: href }],
 			},
 			{
 				path: /^\/learn\/(?!.*\bhome\b).*\/$/,
