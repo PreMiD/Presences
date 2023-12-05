@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 
 	let wordCount = 0;
 	for (const element of document.querySelectorAll(
-		'[class*="flex flex-col items-center"] > *'
+		'[data-message-author-role="user"],[data-message-author-role="assistant"]'
 	)) {
 		const text = element.textContent
 			.replace(/(, )|(,\n)|(,)|([.] )|([.])/gm, " ")
@@ -33,10 +33,9 @@ presence.on("UpdateData", async () => {
 			: "Talking with AI about something";
 		presenceData.state = isTalking
 			? "AI is responding..."
-			: `asked (${
-					Number(document.querySelectorAll('[class*="group w-full"]').length) /
-					2
-			  }) times | (${wordCount}) words`;
+			: `asked (${Number(
+					document.querySelectorAll('[data-message-author-role="user"]').length
+			  )}) times | (${wordCount}) words`;
 		presenceData.smallImageKey = isTalking ? Assets.Talking : null;
 	} else {
 		presenceData.details = "Start new conversation";
