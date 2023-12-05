@@ -391,22 +391,18 @@ presence.on("UpdateData", async () => {
 					document.querySelector(".title .name")?.textContent;
 				presenceData.state =
 					document.querySelector(".level-author")?.textContent;
-				presenceData.smallImageText = `${
-					mapSmallImages === 1
-						? document.querySelector<HTMLAnchorElement>(
-								".diff-switch .primary > .icon > div"
-						  )?.title
-						: ""
-				} ${
-					mapSmallImages === 2
-						? document.querySelector(
-								".diff-switch .primary > span:nth-of-type(2)"
-						  )?.textContent
-						: ""
-				}`;
 				if (presenceData.smallImageText === "")
 					delete presenceData.smallImageText;
 				if (mapSmallImages !== 3) {
+					presenceData.smallImageText = `${
+						mapSmallImages === 0 || mapSmallImages === 1
+							? previewURL.searchParams.get("mode")
+							: ""
+					} ${
+						mapSmallImages === 0 || mapSmallImages === 2
+							? previewURL.searchParams.get("difficulty").replace("Plus", "+")
+							: ""
+					}`;
 					presenceData.smallImageKey =
 						OtherAssets[
 							`${
@@ -421,7 +417,7 @@ presence.on("UpdateData", async () => {
 						] ??
 						OtherAssets[
 							`Unknown${
-								mapSmallImages === 2
+								mapSmallImages === 0 || mapSmallImages === 2
 									? previewURL.searchParams.get("difficulty")
 									: ""
 							}` as keyof typeof OtherAssets
