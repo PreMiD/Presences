@@ -27,7 +27,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("privacy"),
 		]),
 		{ mediaSession } = navigator,
-		watchID = href.match(/v=([^&#]{5,})/)?.[1] ??
+		watchID =
+			href.match(/v=([^&#]{5,})/)?.[1] ??
 			document
 				.querySelector<HTMLAnchorElement>("a.ytp-title-link.yt-uix-sessionlink")
 				?.href.match(/v=([^&#]{5,})/)?.[1],
