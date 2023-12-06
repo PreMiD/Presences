@@ -42,7 +42,7 @@ const presence = new Presence({
 			],
 		},
 		"/search": {
-			details: "Searching the wiki via the Search Engine",
+			details: "Searching the wiki",
 			state: "Searching...",
 			buttons: [
 				{
@@ -126,6 +126,32 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = Assets.Log;
 				presenceData.details = "Viewing The Blog";
 				presenceData.buttons = [{ label: "View Blog", url: href }];
+			}
+			break;
+		case "sdk":
+			if (pathSplit[1]) {
+				presenceData.smallImageKey =
+					document.querySelector<HTMLImageElement>("#sdk-img")?.src;
+				presenceData.smallImageText =
+					document.querySelector<HTMLImageElement>("#sdk-img")?.alt;
+				presenceData.details = `Viewing the ${
+					document.querySelector(".vw-article-title")?.textContent
+				}`;
+				presenceData.state = `Made on ${
+					document.querySelector("time")?.textContent
+				}`;
+				presenceData.buttons = [
+					{ label: "View SDK", url: href },
+					{
+						label: "Source Code",
+						url: document.querySelector<HTMLDivElement>("#sdk-github")
+							?.textContent,
+					},
+				];
+			} else {
+				presenceData.largeImageKey = Assets.Cog;
+				presenceData.details = "Viewing The SDK's";
+				presenceData.buttons = [{ label: "View SDK's", url: href }];
 			}
 			break;
 	}
