@@ -7,12 +7,16 @@ import youtubeEmbedResolver from "./video_sources/embed";
 import youtubeMoviesResolver from "./video_sources/movies";
 import youtubeTVResolver from "./video_sources/tv";
 import youtubeResolver from "./video_sources/default";
-import { Resolver, adjustTimeError } from "./util";
+import {
+	Resolver,
+	adjustTimeError,
+	presence,
+	strings,
+	getSetting,
+	checkStringLanguage,
+} from "./util";
 
-const presence = new Presence({
-		clientId: "463097721130188830",
-	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 enum YouTubeAssets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/logo.png",
@@ -26,71 +30,11 @@ enum LogoMode {
 	Channel = 2,
 }
 
-async function getStrings() {
-	return presence.getStrings(
-		{
-			play: "general.playing",
-			pause: "general.paused",
-			live: "general.live",
-			ad: "youtube.ad",
-			search: "general.searchFor",
-			browsingTypeVideos: "youtube.browsingTypeVideos",
-			browseShorts: "youtube.browsingShorts",
-			browsingVid: "youtube.browsingVideos",
-			browsingPlayl: "youtube.browsingPlaylists",
-			viewCPost: "youtube.viewingCommunityPost",
-			ofChannel: "youtube.ofChannel",
-			readChannel: "youtube.readingChannel",
-			searchChannel: "youtube.searchChannel",
-			trending: "youtube.trending",
-			browsingThrough: "youtube.browsingThrough",
-			subscriptions: "youtube.subscriptions",
-			library: "youtube.library",
-			history: "youtube.history",
-			purchases: "youtube.purchases",
-			reports: "youtube.reportHistory",
-			upload: "youtube.upload",
-			viewChannel: "general.viewChannel",
-			viewAllPlayL: "youtube.viewAllPlaylist",
-			viewEvent: "youtube.viewLiveEvents",
-			viewLiveDash: "youtube.viewLiveDashboard",
-			viewAudio: "youtube.viewAudioLibrary",
-			studioVid: "youtube.studio.viewContent",
-			studioEdit: "youtube.studio.editVideo",
-			studioAnaly: "youtube.studio.videoAnalytics",
-			studioComments: "youtube.studio.videoComments",
-			studioTranslate: "youtube.studio.videoTranslations",
-			studioTheir: "youtube.studio.viewTheir",
-			studioCAnaly: "youtube.studio.channelAnalytics",
-			studioCComments: "youtube.studio.channelComments",
-			studioCTranslate: "youtube.studio.channelTranslations",
-			studioArtist: "youtube.studio.artistPage",
-			studioDash: "youtube.studio.dashboard",
-			viewPlaylist: "general.viewPlaylist",
-			readAbout: "general.readingAbout",
-			viewAccount: "general.viewAccount",
-			viewHome: "general.viewHome",
-			watchVid: "general.watchingVid",
-			watchLive: "general.watchingLive",
-			browsing: "general.browsing",
-			searchSomething: "general.searchSomething",
-			watchStreamButton: "general.buttonWatchStream",
-			watchVideoButton: "general.buttonWatchVideo",
-			viewChannelButton: "general.buttonViewChannel",
-			videos: "youtube.videos",
-		},
-		await presence.getSetting<string>("lang").catch(() => "en")
-	);
-}
-
 const nullResolver: Resolver = {
 	isActive: () => true,
 	getTitle: () => document.title,
 	getUploader: () => "",
 };
-
-let strings: Awaited<ReturnType<typeof getStrings>>,
-	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
 	const [
@@ -102,23 +46,20 @@ presence.on("UpdateData", async () => {
 			channelPic,
 			logo,
 			buttons,
-		] = await Promise.all([
-			presence.getSetting<string>("lang").catch(() => "en"),
-			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("time"),
-			presence.getSetting<string>("vidDetail"),
-			presence.getSetting<string>("vidState"),
-			presence.getSetting<boolean>("channelPic"),
-			presence.getSetting<number>("logo"),
-			presence.getSetting<boolean>("buttons"),
-		]),
+		] = [
+			getSetting<string>("lang", "en"),
+			getSetting<boolean>("privacy", true),
+			getSetting<boolean>("time", true),
+			getSetting<string>("vidDetail", "%title%"),
+			getSetting<string>("vidState", "%uploader%"),
+			getSetting<boolean>("channelPic", false),
+			getSetting<number>("logo", 0),
+			getSetting<boolean>("buttons", true),
+		],
 		{ pathname, hostname, search, href } = document.location;
 
 	// Update strings if user selected another language.
-	if (oldLang !== newLang || !strings) {
-		oldLang = newLang;
-		strings = await getStrings();
-	}
+	if (!checkStringLanguage(newLang)) return;
 
 	// If there is a vid playing
 	const video = Array.from(
@@ -155,17 +96,19 @@ presence.on("UpdateData", async () => {
 						"#content #header-description > h3:nth-child(1) > yt-formatted-string > a"
 					)
 					?.textContent.trim() ?? "",
-			playlistQueue = playlistTitle
-				? `${
-						document.querySelector(
-							"#content #publisher-container > div > yt-formatted-string > span:nth-child(1)"
-						).textContent
-				  } / ${
-						document.querySelector(
-							"#content #publisher-container > div > yt-formatted-string > span:nth-child(3)"
-						).textContent
-				  }`
-				: "";
+			playlistQueueElements = document.querySelectorAll<HTMLSpanElement>(
+				"#content #publisher-container > div > yt-formatted-string > span"
+			);
+		let playlistQueue = "";
+		if (playlistTitle) {
+			if (playlistQueueElements.length > 1)
+				playlistQueue = `${playlistQueueElements[0].textContent} / ${playlistQueueElements[2].textContent}`;
+			else {
+				playlistQueue = document.querySelector<HTMLSpanElement>(
+					"#content #publisher-container > div > span"
+				).textContent;
+			}
+		}
 
 		if (logo === LogoMode.Channel) {
 			pfp = document

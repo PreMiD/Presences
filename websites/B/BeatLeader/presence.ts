@@ -12,7 +12,7 @@ const presence = new Presence({
 		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/79.png", //Poodleader
 		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/80.png", //GladdePaling
 		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/81.gif", //EarthDay
-		"https://i.imgur.com" + "/Kf8bXNc.gif", //Christmas
+		`https://i.imgur.com${"/Kf8bXNc.gif"}`, //Christmas
 	];
 
 const enum Assets {
@@ -391,22 +391,18 @@ presence.on("UpdateData", async () => {
 					document.querySelector(".title .name")?.textContent;
 				presenceData.state =
 					document.querySelector(".level-author")?.textContent;
-				presenceData.smallImageText = `${
-					mapSmallImages === 1
-						? document.querySelector<HTMLAnchorElement>(
-								".diff-switch .primary > .icon > div"
-						  )?.title
-						: ""
-				} ${
-					mapSmallImages === 2
-						? document.querySelector(
-								".diff-switch .primary > span:nth-of-type(2)"
-						  )?.textContent
-						: ""
-				}`;
 				if (presenceData.smallImageText === "")
 					delete presenceData.smallImageText;
 				if (mapSmallImages !== 3) {
+					presenceData.smallImageText = `${
+						mapSmallImages === 0 || mapSmallImages === 1
+							? previewURL.searchParams.get("mode")
+							: ""
+					} ${
+						mapSmallImages === 0 || mapSmallImages === 2
+							? previewURL.searchParams.get("difficulty").replace("Plus", "+")
+							: ""
+					}`;
 					presenceData.smallImageKey =
 						OtherAssets[
 							`${
@@ -421,7 +417,7 @@ presence.on("UpdateData", async () => {
 						] ??
 						OtherAssets[
 							`Unknown${
-								mapSmallImages === 2
+								mapSmallImages === 0 || mapSmallImages === 2
 									? previewURL.searchParams.get("difficulty")
 									: ""
 							}` as keyof typeof OtherAssets
@@ -454,7 +450,7 @@ presence.on("UpdateData", async () => {
 				];
 				if (cover) {
 					presenceData.largeImageKey =
-						document.querySelector<HTMLImageElement>("section > img")?.src;
+						document.querySelector<HTMLImageElement>(".event > img")?.src;
 				}
 				break;
 			}
@@ -475,8 +471,14 @@ presence.on("UpdateData", async () => {
 			}
 			case "playlist": {
 				presenceData.details = "Viewing playlist";
-				presenceData.state =
-					document.querySelector(".playlistTitle")?.textContent;
+				presenceData.state = document.querySelector(
+					".content-box .playlistTitle"
+				)?.textContent;
+				if (cover) {
+					presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+						".content-box .playlistImage"
+					).src;
+				}
 				presenceData.buttons = [
 					{
 						label: "View Page",
