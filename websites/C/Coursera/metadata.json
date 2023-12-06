@@ -9,9 +9,9 @@
 		"en": "Coursera is a global online learning platform that offers anyone, anywhere, access to online courses and degrees from leading universities and companies."
 	},
 	"url": "www.coursera.org",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/4EddbBx.png",
-	"thumbnail": "https://i.imgur.com/Sn88jea.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Coursera/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Coursera/assets/thumbnail.png",
 	"color": "#294cff",
 	"category": "other",
 	"tags": [

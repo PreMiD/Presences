@@ -7,7 +7,7 @@ interface Route extends Functionlize<Partial<PresenceData>> {
 }
 
 const enum Assets {
-	Logo = "https://i.imgur.com/4EddbBx.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Coursera/assets/logo.png",
 }
 
 enum Settings {
