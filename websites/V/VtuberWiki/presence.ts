@@ -105,10 +105,23 @@ presence.on("UpdateData", async () => {
 				case "guides":
 					if (pathSplit[2]) {
 						presenceData.largeImageKey = Assets.Book;
+						presenceData.smallImageKey = Assets.Logo;
 						presenceData.details = "Viewing Guides";
 						presenceData.state = `${pageTitle}`;
 						presenceData.buttons = [{ label: "View Guide", url: href }];
 					} else presenceData.details = "Viewing All The Guides";
+					break;
+				case "agencies":
+					if (pathSplit[2]) {
+						presenceData.largeImageKey = `https://vtubers.wiki/agencies/${pathSplit[2]}/logo.png`;
+						presenceData.smallImageKey = Assets.Logo;
+						presenceData.details = "Viewing a Vtuber Agency";
+						presenceData.state = `${document
+							.querySelector(".vw-article-title")
+							.textContent.replace("Agency •", "")
+							.trim()}`;
+						presenceData.buttons = [{ label: "View Agency", url: href }];
+					} else presenceData.details = "Viewing All The Agencies";
 					break;
 				default:
 					presenceData.details = "Viewing The wiki";
