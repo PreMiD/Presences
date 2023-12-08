@@ -1,26 +1,42 @@
+enum PresenceClients {
+	X = "802958757909889054",
+	Twitter = "1172850898624581652",
+}
+
 let presence = new Presence({
-		clientId: "802958757909889054",
+		clientId: PresenceClients.X,
 	}),
 	twitterCheck: boolean;
 
-const capitalize = (text: string): string => {
-	return text
-		.replace(/[[{(_)}\]]/g, " ")
-		.split(" ")
-		.map(str => {
-			return str.charAt(0).toUpperCase() + str.slice(1);
-		})
-		.join(" ");
-};
+const presences: Record<string, Presence> = {
+		[PresenceClients.X]: presence,
+	},
+	capitalize = (text: string): string => {
+		return text
+			.replace(/[[{(_)}\]]/g, " ")
+			.split(" ")
+			.map(str => {
+				return str.charAt(0).toUpperCase() + str.slice(1);
+			})
+			.join(" ");
+	};
 
-function setClient(options: PresenceOptions) {
+function setClient(clientId: PresenceClients) {
 	if (Number(presence.getExtensionVersion()) < 224) {
 		//Extensions below this version, don't support this feature.
 		presence.hideSetting("twitter");
 		return;
 	}
 	presence.clearActivity();
-	presence = new Presence(options);
+	if (presences[clientId]) {
+		presence = presences[clientId];
+		presence.setActivity();
+	} else {
+		presence = new Presence({
+			clientId: clientId,
+		});
+		presences[clientId] = presence;
+	}
 }
 
 function stripText(element: HTMLElement, id = "None", log = true): string {
@@ -79,10 +95,8 @@ presence.on("UpdateData", async () => {
 
 	if (!twitterCheck || twitterCheck !== twitter) {
 		twitterCheck = twitter;
-		setClient({
-			clientId: "802958757909889054",
-		});
-	} else setClient({ clientId: "1172850898624581652" });
+		setClient(PresenceClients.X);
+	} else setClient(PresenceClients.Twitter);
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
@@ -98,30 +112,30 @@ presence.on("UpdateData", async () => {
 		elapsed = Math.floor(Date.now() / 1000);
 	}
 
-	title = (await strings).browsing;
+	title = strings.browsing;
 	info = capitalize(path.split("/")[1]);
 
 	if (path.match("/i/")) {
 		info = capitalize(path.split("/")[2]);
-		if (info === "Bookmarks") info = (await strings).bookmarks;
+		if (info === "Bookmarks") info = strings.bookmarks;
 	}
 
-	if (path.match("/notifications")) info = (await strings).notifs;
+	if (path.match("/notifications")) info = strings.notifs;
 
-	if (path.match("/explore")) info = (await strings).explore;
+	if (path.match("/explore")) info = strings.explore;
 
-	if (path.match("/tos")) info = (await strings).terms;
+	if (path.match("/tos")) info = strings.terms;
 
-	if (path.match("/privacy")) info = (await strings).privacy;
+	if (path.match("/privacy")) info = strings.privacy;
 
-	if (path.match("/settings/")) info = (await strings).settings;
+	if (path.match("/settings/")) info = strings.settings;
 
 	if (path.match("/search")) {
 		if (privacy) {
-			title = (await strings).searchSomething;
+			title = strings.searchSomething;
 			info = null;
 		} else {
-			title = (await strings).search;
+			title = strings.search;
 			info = document.querySelector("input").textContent;
 		}
 	}
@@ -131,21 +145,20 @@ presence.on("UpdateData", async () => {
 	)?.parentElement.children[1]?.children[1] as HTMLElement;
 
 	if (objHeader) {
-		title = (await strings).viewPosts;
+		title = strings.viewPosts;
 		info = `${
 			stripText(objHeader, "Object Header").split("@")[0]
 		} // ${capitalize(path.split("/")[1])}`;
 
-		if (path.match("/with_replies"))
-			title = (await strings).viewPostsWithReplies;
+		if (path.match("/with_replies")) title = strings.viewPostsWithReplies;
 
-		if (path.match("/media")) title = (await strings).viewMedia;
+		if (path.match("/media")) title = strings.viewMedia;
 
-		if (path.match("/likes")) title = (await strings).viewLiked;
+		if (path.match("/likes")) title = strings.viewLiked;
 	}
 
 	if (!objHeader && path.match("/status/")) {
-		title = (await strings).readPost;
+		title = strings.readPost;
 		[info] = stripText(
 			document.querySelectorAll(
 				`a[href='/${path.split("/")[1]}']`
@@ -155,7 +168,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (path.match("/messages") && objHeader) {
-		title = (await strings).viewDms;
+		title = strings.viewDms;
 		info = stripText(objHeader, "Object Header");
 		if (privacy) info = null;
 	}
@@ -170,7 +183,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (path.match("/lists") && etcHeader) {
-		title = (await strings).viewList;
+		title = strings.viewList;
 		info = capitalize(path.split("/")[1]);
 	}
 
