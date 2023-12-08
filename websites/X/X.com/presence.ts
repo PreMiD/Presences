@@ -27,9 +27,7 @@ function setClient(clientId: PresenceClients) {
 		presence = presences[clientId];
 		presence.setActivity();
 	} else {
-		presence = new Presence({
-			clientId: clientId,
-		});
+		presence = new Presence({ clientId });
 		presences[clientId] = presence;
 	}
 	presence.info("Switched presence client!");
