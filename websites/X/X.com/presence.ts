@@ -22,11 +22,6 @@ const presences: Record<string, Presence> = {
 	};
 
 function setClient(clientId: PresenceClients) {
-	if (Number(presence.getExtensionVersion()) < 224) {
-		//Extensions below this version, don't support this feature.
-		presence.hideSetting("twitter");
-		return;
-	}
 	presence.clearActivity();
 	if (presences[clientId]) {
 		presence = presences[clientId];
@@ -37,6 +32,7 @@ function setClient(clientId: PresenceClients) {
 		});
 		presences[clientId] = presence;
 	}
+	presence.info("Switched presence client!");
 }
 
 function stripText(element: HTMLElement, id = "None", log = true): string {
@@ -95,10 +91,13 @@ presence.on("UpdateData", async () => {
 		presence.getSetting<boolean>("twitter"),
 	]);
 
-	if (!twitterCheck || twitterCheck !== twitter) {
+	if (!twitter && twitterCheck !== twitter) {
 		twitterCheck = twitter;
 		setClient(PresenceClients.X);
-	} else setClient(PresenceClients.Twitter);
+	} else if (twitterCheck !== twitter) {
+		twitterCheck = twitter;
+		setClient(PresenceClients.Twitter);
+	}
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
