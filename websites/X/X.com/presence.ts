@@ -8,7 +8,7 @@ let presence = new Presence({
 	}),
 	twitterCheck: boolean;
 
-const presences: Record<string, Presence> = {
+const presences: { [key in PresenceClients]?: Presence } = {
 		[PresenceClients.X]: presence,
 	},
 	capitalize = (text: string): string => {
