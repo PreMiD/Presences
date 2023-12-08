@@ -1,3 +1,9 @@
+import {
+	deEsser,
+	giveArticle,
+	makeProgressBar,
+	updateUndefinedKeys,
+} from "./util";
 const presence = new Presence({
 		clientId: "1177802176140156998",
 	}),
@@ -60,6 +66,7 @@ const presence = new Presence({
 	},
 	settings = {
 		showTime: true,
+		showTimeOverwrite: false,
 		lastPath: null as string,
 	},
 	language = {
@@ -73,8 +80,12 @@ const presence = new Presence({
 		freezes: null as number,
 		lessonTimeStamp: null as number,
 		inLesson: false,
+		finishedLesson: null as string,
 	},
-	users: { username: string; displayName: string; img: string }[] = [];
+	storedUsers = localStorage.getItem("PMD-users-cache"),
+	users: { username: string; displayName: string; img: string }[] = storedUsers
+		? JSON.parse(storedUsers)
+		: [];
 
 let timeoutId: number;
 
@@ -82,81 +93,84 @@ function newTimeStamp() {
 	return Math.floor(Date.now() / 1000);
 }
 
-function makePossessive(name: string) {
-	return name.endsWith("s") ? `${name}'` : `${name}'s`;
-}
-
-function deEsser(word: string) {
-	return word.endsWith("s") ? word.slice(0, -1) : word;
-}
-
-function giveArticle(word: string) {
-	return `${
-		["a", "e", "i", "o", "u"].some(vowel =>
-			word.toLowerCase().startsWith(vowel)
-		)
-			? "an"
-			: "a"
-	} ${word}`;
-}
-
-function makeProgressBar(value: number, maxValue: number, size: number) {
-	const progressPercentage = Math.min(
-			100,
-			Math.max(0, Math.floor((value / maxValue) * 100))
-		),
-		completedSquares = Math.floor((progressPercentage * size) / 100);
-	return `${"🟩".repeat(completedSquares)}${"⬛".repeat(
-		size - completedSquares
-	)} ${progressPercentage}%`;
-}
-
-function handleLesson() {
-	user.inLesson = true;
+function handleLesson(_path: string | string[]) {
+	const progressBarElement =
+			document.querySelector('div[role="progressbar"]') ?? null,
+		PBProgression = Number(progressBarElement?.getAttribute("aria-valuenow"));
 	if (
+		!document.querySelector('[data-test="daily-quest-progress-slide"]') &&
+		PBProgression < 10
+	)
+		user.finishedLesson = null;
+	if (
+		user.finishedLesson ||
 		document.querySelector('[data-test="daily-quest-progress-slide"]') ||
 		document.querySelector('[data-test="session-complete-slide"]')
 	) {
-		const path = decodeURI(document.location.pathname).split("/");
+		const path = user.finishedLesson ? [user.finishedLesson] : _path;
+
 		switch (true) {
 			case path.includes("legendary"):
+				user.finishedLesson = "legendary";
 				presenceData.details = `Finished ${giveArticle(
 					language.name
 				)} legendary challenge`;
 				break;
-
+			case path.includes("placement"):
+				user.finishedLesson = "placement";
+				presenceData.details = `Finished ${language.name} placement test`;
+				break;
 			case path.includes("test"):
+				user.finishedLesson = "test";
 				presenceData.details = `Passed ${giveArticle(
 					language.name
 				)} jump ahead test`;
 				break;
-
+			case path.includes("mistakes-review"):
+				user.finishedLesson = "mistakes-review";
+				presenceData.details = "Finished reviewing past mistakes";
+				break;
+			case path.includes("finished-default"):
 			default:
+				user.finishedLesson = "finished-default";
 				presenceData.details = `Finished ${giveArticle(language.name)} lesson`;
 		}
-	} else {
-		const progressBarElement = document
-			.querySelector('div[style*="--web-ui_internal_progress-bar-value"]')
-			?.getAttribute("style");
-		if (progressBarElement) {
-			presenceData.state = `${makeProgressBar(
-				Number(
-					/--web-ui_internal_progress-bar-value: ([^;]+)%/.exec(
-						progressBarElement
-					)?.[1]
-				),
-				100,
-				presenceData.details.length / 3
-			)}`;
-		}
 	}
-	if (!user.lessonTimeStamp) user.lessonTimeStamp = newTimeStamp();
+
+	if (!user.finishedLesson && progressBarElement) {
+		user.inLesson = true;
+
+		presenceData.state = `${makeProgressBar(
+			PBProgression,
+			Number(progressBarElement?.getAttribute("aria-valuemax")),
+			presenceData.details.length / 3.2,
+			/--web-ui_progress-bar-color: rgb\(var\(--color-(\w+)\)\);/.exec(
+				progressBarElement?.getAttribute("style")
+			)?.[1]
+		)}`;
+		if (!user.lessonTimeStamp) user.lessonTimeStamp = newTimeStamp();
+		settings.showTimeOverwrite = false;
+	} else if (_path.includes("tips")) presenceData.state = "Viewing tips";
+	else if (!user.inLesson) {
+		settings.lastPath = "~";
+		presenceData.state = "Loading...";
+		settings.showTimeOverwrite = true;
+		user.finishedLesson = null;
+	}
 }
 
-async function updateData() {
+async function updateData(_inLesson = false) {
 	const state = JSON.parse(window.localStorage.getItem("duo.state")).state
 		.redux;
 	if (!state) return;
+
+	// resets lesson variables to default (updateData())
+	// if true is passed (updateData(true)), lesson variables stay untouched
+	if (!_inLesson) {
+		user.inLesson = false;
+		user.finishedLesson = null;
+		settings.showTimeOverwrite = true;
+	}
 
 	user.currentCourseId = state.user.currentCourseId ?? null;
 	if (user.currentCourseId) setLang(/_(.*?)_/.exec(user.currentCourseId)?.[1]);
@@ -181,9 +195,10 @@ function setLang(code: string) {
 		presenceData.smallImageText = `${language.name}`;
 	} else presenceData.smallImageKey = IMAGE.duoGlobe;
 }
-
+updateData();
 presence.on("UpdateData", async () => {
 	if (settings.lastPath === document.location.pathname) return;
+
 	const path = decodeURI(document.location.pathname).split("/");
 
 	delete presenceData.details;
@@ -192,20 +207,45 @@ presence.on("UpdateData", async () => {
 	delete presenceData.state;
 	delete presenceData.startTimestamp;
 
-	user.inLesson = false;
-
 	switch (path[1]) {
 		case "learn":
 			updateData();
 			presenceData.details = `Choosing ${giveArticle(language.name)} lesson`;
 			break;
+		case "characters":
+			updateData();
+			presenceData.details = `Viewing ${language.name} characters`;
+			break;
 
+		case "mistakes-review":
+			updateData(true);
+			presenceData.details = "Reviewing recent mistakes";
+			handleLesson(path);
+			break;
+		case "practice-hub":
+			if (path.includes("listen-up") || path.includes("listening-practice")) {
+				updateData(true);
+				presenceData.details = `Practicing Listening in ${language.name}`;
+				handleLesson(path);
+			} else {
+				updateData();
+				presenceData.details = "In practice hub";
+				switch (true) {
+					case path.includes("mistakes"):
+						presenceData.state = "Viewing mistakes";
+						break;
+					case path.includes("stories"):
+						presenceData.state = "Viewing stories";
+				}
+			}
+			break;
 		case "lesson":
 		case "practice":
-			updateData();
+		case "alphabets":
+			updateData(true);
 			switch (true) {
 				case path.includes("legendary"):
-					presenceData.details = `Doing ${giveArticle(
+					presenceData.details = `In ${giveArticle(
 						language.name
 					)} legendary challenge`;
 					break;
@@ -215,19 +255,25 @@ presence.on("UpdateData", async () => {
 						language.name
 					)} jump ahead test`;
 					break;
+				case path.includes("alphabets"):
+					if (path[3] === "tips") {
+						presenceData.details = "Viewing alphabet tips";
+						presenceData.state = `${language.name}`;
+					} else presenceData.details = `Learning ${path[3]} alphabet`;
+					break;
 
 				default:
 					presenceData.details = `Working on ${giveArticle(
 						language.name
 					)} lesson`;
 			}
-			handleLesson();
+			if (!path.includes("tips")) handleLesson(path);
 			break;
 
 		case "placement":
 			setLang(path[2]);
 			presenceData.details = `Taking ${language.name} placement test`;
-			handleLesson();
+			handleLesson(path);
 			break;
 
 		case "leaderboard":
@@ -252,40 +298,54 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Viewing ${language.name} course`;
 			break;
 
+		case "year-in-review":
+			presenceData.details = `Viewing ${path[2]} Year in Review`;
+			break;
 		case "profile":
 		case "u": {
 			const username = path[2],
 				displayName = document.querySelector(
 					'h1[data-test="profile-username"] span'
 				)?.textContent,
-				img =
-					document.querySelector<HTMLImageElement>(`img[alt="${displayName}"]`)
-						?.src ?? IMAGE.profileDuo,
-				existingUser = users.find(user => user.username === username);
-			if (!displayName) {
+				img = document.querySelector<HTMLImageElement>(
+					`img[alt="${displayName}"]`
+				)?.src,
+				i = users.findIndex(user => user.username === username);
+
+			if (i !== -1) {
+				updateUndefinedKeys(users[i], {
+					username,
+					displayName,
+					img,
+				});
+			} else {
+				users.push({ username, displayName, img });
+				if (users.length > 20) users.shift();
+			}
+
+			localStorage.setItem("PMD-users-cache", JSON.stringify(users));
+
+			if (!users[i]?.displayName) {
 				settings.lastPath = "~";
 				return;
 			}
 
-			if (!existingUser) {
-				users.push({ username, displayName, img });
-				if (users.length > 4) users.pop();
-			}
-			presenceData.details = `Viewing ${makePossessive(
-				existingUser?.displayName ?? displayName
-			)} ${path[3] ?? "profile"}`;
-			presenceData.smallImageKey = existingUser?.img ?? img;
+			presenceData.details = `${path[3] ? "On" : "Viewing"} ${
+				users[i]?.displayName ?? displayName
+			}'s profile`;
+			if (path[3]) presenceData.state = `Viewing ${path[3]}`;
+			presenceData.smallImageKey = users[i]?.img ?? img ?? IMAGE.profileDuo;
 			presenceData.smallImageText = path[1] === "u" ? displayName : username;
 			break;
 		}
 		case "settings":
-			presenceData.details = `Changing ${deEsser(path[2])} settings`;
+			presenceData.details = `In ${deEsser(path[2])} settings`;
 			presenceData.smallImageKey = IMAGE.duoTool;
 			break;
 	}
 
 	if (!user.inLesson) user.lessonTimeStamp = null;
-	if (settings.showTime)
+	if (settings.showTime && !settings.showTimeOverwrite)
 		presenceData.startTimestamp = user.lessonTimeStamp ?? timeStamp;
 
 	presence.setActivity(presenceData);
