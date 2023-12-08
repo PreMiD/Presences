@@ -199,5 +199,5 @@ presence.on("UpdateData", async () => {
 
 	if (time) presenceData.startTimestamp = elapsed;
 
-	presence.setActivity(presenceData, true);
+	presence.setActivity(presenceData);
 });
