@@ -107,32 +107,32 @@ presence.on("UpdateData", async () => {
 
 	let title: string, info: string;
 
-	const path = window.location.pathname;
+	const { pathname, href } = document.location;
 
-	if (oldUrl !== window.location.href) {
-		oldUrl = window.location.href;
+	if (oldUrl !== href) {
+		oldUrl = href;
 		elapsed = Math.floor(Date.now() / 1000);
 	}
 
 	title = strings.browsing;
-	info = capitalize(path.split("/")[1]);
+	info = capitalize(pathname.split("/")[1]);
 
-	if (path.match("/i/")) {
-		info = capitalize(path.split("/")[2]);
+	if (pathname.match("/i/")) {
+		info = capitalize(pathname.split("/")[2]);
 		if (info === "Bookmarks") info = strings.bookmarks;
 	}
 
-	if (path.match("/notifications")) info = strings.notifs;
+	if (pathname.match("/notifications")) info = strings.notifs;
 
-	if (path.match("/explore")) info = strings.explore;
+	if (pathname.match("/explore")) info = strings.explore;
 
-	if (path.match("/tos")) info = strings.terms;
+	if (pathname.match("/tos")) info = strings.terms;
 
-	if (path.match("/privacy")) info = strings.privacy;
+	if (pathname.match("/privacy")) info = strings.privacy;
 
-	if (path.match("/settings/")) info = strings.settings;
+	if (pathname.match("/settings/")) info = strings.settings;
 
-	if (path.match("/search")) {
+	if (pathname.match("/search")) {
 		if (privacy) {
 			title = strings.searchSomething;
 			info = null;
@@ -143,33 +143,33 @@ presence.on("UpdateData", async () => {
 	}
 
 	const objHeader = document.querySelector(
-		`a[href='/${document.location.pathname.split("/")[1]}/header_photo']`
+		`a[href='/${pathname.split("/")[1]}/header_photo']`
 	)?.parentElement.children[1]?.children[1] as HTMLElement;
 
 	if (objHeader) {
 		title = strings.viewPosts;
 		info = `${
 			stripText(objHeader, "Object Header").split("@")[0]
-		} // ${capitalize(path.split("/")[1])}`;
+		} // ${capitalize(pathname.split("/")[1])}`;
 
-		if (path.match("/with_replies")) title = strings.viewPostsWithReplies;
+		if (pathname.match("/with_replies")) title = strings.viewPostsWithReplies;
 
-		if (path.match("/media")) title = strings.viewMedia;
+		if (pathname.match("/media")) title = strings.viewMedia;
 
-		if (path.match("/likes")) title = strings.viewLiked;
+		if (pathname.match("/likes")) title = strings.viewLiked;
 	}
 
-	if (!objHeader && path.match("/status/")) {
+	if (!objHeader && pathname.match("/status/")) {
 		title = strings.readPost;
 		[info] = stripText(
-			document.querySelectorAll(
-				`a[href='/${path.split("/")[1]}']`
-			)[1] as HTMLElement,
+			document.querySelectorAll<HTMLAnchorElement>(
+				`a[href='/${pathname.split("/")[1]}']`
+			)[1],
 			"Post"
 		).split("@");
 	}
 
-	if (path.match("/messages") && objHeader) {
+	if (pathname.match("/messages") && objHeader) {
 		title = strings.viewDms;
 		info = stripText(objHeader, "Object Header");
 		if (privacy) info = null;
@@ -179,14 +179,14 @@ presence.on("UpdateData", async () => {
 		document.querySelectorAll("h2")
 	).find(c => c.parentElement.children[1]?.textContent.includes("@"));
 
-	if (path.match("/moments") && etcHeader) {
+	if (pathname.match("/moments") && etcHeader) {
 		title = "Browsing Moments...";
-		info = capitalize(path.split("/")[1]);
+		info = capitalize(pathname.split("/")[1]);
 	}
 
-	if (path.match("/lists") && etcHeader) {
+	if (pathname.match("/lists") && etcHeader) {
 		title = strings.viewList;
-		info = capitalize(path.split("/")[1]);
+		info = capitalize(pathname.split("/")[1]);
 	}
 
 	const presenceData: PresenceData = {
