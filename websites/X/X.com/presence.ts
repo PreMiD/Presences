@@ -88,10 +88,12 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	//* Update strings if user selected another language.
-	const newLang = await presence.getSetting<string>("lang").catch(() => "en"),
-		privacy = await presence.getSetting<boolean>("privacy"),
-		time = await presence.getSetting<boolean>("time"),
-		twitter = await presence.getSetting<boolean>("twitter");
+	const [newLang, privacy, time, twitter] = await Promise.all([
+		presence.getSetting<string>("lang").catch(() => "en"),
+		presence.getSetting<boolean>("privacy"),
+		presence.getSetting<boolean>("time"),
+		presence.getSetting<boolean>("twitter"),
+	]);
 
 	if (!twitterCheck || twitterCheck !== twitter) {
 		twitterCheck = twitter;
