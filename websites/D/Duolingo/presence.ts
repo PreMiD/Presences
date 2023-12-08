@@ -130,6 +130,15 @@ function handleLesson(_path: string | string[]) {
 				user.finishedLesson = "mistakes-review";
 				presenceData.details = "Finished reviewing past mistakes";
 				break;
+			case path.includes("unit-rewind"):
+				user.finishedLesson = "unit-rewind";
+				presenceData.details = "Finished reviewing old exercises";
+				break;
+			case path.includes("listen-up"):
+			case path.includes("listening-practice"):
+				user.finishedLesson = "listening-practice";
+				presenceData.details = `Finished ${language.name} listening exercises`;
+				break;
 			case path.includes("finished-default"):
 			default:
 				user.finishedLesson = "finished-default";
@@ -223,20 +232,28 @@ presence.on("UpdateData", async () => {
 			handleLesson(path);
 			break;
 		case "practice-hub":
-			if (path.includes("listen-up") || path.includes("listening-practice")) {
-				updateData(true);
-				presenceData.details = `Practicing Listening in ${language.name}`;
-				handleLesson(path);
-			} else {
-				updateData();
-				presenceData.details = "In practice hub";
-				switch (true) {
-					case path.includes("mistakes"):
-						presenceData.state = "Viewing mistakes";
-						break;
-					case path.includes("stories"):
-						presenceData.state = "Viewing stories";
-				}
+			switch (path[2]) {
+				case "unit-rewind":
+					updateData(true);
+					presenceData.details = "Reviewing old exercises";
+					handleLesson(path);
+					break;
+				case "listen-up":
+				case "listening-practice":
+					updateData(true);
+					presenceData.details = `Practicing Listening in ${language.name}`;
+					handleLesson(path);
+					break;
+				default:
+					updateData();
+					presenceData.details = "In practice hub";
+					switch (true) {
+						case path.includes("mistakes"):
+							presenceData.state = "Viewing mistakes";
+							break;
+						case path.includes("stories"):
+							presenceData.state = "Viewing stories";
+					}
 			}
 			break;
 		case "lesson":
