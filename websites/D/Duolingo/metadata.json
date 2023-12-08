@@ -8,14 +8,6 @@
 		{
 			"name": "TheSlowly",
 			"id": "505071508851523599"
-		},
-		{
-			"name": "narpi",
-			"id": "321665259842830336"
-		},
-		{
-			"name": "Luke",
-			"id": "279622919242514432"
 		}
 	],
 	"service": "Duolingo",
@@ -46,10 +38,10 @@
 	},
 	"url": "www.duolingo.com",
 	"regExp": "www\\.duolingo\\.(com|cn)",
-	"version": "3.0.1",
+	"version": "3.1.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/thumbnail.png",
-	"color": "#89E219",
+	"color": "#5dcd32",
 	"category": "other",
 	"tags": [
 		"education",
