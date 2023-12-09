@@ -8,11 +8,30 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://imgur.com/QCtoeEM.png",
 		},
 		{ pathname } = document.location;
-	presenceData.details = "Viewing Page:";
+	presenceData.details = "Viewing Home Page";
 
 	let title: HTMLElement, logo: HTMLElement;
 	presenceData.startTimestamp = browsingUnix;
-	if (document.querySelector(".css-1igwmid > b")) {
+
+	switch (pathname) {
+		case "/bot/add": {
+			presenceData.details = "Adding a new bot";
+			break;
+		}
+		case "/search": {
+			presenceData.details = "Searching for a new bot";
+			break;
+		}
+		case "/": {
+			presenceData.details = "Viewing Home Page";
+			break;
+		}
+	}
+
+	if (
+		pathname.startsWith("/bot/") &&
+		document.querySelector(".css-1igwmid > b")
+	) {
 		title = document.querySelector(".css-1igwmid > b");
 		logo = document.querySelector(
 			".chakra-stack > .chakra-stack > .chakra-stack > .chakra-avatar > img"
@@ -33,16 +52,6 @@ presence.on("UpdateData", async () => {
 		];
 	}
 
-	switch (pathname) {
-		case "/bot/add": {
-			presenceData.details = "Adding a new bot";
-			break;
-		}
-		case "/search": {
-			presenceData.details = "Searching for a new bot";
-			break;
-		}
-	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
