@@ -1,26 +1,36 @@
+enum PresenceClients {
+	X = "802958757909889054",
+	Twitter = "1172850898624581652",
+}
+
 let presence = new Presence({
-		clientId: "802958757909889054",
+		clientId: PresenceClients.X,
 	}),
 	twitterCheck: boolean;
 
-const capitalize = (text: string): string => {
-	return text
-		.replace(/[[{(_)}\]]/g, " ")
-		.split(" ")
-		.map(str => {
-			return str.charAt(0).toUpperCase() + str.slice(1);
-		})
-		.join(" ");
-};
+const presences: { [key in PresenceClients]?: Presence } = {
+		[PresenceClients.X]: presence,
+	},
+	capitalize = (text: string): string => {
+		return text
+			.replace(/[[{(_)}\]]/g, " ")
+			.split(" ")
+			.map(str => {
+				return str.charAt(0).toUpperCase() + str.slice(1);
+			})
+			.join(" ");
+	};
 
-function setClient(options: PresenceOptions) {
-	if (Number(presence.getExtensionVersion()) < 224) {
-		//Extensions below this version, don't support this feature.
-		presence.hideSetting("twitter");
-		return;
-	}
+function setClient(clientId: PresenceClients) {
 	presence.clearActivity();
-	presence = new Presence(options);
+	if (presences[clientId]) {
+		presence = presences[clientId];
+		presence.setActivity();
+	} else {
+		presence = new Presence({ clientId });
+		presences[clientId] = presence;
+	}
+	presence.info("Switched presence client!");
 }
 
 function stripText(element: HTMLElement, id = "None", log = true): string {
@@ -72,17 +82,20 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	//* Update strings if user selected another language.
-	const newLang = await presence.getSetting<string>("lang").catch(() => "en"),
-		privacy = await presence.getSetting<boolean>("privacy"),
-		time = await presence.getSetting<boolean>("time"),
-		twitter = await presence.getSetting<boolean>("twitter");
+	const [newLang, privacy, time, twitter] = await Promise.all([
+		presence.getSetting<string>("lang").catch(() => "en"),
+		presence.getSetting<boolean>("privacy"),
+		presence.getSetting<boolean>("time"),
+		presence.getSetting<boolean>("twitter"),
+	]);
 
-	if (!twitterCheck || twitterCheck !== twitter) {
+	if (!twitter && twitterCheck !== twitter) {
 		twitterCheck = twitter;
-		setClient({
-			clientId: "802958757909889054",
-		});
-	} else setClient({ clientId: "1172850898624581652" });
+		setClient(PresenceClients.X);
+	} else if (twitterCheck !== twitter) {
+		twitterCheck = twitter;
+		setClient(PresenceClients.Twitter);
+	}
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
@@ -91,71 +104,70 @@ presence.on("UpdateData", async () => {
 
 	let title: string, info: string;
 
-	const path = window.location.pathname;
+	const { pathname, href } = document.location;
 
-	if (oldUrl !== window.location.href) {
-		oldUrl = window.location.href;
+	if (oldUrl !== href) {
+		oldUrl = href;
 		elapsed = Math.floor(Date.now() / 1000);
 	}
 
-	title = (await strings).browsing;
-	info = capitalize(path.split("/")[1]);
+	title = strings.browsing;
+	info = capitalize(pathname.split("/")[1]);
 
-	if (path.match("/i/")) {
-		info = capitalize(path.split("/")[2]);
-		if (info === "Bookmarks") info = (await strings).bookmarks;
+	if (pathname.match("/i/")) {
+		info = capitalize(pathname.split("/")[2]);
+		if (info === "Bookmarks") info = strings.bookmarks;
 	}
 
-	if (path.match("/notifications")) info = (await strings).notifs;
+	if (pathname.match("/notifications")) info = strings.notifs;
 
-	if (path.match("/explore")) info = (await strings).explore;
+	if (pathname.match("/explore")) info = strings.explore;
 
-	if (path.match("/tos")) info = (await strings).terms;
+	if (pathname.match("/tos")) info = strings.terms;
 
-	if (path.match("/privacy")) info = (await strings).privacy;
+	if (pathname.match("/privacy")) info = strings.privacy;
 
-	if (path.match("/settings/")) info = (await strings).settings;
+	if (pathname.match("/settings/")) info = strings.settings;
 
-	if (path.match("/search")) {
+	if (pathname.match("/search")) {
 		if (privacy) {
-			title = (await strings).searchSomething;
+			title = strings.searchSomething;
 			info = null;
 		} else {
-			title = (await strings).search;
+			title = strings.search;
 			info = document.querySelector("input").textContent;
 		}
 	}
 
 	const objHeader = document.querySelector(
-		`a[href='/${document.location.pathname.split("/")[1]}/header_photo']`
+		`a[href='/${pathname.split("/")[1]}/header_photo']`
 	)?.parentElement.children[1]?.children[1] as HTMLElement;
 
 	if (objHeader) {
-		title = (await strings).viewPosts;
+		title = strings.viewPosts;
 		info = `${
 			stripText(objHeader, "Object Header").split("@")[0]
-		} // ${capitalize(path.split("/")[1])}`;
+		} // ${capitalize(pathname.split("/")[1])}`;
 
-		if (path.match("/with_replies"))
-			title = (await strings).viewPostsWithReplies;
+		if (pathname.match("/with_replies")) title = strings.viewPostsWithReplies;
 
-		if (path.match("/media")) title = (await strings).viewMedia;
+		if (pathname.match("/media")) title = strings.viewMedia;
 
-		if (path.match("/likes")) title = (await strings).viewLiked;
+		if (pathname.match("/likes")) title = strings.viewLiked;
 	}
 
-	if (!objHeader && path.match("/status/")) {
-		title = (await strings).readPost;
+	if (!objHeader && pathname.match("/status/")) {
+		title = strings.readPost;
 		[info] = stripText(
-			document.querySelectorAll(
-				`a[href='/${path.split("/")[1]}']`
-			)[1] as HTMLElement,
+			document.querySelectorAll<HTMLAnchorElement>(
+				`a[href='/${pathname.split("/")[1]}']`
+			)[1],
 			"Post"
 		).split("@");
 	}
 
-	if (path.match("/messages") && objHeader) {
-		title = (await strings).viewDms;
+	if (pathname.match("/messages") && objHeader) {
+		title = strings.viewDms;
 		info = stripText(objHeader, "Object Header");
 		if (privacy) info = null;
 	}
@@ -164,14 +176,14 @@ presence.on("UpdateData", async () => {
 		document.querySelectorAll("h2")
 	).find(c => c.parentElement.children[1]?.textContent.includes("@"));
 
-	if (path.match("/moments") && etcHeader) {
+	if (pathname.match("/moments") && etcHeader) {
 		title = "Browsing Moments...";
-		info = capitalize(path.split("/")[1]);
+		info = capitalize(pathname.split("/")[1]);
 	}
 
-	if (path.match("/lists") && etcHeader) {
-		title = (await strings).viewList;
-		info = capitalize(path.split("/")[1]);
+	if (pathname.match("/lists") && etcHeader) {
+		title = strings.viewList;
+		info = capitalize(pathname.split("/")[1]);
 	}
 
 	const presenceData: PresenceData = {
@@ -184,5 +196,5 @@ presence.on("UpdateData", async () => {
 
 	if (time) presenceData.startTimestamp = elapsed;
 
-	presence.setActivity(presenceData, true);
+	presence.setActivity(presenceData);
 });
