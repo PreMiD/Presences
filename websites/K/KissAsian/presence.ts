@@ -22,32 +22,35 @@ presence.on("UpdateData", async () => {
 
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing home page";
-	else if (document.location.pathname.includes("/Drama/")) {
-		const dramaTitle = document.querySelector(".barContent > div > .bigChar"),
-			videoTitle = document.querySelector(".heading > h3"),
-			selectEpisode = document.querySelector("#selectEpisode > [selected]");
-		if (dramaTitle) {
-			presenceData.details = "Viewing drama:";
-			presenceData.state = dramaTitle.textContent;
-			presenceData.smallImageKey = Assets.Reading;
-		} else if (!isNaN(video?.duration) && (videoTitle || selectEpisode)) {
+	else if (document.location.pathname.includes("/drama/")) {
+		const dramaTitle = document
+				.querySelector('[class="Animeinfo"]')
+				?.querySelector("a"),
+			selectEpisode = document
+				.querySelector("option[selected]")
+				.textContent.match(/Episode [0-9]*/gm);
+
+		if (!isNaN(video?.duration) && (dramaTitle || selectEpisode[0])) {
 			delete presenceData.startTimestamp;
-			if (videoTitle) {
-				[presenceData.details, presenceData.state] =
-					videoTitle.textContent.split(" » ");
+			if (dramaTitle) {
+				presenceData.details = dramaTitle?.textContent;
 			} else {
 				presenceData.details = document
 					.querySelector("#navsubbar > p > a")
 					.textContent.split("\n")[2]
 					.trim();
-				presenceData.state = selectEpisode.textContent.trim();
 			}
+			presenceData.state = selectEpisode[0];
 			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;
 			[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
 			if (video.paused) delete presenceData.endTimestamp;
+		} else if (dramaTitle) {
+			presenceData.details = "Viewing drama:";
+			presenceData.state = dramaTitle.textContent;
+			presenceData.smallImageKey = Assets.Reading;
 		}
 	} else if (document.location.pathname.includes("/DramaList")) {
 		presenceData.details = "Viewing drama list";
