@@ -184,11 +184,11 @@ presence.on("UpdateData", async () => {
 		document.readyState !== "complete" &&
 		document.querySelector('[class="loading-children-container"]') &&
 		document.location.pathname.includes("/watch/")
-	) {
+	)
 		return;
-	} else if (
+	else if (
 		!scriptPushed &&
-		document.readyState == "complete" &&
+		document.readyState === "complete" &&
 		!document.querySelector('[class="loading-children-container"]')
 	) {
 		scriptPushed = true;
