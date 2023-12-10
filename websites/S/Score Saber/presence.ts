@@ -1,7 +1,7 @@
 const presence = new Presence({
 		clientId: "833644176967991346",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000) - 80000;
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 enum OtherAssets {
 	"360DegreeEasy" = "https://i.imgur.com/OjCC0a2.png",
