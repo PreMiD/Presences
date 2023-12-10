@@ -78,9 +78,11 @@ const presence = new Presence({
 		streak: null as number,
 		xp: null as number,
 		freezes: null as number,
-		lessonTimeStamp: null as number,
-		inLesson: false,
-		finishedLesson: null as string,
+		lesson: {
+			timeStamp: null as number,
+			active: false,
+			finished: null as string,
+		},
 	},
 	storedUsers = localStorage.getItem("PMD-users-cache"),
 	users: { username: string; displayName: string; img: string }[] = storedUsers
@@ -94,60 +96,59 @@ function newTimeStamp() {
 }
 
 function handleLesson(_path: string | string[]) {
-	const progressBarElement =
-			document.querySelector('div[role="progressbar"]') ?? null,
+	const progressBarElement = document.querySelector('div[role="progressbar"]'),
 		PBProgression = Number(progressBarElement?.getAttribute("aria-valuenow"));
 	if (
 		!document.querySelector('[data-test="daily-quest-progress-slide"]') &&
 		PBProgression < 10
 	)
-		user.finishedLesson = null;
+		user.lesson.finished = null;
 	if (
-		user.finishedLesson ||
+		user.lesson.finished ||
 		document.querySelector('[data-test="daily-quest-progress-slide"]') ||
 		document.querySelector('[data-test="session-complete-slide"]')
 	) {
-		const path = user.finishedLesson ? [user.finishedLesson] : _path;
+		const path = user.lesson.finished ? [user.lesson.finished] : _path;
 
 		switch (true) {
 			case path.includes("legendary"):
-				user.finishedLesson = "legendary";
+				user.lesson.finished = "legendary";
 				presenceData.details = `Finished ${giveArticle(
 					language.name
 				)} legendary challenge`;
 				break;
 			case path.includes("placement"):
-				user.finishedLesson = "placement";
+				user.lesson.finished = "placement";
 				presenceData.details = `Finished ${language.name} placement test`;
 				break;
 			case path.includes("test"):
-				user.finishedLesson = "test";
+				user.lesson.finished = "test";
 				presenceData.details = `Passed ${giveArticle(
 					language.name
 				)} jump ahead test`;
 				break;
 			case path.includes("mistakes-review"):
-				user.finishedLesson = "mistakes-review";
+				user.lesson.finished = "mistakes-review";
 				presenceData.details = "Finished reviewing past mistakes";
 				break;
 			case path.includes("unit-rewind"):
-				user.finishedLesson = "unit-rewind";
+				user.lesson.finished = "unit-rewind";
 				presenceData.details = "Finished reviewing old exercises";
 				break;
 			case path.includes("listen-up"):
 			case path.includes("listening-practice"):
-				user.finishedLesson = "listening-practice";
+				user.lesson.finished = "listening-practice";
 				presenceData.details = `Finished ${language.name} listening exercises`;
 				break;
 			case path.includes("finished-default"):
 			default:
-				user.finishedLesson = "finished-default";
+				user.lesson.finished = "finished-default";
 				presenceData.details = `Finished ${giveArticle(language.name)} lesson`;
 		}
 	}
 
-	if (!user.finishedLesson && progressBarElement) {
-		user.inLesson = true;
+	if (!user.lesson.finished && progressBarElement) {
+		user.lesson.active = true;
 
 		presenceData.state = `${makeProgressBar(
 			PBProgression,
@@ -157,31 +158,31 @@ function handleLesson(_path: string | string[]) {
 				progressBarElement?.getAttribute("style")
 			)?.[1]
 		)}`;
-		if (!user.lessonTimeStamp) user.lessonTimeStamp = newTimeStamp();
+		if (!user.lesson.timeStamp) user.lesson.timeStamp = newTimeStamp();
 		settings.showTimeOverwrite = false;
 	} else if (_path.includes("tips")) presenceData.state = "Viewing tips";
-	else if (!user.inLesson) {
+	else if (!user.lesson.active) {
 		settings.lastPath = "~";
 		presenceData.state = "Loading...";
 		settings.showTimeOverwrite = true;
-		user.finishedLesson = null;
+		user.lesson.finished = null;
 	}
 }
 
 async function updateData(_inLesson = false) {
-	const state = JSON.parse(window.localStorage.getItem("duo.state")).state
-		.redux;
+	const state = JSON.parse(window.localStorage.getItem("duo.state"))?.state
+		?.redux;
 	if (!state) return;
 
-	// resets lesson variables to default (updateData())
-	// if true is passed (updateData(true)), lesson variables stay untouched
+	// resets lesson variables to default on updateData()
+	// on updateData(true), lesson variables stay untouched
 	if (!_inLesson) {
-		user.inLesson = false;
-		user.finishedLesson = null;
+		user.lesson.active = false;
+		user.lesson.finished = null;
 		settings.showTimeOverwrite = true;
 	}
 
-	user.currentCourseId = state.user.currentCourseId ?? null;
+	user.currentCourseId = state.user.currentCourseId;
 	if (user.currentCourseId) setLang(/_(.*?)_/.exec(user.currentCourseId)?.[1]);
 
 	const showTime = await presence.getSetting<boolean>("timestamps");
@@ -361,9 +362,9 @@ presence.on("UpdateData", async () => {
 			break;
 	}
 
-	if (!user.inLesson) user.lessonTimeStamp = null;
+	if (!user.lesson.active) user.lesson.timeStamp = null;
 	if (settings.showTime && !settings.showTimeOverwrite)
-		presenceData.startTimestamp = user.lessonTimeStamp ?? timeStamp;
+		presenceData.startTimestamp = user.lesson.timeStamp ?? timeStamp;
 
 	presence.setActivity(presenceData);
 
