@@ -123,7 +123,7 @@ const presence = new Presence({
 	eventName = "PreMiD_Netflix",
 	readyOrNot =
 		document.readyState.includes("complete") ||
-		!document.querySelector('[class="loading-children-container"]'); // Checks if page is still loading. If loaded readyState = complete - So True; If loading screenelement doesnt exist - True; If still loading url or load screen elemtn exist - False;
+		!document.querySelector('[class="loading-children-container"]'); // Checks if page is still loading. If loaded readyState = complete - So True; If loading screenelement doesnt exist - True; If still loading url or load screen element exist - False;
 
 let latestData: {
 		videoMetadata: Record<string, VideoMetadata>;
