@@ -120,7 +120,10 @@ const presence = new Presence({
 		);
 	},
 	script = document.createElement("script"),
-	eventName = "PreMiD_Netflix";
+	eventName = "PreMiD_Netflix",
+	readyOrNot =
+		document.readyState.includes("complete") ||
+		!document.querySelector('[class="loading-children-container"]'); // Checks if page is still loading. If loaded readyState = complete - So True; If loading screenelement doesnt exist - True; If still loading url or load screen elemtn exist - False;
 
 let latestData: {
 		videoMetadata: Record<string, VideoMetadata>;
@@ -130,7 +133,7 @@ let latestData: {
 	prevUrl = document.location.href,
 	strings: Awaited<ReturnType<typeof getStrings>> = null,
 	oldLang: string = null,
-	scriptPushed = false;
+	scriptPushed = false; //Check if the script has been loaded before. False = NOT loaded & True = loaded
 
 presence.on("UpdateData", async () => {
 	const [
@@ -181,18 +184,14 @@ presence.on("UpdateData", async () => {
 	}
 	if (
 		!scriptPushed &&
-		document.readyState !== "complete" &&
-		document.querySelector('[class="loading-children-container"]') &&
+		!readyOrNot &&
 		document.location.pathname.includes("/watch/")
 	)
+		// If it hasnt been pushed, is still loading & includes /watch/ return, otherwise continue showing other things in presence.ts
 		return;
-	else if (
-		!scriptPushed &&
-		document.readyState === "complete" &&
-		!document.querySelector('[class="loading-children-container"]')
-	) {
+	else if (!scriptPushed && readyOrNot) {
 		scriptPushed = true;
-		pushScript();
+		pushScript(); // Load the script.
 	}
 
 	//* Language changed, reload strings
