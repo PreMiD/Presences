@@ -5,13 +5,14 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://imgur.com/QCtoeEM.png",
+			largeImageKey: "https://i.imgur.com/KaW8pr2.png",
+			details: "Viewing Home Page",
+			startTimestamp: browsingUnix,
 		},
-		{ pathname } = document.location;
-	presenceData.details = "Viewing Home Page";
+		{ pathname, origin } = document.location;
+	
 
 	let title: HTMLElement, logo: HTMLElement;
-	presenceData.startTimestamp = browsingUnix;
 
 	switch (pathname) {
 		case "/bot/add": {
@@ -30,10 +31,10 @@ presence.on("UpdateData", async () => {
 
 	if (
 		pathname.startsWith("/bot/") &&
-		document.querySelector(".css-1igwmid > b")
+		document.querySelector('b[class*="chakra-text"]')
 	) {
-		title = document.querySelector('b[class*="chakra-text"]')
-		logo = document.querySelectorAll('[class*="chakra-container"]')?.[1]?.querySelector('[class*="chakra-avatar__img"]') ?? document.querySelector('[class*="chakra-avatar__img"]')
+		title = document.querySelector('b[class*="chakra-text"]');
+		logo = document.querySelectorAll('[class*="chakra-container"]')?.[1]?.querySelector('[class*="chakra-avatar__img"]') ?? document.querySelector('[class*="chakra-avatar__img"]');
 		presenceData.details = "Viewing Bot:";
 		presenceData.state = title.textContent;
 		presenceData.smallImageKey = logo.getAttribute("src");
@@ -41,11 +42,11 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Visit Bot Page",
-				url: `${document.location.origin}/bot/${pathname.split("/")[2]}/`,
+				url: `${origin}/bot/${pathname.split("/")[2]}/`,
 			},
 			{
 				label: `Vote for ${title.textContent}`,
-				url: `${document.location.origin}/bot/${pathname.split("/")[2]}/vote`,
+				url: `${origin}/bot/${pathname.split("/")[2]}/vote`,
 			},
 		];
 	}
