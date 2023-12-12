@@ -33,9 +33,7 @@ presence.on("UpdateData", async () => {
 		document.querySelector(".css-1igwmid > b")
 	) {
 		title = document.querySelector(".css-1igwmid > b");
-		logo = document.querySelector(
-			".chakra-stack > .chakra-stack > .chakra-stack > .chakra-avatar > img"
-		);
+		logo = document.querySelectorAll('[class*="chakra-container"]')?.[1]?.querySelector('[class*="chakra-avatar__img"]') ?? document.querySelector('[class*="chakra-avatar__img"]')
 		presenceData.details = "Viewing Bot:";
 		presenceData.state = title.textContent;
 		presenceData.smallImageKey = logo.getAttribute("src");
