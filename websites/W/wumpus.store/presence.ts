@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 		pathname.startsWith("/bot/") &&
 		document.querySelector(".css-1igwmid > b")
 	) {
-		title = document.querySelector(".css-1igwmid > b");
+		title = document.querySelector('b[class*="chakra-text"]')
 		logo = document.querySelectorAll('[class*="chakra-container"]')?.[1]?.querySelector('[class*="chakra-avatar__img"]') ?? document.querySelector('[class*="chakra-avatar__img"]')
 		presenceData.details = "Viewing Bot:";
 		presenceData.state = title.textContent;
