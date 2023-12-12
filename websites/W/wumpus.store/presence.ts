@@ -10,7 +10,6 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingUnix,
 		},
 		{ pathname, origin } = document.location;
-	
 
 	let title: HTMLElement, logo: HTMLElement;
 
@@ -34,7 +33,11 @@ presence.on("UpdateData", async () => {
 		document.querySelector('b[class*="chakra-text"]')
 	) {
 		title = document.querySelector('b[class*="chakra-text"]');
-		logo = document.querySelectorAll('[class*="chakra-container"]')?.[1]?.querySelector('[class*="chakra-avatar__img"]') ?? document.querySelector('[class*="chakra-avatar__img"]');
+		logo =
+			document
+				.querySelectorAll('[class*="chakra-container"]')?.[1]
+				?.querySelector('[class*="chakra-avatar__img"]') ??
+			document.querySelector('[class*="chakra-avatar__img"]');
 		presenceData.details = "Viewing Bot:";
 		presenceData.state = title.textContent;
 		presenceData.smallImageKey = logo.getAttribute("src");
