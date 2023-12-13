@@ -126,10 +126,12 @@ presence.on("UpdateData", () => {
 						".lessons-and-reviews__button"
 					);
 					if (buttons.length === 2) {
-						const lessons =
-								+buttons[0].querySelector<HTMLSpanElement>("lessons-and-reviews__count").textContent,
-							reviews =
-								+buttons[1].querySelector<HTMLSpanElement>("lessons-and-reviews__count").textContent;
+						const lessons = +buttons[0].querySelector<HTMLSpanElement>(
+								".lessons-and-reviews__count"
+							).textContent,
+							reviews = +buttons[1].querySelector<HTMLSpanElement>(
+								".lessons-and-reviews__count"
+							).textContent;
 						presenceData.details = "Viewing Dashboard";
 						presenceData.state = `${lessons} lessons | ${reviews} reviews`;
 						presenceData.smallImageText =
@@ -174,33 +176,33 @@ presence.on("UpdateData", () => {
 					Object.assign(presenceData, getReviewPresence());
 					break;
 				}
+				case pathname.match(/^\/recent-mistakes\/.*?\/quiz$/)?.input: {
+					presenceData.details = "Doing Extra Study: Recent Mistakes";
+					Object.assign(presenceData, getReviewPresence());
+					break;
+				}
+				case pathname.match(/^\/recent-mistakes\/.*?\/subjects\/\d+\/lesson$/)
+					?.input: {
+					presenceData.details = "Doing Extra Study: Recent Mistakes Lessons";
+					Object.assign(presenceData, getLessonPresence());
+					break;
+				}
 				case "/subjects/review": {
 					presenceData.details = "Doing Reviews";
 					Object.assign(presenceData, getReviewPresence());
 					break;
 				}
-				case (pathname.match(/^\/subject-lessons\/\d+.*?\/quiz$/) || {}).input: {
+				case pathname.match(/^\/subject-lessons\/[-\d/]+\/quiz$/)?.input: {
 					presenceData.details = "Practicing Lessons";
 					Object.assign(presenceData, getReviewPresence());
 					break;
 				}
-				case (pathname.match(/^\/recent-mistakes\/.*?\/quiz$/) || {}).input: {
-					presenceData.details = "Doing Extra Study: Recent Mistakes";
-					Object.assign(presenceData, getReviewPresence());
-					break;
-				}
-				case (pathname.match(/^\/recent-mistakes\/.*?\/subjects\/\d+\/lesson$/) || {}).input: {
-					presenceData.details = "Doing Extra Study: Recent Mistakes Lessons";
-					Object.assign(presenceData, getLessonPresence());
-					break;
-				}
-				case (pathname.match(/^\/subject-lessons\/[\d/]+/) || {}).input: {
+				case pathname.match(/^\/subject-lessons\/[-\d/]+/)?.input: {
 					presenceData.details = "Learning Lessons";
 					Object.assign(presenceData, getLessonPresence());
 					break;
 				}
-				case (pathname.match(/^\/(radicals|kanji|vocabulary)\/.+$/) || {})
-					.input: {
+				case pathname.match(/^\/(radicals|kanji|vocabulary)\/.+$/)?.input: {
 					const [, type] = pathname.split("/");
 					let textDescription =
 						document.querySelector<HTMLElement>(
@@ -223,7 +225,7 @@ presence.on("UpdateData", () => {
 					presenceData.smallImageKey = getTypeAsset(type.replace(/s$/, ""));
 					break;
 				}
-				case (pathname.match(/^\/users\/.+$/) || {}).input: {
+				case pathname.match(/^\/users\/.+$/)?.input: {
 					presenceData.details = "Viewing User Profile";
 					presenceData.state =
 						document.querySelector<HTMLSpanElement>(".username").textContent;
