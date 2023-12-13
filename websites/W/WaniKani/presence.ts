@@ -79,6 +79,35 @@ function getReviewPresence(): PresenceData {
 	return data;
 }
 
+function getLessonPresence(): PresenceData {
+	const presenceData: PresenceData = {};
+	const totalStats = document.querySelectorAll<HTMLDivElement>(
+		'[data-controller="subject-count-statistics"] [data-subject-count-statistics-target="count"]'
+	);
+	presenceData.state = `${
+		document.querySelector<HTMLDivElement>(
+			'[data-quiz-header-target="characters"]'
+		).textContent
+	} - ${
+		document.querySelector<HTMLDivElement>(
+			'[data-quiz-header-target="meaning"]'
+		).textContent
+	}`;
+	presenceData.smallImageKey = getTypeAsset(
+		[
+			...document.querySelector<HTMLDivElement>(
+				'[data-quiz-header-base-class="character-header"]'
+			).classList,
+		]
+			.find(cls => cls.startsWith("character-header--"))
+			.split("--")[1]
+	);
+	if (totalStats.length === 3) {
+		presenceData.smallImageText = `${totalStats[0].textContent} radicals | ${totalStats[1].textContent} kanji | ${totalStats[2].textContent} vocab`;
+	}
+	return presenceData;
+}
+
 presence.on("UpdateData", () => {
 	const { hostname, pathname } = document.location,
 		presenceData: PresenceData = {
@@ -155,30 +184,19 @@ presence.on("UpdateData", () => {
 					Object.assign(presenceData, getReviewPresence());
 					break;
 				}
+				case (pathname.match(/^\/recent-mistakes\/.*?\/quiz$/) || {}).input: {
+					presenceData.details = "Doing Extra Study: Recent Mistakes";
+					Object.assign(presenceData, getReviewPresence());
+					break;
+				}
+				case (pathname.match(/^\/recent-mistakes\/.*?\/subjects\/\d+\/lesson$/) || {}).input: {
+					presenceData.details = "Doing Extra Study: Recent Mistakes Lessons";
+					Object.assign(presenceData, getLessonPresence());
+					break;
+				}
 				case (pathname.match(/^\/subject-lessons\/[\d/]+/) || {}).input: {
 					presenceData.details = "Learning Lessons";
-					const totalStats = document.querySelectorAll<HTMLDivElement>(
-						'[data-controller="subject-count-statistics"] [data-subject-count-statistics-target="count"]'
-					);
-					presenceData.state = `${
-						document.querySelector<HTMLDivElement>(
-							'[data-quiz-header-target="characters"]'
-						).textContent
-					} - ${
-						document.querySelector<HTMLDivElement>(
-							'[data-quiz-header-target="meaning"]'
-						).textContent
-					}`;
-					presenceData.smallImageKey = getTypeAsset(
-						[
-							...document.querySelector<HTMLDivElement>(
-								'[data-quiz-header-base-class="character-header"]'
-							).classList,
-						]
-							.find(cls => cls.startsWith("character-header--"))
-							.split("--")[1]
-					);
-					presenceData.smallImageText = `${totalStats[0].textContent} radicals | ${totalStats[1].textContent} kanji | ${totalStats[2].textContent} vocab`;
+					Object.assign(presenceData, getLessonPresence());
 					break;
 				}
 				case (pathname.match(/^\/(radicals|kanji|vocabulary)\/.+$/) || {})
