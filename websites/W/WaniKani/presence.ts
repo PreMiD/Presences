@@ -150,12 +150,12 @@ presence.on("UpdateData", () => {
 					Object.assign(presenceData, getReviewPresence());
 					break;
 				}
-				case "/subjects/lesson/quiz": {
+				case (pathname.match(/^\/subject-lessons\/\d+.*?\/quiz$/) || {}).input: {
 					presenceData.details = "Practicing Lessons";
 					Object.assign(presenceData, getReviewPresence());
 					break;
 				}
-				case (pathname.match(/^\/subjects\/\d+\/lesson$/) || {}).input: {
+				case (pathname.match(/^\/subject-lessons\/[\d/]+/) || {}).input: {
 					presenceData.details = "Learning Lessons";
 					const totalStats = document.querySelectorAll<HTMLDivElement>(
 						'[data-controller="subject-count-statistics"] [data-subject-count-statistics-target="count"]'
