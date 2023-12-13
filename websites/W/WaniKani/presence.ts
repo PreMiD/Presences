@@ -80,10 +80,10 @@ function getReviewPresence(): PresenceData {
 }
 
 function getLessonPresence(): PresenceData {
-	const presenceData: PresenceData = {};
-	const totalStats = document.querySelectorAll<HTMLDivElement>(
-		'[data-controller="subject-count-statistics"] [data-subject-count-statistics-target="count"]'
-	);
+	const presenceData: PresenceData = {},
+		totalStats = document.querySelectorAll<HTMLDivElement>(
+			'[data-controller="subject-count-statistics"] [data-subject-count-statistics-target="count"]'
+		);
 	presenceData.state = `${
 		document.querySelector<HTMLDivElement>(
 			'[data-quiz-header-target="characters"]'
@@ -102,9 +102,8 @@ function getLessonPresence(): PresenceData {
 			.find(cls => cls.startsWith("character-header--"))
 			.split("--")[1]
 	);
-	if (totalStats.length === 3) {
+	if (totalStats.length === 3)
 		presenceData.smallImageText = `${totalStats[0].textContent} radicals | ${totalStats[1].textContent} kanji | ${totalStats[2].textContent} vocab`;
-	}
 	return presenceData;
 }
 
