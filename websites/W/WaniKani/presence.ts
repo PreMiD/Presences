@@ -98,9 +98,9 @@ presence.on("UpdateData", () => {
 					);
 					if (buttons.length === 2) {
 						const lessons =
-								+buttons[0].querySelector<HTMLSpanElement>("span").textContent,
+								+buttons[0].querySelector<HTMLSpanElement>("lessons-and-reviews__count").textContent,
 							reviews =
-								+buttons[1].querySelector<HTMLSpanElement>("span").textContent;
+								+buttons[1].querySelector<HTMLSpanElement>("lessons-and-reviews__count").textContent;
 						presenceData.details = "Viewing Dashboard";
 						presenceData.state = `${lessons} lessons | ${reviews} reviews`;
 						presenceData.smallImageText =
