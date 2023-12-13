@@ -5,7 +5,7 @@ iframe.on("UpdateData", async () => {
 		"video,[class='jw-video jw-reset']"
 	);
 
-	if (video && !isNaN(video?.duration)) {
+	if (video && !isNaN(video.duration)) {
 		iframe.send({
 			iframeVideo: {
 				currentTime: video.currentTime,
