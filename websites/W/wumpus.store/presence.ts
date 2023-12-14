@@ -20,6 +20,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "/search": {
 			presenceData.details = "Searching for a new bot";
+			presenceData.smallImageKey = Assets.Search
 			break;
 		}
 		case "/": {
