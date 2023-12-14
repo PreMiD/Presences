@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 			details: "Viewing Home Page",
 			startTimestamp: browsingUnix,
 		},
-		{ pathname, origin } = document.location;
+		{ pathname, href} = document.location;
 
 	let title: HTMLElement, logo: HTMLElement;
 
