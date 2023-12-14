@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 			details: "Viewing Home Page",
 			startTimestamp: browsingUnix,
 		},
-		{ pathname, href} = document.location;
+		{ pathname, href } = document.location;
 
 	let title: HTMLElement, logo: HTMLElement;
 
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "/search": {
 			presenceData.details = "Searching for a new bot";
-			presenceData.smallImageKey = Assets.Search
+			presenceData.smallImageKey = Assets.Search;
 			break;
 		}
 		case "/": {
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 			},
 			{
 				label: `Vote for ${title.textContent}`,
-				url: `${href}/vote`
+				url: `${href}/vote`,
 			},
 		];
 	}
