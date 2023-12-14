@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 			},
 			{
 				label: `Vote for ${title.textContent}`,
-				url: `${origin}/bot/${pathname.split("/")[2]}/vote`,
+				url: `${href}/vote`
 			},
 		];
 	}
