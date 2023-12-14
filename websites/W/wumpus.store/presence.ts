@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Visit Bot Page",
-				url: `${origin}/bot/${pathname.split("/")[2]}/`,
+				url: href,
 			},
 			{
 				label: `Vote for ${title.textContent}`,
