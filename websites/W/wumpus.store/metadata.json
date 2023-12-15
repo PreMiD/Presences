@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "347077478726238228",
+		"name": "Dominik"
+	},
+	"service": "wumpus.store",
+	"description": {
+		"en": "Rich Presence for wumpus.store - The #1 Discord Bot Store",
+		"de": "Rich Presence für wumpus.store - Der #1 Discord Bot Store"
+	},
+	"url": "wumpus.store",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/KaW8pr2.png",
+	"thumbnail": "https://i.imgur.com/UUnO5tH.png",
+	"color": "#bcabeb",
+	"category": "other",
+	"tags": [
+		"discord",
+		"bot",
+		"wumpus"
+	]
+}
