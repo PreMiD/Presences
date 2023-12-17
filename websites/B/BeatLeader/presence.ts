@@ -131,15 +131,15 @@ enum OtherAssets {
 
 function simplifyKey(key: string): string {
 	let result = key;
-	if (key.match(/^(Horizontal|Vertical|Inverted|Inverse)/))
+	if (result.match(/^(Horizontal|Vertical|Inverted|Inverse)/))
 		result = result.replace(/Lawless|OneSaber|NoArrows|Standard|Legacy/, "");
 	if (
-		key.match(
+		result.match(
 			/^(360Degree|90Degree|NoArrows|Lightshow|Legacy)-PinkPlay_Controllable/
 		)
 	)
 		result = result.replace("-PinkPlay_Controllable", "");
-	if (key.startsWith("Generated")) result = result.replace("Generated", "");
+	if (result.startsWith("Generated")) result = result.replace("Generated", "");
 	return result;
 }
 
