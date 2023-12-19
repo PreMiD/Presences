@@ -5,12 +5,13 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/A/Akinator/assets/logo.png",
-		startTimestamp: browsingTimestamp,
-	};
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Akinator/assets/logo.png",
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname, href } = document.location;
 
-	switch (document.location.pathname) {
+	switch (pathname) {
 		case "/": {
 			presenceData.details = "Starting Akinator";
 			break;
@@ -24,8 +25,26 @@ presence.on("UpdateData", async () => {
 				document.querySelectorAll(".bubble-body")[0].textContent
 			}`;
 			presenceData.state = `Selecting: ${
-				document.querySelectorAll(":hover")[12].textContent ?? "Still Thinking"
+				document.querySelectorAll(":hover")?.[12]?.textContent ??
+				"Still Thinking"
 			}`;
+			presenceData.smallImageKey = document
+				.querySelector('[class*="flag-icon"]')
+				?.className.split("-")?.[3]
+				? `https://raw.githubusercontent.com/hampusborgos/country-flags/main/png1000px/${document
+						.querySelector('[class*="flag-icon"]')
+						?.className.split("-")[3]
+						?.toLowerCase()}.png`
+				: "";
+			presenceData.smallImageText = document.querySelector(
+				'[class="lang-label"]'
+			)?.textContent;
+			presenceData.buttons = [
+				{
+					label: "Play The Game",
+					url: href,
+				},
+			];
 
 			break;
 		}

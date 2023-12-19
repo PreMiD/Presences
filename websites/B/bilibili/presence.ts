@@ -12,7 +12,7 @@ let uploader: HTMLElement,
 	duration: number,
 	timestamps: number[];
 
-const multiUploader = document.querySelector("div.members-info");
+const multiUploader = document.querySelector("div.membersinfo-normal");
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -21,22 +21,18 @@ presence.on("UpdateData", async () => {
 	};
 
 	async function getTimestamps() {
-		video = document.querySelector("bwp-video");
+		video = document.querySelector("bpx-player-container");
 		if (!video) {
 			video = document.querySelector("video");
 			videoPaused = video.paused;
 			timestamps = presence.getTimestampsfromMedia(video);
 		} else {
-			videoPaused =
-				document
-					.querySelector(".bilibili-player-video-btn-start")
-					.classList.contains("video-state-pause") === true;
+			videoPaused = document.querySelector(".bpx-state-paused") === null;
 			(currentTime = presence.timestampFromFormat(
-				document.querySelector(".bilibili-player-video-time-now").textContent
+				document.querySelector(".bpx-player-ctrl-time-current").textContent
 			)),
 				(duration = presence.timestampFromFormat(
-					document.querySelector(".bilibili-player-video-time-total")
-						.textContent
+					document.querySelector(".bpx-player-ctrl-time-duration").textContent
 				)),
 				(timestamps = presence.getTimestamps(currentTime, duration));
 		}
@@ -58,15 +54,20 @@ presence.on("UpdateData", async () => {
 					getTimestamps();
 
 					if (multiUploader) {
-						uploader = document.querySelector(
-							"#member-container > div:nth-child(1) > div > a"
-						);
-						uploaderName = `${uploader.textContent} + ${
-							document.querySelectorAll(".up-card").length
+						uploader = document.querySelector(".staff-name");
+
+						uploaderName = `${uploader.textContent.trim()} + ${
+							parseInt(
+								document
+									.querySelector(".staff-amt")
+									.textContent.trim()
+									.replaceAll("人", "")
+							) - 1
 						} more`;
 					} else {
-						uploader = document.querySelector("a.username");
-						uploaderName = uploader.textContent;
+						uploader = document.querySelector(".up-name");
+						// "\n      <USERNAME>\n      " -> "<USERNAME>"
+						uploaderName = uploader.textContent.trim();
 					}
 
 					uploaderLink = uploader.getAttribute("href");

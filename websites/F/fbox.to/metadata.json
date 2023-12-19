@@ -16,7 +16,7 @@
 	},
 	"url": "fbox.to",
 	"regExp": "(www([0-9]*)?[.])?fbox[.]to",
-	"version": "1.2.12",
+	"version": "1.2.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/fbox.to/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/fbox.to/assets/thumbnail.png",
 	"color": "#565c67",

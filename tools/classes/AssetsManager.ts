@@ -14,6 +14,7 @@ import sharp from "sharp";
 import { lookup as mimeLookup } from "mime-types";
 
 import { Metadata } from "./PresenceCompiler";
+import { getFolderLetter } from "../util.js";
 
 const require = createRequire(import.meta.url),
 	rootPath = resolve(fileURLToPath(new URL(".", import.meta.url)), "../.."),
@@ -22,7 +23,6 @@ const require = createRequire(import.meta.url),
 
 export default class AssetsManager {
 	cwd: string;
-	presenceFolder: string;
 
 	constructor(
 		public service: string,
@@ -31,19 +31,20 @@ export default class AssetsManager {
 		}
 	) {
 		this.cwd = options?.cwd ?? rootPath;
-		this.presenceFolder = this.getPresenceFolder();
 	}
 
 	get assetBaseUrl() {
 		return `${cdnBase}/PreMiD/${encodeURI(
-			this.presenceFolder.replace(this.cwd, "")
+			this.presenceFolder.replace(`${this.cwd}/`, "")
 		).replace("#", "%23")}/assets`;
 	}
 
-	getPresenceFolder() {
-		return glob
-			.sync(`{websites,programs}/**/${this.service}`)[0]
-			.replace(/\\/g, "/");
+	get presenceFolder() {
+		//TODO Detect if the presence is a website or a program without using glob since the file may not exist anymore at this point
+		const type: "websites" | "programs" = "websites";
+		return `${this.cwd}/${type}/${getFolderLetter(this.service)}/${
+			this.service
+		}`;
 	}
 
 	getFileExtension(url: string) {
@@ -86,7 +87,7 @@ export default class AssetsManager {
 
 				//* A regex to match all image urls in the file
 				const regex =
-					/(?<=["'`])(https?:\/\/.*?\.(?:png|jpg|jpeg|gif|webp))(?=["'`])/g;
+					/(?<=["'`])(https?:\/\/.*?\.(?:png|jpg|jpeg|gif|webp)(?:[?][^'"`]+)?)(?=["'`])/g;
 				let match: RegExpExecArray | null;
 
 				while ((match = regex.exec(file)) !== null) {

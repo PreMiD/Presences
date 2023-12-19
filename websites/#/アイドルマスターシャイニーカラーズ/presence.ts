@@ -52,10 +52,12 @@ presence.on("UpdateData", async () => {
 			"/fesMatchConcert": { details: "グレードフェスをプレイ中" },
 			"/jewelCounter": { details: "フェザージュエルミッション" },
 			"/help": { details: "ヘルプを閲覧中" },
+			"/fesTours": { details: "フェスツアーズをプレイ中" },
+			"/fesToursConcert": { details: "フェスツアーズをプレイ中" },
 		},
 		pathDetails = pathMap[pathname]?.details;
 	if (typeof pathDetails !== "undefined") presenceData.details = pathDetails;
-	if (pathname.includes("/idolAlbum/")) {
+	else if (pathname.includes("/idolAlbum/")) {
 		const idolNames: string[] = [
 				"真乃",
 				"灯織",
@@ -87,6 +89,10 @@ presence.on("UpdateData", async () => {
 			albumIndex = Number(pathname.split("/")[2]) - 1;
 		if (albumIndex >= 0 && albumIndex < idolNames.length)
 			presenceData.details = `${idolNames[albumIndex]}のアルバムを閲覧中`;
+	}
+	for (const [index, idolName] of ["ルビー", "有馬かな", "MEMちょ"].entries()) {
+		if (pathname === `/idolAlbum/${801 + index}`)
+			presenceData.details = `${idolName}のアルバムを閲覧中`;
 	}
 	presence.setActivity(presenceData);
 });

@@ -41,12 +41,9 @@ presence.on("UpdateData", async () => {
 		),
 		thumbnail =
 			document
-				.querySelector(".player-mobile-video-wrap > video")
-				?.getAttribute("poster")
-				?.split("@")[0] ||
-			document
-				.querySelector<HTMLMetaElement>('meta[name="og:image"]')
-				?.content?.split("@")[0];
+				.querySelector<HTMLMetaElement>('meta[property="og:image"]')
+				?.content?.split("?")?.[0] ??
+			"https://cdn.rcd.gg/PreMiD/websites/B/bilibilitv/assets/logo.png";
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
@@ -68,7 +65,7 @@ presence.on("UpdateData", async () => {
 			case "play": {
 				presenceData.details = title;
 				presenceData.state = `${strings.episode} ${document
-					.querySelector(".ep-item__reference--active")
+					.querySelector("a.ep-item.ep-item--active")
 					.textContent?.replace(/\D/g, "")}`;
 				presenceData.buttons = [
 					{
