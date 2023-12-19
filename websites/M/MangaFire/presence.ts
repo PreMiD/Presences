@@ -5,13 +5,20 @@ const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/MangaFire/assets/logo.png",
 }
 
+type PageData = {
+	details?: string;
+	smallImageKey?: string;
+	largeImageKey?: string;
+	state?: string;
+};
+
 presence.on("UpdateData", async () => {
 	const { pathname } = document.location,
 		pathArr = pathname.split("/"),
 		{ details, smallImageKey, largeImageKey, state } = getPageData(
 			pathArr[1],
 			pathArr[2],
-			document.querySelector(".name")?.textContent
+			document.querySelector("h1")?.textContent
 		),
 		presenceData: PresenceData = {
 			largeImageKey: largeImageKey || Assets.Logo,
@@ -32,7 +39,11 @@ presence.on("UpdateData", async () => {
 
 	if (details) presence.setActivity(presenceData);
 });
-function getPageData(page: string, pageDetails: string, title: string) {
+function getPageData(
+	page: string,
+	pageDetails: string,
+	title: string
+): PageData {
 	switch (page) {
 		case "home":
 			return { details: "Viewing home..." };
@@ -71,22 +82,21 @@ function getPageData(page: string, pageDetails: string, title: string) {
 		case "manga":
 			return {
 				details: `Viewing ${
-					document.querySelector("span:nth-child(2)")?.textContent //manga type
+					document.querySelector(".min-info > a:nth-child(1)")?.textContent //manga type
 				}...`,
 				state: title,
 				largeImageKey: document.querySelector<HTMLImageElement>("div>img")?.src, //manga cover
 			};
 		case "read":
 			return {
-				details: `Reading ${title} (${
-					document.querySelector("span:nth-child(3)").textContent //language
+				details: `Reading ${document.querySelector(".head > a").textContent} (${
+					document.querySelector(".lang-view").textContent //language
 				})`,
-				state: `[${document
-					.querySelector("#hz-view-ctl-form > input[type=text]")
-					.getAttribute("placeholder")}/${
-					//current page number
-					document.querySelector("#hz-view-ctl-form > span > span").textContent //total page number
-				}] ${document.querySelector("li > a.active").textContent}`, //Chapter or Volume content details
+				state: `[${
+					document.querySelector("div.viewing:nth-child(6) > span:nth-child(2)")
+						.textContent //current page number | total page number
+				}] 
+				${document.querySelector("li > a.active").textContent}`, //Chapter or Volume content details
 				smallImageKey: Assets.Reading,
 			};
 		case "user":
@@ -99,21 +109,15 @@ function getPageData(page: string, pageDetails: string, title: string) {
 			return { details: "Browsing...", smallImageKey: Assets.Search };
 	}
 }
-function getProfileDetail(pageDetails: string) {
-	switch (pageDetails) {
-		case "profile":
-			return { details: "Viewing their profile settings..." };
-		case "reading":
-			return { details: "Viewing their list of continue watching..." };
-		case "bookmark":
-			return { details: "Viewing their bookmarks..." };
-		case "notification":
-			return { details: "Viewing their notifications..." };
-		case "mal":
-			return { details: "Importing their MyAnimeList..." };
-		case "settings":
-			return { details: "Viewing their general settings..." };
-		default:
-			return { details: "Changing settings..." };
-	}
+function getProfileDetail(pageDetails: string): PageData {
+	const pageDetailsMap: { [key: string]: string } = {
+		profile: "Viewing their profile...",
+		reading: "Viewing their list of continue watching...",
+		bookmark: "Viewing their bookmarks...",
+		notification: "Viewing their notifications...",
+		list: "Importing their Anime list...",
+		settings: "Viewing their general settings...",
+	};
+
+	return { details: pageDetailsMap[pageDetails] || "Changing settings..." };
 }
