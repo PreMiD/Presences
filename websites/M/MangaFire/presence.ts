@@ -89,7 +89,7 @@ function getPageData(
 			};
 		case "read":
 			return {
-				details: `Reading ${document.querySelector(".head > a").textContent} (${
+				details: `Reading ${document.querySelector(".head > a:nth-child(1)").textContent} (${
 					document.querySelector(".lang-view").textContent //language
 				})`,
 				state: `[${
