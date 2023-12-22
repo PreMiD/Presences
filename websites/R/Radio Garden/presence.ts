@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = details;
 					presenceData.state = state;
 					presenceData.buttons = [
-						{ label: "Listen To The Radio", url: document.location.href },
+						{ label: "Listen", url: document.location.href },
 					];
 					break;
 				}
