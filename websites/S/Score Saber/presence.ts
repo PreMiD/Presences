@@ -114,28 +114,19 @@ enum OtherAssets {
 }
 
 function simplifyKey(key: string): string {
+	let result = key;
+	result = result.replace("Solo", "");
 	if (
-		key.startsWith("Horizontal") ||
-		key.startsWith("Vertical") ||
-		key.startsWith("Inverted") ||
-		key.startsWith("Inverse")
-	) {
-		return key
-			.replace("Lawless", "")
-			.replace("OneSaber", "")
-			.replace("NoArrows", "")
-			.replace("Standard", "")
-			.replace("Legacy", "");
-	} else if (
-		key.startsWith("360Degree-PinkPlay_Controllable") ||
-		key.startsWith("90Degree-PinkPlay_Controllable") ||
-		key.startsWith("Lightshow-PinkPlay_Controllable") ||
-		key.startsWith("NoArrows-PinkPlay_Controllable") ||
-		key.startsWith("Legacy-PinkPlay_Controllable")
+		(result.includes("-PinkPlay_Controllable") &&
+			!result.match(/(?:Standard|OneSaber|Lawless)-PinkPlay_Controllable/)) ||
+		result.match(/(Horizontal|Vertical|Inverted|Inverse)/)
 	)
-		return key.replace("-PinkPlay_Controllable", "");
-	else if (key.startsWith("Generated")) return key.replace("Generated", "");
-	else return key;
+		result = result.replace("-PinkPlay_Controllable", "");
+	if (result.startsWith("Generated")) result = result.replace("Generated", "");
+	if (result.match(/(Horizontal|Vertical|Inverted|Inverse)/))
+		result = result.replace(/Lawless|OneSaber|NoArrows|Standard|Legacy/, "");
+	console.log(result);
+	return result;
 }
 
 presence.on("UpdateData", async () => {
@@ -191,9 +182,8 @@ presence.on("UpdateData", async () => {
 					simplifyKey(
 						`${
 							mapSmallImages === 0 || mapSmallImages === 1
-								? document
-										.querySelector(".content .content>b:last-of-type")
-										?.textContent.replace("Solo", "")
+								? document.querySelector(".content .content>b:last-of-type")
+										?.textContent
 								: ""
 						}${
 							mapSmallImages === 0 || mapSmallImages === 2
