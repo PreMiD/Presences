@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("elapsedTime"),
 			presence.getSetting<boolean>("postImage"),
 		]),
-		{ href, pathname } = window.location,
+		{ href, pathname } = document.location,
 		path = pathname.split("/"),
 		[, profileName] = document.title.split("(");
 
