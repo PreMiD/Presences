@@ -70,9 +70,12 @@ presence.on("UpdateData", async () => {
 		}
 		case pathname.includes("/reel/"): {
 			// One reel (Only from profile)
-			const profilename = document.querySelector(
-				'[class="_ap3a _aaco _aacw _aacx _aad7 _aade"]'
-			)?.textContent;
+			const profilename =
+				document.querySelector('[class="_ap3a _aaco _aacw _aacx _aad7 _aade"]')
+					?.textContent ??
+				document.querySelector(
+					"[class*='_acan _acao _acat _acaw _aj1- _ap30 _a6hd']"
+				)?.textContent;
 			presenceData.details = "Watching a reel";
 			presenceData.state = profilename;
 			presenceData.buttons = [
