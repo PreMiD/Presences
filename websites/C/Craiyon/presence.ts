@@ -8,7 +8,8 @@ type State = "start" | "generation" | "results";
 
 let browsingTimestamp: number = Date.now() / 1000,
 	oldPrompt: string = null,
-	activityState: State = "start";
+	activityState: State = "start",
+	searchResultCacheTimestamp: number = 0;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -17,6 +18,9 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, href } = document.location,
 		pathList = pathname.split("/").filter(Boolean);
+
+	let useSlideshow = false;
+
 	switch (pathList[0] ?? "/") {
 		case "/": {
 			const input = document.querySelector<HTMLTextAreaElement>("#prompt"),
@@ -57,6 +61,7 @@ presence.on("UpdateData", async () => {
 						presenceDataCopy.largeImageKey = image.src;
 						slideshow.addSlide(`image${i}`, presenceDataCopy, 5000);
 					}
+					useSlideshow = true;
 				}
 			}
 			break;
@@ -76,6 +81,28 @@ presence.on("UpdateData", async () => {
 					url: href,
 				},
 			];
+			break;
+		}
+		case "search": {
+			if (pathList.length > 1) {
+				presenceData.details = "Viewing search results";
+				presenceData.state = document.querySelector("input").value;
+				const now = Date.now();
+				if (now - searchResultCacheTimestamp > 5000) {
+					searchResultCacheTimestamp = now;
+					slideshow.deleteAllSlides();
+					const images =
+						document.querySelectorAll<HTMLImageElement>("main a img");
+					for (const [i, image] of images.entries()) {
+						const presenceDataCopy = Object.assign({}, presenceData);
+						presenceDataCopy.largeImageKey = image.src;
+						slideshow.addSlide(`image${i}`, presenceDataCopy, 5000);
+					}
+				}
+				useSlideshow = true;
+			} else {
+				presenceData.details = "Searching for images";
+			}
 			break;
 		}
 		case "blog": {
@@ -105,7 +132,7 @@ presence.on("UpdateData", async () => {
 		}
 	}
 	if (presenceData.details) {
-		if (slideshow.getSlides().length > 0) presence.setActivity(slideshow);
+		if (useSlideshow) presence.setActivity(slideshow);
 		else presence.setActivity(presenceData);
 	} else presence.setActivity();
 });
