@@ -44,7 +44,9 @@ presence.on("UpdateData", async () => {
 		presenceData.details = `Lendo: ${
 			document.querySelector(".media-title")?.textContent
 		}`;
-		presenceData.state = "Cap. 200 - Pag. 16";
+		presenceData.state = `${
+			document.querySelector(".chapter-number")?.textContent
+		} - Página ${document.querySelector(".chapter-currentPage")?.textContent}`;
 		presenceData.buttons = [
 			{
 				label: "Ler mangá",
