@@ -8,6 +8,7 @@ let cached: {
 	video: HTMLVideoElement;
 	user: string;
 };
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
@@ -90,11 +91,12 @@ presence.on("UpdateData", async () => {
 		case pathname.includes("/reels/"): {
 			// Multiple reels (From anywhere)
 
-			const videos = document.querySelectorAll("video");
 			if (!cached?.href || !cached?.video || cached?.href !== href) {
-				const check = Array.from(videos).filter(video => !video.paused),
+				const videos = Array.from(document.querySelectorAll("video")).find(
+						video => !video.paused
+					),
 					video =
-						check.length !== 0 ? check[0] : document.querySelector("video");
+						videos.length !== 0 ? videos[0] : document.querySelector("video");
 				if (!video?.paused) {
 					cached = {
 						video,
