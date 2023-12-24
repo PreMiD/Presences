@@ -92,12 +92,12 @@ presence.on("UpdateData", async () => {
 		case pathname === "/following":
 		case pathname.includes("foryou"):
 		case pathname === "/":
-		case pathname == `/${lang}`:
-		case pathname == `/${lang}/`: {
+		case pathname === `/${lang}`:
+		case pathname === `/${lang}/`: {
 			if (!privacy) delete presenceData.startTimestamp;
-			const videos = Array.from(document.querySelectorAll("video")).filter(
+			const videos = Array.from(document.querySelectorAll("video")).find(
 				video => !video.paused
-			)[0];
+			);
 			let video: HTMLVideoElement;
 			if (videos) {
 				video = videos;
@@ -160,10 +160,12 @@ presence.on("UpdateData", async () => {
 						url: creatorURL,
 					},
 				];
-			} else if (tiktokURLMatch)
+			} else if (tiktokURLMatch) {
 				presenceData.buttons = [
 					{ label: strings.buttonViewTikTok, url: tiktokURL },
 				];
+			}
+
 			if (!paused && video?.duration && video?.currentTime)
 				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
 			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
@@ -210,11 +212,12 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = video.paused
 				? strings.paused
 				: strings.playing;
-			if (!video.paused)
+			if (!video.paused) {
 				[, presenceData.endTimestamp] = presence.getTimestamps(
 					video.currentTime,
 					video.duration
 				);
+			}
 			presenceData.buttons = [
 				{ label: strings.buttonViewTikTok, url: href },
 				{
@@ -224,17 +227,16 @@ presence.on("UpdateData", async () => {
 			];
 			break;
 		}
-		case pathname == "/live": {
-			const videos = Array.from(document.querySelectorAll("video")).filter(
+		case pathname === "/live": {
+			const videos = Array.from(document.querySelectorAll("video")).find(
 				video => !video.paused
-			)[0];
+			);
 			let video: HTMLVideoElement;
 			if (videos) {
 				video = videos;
 				getVideo(videos);
-			} else {
-				video = getVideo(null);
-			}
+			} else video = getVideo(null);
+
 			presenceData.details = privacy
 				? strings.watchingLive
 				: `${strings.watchingLive} - ${
