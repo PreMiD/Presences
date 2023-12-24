@@ -9,7 +9,7 @@ type State = "start" | "generation" | "results";
 let browsingTimestamp: number = Date.now() / 1000,
 	oldPrompt: string = null,
 	activityState: State = "start",
-	searchResultCacheTimestamp: number = 0;
+	searchResultCacheTimestamp = 0;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -23,17 +23,15 @@ presence.on("UpdateData", async () => {
 
 	switch (pathList[0] ?? "/") {
 		case "/": {
-			const input = document.querySelector<HTMLTextAreaElement>("#prompt"),
-				generationButton =
-					document.querySelector<HTMLButtonElement>("#generateButton"),
-				promptSettingsCheck = document.querySelector<HTMLImageElement>(
-					"[alt='Style example']"
-				);
+			const input = document.querySelector<HTMLTextAreaElement>("#prompt");
 			presenceData.state = input.value
 				? `"${input.value}"`
 				: "Waiting for input...";
-			if (promptSettingsCheck) presenceData.details = "Thinking of a prompt";
-			else if (generationButton.disabled) {
+			if (document.querySelector<HTMLImageElement>("[alt='Style example']"))
+				presenceData.details = "Thinking of a prompt";
+			else if (
+				document.querySelector<HTMLButtonElement>("#generateButton").disabled
+			) {
 				if (activityState !== "generation") {
 					presenceData.startTimestamp = browsingTimestamp = Date.now() / 1000;
 					slideshow.deleteAllSlides();
@@ -47,16 +45,15 @@ presence.on("UpdateData", async () => {
 					presenceData.startTimestamp = browsingTimestamp = Date.now() / 1000;
 					activityState = "results";
 				}
-				if (document.activeElement === input && input.value !== oldPrompt) {
+				if (document.activeElement === input && input.value !== oldPrompt)
 					presenceData.details = "Thinking of a new prompt";
-					slideshow.deleteAllSlides();
-				} else {
+				else {
 					presenceData.details = "Viewing results";
 					presenceData.state = `"${oldPrompt}"`;
-					const images = document.querySelectorAll<HTMLImageElement>(
-						".image-container img"
-					);
-					for (const [i, image] of images.entries()) {
+
+					for (const [i, image] of document
+						.querySelectorAll<HTMLImageElement>(".image-container img")
+						.entries()) {
 						const presenceDataCopy = Object.assign({}, presenceData);
 						presenceDataCopy.largeImageKey = image.src;
 						slideshow.addSlide(`image${i}`, presenceDataCopy, 5000);
@@ -91,18 +88,17 @@ presence.on("UpdateData", async () => {
 				if (now - searchResultCacheTimestamp > 5000) {
 					searchResultCacheTimestamp = now;
 					slideshow.deleteAllSlides();
-					const images =
-						document.querySelectorAll<HTMLImageElement>("main a img");
-					for (const [i, image] of images.entries()) {
+
+					for (const [i, image] of document
+						.querySelectorAll<HTMLImageElement>("main a img")
+						.entries()) {
 						const presenceDataCopy = Object.assign({}, presenceData);
 						presenceDataCopy.largeImageKey = image.src;
 						slideshow.addSlide(`image${i}`, presenceDataCopy, 5000);
 					}
 				}
 				useSlideshow = true;
-			} else {
-				presenceData.details = "Searching for images";
-			}
+			} else presenceData.details = "Searching for images";
 			break;
 		}
 		case "blog": {
@@ -117,9 +113,7 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
-			} else {
-				presenceData.details = "Browsing blog posts";
-			}
+			} else presenceData.details = "Browsing blog posts";
 			break;
 		}
 		case "privacy": {
