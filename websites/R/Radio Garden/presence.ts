@@ -40,7 +40,8 @@ presence.on("UpdateData", async () => {
 				}
 				case "loading": {
 					// currently loading
-					presenceData.smallImageKey = "https://i.imgur.com/2hmWns3.gif";
+					presenceData.smallImageKey =
+						"https://cdn.rcd.gg/PreMiD/websites/R/Radio%20Garden/assets/0.gif";
 					presenceData.smallImageText = "Tuning";
 					presenceData.details = "Tuning";
 					delete presenceData.startTimestamp;
