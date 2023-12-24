@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = document.location,
+		{ pathname, href } = document.location,
 		pathList = pathname.split("/").filter(Boolean);
 
 	switch (pathList[0] ?? "") {
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "article": {
 			presenceData.details = "Reading an article";
-			presenceData.state = document.querySelector<HTMLHeadingElement>(".headline").textContent;
+			presenceData.state = document.querySelector<HTMLHeadingElement>(".headline");
 			break;
 		}
 		case "play-tetris": {
@@ -45,6 +45,23 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `Level ${iframeData.level}`;
 			presenceData.smallImageKey = Assets.Question;
 			presenceData.smallImageText = `Lines: ${iframeData.lines} | Score: ${iframeData.score}`;
+			break;
+		}
+		case "product-list":
+		case "product-list-videogames":
+		case "product-list-merchandise": {
+			presenceData.details = "Browsing products";
+			break;
+		}
+		case "product": {
+			presenceData.details = "Viewing a product";
+			presenceData.state = document.querySelector(".product-lead h1");
+			presenceData.buttons = [
+				{
+					label: "View Product",
+					url: href,
+				},
+			];
 			break;
 		}
 		default: {
