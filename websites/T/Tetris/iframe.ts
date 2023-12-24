@@ -5,12 +5,6 @@
 // are not sufficient.
 // It also needs to use functions to determine the current scene.
 function iframeInject() {
-	const searchingFor = new Set([
-		"mLinesValueView",
-		"mScoreValueView",
-		"mLevelValueView",
-	]);
-
 	interface TetrisApp extends Record<string, unknown> {
 		mSceneMgr: {
 			getCurrentScene: () => {
@@ -34,16 +28,21 @@ function iframeInject() {
 		obj: Record<string, unknown>,
 		seenAlready = new Set()
 	) {
-		for (var key in obj) {
+		for (const key in obj) {
 			if (Object.hasOwnProperty.call(obj, key)) {
 				if (seenAlready.has(obj[key])) continue;
 				seenAlready.add(obj[key]);
-				if (searchingFor.has(key)) {
+				if (
+					new Set([
+						"mLinesValueView",
+						"mScoreValueView",
+						"mLevelValueView",
+					]).has(key)
+				)
 					values[key] = obj[key] as { mText: string };
-				}
-				if (obj[key] && typeof obj[key] == "object") {
+
+				if (obj[key] && typeof obj[key] === "object")
 					recursiveSearch(obj[key] as Record<string, unknown>, seenAlready);
-				}
 			}
 		}
 	}
@@ -56,14 +55,10 @@ function iframeInject() {
 		if (!found && currentScene === "game") {
 			values = {};
 			recursiveSearch((window as unknown as Window).mBPSApp);
-			if (Object.keys(values).length === 3) {
-				found = true;
-			}
-		} else {
-			if (currentScene === "mainMenu" || currentScene === "gameOver") {
-				found = false;
-			}
-		}
+			if (Object.keys(values).length === 3) found = true;
+		} else if (currentScene === "mainMenu" || currentScene === "gameOver")
+			found = false;
+
 		try {
 			document.querySelector<HTMLTextAreaElement>(
 				"#PreMiD-tetris-presence-output"
@@ -72,19 +67,20 @@ function iframeInject() {
 				score: values.mScoreValueView.mText,
 				level: values.mLevelValueView.mText,
 			});
-		} catch (e) {}
+		} catch (e) {
+			/* ignore */
+		}
 	}, 2000);
 }
 
-const customJavaScript = `{(${iframeInject.toString()})();}`,
-	template = document.createElement("template"),
+const template = document.createElement("template"),
 	script = document.createElement("script"),
 	output = document.createElement("textarea");
 
 output.id = "PreMiD-tetris-presence-output";
 output.style.display = "none";
 script.id = "PreMiD-tetris-presence-script";
-script.textContent = customJavaScript;
+script.textContent = `{(${iframeInject.toString()})();}`;
 template.append(script, output);
 document.head.append(template.cloneNode(true));
 
@@ -92,10 +88,11 @@ const iframe = new iFrame();
 
 iframe.on("UpdateData", () => {
 	try {
-		const output = document.querySelector<HTMLTextAreaElement>(
+		const data = JSON.parse(
+			document.querySelector<HTMLTextAreaElement>(
 				"#PreMiD-tetris-presence-output"
-			),
-			data = JSON.parse(output.value);
+			).value
+		);
 		iframe.send(data);
 	} catch {
 		/* ignore */

@@ -27,10 +27,8 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, href } = document.location,
-		pathList = pathname.split("/").filter(Boolean);
-
-	switch (pathList[0] ?? "") {
+		{ pathname, href } = document.location;
+	switch (pathname.split("/").find(Boolean) ?? "") {
 		case "": {
 			presenceData.details = "Browsing home page";
 			break;
@@ -44,8 +42,9 @@ presence.on("UpdateData", async () => {
 		}
 		case "article": {
 			presenceData.details = "Reading an article";
-			presenceData.state =
-				document.querySelector<HTMLHeadingElement>("[itemprop=headline]");
+			presenceData.state = document.querySelector<HTMLHeadingElement>(
+				"[itemprop=headline]"
+			);
 			presenceData.buttons = [
 				{
 					label: "Read Article",
