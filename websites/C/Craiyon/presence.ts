@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = window.location,
+		{ pathname, href } = window.location,
 		pathList = pathname.split("/").filter(Boolean);
 	switch (pathList[0] ?? "/") {
 		case "/": {
@@ -70,6 +70,12 @@ presence.on("UpdateData", async () => {
 			).nextElementSibling.textContent.trim();
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>("main img");
+			presenceData.buttons = [
+				{
+					label: "View Image Details",
+					url: href,
+				},
+			];
 			break;
 		}
 		case "privacy": {
