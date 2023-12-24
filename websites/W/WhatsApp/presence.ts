@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 
 	if (
 		name?.match(
-			/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/gm
+			/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/gm
 		)?.[0] &&
 		!showNumbers
 	)
@@ -53,26 +53,22 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 		}
+	} else if (document.querySelector('[role="tablist"]')) {
+		// if contact windows with media/documents/etc is open
+		presenceData.details = `Viewing ${document
+			.querySelector('button[aria-selected="true"]')
+			?.textContent?.toLowerCase()} in the chat with ${
+			!showRecipient ? "someone" : name
+		}`;
+	} else if (document.querySelector('[class="_2Ts6i _1xFRo"] > span > div')) {
+		// If contact windows is open
+		presenceData.details = `Viewing contact info of ${
+			!showRecipient ? "someone" : name
+		}`;
 	} else {
-		if (document.querySelector('[role="tablist"]')) {
-			// if contact windows with media/documents/etc is open
-			presenceData.details = `Viewing ${document
-				.querySelector('button[aria-selected="true"]')
-				?.textContent?.toLowerCase()} in the chat with ${
-				!showRecipient ? "someone" : name
-			}`;
-		} else if (document.querySelector('[class="_2Ts6i _1xFRo"] > span > div')) {
-			// If contact windows is open
-			presenceData.details = `Viewing contact info of ${
-				!showRecipient ? "someone" : name
-			}`;
-		} else {
-			presenceData.details = `Texting with ${
-				!showRecipient ? "someone" : name
-			}`;
-			presenceData.state =
-				(typing?.textContent && "Typing...") || "Just reading...";
-		}
+		presenceData.details = `Texting with ${!showRecipient ? "someone" : name}`;
+		presenceData.state =
+			(typing?.textContent && "Typing...") || "Just reading...";
 	}
 
 	presence.setActivity(presenceData);
