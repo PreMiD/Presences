@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 		case "article": {
 			presenceData.details = "Reading an article";
 			presenceData.state =
-				document.querySelector<HTMLHeadingElement>(".headline");
+				document.querySelector<HTMLHeadingElement>("[itemprop=headline]");
 			presenceData.buttons = [
 				{
 					label: "Read Article",
