@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, href } = window.location,
+		{ pathname, href } = document.location,
 		pathList = pathname.split("/").filter(Boolean);
 	switch (pathList[0] ?? "/") {
 		case "/": {
