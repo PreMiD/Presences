@@ -316,6 +316,17 @@ interface Metadata {
 	}[];
 }
 
+interface Contributor {
+	/**
+	 * Name of the contributor on Discord.
+	 */
+	name: string;
+	/**
+	 * Discord ID of the contributor.
+	 */
+	id: string;
+}
+
 type PresenceClassSetActivityEvent = {
 	event: "setActivity";
 	data: { clientId: string; presenceData: PresenceDataFinal };
