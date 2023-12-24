@@ -95,8 +95,7 @@ presence.on("UpdateData", async () => {
 				const videos = Array.from(document.querySelectorAll("video")).find(
 						video => !video.paused
 					),
-					video =
-						videos.length !== 0 ? videos[0] : document.querySelector("video");
+					video = videos ?? document.querySelector("video");
 				if (!video?.paused) {
 					cached = {
 						video,
