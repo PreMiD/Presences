@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "luscarvalho",
+		"id": "1187606265829019689"
+	},
+	"service": "Taiyō",
+	"description": {
+		"en": "Read manga online for free at Taiyō, without ads, with high-quality images, and reader support.",
+		"pt_BR": "Leia mangás online gratuitamente no Taiyō, sem anúncios, com imagens de alta qualidade e suporte ao leitor."
+	},
+	"url": "taiyo.moe",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/HwdiE6p.png",
+	"thumbnail": "https://i.imgur.com/6HHU9u3.png",
+	"color": "#FF4F4F",
+	"category": "anime",
+	"tags": [
+		"manga",
+		"reading"
+	]
+}
