@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 		]);
 
 	let name = document
-		.querySelector('[class="AmmtE"]')
+		.querySelector(".AmmtE")
 		?.querySelector('[class*="lhj4utae"]')?.textContent;
 
 	if (
@@ -31,12 +31,12 @@ presence.on("UpdateData", async () => {
 
 	if (!name && !typing) {
 		switch (true) {
-			case !!document.querySelector('[class="ppled2lx"]'): {
+			case !!document.querySelector(".ppled2lx"): {
 				// Community tab
 				presenceData.details = "Viewing communities";
 				break;
 			}
-			case !!document.querySelector('[class="mrcito7c r96muop5"]'): {
+			case !!document.querySelector(".mrcito7c.r96muop5"): {
 				// Status
 				presenceData.details = "Browsing all status updates";
 				break;
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 			?.textContent?.toLowerCase()} in the chat with ${
 			!showRecipient ? "someone" : name
 		}`;
-	} else if (document.querySelector('[class="_2Ts6i _1xFRo"] > span > div')) {
+	} else if (document.querySelector("._2Ts6i._1xFRo > span > div")) {
 		// If contact windows is open
 		presenceData.details = `Viewing contact info of ${
 			!showRecipient ? "someone" : name
