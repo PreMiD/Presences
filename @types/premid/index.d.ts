@@ -5,36 +5,68 @@
 interface PresenceData {
 	/**
 	 * Top row of the status
+	 *
+	 * Supports:
+	 *
+	 * `String`: A string
+	 *
+	 * `Node`: An element to use (it will use `.textContent`)
 	 */
-	details?: string;
+	details?: string | Node;
 	/**
 	 * Bottom row of the status
+	 *
+	 * Supports:
+	 *
+	 * `String`: A string
+	 *
+	 * `Node`: An element to use (it will use `.textContent`)
 	 */
-	state?: string;
+	state?: string | Node;
 	/**
 	 * Timestamp in seconds or milliseconds for the start of the activity.
 	 * Including this will show time as "elapsed"
 	 */
-	startTimestamp?: number;
+	startTimestamp?: number | Date;
 	/**
 	 * Timestamp in seconds or milliseconds until the end of the activity.
 	 * Including this will show time as "remaining" and it takes priority over startTimestamp
 	 */
-	endTimestamp?: number;
+	endTimestamp?: number | Date;
 	/**
-	 * Key of an image uploaded to the Rich Presence Art Assets of your Presence or a URL to an image.
 	 * Will display as the large profile artwork
+	 *
+	 * Supports:
+	 *
+	 * `String`: An URL to the image or a base64 encoded image
+	 *
+	 * `Blob`: A blob of the image
+	 *
+	 * `HTMLImageElement`: An image element to use (it will be converted to a blob)
 	 */
-	largeImageKey?: string;
+	largeImageKey?: string | Blob | HTMLImageElement;
 	/**
-	 * Key of an image uploaded to the Rich Presence Art Assets of your Presence or a URL to an image.
 	 * Will display as the small profile artwork
+	 *
+	 * Supports:
+	 *
+	 * `String`: An URL to the image or a base64 encoded image
+	 *
+	 * `Blob`: A blob of the image
+	 *
+	 * `HTMLImageElement`: An image element to use (it will be converted to a blob)
 	 */
-	smallImageKey?: string;
+	smallImageKey?: string | Blob | HTMLImageElement;
 	/**
 	 * Tooltip for the smallImageKey
+	 *
+	 * Supports:
+	 *
+	 * `String`: A string
+	 *
+	 * `Node`: An element to use (it will use `.textContent`)
 	 */
-	smallImageText?: string;
+	smallImageText?: string | Node;
 	/**
 	 * Array of buttons, max 2, label is the button text, and url is the link
 	 */
@@ -44,12 +76,39 @@ interface PresenceData {
 interface ButtonData {
 	/**
 	 * Text for the button
+	 *
+	 * Supports:
+	 *
+	 * `String`: A string
+	 *
+	 * `Node`: An element to use (it will use `.textContent`)
 	 */
-	label: string;
+	label: string | Node;
 	/**
 	 * URL of button link
+	 *
+	 * Supports:
+	 *
+	 * `String`: A string
+	 *
+	 * `HTMLAnchorElement`: An anchor element to use (it will use `.href`)
 	 */
-	url: string;
+	url: string | HTMLAnchorElement;
+}
+
+interface PresenceDataFinal {
+	state?: string;
+	details?: string;
+	startTimestamp?: number | Date;
+	endTimestamp?: number | Date;
+	largeImageKey?: string;
+	smallImageKey?: string;
+	smallImageText?: string;
+	buttons?: { label: string; url: string }[];
+}
+
+interface PresenceDataFull extends PresenceDataFinal {
+	largeImageText?: string;
 }
 
 /**
@@ -64,16 +123,10 @@ interface PresenceOptions {
 	/**
 	 * The `UpdateData` event for both the presence and the iframe
 	 * will only be fired when the page has fully loaded.
-	 * @deprecated since 2.2.4
 	 */
 	injectOnComplete?: boolean;
-	/**
-	 * Empty presence data will show the application (image and name) on
-	 * the user's profile.
-	 * @deprecated since 2.2.4
-	 */
-	appMode?: boolean;
 }
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const enum Assets {
 	Play = "https://cdn.rcd.gg/PreMiD/resources/play.png",
@@ -95,183 +148,42 @@ const enum Assets {
 	Viewing = "https://cdn.rcd.gg/PreMiD/resources/viewing.png",
 }
 
-/**
- * Contains basic information about the presece
- * @link https://docs.premid.app/dev/presence/metadata
- */
-interface Metadata {
-	/**
-	 * Should contain Object with name and id of the presence developer.
-	 *
-	 * Name is your Discord username without the identifier(#0000).
-	 *
-	 * User id can be copied from Discord by enabling developer mode and right-clicking on your profile.
-	 */
-	author: Contributor;
-	/**
-	 * Should contain an Array of Objects with each Object having the name and id of the contributor.
-	 *
-	 * Name is your Discord username without the identifier(#0000).
-	 *
-	 * User id can be copied from Discord by enabling developer mode and right-clicking on your profile.
-	 */
-	contributors?: Contributor[];
-	/**
-	 * The title of the service that this presence supports. The folder name and service name should also be the same.
-	 */
-	service: string;
-	/**
-	 * Alternative titles for the service which can be used for searching in the store.
-	 *
-	 * Useful for services that have different names in different countries or for services which have spaces in them, you can remove the space in the alternative name for easier searching.
-	 *
-	 * Note: This is **NOT** used for tags! Only for alternative names!
-	 */
-	altnames?: string[];
-	/**
-	 * Small description of the service.
-	 *
-	 * Your description must have key pair values which indicate the language, and the description in that specific language.
-	 *
-	 * Make descriptions with the languages that you know, our translators will make changes to your metadata file.
-	 *
-	 * Visit the link for all the language IDs.
-	 * @link https://api.premid.app/v2/langFile/list
-	 */
-	description: Record<string, string>;
-	/**
-	 * URL of the service.
-	 *
-	 * Example: `vk.com`
-	 *
-	 * This url must match the url of the website as it will be used to detect wherever or not this is the website to inject the script to.
-	 *
-	 * This may only be used as an array when there are more than one urls.
-	 *
-	 * Note: Do **NOT** add `http://` or `https://` in the url or it will not work.
-	 */
-	url: string | string[];
-	/**
-	 * Version of your presence.
-	 *
-	 * Use Sematic Versioning; <MAJOR>.<MINOR>.<PATCH>
-	 *
-	 * @link https://semver.org/
-	 */
-	version: string;
-	/**
-	 * Link to service's logo.
-	 *
-	 * Must be an imgur link ending with .png/.jpg/.jpeg/.gif.
-	 */
-	logo: string;
-	/**
-	 * Link to service's thumbnail or picture of the website.
-	 *
-	 * Must end with .png/.jpg/etc.
-	 */
-	thumbnail: string;
-	/**
-	 * `#HEX` value.
-	 *
-	 * We recommend using a color that resembles the service the most.
-	 */
-	color: string;
-	/**
-	 * Array with tags, they will help users to search your presence on the website.
-	 */
-	tags: string[];
-	/**
-	 * A string used to represent the category the presence falls under.
-	 *
-	 * @link https://docs.premid.app/dev/presence/metadata#presence-categories
-	 */
-	category: "anime" | "games" | "music" | "socials" | "videos" | "other";
-	/**
-	 * Defines whether `iFrames` are used.
-	 */
-	iframe?: boolean;
-	/**
-	 * A regular expression string used to match urls.
-	 * @link https://docs.premid.app/dev/presence/metadata#regular-expressions
-	 */
-	regExp?: string;
-	/**
-	 * A regular expression selector that selects iframes to inject into.
-	 * @link https://docs.premid.app/dev/presence/metadata#regular-expressions
-	 */
-	iFrameRegExp?: string;
-	/**
-	 * Defines whether `getLogs()` is used.
-	 */
-	readLogs?: boolean;
-	/**
-	 * Whether to include a "add presence" button on the store. Only available for partnered presences.
-	 *
-	 * @private
-	 */
-	button?: boolean;
-	/**
-	 * Whether to display a warning on the presence installation page.
-	 */
-	warning?: boolean;
-	/**
-	 * An array of settings the user can change.
-	 * @link https://docs.premid.app/dev/presence/metadata#presence-settings
-	 */
-	settings?: {
-		/**
-		 * Identifier of the setting, used to obtain its value through presence.getSetting()
-		 */
-		id: string;
-		/**
-		 * Needed for every setting except if you use `multiLanguage`.
-		 */
-		title?: string;
-		/**
-		 * Needed for every setting except if you use `multiLanguage`.
-		 */
-		icon?: string;
-		/**
-		 * Record of conditions that need to be matched for the setting to appear.
-		 * The keys should be ids of other settings and the values should be the value they need to match.
-		 */
-		if?: Record<string, string | number | boolean>;
-		/**
-		 * The text that appears in the background of string settings when nothing is in the input.
-		 */
-		placeholder?: string;
-		/**
-		 * The default value of the setting.
-		 */
-		value?: string | number | boolean;
-		/**
-		 * An array of values to be used as choices for the setting.
-		 * The returned value will be a number representing the index of the chosen option
-		 */
-		values?: (string | number | boolean)[];
-		/**
-		 * `false`: default, it disables multi-localization.
-		 *
-		 * `true`: use this if you are only going to use strings from the [`general.json`](https://github.com/PreMiD/Localization/blob/main/src/Presence/general.json) file.
-		 *
-		 * `string`: name of the file, excluding the extension (.json), inside the [localization github repo](https://github.com/PreMiD/Localization/tree/master/src/Presence).
-		 *
-		 * `string[]`: if you are using more than one file, from inside of the [localization github repo](https://github.com/PreMiD/Localization/tree/master/src/Presence), you can specify all the values in an array. Only common languages of all the files will be listed.
-		 */
-		multiLanguage?: boolean | string | string[];
-	}[];
-}
+type PresenceClassSetActivityEvent = {
+	event: "setActivity";
+	data: { clientId: string; presenceData: PresenceDataFinal };
+};
 
-interface Contributor {
-	/**
-	 * Name of the contributor on Discord.
-	 */
-	name: string;
-	/**
-	 * Discord ID of the contributor.
-	 */
+type PresenceClassClearActivityEvent = { event: "clearActivity" };
+
+type PresenceClassGetPresenceLetiableEvent = {
+	event: "getPresenceLetiable";
+	data: string;
+	nonce: string;
+};
+
+type PresenceClassGetPageVariablesEvent = {
+	event: "getPageVariables";
+	data: string[];
+	nonce: string;
+};
+
+type PresenceClassReconnectEvent = {
+	event: "reconnect";
+};
+
+type PresenceClassEvents =
+	| PresenceClassSetActivityEvent
+	| PresenceClassClearActivityEvent
+	| PresenceClassGetPresenceLetiableEvent
+	| PresenceClassGetPageVariablesEvent
+	| PresenceClassReconnectEvent;
+
+type ConsoleLogType = "log" | "info" | "warn" | "error";
+interface ConsoleLog<T = unknown> {
 	id: string;
+	timestamp: number;
+	type: ConsoleLogType;
+	content: T;
 }
 
 /**
@@ -279,23 +191,23 @@ interface Contributor {
  * @link https://docs.premid.app/en/dev/presence/class
  */
 declare class Presence {
-	metadata: Metadata;
-	_events: any;
 	private clientId;
 	private injectOnComplete;
-	private appMode;
-	private trayTitle;
-	private playback;
 	private internalPresence;
 	private port;
-	private genericStyle;
-	private presenceStyle;
-	private encryptionKey;
-	private normalizeLanguageCode;
+	private pmd;
+	private service;
+	private isTemporary;
+	private log;
+	private logInfo;
+	private logError;
+	private logSuccess;
 	/**
 	 * Create a new Presence
 	 */
 	constructor(presenceOptions: PresenceOptions);
+	private injectVariableGetter(): Promise<void>;
+	private connectToBackground(): void;
 	/**
 	 * Get the current activity
 	 * @link https://docs.premid.app/en/dev/presence/class#getactivity
@@ -305,10 +217,20 @@ declare class Presence {
 	/**
 	 * Sets the presence activity and sends it to the application.
 	 * @param data PresenceData or Slideshow
-	 * @param playback Is presence playing
+	 * @param _playback DEPRECATED: Is presence playing
 	 * @link https://docs.premid.app/dev/presence/class#setactivitypresencedata-boolean
 	 */
-	setActivity(data?: PresenceData | Slideshow, playback?: boolean): void;
+	setActivity(
+		data?: PresenceData | Slideshow,
+		_playback?: boolean
+	): Promise<void>;
+	private getTextFromElement(element: string | Node): string | undefined;
+	private imageSrcToBlob;
+	private getImageFromElement(
+		element: string | Blob | HTMLImageElement
+	): Promise<string | undefined>;
+	private uploadedBlobs;
+	private uploadBlob(blob: Blob): Promise<string | undefined>;
 	/**
 	 * Clears the activity shown in discord as well as the Tray and keybinds
 	 * @link https://docs.premid.app/dev/presence/class#clearactivity
@@ -316,35 +238,87 @@ declare class Presence {
 	clearActivity(): void;
 	/**
 	 * Sets the tray title on the Menubar in Mac OS (Mac OS only, supports ANSI colors)
-	 * @param trayTitle Tray Title
+	 * @param _trayTitle Tray Title
 	 * @link https://docs.premid.app/dev/presence/class#settraytitlestring
 	 * @since 2.0-BETA3
-	 * @deprecated since 2.2.3
+	 * @deprecated 2.5
 	 */
-	setTrayTitle(trayTitle?: string): void;
+	setTrayTitle(_trayTitle?: string): void;
 	/**
 	 * Get translations from the extension
 	 * @param strings String object with keys being the key for string, keyValue is the string value
-	 * @param language Language
+	 * @param language DEPRECATED: Language to get strings for
 	 * @link https://docs.premid.app/dev/presence/class#getstringsobject
 	 */
 	getStrings<
 		T extends {
 			[K: string]: string;
 		}
-	>(strings: T, language?: string): Promise<T>;
+	>(strings: T, _language?: string): Promise<T>;
 	/**
-	 * Get letiables from the actual site *IMPORTANT: This function can make site lagging when it has been used too many times*
+	 * Get letiables from the actual site
 	 * @param {Array} letiables Array of letiable names to get
 	 * @example let pagelet = getPageletiable('pagelet') -> "letiable content"
 	 * @link https://docs.premid.app/presence-development/coding/presence-class#getpageletiable-string
+	 * @deprecated 2.5 - Use getPageVariable instead
 	 */
-	getPageletiable<T>(letiable: string): Promise<T>;
+	getPageletiable<T = unknown>(letiable: string): Promise<T>;
 	/**
 	 * Returns an array of the past 100 logs, you can filter these logs with a RegExp.
-	 * @param regExp Filter of the logs
+	 * @param regExp Filter for the logs content
+	 * @param options Options for the logs
 	 */
-	getLogs(regExp?: RegExp): Promise<any[]>;
+	getLogs<T = unknown>(
+		regExp?: RegExp,
+		options?: {
+			/**
+			 * Types of logs to get
+			 *
+			 * Default: `["log"]`
+			 */
+			types?: ConsoleLogType[];
+			/**
+			 * Whether to only get the content of the logs
+			 *
+			 * Default: `true`
+			 */
+			contentOnly?: true;
+		}
+	): Promise<T[]>;
+	getLogs<T = unknown>(
+		regExp?: RegExp,
+		options?: {
+			/**
+			 * Types of logs to get
+			 *
+			 * Default: `["log"]`
+			 */
+			types?: ConsoleLogType[];
+			/**
+			 * Whether to only get the content of the logs
+			 *
+			 * Default: `true`
+			 */
+			contentOnly: false;
+		}
+	): Promise<ConsoleLog<T>[]>;
+	getLogs<T = unknown>(
+		regExp?: RegExp,
+		options?: {
+			/**
+			 * Types of logs to get
+			 *
+			 * Default: `["log"]`
+			 */
+			types?: ConsoleLogType[];
+			/**
+			 * Whether to only get the content of the logs
+			 *
+			 * Default: `true`
+			 */
+			contentOnly?: boolean;
+		}
+	): Promise<T[] | ConsoleLog<T>[]>;
 	/**
 	 * Returns extension version
 	 * @param onlyNumeric version number without dots
@@ -390,16 +364,6 @@ declare class Presence {
 	 */
 	timestampFromFormat(format: string): number;
 	/**
-	 * Converts a hex string into an RGB object
-	 * @param hex The hex string
-	 */
-	private hexToRGB(hex: `#${string}`): { r: number; g: number; b: number };
-	/**
-	 * Calculates the font color based on the luminosity of the background
-	 * @param backgroundHex The hex string of the background
-	 */
-	private getFontColor(backgroundHex: string): "white" | "black";
-	/**
 	 * Console logs with an info message
 	 * @param message The log message
 	 */
@@ -420,19 +384,21 @@ declare class Presence {
 	 */
 	createSlideshow(): Slideshow;
 	/**
+	 * Get variables from the web page
+	 * Supports nested variables using dot notation (e.g. `document.title`)
+	 *
+	 * NOTE: This function can be very heavy if you are not directly accessing a variable with primitive value!
+	 * @param variables Variables to get
+	 * @since 2.5
+	 */
+	getPageVariable<T extends Record<string, unknown>>(
+		...variables: string[]
+	): Promise<T>;
+	/**
 	 * Sends data back to application
-	 * @param data Data to send back to application
+	 * @param event Event
 	 */
-	private sendData(data: Record<string, unknown>): void;
-	/**
-	 * Generates a AES key from the app identifier
-	 */
-	private getEncryptionKey(): Uint8Array;
-	/**
-	 * Encrypts a string using AES algorithm
-	 * @param data String to be encrypted
-	 */
-	private encryptData(data: string): string;
+	private postEvent(data: PresenceClassEvents): void;
 	/**
 	 * Subscribe to events emitted by the extension
 	 * @param eventName EventName to subscribe to
