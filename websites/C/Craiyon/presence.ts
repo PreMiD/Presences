@@ -10,59 +10,26 @@ let browsingTimestamp: number = Date.now() / 1000,
 	oldPrompt: string = null,
 	activityState: State = "start";
 
-const uploadedURLs: Record<string, string> = {};
-function uploadImage(url: string) {
-	return new Promise<string>(resolve => {
-		if (uploadedURLs[url]) return resolve(uploadedURLs[url]);
-		// Prevents uploading the same image twice due to race conditions
-		uploadedURLs[url] = logo;
-		try {
-			fetch(url)
-				.then(r => r.arrayBuffer())
-				.then(file => {
-					return fetch("https://bashupload.com", {
-						method: "POST",
-						body: file,
-					})
-						.then(r => r.text())
-						.then(x => x.match(/https(.*)/)?.[0]);
-				})
-				.then(uploadURL => {
-					uploadedURLs[url] = uploadURL;
-					setTimeout(() => {
-						presence.info(uploadURL);
-						resolve(uploadURL);
-					}, 750);
-				});
-		} catch (err) {
-			presence.error(err);
-			resolve(url);
-		}
-	});
-}
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = window.location;
-	switch (pathname) {
+		{ pathname } = window.location,
+		pathList = pathname.split("/").filter(Boolean);
+	switch (pathList[0] ?? "/") {
 		case "/": {
-			const input = document.querySelector<HTMLDivElement>("#prompt"),
-				container = document.querySelector<HTMLDivElement>(
-					".h-full.w-full > .relative > div > div"
+			const input = document.querySelector<HTMLTextAreaElement>("#prompt"),
+				generationButton =
+					document.querySelector<HTMLButtonElement>("#generateButton"),
+				promptSettingsCheck = document.querySelector<HTMLImageElement>(
+					"[alt='Style example']"
 				);
-			presenceData.state = input.textContent
-				? `"${input.textContent}"`
+			presenceData.state = input.value
+				? `"${input.value}"`
 				: "Waiting for input...";
-			if (container.querySelector("svg.text-gray-300"))
-				presenceData.details = "Thinking of a prompt";
-			else if (
-				input.nextElementSibling
-					.querySelector("img")
-					.classList.contains("animate-wiggle")
-			) {
+			if (promptSettingsCheck) presenceData.details = "Thinking of a prompt";
+			else if (generationButton.disabled) {
 				if (activityState !== "generation") {
 					presenceData.startTimestamp = browsingTimestamp = Date.now() / 1000;
 					slideshow.deleteAllSlides();
@@ -76,39 +43,40 @@ presence.on("UpdateData", async () => {
 					presenceData.startTimestamp = browsingTimestamp = Date.now() / 1000;
 					activityState = "results";
 				}
-				if (
-					document.activeElement === input &&
-					input.textContent !== oldPrompt
-				) {
+				if (document.activeElement === input && input.value !== oldPrompt) {
 					presenceData.details = "Thinking of a new prompt";
 					slideshow.deleteAllSlides();
-				} else if (container.childElementCount > 3) {
+				} else {
 					presenceData.details = "Viewing results";
 					presenceData.state = `"${oldPrompt}"`;
-					const imageURLs = [...container.children].map(child => {
-						return (child.firstElementChild as HTMLImageElement).src;
-					});
-					for (const [i, imageURL] of imageURLs.entries()) {
+					const images = document.querySelectorAll<HTMLImageElement>(
+						".image-container img"
+					);
+					for (const [i, image] of images.entries()) {
 						const presenceDataCopy = Object.assign({}, presenceData);
-						presenceDataCopy.largeImageKey = await uploadImage(imageURL);
+						presenceDataCopy.largeImageKey = image;
 						slideshow.addSlide(`image${i}`, presenceDataCopy, 5000);
 					}
-				} else {
-					if (slideshow.getSlides().length > 0) slideshow.deleteAllSlides();
-					presenceData.details = "Viewing a generated image";
-					presenceData.state = `"${oldPrompt}"`;
-					presenceData.largeImageKey = await uploadImage(
-						container.querySelector("img").src
-					);
 				}
 			}
 			break;
 		}
-		case "/privacy": {
+		case "image": {
+			presenceData.details = "Viewing an image";
+			presenceData.state = (
+				document
+					.evaluate("//p[text()='Prompt']", document.body)
+					.iterateNext() as HTMLParagraphElement
+			).nextElementSibling.textContent.trim();
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>("main img");
+			break;
+		}
+		case "privacy": {
 			presenceData.details = "Reading privacy policy";
 			break;
 		}
-		case "/terms": {
+		case "terms": {
 			presenceData.details = "Reading terms and conditions";
 			break;
 		}
