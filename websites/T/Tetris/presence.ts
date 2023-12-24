@@ -37,12 +37,15 @@ presence.on("UpdateData", async () => {
 		}
 		case "topic": {
 			presenceData.details = "Browsing a topic";
-			presenceData.state = document.querySelector<HTMLDivElement>("#topic-heading").textContent.trim();
+			presenceData.state = document
+				.querySelector<HTMLDivElement>("#topic-heading")
+				.textContent.trim();
 			break;
 		}
 		case "article": {
 			presenceData.details = "Reading an article";
-			presenceData.state = document.querySelector<HTMLHeadingElement>(".headline");
+			presenceData.state =
+				document.querySelector<HTMLHeadingElement>(".headline");
 			presenceData.buttons = [
 				{
 					label: "Read Article",
@@ -66,7 +69,8 @@ presence.on("UpdateData", async () => {
 		}
 		case "product": {
 			presenceData.details = "Viewing a product";
-			presenceData.state = document.querySelector<HTMLHeadingElement>(".product-lead h1");
+			presenceData.state =
+				document.querySelector<HTMLHeadingElement>(".product-lead h1");
 			presenceData.buttons = [
 				{
 					label: "View Product",
