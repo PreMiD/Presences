@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Adicionando Scan";
 		} else presenceData.details = "Dashboard Taiyō";
 	} else if (pathname.startsWith("/chapter/")) {
-		presenceData.details = `Lendo: ${
+		presenceData.details = `${
 			document.querySelector(".media-title")?.textContent
 		}`;
 		presenceData.state = `${
@@ -49,14 +49,14 @@ presence.on("UpdateData", async () => {
 		} - Página ${document.querySelector(".chapter-currentPage")?.textContent}`;
 		presenceData.buttons = [
 			{
-				label: "Ler mangá",
-				url: document.querySelector<HTMLAnchorElement>(".media-title").href,
+				label: "Ler capítulo",
+				url: href,
 			},
 		];
 	} else if (pathname.startsWith("/media/")) {
 		presenceData.largeImageKey =
 			document.querySelector<HTMLImageElement>(".cover-url").src;
-		presenceData.details = `Visualizando: ${
+		presenceData.details = `${
 			document.querySelector(".media-title")?.textContent
 		}`;
 		presenceData.buttons = [
