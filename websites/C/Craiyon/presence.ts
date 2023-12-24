@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 				document
 					.evaluate("//p[text()='Prompt']", document.body)
 					.iterateNext() as HTMLParagraphElement
-			).nextElementSibling.textContent.trim();
+			).nextElementSibling;
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>("main img").src;
 			presenceData.buttons = [
@@ -76,6 +76,23 @@ presence.on("UpdateData", async () => {
 					url: href,
 				},
 			];
+			break;
+		}
+		case "blog": {
+			if (pathList.length > 1) {
+				presenceData.details = "Reading a blog post";
+				presenceData.state = document.querySelector("h1");
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>("main p + img").src;
+				presenceData.buttons = [
+					{
+						label: "View Blog Post",
+						url: href,
+					},
+				];
+			} else {
+				presenceData.details = "Browsing blog posts";
+			}
 			break;
 		}
 		case "privacy": {
