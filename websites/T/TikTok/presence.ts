@@ -102,9 +102,7 @@ presence.on("UpdateData", async () => {
 			if (videos) {
 				video = videos;
 				getVideo(videos);
-			} else {
-				video = getVideo(null);
-			}
+			} else video = getVideo(null);
 
 			const baseEl = video?.closest(
 					'[data-e2e="recommend-list-item-container"]'
