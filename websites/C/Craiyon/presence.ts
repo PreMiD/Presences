@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
 					);
 					for (const [i, image] of images.entries()) {
 						const presenceDataCopy = Object.assign({}, presenceData);
-						presenceDataCopy.largeImageKey = image;
+						presenceDataCopy.largeImageKey = image.src;
 						slideshow.addSlide(`image${i}`, presenceDataCopy, 5000);
 					}
 				}
@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
 					.iterateNext() as HTMLParagraphElement
 			).nextElementSibling.textContent.trim();
 			presenceData.largeImageKey =
-				document.querySelector<HTMLImageElement>("main img");
+				document.querySelector<HTMLImageElement>("main img").src;
 			presenceData.buttons = [
 				{
 					label: "View Image Details",
