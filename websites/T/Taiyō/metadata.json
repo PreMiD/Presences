@@ -12,7 +12,10 @@
 		"en": "Read manga online for free at Taiyō, without ads, with high-quality images, and reader support.",
 		"pt_BR": "Leia mangás online e gratuitamente na Taiyō, sem anúncios, com alta qualidade de imagens e suporte aos leitores."
 	},
-	"url": "taiyo.moe",
+	"url": [
+		"taiyo.moe",
+		"www.taiyo.moe"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/HwdiE6p.png",
 	"thumbnail": "https://i.imgur.com/6HHU9u3.png",
