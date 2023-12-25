@@ -22,10 +22,10 @@ const christmasData: { me: MyChristmasData; others: Record<string, unknown> } =
 	};
 
 async function getChristmasData() {
-	const [me, others] = await Promise.all([
-		presence.getPageletiable<MyChristmasData>("me"),
-		presence.getPageletiable<Record<string, unknown>>("others"),
-	]);
+	const { me, others } = await presence.getPageVariable<{
+		me: MyChristmasData;
+		others: Record<string, unknown>;
+	}>("me", "others");
 	if (!me.christmas) clearInterval(interval);
 
 	christmasData.me = me;
