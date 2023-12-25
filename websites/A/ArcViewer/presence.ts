@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		logs = await presence.getLogs();
+		logs = await presence.getLogs<string>();
 
 	for (const line of logs) {
 		if (line.startsWith("Current diff is ")) {
