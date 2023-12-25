@@ -22,11 +22,10 @@ const christmasData: { me: MyChristmasData; others: Record<string, unknown> } =
 	};
 
 async function getChristmasData() {
-	const { me, others } = await presence.getPageVariable<{
-		me: MyChristmasData;
-		others: Record<string, unknown>;
-	}>("me", "others");
-	presence.info(JSON.stringify({ me, others }));
+	const [me, others] = await Promise.all([
+		presence.getPageletiable<MyChristmasData>("me"),
+		presence.getPageletiable<Record<string, unknown>>("others"),
+	]);
 	if (!me.christmas) clearInterval(interval);
 
 	christmasData.me = me;
@@ -49,7 +48,7 @@ presence.on("UpdateData", async () => {
 			Object.keys(christmasData.others).length + 1
 		} people celebrating Christmas`;
 		presenceData.smallImageKey =
-			document.querySelector<HTMLImageElement>(".flag.me").src;
+			document.querySelector<HTMLImageElement>(".flag.me img")?.src ?? Assets.Question;
 		presenceData.smallImageText = christmasData.me.country;
 	}
 
