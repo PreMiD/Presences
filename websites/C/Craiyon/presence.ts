@@ -29,15 +29,15 @@ presence.on("UpdateData", async () => {
 	switch (pathList[0] ?? "/") {
 		case "/": {
 			const input = document.querySelector<HTMLTextAreaElement>("#prompt"),
-				generationButtton =
-					document.querySelector<HTMLButtonElement>("#generateButton"),
 				imageContainers = document.querySelectorAll<HTMLImageElement>(
 					".image-container img"
 				);
 			presenceData.state = input.value
 				? `"${input.value}"`
 				: "Waiting for input...";
-			if (generationButtton.disabled) {
+			if (
+				document.querySelector<HTMLButtonElement>("#generateButton").disabled
+			) {
 				if (activityState !== "generation") {
 					presenceData.startTimestamp = browsingTimestamp = Date.now() / 1000;
 					oldPrompt = input.value;
