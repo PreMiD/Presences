@@ -48,7 +48,8 @@ presence.on("UpdateData", async () => {
 			Object.keys(christmasData.others).length + 1
 		} people celebrating Christmas`;
 		presenceData.smallImageKey =
-			document.querySelector<HTMLImageElement>(".flag.me img")?.src ?? Assets.Question;
+			document.querySelector<HTMLImageElement>(".flag.me img")?.src ??
+			Assets.Question;
 		presenceData.smallImageText = christmasData.me.country;
 	}
 
