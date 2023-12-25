@@ -92,10 +92,10 @@ presence.on("UpdateData", async () => {
 			// Multiple reels (From anywhere)
 
 			if (!cached?.href || !cached?.video || cached?.href !== href) {
-				const videos = Array.from(document.querySelectorAll("video")).find(
+				const video =
+					Array.from(document.querySelectorAll("video")).find(
 						video => !video.paused
-					),
-					video = videos ?? document.querySelector("video");
+					) ?? document.querySelector("video");
 				if (!video?.paused) {
 					cached = {
 						video,
