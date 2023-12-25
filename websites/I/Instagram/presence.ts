@@ -112,7 +112,8 @@ presence.on("UpdateData", async () => {
 			const user = cached?.user;
 			presenceData.details = "Watching a reel";
 			presenceData.state = user ?? "unknown creator";
-			presenceData.smallImageKey = "https://i.imgur.com/YSn0xd3.png";
+			presenceData.smallImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/I/Instagram/assets/0.png";
 			presenceData.buttons = [
 				{ label: "Watch Reel", url: href },
 				{
