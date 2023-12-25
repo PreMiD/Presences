@@ -1,26 +1,26 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.9",
-  "author": {
-    "id": "193714715631812608",
-    "name": "theusaf"
-  },
-  "service": "Tetris",
-  "description": {
-    "en": "Visit the official Tetris® website to play FREE online Tetris, get game and merchandise updates, and read about global Tetris events."
-  },
-  "url": "tetris.com",
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/cdEP9LJ.png",
-  "thumbnail": "https://tetris.com/assets-cms/assets/dl/2022/12/31/tetris-mobile-hero-1560x639.jpg",
-  "color": "#2bace2",
-  "category": "games",
-  "tags": [
-    "tetris",
-    "game",
-    "events",
-    "merchandise",
-    "official"
-  ],
-  "iframe": true,
-  "iFrameRegExp": "tetris[.]com[/]games-content[/]play-tetris-content"
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "193714715631812608",
+		"name": "theusaf"
+	},
+	"service": "Tetris",
+	"description": {
+		"en": "Visit the official Tetris® website to play FREE online Tetris, get game and merchandise updates, and read about global Tetris events."
+	},
+	"url": "tetris.com",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tetris/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tetris/assets/thumbnail.jpg",
+	"color": "#2bace2",
+	"category": "games",
+	"tags": [
+		"tetris",
+		"game",
+		"events",
+		"merchandise",
+		"official"
+	],
+	"iframe": true,
+	"iFrameRegExp": "tetris[.]com[/]games-content[/]play-tetris-content"
 }
