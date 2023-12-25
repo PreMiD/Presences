@@ -34,6 +34,7 @@ if (document.location.hostname === "jackbox.tv") {
 				i--
 			) {
 				const latestLog = playerStateLogs[i];
+				if (typeof latestLog !== "string") continue;
 				let parsedLog;
 				try {
 					parsedLog = JSON.parse(latestLog.slice(8));
