@@ -16,11 +16,9 @@ presence.on("UpdateData", async () => {
 	else if (pathname.startsWith("/dashboard")) {
 		if (pathname.includes("/medias/import"))
 			presenceData.details = "Importando Mangá";
-		else if (pathname.includes("/medias/edit")) {
-			presenceData.smallImageText = "Editando";
-			presenceData.smallImageKey = "https://i.imgur.com/Q9XY9Vy.png";
+		else if (pathname.includes("/medias/edit"))
 			presenceData.details = "Editando Mangá";
-		} else if (pathname.includes("/chapters/upload")) {
+		else if (pathname.includes("/chapters/upload")) {
 			const chapterNumber = document.querySelector<HTMLInputElement>(
 					'.chapter-number input[type="number"]'
 				)?.value,
@@ -35,11 +33,9 @@ presence.on("UpdateData", async () => {
 				if (chapterNumber && chapterVolume)
 					presenceData.state = `Cap. ${chapterNumber} - Vol. ${chapterVolume}`;
 			} else presenceData.details = "Upando mangá...";
-		} else if (pathname.includes("/scans/add")) {
-			presenceData.smallImageText = "Adicionando";
-			presenceData.smallImageKey = "https://i.imgur.com/R4iQ6QB.png";
+		} else if (pathname.includes("/scans/add"))
 			presenceData.details = "Adicionando Scan";
-		} else presenceData.details = "Dashboard Taiyō";
+		else presenceData.details = "Dashboard Taiyō";
 	} else if (pathname.startsWith("/chapter/")) {
 		presenceData.details = `${
 			document.querySelector(".media-title")?.textContent
