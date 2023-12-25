@@ -3,6 +3,12 @@ const presence = new Presence({
 	}),
 	timestamp = Math.floor(Date.now() / 1000);
 
+let cached: {
+	href: string;
+	video: HTMLVideoElement;
+	user: string;
+};
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
@@ -13,116 +19,183 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("elapsedTime"),
 			presence.getSetting<boolean>("postImage"),
 		]),
-		{ pathname } = window.location,
+		{ href, pathname } = document.location,
 		path = pathname.split("/"),
 		[, profileName] = document.title.split("(");
 
 	if (elapsedTimeSetting) presenceData.startTimestamp = timestamp;
 
-	if (!path[1]) presenceData.details = "Viewing the Homepage";
-	else if (pathname.startsWith("/stories")) {
-		const time = document.querySelector("time.BPyeS.Nzb55"),
-			video = document.querySelector("video");
-
-		presenceData.details = privacySetting
-			? "Viewing a Story"
-			: `Viewing ${path[2]}'s Story`;
-
-		if (time && time.getAttribute("datetime")) {
-			presenceData.state = getDateString(
-				new Date(time.getAttribute("datetime"))
-			);
+	switch (true) {
+		case !!document.querySelector("div.QY4Ed.P0xOK input.focus-visible"): {
+			presenceData.details = privacySetting ? "Searching" : "Searching for:";
+			presenceData.state = document.querySelector<HTMLInputElement>(
+				"div.QY4Ed.P0xOK input.focus-visible"
+			)?.value;
+			break;
 		}
-
-		if (!privacySetting && video && video.duration) {
-			const timestamps = presence.getTimestampsfromMedia(video);
-
-			presenceData.startTimestamp = timestamps[0];
-			presenceData.endTimestamp = timestamps[1];
+		case !path[1]: {
+			presenceData.details = "Viewing the Homepage";
+			break;
 		}
+		case pathname.startsWith("/stories"): {
+			const time = document.querySelector("time.BPyeS.Nzb55"),
+				video = document.querySelector("video");
 
-		presenceData.buttons = [
-			{
-				label: "View Story",
-				url: `https://www.instagram.com/stories/${path[2]}/${path[3]}`,
-			},
-		];
-	} else if (pathname.startsWith("/accounts")) {
-		presenceData.details = "Settings";
-		presenceData.state = "Changing their Settings";
-	} else if (pathname.startsWith("/p")) {
-		const time = document.querySelector("time._1o9PC.Nzb55"),
-			profileName = document.querySelector(
-				"a.sqdOP.yWX7d._8A5w5.ZIAjV"
-			)?.textContent,
-			image = document.querySelector<HTMLImageElement>(
-				"div.eLAPa.RzuR0 div.KL4Bh img"
-			);
+			presenceData.details = privacySetting
+				? "Viewing a Story"
+				: `Viewing ${path[2]}'s Story`;
 
-		presenceData.details =
-			privacySetting || !profileName
-				? "Viewing a Post"
-				: `Viewing ${profileName}'s Post`;
+			if (time && time.getAttribute("datetime")) {
+				presenceData.state = getDateString(
+					new Date(time.getAttribute("datetime"))
+				);
+			}
 
-		if (time && time.getAttribute("datetime")) {
-			presenceData.state = getDateString(
-				new Date(time.getAttribute("datetime"))
-			);
+			if (!privacySetting && video && video.duration) {
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(video);
+			}
+
+			presenceData.buttons = [
+				{
+					label: "View Story",
+					url: `https://www.instagram.com/stories/${path[2]}/${path[3]}`,
+				},
+			];
+			break;
 		}
+		case pathname.includes("/accounts"): {
+			presenceData.details = "Settings";
+			presenceData.state = "Changing their Settings";
+			break;
+		}
+		case pathname.includes("/reel/"): {
+			// One reel (Only from profile)
+			const profilename =
+				document.querySelector('[class="_ap3a _aaco _aacw _aacx _aad7 _aade"]')
+					?.textContent ??
+				document.querySelector(
+					"[class*='_acan _acao _acat _acaw _aj1- _ap30 _a6hd']"
+				)?.textContent;
+			presenceData.details = "Watching a reel";
+			presenceData.state = profilename;
+			presenceData.buttons = [
+				{ label: "Watch Reel", url: href },
+				{
+					label: "View Creator's Profile",
+					url: `https://www.instagram.com/${profilename}`,
+				},
+			];
+			break;
+		}
+		case pathname.includes("/reels/"): {
+			// Multiple reels (From anywhere)
 
-		if (!privacySetting && postImageSetting && image && image.src)
-			presenceData.largeImageKey = await getShortURL(image.src);
+			if (!cached?.href || !cached?.video || cached?.href !== href) {
+				const video =
+					Array.from(document.querySelectorAll("video")).find(
+						video => !video.paused
+					) ?? document.querySelector("video");
+				if (!video?.paused) {
+					cached = {
+						video,
+						href,
+						user: video
+							?.closest('div[class*="x6ikm8r"]')
+							?.querySelector('[class*="x1943h6x"]')
+							?.textContent?.toLowerCase(),
+					};
+					return;
+				}
+			}
 
-		presenceData.buttons = [
-			{
-				label: "View Post",
-				url: `https://www.instagram.com/${path[1]}/${path[2]}`,
-			},
-		];
-	} else if (pathname.startsWith("/explore"))
-		presenceData.details = "Exploring...";
-	else if (pathname.startsWith("/nametag"))
-		presenceData.details = "Viewing nametag";
-	else if (
-		pathname.startsWith("/direct/inbox") ||
-		pathname.startsWith("/direct/t")
-	)
-		presenceData.details = "Direct Messages";
-	else if (profileName.split(")")[0].replace("@", "") === path[1]) {
-		const profilePicture =
-			document.querySelector<HTMLImageElement>("img._6q-tv");
+			const user = cached?.user;
+			presenceData.details = "Watching a reel";
+			presenceData.state = user ?? "unknown creator";
+			presenceData.smallImageKey = "https://i.imgur.com/YSn0xd3.png";
+			presenceData.buttons = [
+				{ label: "Watch Reel", url: href },
+				{
+					label: "View Creator's Profile",
+					url: user ? `https://www.instagram.com/${user}` : "",
+				},
+			];
+			break;
+		}
+		case pathname.startsWith("/p"): {
+			const time = document.querySelector("time._1o9PC.Nzb55"),
+				profileName = document.querySelector(
+					"a.sqdOP.yWX7d._8A5w5.ZIAjV"
+				)?.textContent,
+				image = document.querySelector<HTMLImageElement>(
+					"div.eLAPa.RzuR0 div.KL4Bh img"
+				);
 
-		presenceData.details = `Viewing a Profile${privacySetting ? "" : ":"}`;
-		presenceData.state = `${
-			document
-				.querySelector("head > title")
-				?.textContent.split("(")[0]
-				.trim() ?? "Unknown"
-		} (${profileName.split(")")[0]})`;
+			presenceData.details =
+				privacySetting || !profileName
+					? "Viewing a Post"
+					: `Viewing ${profileName}'s Post`;
 
-		if (profilePicture)
-			presenceData.smallImageKey = await getShortURL(profilePicture.src);
+			if (time && time.getAttribute("datetime")) {
+				presenceData.state = getDateString(
+					new Date(time.getAttribute("datetime"))
+				);
+			}
 
-		presenceData.buttons = [
-			{
-				label: "View Profile",
-				url: `https://www.instagram.com/${path[1]}`,
-			},
-		];
-	}
+			if (!privacySetting && postImageSetting && image && image.src)
+				presenceData.largeImageKey = await getShortURL(image.src);
 
-	if (document.querySelector("div.QY4Ed.P0xOK input.focus-visible")) {
-		presenceData.details = privacySetting ? "Searching" : "Searching:";
-		presenceData.state = document.querySelector<HTMLInputElement>(
-			"div.QY4Ed.P0xOK input.focus-visible"
-		)?.value;
+			presenceData.buttons = [
+				{
+					label: "View Post",
+					url: `https://www.instagram.com/${path[1]}/${path[2]}`,
+				},
+			];
+			break;
+		}
+		case pathname.startsWith("/explore"): {
+			presenceData.details = "Exploring...";
+			break;
+		}
+		case pathname.startsWith("/nametag"): {
+			presenceData.details = "Viewing nametag";
+			break;
+		}
+		case pathname.startsWith("/direct/inbox"):
+		case pathname.startsWith("/direct/t"): {
+			presenceData.details = "Direct Messages";
+			break;
+		}
+		case profileName?.split(")")[0].replace("@", "") === path[1]: {
+			const profilePicture =
+				document.querySelector<HTMLImageElement>("img._6q-tv");
+
+			presenceData.details = `Viewing a Profile${privacySetting ? "" : ":"}`;
+			presenceData.state = `${
+				document
+					.querySelector("head > title")
+					?.textContent.split("(")[0]
+					.trim() ?? "Unknown"
+			} (${profileName.split(")")[0]})`;
+
+			if (profilePicture)
+				presenceData.smallImageKey = await getShortURL(profilePicture.src);
+
+			presenceData.buttons = [
+				{
+					label: "View Profile",
+					url: `https://www.instagram.com/${path[1]}`,
+				},
+			];
+			break;
+		}
 	}
 
 	if (privacySetting) {
-		delete presenceData.state;
-		delete presenceData.endTimestamp;
-		delete presenceData.buttons;
-		delete presenceData.smallImageKey;
+		if (presenceData.state) delete presenceData.state;
+		if (presenceData.endTimestamp) delete presenceData.endTimestamp;
+		if (presenceData.buttons) delete presenceData.buttons;
+		if (presenceData.smallImageKey) delete presenceData.smallImageKey;
 	}
 
 	presence.setActivity(presenceData);
