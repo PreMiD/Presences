@@ -8,6 +8,7 @@ type State = "start" | "generation" | "results";
 
 let browsingTimestamp: number = Date.now() / 1000,
 	oldPrompt: string = null,
+	oldPath: string = null,
 	activityState: State = "start",
 	searchResultCacheTimestamp = 0;
 
@@ -20,23 +21,28 @@ presence.on("UpdateData", async () => {
 		pathList = pathname.split("/").filter(Boolean);
 
 	let useSlideshow = false;
+	if (oldPath !== pathname) {
+		oldPath = pathname;
+		slideshow.deleteAllSlides();
+	}
 
 	switch (pathList[0] ?? "/") {
 		case "/": {
-			const input = document.querySelector<HTMLTextAreaElement>("#prompt");
+			const input = document.querySelector<HTMLTextAreaElement>("#prompt"),
+				generationButtton =
+					document.querySelector<HTMLButtonElement>("#generateButton"),
+				imageContainers = document.querySelectorAll<HTMLImageElement>(
+					".image-container img"
+				);
 			presenceData.state = input.value
 				? `"${input.value}"`
 				: "Waiting for input...";
-			if (document.querySelector<HTMLImageElement>("[alt='Style example']"))
-				presenceData.details = "Thinking of a prompt";
-			else if (
-				document.querySelector<HTMLButtonElement>("#generateButton").disabled
-			) {
+			if (generationButtton.disabled) {
 				if (activityState !== "generation") {
 					presenceData.startTimestamp = browsingTimestamp = Date.now() / 1000;
-					slideshow.deleteAllSlides();
-					oldPrompt = input.textContent;
+					oldPrompt = input.value;
 					activityState = "generation";
+					slideshow.deleteAllSlides();
 				}
 				presenceData.details = "Generating images";
 				presenceData.state = `"${oldPrompt}"`;
@@ -44,16 +50,18 @@ presence.on("UpdateData", async () => {
 				if (activityState !== "results") {
 					presenceData.startTimestamp = browsingTimestamp = Date.now() / 1000;
 					activityState = "results";
+					slideshow.deleteAllSlides();
 				}
-				if (document.activeElement === input && input.value !== oldPrompt)
-					presenceData.details = "Thinking of a new prompt";
+				if (
+					(document.activeElement === input && input.value !== oldPrompt) ||
+					!imageContainers.length
+				)
+					presenceData.details = "Thinking of a prompt";
 				else {
 					presenceData.details = "Viewing results";
 					presenceData.state = `"${oldPrompt}"`;
 
-					for (const [i, image] of document
-						.querySelectorAll<HTMLImageElement>(".image-container img")
-						.entries()) {
+					for (const [i, image] of imageContainers.entries()) {
 						const presenceDataCopy = Object.assign({}, presenceData);
 						presenceDataCopy.largeImageKey = image.src;
 						slideshow.addSlide(`image${i}`, presenceDataCopy, 5000);
@@ -87,7 +95,6 @@ presence.on("UpdateData", async () => {
 				const now = Date.now();
 				if (now - searchResultCacheTimestamp > 5000) {
 					searchResultCacheTimestamp = now;
-					slideshow.deleteAllSlides();
 
 					for (const [i, image] of document
 						.querySelectorAll<HTMLImageElement>("main a img")
@@ -126,7 +133,10 @@ presence.on("UpdateData", async () => {
 		}
 	}
 	if (presenceData.details) {
-		if (useSlideshow) presence.setActivity(slideshow);
-		else presence.setActivity(presenceData);
+		if (useSlideshow) {
+			if (!slideshow.currentSlide.details)
+				slideshow.currentSlide = slideshow.getSlides()[0].data;
+			presence.setActivity(slideshow);
+		} else presence.setActivity(presenceData);
 	} else presence.setActivity();
 });
