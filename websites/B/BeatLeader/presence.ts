@@ -131,7 +131,6 @@ enum OtherAssets {
 
 function simplifyKey(key: string): string {
 	let result = key;
-	result = result.replace("Solo", "");
 	if (
 		(result.includes("-PinkPlay_Controllable") &&
 			!result.match(/(?:Standard|OneSaber|Lawless)-PinkPlay_Controllable/)) ||
