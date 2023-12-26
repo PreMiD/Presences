@@ -113,7 +113,7 @@ presence.on("UpdateData", async () => {
 					break;
 				case "agencies":
 					if (pathSplit[2]) {
-						presenceData.largeImageKey = `https://vtubers.wiki/agencies/${pathSplit[2]}/logo.png`;
+						presenceData.largeImageKey = `https://vtubers.wiki/static/agencies/${pathSplit[2]}/logo.png`;
 						presenceData.smallImageKey = Assets.Logo;
 						presenceData.details = "Viewing a Vtuber Agency";
 						presenceData.state = `${document

@@ -79,6 +79,34 @@ function getReviewPresence(): PresenceData {
 	return data;
 }
 
+function getLessonPresence(): PresenceData {
+	const presenceData: PresenceData = {},
+		totalStats = document.querySelectorAll<HTMLDivElement>(
+			'[data-controller="subject-count-statistics"] [data-subject-count-statistics-target="count"]'
+		);
+	presenceData.state = `${
+		document.querySelector<HTMLDivElement>(
+			'[data-quiz-header-target="characters"]'
+		).textContent
+	} - ${
+		document.querySelector<HTMLDivElement>(
+			'[data-quiz-header-target="meaning"]'
+		).textContent
+	}`;
+	presenceData.smallImageKey = getTypeAsset(
+		[
+			...document.querySelector<HTMLDivElement>(
+				'[data-quiz-header-base-class="character-header"]'
+			).classList,
+		]
+			.find(cls => cls.startsWith("character-header--"))
+			.split("--")[1]
+	);
+	if (totalStats.length === 3)
+		presenceData.smallImageText = `${totalStats[0].textContent} radicals | ${totalStats[1].textContent} kanji | ${totalStats[2].textContent} vocab`;
+	return presenceData;
+}
+
 presence.on("UpdateData", () => {
 	const { hostname, pathname } = document.location,
 		presenceData: PresenceData = {
@@ -97,10 +125,12 @@ presence.on("UpdateData", () => {
 						".lessons-and-reviews__button"
 					);
 					if (buttons.length === 2) {
-						const lessons =
-								+buttons[0].querySelector<HTMLSpanElement>("span").textContent,
-							reviews =
-								+buttons[1].querySelector<HTMLSpanElement>("span").textContent;
+						const lessons = +buttons[0].querySelector<HTMLSpanElement>(
+								".lessons-and-reviews__count"
+							).textContent,
+							reviews = +buttons[1].querySelector<HTMLSpanElement>(
+								".lessons-and-reviews__count"
+							).textContent;
 						presenceData.details = "Viewing Dashboard";
 						presenceData.state = `${lessons} lessons | ${reviews} reviews`;
 						presenceData.smallImageText =
@@ -145,44 +175,33 @@ presence.on("UpdateData", () => {
 					Object.assign(presenceData, getReviewPresence());
 					break;
 				}
+				case pathname.match(/^\/recent-mistakes\/.*?\/quiz$/)?.input: {
+					presenceData.details = "Doing Extra Study: Recent Mistakes";
+					Object.assign(presenceData, getReviewPresence());
+					break;
+				}
+				case pathname.match(/^\/recent-mistakes\/.*?\/subjects\/\d+\/lesson$/)
+					?.input: {
+					presenceData.details = "Doing Extra Study: Recent Mistakes Lessons";
+					Object.assign(presenceData, getLessonPresence());
+					break;
+				}
 				case "/subjects/review": {
 					presenceData.details = "Doing Reviews";
 					Object.assign(presenceData, getReviewPresence());
 					break;
 				}
-				case "/subjects/lesson/quiz": {
+				case pathname.match(/^\/subject-lessons\/[-\d/]+\/quiz$/)?.input: {
 					presenceData.details = "Practicing Lessons";
 					Object.assign(presenceData, getReviewPresence());
 					break;
 				}
-				case (pathname.match(/^\/subjects\/\d+\/lesson$/) || {}).input: {
+				case pathname.match(/^\/subject-lessons\/[-\d/]+/)?.input: {
 					presenceData.details = "Learning Lessons";
-					const totalStats = document.querySelectorAll<HTMLDivElement>(
-						'[data-controller="subject-count-statistics"] [data-subject-count-statistics-target="count"]'
-					);
-					presenceData.state = `${
-						document.querySelector<HTMLDivElement>(
-							'[data-quiz-header-target="characters"]'
-						).textContent
-					} - ${
-						document.querySelector<HTMLDivElement>(
-							'[data-quiz-header-target="meaning"]'
-						).textContent
-					}`;
-					presenceData.smallImageKey = getTypeAsset(
-						[
-							...document.querySelector<HTMLDivElement>(
-								'[data-quiz-header-base-class="character-header"]'
-							).classList,
-						]
-							.find(cls => cls.startsWith("character-header--"))
-							.split("--")[1]
-					);
-					presenceData.smallImageText = `${totalStats[0].textContent} radicals | ${totalStats[1].textContent} kanji | ${totalStats[2].textContent} vocab`;
+					Object.assign(presenceData, getLessonPresence());
 					break;
 				}
-				case (pathname.match(/^\/(radicals|kanji|vocabulary)\/.+$/) || {})
-					.input: {
+				case pathname.match(/^\/(radicals|kanji|vocabulary)\/.+$/)?.input: {
 					const [, type] = pathname.split("/");
 					let textDescription =
 						document.querySelector<HTMLElement>(
@@ -205,7 +224,7 @@ presence.on("UpdateData", () => {
 					presenceData.smallImageKey = getTypeAsset(type.replace(/s$/, ""));
 					break;
 				}
-				case (pathname.match(/^\/users\/.+$/) || {}).input: {
+				case pathname.match(/^\/users\/.+$/)?.input: {
 					presenceData.details = "Viewing User Profile";
 					presenceData.state =
 						document.querySelector<HTMLSpanElement>(".username").textContent;

@@ -8,6 +8,10 @@
 		{
 			"name": "N0chteil ^^",
 			"id": "495901098926669825"
+		},
+		{
+			"name": "Dark_Ville",
+			"id": "638080361179512853"
 		}
 	],
 	"service": "Instagram",
@@ -24,7 +28,7 @@
 		"vi_VN": "Một cách đơn giản, vui và sáng tạo để chụp, chỉnh sửa và chia sẻ các bức ảnh, video và tin nhắn với gia đình và bạn bè."
 	},
 	"url": "www.instagram.com",
-	"version": "2.2.12",
+	"version": "2.3.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/Instagram/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/Instagram/assets/thumbnail.png",
 	"color": "#E1306C",
