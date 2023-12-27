@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 
 					for (const [i, image] of imageContainers.entries()) {
 						const presenceDataCopy = Object.assign({}, presenceData);
-						presenceDataCopy.largeImageKey = image.src;
+						presenceDataCopy.largeImageKey = image;
 						slideshow.addSlide(`image${i}`, presenceDataCopy, 5000);
 					}
 					useSlideshow = true;
@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
 					.iterateNext() as HTMLParagraphElement
 			).nextElementSibling;
 			presenceData.largeImageKey =
-				document.querySelector<HTMLImageElement>("main img").src;
+				document.querySelector<HTMLImageElement>("main img");
 			presenceData.buttons = [
 				{
 					label: "View Image Details",
@@ -100,7 +100,7 @@ presence.on("UpdateData", async () => {
 						.querySelectorAll<HTMLImageElement>("main a img")
 						.entries()) {
 						const presenceDataCopy = Object.assign({}, presenceData);
-						presenceDataCopy.largeImageKey = image.src;
+						presenceDataCopy.largeImageKey = image;
 						slideshow.addSlide(`image${i}`, presenceDataCopy, 5000);
 					}
 				}
@@ -113,7 +113,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Reading a blog post";
 				presenceData.state = document.querySelector("h1");
 				presenceData.largeImageKey =
-					document.querySelector<HTMLImageElement>("main p + img").src;
+					document.querySelector<HTMLImageElement>("main p + img");
 				presenceData.buttons = [
 					{
 						label: "View Blog Post",
@@ -133,10 +133,7 @@ presence.on("UpdateData", async () => {
 		}
 	}
 	if (presenceData.details) {
-		if (useSlideshow) {
-			if (!slideshow.currentSlide.details)
-				slideshow.currentSlide = slideshow.getSlides()[0].data;
-			presence.setActivity(slideshow);
-		} else presence.setActivity(presenceData);
+		if (useSlideshow) presence.setActivity(slideshow);
+		else presence.setActivity(presenceData);
 	} else presence.setActivity();
 });
