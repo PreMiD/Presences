@@ -9,9 +9,9 @@
 		"en": "View Beat Saber maps and BeatLeader replays directly in your browser, with accurately recreated visuals!"
 	},
 	"url": "allpoland.github.io",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/cAN8Mop.png",
-	"thumbnail": "https://i.imgur.com/WylZHp2.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/thumbnail.png",
 	"color": "#86050A",
 	"category": "games",
 	"tags": [
