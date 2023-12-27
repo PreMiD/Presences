@@ -9,12 +9,13 @@
 		"en": "BeatLeader is Beat Saber's leaderboard with open code and community. Start posting your scores to compete with others on more than 100,000 different maps."
 	},
 	"url": [
+		"beatleader.xyz",
 		"www.beatleader.xyz",
 		"replay.beatleader.xyz",
 		"royale.beatleader.xyz"
 	],
 	"regExp": ".+\\.beatleader.xyz",
-	"version": "1.4.5",
+	"version": "1.5.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/thumbnail.png",
 	"color": "#c81c9f",
