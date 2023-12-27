@@ -90,7 +90,9 @@ presence.on("UpdateData", async () => {
 					presence.setActivity(presenceData);
 				}
 			} else if (document.location.pathname.includes("/members/")) {
-				user = document.querySelector<HTMLElement>(".p-title h1.p-title-value playerWrapper");
+				user = document.querySelector<HTMLElement>(
+					".p-title h1.p-title-value playerWrapper"
+				);
 				presenceData.details = "Forums, viewing user:";
 				presenceData.state = user.textContent;
 
