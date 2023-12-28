@@ -19,7 +19,10 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Importando mangá";
 		else if (pathname.includes("/medias/edit"))
 			presenceData.details = "Editando mangá";
-		else if (pathname.includes("/chapters/upload")) {
+		else if (
+			pathname.includes("/chapters/upload") ||
+			pathname.includes("/chapters/bulk-upload")
+		) {
 			const chapterNumber = document.querySelector<HTMLInputElement>(
 					'.chapter-number input[type="number"]'
 				)?.value,
