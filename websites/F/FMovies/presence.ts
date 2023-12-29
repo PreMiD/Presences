@@ -16,17 +16,28 @@ presence.on(
 	}
 );
 
-function setCommonData(
-	presenceData: PresenceData,
-	document: Document,
-	iFrameData: {
-		currTime: number;
-		duration: number;
-		paused: boolean;
-	},
-	href: string
-) {
-	if (document) {
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/F/FMovies/assets/logo.png",
+}
+
+presence.on("UpdateData", async () => {
+	const presenceData: PresenceData = {
+			startTimestamp: browsingTimestamp,
+			largeImageKey: Assets.Logo,
+		},
+		{ href, pathname } = document.location,
+		[buttons, image] = await Promise.all([
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("image"),
+		]);
+
+	if (
+		pathname.includes("/series/") ||
+		pathname.includes("/tv/") ||
+		pathname.includes("/watch") ||
+		pathname.includes("/film/") ||
+		pathname.includes("/movie/")
+	) {
 		delete presenceData.startTimestamp;
 		const isMovie =
 				href.includes("-movie") ||
@@ -54,7 +65,6 @@ function setCommonData(
 					url: href,
 				},
 			];
-			return presenceData;
 		}
 		if (!isMovie) {
 			if (title.toLowerCase().includes("season")) {
@@ -82,35 +92,7 @@ function setCommonData(
 				url: href,
 			},
 		];
-	}
-
-	return presenceData;
-}
-
-const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/F/FMovies/assets/logo.png",
-}
-
-presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-			startTimestamp: browsingTimestamp,
-			largeImageKey: Assets.Logo,
-		},
-		{ href, pathname } = document.location,
-		[buttons, image] = await Promise.all([
-			presence.getSetting<boolean>("buttons"),
-			presence.getSetting<boolean>("image"),
-		]);
-
-	if (
-		pathname.includes("/series/") ||
-		pathname.includes("/tv/") ||
-		pathname.includes("/watch") ||
-		pathname.includes("/film/") ||
-		pathname.includes("/movie/")
-	)
-		setCommonData(presenceData, document, iFrameData, href);
-	else if (pathname === "/user/profile")
+	} else if (pathname === "/user/profile")
 		presenceData.details = "Checking Profile";
 	else if (pathname === "/user/watchlist")
 		presenceData.details = "Checking Watchlist";
@@ -125,5 +107,6 @@ presence.on("UpdateData", async () => {
 	if (presenceData.buttons && !buttons) delete presenceData.buttons;
 	if (presenceData.largeImageKey !== Assets.Logo && !image)
 		presenceData.largeImageKey = Assets.Logo;
+
 	presence.setActivity(presenceData);
 });
