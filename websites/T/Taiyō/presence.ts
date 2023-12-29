@@ -46,6 +46,11 @@ presence.on("UpdateData", async () => {
 		}
 
 		case "chapter": {
+			const mediaLink =
+					document.querySelector<HTMLAnchorElement>(".media-title").href,
+				links = getCover(mediaLink.split("/")[4]);
+			if (links.length > 0)
+				presenceData.largeImageKey = `https://www.taiyo.moe${links[1]}`;
 			presenceData.details =
 				document.querySelector(".media-title")?.textContent;
 			presenceData.state = `${
@@ -53,7 +58,10 @@ presence.on("UpdateData", async () => {
 			} - Página ${
 				document.querySelector(".chapter-currentPage")?.textContent
 			}`;
-			presenceData.buttons = [{ label: "Ler capítulo", url: href }];
+			presenceData.buttons = [
+				{ label: "Ler capítulo", url: href.replace(/\/[^/]*$/, "") },
+				{ label: "Ler mangá", url: mediaLink },
+			];
 			break;
 		}
 
@@ -69,6 +77,18 @@ presence.on("UpdateData", async () => {
 		default:
 			presenceData.details = "Na página inicial...";
 			break;
+	}
+
+	function getCover(uuid: string) {
+		const elements = document.querySelectorAll(
+				'link[rel="preload"][as="image"]'
+			),
+			links: string[] = [];
+		for (const element of elements) {
+			const imageSrcSet = element.getAttribute("imagesrcset");
+			if (imageSrcSet) links.push(imageSrcSet.split(", ")[0].split(" ")[0]);
+		}
+		return links.filter(link => link.includes(uuid));
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
