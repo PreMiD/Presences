@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "638080361179512853",
+		"name": "dark_ville"
+	},
+	"service": "Doodstreams",
+	"description": {
+		"en": "Doodstream redefines video sharing with a commitment to unrivaled HLS streaming, unlimited bandwidth and seamless user experience."
+	},
+	"url": "doods.pro",
+	"regExp": "(ww(w)?([0-9])?[.])?dood(s)?[.][a-z]*",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/e7SBEQM.png",
+	"thumbnail": "https://i.imgur.com/Ny5sYjY.png",
+	"color": "#FF9900",
+	"category": "videos",
+	"tags": [
+		"anime",
+		"video",
+		"stream",
+		"streaming",
+		"sharing"
+	]
+}
