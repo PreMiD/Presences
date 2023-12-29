@@ -32,9 +32,6 @@ presence.on("UpdateData", async () => {
 			"div.game-calls-to-action > div.game-title-container > h1"
 		),
 		profileName = document.querySelector<HTMLHeadingElement>(".profile-name "),
-		profileTabs = document.querySelector<HTMLAnchorElement>(
-			"#horizontal-tabs li.rbx-tab.active a"
-		),
 		messageTab =
 			document.querySelector("li.menu-option.ng-scope.active")?.textContent ??
 			document.querySelector("li.rbx-tab.ng-scope.active")?.textContent,
@@ -85,7 +82,13 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case pathname.includes("/users") && pathname.includes("/profile"): {
-					if (profileTabs?.textContent?.trim() === "Creations") {
+					if (
+						document
+							.querySelector<HTMLAnchorElement>(
+								"#horizontal-tabs li.rbx-tab.active a"
+							)
+							?.textContent?.trim() === "Creations" // Profile tabs
+					) {
 						presenceData.details = `Profile: ${profileName.textContent}`;
 						presenceData.state = "Browsing creations...";
 					} else {
@@ -150,16 +153,13 @@ presence.on("UpdateData", async () => {
 					else if (pathname.includes("/configure"))
 						presenceData.details = "Configuring Group";
 					else {
-						const groupName = document.querySelector<HTMLHeadingElement>(
-								".group-name.text-overflow"
-							),
-							groupImage = document.querySelector<HTMLImageElement>(
-								"div.group-image img"
-							);
+						presenceData.details = document.querySelector<HTMLHeadingElement>(
+							".group-name.text-overflow"
+						).textContent; // Groupname
 
-						presenceData.details = groupName.textContent;
-
-						presenceData.largeImageKey = groupImage?.src ?? Assets.Logo;
+						presenceData.largeImageKey =
+							document.querySelector<HTMLImageElement>("div.group-image img")
+								?.src ?? Assets.Logo; // Groupimage
 
 						presenceData.buttons = [
 							{
@@ -189,10 +189,7 @@ presence.on("UpdateData", async () => {
 				}
 				case pathname.includes("/games/") &&
 					!pathname.includes("/localization"): {
-					const gameTab = document.querySelector<HTMLLIElement>(
-							"#horizontal-tabs li.rbx-tab.active"
-						),
-						Id = pathname.split("/")[2];
+					const Id = pathname.split("/")[2];
 
 					if (gameId !== Id) {
 						const req = await fetch(
@@ -205,7 +202,11 @@ presence.on("UpdateData", async () => {
 					}
 
 					presenceData.details = `Game: ${gameName.textContent}`;
-					presenceData.state = `Tab: ${gameTab.textContent}`;
+					presenceData.state = `Tab: ${
+						document.querySelector<HTMLLIElement>(
+							"#horizontal-tabs li.rbx-tab.active"
+						).textContent // Gametab
+					}`;
 					presenceData.largeImageKey = gameImage ?? Assets.Logo;
 
 					presenceData.buttons = [
