@@ -13,6 +13,7 @@ let profileId: string,
 	gameImage: string,
 	dfPrevTopic: string,
 	dfTopicName = "[Loading...]",
+	devImage = false,
 	talentUserData: [string, string] = ["0", "0"];
 
 presence.on("UpdateData", async () => {
@@ -146,9 +147,9 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `Tab: ${groupTab.textContent}`;
 					if (pathname.includes("/create"))
 						presenceData.details = "Creating New Group";
-					else if (pathname.includes("/configure")) {
+					else if (pathname.includes("/configure"))
 						presenceData.details = "Configuring Group";
-					} else {
+					else {
 						const groupName = document.querySelector<HTMLHeadingElement>(
 								".group-name.text-overflow"
 							),
@@ -189,9 +190,9 @@ presence.on("UpdateData", async () => {
 				case pathname.includes("/games/") &&
 					!pathname.includes("/localization"): {
 					const gameTab = document.querySelector<HTMLLIElement>(
-						"#horizontal-tabs li.rbx-tab.active"
-					);
-					const Id = pathname.split("/")[2];
+							"#horizontal-tabs li.rbx-tab.active"
+						),
+						Id = pathname.split("/")[2];
 
 					if (gameId !== Id) {
 						const req = await fetch(
@@ -441,6 +442,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.details = "Surfing the DevForum";
 			presenceData.largeImageKey = Assets.DeveloperLogo;
+			devImage = true;
 
 			switch (true) {
 				case pathname.includes("/t/"): {
@@ -506,7 +508,7 @@ presence.on("UpdateData", async () => {
 					presenceData.largeImageKey =
 						document.querySelector<HTMLImageElement>(".user-profile-avatar img")
 							?.src ?? Assets.DeveloperLogo;
-
+					devImage = true;
 					presenceData.buttons = [
 						{
 							label: "View Profile",
@@ -585,6 +587,7 @@ presence.on("UpdateData", async () => {
 		case "talent.roblox.com": {
 			presenceData.details = "Surfing the Talent Hub";
 			presenceData.largeImageKey = Assets.DeveloperLogo;
+			devImage = true;
 
 			switch (true) {
 				case pathname.includes("/search"): {
@@ -619,6 +622,7 @@ presence.on("UpdateData", async () => {
 					presenceData.largeImageKey = Id
 						? `https://www.roblox.com/Thumbs/Avatar.ashx?x=420&y=420&userid=${Id}`
 						: Assets.DeveloperLogo;
+					devImage = true;
 
 					presenceData.buttons = [
 						{
@@ -667,13 +671,13 @@ presence.on("UpdateData", async () => {
 	if (
 		!imagesEnabled &&
 		presenceData.largeImageKey !== Assets.Logo &&
-		!hostname.includes("devforum") // ImagesEnabled setting off & The largeimagekey isnt Assets.Logo & Its not the devforum
+		!devImage // ImagesEnabled setting off & The largeimagekey isnt Assets.Logo & & Its NOT somewhere that uses the devimage
 	)
 		presenceData.largeImageKey = Assets.Logo;
 	else if (
 		!imagesEnabled &&
 		presenceData.largeImageKey !== Assets.DeveloperLogo &&
-		hostname.includes("devforum") // ImagesEnabled setting off & The largeimagekey isnt Assets.DeveloperLogo & Its the devforum
+		devImage // ImagesEnabled setting off & The largeimagekey isnt Assets.DeveloperLogo & Its somewhere that uses the devimage
 	)
 		presenceData.largeImageKey = Assets.DeveloperLogo;
 
