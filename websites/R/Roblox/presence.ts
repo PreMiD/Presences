@@ -7,11 +7,7 @@ const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/logo.png",
 	DeveloperLogo = "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/0.png",
 }
-let profileId: string,
-	profileImg: string,
-	gameId: string,
-	gameImage: string,
-	dfPrevTopic: string,
+let dfPrevTopic: string,
 	dfTopicName = "[Loading...]",
 	devImage = false,
 	talentUserData: [string, string] = ["0", "0"];
@@ -96,19 +92,11 @@ presence.on("UpdateData", async () => {
 						presenceData.state = profileName.textContent;
 					}
 
-					const Id = pathname.split("/")[2];
-
-					if (profileId !== Id) {
-						const req = await fetch(
-							`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${
-								pathname.split("/")[2]
-							}&size=420x420&format=Png`
-						).then(response => response.json());
-						profileImg = req.data[0].imageUrl;
-						profileId = Id;
-					}
-
-					presenceData.largeImageKey = profileImg ?? Assets.Logo;
+					presenceData.largeImageKey =
+						document
+							.querySelector('[class="avatar-card-link avatar-image-link"]')
+							?.querySelector("img")
+							?.getAttribute("src") ?? Assets.Logo;
 
 					presenceData.buttons = [
 						{
@@ -189,25 +177,16 @@ presence.on("UpdateData", async () => {
 				}
 				case pathname.includes("/games/") &&
 					!pathname.includes("/localization"): {
-					const Id = pathname.split("/")[2];
-
-					if (gameId !== Id) {
-						const req = await fetch(
-							`https://thumbnails.roblox.com/v1/places/gameicons?placeIds=${
-								pathname.split("/")[2]
-							}&size=512x512&format=Png`
-						).then(response => response.json());
-						gameImage = req.data[0].imageUrl;
-						gameId = Id;
-					}
-
 					presenceData.details = `Game: ${gameName.textContent}`;
 					presenceData.state = `Tab: ${
 						document.querySelector<HTMLLIElement>(
 							"#horizontal-tabs li.rbx-tab.active"
 						).textContent // Gametab
 					}`;
-					presenceData.largeImageKey = gameImage ?? Assets.Logo;
+					presenceData.largeImageKey =
+						document
+							.querySelector("[class*='carousel-item'] > img")
+							?.getAttribute("src") ?? Assets.Logo;
 
 					presenceData.buttons = [
 						{
