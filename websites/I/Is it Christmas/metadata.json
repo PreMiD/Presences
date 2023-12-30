@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.9",
+  "author": {
+    "id": "193714715631812608",
+    "name": "theusaf"
+  },
+  "service": "Is it Christmas",
+  "altnames": [
+    "Is it Christmas?"
+  ],
+  "description": {
+    "en": "Check whether it is Christmas or not."
+  },
+  "url": "isitchristmas.com",
+  "version": "1.0.0",
+  "logo": "https://isitchristmas.com/icons/512.png",
+  "thumbnail": "https://cdn.discordapp.com/attachments/459040398527037441/1188899463520079932/image.png",
+  "color": "#000",
+  "category": "other",
+  "tags": [
+    "christmas"
+  ]
+}
