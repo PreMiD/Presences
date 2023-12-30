@@ -7,10 +7,7 @@ const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/logo.png",
 	DeveloperLogo = "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/0.png",
 }
-let dfPrevTopic: string,
-	dfTopicName = "[Loading...]",
-	devImage = false,
-	talentUserData: [string, string] = ["0", "0"];
+let devImage = false;
 
 presence.on("UpdateData", async () => {
 	const [buttons, imagesEnabled, onlyDevForums] = await Promise.all([
