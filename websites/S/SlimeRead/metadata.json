@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"name": "Luscarvalho",
+		"id": "458776046184169473"
+	},
+	"service": "SlimeRead",
+	"description": {
+		"en": "Read manga online for free at Taiyō, without ads, with high-quality images, and reader support.",
+		"pt_BR": "Leia mangás online e gratuitamente na Taiyō, sem anúncios, com alta qualidade de imagens e suporte aos leitores."
+	},
+	"url": [
+		"slimeread.com",
+		"www.slimeread.com"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/Ht1LSYT.png",
+	"thumbnail": "https://i.imgur.com/hYjlY58.png",
+	"color": "#FF4F4F",
+	"category": "anime",
+	"tags": [
+		"manga",
+		"reading"
+	]
+}
