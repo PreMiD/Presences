@@ -133,7 +133,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Friends";
 					presenceData.state = `Tab: ${
 						document.querySelector<HTMLAnchorElement>(".rbx-tab-heading.active")
-							.textContent // Friendstab
+							.textContent // Friends tab
 					}`;
 					break;
 				}
