@@ -67,7 +67,11 @@ presence.on("UpdateData", async () => {
 				)?.textContent,
 				mediaLink = document.querySelector<HTMLAnchorElement>(
 					"a.hover\\:text-primary-700.dark\\:hover\\:text-primary-500.hover\\:underline.transition.duration-300.link.cursor-pointer"
-				).href;
+				).href,
+				mediaCover = document.querySelector<HTMLMetaElement>(
+					'meta[property="image"]'
+				)?.content;
+			if (mediaCover) presenceData.largeImageKey = mediaCover;
 			presenceData.details = chapterInfo?.split("/")[0].trim();
 			presenceData.state = chapterInfo?.split("/")[1].trim();
 			presenceData.buttons = [
