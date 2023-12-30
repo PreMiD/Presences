@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 				'img[title="Imagem"]'
 			)[2].src;
 			presenceData.details = document.querySelector(
-				"p.text-dark.dark\\:text-light.transition.duration-300.text-2xl.font-bold.font-serif"
+				'[class="mt-4 sm:ml-4 sm:mt-0  "] > p'
 			)?.textContent;
 			presenceData.buttons = [{ label: "Ler mangá", url: href }];
 			break;
@@ -63,10 +63,10 @@ presence.on("UpdateData", async () => {
 
 		case "ler": {
 			const chapterInfo = document.querySelector(
-					"h1.font-serif.font-bold.text-xl.text-center.sm\\:text-left.text-dark.dark\\:text-light.transition.duration-300"
+					'[class="ml-4 mt-4"] > h1'
 				)?.textContent,
 				mediaLink = document.querySelector<HTMLAnchorElement>(
-					"a.hover\\:text-primary-700.dark\\:hover\\:text-primary-500.hover\\:underline.transition.duration-300.link.cursor-pointer"
+					'[class="ml-4 mt-4"] > h1 > a'
 				).href,
 				mediaCover = document.querySelector<HTMLMetaElement>(
 					'meta[property="image"]'
