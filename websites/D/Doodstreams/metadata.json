@@ -9,7 +9,7 @@
 		"en": "Doodstream redefines video sharing with a commitment to unrivaled HLS streaming, unlimited bandwidth and seamless user experience."
 	},
 	"url": "doods.pro",
-	"regExp": "(ww(w)?([0-9])?[.])?dood(s)?[.][a-z]*",
+	"regExp": "((ww(w)?([0-9])?[.])?dood(s)?[.][a-z]*)|((ww(w)?([0-9])?[.])?doodstream[.][a-z]*([.][a-z]*)?)",
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/e7SBEQM.png",
 	"thumbnail": "https://i.imgur.com/Ny5sYjY.png",
