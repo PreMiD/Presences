@@ -426,7 +426,9 @@ presence.on("UpdateData", async () => {
 
 			switch (true) {
 				case pathname.includes("/t/"): {
-					presenceData.state = `Reading "${dfTopicName}"`;
+					presenceData.state = `Reading ${
+						document.querySelector('[class="fancy-title"]')?.textContent
+					}`;
 					presenceData.smallImageKey = Assets.Reading;
 
 					presenceData.buttons = [
@@ -436,14 +438,6 @@ presence.on("UpdateData", async () => {
 						},
 					];
 
-					if (dfPrevTopic !== pathname.split("/")[3]) {
-						dfPrevTopic = pathname.split("/")[3];
-
-						const req = await (await fetch(`${href}.json`)).json();
-						dfTopicName = req.title;
-
-						presenceData.state = `Reading ${dfTopicName}`;
-					}
 					break;
 				}
 				case pathname.includes("/tag/") ||
@@ -564,85 +558,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 
-		case "talent.roblox.com": {
-			presenceData.details = "Surfing the Talent Hub";
-			presenceData.largeImageKey = Assets.DeveloperLogo;
-			devImage = true;
-
-			switch (true) {
-				case pathname.includes("/search"): {
-					presenceData.smallImageKey = Assets.Search;
-					if (pathname.includes("/creators")) {
-						if (searchResult)
-							presenceData.state = `Searching for Creator: ${searchResult}`;
-						else presenceData.state = "Browsing Creators";
-					} else if (pathname.includes("/jobs")) {
-						if (searchResult)
-							presenceData.state = `Searching for Job: ${searchResult}`;
-						else presenceData.state = "Browsing Jobs";
-					}
-					break;
-				}
-				case pathname.includes("/creators/") &&
-					!pathname.includes("/search/") &&
-					!pathname.includes("/settings"): {
-					const Id = pathname.split("/")[2];
-					if (talentUserData[0] !== Id) {
-						talentUserData = [
-							Id,
-							document.head.title.replace("'s Creator Page - Talent Hub", ""),
-						];
-						const req = await fetch(
-							`https://users.roblox.com/v1/users/${Id}`
-						).then(response => response.json());
-						talentUserData = [Id, req.name ?? talentUserData[1]];
-					}
-					if (!talentUserData[1]) presenceData.state = "Browsing Profile";
-					else presenceData.state = `Looking at ${talentUserData[1]}'s Profile`;
-					presenceData.largeImageKey = Id
-						? `https://www.roblox.com/Thumbs/Avatar.ashx?x=420&y=420&userid=${Id}`
-						: Assets.DeveloperLogo;
-					devImage = true;
-
-					presenceData.buttons = [
-						{
-							label: "Visit Profile",
-							url: href,
-						},
-					];
-					break;
-				}
-				case pathname.includes("/jobs/") &&
-					!!document.querySelector('[data-testid="job-view-header"]'): {
-					presenceData.state = `Looking at Job Post: ${
-						document.querySelector<HTMLParagraphElement>(
-							'[data-testid="job-view-header"] .MuiTypography-root.MuiTypography-body1'
-						).textContent
-					}`;
-
-					presenceData.buttons = [
-						{
-							label: "Visit Job",
-							url: href,
-						},
-					];
-					break;
-				}
-				case pathname.includes("/inbox"): {
-					presenceData.state = "Browsing Inbox";
-					break;
-				}
-
-				case pathname.includes("/settings"): {
-					presenceData.state = "Editing Settings";
-					break;
-				}
-				case pathname.includes("/jobs/create"): {
-					presenceData.state = "Creating Job Post";
-					break;
-				}
-			}
-
+		case "create.roblox.com": {
 			break;
 		}
 	}
