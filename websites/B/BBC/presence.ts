@@ -10,13 +10,13 @@ function setClient(options: PresenceOptions) {
 }
 
 enum LogoAssets {
-	BBC_future = "https://i.imgur.com/Oxy662h.png",
-	BBC_iplayer = "https://i.imgur.com/7jIb2OC.png",
-	BBC_ = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/logo.png",
-	BBC_news = "https://i.imgur.com/KksqBBZ.png",
-	BBC_sounds = "https://i.imgur.com/NAlZ7Ei.png",
-	BBC_sport = "https://i.imgur.com/bwKErHh.png",
-	BBC_weather = "https://i.imgur.com/F0vF9aR.png",
+	BbcFuture = "https://i.imgur.com/Oxy662h.png",
+	BbcIplayer = "https://i.imgur.com/7jIb2OC.png",
+	Bbc = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/logo.png",
+	BbcNews = "https://i.imgur.com/KksqBBZ.png",
+	BbcSounds = "https://i.imgur.com/NAlZ7Ei.png",
+	BbcSport = "https://i.imgur.com/bwKErHh.png",
+	BbcWeather = "https://i.imgur.com/F0vF9aR.png",
 }
 const browsingTimestamp = Math.floor(Date.now() / 1000),
 	getStrings = (lang: string) =>
@@ -47,20 +47,20 @@ const browsingTimestamp = Math.floor(Date.now() / 1000),
 				setClient({
 					clientId: "932513249327460402",
 				});
-				return "iplayer";
+				return "Iplayer";
 			case "sounds":
 				setClient({
 					clientId: "944257541964169287",
 				});
-				return "sounds";
+				return "Sounds";
 			case "sport":
-				return "sport";
+				return "Sport";
 			case "news":
-				return "news";
+				return "News";
 			case "weather":
-				return "weather";
+				return "Weather";
 			case "future":
-				return "future";
+				return "Future";
 			default:
 				setClient({
 					clientId: "658230518520741915",
@@ -127,7 +127,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	let presenceData: PresenceData = {
-		largeImageKey: LogoAssets[`BBC_${serviceName}`],
+		largeImageKey: LogoAssets[`Bbc${serviceName}`],
 		details: strings.browse,
 		startTimestamp: browsingTimestamp,
 	};
