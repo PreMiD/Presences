@@ -47,7 +47,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000),
 				setClient({
 					clientId: "932513249327460402",
 				});
-				return "Iipayer";
+				return "iplayer";
 			case "sounds":
 				setClient({
 					clientId: "944257541964169287",
