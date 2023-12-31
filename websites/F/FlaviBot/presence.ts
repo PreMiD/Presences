@@ -6,6 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/R9S9p94.png",
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location;
 
@@ -79,6 +80,7 @@ presence.on("UpdateData", async () => {
 				title = document.querySelector(".now-title")?.textContent;
 			if (!title) presenceData.details = "Viewing te music player";
 			else {
+				delete presenceData.startTimestamp;
 				presenceData.details = title;
 				presenceData.state =
 					document.querySelector(".author")?.textContent ?? "";
