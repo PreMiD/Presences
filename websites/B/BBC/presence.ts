@@ -3,12 +3,21 @@ let presence = new Presence({
 });
 
 function setClient(options: PresenceOptions) {
-	if (presence.getExtensionVersion() < 224) return;
+	if (Number(presence.getExtensionVersion(true)) < 224) return;
 
 	presence.clearActivity();
 	presence = new Presence(options);
 }
 
+enum LogoAssets {
+	BBC_future = "https://i.imgur.com/Oxy662h.png",
+	BBC_iplayer = "https://i.imgur.com/7jIb2OC.png",
+	BBC_ = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/logo.png",
+	BBC_news = "https://i.imgur.com/KksqBBZ.png",
+	BBC_sounds = "https://i.imgur.com/NAlZ7Ei.png",
+	BBC_sport = "https://i.imgur.com/bwKErHh.png",
+	BBC_weather = "https://i.imgur.com/F0vF9aR.png",
+}
 const browsingTimestamp = Math.floor(Date.now() / 1000),
 	getStrings = (lang: string) =>
 		presence.getStrings(
@@ -38,23 +47,25 @@ const browsingTimestamp = Math.floor(Date.now() / 1000),
 				setClient({
 					clientId: "932513249327460402",
 				});
-				return "bbciplayer";
+				return "Iipayer";
 			case "sounds":
 				setClient({
 					clientId: "944257541964169287",
 				});
-				return "bbcsounds";
+				return "sounds";
 			case "sport":
-				return "bbcsport";
+				return "sport";
 			case "news":
-				return "bbcnews";
+				return "news";
 			case "weather":
-				return "bbcweather";
+				return "weather";
+			case "future":
+				return "future";
 			default:
 				setClient({
 					clientId: "658230518520741915",
 				});
-				return "bbc";
+				return "";
 		}
 	})();
 
@@ -116,7 +127,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	let presenceData: PresenceData = {
-		largeImageKey: `${serviceName}_logo`,
+		largeImageKey: LogoAssets[`BBC_${serviceName}`],
 		details: strings.browse,
 		startTimestamp: browsingTimestamp,
 	};
@@ -602,7 +613,7 @@ presence.on("UpdateData", async () => {
 				handleVideo();
 			}
 		}
-	} else if (path.includes("/news")) {
+	} else if (path.includes("/news") || path.includes("/future")) {
 		presenceData.details = strings.browse;
 		presenceData.smallImageKey = Assets.Reading;
 
@@ -721,7 +732,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (!buttons) delete presenceData.buttons;
-	if (!showCover && presenceData.largeImageKey?.startsWith("https"))
+	if (!showCover && String(presenceData.largeImageKey).startsWith("https"))
 		presenceData.largeImageKey = `${serviceName}_logo`;
 
 	if (presenceData.details === strings.searchFor && !showSearchQuery)
