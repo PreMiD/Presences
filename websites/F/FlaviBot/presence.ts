@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 					.querySelector(".action.play-big")
 					.innerHTML.includes("M6 19h4V5H6v14zm8-14v14h4V5h-4z"),
 				title = document.querySelector(".now-title")?.textContent;
-			if (!title) presenceData.details = "Viewing te music player";
+			if (!title) presenceData.details = "Viewing the music player";
 			else {
 				delete presenceData.startTimestamp;
 				presenceData.details = title;
