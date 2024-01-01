@@ -6,7 +6,8 @@
 	},
 	"service": "Vidoza",
 	"description": {
-		"en": "Absolutely free video hosting and streaming. Share your videos without any limitations via a HTML5 video player."
+		"en": "Absolutely free video hosting and streaming. Share your videos without any limitations via a HTML5 video player.",
+		"nl": "Volledig gratis video's hosten en steamen. Deel jouw video's zonder enige beperkingen via een HTML5 video speler."
 	},
 	"url": "vidoza.net",
 	"regExp": "(ww(w)?([0-9])?[.])?vidoza[.][a-z]*",
