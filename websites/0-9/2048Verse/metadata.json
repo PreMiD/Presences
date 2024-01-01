@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.7",
+	"author": {
+		"id": "205984221859151873",
+		"name": "joerkig"
+	},
+	"service": "2048Verse",
+	"description": {
+		"en": "The website most trusted by 2048 tryhards."
+	},
+	"url": "2048verse.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/wqRX0c7.png",
+	"thumbnail": "https://i.imgur.com/smxsVrq.png",
+	"color": "#776e65",
+	"category": "games",
+	"tags": [
+		"numbers",
+		"merge"
+	],
+	"settings": [
+		{
+			"id": "time",
+			"title": "Show timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}
