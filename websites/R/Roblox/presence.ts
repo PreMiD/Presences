@@ -6,6 +6,7 @@ const presence = new Presence({
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/logo.png",
 	DeveloperLogo = "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/0.png",
+	CreateLogo = "https://i.imgur.com/blbvRJz.png",
 }
 let devImage = false;
 
@@ -556,6 +557,127 @@ presence.on("UpdateData", async () => {
 		}
 
 		case "create.roblox.com": {
+			presenceData.largeImageKey = Assets.CreateLogo;
+			const search = document.querySelector('[id="search-text-field"]');
+			switch (true) {
+				case pathname === "/landing": {
+					presenceData.details = "Browsing on the landing page";
+					break;
+				}
+				case pathname === "/": {
+					presenceData.details = "Browsing on the homepage";
+					break;
+				}
+				case pathname.includes("/dashboard/creations"): {
+					presenceData.details = "Creation's dashboard";
+					presenceData.state = `Tab: ${
+						document.querySelector('button[aria-selected="true"]')?.textContent
+					}`;
+					break;
+				}
+				case pathname.includes("analytics"): {
+					presenceData.details = "Viewing analytics";
+					presenceData.state = `Tab: ${
+						document.querySelector('button[aria-selected="true"]')?.textContent
+					}`;
+					break;
+				}
+				case pathname.includes("/translator-portal"): {
+					presenceData.details = "Browsing trough the translator portal";
+					break;
+				}
+				case pathname.includes("credentials"): {
+					presenceData.details = "Viewing the credentails manager";
+					break;
+				}
+				case pathname.includes("/docs"): {
+					switch (true) {
+						case !!search: {
+							presenceData.details = search?.getAttribute("value")
+								? "Searching for:"
+								: "Searching...";
+							presenceData.state = document
+								.querySelector('[id="search-text-field"]')
+								?.getAttribute("value");
+							presenceData.smallImageKey = Assets.Search;
+							break;
+						}
+						case !!document.querySelector('li[aria-selected="true"]'): {
+							presenceData.details = "Reading docs about:";
+							presenceData.state = document.querySelector(
+								'li[aria-selected="true"]'
+							)?.textContent;
+							presenceData.smallImageKey = Assets.Reading;
+							presenceData.buttons = [
+								{
+									label: "Read Article",
+									url: href,
+								},
+							];
+							break;
+						}
+						default: {
+							presenceData.details = "Documentation - homepage";
+							break;
+						}
+					}
+					break;
+				}
+				case pathname.includes("/marketplace/asset/"): {
+					presenceData.details = `Viewing ${document
+						.querySelector('button[aria-selected="true"]')
+						?.textContent?.toLowerCase()}:`;
+					presenceData.state = document.querySelector(
+						'[data-testid="assetHeadingDetailsTestId"] > h1'
+					)?.textContent;
+					presenceData.buttons = [
+						{
+							label: "View Asset",
+							url: href,
+						},
+					];
+					break;
+				}
+				case pathname.includes("/marketplace"): {
+					presenceData.details = "Marketplace";
+					presenceData.state = `Tab: ${
+						document.querySelector('button[aria-selected="true"]')?.textContent
+					}`;
+					presenceData.buttons = [
+						{
+							label: "View Marketplace",
+							url: href,
+						},
+					];
+					break;
+				}
+				case pathname.includes("/talent/"): {
+					if (document.querySelector("#text-input")?.getAttribute("value")) {
+						presenceData.details = `Talent - searching for:`;
+						presenceData.state = document
+							.querySelector("#text-input")
+							?.getAttribute("value");
+						presenceData.smallImageKey = Assets.Search;
+					} else {
+						presenceData.details = "Talent";
+						presenceData.state = `Tab: ${
+							document.querySelector('button[aria-selected="true"]')
+								?.textContent
+						}`;
+					}
+					break;
+				}
+				case pathname.includes("/roadmap"): {
+					presenceData.details = "Browsing through the roadmap";
+					presenceData.buttons = [
+						{
+							label: "View Roadmap",
+							url: href,
+						},
+					];
+					break;
+				}
+			}
 			break;
 		}
 	}
@@ -564,7 +686,8 @@ presence.on("UpdateData", async () => {
 	if (
 		!imagesEnabled &&
 		presenceData.largeImageKey !== Assets.Logo &&
-		!devImage // ImagesEnabled setting off & The largeimagekey isnt Assets.Logo & & Its NOT somewhere that uses the devimage
+		!devImage &&
+		hostname !== "create.roblox.com" // ImagesEnabled setting off & The largeimagekey isnt Assets.Logo & & Its NOT somewhere that uses the devimage
 	)
 		presenceData.largeImageKey = Assets.Logo;
 	else if (
@@ -573,6 +696,13 @@ presence.on("UpdateData", async () => {
 		devImage // ImagesEnabled setting off & The largeimagekey isnt Assets.DeveloperLogo & Its somewhere that uses the devimage
 	)
 		presenceData.largeImageKey = Assets.DeveloperLogo;
+	else if (
+		!imagesEnabled &&
+		presenceData.largeImageKey !== Assets.CreateLogo &&
+		!devImage &&
+		hostname === "create.roblox.com"
+	)
+		presenceData.largeImageKey = Assets.CreateLogo;
 
 	if (onlyDevForums && !hostname.includes("devforum")) presence.clearActivity();
 	else presence.setActivity(presenceData);
