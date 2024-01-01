@@ -6,7 +6,8 @@
 	},
 	"service": "Doodstreams",
 	"description": {
-		"en": "Doodstream redefines video sharing with a commitment to unrivaled HLS streaming, unlimited bandwidth and seamless user experience."
+		"en": "Doodstream redefines video sharing with a commitment to unrivaled HLS streaming, unlimited bandwidth and seamless user experience.",
+		"nl": "Doodstream herdefinieert het delen van video met een toewijding aan ongeëvenaarde HLS streaming, onbeperkte bandbreedte en naadloze gebruikerservaring."
 	},
 	"url": "doods.pro",
 	"regExp": "((ww(w)?([0-9])?[.])?dood(s)?[.][a-z]*)|((ww(w)?([0-9])?[.])?doodstream[.][a-z]*([.][a-z]*)?)",
