@@ -653,7 +653,7 @@ presence.on("UpdateData", async () => {
 				}
 				case pathname.includes("/talent/"): {
 					if (document.querySelector("#text-input")?.getAttribute("value")) {
-						presenceData.details = `Talent - searching for:`;
+						presenceData.details = "Talent - searching for:";
 						presenceData.state = document
 							.querySelector("#text-input")
 							?.getAttribute("value");
