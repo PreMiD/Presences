@@ -92,9 +92,10 @@ presence.on("UpdateData", async () => {
 				"/store": { details: "Viewing the power store" },
 			};
 
-			for (const [path, data] of Object.entries(pages))
+			for (const [path, data] of Object.entries(pages)) {
 				if (pathname.includes(path))
 					presenceData = { ...presenceData, ...data };
+			}
 
 			if (!presenceData.details) {
 				presenceData.details = `Managing ${
@@ -108,6 +109,8 @@ presence.on("UpdateData", async () => {
 
 	if (titleSite && !privacy && !presenceData.state)
 		presenceData.state = titleSite.textContent;
+
+	if (presenceData.state && privacy) delete presenceData.state;
 
 	if ((!buttons || privacy) && presenceData.buttons)
 		delete presenceData.buttons;
