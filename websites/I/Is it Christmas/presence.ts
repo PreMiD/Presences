@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://isitchristmas.com/icons/512.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/I/Is%20it%20Christmas/assets/logo.png",
 }
 
 interface MyChristmasData {
