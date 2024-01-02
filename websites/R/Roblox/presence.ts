@@ -597,7 +597,7 @@ presence.on("UpdateData", async () => {
 								? "Searching for:"
 								: "Searching...";
 							presenceData.state = document
-								.querySelector('[id="search-text-field"]')
+								.querySelector("#search-text-field")
 								?.getAttribute("value");
 							presenceData.smallImageKey = Assets.Search;
 							break;
