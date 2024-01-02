@@ -3,137 +3,46 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-interface MovieMedia {
-	meta: {
-		meta: {
-			title: string;
-			id: string;
-			year: string;
-			poster: string;
-			type: "movie";
-		};
-		imdbId: string;
-		tmdbId: string;
-	};
-	captions: {
-		langIso: string;
-		url: string;
-		type: string;
-	}[];
-	episode?: undefined;
+interface MWMediaMeta {
+	title: string;
+	type: "show" | "movie";
+	tmdbId: string;
+	year: number;
+	poster: string;
 }
 
-interface SeriesMedia {
-	meta: {
-		meta: {
-			title: string;
-			id: string;
-			year: string;
-			poster: string;
-			type: "series";
-			seasons: {
-				id: string;
-				number: number;
-				title: string;
-			}[];
-			seasonData: {
-				id: string;
-				number: number;
-				title: string;
-				episodes: {
-					id: string;
-					number: number;
-					title: string;
-				}[];
-			};
-		};
-		imdbId: string;
-		tmdbId: string;
-	};
-	episode: {
-		episodeId: string;
-		seasonId: string;
-	};
-	captions: {
-		langIso: string;
-		url: string;
-		type: string;
-	}[];
+interface MWControls {
+	isPlaying: boolean;
+	isLoading: boolean;
 }
 
-interface DevMetaData {
-	media: MovieMedia | SeriesMedia;
-	state: {
-		progress: {
-			time: number;
-			duration: number;
-		};
-		mediaPlaying: {
-			hasPlayedOnce: boolean;
-			isDragSeeking: boolean;
-			isFirstLoading: boolean;
-			isLoading: boolean;
-			isPaused: boolean;
-			isPlaying: boolean;
-			isSeeking: boolean;
-			playbackSpeed: number;
-			volume: number;
-		};
-	};
+interface MWSeason {
+	number: number;
+	tmdbId: string;
+	title: string;
 }
 
-interface ProdMetaData {
-	meta:
-		| {
-				meta: {
-					title: string;
-					id: string;
-					year: string;
-					poster: string;
-					type: "movie";
-				};
-				imdbId: string;
-				tmdbId: string;
-		  }
-		| {
-				meta: {
-					title: string;
-					id: string;
-					year: string;
-					poster: string;
-					type: "series";
-					seasons: {
-						id: string;
-						number: number;
-						title: string;
-					}[];
-					seasonData: {
-						id: string;
-						number: number;
-						title: string;
-						episodes: {
-							id: string;
-							number: number;
-							title: string;
-						}[];
-					};
-				};
-				imdbId: string;
-				tmdbId: string;
-		  };
-	episode?: {
-		episodeId: string;
-		seasonId: string;
-	};
-	progress: {
-		time: number;
-		duration: number;
-	};
+interface MWEpisode {
+	number: number;
+	tmdbId: string;
+	title: string;
 }
+
+interface MWProgress {
+	time: number;
+	duration: number;
+}
+
+type MWPlayerData = {
+	meta: MWMediaMeta;
+	controls: MWControls;
+	season?: MWSeason;
+	episode?: MWEpisode;
+	progress: MWProgress;
+};
 
 presence.on("UpdateData", async () => {
-	const { pathname, href, host } = document.location,
-		subdomain = host.split(".")[0],
+	const { pathname, href } = document.location,
 		[
 			showTimestamp,
 			showWatchButton,
@@ -156,120 +65,55 @@ presence.on("UpdateData", async () => {
 				"https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/logo.png",
 		};
 
-	if (subdomain === "dev") {
-		if (pathname === "" || pathname.startsWith("/search"))
-			presenceData.startTimestamp = browsingTimestamp;
-		else if (pathname.startsWith("/media")) {
-			const metaObj = await presence.getPageletiable("meta"),
-				metaData: DevMetaData | undefined = Object.values(metaObj ?? {})[0];
-			if (!metaData) return;
+	if (pathname === "" || pathname.startsWith("/search"))
+		presenceData.startTimestamp = browsingTimestamp;
+	else if (pathname.startsWith("/media")) {
+		const { meta: media } = await presence.getPageVariable<{
+			meta: { player: MWPlayerData };
+		}>("meta");
+		if (!media?.player) return;
 
-			const { media, state } = metaData;
+		const { meta, progress, episode, season, controls } = media.player;
 
-			presenceData.largeImageKey = media.meta.meta.poster;
+		presenceData.largeImageKey = meta.poster;
 
-			if ((state.progress.time && state.progress.duration) !== 0) {
-				presenceData.state = createProgressBar(
-					state.progress.time,
-					state.progress.duration,
-					{
-						barLengthString,
-						barFill,
-						barTrack,
-						showLabel,
-					}
-				);
-			}
-
-			if (showWatchButton && !pathname.startsWith("/search")) {
-				presenceData.buttons = [
-					{
-						label: `Watch ${capitalize(media.meta.meta.type)}`,
-						url: href,
-					},
-				];
-			}
-
-			const title = `${media.meta.meta.title} (${media.meta.meta.year})`;
-			if (media.meta.meta.type === "series") {
-				const episodeData = media.episode,
-					episode = media.meta.meta.seasonData.episodes.find(
-						episode => episode.id === episodeData.episodeId
-					);
-
-				presenceData.details = `S${media.meta.meta.seasonData.number}E${episode.number} — ${title}`;
-			} else presenceData.details = title;
-
-			if (state.mediaPlaying.isFirstLoading) {
-				presenceData.smallImageKey =
-					"https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/0.gif";
-				presenceData.smallImageText = "Loading";
-			} else if (state.mediaPlaying.isPlaying) {
-				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(
-					document.querySelector("video")
-				);
-				presenceData.smallImageKey = Assets.Play;
-				presenceData.smallImageText = "Playing";
-			} else if (state.mediaPlaying.isPaused) {
-				presenceData.smallImageKey = Assets.Pause;
-				presenceData.smallImageText = "Paused";
-			}
+		if ((progress.time && progress.duration) !== 0) {
+			presenceData.state = createProgressBar(progress.time, progress.duration, {
+				barLengthString,
+				barFill,
+				barTrack,
+				showLabel,
+			});
 		}
-	} else if (subdomain) {
-		if (pathname === "" || pathname.startsWith("/search"))
-			presenceData.startTimestamp = browsingTimestamp;
-		else if (pathname.startsWith("/media")) {
-			const metaObj = await presence.getPageletiable("meta"),
-				metaData: ProdMetaData | undefined = Object.values(metaObj ?? {})[0];
-			if (!metaData) return;
 
-			const { progress, meta, episode } = metaData,
-				mediaPlaying = {
-					isFirstLoading: (progress.time && progress.duration) === 0,
-					isLoading: progress.duration === 0,
-				};
+		if (showWatchButton) {
+			presenceData.buttons = [
+				{
+					label: `Watch ${capitalize(meta.type)}`,
+					url: href,
+				},
+			];
+		}
 
-			presenceData.largeImageKey = meta.meta.poster;
+		const title = `${meta.title} (${meta.year})`;
 
-			if (!mediaPlaying.isLoading && progress.time && progress.duration) {
-				presenceData.state = createProgressBar(
-					progress.time,
-					progress.duration,
-					{
-						barLengthString,
-						barFill,
-						barTrack,
-						showLabel,
-					}
-				);
-			}
+		if (meta.type === "show" && episode && season)
+			presenceData.details = `S${season.number}E${episode.number} — ${title}`;
+		else presenceData.details = title;
 
-			if (showWatchButton && !pathname.startsWith("/search")) {
-				presenceData.buttons = [
-					{
-						label: `Watch ${capitalize(meta.meta.type)}`,
-						url: href,
-					},
-				];
-			}
-
-			const title = `${meta.meta.title} (${meta.meta.year})`;
-			if (meta.meta.type === "series" && episode) {
-				presenceData.details = `S${meta.meta.seasonData.number}E${
-					meta.meta.seasonData.episodes.find(e => e.id === episode.episodeId)
-						.number
-				} — ${title}`;
-			} else presenceData.details = title;
-
-			if (mediaPlaying.isFirstLoading) {
-				presenceData.smallImageKey =
-					"https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/0.gif";
-				presenceData.smallImageText = "Loading";
-			} else {
-				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(
-					document.querySelector("video")
-				);
-			}
+		if (controls.isLoading) {
+			presenceData.smallImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/0.gif";
+			presenceData.smallImageText = "Loading";
+		} else if (controls.isPlaying) {
+			[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(
+				document.querySelector("video")
+			);
+			presenceData.smallImageKey = Assets.Play;
+			presenceData.smallImageText = "Playing";
+		} else {
+			presenceData.smallImageKey = Assets.Pause;
+			presenceData.smallImageText = "Paused";
 		}
 	}
 
