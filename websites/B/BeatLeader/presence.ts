@@ -12,7 +12,8 @@ const presence = new Presence({
 		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/79.png", //Poodleader
 		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/80.png", //GladdePaling
 		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/81.gif", //EarthDay
-		`https://i.imgur.com${"/Kf8bXNc.gif"}`, //Christmas
+		`https://i.imgur.com${"/Kf8bXNc.gif"}`, //Christmas 2022
+		"https://i.imgur.com/4dpoXYa.gif", //Christmas 2023
 	];
 
 const enum Assets {
@@ -160,12 +161,29 @@ switch (date.getMonth()) {
 		break;
 	}
 	case 9: {
-		if (random < 50) dynamicLogo = logoArr[2];
-		else dynamicLogo = logoArr[3];
+		switch (random % 2) {
+			case 0: {
+				dynamicLogo = logoArr[2];
+				break;
+			}
+			case 1: {
+				dynamicLogo = logoArr[3];
+				break;
+			}
+		}
 		break;
 	}
 	case 11: {
-		dynamicLogo = logoArr[7];
+		switch (random % 2) {
+			case 0: {
+				dynamicLogo = logoArr[7];
+				break;
+			}
+			case 1: {
+				dynamicLogo = logoArr[8];
+				break;
+			}
+		}
 		break;
 	}
 	default: {
@@ -204,7 +222,11 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, href, hostname } = document.location;
+		{ pathname, href, hostname } = document.location,
+		button = {
+			label: "View Page",
+			url: href,
+		};
 
 	if (hostname.split(".")[0] === "replay") {
 		presenceData.largeImageKey = cover
@@ -271,20 +293,16 @@ presence.on("UpdateData", async () => {
 		switch (pathname.split("/")[1]) {
 			case "u": {
 				presenceData.details = "Viewing profile";
-				presenceData.state =
-					document.querySelector(".player-nickname a")?.textContent;
+				presenceData.state = document.querySelector(
+					".player-nickname .nickname"
+				)?.textContent;
 				presenceData.smallImageKey =
 					document.querySelector<HTMLImageElement>(".countryIcon")?.src;
 				if (cover) {
 					presenceData.largeImageKey =
 						document.querySelector<HTMLImageElement>(".avatar")?.src;
 				}
-				presenceData.buttons = [
-					{
-						label: "View Page",
-						url: href,
-					},
-				];
+				presenceData.buttons = [button];
 				break;
 			}
 			case "leaderboard": {
@@ -339,23 +357,13 @@ presence.on("UpdateData", async () => {
 						)
 						?.toString();
 				}
-				presenceData.buttons = [
-					{
-						label: "View Page",
-						url: href,
-					},
-				];
+				presenceData.buttons = [button];
 				break;
 			}
 			case "event": {
 				presenceData.details = "Viewing event";
 				presenceData.state = document.querySelector("h2")?.textContent;
-				presenceData.buttons = [
-					{
-						label: "View Page",
-						url: href,
-					},
-				];
+				presenceData.buttons = [button];
 				if (cover) {
 					presenceData.largeImageKey =
 						document.querySelector<HTMLImageElement>(".event > img")?.src;
@@ -365,12 +373,7 @@ presence.on("UpdateData", async () => {
 			case "clan": {
 				presenceData.details = "Viewing clan";
 				presenceData.state = document.querySelector(".title")?.textContent;
-				presenceData.buttons = [
-					{
-						label: "View Page",
-						url: href,
-					},
-				];
+				presenceData.buttons = [button];
 				if (cover) {
 					presenceData.largeImageKey =
 						document.querySelector<HTMLImageElement>(".clanImage").src;
@@ -387,12 +390,7 @@ presence.on("UpdateData", async () => {
 						".content-box .playlistImage"
 					).src;
 				}
-				presenceData.buttons = [
-					{
-						label: "View Page",
-						url: href,
-					},
-				];
+				presenceData.buttons = [button];
 				break;
 			}
 			case "settings": {
