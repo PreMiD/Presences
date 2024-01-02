@@ -92,7 +92,7 @@ presence.on("UpdateData", async () => {
 
 					presenceData.largeImageKey =
 						document
-							.querySelector('[class="avatar-card-link avatar-image-link"]')
+							.querySelector(".avatar-card-link.avatar-image-link")
 							?.querySelector("img")
 							?.getAttribute("src") ?? Assets.Logo;
 
@@ -425,7 +425,7 @@ presence.on("UpdateData", async () => {
 			switch (true) {
 				case pathname.includes("/t/"): {
 					presenceData.state = `Reading ${
-						document.querySelector('[class="fancy-title"]')?.textContent
+						document.querySelector(".fancy-title")?.textContent
 					}`;
 					presenceData.smallImageKey = Assets.Reading;
 
@@ -558,7 +558,7 @@ presence.on("UpdateData", async () => {
 
 		case "create.roblox.com": {
 			presenceData.largeImageKey = Assets.CreateLogo;
-			const search = document.querySelector('[id="search-text-field"]');
+			const search = document.querySelector("#search-text-field");
 			switch (true) {
 				case pathname === "/landing": {
 					presenceData.details = "Browsing on the landing page";
