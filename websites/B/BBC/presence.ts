@@ -740,7 +740,7 @@ presence.on("UpdateData", async () => {
 
 	presence.setActivity(presenceData);
 });
-/* eslint-disable camelcase */
+
 interface IPlayerData {
 	episode?: {
 		title: string;
