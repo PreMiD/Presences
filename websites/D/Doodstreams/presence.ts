@@ -10,7 +10,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "https://i.imgur.com/e7SBEQM.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Doodstreams/assets/logo.png",
 		},
 		{ pathname } = document.location,
 		video = document.querySelector<HTMLVideoElement>("video"),
