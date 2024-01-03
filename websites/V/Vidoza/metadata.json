@@ -11,10 +11,16 @@
 	},
 	"url": "vidoza.net",
 	"regExp": "(ww(w)?([0-9])?[.])?vidoza[.][a-z]*",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/y23NjvR.png",
 	"thumbnail": "https://i.imgur.com/mYpatQ2.png",
 	"color": "#43A047",
 	"category": "videos",
-	"tags": ["anime", "video", "stream", "streaming", "sharing"]
+	"tags": [
+		"anime",
+		"video",
+		"stream",
+		"streaming",
+		"sharing"
+	]
 }
