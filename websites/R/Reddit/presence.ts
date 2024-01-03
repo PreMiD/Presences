@@ -2,9 +2,8 @@ enum PresenceClients {
 	Reddit = "609183409440555018",
 	RedditNetflix = "869992823854870588",
 }
-let presence = new Presence({ clientId: PresenceClients.Reddit });
-
-let subReddit: string,
+let presence = new Presence({ clientId: PresenceClients.Reddit }),
+	subReddit: string,
 	postTitle: string,
 	username: string,
 	nickname: string,
