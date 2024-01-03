@@ -12,8 +12,8 @@
 	"url": "vidoza.net",
 	"regExp": "(ww(w)?([0-9])?[.])?vidoza[.][a-z]*",
 	"version": "1.0.1",
-	"logo": "https://i.imgur.com/y23NjvR.png",
-	"thumbnail": "https://i.imgur.com/mYpatQ2.png",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vidoza/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vidoza/assets/thumbnail.png",
 	"color": "#43A047",
 	"category": "videos",
 	"tags": [
