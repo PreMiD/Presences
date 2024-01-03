@@ -10,13 +10,13 @@ function setClient(options: PresenceOptions) {
 }
 
 enum LogoAssets {
-	BbcFuture = "https://i.imgur.com/Oxy662h.png",
-	BbcIplayer = "https://i.imgur.com/7jIb2OC.png",
+	BbcFuture = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/0.png",
+	BbcIplayer = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/1.png",
 	Bbc = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/logo.png",
-	BbcNews = "https://i.imgur.com/KksqBBZ.png",
-	BbcSounds = "https://i.imgur.com/NAlZ7Ei.png",
-	BbcSport = "https://i.imgur.com/bwKErHh.png",
-	BbcWeather = "https://i.imgur.com/F0vF9aR.png",
+	BbcNews = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/2.png",
+	BbcSounds = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/3.png",
+	BbcSport = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/4.png",
+	BbcWeather = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/5.png",
 }
 const browsingTimestamp = Math.floor(Date.now() / 1000),
 	getStrings = (lang: string) =>
