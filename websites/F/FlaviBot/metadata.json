@@ -9,9 +9,9 @@
 		"en": "Play high quality music on discord for free."
 	},
 	"url": "flavibot.xyz",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/R9S9p94.png",
-	"thumbnail": "https://i.imgur.com/qEFxBqV.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/FlaviBot/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/FlaviBot/assets/thumbnail.png",
 	"color": "#8468E9",
 	"category": "music",
 	"tags": [
