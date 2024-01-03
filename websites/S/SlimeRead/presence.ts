@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/x6NuCdk.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/SlimeRead/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ href, pathname } = document.location;
@@ -65,9 +66,6 @@ presence.on("UpdateData", async () => {
 			const chapterInfo = document.querySelector(
 					'[class="ml-4 mt-4"] > h1'
 				)?.textContent,
-				mediaLink = document.querySelector<HTMLAnchorElement>(
-					'[class="ml-4 mt-4"] > h1 > a'
-				).href,
 				mediaCover = document.querySelector<HTMLMetaElement>(
 					'meta[property="image"]'
 				)?.content;
@@ -76,7 +74,12 @@ presence.on("UpdateData", async () => {
 			presenceData.state = chapterInfo?.split("/")[1].trim();
 			presenceData.buttons = [
 				{ label: "Ler capítulo", url: href.replace(/\/[^/]*$/, "") },
-				{ label: "Ler mangá", url: mediaLink },
+				{
+					label: "Ler mangá",
+					url: document.querySelector<HTMLAnchorElement>(
+						'[class="ml-4 mt-4"] > h1 > a'
+					).href,
+				},
 			];
 			break;
 		}
