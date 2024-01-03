@@ -54,6 +54,7 @@ presence.on("UpdateData", async () => {
 			"/help": { details: "ヘルプを閲覧中" },
 			"/fesTours": { details: "フェスツアーズをプレイ中" },
 			"/fesToursConcert": { details: "フェスツアーズをプレイ中" },
+			"/mastersFes": { details: "マスターズフェスをプレイ中" },
 		},
 		pathDetails = pathMap[pathname]?.details;
 	if (typeof pathDetails !== "undefined") presenceData.details = pathDetails;
@@ -85,6 +86,8 @@ presence.on("UpdateData", async () => {
 				"にちか",
 				"美琴",
 				"ルカ",
+				"羽那",
+				"はるき",
 			],
 			albumIndex = Number(pathname.split("/")[2]) - 1;
 		if (albumIndex >= 0 && albumIndex < idolNames.length)
