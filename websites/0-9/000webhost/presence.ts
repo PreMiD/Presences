@@ -14,7 +14,6 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("buttons"),
 		]),
-		title = document.querySelector("head > title"),
 		titleSite = document.querySelector(".current-website");
 
 	switch (true) {
@@ -26,12 +25,14 @@ presence.on("UpdateData", async () => {
 			switch (true) {
 				case pathname.includes("/t/"): {
 					presenceData.details = "Reading forum post:";
-					presenceData.state = title?.textContent?.replace(
-						`- ${
-							document.querySelector(".fancy-title")?.textContent
-						} - 000webhost forum`,
-						""
-					);
+					presenceData.state = document
+						.querySelector("head > title")
+						?.textContent?.replace(
+							`- ${
+								document.querySelector(".fancy-title")?.textContent
+							} - 000webhost forum`,
+							""
+						);
 					presenceData.smallImageKey = Assets.Reading;
 					presenceData.buttons = [
 						{
