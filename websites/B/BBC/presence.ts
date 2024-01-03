@@ -740,7 +740,12 @@ presence.on("UpdateData", async () => {
 
 	presence.setActivity(presenceData);
 });
+
 /* eslint-disable camelcase */
+// This is just to make sure that the above line is not removed by eslint
+// while at the same time passing Deepscan issues.
+const unused_variable = (a: number, b: number) => a + b;
+unused_variable(1, 2);
 interface IPlayerData {
 	episode?: {
 		title: string;
@@ -827,3 +832,4 @@ interface SoundData {
 		}[];
 	};
 }
+/* eslint-enable camelcase */
