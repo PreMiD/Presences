@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "638080361179512853",
+		"name": "dark_ville"
+	},
+	"service": "FlaviBot",
+	"description": {
+		"en": "Play high quality music on discord for free."
+	},
+	"url": "flavibot.xyz",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/R9S9p94.png",
+	"thumbnail": "https://i.imgur.com/qEFxBqV.png",
+	"color": "#8468E9",
+	"category": "music",
+	"tags": [
+		"discord",
+		"bot",
+		"music",
+		"spotify",
+		"apple-music",
+		"apple",
+		"soundcloud",
+		"tidal",
+		"deezer",
+		"direct",
+		"links",
+		"radio"
+	]
+}
