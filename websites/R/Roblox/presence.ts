@@ -6,7 +6,7 @@ const presence = new Presence({
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/logo.png",
 	DeveloperLogo = "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/0.png",
-	CreateLogo = "https://i.imgur.com/blbvRJz.png",
+	CreateLogo = "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/1.png",
 }
 let devImage = false;
 
