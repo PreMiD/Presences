@@ -1,6 +1,6 @@
 const presence = new Presence({ clientId: "1138970637440917504" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
-	defaultImageUrl = "https://i.imgur.com/Ywk7b7q.png",
+	defaultImageUrl = "https://cdn.rcd.gg/PreMiD/websites/K/KEXP/assets/logo.png",
 	watchPaths = ["/archive/", "/podcasts/", "/shows/", "/djs/", "/schedule/"];
 
 async function updatePresence() {
