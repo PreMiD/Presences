@@ -9,7 +9,7 @@
 		"en": "Watch truly great cinema. Wherever you are. With no ads. Ever. From new directors to award-winners. Beautiful, interesting, incredible movies — a new film every single day. Stream Now. Download to watch Offline. Start your free 7 day trial now."
 	},
 	"url": "mubi.com",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MUBI/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MUBI/assets/thumbnail.png",
 	"color": "#B4CDDB",
@@ -46,6 +46,16 @@
 			},
 			"title": "Show Cover",
 			"value": true
+		},
+		{
+			"id": "viewState",
+			"if": {
+				"privacy": false
+			},
+			"title": "Movie view row2",
+			"icon": "fas fa-comment-alt-edit",
+			"value": "%tags%",
+			"placeholder": "%tags%, %director%, %locationAndDate%, %minutes% or {0}"
 		}
 	]
 }

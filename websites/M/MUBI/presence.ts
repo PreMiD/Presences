@@ -16,6 +16,15 @@ async function getStrings() {
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
+/* eslint-disable camelcase */
+const unused_variable = (a: number, b: number) => a + b;
+unused_variable(1, 2);
+interface Directors {
+	name: string;
+	name_upcase: string;
+	slug: string;
+}
+/* eslint-enable camelcase */
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/MUBI/assets/logo.png",
@@ -29,11 +38,12 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 		},
 		{ href, pathname } = document.location,
-		[newLang, privacy, buttons, covers] = await Promise.all([
+		[newLang, privacy, buttons, covers, viewState] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("covers"),
+			presence.getSetting<string>("viewState"),
 		]),
 		search = document.querySelectorAll(
 			'input[name="query"]'
@@ -112,7 +122,10 @@ presence.on("UpdateData", async () => {
 		case pathname.includes("films"):
 		case pathname.includes("shows"): {
 			const video = document.querySelector<HTMLVideoElement>("video"),
-				title = document.querySelector('[itemprop="name"]')?.textContent;
+				title = document.querySelector('[itemprop="name"]')?.textContent,
+				infoJSON = JSON.parse(
+					document.querySelector("#__NEXT_DATA__")?.textContent
+				)?.props?.initialProps?.pageProps?.initFilm;
 			if (!video) {
 				presenceData.details = `${title.charAt(0)}${title
 					.slice(1)
@@ -120,11 +133,27 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = document
 					.querySelector('[property="og:image"]')
 					?.getAttribute("content");
-				presenceData.state = JSON.parse(
-					document.querySelector("#__NEXT_DATA__")?.textContent
-				)
-					?.props?.initialProps?.pageProps?.initFilm?.genres?.toString()
-					?.replace(/,/gm, ", "); //Genre(s) of the content: Documentary, Drama, etc.
+				presenceData.state = viewState
+					.replace("%tags%", infoJSON?.genres?.toString()?.replace(/,/gm, ", "))
+					.replace(
+						"%director%",
+						infoJSON?.directors?.length === 1
+							? infoJSON?.directors?.[0]?.name
+							: infoJSON?.directors?.map((x: Directors) => x?.name)?.join(", ")
+					)
+					.replace(
+						"%locationAndDate%",
+						infoJSON?.historic_countries?.length === 1
+							? `${infoJSON?.historic_countries}, ${infoJSON?.year}`
+							: `${infoJSON?.historic_countries?.join(", ")}, ${infoJSON?.year}`
+					)
+					.replace(
+						"%minutes%",
+						`${
+							infoJSON?.duration ??
+							document.querySelector('[itemprop="duration"]')?.textContent
+						} minutes long`
+					); //Genre(s) of the content: Documentary, Drama, etc.
 				presenceData.buttons = [
 					{
 						label: "View Content",
