@@ -16,6 +16,11 @@ async function getStrings() {
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
+interface Directors {
+	name: String;
+	name_upcase: String;
+	slug: String;
+}
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/MUBI/assets/logo.png",
@@ -29,11 +34,12 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 		},
 		{ href, pathname } = document.location,
-		[newLang, privacy, buttons, covers] = await Promise.all([
+		[newLang, privacy, buttons, covers, viewState] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("covers"),
+			presence.getSetting<string>("viewState"),
 		]),
 		search = document.querySelectorAll(
 			'input[name="query"]'
@@ -54,7 +60,7 @@ presence.on("UpdateData", async () => {
 		}`;
 		presenceData.state = `In ${
 			document
-				.querySelector('[class="css-1ws58ev e175rd72"]')
+				.querySelector('.css-1ws58ev.e175rd72"]')
 				?.textContent.replace(/[0-9]*,*[.]*/gm, "")
 				?.toLowerCase() ?? "All categories"
 		}`;
@@ -62,23 +68,14 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData);
 		return;
 	}
-	switch (pathname.split("/")[1]) {
-		case "showing":
-		case "": {
+	switch (true) {
+		case pathname.includes("showing"):
+		case pathname === "": {
 			presenceData.details = "Viewing the home page";
 			break;
 		}
-		case "film": {
-			presenceData.buttons = [
-				{
-					label: "Browse",
-					url: href,
-				},
-			];
-			presenceData.details = "Browsing movies";
-			break;
-		}
-		case "specials": {
+
+		case pathname.includes("specials"): {
 			presenceData.buttons = [
 				{
 					label: "Browse",
@@ -86,14 +83,14 @@ presence.on("UpdateData", async () => {
 				},
 			];
 			presenceData.details = `Browsing ${
-				document.querySelector('[class="css-9ziruj e1cgaodc1"]')?.textContent ??
+				document.querySelector(".css-9ziruj.e1cgaodc1")?.textContent ??
 				"specials"
 			}`;
 
 			break;
 		}
-		case "notebook": {
-			if (document.querySelector('[class="css-dve9fb earvnqh7"]')) {
+		case pathname.includes("notebook"): {
+			if (document.querySelector(".css-dve9fb.earvnqh7")) {
 				presenceData.details = "Reading notebook interview about:";
 				presenceData.state = document.querySelector(
 					'[class="css-dve9fb earvnqh7"]'
@@ -107,22 +104,24 @@ presence.on("UpdateData", async () => {
 			];
 			break;
 		}
-		case "users": {
+		case pathname.includes("/users/"): {
 			presenceData.details = `Viewing ${
 				document.querySelector('[data-cy="profile-name"]')?.textContent
 			}'s Profile`;
-			presenceData.state = document
-				.querySelector('[class="esexmu12 css-118gkxg ed2vlb1"]')
-				?.textContent.replace(/[0-9]*,*[.]*/gm, "");
-			presenceData.largeImageKey = document
-				.querySelector('[class="css-1ifv4gr egle0sa2"]')
-				?.getAttribute("src");
+			presenceData.largeImageKey =
+				document
+					.querySelector('[data-cy="avatar-image-container"]')
+					?.querySelector("img")
+					?.getAttribute("src") ?? Assets.Logo;
 			break;
 		}
-		case "films":
-		case "shows": {
+		case pathname.includes("films"):
+		case pathname.includes("shows"): {
 			const video = document.querySelector<HTMLVideoElement>("video"),
-				title = document.querySelector('[itemprop="name"]')?.textContent;
+				title = document.querySelector('[itemprop="name"]')?.textContent,
+				infoJSON = JSON.parse(
+					document.querySelector("#__NEXT_DATA__")?.textContent
+				)?.props?.initialProps?.pageProps?.initFilm;
 			if (!video) {
 				presenceData.details = `${title.charAt(0)}${title
 					.slice(1)
@@ -130,12 +129,30 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = document
 					.querySelector('[property="og:image"]')
 					?.getAttribute("content");
-				presenceData.state = document.querySelector(
-					'[class="css-1tt0la4 e302dtw11"]'
-				)?.textContent;
+				presenceData.state = viewState
+					.replace("%tags%", infoJSON?.genres?.toString()?.replace(/,/gm, ", "))
+					.replace(
+						"%director%",
+						infoJSON?.directors?.length === 1
+							? infoJSON?.directors?.[0]?.name
+							: infoJSON?.directors?.map((x: Directors) => x?.name)?.join(", ")
+					)
+					.replace(
+						"%locationAndDate%",
+						infoJSON?.historic_countries?.length === 1
+							? `${infoJSON?.historic_countries}, ${infoJSON?.year}`
+							: `${infoJSON?.historic_countries?.join(", ")}, ${infoJSON?.year}`
+					)
+					.replace(
+						"%minutes%",
+						`${
+							infoJSON?.duration ??
+							document.querySelector('[itemprop="duration"]')?.textContent
+						} minutes long`
+					); //Genre(s) of the content: Documentary, Drama, etc.
 				presenceData.buttons = [
 					{
-						label: "Browse",
+						label: "View Content",
 						url: href,
 					},
 				];
@@ -151,7 +168,7 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey =
 					document
 						.querySelector("#__NEXT_DATA__")
-						?.innerHTML?.match(
+						?.textContent?.match(
 							/https:\/\/images[.]mubicdn[.]net\/images\/(film|show)\/[0-9]*\/cache-[0-9]*-[0-9]*\/image-w1280[.]jpg/
 						)
 						?.at(0) ?? Assets.Logo;
@@ -168,25 +185,33 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
-		case "cast": {
+		case pathname.includes("film"): {
+			presenceData.buttons = [
+				{
+					label: "Browse",
+					url: href,
+				},
+			];
+			presenceData.details = "Browsing movies";
+			break;
+		}
+		case pathname.includes("cast"): {
 			presenceData.details = "Viewing cast member";
-			presenceData.state = document.querySelector(
-				'[class="css-qbkodn era7u186"]'
-			)?.textContent;
+			presenceData.state = document.querySelector<HTMLMetaElement>(
+				'[property="og:title"]'
+			)?.content;
 			presenceData.largeImageKey = document
-				.querySelector('[class="css-r9klzk egle0sa2"]')
+				.querySelector('[data-testid="resp-img-src"] > img')
 				?.getAttribute("src");
 			break;
 		}
 		default: {
-			const active = document.querySelector('[class="css-1dccbe3 ej6uv270"]');
+			const active = document.querySelector(".css-1dccbe3.ej6uv270");
 			if (active?.textContent)
 				presenceData.details = `Browsing ${active.textContent}`;
-			else if (
-				document.querySelector('[class="css-1ljf7si eugzkiw0"]')?.textContent
-			) {
+			else if (document.querySelector(".css-1ljf7si.eugzkiw0")?.textContent) {
 				presenceData.details = `Viewing ${
-					document.querySelector('[class="css-1ljf7si eugzkiw0"]')?.textContent
+					document.querySelector(".css-1ljf7si.eugzkiw0")?.textContent
 				} settings`;
 			} else presenceData.details = "Browsing...";
 			break;
