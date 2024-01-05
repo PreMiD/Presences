@@ -13,9 +13,9 @@
 		"www.kexp.org",
 		"kexp.org"
 	],
-	"version": "1.0.1",
+	"version": "1.1.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/KEXP/assets/logo.png",
-	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/KEXP/assets/thumbnail.png",
+	"thumbnail": "https://i.imgur.com/Ov4YRDM.png",
 	"color": "#fbab2c",
 	"category": "music",
 	"tags": [
@@ -23,5 +23,11 @@
 		"music",
 		"kexp",
 		"seattle"
+	],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		}
 	]
 }
