@@ -46,12 +46,12 @@ presence.on("UpdateData", async () => {
 				href.includes("/film"),
 			title =
 				document.querySelector(
-					'[aria-current="page"],[itemprop="name"],.card-title fs-4,.Title'
+					'[aria-current="page"],[itemprop="name"],#name,.card-title fs-4,.Title'
 				)?.textContent ??
 				document.querySelector('[itemprop="image"]')?.getAttribute("alt") ??
 				document.querySelector(".film-poster-img")?.getAttribute("title") ??
 				document
-					.querySelector(".lazy img-fluid rounded")
+					.querySelector(".lazy.img-fluid.rounded")
 					?.getAttribute("alt") ??
 				"Unknown";
 
@@ -65,33 +65,32 @@ presence.on("UpdateData", async () => {
 					url: href,
 				},
 			];
-		}
-		if (!isMovie) {
-			if (title.toLowerCase().includes("season")) {
+		} else {
+			if (!isMovie && title.toLowerCase().includes("season")) {
 				const splitEl = title.split("-");
 				presenceData.details = splitEl?.[0];
 				presenceData.state = `${splitEl?.[1] ?? "Unknown season"} - ${
 					splitEl?.[2]?.split(":")?.[0] ?? "unknown episode"
 				}`;
-			}
-		} else presenceData.details = title;
+			} else presenceData.details = title;
 
-		presenceData.largeImageKey =
-			document.querySelector('[itemprop="image"]')?.getAttribute("src") ??
-			Assets.Logo;
-		if (!iFrameData?.paused) {
-			[, presenceData.endTimestamp] = presence.getTimestamps(
-				iFrameData.currTime,
-				iFrameData.duration
-			);
-			presenceData.smallImageKey = Assets.Play;
-		} else presenceData.smallImageKey = Assets.Pause;
-		presenceData.buttons = [
-			{
-				label: isMovie ? "Watch Movie" : "Watch Series",
-				url: href,
-			},
-		];
+			presenceData.largeImageKey =
+				document.querySelector('[itemprop="image"]')?.getAttribute("src") ??
+				Assets.Logo;
+			if (!iFrameData?.paused) {
+				[, presenceData.endTimestamp] = presence.getTimestamps(
+					iFrameData.currTime,
+					iFrameData.duration
+				);
+				presenceData.smallImageKey = Assets.Play;
+			} else presenceData.smallImageKey = Assets.Pause;
+			presenceData.buttons = [
+				{
+					label: isMovie ? "Watch Movie" : "Watch Series",
+					url: href,
+				},
+			];
+		}
 	} else if (pathname === "/user/profile")
 		presenceData.details = "Checking Profile";
 	else if (pathname === "/user/watchlist")
