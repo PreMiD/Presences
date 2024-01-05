@@ -16,11 +16,13 @@ async function getStrings() {
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
+/* eslint-disable camelcase */
 interface Directors {
-	name: String;
-	name_upcase: String;
-	slug: String;
+	name: string;
+	name_upcase: string;
+	slug: string;
 }
+/* eslint-enable camelcase */
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/MUBI/assets/logo.png",
