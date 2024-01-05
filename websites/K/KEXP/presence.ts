@@ -1,14 +1,15 @@
 const presence = new Presence({ clientId: "1138970637440917504" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	defaultImageUrl = "https://cdn.rcd.gg/PreMiD/websites/K/KEXP/assets/logo.png",
-	watchPaths = ["/archive/", "/podcasts/", "/shows/", "/djs/", "/schedule/"];
+	watchPaths = ["/archive/", "/djs/", "/podcasts/", "/schedule/", "/shows/"];
 
 async function updatePresence() {
 	const strings = await presence.getStrings({
+			about: "general.readingAbout",
+			article: "general.readingAnArticle",
 			pause: "general.paused",
 			play: "general.playing",
-			profile: "general.readingAbout",
-			reading: "general.readingAnArticle",
+			searching: "general.searchSomething",
 			watching: "general.watching",
 		}),
 		currentPagePath = document.location.pathname,
@@ -17,28 +18,44 @@ async function updatePresence() {
 			largeImageKey: defaultImageUrl,
 		};
 
-	function setDetails(detailsKey: keyof typeof strings, imageKey: string) {
+	function setDetails(
+		detailsKey: keyof typeof strings,
+		imageKey: string,
+		textKey: keyof typeof strings,
+		selectElement: string
+	) {
 		presenceData.details = strings[detailsKey];
 		presenceData.smallImageKey = imageKey;
-		presenceData.smallImageText = strings[detailsKey];
+		presenceData.smallImageText = strings[textKey];
+		presenceData.state = document.querySelector(selectElement)?.textContent;
 	}
 
 	switch (true) {
 		case watchPaths.includes(currentPagePath):
-			setDetails("watching", Assets.Viewing);
-			presenceData.state = document.querySelector(".InlineMenu-current");
-			break;
-
-		case ["/podcasts/", "/shows/"].some(path =>
-			currentPagePath.startsWith(path)
-		):
-			setDetails("reading", Assets.Reading);
-			presenceData.state = document.querySelector("h1")?.textContent;
+			setDetails(
+				"watching",
+				Assets.Viewing,
+				"searching",
+				".InlineMenu-current"
+			);
 			break;
 
 		case currentPagePath.startsWith("/djs/"):
-			setDetails("profile", Assets.Reading);
-			presenceData.state = document.querySelector("h3")?.textContent;
+			setDetails("about", Assets.Reading, "article", "h3");
+			break;
+
+		case currentPagePath.startsWith("/podcasts/"):
+			setDetails("article", Assets.Reading, "article", "h1");
+			break;
+
+		case currentPagePath.startsWith("/read/") &&
+			/^\/read\/\d{4}\/\d{1,2}\/\d{1,2}\/[\w-]+\/?$/.test(currentPagePath): {
+			setDetails("about", Assets.Reading, "article", "h1");
+			break;
+		}
+
+		case currentPagePath.startsWith("/shows/"):
+			setDetails("about", Assets.Reading, "article", "h1");
 			break;
 
 		default: {
