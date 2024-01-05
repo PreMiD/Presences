@@ -17,6 +17,8 @@ async function getStrings() {
 	);
 }
 /* eslint-disable camelcase */
+const unused_variable = (a: number, b: number) => a + b;
+unused_variable(1, 2);
 interface Directors {
 	name: string;
 	name_upcase: string;
