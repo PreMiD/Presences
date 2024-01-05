@@ -14,7 +14,7 @@ let presence = new Presence({ clientId: PresenceClients.Reddit }),
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Reddit/assets/logo.png",
-	NetflixLogo = "https://cdn.discordapp.com/icons/741794683482538074/a_f893fbdc993664e0c2957dead21e1007.gif?size=512",
+	NetflixLogo = "https://i.imgur.com/Aw5rIOI.gif",
 }
 
 async function getStrings() {
