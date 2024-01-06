@@ -6,7 +6,9 @@
 	},
 	"service": "Taiyō",
 	"altnames": [
-		"Taiyō.moe"
+		"Taiyō.moe",
+		"Taiyo.moe",
+		"Taiyo"
 	],
 	"description": {
 		"en": "Read manga online for free at Taiyō, without ads, with high-quality images, and reader support.",
@@ -16,7 +18,7 @@
 		"taiyo.moe",
 		"www.taiyo.moe"
 	],
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Taiy%C5%8D/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Taiy%C5%8D/assets/thumbnail.png",
 	"color": "#FF4F4F",
