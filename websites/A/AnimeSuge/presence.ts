@@ -10,6 +10,7 @@ const presence = new Presence({
 		"/user/settings": "Changing the settings",
 		"/user/watchlist": "Looking at their watchlist",
 		"/user/import": "Importing their MAL list to Animesuge!",
+		"/home": "At the homepage",
 		"/": "At the homepage",
 		"/newest": "Searching for the newest animes",
 		"/updated": "Searching for recently updated animes",
