@@ -1,20 +1,21 @@
-let presence: Presence;
-
-function setPresence(): void {
-	if (location.pathname.includes("/r/netflix"))
-		presence = new Presence({ clientId: "869992823854870588" });
-	else presence = new Presence({ clientId: "609183409440555018" });
+enum PresenceClients {
+	Reddit = "609183409440555018",
+	RedditNetflix = "869992823854870588",
 }
-
-setPresence();
-
-let subReddit: string,
+let presence = new Presence({ clientId: PresenceClients.Reddit }),
+	subReddit: string,
 	postTitle: string,
 	username: string,
 	nickname: string,
 	rpanTitle: string,
 	strings: Awaited<ReturnType<typeof getStrings>>,
-	oldLang: string = null;
+	oldLang: string = null,
+	containsNetflix: boolean;
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Reddit/assets/logo.png",
+	NetflixLogo = "https://i.imgur.com/Aw5rIOI.gif",
+}
 
 async function getStrings() {
 	return presence.getStrings(
@@ -35,28 +36,56 @@ async function getStrings() {
 	);
 }
 
-const startTimestamp = Math.floor(Date.now() / 1000),
-	oldReddit = document.querySelector("._1tvdSTbdxaK-BnUbzUIqIY") === null;
+const presences: { [key in PresenceClients]?: Presence } = {
+		[PresenceClients.Reddit]: presence,
+	},
+	startTimestamp = Math.floor(Date.now() / 1000),
+	oldReddit = !!document.querySelector(".default-header");
+
+function setClient(clientId: PresenceClients) {
+	presence.clearActivity();
+	if (presences[clientId]) {
+		presence = presences[clientId];
+		presence.setActivity();
+	} else {
+		presence = new Presence({ clientId });
+		presences[clientId] = presence;
+	}
+	presence.info("Switched presence client!");
+}
 
 presence.on("UpdateData", async () => {
-	setPresence();
 	const [newLang, buttons, privacy] = await Promise.all([
-		presence.getSetting<string>("lang").catch(() => "en"),
-		presence.getSetting<boolean>("buttons"),
-		presence.getSetting<boolean>("privacy"),
-	]);
+			presence.getSetting<string>("lang").catch(() => "en"),
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("privacy"),
+		]),
+		{ href, pathname } = document.location,
+		presenceData: PresenceData = {
+			largeImageKey: !pathname.includes("/r/netflix")
+				? Assets.Logo
+				: Assets.NetflixLogo,
+			smallImageKey: pathname.includes("/r/netflix") ? Assets.Logo : "",
+			startTimestamp,
+		};
+
+	if (pathname.includes("/r/netflix") && !containsNetflix) {
+		setClient(PresenceClients.RedditNetflix);
+
+		containsNetflix = true;
+		presenceData.largeImageKey = Assets.NetflixLogo;
+		presenceData.smallImageKey = Assets.Logo;
+	} else if (!pathname.includes("/r/netflix") && containsNetflix) {
+		setClient(PresenceClients.Reddit);
+		containsNetflix = false;
+		presenceData.largeImageKey = Assets.Logo;
+	}
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
 
-	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/R/Reddit/assets/logo.png",
-			startTimestamp,
-		},
-		{ pathname } = window.location;
 	if (oldReddit) {
 		subReddit = document.querySelector(".redditname")
 			? `${
@@ -72,7 +101,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = subReddit;
 				presenceData.buttons = [
 					{
-						url: `https://www.reddit.com${pathname}`,
+						url: href,
 						label: strings.readButton,
 					},
 				];
@@ -87,7 +116,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = strings.profile;
 				presenceData.buttons = [
 					{
-						url: `https://www.reddit.com${pathname}`,
+						url: href,
 						label: strings.viewProfileButton,
 					},
 				];
@@ -118,7 +147,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = subReddit;
 			presenceData.buttons = [
 				{
-					url: `https://www.reddit.com${pathname}`,
+					url: href,
 					label: strings.readButton,
 				},
 			];
@@ -138,7 +167,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = nickname !== "" ? nickname : username;
 			presenceData.buttons = [
 				{
-					url: `https://www.reddit.com${pathname}`,
+					url: href,
 					label: strings.viewProfileButton,
 				},
 			];
@@ -156,7 +185,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = rpanTitle;
 			presenceData.buttons = [
 				{
-					url: `https://www.reddit.com${pathname}`,
+					url: href,
 					label: strings.streamButton,
 				},
 			];
@@ -190,26 +219,7 @@ presence.on("UpdateData", async () => {
 			else presenceData.state = sub.textContent;
 		}
 	}
-	if (pathname.includes("/r/netflix")) {
-		if (!presenceData.buttons?.length) {
-			presenceData.buttons = [
-				{
-					url: "https://www.reddit.com/r/netflix",
-					label: "View r/Netflix Subreddit",
-				},
-				{
-					url: "https://discord.gg/bDumw325vX",
-					label: "Join r/Netflix Discord",
-				},
-			];
-		}
-		if (presenceData.buttons.length === 1) {
-			presenceData.buttons.push({
-				url: "https://discord.gg/bDumw325vX",
-				label: "Join r/Netflix Discord",
-			});
-		}
-	}
+
 	if (!buttons || privacy) delete presenceData.buttons;
 	presence.setActivity(presenceData);
 });
