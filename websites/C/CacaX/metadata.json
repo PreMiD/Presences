@@ -8,7 +8,10 @@
 	"description": {
 		"en": "The social network of the future, 100% free of expression !"
 	},
-	"url": "cacax.fun",
+	"url": [
+		"www.cacax.fun",
+		"cacax.fun"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/9szXrvz.png",
 	"thumbnail": "https://i.imgur.com/yZHviH7.jpg",
