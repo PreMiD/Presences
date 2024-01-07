@@ -14,7 +14,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const { pathname, href } = document.location,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/9szXrvz.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/C/CacaX/assets/logo.png",
 		},
 		images = document.querySelectorAll("img");
 
@@ -44,10 +45,11 @@ presence.on("UpdateData", async () => {
 		// si rien trouvé
 		if (imgUrl === "") {
 			presenceData.largeImageKey =
-				"https://www.cacax.fun/images/placeholder.png";
+				"https://cdn.rcd.gg/PreMiD/websites/C/CacaX/assets/0.png";
 		} else presenceData.largeImageKey = imgUrl;
 
-		presenceData.smallImageKey = "https://i.imgur.com/9szXrvz.png";
+		presenceData.smallImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/C/CacaX/assets/logo.png";
 	} else if (pathname.includes("/posts/")) {
 		presenceData.details = "Posts";
 		presenceData.state = `Regarde le post de ${
@@ -73,10 +75,11 @@ presence.on("UpdateData", async () => {
 		//si rien trouvé
 		if (imgUrl === "") {
 			presenceData.smallImageKey =
-				"https://www.cacax.fun/images/placeholder.png";
+				"https://cdn.rcd.gg/PreMiD/websites/C/CacaX/assets/0.png";
 		} else presenceData.smallImageKey = imgUrl;
 
-		presenceData.largeImageKey = "https://i.imgur.com/9szXrvz.png";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/C/CacaX/assets/logo.png";
 	} else {
 		switch (pathname) {
 			case "/":
