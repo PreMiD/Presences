@@ -1,36 +1,15 @@
 const presence = new Presence({
 		clientId: "863949633009090580",
 	}),
-	pages: { [k: string]: string } = {
-		"/anime": "Watching an anime",
-		"/genre": "Searching by genre",
-		"/search": "Searching anime by name",
-		"/faq": "Reading the FAQ",
-		"/contact": "Reading the contacts",
-		"/user/settings": "Changing the settings",
-		"/user/watchlist": "Looking at their watchlist",
-		"/user/import": "Importing their MAL list to Animesuge!",
-		"/home": "At the homepage",
-		"/": "At the homepage",
-		"/newest": "Searching for the newest animes",
-		"/updated": "Searching for recently updated animes",
-		"/ongoing": "Searching for ongoing animes",
-		"/added": "Searching recently added animes",
-		"/tv": "Searching for TV animes",
-		"/movie": "Searching movie animes",
-		"/ova": "Searching for OVA animes",
-		"/ona": "Searching for ONA animes",
-		"/special": "Searching for special anime episodes",
-		"/az-list": "Seaching all animes",
-		"/most-watched": "Searching most watched animes",
-		"/upcoming": "Searching upcoming animes",
-	};
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeSuge/assets/logo.png",
 }
 
-let timeEnd: number, currentTime: number, paused: boolean;
+let timeEnd: number,
+	currentTime: number,
+	paused = true;
 
 presence.on(
 	"iFrameData",
@@ -40,23 +19,69 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-	const page = document.location.pathname,
-		epNumber = page.slice(page.length - 5).replace(/^\D+/g, ""),
-		presenceData: PresenceData = {
-			largeImageKey: Assets.Logo,
-			startTimestamp: Math.floor(Date.now() / 1000),
-		},
+	let presenceData: PresenceData = {
+		largeImageKey: Assets.Logo,
+		startTimestamp: browsingTimestamp,
+	};
+	const { pathname } = document.location,
+		epNumber = pathname.slice(pathname.length - 5).replace(/^\D+/g, ""),
 		search: URLSearchParams = new URLSearchParams(
 			document.location.search.substring(1)
-		);
-	if (page in pages) {
-		presenceData.details = pages[page];
-		presenceData.state = "Searching animes";
-	} else if (page.includes("/anime")) {
+		),
+		pages: Record<string, PresenceData> = {
+			"/genre": {
+				details: "Searching by genre",
+				state: `Searching for ${document
+					.querySelector(".heading > h2")
+					?.textContent?.toLowerCase()}s`,
+			},
+			"/search": {
+				details: "Searching anime by name",
+				state: `Searching: "${search.get("keyword")}"`,
+				smallImageKey: Assets.Search,
+				smallImageText: "Searching",
+			},
+			"/faq": {
+				details: "Reading the FAQ",
+				state: "Reading",
+				smallImageKey: Assets.Reading,
+			},
+			"/contact": {
+				details: "Reading the contacts",
+				state: "Reading",
+				smallImageKey: Assets.Reading,
+			},
+			"/user/settings": { details: "Changing the settings", state: "Changing" },
+			"/user/watchlist": {
+				details: "Looking at their watchlist",
+				state: search.get("folder")
+					? `At folder: ${search.get("folder")}`
+					: "In all folders",
+			},
+			"/user/import": {
+				details: "Importing their MAL list to Animesuge!",
+				state: "Importing",
+				smallImageKey: Assets.Uploading,
+			},
+			"/newest": { details: "Searching for the newest animes" },
+			"/updated": { details: "Searching for recently updated animes" },
+			"/ongoing": { details: "Searching for ongoing animes" },
+			"/added": { details: "Searching recently added animes" },
+			"/tv": { details: "Searching for TV animes" },
+			"/movie": { details: "Searching movie animes" },
+			"/ova": { details: "Searching for OVA animes" },
+			"/ona": { details: "Searching for ONA animes" },
+			"/special": { details: "Searching for special anime episodes" },
+			"/az-list": { details: "Seaching all animes" },
+			"/most-watched": { details: "Searching most watched animes" },
+			"/upcoming": { details: "Searching upcoming animes" },
+			"/home": { details: "At the homepage" },
+		};
+
+	if (pathname.includes("/anime/")) {
+		delete presenceData.startTimestamp;
 		presenceData.details = `Watching ${
-			document.querySelector<HTMLElement>(
-				"#body > div > div > div > div > section > div > h1"
-			).textContent
+			document.querySelector('[itemprop="name"]')?.textContent
 		}`;
 
 		if (epNumber === "") presenceData.state = "Full episode";
@@ -64,74 +89,27 @@ presence.on("UpdateData", async () => {
 
 		if (!paused) {
 			presenceData.smallImageKey = Assets.Play;
-			[presenceData.startTimestamp, presenceData.endTimestamp] =
-				presence.getTimestamps(currentTime, timeEnd);
+			[, presenceData.endTimestamp] = presence.getTimestamps(
+				currentTime,
+				timeEnd
+			);
 		} else {
 			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Paused";
-			delete presenceData.startTimestamp;
-			delete presenceData.endTimestamp;
 		}
 		presenceData.buttons = [
 			{
 				label: "Watch Episode",
-				url: `http://animesuge.to${page}`,
+				url: `http://animesuge.to${pathname}`,
 			},
 		];
-	} else if (page.includes("/genre")) {
-		const genre = page.slice("/genre/".length);
-		presenceData.details = pages["/genre"];
-		presenceData.state = `Searching for ${
-			genre.charAt(0).toUpperCase() + genre.slice(1)
-		} Animes`;
-	} else if (page.includes("/search")) {
-		presenceData.details = pages[page];
-		presenceData.state = `Searching: "${search.get("keyword")}"`;
-		presenceData.smallImageKey = Assets.Search;
-		presenceData.smallImageText = "Searching";
 	} else {
-		switch (page) {
-			case "/faq": {
-				presenceData.details = pages[page];
-				presenceData.state = "Reading";
-				presenceData.smallImageKey = Assets.Reading;
-
-				break;
-			}
-			case "/contact": {
-				presenceData.details = pages[page];
-				presenceData.state = "Reading";
-				presenceData.smallImageKey = Assets.Reading;
-
-				break;
-			}
-			case "/user/settings": {
-				presenceData.details = pages[page];
-				presenceData.state = "Changing";
-
-				break;
-			}
-			case "/user/watchlist": {
-				const list = search.get("folder");
-				presenceData.details = pages[page];
-				presenceData.state = `At folder: ${list}`;
-				if (list === null)
-					presenceData.state = "Looking at all animes in the watch list";
-
-				break;
-			}
-			case "/user/import": {
-				presenceData.details = pages[page];
-				presenceData.state = "Importing!";
-
-				break;
-			}
-			default: {
-				presenceData.details = "Looking at an unknown page";
-				presenceData.state = "Unknown";
-			}
+		for (const [path, data] of Object.entries(pages)) {
+			if (pathname !== "/" && pathname.includes(path))
+				presenceData = { ...presenceData, ...data };
 		}
 	}
+	if (!presenceData.state) presenceData.state = "Searching animes";
 	if (presenceData.details && presenceData.state)
 		presence.setActivity(presenceData);
 });
