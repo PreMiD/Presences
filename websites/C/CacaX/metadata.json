@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "418760799226429441",
+		"name": "doraf"
+	},
+	"service": "CacaX",
+	"description": {
+		"en": "The social network of the future, 100% free of expression !"
+	},
+	"url": [
+		"www.cacax.fun",
+		"cacax.fun"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/9szXrvz.png",
+	"thumbnail": "https://i.imgur.com/yZHviH7.jpg",
+	"color": "#78350F",
+	"category": "socials",
+	"tags": [
+		"social",
+		"media"
+	]
+}
