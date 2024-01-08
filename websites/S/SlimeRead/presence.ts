@@ -42,6 +42,18 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Visualizando recentes";
 			break;
 
+		case "admin":
+			if (pathname.includes("/scan"))
+				presenceData.details = "Visualizando scan";
+			else if (pathname.includes("/criar/novo"))
+				presenceData.details = "Criando mangá";
+			else if (pathname.includes("/listar"))
+				presenceData.details = "Listando mangás";
+			else if (pathname.includes("/criar-scan"))
+				presenceData.details = "Criando scan";
+			else presenceData.details = "Visualizando painel";
+			break;
+
 		case "pesquisa-obras":
 			if (pathname.includes("/pesquisar")) {
 				const searchValue =
