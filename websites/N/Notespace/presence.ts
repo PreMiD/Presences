@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	icon = "icon",
+	Icon = "https://i.imgur.com/W7Ybot8.png",
 }
 
 presence.on("UpdateData", async () => {
