@@ -1,7 +1,7 @@
 const presence = new Presence({
-	clientId: "1193651901221306378",
-}),
-browsingTimestamp = Math.floor(Date.now() / 1000)
+		clientId: "1193651901221306378",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
 	Icon = "https://i.imgur.com/W7Ybot8.png",
@@ -22,7 +22,6 @@ presence.on("UpdateData", async () => {
 				},
 			],
 		};
-		
 
 	if (currentPath.endsWith("/") || currentPath.includes("strona-glowna"))
 		presenceData.details = "Przegląda stronę główną";
