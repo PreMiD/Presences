@@ -40,30 +40,50 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "boardgame": {
-			const gameHeader = document.querySelector<HTMLAnchorElement>("h1 > a");
+			const gameHeader = document.querySelector<HTMLAnchorElement>("h1 > a"),
+				gameHeaderText = gameHeader.textContent.trim();
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 				".game-header-image img"
 			);
 			presenceData.buttons = [{ label: "View Game", url: gameHeader }];
 			switch (pathList[3]) {
 				case "forums": {
-					presenceData.details = `Viewing forums for '${gameHeader.textContent.trim()}'`;
+					presenceData.details = `Viewing forums for '${gameHeaderText}'`;
 					presenceData.state = document.querySelector(
 						"forums-module h3 span"
 					).childNodes[2];
 					break;
 				}
+				case "images": {
+					const imageContainers = document.querySelectorAll<HTMLDivElement>(
+						"images-module .summary-image-item"
+					);
+					presenceData.details = `Viewing images for '${gameHeaderText}'`;
+					for (let i = 0; i < imageContainers.length; i++) {
+						const imageContainer = imageContainers[i],
+							imageLink = imageContainer.querySelector<HTMLAnchorElement>(
+								".summary-image-thumbnail"
+							),
+							imageTitle = imageContainer.querySelector<HTMLDivElement>(
+								".summary-item-title"
+							),
+							slide: PresenceData = {
+								...presenceData,
+								largeImageKey: imageLink.querySelector<HTMLImageElement>("img"),
+								smallImageKey: Assets.Question,
+								smallImageText: imageTitle,
+								buttons: [{ label: "View Image", url: imageLink }],
+							};
+						slideshow.addSlide(imageLink.href, slide, 5000);
+					}
+					useSlideshow = true;
+					break;
+				}
 				case "ratings": {
-					const reviewElements = [
-						...document.querySelectorAll<HTMLLIElement>(
-							"ratings-module ul > li"
-						),
-					].filter(reviewElement => {
-						return !!reviewElement.querySelector<HTMLSpanElement>(
-							".comment-body span"
-						).textContent;
-					});
-					presenceData.details = `Viewing ratings for '${gameHeader.textContent.trim()}'`;
+					const reviewElements = document.querySelectorAll<HTMLLIElement>(
+						"ratings-module ul > li"
+					);
+					presenceData.details = `Viewing ratings for '${gameHeaderText}'`;
 					for (const reviewElement of reviewElements) {
 						let text = reviewElement
 							.querySelector<HTMLDivElement>(".summary-item-callout")
