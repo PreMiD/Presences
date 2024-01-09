@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
 						genericSubmission(presenceData, "Mod", url);
 					} else if (pathname.startsWith("/blog")) {
 						presenceData.details = `${strings.reading} a blog:`;
-						genericSubmission(presenceData, "Mod", url);
+						genericSubmission(presenceData, "Blog", url);
 					} else if (pathname.startsWith("/project")) {
 						presenceData.details = "Viewing map:";
 						genericSubmission(presenceData, "Map", url);
