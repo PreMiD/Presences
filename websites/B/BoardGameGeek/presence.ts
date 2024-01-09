@@ -34,6 +34,9 @@ presence.on("UpdateData", async () => {
 		case "blogpost": {
 			const postHeader =
 				document.querySelector<HTMLAnchorElement>(".post_title > a");
+			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
+				"meta[property='og:image']"
+			).content;
 			presenceData.details = "Reading a blog post";
 			presenceData.state = postHeader;
 			presenceData.buttons = [{ label: "Read Post", url: postHeader }];
