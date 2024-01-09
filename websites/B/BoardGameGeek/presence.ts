@@ -47,6 +47,36 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.buttons = [{ label: "View Game", url: gameHeader }];
 			switch (pathList[3]) {
+				case "expansions": {
+					const expansions = document.querySelectorAll<HTMLDivElement>(
+						"linked-items-module .summary-item"
+					);
+					presenceData.details = `Viewing expansions for '${gameHeaderText}'`;
+
+					for (const expansion of expansions) {
+						const expansionLink = expansion.querySelector<HTMLAnchorElement>(
+								".summary-item-title > a"
+							),
+							ratingContainer = expansion.querySelector<HTMLDivElement>(
+								".rating-media-overlay"
+							),
+							slide: PresenceData = {
+								...presenceData,
+								largeImageKey:
+									expansion.querySelector<HTMLImageElement>(".media img"),
+								state: expansionLink,
+								smallImageKey: Assets.RatingIcon,
+								smallImageText: `Rating: ${ratingContainer.childNodes[2].textContent.trim()} (${ratingContainer.getAttribute(
+									"uib-tooltip"
+								)})`,
+							};
+						slide.buttons.push({ label: "View Expansion", url: expansionLink });
+						slideshow.addSlide(expansionLink.href, slide, 5000);
+					}
+
+					if (expansions.length) useSlideshow = true;
+					break;
+				}
 				case "files": {
 					presenceData.details = `Viewing files for '${gameHeaderText}'`;
 					presenceData.buttons.push({ label: "View Files", url: href });
@@ -189,7 +219,10 @@ presence.on("UpdateData", async () => {
 				}
 				default: {
 					presenceData.details = "Viewing a game";
-					presenceData.state = gameHeader;
+					presenceData.state = `${gameHeaderText} - ${gameHeader
+						.closest("div")
+						.querySelector("p")
+						.textContent.trim()}`;
 					presenceData.smallImageKey = Assets.RatingIcon;
 					presenceData.smallImageText = `Rating: ${document
 						.querySelector("overall-rating [ng-show=showRating]")
