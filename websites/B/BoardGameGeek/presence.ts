@@ -325,6 +325,36 @@ presence.on("UpdateData", async () => {
 			presenceData.state = searchParams.get("q");
 			break;
 		}
+		case "guild": {
+			function useGuildDetails() {
+				presenceData.details = "Viewing a guild";
+				presenceData.state = document.querySelector("#name");
+				presenceData.buttons = [{ label: "View Guild", url: href }];
+			}
+
+			if (isNaN(+pathList[1])) {
+				switch (pathList[2]) {
+					case "category": {
+						presenceData.details = "Viewing a guild category";
+						presenceData.state = pathList[pathList.length - 1];
+						break;
+					}
+					case "home": {
+						presenceData.details = "Browsing guild categories";
+						break;
+					}
+					case "list": {
+						presenceData.details = "Browsing guilds";
+						break;
+					}
+					case "view": {
+						useGuildDetails();
+						break;
+					}
+				}
+			} else useGuildDetails();
+			break;
+		}
 		case "market": {
 			switch (pathList[1]) {
 				case "browse": {
