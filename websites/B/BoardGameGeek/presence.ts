@@ -93,6 +93,27 @@ presence.on("UpdateData", async () => {
 					).childNodes[2];
 					break;
 				}
+				case "geeklists": {
+					presenceData.details = `Viewing GeekLists for '${gameHeaderText}'`;
+					const geeklists = document.querySelectorAll<HTMLLIElement>(
+						"geeklists-module .summary-item"
+					);
+
+					for (const geeklist of geeklists) {
+						const geeklistLink = geeklist.querySelector<HTMLAnchorElement>(
+								".summary-item-title > a"
+							),
+							slide: PresenceData = {
+								...presenceData,
+								state: geeklistLink,
+							};
+						slide.buttons.push({ label: "View GeekList", url: geeklistLink });
+						slideshow.addSlide(geeklistLink.href, slide, 5000);
+					}
+
+					if (geeklists.length) useSlideshow = true;
+					break;
+				}
 				case "images": {
 					const imageContainers = document.querySelectorAll<HTMLDivElement>(
 						"images-module .summary-image-item"
