@@ -385,6 +385,12 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "wiki": {
+			presenceData.details = "Viewing the wiki";
+			presenceData.state =
+				document.querySelector<HTMLHeadingElement>(".wiki h2");
+			break;
+		}
 	}
 
 	if (useSlideshow) presence.setActivity(slideshow);
