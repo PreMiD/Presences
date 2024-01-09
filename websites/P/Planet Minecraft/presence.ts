@@ -43,43 +43,43 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector("#manage_header").textContent;
 		} else {
 			switch (pathname) {
-				case "/projects/": {
+				case "/projects": {
 					genericFeed(presenceData, "Maps", url);
 					break;
 				}
-				case "/texture-packs/": {
+				case "/texture-packs": {
 					genericFeed(presenceData, "Resource Packs", url);
 					break;
 				}
-				case "/skins/": {
+				case "/skins": {
 					genericFeed(presenceData, "Skins", url);
 					break;
 				}
-				case "/mob-skins/": {
+				case "/mob-skins": {
 					genericFeed(presenceData, "Mob Skins", url);
 					break;
 				}
-				case "/data-packs/": {
+				case "/data-packs": {
 					genericFeed(presenceData, "Data Packs", url);
 					break;
 				}
-				case "/mods/": {
+				case "/mods": {
 					genericFeed(presenceData, "Mods", url);
 					break;
 				}
-				case "/blogs/": {
+				case "/blogs": {
 					genericFeed(presenceData, "Blogs", url);
 					break;
 				}
-				case "/servers/": {
+				case "/servers": {
 					genericFeed(presenceData, "Servers", url);
 					break;
 				}
-				case "/bedrock-servers/": {
+				case "/bedrock-servers": {
 					genericFeed(presenceData, "Bedrock Servers", url);
 					break;
 				}
-				case "/collections/": {
+				case "/collections": {
 					genericFeed(presenceData, "Collections", url);
 					break;
 				}
