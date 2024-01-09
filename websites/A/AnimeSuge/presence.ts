@@ -103,13 +103,13 @@ presence.on("UpdateData", async () => {
 				url: href,
 			},
 		];
-	} else {
+	} else if (pathname === "/") presenceData.details = "Viewing the homepage";
+	else {
 		for (const [path, data] of Object.entries(pages)) {
 			if (pathname !== "/" && pathname.includes(path))
 				presenceData = { ...presenceData, ...data };
 		}
 	}
 
-	if (presenceData.details && presenceData.state)
-		presence.setActivity(presenceData);
+	if (presenceData.details) presence.setActivity(presenceData);
 });
