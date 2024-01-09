@@ -292,6 +292,33 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "geeklists": {
+			if (pathList[1]) {
+				presenceData.details = "Viewing a GeekList";
+				presenceData.state = document.querySelector("header h2");
+				presenceData.buttons = [{ label: "View GeekList", url: href }];
+
+				const items = document.querySelectorAll<HTMLDivElement>(
+					"gg-geeklist-items-by-geeklist gg-geeklist-item .geeklist-item"
+				);
+				for (const item of items) {
+					const itemLink = item.querySelector<HTMLAnchorElement>("h2 a"),
+						slide: PresenceData = {
+							...presenceData,
+							smallImageKey:
+								item.querySelector<HTMLImageElement>("gg-image img"),
+							smallImageText: itemLink,
+						};
+					slide.buttons.push({ label: "View Item", url: itemLink });
+					slideshow.addSlide(itemLink.href, slide, 5000);
+				}
+
+				useSlideshow = true;
+			} else {
+				presenceData.details = "Browsing GeekLists";
+			}
+			break;
+		}
 		case "geeksearch.php": {
 			const searchParams = new URLSearchParams(search);
 			presenceData.details = "Searching for a game";
