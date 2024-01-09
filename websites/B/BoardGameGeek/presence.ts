@@ -47,6 +47,10 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.buttons = [{ label: "View Game", url: gameHeader }];
 			switch (pathList[3]) {
+				case "credits": {
+					presenceData.details = `Viewing credits for '${gameHeaderText}'`;
+					break;
+				}
 				case "expansions": {
 					const expansions = document.querySelectorAll<HTMLDivElement>(
 						"linked-items-module .summary-item"
@@ -155,6 +159,10 @@ presence.on("UpdateData", async () => {
 					if (reviewElements.length) useSlideshow = true;
 					break;
 				}
+				case "sleeves": {
+					presenceData.details = `Viewing sleeves for '${gameHeaderText}'`;
+					break;
+				}
 				case "stats": {
 					presenceData.details = `Viewing stats for '${gameHeaderText}'`;
 
@@ -183,6 +191,10 @@ presence.on("UpdateData", async () => {
 					}
 
 					useSlideshow = true;
+					break;
+				}
+				case "tags": {
+					presenceData.details = `Viewing tags for '${gameHeaderText}'`;
 					break;
 				}
 				case "versions": {
@@ -223,6 +235,11 @@ presence.on("UpdateData", async () => {
 						slideshow.addSlide(videoLink.href, slide, 5000);
 					}
 					if (videoElements.length) useSlideshow = true;
+					break;
+				}
+				case "wiki": {
+					presenceData.details = `Viewing the wiki for '${gameHeaderText}'`;
+					presenceData.buttons.push({ label: "View Wiki", url: href });
 					break;
 				}
 				default: {
