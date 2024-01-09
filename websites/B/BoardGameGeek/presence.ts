@@ -325,6 +325,36 @@ presence.on("UpdateData", async () => {
 			presenceData.state = searchParams.get("q");
 			break;
 		}
+		case "market": {
+			switch (pathList[1]) {
+				case "browse": {
+					const itemTitle = document.querySelector("h3").childNodes[0];
+					presenceData.details = "Browsing a product";
+					presenceData.state = itemTitle;
+					presenceData.smallImageKey =
+						document.querySelector<HTMLImageElement>(".thumbnail");
+					presenceData.smallImageText = itemTitle;
+					break;
+				}
+				case "product": {
+					presenceData.details = "Viewing a product";
+					presenceData.state = document.querySelector(
+						"table tr:first-child td:last-child"
+					);
+					break;
+				}
+				case "search": {
+					const searchParams = new URLSearchParams(search);
+					presenceData.details = "Searching the marketplace";
+					presenceData.state = searchParams.get("q");
+					break;
+				}
+				default: {
+					presenceData.details = "Browsing the marketplace";
+				}
+			}
+			break;
+		}
 	}
 
 	if (useSlideshow) presence.setActivity(slideshow);
