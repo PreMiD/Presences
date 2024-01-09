@@ -20,7 +20,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "Viewing page:",
-		largeImageKey: "https://i.imgur.com/YcaaiHk.png",
+		largeImageKey: "https://i.imgur.com/pNsonk0.png",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = strings.viewHome;
 		delete presenceData.details;
 	} else {
-		const url = `${location.protocol}//${location.host}${location.pathname}`;
+		const url = `${document.location.protocol}//${document.location.host}${document.location.pathname}`;
 		if (pathname.startsWith("/member"))
 			memberActivity(presenceData, pathname, url);
 		else if (
@@ -198,7 +198,7 @@ function memberActivity(
 	const remainingPathname = pathname
 		.substring(profileUrl.length)
 		.replaceAll(/\/(?=$)/gi, "");
-	profileUrl = `${location.protocol}//${location.host}${profileUrl}`;
+	profileUrl = `${document.location.protocol}//${document.location.host}${profileUrl}`;
 
 	presenceData.buttons = [
 		{
