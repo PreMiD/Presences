@@ -11,7 +11,7 @@ async function getStrings() {
 		viewChannel: "general.viewChannel",
 		readingThread: "general.readingThread",
 		browsing: "general.browsing",
-		reading: "general.reading"
+		reading: "general.reading",
 	});
 }
 
@@ -24,8 +24,7 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp,
 	};
 
-	if (!strings)
-		strings = await getStrings();
+	if (!strings) strings = await getStrings();
 
 	const pathname = document.location.pathname.replaceAll(/\/$/g, "");
 
@@ -36,7 +35,10 @@ presence.on("UpdateData", async () => {
 		const url = `${location.protocol}//${location.host}${location.pathname}`;
 		if (pathname.startsWith("/member"))
 			memberActivity(presenceData, pathname, url);
-		else if (pathname.startsWith("/account/manage") && pathname.endsWith("/new")) {
+		else if (
+			pathname.startsWith("/account/manage") &&
+			pathname.endsWith("/new")
+		) {
 			presenceData.details = "Managing Submissions";
 			presenceData.state = document.querySelector("#manage_header").textContent;
 		} else {
@@ -111,40 +113,47 @@ presence.on("UpdateData", async () => {
 						genericSubmission(presenceData, "Server", url);
 					} else if (/\/tickets\/\d+/.test(pathname)) {
 						presenceData.details = `${strings.reading} ticket:`;
-						presenceData.state = document.querySelector("#ticket_view > h1").textContent;
+						presenceData.state =
+							document.querySelector("#ticket_view > h1").textContent;
 						genericButton(presenceData, "Ticket", url);
 					} else if (pathname.startsWith("/rules")) {
 						presenceData.details = `${strings.reading} the rules.`;
 						presenceData.buttons = [
 							{
 								label: "Read Rules",
-								url
-							}
+								url,
+							},
 						];
 					} else if (pathname.startsWith("/chat")) {
 						presenceData.details = strings.viewChannel;
-						presenceData.state = document.querySelector("span.channel_name").textContent;
+						presenceData.state =
+							document.querySelector("span.channel_name").textContent;
 						presenceData.buttons = [
 							{
 								label: "Open Chat",
-								url
-							}
+								url,
+							},
 						];
 					} else if (pathname.startsWith("/forums")) {
 						if (pathname.endsWith("/new")) {
 							presenceData.details = "Writing a thread...";
 							presenceData.state = stateless;
 						} else {
-							const parentElement = document.querySelector("#content_graphic_header > *:first-child"),
+							const parentElement = document.querySelector(
+								"#content_graphic_header > *:first-child"
+							),
 								{ length } = parentElement.children;
 
 							if (parentElement.lastChild.nodeType === Node.TEXT_NODE) {
 								presenceData.state = parentElement.lastChild.textContent;
 								genericFeed(presenceData, "Forums", url);
-							} else if ((parentElement.lastChild as HTMLElement).getAttribute("href") === "#current") {
+							} else if (
+								(parentElement.lastChild as HTMLElement).getAttribute(
+									"href"
+								) === "#current"
+							) {
 								let text;
-								if (length < 1)
-									text = parentElement.textContent;
+								if (length < 1) text = parentElement.textContent;
 								else {
 									text = "";
 									for (let i = 0; i < length; i++) {
@@ -175,27 +184,36 @@ presence.on("UpdateData", async () => {
 
 	if (!presenceData.state)
 		presenceData.state = document.querySelector("head > title").textContent;
-	else if (presenceData.state === stateless)
-		delete presenceData.state;
+	else if (presenceData.state === stateless) delete presenceData.state;
 
 	presence.setActivity(presenceData);
 });
 
-function memberActivity(presenceData: PresenceData, pathname: string, url: string) {
+function memberActivity(
+	presenceData: PresenceData,
+	pathname: string,
+	url: string
+) {
 	let profileUrl = (pathname.match(/\/member\/\w+/) || [pathname])[0];
-	const remainingPathname = pathname.substring(profileUrl.length).replaceAll(/\/(?=$)/ig, "");
+	const remainingPathname = pathname
+		.substring(profileUrl.length)
+		.replaceAll(/\/(?=$)/gi, "");
 	profileUrl = `${location.protocol}//${location.host}${profileUrl}`;
 
 	presenceData.buttons = [
 		{
 			label: "View Profile",
-			url: profileUrl
-		}
+			url: profileUrl,
+		},
 	];
 
 	if (remainingPathname) {
-		presenceData.largeImageKey = document.querySelector("#avatar > img").getAttribute("src");
-		presenceData.state = document.querySelector("#member-title-primary > a").getAttribute("title");
+		presenceData.largeImageKey = document
+			.querySelector("#avatar > img")
+			.getAttribute("src");
+		presenceData.state = document
+			.querySelector("#member-title-primary > a")
+			.getAttribute("title");
 	}
 
 	switch (remainingPathname) {
@@ -268,7 +286,7 @@ function memberActivity(presenceData: PresenceData, pathname: string, url: strin
 		default: {
 			if (remainingPathname.startsWith("/post")) {
 				presenceData.details = `${strings.reading} custom post:`;
-				presenceData.state = presenceData.state = document
+				presenceData.state = document
 					.querySelector('meta[name="description"]')
 					.getAttribute("content");
 				genericButton(presenceData, "Post", url);
@@ -294,27 +312,31 @@ function memberActivity(presenceData: PresenceData, pathname: string, url: strin
 }
 function genericFeed(presenceData: PresenceData, type: string, url: string) {
 	presenceData.details = strings.browsing;
-	if (!presenceData.state)
-		presenceData.state = type;
+	if (!presenceData.state) presenceData.state = type;
 	genericButton(presenceData, type, url);
 }
 
-function genericSubmission(presenceData: PresenceData, type: string, url: string) {
-	presenceData.state = document.querySelector("#resource-title-text > h1").textContent;
-	presenceData.largeImageKey = document.querySelector('link[rel="image_src"]').getAttribute("href");
+function genericSubmission(
+	presenceData: PresenceData,
+	type: string,
+	url: string
+) {
+	presenceData.state = document.querySelector(
+		"#resource-title-text > h1"
+	).textContent;
+	presenceData.largeImageKey = document
+		.querySelector('link[rel="image_src"]')
+		.getAttribute("href");
 	genericButton(presenceData, type, url);
 }
 
 function genericButton(presenceData: PresenceData, type: string, url: string) {
 	const button = {
 		label: `View ${type}`,
-		url
+		url,
 	};
 	if (presenceData.buttons)
 		presenceData.buttons.unshift(button);
-	else {
-		presenceData.buttons = [
-			button
-		];
-	}
+	else
+		presenceData.buttons = [button];
 }
