@@ -385,6 +385,19 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "microbadge": {
+			presenceData.details = "Viewing a microbadge";
+			presenceData.state = document.querySelector<HTMLTableCellElement>(
+				"table td:nth-child(2) > table td:nth-child(2)"
+			);
+			presenceData.smallImageKey =
+				document.querySelector<HTMLImageElement>("h2 img");
+			presenceData.smallImageText =
+				document.querySelector<HTMLTableCellElement>(
+					"table td:nth-child(2) > table tr:nth-child(2) td:nth-child(2)"
+				);
+			break;
+		}
 		case "wiki": {
 			presenceData.details = "Viewing the wiki";
 			presenceData.state =
