@@ -114,6 +114,10 @@ presence.on("UpdateData", async () => {
 					if (imageContainers.length) useSlideshow = true;
 					break;
 				}
+				case "mygames": {
+					presenceData.details = `Viewing their collections for '${gameHeaderText}'`;
+					break;
+				}
 				case "ratings": {
 					const reviewElements = document.querySelectorAll<HTMLLIElement>(
 						"ratings-module ul > li"
