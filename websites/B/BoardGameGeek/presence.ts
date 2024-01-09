@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 		},
-		{ pathname, href } = document.location,
+		{ pathname, href, search } = document.location,
 		pathList = pathname.split("/").filter(Boolean);
 
 	if (oldPath !== pathname) {
@@ -290,6 +290,13 @@ presence.on("UpdateData", async () => {
 						.textContent.trim()}`;
 				}
 			}
+			break;
+		}
+		case "geeksearch.php": {
+			const searchParams = new URLSearchParams(search);
+			presenceData.details = "Searching for a game";
+			presenceData.state = searchParams.get("q");
+			break;
 		}
 	}
 
