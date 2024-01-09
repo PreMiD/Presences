@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 						slide.buttons.push({ label: "View Image", url: imageLink });
 						slideshow.addSlide(imageLink.href, slide, 5000);
 					}
-					useSlideshow = true;
+					if (imageContainers.length) useSlideshow = true;
 					break;
 				}
 				case "ratings": {
@@ -114,7 +114,7 @@ presence.on("UpdateData", async () => {
 							};
 						slideshow.addSlide(username, slide, 5000);
 					}
-					useSlideshow = true;
+					if (reviewElements.length) useSlideshow = true;
 					break;
 				}
 				case "stats": {
@@ -160,6 +160,7 @@ presence.on("UpdateData", async () => {
 						slide.buttons.push({ label: "View Version", url: version });
 						slideshow.addSlide(version.href, slide, 5000);
 					}
+					if (versions.length) useSlideshow = true;
 					break;
 				}
 				case "videos": {
@@ -183,7 +184,7 @@ presence.on("UpdateData", async () => {
 						slide.buttons.push({ label: "View Video", url: videoLink });
 						slideshow.addSlide(videoLink.href, slide, 5000);
 					}
-					useSlideshow = true;
+					if (videoElements.length) useSlideshow = true;
 					break;
 				}
 				default: {
