@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 	};
-	const { pathname } = document.location,
+	const { pathname, href } = document.location,
 		epNumber = pathname.slice(pathname.length - 5).replace(/^\D+/g, ""),
 		search: URLSearchParams = new URLSearchParams(
 			document.location.search.substring(1)
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 			"/user/watchlist": {
 				details: "Looking at their watchlist",
 				state: search.get("folder")
-					? `At folder: ${search.get("folder")}`
+					? `In folder: ${search.get("folder")}`
 					: "In all folders",
 			},
 			"/user/import": {
@@ -100,7 +100,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Watch Episode",
-				url: `http://animesuge.to${pathname}`,
+				url: href,
 			},
 		];
 	} else {
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 				presenceData = { ...presenceData, ...data };
 		}
 	}
-	if (!presenceData.state) presenceData.state = "Searching animes";
+
 	if (presenceData.details && presenceData.state)
 		presence.setActivity(presenceData);
 });
