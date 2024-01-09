@@ -112,6 +112,32 @@ presence.on("UpdateData", async () => {
 					useSlideshow = true;
 					break;
 				}
+				case "videos": {
+					const videoElements = document.querySelectorAll<HTMLDivElement>(
+						"videos-module .summary-video-item"
+					);
+					presenceData.details = `Viewing videos for '${gameHeaderText}'`;
+					for (const videoElement of videoElements) {
+						const videoLink = videoElement.querySelector<HTMLAnchorElement>(
+								".summary-video-thumbnail"
+							),
+							videoTitle = videoElement.querySelector<HTMLDivElement>(
+								".summary-item-title"
+							),
+							slide: PresenceData = {
+								...presenceData,
+								largeImageKey: videoLink.querySelector<HTMLImageElement>(
+									"img"
+								),
+								smallImageKey: Assets.Question,
+								smallImageText: videoTitle,
+								buttons: [{ label: "View Video", url: videoLink }],
+							};
+						slideshow.addSlide(videoLink.href, slide, 5000);
+					}
+					useSlideshow = true;
+					break;
+				}
 				default: {
 					presenceData.details = "Viewing a game";
 					presenceData.state = gameHeader;
