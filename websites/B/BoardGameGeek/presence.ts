@@ -77,8 +77,8 @@ presence.on("UpdateData", async () => {
 								largeImageKey: imageLink.querySelector<HTMLImageElement>("img"),
 								smallImageKey: Assets.Question,
 								smallImageText: imageTitle,
-								buttons: [{ label: "View Image", url: imageLink }],
 							};
+						slide.buttons.push({ label: "View Image", url: imageLink });
 						slideshow.addSlide(imageLink.href, slide, 5000);
 					}
 					useSlideshow = true;
@@ -147,6 +147,21 @@ presence.on("UpdateData", async () => {
 					useSlideshow = true;
 					break;
 				}
+				case "versions": {
+					presenceData.details = `Viewing versions for '${gameHeaderText}'`;
+					const versions = document.querySelectorAll<HTMLAnchorElement>(
+						"linked-items-module .summary-item-title > a"
+					);
+					for (const version of versions) {
+						const slide: PresenceData = {
+							...presenceData,
+							state: version,
+						};
+						slide.buttons.push({ label: "View Version", url: version });
+						slideshow.addSlide(version.href, slide, 5000);
+					}
+					break;
+				}
 				case "videos": {
 					const videoElements = document.querySelectorAll<HTMLDivElement>(
 						"videos-module .summary-video-item"
@@ -164,8 +179,8 @@ presence.on("UpdateData", async () => {
 								largeImageKey: videoLink.querySelector<HTMLImageElement>("img"),
 								smallImageKey: Assets.Question,
 								smallImageText: videoTitle,
-								buttons: [{ label: "View Video", url: videoLink }],
 							};
+						slide.buttons.push({ label: "View Video", url: videoLink });
 						slideshow.addSlide(videoLink.href, slide, 5000);
 					}
 					useSlideshow = true;
