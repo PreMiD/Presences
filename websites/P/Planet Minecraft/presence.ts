@@ -20,7 +20,8 @@ let strings: Awaited<ReturnType<typeof getStrings>>;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "Viewing page:",
-		largeImageKey: "https://i.imgur.com/pNsonk0.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/P/Planet%20Minecraft/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
