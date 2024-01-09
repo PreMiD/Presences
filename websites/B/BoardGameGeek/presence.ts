@@ -143,6 +143,10 @@ presence.on("UpdateData", async () => {
 					presenceData.details = `Viewing stores for '${gameHeaderText}'`;
 					break;
 				}
+				case "mentions": {
+					presenceData.details = `Viewing mentions for '${gameHeaderText}'`;
+					break;
+				}
 				case "mygames": {
 					presenceData.details = `Viewing their collections for '${gameHeaderText}'`;
 					break;
