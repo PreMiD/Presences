@@ -180,6 +180,10 @@ presence.on("UpdateData", async () => {
 					if (reviewElements.length) useSlideshow = true;
 					break;
 				}
+				case "recommendations": {
+					presenceData.details = `Viewing recommendations for '${gameHeaderText}'`;
+					break;
+				}
 				case "sleeves": {
 					presenceData.details = `Viewing sleeves for '${gameHeaderText}'`;
 					break;
@@ -216,6 +220,10 @@ presence.on("UpdateData", async () => {
 				}
 				case "tags": {
 					presenceData.details = `Viewing tags for '${gameHeaderText}'`;
+					break;
+				}
+				case "trading": {
+					presenceData.details = `Viewing trades for '${gameHeaderText}'`;
 					break;
 				}
 				case "versions": {
