@@ -114,6 +114,10 @@ presence.on("UpdateData", async () => {
 					if (imageContainers.length) useSlideshow = true;
 					break;
 				}
+				case "marketplace": {
+					presenceData.details = `Viewing stores for '${gameHeaderText}'`;
+					break;
+				}
 				case "mygames": {
 					presenceData.details = `Viewing their collections for '${gameHeaderText}'`;
 					break;
