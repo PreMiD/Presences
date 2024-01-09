@@ -47,6 +47,11 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.buttons = [{ label: "View Game", url: gameHeader }];
 			switch (pathList[3]) {
+				case "files": {
+					presenceData.details = `Viewing files for '${gameHeaderText}'`;
+					presenceData.buttons = [{ label: "View Files", url: href }];
+					break;
+				}
 				case "forums": {
 					presenceData.details = `Viewing forums for '${gameHeaderText}'`;
 					presenceData.state = document.querySelector(
