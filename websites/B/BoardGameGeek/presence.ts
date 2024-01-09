@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 			switch (pathList[3]) {
 				case "files": {
 					presenceData.details = `Viewing files for '${gameHeaderText}'`;
-					presenceData.buttons = [{ label: "View Files", url: href }];
+					presenceData.buttons.push({ label: "View Files", url: href });
 					break;
 				}
 				case "forums": {
@@ -117,6 +117,36 @@ presence.on("UpdateData", async () => {
 					useSlideshow = true;
 					break;
 				}
+				case "stats": {
+					presenceData.details = `Viewing stats for '${gameHeaderText}'`;
+
+					const gamePanels =
+						document.querySelectorAll<HTMLDivElement>(".game-stats .panel");
+					for (const gamePanel of gamePanels) {
+						const gamePanelTitle = gamePanel
+								.querySelector("h3")
+								.textContent.trim(),
+							gamePanelItems =
+								gamePanel.querySelectorAll<HTMLLIElement>(".outline-item");
+
+						for (const gamePanelItem of gamePanelItems) {
+							const gamePanelItemTitle = gamePanelItem
+									.querySelector(".outline-item-title")
+									.textContent.trim(),
+								gamePanelItemValue = gamePanelItem
+									.querySelector(".outline-item-description")
+									.textContent.trim(),
+								slide: PresenceData = {
+									...presenceData,
+									state: `${gamePanelTitle}: ${gamePanelItemTitle} - ${gamePanelItemValue}`,
+								};
+							slideshow.addSlide(gamePanelItemTitle, slide, 5000);
+						}
+					}
+
+					useSlideshow = true;
+					break;
+				}
 				case "videos": {
 					const videoElements = document.querySelectorAll<HTMLDivElement>(
 						"videos-module .summary-video-item"
@@ -131,9 +161,7 @@ presence.on("UpdateData", async () => {
 							),
 							slide: PresenceData = {
 								...presenceData,
-								largeImageKey: videoLink.querySelector<HTMLImageElement>(
-									"img"
-								),
+								largeImageKey: videoLink.querySelector<HTMLImageElement>("img"),
 								smallImageKey: Assets.Question,
 								smallImageText: videoTitle,
 								buttons: [{ label: "View Video", url: videoLink }],
