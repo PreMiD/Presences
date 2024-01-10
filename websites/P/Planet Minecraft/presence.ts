@@ -1,6 +1,6 @@
 const presence = new Presence({
-		clientId: "1193411747898458132",
-	}),
+	clientId: "1193411747898458132",
+}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	stateless = "stateless";
 
@@ -20,7 +20,8 @@ let strings: Awaited<ReturnType<typeof getStrings>>;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "Viewing page:",
-		largeImageKey: "https://i.imgur.com/pNsonk0.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/P/Planet%20Minecraft/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -43,43 +44,43 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector("#manage_header").textContent;
 		} else {
 			switch (pathname) {
-				case "/projects/": {
+				case "/projects": {
 					genericFeed(presenceData, "Maps", url);
 					break;
 				}
-				case "/texture-packs/": {
+				case "/texture-packs": {
 					genericFeed(presenceData, "Resource Packs", url);
 					break;
 				}
-				case "/skins/": {
+				case "/skins": {
 					genericFeed(presenceData, "Skins", url);
 					break;
 				}
-				case "/mob-skins/": {
+				case "/mob-skins": {
 					genericFeed(presenceData, "Mob Skins", url);
 					break;
 				}
-				case "/data-packs/": {
+				case "/data-packs": {
 					genericFeed(presenceData, "Data Packs", url);
 					break;
 				}
-				case "/mods/": {
+				case "/mods": {
 					genericFeed(presenceData, "Mods", url);
 					break;
 				}
-				case "/blogs/": {
+				case "/blogs": {
 					genericFeed(presenceData, "Blogs", url);
 					break;
 				}
-				case "/servers/": {
+				case "/servers": {
 					genericFeed(presenceData, "Servers", url);
 					break;
 				}
-				case "/bedrock-servers/": {
+				case "/bedrock-servers": {
 					genericFeed(presenceData, "Bedrock Servers", url);
 					break;
 				}
-				case "/collections/": {
+				case "/collections": {
 					genericFeed(presenceData, "Collections", url);
 					break;
 				}
@@ -140,8 +141,8 @@ presence.on("UpdateData", async () => {
 							presenceData.state = stateless;
 						} else {
 							const parentElement = document.querySelector(
-									"#content_graphic_header > *:first-child"
-								),
+								"#content_graphic_header > *:first-child"
+							),
 								{ length } = parentElement.children;
 
 							if (parentElement.lastChild.nodeType === Node.TEXT_NODE) {
