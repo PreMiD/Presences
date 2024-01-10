@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: "1193411747898458132",
-}),
+		clientId: "1193411747898458132",
+	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	stateless = "stateless";
 
@@ -141,8 +141,8 @@ presence.on("UpdateData", async () => {
 							presenceData.state = stateless;
 						} else {
 							const parentElement = document.querySelector(
-								"#content_graphic_header > *:first-child"
-							),
+									"#content_graphic_header > *:first-child"
+								),
 								{ length } = parentElement.children;
 
 							if (parentElement.lastChild.nodeType === Node.TEXT_NODE) {
