@@ -220,7 +220,7 @@ function memberActivity(
 	switch (remainingPathname) {
 		case "/submissions": {
 			presenceData.details = "Viewing submissions by:";
-			genericButton(presenceData, "Guest Submissions", url);
+			genericButton(presenceData, "Submissions", url);
 
 			break;
 		}
