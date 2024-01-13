@@ -90,7 +90,7 @@ const boards: { [board: string]: string } = {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: Assets.Cog,
+		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 	};
 
