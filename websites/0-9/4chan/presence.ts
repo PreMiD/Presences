@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Cog = "https://i.imgur.com/XAgEs5E.png",
+	Logo = "https://i.imgur.com/7pI9X5M.png",
 }
 
 const boards: { [board: string]: string } = {
