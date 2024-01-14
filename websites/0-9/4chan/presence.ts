@@ -92,7 +92,8 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
-	};
+	},
+	{ pathname } = document.location;
 
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing the front page";
