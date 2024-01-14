@@ -95,28 +95,28 @@ presence.on("UpdateData", async () => {
 	},
 	{ pathname } = document.location;
 
-	if (document.location.pathname === "/")
+	if (pathname === "/")
 		presenceData.details = "Viewing the front page";
-	else if (document.location.pathname.startsWith("/faq"))
+	else if (pathname.startsWith("/faq"))
 		presenceData.details = "Reading the FAQ";
-	else if (document.location.pathname.startsWith("/rules"))
+	else if (pathname.startsWith("/rules"))
 		presenceData.details = "Reading the rules";
-	else if (document.location.pathname.startsWith("/4channews"))
+	else if (pathname.startsWith("/4channews"))
 		presenceData.details = "Viewing news posts";
 	else {
 		for (const board in boards) {
-			if (document.location.pathname.includes(board))
+			if (pathname.includes(board))
 				presenceData.details = `Browsing ${board} - ${boards[board]}`;
 		}
 
-		if (document.location.pathname.includes("/thread/")) {
-			const threadNum = document.location.pathname.split("/").at(-1),
+		if (pathname.includes("/thread/")) {
+			const threadNum = pathname.split("/").at(-1),
 				threadSubject = document.querySelector(".subject").textContent;
 
 			if (threadSubject)
 				presenceData.state = `>>${threadNum} - "${threadSubject}"`;
 			else presenceData.state = `>>${threadNum}`;
-		} else if (document.location.pathname.includes("/archive"))
+		} else if (pathname.includes("/archive"))
 			presenceData.state = "Checking the archive";
 	}
 
