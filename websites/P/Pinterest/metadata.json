@@ -17,7 +17,7 @@
 		"vi_VN": "Khám phá các công thức, ý tưởng cải tiến nhà, cảm hứng và các ý tưởng khác."
 	},
 	"url": "www.pinterest.com",
-	"regExp": "([a-z0-9-]+[.])*pinterest([.][a-z]+)+",
+	"regExp": "([a-z0-9-]+[.])*pinterest([.][a-z]+)+[/]"",
 	"version": "1.4.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Pinterest/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Pinterest/assets/thumbnail.jpg",
