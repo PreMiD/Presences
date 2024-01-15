@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
 				else state = "Not logged in!";
 			}
 
-			details = pages[pathname]?.details;
+			details = pages[pathname]?.details as string;
 
 			break;
 		case "bio.signed.host":

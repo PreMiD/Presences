@@ -4,11 +4,10 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	let presenceData = {
+	let presenceData: PresenceData = {
 		smallImageKey: "https://cdn.rcd.gg/PreMiD/websites/C/Currys/assets/0.png",
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/C/Currys/assets/logo.png",
-		largeImageText: "Browsing Currys",
 		startTimestamp: browsingTimestamp,
 		details: "Browsing",
 		state: "Currys Website",

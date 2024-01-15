@@ -325,7 +325,9 @@ app.on("UpdateData", async () => {
 
 							if (condition.replace) {
 								for (const replace of condition.replace.toReplace) {
-									app.data[key as StringEntry] = app.data[key as StringEntry]
+									app.data[key as StringEntry] = (
+										app.data[key as StringEntry] as string
+									)
 										.replace(replace.input, app.meta[replace.with] ?? "")
 										.trim();
 								}
@@ -335,7 +337,9 @@ app.on("UpdateData", async () => {
 
 							if (condition.ifNot.replace) {
 								for (const replace of condition.ifNot.replace.toReplace) {
-									app.data[key as StringEntry] = app.data[key as StringEntry]
+									app.data[key as StringEntry] = (
+										app.data[key as StringEntry] as string
+									)
 										.replace(replace.input, app.meta[replace.with] ?? "")
 										.trim();
 								}
@@ -347,8 +351,10 @@ app.on("UpdateData", async () => {
 		}
 	}
 
-	if (app.data.largeImageKey?.startsWith("http"))
-		app.data.largeImageKey = await app.getShortURL(app.data.largeImageKey);
+	if ((app.data.largeImageKey as string)?.startsWith("http"))
+		app.data.largeImageKey = await app.getShortURL(
+			app.data.largeImageKey as string
+		);
 
 	if (app.data.details) app.setActivity(app.data);
 	else app.setActivity();

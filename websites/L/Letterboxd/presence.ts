@@ -154,7 +154,9 @@ presence.on("UpdateData", async () => {
 				} else presenceData.details = "Viewing films";
 
 				if (!presenceData.details) presenceData.details = "Viewing films";
-				presenceData.buttons = generateButtonText(presenceData.details);
+				presenceData.buttons = generateButtonText(
+					presenceData.details as string
+				);
 
 				break;
 			}
@@ -217,7 +219,7 @@ presence.on("UpdateData", async () => {
 									}
 
 									presenceData.buttons = generateButtonText(
-										presenceData.details
+										presenceData.details as string
 									);
 									presenceData.largeImageKey = getImageURLByAlt(
 										clarifyString(title.textContent)
@@ -481,7 +483,7 @@ presence.on("UpdateData", async () => {
 								.firstElementChild as HTMLAnchorElement
 						).textContent;
 						if (path[0] !== user && path[0] !== user.toLowerCase()) {
-							presenceData.details = presenceData.details
+							presenceData.details = (presenceData.details as string)
 								.replace("their", `${name}'s`)
 								.replace("they've", `${name} has`);
 						}
