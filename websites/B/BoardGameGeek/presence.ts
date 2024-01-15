@@ -305,8 +305,10 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
-		case "geeklists": {
-			if (pathList[1]) {
+		case "geeklist": {
+			if (pathList[1] === "new") {
+				presenceData.details = "Creating a GeekList";
+			} else {
 				presenceData.details = "Viewing a GeekList";
 				presenceData.state = document.querySelector("header h2");
 				presenceData.buttons = [{ label: "View GeekList", url: href }];
@@ -327,8 +329,22 @@ presence.on("UpdateData", async () => {
 				}
 
 				useSlideshow = true;
-			} else {
-				presenceData.details = "Browsing GeekLists";
+			}
+			break;
+		}
+		case "geeklists": {
+			switch (pathList[1]) {
+				case "bookmarks": {
+					presenceData.details = "Viewing their bookmarked GeekLists";
+					break;
+				}
+				case "mylists": {
+					presenceData.details = "Viewing their GeekLists";
+					break;
+				}
+				default: {
+					presenceData.details = "Browsing GeekLists";
+				}
 			}
 			break;
 		}
