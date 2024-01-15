@@ -464,7 +464,14 @@ presence.on("UpdateData", async () => {
 		case "images": {
 			presenceData.details = "Browsing images";
 
-			const images = document.querySelectorAll("gg-image-browser gg-image");
+			const images = document.querySelectorAll<HTMLImageElement>("gg-image-browser gg-image img");
+			for (const image of images) {
+				const slide: PresenceData = {
+					...presenceData,
+					largeImageKey: image,
+				};
+				slideshow.addSlide(image.src, slide, 5000);
+			}
 
 			useSlideshow = true;
 			break;
@@ -628,6 +635,14 @@ presence.on("UpdateData", async () => {
 				}
 				case "region": {
 					presenceData.details = "Browsing threads";
+					break;
+				}
+				case "reviews": {
+					presenceData.details = "Viewing reviews";
+					break;
+				}
+				case "sessions": {
+					presenceData.details = "Viewing game sessions";
 					break;
 				}
 			}
