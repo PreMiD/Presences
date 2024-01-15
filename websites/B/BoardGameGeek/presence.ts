@@ -31,6 +31,15 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing the homepage";
 			break;
 		}
+		case "blogs": {
+			switch (pathList[1]) {
+				case "myblogs": {
+					presenceData.details = "Viewing their blogs";
+					break;
+				}
+			}
+			break;
+		}
 		case "blogpost": {
 			const postHeader =
 				document.querySelector<HTMLAnchorElement>(".post_title > a");
@@ -510,6 +519,17 @@ presence.on("UpdateData", async () => {
 		}
 		case "subscriptions": {
 			presenceData.details = "Viewing their subscriptions";
+			break;
+		}
+		case "tag": {
+			presenceData.details = "Viewing a tag";
+			presenceData.state =
+				document.querySelector<HTMLAnchorElement>(".tagtitle a");
+			presenceData.buttons = [{ label: "View Tag", url: href }];
+			break;
+		}
+		case "tags": {
+			presenceData.details = "Browsing tags";
 			break;
 		}
 		case "thread": {
