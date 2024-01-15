@@ -129,9 +129,8 @@ presence.on("UpdateData", async () => {
 		strings = await getStrings();
 	}
 
-	if (showSong && (hidePaused && !playing) && !showBrowsing) {
+	if (showSong && (hidePaused && !playing) && !showBrowsing)
 		return presence.clearActivity();
-	}
 
 	let presenceData: PresenceData = {
 		largeImageKey:
@@ -266,7 +265,7 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (presenceData.details && typeof presenceData.details == 'string') {
+	if (presenceData.details && typeof presenceData.details === "string") {
 		if (presenceData.details.match("(Browsing|Viewing|Discovering)")) {
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = strings.browse;
