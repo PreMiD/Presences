@@ -292,6 +292,16 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "forums": {
+			if (pathList[1]) {
+				presenceData.details = "Browsing a forum section";
+				presenceData.state = document.querySelector("header h2");
+				presenceData.buttons = [{ label: "View Forum", url: href }];
+			} else {
+				presenceData.details = "Browsing forums";
+			}
+			break;
+		}
 		case "geeklists": {
 			if (pathList[1]) {
 				presenceData.details = "Viewing a GeekList";
