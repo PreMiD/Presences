@@ -53,6 +53,12 @@
 			"value": true
 		},
 		{
+			"id": "hidePaused",
+			"title": "Hide while paused",
+			"icon": "fas fa-pause",
+			"value": false
+		},
+		{
 			"id": "timestamp",
 			"title": "Show Timestamps",
 			"icon": "fas fa-clock",
