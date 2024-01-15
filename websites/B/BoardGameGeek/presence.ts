@@ -306,6 +306,10 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "browse": {
+			presenceData.details = "Browsing games";
+			break;
+		}
 		case "collection": {
 			presenceData.details = "Viewing a game collection";
 			presenceData.buttons = [{ label: "View Collection", url: href }];
@@ -313,6 +317,10 @@ presence.on("UpdateData", async () => {
 		}
 		case "fan": {
 			presenceData.details = "Viewing fan items";
+			break;
+		}
+		case "files": {
+			presenceData.details = "Browsing files";
 			break;
 		}
 		case "findgamers.php":
@@ -442,6 +450,10 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Editing their GeekWidget";
 			break;
 		}
+		case "gonecardboard": {
+			presenceData.details = "Viewing Gone Cardboard listings";
+			break;
+		}
 		case "image": {
 			presenceData.details = "Viewing an image";
 			presenceData.smallImageKey =
@@ -451,6 +463,10 @@ presence.on("UpdateData", async () => {
 		}
 		case "images": {
 			presenceData.details = "Browsing images";
+
+			const images = document.querySelectorAll("gg-image-browser gg-image");
+
+			useSlideshow = true;
 			break;
 		}
 		case "guild": {
@@ -572,6 +588,10 @@ presence.on("UpdateData", async () => {
 		}
 		case "quickbar": {
 			presenceData.details = "Managing their QuickBar";
+			break;
+		}
+		case "recentadditions": {
+			presenceData.details = "Viewing recent additions";
 			break;
 		}
 		case "subscriptions": {
