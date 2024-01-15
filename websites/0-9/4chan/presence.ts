@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Logo = "https://i.imgur.com/7pI9X5M.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/0-9/4chan/assets/logo.png",
 }
 
 const boards: { [board: string]: string } = {
