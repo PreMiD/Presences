@@ -90,13 +90,12 @@ const boards: { [board: string]: string } = {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: Assets.Logo,
-		startTimestamp: browsingTimestamp,
-	},
-	{ pathname } = document.location;
+			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname } = document.location;
 
-	if (pathname === "/")
-		presenceData.details = "Viewing the front page";
+	if (pathname === "/") presenceData.details = "Viewing the front page";
 	else if (pathname.startsWith("/faq"))
 		presenceData.details = "Reading the FAQ";
 	else if (pathname.startsWith("/rules"))
