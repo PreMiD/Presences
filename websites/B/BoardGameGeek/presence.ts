@@ -305,6 +305,18 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "geekaccount": {
+			presenceData.details = "Managing their account";
+			break;
+		}
+		case "geekaccount.php": {
+			presenceData.details = "Managing their profile";
+			break;
+		}
+		case "geekcentral": {
+			presenceData.details = "Managing their GeekCentral";
+			break;
+		}
 		case "geeklist": {
 			if (pathList[1] === "new") {
 				presenceData.details = "Creating a GeekList";
@@ -419,16 +431,24 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "microbadge": {
-			presenceData.details = "Viewing a microbadge";
-			presenceData.state = document.querySelector<HTMLTableCellElement>(
-				"table td:nth-child(2) > table td:nth-child(2)"
-			);
-			presenceData.smallImageKey =
-				document.querySelector<HTMLImageElement>("h2 img");
-			presenceData.smallImageText =
-				document.querySelector<HTMLTableCellElement>(
-					"table td:nth-child(2) > table tr:nth-child(2) td:nth-child(2)"
+			if (pathList[1] === "edit") {
+				presenceData.details = "Editing their microbadges";
+			} else {
+				presenceData.details = "Viewing a microbadge";
+				presenceData.state = document.querySelector<HTMLTableCellElement>(
+					"table td:nth-child(2) > table td:nth-child(2)"
 				);
+				presenceData.smallImageKey =
+					document.querySelector<HTMLImageElement>("h2 img");
+				presenceData.smallImageText =
+					document.querySelector<HTMLTableCellElement>(
+						"table td:nth-child(2) > table tr:nth-child(2) td:nth-child(2)"
+					);
+			}
+			break;
+		}
+		case "quickbar": {
+			presenceData.details = "Managing their QuickBar";
 			break;
 		}
 		case "subscriptions": {
@@ -436,6 +456,13 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "thread": {
+			presenceData.details = "Viewing a thread";
+			presenceData.state =
+				document.querySelector<HTMLAnchorElement>(".forum-header a");
+			presenceData.buttons = [{ label: "View Thread", url: href }];
+			break;
+		}
+		case "threads": {
 			switch (pathList[1]) {
 				case "bookmarks": {
 					presenceData.details = "Viewing their bookmarked threads";
@@ -448,12 +475,6 @@ presence.on("UpdateData", async () => {
 				case "region": {
 					presenceData.details = "Browsing threads";
 					break;
-				}
-				default: {
-					presenceData.details = "Viewing a thread";
-					presenceData.state =
-						document.querySelector<HTMLAnchorElement>(".forum-header a");
-					presenceData.buttons = [{ label: "View Thread", url: href }];
 				}
 			}
 			break;
