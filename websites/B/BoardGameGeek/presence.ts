@@ -14,6 +14,7 @@ const enum Assets {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href, search } = document.location,
 		pathList = pathname.split("/").filter(Boolean);
@@ -44,11 +45,9 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "blogs": {
-			if (pathList[1] === "myblogs") {
+			if (pathList[1] === "myblogs")
 				presenceData.details = "Viewing their blogs";
-			} else {
-				presenceData.details = "Browsing blogs";
-			}
+			else presenceData.details = "Browsing blogs";
 			break;
 		}
 		case "blogpost": {
@@ -142,19 +141,17 @@ presence.on("UpdateData", async () => {
 						"images-module .summary-image-item"
 					);
 					presenceData.details = `Viewing images for '${gameHeaderText}'`;
-					for (let i = 0; i < imageContainers.length; i++) {
-						const imageContainer = imageContainers[i],
-							imageLink = imageContainer.querySelector<HTMLAnchorElement>(
+					for (const imageContainer of imageContainers) {
+						const imageLink = imageContainer.querySelector<HTMLAnchorElement>(
 								".summary-image-thumbnail"
-							),
-							imageTitle = imageContainer.querySelector<HTMLDivElement>(
-								".summary-item-title"
 							),
 							slide: PresenceData = {
 								...presenceData,
 								largeImageKey: imageLink.querySelector<HTMLImageElement>("img"),
 								smallImageKey: Assets.Question,
-								smallImageText: imageTitle,
+								smallImageText: imageContainer.querySelector<HTMLDivElement>(
+									".summary-item-title"
+								),
 							};
 						slide.buttons.push({ label: "View Image", url: imageLink });
 						slideshow.addSlide(imageLink.href, slide, 5000);
@@ -191,15 +188,15 @@ presence.on("UpdateData", async () => {
 								.querySelector<HTMLSpanElement>(".comment-body span")
 								.textContent.trim()}`;
 						}
-						const avatar =
-								reviewElement.querySelector<HTMLImageElement>(".avatar"),
-							username = reviewElement
+						const username = reviewElement
 								.querySelector<HTMLAnchorElement>(".comment-header-user")
 								.textContent.trim(),
 							slide: PresenceData = {
 								...presenceData,
 								state: text,
-								smallImageKey: avatar ? avatar : Assets.Question,
+								smallImageKey:
+									reviewElement.querySelector<HTMLImageElement>(".avatar") ??
+									Assets.Question,
 								smallImageText: username,
 							};
 						slideshow.addSlide(username, slide, 5000);
@@ -221,22 +218,20 @@ presence.on("UpdateData", async () => {
 					const gamePanels =
 						document.querySelectorAll<HTMLDivElement>(".game-stats .panel");
 					for (const gamePanel of gamePanels) {
-						const gamePanelTitle = gamePanel
-								.querySelector("h3")
-								.textContent.trim(),
-							gamePanelItems =
-								gamePanel.querySelectorAll<HTMLLIElement>(".outline-item");
+						const gamePanelItems =
+							gamePanel.querySelectorAll<HTMLLIElement>(".outline-item");
 
 						for (const gamePanelItem of gamePanelItems) {
 							const gamePanelItemTitle = gamePanelItem
 									.querySelector(".outline-item-title")
 									.textContent.trim(),
-								gamePanelItemValue = gamePanelItem
-									.querySelector(".outline-item-description")
-									.textContent.trim(),
 								slide: PresenceData = {
 									...presenceData,
-									state: `${gamePanelTitle}: ${gamePanelItemTitle} - ${gamePanelItemValue}`,
+									state: `${gamePanel
+										.querySelector("h3")
+										.textContent.trim()}: ${gamePanelItemTitle} - ${gamePanelItem
+										.querySelector(".outline-item-description")
+										.textContent.trim()}`,
 								};
 							slideshow.addSlide(gamePanelItemTitle, slide, 5000);
 						}
@@ -278,14 +273,13 @@ presence.on("UpdateData", async () => {
 						const videoLink = videoElement.querySelector<HTMLAnchorElement>(
 								".summary-video-thumbnail"
 							),
-							videoTitle = videoElement.querySelector<HTMLDivElement>(
-								".summary-item-title"
-							),
 							slide: PresenceData = {
 								...presenceData,
 								largeImageKey: videoLink.querySelector<HTMLImageElement>("img"),
 								smallImageKey: Assets.Question,
-								smallImageText: videoTitle,
+								smallImageText: videoElement.querySelector<HTMLDivElement>(
+									".summary-item-title"
+								),
 							};
 						slide.buttons.push({ label: "View Video", url: videoLink });
 						slideshow.addSlide(videoLink.href, slide, 5000);
@@ -329,16 +323,14 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "forums": {
-			if (pathList[1] === "search") {
+			if (pathList[1] === "search")
 				presenceData.details = "Searching the forums";
-			} else if (pathList[1]) {
+			else if (pathList[1]) {
 				presenceData.details = "Browsing a forum section";
 				presenceData.state =
 					document.querySelector<HTMLHeadingElement>("header h2");
 				presenceData.buttons = [{ label: "View Forum", url: href }];
-			} else {
-				presenceData.details = "Browsing forums";
-			}
+			} else presenceData.details = "Browsing forums";
 			break;
 		}
 		case "geekaccount": {
@@ -358,9 +350,8 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "geeklist": {
-			if (pathList[1] === "new") {
-				presenceData.details = "Creating a GeekList";
-			} else {
+			if (pathList[1] === "new") presenceData.details = "Creating a GeekList";
+			else {
 				presenceData.details = "Viewing a GeekList";
 				presenceData.state = document.querySelector("header h2");
 				presenceData.buttons = [{ label: "View GeekList", url: href }];
@@ -405,9 +396,8 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "geeksearch.php": {
-			const searchParams = new URLSearchParams(search);
 			presenceData.details = "Searching for a game";
-			presenceData.state = searchParams.get("q");
+			presenceData.state = new URLSearchParams(search).get("q");
 			break;
 		}
 		case "geekwidget.php": {
@@ -426,11 +416,11 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "guild": {
-			function useGuildDetails() {
+			const useGuildDetails = () => {
 				presenceData.details = "Viewing a guild";
 				presenceData.state = document.querySelector("#name");
 				presenceData.buttons = [{ label: "View Guild", url: href }];
-			}
+			};
 
 			if (isNaN(+pathList[1])) {
 				switch (pathList[2]) {
@@ -474,9 +464,8 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case "search": {
-					const searchParams = new URLSearchParams(search);
 					presenceData.details = "Searching the marketplace";
-					presenceData.state = searchParams.get("q");
+					presenceData.state = new URLSearchParams(search).get("q");
 					break;
 				}
 				default: {
