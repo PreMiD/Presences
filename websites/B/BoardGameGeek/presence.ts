@@ -395,6 +395,44 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing their GeekMail";
 			break;
 		}
+		case "geekpreview": {
+			const title = document.querySelector<HTMLHeadingElement>(
+					".geekpreview-header-info h1"
+				),
+				previewImage = document.querySelector<HTMLImageElement>(
+					".geekpreview-header-logo img"
+				);
+			presenceData.details = "Viewing a GeekPreview";
+			presenceData.state = title;
+			presenceData.largeImageKey = previewImage;
+			presenceData.buttons = [{ label: "View GeekPreview", url: href }];
+
+			slideshow.addSlide(href, presenceData, 5000);
+
+			const items = document.querySelectorAll("geekpreview-singleitem");
+			for (const item of items) {
+				const itemLink = item.querySelector<HTMLAnchorElement>(
+						".geekpreview-item-inner-info-header-title a"
+					),
+					slide: PresenceData = {
+						details: `Viewing a GeekPreview item - ${title.textContent.trim()}`,
+						state: itemLink,
+						largeImageKey: item.querySelector<HTMLImageElement>(
+							".geekpreview-item-inner-cover img"
+						),
+						smallImageKey: previewImage,
+						smallImageText: title,
+						buttons: [
+							{ label: "View GeekPreview", url: href },
+							{ label: "View Item", url: itemLink },
+						],
+					};
+				slideshow.addSlide(itemLink.href, slide, 5000);
+			}
+
+			useSlideshow = true;
+			break;
+		}
 		case "geeksearch.php": {
 			presenceData.details = "Searching for a game";
 			presenceData.state = new URLSearchParams(search).get("q");
@@ -526,6 +564,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state =
 				document.querySelector<HTMLAnchorElement>(".username a");
 			presenceData.buttons = [{ label: "View Plays", url: href }];
+			break;
+		}
+		case "previews": {
+			presenceData.details = "Browsing previews";
 			break;
 		}
 		case "quickbar": {
