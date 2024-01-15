@@ -6,7 +6,7 @@ const presence = new Presence({
 const enum Assets {
 	Likes = "https://i.imgur.com/394dVMI.png",
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/P/Pinterest/assets/logo.png",
-	Loading = `https://i.imgur.com/${"6s5f2TA"}.gif`,
+	Loading = "https://i.imgur.com/\u002e.gif",
 }
 
 presence.on("UpdateData", async () => {
