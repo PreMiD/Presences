@@ -292,8 +292,20 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "collection": {
+			presenceData.details = "Viewing a game collection";
+			presenceData.buttons = [{ label: "View Collection", url: href }];
+			break;
+		}
 		case "fan": {
 			presenceData.details = "Viewing fan items";
+			break;
+		}
+		case "findgamers.php":
+		case "map":
+		case "searchform":
+		case "users.php": {
+			presenceData.details = "Searching users";
 			break;
 		}
 		case "forums": {
@@ -461,6 +473,10 @@ presence.on("UpdateData", async () => {
 						);
 				}
 			}
+			break;
+		}
+		case "microbadges": {
+			presenceData.details = "Browsing microbadges";
 			break;
 		}
 		case "quickbar": {
