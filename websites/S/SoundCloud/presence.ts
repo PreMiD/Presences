@@ -112,16 +112,23 @@ const statics = {
 
 presence.on("UpdateData", async () => {
 	const path = location.pathname.replace(/\/?$/, "/"),
-		[showBrowsing, showSong, hidePaused, showTimestamps, showCover, showButtons, newLang] =
-			await Promise.all([
-				presence.getSetting<boolean>("browse"),
-				presence.getSetting<boolean>("song"),
-				presence.getSetting<boolean>("hidePaused"),
-				presence.getSetting<boolean>("timestamp"),
-				presence.getSetting<boolean>("cover"),
-				presence.getSetting<boolean>("buttons"),
-				presence.getSetting<string>("lang").catch(() => "en"),
-			]),
+		[
+			showBrowsing,
+			showSong,
+			hidePaused,
+			showTimestamps,
+			showCover,
+			showButtons,
+			newLang,
+		] = await Promise.all([
+			presence.getSetting<boolean>("browse"),
+			presence.getSetting<boolean>("song"),
+			presence.getSetting<boolean>("hidePaused"),
+			presence.getSetting<boolean>("timestamp"),
+			presence.getSetting<boolean>("cover"),
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<string>("lang").catch(() => "en"),
+		]),
 		playing = Boolean(document.querySelector(".playControls__play.playing"));
 
 	if (oldLang !== newLang || !strings) {
@@ -129,7 +136,7 @@ presence.on("UpdateData", async () => {
 		strings = await getStrings();
 	}
 
-	if (showSong && (hidePaused && !playing) && !showBrowsing)
+	if (showSong && hidePaused && !playing && !showBrowsing)
 		return presence.clearActivity();
 
 	let presenceData: PresenceData = {
@@ -283,3 +290,4 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData);
 	} else presence.setActivity();
 });
+
