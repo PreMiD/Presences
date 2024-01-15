@@ -479,6 +479,31 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing microbadges";
 			break;
 		}
+		case "play": {
+			const thumbnailContainer =
+				document.querySelector<HTMLSpanElement>(".go_thumbnail");
+			presenceData.details = "Viewing a play";
+			presenceData.state = `${document
+				.querySelector<HTMLAnchorElement>(".username a")
+				.textContent.trim()} - ${thumbnailContainer.nextElementSibling.textContent.trim()}`;
+			presenceData.largeImageKey =
+				thumbnailContainer.querySelector<HTMLImageElement>("img");
+			presenceData.buttons = [
+				{ label: "View Play", url: href },
+				{
+					label: "View Game",
+					url: thumbnailContainer.nextElementSibling as HTMLAnchorElement,
+				},
+			];
+			break;
+		}
+		case "plays": {
+			presenceData.details = "Viewing a user's plays";
+			presenceData.state =
+				document.querySelector<HTMLAnchorElement>(".username a");
+			presenceData.buttons = [{ label: "View Plays", url: href }];
+			break;
+		}
 		case "quickbar": {
 			presenceData.details = "Managing their QuickBar";
 			break;
