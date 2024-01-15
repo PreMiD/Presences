@@ -464,13 +464,18 @@ presence.on("UpdateData", async () => {
 		case "images": {
 			presenceData.details = "Browsing images";
 
-			const images = document.querySelectorAll<HTMLImageElement>("gg-image-browser gg-image img");
+			const images = document.querySelectorAll<HTMLImageElement>(
+				"gg-image-browser gg-image img"
+			);
 			for (const image of images) {
-				const slide: PresenceData = {
-					...presenceData,
-					largeImageKey: image,
-				};
-				slideshow.addSlide(image.src, slide, 5000);
+				slideshow.addSlide(
+					image.src,
+					{
+						...presenceData,
+						largeImageKey: image,
+					},
+					5000
+				);
 			}
 
 			useSlideshow = true;
