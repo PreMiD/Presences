@@ -476,6 +476,10 @@ presence.on("UpdateData", async () => {
 			useSlideshow = true;
 			break;
 		}
+		case "item": {
+			presenceData.details = "Creating an item";
+			break;
+		}
 		case "guild": {
 			const useGuildDetails = () => {
 				presenceData.details = "Viewing a guild";
