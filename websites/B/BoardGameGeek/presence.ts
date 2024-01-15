@@ -292,6 +292,10 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "fan": {
+			presenceData.details = "Viewing fan items";
+			break;
+		}
 		case "forums": {
 			if (pathList[1] === "search") {
 				presenceData.details = "Searching the forums";
@@ -370,6 +374,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state = searchParams.get("q");
 			break;
 		}
+		case "geekwidget.php": {
+			presenceData.details = "Editing their GeekWidget";
+			break;
+		}
 		case "guild": {
 			function useGuildDetails() {
 				presenceData.details = "Viewing a guild";
@@ -431,19 +439,27 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "microbadge": {
-			if (pathList[1] === "edit") {
-				presenceData.details = "Editing their microbadges";
-			} else {
-				presenceData.details = "Viewing a microbadge";
-				presenceData.state = document.querySelector<HTMLTableCellElement>(
-					"table td:nth-child(2) > table td:nth-child(2)"
-				);
-				presenceData.smallImageKey =
-					document.querySelector<HTMLImageElement>("h2 img");
-				presenceData.smallImageText =
-					document.querySelector<HTMLTableCellElement>(
-						"table td:nth-child(2) > table tr:nth-child(2) td:nth-child(2)"
+			switch (pathList[1]) {
+				case "edit": {
+					presenceData.details = "Editing their microbadges";
+					break;
+				}
+				case "browse": {
+					presenceData.details = "Browsing microbadges";
+					break;
+				}
+				default: {
+					presenceData.details = "Viewing a microbadge";
+					presenceData.state = document.querySelector<HTMLTableCellElement>(
+						"table td:nth-child(2) > table td:nth-child(2)"
 					);
+					presenceData.smallImageKey =
+						document.querySelector<HTMLImageElement>("h2 img");
+					presenceData.smallImageText =
+						document.querySelector<HTMLTableCellElement>(
+							"table td:nth-child(2) > table tr:nth-child(2) td:nth-child(2)"
+						);
+				}
 			}
 			break;
 		}
@@ -480,9 +496,14 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "user": {
-			const avatar = document.querySelector<HTMLImageElement>(".avatarblock img[data-overtexttype=avatarovertext]");
-			presenceData.details = `Viewing a user's ${document.querySelector(".menu_table .tabOn").textContent.trim()}`
-			presenceData.state = document.querySelector<HTMLAnchorElement>(".username a");
+			const avatar = document.querySelector<HTMLImageElement>(
+				".avatarblock img[data-overtexttype=avatarovertext]"
+			);
+			presenceData.details = `Viewing a user's ${document
+				.querySelector(".menu_table .tabOn")
+				.textContent.trim()}`;
+			presenceData.state =
+				document.querySelector<HTMLAnchorElement>(".username a");
 			presenceData.buttons = [{ label: "View User", url: href }];
 			if (avatar) presenceData.smallImageKey = avatar;
 			break;
