@@ -295,7 +295,8 @@ presence.on("UpdateData", async () => {
 		case "forums": {
 			if (pathList[1]) {
 				presenceData.details = "Browsing a forum section";
-				presenceData.state = document.querySelector("header h2");
+				presenceData.state =
+					document.querySelector<HTMLHeadingElement>("header h2");
 				presenceData.buttons = [{ label: "View Forum", url: href }];
 			} else {
 				presenceData.details = "Browsing forums";
@@ -406,6 +407,29 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLTableCellElement>(
 					"table td:nth-child(2) > table tr:nth-child(2) td:nth-child(2)"
 				);
+			break;
+		}
+		case "thread": {
+			switch (pathList[1]) {
+				case "bookmarks": {
+					presenceData.details = "Viewing their bookmarked threads";
+					break;
+				}
+				case "new": {
+					presenceData.details = "Creating a new thread";
+					break;
+				}
+				case "region": {
+					presenceData.details = "Browsing threads";
+					break;
+				}
+				default: {
+					presenceData.details = "Viewing a thread";
+					presenceData.state =
+						document.querySelector<HTMLAnchorElement>(".forum-header a");
+					presenceData.buttons = [{ label: "View Thread", url: href }];
+				}
+			}
 			break;
 		}
 		case "wiki": {
