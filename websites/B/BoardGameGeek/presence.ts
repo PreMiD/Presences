@@ -31,12 +31,23 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing the homepage";
 			break;
 		}
+		case "blog": {
+			if (pathList[1] === "create") {
+				presenceData.details = "Creating a new blog";
+				break;
+			} else {
+				presenceData.details = "Viewing a blog";
+				presenceData.state =
+					document.querySelector<HTMLAnchorElement>(".post_title > a");
+				presenceData.buttons = [{ label: "View Blog", url: href }];
+			}
+			break;
+		}
 		case "blogs": {
-			switch (pathList[1]) {
-				case "myblogs": {
-					presenceData.details = "Viewing their blogs";
-					break;
-				}
+			if (pathList[1] === "myblogs") {
+				presenceData.details = "Viewing their blogs";
+			} else {
+				presenceData.details = "Browsing blogs";
 			}
 			break;
 		}
