@@ -12,9 +12,9 @@
 		"www.4chan.org",
 		"4chan.org"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/7pI9X5M.png",
-	"thumbnail": "https://i.imgur.com/lcl0PuO.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/0-9/4chan/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/0-9/4chan/assets/thumbnail.png",
 	"color": "#789922",
 	"category": "socials",
 	"tags": [
