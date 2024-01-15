@@ -348,6 +348,10 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "geekmail": {
+			presenceData.details = "Browsing their GeekMail";
+			break;
+		}
 		case "geeksearch.php": {
 			const searchParams = new URLSearchParams(search);
 			presenceData.details = "Searching for a game";
@@ -425,6 +429,10 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLTableCellElement>(
 					"table td:nth-child(2) > table tr:nth-child(2) td:nth-child(2)"
 				);
+			break;
+		}
+		case "subscriptions": {
+			presenceData.details = "Viewing their subscriptions";
 			break;
 		}
 		case "thread": {
