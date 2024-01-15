@@ -479,6 +479,18 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "user": {
+			const avatar = document.querySelector<HTMLImageElement>(".avatarblock img[data-overtexttype=avatarovertext]");
+			presenceData.details = `Viewing a user's ${document.querySelector(".menu_table .tabOn").textContent.trim()}`
+			presenceData.state = document.querySelector<HTMLAnchorElement>(".username a");
+			presenceData.buttons = [{ label: "View User", url: href }];
+			if (avatar) presenceData.smallImageKey = avatar;
+			break;
+		}
+		case "users": {
+			presenceData.details = "Browsing users";
+			break;
+		}
 		case "wiki": {
 			presenceData.details = "Viewing the wiki";
 			presenceData.state =
