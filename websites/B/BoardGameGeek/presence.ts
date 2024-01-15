@@ -115,6 +115,35 @@ presence.on("UpdateData", async () => {
 					).childNodes[2];
 					break;
 				}
+				case "geeklist": {
+					presenceData.details = "Viewing a GeekList";
+					presenceData.state = document.querySelector("header h2");
+					presenceData.buttons = [{ label: "View GeekList", url: href }];
+					slideshow.addSlide(href, presenceData, 5000);
+
+					const items = document.querySelectorAll<HTMLDivElement>(
+						"gg-geeklist-items-by-geeklist gg-geeklist-item .geeklist-item"
+					);
+					for (const item of items) {
+						const itemLink = item.querySelector<HTMLAnchorElement>("h2 a"),
+							slide: PresenceData = {
+								details: `Viewing a GeekList item - ${gameHeaderText}`,
+								state: itemLink,
+								largeImageKey:
+									item.querySelector<HTMLImageElement>("gg-image img"),
+								smallImageKey: Assets.Question,
+								smallImageText: itemLink,
+								buttons: [
+									{ label: "View GeekList", url: href },
+									{ label: "View Item", url: itemLink },
+								],
+							};
+						slideshow.addSlide(itemLink.href, slide, 5000);
+					}
+
+					useSlideshow = true;
+					break;
+				}
 				case "geeklists": {
 					presenceData.details = `Viewing GeekLists for '${gameHeaderText}'`;
 					const geeklists = document.querySelectorAll<HTMLLIElement>(
