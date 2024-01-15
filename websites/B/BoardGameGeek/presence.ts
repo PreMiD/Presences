@@ -293,7 +293,9 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "forums": {
-			if (pathList[1]) {
+			if (pathList[1] === "search") {
+				presenceData.details = "Searching the forums";
+			} else if (pathList[1]) {
 				presenceData.details = "Browsing a forum section";
 				presenceData.state =
 					document.querySelector<HTMLHeadingElement>("header h2");
