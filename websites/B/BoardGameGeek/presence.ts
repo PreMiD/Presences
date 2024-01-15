@@ -349,6 +349,10 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Managing their profile";
 			break;
 		}
+		case "geekbuddy.php": {
+			presenceData.details = "Managing their GeekBuddy";
+			break;
+		}
 		case "geekcentral": {
 			presenceData.details = "Managing their GeekCentral";
 			break;
@@ -408,6 +412,17 @@ presence.on("UpdateData", async () => {
 		}
 		case "geekwidget.php": {
 			presenceData.details = "Editing their GeekWidget";
+			break;
+		}
+		case "image": {
+			presenceData.details = "Viewing an image";
+			presenceData.smallImageKey =
+				document.querySelector<HTMLImageElement>("gg-image-nav img");
+			presenceData.buttons = [{ label: "View Image", url: href }];
+			break;
+		}
+		case "images": {
+			presenceData.details = "Browsing images";
 			break;
 		}
 		case "guild": {
