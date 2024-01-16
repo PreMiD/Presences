@@ -133,7 +133,6 @@ presence.on("UpdateData", async () => {
 
 					break;
 				}
-				// No default
 			}
 		}
 	}
