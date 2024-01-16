@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View the mod page",
-				url: "https://embersparkgames.com/desolation",
+				url: "https://emberspark.games/desolation",
 			},
 		];
 		if (!currentPath[2] || currentPath[2] === "about")
