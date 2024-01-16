@@ -153,7 +153,7 @@ function handleLesson(_path: string | string[]) {
 		presenceData.state = `${makeProgressBar(
 			PBProgression,
 			Number(progressBarElement?.getAttribute("aria-valuemax")),
-			presenceData.details.length / 3.2,
+			(presenceData.details as string).length / 3.2,
 			/--web-ui_progress-bar-color: rgb\(var\(--color-(\w+)\)\);/.exec(
 				progressBarElement?.getAttribute("style")
 			)?.[1]

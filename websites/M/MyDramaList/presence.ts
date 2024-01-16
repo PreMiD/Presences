@@ -149,7 +149,10 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (presenceData.largeImageKey.includes("http") && !coverEnabled) {
+	if (
+		(presenceData.largeImageKey as string).includes("http") &&
+		!coverEnabled
+	) {
 		presenceData.largeImageKey =
 			"https://cdn.rcd.gg/PreMiD/websites/M/MyDramaList/assets/logo.png";
 	}

@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = getElement(".mat-tab-label-active");
 	}
 
-	if (presenceData.details) {
+	if (presenceData.details && typeof presenceData.details === "string") {
 		if (presenceData.details.match("(Browsing|Viewing)")) {
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = (await strings).browse;

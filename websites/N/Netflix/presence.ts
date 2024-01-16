@@ -320,10 +320,10 @@ presence.on("UpdateData", async () => {
 					delete presenceData.endTimestamp;
 				}
 
-				if (presenceData.details.length < 3)
+				if ((presenceData.details as string).length < 3)
 					presenceData.details = ` ${presenceData.details}`;
 
-				if (presenceData.state?.length < 3)
+				if ((presenceData.state as string)?.length < 3)
 					presenceData.state = ` ${presenceData.state}`;
 
 				if (showMovie) return presence.setActivity(presenceData);
@@ -375,7 +375,7 @@ presence.on("UpdateData", async () => {
 				if (presenceData.details.length < 3)
 					presenceData.details = ` ${presenceData.details}`;
 
-				if (presenceData.state.length < 3)
+				if ((presenceData.state as string).length < 3)
 					presenceData.state = ` ${presenceData.state}`;
 
 				if (showSeries) return presence.setActivity(presenceData);
