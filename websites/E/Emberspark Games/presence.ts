@@ -19,12 +19,6 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Emberspark Games";
 		presenceData.largeImageKey = Assets.Icon;
 		presenceData.state = "Viewing the home page";
-		presenceData.buttons = [
-			{
-				label: "Check out our games/mods!",
-				url: "https://embersparkgames.com",
-			},
-		];
 	} else if (currentPath[1] === "desolation") {
 		presenceData.details = "Portal 2: Desolation mod";
 		presenceData.largeImageKey = Assets.DesolationIcon;
