@@ -454,8 +454,9 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData);
 
 		if (
-			presenceData.details.includes("ERROR: NOT FOUND!") ||
-			(presenceData.state && presenceData.state.includes("ERROR: NOT FOUND!"))
+			(presenceData.details as string).includes("ERROR: NOT FOUND!") ||
+			(presenceData.state &&
+				(presenceData.state as string).includes("ERROR: NOT FOUND!"))
 		) {
 			presence.error(
 				`Unable to find an element...\nPlease contact Bas950#0950 in Discord (https://discord.premid.app/).\nPath: ${path}`

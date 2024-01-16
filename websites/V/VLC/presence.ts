@@ -99,7 +99,10 @@ presence.on("UpdateData", async () => {
 
 			if (presenceData.details && presenceData.details.length > 100)
 				presenceData.details = presenceData.details.substring(0, 127);
-			if (presenceData.state && presenceData.state.length > 100)
+			if (
+				typeof presenceData.state === "string" &&
+				presenceData.state.length > 100
+			)
 				presenceData.state = presenceData.state.substring(0, 127);
 
 			presenceData.smallImageKey =
