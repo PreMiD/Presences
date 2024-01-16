@@ -3,7 +3,7 @@ const presence = new Presence({ clientId: "1196469492310618142" }),
 
 const enum Assets {
 	Icon = "https://i.imgur.com/w5E2gIj.png",
-	DesolationIcon = "https://i.imgur.com/TUZ9rwv.png",
+	DesolationIcon = "https://i.imgur.com/xLRd3Aa.png",
 	ConsumerCatalog = "https://i.imgur.com/FxjlP2Z.png",
 }
 
@@ -19,15 +19,28 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Emberspark Games";
 		presenceData.largeImageKey = Assets.Icon;
 		presenceData.state = "Viewing the home page";
+		presenceData.buttons = [
+			{
+				label: "Check out our games/mods!",
+				url: "https://embersparkgames.com",
+			},
+		];
 	} else if (currentPath[1] === "desolation") {
 		presenceData.details = "Portal 2: Desolation mod";
 		presenceData.largeImageKey = Assets.DesolationIcon;
+		presenceData.buttons = [
+			{
+				label: "View the mod page",
+				url: "https://embersparkgames.com/desolation",
+			},
+		];
 		if (!currentPath[2] || currentPath[2] === "about")
 			presenceData.state = "Viewing the about page";
 		else {
 			switch (currentPath[2]) {
 				case "news": {
 					presenceData.state = "Viewing the changelog page";
+					presenceData.smallImageText = "Viewing all the posts...";
 					if (currentPath[3]) {
 						presenceData.smallImageText = "Viewing a changelog post...";
 						const newsHeadline = document
@@ -49,6 +62,12 @@ presence.on("UpdateData", async () => {
 					presenceData.state = "In the test subject waiting area";
 					presenceData.smallImageKey = Assets.ConsumerCatalog;
 					presenceData.smallImageText = "Sitting in the waiting area...";
+					presenceData.buttons = [
+						{
+							label: "View the catalogue",
+							url: "https://embersparkgames.com/desolation/catalog",
+						},
+					];
 
 					if (
 						document
@@ -91,6 +110,7 @@ presence.on("UpdateData", async () => {
 				}
 				case "gallery": {
 					presenceData.state = "Viewing the gallery page";
+					presenceData.smallImageText = "Viewing all the images...";
 
 					const activeImage = document.querySelector(
 						".splide__slide.is-active.is-visible"
