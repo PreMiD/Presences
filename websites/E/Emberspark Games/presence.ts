@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View the catalogue",
-							url: "https://embersparkgames.com/desolation/catalog",
+							url: "https://emberspark.games/desolation/catalog",
 						},
 					];
 
