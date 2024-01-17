@@ -171,9 +171,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = article.textContent;
 				presenceData.smallImageKey = Assets.Reading;
 				presenceData.buttons = [{ label: "Read Article", url: href }];
-			} else 
-				presenceData.details = "Browsing through the help center";
-			
+			} else presenceData.details = "Browsing through the help center";
 
 			break;
 		}
