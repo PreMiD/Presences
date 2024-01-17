@@ -30,6 +30,9 @@ enum LogoMode {
 	Channel = 2,
 }
 
+type VPArray = { href: string; ttl: number }[];
+
+
 const nullResolver: Resolver = {
 	isActive: () => true,
 	getTitle: () => document.title,
@@ -80,14 +83,19 @@ presence.on("UpdateData", async () => {
 		if (resolver === youtubeShortsResolver)
 			await cacheShortData(hostname, pathname.split("/shorts/")[1]);
 
-		let perVideoPrivacyArray: string[] =
+
+		let perVideoPrivacyArray: VPArray =
 				JSON.parse(localStorage.getItem("pmdEnablePrivacy")) ?? [],
-			perVideoNonPrivacyArray: string[] =
+			perVideoNonPrivacyArray: VPArray =
 				JSON.parse(localStorage.getItem("pmdDisablePrivacy")) ?? [];
+
+		const isHrefInArray = (href: string, array: VPArray) => {
+			return array.findIndex(entry => entry.href === href) !== -1;
+		};
 
 		if (resolver === youtubeResolver) {
 			try {
-				perVideoPrivacy = perVideoPrivacyArray.includes(href);
+				perVideoPrivacy = isHrefInArray(href, perVideoPrivacyArray);
 
 				if (!document.querySelector("#pmdEnablePrivacy")) {
 					const button = document.createElement("div"),
@@ -106,23 +114,24 @@ presence.on("UpdateData", async () => {
 					button.className =
 						"yt-spec-button-shape-next yt-spec-button-shape-next--tonal yt-spec-button-shape-next--mono yt-spec-button-shape-next--size-m yt-spec-button-shape-next--icon-leading";
 					button.addEventListener("click", () => {
-						const { href } = document.location;
+						const { href } = document.location,
+							ttl = Date.now() + 3 * 60 * 60 * 1000;
 						if (localStorage.getItem("pmdPrivacyEnabled") === "true") {
-							perVideoNonPrivacyArray.includes(href)
+							isHrefInArray(href, perVideoNonPrivacyArray)
 								? (perVideoNonPrivacyArray = perVideoNonPrivacyArray.filter(
-										i => i !== href
+										e => e.href !== href
 								  ))
-								: perVideoNonPrivacyArray.push(href);
+								: perVideoNonPrivacyArray.push({ href, ttl });
 							localStorage.setItem(
 								"pmdDisablePrivacy",
 								JSON.stringify(perVideoNonPrivacyArray)
 							);
 						} else {
-							perVideoPrivacyArray.includes(href)
+							isHrefInArray(href, perVideoPrivacyArray)
 								? (perVideoPrivacyArray = perVideoPrivacyArray.filter(
-										i => i !== href
+										e => e.href !== href
 								  ))
-								: perVideoPrivacyArray.push(href);
+								: perVideoPrivacyArray.push({ href, ttl });
 							localStorage.setItem(
 								"pmdEnablePrivacy",
 								JSON.stringify(perVideoPrivacyArray)
@@ -169,10 +178,10 @@ presence.on("UpdateData", async () => {
 					});
 				} else {
 					if (privacy) {
-						perVideoPrivacy = !perVideoNonPrivacyArray.includes(href);
+						perVideoPrivacy = !isHrefInArray(href, perVideoNonPrivacyArray);
 						localStorage.setItem("pmdPrivacyEnabled", "true");
 					} else {
-						perVideoPrivacy = perVideoPrivacyArray.includes(href);
+						perVideoPrivacy = isHrefInArray(href, perVideoPrivacyArray);
 						localStorage.setItem("pmdPrivacyEnabled", "false");
 					}
 
@@ -671,3 +680,24 @@ presence.on("UpdateData", async () => {
 		else presence.setActivity(presenceData);
 	}
 });
+
+const removeExpiredPrivacyOverwrites = (array: VPArray) => {
+	return array.filter(entry => entry.ttl > Date.now());
+};
+
+localStorage.setItem(
+	"pmdDisablePrivacy",
+	JSON.stringify(
+		removeExpiredPrivacyOverwrites(
+			JSON.parse(localStorage.getItem("pmdDisablePrivacy"))
+		)
+	)
+);
+localStorage.setItem(
+	"pmdEnablePrivacy",
+	JSON.stringify(
+		removeExpiredPrivacyOverwrites(
+			JSON.parse(localStorage.getItem("pmdEnablePrivacy"))
+		)
+	)
+);
