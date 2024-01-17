@@ -45,10 +45,6 @@ presence.on("UpdateData", () => {
 				label: "Assistir episódio",
 				url: location.href,
 			},
-			{
-				label: "Ver anime",
-				url: document.querySelector<HTMLAnchorElement>(".mb-4>a").href,
-			},
 		];
 		const video = document.querySelector("video");
 		if (video && !video.paused && video.readyState >= 1) {
