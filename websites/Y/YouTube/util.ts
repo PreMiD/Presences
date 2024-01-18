@@ -68,6 +68,8 @@ const stringMap = {
 	watchVideoButton: "general.buttonWatchVideo",
 	viewChannelButton: "general.buttonViewChannel",
 	videos: "youtube.videos",
+	perVideoPrivacyToolTip1: "youtube.perVideoPrivacy.tooltip.1",
+	perVideoPrivacyToolTip2: "youtube.perVideoPrivacy.tooltip.2",
 };
 
 export let strings: Awaited<
@@ -199,8 +201,8 @@ export function pvPrivacyUI(privacy: boolean, href: string): boolean {
 					);
 				}
 			});
-			p1.textContent = "Overwrite your privacy mode for this video";
-			p2.textContent = "This is part of the PreMiD YouTube presence";
+			p1.textContent = strings.perVideoPrivacyToolTip1;
+			p2.textContent = strings.perVideoPrivacyToolTip2;
 			p2.style.fontStyle = "italic";
 			tooltip.appendChild(p1);
 			tooltip.appendChild(p2);
