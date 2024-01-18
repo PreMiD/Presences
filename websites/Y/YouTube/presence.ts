@@ -42,6 +42,7 @@ presence.on("UpdateData", async () => {
 			newLang,
 			privacy,
 			privacyTtl,
+			privacyButtonShown,
 			time,
 			vidDetail,
 			vidState,
@@ -52,6 +53,7 @@ presence.on("UpdateData", async () => {
 			getSetting<string>("lang", "en"),
 			getSetting<boolean>("privacy", true),
 			getSetting<number>("privacy-ttl"),
+			getSetting<boolean>("privacy-shown", true),
 			getSetting<boolean>("time", true),
 			getSetting<string>("vidDetail", "%title%"),
 			getSetting<string>("vidState", "%uploader%"),
@@ -186,11 +188,16 @@ presence.on("UpdateData", async () => {
 
 		let perVideoPrivacy = privacy;
 		if (resolver === youtubeResolver) {
-			perVideoPrivacy = pvPrivacyUI(
-				privacy,
-				new URLSearchParams(search).get("v"),
-				privacyTtl
-			);
+			privacyButtonShown
+				? (perVideoPrivacy = pvPrivacyUI(
+						privacy,
+						new URLSearchParams(search).get("v"),
+						privacyTtl
+				  ))
+				: document.querySelector("#pmdEnablePrivacy")
+				? (document.querySelector("#pmdEnablePrivacy").remove(),
+				  document.querySelector("#pmdEnablePrivacyTooltip").remove())
+				: "";
 		}
 
 		// Update title to indicate when an ad is being played

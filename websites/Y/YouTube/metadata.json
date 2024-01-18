@@ -96,7 +96,16 @@
 			"value": false
 		},
 		{
+			"id": "privacy-shown",
+			"title": "Show Privacy Button",
+			"icon": "fad fa-eye-low-vision",
+			"value": true
+		},
+		{
 			"id": "privacy-ttl",
+			"if": {
+				"privacy-shown": true
+			},
 			"title": "Time to Expire",
 			"icon": "fad fa-eye",
 			"value": 0,

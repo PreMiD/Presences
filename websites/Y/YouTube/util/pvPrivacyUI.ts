@@ -75,6 +75,7 @@ export function pvPrivacyUI(
 			p1.textContent = strings.perVideoPrivacyToolTip1;
 			p2.textContent = strings.perVideoPrivacyToolTip2;
 			p2.style.fontStyle = "italic";
+			tooltip.id = "pmdEnablePrivacyTooltip";
 			tooltip.appendChild(p1);
 			tooltip.appendChild(p2);
 			button.innerHTML =
