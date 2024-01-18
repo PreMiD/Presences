@@ -183,7 +183,8 @@ presence.on("UpdateData", async () => {
 		}
 
 		let perVideoPrivacy = privacy;
-		if (resolver === youtubeResolver) perVideoPrivacy = pvPrivacyUI(privacy, href);
+		if (resolver === youtubeResolver)
+			perVideoPrivacy = pvPrivacyUI(privacy, href);
 
 		// Update title to indicate when an ad is being played
 		if (document.querySelector(".ytp-ad-player-overlay")) {
