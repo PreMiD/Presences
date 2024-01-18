@@ -14,8 +14,8 @@ import {
 	strings,
 	getSetting,
 	checkStringLanguage,
-	pvPrivacyUI,
 } from "./util";
+import { pvPrivacyUI } from "./util/pvPrivacyUI";
 
 const browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -41,6 +41,7 @@ presence.on("UpdateData", async () => {
 	const [
 			newLang,
 			privacy,
+			privacyTtl,
 			time,
 			vidDetail,
 			vidState,
@@ -50,6 +51,7 @@ presence.on("UpdateData", async () => {
 		] = [
 			getSetting<string>("lang", "en"),
 			getSetting<boolean>("privacy", true),
+			getSetting<number>("privacy-ttl"),
 			getSetting<boolean>("time", true),
 			getSetting<string>("vidDetail", "%title%"),
 			getSetting<string>("vidState", "%uploader%"),
@@ -183,8 +185,13 @@ presence.on("UpdateData", async () => {
 		}
 
 		let perVideoPrivacy = privacy;
-		if (resolver === youtubeResolver)
-			perVideoPrivacy = pvPrivacyUI(privacy, href);
+		if (resolver === youtubeResolver) {
+			perVideoPrivacy = pvPrivacyUI(
+				privacy,
+				new URLSearchParams(search).get("v"),
+				privacyTtl
+			);
+		}
 
 		// Update title to indicate when an ad is being played
 		if (document.querySelector(".ytp-ad-player-overlay")) {

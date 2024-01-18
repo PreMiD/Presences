@@ -96,6 +96,18 @@
 			"value": false
 		},
 		{
+			"id": "privacy-ttl",
+			"title": "Time to Expire",
+			"icon": "fad fa-eye",
+			"value": 0,
+			"values": [
+				"5 hours",
+				"12 hours",
+				"one day",
+				"one week"
+			]
+		},
+		{
 			"id": "time",
 			"title": "Show timestamps",
 			"icon": "fad fa-stopwatch",
