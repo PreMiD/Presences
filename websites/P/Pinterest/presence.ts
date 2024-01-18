@@ -3,143 +3,137 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let user: Element | HTMLElement | string,
-	search: Element | HTMLElement | string,
-	title: Element | HTMLElement | string;
+const enum Assets {
+	Likes = "https://i.imgur.com/394dVMI.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/P/Pinterest/assets/logo.png",
+	Loading = "https://i.imgur.com/6s5f2TA\u002egif",
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pinterest/assets/logo.png",
-	};
-	presenceData.startTimestamp = browsingTimestamp;
-	if (document.location.hostname === "help.pinterest.com") {
-		presenceData.details = "Viewing Help Center";
-		delete presenceData.state;
+			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname, hostname, href } = document.location,
+		buttons = await presence.getSetting<boolean>("buttons"),
+		ideasHubPage =
+			document.querySelector('[data-test-id="ideas-hub-page-header"]') ||
+			document.querySelector('[data-test-id="control-ideas-redesign-header"]'),
+		search = document.querySelector<HTMLInputElement>(
+			'input[aria-label="Search"],input[aria-label="search"]'
+		),
+		video = document.querySelector<HTMLVideoElement>("video");
 
-		delete presenceData.smallImageKey;
-
+	if (hostname === "help.pinterest.com") {
+		presenceData.details = "Viewing the help center";
 		presence.setActivity(presenceData);
-	} else if (document.location.pathname.includes("/search/")) {
-		search = document.querySelector(
-			"#HeaderContent > div > div > div > div > div > div > div > div > div > div > input"
-		);
-		presenceData.details = "Searching for:";
-		presenceData.state = (search as HTMLInputElement).textContent;
-
-		presenceData.smallImageKey = Assets.Search;
-
-		presence.setActivity(presenceData);
-	} else if (
-		document.querySelector(
-			"#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
-		) !== null ||
-		document.querySelector(
-			"body > div > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
-		) !== null
-	) {
-		user = document.querySelector(
-			"#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
-		);
-		user ??= document.querySelector(
-			"body > div > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
-		);
-		presenceData.details = "Viewing user:";
-		presenceData.state = (user as HTMLElement).textContent;
-
-		delete presenceData.smallImageKey;
-
-		presence.setActivity(presenceData);
-	} else if (
-		document.querySelector(
-			"#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div > div.BrioProfileHeaderWrapper > div:nth-child(1) > div > div > div > div > div > div > div > div:nth-child(1) > h4"
-		) !== null ||
-		document.querySelector(
-			"body > div > div.App.AppBase > div.appContent > div > div > div > div > div.BrioProfileHeaderWrapper > div:nth-child(1) > div > div > div > div > div > div > div > div:nth-child(1) > h4"
-		)
-	) {
-		user = document.querySelector(
-			"#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div > div.BrioProfileHeaderWrapper > div:nth-child(1) > div > div > div > div > div > div > div > div:nth-child(1) > h4"
-		);
-		if (user === null) {
-			user = document.querySelector(
-				"body > div > div.App.AppBase > div.appContent > div > div > div > div > div.BrioProfileHeaderWrapper > div:nth-child(1) > div > div > div > div > div > div > div > div:nth-child(1) > h4"
-			);
-		}
-		presenceData.details = "Viewing user:";
-		presenceData.state = (user as HTMLElement).textContent;
-
-		delete presenceData.smallImageKey;
-
-		presence.setActivity(presenceData);
-	} else if (
-		document.querySelector(
-			"body > div > div.App.AppBase > div.appContent > div > div > div > div > div > div > div > div > div > div.boardHeaderWrapper > div > div > div > div:nth-child(1) > h4"
-		) !== null ||
-		document.querySelector(
-			"#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div > div > div > div > div > div > div.boardHeaderWrapper > div > div > div > div:nth-child(1) > h4"
-		) !== null
-	) {
-		title = document.querySelector(
-			"body > div > div.App.AppBase > div.appContent > div > div > div > div > div > div > div > div > div > div.boardHeaderWrapper > div > div > div > div:nth-child(1) > h4"
-		);
-		if (title === null) {
-			title = document.querySelector(
-				"#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div > div > div > div > div > div > div.boardHeaderWrapper > div > div > div > div:nth-child(1) > h4"
-			);
-		}
-		presenceData.details = "Viewing board:";
-		presenceData.state = (title as HTMLElement).textContent;
-
-		delete presenceData.smallImageKey;
-
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.includes("/following")) {
-		presenceData.details = "Viewing their following";
-		delete presenceData.state;
-
-		delete presenceData.smallImageKey;
-
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.includes("/pin/")) {
-		presenceData.details = "Viewing a pin";
-		delete presenceData.state;
-
-		delete presenceData.smallImageKey;
-
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.includes("/edit")) {
-		presenceData.details = "Editting their homepage";
-		delete presenceData.state;
-
-		delete presenceData.smallImageKey;
-
-		presence.setActivity(presenceData);
-	} else if (document.location.pathname.includes("/settings")) {
-		presenceData.details = "Viewing their settings";
-		delete presenceData.state;
-
-		delete presenceData.smallImageKey;
-
-		presence.setActivity(presenceData);
-	} else if (
-		document.querySelector("#__PWS_ROOT__ > div.App.AppBase") !== null &&
-		document.querySelector("#__PWS_ROOT__ > div.App.AppBase").className ===
-			"App AppBase"
-	) {
-		presenceData.details = "Viewing the home page";
-		delete presenceData.state;
-
-		delete presenceData.smallImageKey;
-
-		presence.setActivity(presenceData);
-	} else {
-		title = document.querySelector("head > title");
-		presenceData.details = "Viewing:";
-		presenceData.state = (title as HTMLElement).textContent;
-
-		delete presenceData.smallImageKey;
-
-		presence.setActivity(presenceData);
+		return;
 	}
+	switch (true) {
+		case document.readyState !== "complete": {
+			presenceData.details = "Loading";
+			presenceData.smallImageKey = Assets.Loading;
+			break;
+		}
+		case !!search?.value: {
+			presenceData.details = !pathname.includes("/search/")
+				? "Searching for"
+				: "Viewing search results for";
+			presenceData.state = search.value;
+			presenceData.smallImageKey = Assets.Search;
+			break;
+		}
+		case !!document.querySelector(
+			'[data-layout-shift-boundary-id="ProfilePageContainer"]'
+		): {
+			presenceData.details = "Viewing profile of";
+			presenceData.state = document.querySelector(
+				'[data-test-id="profile-name"]'
+			)?.textContent;
+			presenceData.buttons = [{ label: "View Profile", url: href }];
+			break;
+		}
+
+		case pathname.includes("/pin/"): {
+			const creatorProfile = document
+					.querySelector('[data-test-id="official-user-attribution"]')
+					?.querySelector<HTMLAnchorElement>("a")?.href,
+				likesEl = document.querySelector(
+					'[data-test-id="Reaction"]'
+				)?.textContent;
+			presenceData.details =
+				JSON.parse(
+					document.querySelector('[data-test-id="leaf-snippet"]')?.textContent
+				)?.headline ?? "Viewing a pin";
+
+			if (!isNaN(video?.duration)) {
+				delete presenceData.startTimestamp;
+				if (!video.paused) {
+					[, presenceData.endTimestamp] =
+						presence.getTimestampsfromMedia(video);
+				}
+				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
+				presenceData.smallImageText = video.paused ? "Paused" : "Playing back";
+				presenceData.state = `Viewing a video pin by: ${
+					document.querySelector(
+						'[data-test-id="creator-profile-name"],[data-test-id="username"]'
+					)?.textContent
+				}`;
+				presenceData.buttons = creatorProfile
+					? [
+							{ label: "Watch Video Pin", url: href },
+							{
+								label: "View Creator's Profile",
+								url: creatorProfile,
+							},
+					  ]
+					: [{ label: "Watch Video Pin", url: href }];
+			} else {
+				if (likesEl) {
+					presenceData.smallImageKey = Assets.Likes;
+					presenceData.smallImageText = `${likesEl} likes`;
+				}
+				presenceData.state = `Viewing pin by: ${
+					document.querySelector(
+						'[data-test-id="creator-profile-name"],[data-test-id="username"]'
+					)?.textContent
+				}`;
+				presenceData.buttons = creatorProfile
+					? [
+							{ label: "View Pin", url: href },
+							{
+								label: "View Creator's Profile",
+								url: creatorProfile,
+							},
+					  ]
+					: [{ label: "View Pin", url: href }];
+			}
+			break;
+		}
+		case pathname.includes("/ideas/") &&
+			!!pathname.match(/[0-9]{12}/gm)?.length: {
+			presenceData.details = `Browsing through ideas about: ${ideasHubPage?.textContent}`;
+			presenceData.state = Array.from(
+				document.querySelectorAll('[data-test-id="breadcrumb"]') || []
+			)
+				.map(x => x?.textContent)
+				.join(" => ");
+			presenceData.buttons = [{ label: "Browse Through Ideas", url: href }];
+			break;
+		}
+		case pathname.includes("/videos/"): {
+			presenceData.details = "Browsing through videos";
+			break;
+		}
+		case pathname === "/": {
+			presenceData.details = "Viewing the homepage";
+			break;
+		}
+		default: {
+			presenceData.details = "Viewing an unknown page";
+		}
+	}
+
+	if (!buttons && presenceData.buttons) delete presenceData.buttons;
+	if (presenceData.details) presence.setActivity(presenceData);
 });

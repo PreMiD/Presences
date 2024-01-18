@@ -4,6 +4,12 @@
 		"name": "Bas950",
 		"id": "241278257335500811"
 	},
+	"contributors": [
+		{
+			"name": "Dark_Ville",
+			"id": "638080361179512853"
+		}
+	],
 	"service": "Pinterest",
 	"description": {
 		"en": "Discover recipes, home ideas, style inspiration and other ideas to try.",
@@ -12,12 +18,20 @@
 	},
 	"url": "www.pinterest.com",
 	"regExp": "([a-z0-9-]+[.])*pinterest([.][a-z]+)+[/]",
-	"version": "1.3.19",
+	"version": "1.4.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Pinterest/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Pinterest/assets/thumbnail.jpg",
 	"color": "#cc2127",
 	"category": "other",
 	"tags": [
 		"pinterest"
+	],
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
 	]
 }
