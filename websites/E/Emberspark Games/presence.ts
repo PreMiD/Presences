@@ -2,9 +2,9 @@ const presence = new Presence({ clientId: "1196469492310618142" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Icon = "https://i.imgur.com/w5E2gIj.png",
-	DesolationIcon = "https://i.imgur.com/xLRd3Aa.png",
-	ConsumerCatalog = "https://i.imgur.com/FxjlP2Z.png",
+	Icon = "https://cdn.rcd.gg/PreMiD/websites/E/Emberspark%20Games/assets/logo.png",
+	DesolationIcon = "https://cdn.rcd.gg/PreMiD/websites/E/Emberspark%20Games/assets/0.png",
+	ConsumerCatalog = "https://cdn.rcd.gg/PreMiD/websites/E/Emberspark%20Games/assets/1.png",
 }
 
 presence.on("UpdateData", async () => {
