@@ -7,7 +7,7 @@ presence.on("UpdateData", () => {
 	const { pathname } = window.location,
 		presenceData: PresenceData = {
 			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/P/Puray%20Animes/assets/logo.png",
+				"https://cdn.rcd.gg/PreMiD/websites/A/Anim/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 	if (document.querySelector("input[id^=headlessui]"))
