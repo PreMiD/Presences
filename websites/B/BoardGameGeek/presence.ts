@@ -7,8 +7,8 @@ let oldPath = document.location.pathname,
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/KxdUXPF.png",
-	RatingIcon = "https://i.imgur.com/hxfFQ0h.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/B/BoardGameGeek/assets/logo.png",
+	RatingIcon = "https://cdn.rcd.gg/PreMiD/websites/B/BoardGameGeek/assets/0.png",
 }
 
 presence.on("UpdateData", async () => {
