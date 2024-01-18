@@ -1,16 +1,16 @@
 {
 	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
-		"name": "Luscarvalho",
-		"id": "458776046184169473"
+		"name": "nesi",
+		"id": "476522405725077519"
 	},
-	"service": "Puray Animes",
+	"service": "Anim",
 	"description": {
-		"en": "Puray Animes is a site to watch anime without ads.",
-		"pt_BR": "Puray Animes é um site para ver animes sem anúncios."
+		"en": "Anim is a site to watch anime without ads.",
+		"pt_BR": "Anim Animes é um site para ver animes sem anúncios."
 	},
-	"url": "puray.moe",
-	"version": "1.1.7",
+	"url": "anim.wtf",
+	"version": "1.0.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Puray%20Animes/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Puray%20Animes/assets/thumbnail.png",
 	"color": "#0e0e12",
