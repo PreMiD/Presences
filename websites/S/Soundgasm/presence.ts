@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = user;
 					presenceData.buttons = [
 						{
-							label: "Listen along",
+							label: "Listen",
 							url: `https://soundgasm.net${data.join("/")}`,
 						},
 						{
