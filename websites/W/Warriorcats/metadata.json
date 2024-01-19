@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "202740603790819328",
+		"name": "aimslut"
+	},
+	"service": "Warriorcats",
+	"description": {
+		"en": "meow"
+	},
+	"url": "https://www.warriorcats.de/",
+	"version": "1.0.0",
+	"logo": "https://www.warriorcats.de/wp-content/uploads/9783407759085-web.jpg",
+	"thumbnail": "https://www.warriorcats.de/wp-content/uploads/9783407759085-web.jpg",
+	"color": "#ffffff",
+	"category": "other",
+	"tags": [
+		"anime"
+	]
+}
