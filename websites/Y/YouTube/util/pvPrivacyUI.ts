@@ -116,12 +116,12 @@ export function pvPrivacyUI(
 				localStorage.setItem("pmdPrivacyEnabled", "false");
 			}
 
-			const svgEnabled = document.querySelector(
+			const svgEnabled = document.querySelector<HTMLElement>(
 					"#pmdPrivacyEnabled"
-				) as HTMLElement,
-				svgDisabled = document.querySelector(
+				),
+				svgDisabled = document.querySelector<HTMLElement>(
 					"#pmdPrivacyDisabled"
-				) as HTMLElement;
+				);
 			if (perVideoPrivacy) {
 				svgEnabled.style.display = "inline-block";
 				svgDisabled.style.display = "none";
