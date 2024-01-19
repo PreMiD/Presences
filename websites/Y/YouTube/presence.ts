@@ -188,16 +188,21 @@ presence.on("UpdateData", async () => {
 
 		let perVideoPrivacy = privacy;
 		if (resolver === youtubeResolver) {
-			privacyButtonShown
-				? (perVideoPrivacy = pvPrivacyUI(
-						privacy,
-						new URLSearchParams(search).get("v"),
-						privacyTtl
-				  ))
-				: document.querySelector("#pmdEnablePrivacy")
-				? (document.querySelector("#pmdEnablePrivacy").remove(),
-				  document.querySelector("#pmdEnablePrivacyTooltip").remove())
-				: "";
+			if (privacyButtonShown) {
+				perVideoPrivacy = pvPrivacyUI(
+					privacy,
+					new URLSearchParams(search).get("v"),
+					privacyTtl
+				);
+			} else {
+				const enablePrivacyElement =
+					document.querySelector("#pmdEnablePrivacy");
+
+				if (enablePrivacyElement) {
+					enablePrivacyElement.remove();
+					document.querySelector("#pmdEnablePrivacyTooltip").remove();
+				}
+			}
 		}
 
 		// Update title to indicate when an ad is being played

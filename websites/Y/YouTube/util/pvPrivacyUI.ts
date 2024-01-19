@@ -116,9 +116,8 @@ export function pvPrivacyUI(
 				localStorage.setItem("pmdPrivacyEnabled", "false");
 			}
 
-			const svgEnabled = document.querySelector<HTMLElement>(
-					"#pmdPrivacyEnabled"
-				),
+			const svgEnabled =
+					document.querySelector<HTMLElement>("#pmdPrivacyEnabled"),
 				svgDisabled = document.querySelector<HTMLElement>(
 					"#pmdPrivacyDisabled"
 				);
