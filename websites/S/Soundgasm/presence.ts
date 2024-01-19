@@ -27,12 +27,10 @@ presence.on("UpdateData", async () => {
 		}
 		case "/signup": {
 			presenceData.details = "Creating an account";
-
 			break;
 		}
 		case "/login": {
 			presenceData.details = "Logging in";
-
 			break;
 		}
 		default:
@@ -50,7 +48,7 @@ presence.on("UpdateData", async () => {
 							url: `https://soundgasm.net${data.join("/")}`,
 						},
 						{
-							label: `${user}'s audios`,
+							label: `View ${user}'s Audios`,
 							url: `https://soundgasm.net${data.slice(0, -1).join("/")}`,
 						},
 					];
@@ -70,7 +68,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = `Browsing ${user}'s audios`;
 					presenceData.buttons = [
 						{
-							label: `${user}'s audios`,
+							label: `View ${user}'s Audios`,
 							url: `https://soundgasm.net${data.join("/")}`,
 						},
 					];
