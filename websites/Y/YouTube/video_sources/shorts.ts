@@ -5,9 +5,12 @@ function isActive(): boolean {
 }
 
 function getTitle(): string {
-	return document
-		.querySelector('[class="ytp-title-link yt-uix-sessionlink"]')
-		?.textContent.trim();
+	return (
+		getShortsElement()
+			?.closest("ytd-reel-player-header-renderer")
+			.querySelector(".title")
+			?.textContent.trim() || "Loading..."
+	);
 }
 
 function getShortsElement(): HTMLElement {
@@ -27,6 +30,7 @@ function getShortsElement(): HTMLElement {
 
 function getUploader(): string {
 	const closest = getShortsElement();
+	if (!closest?.textContent) return "";
 	return `${closest
 		?.querySelector("a")
 		?.getAttribute("href")
