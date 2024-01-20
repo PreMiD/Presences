@@ -70,10 +70,11 @@ presence.on("UpdateData", async () => {
 				case document.querySelector<HTMLMetaElement>('[property="og:type"]')
 					?.content === "profile": {
 					presenceData.details = `Viewing user: ${
-						document.querySelector(".vfPi2").textContent
+						document.querySelector("header h1").textContent
 					}`;
-					presenceData.state =
-						document.querySelector(".MLzKD.PqK1Y")?.textContent; // Tab;
+					presenceData.state = [
+						...document.querySelectorAll("header + div a"),
+					].find(e => e.classList.length > 1)?.textContent;
 					presenceData.buttons = [{ label: "View Profile", url: href }];
 					break;
 				}
