@@ -6,15 +6,16 @@
 	},
 	"service": "Warriorcats",
 	"description": {
-		"en": "meow"
+		"en": "Discover the world of the Warrior Cats and learn everything about the fantasy books!",
+		"de": "Entdecke die Welt der Warrior Cats und erfahre alles über die Fantasy-Bücher!"
 	},
-	"url": "warriorcats.de",
+	"url": "www.warriorcats.de",
 	"version": "1.0.0",
-	"logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Warrior_Cats_logo.svg/2560px-Warrior_Cats_logo.svg.png",
+	"logo": "https://i.imgur.com/Ij2BuGr.jpg",
 	"thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Warrior_Cats_logo.svg/2560px-Warrior_Cats_logo.svg.png",
 	"color": "#ffffff",
 	"category": "other",
 	"tags": [
-		"anime"
+		"warriorcats"
 	]
 }
