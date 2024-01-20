@@ -71,16 +71,15 @@ presence.on("UpdateData", async () => {
 
 	if (video) {
 		const resolver = [
-			youtubeEmbedResolver,
-			youtubeShortsResolver,
-			youtubeOldResolver,
-			youtubeTVResolver,
-			youtubeResolver,
-			youtubeMoviesResolver,
-			nullResolver,
-		].find(resolver => resolver.isActive());
-
-		const title = resolver.getTitle(),
+				youtubeEmbedResolver,
+				youtubeShortsResolver,
+				youtubeOldResolver,
+				youtubeTVResolver,
+				youtubeResolver,
+				youtubeMoviesResolver,
+				nullResolver,
+			].find(resolver => resolver.isActive()),
+			title = resolver.getTitle(),
 			uploaderName = resolver.getUploader();
 
 		let pfp: string;
