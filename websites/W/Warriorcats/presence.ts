@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-async function getPostNumber() {
+function getPostNumber() {
 	return document
 		.querySelector("article")
 		.getAttribute("id")
@@ -15,13 +15,11 @@ presence.on("UpdateData", async () => {
 		details: "Stöbert auf der Warrior Cats Seite",
 		largeImageKey: "https://i.imgur.com/Ij2BuGr.jpg",
 		startTimestamp: browsingTimestamp,
-		buttons: [{ label: "Current Page", url: document.location.href }],
 	};
 
 	switch (document.location.pathname) {
 		case "/": {
-			delete presenceData.buttons;
-			presenceData.details = "Auf der Startseite";
+			presenceData.details = "auf der Startseite";
 			break;
 		}
 		case "/beutehaufen-uebersicht/": {
@@ -30,62 +28,83 @@ presence.on("UpdateData", async () => {
 		}
 		case "/nachrichten-vom-baumgeviert/": {
 			presenceData.details = "lesen der Nachrichten";
-
 			break;
 		}
 		case "/nutzerkonto/": {
-			delete presenceData.buttons;
 			presenceData.details = "im Nutzerkonto";
 			break;
 		}
 		case "/dein-clanlager/": {
-			delete presenceData.buttons;
 			presenceData.details = "im  Clan Camp";
 			break;
 		}
 		case "/deine-clankatze/": {
-			delete presenceData.buttons;
 			presenceData.details = "mit der eigenen Katze";
 			break;
 		}
 		case "/graphic-novel/": {
 			presenceData.details = "in den Graphic Novels";
+			presenceData.buttons = [
+				{
+					label: "Buch ansehen",
+					url: document.location.href,
+				},
+			];
 			break;
 		}
 		case "/alle-baende/": {
-			presenceData.details = "Liste aller Bände";
+			presenceData.details = "in der Liste aller Bände";
 			break;
 		}
 		case "/erin-hunter/": {
-			presenceData.details = "Erin Hunter Seite";
-
+			presenceData.details = "auf der Erin Hunter Seite";
 			break;
 		}
 		case "/welt-der-warrior-cats/": {
-			presenceData.details = "Welt der Warrior Cats";
+			presenceData.details = "betrachtet die Welt";
 			break;
 		}
 		case "/zeitstrahl/": {
-			presenceData.details = "Lore der Warrior Cats";
+			presenceData.details = "die Lore der Warrior Cats";
 			break;
 		}
 		case "/wiki/": {
-			presenceData.details = "Stoebert im Wiki";
+			presenceData.details = "im Wiki lesen";
 			break;
 		}
-		default:
-			{
-				presenceData.details = "unbekannte Seite";
-			}
-
-			if (document.location.pathname.startsWith("/staffel-")) {
-				presenceData.details = `Staffel ${
-					document.location.pathname.split("/")[1].split("-")[1]
-				}`;
-			}
+		default: {
+			presenceData.details = "unbekannte Seite";
+		}
 	}
 
-	async function getStaffelName(postNumber: string) {
+	if (
+		document.location.pathname.startsWith("/beute/staffel-") ||
+		document.location.pathname.startsWith("/beute/")
+	) {
+		const postNumber = getPostNumber();
+
+		presenceData.state = `Viewing ${getBuchName(postNumber)}`;
+		presenceData.details = getStaffelName(postNumber);
+		presenceData.buttons = [
+			{
+				label: "Buch ansehen",
+				url: document.location.href,
+			},
+		];
+		presenceData.largeImageKey = getBuchImage(postNumber);
+	} else if (document.location.pathname.startsWith("/staffel-")) {
+		presenceData.buttons = [
+			{
+				label: "Staffel ansehen",
+				url: document.location.href,
+			},
+		];
+		presenceData.details = `Staffel ${
+			document.location.pathname.split("/")[1].split("-")[1]
+		}`;
+	}
+
+	function getStaffelName(postNumber: string) {
 		const staffelName = document.querySelector(
 				`#post-${postNumber} > div > div.entry-content > div > div.wc-biblio > div.wc-staffel`
 			).textContent,
@@ -96,39 +115,25 @@ presence.on("UpdateData", async () => {
 					document.location.pathname.split("/")[2].split("-")[1].toUpperCase(),
 					""
 				);
+		console.log(result3);
 		return result3.replace(/[^a-zA-Z ]/g, "").trim();
 	}
 
-	async function getBuchName(postNumber: string) {
-		let buchName = document.querySelector(
-			`#post-${postNumber} > div > div.entry-content > div > div.wc-biblio > div.wc-band`
-		).textContent;
-		// remove everything before :
-		buchName = buchName.replace(/.*:/, "");
-		return buchName;
+	function getBuchName(postNumber: string) {
+		return document
+			.querySelector(
+				`#post-${postNumber} > div > div.entry-content > div > div.wc-biblio > div.wc-band`
+			)
+			.textContent.replace(/.*:/, "");
 	}
 
-	async function getBuchImage(postNumber: string) {
-		const buchImage = document
+	function getBuchImage(postNumber: string) {
+		return document
 			.querySelector(
 				`#post-${postNumber} > div > div.entry-content > div > div.wc-article-thumbnail > a > img`
 			)
 			.getAttribute("src");
-		return buchImage;
 	}
 
-	if (
-		document.location.pathname.startsWith("/beute/staffel-") ||
-		document.location.pathname.startsWith("/beute/")
-	) {
-		const postNumber = await getPostNumber(),
-			staffelName = await getStaffelName(postNumber),
-			buchName = await getBuchName(postNumber),
-			buchImage = await getBuchImage(postNumber);
-
-		presenceData.state = `Viewing ${buchName}`;
-		presenceData.details = `${staffelName}`;
-		presenceData.largeImageKey = buchImage;
-	}
 	presence.setActivity(presenceData);
 });
