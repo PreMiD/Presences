@@ -15,6 +15,7 @@ import {
 	getSetting,
 	checkStringLanguage,
 } from "./util";
+import { pvPrivacyUI } from "./util/pvPrivacyUI";
 
 const browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -40,6 +41,8 @@ presence.on("UpdateData", async () => {
 	const [
 			newLang,
 			privacy,
+			privacyTtl,
+			privacyButtonShown,
 			time,
 			vidDetail,
 			vidState,
@@ -49,6 +52,8 @@ presence.on("UpdateData", async () => {
 		] = [
 			getSetting<string>("lang", "en"),
 			getSetting<boolean>("privacy", true),
+			getSetting<number>("privacy-ttl"),
+			getSetting<boolean>("privacy-shown", true),
 			getSetting<boolean>("time", true),
 			getSetting<string>("vidDetail", "%title%"),
 			getSetting<string>("vidState", "%uploader%"),
@@ -76,7 +81,6 @@ presence.on("UpdateData", async () => {
 			youtubeMoviesResolver,
 			nullResolver,
 		].find(resolver => resolver.isActive());
-
 		if (resolver === youtubeShortsResolver)
 			await cacheShortData(hostname, pathname.split("/shorts/")[1]);
 
@@ -182,11 +186,31 @@ presence.on("UpdateData", async () => {
 			}
 		}
 
+		let perVideoPrivacy = privacy;
+		if (resolver === youtubeResolver) {
+			if (privacyButtonShown) {
+				perVideoPrivacy = pvPrivacyUI(
+					privacy,
+					new URLSearchParams(search).get("v"),
+					privacyTtl
+				);
+			} else {
+				const enablePrivacyElement =
+					document.querySelector("#pmdEnablePrivacy");
+
+				if (enablePrivacyElement) {
+					enablePrivacyElement.remove();
+					document.querySelector("#pmdEnablePrivacyTooltip").remove();
+				}
+			}
+		}
+
 		// Update title to indicate when an ad is being played
 		if (document.querySelector(".ytp-ad-player-overlay")) {
 			presenceData.details = strings.ad;
 			delete presenceData.state;
-		} else if (privacy) {
+		} else if (perVideoPrivacy) {
+			//defaults to privacy setting, but allows it to be overwritten
 			if (live) presenceData.details = strings.watchLive;
 			else presenceData.details = strings.watchVid;
 

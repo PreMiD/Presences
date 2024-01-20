@@ -16,6 +16,10 @@
 		{
 			"name": "theusaf",
 			"id": "193714715631812608"
+		},
+		{
+			"name": "veryCrunchy",
+			"id": "576097150359044106"
 		}
 	],
 	"service": "YouTube",
@@ -71,7 +75,7 @@
 		"www.youtube.com",
 		"studio.youtube.com"
 	],
-	"version": "5.7.1",
+	"version": "5.8.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/thumbnail.jpg",
 	"color": "#E40813",
@@ -90,6 +94,27 @@
 			"title": "Privacy Mode",
 			"icon": "fad fa-user-secret",
 			"value": false
+		},
+		{
+			"id": "privacy-shown",
+			"title": "Show Privacy Button",
+			"icon": "fad fa-eye-low-vision",
+			"value": true
+		},
+		{
+			"id": "privacy-ttl",
+			"if": {
+				"privacy-shown": true
+			},
+			"title": "Time to Expire",
+			"icon": "fad fa-eye",
+			"value": 0,
+			"values": [
+				"5 hours",
+				"12 hours",
+				"one day",
+				"one week"
+			]
 		},
 		{
 			"id": "time",

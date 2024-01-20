@@ -68,6 +68,8 @@ const stringMap = {
 	watchVideoButton: "general.buttonWatchVideo",
 	viewChannelButton: "general.buttonViewChannel",
 	videos: "youtube.videos",
+	perVideoPrivacyToolTip1: "youtube.perVideoPrivacy.tooltip.1",
+	perVideoPrivacyToolTip2: "youtube.perVideoPrivacy.tooltip.2",
 };
 
 export let strings: Awaited<
