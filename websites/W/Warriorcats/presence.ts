@@ -115,7 +115,6 @@ presence.on("UpdateData", async () => {
 					document.location.pathname.split("/")[2].split("-")[1].toUpperCase(),
 					""
 				);
-		console.log(result3);
 		return result3.replace(/[^a-zA-Z ]/g, "").trim();
 	}
 
