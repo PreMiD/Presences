@@ -22,10 +22,17 @@ function getUploader(): string {
 	);
 }
 
+export function getChannelURL(): string {
+	return document.querySelector<HTMLLinkElement>(
+		"#top-row ytd-video-owner-renderer > a"
+	)?.href;
+}
+
 const resolver: Resolver = {
 	isActive,
 	getTitle,
 	getUploader,
+	getChannelURL,
 };
 
 export default resolver;

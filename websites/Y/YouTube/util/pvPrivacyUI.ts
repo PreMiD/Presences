@@ -23,7 +23,7 @@ export function pvPrivacyUI(
 	videoId: string,
 	privacyTtl: number
 ): boolean {
-	let perVideoPrivacy = false;
+	let perVideoPrivacy = true;
 	const isVideoInArray = (videoId: string, array: VPArray) => {
 		return array.some(entry => entry.videoId === videoId);
 	};
