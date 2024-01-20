@@ -43,9 +43,9 @@
 		"beta.premid.app",
 		"status.premid.app"
 	],
-	"version": "3.1.10",
+	"version": "3.1.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PreMiD/assets/logo.png",
-	"thumbnail": "https://cdn.verycrunchy.dev/premid/thumbnail_1001x563.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PreMiD/assets/thumbnail.png",
 	"color": "#7289DA",
 	"category": "other",
 	"tags": [
