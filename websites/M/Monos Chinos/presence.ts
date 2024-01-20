@@ -19,7 +19,7 @@ const presence = new Presence({
 		playing: "general.playing",
 		paused: "general.paused",
 		browsing: "general.browsing",
-		episode: "presence.media.info.episode",
+		episode: "general.viewEpisode",
 	});
 let video: VideoContext = null,
 	lastVideoOption = 1;
@@ -95,7 +95,8 @@ presence.on("UpdateData", async () => {
 	else if (action.id === "episode") {
 		const detailsMatch = document
 			.querySelector(".heromain_h1")
-			.textContent.match(/^([^\d]+).* (\d+).+$/);
+			.textContent.replace(/- /gm, "")
+			.match(/^([^\d]+)(\d+)/);
 
 		if (!detailsMatch) return presence.setActivity(browsingData);
 
@@ -103,7 +104,7 @@ presence.on("UpdateData", async () => {
 
 		Object.assign(presenceData, {
 			details: title,
-			state: (await strings).episode.replace("{0}", episode),
+			state: `${(await strings).episode} ${episode}`,
 			smallImageKey: "browsing",
 			smallImageText: "viendo el capitulo",
 		});
