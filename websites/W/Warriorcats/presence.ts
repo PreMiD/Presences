@@ -12,12 +12,12 @@ function getPostNumber() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		details: "Stöbert auf der Warrior Cats Seite",
-		largeImageKey: "https://i.imgur.com/Ij2BuGr.jpg",
-		startTimestamp: browsingTimestamp,
-	};
-
-	switch (document.location.pathname) {
+			details: "Stöbert auf der Warrior Cats Seite",
+			largeImageKey: "https://i.imgur.com/Ij2BuGr.jpg",
+			startTimestamp: browsingTimestamp,
+		},
+		{ href, pathname } = document.location;
+	switch (pathname) {
 		case "/": {
 			presenceData.details = "auf der Startseite";
 			break;
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Buch ansehen",
-					url: document.location.href,
+					url: href,
 				},
 			];
 			break;
@@ -78,8 +78,8 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (
-		document.location.pathname.startsWith("/beute/staffel-") ||
-		document.location.pathname.startsWith("/beute/")
+		pathname.startsWith("/beute/staffel-") ||
+		pathname.startsWith("/beute/")
 	) {
 		const postNumber = getPostNumber();
 
@@ -88,20 +88,18 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Buch ansehen",
-				url: document.location.href,
+				url: href,
 			},
 		];
 		presenceData.largeImageKey = getBuchImage(postNumber);
-	} else if (document.location.pathname.startsWith("/staffel-")) {
+	} else if (pathname.startsWith("/staffel-")) {
 		presenceData.buttons = [
 			{
 				label: "Staffel ansehen",
-				url: document.location.href,
+				url: href,
 			},
 		];
-		presenceData.details = `Staffel ${
-			document.location.pathname.split("/")[1].split("-")[1]
-		}`;
+		presenceData.details = `Staffel ${pathname.split("/")[1].split("-")[1]}`;
 	}
 
 	function getStaffelName(postNumber: string) {
@@ -111,10 +109,7 @@ presence.on("UpdateData", async () => {
 			result3 = staffelName
 				.replace(/^Warrior Cats \| /, "")
 				.replace(/Staffel /, "")
-				.replace(
-					document.location.pathname.split("/")[2].split("-")[1].toUpperCase(),
-					""
-				);
+				.replace(pathname.split("/")[2].split("-")[1].toUpperCase(), "");
 		return result3.replace(/[^a-zA-Z ]/g, "").trim();
 	}
 
