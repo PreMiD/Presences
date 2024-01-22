@@ -1,8 +1,5 @@
 import youtubeOldResolver from "./video_sources/old";
-import youtubeShortsResolver, {
-	cacheShortData,
-	getCache as getShortsCache,
-} from "./video_sources/shorts";
+import youtubeShortsResolver from "./video_sources/shorts";
 import youtubeEmbedResolver from "./video_sources/embed";
 import youtubeMoviesResolver from "./video_sources/movies";
 import youtubeTVResolver from "./video_sources/tv";
@@ -35,6 +32,7 @@ const nullResolver: Resolver = {
 	isActive: () => true,
 	getTitle: () => document.title,
 	getUploader: () => "",
+	getChannelURL: () => "",
 };
 
 presence.on("UpdateData", async () => {
@@ -73,18 +71,15 @@ presence.on("UpdateData", async () => {
 
 	if (video) {
 		const resolver = [
-			youtubeEmbedResolver,
-			youtubeShortsResolver,
-			youtubeOldResolver,
-			youtubeTVResolver,
-			youtubeResolver,
-			youtubeMoviesResolver,
-			nullResolver,
-		].find(resolver => resolver.isActive());
-		if (resolver === youtubeShortsResolver)
-			await cacheShortData(hostname, pathname.split("/shorts/")[1]);
-
-		const title = resolver.getTitle(),
+				youtubeEmbedResolver,
+				youtubeShortsResolver,
+				youtubeOldResolver,
+				youtubeTVResolver,
+				youtubeResolver,
+				youtubeMoviesResolver,
+				nullResolver,
+			].find(resolver => resolver.isActive()),
+			title = resolver.getTitle(),
 			uploaderName = resolver.getUploader();
 
 		let pfp: string;
@@ -228,11 +223,7 @@ presence.on("UpdateData", async () => {
 				},
 				{
 					label: strings.viewChannelButton,
-					url:
-						getShortsCache()?.channelURL ??
-						document.querySelector<HTMLLinkElement>(
-							"#top-row ytd-video-owner-renderer > a"
-						)?.href,
+					url: resolver.getChannelURL(),
 				},
 			];
 		}

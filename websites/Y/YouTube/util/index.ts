@@ -16,6 +16,7 @@ export interface Resolver {
 	isActive(): boolean;
 	getTitle(): string;
 	getUploader(): string;
+	getChannelURL(): string;
 }
 
 const stringMap = {
