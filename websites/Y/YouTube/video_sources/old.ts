@@ -1,4 +1,5 @@
 import { Resolver } from "../util";
+import { getChannelURL } from "./default";
 
 function isActive(): boolean {
 	return (
@@ -19,6 +20,7 @@ const resolver: Resolver = {
 	isActive,
 	getTitle,
 	getUploader,
+	getChannelURL,
 };
 
 export default resolver;
