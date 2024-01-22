@@ -23,5 +23,11 @@
 		"music",
 		"recording",
 		"nsfw"
+	],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		}
 	]
 }

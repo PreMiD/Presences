@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		newLang = await presence.getSetting<string>("ID").catch(() => "en");
+		newLang = await presence.getSetting<string>("lang").catch(() => "en");
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
