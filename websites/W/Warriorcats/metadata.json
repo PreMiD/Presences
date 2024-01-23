@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "202740603790819328",
+		"name": "aimslut"
+	},
+	"service": "Warriorcats",
+	"description": {
+		"en": "Discover the world of the Warrior Cats and learn everything about the fantasy books!",
+		"de": "Entdecke die Welt der Warrior Cats und erfahre alles über die Fantasy-Bücher!"
+	},
+	"url": "www.warriorcats.de",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Warriorcats/assets/logo.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Warriorcats/assets/thumbnail.png",
+	"color": "#ffffff",
+	"category": "other",
+	"tags": [
+		"warriorcats"
+	]
+}

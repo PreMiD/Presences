@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "205984221859151873",
+		"name": "joerkig"
+	},
+	"service": "Secret Hitler",
+	"description": {
+		"en": "A web adaptation of the social deduction board game Secret Hitler.  Always free and no ads."
+	},
+	"url": "secrethitler.io",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/WA854TR.png",
+	"thumbnail": "https://i.imgur.com/bG2MFhQ.png",
+	"color": "#c36563",
+	"category": "games",
+	"tags": [
+		"deduction",
+		"social"
+	],	
+	"settings": [
+		{
+			"id": "time",
+			"title": "Show timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}
