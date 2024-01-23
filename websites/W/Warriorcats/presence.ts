@@ -13,7 +13,8 @@ function getPostNumber() {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Stöbert auf der Warrior Cats Seite",
-			largeImageKey: "https://i.imgur.com/Ij2BuGr.jpg",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Warriorcats/assets/logo.jpg",
 			startTimestamp: browsingTimestamp,
 		},
 		{ href, pathname } = document.location;
