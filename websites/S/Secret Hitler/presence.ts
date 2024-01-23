@@ -4,9 +4,9 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/WA854TR.png",
-	Private = "https://i.imgur.com/AtfoMFl.png",
-	Unlisted = "https://i.imgur.com/KTTK6YC.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Secret%20Hitler/assets/logo.png",
+	Private = "https://cdn.rcd.gg/PreMiD/websites/S/Secret%20Hitler/assets/0.png",
+	Unlisted = "https://cdn.rcd.gg/PreMiD/websites/S/Secret%20Hitler/assets/1.png",
 }
 
 presence.on("UpdateData", async () => {
