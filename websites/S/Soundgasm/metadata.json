@@ -27,7 +27,7 @@
 	"settings": [
 		{
 			"id": "lang",
-			"multiLanguage": true
+			"multiLanguage": "youtube"
 		}
 	]
 }
