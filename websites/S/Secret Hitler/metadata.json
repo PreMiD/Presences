@@ -9,15 +9,15 @@
 		"en": "A web adaptation of the social deduction board game Secret Hitler.  Always free and no ads."
 	},
 	"url": "secrethitler.io",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/WA854TR.png",
-	"thumbnail": "https://i.imgur.com/bG2MFhQ.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Secret%20Hitler/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Secret%20Hitler/assets/thumbnail.png",
 	"color": "#c36563",
 	"category": "games",
 	"tags": [
 		"deduction",
 		"social"
-	],	
+	],
 	"settings": [
 		{
 			"id": "time",
