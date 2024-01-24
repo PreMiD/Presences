@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (!conditions.isConnecting && conditions.isLive) {
-		if (private) presenceData.details = (await strings).listening;
+		if (private) presenceData.details = strings.listening;
 		else {
 			const title = document.querySelector("#playerTitle").textContent,
 				author = document.querySelector("#playerSubtitle").textContent,
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
 			if (conditions.isStopped) {
 				delete presenceData.startTimestamp;
 				presenceData.smallImageKey = Assets.Pause;
-				presenceData.smallImageText = (await strings).pause;
+				presenceData.smallImageText = strings.pause;
 			} else {
 				if (!private && timestamps) {
 					const timeElapsed = presence.timestampFromFormat(
@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
 						Math.floor(Date.now() / 1000) - timeElapsed;
 				}
 				presenceData.smallImageKey = Assets.Live;
-				presenceData.smallImageText = (await strings).live;
+				presenceData.smallImageText = strings.live;
 			}
 		} else {
 			if (!private && timestamps) {
@@ -102,16 +102,16 @@ presence.on("UpdateData", async () => {
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
 				presenceData.smallImageKey = Assets.Pause;
-				presenceData.smallImageText = (await strings).pause;
+				presenceData.smallImageText = strings.pause;
 			} else if (conditions.isStopped) {
 				presenceData.smallImageKey = Assets.Stop;
-				presenceData.smallImageText = (await strings).pause;
+				presenceData.smallImageText = strings.pause;
 			} else {
 				presenceData.smallImageKey = Assets.Play;
-				presenceData.smallImageText = (await strings).play;
+				presenceData.smallImageText = strings.play;
 			}
 		}
-	} else presenceData.details = (await strings).browse;
+	} else presenceData.details = strings.browse;
 
 	presence.setActivity(presenceData);
 });
