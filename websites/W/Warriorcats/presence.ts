@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 		{ href, pathname } = document.location;
 	switch (pathname) {
 		case "/": {
-			presenceData.details = "auf der Startseite";
+			presenceData.details = "Auf der Startseite";
 			break;
 		}
 		case "/beutehaufen-uebersicht/": {
@@ -28,23 +28,23 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/nachrichten-vom-baumgeviert/": {
-			presenceData.details = "lesen der Nachrichten";
+			presenceData.details = "Lesen der Nachrichten";
 			break;
 		}
 		case "/nutzerkonto/": {
-			presenceData.details = "im Nutzerkonto";
+			presenceData.details = "Im Nutzerkonto";
 			break;
 		}
 		case "/dein-clanlager/": {
-			presenceData.details = "im  Clan Camp";
+			presenceData.details = "Im  Clan Camp";
 			break;
 		}
 		case "/deine-clankatze/": {
-			presenceData.details = "mit der eigenen Katze";
+			presenceData.details = "Bei der eigenen Katze";
 			break;
 		}
 		case "/graphic-novel/": {
-			presenceData.details = "in den Graphic Novels";
+			presenceData.details = "In den Graphic Novels";
 			presenceData.buttons = [
 				{
 					label: "Buch ansehen",
@@ -54,27 +54,27 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/alle-baende/": {
-			presenceData.details = "in der Liste aller Bände";
+			presenceData.details = "In der Liste aller Bände";
 			break;
 		}
 		case "/erin-hunter/": {
-			presenceData.details = "auf der Erin Hunter Seite";
+			presenceData.details = "Auf der Erin Hunter Seite";
 			break;
 		}
 		case "/welt-der-warrior-cats/": {
-			presenceData.details = "betrachtet die Welt";
+			presenceData.details = "Betrachtet die Welt";
 			break;
 		}
 		case "/zeitstrahl/": {
-			presenceData.details = "die Lore der Warrior Cats";
+			presenceData.details = "Die Lore der Warrior Cats";
 			break;
 		}
 		case "/wiki/": {
-			presenceData.details = "im Wiki lesen";
+			presenceData.details = "Im Wiki lesen";
 			break;
 		}
 		default: {
-			presenceData.details = "unbekannte Seite";
+			presenceData.details = "Unbekannte Seite";
 		}
 	}
 
