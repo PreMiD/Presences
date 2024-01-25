@@ -27,14 +27,13 @@ async function getStrings() {
 }
 
 // Асинхронно получаем строковые значения и сохраняем их в переменной
-let strings: Awaited<ReturnType<typeof getStrings>>;
-
-// Объект для хранения данных о видео
-let video: VideoData = {
-	duration: 0,
-	currentTime: 0,
-	paused: true,
-};
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	// Объект для хранения данных о видео
+	video: VideoData = {
+		duration: 0,
+		currentTime: 0,
+		paused: true,
+	};
 
 // Обработчик события "iFrameData", обновляющий данные о видео
 presence.on("iFrameData", (data: VideoData) => {
@@ -45,26 +44,28 @@ presence.on("iFrameData", (data: VideoData) => {
 presence.on("UpdateData", async () => {
 	// Асинхронно получаем настройки пользователя
 	const [privacy, time] = await Promise.all([
-		presence.getSetting<boolean>("privacy"),
-		presence.getSetting<boolean>("time"),
-	]);
-
-	// Объект для хранения данных для Presence
-	const presenceData: PresenceData = {
-		details: "Где-то на сайте",
-		largeImageKey: Assets.Logo,
-		smallImageText: "AniMi Club",
-	};
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("time"),
+		]),
+		// Объект для хранения данных для Presence
+		presenceData: PresenceData = {
+			details: "Где-то на сайте",
+			largeImageKey: Assets.Logo,
+			smallImageText: "AniMi Club",
+		};
 
 	// Если строки не загружены, загружаем их
 	if (!strings) strings = await getStrings();
 
 	// Определяем тип контента
-	const typeContent = document
-		.querySelector("meta[property='og:url']")
-		.getAttribute("content")
-		.split("/")[3];
-	const typeCurrent = typeContent === "anime" ? "аниме" : "манга";
+
+	const typeCurrent =
+		document
+			.querySelector("meta[property='og:url']")
+			.getAttribute("content")
+			.split("/")[3] === "anime"
+			? "аниме"
+			: "манга";
 
 	// Определяем активность в зависимости от текущего URL
 	if (document.location.pathname === "/") {
