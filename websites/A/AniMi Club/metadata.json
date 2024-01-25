@@ -1,0 +1,47 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "546262814424170498",
+		"name": "official_riktik"
+	},
+	"service": "AniMi Club",
+	"description": {
+		"en": "Service for watching anime with extensive functionality.",
+		"ru": "Сервис для просмотра аниме с широким функционалом.",
+		"uk_UA": "Сервіс для перегляду аніме з широким функціоналом."
+	},
+	"url": [
+		"animi.club",
+		"www.animi.club",
+		"dev.animi.club"
+	],
+	"version": "1.0.2",
+	"logo": "https://i.imgur.com/BZtDh0g.png",
+	"thumbnail": "https://i.imgur.com/Anc197L.png",
+	"color": "#e11d48",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"аниме",
+		"animi",
+		"аними",
+		"animiclub",
+		"анимиклаб"
+	],
+	"iframe": true,
+	"iFrameRegExp": ".*",
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Приватный режим",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "time",
+			"title": "Показывать оставшееся время просмотра",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		}
+	]
+}
