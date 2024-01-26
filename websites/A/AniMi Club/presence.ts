@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Logo = "https://i.imgur.com/BZtDh0g.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AniMi%20Club/assets/logo.png",
 }
 
 interface VideoData {
