@@ -49,17 +49,9 @@ presence.on("UpdateData", async () => {
 				author = document.querySelector("#playerSubtitle").textContent,
 				artwork = document.querySelector("#playerArtwork").getAttribute("src");
 
-			if (title) {
-				if (title.length > 128)
-					presenceData.details = `${title.substring(0, 125)}...`;
-				else presenceData.details = title;
-			}
+			if (title) presenceData.details = title;
 
-			if (author) {
-				if (author.length > 128)
-					presenceData.state = `${author.substring(0, 125)}...`;
-				else presenceData.state = author;
-			}
+			if (author) presenceData.state = author;
 
 			if (artwork && cover) presenceData.largeImageKey = artwork;
 		}
