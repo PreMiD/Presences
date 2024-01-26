@@ -84,6 +84,7 @@ export function pvPrivacyUI(
 			parent.appendChild(button);
 			parent.appendChild(tooltip);
 			tooltip.style.opacity = "0";
+			tooltip.style.pointerEvents = "none";
 			tooltip.style.position = "absolute";
 			tooltip.style.padding = "5px";
 			tooltip.style.borderRadius = "5px";
