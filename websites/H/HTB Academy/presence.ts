@@ -8,7 +8,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/H/HackTheBox/assets/logo.png",
+			"https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_fabbd1201be6463ecfda11b3bbcb03de/hack-the-box-for-business.jpg",
 		startTimestamp: browsingTimestamp,
 	};
 
