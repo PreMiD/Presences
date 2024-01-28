@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/H/HackTheBox/assets/logo.png",
 		startTimestamp: browsingTimestamp,
-	};
+	},
 
 	if (pathname === "/" || pathname === "/login")
 		presenceData.details = "Breaching into the Academy";
