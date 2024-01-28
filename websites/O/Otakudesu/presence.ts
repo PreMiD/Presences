@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing anime";
 				presenceData.state = document
 					.querySelector(".jdlrx > h1")
-					.textContent.replace(/Subtitle Indonesia/gi, "");
+					.textContent.replace(/Nonton Anime/gi, "");
 				presenceData.buttons = [
 					{ label: "View anime", url: document.location.href },
 				];
