@@ -3,8 +3,7 @@ const presence = new Presence({
 		clientId: "1200517025383075840",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
-
- path = document.location.pathname;
+	path = document.location.pathname;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -13,37 +12,26 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp,
 	};
 
-	if (
-		path === "/" ||
-		path === "/login"
-	)
+	if (path === "/" || path === "/login")
 		presenceData.details = "Breaching into the Academy";
 	else if (path.includes("/dashboard")) {
 		presenceData.details = "Browsing the dashboard";
-	const persred: HTMLElement = document.querySelector(
-			".red .progress"
-		),
-	 persblue: HTMLElement = document.querySelector(
-			".blue .progress"
-		),
-	 persgrn: HTMLElement = document.querySelector(
-			".green .progress"
-		);
+		const persred: HTMLElement = document.querySelector(".red .progress"),
+			persblue: HTMLElement = document.querySelector(".blue .progress"),
+			persgrn: HTMLElement = document.querySelector(".green .progress");
 		presenceData.state =
 			`Off: ${persred.textContent} ` +
 			`Def: ${persblue.textContent} ` +
 			`Gen: ${persgrn.textContent}`;
 	} else if (path.includes("/exams"))
 		presenceData.details = "Browsing the exams";
-	else if (path.includes("/paths"))
-		presenceData.details = "Browsing paths";
-	else if (path.includes("/modules"))
-		presenceData.details = "Browsing modules";
+	else if (path.includes("/paths")) presenceData.details = "Browsing paths";
+	else if (path.includes("/modules")) presenceData.details = "Browsing modules";
 	else if (path.includes("/section")) {
 		let module: HTMLElement;
 		const iterminal: HTMLElement = document.querySelector(".iterminal");
 		if (iterminal) {
-		 module = document.querySelector(
+			module = document.querySelector(
 				"#layout-wrapper > div.main-content > div > div:nth-child(2) > div > div > h4"
 			);
 		} else {
