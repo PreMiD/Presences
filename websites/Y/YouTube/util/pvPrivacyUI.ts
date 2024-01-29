@@ -35,18 +35,19 @@ export function pvPrivacyUI(
 			const button = document.createElement("div"),
 				tooltip = document.createElement("div"),
 				p1 = document.createElement("p"),
-				p2 = document.createElement("p"),
+				p2 = document.createElement("i"),
 				parent = document.querySelector("#owner");
 
 			button.id = "pmdEnablePrivacy";
 			button.style.marginLeft = "8px";
 			button.style.minWidth = "min-content";
 			button.style.maxWidth = "min-content";
+			button.style.color = "#f9f9f9";
 
 			button.style.backgroundImage =
-				"linear-gradient(to right, #b55fd3, #18b7d2)";
+				"linear-gradient(to right, #d570f9, #1cd8f8)";
 			button.className =
-				"yt-spec-button-shape-next yt-spec-button-shape-next--tonal yt-spec-button-shape-next--mono yt-spec-button-shape-next--size-m yt-spec-button-shape-next--icon-leading";
+				"yt-spec-button-shape-next yt-spec-button-shape-next--size-m yt-spec-button-shape-next--icon-leading";
 			button.addEventListener("click", () => {
 				const videoId = new URLSearchParams(document.location.search).get("v"),
 					ttl = Date.now() + [5, 12, 24, 168][privacyTtl] * 60 * 60 * 1000;
@@ -74,8 +75,8 @@ export function pvPrivacyUI(
 			});
 			p1.textContent = strings.perVideoPrivacyToolTip1;
 			p2.textContent = strings.perVideoPrivacyToolTip2;
-			p2.style.fontStyle = "italic";
 			tooltip.id = "pmdEnablePrivacyTooltip";
+			tooltip.style.userSelect = "none";
 			tooltip.appendChild(p1);
 			tooltip.appendChild(p2);
 			button.innerHTML =
@@ -83,19 +84,20 @@ export function pvPrivacyUI(
 			parent.appendChild(button);
 			parent.appendChild(tooltip);
 			tooltip.style.opacity = "0";
+			tooltip.style.pointerEvents = "none";
 			tooltip.style.position = "absolute";
 			tooltip.style.padding = "5px";
 			tooltip.style.borderRadius = "5px";
 			tooltip.style.top = "-5px";
-			tooltip.style.zIndex = "1";
+			tooltip.style.zIndex = "5";
 			tooltip.style.transition = "opacity 0.3s ease-in-out";
 			tooltip.style.color = "#fff";
 			tooltip.style.background = "#2c2f33";
-			tooltip.style.transitionDelay = "700ms";
+			tooltip.style.transitionDelay = "600ms";
 
 			button.addEventListener("mouseover", function () {
 				tooltip.style.opacity = "1";
-				tooltip.style.top = `${button.offsetTop - tooltip.offsetHeight - 5}px`;
+				tooltip.style.top = `${button.offsetTop - tooltip.offsetHeight - 8}px`;
 				tooltip.style.left = `${
 					button.offsetLeft + button.offsetWidth / 2 - tooltip.offsetWidth / 2
 				}px`;
@@ -104,7 +106,7 @@ export function pvPrivacyUI(
 			button.addEventListener("mouseleave", function () {
 				tooltip.style.opacity = "0";
 				setTimeout(() => {
-					tooltip.style.transitionDelay = "700ms";
+					tooltip.style.transitionDelay = "600ms";
 				});
 			});
 		} else {

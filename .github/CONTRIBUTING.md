@@ -1,7 +1,7 @@
 <div align="center">
     <img src="https://github.com/PreMiD.png?size=2048" width="128px" style="max-width:100%;">
     <h3 style="font-size: 2rem; margin-bottom: 0">Presence Guidelines</h3>
-    <h4 style="margin-top: 0">Revision 3</h4>
+    <h4 style="margin-top: 0">Revision 3.1</h4>
     <br />
 </div>
 
@@ -30,7 +30,7 @@ The general rules of presence development are as follows:
     - For 12+ month old domains: **45,000 unique visitors/day**.
   - The website can't be on a cheap domain like `.xyz`, `.club` and so on.
   - The website itself must have a very good quality, design, etc.
-- Presences should use [common details](https://api.premid.app/v2/langFile/presence/en) (strings starting with "general."). You can achieve this using `multiLanguage` with the provided strings. If your presence requires custom strings, then you shouldn't use `multiLanguage` until the presence gets 1000 users. You can find an example [here](https://docs.premid.app/dev/presence/class#getstringsobject).
+- Presences should use [common details](https://github.com/PreMiD/Localization/blob/17439510645afbc123aaf655e0fa02f8a947fe72/src/Presence/general.json) (strings starting with "general."). You can achieve this using `multiLanguage` with the provided strings. If your presence requires custom strings, then you shouldn't use `multiLanguage` until the presence gets 1000 users. You can find an example [here](https://docs.premid.app/dev/presence/class#getstringsobject).
 - Including the `presence.ts` file, `iframe.ts` file, and `metadata.json` file is mandatory so the result would be what is represented in the following schema:
 
 ```bash
@@ -60,7 +60,7 @@ Each presence has a descriptor file called `metadata.json`, the metadata has a s
 
 ```json
 {
-  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "$schema": "https://schemas.premid.app/metadata/1.9",
   "author": {
     "name": "USER",
     "id": "ID"
@@ -215,10 +215,7 @@ A list of fields and their rules are listed below:
 
 > The code you write **must** be _well-written_ and **must** be _readable_ and all strings must be grammatically correct (grammar errors on websites can be ignored).
 
-> Each presence follows a strict linting ruleset which will be checked during the review process. A couple of recommendations can be seen below.
-> [TypeScript Plugin Recommendations for Strict Type Checking](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules).
-> [ESlint Recommendations](https://eslint.org/docs/rules).
-> [Prettier](https://prettier.io/).
+> Each presence follows a strict linting ruleset which will be checked during the review process. A couple of recommendations can be seen below. [TypeScript Plugin Recommendations for Strict Type Checking](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules). [ESlint Recommendations](https://eslint.org/docs/rules). [Prettier](https://prettier.io/).
 
 Here is a list of rules you must follow when writing your `presence.ts` file:
 
@@ -261,7 +258,7 @@ The most important process of presence development is getting your presence on t
 
 <div>
   <h2 style="font-size: 2rem; margin-bottom: 0;">Presence Reviewers</h2>
-  <a href="https://github.com/Bas950"><img src="https://github.com/Bas950.png?size=2048" width="48px" style="max-width:100%; border-radius: 50%;"/></a> <a href="https://github.com/EncryptedDev"><img src="https://github.com/EncryptedDev.png?size=2048" width="48px" style="max-width:100%; border-radius: 50%;"/></a>
+  <a href="https://github.com/Bas950"><img src="https://github.com/Bas950.png?size=2048" title="Bas950" width="48px" style="max-width:100%; border-radius: 50%;"/></a> <a href="https://github.com/theusaf"><img src="https://github.com/theusaf.png?size=2048" title="theusaf" width="48px" style="max-width:100%; border-radius: 50%;"/></a> <a href="https://github.com/Timeraa"><img src="https://github.com/Timeraa.png?size=2048" title="Timeraa" width="48px" style="max-width:100%; border-radius: 50%;"/></a>
   <br />
 </div>
 
@@ -287,11 +284,11 @@ A few things you should know after opening a pull request:
 
 ## `Checks`
 
-![Example of checks](https://i.imgur.com/vF7QpBH.png)
+![Example of checks](https://i.imgur.com/vzz6axm.png)
 
 Currently, a presence goes through 3 separate stages of checks. All of these checks help the reviewers determine whether your presence is suitable for deployment.
 
-- `DeepScan` is a bot that checks for code quality. If you ever receive errors for new issues, you are **required** to fix them. *Warning: DeepScan doesn't always give you errors. Please look at CodeFactor warnings instead.*
+- `DeepScan` is a bot that checks for code quality. If you ever receive errors for new issues, you are **required** to fix them. _Warning: DeepScan doesn't always give you errors. Please look at CodeFactor warnings instead._
 - `Compile and Lint` checks for code quality. If you ever receive errors for new issues, you are **required** to fix them.
 - `Presence Validator` will scan your `metadata.json` file for any errors (for e.g., missing fields, invalid value types, etc.). If you ever see any new issues, you are also **required** to fix those. Adding a schema field to your `metadata.json` file will allow your text editor (if supported) to show you these errors during development.
 
