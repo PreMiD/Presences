@@ -11,7 +11,7 @@ import {
 	strings,
 	getSetting,
 	checkStringLanguage,
-	getThumbnail
+	getThumbnail,
 } from "./util";
 import { pvPrivacyUI } from "./util/pvPrivacyUI";
 

@@ -145,12 +145,12 @@ export function getSetting<E extends string | boolean | number>(
 	return (cachedSettings[setting] as E) ?? fallback;
 }
 
-
 let generatedId: string, generatedImage: string;
 export async function getThumbnail(videoId: string): Promise<string> {
 	if (generatedId === videoId) return generatedImage;
 	return new Promise(resolve => {
-		const img = new Image(),wh = 320;
+		const img = new Image(),
+			wh = 320;
 		img.crossOrigin = "anonymous";
 		img.src = `https://i3.ytimg.com/vi/${videoId}/mqdefault.jpg`;
 
