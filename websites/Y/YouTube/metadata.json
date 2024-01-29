@@ -10,10 +10,6 @@
 			"id": "241278257335500811"
 		},
 		{
-			"name": "DooMLorD",
-			"id": "465105167751315471"
-		},
-		{
 			"name": "theusaf",
 			"id": "193714715631812608"
 		},
@@ -75,7 +71,7 @@
 		"www.youtube.com",
 		"studio.youtube.com"
 	],
-	"version": "5.8.1",
+	"version": "5.9.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/thumbnail.jpg",
 	"color": "#E40813",
