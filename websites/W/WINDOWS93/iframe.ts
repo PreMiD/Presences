@@ -30,13 +30,13 @@ let minesweeper = {
 	},
 	active = false;
 
-window.onfocus = function () {
+window.addEventListener("focus", function () {
 	active = true;
-};
+});
 
-window.onblur = function () {
+window.addEventListener("blur", function () {
 	active = false;
-};
+});
 
 active = true;
 
