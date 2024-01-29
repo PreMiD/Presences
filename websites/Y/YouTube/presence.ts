@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 		] = [
 			getSetting<string>("lang", "en"),
 			getSetting<boolean>("privacy", true),
-			getSetting<number>("privacy-ttl"),
+			getSetting<number>("privacy-ttl", 1),
 			getSetting<boolean>("privacy-shown", true),
 			getSetting<boolean>("time", true),
 			getSetting<string>("vidDetail", "%title%"),
