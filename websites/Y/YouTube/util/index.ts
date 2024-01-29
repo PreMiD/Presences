@@ -144,3 +144,44 @@ export function getSetting<E extends string | boolean | number>(
 	startSettingGetter(setting);
 	return (cachedSettings[setting] as E) ?? fallback;
 }
+
+
+let generatedId: string, generatedImage: string;
+export async function getThumbnail(videoId: string): Promise<string> {
+	if (generatedId === videoId) return generatedImage;
+	return new Promise(resolve => {
+		const img = new Image(),wh = 320;
+		img.crossOrigin = "anonymous";
+		img.src = `https://i3.ytimg.com/vi/${videoId}/mqdefault.jpg`;
+
+		img.onload = function () {
+			let newWidth, newHeight, offsetX, offsetY;
+
+			if (img.width > img.height) {
+				newWidth = wh;
+				newHeight = (wh / img.width) * img.height;
+				offsetX = 0;
+				offsetY = (wh - newHeight) / 2;
+			} else {
+				newHeight = wh;
+				newWidth = (wh / img.height) * img.width;
+				offsetX = (wh - newWidth) / 2;
+				offsetY = 0;
+			}
+			const tempCanvas = document.createElement("canvas");
+			tempCanvas.width = wh;
+			tempCanvas.height = wh;
+
+			tempCanvas
+				.getContext("2d")
+				.drawImage(img, offsetX, offsetY, newWidth, newHeight);
+
+			generatedId = videoId;
+			generatedImage = tempCanvas.toDataURL("image/png");
+			resolve(generatedImage);
+		};
+		img.onerror = function () {
+			resolve(`https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`);
+		};
+	});
+}

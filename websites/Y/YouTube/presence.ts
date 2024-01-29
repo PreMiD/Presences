@@ -11,6 +11,7 @@ import {
 	strings,
 	getSetting,
 	checkStringLanguage,
+	getThumbnail
 } from "./util";
 import { pvPrivacyUI } from "./util/pvPrivacyUI";
 
@@ -146,7 +147,7 @@ presence.on("UpdateData", async () => {
 					unlistedVideo || logo === LogoMode.YouTubeLogo || pfp === ""
 						? YouTubeAssets.Logo
 						: logo === LogoMode.Thumbnail
-						? `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`
+						? await getThumbnail(videoId)
 						: pfp,
 				smallImageKey: video.paused
 					? Assets.Pause
