@@ -16,7 +16,6 @@ presence.on("UpdateData", async () => {
 	
 	if (document.querySelector(".pdp-mod-product-badge-title")) { // PRODUCT
 		const itemName = document.querySelector(".pdp-mod-product-badge-title");
-		itemName = document.querySelector(".pdp-mod-product-badge-title");
 		presenceData.details = "Viewing Product:";
 		presenceData.state = itemName.textContent;
 		presenceData.largeImageKey = document.querySelector('meta[name="og:image"]').getAttribute("content") || "";
