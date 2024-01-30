@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let itemName: HTMLElement
+let itemName: HTMLElement;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -13,13 +13,13 @@ presence.on("UpdateData", async () => {
 	};
 
 	itemName = document.querySelector("#search > span > h1 > div > div.sg-col-14-of-20.sg-col-26-of-32.sg-col-18-of-24.sg-col.sg-col-22-of-28.s-breadcrumb.sg-col-10-of-16.sg-col-30-of-36.sg-col-6-of-12 > div > div > span.a-color-state.a-text-bold");
-	const ogImageElement = document.querySelector('meta[name="og:image"]');
 	
 	if (document.querySelector(".pdp-mod-product-badge-title")) { // PRODUCT
+		const itemName = document.querySelector(".pdp-mod-product-badge-title");
 		itemName = document.querySelector(".pdp-mod-product-badge-title");
 		presenceData.details = "Viewing Product:";
 		presenceData.state = itemName.textContent;
-		presenceData.largeImageKey = ogImageElement.getAttribute("content") || ""; 
+		presenceData.largeImageKey = document.querySelector('meta[name="og:image"]').getAttribute("content") || "";
 	} else if (document.location.pathname.includes("/tag")) { // TAGS
 		itemName = document.querySelector(".JrAyI");
 		presenceData.details = "Tags:";
@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/address")) { // ADDRESS
 		presenceData.details = "Address Book";
 	} else if (document.location.pathname.includes("/cart")) { // CART
-		itemName = document.querySelector(".checkout-summary-label")
+		itemName = document.querySelector(".checkout-summary-label");
 		presenceData.details = "Cart:";
 		presenceData.state = itemName.textContent;
 	} else if (document.location.pathname.includes("/customer/cancellations/index")) { // CANCALLATIONS
@@ -56,17 +56,16 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/wishlist")) { // WISHLIST
 		itemName = document.querySelector(".first ");
 		presenceData.details = itemName.textContent;
-	} else if (document.location.pathname.includes("/customer/returns")) { // WISHLIST
+	} else if (document.location.pathname.includes("/customer/returns")) { // RETURNS
 		presenceData.details = "My Returns";
-	} else (presenceData.details = "Home")
+	} else (presenceData.details = "Home");
 
 	if (await presence.getSetting<boolean>("incognito")) {
 		presenceData.details = "Incognito";
-		presenceData.largeImageKey = "https://lzd-img-global.slatic.net/g/tps/tfs/TB1PApewFT7gK0jSZFpXXaTkpXa-200-200.png"
-		presenceData.state = null
-		presenceData.startTimestamp = null
+		presenceData.largeImageKey = "https://lzd-img-global.slatic.net/g/tps/tfs/TB1PApewFT7gK0jSZFpXXaTkpXa-200-200.png";
+		presenceData.state = null;
+		presenceData.startTimestamp = null;
 	}
 	if (!presenceData.details) presence.setActivity();
 	else presence.setActivity(presenceData);
 });
-
