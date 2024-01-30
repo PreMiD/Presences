@@ -1,4 +1,3 @@
-/* eslint-disable no-one-time-vars/no-one-time-vars */
 const presence = new Presence({
 		clientId: "1200517025383075840",
 	}),
