@@ -8,7 +8,10 @@
 	"description": {
 		"en": "Visit Lazada.com to get incredible bargains and stacking coupons for even more savings."
 	},
-	"url": "lazada.com",
+	"url": [
+		"lazada.com",
+		"www.lazada.com"
+	],
 	"version": "1.0.0",
 	"logo": "https://lzd-img-global.slatic.net/g/tps/tfs/TB1PApewFT7gK0jSZFpXXaTkpXa-200-200.png",
 	"thumbnail": "https://www.most2414.com/wp-content/uploads/2020/02/02FEB-Insights-Lazada-Service-Marketplace-MOST2414-Cover.jpg",
