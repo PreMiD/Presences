@@ -9,9 +9,9 @@
 		"en": "WINDOWS93 is a website stylised to look and work as an operating system and a parody of the Windows 9x series."
 	},
 	"url": "www.windows93.net",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/b92k3WX.png",
-	"thumbnail": "https://i.imgur.com/uTaJQ0Z.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WINDOWS93/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WINDOWS93/assets/thumbnail.png",
 	"color": "#C2FF00",
 	"category": "other",
 	"tags": [
@@ -30,7 +30,7 @@
 				"White",
 				"Black"
 			]
-		},		
+		},
 		{
 			"id": "time",
 			"title": "Show timestamps",

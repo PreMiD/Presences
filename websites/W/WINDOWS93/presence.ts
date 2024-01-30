@@ -4,8 +4,8 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	LogoWhite = "https://i.imgur.com/b92k3WX.png",
-	LogoBlack = "https://i.imgur.com/acJF38u.png",
+	LogoWhite = "https://cdn.rcd.gg/PreMiD/websites/W/WINDOWS93/assets/logo.png",
+	LogoBlack = "https://cdn.rcd.gg/PreMiD/websites/W/WINDOWS93/assets/0.png",
 }
 
 let iFrameData = {
