@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 	itemName = document.querySelector("#search > span > h1 > div > div.sg-col-14-of-20.sg-col-26-of-32.sg-col-18-of-24.sg-col.sg-col-22-of-28.s-breadcrumb.sg-col-10-of-16.sg-col-30-of-36.sg-col-6-of-12 > div > div > span.a-color-state.a-text-bold");
 	
 	if (document.querySelector(".pdp-mod-product-badge-title")) { // PRODUCT
-		const itemName = document.querySelector(".pdp-mod-product-badge-title");
+		let itemName = document.querySelector(".pdp-mod-product-badge-title");
 		presenceData.details = "Viewing Product:";
 		presenceData.state = itemName.textContent;
 		presenceData.largeImageKey = document.querySelector('meta[name="og:image"]').getAttribute("content") || "";
