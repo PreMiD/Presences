@@ -1,5 +1,0 @@
-node_modules
-tools
-.vscode
-**/*.js
-*.json
