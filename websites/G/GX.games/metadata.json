@@ -9,9 +9,9 @@
 		"en": "Discover new games, compete for weekly prizes and share your experience with friends"
 	},
 	"url": "gx.games",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/XF5rBJc.png",
-	"thumbnail": "https://i.imgur.com/J9A7O93.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GX.games/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GX.games/assets/thumbnail.png",
 	"color": "#FA1E4E",
 	"category": "games",
 	"tags": [
