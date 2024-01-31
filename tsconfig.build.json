@@ -1,0 +1,9 @@
+{
+	"files": [],
+	"references": [
+		{ "path": "./tools/validator/tsconfig.build.json" },
+		{
+			"path": "./tools/premid/tsconfig.build.json"
+		}
+	]
+}

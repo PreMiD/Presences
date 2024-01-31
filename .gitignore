@@ -1,49 +1,12 @@
 # General files
 .idea
 node_modules
-pnpm-lock.yaml
 yarn.lock
+package-lock.json
 .env
-
-# Compiled files
-**/*.js
-!websites/*/*.js
-!programs/*/*.js
-*/*/*/dist
-websites/**/*/tsconfig.json
-programs/**/*/tsconfig.json
-
+coverage
+dist
+*.tsbuildinfo
 
 # MacOS-generated files
 .DS_Store
-
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-.pnpm-debug.log*
-
-# Yarn errors and logs
-.yarn/*
-!.yarn/cache
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
-
-# Cache files
-.eslintcache
-
-# local VSCode files
-**/.vscode/*
-**/.history
-
-# Exception for extension recommendations
-!**/.vscode/extensions.json
-
-# PresenceUpdater
-dist

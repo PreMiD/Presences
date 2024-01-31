@@ -1,0 +1,11 @@
+{
+	"name": "@presences/validator",
+	"private": true,
+	"version": "1.0.0",
+	"type": "module",
+	"main": "dist/index.js",
+	"dependencies": {
+		"@presences/types": "workspace:*",
+		"valibot": "^0.27.1"
+	}
+}

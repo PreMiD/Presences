@@ -1,0 +1,10 @@
+{
+	"name": "premid",
+	"private": true,
+	"version": "1.0.0",
+	"type": "module",
+	"main": "dist/index.js",
+	"devDependencies": {
+		"@presences/types": "workspace:*"
+	}
+}

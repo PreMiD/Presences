@@ -1,0 +1,6 @@
+*.js
+*.d.ts
+*.yaml
+*.yml
+*.cjs
+*.json
