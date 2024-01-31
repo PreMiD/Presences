@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 	if (await presence.getSetting<boolean>("incognito")) {
 		presenceData.details = "Incognito";
 		presenceData.largeImageKey =
-			"https://lzd-img-global.slatic.net/g/tps/tfs/TB1PApewFT7gK0jSZFpXXaTkpXa-200-200.png";
+			"https://i.ibb.co/LpxnMfj/512x512pngoflazada.png";
 		delete presenceData.state;
 		delete presenceData.startTimestamp;
 	}
