@@ -10,59 +10,56 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname } = document.location;
 
-	let item: HTMLElement;
-
 	if (document.querySelector(".pdp-mod-product-badge-title")) {
-		item = document.querySelector(".pdp-mod-product-badge-title");
 		presenceData.details = "Viewing Product:";
-		presenceData.state = item.textContent;
+		presenceData.state = document.querySelector(
+			".pdp-mod-product-badge-title"
+		).textContent;
 		presenceData.largeImageKey =
 			document.querySelector('meta[name="og:image"]').getAttribute("content") ||
 			"";
 	} else if (pathname.includes("/tag")) {
-		item = document.querySelector(".JrAyI");
 		presenceData.details = "Viewing Tags:";
-		presenceData.state = item.textContent;
+		presenceData.state = document.querySelector(".JrAyI").textContent;
 	} else if (pathname.includes("/catalog")) {
-		item = document.querySelector(".JrAyI");
 		presenceData.details = "Viewing Catalog:";
-		presenceData.state = item.textContent;
+		presenceData.state = document.querySelector(".JrAyI").textContent;
 	} else if (pathname.includes("/customer/order"))
 		presenceData.details = "My Orders";
 	else if (pathname.includes("/user/login")) {
 		presenceData.details = "User:";
 		presenceData.state = "Login";
 	} else if (pathname.includes("/user/profile")) {
-		item = document.querySelector(".my-profile-item-info");
 		presenceData.details = "My Profile:";
-		presenceData.state = item.textContent;
+		presenceData.state = document.querySelector(
+			".my-profile-item-info"
+		).textContent;
 	} else if (pathname.includes("/address"))
 		presenceData.details = "Address Book";
 	else if (pathname.includes("/cart")) {
-		item = document.querySelector(".checkout-summary-label");
 		presenceData.details = "Cart:";
-		presenceData.state = item.textContent;
+		presenceData.state = document.querySelector(
+			".checkout-summary-label"
+		).textContent;
 	} else if (pathname.includes("/customer/cancellations/index"))
 		presenceData.details = "My Cancellations";
 	else if (pathname.includes("customer/cancellations/view")) {
-		item = document.querySelector(".info-unit");
 		presenceData.details = "Cancellation Details:";
-		presenceData.state = item.textContent;
+		presenceData.state = document.querySelector(".info-unit").textContent;
 	} else if (pathname.includes("/wallet"))
 		presenceData.details = "Lazada Wallet";
 	else if (pathname.includes("/customer/myReview"))
 		presenceData.details = "My Reviews";
-	else if (pathname.includes("/wishlist")) {
-		item = document.querySelector(".first ");
-		presenceData.details = item.textContent;
-	} else if (pathname.includes("/customer/returns"))
+	else if (pathname.includes("/wishlist"))
+		presenceData.details = document.querySelector(".first ").textContent;
+	else if (pathname.includes("/customer/returns"))
 		presenceData.details = "My Returns";
 	else presenceData.details = "Home";
 
 	if (await presence.getSetting<boolean>("incognito")) {
 		presenceData.details = "Incognito";
 		presenceData.largeImageKey =
-			"https://i.ibb.co/LpxnMfj/512x512pngoflazada.png";
+			"https://lzd-img-global.slatic.net/g/tps/tfs/TB1PApewFT7gK0jSZFpXXaTkpXa-200-200.png";
 		delete presenceData.state;
 		delete presenceData.startTimestamp;
 	}
