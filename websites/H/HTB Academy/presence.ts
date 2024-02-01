@@ -7,7 +7,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
-			"https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_fabbd1201be6463ecfda11b3bbcb03de/hack-the-box-for-business.jpg",
+			"https://cdn.rcd.gg/PreMiD/websites/H/HTB%20Academy/assets/logo.jpg",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -15,13 +15,11 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Breaching into the Academy";
 	else if (pathname.includes("/dashboard")) {
 		presenceData.details = "Browsing the dashboard";
-		const persred: HTMLElement = document.querySelector(".red .progress"),
-			persblue: HTMLElement = document.querySelector(".blue .progress"),
-			persgrn: HTMLElement = document.querySelector(".green .progress");
+
 		presenceData.state =
-			`Off: ${persred.textContent} ` +
-			`Def: ${persblue.textContent} ` +
-			`Gen: ${persgrn.textContent}`;
+			`Off: ${document.querySelector(".red .progress").textContent} ` +
+			`Def: ${document.querySelector(".blue .progress").textContent} ` +
+			`Gen: ${document.querySelector(".green .progress").textContent}`;
 	} else if (pathname.includes("/exams"))
 		presenceData.details = "Browsing the exams";
 	else if (pathname.includes("/paths")) presenceData.details = "Browsing paths";
@@ -29,8 +27,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Browsing modules";
 	else if (pathname.includes("/section")) {
 		let module: HTMLElement;
-		const iterminal: HTMLElement = document.querySelector(".iterminal");
-		if (iterminal) {
+
+		if (document.querySelector(".iterminal")) {
 			module = document.querySelector(
 				"#layout-wrapper > div.main-content > div > div:nth-child(2) > div > div > h4"
 			);
@@ -40,15 +38,15 @@ presence.on("UpdateData", async () => {
 			);
 		}
 
-		const section: HTMLElement = document.querySelector(".training-module h1");
 		presenceData.details = `Reading Module: ${module.textContent}`;
-		presenceData.state = `Section: ${section?.textContent}`;
+		presenceData.state = `Section: ${
+			document.querySelector(".training-module h1")?.textContent
+		}`;
 	} else if (pathname.includes("/details")) {
-		const module2: HTMLElement = document.querySelector(
-			".page-title-box .page-title"
-		);
 		presenceData.details = "Reading details about module:";
-		presenceData.state = `"${module2.textContent}"`;
+		presenceData.state = `"${
+			document.querySelector(".page-title-box .page-title").textContent
+		}"`;
 	} else if (pathname.includes("/my-certificates"))
 		presenceData.details = "Looking at their certificates";
 	else if (pathname.includes("/my-badges"))
