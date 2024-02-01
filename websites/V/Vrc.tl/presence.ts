@@ -9,24 +9,18 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo",
-		smallImageKey: "search",
+		largeImageKey: "https://files.catbox.moe/dalqh3.png",
+		smallImageKey: "https://files.catbox.moe/g66t9n.png",
 		startTimestamp: browsingTimestamp,
-		buttons: [
-			{
-				label: "View Timeline",
-				url: "https://vrc.tl/",
-			},
-		],
 	};
 
-	if (regexes.detail.test(window.location.pathname)) {
+	if (regexes.detail.test(document.location.pathname)) {
 		presenceData.details = "Editing an event";
 		presenceData.state = `Event ID: ${
-			window.location.pathname.match(regexes.detail)[1]
+			document.location.pathname.match(regexes.detail)[1]
 		}`;
-	} else if (regexes.index.test(window.location.pathname)) {
-		switch (window.location.pathname) {
+	} else if (regexes.index.test(document.location.pathname)) {
+		switch (document.location.pathname) {
 			case "/":
 				presenceData.details = "Viewing the timeline";
 				break;
