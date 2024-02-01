@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "339316517558681610",
+		"name": "firstoften"
+	},
+	"service": "HTB Academy",
+	"description": {
+		"en": "HTB Academy is a goldmine of learning opportunities, featuring numerous modules that cover various tools, methodologies, and all aspects of cybersecurity."
+	},
+	"url": "academy.hackthebox.com",
+	"version": "1.0.0",
+	"logo": "https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_fabbd1201be6463ecfda11b3bbcb03de/hack-the-box-for-business.jpg",
+	"thumbnail": "https://academy.hackthebox.com/images/pages/front/OG_AcademyHomepage.png",
+	"color": "#40a832",
+	"category": "other",
+	"tags": [
+		"hacking",
+		"learning"
+	]
+}
