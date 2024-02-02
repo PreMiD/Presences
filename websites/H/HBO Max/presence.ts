@@ -154,6 +154,7 @@ async function fetchVideoInfo() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
+			type: ActivityType.Watching,
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/H/HBO%20Max/assets/logo.png",
 		},

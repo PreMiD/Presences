@@ -133,6 +133,7 @@ presence.on("UpdateData", async () => {
 					.querySelector("#page-manager > ytd-watch-flexy")
 					?.getAttribute("video-id") ?? pathname.split("/shorts/")[1],
 			presenceData: PresenceData = {
+				type: ActivityType.Watching,
 				details: vidDetail
 					.replace("%title%", title.trim())
 					.replace("%uploader%", uploaderName.trim())
@@ -246,6 +247,7 @@ presence.on("UpdateData", async () => {
 		const presenceData: PresenceData = {
 			largeImageKey: YouTubeAssets.Logo,
 			startTimestamp: browsingTimestamp,
+			type: ActivityType.Watching,
 		};
 		let searching = false;
 

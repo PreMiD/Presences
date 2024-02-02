@@ -21,7 +21,10 @@ function getTimestamps(videoTime: number, videoDuration: number): number[] {
 }
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = { largeImageKey: "pvid" };
+	const presenceData: PresenceData = {
+		type: ActivityType.Watching,
+		largeImageKey: "pvid",
+	};
 	presenceData.startTimestamp = browsingTimestamp;
 	const title: string =
 			document.querySelector(

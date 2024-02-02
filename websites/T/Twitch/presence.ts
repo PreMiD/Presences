@@ -149,6 +149,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	let presenceData: PresenceData = {
+		type: ActivityType.Watching,
 		largeImageKey: logoArr[logo] || "twitch",
 		startTimestamp: elapsed,
 	};

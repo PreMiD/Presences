@@ -140,6 +140,7 @@ presence.on("UpdateData", async () => {
 		return presence.clearActivity();
 
 	let presenceData: PresenceData = {
+		type: ActivityType.Listening,
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/S/SoundCloud/assets/logo.png",
 		startTimestamp: elapsed,

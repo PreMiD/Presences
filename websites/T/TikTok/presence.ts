@@ -53,6 +53,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
+			type: ActivityType.Watching,
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/T/TikTok/assets/logo.png",
 			startTimestamp: browsingTimestamp,

@@ -4,6 +4,24 @@
  */
 interface PresenceData {
 	/**
+	 * Name to show in activity
+	 * @example "YouTube"
+	 * @since 2.6
+	 */
+	name?: string;
+	/**
+	 * Type of activity.
+	 *
+	 * @example
+	 * - ActivityType.Playing: "Playing [name]"
+	 * - ActivityType.Listening: "Listening to [name]"
+	 * - ActivityType.Watching: "Watching [name]"
+	 * - ActivityType.Competing: "Competing in [name]"
+	 *
+	 * @since 2.6
+	 */
+	type?: ActivityType;
+	/**
 	 * Top row of the status
 	 *
 	 * Supports:
@@ -57,6 +75,17 @@ interface PresenceData {
 	 * `HTMLImageElement`: An image element to use (it will be converted to a blob)
 	 */
 	smallImageKey?: string | Blob | HTMLImageElement;
+	/**
+	 * Tooltip for the largeImageKey
+	 *
+	 * Supports:
+	 *
+	 * `String`: A string
+	 *
+	 * `Node`: An element to use (it will use `.textContent`)
+	 * @since 2.6
+	 */
+	largeImageText?: string | Node;
 	/**
 	 * Tooltip for the smallImageKey
 	 *
@@ -127,6 +156,24 @@ interface PresenceOptions {
 	injectOnComplete?: boolean;
 }
 
+const enum ActivityType {
+	/**
+	 * Playing {name}
+	 */
+	Playing = 0,
+	/**
+	 * Listening to {name}
+	 */
+	Listening = 2,
+	/**
+	 * Watching {name}
+	 */
+	Watching = 3,
+	/**
+	 * Competing in {name}
+	 */
+	Competing = 5,
+}
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const enum Assets {
 	Play = "https://cdn.rcd.gg/PreMiD/resources/play.png",
