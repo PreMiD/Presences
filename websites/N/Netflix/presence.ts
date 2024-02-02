@@ -174,7 +174,7 @@ presence.on("UpdateData", async () => {
 
 	let presenceData: PresenceData = {
 			largeImageKey: largeImage,
-			type: ActivityType.Watching
+			type: ActivityType.Watching,
 		},
 		[videoMetadata] = Object.values(latestData?.videoMetadata || {});
 	//* Reset browsingTimestamp if href has changed.
