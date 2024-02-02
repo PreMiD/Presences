@@ -156,7 +156,6 @@ interface PresenceOptions {
 	injectOnComplete?: boolean;
 }
 
- 
 const enum ActivityType {
 	/**
 	 * Playing {name}
@@ -175,7 +174,7 @@ const enum ActivityType {
 	 */
 	Competing = 5,
 }
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const enum Assets {
 	Play = "https://cdn.rcd.gg/PreMiD/resources/play.png",
 	Pause = "https://cdn.rcd.gg/PreMiD/resources/pause.png",
