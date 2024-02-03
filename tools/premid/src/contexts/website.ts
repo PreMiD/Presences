@@ -4,13 +4,14 @@ import type { defineSettings } from "../moveToExtension/defineSettings.js";
 import type { defineSettingsVisibility } from "../moveToExtension/defineSettingsVisibility.js";
 import type { defineStrings } from "../moveToExtension/defineStrings.js";
 import type { PresenceConfig } from "../presence.js";
-import type { Awaitable } from "../utils.js";
+import type { Actual, Awaitable } from "../utils.js";
 import type { WebsiteConfig } from "../website.js";
 
 export type WebsitePresenceCallback<Config extends PresenceConfig> = (context: WebsitePresenceContext<Config>) => Awaitable<void>;
 
 export type WebsitePresenceContext<Config extends PresenceConfig> = Readonly<{
 	presence: Presence<Config>;
+	config: Actual<Omit<Config, "website">>;
 	useSettings: ReturnType<typeof defineSettings<Config>>;
 	useSettingsVisibility: ReturnType<typeof defineSettingsVisibility<Config>>;
 	useStrings: ReturnType<typeof defineStrings<Config>>;
@@ -24,3 +25,11 @@ export type WebsitePresenceContext<Config extends PresenceConfig> = Readonly<{
 	error: (message: string) => void;
 	success: (message: string) => void;
 }>;
+
+//TODO getExtensionVersion
+//TODO getTimestamps
+//TODO getTimestampsFromMedia
+//TODO timestampFromFormat
+//TODO createSlideshow
+//TODO Slideshow
+//TODO IframeData event
