@@ -1,9 +1,10 @@
 /* eslint-disable one-var */
-import { EventEmitter } from "eventemitter3";
+import type { EventEmitter } from "eventemitter3";
 
+import type { ConsoleLog } from "../log.js";
 import type { PresenceConfig } from "../presence.js";
 import type { PresenceData } from "../presenceData.js";
-import { Awaitable, SettingObjectFromId, SettingsInConfig, ValueOfSetting } from "../utils.js";
+import type { Awaitable, SettingObjectFromId, SettingsInConfig, ValueOfSetting } from "../utils.js";
 
 export interface Presence<Config extends PresenceConfig> extends EventEmitter<PresenceEvents<Config>> {
 	presenceData: PresenceData;
@@ -22,4 +23,5 @@ export interface PresenceEvents<Config extends PresenceConfig> {
 	) => Awaitable<void>;
 	localeUpdate: (locale: string) => Awaitable<void>;
 	updateData: () => Awaitable<void>;
+	consoleLog: (log: ConsoleLog) => Awaitable<void>;
 }
