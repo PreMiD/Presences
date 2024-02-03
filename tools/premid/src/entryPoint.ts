@@ -1,20 +1,19 @@
-import type { WebsitePresenceCallback } from "./contexts/website.js";
-import type { PresenceConfig } from "./presence.js";
+import type { AnyCallback } from "./utils.js";
 
-export function defineEntryPoint<Config extends PresenceConfig>(config: EntryPointConfig<Config>): EntryPointConfig<Config> {
+export function defineEntryPoint(config: EntryPointConfig): EntryPointConfig {
 	return config;
 }
 
-export type EntryPointConfig<Config extends PresenceConfig> =
+export type EntryPointConfig =
 	| {
 			/**
 			 * The setup function to be called when the url is matched.
 			 */
-			setup: WebsitePresenceCallback<Config>;
+			setup: AnyCallback;
 			/**
 			 * The teardown function to be called when the url is no longer matched.
 			 */
-			teardown: WebsitePresenceCallback<Config>;
+			teardown: AnyCallback;
 			/**
 			 * The mode of the entry point. If it's "modern", setup and teardown functions should be provided.
 			 */
@@ -24,7 +23,7 @@ export type EntryPointConfig<Config extends PresenceConfig> =
 			/**
 			 * The main function to be called when the url is matched.
 			 */
-			main: WebsitePresenceCallback<Config>;
+			main: AnyCallback;
 			/**
 			 * The mode of the entry point. If it's "classic", a main function should be provided.
 			 */

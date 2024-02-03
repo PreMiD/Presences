@@ -1,17 +1,27 @@
-import { defineEntryPoint, type WebsitePresenceCallback } from "premid";
+import { defineEntryPoint, getContext } from "premid";
 
 import type { YouTubeConfig } from "../config.js";
 
-const main: WebsitePresenceCallback<YouTubeConfig> = async ({ fetchStrings }) => {
-	const { t } = await fetchStrings("string1", "string3", "string5");
-};
+const context = getContext<YouTubeConfig>(),
+	onReadyStateChange = () => {
+		if (document.readyState === "complete") void main();
+	},
+	runUpdate = () => {
+		void main();
+	},
+	main = async () => {
+		const { fetchStrings } = context,
+			{ t } = await fetchStrings("string1", "string3", "string5");
+	};
 
-export default defineEntryPoint<YouTubeConfig>({
+export default defineEntryPoint({
 	mode: "modern",
-	setup: context => {
-		void main(context);
+	setup: () => {
+		document.addEventListener("readystatechange", onReadyStateChange);
+		context.presence.on("settingUpdate", runUpdate);
 	},
 	teardown: () => {
-		// Do nothing
+		document.removeEventListener("readystatechange", onReadyStateChange);
+		context.presence.off("settingUpdate", runUpdate);
 	},
 });

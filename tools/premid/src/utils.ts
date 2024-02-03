@@ -41,6 +41,6 @@ export interface I18n<FetchedStrings extends I18nStrings> {
 	t: (key: FetchedStrings, ...parameters: (string | number | boolean)[]) => string;
 }
 
-export type AnyCallback = (..._arguments: unknown[]) => Awaitable<void>;
+export type AnyCallback = () => Awaitable<void>;
 
 export type MergeText<One extends string, Two extends string> = `${One}${Two}`;

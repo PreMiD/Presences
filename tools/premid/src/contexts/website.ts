@@ -29,3 +29,13 @@ export type WebsitePresenceContext<Config extends PresenceConfig> = Actual<
 //TODO createSlideshow
 //TODO Slideshow
 //TODO IframeData event
+
+/**
+ * Get the context for the website presence.
+ *
+ * Note: Do **NOT** destructure the context object outside of lifecycle functions, as it will make the context object stale.
+ * You can destructure the context object inside lifecycle functions, as it will be updated when the lifecycle function is called.
+ */
+export function getContext<Config extends PresenceConfig>(): WebsitePresenceContext<Config> {
+	return {} as WebsitePresenceContext<Config>;
+}
