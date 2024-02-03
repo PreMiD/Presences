@@ -1,4 +1,6 @@
-import type { Actual, Presence, PresenceConfig, SettingsObject } from "../index.js";
+import type { Presence } from "../classes/Presence.js";
+import type { PresenceConfig } from "../presence.js";
+import type { Actual, SettingsObject } from "../utils.js";
 
 export function defineSettings<Config extends PresenceConfig = PresenceConfig>(
 	record: Actual<SettingsObject<Config>> | Record<string, unknown>,

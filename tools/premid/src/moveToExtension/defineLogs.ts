@@ -1,5 +1,6 @@
-import type { Presence, PresenceConfig } from "../index.js";
+import type { Presence } from "../classes/Presence.js";
 import type { ConsoleLog, ConsoleLogType } from "../log.js";
+import type { PresenceConfig } from "../presence.js";
 
 export function defineLogs<Config extends PresenceConfig = PresenceConfig>(presence: Presence<Config>) {
 	const logs: ConsoleLog[] = [];
