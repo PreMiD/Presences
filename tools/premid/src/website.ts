@@ -34,7 +34,7 @@ export interface WebsiteConfig {
 	 *
 	 * @default false
 	 */
-	readLogs?: boolean;
+	readLogs?: true;
 	/**
 	 * The presence's settings.
 	 */

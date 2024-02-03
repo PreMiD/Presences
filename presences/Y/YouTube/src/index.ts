@@ -10,7 +10,7 @@ export const main: AnyCallback = (async ({ presence, useSettings, useStrings }) 
 		const { showTimestamp } = useSettings();
 
 		presence.set("state", t("string1"));
-		// {0} will be replaced with the first argument, {1} with the second, and so on
+		//* {0} will be replaced with the first argument, {1} with the second, and so on
 		presence.set("details", t("string3", "foo", "bar"));
 		presence.set("smallImageText", t("string5"));
 
