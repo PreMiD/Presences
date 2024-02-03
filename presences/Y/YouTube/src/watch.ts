@@ -2,7 +2,14 @@ import { AnyCallback, PresenceType, useDom } from "premid";
 
 import { YouTubeCallback } from "../config.js";
 
-export const watch: AnyCallback = (({ presence, useSettingsVisibility, config: { name, logo } }) => {
+export const watch: AnyCallback = (({
+	presence,
+	useSettingsVisibility,
+	config: {
+		name: [name],
+		logo,
+	},
+}) => {
 	//* Set default presence data
 	presence.set("name", name).set("largeImageKey", logo).set("type", PresenceType.Watching);
 

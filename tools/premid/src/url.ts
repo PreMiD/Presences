@@ -8,7 +8,7 @@ export interface PresenceURLMatch {
 	 *
 	 * So make sure to start the expression with `^https?:\/\/` or end it with `$`.
 	 *
-	 * @example `/^https?:\/\/(?:www\.)?netflix\.(com|co\.kr)/`
+	 * @example /^https?:\/\/(?:www\.)?netflix\.(com|co\.kr)/
 	 */
 	match: RegExp;
 	/**
@@ -25,7 +25,7 @@ export interface PresenceIframeURLMatch {
 	 *
 	 * So make sure to start the expression with `^https?:\/\/` or end it with `$`.
 	 *
-	 * @example `/^https?:\/\/(?:www\.)?netflix\.(com|co\.kr)/`
+	 * @example /^https?:\/\/(?:www\.)?netflix\.(com|co\.kr)/
 	 */
 	match: RegExp;
 	/**

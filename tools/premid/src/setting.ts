@@ -59,9 +59,9 @@ export interface PresenceSettingsLanguage extends PresenceSettingsBase {
 	 *
 	 * `string[]`: if you are using more than one file, from inside of the [localization github repo](https://github.com/PreMiD/Localization/tree/master/src/Presence), you can specify all the values in an array (excluding the `general.json` file, since it's always loaded). Only common languages of all the files will be listed.
 	 *
-	 * @example `true`
-	 * @example `netflix`
-	 * @example `['netflix', 'youtube']`
+	 * @example true
+	 * @example "netflix"
+	 * @example ["netflix", "youtube"]
 	 */
 	languageFiles: true | string | [string, ...string[]];
 }

@@ -9,8 +9,8 @@ export interface WebsiteConfig {
 	 *
 	 * (Useful for websites that have different urls in different countries, e.g. `netflix.com` and `netflix.co.kr`).
 	 *
-	 * @example `netflix.com`
-	 * @example `[netflix.com, netflix.co.kr]`
+	 * @example "netflix.com"
+	 * @example ["netflix.com", "netflix.co.kr"]
 	 */
 	displayUrl: string | [string, ...string[]];
 	/**
