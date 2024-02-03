@@ -2,7 +2,7 @@ import type { Category, Color, ImageURL, UUID } from "@presences/types";
 
 import type { WebsiteConfig } from "./website.js";
 
-export default function definePresence(config: PresenceConfig): PresenceConfig {
+export function definePresence<T extends PresenceConfig>(config: T): T {
 	return config;
 }
 
@@ -22,7 +22,7 @@ export interface PresenceConfig {
 	 *
 	 * Want to know if a service has multiple names? Check out Wikidata! (e.g. Netflix: https://www.wikidata.org/wiki/Q907311)
 	 */
-	service: string | [string, ...string[]];
+	name: string | [string, ...string[]];
 	/**
 	 * The description of the service. (English only, translations are done in Crowdin)
 	 *

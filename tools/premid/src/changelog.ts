@@ -1,10 +1,14 @@
-import { ChangeLogChangeText, Snowflake } from "@presences/types";
+import type { ChangeLogChangeText, SemanticVersion, Snowflake } from "@presences/types";
 
-export default function defineChangeLog(log: ChangeLog): ChangeLog {
-	return log;
+export function defineChangeLogs(logs: [ChangeLog, ...ChangeLog[]]): [ChangeLog, ...ChangeLog[]] {
+	return logs;
 }
 
 export interface ChangeLog {
+	/**
+	 * The version of this change log.
+	 */
+	version: SemanticVersion;
 	/**
 	 * The changes made in this version.
 	 *

@@ -35,6 +35,9 @@ importers:
       lint-staged:
         specifier: ^15.2.1
         version: 15.2.1
+      premid:
+        specifier: workspace:*
+        version: link:tools/premid
       prettier:
         specifier: ^3.2.4
         version: 3.2.4
@@ -50,6 +53,9 @@ importers:
       '@presences/types':
         specifier: workspace:*
         version: link:../types
+      eventemitter3:
+        specifier: ^5.0.1
+        version: 5.0.1
 
   tools/types: {}
 

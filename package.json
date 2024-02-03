@@ -1,6 +1,7 @@
 {
 	"name": "presences",
 	"version": "3.0.0",
+	"type": "module",
 	"description": "",
 	"scripts": {
 		"prepare": "husky",
@@ -23,6 +24,7 @@
 		"eslint": "^8.56.0",
 		"husky": "^9.0.7",
 		"lint-staged": "^15.2.1",
+		"premid": "workspace:*",
 		"prettier": "^3.2.4",
 		"typescript": "^5.3.3",
 		"vitest": "^1.2.2"

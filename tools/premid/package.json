@@ -5,6 +5,7 @@
 	"type": "module",
 	"main": "dist/index.js",
 	"devDependencies": {
-		"@presences/types": "workspace:*"
+		"@presences/types": "workspace:*",
+		"eventemitter3": "^5.0.1"
 	}
 }
