@@ -26,6 +26,10 @@ export type SettingObjectFromId<Config extends PresenceConfig, Id extends Settin
 
 export type SettingIds<Config extends PresenceConfig> = SettingsInConfig<Config>["id"];
 
+export type SettingsVisibilityObject<Config extends PresenceConfig, ValueObject extends boolean = true> = ValueObject extends true
+	? Record<MergeText<keyof SettingsObject<Config>, "Visibility">, { value: boolean }>
+	: Record<keyof SettingsObject<Config>, boolean>;
+
 export type Actual<T> = T extends infer U ? { [K in keyof U]: U[K] } : never;
 
 export type Awaitable<T> = T | Promise<T>;
@@ -37,3 +41,5 @@ export interface I18n<FetchedStrings extends I18nStrings> {
 }
 
 export type AnyCallback = (..._arguments: unknown[]) => Awaitable<void>;
+
+export type MergeText<One extends string, Two extends string> = `${One}${Two}`;

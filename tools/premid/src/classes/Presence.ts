@@ -21,6 +21,7 @@ export interface PresenceEvents<Config extends PresenceConfig> {
 		setting: Id,
 		value: ValueOfSetting<SettingObjectFromId<Config, Id>>
 	) => Awaitable<void>;
+	settingVisibilityUpdate: <Id extends SettingsInConfig<Config>["id"] = SettingsInConfig<Config>["id"]>(setting: Id, value: boolean) => Awaitable<void>;
 	localeUpdate: (locale: string) => Awaitable<void>;
 	updateData: () => Awaitable<void>;
 	consoleLog: (log: ConsoleLog) => Awaitable<void>;
