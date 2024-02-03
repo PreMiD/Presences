@@ -1,6 +1,7 @@
 export * from "./changelog.js";
 export * from "./classes/Presence.js";
 export * from "./contexts/website.js";
+export * from "./entryPoint.js";
 export * from "./presence.js";
 export * from "./presenceData.js";
 export * from "./setting.js";

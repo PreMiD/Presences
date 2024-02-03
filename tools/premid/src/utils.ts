@@ -18,17 +18,18 @@ export type ValueOfSetting<Setting extends PresenceSetting> = Setting extends Pr
 				? string
 				: never;
 
-export type SettingsObject<Config extends PresenceConfig> = Readonly<{
-	[Id in SettingsInConfig<Config>["id"]]: ValueOfSetting<SettingObjectFromId<Config, Id>>;
-}>;
+export type SettingsObject<Config extends PresenceConfig> = Actual<
+	Readonly<{
+		[Id in SettingsInConfig<Config>["id"]]: {
+			readonly value: ValueOfSetting<SettingObjectFromId<Config, Id>>;
+			visibility: boolean;
+		};
+	}>
+>;
 
 export type SettingObjectFromId<Config extends PresenceConfig, Id extends SettingsInConfig<Config>["id"]> = Extract<SettingsInConfig<Config>, { id: Id }>;
 
 export type SettingIds<Config extends PresenceConfig> = SettingsInConfig<Config>["id"];
-
-export type SettingsVisibilityObject<Config extends PresenceConfig, ValueObject extends boolean = true> = ValueObject extends true
-	? Record<MergeText<keyof SettingsObject<Config>, "Visibility">, { value: boolean }>
-	: Record<keyof SettingsObject<Config>, boolean>;
 
 export type Actual<T> = T extends infer U ? { [K in keyof U]: U[K] } : never;
 

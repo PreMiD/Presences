@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/filename-case */
 export function useDom() {
 	const { href, pathname, search, hash, host, hostname, origin, port, protocol } = document.location;
 	return {

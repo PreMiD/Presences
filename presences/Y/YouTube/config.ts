@@ -1,7 +1,4 @@
-import { definePresence, type PresenceConfig, type WebsitePresenceCallback } from "premid";
-
-import { main } from "./src/index.js";
-import { watch } from "./src/watch.js";
+import { definePresence, type PresenceConfig } from "premid";
 
 const config = {
 	category: "video",
@@ -65,11 +62,11 @@ const config = {
 		],
 		url: [
 			{
-				callback: watch,
+				entry: "watch.ts",
 				match: /^https?:\/\/(?:www\.)?youtube\.com\/watch\?v=/,
 			},
 			{
-				callback: main,
+				entry: "index.ts",
 				match: /^https?:\/\/(?:www\.)?youtube\.com/,
 			},
 		],
@@ -79,4 +76,3 @@ const config = {
 export default definePresence(config);
 
 export type YouTubeConfig = typeof config;
-export type YouTubeCallback = WebsitePresenceCallback<YouTubeConfig>;

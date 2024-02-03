@@ -1,4 +1,4 @@
-import type { AnyCallback } from "./utils.js";
+import type { EntryPoint } from "./entryPoint.js";
 
 export interface PresenceURLMatch {
 	/**
@@ -12,9 +12,9 @@ export interface PresenceURLMatch {
 	 */
 	match: RegExp;
 	/**
-	 * The function that is called when the url matches.
+	 * The filename of the entry point inside of the `src` directory.
 	 */
-	callback: AnyCallback;
+	entry: EntryPoint;
 }
 
 export interface PresenceIframeURLMatch {
@@ -29,7 +29,7 @@ export interface PresenceIframeURLMatch {
 	 */
 	match: RegExp;
 	/**
-	 * The function that is called when the url matches.
+	 * The filename of the entry point inside of the `src` directory.
 	 */
-	callback: AnyCallback;
+	entry: EntryPoint;
 }
