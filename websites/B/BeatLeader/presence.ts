@@ -327,7 +327,11 @@ presence.on("UpdateData", async () => {
 				if (mapSmallImages !== 3) {
 					presenceData.smallImageText = `${
 						mapSmallImages === 0 || mapSmallImages === 1 ? mode : ""
-					} ${mapSmallImages === 0 || mapSmallImages === 2 ? difficulty : ""}`;
+					} ${
+						mapSmallImages === 0 || mapSmallImages === 2
+							? difficulty.replace("Plus", "+")
+							: ""
+					}`;
 					presenceData.smallImageKey =
 						OtherAssets[
 							simplifyKey(
