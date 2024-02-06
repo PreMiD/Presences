@@ -4,6 +4,7 @@ import youtubeEmbedResolver from "./video_sources/embed";
 import youtubeMoviesResolver from "./video_sources/movies";
 import youtubeTVResolver from "./video_sources/tv";
 import youtubeResolver from "./video_sources/default";
+import youtubeApiResolver from "./video_sources/api";
 import {
 	Resolver,
 	adjustTimeError,
@@ -34,6 +35,7 @@ const nullResolver: Resolver = {
 	getTitle: () => document.title,
 	getUploader: () => "",
 	getChannelURL: () => "",
+	getVideoID: () => "",
 };
 
 presence.on("UpdateData", async () => {
@@ -78,6 +80,7 @@ presence.on("UpdateData", async () => {
 				youtubeTVResolver,
 				youtubeResolver,
 				youtubeMoviesResolver,
+				youtubeApiResolver,
 				nullResolver,
 			].find(resolver => resolver.isActive()),
 			title = resolver.getTitle(),
@@ -128,10 +131,7 @@ presence.on("UpdateData", async () => {
 				unlistedBadgeElement &&
 				unlistedPathElement?.getAttribute("d") ===
 					unlistedBadgeElement?.getAttribute("d"),
-			videoId =
-				document
-					.querySelector("#page-manager > ytd-watch-flexy")
-					?.getAttribute("video-id") ?? pathname.split("/shorts/")[1],
+			videoId = resolver.getVideoID(),
 			presenceData: PresenceData = {
 				type: ActivityType.Watching,
 				details: vidDetail

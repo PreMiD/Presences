@@ -1,8 +1,14 @@
 import { Resolver, truncateAfter } from "../util";
-import { getChannelURL } from "./default";
+import { getChannelURL, getVideoID } from "./default";
 
 function isActive(): boolean {
-	return !!document.querySelector(".player-video-title");
+	return (
+		!!document.querySelector(".player-video-title") &&
+		!!getTitle() &&
+		!!getUploader() &&
+		!!getVideoID() &&
+		!!getChannelURL()
+	);
 }
 
 function getTitle(): string {
@@ -22,6 +28,7 @@ const resolver: Resolver = {
 	getTitle,
 	getUploader,
 	getChannelURL,
+	getVideoID,
 };
 
 export default resolver;

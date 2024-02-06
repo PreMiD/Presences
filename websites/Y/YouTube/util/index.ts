@@ -17,6 +17,7 @@ export interface Resolver {
 	getTitle(): string;
 	getUploader(): string;
 	getChannelURL(): string;
+	getVideoID(): string;
 }
 
 const stringMap = {
