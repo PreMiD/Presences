@@ -37,14 +37,14 @@ presence.on("UpdateData", async () => {
 			break;
 		case pathname.startsWith("/profile") ? pathname : null:
 			presenceData.details = "Przegląda profil:";
-			presenceData.state = document.querySelector("h1").innerHTML;
+			presenceData.state = document.querySelector("h1").textContent;
 			presenceData.buttons = [{ label: "Zobacz profil", url: href }];
 			break;
 		case community:
 			presenceData.smallImageKey = Assets.Reading;
 			if (community.split("/").length === 3) {
 				presenceData.details = "Przegląda post na forum:";
-				presenceData.state = document.querySelector("h1").innerHTML;
+				presenceData.state = document.querySelector("h1").textContent;
 				presenceData.buttons = [{ label: "Zobacz post", url: href }];
 			} else presenceData.details = "Przegląda forum...";
 			break;
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 					.getAttribute("src");
 				if (nav.children.length === 3) {
 					presenceData.details = "Przegląda serię:";
-					presenceData.state = document.querySelector("h1.fw-bolder").innerHTML;
+					presenceData.state = document.querySelector("h1.fw-bolder").textContent;
 					presenceData.buttons = [{ label: "Zobacz serię", url: href }];
 				} else if (nav.children.length === 4) {
 					presenceData.details = `Ogląda: ${nav.children[2].textContent}`;
