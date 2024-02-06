@@ -1,8 +1,12 @@
 import { Resolver } from "../util";
-import { getChannelURL } from "./default";
+import { getChannelURL, getVideoID } from "./default";
 
 function isActive(): boolean {
-	return document.location.pathname.includes("/embed");
+	return (
+		document.location.pathname.includes("/embed") &&
+		!!getTitle() &&
+		!!getUploader()
+	);
 }
 
 function getTitle(): string {
@@ -25,6 +29,7 @@ const resolver: Resolver = {
 	getTitle,
 	getUploader,
 	getChannelURL,
+	getVideoID,
 };
 
 export default resolver;

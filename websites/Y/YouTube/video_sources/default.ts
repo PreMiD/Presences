@@ -22,6 +22,12 @@ function getUploader(): string {
 	);
 }
 
+export function getVideoID(): string {
+	return document
+		.querySelector("#page-manager > ytd-watch-flexy")
+		?.getAttribute("video-id");
+}
+
 export function getChannelURL(): string {
 	return document.querySelector<HTMLLinkElement>(
 		"#top-row ytd-video-owner-renderer > a"
@@ -33,6 +39,7 @@ const resolver: Resolver = {
 	getTitle,
 	getUploader,
 	getChannelURL,
+	getVideoID,
 };
 
 export default resolver;
