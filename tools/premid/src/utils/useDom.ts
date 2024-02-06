@@ -24,9 +24,7 @@ export function useDom() {
 			options?: boolean | EventListenerOptions
 		) => {
 			const [target, event] = key.split(".") as ["window" | "document", string];
-			target === "document"
-				? document.removeEventListener.bind(document)(event, listener, options)
-				: window.removeEventListener.bind(window)(event, listener, options);
+			target === "document" ? document.removeEventListener(event, listener, options) : window.removeEventListener(event, listener, options);
 		},
 		/**
 		 * Add an event listener to the document or window
@@ -37,9 +35,7 @@ export function useDom() {
 			options?: boolean | AddEventListenerOptions
 		) => {
 			const [target, event] = key.split(".") as ["window" | "document", string];
-			target === "document"
-				? document.addEventListener.bind(document)(event, listener, options)
-				: window.addEventListener.bind(window)(event, listener, options);
+			target === "document" ? document.addEventListener(event, listener, options) : window.addEventListener(event, listener, options);
 		},
 		origin,
 		pathname,
