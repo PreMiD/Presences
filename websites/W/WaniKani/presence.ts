@@ -166,6 +166,10 @@ presence.on("UpdateData", () => {
 					}
 					break;
 				}
+				case "/subject-lessons/picker": {
+					presenceData.details = "Choosing Lessons";
+					break;
+				}
 				case "/subjects/extra_study": {
 					presenceData.details = `Doing ${
 						document.querySelector<HTMLDivElement>(
