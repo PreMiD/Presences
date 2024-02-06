@@ -123,12 +123,12 @@ presence.on("UpdateData", async () => {
 			}),
 			smallImageKey:
 				mediaSession.playbackState === "paused"
-					? "pause"
+					? Assets.Pause
 					: repeatMode === "ONE"
-					? "repeat-one"
+					? Assets.RepeatOne
 					: repeatMode === "ALL"
-					? "repeat"
-					: "play",
+					? Assets.Repeat
+					: Assets.Play,
 			smallImageText:
 				mediaSession.playbackState === "paused"
 					? "Paused"
@@ -194,7 +194,8 @@ presence.on("UpdateData", async () => {
 
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>("#thumbnail img").src;
-			presenceData.smallImageKey = "ytm_lg";
+			presenceData.smallImageKey =
+				"https://cdn.discordapp.com/app-assets/463151177836658699/463151407512682502.png";
 		}
 
 		if (pathname.match(/^\/search/)) {
