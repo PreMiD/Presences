@@ -38,14 +38,14 @@ presence.on("UpdateData", async () => {
 		case pathname.startsWith("/profile") ? pathname : null:
 			presenceData.details = "Przegląda profil:";
 			presenceData.state = document.querySelector("h1").textContent;
-			presenceData.buttons = [{ label: "Zobacz profil", url: href }];
+			presenceData.buttons = [{ label: "Zobacz Profil", url: href }];
 			break;
 		case community:
 			presenceData.smallImageKey = Assets.Reading;
 			if (community.split("/").length === 3) {
 				presenceData.details = "Przegląda post na forum:";
 				presenceData.state = document.querySelector("h1").textContent;
-				presenceData.buttons = [{ label: "Zobacz post", url: href }];
+				presenceData.buttons = [{ label: "Zobacz Post", url: href }];
 			} else presenceData.details = "Przegląda forum...";
 			break;
 		case production:
@@ -61,14 +61,14 @@ presence.on("UpdateData", async () => {
 				if (nav.children.length === 3) {
 					presenceData.details = "Przegląda serię:";
 					presenceData.state = document.querySelector("h1.fw-bolder").textContent;
-					presenceData.buttons = [{ label: "Zobacz serię", url: href }];
+					presenceData.buttons = [{ label: "Zobacz Serię", url: href }];
 				} else if (nav.children.length === 4) {
 					presenceData.details = `Ogląda: ${nav.children[2].textContent}`;
 					presenceData.state = `Odcinek: ${nav.children[3].textContent}`;
 					presenceData.buttons = [
 						{ label: "Oglądaj", url: href },
 						{
-							label: "Cała seria",
+							label: "Cała Seria",
 							url: `${origin}${nav.children[2]
 								.querySelector("a")
 								.getAttribute("href")}`,
