@@ -60,7 +60,8 @@ presence.on("UpdateData", async () => {
 					.getAttribute("src");
 				if (nav.children.length === 3) {
 					presenceData.details = "Przegląda serię:";
-					presenceData.state = document.querySelector("h1.fw-bolder").textContent;
+					presenceData.state =
+						document.querySelector("h1.fw-bolder").textContent;
 					presenceData.buttons = [{ label: "Zobacz Serię", url: href }];
 				} else if (nav.children.length === 4) {
 					presenceData.details = `Ogląda: ${nav.children[2].textContent}`;
