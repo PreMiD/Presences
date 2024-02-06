@@ -1,15 +1,15 @@
-import { defineEntryPoint, getContext } from "premid";
+import { defineEntryPoint, getContext, useDom } from "premid";
 
 import type { YouTubeConfig } from "../config.js";
 
 const context = getContext<YouTubeConfig>(),
 	onReadyStateChange = () => {
-		if (document.readyState === "complete") void main();
+		if (document.readyState === "complete") void updateActivity();
 	},
-	runUpdate = () => {
-		void main();
+	runUpdateActivity = () => {
+		void updateActivity();
 	},
-	main = async () => {
+	updateActivity = async () => {
 		const { fetchStrings } = context,
 			{ t } = await fetchStrings("string1", "string3", "string5");
 	};
@@ -17,11 +17,19 @@ const context = getContext<YouTubeConfig>(),
 export default defineEntryPoint({
 	mode: "modern",
 	setup: () => {
-		document.addEventListener("readystatechange", onReadyStateChange);
-		context.presence.on("settingUpdate", runUpdate);
+		const { on } = useDom(),
+			{ presence } = context;
+
+		on("document.readystatechange", onReadyStateChange);
+		on("window.popstate", runUpdateActivity);
+		presence.on("settingUpdate", runUpdateActivity);
 	},
 	teardown: () => {
-		document.removeEventListener("readystatechange", onReadyStateChange);
-		context.presence.off("settingUpdate", runUpdate);
+		const { off } = useDom(),
+			{ presence } = context;
+
+		off("document.readystatechange", onReadyStateChange);
+		off("window.popstate", runUpdateActivity);
+		presence.off("settingUpdate", runUpdateActivity);
 	},
 });

@@ -1,3 +1,5 @@
+import type { MergeText } from "../utils.js";
+
 export function useDom() {
 	const { href, pathname, search, hash, host, hostname, origin, port, protocol } = document.location;
 	return {
@@ -13,8 +15,32 @@ export function useDom() {
 		host,
 		hostname,
 		href,
-		off: document.removeEventListener.bind(document),
-		on: document.addEventListener.bind(document),
+		/**
+		 * Remove an event listener from the document or window
+		 */
+		off: <K extends MergeText<"window.", keyof WindowEventMap> | MergeText<"document.", keyof DocumentEventMap>>(
+			key: K,
+			listener: EventListenerOrEventListenerObject,
+			options?: boolean | EventListenerOptions
+		) => {
+			const [target, event] = key.split(".") as ["window" | "document", string];
+			target === "document"
+				? document.removeEventListener.bind(document)(event, listener, options)
+				: window.removeEventListener.bind(window)(event, listener, options);
+		},
+		/**
+		 * Add an event listener to the document or window
+		 */
+		on: <K extends MergeText<"window.", keyof WindowEventMap> | MergeText<"document.", keyof DocumentEventMap>>(
+			key: K,
+			listener: EventListenerOrEventListenerObject,
+			options?: boolean | AddEventListenerOptions
+		) => {
+			const [target, event] = key.split(".") as ["window" | "document", string];
+			target === "document"
+				? document.addEventListener.bind(document)(event, listener, options)
+				: window.addEventListener.bind(window)(event, listener, options);
+		},
 		origin,
 		pathname,
 		port,
