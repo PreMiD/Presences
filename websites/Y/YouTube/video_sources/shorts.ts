@@ -4,13 +4,15 @@ function isActive(): boolean {
 	return (
 		document.location.pathname.includes("/shorts/") &&
 		!!getTitle() &&
-		!!getUploader()
+		!!getUploader() &&
+		!!getChannelURL() &&
+		!!getVideoID()
 	);
 }
 
 function getTitle(): string {
 	return getShortsElement()
-		?.closest("ytd-reel-player-header-renderer")
+		?.closest(".ytd-reel-player-overlay-renderer")
 		?.querySelector(".title")
 		?.textContent.trim();
 }

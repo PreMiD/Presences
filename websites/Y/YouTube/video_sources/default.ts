@@ -1,7 +1,7 @@
 import { Resolver } from "../util";
 
 function isActive(): boolean {
-	return !!getTitle() && !!getUploader();
+	return !!getTitle() && !!getUploader() && !!getVideoID() && !!getChannelURL();
 }
 
 function getTitle(): string {

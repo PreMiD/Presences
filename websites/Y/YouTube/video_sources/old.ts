@@ -6,7 +6,9 @@ function isActive(): boolean {
 		!!document.querySelector(".watch-title") &&
 		document.location.pathname.includes("/watch") &&
 		!!getTitle() &&
-		!!getUploader()
+		!!getUploader() &&
+		!!getVideoID() &&
+		!!getChannelURL()
 	);
 }
 

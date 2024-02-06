@@ -5,7 +5,9 @@ function isActive(): boolean {
 	return (
 		document.location.pathname.includes("/embed") &&
 		!!getTitle() &&
-		!!getUploader()
+		!!getUploader() &&
+		!!getVideoID() &&
+		!!getChannelURL()
 	);
 }
 

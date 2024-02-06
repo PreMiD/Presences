@@ -5,7 +5,9 @@ function isActive(): boolean {
 	return (
 		!!document.querySelector(".player-video-title") &&
 		!!getTitle() &&
-		!!getUploader()
+		!!getUploader() &&
+		!!getVideoID() &&
+		!!getChannelURL()
 	);
 }
 

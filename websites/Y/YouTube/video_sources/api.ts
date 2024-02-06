@@ -5,16 +5,6 @@ import { getVideoID as getShortsVideoID } from "./shorts";
 const videoCache = new Map<string, YouTubeAPIResponse>(),
 	videoCacheLoading = new Set<string>();
 
-interface YouTubeConfig extends Record<string, unknown> {
-	yt: {
-		config_: {
-			INNERTUBE_API_KEY: string;
-			INNERTUBE_CLIENT_NAME: string;
-			INNERTUBE_CLIENT_VERSION: string;
-		};
-	};
-}
-
 interface YouTubeAPIResponse {
 	videoDetails: {
 		title: string;
@@ -35,21 +25,13 @@ interface YouTubeAPIResponse {
 }
 
 async function fetchVideoData(id: string) {
-	const {
-		yt: {
-			config_: {
-				INNERTUBE_API_KEY: apiKey,
-				INNERTUBE_CLIENT_NAME: clientName,
-				INNERTUBE_CLIENT_VERSION: clientVersion,
-			},
-		},
-	} = await presence.getPageVariable<YouTubeConfig>(
+	const data = await presence.getPageVariable(
 		"yt.config_.INNERTUBE_API_KEY",
 		"yt.config_.INNERTUBE_CLIENT_NAME",
 		"yt.config_.INNERTUBE_CLIENT_VERSION"
 	);
 	const request = fetch(
-		`https://www.youtube.com/youtubei/v1/player?key=${apiKey}`,
+		`https://www.youtube.com/youtubei/v1/player?key=${data["yt.config_.INNERTUBE_API_KEY"]}`,
 		{
 			method: "POST",
 			headers: {
@@ -59,8 +41,8 @@ async function fetchVideoData(id: string) {
 				videoId: id,
 				context: {
 					client: {
-						clientName,
-						clientVersion,
+						clientName: data["yt.config_.INNERTUBE_CLIENT_NAME"],
+						clientVersion: data["yt.config_.INNERTUBE_CLIENT_VERSION"],
 					},
 				},
 			}),
@@ -73,14 +55,19 @@ async function fetchVideoData(id: string) {
 
 function isActive(): boolean {
 	const currentVideoID = getVideoID();
-	if (!videoCache.has(currentVideoID)) {
+	if (
+		!videoCache.has(currentVideoID) &&
+		!videoCacheLoading.has(currentVideoID)
+	) {
 		fetchVideoData(currentVideoID);
 		return false;
 	} else if (videoCacheLoading.has(currentVideoID)) {
 		return false;
 	}
 
-	return !!getTitle() && !!getUploader();
+	return (
+		!!getTitle() && !!getUploader() && !!currentVideoID && !!getChannelURL()
+	);
 }
 
 function getTitle(): string {
