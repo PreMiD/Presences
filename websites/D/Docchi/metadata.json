@@ -10,9 +10,9 @@
 		"pl": "Polska strona anime z wieloma seriami, najlepsze odtwarzacze wideo, dobra jakość."
 	},
 	"url": "docchi.pl",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/oc3Dq03.png",
-	"thumbnail": "https://i.imgur.com/Tk2neRV.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Docchi/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Docchi/assets/thumbnail.png",
 	"color": "#07BF67",
 	"category": "anime",
 	"tags": [
