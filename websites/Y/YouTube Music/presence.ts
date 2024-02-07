@@ -195,7 +195,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>("#thumbnail img").src;
 			presenceData.smallImageKey =
-				"https://cdn.verycrunchy.dev/ytm-smallimagekey.png";
+				"https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/0.png";
 		}
 
 		if (pathname.match(/^\/search/)) {
