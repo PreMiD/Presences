@@ -6,7 +6,7 @@ presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/C/CodePen/assets/logo.png",
-		smallImageKey: "logo-outline",
+		smallImageKey: "https://cdn.discordapp.com/app-assets/670111348130185267/670111931348025385.png?size=512",
 		smallImageText: "codepen.io",
 		details: "Codepen.io",
 		state: "Coding...",
