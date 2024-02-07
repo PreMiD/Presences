@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/M/Monos%20Chinos/assets/logo.png",
 			details: (await strings).browsing,
-			smallImageKey: "browsing",
+			smallImageKey: Assets.Viewing,
 			smallImageText: (await strings).browsing,
 		},
 		actions: PageAction[] = [
@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
 		Object.assign(presenceData, {
 			details: title,
 			state: `${(await strings).episode} ${episode}`,
-			smallImageKey: "browsing",
+			smallImageKey: Assets.Viewing,
 			smallImageText: "viendo el capitulo",
 		});
 
