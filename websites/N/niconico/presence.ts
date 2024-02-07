@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
 					} - ${location.pathname.match(/lv\d+/)[0]}`,
 					largeImageKey:
 						"https://cdn.rcd.gg/PreMiD/websites/N/niconico/assets/logo.png",
-					smallImageKey: "live",
+					smallImageKey: Assets.Live,
 					smallImageText: (await strings).live,
 					startTimestamp:
 						Math.floor(Date.now() / 1000) -
