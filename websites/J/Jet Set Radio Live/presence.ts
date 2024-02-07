@@ -39,7 +39,7 @@ const presence = new Presence({
 		toejamandearl: "Toe Jam & Earl",
 		hover: "Hover",
 		butterflies: "Butterflies",
-		lethalleagueblaze: "Lethal League Blace",
+		lethalleagueblaze: "Lethal League Blaze",
 		bonafidebloom: "BonafideBloom",
 		djchidow: "DJ Chidow",
 		verafx: "VeraFX",
@@ -47,12 +47,17 @@ const presence = new Presence({
 		halloween: "Halloween",
 		christmas: "Christmas",
 		snowfi: "Snow-Fi",
+		brc: "Bomb Rush Cyberfunk",
+		elaquent: "Elaquent",
+		turntablism: "Turntablism",
+		sonicrush: "Sonic Rush"
 	};
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
+			type: ActivityType.Listening,
 			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/J/Jet%20Set%20Radio%20Live/assets/logo.png",
+				"https://cdn.rcd.gg/PreMiD/websites/J/Jet%20Set%20Radio%20Live/assets/logo.png"
 		},
 		audio = document.querySelector<HTMLAudioElement>("#audioPlayer"),
 		songName = document.querySelector(
@@ -60,16 +65,15 @@ presence.on("UpdateData", async () => {
 		),
 		buttons = await presence.getSetting<boolean>("buttons");
 
-	if (songName.textContent.length < 1 || !audio) {
-		presenceData.details = "Not tuned in.";
-		presenceData.smallImageKey = Assets.Pause;
-		presenceData.smallImageText = (await strings).pause;
-	} else {
-		const stationID = document
+	if (songName.textContent.length < 1 || !audio) presenceData.details = "Not tuned in.";
+	else {
+		const stationImage = document
 			.querySelector<HTMLImageElement>("#graffitiSoul")
-			.src.split("/")[5];
-		presenceData.largeImageKey = stationID;
-		presenceData.state = stationIDMap[stationID];
+			.src,
+		 stationName = stationIDMap[stationImage.split("/")[5]];
+		presenceData.largeImageKey = stationImage;
+		if (stationName) presenceData.state = stationName;
+
 		if (
 			!audio.paused &&
 			!document.querySelector('#loadingTrackCircle:not([style*="hidden"])')
