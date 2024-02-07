@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
 		params = document.location.search,
 		[, action] = path.split("/"),
 		details = boardTypeMapping[action],
-		presenceData: PresenceData = { largeImageKey: "namu" };
+		presenceData: PresenceData = { largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/N/namu.wiki/assets/logo.png" };
 
 	/**
 	 *
