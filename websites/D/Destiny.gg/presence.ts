@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/D/Destiny.gg/assets/logo.png",
-		smallImageKey: "really_bad_d_gg_logo_upscale",
+		smallImageKey: "https://cdn.discordapp.com/app-assets/759921592926339072/759922832066609192.png?size=512",
 		startTimestamp: browsingTimestamp,
 	};
 
