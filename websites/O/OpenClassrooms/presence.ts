@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			smallImageKey: "teaching",
+			smallImageKey: "https://cdn.discordapp.com/app-assets/796446671617130567/800468363717509120.png?size=512",
 			smallImageText: "OpenClassrooms",
 		},
 		webpath = window.location.pathname.toLowerCase();
