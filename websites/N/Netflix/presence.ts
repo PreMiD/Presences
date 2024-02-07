@@ -442,7 +442,7 @@ presence.on("UpdateData", async () => {
 			details: strings.searchFor,
 			state: document.querySelector<HTMLInputElement>(".searchInput > input")
 				?.value,
-			smallImageKey: "search",
+			smallImageKey: Assets.Search,
 		},
 		"jbv/(\\d*)/": {
 			...(await (async () => {
