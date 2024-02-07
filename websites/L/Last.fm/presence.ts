@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/L/Last.fm/assets/logo.png",
-		smallImageKey: "browse",
+		smallImageKey: Assets.Search,
 		startTimestamp: browsingTimestamp,
 	};
 	const [buttons, timestamps, cover] = await Promise.all([
