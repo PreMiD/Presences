@@ -22,5 +22,5 @@
 		"subs"
 	],
 	"iframe": true,
-	"iFrameRegExp": "cda[.]pl|google[.]com|mega[.]nz|dailymotion[.]com"
+	"iFrameRegExp": "cda[.]pl|google[.]com|mega[.]nz|dailymotion[.]com|video[.]sibnet[.]ru"
 }
