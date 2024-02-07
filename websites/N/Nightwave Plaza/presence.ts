@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = { largeImageKey: "icon" },
+	const presenceData: PresenceData = { largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/N/Nightwave%20Plaza/assets/logo.png" },
 		playerTitle: HTMLDivElement = document.querySelector("div.player-title"),
 		playerArtist: HTMLDivElement = document.querySelector("div.player-artist"),
 		playerTime: HTMLDivElement = document.querySelector("div.player-time"),
