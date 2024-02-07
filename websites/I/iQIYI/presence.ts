@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: ["iqiyi_logo_b", "iqiyi_logo"][logo],
 		details: strings.browse,
-		smallImageKey: "search",
+		smallImageKey: Assets.Search,
 		startTimestamp: browsingTimestamp,
 	};
 
