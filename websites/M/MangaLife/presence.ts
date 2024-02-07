@@ -15,10 +15,10 @@ presence.on("UpdateData", async () => {
 				state: document.title.split(" | MangaLife")[0],
 			},
 			"/read-online/": {
-				smallImageKey: "reading",
+				smallImageKey: Assets.Reading,
 			},
 			"/search": {
-				smallImageKey: "search",
+				smallImageKey: Assets.Search,
 				details: "Searching...",
 			},
 			"/discussion": {
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 				state: "Bookmarks",
 			},
 			"settings.php": {
-				smallImageKey: "settings",
+				smallImageKey: "https://cdn.discordapp.com/app-assets/906057236927893576/932989087936286730.png?size=512",
 				details: "Editing...",
 				state: "User Settings",
 			},
