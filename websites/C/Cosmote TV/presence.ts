@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 				details: "Searching",
 				state:
 					document.querySelector<HTMLInputElement>("#searchFieldInput")?.value,
-				smallImageKey: "search",
+				smallImageKey: Assets.Search,
 				smallImageText: "Searching",
 			},
 			loginSplash: {
