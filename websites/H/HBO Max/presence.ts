@@ -170,7 +170,7 @@ presence.on("UpdateData", async () => {
 		case path === "/search":
 			Object.assign(presenceData, {
 				details: "Searching",
-				smallImageKey: "search",
+				smallImageKey: Assets.Search,
 				smallImageText: "Browsing...",
 			});
 			break;
