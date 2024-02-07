@@ -563,12 +563,12 @@ presence.on("UpdateData", async () => {
 					state: document.querySelector<HTMLInputElement>(
 						"input.location-search-input__input"
 					)?.value,
-					smallImageKey: "search",
+					smallImageKey: Assets.Search,
 				},
 				"/weather/map": {
 					details: strings.viewPage,
 					state: "Map",
-					smallImageKey: "map",
+					smallImageKey: "https://cdn.discordapp.com/app-assets/658230518520741915/819962900499398677.png?size=512",
 				},
 				"/weather/([0-9])": {
 					details: "Viewing weather of:",
@@ -579,7 +579,7 @@ presence.on("UpdateData", async () => {
 					smallImageText: document.querySelector(
 						"div.wr-day-summary > div > span"
 					)?.textContent,
-					smallImageKey: "reading",
+					smallImageKey: Assets.Reading,
 					buttons: [
 						{
 							label: "View Weather",
@@ -590,7 +590,7 @@ presence.on("UpdateData", async () => {
 				"/weather/features/([0-9])": {
 					details: strings.readingArticle,
 					state: title,
-					smallImageKey: "reading",
+					smallImageKey: Assets.Reading,
 					buttons: [
 						{
 							label: strings.buttonReadArticle,
