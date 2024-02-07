@@ -50,14 +50,14 @@ const presence = new Presence({
 		brc: "Bomb Rush Cyberfunk",
 		elaquent: "Elaquent",
 		turntablism: "Turntablism",
-		sonicrush: "Sonic Rush"
+		sonicrush: "Sonic Rush",
 	};
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			type: ActivityType.Listening,
 			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/J/Jet%20Set%20Radio%20Live/assets/logo.png"
+				"https://cdn.rcd.gg/PreMiD/websites/J/Jet%20Set%20Radio%20Live/assets/logo.png",
 		},
 		audio = document.querySelector<HTMLAudioElement>("#audioPlayer"),
 		songName = document.querySelector(
@@ -65,12 +65,12 @@ presence.on("UpdateData", async () => {
 		),
 		buttons = await presence.getSetting<boolean>("buttons");
 
-	if (songName.textContent.length < 1 || !audio) presenceData.details = "Not tuned in.";
+	if (songName.textContent.length < 1 || !audio)
+		presenceData.details = "Not tuned in.";
 	else {
-		const stationImage = document
-			.querySelector<HTMLImageElement>("#graffitiSoul")
-			.src,
-		 stationName = stationIDMap[stationImage.split("/")[5]];
+		const stationImage =
+				document.querySelector<HTMLImageElement>("#graffitiSoul").src,
+			stationName = stationIDMap[stationImage.split("/")[5]];
 		presenceData.largeImageKey = stationImage;
 		if (stationName) presenceData.state = stationName;
 
