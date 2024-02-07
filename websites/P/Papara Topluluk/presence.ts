@@ -29,7 +29,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/Papara%20Topluluk/assets/logo.png",
 			startTimestamp: dateNow,
 		},
 		page = document.location.pathname,
