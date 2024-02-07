@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/logo.png",
-			smallImageKey: "smallimagekey",
+			smallImageKey: "https://cdn.discordapp.com/app-assets/961652082027421746/961655974333141062.png?size=512",
 			smallImageText: "CodeSandbox",
 			details: "Loading",
 			startTimestamp: browsingTimestamp,
