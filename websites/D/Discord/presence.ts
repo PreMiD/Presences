@@ -254,7 +254,7 @@ presence.on("UpdateData", async () => {
 							: strings.inviteServer
 									.split("{0}")[1]
 									?.replace("{1}", document.title),
-						smallImageKey: "reading",
+						smallImageKey: Assets.Reading,
 						// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 						//@ts-expect-error
 						buttons: showInvites
@@ -368,7 +368,7 @@ presence.on("UpdateData", async () => {
 								c.className?.includes("appDetails")
 							)?.textContent
 						),
-						smallImageKey: "writing",
+						smallImageKey: Assets.Writing,
 					},
 					"/developers/teams/": {
 						details: strings.portal,
@@ -380,7 +380,7 @@ presence.on("UpdateData", async () => {
 							"{0}",
 							document.querySelector("div.Select-value")?.textContent
 						),
-						smallImageKey: "writing",
+						smallImageKey: Assets.Writing,
 					},
 					"/developers/servers/": {
 						details: strings.portal,
@@ -394,12 +394,12 @@ presence.on("UpdateData", async () => {
 								c.className.includes("itemName")
 							)?.textContent
 						),
-						smallImageKey: "reading",
+						smallImageKey: Assets.Reading,
 					},
 					"/developers/docs/": {
 						details: strings.portal,
 						state: strings.docs,
-						smallImageKey: "reading",
+						smallImageKey: Assets.Reading,
 						smallImageText: strings.reading,
 					},
 				};
@@ -588,7 +588,7 @@ presence.on("UpdateData", async () => {
 					state: `${strings.searchFor} ${
 						(document.querySelector("#query") as HTMLInputElement)?.value
 					}`,
-					smallImageKey: "search",
+					smallImageKey: Assets.Search,
 					smallImageText: strings.searching,
 				},
 				"/articles/": {
@@ -596,7 +596,7 @@ presence.on("UpdateData", async () => {
 					state: `${strings.readingArticle} ${document
 						.querySelector("h1")
 						?.textContent.trim()}`,
-					smallImageKey: "reading",
+					smallImageKey: Assets.Reading,
 					smallImageText: strings.reading,
 				},
 			};
@@ -725,7 +725,7 @@ presence.on("UpdateData", async () => {
 					state: `${strings.searchFor} ${
 						(document.querySelector("input") as HTMLInputElement)?.value
 					}`,
-					smallImageKey: "search",
+					smallImageKey: Assets.Search,
 					smallImageText: strings.searching,
 				},
 			};
