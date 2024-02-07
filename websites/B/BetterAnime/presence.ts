@@ -68,7 +68,7 @@ const presence = new Presence({
 		presenceData: {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/B/BetterAnime/assets/logo.png",
-			smallImageKey: "browse",
+			smallImageKey: Assets.Search,
 		},
 	};
 
