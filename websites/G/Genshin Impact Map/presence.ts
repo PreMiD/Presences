@@ -136,7 +136,7 @@ presence.on("UpdateData", async () => {
 			details: "Genshin Impact Map",
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/G/Genshin%20Impact%20Map/assets/logo.png",
-			smallImageKey: "search",
+			smallImageKey: Assets.Search,
 			startTimestamp: browsingTimestamp,
 		},
 		{ hash, host, hostname, pathname, search } = document.location,
