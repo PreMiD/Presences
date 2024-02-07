@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/A/Apple%20TV+/assets/logo.png",
 		details: "Browsing...",
-		smallImageKey: "browse",
+		smallImageKey: Assets.Search,
 		startTimestamp: data.startedSince,
 	};
 
