@@ -1,16 +1,20 @@
 import { Resolver } from "../util";
 
 function isActive(): boolean {
-	return document.location.pathname.includes("/shorts/");
+	return (
+		document.location.pathname.includes("/shorts/") &&
+		!!getTitle() &&
+		!!getUploader() &&
+		!!getChannelURL() &&
+		!!getVideoID()
+	);
 }
 
 function getTitle(): string {
-	return (
-		getShortsElement()
-			?.closest("ytd-reel-player-header-renderer")
-			.querySelector(".title")
-			?.textContent.trim() || "Loading..."
-	);
+	return getShortsElement()
+		?.closest(".ytd-reel-player-overlay-renderer")
+		?.querySelector(".title")
+		?.textContent.trim();
 }
 
 function getShortsElement(): HTMLElement {
@@ -44,11 +48,16 @@ function getChannelURL(): string {
 	}`;
 }
 
+export function getVideoID(): string {
+	return document.location.pathname.split("/shorts/")[1];
+}
+
 const resolver: Resolver = {
 	isActive,
 	getTitle,
 	getUploader,
 	getChannelURL,
+	getVideoID,
 };
 
 export default resolver;

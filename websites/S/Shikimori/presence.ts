@@ -2,6 +2,14 @@ const presence = new Presence({
 	clientId: "934863156356972584",
 });
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Shikimori/assets/logo.png",
+}
+
+function textContent(tags: string) {
+	return document.querySelector(tags)?.textContent;
+}
+
 presence.on("UpdateData", async () => {
 	const [privacy, logo, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
@@ -9,8 +17,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/S/Shikimori/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			details: "Где-то на сайте",
 		},
 		title = document
@@ -19,17 +26,14 @@ presence.on("UpdateData", async () => {
 		{ pathname, href } = document.location,
 		typeContent =
 			pathname.split("/")[1] === "animes"
-				? "аниме"
+				? "Аниме"
 				: pathname.split("/")[1] === "mangas"
-				? "манги"
-				: "ранобэ",
+				? "Манга"
+				: "Ранобэ",
 		isImageExist = (tags: string) => {
 			return document.querySelector<HTMLImageElement>(tags) && !privacy && logo
 				? document.querySelector<HTMLImageElement>(tags)?.src
-				: "https://cdn.rcd.gg/PreMiD/websites/S/Shikimori/assets/logo.png";
-		},
-		textContent = (tags: string) => {
-			return document.querySelector(tags)?.textContent;
+				: Assets.Logo;
 		};
 
 	presenceData.buttons = [
@@ -43,10 +47,12 @@ presence.on("UpdateData", async () => {
 		case "":
 			presenceData.details = "На главной странице";
 			break;
+
 		case "animes":
 		case "mangas":
 		case "ranobe":
 			presenceData.details = `В поиске ${typeContent}`;
+			presenceData.smallImageKey = Assets.Search;
 
 			if (pathname.split("/")[2]) {
 				switch (pathname.split("/")[2]) {
@@ -62,10 +68,11 @@ presence.on("UpdateData", async () => {
 					case "studio":
 						presenceData.state = textContent("header > h1");
 						break;
+
 					default:
-						presenceData.details = `Смотрит страницу ${typeContent}`;
-						presenceData.state = title;
+						presenceData.details = `${title} (${typeContent})`;
 						presenceData.largeImageKey = isImageExist(".c-poster img");
+						presenceData.smallImageKey = Assets.Viewing;
 						break;
 				}
 			}
@@ -73,14 +80,14 @@ presence.on("UpdateData", async () => {
 			switch (pathname.split("/")[3]) {
 				case "critiques":
 				case "reviews":
-					presenceData.details = `Смотрит ${textContent(
-						".b-breadcrumbs span:nth-last-child(1) span"
-					)?.toLowerCase()} ${typeContent}`;
-					presenceData.state = textContent(
-						".b-breadcrumbs span:nth-last-child(2) span"
-					);
+					presenceData.details = `${document
+						.querySelector("meta[itemprop='name']")
+						.getAttribute("content")} (${typeContent})`;
+					presenceData.state = title;
 					presenceData.largeImageKey = isImageExist(".b-menu_logo img");
+					presenceData.smallImageKey = Assets.Reading;
 					break;
+
 				case "characters":
 				case "chronology":
 				case "clubs":
@@ -91,22 +98,27 @@ presence.on("UpdateData", async () => {
 				case "staff":
 				case "related":
 				case "videos":
-					presenceData.details = `Смотрит страницу ${typeContent} (${textContent(
-						".subheadline"
-					)})`;
-					presenceData.state = textContent(
+					presenceData.details = `${textContent(
 						".b-breadcrumbs span:last-child span"
-					);
+					)} (${typeContent})`;
+					presenceData.state = textContent(".subheadline");
 					presenceData.largeImageKey = isImageExist(".b-menu_logo img");
+					presenceData.smallImageKey = Assets.Viewing;
 					break;
+
 				case "franchise":
-					presenceData.details = "Смотрит франшизу";
-					presenceData.state = textContent(
+					presenceData.details = textContent(
 						".b-breadcrumbs span:last-child span"
 					);
+					presenceData.state = "Франшиза";
+					presenceData.smallImageKey = Assets.Viewing;
+					break;
+
+				default:
 					break;
 			}
 			break;
+
 		case "clubs":
 		case "collections":
 		case "articles":
@@ -116,46 +128,55 @@ presence.on("UpdateData", async () => {
 		case "achievements":
 		case "moderations":
 		case "kakie-anime-postmotret":
-			presenceData.details = `Смотрит ${title.toLowerCase()}`;
+			presenceData.details = title;
+			presenceData.smallImageKey = Assets.Viewing;
+
 			if (pathname.split("/")[2]) {
-				presenceData.details = `Смотрит
-				${textContent(".b-link span:first-child")?.toLowerCase()}`;
+				presenceData.details = textContent(".b-link span:first-child");
 				presenceData.state = textContent(".l-page header h1");
 				presenceData.largeImageKey = isImageExist(".b-menu_logo img");
 			}
 			break;
+
 		case "forum":
-			presenceData.details = `Смотрит ${textContent(
-				".l-page header .b-link span"
-			)?.toLowerCase()}`;
+			presenceData.details = textContent(".l-page header .b-link span");
+			presenceData.smallImageKey = Assets.Reading;
+
 			switch (pathname.split("/")[2]) {
 				case "updates":
 				case "reviews":
 					presenceData.state = textContent(".reload");
 					break;
+
 				default:
 					presenceData.state = title;
 					presenceData.largeImageKey = isImageExist(".b-menu_logo img");
 					break;
 			}
 			break;
+
 		case title.replace(" ", "+"):
-			presenceData.details = `Смотрит профиль ${
-				!privacy ? title : "пользователя"
-			}`;
+			presenceData.details = `Профиль ${!privacy ? title : "пользователя"}`;
 			presenceData.largeImageKey = isImageExist(".avatar img");
+			presenceData.smallImageKey = Assets.Viewing;
 			break;
+
 		case "characters":
 		case "people":
-			presenceData.details = `Смотрит страницу ${textContent(
-				".l-page header p"
-			)?.toLowerCase()}`;
-			presenceData.state = title;
+			presenceData.details = textContent(".l-page header p");
 			presenceData.largeImageKey = isImageExist(".c-poster img");
-			if (!privacy && pathname.split("/")[3]) {
-				presenceData.details = `${presenceData.details} (${title})`;
-				presenceData.state = textContent(".b-breadcrumbs span:last-child span");
-				presenceData.largeImageKey = isImageExist(".b-menu_logo img");
+			presenceData.smallImageKey = Assets.Viewing;
+
+			if (!privacy) {
+				presenceData.details = `${title} (${textContent(".l-page header p")})`;
+
+				if (pathname.split("/")[3]) {
+					presenceData.details = `${textContent(
+						".b-breadcrumbs span:last-child span"
+					)} (${textContent(".l-page header p")})`;
+					presenceData.state = title;
+					presenceData.largeImageKey = isImageExist(".b-menu_logo img");
+				}
 			}
 			break;
 	}
@@ -170,56 +191,42 @@ presence.on("UpdateData", async () => {
 		case "reviews":
 		case "versions":
 		case "topics":
-			presenceData.details = `Смотрит профиль ${
+			presenceData.details = `Профиль ${
 				!privacy ? pathname.split("/")[1].replace("+", " ") : "пользователя"
 			}`;
 			presenceData.state = title;
+			presenceData.smallImageKey = Assets.Viewing;
 			break;
-		case "edit":
-			presenceData.details = "Настраивает учётную запись";
-			presenceData.state = title;
-			break;
+
 		case "dialogs":
-			presenceData.details = "Смотрит почту";
+			presenceData.details = "Почта";
+			presenceData.smallImageKey = Assets.Viewing;
 			break;
+
 		case "messages":
-			presenceData.details = `Смотрит ${title.toLowerCase()}`;
+			presenceData.details = title;
+			presenceData.smallImageKey = Assets.Viewing;
 			break;
+
 		case "history":
-			presenceData.details = `Смотрит профиль ${
+			presenceData.details = `Профиль ${
 				!privacy ? pathname.split("/")[1].replace("+", " ") : "пользователя"
 			}`;
-			presenceData.state = "Историю списка";
+			presenceData.state = "История списка";
 			presenceData.largeImageKey = isImageExist(".submenu-triangle img");
+			presenceData.smallImageKey = Assets.Viewing;
 			break;
+
 		case "list":
 			if (pathname.split("/")[3].match(/anime|manga/)) {
-				presenceData.details = `Смотрит ${textContent(
-					".subheadline"
-				)?.toLowerCase()} ${
+				presenceData.details = `${textContent(".subheadline")} ${
 					!privacy ? pathname.split("/")[1] : "пользователя"
 				}`;
+				presenceData.state = document.querySelector<HTMLElement>(
+					".mylist .b-link.selected"
+				)?.firstChild;
 				presenceData.largeImageKey = isImageExist(".avatar img");
-				switch (pathname.split("/")[5]) {
-					case "planned":
-						presenceData.state = "Запланированно";
-						break;
-					case "watching":
-						presenceData.state = "Смотрю";
-						break;
-					case "rewatching":
-						presenceData.state = "Пересматриваю";
-						break;
-					case "completed":
-						presenceData.state = "Просмотрено";
-						break;
-					case "on_hold":
-						presenceData.state = "Отложено";
-						break;
-					case "dropped":
-						presenceData.state = "Брошено";
-						break;
-				}
+				presenceData.smallImageKey = Assets.Viewing;
 			}
 			break;
 	}

@@ -121,16 +121,16 @@ presence.on("UpdateData", () => {
 				case "/":
 				case "/dashboard":
 				case "/login": {
-					const buttons = document.querySelectorAll(
-						".lessons-and-reviews__button"
-					);
+					const buttons = document.querySelector(
+						".lessons-and-reviews"
+					).children;
 					if (buttons.length === 2) {
-						const lessons = +buttons[0].querySelector<HTMLSpanElement>(
-								".lessons-and-reviews__count"
-							).textContent,
-							reviews = +buttons[1].querySelector<HTMLSpanElement>(
-								".lessons-and-reviews__count"
-							).textContent;
+						const lessons =
+								+buttons[0].querySelector<HTMLSpanElement>("[class*=__count]")
+									.textContent,
+							reviews =
+								+buttons[1].querySelector<HTMLSpanElement>("[class*=__count]")
+									.textContent;
 						presenceData.details = "Viewing Dashboard";
 						presenceData.state = `${lessons} lessons | ${reviews} reviews`;
 						presenceData.smallImageText =
@@ -164,6 +164,10 @@ presence.on("UpdateData", () => {
 						presenceData.details = "Browsing";
 						presenceData.state = "Viewing Home Page";
 					}
+					break;
+				}
+				case "/subject-lessons/picker": {
+					presenceData.details = "Choosing Lessons";
 					break;
 				}
 				case "/subjects/extra_study": {

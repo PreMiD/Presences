@@ -230,7 +230,7 @@ presence.on("UpdateData", async () => {
 
 	if (hostname.split(".")[0] === "replay") {
 		presenceData.largeImageKey = cover
-			? document.querySelector<HTMLImageElement>("#songImage").src
+			? document.querySelector<HTMLImageElement>("#songImage")
 			: Assets.Replay;
 		presenceData.details = document.querySelector("#songName").textContent;
 		presenceData.state = document.querySelector("#playerName").textContent;
@@ -259,7 +259,7 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (hostname.split(".")[0] === "royale") {
 		presenceData.largeImageKey = cover
-			? document.querySelector<HTMLImageElement>("#songImage").src
+			? document.querySelector<HTMLImageElement>("#songImage")
 			: Assets.Replay;
 		presenceData.details = document.querySelector("#songName").textContent;
 		presenceData.state = `${
@@ -297,20 +297,27 @@ presence.on("UpdateData", async () => {
 					".player-nickname .nickname"
 				)?.textContent;
 				presenceData.smallImageKey =
-					document.querySelector<HTMLImageElement>(".countryIcon")?.src;
+					document.querySelector<HTMLImageElement>(".countryIcon");
 				if (cover) {
 					presenceData.largeImageKey =
-						document.querySelector<HTMLImageElement>(".avatar")?.src;
+						document.querySelector<HTMLImageElement>(".avatar");
 				}
 				presenceData.buttons = [button];
 				break;
 			}
 			case "leaderboard": {
 				const previewURL = new URL(
-					document.querySelector<HTMLAnchorElement>(
-						'a[href^="https://allpoland.github.io"]'
-					)?.href
-				);
+						document.querySelector<HTMLAnchorElement>(
+							'a[href^="https://allpoland.github.io"]'
+						)?.href ?? "https://allpoland.github.io"
+					),
+					difficulty =
+						previewURL.searchParams.get("difficulty") ??
+						document.querySelector(".primary > span:last-of-type").textContent,
+					mode =
+						previewURL.searchParams.get("mode") ??
+						document.querySelector<HTMLDivElement>(".primary > span > div")
+							?.title;
 				presenceData.details =
 					document.querySelector(".title .name")?.textContent;
 				presenceData.state =
@@ -319,24 +326,18 @@ presence.on("UpdateData", async () => {
 					delete presenceData.smallImageText;
 				if (mapSmallImages !== 3) {
 					presenceData.smallImageText = `${
-						mapSmallImages === 0 || mapSmallImages === 1
-							? previewURL.searchParams.get("mode")
-							: ""
+						mapSmallImages === 0 || mapSmallImages === 1 ? mode : ""
 					} ${
 						mapSmallImages === 0 || mapSmallImages === 2
-							? previewURL.searchParams.get("difficulty").replace("Plus", "+")
+							? difficulty.replace("Plus", "+")
 							: ""
 					}`;
 					presenceData.smallImageKey =
 						OtherAssets[
 							simplifyKey(
-								`${
-									mapSmallImages === 0 || mapSmallImages === 1
-										? previewURL.searchParams.get("mode")
-										: ""
-								}${
+								`${mapSmallImages === 0 || mapSmallImages === 1 ? mode : ""}${
 									mapSmallImages === 0 || mapSmallImages === 2
-										? previewURL.searchParams.get("difficulty")
+										? difficulty.replace("+", "Plus")
 										: ""
 								}`
 							) as keyof typeof OtherAssets
@@ -344,7 +345,7 @@ presence.on("UpdateData", async () => {
 						OtherAssets[
 							`Unknown${
 								mapSmallImages === 0 || mapSmallImages === 2
-									? previewURL.searchParams.get("difficulty")
+									? difficulty.replace("+", "Plus")
 									: ""
 							}` as keyof typeof OtherAssets
 						];
@@ -366,7 +367,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [button];
 				if (cover) {
 					presenceData.largeImageKey =
-						document.querySelector<HTMLImageElement>(".event > img")?.src;
+						document.querySelector<HTMLImageElement>(".event > img");
 				}
 				break;
 			}
@@ -376,7 +377,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [button];
 				if (cover) {
 					presenceData.largeImageKey =
-						document.querySelector<HTMLImageElement>(".clanImage").src;
+						document.querySelector<HTMLImageElement>(".clanImage");
 				}
 				break;
 			}
@@ -388,7 +389,7 @@ presence.on("UpdateData", async () => {
 				if (cover) {
 					presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 						".content-box .playlistImage"
-					).src;
+					);
 				}
 				presenceData.buttons = [button];
 				break;
@@ -439,6 +440,9 @@ presence.on("UpdateData", async () => {
 			case "followed": {
 				presenceData.details = "Viewing their follows";
 				break;
+			}
+			case "clansmap": {
+				presenceData.details = "Viewing clans map";
 			}
 		}
 		if (

@@ -1,10 +1,14 @@
 import { Resolver } from "../util";
-import { getChannelURL } from "./default";
+import { getChannelURL, getVideoID } from "./default";
 
 function isActive(): boolean {
 	return (
 		!!document.querySelector(".watch-title") &&
-		document.location.pathname.includes("/watch")
+		document.location.pathname.includes("/watch") &&
+		!!getTitle() &&
+		!!getUploader() &&
+		!!getVideoID() &&
+		!!getChannelURL()
 	);
 }
 
@@ -21,6 +25,7 @@ const resolver: Resolver = {
 	getTitle,
 	getUploader,
 	getChannelURL,
+	getVideoID,
 };
 
 export default resolver;
