@@ -77,6 +77,18 @@ setInterval(() => {
 	newStats();
 }, 10_000);
 
+const enum Assets {
+	WhiteBackSmall = "https://cdn.discordapp.com/app-assets/748660637021896835/797201293936427008.png?size=512",
+	BlackBackSmall = "https://cdn.discordapp.com/app-assets/748660637021896835/797201293839826944.png?size=512",
+	ColorBackSmall = "https://cdn.discordapp.com/app-assets/748660637021896835/797201293818331176.png?size=512",
+	ColorBack = "https://cdn.discordapp.com/app-assets/748660637021896835/797196401401790464.png?size=512",
+	BlackBack = "https://cdn.discordapp.com/app-assets/748660637021896835/797196372645249024.png?size=512",
+	WhiteBack = "https://cdn.discordapp.com/app-assets/748660637021896835/797196345559482378.png?size=512",
+	Black = "https://cdn.discordapp.com/app-assets/748660637021896835/797196302596833291.png?size=512",
+	White = "https://cdn.discordapp.com/app-assets/748660637021896835/797193043630358570.png?size=512",
+	Logo = "https://cdn.discordapp.com/app-assets/748660637021896835/748660771361390622.png?size=512"
+}
+
 presence.on("UpdateData", async () => {
 	const [info, elapsed, format1, format2, format3, buttons, logo] =
 			await Promise.all([
@@ -89,19 +101,19 @@ presence.on("UpdateData", async () => {
 				presence.getSetting<number>("logo"),
 			]),
 		logoArr = [
-			"reywhitebacksmall",
-			"reyblackbacksmall",
-			"reycolorbacksmall",
-			"reywhiteback",
-			"reyblackback",
-			"reycolorback",
-			"reywhite",
-			"reyblack",
-			"rey",
+			Assets.WhiteBackSmall,
+			Assets.BlackBackSmall,
+			Assets.ColorBackSmall,
+			Assets.WhiteBack,
+			Assets.BlackBack,
+			Assets.ColorBack,
+			Assets.White,
+			Assets.Black,
+			Assets.Logo,
 		],
 		presenceData: PresenceData = {
-			largeImageKey: logoArr[logo] || "reywhitebacksmall",
-			smallImageKey: "reading",
+			largeImageKey: logoArr[logo] || Assets.WhiteBackSmall,
+			smallImageKey: Assets.Reading,
 		};
 
 	let showFormat3 = false;
@@ -234,8 +246,8 @@ presence.on("UpdateData", async () => {
 				.src.includes("play.png");
 
 		paused
-			? (presenceData.smallImageKey = "pause")
-			: (presenceData.smallImageKey = "play");
+			? (presenceData.smallImageKey = Assets.Pause)
+			: (presenceData.smallImageKey = Assets.Play);
 
 		presenceData.details = format1
 			.replace("%title%", channel.track)
