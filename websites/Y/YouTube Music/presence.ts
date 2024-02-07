@@ -195,7 +195,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>("#thumbnail img").src;
 			presenceData.smallImageKey =
-				"https://cdn.discordapp.com/app-assets/463151177836658699/463151407512682502.png";
+				"https://cdn.discordapp.com/app-assets/463151177836658699/463151407512682502.png?size=512";
 		}
 
 		if (pathname.match(/^\/search/)) {
