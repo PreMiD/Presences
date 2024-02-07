@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			smallImageKey: "icon",
+			smallImageKey: "https://cdn.discordapp.com/app-assets/754070047193956492/870496976570044449.png?size=512",
 			smallImageText: "DMOJ: Modern Online Judge",
 			startTimestamp: browsingTimestamp,
 		},
