@@ -10,7 +10,10 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const path: string = document.location.pathname,
-		presenceData: PresenceData = { largeImageKey: "diziroll" };
+		presenceData: PresenceData = {
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Diziroll/assets/logo.png",
+		};
 	presenceData.startTimestamp = Date.now();
 	if (path.startsWith("/arsiv")) {
 		presenceData.details = "Bir sayfaya bakıyor:";

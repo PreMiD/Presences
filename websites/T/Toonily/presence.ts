@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 				: ""
 		} ${hostname.endsWith(".com") ? "Manhwas" : "Mangas"}`;
 		if (order) presenceData.state = `Ordered By ${order.textContent}`;
-		presenceData.smallImageText = presenceData.smallImageKey = "looking";
+		presenceData.smallImageText = presenceData.smallImageKey = Assets.Viewing;
 	} else if (
 		pathname.startsWith("/manga/") ||
 		pathname.startsWith("/webtoon/")

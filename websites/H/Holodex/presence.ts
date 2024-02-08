@@ -8,6 +8,21 @@ const presence = new Presence({
 
 let iFrameVideo: { isPaused: boolean; thumbnail: string };
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png",
+	Mdihome = "https://cdn.discordapp.com/app-assets/860224040060715018/860835539049513010.png?size=512",
+	Mdiheart = "https://cdn.discordapp.com/app-assets/860224040060715018/860836675156574228.png?size=512",
+	Mdiaccountboxmultiple = "https://cdn.discordapp.com/app-assets/860224040060715018/860838665591455804.png?size=512",
+	Mdiaccountbox = "https://cdn.discordapp.com/app-assets/860224040060715018/860839344785063946.png?size=512",
+	Mdianimationplay = "https://cdn.discordapp.com/app-assets/860224040060715018/860846730412818452.png?size=512",
+	Multiview = "https://cdn.discordapp.com/app-assets/860224040060715018/860848013429047316.png?size=512",
+	Mdimusic = "https://cdn.discordapp.com/app-assets/860224040060715018/860849152802684949.png?size=512",
+	Mdiinfinity = "https://cdn.discordapp.com/app-assets/860224040060715018/860850489889128448.png?size=512",
+	Mdisettings = "https://cdn.discordapp.com/app-assets/860224040060715018/860860048791961640.png?size=512",
+	Mdiloginvariant = "https://cdn.discordapp.com/app-assets/860224040060715018/860861825770586112.png?size=512",
+	Mdiplaylistplay = "https://cdn.discordapp.com/app-assets/860224040060715018/861196477371514880.png?size=512",
+}
+
 presence.on(
 	"iFrameData",
 	(data: { video: { isPaused: boolean; thumbnail: string } }) => {
@@ -176,7 +191,7 @@ const getInfo = {
 		details: `Unsupported Page: ${window.location.pathname}`,
 		state: "",
 		smallimage: {
-			image: "largeimage",
+			image: Assets.Logo,
 			hover: "Holodex",
 		},
 		startTime: ~~(Date.now() / 1000),
@@ -274,57 +289,60 @@ const getInfo = {
 			switch (path[1]) {
 				case "home":
 					return {
-						image: "mdihome",
+						image: Assets.Mdihome,
 						hover: "Home Page",
 					};
 				case "favorites":
 					return {
-						image: "mdiheart",
+						image: Assets.Mdiheart,
 						hover: "Favorites",
 					};
 				case "channel":
 					return {
-						image: path.length < 3 ? "mdiaccountboxmultiple" : "mdiaccountbox",
+						image:
+							path.length < 3
+								? Assets.Mdiaccountboxmultiple
+								: Assets.Mdiaccountbox,
 						hover: path.length < 3 ? "Channels" : `${getInfo.channel().title}`,
 					};
 				case "library":
 					return {
-						image: "mdianimationplay",
+						image: Assets.Mdianimationplay,
 						hover: "Library",
 					};
 				case "playlists":
 					return {
-						image: "mdiplaylistplay",
+						image: Assets.Mdiplaylistplay,
 						hover: "Playlists",
 					};
 				case "multiview":
 					return {
-						image: "multiview",
+						image: Assets.Multiview,
 						hover: "MultiView",
 					};
 				case "music":
 					return {
-						image: "mdimusic",
+						image: Assets.Mdimusic,
 						hover: "Music",
 					};
 				case "infinite":
 					return {
-						image: "mdiinfinity",
+						image: Assets.Mdiinfinity,
 						hover: "Mugen Clips",
 					};
 				case "about":
 					return {
-						image: "mdihelpcircle",
+						image: Assets.Question,
 						hover: "About",
 					};
 				case "settings":
 					return {
-						image: "mdisettings",
+						image: Assets.Mdisettings,
 						hover: "Settings",
 					};
 				case "login":
 					return {
-						image: "mdiloginvariant",
+						image: Assets.Mdiloginvariant,
 						hover:
 							document.querySelector(".v-card.ma-auto.v-sheet .v-list") === null
 								? "Login Screen"
@@ -332,14 +350,14 @@ const getInfo = {
 					};
 				case "watch":
 					return {
-						image: iFrameVideo.isPaused ? "mdipause" : "mdiplay",
+						image: iFrameVideo.isPaused ? Assets.Pause : Assets.Play,
 						hover: iFrameVideo.isPaused
 							? (await strings).pause
 							: (await strings).play,
 					};
 				case "search":
 					return {
-						image: "mdimagnify",
+						image: Assets.Search,
 						hover:
 							getInfo.generic().getURLParameter("advanced") === "true"
 								? "Advanced Search"
@@ -348,7 +366,7 @@ const getInfo = {
 
 				default:
 					return {
-						image: "largeimage",
+						image: Assets.Logo,
 						hover: "Holodex",
 					};
 			}
@@ -359,9 +377,7 @@ presence.on("UpdateData", async () => {
 	dataUpdater.updateAll();
 
 	const presenceData: PresenceData = {
-			largeImageKey:
-				iFrameVideo.thumbnail ??
-				"https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png",
+			largeImageKey: iFrameVideo.thumbnail ?? Assets.Logo,
 			smallImageKey: data.smallimage.image,
 			smallImageText: data.smallimage.hover,
 			details: data.details,

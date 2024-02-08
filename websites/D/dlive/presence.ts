@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 		const presenceData: PresenceData = {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/D/dlive/assets/logo.png",
-			smallImageKey: "live",
+			smallImageKey: Assets.Live,
 		};
 
 		presenceData.details = document.querySelector<HTMLElement>(

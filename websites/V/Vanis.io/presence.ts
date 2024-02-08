@@ -12,7 +12,10 @@ let Server: string, Region: string, Nickname: string, Mass: string;
 
 presence.on("UpdateData", async () => {
 	// Presence Data
-	const presenceData: PresenceData = { largeImageKey: "vanis_image" },
+	const presenceData: PresenceData = {
+			largeImageKey:
+				"https://cdn.discordapp.com/app-assets/759926761554313218/759932013892861963.png?size=512",
+		},
 		massElement = document.querySelector("#hud .stats div:nth-child(3)"),
 		overlay = <HTMLElement>document.querySelector("#overlay");
 

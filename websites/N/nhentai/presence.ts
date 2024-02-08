@@ -183,19 +183,4 @@ presence.on("UpdateData", async () => {
 	}
 
 	presence.setActivity(presenceData);
-
-	/*
-
-		let presenceData: PresenceData = {
-			largeImageKey: "lg"
-		}
-
-		presenceData.details = "Browsing...";
-		presenceData.startTimestamp = browsingTimestamp;
-
-		delete presenceData.state;
-		delete presenceData.smallImageKey;
-
-		presence.setActivity(presenceData, true);
-	*/
 });

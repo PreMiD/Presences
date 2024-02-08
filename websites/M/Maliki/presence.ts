@@ -10,12 +10,17 @@ interface SongPlayingData {
 
 let songInfo: SongPlayingData = null;
 
+const enum Assets {
+	Logo = "https://cdn.discordapp.com/app-assets/990204576189808670/991002671844589628.png?size=512",
+	Malimode = "https://cdn.discordapp.com/app-assets/990204576189808670/991003995063603210.png?size=512",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
 				document.location.hostname === "malimode.maliki.com"
-					? "malimode"
-					: "maliki_1024",
+					? Assets.Malimode
+					: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		[privacy, time] = await Promise.all([
@@ -58,11 +63,11 @@ presence.on("UpdateData", async () => {
 			break;
 		case "/personnalisation":
 			presenceData.details = "Personnalise son personnage";
-			presenceData.largeImageKey = "malimode";
+			presenceData.largeImageKey = Assets.Malimode;
 			break;
 		case "/partager":
 			presenceData.details = "Partage son personnage";
-			presenceData.largeImageKey = "malimode";
+			presenceData.largeImageKey = Assets.Malimode;
 			break;
 		default: {
 			if (document.location.pathname.includes("/strips/")) {

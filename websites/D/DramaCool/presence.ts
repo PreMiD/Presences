@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 				"https://cdn.rcd.gg/PreMiD/websites/D/DramaCool/assets/logo.png",
 			details: "Browsing",
 			smallImageText: "Browsing",
-			smallImageKey: "reading",
+			smallImageKey: Assets.Reading,
 			startTimestamp: startsTime,
 		},
 		[covers, buttons, newLang] = await Promise.all([

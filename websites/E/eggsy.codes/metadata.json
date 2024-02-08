@@ -12,7 +12,7 @@
 	},
 	"url": "eggsy.xyz",
 	"regExp": "eggsy[.]xyz(?![/]projects[/]premid[/]custom-status)",
-	"version": "1.2.22",
+	"version": "1.2.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/eggsy.codes/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/eggsy.codes/assets/thumbnail.png",
 	"color": "#212121",

@@ -3,10 +3,13 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/G/GG%20App/assets/logo.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/G/GG%20App/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname,
@@ -30,7 +33,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 				"#root > div > div.css-1dbjc4n > div > div > div > div.css-1dbjc4n > img"
 			).src;
-			presenceData.smallImageKey = "lg";
+			presenceData.smallImageKey = Assets.Logo;
 		}
 		presenceData.buttons = [{ label: "View Game", url: document.URL }];
 	} else if (
@@ -59,7 +62,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 				"#root > div > div.css-1dbjc4n > div > div:nth-child(3) > div.w-full > div > div > a > img"
 			).src;
-			presenceData.smallImageKey = "lg";
+			presenceData.smallImageKey = Assets.Logo;
 		}
 	} else if (path.includes("/games/")) {
 		if (path.endsWith("/reviews")) {
@@ -98,7 +101,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 				"#root > div > div.css-1dbjc4n > div > div > div > div > a > img"
 			).src;
-			presenceData.smallImageKey = "lg";
+			presenceData.smallImageKey = Assets.Logo;
 		}
 		presenceData.buttons = [{ label: "Read Review", url: document.URL }];
 	} else if (path.startsWith("/home")) presenceData.details = "At Home page";
@@ -114,7 +117,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 				"#root > div > div.css-1dbjc4n > div > div > div.w-full > div > div > a > img"
 			).src;
-			presenceData.smallImageKey = "lg";
+			presenceData.smallImageKey = Assets.Logo;
 		}
 		presenceData.buttons = [{ label: "View Lists", url: document.URL }];
 	} else if (path.includes("/lists/")) {

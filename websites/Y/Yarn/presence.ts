@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 			  })`
 			: "Navigate...";
 		presenceData.smallImageKey = parseQueryString(document.location.hash).q
-			? "search"
+			? Assets.Search
 			: null;
 		presenceData.smallImageText = "Searching...";
 	} else if (document.location.pathname.includes("/package/")) {

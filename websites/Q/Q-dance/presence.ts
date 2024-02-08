@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			".audioplayer-nowplaying__artist"
 		).textContent;
-		presenceData.smallImageKey = "live";
+		presenceData.smallImageKey = Assets.Live;
 		presenceData.smallImageText = strings.live;
 		presenceData.largeImageKey =
 			document.querySelector<HTMLImageElement>(

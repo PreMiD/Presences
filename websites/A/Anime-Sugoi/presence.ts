@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = episode;
 			}
 
-			presenceData.smallImageKey = video.paused ? "pause" : "playing";
+			presenceData.smallImageKey = video.paused ? Assets.Play : Assets.Pause;
 			presenceData.smallImageText = video.paused
 				? (await strings).pause
 				: (await strings).play;

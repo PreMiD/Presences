@@ -6,6 +6,7 @@ const presence = new Presence({
 		pause: "general.paused",
 	}),
 	start = Date.now();
+
 let videoTitle: string,
 	videoCurrentTime: number,
 	videoDuration: number,
@@ -17,12 +18,50 @@ interface DataInterface {
 	duration: number;
 	paused: boolean;
 }
+
+/* eslint-disable camelcase */
+const assets: Record<string, string> = {
+	git: "https://cdn.discordapp.com/app-assets/736516965748834336/737966303356256286.png?size=512",
+	html: "https://cdn.discordapp.com/app-assets/736516965748834336/737966303746195467.png?size=512",
+	css: "https://cdn.discordapp.com/app-assets/736516965748834336/737966304186597417.png?size=512",
+	the_command_line:
+		"https://cdn.discordapp.com/app-assets/736516965748834336/737966305407139951.png?size=512",
+	node_with_sqlite:
+		"https://cdn.discordapp.com/app-assets/736516965748834336/737966305625374730.png?size=512",
+	ruby_on_rails:
+		"https://cdn.discordapp.com/app-assets/736516965748834336/737966306065776673.png?size=512",
+	python_2:
+		"https://cdn.discordapp.com/app-assets/736516965748834336/737966306300526663.png?size=512",
+	javascript:
+		"https://cdn.discordapp.com/app-assets/736516965748834336/737966306627682357.png?size=512",
+	go: "https://cdn.discordapp.com/app-assets/736516965748834336/737966306632138752.png?size=512",
+	authentication_with_ruby_on_rails:
+		"https://cdn.discordapp.com/app-assets/736516965748834336/737966306669625374.png?size=512",
+	java: "https://cdn.discordapp.com/app-assets/736516965748834336/737966306749579404.png?size=512",
+	python_3:
+		"https://cdn.discordapp.com/app-assets/736516965748834336/737966306837528617.png?size=512",
+	swift:
+		"https://cdn.discordapp.com/app-assets/736516965748834336/737966306850111529.png?size=512",
+	r: "https://cdn.discordapp.com/app-assets/736516965748834336/737966307089186886.png?size=512",
+	kotlin:
+		"https://cdn.discordapp.com/app-assets/736516965748834336/737966308125311028.png?size=512",
+	ruby: "https://cdn.discordapp.com/app-assets/736516965748834336/737966308184031243.png?size=512",
+	sql: "https://cdn.discordapp.com/app-assets/736516965748834336/737966308821434468.png?size=512",
+	php: "https://cdn.discordapp.com/app-assets/736516965748834336/737966308985143389.png?size=512",
+	csharp:
+		"https://cdn.discordapp.com/app-assets/736516965748834336/737966391935893515.png?size=512",
+	cplusplus:
+		"https://cdn.discordapp.com/app-assets/736516965748834336/737966392044945510.png?size=512",
+};
+/* eslint-enable camelcase */
+
 presence.on("iFrameData", (data: DataInterface) => {
 	videoTitle = data.title;
 	videoCurrentTime = data.currentTime;
 	videoDuration = data.duration;
 	videoPaused = data.paused;
 });
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
@@ -47,15 +86,18 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `"${
 						document.querySelector("main h1").textContent
 					}"`;
-					presenceData.smallImageKey = document
-						.querySelector("main h1")
-						.textContent.split(" ")
-						.slice(1)
-						.join(" ")
-						.toLowerCase()
-						.replace(" ", "_")
-						.replace("+", "plus")
-						.replace("#", "sharp");
+					presenceData.smallImageKey =
+						assets[
+							document
+								.querySelector("main h1")
+								.textContent.split(" ")
+								.slice(1)
+								.join(" ")
+								.toLowerCase()
+								.replace(" ", "_")
+								.replace("+", "plus")
+								.replace("#", "sharp")
+						];
 					presenceData.smallImageText = document
 						.querySelector("main h1")
 						.textContent.split(" ")
@@ -88,14 +130,17 @@ presence.on("UpdateData", async () => {
 			if (heading.className.startsWith("trackTitle__")) premiumPath = true;
 			heading = heading.textContent;
 			if (pathArray[0] === "courses" && heading.startsWith("Learn ")) {
-				presenceData.smallImageKey = heading
-					.split(" ")
-					.slice(1)
-					.join(" ")
-					.toLowerCase()
-					.replace(" ", "_")
-					.replace("+", "plus")
-					.replace("#", "sharp");
+				presenceData.smallImageKey =
+					assets[
+						heading
+							.split(" ")
+							.slice(1)
+							.join(" ")
+							.toLowerCase()
+							.replace(" ", "_")
+							.replace("+", "plus")
+							.replace("#", "sharp")
+					];
 				presenceData.smallImageText = heading.split(" ").slice(1).join(" ");
 			}
 			presenceData.details = heading.startsWith("Learn ")
@@ -144,12 +189,15 @@ presence.on("UpdateData", async () => {
 					document.querySelector("#catalog-heading").textContent
 				}`;
 				presenceData.state = "in the catalog";
-				presenceData.smallImageKey = document
-					.querySelector("#catalog-heading")
-					.textContent.toLowerCase()
-					.replace(" ", "_")
-					.replace("+", "plus")
-					.replace("#", "sharp");
+				presenceData.smallImageKey =
+					assets[
+						document
+							.querySelector("#catalog-heading")
+							.textContent.toLowerCase()
+							.replace(" ", "_")
+							.replace("+", "plus")
+							.replace("#", "sharp")
+					];
 				presenceData.smallImageText =
 					document.querySelector("#catalog-heading").textContent;
 			} else if (pathArray[1] === "subject") {

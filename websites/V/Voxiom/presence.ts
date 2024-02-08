@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			smallImageKey: "voxiom",
+			smallImageKey:
+				"https://cdn.discordapp.com/app-assets/930231661986197554/930232624637677609.png?size=512",
 			smallImageText: "Playing Voxiom",
 		},
 		{ pathname, hash, protocol, hostname } = window.location,

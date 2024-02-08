@@ -131,7 +131,7 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageText = "Odtwarzanie";
 					if (video.paused) {
 						presenceData.smallImageKey = Assets.Pause;
-						presenceData.smallImageKey = "Wstrzymano";
+						presenceData.smallImageText = "Wstrzymano";
 						delete presenceData.startTimestamp;
 						delete presenceData.endTimestamp;
 					}

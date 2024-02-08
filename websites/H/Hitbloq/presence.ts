@@ -1,7 +1,52 @@
 const presence = new Presence({
 		clientId: "939893060672827402",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	assets = {
+		s90e: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867125006379.png?size=512",
+		s360h:
+			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867141787648.png?size=512",
+		s360e:
+			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867221463140.png?size=512",
+		s90n: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867271794728.png?size=512",
+		s90ex:
+			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867288567808.png?size=512",
+		s1sh: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867351498773.png?size=512",
+		s1sn: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867426992208.png?size=512",
+		s1se: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867452162110.png?size=512",
+		snan: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867510886531.png?size=512",
+		sn: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867527663617.png?size=512",
+		s1sex:
+			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867573800980.png?size=512",
+		snaex:
+			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867607335083.png?size=512",
+		snae: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867615735839.png?size=512",
+		s360ex:
+			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867624124427.png?size=512",
+		sllex:
+			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867666055271.png?size=512",
+		sep: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867666071581.png?size=512",
+		s1sep:
+			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867703804005.png?size=512",
+		sllep:
+			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867741556807.png?size=512",
+		s360ep:
+			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867749945485.png?size=512",
+		sllh: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867758338140.png?size=512",
+		se: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867783503952.png?size=512",
+		snaep:
+			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867787690155.png?size=512",
+		sex: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867787698257.png?size=512",
+		slle: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867821248532.png?size=512",
+		snah: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867842224148.png?size=512",
+		sh: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867955466240.png?size=512",
+		s90h: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867984838686.png?size=512",
+		slln: "https://cdn.discordapp.com/app-assets/939893060672827402/998651868114845766.png?size=512",
+		s360n:
+			"https://cdn.discordapp.com/app-assets/939893060672827402/998651868215513209.png?size=512",
+		s90ep:
+			"https://cdn.discordapp.com/app-assets/939893060672827402/998651869478015037.png?size=512",
+	};
 
 presence.on("UpdateData", async () => {
 	const [time, buttons, cover] = await Promise.all([
@@ -79,9 +124,12 @@ presence.on("UpdateData", async () => {
 					url: document.location.href,
 				},
 			];
-			presenceData.smallImageKey = `${
-				document.location.pathname.split("_")[2]
-			}${document.location.pathname.split("_")[1]}`;
+			presenceData.smallImageKey =
+				assets[
+					`${document.location.pathname.split("_")[2]}${
+						document.location.pathname.split("_")[1]
+					}` as keyof typeof assets
+				];
 			let characteristic;
 			switch (document.location.pathname.split("_")[2]) {
 				case "s": {

@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 				details: "Searching",
 				state:
 					document.querySelector<HTMLInputElement>("#searchFieldInput")?.value,
-				smallImageKey: "search",
+				smallImageKey: Assets.Search,
 				smallImageText: "Searching",
 			},
 			loginSplash: {
@@ -124,7 +124,7 @@ presence.on("UpdateData", async () => {
 
 				presenceData.startTimestamp = channelTimestamp;
 
-				presenceData.smallImageKey = paused ? "pause" : "live";
+				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Live;
 				presenceData.smallImageText = paused ? strings.pause : strings.live;
 			} else {
 				// Replay / Timeshift

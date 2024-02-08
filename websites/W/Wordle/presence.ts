@@ -8,6 +8,9 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/W/Wordle/assets/logo.png",
+	Thought = "https://cdn.discordapp.com/app-assets/938310167404101683/938336664516952064.png?size=512",
+	Fail = "https://cdn.discordapp.com/app-assets/938310167404101683/938336664621834241.png?size=512",
+	Solved = "https://cdn.discordapp.com/app-assets/938310167404101683/938336777662496788.png?size=512",
 }
 
 presence.on("UpdateData", async () => {
@@ -27,18 +30,18 @@ presence.on("UpdateData", async () => {
 			if (correct === 5) {
 				presenceData.details = `Solved (#${puzzleNumber})`;
 				presenceData.state = `Guess ${i + 1} / 6`;
-				presenceData.smallImageKey = "solved";
+				presenceData.smallImageKey = Assets.Solved;
 				break;
 			} else if (i === 5 && guessed) {
 				presenceData.details = `Failed (#${puzzleNumber})`;
 				presenceData.state = "Guess X / 6";
-				presenceData.smallImageKey = "fail";
+				presenceData.smallImageKey = Assets.Fail;
 				break;
 			} else if (!guessed) {
 				if (i === 0) presenceData.details = `Warming up... (#${puzzleNumber})`;
 				else presenceData.details = `Guessing... (#${puzzleNumber})`;
 				presenceData.state = `Guess ${i + 1} / 6`;
-				presenceData.smallImageKey = "thought";
+				presenceData.smallImageKey = Assets.Thought;
 				break;
 			}
 		}

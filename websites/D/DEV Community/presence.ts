@@ -88,6 +88,11 @@ function isPodcast(): boolean {
 	}
 }
 
+const assets: Record<string, string> = {
+	play: Assets.Play,
+	pause: Assets.Pause,
+};
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
@@ -104,7 +109,8 @@ presence.on("UpdateData", async () => {
 			break;
 		case isProfile():
 			presenceData.details = authorName;
-			presenceData.smallImageKey = "user";
+			presenceData.smallImageKey =
+				"https://cdn.discordapp.com/app-assets/829466407321731082/830447917726171157.png?size=512";
 			presenceData.smallImageText = "Profile";
 			if (buttons) {
 				presenceData.buttons = [
@@ -154,7 +160,7 @@ presence.on("UpdateData", async () => {
 				: "play";
 			contentStateText = contentStateKey === "pause" ? "Paused" : "Playing";
 
-			presenceData.smallImageKey = contentStateKey;
+			presenceData.smallImageKey = assets[contentStateKey];
 			presenceData.smallImageText = contentStateText;
 
 			[, endTimestamp] = presence.getTimestampsfromMedia(
@@ -189,7 +195,7 @@ presence.on("UpdateData", async () => {
 				: "play";
 			contentStateText = contentStateKey === "pause" ? "Paused" : "Listening";
 
-			presenceData.smallImageKey = contentStateKey;
+			presenceData.smallImageKey = assets[contentStateKey];
 			presenceData.smallImageText = contentStateText;
 
 			[, endTimestamp] = presence.getTimestampsfromMedia(

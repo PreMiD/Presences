@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/E/Everskies/assets/logo.png",
-		smallImageKey: "browse",
+		smallImageKey: Assets.Search,
 		startTimestamp: data.startedSince,
 	};
 

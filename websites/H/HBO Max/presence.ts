@@ -51,53 +51,60 @@ const presence = new Presence({
 
 let isFetching = false;
 
-function fetchToken(): Promise<string> {
-	return fetch("https://oauth.api.hbo.com/auth/tokens", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		/* eslint-disable camelcase */
-		body: JSON.stringify({
-			client_id: "585b02c8-dbe1-432f-b1bb-11cf670fbeb0",
-			client_secret: crypto.randomUUID(),
-			scope: "browse video_playback",
-			grant_type: "client_credentials",
-			deviceSerialNumber: crypto.randomUUID(),
-			clientDeviceData: {
-				paymentProviderCode: "blackmarket",
+async function fetchToken(): Promise<string> {
+	const res = await fetch("https://oauth.api.hbo.com/auth/tokens", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
 			},
+			/* eslint-disable camelcase */
+			body: JSON.stringify({
+				client_id: "585b02c8-dbe1-432f-b1bb-11cf670fbeb0",
+				client_secret: crypto.randomUUID(),
+				scope: "browse video_playback",
+				grant_type: "client_credentials",
+				deviceSerialNumber: crypto.randomUUID(),
+				clientDeviceData: {
+					paymentProviderCode: "blackmarket",
+				},
+			}),
 		}),
-		/* eslint-enable camelcase */
-	})
-		.then(res => res.json())
-		.then(res => res.access_token);
+		res_1 = await res.json();
+	return res_1.access_token;
 }
 
-function fetchClientConfig(
+async function fetchClientConfig(
 	token: string
 ): Promise<{ routeKey: string; countryCode: string }> {
-	return fetch("https://sessions.api.hbo.com/sessions/v1/clientConfig", {
-		method: "POST",
-		headers: {
-			authorization: `Bearer ${token}`,
-			"content-type": "application/json",
-		},
-		body: JSON.stringify({
-			contract: "abc:1.0.0.0",
-			preferredLanguages: ["en-us"],
-		}),
-	})
-		.then(res => res.json())
-		.then(res => ({
-			routeKey: res.routeKeys.contentSubdomain,
-			countryCode: new URLSearchParams(
-				res.features["express-content"].config.expressContentParams
-			).get("country-code"),
-		}));
+	const res = await fetch(
+			"https://sessions.api.hbo.com/sessions/v1/clientConfig",
+			{
+				method: "POST",
+				headers: {
+					authorization: `Bearer ${token}`,
+					"content-type": "application/json",
+				},
+				body: JSON.stringify({
+					contract: "abc:1.0.0.0",
+					preferredLanguages: ["en-us"],
+				}),
+			}
+		),
+		res_1 = await res.json();
+	return {
+		routeKey: res_1.routeKeys.contentSubdomain,
+		countryCode: new URLSearchParams(
+			res_1.features["express-content"].config.expressContentParams
+		).get("country-code"),
+	};
 }
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/H/HBO%20Max/assets/logo.png",
+}
+
 async function fetchVideoInfo() {
-	if (isFetching) return { coverArt: "lg", title: "" };
+	if (isFetching) return { coverArt: Assets.Logo, title: "" };
 
 	let output: {
 		coverArt?: string;
@@ -134,7 +141,7 @@ async function fetchVideoInfo() {
 					return `https://artist.api.cdn.hbo.com/images/${
 						location.pathname.match(/:feature:([^:]+)/)[1]
 					}/tileburnedin?size=1024x1024`;
-				} else return "lg";
+				} else return Assets.Logo;
 			})(),
 			title: (mediaInfo.seriesTitles || mediaInfo.titles).full,
 			subtitle: mediaInfo.seriesTitles
@@ -142,7 +149,7 @@ async function fetchVideoInfo() {
 				: "",
 		};
 	} catch {
-		output = { coverArt: "lg" };
+		output = { coverArt: Assets.Logo };
 		presence.error(
 			"Unable to fetch video info. Please open an issue here https://github.com/PreMiD/Presences/issues"
 		);
@@ -155,8 +162,7 @@ async function fetchVideoInfo() {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			type: ActivityType.Watching,
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/H/HBO%20Max/assets/logo.png",
+			largeImageKey: Assets.Logo,
 		},
 		video = document.querySelector("video"),
 		path = document.location.pathname;
@@ -170,7 +176,7 @@ presence.on("UpdateData", async () => {
 		case path === "/search":
 			Object.assign(presenceData, {
 				details: "Searching",
-				smallImageKey: "search",
+				smallImageKey: Assets.Search,
 				smallImageText: "Browsing...",
 			});
 			break;

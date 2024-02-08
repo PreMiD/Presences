@@ -1,7 +1,14 @@
 const presence = new Presence({
-		clientId: "628269030901547037",
-	}),
-	pages: { [key: string]: string } = {
+	clientId: "628269030901547037",
+});
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/logo.png",
+	Video = "https://cdn.discordapp.com/app-assets/628269030901547037/628285534631886877.png?size=512",
+	Post = "https://cdn.discordapp.com/app-assets/628269030901547037/628286687616696320.png?size=512",
+	Star = "https://cdn.discordapp.com/app-assets/628269030901547037/628287605636595713.png?size=512",
+}
+const pages: { [key: string]: string } = {
 		"/": "Ana Sayfa",
 		"/haber": "Haberler",
 		"/video": "Videolar",
@@ -18,9 +25,9 @@ const presence = new Presence({
 		"/iletisim": "İletişim",
 	},
 	smallImageKey: { [key: string]: string } = {
-		"/ara": "searching",
-		"/video": "video",
-		"/uye/favorilerim": "star",
+		"/ara": Assets.Search,
+		"/video": Assets.Video,
+		"/uye/favorilerim": Assets.Star,
 	};
 
 presence.on("UpdateData", async () => {
@@ -38,8 +45,7 @@ presence.on("UpdateData", async () => {
 		);
 
 		presence.setActivity({
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			details: "Bir yazara göz atıyor:",
 			state:
 				author && author.textContent !== "" ? author.textContent : "Belirsiz",
@@ -47,8 +53,7 @@ presence.on("UpdateData", async () => {
 		});
 	} else if (title && title.textContent !== "") {
 		presence.setActivity({
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			details: `${title.textContent}`,
 			state: `Yazar: ${
 				document.querySelector(
@@ -67,14 +72,13 @@ presence.on("UpdateData", async () => {
 					  ).textContent
 					: "Belirsiz Süre"
 			})`,
-			smallImageKey: "post",
+			smallImageKey: Assets.Post,
 			smallImageText: "Bir gönderi okuyor...",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (videoTitle && videoTitle.textContent !== "") {
 		presence.setActivity({
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			details: `${videoTitle.textContent}`,
 			state: `Yazar: ${
 				document.querySelector(
@@ -93,18 +97,16 @@ presence.on("UpdateData", async () => {
 					  ).textContent
 					: "Belirsiz Süre"
 			})`,
-			smallImageKey: "video",
+			smallImageKey: Assets.Video,
 			smallImageText: "Bir video gönderi okuyor...",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else {
 		presence.setActivity({
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			details: "Bir sayfaya göz atıyor:",
 			state: pages[page] || pages[page.slice(0, -1)] || "Ana Sayfa",
-			smallImageKey:
-				smallImageKey[page] || smallImageKey[page.slice(0, -1)] || "NOTHING",
+			smallImageKey: smallImageKey[page] || smallImageKey[page.slice(0, -1)],
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}

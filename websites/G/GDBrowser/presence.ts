@@ -1,6 +1,34 @@
 const presence = new Presence({
-	clientId: "635876670146084880",
-});
+		clientId: "635876670146084880",
+	}),
+	/* eslint-disable camelcase */
+	assets = {
+		diff_hard:
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668467851962744832.png?size=512",
+		diff_easy:
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668467852289769483.png?size=512",
+		diff_normal:
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668467852306546688.png?size=512",
+		diff_insane:
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668467853137018880.png?size=512",
+		diff_harder:
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668467853363511306.png?size=512",
+		diff_demon:
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668467853665501194.png?size=512",
+		diff_auto:
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668467853866827817.png?size=512",
+		diff_medium_demon:
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668876173257867264.png?size=512",
+		diff_extreme_demon:
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668876173484490765.png?size=512",
+		diff_hard_demon:
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668876173673103401.png?size=512",
+		diff_easy_demon:
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668876174231076874.png?size=512",
+		diff_insane_demon:
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668876174461763634.png?size=512",
+	};
+/* eslint-enable camelcase */
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -23,10 +51,13 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `${
 				document.querySelectorAll("h1")[0].textContent
 			} ${document.querySelector("#authorLink").textContent}`;
-			presenceData.smallImageKey = `diff_${document
-				.querySelector("#difficultytext")
-				.textContent.toLowerCase()
-				.replace("<br>", "_")}`;
+			presenceData.smallImageKey =
+				assets[
+					`diff_${document
+						.querySelector("#difficultytext")
+						.textContent.toLowerCase()
+						.replace("<br>", "_")}` as keyof typeof assets
+				];
 			presenceData.smallImageText = `${document
 				.querySelector("#difficultytext")
 				.textContent.replace("<br>", " ")}`;

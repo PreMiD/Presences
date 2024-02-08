@@ -1,42 +1,74 @@
 type availableColors = "red" | "blue" | "beige";
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/logo.png",
+	Beige5 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859768344510484.png?size=512",
+	Red6 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859768722128966.png?size=512",
+	Blue1 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859769020710954.png?size=512",
+	Red8 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859769657982977.png?size=512",
+	Red4 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859769741213716.png?size=512",
+	Beige3 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859769859047454.png?size=512",
+	Blue4 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859769955254342.png?size=512",
+	Codenames = "https://cdn.discordapp.com/app-assets/817859401477259315/817859770009780264.png?size=512",
+	Blue8 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859770043596830.png?size=512",
+	Blue5 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859770069155890.png?size=512",
+	Blue9 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859770169163776.png?size=512",
+	Beige2 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859770688995348.png?size=512",
+	Blue7 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859770722811905.png?size=512",
+	Blue6 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859770874069003.png?size=512",
+	Blue2 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859771012743189.png?size=512",
+	Blue3 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859771067138079.png?size=512",
+	Red9 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859771155611709.png?size=512",
+	Beige4 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859771180646430.png?size=512",
+	Beige6 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859771310407742.png?size=512",
+	Red5 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859771314602036.png?size=512",
+	Red2 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859771335966810.png?size=512",
+	Red7 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859771402158080.png?size=512",
+	Red1 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859771411464212.png?size=512",
+	Red3 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859771414741012.png?size=512",
+	Beige1 = "https://cdn.discordapp.com/app-assets/817859401477259315/817859771569799168.png?size=512",
+}
+
 const presence = new Presence({
 		clientId: "817859401477259315",
 	}),
 	slideshow = presence.createSlideshow(),
 	icons = {
 		red: [
-			"red1",
-			"red2",
-			"red3",
-			"red4",
-			"red5",
-			"red6",
-			"red7",
-			"red8",
-			"red9",
+			Assets.Red1,
+			Assets.Red2,
+			Assets.Red3,
+			Assets.Red4,
+			Assets.Red5,
+			Assets.Red6,
+			Assets.Red7,
+			Assets.Red8,
+			Assets.Red9,
 		],
 		blue: [
-			"blue1",
-			"blue2",
-			"blue3",
-			"blue4",
-			"blue5",
-			"blue6",
-			"blue7",
-			"blue8",
-			"blue9",
+			Assets.Blue1,
+			Assets.Blue2,
+			Assets.Blue3,
+			Assets.Blue4,
+			Assets.Blue5,
+			Assets.Blue6,
+			Assets.Blue7,
+			Assets.Blue8,
+			Assets.Blue9,
 		],
-		beige: ["beige1", "beige2", "beige3", "beige4", "beige5", "beige6"],
+		beige: [
+			Assets.Beige1,
+			Assets.Beige2,
+			Assets.Beige3,
+			Assets.Beige4,
+			Assets.Beige5,
+			Assets.Beige6,
+		],
 	};
 
 let browsingTimestamp = Math.floor(Date.now() / 1000),
 	lastTeamLog: availableColors = "beige",
 	currentlySetColor: availableColors = "beige";
-
-const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/logo.png",
-}
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {

@@ -30,8 +30,15 @@ async function getStrings() {
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/J/Juniperbot/assets/logo.png",
+	Stats = "https://cdn.discordapp.com/app-assets/739908991274057870/739985402911391775.png?size=512",
+	Donate = "https://cdn.discordapp.com/app-assets/739908991274057870/739986305496121355.png?size=512",
+	List = "https://cdn.discordapp.com/app-assets/739908991274057870/739986784359940218.png?size=512",
+}
+
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = { largeImageKey: "logo" },
+	const presenceData: PresenceData = { largeImageKey: Assets.Logo },
 		newLang = await presence.getSetting<string>("lang").catch(() => "en");
 
 	if (oldLang !== newLang || !strings) {
@@ -44,15 +51,15 @@ presence.on("UpdateData", async () => {
 
 		switch (true) {
 			case pathIncludes("/ranking/"):
-				presenceData.details = (await strings).leaderboard;
+				presenceData.details = strings.leaderboard;
 				presenceData.state = document.querySelector(
 					".guild--info h1.font-weight-thin.display-2"
 				).textContent;
-				presenceData.smallImageKey = "list";
+				presenceData.smallImageKey = Assets.List;
 				break;
 			case pathIncludes("/dashboard/"):
-				presenceData.details = (await strings).serverdash;
-				presenceData.state = (await strings).serverdashname.replace(
+				presenceData.details = strings.serverdash;
+				presenceData.state = strings.serverdashname.replace(
 					"{0}",
 					document.querySelector(".guild--info h1.font-weight-thin.display-2")
 						.textContent
@@ -60,48 +67,42 @@ presence.on("UpdateData", async () => {
 				break;
 
 			case pathIncludes("/donate"):
-				presenceData.details = (await strings).donate;
-				presenceData.smallImageKey = "donate";
+				presenceData.details = strings.donate;
+				presenceData.smallImageKey = Assets.Donate;
 				break;
 
 			case pathIncludes("/servers"):
-				presenceData.details = (await strings).servers;
-				presenceData.smallImageKey = "list";
+				presenceData.details = strings.servers;
+				presenceData.smallImageKey = Assets.List;
 				break;
 
 			case pathIncludes("/commands"):
-				presenceData.details = (await strings).commands;
-				presenceData.smallImageKey = "list";
+				presenceData.details = strings.commands;
+				presenceData.smallImageKey = Assets.List;
 				break;
 
 			case pathIncludes("/status"):
-				presenceData.details = (await strings).stats;
-				presenceData.smallImageKey = "stats";
+				presenceData.details = strings.stats;
+				presenceData.smallImageKey = Assets.Stats;
 				break;
 
 			case pathIncludes("/user/card"):
-				presenceData.details = (await strings).usercard;
+				presenceData.details = strings.usercard;
 				break;
 
 			case pathIncludes("/terms"):
-				presenceData.details = `${(await strings).reading} ${
-					(await strings).terms
-				}`;
-				presenceData.smallImageKey = "list";
+				presenceData.details = `${strings.reading} ${strings.terms}`;
+				presenceData.smallImageKey = Assets.List;
 				break;
 
 			case pathIncludes("/cookie"):
-				presenceData.details = `${(await strings).reading} ${
-					(await strings).cookies
-				}`;
-				presenceData.smallImageKey = "list";
+				presenceData.details = `${strings.reading} ${strings.cookies}`;
+				presenceData.smallImageKey = Assets.List;
 				break;
 
 			case pathIncludes("/privacy"):
-				presenceData.details = `${(await strings).reading} ${
-					(await strings).privacy
-				}`;
-				presenceData.smallImageKey = "list";
+				presenceData.details = `${strings.reading} ${strings.privacy}`;
+				presenceData.smallImageKey = Assets.List;
 				break;
 
 			default:
@@ -113,19 +114,19 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.details = document.title;
 		presenceData.state = "docs.juniper.bot";
-		presenceData.smallImageKey = "list";
+		presenceData.smallImageKey = Assets.List;
 	}
 	if (host === "feedback.juniper.bot") {
 		presenceData.startTimestamp = browsingTimestamp;
 		presenceData.state = "feedback.juniper.bot";
 		switch (true) {
 			case pathIncludes("/posts/"):
-				presenceData.details = `${(await strings).reading} ${
+				presenceData.details = `${strings.reading} ${
 					document.querySelector(".post-header h1").textContent
 				}`;
 				break;
 			default:
-				presenceData.details = (await strings).viewMainPage;
+				presenceData.details = strings.viewMainPage;
 				break;
 		}
 	}

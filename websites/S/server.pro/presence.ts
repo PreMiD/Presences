@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 	if (document.location.pathname.includes("/advanced-settings")) {
 		presenceData.details = "Server Panel:";
 		presenceData.state = "Advanced Settings";
-		presenceData.smallImageKey = "editing";
+		presenceData.smallImageKey = Assets.Writing;
 	} else if (document.location.pathname.includes("/files")) {
 		presenceData.details = "Server Panel:";
 		presenceData.state = "Server Files";
@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/scheduler")) {
 		presenceData.details = "Server Panel:";
 		presenceData.state = "Scheduled Tasks";
-		presenceData.smallImageKey = "editing";
+		presenceData.smallImageKey = Assets.Writing;
 	} else if (document.location.pathname.includes("/worlds")) {
 		presenceData.details = "Server Panel";
 		presenceData.state = "Viewing worlds";
@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/server-page")) {
 		presenceData.details = "Server Panel:";
 		presenceData.state = "Editing a server";
-		presenceData.smallImageKey = "editing";
+		presenceData.smallImageKey = Assets.Writing;
 	} else if (document.location.pathname.includes("/ftp")) {
 		presenceData.details = "Server Panel:";
 		presenceData.state = "Viewing FTP Details";
@@ -113,14 +113,14 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/firewall")) {
 		presenceData.details = "Server Panel:";
 		presenceData.state = "Editing Firewall";
-		presenceData.smallImageKey = "editing";
+		presenceData.smallImageKey = Assets.Writing;
 	} else if (document.location.pathname.includes("/reset")) {
 		presenceData.details = "Server Panel:";
 		presenceData.state = "Viewing Reset Page";
 		presenceData.smallImageKey = Assets.Viewing;
 	} else if (document.location.pathname.includes("/account")) {
 		presenceData.state = "Editing Account";
-		presenceData.smallImageKey = "editing";
+		presenceData.smallImageKey = Assets.Writing;
 	} else if (document.location.pathname.includes("/support")) {
 		presenceData.smallImageText = "Viewing Support Page";
 		presenceData.smallImageKey = Assets.Viewing;

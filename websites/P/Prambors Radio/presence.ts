@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageKey = Assets.Pause;
 					presenceData.smallImageText = pause;
 				} else if (status === "playing") {
-					presenceData.smallImageKey = "live";
+					presenceData.smallImageKey = Assets.Live;
 					presenceData.smallImageText = "Listening";
 					presenceData.startTimestamp = timestamp;
 				}
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageKey = Assets.Pause;
 					presenceData.smallImageText = pause;
 				} else if (buttonAction === "pause") {
-					presenceData.smallImageKey = "live";
+					presenceData.smallImageKey = Assets.Live;
 					presenceData.smallImageText = "Listening";
 					presenceData.startTimestamp = timestamp;
 				}

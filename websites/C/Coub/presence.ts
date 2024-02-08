@@ -282,8 +282,8 @@ const pages: PageContext[] = [
 		clientId: "818598086984728576",
 	}),
 	presenceImageKeys = {
-		PLAY: "playx1024",
-		PAUSE: "pausex1024",
+		PLAY: Assets.Play,
+		PAUSE: Assets.Pause,
 	};
 function getStrings(newLang?: string) {
 	return presence.getStrings(

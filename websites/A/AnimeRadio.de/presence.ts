@@ -3,10 +3,18 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeRadio.de/assets/logo.png",
+	Animetreff = "https://cdn.discordapp.com/app-assets/687352219598585905/687372495921348622.png?size=512",
+	Animenews = "https://cdn.discordapp.com/app-assets/687352219598585905/687372495367700533.png?size=512",
+	Animekino = "https://cdn.discordapp.com/app-assets/687352219598585905/687372496135258163.png?size=512",
+	Animemesse = "https://cdn.discordapp.com/app-assets/687352219598585905/687369511397359642.png?size=512",
+	Animefanshop = "https://cdn.discordapp.com/app-assets/687352219598585905/687374084719247374.png?size=512",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/A/AnimeRadio.de/assets/logo.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -25,7 +33,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "www.animetreff.de": {
-			presenceData.largeImageKey = "animetreff";
+			presenceData.largeImageKey = Assets.Animetreff;
 			if (document.URL.includes("/CustomPage/?id=1")) {
 				presenceData.details = "Chattet";
 				presenceData.smallImageKey = Assets.Writing;
@@ -83,14 +91,14 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "www.animenews.de": {
-			presenceData.largeImageKey = "animenews";
+			presenceData.largeImageKey = Assets.Animenews;
 			presenceData.details = "Liest Neuigkeiten";
 			presenceData.smallImageKey = Assets.Reading;
 
 			break;
 		}
 		case "www.animekino.de": {
-			presenceData.largeImageKey = "animekino";
+			presenceData.largeImageKey = Assets.Animekino;
 			if (document.URL.includes("partner"))
 				presenceData.details = "Betrachtet Partner";
 			else if (document.URL.includes("kontakt"))
@@ -150,7 +158,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "www.animemesse.de": {
-			presenceData.largeImageKey = "animemesse";
+			presenceData.largeImageKey = Assets.Animemesse;
 			presenceData.details = `Betrachtet ${
 				document.querySelector("#content > li.active > a").textContent
 			}`;
@@ -158,7 +166,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "www.animefanshop.de": {
-			presenceData.largeImageKey = "animefanshop";
+			presenceData.largeImageKey = Assets.Animefanshop;
 			const product = document.querySelector(
 				".product-info-title-desktop > span"
 			);

@@ -205,7 +205,7 @@ presence.on("UpdateData", async () => {
 					{ label: strings.watchStream, url: document.URL },
 				];
 			} else presenceData.details = strings.watchingLive;
-			presenceData.smallImageKey = "live";
+			presenceData.smallImageKey = Assets.Live;
 			presenceData.smallImageText = strings.live;
 		}
 		if (profilePic) {

@@ -133,16 +133,20 @@ let lastPageIndex: number,
 	currentLang: string,
 	localizedStrings: { [key: string]: string },
 	frameData: VideoContext;
+
 const IMAGES = {
-	LOGO: "logox1024",
-	PLAY: "playx1024",
-	PAUSE: "pausex1024",
-	BROWSE: "browsex1024",
-	SEARCH: "searchx1024",
+	LOGO: "https://cdn.discordapp.com/app-assets/825531268581818419/825535645124395040.png?size=512",
+	PLAY: Assets.Play,
+	PAUSE: Assets.Pause,
+	BROWSE:
+		"https://cdn.discordapp.com/app-assets/825531268581818419/825535645250093088.png?size=512",
+	SEARCH: Assets.Search,
 };
+
 presence.on("iFrameData", (data: VideoContext) => {
 	frameData = data;
 });
+
 presence.on("UpdateData", async () => {
 	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	if (newLang !== currentLang) {

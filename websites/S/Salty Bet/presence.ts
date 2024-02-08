@@ -21,19 +21,25 @@ function getText(selector: string) {
 	return document.querySelector(selector)?.textContent;
 }
 
+const enum Assets {
+	Salero = "https://cdn.discordapp.com/app-assets/802246778010730548/803539427438886913.png?size=512",
+	Trofeo = "https://cdn.discordapp.com/app-assets/802246778010730548/803726939315634198.png?size=512",
+	Saltgirl = "https://cdn.discordapp.com/app-assets/802246778010730548/804262497799897090.png?size=512",
+}
+
 function getModeImageKey(): string[] {
 	if (
 		getText(SelectorMap.tmode) ||
 		getText(SelectorMap.footer).includes("bracket!") ||
 		getText(SelectorMap.footer).includes("FINAL")
 	)
-		return ["trofeo", "Tournament Mode"];
+		return [Assets.Trofeo, "Tournament Mode"];
 	else if (
 		getText(SelectorMap.footer).includes("exhibition") ||
 		getText(SelectorMap.footer).includes("Exhibition")
 	)
-		return ["saltgirl", "Exhibition Mode"];
-	else return ["salero", "Matchmaking Mode"];
+		return [Assets.Saltgirl, "Exhibition Mode"];
+	else return [Assets.Salero, "Matchmaking Mode"];
 }
 
 function getFighters(): string {

@@ -29,8 +29,8 @@ function RefreshData() {
 		presenceData.smallImageKey =
 			document.querySelector<HTMLElement>("#mv-pl").style.visibility !==
 			"visible"
-				? "mvplaying"
-				: "mvpaused";
+				? Assets.Play
+				: Assets.Pause;
 	} else {
 		let actualUrl = window.location.toString();
 		const actualTitle = document.title;

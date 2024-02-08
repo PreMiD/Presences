@@ -3,10 +3,16 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Rockstargamestransparent = "https://cdn.discordapp.com/app-assets/765234467849240657/878424036550533120.png?size=512",
+	Rockstargamespurple = "https://cdn.discordapp.com/app-assets/765234467849240657/878444100817416222.png?size=512",
+	Rockstargamesspecial3 = "https://cdn.discordapp.com/app-assets/765234467849240657/878444113752633344.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Rockstar%20Games/assets/logo.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/R/Rockstar%20Games/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname } = document.location;
@@ -58,7 +64,7 @@ presence.on("UpdateData", async () => {
 		hostname === "support.rockstargames.com" ||
 		hostname === "www.support.rockstargames.com"
 	) {
-		presenceData.largeImageKey = "rockstargamestransparent";
+		presenceData.largeImageKey = Assets.Rockstargamestransparent;
 		if (pathname === "/") presenceData.details = "Browsing Support Homepage";
 		else if (pathname.startsWith("/categories/")) {
 			presenceData.details = "Browsing Support Pages";
@@ -70,7 +76,7 @@ presence.on("UpdateData", async () => {
 		hostname === "socialclub.rockstargames.com" ||
 		hostname === "www.socialclub.rockstargames.com"
 	) {
-		presenceData.largeImageKey = "rockstargamespurple";
+		presenceData.largeImageKey = Assets.Rockstargamespurple;
 		if (pathname === "/")
 			presenceData.details = "Browsing Social Club Homepage";
 		else if (pathname === "/games")
@@ -114,7 +120,7 @@ presence.on("UpdateData", async () => {
 		hostname === "store.rockstargames.com" ||
 		hostname === "www.store.rockstargames.com"
 	) {
-		presenceData.largeImageKey = "rockstargamesspecial3";
+		presenceData.largeImageKey = Assets.Rockstargamesspecial3;
 		if (pathname === "/en") presenceData.details = "Browsing Store Homepage";
 		else if (pathname.startsWith("/en/")) {
 			presenceData.details = "Browsing Rockstar Store";
