@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
 		};
 
 		if (liveIsPlaying) {
-			presenceData.smallImageKey = "live";
+			presenceData.smallImageKey = Assets.Live
 			presenceData.smallImageText = (await strings).live;
 		}
 

@@ -3,10 +3,34 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+	const enum Assets {
+		Logo = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/logo.png",
+		LogoDark = "https://cdn.discordapp.com/app-assets/860298084512038964/861284328163508224.png?size=512",
+		LogoLight = "https://cdn.discordapp.com/app-assets/860298084512038964/861284640006471690.png?size=512",
+		Home = "https://cdn.discordapp.com/app-assets/860298084512038964/861304842060562453.png?size=512",
+		Archive = "https://cdn.discordapp.com/app-assets/860298084512038964/861305393685594162.png?size=512",
+		Bookmark = "https://cdn.discordapp.com/app-assets/860298084512038964/861305455253651468.png?size=512",
+		Brush = "https://cdn.discordapp.com/app-assets/860298084512038964/861305529610797057.png?size=512",
+		Calendar = "https://cdn.discordapp.com/app-assets/860298084512038964/861305576683733023.png?size=512",
+		Pen = "https://cdn.discordapp.com/app-assets/860298084512038964/861305628625338398.png?size=512",
+		Plus = "https://cdn.discordapp.com/app-assets/860298084512038964/861305665421967413.png?size=512",
+		Hash = "https://cdn.discordapp.com/app-assets/860298084512038964/861360434220367883.png?size=512",
+		Journals = "https://cdn.discordapp.com/app-assets/860298084512038964/861360577409450020.png?size=512",
+		File = "https://cdn.discordapp.com/app-assets/860298084512038964/861360657189568513.png?size=512",
+		Calendar2 = "https://cdn.discordapp.com/app-assets/860298084512038964/861360719001419776.png?size=512",
+		Book2 = "https://cdn.discordapp.com/app-assets/860298084512038964/861639881172320266.png?size=512",
+		Slash = "https://cdn.discordapp.com/app-assets/860298084512038964/861712161344978964.png?size=512",
+		File2 = "https://cdn.discordapp.com/app-assets/860298084512038964/861712171619319809.png?size=512",
+		Tags = "https://cdn.discordapp.com/app-assets/860298084512038964/861712182739599390.png?size=512",
+		Journal = "https://cdn.discordapp.com/app-assets/860298084512038964/861713304968101928.png?size=512",
+		File3 = "https://cdn.discordapp.com/app-assets/860298084512038964/861716898924593172.png?size=512",
+		Book3 = "https://cdn.discordapp.com/app-assets/860298084512038964/861721710603927582.png?size=512",
+		Sort = "https://cdn.discordapp.com/app-assets/860298084512038964/861723391660916736.png?size=512",
+	}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/logo.png",
+			largeImageKey: Assets.Logo,
 		},
 		/* Query dell'URI - URI query */
 		searchParams = new URLSearchParams(
@@ -17,12 +41,12 @@ presence.on("UpdateData", async () => {
 
 	/* Homepage */
 	if (document.location.pathname === "/") {
-		presenceData.smallImageKey = "home";
+		presenceData.smallImageKey = Assets.Home;
 		presenceData.smallImageText = "Homepage";
 		presenceData.details = "Nella homepage";
 	} else if (document.location.href.includes("/bookmarks/")) {
 		/* Preferiti - Bookmarks*/
-		presenceData.smallImageKey = "bookmark";
+		presenceData.smallImageKey = Assets.Bookmark;
 		presenceData.smallImageText = "Preferiti";
 		presenceData.details = "Sfogliando i preferiti";
 
@@ -45,13 +69,13 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `"${searchParams.get("keyword")}"`;
 	} else if (document.location.href.includes("author=")) {
 		/* Ricerca per autore - Search by author */
-		presenceData.smallImageKey = "pen";
+		presenceData.smallImageKey = Assets.Pen;
 		presenceData.smallImageText = "Ricerca per autore";
 		presenceData.details = "Sfogliando i contenuti dell'autore:";
 		presenceData.state = searchParams.get("author");
 	} else if (document.location.href.includes("artist=")) {
 		/* Ricerca per artista - Search by artist */
-		presenceData.smallImageKey = "brush";
+		presenceData.smallImageKey = Assets.Brush;
 		presenceData.smallImageText = "Ricerca per artista";
 		presenceData.details = "Sfogliando i contenuti dell'artista:";
 		presenceData.state = searchParams.get("artist");
@@ -60,19 +84,19 @@ presence.on("UpdateData", async () => {
 		const genre = searchParams.get("genre").split(" ");
 		for (let i = 0; i < genre.length; i++)
 			genre[i] = genre[i][0].toUpperCase() + genre[i].substr(1);
-		presenceData.smallImageKey = "tags";
+		presenceData.smallImageKey = Assets.Tags;
 		presenceData.smallImageText = "Ricerca per genere";
 		presenceData.details = "Sfogliando i contenuti del genere:";
 		presenceData.state = genre.join(" ");
 	} else if (document.location.href.includes("year=")) {
 		/* Ricerca per anno - Search by year of release */
-		presenceData.smallImageKey = "calendar2";
+		presenceData.smallImageKey = Assets.Calendar2;
 		presenceData.smallImageText = "Ricerca per anno";
 		presenceData.details = "Sfogliando i contenuti dell'anno:";
 		presenceData.state = searchParams.get("year");
 	} else if (document.location.href.includes("status=")) {
 		/* Ricerca per stato - Search by status */
-		presenceData.smallImageKey = "slash";
+		presenceData.smallImageKey = Assets.Slash;
 		presenceData.smallImageText = "Ricerca per stato";
 		presenceData.details = "Sfogliando i contenuti:";
 
@@ -88,13 +112,13 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.href.includes("type=")) {
 		/* Ricerca per formato - Search by format */
 		const rawtype = searchParams.get("type");
-		presenceData.smallImageKey = "file3";
+		presenceData.smallImageKey = Assets.File3;
 		presenceData.smallImageText = "Ricerca per formato";
 		presenceData.details = "Sfogliando i contenuti in formato:";
 		presenceData.state = rawtype[0].toUpperCase() + rawtype.substring(1);
 	} else if (document.location.href.includes("sort=")) {
 		/* Ricerca per ordinamento - Order by */
-		presenceData.smallImageKey = "sort";
+		presenceData.smallImageKey = Assets.Sort;
 		presenceData.smallImageText = "Ricerca per ordinamento";
 		presenceData.details = "Sfogliando i contenuti:";
 
@@ -112,7 +136,7 @@ presence.on("UpdateData", async () => {
 		if (sort in sorts) presenceData.state = sorts[sort];
 	} else if (document.location.href.includes("archive")) {
 		/* Pagina principale - Main page */
-		presenceData.smallImageKey = "archive";
+		presenceData.smallImageKey = Assets.Archive;
 		presenceData.smallImageText = "Archivio";
 		presenceData.details = "Nell'archivio";
 		presenceData.state = "Sfogliando...";
@@ -133,7 +157,7 @@ presence.on("UpdateData", async () => {
 			if (typeof chapter0n === "undefined")
 				(chapterString = "Oneshot"), (chapter = "");
 
-			presenceData.smallImageKey = "book3";
+			presenceData.smallImageKey = Assets.Book3;
 			presenceData.smallImageText = mangaName;
 			presenceData.details = `Leggendo: ${mangaName}`;
 			presenceData.state = `${chapterString + chapter} | Pagina ${
@@ -152,7 +176,7 @@ presence.on("UpdateData", async () => {
 		} else {
 			/* Nella pagina principale del manga - In the manga's main page */
 			const pageName = document.title.replace(" Scan ITA - MangaWorld", "");
-			presenceData.smallImageKey = "eye";
+			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = pageName;
 			presenceData.details = "Visualizzando la pagina di:";
 			presenceData.state = pageName;
@@ -166,7 +190,7 @@ presence.on("UpdateData", async () => {
 	} else {
 		/* In qualunque altra pagina - In any other page */
 		const pageName = document.title.replace("MangaWorld - ", "");
-		presenceData.smallImageKey = "eye";
+		presenceData.smallImageKey = Assets.Viewing;
 		presenceData.smallImageText = `"${pageName}"`;
 		presenceData.details = "Visualizzando la pagina:";
 		presenceData.state = `"${pageName}"`;

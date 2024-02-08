@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 			)
 			.textContent.replace("Seite", "Kapitel")
 			.toString()} | ${document.querySelector(".page-text").textContent}`;
-		presenceData.smallImageKey = "manga";
+		presenceData.smallImageKey = Assets.Reading;
 	} else if (document.location.pathname.startsWith("/series/")) {
 		presenceData.details = "| Serie";
 		presenceData.state = document.querySelector(".series-title").textContent;

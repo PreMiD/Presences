@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 				} else if (document.querySelector(".MenuHeader__header__1SYq0"))
 					details = "Setting up...";
 				else {
-					smallImageKey = "live";
+					smallImageKey = Assets.Live;
 					smallImageText = (await strings).live;
 
 					const users =
@@ -111,11 +111,11 @@ presence.on("UpdateData", async () => {
 						);
 						if (play) {
 							if (play.href.baseVal.endsWith("pause")) {
-								smallImageKey = "play";
+								smallImageKey = Assets.Play;
 								smallImageText = (await strings).play;
 								playing = true;
 							} else {
-								smallImageKey = "pause";
+								smallImageKey = Assets.Pause
 								smallImageText = (await strings).pause;
 								playing = false;
 							}

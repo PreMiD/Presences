@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 		);
 
 	if (usuarioNome) {
-		presenceData.smallImageKey = "user";
+		presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/751285675277680811/751311036824420413.png?size=512";
 		presenceData.smallImageText = usuarioNome.textContent.slice(11);
 	}
 

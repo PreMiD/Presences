@@ -58,6 +58,18 @@ const updateCallback = {
 		];
 	};
 
+	const enum Assets {
+		Sm = "https://cdn.discordapp.com/app-assets/731069087031230487/731070558573428757.png?size=512",
+		Accounts = "https://cdn.discordapp.com/app-assets/731069087031230487/731070558594400269.png?size=512",
+		Tm = "https://cdn.discordapp.com/app-assets/731069087031230487/731070558833344515.png?size=512",
+		Api = "https://cdn.discordapp.com/app-assets/731069087031230487/731070559177146368.png?size=512",
+		Item = "https://cdn.discordapp.com/app-assets/731069087031230487/731070561765031946.png?size=512",
+		Logo = "https://cdn.discordapp.com/app-assets/731069087031230487/731070566781419530.png?size=512",
+		Tmtube = "https://cdn.discordapp.com/app-assets/731069087031230487/731070568253620305.png?size=512",
+		Tm2020 = "https://cdn.discordapp.com/app-assets/731069087031230487/732485276756213852.png?size=512",
+		Tmx = "https://cdn.discordapp.com/app-assets/731069087031230487/732485278446387262.png?size=512",
+	}
+
 ((): void => {
 	if (
 		currentURL.hostname.startsWith("mania") ||
@@ -88,17 +100,17 @@ const updateCallback = {
 
 		switch (currentURL.hostname.split(".")[0]) {
 			case "tm":
-				presenceData.smallImageKey = "tm";
+				presenceData.smallImageKey = Assets.Tm;
 				presenceData.smallImageText = "TrackMania²";
 				break;
 			case "sm":
-				presenceData.smallImageKey = "sm";
+				presenceData.smallImageKey = Assets.Sm;
 				presenceData.smallImageText = "ShootMania";
 				break;
 			case "trackmania":
-				presenceData.smallImageKey = "tm-2020";
+				presenceData.smallImageKey =  Assets.Tm2020;
 				presenceData.smallImageText = "Trackmania (2020)";
-				presenceData.largeImageKey = "tmx";
+				presenceData.largeImageKey = Assets.Tmx;
 				break;
 		}
 
@@ -374,9 +386,9 @@ const updateCallback = {
 			}
 		}
 	} else if (currentURL.hostname.startsWith("item")) {
-		presenceData.smallImageKey = "lg";
+		presenceData.smallImageKey = Assets.Logo;
 		presenceData.smallImageText = "ItemExchange";
-		presenceData.largeImageKey = "item";
+		presenceData.largeImageKey = Assets.Item;
 
 		if (currentPath[0] === "error")
 			presenceData.details = "On a non-existent page";
@@ -491,7 +503,7 @@ const updateCallback = {
 			}
 		}
 	} else if (currentURL.hostname.startsWith("accounts")) {
-		presenceData.smallImageKey = "accounts";
+		presenceData.smallImageKey = Assets.Accounts;
 		presenceData.smallImageText = "Accounts";
 
 		if (currentPath[0] === "auth") {
@@ -515,9 +527,9 @@ const updateCallback = {
 		} else if (currentPath[0] === "user")
 			presenceData.details = "Configuring their account";
 	} else if (currentURL.hostname.startsWith("tmtube")) {
-		presenceData.smallImageKey = "lg";
+		presenceData.smallImageKey = Assets.Logo;
 		presenceData.smallImageText = "TMTube Archive";
-		presenceData.largeImageKey = "tmtube";
+		presenceData.largeImageKey = Assets.Tmtube;
 
 		updateCallback.function = (): void => {
 			switch (currentPath[0]) {
@@ -567,7 +579,7 @@ const updateCallback = {
 			}
 		};
 	} else if (currentURL.hostname.startsWith("api")) {
-		presenceData.smallImageKey = "api";
+		presenceData.smallImageKey = Assets.Api;
 		presenceData.smallImageText = "API Documentation";
 
 		if (currentPath[0] === "") presenceData.details = "On the home page";
