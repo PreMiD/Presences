@@ -12,11 +12,9 @@ presence.on("UpdateData", async () => {
 
 	if (document.location.pathname === "/") {
 		presenceData.details = "Browsing the home page...";
-		presenceData.smallImageKey = "home";
 	} else if (document.location.pathname.startsWith("/settings")) {
 		delete presenceData.details;
 		presenceData.details = "In settings...";
-		presenceData.smallImageKey = "settings";
 		presenceData.state = "Overview";
 		switch (document.location.pathname) {
 			case "/settings/email/":

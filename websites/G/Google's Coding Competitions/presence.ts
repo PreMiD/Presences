@@ -21,6 +21,12 @@ const timeElapsed: number = ~~(Date.now() / 1000);
 
 setPresence();
 
+const enum Assets {
+  Kickstart = "https://cdn.discordapp.com/app-assets/848588920437604382/848924553114550316.png?size=512",
+  Codejam = "https://cdn.discordapp.com/app-assets/848588920437604382/848926377608085555.png?size=512",
+  Hashcode = "https://cdn.discordapp.com/app-assets/848588920437604382/848926377959751761.png?size=512",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
@@ -31,7 +37,7 @@ presence.on("UpdateData", async () => {
 
 	switch (location.pathname.split("/")[1]) {
 		case "kickstart": {
-			presenceData.largeImageKey = "kickstart";
+			presenceData.largeImageKey = Assets.Kickstart;
 
 			switch (location.pathname.split("/")[2]) {
 				case "about": {
@@ -107,7 +113,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		case "codejam": {
-			presenceData.largeImageKey = "codejam";
+			presenceData.largeImageKey = Assets.Codejam;
 
 			switch (location.pathname.split("/")[2]) {
 				case "about": {
@@ -183,7 +189,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		case "hashcode": {
-			presenceData.largeImageKey = "hashcode";
+			presenceData.largeImageKey = Assets.Hashcode;
 
 			switch (location.pathname.split("/")[2]) {
 				case "about": {

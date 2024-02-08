@@ -3,10 +3,15 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+	const enum Assets {
+		Logo = "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Colab/assets/logo.png",
+		Comment = "https://cdn.discordapp.com/app-assets/959487033963843594/959930723505164348.png?size=512",
+		Information = "https://cdn.discordapp.com/app-assets/959487033963843594/959933136135938069.png?size=512",
+	}
+
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/G/Google%20Colab/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		notebookTitle =
@@ -63,7 +68,7 @@ presence.on("UpdateData", () => {
 
 		// Checking if the user is commenting
 		if (document.querySelector(".comment-fragment.editing.focused")) {
-			presenceData.smallImageKey = "comment";
+			presenceData.smallImageKey = Assets.Comment;
 			presenceData.smallImageText = "Commenting";
 		} else {
 			// Checking runtime resources
@@ -71,7 +76,7 @@ presence.on("UpdateData", () => {
 				"colab-connect-button"
 			).shadowRoot;
 			if (connectShadowRoot.querySelector("#connect-button-resource-display")) {
-				presenceData.smallImageKey = "information";
+				presenceData.smallImageKey = Assets.Information;
 				presenceData.smallImageText = `Ram: ${
 					connectShadowRoot
 						.querySelector(".ram")
