@@ -3,12 +3,19 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+	const enum Assets {
+		Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Discords.com/assets/logo.png",
+		Discordbio = "https://cdn.discordapp.com/app-assets/843791837273391104/848004838452232224.png?size=512",
+		Discordtemplates = "https://cdn.discordapp.com/app-assets/843791837273391104/849930369213268010.png?size=512",
+		Botsfordiscord = "https://cdn.discordapp.com/app-assets/843791837273391104/876063006193221652.png?size=512",
+	}
+
 presence.on("UpdateData", async () => {
 	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
 			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/D/Discords.com/assets/logo.png",
+			 			Assets.Logo,
 		};
 
 	if (document.location.pathname === "/")
@@ -220,7 +227,7 @@ presence.on("UpdateData", async () => {
 					];
 					// discord.bio
 				} else if (document.location.pathname.includes("/profiles")) {
-					presenceData.largeImageKey = "discordbio_logo";
+					presenceData.largeImageKey = Assets.Discordbio;
 					presenceData.smallImageKey = Assets.Reading;
 					presenceData.smallImageText = "Browsing...";
 					presenceData.details = "Browsing top bios";
@@ -231,7 +238,7 @@ presence.on("UpdateData", async () => {
 						},
 					];
 				} else if (document.location.pathname === "/bio/premium") {
-					presenceData.largeImageKey = "discordbio_logo";
+					presenceData.largeImageKey = Assets.Discordbio;
 					presenceData.details = "Viewing 💎 premium plans";
 					presenceData.buttons = [
 						{
@@ -240,13 +247,13 @@ presence.on("UpdateData", async () => {
 						},
 					];
 				} else if (document.location.pathname.includes("/customise")) {
-					presenceData.largeImageKey = "discordbio_logo";
+					presenceData.largeImageKey = Assets.Discordbio;
 					presenceData.details = "Editing bio";
 				} else if (document.location.pathname.includes("/settings")) {
-					presenceData.largeImageKey = "discordbio_logo";
+					presenceData.largeImageKey = Assets.Discordbio;
 					presenceData.details = "Viewing ⚙️ settings";
 				} else if (document.location.pathname.includes("/p/")) {
-					presenceData.largeImageKey = "discordbio_logo";
+					presenceData.largeImageKey = Assets.Discordbio;
 					const profileName = document.querySelector(
 						"span.text-white.font-bold.text-2xl"
 					)?.textContent;
@@ -271,11 +278,11 @@ presence.on("UpdateData", async () => {
 						},
 					];
 				} else if (document.location.pathname.includes("/bio")) {
-					presenceData.largeImageKey = "discordbio_logo";
+					presenceData.largeImageKey = Assets.Discordbio;
 					presenceData.details = "Viewing home page";
 					// discord templates
 				} else if (document.location.pathname.includes("/edit")) {
-					presenceData.largeImageKey = "discordtemplates_logo";
+					presenceData.largeImageKey = Assets.Discordtemplates;
 					presenceData.details = "Editing a template";
 					presenceData.buttons = [
 						{
@@ -284,14 +291,14 @@ presence.on("UpdateData", async () => {
 						},
 					];
 				} else if (document.location.pathname.includes("/templates/id/new")) {
-					presenceData.largeImageKey = "discordtemplates_logo";
+					presenceData.largeImageKey = Assets.Discordtemplates;
 					presenceData.details = "Creating New Template:";
 					presenceData.state = `${
 						document.querySelector("h5.font-semibold.text-lg.truncate")
 							?.textContent ?? "Unknown"
 					}`;
 				} else if (document.location.pathname.includes("/templates/id/top")) {
-					presenceData.largeImageKey = "discordtemplates_logo";
+					presenceData.largeImageKey = Assets.Discordtemplates;
 					presenceData.details = "Viewing Top-10 templates";
 					presenceData.smallImageKey = Assets.Reading;
 					presenceData.smallImageText = "Browsing...";
@@ -302,7 +309,7 @@ presence.on("UpdateData", async () => {
 						},
 					];
 				} else if (document.location.pathname.includes("/templates/id/")) {
-					presenceData.largeImageKey = "discordtemplates_logo";
+					presenceData.largeImageKey = Assets.Discordtemplates;
 					presenceData.details = "Viewing Template:";
 					presenceData.state = `${
 						document.querySelector("h1.font-semibold.truncate")?.textContent ??
@@ -315,7 +322,7 @@ presence.on("UpdateData", async () => {
 						},
 					];
 				} else if (document.location.pathname.includes("/templates/users/")) {
-					presenceData.largeImageKey = "discordtemplates_logo";
+					presenceData.largeImageKey = Assets.Discordtemplates;
 					presenceData.details = "Viewing User:";
 					presenceData.state = `${
 						document.querySelector("h1.text-3xl.font-semibold")?.textContent ??
@@ -328,7 +335,7 @@ presence.on("UpdateData", async () => {
 						},
 					];
 				} else if (document.location.pathname.includes("/templates/search/")) {
-					presenceData.largeImageKey = "discordtemplates_logo";
+					presenceData.largeImageKey = Assets.Discordtemplates;
 					presenceData.details = "Searching for:";
 					presenceData.state = `${
 						document.location.pathname.split("/templates/search/")[1] ??
@@ -337,7 +344,7 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageKey = Assets.Search;
 					presenceData.smallImageText = "Searching...";
 				} else if (document.location.pathname.includes("/templates/tags/")) {
-					presenceData.largeImageKey = "discordtemplates_logo";
+					presenceData.largeImageKey = Assets.Discordtemplates;
 					presenceData.details = "Searching by tag:";
 					presenceData.state = `${
 						document.location.pathname.split("/templates/tags/")[1] ?? "Unknown"
@@ -345,7 +352,7 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageKey = Assets.Search;
 					presenceData.smallImageText = "Searching...";
 				} else if (document.location.pathname.includes("/templates")) {
-					presenceData.largeImageKey = "discordtemplates_logo";
+					presenceData.largeImageKey = Assets.Discordtemplates;
 					presenceData.details = "Viewing home page";
 				}
 		}
