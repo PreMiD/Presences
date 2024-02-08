@@ -15,14 +15,14 @@ enum Settings {
 }
 
 const enum Assets {
-	Discovery = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759030665216.png?size=512",
-	Library = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759063957525.png?size=512",
-	Team = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759395176544.png?size=512",
-	Manga = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759504097290.png?size=512",
-	News = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759529918474.png?size=512",
-	Paintings = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759559016479.png?size=512",
-	DarkLogo = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759609085962.png?size=512",
-	LightLogo = "https://cdn.discordapp.com/app-assets/862700890414776370/862723760124854313.png?size=512",
+	Discovery = "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/0.png",
+	Library = "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/1.png",
+	Team = "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/2.png",
+	Manga = "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/3.png",
+	News = "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/4.png",
+	Paintings = "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/5.png",
+	DarkLogo = "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/6.png",
+	LightLogo = "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/7.png",
 }
 
 const presence = new Presence({

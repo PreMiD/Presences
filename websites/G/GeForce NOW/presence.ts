@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/G/GeForce%20NOW/assets/logo.png",
 			smallImageKey:
-				"https://cdn.discordapp.com/app-assets/864631234339930132/864635911521959936.png?size=512",
+				"https://cdn.rcd.gg/PreMiD/websites/G/GeForce%20NOW/assets/0.png",
 			startTimestamp: browsingTimestamp,
 		};
 
