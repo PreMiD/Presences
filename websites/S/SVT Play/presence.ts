@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 					'[data-rt="video-player-channels"]'
 				)
 			) {
-				presenceData.smallImageKey = "live";
+				presenceData.smallImageKey = Assets.Live;
 				presenceData.smallImageText = `Watching live on channel: ${
 					document.querySelector("head > title").textContent.split("|")[0]
 				}`;
@@ -113,7 +113,7 @@ presence.on("UpdateData", async () => {
 				} else if (live === true) {
 					presenceData.details = title;
 					presenceData.state = user;
-					presenceData.smallImageKey = "live";
+					presenceData.smallImageKey = Assets.Live;
 				} else {
 					presenceData.startTimestamp = browsingTimestamp;
 					presenceData.details = "Looing at:";

@@ -169,12 +169,14 @@ const timers: { [key: string]: Date } = {},
 let lastPageIndex: number,
 	currentLang: string,
 	localizedStrings: { [key: string]: string };
+
 const IMAGES = {
-	LOGO: "logox1024",
-	PLAY: "playx1024",
-	PAUSE: "pausex1024",
-	BROWSE: "browsex1024",
+	LOGO: "https://cdn.discordapp.com/app-assets/823951719331004426/823952010721755176.png?size=512",
+	PLAY: Assets.Play,
+	PAUSE: Assets.Pause,
+	BROWSE: Assets.Search,
 };
+
 presence.on("UpdateData", async () => {
 	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	if (newLang !== currentLang) {

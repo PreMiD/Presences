@@ -18,7 +18,24 @@ enum LogoAssets {
 	BbcSport = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/4.png",
 	BbcWeather = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/5.png",
 }
-const browsingTimestamp = Math.floor(Date.now() / 1000),
+
+/* eslint-disable camelcase */
+const assets = {
+		bbcsounds_logo:
+			"https://cdn.discordapp.com/app-assets/658230518520741915/813002634281091082.png?size=512",
+		bbciplayer_logo:
+			"https://cdn.discordapp.com/app-assets/658230518520741915/818020500038615061.png?size=512",
+		bbc_logo:
+			"https://cdn.discordapp.com/app-assets/658230518520741915/818020500319502366.png?size=512",
+		bbcnews_logo:
+			"https://cdn.discordapp.com/app-assets/658230518520741915/818821115534770235.png?size=512",
+		bbcsport_logo:
+			"https://cdn.discordapp.com/app-assets/658230518520741915/818821378320498698.png?size=512",
+		bbcweather_logo:
+			"https://cdn.discordapp.com/app-assets/658230518520741915/819920132172152883.png?size=512",
+	},
+	/* eslint-enable camelcase */
+	browsingTimestamp = Math.floor(Date.now() / 1000),
 	getStrings = (lang: string) =>
 		presence.getStrings(
 			{
@@ -563,12 +580,13 @@ presence.on("UpdateData", async () => {
 					state: document.querySelector<HTMLInputElement>(
 						"input.location-search-input__input"
 					)?.value,
-					smallImageKey: "search",
+					smallImageKey: Assets.Search,
 				},
 				"/weather/map": {
 					details: strings.viewPage,
 					state: "Map",
-					smallImageKey: "map",
+					smallImageKey:
+						"https://cdn.discordapp.com/app-assets/658230518520741915/819962900499398677.png?size=512",
 				},
 				"/weather/([0-9])": {
 					details: "Viewing weather of:",
@@ -579,7 +597,7 @@ presence.on("UpdateData", async () => {
 					smallImageText: document.querySelector(
 						"div.wr-day-summary > div > span"
 					)?.textContent,
-					smallImageKey: "reading",
+					smallImageKey: Assets.Reading,
 					buttons: [
 						{
 							label: "View Weather",
@@ -590,7 +608,7 @@ presence.on("UpdateData", async () => {
 				"/weather/features/([0-9])": {
 					details: strings.readingArticle,
 					state: title,
-					smallImageKey: "reading",
+					smallImageKey: Assets.Reading,
 					buttons: [
 						{
 							label: strings.buttonReadArticle,
@@ -732,8 +750,10 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (!buttons) delete presenceData.buttons;
-	if (!showCover && String(presenceData.largeImageKey).startsWith("https"))
-		presenceData.largeImageKey = `${serviceName}_logo`;
+	if (!showCover && String(presenceData.largeImageKey).startsWith("https")) {
+		presenceData.largeImageKey =
+			assets[`${serviceName}_logo` as keyof typeof assets];
+	}
 
 	if (presenceData.details === strings.searchFor && !showSearchQuery)
 		presenceData.state = "(Hidden)";

@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 					"https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/logo.png",
 				details: "Bir kategoriye göz atıyor:",
 				state: genre,
-				smallImageKey: "search",
+				smallImageKey: Assets.Search,
 				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (genre && showName) {
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 					"https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/logo.png",
 				details: "Bir dizi arıyor:",
 				state: `${showName} (${genre})`,
-				smallImageKey: "search",
+				smallImageKey: Assets.Search,
 				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (
@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
 					"https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/logo.png",
 				details: "Bir dizi arıyor:",
 				state: showName,
-				smallImageKey: "search",
+				smallImageKey: Assets.Search,
 				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		}

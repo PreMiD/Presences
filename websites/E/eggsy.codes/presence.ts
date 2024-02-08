@@ -26,7 +26,9 @@ presence.on("UpdateData", async () => {
 					"https://cdn.rcd.gg/PreMiD/websites/E/eggsy.codes/assets/logo.png",
 				details,
 				state,
-				smallImageKey: smallImage ?? "SOMETHING-SKETCHY",
+				smallImageKey:
+					smallImage ??
+					"https://cdn.rcd.gg/PreMiD/websites/E/eggsy.codes/assets/logo.png",
 				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else {

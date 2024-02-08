@@ -10,7 +10,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/C/Cytoid/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 

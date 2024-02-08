@@ -4,11 +4,15 @@ const presence = new Presence({
 
 let deck;
 
+const enum Assets {
+	Banner = "https://cdn.discordapp.com/app-assets/630550023133724692/630550398364680202.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/Y/Yu-Gi-Oh%20Top%20Decks/assets/logo.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/Y/Yu-Gi-Oh%20Top%20Decks/assets/logo.png",
-		smallImageKey: "icon",
+		largeImageKey: Assets.Logo,
+		smallImageKey: Assets.Logo,
 	};
 
 	switch (document.location.pathname) {
@@ -45,8 +49,8 @@ presence.on("UpdateData", async () => {
 					"Most Used Cards",
 					""
 				)}`;
-			presenceData.largeImageKey = "banner";
-			presenceData.smallImageKey = "icon";
+			presenceData.largeImageKey = Assets.Banner;
+			presenceData.smallImageKey = Assets.Logo;
 			presenceData.smallImageText = "looking";
 
 			break;
@@ -60,8 +64,8 @@ presence.on("UpdateData", async () => {
 				document.querySelectorAll(".sortable")[0].children[1].firstElementChild
 					.children[4].textContent
 			}`),
-				(presenceData.largeImageKey = "banner");
-			presenceData.smallImageKey = "icon";
+				(presenceData.largeImageKey = Assets.Banner);
+			presenceData.smallImageKey = Assets.Logo;
 			presenceData.smallImageText = "looking";
 
 			break;
@@ -71,8 +75,8 @@ presence.on("UpdateData", async () => {
 				.value;
 			presenceData.details = "Building Deck";
 			presenceData.state = `Editing: ${deck}`;
-			presenceData.largeImageKey = "banner";
-			presenceData.smallImageKey = "icon";
+			presenceData.largeImageKey = Assets.Banner;
+			presenceData.smallImageKey = Assets.Logo;
 			presenceData.smallImageText = "creating deck";
 
 			break;
@@ -97,8 +101,8 @@ presence.on("UpdateData", async () => {
 						.children[1].textContent.replace("\n", ":")
 						.split(":")[1]
 				}`;
-				presenceData.largeImageKey = "banner";
-				presenceData.smallImageKey = "icon";
+				presenceData.largeImageKey = Assets.Banner;
+				presenceData.smallImageKey = Assets.Logo;
 				presenceData.smallImageText = document.location.href;
 			}
 	}

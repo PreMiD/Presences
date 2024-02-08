@@ -1,11 +1,19 @@
 const presence = new Presence({
-		clientId: "778092541836656712",
-	}),
-	modePair: { [key: string]: string } = {
-		Arrows: "arrows2",
-		"Death Arrows": "arrows2",
-		Grapple: "grapple2",
-	};
+	clientId: "778092541836656712",
+});
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/B/Bonk.io/assets/logo.png",
+	Arrows = "https://cdn.discordapp.com/app-assets/778092541836656712/778104039446413352.png?size=512",
+	Arrows2 = "https://cdn.discordapp.com/app-assets/778092541836656712/778135661415890956.png?size=512",
+	Classic = "https://cdn.discordapp.com/app-assets/778092541836656712/778135661517602867.png?size=512",
+	Grapple = "https://cdn.discordapp.com/app-assets/778092541836656712/778135661562560524.png?size=512",
+}
+const modePair: { [key: string]: string } = {
+	Arrows: Assets.Arrows,
+	"Death Arrows": Assets.Arrows2,
+	Grapple: Assets.Grapple,
+};
 
 interface IFrameData {
 	lastGameMode?: string;
@@ -19,8 +27,7 @@ let gameStartTimestamp: number = null,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/B/Bonk.io/assets/logo.png",
+		largeImageKey: Assets.Logo,
 	};
 
 	if (ifd?.id) {
@@ -55,7 +62,8 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `In a lobby - ${ifd.lastGameMode} (${
 					ifd.playerCount
 				} player${ifd.playerCount === 1 ? "" : "s"})`;
-				presenceData.smallImageKey = modePair[ifd.lastGameMode] || "classic2";
+				presenceData.smallImageKey =
+					modePair[ifd.lastGameMode] || Assets.Classic;
 				presenceData.smallImageText = ifd.lastGameMode;
 				break;
 			case "mapeditorcontainer":
@@ -68,7 +76,8 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "In Game";
 				if (ifd.lastGameMode) {
 					presenceData.details += ` - ${ifd.lastGameMode}`;
-					presenceData.smallImageKey = modePair[ifd.lastGameMode] || "classic2";
+					presenceData.smallImageKey =
+						modePair[ifd.lastGameMode] || Assets.Classic;
 					presenceData.smallImageText = ifd.lastGameMode;
 				}
 				break;

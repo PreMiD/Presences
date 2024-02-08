@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 		if (users) {
 			if (new URLSearchParams(location.search).get("has_video") === "true") {
 				presenceData.details = "In a video call with:";
-				presenceData.smallImageKey = "videocall";
+				presenceData.smallImageKey = Assets.VideoCall;
 			} else {
 				presenceData.details = "In a call with:";
 				presenceData.smallImageKey = Assets.Call;

@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 		];
 		presenceData.details = "Çeviri mangaya:";
 		presenceData.state = document.querySelector(".name").textContent;
-		presenceData.smallImageKey = "view";
+		presenceData.smallImageKey = Assets.Viewing;
 	} else if (pathname === "/mangalar" && search?.substr(0, 7) === "?search") {
 		presenceData.details = "Arıyor:";
 		presenceData.state = new URLSearchParams(search).get("search");

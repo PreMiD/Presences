@@ -3,10 +3,19 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/logo.png",
+	Inbox = "https://cdn.discordapp.com/app-assets/917417055458852865/917785142825746462.png?size=512",
+	User = "https://cdn.discordapp.com/app-assets/917417055458852865/919428857440899162.png?size=512",
+	Artwork = "https://cdn.discordapp.com/app-assets/917417055458852865/917788292014014464.png?size=512",
+	Searchjob = "https://cdn.discordapp.com/app-assets/917417055458852865/917785141835866193.png?size=512",
+	Editprofile = "https://cdn.discordapp.com/app-assets/917417055458852865/917785141781340202.png?size=512",
+	Portfolio = "https://cdn.discordapp.com/app-assets/917417055458852865/917790216977277022.png?size=512",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		shortTitle = document.title.split(/-(.+)/)[1],
@@ -19,7 +28,7 @@ presence.on("UpdateData", async () => {
 
 	if (document.location.pathname.startsWith("/messages")) {
 		presenceData.details = "Checking inbox";
-		presenceData.smallImageKey = "inbox";
+		presenceData.smallImageKey = Assets.Inbox;
 		presenceData.smallImageText = "Checking inbox";
 	} else if (
 		document.querySelector<HTMLDivElement>(
@@ -31,7 +40,7 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 			"div.user-profile > user-header > div > div > div.avatar > img"
 		).src;
-		presenceData.smallImageKey = "user";
+		presenceData.smallImageKey = Assets.User;
 		presenceData.smallImageText = "Viewing profile";
 		presenceData.buttons = [{ label: "View Artist", url: document.URL }];
 	} else if (document.location.pathname.startsWith("/artwork")) {
@@ -49,7 +58,7 @@ presence.on("UpdateData", async () => {
 				"div.asset-image > picture > img"
 			).src;
 		} else {
-			presenceData.smallImageKey = "artwork";
+			presenceData.smallImageKey = Assets.Artwork;
 			presenceData.smallImageText = "Viewing artwork";
 		}
 		presenceData.buttons = [
@@ -70,7 +79,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document
 			.querySelector('meta[property="og:title"]')
 			.getAttribute("content");
-		presenceData.smallImageKey = "searchjob";
+		presenceData.smallImageKey = Assets.Searchjob;
 		presenceData.smallImageText = "Viewing jobs";
 	} else if (document.location.pathname.startsWith("/blogs")) {
 		if (document.location.pathname === "/blogs")
@@ -92,7 +101,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Looking for guides";
 	else if (document.location.pathname.startsWith("/learning")) {
 		presenceData.details = "Learning";
-		presenceData.smallImageKey = "learning";
+		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Learning";
 		if (
 			document.location.href.includes("/courses") ||
@@ -148,7 +157,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Changing settings";
 	else if (document.location.href.includes("profile/edit")) {
 		presenceData.details = "Editing profile";
-		presenceData.smallImageKey = "editprofile";
+		presenceData.smallImageKey = Assets.Editprofile;
 		presenceData.smallImageText = "Editing profile";
 	} else if (document.location.href.includes("project/new")) {
 		presenceData.details = "Uploading an artwork";
@@ -159,7 +168,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = shortTitle;
 	} else if (document.location.hostname === "www.artstation.com") {
 		presenceData.details = "Exploring artworks";
-		presenceData.smallImageKey = "artwork";
+		presenceData.smallImageKey = Assets.Artwork;
 		presenceData.smallImageText = "Exploring artworks";
 	} else {
 		presenceData.details = "Viewing a portfolio";
@@ -169,7 +178,7 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = document
 			.querySelector("head > meta[name=image]")
 			.getAttribute("content");
-		presenceData.smallImageKey = "portfolio";
+		presenceData.smallImageKey = Assets.Portfolio;
 		presenceData.smallImageText = "Viewing portfolio";
 	}
 	if (!image) {

@@ -9,6 +9,25 @@ let iFrameVideo: boolean,
 	paused: boolean,
 	playback: boolean;
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeWorld/assets/logo.png",
+	Home = "https://cdn.discordapp.com/app-assets/678265146883178519/736587225919389806.png?size=512",
+	Info = "https://cdn.discordapp.com/app-assets/678265146883178519/736587224782733332.png?size=512",
+	Settings = "https://cdn.discordapp.com/app-assets/678265146883178519/736587225940099132.png?size=512",
+	Notifications = "https://cdn.discordapp.com/app-assets/678265146883178519/736587225285918876.png?size=512",
+	User = "https://cdn.discordapp.com/app-assets/678265146883178519/736587225176866846.png?size=512",
+	WLSettings = "https://cdn.discordapp.com/app-assets/678265146883178519/736587225634046082.png?size=512",
+	UserWL = "https://cdn.discordapp.com/app-assets/678265146883178519/736587225093111888.png?size=512",
+	New = "https://cdn.discordapp.com/app-assets/678265146883178519/736587224757305354.png?size=512",
+	Schedule = "https://cdn.discordapp.com/app-assets/678265146883178519/736587224761499668.png?size=512",
+	Clock = "https://cdn.discordapp.com/app-assets/678265146883178519/736587223771906088.png?size=512",
+	Archive = "https://cdn.discordapp.com/app-assets/678265146883178519/736587223540957234.png?size=512",
+	Paper = "https://cdn.discordapp.com/app-assets/678265146883178519/736587224686002176.png?size=512",
+	Yuriko = "https://cdn.discordapp.com/app-assets/678265146883178519/736587229539074139.png?size=512",
+	Working = "https://cdn.discordapp.com/app-assets/678265146883178519/736587227286470746.png?size=512",
+	Pokemon = "https://cdn.discordapp.com/app-assets/678265146883178519/750844214287400962.png?size=512",
+}
+
 presence.on(
 	"iFrameData",
 	(data: {
@@ -37,7 +56,7 @@ presence.on("UpdateData", async () => {
 
 	if (document.location.pathname === "/") {
 		// Homepage
-		presenceData.smallImageKey = "home";
+		presenceData.smallImageKey = Assets.Home;
 		presenceData.smallImageText = "Homepage";
 		presenceData.details = "Nella homepage";
 	} else if (
@@ -47,54 +66,54 @@ presence.on("UpdateData", async () => {
 		document.location.pathname.startsWith("/termini")
 	) {
 		// Contact
-		presenceData.smallImageKey = "info";
+		presenceData.smallImageKey = Assets.Info;
 		presenceData.smallImageText = "Contatti";
 		presenceData.details = "Sta leggendo le info";
 		presenceData.state = "su AnimeWorld";
 	} else if (document.location.pathname.startsWith("/login")) {
 		// Contact
-		presenceData.smallImageKey = "info";
+		presenceData.smallImageKey = Assets.Info;
 		presenceData.smallImageText = "Login";
 		presenceData.details = "Sta accedendo al suo";
 		presenceData.state = "account";
 	} else if (document.location.pathname.startsWith("/settings")) {
 		// General Settings
-		presenceData.smallImageKey = "settings";
+		presenceData.smallImageKey = Assets.Settings;
 		presenceData.smallImageText = "Impostazioni";
 		presenceData.details = "Nelle sue impostazioni";
 	} else if (document.location.pathname.startsWith("/mal-import")) {
 		// Import WL
-		presenceData.smallImageKey = "import";
+		presenceData.smallImageKey = Assets.Downloading;
 		presenceData.smallImageText = "Importa la WatchList";
 		presenceData.details = "Sta importando la sua";
 		presenceData.state = "WatchList da MAL";
 	} else if (document.location.pathname.startsWith("/notifications")) {
 		// Notifications
-		presenceData.smallImageKey = "notifications";
+		presenceData.smallImageKey = Assets.Notifications;
 		presenceData.smallImageText = "Notifiche";
 		presenceData.details = "Sfoglia le notifiche";
 	} else if (document.location.pathname.startsWith("/profile")) {
 		const [, username] = document.title.split("Profilo di ");
-		presenceData.smallImageKey = "user";
+		presenceData.smallImageKey = Assets.User;
 		presenceData.smallImageText = `Profilo di ${username}`;
 		presenceData.details = "Guarda il profilo di:";
 		presenceData.state = username;
 	} else if (document.location.href.includes("watchlist")) {
 		if (document.querySelector("#rich-presence-proprietary")) {
-			presenceData.smallImageKey = "wlsettings";
+			presenceData.smallImageKey = Assets.WLSettings;
 			presenceData.smallImageText = "Imposta la WatchList";
 			presenceData.details = "Sta modificando la sua";
 			presenceData.state = "WatchList";
 		} else {
 			const [, usernamewl] = document.title.split("Watchlist di ");
-			presenceData.smallImageKey = "userwl";
+			presenceData.smallImageKey = Assets.UserWL;
 			presenceData.smallImageText = `WatchList di ${usernamewl}`;
 			presenceData.details = "Guarda la WatchList di:";
 			presenceData.state = usernamewl;
 		}
 	} else if (document.location.pathname.startsWith("/request-serie")) {
 		// Import WL
-		presenceData.smallImageKey = "new";
+		presenceData.smallImageKey = Assets.New;
 		presenceData.smallImageText = "Richiede un'anime";
 		presenceData.details = "Sta facendo la richiesta";
 		presenceData.state = "per aggiungere un'anime";
@@ -116,14 +135,14 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/newest")) {
 		// Newest
 		if (document.location.href.includes("newest?page=")) {
-			presenceData.smallImageKey = "new";
+			presenceData.smallImageKey = Assets.New;
 			presenceData.smallImageText = "Nuove aggiunte";
 			presenceData.details = "Sfoglia le nuove aggiunte";
 			presenceData.state = `Pagina: ${
 				document.location.href.split("newest?page=")[1]
 			}`;
 		} else {
-			presenceData.smallImageKey = "new";
+			presenceData.smallImageKey = Assets.New;
 			presenceData.smallImageText = "Nuove aggiunte";
 			presenceData.details = "Sfoglia le nuove aggiunte";
 			presenceData.state = "Pagina: 1";
@@ -131,14 +150,14 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/updated")) {
 		// Updated
 		if (document.location.href.includes("updated?page=")) {
-			presenceData.smallImageKey = "new";
+			presenceData.smallImageKey = Assets.New;
 			presenceData.smallImageText = "Nuovi episodi";
 			presenceData.details = "Sfoglia i nuovi episodi";
 			presenceData.state = `Pagina: ${
 				document.location.href.split("updated?page=")[1]
 			}`;
 		} else {
-			presenceData.smallImageKey = "new";
+			presenceData.smallImageKey = Assets.New;
 			presenceData.smallImageText = "Nuovi episodi";
 			presenceData.details = "Sfoglia i nuovi episodi";
 			presenceData.state = "Pagina: 1";
@@ -146,40 +165,40 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/ongoing")) {
 		// On Going
 		if (document.location.href.includes("ongoing?page=")) {
-			presenceData.smallImageKey = "schedule";
+			presenceData.smallImageKey = Assets.Schedule;
 			presenceData.smallImageText = "Anime in corso";
 			presenceData.details = "Sfoglia gli anime in";
 			presenceData.state = `corso. Pagina: ${
 				document.location.href.split("ongoing?page=")[1]
 			}`;
 		} else {
-			presenceData.smallImageKey = "schedule";
+			presenceData.smallImageKey = Assets.Schedule;
 			presenceData.smallImageText = "Anime in corso";
 			presenceData.details = "Sfoglia gli anime in";
 			presenceData.state = "corso. Pagina: 1";
 		}
 	} else if (document.location.pathname.startsWith("/upcoming")) {
 		// Upcoming
-		presenceData.smallImageKey = "clock";
+		presenceData.smallImageKey = Assets.Clock;
 		presenceData.smallImageText = "Prossime uscite";
 		presenceData.details = "Sfoglia le prossime";
 		presenceData.state = "uscite";
 	} else if (document.location.pathname.startsWith("/az-list")) {
 		// A-Z List
 		if (document.location.href.includes("?page=")) {
-			presenceData.smallImageKey = "archive";
+			presenceData.smallImageKey = Assets.Archive;
 			presenceData.smallImageText = "Archivio";
 			presenceData.details = "Sfoglia tutti gli anime";
 			presenceData.state = `Pagina: ${document.location.href.split("=")[1]}`;
 		} else {
-			presenceData.smallImageKey = "archive";
+			presenceData.smallImageKey = Assets.Archive;
 			presenceData.smallImageText = "Archivio";
 			presenceData.details = "Sfoglia tutti gli anime";
 			presenceData.state = "Pagina: 1";
 		}
 	} else if (document.location.pathname.startsWith("/schedule")) {
 		// On Going
-		presenceData.smallImageKey = "schedule";
+		presenceData.smallImageKey = Assets.Schedule;
 		presenceData.smallImageText = "Calendario";
 		presenceData.details = "Consulta il calendario degli";
 		presenceData.state = "anime";
@@ -199,19 +218,19 @@ presence.on("UpdateData", async () => {
 			document.location.pathname === "/news/"
 		) {
 			if (document.location.href.includes("?page=")) {
-				presenceData.smallImageKey = "paper";
+				presenceData.smallImageKey = Assets.Paper;
 				presenceData.smallImageText = "Notizie";
 				presenceData.details = "Legge le notizie";
 				presenceData.state = `Pagina: ${document.location.href.split("=")[1]}`;
 			} else {
-				presenceData.smallImageKey = "paper";
+				presenceData.smallImageKey = Assets.Paper;
 				presenceData.smallImageText = "Notizie";
 				presenceData.details = "Legge le notizie";
 				presenceData.state = "Pagina: 1";
 			}
 		} else {
 			const [, newsName] = document.title.split("- ");
-			presenceData.smallImageKey = "paper";
+			presenceData.smallImageKey = Assets.Paper;
 			presenceData.smallImageText = newsName;
 			presenceData.details = "Legge la notizia:";
 			presenceData.state = newsName;
@@ -347,7 +366,7 @@ presence.on("UpdateData", async () => {
 				.split(" Streaming & ");
 			if (newname.includes("(ITA)")) [newname] = newname.split(" (ITA)");
 
-			presenceData.smallImageKey = "new";
+			presenceData.smallImageKey = Assets.New;
 			presenceData.smallImageText = newname;
 			presenceData.details = `Guarda l'annunciato:\n${newname}`;
 			presenceData.state =
@@ -401,7 +420,7 @@ presence.on("UpdateData", async () => {
 						presenceData.endTimestamp = paused ? null : timestamps[1];
 					}
 				} else {
-					presenceData.smallImageKey = "watching";
+					presenceData.smallImageKey = Assets.Viewing;
 					presenceData.smallImageText = `${animename}｜Episodio: ${animenumber}`;
 					presenceData.details = `Sta per guardare:\n${animename}`;
 					presenceData.state =
@@ -445,7 +464,7 @@ presence.on("UpdateData", async () => {
 						presenceData.endTimestamp = paused ? null : timestamps[1];
 					}
 				} else {
-					presenceData.smallImageKey = "watching";
+					presenceData.smallImageKey = Assets.Viewing;
 					presenceData.smallImageText = moviename;
 					presenceData.details = `Sta per guardare il film:\n${moviename}`;
 					presenceData.state =
@@ -491,7 +510,7 @@ presence.on("UpdateData", async () => {
 						presenceData.endTimestamp = paused ? null : timestamps[1];
 					}
 				} else {
-					presenceData.smallImageKey = "watching";
+					presenceData.smallImageKey = Assets.Viewing;
 					presenceData.smallImageText = `${oavname}｜${oavnumber}° OAV`;
 					presenceData.details = `Sta per guardare:\n${oavname}`;
 					presenceData.state =
@@ -538,7 +557,7 @@ presence.on("UpdateData", async () => {
 						presenceData.endTimestamp = paused ? null : timestamps[1];
 					}
 				} else {
-					presenceData.smallImageKey = "watching";
+					presenceData.smallImageKey = Assets.Viewing;
 					presenceData.smallImageText = `${onaname}｜${onanumber}° ONA`;
 					presenceData.details = `Sta per guardare:\n${onaname}`;
 					presenceData.state =
@@ -586,7 +605,7 @@ presence.on("UpdateData", async () => {
 						presenceData.endTimestamp = paused ? null : timestamps[1];
 					}
 				} else {
-					presenceData.smallImageKey = "watching";
+					presenceData.smallImageKey = Assets.Viewing;
 					presenceData.smallImageText = `${specialname}｜${specialnumber}° Special`;
 					presenceData.details = `Sta per guardare:\n${specialname}`;
 					presenceData.state =
@@ -631,7 +650,7 @@ presence.on("UpdateData", async () => {
 						presenceData.endTimestamp = paused ? null : timestamps[1];
 					}
 				} else {
-					presenceData.smallImageKey = "watching";
+					presenceData.smallImageKey = Assets.Viewing;
 					presenceData.smallImageText = previewname;
 					presenceData.details = `Sta per guardare la preview:\n${previewname}`;
 					presenceData.state =
@@ -643,13 +662,13 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	} else if (document.location.pathname.startsWith("/admin")) {
-		presenceData.largeImageKey = "yuriko";
-		presenceData.smallImageKey = "working";
+		presenceData.largeImageKey = Assets.Yuriko;
+		presenceData.smallImageKey = Assets.Working;
 		presenceData.smallImageText = "AnimeWorld Lover";
 		presenceData.details = "Sta lavorando su";
 		presenceData.state = "AnimeWorld";
 	} else {
-		presenceData.largeImageKey = "pokemonlogo";
+		presenceData.largeImageKey = Assets.Pokemon;
 		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Navigando...";
 		presenceData.details = "Navigando...";

@@ -3,11 +3,19 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/CSGO%20Stash/assets/logo.png",
+	Skins = "https://cdn.discordapp.com/app-assets/918832169823125555/918854002542784522.png?size=512",
+	Case = "https://cdn.discordapp.com/app-assets/918832169823125555/919939227930730566.png?size=512",
+	Sticker = "https://cdn.discordapp.com/app-assets/918832169823125555/919938921977245746.png?size=512",
+	Glove = "https://cdn.discordapp.com/app-assets/918832169823125555/919944744749137970.png?size=512",
+	Items = "https://cdn.discordapp.com/app-assets/918832169823125555/919946739941781514.png?size=512",
+}
+
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			details: "Browsing...",
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/C/CSGO%20Stash/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		shortTitle = document.title.substring(
@@ -44,12 +52,12 @@ presence.on("UpdateData", () => {
 	} else if (path.startsWith("/weapon")) {
 		presenceData.details = "Browsing weapon skins";
 		presenceData.state = shortTitle;
-		presenceData.smallImageKey = "skins";
+		presenceData.smallImageKey = Assets.Skins;
 		presenceData.smallImageText = "Viewing skins";
 	} else if (path.startsWith("/skin-rarity")) {
 		presenceData.details = "Viewing a skin rarity catalog";
 		presenceData.state = shortTitle;
-		presenceData.smallImageKey = "skins";
+		presenceData.smallImageKey = Assets.Skins;
 		presenceData.smallImageText = "Viewing skins";
 	} else if (path.startsWith("/case")) {
 		presenceData.details = `Viewing case: ${shortTitle}`;
@@ -59,7 +67,7 @@ presence.on("UpdateData", () => {
 	} else if (path.startsWith("/containers")) {
 		presenceData.details = "Browsing containers";
 		presenceData.state = shortTitle;
-		presenceData.smallImageKey = "case";
+		presenceData.smallImageKey = Assets.Case;
 		presenceData.smallImageText = "Viewing containers";
 	} else if (path.startsWith("/collection")) {
 		presenceData.details = "Viewing a skin collection";
@@ -84,14 +92,14 @@ presence.on("UpdateData", () => {
 			presenceData.details = `Viewing sticker: ${shortTitle}`;
 			presenceData.state = `Steam price: ${steamPrice.textContent}`;
 			presenceData.largeImageKey = middleImage.src;
-			presenceData.smallImageKey = "sticker";
+			presenceData.smallImageKey = Assets.Sticker;
 			presenceData.smallImageText = "Viewing stickers";
 			presenceData.buttons = [{ label: "View Sticker", url: document.URL }];
 		}
 	} else if (path.startsWith("/glove")) {
 		if (path === "/gloves") {
 			presenceData.details = "Browsing gloves";
-			presenceData.smallImageKey = "glove";
+			presenceData.smallImageKey = Assets.Glove;
 			presenceData.smallImageText = "Viewing gloves";
 		} else {
 			presenceData.details = `Viewing glove: ${shortTitle}`;
@@ -146,7 +154,7 @@ presence.on("UpdateData", () => {
 	} else if (path.startsWith("/item")) {
 		if (path === "/items") {
 			presenceData.details = "Browsing items";
-			presenceData.smallImageKey = "items";
+			presenceData.smallImageKey = Assets.Items;
 			presenceData.smallImageText = "Viewing items";
 		} else {
 			presenceData.details = `Viewing item: ${shortTitle}`;

@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
 	} else if (path.includes("/search")) {
 		const input: HTMLInputElement = document.querySelector(".cu-search-input");
 		details = "Searching";
-		smallImageKey = "search";
+		smallImageKey = Assets.Search;
 		smallImageText = (await strings).search;
 		if (input && input.value.length > 0) state = input.value;
 	} else if (path.includes("/live")) {
@@ -128,7 +128,11 @@ presence.on("UpdateData", async () => {
 			if (content && content.textContent.length > 0)
 				state = content.textContent;
 
-			smallImageKey = live ? "live" : video.paused ? Assets.Pause : Assets.Play;
+			smallImageKey = live
+				? Assets.Live
+				: video.paused
+				? Assets.Pause
+				: Assets.Play;
 			smallImageText = live
 				? (await strings).live
 				: video.paused
@@ -160,7 +164,7 @@ presence.on("UpdateData", async () => {
 					state = content.textContent;
 
 				smallImageKey = live
-					? "live"
+					? Assets.Live
 					: video.paused
 					? Assets.Pause
 					: Assets.Play;

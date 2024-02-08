@@ -92,6 +92,43 @@ let strings: ReturnType<typeof getStrings> extends PromiseLike<infer U>
 		: unknown,
 	oldLang: string;
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/logo.png",
+	LogoRainbow = "https://cdn.discordapp.com/app-assets/839150832036872213/839151149495484436.png?size=512",
+	AppleStore = "https://cdn.discordapp.com/app-assets/839150832036872213/839158580716372049.png?size=512",
+	AppleSupport = "https://cdn.discordapp.com/app-assets/839150832036872213/839159824092626964.png?size=512",
+	AppStore = "https://cdn.discordapp.com/app-assets/839150832036872213/839156639378571315.png?size=512",
+	ICloud = "https://cdn.discordapp.com/app-assets/839150832036872213/839166572253806663.png?size=512",
+	Keynote = "https://cdn.discordapp.com/app-assets/839150832036872213/958412305475977268.png?size=512",
+	AppleCard = "https://cdn.discordapp.com/app-assets/839150832036872213/842105422680686612.png?size=512",
+	AppleDeveloper = "https://cdn.discordapp.com/app-assets/839150832036872213/843257607716470794.png?size=512",
+}
+
+/* eslint-disable camelcase */
+const assets: Record<string, string> = {
+	icloud_calendar:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958402860729651271.png?size=512",
+	icloud_photos:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958402860910010378.png?size=512",
+	icloud_mail:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958402860981317653.png?size=512",
+	icloud_contacts:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958402861044232263.png?size=512",
+	icloud_notes:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958402861144866887.png?size=512",
+	icloud_find:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958402861199425538.png?size=512",
+	icloud_pages:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958412305207533569.png?size=512",
+	icloud_keynote:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958412305475977268.png?size=512",
+	icloud_reminders:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958412563413073970.png?size=512",
+	icloud_numbers:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/979531426976374874.png?size=512",
+};
+/* eslint-enable camelcase */
+
 presence.on("UpdateData", async () => {
 	const urlpath = window.location.pathname.toLowerCase().split("/"),
 		[
@@ -168,7 +205,7 @@ presence.on("UpdateData", async () => {
 			"maps",
 		],
 		presenceData: PresenceData = {
-			largeImageKey: ["logo", "logo-rainbow"][logo] || "logo",
+			largeImageKey: [Assets.Logo, Assets.LogoRainbow][logo] || Assets.Logo,
 		};
 
 	if (!oldLang || oldLang !== newLang) {
@@ -363,7 +400,7 @@ presence.on("UpdateData", async () => {
 	) {
 		const num = urlpath[1] === "shop" ? 2 : 3;
 
-		presenceData.largeImageKey = "apple-store";
+		presenceData.largeImageKey = Assets.AppleStore;
 
 		if (!urlpath[num]) {
 			presenceData.details = "Shop";
@@ -515,7 +552,7 @@ presence.on("UpdateData", async () => {
 					"displays",
 				];
 
-				presenceData.largeImageKey = "apple-support";
+				presenceData.largeImageKey = Assets.AppleSupport;
 
 				if (sProducts.find(e => urlpath.includes(e))) {
 					presenceData.details = strings.support;
@@ -555,7 +592,7 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "apps.apple.com": {
-				presenceData.largeImageKey = "app-store";
+				presenceData.largeImageKey = Assets.AppStore;
 
 				if (urlpath.includes("app")) {
 					if (document.querySelector("p.we-connecting__instructions")) {
@@ -600,14 +637,14 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "www.icloud.com": {
-				presenceData.largeImageKey = "icloud";
+				presenceData.largeImageKey = Assets.ICloud;
 				presenceData.details = "iCloud";
 
 				if (!urlpath[1]) presenceData.state = "Launchpad";
 				else {
 					if (urlpath[1] !== "iclouddrive") {
-						presenceData.largeImageKey = `icloud_${urlpath[1]}`;
-						presenceData.smallImageKey = "icloud";
+						presenceData.largeImageKey = assets[`icloud_${urlpath[1]}`];
+						presenceData.smallImageKey = Assets.ICloud;
 					}
 
 					switch (urlpath[1]) {
@@ -698,7 +735,7 @@ presence.on("UpdateData", async () => {
 						default:
 							if (urlpath[1] === "keynote-live" && urlpath[2]) {
 								presenceData.details = "iCloud Keynote Live";
-								presenceData.largeImageKey = "keynote";
+								presenceData.largeImageKey = Assets.Keynote;
 
 								if (document.querySelector("iframe")?.style.display === "none")
 									presenceData.state = strings.iCloudKeynoteWait;
@@ -711,7 +748,7 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "card.apple.com": {
-				presenceData.largeImageKey = "apple-card";
+				presenceData.largeImageKey = Assets.AppleCard;
 				presenceData.details = "Apple Card";
 
 				if (!urlpath[1]) presenceData.state = "Home";
@@ -740,7 +777,7 @@ presence.on("UpdateData", async () => {
 						document.querySelector("body")?.id ||
 						document.querySelector("body").classList[0]?.replace("nav-", "");
 
-				presenceData.largeImageKey = "apple-developer";
+				presenceData.largeImageKey = Assets.AppleDeveloper;
 				presenceData.details = "Apple Developer";
 				presenceData.state = "Home";
 

@@ -131,7 +131,7 @@ presence.on("UpdateData", async () => {
 				"/article": {
 					details: strings.readArticle,
 					state: document.querySelector(".post-header > h1")?.textContent,
-					smallImageKey: "reading",
+					smallImageKey: Assets.Reading,
 					buttons: [
 						{
 							label: strings.btnReadArticle,

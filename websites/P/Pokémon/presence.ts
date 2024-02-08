@@ -14,10 +14,22 @@ function settingSetter(): void {
 
 const browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Pokemontv = "https://cdn.discordapp.com/app-assets/684885381728043048/684885514901258336.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9mon/assets/logo.png",
+	Pokemonplay = "https://cdn.discordapp.com/app-assets/684885381728043048/684896584886255717.png?size=512",
+	Pokeball = "https://cdn.discordapp.com/app-assets/684885381728043048/684904470815178754.png?size=512",
+	Tcg = "https://cdn.discordapp.com/app-assets/684885381728043048/685637535258378310.png?size=512",
+	Store = "https://cdn.discordapp.com/app-assets/684885381728043048/687790839614669062.png?size=512",
+	Storejp = "https://cdn.discordapp.com/app-assets/684885381728043048/687791788056248489.png?size=512",
+	Cafe = "https://cdn.discordapp.com/app-assets/684885381728043048/687794883829694567.png?size=512",
+	Sweets = "https://cdn.discordapp.com/app-assets/684885381728043048/687794884693852176.png?size=512",
+	Storekr = "https://cdn.discordapp.com/app-assets/684885381728043048/690196825130795018.png?size=512",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9mon/assets/logo.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -43,7 +55,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = "Browsing...";
 				}
 			} else if (document.location.pathname.includes("/play-pokemon/")) {
-				presenceData.largeImageKey = "pokemonplay";
+				presenceData.largeImageKey = Assets.Pokemonplay;
 				const title = document.querySelector(".full-article > h1");
 				if (title) {
 					presenceData.details = "Reading article:";
@@ -54,7 +66,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = "Browsing...";
 				}
 			} else if (document.location.pathname.includes("/pokedex/")) {
-				presenceData.smallImageKey = "pokeball";
+				presenceData.smallImageKey = Assets.Pokeball;
 				presenceData.smallImageText = "Pokédex";
 				const search = document.querySelector<HTMLInputElement>("#searchInput");
 
@@ -83,7 +95,7 @@ presence.on("UpdateData", async () => {
 						presenceData.details = "Pokédex";
 						presenceData.state = "Searching something up...";
 					}
-					presenceData.largeImageKey = "pokeball";
+					presenceData.largeImageKey = Assets.Pokeball;
 					presenceData.smallImageKey = Assets.Search;
 				} else {
 					presenceData.details = "Pokédex";
@@ -135,7 +147,7 @@ presence.on("UpdateData", async () => {
 				document.location.pathname.includes("/pokemon-estampas-ilustradas") ||
 				document.location.pathname.includes("/gcc")
 			) {
-				presenceData.largeImageKey = "tcg";
+				presenceData.largeImageKey = Assets.Tcg;
 				presenceData.smallImageKey = Assets.Reading;
 
 				if (
@@ -180,7 +192,7 @@ presence.on("UpdateData", async () => {
 				document.location.pathname.includes("/pokemon-episoder") ||
 				document.location.pathname.includes("/pokemon-avsnitt")
 			) {
-				presenceData.largeImageKey = "pokemontv";
+				presenceData.largeImageKey = Assets.Pokemontv;
 				presenceData.details = "Viewing PokémonTV";
 			} else if (
 				document.location.pathname.includes("/country-region") ||
@@ -197,7 +209,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "tcg.pokemon.com": {
-			presenceData.largeImageKey = "tcg";
+			presenceData.largeImageKey = Assets.Tcg;
 			if (document.location.pathname.includes("/how-to-play/"))
 				presenceData.details = "Learning how to play";
 			else if (document.location.pathname.includes("/expansions/")) {
@@ -214,7 +226,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "forums.pokemontcg.com": {
-			presenceData.largeImageKey = "tcg";
+			presenceData.largeImageKey = Assets.Tcg;
 			if (document.location.pathname.includes("/topic")) {
 				presenceData.details = "Reading thread:";
 				presenceData.state = document
@@ -246,7 +258,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "www.pokemoncenter.com": {
-			presenceData.largeImageKey = "store";
+			presenceData.largeImageKey = Assets.Store;
 			if (document.querySelector(".main_header")) {
 				presenceData.details = "Viewing product:";
 				presenceData.state = document.querySelector(".main_header").textContent;
@@ -264,11 +276,11 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "www.pokemoncenter-online.com": {
-			presenceData.largeImageKey = "storejp";
+			presenceData.largeImageKey = Assets.Storejp;
 			if (document.location.pathname.includes("/cafe")) {
-				presenceData.largeImageKey = "cafe";
+				presenceData.largeImageKey = Assets.Cafe;
 				if (document.location.pathname.includes("/pikachu_sweets")) {
-					presenceData.largeImageKey = "sweets";
+					presenceData.largeImageKey = Assets.Sweets;
 					presenceData.details = "Viewing the";
 					presenceData.state = "Pikachu Sweets Cafe";
 				} else if (document.location.pathname.includes("/menu"))
@@ -323,12 +335,12 @@ presence.on("UpdateData", async () => {
 					"([a-z0-9]+)[.]pokemon-cafe[.]([a-z0-9]+)([.]([a-z0-9]+))?"
 				)
 			) {
-				presenceData.largeImageKey = "cafe";
+				presenceData.largeImageKey = Assets.Cafe;
 				presenceData.details = "Making a reservation";
 			} else {
 				switch (document.location.host) {
 					case "watch.pokemon.com": {
-						presenceData.largeImageKey = "pokemontv";
+						presenceData.largeImageKey = Assets.Pokemontv;
 						if (document.location.pathname.includes("/player")) {
 							const video = document.querySelector("video"),
 								[startTimestamp, endTimestamp] = presence.getTimestamps(
@@ -401,7 +413,7 @@ presence.on("UpdateData", async () => {
 						} else if (document.location.pathname.includes("/game"))
 							presenceData.details = "Viewing Pokémon's games";
 						else if (document.location.pathname.includes("/pokedex")) {
-							presenceData.smallImageKey = "pokeball";
+							presenceData.smallImageKey = Assets.Pokeball;
 							presenceData.smallImageText = "Pokédex";
 							const search =
 								document.querySelector<HTMLInputElement>("#word.form-control");
@@ -431,7 +443,7 @@ presence.on("UpdateData", async () => {
 									presenceData.details = "Pokédex";
 									presenceData.state = "Searching something up...";
 								}
-								presenceData.largeImageKey = "pokeball";
+								presenceData.largeImageKey = Assets.Pokeball;
 								presenceData.smallImageKey = Assets.Search;
 							} else {
 								presenceData.details = "Pokédex";
@@ -445,7 +457,7 @@ presence.on("UpdateData", async () => {
 								presenceData.smallImageKey = Assets.Reading;
 							} else presenceData.details = "Viewing Pokémon's animations";
 						} else if (document.location.pathname.includes("/product")) {
-							presenceData.largeImageKey = "storekr";
+							presenceData.largeImageKey = Assets.Storekr;
 							const title = document.querySelector(".medium-title");
 							if (title) {
 								presenceData.details = "Viewing product:";
@@ -459,7 +471,7 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 					case "pokemoncard.co.kr": {
-						presenceData.largeImageKey = "tcg";
+						presenceData.largeImageKey = Assets.Tcg;
 						if (document.location.pathname.includes("/main"))
 							presenceData.details = "Browsing...";
 						else if (document.location.pathname.includes("/news/")) {
@@ -530,7 +542,7 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 					case "www.pokemonstore.co.kr": {
-						presenceData.largeImageKey = "storekr";
+						presenceData.largeImageKey = Assets.Storekr;
 						if (document.location.pathname.includes("/goods_view")) {
 							presenceData.details = "Viewing product:";
 							presenceData.state = document
@@ -575,7 +587,7 @@ presence.on("UpdateData", async () => {
 						else if (document.location.pathname.includes("/event"))
 							presenceData.details = "Viewing Pokémon Events";
 						else if (document.location.pathname.includes("/anime")) {
-							presenceData.largeImageKey = "pokemontv";
+							presenceData.largeImageKey = Assets.Pokemontv;
 							const title =
 								document.querySelector(".m-ttl-top") ||
 								document.querySelector(".m-ttl-dot");
@@ -609,7 +621,7 @@ presence.on("UpdateData", async () => {
 									.trim();
 							} else presenceData.details = "Viewing Upcoming Pokémon Centers";
 						} else if (document.location.pathname.includes("/goods")) {
-							presenceData.smallImageKey = "storejp";
+							presenceData.smallImageKey = Assets.Storejp;
 							const title = document.querySelector(".m-ttl-hd");
 							if (title) {
 								presenceData.details = "Viewing Pokémon Goods";
@@ -620,7 +632,7 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 					case "www.pokemon-movie.jp": {
-						presenceData.largeImageKey = "pokemontv";
+						presenceData.largeImageKey = Assets.Pokemontv;
 						if (document.location.pathname.includes("/news/")) {
 							if (document.URL.includes("?p=")) {
 								presenceData.smallImageKey = Assets.Reading;
@@ -664,7 +676,7 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 					case "www.pokemon-card.com": {
-						presenceData.largeImageKey = "tcg";
+						presenceData.largeImageKey = Assets.Tcg;
 						if (document.location.pathname.includes("/about"))
 							presenceData.details = "Viewing the tutorial";
 						else if (document.location.pathname.includes("/rules")) {
@@ -732,7 +744,7 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 					case "map.pokemon-card.com": {
-						presenceData.largeImageKey = "tcg";
+						presenceData.largeImageKey = Assets.Tcg;
 						presenceData.details = "Viewing the map";
 
 						break;
@@ -748,7 +760,7 @@ presence.on("UpdateData", async () => {
 							)
 						) {
 							if (document.location.pathname.includes("/anime")) {
-								presenceData.largeImageKey = "pokemontv";
+								presenceData.largeImageKey = Assets.Pokemontv;
 								if (document.location.pathname.includes("/series")) {
 									presenceData.details = "Viewing serie:";
 									presenceData.state = document.querySelector(
@@ -811,7 +823,7 @@ presence.on("UpdateData", async () => {
 							else if (document.location.pathname.includes("/event"))
 								presenceData.details = "Viewing Pokémon Events";
 							else if (document.location.pathname.includes("/pokedex")) {
-								presenceData.smallImageKey = "pokeball";
+								presenceData.smallImageKey = Assets.Pokeball;
 								presenceData.smallImageText = "Pokédex";
 								const search =
 									document.querySelector<HTMLInputElement>("#search_input");
@@ -837,14 +849,14 @@ presence.on("UpdateData", async () => {
 										presenceData.details = "Pokédex";
 										presenceData.state = "Searching something up...";
 									}
-									presenceData.largeImageKey = "pokeball";
+									presenceData.largeImageKey = Assets.Pokeball;
 									presenceData.smallImageKey = Assets.Search;
 								} else {
 									presenceData.details = "Pokédex";
 									presenceData.state = "Browsing...";
 								}
 							} else if (document.location.pathname.includes("/card")) {
-								presenceData.largeImageKey = "tcg";
+								presenceData.largeImageKey = Assets.Tcg;
 								if (document.querySelector(".article-detail__title")) {
 									presenceData.details = "Viewing extension pack:";
 									presenceData.state = document.querySelector(
@@ -855,7 +867,7 @@ presence.on("UpdateData", async () => {
 								else {
 									presenceData.details = "Reading about the";
 									presenceData.state = "Trading Card Game";
-									presenceData.smallImageKey = "reading;";
+									presenceData.smallImageKey = Assets.Reading;
 								}
 							} else if (
 								document.location.pathname.includes("/pokemoncenter")

@@ -1,4 +1,5 @@
 import {
+	assets,
 	deEsser,
 	giveArticle,
 	makeProgressBar,
@@ -201,7 +202,7 @@ function setLang(code: string) {
 			}[language.code]
 		);
 	} else if (language.name && language.code) {
-		presenceData.smallImageKey = `lang_${language.code.split("-")[0]}`;
+		presenceData.smallImageKey = assets[`lang_${language.code.split("-")[0]}`];
 		presenceData.smallImageText = `${language.name}`;
 	} else presenceData.smallImageKey = IMAGE.duoGlobe;
 }

@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
 								.textContent.replace("(", "")
 								.replace(")", "")
 						: null || "Belirsiz",
-				smallImageKey: "search",
+				smallImageKey: Assets.Search,
 				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (page.includes("/author/")) {

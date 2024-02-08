@@ -21,7 +21,7 @@
 					state: document.querySelector(".backInfoTxt3").textContent,
 					largeImageKey:
 						"https://cdn.rcd.gg/PreMiD/websites/D/d%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%B9%E3%83%88%E3%82%A2/assets/logo.png",
-					smallImageKey: isPlaying ? "play" : "pause",
+					smallImageKey: isPlaying ? Assets.Play : Assets.Pause,
 					smallImageText: isPlaying
 						? (await strings).play
 						: (await strings).pause,

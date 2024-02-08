@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 			{ label: "Ook radio luisteren", url: document.location.href },
 		];
 	} else if (document.querySelector("[class*=spinner]")) {
-		presenceData.smallImageKey = "waiting";
+		presenceData.smallImageKey = Assets.Pause;
 		presenceData.smallImageText = "Wordt geladen";
 	} else if (document.querySelector("polygon")) {
 		presenceData.smallImageKey = Assets.Pause;

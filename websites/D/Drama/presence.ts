@@ -5,7 +5,7 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Drama/assets/logo.png",
-		smallImageKey: "search",
+		smallImageKey: Assets.Search,
 		smallImageText: "Looking for a thread",
 		details: "Looking for drama!",
 		state: "Browsing",

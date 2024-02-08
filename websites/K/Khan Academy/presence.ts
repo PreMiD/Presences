@@ -10,10 +10,16 @@ const presence = new Presence({
 		profile: "general.viewProfile",
 	});
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/K/Khan%20Academy/assets/logo.png",
+	Video = "https://cdn.discordapp.com/app-assets/900882829154598952/900915583607001100.png?size=512",
+	Article = "https://cdn.discordapp.com/app-assets/900882829154598952/900915583607001110.png?size=512",
+	Exercise = "https://cdn.discordapp.com/app-assets/900882829154598952/900915583929942036.png?size=512",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/K/Khan%20Academy/assets/logo.png",
+		largeImageKey: Assets.Logo,
 		details: (await strings).watching,
 	};
 
@@ -64,10 +70,10 @@ presence.on("UpdateData", async () => {
 			).textContent;
 
 			if (document.location.pathname.includes("/v/"))
-				presenceData.smallImageKey = "video";
+				presenceData.smallImageKey = Assets.Video;
 			else if (document.location.pathname.includes("/a/"))
-				presenceData.smallImageKey = "article";
-			else presenceData.smallImageKey = "exercise";
+				presenceData.smallImageKey = Assets.Article;
+			else presenceData.smallImageKey = Assets.Exercise;
 		}
 	}
 

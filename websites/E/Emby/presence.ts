@@ -277,14 +277,14 @@ const // official website
 	// web client app name
 	// all the presence art assets uploaded to discord
 	PRESENCE_ART_ASSETS = {
-		download: "downloading",
-		live: "live",
-		logo: "banner-icon",
-		pause: "pause",
-		play: "play",
-		read: "reading",
-		search: "search",
-		write: "writing",
+		download: Assets.Downloading,
+		live: Assets.Live,
+		logo: "https://cdn.discordapp.com/app-assets/671807692297207828/671815741430956053.png?size=512",
+		pause: Assets.Pause,
+		play: Assets.Play,
+		read: Assets.Reading,
+		search: Assets.Search,
+		write: Assets.Writing,
 	},
 	presenceData: PresenceData = {
 		largeImageKey: PRESENCE_ART_ASSETS.logo,

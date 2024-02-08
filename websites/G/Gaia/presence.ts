@@ -22,7 +22,7 @@ async function getShortURL(url: string) {
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/G/Gaia/assets/logo.png",
-		smallImageKey: "browse",
+		smallImageKey: Assets.Search,
 		startTimestamp: browsingTimestamp,
 	};
 

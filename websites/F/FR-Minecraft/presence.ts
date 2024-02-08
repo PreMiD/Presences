@@ -14,7 +14,8 @@ presence.on("UpdateData", async () => {
 	presenceData.startTimestamp = browsingTimestamp;
 	if (privacy) presenceData.details = "Browsing";
 	else if (window.location.pathname.startsWith("/forum")) {
-		presenceData.smallImageKey = "forum";
+		presenceData.smallImageKey =
+			"https://cdn.discordapp.com/app-assets/810082044284895253/810132469411086396.png?size=512";
 		if (
 			window.location.pathname.startsWith("/forum/forum-") ||
 			window.location.pathname.startsWith("/forum/topic-") ||

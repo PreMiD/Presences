@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
 			Math.floor(currentTime),
 			Math.floor(duration)
 		);
-		presenceData.smallImageKey = paused ? "pause" : "repeat";
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Repeat;
 		presenceData.smallImageText = paused
 			? (await strings).pause
 			: (await strings).play;
