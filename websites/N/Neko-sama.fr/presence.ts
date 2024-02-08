@@ -40,14 +40,17 @@ const websiteDomain = "https://neko-sama.fr";
 
 let video: Video = null;
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/N/Neko-sama.fr/assets/logo.png",
+}
+
 presence.on("iFrameData", (data: Video) => {
 	video = data;
 });
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/N/Neko-sama.fr/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			details: "Navigue sur Neko-sama",
 		},
 		{ pathname } = document.location,
@@ -68,7 +71,7 @@ presence.on("UpdateData", async () => {
 						}`;
 						presenceData.largeImageKey =
 							episodeImage === `${websiteDomain}/images/default_thumbnail.png`
-								? "nekosama-icon"
+								? Assets.Logo
 								: episodeImage;
 						presenceData.buttons = [
 							{
@@ -93,7 +96,7 @@ presence.on("UpdateData", async () => {
 					}`;
 					presenceData.largeImageKey =
 						episodeImage === `${websiteDomain}/images/default_thumbnail.png`
-							? "nekosama-icon"
+							? Assets.Logo
 							: episodeImage;
 					presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 					presenceData.smallImageText = paused
@@ -116,7 +119,7 @@ presence.on("UpdateData", async () => {
 						document.querySelector("h1").firstChild.textContent;
 					presenceData.largeImageKey =
 						animeImage === `${websiteDomain}/images/default_thumbnail.png`
-							? "nekosama-icon"
+							? Assets.Logo
 							: animeImage;
 					presenceData.buttons = [
 						{

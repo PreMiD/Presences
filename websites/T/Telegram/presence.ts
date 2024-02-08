@@ -19,7 +19,7 @@ function setPresenceData(
 			presenceData.state = activeChatDetails.textContent;
 		} else presenceData.details = "Talking to someone";
 		presenceData.smallImageKey =
-			textArea && textArea.textContent.length >= 1 ? "writing" : "reading";
+			textArea && textArea.textContent.length >= 1 ? Assets.Writing: Assets.Reading
 		presenceData.smallImageText =
 			textArea && textArea.textContent.length >= 1
 				? "Typing a message"

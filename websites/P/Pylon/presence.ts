@@ -606,7 +606,7 @@ presence.on("UpdateData", async () => {
 				presenceData.startTimestamp = lastFileChange;
 				presenceData.largeImageKey = largeImageKey
 					? largeImageKey.image
-					: "txt";
+					: Assets.Text
 				presenceData.details = (await presence.getSetting<string>("details"))
 					.replaceAll("%file%", currentFile.textContent)
 					.replaceAll("%guild%", guildName)

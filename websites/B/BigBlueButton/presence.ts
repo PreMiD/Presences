@@ -91,11 +91,21 @@ async function getData() {
 
 setInterval(getData, 1000);
 
+const assets = {
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/B/BigBlueButton/assets/logo.png",
+  "muted": "https://cdn.discordapp.com/app-assets/768028596035649536/768041625837371402.png?size=512",
+  "microphone": "https://cdn.discordapp.com/app-assets/768028596035649536/768041647425847346.png?size=512",
+  "disconnected": "https://cdn.discordapp.com/app-assets/768028596035649536/768042676759035904.png?size=512",
+  "headphones": "https://cdn.discordapp.com/app-assets/768028596035649536/768042693107384360.png?size=512",
+  "presentation": "https://cdn.discordapp.com/app-assets/768028596035649536/768136596528169001.png?size=512",
+  "video": "https://cdn.discordapp.com/app-assets/768028596035649536/768137302525739078.png?size=512",
+  "screen": "https://cdn.discordapp.com/app-assets/768028596035649536/768138040488624179.png?size=512",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/B/BigBlueButton/assets/logo.png",
-		smallImageKey: inCall ? userState : "logo",
+		largeImageKey:assets.logo,
+		smallImageKey: inCall ? assets[userState as keyof typeof assets] : assets.logo,
 		smallImageText: inCall
 			? userState === "screen"
 				? "Sharing screen..."

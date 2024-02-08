@@ -5,6 +5,13 @@ const presence = new Presence({
 
 let item: HTMLElement, user: HTMLElement, title: HTMLElement | string | Element;
 
+const assets: Record<string, string> = {
+  "dk": "https://cdn.discordapp.com/app-assets/729035228324298852/729035341302071326.png?size=512",
+  "en": "https://cdn.discordapp.com/app-assets/729035228324298852/729060359608074290.png?size=512",
+  "jp": "https://cdn.discordapp.com/app-assets/729035228324298852/729370369823342662.png?size=512",
+  "br": "https://cdn.discordapp.com/app-assets/729035228324298852/729385724301934653.png?size=512",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
@@ -162,7 +169,7 @@ presence.on("UpdateData", async () => {
 					);
 					if (document.URL.includes("#")) [lang] = lang.split("#");
 
-					presenceData.smallImageKey = lang.toLowerCase();
+					presenceData.smallImageKey = assets[lang.toLowerCase()];
 					presenceData.state = "Translating Website";
 				} else if (document.URL.includes("?project=notification")) {
 					lang = document.URL.replace(
@@ -171,7 +178,7 @@ presence.on("UpdateData", async () => {
 					);
 					if (document.URL.includes("#")) [lang] = lang.split("#");
 
-					presenceData.smallImageKey = lang.toLowerCase();
+					presenceData.smallImageKey = assets[lang.toLowerCase()];
 					presenceData.state = "Translating Notification";
 				} else if (document.URL.includes("?project=client")) {
 					lang = document.URL.replace(
@@ -180,7 +187,7 @@ presence.on("UpdateData", async () => {
 					);
 					if (document.URL.includes("#")) [lang] = lang.split("#");
 
-					presenceData.smallImageKey = lang.toLowerCase();
+					presenceData.smallImageKey = assets[lang.toLowerCase()];
 					presenceData.state = "Translating Client";
 				}
 			} else {

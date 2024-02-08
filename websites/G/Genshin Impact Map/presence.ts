@@ -3,6 +3,31 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	EmblemMondstadt = "https://cdn.discordapp.com/app-assets/973729201104511007/973795983420977223.png?size=512",
+	EmblemLiyue = "https://cdn.discordapp.com/app-assets/973729201104511007/973796136949280788.png?size=512",
+	EmblemInazuma = "https://cdn.discordapp.com/app-assets/973729201104511007/973797157205323846.png?size=512",
+	EmblemUnknown = "https://cdn.discordapp.com/app-assets/973729201104511007/973798500317921280.png?size=512",
+	EnkanomiyaMap = "https://cdn.discordapp.com/app-assets/973729201104511007/973904146602278932.png?size=512",
+	TeyvatMap = "https://cdn.discordapp.com/app-assets/973729201104511007/973904359400292402.png?size=512",
+	TheChasmUndergroundMinesMap = "https://cdn.discordapp.com/app-assets/973729201104511007/973904999669202964.png?size=512",
+	EmblemEnkanomiya = "https://cdn.discordapp.com/app-assets/973729201104511007/973924918913806356.png?size=512",
+	EmblemThechasm = "https://cdn.discordapp.com/app-assets/973729201104511007/973924919056433172.png?size=512",
+	PreviewMondstadt = "https://cdn.discordapp.com/app-assets/973729201104511007/973948984219557928.png?size=512",
+	PreviewLiyue = "https://cdn.discordapp.com/app-assets/973729201104511007/973948985221992498.png?size=512",
+	PreviewTenshukaku = "https://cdn.discordapp.com/app-assets/973729201104511007/973950153604087948.png?size=512",
+	PreviewTheChasmUndergroundMines = "https://cdn.discordapp.com/app-assets/973729201104511007/973954373019381840.png?size=512",
+	PreviewGoldenAppleArchipelago28 = "https://cdn.discordapp.com/app-assets/973729201104511007/997328289586753637.png?size=512",
+	GoldenAppleArchipelagoMap28 = "https://cdn.discordapp.com/app-assets/973729201104511007/997330298771611810.png?size=512",
+	PreviewEnkanomiya = "https://cdn.discordapp.com/app-assets/973729201104511007/997331604668153976.png?size=512",
+	EmblemIsles = "https://cdn.discordapp.com/app-assets/973729201104511007/1000432365652418592.png?size=512",
+	EmblemSumeru = "https://cdn.discordapp.com/app-assets/973729201104511007/1011656257465225216.png?size=512",
+	PreviewSumeru = "https://cdn.discordapp.com/app-assets/973729201104511007/1011656919028609064.png?size=512",
+	PreviewSumeru2 = "https://cdn.rcd.gg/PreMiD/websites/G/Genshin%20Impact%20Map/assets/0.png",
+	Logo =
+	"https://cdn.rcd.gg/PreMiD/websites/G/Genshin%20Impact%20Map/assets/logo.png",
+}
+
 interface Maps extends Image {
 	id: number;
 	map: string;
@@ -31,18 +56,18 @@ const map: Maps[] = [
 			map: "Teyvat",
 			city: true,
 			image: {
-				small: "emblem_unknown",
-				default: "teyvat_map",
-				preview: "teyvat_map",
+				small: Assets.EmblemUnknown,
+				default: Assets.TeyvatMap,
+				preview: Assets.TeyvatMap,
 			},
 		},
 		{
 			id: 7,
 			map: "Enkanomiya",
 			image: {
-				small: "emblem_enkanomiya",
-				default: "enkanomiya_map",
-				preview: "preview_enkanomiya",
+				small: Assets.EmblemEnkanomiya,
+				default: Assets.EnkanomiyaMap,
+				preview: Assets.PreviewEnkanomiya,
 			},
 		},
 		{
@@ -50,9 +75,9 @@ const map: Maps[] = [
 			map: "The Chasm: Underground Mines",
 			key: ["chasm", "the-chasm-underground"],
 			image: {
-				small: "emblem_thechasm",
-				default: "the_chasm_underground_mines_map",
-				preview: "preview_the_chasm_underground_mines",
+				small: Assets.EmblemThechasm,
+				default: Assets.TheChasmUndergroundMinesMap,
+				preview: Assets.PreviewTheChasmUndergroundMines,
 			},
 		},
 		{
@@ -62,9 +87,9 @@ const map: Maps[] = [
 			map: "Golden Apple Archipelago",
 			key: ["isles", "golden-apple-archipelago-2-8"],
 			image: {
-				small: "emblem_isles",
-				default: "golden_apple_archipelago_map_2_8",
-				preview: "preview_golden_apple_archipelago_2_8",
+				small: Assets.EmblemIsles,
+				default: Assets.GoldenAppleArchipelagoMap28,
+				preview:Assets.PreviewGoldenAppleArchipelago28,
 			},
 			starting: 1657854000, // Fri, 15 Jul 2022 03:00 GMT
 			ending: 1661295600, // Wed, 24 Aug 2022 23:00 GMT
@@ -73,8 +98,8 @@ const map: Maps[] = [
 			id: 0,
 			map: "Unknown",
 			image: {
-				small: "emblem_unknown",
-				default: "unknown_map",
+				small: Assets.EmblemUnknown,
+				default: Assets.EmblemUnknown,
 			},
 		},
 	],
@@ -83,29 +108,29 @@ const map: Maps[] = [
 			position: 1200,
 			map: "Mondstadt",
 			image: {
-				small: "emblem_mondstadt",
-				default: "preview_mondstadt",
-				preview: "preview_mondstadt",
+				small: Assets.EmblemMondstadt,
+				default: Assets.PreviewMondstadt,
+				preview: Assets.PreviewMondstadt,
 			},
 		},
 		{
 			position: 2500,
 			map: "Liyue",
 			image: {
-				small: "emblem_liyue",
-				default: "preview_liyue",
-				preview: "preview_liyue",
+				small: Assets.EmblemLiyue,
+				default: Assets.PreviewLiyue,
+				preview: Assets.PreviewLiyue,
 			},
 		},
 		{
 			position: 5000,
 			map: "Sumeru",
 			image: {
-				small: "emblem_sumeru",
-				default: "preview_sumeru",
+				small: Assets.EmblemSumeru,
+				default: Assets.PreviewSumeru,
 				preview: [
-					"preview_sumeru",
-					"https://cdn.rcd.gg/PreMiD/websites/G/Genshin%20Impact%20Map/assets/0.png",
+					Assets.PreviewSumeru,
+					Assets.PreviewSumeru2,
 				],
 			},
 		},
@@ -113,9 +138,9 @@ const map: Maps[] = [
 			position: 9000,
 			map: "Inazuma",
 			image: {
-				small: "emblem_inazuma",
-				default: "preview_tenshukaku",
-				preview: "preview_tenshukaku",
+				small: Assets.EmblemInazuma,
+				default: Assets.PreviewTenshukaku,
+				preview: Assets.PreviewTenshukaku,
 			},
 		},
 	];
@@ -134,8 +159,7 @@ presence.on("UpdateData", async () => {
 		]),
 		presenceData: PresenceData = {
 			details: "Genshin Impact Map",
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/G/Genshin%20Impact%20Map/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			smallImageKey: Assets.Search,
 			startTimestamp: browsingTimestamp,
 		},

@@ -10,6 +10,27 @@ enum ResourceNames {
 	history = "history",
 	info = "info",
 }
+
+const assets = {
+  "logo_cloud_dark": "https://cdn.discordapp.com/app-assets/714001239351885904/714001704747663494.png?size=512",
+  "logo_book_dark": "https://cdn.discordapp.com/app-assets/714001239351885904/714001704898789427.png?size=512",
+  "logo_book": "https://cdn.discordapp.com/app-assets/714001239351885904/714001705032876102.png?size=512",
+  "logo_cloud": "https://cdn.discordapp.com/app-assets/714001239351885904/714001705204711484.png?size=512",
+  "reading_dark": Assets.Reading,
+  "writing": Assets.Writing,
+  "reading": Assets.Reading,
+  "search_dark": Assets.Search,
+  "search": Assets.Search,
+  "writing_dark": Assets.Writing,
+  "history_dark": "https://cdn.discordapp.com/app-assets/714001239351885904/714048497191747585.png?size=512",
+  "history": "https://cdn.discordapp.com/app-assets/714001239351885904/714048497237622804.png?size=512",
+  "info": "https://cdn.discordapp.com/app-assets/714001239351885904/714205350957547601.png?size=512",
+  "info_dark": "https://cdn.discordapp.com/app-assets/714001239351885904/714205350995165254.png?size=512",
+  "hatsune_miku": "https://cdn.discordapp.com/app-assets/714001239351885904/775492603344584706.png?size=512",
+  "bell": "https://cdn.discordapp.com/app-assets/714001239351885904/777297394387517490.png?size=512",
+  "bell_dark": "https://cdn.discordapp.com/app-assets/714001239351885904/777297394500894750.png?size=512",
+}
+
 async function Resource(ResourceSelected: ResourceNames): Promise<string> {
 	let value = ResourceSelected.toString();
 	const logo = await presence.getSetting<number>("logo"),
@@ -17,8 +38,9 @@ async function Resource(ResourceSelected: ResourceNames): Promise<string> {
 	if (ResourceSelected === ResourceNames.logo)
 		logo !== 0 ? (value += "_book") : (value += "_cloud");
 	if (darkmode) value += "_dark";
-	return value;
+	return assets[value as keyof typeof assets];
 }
+
 function getPagination(pagN: number): number[] {
 	const pagination = document.querySelectorAll(".pagination")[pagN];
 	let current = 1,

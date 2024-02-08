@@ -77,6 +77,12 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
 	strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
+	const enum Assets {
+		DiscordBlack = "https://cdn.discordapp.com/app-assets/616940877042155531/842430731238113330.png?size=512",
+		Discord = "https://cdn.discordapp.com/app-assets/616940877042155531/842430731435507722.png?size=512",
+		DiscordWhite = "https://cdn.discordapp.com/app-assets/616940877042155531/842430731694899240.png?size=512",
+	}
+
 presence.on("UpdateData", async () => {
 	const [
 		showBrowsing,
@@ -100,7 +106,7 @@ presence.on("UpdateData", async () => {
 
 	let presenceData: PresenceData = {
 		largeImageKey:
-			["discordwhite", "discord", "discordblack"][logo] || "discordwhite",
+			[Assets.DiscordWhite, Assets.Discord, Assets.DiscordBlack][logo] || Assets.DiscordWhite,
 	};
 
 	if (document.location.href !== prevUrl) {
@@ -185,7 +191,7 @@ presence.on("UpdateData", async () => {
 									.split("{0}")[1]
 									?.replace("{1}", serverChannel)
 									.replace("{2}", serverServerName),
-						smallImageKey: serverTyping ? "writing" : "reading",
+						smallImageKey: serverTyping ? Assets.Writing : Assets.Reading,
 						smallImageText: serverTyping ? strings.writing : strings.reading,
 					},
 					"/channels/@me/": {
@@ -234,7 +240,7 @@ presence.on("UpdateData", async () => {
 							: strings.dmReading
 									.split("{0}")[1]
 									?.replace("{1}", dmsUserGroupName),
-						smallImageKey: dmsTyping ? "writing" : "reading",
+						smallImageKey: dmsTyping ? Assets.Writing : Assets.Reading,
 						smallImageText: dmsTyping ? strings.writing : strings.reading,
 					},
 					"/invite/(\\w*\\d*)/": {

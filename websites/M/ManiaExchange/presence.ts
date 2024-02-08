@@ -95,7 +95,7 @@ const updateCallback = {
 		 * @param sm String for ShootMania
 		 */
 		const chooseTwo = (tm: string, sm: string): string => {
-			return presenceData.smallImageKey === "tm" ? tm : sm;
+			return presenceData.smallImageKey === Assets.Tm ? tm : sm;
 		};
 
 		switch (currentURL.hostname.split(".")[0]) {

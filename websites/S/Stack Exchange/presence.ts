@@ -220,8 +220,8 @@ presence.on("UpdateData", async () => {
 		}
 		default: {
 			const imageKey = hostname.replace(".stackexchange.com", "");
-			if (imageKey === "meta") presenceData.smallImageKey = imageKey;
-			else presenceData.smallImageKey = imageKey.replace(".meta", "");
+			if (imageKey === "meta") presenceData.smallImageKey = assets[imageKey];
+			else presenceData.smallImageKey = assets[imageKey.replace(".meta", "") as keyof typeof assets];
 
 			presenceData.smallImageText = document
 				.querySelector("meta[property='og:site_name']")

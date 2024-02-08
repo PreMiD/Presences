@@ -56,8 +56,8 @@ presence.on("UpdateData", async () => {
 
 		case "watch":
 			presenceData.smallImageKey = document.querySelectorAll(".vjs-playing")[0]
-				? "play"
-				: "pause";
+				? Assets.Play
+				: Assets.Pause;
 			presenceData.details = document
 				.querySelectorAll("h1")[0]
 				.textContent.trim();

@@ -3,10 +3,13 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Date.now() / 1000;
 
+	const enum Assets {
+		Logo = "https://cdn.rcd.gg/PreMiD/websites/L/Last.fm/assets/logo.png",
+	}
+
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/L/Last.fm/assets/logo.png",
+		largeImageKey: Assets.Logo,
 		smallImageKey: Assets.Search,
 		startTimestamp: browsingTimestamp,
 	};
@@ -88,10 +91,10 @@ presence.on("UpdateData", async () => {
 							return (
 								document.querySelector<HTMLImageElement>(
 									".album-overview-cover-art > .cover-art > img"
-								)?.src ?? "lastfm"
+								)?.src ?? Assets.Logo
 							);
-						} else return "lastfm";
-					} else return "lastfm";
+						} else return Assets.Logo
+					} else return Assets.Logo
 				})(),
 				state: document.querySelector("h1.header-new-title")?.textContent,
 				buttons: ((): [ButtonData] => {
@@ -153,7 +156,7 @@ presence.on("UpdateData", async () => {
 			).src;
 
 			presenceData.largeImageKey = artwork.includes("player_default_album")
-				? "lastfm"
+				? Assets.Logo
 				: artwork.replace("/174s/", "/1024s/");
 		} else {
 			presenceData.largeImageKey =

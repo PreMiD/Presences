@@ -2,6 +2,10 @@ const presence = new Presence({
 	clientId: "715116675346989096",
 });
 
+const enum Assets {
+  Logo = "https://cdn.discordapp.com/app-assets/715116675346989096/715117252134961233.png?size=512",
+}
+
 presence.on("UpdateData", async () => {
 	const player = Array.from(document.querySelectorAll("i")).find(x =>
 			["playerIcon playerIcon--play", "playerIcon playerIcon--pause"].includes(
@@ -33,8 +37,8 @@ presence.on("UpdateData", async () => {
 				state: author,
 				largeImageKey: cover
 					? document.querySelector<HTMLImageElement>(`img[alt="${title}"]`).src
-					: "icon",
-				smallImageKey: paused ? "pause" : "playing",
+					: Assets.Logo,
+				smallImageKey: paused ? Assets.Pause : Assets.Play,
 				smallImageText: paused ? "Paused" : "Playing",
 				startTimestamp: timestamps[0],
 				endTimestamp: timestamps[1],

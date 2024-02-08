@@ -127,9 +127,9 @@ presence.on("UpdateData", async () => {
 			sChannelName: document.querySelector("strong.rmc_name")?.textContent,
 		},
 		presenceData: PresenceData = {
-			largeImageKey: data.service?.toLowerCase(),
+			largeImageKey: assets[data.service?.toLowerCase()],
 			details: "Browsing...",
-			smallImageKey: `${data.service.toLowerCase()}_browse`,
+			smallImageKey: assets[`${data.service.toLowerCase()}_browse`],
 		},
 		getImageOrTimestamp = (
 			video: HTMLVideoElement,
@@ -338,7 +338,7 @@ presence.on("UpdateData", async () => {
 					],
 				},
 				smallImageKey: {
-					setTo: `${data.service.toLowerCase()}_book`,
+					setTo: assets[`${data.service.toLowerCase()}_book`],
 				},
 			},
 		},
@@ -360,7 +360,7 @@ presence.on("UpdateData", async () => {
 					],
 				},
 				smallImageKey: {
-					setTo: `${data.service.toLowerCase()}_book`,
+					setTo: assets[`${data.service.toLowerCase()}_book`],
 				},
 			},
 		},
@@ -382,7 +382,7 @@ presence.on("UpdateData", async () => {
 					],
 				},
 				smallImageKey: {
-					setTo: `${data.service.toLowerCase()}_book`,
+					setTo: assets[`${data.service.toLowerCase()}_book`],
 				},
 			},
 		},
@@ -436,7 +436,7 @@ presence.on("UpdateData", async () => {
 							k: !!document.querySelector('[class="badge_live"]'),
 							v: true,
 							then: {
-								v: `${data.service.toLowerCase()}_live`,
+								v: assets[`${data.service.toLowerCase()}_live`],
 							},
 						},
 					},
@@ -513,7 +513,7 @@ presence.on("UpdateData", async () => {
 					}`,
 				},
 				smallImageKey: {
-					setTo: `${data.service.toLowerCase()}_language`,
+					setTo: assets[`${data.service.toLowerCase()}_language`],
 				},
 			},
 		},
@@ -533,7 +533,7 @@ presence.on("UpdateData", async () => {
 					}`,
 				},
 				smallImageKey: {
-					setTo: `${data.service.toLowerCase()}_language`,
+					setTo: assets[`${data.service.toLowerCase()}_language`],
 				},
 			},
 		},

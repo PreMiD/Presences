@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 			.getAttribute("aria-checked") === "true"
 	) {
 		presenceData.smallImageKey =
-			repeatType === "button__repeatAll" ? "repeat" : "repeat-one";
+			repeatType === "button__repeatAll" ? Assets.Repeat: Assets.RepeatOne
 		presenceData.smallImageText =
 			repeatType === "button__repeatAll" ? "Playlist on loop" : "On loop";
 

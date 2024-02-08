@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 
 					if (cover && coverUrl) {
 						data.largeImageKey = await getShortURL(coverUrl);
-						data.smallImageKey = video.paused ? "pause-c" : "play-c";
+						data.smallImageKey = video.paused ? Assets.Pause: Assets.Play
 					}
 
 					if (!video.paused)

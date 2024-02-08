@@ -50,6 +50,34 @@ const enum Assets {
 	Unknown = "https://cdn.discordapp.com/app-assets/961652082027421746/962819498270941275.png?size=512",
 }
 
+const assets = {
+  "py": "https://cdn.discordapp.com/app-assets/961652082027421746/961676733168369694.png?size=512",
+  "js": "https://cdn.discordapp.com/app-assets/961652082027421746/961677110806724698.png?size=512",
+  "ts": "https://cdn.discordapp.com/app-assets/961652082027421746/961677111125475429.png?size=512",
+  "css": "https://cdn.discordapp.com/app-assets/961652082027421746/961677111268110386.png?size=512",
+  "swift": "https://cdn.discordapp.com/app-assets/961652082027421746/961677111930793995.png?size=512",
+  "html": "https://cdn.discordapp.com/app-assets/961652082027421746/961677111972737045.png?size=512",
+  "java": "https://cdn.discordapp.com/app-assets/961652082027421746/961677112350216223.png?size=512",
+  "cpp": "https://cdn.discordapp.com/app-assets/961652082027421746/961731137330364466.png?size=512",
+  "json": "https://cdn.discordapp.com/app-assets/961652082027421746/961739308509839380.png?size=512",
+  "cs": "https://cdn.discordapp.com/app-assets/961652082027421746/961742269373906964.png?size=512",
+  "c": "https://cdn.discordapp.com/app-assets/961652082027421746/961743219593453589.png?size=512",
+  "txt": "https://cdn.discordapp.com/app-assets/961652082027421746/961744562626396160.png?size=512",
+  "tsx": "https://cdn.discordapp.com/app-assets/961652082027421746/961772140565233675.png?size=512",
+  "jsx": "https://cdn.discordapp.com/app-assets/961652082027421746/961772245301202985.png?size=512",
+  "cr": "https://cdn.discordapp.com/app-assets/961652082027421746/962166504126836736.png?size=512",
+  "go": "https://cdn.discordapp.com/app-assets/961652082027421746/962166504282001462.png?size=512",
+  "sh": "https://cdn.discordapp.com/app-assets/961652082027421746/962166504693043200.png?size=512",
+  "bash": "https://cdn.discordapp.com/app-assets/961652082027421746/962166504995049512.png?size=512",
+  "sql": "https://cdn.discordapp.com/app-assets/961652082027421746/962166505041174554.png?size=512",
+  "ru": "https://cdn.discordapp.com/app-assets/961652082027421746/962166505045368942.png?size=512",
+  "lua": "https://cdn.discordapp.com/app-assets/961652082027421746/962166505221533706.png?size=512",
+  "php": "https://cdn.discordapp.com/app-assets/961652082027421746/962166505452228618.png?size=512",
+  "kt": "https://cdn.discordapp.com/app-assets/961652082027421746/962167344950550598.png?size=512",
+  "bat": "https://cdn.discordapp.com/app-assets/961652082027421746/962168886252437617.png?size=512",
+  "rs": "https://cdn.discordapp.com/app-assets/961652082027421746/962325628168847371.png?size=512",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
@@ -145,9 +173,9 @@ presence.on("UpdateData", async () => {
 							.replace(/(:)|[0-9]|(-)/g, "")
 					)
 				) {
-					presenceData.largeImageKey = `${formatImg[formatImg.length - 1]
+					presenceData.largeImageKey = assets[`${formatImg[formatImg.length - 1]
 						.toLowerCase()
-						.replace(/(:)|[0-9]|(-)/g, "")}`;
+						.replace(/(:)|[0-9]|(-)/g, "")}` as keyof typeof assets];
 				} else presenceData.largeImageKey = Assets.Txt;
 			} else {
 				presenceData.details = `Looking at ${

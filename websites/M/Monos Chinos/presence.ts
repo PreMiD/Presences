@@ -24,6 +24,13 @@ const presence = new Presence({
 let video: VideoContext = null,
 	lastVideoOption = 1;
 
+	const enum Assets {
+		Season = "https://cdn.discordapp.com/app-assets/707389880505860156/707445020176810014.png?size=512",
+		Directory = "https://cdn.discordapp.com/app-assets/707389880505860156/707445631475515392.png?size=512",
+		Logo =
+		"https://cdn.rcd.gg/PreMiD/websites/M/Monos%20Chinos/assets/logo.png",
+	}
+
 presence.on("iFrameData", async (context: VideoContext) => {
 	video = context;
 });
@@ -31,11 +38,11 @@ presence.on("iFrameData", async (context: VideoContext) => {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/M/Monos%20Chinos/assets/logo.png",
+				Assets.Logo,
 		},
 		browsingData: PresenceData = {
 			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/M/Monos%20Chinos/assets/logo.png",
+				Assets.Logo,
 			details: (await strings).browsing,
 			smallImageKey: Assets.Viewing,
 			smallImageText: (await strings).browsing,
@@ -50,31 +57,31 @@ presence.on("UpdateData", async () => {
 				id: "seasonList",
 				path: "/emision",
 				text: "viendo lista de emisión",
-				icon: "season",
+				icon: Assets.Season
 			},
 			{
 				id: "directory",
 				path: "/animes",
 				text: "viendo el directorio",
-				icon: "directory",
+				icon: Assets.Directory
 			},
 			{
 				id: "seasonCalendar",
 				path: "/calendario",
 				text: "viendo el calendario",
-				icon: "season",
+				icon:Assets.Season
 			},
 			{
 				id: "directoryAnime",
 				path: "/anime/",
 				text: "viendo lista de episodios",
-				icon: "directory",
+				icon:Assets.Directory
 			},
 			{
 				id: "search",
 				path: "/buscar",
 				text: "buscando animes:",
-				icon: "search",
+				icon: Assets.Search
 			},
 			{
 				id: "profile",
@@ -134,7 +141,7 @@ presence.on("UpdateData", async () => {
 		);
 
 		Object.assign(presenceData, {
-			smallImageKey: video.paused ? "paused" : "playing",
+			smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 			smallImageText: (await strings)[video.paused ? "paused" : "playing"],
 		} as PresenceData);
 

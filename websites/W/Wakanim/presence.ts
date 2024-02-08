@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey =
 				document.querySelector<HTMLMetaElement>(
 					".episode > .container > [itemprop=thumbnailUrl]"
-				).content ?? "wakanim";
+				).content ?? "https://cdn.discordapp.com/app-assets/662841394171346955/663486692015079458.png?size=512";
 		}
 
 		if (subtitle && subtitle.textContent)

@@ -113,7 +113,7 @@ presence.on("UpdateData", async () => {
 		presenceData = {
 			largeImageKey: showCover
 				? mediaSession.metadata.artwork.at(-1).src
-				: "ytm_lg",
+				: "https://cdn.discordapp.com/app-assets/463151177836658699/463151407512682502.png?size=512",
 			details: mediaSession.metadata.title,
 			state: [mediaSession.metadata.artist, mediaSession.metadata.album]
 				.filter(Boolean)

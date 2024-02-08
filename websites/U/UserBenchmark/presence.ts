@@ -49,6 +49,15 @@ const statics = {
 	},
 };
 
+const assets = {
+  "ssd": "https://cdn.discordapp.com/app-assets/735229766701154357/735567736377311334.png?size=512",
+  "cpu": "https://cdn.discordapp.com/app-assets/735229766701154357/735567755817910384.png?size=512",
+  "usb": "https://cdn.discordapp.com/app-assets/735229766701154357/735567756866355301.png?size=512",
+  "hdd": "https://cdn.discordapp.com/app-assets/735229766701154357/735567758095417386.png?size=512",
+  "gpu": "https://cdn.discordapp.com/app-assets/735229766701154357/735567758179303505.png?size=512",
+  "ram": "https://cdn.discordapp.com/app-assets/735229766701154357/735567758225440788.png?size=512",
+}
+
 presence.on("UpdateData", async () => {
 	const { host, pathname, href } = document.location,
 		path = pathname.replace(/\/?$/, "/"),
@@ -183,7 +192,7 @@ presence.on("UpdateData", async () => {
 
 		if (path === "/" && !host.startsWith("www")) {
 			const hardware = host.split(".").shift();
-			presenceData.smallImageKey = hardware;
+			presenceData.smallImageKey = assets[hardware as keyof typeof assets];
 			presenceData.smallImageText = hardware.toUpperCase();
 		}
 

@@ -1,7 +1,14 @@
 const presence = new Presence({
 		clientId: "628269030901547037",
-	}),
-	pages: { [key: string]: string } = {
+	});
+
+	const enum Assets {
+		Logo = "https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/logo.png",
+		Video = "https://cdn.discordapp.com/app-assets/628269030901547037/628285534631886877.png?size=512",
+		Post = "https://cdn.discordapp.com/app-assets/628269030901547037/628286687616696320.png?size=512",
+		Star = "https://cdn.discordapp.com/app-assets/628269030901547037/628287605636595713.png?size=512",
+	}
+	const pages: { [key: string]: string } = {
 		"/": "Ana Sayfa",
 		"/haber": "Haberler",
 		"/video": "Videolar",
@@ -18,16 +25,11 @@ const presence = new Presence({
 		"/iletisim": "İletişim",
 	},
 	smallImageKey: { [key: string]: string } = {
-		"/ara": "searching",
-		"/video": "video",
-		"/uye/favorilerim": "star",
+		"/ara": Assets.Search,
+		"/video": Assets.Video,
+		"/uye/favorilerim": Assets.Star,
 	};
 
-	const enum Assets {
-		Logo = "https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/logo.png",
-		Video = "https://cdn.discordapp.com/app-assets/628269030901547037/628285534631886877.png?size=512",
-		Post = "https://cdn.discordapp.com/app-assets/628269030901547037/628286687616696320.png?size=512",
-	}
 
 presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
@@ -106,7 +108,7 @@ presence.on("UpdateData", async () => {
 			details: "Bir sayfaya göz atıyor:",
 			state: pages[page] || pages[page.slice(0, -1)] || "Ana Sayfa",
 			smallImageKey:
-				smallImageKey[page] || smallImageKey[page.slice(0, -1)] || "NOTHING",
+				smallImageKey[page] || smallImageKey[page.slice(0, -1)],
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	}

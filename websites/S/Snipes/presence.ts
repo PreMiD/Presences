@@ -3,10 +3,25 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/logo.png",
+}
+
+	const assets = {
+		"fr": "https://cdn.discordapp.com/app-assets/827620297896230912/836617711848914984.png?size=512",
+		"at": "https://cdn.discordapp.com/app-assets/827620297896230912/836617711952986123.png?size=512",
+		"es": "https://cdn.discordapp.com/app-assets/827620297896230912/836617712003842059.png?size=512",
+		"nl": "https://cdn.discordapp.com/app-assets/827620297896230912/836617712003973141.png?size=512",
+		"it": "https://cdn.discordapp.com/app-assets/827620297896230912/836617712188784670.png?size=512",
+		"be": "https://cdn.discordapp.com/app-assets/827620297896230912/836617712247373915.png?size=512",
+		"ch": "https://cdn.discordapp.com/app-assets/827620297896230912/836617712427335731.png?size=512",
+		"usa": "https://cdn.discordapp.com/app-assets/827620297896230912/836617712725131274.png?size=512",
+		"de": "https://cdn.discordapp.com/app-assets/827620297896230912/836617712858824745.png?size=512",
+	}
+
 presence.on("UpdateData", async function () {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/logo.png",
+			largeImageKey: Assets.Logo,
 		},
 		setTimeElapsed = await presence.getSetting<boolean>("timeElapsed"),
 		setShowButtons = await presence.getSetting<boolean>("showButtons"),
@@ -154,7 +169,7 @@ presence.on("UpdateData", async function () {
 				document.location.hostname === "www.snipesusa.com" ? "usa" : "de";
 		}
 
-		presenceData.smallImageKey = smallimage;
+		presenceData.smallImageKey = assets[smallimage as keyof typeof assets];
 		presenceData.smallImageText = `SNIPES ${smallimage.toUpperCase()}`;
 	}
 

@@ -3,6 +3,13 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+	const assets = {
+		"gryffindor": "https://cdn.discordapp.com/app-assets/843731213893107713/843743180885065738.png?size=512",
+		"hufflepuff": "https://cdn.discordapp.com/app-assets/843731213893107713/843743181522599956.png?size=512",
+		"ravenclaw": "https://cdn.discordapp.com/app-assets/843731213893107713/843743181752631356.png?size=512",
+		"slytherin": "https://cdn.discordapp.com/app-assets/843731213893107713/843743182403403786.png?size=512",
+	}
+
 presence.on("UpdateData", async function () {
 	const setting = {
 			timeElapsed: await presence.getSetting<boolean>("timeElapsed"),
@@ -172,9 +179,9 @@ presence.on("UpdateData", async function () {
 		if (urlpath[1] === "passport") presenceData.details = "Passport";
 
 		if (document.querySelector("span.HogwartsHouse_houseName__CykI1")) {
-			presenceData.smallImageKey = document
+			presenceData.smallImageKey = assets[document
 				.querySelector("span.HogwartsHouse_houseName__CykI1")
-				?.textContent.toLocaleLowerCase();
+				?.textContent.toLocaleLowerCase() as keyof typeof assets];
 			presenceData.smallImageText = document.querySelector(
 				"span.HogwartsHouse_houseName__CykI1"
 			)?.textContent;

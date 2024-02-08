@@ -211,10 +211,10 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (privacy && presenceData.smallImageKey === "search") {
+	if (privacy && presenceData.smallImageKey === Assets.Search) {
 		presenceData.details = strings.searchSomething;
 		delete presenceData.state;
-	} else if (privacy && presenceData.smallImageKey === "reading") {
+	} else if (privacy && presenceData.smallImageKey === Assets.Reading) {
 		presenceData.details = strings.browse;
 		delete presenceData.state;
 	}

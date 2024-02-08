@@ -276,7 +276,7 @@ presence.on("UpdateData", async () => {
 								)
 						);
 					}
-					presenceData.smallImageKey = video.paused ? "pause" : "live";
+					presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Live
 					presenceData.smallImageText = video.paused
 						? strings.pause
 						: strings.live;

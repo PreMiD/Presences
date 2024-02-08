@@ -1,6 +1,16 @@
 let elapsed = Math.floor(Date.now() / 1000),
 	prevUrl = document.location.href;
 
+	const assets = {
+		"zdf": "https://cdn.discordapp.com/app-assets/854999470357217290/855000938463625226.png?size=512",
+		"3sat": "https://cdn.discordapp.com/app-assets/854999470357217290/855006452326465547.png?size=512",
+		"phoenix": "https://cdn.discordapp.com/app-assets/854999470357217290/855006452657946654.png?size=512",
+		"arte": "https://cdn.discordapp.com/app-assets/854999470357217290/855006452737245215.png?size=512",
+		"zdfinfo": "https://cdn.discordapp.com/app-assets/854999470357217290/855006452770799617.png?size=512",
+		"zdfneo": "https://cdn.discordapp.com/app-assets/854999470357217290/855006453205958666.png?size=512",
+		"kika": "https://cdn.discordapp.com/app-assets/854999470357217290/855006453272936488.png?size=512",
+	}
+
 const presence = new Presence({
 		clientId: "854999470357217290",
 	}),
@@ -55,7 +65,7 @@ presence.on("UpdateData", async () => {
 				}
 			}
 
-			presenceData.largeImageKey = mediathekLivechannel.toLowerCase();
+			presenceData.largeImageKey = assets[mediathekLivechannel.toLowerCase() as keyof typeof assets];
 			presenceData.smallImageKey = Assets.Live;
 			presenceData.smallImageText = "Live";
 			presenceData.details = `${mediathekLivechannel} Live`;

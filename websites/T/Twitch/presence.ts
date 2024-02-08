@@ -2,6 +2,17 @@ let elapsed = Math.floor(Date.now() / 1000),
 	prevUrl = document.location.href,
 	oldLang = "en";
 
+	const enum Assets {
+		BlackOps = "https://cdn.discordapp.com/app-assets/802958789555781663/802961388942131262.png?size=512",
+		DevMain = "https://cdn.discordapp.com/app-assets/802958789555781663/802961389425393704.png?size=512",
+		Purple = "https://cdn.discordapp.com/app-assets/802958789555781663/802961389836697640.png?size=512",
+		White = "https://cdn.discordapp.com/app-assets/802958789555781663/802961389865926656.png?size=512",
+		Pride = "https://cdn.discordapp.com/app-assets/802958789555781663/802961389874184203.png?size=512",
+		Logo = "https://cdn.discordapp.com/app-assets/802958789555781663/802961390007615488.png?size=512",
+		DevWhite = "https://cdn.discordapp.com/app-assets/802958789555781663/802961390075248640.png?size=512",
+		DevPurple = "https://cdn.discordapp.com/app-assets/802958789555781663/802961392478715984.png?size=512",
+	}
+
 const presence = new Presence({
 		clientId: "802958789555781663",
 	}),
@@ -104,8 +115,15 @@ const presence = new Presence({
 			oldLang
 		);
 	},
-	devLogoArr = ["dev-main", "dev-white", "dev-purple"],
-	logoArr = ["twitch", "black-ops", "white", "purple", "pride"];
+	devLogoArr = [
+		Assets.DevMain,
+		Assets.DevWhite,
+		Assets.DevPurple,],
+	logoArr = [Assets.Logo,
+		Assets.BlackOps,
+		Assets.White,
+		Assets.Purple,
+		Assets.Pride];
 
 let strings: Awaited<ReturnType<typeof getStrings>>;
 
@@ -150,7 +168,7 @@ presence.on("UpdateData", async () => {
 
 	let presenceData: PresenceData = {
 		type: ActivityType.Watching,
-		largeImageKey: logoArr[logo] || "twitch",
+		largeImageKey: logoArr[logo] || Assets.Logo,
 		startTimestamp: elapsed,
 	};
 
@@ -299,7 +317,7 @@ presence.on("UpdateData", async () => {
 									".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
 								)
 								?.src?.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600") ??
-							(logoArr[logo] || "twitch");
+							(logoArr[logo] || Assets.Logo);
 					user += tab ? ` (${tab})` : "";
 
 					presenceData.details = strings.viewProfile;
@@ -453,7 +471,7 @@ presence.on("UpdateData", async () => {
 									".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
 								)
 								?.src?.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600") ??
-							(logoArr[logo] || "twitch");
+							(logoArr[logo] || Assets.Logo);
 					presenceData.details = streamDetail
 						.replace("%title%", title ?? "")
 						.replace("%streamer%", streamer ?? "")
@@ -498,7 +516,7 @@ presence.on("UpdateData", async () => {
 									".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
 								)
 								?.src?.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600") ??
-							(logoArr[logo] || "twitch");
+							(logoArr[logo] || Assets.Logo);
 					presenceData.details = vidDetail
 						.replace("%title%", title ?? "")
 						.replace("%uploader%", uploader ?? "")
@@ -781,7 +799,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "dev.twitch.tv": {
 			//* Dev docs
-			presenceData.largeImageKey = devLogoArr[devLogo] || "dev-main";
+			presenceData.largeImageKey = devLogoArr[devLogo] || Assets.DevMain;
 			if (showBrowsing) {
 				const statics = {
 					"/": {
@@ -828,7 +846,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "discuss.dev.twitch.tv": {
 			//! Development forums
-			presenceData.largeImageKey = devLogoArr[devLogo] || "dev-main";
+			presenceData.largeImageKey = devLogoArr[devLogo] || Assets.DevMain;
 			if (showBrowsing) {
 				const statics = {
 					"/": {
@@ -869,7 +887,7 @@ presence.on("UpdateData", async () => {
 		case "status.twitch.tv": {
 			//* Status pages
 			if (document.location.hostname === "devstatus.twitch.tv")
-				presenceData.largeImageKey = devLogoArr[devLogo] || "dev-main";
+				presenceData.largeImageKey = devLogoArr[devLogo] || Assets.DevMain;
 			if (showBrowsing) {
 				const statics = {
 					"/": {

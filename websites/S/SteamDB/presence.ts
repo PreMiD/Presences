@@ -3,6 +3,18 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+	const assets = {
+		"users": "https://cdn.discordapp.com/app-assets/858408468854997052/877654020993454090.png?size=512",
+		"game": "https://cdn.discordapp.com/app-assets/858408468854997052/885819106954211368.png?size=512",
+		"dlc": "https://cdn.discordapp.com/app-assets/858408468854997052/885819607863156746.png?size=512",
+		"tool": "https://cdn.discordapp.com/app-assets/858408468854997052/885820332127162380.png?size=512",
+		"config": "https://cdn.discordapp.com/app-assets/858408468854997052/885821095280795698.png?size=512",
+		"unknown": "https://cdn.discordapp.com/app-assets/858408468854997052/885822777653874718.png?size=512",
+		"music": "https://cdn.discordapp.com/app-assets/858408468854997052/885828018206031872.png?size=512",
+		"application": "https://cdn.discordapp.com/app-assets/858408468854997052/890605909938692118.png?size=512",
+		"video": "https://cdn.discordapp.com/app-assets/858408468854997052/890607300631490570.png?size=512",
+	}
+
 presence.on("UpdateData", async () => {
 	let searchText: HTMLInputElement, h1Title: Element, h2Title: Element;
 	const [time, accountValue, buttons] = await Promise.all([
@@ -123,7 +135,7 @@ presence.on("UpdateData", async () => {
 							.children.item(1).textContent;
 						presenceData.state =
 							document.querySelector("h1").lastChild.textContent;
-						presenceData.smallImageKey = tbody.toLowerCase();
+						presenceData.smallImageKey = assets[tbody.toLowerCase() as keyof typeof assets];
 						presenceData.smallImageText = tbody;
 						presenceData.buttons = [
 							{

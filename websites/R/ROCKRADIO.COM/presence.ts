@@ -37,8 +37,8 @@ presence.on("UpdateData", async () => {
 			playing =
 				document.querySelector("#play-button > div > a").className ===
 				"ico icon-pause"
-					? "play"
-					: "pause";
+					? Assets.Play
+					: Assets.Pause
 			presenceData.smallImageKey = playing;
 		} else if (document.querySelector("#channel-title")) {
 			title = document.querySelector("#channel-title");

@@ -3,6 +3,13 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+	const enum Assets {
+		LogoRedText = "https://cdn.discordapp.com/app-assets/829056927227969596/829058361332596776.png?size=512",
+		LogoRed = "https://cdn.discordapp.com/app-assets/829056927227969596/829058361411895346.png?size=512",
+		LogoWhite = "https://cdn.discordapp.com/app-assets/829056927227969596/829085144278237254.png?size=512",
+		LogoWhiteText = "https://cdn.discordapp.com/app-assets/829056927227969596/829085145260228638.png?size=512",
+	}
+
 presence.on("UpdateData", async function () {
 	const [timeElapsed, showButtons, logo, showCheckout] = await Promise.all([
 			presence.getSetting<boolean>("timeElapsed"),
@@ -10,7 +17,11 @@ presence.on("UpdateData", async function () {
 			presence.getSetting<number>("logo"),
 			presence.getSetting<boolean>("showCheckout"),
 		]),
-		logoArr = ["logo_red", "logo_red_text", "logo_white", "logo_white_text"],
+		logoArr = [
+			Assets.LogoRed,
+			Assets.LogoRedText,
+			Assets.LogoWhite,
+			Assets.LogoWhiteText,],
 		urlpath = window.location.pathname.split("/"),
 		langs = [
 			"en_ca",
@@ -54,7 +65,7 @@ presence.on("UpdateData", async function () {
 		],
 		urlpNum = langs.includes(urlpath[1]) ? 2 : 1,
 		presenceData: PresenceData = {
-			largeImageKey: logoArr[logo] ?? "logo_red",
+			largeImageKey: logoArr[logo] ?? Assets.LogoRed,
 		};
 
 	if (timeElapsed) presenceData.startTimestamp = browsingTimestamp;

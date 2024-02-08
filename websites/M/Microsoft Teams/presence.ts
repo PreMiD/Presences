@@ -85,8 +85,8 @@ presence.on("UpdateData", async () => {
 				.querySelector("#video-button")
 				.getAttribute("aria-label")
 				.endsWith("off")
-				? "vcall"
-				: "call";
+				? Assets.VideoCall
+				: Assets.Call
 		} else presenceData.details = "Joining a meeting...";
 	} else presenceData.details = await presence.getSetting<string>("noMessage");
 

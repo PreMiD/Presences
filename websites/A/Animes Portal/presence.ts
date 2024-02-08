@@ -2,10 +2,13 @@ const presence = new Presence({
 	clientId: "924791712944099389",
 });
 
+const enum Assets {
+	Logo ="https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png",
+			largeImageKey: Assets.Logo,
 		},
 		{ pathname, href } = document.location,
 		[showThumb, showMessaging] = await Promise.all([
@@ -51,7 +54,7 @@ presence.on("UpdateData", async () => {
 			);
 
 			presenceData.details = `Viewing otaku ${username}`;
-			presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png";
+			presenceData.smallImageKey = Assets.Logo;
 		}
 	} else if (pathname.startsWith("/animes")) {
 		if (paths[1] === "search" && paths[2]) {
@@ -75,10 +78,10 @@ presence.on("UpdateData", async () => {
 					"body > main.animated > div.wrapper > article.rowView > aside.aside > div.cover-holder > img.abs"
 				).src;
 
-			if (image) presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png";
+			if (image) presenceData.smallImageKey = Assets.Logo;
 
 			presenceData.details = `Viewing ${name}`;
-			presenceData.largeImageKey = image ?? "logo";
+			presenceData.largeImageKey = image ?? Assets.Logo;
 			presenceData.buttons = [
 				{
 					label: "View anime",
@@ -106,7 +109,7 @@ presence.on("UpdateData", async () => {
 
 				if (thumb !== "logo" && showThumb) {
 					presenceData.largeImageKey = thumb;
-					presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png";
+					presenceData.smallImageKey = Assets.Logo;
 				}
 			}
 		}
@@ -129,11 +132,11 @@ presence.on("UpdateData", async () => {
 				"body > main.animated > div.wrapper > article.rowView > aside.aside > div.cover-holder > img.abs"
 			).src;
 
-		if (image) presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png";
+		if (image) presenceData.smallImageKey = Assets.Logo
 
 		presenceData.details = "Viewing movie";
 		presenceData.state = name;
-		presenceData.largeImageKey = image ?? "logo";
+		presenceData.largeImageKey = image ?? Assets.Logo;
 	} else if (pathname.startsWith("/manga")) {
 		if (paths[1] === "search" && paths[2]) {
 			const query: string = paths[2].replaceAll("-", " ");
@@ -190,9 +193,9 @@ presence.on("UpdateData", async () => {
 
 			if (name) presenceData.details = `Viewing manga ${name}`;
 
-			presenceData.largeImageKey = image ?? "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png";
+			presenceData.largeImageKey = image ?? Assets.Logo;
 
-			if (image) presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png";
+			if (image) presenceData.smallImageKey = Assets.Logo;
 
 			presenceData.buttons = [
 				{
@@ -218,7 +221,7 @@ presence.on("iFrameData", async (data: IFrameData) => {
 	if (!data.currentTime || !data.duration) return;
 	const presenceData: PresenceData = {
 			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png",
+				Assets.Logo,
 		},
 		showThumb = await presence.getSetting<boolean>("showthumb"),
 		epInfo = getInfo(),
@@ -252,7 +255,7 @@ presence.on("iFrameData", async (data: IFrameData) => {
 
 	if (thumb !== "logo" && showThumb) {
 		presenceData.largeImageKey = thumb;
-		presenceData.smallImageKey = data.paused ? "start" : "logo";
+		presenceData.smallImageKey = data.paused ? Assets.Pause : Assets.Logo
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
@@ -295,7 +298,7 @@ function parseAvatarFromAttr(attr: string, def?: string): string {
 		avatar === "https://static.animes-portal.info/assets/images/avatar.svg" ||
 		!avatar
 	)
-		avatar = def || "defaultav";
+		avatar = def || Assets.Logo;
 
 	return avatar;
 }

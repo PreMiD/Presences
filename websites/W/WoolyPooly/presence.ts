@@ -5,6 +5,25 @@ const presence = new Presence({
 
 let currencyTitle, currencyEffort, effortType, wallet24Revenue: string;
 
+const assets = {
+  "etc": "https://cdn.discordapp.com/app-assets/783702757021581352/783709805708836935.png?size=512",
+  "aion": "https://cdn.discordapp.com/app-assets/783702757021581352/783714274563719198.png?size=512",
+  "mwc": "https://cdn.discordapp.com/app-assets/783702757021581352/783714275021553725.png?size=512",
+  "ae": "https://cdn.discordapp.com/app-assets/783702757021581352/783714276891295745.png?size=512",
+  "cfx": "https://cdn.discordapp.com/app-assets/783702757021581352/783714277311250442.png?size=512",
+  "ctxc": "https://cdn.discordapp.com/app-assets/783702757021581352/783714277369708565.png?size=512",
+  "rvn": "https://cdn.discordapp.com/app-assets/783702757021581352/783714277574836224.png?size=512",
+  "eth": "https://cdn.discordapp.com/app-assets/783702757021581352/783714277889802241.png?size=512",
+  "veil": "https://cdn.discordapp.com/app-assets/783702757021581352/783714277936726047.png?size=512",
+  "grin": "https://cdn.discordapp.com/app-assets/783702757021581352/783714278175801344.png?size=512",
+  "sero": "https://cdn.discordapp.com/app-assets/783702757021581352/783714278318014485.png?size=512",
+  "btg": "https://cdn.discordapp.com/app-assets/783702757021581352/783714278392856577.png?size=512",
+  "zel": "https://cdn.discordapp.com/app-assets/783702757021581352/783714278695501835.png?size=512",
+  "ergo": "https://cdn.discordapp.com/app-assets/783702757021581352/806847524555325460.png?size=512",
+  "xzc": "https://cdn.discordapp.com/app-assets/783702757021581352/806850115151200286.png?size=512",
+  "erg": "https://cdn.discordapp.com/app-assets/783702757021581352/808285506939912252.png?size=512",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
@@ -64,7 +83,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `Effort (${effortType}): ${currencyEffort}%`;
 				}
 				presenceData.details = currencyTitle;
-				presenceData.smallImageKey = window.location.pathname.split("/")[2];
+				presenceData.smallImageKey = assets[window.location.pathname.split("/")[2] as keyof typeof assets];;
 				presenceData.smallImageText = currencyTitle;
 			} else {
 				presenceData.startTimestamp = browsingTimestamp;
