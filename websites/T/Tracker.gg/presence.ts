@@ -1,10 +1,20 @@
 const presence = new Presence({ clientId: "929349462365704222" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+	const enum Assets {
+		Logo = "https://cdn.rcd.gg/PreMiD/websites/T/Tracker.gg/assets/logo.png",
+		Valorant = "https://cdn.discordapp.com/app-assets/929349462365704222/929366806018285568.png?size=512",
+		Hyperscape = "https://cdn.discordapp.com/app-assets/929349462365704222/929417090291630180.png?size=512",
+		Apex = "https://cdn.discordapp.com/app-assets/929349462365704222/929425435190755329.png?size=512",
+		Fn = "https://cdn.discordapp.com/app-assets/929349462365704222/929428339616280677.png?size=512",
+		Csgo = "https://cdn.discordapp.com/app-assets/929349462365704222/929735068228923402.png?size=512",
+		Lol = "https://cdn.discordapp.com/app-assets/929349462365704222/929738426138386492.png?size=512",
+		Splitgate = "https://cdn.discordapp.com/app-assets/929349462365704222/929744904257695754.png?size=512",
+	}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/T/Tracker.gg/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location,
@@ -110,7 +120,7 @@ presence.on("UpdateData", async () => {
 							case "/valorant": {
 								presenceData.details = "Viewing Valorant Page";
 								presenceData.smallImageText = "TRN";
-								presenceData.largeImageKey = "valorant";
+								presenceData.largeImageKey = Assets.Valorant;
 
 								break;
 							}
@@ -124,7 +134,7 @@ presence.on("UpdateData", async () => {
 										document.querySelector<HTMLSpanElement>(
 											"#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-details > div.ph-details__identifier > span > span.trn-ign__discriminator"
 										).textContent;
-									presenceData.smallImageKey = "valorant";
+									presenceData.smallImageKey = Assets.Valorant;
 									presenceData.smallImageText =
 										document.querySelector<HTMLSpanElement>(
 											"#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-details > div.ph-details__identifier > span > span.trn-ign__username"
@@ -139,21 +149,21 @@ presence.on("UpdateData", async () => {
 										presenceData.details = "Viewing:";
 										presenceData.state = "Valorant Leaderboards Ranked";
 										presenceData.smallImageText = "TRN";
-										presenceData.largeImageKey = "valorant";
+										presenceData.largeImageKey = Assets.Valorant;
 									} else if (
 										pathname.includes("/valorant/leaderboards/stats")
 									) {
 										presenceData.details = "Viewing:";
 										presenceData.state = "Valorant Leaderboards Seasonal";
 										presenceData.smallImageText = "TRN";
-										presenceData.largeImageKey = "valorant";
+										presenceData.largeImageKey = Assets.Valorant;
 									}
 								} else if (pathname.includes("/valorant/guides")) {
 									if (pathname.includes("/clips/submit")) {
 										presenceData.details = "Submitting Valorant Clip";
 
 										presenceData.smallImageText = "TRN";
-										presenceData.largeImageKey = "valorant";
+										presenceData.largeImageKey = Assets.Valorant;
 									} else if (pathname.includes("/clips")) {
 										try {
 											const stream: Element =
@@ -165,18 +175,18 @@ presence.on("UpdateData", async () => {
 												presenceData.state = "Valorant Lineup Clip";
 
 												presenceData.smallImageText = "TRN";
-												presenceData.largeImageKey = "valorant";
+												presenceData.largeImageKey = Assets.Valorant;
 											} else {
 												presenceData.details = "Viewing:";
 												presenceData.state = "Valorant Lineup Guides";
 
 												presenceData.smallImageText = "TRN";
-												presenceData.largeImageKey = "valorant";
+												presenceData.largeImageKey = Assets.Valorant;
 											}
 										} catch {
 											presenceData.details = "Viewing:";
 											presenceData.state = "Valorant Lineup Guides";
-											presenceData.smallImageKey = "valorant";
+											presenceData.smallImageKey = Assets.Valorant;
 											presenceData.smallImageText = "Valorant";
 										}
 									} else if (pathname.includes("/dashboard")) {
@@ -184,7 +194,7 @@ presence.on("UpdateData", async () => {
 										presenceData.state = "own Valorant Guides";
 
 										presenceData.smallImageText = "TRN";
-										presenceData.largeImageKey = "valorant";
+										presenceData.largeImageKey = Assets.Valorant;
 									} else {
 										try {
 											presenceData.details = "Reading Guide:";
@@ -198,13 +208,13 @@ presence.on("UpdateData", async () => {
 													"#app > div.trn-wrapper > div.trn-container > div > main > article > div.guide__main > div > div.guide-main__hero.card.header-bordered.responsive > div.guide-main-metadata > div.guide-main__author.guide-main-metadata__author > span.guide-main__author-username"
 												).textContent
 											}`;
-											presenceData.largeImageKey = "valorant";
+											presenceData.largeImageKey = Assets.Valorant;
 										} catch {
 											presenceData.details = "Viewing:";
 											presenceData.state = "Valorant Guides";
 
 											presenceData.smallImageText = "TRN";
-											presenceData.largeImageKey = "valorant";
+											presenceData.largeImageKey = Assets.Valorant;
 										}
 									}
 								} else {
@@ -214,7 +224,7 @@ presence.on("UpdateData", async () => {
 											presenceData.state = "Valorant Looking for Group";
 
 											presenceData.smallImageText = "TRN";
-											presenceData.largeImageKey = "valorant";
+											presenceData.largeImageKey = Assets.Valorant;
 
 											break;
 										}
@@ -223,7 +233,7 @@ presence.on("UpdateData", async () => {
 											presenceData.state = "Valorant Insights";
 
 											presenceData.smallImageText = "TRN";
-											presenceData.largeImageKey = "valorant";
+											presenceData.largeImageKey = Assets.Valorant;
 
 											break;
 										}
@@ -232,7 +242,7 @@ presence.on("UpdateData", async () => {
 											presenceData.state = "Valorant Agents";
 
 											presenceData.smallImageText = "TRN";
-											presenceData.largeImageKey = "valorant";
+											presenceData.largeImageKey = Assets.Valorant;
 
 											break;
 										}
@@ -245,13 +255,13 @@ presence.on("UpdateData", async () => {
 													).textContent;
 
 												presenceData.smallImageText = "TRN";
-												presenceData.largeImageKey = "valorant";
+												presenceData.largeImageKey = Assets.Valorant;
 											} else if (pathname === "/valorant/weapons") {
 												presenceData.details = "Viewing:";
 												presenceData.state = "Valorant Weapons";
 
 												presenceData.smallImageText = "TRN";
-												presenceData.largeImageKey = "valorant";
+												presenceData.largeImageKey = Assets.Valorant;
 											} else if (pathname.includes("/valorant/weapons")) {
 												presenceData.details = "Viewing Valorant Weapon:";
 												presenceData.state =
@@ -260,13 +270,13 @@ presence.on("UpdateData", async () => {
 													).textContent;
 
 												presenceData.smallImageText = "TRN";
-												presenceData.largeImageKey = "valorant";
+												presenceData.largeImageKey = Assets.Valorant;
 											} else if (pathname === "/valorant/maps") {
 												presenceData.details = "Viewing:";
 												presenceData.state = "Valorant Maps";
 
 												presenceData.smallImageText = "TRN";
-												presenceData.largeImageKey = "valorant";
+												presenceData.largeImageKey = Assets.Valorant;
 											} else if (pathname.includes("/valorant/maps")) {
 												presenceData.details = "Viewing Valorant Map:";
 												presenceData.state = document
@@ -276,7 +286,7 @@ presence.on("UpdateData", async () => {
 													.textContent.replace(" - Valorant Map", "");
 
 												presenceData.smallImageText = "TRN";
-												presenceData.largeImageKey = "valorant";
+												presenceData.largeImageKey = Assets.Valorant;
 											} else {
 												switch (pathname) {
 													case "/valorant/cards": {
@@ -284,7 +294,7 @@ presence.on("UpdateData", async () => {
 														presenceData.state = "Valorant Cards";
 
 														presenceData.smallImageText = "TRN";
-														presenceData.largeImageKey = "valorant";
+														presenceData.largeImageKey = Assets.Valorant;
 
 														break;
 													}
@@ -293,7 +303,7 @@ presence.on("UpdateData", async () => {
 														presenceData.state = "Valorant Buddies";
 
 														presenceData.smallImageText = "TRN";
-														presenceData.largeImageKey = "valorant";
+														presenceData.largeImageKey = Assets.Valorant;
 
 														break;
 													}
@@ -302,7 +312,7 @@ presence.on("UpdateData", async () => {
 														presenceData.state = "Valorant Sprays";
 
 														presenceData.smallImageText = "TRN";
-														presenceData.largeImageKey = "valorant";
+														presenceData.largeImageKey = Assets.Valorant;
 
 														break;
 													}
@@ -311,7 +321,7 @@ presence.on("UpdateData", async () => {
 														presenceData.state = "Hyper Scape";
 
 														presenceData.smallImageText = "TRN";
-														presenceData.largeImageKey = "hyperscape";
+														presenceData.largeImageKey = Assets.Hyperscape;
 
 														break;
 													}
@@ -325,7 +335,7 @@ presence.on("UpdateData", async () => {
 															presenceData.details =
 																"Viewing HyperScape Profile:";
 															presenceData.state = playerName;
-															presenceData.smallImageKey = "hyperscape";
+															presenceData.smallImageKey = Assets.Hyperscape;
 															presenceData.smallImageText = playerName;
 															presenceData.largeImageKey =
 																document.querySelector<HTMLImageElement>(
@@ -340,35 +350,35 @@ presence.on("UpdateData", async () => {
 																	"HyperScape Leaderboards Lifetime";
 
 																presenceData.smallImageText = "TRN";
-																presenceData.largeImageKey = "hyperscape";
+																presenceData.largeImageKey = Assets.Hyperscape;
 															} else if (pathname.includes("/career-bests/")) {
 																presenceData.details = "Viewing:";
 																presenceData.state =
 																	"HyperScape Leaderboards Career Bests";
 
 																presenceData.smallImageText = "TRN";
-																presenceData.largeImageKey = "hyperscape";
+																presenceData.largeImageKey = Assets.Hyperscape;
 															} else if (pathname.includes("/playlists/")) {
 																presenceData.details = "Viewing:";
 																presenceData.state =
 																	"HyperScape Leaderboards Playlists";
 
 																presenceData.smallImageText = "TRN";
-																presenceData.largeImageKey = "hyperscape";
+																presenceData.largeImageKey = Assets.Hyperscape;
 															} else if (pathname.includes("/weapons/")) {
 																presenceData.details = "Viewing:";
 																presenceData.state =
 																	"HyperScape Leaderboards Weapons";
 
 																presenceData.smallImageText = "TRN";
-																presenceData.largeImageKey = "hyperscape";
+																presenceData.largeImageKey = Assets.Hyperscape;
 															}
 														} else if (pathname === "/csgo") {
 															presenceData.details = "Viewing Game:";
 															presenceData.state = "CS:GO";
 
 															presenceData.smallImageText = "TRN";
-															presenceData.largeImageKey = "csgo";
+															presenceData.largeImageKey = Assets.Csgo;
 														} else if (pathname.includes("/csgo/profile/")) {
 															const playerName: string =
 																document.querySelector<HTMLSpanElement>(
@@ -377,7 +387,7 @@ presence.on("UpdateData", async () => {
 
 															presenceData.details = "Viewing CSGO Profile:";
 															presenceData.state = playerName;
-															presenceData.smallImageKey = "csgo";
+															presenceData.smallImageKey = Assets.Csgo;
 															presenceData.smallImageText = playerName;
 															presenceData.largeImageKey =
 																document.querySelector<HTMLImageElement>(
@@ -390,13 +400,13 @@ presence.on("UpdateData", async () => {
 															presenceData.state = "CSGO Leaderboard";
 
 															presenceData.smallImageText = "TRN";
-															presenceData.largeImageKey = "csgo";
+															presenceData.largeImageKey = Assets.Csgo;
 														} else if (pathname === "/lol") {
 															presenceData.details = "Viewing Game:";
 															presenceData.state = "Leage of Legends";
 
 															presenceData.smallImageText = "TRN";
-															presenceData.largeImageKey = "lol";
+															presenceData.largeImageKey = Assets.Lol;
 														} else if (pathname.includes("/lol/profile")) {
 															const playerName: string =
 																document.querySelector<HTMLSpanElement>(
@@ -405,7 +415,7 @@ presence.on("UpdateData", async () => {
 
 															presenceData.details = "Viewing LoL Profile:";
 															presenceData.state = playerName;
-															presenceData.smallImageKey = "lol";
+															presenceData.smallImageKey = Assets.Lol;
 															presenceData.smallImageText = playerName;
 															presenceData.largeImageKey =
 																document.querySelector<HTMLImageElement>(
@@ -418,13 +428,13 @@ presence.on("UpdateData", async () => {
 															presenceData.state = "LoL Leaderboard";
 
 															presenceData.smallImageText = "TRN";
-															presenceData.largeImageKey = "lol";
+															presenceData.largeImageKey = Assets.Lol;
 														} else if (pathname === "/splitgate") {
 															presenceData.details = "Viewing Game:";
 															presenceData.state = "Splitgate";
 
 															presenceData.smallImageText = "TRN";
-															presenceData.largeImageKey = "splitgate";
+															presenceData.largeImageKey = Assets.Splitgate;
 														} else if (
 															pathname.includes("/splitgate/profile/")
 														) {
@@ -436,7 +446,7 @@ presence.on("UpdateData", async () => {
 															presenceData.details =
 																"Viewing Splitgate Profile:";
 															presenceData.state = playerName;
-															presenceData.smallImageKey = "splitgate";
+															presenceData.smallImageKey = Assets.Splitgate;
 															presenceData.smallImageText = playerName;
 															presenceData.largeImageKey =
 																document.querySelector<HTMLImageElement>(
@@ -450,20 +460,20 @@ presence.on("UpdateData", async () => {
 																presenceData.state = "Playlist";
 
 																presenceData.smallImageText = "TRN";
-																presenceData.largeImageKey = "splitgate";
+																presenceData.largeImageKey = Assets.Splitgate;
 															} else if (pathname.includes("/stats/")) {
 																presenceData.details = "Viewing Leaderboard:";
 																presenceData.state = "Overall";
 
 																presenceData.smallImageText = "TRN";
-																presenceData.largeImageKey = "splitgate";
+																presenceData.largeImageKey = Assets.Splitgate;
 															}
 														} else if (pathname === "/splitgate/challenges") {
 															presenceData.details = "Viewing:";
 															presenceData.state = "Splitgate Challenges";
 
 															presenceData.smallImageText = "TRN";
-															presenceData.largeImageKey = "splitgate";
+															presenceData.largeImageKey = Assets.Splitgate;
 														} else if (
 															pathname.includes("/splitgate/challenges/")
 														) {
@@ -476,7 +486,7 @@ presence.on("UpdateData", async () => {
 															presenceData.state = challengeTitle;
 
 															presenceData.smallImageText = "TRN";
-															presenceData.largeImageKey = "splitgate";
+															presenceData.largeImageKey = Assets.Splitgate;
 														}
 												}
 											}
@@ -493,7 +503,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing Fortnite Page";
 
 				presenceData.smallImageText = "TRN";
-				presenceData.largeImageKey = "fortnite";
+				presenceData.largeImageKey = Assets.Fn;
 			} else if (pathname.includes("/profile/all/")) {
 				const playerName: string = document.querySelector<HTMLSpanElement>(
 					"#profile > div.trn-card.trn-profile-header > div > h1 > span"
@@ -501,7 +511,7 @@ presence.on("UpdateData", async () => {
 
 				presenceData.details = "Viewing Fortnite Profile:";
 				presenceData.state = playerName;
-				presenceData.smallImageKey = "fortnite";
+				presenceData.smallImageKey = Assets.Fn;
 				presenceData.smallImageText = playerName;
 				presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 					"#profile > div.trn-card.trn-profile-header > div > div.trn-profile-header__avatar.trn-roundavatar.trn-roundavatar--white > img"
@@ -513,7 +523,7 @@ presence.on("UpdateData", async () => {
 						presenceData.state = "Looking for Player";
 
 						presenceData.smallImageText = "TRN";
-						presenceData.largeImageKey = "fortnite";
+						presenceData.largeImageKey = Assets.Fn;
 
 						break;
 					}
@@ -522,7 +532,7 @@ presence.on("UpdateData", async () => {
 						presenceData.state = "Events";
 
 						presenceData.smallImageText = "TRN";
-						presenceData.largeImageKey = "fortnite";
+						presenceData.largeImageKey = Assets.Fn;
 
 						break;
 					}
@@ -531,7 +541,7 @@ presence.on("UpdateData", async () => {
 						presenceData.state = "Power Ranking";
 
 						presenceData.smallImageText = "TRN";
-						presenceData.largeImageKey = "fortnite";
+						presenceData.largeImageKey = Assets.Fn;
 
 						break;
 					}
@@ -540,7 +550,7 @@ presence.on("UpdateData", async () => {
 						presenceData.state = "Hype";
 
 						presenceData.smallImageText = "TRN";
-						presenceData.largeImageKey = "fortnite";
+						presenceData.largeImageKey = Assets.Fn;
 
 						break;
 					}
@@ -549,7 +559,7 @@ presence.on("UpdateData", async () => {
 						presenceData.state = "Earnings";
 
 						presenceData.smallImageText = "TRN";
-						presenceData.largeImageKey = "fortnite";
+						presenceData.largeImageKey = Assets.Fn;
 
 						break;
 					}
@@ -558,7 +568,7 @@ presence.on("UpdateData", async () => {
 						presenceData.state = "Win Streak";
 
 						presenceData.smallImageText = "TRN";
-						presenceData.largeImageKey = "fortnite";
+						presenceData.largeImageKey = Assets.Fn;
 
 						break;
 					}
@@ -568,21 +578,21 @@ presence.on("UpdateData", async () => {
 							presenceData.state = "Single Match Kills";
 
 							presenceData.smallImageText = "TRN";
-							presenceData.largeImageKey = "fortnite";
+							presenceData.largeImageKey = Assets.Fn;
 						} else if (pathname.includes("/leaderboards/")) {
 							if (pathname.includes("/TRNRating")) {
 								presenceData.details = "Viewing Leaderboard:";
 								presenceData.state = "Tracker Network Rating";
 
 								presenceData.smallImageText = "TRN";
-								presenceData.largeImageKey = "fortnite";
+								presenceData.largeImageKey = Assets.Fn;
 							}
 						} else if (pathname === "/challenges") {
 							presenceData.details = "Viewing:";
 							presenceData.state = "Challanges";
 
 							presenceData.smallImageText = "TRN";
-							presenceData.largeImageKey = "fortnite";
+							presenceData.largeImageKey = Assets.Fn;
 						} else if (pathname.includes("/challenges/")) {
 							presenceData.details = "Viewing Challange:";
 							presenceData.state = document.querySelector<HTMLHeadingElement>(
@@ -590,13 +600,13 @@ presence.on("UpdateData", async () => {
 							).textContent;
 
 							presenceData.smallImageText = "TRN";
-							presenceData.largeImageKey = "fortnite";
+							presenceData.largeImageKey = Assets.Fn;
 						} else if (pathname === "/creative") {
 							presenceData.details = "Viewing:";
 							presenceData.state = "Creative Maps";
 
 							presenceData.smallImageText = "TRN";
-							presenceData.largeImageKey = "fortnite";
+							presenceData.largeImageKey = Assets.Fn;
 						}
 				}
 			}

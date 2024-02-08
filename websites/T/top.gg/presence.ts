@@ -2,17 +2,22 @@ const presence = new Presence({
 	clientId: "629380028576301093",
 });
 
+const enum Assets {
+  Dblstaff = "https://cdn.discordapp.com/app-assets/629380028576301093/629385715519717376.png?size=512",
+  Dslregular = "https://cdn.discordapp.com/app-assets/629380028576301093/629452144839360513.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/top.gg/assets/logo.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/T/top.gg/assets/logo.png",
+		largeImageKey: Assets.Logo,
 	};
 	presenceData.details = "Viewing Page:";
 
 	//Discord Bot List
 	if (window.location.pathname.startsWith("/moderation")) {
 		presenceData.details = "Viewing DBL Staff section:";
-		presenceData.largeImageKey = "dblstaff";
+		presenceData.largeImageKey = Assets.Dblstaff;
 
 		switch (window.location.pathname) {
 			case "/moderation": {
@@ -68,7 +73,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Viewing a Discord bot: ${document
 				.querySelector(".entity-header__name")
 				.textContent.trim()}`;
-			presenceData.largeImageKey = "dblstaff";
+			presenceData.largeImageKey = Assets.Dblstaff;
 			presenceData.state = "Bot isn't approved yet";
 		} else {
 			presenceData.details = "Viewing a Discord bot:";
@@ -98,7 +103,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = "Discord Bot List API Documentation";
 	//Discord Server List
 	else if (window.location.pathname.startsWith("/servers")) {
-		presenceData.largeImageKey = "dslregular";
+		presenceData.largeImageKey = Assets.Dslregular
 		if (
 			window.location.pathname.startsWith("/servers/list/") ||
 			window.location.pathname.startsWith("/servers/tag/")

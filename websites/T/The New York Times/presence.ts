@@ -152,7 +152,7 @@ presence.on("UpdateData", async () => {
 			}
 
 			if (isLive) {
-				presenceData.smallImageKey = "live";
+				presenceData.smallImageKey = Assets.Live
 				presenceData.smallImageText = "Live";
 			} else if (setting.articleAuthor && !setting.privacy && author) {
 				presenceData.smallImageKey = await getShortURL(author.src);

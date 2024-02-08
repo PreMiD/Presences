@@ -414,7 +414,7 @@ presence.on("UpdateData", async () => {
 
 				presenceData.details = strings.squad;
 				presenceData.state = squadNames.join(", ");
-				presenceData.smallImageKey = "live";
+				presenceData.smallImageKey = Assets.Live;
 				presenceData.smallImageText = strings.live;
 			}
 
@@ -423,7 +423,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = getElement(".stream-info-card p > a");
 
 				if (getElement(".modview-dock-widget p") !== "Offline") {
-					presenceData.smallImageKey = "live";
+					presenceData.smallImageKey = Assets.Live;
 					presenceData.smallImageText = strings.live;
 				}
 			}
@@ -467,7 +467,7 @@ presence.on("UpdateData", async () => {
 					if (!presenceData.details)
 						presenceData.details = strings.watchingLive;
 
-					presenceData.smallImageKey = "live";
+					presenceData.smallImageKey = Assets.Live;
 					presenceData.smallImageText = strings.live;
 					if (pfp) presenceData.largeImageKey = profilePic;
 
