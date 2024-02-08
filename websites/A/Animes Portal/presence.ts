@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
 			);
 
 			presenceData.details = `Viewing otaku ${username}`;
-			presenceData.smallImageKey = "logo";
+			presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png";
 		}
 	} else if (pathname.startsWith("/animes")) {
 		if (paths[1] === "search" && paths[2]) {
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 					"body > main.animated > div.wrapper > article.rowView > aside.aside > div.cover-holder > img.abs"
 				).src;
 
-			if (image) presenceData.smallImageKey = "logo";
+			if (image) presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png";
 
 			presenceData.details = `Viewing ${name}`;
 			presenceData.largeImageKey = image ?? "logo";
@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
 
 				if (thumb !== "logo" && showThumb) {
 					presenceData.largeImageKey = thumb;
-					presenceData.smallImageKey = "logo";
+					presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png";
 				}
 			}
 		}
@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
 				"body > main.animated > div.wrapper > article.rowView > aside.aside > div.cover-holder > img.abs"
 			).src;
 
-		if (image) presenceData.smallImageKey = "logo";
+		if (image) presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png";
 
 		presenceData.details = "Viewing movie";
 		presenceData.state = name;
@@ -190,9 +190,9 @@ presence.on("UpdateData", async () => {
 
 			if (name) presenceData.details = `Viewing manga ${name}`;
 
-			presenceData.largeImageKey = image ?? "logo";
+			presenceData.largeImageKey = image ?? "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png";
 
-			if (image) presenceData.smallImageKey = "logo";
+			if (image) presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png";
 
 			presenceData.buttons = [
 				{
@@ -234,7 +234,7 @@ presence.on("iFrameData", async (data: IFrameData) => {
 				Math.floor(data.duration)
 			);
 	} else {
-		presenceData.smallImageKey = "start";
+		presenceData.smallImageKey = Assets.Pause;
 		presenceData.smallImageText = "Paused";
 	}
 

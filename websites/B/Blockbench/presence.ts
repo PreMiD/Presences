@@ -15,6 +15,12 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/B/Blockbench/assets/logo.png",
+	Generic = "https://cdn.discordapp.com/app-assets/901821070263336971/901847182079066143.png?size=512",
+	BlockItem = "https://cdn.discordapp.com/app-assets/901821070263336971/901847182410416168.png?size=512",
+	Bedrock = "https://cdn.discordapp.com/app-assets/901821070263336971/901847182301335584.png?size=512",
+	Modded = "https://cdn.discordapp.com/app-assets/901821070263336971/901847182452326420.png?size=512",
+	Optifine = "https://cdn.discordapp.com/app-assets/901821070263336971/901847182251020348.png?size=512",
+	Skin = "https://cdn.discordapp.com/app-assets/901821070263336971/901847182242631681.png?size=512",
 }
 
 presence.on("UpdateData", async () => {
@@ -34,22 +40,22 @@ presence.on("UpdateData", async () => {
 
 		switch (modelType?.toLowerCase()) {
 			case "generic model":
-				presenceData.smallImageKey = "generic";
+				presenceData.smallImageKey = Assets.Generic;
 				break;
 			case "java block/item":
-				presenceData.smallImageKey = "block-item";
+				presenceData.smallImageKey = Assets.BlockItem;
 				break;
 			case "bedrock model":
-				presenceData.smallImageKey = "bedrock";
+				presenceData.smallImageKey = Assets.Bedrock;
 				break;
 			case "modded entity":
-				presenceData.smallImageKey = "modded";
+				presenceData.smallImageKey = Assets.Modded;
 				break;
 			case "optifine entity":
-				presenceData.smallImageKey = "optifine";
+				presenceData.smallImageKey = Assets.Optifine;
 				break;
 			case "minecraft skin":
-				presenceData.smallImageKey = "skin";
+				presenceData.smallImageKey = Assets.Skin;
 				break;
 			default:
 				break;

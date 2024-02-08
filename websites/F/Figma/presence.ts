@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 	if (document.location.pathname === "/") {
 		// Main Page
 
-		presenceData.smallImageKey = "house";
+		presenceData.smallImageKey = assets.home;
 		presenceData.smallImageText = "Figma";
 		presenceData.details = "Homepage";
 	} else if (document.location.pathname.endsWith("/product/")) {

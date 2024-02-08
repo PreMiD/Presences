@@ -10,10 +10,17 @@ const presence = new Presence({ clientId: "858292108195921920" }),
 		"css",
 	];
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/logo.jpg",
+	Snippet = "https://cdn.discordapp.com/app-assets/858292108195921920/868478789498335242.png?size=512",
+	Apps = "https://cdn.discordapp.com/app-assets/858292108195921920/868482859281825832.png?size=512",
+	Lib = "https://cdn.discordapp.com/app-assets/858292108195921920/868484101370433536.png?size=512",
+	Autocode = "https://cdn.discordapp.com/app-assets/858292108195921920/868458144307752990.png?size=512",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/logo.jpg",
+			largeImageKey:Assets.Logo,
 			startTimestamp: startedAt,
 		},
 		{ pathname, hostname } = window.location,
@@ -31,7 +38,7 @@ presence.on("UpdateData", async () => {
 				.textContent.trim();
 		} else presenceData.details = "Looking for Snippets";
 		presenceData.state = `${hostname}/${path[0]}`;
-		presenceData.smallImageKey = "snippet";
+		presenceData.smallImageKey = Assets.Snippet;
 	} else if (pathname.includes("/app")) {
 		if (path.length >= 3) {
 			presenceData.details = document
@@ -39,12 +46,12 @@ presence.on("UpdateData", async () => {
 				.textContent.trim();
 		} else presenceData.details = "Looking for Apps";
 		presenceData.state = `${hostname}/${path[0]}`;
-		presenceData.smallImageKey = "apps";
+		presenceData.smallImageKey = Assets.Apps;
 	} else if (pathname.includes("/lib")) {
 		if (path.length >= 3) presenceData.details = `Reading ${path[1]} docs`;
 		else presenceData.details = "Looking for Docs";
 		presenceData.state = `${hostname}/${path[0]}`;
-		presenceData.smallImageKey = "lib";
+		presenceData.smallImageKey = Assets.Lib;
 	} else if (pathname.includes("/mp/")) {
 		const filename = document
 			.querySelector("div.filename > [data-filename]")
@@ -69,11 +76,11 @@ presence.on("UpdateData", async () => {
 
 			presenceData.details = replaceTemplate(details);
 			presenceData.state = replaceTemplate(state);
-			presenceData.smallImageKey = "autocode";
+			presenceData.smallImageKey = Assets.Autocode;
 
 			if (extension && supportedLanguages.includes(extension))
 				presenceData.largeImageKey = `lang-${extension}`;
-			else presenceData.largeImageKey = "autocode";
+			else presenceData.largeImageKey =Assets.Autocode;
 		}
 	}
 

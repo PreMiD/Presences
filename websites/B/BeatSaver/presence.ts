@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
 					".list-group-item.d-flex.justify-content-between:nth-child(2) > span"
 				).textContent === "Bot"
 			) {
-				presenceData.smallImageKey = "showauto";
+				presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/837997079208525835/838839514649853984.png?size=512";
 				presenceData.smallImageText = "Made using AI";
 			}
 

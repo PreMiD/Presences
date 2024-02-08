@@ -15,9 +15,17 @@ presence.on(
 	}
 );
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/B/Blkom/assets/logo.png",
+	Location = "https://cdn.discordapp.com/app-assets/769568486263095327/770067302322143262.png?size=512",
+	Discovery = "https://cdn.discordapp.com/app-assets/769568486263095327/770067301809913888.png?size=512",
+	Blog = "https://cdn.discordapp.com/app-assets/769568486263095327/770067301412110376.png?size=512",
+	Profile = "https://cdn.discordapp.com/app-assets/769568486263095327/770067302736986122.png?size=512",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/B/Blkom/assets/logo.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 
@@ -70,7 +78,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = document.querySelector(".heading > a").textContent;
 		presenceData.state = "Downloading Anime";
 	} else if (location.pathname.startsWith("/anime/")) {
-		presenceData.smallImageKey = "location";
+		presenceData.smallImageKey = Assets.Location;
 		presenceData.smallImageText = "Viewing";
 		presenceData.details = document
 			.querySelector(".name")
@@ -78,39 +86,39 @@ presence.on("UpdateData", async () => {
 			.slice(0, -5);
 		presenceData.state = "Viewing an Anime";
 	} else if (location.pathname.startsWith("/anime-list")) {
-		presenceData.smallImageKey = "discovery";
+		presenceData.smallImageKey = Assets.Discovery;
 		presenceData.smallImageText = "Browsing";
 		presenceData.details = "Browsing for Anime";
 	} else if (location.pathname.startsWith("/series-list")) {
-		presenceData.smallImageKey = "discovery";
+		presenceData.smallImageKey = Assets.Discovery;
 		presenceData.smallImageText = "Browsing";
 		presenceData.details = "Browsing for Series";
 	} else if (location.pathname.startsWith("/movie-list")) {
-		presenceData.smallImageKey = "discovery";
+		presenceData.smallImageKey = Assets.Discovery;
 		presenceData.smallImageText = "Browsing";
 		presenceData.details = "Browsing for Movie";
 	} else if (location.pathname.startsWith("/ova-list")) {
-		presenceData.smallImageKey = "discovery";
+		presenceData.smallImageKey = Assets.Discovery;
 		presenceData.smallImageText = "Browsing";
 		presenceData.details = "Browsing for Ova";
 	} else if (location.pathname.startsWith("/ona-list")) {
-		presenceData.smallImageKey = "discovery";
+		presenceData.smallImageKey = Assets.Discovery;
 		presenceData.smallImageText = "Browsing";
 		presenceData.details = "Browsing for Ona";
 	} else if (location.pathname.startsWith("/special-list")) {
-		presenceData.smallImageKey = "discovery";
+		presenceData.smallImageKey = Assets.Discovery;
 		presenceData.smallImageText = "Browsing";
 		presenceData.details = "Browsing for Special";
 	} else if (location.pathname.startsWith("/premium")) {
-		presenceData.smallImageKey = "discovery";
+		presenceData.smallImageKey = Assets.Discovery;
 		presenceData.smallImageText = "Discovering";
 		presenceData.details = "Discovering Premium";
 	} else if (location.pathname === "/blog") {
-		presenceData.smallImageKey = "discovery";
+		presenceData.smallImageKey = Assets.Discovery;
 		presenceData.smallImageText = "Discovering";
 		presenceData.details = "Discovering Blog";
 	} else if (location.pathname.startsWith("/post")) {
-		presenceData.smallImageKey = "blog";
+		presenceData.smallImageKey = Assets.Blog;
 		presenceData.smallImageText = "Reading";
 		presenceData.details = document
 			.querySelector(".post-title")
@@ -119,14 +127,14 @@ presence.on("UpdateData", async () => {
 			.querySelector(".publisher")
 			.textContent.trim()}'s Post`;
 	} else if (location.pathname.startsWith("/timeline")) {
-		presenceData.smallImageKey = "discovery";
+		presenceData.smallImageKey = Assets.Discovery;
 		presenceData.smallImageText = "Discovering";
 		presenceData.details = "Discovering Timeline";
 	} else if (
 		location.pathname.startsWith("/user") &&
 		location.pathname.includes("/ratings")
 	) {
-		presenceData.smallImageKey = "profile";
+		presenceData.smallImageKey = Assets.Profile;
 		presenceData.smallImageText = "Viewing";
 		presenceData.details = "Ratings List";
 		presenceData.state = `Viewing ${document
@@ -136,7 +144,7 @@ presence.on("UpdateData", async () => {
 		location.pathname.startsWith("/user") &&
 		location.pathname.includes("/watching")
 	) {
-		presenceData.smallImageKey = "profile";
+		presenceData.smallImageKey = Assets.Profile;
 		presenceData.smallImageText = "Viewing";
 		presenceData.details = "Watching List";
 		presenceData.state = `Viewing ${document
@@ -146,7 +154,7 @@ presence.on("UpdateData", async () => {
 		location.pathname.startsWith("/user") &&
 		location.pathname.includes("/completed")
 	) {
-		presenceData.smallImageKey = "profile";
+		presenceData.smallImageKey = Assets.Profile;
 		presenceData.smallImageText = "Viewing";
 		presenceData.details = "Completed List";
 		presenceData.state = `Viewing ${document
@@ -156,7 +164,7 @@ presence.on("UpdateData", async () => {
 		location.pathname.startsWith("/user") &&
 		location.pathname.includes("/on-hold")
 	) {
-		presenceData.smallImageKey = "profile";
+		presenceData.smallImageKey = Assets.Profile;
 		presenceData.smallImageText = "Viewing";
 		presenceData.details = "On-Hold List";
 		presenceData.state = `Viewing ${document
@@ -166,7 +174,7 @@ presence.on("UpdateData", async () => {
 		location.pathname.startsWith("/user") &&
 		location.pathname.includes("/dropped")
 	) {
-		presenceData.smallImageKey = "profile";
+		presenceData.smallImageKey = Assets.Profile;
 		presenceData.smallImageText = "Viewing";
 		presenceData.details = "Dropped List";
 		presenceData.state = `Viewing ${document
@@ -176,14 +184,14 @@ presence.on("UpdateData", async () => {
 		location.pathname.startsWith("/user") &&
 		location.pathname.includes("/plan-to-watch")
 	) {
-		presenceData.smallImageKey = "profile";
+		presenceData.smallImageKey = Assets.Profile;
 		presenceData.smallImageText = "Viewing";
 		presenceData.details = "Planned List";
 		presenceData.state = `Viewing ${document
 			.querySelector(".profile-usertitle-name")
 			.textContent.trim()}'s Profile`;
 	} else if (location.pathname.startsWith("/user")) {
-		presenceData.smallImageKey = "profile";
+		presenceData.smallImageKey = Assets.Profile;
 		presenceData.smallImageText = "Viewing";
 		presenceData.details = "Main Page";
 		presenceData.state = `Viewing ${document

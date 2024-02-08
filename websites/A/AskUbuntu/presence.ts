@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = (
 			document.querySelector("#bigsearch > div > input") as HTMLInputElement
 		).value;
-		presenceData.smallImageKey = "logo";
+		presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/AskUbuntu/assets/logo.png";
 	} else if (page.includes("/users")) {
 		presenceData.details = "Viewing User Profile:";
 		presenceData.state = document

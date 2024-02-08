@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = titleContent;
 			if (logo) {
 				presenceData.largeImageKey = image;
-				presenceData.smallImageKey = "animego_logo";
+				presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeGO/assets/logo.jpg";
 			}
 			if (buttons) {
 				presenceData.buttons = [
