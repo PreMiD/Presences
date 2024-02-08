@@ -3,12 +3,21 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+	const enum Assets {
+		Logo =
+		"https://cdn.rcd.gg/PreMiD/websites/L/LeoSight/assets/logo.png",
+		Lsminilogo = "https://cdn.discordapp.com/app-assets/888141162488143893/888420080197722213.png?size=512",
+		Artic = "https://cdn.discordapp.com/app-assets/888141162488143893/888736651860410378.png?size=512",
+		Ctf = "https://cdn.discordapp.com/app-assets/888141162488143893/888736652644712528.png?size=512",
+		Eco = "https://cdn.discordapp.com/app-assets/888141162488143893/888736873277693972.png?size=512",
+		Guard = "https://cdn.discordapp.com/app-assets/888141162488143893/888756771030708254.png?size=512",
+	}
+
 let item, item2;
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/L/LeoSight/assets/logo.png",
-			smallImageKey: "lsminilogo",
+			largeImageKey: Assets.Logo,
+			smallImageKey: Assets.Lsminilogo,
 			smallImageText: "leosight.cz",
 			startTimestamp: browsingTimestamp,
 		},
@@ -266,7 +275,7 @@ presence.on("UpdateData", async () => {
 									}
 									default:
 										if (window.location.href.includes("artic")) {
-											presenceData.smallImageKey = "artic";
+											presenceData.smallImageKey = Assets.Artic;
 											presenceData.smallImageText = "artic.leosight.cz";
 											presenceData.details = "Artic";
 											if (path === "/" || path === "")
@@ -425,7 +434,7 @@ presence.on("UpdateData", async () => {
 													presenceData.state = "Seznam uživatelů";
 											}
 										} else if (window.location.href.includes("ctf")) {
-											presenceData.smallImageKey = "ctf";
+											presenceData.smallImageKey = Assets.Ctf;
 											presenceData.smallImageText = "ctf.leosight.cz";
 											presenceData.details = "Leosight CTF";
 											if (path.includes("login.php"))
@@ -433,11 +442,11 @@ presence.on("UpdateData", async () => {
 											else if (path.includes("index.php"))
 												presenceData.state = "Odvařuje si mozek";
 										} else if (window.location.href.includes("eco")) {
-											presenceData.smallImageKey = "eco";
+											presenceData.smallImageKey = Assets.Eco;
 											presenceData.smallImageText = "eco.leosight.cz";
 											presenceData.details = "Hraje Leosight ECO";
 										} else if (window.location.href.includes("guard")) {
-											presenceData.smallImageKey = "guard";
+											presenceData.smallImageKey = Assets.Guard;
 											presenceData.smallImageText = "guard.leosight.cz";
 											presenceData.details = "Leosigh Guard";
 											if (path === "" || path === "/")

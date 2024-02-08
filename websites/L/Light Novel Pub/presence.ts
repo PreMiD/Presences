@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = document
 			.querySelector('meta[property="og:image"]')
 			.getAttribute("content");
-		presenceData.smallImageKey = "logo";
+		presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/L/Light%20Novel%20Pub/assets/logo.png";
 		switch (true) {
 			case pathname.endsWith("-12032016"):
 				presenceData.details = "Viewing a Novel";

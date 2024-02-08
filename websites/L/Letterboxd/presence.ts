@@ -35,13 +35,16 @@ function filterIterable<T extends Element>(
 	return Array.from(itr).find((element, ind) => fnc(element, ind));
 }
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/L/Letterboxd/assets/logo.png",
+}
+
 presence.on("UpdateData", async () => {
 	const path = document.location.pathname.slice(1).split("/");
 	path.pop();
 
 	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/L/Letterboxd/assets/logo.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -106,7 +109,7 @@ presence.on("UpdateData", async () => {
 					path[0] === "director" ? "director" : "actor"
 				}: ${name}`;
 				presenceData.largeImageKey = pfp;
-				presenceData.smallImageKey = "final";
+				presenceData.smallImageKey = Assets.Logo;
 				presenceData.buttons = generateButtonText(presenceData.details);
 
 				break;
@@ -182,7 +185,7 @@ presence.on("UpdateData", async () => {
 										).textContent
 									}`;
 									presenceData.largeImageKey = getImageURLByAlt(title);
-									presenceData.smallImageKey = "final";
+									presenceData.smallImageKey = Assets.Logo;
 									delete presenceData.startTimestamp;
 									presenceData.buttons = [
 										{ label: "Watch trailer", url: window.location.href },
@@ -224,7 +227,7 @@ presence.on("UpdateData", async () => {
 									presenceData.largeImageKey = getImageURLByAlt(
 										clarifyString(title.textContent)
 									);
-									presenceData.smallImageKey = "final";
+									presenceData.smallImageKey = Assets.Logo;
 								}
 							} else {
 								const header = document.querySelector("#featured-film-header"),
@@ -248,7 +251,7 @@ presence.on("UpdateData", async () => {
 									{ label: `View ${title}`, url: window.location.href },
 								];
 								presenceData.largeImageKey = getImageURLByAlt(title);
-								presenceData.smallImageKey = "final";
+								presenceData.smallImageKey = Assets.Logo;
 								break;
 							}
 						}
@@ -362,7 +365,7 @@ presence.on("UpdateData", async () => {
 								name.previousElementSibling
 									.firstElementChild as HTMLImageElement
 							).src;
-							presenceData.smallImageKey = "final";
+							presenceData.smallImageKey = Assets.Logo;
 							presenceData.buttons = [
 								{
 									label: `View ${name.textContent}'s stats`,
@@ -426,7 +429,7 @@ presence.on("UpdateData", async () => {
 							presenceData.largeImageKey = getImageURLByAlt(
 								clarifyString(title.textContent)
 							);
-							presenceData.smallImageKey = "final";
+							presenceData.smallImageKey = Assets.Logo;
 
 							break;
 						}
@@ -506,7 +509,7 @@ presence.on("UpdateData", async () => {
 						document.querySelector("#avatar-zoom")
 							.previousElementSibling as HTMLImageElement
 					).src;
-					presenceData.smallImageKey = "final";
+					presenceData.smallImageKey = Assets.Logo;
 					presenceData.buttons = [
 						{ label: `View ${name}`, url: window.location.href },
 					];
