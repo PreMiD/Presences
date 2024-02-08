@@ -168,7 +168,7 @@ presence.on("UpdateData", async () => {
 			"#app > div > div > nav > ul > li > div > div > div"
 		);
 		if (!members[1].textContent.includes("Please login!")) {
-			presenceData.smallImageKey = "user";
+			presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/846385772688834591/846598555087274004.png?size=512";
 			if (!privacy) presenceData.smallImageText = members[0].textContent;
 		}
 	}

@@ -21,10 +21,27 @@ const presence = new Presence({
 let lastGameChange: number = null,
 	lastGame: string = null;
 
+	const enum Assets {
+		Logo =
+		"https://cdn.rcd.gg/PreMiD/websites/N/Newgrounds/assets/logo.jpeg",
+		Art = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780319641680.png?size=512",
+		Audio = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780349132830.png?size=512",
+		Movies = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780504977428.png?size=512",
+		Fav = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780605378560.png?size=512",
+		AudioPlay = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780709842995.png?size=512",
+		AudioPause = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780818763846.png?size=512",
+		PM = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780819025920.png?size=512",
+		Forum = "https://cdn.discordapp.com/app-assets/779342189884997633/779363802956693545.png?size=512",
+		Games = "https://cdn.discordapp.com/app-assets/779342189884997633/779364961558200340.png?size=512",
+		MoviesPause = "https://cdn.discordapp.com/app-assets/779342189884997633/779366488745836564.png?size=512",
+		MoviesPlay = "https://cdn.discordapp.com/app-assets/779342189884997633/779366488750293042.png?size=512",
+		GamesPlay = "https://cdn.discordapp.com/app-assets/779342189884997633/779366488800755783.png?size=512",
+		User = "https://cdn.discordapp.com/app-assets/779342189884997633/779372962561392650.png?size=512",
+	}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/N/Newgrounds/assets/logo.jpeg",
+			largeImageKey: Assets.Logo,
 		},
 		itemName = document.querySelector('[itemprop="name"]')
 			? document.querySelector('[itemprop="name"]').textContent
@@ -34,7 +51,7 @@ presence.on("UpdateData", async () => {
 	if (location.hostname !== "www.newgrounds.com") {
 		const userName = document.querySelector(".user-link").textContent;
 		presenceData.details = "Viewing a user's profile";
-		presenceData.smallImageKey = "user";
+		presenceData.smallImageKey = Assets.User;
 		presenceData.smallImageText = "User Profile";
 
 		if (await presence.getSetting<boolean>("showprofilename")) {
@@ -69,15 +86,15 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing a user's trophies";
 	} else if (document.location.pathname.startsWith("/movies")) {
 		presenceData.details = "Browsing movies";
-		presenceData.smallImageKey = "movies";
+		presenceData.smallImageKey = Assets.Movies;
 		presenceData.smallImageText = "Movies";
 	} else if (document.location.pathname.startsWith("/games")) {
 		presenceData.details = "Browsing games";
-		presenceData.smallImageKey = "games";
+		presenceData.smallImageKey = Assets.Games;
 		presenceData.smallImageText = "Games";
 	} else if (document.location.pathname.startsWith("/audio")) {
 		presenceData.details = "Browsing audio";
-		presenceData.smallImageKey = "audio";
+		presenceData.smallImageKey = Assets.Audio;
 		presenceData.smallImageText = "Audio";
 		if (document.location.pathname.startsWith("/audio/listen")) {
 			presenceData.details = "Listening to audio";
@@ -94,7 +111,7 @@ presence.on("UpdateData", async () => {
 					];
 				}
 			}
-			presenceData.smallImageKey = "audio_pause";
+			presenceData.smallImageKey = Assets.AudioPause;
 			presenceData.smallImageText = "Audio - Paused";
 			if (
 				document.querySelector('#audio-listen-play[style="display: none;"]')
@@ -106,13 +123,13 @@ presence.on("UpdateData", async () => {
 							document.querySelector("#audio-listen-duration").textContent
 						);
 				}
-				presenceData.smallImageKey = "audio_play";
+				presenceData.smallImageKey = Assets.AudioPlay;
 				presenceData.smallImageText = "Audio - Playing";
 			}
 		}
 	} else if (document.location.pathname.startsWith("/art")) {
 		presenceData.details = "Browsing art";
-		presenceData.smallImageKey = "art";
+		presenceData.smallImageKey = Assets.Art;
 		presenceData.smallImageText = "Art";
 		if (document.location.pathname.startsWith("/art/view")) {
 			presenceData.details = "Viewing art";
@@ -153,7 +170,7 @@ presence.on("UpdateData", async () => {
 					}
 					// Some movies might not have the NG player
 					if (document.querySelector(".ng-video-player")) {
-						presenceData.smallImageKey = "movies_pause";
+						presenceData.smallImageKey = Assets.MoviesPause;
 						presenceData.smallImageText = "Movies - Paused";
 						if (
 							document.querySelector(
@@ -169,11 +186,11 @@ presence.on("UpdateData", async () => {
 											.textContent
 									);
 							}
-							presenceData.smallImageKey = "movies_play";
+							presenceData.smallImageKey = Assets.MoviesPlay;
 							presenceData.smallImageText = "Movies - Playing";
 						}
 					} else {
-						presenceData.smallImageKey = "movies";
+						presenceData.smallImageKey = Assets.Movies;
 						presenceData.smallImageText = "Movies";
 					}
 					break;
@@ -195,7 +212,7 @@ presence.on("UpdateData", async () => {
 							];
 						}
 					}
-					presenceData.smallImageKey = "games_play";
+					presenceData.smallImageKey = Assets.GamesPlay;
 					presenceData.smallImageText = "Games - Playing";
 					if (await presence.getSetting<boolean>("timestamp"))
 						presenceData.startTimestamp = lastGameChange;
@@ -204,14 +221,14 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (document.location.pathname.startsWith("/bbs")) {
 		presenceData.details = "Browsing the forums";
-		presenceData.smallImageKey = "forum";
+		presenceData.smallImageKey =  Assets.Forum;
 		presenceData.smallImageText = "Forums";
 		if (document.location.pathname.startsWith("/bbs/search/author/")) {
 			const [, userName] = document
 				.querySelector(".pod-head > .search")
 				.textContent.split('"');
 			presenceData.details = "Viewing a user's posts";
-			presenceData.smallImageKey = "user";
+			presenceData.smallImageKey = Assets.User;
 			presenceData.smallImageText = "User Profile";
 			if (await presence.getSetting<boolean>("showprofilename")) {
 				presenceData.state =
@@ -259,7 +276,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Browsing their feed";
 	else if (document.location.pathname.startsWith("/pm")) {
 		presenceData.details = "Browsing Private Messages";
-		presenceData.smallImageKey = "pm";
+		presenceData.smallImageKey =Assets.PM;
 		presenceData.smallImageText = "Private Messages";
 	} else if (document.location.pathname.startsWith("/dump"))
 		presenceData.details = "in Dumping Grounds";
