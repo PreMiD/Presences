@@ -46,14 +46,14 @@ presence.on("UpdateData", async function () {
 		document.location.hostname === "joyn.de"
 	) {
 		if (document.querySelector(".lk71lm-0.htJLsh")) {
-			presenceData.details = (await strings).searching;
+			presenceData.details = strings.searching;
 			presenceData.state =
 				document.querySelector<HTMLInputElement>(".search-input").value;
 		} else if (
 			(urlpath[1] === "" || document.location.pathname.includes("/#home")) &&
 			urlpath[2] !== ""
 		)
-			presenceData.details = (await strings).browsing;
+			presenceData.details = strings.browsing;
 		else {
 			switch (urlpath[1]) {
 				case "compilation": {
@@ -77,7 +77,7 @@ presence.on("UpdateData", async function () {
 				}
 				case "filme": {
 					const film = document.querySelector(".artLogo");
-					presenceData.details = (await strings).viewMovie;
+					presenceData.details = strings.viewMovie;
 					if (film) presenceData.state = (film as HTMLImageElement).alt;
 					if (!film)
 						presenceData.state = document.querySelector(".hXdaOG").textContent;
@@ -85,7 +85,7 @@ presence.on("UpdateData", async function () {
 					if (setting.showButtons) {
 						presenceData.buttons = [
 							{
-								label: (await strings).watchMovie,
+								label: strings.watchMovie,
 								url: `https://www.joyn.de/filme/${urlpath[2]}`,
 							},
 						];
@@ -103,7 +103,7 @@ presence.on("UpdateData", async function () {
 					if (setting.showButtons) {
 						presenceData.buttons = [
 							{
-								label: (await strings).watchSeries,
+								label: strings.watchSeries,
 								url: `https://www.joyn.de/serien/${urlpath[2]}`,
 							},
 						];
@@ -118,9 +118,9 @@ presence.on("UpdateData", async function () {
 							document.location.pathname.includes("/filme") ||
 							document.location.pathname.includes("/sport"))
 					)
-						presenceData.details = (await strings).browsing;
+						presenceData.details = strings.browsing;
 					else if (urlpath[1] === "channels") {
-						presenceData.details = (await strings).browsing;
+						presenceData.details = strings.browsing;
 						presenceData.state = document.querySelector(".bISbKZ").textContent;
 					} else if (urlpath[1] === "play" && urlpath[2] === "filme") {
 						const videoStartTime = Date.now();
@@ -138,15 +138,15 @@ presence.on("UpdateData", async function () {
 									video.duration;
 							}
 							presenceData.smallImageKey = Assets.Play;
-							presenceData.smallImageText = (await strings).play;
+							presenceData.smallImageText = strings.play;
 						} else {
 							presenceData.smallImageKey = Assets.Pause;
-							presenceData.smallImageText = (await strings).pause;
+							presenceData.smallImageText = strings.pause;
 						}
 						if (setting.showButtons) {
 							presenceData.buttons = [
 								{
-									label: (await strings).watchMovie,
+									label: strings.watchMovie,
 									url: `https://www.joyn.de/filme/${urlpath[3]}`,
 								},
 							];
@@ -165,16 +165,16 @@ presence.on("UpdateData", async function () {
 									video.duration;
 							}
 							presenceData.smallImageKey = Assets.Play;
-							presenceData.smallImageText = (await strings).play;
+							presenceData.smallImageText = strings.play;
 						} else {
 							presenceData.smallImageKey = Assets.Pause;
-							presenceData.smallImageText = (await strings).pause;
+							presenceData.smallImageText = strings.pause;
 						}
 
 						if (setting.showButtons) {
 							presenceData.buttons = [
 								{
-									label: (await strings).watchSeries,
+									label: strings.watchSeries,
 									url: `https://www.joyn.de/serien/${urlpath[3]}`,
 								},
 							];
@@ -192,10 +192,10 @@ presence.on("UpdateData", async function () {
 									video.duration;
 							}
 							presenceData.smallImageKey = Assets.Play;
-							presenceData.smallImageText = (await strings).play;
+							presenceData.smallImageText = strings.play;
 						} else {
 							presenceData.smallImageKey = Assets.Pause;
-							presenceData.smallImageText = (await strings).pause;
+							presenceData.smallImageText = strings.pause;
 						}
 					} else if (urlpath[1] === "play" && urlpath[2] === "live-tv") {
 						presenceData.details = document.title.replace(
@@ -203,8 +203,8 @@ presence.on("UpdateData", async function () {
 							""
 						);
 						presenceData.state = "Live-TV";
-						presenceData.smallImageKey = "live";
-						presenceData.smallImageText = (await strings).live;
+						presenceData.smallImageKey = Assets.Live;
+						presenceData.smallImageText = strings.live;
 
 						if (setting.showButtons) {
 							presenceData.buttons = [
@@ -227,10 +227,10 @@ presence.on("UpdateData", async function () {
 									video.duration;
 							}
 							presenceData.smallImageKey = Assets.Play;
-							presenceData.smallImageText = (await strings).play;
+							presenceData.smallImageText = strings.play;
 						} else {
 							presenceData.smallImageKey = Assets.Pause;
-							presenceData.smallImageText = (await strings).pause;
+							presenceData.smallImageText = strings.pause;
 						}
 
 						if (setting.showButtons) {
@@ -255,10 +255,10 @@ presence.on("UpdateData", async function () {
 									video.duration;
 							}
 							presenceData.smallImageKey = Assets.Play;
-							presenceData.smallImageText = (await strings).play;
+							presenceData.smallImageText = strings.play;
 						} else {
 							presenceData.smallImageKey = Assets.Pause;
-							presenceData.smallImageText = (await strings).pause;
+							presenceData.smallImageText = strings.pause;
 						}
 
 						if (setting.showButtons) {
