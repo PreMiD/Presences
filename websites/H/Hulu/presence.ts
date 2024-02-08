@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
 	} else if (path.includes("/search")) {
 		const input: HTMLInputElement = document.querySelector(".cu-search-input");
 		details = "Searching";
-		smallImageKey = "search";
+		smallImageKey = Assets.Search;
 		smallImageText = (await strings).search;
 		if (input && input.value.length > 0) state = input.value;
 	} else if (path.includes("/live")) {
