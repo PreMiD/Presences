@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing channel:";
 				presenceData.state = channelTitle;
 				presenceData.largeImageKey = pageType.toLowerCase();
-				presenceData.smallImageKey = "logo";
+				presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/logo.png";
 				presenceData.smallImageText = document.title;
 				presenceData.buttons = [{ label: "View Channel", url: location.href }];
 
@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
 					delete presenceData.startTimestamp;
 
 					presenceData.details = title;
-					presenceData.smallImageKey = "live";
+					presenceData.smallImageKey = Assets.Live;
 					presenceData.smallImageText = "Live";
 					presenceData.buttons = [
 						{
