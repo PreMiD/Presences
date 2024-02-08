@@ -3,54 +3,30 @@ const presence = new Presence({
 	}),
 	/* eslint-disable camelcase */
 	assets: Record<string, string> = {
-		char_box:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/0.png",
-		char_crt:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/1.png",
-		char_vox:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/2.png",
-		char_blk:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/3.png",
-		char_crg:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/4.png",
-		char_qua:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/5.png",
-		char_inf:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/6.png",
-		map_attack:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/7.png",
-		map_area:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/8.png",
-		map_combat:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/9.png",
-		map_point:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/10.png",
-		map_final:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/11.png",
-		map_vector:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/12.png",
-		map_location:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/13.png",
-		map_position:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/14.png",
-		map_dig:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/15.png",
-		map_battle:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/16.png",
-		map_war:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/17.png",
-		map_platform:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/18.png",
-		map_big:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/19.png",
-		map_excavate:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/20.png",
-		map_unearth:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/21.png",
-		"20xx":
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/22.png",
-		char_cub:
-			"https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/23.png",
+		char_box: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/0.png",
+		char_crt: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/1.png",
+		char_vox: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/2.png",
+		char_blk: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/3.png",
+		char_crg: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/4.png",
+		char_qua: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/5.png",
+		char_inf: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/6.png",
+		map_attack: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/7.png",
+		map_area: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/8.png",
+		map_combat: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/9.png",
+		map_point: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/10.png",
+		map_final: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/11.png",
+		map_vector: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/12.png",
+		map_location: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/13.png",
+		map_position: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/14.png",
+		map_dig: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/15.png",
+		map_battle: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/16.png",
+		map_war: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/17.png",
+		map_platform: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/18.png",
+		map_big: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/19.png",
+		map_excavate: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/20.png",
+		map_unearth: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/21.png",
+		"20xx": "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/22.png",
+		char_cub: "https://cdn.rcd.gg/PreMiD/websites/0-9/20XX/assets/23.png",
 	};
 /* eslint-enable camelcase */
 

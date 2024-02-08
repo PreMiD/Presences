@@ -3,21 +3,15 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	assets = {
-		users:
-			"https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/1.png",
+		users: "https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/1.png",
 		game: "https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/2.png",
 		dlc: "https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/3.png",
 		tool: "https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/4.png",
-		config:
-			"https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/5.png",
-		unknown:
-			"https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/6.png",
-		music:
-			"https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/7.png",
-		application:
-			"https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/8.png",
-		video:
-			"https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/9.png",
+		config: "https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/5.png",
+		unknown: "https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/6.png",
+		music: "https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/7.png",
+		application: "https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/8.png",
+		video: "https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/9.png",
 	};
 
 presence.on("UpdateData", async () => {

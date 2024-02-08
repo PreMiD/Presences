@@ -55,8 +55,7 @@ const assets = {
 	js: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/17.png",
 	ts: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/18.png",
 	css: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/19.png",
-	swift:
-		"https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/20.png",
+	swift: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/20.png",
 	html: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/21.png",
 	java: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/22.png",
 	cpp: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/23.png",

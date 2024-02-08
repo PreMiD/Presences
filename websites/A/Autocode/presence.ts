@@ -19,18 +19,12 @@ const enum Assets {
 }
 
 const assets = {
-	"lang-html":
-		"https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/4.png",
-	"lang-css":
-		"https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/5.png",
-	"lang-js":
-		"https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/6.png",
-	"lang-json":
-		"https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/7.png",
-	"lang-txt":
-		"https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/8.png",
-	"lang-md":
-		"https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/9.png",
+	"lang-html": "https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/4.png",
+	"lang-css": "https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/5.png",
+	"lang-js": "https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/6.png",
+	"lang-json": "https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/7.png",
+	"lang-txt": "https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/8.png",
+	"lang-md": "https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/9.png",
 	"lang-gitignore":
 		"https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/10.png",
 };

@@ -28,30 +28,22 @@ const assets: Record<string, string> = {
 		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/3.png",
 	node_with_sqlite:
 		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/4.png",
-	ruby_on_rails:
-		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/5.png",
-	python_2:
-		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/6.png",
-	javascript:
-		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/7.png",
+	ruby_on_rails: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/5.png",
+	python_2: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/6.png",
+	javascript: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/7.png",
 	go: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/8.png",
 	authentication_with_ruby_on_rails:
 		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/9.png",
 	java: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/10.png",
-	python_3:
-		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/11.png",
-	swift:
-		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/12.png",
+	python_3: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/11.png",
+	swift: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/12.png",
 	r: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/13.png",
-	kotlin:
-		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/14.png",
+	kotlin: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/14.png",
 	ruby: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/15.png",
 	sql: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/16.png",
 	php: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/17.png",
-	csharp:
-		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/18.png",
-	cplusplus:
-		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/19.png",
+	csharp: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/18.png",
+	cplusplus: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/19.png",
 };
 /* eslint-enable camelcase */
 

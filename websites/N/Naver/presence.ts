@@ -82,18 +82,13 @@ const presence = new Presence({
 	},
 	/* eslint-disable camelcase */
 	assets: Record<string, string> = {
-		naver:
-			"https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/0.png",
-		naver_webtoon:
-			"https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/1.png",
-		naver_now:
-			"https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/2.png",
-		naver_tv:
-			"https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/3.png",
+		naver: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/0.png",
+		naver_webtoon: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/1.png",
+		naver_now: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/2.png",
+		naver_tv: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/3.png",
 		naver_tv_play: Assets.Play,
 		naver_tv_pause: Assets.Pause,
-		naver_papago:
-			"https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/4.png",
+		naver_papago: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/4.png",
 		naver_now_play: Assets.Play,
 		naver_now_pause: Assets.Pause,
 		naver_browse: Assets.Search,
@@ -105,11 +100,9 @@ const presence = new Presence({
 		naver_now_live: Assets.Live,
 		naver_book: Assets.Reading,
 		naver_webtoon_book: Assets.Reading,
-		naver_blog:
-			"https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/6.png",
+		naver_blog: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/6.png",
 		naver_blog_browse: Assets.Search,
-		naver_cafe:
-			"https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/7.png",
+		naver_cafe: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/7.png",
 		naver_cafe_browse: Assets.Search,
 		book: Assets.Reading,
 		browse: Assets.Search,

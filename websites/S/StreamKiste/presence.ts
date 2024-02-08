@@ -138,8 +138,7 @@ const IMAGES = {
 	LOGO: "https://cdn.rcd.gg/PreMiD/websites/S/StreamKiste/assets/0.png",
 	PLAY: Assets.Play,
 	PAUSE: Assets.Pause,
-	BROWSE:
-		"https://cdn.rcd.gg/PreMiD/websites/S/StreamKiste/assets/1.png",
+	BROWSE: "https://cdn.rcd.gg/PreMiD/websites/S/StreamKiste/assets/1.png",
 	SEARCH: Assets.Search,
 };
 

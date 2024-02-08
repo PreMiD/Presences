@@ -106,26 +106,16 @@ const enum Assets {
 
 /* eslint-disable camelcase */
 const assets: Record<string, string> = {
-	icloud_calendar:
-		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/8.png",
-	icloud_photos:
-		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/9.png",
-	icloud_mail:
-		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/10.png",
-	icloud_contacts:
-		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/11.png",
-	icloud_notes:
-		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/12.png",
-	icloud_find:
-		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/13.png",
-	icloud_pages:
-		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/14.png",
-	icloud_keynote:
-		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/5.png",
-	icloud_reminders:
-		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/15.png",
-	icloud_numbers:
-		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/16.png",
+	icloud_calendar: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/8.png",
+	icloud_photos: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/9.png",
+	icloud_mail: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/10.png",
+	icloud_contacts: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/11.png",
+	icloud_notes: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/12.png",
+	icloud_find: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/13.png",
+	icloud_pages: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/14.png",
+	icloud_keynote: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/5.png",
+	icloud_reminders: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/15.png",
+	icloud_numbers: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/16.png",
 };
 /* eslint-enable camelcase */
 

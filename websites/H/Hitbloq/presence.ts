@@ -4,48 +4,35 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	assets = {
 		s90e: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/0.png",
-		s360h:
-			"https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/1.png",
-		s360e:
-			"https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/2.png",
+		s360h: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/1.png",
+		s360e: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/2.png",
 		s90n: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/3.png",
-		s90ex:
-			"https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/4.png",
+		s90ex: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/4.png",
 		s1sh: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/5.png",
 		s1sn: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/6.png",
 		s1se: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/7.png",
 		snan: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/8.png",
 		sn: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/9.png",
-		s1sex:
-			"https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/10.png",
-		snaex:
-			"https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/11.png",
+		s1sex: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/10.png",
+		snaex: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/11.png",
 		snae: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/12.png",
-		s360ex:
-			"https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/13.png",
-		sllex:
-			"https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/14.png",
+		s360ex: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/13.png",
+		sllex: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/14.png",
 		sep: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/15.png",
-		s1sep:
-			"https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/16.png",
-		sllep:
-			"https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/17.png",
-		s360ep:
-			"https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/18.png",
+		s1sep: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/16.png",
+		sllep: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/17.png",
+		s360ep: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/18.png",
 		sllh: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/19.png",
 		se: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/20.png",
-		snaep:
-			"https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/21.png",
+		snaep: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/21.png",
 		sex: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/22.png",
 		slle: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/23.png",
 		snah: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/24.png",
 		sh: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/25.png",
 		s90h: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/26.png",
 		slln: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/27.png",
-		s360n:
-			"https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/28.png",
-		s90ep:
-			"https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/29.png",
+		s360n: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/28.png",
+		s90ep: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/29.png",
 	};
 
 presence.on("UpdateData", async () => {

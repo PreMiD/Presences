@@ -12,8 +12,7 @@ let gametypequery: string,
 
 const browsingTimestamp = Math.floor(Date.now() / 1000),
 	assets = {
-		squad:
-			"https://cdn.rcd.gg/PreMiD/websites/S/surviv.io/assets/0.png",
+		squad: "https://cdn.rcd.gg/PreMiD/websites/S/surviv.io/assets/0.png",
 		duo: "https://cdn.rcd.gg/PreMiD/websites/S/surviv.io/assets/1.png",
 		solo: "https://cdn.rcd.gg/PreMiD/websites/S/surviv.io/assets/2.png",
 	};

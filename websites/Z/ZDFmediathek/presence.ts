@@ -3,15 +3,11 @@ let elapsed = Math.floor(Date.now() / 1000),
 
 const assets = {
 		zdf: "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/0.png",
-		"3sat":
-			"https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/1.png",
-		phoenix:
-			"https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/2.png",
+		"3sat": "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/1.png",
+		phoenix: "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/2.png",
 		arte: "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/3.png",
-		zdfinfo:
-			"https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/4.png",
-		zdfneo:
-			"https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/5.png",
+		zdfinfo: "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/4.png",
+		zdfneo: "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/5.png",
 		kika: "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/6.png",
 	},
 	presence = new Presence({

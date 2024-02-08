@@ -4,34 +4,22 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	assets = {
 		home: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/0.png",
-		house:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/1.png",
-		settings:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/2.png",
+		house: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/1.png",
+		settings: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/2.png",
 		user: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/3.png",
-		search:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/4.png",
-		extension:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/5.png",
-		history:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/6.png",
-		coding:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/7.png",
-		layers:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/8.png",
+		search: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/4.png",
+		extension: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/5.png",
+		history: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/6.png",
+		coding: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/7.png",
+		layers: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/8.png",
 		help: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/9.png",
 		blog: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/10.png",
-		community:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/11.png",
-		communication:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/12.png",
-		globe:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/13.png",
-		"down-arrow":
-			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/14.png",
+		community: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/11.png",
+		communication: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/12.png",
+		globe: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/13.png",
+		"down-arrow": "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/14.png",
 		view: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/15.png",
-		group:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/16.png",
+		group: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/16.png",
 		edit: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/17.png",
 	};
 

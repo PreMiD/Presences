@@ -1,15 +1,12 @@
 const presence = new Presence({ clientId: "818822000176791553" }),
 	assets = {
-		"word-logo":
-			"https://cdn.rcd.gg/PreMiD/websites/O/OneDrive/assets/0.png",
-		"excel-logo":
-			"https://cdn.rcd.gg/PreMiD/websites/O/OneDrive/assets/1.png",
+		"word-logo": "https://cdn.rcd.gg/PreMiD/websites/O/OneDrive/assets/0.png",
+		"excel-logo": "https://cdn.rcd.gg/PreMiD/websites/O/OneDrive/assets/1.png",
 		"powerpoint-logo":
 			"https://cdn.rcd.gg/PreMiD/websites/O/OneDrive/assets/2.png",
 		"onedrive-logo":
 			"https://cdn.rcd.gg/PreMiD/websites/O/OneDrive/assets/3.png",
-		"office-logo":
-			"https://cdn.rcd.gg/PreMiD/websites/O/OneDrive/assets/4.png",
+		"office-logo": "https://cdn.rcd.gg/PreMiD/websites/O/OneDrive/assets/4.png",
 	};
 
 presence.on("UpdateData", async () => {

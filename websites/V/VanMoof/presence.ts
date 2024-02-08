@@ -4,16 +4,11 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	/* eslint-disable camelcase */
 	assets = {
-		vanmoof_v:
-			"https://cdn.rcd.gg/PreMiD/websites/V/VanMoof/assets/0.png",
-		vanmoof_s3:
-			"https://cdn.rcd.gg/PreMiD/websites/V/VanMoof/assets/1.png",
-		vanmoof_x3:
-			"https://cdn.rcd.gg/PreMiD/websites/V/VanMoof/assets/2.png",
-		vanmoof_a5:
-			"https://cdn.rcd.gg/PreMiD/websites/V/VanMoof/assets/3.png",
-		vanmoof_s5:
-			"https://cdn.rcd.gg/PreMiD/websites/V/VanMoof/assets/4.png",
+		vanmoof_v: "https://cdn.rcd.gg/PreMiD/websites/V/VanMoof/assets/0.png",
+		vanmoof_s3: "https://cdn.rcd.gg/PreMiD/websites/V/VanMoof/assets/1.png",
+		vanmoof_x3: "https://cdn.rcd.gg/PreMiD/websites/V/VanMoof/assets/2.png",
+		vanmoof_a5: "https://cdn.rcd.gg/PreMiD/websites/V/VanMoof/assets/3.png",
+		vanmoof_s5: "https://cdn.rcd.gg/PreMiD/websites/V/VanMoof/assets/4.png",
 	};
 /* eslint-enable camelcase */
 

@@ -416,126 +416,78 @@ const presence = new Presence({
 		".css": { image: "css" },
 	},
 	assets = {
-		pylon:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/0.png",
+		pylon: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/0.png",
 		ahk: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/1.png",
-		angular:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/2.png",
-		applescript:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/3.png",
-		android:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/4.png",
-		appveyor:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/5.png",
-		arduino:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/6.png",
+		angular: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/2.png",
+		applescript: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/3.png",
+		android: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/4.png",
+		appveyor: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/5.png",
+		arduino: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/6.png",
 		as: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/7.png",
-		autoit:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/8.png",
+		autoit: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/8.png",
 		asp: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/9.png",
-		assembly:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/10.png",
+		assembly: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/10.png",
 		bat: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/11.png",
-		bower:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/12.png",
-		cmake:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/13.png",
-		clojure:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/14.png",
-		circleci:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/15.png",
+		bower: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/12.png",
+		cmake: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/13.png",
+		clojure: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/14.png",
+		circleci: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/15.png",
 		c: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/16.png",
-		cargo:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/17.png",
+		cargo: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/17.png",
 		env: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/18.png",
-		flowconfig:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/19.png",
-		cssmap:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/20.png",
-		cshtml:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/21.png",
-		firebase:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/22.png",
-		crystal:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/23.png",
-		eslint:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/24.png",
+		flowconfig: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/19.png",
+		cssmap: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/20.png",
+		cshtml: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/21.png",
+		firebase: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/22.png",
+		crystal: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/23.png",
+		eslint: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/24.png",
 		git: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/25.png",
 		elm: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/26.png",
 		d: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/27.png",
-		denizen:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/28.png",
+		denizen: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/28.png",
 		dart: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/29.png",
-		csharp:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/30.png",
-		elixir:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/31.png",
+		csharp: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/30.png",
+		elixir: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/31.png",
 		css: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/32.png",
 		dm: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/33.png",
-		docker:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/34.png",
-		haskell:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/35.png",
+		docker: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/34.png",
+		haskell: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/35.png",
 		ejs: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/36.png",
 		cuda: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/37.png",
-		fsharp:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/38.png",
-		gemfile:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/39.png",
-		gradle:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/40.png",
+		fsharp: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/38.png",
+		gemfile: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/39.png",
+		gradle: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/40.png",
 		go: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/41.png",
-		coffee:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/42.png",
-		brainfuck:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/43.png",
-		erlang:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/44.png",
-		gatsbyjs:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/45.png",
-		graphql:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/46.png",
+		coffee: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/42.png",
+		brainfuck: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/43.png",
+		erlang: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/44.png",
+		gatsbyjs: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/45.png",
+		graphql: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/46.png",
 		cpp: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/47.png",
-		godot:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/48.png",
+		godot: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/48.png",
 		log: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/49.png",
-		livescript:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/50.png",
-		heroku:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/51.png",
-		handlebars:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/52.png",
+		livescript: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/50.png",
+		heroku: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/51.png",
+		handlebars: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/52.png",
 		npm: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/53.png",
-		jsmap:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/54.png",
-		hjson:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/55.png",
+		jsmap: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/54.png",
+		hjson: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/55.png",
 		html: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/56.png",
-		markdown:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/57.png",
-		manifest:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/58.png",
-		markdownx:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/59.png",
+		markdown: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/57.png",
+		manifest: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/58.png",
+		markdownx: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/59.png",
 		json: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/60.png",
-		gruntfile:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/61.png",
+		gruntfile: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/61.png",
 		toml: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/62.png",
-		harbour:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/63.png",
+		harbour: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/63.png",
 		js: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/64.png",
 		gulp: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/65.png",
-		makefile:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/66.png",
-		reasonml:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/67.png",
-		shell:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/68.png",
+		makefile: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/66.png",
+		reasonml: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/67.png",
+		shell: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/68.png",
 		nim: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/69.png",
-		julia:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/70.png",
-		editorconfig:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/71.png",
+		julia: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/70.png",
+		editorconfig: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/71.png",
 		text: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/72.png",
 		jest: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/73.png",
 		ts: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/74.png",
@@ -544,82 +496,58 @@ const presence = new Presence({
 		yaml: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/77.png",
 		tex: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/78.png",
 		wasm: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/79.png",
-		prisma:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/80.png",
-		vcxproj:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/81.png",
-		kotlin:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/82.png",
-		nodemon:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/83.png",
+		prisma: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/80.png",
+		vcxproj: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/81.png",
+		kotlin: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/82.png",
+		nodemon: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/83.png",
 		r: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/84.png",
-		ocaml:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/85.png",
-		powershell:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/86.png",
+		ocaml: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/85.png",
+		powershell: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/86.png",
 		svg: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/87.png",
-		delphi:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/88.png",
-		python:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/89.png",
+		delphi: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/88.png",
+		python: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/89.png",
 		sql: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/90.png",
 		http: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/91.png",
 		v: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/92.png",
 		yarn: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/93.png",
 		txt: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/94.png",
 		zig: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/95.png",
-		groovy:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/96.png",
-		marko:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/97.png",
-		prettier:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/98.png",
+		groovy: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/96.png",
+		marko: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/97.png",
+		prettier: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/98.png",
 		php: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/99.png",
 		twig: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/100.png",
-		swift:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/101.png",
+		swift: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/101.png",
 		lua: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/102.png",
-		purescript:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/103.png",
+		purescript: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/103.png",
 		vue: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/104.png",
 		java: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/105.png",
 		less: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/106.png",
 		jsx: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/107.png",
-		jupyter:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/108.png",
+		jupyter: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/108.png",
 		lisp: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/109.png",
 		perl: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/110.png",
 		objc: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/111.png",
-		pascal:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/112.png",
+		pascal: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/112.png",
 		pawn: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/113.png",
-		postcss:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/114.png",
+		postcss: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/114.png",
 		pug: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/115.png",
 		vba: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/116.png",
-		vscodeignore:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/117.png",
+		vscodeignore: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/117.png",
 		tsx: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/118.png",
 		vb: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/119.png",
 		sqf: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/120.png",
-		svelte:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/121.png",
+		svelte: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/121.png",
 		ruby: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/122.png",
-		scala:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/123.png",
-		stylus:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/124.png",
-		webpack:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/125.png",
+		scala: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/123.png",
+		stylus: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/124.png",
+		webpack: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/125.png",
 		vala: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/126.png",
-		travis:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/127.png",
+		travis: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/127.png",
 		rust: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/128.png",
 		scss: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/129.png",
-		ponylang:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/130.png",
-		processing:
-			"https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/131.png",
+		ponylang: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/130.png",
+		processing: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/131.png",
 	};
 
 const enum Assets {

@@ -21,18 +21,12 @@ enum LogoAssets {
 
 /* eslint-disable camelcase */
 const assets = {
-		bbcsounds_logo:
-			"https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/6.png",
-		bbciplayer_logo:
-			"https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/7.png",
-		bbc_logo:
-			"https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/8.png",
-		bbcnews_logo:
-			"https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/9.png",
-		bbcsport_logo:
-			"https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/10.png",
-		bbcweather_logo:
-			"https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/11.png",
+		bbcsounds_logo: "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/6.png",
+		bbciplayer_logo: "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/7.png",
+		bbc_logo: "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/8.png",
+		bbcnews_logo: "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/9.png",
+		bbcsport_logo: "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/10.png",
+		bbcweather_logo: "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/11.png",
 	},
 	/* eslint-enable camelcase */
 	browsingTimestamp = Math.floor(Date.now() / 1000),

@@ -8,13 +8,11 @@ const presence = new Presence({
 			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/1.png",
 		alcohol:
 			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/2.png",
-		apple:
-			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/3.png",
+		apple: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/3.png",
 		astronomy:
 			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/4.png",
 		avp: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/5.png",
-		anime:
-			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/6.png",
+		anime: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/6.png",
 		biology:
 			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/7.png",
 		br: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/8.png",
