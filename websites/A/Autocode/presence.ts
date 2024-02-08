@@ -95,10 +95,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state = replaceTemplate(state);
 			presenceData.smallImageKey = Assets.Autocode;
 
-			if (extension && supportedLanguages.includes(extension))
+			if (extension && supportedLanguages.includes(extension)) {
 				presenceData.largeImageKey =
 					assets[`lang-${extension}` as keyof typeof assets];
-			else presenceData.largeImageKey = Assets.Autocode;
+			} else presenceData.largeImageKey = Assets.Autocode;
 		}
 	}
 

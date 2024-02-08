@@ -163,10 +163,10 @@ presence.on("UpdateData", async () => {
 	if (
 		window.getComputedStyle(bodyWrap).getPropertyValue("background-color") ===
 		"rgb(38, 38, 38)"
-	)
+	) {
 		presenceData.largeImageKey =
 			"https://cdn.discordapp.com/app-assets/704585837949747330/725995167496011838.png?size=512";
-	else if (
+	} else if (
 		window.getComputedStyle(bodyWrap).getPropertyValue("background-color") !==
 		"rgb(38, 38, 38)"
 	) {

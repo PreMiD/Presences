@@ -750,9 +750,10 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (!buttons) delete presenceData.buttons;
-	if (!showCover && String(presenceData.largeImageKey).startsWith("https"))
+	if (!showCover && String(presenceData.largeImageKey).startsWith("https")) {
 		presenceData.largeImageKey =
 			assets[`${serviceName}_logo` as keyof typeof assets];
+	}
 
 	if (presenceData.details === strings.searchFor && !showSearchQuery)
 		presenceData.state = "(Hidden)";
