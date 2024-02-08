@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 					'[data-rt="video-player-channels"]'
 				)
 			) {
-				presenceData.smallImageKey = Assets.Live
+				presenceData.smallImageKey = Assets.Live;
 				presenceData.smallImageText = `Watching live on channel: ${
 					document.querySelector("head > title").textContent.split("|")[0]
 				}`;

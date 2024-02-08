@@ -190,7 +190,7 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		}
-		presenceData.smallImageKey = Assets.Live
+		presenceData.smallImageKey = Assets.Live;
 		presenceData.smallImageText = strings.live;
 	} else if (!privacy) {
 		const sub = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP");

@@ -118,7 +118,7 @@ presence.on("UpdateData", async () => {
 		"/create-account/step-2": {
 			details: "Creating an account",
 			state: "Step 2 of 2",
-			smallImageKey: Assets.Writing
+			smallImageKey: Assets.Writing,
 		},
 		"/settings": {
 			details: "Viewing their:",

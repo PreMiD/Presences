@@ -115,7 +115,7 @@ presence.on("UpdateData", () => {
 	}
 	if (video) {
 		if (live) {
-			presenceData.smallImageKey = video.paused ? Assets.Pause :Assets.Live
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Live;
 			presenceData.smallImageText = video.paused
 				? "Live Playback paused"
 				: "Live";

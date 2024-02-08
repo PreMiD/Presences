@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 			? Assets.Live
 			: video.paused
 			? Assets.Pause
-			: Assets.Play
+			: Assets.Play;
 		presenceData.smallImageText = live
 			? (await strings).live
 			: video.paused

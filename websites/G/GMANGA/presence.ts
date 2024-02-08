@@ -15,14 +15,14 @@ enum Settings {
 }
 
 const enum Assets {
-  Discovery = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759030665216.png?size=512",
-  Library = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759063957525.png?size=512",
-  Team = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759395176544.png?size=512",
-  Manga = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759504097290.png?size=512",
-  News = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759529918474.png?size=512",
-  Paintings = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759559016479.png?size=512",
-  DarkLogo = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759609085962.png?size=512",
-  LightLogo = "https://cdn.discordapp.com/app-assets/862700890414776370/862723760124854313.png?size=512",
+	Discovery = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759030665216.png?size=512",
+	Library = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759063957525.png?size=512",
+	Team = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759395176544.png?size=512",
+	Manga = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759504097290.png?size=512",
+	News = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759529918474.png?size=512",
+	Paintings = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759559016479.png?size=512",
+	DarkLogo = "https://cdn.discordapp.com/app-assets/862700890414776370/862723759609085962.png?size=512",
+	LightLogo = "https://cdn.discordapp.com/app-assets/862700890414776370/862723760124854313.png?size=512",
 }
 
 const presence = new Presence({
@@ -138,7 +138,7 @@ if (searchInput) {
 			return;
 		}
 
-		searchData.smallImageKey =  Assets.Search;
+		searchData.smallImageKey = Assets.Search;
 		searchData.smallImageText = "Searching";
 		searchData.state = `Searching: ${this.textContent}`;
 	});
@@ -149,7 +149,8 @@ presence.on("UpdateData", async () => {
 		showButtons = await presence.getSetting<boolean>(Settings.BUTTONS),
 		logo = await presence.getSetting<number>(Settings.LOGO);
 	let presenceData: PresenceData = {
-		largeImageKey: [Assets.LightLogo, Assets.DarkLogo][logo] || Assets.LightLogo,
+		largeImageKey:
+			[Assets.LightLogo, Assets.DarkLogo][logo] || Assets.LightLogo,
 	};
 
 	if (showTimestamp) presenceData.startTimestamp = startTimestamp;

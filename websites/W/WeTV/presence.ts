@@ -4,15 +4,9 @@ class WeTV extends Presence {
 	}
 
 	getTitle() {
-		const JSONData: {
-			"@graph": {
-				name: string;
-			}[];
-		} = JSON.parse(
+		return JSON.parse(
 			document.querySelector('[type="application/ld+json"]').textContent
-		);
-
-		return JSONData["@graph"][0].name;
+		)["@graph"][0].name;
 	}
 
 	getMovieTitle() {

@@ -19,15 +19,15 @@ interface QuizletData {
 let qzData: QuizletData = null,
 	actionTimestamp: number = null;
 
-	const enum Assets {
-		Quizlet = "https://cdn.discordapp.com/app-assets/719784356725653504/719784460790267905.png?size=512",
-		Flashcards = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088138301491.png?size=512",
-		Match = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088435966012.png?size=512",
-		Test = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088511463434.png?size=512",
-		Learn = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088553537548.png?size=512",
-		Spell = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088792350720.png?size=512",
-		Gravity = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088930893885.png?size=512",
-	}
+const enum Assets {
+	Quizlet = "https://cdn.discordapp.com/app-assets/719784356725653504/719784460790267905.png?size=512",
+	Flashcards = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088138301491.png?size=512",
+	Match = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088435966012.png?size=512",
+	Test = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088511463434.png?size=512",
+	Learn = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088553537548.png?size=512",
+	Spell = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088792350720.png?size=512",
+	Gravity = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088930893885.png?size=512",
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -118,7 +118,7 @@ presence.on("UpdateData", async () => {
 				break;
 			case "Assistant": // Set > Learn
 				actionTimestamp ??= Date.now();
-				presenceData.smallImageKey = Assets.Learn
+				presenceData.smallImageKey = Assets.Learn;
 				presenceData.smallImageText = "Learn";
 				presenceData.details = "Learning set";
 				presenceData.state = qzData.layer.studyableTitle;
@@ -146,7 +146,7 @@ presence.on("UpdateData", async () => {
 				break;
 			case "Spell": // Set > Spell
 				actionTimestamp ??= Date.now();
-				presenceData.smallImageKey = Assets.Spell
+				presenceData.smallImageKey = Assets.Spell;
 				presenceData.smallImageText = "Spell";
 				presenceData.details = "Spelling";
 				presenceData.state = `on ${qzData.layer.studyableTitle}`;

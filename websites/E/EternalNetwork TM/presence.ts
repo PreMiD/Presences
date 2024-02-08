@@ -19,17 +19,17 @@ const presence = new Presence({
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
-	const enum Assets {
-		EternalradioLogo = "https://cdn.discordapp.com/app-assets/440182142694064129/886561156972560394.png?size=512",
-		EternalcraftSmp = "https://cdn.discordapp.com/app-assets/440182142694064129/886561159317164032.png?size=512",
-		EternalnetworktmLogo = "https://cdn.discordapp.com/app-assets/440182142694064129/886561263432392734.png?size=512",
-		EternalnetworktmStatus = "https://cdn.discordapp.com/app-assets/440182142694064129/886563849900269618.png?size=512",
-		EternalnetworktmLogo2 = "https://cdn.discordapp.com/app-assets/440182142694064129/886587581603643432.png?size=512",
-		EternalnetworktmLogo3 = "https://cdn.discordapp.com/app-assets/440182142694064129/886587582396395570.png?size=512",
-		EternallogisticLogo = "https://cdn.discordapp.com/app-assets/440182142694064129/1010639904759361629.png?size=512",
-		EternalshortenerLogo = "https://cdn.discordapp.com/app-assets/440182142694064129/1010645891625005198.png?size=512",
-		EternalnetworktmDev = "https://cdn.discordapp.com/app-assets/440182142694064129/1010650194494378186.png?size=512",
-	}
+const enum Assets {
+	EternalradioLogo = "https://cdn.discordapp.com/app-assets/440182142694064129/886561156972560394.png?size=512",
+	EternalcraftSmp = "https://cdn.discordapp.com/app-assets/440182142694064129/886561159317164032.png?size=512",
+	EternalnetworktmLogo = "https://cdn.discordapp.com/app-assets/440182142694064129/886561263432392734.png?size=512",
+	EternalnetworktmStatus = "https://cdn.discordapp.com/app-assets/440182142694064129/886563849900269618.png?size=512",
+	EternalnetworktmLogo2 = "https://cdn.discordapp.com/app-assets/440182142694064129/886587581603643432.png?size=512",
+	EternalnetworktmLogo3 = "https://cdn.discordapp.com/app-assets/440182142694064129/886587582396395570.png?size=512",
+	EternallogisticLogo = "https://cdn.discordapp.com/app-assets/440182142694064129/1010639904759361629.png?size=512",
+	EternalshortenerLogo = "https://cdn.discordapp.com/app-assets/440182142694064129/1010645891625005198.png?size=512",
+	EternalnetworktmDev = "https://cdn.discordapp.com/app-assets/440182142694064129/1010650194494378186.png?size=512",
+}
 
 presence.on("UpdateData", async () => {
 	const newLang: string = await presence
@@ -184,7 +184,7 @@ presence.on("UpdateData", async () => {
 		}
 		case `et-log.${etrnl}`:
 		case `www.et-log.${etrnl}`: {
-			presenceData.smallImageKey =Assets.EternallogisticLogo;
+			presenceData.smallImageKey = Assets.EternallogisticLogo;
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
 			if (pathname.includes("/about.php")) {
@@ -206,7 +206,7 @@ presence.on("UpdateData", async () => {
 		}
 		case `dev.${etrnl}`:
 		case `www.dev.${etrnl}`: {
-			presenceData.smallImageKey =Assets.EternalnetworktmDev
+			presenceData.smallImageKey = Assets.EternalnetworktmDev;
 
 			if (pathname.includes("/etlog")) {
 				presenceData.state = "Working on ET-LOG system";
@@ -224,7 +224,7 @@ presence.on("UpdateData", async () => {
 		}
 		case `shortener.${etrnltm}`:
 		case `www.shortener.${etrnltm}`: {
-			presenceData.smallImageKey = Assets.EternalshortenerLogo
+			presenceData.smallImageKey = Assets.EternalshortenerLogo;
 
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 

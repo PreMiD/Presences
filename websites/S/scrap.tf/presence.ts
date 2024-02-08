@@ -3,23 +3,23 @@ const presence = new Presence({
 	}),
 	browsingStamp = Math.floor(Date.now() / 1000);
 
-	const enum Assets {
-		Logo = "https://cdn.rcd.gg/PreMiD/websites/S/scrap.tf/assets/logo.png",
-		Cards = "https://cdn.discordapp.com/app-assets/918904479888334968/941605733957529611.png?size=512",
-		Hats = "https://cdn.discordapp.com/app-assets/918904479888334968/941605734767030282.png?size=512",
-		Items = "https://cdn.discordapp.com/app-assets/918904479888334968/941605735685566514.png?size=512",
-		Keys = "https://cdn.discordapp.com/app-assets/918904479888334968/941605741062668309.png?size=512",
-		Killstreaks = "https://cdn.discordapp.com/app-assets/918904479888334968/941605743134650409.png?size=512",
-		Weapons = "https://cdn.discordapp.com/app-assets/918904479888334968/941605743931584543.png?size=512",
-		Stranges = "https://cdn.discordapp.com/app-assets/918904479888334968/941605750000726047.png?size=512",
-		Mvm = "https://cdn.discordapp.com/app-assets/918904479888334968/941605750281748520.png?size=512",
-		Skins = "https://cdn.discordapp.com/app-assets/918904479888334968/941605750642442261.png?size=512",
-		Unusuals = "https://cdn.discordapp.com/app-assets/918904479888334968/941605750789275648.png?size=512",
-		Premium = "https://cdn.discordapp.com/app-assets/918904479888334968/948200003606814720.png?size=512",
-		Pplus = "https://cdn.discordapp.com/app-assets/918904479888334968/948200004676358175.png?size=512",
-		User = "https://cdn.discordapp.com/app-assets/918904479888334968/948200005292937266.png?size=512",
-		Superp = "https://cdn.discordapp.com/app-assets/918904479888334968/948200005322280990.png?size=512",
-	}
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/scrap.tf/assets/logo.png",
+	Cards = "https://cdn.discordapp.com/app-assets/918904479888334968/941605733957529611.png?size=512",
+	Hats = "https://cdn.discordapp.com/app-assets/918904479888334968/941605734767030282.png?size=512",
+	Items = "https://cdn.discordapp.com/app-assets/918904479888334968/941605735685566514.png?size=512",
+	Keys = "https://cdn.discordapp.com/app-assets/918904479888334968/941605741062668309.png?size=512",
+	Killstreaks = "https://cdn.discordapp.com/app-assets/918904479888334968/941605743134650409.png?size=512",
+	Weapons = "https://cdn.discordapp.com/app-assets/918904479888334968/941605743931584543.png?size=512",
+	Stranges = "https://cdn.discordapp.com/app-assets/918904479888334968/941605750000726047.png?size=512",
+	Mvm = "https://cdn.discordapp.com/app-assets/918904479888334968/941605750281748520.png?size=512",
+	Skins = "https://cdn.discordapp.com/app-assets/918904479888334968/941605750642442261.png?size=512",
+	Unusuals = "https://cdn.discordapp.com/app-assets/918904479888334968/941605750789275648.png?size=512",
+	Premium = "https://cdn.discordapp.com/app-assets/918904479888334968/948200003606814720.png?size=512",
+	Pplus = "https://cdn.discordapp.com/app-assets/918904479888334968/948200004676358175.png?size=512",
+	User = "https://cdn.discordapp.com/app-assets/918904479888334968/948200005292937266.png?size=512",
+	Superp = "https://cdn.discordapp.com/app-assets/918904479888334968/948200005322280990.png?size=512",
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {

@@ -3,20 +3,20 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-	const enum Assets {
-		Logo = "https://cdn.discordapp.com/app-assets/918337184929546322/918356037449441320.png?size=512",
-		Employees = "https://cdn.discordapp.com/app-assets/918337184929546322/918356038783238145.png?size=512",
-		Gearbuilder = "https://cdn.discordapp.com/app-assets/918337184929546322/918356039735332895.png?size=512",
-		Guide = "https://cdn.discordapp.com/app-assets/918337184929546322/918356041081716766.png?size=512",
-		Tierlist = "https://cdn.discordapp.com/app-assets/918337184929546322/918356043359223849.png?size=512",
-		Operators = "https://cdn.discordapp.com/app-assets/918337184929546322/918356044009328660.png?size=512",
-		Ships = "https://cdn.discordapp.com/app-assets/918337184929546322/918356044172898314.png?size=512",
-		Upcoming = "https://cdn.discordapp.com/app-assets/918337184929546322/918356045020139520.png?size=512",
-		Skins = "https://cdn.discordapp.com/app-assets/918337184929546322/918356045280186418.png?size=512",
-		Stats = "https://cdn.discordapp.com/app-assets/918337184929546322/918361811949092904.png?size=512",
-		Blogs = "https://cdn.discordapp.com/app-assets/918337184929546322/918364843826880522.png?size=512",
-		Shipbg = "https://cdn.discordapp.com/app-assets/918337184929546322/919508232505008128.png?size=512",
-	}
+const enum Assets {
+	Logo = "https://cdn.discordapp.com/app-assets/918337184929546322/918356037449441320.png?size=512",
+	Employees = "https://cdn.discordapp.com/app-assets/918337184929546322/918356038783238145.png?size=512",
+	Gearbuilder = "https://cdn.discordapp.com/app-assets/918337184929546322/918356039735332895.png?size=512",
+	Guide = "https://cdn.discordapp.com/app-assets/918337184929546322/918356041081716766.png?size=512",
+	Tierlist = "https://cdn.discordapp.com/app-assets/918337184929546322/918356043359223849.png?size=512",
+	Operators = "https://cdn.discordapp.com/app-assets/918337184929546322/918356044009328660.png?size=512",
+	Ships = "https://cdn.discordapp.com/app-assets/918337184929546322/918356044172898314.png?size=512",
+	Upcoming = "https://cdn.discordapp.com/app-assets/918337184929546322/918356045020139520.png?size=512",
+	Skins = "https://cdn.discordapp.com/app-assets/918337184929546322/918356045280186418.png?size=512",
+	Stats = "https://cdn.discordapp.com/app-assets/918337184929546322/918361811949092904.png?size=512",
+	Blogs = "https://cdn.discordapp.com/app-assets/918337184929546322/918364843826880522.png?size=512",
+	Shipbg = "https://cdn.discordapp.com/app-assets/918337184929546322/919508232505008128.png?size=512",
+}
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
@@ -143,7 +143,7 @@ presence.on("UpdateData", () => {
 				} else if (document.location.href.includes("gear-builder")) {
 					presenceData.details = "Making a Gear Builder template";
 					presenceData.largeImageKey = Assets.Ships;
-					presenceData.smallImageKey = Assets.Gearbuilder
+					presenceData.smallImageKey = Assets.Gearbuilder;
 					presenceData.smallImageText = "Gear building";
 				} else if (document.location.href === "https://www.prydwen.co/") {
 					presenceData.details = "Viewing home page";

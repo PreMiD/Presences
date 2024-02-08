@@ -3,10 +3,10 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-	const enum Assets {
-		Logo = "https://cdn.discordapp.com/app-assets/839539095393796116/839539337044426772.png?size=512",
-		LogoTransp = "https://cdn.discordapp.com/app-assets/839539095393796116/839540305308155954.png?size=512",
-	}
+const enum Assets {
+	Logo = "https://cdn.discordapp.com/app-assets/839539095393796116/839539337044426772.png?size=512",
+	LogoTransp = "https://cdn.discordapp.com/app-assets/839539095393796116/839540305308155954.png?size=512",
+}
 
 presence.on("UpdateData", async function () {
 	const setting = {
@@ -17,7 +17,8 @@ presence.on("UpdateData", async function () {
 		},
 		urlpath = window.location.pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: [Assets.Logo, Assets.LogoTransp][setting.logo] || Assets.Logo,
+			largeImageKey:
+				[Assets.Logo, Assets.LogoTransp][setting.logo] || Assets.Logo,
 		};
 
 	if (setting.timeElapsed && !setting.privacy)

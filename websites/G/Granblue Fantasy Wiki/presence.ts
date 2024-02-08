@@ -3,13 +3,12 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-	const enum Assets {
-		Logo =
-		"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy%20Wiki/assets/logo.png",
-		Tierlist = "https://cdn.discordapp.com/app-assets/914354609370329098/917224354331373589.png?size=512",
-		Login = "https://cdn.discordapp.com/app-assets/914354609370329098/917224354482360380.png?size=512",
-		Newaccount = "https://cdn.discordapp.com/app-assets/914354609370329098/917229316683751504.png?size=512",
-	}
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy%20Wiki/assets/logo.png",
+	Tierlist = "https://cdn.discordapp.com/app-assets/914354609370329098/917224354331373589.png?size=512",
+	Login = "https://cdn.discordapp.com/app-assets/914354609370329098/917224354482360380.png?size=512",
+	Newaccount = "https://cdn.discordapp.com/app-assets/914354609370329098/917229316683751504.png?size=512",
+}
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {

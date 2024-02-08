@@ -3,11 +3,11 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-	const enum Assets {
-		Logo = "https://cdn.rcd.gg/PreMiD/websites/T/Timolia/assets/logo.png",
-		Minecraft = "https://cdn.discordapp.com/app-assets/872421983554502717/872485112766419015.png?size=512",
-		Gitlab = "https://cdn.discordapp.com/app-assets/872421983554502717/872485112900616242.png?size=512",
-	}
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/Timolia/assets/logo.png",
+	Minecraft = "https://cdn.discordapp.com/app-assets/872421983554502717/872485112766419015.png?size=512",
+	Gitlab = "https://cdn.discordapp.com/app-assets/872421983554502717/872485112900616242.png?size=512",
+}
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {

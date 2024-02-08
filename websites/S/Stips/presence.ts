@@ -119,9 +119,9 @@ fetch("https://stips.co.il/api?name=user.get_app_user").then(resp =>
 );
 
 const enum Assets {
-  Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Stips/assets/logo.png",
-  StipspiLight = "https://cdn.discordapp.com/app-assets/745570917823807519/745631551835996260.png?size=512",
-  StipspinDark = "https://cdn.discordapp.com/app-assets/745570917823807519/745631552179929088.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Stips/assets/logo.png",
+	StipspiLight = "https://cdn.discordapp.com/app-assets/745570917823807519/745631551835996260.png?size=512",
+	StipspinDark = "https://cdn.discordapp.com/app-assets/745570917823807519/745631552179929088.png?size=512",
 }
 
 // main loop
@@ -346,7 +346,7 @@ presence.on("UpdateData", () => {
 	presence.setActivity({
 		details: details ?? translate(isMale).default,
 		largeImageKey: Assets.Logo,
-		smallImageKey: hasDark ? Assets.StipspinDark: Assets.StipspiLight,
+		smallImageKey: hasDark ? Assets.StipspinDark : Assets.StipspiLight,
 		startTimestamp: elapsed,
 		smallImageText,
 	});

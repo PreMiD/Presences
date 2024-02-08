@@ -86,7 +86,7 @@ const enum Assets {
 	WhiteBack = "https://cdn.discordapp.com/app-assets/748660637021896835/797196345559482378.png?size=512",
 	Black = "https://cdn.discordapp.com/app-assets/748660637021896835/797196302596833291.png?size=512",
 	White = "https://cdn.discordapp.com/app-assets/748660637021896835/797193043630358570.png?size=512",
-	Logo = "https://cdn.discordapp.com/app-assets/748660637021896835/748660771361390622.png?size=512"
+	Logo = "https://cdn.discordapp.com/app-assets/748660637021896835/748660771361390622.png?size=512",
 }
 
 presence.on("UpdateData", async () => {

@@ -24,12 +24,11 @@ const presence = new Presence({
 let video: VideoContext = null,
 	lastVideoOption = 1;
 
-	const enum Assets {
-		Season = "https://cdn.discordapp.com/app-assets/707389880505860156/707445020176810014.png?size=512",
-		Directory = "https://cdn.discordapp.com/app-assets/707389880505860156/707445631475515392.png?size=512",
-		Logo =
-		"https://cdn.rcd.gg/PreMiD/websites/M/Monos%20Chinos/assets/logo.png",
-	}
+const enum Assets {
+	Season = "https://cdn.discordapp.com/app-assets/707389880505860156/707445020176810014.png?size=512",
+	Directory = "https://cdn.discordapp.com/app-assets/707389880505860156/707445631475515392.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/Monos%20Chinos/assets/logo.png",
+}
 
 presence.on("iFrameData", async (context: VideoContext) => {
 	video = context;
@@ -37,12 +36,10 @@ presence.on("iFrameData", async (context: VideoContext) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				Assets.Logo,
+			largeImageKey: Assets.Logo,
 		},
 		browsingData: PresenceData = {
-			largeImageKey:
-				Assets.Logo,
+			largeImageKey: Assets.Logo,
 			details: (await strings).browsing,
 			smallImageKey: Assets.Viewing,
 			smallImageText: (await strings).browsing,
@@ -57,31 +54,31 @@ presence.on("UpdateData", async () => {
 				id: "seasonList",
 				path: "/emision",
 				text: "viendo lista de emisión",
-				icon: Assets.Season
+				icon: Assets.Season,
 			},
 			{
 				id: "directory",
 				path: "/animes",
 				text: "viendo el directorio",
-				icon: Assets.Directory
+				icon: Assets.Directory,
 			},
 			{
 				id: "seasonCalendar",
 				path: "/calendario",
 				text: "viendo el calendario",
-				icon:Assets.Season
+				icon: Assets.Season,
 			},
 			{
 				id: "directoryAnime",
 				path: "/anime/",
 				text: "viendo lista de episodios",
-				icon:Assets.Directory
+				icon: Assets.Directory,
 			},
 			{
 				id: "search",
 				path: "/buscar",
 				text: "buscando animes:",
-				icon: Assets.Search
+				icon: Assets.Search,
 			},
 			{
 				id: "profile",

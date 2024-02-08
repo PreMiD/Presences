@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Logo ="https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
 				"body > main.animated > div.wrapper > article.rowView > aside.aside > div.cover-holder > img.abs"
 			).src;
 
-		if (image) presenceData.smallImageKey = Assets.Logo
+		if (image) presenceData.smallImageKey = Assets.Logo;
 
 		presenceData.details = "Viewing movie";
 		presenceData.state = name;
@@ -220,8 +220,7 @@ interface IFrameData {
 presence.on("iFrameData", async (data: IFrameData) => {
 	if (!data.currentTime || !data.duration) return;
 	const presenceData: PresenceData = {
-			largeImageKey:
-				Assets.Logo,
+			largeImageKey: Assets.Logo,
 		},
 		showThumb = await presence.getSetting<boolean>("showthumb"),
 		epInfo = getInfo(),
@@ -255,7 +254,7 @@ presence.on("iFrameData", async (data: IFrameData) => {
 
 	if (thumb !== "logo" && showThumb) {
 		presenceData.largeImageKey = thumb;
-		presenceData.smallImageKey = data.paused ? Assets.Pause : Assets.Logo
+		presenceData.smallImageKey = data.paused ? Assets.Pause : Assets.Logo;
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

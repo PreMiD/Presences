@@ -276,7 +276,9 @@ presence.on("UpdateData", async () => {
 								)
 						);
 					}
-					presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Live
+					presenceData.smallImageKey = video.paused
+						? Assets.Pause
+						: Assets.Live;
 					presenceData.smallImageText = video.paused
 						? strings.pause
 						: strings.live;
@@ -348,7 +350,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = streamState
 						.replace("%title%", title)
 						.replace("%streamer%", channelPageChannelName);
-					presenceData.smallImageKey = Assets.PremiereLive
+					presenceData.smallImageKey = Assets.PremiereLive;
 					presenceData.smallImageText = strings.waitingLiveThe;
 				}
 

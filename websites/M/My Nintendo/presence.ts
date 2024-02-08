@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
 				document.title;
 
-			presenceData.smallImageKey = Assets.Reading
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "reading";
 			break;
 		// Points
@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLHeadingElement>("h1")?.textContent ??
 				document.title;
 
-			presenceData.smallImageKey = Assets.Reading
+			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "reading";
 			break;
 		// Startpage, Unknown

@@ -10,40 +10,40 @@ const presence = new Presence({
 let user: HTMLElement, title: HTMLElement | string, search: HTMLInputElement;
 
 const enum Assets {
-  Vcall = "https://cdn.discordapp.com/app-assets/641394369651277834/641394528837959727.png?size=512",
-  Logo = "https://cdn.rcd.gg/PreMiD/websites/G/globoplay/assets/logo.png",
-  Gnt = "https://cdn.discordapp.com/app-assets/641394369651277834/793543099400847361.png?size=512",
-  Viva = "https://cdn.discordapp.com/app-assets/641394369651277834/793543711757434892.png?size=512",
-  Gloobinho = "https://cdn.discordapp.com/app-assets/641394369651277834/793545427349143574.png?size=512",
-  Megapix = "https://cdn.discordapp.com/app-assets/641394369651277834/793545840136159242.png?size=512",
-  Universalplus = "https://cdn.discordapp.com/app-assets/641394369651277834/793546120101363733.png?size=512",
-  Universaltv = "https://cdn.discordapp.com/app-assets/641394369651277834/793546121505931284.png?size=512",
-  Syfy = "https://cdn.discordapp.com/app-assets/641394369651277834/793547388059910186.png?size=512",
-  Studiouniversal = "https://cdn.discordapp.com/app-assets/641394369651277834/793547388349710347.png?size=512",
-  Bis = "https://cdn.discordapp.com/app-assets/641394369651277834/793553133966983199.png?size=512",
-  Canalbrasil = "https://cdn.discordapp.com/app-assets/641394369651277834/793553134432550944.png?size=512",
-  Canaloff = "https://cdn.discordapp.com/app-assets/641394369651277834/793553136823959553.png?size=512",
-  Maisnatela = "https://cdn.discordapp.com/app-assets/641394369651277834/793555271418118154.png?size=512",
-  Combate = "https://cdn.discordapp.com/app-assets/641394369651277834/793561113601507328.png?size=512",
-  Cbn = "https://cdn.discordapp.com/app-assets/641394369651277834/803160858138116110.png?size=512",
-  Bbb = "https://cdn.discordapp.com/app-assets/641394369651277834/803165029582766090.png?size=512",
-  Modoviagem = "https://cdn.discordapp.com/app-assets/641394369651277834/952328269464752128.png?size=512",
-  TVGlobo = "https://cdn.discordapp.com/app-assets/641394369651277834/952328273566785636.png?size=512",
-  Sportv2 = "https://cdn.discordapp.com/app-assets/641394369651277834/952345725495304212.png?size=512",
-  Sportv = "https://cdn.discordapp.com/app-assets/641394369651277834/952345725579198494.png?size=512",
-  Sportv3 = "https://cdn.discordapp.com/app-assets/641394369651277834/952345725595955220.png?size=512",
-  Telecine = "https://cdn.discordapp.com/app-assets/641394369651277834/952414319893700618.png?size=512",
-  Tcpremium = "https://cdn.discordapp.com/app-assets/641394369651277834/952414758655643649.png?size=512",
-  Tcaction = "https://cdn.discordapp.com/app-assets/641394369651277834/952414909893840976.png?size=512",
-  Tctouch = "https://cdn.discordapp.com/app-assets/641394369651277834/952415042765221968.png?size=512",
-  Tcfun = "https://cdn.discordapp.com/app-assets/641394369651277834/952415186306863144.png?size=512",
-  Tcpipoca = "https://cdn.discordapp.com/app-assets/641394369651277834/952415278564786179.png?size=512",
-  Tccult = "https://cdn.discordapp.com/app-assets/641394369651277834/952415335510851655.png?size=512",
-  Starzplay = "https://cdn.discordapp.com/app-assets/641394369651277834/1006442205981966357.png?size=512",
-  Gloob = "https://cdn.discordapp.com/app-assets/641394369651277834/1006462003243667536.png?size=512",
-  Futura = "https://cdn.discordapp.com/app-assets/641394369651277834/1006462473383182336.png?size=512",
-  Multishow = "https://cdn.discordapp.com/app-assets/641394369651277834/1007529565914157186.png?size=512",
-  Globonews = "https://cdn.discordapp.com/app-assets/641394369651277834/1008674475111366728.png?size=512",
+	Vcall = "https://cdn.discordapp.com/app-assets/641394369651277834/641394528837959727.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/G/globoplay/assets/logo.png",
+	Gnt = "https://cdn.discordapp.com/app-assets/641394369651277834/793543099400847361.png?size=512",
+	Viva = "https://cdn.discordapp.com/app-assets/641394369651277834/793543711757434892.png?size=512",
+	Gloobinho = "https://cdn.discordapp.com/app-assets/641394369651277834/793545427349143574.png?size=512",
+	Megapix = "https://cdn.discordapp.com/app-assets/641394369651277834/793545840136159242.png?size=512",
+	Universalplus = "https://cdn.discordapp.com/app-assets/641394369651277834/793546120101363733.png?size=512",
+	Universaltv = "https://cdn.discordapp.com/app-assets/641394369651277834/793546121505931284.png?size=512",
+	Syfy = "https://cdn.discordapp.com/app-assets/641394369651277834/793547388059910186.png?size=512",
+	Studiouniversal = "https://cdn.discordapp.com/app-assets/641394369651277834/793547388349710347.png?size=512",
+	Bis = "https://cdn.discordapp.com/app-assets/641394369651277834/793553133966983199.png?size=512",
+	Canalbrasil = "https://cdn.discordapp.com/app-assets/641394369651277834/793553134432550944.png?size=512",
+	Canaloff = "https://cdn.discordapp.com/app-assets/641394369651277834/793553136823959553.png?size=512",
+	Maisnatela = "https://cdn.discordapp.com/app-assets/641394369651277834/793555271418118154.png?size=512",
+	Combate = "https://cdn.discordapp.com/app-assets/641394369651277834/793561113601507328.png?size=512",
+	Cbn = "https://cdn.discordapp.com/app-assets/641394369651277834/803160858138116110.png?size=512",
+	Bbb = "https://cdn.discordapp.com/app-assets/641394369651277834/803165029582766090.png?size=512",
+	Modoviagem = "https://cdn.discordapp.com/app-assets/641394369651277834/952328269464752128.png?size=512",
+	TVGlobo = "https://cdn.discordapp.com/app-assets/641394369651277834/952328273566785636.png?size=512",
+	Sportv2 = "https://cdn.discordapp.com/app-assets/641394369651277834/952345725495304212.png?size=512",
+	Sportv = "https://cdn.discordapp.com/app-assets/641394369651277834/952345725579198494.png?size=512",
+	Sportv3 = "https://cdn.discordapp.com/app-assets/641394369651277834/952345725595955220.png?size=512",
+	Telecine = "https://cdn.discordapp.com/app-assets/641394369651277834/952414319893700618.png?size=512",
+	Tcpremium = "https://cdn.discordapp.com/app-assets/641394369651277834/952414758655643649.png?size=512",
+	Tcaction = "https://cdn.discordapp.com/app-assets/641394369651277834/952414909893840976.png?size=512",
+	Tctouch = "https://cdn.discordapp.com/app-assets/641394369651277834/952415042765221968.png?size=512",
+	Tcfun = "https://cdn.discordapp.com/app-assets/641394369651277834/952415186306863144.png?size=512",
+	Tcpipoca = "https://cdn.discordapp.com/app-assets/641394369651277834/952415278564786179.png?size=512",
+	Tccult = "https://cdn.discordapp.com/app-assets/641394369651277834/952415335510851655.png?size=512",
+	Starzplay = "https://cdn.discordapp.com/app-assets/641394369651277834/1006442205981966357.png?size=512",
+	Gloob = "https://cdn.discordapp.com/app-assets/641394369651277834/1006462003243667536.png?size=512",
+	Futura = "https://cdn.discordapp.com/app-assets/641394369651277834/1006462473383182336.png?size=512",
+	Multishow = "https://cdn.discordapp.com/app-assets/641394369651277834/1007529565914157186.png?size=512",
+	Globonews = "https://cdn.discordapp.com/app-assets/641394369651277834/1008674475111366728.png?size=512",
 }
 
 presence.on("UpdateData", async () => {
@@ -370,7 +370,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Telecine Premium - ${programTitle.textContent}`;
 				presenceData.state = programMetadata.textContent;
 				presenceData.smallImageKey = Assets.Live;
-				presenceData.largeImageKey = Assets.Tcpremium
+				presenceData.largeImageKey = Assets.Tcpremium;
 			} else if (document.location.pathname.includes("/10221184/")) {
 				presenceData.details = `Telecine Action - ${programTitle.textContent}`;
 				presenceData.state = programMetadata.textContent;
@@ -385,7 +385,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Telecine Fun - ${programTitle.textContent}`;
 				presenceData.state = programMetadata.textContent;
 				presenceData.smallImageKey = Assets.Live;
-				presenceData.largeImageKey = Assets.Tcfun
+				presenceData.largeImageKey = Assets.Tcfun;
 			} else if (document.location.pathname.includes("/10221225/")) {
 				presenceData.details = `Telecine Pipoca - ${programTitle.textContent}`;
 				presenceData.state = programMetadata.textContent;
@@ -429,7 +429,7 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = Assets.Gloob;
 			} else if (document.location.pathname.includes("/gloobinho/")) {
 				presenceData.details = "Gloobinho";
-				presenceData.largeImageKey  = Assets.Gloobinho;
+				presenceData.largeImageKey = Assets.Gloobinho;
 			} else if (document.location.pathname.includes("/megapix/")) {
 				presenceData.details = "Megapix";
 				presenceData.largeImageKey = Assets.Megapix;

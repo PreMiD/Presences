@@ -112,7 +112,7 @@ presence.on("UpdateData", async () => {
 				? Assets.Live
 				: video.paused
 				? Assets.Pause
-				: Assets.Play
+				: Assets.Play;
 		}
 
 		if (buttons) {

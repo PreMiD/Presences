@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 						state: `${owner} - ${location.pathname.match(/..\d+$/)[0]}`,
 						largeImageKey:
 							"https://cdn.rcd.gg/PreMiD/websites/N/niconico/assets/logo.png",
-						smallImageKey: isPlaying ? Assets.Play: Assets.Pause,
+						smallImageKey: isPlaying ? Assets.Play : Assets.Pause,
 						smallImageText: isPlaying
 							? (await strings).play
 							: (await strings).pause,

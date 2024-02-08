@@ -3,11 +3,11 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-	const enum Assets {
-		Logo = "https://cdn.rcd.gg/PreMiD/websites/L/Los%20Angeles%20Times/assets/logo.jpg",
-		Bestcovery = "https://cdn.discordapp.com/app-assets/1005501034191409153/1005576653126242324.png?size=512",
-		LogoSmall = "https://cdn.discordapp.com/app-assets/1005501034191409153/1005577235916394507.png?size=512",
-	}
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/L/Los%20Angeles%20Times/assets/logo.jpg",
+	Bestcovery = "https://cdn.discordapp.com/app-assets/1005501034191409153/1005576653126242324.png?size=512",
+	LogoSmall = "https://cdn.discordapp.com/app-assets/1005501034191409153/1005577235916394507.png?size=512",
+}
 
 presence.on("UpdateData", async () => {
 	const title = document.title.replace(" - Los Angeles Times", ""),
@@ -140,7 +140,7 @@ presence.on("UpdateData", async () => {
 					title = document.title.replace(" - Bestcovery", "");
 
 				presenceData.largeImageKey = Assets.Bestcovery;
-				presenceData.smallImageKey = Assets.LogoSmall
+				presenceData.smallImageKey = Assets.LogoSmall;
 				presenceData.smallImageText = "Bestcovery powered by L.A. Times";
 
 				if (categories.includes(path[2])) {

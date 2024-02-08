@@ -114,7 +114,7 @@ presence.on("UpdateData", async () => {
 					? Assets.RepeatOne
 					: media.state === "playing"
 					? Assets.Play
-					: Assets.Pause
+					: Assets.Pause;
 
 			presenceData.smallImageText =
 				media.state === "paused"

@@ -44,7 +44,9 @@ presence.on("UpdateData", async () => {
 		data.smallImageText = playing
 			? (await strings).play
 			: (await strings).pause;
-		playing ? (data.smallImageKey = Assets.Play) : (data.smallImageKey = Assets.Pause);
+		playing
+			? (data.smallImageKey = Assets.Play)
+			: (data.smallImageKey = Assets.Pause);
 
 		presence.setActivity(data);
 	}

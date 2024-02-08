@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/logo.png"
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -30,9 +30,7 @@ presence.on("UpdateData", async () => {
 					"meta[property='og:image']"
 				).content;
 				presenceData.smallImageKey = Assets.Logo;
-			} else {
-				presenceData.largeImageKey = Assets.Logo;
-			}
+			} else presenceData.largeImageKey = Assets.Logo;
 		}
 		presenceData.buttons = [{ label: "View Album", url: document.URL }];
 	} else if (pathname.startsWith("/artist")) {

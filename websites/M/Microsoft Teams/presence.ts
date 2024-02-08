@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
 				.getAttribute("aria-label")
 				.endsWith("off")
 				? Assets.VideoCall
-				: Assets.Call
+				: Assets.Call;
 		} else presenceData.details = "Joining a meeting...";
 	} else presenceData.details = await presence.getSetting<string>("noMessage");
 

@@ -94,7 +94,7 @@ presence.on("UpdateData", () => {
 				.querySelector("div[data-testid='trackInformationCard'] > img")
 				.getAttribute("src");
 			presenceData.smallImageKey =
-			"https://cdn.rcd.gg/PreMiD/websites/B/Brain.fm/assets/logo.png";
+				"https://cdn.rcd.gg/PreMiD/websites/B/Brain.fm/assets/logo.png";
 			presenceData.smallImageText = songTypeInfo[1];
 		} else if (pathname.startsWith("/user"))
 			presenceData.details = "Viewing their user information";

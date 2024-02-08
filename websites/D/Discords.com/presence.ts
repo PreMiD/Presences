@@ -3,19 +3,18 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-	const enum Assets {
-		Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Discords.com/assets/logo.png",
-		Discordbio = "https://cdn.discordapp.com/app-assets/843791837273391104/848004838452232224.png?size=512",
-		Discordtemplates = "https://cdn.discordapp.com/app-assets/843791837273391104/849930369213268010.png?size=512",
-		Botsfordiscord = "https://cdn.discordapp.com/app-assets/843791837273391104/876063006193221652.png?size=512",
-	}
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Discords.com/assets/logo.png",
+	Discordbio = "https://cdn.discordapp.com/app-assets/843791837273391104/848004838452232224.png?size=512",
+	Discordtemplates = "https://cdn.discordapp.com/app-assets/843791837273391104/849930369213268010.png?size=512",
+	Botsfordiscord = "https://cdn.discordapp.com/app-assets/843791837273391104/876063006193221652.png?size=512",
+}
 
 presence.on("UpdateData", async () => {
 	const showTimestamp = await presence.getSetting<boolean>("timestamp"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
 		presenceData: PresenceData = {
-			largeImageKey:
-			 			Assets.Logo,
+			largeImageKey: Assets.Logo,
 		};
 
 	if (document.location.pathname === "/")

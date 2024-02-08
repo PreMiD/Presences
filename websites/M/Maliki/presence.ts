@@ -11,8 +11,8 @@ interface SongPlayingData {
 let songInfo: SongPlayingData = null;
 
 const enum Assets {
-  Logo = "https://cdn.discordapp.com/app-assets/990204576189808670/991002671844589628.png?size=512",
-  Malimode = "https://cdn.discordapp.com/app-assets/990204576189808670/991003995063603210.png?size=512",
+	Logo = "https://cdn.discordapp.com/app-assets/990204576189808670/991002671844589628.png?size=512",
+	Malimode = "https://cdn.discordapp.com/app-assets/990204576189808670/991003995063603210.png?size=512",
 }
 
 presence.on("UpdateData", async () => {

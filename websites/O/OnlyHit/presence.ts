@@ -12,12 +12,12 @@ let songTimestamp = Math.floor(Date.now() / 1000),
 	currentTitle = "",
 	lastTitle = "";
 
-	const enum Assets {
-		Gold = "https://cdn.discordapp.com/app-assets/666412985513672715/751952686374453270.png?size=512",
-		Logo = "https://cdn.discordapp.com/app-assets/666412985513672715/751952687234416690.png?size=512",
-		Japan = "https://cdn.discordapp.com/app-assets/666412985513672715/752701518691434577.png?size=512",
-		Kpop = "https://cdn.discordapp.com/app-assets/666412985513672715/752701519010463795.png?size=512",
-	}
+const enum Assets {
+	Gold = "https://cdn.discordapp.com/app-assets/666412985513672715/751952686374453270.png?size=512",
+	Logo = "https://cdn.discordapp.com/app-assets/666412985513672715/751952687234416690.png?size=512",
+	Japan = "https://cdn.discordapp.com/app-assets/666412985513672715/752701518691434577.png?size=512",
+	Kpop = "https://cdn.discordapp.com/app-assets/666412985513672715/752701519010463795.png?size=512",
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {},

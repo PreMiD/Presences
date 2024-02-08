@@ -12,7 +12,8 @@ presence.on("UpdateData", async () => {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/F/Flickr/assets/logo.png",
 		startTimestamp: startTimeStamp,
-		smallImageKey: "https://cdn.rcd.gg/PreMiD/websites/F/Flickr/assets/logo.png",
+		smallImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/F/Flickr/assets/logo.png",
 		smallImageText: "Viewing Images or videos on Flickr",
 	};
 	if (document.location.hostname === "www.flickr.com") {

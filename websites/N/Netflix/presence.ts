@@ -91,8 +91,8 @@ async function pushScript() {
 }
 
 const enum Assets {
-  Logo = "https://cdn.discordapp.com/app-assets/926541425682829352/926541896573153281.png?size=512",
-  Noback = "https://cdn.discordapp.com/app-assets/926541425682829352/926542003464970300.png?size=512",
+	Logo = "https://cdn.discordapp.com/app-assets/926541425682829352/926541896573153281.png?size=512",
+	Noback = "https://cdn.discordapp.com/app-assets/926541425682829352/926542003464970300.png?size=512",
 	Animated = "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/0.gif",
 }
 
@@ -172,11 +172,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover"),
 		]),
 		largeImage =
-			[
-				Assets.Animated,
-				Assets.Logo,
-				Assets.Noback,
-			][logo] || Assets.Logo;
+			[Assets.Animated, Assets.Logo, Assets.Noback][logo] || Assets.Logo;
 
 	let presenceData: PresenceData = {
 			largeImageKey: largeImage,

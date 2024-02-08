@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 		return presence.setActivity({
 			details: "Searching for :",
 			state: document.location.search.replace("?q=", ""),
-			largeImageKey:Assets.Logo,
+			largeImageKey: Assets.Logo,
 			smallImageKey: Assets.Search,
 			smallImageText: "Searching...",
 		});

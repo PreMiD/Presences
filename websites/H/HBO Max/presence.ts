@@ -53,52 +53,54 @@ let isFetching = false;
 
 async function fetchToken(): Promise<string> {
 	const res = await fetch("https://oauth.api.hbo.com/auth/tokens", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		/* eslint-disable camelcase */
-		body: JSON.stringify({
-			client_id: "585b02c8-dbe1-432f-b1bb-11cf670fbeb0",
-			client_secret: crypto.randomUUID(),
-			scope: "browse video_playback",
-			grant_type: "client_credentials",
-			deviceSerialNumber: crypto.randomUUID(),
-			clientDeviceData: {
-				paymentProviderCode: "blackmarket",
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
 			},
+			/* eslint-disable camelcase */
+			body: JSON.stringify({
+				client_id: "585b02c8-dbe1-432f-b1bb-11cf670fbeb0",
+				client_secret: crypto.randomUUID(),
+				scope: "browse video_playback",
+				grant_type: "client_credentials",
+				deviceSerialNumber: crypto.randomUUID(),
+				clientDeviceData: {
+					paymentProviderCode: "blackmarket",
+				},
+			}),
 		}),
-	});
-	const res_1 = await res.json();
+		res_1 = await res.json();
 	return res_1.access_token;
 }
 
 async function fetchClientConfig(
 	token: string
 ): Promise<{ routeKey: string; countryCode: string }> {
-	const res = await fetch("https://sessions.api.hbo.com/sessions/v1/clientConfig", {
-		method: "POST",
-		headers: {
-			authorization: `Bearer ${token}`,
-			"content-type": "application/json",
-		},
-		body: JSON.stringify({
-			contract: "abc:1.0.0.0",
-			preferredLanguages: ["en-us"],
-		}),
-	});
-	const res_1 = await res.json();
-	return ({
+	const res = await fetch(
+			"https://sessions.api.hbo.com/sessions/v1/clientConfig",
+			{
+				method: "POST",
+				headers: {
+					authorization: `Bearer ${token}`,
+					"content-type": "application/json",
+				},
+				body: JSON.stringify({
+					contract: "abc:1.0.0.0",
+					preferredLanguages: ["en-us"],
+				}),
+			}
+		),
+		res_1 = await res.json();
+	return {
 		routeKey: res_1.routeKeys.contentSubdomain,
 		countryCode: new URLSearchParams(
 			res_1.features["express-content"].config.expressContentParams
 		).get("country-code"),
-	});
+	};
 }
 
-const enum Assets  {
-  Logo=
-	"https://cdn.rcd.gg/PreMiD/websites/H/HBO%20Max/assets/logo.png"
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/H/HBO%20Max/assets/logo.png",
 }
 
 async function fetchVideoInfo() {

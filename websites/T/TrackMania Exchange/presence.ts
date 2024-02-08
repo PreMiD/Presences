@@ -3,20 +3,21 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-	const enum Assets {
-		United = "https://cdn.discordapp.com/app-assets/721986767322087464/722068690161369130.png?size=512",
-		Nforever = "https://cdn.discordapp.com/app-assets/721986767322087464/722068699544158280.png?size=512",
-		Sunrise = "https://cdn.discordapp.com/app-assets/721986767322087464/722068701930717254.png?size=512",
-		Original = "https://cdn.discordapp.com/app-assets/721986767322087464/722068704149504132.png?size=512",
-		Nations = "https://cdn.discordapp.com/app-assets/721986767322087464/722068712756215869.png?size=512",
-		Logo = "https://cdn.rcd.gg/PreMiD/websites/T/TrackMania%20Exchange/assets/logo.png",
-	}
+const enum Assets {
+	United = "https://cdn.discordapp.com/app-assets/721986767322087464/722068690161369130.png?size=512",
+	Nforever = "https://cdn.discordapp.com/app-assets/721986767322087464/722068699544158280.png?size=512",
+	Sunrise = "https://cdn.discordapp.com/app-assets/721986767322087464/722068701930717254.png?size=512",
+	Original = "https://cdn.discordapp.com/app-assets/721986767322087464/722068704149504132.png?size=512",
+	Nations = "https://cdn.discordapp.com/app-assets/721986767322087464/722068712756215869.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/TrackMania%20Exchange/assets/logo.png",
+}
 
 let currentURL = new URL(document.location.href),
 	currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
 	presenceData: PresenceData = {
 		details: "Viewing an unsupported page",
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/TrackMania%20Exchange/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/T/TrackMania%20Exchange/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -169,12 +170,12 @@ const updateCallback = {
 
 		switch (currentURL.host) {
 			case "united.tm-exchange.com":
-				presenceData.smallImageKey = Assets.United
+				presenceData.smallImageKey = Assets.United;
 				presenceData.smallImageText = "United (TMUF-X)";
 				idPrefix = "_ctl1";
 				break;
 			case "tmnforever.tm-exchange.com":
-				presenceData.smallImageKey = Assets.Nforever
+				presenceData.smallImageKey = Assets.Nforever;
 				presenceData.smallImageText = "Nations Forever (TMNF-X)";
 				idPrefix = "ctl01";
 				break;

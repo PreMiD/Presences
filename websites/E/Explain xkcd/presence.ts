@@ -32,13 +32,15 @@ presence.on("UpdateData", () => {
 	if (path === "Main_Page") {
 		presenceData.details = "Viewing the main page";
 		presenceData.state = `Comic #${getComicNumber()}: ${getComicName()}`;
-		presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/956341194131116072/956391407214530591.png?size=512";
+		presenceData.smallImageKey =
+			"https://cdn.discordapp.com/app-assets/956341194131116072/956391407214530591.png?size=512";
 		presenceData.smallImageText = getTitleText();
 	} else if (/^\d+:_\w+$/.test(path)) {
 		// comic page
 		presenceData.details = "Viewing a comic explanation";
 		presenceData.state = `Comic #${getComicNumber()}: ${getComicName()}`;
-		presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/956341194131116072/956391407214530591.png?size=512";
+		presenceData.smallImageKey =
+			"https://cdn.discordapp.com/app-assets/956341194131116072/956391407214530591.png?size=512";
 		presenceData.smallImageText = getTitleText();
 	} else if (path.startsWith("User:")) {
 		// user page

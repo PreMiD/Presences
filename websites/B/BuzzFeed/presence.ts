@@ -38,7 +38,8 @@ presence.on("UpdateData", async () => {
 	} else if (page.includes("/search")) {
 		presenceData.details = "Searching:";
 		presenceData.state = document.title;
-		presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/B/BuzzFeed/assets/logo.png";
+		presenceData.smallImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/B/BuzzFeed/assets/logo.png";
 	} else if (user && user.textContent !== "") {
 		presenceData.details = "Viewing User Profile:";
 		presenceData.state = user.textContent;

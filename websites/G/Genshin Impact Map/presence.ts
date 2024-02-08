@@ -24,8 +24,7 @@ const enum Assets {
 	EmblemSumeru = "https://cdn.discordapp.com/app-assets/973729201104511007/1011656257465225216.png?size=512",
 	PreviewSumeru = "https://cdn.discordapp.com/app-assets/973729201104511007/1011656919028609064.png?size=512",
 	PreviewSumeru2 = "https://cdn.rcd.gg/PreMiD/websites/G/Genshin%20Impact%20Map/assets/0.png",
-	Logo =
-	"https://cdn.rcd.gg/PreMiD/websites/G/Genshin%20Impact%20Map/assets/logo.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/G/Genshin%20Impact%20Map/assets/logo.png",
 }
 
 interface Maps extends Image {
@@ -89,7 +88,7 @@ const map: Maps[] = [
 			image: {
 				small: Assets.EmblemIsles,
 				default: Assets.GoldenAppleArchipelagoMap28,
-				preview:Assets.PreviewGoldenAppleArchipelago28,
+				preview: Assets.PreviewGoldenAppleArchipelago28,
 			},
 			starting: 1657854000, // Fri, 15 Jul 2022 03:00 GMT
 			ending: 1661295600, // Wed, 24 Aug 2022 23:00 GMT
@@ -128,10 +127,7 @@ const map: Maps[] = [
 			image: {
 				small: Assets.EmblemSumeru,
 				default: Assets.PreviewSumeru,
-				preview: [
-					Assets.PreviewSumeru,
-					Assets.PreviewSumeru2,
-				],
+				preview: [Assets.PreviewSumeru, Assets.PreviewSumeru2],
 			},
 		},
 		{

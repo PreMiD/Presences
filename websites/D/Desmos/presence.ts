@@ -49,7 +49,8 @@ presence.on("UpdateData", async () => {
 	} else graphing = 0;
 	// Setting Presence
 	if (graphing === 2) {
-		presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/D/Desmos/assets/logo.jpg";
+		presenceData.smallImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/D/Desmos/assets/logo.jpg";
 		presenceData.smallImageText = "Desmos Graphing Calculator";
 		presenceData.details = "Plotting a Graph: ".concat(title);
 		presenceData.state = numEquations.toString().concat(" Equation");

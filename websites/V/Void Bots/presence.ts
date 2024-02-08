@@ -92,7 +92,8 @@ presence.on("UpdateData", async () => {
 				0,
 				-1
 			)} ${strings.docsViewer2.toLowerCase()}:`;
-			presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/765261270814949417/818976293248827412.png?size=512";
+			presenceData.smallImageKey =
+				"https://cdn.discordapp.com/app-assets/765261270814949417/818976293248827412.png?size=512";
 			presenceData.smallImageText = "Confusion 100";
 			presenceData.state =
 				document.querySelector("title").textContent || "Home";

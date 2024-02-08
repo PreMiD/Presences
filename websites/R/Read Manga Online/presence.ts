@@ -3,10 +3,10 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-	const enum Assets {
-		Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Read%20Manga%20Online/assets/logo.png",
-		Settings = "https://cdn.discordapp.com/app-assets/839455068855861248/839472783590424596.png?size=512",
-	}
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Read%20Manga%20Online/assets/logo.png",
+	Settings = "https://cdn.discordapp.com/app-assets/839455068855861248/839472783590424596.png?size=512",
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
 							presenceData.details = "Reading:";
 							presenceData.state =
 								document.querySelector(".page-title").textContent;
-							presenceData.smallImageKey = Assets.Viewing
+							presenceData.smallImageKey = Assets.Viewing;
 							presenceData.buttons = [{ label: "View manga", url: href }];
 						} else if (pathname.startsWith("/user-panel")) {
 							presenceData.details = "Viewing their:";

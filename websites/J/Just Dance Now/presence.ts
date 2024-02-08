@@ -16,7 +16,8 @@ presence.on("UpdateData", async () => {
 		};
 
 	if (document.querySelector("html").className.includes("vip"))
-		presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/928372793438011433/928774626350358598.png?size=512";
+		presenceData.smallImageKey =
+			"https://cdn.discordapp.com/app-assets/928372793438011433/928774626350358598.png?size=512";
 	presenceData.smallImageText = "VIP";
 	if (document.querySelector("div.logo"))
 		presenceData.details = "Viewing Homepage";

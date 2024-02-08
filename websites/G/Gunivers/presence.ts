@@ -111,7 +111,8 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Home";
 		}
 	} else if (document.location.hostname === "project.gunivers.net") {
-		presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/723474173208297532/803577194118119424.png?size=512";
+		presenceData.smallImageKey =
+			"https://cdn.discordapp.com/app-assets/723474173208297532/803577194118119424.png?size=512";
 		presenceData.details = "Viewing a page:";
 		presenceData.state = "Gunivers Workspace";
 		if (window.location.pathname.endsWith("/projects")) {

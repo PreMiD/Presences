@@ -3,9 +3,9 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Date.now() / 1000;
 
-	const enum Assets {
-		Logo = "https://cdn.rcd.gg/PreMiD/websites/L/Last.fm/assets/logo.png",
-	}
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/L/Last.fm/assets/logo.png",
+}
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
@@ -93,8 +93,8 @@ presence.on("UpdateData", async () => {
 									".album-overview-cover-art > .cover-art > img"
 								)?.src ?? Assets.Logo
 							);
-						} else return Assets.Logo
-					} else return Assets.Logo
+						} else return Assets.Logo;
+					} else return Assets.Logo;
 				})(),
 				state: document.querySelector("h1.header-new-title")?.textContent,
 				buttons: ((): [ButtonData] => {

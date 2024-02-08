@@ -18,7 +18,8 @@ presence.on("UpdateData", () => {
 		presenceData.smallImageKey = Assets.Search;
 	} else {
 		if (pathname.includes("emperors-domination"))
-			presenceData.largeImageKey = "https://cdn.discordapp.com/app-assets/908721185863397426/908730753775435797.png?size=512";
+			presenceData.largeImageKey =
+				"https://cdn.discordapp.com/app-assets/908721185863397426/908730753775435797.png?size=512";
 		if (/^\/$/.test(pathname)) presenceData.details = "Viewing Home Page";
 		else if (/^\/novels\/?$/.test(pathname)) {
 			// Counting comics
@@ -29,7 +30,7 @@ presence.on("UpdateData", () => {
 		} else if (/^\/novel\/[0-9a-z-]+\/?$/i.test(pathname)) {
 			presenceData.details = "Viewing Novel";
 			presenceData.state = document.querySelector(".novel-body h2").textContent;
-			presenceData.smallImageKey = Assets.Viewing
+			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.buttons = [
 				{
 					label: "Visit Novel Page",

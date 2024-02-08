@@ -97,7 +97,10 @@ presence.on("UpdateData", async () => {
 		params = document.location.search,
 		[, action] = path.split("/"),
 		details = boardTypeMapping[action],
-		presenceData: PresenceData = { largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/N/namu.wiki/assets/logo.png" };
+		presenceData: PresenceData = {
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/N/namu.wiki/assets/logo.png",
+		};
 
 	/**
 	 *
@@ -168,7 +171,8 @@ presence.on("UpdateData", async () => {
 			"#app > div > div > nav > ul > li > div > div > div"
 		);
 		if (!members[1].textContent.includes("Please login!")) {
-			presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/846385772688834591/846598555087274004.png?size=512";
+			presenceData.smallImageKey =
+				"https://cdn.discordapp.com/app-assets/846385772688834591/846598555087274004.png?size=512";
 			if (!privacy) presenceData.smallImageText = members[0].textContent;
 		}
 	}

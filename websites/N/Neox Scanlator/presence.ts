@@ -164,7 +164,8 @@ presence.on("UpdateData", async () => {
 		window.getComputedStyle(bodyWrap).getPropertyValue("background-color") ===
 		"rgb(38, 38, 38)"
 	)
-		presenceData.largeImageKey = "https://cdn.discordapp.com/app-assets/704585837949747330/725995167496011838.png?size=512";
+		presenceData.largeImageKey =
+			"https://cdn.discordapp.com/app-assets/704585837949747330/725995167496011838.png?size=512";
 	else if (
 		window.getComputedStyle(bodyWrap).getPropertyValue("background-color") !==
 		"rgb(38, 38, 38)"
@@ -177,7 +178,8 @@ presence.on("UpdateData", async () => {
 		"body > div.wrap > div > header > div.c-sub-header-nav.with-border.hide-sticky-menu > div > div > div.c-modal_item > div > span"
 	);
 	if (UsuarioTexto && PesquisaTexto === null) {
-		presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/704585837949747330/725444173897007155.png?size=512";
+		presenceData.smallImageKey =
+			"https://cdn.discordapp.com/app-assets/704585837949747330/725444173897007155.png?size=512";
 		presenceData.smallImageText = UsuarioTexto.textContent.slice(
 			UsuarioTexto.textContent.search(",") + 1
 		);

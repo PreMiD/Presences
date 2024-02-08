@@ -3,10 +3,10 @@ const presence = new Presence({
 });
 
 const enum Assets {
-  Logo = "https://cdn.rcd.gg/PreMiD/websites/O/Overbuff/assets/logo.png",
-  Ps4 = "https://cdn.discordapp.com/app-assets/701201789365518337/701338930535989339.png?size=512",
-  Xbox = "https://cdn.discordapp.com/app-assets/701201789365518337/701338931983024179.png?size=512",
-  Windows = "https://cdn.discordapp.com/app-assets/701201789365518337/701339552970965040.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/O/Overbuff/assets/logo.png",
+	Ps4 = "https://cdn.discordapp.com/app-assets/701201789365518337/701338930535989339.png?size=512",
+	Xbox = "https://cdn.discordapp.com/app-assets/701201789365518337/701338931983024179.png?size=512",
+	Windows = "https://cdn.discordapp.com/app-assets/701201789365518337/701339552970965040.png?size=512",
 }
 
 presence.on("UpdateData", () => {

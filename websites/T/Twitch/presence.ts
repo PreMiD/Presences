@@ -2,16 +2,16 @@ let elapsed = Math.floor(Date.now() / 1000),
 	prevUrl = document.location.href,
 	oldLang = "en";
 
-	const enum Assets {
-		BlackOps = "https://cdn.discordapp.com/app-assets/802958789555781663/802961388942131262.png?size=512",
-		DevMain = "https://cdn.discordapp.com/app-assets/802958789555781663/802961389425393704.png?size=512",
-		Purple = "https://cdn.discordapp.com/app-assets/802958789555781663/802961389836697640.png?size=512",
-		White = "https://cdn.discordapp.com/app-assets/802958789555781663/802961389865926656.png?size=512",
-		Pride = "https://cdn.discordapp.com/app-assets/802958789555781663/802961389874184203.png?size=512",
-		Logo = "https://cdn.discordapp.com/app-assets/802958789555781663/802961390007615488.png?size=512",
-		DevWhite = "https://cdn.discordapp.com/app-assets/802958789555781663/802961390075248640.png?size=512",
-		DevPurple = "https://cdn.discordapp.com/app-assets/802958789555781663/802961392478715984.png?size=512",
-	}
+const enum Assets {
+	BlackOps = "https://cdn.discordapp.com/app-assets/802958789555781663/802961388942131262.png?size=512",
+	DevMain = "https://cdn.discordapp.com/app-assets/802958789555781663/802961389425393704.png?size=512",
+	Purple = "https://cdn.discordapp.com/app-assets/802958789555781663/802961389836697640.png?size=512",
+	White = "https://cdn.discordapp.com/app-assets/802958789555781663/802961389865926656.png?size=512",
+	Pride = "https://cdn.discordapp.com/app-assets/802958789555781663/802961389874184203.png?size=512",
+	Logo = "https://cdn.discordapp.com/app-assets/802958789555781663/802961390007615488.png?size=512",
+	DevWhite = "https://cdn.discordapp.com/app-assets/802958789555781663/802961390075248640.png?size=512",
+	DevPurple = "https://cdn.discordapp.com/app-assets/802958789555781663/802961392478715984.png?size=512",
+}
 
 const presence = new Presence({
 		clientId: "802958789555781663",
@@ -115,15 +115,14 @@ const presence = new Presence({
 			oldLang
 		);
 	},
-	devLogoArr = [
-		Assets.DevMain,
-		Assets.DevWhite,
-		Assets.DevPurple,],
-	logoArr = [Assets.Logo,
+	devLogoArr = [Assets.DevMain, Assets.DevWhite, Assets.DevPurple],
+	logoArr = [
+		Assets.Logo,
 		Assets.BlackOps,
 		Assets.White,
 		Assets.Purple,
-		Assets.Pride];
+		Assets.Pride,
+	];
 
 let strings: Awaited<ReturnType<typeof getStrings>>;
 

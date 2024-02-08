@@ -13,50 +13,49 @@ let elapsed = Math.floor(Date.now() / 1000),
 	prevUrl = document.location.href;
 
 const statics = {
-	"/pages/global/pagegone.jsf/": {
-		details: "404",
-		state: "Not Found",
+		"/pages/global/pagegone.jsf/": {
+			details: "404",
+			state: "Not Found",
+		},
+		"/page/login/": {
+			details: "Logging In...",
+		},
+		"/page/register/": {
+			details: "Registering...",
+		},
+		"/page/about/": {
+			details: "Viewing Page...",
+			state: "About",
+		},
+		"/page/guide/": {
+			details: "Viewing Page...",
+			state: "User Guide",
+		},
+		"/page/privacy/": {
+			details: "Viewing Page...",
+			state: "Privacy Policy",
+		},
+		"/page/developer/": {
+			details: "Viewing Page...",
+			state: "Developer Resources",
+		},
+		"/Top/": {
+			details: "Viewing Page...",
+			state: "Top Hardware",
+		},
+		"/Software/": {
+			details: "Viewing Page...",
+			state: "PC Software",
+		},
 	},
-	"/page/login/": {
-		details: "Logging In...",
-	},
-	"/page/register/": {
-		details: "Registering...",
-	},
-	"/page/about/": {
-		details: "Viewing Page...",
-		state: "About",
-	},
-	"/page/guide/": {
-		details: "Viewing Page...",
-		state: "User Guide",
-	},
-	"/page/privacy/": {
-		details: "Viewing Page...",
-		state: "Privacy Policy",
-	},
-	"/page/developer/": {
-		details: "Viewing Page...",
-		state: "Developer Resources",
-	},
-	"/Top/": {
-		details: "Viewing Page...",
-		state: "Top Hardware",
-	},
-	"/Software/": {
-		details: "Viewing Page...",
-		state: "PC Software",
-	},
-};
-
-const assets = {
-  "ssd": "https://cdn.discordapp.com/app-assets/735229766701154357/735567736377311334.png?size=512",
-  "cpu": "https://cdn.discordapp.com/app-assets/735229766701154357/735567755817910384.png?size=512",
-  "usb": "https://cdn.discordapp.com/app-assets/735229766701154357/735567756866355301.png?size=512",
-  "hdd": "https://cdn.discordapp.com/app-assets/735229766701154357/735567758095417386.png?size=512",
-  "gpu": "https://cdn.discordapp.com/app-assets/735229766701154357/735567758179303505.png?size=512",
-  "ram": "https://cdn.discordapp.com/app-assets/735229766701154357/735567758225440788.png?size=512",
-}
+	assets = {
+		ssd: "https://cdn.discordapp.com/app-assets/735229766701154357/735567736377311334.png?size=512",
+		cpu: "https://cdn.discordapp.com/app-assets/735229766701154357/735567755817910384.png?size=512",
+		usb: "https://cdn.discordapp.com/app-assets/735229766701154357/735567756866355301.png?size=512",
+		hdd: "https://cdn.discordapp.com/app-assets/735229766701154357/735567758095417386.png?size=512",
+		gpu: "https://cdn.discordapp.com/app-assets/735229766701154357/735567758179303505.png?size=512",
+		ram: "https://cdn.discordapp.com/app-assets/735229766701154357/735567758225440788.png?size=512",
+	};
 
 presence.on("UpdateData", async () => {
 	const { host, pathname, href } = document.location,

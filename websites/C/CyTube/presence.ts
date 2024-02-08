@@ -45,14 +45,14 @@ interface MatchList {
 }
 
 const enum Assets {
-  Logo = "https://cdn.rcd.gg/PreMiD/websites/C/CyTube/assets/logo.png",
-  ServiceYT = "https://cdn.discordapp.com/app-assets/653639828826750976/670459554344992768.png?size=512",
-  ServiceGD = "https://cdn.discordapp.com/app-assets/653639828826750976/670465121331576832.png?size=512",
-  ServiceDBX = "https://cdn.discordapp.com/app-assets/653639828826750976/670466824089108500.png?size=512",
-  ServiceAWS = "https://cdn.discordapp.com/app-assets/653639828826750976/670467866499481636.png?size=512",
-  ServiceDC = "https://cdn.discordapp.com/app-assets/653639828826750976/670489137220026370.png?size=512",
-  ServiceGC = "https://cdn.discordapp.com/app-assets/653639828826750976/670489137715085332.png?size=512",
-  ServiceUK = "https://cdn.discordapp.com/app-assets/653639828826750976/684507782149308485.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/CyTube/assets/logo.png",
+	ServiceYT = "https://cdn.discordapp.com/app-assets/653639828826750976/670459554344992768.png?size=512",
+	ServiceGD = "https://cdn.discordapp.com/app-assets/653639828826750976/670465121331576832.png?size=512",
+	ServiceDBX = "https://cdn.discordapp.com/app-assets/653639828826750976/670466824089108500.png?size=512",
+	ServiceAWS = "https://cdn.discordapp.com/app-assets/653639828826750976/670467866499481636.png?size=512",
+	ServiceDC = "https://cdn.discordapp.com/app-assets/653639828826750976/670489137220026370.png?size=512",
+	ServiceGC = "https://cdn.discordapp.com/app-assets/653639828826750976/670489137715085332.png?size=512",
+	ServiceUK = "https://cdn.discordapp.com/app-assets/653639828826750976/684507782149308485.png?size=512",
 }
 
 const matches: MatchList = {

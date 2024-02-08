@@ -169,7 +169,7 @@ const enum Assets {
 presence.on("UpdateData", async () => {
 	const path = document.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey:Assets.Logo,
+			largeImageKey: Assets.Logo,
 			details: "loading",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		},

@@ -3,15 +3,15 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-	const enum Assets {
-		Logo = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/logo.png",
-		Mspa = "https://cdn.discordapp.com/app-assets/941798064694378557/941818165728526446.png?size=512",
-		Ryan = "https://cdn.discordapp.com/app-assets/941798064694378557/945497825591058492.png?size=512",
-		Hellajeff = "https://cdn.discordapp.com/app-assets/941798064694378557/945503590678683683.png?size=512",
-		Meat = "https://cdn.discordapp.com/app-assets/941798064694378557/945507680318029834.png?size=512",
-		Candy = "https://cdn.discordapp.com/app-assets/941798064694378557/945507680330612806.png?size=512",
-		Prologue = "https://cdn.discordapp.com/app-assets/941798064694378557/945538252499202049.png?size=512",
-	}
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/logo.png",
+	Mspa = "https://cdn.discordapp.com/app-assets/941798064694378557/941818165728526446.png?size=512",
+	Ryan = "https://cdn.discordapp.com/app-assets/941798064694378557/945497825591058492.png?size=512",
+	Hellajeff = "https://cdn.discordapp.com/app-assets/941798064694378557/945503590678683683.png?size=512",
+	Meat = "https://cdn.discordapp.com/app-assets/941798064694378557/945507680318029834.png?size=512",
+	Candy = "https://cdn.discordapp.com/app-assets/941798064694378557/945507680330612806.png?size=512",
+	Prologue = "https://cdn.discordapp.com/app-assets/941798064694378557/945538252499202049.png?size=512",
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {

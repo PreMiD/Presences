@@ -17,7 +17,8 @@ presence.on("UpdateData", () => {
 			presenceData.details = "Reading the news";
 		else if (document.location.pathname.includes("/photos/")) {
 			presenceData.details = "Looking at photos";
-			presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/728904519055966228/734393800918695976.png?size=512";
+			presenceData.smallImageKey =
+				"https://cdn.discordapp.com/app-assets/728904519055966228/734393800918695976.png?size=512";
 			presenceData.smallImageText = "Photos";
 		} else if (document.location.pathname.includes("/videos"))
 			presenceData.details = "Searching for videos";

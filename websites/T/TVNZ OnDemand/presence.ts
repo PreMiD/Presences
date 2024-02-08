@@ -22,9 +22,9 @@ presence.on("UpdateData", () => {
 				"https://cdn.rcd.gg/PreMiD/websites/T/TVNZ%20OnDemand/assets/logo.png",
 		};
 
-	if (document.location.href.includes("login.tech.tvnz.co.nz")) {
+	if (document.location.href.includes("login.tech.tvnz.co.nz"))
 		presenceData.details = "Logging in...";
-	} else if (document.location.pathname.includes("/1-news-special")) {
+	else if (document.location.pathname.includes("/1-news-special")) {
 		presenceData.details = "Watching a live 1 NEWS Special";
 		presenceData.state =
 			document.querySelectorAll(".Hero-title")[1].textContent;
@@ -114,9 +114,8 @@ presence.on("UpdateData", () => {
 				break;
 			}
 			default:
-				if (document.location.pathname.includes("/one-news")) {
+				if (document.location.pathname.includes("/one-news"))
 					presenceData.details = "Browsing 1 NEWS";
-				}
 		}
 	}
 

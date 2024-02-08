@@ -31,7 +31,8 @@ presence.on("UpdateData", async () => {
 				.getAttribute("src")
 		) {
 			presenceData.largeImageKey = image;
-			presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/D/Doordash/assets/logo.png";
+			presenceData.smallImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/D/Doordash/assets/logo.png";
 			presenceData.details = `Viewing the menu of ${name}`;
 		} else {
 			if (!hideFood) {

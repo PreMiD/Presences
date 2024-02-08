@@ -58,17 +58,17 @@ const updateCallback = {
 		];
 	};
 
-	const enum Assets {
-		Sm = "https://cdn.discordapp.com/app-assets/731069087031230487/731070558573428757.png?size=512",
-		Accounts = "https://cdn.discordapp.com/app-assets/731069087031230487/731070558594400269.png?size=512",
-		Tm = "https://cdn.discordapp.com/app-assets/731069087031230487/731070558833344515.png?size=512",
-		Api = "https://cdn.discordapp.com/app-assets/731069087031230487/731070559177146368.png?size=512",
-		Item = "https://cdn.discordapp.com/app-assets/731069087031230487/731070561765031946.png?size=512",
-		Logo = "https://cdn.discordapp.com/app-assets/731069087031230487/731070566781419530.png?size=512",
-		Tmtube = "https://cdn.discordapp.com/app-assets/731069087031230487/731070568253620305.png?size=512",
-		Tm2020 = "https://cdn.discordapp.com/app-assets/731069087031230487/732485276756213852.png?size=512",
-		Tmx = "https://cdn.discordapp.com/app-assets/731069087031230487/732485278446387262.png?size=512",
-	}
+const enum Assets {
+	Sm = "https://cdn.discordapp.com/app-assets/731069087031230487/731070558573428757.png?size=512",
+	Accounts = "https://cdn.discordapp.com/app-assets/731069087031230487/731070558594400269.png?size=512",
+	Tm = "https://cdn.discordapp.com/app-assets/731069087031230487/731070558833344515.png?size=512",
+	Api = "https://cdn.discordapp.com/app-assets/731069087031230487/731070559177146368.png?size=512",
+	Item = "https://cdn.discordapp.com/app-assets/731069087031230487/731070561765031946.png?size=512",
+	Logo = "https://cdn.discordapp.com/app-assets/731069087031230487/731070566781419530.png?size=512",
+	Tmtube = "https://cdn.discordapp.com/app-assets/731069087031230487/731070568253620305.png?size=512",
+	Tm2020 = "https://cdn.discordapp.com/app-assets/731069087031230487/732485276756213852.png?size=512",
+	Tmx = "https://cdn.discordapp.com/app-assets/731069087031230487/732485278446387262.png?size=512",
+}
 
 ((): void => {
 	if (
@@ -108,7 +108,7 @@ const updateCallback = {
 				presenceData.smallImageText = "ShootMania";
 				break;
 			case "trackmania":
-				presenceData.smallImageKey =  Assets.Tm2020;
+				presenceData.smallImageKey = Assets.Tm2020;
 				presenceData.smallImageText = "Trackmania (2020)";
 				presenceData.largeImageKey = Assets.Tmx;
 				break;

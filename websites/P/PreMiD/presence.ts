@@ -136,7 +136,7 @@ presence.on("UpdateData", async () => {
 					if (icon) {
 						presenceData.largeImageKey = icon;
 						presenceData.smallImageKey =
-						"https://cdn.rcd.gg/PreMiD/websites/P/PreMiD/assets/logo.png";
+							"https://cdn.rcd.gg/PreMiD/websites/P/PreMiD/assets/logo.png";
 					}
 					break;
 				case pathIncludes("/store/presences/"):
@@ -156,7 +156,7 @@ presence.on("UpdateData", async () => {
 					if (icon) {
 						presenceData.largeImageKey = icon;
 						presenceData.smallImageKey =
-						"https://cdn.rcd.gg/PreMiD/websites/P/PreMiD/assets/logo.png";
+							"https://cdn.rcd.gg/PreMiD/websites/P/PreMiD/assets/logo.png";
 					}
 					break;
 				case pathIncludes("/store"):

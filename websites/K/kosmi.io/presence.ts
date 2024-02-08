@@ -19,10 +19,10 @@ const noGames: string[] = [
 ];
 
 const enum Assets {
-  Kosmimain = "https://cdn.discordapp.com/app-assets/813518808634621952/813519353777356830.png?size=512",
-  Vcall = "https://cdn.discordapp.com/app-assets/813518808634621952/814488369383997480.png?size=512",
-  Gamepad = "https://cdn.discordapp.com/app-assets/813518808634621952/814494719248826378.png?size=512",
-  Paintbrush = "https://cdn.discordapp.com/app-assets/813518808634621952/814504609699201034.png?size=512",
+	Kosmimain = "https://cdn.discordapp.com/app-assets/813518808634621952/813519353777356830.png?size=512",
+	Vcall = "https://cdn.discordapp.com/app-assets/813518808634621952/814488369383997480.png?size=512",
+	Gamepad = "https://cdn.discordapp.com/app-assets/813518808634621952/814494719248826378.png?size=512",
+	Paintbrush = "https://cdn.discordapp.com/app-assets/813518808634621952/814504609699201034.png?size=512",
 }
 
 presence.on("UpdateData", async () => {

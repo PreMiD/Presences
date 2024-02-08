@@ -3,10 +3,10 @@ const presence = new Presence({
 });
 
 const enum Assets {
-  Logo = "https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/logo.png",
-  Skin = "https://cdn.discordapp.com/app-assets/501842028569559061/969231677899571250.png?size=512",
-  Shop = "https://cdn.discordapp.com/app-assets/501842028569559061/969231678016995338.png?size=512",
-  Leaderboard = "https://cdn.discordapp.com/app-assets/501842028569559061/969232037728882739.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/logo.png",
+	Skin = "https://cdn.discordapp.com/app-assets/501842028569559061/969231677899571250.png?size=512",
+	Shop = "https://cdn.discordapp.com/app-assets/501842028569559061/969231678016995338.png?size=512",
+	Leaderboard = "https://cdn.discordapp.com/app-assets/501842028569559061/969232037728882739.png?size=512",
 }
 
 let path,
@@ -135,7 +135,7 @@ function resolveLanguage(lang: string): keyof typeof waitingString {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: Assets.Logo
+		largeImageKey: Assets.Logo,
 	};
 
 	path = document.location.pathname.split("/");
@@ -205,7 +205,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = "En jeu";
 
-		presenceData.smallImageKey = Assets.Live
+		presenceData.smallImageKey = Assets.Live;
 		if (currTime?.includes(":")) {
 			[presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(
 				cp,
@@ -248,7 +248,7 @@ presence.on("UpdateData", async () => {
 
 		switch (path[0]) {
 			case "skin":
-				presenceData.smallImageKey = Assets.Skin
+				presenceData.smallImageKey = Assets.Skin;
 				presenceData.smallImageText = "Choisis ton skin";
 				presenceData.state = "Consulte ses Skins";
 				break;
@@ -256,7 +256,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = "Change ses paramètres";
 				break;
 			case "shop":
-				presenceData.smallImageKey = Assets.Shop
+				presenceData.smallImageKey = Assets.Shop;
 				presenceData.smallImageText = "Achète des skins";
 				presenceData.state = "Consulte la Boutique";
 				break;

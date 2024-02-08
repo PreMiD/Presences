@@ -9,12 +9,12 @@ const enum Assets {
 	Animenews = "https://cdn.discordapp.com/app-assets/687352219598585905/687372495367700533.png?size=512",
 	Animekino = "https://cdn.discordapp.com/app-assets/687352219598585905/687372496135258163.png?size=512",
 	Animemesse = "https://cdn.discordapp.com/app-assets/687352219598585905/687369511397359642.png?size=512",
-	Animefanshop = "https://cdn.discordapp.com/app-assets/687352219598585905/687374084719247374.png?size=512"
+	Animefanshop = "https://cdn.discordapp.com/app-assets/687352219598585905/687374084719247374.png?size=512",
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:Assets.Logo,
+		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -166,7 +166,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "www.animefanshop.de": {
-			presenceData.largeImageKey  = Assets.Animefanshop;
+			presenceData.largeImageKey = Assets.Animefanshop;
 			const product = document.querySelector(
 				".product-info-title-desktop > span"
 			);

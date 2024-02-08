@@ -17,13 +17,13 @@ function parseQueryString(queryString?: string): { [key: string]: string } {
 }
 
 const enum Assets {
-  Logo =  "https://cdn.rcd.gg/PreMiD/websites/R/RootMe/assets/logo.png",
-  Ctf = "https://cdn.discordapp.com/app-assets/673322920809988120/673324293567938590.png?size=512",
-  Chall = "https://cdn.discordapp.com/app-assets/673322920809988120/673324321489551383.png?size=512",
-  Commu = "https://cdn.discordapp.com/app-assets/673322920809988120/684073937268768814.png?size=512",
-  Docu = "https://cdn.discordapp.com/app-assets/673322920809988120/684078044599550048.png?size=512",
-  Infos = "https://cdn.discordapp.com/app-assets/673322920809988120/684080348782788608.png?size=512",
-  Tools = "https://cdn.discordapp.com/app-assets/673322920809988120/684081622722936856.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/RootMe/assets/logo.png",
+	Ctf = "https://cdn.discordapp.com/app-assets/673322920809988120/673324293567938590.png?size=512",
+	Chall = "https://cdn.discordapp.com/app-assets/673322920809988120/673324321489551383.png?size=512",
+	Commu = "https://cdn.discordapp.com/app-assets/673322920809988120/684073937268768814.png?size=512",
+	Docu = "https://cdn.discordapp.com/app-assets/673322920809988120/684078044599550048.png?size=512",
+	Infos = "https://cdn.discordapp.com/app-assets/673322920809988120/684080348782788608.png?size=512",
+	Tools = "https://cdn.discordapp.com/app-assets/673322920809988120/684081622722936856.png?size=512",
 }
 
 presence.on("UpdateData", async () => {

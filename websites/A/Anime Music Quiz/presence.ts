@@ -18,13 +18,12 @@ const enum Assets {
 	Headset = "https://cdn.discordapp.com/app-assets/691494438349832227/691662213961875467.png?size=512",
 	Gamepad = "https://cdn.discordapp.com/app-assets/691494438349832227/691662213169152143.png?size=512",
 	Menu = "https://cdn.discordapp.com/app-assets/691494438349832227/691662211520790588.png?size=512",
-	Info = "https://cdn.discordapp.com/app-assets/691494438349832227/691662212766629998.png?size=512"
+	Info = "https://cdn.discordapp.com/app-assets/691494438349832227/691662212766629998.png?size=512",
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:
-			Assets.Logo,
+		largeImageKey: Assets.Logo,
 	};
 	if (!navigator.language.includes("it-IT")) {
 		// English

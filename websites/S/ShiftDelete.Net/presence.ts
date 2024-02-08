@@ -189,7 +189,8 @@ presence.on("UpdateData", async () => {
 						? author.textContent
 						: "Belirsiz Gönderi Sahibi"
 				} ${time && time.textContent !== "" ? `(${time.textContent})` : ""}`,
-				smallImageKey: "https://cdn.discordapp.com/app-assets/643821029940133898/643836970824499200.png?size=512",
+				smallImageKey:
+					"https://cdn.discordapp.com/app-assets/643821029940133898/643836970824499200.png?size=512",
 				smallImageText: "Bir forum gönderisi okuyor.",
 				startTimestamp: Math.floor(Date.now() / 1000),
 			});
@@ -215,7 +216,8 @@ presence.on("UpdateData", async () => {
 					"https://cdn.rcd.gg/PreMiD/websites/S/ShiftDelete.Net/assets/logo.png",
 				details: "Bir sayfaya göz atıyor:",
 				state: pages[page] || pages[page.slice(0, -1)],
-				smallImageKey: "https://cdn.discordapp.com/app-assets/643821029940133898/643836970824499200.png?size=512",
+				smallImageKey:
+					"https://cdn.discordapp.com/app-assets/643821029940133898/643836970824499200.png?size=512",
 				smallImageText: "Bu kullanıcı şuan da SDN Forum'da.",
 				startTimestamp: Math.floor(Date.now() / 1000),
 			});

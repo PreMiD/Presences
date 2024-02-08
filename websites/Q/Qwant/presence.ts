@@ -28,11 +28,11 @@ interface ItemMap {
 }
 
 const enum Assets {
-  Logo = "https://cdn.rcd.gg/PreMiD/websites/Q/Qwant/assets/logo.png",
-  Qwantjunior = "https://cdn.discordapp.com/app-assets/719331723560878091/719338857170206791.png?size=512",
-  Music = "https://cdn.discordapp.com/app-assets/719331723560878091/719348566467936337.png?size=512",
-  Maps = "https://cdn.discordapp.com/app-assets/719331723560878091/719353198581907476.png?size=512",
-  News = "https://cdn.discordapp.com/app-assets/719331723560878091/719367651205447721.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/Q/Qwant/assets/logo.png",
+	Qwantjunior = "https://cdn.discordapp.com/app-assets/719331723560878091/719338857170206791.png?size=512",
+	Music = "https://cdn.discordapp.com/app-assets/719331723560878091/719348566467936337.png?size=512",
+	Maps = "https://cdn.discordapp.com/app-assets/719331723560878091/719353198581907476.png?size=512",
+	News = "https://cdn.discordapp.com/app-assets/719331723560878091/719367651205447721.png?size=512",
 }
 
 presence.on("UpdateData", async () => {

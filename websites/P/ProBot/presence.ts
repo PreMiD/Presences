@@ -92,7 +92,7 @@ presence.on("UpdateData", () => {
 		];
 	} else if (document.location.pathname.includes("/server/")) {
 		presenceData.smallImageKey =
-		"https://cdn.rcd.gg/PreMiD/websites/P/ProBot/assets/logo.png";
+			"https://cdn.rcd.gg/PreMiD/websites/P/ProBot/assets/logo.png";
 		presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 			"#sidebar_sidebar__avatar__QDGRP"
 		).src;

@@ -14,25 +14,15 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData);
 		return;
 	}
-	if (p.startsWith("/a")) {
-		presenceData.details = "ありがとうございます";
-	} else if (p.startsWith("/g")) {
-		presenceData.details = "Install Gentoo";
-	} else if (p.startsWith("/b")) {
-		presenceData.details = "बोलो जुबाँ केसरी";
-	} else if (p.startsWith("/pol")) {
-		presenceData.details = "Politically Incorrect";
-	} else if (p.startsWith("/ent")) {
-		presenceData.details = "Entertainment";
-	} else if (p.startsWith("/man")) {
-		presenceData.details = "manuṣyatā";
-	} else if (p.startsWith("/meta")) {
-		presenceData.details = "Discussions";
-	} else if (p.startsWith("/yoga")) {
-		presenceData.details = "Fitness";
-	} else if (p.startsWith("/dhan")) {
-		presenceData.details = "Dhandho";
-	}
+	if (p.startsWith("/a")) presenceData.details = "ありがとうございます";
+	else if (p.startsWith("/g")) presenceData.details = "Install Gentoo";
+	else if (p.startsWith("/b")) presenceData.details = "बोलो जुबाँ केसरी";
+	else if (p.startsWith("/pol")) presenceData.details = "Politically Incorrect";
+	else if (p.startsWith("/ent")) presenceData.details = "Entertainment";
+	else if (p.startsWith("/man")) presenceData.details = "manuṣyatā";
+	else if (p.startsWith("/meta")) presenceData.details = "Discussions";
+	else if (p.startsWith("/yoga")) presenceData.details = "Fitness";
+	else if (p.startsWith("/dhan")) presenceData.details = "Dhandho";
 
 	const parts = p.split("/");
 	presenceData.smallImageText = `Browsing /${parts[1].split(".")[0]}/ - ${
@@ -52,7 +42,8 @@ presence.on("UpdateData", async () => {
 		}`;
 	} else if (p.endsWith("Rules.html") || p.endsWith("rules.html")) {
 		presenceData.smallImageText = "Reading rules";
-		presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/I/Indiachan/assets/logo.png";
+		presenceData.smallImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/I/Indiachan/assets/logo.png";
 	} else if (p.includes("media"))
 		presenceData.smallImageText = "Looking at some media";
 

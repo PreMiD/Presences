@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 					Math.floor(video.currentTime),
 					Math.floor(video.duration)
 				);
-			presenceData.smallImageKey = video.paused ? Assets.Stop : Assets.Play
+			presenceData.smallImageKey = video.paused ? Assets.Stop : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? "Capítulo pausado"
 				: "Reproduciendo capítulo";
@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
 			}
 		} else {
 			presenceData.details = "Viendo anime";
-			presenceData.smallImageKey = video.paused ?Assets.Stop : Assets.Play
+			presenceData.smallImageKey = video.paused ? Assets.Stop : Assets.Play;
 			presenceData.smallImageText = video.paused
 				? "Capítulo pausado"
 				: "Reproduciendo capítulo";

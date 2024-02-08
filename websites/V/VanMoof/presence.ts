@@ -1,15 +1,21 @@
 const presence = new Presence({
 		clientId: "941761536681201676",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
-
-	const assets = {
-		"vanmoof_v": "https://cdn.discordapp.com/app-assets/941761536681201676/941774184734928996.png?size=512",
-		"vanmoof_s3": "https://cdn.discordapp.com/app-assets/941761536681201676/949822264277356584.png?size=512",
-		"vanmoof_x3": "https://cdn.discordapp.com/app-assets/941761536681201676/949822301543739422.png?size=512",
-		"vanmoof_a5": "https://cdn.discordapp.com/app-assets/941761536681201676/960922227874873444.png?size=512",
-		"vanmoof_s5": "https://cdn.discordapp.com/app-assets/941761536681201676/960922227891654656.png?size=512",
-	}
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	/* eslint-disable camelcase */
+	assets = {
+		vanmoof_v:
+			"https://cdn.discordapp.com/app-assets/941761536681201676/941774184734928996.png?size=512",
+		vanmoof_s3:
+			"https://cdn.discordapp.com/app-assets/941761536681201676/949822264277356584.png?size=512",
+		vanmoof_x3:
+			"https://cdn.discordapp.com/app-assets/941761536681201676/949822301543739422.png?size=512",
+		vanmoof_a5:
+			"https://cdn.discordapp.com/app-assets/941761536681201676/960922227874873444.png?size=512",
+		vanmoof_s5:
+			"https://cdn.discordapp.com/app-assets/941761536681201676/960922227891654656.png?size=512",
+	};
+/* eslint-enable camelcase */
 
 presence.on("UpdateData", async () => {
 	const urlpath = window.location.pathname.split("/"),
@@ -231,8 +237,12 @@ presence.on("UpdateData", async () => {
 						.split("-")
 						.pop()
 						.toUpperCase()}`;
-					presenceData.largeImageKey = assets[`vanmoof_${urlpath[2].split("-").pop()}` as keyof typeof assets];
-					presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/V/VanMoof/assets/logo.png";
+					presenceData.largeImageKey =
+						assets[
+							`vanmoof_${urlpath[2].split("-").pop()}` as keyof typeof assets
+						];
+					presenceData.smallImageKey =
+						"https://cdn.rcd.gg/PreMiD/websites/V/VanMoof/assets/logo.png";
 					presenceData.buttons = [
 						{
 							label: "View on VanMoof",

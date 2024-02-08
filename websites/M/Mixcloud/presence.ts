@@ -51,13 +51,13 @@ presence.on("UpdateData", async () => {
 			state: author,
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/M/Mixcloud/assets/logo.png",
-			smallImageKey: isPlaying ?Assets.Play : Assets.Pause,
+			smallImageKey: isPlaying ? Assets.Play : Assets.Pause,
 			smallImageText: isPlaying ? (await strings).play : (await strings).pause,
 			buttons: [{ label: openUrlText, url }],
 		};
 
 		if (liveIsPlaying) {
-			presenceData.smallImageKey = Assets.Live
+			presenceData.smallImageKey = Assets.Live;
 			presenceData.smallImageText = (await strings).live;
 		}
 

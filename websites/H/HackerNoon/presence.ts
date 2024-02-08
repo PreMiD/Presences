@@ -31,7 +31,8 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector<HTMLInputElement>(
 			"#searchbox > div > form > input"
 		).value;
-		presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/H/HackerNoon/assets/logo.png";
+		presenceData.smallImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/H/HackerNoon/assets/logo.png";
 	} else if (user && user.textContent !== "") {
 		presenceData.details = "Viewing User Profile:";
 		presenceData.state = user.textContent;

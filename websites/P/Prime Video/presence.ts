@@ -23,7 +23,8 @@ function getTimestamps(videoTime: number, videoDuration: number): number[] {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		type: ActivityType.Watching,
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/Prime%20Video/assets/logo.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/P/Prime%20Video/assets/logo.png",
 	};
 	presenceData.startTimestamp = browsingTimestamp;
 	const title: string =

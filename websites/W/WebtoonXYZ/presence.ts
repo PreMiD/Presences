@@ -3,13 +3,13 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-	const enum Assets {
-		Logo = "https://cdn.discordapp.com/app-assets/836962986451140609/836964769042661427.png?size=512",
-		View = "https://cdn.discordapp.com/app-assets/836962986451140609/836964769826996245.png?size=512",
-		Logo2 = "https://cdn.discordapp.com/app-assets/836962986451140609/836971715468853260.png?size=512",
-		Settings = "https://cdn.discordapp.com/app-assets/836962986451140609/837000268998508615.png?size=512",
-		Solo = "https://cdn.discordapp.com/app-assets/836962986451140609/837008159934513174.png?size=512",
-	}
+const enum Assets {
+	Logo = "https://cdn.discordapp.com/app-assets/836962986451140609/836964769042661427.png?size=512",
+	View = "https://cdn.discordapp.com/app-assets/836962986451140609/836964769826996245.png?size=512",
+	Logo2 = "https://cdn.discordapp.com/app-assets/836962986451140609/836971715468853260.png?size=512",
+	Settings = "https://cdn.discordapp.com/app-assets/836962986451140609/837000268998508615.png?size=512",
+	Solo = "https://cdn.discordapp.com/app-assets/836962986451140609/837008159934513174.png?size=512",
+}
 
 presence.on("UpdateData", async () => {
 	const [logo, buttons] = await Promise.all([
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 			? Assets.Solo
 			: logo === 0
 			? Assets.Logo
-			: Assets.Logo2
+			: Assets.Logo2;
 		presenceData.smallImageKey = Assets.Reading;
 		if (buttons) {
 			presenceData.buttons = [
@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
 			? Assets.Solo
 			: logo === 0
 			? Assets.Logo
-			: Assets.Logo2
+			: Assets.Logo2;
 		if (buttons) {
 			presenceData.buttons = [
 				{

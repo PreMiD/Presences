@@ -10,13 +10,13 @@ let gametypequery: string,
 	alivecount: string,
 	place: string;
 
-const browsingTimestamp = Math.floor(Date.now() / 1000);
-
-const assets = {
-  "squad": "https://cdn.discordapp.com/app-assets/640711877609127976/729548462886223932.png?size=512",
-  "duo": "https://cdn.discordapp.com/app-assets/640711877609127976/729549183391891507.png?size=512",
-  "solo": "https://cdn.discordapp.com/app-assets/640711877609127976/730196573581213749.png?size=512",
-}
+const browsingTimestamp = Math.floor(Date.now() / 1000),
+	assets = {
+		squad:
+			"https://cdn.discordapp.com/app-assets/640711877609127976/729548462886223932.png?size=512",
+		duo: "https://cdn.discordapp.com/app-assets/640711877609127976/729549183391891507.png?size=512",
+		solo: "https://cdn.discordapp.com/app-assets/640711877609127976/730196573581213749.png?size=512",
+	};
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -50,7 +50,8 @@ presence.on("UpdateData", async () => {
 						url: document.baseURI,
 					},
 				];
-				presenceData.smallImageKey = assets[gametype.toLowerCase() as keyof typeof assets];
+				presenceData.smallImageKey =
+					assets[gametype.toLowerCase() as keyof typeof assets];
 				presenceData.smallImageText =
 					document.querySelector("#team-code").textContent;
 			}

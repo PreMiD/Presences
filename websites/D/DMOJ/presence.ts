@@ -3,28 +3,28 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-	const enum Assets {
-		Editorial = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050386276353.png?size=512",
-		Post = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050776322148.png?size=512",
-		EditProfile = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050776338452.png?size=512",
-		Organization = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050805682186.png?size=512",
-		Problem = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050809892924.png?size=512",
-		About = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050814074911.png?size=512",
-		Home = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050814087168.png?size=512",
-		Contest = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050918924318.png?size=512",
-		Leaderboard = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050931515393.png?size=512",
-		Status = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051409657858.png?size=512",
-		SubmissionList = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051510317118.png?size=512",
-		Ticket = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051585814561.png?size=512",
-		ProblemList = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051678105600.png?size=512",
-		Submit = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051703283713.png?size=512",
-		Statistics = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051720048710.png?size=512",
-		Submission = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051732635688.png?size=512",
-		Source = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051757793311.png?size=512",
-		User = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051829108786.png?size=512",
-		Users = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051954925649.png?size=512",
-		Icon = "https://cdn.discordapp.com/app-assets/754070047193956492/870496976570044449.png?size=512",
-	}
+const enum Assets {
+	Editorial = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050386276353.png?size=512",
+	Post = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050776322148.png?size=512",
+	EditProfile = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050776338452.png?size=512",
+	Organization = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050805682186.png?size=512",
+	Problem = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050809892924.png?size=512",
+	About = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050814074911.png?size=512",
+	Home = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050814087168.png?size=512",
+	Contest = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050918924318.png?size=512",
+	Leaderboard = "https://cdn.discordapp.com/app-assets/754070047193956492/870495050931515393.png?size=512",
+	Status = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051409657858.png?size=512",
+	SubmissionList = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051510317118.png?size=512",
+	Ticket = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051585814561.png?size=512",
+	ProblemList = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051678105600.png?size=512",
+	Submit = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051703283713.png?size=512",
+	Statistics = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051720048710.png?size=512",
+	Submission = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051732635688.png?size=512",
+	Source = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051757793311.png?size=512",
+	User = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051829108786.png?size=512",
+	Users = "https://cdn.discordapp.com/app-assets/754070047193956492/870495051954925649.png?size=512",
+	Icon = "https://cdn.discordapp.com/app-assets/754070047193956492/870496976570044449.png?size=512",
+}
 
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
@@ -258,7 +258,7 @@ presence.on("UpdateData", () => {
 		presenceData.state = document
 			.querySelector("#user-links > ul > li > a > span > span > b")
 			.textContent.trim();
-		presenceData.largeImageKey =Assets.EditProfile;
+		presenceData.largeImageKey = Assets.EditProfile;
 	} else if (url.includes("contests")) {
 		presenceData.details = "Browsing contests";
 		presenceData.largeImageKey = Assets.Contest;

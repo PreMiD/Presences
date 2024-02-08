@@ -3,13 +3,13 @@ const presence = new Presence({
 	}),
 	timestampe = Math.floor(Date.now() / 1000);
 
-	const enum Assets {
-		Logo = "https://cdn.rcd.gg/PreMiD/websites/O/osu%20track/assets/logo.png",
-		Mania = "https://cdn.discordapp.com/app-assets/861180231909113866/861182390932340736.png?size=512",
-		Taiko = "https://cdn.discordapp.com/app-assets/861180231909113866/861182418131484682.png?size=512",
-		Ctb = "https://cdn.discordapp.com/app-assets/861180231909113866/861182443368218624.png?size=512",
-		Circle = "https://cdn.discordapp.com/app-assets/861180231909113866/861462486225911808.png?size=512",
-	}
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/O/osu%20track/assets/logo.png",
+	Mania = "https://cdn.discordapp.com/app-assets/861180231909113866/861182390932340736.png?size=512",
+	Taiko = "https://cdn.discordapp.com/app-assets/861180231909113866/861182418131484682.png?size=512",
+	Ctb = "https://cdn.discordapp.com/app-assets/861180231909113866/861182443368218624.png?size=512",
+	Circle = "https://cdn.discordapp.com/app-assets/861180231909113866/861462486225911808.png?size=512",
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {

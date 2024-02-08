@@ -3,22 +3,22 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-	const enum Assets {
-		ChartBar = "https://cdn.discordapp.com/app-assets/860146992284958762/860153594841137182.png?size=512",
-		Envelope = "https://cdn.discordapp.com/app-assets/860146992284958762/860153594845855786.png?size=512",
-		Donate = "https://cdn.discordapp.com/app-assets/860146992284958762/860153596300755014.png?size=512",
-		Incubator = "https://cdn.discordapp.com/app-assets/860146992284958762/860153598825463824.png?size=512",
-		Logo = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/logo.png",
-		Phabricator = "https://cdn.discordapp.com/app-assets/860146992284958762/860153727729926214.png?size=512",
-		Wikimania = "https://cdn.discordapp.com/app-assets/860146992284958762/860153728878641193.png?size=512",
-		Xtools = "https://cdn.discordapp.com/app-assets/860146992284958762/860153730901082123.png?size=512",
-		Mediawiki = "https://cdn.discordapp.com/app-assets/860146992284958762/860153730997026836.png?size=512",
-		WikimediaCloudServices = "https://cdn.discordapp.com/app-assets/860146992284958762/860153735523467264.png?size=512",
-		Meta = "https://cdn.discordapp.com/app-assets/860146992284958762/860153739813847091.png?size=512",
-		Wikitech = "https://cdn.discordapp.com/app-assets/860146992284958762/860153742744485908.png?size=512",
-		LogoBlack = "https://cdn.discordapp.com/app-assets/860146992284958762/893141805049184258.png?size=512",
-		Wikispore = "https://cdn.discordapp.com/app-assets/860146992284958762/894126112819544075.png?size=512",
-	}
+const enum Assets {
+	ChartBar = "https://cdn.discordapp.com/app-assets/860146992284958762/860153594841137182.png?size=512",
+	Envelope = "https://cdn.discordapp.com/app-assets/860146992284958762/860153594845855786.png?size=512",
+	Donate = "https://cdn.discordapp.com/app-assets/860146992284958762/860153596300755014.png?size=512",
+	Incubator = "https://cdn.discordapp.com/app-assets/860146992284958762/860153598825463824.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/logo.png",
+	Phabricator = "https://cdn.discordapp.com/app-assets/860146992284958762/860153727729926214.png?size=512",
+	Wikimania = "https://cdn.discordapp.com/app-assets/860146992284958762/860153728878641193.png?size=512",
+	Xtools = "https://cdn.discordapp.com/app-assets/860146992284958762/860153730901082123.png?size=512",
+	Mediawiki = "https://cdn.discordapp.com/app-assets/860146992284958762/860153730997026836.png?size=512",
+	WikimediaCloudServices = "https://cdn.discordapp.com/app-assets/860146992284958762/860153735523467264.png?size=512",
+	Meta = "https://cdn.discordapp.com/app-assets/860146992284958762/860153739813847091.png?size=512",
+	Wikitech = "https://cdn.discordapp.com/app-assets/860146992284958762/860153742744485908.png?size=512",
+	LogoBlack = "https://cdn.discordapp.com/app-assets/860146992284958762/893141805049184258.png?size=512",
+	Wikispore = "https://cdn.discordapp.com/app-assets/860146992284958762/894126112819544075.png?size=512",
+}
 
 let currentURL = new URL(document.location.href),
 	currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
@@ -445,7 +445,7 @@ const updateCallback = {
 						break;
 					}
 					case "www.mediawiki.org": {
-						presenceData.smallImageKey = Assets.Mediawiki
+						presenceData.smallImageKey = Assets.Mediawiki;
 						break;
 					}
 					default:
@@ -454,7 +454,7 @@ const updateCallback = {
 						else if (currentURL.hostname === "foundation.wikimedia.org")
 							presenceData.smallImageKey = Assets.LogoBlack;
 						else if (currentURL.hostname === "wikispore.wmflabs.org")
-							presenceData.smallImageKey = Assets.Wikispore
+							presenceData.smallImageKey = Assets.Wikispore;
 				}
 
 				const siteName = mwConfig.wgSiteName,

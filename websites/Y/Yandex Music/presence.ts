@@ -50,7 +50,7 @@ setInterval(async () => {
 
 	presenceData = {
 		largeImageKey,
-		smallImageKey: playing ?Assets.Play : Assets.Pause,
+		smallImageKey: playing ? Assets.Play : Assets.Pause,
 		smallImageText: playing ? (await strings).playing : (await strings).pause,
 		details:
 			document.querySelectorAll<HTMLElement>(".track__title")[0].textContent,

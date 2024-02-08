@@ -3,16 +3,16 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-	const enum Assets {
-		Group = "https://cdn.discordapp.com/app-assets/909403157686288414/911255304233189427.png?size=512",
-		Home = "https://cdn.discordapp.com/app-assets/909403157686288414/911255304358993920.png?size=512",
-		Notification = "https://cdn.discordapp.com/app-assets/909403157686288414/911255304363212822.png?size=512",
-		User = "https://cdn.discordapp.com/app-assets/909403157686288414/911255304463867905.png?size=512",
-		Star = "https://cdn.discordapp.com/app-assets/909403157686288414/911260439646711839.png?size=512",
-		List = "https://cdn.discordapp.com/app-assets/909403157686288414/911260439952883762.png?size=512",
-		Poll = "https://cdn.discordapp.com/app-assets/909403157686288414/911260440003215380.png?size=512",
-		PersonalityDatabase = "https://cdn.discordapp.com/app-assets/909403157686288414/911862823720742932.png?size=512",
-	}
+const enum Assets {
+	Group = "https://cdn.discordapp.com/app-assets/909403157686288414/911255304233189427.png?size=512",
+	Home = "https://cdn.discordapp.com/app-assets/909403157686288414/911255304358993920.png?size=512",
+	Notification = "https://cdn.discordapp.com/app-assets/909403157686288414/911255304363212822.png?size=512",
+	User = "https://cdn.discordapp.com/app-assets/909403157686288414/911255304463867905.png?size=512",
+	Star = "https://cdn.discordapp.com/app-assets/909403157686288414/911260439646711839.png?size=512",
+	List = "https://cdn.discordapp.com/app-assets/909403157686288414/911260439952883762.png?size=512",
+	Poll = "https://cdn.discordapp.com/app-assets/909403157686288414/911260440003215380.png?size=512",
+	PersonalityDatabase = "https://cdn.discordapp.com/app-assets/909403157686288414/911862823720742932.png?size=512",
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -75,18 +75,18 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = Assets.Home;
 		presenceData.details = "Viewing homepage";
 	} else if (document.location.pathname.includes("/profile")) {
-		presenceData.smallImageKey = Assets.List
+		presenceData.smallImageKey = Assets.List;
 		presenceData.details = "Viewing category:";
 		presenceData.state = document.title?.split(" | ")[0];
 	} else if (document.location.pathname.includes("/community")) {
 		presenceData.smallImageKey = Assets.Group;
 		presenceData.details = "Viewing community feed";
 	} else if (document.location.pathname.includes("/topic")) {
-		presenceData.smallImageKey = Assets.Star
+		presenceData.smallImageKey = Assets.Star;
 		presenceData.details = "Viewing topic:";
 		presenceData.state = document.title?.split(" | ")[0];
 	} else if (document.location.pathname.includes("/notification")) {
-		presenceData.smallImageKey = Assets.Notification
+		presenceData.smallImageKey = Assets.Notification;
 		presenceData.details = "Viewing notification";
 	} else if (document.location.pathname.includes("/user/")) {
 		if (showUserNameInUserProfile) {
@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		} else presenceData.details = "Viewing user's profile";
-		presenceData.smallImageKey = Assets.User
+		presenceData.smallImageKey = Assets.User;
 	} else {
 		presenceData.details = "Viewing page:";
 		presenceData.state = document.title?.split(" | ")[0];

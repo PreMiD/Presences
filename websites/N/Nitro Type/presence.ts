@@ -10,9 +10,9 @@ function getNumberWithOrdinal(n: number): string {
 }
 
 const enum Assets {
-  Logo = "https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/logo.png",
-  User = "https://cdn.discordapp.com/app-assets/676560908578717702/676782360569839643.png?size=512",
-  Guest = "https://cdn.discordapp.com/app-assets/676560908578717702/676782684625698836.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/logo.png",
+	User = "https://cdn.discordapp.com/app-assets/676560908578717702/676782360569839643.png?size=512",
+	Guest = "https://cdn.discordapp.com/app-assets/676560908578717702/676782684625698836.png?size=512",
 }
 
 presence.on("UpdateData", () => {

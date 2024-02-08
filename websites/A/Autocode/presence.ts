@@ -19,18 +19,25 @@ const enum Assets {
 }
 
 const assets = {
-  "lang-html": "https://cdn.discordapp.com/app-assets/858292108195921920/868489344447569990.png?size=512",
-  "lang-css": "https://cdn.discordapp.com/app-assets/858292108195921920/868502199699906640.png?size=512",
-  "lang-js": "https://cdn.discordapp.com/app-assets/858292108195921920/868502501207470080.png?size=512",
-  "lang-json": "https://cdn.discordapp.com/app-assets/858292108195921920/868502619084161056.png?size=512",
-  "lang-txt": "https://cdn.discordapp.com/app-assets/858292108195921920/868502804367540224.png?size=512",
-  "lang-md": "https://cdn.discordapp.com/app-assets/858292108195921920/868503178247823401.png?size=512",
-  "lang-gitignore": "https://cdn.discordapp.com/app-assets/858292108195921920/868503747905597480.png?size=512",
-}
+	"lang-html":
+		"https://cdn.discordapp.com/app-assets/858292108195921920/868489344447569990.png?size=512",
+	"lang-css":
+		"https://cdn.discordapp.com/app-assets/858292108195921920/868502199699906640.png?size=512",
+	"lang-js":
+		"https://cdn.discordapp.com/app-assets/858292108195921920/868502501207470080.png?size=512",
+	"lang-json":
+		"https://cdn.discordapp.com/app-assets/858292108195921920/868502619084161056.png?size=512",
+	"lang-txt":
+		"https://cdn.discordapp.com/app-assets/858292108195921920/868502804367540224.png?size=512",
+	"lang-md":
+		"https://cdn.discordapp.com/app-assets/858292108195921920/868503178247823401.png?size=512",
+	"lang-gitignore":
+		"https://cdn.discordapp.com/app-assets/858292108195921920/868503747905597480.png?size=512",
+};
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:Assets.Logo,
+			largeImageKey: Assets.Logo,
 			startTimestamp: startedAt,
 		},
 		{ pathname, hostname } = window.location,
@@ -89,8 +96,9 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Autocode;
 
 			if (extension && supportedLanguages.includes(extension))
-				presenceData.largeImageKey = assets[`lang-${extension}` as keyof typeof assets];
-			else presenceData.largeImageKey =Assets.Autocode;
+				presenceData.largeImageKey =
+					assets[`lang-${extension}` as keyof typeof assets];
+			else presenceData.largeImageKey = Assets.Autocode;
 		}
 	}
 

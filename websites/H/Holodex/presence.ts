@@ -8,21 +8,19 @@ const presence = new Presence({
 
 let iFrameVideo: { isPaused: boolean; thumbnail: string };
 
-
 const enum Assets {
-  Logo =
-	"https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png",
-  Mdihome = "https://cdn.discordapp.com/app-assets/860224040060715018/860835539049513010.png?size=512",
-  Mdiheart = "https://cdn.discordapp.com/app-assets/860224040060715018/860836675156574228.png?size=512",
-  Mdiaccountboxmultiple = "https://cdn.discordapp.com/app-assets/860224040060715018/860838665591455804.png?size=512",
-  Mdiaccountbox = "https://cdn.discordapp.com/app-assets/860224040060715018/860839344785063946.png?size=512",
-  Mdianimationplay = "https://cdn.discordapp.com/app-assets/860224040060715018/860846730412818452.png?size=512",
-  Multiview = "https://cdn.discordapp.com/app-assets/860224040060715018/860848013429047316.png?size=512",
-  Mdimusic = "https://cdn.discordapp.com/app-assets/860224040060715018/860849152802684949.png?size=512",
-  Mdiinfinity = "https://cdn.discordapp.com/app-assets/860224040060715018/860850489889128448.png?size=512",
-  Mdisettings = "https://cdn.discordapp.com/app-assets/860224040060715018/860860048791961640.png?size=512",
-  Mdiloginvariant = "https://cdn.discordapp.com/app-assets/860224040060715018/860861825770586112.png?size=512",
-  Mdiplaylistplay = "https://cdn.discordapp.com/app-assets/860224040060715018/861196477371514880.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png",
+	Mdihome = "https://cdn.discordapp.com/app-assets/860224040060715018/860835539049513010.png?size=512",
+	Mdiheart = "https://cdn.discordapp.com/app-assets/860224040060715018/860836675156574228.png?size=512",
+	Mdiaccountboxmultiple = "https://cdn.discordapp.com/app-assets/860224040060715018/860838665591455804.png?size=512",
+	Mdiaccountbox = "https://cdn.discordapp.com/app-assets/860224040060715018/860839344785063946.png?size=512",
+	Mdianimationplay = "https://cdn.discordapp.com/app-assets/860224040060715018/860846730412818452.png?size=512",
+	Multiview = "https://cdn.discordapp.com/app-assets/860224040060715018/860848013429047316.png?size=512",
+	Mdimusic = "https://cdn.discordapp.com/app-assets/860224040060715018/860849152802684949.png?size=512",
+	Mdiinfinity = "https://cdn.discordapp.com/app-assets/860224040060715018/860850489889128448.png?size=512",
+	Mdisettings = "https://cdn.discordapp.com/app-assets/860224040060715018/860860048791961640.png?size=512",
+	Mdiloginvariant = "https://cdn.discordapp.com/app-assets/860224040060715018/860861825770586112.png?size=512",
+	Mdiplaylistplay = "https://cdn.discordapp.com/app-assets/860224040060715018/861196477371514880.png?size=512",
 }
 
 presence.on(
@@ -301,7 +299,10 @@ const getInfo = {
 					};
 				case "channel":
 					return {
-						image: path.length < 3 ? Assets.Mdiaccountboxmultiple : Assets.Mdiaccountbox,
+						image:
+							path.length < 3
+								? Assets.Mdiaccountboxmultiple
+								: Assets.Mdiaccountbox,
 						hover: path.length < 3 ? "Channels" : `${getInfo.channel().title}`,
 					};
 				case "library":
@@ -341,7 +342,7 @@ const getInfo = {
 					};
 				case "login":
 					return {
-						image:Assets.Mdiloginvariant,
+						image: Assets.Mdiloginvariant,
 						hover:
 							document.querySelector(".v-card.ma-auto.v-sheet .v-list") === null
 								? "Login Screen"
@@ -376,8 +377,7 @@ presence.on("UpdateData", async () => {
 	dataUpdater.updateAll();
 
 	const presenceData: PresenceData = {
-			largeImageKey:
-				iFrameVideo.thumbnail ?? Assets.Logo,
+			largeImageKey: iFrameVideo.thumbnail ?? Assets.Logo,
 			smallImageKey: data.smallimage.image,
 			smallImageText: data.smallimage.hover,
 			details: data.details,

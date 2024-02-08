@@ -79,33 +79,42 @@ const presence = new Presence({
 		isChecked: false,
 		service: null,
 		presence: null,
+	},
+	/* eslint-disable camelcase */
+	assets: Record<string, string> = {
+		naver:
+			"https://cdn.discordapp.com/app-assets/825307070584586250/825337490952290344.png?size=512",
+		naver_webtoon:
+			"https://cdn.discordapp.com/app-assets/825307070584586250/825337500779544597.png?size=512",
+		naver_now:
+			"https://cdn.discordapp.com/app-assets/825307070584586250/825337502172184576.png?size=512",
+		naver_tv:
+			"https://cdn.discordapp.com/app-assets/825307070584586250/825337511408173067.png?size=512",
+		naver_tv_play: Assets.Play,
+		naver_tv_pause: Assets.Pause,
+		naver_papago:
+			"https://cdn.discordapp.com/app-assets/825307070584586250/826393989858852864.png?size=512",
+		naver_now_play: Assets.Play,
+		naver_now_pause: Assets.Pause,
+		naver_browse: Assets.Search,
+		naver_tv_browse: Assets.Search,
+		naver_papago_language:
+			"https://cdn.discordapp.com/app-assets/825307070584586250/826435063397875752.png?size=512",
+		naver_webtoon_browse: Assets.Search,
+		naver_now_browse: Assets.Search,
+		naver_now_live: Assets.Live,
+		naver_book: Assets.Reading,
+		naver_webtoon_book: Assets.Reading,
+		naver_blog:
+			"https://cdn.discordapp.com/app-assets/825307070584586250/827052452783849513.png?size=512",
+		naver_blog_browse: Assets.Search,
+		naver_cafe:
+			"https://cdn.discordapp.com/app-assets/825307070584586250/846686340028694569.png?size=512",
+		naver_cafe_browse: Assets.Search,
+		book: Assets.Reading,
+		browse: Assets.Search,
 	};
-
-	const assets: Record<string, string> = {
-		"naver":"https://cdn.discordapp.com/app-assets/825307070584586250/825337490952290344.png?size=512",
-		"naver_webtoon":"https://cdn.discordapp.com/app-assets/825307070584586250/825337500779544597.png?size=512",
-		"naver_now":"https://cdn.discordapp.com/app-assets/825307070584586250/825337502172184576.png?size=512",
-		"naver_tv":"https://cdn.discordapp.com/app-assets/825307070584586250/825337511408173067.png?size=512",
-		"naver_tv_play":Assets.Play,
-		"naver_tv_pause":Assets.Pause,
-		"naver_papago":"https://cdn.discordapp.com/app-assets/825307070584586250/826393989858852864.png?size=512",
-		"naver_now_play":Assets.Play,
-		"naver_now_pause":Assets.Pause,
-		"naver_browse":Assets.Search,
-		"naver_tv_browse":Assets.Search,
-		"naver_papago_language":"https://cdn.discordapp.com/app-assets/825307070584586250/826435063397875752.png?size=512",
-		"naver_webtoon_browse":Assets.Search,
-		"naver_now_browse":Assets.Search,
-		"naver_now_live":Assets.Live,
-		"naver_book":Assets.Reading,
-		"naver_webtoon_book":Assets.Reading,
-		"naver_blog":"https://cdn.discordapp.com/app-assets/825307070584586250/827052452783849513.png?size=512",
-		"naver_blog_browse":Assets.Search,
-		"naver_cafe":"https://cdn.discordapp.com/app-assets/825307070584586250/846686340028694569.png?size=512",
-		"naver_cafe_browse":Assets.Search,
-		"book": Assets.Reading,
-		"browse": Assets.Search,
-	}
+/* eslint-enable camelcase */
 
 let blog: string, cafeTitle: string;
 

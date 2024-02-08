@@ -21,23 +21,22 @@ const presence = new Presence({
 let lastGameChange: number = null,
 	lastGame: string = null;
 
-	const enum Assets {
-		Logo =
-		"https://cdn.rcd.gg/PreMiD/websites/N/Newgrounds/assets/logo.jpeg",
-		Art = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780319641680.png?size=512",
-		Audio = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780349132830.png?size=512",
-		Movies = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780504977428.png?size=512",
-		Fav = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780605378560.png?size=512",
-		AudioPlay = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780709842995.png?size=512",
-		AudioPause = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780818763846.png?size=512",
-		PM = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780819025920.png?size=512",
-		Forum = "https://cdn.discordapp.com/app-assets/779342189884997633/779363802956693545.png?size=512",
-		Games = "https://cdn.discordapp.com/app-assets/779342189884997633/779364961558200340.png?size=512",
-		MoviesPause = "https://cdn.discordapp.com/app-assets/779342189884997633/779366488745836564.png?size=512",
-		MoviesPlay = "https://cdn.discordapp.com/app-assets/779342189884997633/779366488750293042.png?size=512",
-		GamesPlay = "https://cdn.discordapp.com/app-assets/779342189884997633/779366488800755783.png?size=512",
-		User = "https://cdn.discordapp.com/app-assets/779342189884997633/779372962561392650.png?size=512",
-	}
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/N/Newgrounds/assets/logo.jpeg",
+	Art = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780319641680.png?size=512",
+	Audio = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780349132830.png?size=512",
+	Movies = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780504977428.png?size=512",
+	Fav = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780605378560.png?size=512",
+	AudioPlay = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780709842995.png?size=512",
+	AudioPause = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780818763846.png?size=512",
+	PM = "https://cdn.discordapp.com/app-assets/779342189884997633/779363780819025920.png?size=512",
+	Forum = "https://cdn.discordapp.com/app-assets/779342189884997633/779363802956693545.png?size=512",
+	Games = "https://cdn.discordapp.com/app-assets/779342189884997633/779364961558200340.png?size=512",
+	MoviesPause = "https://cdn.discordapp.com/app-assets/779342189884997633/779366488745836564.png?size=512",
+	MoviesPlay = "https://cdn.discordapp.com/app-assets/779342189884997633/779366488750293042.png?size=512",
+	GamesPlay = "https://cdn.discordapp.com/app-assets/779342189884997633/779366488800755783.png?size=512",
+	User = "https://cdn.discordapp.com/app-assets/779342189884997633/779372962561392650.png?size=512",
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -221,7 +220,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (document.location.pathname.startsWith("/bbs")) {
 		presenceData.details = "Browsing the forums";
-		presenceData.smallImageKey =  Assets.Forum;
+		presenceData.smallImageKey = Assets.Forum;
 		presenceData.smallImageText = "Forums";
 		if (document.location.pathname.startsWith("/bbs/search/author/")) {
 			const [, userName] = document
@@ -276,7 +275,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Browsing their feed";
 	else if (document.location.pathname.startsWith("/pm")) {
 		presenceData.details = "Browsing Private Messages";
-		presenceData.smallImageKey =Assets.PM;
+		presenceData.smallImageKey = Assets.PM;
 		presenceData.smallImageText = "Private Messages";
 	} else if (document.location.pathname.startsWith("/dump"))
 		presenceData.details = "in Dumping Grounds";

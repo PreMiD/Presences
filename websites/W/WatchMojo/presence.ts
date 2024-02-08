@@ -97,9 +97,7 @@ presence.on("UpdateData", async () => {
 				? null
 				: document.querySelector(".brid-poster-title")?.textContent,
 			smallImageKey: video?.paused ? Assets.Pause : Assets.Play,
-			smallImageText: video?.paused
-				? strings.pause
-				: strings.play,
+			smallImageText: video?.paused ? strings.pause : strings.play,
 			startTimestamp: video?.paused
 				? null
 				: video
@@ -164,9 +162,7 @@ presence.on("UpdateData", async () => {
 		"/blog/(\\d*)/(\\d*)/(\\d*)/": {
 			details: strings.article,
 			state: document.querySelector("h1")?.textContent,
-			buttons: [
-				{ label: strings.buttonReadArticle, url: document.URL },
-			],
+			buttons: [{ label: strings.buttonReadArticle, url: document.URL }],
 		},
 		"/categories/": {
 			details: strings.category,
@@ -178,9 +174,7 @@ presence.on("UpdateData", async () => {
 		"/channels/": {
 			details: strings.viewChannel,
 			state: location.pathname.split("/")[2],
-			buttons: [
-				{ label: strings.buttonViewChannel, url: document.URL },
-			],
+			buttons: [{ label: strings.buttonViewChannel, url: document.URL }],
 		},
 		"/search/": {
 			details: strings.searchFor,

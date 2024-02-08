@@ -3,8 +3,8 @@ const presence = new Presence({
 });
 
 const enum Assets {
-  Dblstaff = "https://cdn.discordapp.com/app-assets/629380028576301093/629385715519717376.png?size=512",
-  Dslregular = "https://cdn.discordapp.com/app-assets/629380028576301093/629452144839360513.png?size=512",
+	Dblstaff = "https://cdn.discordapp.com/app-assets/629380028576301093/629385715519717376.png?size=512",
+	Dslregular = "https://cdn.discordapp.com/app-assets/629380028576301093/629452144839360513.png?size=512",
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/top.gg/assets/logo.png",
 }
 
@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = "Discord Bot List API Documentation";
 	//Discord Server List
 	else if (window.location.pathname.startsWith("/servers")) {
-		presenceData.largeImageKey = Assets.Dslregular
+		presenceData.largeImageKey = Assets.Dslregular;
 		if (
 			window.location.pathname.startsWith("/servers/list/") ||
 			window.location.pathname.startsWith("/servers/tag/")

@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
 											.textContent.replace("\n", ": ")
 									: null
 						  }`,
-				smallImageKey: video.paused ?Assets.Pause: Assets.Play,
+				smallImageKey: video.paused ? Assets.Pause : Assets.Play,
 				smallImageText: video.paused
 					? (await strings).pause
 					: (await strings).play,

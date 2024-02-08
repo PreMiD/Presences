@@ -6,18 +6,18 @@ const presence = new Presence({
 let title: HTMLElement, search: HTMLInputElement;
 
 const enum Assets {
-  Toloka = "https://cdn.discordapp.com/app-assets/798502531847421962/798507774123966485.png?size=512",
-  Film = "https://cdn.discordapp.com/app-assets/798502531847421962/798606492810084402.png?size=512",
-  Video = "https://cdn.discordapp.com/app-assets/798502531847421962/798606492923068456.png?size=512",
-  Home = "https://cdn.discordapp.com/app-assets/798502531847421962/798606493460856832.png?size=512",
-  Music = "https://cdn.discordapp.com/app-assets/798502531847421962/798606493548544032.png?size=512",
-  Reply = "https://cdn.discordapp.com/app-assets/798502531847421962/798608245296070696.png?size=512",
-  Archive = "https://cdn.discordapp.com/app-assets/798502531847421962/798608245430026300.png?size=512",
-  User = "https://cdn.discordapp.com/app-assets/798502531847421962/798608245656649779.png?size=512",
-  Book = "https://cdn.discordapp.com/app-assets/798502531847421962/798608245702131762.png?size=512",
-  Gamepad = "https://cdn.discordapp.com/app-assets/798502531847421962/798608245815771166.png?size=512",
-  Desktop = "https://cdn.discordapp.com/app-assets/798502531847421962/798608246100197376.png?size=512",
-  Sms = "https://cdn.discordapp.com/app-assets/798502531847421962/798608246327607376.png?size=512",
+	Toloka = "https://cdn.discordapp.com/app-assets/798502531847421962/798507774123966485.png?size=512",
+	Film = "https://cdn.discordapp.com/app-assets/798502531847421962/798606492810084402.png?size=512",
+	Video = "https://cdn.discordapp.com/app-assets/798502531847421962/798606492923068456.png?size=512",
+	Home = "https://cdn.discordapp.com/app-assets/798502531847421962/798606493460856832.png?size=512",
+	Music = "https://cdn.discordapp.com/app-assets/798502531847421962/798606493548544032.png?size=512",
+	Reply = "https://cdn.discordapp.com/app-assets/798502531847421962/798608245296070696.png?size=512",
+	Archive = "https://cdn.discordapp.com/app-assets/798502531847421962/798608245430026300.png?size=512",
+	User = "https://cdn.discordapp.com/app-assets/798502531847421962/798608245656649779.png?size=512",
+	Book = "https://cdn.discordapp.com/app-assets/798502531847421962/798608245702131762.png?size=512",
+	Gamepad = "https://cdn.discordapp.com/app-assets/798502531847421962/798608245815771166.png?size=512",
+	Desktop = "https://cdn.discordapp.com/app-assets/798502531847421962/798608246100197376.png?size=512",
+	Sms = "https://cdn.discordapp.com/app-assets/798502531847421962/798608246327607376.png?size=512",
 }
 
 presence.on("UpdateData", async () => {

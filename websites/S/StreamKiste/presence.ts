@@ -138,8 +138,9 @@ const IMAGES = {
 	LOGO: "https://cdn.discordapp.com/app-assets/825531268581818419/825535645124395040.png?size=512",
 	PLAY: Assets.Play,
 	PAUSE: Assets.Pause,
-	BROWSE: "https://cdn.discordapp.com/app-assets/825531268581818419/825535645250093088.png?size=512",
-	SEARCH: Assets.Search
+	BROWSE:
+		"https://cdn.discordapp.com/app-assets/825531268581818419/825535645250093088.png?size=512",
+	SEARCH: Assets.Search,
 };
 
 presence.on("iFrameData", (data: VideoContext) => {

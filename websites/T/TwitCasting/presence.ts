@@ -131,7 +131,7 @@ presence.on("UpdateData", async () => {
 					{ label: strings.buttonWatchStream, url: document.URL },
 				];
 			}
-			presenceData.smallImageKey = Assets.Live
+			presenceData.smallImageKey = Assets.Live;
 			presenceData.smallImageText = strings.live;
 		} else if (pathname.includes("/movie")) {
 			if (privacy) presenceData.details = strings.watchingVid;

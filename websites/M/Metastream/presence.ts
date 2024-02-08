@@ -115,7 +115,7 @@ presence.on("UpdateData", async () => {
 								smallImageText = (await strings).play;
 								playing = true;
 							} else {
-								smallImageKey = Assets.Pause
+								smallImageKey = Assets.Pause;
 								smallImageText = (await strings).pause;
 								playing = false;
 							}

@@ -25,7 +25,8 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Members: ${
 			document.querySelector(".room-title-capacity").textContent
 		}`;
-		presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/712269360206708766/714167776788349162.png?size=512";
+		presenceData.smallImageKey =
+			"https://cdn.discordapp.com/app-assets/712269360206708766/714167776788349162.png?size=512";
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

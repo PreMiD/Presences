@@ -23,7 +23,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing a page:";
 		presenceData.state = "FAQ";
 	} else if (window.location.pathname.endsWith("map")) {
-		presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/805070274847440916/805072848870834186.png?size=512";
+		presenceData.smallImageKey =
+			"https://cdn.discordapp.com/app-assets/805070274847440916/805072848870834186.png?size=512";
 		presenceData.details = "Viewing a page:";
 		if (pmap) presenceData.state = "Map";
 		else {

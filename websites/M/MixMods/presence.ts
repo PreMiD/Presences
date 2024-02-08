@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Na página inicial...";
 
 		presenceData.smallImageKey =
-		"https://cdn.rcd.gg/PreMiD/websites/M/MixMods/assets/logo.png";
+			"https://cdn.rcd.gg/PreMiD/websites/M/MixMods/assets/logo.png";
 		presenceData.smallImageText = "www.mixmods.com.br";
 	} else if (document.location.pathname.match("/search/label")) {
 		presenceData.details = "Visualizando categoria:";

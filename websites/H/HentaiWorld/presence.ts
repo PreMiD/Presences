@@ -30,19 +30,18 @@ presence.on("iFrameData", (data: IFrameData) => {
 });
 
 const enum Assets {
-  Logo =
-	"https://cdn.rcd.gg/PreMiD/websites/H/HentaiWorld/assets/logo.png",
-  Clock = "https://cdn.discordapp.com/app-assets/660882722839068702/676816350886363157.png?size=512",
-  Home = "https://cdn.discordapp.com/app-assets/660882722839068702/676816351234490380.png?size=512",
-  Contacts = "https://cdn.discordapp.com/app-assets/660882722839068702/676816351599263774.png?size=512",
-  New = "https://cdn.discordapp.com/app-assets/660882722839068702/676816351779881020.png?size=512",
-  Notifications = "https://cdn.discordapp.com/app-assets/660882722839068702/676816352505495558.png?size=512",
-  Userwl = "https://cdn.discordapp.com/app-assets/660882722839068702/676816352543244297.png?size=512",
-  User = "https://cdn.discordapp.com/app-assets/660882722839068702/676816352635518986.png?size=512",
-  Settings = "https://cdn.discordapp.com/app-assets/660882722839068702/676816352656228354.png?size=512",
-  Schedule = "https://cdn.discordapp.com/app-assets/660882722839068702/676816352777863178.png?size=512",
-  Wlsettings = "https://cdn.discordapp.com/app-assets/660882722839068702/676816654025490442.png?size=512",
-  Archive = "https://cdn.discordapp.com/app-assets/660882722839068702/676816655803875329.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/H/HentaiWorld/assets/logo.png",
+	Clock = "https://cdn.discordapp.com/app-assets/660882722839068702/676816350886363157.png?size=512",
+	Home = "https://cdn.discordapp.com/app-assets/660882722839068702/676816351234490380.png?size=512",
+	Contacts = "https://cdn.discordapp.com/app-assets/660882722839068702/676816351599263774.png?size=512",
+	New = "https://cdn.discordapp.com/app-assets/660882722839068702/676816351779881020.png?size=512",
+	Notifications = "https://cdn.discordapp.com/app-assets/660882722839068702/676816352505495558.png?size=512",
+	Userwl = "https://cdn.discordapp.com/app-assets/660882722839068702/676816352543244297.png?size=512",
+	User = "https://cdn.discordapp.com/app-assets/660882722839068702/676816352635518986.png?size=512",
+	Settings = "https://cdn.discordapp.com/app-assets/660882722839068702/676816352656228354.png?size=512",
+	Schedule = "https://cdn.discordapp.com/app-assets/660882722839068702/676816352777863178.png?size=512",
+	Wlsettings = "https://cdn.discordapp.com/app-assets/660882722839068702/676816654025490442.png?size=512",
+	Archive = "https://cdn.discordapp.com/app-assets/660882722839068702/676816655803875329.png?size=512",
 }
 
 presence.on("UpdateData", () => {

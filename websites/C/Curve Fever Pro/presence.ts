@@ -1,55 +1,55 @@
 const presence = new Presence({
-		clientId: "775356824240128021",
-	});
-	const enum Assets {  Index = "https://cdn.discordapp.com/app-assets/775356824240128021/775358325666873384.png?size=512",
-  Angel = "https://cdn.discordapp.com/app-assets/775356824240128021/776016617620373506.png?size=512",
-  BlueRacer = "https://cdn.discordapp.com/app-assets/775356824240128021/776016617708322848.png?size=512",
-  CandyCane = "https://cdn.discordapp.com/app-assets/775356824240128021/776016617934290965.png?size=512",
-  BumbleBee = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618056712192.png?size=512",
-  Joker = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618219110421.png?size=512",
-  JackoLantern = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618278486057.png?size=512",
-  Poopy = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618395926559.png?size=512",
-  JungleLeaf = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618404446228.png?size=512",
-  OChristmasTree = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618508648498.png?size=512",
-  Robot = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618627137536.png?size=512",
-  Vampire = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618760699945.png?size=512",
-  RedYellow = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618806312990.png?size=512",
-  TheMummy = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618915627028.png?size=512",
-  ThinkPink = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618991517716.png?size=512",
-  WitchyCauldron = "https://cdn.discordapp.com/app-assets/775356824240128021/776016619046043649.png?size=512",
-  VipGold = "https://cdn.discordapp.com/app-assets/775356824240128021/776016619058626600.png?size=512",
-  ZombieHand = "https://cdn.discordapp.com/app-assets/775356824240128021/776016619293507634.png?size=512",
-  SpiderCurve = "https://cdn.discordapp.com/app-assets/775356824240128021/776016619314479124.png?size=512",
-  Starfish = "https://cdn.discordapp.com/app-assets/775356824240128021/776016619331256360.png?size=512",
-  IceCream = "https://cdn.discordapp.com/app-assets/775356824240128021/776020539898593280.png?size=512",
-  Rasta = "https://cdn.discordapp.com/app-assets/775356824240128021/776045905451155476.png?size=512",
-  Pineapple = "https://cdn.discordapp.com/app-assets/775356824240128021/776045905643044924.png?size=512",
-	Logo =
-	"https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/logo.png",
+	clientId: "775356824240128021",
+});
+const enum Assets {
+	Index = "https://cdn.discordapp.com/app-assets/775356824240128021/775358325666873384.png?size=512",
+	Angel = "https://cdn.discordapp.com/app-assets/775356824240128021/776016617620373506.png?size=512",
+	BlueRacer = "https://cdn.discordapp.com/app-assets/775356824240128021/776016617708322848.png?size=512",
+	CandyCane = "https://cdn.discordapp.com/app-assets/775356824240128021/776016617934290965.png?size=512",
+	BumbleBee = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618056712192.png?size=512",
+	Joker = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618219110421.png?size=512",
+	JackoLantern = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618278486057.png?size=512",
+	Poopy = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618395926559.png?size=512",
+	JungleLeaf = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618404446228.png?size=512",
+	OChristmasTree = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618508648498.png?size=512",
+	Robot = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618627137536.png?size=512",
+	Vampire = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618760699945.png?size=512",
+	RedYellow = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618806312990.png?size=512",
+	TheMummy = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618915627028.png?size=512",
+	ThinkPink = "https://cdn.discordapp.com/app-assets/775356824240128021/776016618991517716.png?size=512",
+	WitchyCauldron = "https://cdn.discordapp.com/app-assets/775356824240128021/776016619046043649.png?size=512",
+	VipGold = "https://cdn.discordapp.com/app-assets/775356824240128021/776016619058626600.png?size=512",
+	ZombieHand = "https://cdn.discordapp.com/app-assets/775356824240128021/776016619293507634.png?size=512",
+	SpiderCurve = "https://cdn.discordapp.com/app-assets/775356824240128021/776016619314479124.png?size=512",
+	Starfish = "https://cdn.discordapp.com/app-assets/775356824240128021/776016619331256360.png?size=512",
+	IceCream = "https://cdn.discordapp.com/app-assets/775356824240128021/776020539898593280.png?size=512",
+	Rasta = "https://cdn.discordapp.com/app-assets/775356824240128021/776045905451155476.png?size=512",
+	Pineapple = "https://cdn.discordapp.com/app-assets/775356824240128021/776045905643044924.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/logo.png",
 }
-const	skinNames = new Map<string, string>()
-		.set("Angel", Assets.Angel)
-		.set("Blue Racer", Assets.BlueRacer)
-		.set("Bumble Bee", Assets.BumbleBee)
-		.set("Candy Cane", Assets.CandyCane)
-		.set("Jack-o'-lantern", Assets.JackoLantern)
-		.set("Joker", Assets.Joker)
-		.set("Jungle Leaf", Assets.JungleLeaf)
-		.set("O Christmas Tree", Assets.OChristmasTree)
-		.set("Poopy", Assets.Poopy)
-		.set("Red&Yellow", Assets.RedYellow)
-		.set("Robot", Assets.Robot)
-		.set("Spider Curve", Assets.SpiderCurve)
-		.set("Starfish", Assets.Starfish)
-		.set("The Mummy", Assets.TheMummy)
-		.set("Think Pink", Assets.ThinkPink)
-		.set("Vampire", Assets.Vampire)
-		.set("VIP Gold", Assets.VipGold)
-		.set("Witchy Cauldron", Assets.WitchyCauldron)
-		.set("Zombie Hand", Assets.ZombieHand)
-		.set("Ice-Cream", Assets.IceCream)
-		.set("Pineapple", Assets.Pineapple)
-		.set("Rasta", Assets.Rasta);
+const skinNames = new Map<string, string>()
+	.set("Angel", Assets.Angel)
+	.set("Blue Racer", Assets.BlueRacer)
+	.set("Bumble Bee", Assets.BumbleBee)
+	.set("Candy Cane", Assets.CandyCane)
+	.set("Jack-o'-lantern", Assets.JackoLantern)
+	.set("Joker", Assets.Joker)
+	.set("Jungle Leaf", Assets.JungleLeaf)
+	.set("O Christmas Tree", Assets.OChristmasTree)
+	.set("Poopy", Assets.Poopy)
+	.set("Red&Yellow", Assets.RedYellow)
+	.set("Robot", Assets.Robot)
+	.set("Spider Curve", Assets.SpiderCurve)
+	.set("Starfish", Assets.Starfish)
+	.set("The Mummy", Assets.TheMummy)
+	.set("Think Pink", Assets.ThinkPink)
+	.set("Vampire", Assets.Vampire)
+	.set("VIP Gold", Assets.VipGold)
+	.set("Witchy Cauldron", Assets.WitchyCauldron)
+	.set("Zombie Hand", Assets.ZombieHand)
+	.set("Ice-Cream", Assets.IceCream)
+	.set("Pineapple", Assets.Pineapple)
+	.set("Rasta", Assets.Rasta);
 
 let lastlobbyName = "",
 	lastName = "Unnamed";

@@ -3,24 +3,24 @@ const presence = new Presence({
 	}),
 	startedTime = Math.floor(Date.now() / 1000);
 
-	const enum Assets {
-		WovHeroes = "https://cdn.discordapp.com/app-assets/888429594120716328/888753463058632704.png?size=512",
-		WovBlog = "https://cdn.discordapp.com/app-assets/888429594120716328/888756815049920542.png?size=512",
-		Vouchers = "https://cdn.discordapp.com/app-assets/888429594120716328/899321317315182652.png?size=512",
-		WovText = "https://cdn.discordapp.com/app-assets/888429594120716328/906345767353073674.png?size=512",
-		Logo = "https://cdn.discordapp.com/app-assets/888429594120716328/953709529042919484.png?size=512",
-		WovNoBg = "https://cdn.discordapp.com/app-assets/888429594120716328/953710417643995207.png?size=512",
-		WovWhite = "https://cdn.discordapp.com/app-assets/888429594120716328/959186869504081990.png?size=512",
-		Online = "https://cdn.discordapp.com/app-assets/888429594120716328/972910024017973269.png?size=512",
-		Invisible = "https://cdn.discordapp.com/app-assets/888429594120716328/972910024236101722.png?size=512",
-		Dnd = "https://cdn.discordapp.com/app-assets/888429594120716328/972910024282243142.png?size=512",
-		LetsPlay = "https://cdn.discordapp.com/app-assets/888429594120716328/973175216480092260.png?size=512",
-		Heart = "https://cdn.discordapp.com/app-assets/888429594120716328/990164727713914940.png?size=512",
-		Skull = "https://cdn.discordapp.com/app-assets/888429594120716328/990164727839727646.png?size=512",
-		Stopwatch = "https://cdn.discordapp.com/app-assets/888429594120716328/990164728485675058.png?size=512",
-		Popcorn = "https://cdn.discordapp.com/app-assets/888429594120716328/990164728825393212.png?size=512",
-		Friends = "https://cdn.discordapp.com/app-assets/888429594120716328/990164729454538832.png?size=512",
-	}
+const enum Assets {
+	WovHeroes = "https://cdn.discordapp.com/app-assets/888429594120716328/888753463058632704.png?size=512",
+	WovBlog = "https://cdn.discordapp.com/app-assets/888429594120716328/888756815049920542.png?size=512",
+	Vouchers = "https://cdn.discordapp.com/app-assets/888429594120716328/899321317315182652.png?size=512",
+	WovText = "https://cdn.discordapp.com/app-assets/888429594120716328/906345767353073674.png?size=512",
+	Logo = "https://cdn.discordapp.com/app-assets/888429594120716328/953709529042919484.png?size=512",
+	WovNoBg = "https://cdn.discordapp.com/app-assets/888429594120716328/953710417643995207.png?size=512",
+	WovWhite = "https://cdn.discordapp.com/app-assets/888429594120716328/959186869504081990.png?size=512",
+	Online = "https://cdn.discordapp.com/app-assets/888429594120716328/972910024017973269.png?size=512",
+	Invisible = "https://cdn.discordapp.com/app-assets/888429594120716328/972910024236101722.png?size=512",
+	Dnd = "https://cdn.discordapp.com/app-assets/888429594120716328/972910024282243142.png?size=512",
+	LetsPlay = "https://cdn.discordapp.com/app-assets/888429594120716328/973175216480092260.png?size=512",
+	Heart = "https://cdn.discordapp.com/app-assets/888429594120716328/990164727713914940.png?size=512",
+	Skull = "https://cdn.discordapp.com/app-assets/888429594120716328/990164727839727646.png?size=512",
+	Stopwatch = "https://cdn.discordapp.com/app-assets/888429594120716328/990164728485675058.png?size=512",
+	Popcorn = "https://cdn.discordapp.com/app-assets/888429594120716328/990164728825393212.png?size=512",
+	Friends = "https://cdn.discordapp.com/app-assets/888429594120716328/990164729454538832.png?size=512",
+}
 
 presence.on("UpdateData", async () => {
 	const [
@@ -257,10 +257,10 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageKey = Assets.LetsPlay;
 					presenceData.smallImageText = "Let's Play";
 				} else if (root.getAttribute("premid-status") === "online") {
-					presenceData.smallImageKey = Assets.Online
+					presenceData.smallImageKey = Assets.Online;
 					presenceData.smallImageText = "Online";
 				} else if (root.getAttribute("premid-status") === "dnd") {
-					presenceData.smallImageKey = Assets.Dnd
+					presenceData.smallImageKey = Assets.Dnd;
 					presenceData.smallImageText = "Do Not Disturb";
 				}
 			}
@@ -437,7 +437,7 @@ presence.on("UpdateData", async () => {
 				} else presenceData.state = "Loading...";
 			}
 			presenceData.smallImageText = "Lobby";
-			presenceData.smallImageKey = Assets.Friends
+			presenceData.smallImageKey = Assets.Friends;
 		}
 
 		//In game
@@ -460,7 +460,7 @@ presence.on("UpdateData", async () => {
 						.innerHTML.includes("")
 				) {
 					presenceData.details = "In pre-game lobby";
-					presenceData.smallImageKey = Assets.Stopwatch
+					presenceData.smallImageKey = Assets.Stopwatch;
 					presenceData.smallImageText = "Waiting";
 					if (!privacyMode) {
 						const playerCountPreGame = document.querySelector(
@@ -496,7 +496,7 @@ presence.on("UpdateData", async () => {
 								?.includes("color: rgb(255, 64, 129)")
 						) {
 							playerState = "Spectator";
-							presenceData.smallImageKey = Assets.Popcorn
+							presenceData.smallImageKey = Assets.Popcorn;
 							presenceData.smallImageText = playerState;
 							if (privacyMode) presenceData.details = "Spectating a game";
 						}
@@ -519,7 +519,7 @@ presence.on("UpdateData", async () => {
 								player.getAttribute("style")?.includes("line-through")
 							) {
 								playerState = "Dead";
-								presenceData.smallImageKey = Assets.Skull
+								presenceData.smallImageKey = Assets.Skull;
 							} else if (
 								player.textContent.replace("|", "") ===
 									root.getAttribute("premid-username") ||
@@ -531,7 +531,7 @@ presence.on("UpdateData", async () => {
 									?.includes("color: rgb(255, 64, 129)")
 							) {
 								playerState = "Alive";
-								presenceData.smallImageKey = Assets.Heart
+								presenceData.smallImageKey = Assets.Heart;
 							}
 						}
 						presenceData.smallImageText = playerState;

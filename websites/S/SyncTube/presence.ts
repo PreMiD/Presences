@@ -13,8 +13,8 @@ let video = {
 };
 
 const enum Assets {
-  Logo = "https://cdn.discordapp.com/app-assets/827892428266274857/827902180254154844.png?size=512",
-  Logo2 = "https://cdn.discordapp.com/app-assets/827892428266274857/827904935110377472.png?size=512",
+	Logo = "https://cdn.discordapp.com/app-assets/827892428266274857/827902180254154844.png?size=512",
+	Logo2 = "https://cdn.discordapp.com/app-assets/827892428266274857/827904935110377472.png?size=512",
 }
 
 presence.on("UpdateData", async function () {

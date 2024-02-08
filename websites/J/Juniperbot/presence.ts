@@ -30,12 +30,12 @@ async function getStrings() {
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
-	const enum Assets {
-		Logo = "https://cdn.rcd.gg/PreMiD/websites/J/Juniperbot/assets/logo.png",
-		Stats = "https://cdn.discordapp.com/app-assets/739908991274057870/739985402911391775.png?size=512",
-		Donate = "https://cdn.discordapp.com/app-assets/739908991274057870/739986305496121355.png?size=512",
-		List = "https://cdn.discordapp.com/app-assets/739908991274057870/739986784359940218.png?size=512",
-	}
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/J/Juniperbot/assets/logo.png",
+	Stats = "https://cdn.discordapp.com/app-assets/739908991274057870/739985402911391775.png?size=512",
+	Donate = "https://cdn.discordapp.com/app-assets/739908991274057870/739986305496121355.png?size=512",
+	List = "https://cdn.discordapp.com/app-assets/739908991274057870/739986784359940218.png?size=512",
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = { largeImageKey: Assets.Logo },
@@ -91,23 +91,17 @@ presence.on("UpdateData", async () => {
 				break;
 
 			case pathIncludes("/terms"):
-				presenceData.details = `${strings.reading} ${
-					strings.terms
-				}`;
+				presenceData.details = `${strings.reading} ${strings.terms}`;
 				presenceData.smallImageKey = Assets.List;
 				break;
 
 			case pathIncludes("/cookie"):
-				presenceData.details = `${strings.reading} ${
-					strings.cookies
-				}`;
+				presenceData.details = `${strings.reading} ${strings.cookies}`;
 				presenceData.smallImageKey = Assets.List;
 				break;
 
 			case pathIncludes("/privacy"):
-				presenceData.details = `${strings.reading} ${
-					strings.privacy
-				}`;
+				presenceData.details = `${strings.reading} ${strings.privacy}`;
 				presenceData.smallImageKey = Assets.List;
 				break;
 

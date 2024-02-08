@@ -104,18 +104,30 @@ const enum Assets {
 	AppleDeveloper = "https://cdn.discordapp.com/app-assets/839150832036872213/843257607716470794.png?size=512",
 }
 
+/* eslint-disable camelcase */
 const assets: Record<string, string> = {
-  "icloud_calendar": "https://cdn.discordapp.com/app-assets/839150832036872213/958402860729651271.png?size=512",
-  "icloud_photos": "https://cdn.discordapp.com/app-assets/839150832036872213/958402860910010378.png?size=512",
-  "icloud_mail": "https://cdn.discordapp.com/app-assets/839150832036872213/958402860981317653.png?size=512",
-  "icloud_contacts": "https://cdn.discordapp.com/app-assets/839150832036872213/958402861044232263.png?size=512",
-  "icloud_notes": "https://cdn.discordapp.com/app-assets/839150832036872213/958402861144866887.png?size=512",
-  "icloud_find": "https://cdn.discordapp.com/app-assets/839150832036872213/958402861199425538.png?size=512",
-  "icloud_pages": "https://cdn.discordapp.com/app-assets/839150832036872213/958412305207533569.png?size=512",
-  "icloud_keynote": "https://cdn.discordapp.com/app-assets/839150832036872213/958412305475977268.png?size=512",
-  "icloud_reminders": "https://cdn.discordapp.com/app-assets/839150832036872213/958412563413073970.png?size=512",
-  "icloud_numbers": "https://cdn.discordapp.com/app-assets/839150832036872213/979531426976374874.png?size=512",
-}
+	icloud_calendar:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958402860729651271.png?size=512",
+	icloud_photos:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958402860910010378.png?size=512",
+	icloud_mail:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958402860981317653.png?size=512",
+	icloud_contacts:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958402861044232263.png?size=512",
+	icloud_notes:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958402861144866887.png?size=512",
+	icloud_find:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958402861199425538.png?size=512",
+	icloud_pages:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958412305207533569.png?size=512",
+	icloud_keynote:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958412305475977268.png?size=512",
+	icloud_reminders:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/958412563413073970.png?size=512",
+	icloud_numbers:
+		"https://cdn.discordapp.com/app-assets/839150832036872213/979531426976374874.png?size=512",
+};
+/* eslint-enable camelcase */
 
 presence.on("UpdateData", async () => {
 	const urlpath = window.location.pathname.toLowerCase().split("/"),

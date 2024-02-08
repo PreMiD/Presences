@@ -19,16 +19,23 @@ enum LogoAssets {
 	BbcWeather = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/5.png",
 }
 
+/* eslint-disable camelcase */
 const assets = {
-  "bbcsounds_logo": "https://cdn.discordapp.com/app-assets/658230518520741915/813002634281091082.png?size=512",
-  "bbciplayer_logo": "https://cdn.discordapp.com/app-assets/658230518520741915/818020500038615061.png?size=512",
-  "bbc_logo": "https://cdn.discordapp.com/app-assets/658230518520741915/818020500319502366.png?size=512",
-  "bbcnews_logo": "https://cdn.discordapp.com/app-assets/658230518520741915/818821115534770235.png?size=512",
-  "bbcsport_logo": "https://cdn.discordapp.com/app-assets/658230518520741915/818821378320498698.png?size=512",
-  "bbcweather_logo": "https://cdn.discordapp.com/app-assets/658230518520741915/819920132172152883.png?size=512",
-}
-
-const browsingTimestamp = Math.floor(Date.now() / 1000),
+		bbcsounds_logo:
+			"https://cdn.discordapp.com/app-assets/658230518520741915/813002634281091082.png?size=512",
+		bbciplayer_logo:
+			"https://cdn.discordapp.com/app-assets/658230518520741915/818020500038615061.png?size=512",
+		bbc_logo:
+			"https://cdn.discordapp.com/app-assets/658230518520741915/818020500319502366.png?size=512",
+		bbcnews_logo:
+			"https://cdn.discordapp.com/app-assets/658230518520741915/818821115534770235.png?size=512",
+		bbcsport_logo:
+			"https://cdn.discordapp.com/app-assets/658230518520741915/818821378320498698.png?size=512",
+		bbcweather_logo:
+			"https://cdn.discordapp.com/app-assets/658230518520741915/819920132172152883.png?size=512",
+	},
+	/* eslint-enable camelcase */
+	browsingTimestamp = Math.floor(Date.now() / 1000),
 	getStrings = (lang: string) =>
 		presence.getStrings(
 			{
@@ -578,7 +585,8 @@ presence.on("UpdateData", async () => {
 				"/weather/map": {
 					details: strings.viewPage,
 					state: "Map",
-					smallImageKey: "https://cdn.discordapp.com/app-assets/658230518520741915/819962900499398677.png?size=512",
+					smallImageKey:
+						"https://cdn.discordapp.com/app-assets/658230518520741915/819962900499398677.png?size=512",
 				},
 				"/weather/([0-9])": {
 					details: "Viewing weather of:",
@@ -743,7 +751,8 @@ presence.on("UpdateData", async () => {
 
 	if (!buttons) delete presenceData.buttons;
 	if (!showCover && String(presenceData.largeImageKey).startsWith("https"))
-		presenceData.largeImageKey = assets[`${serviceName}_logo` as keyof typeof assets];
+		presenceData.largeImageKey =
+			assets[`${serviceName}_logo` as keyof typeof assets];
 
 	if (presenceData.details === strings.searchFor && !showSearchQuery)
 		presenceData.state = "(Hidden)";

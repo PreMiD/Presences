@@ -3,15 +3,14 @@ const presence = new Presence({
 	}),
 	time = Math.floor(Date.now() / 1000);
 
-	const enum Assets {
-		Logo =
-		"https://cdn.rcd.gg/PreMiD/websites/R/Riot%20Games/assets/logo.png",
-		Valorant = "https://cdn.discordapp.com/app-assets/812085870382809128/812119543551361075.png?size=512",
-		Lol = "https://cdn.discordapp.com/app-assets/812085870382809128/812119544952782848.png?size=512",
-		Tft = "https://cdn.discordapp.com/app-assets/812085870382809128/812120276539932733.png?size=512",
-		Wildrift = "https://cdn.discordapp.com/app-assets/812085870382809128/812120779755225118.png?size=512",
-		Lor = "https://cdn.discordapp.com/app-assets/812085870382809128/812120778706911292.png?size=512",
-	}
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Riot%20Games/assets/logo.png",
+	Valorant = "https://cdn.discordapp.com/app-assets/812085870382809128/812119543551361075.png?size=512",
+	Lol = "https://cdn.discordapp.com/app-assets/812085870382809128/812119544952782848.png?size=512",
+	Tft = "https://cdn.discordapp.com/app-assets/812085870382809128/812120276539932733.png?size=512",
+	Wildrift = "https://cdn.discordapp.com/app-assets/812085870382809128/812120779755225118.png?size=512",
+	Lor = "https://cdn.discordapp.com/app-assets/812085870382809128/812120778706911292.png?size=512",
+}
 
 presence.on("UpdateData", async () => {
 	const path = location.href
@@ -64,7 +63,7 @@ presence.on("UpdateData", async () => {
 		};
 		for (const [k, v] of Object.entries(statics)) {
 			if (path.match(k)) {
-				presenceData.largeImageKey = Assets.Logo
+				presenceData.largeImageKey = Assets.Logo;
 				presenceData = { ...presenceData, ...v };
 			}
 		}

@@ -26,10 +26,10 @@ const presence = new Presence({
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
-	const enum Assets {
-		Logo = "https://cdn.discordapp.com/app-assets/809748404963770398/809773186391998474.png?size=512",
-		Logo2 = "https://cdn.discordapp.com/app-assets/809748404963770398/819827629137330176.png?size=512",
-	}
+const enum Assets {
+	Logo = "https://cdn.discordapp.com/app-assets/809748404963770398/809773186391998474.png?size=512",
+	Logo2 = "https://cdn.discordapp.com/app-assets/809748404963770398/819827629137330176.png?size=512",
+}
 
 presence.on("UpdateData", async () => {
 	const [newLang, showButtons, searchQuery, logo, cover] = await Promise.all([

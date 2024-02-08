@@ -30,29 +30,28 @@ let playerData: PlayerData,
 presence.info("PreMiD extension has loaded");
 
 const enum Assets {
-  Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeOnsen/assets/logo.png",
-  Account = "https://cdn.discordapp.com/app-assets/826806766033174568/917858054232498226.png?size=512",
-  Browse = "https://cdn.discordapp.com/app-assets/826806766033174568/917858106321567775.png?size=512",
-  Read = "https://cdn.discordapp.com/app-assets/826806766033174568/917858157756297216.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeOnsen/assets/logo.png",
+	Account = "https://cdn.discordapp.com/app-assets/826806766033174568/917858054232498226.png?size=512",
+	Browse = "https://cdn.discordapp.com/app-assets/826806766033174568/917858106321567775.png?size=512",
+	Read = "https://cdn.discordapp.com/app-assets/826806766033174568/917858157756297216.png?size=512",
 }
 
 function updateData() {
 	if (/^watch$/i.test(page)) {
 		const player = <HTMLVideoElement>qs("div.ao-player-media video"),
-			title = qs("span.ao-player-metadata-title").textContent,
-			episode = Number(
+			{ paused, currentTime: progress, duration } = player;
+		playerData = {
+			time: {
+				progress,
+				duration,
+				snowflake: presence.getTimestamps(progress, duration),
+			},
+			title: qs("span.ao-player-metadata-title").textContent,
+			episode: Number(
 				qs('meta[name="ao-content-episode"]').getAttribute("content")
 			),
-			[currentEpisodeOption] = (<HTMLSelectElement>(
-				qs("select.ao-player-metadata-episode")
-			)).selectedOptions,
-			{ paused, currentTime: progress, duration } = player,
-			snowflake = presence.getTimestamps(progress, duration);
-		playerData = {
-			time: { progress, duration, snowflake },
-			title,
-			episode,
-			episodeName: currentEpisodeOption.textContent,
+			episodeName: (<HTMLSelectElement>qs("select.ao-player-metadata-episode"))
+				.selectedOptions[0].textContent,
 			playbackState: paused ? "paused" : "playing",
 		};
 		if (document.body.contains(player) && !pageLoaded) pageLoaded = true;
@@ -87,8 +86,9 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "genre": {
-			const genre = qs("div.content-result span i").textContent;
-			presenceData.details = `Genre: ${genre}`;
+			presenceData.details = `Genre: ${
+				qs("div.content-result span i").textContent
+			}`;
 			presenceData.smallImageKey = rpaImage.general.browse;
 			presenceData.smallImageText = "Browsing";
 			break;
@@ -100,8 +100,9 @@ presence.on("UpdateData", () => {
 			break;
 		}
 		case "details": {
-			const title = qs('div.title span[lang="en"]').textContent;
-			presenceData.details = `Viewing ${title}`;
+			presenceData.details = `Viewing ${
+				qs('div.title span[lang="en"]').textContent
+			}`;
 			presenceData.smallImageKey = rpaImage.general.browse;
 			presenceData.smallImageText = "Details";
 			break;
