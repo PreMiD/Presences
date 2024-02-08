@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
 						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = "Live Paused";
 					} else {
-						presenceData.smallImageKey = "live";
+						presenceData.smallImageKey = Assets.Live;
 						presenceData.smallImageText = "Playing";
 					}
 				}

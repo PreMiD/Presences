@@ -224,7 +224,7 @@ presence.on("UpdateData", async () => {
 						.pop()
 						.toUpperCase()}`;
 					presenceData.largeImageKey = `vanmoof_${urlpath[2].split("-").pop()}`;
-					presenceData.smallImageKey = "logo";
+					presenceData.smallImageKey = "https://cdn.rcd.gg/PreMiD/websites/V/VanMoof/assets/logo.png";
 					presenceData.buttons = [
 						{
 							label: "View on VanMoof",

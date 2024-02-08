@@ -3,10 +3,13 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/logo.png"
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		cover = await presence.getSetting<boolean>("cover"),
@@ -26,10 +29,9 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
 					"meta[property='og:image']"
 				).content;
-				presenceData.smallImageKey = "logo";
+				presenceData.smallImageKey = Assets.Logo;
 			} else {
-				presenceData.largeImageKey =
-					"https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/logo.png";
+				presenceData.largeImageKey = Assets.Logo;
 			}
 		}
 		presenceData.buttons = [{ label: "View Album", url: document.URL }];
@@ -41,14 +43,14 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = document.querySelector<HTMLAnchorElement>(
 					"#leftfloat > div > a"
 				).href;
-				presenceData.smallImageKey = "logo";
+				presenceData.smallImageKey = Assets.Logo;
 			} else if (
 				document.querySelector<HTMLAnchorElement>("#innermain > div > a")
 			) {
 				presenceData.largeImageKey = document.querySelector<HTMLAnchorElement>(
 					"#innermain > div > a"
 				).href;
-				presenceData.smallImageKey = "logo";
+				presenceData.smallImageKey = Assets.Logo;
 			} else {
 				presenceData.largeImageKey =
 					"https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/logo.png";
@@ -69,7 +71,7 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = document.querySelector<HTMLAnchorElement>(
 					"#innermain > div > a"
 				).href;
-				presenceData.smallImageKey = "logo";
+				presenceData.smallImageKey = Assets.Logo;
 			} else {
 				presenceData.largeImageKey =
 					"https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/logo.png";
