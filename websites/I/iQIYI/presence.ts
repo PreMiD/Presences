@@ -27,8 +27,8 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
 const enum Assets {
-	Logo = "https://cdn.discordapp.com/app-assets/809748404963770398/809773186391998474.png?size=512",
-	Logo2 = "https://cdn.discordapp.com/app-assets/809748404963770398/819827629137330176.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/I/iQIYI/assets/0.png",
+	Logo2 = "https://cdn.rcd.gg/PreMiD/websites/I/iQIYI/assets/1.png",
 }
 
 presence.on("UpdateData", async () => {

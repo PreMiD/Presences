@@ -6,7 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			smallImageKey:
-				"https://cdn.discordapp.com/app-assets/796446671617130567/800468363717509120.png?size=512",
+				"https://cdn.rcd.gg/PreMiD/websites/O/OpenClassrooms/assets/0.png",
 			smallImageText: "OpenClassrooms",
 		},
 		webpath = window.location.pathname.toLowerCase();

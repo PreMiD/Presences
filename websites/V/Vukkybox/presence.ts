@@ -7,8 +7,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/V/Vukkybox/assets/logo.png",
-		smallImageKey:
-			"https://cdn.discordapp.com/app-assets/918248582459555871/918251112602144788.png?size=512",
+		smallImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/Vukkybox/assets/1.png",
 		smallImageText: "Playing Vukkybox",
 		startTimestamp: browsingTimestamp,
 	};

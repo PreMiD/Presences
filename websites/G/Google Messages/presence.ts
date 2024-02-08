@@ -6,7 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			smallImageKey:
-				"https://cdn.discordapp.com/app-assets/809898713996066827/810144767467716629.png?size=512",
+				"https://cdn.rcd.gg/PreMiD/websites/G/Google%20Messages/assets/0.png",
 			smallImageText: "Google",
 			startTimestamp: tmb,
 		},

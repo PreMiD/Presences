@@ -19,7 +19,7 @@ function capitalize(str: string): string {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
-				"https://cdn.discordapp.com/app-assets/662841394171346955/663486692015079458.png?size=512",
+				"https://cdn.rcd.gg/PreMiD/websites/W/Wakanim/assets/0.png",
 		},
 		video = document.querySelector<HTMLVideoElement>("video"),
 		title = document.querySelector<HTMLSpanElement>(".episode_title"),
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLMetaElement>(
 					".episode > .container > [itemprop=thumbnailUrl]"
 				).content ??
-				"https://cdn.discordapp.com/app-assets/662841394171346955/663486692015079458.png?size=512";
+				"https://cdn.rcd.gg/PreMiD/websites/W/Wakanim/assets/0.png";
 		}
 
 		if (subtitle && subtitle.textContent)

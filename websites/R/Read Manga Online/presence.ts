@@ -5,7 +5,7 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Read%20Manga%20Online/assets/logo.png",
-	Settings = "https://cdn.discordapp.com/app-assets/839455068855861248/839472783590424596.png?size=512",
+	Settings = "https://cdn.rcd.gg/PreMiD/websites/R/Read%20Manga%20Online/assets/0.png",
 }
 
 presence.on("UpdateData", async () => {

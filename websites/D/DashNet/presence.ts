@@ -41,7 +41,7 @@ presence.on("UpdateData", () => {
 			.querySelector("#cookies div")
 			.textContent.replace("per second :", "Per second:");
 		presenceData.smallImageKey =
-			"https://cdn.discordapp.com/app-assets/676126246928777250/676142979144220674.png?size=512";
+			"https://cdn.rcd.gg/PreMiD/websites/D/DashNet/assets/0.png";
 		presenceData.smallImageText = `Legacy level: ${
 			document.querySelector("#ascendNumber").textContent
 		}`;

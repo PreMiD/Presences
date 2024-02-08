@@ -18,7 +18,7 @@ presence.on("UpdateData", () => {
 		else if (document.location.pathname.includes("/photos/")) {
 			presenceData.details = "Looking at photos";
 			presenceData.smallImageKey =
-				"https://cdn.discordapp.com/app-assets/728904519055966228/734393800918695976.png?size=512";
+				"https://cdn.rcd.gg/PreMiD/websites/M/motorsport.com/assets/0.png";
 			presenceData.smallImageText = "Photos";
 		} else if (document.location.pathname.includes("/videos"))
 			presenceData.details = "Searching for videos";

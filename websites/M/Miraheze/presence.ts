@@ -4,9 +4,9 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Donate = "https://cdn.discordapp.com/app-assets/900002010156400670/900061732913946686.png?size=512",
+	Donate = "https://cdn.rcd.gg/PreMiD/websites/M/Miraheze/assets/0.png",
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/Miraheze/assets/logo.png",
-	Phabricator = "https://cdn.discordapp.com/app-assets/900002010156400670/900061734818181130.png?size=512",
+	Phabricator = "https://cdn.rcd.gg/PreMiD/websites/M/Miraheze/assets/1.png",
 }
 
 let currentURL = new URL(document.location.href),

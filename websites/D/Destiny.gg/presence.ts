@@ -5,10 +5,10 @@ const browsingTimestamp = Math.floor(Date.now() / 1000),
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Destiny.gg/assets/logo.png",
-	SmallImage = "https://cdn.discordapp.com/app-assets/759921592926339072/759922832066609192.png?size=512",
-	Money = "https://cdn.discordapp.com/app-assets/759921592926339072/760209604239687700.png?size=512",
-	Profile = "https://cdn.discordapp.com/app-assets/759921592926339072/760211012531781632.png?size=512",
-	Chat = "https://cdn.discordapp.com/app-assets/759921592926339072/765406610913755148.png?size=512",
+	SmallImage = "https://cdn.rcd.gg/PreMiD/websites/D/Destiny.gg/assets/0.png",
+	Money = "https://cdn.rcd.gg/PreMiD/websites/D/Destiny.gg/assets/1.png",
+	Profile = "https://cdn.rcd.gg/PreMiD/websites/D/Destiny.gg/assets/2.png",
+	Chat = "https://cdn.rcd.gg/PreMiD/websites/D/Destiny.gg/assets/3.png",
 }
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {

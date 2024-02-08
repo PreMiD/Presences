@@ -8,11 +8,11 @@ let profile: HTMLElement, title: HTMLElement;
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/V/V3rmillion/assets/logo.png",
-	House = "https://cdn.discordapp.com/app-assets/650569876993343529/650780099838476288.png?size=512",
-	Memo = "https://cdn.discordapp.com/app-assets/650569876993343529/650781077937455130.png?size=512",
-	Paper = "https://cdn.discordapp.com/app-assets/650569876993343529/650781592486412309.png?size=512",
-	Spy = "https://cdn.discordapp.com/app-assets/650569876993343529/650785262544224276.png?size=512",
-	Cog = "https://cdn.discordapp.com/app-assets/650569876993343529/650798694366576661.png?size=512",
+	House = "https://cdn.rcd.gg/PreMiD/websites/V/V3rmillion/assets/0.png",
+	Memo = "https://cdn.rcd.gg/PreMiD/websites/V/V3rmillion/assets/1.png",
+	Paper = "https://cdn.rcd.gg/PreMiD/websites/V/V3rmillion/assets/2.png",
+	Spy = "https://cdn.rcd.gg/PreMiD/websites/V/V3rmillion/assets/3.png",
+	Cog = "https://cdn.rcd.gg/PreMiD/websites/V/V3rmillion/assets/4.png",
 }
 
 /* Main eventHandler */

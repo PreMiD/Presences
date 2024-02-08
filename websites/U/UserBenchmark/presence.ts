@@ -49,12 +49,12 @@ const statics = {
 		},
 	},
 	assets = {
-		ssd: "https://cdn.discordapp.com/app-assets/735229766701154357/735567736377311334.png?size=512",
-		cpu: "https://cdn.discordapp.com/app-assets/735229766701154357/735567755817910384.png?size=512",
-		usb: "https://cdn.discordapp.com/app-assets/735229766701154357/735567756866355301.png?size=512",
-		hdd: "https://cdn.discordapp.com/app-assets/735229766701154357/735567758095417386.png?size=512",
-		gpu: "https://cdn.discordapp.com/app-assets/735229766701154357/735567758179303505.png?size=512",
-		ram: "https://cdn.discordapp.com/app-assets/735229766701154357/735567758225440788.png?size=512",
+		ssd: "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/0.png",
+		cpu: "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/1.png",
+		usb: "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/2.png",
+		hdd: "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/3.png",
+		gpu: "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/4.png",
+		ram: "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/5.png",
 	};
 
 presence.on("UpdateData", async () => {

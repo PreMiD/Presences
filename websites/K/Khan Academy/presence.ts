@@ -12,9 +12,9 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/K/Khan%20Academy/assets/logo.png",
-	Video = "https://cdn.discordapp.com/app-assets/900882829154598952/900915583607001100.png?size=512",
-	Article = "https://cdn.discordapp.com/app-assets/900882829154598952/900915583607001110.png?size=512",
-	Exercise = "https://cdn.discordapp.com/app-assets/900882829154598952/900915583929942036.png?size=512",
+	Video = "https://cdn.rcd.gg/PreMiD/websites/K/Khan%20Academy/assets/0.png",
+	Article = "https://cdn.rcd.gg/PreMiD/websites/K/Khan%20Academy/assets/1.png",
+	Exercise = "https://cdn.rcd.gg/PreMiD/websites/K/Khan%20Academy/assets/2.png",
 }
 
 presence.on("UpdateData", async () => {

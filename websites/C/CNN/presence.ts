@@ -4,8 +4,8 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://cdn.discordapp.com/app-assets/839539095393796116/839539337044426772.png?size=512",
-	LogoTransp = "https://cdn.discordapp.com/app-assets/839539095393796116/839540305308155954.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/CNN/assets/0.png",
+	LogoTransp = "https://cdn.rcd.gg/PreMiD/websites/C/CNN/assets/1.png",
 }
 
 presence.on("UpdateData", async function () {

@@ -78,9 +78,9 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
 	oldLang: string = null;
 
 const enum Assets {
-	DiscordBlack = "https://cdn.discordapp.com/app-assets/616940877042155531/842430731238113330.png?size=512",
-	Discord = "https://cdn.discordapp.com/app-assets/616940877042155531/842430731435507722.png?size=512",
-	DiscordWhite = "https://cdn.discordapp.com/app-assets/616940877042155531/842430731694899240.png?size=512",
+	DiscordBlack = "https://cdn.rcd.gg/PreMiD/websites/D/Discord/assets/0.png",
+	Discord = "https://cdn.rcd.gg/PreMiD/websites/D/Discord/assets/1.png",
+	DiscordWhite = "https://cdn.rcd.gg/PreMiD/websites/D/Discord/assets/2.png",
 }
 
 presence.on("UpdateData", async () => {

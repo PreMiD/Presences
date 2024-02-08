@@ -120,8 +120,8 @@ fetch("https://stips.co.il/api?name=user.get_app_user").then(resp =>
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Stips/assets/logo.png",
-	StipspiLight = "https://cdn.discordapp.com/app-assets/745570917823807519/745631551835996260.png?size=512",
-	StipspinDark = "https://cdn.discordapp.com/app-assets/745570917823807519/745631552179929088.png?size=512",
+	StipspiLight = "https://cdn.rcd.gg/PreMiD/websites/S/Stips/assets/0.png",
+	StipspinDark = "https://cdn.rcd.gg/PreMiD/websites/S/Stips/assets/1.png",
 }
 
 // main loop

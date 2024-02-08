@@ -6,10 +6,10 @@ const presence = new Presence({
 let item: HTMLElement, user: HTMLElement, title: HTMLElement | string | Element;
 
 const assets: Record<string, string> = {
-	dk: "https://cdn.discordapp.com/app-assets/729035228324298852/729035341302071326.png?size=512",
-	en: "https://cdn.discordapp.com/app-assets/729035228324298852/729060359608074290.png?size=512",
-	jp: "https://cdn.discordapp.com/app-assets/729035228324298852/729370369823342662.png?size=512",
-	br: "https://cdn.discordapp.com/app-assets/729035228324298852/729385724301934653.png?size=512",
+	dk: "https://cdn.rcd.gg/PreMiD/websites/L/LabyMod/assets/0.png",
+	en: "https://cdn.rcd.gg/PreMiD/websites/L/LabyMod/assets/1.png",
+	jp: "https://cdn.rcd.gg/PreMiD/websites/L/LabyMod/assets/2.png",
+	br: "https://cdn.rcd.gg/PreMiD/websites/L/LabyMod/assets/3.png",
 };
 
 presence.on("UpdateData", async () => {

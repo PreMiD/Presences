@@ -416,216 +416,144 @@ const presence = new Presence({
 		".css": { image: "css" },
 	},
 	assets = {
-		pylon:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779071954808209418.png?size=512",
-		ahk: "https://cdn.discordapp.com/app-assets/779062000412000307/779072073514745898.png?size=512",
-		angular:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072073645424691.png?size=512",
-		applescript:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072073673998356.png?size=512",
-		android:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072073700081664.png?size=512",
-		appveyor:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072073845964891.png?size=512",
-		arduino:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072074551001119.png?size=512",
-		as: "https://cdn.discordapp.com/app-assets/779062000412000307/779072074844078180.png?size=512",
-		autoit:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072074915774534.png?size=512",
-		asp: "https://cdn.discordapp.com/app-assets/779062000412000307/779072074915774574.png?size=512",
-		assembly:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072076342362112.png?size=512",
-		bat: "https://cdn.discordapp.com/app-assets/779062000412000307/779072079633973248.png?size=512",
-		bower:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072080406249492.png?size=512",
-		cmake:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072080742055986.png?size=512",
-		clojure:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072080829218817.png?size=512",
-		circleci:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072080842981396.png?size=512",
-		c: "https://cdn.discordapp.com/app-assets/779062000412000307/779072080858841119.png?size=512",
-		cargo:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072080951640095.png?size=512",
-		env: "https://cdn.discordapp.com/app-assets/779062000412000307/779072081491918898.png?size=512",
-		flowconfig:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072081618141184.png?size=512",
-		cssmap:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072081618534400.png?size=512",
-		cshtml:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072081743839262.png?size=512",
-		firebase:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072081924456499.png?size=512",
-		crystal:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072081966530582.png?size=512",
-		eslint:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072082013061201.png?size=512",
-		git: "https://cdn.discordapp.com/app-assets/779062000412000307/779072082075451422.png?size=512",
-		elm: "https://cdn.discordapp.com/app-assets/779062000412000307/779072082100092988.png?size=512",
-		d: "https://cdn.discordapp.com/app-assets/779062000412000307/779072082155667467.png?size=512",
-		denizen:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072082185158667.png?size=512",
-		dart: "https://cdn.discordapp.com/app-assets/779062000412000307/779072082197086248.png?size=512",
-		csharp:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072082201018399.png?size=512",
-		elixir:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072082222514186.png?size=512",
-		css: "https://cdn.discordapp.com/app-assets/779062000412000307/779072082230771712.png?size=512",
-		dm: "https://cdn.discordapp.com/app-assets/779062000412000307/779072082259869737.png?size=512",
-		docker:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072082267865098.png?size=512",
-		haskell:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072082276515862.png?size=512",
-		ejs: "https://cdn.discordapp.com/app-assets/779062000412000307/779072082276646973.png?size=512",
-		cuda: "https://cdn.discordapp.com/app-assets/779062000412000307/779072082294079548.png?size=512",
-		fsharp:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072082352275477.png?size=512",
-		gemfile:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072082381242418.png?size=512",
-		gradle:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072082389893160.png?size=512",
-		go: "https://cdn.discordapp.com/app-assets/779062000412000307/779072082399068231.png?size=512",
-		coffee:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072082436685854.png?size=512",
-		brainfuck:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072082439831612.png?size=512",
-		erlang:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072082444812358.png?size=512",
-		gatsbyjs:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072082549145630.png?size=512",
-		graphql:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072082582437948.png?size=512",
-		cpp: "https://cdn.discordapp.com/app-assets/779062000412000307/779072082586632213.png?size=512",
-		godot:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072082709315644.png?size=512",
-		log: "https://cdn.discordapp.com/app-assets/779062000412000307/779072082864504834.png?size=512",
-		livescript:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072082964906046.png?size=512",
-		heroku:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072083044728832.png?size=512",
-		handlebars:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072083136348180.png?size=512",
-		npm: "https://cdn.discordapp.com/app-assets/779062000412000307/779072083241205821.png?size=512",
-		jsmap:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072083590119454.png?size=512",
-		hjson:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072083761823755.png?size=512",
-		html: "https://cdn.discordapp.com/app-assets/779062000412000307/779072083815825430.png?size=512",
-		markdown:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072083888046140.png?size=512",
-		manifest:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072083920814090.png?size=512",
-		markdownx:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072083946242129.png?size=512",
-		json: "https://cdn.discordapp.com/app-assets/779062000412000307/779072083996573707.png?size=512",
-		gruntfile:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072084017938493.png?size=512",
-		toml: "https://cdn.discordapp.com/app-assets/779062000412000307/779072084054769689.png?size=512",
-		harbour:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072084109557820.png?size=512",
-		js: "https://cdn.discordapp.com/app-assets/779062000412000307/779072084201439243.png?size=512",
-		gulp: "https://cdn.discordapp.com/app-assets/779062000412000307/779072084240236567.png?size=512",
-		makefile:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072084403159061.png?size=512",
-		reasonml:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072084415742022.png?size=512",
-		shell:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072084608811038.png?size=512",
-		nim: "https://cdn.discordapp.com/app-assets/779062000412000307/779072084650622977.png?size=512",
-		julia:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072084667793458.png?size=512",
-		editorconfig:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072084676444201.png?size=512",
-		text: "https://cdn.discordapp.com/app-assets/779062000412000307/779072084696629308.png?size=512",
-		jest: "https://cdn.discordapp.com/app-assets/779062000412000307/779072084696629309.png?size=512",
-		ts: "https://cdn.discordapp.com/app-assets/779062000412000307/779072084801748993.png?size=512",
-		xml: "https://cdn.discordapp.com/app-assets/779062000412000307/779072084814069812.png?size=512",
-		haxe: "https://cdn.discordapp.com/app-assets/779062000412000307/779072084852211712.png?size=512",
-		yaml: "https://cdn.discordapp.com/app-assets/779062000412000307/779072084865187851.png?size=512",
-		tex: "https://cdn.discordapp.com/app-assets/779062000412000307/779072085166915644.png?size=512",
-		wasm: "https://cdn.discordapp.com/app-assets/779062000412000307/779072085192081428.png?size=512",
-		prisma:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072085196668959.png?size=512",
-		vcxproj:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072085250408508.png?size=512",
-		kotlin:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072085259583579.png?size=512",
-		nodemon:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072085342945292.png?size=512",
-		r: "https://cdn.discordapp.com/app-assets/779062000412000307/779072085402058762.png?size=512",
-		ocaml:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072085414641706.png?size=512",
-		powershell:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072085418835978.png?size=512",
-		svg: "https://cdn.discordapp.com/app-assets/779062000412000307/779072085443477537.png?size=512",
-		delphi:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072085473362012.png?size=512",
-		python:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072085477556234.png?size=512",
-		sql: "https://cdn.discordapp.com/app-assets/779062000412000307/779072085501804564.png?size=512",
-		http: "https://cdn.discordapp.com/app-assets/779062000412000307/779072085527101470.png?size=512",
-		v: "https://cdn.discordapp.com/app-assets/779062000412000307/779072085544402965.png?size=512",
-		yarn: "https://cdn.discordapp.com/app-assets/779062000412000307/779072085544665148.png?size=512",
-		txt: "https://cdn.discordapp.com/app-assets/779062000412000307/779072085560655882.png?size=512",
-		zig: "https://cdn.discordapp.com/app-assets/779062000412000307/779072085632483328.png?size=512",
-		groovy:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072085649522688.png?size=512",
-		marko:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072085653585982.png?size=512",
-		prettier:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072085698936832.png?size=512",
-		php: "https://cdn.discordapp.com/app-assets/779062000412000307/779072085703000064.png?size=512",
-		twig: "https://cdn.discordapp.com/app-assets/779062000412000307/779072085775089674.png?size=512",
-		swift:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072085782954024.png?size=512",
-		lua: "https://cdn.discordapp.com/app-assets/779062000412000307/779072085804711966.png?size=512",
-		purescript:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072085841543168.png?size=512",
-		vue: "https://cdn.discordapp.com/app-assets/779062000412000307/779072085875359764.png?size=512",
-		java: "https://cdn.discordapp.com/app-assets/779062000412000307/779072124752756757.png?size=512",
-		less: "https://cdn.discordapp.com/app-assets/779062000412000307/779072124798894133.png?size=512",
-		jsx: "https://cdn.discordapp.com/app-assets/779062000412000307/779072124881993768.png?size=512",
-		jupyter:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072124945039390.png?size=512",
-		lisp: "https://cdn.discordapp.com/app-assets/779062000412000307/779072125037707274.png?size=512",
-		perl: "https://cdn.discordapp.com/app-assets/779062000412000307/779072125050814485.png?size=512",
-		objc: "https://cdn.discordapp.com/app-assets/779062000412000307/779072125096558612.png?size=512",
-		pascal:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072125163012157.png?size=512",
-		pawn: "https://cdn.discordapp.com/app-assets/779062000412000307/779072125176512533.png?size=512",
-		postcss:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072125687955466.png?size=512",
-		pug: "https://cdn.discordapp.com/app-assets/779062000412000307/779072125922443355.png?size=512",
-		vba: "https://cdn.discordapp.com/app-assets/779062000412000307/779072126510563439.png?size=512",
-		vscodeignore:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072126677811202.png?size=512",
-		tsx: "https://cdn.discordapp.com/app-assets/779062000412000307/779072126711758850.png?size=512",
-		vb: "https://cdn.discordapp.com/app-assets/779062000412000307/779072126820024341.png?size=512",
-		sqf: "https://cdn.discordapp.com/app-assets/779062000412000307/779072126832738374.png?size=512",
-		svelte:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072126904041472.png?size=512",
-		ruby: "https://cdn.discordapp.com/app-assets/779062000412000307/779072126908891186.png?size=512",
-		scala:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072126954897408.png?size=512",
-		stylus:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072127000641597.png?size=512",
-		webpack:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072127005360128.png?size=512",
-		vala: "https://cdn.discordapp.com/app-assets/779062000412000307/779072127025283122.png?size=512",
-		travis:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072127046385684.png?size=512",
-		rust: "https://cdn.discordapp.com/app-assets/779062000412000307/779072127072337982.png?size=512",
-		scss: "https://cdn.discordapp.com/app-assets/779062000412000307/779072127155568640.png?size=512",
-		ponylang:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072127180472350.png?size=512",
-		processing:
-			"https://cdn.discordapp.com/app-assets/779062000412000307/779072127344967710.png?size=512",
+		pylon: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/0.png",
+		ahk: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/1.png",
+		angular: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/2.png",
+		applescript: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/3.png",
+		android: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/4.png",
+		appveyor: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/5.png",
+		arduino: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/6.png",
+		as: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/7.png",
+		autoit: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/8.png",
+		asp: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/9.png",
+		assembly: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/10.png",
+		bat: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/11.png",
+		bower: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/12.png",
+		cmake: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/13.png",
+		clojure: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/14.png",
+		circleci: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/15.png",
+		c: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/16.png",
+		cargo: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/17.png",
+		env: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/18.png",
+		flowconfig: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/19.png",
+		cssmap: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/20.png",
+		cshtml: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/21.png",
+		firebase: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/22.png",
+		crystal: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/23.png",
+		eslint: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/24.png",
+		git: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/25.png",
+		elm: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/26.png",
+		d: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/27.png",
+		denizen: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/28.png",
+		dart: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/29.png",
+		csharp: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/30.png",
+		elixir: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/31.png",
+		css: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/32.png",
+		dm: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/33.png",
+		docker: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/34.png",
+		haskell: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/35.png",
+		ejs: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/36.png",
+		cuda: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/37.png",
+		fsharp: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/38.png",
+		gemfile: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/39.png",
+		gradle: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/40.png",
+		go: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/41.png",
+		coffee: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/42.png",
+		brainfuck: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/43.png",
+		erlang: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/44.png",
+		gatsbyjs: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/45.png",
+		graphql: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/46.png",
+		cpp: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/47.png",
+		godot: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/48.png",
+		log: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/49.png",
+		livescript: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/50.png",
+		heroku: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/51.png",
+		handlebars: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/52.png",
+		npm: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/53.png",
+		jsmap: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/54.png",
+		hjson: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/55.png",
+		html: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/56.png",
+		markdown: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/57.png",
+		manifest: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/58.png",
+		markdownx: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/59.png",
+		json: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/60.png",
+		gruntfile: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/61.png",
+		toml: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/62.png",
+		harbour: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/63.png",
+		js: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/64.png",
+		gulp: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/65.png",
+		makefile: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/66.png",
+		reasonml: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/67.png",
+		shell: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/68.png",
+		nim: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/69.png",
+		julia: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/70.png",
+		editorconfig: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/71.png",
+		text: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/72.png",
+		jest: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/73.png",
+		ts: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/74.png",
+		xml: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/75.png",
+		haxe: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/76.png",
+		yaml: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/77.png",
+		tex: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/78.png",
+		wasm: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/79.png",
+		prisma: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/80.png",
+		vcxproj: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/81.png",
+		kotlin: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/82.png",
+		nodemon: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/83.png",
+		r: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/84.png",
+		ocaml: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/85.png",
+		powershell: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/86.png",
+		svg: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/87.png",
+		delphi: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/88.png",
+		python: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/89.png",
+		sql: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/90.png",
+		http: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/91.png",
+		v: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/92.png",
+		yarn: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/93.png",
+		txt: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/94.png",
+		zig: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/95.png",
+		groovy: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/96.png",
+		marko: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/97.png",
+		prettier: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/98.png",
+		php: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/99.png",
+		twig: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/100.png",
+		swift: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/101.png",
+		lua: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/102.png",
+		purescript: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/103.png",
+		vue: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/104.png",
+		java: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/105.png",
+		less: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/106.png",
+		jsx: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/107.png",
+		jupyter: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/108.png",
+		lisp: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/109.png",
+		perl: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/110.png",
+		objc: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/111.png",
+		pascal: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/112.png",
+		pawn: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/113.png",
+		postcss: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/114.png",
+		pug: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/115.png",
+		vba: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/116.png",
+		vscodeignore: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/117.png",
+		tsx: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/118.png",
+		vb: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/119.png",
+		sqf: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/120.png",
+		svelte: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/121.png",
+		ruby: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/122.png",
+		scala: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/123.png",
+		stylus: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/124.png",
+		webpack: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/125.png",
+		vala: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/126.png",
+		travis: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/127.png",
+		rust: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/128.png",
+		scss: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/129.png",
+		ponylang: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/130.png",
+		processing: "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/131.png",
 	};
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/logo.png",
-	Idle = "https://cdn.discordapp.com/app-assets/779062000412000307/779103877374541874.png?size=512",
-	PylonD = "https://cdn.discordapp.com/app-assets/779062000412000307/779072756650082314.png?size=512",
+	Idle = "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/132.png",
+	PylonD = "https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/133.png",
 }
 
 let lastFileChange: number = null,

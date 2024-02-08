@@ -4,13 +4,13 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	assets = {
 		gryffindor:
-			"https://cdn.discordapp.com/app-assets/843731213893107713/843743180885065738.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/W/Wizarding%20World/assets/0.png",
 		hufflepuff:
-			"https://cdn.discordapp.com/app-assets/843731213893107713/843743181522599956.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/W/Wizarding%20World/assets/1.png",
 		ravenclaw:
-			"https://cdn.discordapp.com/app-assets/843731213893107713/843743181752631356.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/W/Wizarding%20World/assets/2.png",
 		slytherin:
-			"https://cdn.discordapp.com/app-assets/843731213893107713/843743182403403786.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/W/Wizarding%20World/assets/3.png",
 	};
 
 presence.on("UpdateData", async function () {

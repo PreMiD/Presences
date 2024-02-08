@@ -5,8 +5,8 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Danbooru/assets/logo.png",
-	Artwork = "https://cdn.discordapp.com/app-assets/918794311557058590/919089758431494145.png?size=512",
-	User = "https://cdn.discordapp.com/app-assets/918794311557058590/919090981461188628.png?size=512",
+	Artwork = "https://cdn.rcd.gg/PreMiD/websites/D/Danbooru/assets/0.png",
+	User = "https://cdn.rcd.gg/PreMiD/websites/D/Danbooru/assets/1.png",
 }
 
 presence.on("UpdateData", async () => {

@@ -5,7 +5,7 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck%5E2/assets/logo.png",
-	Heart = "https://cdn.discordapp.com/app-assets/945791515169521694/952985424861736990.png?size=512",
+	Heart = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck%5E2/assets/0.png",
 }
 
 presence.on("UpdateData", async () => {

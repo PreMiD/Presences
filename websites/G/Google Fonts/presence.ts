@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/G/Google%20Fonts/assets/logo.png",
 			smallImageKey:
-				"https://cdn.discordapp.com/app-assets/814919836835905566/814922705820319774.png?size=512",
+				"https://cdn.rcd.gg/PreMiD/websites/G/Google%20Fonts/assets/0.png",
 			startTimestamp: tmb,
 		},
 		path = document.location.pathname.toLowerCase(),

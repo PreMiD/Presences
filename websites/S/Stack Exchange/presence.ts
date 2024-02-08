@@ -3,332 +3,330 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	assets = {
-		ai: "https://cdn.discordapp.com/app-assets/919817726195814431/920218219581689898.png?size=512",
+		ai: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/0.png",
 		askubuntu:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218219615227905.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/1.png",
 		alcohol:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218219816583168.png?size=512",
-		apple:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218219925622804.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/2.png",
+		apple: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/3.png",
 		astronomy:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218219950792704.png?size=512",
-		avp: "https://cdn.discordapp.com/app-assets/919817726195814431/920218220001128458.png?size=512",
-		anime:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218220005306408.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/4.png",
+		avp: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/5.png",
+		anime: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/6.png",
 		biology:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218220017893396.png?size=512",
-		br: "https://cdn.discordapp.com/app-assets/919817726195814431/920218220043042817.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/7.png",
+		br: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/8.png",
 		boardgames:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218220185657384.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/9.png",
 		blender:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218220206620682.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/10.png",
 		buddhism:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218220215042088.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/11.png",
 		chess:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218220307292210.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/12.png",
 		chinese:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218220449918986.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/13.png",
 		civicrm:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218220521193482.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/14.png",
 		chemistry:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218220554764298.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/15.png",
 		christianity:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218220609290240.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/16.png",
 		craftcms:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218220701569045.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/17.png",
 		codegolf:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218220705751040.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/18.png",
 		coffee:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218220760289301.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/19.png",
 		communitybuilding:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218220772876359.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/20.png",
 		computergraphics:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218220772884511.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/21.png",
 		codereview:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218220827381791.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/22.png",
 		cooking:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218220944834580.png?size=512",
-		cs: "https://cdn.discordapp.com/app-assets/919817726195814431/920218221020323851.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/23.png",
+		cs: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/24.png",
 		crafts:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218221024522271.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/25.png",
 		cstheory:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218221095821363.png?size=512",
-		dba: "https://cdn.discordapp.com/app-assets/919817726195814431/920218221154549760.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/26.png",
+		dba: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/27.png",
 		cseducators:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218221175504896.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/28.png",
 		conlang:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218221188091944.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/29.png",
 		datascience:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218221192286218.png?size=512",
-		diy: "https://cdn.discordapp.com/app-assets/919817726195814431/920218221225865248.png?size=512",
-		dsp: "https://cdn.discordapp.com/app-assets/919817726195814431/920218221234257971.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/30.png",
+		diy: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/31.png",
+		dsp: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/32.png",
 		devops:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218221259399178.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/33.png",
 		economics:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218221292949565.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/34.png",
 		drones:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218221351669760.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/35.png",
 		drupal:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218221632712704.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/36.png",
 		earthscience:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218221649481728.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/37.png",
 		russian:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218223528538123.png?size=512",
-		ru: "https://cdn.discordapp.com/app-assets/919817726195814431/920218223796948993.png?size=512",
-		rus: "https://cdn.discordapp.com/app-assets/919817726195814431/920218223864082433.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/38.png",
+		ru: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/39.png",
+		rus: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/40.png",
 		scicomp:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218223973113886.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/41.png",
 		salesforce:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224006660116.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/42.png",
 		sitecore:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224031825921.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/43.png",
 		sports:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224048631829.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/44.png",
 		space:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224107327541.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/45.png",
 		scifi:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224111525908.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/46.png",
 		serverfault:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224153481216.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/47.png",
 		superuser:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224233185321.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/48.png",
 		sharepoint:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224237350922.png?size=512",
-		tor: "https://cdn.discordapp.com/app-assets/919817726195814431/920218224254156811.png?size=512",
-		vi: "https://cdn.discordapp.com/app-assets/919817726195814431/920218224266711061.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/49.png",
+		tor: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/50.png",
+		vi: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/51.png",
 		softwareengineering:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224275116062.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/52.png",
 		stackoverflow:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224287678495.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/53.png",
 		skeptics:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224300261426.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/54.png",
 		ukrainian:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224312844291.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/55.png",
 		stellar:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224329654273.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/56.png",
 		softwarerecs:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224342233138.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/57.png",
 		security:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224363192370.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/58.png",
 		sound:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224375791646.png?size=512",
-		sqa: "https://cdn.discordapp.com/app-assets/919817726195814431/920218224384155658.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/59.png",
+		sqa: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/60.png",
 		spanish:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224434483210.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/61.png",
 		stackapps:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224434487307.png?size=512",
-		tex: "https://cdn.discordapp.com/app-assets/919817726195814431/920218224501592074.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/62.png",
+		tex: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/63.png",
 		stats:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224505810964.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/64.png",
 		tridion:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224589684746.png?size=512",
-		ux: "https://cdn.discordapp.com/app-assets/919817726195814431/920218224606466088.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/65.png",
+		ux: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/66.png",
 		sustainability:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224606478366.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/67.png",
 		travel:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224623222804.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/68.png",
 		webapps:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224660996097.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/69.png",
 		tezos:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224669376542.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/70.png",
 		vegetarianism:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224669388800.png?size=512",
-		unix: "https://cdn.discordapp.com/app-assets/919817726195814431/920218224749068298.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/71.png",
+		unix: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/72.png",
 		windowsphone:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224799399936.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/73.png",
 		woodworking:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224811966464.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/74.png",
 		webmasters:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224845529098.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/75.png",
 		wordpress:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224887488542.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/76.png",
 		writing:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224904245278.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/77.png",
 		workplace:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218224937795614.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/78.png",
 		worldbuilding:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218225072046100.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/79.png",
 		judaism:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218249491267655.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/80.png",
 		elementaryos:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218250728583239.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/81.png",
 		electronics:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218250762149950.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/82.png",
 		engineering:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251034787841.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/83.png",
 		gamedev:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251177385995.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/84.png",
 		emacs:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251202531328.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/85.png",
 		fitness:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251215126589.png?size=512",
-		ell: "https://cdn.discordapp.com/app-assets/919817726195814431/920218251219320862.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/86.png",
+		ell: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/87.png",
 		english:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251223515156.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/88.png",
 		ethereum:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251424837682.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/89.png",
 		gardening:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251429040128.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/90.png",
 		genealogy:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251433226310.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/91.png",
 		italian:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251454185473.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/92.png",
 		expressionengine:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251458404363.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/93.png",
 		gaming:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251475169340.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/94.png",
 		german:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251475177482.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/95.png",
 		languagelearning:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251546476545.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/96.png",
 		graphicdesign:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251554873344.png?size=512",
-		ham: "https://cdn.discordapp.com/app-assets/919817726195814431/920218251559067668.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/97.png",
+		ham: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/98.png",
 		eosio:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251571654676.png?size=512",
-		law: "https://cdn.discordapp.com/app-assets/919817726195814431/920218251580043346.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/99.png",
+		law: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/100.png",
 		hermeneutics:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251605192774.png?size=512",
-		iota: "https://cdn.discordapp.com/app-assets/919817726195814431/920218251617783830.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/101.png",
+		iota: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/102.png",
 		hinduism:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251617796126.png?size=512",
-		hsm: "https://cdn.discordapp.com/app-assets/919817726195814431/920218251634569256.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/103.png",
+		hsm: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/104.png",
 		hardwarerecs:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251647156264.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/105.png",
 		interpersonal:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251668099102.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/106.png",
 		islam:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251684888596.png?size=512",
-		iot: "https://cdn.discordapp.com/app-assets/919817726195814431/920218251684896818.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/107.png",
+		iot: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/108.png",
 		homebrew:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251689095219.png?size=512",
-		ja: "https://cdn.discordapp.com/app-assets/919817726195814431/920218251710042142.png?size=512",
-		gis: "https://cdn.discordapp.com/app-assets/919817726195814431/920218251751981076.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/109.png",
+		ja: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/110.png",
+		gis: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/111.png",
 		history:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251772956692.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/112.png",
 		joomla:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251831693362.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/113.png",
 		japanese:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251852648458.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/114.png",
 		lifehacks:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251903008788.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/115.png",
 		latin:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251907182673.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/116.png",
 		linguistics:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218251915583498.png?size=512",
-		math: "https://cdn.discordapp.com/app-assets/919817726195814431/920218252016238612.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/117.png",
+		math: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/118.png",
 		matheducators:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218252095938590.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/119.png",
 		magento:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920218252121112606.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/120.png",
 		stackexchange:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920219713928310824.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/121.png",
 		"3dprinting":
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233775860953149.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/122.png",
 		academia:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776079061033.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/123.png",
 		aviation:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776217464882.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/124.png",
 		arduino:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776230039552.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/125.png",
 		bitcoin:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776326524968.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/126.png",
 		bicycles:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776360075265.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/127.png",
 		bricks:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776397819946.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/128.png",
 		android:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776422989915.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/129.png",
 		medicalsciences:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776439758869.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/130.png",
 		bioinformatics:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776443965451.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/131.png",
 		cardano:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776578179083.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/132.png",
 		literature:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776599150612.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/133.png",
 		korean:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776624316416.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/134.png",
 		expatriates:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776653672499.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/135.png",
 		crypto:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776653680681.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/136.png",
 		musicfans:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776683049013.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/137.png",
 		french:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776691421195.png?size=512",
-		meta: "https://cdn.discordapp.com/app-assets/919817726195814431/920233776712417312.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/138.png",
+		meta: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/139.png",
 		martialarts:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776724987944.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/140.png",
 		monero:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776766939156.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/141.png",
 		esperanto:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776792104960.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/142.png",
 		mechanics:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776796282920.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/143.png",
 		parenting:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776796295169.png?size=512",
-		es: "https://cdn.discordapp.com/app-assets/919817726195814431/920233776800481300.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/144.png",
+		es: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/145.png",
 		ebooks:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776800493619.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/146.png",
 		opensource:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776804683777.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/147.png",
 		mythology:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776838238208.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/148.png",
 		opendata:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776859213844.png?size=512",
-		or: "https://cdn.discordapp.com/app-assets/919817726195814431/920233776880168970.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/149.png",
+		or: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/150.png",
 		outdoors:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776896966696.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/151.png",
 		freelancing:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233776989241374.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/152.png",
 		mattermodeling:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233777157001257.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/153.png",
 		music:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920233777211531264.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/154.png",
 		mathoverflow:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920235543302901801.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/155.png",
 		mathematica:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920235543361642496.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/156.png",
 		money:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920235705005928448.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/157.png",
 		movies:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920235705073012757.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/158.png",
 		networkengineering:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920235813625790484.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/159.png",
 		philosophy:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920236034632060939.png?size=512",
-		pm: "https://cdn.discordapp.com/app-assets/919817726195814431/920236034665615381.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/160.png",
+		pm: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/161.png",
 		politics:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920236034690785291.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/162.png",
 		poker:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920236034703360021.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/163.png",
 		photo:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920236034715975730.png?size=512",
-		pets: "https://cdn.discordapp.com/app-assets/919817726195814431/920236034741137418.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/164.png",
+		pets: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/165.png",
 		portuguese:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920236034854363146.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/166.png",
 		patents:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920236034866966528.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/167.png",
 		psychology:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920236034887917578.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/168.png",
 		physics:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920236034925658122.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/169.png",
 		retrocomputing:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920236034938269716.png?size=512",
-		rpg: "https://cdn.discordapp.com/app-assets/919817726195814431/920236034967621682.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/170.png",
+		rpg: "https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/171.png",
 		robotics:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920236034971824138.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/172.png",
 		puzzling:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920236034980200458.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/173.png",
 		reverseengineering:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920236035005382657.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/174.png",
 		quant:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920236035026345994.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/175.png",
 		raspberrypi:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920236035366064148.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/176.png",
 		quantumcomputing:
-			"https://cdn.discordapp.com/app-assets/919817726195814431/920236035437371403.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/Stack%20Exchange/assets/177.png",
 	};
 
 presence.on("UpdateData", async () => {

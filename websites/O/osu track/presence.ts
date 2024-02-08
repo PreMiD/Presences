@@ -5,10 +5,10 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/O/osu%20track/assets/logo.png",
-	Mania = "https://cdn.discordapp.com/app-assets/861180231909113866/861182390932340736.png?size=512",
-	Taiko = "https://cdn.discordapp.com/app-assets/861180231909113866/861182418131484682.png?size=512",
-	Ctb = "https://cdn.discordapp.com/app-assets/861180231909113866/861182443368218624.png?size=512",
-	Circle = "https://cdn.discordapp.com/app-assets/861180231909113866/861462486225911808.png?size=512",
+	Mania = "https://cdn.rcd.gg/PreMiD/websites/O/osu%20track/assets/0.png",
+	Taiko = "https://cdn.rcd.gg/PreMiD/websites/O/osu%20track/assets/1.png",
+	Ctb = "https://cdn.rcd.gg/PreMiD/websites/O/osu%20track/assets/2.png",
+	Circle = "https://cdn.rcd.gg/PreMiD/websites/O/osu%20track/assets/3.png",
 }
 
 presence.on("UpdateData", async () => {

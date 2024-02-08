@@ -3,13 +3,13 @@ const presence = new Presence({ clientId: "929349462365704222" }),
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/Tracker.gg/assets/logo.png",
-	Valorant = "https://cdn.discordapp.com/app-assets/929349462365704222/929366806018285568.png?size=512",
-	Hyperscape = "https://cdn.discordapp.com/app-assets/929349462365704222/929417090291630180.png?size=512",
-	Apex = "https://cdn.discordapp.com/app-assets/929349462365704222/929425435190755329.png?size=512",
-	Fn = "https://cdn.discordapp.com/app-assets/929349462365704222/929428339616280677.png?size=512",
-	Csgo = "https://cdn.discordapp.com/app-assets/929349462365704222/929735068228923402.png?size=512",
-	Lol = "https://cdn.discordapp.com/app-assets/929349462365704222/929738426138386492.png?size=512",
-	Splitgate = "https://cdn.discordapp.com/app-assets/929349462365704222/929744904257695754.png?size=512",
+	Valorant = "https://cdn.rcd.gg/PreMiD/websites/T/Tracker.gg/assets/0.png",
+	Hyperscape = "https://cdn.rcd.gg/PreMiD/websites/T/Tracker.gg/assets/1.png",
+	Apex = "https://cdn.rcd.gg/PreMiD/websites/T/Tracker.gg/assets/2.png",
+	Fn = "https://cdn.rcd.gg/PreMiD/websites/T/Tracker.gg/assets/3.png",
+	Csgo = "https://cdn.rcd.gg/PreMiD/websites/T/Tracker.gg/assets/4.png",
+	Lol = "https://cdn.rcd.gg/PreMiD/websites/T/Tracker.gg/assets/5.png",
+	Splitgate = "https://cdn.rcd.gg/PreMiD/websites/T/Tracker.gg/assets/6.png",
 }
 
 presence.on("UpdateData", async () => {

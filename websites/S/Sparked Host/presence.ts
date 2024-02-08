@@ -5,8 +5,8 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Sparked%20Host/assets/logo.png",
-	Pterodactyl = "https://cdn.discordapp.com/app-assets/807949437922050069/807951890797166612.png?size=512",
-	Hetrix = "https://cdn.discordapp.com/app-assets/807949437922050069/808057180909207602.png?size=512",
+	Pterodactyl = "https://cdn.rcd.gg/PreMiD/websites/S/Sparked%20Host/assets/0.png",
+	Hetrix = "https://cdn.rcd.gg/PreMiD/websites/S/Sparked%20Host/assets/1.png",
 }
 
 presence.on("UpdateData", async () => {

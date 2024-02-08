@@ -25,8 +25,8 @@ let video: VideoContext = null,
 	lastVideoOption = 1;
 
 const enum Assets {
-	Season = "https://cdn.discordapp.com/app-assets/707389880505860156/707445020176810014.png?size=512",
-	Directory = "https://cdn.discordapp.com/app-assets/707389880505860156/707445631475515392.png?size=512",
+	Season = "https://cdn.rcd.gg/PreMiD/websites/M/Monos%20Chinos/assets/0.png",
+	Directory = "https://cdn.rcd.gg/PreMiD/websites/M/Monos%20Chinos/assets/1.png",
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/Monos%20Chinos/assets/logo.png",
 }
 

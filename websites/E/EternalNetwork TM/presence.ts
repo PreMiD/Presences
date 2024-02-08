@@ -20,15 +20,15 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
 const enum Assets {
-	EternalradioLogo = "https://cdn.discordapp.com/app-assets/440182142694064129/886561156972560394.png?size=512",
-	EternalcraftSmp = "https://cdn.discordapp.com/app-assets/440182142694064129/886561159317164032.png?size=512",
-	EternalnetworktmLogo = "https://cdn.discordapp.com/app-assets/440182142694064129/886561263432392734.png?size=512",
-	EternalnetworktmStatus = "https://cdn.discordapp.com/app-assets/440182142694064129/886563849900269618.png?size=512",
-	EternalnetworktmLogo2 = "https://cdn.discordapp.com/app-assets/440182142694064129/886587581603643432.png?size=512",
-	EternalnetworktmLogo3 = "https://cdn.discordapp.com/app-assets/440182142694064129/886587582396395570.png?size=512",
-	EternallogisticLogo = "https://cdn.discordapp.com/app-assets/440182142694064129/1010639904759361629.png?size=512",
-	EternalshortenerLogo = "https://cdn.discordapp.com/app-assets/440182142694064129/1010645891625005198.png?size=512",
-	EternalnetworktmDev = "https://cdn.discordapp.com/app-assets/440182142694064129/1010650194494378186.png?size=512",
+	EternalradioLogo = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/0.png",
+	EternalcraftSmp = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/1.png",
+	EternalnetworktmLogo = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/2.png",
+	EternalnetworktmStatus = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/3.png",
+	EternalnetworktmLogo2 = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/4.png",
+	EternalnetworktmLogo3 = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/5.png",
+	EternallogisticLogo = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/6.png",
+	EternalshortenerLogo = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/7.png",
+	EternalnetworktmDev = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/8.png",
 }
 
 presence.on("UpdateData", async () => {

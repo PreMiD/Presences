@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/O/Overleaf/assets/logo.png",
 			smallImageKey:
-				"https://cdn.discordapp.com/app-assets/784954155747377162/784979467859656711.png?size=512",
+				"https://cdn.rcd.gg/PreMiD/websites/O/Overleaf/assets/0.png",
 			smallImageText: "Overleaf",
 			startTimestamp: browsingTimestamp,
 		},

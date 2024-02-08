@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
 				-1
 			)} ${strings.docsViewer2.toLowerCase()}:`;
 			presenceData.smallImageKey =
-				"https://cdn.discordapp.com/app-assets/765261270814949417/818976293248827412.png?size=512";
+				"https://cdn.rcd.gg/PreMiD/websites/V/Void%20Bots/assets/0.png";
 			presenceData.smallImageText = "Confusion 100";
 			presenceData.state =
 				document.querySelector("title").textContent || "Home";

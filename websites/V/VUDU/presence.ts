@@ -14,7 +14,7 @@ let startTime = Date.now(),
 	// Set the default presence data for when the video is loading
 	presenceData: PresenceData = {
 		largeImageKey:
-			"https://cdn.discordapp.com/app-assets/697983563857002517/697985555040043068.png?size=512" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
+			"https://cdn.rcd.gg/PreMiD/websites/V/VUDU/assets/0.png" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
 		details: "Browsing VUDU",
 	};
 
@@ -77,7 +77,7 @@ presence.on("UpdateData", () => {
 			// Discord says "hey nice pause"
 			presenceData = {
 				largeImageKey:
-					"https://cdn.discordapp.com/app-assets/697983563857002517/697985555040043068.png?size=512" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
+					"https://cdn.rcd.gg/PreMiD/websites/V/VUDU/assets/0.png" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
 				details: `Watching ${metadata}`, //The upper section of the presence text
 				state: "Paused",
 			};
@@ -88,9 +88,9 @@ presence.on("UpdateData", () => {
 			// Set presence to movie data
 			presenceData = {
 				largeImageKey:
-					"https://cdn.discordapp.com/app-assets/697983563857002517/697985555040043068.png?size=512" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
+					"https://cdn.rcd.gg/PreMiD/websites/V/VUDU/assets/0.png" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
 				smallImageKey:
-					"https://cdn.discordapp.com/app-assets/697983563857002517/697988095223529553.png?size=512" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
+					"https://cdn.rcd.gg/PreMiD/websites/V/VUDU/assets/1.png" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
 				smallImageText: "Watching movies", //The text which is displayed when hovering over the small image
 				details: `Watching ${metadata}`, //The upper section of the presence text
 				startTimestamp: startTime, //The unix epoch timestamp for when to start counting from

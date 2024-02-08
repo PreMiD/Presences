@@ -84,8 +84,8 @@ let video: {
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Daum/assets/logo.png",
-	DaumMail = "https://cdn.discordapp.com/app-assets/829266476875120650/829546176679247882.png?size=512",
-	DaumCafe = "https://cdn.discordapp.com/app-assets/829266476875120650/829954424642076684.png?size=512",
+	DaumMail = "https://cdn.rcd.gg/PreMiD/websites/D/Daum/assets/0.png",
+	DaumCafe = "https://cdn.rcd.gg/PreMiD/websites/D/Daum/assets/1.png",
 }
 
 presence.on(

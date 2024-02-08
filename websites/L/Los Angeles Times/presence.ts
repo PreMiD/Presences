@@ -5,8 +5,8 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/L/Los%20Angeles%20Times/assets/logo.jpg",
-	Bestcovery = "https://cdn.discordapp.com/app-assets/1005501034191409153/1005576653126242324.png?size=512",
-	LogoSmall = "https://cdn.discordapp.com/app-assets/1005501034191409153/1005577235916394507.png?size=512",
+	Bestcovery = "https://cdn.rcd.gg/PreMiD/websites/L/Los%20Angeles%20Times/assets/0.png",
+	LogoSmall = "https://cdn.rcd.gg/PreMiD/websites/L/Los%20Angeles%20Times/assets/1.png",
 }
 
 presence.on("UpdateData", async () => {

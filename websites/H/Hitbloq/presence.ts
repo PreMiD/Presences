@@ -3,49 +3,36 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	assets = {
-		s90e: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867125006379.png?size=512",
-		s360h:
-			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867141787648.png?size=512",
-		s360e:
-			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867221463140.png?size=512",
-		s90n: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867271794728.png?size=512",
-		s90ex:
-			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867288567808.png?size=512",
-		s1sh: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867351498773.png?size=512",
-		s1sn: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867426992208.png?size=512",
-		s1se: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867452162110.png?size=512",
-		snan: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867510886531.png?size=512",
-		sn: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867527663617.png?size=512",
-		s1sex:
-			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867573800980.png?size=512",
-		snaex:
-			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867607335083.png?size=512",
-		snae: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867615735839.png?size=512",
-		s360ex:
-			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867624124427.png?size=512",
-		sllex:
-			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867666055271.png?size=512",
-		sep: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867666071581.png?size=512",
-		s1sep:
-			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867703804005.png?size=512",
-		sllep:
-			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867741556807.png?size=512",
-		s360ep:
-			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867749945485.png?size=512",
-		sllh: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867758338140.png?size=512",
-		se: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867783503952.png?size=512",
-		snaep:
-			"https://cdn.discordapp.com/app-assets/939893060672827402/998651867787690155.png?size=512",
-		sex: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867787698257.png?size=512",
-		slle: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867821248532.png?size=512",
-		snah: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867842224148.png?size=512",
-		sh: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867955466240.png?size=512",
-		s90h: "https://cdn.discordapp.com/app-assets/939893060672827402/998651867984838686.png?size=512",
-		slln: "https://cdn.discordapp.com/app-assets/939893060672827402/998651868114845766.png?size=512",
-		s360n:
-			"https://cdn.discordapp.com/app-assets/939893060672827402/998651868215513209.png?size=512",
-		s90ep:
-			"https://cdn.discordapp.com/app-assets/939893060672827402/998651869478015037.png?size=512",
+		s90e: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/0.png",
+		s360h: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/1.png",
+		s360e: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/2.png",
+		s90n: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/3.png",
+		s90ex: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/4.png",
+		s1sh: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/5.png",
+		s1sn: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/6.png",
+		s1se: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/7.png",
+		snan: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/8.png",
+		sn: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/9.png",
+		s1sex: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/10.png",
+		snaex: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/11.png",
+		snae: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/12.png",
+		s360ex: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/13.png",
+		sllex: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/14.png",
+		sep: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/15.png",
+		s1sep: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/16.png",
+		sllep: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/17.png",
+		s360ep: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/18.png",
+		sllh: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/19.png",
+		se: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/20.png",
+		snaep: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/21.png",
+		sex: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/22.png",
+		slle: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/23.png",
+		snah: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/24.png",
+		sh: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/25.png",
+		s90h: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/26.png",
+		slln: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/27.png",
+		s360n: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/28.png",
+		s90ep: "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/29.png",
 	};
 
 presence.on("UpdateData", async () => {

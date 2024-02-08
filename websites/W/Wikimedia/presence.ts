@@ -4,20 +4,20 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	ChartBar = "https://cdn.discordapp.com/app-assets/860146992284958762/860153594841137182.png?size=512",
-	Envelope = "https://cdn.discordapp.com/app-assets/860146992284958762/860153594845855786.png?size=512",
-	Donate = "https://cdn.discordapp.com/app-assets/860146992284958762/860153596300755014.png?size=512",
-	Incubator = "https://cdn.discordapp.com/app-assets/860146992284958762/860153598825463824.png?size=512",
+	ChartBar = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/0.png",
+	Envelope = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/1.png",
+	Donate = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/2.png",
+	Incubator = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/3.png",
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/logo.png",
-	Phabricator = "https://cdn.discordapp.com/app-assets/860146992284958762/860153727729926214.png?size=512",
-	Wikimania = "https://cdn.discordapp.com/app-assets/860146992284958762/860153728878641193.png?size=512",
-	Xtools = "https://cdn.discordapp.com/app-assets/860146992284958762/860153730901082123.png?size=512",
-	Mediawiki = "https://cdn.discordapp.com/app-assets/860146992284958762/860153730997026836.png?size=512",
-	WikimediaCloudServices = "https://cdn.discordapp.com/app-assets/860146992284958762/860153735523467264.png?size=512",
-	Meta = "https://cdn.discordapp.com/app-assets/860146992284958762/860153739813847091.png?size=512",
-	Wikitech = "https://cdn.discordapp.com/app-assets/860146992284958762/860153742744485908.png?size=512",
-	LogoBlack = "https://cdn.discordapp.com/app-assets/860146992284958762/893141805049184258.png?size=512",
-	Wikispore = "https://cdn.discordapp.com/app-assets/860146992284958762/894126112819544075.png?size=512",
+	Phabricator = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/4.png",
+	Wikimania = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/5.png",
+	Xtools = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/6.png",
+	Mediawiki = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/7.png",
+	WikimediaCloudServices = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/8.png",
+	Meta = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/9.png",
+	Wikitech = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/10.png",
+	LogoBlack = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/11.png",
+	Wikispore = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/12.png",
 }
 
 let currentURL = new URL(document.location.href),

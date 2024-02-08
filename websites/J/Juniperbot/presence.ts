@@ -32,9 +32,9 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/J/Juniperbot/assets/logo.png",
-	Stats = "https://cdn.discordapp.com/app-assets/739908991274057870/739985402911391775.png?size=512",
-	Donate = "https://cdn.discordapp.com/app-assets/739908991274057870/739986305496121355.png?size=512",
-	List = "https://cdn.discordapp.com/app-assets/739908991274057870/739986784359940218.png?size=512",
+	Stats = "https://cdn.rcd.gg/PreMiD/websites/J/Juniperbot/assets/0.png",
+	Donate = "https://cdn.rcd.gg/PreMiD/websites/J/Juniperbot/assets/1.png",
+	List = "https://cdn.rcd.gg/PreMiD/websites/J/Juniperbot/assets/2.png",
 }
 
 presence.on("UpdateData", async () => {

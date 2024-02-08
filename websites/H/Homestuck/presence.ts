@@ -5,12 +5,12 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/logo.png",
-	Mspa = "https://cdn.discordapp.com/app-assets/941798064694378557/941818165728526446.png?size=512",
-	Ryan = "https://cdn.discordapp.com/app-assets/941798064694378557/945497825591058492.png?size=512",
-	Hellajeff = "https://cdn.discordapp.com/app-assets/941798064694378557/945503590678683683.png?size=512",
-	Meat = "https://cdn.discordapp.com/app-assets/941798064694378557/945507680318029834.png?size=512",
-	Candy = "https://cdn.discordapp.com/app-assets/941798064694378557/945507680330612806.png?size=512",
-	Prologue = "https://cdn.discordapp.com/app-assets/941798064694378557/945538252499202049.png?size=512",
+	Mspa = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/0.png",
+	Ryan = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/1.png",
+	Hellajeff = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/2.png",
+	Meat = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/3.png",
+	Candy = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/4.png",
+	Prologue = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/5.png",
 }
 
 presence.on("UpdateData", async () => {

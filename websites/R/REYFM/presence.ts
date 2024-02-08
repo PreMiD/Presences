@@ -78,15 +78,15 @@ setInterval(() => {
 }, 10_000);
 
 const enum Assets {
-	WhiteBackSmall = "https://cdn.discordapp.com/app-assets/748660637021896835/797201293936427008.png?size=512",
-	BlackBackSmall = "https://cdn.discordapp.com/app-assets/748660637021896835/797201293839826944.png?size=512",
-	ColorBackSmall = "https://cdn.discordapp.com/app-assets/748660637021896835/797201293818331176.png?size=512",
-	ColorBack = "https://cdn.discordapp.com/app-assets/748660637021896835/797196401401790464.png?size=512",
-	BlackBack = "https://cdn.discordapp.com/app-assets/748660637021896835/797196372645249024.png?size=512",
-	WhiteBack = "https://cdn.discordapp.com/app-assets/748660637021896835/797196345559482378.png?size=512",
-	Black = "https://cdn.discordapp.com/app-assets/748660637021896835/797196302596833291.png?size=512",
-	White = "https://cdn.discordapp.com/app-assets/748660637021896835/797193043630358570.png?size=512",
-	Logo = "https://cdn.discordapp.com/app-assets/748660637021896835/748660771361390622.png?size=512",
+	WhiteBackSmall = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/0.png",
+	BlackBackSmall = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/1.png",
+	ColorBackSmall = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/2.png",
+	ColorBack = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/3.png",
+	BlackBack = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/4.png",
+	WhiteBack = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/5.png",
+	Black = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/6.png",
+	White = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/7.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/8.png",
 }
 
 presence.on("UpdateData", async () => {

@@ -21,18 +21,12 @@ enum LogoAssets {
 
 /* eslint-disable camelcase */
 const assets = {
-		bbcsounds_logo:
-			"https://cdn.discordapp.com/app-assets/658230518520741915/813002634281091082.png?size=512",
-		bbciplayer_logo:
-			"https://cdn.discordapp.com/app-assets/658230518520741915/818020500038615061.png?size=512",
-		bbc_logo:
-			"https://cdn.discordapp.com/app-assets/658230518520741915/818020500319502366.png?size=512",
-		bbcnews_logo:
-			"https://cdn.discordapp.com/app-assets/658230518520741915/818821115534770235.png?size=512",
-		bbcsport_logo:
-			"https://cdn.discordapp.com/app-assets/658230518520741915/818821378320498698.png?size=512",
-		bbcweather_logo:
-			"https://cdn.discordapp.com/app-assets/658230518520741915/819920132172152883.png?size=512",
+		bbcsounds_logo: "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/6.png",
+		bbciplayer_logo: "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/7.png",
+		bbc_logo: "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/8.png",
+		bbcnews_logo: "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/9.png",
+		bbcsport_logo: "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/10.png",
+		bbcweather_logo: "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/11.png",
 	},
 	/* eslint-enable camelcase */
 	browsingTimestamp = Math.floor(Date.now() / 1000),
@@ -586,7 +580,7 @@ presence.on("UpdateData", async () => {
 					details: strings.viewPage,
 					state: "Map",
 					smallImageKey:
-						"https://cdn.discordapp.com/app-assets/658230518520741915/819962900499398677.png?size=512",
+						"https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/12.png",
 				},
 				"/weather/([0-9])": {
 					details: "Viewing weather of:",
