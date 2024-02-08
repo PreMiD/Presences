@@ -3,6 +3,18 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+	const enum Assets {
+		Forums512 = "https://cdn.discordapp.com/app-assets/970743721404530798/971249087267606548.png?size=512",
+		Home512 = "https://cdn.discordapp.com/app-assets/970743721404530798/971249087468937216.png?size=512",
+		Info512 = "https://cdn.discordapp.com/app-assets/970743721404530798/971249087947104256.png?size=512",
+		Logo = "https://cdn.discordapp.com/app-assets/970743721404530798/971249098390925322.png?size=512",
+		Forums = "https://cdn.discordapp.com/app-assets/970743721404530798/971249112513146902.png?size=512",
+		Category = "https://cdn.discordapp.com/app-assets/970743721404530798/971249113846931486.png?size=512",
+		Home = "https://cdn.discordapp.com/app-assets/970743721404530798/971249114094395502.png?size=512",
+		Info = "https://cdn.discordapp.com/app-assets/970743721404530798/971249114354450482.png?size=512",
+		Logo1024 = "https://cdn.discordapp.com/app-assets/970743721404530798/971249114702544907.png?size=512",
+	}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
@@ -10,9 +22,9 @@ presence.on("UpdateData", async () => {
 		{ pathname, search, hostname, href } = window.location;
 	switch (hostname) {
 		case "sonicretro.org": {
-			presenceData.smallImageKey = "home_512";
+			presenceData.smallImageKey = Assets.Home512;
 			if (search) {
-				presenceData.largeImageKey = "search";
+				presenceData.largeImageKey = Assets.Search;
 				if (!new URLSearchParams(search).get("s"))
 					presenceData.details = "Searching for something...";
 				else {
@@ -24,17 +36,17 @@ presence.on("UpdateData", async () => {
 				!search &&
 				(pathname === "/" || pathname === "/#" || pathname.includes("/page/"))
 			) {
-				presenceData.largeImageKey = "home";
+				presenceData.largeImageKey = Assets.Home;
 				presenceData.details = "Zooming through the main page";
 			} else if (pathname.includes("/category/")) {
-				presenceData.largeImageKey = "search";
+				presenceData.largeImageKey = Assets.Search;
 				presenceData.details = `Looking through ${
 					document.querySelector("#main > div.archive-box > h1").textContent
 				}`;
 			} else if (
 				/https:\/\/sonicretro.org\/\d{4}\/\d{2}\/(\d{2})*\//.test(pathname)
 			) {
-				presenceData.largeImageKey = "search";
+				presenceData.largeImageKey = Assets.Search;
 				presenceData.details = `Looking for posts from ${
 					document.title.split("-")[0]
 				}`;
@@ -43,7 +55,7 @@ presence.on("UpdateData", async () => {
 					href
 				)
 			) {
-				presenceData.largeImageKey = "reading";
+				presenceData.largeImageKey = Assets.Reading;
 				presenceData.details = "Reading an article";
 				presenceData.state = document.title.split(" - Sonic Retro")[0];
 				presenceData.buttons = [
@@ -53,7 +65,7 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			} else {
-				presenceData.largeImageKey = "logo_1024";
+				presenceData.largeImageKey = Assets.Logo1024;
 				presenceData.details = "Viewing an unsupported page";
 			}
 			break;
@@ -75,26 +87,26 @@ presence.on("UpdateData", async () => {
 				"Blocked users - Sonic Retro",
 				"File list - Sonic Retro",
 			];
-			presenceData.smallImageKey = "info_512";
+			presenceData.smallImageKey = Assets.Info512;
 			if (
 				pathname === "/" ||
 				pathname.includes("/Main_Page") ||
 				(pathname.includes("/index.php") && !search)
 			) {
-				presenceData.largeImageKey = "info";
+				presenceData.largeImageKey = Assets.Info;
 				presenceData.details = "Zooming through the main page";
 			} else if (pathname.includes("Special:")) {
 				if (unsupported.includes(document.title)) {
-					presenceData.largeImageKey = "logo_1024";
+					presenceData.largeImageKey = Assets.Logo1024;
 					presenceData.details = "Viewing an unsupported page";
 				} else if (pathname.includes("/Special:SpecialPages")) {
-					presenceData.largeImageKey = "search";
+					presenceData.largeImageKey = Assets.Search;
 					presenceData.details = "Browsing special pages";
 				} else if (pathname.includes("/Special:Search")) {
-					presenceData.largeImageKey = "search";
+					presenceData.largeImageKey = Assets.Search;
 					presenceData.details = "Searching for something...";
 				} else {
-					presenceData.largeImageKey = "category";
+					presenceData.largeImageKey = Assets.Category;
 					presenceData.details = "Browsing a special page:";
 					presenceData.state = document.title.split(" - Sonic Retro")[0];
 					presenceData.buttons = [
@@ -105,7 +117,7 @@ presence.on("UpdateData", async () => {
 					];
 				}
 			} else if (document.title.startsWith("Category:")) {
-				presenceData.largeImageKey = "reading";
+				presenceData.largeImageKey = Assets.Reading;
 				presenceData.details = "Reading an article:";
 				presenceData.state = document.title
 					.split("Category:")[1]
@@ -117,13 +129,13 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			} else if (document.title.startsWith("Talk:")) {
-				presenceData.largeImageKey = "reading";
+				presenceData.largeImageKey = Assets.Reading;
 				presenceData.details = "Browsing a talk page:";
 				presenceData.state = document.title
 					.split("Talk:")[1]
 					.split(" - Sonic Retro")[0];
 			} else if (document.title.startsWith("Sonic Retro:")) {
-				presenceData.largeImageKey = "reading";
+				presenceData.largeImageKey = Assets.Reading;
 				presenceData.details = "Reading an article:";
 				presenceData.state = document.title
 					.split("Sonic Retro:")[1]
@@ -135,7 +147,7 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			} else if (document.title.startsWith("User:")) {
-				presenceData.largeImageKey = "reading";
+				presenceData.largeImageKey = Assets.Reading;
 				presenceData.details = "Viewing a user's page:";
 				presenceData.state = `@${
 					document.title.split("User:")[1].split(" - Sonic Retro")[0]
@@ -150,10 +162,10 @@ presence.on("UpdateData", async () => {
 				pathname.includes("/File:") ||
 				pathname.includes("/Sonic_Retro:General_disclaimer")
 			) {
-				presenceData.largeImageKey = "logo_1024";
+				presenceData.largeImageKey = Assets.Logo1024;
 				presenceData.details = "Viewing an unsupported page";
 			} else if (pathname === "/index.php" && search.includes("search=")) {
-				presenceData.largeImageKey = "search";
+				presenceData.largeImageKey = Assets.Search;
 				if (document.title.startsWith("Search -"))
 					presenceData.details = "Searching for something...";
 				else {
@@ -167,10 +179,10 @@ presence.on("UpdateData", async () => {
 				pathname === "/index.php" ||
 				pathname.startsWith("User_talk:")
 			) {
-				presenceData.largeImageKey = "logo_1024";
+				presenceData.largeImageKey = Assets.Logo1024;
 				presenceData.details = "Viewing an unsupported page";
 			} else {
-				presenceData.largeImageKey = "reading";
+				presenceData.largeImageKey = Assets.Reading;
 				presenceData.details = "Reading an article:";
 				presenceData.state = document.title.split(" - Sonic Retro")[0];
 				presenceData.buttons = [
@@ -183,12 +195,12 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "forums.sonicretro.org": {
-			presenceData.smallImageKey = "forums_512";
+			presenceData.smallImageKey = Assets.Forums512
 			if (search) {
 				const forumTitle = document.title.split(
 					" | Sonic and Sega Retro Forums"
 				)[0];
-				presenceData.largeImageKey = "search";
+				presenceData.largeImageKey = Assets.Search;
 				if (search.includes("?watched/forums"))
 					presenceData.details = "Browsing watched forums";
 				else if (search.startsWith("?watched/threads"))
@@ -210,7 +222,7 @@ presence.on("UpdateData", async () => {
 						},
 					];
 				} else if (search.startsWith("?threads/")) {
-					presenceData.largeImageKey = "reading";
+					presenceData.largeImageKey = Assets.Reading;
 					presenceData.details = "Reading a thread:";
 					presenceData.state = forumTitle;
 					presenceData.buttons = [
@@ -221,10 +233,10 @@ presence.on("UpdateData", async () => {
 					];
 				} else if (search.startsWith("?members/")) {
 					if (document.title.startsWith("Notable Members")) {
-						presenceData.largeImageKey = "search";
+						presenceData.largeImageKey = Assets.Search;
 						presenceData.details = "Browsing notable members";
 					} else {
-						presenceData.largeImageKey = "reading";
+						presenceData.largeImageKey = Assets.Reading;
 						presenceData.details = "Viewing a member's page";
 						presenceData.state = `@${forumTitle}`;
 						presenceData.buttons = [
@@ -235,7 +247,7 @@ presence.on("UpdateData", async () => {
 						];
 					}
 				} else if (search.startsWith("?search/")) {
-					presenceData.largeImageKey = "search";
+					presenceData.largeImageKey = Assets.Search;
 					if (
 						document.title.startsWith("Error") ||
 						document.title.startsWith("Search")
@@ -253,22 +265,22 @@ presence.on("UpdateData", async () => {
 						search
 					)
 				) {
-					presenceData.largeImageKey = "logo_1024";
+					presenceData.largeImageKey = Assets.Logo1024;
 					presenceData.details = "Viewing an unsupported page";
 				}
 			} else if (pathname === "/index.php" && !search) {
-				presenceData.largeImageKey = "forums";
+				presenceData.largeImageKey = Assets.Forums
 				presenceData.details = "Zooming through the main page";
 			} else {
-				presenceData.largeImageKey = "logo_1024";
+				presenceData.largeImageKey = Assets.Logo1024;
 				presenceData.details = "Viewing an unsupported page";
 			}
 			break;
 		}
 		default: {
-			presenceData.smallImageKey = "unsupported_512";
+			presenceData.smallImageKey = Assets.Question
 			presenceData.smallImageText = "Unknown Page";
-			presenceData.largeImageKey = "logo_1024";
+			presenceData.largeImageKey = Assets.Logo1024;
 			presenceData.details = "Viewing an unsupported page";
 		}
 	}

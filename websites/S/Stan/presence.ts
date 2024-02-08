@@ -88,7 +88,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Stan/assets/logo.png",
 		details: data.strings.browse,
-		smallImageKey: "browse",
+		smallImageKey: Assets.Search,
 		startTimestamp: data.startedSince,
 	};
 

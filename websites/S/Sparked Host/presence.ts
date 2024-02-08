@@ -3,10 +3,15 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+	const enum Assets {
+		Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Sparked%20Host/assets/logo.png",
+		Pterodactyl = "https://cdn.discordapp.com/app-assets/807949437922050069/807951890797166612.png?size=512",
+		Hetrix = "https://cdn.discordapp.com/app-assets/807949437922050069/808057180909207602.png?size=512",
+	}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/S/Sparked%20Host/assets/logo.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -98,7 +103,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "control.sparkedhost.us": {
 			const serverName = document.title.split(" | ");
-			presenceData.smallImageKey = "pterodactyl";
+			presenceData.smallImageKey = Assets.Pterodactyl;
 			presenceData.smallImageText = "Pterodactyl";
 			if (document.location.pathname === "/") {
 				presenceData.details = "Viewing Servers";
@@ -144,7 +149,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "status.sparkedhost.com": {
-			presenceData.smallImageKey = "hetrix";
+			presenceData.smallImageKey = Assets.Hetrix;
 			presenceData.smallImageText = "HetrixTools";
 			presenceData.details = "Server Status";
 			presenceData.state = "Who broke it?";

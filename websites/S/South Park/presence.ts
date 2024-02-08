@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/S/South%20Park/assets/logo.jpg",
 		details: "Browsing...",
-		smallImageKey: "reading",
+		smallImageKey: Assets.Reading,
 		startTimestamp: startTime,
 	};
 
@@ -113,12 +113,12 @@ presence.on("UpdateData", async () => {
 		"/create-account/step-1": {
 			details: "Creating an account",
 			state: "Step 1 of 2",
-			smallImageKey: "writing",
+			smallImageKey: Assets.Writing,
 		},
 		"/create-account/step-2": {
 			details: "Creating an account",
 			state: "Step 2 of 2",
-			smallImageKey: "writing",
+			smallImageKey: Assets.Writing
 		},
 		"/settings": {
 			details: "Viewing their:",

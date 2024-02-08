@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 			songInfoArray[1].textContent;
 		presenceData.state = `By ${songInfoArray[0].textContent}`;
 		presenceDataSlide.state = `From ${songInfoArray[2].textContent}`;
-		presenceData.smallImageKey = presenceDataSlide.smallImageKey = "live";
+		presenceData.smallImageKey = presenceDataSlide.smallImageKey = Assets.Live;
 		presenceData.startTimestamp = presenceDataSlide.startTimestamp =
 			timeElapsed;
 		slideshow.addSlide("slideArtist", presenceData, 5000);
