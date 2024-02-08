@@ -8,15 +8,15 @@ const enum Assets {
 }
 
 const assets = {
-	fr: "https://cdn.discordapp.com/app-assets/827620297896230912/836617711848914984.png?size=512",
-	at: "https://cdn.discordapp.com/app-assets/827620297896230912/836617711952986123.png?size=512",
-	es: "https://cdn.discordapp.com/app-assets/827620297896230912/836617712003842059.png?size=512",
-	nl: "https://cdn.discordapp.com/app-assets/827620297896230912/836617712003973141.png?size=512",
-	it: "https://cdn.discordapp.com/app-assets/827620297896230912/836617712188784670.png?size=512",
-	be: "https://cdn.discordapp.com/app-assets/827620297896230912/836617712247373915.png?size=512",
-	ch: "https://cdn.discordapp.com/app-assets/827620297896230912/836617712427335731.png?size=512",
-	usa: "https://cdn.discordapp.com/app-assets/827620297896230912/836617712725131274.png?size=512",
-	de: "https://cdn.discordapp.com/app-assets/827620297896230912/836617712858824745.png?size=512",
+	fr: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/0.png",
+	at: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/1.png",
+	es: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/2.png",
+	nl: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/3.png",
+	it: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/4.png",
+	be: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/5.png",
+	ch: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/6.png",
+	usa: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/7.png",
+	de: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/8.png",
 };
 
 presence.on("UpdateData", async function () {

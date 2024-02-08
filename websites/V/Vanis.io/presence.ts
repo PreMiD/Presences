@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 	// Presence Data
 	const presenceData: PresenceData = {
 			largeImageKey:
-				"https://cdn.discordapp.com/app-assets/759926761554313218/759932013892861963.png?size=512",
+				"https://cdn.rcd.gg/PreMiD/websites/V/Vanis.io/assets/0.png",
 		},
 		massElement = document.querySelector("#hud .stats div:nth-child(3)"),
 		overlay = <HTMLElement>document.querySelector("#overlay");

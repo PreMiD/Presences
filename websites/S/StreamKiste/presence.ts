@@ -135,11 +135,11 @@ let lastPageIndex: number,
 	frameData: VideoContext;
 
 const IMAGES = {
-	LOGO: "https://cdn.discordapp.com/app-assets/825531268581818419/825535645124395040.png?size=512",
+	LOGO: "https://cdn.rcd.gg/PreMiD/websites/S/StreamKiste/assets/0.png",
 	PLAY: Assets.Play,
 	PAUSE: Assets.Pause,
 	BROWSE:
-		"https://cdn.discordapp.com/app-assets/825531268581818419/825535645250093088.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/S/StreamKiste/assets/1.png",
 	SEARCH: Assets.Search,
 };
 

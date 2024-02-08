@@ -4,9 +4,9 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Rockstargamestransparent = "https://cdn.discordapp.com/app-assets/765234467849240657/878424036550533120.png?size=512",
-	Rockstargamespurple = "https://cdn.discordapp.com/app-assets/765234467849240657/878444100817416222.png?size=512",
-	Rockstargamesspecial3 = "https://cdn.discordapp.com/app-assets/765234467849240657/878444113752633344.png?size=512",
+	Rockstargamestransparent = "https://cdn.rcd.gg/PreMiD/websites/R/Rockstar%20Games/assets/0.png",
+	Rockstargamespurple = "https://cdn.rcd.gg/PreMiD/websites/R/Rockstar%20Games/assets/1.png",
+	Rockstargamesspecial3 = "https://cdn.rcd.gg/PreMiD/websites/R/Rockstar%20Games/assets/2.png",
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Rockstar%20Games/assets/logo.png",
 }
 

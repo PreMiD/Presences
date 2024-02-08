@@ -5,11 +5,11 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/CSGO%20Stash/assets/logo.png",
-	Skins = "https://cdn.discordapp.com/app-assets/918832169823125555/918854002542784522.png?size=512",
-	Case = "https://cdn.discordapp.com/app-assets/918832169823125555/919939227930730566.png?size=512",
-	Sticker = "https://cdn.discordapp.com/app-assets/918832169823125555/919938921977245746.png?size=512",
-	Glove = "https://cdn.discordapp.com/app-assets/918832169823125555/919944744749137970.png?size=512",
-	Items = "https://cdn.discordapp.com/app-assets/918832169823125555/919946739941781514.png?size=512",
+	Skins = "https://cdn.rcd.gg/PreMiD/websites/C/CSGO%20Stash/assets/0.png",
+	Case = "https://cdn.rcd.gg/PreMiD/websites/C/CSGO%20Stash/assets/1.png",
+	Sticker = "https://cdn.rcd.gg/PreMiD/websites/C/CSGO%20Stash/assets/2.png",
+	Glove = "https://cdn.rcd.gg/PreMiD/websites/C/CSGO%20Stash/assets/3.png",
+	Items = "https://cdn.rcd.gg/PreMiD/websites/C/CSGO%20Stash/assets/4.png",
 }
 
 presence.on("UpdateData", () => {

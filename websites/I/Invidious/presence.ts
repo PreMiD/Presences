@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/I/Invidious/assets/logo.png",
 		smallImageKey:
-			"https://cdn.discordapp.com/app-assets/761617743593209869/761857793908932619.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/I/Invidious/assets/0.png",
 	};
 	let clear = false;
 

@@ -7,11 +7,11 @@ const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/V/V2EX/assets/logo.png",
-	Famous = "https://cdn.discordapp.com/app-assets/699318388270301284/699538301992042526.png?size=512",
-	Tongue = "https://cdn.discordapp.com/app-assets/699318388270301284/699538302654742568.png?size=512",
-	Happy = "https://cdn.discordapp.com/app-assets/699318388270301284/699538302847680542.png?size=512",
-	Curious = "https://cdn.discordapp.com/app-assets/699318388270301284/699538303028035585.png?size=512",
-	Famous2 = "https://cdn.discordapp.com/app-assets/699318388270301284/699540542547296276.png?size=512",
+	Famous = "https://cdn.rcd.gg/PreMiD/websites/V/V2EX/assets/0.png",
+	Tongue = "https://cdn.rcd.gg/PreMiD/websites/V/V2EX/assets/1.png",
+	Happy = "https://cdn.rcd.gg/PreMiD/websites/V/V2EX/assets/2.png",
+	Curious = "https://cdn.rcd.gg/PreMiD/websites/V/V2EX/assets/3.png",
+	Famous2 = "https://cdn.rcd.gg/PreMiD/websites/V/V2EX/assets/4.png",
 }
 
 presence.on("UpdateData", async () => {

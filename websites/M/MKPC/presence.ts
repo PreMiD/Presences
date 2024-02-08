@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 			{ label: "Play Game", url: "https://mkpc.malahieude.net/mariokart.php" },
 		];
 		presenceData.smallImageKey =
-			"https://cdn.discordapp.com/app-assets/812176837748457483/812274131369328640.png?size=512";
+			"https://cdn.rcd.gg/PreMiD/websites/M/MKPC/assets/0.png";
 	} else {
 		switch (document.location.pathname) {
 			case "/mariokart.php": {

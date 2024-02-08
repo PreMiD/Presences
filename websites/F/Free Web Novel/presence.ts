@@ -4,13 +4,13 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Smallimagekey = "https://cdn.discordapp.com/app-assets/965294297048023050/965309571046440990.png?size=512",
+	Smallimagekey = "https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/0.png",
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/logo.png",
-	Browsing = "https://cdn.discordapp.com/app-assets/965294297048023050/965478655901974568.png?size=512",
-	Closed = "https://cdn.discordapp.com/app-assets/965294297048023050/965480031465914409.png?size=512",
-	Open = "https://cdn.discordapp.com/app-assets/965294297048023050/965480033097494588.png?size=512",
-	Incognito = "https://cdn.discordapp.com/app-assets/965294297048023050/967074363046252605.png?size=512",
-	Nocover = "https://cdn.discordapp.com/app-assets/965294297048023050/967778188199608371.png?size=512",
+	Browsing = "https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/1.png",
+	Closed = "https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/2.png",
+	Open = "https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/3.png",
+	Incognito = "https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/4.png",
+	Nocover = "https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/5.png",
 }
 
 presence.on("UpdateData", async () => {

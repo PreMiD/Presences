@@ -10,17 +10,17 @@ let iFrameVideo: { isPaused: boolean; thumbnail: string };
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png",
-	Mdihome = "https://cdn.discordapp.com/app-assets/860224040060715018/860835539049513010.png?size=512",
-	Mdiheart = "https://cdn.discordapp.com/app-assets/860224040060715018/860836675156574228.png?size=512",
-	Mdiaccountboxmultiple = "https://cdn.discordapp.com/app-assets/860224040060715018/860838665591455804.png?size=512",
-	Mdiaccountbox = "https://cdn.discordapp.com/app-assets/860224040060715018/860839344785063946.png?size=512",
-	Mdianimationplay = "https://cdn.discordapp.com/app-assets/860224040060715018/860846730412818452.png?size=512",
-	Multiview = "https://cdn.discordapp.com/app-assets/860224040060715018/860848013429047316.png?size=512",
-	Mdimusic = "https://cdn.discordapp.com/app-assets/860224040060715018/860849152802684949.png?size=512",
-	Mdiinfinity = "https://cdn.discordapp.com/app-assets/860224040060715018/860850489889128448.png?size=512",
-	Mdisettings = "https://cdn.discordapp.com/app-assets/860224040060715018/860860048791961640.png?size=512",
-	Mdiloginvariant = "https://cdn.discordapp.com/app-assets/860224040060715018/860861825770586112.png?size=512",
-	Mdiplaylistplay = "https://cdn.discordapp.com/app-assets/860224040060715018/861196477371514880.png?size=512",
+	Mdihome = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/0.png",
+	Mdiheart = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/1.png",
+	Mdiaccountboxmultiple = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/2.png",
+	Mdiaccountbox = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/3.png",
+	Mdianimationplay = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/4.png",
+	Multiview = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/5.png",
+	Mdimusic = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/6.png",
+	Mdiinfinity = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/7.png",
+	Mdisettings = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/8.png",
+	Mdiloginvariant = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/9.png",
+	Mdiplaylistplay = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/10.png",
 }
 
 presence.on(

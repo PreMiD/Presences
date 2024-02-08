@@ -5,11 +5,11 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/L/LeoSight/assets/logo.png",
-	Lsminilogo = "https://cdn.discordapp.com/app-assets/888141162488143893/888420080197722213.png?size=512",
-	Artic = "https://cdn.discordapp.com/app-assets/888141162488143893/888736651860410378.png?size=512",
-	Ctf = "https://cdn.discordapp.com/app-assets/888141162488143893/888736652644712528.png?size=512",
-	Eco = "https://cdn.discordapp.com/app-assets/888141162488143893/888736873277693972.png?size=512",
-	Guard = "https://cdn.discordapp.com/app-assets/888141162488143893/888756771030708254.png?size=512",
+	Lsminilogo = "https://cdn.rcd.gg/PreMiD/websites/L/LeoSight/assets/0.png",
+	Artic = "https://cdn.rcd.gg/PreMiD/websites/L/LeoSight/assets/1.png",
+	Ctf = "https://cdn.rcd.gg/PreMiD/websites/L/LeoSight/assets/2.png",
+	Eco = "https://cdn.rcd.gg/PreMiD/websites/L/LeoSight/assets/3.png",
+	Guard = "https://cdn.rcd.gg/PreMiD/websites/L/LeoSight/assets/4.png",
 }
 
 let item, item2;

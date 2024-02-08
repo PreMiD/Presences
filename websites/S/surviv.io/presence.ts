@@ -13,9 +13,9 @@ let gametypequery: string,
 const browsingTimestamp = Math.floor(Date.now() / 1000),
 	assets = {
 		squad:
-			"https://cdn.discordapp.com/app-assets/640711877609127976/729548462886223932.png?size=512",
-		duo: "https://cdn.discordapp.com/app-assets/640711877609127976/729549183391891507.png?size=512",
-		solo: "https://cdn.discordapp.com/app-assets/640711877609127976/730196573581213749.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/surviv.io/assets/0.png",
+		duo: "https://cdn.rcd.gg/PreMiD/websites/S/surviv.io/assets/1.png",
+		solo: "https://cdn.rcd.gg/PreMiD/websites/S/surviv.io/assets/2.png",
 	};
 
 presence.on("UpdateData", async () => {

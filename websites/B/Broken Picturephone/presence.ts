@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 	if (valor === 1) {
 		presenceData.details = "Creating a room";
 		presenceData.smallImageKey =
-			"https://cdn.discordapp.com/app-assets/756196794727399617/756584310022209728.png?size=512";
+			"https://cdn.rcd.gg/PreMiD/websites/B/Broken%20Picturephone/assets/0.png";
 		presenceData.smallImageText = "On homepage";
 	}
 	if (valor >= 6) {

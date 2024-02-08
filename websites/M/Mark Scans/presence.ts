@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 
 	if (usuarioNome) {
 		presenceData.smallImageKey =
-			"https://cdn.discordapp.com/app-assets/751285675277680811/751311036824420413.png?size=512";
+			"https://cdn.rcd.gg/PreMiD/websites/M/Mark%20Scans/assets/0.png";
 		presenceData.smallImageText = usuarioNome.textContent.slice(11);
 	}
 

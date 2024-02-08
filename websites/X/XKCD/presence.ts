@@ -24,7 +24,7 @@ presence.on("UpdateData", () => {
 		presenceData.smallImageText = text;
 		presenceData.details = `Reading #${comicNumber}`;
 		presenceData.smallImageKey =
-			"https://cdn.discordapp.com/app-assets/754549450772316160/754573096354316398.png?size=512";
+			"https://cdn.rcd.gg/PreMiD/websites/X/XKCD/assets/0.png";
 		presenceData.buttons = [
 			{
 				url: `https://xkcd.com/${comicNumber}`,

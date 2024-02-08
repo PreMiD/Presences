@@ -172,7 +172,7 @@ presence.on("UpdateData", async () => {
 		);
 		if (!members[1].textContent.includes("Please login!")) {
 			presenceData.smallImageKey =
-				"https://cdn.discordapp.com/app-assets/846385772688834591/846598555087274004.png?size=512";
+				"https://cdn.rcd.gg/PreMiD/websites/N/namu.wiki/assets/0.png";
 			if (!privacy) presenceData.smallImageText = members[0].textContent;
 		}
 	}

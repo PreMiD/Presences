@@ -1,15 +1,15 @@
 const presence = new Presence({ clientId: "818822000176791553" }),
 	assets = {
 		"word-logo":
-			"https://cdn.discordapp.com/app-assets/818822000176791553/818841033026175026.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/O/OneDrive/assets/0.png",
 		"excel-logo":
-			"https://cdn.discordapp.com/app-assets/818822000176791553/818841299892699166.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/O/OneDrive/assets/1.png",
 		"powerpoint-logo":
-			"https://cdn.discordapp.com/app-assets/818822000176791553/818847184887873616.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/O/OneDrive/assets/2.png",
 		"onedrive-logo":
-			"https://cdn.discordapp.com/app-assets/818822000176791553/818868309906423808.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/O/OneDrive/assets/3.png",
 		"office-logo":
-			"https://cdn.discordapp.com/app-assets/818822000176791553/818866532083433472.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/O/OneDrive/assets/4.png",
 	};
 
 presence.on("UpdateData", async () => {

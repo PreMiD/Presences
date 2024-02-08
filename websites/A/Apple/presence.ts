@@ -94,38 +94,38 @@ let strings: ReturnType<typeof getStrings> extends PromiseLike<infer U>
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/logo.png",
-	LogoRainbow = "https://cdn.discordapp.com/app-assets/839150832036872213/839151149495484436.png?size=512",
-	AppleStore = "https://cdn.discordapp.com/app-assets/839150832036872213/839158580716372049.png?size=512",
-	AppleSupport = "https://cdn.discordapp.com/app-assets/839150832036872213/839159824092626964.png?size=512",
-	AppStore = "https://cdn.discordapp.com/app-assets/839150832036872213/839156639378571315.png?size=512",
-	ICloud = "https://cdn.discordapp.com/app-assets/839150832036872213/839166572253806663.png?size=512",
-	Keynote = "https://cdn.discordapp.com/app-assets/839150832036872213/958412305475977268.png?size=512",
-	AppleCard = "https://cdn.discordapp.com/app-assets/839150832036872213/842105422680686612.png?size=512",
-	AppleDeveloper = "https://cdn.discordapp.com/app-assets/839150832036872213/843257607716470794.png?size=512",
+	LogoRainbow = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/0.png",
+	AppleStore = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/1.png",
+	AppleSupport = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/2.png",
+	AppStore = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/3.png",
+	ICloud = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/4.png",
+	Keynote = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/5.png",
+	AppleCard = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/6.png",
+	AppleDeveloper = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/7.png",
 }
 
 /* eslint-disable camelcase */
 const assets: Record<string, string> = {
 	icloud_calendar:
-		"https://cdn.discordapp.com/app-assets/839150832036872213/958402860729651271.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/8.png",
 	icloud_photos:
-		"https://cdn.discordapp.com/app-assets/839150832036872213/958402860910010378.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/9.png",
 	icloud_mail:
-		"https://cdn.discordapp.com/app-assets/839150832036872213/958402860981317653.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/10.png",
 	icloud_contacts:
-		"https://cdn.discordapp.com/app-assets/839150832036872213/958402861044232263.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/11.png",
 	icloud_notes:
-		"https://cdn.discordapp.com/app-assets/839150832036872213/958402861144866887.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/12.png",
 	icloud_find:
-		"https://cdn.discordapp.com/app-assets/839150832036872213/958402861199425538.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/13.png",
 	icloud_pages:
-		"https://cdn.discordapp.com/app-assets/839150832036872213/958412305207533569.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/14.png",
 	icloud_keynote:
-		"https://cdn.discordapp.com/app-assets/839150832036872213/958412305475977268.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/5.png",
 	icloud_reminders:
-		"https://cdn.discordapp.com/app-assets/839150832036872213/958412563413073970.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/15.png",
 	icloud_numbers:
-		"https://cdn.discordapp.com/app-assets/839150832036872213/979531426976374874.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/16.png",
 };
 /* eslint-enable camelcase */
 

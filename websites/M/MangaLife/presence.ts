@@ -3,15 +3,15 @@ const presence = new Presence({ clientId: "906057236927893576" }),
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/logo.png",
-	LogoPng = "https://cdn.discordapp.com/app-assets/906057236927893576/923858941421682698.png?size=512",
-	Subscriptions = "https://cdn.discordapp.com/app-assets/906057236927893576/927164464074223676.png?size=512",
-	Discussions = "https://cdn.discordapp.com/app-assets/906057236927893576/927165805198737470.png?size=512",
-	Contact = "https://cdn.discordapp.com/app-assets/906057236927893576/927166569887461376.png?size=512",
-	Privacy = "https://cdn.discordapp.com/app-assets/906057236927893576/927167543930671105.png?size=512",
-	Hot = "https://cdn.discordapp.com/app-assets/906057236927893576/927187328043221024.png?size=512",
-	Bookmark = "https://cdn.discordapp.com/app-assets/906057236927893576/927194790536282132.png?size=512",
-	Home = "https://cdn.discordapp.com/app-assets/906057236927893576/930123335071850506.png?size=512",
-	Settings = "https://cdn.discordapp.com/app-assets/906057236927893576/932989087936286730.png?size=512",
+	LogoPng = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/0.png",
+	Subscriptions = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/1.png",
+	Discussions = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/2.png",
+	Contact = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/3.png",
+	Privacy = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/4.png",
+	Hot = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/5.png",
+	Bookmark = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/6.png",
+	Home = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/7.png",
+	Settings = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/8.png",
 }
 
 presence.on("UpdateData", async () => {

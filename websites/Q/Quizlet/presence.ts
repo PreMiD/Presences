@@ -20,13 +20,13 @@ let qzData: QuizletData = null,
 	actionTimestamp: number = null;
 
 const enum Assets {
-	Quizlet = "https://cdn.discordapp.com/app-assets/719784356725653504/719784460790267905.png?size=512",
-	Flashcards = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088138301491.png?size=512",
-	Match = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088435966012.png?size=512",
-	Test = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088511463434.png?size=512",
-	Learn = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088553537548.png?size=512",
-	Spell = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088792350720.png?size=512",
-	Gravity = "https://cdn.discordapp.com/app-assets/719784356725653504/719812088930893885.png?size=512",
+	Quizlet = "https://cdn.rcd.gg/PreMiD/websites/Q/Quizlet/assets/0.png",
+	Flashcards = "https://cdn.rcd.gg/PreMiD/websites/Q/Quizlet/assets/1.png",
+	Match = "https://cdn.rcd.gg/PreMiD/websites/Q/Quizlet/assets/2.png",
+	Test = "https://cdn.rcd.gg/PreMiD/websites/Q/Quizlet/assets/3.png",
+	Learn = "https://cdn.rcd.gg/PreMiD/websites/Q/Quizlet/assets/4.png",
+	Spell = "https://cdn.rcd.gg/PreMiD/websites/Q/Quizlet/assets/5.png",
+	Gravity = "https://cdn.rcd.gg/PreMiD/websites/Q/Quizlet/assets/6.png",
 }
 
 presence.on("UpdateData", async () => {

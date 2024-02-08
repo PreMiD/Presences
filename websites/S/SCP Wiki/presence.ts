@@ -5,8 +5,8 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/SCP%20Wiki/assets/logo.png",
-	LogoInt = "https://cdn.discordapp.com/app-assets/639208971806310441/639546099140395018.png?size=512",
-	LogoSandbox = "https://cdn.discordapp.com/app-assets/639208971806310441/639546104202919936.png?size=512",
+	LogoInt = "https://cdn.rcd.gg/PreMiD/websites/S/SCP%20Wiki/assets/0.png",
+	LogoSandbox = "https://cdn.rcd.gg/PreMiD/websites/S/SCP%20Wiki/assets/1.png",
 }
 
 presence.on("UpdateData", async () => {

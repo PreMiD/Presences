@@ -171,7 +171,7 @@ let lastPageIndex: number,
 	localizedStrings: { [key: string]: string };
 
 const IMAGES = {
-	LOGO: "https://cdn.discordapp.com/app-assets/823951719331004426/823952010721755176.png?size=512",
+	LOGO: "https://cdn.rcd.gg/PreMiD/websites/N/Nutaku/assets/0.png",
 	PLAY: Assets.Play,
 	PAUSE: Assets.Pause,
 	BROWSE: Assets.Search,

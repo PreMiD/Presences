@@ -106,8 +106,8 @@ interface SeriesInfo {
 /* eslint-enable camelcase */
 
 const enum Assets {
-	Logo = "https://cdn.discordapp.com/app-assets/815947069117169684/815947601974788142.png?size=512",
-	LogoText = "https://cdn.discordapp.com/app-assets/815947069117169684/816269556976713728.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/V/Viu/assets/0.png",
+	LogoText = "https://cdn.rcd.gg/PreMiD/websites/V/Viu/assets/1.png",
 }
 
 presence.on("UpdateData", async () => {

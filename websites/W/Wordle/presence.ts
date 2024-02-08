@@ -8,9 +8,9 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/W/Wordle/assets/logo.png",
-	Thought = "https://cdn.discordapp.com/app-assets/938310167404101683/938336664516952064.png?size=512",
-	Fail = "https://cdn.discordapp.com/app-assets/938310167404101683/938336664621834241.png?size=512",
-	Solved = "https://cdn.discordapp.com/app-assets/938310167404101683/938336777662496788.png?size=512",
+	Thought = "https://cdn.rcd.gg/PreMiD/websites/W/Wordle/assets/0.png",
+	Fail = "https://cdn.rcd.gg/PreMiD/websites/W/Wordle/assets/1.png",
+	Solved = "https://cdn.rcd.gg/PreMiD/websites/W/Wordle/assets/2.png",
 }
 
 presence.on("UpdateData", async () => {

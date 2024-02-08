@@ -17,10 +17,10 @@ presence.on(
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/B/Blkom/assets/logo.png",
-	Location = "https://cdn.discordapp.com/app-assets/769568486263095327/770067302322143262.png?size=512",
-	Discovery = "https://cdn.discordapp.com/app-assets/769568486263095327/770067301809913888.png?size=512",
-	Blog = "https://cdn.discordapp.com/app-assets/769568486263095327/770067301412110376.png?size=512",
-	Profile = "https://cdn.discordapp.com/app-assets/769568486263095327/770067302736986122.png?size=512",
+	Location = "https://cdn.rcd.gg/PreMiD/websites/B/Blkom/assets/0.png",
+	Discovery = "https://cdn.rcd.gg/PreMiD/websites/B/Blkom/assets/1.png",
+	Blog = "https://cdn.rcd.gg/PreMiD/websites/B/Blkom/assets/2.png",
+	Profile = "https://cdn.rcd.gg/PreMiD/websites/B/Blkom/assets/3.png",
 }
 
 presence.on("UpdateData", async () => {

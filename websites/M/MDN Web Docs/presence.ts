@@ -4,12 +4,12 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Homepage = "https://cdn.discordapp.com/app-assets/786770326234464256/786771428208541696.png?size=512",
-	Extension = "https://cdn.discordapp.com/app-assets/786770326234464256/786773473916747776.png?size=512",
-	Mathml = "https://cdn.discordapp.com/app-assets/786770326234464256/787112729499664424.png?size=512",
-	Css = "https://cdn.discordapp.com/app-assets/786770326234464256/787136952642043915.png?size=512",
-	Html = "https://cdn.discordapp.com/app-assets/786770326234464256/787136952826200085.png?size=512",
-	Javascript = "https://cdn.discordapp.com/app-assets/786770326234464256/787137160604024852.png?size=512",
+	Homepage = "https://cdn.rcd.gg/PreMiD/websites/M/MDN%20Web%20Docs/assets/0.png",
+	Extension = "https://cdn.rcd.gg/PreMiD/websites/M/MDN%20Web%20Docs/assets/1.png",
+	Mathml = "https://cdn.rcd.gg/PreMiD/websites/M/MDN%20Web%20Docs/assets/2.png",
+	Css = "https://cdn.rcd.gg/PreMiD/websites/M/MDN%20Web%20Docs/assets/3.png",
+	Html = "https://cdn.rcd.gg/PreMiD/websites/M/MDN%20Web%20Docs/assets/4.png",
+	Javascript = "https://cdn.rcd.gg/PreMiD/websites/M/MDN%20Web%20Docs/assets/5.png",
 }
 
 presence.on("UpdateData", async () => {

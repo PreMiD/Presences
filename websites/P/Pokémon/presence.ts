@@ -15,16 +15,16 @@ function settingSetter(): void {
 const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Pokemontv = "https://cdn.discordapp.com/app-assets/684885381728043048/684885514901258336.png?size=512",
+	Pokemontv = "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9mon/assets/0.png",
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9mon/assets/logo.png",
-	Pokemonplay = "https://cdn.discordapp.com/app-assets/684885381728043048/684896584886255717.png?size=512",
-	Pokeball = "https://cdn.discordapp.com/app-assets/684885381728043048/684904470815178754.png?size=512",
-	Tcg = "https://cdn.discordapp.com/app-assets/684885381728043048/685637535258378310.png?size=512",
-	Store = "https://cdn.discordapp.com/app-assets/684885381728043048/687790839614669062.png?size=512",
-	Storejp = "https://cdn.discordapp.com/app-assets/684885381728043048/687791788056248489.png?size=512",
-	Cafe = "https://cdn.discordapp.com/app-assets/684885381728043048/687794883829694567.png?size=512",
-	Sweets = "https://cdn.discordapp.com/app-assets/684885381728043048/687794884693852176.png?size=512",
-	Storekr = "https://cdn.discordapp.com/app-assets/684885381728043048/690196825130795018.png?size=512",
+	Pokemonplay = "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9mon/assets/1.png",
+	Pokeball = "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9mon/assets/2.png",
+	Tcg = "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9mon/assets/3.png",
+	Store = "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9mon/assets/4.png",
+	Storejp = "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9mon/assets/5.png",
+	Cafe = "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9mon/assets/6.png",
+	Sweets = "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9mon/assets/7.png",
+	Storekr = "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9mon/assets/8.png",
 }
 
 presence.on("UpdateData", async () => {

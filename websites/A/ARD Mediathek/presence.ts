@@ -15,10 +15,10 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/ARD%20Mediathek/assets/logo.png",
-	ThreeSat = "https://cdn.discordapp.com/app-assets/853718947412967474/853740702672486412.png?size=512",
-	Deutschewelle = "https://cdn.discordapp.com/app-assets/853718947412967474/854084150574186567.png?size=512",
-	Kika = "https://cdn.discordapp.com/app-assets/853718947412967474/853740703510822922.png?size=512",
-	ArdMediathek = "https://cdn.discordapp.com/app-assets/853718947412967474/853737065312813056.png?size=512",
+	ThreeSat = "https://cdn.rcd.gg/PreMiD/websites/A/ARD%20Mediathek/assets/0.png",
+	Deutschewelle = "https://cdn.rcd.gg/PreMiD/websites/A/ARD%20Mediathek/assets/1.png",
+	Kika = "https://cdn.rcd.gg/PreMiD/websites/A/ARD%20Mediathek/assets/2.png",
+	ArdMediathek = "https://cdn.rcd.gg/PreMiD/websites/A/ARD%20Mediathek/assets/3.png",
 }
 
 presence.on("UpdateData", async () => {

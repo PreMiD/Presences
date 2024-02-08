@@ -4,9 +4,9 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/logo.png",
-	Video = "https://cdn.discordapp.com/app-assets/628269030901547037/628285534631886877.png?size=512",
-	Post = "https://cdn.discordapp.com/app-assets/628269030901547037/628286687616696320.png?size=512",
-	Star = "https://cdn.discordapp.com/app-assets/628269030901547037/628287605636595713.png?size=512",
+	Video = "https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/0.png",
+	Post = "https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/1.png",
+	Star = "https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/2.png",
 }
 const pages: { [key: string]: string } = {
 		"/": "Ana Sayfa",

@@ -5,12 +5,12 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/logo.png",
-	Inbox = "https://cdn.discordapp.com/app-assets/917417055458852865/917785142825746462.png?size=512",
-	User = "https://cdn.discordapp.com/app-assets/917417055458852865/919428857440899162.png?size=512",
-	Artwork = "https://cdn.discordapp.com/app-assets/917417055458852865/917788292014014464.png?size=512",
-	Searchjob = "https://cdn.discordapp.com/app-assets/917417055458852865/917785141835866193.png?size=512",
-	Editprofile = "https://cdn.discordapp.com/app-assets/917417055458852865/917785141781340202.png?size=512",
-	Portfolio = "https://cdn.discordapp.com/app-assets/917417055458852865/917790216977277022.png?size=512",
+	Inbox = "https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/0.png",
+	User = "https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/1.png",
+	Artwork = "https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/2.png",
+	Searchjob = "https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/3.png",
+	Editprofile = "https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/4.png",
+	Portfolio = "https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/5.png",
 }
 
 presence.on("UpdateData", async () => {

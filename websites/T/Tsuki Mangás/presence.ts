@@ -14,13 +14,13 @@ enum ResourceNames {
 /* eslint-disable camelcase */
 const assets = {
 	logo_cloud_dark:
-		"https://cdn.discordapp.com/app-assets/714001239351885904/714001704747663494.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/0.png",
 	logo_book_dark:
-		"https://cdn.discordapp.com/app-assets/714001239351885904/714001704898789427.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/1.png",
 	logo_book:
-		"https://cdn.discordapp.com/app-assets/714001239351885904/714001705032876102.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/2.png",
 	logo_cloud:
-		"https://cdn.discordapp.com/app-assets/714001239351885904/714001705204711484.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/3.png",
 	reading_dark: Assets.Reading,
 	writing: Assets.Writing,
 	reading: Assets.Reading,
@@ -28,17 +28,17 @@ const assets = {
 	search: Assets.Search,
 	writing_dark: Assets.Writing,
 	history_dark:
-		"https://cdn.discordapp.com/app-assets/714001239351885904/714048497191747585.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/4.png",
 	history:
-		"https://cdn.discordapp.com/app-assets/714001239351885904/714048497237622804.png?size=512",
-	info: "https://cdn.discordapp.com/app-assets/714001239351885904/714205350957547601.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/5.png",
+	info: "https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/6.png",
 	info_dark:
-		"https://cdn.discordapp.com/app-assets/714001239351885904/714205350995165254.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/7.png",
 	hatsune_miku:
-		"https://cdn.discordapp.com/app-assets/714001239351885904/775492603344584706.png?size=512",
-	bell: "https://cdn.discordapp.com/app-assets/714001239351885904/777297394387517490.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/8.png",
+	bell: "https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/9.png",
 	bell_dark:
-		"https://cdn.discordapp.com/app-assets/714001239351885904/777297394500894750.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/10.png",
 };
 /* eslint-enable camelcase */
 

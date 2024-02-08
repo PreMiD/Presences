@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 			document.querySelector(".room-title-capacity").textContent
 		}`;
 		presenceData.smallImageKey =
-			"https://cdn.discordapp.com/app-assets/712269360206708766/714167776788349162.png?size=512";
+			"https://cdn.rcd.gg/PreMiD/websites/D/Durarara/assets/0.png";
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

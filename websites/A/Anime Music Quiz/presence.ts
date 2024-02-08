@@ -12,13 +12,13 @@ let lobbyNumber,
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Music%20Quiz/assets/logo.png",
-	Lobby = "https://cdn.discordapp.com/app-assets/691494438349832227/691662211755802706.png?size=512",
-	Room = "https://cdn.discordapp.com/app-assets/691494438349832227/691662213940903946.png?size=512",
-	Btr = "https://cdn.discordapp.com/app-assets/691494438349832227/691662213290917918.png?size=512",
-	Headset = "https://cdn.discordapp.com/app-assets/691494438349832227/691662213961875467.png?size=512",
-	Gamepad = "https://cdn.discordapp.com/app-assets/691494438349832227/691662213169152143.png?size=512",
-	Menu = "https://cdn.discordapp.com/app-assets/691494438349832227/691662211520790588.png?size=512",
-	Info = "https://cdn.discordapp.com/app-assets/691494438349832227/691662212766629998.png?size=512",
+	Lobby = "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Music%20Quiz/assets/0.png",
+	Room = "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Music%20Quiz/assets/1.png",
+	Btr = "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Music%20Quiz/assets/2.png",
+	Headset = "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Music%20Quiz/assets/3.png",
+	Gamepad = "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Music%20Quiz/assets/4.png",
+	Menu = "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Music%20Quiz/assets/5.png",
+	Info = "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Music%20Quiz/assets/6.png",
 }
 
 presence.on("UpdateData", async () => {

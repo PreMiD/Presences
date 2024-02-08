@@ -2,17 +2,17 @@ let elapsed = Math.floor(Date.now() / 1000),
 	prevUrl = document.location.href;
 
 const assets = {
-		zdf: "https://cdn.discordapp.com/app-assets/854999470357217290/855000938463625226.png?size=512",
+		zdf: "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/0.png",
 		"3sat":
-			"https://cdn.discordapp.com/app-assets/854999470357217290/855006452326465547.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/1.png",
 		phoenix:
-			"https://cdn.discordapp.com/app-assets/854999470357217290/855006452657946654.png?size=512",
-		arte: "https://cdn.discordapp.com/app-assets/854999470357217290/855006452737245215.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/2.png",
+		arte: "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/3.png",
 		zdfinfo:
-			"https://cdn.discordapp.com/app-assets/854999470357217290/855006452770799617.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/4.png",
 		zdfneo:
-			"https://cdn.discordapp.com/app-assets/854999470357217290/855006453205958666.png?size=512",
-		kika: "https://cdn.discordapp.com/app-assets/854999470357217290/855006453272936488.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/5.png",
+		kika: "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/6.png",
 	},
 	presence = new Presence({
 		clientId: "854999470357217290",

@@ -30,9 +30,9 @@ function getText(selector: string): string {
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/TETR.IO/assets/logo.jpg",
-	Qp = "https://cdn.discordapp.com/app-assets/815006153066151998/815032206233305137.png?size=512",
-	Ct = "https://cdn.discordapp.com/app-assets/815006153066151998/815032279264788489.png?size=512",
-	Tl = "https://cdn.discordapp.com/app-assets/815006153066151998/816417328484319242.png?size=512",
+	Qp = "https://cdn.rcd.gg/PreMiD/websites/T/TETR.IO/assets/0.png",
+	Ct = "https://cdn.rcd.gg/PreMiD/websites/T/TETR.IO/assets/1.png",
+	Tl = "https://cdn.rcd.gg/PreMiD/websites/T/TETR.IO/assets/2.png",
 }
 
 presence.on("UpdateData", async () => {

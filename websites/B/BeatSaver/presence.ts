@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
 				).textContent === "Bot"
 			) {
 				presenceData.smallImageKey =
-					"https://cdn.discordapp.com/app-assets/837997079208525835/838839514649853984.png?size=512";
+					"https://cdn.rcd.gg/PreMiD/websites/B/BeatSaver/assets/41.png";
 				presenceData.smallImageText = "Made using AI";
 			}
 

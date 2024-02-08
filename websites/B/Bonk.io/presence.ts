@@ -4,10 +4,10 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/B/Bonk.io/assets/logo.png",
-	Arrows = "https://cdn.discordapp.com/app-assets/778092541836656712/778104039446413352.png?size=512",
-	Arrows2 = "https://cdn.discordapp.com/app-assets/778092541836656712/778135661415890956.png?size=512",
-	Classic = "https://cdn.discordapp.com/app-assets/778092541836656712/778135661517602867.png?size=512",
-	Grapple = "https://cdn.discordapp.com/app-assets/778092541836656712/778135661562560524.png?size=512",
+	Arrows = "https://cdn.rcd.gg/PreMiD/websites/B/Bonk.io/assets/0.png",
+	Arrows2 = "https://cdn.rcd.gg/PreMiD/websites/B/Bonk.io/assets/1.png",
+	Classic = "https://cdn.rcd.gg/PreMiD/websites/B/Bonk.io/assets/2.png",
+	Grapple = "https://cdn.rcd.gg/PreMiD/websites/B/Bonk.io/assets/3.png",
 }
 const modePair: { [key: string]: string } = {
 	Arrows: Assets.Arrows,

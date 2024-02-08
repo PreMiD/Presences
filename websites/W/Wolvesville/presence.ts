@@ -4,22 +4,22 @@ const presence = new Presence({
 	startedTime = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	WovHeroes = "https://cdn.discordapp.com/app-assets/888429594120716328/888753463058632704.png?size=512",
-	WovBlog = "https://cdn.discordapp.com/app-assets/888429594120716328/888756815049920542.png?size=512",
-	Vouchers = "https://cdn.discordapp.com/app-assets/888429594120716328/899321317315182652.png?size=512",
-	WovText = "https://cdn.discordapp.com/app-assets/888429594120716328/906345767353073674.png?size=512",
-	Logo = "https://cdn.discordapp.com/app-assets/888429594120716328/953709529042919484.png?size=512",
-	WovNoBg = "https://cdn.discordapp.com/app-assets/888429594120716328/953710417643995207.png?size=512",
-	WovWhite = "https://cdn.discordapp.com/app-assets/888429594120716328/959186869504081990.png?size=512",
-	Online = "https://cdn.discordapp.com/app-assets/888429594120716328/972910024017973269.png?size=512",
-	Invisible = "https://cdn.discordapp.com/app-assets/888429594120716328/972910024236101722.png?size=512",
-	Dnd = "https://cdn.discordapp.com/app-assets/888429594120716328/972910024282243142.png?size=512",
-	LetsPlay = "https://cdn.discordapp.com/app-assets/888429594120716328/973175216480092260.png?size=512",
-	Heart = "https://cdn.discordapp.com/app-assets/888429594120716328/990164727713914940.png?size=512",
-	Skull = "https://cdn.discordapp.com/app-assets/888429594120716328/990164727839727646.png?size=512",
-	Stopwatch = "https://cdn.discordapp.com/app-assets/888429594120716328/990164728485675058.png?size=512",
-	Popcorn = "https://cdn.discordapp.com/app-assets/888429594120716328/990164728825393212.png?size=512",
-	Friends = "https://cdn.discordapp.com/app-assets/888429594120716328/990164729454538832.png?size=512",
+	WovHeroes = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/1.png",
+	WovBlog = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/2.png",
+	Vouchers = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/3.png",
+	WovText = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/4.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/5.png",
+	WovNoBg = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/6.png",
+	WovWhite = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/7.png",
+	Online = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/8.png",
+	Invisible = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/9.png",
+	Dnd = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/10.png",
+	LetsPlay = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/11.png",
+	Heart = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/12.png",
+	Skull = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/13.png",
+	Stopwatch = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/14.png",
+	Popcorn = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/15.png",
+	Friends = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/16.png",
 }
 
 presence.on("UpdateData", async () => {

@@ -159,11 +159,11 @@ presence.on(
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/logo.png",
-	BrowsingHome = "https://cdn.discordapp.com/app-assets/629355416714739732/629360023704829973.png?size=512",
-	BrowsingAll = "https://cdn.discordapp.com/app-assets/629355416714739732/629360024262803477.png?size=512",
-	BrowsingGenre = "https://cdn.discordapp.com/app-assets/629355416714739732/863926000927768577.png?size=512",
-	BrowsingTime = "https://cdn.discordapp.com/app-assets/629355416714739732/863924470196600873.png?size=512",
-	BrowsingSeason = "https://cdn.discordapp.com/app-assets/629355416714739732/629431536353280000.png?size=512",
+	BrowsingHome = "https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/0.png",
+	BrowsingAll = "https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/1.png",
+	BrowsingGenre = "https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/2.png",
+	BrowsingTime = "https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/3.png",
+	BrowsingSeason = "https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/4.png",
 }
 
 presence.on("UpdateData", async () => {

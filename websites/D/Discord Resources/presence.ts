@@ -3,10 +3,10 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 const enum Assets {
-	Drw = "https://cdn.discordapp.com/app-assets/973710731549745152/973711249751805962.png?size=512",
-	Wiki = "https://cdn.discordapp.com/app-assets/973710731549745152/973732108998692864.png?size=512",
-	Blog = "https://cdn.discordapp.com/app-assets/973710731549745152/973732112937152562.png?size=512",
-	Unsupported = "https://cdn.discordapp.com/app-assets/973710731549745152/973738416955088947.png?size=512",
+	Drw = "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Resources/assets/0.png",
+	Wiki = "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Resources/assets/1.png",
+	Blog = "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Resources/assets/2.png",
+	Unsupported = "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Resources/assets/3.png",
 }
 
 presence.on("UpdateData", async () => {

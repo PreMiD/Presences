@@ -5,11 +5,11 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeRadio.de/assets/logo.png",
-	Animetreff = "https://cdn.discordapp.com/app-assets/687352219598585905/687372495921348622.png?size=512",
-	Animenews = "https://cdn.discordapp.com/app-assets/687352219598585905/687372495367700533.png?size=512",
-	Animekino = "https://cdn.discordapp.com/app-assets/687352219598585905/687372496135258163.png?size=512",
-	Animemesse = "https://cdn.discordapp.com/app-assets/687352219598585905/687369511397359642.png?size=512",
-	Animefanshop = "https://cdn.discordapp.com/app-assets/687352219598585905/687374084719247374.png?size=512",
+	Animetreff = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeRadio.de/assets/0.png",
+	Animenews = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeRadio.de/assets/1.png",
+	Animekino = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeRadio.de/assets/2.png",
+	Animemesse = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeRadio.de/assets/3.png",
+	Animefanshop = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeRadio.de/assets/4.png",
 }
 
 presence.on("UpdateData", async () => {

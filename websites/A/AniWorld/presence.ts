@@ -186,7 +186,7 @@ presence.on("UpdateData", async () => {
 									document.querySelector<HTMLHeadingElement>("h1").textContent
 								}`;
 								presenceData.smallImageKey =
-									"https://cdn.discordapp.com/app-assets/969716001090437120/969721480264953956.png?size=512";
+									"https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/0.png";
 								presenceData.smallImageText = `${
 									document.querySelector<HTMLDivElement>(
 										"#userDetails > div > div > div:nth-child(3) > div"

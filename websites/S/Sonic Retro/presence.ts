@@ -4,15 +4,15 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Forums512 = "https://cdn.discordapp.com/app-assets/970743721404530798/971249087267606548.png?size=512",
-	Home512 = "https://cdn.discordapp.com/app-assets/970743721404530798/971249087468937216.png?size=512",
-	Info512 = "https://cdn.discordapp.com/app-assets/970743721404530798/971249087947104256.png?size=512",
-	Logo = "https://cdn.discordapp.com/app-assets/970743721404530798/971249098390925322.png?size=512",
-	Forums = "https://cdn.discordapp.com/app-assets/970743721404530798/971249112513146902.png?size=512",
-	Category = "https://cdn.discordapp.com/app-assets/970743721404530798/971249113846931486.png?size=512",
-	Home = "https://cdn.discordapp.com/app-assets/970743721404530798/971249114094395502.png?size=512",
-	Info = "https://cdn.discordapp.com/app-assets/970743721404530798/971249114354450482.png?size=512",
-	Logo1024 = "https://cdn.discordapp.com/app-assets/970743721404530798/971249114702544907.png?size=512",
+	Forums512 = "https://cdn.rcd.gg/PreMiD/websites/S/Sonic%20Retro/assets/0.png",
+	Home512 = "https://cdn.rcd.gg/PreMiD/websites/S/Sonic%20Retro/assets/1.png",
+	Info512 = "https://cdn.rcd.gg/PreMiD/websites/S/Sonic%20Retro/assets/2.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Sonic%20Retro/assets/3.png",
+	Forums = "https://cdn.rcd.gg/PreMiD/websites/S/Sonic%20Retro/assets/4.png",
+	Category = "https://cdn.rcd.gg/PreMiD/websites/S/Sonic%20Retro/assets/5.png",
+	Home = "https://cdn.rcd.gg/PreMiD/websites/S/Sonic%20Retro/assets/6.png",
+	Info = "https://cdn.rcd.gg/PreMiD/websites/S/Sonic%20Retro/assets/7.png",
+	Logo1024 = "https://cdn.rcd.gg/PreMiD/websites/S/Sonic%20Retro/assets/8.png",
 }
 
 presence.on("UpdateData", async () => {

@@ -22,9 +22,9 @@ const timeElapsed: number = ~~(Date.now() / 1000);
 setPresence();
 
 const enum Assets {
-	Kickstart = "https://cdn.discordapp.com/app-assets/848588920437604382/848924553114550316.png?size=512",
-	Codejam = "https://cdn.discordapp.com/app-assets/848588920437604382/848926377608085555.png?size=512",
-	Hashcode = "https://cdn.discordapp.com/app-assets/848588920437604382/848926377959751761.png?size=512",
+	Kickstart = "https://cdn.rcd.gg/PreMiD/websites/G/Google's%20Coding%20Competitions/assets/0.png",
+	Codejam = "https://cdn.rcd.gg/PreMiD/websites/G/Google's%20Coding%20Competitions/assets/1.png",
+	Hashcode = "https://cdn.rcd.gg/PreMiD/websites/G/Google's%20Coding%20Competitions/assets/2.png",
 }
 
 presence.on("UpdateData", async () => {

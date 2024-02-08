@@ -4,11 +4,11 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	United = "https://cdn.discordapp.com/app-assets/721986767322087464/722068690161369130.png?size=512",
-	Nforever = "https://cdn.discordapp.com/app-assets/721986767322087464/722068699544158280.png?size=512",
-	Sunrise = "https://cdn.discordapp.com/app-assets/721986767322087464/722068701930717254.png?size=512",
-	Original = "https://cdn.discordapp.com/app-assets/721986767322087464/722068704149504132.png?size=512",
-	Nations = "https://cdn.discordapp.com/app-assets/721986767322087464/722068712756215869.png?size=512",
+	United = "https://cdn.rcd.gg/PreMiD/websites/T/TrackMania%20Exchange/assets/0.png",
+	Nforever = "https://cdn.rcd.gg/PreMiD/websites/T/TrackMania%20Exchange/assets/1.png",
+	Sunrise = "https://cdn.rcd.gg/PreMiD/websites/T/TrackMania%20Exchange/assets/2.png",
+	Original = "https://cdn.rcd.gg/PreMiD/websites/T/TrackMania%20Exchange/assets/3.png",
+	Nations = "https://cdn.rcd.gg/PreMiD/websites/T/TrackMania%20Exchange/assets/4.png",
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/TrackMania%20Exchange/assets/logo.png",
 }
 

@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 	};
 	if (window.location.hostname === "otaku-streamers.com") {
 		presenceData.largeImageKey =
-			"https://cdn.discordapp.com/app-assets/719985436075753492/719986195240583232.png?size=512";
+			"https://cdn.rcd.gg/PreMiD/websites/O/Otaku-Streamers/assets/0.png";
 		if (path === "/" || path === "/index.php") presenceData.details = "Home";
 		else if (path.includes("/info/")) {
 			title = document.querySelector(

@@ -6,18 +6,18 @@ const presence = new Presence({
 let title: HTMLElement, search: HTMLInputElement;
 
 const enum Assets {
-	Toloka = "https://cdn.discordapp.com/app-assets/798502531847421962/798507774123966485.png?size=512",
-	Film = "https://cdn.discordapp.com/app-assets/798502531847421962/798606492810084402.png?size=512",
-	Video = "https://cdn.discordapp.com/app-assets/798502531847421962/798606492923068456.png?size=512",
-	Home = "https://cdn.discordapp.com/app-assets/798502531847421962/798606493460856832.png?size=512",
-	Music = "https://cdn.discordapp.com/app-assets/798502531847421962/798606493548544032.png?size=512",
-	Reply = "https://cdn.discordapp.com/app-assets/798502531847421962/798608245296070696.png?size=512",
-	Archive = "https://cdn.discordapp.com/app-assets/798502531847421962/798608245430026300.png?size=512",
-	User = "https://cdn.discordapp.com/app-assets/798502531847421962/798608245656649779.png?size=512",
-	Book = "https://cdn.discordapp.com/app-assets/798502531847421962/798608245702131762.png?size=512",
-	Gamepad = "https://cdn.discordapp.com/app-assets/798502531847421962/798608245815771166.png?size=512",
-	Desktop = "https://cdn.discordapp.com/app-assets/798502531847421962/798608246100197376.png?size=512",
-	Sms = "https://cdn.discordapp.com/app-assets/798502531847421962/798608246327607376.png?size=512",
+	Toloka = "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/0.png",
+	Film = "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/1.png",
+	Video = "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/2.png",
+	Home = "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/3.png",
+	Music = "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/4.png",
+	Reply = "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/5.png",
+	Archive = "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/6.png",
+	User = "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/7.png",
+	Book = "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/8.png",
+	Gamepad = "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/9.png",
+	Desktop = "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/10.png",
+	Sms = "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/11.png",
 }
 
 presence.on("UpdateData", async () => {

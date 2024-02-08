@@ -31,9 +31,9 @@ presence.info("PreMiD extension has loaded");
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeOnsen/assets/logo.png",
-	Account = "https://cdn.discordapp.com/app-assets/826806766033174568/917858054232498226.png?size=512",
-	Browse = "https://cdn.discordapp.com/app-assets/826806766033174568/917858106321567775.png?size=512",
-	Read = "https://cdn.discordapp.com/app-assets/826806766033174568/917858157756297216.png?size=512",
+	Account = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeOnsen/assets/0.png",
+	Browse = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeOnsen/assets/1.png",
+	Read = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeOnsen/assets/2.png",
 }
 
 function updateData() {

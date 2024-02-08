@@ -3,36 +3,36 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	assets = {
-		home: "https://cdn.discordapp.com/app-assets/768942376403075073/769086514050498581.png?size=512",
+		home: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/0.png",
 		house:
-			"https://cdn.discordapp.com/app-assets/768942376403075073/771425351821688873.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/1.png",
 		settings:
-			"https://cdn.discordapp.com/app-assets/768942376403075073/771426965114322975.png?size=512",
-		user: "https://cdn.discordapp.com/app-assets/768942376403075073/771431693701218324.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/2.png",
+		user: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/3.png",
 		search:
-			"https://cdn.discordapp.com/app-assets/768942376403075073/771433283657400360.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/4.png",
 		extension:
-			"https://cdn.discordapp.com/app-assets/768942376403075073/771435762746523728.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/5.png",
 		history:
-			"https://cdn.discordapp.com/app-assets/768942376403075073/771437369148178432.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/6.png",
 		coding:
-			"https://cdn.discordapp.com/app-assets/768942376403075073/771438033756618772.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/7.png",
 		layers:
-			"https://cdn.discordapp.com/app-assets/768942376403075073/771475630239645736.png?size=512",
-		help: "https://cdn.discordapp.com/app-assets/768942376403075073/771476143886303263.png?size=512",
-		blog: "https://cdn.discordapp.com/app-assets/768942376403075073/771479571056033793.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/8.png",
+		help: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/9.png",
+		blog: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/10.png",
 		community:
-			"https://cdn.discordapp.com/app-assets/768942376403075073/771485587784859658.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/11.png",
 		communication:
-			"https://cdn.discordapp.com/app-assets/768942376403075073/771485587807010906.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/12.png",
 		globe:
-			"https://cdn.discordapp.com/app-assets/768942376403075073/771486845895835658.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/13.png",
 		"down-arrow":
-			"https://cdn.discordapp.com/app-assets/768942376403075073/771487564438962219.png?size=512",
-		view: "https://cdn.discordapp.com/app-assets/768942376403075073/771489743715172354.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/14.png",
+		view: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/15.png",
 		group:
-			"https://cdn.discordapp.com/app-assets/768942376403075073/771494340539318272.png?size=512",
-		edit: "https://cdn.discordapp.com/app-assets/768942376403075073/771631823490646036.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/16.png",
+		edit: "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/17.png",
 	};
 
 presence.on("UpdateData", async () => {

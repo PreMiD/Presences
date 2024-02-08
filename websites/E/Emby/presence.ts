@@ -279,7 +279,7 @@ const // official website
 	PRESENCE_ART_ASSETS = {
 		download: Assets.Downloading,
 		live: Assets.Live,
-		logo: "https://cdn.discordapp.com/app-assets/671807692297207828/671815741430956053.png?size=512",
+		logo: "https://cdn.rcd.gg/PreMiD/websites/E/Emby/assets/0.png",
 		pause: Assets.Pause,
 		play: Assets.Play,
 		read: Assets.Reading,

@@ -21,37 +21,37 @@ interface DataInterface {
 
 /* eslint-disable camelcase */
 const assets: Record<string, string> = {
-	git: "https://cdn.discordapp.com/app-assets/736516965748834336/737966303356256286.png?size=512",
-	html: "https://cdn.discordapp.com/app-assets/736516965748834336/737966303746195467.png?size=512",
-	css: "https://cdn.discordapp.com/app-assets/736516965748834336/737966304186597417.png?size=512",
+	git: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/0.png",
+	html: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/1.png",
+	css: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/2.png",
 	the_command_line:
-		"https://cdn.discordapp.com/app-assets/736516965748834336/737966305407139951.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/3.png",
 	node_with_sqlite:
-		"https://cdn.discordapp.com/app-assets/736516965748834336/737966305625374730.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/4.png",
 	ruby_on_rails:
-		"https://cdn.discordapp.com/app-assets/736516965748834336/737966306065776673.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/5.png",
 	python_2:
-		"https://cdn.discordapp.com/app-assets/736516965748834336/737966306300526663.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/6.png",
 	javascript:
-		"https://cdn.discordapp.com/app-assets/736516965748834336/737966306627682357.png?size=512",
-	go: "https://cdn.discordapp.com/app-assets/736516965748834336/737966306632138752.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/7.png",
+	go: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/8.png",
 	authentication_with_ruby_on_rails:
-		"https://cdn.discordapp.com/app-assets/736516965748834336/737966306669625374.png?size=512",
-	java: "https://cdn.discordapp.com/app-assets/736516965748834336/737966306749579404.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/9.png",
+	java: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/10.png",
 	python_3:
-		"https://cdn.discordapp.com/app-assets/736516965748834336/737966306837528617.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/11.png",
 	swift:
-		"https://cdn.discordapp.com/app-assets/736516965748834336/737966306850111529.png?size=512",
-	r: "https://cdn.discordapp.com/app-assets/736516965748834336/737966307089186886.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/12.png",
+	r: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/13.png",
 	kotlin:
-		"https://cdn.discordapp.com/app-assets/736516965748834336/737966308125311028.png?size=512",
-	ruby: "https://cdn.discordapp.com/app-assets/736516965748834336/737966308184031243.png?size=512",
-	sql: "https://cdn.discordapp.com/app-assets/736516965748834336/737966308821434468.png?size=512",
-	php: "https://cdn.discordapp.com/app-assets/736516965748834336/737966308985143389.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/14.png",
+	ruby: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/15.png",
+	sql: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/16.png",
+	php: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/17.png",
 	csharp:
-		"https://cdn.discordapp.com/app-assets/736516965748834336/737966391935893515.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/18.png",
 	cplusplus:
-		"https://cdn.discordapp.com/app-assets/736516965748834336/737966392044945510.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/19.png",
 };
 /* eslint-enable camelcase */
 

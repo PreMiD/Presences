@@ -4,20 +4,20 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	assets = {
 		users:
-			"https://cdn.discordapp.com/app-assets/858408468854997052/877654020993454090.png?size=512",
-		game: "https://cdn.discordapp.com/app-assets/858408468854997052/885819106954211368.png?size=512",
-		dlc: "https://cdn.discordapp.com/app-assets/858408468854997052/885819607863156746.png?size=512",
-		tool: "https://cdn.discordapp.com/app-assets/858408468854997052/885820332127162380.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/1.png",
+		game: "https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/2.png",
+		dlc: "https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/3.png",
+		tool: "https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/4.png",
 		config:
-			"https://cdn.discordapp.com/app-assets/858408468854997052/885821095280795698.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/5.png",
 		unknown:
-			"https://cdn.discordapp.com/app-assets/858408468854997052/885822777653874718.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/6.png",
 		music:
-			"https://cdn.discordapp.com/app-assets/858408468854997052/885828018206031872.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/7.png",
 		application:
-			"https://cdn.discordapp.com/app-assets/858408468854997052/890605909938692118.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/8.png",
 		video:
-			"https://cdn.discordapp.com/app-assets/858408468854997052/890607300631490570.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/S/SteamDB/assets/9.png",
 	};
 
 presence.on("UpdateData", async () => {

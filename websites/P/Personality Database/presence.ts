@@ -4,14 +4,14 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Group = "https://cdn.discordapp.com/app-assets/909403157686288414/911255304233189427.png?size=512",
-	Home = "https://cdn.discordapp.com/app-assets/909403157686288414/911255304358993920.png?size=512",
-	Notification = "https://cdn.discordapp.com/app-assets/909403157686288414/911255304363212822.png?size=512",
-	User = "https://cdn.discordapp.com/app-assets/909403157686288414/911255304463867905.png?size=512",
-	Star = "https://cdn.discordapp.com/app-assets/909403157686288414/911260439646711839.png?size=512",
-	List = "https://cdn.discordapp.com/app-assets/909403157686288414/911260439952883762.png?size=512",
-	Poll = "https://cdn.discordapp.com/app-assets/909403157686288414/911260440003215380.png?size=512",
-	PersonalityDatabase = "https://cdn.discordapp.com/app-assets/909403157686288414/911862823720742932.png?size=512",
+	Group = "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/0.png",
+	Home = "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/1.png",
+	Notification = "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/2.png",
+	User = "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/3.png",
+	Star = "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/4.png",
+	List = "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/5.png",
+	Poll = "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/6.png",
+	PersonalityDatabase = "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/7.png",
 }
 
 presence.on("UpdateData", async () => {

@@ -15,11 +15,11 @@ function getElementByXpath(path: string) {
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/logo.png",
-	Home = "https://cdn.discordapp.com/app-assets/968353669491871754/968484547152998433.png?size=512",
-	Profile = "https://cdn.discordapp.com/app-assets/968353669491871754/968484547316572221.png?size=512",
-	Editor = "https://cdn.discordapp.com/app-assets/968353669491871754/968484547475963964.png?size=512",
-	Export = "https://cdn.discordapp.com/app-assets/968353669491871754/968484547505307739.png?size=512",
-	Discover = "https://cdn.discordapp.com/app-assets/968353669491871754/968484547777937428.png?size=512",
+	Home = "https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/0.png",
+	Profile = "https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/1.png",
+	Editor = "https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/2.png",
+	Export = "https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/3.png",
+	Discover = "https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/4.png",
 }
 
 presence.on("UpdateData", async () => {

@@ -15,12 +15,12 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/B/Blockbench/assets/logo.png",
-	Generic = "https://cdn.discordapp.com/app-assets/901821070263336971/901847182079066143.png?size=512",
-	BlockItem = "https://cdn.discordapp.com/app-assets/901821070263336971/901847182410416168.png?size=512",
-	Bedrock = "https://cdn.discordapp.com/app-assets/901821070263336971/901847182301335584.png?size=512",
-	Modded = "https://cdn.discordapp.com/app-assets/901821070263336971/901847182452326420.png?size=512",
-	Optifine = "https://cdn.discordapp.com/app-assets/901821070263336971/901847182251020348.png?size=512",
-	Skin = "https://cdn.discordapp.com/app-assets/901821070263336971/901847182242631681.png?size=512",
+	Generic = "https://cdn.rcd.gg/PreMiD/websites/B/Blockbench/assets/0.png",
+	BlockItem = "https://cdn.rcd.gg/PreMiD/websites/B/Blockbench/assets/1.png",
+	Bedrock = "https://cdn.rcd.gg/PreMiD/websites/B/Blockbench/assets/2.png",
+	Modded = "https://cdn.rcd.gg/PreMiD/websites/B/Blockbench/assets/3.png",
+	Optifine = "https://cdn.rcd.gg/PreMiD/websites/B/Blockbench/assets/4.png",
+	Skin = "https://cdn.rcd.gg/PreMiD/websites/B/Blockbench/assets/5.png",
 }
 
 presence.on("UpdateData", async () => {

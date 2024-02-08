@@ -4,9 +4,9 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/logo.png",
-	Skin = "https://cdn.discordapp.com/app-assets/501842028569559061/969231677899571250.png?size=512",
-	Shop = "https://cdn.discordapp.com/app-assets/501842028569559061/969231678016995338.png?size=512",
-	Leaderboard = "https://cdn.discordapp.com/app-assets/501842028569559061/969232037728882739.png?size=512",
+	Skin = "https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/0.png",
+	Shop = "https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/1.png",
+	Leaderboard = "https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/2.png",
 }
 
 let path,

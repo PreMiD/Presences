@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
 		// Idling state
 		presenceData.details = "Idling";
 		presenceData.smallImageKey =
-			"https://cdn.discordapp.com/app-assets/736620343279484959/751996365369770005.png?size=512";
+			"https://cdn.rcd.gg/PreMiD/websites/R/Radiko/assets/0.png";
 		presenceData.smallImageText = strings.browsing;
 	}
 

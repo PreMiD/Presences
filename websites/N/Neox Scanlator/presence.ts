@@ -165,7 +165,7 @@ presence.on("UpdateData", async () => {
 		"rgb(38, 38, 38)"
 	) {
 		presenceData.largeImageKey =
-			"https://cdn.discordapp.com/app-assets/704585837949747330/725995167496011838.png?size=512";
+			"https://cdn.rcd.gg/PreMiD/websites/N/Neox%20Scanlator/assets/0.png";
 	} else if (
 		window.getComputedStyle(bodyWrap).getPropertyValue("background-color") !==
 		"rgb(38, 38, 38)"
@@ -179,7 +179,7 @@ presence.on("UpdateData", async () => {
 	);
 	if (UsuarioTexto && PesquisaTexto === null) {
 		presenceData.smallImageKey =
-			"https://cdn.discordapp.com/app-assets/704585837949747330/725444173897007155.png?size=512";
+			"https://cdn.rcd.gg/PreMiD/websites/N/Neox%20Scanlator/assets/1.png";
 		presenceData.smallImageText = UsuarioTexto.textContent.slice(
 			UsuarioTexto.textContent.search(",") + 1
 		);

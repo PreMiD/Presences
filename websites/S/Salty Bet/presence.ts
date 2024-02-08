@@ -22,9 +22,9 @@ function getText(selector: string) {
 }
 
 const enum Assets {
-	Salero = "https://cdn.discordapp.com/app-assets/802246778010730548/803539427438886913.png?size=512",
-	Trofeo = "https://cdn.discordapp.com/app-assets/802246778010730548/803726939315634198.png?size=512",
-	Saltgirl = "https://cdn.discordapp.com/app-assets/802246778010730548/804262497799897090.png?size=512",
+	Salero = "https://cdn.rcd.gg/PreMiD/websites/S/Salty%20Bet/assets/0.png",
+	Trofeo = "https://cdn.rcd.gg/PreMiD/websites/S/Salty%20Bet/assets/1.png",
+	Saltgirl = "https://cdn.rcd.gg/PreMiD/websites/S/Salty%20Bet/assets/2.png",
 }
 
 function getModeImageKey(): string[] {

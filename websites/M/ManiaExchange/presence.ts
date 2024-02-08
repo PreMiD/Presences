@@ -59,15 +59,15 @@ const updateCallback = {
 	};
 
 const enum Assets {
-	Sm = "https://cdn.discordapp.com/app-assets/731069087031230487/731070558573428757.png?size=512",
-	Accounts = "https://cdn.discordapp.com/app-assets/731069087031230487/731070558594400269.png?size=512",
-	Tm = "https://cdn.discordapp.com/app-assets/731069087031230487/731070558833344515.png?size=512",
-	Api = "https://cdn.discordapp.com/app-assets/731069087031230487/731070559177146368.png?size=512",
-	Item = "https://cdn.discordapp.com/app-assets/731069087031230487/731070561765031946.png?size=512",
-	Logo = "https://cdn.discordapp.com/app-assets/731069087031230487/731070566781419530.png?size=512",
-	Tmtube = "https://cdn.discordapp.com/app-assets/731069087031230487/731070568253620305.png?size=512",
-	Tm2020 = "https://cdn.discordapp.com/app-assets/731069087031230487/732485276756213852.png?size=512",
-	Tmx = "https://cdn.discordapp.com/app-assets/731069087031230487/732485278446387262.png?size=512",
+	Sm = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/0.png",
+	Accounts = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/1.png",
+	Tm = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/2.png",
+	Api = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/3.png",
+	Item = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/4.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/5.png",
+	Tmtube = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/6.png",
+	Tm2020 = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/7.png",
+	Tmx = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/8.png",
 }
 
 ((): void => {

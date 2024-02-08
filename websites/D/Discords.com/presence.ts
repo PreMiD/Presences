@@ -5,9 +5,9 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Discords.com/assets/logo.png",
-	Discordbio = "https://cdn.discordapp.com/app-assets/843791837273391104/848004838452232224.png?size=512",
-	Discordtemplates = "https://cdn.discordapp.com/app-assets/843791837273391104/849930369213268010.png?size=512",
-	Botsfordiscord = "https://cdn.discordapp.com/app-assets/843791837273391104/876063006193221652.png?size=512",
+	Discordbio = "https://cdn.rcd.gg/PreMiD/websites/D/Discords.com/assets/0.png",
+	Discordtemplates = "https://cdn.rcd.gg/PreMiD/websites/D/Discords.com/assets/1.png",
+	Botsfordiscord = "https://cdn.rcd.gg/PreMiD/websites/D/Discords.com/assets/2.png",
 }
 
 presence.on("UpdateData", async () => {

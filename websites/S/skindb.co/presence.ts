@@ -3,10 +3,10 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Skindb = "https://cdn.discordapp.com/app-assets/731659541904621708/731660491117559888.png?size=512",
-	Fortnite = "https://cdn.discordapp.com/app-assets/731659541904621708/731660901635063869.png?size=512",
-	Valorant = "https://cdn.discordapp.com/app-assets/731659541904621708/731660951291428874.png?size=512",
-	Fallguys = "https://cdn.discordapp.com/app-assets/731659541904621708/751123214775746640.png?size=512",
+	Skindb = "https://cdn.rcd.gg/PreMiD/websites/S/skindb.co/assets/0.png",
+	Fortnite = "https://cdn.rcd.gg/PreMiD/websites/S/skindb.co/assets/1.png",
+	Valorant = "https://cdn.rcd.gg/PreMiD/websites/S/skindb.co/assets/2.png",
+	Fallguys = "https://cdn.rcd.gg/PreMiD/websites/S/skindb.co/assets/3.png",
 }
 
 presence.on("UpdateData", async () => {

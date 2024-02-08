@@ -5,7 +5,7 @@ const presence = new Presence({
 let deck;
 
 const enum Assets {
-	Banner = "https://cdn.discordapp.com/app-assets/630550023133724692/630550398364680202.png?size=512",
+	Banner = "https://cdn.rcd.gg/PreMiD/websites/Y/Yu-Gi-Oh%20Top%20Decks/assets/0.png",
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/Y/Yu-Gi-Oh%20Top%20Decks/assets/logo.png",
 }
 

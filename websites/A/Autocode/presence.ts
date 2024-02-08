@@ -12,27 +12,27 @@ const presence = new Presence({ clientId: "858292108195921920" }),
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/logo.jpg",
-	Snippet = "https://cdn.discordapp.com/app-assets/858292108195921920/868478789498335242.png?size=512",
-	Apps = "https://cdn.discordapp.com/app-assets/858292108195921920/868482859281825832.png?size=512",
-	Lib = "https://cdn.discordapp.com/app-assets/858292108195921920/868484101370433536.png?size=512",
-	Autocode = "https://cdn.discordapp.com/app-assets/858292108195921920/868458144307752990.png?size=512",
+	Snippet = "https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/0.png",
+	Apps = "https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/1.png",
+	Lib = "https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/2.png",
+	Autocode = "https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/3.png",
 }
 
 const assets = {
 	"lang-html":
-		"https://cdn.discordapp.com/app-assets/858292108195921920/868489344447569990.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/4.png",
 	"lang-css":
-		"https://cdn.discordapp.com/app-assets/858292108195921920/868502199699906640.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/5.png",
 	"lang-js":
-		"https://cdn.discordapp.com/app-assets/858292108195921920/868502501207470080.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/6.png",
 	"lang-json":
-		"https://cdn.discordapp.com/app-assets/858292108195921920/868502619084161056.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/7.png",
 	"lang-txt":
-		"https://cdn.discordapp.com/app-assets/858292108195921920/868502804367540224.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/8.png",
 	"lang-md":
-		"https://cdn.discordapp.com/app-assets/858292108195921920/868503178247823401.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/9.png",
 	"lang-gitignore":
-		"https://cdn.discordapp.com/app-assets/858292108195921920/868503747905597480.png?size=512",
+		"https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/10.png",
 };
 
 presence.on("UpdateData", async () => {
