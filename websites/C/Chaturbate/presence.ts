@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = "Broadcasting as";
 		presenceData.state = path.split("/")[2];
-		presenceData.smallImageKey = "live";
+		presenceData.smallImageKey = Assets.Live;
 		presenceData.smallImageText = (await strings).live;
 		presenceData.startTimestamp = elapsed;
 	} else if (
@@ -215,7 +215,7 @@ presence.on("UpdateData", async () => {
 		[, presenceData.details] = path.split("/");
 
 		if (video && !video.paused) {
-			presenceData.smallImageKey = "live";
+			presenceData.smallImageKey = Assets.Live;
 			presenceData.smallImageText = (await strings).live;
 		} else {
 			presenceData.smallImageKey = Assets.Search;

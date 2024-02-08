@@ -87,7 +87,7 @@ presence.on("UpdateData", () => {
 	else if (document.location.pathname.startsWith("/design/")) {
 		if (document.location.pathname.endsWith("/edit")) {
 			presenceData.details = "Editing the design:";
-			presenceData.smallImageKey = "brush";
+			presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/670612134878773297/670612985932414989.png?size=512";
 			presenceData.smallImageText = "Editing";
 			presenceData.state = document.querySelector("head > title").textContent;
 		} else if (document.location.pathname.endsWith("/view")) {

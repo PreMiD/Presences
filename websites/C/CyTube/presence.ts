@@ -125,12 +125,12 @@ presence.on("UpdateData", async () => {
 
 		if (data.paused) {
 			presenceData.startTimestamp = null;
-			presenceData.smallImageKey = "presence_playback_paused";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = `${translate.pause} - ${getTimestamp(
 				data.currentTime
 			)}`;
 		} else {
-			presenceData.smallImageKey = "presence_playback_playing";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = translate.play;
 		}
 	}
@@ -147,7 +147,7 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 		} else if (!document.querySelector("#videowrap").querySelector("video")) {
 			presenceData.details = "Waiting to Start";
-			presenceData.smallImageKey = "presence_playback_waiting";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Waiting";
 			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 
