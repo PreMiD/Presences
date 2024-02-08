@@ -713,7 +713,7 @@ presence.on("UpdateData", async () => {
 			KNOWN_LANGUAGES.find(key =>
 				key.language.includes(editor.lang?.toLowerCase())
 			)?.image ||
-			"vscode";
+			Assets.Logo;
 	}
 
 	if (buttons && document.location.pathname?.split("/")[1] === "github") {
