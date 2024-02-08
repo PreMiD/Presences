@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 		fileType === "PowerPoint"
 	) {
 		presenceData.largeImageKey = `${fileType.toLowerCase()}-logo`;
-		presenceData.smallImageKey = "office-logo";
+		presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/818822000176791553/818866532083433472.png?size=512";
 		presenceData.smallImageText = "Microsoft Office Online";
 		presenceData.details = `Editing ${
 			fileType.charAt(0) === "E" ? "an" : "a"

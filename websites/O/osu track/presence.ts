@@ -3,10 +3,17 @@ const presence = new Presence({
 	}),
 	timestampe = Math.floor(Date.now() / 1000);
 
+	const enum Assets {
+		Logo = "https://cdn.rcd.gg/PreMiD/websites/O/osu%20track/assets/logo.png",
+		Mania = "https://cdn.discordapp.com/app-assets/861180231909113866/861182390932340736.png?size=512",
+		Taiko = "https://cdn.discordapp.com/app-assets/861180231909113866/861182418131484682.png?size=512",
+		Ctb = "https://cdn.discordapp.com/app-assets/861180231909113866/861182443368218624.png?size=512",
+		Circle = "https://cdn.discordapp.com/app-assets/861180231909113866/861462486225911808.png?size=512",
+	}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/O/osu%20track/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: timestampe,
 		},
 		pathnames = location.pathname,
@@ -28,7 +35,7 @@ presence.on("UpdateData", async () => {
 		case `/osutrack/user/${urlSplit}/`: {
 			presenceData.details = "Viewing a user's statistics";
 			presenceData.state = decodeURL;
-			presenceData.smallImageKey = "osu_std_logo";
+			presenceData.smallImageKey = Assets.Circle;
 			presenceData.smallImageText = "osu!standard";
 
 			break;
@@ -37,24 +44,24 @@ presence.on("UpdateData", async () => {
 			if (pathnames.includes(`/osutrack/user/${urlSplit}/taiko`)) {
 				presenceData.details = "Viewing a user's statistics";
 				presenceData.state = `${decodeURL} in osu!taiko`;
-				presenceData.smallImageKey = "taiko";
+				presenceData.smallImageKey = Assets.Taiko;
 				presenceData.smallImageText = "Taiko";
 			} else if (pathnames.includes(`/osutrack/user/${urlSplit}/ctb`)) {
 				presenceData.details = "Viewing a user's statistics";
 				presenceData.state = `${decodeURL} in osu!catch the beat`;
-				presenceData.smallImageKey = "ctb";
+				presenceData.smallImageKey = Assets.Ctb;
 				presenceData.smallImageText = "Catch The Beat (CTB)";
 			} else if (pathnames.includes(`/osutrack/user/${urlSplit}/mania`)) {
 				presenceData.details = "Viewing a user's statistics";
 				presenceData.state = `${decodeURL} in osu!mania`;
-				presenceData.smallImageKey = "mania";
+				presenceData.smallImageKey = Assets.Mania;
 				presenceData.smallImageText = "Mania";
 			} else {
 				switch (pathnames) {
 					case "/osutrack/bestplays/": {
 						presenceData.details = "Viewing at the Best Plays";
 						presenceData.state = "osu!standard";
-						presenceData.smallImageKey = "osu_std_logo";
+						presenceData.smallImageKey = Assets.Circle;
 						presenceData.smallImageText = "osu!standard";
 
 						break;
@@ -62,7 +69,7 @@ presence.on("UpdateData", async () => {
 					case "/osutrack/bestplays/taiko/": {
 						presenceData.details = "Viewing at the Best Plays";
 						presenceData.state = "osu!taiko";
-						presenceData.smallImageKey = "taiko";
+						presenceData.smallImageKey = Assets.Taiko;
 						presenceData.smallImageText = "osu!taiko";
 
 						break;
@@ -70,7 +77,7 @@ presence.on("UpdateData", async () => {
 					case "/osutrack/bestplays/ctb/": {
 						presenceData.details = "ViewKing at the Best Plays";
 						presenceData.state = "osu!catch the beat (cbt)";
-						presenceData.smallImageKey = "ctb";
+						presenceData.smallImageKey = Assets.Ctb;
 						presenceData.smallImageText = "osu!catch the beat";
 
 						break;
@@ -78,7 +85,7 @@ presence.on("UpdateData", async () => {
 					case "/osutrack/bestplays/mania/": {
 						presenceData.details = "Viewing at the Best Plays";
 						presenceData.state = "osu!mania";
-						presenceData.smallImageKey = "mania";
+						presenceData.smallImageKey = Assets.Mania;
 						presenceData.smallImageText = "osu!mania";
 
 						break;

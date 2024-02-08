@@ -101,7 +101,8 @@ presence.on("UpdateData", async () => {
 	} else {
 		presenceData.details = "Browsing:";
 		presenceData.state = document.title.replace(" - OpenClassrooms", "");
-		presenceData.largeImageKey = "logopurp";
+		presenceData.largeImageKey =
+		"https://cdn.rcd.gg/PreMiD/websites/O/OpenClassrooms/assets/logo.png";;
 	}
 	presenceData.startTimestamp = timeS;
 
