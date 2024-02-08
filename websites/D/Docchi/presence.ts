@@ -1,10 +1,33 @@
 const presence = new Presence({
 		clientId: "1204425198741491742",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	pages: { [key: string]: { desc: string; image: Assets } } = {
+		"/": { desc: "Przegląda stronę główną...", image: Assets.Viewing },
+		"/schedule": { desc: "Przegląda harmonogram", image: Assets.Viewing },
+		"/stats": { desc: "Przegląda statystyki...", image: Assets.Viewing },
+		"/monitoring": {
+			desc: "Przegląda monitorowane serie...",
+			image: Assets.Viewing,
+		},
+		"/contact": {
+			desc: "Przegląda stronę kontaktową...",
+			image: Assets.Viewing,
+		},
+		"/rules": { desc: "Czyta regulamin...", image: Assets.Reading },
+		"/privacy": {
+			desc: "Czyta politykę prywatności...",
+			image: Assets.Reading,
+		},
+		"/alternatives": {
+			desc: "Przegląda listę stron alternatywnych...",
+			image: Assets.Viewing,
+		},
+		"/my": { desc: "Przegląda swoją stronę...", image: Assets.Viewing },
+	};
 
 const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Docchi/assets/logo.png",
+	Logo = "https://i.imgur.com/bZ1YU4p.png",
 }
 
 let video = {
@@ -30,14 +53,25 @@ presence.on("UpdateData", async () => {
 	presenceData.smallImageKey = Assets.Viewing;
 
 	const production = pathname.startsWith("/production/as") ? pathname : null,
-		community = pathname.startsWith("/community") ? pathname : null;
+		community = pathname.startsWith("/community") ? pathname : null,
+		panel = pathname.startsWith("/panel") ? pathname : null;
 	switch (pathname) {
 		case pathname.startsWith("/settings") ? pathname : null:
-			presenceData.details = "Przegląda ustawienia profilu...";
+			presenceData.details = "Przegląda ustawienia:";
+			presenceData.state =
+				document.querySelector("span.navbar-item-active").textContent ||
+				"Nieznana zakładka";
 			break;
 		case pathname.startsWith("/profile") ? pathname : null:
-			presenceData.details = "Przegląda profil:";
-			presenceData.state = document.querySelector("h1").textContent;
+			presenceData.details = `Przegląda profil - ${
+				document.querySelector("h1").textContent
+			}`;
+			presenceData.state = `Zakładka: ${
+				document.querySelector("span.navbar-item-active").textContent
+			}`;
+			presenceData.largeImageKey = document
+				.querySelector("img.profile_page_profile_avatar__NwKeS")
+				.getAttribute("src");
 			presenceData.buttons = [{ label: "Zobacz Profil", url: href }];
 			break;
 		case community:
@@ -54,27 +88,42 @@ presence.on("UpdateData", async () => {
 			else if (production.endsWith("list"))
 				presenceData.details = "Przegląda serie anime...";
 			else {
-				const nav = document.querySelector("ol");
 				presenceData.largeImageKey = document
 					.querySelector("img.shadow-sm")
 					.getAttribute("src");
-				if (nav.children.length === 3) {
+				if (!document.querySelector("iframe[title='Odtwarzacz']")) {
 					presenceData.details = "Przegląda serię:";
-					presenceData.state =
-						document.querySelector("h1.fw-bolder").textContent;
+					presenceData.state = document.querySelector(
+						"a[mal_sync='title']"
+					).textContent;
 					presenceData.buttons = [{ label: "Zobacz Serię", url: href }];
-				} else if (nav.children.length === 4) {
-					presenceData.details = `Ogląda: ${nav.children[2].textContent}`;
-					presenceData.state = `Odcinek: ${nav.children[3].textContent}`;
-					presenceData.buttons = [
-						{ label: "Oglądaj", url: href },
-						{
-							label: "Cała Seria",
-							url: `${origin}${nav.children[2]
-								.querySelector("a")
-								.getAttribute("href")}`,
-						},
-					];
+				} else {
+					const animetype = [...document.querySelectorAll("h4")].find(
+						h4 => h4.textContent.trim() === "Rodzaj"
+					).nextElementSibling.textContent;
+					if (animetype === "Movie") {
+						presenceData.details = "Ogląda film:";
+						presenceData.state = document.querySelector(
+							"a[mal_sync='title']"
+						).textContent;
+						presenceData.buttons = [{ label: "Oglądaj", url: href }];
+					} else {
+						presenceData.details = `Ogląda: ${
+							document.querySelector("a[mal_sync='title']").textContent
+						}`;
+						presenceData.state = `Odcinek: ${
+							document.querySelector("a[mal_sync='episode']").textContent
+						}`;
+						presenceData.buttons = [
+							{ label: "Oglądaj", url: href },
+							{
+								label: "Cała Seria",
+								url: `${origin}${document
+									.querySelector("a[mal_sync='episode']")
+									.getAttribute("href")}`,
+							},
+						];
+					}
 					[presenceData.startTimestamp, presenceData.endTimestamp] =
 						presence.getTimestamps(video.current, video.duration);
 
@@ -89,31 +138,26 @@ presence.on("UpdateData", async () => {
 				}
 			}
 			break;
-		case "/schedule":
-			presenceData.details = "Przegląda harmonogram...";
-			break;
-		case "/stats":
-			presenceData.details = "Przegląda statystyki...";
-			break;
-		case "/monitoring":
-			presenceData.details = "Przegląda monitorowane serie...";
-			break;
-		case "/contact":
-			presenceData.details = "Przegląda stronę kontaktową...";
-			break;
-		case "/rules":
-			presenceData.details = "Czyta regulamin...";
-			presenceData.smallImageKey = Assets.Reading;
-			break;
-		case "/privacy":
-			presenceData.details = "Czyta politykę prywatności...";
-			presenceData.smallImageKey = Assets.Reading;
-			break;
-		case "/alternatives":
-			presenceData.details = "Przegląda listę stron alternatywnych...";
+		case panel:
+			presenceData.details = `${
+				document.querySelector("span.navbar-item-active").textContent
+			}:`;
+			presenceData.smallImageKey = Assets.Writing;
+			if (panel.startsWith("/panel/anime")) {
+				const title = [...document.querySelectorAll("p")]
+					.find(p => p.textContent.trim() === "Tytuł")
+					.nextElementSibling.getAttribute("value");
+				presenceData.state = title;
+			} else if (panel.startsWith("/panel/episode")) {
+				const title = [...document.querySelectorAll("p")]
+					.find(p => p.textContent.trim() === "Anime")
+					.nextElementSibling.getAttribute("value");
+				presenceData.state = title.replace(/-/g, " ");
+			}
 			break;
 		default:
-			presenceData.details = "Przegląda stronę główną...";
+			presenceData.details = pages[pathname].desc || "Nieznana aktywność 🤨";
+			presenceData.smallImageKey = pages[pathname].image || Assets.Viewing;
 			break;
 	}
 
