@@ -3,8 +3,8 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Browsing = "https://cdn.rcd.gg/PreMiD/websites/G/Giphy/assets/0.png",
-	Creating = "https://cdn.rcd.gg/PreMiD/websites/G/Giphy/assets/1.png",
+	Browsing = "https://cdn.discordapp.com/app-assets/630507230852022273/630510627965894676.png?size=512",
+	Creating = "https://cdn.discordapp.com/app-assets/630507230852022273/630511145509453865.png?size=512",
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/G/Giphy/assets/logo.png",
 }
 

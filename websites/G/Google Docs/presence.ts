@@ -29,10 +29,10 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
 const enum Assets {
-	DocsLogo = "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Docs/assets/0.png",
-	FormsLogo = "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Docs/assets/1.png",
-	SheetsLogo = "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Docs/assets/2.png",
-	SlidesLogo = "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Docs/assets/3.png",
+	DocsLogo = "https://cdn.discordapp.com/app-assets/630478614894477337/630478689431191592.png?size=512",
+	FormsLogo = "https://cdn.discordapp.com/app-assets/630478614894477337/630484135911096327.png?size=512",
+	SheetsLogo = "https://cdn.discordapp.com/app-assets/630478614894477337/1112078415646953553.png?size=512",
+	SlidesLogo = "https://cdn.discordapp.com/app-assets/630478614894477337/1112078547998224514.png?size=512",
 }
 
 presence.on("UpdateData", async () => {

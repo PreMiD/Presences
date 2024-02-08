@@ -29,12 +29,12 @@ function getGenre(code: string) {
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/G/Genie%20Music/assets/logo.png",
-	TV = "https://cdn.rcd.gg/PreMiD/websites/G/Genie%20Music/assets/0.png",
-	Mnet = "https://cdn.rcd.gg/PreMiD/websites/G/Genie%20Music/assets/1.png",
-	Chart = "https://cdn.rcd.gg/PreMiD/websites/G/Genie%20Music/assets/2.png",
-	Music = "https://cdn.rcd.gg/PreMiD/websites/G/Genie%20Music/assets/3.png",
-	Playlist = "https://cdn.rcd.gg/PreMiD/websites/G/Genie%20Music/assets/4.png",
-	Profile = "https://cdn.rcd.gg/PreMiD/websites/G/Genie%20Music/assets/5.png",
+	TV = "https://cdn.discordapp.com/app-assets/857504938443407360/872357712124575805.png?size=512",
+	Mnet = "https://cdn.discordapp.com/app-assets/857504938443407360/872367942321467413.png?size=512",
+	Chart = "https://cdn.discordapp.com/app-assets/857504938443407360/872368898278817823.png?size=512",
+	Music = "https://cdn.discordapp.com/app-assets/857504938443407360/872368898480173066.png?size=512",
+	Playlist = "https://cdn.discordapp.com/app-assets/857504938443407360/872369147751837717.png?size=512",
+	Profile = "https://cdn.discordapp.com/app-assets/857504938443407360/872379996923129896.png?size=512",
 }
 
 presence.on("UpdateData", async () => {

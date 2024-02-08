@@ -4,29 +4,29 @@ const presence = new Presence({
 	/* eslint-disable camelcase */
 	assets = {
 		diff_hard:
-			"https://cdn.rcd.gg/PreMiD/websites/G/GDBrowser/assets/0.png",
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668467851962744832.png?size=512",
 		diff_easy:
-			"https://cdn.rcd.gg/PreMiD/websites/G/GDBrowser/assets/1.png",
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668467852289769483.png?size=512",
 		diff_normal:
-			"https://cdn.rcd.gg/PreMiD/websites/G/GDBrowser/assets/2.png",
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668467852306546688.png?size=512",
 		diff_insane:
-			"https://cdn.rcd.gg/PreMiD/websites/G/GDBrowser/assets/3.png",
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668467853137018880.png?size=512",
 		diff_harder:
-			"https://cdn.rcd.gg/PreMiD/websites/G/GDBrowser/assets/4.png",
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668467853363511306.png?size=512",
 		diff_demon:
-			"https://cdn.rcd.gg/PreMiD/websites/G/GDBrowser/assets/5.png",
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668467853665501194.png?size=512",
 		diff_auto:
-			"https://cdn.rcd.gg/PreMiD/websites/G/GDBrowser/assets/6.png",
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668467853866827817.png?size=512",
 		diff_medium_demon:
-			"https://cdn.rcd.gg/PreMiD/websites/G/GDBrowser/assets/7.png",
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668876173257867264.png?size=512",
 		diff_extreme_demon:
-			"https://cdn.rcd.gg/PreMiD/websites/G/GDBrowser/assets/8.png",
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668876173484490765.png?size=512",
 		diff_hard_demon:
-			"https://cdn.rcd.gg/PreMiD/websites/G/GDBrowser/assets/9.png",
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668876173673103401.png?size=512",
 		diff_easy_demon:
-			"https://cdn.rcd.gg/PreMiD/websites/G/GDBrowser/assets/10.png",
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668876174231076874.png?size=512",
 		diff_insane_demon:
-			"https://cdn.rcd.gg/PreMiD/websites/G/GDBrowser/assets/11.png",
+			"https://cdn.discordapp.com/app-assets/635876670146084880/668876174461763634.png?size=512",
 	};
 /* eslint-enable camelcase */
 

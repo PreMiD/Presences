@@ -5,41 +5,41 @@ const presence = new Presence({
 	/* eslint-disable camelcase */
 	assets = {
 		bitwit_ultra:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/0.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/889955073323565147.png?size=512",
 		tech_deals:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/1.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/889955494821789736.png?size=512",
 		eposvox:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/2.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/889955639684653116.png?size=512",
 		ufdtech:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/3.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/889955902436819065.png?size=512",
 		level1techs:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/4.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/889956141264670772.png?size=512",
 		"3dprintingnerd":
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/5.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/889956369023795240.png?size=512",
 		themightyjingles:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/6.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/889956603602829403.png?size=512",
 		restoreit:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/7.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/889956721332719707.png?size=512",
 		badseedtech:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/8.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/889956938488627240.png?size=512",
 		robertneal:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/9.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/889957136510091345.png?size=512",
 		lawfulmasses:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/10.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/889981292752539659.png?size=512",
 		gearseekers:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/11.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/889982141964894248.png?size=512",
 		craftcomputing:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/12.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/889982561726640209.png?size=512",
 		toastybros:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/13.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/889982847010635796.png?size=512",
 		theguncollective:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/14.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/889982990271270912.png?size=512",
 		forgottenweapons:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/15.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/890208334383296514.png?size=512",
 		linustechtips:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/16.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/890208777641525288.png?size=512",
 		lonseidman:
-			"https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/17.png",
+			"https://cdn.discordapp.com/app-assets/889918462477095012/890209027005513739.png?size=512",
 	};
 /* eslint-enable camelcase */
 
