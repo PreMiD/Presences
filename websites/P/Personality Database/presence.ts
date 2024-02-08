@@ -3,6 +3,17 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+	const enum Assets {
+		Group = "https://cdn.discordapp.com/app-assets/909403157686288414/911255304233189427.png?size=512",
+		Home = "https://cdn.discordapp.com/app-assets/909403157686288414/911255304358993920.png?size=512",
+		Notification = "https://cdn.discordapp.com/app-assets/909403157686288414/911255304363212822.png?size=512",
+		User = "https://cdn.discordapp.com/app-assets/909403157686288414/911255304463867905.png?size=512",
+		Star = "https://cdn.discordapp.com/app-assets/909403157686288414/911260439646711839.png?size=512",
+		List = "https://cdn.discordapp.com/app-assets/909403157686288414/911260439952883762.png?size=512",
+		Poll = "https://cdn.discordapp.com/app-assets/909403157686288414/911260440003215380.png?size=512",
+		PersonalityDatabase = "https://cdn.discordapp.com/app-assets/909403157686288414/911862823720742932.png?size=512",
+	}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
@@ -34,7 +45,7 @@ presence.on("UpdateData", async () => {
 			))?.getAttribute("src");
 
 		if (profilePicture) presenceData.largeImageKey = profilePicture;
-		presenceData.smallImageKey = "poll";
+		presenceData.smallImageKey = Assets.Poll;
 		presenceData.details = "Viewing:";
 
 		const firstType: string = profilePersonality?.split(" - ")[0];
@@ -61,21 +72,21 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Searching:";
 		presenceData.state = urlParams.get("keyword") || urlParams.get("q");
 	} else if (document.location.pathname === "/vote") {
-		presenceData.smallImageKey = "home";
+		presenceData.smallImageKey = Assets.Home;
 		presenceData.details = "Viewing homepage";
 	} else if (document.location.pathname.includes("/profile")) {
-		presenceData.smallImageKey = "list";
+		presenceData.smallImageKey = Assets.List
 		presenceData.details = "Viewing category:";
 		presenceData.state = document.title?.split(" | ")[0];
 	} else if (document.location.pathname.includes("/community")) {
-		presenceData.smallImageKey = "group";
+		presenceData.smallImageKey = Assets.Group;
 		presenceData.details = "Viewing community feed";
 	} else if (document.location.pathname.includes("/topic")) {
-		presenceData.smallImageKey = "star";
+		presenceData.smallImageKey = Assets.Star
 		presenceData.details = "Viewing topic:";
 		presenceData.state = document.title?.split(" | ")[0];
 	} else if (document.location.pathname.includes("/notification")) {
-		presenceData.smallImageKey = "notification";
+		presenceData.smallImageKey = Assets.Notification
 		presenceData.details = "Viewing notification";
 	} else if (document.location.pathname.includes("/user/")) {
 		if (showUserNameInUserProfile) {
@@ -90,7 +101,7 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		} else presenceData.details = "Viewing user's profile";
-		presenceData.smallImageKey = "user";
+		presenceData.smallImageKey = Assets.User
 	} else {
 		presenceData.details = "Viewing page:";
 		presenceData.state = document.title?.split(" | ")[0];

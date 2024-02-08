@@ -219,7 +219,7 @@ presence.on("UpdateData", async () => {
 		pathname.includes("/privacy-policy/")
 	) {
 		presenceData.details = "Reading the Privacy Policy";
-		presenceData.smallImageKey = "smoll";
+		presenceData.smallImageKey = Assets.Reading
 		presenceData.smallImageText = "Reading";
 	}
 
