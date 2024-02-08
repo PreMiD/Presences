@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 			}
 
 			presenceData.largeImageKey = mediathekLivechannel.toLowerCase();
-			presenceData.smallImageKey = "live";
+			presenceData.smallImageKey = Assets.Live;
 			presenceData.smallImageText = "Live";
 			presenceData.details = `${mediathekLivechannel} Live`;
 			presenceData.state = videoInfoTag
