@@ -3,10 +3,14 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+	const enum Assets {  Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Danbooru/assets/logo.png",
+  Artwork = "https://cdn.discordapp.com/app-assets/918794311557058590/919089758431494145.png?size=512",
+  User = "https://cdn.discordapp.com/app-assets/918794311557058590/919090981461188628.png?size=512",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/D/Danbooru/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		[shortTitle] = document.title.split(/[|]/, 1),
@@ -18,12 +22,12 @@ presence.on("UpdateData", async () => {
 
 	if (path === "/posts") {
 		presenceData.details = "Browsing posts";
-		presenceData.smallImageKey = "artwork";
+		presenceData.smallImageKey = Assets.Artwork;
 		presenceData.smallImageText = "Viewing artworks";
 	} else if (path.startsWith("/posts")) {
 		presenceData.details = "Viewing an artwork";
 		presenceData.state = shortTitle;
-		presenceData.smallImageKey = "artwork";
+		presenceData.smallImageKey = Assets.Artwork;
 		presenceData.smallImageText = "Viewing artworks";
 		if (buttons) {
 			presenceData.buttons = [
@@ -56,12 +60,12 @@ presence.on("UpdateData", async () => {
 					presenceData.state = shortTitle;
 				} else if (path === "/artists") {
 					presenceData.details = "Browsing artists";
-					presenceData.smallImageKey = "user";
+					presenceData.smallImageKey = Assets.User;
 					presenceData.smallImageText = "Viewing a profile";
 				} else if (path.startsWith("/artists")) {
 					presenceData.details = "Viewing an artist";
 					presenceData.state = shortTitle;
-					presenceData.smallImageKey = "user";
+					presenceData.smallImageKey = Assets.User;
 					presenceData.smallImageText = "Viewing a profile";
 					if (buttons) {
 						presenceData.buttons = [
@@ -70,12 +74,12 @@ presence.on("UpdateData", async () => {
 					}
 				} else if (path === "/users") {
 					presenceData.details = "Looking up users";
-					presenceData.smallImageKey = "user";
+					presenceData.smallImageKey = Assets.User;
 					presenceData.smallImageText = "Viewing a profile";
 				} else if (path.startsWith("/users")) {
 					presenceData.details = "Viewing a user";
 					presenceData.state = shortTitle;
-					presenceData.smallImageKey = "user";
+					presenceData.smallImageKey = Assets.User;
 					presenceData.smallImageText = "Viewing a profile";
 				} else if (path === "/tags") presenceData.details = "Browsing tags";
 				else if (path === "/pools") presenceData.details = "Browsing pools";

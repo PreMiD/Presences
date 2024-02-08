@@ -40,7 +40,7 @@ presence.on("UpdateData", () => {
 		presenceData.state = document
 			.querySelector("#cookies div")
 			.textContent.replace("per second :", "Per second:");
-		presenceData.smallImageKey = "legacyy";
+		presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/676126246928777250/676142979144220674.png?size=512";
 		presenceData.smallImageText = `Legacy level: ${
 			document.querySelector("#ascendNumber").textContent
 		}`;

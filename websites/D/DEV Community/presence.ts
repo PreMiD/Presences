@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
 			break;
 		case isProfile():
 			presenceData.details = authorName;
-			presenceData.smallImageKey = "user";
+			presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/829466407321731082/830447917726171157.png?size=512";
 			presenceData.smallImageText = "Profile";
 			if (buttons) {
 				presenceData.buttons = [
