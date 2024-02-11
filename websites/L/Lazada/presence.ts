@@ -12,6 +12,7 @@ presence.on("UpdateData", async () => {
 
 	if (document.querySelector(".pdp-mod-product-badge-title")) {
 		presenceData.details = "Viewing Product:";
+		presenceData.smallImageKey = Assets.Viewing;
 		presenceData.state = document.querySelector(
 			".pdp-mod-product-badge-title"
 		).textContent;
@@ -20,9 +21,11 @@ presence.on("UpdateData", async () => {
 			"";
 	} else if (pathname.includes("/tag")) {
 		presenceData.details = "Viewing Tags:";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.state = document.querySelector(".JrAyI").textContent;
 	} else if (pathname.includes("/catalog")) {
 		presenceData.details = "Viewing Catalog:";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.state = document.querySelector(".JrAyI").textContent;
 	} else if (pathname.includes("/customer/order"))
 		presenceData.details = "My Orders";
@@ -59,7 +62,8 @@ presence.on("UpdateData", async () => {
 	if (await presence.getSetting<boolean>("incognito")) {
 		presenceData.details = "Incognito";
 		presenceData.largeImageKey =
-			"https://i.ibb.co/LpxnMfj/512x512pngoflazada.png";
+			"https://lzd-img-global.slatic.net/g/tps/tfs/TB1PApewFT7gK0jSZFpXXaTkpXa-200-200.png";
+		presenceData.smallImageKey = Assets.Question;
 		delete presenceData.state;
 		delete presenceData.startTimestamp;
 	}
