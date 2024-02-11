@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			smallImageKey: "teaching",
+			smallImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/O/OpenClassrooms/assets/0.png",
 			smallImageText: "OpenClassrooms",
 		},
 		webpath = window.location.pathname.toLowerCase();
@@ -101,7 +102,8 @@ presence.on("UpdateData", async () => {
 	} else {
 		presenceData.details = "Browsing:";
 		presenceData.state = document.title.replace(" - OpenClassrooms", "");
-		presenceData.largeImageKey = "logopurp";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/O/OpenClassrooms/assets/logo.png";
 	}
 	presenceData.startTimestamp = timeS;
 

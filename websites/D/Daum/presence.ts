@@ -82,6 +82,12 @@ let video: {
 		article: string;
 	};
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Daum/assets/logo.png",
+	DaumMail = "https://cdn.rcd.gg/PreMiD/websites/D/Daum/assets/0.png",
+	DaumCafe = "https://cdn.rcd.gg/PreMiD/websites/D/Daum/assets/1.png",
+}
+
 presence.on(
 	"iFrameData",
 	(data: { video?: typeof video; cafe?: typeof cafe }) => {
@@ -92,17 +98,17 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/D/Daum/assets/logo.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: startTime,
 	};
 
 	switch (presence.serviceName) {
 		case "DAUM_MAIL":
-			presenceData.largeImageKey = presence.serviceName.toLowerCase();
+			presenceData.largeImageKey = Assets.DaumMail;
 			break;
 
 		case "DAUM_CAFE":
-			presenceData.largeImageKey = presence.serviceName.toLowerCase();
+			presenceData.largeImageKey = Assets.DaumCafe;
 			break;
 
 		default:

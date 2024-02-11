@@ -29,11 +29,59 @@ const presence = new Presence({
 		"go",
 		"rs",
 	];
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/logo.png",
+	Square = "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/0.png",
+	Create = "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/1.png",
+	Dashboard = "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/2.png",
+	Discover = "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/3.png",
+	Drafts = "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/4.png",
+	All = "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/5.png",
+	Templates = "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/6.png",
+	Repositories = "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/7.png",
+	Recent = "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/8.png",
+	Deleted = "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/9.png",
+	Shared = "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/10.png",
+	Liked = "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/11.png",
+	Profile = "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/12.png",
+	Txt = "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/13.png",
+	UserSandbox = "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/14.png",
+	Unknown = "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/15.png",
+}
+
+const assets = {
+	py: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/16.png",
+	js: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/17.png",
+	ts: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/18.png",
+	css: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/19.png",
+	swift: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/20.png",
+	html: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/21.png",
+	java: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/22.png",
+	cpp: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/23.png",
+	json: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/24.png",
+	cs: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/25.png",
+	c: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/26.png",
+	txt: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/13.png",
+	tsx: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/27.png",
+	jsx: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/28.png",
+	cr: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/29.png",
+	go: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/30.png",
+	sh: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/31.png",
+	bash: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/32.png",
+	sql: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/33.png",
+	ru: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/34.png",
+	lua: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/35.png",
+	php: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/36.png",
+	kt: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/37.png",
+	bat: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/38.png",
+	rs: "https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/39.png",
+};
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/logo.png",
-			smallImageKey: "smallimagekey",
+			largeImageKey: Assets.Logo,
+			smallImageKey: Assets.Square,
 			smallImageText: "CodeSandbox",
 			details: "Loading",
 			startTimestamp: browsingTimestamp,
@@ -42,47 +90,47 @@ presence.on("UpdateData", async () => {
 	if (pathname.startsWith("/")) {
 		if (document.querySelector<HTMLDivElement>('[class="ReactModalPortal"]')) {
 			presenceData.details = "Creating a new sandbox!";
-			presenceData.largeImageKey = "create";
+			presenceData.largeImageKey = Assets.Create;
 		} else if (pathname.includes("/dashboard/home")) {
 			presenceData.details = "Looking at their dashboard";
 			presenceData.state = "Page: Home";
-			presenceData.largeImageKey = "dashboard";
+			presenceData.largeImageKey = Assets.Dashboard;
 		} else if (pathname.includes("/dashboard/discover")) {
 			presenceData.details = "Discovering other sandboxes";
 			presenceData.state = "Page: Discover";
-			presenceData.largeImageKey = "discover";
+			presenceData.largeImageKey = Assets.Discover;
 		} else if (pathname.includes("/dashboard/drafts")) {
 			presenceData.details = "Looking at their drafts";
 			presenceData.state = "Page: Drafts";
-			presenceData.largeImageKey = "drafts";
+			presenceData.largeImageKey = Assets.Drafts;
 		} else if (pathname.includes("/dashboard/all")) {
 			presenceData.details = "Looking through their sandboxes";
 			presenceData.state = "Page: All Sandboxes";
-			presenceData.largeImageKey = "all";
+			presenceData.largeImageKey = Assets.All;
 		} else if (pathname.includes("/dashboard/templates")) {
 			presenceData.details = "Looking through their templates";
 			presenceData.state = "Page: Templates";
-			presenceData.largeImageKey = "templates";
+			presenceData.largeImageKey = Assets.Templates;
 		} else if (pathname.includes("/dashboard/repositories")) {
 			presenceData.details = "Looking through their repositories";
 			presenceData.state = "Page: Repositories";
-			presenceData.largeImageKey = "repositories";
+			presenceData.largeImageKey = Assets.Repositories;
 		} else if (pathname.includes("/dashboard/recent")) {
 			presenceData.details = "Looking through their recent sandboxes";
 			presenceData.state = "Page: Recently Modified";
-			presenceData.largeImageKey = "recent";
+			presenceData.largeImageKey = Assets.Recent;
 		} else if (pathname.includes("/dashboard/deleted")) {
 			presenceData.details = "Looking through their trashed sandboxes";
 			presenceData.state = "Page: Recently Deleted";
-			presenceData.largeImageKey = "deleted";
+			presenceData.largeImageKey = Assets.Deleted;
 		} else if (pathname.includes("/dashboard/shared")) {
 			presenceData.details = "Looking at shared sandboxes";
 			presenceData.state = "Page: Shared With Me";
-			presenceData.largeImageKey = "shared";
+			presenceData.largeImageKey = Assets.Shared;
 		} else if (pathname.includes("/dashboard/liked")) {
 			presenceData.details = "Looking at liked sandboxes";
 			presenceData.state = "Page: Liked Sandboxes";
-			presenceData.largeImageKey = "liked";
+			presenceData.largeImageKey = Assets.Liked;
 		} else if (pathname.includes("/u/")) {
 			presenceData.details = "Looking at a user's profile:";
 			presenceData.state = `${
@@ -94,7 +142,7 @@ presence.on("UpdateData", async () => {
 					'[class="sc-bdnylx sc-gtssRu gDXMLZ itZLEx"]'
 				).textContent
 			})`;
-			presenceData.largeImageKey = "profile";
+			presenceData.largeImageKey = Assets.Profile;
 			presenceData.buttons = [
 				{
 					label: "View Profile",
@@ -125,10 +173,13 @@ presence.on("UpdateData", async () => {
 							.replace(/(:)|[0-9]|(-)/g, "")
 					)
 				) {
-					presenceData.largeImageKey = `${formatImg[formatImg.length - 1]
-						.toLowerCase()
-						.replace(/(:)|[0-9]|(-)/g, "")}`;
-				} else presenceData.largeImageKey = "txt";
+					presenceData.largeImageKey =
+						assets[
+							`${formatImg[formatImg.length - 1]
+								.toLowerCase()
+								.replace(/(:)|[0-9]|(-)/g, "")}` as keyof typeof assets
+						];
+				} else presenceData.largeImageKey = Assets.Txt;
 			} else {
 				presenceData.details = `Looking at ${
 					document.querySelector<HTMLSpanElement>(
@@ -140,7 +191,7 @@ presence.on("UpdateData", async () => {
 						'[class="sc-bdnylx sc-gtssRu gDXMLZ efjlMo"]'
 					).textContent
 				}`;
-				presenceData.largeImageKey = "usersandbox";
+				presenceData.largeImageKey = Assets.UserSandbox;
 				presenceData.buttons = [
 					{
 						label: "View Sandbox",
@@ -150,7 +201,7 @@ presence.on("UpdateData", async () => {
 			}
 		} else {
 			presenceData.details = "Viewing an unsupported CodeSandbox page";
-			presenceData.largeImageKey = "unknown";
+			presenceData.largeImageKey = Assets.Unknown;
 		}
 	}
 	presence.setActivity(presenceData);

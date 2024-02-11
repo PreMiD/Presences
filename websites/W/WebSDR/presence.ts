@@ -33,7 +33,6 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/W/WebSDR/assets/logo.png",
-		//smallImageKey: "key",
 		smallImageText: "University of Twente SDR",
 		startTimestamp: browsingTimestamp,
 	};

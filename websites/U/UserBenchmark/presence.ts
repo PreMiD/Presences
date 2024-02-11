@@ -13,41 +13,49 @@ let elapsed = Math.floor(Date.now() / 1000),
 	prevUrl = document.location.href;
 
 const statics = {
-	"/pages/global/pagegone.jsf/": {
-		details: "404",
-		state: "Not Found",
+		"/pages/global/pagegone.jsf/": {
+			details: "404",
+			state: "Not Found",
+		},
+		"/page/login/": {
+			details: "Logging In...",
+		},
+		"/page/register/": {
+			details: "Registering...",
+		},
+		"/page/about/": {
+			details: "Viewing Page...",
+			state: "About",
+		},
+		"/page/guide/": {
+			details: "Viewing Page...",
+			state: "User Guide",
+		},
+		"/page/privacy/": {
+			details: "Viewing Page...",
+			state: "Privacy Policy",
+		},
+		"/page/developer/": {
+			details: "Viewing Page...",
+			state: "Developer Resources",
+		},
+		"/Top/": {
+			details: "Viewing Page...",
+			state: "Top Hardware",
+		},
+		"/Software/": {
+			details: "Viewing Page...",
+			state: "PC Software",
+		},
 	},
-	"/page/login/": {
-		details: "Logging In...",
-	},
-	"/page/register/": {
-		details: "Registering...",
-	},
-	"/page/about/": {
-		details: "Viewing Page...",
-		state: "About",
-	},
-	"/page/guide/": {
-		details: "Viewing Page...",
-		state: "User Guide",
-	},
-	"/page/privacy/": {
-		details: "Viewing Page...",
-		state: "Privacy Policy",
-	},
-	"/page/developer/": {
-		details: "Viewing Page...",
-		state: "Developer Resources",
-	},
-	"/Top/": {
-		details: "Viewing Page...",
-		state: "Top Hardware",
-	},
-	"/Software/": {
-		details: "Viewing Page...",
-		state: "PC Software",
-	},
-};
+	assets = {
+		ssd: "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/0.png",
+		cpu: "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/1.png",
+		usb: "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/2.png",
+		hdd: "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/3.png",
+		gpu: "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/4.png",
+		ram: "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/5.png",
+	};
 
 presence.on("UpdateData", async () => {
 	const { host, pathname, href } = document.location,
@@ -167,7 +175,7 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (presenceData.details) {
+	if (presenceData.details && typeof presenceData.details === "string") {
 		if (presenceData.details.match("(Browsing|Viewing)")) {
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = (await strings).browse;
@@ -183,7 +191,7 @@ presence.on("UpdateData", async () => {
 
 		if (path === "/" && !host.startsWith("www")) {
 			const hardware = host.split(".").shift();
-			presenceData.smallImageKey = hardware;
+			presenceData.smallImageKey = assets[hardware as keyof typeof assets];
 			presenceData.smallImageText = hardware.toUpperCase();
 		}
 

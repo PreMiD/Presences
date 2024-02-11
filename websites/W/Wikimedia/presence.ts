@@ -3,12 +3,28 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	ChartBar = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/0.png",
+	Envelope = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/1.png",
+	Donate = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/2.png",
+	Incubator = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/3.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/logo.png",
+	Phabricator = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/4.png",
+	Wikimania = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/5.png",
+	Xtools = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/6.png",
+	Mediawiki = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/7.png",
+	WikimediaCloudServices = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/8.png",
+	Meta = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/9.png",
+	Wikitech = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/10.png",
+	LogoBlack = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/11.png",
+	Wikispore = "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/12.png",
+}
+
 let currentURL = new URL(document.location.href),
 	currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
 	presenceData: PresenceData = {
 		details: "Viewing an unsupported page",
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/logo.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 	};
 const updateCallback = {
@@ -29,8 +45,7 @@ const updateCallback = {
 	resetData = (
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		}
 	): void => {
@@ -48,14 +63,14 @@ const updateCallback = {
 	prepare = async (): Promise<void> => {
 		switch (currentURL.hostname) {
 			case "www.wikimedia.org": {
-				presenceData.smallImageKey = "lg-black";
+				presenceData.smallImageKey = Assets.LogoBlack;
 				presenceData.smallImageText = "wikimedia.org landing page";
 				presenceData.details = "On the home page";
 
 				break;
 			}
 			case "wikimediafoundation.org": {
-				presenceData.smallImageKey = "lg-black";
+				presenceData.smallImageKey = Assets.LogoBlack;
 				presenceData.smallImageText = "Wikimedia Foundation website";
 
 				if (currentPath[0] === "") presenceData.details = "On the home page";
@@ -133,7 +148,7 @@ const updateCallback = {
 			}
 			case "lists.wikimedia.org": {
 				if (currentPath[0] === "postorius" && currentPath[1] === "lists") {
-					presenceData.smallImageKey = "envelope";
+					presenceData.smallImageKey = Assets.Envelope;
 					presenceData.smallImageText = "Mailing Lists";
 
 					if (!currentPath[2]) presenceData.details = "Viewing mailing lists";
@@ -178,7 +193,7 @@ const updateCallback = {
 				break;
 			}
 			case "stats.wikimedia.org": {
-				presenceData.smallImageKey = "chart-bar";
+				presenceData.smallImageKey = Assets.ChartBar;
 				presenceData.smallImageText = "Wikimedia Statistics";
 
 				presenceData.details = "Viewing Wikimedia Statistics";
@@ -194,7 +209,7 @@ const updateCallback = {
 			}
 			case "phabricator.wikimedia.org":
 			case "phab.wmflabs.org": {
-				presenceData.smallImageKey = "phabricator";
+				presenceData.smallImageKey = Assets.Phabricator;
 				presenceData.smallImageText = "Wikimedia Phabricator";
 				if (currentURL.hostname === "phab.wmflabs.org")
 					presenceData.smallImageText += " (test)";
@@ -361,7 +376,7 @@ const updateCallback = {
 				break;
 			}
 			case "xtools.wmflabs.org": {
-				presenceData.smallImageKey = "xtools";
+				presenceData.smallImageKey = Assets.Xtools;
 				presenceData.smallImageText = "XTools";
 
 				const titleArray = document.title.split(" - ");
@@ -377,7 +392,7 @@ const updateCallback = {
 				break;
 			}
 			case "dumps.wikimedia.org": {
-				presenceData.smallImageKey = "cloud-download-alt";
+				presenceData.smallImageKey = Assets.Downloading;
 				presenceData.smallImageText = "Wikimedia Downloads";
 
 				if (currentPath[0] === "") presenceData.details = "On the home page";
@@ -397,7 +412,7 @@ const updateCallback = {
 				break;
 			}
 			case "donate.wikimedia.org": {
-				presenceData.smallImageKey = "donate";
+				presenceData.smallImageKey = Assets.Donate;
 				presenceData.smallImageText = "Donation Gateway";
 
 				presenceData.details = "Donating to the Wikimedia Foundation";
@@ -418,28 +433,28 @@ const updateCallback = {
 
 				switch (currentURL.hostname) {
 					case "meta.wikimedia.org": {
-						presenceData.smallImageKey = "meta";
+						presenceData.smallImageKey = Assets.Meta;
 						break;
 					}
 					case "incubator.wikimedia.org": {
-						presenceData.smallImageKey = "incubator";
+						presenceData.smallImageKey = Assets.Incubator;
 						break;
 					}
 					case "wikitech.wikimedia.org": {
-						presenceData.smallImageKey = "wikitech";
+						presenceData.smallImageKey = Assets.Wikitech;
 						break;
 					}
 					case "www.mediawiki.org": {
-						presenceData.smallImageKey = "mediawiki";
+						presenceData.smallImageKey = Assets.Mediawiki;
 						break;
 					}
 					default:
 						if (currentURL.hostname.startsWith("wikimania"))
-							presenceData.smallImageKey = "wikimania";
+							presenceData.smallImageKey = Assets.Wikimania;
 						else if (currentURL.hostname === "foundation.wikimedia.org")
-							presenceData.smallImageKey = "lg-black";
+							presenceData.smallImageKey = Assets.LogoBlack;
 						else if (currentURL.hostname === "wikispore.wmflabs.org")
-							presenceData.smallImageKey = "wikispore";
+							presenceData.smallImageKey = Assets.Wikispore;
 				}
 
 				const siteName = mwConfig.wgSiteName,

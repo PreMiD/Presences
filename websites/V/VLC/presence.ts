@@ -99,19 +99,22 @@ presence.on("UpdateData", async () => {
 
 			if (presenceData.details && presenceData.details.length > 100)
 				presenceData.details = presenceData.details.substring(0, 127);
-			if (presenceData.state && presenceData.state.length > 100)
+			if (
+				typeof presenceData.state === "string" &&
+				presenceData.state.length > 100
+			)
 				presenceData.state = presenceData.state.substring(0, 127);
 
 			presenceData.smallImageKey =
 				media.state === "paused"
-					? "pause"
+					? Assets.Pause
 					: media.loop === "true" && media.repeat === "false"
-					? "repeat"
+					? Assets.Repeat
 					: media.repeat === "true" && media.loop === "false"
-					? "repeat-one"
+					? Assets.RepeatOne
 					: media.state === "playing"
-					? "play"
-					: "pause";
+					? Assets.Play
+					: Assets.Pause;
 
 			presenceData.smallImageText =
 				media.state === "paused"

@@ -77,6 +77,18 @@ setInterval(() => {
 	newStats();
 }, 10_000);
 
+const enum Assets {
+	WhiteBackSmall = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/0.png",
+	BlackBackSmall = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/1.png",
+	ColorBackSmall = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/2.png",
+	ColorBack = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/3.png",
+	BlackBack = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/4.png",
+	WhiteBack = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/5.png",
+	Black = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/6.png",
+	White = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/7.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/8.png",
+}
+
 presence.on("UpdateData", async () => {
 	const [info, elapsed, format1, format2, format3, buttons, logo] =
 			await Promise.all([
@@ -89,19 +101,19 @@ presence.on("UpdateData", async () => {
 				presence.getSetting<number>("logo"),
 			]),
 		logoArr = [
-			"reywhitebacksmall",
-			"reyblackbacksmall",
-			"reycolorbacksmall",
-			"reywhiteback",
-			"reyblackback",
-			"reycolorback",
-			"reywhite",
-			"reyblack",
-			"rey",
+			Assets.WhiteBackSmall,
+			Assets.BlackBackSmall,
+			Assets.ColorBackSmall,
+			Assets.WhiteBack,
+			Assets.BlackBack,
+			Assets.ColorBack,
+			Assets.White,
+			Assets.Black,
+			Assets.Logo,
 		],
 		presenceData: PresenceData = {
-			largeImageKey: logoArr[logo] || "reywhitebacksmall",
-			smallImageKey: "reading",
+			largeImageKey: logoArr[logo] || Assets.WhiteBackSmall,
+			smallImageKey: Assets.Reading,
 		};
 
 	let showFormat3 = false;
@@ -234,8 +246,8 @@ presence.on("UpdateData", async () => {
 				.src.includes("play.png");
 
 		paused
-			? (presenceData.smallImageKey = "pause")
-			: (presenceData.smallImageKey = "play");
+			? (presenceData.smallImageKey = Assets.Pause)
+			: (presenceData.smallImageKey = Assets.Play);
 
 		presenceData.details = format1
 			.replace("%title%", channel.track)

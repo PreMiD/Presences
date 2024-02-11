@@ -111,7 +111,8 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Home";
 		}
 	} else if (document.location.hostname === "project.gunivers.net") {
-		presenceData.smallImageKey = "workspace";
+		presenceData.smallImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/G/Gunivers/assets/0.png";
 		presenceData.details = "Viewing a page:";
 		presenceData.state = "Gunivers Workspace";
 		if (window.location.pathname.endsWith("/projects")) {

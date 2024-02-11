@@ -8,66 +8,41 @@ type State = "start" | "generation" | "results";
 
 let browsingTimestamp: number = Date.now() / 1000,
 	oldPrompt: string = null,
-	activityState: State = "start";
-
-const uploadedURLs: Record<string, string> = {};
-function uploadImage(url: string) {
-	return new Promise<string>(resolve => {
-		if (uploadedURLs[url]) return resolve(uploadedURLs[url]);
-		// Prevents uploading the same image twice due to race conditions
-		uploadedURLs[url] = logo;
-		try {
-			fetch(url)
-				.then(r => r.arrayBuffer())
-				.then(file => {
-					return fetch("https://bashupload.com", {
-						method: "POST",
-						body: file,
-					})
-						.then(r => r.text())
-						.then(x => x.match(/https(.*)/)?.[0]);
-				})
-				.then(uploadURL => {
-					uploadedURLs[url] = uploadURL;
-					setTimeout(() => {
-						presence.info(uploadURL);
-						resolve(uploadURL);
-					}, 750);
-				});
-		} catch (err) {
-			presence.error(err);
-			resolve(url);
-		}
-	});
-}
+	oldPath: string = null,
+	activityState: State = "start",
+	searchResultCacheTimestamp = 0;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = window.location;
-	switch (pathname) {
+		{ pathname, href } = document.location,
+		pathList = pathname.split("/").filter(Boolean);
+
+	let useSlideshow = false;
+	if (oldPath !== pathname) {
+		oldPath = pathname;
+		slideshow.deleteAllSlides();
+	}
+
+	switch (pathList[0] ?? "/") {
 		case "/": {
-			const input = document.querySelector<HTMLDivElement>("#prompt"),
-				container = document.querySelector<HTMLDivElement>(
-					".h-full.w-full > .relative > div > div"
+			const input = document.querySelector<HTMLTextAreaElement>("#prompt"),
+				imageContainers = document.querySelectorAll<HTMLImageElement>(
+					".image-container img"
 				);
-			presenceData.state = input.textContent
-				? `"${input.textContent}"`
+			presenceData.state = input.value
+				? `"${input.value}"`
 				: "Waiting for input...";
-			if (container.querySelector("svg.text-gray-300"))
-				presenceData.details = "Thinking of a prompt";
-			else if (
-				input.nextElementSibling
-					.querySelector("img")
-					.classList.contains("animate-wiggle")
+			if (
+				document.querySelector<HTMLButtonElement>("#generateButton").disabled
 			) {
 				if (activityState !== "generation") {
 					presenceData.startTimestamp = browsingTimestamp = Date.now() / 1000;
-					slideshow.deleteAllSlides();
-					oldPrompt = input.textContent;
+					oldPrompt = input.value;
 					activityState = "generation";
+					slideshow.deleteAllSlides();
 				}
 				presenceData.details = "Generating images";
 				presenceData.state = `"${oldPrompt}"`;
@@ -75,46 +50,90 @@ presence.on("UpdateData", async () => {
 				if (activityState !== "results") {
 					presenceData.startTimestamp = browsingTimestamp = Date.now() / 1000;
 					activityState = "results";
+					slideshow.deleteAllSlides();
 				}
 				if (
-					document.activeElement === input &&
-					input.textContent !== oldPrompt
-				) {
-					presenceData.details = "Thinking of a new prompt";
-					slideshow.deleteAllSlides();
-				} else if (container.childElementCount > 3) {
+					(document.activeElement === input && input.value !== oldPrompt) ||
+					!imageContainers.length
+				)
+					presenceData.details = "Thinking of a prompt";
+				else {
 					presenceData.details = "Viewing results";
 					presenceData.state = `"${oldPrompt}"`;
-					const imageURLs = [...container.children].map(child => {
-						return (child.firstElementChild as HTMLImageElement).src;
-					});
-					for (const [i, imageURL] of imageURLs.entries()) {
+
+					for (const [i, image] of imageContainers.entries()) {
 						const presenceDataCopy = Object.assign({}, presenceData);
-						presenceDataCopy.largeImageKey = await uploadImage(imageURL);
+						presenceDataCopy.largeImageKey = image;
 						slideshow.addSlide(`image${i}`, presenceDataCopy, 5000);
 					}
-				} else {
-					if (slideshow.getSlides().length > 0) slideshow.deleteAllSlides();
-					presenceData.details = "Viewing a generated image";
-					presenceData.state = `"${oldPrompt}"`;
-					presenceData.largeImageKey = await uploadImage(
-						container.querySelector("img").src
-					);
+					useSlideshow = true;
 				}
 			}
 			break;
 		}
-		case "/privacy": {
+		case "image": {
+			presenceData.details = "Viewing an image";
+			presenceData.state = (
+				document
+					.evaluate("//p[text()='Prompt']", document.body)
+					.iterateNext() as HTMLParagraphElement
+			).nextElementSibling;
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>("main img");
+			presenceData.buttons = [
+				{
+					label: "View Image Details",
+					url: href,
+				},
+			];
+			break;
+		}
+		case "search": {
+			if (pathList.length > 1) {
+				presenceData.details = "Viewing search results";
+				presenceData.state = document.querySelector("input").value;
+				const now = Date.now();
+				if (now - searchResultCacheTimestamp > 5000) {
+					searchResultCacheTimestamp = now;
+
+					for (const [i, image] of document
+						.querySelectorAll<HTMLImageElement>("main a img")
+						.entries()) {
+						const presenceDataCopy = Object.assign({}, presenceData);
+						presenceDataCopy.largeImageKey = image;
+						slideshow.addSlide(`image${i}`, presenceDataCopy, 5000);
+					}
+				}
+				useSlideshow = true;
+			} else presenceData.details = "Searching for images";
+			break;
+		}
+		case "blog": {
+			if (pathList.length > 1) {
+				presenceData.details = "Reading a blog post";
+				presenceData.state = document.querySelector("h1");
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>("main p + img");
+				presenceData.buttons = [
+					{
+						label: "View Blog Post",
+						url: href,
+					},
+				];
+			} else presenceData.details = "Browsing blog posts";
+			break;
+		}
+		case "privacy": {
 			presenceData.details = "Reading privacy policy";
 			break;
 		}
-		case "/terms": {
+		case "terms": {
 			presenceData.details = "Reading terms and conditions";
 			break;
 		}
 	}
 	if (presenceData.details) {
-		if (slideshow.getSlides().length > 0) presence.setActivity(slideshow);
+		if (useSlideshow) presence.setActivity(slideshow);
 		else presence.setActivity(presenceData);
 	} else presence.setActivity();
 });

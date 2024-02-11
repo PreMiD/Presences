@@ -3,10 +3,34 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/logo.png",
+	LogoDark = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/0.png",
+	LogoLight = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/1.png",
+	Home = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/2.png",
+	Archive = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/3.png",
+	Bookmark = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/4.png",
+	Brush = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/5.png",
+	Calendar = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/6.png",
+	Pen = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/7.png",
+	Plus = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/8.png",
+	Hash = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/9.png",
+	Journals = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/10.png",
+	File = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/11.png",
+	Calendar2 = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/12.png",
+	Book2 = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/13.png",
+	Slash = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/14.png",
+	File2 = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/15.png",
+	Tags = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/16.png",
+	Journal = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/17.png",
+	File3 = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/18.png",
+	Book3 = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/19.png",
+	Sort = "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/20.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/logo.png",
+			largeImageKey: Assets.Logo,
 		},
 		/* Query dell'URI - URI query */
 		searchParams = new URLSearchParams(
@@ -17,12 +41,12 @@ presence.on("UpdateData", async () => {
 
 	/* Homepage */
 	if (document.location.pathname === "/") {
-		presenceData.smallImageKey = "home";
+		presenceData.smallImageKey = Assets.Home;
 		presenceData.smallImageText = "Homepage";
 		presenceData.details = "Nella homepage";
 	} else if (document.location.href.includes("/bookmarks/")) {
 		/* Preferiti - Bookmarks*/
-		presenceData.smallImageKey = "bookmark";
+		presenceData.smallImageKey = Assets.Bookmark;
 		presenceData.smallImageText = "Preferiti";
 		presenceData.details = "Sfogliando i preferiti";
 
@@ -45,13 +69,13 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `"${searchParams.get("keyword")}"`;
 	} else if (document.location.href.includes("author=")) {
 		/* Ricerca per autore - Search by author */
-		presenceData.smallImageKey = "pen";
+		presenceData.smallImageKey = Assets.Pen;
 		presenceData.smallImageText = "Ricerca per autore";
 		presenceData.details = "Sfogliando i contenuti dell'autore:";
 		presenceData.state = searchParams.get("author");
 	} else if (document.location.href.includes("artist=")) {
 		/* Ricerca per artista - Search by artist */
-		presenceData.smallImageKey = "brush";
+		presenceData.smallImageKey = Assets.Brush;
 		presenceData.smallImageText = "Ricerca per artista";
 		presenceData.details = "Sfogliando i contenuti dell'artista:";
 		presenceData.state = searchParams.get("artist");
@@ -60,19 +84,19 @@ presence.on("UpdateData", async () => {
 		const genre = searchParams.get("genre").split(" ");
 		for (let i = 0; i < genre.length; i++)
 			genre[i] = genre[i][0].toUpperCase() + genre[i].substr(1);
-		presenceData.smallImageKey = "tags";
+		presenceData.smallImageKey = Assets.Tags;
 		presenceData.smallImageText = "Ricerca per genere";
 		presenceData.details = "Sfogliando i contenuti del genere:";
 		presenceData.state = genre.join(" ");
 	} else if (document.location.href.includes("year=")) {
 		/* Ricerca per anno - Search by year of release */
-		presenceData.smallImageKey = "calendar2";
+		presenceData.smallImageKey = Assets.Calendar2;
 		presenceData.smallImageText = "Ricerca per anno";
 		presenceData.details = "Sfogliando i contenuti dell'anno:";
 		presenceData.state = searchParams.get("year");
 	} else if (document.location.href.includes("status=")) {
 		/* Ricerca per stato - Search by status */
-		presenceData.smallImageKey = "slash";
+		presenceData.smallImageKey = Assets.Slash;
 		presenceData.smallImageText = "Ricerca per stato";
 		presenceData.details = "Sfogliando i contenuti:";
 
@@ -88,13 +112,13 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.href.includes("type=")) {
 		/* Ricerca per formato - Search by format */
 		const rawtype = searchParams.get("type");
-		presenceData.smallImageKey = "file3";
+		presenceData.smallImageKey = Assets.File3;
 		presenceData.smallImageText = "Ricerca per formato";
 		presenceData.details = "Sfogliando i contenuti in formato:";
 		presenceData.state = rawtype[0].toUpperCase() + rawtype.substring(1);
 	} else if (document.location.href.includes("sort=")) {
 		/* Ricerca per ordinamento - Order by */
-		presenceData.smallImageKey = "sort";
+		presenceData.smallImageKey = Assets.Sort;
 		presenceData.smallImageText = "Ricerca per ordinamento";
 		presenceData.details = "Sfogliando i contenuti:";
 
@@ -112,7 +136,7 @@ presence.on("UpdateData", async () => {
 		if (sort in sorts) presenceData.state = sorts[sort];
 	} else if (document.location.href.includes("archive")) {
 		/* Pagina principale - Main page */
-		presenceData.smallImageKey = "archive";
+		presenceData.smallImageKey = Assets.Archive;
 		presenceData.smallImageText = "Archivio";
 		presenceData.details = "Nell'archivio";
 		presenceData.state = "Sfogliando...";
@@ -133,7 +157,7 @@ presence.on("UpdateData", async () => {
 			if (typeof chapter0n === "undefined")
 				(chapterString = "Oneshot"), (chapter = "");
 
-			presenceData.smallImageKey = "book3";
+			presenceData.smallImageKey = Assets.Book3;
 			presenceData.smallImageText = mangaName;
 			presenceData.details = `Leggendo: ${mangaName}`;
 			presenceData.state = `${chapterString + chapter} | Pagina ${
@@ -152,7 +176,7 @@ presence.on("UpdateData", async () => {
 		} else {
 			/* Nella pagina principale del manga - In the manga's main page */
 			const pageName = document.title.replace(" Scan ITA - MangaWorld", "");
-			presenceData.smallImageKey = "eye";
+			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = pageName;
 			presenceData.details = "Visualizzando la pagina di:";
 			presenceData.state = pageName;
@@ -166,7 +190,7 @@ presence.on("UpdateData", async () => {
 	} else {
 		/* In qualunque altra pagina - In any other page */
 		const pageName = document.title.replace("MangaWorld - ", "");
-		presenceData.smallImageKey = "eye";
+		presenceData.smallImageKey = Assets.Viewing;
 		presenceData.smallImageText = `"${pageName}"`;
 		presenceData.details = "Visualizzando la pagina:";
 		presenceData.state = `"${pageName}"`;

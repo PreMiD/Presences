@@ -37,7 +37,6 @@ presence.on("UpdateData", async () => {
 			state: category.textContent.trim() || "Belirsiz",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
-		//console.log('asd')
 	} else if (
 		page.includes("?searchTerm") ||
 		(searchingFor && searchingFor.textContent !== "")
@@ -50,7 +49,7 @@ presence.on("UpdateData", async () => {
 				searchingFor && searchingFor.textContent
 					? searchingFor.textContent
 					: "Belirsiz",
-			smallImageKey: "letgo-ara",
+			smallImageKey: Assets.Search,
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (page.includes("/i/")) {

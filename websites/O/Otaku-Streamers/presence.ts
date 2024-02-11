@@ -13,7 +13,8 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp,
 	};
 	if (window.location.hostname === "otaku-streamers.com") {
-		presenceData.largeImageKey = "betalogo";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/O/Otaku-Streamers/assets/0.png";
 		if (path === "/" || path === "/index.php") presenceData.details = "Home";
 		else if (path.includes("/info/")) {
 			title = document.querySelector(

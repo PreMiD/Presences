@@ -1,69 +1,63 @@
 import { Resolver } from "../util";
 
 function isActive(): boolean {
-	return document.location.pathname.includes("/shorts/");
+	return (
+		document.location.pathname.includes("/shorts/") &&
+		!!getTitle() &&
+		!!getUploader() &&
+		!!getChannelURL() &&
+		!!getVideoID()
+	);
 }
 
 function getTitle(): string {
-	return document
-		.querySelector('[class="ytp-title-link yt-uix-sessionlink"]')
+	return getShortsElement()
+		?.closest(".ytd-reel-player-overlay-renderer")
+		?.querySelector(".title")
 		?.textContent.trim();
 }
 
+function getShortsElement(): HTMLElement {
+	return (
+		document
+			.querySelector("video")
+			?.closest("ytd-reel-video-renderer")
+			?.querySelector(
+				"yt-formatted-string#text.style-scope.ytd-channel-name"
+			) ??
+		document
+			.querySelectorAll("video")[1]
+			?.closest("ytd-reel-video-renderer")
+			?.querySelector("yt-formatted-string#text.style-scope.ytd-channel-name")
+	);
+}
+
 function getUploader(): string {
-	return cached?.uploader;
+	const closest = getShortsElement();
+	if (!closest?.textContent) return "";
+	return `${closest
+		?.querySelector("a")
+		?.getAttribute("href")
+		?.replace("/", "")
+		?.replace("@", "")} (${closest?.textContent})`;
 }
 
-function delay(ms: number): Promise<void> {
-	return new Promise(resolve => setTimeout(resolve, ms));
+function getChannelURL(): string {
+	return `https://${document.location.hostname}/${
+		getShortsElement()?.textContent
+	}`;
 }
 
-interface Cache {
-	id: string;
-	uploader: string;
-	channelURL: string;
-}
-
-let cached: Cache;
-export async function cacheShortData(
-	hostname: string,
-	shortsPath: string
-): Promise<Cache> {
-	if (!cached?.id || cached.id !== shortsPath) {
-		await delay(300);
-		const closest =
-			document
-				.querySelector("video")
-				?.closest("ytd-reel-video-renderer")
-				?.querySelector(
-					"yt-formatted-string#text.style-scope.ytd-channel-name"
-				) ??
-			document
-				.querySelectorAll("video")[1]
-				?.closest("ytd-reel-video-renderer")
-				?.querySelector(
-					"yt-formatted-string#text.style-scope.ytd-channel-name"
-				);
-		cached = {
-			id: shortsPath,
-			uploader: `${closest
-				?.querySelector("a")
-				?.getAttribute("href")
-				?.replace("/", "")
-				?.replace("@", "")} (${closest?.textContent})`,
-			channelURL: `https://${hostname}/${closest?.textContent}`,
-		};
-		return cached;
-	} else return cached;
-}
-export function getCache(): Cache {
-	return cached;
+export function getVideoID(): string {
+	return document.location.pathname.split("/shorts/")[1];
 }
 
 const resolver: Resolver = {
 	isActive,
 	getTitle,
 	getUploader,
+	getChannelURL,
+	getVideoID,
 };
 
 export default resolver;

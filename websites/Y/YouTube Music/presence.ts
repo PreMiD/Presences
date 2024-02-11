@@ -27,9 +27,11 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("privacy"),
 		]),
 		{ mediaSession } = navigator,
-		watchID = document
-			.querySelector<HTMLAnchorElement>("a.ytp-title-link.yt-uix-sessionlink")
-			.href.match(/v=([^&#]{5,})/)?.[1],
+		watchID =
+			href.match(/v=([^&#]{5,})/)?.[1] ??
+			document
+				.querySelector<HTMLAnchorElement>("a.ytp-title-link.yt-uix-sessionlink")
+				?.href.match(/v=([^&#]{5,})/)?.[1],
 		repeatMode = document
 			.querySelector('ytmusic-player-bar[slot="player-bar"]')
 			.getAttribute("repeat-Mode_"),
@@ -58,6 +60,7 @@ presence.on("UpdateData", async () => {
 
 	if (["playing", "paused"].includes(mediaSession.playbackState)) {
 		if (privacyMode) {
+			presenceData.type = ActivityType.Listening;
 			return presence.setActivity({
 				...(mediaSession.playbackState === "playing" && {
 					largeImageKey:
@@ -110,7 +113,7 @@ presence.on("UpdateData", async () => {
 		presenceData = {
 			largeImageKey: showCover
 				? mediaSession.metadata.artwork.at(-1).src
-				: "ytm_lg",
+				: "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/1.png",
 			details: mediaSession.metadata.title,
 			state: [mediaSession.metadata.artist, mediaSession.metadata.album]
 				.filter(Boolean)
@@ -120,12 +123,12 @@ presence.on("UpdateData", async () => {
 			}),
 			smallImageKey:
 				mediaSession.playbackState === "paused"
-					? "pause"
+					? Assets.Pause
 					: repeatMode === "ONE"
-					? "repeat-one"
+					? Assets.RepeatOne
 					: repeatMode === "ALL"
-					? "repeat"
-					: "play",
+					? Assets.Repeat
+					: Assets.Play,
 			smallImageText:
 				mediaSession.playbackState === "paused"
 					? "Paused"
@@ -142,6 +145,7 @@ presence.on("UpdateData", async () => {
 		};
 	} else if (showBrowsing) {
 		if (privacyMode) {
+			presenceData.type = ActivityType.Listening;
 			return presence.setActivity({
 				largeImageKey:
 					"https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/logo.png",
@@ -190,7 +194,8 @@ presence.on("UpdateData", async () => {
 
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>("#thumbnail img").src;
-			presenceData.smallImageKey = "ytm_lg";
+			presenceData.smallImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/0.png";
 		}
 
 		if (pathname.match(/^\/search/)) {
@@ -256,6 +261,7 @@ presence.on("UpdateData", async () => {
 	if (!showBrowsing) return presence.clearActivity();
 
 	//* For some bizarre reason the timestamps are NaN eventho they are never actually set in testing, this spread is a workaround
+	presenceData.type = ActivityType.Listening;
 	presence.setActivity(presenceData);
 });
 

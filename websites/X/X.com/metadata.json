@@ -19,7 +19,7 @@
 		"twitter.com",
 		"x.com"
 	],
-	"version": "1.0.1",
+	"version": "1.1.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/X/X.com/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/X/X.com/assets/thumbnail.png",
 	"color": "#000000",
@@ -45,6 +45,12 @@
 			"title": "Show timestamps",
 			"icon": "fad fa-stopwatch",
 			"value": true
+		},
+		{
+			"id": "twitter",
+			"title": "Enable twitter",
+			"icon": "fad fa-user-secret",
+			"value": false
 		}
 	]
 }

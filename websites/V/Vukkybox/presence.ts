@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/V/Vukkybox/assets/logo.png",
-		smallImageKey: "vukky",
+		smallImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/Vukkybox/assets/1.png",
 		smallImageText: "Playing Vukkybox",
 		startTimestamp: browsingTimestamp,
 	};

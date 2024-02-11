@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/H/Harmony/assets/logo.png",
-		smallImageKey: "live",
+		smallImageKey: Assets.Live,
 	};
 
 	if (document.location.hash.startsWith("#/")) {

@@ -14,7 +14,8 @@ presence.on("UpdateData", async () => {
 
 	if (valor === 1) {
 		presenceData.details = "Creating a room";
-		presenceData.smallImageKey = "home";
+		presenceData.smallImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/B/Broken%20Picturephone/assets/0.png";
 		presenceData.smallImageText = "On homepage";
 	}
 	if (valor >= 6) {

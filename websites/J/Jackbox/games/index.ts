@@ -47,6 +47,11 @@ import * as htmf from "./Party Pack 9/htmf";
 import * as rangegame from "./Party Pack 9/range-game";
 import * as lineup from "./Party Pack 9/lineup";
 import * as antiquefreak from "./Party Pack 9/antique-freak";
+import * as awshirt2 from "./Party Pack 10/awshirt2";
+import * as nopusopus from "./Party Pack 10/nopus-opus";
+import * as riskytext from "./Party Pack 10/risky-text";
+import * as timetrivia from "./Party Pack 10/time-trivia";
+import * as usthem from "./Party Pack 10/us-them";
 
 export default {
 	unknown,
@@ -98,4 +103,9 @@ export default {
 	"range-game": rangegame,
 	lineup,
 	"antique-freak": antiquefreak,
+	awshirt2,
+	"nopus-opus": nopusopus,
+	"risky-text": riskytext,
+	"time-trivia": timetrivia,
+	"us-them": usthem,
 } as Record<string, Game>;

@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 				"https://cdn.rcd.gg/PreMiD/websites/P/Playerbros/assets/logo.png",
 			details: postTitle.textContent || "Belirsiz",
 			state: `Yazar: ${author.textContent} (${date.textContent})`,
-			smallImageKey: "reading",
+			smallImageKey: Assets.Reading,
 			smallImageText: "Bir gönderi okuyor...",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
 								""
 							)
 					: null || "Belirsiz",
-			smallImageKey: "search",
+			smallImageKey: Assets.Search,
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (pages[page] || pages[page.slice(0, -1)]) {

@@ -92,6 +92,33 @@ let strings: ReturnType<typeof getStrings> extends PromiseLike<infer U>
 		: unknown,
 	oldLang: string;
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/logo.png",
+	LogoRainbow = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/0.png",
+	AppleStore = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/1.png",
+	AppleSupport = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/2.png",
+	AppStore = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/3.png",
+	ICloud = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/4.png",
+	Keynote = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/5.png",
+	AppleCard = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/6.png",
+	AppleDeveloper = "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/7.png",
+}
+
+/* eslint-disable camelcase */
+const assets: Record<string, string> = {
+	icloud_calendar: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/8.png",
+	icloud_photos: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/9.png",
+	icloud_mail: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/10.png",
+	icloud_contacts: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/11.png",
+	icloud_notes: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/12.png",
+	icloud_find: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/13.png",
+	icloud_pages: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/14.png",
+	icloud_keynote: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/5.png",
+	icloud_reminders: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/15.png",
+	icloud_numbers: "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/16.png",
+};
+/* eslint-enable camelcase */
+
 presence.on("UpdateData", async () => {
 	const urlpath = window.location.pathname.toLowerCase().split("/"),
 		[
@@ -168,7 +195,7 @@ presence.on("UpdateData", async () => {
 			"maps",
 		],
 		presenceData: PresenceData = {
-			largeImageKey: ["logo", "logo-rainbow"][logo] || "logo",
+			largeImageKey: [Assets.Logo, Assets.LogoRainbow][logo] || Assets.Logo,
 		};
 
 	if (!oldLang || oldLang !== newLang) {
@@ -363,7 +390,7 @@ presence.on("UpdateData", async () => {
 	) {
 		const num = urlpath[1] === "shop" ? 2 : 3;
 
-		presenceData.largeImageKey = "apple-store";
+		presenceData.largeImageKey = Assets.AppleStore;
 
 		if (!urlpath[num]) {
 			presenceData.details = "Shop";
@@ -515,7 +542,7 @@ presence.on("UpdateData", async () => {
 					"displays",
 				];
 
-				presenceData.largeImageKey = "apple-support";
+				presenceData.largeImageKey = Assets.AppleSupport;
 
 				if (sProducts.find(e => urlpath.includes(e))) {
 					presenceData.details = strings.support;
@@ -555,7 +582,7 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "apps.apple.com": {
-				presenceData.largeImageKey = "app-store";
+				presenceData.largeImageKey = Assets.AppStore;
 
 				if (urlpath.includes("app")) {
 					if (document.querySelector("p.we-connecting__instructions")) {
@@ -600,14 +627,14 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "www.icloud.com": {
-				presenceData.largeImageKey = "icloud";
+				presenceData.largeImageKey = Assets.ICloud;
 				presenceData.details = "iCloud";
 
 				if (!urlpath[1]) presenceData.state = "Launchpad";
 				else {
 					if (urlpath[1] !== "iclouddrive") {
-						presenceData.largeImageKey = `icloud_${urlpath[1]}`;
-						presenceData.smallImageKey = "icloud";
+						presenceData.largeImageKey = assets[`icloud_${urlpath[1]}`];
+						presenceData.smallImageKey = Assets.ICloud;
 					}
 
 					switch (urlpath[1]) {
@@ -698,7 +725,7 @@ presence.on("UpdateData", async () => {
 						default:
 							if (urlpath[1] === "keynote-live" && urlpath[2]) {
 								presenceData.details = "iCloud Keynote Live";
-								presenceData.largeImageKey = "keynote";
+								presenceData.largeImageKey = Assets.Keynote;
 
 								if (document.querySelector("iframe")?.style.display === "none")
 									presenceData.state = strings.iCloudKeynoteWait;
@@ -711,7 +738,7 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "card.apple.com": {
-				presenceData.largeImageKey = "apple-card";
+				presenceData.largeImageKey = Assets.AppleCard;
 				presenceData.details = "Apple Card";
 
 				if (!urlpath[1]) presenceData.state = "Home";
@@ -740,7 +767,7 @@ presence.on("UpdateData", async () => {
 						document.querySelector("body")?.id ||
 						document.querySelector("body").classList[0]?.replace("nav-", "");
 
-				presenceData.largeImageKey = "apple-developer";
+				presenceData.largeImageKey = Assets.AppleDeveloper;
 				presenceData.details = "Apple Developer";
 				presenceData.state = "Home";
 

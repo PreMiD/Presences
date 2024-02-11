@@ -232,7 +232,10 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (presenceData.details.includes("their") && presenceData.buttons)
+	if (
+		(presenceData.details as string).includes("their") &&
+		presenceData.buttons
+	)
 		delete presenceData.buttons;
 	if (!buttons && !joinButton && presenceData.buttons)
 		delete presenceData.buttons;

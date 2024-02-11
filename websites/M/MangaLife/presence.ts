@@ -1,6 +1,19 @@
 const presence = new Presence({ clientId: "906057236927893576" }),
 	browsingStamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/logo.png",
+	LogoPng = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/0.png",
+	Subscriptions = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/1.png",
+	Discussions = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/2.png",
+	Contact = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/3.png",
+	Privacy = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/4.png",
+	Hot = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/5.png",
+	Bookmark = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/6.png",
+	Home = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/7.png",
+	Settings = "https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/8.png",
+}
+
 presence.on("UpdateData", async () => {
 	const [privacy, cover, timestamps, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
@@ -15,51 +28,50 @@ presence.on("UpdateData", async () => {
 				state: document.title.split(" | MangaLife")[0],
 			},
 			"/read-online/": {
-				smallImageKey: "reading",
+				smallImageKey: Assets.Reading,
 			},
 			"/search": {
-				smallImageKey: "search",
+				smallImageKey: Assets.Search,
 				details: "Searching...",
 			},
 			"/discussion": {
-				smallImageKey: !privacy ? "discussions" : "",
+				smallImageKey: !privacy ? Assets.Discussions : "",
 				state: "Discussions",
 			},
 			"hot.php": {
-				smallImageKey: !privacy ? "hot" : "",
+				smallImageKey: !privacy ? Assets.Hot : "",
 				state: "Hot Manga Updates",
 				buttons: [{ label: "Hot Manga Updates", url: `${document.location}` }],
 			},
 			"subscription.php": {
-				smallImageKey: !privacy ? "subscriptions" : "",
+				smallImageKey: !privacy ? Assets.Subscriptions : "",
 				state: "Subscriptions",
 			},
 			"feed.php": {
-				smallImageKey: !privacy ? "subscriptions" : "",
+				smallImageKey: !privacy ? Assets.Subscriptions : "",
 				state: "Subscriptions Feed",
 			},
 			"bookmark.php": {
-				smallImageKey: !privacy ? "bookmark" : "",
+				smallImageKey: !privacy ? Assets.Bookmark : "",
 				state: "Bookmarks",
 			},
 			"settings.php": {
-				smallImageKey: "settings",
+				smallImageKey: Assets.Settings,
 				details: "Editing...",
 				state: "User Settings",
 			},
 			"/contact": {
-				smallImageKey: !privacy ? "contact" : "",
+				smallImageKey: !privacy ? Assets.Contact : "",
 				state: "Contact Page",
 			},
 			"/privacy": {
-				smallImageKey: !privacy ? "privacy" : "",
+				smallImageKey: !privacy ? Assets.Privacy : "",
 				state: "Privacy Policy Page",
 			},
 		};
 	let presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/logo.png",
-		smallImageKey: !privacy ? "home" : "",
+		largeImageKey: Assets.Logo,
+		smallImageKey: !privacy ? Assets.Home : "",
 		details: "Browsing...",
 		state: "Home Page",
 		startTimestamp: browsingStamp,
@@ -78,12 +90,15 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey =
 				!privacy && cover
 					? `https://cover.nep.li/cover/${path.split("/manga/")[1]}.jpg`
-					: "logo";
-			presenceData.smallImageKey = !privacy && cover ? "logo-png" : "search";
+					: Assets.Logo;
+			presenceData.smallImageKey =
+				!privacy && cover ? Assets.LogoPng : Assets.Search;
 			presenceData.buttons = [
 				{
 					label:
-						presenceData.state.length >= 30 ? "View Manga" : presenceData.state,
+						(presenceData.state as string).length >= 30
+							? "View Manga"
+							: presenceData.state,
 					url: `${document.location}`,
 				},
 			];
@@ -94,7 +109,7 @@ presence.on("UpdateData", async () => {
 					? `https://cover.nep.li/cover/${
 							path.split("/read-online/")[1].split("-chapter-")[0]
 					  }.jpg`
-					: "logo";
+					: Assets.Logo;
 			presenceData.details = !privacy
 				? document.querySelector(".col-12 > a").textContent.trim()
 				: "Reading a Manga...";

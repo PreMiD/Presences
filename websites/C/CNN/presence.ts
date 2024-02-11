@@ -3,6 +3,11 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/CNN/assets/0.png",
+	LogoTransp = "https://cdn.rcd.gg/PreMiD/websites/C/CNN/assets/1.png",
+}
+
 presence.on("UpdateData", async function () {
 	const setting = {
 			timeElapsed: await presence.getSetting<boolean>("timeElapsed"),
@@ -12,7 +17,8 @@ presence.on("UpdateData", async function () {
 		},
 		urlpath = window.location.pathname.split("/"),
 		presenceData: PresenceData = {
-			largeImageKey: ["logo", "logo-transp"][setting.logo] || "logo",
+			largeImageKey:
+				[Assets.Logo, Assets.LogoTransp][setting.logo] || Assets.Logo,
 		};
 
 	if (setting.timeElapsed && !setting.privacy)

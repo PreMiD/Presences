@@ -19,6 +19,18 @@ const presence = new Presence({
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
+const enum Assets {
+	EternalradioLogo = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/0.png",
+	EternalcraftSmp = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/1.png",
+	EternalnetworktmLogo = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/2.png",
+	EternalnetworktmStatus = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/3.png",
+	EternalnetworktmLogo2 = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/4.png",
+	EternalnetworktmLogo3 = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/5.png",
+	EternallogisticLogo = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/6.png",
+	EternalshortenerLogo = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/7.png",
+	EternalnetworktmDev = "https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/8.png",
+}
+
 presence.on("UpdateData", async () => {
 	const newLang: string = await presence
 			.getSetting<string>("lang")
@@ -38,18 +50,18 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-		details: (await strings).viewPage,
+		details: strings.viewPage,
 		largeImageKey:
 			[
-				"eternalnetworktm_logo",
-				"eternalnetworktm_logo_2",
-				"eternalnetworktm_logo_3",
-			][bigicon] || "eternalnetworktm_logo",
+				Assets.EternalnetworktmLogo,
+				Assets.EternalnetworktmLogo2,
+				Assets.EternalnetworktmLogo3,
+			][bigicon] || Assets.EternalnetworktmLogo,
 		smallImageText: hostname + pathname,
 		startTimestamp: browsingTimestamp,
 		buttons: [
 			{
-				label: (await strings).buttonViewPage,
+				label: strings.buttonViewPage,
 				url: window.location.href,
 			},
 		],
@@ -60,7 +72,7 @@ presence.on("UpdateData", async () => {
 	switch (hostname) {
 		case etrnl:
 		case `www.${etrnl}`: {
-			presenceData.smallImageKey = "eternalnetworktm_logo";
+			presenceData.smallImageKey = Assets.EternalnetworktmLogo;
 
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
@@ -74,7 +86,7 @@ presence.on("UpdateData", async () => {
 		}
 		case `forum.${etrnl}`:
 		case `www.forum.${etrnl}`: {
-			presenceData.smallImageKey = "eternalnetworktm_logo_v2";
+			presenceData.smallImageKey = Assets.EternalnetworktmLogo2;
 
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
@@ -97,11 +109,11 @@ presence.on("UpdateData", async () => {
 				presenceData.state = "Viewing Forum Videos";
 
 			if (search.includes("?mode=view&id=")) {
-				presenceData.details = `${(await strings).watchingVid}:`;
+				presenceData.details = `${strings.watchingVid}:`;
 				presenceData.state = document.querySelector("h3.first > a").textContent;
 				presenceData.buttons = [
 					{
-						label: (await strings).buttonViewPage,
+						label: strings.buttonViewPage,
 						url: window.location.href,
 					},
 					{
@@ -114,7 +126,7 @@ presence.on("UpdateData", async () => {
 			}
 
 			if (pathname.includes("/viewtopic.php")) {
-				presenceData.details = (await strings).readingPost;
+				presenceData.details = strings.readingPost;
 				presenceData.state = ttl;
 			}
 
@@ -133,8 +145,8 @@ presence.on("UpdateData", async () => {
 		}
 		case `radio.${etrnl}`:
 		case `www.radio.${etrnl}`: {
-			presenceData.smallImageKey = "eternalradio_logo";
-			presenceData.details = (await strings).listeningMusic;
+			presenceData.smallImageKey = Assets.EternalradioLogo;
+			presenceData.details = strings.listeningMusic;
 
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
@@ -154,7 +166,7 @@ presence.on("UpdateData", async () => {
 		}
 		case `status.${etrnl}`:
 		case `www.status.${etrnl}`: {
-			presenceData.smallImageKey = "eternalnetworktm_status";
+			presenceData.smallImageKey = Assets.EternalnetworktmStatus;
 
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
@@ -172,8 +184,7 @@ presence.on("UpdateData", async () => {
 		}
 		case `et-log.${etrnl}`:
 		case `www.et-log.${etrnl}`: {
-			presenceData.smallImageKey = "eternallogistic_logo";
-
+			presenceData.smallImageKey = Assets.EternallogisticLogo;
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 
 			if (pathname.includes("/about.php")) {
@@ -195,7 +206,7 @@ presence.on("UpdateData", async () => {
 		}
 		case `dev.${etrnl}`:
 		case `www.dev.${etrnl}`: {
-			presenceData.smallImageKey = "eternalnetworktm_dev";
+			presenceData.smallImageKey = Assets.EternalnetworktmDev;
 
 			if (pathname.includes("/etlog")) {
 				presenceData.state = "Working on ET-LOG system";
@@ -213,7 +224,7 @@ presence.on("UpdateData", async () => {
 		}
 		case `shortener.${etrnltm}`:
 		case `www.shortener.${etrnltm}`: {
-			presenceData.smallImageKey = "eternalshortener_logo";
+			presenceData.smallImageKey = Assets.EternalshortenerLogo;
 
 			if (pathname.startsWith("/")) presenceData.state = ttl;
 

@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 				"a.station.selected_station > div.station_details > div.station_name"
 			).textContent
 		}`;
-		presenceData.smallImageKey = "live";
+		presenceData.smallImageKey = Assets.Live;
 		presenceData.startTimestamp = timeElapsed;
 	}
 	presence.setActivity(presenceData);

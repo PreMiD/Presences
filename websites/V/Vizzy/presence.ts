@@ -12,28 +12,37 @@ function getElementByXpath(path: string) {
 		null
 	).singleNodeValue;
 }
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/logo.png",
+	Home = "https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/0.png",
+	Profile = "https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/1.png",
+	Editor = "https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/2.png",
+	Export = "https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/3.png",
+	Discover = "https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/4.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, search, href } = window.location,
+		{ pathname, search, href } = document.location,
 		tabParams = new URLSearchParams(search).get("tab");
 	switch (pathname) {
 		case "/": {
 			presenceData.details = "Viewing the homepage";
-			presenceData.smallImageKey = "home";
+			presenceData.smallImageKey = Assets.Home;
 			break;
 		}
 		case "/creations":
 		case "/community": {
 			presenceData.details = "Viewing community creations";
-			presenceData.smallImageKey = "discover";
+			presenceData.smallImageKey = Assets.Discover;
 			break;
 		}
 		case "/project": {
-			presenceData.smallImageKey = "discover";
+			presenceData.smallImageKey = Assets.Discover;
 			presenceData.details = "Viewing a project";
 			presenceData.state = getElementByXpath(
 				"/html/body/div[1]/div/main/div/div/div[2]/div/div[2]/div[1]/h4"
@@ -47,7 +56,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/user": {
-			presenceData.smallImageKey = "discover";
+			presenceData.smallImageKey = Assets.Discover;
 			presenceData.details = "Viewing a user's page";
 			presenceData.state = `@${
 				getElementByXpath("/html/body/div[1]/div/h5").textContent
@@ -62,7 +71,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "/profile": {
 			presenceData.details = "Viewing their profile";
-			presenceData.smallImageKey = "profile";
+			presenceData.smallImageKey = Assets.Profile;
 			if (tabParams) presenceData.state = `Tab: ${tabParams}`;
 
 			break;
@@ -80,11 +89,11 @@ presence.on("UpdateData", async () => {
 					"/html/body/div[1]/div[2]/header/div[4]/div[1]/span/span"
 				).textContent
 			}`;
-			presenceData.smallImageKey = "editor";
+			presenceData.smallImageKey = Assets.Editor;
 			break;
 		}
 		case "/export": {
-			presenceData.smallImageKey = "export";
+			presenceData.smallImageKey = Assets.Export;
 			presenceData.details = "Exporting a video";
 			break;
 		}
@@ -92,16 +101,16 @@ presence.on("UpdateData", async () => {
 			switch (tabParams) {
 				case "faq": {
 					presenceData.details = "Reading frequently asked questions";
-					presenceData.smallImageKey = "faq";
+					presenceData.smallImageKey = Assets.Question;
 					break;
 				}
 				case "creator": {
-					presenceData.smallImageKey = "discover";
+					presenceData.smallImageKey = Assets.Discover;
 					presenceData.details = "Reading about creator mode";
 					break;
 				}
 				case "lyrics": {
-					presenceData.smallImageKey = "faq";
+					presenceData.smallImageKey = Assets.Question;
 					presenceData.details = "Viewing an unsupported page";
 					break;
 				}
@@ -111,17 +120,17 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/privacy": {
-			presenceData.smallImageKey = "discover";
+			presenceData.smallImageKey = Assets.Discover;
 			presenceData.details = "Reading the privacy policy";
 			break;
 		}
 		case "/terms-of-service": {
-			presenceData.smallImageKey = "discover";
+			presenceData.smallImageKey = Assets.Discover;
 			presenceData.details = "Reading the terms of use";
 			break;
 		}
 		default: {
-			presenceData.smallImageKey = "faq";
+			presenceData.smallImageKey = Assets.Question;
 			presenceData.details = "Viewing an unsupported page";
 		}
 	}

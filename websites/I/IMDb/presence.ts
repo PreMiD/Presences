@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 		).textContent;
 		presenceData.largeImageKey =
 			"https://cdn.rcd.gg/PreMiD/websites/I/IMDb/assets/logo.png";
-		presenceData.smallImageKey = video.paused ? "paused" : "playing";
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;

@@ -7,7 +7,7 @@ presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/M/motorsport.com/assets/logo.png",
-		smallImageKey: "reading",
+		smallImageKey: Assets.Reading,
 		smallImageText: "Reading",
 		startTimestamp: browsingTimestamp,
 	};
@@ -17,13 +17,14 @@ presence.on("UpdateData", () => {
 			presenceData.details = "Reading the news";
 		else if (document.location.pathname.includes("/photos/")) {
 			presenceData.details = "Looking at photos";
-			presenceData.smallImageKey = "photo";
+			presenceData.smallImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/M/motorsport.com/assets/0.png";
 			presenceData.smallImageText = "Photos";
 		} else if (document.location.pathname.includes("/videos"))
 			presenceData.details = "Searching for videos";
 		else if (document.location.pathname.includes("/video/")) {
 			presenceData.details = "Watching a video";
-			presenceData.smallImageKey = "play-icon";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Watching";
 		} else if (document.location.pathname.includes("/schedule"))
 			presenceData.details = "Looking at schedules";

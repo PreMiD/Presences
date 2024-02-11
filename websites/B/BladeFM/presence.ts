@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
 
 	if (settings.timestamp) presenceData.startTimestamp = timestamp;
 	if (data.live.is_live && data.live.streamer_name !== "Admin")
-		presenceData.smallImageKey = "live";
+		presenceData.smallImageKey = Assets.Live;
 	else delete presenceData.smallImageText;
 
 	presence.setActivity(presenceData);

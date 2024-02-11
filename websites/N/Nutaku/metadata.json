@@ -14,7 +14,7 @@
 		"www.nutaku.net"
 	],
 	"regExp": "([a-z]+[.])nutaku.net[/]",
-	"version": "1.0.21",
+	"version": "1.0.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Nutaku/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Nutaku/assets/thumbnail.jpg",
 	"color": "#E53155",

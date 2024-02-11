@@ -3,10 +3,13 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/I/IGDB/assets/logo.png",
+}
+
 presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/I/IGDB/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		path = document.location.pathname;
@@ -26,7 +29,7 @@ presence.on("UpdateData", () => {
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 				"#content-page > div.loaded > div > div.gamepage-header-info > div.gamepage-cover > img"
 			).src;
-			presenceData.smallImageKey = "logo";
+			presenceData.smallImageKey = Assets.Logo;
 			presenceData.smallImageText = "IGDB";
 		}
 	} else if (path.startsWith("/genres")) {
@@ -44,7 +47,7 @@ presence.on("UpdateData", () => {
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 				"#content-page > div > div > div.row > div.col-sm-4 > img"
 			).src;
-			presenceData.smallImageKey = "logo";
+			presenceData.smallImageKey = Assets.Logo;
 			presenceData.smallImageText = "IGDB";
 		}
 	} else if (path.startsWith("/top-100")) {
@@ -95,7 +98,7 @@ presence.on("UpdateData", () => {
 			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
 				"#content-page > div > div > div:nth-child(3) > div.row.mar-md-bottom > div.col-sm-4 > img"
 			).src;
-			presenceData.smallImageKey = "logo";
+			presenceData.smallImageKey = Assets.Logo;
 			presenceData.smallImageText = "IGDB";
 		}
 	}

@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector<HTMLMetaElement>('[property="og:image"]')
 						?.content ??
 					"https://cdn.rcd.gg/PreMiD/websites/0-9/7plus/assets/logo.png";
-				presenceData.smallImageKey = "live";
+				presenceData.smallImageKey = Assets.Live;
 				presenceData.smallImageText = "Live";
 				presenceData.details = document
 					.querySelector('[class="swiper-slide swiper-slide-active"]')

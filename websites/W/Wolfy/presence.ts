@@ -2,6 +2,13 @@ const presence = new Presence({
 	clientId: "501842028569559061", // Official Wolfy Discord App Client ID, owned by Wolfy's Admin
 });
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/logo.png",
+	Skin = "https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/0.png",
+	Shop = "https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/1.png",
+	Leaderboard = "https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/2.png",
+}
+
 let path,
 	prev: string,
 	elapsed: number,
@@ -97,7 +104,7 @@ async function handleCheckingLeaderboard(
 	presenceData: PresenceData,
 	username?: string
 ) {
-	presenceData.smallImageKey = "leaderboard";
+	presenceData.smallImageKey = Assets.Leaderboard;
 	presenceData.smallImageText = "Consulte le classement";
 
 	if (!username) {
@@ -128,7 +135,7 @@ function resolveLanguage(lang: string): keyof typeof waitingString {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/logo.png",
+		largeImageKey: Assets.Logo,
 	};
 
 	path = document.location.pathname.split("/");
@@ -198,7 +205,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = "En jeu";
 
-		presenceData.smallImageKey = "live";
+		presenceData.smallImageKey = Assets.Live;
 		if (currTime?.includes(":")) {
 			[presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(
 				cp,
@@ -241,7 +248,7 @@ presence.on("UpdateData", async () => {
 
 		switch (path[0]) {
 			case "skin":
-				presenceData.smallImageKey = "skin";
+				presenceData.smallImageKey = Assets.Skin;
 				presenceData.smallImageText = "Choisis ton skin";
 				presenceData.state = "Consulte ses Skins";
 				break;
@@ -249,7 +256,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = "Change ses paramètres";
 				break;
 			case "shop":
-				presenceData.smallImageKey = "shop";
+				presenceData.smallImageKey = Assets.Shop;
 				presenceData.smallImageText = "Achète des skins";
 				presenceData.state = "Consulte la Boutique";
 				break;

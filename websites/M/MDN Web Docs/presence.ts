@@ -3,6 +3,15 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Homepage = "https://cdn.rcd.gg/PreMiD/websites/M/MDN%20Web%20Docs/assets/0.png",
+	Extension = "https://cdn.rcd.gg/PreMiD/websites/M/MDN%20Web%20Docs/assets/1.png",
+	Mathml = "https://cdn.rcd.gg/PreMiD/websites/M/MDN%20Web%20Docs/assets/2.png",
+	Css = "https://cdn.rcd.gg/PreMiD/websites/M/MDN%20Web%20Docs/assets/3.png",
+	Html = "https://cdn.rcd.gg/PreMiD/websites/M/MDN%20Web%20Docs/assets/4.png",
+	Javascript = "https://cdn.rcd.gg/PreMiD/websites/M/MDN%20Web%20Docs/assets/5.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
@@ -10,15 +19,15 @@ presence.on("UpdateData", async () => {
 		paths = document.location.pathname.split("/");
 
 	if (!paths[2]) {
-		presenceData.largeImageKey = "homepage";
+		presenceData.largeImageKey = Assets.Homepage;
 		presenceData.details = "Looking at the main page...";
 	} else if (!paths[3]) {
-		presenceData.largeImageKey = "homepage";
+		presenceData.largeImageKey = Assets.Homepage;
 		presenceData.details = "Looking at Web Technologies";
 	} else {
 		switch (paths[4]) {
 			case "JavaScript": {
-				presenceData.largeImageKey = "javascript";
+				presenceData.largeImageKey = Assets.Javascript;
 
 				if (paths[5]) {
 					paths.splice(0, 5);
@@ -32,7 +41,7 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "HTML": {
-				presenceData.largeImageKey = "html";
+				presenceData.largeImageKey = Assets.Html;
 
 				if (paths[5]) {
 					paths.splice(0, 5);
@@ -46,7 +55,7 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "CSS": {
-				presenceData.largeImageKey = "css";
+				presenceData.largeImageKey = Assets.Css;
 
 				if (paths[5]) {
 					paths.splice(0, 5);
@@ -60,7 +69,7 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "MathML": {
-				presenceData.largeImageKey = "mathml";
+				presenceData.largeImageKey = Assets.Mathml;
 
 				if (paths[5]) {
 					paths.splice(0, 5);
@@ -74,7 +83,7 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "WebExtensions": {
-				presenceData.largeImageKey = "extension";
+				presenceData.largeImageKey = Assets.Extension;
 
 				if (paths[4]) {
 					paths.splice(0, 5);
@@ -88,7 +97,7 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			default: {
-				presenceData.largeImageKey = "homepage";
+				presenceData.largeImageKey = Assets.Homepage;
 
 				const tech = paths[4];
 

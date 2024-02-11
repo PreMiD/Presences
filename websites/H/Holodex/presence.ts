@@ -8,6 +8,21 @@ const presence = new Presence({
 
 let iFrameVideo: { isPaused: boolean; thumbnail: string };
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png",
+	Mdihome = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/0.png",
+	Mdiheart = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/1.png",
+	Mdiaccountboxmultiple = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/2.png",
+	Mdiaccountbox = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/3.png",
+	Mdianimationplay = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/4.png",
+	Multiview = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/5.png",
+	Mdimusic = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/6.png",
+	Mdiinfinity = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/7.png",
+	Mdisettings = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/8.png",
+	Mdiloginvariant = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/9.png",
+	Mdiplaylistplay = "https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/10.png",
+}
+
 presence.on(
 	"iFrameData",
 	(data: { video: { isPaused: boolean; thumbnail: string } }) => {
@@ -176,7 +191,7 @@ const getInfo = {
 		details: `Unsupported Page: ${window.location.pathname}`,
 		state: "",
 		smallimage: {
-			image: "largeimage",
+			image: Assets.Logo,
 			hover: "Holodex",
 		},
 		startTime: ~~(Date.now() / 1000),
@@ -274,57 +289,60 @@ const getInfo = {
 			switch (path[1]) {
 				case "home":
 					return {
-						image: "mdihome",
+						image: Assets.Mdihome,
 						hover: "Home Page",
 					};
 				case "favorites":
 					return {
-						image: "mdiheart",
+						image: Assets.Mdiheart,
 						hover: "Favorites",
 					};
 				case "channel":
 					return {
-						image: path.length < 3 ? "mdiaccountboxmultiple" : "mdiaccountbox",
+						image:
+							path.length < 3
+								? Assets.Mdiaccountboxmultiple
+								: Assets.Mdiaccountbox,
 						hover: path.length < 3 ? "Channels" : `${getInfo.channel().title}`,
 					};
 				case "library":
 					return {
-						image: "mdianimationplay",
+						image: Assets.Mdianimationplay,
 						hover: "Library",
 					};
 				case "playlists":
 					return {
-						image: "mdiplaylistplay",
+						image: Assets.Mdiplaylistplay,
 						hover: "Playlists",
 					};
 				case "multiview":
 					return {
-						image: "multiview",
+						image: Assets.Multiview,
 						hover: "MultiView",
 					};
 				case "music":
 					return {
-						image: "mdimusic",
+						image: Assets.Mdimusic,
 						hover: "Music",
 					};
 				case "infinite":
 					return {
-						image: "mdiinfinity",
+						image: Assets.Mdiinfinity,
 						hover: "Mugen Clips",
 					};
 				case "about":
 					return {
-						image: "mdihelpcircle",
+						image: Assets.Question,
 						hover: "About",
 					};
 				case "settings":
 					return {
-						image: "mdisettings",
+						image: Assets.Mdisettings,
 						hover: "Settings",
 					};
 				case "login":
 					return {
-						image: "mdiloginvariant",
+						image: Assets.Mdiloginvariant,
 						hover:
 							document.querySelector(".v-card.ma-auto.v-sheet .v-list") === null
 								? "Login Screen"
@@ -332,14 +350,14 @@ const getInfo = {
 					};
 				case "watch":
 					return {
-						image: iFrameVideo.isPaused ? "mdipause" : "mdiplay",
+						image: iFrameVideo.isPaused ? Assets.Pause : Assets.Play,
 						hover: iFrameVideo.isPaused
 							? (await strings).pause
 							: (await strings).play,
 					};
 				case "search":
 					return {
-						image: "mdimagnify",
+						image: Assets.Search,
 						hover:
 							getInfo.generic().getURLParameter("advanced") === "true"
 								? "Advanced Search"
@@ -348,7 +366,7 @@ const getInfo = {
 
 				default:
 					return {
-						image: "largeimage",
+						image: Assets.Logo,
 						hover: "Holodex",
 					};
 			}
@@ -359,9 +377,7 @@ presence.on("UpdateData", async () => {
 	dataUpdater.updateAll();
 
 	const presenceData: PresenceData = {
-			largeImageKey:
-				iFrameVideo.thumbnail ??
-				"https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png",
+			largeImageKey: iFrameVideo.thumbnail ?? Assets.Logo,
 			smallImageKey: data.smallimage.image,
 			smallImageText: data.smallimage.hover,
 			details: data.details,

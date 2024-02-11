@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				"#now-programs-list > h1"
 			).textContent;
-			presenceData.smallImageKey = "spiriteplay";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = strings.play;
 			presenceData.startTimestamp = isTimeVisible ? startTimeStamp : null;
 		} else {
@@ -64,13 +64,14 @@ presence.on("UpdateData", async () => {
 
 			presenceData.details = "Paused.";
 			presenceData.state = `${codeChannel} channel.`;
-			presenceData.smallImageKey = "spiritepause";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = strings.pause;
 		}
 	} else {
 		// Idling state
 		presenceData.details = "Idling";
-		presenceData.smallImageKey = "spiriteidling";
+		presenceData.smallImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/R/Radiko/assets/0.png";
 		presenceData.smallImageText = strings.browsing;
 	}
 

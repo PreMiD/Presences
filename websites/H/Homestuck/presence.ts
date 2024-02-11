@@ -3,10 +3,19 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/logo.png",
+	Mspa = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/0.png",
+	Ryan = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/1.png",
+	Hellajeff = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/2.png",
+	Meat = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/3.png",
+	Candy = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/4.png",
+	Prologue = "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/5.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/H/Homestuck/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location,
@@ -22,7 +31,7 @@ presence.on("UpdateData", async () => {
 
 		case "jailbreak":
 			presenceData.details = "Reading Jailbreak";
-			presenceData.smallImageKey = "mspa";
+			presenceData.smallImageKey = Assets.Mspa;
 			if (!pathArr[2]) presenceData.state = "Page 1 of 134";
 			else presenceData.state = `Page ${pathArr[2]} of 134`;
 
@@ -37,7 +46,7 @@ presence.on("UpdateData", async () => {
 
 		case "bard-quest":
 			presenceData.details = "Reading Bard Quest";
-			presenceData.smallImageKey = "mspa";
+			presenceData.smallImageKey = Assets.Mspa;
 			if (!pathArr[2]) presenceData.state = "Page 1 of 47";
 			else presenceData.state = `Page ${pathArr[2]} of 47`;
 
@@ -52,7 +61,7 @@ presence.on("UpdateData", async () => {
 
 		case "problem-sleuth":
 			presenceData.details = "Reading Problem Sleuth";
-			presenceData.smallImageKey = "mspa";
+			presenceData.smallImageKey = Assets.Mspa;
 			if (!pathArr[2]) presenceData.state = "Page 1 of 1674";
 			else presenceData.state = `Page ${pathArr[2]} of 1674`;
 
@@ -67,7 +76,7 @@ presence.on("UpdateData", async () => {
 
 		case "ryanquest":
 			presenceData.details = "Reading Ryanquest";
-			presenceData.smallImageKey = "ryan";
+			presenceData.smallImageKey = Assets.Ryan;
 			if (!pathArr[2]) presenceData.state = "Page 1 of 15";
 			else presenceData.state = `Page ${pathArr[2]} of 15`;
 
@@ -82,7 +91,7 @@ presence.on("UpdateData", async () => {
 
 		case "sweet-bro-and-hella-jeff":
 			presenceData.details = "Reading Sweet Bro and Hella Jeff";
-			presenceData.smallImageKey = "hellajeff";
+			presenceData.smallImageKey = Assets.Hellajeff;
 			if (!pathArr[2]) presenceData.state = "Page 1 of 54";
 			else presenceData.state = `Page ${pathArr[2]} of 54`;
 
@@ -97,7 +106,7 @@ presence.on("UpdateData", async () => {
 
 		case "beta":
 			presenceData.details = "Reading Homestuck (BETA)";
-			presenceData.smallImageKey = "mspa";
+			presenceData.smallImageKey = Assets.Mspa;
 			if (!pathArr[2]) presenceData.state = "Page 1 of 8";
 			else presenceData.state = `Page ${pathArr[2]} of 8`;
 
@@ -112,7 +121,7 @@ presence.on("UpdateData", async () => {
 
 		case "story":
 			presenceData.details = "Reading Homestuck";
-			presenceData.smallImageKey = "mspa";
+			presenceData.smallImageKey = Assets.Mspa;
 			if (!pathArr[2]) presenceData.state = "Page 1 of 8130";
 			else presenceData.state = `Page ${pathArr[2]} of 8130`;
 
@@ -133,7 +142,7 @@ presence.on("UpdateData", async () => {
 		case "epilogues":
 			presenceData.details = "Reading The Homestuck Epilogues";
 			presenceData.state = "Viewing select screen";
-			presenceData.smallImageKey = "prologue";
+			presenceData.smallImageKey = Assets.Prologue;
 			presenceData.smallImageText = "Making the choice";
 			switch (pathArr[2]) {
 				case "prologue":
@@ -151,7 +160,7 @@ presence.on("UpdateData", async () => {
 					break;
 				case "meat":
 					presenceData.state = `Meat Chapter ${pathArr[3]} of 44`;
-					presenceData.smallImageKey = "meat";
+					presenceData.smallImageKey = Assets.Meat;
 					presenceData.smallImageText =
 						"Meat was definitely the right choice, you think, as grease drips down your chin.";
 					presenceData.buttons = [
@@ -163,7 +172,7 @@ presence.on("UpdateData", async () => {
 					break;
 				case "candy":
 					presenceData.state = `Candy Chapter ${pathArr[3]} of 41`;
-					presenceData.smallImageKey = "candy";
+					presenceData.smallImageKey = Assets.Candy;
 					presenceData.smallImageText =
 						"Candy was definitely the right choice, John thinks, as he munches thoughtfully on a strawberry swirl mint.";
 					presenceData.buttons = [
@@ -195,13 +204,13 @@ presence.on("UpdateData", async () => {
 		case "extras":
 			if (!pathArr[2]) {
 				presenceData.details = "Viewing extra 1 of 40";
-				presenceData.smallImageKey = "mspa";
+				presenceData.smallImageKey = Assets.Mspa;
 				presenceData.smallImageText = document.querySelector("h2").textContent;
 			} else if (pathArr[2] === "list")
 				presenceData.details = "Viewing extras list";
 			else {
 				presenceData.details = `Viewing extra ${pathArr[2]} of 40`;
-				presenceData.smallImageKey = "mspa";
+				presenceData.smallImageKey = Assets.Mspa;
 				if (document.querySelector("h2").textContent.length <= 128) {
 					presenceData.smallImageText =
 						document.querySelector("h2").textContent;

@@ -26,6 +26,31 @@ const presence = new Presence({
 				},
 			],
 		},
+		"/about": {
+			details: "Viewing the About Page",
+			buttons: [
+				{ label: "View the About Page", url: "https://www.vtubers.wiki/about" },
+			],
+		},
+		"/donate": {
+			details: "Viewing the Donate Page",
+			buttons: [
+				{
+					label: "View the Donate Page",
+					url: "https://www.vtubers.wiki/donate",
+				},
+			],
+		},
+		"/search": {
+			details: "Searching the wiki",
+			state: "Searching...",
+			buttons: [
+				{
+					label: "View the Search Engine",
+					url: "https://www.vtubers.wiki/search",
+				},
+			],
+		},
 	};
 
 const enum Assets {
@@ -80,15 +105,66 @@ presence.on("UpdateData", async () => {
 				case "guides":
 					if (pathSplit[2]) {
 						presenceData.largeImageKey = Assets.Book;
+						presenceData.smallImageKey = Assets.Logo;
 						presenceData.details = "Viewing Guides";
 						presenceData.state = `${pageTitle}`;
 						presenceData.buttons = [{ label: "View Guide", url: href }];
 					} else presenceData.details = "Viewing All The Guides";
 					break;
+				case "agencies":
+					if (pathSplit[2]) {
+						presenceData.largeImageKey = `https://vtubers.wiki/static/agencies/${pathSplit[2]}/logo.png`;
+						presenceData.smallImageKey = Assets.Logo;
+						presenceData.details = "Viewing a Vtuber Agency";
+						presenceData.state = `${document
+							.querySelector(".vw-article-title")
+							.textContent.replace("Agency •", "")
+							.trim()}`;
+						presenceData.buttons = [{ label: "View Agency", url: href }];
+					} else presenceData.details = "Viewing All The Agencies";
+					break;
 				default:
 					presenceData.details = "Viewing The wiki";
 					presenceData.state = pageTitle;
 					presenceData.buttons = [{ label: "View Wiki", url: href }];
+			}
+			break;
+		case "blog":
+			if (pathSplit[1]) {
+				presenceData.largeImageKey = Assets.Log;
+				presenceData.details = "Viewing a Blog Post";
+				presenceData.state = pageTitle;
+				presenceData.buttons = [{ label: "View Blog Post", url: href }];
+			} else {
+				presenceData.largeImageKey = Assets.Log;
+				presenceData.details = "Viewing The Blog";
+				presenceData.buttons = [{ label: "View Blog", url: href }];
+			}
+			break;
+		case "sdk":
+			if (pathSplit[1]) {
+				presenceData.smallImageKey =
+					document.querySelector<HTMLImageElement>("#sdk-img")?.src;
+				presenceData.smallImageText =
+					document.querySelector<HTMLImageElement>("#sdk-img")?.alt;
+				presenceData.details = `Viewing the ${
+					document.querySelector(".vw-article-title")?.textContent
+				}`;
+				presenceData.state = `Made on ${
+					document.querySelector("time")?.textContent
+				}`;
+				presenceData.buttons = [
+					{ label: "View SDK", url: href },
+					{
+						label: "Source Code",
+						url: document.querySelector<HTMLDivElement>("#sdk-github")
+							?.textContent,
+					},
+				];
+			} else {
+				presenceData.largeImageKey = Assets.Cog;
+				presenceData.details = "Viewing The SDK's";
+				presenceData.buttons = [{ label: "View SDK's", url: href }];
 			}
 			break;
 	}

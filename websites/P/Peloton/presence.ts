@@ -159,14 +159,14 @@ presence.on("UpdateData", async () => {
 				!(document.querySelector(".jw-video") as HTMLVideoElement).paused
 			) {
 				case true:
-					presenceData.smallImageKey = "live";
+					presenceData.smallImageKey = Assets.Live;
 					presenceData.smallImageText = strings.live;
 					presenceData.endTimestamp = new Date(
 						Date.now() + (clipTimeLeft[0] * 1 + clipTimeLeft[1] * 1) * 10
 					).getTime();
 					break;
 				case false:
-					presenceData.smallImageKey = "live";
+					presenceData.smallImageKey = Assets.Live;
 					presenceData.smallImageText = strings.live;
 					break;
 			}

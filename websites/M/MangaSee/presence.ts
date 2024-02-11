@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			".list-group-item > h1"
 		).textContent;
-		presenceData.smallImageKey = "view";
+		presenceData.smallImageKey = Assets.Viewing;
 		if (buttons) {
 			presenceData.buttons = [
 				{ label: "View manga", url: window.location.href },

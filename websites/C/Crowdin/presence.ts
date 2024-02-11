@@ -260,7 +260,7 @@ presence.on("UpdateData", async () => {
 							presenceData.state = "Managing project settings";
 					}
 					if (!presenceData.details && presenceData.state) {
-						const stateSplit = presenceData.state.split(" ");
+						const stateSplit = (presenceData.state as string).split(" ");
 						if (!stateSplit.includes("project"))
 							stateSplit.splice(1, 0, "a project's");
 						else stateSplit[stateSplit.indexOf("project")] = "a project's";

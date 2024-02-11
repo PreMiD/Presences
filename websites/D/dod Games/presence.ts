@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 							document.querySelector<HTMLDivElement>("#drawtools").style
 								.display !== "none"
 						) {
-							presenceData.smallImageKey = "molivaki";
+							presenceData.smallImageKey = Assets.Writing;
 							presenceData.smallImageText = "Ζωγραφίζει";
 						}
 

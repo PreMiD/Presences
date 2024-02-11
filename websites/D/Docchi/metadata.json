@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "334411435633541121",
+		"name": "meffiu"
+	},
+	"service": "Docchi",
+	"description": {
+		"en": "Polish anime site with a lot of series, best video players, good quality.",
+		"pl": "Polska strona anime z wieloma seriami, najlepsze odtwarzacze wideo, dobra jakość."
+	},
+	"url": "docchi.pl",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Docchi/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Docchi/assets/thumbnail.png",
+	"color": "#07BF67",
+	"category": "anime",
+	"tags": [
+		"polish",
+		"anime",
+		"video",
+		"subs"
+	],
+	"iframe": true,
+	"iFrameRegExp": "cda[.]pl|google[.]com|mega[.]nz|dailymotion[.]com|video[.]sibnet[.]ru"
+}

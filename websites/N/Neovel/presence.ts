@@ -185,7 +185,7 @@ presence.on("UpdateData", async () => {
 	}
 	if (!showCover) {
 		presenceData.largeImageKey = presenceDataSlide.largeImageKey =
-			"neovel_logo";
+			"https://cdn.rcd.gg/PreMiD/websites/N/Neovel/assets/logo.jpg";
 	}
 
 	if (slideshow.getSlides().length > 0) presence.setActivity(slideshow);

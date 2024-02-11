@@ -277,14 +277,14 @@ const // official website
 	// web client app name
 	// all the presence art assets uploaded to discord
 	PRESENCE_ART_ASSETS = {
-		download: "downloading",
-		live: "live",
-		logo: "banner-icon",
-		pause: "pause",
-		play: "play",
-		read: "reading",
-		search: "search",
-		write: "writing",
+		download: Assets.Downloading,
+		live: Assets.Live,
+		logo: "https://cdn.rcd.gg/PreMiD/websites/E/Emby/assets/0.png",
+		pause: Assets.Pause,
+		play: Assets.Play,
+		read: Assets.Reading,
+		search: Assets.Search,
+		write: Assets.Writing,
 	},
 	presenceData: PresenceData = {
 		largeImageKey: PRESENCE_ART_ASSETS.logo,
@@ -752,7 +752,8 @@ async function setDefaultsToPresence(): Promise<void> {
 
 	if (presenceData.startTimestamp) delete presenceData.startTimestamp;
 
-	if (isNaN(presenceData.endTimestamp)) delete presenceData.endTimestamp;
+	if (isNaN(presenceData.endTimestamp as number))
+		delete presenceData.endTimestamp;
 
 	if (await presence.getSetting<boolean>("showTimestamps"))
 		presenceData.startTimestamp = Date.now();

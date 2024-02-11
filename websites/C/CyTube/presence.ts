@@ -44,34 +44,45 @@ interface MatchList {
 	[key: string]: Match;
 }
 
-const matches: MatchList = {
-	youtube: { display: "YouTube", imageKey: "cytube_service_yt" },
-	googlevideo: { display: "YouTube", imageKey: "cytube_service_yt" },
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/CyTube/assets/logo.png",
+	ServiceYT = "https://cdn.rcd.gg/PreMiD/websites/C/CyTube/assets/0.png",
+	ServiceGD = "https://cdn.rcd.gg/PreMiD/websites/C/CyTube/assets/1.png",
+	ServiceDBX = "https://cdn.rcd.gg/PreMiD/websites/C/CyTube/assets/2.png",
+	ServiceAWS = "https://cdn.rcd.gg/PreMiD/websites/C/CyTube/assets/3.png",
+	ServiceDC = "https://cdn.rcd.gg/PreMiD/websites/C/CyTube/assets/4.png",
+	ServiceGC = "https://cdn.rcd.gg/PreMiD/websites/C/CyTube/assets/5.png",
+	ServiceUK = "https://cdn.rcd.gg/PreMiD/websites/C/CyTube/assets/6.png",
+}
 
-	"docs.google": { display: "Google Drive", imageKey: "cytube_service_gd" },
+const matches: MatchList = {
+	youtube: { display: "YouTube", imageKey: Assets.ServiceYT },
+	googlevideo: { display: "YouTube", imageKey: Assets.ServiceYT },
+
+	"docs.google": { display: "Google Drive", imageKey: Assets.ServiceGD },
 	googleusercontent: {
 		display: "Google Drive",
-		imageKey: "cytube_service_gd",
+		imageKey: Assets.ServiceGD,
 	},
 
-	appspot: { display: "Google Cloud", imageKey: "cytube_service_gc" },
-	blogspot: { display: "Google Cloud", imageKey: "cytube_service_gc" },
+	appspot: { display: "Google Cloud", imageKey: Assets.ServiceGC },
+	blogspot: { display: "Google Cloud", imageKey: Assets.ServiceGC },
 
-	dropbox: { display: "Dropbox", imageKey: "cytube_service_dbx" },
+	dropbox: { display: "Dropbox", imageKey: Assets.ServiceDBX },
 
-	amazonaws: { display: "Amazon AWS", imageKey: "cytube_service_aws" },
+	amazonaws: { display: "Amazon AWS", imageKey: Assets.ServiceAWS },
 
-	soundcloud: { display: "Soundcloud", imageKey: "cytube_service_sc" },
+	soundcloud: { display: "Soundcloud", imageKey: Assets.Question }, // asset not found
 
-	discordapp: { display: "Discord", imageKey: "cytube_service_dc" },
+	discordapp: { display: "Discord", imageKey: Assets.ServiceDC },
 
-	"vimeo-prod-": { display: "Vimeo", imageKey: "cytube_service_ve" },
+	"vimeo-prod-": { display: "Vimeo", imageKey: Assets.Question }, // asset not found
 };
 
 function service(service: string): Match {
 	let returnMatch: Match = {
 		display: "Unknown Service",
-		imageKey: "cytube_service_uk",
+		imageKey: Assets.ServiceUK,
 	};
 
 	for (const key of Object.keys(matches))
@@ -97,8 +108,7 @@ presence.on("iFrameData", (data: VideoData) => {
 presence.on("UpdateData", async () => {
 	const path = document.location.pathname,
 		presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/C/CyTube/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			details: "loading",
 			state: "CyTube",
 		},
@@ -125,12 +135,12 @@ presence.on("UpdateData", async () => {
 
 		if (data.paused) {
 			presenceData.startTimestamp = null;
-			presenceData.smallImageKey = "presence_playback_paused";
+			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = `${translate.pause} - ${getTimestamp(
 				data.currentTime
 			)}`;
 		} else {
-			presenceData.smallImageKey = "presence_playback_playing";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = translate.play;
 		}
 	}
@@ -147,7 +157,7 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 		} else if (!document.querySelector("#videowrap").querySelector("video")) {
 			presenceData.details = "Waiting to Start";
-			presenceData.smallImageKey = "presence_playback_waiting";
+			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Waiting";
 			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 

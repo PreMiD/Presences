@@ -3,6 +3,16 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Smallimagekey = "https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/0.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/logo.png",
+	Browsing = "https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/1.png",
+	Closed = "https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/2.png",
+	Open = "https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/3.png",
+	Incognito = "https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/4.png",
+	Nocover = "https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/5.png",
+}
+
 presence.on("UpdateData", async () => {
 	let [showCover, showButtons, showBook, showLogo] = await Promise.all([
 		presence.getSetting<boolean>("showCover"),
@@ -16,8 +26,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("showReading"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = window.location,
@@ -41,7 +50,7 @@ presence.on("UpdateData", async () => {
 		showLogo = true;
 		showButtons = false;
 	} else {
-		presenceData.smallImageKey = "closed";
+		presenceData.smallImageKey = Assets.Closed;
 		presenceData.smallImageText = "Not Reading";
 	}
 	if (!showBook) showCover = false;
@@ -106,7 +115,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case privacy: {
-			presenceData.largeImageKey = "incognito";
+			presenceData.largeImageKey = Assets.Incognito;
 			if (!showReading) break;
 			if (
 				pathnames.includes(pathname) ||
@@ -117,12 +126,12 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLAnchorElement>('[title="Read Next chapter"]')
 			) {
 				presenceData.details = "Reading...";
-				presenceData.smallImageKey = "open";
+				presenceData.smallImageKey = Assets.Open;
 			}
 			break;
 		}
 		case showLogo: {
-			presenceData.largeImageKey = "fwn_1024";
+			presenceData.largeImageKey = Assets.Logo;
 			delete presenceData.smallImageKey;
 			delete presenceData.details;
 			delete presenceData.state;
@@ -171,7 +180,7 @@ presence.on("UpdateData", async () => {
 					delete presenceData.state;
 				}
 				if (showReading) {
-					presenceData.smallImageKey = "open";
+					presenceData.smallImageKey = Assets.Open;
 					presenceData.smallImageText = "Reading";
 				} else {
 					delete presenceData.smallImageKey;

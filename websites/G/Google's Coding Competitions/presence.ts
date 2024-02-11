@@ -21,6 +21,12 @@ const timeElapsed: number = ~~(Date.now() / 1000);
 
 setPresence();
 
+const enum Assets {
+	Kickstart = "https://cdn.rcd.gg/PreMiD/websites/G/Google's%20Coding%20Competitions/assets/0.png",
+	Codejam = "https://cdn.rcd.gg/PreMiD/websites/G/Google's%20Coding%20Competitions/assets/1.png",
+	Hashcode = "https://cdn.rcd.gg/PreMiD/websites/G/Google's%20Coding%20Competitions/assets/2.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
@@ -31,7 +37,7 @@ presence.on("UpdateData", async () => {
 
 	switch (location.pathname.split("/")[1]) {
 		case "kickstart": {
-			presenceData.largeImageKey = "kickstart";
+			presenceData.largeImageKey = Assets.Kickstart;
 
 			switch (location.pathname.split("/")[2]) {
 				case "about": {
@@ -107,7 +113,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		case "codejam": {
-			presenceData.largeImageKey = "codejam";
+			presenceData.largeImageKey = Assets.Codejam;
 
 			switch (location.pathname.split("/")[2]) {
 				case "about": {
@@ -183,7 +189,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		case "hashcode": {
-			presenceData.largeImageKey = "hashcode";
+			presenceData.largeImageKey = Assets.Hashcode;
 
 			switch (location.pathname.split("/")[2]) {
 				case "about": {

@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document
 			.querySelector("div.teams")
 			.textContent.replace("VS", " vs ");
-		presenceData.smallImageKey = "live";
+		presenceData.smallImageKey = Assets.Live;
 	} else if (path.includes("/article/")) {
 		presenceData.details = "Reading news article:";
 		presenceData.state = document.querySelector("div.title").textContent;

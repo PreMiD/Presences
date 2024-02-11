@@ -58,6 +58,18 @@ const updateCallback = {
 		];
 	};
 
+const enum Assets {
+	Sm = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/0.png",
+	Accounts = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/1.png",
+	Tm = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/2.png",
+	Api = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/3.png",
+	Item = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/4.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/5.png",
+	Tmtube = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/6.png",
+	Tm2020 = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/7.png",
+	Tmx = "https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/8.png",
+}
+
 ((): void => {
 	if (
 		currentURL.hostname.startsWith("mania") ||
@@ -83,22 +95,22 @@ const updateCallback = {
 		 * @param sm String for ShootMania
 		 */
 		const chooseTwo = (tm: string, sm: string): string => {
-			return presenceData.smallImageKey === "tm" ? tm : sm;
+			return presenceData.smallImageKey === Assets.Tm ? tm : sm;
 		};
 
 		switch (currentURL.hostname.split(".")[0]) {
 			case "tm":
-				presenceData.smallImageKey = "tm";
+				presenceData.smallImageKey = Assets.Tm;
 				presenceData.smallImageText = "TrackMania²";
 				break;
 			case "sm":
-				presenceData.smallImageKey = "sm";
+				presenceData.smallImageKey = Assets.Sm;
 				presenceData.smallImageText = "ShootMania";
 				break;
 			case "trackmania":
-				presenceData.smallImageKey = "tm-2020";
+				presenceData.smallImageKey = Assets.Tm2020;
 				presenceData.smallImageText = "Trackmania (2020)";
-				presenceData.largeImageKey = "tmx";
+				presenceData.largeImageKey = Assets.Tmx;
 				break;
 		}
 
@@ -374,9 +386,9 @@ const updateCallback = {
 			}
 		}
 	} else if (currentURL.hostname.startsWith("item")) {
-		presenceData.smallImageKey = "lg";
+		presenceData.smallImageKey = Assets.Logo;
 		presenceData.smallImageText = "ItemExchange";
-		presenceData.largeImageKey = "item";
+		presenceData.largeImageKey = Assets.Item;
 
 		if (currentPath[0] === "error")
 			presenceData.details = "On a non-existent page";
@@ -491,7 +503,7 @@ const updateCallback = {
 			}
 		}
 	} else if (currentURL.hostname.startsWith("accounts")) {
-		presenceData.smallImageKey = "accounts";
+		presenceData.smallImageKey = Assets.Accounts;
 		presenceData.smallImageText = "Accounts";
 
 		if (currentPath[0] === "auth") {
@@ -515,9 +527,9 @@ const updateCallback = {
 		} else if (currentPath[0] === "user")
 			presenceData.details = "Configuring their account";
 	} else if (currentURL.hostname.startsWith("tmtube")) {
-		presenceData.smallImageKey = "lg";
+		presenceData.smallImageKey = Assets.Logo;
 		presenceData.smallImageText = "TMTube Archive";
-		presenceData.largeImageKey = "tmtube";
+		presenceData.largeImageKey = Assets.Tmtube;
 
 		updateCallback.function = (): void => {
 			switch (currentPath[0]) {
@@ -567,7 +579,7 @@ const updateCallback = {
 			}
 		};
 	} else if (currentURL.hostname.startsWith("api")) {
-		presenceData.smallImageKey = "api";
+		presenceData.smallImageKey = Assets.Api;
 		presenceData.smallImageText = "API Documentation";
 
 		if (currentPath[0] === "") presenceData.details = "On the home page";

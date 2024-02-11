@@ -46,10 +46,10 @@ presence.on("UpdateData", async () => {
 		)?.textContent),
 			(presenceData.state = state);
 		presenceData.smallImageKey = live
-			? "live"
+			? Assets.Live
 			: video.paused
-			? "pause"
-			: "play";
+			? Assets.Pause
+			: Assets.Play;
 		presenceData.smallImageText = live
 			? (await strings).live
 			: video.paused

@@ -59,6 +59,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
+			type: ActivityType.Watching,
 		},
 		{ pathname, href } = document.location,
 		[newLang, privacy, buttons, covers] = await Promise.all([

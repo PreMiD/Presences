@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Planet/assets/logo.jpg",
 		details: strings.browse,
-		smallImageKey: "reading",
+		smallImageKey: Assets.Reading,
 		startTimestamp: startsTime,
 	};
 

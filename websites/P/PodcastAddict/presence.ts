@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 	else if (pathname.startsWith("/podcast")) {
 		presenceData.details = "Viewing:";
 		presenceData.state = document.querySelector(".caption").textContent;
-		presenceData.smallImageKey = "view";
+		presenceData.smallImageKey = Assets.Viewing;
 		presenceData.buttons = [
 			{ label: "View Podcast", url: window.location.href },
 		];

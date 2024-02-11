@@ -12,6 +12,11 @@ let video = {
 	url: <string>null,
 };
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/SyncTube/assets/0.png",
+	Logo2 = "https://cdn.rcd.gg/PreMiD/websites/S/SyncTube/assets/1.png",
+}
+
 presence.on("UpdateData", async function () {
 	const [timeElapsed, moreDetails, showButtons, privacy, logo] =
 			await Promise.all([
@@ -22,7 +27,7 @@ presence.on("UpdateData", async function () {
 				presence.getSetting<number>("logo"),
 			]),
 		presenceData: PresenceData = {
-			largeImageKey: logo === 0 ? "logo" : "logo2",
+			largeImageKey: logo === 0 ? Assets.Logo : Assets.Logo2,
 		},
 		urlpath = window.location.pathname.split("/");
 
