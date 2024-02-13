@@ -5,14 +5,14 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/L/Lazada/assets/logo.png",
+			largeImageKey: "https://i.ibb.co/LpxnMfj/512x512pngoflazada.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location;
 
 	if (document.querySelector(".pdp-mod-product-badge-title")) {
 		presenceData.details = "Viewing Product:";
+		presenceData.smallImageKey = Assets.Viewing;
 		presenceData.state = document.querySelector(
 			".pdp-mod-product-badge-title"
 		).textContent;
@@ -21,9 +21,11 @@ presence.on("UpdateData", async () => {
 			"";
 	} else if (pathname.includes("/tag")) {
 		presenceData.details = "Viewing Tags:";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.state = document.querySelector(".JrAyI").textContent;
 	} else if (pathname.includes("/catalog")) {
 		presenceData.details = "Viewing Catalog:";
+		presenceData.smallImageKey = Assets.Search;
 		presenceData.state = document.querySelector(".JrAyI").textContent;
 	} else if (pathname.includes("/customer/order"))
 		presenceData.details = "My Orders";
@@ -60,7 +62,8 @@ presence.on("UpdateData", async () => {
 	if (await presence.getSetting<boolean>("incognito")) {
 		presenceData.details = "Incognito";
 		presenceData.largeImageKey =
-			"https://cdn.rcd.gg/PreMiD/websites/L/Lazada/assets/logo.png";
+			"https://i.ibb.co/LpxnMfj/512x512pngoflazada.png";
+		presenceData.smallImageKey = Assets.Question;
 		delete presenceData.state;
 		delete presenceData.startTimestamp;
 	}
