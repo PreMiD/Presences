@@ -41,6 +41,7 @@ presence.on("UpdateData", async () => {
 	const { href, search, pathname } = document.location,
 		presenceData: PresenceData = {
 			name: "Bitview",
+			type: ActivityType.Watching,
 			largeImageKey: Assets.Logo,
 		},
 		baseViewingPresence = () => {
