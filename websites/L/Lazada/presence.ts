@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/L/Lazada/assets/logo.png",
+			largeImageKey: "https://i.ibb.co/LpxnMfj/512x512pngoflazada.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location;
@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
 	if (await presence.getSetting<boolean>("incognito")) {
 		presenceData.details = "Incognito";
 		presenceData.largeImageKey =
-			"https://cdn.rcd.gg/PreMiD/websites/L/Lazada/assets/logo.png";
+			"https://i.ibb.co/LpxnMfj/512x512pngoflazada.png";
 		presenceData.smallImageKey = Assets.Question;
 		delete presenceData.state;
 		delete presenceData.startTimestamp;
