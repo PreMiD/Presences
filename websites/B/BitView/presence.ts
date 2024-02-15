@@ -32,7 +32,7 @@ const presence = new Presence({
 			.textContent;
 	};
 
-const enum Assets { // Other default assets can be found at index.d.ts
+const enum Assets {
 	Logo = "https://i.imgur.com/x7XnGcX.png",
 }
 
