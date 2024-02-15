@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 	// Functions and consts.
 	const { href, search, pathname } = document.location,
 		presenceData: PresenceData = {
-			name: "Bitview",
+			name: "BitView",
 			type: ActivityType.Watching,
 			largeImageKey: Assets.Logo,
 		},
