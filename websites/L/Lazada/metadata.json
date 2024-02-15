@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "392970361047613441",
-		"name": "niqowi"
+		"name": "2tulog"
 	},
 	"service": "Lazada",
 	"description": {
@@ -18,9 +18,9 @@
 		"lazada.sg",
 		"www.lazada.sg"
 	],
-	"version": "1.0.1",
-	"logo": "https://i.ibb.co/LpxnMfj/512x512pngoflazada.png",
-	"thumbnail": "https://www.most2414.com/wp-content/uploads/2020/02/02FEB-Insights-Lazada-Service-Marketplace-MOST2414-Cover.jpg",
+	"version": "1.0.2",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/Lazada/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Lazada/assets/thumbnail.jpg",
 	"color": "#191fb5",
 	"category": "other",
 	"tags": [
