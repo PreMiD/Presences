@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"id": "392970361047613441",
-		"name": "niqowi"
+		"name": "2tulog"
 	},
 	"service": "Lazada",
 	"description": {
@@ -10,9 +10,15 @@
 	},
 	"url": [
 		"lazada.com",
-		"www.lazada.com"
+		"www.lazada.com",
+		"lazada.co",
+		"www.lazada.co",
+		"lazada.vn",
+		"www.lazada.vn",
+		"lazada.sg",
+		"www.lazada.sg"
 	],
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/Lazada/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Lazada/assets/thumbnail.jpg",
 	"color": "#191fb5",
