@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "302505485519683585",
+		"name": "darkitxu84"
+	},
+	"service": "BitView",
+	"description": {
+		"en": "Video repository that simulates old YouTube style",
+		"es": "Repositorio de videos que simula el estilo antiguo de YouTube"
+	},
+	"url": "www.bitview.net",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/x7XnGcX.png",
+	"thumbnail": "https://i.imgur.com/hZ1g1qM.png",
+	"color": "#00c9fc",
+	"category": "videos",
+	"tags": [
+		"video",
+		"media"
+	]
+}
