@@ -43,6 +43,13 @@ presence.on("UpdateData", async () => {
 				[startTimestamp, endTimestamp] = presence.getTimestamps(
 					Math.floor(video.currentTime),
 					Math.floor(video.duration)
+				),
+				currentEpisodeNumber = Number(
+					document.querySelector(".active .btn-ep")?.textContent
+				),
+				totalEpisodeNumber = Number(
+					document.querySelector(`.item.item-${streamingType} .name`)
+						?.textContent
 				);
 
 			presenceData.details = `Watching ${
@@ -50,14 +57,9 @@ presence.on("UpdateData", async () => {
 			}`;
 
 			presenceData.state = `Episode ${
-				Number(
-					document.querySelector(".active .btn-ep")?.textContent
-				).toLocaleString() || "?"
+				isNaN(currentEpisodeNumber) || !currentEpisodeNumber ? "?" : currentEpisodeNumber.toLocaleString()
 			}/${
-				Number(
-					document.querySelector(`.item.item-${streamingType} .name`)
-						?.textContent
-				).toLocaleString() || "?"
+				isNaN(totalEpisodeNumber) || !totalEpisodeNumber ? "?" : totalEpisodeNumber.toLocaleString()
 			}`;
 			if (video.exists) {
 				if (await presence.getSetting<boolean>("timestamps")) {
