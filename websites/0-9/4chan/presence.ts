@@ -112,6 +112,13 @@ presence.on("UpdateData", async () => {
 			const threadNum = pathname.split("/").at(-1),
 				threadSubject = document.querySelector(".subject").textContent;
 
+			presenceData.buttons = [
+				{
+					label: "View Thread",
+					url: document.URL,
+				},
+			];
+
 			if (threadSubject)
 				presenceData.state = `>>${threadNum} - "${threadSubject}"`;
 			else presenceData.state = `>>${threadNum}`;
