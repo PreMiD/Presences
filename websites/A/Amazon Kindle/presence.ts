@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Stöbert in der Kindle Bibliothek",
 			largeImageKey:
-				"https://www.amazon.de/images/G/03/kindle/merch/2020/AMZ_Kindle_Logo_2C._CB416921084_.png",
+				"https://i.imgur.com/LnSgbsr.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location;
