@@ -24,7 +24,8 @@ presence.on(
 );
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://cdn.discordapp.com/attachments/1188145024492380174/1208641322811138148/QYco5JN.png",
+		largeImageKey:
+			"https://cdn.discordapp.com/attachments/1188145024492380174/1208641322811138148/QYco5JN.png",
 	};
 	const { pathname, href, search } = document.location,
 		showButtons = await presence.getSetting<boolean>("buttons"),
@@ -57,9 +58,13 @@ presence.on("UpdateData", async () => {
 			}`;
 
 			presenceData.state = `Episode ${
-				isNaN(currentEpisodeNumber) || !currentEpisodeNumber ? "?" : currentEpisodeNumber.toLocaleString()
+				isNaN(currentEpisodeNumber) || !currentEpisodeNumber
+					? "?"
+					: currentEpisodeNumber.toLocaleString()
 			}/${
-				isNaN(totalEpisodeNumber) || !totalEpisodeNumber ? "?" : totalEpisodeNumber.toLocaleString()
+				isNaN(totalEpisodeNumber) || !totalEpisodeNumber
+					? "?"
+					: totalEpisodeNumber.toLocaleString()
 			}`;
 			if (video.exists) {
 				if (await presence.getSetting<boolean>("timestamps")) {
@@ -167,7 +172,7 @@ presence.on("UpdateData", async () => {
 				letter = searchParams.get("letter"),
 				pages: Record<string, PresenceData> = {
 					"/home": {
-						details: "Browsing homepage"
+						details: "Browsing homepage",
 					},
 					"/most-popular": {
 						details: "Browsing most popular anime",
