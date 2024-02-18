@@ -27,7 +27,11 @@ presence.on("UpdateData", async () => {
 		largeImageKey: Assets.Logo,
 	};
 	const { pathname, href, search } = document.location,
-		showButtons = await presence.getSetting<boolean>("buttons");
+		showButtons = await presence.getSetting<boolean>("buttons"),
+		showW2Button = await presence.getSetting<boolean>(
+			"watch2getherJoinRoomButton"
+		),
+		showTimestamps = await presence.getSetting<boolean>("timestamps");
 	switch (true) {
 		case pathname === "/home":
 			presenceData.details = "Browsing Home";
@@ -136,10 +140,7 @@ presence.on("UpdateData", async () => {
 					? `${viewers.toLocaleString()} viewers`
 					: `${viewers} viewer`
 			}`;
-			const buttonAllowed = await presence.getSetting<boolean>(
-				"watch2getherJoinRoomButton"
-			);
-			if (buttonAllowed && showButtons) {
+			if (showW2Button && showButtons) {
 				presenceData.buttons = [
 					{
 						label: "Join Room",
@@ -147,7 +148,6 @@ presence.on("UpdateData", async () => {
 					},
 				];
 			}
-			const showTimestamps = await presence.getSetting<boolean>("timestamps");
 			if (video.exists) {
 				if (showTimestamps) {
 					presenceData.startTimestamp = startTimestamp;
