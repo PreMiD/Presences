@@ -8,11 +8,14 @@
 	"description": {
 		"en": "Read books online via Amazon Kindle"
 	},
-	"url": "lesen.amazon.de",
+	"url": [
+		"lesen.amazon.de",
+		"read.amazon.com"
+	],
 	"version": "1.0.0",
-	"logo": "https://www.designtagebuch.de/wp-content/uploads/mediathek//2017/10/kindle-app-icon-700x513.jpg",
+	"logo": "https://i.imgur.com/LnSgbsr.png",
 	"thumbnail": "https://www.designtagebuch.de/wp-content/uploads/mediathek//2017/10/kindle-app-icon-700x513.jpg",
-	"color": "#ffffff",
+	"color": "#FDEE00",
 	"category": "other",
 	"tags": [
 		"books"

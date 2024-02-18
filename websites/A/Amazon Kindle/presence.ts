@@ -1,7 +1,7 @@
 const presence = new Presence({
-	clientId: "1208798725116395592",
-}),
-browsingTimestamp = Math.floor(Date.now() / 1000);
+		clientId: "1208798725116395592",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -10,12 +10,22 @@ presence.on("UpdateData", async () => {
 				"https://www.amazon.de/images/G/03/kindle/merch/2020/AMZ_Kindle_Logo_2C._CB416921084_.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{pathname} = document.location;
+		{ pathname } = document.location;
 	switch (pathname) {
 		case "/": {
-				presenceData.details = document.querySelector("#top-menu-bar > ion-toolbar > ion-title").textContent;
-				presenceData.state = document.querySelector("#main-content > div:nth-child(7) > ion-footer > ion-toolbar > ion-title > div").textContent.split("●")[0].replace("Page", " ").replace("of", "/").replace("Location", " ").trim();
-			}
+			presenceData.details = document.querySelector(
+				"#top-menu-bar > ion-toolbar > ion-title"
+			).textContent;
+			presenceData.state = document
+				.querySelector(
+					"#main-content > div:nth-child(7) > ion-footer > ion-toolbar > ion-title > div"
+				)
+				.textContent.split("●")[0]
+				.replace("Page", " ")
+				.replace("of", "/")
+				.replace("Location", " ")
+				.trim();
+		}
 	}
 
 	presence.setActivity(presenceData);
