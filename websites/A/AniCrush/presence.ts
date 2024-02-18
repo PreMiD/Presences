@@ -33,15 +33,6 @@ presence.on("UpdateData", async () => {
 		),
 		showTimestamps = await presence.getSetting<boolean>("timestamps");
 	switch (true) {
-		case pathname === "/home":
-			presenceData.details = "Browsing Home";
-			break;
-		case pathname === "/az-list":
-			presenceData.details = "Browzing AZ List";
-			break;
-		case pathname === "/most-popular":
-			presenceData.details = "Browsing Most Popular";
-			break;
 		case pathname.startsWith("/watch/"): {
 			const streamingType = Array.from(
 					document.querySelectorAll(".list .w-type").values()
@@ -173,6 +164,9 @@ presence.on("UpdateData", async () => {
 			const searchParams = new URLSearchParams(search),
 				letter = searchParams.get("letter"),
 				pages: Record<string, PresenceData> = {
+					"/home": {
+						details: "Browsing homepage"
+					},
 					"/most-popular": {
 						details: "Browsing most popular anime",
 					},
