@@ -24,7 +24,7 @@ presence.on(
 );
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: Assets.Logo,
+		largeImageKey: "https://cdn.discordapp.com/app-assets/1208440916461887488/1208443100310143076.png",
 	};
 	const { pathname, href, search } = document.location,
 		showButtons = await presence.getSetting<boolean>("buttons"),
