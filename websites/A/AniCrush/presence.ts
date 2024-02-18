@@ -2,7 +2,7 @@ const presence = new Presence({
 	clientId: "1208440916461887488",
 });
 const enum Assets {
-	Logo = "https://cdn.discordapp.com/attachments/1188145024492380174/1208641322811138148/QYco5JN.png",
+	Logo = "https://i.imgur.com/cwFUt40.png",
 }
 let video = {
 	exists: false,
@@ -25,7 +25,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey:
-			"https://cdn.discordapp.com/attachments/1188145024492380174/1208641322811138148/QYco5JN.png",
+			Assets.Logo,
 	};
 	const { pathname, href, search } = document.location,
 		showButtons = await presence.getSetting<boolean>("buttons"),
