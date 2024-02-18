@@ -2,7 +2,7 @@ const presence = new Presence({
 	clientId: "1208440916461887488",
 });
 const enum Assets {
-	Logo = "favicon",
+	Logo = "https://cdn.discordapp.com/attachments/1188145024492380174/1208641322811138148/QYco5JN.png",
 }
 let video = {
 	exists: false,
