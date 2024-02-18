@@ -30,7 +30,10 @@
 			"id": "watch2getherJoinRoomButton",
 			"title": "Show Watch2gether \"Join Room\" Button",
 			"icon": "fas fa-compress-arrows-alt",
-			"value": false
+			"value": false,
+			"if": {
+				"privacyMode": false
+			}
 		},
 		{
 			"id": "buttons",
