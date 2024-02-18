@@ -24,8 +24,7 @@ presence.on(
 );
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey:
-			Assets.Logo,
+		largeImageKey: Assets.Logo,
 	};
 	const { pathname, href, search } = document.location,
 		showButtons = await presence.getSetting<boolean>("buttons"),
