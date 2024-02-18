@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "202740603790819328",
+		"name": "aimslut"
+	},
+	"service": "Amazon Kindle",
+	"description": {
+		"en": "Read books online via Amazon Kindle"
+	},
+	"url": "lesen.amazon.de",
+	"version": "1.0.0",
+	"logo": "https://www.designtagebuch.de/wp-content/uploads/mediathek//2017/10/kindle-app-icon-700x513.jpg",
+	"thumbnail": "https://www.designtagebuch.de/wp-content/uploads/mediathek//2017/10/kindle-app-icon-700x513.jpg",
+	"color": "#ffffff",
+	"category": "other",
+	"tags": [
+		"books"
+	]
+}
