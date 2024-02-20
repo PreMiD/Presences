@@ -2,7 +2,7 @@ const presence = new Presence({
 	clientId: "1208440916461887488",
 });
 const enum Assets {
-	Logo = "https://i.imgur.com/cwFUt40.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AniCrush/assets/logo.png",
 }
 let video = {
 	exists: false,
