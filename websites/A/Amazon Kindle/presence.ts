@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			details: "Stöbert in der Kindle Bibliothek",
+			details: "Amazon Kindle Home",
 			largeImageKey: "https://i.imgur.com/LnSgbsr.png",
 			startTimestamp: browsingTimestamp,
 		},
