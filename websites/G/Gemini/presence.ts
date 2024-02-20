@@ -9,9 +9,10 @@ const enum Assets {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: Assets.Logo,
-		startTimestamp: browsingTimestamp,
-	}, { pathname } = document.location;
+			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname } = document.location;
 	switch (true) {
 		case pathname.startsWith("/app"):
 			presenceData.details = "Asking questions";
