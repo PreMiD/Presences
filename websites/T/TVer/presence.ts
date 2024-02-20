@@ -66,11 +66,7 @@ presence.on("UpdateData", async () => {
 		)?.textContent,
 		seriesTitle = document.querySelector(
 			"[class^='titles_container'] h2"
-		)?.textContent,
-		thumbnail = document
-			.querySelector<HTMLImageElement>("[class^='thumbnail-img_img']")
-			?.src.replace(/(thumbnail\/episode\/)[^/]+/, "$1small")
-			.replace(/\.jpg.*$/, ".jpg");
+		)?.textContent;
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
@@ -102,7 +98,14 @@ presence.on("UpdateData", async () => {
 					if (isScheduled) presenceData.details = strings.waitingLive;
 					else presenceData.details = strings.watchingLive;
 				} else {
-					if (videoPic) presenceData.largeImageKey = thumbnail;
+					if (videoPic) {
+						presenceData.largeImageKey = document
+							.querySelector<HTMLImageElement>(
+								"[class*='live_active'] > div > img"
+							)
+							?.src.replace(/(thumbnail\/live\/)[^/]+/, "$1small")
+							.replace(/\.jpg.*$/, ".jpg");
+					}
 					if (isScheduled) presenceData.details = strings.waitingLiveThe;
 					else {
 						presenceData.details = liveDetail
@@ -128,7 +131,13 @@ presence.on("UpdateData", async () => {
 			} else if (pathname.includes("/episodes")) {
 				if (privacy) presenceData.details = strings.watchingVid;
 				else {
-					if (videoPic) presenceData.largeImageKey = thumbnail;
+					if (videoPic) {
+						presenceData.largeImageKey =
+							"https://statics.tver.jp/images/content/thumbnail/episode/small/%episodeId%.jpg".replace(
+								"%episodeId%",
+								pathname?.split("/")[2]
+							);
+					}
 					const tvStation = document.querySelector(
 						"[class^='description_meta'] > div:nth-child(1)"
 					)?.textContent;
