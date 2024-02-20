@@ -3,8 +3,8 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	pages: { [key: string]: { desc: string; image: Assets } } = {
-		"/": { desc: "Przegląda stronę główną...", image: Assets.Viewing },
-		"/schedule": { desc: "Przegląda harmonogram", image: Assets.Viewing },
+		"/": { desc: "Strona Główna", image: Assets.Viewing },
+		"/schedule": { desc: "Przegląda harmonogram...", image: Assets.Viewing },
 		"/stats": { desc: "Przegląda statystyki...", image: Assets.Viewing },
 		"/monitoring": {
 			desc: "Przegląda monitorowane serie...",
@@ -47,27 +47,39 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
+			type: ActivityType.Watching,
 		},
-		{ pathname, href, origin } = document.location;
+		{ pathname, href, origin } = document.location,
+		[privacy, buttons] = [
+			await presence.getSetting<boolean>("privacy"),
+			await presence.getSetting<boolean>("buttons"),
+		];
 
 	presenceData.smallImageKey = Assets.Viewing;
 
 	const production = pathname.startsWith("/production/as") ? pathname : null,
 		community = pathname.startsWith("/community") ? pathname : null,
-		panel = pathname.startsWith("/panel") ? pathname : null;
+		panel = pathname.startsWith("/panel") ? pathname : null,
+		ht = pathname.startsWith("/hentai") ? pathname : null;
 	switch (pathname) {
 		case pathname.startsWith("/settings") ? pathname : null:
-			presenceData.details = "Przegląda ustawienia:";
+			presenceData.details = "Przegląda ustawienia";
 			presenceData.state =
-				document.querySelector("span.navbar-item-active").textContent ||
+				document
+					.querySelector("div.text-sm-start")
+					.querySelector("span.navbar-item-active").textContent ||
 				"Nieznana zakładka";
 			break;
 		case pathname.startsWith("/profile") ? pathname : null:
-			presenceData.details = `Przegląda profil - ${
-				document.querySelector("h1").textContent
-			}`;
+			privacy
+				? (presenceData.details = "Przegląda profil")
+				: (presenceData.details = `Przegląda profil - ${
+						document.querySelector("h1").textContent
+				  }`);
 			presenceData.state = `Zakładka: ${
-				document.querySelector("span.navbar-item-active").textContent
+				document
+					.querySelector("div.profile_nav")
+					.querySelector("span.navbar-item-active").textContent
 			}`;
 			presenceData.largeImageKey = document
 				.querySelector("img.profile_page_profile_avatar__NwKeS")
@@ -77,7 +89,7 @@ presence.on("UpdateData", async () => {
 		case community:
 			presenceData.smallImageKey = Assets.Reading;
 			if (community.split("/").length === 3) {
-				presenceData.details = "Przegląda post na forum:";
+				presenceData.details = "Przegląda post na forum";
 				presenceData.state = document.querySelector("h1").textContent;
 				presenceData.buttons = [{ label: "Zobacz Post", url: href }];
 			} else presenceData.details = "Przegląda forum...";
@@ -92,7 +104,7 @@ presence.on("UpdateData", async () => {
 					.querySelector("img.shadow-sm")
 					.getAttribute("src");
 				if (!document.querySelector("iframe[title='Odtwarzacz']")) {
-					presenceData.details = "Przegląda serię:";
+					presenceData.details = "Przegląda serię";
 					presenceData.state = document.querySelector(
 						"a[mal_sync='title']"
 					).textContent;
@@ -102,15 +114,18 @@ presence.on("UpdateData", async () => {
 						h4 => h4.textContent.trim() === "Rodzaj"
 					).nextElementSibling.textContent;
 					if (animetype === "Movie") {
-						presenceData.details = "Ogląda film:";
-						presenceData.state = document.querySelector(
-							"a[mal_sync='title']"
-						).textContent;
+						privacy
+							? (presenceData.details = "Ogląda film anime")
+							: (presenceData.details = document.querySelector(
+									"a[mal_sync='title']"
+							  ).textContent);
 						presenceData.buttons = [{ label: "Oglądaj", url: href }];
 					} else {
-						presenceData.details = `Ogląda: ${
-							document.querySelector("a[mal_sync='title']").textContent
-						}`;
+						privacy
+							? (presenceData.details = "Ogląda anime")
+							: (presenceData.details = document.querySelector(
+									"a[mal_sync='title']"
+							  ).textContent);
 						presenceData.state = `Odcinek: ${
 							document.querySelector("a[mal_sync='episode']").textContent
 						}`;
@@ -139,9 +154,9 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		case panel:
-			presenceData.details = `${
-				document.querySelector("span.navbar-item-active").textContent
-			}:`;
+			presenceData.details = document
+				.querySelector("div.text-sm-start")
+				.querySelector("span.navbar-item-active").textContent;
 			presenceData.smallImageKey = Assets.Writing;
 			if (panel.startsWith("/panel/anime")) {
 				const title = [...document.querySelectorAll("p")]
@@ -155,12 +170,51 @@ presence.on("UpdateData", async () => {
 				presenceData.state = title.replace(/-/g, " ");
 			}
 			break;
+		case ht:
+			if (ht.endsWith("list"))
+				presenceData.details = "Przegląda listę hentai...";
+			else {
+				presenceData.largeImageKey = document
+					.querySelector("img.shadow-sm")
+					.getAttribute("src");
+				if (!document.querySelector("iframe[title='Odtwarzacz']")) {
+					presenceData.details = "Przegląda serię";
+					presenceData.state = document.querySelector(
+						"a[mal_sync='title']"
+					).textContent;
+					presenceData.buttons = [{ label: "Zobacz Serię", url: href }];
+				} else {
+					privacy
+						? (presenceData.details = "Ogląda anime")
+						: (presenceData.details = document.querySelector(
+								"a[mal_sync='title']"
+						  ).textContent);
+					presenceData.state = `Odcinek: ${
+						document.querySelector("a[mal_sync='episode']").textContent
+					}`;
+					presenceData.buttons = [
+						{ label: "Oglądaj", url: href },
+						{
+							label: "Cała Seria",
+							url: `${origin}${document
+								.querySelector("a[mal_sync='episode']")
+								.getAttribute("href")}`,
+						},
+					];
+				}
+			}
+			break;
 		default:
 			presenceData.details = pages[pathname].desc || "Nieznana aktywność 🤨";
 			presenceData.smallImageKey = pages[pathname].image || Assets.Viewing;
 			break;
 	}
 
+	if (!buttons || privacy) delete presenceData.buttons;
+	if (privacy) {
+		presenceData.largeImageKey = Assets.Logo;
+		delete presenceData.state;
+	}
 	if (!presenceData.details) presence.setActivity();
 	else presence.setActivity(presenceData);
 });
