@@ -36,7 +36,8 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			name: "Tver",
 			type: ActivityType.Watching,
-			largeImageKey: "https://i.imgur.com/rcCekWy.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/TVer/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		[
@@ -132,11 +133,9 @@ presence.on("UpdateData", async () => {
 				if (privacy) presenceData.details = strings.watchingVid;
 				else {
 					if (videoPic) {
-						presenceData.largeImageKey =
-							"https://statics.tver.jp/images/content/thumbnail/episode/small/%episodeId%.jpg".replace(
-								"%episodeId%",
-								pathname.split("/")[2]
-							);
+						presenceData.largeImageKey = `https://statics.tver.jp/images/content/thumbnail/episode/small/${
+							pathname.split("/")[2]
+						}.jpg`;
 					}
 					const tvStation = document.querySelector(
 						"[class^='description_meta'] > div:nth-child(1)"
