@@ -11,9 +11,10 @@
 	},
 	"url": [
 		"lectortmo.com",
-		"tmocommunity.com"
+		"tmocommunity.com",
+		"visortmo.com"
 	],
-	"version": "1.2.19",
+	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TuMangaOnline/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TuMangaOnline/assets/thumbnail.png",
 	"color": "#3366cc",
