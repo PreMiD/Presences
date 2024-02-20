@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
-			details: "Browsing website"
+			details: "Browsing website",
 		},
 		{ pathname } = document.location;
 	switch (true) {
