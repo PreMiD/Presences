@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: "1206601150607134780",
-}),
+		clientId: "1206601150607134780",
+	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	getStrings = async () => {
 		return presence.getStrings(
@@ -34,11 +34,11 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		name: "Tver",
-		type: ActivityType.Watching,
-		largeImageKey: "https://i.imgur.com/rcCekWy.png",
-		startTimestamp: browsingTimestamp,
-	},
+			name: "Tver",
+			type: ActivityType.Watching,
+			largeImageKey: "https://i.imgur.com/rcCekWy.png",
+			startTimestamp: browsingTimestamp,
+		},
 		[
 			buttons,
 			liveDetail,
@@ -89,8 +89,8 @@ presence.on("UpdateData", async () => {
 		default:
 			if (pathname.includes("/live")) {
 				const isScheduled = document.querySelector(
-					"[class^='live-scheduled_host']"
-				),
+						"[class^='live-scheduled_host']"
+					),
 					tvStation = document.querySelector(
 						"[class^='description_metaDetail'] > span"
 					)?.textContent;
