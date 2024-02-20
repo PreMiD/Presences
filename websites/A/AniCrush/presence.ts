@@ -27,11 +27,11 @@ presence.on("UpdateData", async () => {
 		largeImageKey: Assets.Logo,
 	};
 	const { pathname, href, search } = document.location,
-		showButtons = await presence.getSetting<boolean>("buttons"),
-		showW2Button = await presence.getSetting<boolean>(
-			"watch2getherJoinRoomButton"
-		),
-		showTimestamps = await presence.getSetting<boolean>("timestamps");
+	[showButtons, showW2Button, showTimestamps] = await Promise.all([
+		presence.getSetting<boolean>("buttons"),
+		presence.getSetting<boolean>("watch2getherJoinRoomButton"),
+		presence.getSetting<boolean>("timestamps")
+	]);
 	switch (true) {
 		case pathname.startsWith("/watch/"): {
 			const streamingType = Array.from(
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 					: totalEpisodeNumber.toLocaleString()
 			}`;
 			if (video.exists) {
-				if (await presence.getSetting<boolean>("timestamps")) {
+				if (showTimestamps) {
 					presenceData.startTimestamp = startTimestamp;
 					presenceData.endTimestamp = endTimestamp;
 				}
