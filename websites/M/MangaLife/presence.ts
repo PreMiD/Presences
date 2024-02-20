@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 		case path.startsWith("/manga/"):
 			presenceData.largeImageKey =
 				!privacy && cover
-					? `https://cover.nep.li/cover/${path.split("/manga/")[1]}.jpg`
+					? `https://temp.compsci88.com/cover/${path.split("/manga/")[1]}.jpg`
 					: Assets.Logo;
 			presenceData.smallImageKey =
 				!privacy && cover ? Assets.LogoPng : Assets.Search;
@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
 		case path.startsWith("/read-online/"):
 			presenceData.largeImageKey =
 				!privacy && cover
-					? `https://cover.nep.li/cover/${
+					? `https://temp.compsci88.com/cover/${
 							path.split("/read-online/")[1].split("-chapter-")[0]
 					  }.jpg`
 					: Assets.Logo;
