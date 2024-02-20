@@ -6,7 +6,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Amazon Kindle Home",
-			largeImageKey: "https://i.imgur.com/LnSgbsr.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/Amazon%20Kindle/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location;
