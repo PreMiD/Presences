@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
 					...document.querySelectorAll("#icons-results > article"),
 				];
 				if (iconCards.length) {
-					const key = `search-${searchQuery}`;
+					const key = `search-${searchQuery}-${iconCards[0].id}`;
 					registerSlideshowKey(key);
 					usesSlideshow = true;
 					const batchData = await batch(key, iconCards, async card => {
