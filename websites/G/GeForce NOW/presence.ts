@@ -11,7 +11,8 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/G/GeForce%20NOW/assets/logo.png",
-			smallImageKey: "small",
+			smallImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/GeForce%20NOW/assets/0.png",
 			startTimestamp: browsingTimestamp,
 		};
 

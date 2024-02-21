@@ -10,7 +10,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "logo",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/C/Cytoid/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 
@@ -20,48 +21,42 @@ presence.on("UpdateData", async () => {
 		if (document.location.pathname === "/levels") {
 			presenceData.details = "Browsing Levels";
 			presenceData.state = `${
-				document.querySelector("div.dropdown-trigger > button").textContent
+				document.querySelector("div.dropdown > div.btn")?.textContent
 			} ${
-				document.querySelector<SVGElement>("div.field > button > span > svg")
-					.dataset.icon === "sort-amount-up"
+				new URL(document.location.href).searchParams.get("order") === "asc"
 					? "↑"
 					: "↓"
 			}`;
-			const previewedCard = [...document.querySelectorAll("audio")].find(
-				element => !element.paused
-			)?.parentElement.parentElement.parentElement;
+			const previewedCard = document.querySelector(
+				".btn-ghost > div.radial-progress"
+			)?.parentElement.parentElement.parentElement.parentElement.parentElement;
 			if (previewedCard) {
 				presenceData.details =
-					previewedCard.querySelector(".content-title").textContent;
+					previewedCard.querySelector(".card-title").textContent;
 				presenceData.state =
-					previewedCard.querySelector(".content-subtitle").textContent;
+					previewedCard.querySelector(
+						".card-title"
+					).nextElementSibling.textContent;
 				presenceData.largeImageKey = previewedCard
-					.querySelector<HTMLDivElement>(".content-card-bg")
+					.querySelector<HTMLDivElement>(".base-card-bg")
 					.style.backgroundImage.slice(5, -2);
-				presenceData.endTimestamp = presence.getTimestampsfromMedia(
-					previewedCard.querySelector("audio")
-				)[1];
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Playing Preview";
 				presenceData.buttons = [
 					{
 						label: "View Level",
-						url: previewedCard.querySelector<HTMLAnchorElement>(
-							".content-card-overlay"
-						).href,
-					},
-					{
-						label: "View Uploader",
-						url: previewedCard.querySelector<HTMLAnchorElement>(".link").href,
+						url: previewedCard.parentElement as HTMLAnchorElement,
 					},
 				];
 			}
 		} else {
-			presenceData.details = document.querySelector("h1").textContent;
-			presenceData.state = document.querySelector("h5").textContent;
-			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-				"img.background-image"
-			).src;
+			presenceData.details =
+				document.querySelector("#contentTitle > h1").textContent;
+			presenceData.state =
+				document.querySelector("#contentTitle > p").textContent;
+			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
+				"head > meta[property='og:image']"
+			).content;
 			presenceData.buttons = [
 				{
 					label: "View Level",
@@ -69,16 +64,9 @@ presence.on("UpdateData", async () => {
 				},
 				{
 					label: "View Uploader",
-					url: document.querySelector<HTMLAnchorElement>(".player-avatar").href,
+					url: document.querySelector<HTMLAnchorElement>(".card-body > a").href,
 				},
 			];
-			if (!document.querySelector("audio").paused) {
-				presenceData.smallImageKey = Assets.Play;
-				presenceData.smallImageText = "Playing Preview";
-				presenceData.endTimestamp = presence.getTimestampsfromMedia(
-					document.querySelector("audio")
-				)[1];
-			}
 		}
 	}
 	if (document.location.pathname.startsWith("/collections")) {
@@ -86,18 +74,19 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing Collections";
 		else {
 			presenceData.details = "Viewing Collection";
-			presenceData.state = document.querySelector("h1").textContent;
-			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-				"img.background-image"
-			).src;
+			presenceData.state =
+				document.querySelector("#contentTitle > h1").textContent;
+			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
+				"head > meta[property='og:image']"
+			).content;
 			presenceData.buttons = [
 				{
-					label: "View Level",
+					label: "View Collection",
 					url: document.location.href,
 				},
 				{
 					label: "View Uploader",
-					url: document.querySelector<HTMLAnchorElement>(".player-avatar").href,
+					url: document.querySelector<HTMLAnchorElement>(".card-body > a").href,
 				},
 			];
 		}
@@ -107,7 +96,8 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing Posts";
 		else {
 			presenceData.details = "Viewing Post";
-			presenceData.state = document.querySelector("h1").textContent;
+			presenceData.state =
+				document.querySelector("#contentTitle > h1").textContent;
 			presenceData.buttons = [
 				{
 					label: "View Post",
@@ -118,9 +108,9 @@ presence.on("UpdateData", async () => {
 	}
 	if (document.location.pathname.startsWith("/profile")) {
 		presenceData.details = "Viewing Profile";
-		presenceData.state = document.querySelector(".username").textContent;
+		presenceData.state = document.querySelector("p.card-title").textContent;
 		presenceData.largeImageKey =
-			document.querySelector<HTMLImageElement>(".cytoid-avatar").src;
+			document.querySelector<HTMLImageElement>("#contentTitle img").src;
 		presenceData.buttons = [
 			{
 				label: "View Profile",
@@ -131,20 +121,20 @@ presence.on("UpdateData", async () => {
 	if (document.location.pathname.startsWith("/studio")) {
 		presenceData.details = "Viewing Studio";
 		presenceData.state = document.querySelector(
-			".is-exact-active > span"
+			"#StudioMenu .active"
 		).textContent;
 	}
 	if (document.location.pathname.startsWith("/settings")) {
 		presenceData.details = "Viewing Settings";
 		presenceData.state = document.querySelector(
-			".is-exact-active > span"
+			"#StudioMenu .active"
 		).textContent;
 	}
 	if (document.location.pathname === "/library")
 		presenceData.details = "Viewing Library";
 	if (document.location.pathname.startsWith("/pages/")) {
 		presenceData.details = `Viewing ${
-			document.querySelector("div.title").textContent
+			document.querySelector("h1").textContent
 		}`;
 	}
 	if (document.location.pathname === "/credits")

@@ -309,7 +309,7 @@ presence.on("UpdateData", async () => {
 		if (await presence.getSetting<boolean>(SettingsId.showAnimeName))
 			presenceData.state = animeName ? animeName.textContent : "...";
 		else {
-			presenceData.details = presenceData.details.replace(":", "");
+			presenceData.details = (presenceData.details as string).replace(":", "");
 			delete presenceData.smallImageText;
 		}
 	} else if (

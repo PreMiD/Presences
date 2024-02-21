@@ -21,19 +21,25 @@ function getText(selector: string) {
 	return document.querySelector(selector)?.textContent;
 }
 
+const enum Assets {
+	Salero = "https://cdn.rcd.gg/PreMiD/websites/S/Salty%20Bet/assets/0.png",
+	Trofeo = "https://cdn.rcd.gg/PreMiD/websites/S/Salty%20Bet/assets/1.png",
+	Saltgirl = "https://cdn.rcd.gg/PreMiD/websites/S/Salty%20Bet/assets/2.png",
+}
+
 function getModeImageKey(): string[] {
 	if (
 		getText(SelectorMap.tmode) ||
 		getText(SelectorMap.footer).includes("bracket!") ||
 		getText(SelectorMap.footer).includes("FINAL")
 	)
-		return ["trofeo", "Tournament Mode"];
+		return [Assets.Trofeo, "Tournament Mode"];
 	else if (
 		getText(SelectorMap.footer).includes("exhibition") ||
 		getText(SelectorMap.footer).includes("Exhibition")
 	)
-		return ["saltgirl", "Exhibition Mode"];
-	else return ["salero", "Matchmaking Mode"];
+		return [Assets.Saltgirl, "Exhibition Mode"];
+	else return [Assets.Salero, "Matchmaking Mode"];
 }
 
 function getFighters(): string {

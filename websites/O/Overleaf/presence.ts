@@ -7,7 +7,8 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/O/Overleaf/assets/logo.png",
-			smallImageKey: "whitelogo",
+			smallImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/O/Overleaf/assets/0.png",
 			smallImageText: "Overleaf",
 			startTimestamp: browsingTimestamp,
 		},

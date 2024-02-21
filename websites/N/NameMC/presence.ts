@@ -150,7 +150,7 @@ presence.on("UpdateData", async () => {
 			state: document.querySelector(
 				"#status-bar > div > div > div.col-lg-7 > h1 > samp"
 			)?.textContent,
-			smallImageKey: "search",
+			smallImageKey: Assets.Search,
 		},
 		"/skin/": {
 			details: strings.viewSkin,

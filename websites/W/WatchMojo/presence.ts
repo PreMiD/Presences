@@ -89,17 +89,15 @@ presence.on("UpdateData", async () => {
 		[name: string]: PresenceData;
 	} = {
 		"/": {
-			details: (await strings).browse,
+			details: strings.browse,
 		},
 		"/video/id/(\\d*)/": {
-			details: privacy ? (await strings).watchingVid : (await strings).watching,
+			details: privacy ? strings.watchingVid : strings.watching,
 			state: privacy
 				? null
 				: document.querySelector(".brid-poster-title")?.textContent,
 			smallImageKey: video?.paused ? Assets.Pause : Assets.Play,
-			smallImageText: video?.paused
-				? (await strings).pause
-				: (await strings).play,
+			smallImageText: video?.paused ? strings.pause : strings.play,
 			startTimestamp: video?.paused
 				? null
 				: video
@@ -110,18 +108,18 @@ presence.on("UpdateData", async () => {
 				: video
 				? presence.getTimestampsfromMedia(video)[1]
 				: null,
-			buttons: [{ label: (await strings).buttonWatchVideo, url: document.URL }],
+			buttons: [{ label: strings.buttonWatchVideo, url: document.URL }],
 		},
 		"/trivia/": {
 			details: privacy
-				? (await strings).playingTrivia
-				: (await strings).trivia.replace(
+				? strings.playingTrivia
+				: strings.trivia.replace(
 						"{0}",
 						document.querySelector("#yttitle")?.textContent
 				  ),
 			state: privacy
 				? null
-				: (await strings).triviaGame
+				: strings.triviaGame
 						.replace(
 							"{0}",
 							document
@@ -152,43 +150,39 @@ presence.on("UpdateData", async () => {
 								?.textContent.split("/")[1]
 						),
 			smallImageKey: iframePau ? Assets.Pause : Assets.Play,
-			smallImageText: iframePau ? (await strings).pause : (await strings).play,
+			smallImageText: iframePau ? strings.pause : strings.play,
 			startTimestamp: iframePau
 				? 0
 				: presence.getTimestamps(iframeCur, iframeDur)[0],
 			endTimestamp: iframePau
 				? 0
 				: presence.getTimestamps(iframeCur, iframeDur)[1],
-			buttons: [{ label: (await strings).buttonPlayTrivia, url: document.URL }],
+			buttons: [{ label: strings.buttonPlayTrivia, url: document.URL }],
 		},
 		"/blog/(\\d*)/(\\d*)/(\\d*)/": {
-			details: (await strings).article,
+			details: strings.article,
 			state: document.querySelector("h1")?.textContent,
-			buttons: [
-				{ label: (await strings).buttonReadArticle, url: document.URL },
-			],
+			buttons: [{ label: strings.buttonReadArticle, url: document.URL }],
 		},
 		"/categories/": {
-			details: (await strings).category,
+			details: strings.category,
 			state:
 				typeof location.pathname.split("/")[2] === "string"
 					? capitalize(location.pathname.split("/")[2])
 					: "NEEDS RESET",
 		},
 		"/channels/": {
-			details: (await strings).viewChannel,
+			details: strings.viewChannel,
 			state: location.pathname.split("/")[2],
-			buttons: [
-				{ label: (await strings).buttonViewChannel, url: document.URL },
-			],
+			buttons: [{ label: strings.buttonViewChannel, url: document.URL }],
 		},
 		"/search/": {
-			details: (await strings).searchFor,
+			details: strings.searchFor,
 			state:
 				document.querySelector("#result > div > b:nth-child(2)")?.textContent ||
 				document.querySelector("#resultd > a > span")?.textContent,
-			smallImageKey: "search",
-			smallImageText: (await strings).search,
+			smallImageKey: Assets.Search,
+			smallImageText: strings.search,
 		},
 	};
 
@@ -205,17 +199,17 @@ presence.on("UpdateData", async () => {
 					.match(k)
 			) {
 				presenceData.smallImageKey = Assets.Reading;
-				presenceData.smallImageText = (await strings).browse;
+				presenceData.smallImageText = strings.browse;
 				presenceData = { ...presenceData, ...v };
 			}
 		}
 	}
 
-	if (privacy && presenceData.smallImageKey === "search") {
-		presenceData.details = (await strings).searchSomething;
+	if (privacy && presenceData.smallImageKey === Assets.Search) {
+		presenceData.details = strings.searchSomething;
 		delete presenceData.state;
-	} else if (privacy && presenceData.smallImageKey === "reading") {
-		presenceData.details = (await strings).browse;
+	} else if (privacy && presenceData.smallImageKey === Assets.Reading) {
+		presenceData.details = strings.browse;
 		delete presenceData.state;
 	}
 

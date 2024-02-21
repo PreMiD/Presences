@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
 	if (playback) {
 		presenceData.details = getTrack();
 		presenceData.state = getArtists();
-		presenceData.smallImageKey = "live";
+		presenceData.smallImageKey = Assets.Live;
 		presenceData.smallImageText = (await strings).live;
 		presenceData.startTimestamp = startTimestamp;
 	} else if (path.includes("music")) {

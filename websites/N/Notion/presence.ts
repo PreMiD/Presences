@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 							.toString(16)}.png`
 					: await shortenURL(pageIcon.src, "edit")
 				: "edit";
-		} else presenceData.smallImageKey = "edit";
+		} else presenceData.smallImageKey = Assets.Writing;
 		presenceData.smallImageText = "Editing";
 	} else if (
 		document.querySelector<HTMLDivElement>(

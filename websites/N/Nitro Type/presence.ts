@@ -9,14 +9,19 @@ function getNumberWithOrdinal(n: number): string {
 	return n + (s[(v - 20) % 10] || s[v] || s[0]);
 }
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/logo.png",
+	User = "https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/0.png",
+	Guest = "https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/1.png",
+}
+
 presence.on("UpdateData", () => {
 	try {
 		//log("UpdateData called")
 		const loggedIn = !!document.querySelector(".dropdown--account span"),
 			presenceData: PresenceData = {
-				largeImageKey:
-					"https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/logo.png",
-				smallImageKey: loggedIn ? "user" : "guest",
+				largeImageKey: Assets.Logo,
+				smallImageKey: loggedIn ? Assets.User : Assets.Guest,
 				smallImageText: loggedIn
 					? document.querySelector(".dropdown--account span").textContent
 					: "Racing as a guest",

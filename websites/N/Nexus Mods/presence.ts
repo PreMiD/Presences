@@ -1017,7 +1017,7 @@ presence.on("UpdateData", () => {
 	presenceData = {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/N/Nexus%20Mods/assets/logo.png",
-		smallImageKey: "reading",
+		smallImageKey: Assets.Reading,
 		startTimestamp: browsingTimestamp,
 	};
 

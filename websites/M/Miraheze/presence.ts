@@ -3,14 +3,20 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Donate = "https://cdn.rcd.gg/PreMiD/websites/M/Miraheze/assets/0.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/Miraheze/assets/logo.png",
+	Phabricator = "https://cdn.rcd.gg/PreMiD/websites/M/Miraheze/assets/1.png",
+}
+
 let currentURL = new URL(document.location.href),
 	currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
 	presenceData: PresenceData = {
 		details: "Viewing an unsupported page",
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/M/Miraheze/assets/logo.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 	};
+
 const updateCallback = {
 		_function: null as () => void,
 		get function(): () => void {
@@ -29,8 +35,7 @@ const updateCallback = {
 	resetData = (
 		defaultData: PresenceData = {
 			details: "Viewing an unsupported page",
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/M/Miraheze/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		}
 	): void => {
@@ -63,7 +68,7 @@ const updateCallback = {
 		} else {
 			switch (currentURL.hostname) {
 				case "phabricator.miraheze.org": {
-					presenceData.smallImageKey = "phabricator";
+					presenceData.smallImageKey = Assets.Phabricator;
 					presenceData.smallImageText = "Phabricator";
 
 					if (currentPath[0] === "") presenceData.details = "On the home page";
@@ -236,7 +241,7 @@ const updateCallback = {
 					break;
 				}
 				case "blog.miraheze.org": {
-					presenceData.smallImageKey = "phabricator";
+					presenceData.smallImageKey = Assets.Phabricator;
 					presenceData.smallImageText = "Phabricator (blog)";
 
 					if (!currentPath[1]) {
@@ -254,7 +259,7 @@ const updateCallback = {
 					break;
 				}
 				case "donate.miraheze.org": {
-					presenceData.smallImageKey = "donate";
+					presenceData.smallImageKey = Assets.Donate;
 					presenceData.smallImageText = "Donation Gateway";
 
 					presenceData.details = "Donating to Miraheze";

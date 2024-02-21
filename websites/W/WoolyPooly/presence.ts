@@ -5,6 +5,25 @@ const presence = new Presence({
 
 let currencyTitle, currencyEffort, effortType, wallet24Revenue: string;
 
+const assets = {
+	etc: "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/0.png",
+	aion: "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/1.png",
+	mwc: "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/2.png",
+	ae: "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/3.png",
+	cfx: "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/4.png",
+	ctxc: "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/5.png",
+	rvn: "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/6.png",
+	eth: "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/7.png",
+	veil: "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/8.png",
+	grin: "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/9.png",
+	sero: "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/10.png",
+	btg: "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/11.png",
+	zel: "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/12.png",
+	ergo: "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/13.png",
+	xzc: "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/14.png",
+	erg: "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/15.png",
+};
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
@@ -64,7 +83,8 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `Effort (${effortType}): ${currencyEffort}%`;
 				}
 				presenceData.details = currencyTitle;
-				presenceData.smallImageKey = window.location.pathname.split("/")[2];
+				presenceData.smallImageKey =
+					assets[window.location.pathname.split("/")[2] as keyof typeof assets];
 				presenceData.smallImageText = currencyTitle;
 			} else {
 				presenceData.startTimestamp = browsingTimestamp;

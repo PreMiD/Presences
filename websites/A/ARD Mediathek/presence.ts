@@ -15,6 +15,10 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/ARD%20Mediathek/assets/logo.png",
+	ThreeSat = "https://cdn.rcd.gg/PreMiD/websites/A/ARD%20Mediathek/assets/0.png",
+	Deutschewelle = "https://cdn.rcd.gg/PreMiD/websites/A/ARD%20Mediathek/assets/1.png",
+	Kika = "https://cdn.rcd.gg/PreMiD/websites/A/ARD%20Mediathek/assets/2.png",
+	ArdMediathek = "https://cdn.rcd.gg/PreMiD/websites/A/ARD%20Mediathek/assets/3.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -50,13 +54,13 @@ presence.on("UpdateData", async () => {
 					.querySelector(".src__Box-sc-1sbtrzs-0.Column-wbrv0h-1.llCdnS.hkXjQv")
 					.children[0].children[0].getAttribute("src");
 				if (channelLinkIMG === "/images/KdbelgIm.svg")
-					presenceData.largeImageKey = "3sat";
+					presenceData.largeImageKey = Assets.ThreeSat;
 				else if (channelLinkIMG === "/images/siBNbNWW.svg")
-					presenceData.largeImageKey = "deutschewelle";
-				else presenceData.largeImageKey = "kika";
+					presenceData.largeImageKey = Assets.Deutschewelle;
+				else presenceData.largeImageKey = Assets.Kika;
 			}
 
-			presenceData.smallImageKey = "live";
+			presenceData.smallImageKey = Assets.Live;
 			presenceData.smallImageText = "Live";
 			presenceData.details = `${document.title
 				.replace(/Livestream \| ARD-Mediathek/, "")
@@ -68,7 +72,7 @@ presence.on("UpdateData", async () => {
 			];
 		} else if (path.startsWith("/video/")) {
 			// Video-on-demand
-			presenceData.largeImageKey = "ard_mediathek";
+			presenceData.largeImageKey = Assets.ArdMediathek;
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = (await strings).play;
 			presenceData.details = videoTitle;

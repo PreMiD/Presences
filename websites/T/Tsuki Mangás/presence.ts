@@ -10,6 +10,38 @@ enum ResourceNames {
 	history = "history",
 	info = "info",
 }
+
+/* eslint-disable camelcase */
+const assets = {
+	logo_cloud_dark:
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/0.png",
+	logo_book_dark:
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/1.png",
+	logo_book:
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/2.png",
+	logo_cloud:
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/3.png",
+	reading_dark: Assets.Reading,
+	writing: Assets.Writing,
+	reading: Assets.Reading,
+	search_dark: Assets.Search,
+	search: Assets.Search,
+	writing_dark: Assets.Writing,
+	history_dark:
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/4.png",
+	history:
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/5.png",
+	info: "https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/6.png",
+	info_dark:
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/7.png",
+	hatsune_miku:
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/8.png",
+	bell: "https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/9.png",
+	bell_dark:
+		"https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/10.png",
+};
+/* eslint-enable camelcase */
+
 async function Resource(ResourceSelected: ResourceNames): Promise<string> {
 	let value = ResourceSelected.toString();
 	const logo = await presence.getSetting<number>("logo"),
@@ -17,8 +49,9 @@ async function Resource(ResourceSelected: ResourceNames): Promise<string> {
 	if (ResourceSelected === ResourceNames.logo)
 		logo !== 0 ? (value += "_book") : (value += "_cloud");
 	if (darkmode) value += "_dark";
-	return value;
+	return assets[value as keyof typeof assets];
 }
+
 function getPagination(pagN: number): number[] {
 	const pagination = document.querySelectorAll(".pagination")[pagN];
 	let current = 1,

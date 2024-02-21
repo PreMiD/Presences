@@ -56,7 +56,6 @@ presence.on("UpdateData", async () => {
 				presenceData.details =
 					document.querySelector(".breadcrumbs").lastElementChild.textContent;
 				presenceData.state = `Solving: ${document.title.split("|")[0]}`;
-				presenceData.smallImageKey = "code";
 			} else {
 				// ? https://codechef.com
 				switch (location.pathname.split("/")[1]) {
@@ -65,7 +64,6 @@ presence.on("UpdateData", async () => {
 						presenceData.state = `Editing ${
 							document.querySelector(".chosen-single").childNodes[0].textContent
 						} file`;
-						presenceData.smallImageKey = "code";
 						break;
 					}
 

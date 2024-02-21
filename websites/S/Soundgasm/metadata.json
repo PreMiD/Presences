@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "623396579960946690",
+		"name": "bear_"
+	},
+	"service": "Soundgasm",
+	"description": {
+		"en": "The future home for your audio hosting needs."
+	},
+	"url": [
+		"soundgasm.net",
+		"www.soundgasm.net"
+	],
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Soundgasm/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Soundgasm/assets/thumbnail.png",
+	"color": "#003399",
+	"category": "other",
+	"tags": [
+		"audio",
+		"asmr",
+		"music",
+		"recording",
+		"nsfw"
+	],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": "youtube"
+		}
+	]
+}

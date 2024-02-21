@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "623396579960946690",
+		"name": "bear_"
+	},
+	"service": "4chan",
+	"description": {
+		"en": "4chan is an anonymous English-language imageboard website. Launched by Christopher \\\"moot\\\" Poole in October 2003, the site hosts boards dedicated to a wide variety of topics, from video games and television to literature, cooking, weapons, music, history, anime, fitness, politics, and sports, among others."
+	},
+	"url": [
+		"www.4chan.org",
+		"4chan.org"
+	],
+	"version": "1.0.2",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/0-9/4chan/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/0-9/4chan/assets/thumbnail.png",
+	"color": "#789922",
+	"category": "socials",
+	"tags": [
+		"4chan",
+		"imageboard",
+		"nsfw"
+	]
+}

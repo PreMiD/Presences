@@ -40,7 +40,8 @@ presence.on("UpdateData", () => {
 		presenceData.state = document
 			.querySelector("#cookies div")
 			.textContent.replace("per second :", "Per second:");
-		presenceData.smallImageKey = "legacyy";
+		presenceData.smallImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/D/DashNet/assets/0.png";
 		presenceData.smallImageText = `Legacy level: ${
 			document.querySelector("#ascendNumber").textContent
 		}`;

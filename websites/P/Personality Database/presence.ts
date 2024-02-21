@@ -3,6 +3,17 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Group = "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/0.png",
+	Home = "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/1.png",
+	Notification = "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/2.png",
+	User = "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/3.png",
+	Star = "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/4.png",
+	List = "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/5.png",
+	Poll = "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/6.png",
+	PersonalityDatabase = "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/7.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
@@ -34,7 +45,7 @@ presence.on("UpdateData", async () => {
 			))?.getAttribute("src");
 
 		if (profilePicture) presenceData.largeImageKey = profilePicture;
-		presenceData.smallImageKey = "poll";
+		presenceData.smallImageKey = Assets.Poll;
 		presenceData.details = "Viewing:";
 
 		const firstType: string = profilePersonality?.split(" - ")[0];
@@ -61,21 +72,21 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Searching:";
 		presenceData.state = urlParams.get("keyword") || urlParams.get("q");
 	} else if (document.location.pathname === "/vote") {
-		presenceData.smallImageKey = "home";
+		presenceData.smallImageKey = Assets.Home;
 		presenceData.details = "Viewing homepage";
 	} else if (document.location.pathname.includes("/profile")) {
-		presenceData.smallImageKey = "list";
+		presenceData.smallImageKey = Assets.List;
 		presenceData.details = "Viewing category:";
 		presenceData.state = document.title?.split(" | ")[0];
 	} else if (document.location.pathname.includes("/community")) {
-		presenceData.smallImageKey = "group";
+		presenceData.smallImageKey = Assets.Group;
 		presenceData.details = "Viewing community feed";
 	} else if (document.location.pathname.includes("/topic")) {
-		presenceData.smallImageKey = "star";
+		presenceData.smallImageKey = Assets.Star;
 		presenceData.details = "Viewing topic:";
 		presenceData.state = document.title?.split(" | ")[0];
 	} else if (document.location.pathname.includes("/notification")) {
-		presenceData.smallImageKey = "notification";
+		presenceData.smallImageKey = Assets.Notification;
 		presenceData.details = "Viewing notification";
 	} else if (document.location.pathname.includes("/user/")) {
 		if (showUserNameInUserProfile) {
@@ -90,7 +101,7 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		} else presenceData.details = "Viewing user's profile";
-		presenceData.smallImageKey = "user";
+		presenceData.smallImageKey = Assets.User;
 	} else {
 		presenceData.details = "Viewing page:";
 		presenceData.state = document.title?.split(" | ")[0];

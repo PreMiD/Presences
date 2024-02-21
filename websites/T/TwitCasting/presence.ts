@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 		{ pathname, search, href } = document.location,
 		title = document
 			.querySelector<HTMLSpanElement>(
-				":is(#movie_title_content, .tw-player-page__title-editor-value)"
+				":is(#movie_title_content, .tw-player-page-title-title)"
 			)
 			?.innerText.split("\n")[0],
 		channelName =
@@ -131,7 +131,7 @@ presence.on("UpdateData", async () => {
 					{ label: strings.buttonWatchStream, url: document.URL },
 				];
 			}
-			presenceData.smallImageKey = "live";
+			presenceData.smallImageKey = Assets.Live;
 			presenceData.smallImageText = strings.live;
 		} else if (pathname.includes("/movie")) {
 			if (privacy) presenceData.details = strings.watchingVid;

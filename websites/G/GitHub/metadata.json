@@ -8,6 +8,10 @@
 		{
 			"name": "Encrypted",
 			"id": "564434085708038144"
+		},
+		{
+			"name": "veryCrunchy",
+			"id": "576097150359044106"
 		}
 	],
 	"service": "GitHub",
@@ -29,10 +33,10 @@
 		"github.com",
 		"gist.github.com"
 	],
-	"version": "2.11.8",
+	"version": "2.11.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GitHub/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GitHub/assets/thumbnail.png",
-	"color": "#000000",
+	"color": "#171515",
 	"category": "other",
 	"tags": [
 		"programming",

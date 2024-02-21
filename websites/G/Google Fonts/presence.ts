@@ -7,7 +7,8 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/G/Google%20Fonts/assets/logo.png",
-			smallImageKey: "google",
+			smallImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/Google%20Fonts/assets/0.png",
 			startTimestamp: tmb,
 		},
 		path = document.location.pathname.toLowerCase(),

@@ -12,6 +12,13 @@ let songTimestamp = Math.floor(Date.now() / 1000),
 	currentTitle = "",
 	lastTitle = "";
 
+const enum Assets {
+	Gold = "https://cdn.rcd.gg/PreMiD/websites/O/OnlyHit/assets/0.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/O/OnlyHit/assets/1.png",
+	Japan = "https://cdn.rcd.gg/PreMiD/websites/O/OnlyHit/assets/2.png",
+	Kpop = "https://cdn.rcd.gg/PreMiD/websites/O/OnlyHit/assets/3.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {},
 		[format1, format2, showElapsed] = await Promise.all([
@@ -25,7 +32,7 @@ presence.on("UpdateData", async () => {
 		//* Show timestamp if the setting is enabled and set largeImageKey
 		if (showElapsed) presenceData.startTimestamp = browsingTimestamp;
 
-		presenceData.largeImageKey = "logo_onlyhit";
+		presenceData.largeImageKey = Assets.Logo;
 		presenceData.smallImageKey = Assets.Reading;
 
 		//* If they have site information enabled
@@ -47,16 +54,16 @@ presence.on("UpdateData", async () => {
 		//* Set largeImageKey to the radio type
 		switch (document.querySelector(".stream-name").textContent) {
 			case "OnlyHit Gold":
-				presenceData.largeImageKey = "logo_gold";
+				presenceData.largeImageKey = Assets.Gold;
 				break;
 			case "OnlyHit Japan":
-				presenceData.largeImageKey = "logo_japan";
+				presenceData.largeImageKey = Assets.Japan;
 				break;
 			case "OnlyHit K-Pop":
-				presenceData.largeImageKey = "logo_k-pop";
+				presenceData.largeImageKey = Assets.Kpop;
 				break;
 			default:
-				presenceData.largeImageKey = "logo_onlyhit";
+				presenceData.largeImageKey = Assets.Logo;
 				break;
 		}
 

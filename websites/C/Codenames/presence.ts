@@ -1,42 +1,74 @@
 type availableColors = "red" | "blue" | "beige";
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/logo.png",
+	Beige5 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/0.png",
+	Red6 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/1.png",
+	Blue1 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/2.png",
+	Red8 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/3.png",
+	Red4 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/4.png",
+	Beige3 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/5.png",
+	Blue4 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/6.png",
+	Codenames = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/7.png",
+	Blue8 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/8.png",
+	Blue5 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/9.png",
+	Blue9 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/10.png",
+	Beige2 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/11.png",
+	Blue7 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/12.png",
+	Blue6 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/13.png",
+	Blue2 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/14.png",
+	Blue3 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/15.png",
+	Red9 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/16.png",
+	Beige4 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/17.png",
+	Beige6 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/18.png",
+	Red5 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/19.png",
+	Red2 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/20.png",
+	Red7 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/21.png",
+	Red1 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/22.png",
+	Red3 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/23.png",
+	Beige1 = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/24.png",
+}
+
 const presence = new Presence({
 		clientId: "817859401477259315",
 	}),
 	slideshow = presence.createSlideshow(),
 	icons = {
 		red: [
-			"red1",
-			"red2",
-			"red3",
-			"red4",
-			"red5",
-			"red6",
-			"red7",
-			"red8",
-			"red9",
+			Assets.Red1,
+			Assets.Red2,
+			Assets.Red3,
+			Assets.Red4,
+			Assets.Red5,
+			Assets.Red6,
+			Assets.Red7,
+			Assets.Red8,
+			Assets.Red9,
 		],
 		blue: [
-			"blue1",
-			"blue2",
-			"blue3",
-			"blue4",
-			"blue5",
-			"blue6",
-			"blue7",
-			"blue8",
-			"blue9",
+			Assets.Blue1,
+			Assets.Blue2,
+			Assets.Blue3,
+			Assets.Blue4,
+			Assets.Blue5,
+			Assets.Blue6,
+			Assets.Blue7,
+			Assets.Blue8,
+			Assets.Blue9,
 		],
-		beige: ["beige1", "beige2", "beige3", "beige4", "beige5", "beige6"],
+		beige: [
+			Assets.Beige1,
+			Assets.Beige2,
+			Assets.Beige3,
+			Assets.Beige4,
+			Assets.Beige5,
+			Assets.Beige6,
+		],
 	};
 
 let browsingTimestamp = Math.floor(Date.now() / 1000),
 	lastTeamLog: availableColors = "beige",
 	currentlySetColor: availableColors = "beige";
-
-const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/logo.png",
-}
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {

@@ -10,7 +10,10 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp,
 	};
 
-	if (document.location.hostname === "lectortmo.com") {
+	if (
+		document.location.hostname === "lectortmo.com" ||
+		document.location.hostname === "visortmo.com"
+	) {
 		if (document.location.pathname === "/")
 			presenceData.details = "Browsing...";
 		else if (document.location.pathname.includes("/library/manga/")) {

@@ -1,43 +1,47 @@
 const presence = new Presence({
 		clientId: "612416330003382314",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000),
-	dfLgImage = "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/0.png";
-let profileName,
-	profileId: string,
-	profileImg: string,
-	profileTabs,
-	messageTab,
-	friendsTab,
-	inventoryTab,
-	groupName,
-	groupTab,
-	groupImage,
-	gameId: string,
-	gameImage: string,
-	gameTab,
-	localizationTab: HTMLSpanElement,
-	localizationGameName,
-	transactionsTab,
-	dfPrevTopic: string,
-	dfTopicName = "[Loading...]",
-	talentUserData: [string, string] = ["0", "0"];
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/logo.png",
+	DeveloperLogo = "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/0.png",
+	CreateLogo = "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/1.png",
+}
+let devImage = false;
 
 presence.on("UpdateData", async () => {
-	const [buttons, imagesEnabled] = await Promise.all([
+	const [buttons, imagesEnabled, onlyDevForums] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("images"),
+			presence.getSetting<boolean>("only-devforum"),
 		]),
 		presenceData: PresenceData = {
 			details: "Unknown page",
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, hostname, href } = document.location,
 		gameName = document.querySelector<HTMLHeadingElement>(
 			"div.game-calls-to-action > div.game-title-container > h1"
-		);
+		),
+		profileName = document.querySelector<HTMLHeadingElement>(".profile-name "),
+		messageTab =
+			document.querySelector("li.menu-option.ng-scope.active")?.textContent ??
+			document.querySelector("li.rbx-tab.ng-scope.active")?.textContent,
+		groupTab =
+			document.querySelector<HTMLLIElement>(
+				"#configure-group .tab-content-group ul .active"
+			) ??
+			document.querySelector<HTMLLIElement>(
+				"#horizontal-tabs li.rbx-tab.active"
+			),
+		newUrl = new URL(href),
+		searchResult =
+			newUrl.searchParams?.get("Keyword") ?? newUrl.searchParams?.get("query"),
+		item = document.querySelector<HTMLHeadingElement>(
+			".item-name-container h2"
+		)?.textContent;
 
 	switch (hostname) {
 		case "web.roblox.com":
@@ -65,380 +69,336 @@ presence.on("UpdateData", async () => {
 				"/login": { state: "Log In" },
 			};
 
-			if (pathname.includes("/users") && pathname.includes("/profile")) {
-				profileName = document.querySelector<HTMLHeadingElement>(
-					"div.header-names > div.profile-display-name"
-				);
-
-				profileTabs = document.querySelector<HTMLAnchorElement>(
-					"#horizontal-tabs li.rbx-tab.active a"
-				);
-
-				if (profileTabs) {
-					if (profileTabs.textContent === "Creations") {
+			switch (true) {
+				case !!document.querySelector(".notification-stream-container"): {
+					presenceData.details = "Viewing Notifications";
+					if (presenceData.state) delete presenceData.state;
+					break;
+				}
+				case pathname.includes("/users") && pathname.includes("/profile"): {
+					if (
+						document
+							.querySelector<HTMLAnchorElement>(
+								"#horizontal-tabs li.rbx-tab.active a"
+							)
+							?.textContent?.trim() === "Creations" // Profile tabs
+					) {
 						presenceData.details = `Profile: ${profileName.textContent}`;
 						presenceData.state = "Browsing creations...";
+					} else {
+						presenceData.details = "Looking on a profile: ";
+						presenceData.state = profileName.textContent;
 					}
-				} else {
-					presenceData.details = "Looking on a profile: ";
-					presenceData.state = profileName.textContent;
-				}
 
-				const Id = pathname.split("/")[2];
+					presenceData.largeImageKey =
+						document
+							.querySelector(".avatar-card-link.avatar-image-link")
+							?.querySelector("img")
+							?.getAttribute("src") ?? Assets.Logo;
 
-				if (profileId !== Id) {
-					const req = await fetch(
-						`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${
-							pathname.split("/")[2]
-						}&size=420x420&format=Png`
-					).then(response => response.json());
-					profileImg = req.data[0].imageUrl;
-					profileId = Id;
-				}
-
-				presenceData.largeImageKey = imagesEnabled ? profileImg : "lg";
-
-				if (buttons) {
 					presenceData.buttons = [
 						{
 							label: "Visit Profile",
-							url: document.URL,
+							url: href,
 						},
 					];
+					break;
 				}
-			} else if (
-				pathname.includes("/my/messages") ||
-				pathname.includes("/My/Messages")
-			) {
-				messageTab = document.querySelector<HTMLLIElement>(
-					"div.messages-container > div > ul > li.rbx-tab.ng-scope.active"
-				);
-
-				presenceData.details = "Messages";
-				presenceData.state = `Tab: ${messageTab.textContent}`;
-			} else if (pathname.includes("/my/account")) {
-				messageTab = document.querySelector<HTMLLIElement>(
-					"#settings-container > div > ul > li.menu-option.ng-scope.active"
-				);
-
-				presenceData.details = "Settings";
-				presenceData.state = `Tab: ${messageTab.textContent}`;
-			} else if (pathname.includes("/users/friends")) {
-				friendsTab = document.querySelector<HTMLAnchorElement>(
-					".rbx-tab-heading.active"
-				);
-
-				presenceData.details = "Friends";
-				presenceData.state = `Tab: ${friendsTab.textContent}`;
-			} else if (
-				pathname.includes("/users") &&
-				pathname.includes("/inventory")
-			) {
-				inventoryTab = document.querySelector<HTMLLIElement>(
-					"#vertical-menu > li.menu-option.ng-scope.active"
-				);
-
-				presenceData.details = "Inventory";
-				presenceData.state = inventoryTab.textContent;
-			} else if (
-				pathname.includes("/groups") &&
-				!pathname.includes("/search") &&
-				!pathname.includes("/develop")
-			) {
-				if (pathname.includes("/create"))
-					presenceData.details = "Creating New Group";
-				else if (pathname.includes("/configure")) {
-					groupTab = document.querySelector<HTMLLIElement>(
-						"#configure-group .tab-content-group ul .active"
-					);
-
-					presenceData.details = "Configuring Group";
+				case pathname.includes("/my/messages"):
+				case pathname.includes("/My/Messages"): {
+					presenceData.details = "Messages";
+					presenceData.state = `Tab: ${messageTab}`;
+					break;
+				}
+				case pathname.includes("/my/account"): {
+					presenceData.details = "Settings";
+					presenceData.state = `Tab: ${messageTab}`;
+					break;
+				}
+				case pathname.includes("/users/friends"): {
+					presenceData.details = "Friends";
+					presenceData.state = `Tab: ${
+						document.querySelector<HTMLAnchorElement>(".rbx-tab-heading.active")
+							.textContent // Friends tab
+					}`;
+					break;
+				}
+				case pathname.includes("/users") && pathname.includes("/inventory"): {
+					presenceData.details = "Inventory";
+					presenceData.state = document.querySelector<HTMLLIElement>(
+						"#vertical-menu > li.menu-option.ng-scope.active"
+					).textContent; // Inventory tab
+					break;
+				}
+				case pathname.includes("/groups") &&
+					!pathname.includes("/search") &&
+					!pathname.includes("/develop"): {
 					presenceData.state = `Tab: ${groupTab.textContent}`;
-				} else {
-					groupName = document.querySelector<HTMLHeadingElement>(
-						".group-name.text-overflow"
-					);
-					groupImage = document.querySelector<HTMLImageElement>(
-						"div.group-image img"
-					);
-					groupTab = document.querySelector<HTMLLIElement>(
-						"#horizontal-tabs li.rbx-tab.active"
-					);
+					if (pathname.includes("/create"))
+						presenceData.details = "Creating New Group";
+					else if (pathname.includes("/configure"))
+						presenceData.details = "Configuring Group";
+					else {
+						presenceData.details = document.querySelector<HTMLHeadingElement>(
+							".group-name.text-overflow"
+						).textContent; // Groupname
 
-					presenceData.details = groupName.textContent;
-					presenceData.state = `Tab: ${groupTab.textContent}`;
-					presenceData.largeImageKey = imagesEnabled ? groupImage.src : "lg";
+						presenceData.largeImageKey =
+							document.querySelector<HTMLImageElement>("div.group-image img")
+								?.src ?? Assets.Logo; // Groupimage
 
-					if (buttons) {
 						presenceData.buttons = [
 							{
 								label: "Visit Group",
-								url: document.URL,
+								url: href,
 							},
 						];
 					}
+					break;
 				}
-			} else if (pathname.includes("/search/groups")) {
-				presenceData.details = "Searching for a group:";
-				presenceData.state = new URL(href).searchParams.get("keyword");
-			} else if (
-				(pathname === "/discover/" || pathname === "/discover") &&
-				gameName === null
-			) {
-				presenceData.details = "Browsing games...";
-				delete presenceData.state;
-
-				const searchResult = new URL(href).searchParams.get("Keyword");
-
-				if (searchResult) {
-					presenceData.details = "Searching for a game: ";
-					presenceData.state = searchResult;
+				case pathname.includes("/search/groups"): {
+					presenceData.details = "Searching for a group:";
+					presenceData.state = new URL(href).searchParams.get("keyword");
+					break;
 				}
-			} else if (
-				pathname.includes("/games/") &&
-				!pathname.includes("/localization")
-			) {
-				gameTab = document.querySelector<HTMLLIElement>(
-					"#horizontal-tabs li.rbx-tab.active"
-				);
-				const Id = pathname.split("/")[2];
+				case (pathname === "/discover/" || pathname === "/discover") &&
+					gameName === null: {
+					presenceData.details = "Browsing games...";
+					if (presenceData.state) delete presenceData.state;
 
-				if (gameId !== Id) {
-					const req = await fetch(
-						`https://thumbnails.roblox.com/v1/places/gameicons?placeIds=${
-							pathname.split("/")[2]
-						}&size=512x512&format=Png`
-					).then(response => response.json());
-					gameImage = req.data[0].imageUrl;
-					gameId = Id;
+					if (searchResult) {
+						presenceData.details = "Searching for a game: ";
+						presenceData.smallImageKey = Assets.Search;
+						presenceData.state = searchResult;
+					}
+					break;
 				}
+				case pathname.includes("/games/") &&
+					!pathname.includes("/localization"): {
+					presenceData.details = `Game: ${gameName.textContent}`;
+					presenceData.state = `Tab: ${
+						document.querySelector<HTMLLIElement>(
+							"#horizontal-tabs li.rbx-tab.active"
+						).textContent // Gametab
+					}`;
+					presenceData.largeImageKey =
+						document
+							.querySelector("[class*='carousel-item'] > img")
+							?.getAttribute("src") ?? Assets.Logo;
 
-				presenceData.details = `Game: ${gameName.textContent}`;
-				presenceData.state = `Tab: ${gameTab.textContent}`;
-				presenceData.largeImageKey = imagesEnabled ? gameImage : "lg";
-				if (buttons) {
 					presenceData.buttons = [
 						{
 							label: "Visit Game",
-							url: document.URL,
+							url: href,
 						},
 					];
+					break;
 				}
-			} else if (pathname.includes("/catalog")) {
-				const searchResult = new URL(href).searchParams.get("Keyword");
+				case pathname.includes("/catalog"): {
+					const itemImage = document.querySelector<HTMLImageElement>(
+						"span.thumbnail-span img"
+					);
 
-				presenceData.details = "Current page:";
-				presenceData.state = "Catalog";
+					if (searchResult) {
+						presenceData.details = "Searching for an item: ";
+						presenceData.smallImageKey = Assets.Search;
+						presenceData.state = searchResult;
+					} else if (itemImage) {
+						presenceData.details = "Looking at Catalog Item:";
+						presenceData.largeImageKey = itemImage?.src ?? Assets.Logo;
+						presenceData.state = item;
 
-				const itemImage = document.querySelector<HTMLImageElement>(
-					"span.thumbnail-span img"
-				);
-
-				if (searchResult) {
-					presenceData.details = "Searching for an item: ";
-					presenceData.state = searchResult;
-				} else if (itemImage) {
-					presenceData.details = "Looking at Catalog Item:";
-					presenceData.largeImageKey = imagesEnabled ? itemImage.src : "lg";
-					presenceData.state = document.querySelector<HTMLHeadingElement>(
-						".item-name-container h2"
-					).textContent;
-
-					if (buttons) {
 						presenceData.buttons = [
 							{
 								label: "View Catalog Item",
-								url: document.URL,
+								url: href,
 							},
 						];
+					} else {
+						presenceData.details = "Current page:";
+						presenceData.state = "Catalog";
 					}
+					break;
 				}
-			} else if (pathname.includes("/places/")) {
-				presenceData.details = "Configuring Place";
-				presenceData.state = `Tab: ${
-					document.querySelector<HTMLDivElement>(
-						"#MasterContainer #navbar div.selected a"
-					).textContent || "Unknown"
-				}`;
-			} else if (pathname.includes("/universes/configure")) {
-				presenceData.details = "Configuring Experience";
-				presenceData.state = `Tab: ${
-					document.querySelector<HTMLDivElement>(
-						"#MasterContainer #navbar div.selected a"
-					).textContent || "Unknown"
-				}`;
-			} else if (pathname.includes("/bundles/")) {
-				presenceData.details = "Looking at Bundle:";
-				presenceData.largeImageKey = imagesEnabled
-					? document.querySelector<HTMLImageElement>("span.thumbnail-span img")
-							.src
-					: "lg";
-				presenceData.state = document.querySelector<HTMLHeadingElement>(
-					".item-name-container h2"
-				).textContent;
+				case pathname.includes("/places/"): {
+					presenceData.details = "Configuring Place";
+					presenceData.state = `Tab: ${
+						document.querySelector<HTMLDivElement>(
+							"#MasterContainer #navbar div.selected a"
+						).textContent || "Unknown"
+					}`;
+					break;
+				}
+				case pathname.includes("/universes/configure"): {
+					presenceData.details = "Configuring Experience";
+					presenceData.state = `Tab: ${
+						document.querySelector<HTMLDivElement>(
+							"#MasterContainer #navbar div.selected a"
+						).textContent || "Unknown"
+					}`;
+					break;
+				}
+				case pathname.includes("/bundles/"): {
+					presenceData.details = "Looking at Bundle:";
+					presenceData.largeImageKey =
+						document.querySelector<HTMLImageElement>("span.thumbnail-span img")
+							?.src ?? Assets.Logo;
+					presenceData.state = item;
 
-				if (buttons) {
 					presenceData.buttons = [
 						{
 							label: "View Bundle",
-							url: document.URL,
+							url: href,
 						},
 					];
+					break;
 				}
-			} else if (pathname.includes("/search/users")) {
-				presenceData.details = "Searching for an user:";
-				presenceData.state = new URL(href).searchParams.get("keyword");
-			} else if (pathname.includes("/develop")) {
-				presenceData.details = "Developer Page";
-				const developTabs = document.querySelector<HTMLDivElement>(
-					"#DevelopTabs .tab-active"
-				).textContent;
+				case pathname.includes("/search/users"): {
+					presenceData.details = "Searching for an user:";
+					presenceData.smallImageKey = Assets.Search;
+					presenceData.state = new URL(href).searchParams.get("keyword");
+					break;
+				}
+				case pathname.includes("/develop"): {
+					presenceData.details = "Developer Page";
+					const developTabs = document.querySelector<HTMLDivElement>(
+						"#DevelopTabs .tab-active"
+					).textContent;
 
-				switch (developTabs) {
-					case "My Creations": {
-						presenceData.state = `Tab: ${developTabs} > ${
-							document.querySelector<HTMLAnchorElement>(".tab-item-selected")
-								.textContent
-						}`;
-						break;
-					}
+					switch (developTabs) {
+						case "My Creations": {
+							presenceData.state = `Tab: ${developTabs} > ${
+								document.querySelector<HTMLAnchorElement>(".tab-item-selected")
+									.textContent
+							}`;
+							break;
+						}
 
-					case "Group Creations": {
-						presenceData.state = `Tab: ${developTabs} > ${
-							document.querySelector<HTMLAnchorElement>(
-								'#SelectedGroupId option[selected="selected"]'
-							).textContent
-						} > ${
-							document.querySelector<HTMLAnchorElement>(".tab-item-selected")
-								.textContent
-						}`;
-						break;
-					}
-
-					case "Library": {
-						const searchResult = new URL(href).searchParams.get("Keyword");
-
-						if (searchResult) {
-							presenceData.details = `Searching at ${developTabs} for: `;
-							presenceData.state = searchResult;
-						} else {
+						case "Group Creations": {
 							presenceData.state = `Tab: ${developTabs} > ${
 								document.querySelector<HTMLAnchorElement>(
-									".selectedAssetTypeFilter"
+									'#SelectedGroupId option[selected="selected"]'
 								).textContent
+							} > ${
+								document.querySelector<HTMLAnchorElement>(".tab-item-selected")
+									.textContent
 							}`;
+							break;
 						}
-						break;
-					}
 
-					default: {
-						presenceData.state = `Tab: ${developTabs}`;
-						break;
+						case "Library": {
+							if (searchResult) {
+								presenceData.details = `Searching at ${developTabs} for: `;
+								presenceData.state = searchResult;
+							} else {
+								presenceData.state = `Tab: ${developTabs} > ${
+									document.querySelector<HTMLAnchorElement>(
+										".selectedAssetTypeFilter"
+									).textContent
+								}`;
+							}
+							break;
+						}
+
+						default: {
+							presenceData.state = `Tab: ${developTabs}`;
+							break;
+						}
 					}
+					break;
 				}
-			} else if (pathname.includes("/localization")) {
-				if (pathname.includes("/configure")) {
-					localizationTab = document.querySelector<HTMLSpanElement>(
-						".left-panel ul .active a"
-					);
-
-					presenceData.details = "Managing Localizations";
-				} else {
-					localizationTab = document.querySelector<HTMLSpanElement>(
-						".nav-tabs .active .text-lead"
-					);
-					localizationGameName = document.querySelector<HTMLHeadingElement>(
-						"#selenium-game-title-heading"
-					);
-
-					if (!localizationGameName) {
-						localizationGameName = document.querySelector<HTMLHeadingElement>(
-							"div.component-container h4"
+				case pathname.includes("/localization"): {
+					const localizationTab =
+						document.querySelector<HTMLSpanElement>(
+							".left-panel ul .active a"
+						) ??
+						document.querySelector<HTMLSpanElement>(
+							".nav-tabs .active .text-lead"
 						);
+					if (pathname.includes("/configure"))
+						presenceData.details = "Managing Localizations";
+					else {
+						const localizationGameName =
+							document.querySelector<HTMLHeadingElement>(
+								"#selenium-game-title-heading"
+							) ??
+							document.querySelector<HTMLHeadingElement>(
+								"div.component-container h4"
+							);
+
+						presenceData.details = `Localizing "${
+							localizationGameName?.textContent ?? "Untilted Game"
+						}"`;
 					}
 
-					presenceData.details = `Localizing "${
-						localizationGameName
-							? localizationGameName.textContent
-							: "Untilted Game"
-					}"`;
+					presenceData.state = `Tab: ${localizationTab.textContent}`;
+					break;
 				}
+				case pathname.includes("/transactions"): {
+					presenceData.details = "Transactions Page";
+					presenceData.state = `Tab: ${
+						document.querySelector<HTMLSpanElement>(
+							".transaction-type-dropdown .rbx-selection-label"
+						).textContent
+						// Transaction tab
+					}`;
+					break;
+				}
+				case pathname.includes("/badges/"): {
+					presenceData.details = "Looking at Badge:";
+					presenceData.largeImageKey =
+						document.querySelector<HTMLImageElement>("span.thumbnail-span img")
+							?.src ?? Assets.Logo;
+					presenceData.state = item;
 
-				presenceData.state = `Tab: ${localizationTab.textContent}`;
-			} else if (pathname.includes("/transactions")) {
-				transactionsTab = document.querySelector<HTMLSpanElement>(
-					".transaction-type-dropdown .rbx-selection-label"
-				).textContent;
-
-				presenceData.details = "Transactions Page";
-				presenceData.state = `Tab: ${transactionsTab}`;
-			} else if (pathname.includes("/badges/")) {
-				presenceData.details = "Looking at Badge:";
-				presenceData.largeImageKey = imagesEnabled
-					? document.querySelector<HTMLImageElement>("span.thumbnail-span img")
-							.src
-					: "lg";
-				presenceData.state = document.querySelector<HTMLHeadingElement>(
-					".item-name-container h2"
-				).textContent;
-
-				if (buttons) {
 					presenceData.buttons = [
 						{
 							label: "View Badge",
-							url: document.URL,
+							url: href,
 						},
 					];
+					break;
 				}
-			} else if (pathname.includes("/library/")) {
-				presenceData.details = "Looking at Asset:";
-				presenceData.largeImageKey = imagesEnabled
-					? document.querySelector<HTMLImageElement>("span.thumbnail-span img")
-							.src
-					: "lg";
-				presenceData.state = document.querySelector<HTMLHeadingElement>(
-					".item-name-container h2"
-				).textContent;
+				case pathname.includes("/library/"): {
+					presenceData.details = "Looking at Asset:";
+					presenceData.largeImageKey =
+						document.querySelector<HTMLImageElement>("span.thumbnail-span img")
+							?.src ?? Assets.Logo;
+					presenceData.state = item;
 
-				if (buttons) {
 					presenceData.buttons = [
 						{
 							label: "View Asset",
-							url: document.URL,
+							url: href,
 						},
 					];
+					break;
 				}
-			} else if (pathname.includes("/game-pass/")) {
-				presenceData.details = "Looking at Gamepass:";
-				presenceData.largeImageKey = imagesEnabled
-					? document.querySelector<HTMLImageElement>("span.thumbnail-span img")
-							.src
-					: "lg";
-				presenceData.state = document.querySelector<HTMLHeadingElement>(
-					".item-name-container h2"
-				).textContent;
+				case pathname.includes("/game-pass/"): {
+					presenceData.details = "Looking at Gamepass:";
+					presenceData.largeImageKey =
+						document.querySelector<HTMLImageElement>("span.thumbnail-span img")
+							?.src ?? Assets.Logo;
+					presenceData.state = item;
 
-				if (buttons) {
 					presenceData.buttons = [
 						{
 							label: "View Gamepass",
-							url: document.URL,
+							url: href,
 						},
 					];
+					break;
 				}
-			} else {
-				for (const [i, v] of Object.entries(pages)) {
-					if (pathname.includes(i)) {
-						presenceData.details = v.details ?? "Current Page: ";
-						if (v.state) presenceData.state = v.state;
-						else delete presenceData.state;
+
+				default: {
+					for (const [i, v] of Object.entries(pages)) {
+						if (pathname.includes(i)) {
+							presenceData.details = v.details ?? "Current Page: ";
+							if (v.state) presenceData.state = v.state;
+							else if (presenceData.buttons) delete presenceData.buttons;
+						}
 					}
 				}
-			}
-
-			if (document.querySelector(".notification-stream-container") !== null) {
-				presenceData.details = "Viewing Notifications";
-				delete presenceData.state;
 			}
 			break;
 		}
@@ -459,200 +419,291 @@ presence.on("UpdateData", async () => {
 			};
 
 			presenceData.details = "Surfing the DevForum";
-			presenceData.largeImageKey = dfLgImage;
+			presenceData.largeImageKey = Assets.DeveloperLogo;
+			devImage = true;
 
-			if (pathname.includes("/t/")) {
-				presenceData.state = `Reading "${dfTopicName}"`;
+			switch (true) {
+				case pathname.includes("/t/"): {
+					presenceData.state = `Reading ${
+						document.querySelector(".fancy-title")?.textContent
+					}`;
+					presenceData.smallImageKey = Assets.Reading;
 
-				if (buttons) {
 					presenceData.buttons = [
 						{
 							label: "View Topic",
-							url: document.URL,
+							url: href,
 						},
 					];
+
+					break;
 				}
-
-				if (dfPrevTopic !== pathname.split("/")[3]) {
-					dfPrevTopic = pathname.split("/")[3];
-
-					const req = await (await fetch(`${document.URL}.json`)).json();
-					dfTopicName = req.title;
-
-					presenceData.state = `Reading ${dfTopicName}`;
-				}
-			} else if (
-				pathname.includes("/tag/") ||
-				(pathname.includes("/c/") && !pathname.includes("/categories/"))
-			) {
-				presenceData.state = `Browsing ${
-					document.title.split("- DevForum | Roblox")[0]
-				}`;
-			} else if (pathname.includes("/search")) {
-				presenceData.state = `Searching "${new URL(href).searchParams.get(
-					"q"
-				)}"`;
-			} else if (pathname.includes("/badges") && !pathname.includes("/u")) {
-				presenceData.state = "Browsing Badges";
-
-				if (document.querySelector(".container.show-badge")) {
+				case pathname.includes("/tag/") ||
+					(pathname.includes("/c/") && !pathname.includes("/categories/")): {
 					presenceData.state = `Browsing ${
-						document
-							.querySelector(".container.show-badge h1")
-							.textContent.split("/")[1]
-					} Badge`;
+						document.title.split("- DevForum | Roblox")[0]
+					}`;
+					break;
 				}
-			} else if (pathname.includes("/g/")) {
-				presenceData.state = "Browsing Groups";
-
-				if (document.querySelector(".group-info-name")) {
-					presenceData.state = `Browsing ${
-						document.querySelector(".group-info-name").textContent
-					} Group`;
+				case pathname.includes("/search"): {
+					presenceData.state = `Searching "${new URL(href).searchParams.get(
+						"q"
+					)}"`;
+					presenceData.smallImageKey = Assets.Search;
+					break;
 				}
-			} else if (pathname.includes("/u/")) {
-				const user = document.querySelector(".username").textContent;
-				presenceData.state = `Browsing ${user}'s Profile`;
-				presenceData.largeImageKey = imagesEnabled
-					? document.querySelector<HTMLImageElement>(".user-profile-avatar img")
-							.src
-					: dfLgImage;
+				case pathname.includes("/badges") && !pathname.includes("/u"): {
+					presenceData.state = "Browsing Badges";
 
-				if (buttons) {
+					if (document.querySelector(".container.show-badge")) {
+						presenceData.state = `Browsing ${
+							document
+								.querySelector(".container.show-badge h1")
+								.textContent.split("/")[1]
+						} Badge`;
+					}
+					break;
+				}
+				case pathname.includes("/g/"): {
+					presenceData.state = "Browsing Groups";
+
+					if (document.querySelector(".group-info-name")) {
+						presenceData.state = `Browsing ${
+							document.querySelector(".group-info-name").textContent
+						} Group`;
+					}
+					break;
+				}
+				case pathname.includes("/u/"): {
+					const user = document.querySelector(".username").textContent;
+					presenceData.state = `Browsing ${user}'s Profile`;
+					presenceData.largeImageKey =
+						document.querySelector<HTMLImageElement>(".user-profile-avatar img")
+							?.src ?? Assets.DeveloperLogo;
+					devImage = true;
 					presenceData.buttons = [
 						{
 							label: "View Profile",
-							url: document.URL,
+							url: href,
 						},
 					];
-				}
 
-				const sections: {
-					[name: string]: [string, boolean];
-				} = {
-					"/summary": [`Browsing ${user}'s Summary`, false],
-					"/activity": [`Browsing ${user}'s Activity`, false],
-					"/badges": [`Browsing ${user}'s Badges`, false],
-					"/preferences": ["Editing Account Preferences", true],
-					"/messages": ["Browsing Messages", true],
-					"/notifications": ["Browsing Notifications", true],
-				};
+					const sections: {
+						[name: string]: [string, boolean];
+					} = {
+						"/summary": [`Browsing ${user}'s Summary`, false],
+						"/activity": [`Browsing ${user}'s Activity`, false],
+						"/badges": [`Browsing ${user}'s Badges`, false],
+						"/preferences": ["Editing Account Preferences", true],
+						"/messages": ["Browsing Messages", true],
+						"/notifications": ["Browsing Notifications", true],
+					};
 
-				if (pathname.includes("/follow")) {
-					presenceData.state = "Browsing Network";
-					delete presenceData.buttons;
+					if (pathname.includes("/follow")) {
+						presenceData.state = "Browsing Network";
+						if (presenceData.buttons) delete presenceData.buttons;
 
-					if (pathname.includes("/followers"))
-						presenceData.state = "Looking at Followers";
-					else if (pathname.includes("/following"))
-						presenceData.state = "Looking at Following";
-				} else {
-					for (const [i, v] of Object.entries(sections)) {
-						if (pathname.includes(i)) {
-							presenceData.state = v[0];
-							if (v[1] === true) delete presenceData.buttons;
+						if (pathname.includes("/followers"))
+							presenceData.state = "Looking at Followers";
+						else if (pathname.includes("/following"))
+							presenceData.state = "Looking at Following";
+					} else {
+						for (const [i, v] of Object.entries(sections)) {
+							if (pathname.includes(i)) {
+								presenceData.state = v[0];
+								if (v[1] === true && presenceData.buttons)
+									delete presenceData.buttons;
+							} else {
+								for (const [i, v] of Object.entries(pages))
+									if (pathname === i) presenceData.state = v.state;
+							}
 						}
 					}
+					break;
 				}
-			} else {
-				for (const [i, v] of Object.entries(pages))
-					if (pathname === i) presenceData.state = v.state;
+				case !!document.querySelector(".composer-action-createTopic"): {
+					presenceData.state = "Creating a New Topic";
+					break;
+				}
+				case !!document.querySelector(".composer-action-privateMessage"): {
+					presenceData.state = "Writing a Private Message";
+					break;
+				}
+				case !!document.querySelector(".composer-action-reply"): {
+					presenceData.state = `Replying To ${
+						document
+							.querySelector(".composer-action-reply")
+							.querySelector(".user-link").textContent
+					}`;
+					break;
+				}
+				case !!document.querySelector(".keyboard-shortcuts-modal"): {
+					presenceData.state = "Browsing Keyboard Shortcuts";
+					break;
+				}
+				case !!document.querySelector(".flag-modal.in"): {
+					presenceData.state = "Flagging a Post";
+					if (presenceData.buttons) delete presenceData.buttons;
+					break;
+				}
+				case !!document.querySelector(".composer-action-edit"): {
+					presenceData.state = "Editing a Post";
+					if (presenceData.buttons) delete presenceData.buttons;
+					break;
+				}
 			}
 
-			if (document.querySelector(".composer-action-createTopic"))
-				presenceData.state = "Creating a New Topic";
-			else if (document.querySelector(".composer-action-privateMessage"))
-				presenceData.state = "Writing a Private Message";
-			else if (document.querySelector(".composer-action-reply")) {
-				presenceData.state = `Replying To ${
-					document
-						.querySelector(".composer-action-reply")
-						.querySelector(".user-link").textContent
-				}`;
-			} else if (document.querySelector(".keyboard-shortcuts-modal"))
-				presenceData.state = "Browsing Keyboard Shortcuts";
-			else if (document.querySelector(".flag-modal.in")) {
-				presenceData.state = "Flagging a Post";
-				delete presenceData.buttons;
-			} else if (document.querySelector(".composer-action-edit")) {
-				presenceData.state = "Editing a Post";
-				delete presenceData.buttons;
-			}
 			break;
 		}
 
-		case "talent.roblox.com": {
-			presenceData.details = "Surfing the Talent Hub";
-			presenceData.largeImageKey = dfLgImage;
-
-			if (pathname.includes("/search")) {
-				const searchResult = new URL(href).searchParams.get("query");
-				if (pathname.includes("/creators")) {
-					if (searchResult)
-						presenceData.state = `Searching for Creator: ${searchResult}`;
-					else presenceData.state = "Browsing Creators";
-				} else if (pathname.includes("/jobs")) {
-					if (searchResult)
-						presenceData.state = `Searching for Job: ${searchResult}`;
-					else presenceData.state = "Browsing Jobs";
+		case "create.roblox.com": {
+			presenceData.largeImageKey = Assets.CreateLogo;
+			const search = document.querySelector("#search-text-field");
+			switch (true) {
+				case pathname === "/landing": {
+					presenceData.details = "Browsing on the landing page";
+					break;
 				}
-			} else if (
-				pathname.includes("/creators/") &&
-				!pathname.includes("/search/") &&
-				!pathname.includes("/settings")
-			) {
-				const Id = pathname.split("/")[2];
-				if (talentUserData[0] !== Id) {
-					talentUserData = [
-						Id,
-						document.head.title.replace("'s Creator Page - Talent Hub", ""),
-					];
-					const req = await fetch(
-						`https://users.roblox.com/v1/users/${Id}`
-					).then(response => response.json());
-					talentUserData = [Id, req.name ?? talentUserData[1]];
+				case pathname === "/": {
+					presenceData.details = "Browsing on the homepage";
+					break;
 				}
-				if (!talentUserData[1]) presenceData.state = "Browsing Profile";
-				else presenceData.state = `Looking at ${talentUserData[1]}'s Profile`;
-				presenceData.largeImageKey = imagesEnabled
-					? `https://www.roblox.com/Thumbs/Avatar.ashx?x=420&y=420&userid=${Id}`
-					: dfLgImage;
-
-				if (buttons) {
+				case pathname.includes("/dashboard/creations"): {
+					presenceData.details = "Creation's dashboard";
+					presenceData.state = `Tab: ${
+						document.querySelector('button[aria-selected="true"]')?.textContent
+					}`;
+					break;
+				}
+				case pathname.includes("analytics"): {
+					presenceData.details = "Viewing analytics";
+					presenceData.state = `Tab: ${
+						document.querySelector('button[aria-selected="true"]')?.textContent
+					}`;
+					break;
+				}
+				case pathname.includes("/translator-portal"): {
+					presenceData.details = "Browsing trough the translator portal";
+					break;
+				}
+				case pathname.includes("credentials"): {
+					presenceData.details = "Viewing the credentails manager";
+					break;
+				}
+				case pathname.includes("/docs"): {
+					switch (true) {
+						case !!search: {
+							presenceData.details = search?.getAttribute("value")
+								? "Searching for:"
+								: "Searching...";
+							presenceData.state = document
+								.querySelector("#search-text-field")
+								?.getAttribute("value");
+							presenceData.smallImageKey = Assets.Search;
+							break;
+						}
+						case !!document.querySelector('li[aria-selected="true"]'): {
+							presenceData.details = "Reading docs about:";
+							presenceData.state = document.querySelector(
+								'li[aria-selected="true"]'
+							)?.textContent;
+							presenceData.smallImageKey = Assets.Reading;
+							presenceData.buttons = [
+								{
+									label: "Read Article",
+									url: href,
+								},
+							];
+							break;
+						}
+						default: {
+							presenceData.details = "Documentation - homepage";
+							break;
+						}
+					}
+					break;
+				}
+				case pathname.includes("/marketplace/asset/"): {
+					presenceData.details = `Viewing ${document
+						.querySelector('button[aria-selected="true"]')
+						?.textContent?.toLowerCase()}:`;
+					presenceData.state = document.querySelector(
+						'[data-testid="assetHeadingDetailsTestId"] > h1'
+					)?.textContent;
 					presenceData.buttons = [
 						{
-							label: "Visit Profile",
-							url: document.URL,
+							label: "View Asset",
+							url: href,
 						},
 					];
+					break;
 				}
-			} else if (
-				pathname.includes("/jobs/") &&
-				document.querySelector('[data-testid="job-view-header"]')
-			) {
-				presenceData.state = `Looking at Job Post: ${
-					document.querySelector<HTMLParagraphElement>(
-						'[data-testid="job-view-header"] .MuiTypography-root.MuiTypography-body1'
-					).textContent
-				}`;
-
-				if (buttons) {
+				case pathname.includes("/marketplace"): {
+					presenceData.details = "Marketplace";
+					presenceData.state = `Tab: ${
+						document.querySelector('button[aria-selected="true"]')?.textContent
+					}`;
 					presenceData.buttons = [
 						{
-							label: "Visit Job",
-							url: document.URL,
+							label: "View Marketplace",
+							url: href,
 						},
 					];
+					break;
 				}
-			} else if (pathname.includes("/inbox"))
-				presenceData.state = "Browsing Inbox";
-			else if (pathname.includes("/settings"))
-				presenceData.state = "Editing Settings";
-			else if (pathname.includes("/jobs/create"))
-				presenceData.state = "Creating Job Post";
+				case pathname.includes("/talent/"): {
+					if (document.querySelector("#text-input")?.getAttribute("value")) {
+						presenceData.details = "Talent - searching for:";
+						presenceData.state = document
+							.querySelector("#text-input")
+							?.getAttribute("value");
+						presenceData.smallImageKey = Assets.Search;
+					} else {
+						presenceData.details = "Talent";
+						presenceData.state = `Tab: ${
+							document.querySelector('button[aria-selected="true"]')
+								?.textContent
+						}`;
+					}
+					break;
+				}
+				case pathname.includes("/roadmap"): {
+					presenceData.details = "Browsing through the roadmap";
+					presenceData.buttons = [
+						{
+							label: "View Roadmap",
+							url: href,
+						},
+					];
+					break;
+				}
+			}
 			break;
 		}
 	}
 
-	presence.setActivity(presenceData);
+	if (!buttons && presenceData.buttons) delete presenceData.buttons;
+	if (
+		!imagesEnabled &&
+		presenceData.largeImageKey !== Assets.Logo &&
+		!devImage &&
+		hostname !== "create.roblox.com" // ImagesEnabled setting off & The largeimagekey isnt Assets.Logo & & Its NOT somewhere that uses the devimage
+	)
+		presenceData.largeImageKey = Assets.Logo;
+	else if (
+		!imagesEnabled &&
+		presenceData.largeImageKey !== Assets.DeveloperLogo &&
+		devImage // ImagesEnabled setting off & The largeimagekey isnt Assets.DeveloperLogo & Its somewhere that uses the devimage
+	)
+		presenceData.largeImageKey = Assets.DeveloperLogo;
+	else if (
+		!imagesEnabled &&
+		presenceData.largeImageKey !== Assets.CreateLogo &&
+		!devImage &&
+		hostname === "create.roblox.com"
+	)
+		presenceData.largeImageKey = Assets.CreateLogo;
+
+	if (onlyDevForums && !hostname.includes("devforum")) presence.clearActivity();
+	else presence.setActivity(presenceData);
 });

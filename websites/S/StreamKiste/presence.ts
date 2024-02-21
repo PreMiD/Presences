@@ -133,16 +133,19 @@ let lastPageIndex: number,
 	currentLang: string,
 	localizedStrings: { [key: string]: string },
 	frameData: VideoContext;
+
 const IMAGES = {
-	LOGO: "logox1024",
-	PLAY: "playx1024",
-	PAUSE: "pausex1024",
-	BROWSE: "browsex1024",
-	SEARCH: "searchx1024",
+	LOGO: "https://cdn.rcd.gg/PreMiD/websites/S/StreamKiste/assets/0.png",
+	PLAY: Assets.Play,
+	PAUSE: Assets.Pause,
+	BROWSE: "https://cdn.rcd.gg/PreMiD/websites/S/StreamKiste/assets/1.png",
+	SEARCH: Assets.Search,
 };
+
 presence.on("iFrameData", (data: VideoContext) => {
 	frameData = data;
 });
+
 presence.on("UpdateData", async () => {
 	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
 	if (newLang !== currentLang) {

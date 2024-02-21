@@ -118,6 +118,12 @@ fetch("https://stips.co.il/api?name=user.get_app_user").then(resp =>
 	})
 );
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Stips/assets/logo.png",
+	StipspiLight = "https://cdn.rcd.gg/PreMiD/websites/S/Stips/assets/0.png",
+	StipspinDark = "https://cdn.rcd.gg/PreMiD/websites/S/Stips/assets/1.png",
+}
+
 // main loop
 presence.on("UpdateData", () => {
 	const Path = window.location.pathname;
@@ -339,8 +345,8 @@ presence.on("UpdateData", () => {
 
 	presence.setActivity({
 		details: details ?? translate(isMale).default,
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/S/Stips/assets/logo.png",
-		smallImageKey: hasDark ? "stipspin_dark" : "stipspin_light",
+		largeImageKey: Assets.Logo,
+		smallImageKey: hasDark ? Assets.StipspinDark : Assets.StipspiLight,
 		startTimestamp: elapsed,
 		smallImageText,
 	});

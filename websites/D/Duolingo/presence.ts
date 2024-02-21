@@ -1,296 +1,378 @@
-/* eslint-disable no-one-time-vars/no-one-time-vars */
+import {
+	assets,
+	deEsser,
+	giveArticle,
+	makeProgressBar,
+	updateUndefinedKeys,
+} from "./util";
 const presence = new Presence({
-		clientId: "909577563234508910",
+		clientId: "1177802176140156998",
 	}),
-	FLAG_ICONS = [
-		"ar",
-		"ca",
-		"cs",
-		"cy",
-		"da",
-		"de",
-		"dn",
-		"el",
-		"en",
-		"eo",
-		"es",
-		"fr",
-		"ga",
-		"gn",
-		"he",
-		"hi",
-		"hu",
-		"hv",
-		"hw",
-		"id",
-		"it",
-		"ja",
-		"kl",
-		"ko",
-		"nb",
-		"nv",
-		"pl",
-		"pt",
-		"ro",
-		"ru",
-		"sv",
-		"sw",
-		"tr",
-		"uk",
-		"vi",
-		"zs",
-	],
-	INFO_PAGES = [
-		"approach",
-		"contact",
-		"cookies",
-		"efficacy",
-		"guidelines",
-		"info",
-		"mobile",
-		"privacy",
-		"team",
-		"terms",
-	],
-	API_ENDPOINTS = [
-		"2017-06-30",
-		"api",
-		"friendships",
-		"login",
-		"switch_language",
-		"users",
-		"vocabulary",
-	],
+	timeStamp = newTimeStamp(),
+	IMAGE = {
+		duoTool: "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/0.png",
+		profileDuo: "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/1.png",
+		duoGlobe: "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/2.png",
+	},
+	LANGUAGE_NAMES: Record<string, string> = {
+		ar: "Arabic",
+		ca: "Catalan",
+		cs: "Czech",
+		cy: "Welsh",
+		da: "Danish",
+		de: "German",
+		el: "Greek",
+		en: "English",
+		eo: "Esperanto",
+		es: "Spanish",
+		fi: "Finnish",
+		fr: "French",
+		gd: "Scottish Gaelic",
+		gn: "Guarani",
+		he: "Hebrew",
+		hi: "Hindi",
+		ht: "Haitian Creole",
+		hu: "Hungarian",
+		hv: "High Valyrian",
+		hw: "Hawaiian",
+		id: "Indonesian",
+		it: "Italian",
+		ja: "Japanese",
+		ko: "Korean",
+		la: "Latin",
+		"nl-nl": "Dutch",
+		"no-bo": "Norwegian (Bokmål)",
+		nv: "Navajo",
+		pl: "Polish",
+		pt: "Portuguese",
+		qc: "K'iche'",
+		ro: "Romanian",
+		ru: "Russian",
+		sw: "Swahili",
+		ga: "Irish",
+		sv: "Swedish",
+		tlh: "Klingon",
+		tr: "Turkish",
+		uk: "Ukrainian",
+		vi: "Vietnamese",
+		yi: "Yiddish",
+		yu: "Yucatec",
+		zh: "Chinese",
+		"zh-hk": "Chinese (Cantonese)",
+		zu: "Zulu",
+	},
 	presenceData: PresenceData = {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/logo.png",
-		startTimestamp: Math.floor(Date.now() / 1000),
+	},
+	settings = {
+		showTime: true,
+		showTimeOverwrite: false,
+		lastPath: null as string,
 	},
 	language = {
-		imageKey: null as string,
+		code: null as string,
 		name: null as string,
-	};
+	},
+	user = {
+		currentCourseId: null as string,
+		streak: null as number,
+		xp: null as number,
+		freezes: null as number,
+		lesson: {
+			timeStamp: null as number,
+			active: false,
+			finished: null as string,
+		},
+	},
+	storedUsers = localStorage.getItem("PMD-users-cache"),
+	users: { username: string; displayName: string; img: string }[] = storedUsers
+		? JSON.parse(storedUsers)
+		: [];
 
-function updateLanguage() {
-	const state = JSON.parse(window.localStorage.getItem("duo.state")),
-		courseId = state?.user?.currentCourseId;
-	if (!courseId) return;
+let timeoutId: number;
 
-	const course = state.courses?.[courseId];
-	if (!course) return;
-
-	const languageId = course.learningLanguage;
-	if (FLAG_ICONS.includes(languageId)) language.imageKey = `flag_${languageId}`;
-	else if (languageId) language.imageKey = "flag_unknown";
-	else language.imageKey = null;
-	language.name = course.title ?? null;
+function newTimeStamp() {
+	return Math.floor(Date.now() / 1000);
 }
-updateLanguage();
-setInterval(updateLanguage, 1000);
 
-function capitalize(str: string): string {
-	return str.charAt(0).toUpperCase() + str.slice(1);
-}
+function handleLesson(_path: string | string[]) {
+	const progressBarElement = document.querySelector('div[role="progressbar"]'),
+		PBProgression = Number(progressBarElement?.getAttribute("aria-valuenow"));
+	if (
+		!document.querySelector('[data-test="daily-quest-progress-slide"]') &&
+		PBProgression < 10
+	)
+		user.lesson.finished = null;
+	if (
+		user.lesson.finished ||
+		document.querySelector('[data-test="daily-quest-progress-slide"]') ||
+		document.querySelector('[data-test="session-complete-slide"]')
+	) {
+		const path = user.lesson.finished ? [user.lesson.finished] : _path;
 
-function checkBasicPages(path: string[]): boolean {
-	if (path.length === 0) {
-		if (
-			new URL(document.location.href).searchParams.get("isLoggingIn") === "true"
-		) {
-			presenceData.details = "Logging in";
-			return true;
-		}
-		presenceData.details = "Viewing the home page";
-		return true;
-	} else if (INFO_PAGES.includes(path[0])) {
-		presenceData.details = `Viewing the ${path[0]} page`;
-		return true;
-	} else {
-		switch (path[0]) {
-			case "courses": {
-				presenceData.details = "Viewing available courses";
-				return true;
-			}
-			case "abc": {
-				presenceData.details = "Looking into Duolingo ABC";
-				return true;
-			}
-			case "plus": {
-				presenceData.details = "Looking into Duolingo Plus";
-				return true;
-			}
-			case "dictionary": {
-				presenceData.details = "Looking up a word";
-				if (path.length >= 3) presenceData.state = `${path[1]}: ${path[2]}`;
-				return true;
-			}
-			case "profile": {
-				if (path.length < 2) return true;
-				presenceData.details = "Viewing a profile";
-				[, presenceData.state] = path;
-				if (path.length >= 3) {
-					presenceData.details += " section";
-					presenceData.state += `'s ${path[2]}`;
-				}
-				return true;
-			}
-			case "friend-updates": {
-				presenceData.details = "Viewing friend updates";
-				return true;
-			}
-			case "user-search": {
-				presenceData.details = "Searching for a user";
-				return true;
-			}
-			case "settings": {
-				presenceData.details = "Adjusting settings";
-				if (path.length >= 2) {
-					const [, page] = path;
-					presenceData.state = `Section: ${capitalize(page)}`;
-				}
-				return true;
-			}
+		switch (true) {
+			case path.includes("legendary"):
+				user.lesson.finished = "legendary";
+				presenceData.details = `Finished ${giveArticle(
+					language.name
+				)} legendary challenge`;
+				break;
+			case path.includes("placement"):
+				user.lesson.finished = "placement";
+				presenceData.details = `Finished ${language.name} placement test`;
+				break;
+			case path.includes("test"):
+				user.lesson.finished = "test";
+				presenceData.details = `Passed ${giveArticle(
+					language.name
+				)} jump ahead test`;
+				break;
+			case path.includes("mistakes-review"):
+				user.lesson.finished = "mistakes-review";
+				presenceData.details = "Finished reviewing past mistakes";
+				break;
+			case path.includes("unit-rewind"):
+				user.lesson.finished = "unit-rewind";
+				presenceData.details = "Finished reviewing old exercises";
+				break;
+			case path.includes("listen-up"):
+			case path.includes("listening-practice"):
+				user.lesson.finished = "listening-practice";
+				presenceData.details = `Finished ${language.name} listening exercises`;
+				break;
+			case path.includes("finished-default"):
 			default:
-				if (document.title.startsWith("Error")) {
-					presenceData.details = "Watching Duo cry :(";
-					presenceData.state = document.title;
-					return true;
-				} else if (API_ENDPOINTS.includes(path[0])) {
-					presenceData.details = "Viewing an API response";
-					presenceData.state = `Endpoint: /${path[0]}`;
-					return true;
-				} else if (path[0] === "log-in") {
-					presenceData.details = "Logging in";
-					return true;
-				} else if (["forgot_password", "reset_password"].includes(path[0])) {
-					presenceData.details = "Resetting their password";
-					return true;
-				} else if (path[0] === "course") {
-					presenceData.details = "Considering a course";
-					if (path.length < 4) return true;
-
-					const courseSplit = path[3].split("-");
-					if (courseSplit.length < 2) return true;
-					presenceData.state = capitalize(courseSplit[1]);
-					return true;
-				}
+				user.lesson.finished = "finished-default";
+				presenceData.details = `Finished ${giveArticle(language.name)} lesson`;
 		}
 	}
 
-	return false;
+	if (!user.lesson.finished && progressBarElement) {
+		user.lesson.active = true;
+
+		presenceData.state = `${makeProgressBar(
+			PBProgression,
+			Number(progressBarElement?.getAttribute("aria-valuemax")),
+			(presenceData.details as string).length / 3.2,
+			/--web-ui_progress-bar-color: rgb\(var\(--color-(\w+)\)\);/.exec(
+				progressBarElement?.getAttribute("style")
+			)?.[1]
+		)}`;
+		if (!user.lesson.timeStamp) user.lesson.timeStamp = newTimeStamp();
+		settings.showTimeOverwrite = false;
+	} else if (_path.includes("tips")) presenceData.state = "Viewing tips";
+	else if (!user.lesson.active) {
+		settings.lastPath = "~";
+		presenceData.state = "Loading...";
+		settings.showTimeOverwrite = true;
+		user.lesson.finished = null;
+	}
 }
 
-function checkLearningPages(path: string[]): boolean {
-	function set(details: string) {
-		presenceData.details = details;
-		presenceData.state = `Learning ${language.name}`;
-		return true;
+async function updateData(_inLesson = false) {
+	const state = JSON.parse(window.localStorage.getItem("duo.state"))?.state
+		?.redux;
+	if (!state) return;
+
+	// resets lesson variables to default on updateData()
+	// on updateData(true), lesson variables stay untouched
+	if (!_inLesson) {
+		user.lesson.active = false;
+		user.lesson.finished = null;
+		settings.showTimeOverwrite = true;
 	}
 
-	switch (path[0]) {
-		case "learn": {
-			// Update the language in case the user just logged in
-			updateLanguage();
-			return set("Choosing something to learn");
-		}
-		case "practice":
-			return set("Practicing everything learned");
-		case "skill": {
-			if (path.length < 3) return;
+	user.currentCourseId = state.user.currentCourseId;
+	if (user.currentCourseId) setLang(/_(.*?)_/.exec(user.currentCourseId)?.[1]);
 
-			const lesson = path[2]
-				.replace(/([a-z]+)([A-Z]|-\d)/g, "$1 $2")
-				.replace(/-(\d)/g, "$1");
-			if (path.length >= 4) {
-				switch (path[3]) {
-					case "tips":
-						return set(`Reading tips for ${lesson}`);
-					case "practice":
-						return set(`Practicing ${lesson}`);
-					case "test":
-						return set(`Testing out of ${lesson}`);
-					// No default
-				}
-			}
-			return set(`In a lesson: ${lesson}`);
-		}
-		case "shop":
-			return set("In the shop");
-		case "words":
-			return set("Viewing all learned words");
-		case "stories": {
-			if (path.length < 2) return set("Choosing a story to read");
-
-			const phrases = document.querySelectorAll(
-				`body > ${"div > ".repeat(11)} .phrase`
-			);
-			if (phrases.length !== 0) {
-				return set(
-					`Reading ${Array.from(phrases)
-						.map(p => p.textContent)
-						.join(" ")}`
-				);
-			}
-			return set("Reading a story");
-		}
-		case "mistakes-review":
-			return set("Reviewing past mistakes");
-		case "checkpoint": {
-			if (path.length < 4) return;
-
-			const checkpoint = parseInt(path[2], 10) + 1;
-			if (path[3] === "practice")
-				return set(`Practicing Checkpoint ${checkpoint}`);
-			else if (path[3] === "bigtest")
-				return set(`Taking the Checkpoint ${checkpoint} test`);
-			return;
-		}
-		// No default
-	}
-
-	return false;
+	const showTime = await presence.getSetting<boolean>("timestamps");
+	settings.showTime = showTime;
 }
 
-function checkStartingPages(path: string[]): boolean {
-	function set(state: string) {
-		presenceData.details = "Getting started";
-		presenceData.state = state;
-		return true;
-	}
-
-	switch (path[0]) {
-		case "register":
-			return set("Choosing a language");
-		case "welcome":
-			return set("Answering some questions");
-		case "placement":
-			return set("Taking the placement test");
-		// No default
-	}
-
-	return false;
+function setLang(code: string) {
+	language.code = code?.toLowerCase();
+	language.name = LANGUAGE_NAMES[language.code] || null;
+	if (!language.name && language.code) {
+		setLang(
+			{
+				dn: "nl-nl",
+				nb: "no-bo",
+				zc: "zh-hk",
+			}[language.code]
+		);
+	} else if (language.name && language.code) {
+		presenceData.smallImageKey = assets[`lang_${language.code.split("-")[0]}`];
+		presenceData.smallImageText = `${language.name}`;
+	} else presenceData.smallImageKey = IMAGE.duoGlobe;
 }
-
-function determineText(path: string[]) {
-	if (checkBasicPages(path)) return;
-	else if (checkLearningPages(path)) return;
-	else if (checkStartingPages(path)) return;
-}
-
+updateData();
 presence.on("UpdateData", async () => {
-	if (!language.imageKey || !language.name) {
-		delete presenceData.smallImageKey;
-		delete presenceData.smallImageText;
-	} else {
-		presenceData.smallImageKey = language.imageKey;
-		presenceData.smallImageText = `Learning ${language.name}`;
-	}
+	if (settings.lastPath === document.location.pathname) return;
+
+	const path = decodeURI(document.location.pathname).split("/");
+
 	delete presenceData.details;
+	delete presenceData.smallImageKey;
+	delete presenceData.smallImageText;
 	delete presenceData.state;
+	delete presenceData.startTimestamp;
 
-	let path = decodeURI(window.location.pathname).split("/");
-	path = path.filter(p => p !== "");
+	switch (path[1]) {
+		case "learn":
+			updateData();
+			presenceData.details = `Choosing ${giveArticle(language.name)} lesson`;
+			break;
+		case "characters":
+			updateData();
+			presenceData.details = `Viewing ${language.name} characters`;
+			break;
 
-	determineText(path);
+		case "mistakes-review":
+			updateData(true);
+			presenceData.details = "Reviewing recent mistakes";
+			handleLesson(path);
+			break;
+		case "practice-hub":
+			switch (path[2]) {
+				case "unit-rewind":
+					updateData(true);
+					presenceData.details = "Reviewing old exercises";
+					handleLesson(path);
+					break;
+				case "listen-up":
+				case "listening-practice":
+					updateData(true);
+					presenceData.details = `Practicing Listening in ${language.name}`;
+					handleLesson(path);
+					break;
+				default:
+					updateData();
+					presenceData.details = "In practice hub";
+					switch (true) {
+						case path.includes("mistakes"):
+							presenceData.state = "Viewing mistakes";
+							break;
+						case path.includes("stories"):
+							presenceData.state = "Viewing stories";
+					}
+			}
+			break;
+		case "lesson":
+		case "practice":
+		case "alphabets":
+			updateData(true);
+			switch (true) {
+				case path.includes("legendary"):
+					presenceData.details = `In ${giveArticle(
+						language.name
+					)} legendary challenge`;
+					break;
+
+				case path.includes("test"):
+					presenceData.details = `Taking ${giveArticle(
+						language.name
+					)} jump ahead test`;
+					break;
+				case path.includes("alphabets"):
+					if (path[3] === "tips") {
+						presenceData.details = "Viewing alphabet tips";
+						presenceData.state = `${language.name}`;
+					} else presenceData.details = `Learning ${path[3]} alphabet`;
+					break;
+
+				default:
+					presenceData.details = `Working on ${giveArticle(
+						language.name
+					)} lesson`;
+			}
+			if (!path.includes("tips")) handleLesson(path);
+			break;
+
+		case "placement":
+			setLang(path[2]);
+			presenceData.details = `Taking ${language.name} placement test`;
+			handleLesson(path);
+			break;
+
+		case "leaderboard":
+			presenceData.details = "Viewing leaderboard";
+			break;
+
+		case "quests":
+			presenceData.state = "Viewing quests";
+			break;
+
+		case "shop":
+			presenceData.state = "Viewing shop";
+			break;
+
+		case "courses":
+			presenceData.details = "Viewing available courses";
+			presenceData.smallImageKey = IMAGE.duoGlobe;
+			presenceData.smallImageText = "viewing courses";
+			break;
+		case "enroll":
+			setLang(path[2]);
+			presenceData.details = `Viewing ${language.name} course`;
+			break;
+
+		case "year-in-review":
+			presenceData.details = `Viewing ${path[2]} Year in Review`;
+			break;
+		case "profile":
+		case "u": {
+			const username = path[2],
+				displayName = document.querySelector(
+					'h1[data-test="profile-username"] span'
+				)?.textContent,
+				img = document.querySelector<HTMLImageElement>(
+					`img[alt="${displayName}"]`
+				)?.src,
+				i = users.findIndex(user => user.username === username);
+
+			if (i !== -1) {
+				updateUndefinedKeys(users[i], {
+					username,
+					displayName,
+					img,
+				});
+			} else {
+				users.push({ username, displayName, img });
+				if (users.length > 20) users.shift();
+			}
+
+			localStorage.setItem("PMD-users-cache", JSON.stringify(users));
+
+			if (!users[i]?.displayName) {
+				settings.lastPath = "~";
+				return;
+			}
+
+			presenceData.details = `${path[3] ? "On" : "Viewing"} ${
+				users[i]?.displayName ?? displayName
+			}'s profile`;
+			if (path[3]) presenceData.state = `Viewing ${path[3]}`;
+			presenceData.smallImageKey = users[i]?.img ?? img ?? IMAGE.profileDuo;
+			presenceData.smallImageText = path[1] === "u" ? displayName : username;
+			break;
+		}
+		case "settings":
+			presenceData.details = `In ${deEsser(path[2])} settings`;
+			presenceData.smallImageKey = IMAGE.duoTool;
+			break;
+	}
+
+	if (!user.lesson.active) user.lesson.timeStamp = null;
+	if (settings.showTime && !settings.showTimeOverwrite)
+		presenceData.startTimestamp = user.lesson.timeStamp ?? timeStamp;
+
 	presence.setActivity(presenceData);
+
+	settings.lastPath = document.location.pathname;
+
+	timeoutId = setTimeout(() => {
+		settings.lastPath = "~";
+		clearTimeout(timeoutId);
+	}, 2000);
 });

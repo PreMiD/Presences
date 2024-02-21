@@ -3,10 +3,16 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Destiny%20Item%20Manager/assets/logo.png",
+	GuardianWarlock = "https://cdn.rcd.gg/PreMiD/websites/D/Destiny%20Item%20Manager/assets/0.png",
+	GuardianTitan = "https://cdn.rcd.gg/PreMiD/websites/D/Destiny%20Item%20Manager/assets/1.png",
+	GuardianHunter = "https://cdn.rcd.gg/PreMiD/websites/D/Destiny%20Item%20Manager/assets/2.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/D/Destiny%20Item%20Manager/assets/logo.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -30,16 +36,16 @@ presence.on("UpdateData", async () => {
 
 			switch (guardian) {
 				case "Titan": {
-					presenceData.smallImageKey = "guardian-titan";
+					presenceData.smallImageKey = Assets.GuardianTitan;
 					break;
 				}
 				case "Warlock": {
-					presenceData.smallImageKey = "guardian-warlock";
+					presenceData.smallImageKey = Assets.GuardianWarlock;
 					break;
 				}
 				case "Hunter":
 					{
-						presenceData.smallImageKey = "guardian-hunter";
+						presenceData.smallImageKey = Assets.GuardianHunter;
 						// No default
 					}
 					break;

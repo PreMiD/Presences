@@ -4,16 +4,9 @@ class WeTV extends Presence {
 	}
 
 	getTitle() {
-		// eslint-disable-next-line no-one-time-vars/no-one-time-vars
-		const JSONData: {
-			"@graph": {
-				name: string;
-			}[];
-		} = JSON.parse(
+		return JSON.parse(
 			document.querySelector('[type="application/ld+json"]').textContent
-		);
-
-		return JSONData["@graph"][0].name;
+		)["@graph"][0].name;
 	}
 
 	getMovieTitle() {
@@ -51,7 +44,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "Browsing...",
 		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/WeTV/assets/logo.png",
-		smallImageKey: "browse",
+		smallImageKey: Assets.Search,
 	};
 
 	if (document.location.pathname.includes("/play/")) {

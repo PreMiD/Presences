@@ -4,6 +4,12 @@
 		"name": "Bas950",
 		"id": "241278257335500811"
 	},
+	"contributors": [
+		{
+			"name": "veryCrunchy",
+			"id": "576097150359044106"
+		}
+	],
 	"service": "Hypixel",
 	"description": {
 		"en": "Play award winning minecraft games and mini-games with your friends for free. Only on the Hypixel minecraft server!",
@@ -12,7 +18,7 @@
 	},
 	"url": "hypixel.net",
 	"regExp": "([a-z0-9-]+[.])*hypixel[.]net[/]",
-	"version": "1.2.20",
+	"version": "1.2.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Hypixel/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Hypixel/assets/thumbnail.jpg",
 	"color": "#d9992a",

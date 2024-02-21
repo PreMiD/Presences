@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = document
 					.querySelectorAll(".avatar")[1]
 					.getAttribute("src");
-				presenceData.smallImageKey = "anilist_lg";
+				presenceData.smallImageKey = Assets.Logo;
 			}
 			switch (pathnameArray[3]) {
 				case "mangalist":

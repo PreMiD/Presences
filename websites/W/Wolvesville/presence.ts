@@ -3,6 +3,25 @@ const presence = new Presence({
 	}),
 	startedTime = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	WovHeroes = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/1.png",
+	WovBlog = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/2.png",
+	Vouchers = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/3.png",
+	WovText = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/4.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/5.png",
+	WovNoBg = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/6.png",
+	WovWhite = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/7.png",
+	Online = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/8.png",
+	Invisible = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/9.png",
+	Dnd = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/10.png",
+	LetsPlay = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/11.png",
+	Heart = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/12.png",
+	Skull = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/13.png",
+	Stopwatch = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/14.png",
+	Popcorn = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/15.png",
+	Friends = "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/16.png",
+}
+
 presence.on("UpdateData", async () => {
 	const [
 			privacyMode,
@@ -21,16 +40,16 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("showTimestamp"),
 			presence.getSetting<number>("logo"),
 		]),
-		logoArr = ["wov", "wov_white", "wov_no_bg", "wov_text"],
+		logoArr = [Assets.Logo, Assets.WovWhite, Assets.WovNoBg, Assets.WovText],
 		presenceData: PresenceData = {
-			largeImageKey: logoArr[logo] || "wov",
+			largeImageKey: logoArr[logo] || Assets.Logo,
 		};
 
 	if (showTimestamp) presenceData.startTimestamp = startedTime;
 
 	//Wolvesville Blog
 	if (document.location.href.includes("blog.wolvesville.com")) {
-		presenceData.smallImageKey = "wov_blog";
+		presenceData.smallImageKey = Assets.WovBlog;
 		presenceData.smallImageText = "Development Blog";
 		if (
 			document.location.pathname === "/" ||
@@ -64,7 +83,7 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.href.includes("heroes.wolvesville.com")) {
 		presenceData.details = "Wolvesville Heroes";
 		presenceData.state = "Home page";
-		presenceData.smallImageKey = "wov_heroes";
+		presenceData.smallImageKey = Assets.WovHeroes;
 		presenceData.smallImageText = "Wolvesville Heroes";
 
 		if (document.location.pathname.includes("overview"))
@@ -113,7 +132,7 @@ presence.on("UpdateData", async () => {
 	//Vouchers
 	else if (document.location.href.includes("vouchers.wolvesville.com")) {
 		presenceData.details = "Redeeming a code";
-		presenceData.smallImageKey = "vouchers";
+		presenceData.smallImageKey = Assets.Vouchers;
 		presenceData.smallImageText = "Redeem";
 
 		//Game
@@ -235,13 +254,13 @@ presence.on("UpdateData", async () => {
 
 			if (!privacyMode && showStatus) {
 				if (root.getAttribute("premid-status") === "lets_play") {
-					presenceData.smallImageKey = "lets_play";
+					presenceData.smallImageKey = Assets.LetsPlay;
 					presenceData.smallImageText = "Let's Play";
 				} else if (root.getAttribute("premid-status") === "online") {
-					presenceData.smallImageKey = "online";
+					presenceData.smallImageKey = Assets.Online;
 					presenceData.smallImageText = "Online";
 				} else if (root.getAttribute("premid-status") === "dnd") {
-					presenceData.smallImageKey = "dnd";
+					presenceData.smallImageKey = Assets.Dnd;
 					presenceData.smallImageText = "Do Not Disturb";
 				}
 			}
@@ -418,7 +437,7 @@ presence.on("UpdateData", async () => {
 				} else presenceData.state = "Loading...";
 			}
 			presenceData.smallImageText = "Lobby";
-			presenceData.smallImageKey = "friends";
+			presenceData.smallImageKey = Assets.Friends;
 		}
 
 		//In game
@@ -441,7 +460,7 @@ presence.on("UpdateData", async () => {
 						.innerHTML.includes("")
 				) {
 					presenceData.details = "In pre-game lobby";
-					presenceData.smallImageKey = "stopwatch";
+					presenceData.smallImageKey = Assets.Stopwatch;
 					presenceData.smallImageText = "Waiting";
 					if (!privacyMode) {
 						const playerCountPreGame = document.querySelector(
@@ -477,7 +496,7 @@ presence.on("UpdateData", async () => {
 								?.includes("color: rgb(255, 64, 129)")
 						) {
 							playerState = "Spectator";
-							presenceData.smallImageKey = "popcorn";
+							presenceData.smallImageKey = Assets.Popcorn;
 							presenceData.smallImageText = playerState;
 							if (privacyMode) presenceData.details = "Spectating a game";
 						}
@@ -500,7 +519,7 @@ presence.on("UpdateData", async () => {
 								player.getAttribute("style")?.includes("line-through")
 							) {
 								playerState = "Dead";
-								presenceData.smallImageKey = "skull";
+								presenceData.smallImageKey = Assets.Skull;
 							} else if (
 								player.textContent.replace("|", "") ===
 									root.getAttribute("premid-username") ||
@@ -512,7 +531,7 @@ presence.on("UpdateData", async () => {
 									?.includes("color: rgb(255, 64, 129)")
 							) {
 								playerState = "Alive";
-								presenceData.smallImageKey = "heart";
+								presenceData.smallImageKey = Assets.Heart;
 							}
 						}
 						presenceData.smallImageText = playerState;

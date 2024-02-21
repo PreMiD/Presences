@@ -8,6 +8,10 @@
 		{
 			"name": "LSTMPD",
 			"id": "320654696198963211"
+		},
+		{
+			"name": "Pawele",
+			"id": "303108947261259776"
 		}
 	],
 	"service": "Sosac",
@@ -19,7 +23,7 @@
 		"movies.sosac.tv",
 		"sosac.tv"
 	],
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Sosac/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Sosac/assets/thumbnail.png",
 	"color": "#ff5600",

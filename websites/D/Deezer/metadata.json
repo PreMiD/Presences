@@ -23,7 +23,7 @@
 		"ga_IE": "Éifeall na ceimhniú a thágthóg, uair éirinn."
 	},
 	"url": "www.deezer.com",
-	"version": "2.2.16",
+	"version": "2.3.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Deezer/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Deezer/assets/thumbnail.png",
 	"color": "#A31D7C",
@@ -48,6 +48,12 @@
 			"title": "Show Cover",
 			"icon": "fad fa-images",
 			"value": true
+		},
+		{
+			"id": "browseInfo",
+			"title": "Only show browsing info",
+			"icon": "fad fa-magnifying-glass",
+			"value": false
 		}
 	]
 }

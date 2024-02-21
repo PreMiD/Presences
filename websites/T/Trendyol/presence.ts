@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 				"https://cdn.rcd.gg/PreMiD/websites/T/Trendyol/assets/logo.png",
 			details: "Bir şey arıyor:",
 			state: searchingFor.textContent || "Belirsiz",
-			smallImageKey: "search",
+			smallImageKey: Assets.Search,
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (category && category.textContent !== "") {

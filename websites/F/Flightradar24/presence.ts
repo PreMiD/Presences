@@ -15,6 +15,14 @@ let remaining = 0,
 		paused: true,
 	};
 
+enum OtherAssets {
+	airborne = "https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/0.png",
+	arriving = "https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/1.png",
+	departing = "https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/2.png",
+	diverting = "https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/3.png",
+	onground = "https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/4.png",
+}
+
 presence.on(
 	"iFrameData",
 	(data: {
@@ -59,9 +67,11 @@ presence.on("UpdateData", async () => {
 						case "airports":
 							if (document.location.pathname === "/data/airports")
 								presenceData.details = "Browsing Airports";
-							else if (document.querySelector("[id='cnt-subpage-title']")) {
+							else if (
+								document.querySelector("[data-testid='cnt-subpage-title']")
+							) {
 								presenceData.details = `Browsing ${
-									document.querySelector("[id='cnt-subpage-title']")
+									document.querySelector("[data-testid='cnt-subpage-title']")
 										.firstElementChild.firstChild.textContent
 								}`;
 								presenceData.state = `${
@@ -113,9 +123,11 @@ presence.on("UpdateData", async () => {
 							} else presenceData.details = "Browsing Airlines";
 							break;
 						case "aircraft":
-							if (document.querySelector("[id='cnt-subpage-title'] > h1")) {
+							if (
+								document.querySelector("[data-testid='cnt-subpage-title'] > h1")
+							) {
 								presenceData.details = `Viewing ${document
-									.querySelector("[id='cnt-subpage-title'] > h1 ")
+									.querySelector("[data-testid='cnt-subpage-title'] > h1 ")
 									.textContent.replace("Production lists - ", "")}`;
 								presenceData.buttons = [
 									{
@@ -124,10 +136,10 @@ presence.on("UpdateData", async () => {
 									},
 								];
 							} else if (
-								document.querySelector("[id='cnt-subpage-info'] > h1")
+								document.querySelector("[data-testid='cnt-subpage-info'] > h1")
 							) {
 								presenceData.details = `Viewing ${document
-									.querySelector("[id='cnt-subpage-info'] > h1 ")
+									.querySelector("[data-testid='cnt-subpage-info'] > h1 ")
 									.textContent.replace(
 										"Flight history for aircraft -",
 										"Aircraft"
@@ -152,12 +164,14 @@ presence.on("UpdateData", async () => {
 							} else presenceData.details = "Browsing Aircraft";
 							break;
 						case "flights":
-							if (document.querySelector("[id='cnt-subpage-info'] > h1")) {
+							if (
+								document.querySelector("[data-testid='cnt-subpage-info'] > h1")
+							) {
 								presenceData.details = `Viewing ${document
-									.querySelector("[id='cnt-subpage-info'] > h1 ")
+									.querySelector("[data-testid='cnt-subpage-info'] > h1 ")
 									.textContent.match(/(flight .+$)/g)}`;
 								presenceData.state = `${document
-									.querySelector("[id='cnt-subpage-info'] > h1 ")
+									.querySelector("[data-testid='cnt-subpage-info'] > h1 ")
 									.textContent.replace(/(flight .+$)/g, "")
 									.replace("Flight history for ", "")}`;
 								presenceData.buttons = [
@@ -169,9 +183,11 @@ presence.on("UpdateData", async () => {
 							} else presenceData.details = "Browsing Flights";
 							break;
 						case "pinned":
-							if (document.querySelector("[id='cnt-subpage-info'] > h1")) {
+							if (
+								document.querySelector("[data-testid='cnt-subpage-info'] > h1")
+							) {
 								presenceData.details = `Viewing ${document
-									.querySelector("[id='cnt-subpage-info'] > h1 ")
+									.querySelector("[data-testid='cnt-subpage-info'] > h1 ")
 									.textContent.replace(
 										"Flight history for aircraft -",
 										"Aircraft"
@@ -407,11 +423,19 @@ presence.on("UpdateData", async () => {
 					break;
 
 				default:
-					if (document.querySelector("body[class*='multiView']")) {
+					if (
+						document.querySelector(
+							"[data-testid='view-selector-toggle'] > span:nth-child(2)"
+						).textContent === "Multi"
+					) {
 						presenceData.details = `Viewing ${
-							document.querySelector("button > span.selected").textContent
+							document.querySelector(
+								"[data-testid='view-selector-toggle'] > span:nth-child(2)"
+							).textContent
 						} Mode`;
-						if (document.querySelector(".layout.flex")) {
+						if (
+							document.querySelector("[data-testid='multiselect__info-panel']")
+						) {
 							presenceData.buttons = [
 								{
 									label: "View Page",
@@ -419,76 +443,74 @@ presence.on("UpdateData", async () => {
 								},
 							];
 							if (
-								document.querySelector(".layout.flex").childElementCount === 1
+								document.querySelectorAll(
+									"[data-testid='multiselect__info-panel']"
+								).length === 1
 							) {
 								presenceData.state = `Tracking ${document
-									.querySelector(".layout.flex")
-									.childElementCount.toString()} Flight`;
+									.querySelectorAll("[data-testid='multiselect__info-panel']")
+									.length.toString()} Flight`;
 							} else if (
-								document.querySelector(".layout.flex").childElementCount >= 2
+								document.querySelectorAll(
+									"[data-testid='multiselect__info-panel']"
+								).length >= 2
 							) {
 								presenceData.state = `Tracking ${document
-									.querySelector(".layout.flex")
-									.childElementCount.toString()} Flights`;
+									.querySelectorAll("[data-testid='multiselect__info-panel']")
+									.length.toString()} Flights`;
 							}
 						}
-					} else if (document.querySelector("body[id='map']")) {
+					} else if (
+						document.querySelector(
+							"[data-testid='view-selector-toggle'] > span:nth-child(2)"
+						).textContent === "Map"
+					) {
 						presenceData.details = `Viewing ${
-							document.querySelector("button > span.selected").textContent
+							document.querySelector(
+								"[data-testid='view-selector-toggle'] > span:nth-child(2)"
+							).textContent
 						} Mode`;
-						if (document.querySelector("[class*='show-left-overlay']")) {
+						if (document.querySelector("[data-testid='aircraft-panel']")) {
 							if (
-								document.querySelector("[class*='airline-info__callsign']")
-									.textContent === "NO CALLSIGN"
+								document.querySelector(
+									"[data-testid='aircraft-panel__header__callsign']"
+								).textContent === "N/A"
 							) {
 								presenceData.details = `Tracking ${
 									document.querySelector(
-										"div[title='Aircraft Registration Number']"
-									).childNodes[3].textContent
+										"[data-testid='aircraft-panel__registration']"
+									).textContent
 								}`;
 							} else {
 								presenceData.details = `Tracking ${
-									document.querySelector(".airline-info__head > h2 ")
-										.textContent
-								} ${
-									document.querySelector(".airline-info__head > h3 ")
-										.textContent
-								}`;
-							}
-							if (
-								document.querySelector(
-									".pnl-component.flight-info.appear > div > div > div > h3 > span "
-								).innerHTML !== "&nbsp;"
-							) {
-								presenceData.state = `${
 									document.querySelector(
-										".pnl-component.flight-info.appear > div > div > div > h3 > span "
-									).textContent
-								} to ${
-									document.querySelector(
-										".pnl-component.flight-info.appear > div > div > div:nth-of-type(2) > h3 > span "
+										"[data-testid='aircraft-panel__header__callsign']"
 									).textContent
 								}`;
 							}
-							presenceData.smallImageKey = document.querySelector(
-								"svg[class^='active']"
-							).id;
-							presenceData.smallImageText =
-								document.querySelector<HTMLOrSVGImageElement>(
-									"svg[class^='active']"
-								).dataset.tooltipValue;
+							presenceData.smallImageKey =
+								OtherAssets[
+									document
+										.querySelector(
+											"[data-testid='aircraft-panel'] [data-testid='base-tooltip__content']"
+										)
+										.textContent.toLocaleLowerCase()
+										.replaceAll(" ", "") as keyof typeof OtherAssets
+								];
+							presenceData.smallImageText = document.querySelector(
+								"[data-testid='aircraft-panel'] [data-testid='base-tooltip__content']"
+							).textContent;
 							if (
-								document.querySelector(".flight-progress.appear") &&
 								document.querySelector(
-									".time-distance > div:nth-of-type(2) > span:nth-of-type(2)"
-								).className !== "hidden"
+									"[data-testid='aircraft-panel__flight-time-remaining'] > span"
+								)
 							) {
 								if (
 									remaining !==
 									parseInt(
 										document
 											.querySelector(
-												".time-distance > div:nth-of-type(2) > span:nth-of-type(2)"
+												"[data-testid='aircraft-panel__flight-time-remaining'] > span"
 											)
 											.textContent.slice(5)
 											.split(":")[0]
@@ -497,7 +519,7 @@ presence.on("UpdateData", async () => {
 										parseInt(
 											document
 												.querySelector(
-													".time-distance > div:nth-of-type(2) > span:nth-of-type(2)"
+													"[data-testid='aircraft-panel__flight-time-remaining'] > span"
 												)
 												.textContent.slice(5)
 												.split(":")[1]
@@ -508,7 +530,7 @@ presence.on("UpdateData", async () => {
 										parseInt(
 											document
 												.querySelector(
-													".time-distance > div:nth-of-type(2) > span:nth-of-type(2)"
+													"[data-testid='aircraft-panel__flight-time-remaining'] > span"
 												)
 												.textContent.slice(5)
 												.split(":")[0]
@@ -517,7 +539,7 @@ presence.on("UpdateData", async () => {
 										parseInt(
 											document
 												.querySelector(
-													".time-distance > div:nth-of-type(2) > span:nth-of-type(2)"
+													"[data-testid='aircraft-panel__flight-time-remaining'] > span"
 												)
 												.textContent.slice(5)
 												.split(":")[1]
@@ -529,14 +551,16 @@ presence.on("UpdateData", async () => {
 							}
 							if (
 								images &&
-								document.querySelector<HTMLImageElement>(
-									".pnl-component.aircraft-image > a > img"
-								).src !==
-									"https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/0.jpg"
+								document.querySelector<HTMLAnchorElement>(
+									"[data-testid='aircraft-panel__image-link']"
+								).href !== "https://www.jetphotos.com/addphotos/" &&
+								document.querySelector<HTMLAnchorElement>(
+									"[data-testid='aircraft-panel__image-link']"
+								).href !== ""
 							) {
 								presenceData.largeImageKey =
 									document.querySelector<HTMLImageElement>(
-										".pnl-component.aircraft-image > a > img"
+										"[data-testid='aircraft-panel__image-link'] > img"
 									).src;
 							}
 							presenceData.buttons = [
@@ -546,11 +570,11 @@ presence.on("UpdateData", async () => {
 								},
 							];
 						} else if (
-							document.querySelector("[class*='airport-panel-open']")
+							document.querySelector("[data-testid='airport-panel']")
 						) {
 							presenceData.details = `Tracking ${
 								document.querySelector(
-									".pnl-component.airport-info > .title > span"
+									"[data-testid='airport-panel__header__name']"
 								).textContent
 							}`;
 							if (document.querySelector("span[class='AM']")) {
@@ -578,10 +602,18 @@ presence.on("UpdateData", async () => {
 										.textContent.split("|")[2]
 								}`;
 							}
-							if (images) {
+							if (
+								images &&
+								document.querySelector<HTMLAnchorElement>(
+									"[data-testid='airport-panel__image-link']"
+								).href !== "https://www.jetphotos.com/addphotos/" &&
+								document.querySelector<HTMLAnchorElement>(
+									"[data-testid='airport-panel__image-link']"
+								).href !== ""
+							) {
 								presenceData.largeImageKey =
 									document.querySelector<HTMLImageElement>(
-										".pnl-component.airport-image > a > img"
+										"[data-testid='airport-panel__image-link'] > img"
 									).src;
 							}
 							presenceData.buttons = [

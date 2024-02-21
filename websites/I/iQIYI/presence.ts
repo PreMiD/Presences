@@ -26,6 +26,11 @@ const presence = new Presence({
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/I/iQIYI/assets/0.png",
+	Logo2 = "https://cdn.rcd.gg/PreMiD/websites/I/iQIYI/assets/1.png",
+}
+
 presence.on("UpdateData", async () => {
 	const [newLang, showButtons, searchQuery, logo, cover] = await Promise.all([
 		presence.getSetting<string>("lang").catch(() => "en"),
@@ -41,9 +46,9 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-		largeImageKey: ["iqiyi_logo_b", "iqiyi_logo"][logo],
+		largeImageKey: [Assets.Logo2, Assets.Logo][logo],
 		details: strings.browse,
-		smallImageKey: "search",
+		smallImageKey: Assets.Search,
 		startTimestamp: browsingTimestamp,
 	};
 

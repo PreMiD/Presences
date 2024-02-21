@@ -39,12 +39,14 @@ interface CategoriesNextData {
 interface ProgrammeNextData {
 	props: {
 		pageProps: {
-			title: {
-				CTAText?: string;
-				episodeNumber?: number;
-				programmeTitle: string;
-				seriesNumber?: number;
-				titleType: string;
+			programme: {
+				heroCtaLabel?: string;
+				title: string;
+			};
+			episode: {
+				productionType: string;
+				episode: number;
+				series: number;
 			};
 		};
 	};
@@ -144,13 +146,15 @@ presence.on("UpdateData", async () => {
 					delete presenceData.startTimestamp;
 
 					const nextData = fetchNextData<ProgrammeNextData>();
-					presenceData.details = `Watching ${nextData.props.pageProps.title.programmeTitle}`;
+					presenceData.details = `Watching ${nextData.props.pageProps.programme.title}`;
 
 					if (
-						nextData.props.pageProps.title.CTAText &&
-						nextData.props.pageProps.title.titleType !== "FILM"
-					)
-						presenceData.state = nextData.props.pageProps.title.CTAText;
+						nextData.props.pageProps.programme.heroCtaLabel &&
+						nextData.props.pageProps.episode.productionType !== "FILM"
+					) {
+						presenceData.state =
+							nextData.props.pageProps.programme.heroCtaLabel;
+					}
 
 					const [video] = document.querySelectorAll("video");
 

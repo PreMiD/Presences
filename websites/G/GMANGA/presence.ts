@@ -14,20 +14,15 @@ enum Settings {
 	LOGO = "logo",
 }
 
-enum Icons {
-	NEWS = "news",
-	TEAM = "team",
-	MANGA = "manga",
-	READING = "reading",
-	LIBRARY = "library",
-	SEARCHING = "searching",
-	DISCOVERY = "discovery",
-	PAINTINGS = "paintings",
-}
-
-enum Logos {
-	LIGHT = "light-logo",
-	DARK = "dark-logo",
+const enum Assets {
+	Discovery = "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/0.png",
+	Library = "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/1.png",
+	Team = "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/2.png",
+	Manga = "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/3.png",
+	News = "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/4.png",
+	Paintings = "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/5.png",
+	DarkLogo = "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/6.png",
+	LightLogo = "https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/7.png",
 }
 
 const presence = new Presence({
@@ -41,7 +36,7 @@ const presence = new Presence({
 			{ path: /^\/$/, details: () => "On Homepage" },
 			{
 				path: /^\/(mangas|mangas\/featured|mangas\/latest|)$/,
-				smallImageKey: () => Icons.DISCOVERY,
+				smallImageKey: () => Assets.Discovery,
 				smallImageText: () => "Browsing",
 				details: () => "Browsing for Manga",
 				buttons: () => [{ label: "Browse", url: location.href }],
@@ -61,7 +56,7 @@ const presence = new Presence({
 					return data;
 				},
 				playback: () => !!data.endTimestamp,
-				smallImageKey: () => Icons.READING,
+				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Reading",
 				state: () => document.querySelector(".white-link").textContent,
 				details: () =>
@@ -82,7 +77,7 @@ const presence = new Presence({
 				path: /^\/mangas\/\d+\/(.*)+$/,
 				details: () => "Viewing a manga",
 				state: () => document.querySelector("h1.header").textContent,
-				smallImageKey: () => Icons.MANGA,
+				smallImageKey: () => Assets.Manga,
 				smallImageText: () => "Viewing",
 				buttons: () => [
 					{ label: "View Manga", url: location.href },
@@ -96,7 +91,7 @@ const presence = new Presence({
 			},
 			{
 				path: /^\/news+/,
-				smallImageKey: () => Icons.NEWS,
+				smallImageKey: () => Assets.News,
 				smallImageText: () => "Reading",
 				details: () => "Reading News",
 				state: () => document.querySelector("h1.header")?.textContent,
@@ -104,7 +99,7 @@ const presence = new Presence({
 			},
 			{
 				path: /\/colorings$/,
-				smallImageKey: () => Icons.PAINTINGS,
+				smallImageKey: () => Assets.Paintings,
 				smallImageText: () => "Viewing",
 				details: () => "Viewing Paintings",
 				state: () =>
@@ -115,7 +110,7 @@ const presence = new Presence({
 			},
 			{
 				path: /^\/teams/,
-				smallImageKey: () => Icons.TEAM,
+				smallImageKey: () => Assets.Team,
 				smallImageText: () => "Viewing",
 				details: () => "Viewing a Team",
 				state: () => document.querySelector("h2.header").textContent,
@@ -123,7 +118,7 @@ const presence = new Presence({
 			},
 			{
 				path: /^\/members/,
-				smallImageKey: () => Icons.LIBRARY,
+				smallImageKey: () => Assets.Library,
 				smallImageText: () => "Viewing",
 				details: () => "Viewing a User",
 				state: () => document.querySelector("h2.header").textContent,
@@ -143,7 +138,7 @@ if (searchInput) {
 			return;
 		}
 
-		searchData.smallImageKey = Icons.SEARCHING;
+		searchData.smallImageKey = Assets.Search;
 		searchData.smallImageText = "Searching";
 		searchData.state = `Searching: ${this.textContent}`;
 	});
@@ -154,7 +149,8 @@ presence.on("UpdateData", async () => {
 		showButtons = await presence.getSetting<boolean>(Settings.BUTTONS),
 		logo = await presence.getSetting<number>(Settings.LOGO);
 	let presenceData: PresenceData = {
-		largeImageKey: [Logos.LIGHT, Logos.DARK][logo] || Logos.LIGHT,
+		largeImageKey:
+			[Assets.LightLogo, Assets.DarkLogo][logo] || Assets.LightLogo,
 	};
 
 	if (showTimestamp) presenceData.startTimestamp = startTimestamp;

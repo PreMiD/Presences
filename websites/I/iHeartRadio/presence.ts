@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 				subtitle = checkLength(subtitle);
 				presenceData.state = subtitle;
 
-				presenceData.smallImageKey = "live";
+				presenceData.smallImageKey = Assets.Live;
 				presenceData.smallImageText = (await strings).live;
 				if (!elapsed) elapsed = Math.floor(Date.now() / 1000);
 

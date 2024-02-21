@@ -5,6 +5,13 @@ const presence = new Presence({
 
 let item: HTMLElement, user: HTMLElement, title: HTMLElement | string | Element;
 
+const assets: Record<string, string> = {
+	dk: "https://cdn.rcd.gg/PreMiD/websites/L/LabyMod/assets/0.png",
+	en: "https://cdn.rcd.gg/PreMiD/websites/L/LabyMod/assets/1.png",
+	jp: "https://cdn.rcd.gg/PreMiD/websites/L/LabyMod/assets/2.png",
+	br: "https://cdn.rcd.gg/PreMiD/websites/L/LabyMod/assets/3.png",
+};
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
@@ -162,7 +169,7 @@ presence.on("UpdateData", async () => {
 					);
 					if (document.URL.includes("#")) [lang] = lang.split("#");
 
-					presenceData.smallImageKey = lang.toLowerCase();
+					presenceData.smallImageKey = assets[lang.toLowerCase()];
 					presenceData.state = "Translating Website";
 				} else if (document.URL.includes("?project=notification")) {
 					lang = document.URL.replace(
@@ -171,7 +178,7 @@ presence.on("UpdateData", async () => {
 					);
 					if (document.URL.includes("#")) [lang] = lang.split("#");
 
-					presenceData.smallImageKey = lang.toLowerCase();
+					presenceData.smallImageKey = assets[lang.toLowerCase()];
 					presenceData.state = "Translating Notification";
 				} else if (document.URL.includes("?project=client")) {
 					lang = document.URL.replace(
@@ -180,7 +187,7 @@ presence.on("UpdateData", async () => {
 					);
 					if (document.URL.includes("#")) [lang] = lang.split("#");
 
-					presenceData.smallImageKey = lang.toLowerCase();
+					presenceData.smallImageKey = assets[lang.toLowerCase()];
 					presenceData.state = "Translating Client";
 				}
 			} else {

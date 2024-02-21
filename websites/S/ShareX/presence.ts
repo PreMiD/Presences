@@ -9,7 +9,6 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/S/ShareX/assets/logo.png",
-			smallImageKey: "sharex-white-logo",
 			smallImageText: "Navigating on getsharex.com",
 			buttons: [
 				{
@@ -25,54 +24,39 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/downloads")) {
 		presenceData.state = "Browsing Downloads Page";
 		presenceData.smallImageKey = Assets.Downloading;
-	} else if (document.location.pathname.includes("/screenshots")) {
+	} else if (document.location.pathname.includes("/screenshots"))
 		presenceData.state = "Viewing Screenshots";
-		presenceData.smallImageKey = "screenshot";
-	} else if (document.location.pathname.includes("/changelog")) {
+	else if (document.location.pathname.includes("/changelog")) {
 		presenceData.details = "Reading Changelog";
 		presenceData.state = document.querySelector("h2")?.textContent;
-		presenceData.smallImageKey = "changelog";
-	} else if (document.location.pathname.includes("/donate")) {
+	} else if (document.location.pathname.includes("/donate"))
 		presenceData.state = "Browsing Donations Page";
-		presenceData.smallImageKey = "donate";
-	} else if (document.location.pathname.includes("/image-effects")) {
+	else if (document.location.pathname.includes("/image-effects"))
 		presenceData.state = "Browsing Image Effects";
-		presenceData.smallImageKey = "imageeffects";
-	} else if (document.location.pathname.includes("/actions")) {
+	else if (document.location.pathname.includes("/actions"))
 		presenceData.state = "Browsing Actions Page";
-		presenceData.smallImageKey = "actionspage";
-	} else if (document.location.pathname.includes("/brand-assets"))
+	else if (document.location.pathname.includes("/brand-assets"))
 		presenceData.state = "Browsing Brand Assets";
 
 	// Docs
-	if (document.location.pathname.includes("/faq")) {
+	if (document.location.pathname.includes("/faq"))
 		presenceData.state = "Browsing FAQ";
-		presenceData.smallImageKey = "faq";
-	} else if (document.location.pathname.includes("/dev-builds")) {
+	else if (document.location.pathname.includes("/dev-builds"))
 		presenceData.state = "Browsing Dev Builds";
-		presenceData.smallImageKey = "beta";
-	} else if (document.location.pathname.includes("/region-capture")) {
+	else if (document.location.pathname.includes("/region-capture"))
 		presenceData.state = "Browsing RC Keybinds";
-		presenceData.smallImageKey = "shortcuts";
-	} else if (document.location.pathname.includes("/command-line-arguments")) {
+	else if (document.location.pathname.includes("/command-line-arguments"))
 		presenceData.state = "Browsing CLI Page";
-		presenceData.smallImageKey = "cli";
-	} else if (document.location.pathname.includes("/translation")) {
+	else if (document.location.pathname.includes("/translation"))
 		presenceData.state = "Reading Translation Guide";
-		presenceData.smallImageKey = "translate";
-	} else if (document.location.pathname.includes("/custom-uploader")) {
+	else if (document.location.pathname.includes("/custom-uploader"))
 		presenceData.state = "Reading Custom Uploaders Guide";
-		presenceData.smallImageKey = "customupload";
-	} else if (document.location.pathname.includes("amazon-s3")) {
+	else if (document.location.pathname.includes("amazon-s3"))
 		presenceData.state = "Reading Amazon S3 Guide";
-		presenceData.smallImageKey = "amazon";
-	} else if (document.location.pathname.includes("/google-cloud-storage")) {
+	else if (document.location.pathname.includes("/google-cloud-storage"))
 		presenceData.state = "Reading Google Cloud Guide";
-		presenceData.smallImageKey = "googlecloud";
-	} else if (document.location.pathname.includes("website-capture")) {
+	else if (document.location.pathname.includes("website-capture"))
 		presenceData.state = "Reading Website Capture Guide";
-		presenceData.smallImageKey = "websitecapture";
-	}
 
 	// Start Browsing Timestamp
 	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;

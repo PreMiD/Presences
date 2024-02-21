@@ -796,7 +796,8 @@ async function setDefaultsToPresence(): Promise<void> {
 
 	if (presenceData.startTimestamp) delete presenceData.startTimestamp;
 
-	if (isNaN(presenceData.endTimestamp)) delete presenceData.endTimestamp;
+	if (isNaN(presenceData.endTimestamp as number))
+		delete presenceData.endTimestamp;
 
 	if (await presence.getSetting<boolean>("showTimestamps"))
 		presenceData.startTimestamp = Date.now();

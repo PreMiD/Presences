@@ -25,7 +25,8 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Members: ${
 			document.querySelector(".room-title-capacity").textContent
 		}`;
-		presenceData.smallImageKey = "chat";
+		presenceData.smallImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/D/Durarara/assets/0.png";
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
