@@ -176,6 +176,16 @@ presence.on("UpdateData", async () => {
 
 			break;
 		}
+		default: {
+			if (
+				document.querySelector<HTMLMetaElement>('[property="og:type"]')
+					?.content !== "profile"
+			)
+				return;
+			const username = document.querySelector("header h1")?.textContent;
+			presenceData.details = `Viewing user${username ? `: ${username}` : ""}`;
+			break;
+		}
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
