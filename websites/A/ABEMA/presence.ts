@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			name: "ABEMA",
 			type: ActivityType.Watching,
-			largeImageKey: "https://i.imgur.com/8KLnjVb.png",
+			largeImageKey: "https://i.imgur.com/X2NiQOd.png",
 			startTimestamp: browsingTimestamp,
 		},
 		[buttons, newLang, privacy, showTimestamps, videoPic] = await Promise.all([
