@@ -1,43 +1,106 @@
 export const presence = new Presence({
-		clientId: "820023496934817804",
-	});
+	clientId: "820023496934817804",
+});
 export const browsingTimestamp = Math.floor(Date.now() / 1000);
 export const slideshow = presence.createSlideshow();
 
-let documentIsLoaded = document.readyState === "complete";
-document.addEventListener("DOMContentLoaded", () => {
-  documentIsLoaded = true;
-});
+let oldSlideshowKey: string;
+export function registerSlideshowKey(key: string): boolean {
+	if (oldSlideshowKey !== key) {
+		presence.info(`Slideshow key changed from ${oldSlideshowKey} to ${key}`);
+		slideshow.deleteAllSlides();
+		oldSlideshowKey = key;
+		return true;
+	}
+	return false;
+}
 
-const iconCache: Record<string, string> = {};
-export function getIconImage(icon: HTMLElement, backgroundColor = "#fff"): string {
-  if (!documentIsLoaded) return;
+const iconCache: Record<string, Promise<Blob>> = {};
+export function getIconImage(
+	icon: HTMLElement,
+	backgroundColor = "#fff"
+): Promise<Blob> {
 	const canvas = document.createElement("canvas");
 	canvas.width = 512;
 	canvas.height = 512;
 	const ctx = canvas.getContext("2d");
 
-  // get the icon's computed style
+	// get the icon's computed style
 	const computedStyle = getComputedStyle(icon),
 		computedStyleBefore = getComputedStyle(icon, ":before"),
 		fontFamily = computedStyle.fontFamily,
-    fontWeight = computedStyle.fontWeight,
+		fontWeight = computedStyle.fontWeight,
 		color = computedStyle.color,
 		text = computedStyleBefore.content.replace(/"/g, ""),
-    key = `${fontFamily}-${fontWeight}-${backgroundColor}-${color}-${text}`;
+		key = `${fontFamily}-${fontWeight}-${backgroundColor}-${color}-${text}`;
 
 	if (iconCache[key]) return iconCache[key];
-  // render the background
-  ctx.fillStyle = backgroundColor;
-  ctx.fillRect(0, 0, 512, 512);
+	// render the background
+	ctx.fillStyle = backgroundColor;
+	ctx.fillRect(0, 0, 512, 512);
 
-  // render the text
-  ctx.font = `${fontWeight} 384px/1 ${fontFamily}`;
+	// render the text
+	ctx.font = `${fontWeight} 384px/1 ${fontFamily}`;
 	ctx.fillStyle = color;
 	ctx.textAlign = "center";
 	ctx.textBaseline = "middle";
 	ctx.fillText(text, 256, 256);
-	iconCache[key] = canvas.toDataURL();
-	presence.info(`${text} -> ${iconCache[key]}`);
+
+	const blobPromise: Promise<Blob> = new Promise(async resolve => {
+		canvas.toBlob(blob => resolve(blob));
+	});
+
+	iconCache[key] = blobPromise;
 	return iconCache[key];
+}
+
+let batchCacheKey: string,
+	batchCache: unknown[] = [],
+	batchInterval: number,
+	batchIndex = 0,
+	batchItems: unknown[] = [],
+	batchAborter = new AbortController();
+export async function batch<I, O>(
+	key: string,
+	itemList: I[],
+	mapper: (input: I) => Awaitable<O>
+): Promise<O[]> {
+	if (batchCacheKey === key) {
+		// check if items changed
+		if (batchItems.length !== itemList.length) {
+      presence.info(`Batched items changed from ${batchItems.length} to ${itemList.length}`);
+			batchCache = [];
+			batchIndex = 0;
+			batchItems = itemList;
+      if (batchInterval === null) {
+        executeBatch();
+      }
+		}
+		return batchCache as O[];
+	}
+	clearTimeout(batchInterval);
+	batchCacheKey = key;
+	batchCache = [];
+
+	async function executeBatch() {
+		for (let i = batchIndex, j = 0; i < batchItems.length && j < 10; i++, j++) {
+			const data = await mapper((batchItems as I[])[i]);
+			if (batchAborter.signal.aborted) {
+				batchAborter = new AbortController();
+				break;
+			}
+			batchCache.push(data);
+			batchIndex++;
+		}
+		presence.info(`Batched ${batchIndex} of ${batchItems.length}`);
+		if (batchIndex === batchItems.length) {
+			clearTimeout(batchInterval);
+      batchInterval = null;
+		} else {
+			batchInterval = setTimeout(executeBatch, 5000);
+		}
+	}
+
+	executeBatch();
+	return batchCache as O[];
 }
