@@ -69,6 +69,7 @@ export async function batch<I, O>(
 		// check if items changed
 		if (batchItems.length !== itemList.length) {
       presence.info(`Batched items changed from ${batchItems.length} to ${itemList.length}`);
+      batchAborter.abort();
 			batchCache = [];
 			batchIndex = 0;
 			batchItems = itemList;
@@ -78,14 +79,19 @@ export async function batch<I, O>(
 		}
 		return batchCache as O[];
 	}
+  presence.info(`Batched key changed from ${batchCacheKey} to ${key}`);
 	clearTimeout(batchInterval);
+  batchAborter.abort();
 	batchCacheKey = key;
 	batchCache = [];
+  batchItems = itemList;
+  batchIndex = 0;
 
 	async function executeBatch() {
 		for (let i = batchIndex, j = 0; i < batchItems.length && j < 10; i++, j++) {
 			const data = await mapper((batchItems as I[])[i]);
 			if (batchAborter.signal.aborted) {
+        presence.info(`Batch aborted`);
 				batchAborter = new AbortController();
 				break;
 			}
@@ -96,7 +102,7 @@ export async function batch<I, O>(
 		if (batchIndex === batchItems.length) {
 			clearTimeout(batchInterval);
       batchInterval = null;
-		} else {
+		} else if (key === batchCacheKey) {
 			batchInterval = setTimeout(executeBatch, 5000);
 		}
 	}
