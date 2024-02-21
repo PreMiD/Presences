@@ -25,6 +25,14 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing Home Page";
 			break;
 		}
+		case "docs": {
+			presenceData.details = "Reading Documentation";
+			if (pathList[1]) {
+				presenceData.state = document.querySelector(".section+h1");
+				presenceData.buttons = [{ label: "Read Docs", url: href }];
+			}
+			break;
+		}
 		case "icons": {
 			if (pathList[1] === "categories") {
 				if (pathList[2]) {
