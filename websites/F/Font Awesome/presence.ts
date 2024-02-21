@@ -1,8 +1,3 @@
-const presence = new Presence({
-		clientId: "820023496934817804",
-	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
@@ -20,6 +15,29 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "icons": {
+			if (pathList[1] === "categories") {
+				if (pathList[2]) {
+					const header = document.querySelector("h2");
+					presenceData.details = "Viewing Icon Category";
+					presenceData.state = header;
+					presenceData.smallImageKey = getIconImage(header.querySelector("i"));
+					presenceData.smallImageText = header;
+					presenceData.buttons = [{ label: "View Category", url: href }];
+				} else {
+					presenceData.details = "Browsing Categories";
+				}
+			} else if (pathList[1]) {
+				presenceData.details = "Viewing Icon";
+				presenceData.state = document.querySelector(".icon-detail h1+button");
+				presenceData.smallImageKey = getIconImage(
+					document.querySelector(".icon-details-preview-rendering i")
+				);
+				presenceData.smallImageText =
+					document.querySelector<HTMLSelectElement>("#icon_family").value;
+				presenceData.buttons = [{ label: "View Icon", url: href }];
+			} else {
+				presenceData.details = "Browsing Icons";
+			}
 			break;
 		}
 		case "start": {
