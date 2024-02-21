@@ -240,7 +240,6 @@ presence.on("UpdateData", async () => {
 				contentTitle = null;
 				contentSerieTitle = null;
 			}
-
 			break;
 	}
 
