@@ -46,8 +46,14 @@ export function getIconImage(
 	ctx.textBaseline = "middle";
 	ctx.fillText(text, 256, 256);
 
-	const blobPromise: Promise<Blob> = new Promise(async resolve => {
-		canvas.toBlob(blob => resolve(blob));
+	const blobPromise: Promise<Blob> = new Promise(resolve => {
+		canvas.toBlob(blob => {
+      // for debugging
+      const url = URL.createObjectURL(blob);
+      presence.info(`${key} -> ${url}`);
+      setTimeout(() => URL.revokeObjectURL(url), 15e3);
+      resolve(blob);
+    });
 	});
 
 	iconCache[key] = blobPromise;

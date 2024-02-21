@@ -1,7 +1,6 @@
 import {
 	batch,
 	browsingTimestamp,
-	// cacheResultTimed,
 	getIconImage,
 	presence,
 	registerSlideshowKey,
