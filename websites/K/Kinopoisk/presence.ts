@@ -1,23 +1,22 @@
 const presence = new Presence({
-	clientId: "1034799018980679680",
-});
+		clientId: "1034799018980679680",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 async function getStrings() {
 	return presence.getStrings(
 		{
 			play: "general.watchingVid",
 			pause: "general.paused",
+			view: "general.view",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
 }
 
-let video = {
-		duration: 0,
-		currentTime: 0,
-		paused: true,
-	},
-	strings: Awaited<ReturnType<typeof getStrings>>;
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	contentTitle: string = null,
+	contentSerieTitle: string = null;
 
 function textContent(tags: string) {
 	return document.querySelector(tags)?.textContent?.trim();
@@ -34,13 +33,6 @@ const enum Assets {
 	Movies = "https://cdn.rcd.gg/PreMiD/websites/K/Kinopoisk/assets/0.png",
 }
 
-presence.on(
-	"iFrameData",
-	(data: { duration: number; currentTime: number; paused: boolean }) => {
-		video = data;
-	}
-);
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Где-то на сайте",
@@ -51,6 +43,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("time"),
 		]),
 		{ hostname, pathname } = document.location;
+
+	let isPaused, contentTimestamps: number[];
 
 	if (!strings) strings = await getStrings();
 
@@ -187,41 +181,64 @@ presence.on("UpdateData", async () => {
 				presenceData.details = `Смотрит информацию ${textContent(
 					".FilmContent_wrapper__EicQU .TabList_root__Kwcez button"
 				)?.toLowerCase()}`;
-				presenceData.state = document.querySelector<HTMLImageElement>(
-					".FilmContent_wrapper__EicQU img"
-				)?.alt;
+				presenceData.state = document
+					.querySelector<HTMLImageElement>(".FilmContent_wrapper__EicQU img")
+					?.alt.replace("Смотреть", "")
+					.replace("фильм", "");
+				presenceData.smallImageKey = Assets.Viewing;
 			}
 
 			if (document.querySelector(".CrispySlideDown_fade_active__StELV")) {
 				presenceData.details = `Смотрит информацию ${textContent(
 					".CrispySlideDown_fade_active__StELV .TabList_root__Kwcez button"
 				)?.toLowerCase()}`;
-				presenceData.state = document.querySelector<HTMLImageElement>(
-					".CrispySlideDown_fade_active__StELV img"
-				)?.alt;
+				presenceData.state = document
+					.querySelector<HTMLImageElement>(
+						".CrispySlideDown_fade_active__StELV img"
+					)
+					?.alt.replace("Смотреть", "")
+					.replace("фильм", "");
+				presenceData.smallImageKey = Assets.Viewing;
 			}
 
 			if (document.querySelector(".PlayerManager_body__rOEVd")) {
-				presenceData.details = `Смотрит ${
-					!privacy
-						? pageTitle(" — ")[0]
-						: textContent(".Meta_subtitle__jnooi")
-						? "сериал"
-						: "фильм"
-				}`;
-				presenceData.state = textContent(".Meta_subtitle__jnooi");
-				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
-				presenceData.smallImageText = video.paused
-					? strings.pause
-					: strings.play;
+				if (document.querySelector(".Meta_image__CXoKi")) {
+					contentTitle =
+						document.querySelector<HTMLImageElement>(".Meta_image__CXoKi")?.alt;
+				}
 
-				if (video.paused || !time) {
+				if (document.querySelector(".Meta_subtitle__jnooi"))
+					contentSerieTitle = textContent(".Meta_subtitle__jnooi");
+
+				if (contentTitle || contentSerieTitle) {
+					presenceData.details = `Смотрит ${
+						!privacy ? contentTitle : contentSerieTitle ? "сериал" : "фильм"
+					}`;
+
+					contentTimestamps = presence.getTimestampsfromMedia(
+						document.querySelector("video")
+					);
+
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestamps(contentTimestamps[0], contentTimestamps[1]);
+				} else {
+					presenceData.details = "Смотрит телеканал";
+					presenceData.startTimestamp = browsingTimestamp;
+				}
+
+				isPaused = document.querySelector(".styles_play__lWZwM");
+
+				presenceData.state = contentSerieTitle;
+				presenceData.smallImageKey = isPaused ? Assets.Pause : Assets.Play;
+				presenceData.smallImageText = isPaused ? strings.pause : strings.play;
+
+				if (isPaused || !time) {
 					delete presenceData.startTimestamp;
 					delete presenceData.endTimestamp;
-				} else {
-					[presenceData.startTimestamp, presenceData.endTimestamp] =
-						presence.getTimestamps(video.currentTime, video.duration);
 				}
+			} else {
+				contentTitle = null;
+				contentSerieTitle = null;
 			}
 			break;
 	}
