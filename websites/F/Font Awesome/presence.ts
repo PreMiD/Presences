@@ -1,3 +1,5 @@
+import { browsingTimestamp, getIconImage, presence } from "./util";
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
@@ -6,7 +8,7 @@ presence.on("UpdateData", async () => {
 			type: ActivityType.Playing,
 			name: "Font Awesome",
 		},
-		{ pathname, search, href } = document.location,
+		{ pathname, href } = document.location,
 		pathList = pathname.split("/").filter(Boolean);
 
 	switch (pathList[0] ?? "/") {
@@ -30,7 +32,9 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing Icon";
 				presenceData.state = document.querySelector(".icon-detail h1+button");
 				presenceData.smallImageKey = getIconImage(
-					document.querySelector(".icon-details-preview-rendering i")
+					document.querySelector(".icon-details-preview-rendering i"),
+					getComputedStyle(document.querySelector(".icon-details-preview.card"))
+						.backgroundColor
 				);
 				presenceData.smallImageText =
 					document.querySelector<HTMLSelectElement>("#icon_family").value;
