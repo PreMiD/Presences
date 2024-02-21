@@ -42,7 +42,9 @@ presence.on("UpdateData", async () => {
 				}
 			} else if (pathList[1]) {
 				presenceData.details = "Viewing Icon";
-				presenceData.state = document.querySelector(".icon-detail h1+button");
+				presenceData.state = document.querySelector(
+					".icon-detail h1+button,#icon-landing h1+button"
+				).childNodes[1];
 				presenceData.smallImageKey = await getIconImage(
 					document.querySelector(".icon-details-preview-rendering i"),
 					getComputedStyle(document.querySelector(".icon-details-preview.card"))
