@@ -325,6 +325,11 @@ presence.on("UpdateData", async () => {
 		};
 
 	if (hostname.split(".")[0] === "replay") {
+		presenceData.type = ActivityType.Watching;
+		presenceData.name = "BL replay";
+		presenceData.largeImageText = `${
+			document.querySelector("#songMode").textContent || "Standard"
+		} ${document.querySelector("#songDifficulty").textContent}`;
 		presenceData.largeImageKey = cover
 			? document.querySelector<HTMLImageElement>("#songImage")
 			: Assets.Replay;
@@ -354,6 +359,8 @@ presence.on("UpdateData", async () => {
 			},
 		];
 	} else if (hostname.split(".")[0] === "royale") {
+		presenceData.type = ActivityType.Watching;
+		presenceData.name = "BL royale";
 		presenceData.largeImageKey = cover
 			? document.querySelector<HTMLImageElement>("#songImage")
 			: Assets.Replay;
@@ -535,6 +542,11 @@ presence.on("UpdateData", async () => {
 			}
 			case "clansmap": {
 				presenceData.details = "Viewing clans map";
+				break;
+			}
+			case "maps": {
+				presenceData.details = "Browsing maps";
+				break;
 			}
 		}
 		if (
@@ -543,6 +555,8 @@ presence.on("UpdateData", async () => {
 				?.src.includes("replay.beatleader.xyz") &&
 			replay.name
 		) {
+			presenceData.type = ActivityType.Watching;
+			presenceData.name = "BL replay";
 			presenceData.largeImageKey = cover ? replay.cover : Assets.Replay;
 			presenceData.details = replay.name;
 			presenceData.state = replay.playerName;
