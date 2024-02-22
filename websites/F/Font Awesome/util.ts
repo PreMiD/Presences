@@ -34,12 +34,9 @@ export function getIconImage(
 	canvas.height = 512;
 	const ctx = canvas.getContext("2d"),
 		// get the icon's computed style
-		computedStyle = getComputedStyle(icon),
-		computedStyleBefore = getComputedStyle(icon, ":before"),
-		{ fontFamily } = computedStyle,
-		{ fontWeight } = computedStyle,
-		{ color } = computedStyle,
-		text = computedStyleBefore.content.replace(/"/g, ""),
+		{ fontFamily, fontWeight, color } = getComputedStyle(icon),
+		{ content } = getComputedStyle(icon, ":before"),
+		text = content.replace(/"/g, ""),
 		key = `${fontFamily}-${fontWeight}-${backgroundColor}-${color}-${text}`;
 
 	if (iconCache[key]) return iconCache[key];
