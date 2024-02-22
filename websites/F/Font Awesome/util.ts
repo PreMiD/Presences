@@ -32,14 +32,13 @@ export function getIconImage(
 	const canvas = document.createElement("canvas");
 	canvas.width = 512;
 	canvas.height = 512;
-	const ctx = canvas.getContext("2d");
-
-	// get the icon's computed style
-	const computedStyle = getComputedStyle(icon),
+	const ctx = canvas.getContext("2d"),
+		// get the icon's computed style
+		computedStyle = getComputedStyle(icon),
 		computedStyleBefore = getComputedStyle(icon, ":before"),
-		fontFamily = computedStyle.fontFamily,
-		fontWeight = computedStyle.fontWeight,
-		color = computedStyle.color,
+		{ fontFamily } = computedStyle,
+		{ fontWeight } = computedStyle,
+		{ color } = computedStyle,
 		text = computedStyleBefore.content.replace(/"/g, ""),
 		key = `${fontFamily}-${fontWeight}-${backgroundColor}-${color}-${text}`;
 
@@ -57,12 +56,12 @@ export function getIconImage(
 
 	const blobPromise: Promise<Blob> = new Promise(resolve => {
 		canvas.toBlob(blob => {
-      // for debugging
-      const url = URL.createObjectURL(blob);
-      presence.info(`${key} -> ${url}`);
-      setTimeout(() => URL.revokeObjectURL(url), 15e3);
-      resolve(blob);
-    });
+			// for debugging
+			const url = URL.createObjectURL(blob);
+			presence.info(`${key} -> ${url}`);
+			setTimeout(() => URL.revokeObjectURL(url), 15e3);
+			resolve(blob);
+		});
 	});
 
 	iconCache[key] = blobPromise;
@@ -94,30 +93,30 @@ export async function batch<I, O>(
 	if (batchCacheKey === key) {
 		// check if items changed
 		if (batchItems.length !== itemList.length) {
-      presence.info(`Batched items changed from ${batchItems.length} to ${itemList.length}`);
-      batchAborter.abort();
+			presence.info(
+				`Batched items changed from ${batchItems.length} to ${itemList.length}`
+			);
+			batchAborter.abort();
 			batchCache = [];
 			batchIndex = 0;
 			batchItems = itemList;
-      if (batchInterval === null) {
-        executeBatch();
-      }
+			if (batchInterval === null) executeBatch();
 		}
 		return batchCache as O[];
 	}
-  presence.info(`Batched key changed from ${batchCacheKey} to ${key}`);
+	presence.info(`Batched key changed from ${batchCacheKey} to ${key}`);
 	clearTimeout(batchInterval);
-  batchAborter.abort();
+	batchAborter.abort();
 	batchCacheKey = key;
 	batchCache = [];
-  batchItems = itemList;
-  batchIndex = 0;
+	batchItems = itemList;
+	batchIndex = 0;
 
 	async function executeBatch() {
 		for (let i = batchIndex, j = 0; i < batchItems.length && j < 10; i++, j++) {
 			const data = await mapper((batchItems as I[])[i]);
 			if (batchAborter.signal.aborted) {
-        presence.info(`Batch aborted`);
+				presence.info("Batch aborted");
 				batchAborter = new AbortController();
 				break;
 			}
@@ -127,10 +126,9 @@ export async function batch<I, O>(
 		presence.info(`Batched ${batchIndex} of ${batchItems.length}`);
 		if (batchIndex === batchItems.length) {
 			clearTimeout(batchInterval);
-      batchInterval = null;
-		} else if (key === batchCacheKey) {
+			batchInterval = null;
+		} else if (key === batchCacheKey)
 			batchInterval = setTimeout(executeBatch, 5000);
-		}
 	}
 
 	executeBatch();

@@ -44,9 +44,7 @@ presence.on("UpdateData", async () => {
 					);
 					presenceData.smallImageText = header;
 					presenceData.buttons = [{ label: "View Category", url: href }];
-				} else {
-					presenceData.details = "Browsing Categories";
-				}
+				} else presenceData.details = "Browsing Categories";
 			} else if (pathList[1]) {
 				presenceData.details = "Viewing Icon";
 				presenceData.state = document.querySelector(
@@ -59,13 +57,10 @@ presence.on("UpdateData", async () => {
 				);
 				const family =
 					document.querySelector<HTMLSelectElement>("#icon_family");
-				if (family) {
-					presenceData.smallImageText = family.value;
-				}
+				if (family) presenceData.smallImageText = family.value;
+
 				presenceData.buttons = [{ label: "View Icon", url: href }];
-			} else {
-				presenceData.details = "Browsing Icons";
-			}
+			} else presenceData.details = "Browsing Icons";
 			break;
 		}
 		case "search": {
@@ -88,9 +83,8 @@ presence.on("UpdateData", async () => {
 						};
 						return tempData;
 					});
-					for (const data of batchData) {
+					for (const data of batchData)
 						slideshow.addSlide(data.smallImageText as string, data, 5000);
-					}
 				}
 			}
 			break;
@@ -107,9 +101,7 @@ presence.on("UpdateData", async () => {
 			if (pathList[1]) {
 				presenceData.details = "Viewing Plan";
 				presenceData.state = document.querySelector("h3");
-			} else {
-				presenceData.details = "Browsing Plans";
-			}
+			} else presenceData.details = "Browsing Plans";
 			break;
 		}
 		case "sessions": {
