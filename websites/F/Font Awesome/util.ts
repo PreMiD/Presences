@@ -5,6 +5,9 @@ export const browsingTimestamp = Math.floor(Date.now() / 1000);
 export const slideshow = presence.createSlideshow();
 
 let oldSlideshowKey: string;
+/**
+ * Registers a new slideshow key and clears the current slideshow on changes.
+ */
 export function registerSlideshowKey(key: string): boolean {
 	if (oldSlideshowKey !== key) {
 		presence.info(`Slideshow key changed from ${oldSlideshowKey} to ${key}`);
@@ -16,6 +19,12 @@ export function registerSlideshowKey(key: string): boolean {
 }
 
 const iconCache: Record<string, Promise<Blob>> = {};
+/**
+ * Converts an icon <i> element to a Blob.
+ *
+ * @param icon
+ * @param backgroundColor The background color of the icon
+ */
 export function getIconImage(
 	icon: HTMLElement,
 	backgroundColor = "#fff"
@@ -66,6 +75,17 @@ let batchCacheKey: string,
 	batchIndex = 0,
 	batchItems: unknown[] = [],
 	batchAborter = new AbortController();
+/**
+ * Batches a list of items and maps them to a new list of items.
+ * Useful for expensive operations.
+ *
+ * The batch will execute every 5 seconds and will stop if the key changes.
+ * If new items are added, the batch will restart.
+ *
+ * @param key A unique key for the batch
+ * @param itemList The list of items to batch
+ * @param mapper The function to map the items
+ */
 export async function batch<I, O>(
 	key: string,
 	itemList: I[],
