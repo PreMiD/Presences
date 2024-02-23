@@ -226,7 +226,9 @@ presence.on("UpdateData", async () => {
 		}
 		case path[0] === "baby-map": {
 			presenceData.details = "Playing: Baby Map";
-			presenceData.state = document.querySelector(".total-babies").textContent.trim();
+			presenceData.state = document
+				.querySelector(".total-babies")
+				.textContent.trim();
 			break;
 		}
 		case path[0] === "progress": {
