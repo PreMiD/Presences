@@ -289,7 +289,7 @@ presence.on("UpdateData", async () => {
 	if (showButtons) {
 		presenceData.buttons = [
 			{
-				label: "View",
+				label: "Play",
 				url: href,
 			},
 		];
