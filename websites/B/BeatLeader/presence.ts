@@ -535,6 +535,11 @@ presence.on("UpdateData", async () => {
 			}
 			case "clansmap": {
 				presenceData.details = "Viewing clans map";
+				break;
+			}
+			case "maps": {
+				presenceData.details = "Browsing maps";
+				break;
 			}
 		}
 		if (
