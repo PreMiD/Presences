@@ -1,0 +1,50 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "205984221859151873",
+		"name": "joerkig"
+	},
+	"service": "Quaver",
+	"description": {
+		"en": "The ultimate community-driven, and open-source competitive rhythm game available on Steam."
+	},
+	"url": ["quavergame.com","wiki.quavergame.com"],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/Ja2zIvV.png",
+	"thumbnail": "https://static.quavergame.com/img/home.jpg",
+	"color": "#09a4c6",
+	"category": "games",
+	"tags": [
+		"quavergame",
+		"rhythm",
+		"game",
+		"leaderboard",
+		"competitive"
+	],
+	"settings": [
+		{
+			"id": "time",
+			"title": "Show timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		},
+		{
+			"title": "Show Cover",
+			"id": "cover",
+			"icon": "fad fa-images",
+			"value": true
+		},
+		{
+			"title": "Show Small Image",
+			"id": "smallImage",
+			"icon": "fad fa-images",
+			"value": true
+		}
+	]
+}
