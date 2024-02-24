@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 		case "infinite-craft": {
 			presenceData.details = "Playing: Infinite Craft";
 			presenceData.state = `Discovered ${
-				document.querySelectorAll(".items .item").length || 0
+				document.querySelectorAll(".items .item").length
 			} items`;
 			break;
 		}
