@@ -275,7 +275,6 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Playing: Design the Next iPhone";
 			break;
 		}
-		case !path[0]:
 		default: {
 			presenceData.details = "Browsing";
 			if (document.querySelectorAll(".posts .link") && !path[0]) {
