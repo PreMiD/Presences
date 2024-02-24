@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png",
 	};
-	if (!document.querySelector('[data-test="player-container"]')) {
+	if (document.querySelector('[data-test="player-container"]')) {
 		const playerText = document.querySelector('[data-test="player-text"]');
 		if (
 			!document.querySelector('[data-test="controls-container"]').children[1]
