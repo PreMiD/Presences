@@ -64,19 +64,20 @@ presence.on("UpdateData", async () => {
 			}[pathArr[2]];
 			presenceData.smallImageKey = Assets.Search;
 			break;
-		case "chapter": {
-			const title = document.querySelector(".text-primary").textContent.trim();
-			presenceData.details = `Reading ${title}`;
-			presenceData.state = `Page ${document
-				.querySelector("head > title")
-				.textContent.replace(` - ${title} - MangaDex`, "")}`;
-			presenceData.largeImageKey = await getCoverImage(
-				document.querySelector<HTMLLinkElement>("span > a").href.split("/")[4]
-			);
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.buttons = [{ label: "Read Chapter", url: href }];
-			break;
-		}
+			case "chapter": {
+				const title = document.querySelector(".text-primary").textContent.trim();
+				const chapterNumber = document.querySelector(".mx-1").textContent.trim();
+				const pageNumber = document.querySelector(".ml-1").textContent.trim();
+				presenceData.details = `Reading ${title}`;
+				presenceData.state = `Chapter ${chapterNumber}, Page ${pageNumber}`;
+				presenceData.largeImageKey = await getCoverImage(
+					document.querySelector<HTMLLinkElement>("span > a").href.split("/")[4]
+				);
+				presenceData.smallImageKey = Assets.Reading;
+				presenceData.buttons = [{ label: "Read Chapter", url: href }];
+				break;
+			}
+			
 		case "tag":
 			presenceData.details = "Viewing a Tag";
 			presenceData.state = document
