@@ -20,15 +20,15 @@ presence.on("UpdateData", async () => {
 		]);
 	path.shift();
 	if (pathname.endsWith("/")) path.pop();
-	switch (true) {
-		case path[0] === "infinite-craft": {
+	switch (path[0]) {
+		case "infinite-craft": {
 			presenceData.details = "Playing: Infinite Craft";
 			presenceData.state = `Discovered ${
 				document.querySelectorAll(".items .item").length || 0
 			} items`;
 			break;
 		}
-		case path[0] === "internet-artifacts": {
+		case "internet-artifacts": {
 			presenceData.details = "Playing: Internet Artifacts";
 			if (document.querySelector(".enter.enter-hide")) {
 				presenceData.state = `Reading "${
@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 			} else presenceData.state = "Entering";
 			break;
 		}
-		case path[0] === "password-game": {
+		case "password-game": {
 			presenceData.details = "Playing: Password Game";
 			presenceData.state = `${
 				document.querySelector(".password-length.show-password-length")
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 			} characters`;
 			break;
 		}
-		case path[0] === "space-elevator": {
+		case "space-elevator": {
 			const altitude = Number(
 				Array.from(document.querySelectorAll(".altitude-digit"))
 					.map(v => Number(v.textContent.trim()))
@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `Reached highest point (${altitude}m)`;
 			break;
 		}
-		case path[0] === "asteroid-launcher": {
+		case "asteroid-launcher": {
 			presenceData.details = "Playing: Asteroid Launcher";
 			if (
 				document.querySelector(".cta")?.textContent?.trim() ===
@@ -84,11 +84,11 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
-		case path[0] === "perfect-circle": {
+		case "perfect-circle": {
 			presenceData.details = "Playing: Perfect Circle";
 			break;
 		}
-		case path[0] === "wonders-of-street-view": {
+		case "wonders-of-street-view": {
 			presenceData.details = "Playing: Wonders of Street View";
 			if (showLocation) {
 				presenceData.state = `At ${
@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
 			} else presenceData.state = "Location hidden";
 			break;
 		}
-		case path[0] === "earth-reviews": {
+		case "earth-reviews": {
 			presenceData.details = "Playing: Earth Reviews";
 			presenceData.state = "";
 			if (!path[1]) {
@@ -112,7 +112,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `Writing a review for ${title}`;
 			break;
 		}
-		case path[0] === "lets-settle-this": {
+		case "lets-settle-this": {
 			presenceData.details = "Playing: Let's Settle This";
 			const answered =
 				document.querySelectorAll(".result").length -
@@ -120,7 +120,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `Answered ${answered} questions`;
 			break;
 		}
-		case path[0] === "ambient-chaos": {
+		case "ambient-chaos": {
 			presenceData.details = "Playing: Ambient Chaos";
 			const totalVolume = Array.from(document.querySelectorAll(".volume"))
 				.filter(v => Number(v.textContent))
@@ -129,12 +129,12 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `Total volume: ${totalVolume || 0}`;
 			break;
 		}
-		case path[0] === "absurd-trolley-problems": {
+		case "absurd-trolley-problems": {
 			presenceData.details = "Playing: Absurd Trolley Problems";
 			presenceData.state = document.querySelector(".level")?.textContent;
 			break;
 		}
-		case path[0] === "auction-game": {
+		case "auction-game": {
 			presenceData.details = "Playing: The Auction Game";
 			if (document.querySelector(".screen-play")) {
 				presenceData.state = "Starting";
@@ -148,7 +148,7 @@ presence.on("UpdateData", async () => {
 			if (artTitle) presenceData.state += ` - ${artTitle}`;
 			break;
 		}
-		case path[0] === "deep-sea": {
+		case "deep-sea": {
 			presenceData.details = "Playing: The Deep Sea";
 			const depth = document
 				.querySelector(".depth-line")
@@ -162,7 +162,7 @@ presence.on("UpdateData", async () => {
 			else presenceData.state = "Starting";
 			break;
 		}
-		case path[0] === "size-of-space": {
+		case "size-of-space": {
 			presenceData.details = "Playing: The Size of Space";
 			const type = document.querySelector(".item-type")?.textContent;
 			presenceData.state = `${
@@ -170,20 +170,20 @@ presence.on("UpdateData", async () => {
 			}${type && type.trim() ? ` (${type.trim()})` : ""}`;
 			break;
 		}
-		case path[0] === "life-stats": {
+		case "life-stats": {
 			presenceData.details = "Playing: Life Stats";
 			if (document.querySelector(".go-button")) presenceData.state = "Starting";
 			else presenceData.state = "Reading";
 			break;
 		}
-		case path[0] === "who-was-alive": {
+		case "who-was-alive": {
 			presenceData.details = "Playing: Who Was Alive?";
 			presenceData.state = `In year ${
 				document.querySelector("input")?.value || 1800
 			}`;
 			break;
 		}
-		case path[0] === "life-checklist": {
+		case "life-checklist": {
 			presenceData.details = "Playing: Life Checklist";
 			const totalChecklist =
 				document.querySelectorAll(".goal-check-img").length;
@@ -194,12 +194,12 @@ presence.on("UpdateData", async () => {
 			}/${totalChecklist}`;
 			break;
 		}
-		case path[0] === "speed": {
+		case "speed": {
 			presenceData.details = "Playing: How Fast Are You Moving?";
 			presenceData.state = document.querySelector(".since")?.textContent;
 			break;
 		}
-		case path[0] === "paper": {
+		case "paper": {
 			presenceData.details = "Playing: Paper";
 			const split = document
 				.querySelector(".fold-tall")
@@ -217,61 +217,61 @@ presence.on("UpdateData", async () => {
 			})`;
 			break;
 		}
-		case path[0] === "spend": {
+		case "spend": {
 			presenceData.details = "Playing: Spend Bill Gates' Money";
 			presenceData.state = `${
 				document.querySelector(".money-bar").textContent || "$100,000,000,000"
 			} left`;
 			break;
 		}
-		case path[0] === "baby-map": {
+		case "baby-map": {
 			presenceData.details = "Playing: Baby Map";
 			presenceData.state = document
 				.querySelector(".total-babies")
 				.textContent.trim();
 			break;
 		}
-		case path[0] === "progress": {
+		case "progress": {
 			presenceData.details = "Playing: Progress";
 			break;
 		}
-		case path[0] === "logos-from-memory": {
+		case "logos-from-memory": {
 			presenceData.details = "Playing: Draw Logos From Memory";
 			break;
 		}
-		case path[0] === "where-does-the-day-go": {
+		case "where-does-the-day-go": {
 			presenceData.details = "Playing: Where does the day go?";
 			break;
 		}
-		case path[0] === "dark-patterns": {
+		case "dark-patterns": {
 			presenceData.details = "Playing: Dark Patterns";
 			break;
 		}
-		case path[0] === "share-this-page": {
+		case "share-this-page": {
 			presenceData.details = "Playing: Share This Page";
 			break;
 		}
-		case path[0] === "printing-money": {
+		case "printing-money": {
 			presenceData.details = "Playing: Printing Money";
 			break;
 		}
-		case path[0] === "rocks": {
+		case "rocks": {
 			presenceData.details = "Playing: Rocks";
 			break;
 		}
-		case path[0] === "sell-sell-sell": {
+		case "sell-sell-sell": {
 			presenceData.details = "Playing: Sell Sell Sell";
 			break;
 		}
-		case path[0] === "universe-forecast": {
+		case "universe-forecast": {
 			presenceData.details = "Playing: Universe Forecast";
 			break;
 		}
-		case path[0] === "days-since-incident": {
+		case "days-since-incident": {
 			presenceData.details = "Playing: Days Since Incident";
 			break;
 		}
-		case path[0] === "design-the-next-iphone": {
+		case "design-the-next-iphone": {
 			presenceData.details = "Playing: Design the Next iPhone";
 			break;
 		}
