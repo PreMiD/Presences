@@ -38,6 +38,7 @@ presence.on("UpdateData", async () => {
 					.querySelector("#navsubbar > p > a")
 					.textContent.split("\n")[2]
 					.trim();
+				
 			}
 			presenceData.state = selectEpisode[0];
 			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
