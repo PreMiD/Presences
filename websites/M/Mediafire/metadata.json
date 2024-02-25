@@ -15,7 +15,11 @@
 		"app.mediafire.com",
 		"blog.mediafire.com"
 	],
-	"version": "1.1.7",
+	"matches": [
+		"*://mediafire.zendesk.com/*",
+		"*://*.mediafire.com/*"
+	],
+	"version": "1.1.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Mediafire/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Mediafire/assets/thumbnail.jpg",
 	"color": "#FF0000",
@@ -34,6 +38,5 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	],
-		"matches": ["*://mediafire.zendesk.com/*", "*://*.mediafire.com/*"]
+	]
 }

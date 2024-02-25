@@ -12,7 +12,11 @@
 		"territorial.io",
 		"www.territorial.io"
 	],
-	"version": "1.0.7",
+	"matches": [
+		"*://www.territorial.io/*",
+		"*://territorial.io/*"
+	],
+	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Territorial/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Territorial/assets/thumbnail.jpg",
 	"color": "#07283C",
@@ -31,6 +35,5 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	],
-		"matches": ["*://www.territorial.io/*", "*://territorial.io/*"]
+	]
 }

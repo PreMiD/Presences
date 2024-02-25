@@ -14,7 +14,11 @@
 		"docs.tebex.io"
 	],
 	"regExp": "(.*[.]buycraft[.]net)|(.*[.]tebex[.]io)",
-	"version": "1.0.7",
+	"matches": [
+		"*://*.buycraft.net/*",
+		"*://*.tebex.io/*"
+	],
+	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tebex/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tebex/assets/thumbnail.jpg",
 	"color": "#215AA9",
@@ -33,6 +37,5 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	],
-		"matches": ["*://*.buycraft.net/*", "*://*.tebex.io/*"]
+	]
 }

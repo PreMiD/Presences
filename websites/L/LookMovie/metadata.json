@@ -15,7 +15,11 @@
 		"playerwatchlm25.xyz"
 	],
 	"regExp": "(playerwatch[0-9]*.xyz)|(playerwatchlm[0-9]*.xyz)|(lookmovie[0-9]?[.][A-z]{2})",
-	"version": "1.5.7",
+	"matches": [
+		"*://*lookmovie*.*/*",
+		"*://*.playerwatch*.*/*"
+	],
+	"version": "1.5.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LookMovie/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LookMovie/assets/thumbnail.png",
 	"color": "#ffcc00",
@@ -53,6 +57,5 @@
 				"privacy": false
 			}
 		}
-	],
-	"matches": ["*://*lookmovie*.*/*", "*://*.playerwatch*.*/*"]
+	]
 }

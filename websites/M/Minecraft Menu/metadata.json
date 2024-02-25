@@ -13,7 +13,11 @@
 		"minecraft.menu",
 		"www.minecraft.menu"
 	],
-	"version": "1.0.7",
+	"matches": [
+		"*://www.minecraft.menu/*",
+		"*://minecraft.menu/*"
+	],
+	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Minecraft%20Menu/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Minecraft%20Menu/assets/thumbnail.jpg",
 	"color": "#DD1500",
@@ -41,6 +45,5 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	],
-		"matches": ["*://www.minecraft.menu/*", "*://minecraft.menu/*"]
+	]
 }

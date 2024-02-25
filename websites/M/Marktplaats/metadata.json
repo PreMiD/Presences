@@ -13,7 +13,11 @@
 		"www.marktplaats.nl",
 		"help.marktplaats.nl"
 	],
-	"version": "1.2.2",
+	"matches": [
+		"*://www.marktplaats.nl/*",
+		"*://help.marktplaats.nl/*"
+	],
+	"version": "1.2.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Marktplaats/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Marktplaats/assets/thumbnail.jpg",
 	"color": "#FF0000",
@@ -45,6 +49,5 @@
 				"privacy": false
 			}
 		}
-	],
-		"matches": ["*://www.marktplaats.nl/*", "*://help.marktplaats.nl/*"]
+	]
 }

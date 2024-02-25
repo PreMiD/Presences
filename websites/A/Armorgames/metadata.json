@@ -11,7 +11,10 @@
 		"vi_VN": "Chơi các trò chơi trực tuyến miễn phí tại armorgames."
 	},
 	"url": "armorgames.com",
-	"version": "1.1.7",
+	"matches": [
+		"*://armorgames.com/*"
+	],
+	"version": "1.1.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Armorgames/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Armorgames/assets/thumbnail.jpg",
 	"color": "#9ed2de",
@@ -32,6 +35,5 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	],
-		"matches": ["*://armorgames.com/*"]
+	]
 }

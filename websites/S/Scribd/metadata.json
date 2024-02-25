@@ -9,7 +9,10 @@
 		"en": "Discover +2M top ebooks and audiobooks on the leading digital library. Free for 30 days! Access millions of ebooks, audiobooks, magazines, and more. All in one simple subscription. Explore Documents. Personal Growth. Non-Fiction Titles. Explore Magazines."
 	},
 	"url": "www.scribd.com",
-	"version": "1.0.7",
+	"matches": [
+		"*://www.scribd.com/*"
+	],
+	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Scribd/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Scribd/assets/thumbnail.png",
 	"color": "#00858E",
@@ -47,6 +50,5 @@
 			"title": "Show Cover",
 			"value": true
 		}
-	],
-	"matches": ["*://www.scribd.com/*"]
+	]
 }

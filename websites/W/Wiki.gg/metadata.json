@@ -11,7 +11,10 @@
 	},
 	"url": "wiki.gg",
 	"regExp": "([a-z0-9-]+[.])*wiki[.]gg[/]",
-	"version": "2.0.7",
+	"matches": [
+		"*://*.wiki.gg/*"
+	],
+	"version": "2.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wiki.gg/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wiki.gg/assets/thumbnail.jpg",
 	"color": "#ff1980",
@@ -41,6 +44,5 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	],
-	"matches": ["*://*.wiki.gg/*"]
+	]
 }

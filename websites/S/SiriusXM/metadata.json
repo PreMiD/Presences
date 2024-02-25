@@ -19,7 +19,11 @@
 		"player.siriusxm.com",
 		"player.siriusxm.ca"
 	],
-	"version": "1.2.15",
+	"matches": [
+		"*://player.siriusxm.com/*",
+		"*://player.siriusxm.ca/*"
+	],
+	"version": "1.2.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SiriusXM/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SiriusXM/assets/thumbnail.png",
 	"color": "#0081FF",
@@ -27,6 +31,5 @@
 	"tags": [
 		"music",
 		"radio"
-	],
-	"matches": ["*://player.siriusxm.com/*", "*://player.siriusxm.ca/*"]
+	]
 }

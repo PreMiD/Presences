@@ -10,7 +10,11 @@
 	},
 	"url": "idlix.com",
 	"regExp": "((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[/])|((tv[.])?idlix(plus)?[.]net)|((tv[.])?idlix(official)?[.]co)",
-	"version": "1.0.9",
+	"matches": [
+		"*://*.idlix*.*/*",
+		"*://*/*"
+	],
+	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/IDLIX/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/IDLIX/assets/thumbnail.png",
 	"color": "#e50914",
@@ -23,6 +27,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": "https://jeniusplay[.]com",
+	"iFrameMatches": [
+		"*://jeniusplay.com/*"
+	],
 	"settings": [
 		{
 			"id": "lang",
@@ -52,7 +59,5 @@
 				"privacy": false
 			}
 		}
-	],
-	"matches": ["*://*.idlix*.*/*", "*://*/*"],
-	"iFrameMatches": ["*://jeniusplay.com/*"]
+	]
 }

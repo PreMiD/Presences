@@ -12,7 +12,10 @@
 		"www.epal.gg",
 		"epal.gg"
 	],
-	"version": "1.0.2",
+	"matches": [
+		"*://*.epal.gg/*"
+	],
+	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/E-PAL/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/E-PAL/assets/thumbnail.png",
 	"color": "#7041e6",
@@ -23,6 +26,5 @@
 		"friends",
 		"gaming",
 		"game"
-	],
-	"matches": ["*://*.epal.gg/*"]
+	]
 }

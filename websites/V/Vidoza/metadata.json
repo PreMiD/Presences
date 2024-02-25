@@ -11,7 +11,10 @@
 	},
 	"url": "vidoza.net",
 	"regExp": "(ww(w)?([0-9])?[.])?vidoza[.][a-z]*",
-	"version": "1.0.2",
+	"matches": [
+		"*://*.vidoza.*/*"
+	],
+	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vidoza/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vidoza/assets/thumbnail.png",
 	"color": "#43A047",
@@ -22,6 +25,5 @@
 		"stream",
 		"streaming",
 		"sharing"
-	],
-		"matches": ["*://*.vidoza.*/*"]
+	]
 }

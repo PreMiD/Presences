@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "638080361179512853",
-		"name": "Dark_Ville#2756"
+		"name": "Dark_Ville"
 	},
 	"service": "Discovery",
 	"description": {
@@ -15,7 +15,11 @@
 		"go.discovery.com",
 		"www.go.discovery.com"
 	],
-	"version": "1.0.7",
+	"matches": [
+		"*://*.discoveryplus.com/*",
+		"*://*.discovery.com/*"
+	],
+	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Discovery/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Discovery/assets/thumbnail.png",
 	"color": "#2175d9",
@@ -54,6 +58,5 @@
 				"privacy": false
 			}
 		}
-	],
-		"matches": ["*://*.discoveryplus.com/*", "*://*.discovery.com/*"]
+	]
 }

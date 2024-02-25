@@ -12,7 +12,11 @@
 		"uktvplay.uktv.co.uk",
 		"uktvplay.co.uk"
 	],
-	"version": "1.0.10",
+	"matches": [
+		"*://uktvplay.uktv.co.uk/*",
+		"*://uktvplay.co.uk/*"
+	],
+	"version": "1.0.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/U/UKTV/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/UKTV/assets/thumbnail.png",
 	"color": "#00BAC6",
@@ -52,6 +56,5 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	],
-		"matches": ["*://uktvplay.uktv.co.uk/*", "*://uktvplay.co.uk/*"]
+	]
 }
