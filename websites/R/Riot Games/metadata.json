@@ -18,7 +18,10 @@
 	],
 	"regExp": "([a-z0-9-]+[.])*(riotgames|leagueoflegends|playruneterra|playvalorant)[.]com[/]",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://*.riotgames.com/*",
+		"*://*.leagueoflegends.com/*",
+		"*://*.playruneterra.com/*",
+		"*://*.playvalorant.com/*"
 	],
 	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Riot%20Games/assets/logo.png",
