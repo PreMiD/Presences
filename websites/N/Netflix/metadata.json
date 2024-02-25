@@ -166,5 +166,6 @@
 			"icon": "fad fa-images",
 			"value": true
 		}
-	]
+	],
+	"matches": ["*://*.netflix.com/*"]
 }

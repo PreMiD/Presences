@@ -76,5 +76,6 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	]
+	],
+	"matches": ["*://*.soundcloud.com/*"]
 }

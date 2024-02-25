@@ -77,5 +77,6 @@
 				"privacy": false
 			}
 		}
-	]
+	],
+	"matches": ["*://music.youtube.com/*"]
 }
