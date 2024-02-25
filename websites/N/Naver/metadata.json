@@ -41,7 +41,7 @@
 	],
 	"regExp": "((section)[.])?([a-z]+)[.]naver[.]([a-z0-9]+)",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://*.naver.com/*"
 	],
 	"version": "1.2.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/logo.png",
@@ -60,7 +60,7 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://*.naver.com/*"
 	],
 	"settings": [
 		{
