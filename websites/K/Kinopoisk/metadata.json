@@ -13,7 +13,7 @@
 		"www.kinopoisk.ru",
 		"hd.kinopoisk.ru"
 	],
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kinopoisk/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kinopoisk/assets/thumbnail.png",
 	"color": "#ff5900",
@@ -24,8 +24,6 @@
 		"video",
 		"media"
 	],
-	"iframe": true,
-	"iFrameRegExp": ".*",
 	"settings": [
 		{
 			"id": "privacy",
