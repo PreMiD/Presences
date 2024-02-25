@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "334411435633541121",
 		"name": "meffiu"
@@ -22,7 +22,7 @@
 		"subs"
 	],
 	"iframe": true,
-	"iFrameRegExp": "cda[.]pl|google[.]com|mega[.]nz|dailymotion[.]com|video[.]sibnet[.]ru",
+	"iFrameMatches": ["*://*.cda.pl/*", "*://*.google.com/*", "*://*.mega.nz/*", "*://*.dailymotion.com/*", "*://*.sibnet.ru/*"],
 	"settings": [
 		{
 			"id": "privacy",
@@ -39,5 +39,6 @@
 				"privacy": false
 			}
 		}
-	]
+	],
+	"matches": ["*://*.docchi.pl/*"]
 }
