@@ -17,7 +17,7 @@
 	],
 	"regExp": "([a-z]{2,}[.])?southpark(studios)?([.][a-z]{2,}){1,2}",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://southpark.cc.com/*"
 	],
 	"version": "1.1.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/South%20Park/assets/logo.jpg",
