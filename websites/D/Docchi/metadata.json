@@ -10,7 +10,7 @@
 		"pl": "Polska strona anime z wieloma seriami, najlepsze odtwarzacze wideo, dobra jakość."
 	},
 	"url": "docchi.pl",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Docchi/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Docchi/assets/thumbnail.png",
 	"color": "#07BF67",
@@ -23,6 +23,13 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": "cda[.]pl|google[.]com|mega[.]nz|dailymotion[.]com|video[.]sibnet[.]ru",
+	"iFrameMatches": [
+		"*://*.cda.pl/*",
+		"*://*.google.com/*",
+		"*://*.mega.nz/*",
+		"*://*.dailymotion.com/*",
+		"*://*.sibnet.ru/*"
+	],
 	"settings": [
 		{
 			"id": "privacy",
@@ -39,5 +46,8 @@
 				"privacy": false
 			}
 		}
+	],
+	"matches": [
+		"*://*.docchi.pl/*"
 	]
 }
