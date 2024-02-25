@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Uhevela",
 		"id": "616969786718683167"
@@ -10,7 +10,7 @@
 		"nl": "Een Franse Minecraft server gecultiveerd door toegewijde spelers."
 	},
 	"url": "gardenmc.fr",
-	"version": "1.1.18",
+	"version": "1.1.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Garden/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Garden/assets/thumbnail.png",
 	"color": "#0f7e49",

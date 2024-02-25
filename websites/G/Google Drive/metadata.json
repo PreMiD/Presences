@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Callum",
 		"id": "506899274748133376"
@@ -21,7 +21,7 @@
 	},
 	"url": "drive.google.com",
 	"regExp": "drive[.]google([.][a-z]+)+[/]",
-	"version": "1.6.8",
+	"version": "1.6.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Drive/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Drive/assets/thumbnail.png",
 	"color": "#3aa154",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Callum",
 		"id": "506899274748133376"
@@ -15,7 +15,7 @@
 		"www.sickipedia.net"
 	],
 	"regExp": "([a-z0-9-]+[.])*(sickipedia[.]net)[/]",
-	"version": "1.0.16",
+	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Sickipedia/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Sickipedia/assets/thumbnail.png",
 	"color": "#333333",

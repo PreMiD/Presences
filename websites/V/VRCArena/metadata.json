@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "KnuffelBeestje",
 		"id": "219155156569161731"
@@ -11,7 +11,7 @@
 		"ga_IE": "úinéireacht agus uaslódáil cineálacha éagsúla sócmhainní agus ranganna teagaisc do na speicis éagsúla atá le fáil sa chluiche sóisialta il-imreora VR VRChat ar líne."
 	},
 	"url": "www.vrcarena.com",
-	"version": "1.0.21",
+	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/VRCArena/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/VRCArena/assets/thumbnail.png",
 	"color": "#5f3d8a",

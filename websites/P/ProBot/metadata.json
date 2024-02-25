@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "NMW03",
 		"id": "534099893979971584"
@@ -16,7 +16,7 @@
 		"nl": "Welkomstafbeeldingen, moderatie, niveaus, reactie rollen, logboeken, muziek van hoge kwaliteit en nog veel meer!"
 	},
 	"url": "probot.io",
-	"version": "2.0.8",
+	"version": "2.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/ProBot/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/ProBot/assets/thumbnail.png",
 	"color": "#450F40",

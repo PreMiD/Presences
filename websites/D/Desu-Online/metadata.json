@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "334411435633541121",
 		"name": "Meffiu"
@@ -10,7 +10,7 @@
 		"pl": "Najlepsza strona z anime online pl! Anime z polskimi napisami w doskonałej jakości i bez reklam! Najlepsze odtwarzacze video."
 	},
 	"url": "desu-online.pl",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Desu-Online/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Desu-Online/assets/thumbnail.png",
 	"color": "#D9910F",

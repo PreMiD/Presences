@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "theusaf",
 		"id": "193714715631812608"
@@ -17,7 +17,7 @@
 		"nl": "'s Werelds meest populaire en makkelijkst te gebruiken iconenset heeft net een upgrade gekregen. Meer iconen. Meer stijlen. Meer opties."
 	},
 	"url": "fontawesome.com",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Font%20Awesome/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Font%20Awesome/assets/thumbnail.png",
 	"color": "#0285f7",

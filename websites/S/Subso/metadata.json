@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Callum",
 		"id": "506899274748133376"
@@ -15,7 +15,7 @@
 		"creators.sub.so"
 	],
 	"regExp": "([a-z0-9-]+[.])*sub[.]so[/]",
-	"version": "1.0.15",
+	"version": "1.0.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Subso/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Subso/assets/thumbnail.jpg",
 	"color": "#32a852",
