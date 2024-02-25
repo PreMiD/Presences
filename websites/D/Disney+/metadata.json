@@ -21,7 +21,11 @@
 	},
 	"url": "www.disneyplus.com",
 	"regExp": "([a-z0-9-]+[.])*disneyplus[.]com[/]|([a-z0-9-]+[.])*hotstar[.]com[/]",
-	"version": "1.5.4",
+	"matches": [
+		"*://*.disneyplus.com/*",
+		"*://*.hotstar.com/*"
+	],
+	"version": "1.5.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/thumbnail.png",
 	"color": "#233778",
@@ -75,6 +79,5 @@
 			"icon": "fas fa-users",
 			"value": false
 		}
-	],
-	"matches": ["*://*.disneyplus.com/*", "*://*.hotstar.com/*"]
+	]
 }
