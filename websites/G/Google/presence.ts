@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
 		}
 		if (privacy) {
 			delete presenceData.state;
-			if (presenceData.details.includes("Searching for"))
+			if (typeof presenceData.details === "string" && presenceData.details.includes("Searching for"))
 				presenceData.details = "Searching";
 		}
 	}
