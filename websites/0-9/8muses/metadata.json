@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "fror",
 		"id": "515668127829458945"
@@ -12,7 +12,10 @@
 		"vi_VN": "Truyện tranh khiêu dâm miễn phí, hoạt hình người lớn, phim 3D khiêu dâm và hơn nữa."
 	},
 	"url": "8muses.io",
-	"version": "1.0.21",
+	"matches": [
+		"*://8muses.io/*"
+	],
+	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/0-9/8muses/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/0-9/8muses/assets/thumbnail.png",
 	"color": "#2caae1",

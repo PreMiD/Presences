@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Rodry",
 		"id": "240875059953139714"
@@ -11,7 +11,10 @@
 		"nl": "Onze missie: spelers versterken"
 	},
 	"url": "hypixelstudios.com",
-	"version": "1.0.17",
+	"matches": [
+		"*://hypixelstudios.com/*"
+	],
+	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Hypixel%20Studios/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Hypixel%20Studios/assets/thumbnail.jpg",
 	"color": "#15243A",

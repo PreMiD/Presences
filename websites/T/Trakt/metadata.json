@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "xKubson_",
 		"id": "404217213873029120"
@@ -9,7 +9,10 @@
 		"en": "Track what you watch and when. Discover what's hot and where you can watch it. Share comments, ratings and recommendations."
 	},
 	"url": "trakt.tv",
-	"version": "1.0.7",
+	"matches": [
+		"*://trakt.tv/*"
+	],
+	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Trakt/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Trakt/assets/thumbnail.png",
 	"color": "#ff0000",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "RisingSunLight",
 		"id": "240521747852558347"
@@ -10,7 +10,10 @@
 		"fr": "Patreon est le meilleur endroit pour les créateurs afin de créer de l'adhésion en fournissant des accès exclusifs à leur travail et une connexion plus profonde avec leur communauté."
 	},
 	"url": "www.patreon.com",
-	"version": "1.0.6",
+	"matches": [
+		"*://www.patreon.com/*"
+	],
+	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Patreon/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Patreon/assets/thumbnail.png",
 	"color": "#F1465A",

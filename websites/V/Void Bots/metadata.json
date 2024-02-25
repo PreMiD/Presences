@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "DanPlayz",
 		"id": "209796601357533184"
@@ -15,7 +15,12 @@
 		"beta.voidbots.net",
 		"docs.voidbots.net"
 	],
-	"version": "1.0.21",
+	"matches": [
+		"*://voidbots.net/*",
+		"*://beta.voidbots.net/*",
+		"*://docs.voidbots.net/*"
+	],
+	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Void%20Bots/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Void%20Bots/assets/thumbnail.png",
 	"color": "#B04BEC",

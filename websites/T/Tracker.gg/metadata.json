@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "OGMatrix",
 		"id": "657290880947978241"
@@ -14,7 +14,12 @@
 		"fortnitetracker.com",
 		"thetrackernetwork.com"
 	],
-	"version": "1.0.12",
+	"matches": [
+		"*://tracker.gg/*",
+		"*://fortnitetracker.com/*",
+		"*://thetrackernetwork.com/*"
+	],
+	"version": "1.0.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tracker.gg/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tracker.gg/assets/thumbnail.png",
 	"color": "#e2263c",

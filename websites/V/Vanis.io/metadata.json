@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Mirax",
 		"id": "223355525826347018"
@@ -14,7 +14,11 @@
 		"vanis.io",
 		"skins.vanis.io"
 	],
-	"version": "1.0.18",
+	"matches": [
+		"*://vanis.io/*",
+		"*://skins.vanis.io/*"
+	],
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vanis.io/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vanis.io/assets/thumbnail.png",
 	"color": "#ce3239",

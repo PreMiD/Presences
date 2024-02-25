@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "tarikcoskun",
 		"id": "474537652943847444"
@@ -12,7 +12,10 @@
 		"vi_VN": "OneDrive là dịch vụ lưu trữ đám mây và chia sẻ của Microsoft."
 	},
 	"url": "onedrive.live.com",
-	"version": "1.0.18",
+	"matches": [
+		"*://onedrive.live.com/*"
+	],
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/OneDrive/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/OneDrive/assets/thumbnail.png",
 	"color": "#0078d4",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Yusaki",
 		"id": "439582316873121793"
@@ -14,7 +14,10 @@
 	},
 	"url": "www.anime-sugoi.com",
 	"regExp": "([a-z0-9-]+[.])*anime-sugoi[.]com[/]",
-	"version": "1.0.28",
+	"matches": [
+		"*://*.anime-sugoi.com/*"
+	],
+	"version": "1.0.29",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Anime-Sugoi/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Anime-Sugoi/assets/thumbnail.jpg",
 	"color": "#ff6666",
@@ -27,5 +30,8 @@
 		"thai"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

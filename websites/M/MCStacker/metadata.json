@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -14,7 +14,12 @@
 		"bimbimma.com",
 		"mcstacker.bimbimma.com"
 	],
-	"version": "1.3.18",
+	"matches": [
+		"*://mcstacker.net/*",
+		"*://bimbimma.com/*",
+		"*://mcstacker.bimbimma.com/*"
+	],
+	"version": "1.3.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MCStacker/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MCStacker/assets/thumbnail.png",
 	"color": "#fe5f10",

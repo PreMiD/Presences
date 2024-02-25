@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bashiku",
 		"id": "531417292446105620"
@@ -31,7 +31,26 @@
 		"turkanime.fun",
 		"turkceanimeizle.org"
 	],
-	"version": "2.0.10",
+	"matches": [
+		"*://anizm.info/*",
+		"*://anizm.net/*",
+		"*://anizm.tv/*",
+		"*://puffytr.com/*",
+		"*://anizle.com/*",
+		"*://anizm.pro/*",
+		"*://turkanime.info/*",
+		"*://turkanime.pro/*",
+		"*://turkanime.shop/*",
+		"*://turkanime.xyz/*",
+		"*://turkanime.store/*",
+		"*://anizm.store/*",
+		"*://tranimeizle.org/*",
+		"*://animetr.fun/*",
+		"*://tranimeizle.xyz/*",
+		"*://turkanime.fun/*",
+		"*://turkceanimeizle.org/*"
+	],
+	"version": "2.0.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnizmTV/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnizmTV/assets/thumbnail.png",
 	"color": "#fc9003",
@@ -43,5 +62,8 @@
 		"anizmtv"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -10,7 +10,10 @@
 		"nl": "TrueAchievements is de plaats voor Xbox nieuws, prestatielijsten en gidsen, recensies, interviews, scoreborden en meer."
 	},
 	"url": "www.trueachievements.com",
-	"version": "1.0.20",
+	"matches": [
+		"*://www.trueachievements.com/*"
+	],
+	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TrueAchievements/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TrueAchievements/assets/thumbnail.png",
 	"color": "#c1f800",

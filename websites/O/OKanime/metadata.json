@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "fror",
 		"id": "515668127829458945"
@@ -13,7 +13,11 @@
 		"okanime.tv",
 		"www.okanime.tv"
 	],
-	"version": "1.1.28",
+	"matches": [
+		"*://okanime.tv/*",
+		"*://www.okanime.tv/*"
+	],
+	"version": "1.1.29",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/OKanime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/OKanime/assets/thumbnail.png",
 	"color": "#a5173b",
@@ -24,5 +28,8 @@
 		"streaming"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

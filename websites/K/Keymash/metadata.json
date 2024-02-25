@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "GNiK",
 		"id": "83888634339528704"
@@ -10,7 +10,10 @@
 		"nl": "Breng uw typen naar een hoger niveau! Een online typspel voor meerdere spelers waarin je het kunt opnemen tegen spelers over de hele wereld."
 	},
 	"url": "keyma.sh",
-	"version": "1.0.15",
+	"matches": [
+		"*://keyma.sh/*"
+	],
+	"version": "1.0.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Keymash/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Keymash/assets/thumbnail.png",
 	"color": "#FB923C",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Kozou",
 		"id": "379362415428632576"
@@ -23,7 +23,10 @@
 	},
 	"url": "voiranime.com",
 	"regExp": "([a-z0-9-]+[.])*voiranime[.]com[/]",
-	"version": "2.1.8",
+	"matches": [
+		"*://*.voiranime.com/*"
+	],
+	"version": "2.1.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Voiranime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Voiranime/assets/thumbnail.png",
 	"color": "#1a1920",
@@ -35,6 +38,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	],
 	"settings": [
 		{
 			"id": "lang",

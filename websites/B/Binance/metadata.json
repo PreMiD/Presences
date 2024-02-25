@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Hibanka",
 		"id": "467658348158779393"
@@ -21,7 +21,16 @@
 		"launchpad.binance.com",
 		"research.binance.com"
 	],
-	"version": "1.0.22",
+	"matches": [
+		"*://www.binance.com/*",
+		"*://voptions.binance.com/*",
+		"*://cloud.binance.com/*",
+		"*://pool.binance.com/*",
+		"*://academy.binance.com/*",
+		"*://launchpad.binance.com/*",
+		"*://research.binance.com/*"
+	],
+	"version": "1.0.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Binance/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Binance/assets/thumbnail.jpg",
 	"color": "#f0b90b",

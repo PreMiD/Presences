@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -17,7 +17,10 @@
 		"nl": "Speel de nummers, albums, afspeellijsten en podcasts af die je leuk vindt op de geheel nieuwe Pandora."
 	},
 	"url": "www.pandora.com",
-	"version": "2.1.12",
+	"matches": [
+		"*://www.pandora.com/*"
+	],
+	"version": "2.1.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Pandora/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Pandora/assets/thumbnail.png",
 	"color": "#224099",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "D̲u̲c̲k̲o̲ 🌈",
 		"id": "506482395269169153"
@@ -10,7 +10,10 @@
 		"nl": "Krijg informatie over chemische formules."
 	},
 	"url": "formuliser.oojmed.com",
-	"version": "1.0.17",
+	"matches": [
+		"*://formuliser.oojmed.com/*"
+	],
+	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Formuliser/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Formuliser/assets/thumbnail.png",
 	"color": "#1f1f1f",

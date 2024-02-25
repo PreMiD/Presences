@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "theusaf",
 		"id": "193714715631812608"
@@ -12,7 +12,11 @@
 		"picard.musicbrainz.org",
 		"picard-docs.musicbrainz.org"
 	],
-	"version": "1.0.6",
+	"matches": [
+		"*://picard.musicbrainz.org/*",
+		"*://picard-docs.musicbrainz.org/*"
+	],
+	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MusicBrainz%20Picard/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MusicBrainz%20Picard/assets/thumbnail.png",
 	"color": "#771b85",

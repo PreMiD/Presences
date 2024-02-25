@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "393773835620712461",
 		"name": "yourelosingme"
@@ -15,7 +15,10 @@
 		"en": "watch.lonelil.com is your one-stop destination for free movies, anime, TV shows, and Live TV. With a vast collection of content and easy-to-use interface, you'll never run out of entertainment options."
 	},
 	"url": "watch.lonelil.com",
-	"version": "1.1.0",
+	"matches": [
+		"*://watch.lonelil.com/*"
+	],
+	"version": "1.1.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/watch.lonelil.com/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/watch.lonelil.com/assets/thumbnail.png",
 	"color": "#0A0A0A",

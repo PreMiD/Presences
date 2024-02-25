@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -17,7 +17,10 @@
 	},
 	"url": "kissasian.li",
 	"regExp": "kissasian([.][a-z]+)+[/]",
-	"version": "3.0.17",
+	"matches": [
+		"__REPLACE_ME__"
+	],
+	"version": "3.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/KissAsian/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/KissAsian/assets/thumbnail.png",
 	"color": "#f5d80b",
@@ -27,5 +30,8 @@
 		"drama"
 	],
 	"iframe": true,
-	"iFrameRegExp": "^(?!(disqus[.]org|disqus[.]com)$).*$"
+	"iFrameRegExp": "^(?!(disqus[.]org|disqus[.]com)$).*$",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

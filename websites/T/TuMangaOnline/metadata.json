@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -14,7 +14,12 @@
 		"tmocommunity.com",
 		"visortmo.com"
 	],
-	"version": "1.2.20",
+	"matches": [
+		"*://lectortmo.com/*",
+		"*://tmocommunity.com/*",
+		"*://visortmo.com/*"
+	],
+	"version": "1.2.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TuMangaOnline/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TuMangaOnline/assets/thumbnail.png",
 	"color": "#3366cc",

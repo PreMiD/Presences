@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Kyrie",
 		"id": "368399721494216706"
@@ -10,7 +10,10 @@
 	},
 	"url": "localhost",
 	"regExp": "192[.]168[.]1[.]([0-9]+)",
-	"version": "1.0.9",
+	"matches": [
+		"*://192.168.1.*/*"
+	],
+	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AirSong/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AirSong/assets/thumbnail.png",
 	"color": "#0094CB",

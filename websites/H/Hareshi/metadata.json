@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Faelayis",
 		"id": "328731868096888833"
@@ -14,7 +14,10 @@
 		"forum.hareshi.net"
 	],
 	"regExp": "([a-z0-9-]+[.])*hareshi[.]net[/]",
-	"version": "1.0.10",
+	"matches": [
+		"*://*.hareshi.net/*"
+	],
+	"version": "1.0.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Hareshi/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Hareshi/assets/thumbnail.jpg",
 	"color": "#ff6c96",

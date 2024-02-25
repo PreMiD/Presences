@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "CRUGG",
 		"id": "228965621478588416"
@@ -14,7 +14,11 @@
 		"tora-dora.fandom.com",
 		"toradora.fandom.com"
 	],
-	"version": "1.1.23",
+	"matches": [
+		"*://tora-dora.fandom.com/*",
+		"*://toradora.fandom.com/*"
+	],
+	"version": "1.1.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Toradora%20Wikia/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Toradora%20Wikia/assets/thumbnail.png",
 	"color": "#F9304B",

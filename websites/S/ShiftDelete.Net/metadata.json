@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -14,7 +14,11 @@
 		"shiftdelete.net",
 		"forum.shiftdelete.net"
 	],
-	"version": "1.2.21",
+	"matches": [
+		"*://shiftdelete.net/*",
+		"*://forum.shiftdelete.net/*"
+	],
+	"version": "1.2.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/ShiftDelete.Net/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/ShiftDelete.Net/assets/thumbnail.png",
 	"color": "#fedd00",

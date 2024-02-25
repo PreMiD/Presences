@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Kabal",
 		"id": "269581360316940299"
@@ -14,7 +14,11 @@
 		"exxen.com",
 		"www.exxen.com"
 	],
-	"version": "1.0.17",
+	"matches": [
+		"*://exxen.com/*",
+		"*://www.exxen.com/*"
+	],
+	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Exxen/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Exxen/assets/thumbnail.png",
 	"color": "#F9C623",

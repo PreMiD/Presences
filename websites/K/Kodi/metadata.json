@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Alexx",
 		"id": "604182077088202784"
@@ -13,7 +13,11 @@
 		"localhost",
 		"127.0.0.1"
 	],
-	"version": "1.0.23",
+	"matches": [
+		"*://localhost/*",
+		"*://127.0.0.1/*"
+	],
+	"version": "1.0.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kodi/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kodi/assets/thumbnail.png",
 	"color": "#ff7c00",

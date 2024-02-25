@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "theusaf",
 		"id": "193714715631812608"
@@ -19,7 +19,10 @@
 		"asuratoon.com"
 	],
 	"regExp": "asura.*?[.].*?[/]",
-	"version": "1.2.9",
+	"matches": [
+		"__REPLACE_ME__"
+	],
+	"version": "1.2.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Asura%20Scans/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Asura%20Scans/assets/thumbnail.png",
 	"color": "#6E3CAA",

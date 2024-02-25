@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "वाह्य",
 		"id": "819696394180100106"
@@ -11,7 +11,10 @@
 		"vi_VN": "Một trong những trang với thư viện anime lớn nhất Brazil hoàn toàn miễn phí."
 	},
 	"url": "animesgames.net",
-	"version": "1.0.6",
+	"matches": [
+		"*://animesgames.net/*"
+	],
+	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Games/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Games/assets/thumbnail.png",
 	"color": "#229050",

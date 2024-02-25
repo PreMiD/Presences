@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "theusaf",
 		"id": "193714715631812608"
@@ -19,7 +19,18 @@
 		"help.heroku.com",
 		"status.heroku.com"
 	],
-	"version": "1.0.7",
+	"matches": [
+		"*://www.heroku.com/*",
+		"*://blog.heroku.com/*",
+		"*://brand.heroku.com/*",
+		"*://dashboard.heroku.com/*",
+		"*://data.heroku.com/*",
+		"*://devcenter.heroku.com/*",
+		"*://elements.heroku.com/*",
+		"*://help.heroku.com/*",
+		"*://status.heroku.com/*"
+	],
+	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Heroku/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Heroku/assets/thumbnail.png",
 	"color": "#211746",

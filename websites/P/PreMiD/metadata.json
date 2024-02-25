@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -43,7 +43,13 @@
 		"beta.premid.app",
 		"status.premid.app"
 	],
-	"version": "3.1.12",
+	"matches": [
+		"*://premid.app/*",
+		"*://docs.premid.app/*",
+		"*://beta.premid.app/*",
+		"*://status.premid.app/*"
+	],
+	"version": "3.1.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PreMiD/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PreMiD/assets/thumbnail.png",
 	"color": "#7289DA",

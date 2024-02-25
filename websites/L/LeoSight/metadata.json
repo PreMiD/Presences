@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Dzardys",
 		"id": "523468146183634971"
@@ -16,7 +16,14 @@
 		"eco.leosight.cz",
 		"guard.leosight.cz"
 	],
-	"version": "1.1.15",
+	"matches": [
+		"*://leosight.cz/*",
+		"*://artic.leosight.cz/*",
+		"*://ctf.leosight.cz/*",
+		"*://eco.leosight.cz/*",
+		"*://guard.leosight.cz/*"
+	],
+	"version": "1.1.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LeoSight/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LeoSight/assets/thumbnail.png",
 	"color": "#595959",

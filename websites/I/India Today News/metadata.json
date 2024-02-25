@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Anaxes",
 		"id": "567885938160697377"
@@ -9,7 +9,10 @@
 		"en": "Story by story. Edition by edition."
 	},
 	"url": "www.indiatoday.in",
-	"version": "1.0.8",
+	"matches": [
+		"*://www.indiatoday.in/*"
+	],
+	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/India%20Today%20News/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/India%20Today%20News/assets/thumbnail.png",
 	"color": "#fc3b43",
@@ -21,6 +24,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	],
 	"settings": [
 		{
 			"id": "lang",

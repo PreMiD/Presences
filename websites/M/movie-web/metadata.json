@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "705490775932403795",
 		"name": "jordaar"
@@ -10,7 +10,11 @@
 	},
 	"url": "movie-web.app",
 	"regExp": "(dev[.])?(movie-web[.]app)",
-	"version": "1.0.3",
+	"matches": [
+		"*://dev.movie-web.app/*",
+		"*://movie-web.app/*"
+	],
+	"version": "1.0.4",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/thumbnail.png",
 	"color": "#533670",

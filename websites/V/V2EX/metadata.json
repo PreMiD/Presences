@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Xunco",
 		"id": "611786551504011305"
@@ -18,7 +18,10 @@
 		"v2ex.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*v2ex[.]com[/]",
-	"version": "1.0.21",
+	"matches": [
+		"*://*.v2ex.com/*"
+	],
+	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/V2EX/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/V2EX/assets/thumbnail.png",
 	"color": "#aab0c6",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Snazzah",
 		"id": "158049329150427136"
@@ -10,7 +10,10 @@
 		"nl": "Alternatieve Agar.io-website, met verschillende modi."
 	},
 	"url": "tricksplit.io",
-	"version": "1.0.19",
+	"matches": [
+		"*://tricksplit.io/*"
+	],
+	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TrickSplit.io/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TrickSplit.io/assets/thumbnail.png",
 	"color": "#ABCF44",
@@ -21,5 +24,8 @@
 		"miniclip"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

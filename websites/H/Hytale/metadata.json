@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Rodry",
 		"id": "240875059953139714"
@@ -11,7 +11,10 @@
 		"nl": "Ga op een reis vol avontuur en creativiteit! Hytale combineert de reikwijdte van een sandbox met de diepte van een rollenspel en dompelt spelers onder in een procedureel gegenereerde wereld waar wankelende torens en diepe kerkers rijke beloningen beloven."
 	},
 	"url": "hytale.com",
-	"version": "1.0.19",
+	"matches": [
+		"*://hytale.com/*"
+	],
+	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Hytale/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Hytale/assets/thumbnail.png",
 	"color": "#15243A",

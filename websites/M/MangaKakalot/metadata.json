@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -13,7 +13,11 @@
 		"mangakakalot.com",
 		"manganato.com"
 	],
-	"version": "1.0.21",
+	"matches": [
+		"*://mangakakalot.com/*",
+		"*://manganato.com/*"
+	],
+	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaKakalot/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaKakalot/assets/thumbnail.jpg",
 	"color": "#f05759",

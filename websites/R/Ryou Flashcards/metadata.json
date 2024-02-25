@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "AcidEpicice",
 		"id": "249992970235936768"
@@ -10,7 +10,10 @@
 		"nl": "Ryou Flashcards is een web app voor het leren van Japans en het bestuderen van kanji en woordenschat woorden."
 	},
 	"url": "www.ryouflashcards.com",
-	"version": "1.1.15",
+	"matches": [
+		"*://www.ryouflashcards.com/*"
+	],
+	"version": "1.1.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Ryou%20Flashcards/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Ryou%20Flashcards/assets/thumbnail.png",
 	"color": "#4C8FFB",

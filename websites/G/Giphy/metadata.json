@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Nekolen",
 		"id": "270125856679002113"
@@ -15,7 +15,10 @@
 		"vi_VN": "Giphy là công cụ tìm kiếm và tạo Gif."
 	},
 	"url": "giphy.com",
-	"version": "1.2.23",
+	"matches": [
+		"*://giphy.com/*"
+	],
+	"version": "1.2.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Giphy/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Giphy/assets/thumbnail.png",
 	"color": "#00FF00",

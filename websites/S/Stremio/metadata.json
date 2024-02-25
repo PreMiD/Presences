@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Sleeyax",
 		"id": "226037514954080257"
@@ -22,7 +22,14 @@
 		"web.strem.io",
 		"web.stremio.com"
 	],
-	"version": "2.0.0",
+	"matches": [
+		"*://www.stremio.com/*",
+		"*://stremio.com/*",
+		"*://app.strem.io/*",
+		"*://web.strem.io/*",
+		"*://web.stremio.com/*"
+	],
+	"version": "2.0.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Stremio/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Stremio/assets/thumbnail.jpg",
 	"color": "#8A5AAB",

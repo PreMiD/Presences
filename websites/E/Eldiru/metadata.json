@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "rippledwater",
 		"id": "752720971089182752"
@@ -11,7 +11,10 @@
 		"nl": "Op Moodle gebaseerde e-learning site voor studenten van de Jenderal Soedirman Universiteit"
 	},
 	"url": "eldiru.unsoed.ac.id",
-	"version": "1.0.15",
+	"matches": [
+		"*://eldiru.unsoed.ac.id/*"
+	],
+	"version": "1.0.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Eldiru/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Eldiru/assets/thumbnail.png",
 	"color": "#FFEE00",

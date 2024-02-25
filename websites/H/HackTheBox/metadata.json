@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "937757295453044806",
 		"name": "Atsukoro1"
@@ -9,7 +9,10 @@
 		"en": "Hack The Box is a massive, online cybersecurity training platform, allowing individuals, companies, universities and all kinds of organizations around the world to level up their hacking skills."
 	},
 	"url": "app.hackthebox.com",
-	"version": "1.0.6",
+	"matches": [
+		"*://app.hackthebox.com/*"
+	],
+	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HackTheBox/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HackTheBox/assets/thumbnail.jpeg",
 	"color": "#9fef00",

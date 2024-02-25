@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "CRUGG",
 		"id": "228965621478588416"
@@ -19,7 +19,12 @@
 		"canary.giggl.app",
 		"status.giggl.app"
 	],
-	"version": "2.0.14",
+	"matches": [
+		"*://giggl.app/*",
+		"*://canary.giggl.app/*",
+		"*://status.giggl.app/*"
+	],
+	"version": "2.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Giggl/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Giggl/assets/thumbnail.png",
 	"color": "#FF0099",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "xKubson_",
 		"id": "404217213873029120"
@@ -10,7 +10,10 @@
 		"pl": "Polska strona oferująca linki do seriali i filmów z innych źródeł."
 	},
 	"url": "filman.cc",
-	"version": "1.0.9",
+	"matches": [
+		"*://filman.cc/*"
+	],
+	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/filman.cc/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/filman.cc/assets/thumbnail.png",
 	"color": "#00b3ff",

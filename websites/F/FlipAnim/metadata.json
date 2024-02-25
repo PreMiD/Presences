@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -10,7 +10,10 @@
 		"nl": "Maak flipbook-animaties online!"
 	},
 	"url": "flipanim.com",
-	"version": "1.2.18",
+	"matches": [
+		"*://flipanim.com/*"
+	],
+	"version": "1.2.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/FlipAnim/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/FlipAnim/assets/thumbnail.png",
 	"color": "#f2a012",

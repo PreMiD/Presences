@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -14,7 +14,11 @@
 		"docs.tebex.io"
 	],
 	"regExp": "(.*[.]buycraft[.]net)|(.*[.]tebex[.]io)",
-	"version": "1.0.6",
+	"matches": [
+		"*://*.buycraft.net/*",
+		"*://*.tebex.io/*"
+	],
+	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tebex/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tebex/assets/thumbnail.jpg",
 	"color": "#215AA9",

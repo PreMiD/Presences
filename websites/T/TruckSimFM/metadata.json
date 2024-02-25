@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -10,7 +10,10 @@
 		"nl": "TruckSimFM is een online radiostation, gewijd aan de Simulation Community, 24/7 live met niets dan geweldige muziek, online, op mobiel en op je slimme luidspreker."
 	},
 	"url": "trucksim.fm",
-	"version": "1.2.19",
+	"matches": [
+		"*://trucksim.fm/*"
+	],
+	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TruckSimFM/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TruckSimFM/assets/thumbnail.png",
 	"color": "#5398ee",

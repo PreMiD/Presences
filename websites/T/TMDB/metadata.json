@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Keksi♡",
 		"id": "527147599942385674"
@@ -9,7 +9,10 @@
 		"en": "The Movie Database (TMDB) is a popular, user editable database for movies and TV shows."
 	},
 	"url": "www.themoviedb.org",
-	"version": "1.0.8",
+	"matches": [
+		"*://www.themoviedb.org/*"
+	],
+	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TMDB/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TMDB/assets/thumbnail.png",
 	"color": "#032541",

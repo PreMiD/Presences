@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "BartBoys3",
 		"id": "322892916093747200"
@@ -10,7 +10,10 @@
 		"nl": "Nookazon is een fansite waar gebruikers items en dorpelingen kunnen kopen en verkopen in \"Animal Crossing: New Horizons\"."
 	},
 	"url": "nookazon.com",
-	"version": "1.0.19",
+	"matches": [
+		"*://nookazon.com/*"
+	],
+	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Nookazon/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Nookazon/assets/thumbnail.png",
 	"color": "#5FA0D7",

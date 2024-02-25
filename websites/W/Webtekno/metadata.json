@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -12,7 +12,10 @@
 		"nl": "Webtekno is een van de grootste technologieblogs in Turkije."
 	},
 	"url": "www.webtekno.com",
-	"version": "1.3.21",
+	"matches": [
+		"*://www.webtekno.com/*"
+	],
+	"version": "1.3.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/thumbnail.png",
 	"color": "#f54b37",

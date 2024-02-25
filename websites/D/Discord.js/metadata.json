@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Deivid",
 		"id": "406184197405802497"
@@ -12,7 +12,11 @@
 	},
 	"url": "discord.js.org",
 	"regExp": "([a-z0-9-]+[.])*(discord[.]js.org|old[.]discordjs.dev)[/]",
-	"version": "1.2.21",
+	"matches": [
+		"*://*.discord.js.org/*",
+		"*://*.old.discordjs.dev/*"
+	],
+	"version": "1.2.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Discord.js/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Discord.js/assets/thumbnail.png",
 	"color": "#8dd6f1",

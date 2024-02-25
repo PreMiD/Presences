@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "630812692659044352",
 		"name": "itsmateo20"
@@ -9,7 +9,10 @@
 		"en": "Emberspark Games is a team of passionate gamers with a knack for creating engaging and immersive experiences. With their deep understanding of game design and storytelling, they are committed to delivering top-notch content that resonates with players worldwide."
 	},
 	"url": "emberspark.games",
-	"version": "1.0.1",
+	"matches": [
+		"*://emberspark.games/*"
+	],
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Emberspark%20Games/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Emberspark%20Games/assets/thumbnail.png",
 	"color": "#202020",

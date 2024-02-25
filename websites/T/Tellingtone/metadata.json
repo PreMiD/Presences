@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "RisingSunLight",
 		"id": "240521747852558347"
@@ -10,7 +10,10 @@
 		"fr": "Découvrez notre catalogue de séries audio originales, des histoires conçues dès l'écriture pour être écoutées en podcast. Plongez dans nos univers fantastiques où s'entremêlent suspense, magie et enquête…"
 	},
 	"url": "tellingtone.com",
-	"version": "1.0.9",
+	"matches": [
+		"*://tellingtone.com/*"
+	],
+	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tellingtone/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tellingtone/assets/thumbnail.png",
 	"color": "#f58800",

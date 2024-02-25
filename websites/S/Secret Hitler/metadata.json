@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "205984221859151873",
 		"name": "joerkig"
@@ -9,7 +9,10 @@
 		"en": "A web adaptation of the social deduction board game Secret Hitler.  Always free and no ads."
 	},
 	"url": "secrethitler.io",
-	"version": "1.0.1",
+	"matches": [
+		"*://secrethitler.io/*"
+	],
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Secret%20Hitler/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Secret%20Hitler/assets/thumbnail.png",
 	"color": "#c36563",

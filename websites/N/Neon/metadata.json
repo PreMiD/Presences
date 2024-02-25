@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Kety The Folf",
 		"id": "263443630767734784"
@@ -19,7 +19,11 @@
 		"www.neontv.co.nz",
 		"neontv.co.nz"
 	],
-	"version": "1.0.19",
+	"matches": [
+		"*://www.neontv.co.nz/*",
+		"*://neontv.co.nz/*"
+	],
+	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Neon/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Neon/assets/thumbnail.png",
 	"color": "#000000",

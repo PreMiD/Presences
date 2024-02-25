@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "churuya",
 		"id": "173177499272871937"
@@ -11,7 +11,10 @@
 		"nl": "Onlineversies van populaire bordspellen"
 	},
 	"url": "meme-police.ru",
-	"version": "1.0.17",
+	"matches": [
+		"*://meme-police.ru/*"
+	],
+	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Meme%20Police/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Meme%20Police/assets/thumbnail.png",
 	"color": "#9C27B0",
@@ -21,5 +24,8 @@
 		"meme-police"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

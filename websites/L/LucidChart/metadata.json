@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "dAn",
 		"id": "169516316124905473"
@@ -13,7 +13,11 @@
 		"www.lucidchart.com",
 		"lucidchart.com"
 	],
-	"version": "1.3.20",
+	"matches": [
+		"*://www.lucidchart.com/*",
+		"*://lucidchart.com/*"
+	],
+	"version": "1.3.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LucidChart/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LucidChart/assets/thumbnail.png",
 	"color": "#F38D32",

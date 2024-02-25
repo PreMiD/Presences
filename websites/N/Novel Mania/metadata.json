@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Shuichi",
 		"id": "179440483796385792"
@@ -11,7 +11,10 @@
 		"nl": "Lees overal en altijd webnovels in het Portugees."
 	},
 	"url": "novelmania.com.br",
-	"version": "1.0.17",
+	"matches": [
+		"*://novelmania.com.br/*"
+	],
+	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Novel%20Mania/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Novel%20Mania/assets/thumbnail.jpg",
 	"color": "#008cff",

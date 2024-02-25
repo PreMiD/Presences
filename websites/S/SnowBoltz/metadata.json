@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Yusaki",
 		"id": "439582316873121793"
@@ -15,7 +15,10 @@
 		"shop.snowboltz.net"
 	],
 	"regExp": "([a-z0-9-]+[.])*snowboltz[.]net[/]",
-	"version": "1.1.15",
+	"matches": [
+		"*://*.snowboltz.net/*"
+	],
+	"version": "1.1.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SnowBoltz/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SnowBoltz/assets/thumbnail.png",
 	"color": "#00ccff",

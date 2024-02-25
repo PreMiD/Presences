@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "CRUGG",
 		"id": "228965621478588416"
@@ -15,7 +15,11 @@
 		"rule34.xxx",
 		"rule34.paheal.net"
 	],
-	"version": "1.2.19",
+	"matches": [
+		"*://rule34.xxx/*",
+		"*://rule34.paheal.net/*"
+	],
+	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Rule34/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Rule34/assets/thumbnail.png",
 	"color": "#AAE5A3",

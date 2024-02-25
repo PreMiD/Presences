@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "VocalZero",
 		"id": "223891083724193792"
@@ -9,7 +9,10 @@
 		"en": "The future of radio is here. Experience 12 Spaces with non-stop music you'll love."
 	},
 	"url": "atomic.radio",
-	"version": "1.1.0",
+	"matches": [
+		"*://atomic.radio/*"
+	],
+	"version": "1.1.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/atomicradio/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/atomicradio/assets/thumbnail.jpg",
 	"color": "#a9f923",

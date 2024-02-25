@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "d0gg3r",
 		"id": "460318444487704597"
@@ -14,7 +14,11 @@
 		"www.codecademy.com",
 		"news.codecademy.com"
 	],
-	"version": "1.1.25",
+	"matches": [
+		"*://www.codecademy.com/*",
+		"*://news.codecademy.com/*"
+	],
+	"version": "1.1.26",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/thumbnail.png",
 	"color": "#152B39",
@@ -26,5 +30,8 @@
 		"learn"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

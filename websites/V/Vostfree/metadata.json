@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Kozou",
 		"id": "379362415428632576"
@@ -10,7 +10,10 @@
 		"fr": "Téléchargez et regardez vos animes en ligne. Regardez des animes VF et VOSTFR en ligne, anime vf en ddl gratuitement."
 	},
 	"url": "vostfree.tv",
-	"version": "1.0.14",
+	"matches": [
+		"*://vostfree.tv/*"
+	],
+	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vostfree/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vostfree/assets/thumbnail.png",
 	"color": "#1b1c1d",
@@ -23,6 +26,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	],
 	"settings": [
 		{
 			"id": "privacy",

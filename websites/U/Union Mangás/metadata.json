@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Viruz",
 		"id": "158973226465230848"
@@ -12,7 +12,10 @@
 		"nl": "Union Mangas is een Braziliaanse manga website. Lees snel en gemakkelijk je favoriete manga's in het Portugees!"
 	},
 	"url": "unionmangas.top",
-	"version": "1.3.19",
+	"matches": [
+		"*://unionmangas.top/*"
+	],
+	"version": "1.3.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/U/Union%20Mang%C3%A1s/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/Union%20Mang%C3%A1s/assets/thumbnail.png",
 	"color": "#a43030",

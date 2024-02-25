@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Yelo",
 		"id": "425326889565945856"
@@ -10,7 +10,10 @@
 		"es": "El mejor portal para ver anime online sub español en calidad HD, descargar anime ligero en HD desde Mega, Mediafire y más! TioAnime tu mejor opción."
 	},
 	"url": "tioanime.com",
-	"version": "1.0.18",
+	"matches": [
+		"*://tioanime.com/*"
+	],
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tio%20Anime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tio%20Anime/assets/thumbnail.png",
 	"color": "#18142f",
@@ -20,6 +23,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	],
 	"settings": [
 		{
 			"id": "privacy",

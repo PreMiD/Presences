@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Slowftw",
 		"id": "325046217904226306"
@@ -11,7 +11,10 @@
 		"nl": "Tsuki Mangás is een Braziliaanse manga-lezer; lees je favoriete manga's op je smartphone, tablet, computer of een ander apparaat. Sla je favoriete personages op en volg de nieuwste releases."
 	},
 	"url": "tsukimangas.com",
-	"version": "1.4.22",
+	"matches": [
+		"*://tsukimangas.com/*"
+	],
+	"version": "1.4.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tsuki%20Mang%C3%A1s/assets/thumbnail.png",
 	"color": "#161616",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -14,7 +14,11 @@
 		"shinden.pl",
 		"forum.shinden.pl"
 	],
-	"version": "1.0.20",
+	"matches": [
+		"*://shinden.pl/*",
+		"*://forum.shinden.pl/*"
+	],
+	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Shinden/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Shinden/assets/thumbnail.png",
 	"color": "#6a2b8b",
@@ -24,5 +28,8 @@
 		"anime"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

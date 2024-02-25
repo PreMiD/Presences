@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -15,7 +15,10 @@
 		"www.rocketleagueesports.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*rocketleague[.]com[/]",
-	"version": "1.2.18",
+	"matches": [
+		"*://*.rocketleague.com/*"
+	],
+	"version": "1.2.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Rocket%20League/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Rocket%20League/assets/thumbnail.jpg",
 	"color": "#0055ab",

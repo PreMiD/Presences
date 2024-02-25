@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -10,7 +10,10 @@
 		"nl": "Een volledig aanpasbare servermoderatie Discord-bot voor uw Discord-server met een eenvoudig en intuïtief webdashboard. Serverbeheer is nu een stuk eenvoudiger geworden."
 	},
 	"url": "dyno.gg",
-	"version": "1.2.18",
+	"matches": [
+		"*://dyno.gg/*"
+	],
+	"version": "1.2.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Dyno/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Dyno/assets/thumbnail.png",
 	"color": "#337fd5",

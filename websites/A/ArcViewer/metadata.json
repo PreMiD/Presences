@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "205984221859151873",
 		"name": "joerkig"
@@ -9,7 +9,10 @@
 		"en": "View Beat Saber maps and BeatLeader replays directly in your browser, with accurately recreated visuals!"
 	},
 	"url": "allpoland.github.io",
-	"version": "1.0.1",
+	"matches": [
+		"*://allpoland.github.io/*"
+	],
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/thumbnail.png",
 	"color": "#86050A",

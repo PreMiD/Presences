@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "205984221859151873",
 		"name": "joerkig"
@@ -8,8 +8,15 @@
 	"description": {
 		"en": "The ultimate community-driven, and open-source competitive rhythm game available on Steam."
 	},
-	"url": ["quavergame.com","wiki.quavergame.com"],
-	"version": "1.0.0",
+	"url": [
+		"quavergame.com",
+		"wiki.quavergame.com"
+	],
+	"matches": [
+		"*://quavergame.com/*",
+		"*://wiki.quavergame.com/*"
+	],
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/Ja2zIvV.png",
 	"thumbnail": "https://static.quavergame.com/img/home.jpg",
 	"color": "#09a4c6",

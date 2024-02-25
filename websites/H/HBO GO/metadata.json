@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "PreMiD",
 		"id": "503557087041683458"
@@ -26,7 +26,18 @@
 		"www.hbogoasia.id",
 		"www.hbogoasia.ph"
 	],
-	"version": "2.3.6",
+	"matches": [
+		"*://hbogo.ro/*",
+		"*://hbogo.com/*",
+		"*://hbogo.pl/*",
+		"*://hbogo.cz/*",
+		"*://hbogo.sk/*",
+		"*://www.hbogo.co.th/*",
+		"*://www.hbogoasia.my/*",
+		"*://www.hbogoasia.id/*",
+		"*://www.hbogoasia.ph/*"
+	],
+	"version": "2.3.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HBO%20GO/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HBO%20GO/assets/thumbnail.png",
 	"color": "#011921",

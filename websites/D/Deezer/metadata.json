@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -23,7 +23,10 @@
 		"ga_IE": "Éifeall na ceimhniú a thágthóg, uair éirinn."
 	},
 	"url": "www.deezer.com",
-	"version": "2.3.1",
+	"matches": [
+		"*://www.deezer.com/*"
+	],
+	"version": "2.3.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Deezer/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Deezer/assets/thumbnail.png",
 	"color": "#A31D7C",

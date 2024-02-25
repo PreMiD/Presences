@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -11,7 +11,10 @@
 		"pt_BR": "Leia online e organize suas leituras aqui. Leia em português (PT-BR) os mangás mais lidos como Naruto, Fairy Tail, One Piece e outros!"
 	},
 	"url": "mangalivre.net",
-	"version": "1.3.22",
+	"matches": [
+		"*://mangalivre.net/*"
+	],
+	"version": "1.3.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Manga%20Livre/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Manga%20Livre/assets/thumbnail.png",
 	"color": "#b4ad9d",

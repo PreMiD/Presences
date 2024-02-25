@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -23,7 +23,15 @@
 		"denostatus.com",
 		"deno.news"
 	],
-	"version": "1.1.6",
+	"matches": [
+		"*://deno.land/*",
+		"*://doc.deno.land/*",
+		"*://deno.com/*",
+		"*://merch.deno.com/*",
+		"*://denostatus.com/*",
+		"*://deno.news/*"
+	],
+	"version": "1.1.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Deno/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Deno/assets/thumbnail.png",
 	"color": "#f9f9f9",

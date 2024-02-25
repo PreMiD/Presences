@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Alexx",
 		"id": "604453403640463371"
@@ -10,7 +10,10 @@
 		"nl": "Stadia is een door Google geëxploiteerde cloudgamingdienst. Er wordt geadverteerd dat het videogames kan streamen tot 4K-resolutie bij 60 frames per seconde met ondersteuning voor high-dynamic-range, naar spelers via de talrijke datacenters van het bedrijf over de hele wereld, op voorwaarde dat ze een internetverbinding met voldoende hoge snelheid gebruiken. Het is toegankelijk via de Google Chrome-webbrowser op desktopcomputers, Pixel-smartphones, ondersteunde smartphones van Samsung, OnePlus, Razer en Asus, evenals Chrome OS-tablets en Chromecast voor tv-ondersteuning."
 	},
 	"url": "stadia.google.com",
-	"version": "1.0.21",
+	"matches": [
+		"*://stadia.google.com/*"
+	],
+	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Stadia/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Stadia/assets/thumbnail.png",
 	"color": "#0081FF",

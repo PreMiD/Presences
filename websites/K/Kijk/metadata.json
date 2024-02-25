@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -10,7 +10,10 @@
 		"en": "Kijk opens your eyes."
 	},
 	"url": "www.kijk.nl",
-	"version": "1.2.6",
+	"matches": [
+		"*://www.kijk.nl/*"
+	],
+	"version": "1.2.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kijk/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kijk/assets/thumbnail.jpg",
 	"color": "#ff0000",

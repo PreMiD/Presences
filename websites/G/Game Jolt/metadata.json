@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -11,7 +11,10 @@
 		"nl": "Game Jolt is een hostingdienst voor freeware en commerciële videospelletjes met sociale functies."
 	},
 	"url": "gamejolt.com",
-	"version": "1.2.22",
+	"matches": [
+		"*://gamejolt.com/*"
+	],
+	"version": "1.2.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Game%20Jolt/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Game%20Jolt/assets/thumbnail.png",
 	"color": "#191919",

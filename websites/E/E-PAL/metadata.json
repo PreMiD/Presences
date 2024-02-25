@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "638080361179512853",
 		"name": "dark_ville"
@@ -12,7 +12,11 @@
 		"www.epal.gg",
 		"epal.gg"
 	],
-	"version": "1.0.1",
+	"matches": [
+		"*://www.epal.gg/*",
+		"*://epal.gg/*"
+	],
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/E-PAL/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/E-PAL/assets/thumbnail.png",
 	"color": "#7041e6",

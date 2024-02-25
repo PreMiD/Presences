@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -15,7 +15,11 @@
 		"yagpdb.xyz",
 		"docs.yagpdb.xyz"
 	],
-	"version": "1.2.21",
+	"matches": [
+		"*://yagpdb.xyz/*",
+		"*://docs.yagpdb.xyz/*"
+	],
+	"version": "1.2.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/YAGPDB/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/YAGPDB/assets/thumbnail.png",
 	"color": "#ec7760",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "562755652921982986",
 		"name": "PrimeMinus"
@@ -9,7 +9,10 @@
 		"en": "Rumble is an alternate online video sharing platform for people with something to say and something to share, who believe in authentic expression, and want to control the value of their own creations."
 	},
 	"url": "rumble.com",
-	"version": "1.0.1",
+	"matches": [
+		"*://rumble.com/*"
+	],
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Rumble/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Rumble/assets/thumbnail.jpg",
 	"color": "#85c742",

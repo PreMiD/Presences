@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "638080361179512853",
 		"name": "dark_ville"
@@ -11,7 +11,10 @@
 	},
 	"url": "doods.pro",
 	"regExp": "((ww(w)?([0-9])?[.])?dood(s)?[.][a-z]*)|((ww(w)?([0-9])?[.])?doodstream[.][a-z]*([.][a-z]*)?)",
-	"version": "1.0.1",
+	"matches": [
+		"__REPLACE_ME__"
+	],
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Doodstreams/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Doodstreams/assets/thumbnail.png",
 	"color": "#FF9900",

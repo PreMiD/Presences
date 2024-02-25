@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -11,7 +11,10 @@
 		"zh_CN": "100% Rock Internet Radio, 在线收听最多样化的摇滚音乐."
 	},
 	"url": "www.rockradio.com",
-	"version": "1.2.19",
+	"matches": [
+		"*://www.rockradio.com/*"
+	],
+	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/ROCKRADIO.COM/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/ROCKRADIO.COM/assets/thumbnail.png",
 	"color": "#fce53f",

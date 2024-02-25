@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "RisingSunLight",
 		"id": "240521747852558347"
@@ -10,7 +10,10 @@
 		"fr": "Votre site de streaming préféré pour vos animes et scans sans pubs."
 	},
 	"url": "anime-sama.fr",
-	"version": "1.1.6",
+	"matches": [
+		"*://anime-sama.fr/*"
+	],
+	"version": "1.1.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Sama/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Sama/assets/thumbnail.png",
 	"color": "#0063c0",
@@ -24,6 +27,12 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*((sendvid)|(sibnet)|(myvi)).*",
+	"iFrameMatches": [
+		"*://*.anime-sama.fr/*",
+		"*://video.sibnet.ru/*",
+		"*://sendvid.com/*",
+		"*://vk.com/*"
+	],
 	"settings": [
 		{
 			"id": "buttons",

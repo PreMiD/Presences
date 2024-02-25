@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Nekolen",
 		"id": "270125856679002113"
@@ -16,7 +16,10 @@
 		"nl": "Gewoon lichte romans! Huis van alle lichte romans"
 	},
 	"url": "justlightnovels.com",
-	"version": "1.2.19",
+	"matches": [
+		"*://justlightnovels.com/*"
+	],
+	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/Just%20Light%20Novels/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/Just%20Light%20Novels/assets/thumbnail.png",
 	"color": "#0000ff",

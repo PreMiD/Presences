@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "bossatossa",
 		"id": "514756351327731729"
@@ -21,7 +21,10 @@
 		"nl": "De meest moe radio in Brazilië"
 	},
 	"url": "www.animu.com.br",
-	"version": "1.2.28",
+	"matches": [
+		"*://www.animu.com.br/*"
+	],
+	"version": "1.2.29",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/R%C3%A1dio%20Animu/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/R%C3%A1dio%20Animu/assets/thumbnail.png",
 	"color": "#2c004b",
@@ -33,5 +36,8 @@
 		"moe"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

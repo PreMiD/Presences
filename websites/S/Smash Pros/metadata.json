@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "596877893137596416",
 		"name": "c_fornow"
@@ -12,7 +12,11 @@
 		"smashpros.gg",
 		"www.smashpros.gg"
 	],
-	"version": "1.0.1",
+	"matches": [
+		"*://smashpros.gg/*",
+		"*://www.smashpros.gg/*"
+	],
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Smash%20Pros/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Smash%20Pros/assets/thumbnail.jpg",
 	"color": "#52ff87",

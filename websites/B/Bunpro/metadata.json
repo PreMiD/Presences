@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "JulianCDC",
 		"id": "159565307831123968"
@@ -26,7 +26,12 @@
 		"bunpro.jp",
 		"community.bunpro.jp"
 	],
-	"version": "2.0.8",
+	"matches": [
+		"*://www.bunpro.jp/*",
+		"*://bunpro.jp/*",
+		"*://community.bunpro.jp/*"
+	],
+	"version": "2.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Bunpro/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Bunpro/assets/thumbnail.png",
 	"color": "#5e6266",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -18,7 +18,10 @@
 	},
 	"url": "hypixel.net",
 	"regExp": "([a-z0-9-]+[.])*hypixel[.]net[/]",
-	"version": "1.2.21",
+	"matches": [
+		"*://*.hypixel.net/*"
+	],
+	"version": "1.2.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Hypixel/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Hypixel/assets/thumbnail.jpg",
 	"color": "#d9992a",

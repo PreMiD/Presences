@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "638080361179512853",
 		"name": "Dark_Ville"
@@ -12,7 +12,11 @@
 		"www.historyvault.com",
 		"watch.historyvault.com"
 	],
-	"version": "1.0.6",
+	"matches": [
+		"*://www.historyvault.com/*",
+		"*://watch.historyvault.com/*"
+	],
+	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/History%20Vault/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/History%20Vault/assets/thumbnail.jpg",
 	"color": "#DC9533",

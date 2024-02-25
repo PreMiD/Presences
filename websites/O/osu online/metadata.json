@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Trigger.",
 		"id": "309514131159908353"
@@ -17,7 +17,10 @@
 		"nl": "Dit is een niet-officiële implementatie van osu !. Score- en beoordelingsregels verschillen van officiële versies. Sommige muziek is mogelijk niet perfect gesynchroniseerd. Andere modi dan osu! (std) worden niet ondersteund."
 	},
 	"url": "osugame.online",
-	"version": "1.0.18",
+	"matches": [
+		"*://osugame.online/*"
+	],
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/osu%20online/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/osu%20online/assets/thumbnail.png",
 	"color": "#B63258",

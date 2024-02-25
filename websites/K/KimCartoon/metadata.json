@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -11,7 +11,10 @@
 	},
 	"url": "kimcartoon.si",
 	"regExp": "(ww([0-9]?)(w)?[.])?kim(-)?cartoon[.].*",
-	"version": "2.0.0",
+	"matches": [
+		"__REPLACE_ME__"
+	],
+	"version": "2.0.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/KimCartoon/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/KimCartoon/assets/thumbnail.png",
 	"color": "#fdf5ad",
@@ -22,6 +25,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	],
 	"settings": [
 		{
 			"id": "cover",

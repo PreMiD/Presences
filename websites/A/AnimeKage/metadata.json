@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -15,7 +15,10 @@
 	},
 	"url": "ak151.anime-kage.eu",
 	"regExp": "([a-z0-9-]+[.])*anime-kage[.]eu[/]",
-	"version": "1.2.25",
+	"matches": [
+		"*://*.anime-kage.eu/*"
+	],
+	"version": "1.2.26",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeKage/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeKage/assets/thumbnail.png",
 	"color": "#2bb4ba",
@@ -25,5 +28,8 @@
 		"videos"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

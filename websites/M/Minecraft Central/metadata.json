@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "hi_feeeh",
 		"id": "160923526277103617"
@@ -13,7 +13,11 @@
 		"mccentral.org",
 		"buy.mccentral.org"
 	],
-	"version": "1.0.20",
+	"matches": [
+		"*://mccentral.org/*",
+		"*://buy.mccentral.org/*"
+	],
+	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Minecraft%20Central/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Minecraft%20Central/assets/thumbnail.png",
 	"color": "#da8a00",

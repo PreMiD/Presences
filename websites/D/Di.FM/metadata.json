@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Callum",
 		"id": "506899274748133376"
@@ -12,7 +12,10 @@
 	},
 	"url": "di.fm",
 	"regExp": "([a-z0-9-]+[.])*di[.]fm[/]",
-	"version": "1.5.5",
+	"matches": [
+		"*://*.di.fm/*"
+	],
+	"version": "1.5.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Di.FM/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Di.FM/assets/thumbnail.png",
 	"color": "#3aa154",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Alexx",
 		"id": "604182077088202784"
@@ -15,7 +15,13 @@
 		"r22.core.learn.edgenuity.com",
 		"r23.core.learn.edgenuity.com"
 	],
-	"version": "1.0.21",
+	"matches": [
+		"*://auth.edgenuity.com/*",
+		"*://student.edgenuity.com/*",
+		"*://r22.core.learn.edgenuity.com/*",
+		"*://r23.core.learn.edgenuity.com/*"
+	],
+	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Edgenuity/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Edgenuity/assets/thumbnail.png",
 	"color": "#FF0000",

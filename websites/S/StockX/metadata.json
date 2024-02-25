@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Kyrie",
 		"id": "368399721494216706"
@@ -9,7 +9,10 @@
 		"en": "Buy and sell the hottest sneakers including Adidas Yeezy and Retro Jordans, Supreme streetwear, trading cards, collectibles, designer handbags and luxury watches."
 	},
 	"url": "stockx.com",
-	"version": "1.0.9",
+	"matches": [
+		"*://stockx.com/*"
+	],
+	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/StockX/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/StockX/assets/thumbnail.png",
 	"color": "#15A25D",

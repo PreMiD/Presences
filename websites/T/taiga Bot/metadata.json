@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "CRUGG",
 		"id": "228965621478588416"
@@ -12,7 +12,10 @@
 		"nl": "taiga is een Discord Bot met vele kenmerken zoals Virtuele Ruil Kaarten, een economie systeem en in de toekomst zelfs een Plugin Marketplace."
 	},
 	"url": "taigabot.net",
-	"version": "3.0.16",
+	"matches": [
+		"*://taigabot.net/*"
+	],
+	"version": "3.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/taiga%20Bot/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/taiga%20Bot/assets/thumbnail.png",
 	"color": "#ff006d",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "SagaFreya",
 		"id": "316314134990028810"
@@ -14,7 +14,11 @@
 		"websdr.ewi.utwente.nl",
 		"etgd1.ewi.utwente.nl"
 	],
-	"version": "1.0.21",
+	"matches": [
+		"*://websdr.ewi.utwente.nl/*",
+		"*://etgd1.ewi.utwente.nl/*"
+	],
+	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WebSDR/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WebSDR/assets/thumbnail.png",
 	"color": "#1f38de",

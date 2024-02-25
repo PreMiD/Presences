@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -12,7 +12,10 @@
 		"ga_IE": "Is é VVVVID do theilifís phearsantaithe ar líne go hiomlán saor in aisce."
 	},
 	"url": "www.vvvvid.it",
-	"version": "1.2.19",
+	"matches": [
+		"*://www.vvvvid.it/*"
+	],
+	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/VVVVID/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/VVVVID/assets/thumbnail.png",
 	"color": "#ffffff",

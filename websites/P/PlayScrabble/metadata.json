@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -12,7 +12,11 @@
 		"www.playscrabble.com",
 		"playscrabble.com"
 	],
-	"version": "1.0.1",
+	"matches": [
+		"*://www.playscrabble.com/*",
+		"*://playscrabble.com/*"
+	],
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PlayScrabble/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PlayScrabble/assets/thumbnail.png",
 	"color": "#F04930",

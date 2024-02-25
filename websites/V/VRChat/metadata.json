@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "KnuffelBeestje",
 		"id": "219155156569161731"
@@ -15,7 +15,12 @@
 		"hello.vrchat.com",
 		"feedback.vrchat.com"
 	],
-	"version": "1.0.23",
+	"matches": [
+		"*://vrchat.com/*",
+		"*://hello.vrchat.com/*",
+		"*://feedback.vrchat.com/*"
+	],
+	"version": "1.0.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/VRChat/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/VRChat/assets/thumbnail.png",
 	"color": "#0B5286",

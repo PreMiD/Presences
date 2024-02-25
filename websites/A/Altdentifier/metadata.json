@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "NMW03",
 		"id": "534099893979971584"
@@ -20,7 +20,10 @@
 		"vi_VN": "Bot bảo mật tốt nhất Discord!"
 	},
 	"url": "altdentifier.com",
-	"version": "1.2.19",
+	"matches": [
+		"*://altdentifier.com/*"
+	],
+	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Altdentifier/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Altdentifier/assets/thumbnail.png",
 	"color": "#7289D9",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Kyrie",
 		"id": "368399721494216706"
@@ -14,7 +14,12 @@
 		"onedrive.live.com"
 	],
 	"regExp": "www[.]office[.]com|([a-z0-9-_]+)[-]my[.]sharepoint[.]com|onedrive[.]live[.]com",
-	"version": "1.0.7",
+	"matches": [
+		"*://www.office.com/*",
+		"*://www.sharepoint.com/*",
+		"*://onedrive.live.com/*"
+	],
+	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Microsoft%20365/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Microsoft%20365/assets/thumbnail.png",
 	"color": "#DE5001",
@@ -27,6 +32,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	],
 	"settings": [
 		{
 			"id": "privacy",

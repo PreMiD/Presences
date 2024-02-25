@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Favna",
 		"id": "268792781713965056"
@@ -10,7 +10,10 @@
 		"nl": "Een volledig aanpasbare server moderatie Discord bot voor je Discord server die beschikt over een eenvoudig en intuïtief web dashboard. Serverbeheer is net een stuk eenvoudiger geworden."
 	},
 	"url": "skyra.pw",
-	"version": "1.0.18",
+	"matches": [
+		"*://skyra.pw/*"
+	],
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Skyra/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Skyra/assets/thumbnail.png",
 	"color": "#7087D8",

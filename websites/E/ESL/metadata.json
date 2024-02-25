@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -26,7 +26,23 @@
 		"intelgrandslam.eslgaming.com",
 		"www.schulmeisterschaft.de"
 	],
-	"version": "2.3.19",
+	"matches": [
+		"*://www.eslgaming.com/*",
+		"*://play.eslgaming.com/*",
+		"*://pro.eslgaming.com/*",
+		"*://tv.eslgaming.com/*",
+		"*://shop.eslgaming.com/*",
+		"*://fantasy.eslgaming.com/*",
+		"*://forum.eslgaming.com/*",
+		"*://about.eslgaming.com/*",
+		"*://brand.eslgaming.com/*",
+		"*://photos.eslgaming.com/*",
+		"*://www.esl-one.com/*",
+		"*://www.intelextrememasters.com/*",
+		"*://intelgrandslam.eslgaming.com/*",
+		"*://www.schulmeisterschaft.de/*"
+	],
+	"version": "2.3.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/ESL/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/ESL/assets/thumbnail.png",
 	"color": "#46afe4",

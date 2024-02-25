@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "MulverineX",
 		"id": "178551656714076161"
@@ -17,7 +17,12 @@
 		"animepahe.ru",
 		"animepahe.org"
 	],
-	"version": "1.5.19",
+	"matches": [
+		"*://animepahe.com/*",
+		"*://animepahe.ru/*",
+		"*://animepahe.org/*"
+	],
+	"version": "1.5.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/thumbnail.png",
 	"color": "#d5015b",
@@ -29,6 +34,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": "kwik.cx/e",
+	"iFrameMatches": [
+		"*://kwik.cx/e*"
+	],
 	"settings": [
 		{
 			"id": "lang",

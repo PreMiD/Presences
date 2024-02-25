@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Miodec",
 		"id": "102819690287489024"
@@ -19,7 +19,11 @@
 		"www.monkeytype.com",
 		"monkeytype.com"
 	],
-	"version": "2.0.19",
+	"matches": [
+		"*://www.monkeytype.com/*",
+		"*://monkeytype.com/*"
+	],
+	"version": "2.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Monkeytype/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Monkeytype/assets/thumbnail.png",
 	"color": "#383200",

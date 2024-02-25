@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Slowlife",
 		"id": "374905512661221377"
@@ -10,7 +10,10 @@
 		"nl": "LINE TV is een wereldwijde videostreamingservice. U kunt video-inhoud van hoge kwaliteit bekijken in verschillende categorieën, zoals tv-drama's en entertainmentprogramma's."
 	},
 	"url": "www.linetv.tw",
-	"version": "2.0.6",
+	"matches": [
+		"*://www.linetv.tw/*"
+	],
+	"version": "2.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/Line%20TV/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Line%20TV/assets/thumbnail.png",
 	"color": "#01d145",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Kazo",
 		"id": "393071912189952011"
@@ -11,7 +11,10 @@
 		"nl": "De beste plek om League of Legends esports te bekijken en beloningen te verdienen!"
 	},
 	"url": "lolesports.com",
-	"version": "1.1.19",
+	"matches": [
+		"*://lolesports.com/*"
+	],
+	"version": "1.1.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LoL%20Esports/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LoL%20Esports/assets/thumbnail.jpg",
 	"color": "#061A25",
@@ -24,5 +27,8 @@
 		"riotgames"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

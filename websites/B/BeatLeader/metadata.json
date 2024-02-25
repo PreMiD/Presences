@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "205984221859151873",
 		"name": "joerkig"
@@ -15,7 +15,11 @@
 		"royale.beatleader.xyz"
 	],
 	"regExp": ".+\\.beatleader\\.(?:xyz)|(?:net)",
-	"version": "1.7.0",
+	"matches": [
+		"*://*.beatleader.xyz/*",
+		"*://*.beatleader.net/*"
+	],
+	"version": "1.7.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/thumbnail.png",
 	"color": "#c81c9f",
@@ -30,6 +34,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": "https:\\/\\/replay\\.beatleader\\.xyz",
+	"iFrameMatches": [
+		"https://replay.beatleader.xyz/*"
+	],
 	"settings": [
 		{
 			"id": "logo",

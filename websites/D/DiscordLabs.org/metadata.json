@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Dominik",
 		"id": "594491170248458250"
@@ -11,7 +11,10 @@
 		"nl": "Bekijk onze geweldige lijst van lab goedgekeurde discord bots!"
 	},
 	"url": "bots.discordlabs.org",
-	"version": "1.2.19",
+	"matches": [
+		"*://bots.discordlabs.org/*"
+	],
+	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/DiscordLabs.org/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/DiscordLabs.org/assets/thumbnail.png",
 	"color": "#6a0dad",

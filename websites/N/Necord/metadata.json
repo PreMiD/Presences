@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "someone",
 		"id": "235413185639874561"
@@ -12,7 +12,11 @@
 		"necord.org",
 		"www.necord.org"
 	],
-	"version": "1.0.5",
+	"matches": [
+		"*://necord.org/*",
+		"*://www.necord.org/*"
+	],
+	"version": "1.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Necord/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Necord/assets/thumbnail.png",
 	"color": "#c12549",

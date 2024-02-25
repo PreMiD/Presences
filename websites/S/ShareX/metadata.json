@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Paulツ",
 		"id": "744825560034705508"
@@ -10,7 +10,10 @@
 		"fr": "ShareX est un logiciel open-source et gratuit qui vous donne la posibilitée de capturer ou enregistrer n'importe quel endroit de votre écran et le partager en appuyant sur une simple touche. ShareX peut faire beacoup d'autre choses come envoyer une image, du texte, et bien plus vers plus de 80 destinations."
 	},
 	"url": "getsharex.com",
-	"version": "1.0.17",
+	"matches": [
+		"*://getsharex.com/*"
+	],
+	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/ShareX/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/ShareX/assets/thumbnail.png",
 	"color": "#2486f1",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -10,7 +10,10 @@
 		"nl": "Bekijk online Koreaanse shows met Engelse ondertiteling in hoge kwaliteit."
 	},
 	"url": "kshow123.net",
-	"version": "2.2.22",
+	"matches": [
+		"*://kshow123.net/*"
+	],
+	"version": "2.2.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kshow123/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kshow123/assets/thumbnail.png",
 	"color": "#2daae1",
@@ -21,5 +24,8 @@
 		"kpop"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

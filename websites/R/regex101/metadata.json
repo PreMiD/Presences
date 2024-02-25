@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "theusaf",
 		"id": "193714715631812608"
@@ -9,7 +9,10 @@
 		"en": "Regular expression tester with syntax highlighting, explanation, cheat sheet for PHP/PCRE, Python, GO, JavaScript, Java, C#/.NET."
 	},
 	"url": "regex101.com",
-	"version": "1.0.8",
+	"matches": [
+		"*://regex101.com/*"
+	],
+	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/regex101/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/regex101/assets/thumbnail.png",
 	"color": "#1a2c42",

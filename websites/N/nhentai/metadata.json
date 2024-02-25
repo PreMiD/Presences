@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "TheDrop.",
 		"id": "293828021134295040"
@@ -18,7 +18,10 @@
 		"vi_VN": "nhentai là trang web hentai lưu trữ các bộ manga hentai khiêu dâm với trong nhiều ngôn ngữ khác nhau."
 	},
 	"url": "nhentai.net",
-	"version": "2.4.18",
+	"matches": [
+		"*://nhentai.net/*"
+	],
+	"version": "2.4.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/nhentai/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/nhentai/assets/thumbnail.png",
 	"color": "#eb2754",

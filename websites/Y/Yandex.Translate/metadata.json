@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -17,7 +17,10 @@
 		"translate.yandex.ua"
 	],
 	"regExp": "(translate|ceviri).yandex([.][a-z]+)+[/]",
-	"version": "1.0.18",
+	"matches": [
+		"__REPLACE_ME__"
+	],
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex.Translate/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex.Translate/assets/thumbnail.png",
 	"color": "#FF2222",

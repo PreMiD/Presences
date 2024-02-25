@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Owen",
 		"id": "246778942323818506"
@@ -10,7 +10,10 @@
 		"nl": "De ultieme kleurencollectie!"
 	},
 	"url": "www.htmlcsscolor.com",
-	"version": "1.2.19",
+	"matches": [
+		"*://www.htmlcsscolor.com/*"
+	],
+	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/htmlcsscolor/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/htmlcsscolor/assets/thumbnail.png",
 	"color": "#93C54B",

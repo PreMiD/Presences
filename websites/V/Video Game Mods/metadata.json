@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "354233941550694400",
 		"name": "Kuriel"
@@ -9,7 +9,10 @@
 		"en": "Video Game Mods is bringing modding communities together under a unified network. The original community creator retains control over the content and community for the game."
 	},
 	"url": "videogamemods.com",
-	"version": "1.0.6",
+	"matches": [
+		"*://videogamemods.com/*"
+	],
+	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Video%20Game%20Mods/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Video%20Game%20Mods/assets/thumbnail.jpeg",
 	"color": "#5362e8",

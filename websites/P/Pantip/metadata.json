@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Yusaki",
 		"id": "439582316873121793"
@@ -12,7 +12,10 @@
 	},
 	"url": "www.pantip.com",
 	"regExp": "([a-z0-9-]+[.])*pantip[.]com[/]",
-	"version": "1.0.18",
+	"matches": [
+		"*://*.pantip.com/*"
+	],
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Pantip/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Pantip/assets/thumbnail.png",
 	"color": "#9d93f5",

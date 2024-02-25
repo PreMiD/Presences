@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "SinecKers",
 		"id": "380411952666640385"
@@ -14,7 +14,11 @@
 		"www.fullprogramlarindir.com",
 		"fullprogramlarindir.com"
 	],
-	"version": "1.0.22",
+	"matches": [
+		"*://www.fullprogramlarindir.com/*",
+		"*://fullprogramlarindir.com/*"
+	],
+	"version": "1.0.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Full%20Programlar%20Indir/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Full%20Programlar%20Indir/assets/thumbnail.png",
 	"color": "#3F9EDD",

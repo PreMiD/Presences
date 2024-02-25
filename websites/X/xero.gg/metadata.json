@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Dekirai",
 		"id": "146743774909825024"
@@ -11,7 +11,10 @@
 		"nl": "xero.gg is een website Player- en Clan-database voor een privéserver van het spel S4 League."
 	},
 	"url": "xero.gg",
-	"version": "1.1.20",
+	"matches": [
+		"*://xero.gg/*"
+	],
+	"version": "1.1.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/X/xero.gg/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/X/xero.gg/assets/thumbnail.png",
 	"color": "#428DE3",

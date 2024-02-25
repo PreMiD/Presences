@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "PreMiD",
 		"id": "503557087041683458"
@@ -16,7 +16,10 @@
 		"nl": "lain game is een website die probeert de PlayStation-game 'Serial Experiments Lain' uit 1998 in webvorm te reproduceren."
 	},
 	"url": "laingame.net",
-	"version": "1.2.20",
+	"matches": [
+		"*://laingame.net/*"
+	],
+	"version": "1.2.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/lain%20game/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/lain%20game/assets/thumbnail.png",
 	"color": "#000000",

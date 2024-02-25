@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Ninja",
 		"id": "150987570715688960"
@@ -9,7 +9,10 @@
 		"en": "BigRig.FM is the No.1 Country Music Station, providing round the clock entertainment broadcasting your county classics and the hits of today."
 	},
 	"url": "bigrig.fm",
-	"version": "1.0.6",
+	"matches": [
+		"*://bigrig.fm/*"
+	],
+	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BigRigFM/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BigRigFM/assets/thumbnail.png",
 	"color": "#e57215",
