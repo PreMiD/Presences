@@ -55,7 +55,10 @@
 		"www.netflix.com",
 		"netflix.com"
 	],
-	"version": "5.2.6",
+	"matches": [
+		"*://*.netflix.com/*"
+	],
+	"version": "5.2.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/thumbnail.jpg",
 	"color": "#db0000",
@@ -166,6 +169,5 @@
 			"icon": "fad fa-images",
 			"value": true
 		}
-	],
-	"matches": ["*://*.netflix.com/*"]
+	]
 }

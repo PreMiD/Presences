@@ -71,7 +71,11 @@
 		"www.youtube.com",
 		"studio.youtube.com"
 	],
-	"version": "5.10.2",
+	"matches": [
+		"*://www.youtube.com/*",
+		"*://studio.youtube.com/*"
+	],
+	"version": "5.10.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/thumbnail.jpg",
 	"color": "#E40813",
@@ -170,6 +174,5 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	],
-	"matches": ["*://www.youtube.com/*", "*://studio.youtube.com/*"]
+	]
 }
