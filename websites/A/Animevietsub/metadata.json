@@ -37,5 +37,7 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	]
+	],
+	"matches": ["*://animevietsub.io/*"],
+	"iFrameMatches": ["*://*/*"]
 }

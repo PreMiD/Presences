@@ -24,5 +24,6 @@
 	"tags": [
 		"stopots",
 		"games"
-	]
+	],
+		"matches": ["*://stopots.com/*"]
 }

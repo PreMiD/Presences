@@ -50,5 +50,6 @@
 			"title": "Show Cover",
 			"value": true
 		}
-	]
+	],
+	"matches": ["*://*.historyvault.com/*"]
 }

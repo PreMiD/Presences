@@ -45,5 +45,6 @@
 				"privacy": false
 			}
 		}
-	]
+	],
+		"matches": ["*://www.marktplaats.nl/*", "*://help.marktplaats.nl/*"]
 }

@@ -55,5 +55,6 @@
 				"privacy": false
 			}
 		}
-	]
+	],
+		"matches": ["*://tubitv.com/*"]
 }

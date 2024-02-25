@@ -34,5 +34,6 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	]
+	],
+		"matches": ["*://mediafire.zendesk.com/*", "*://*.mediafire.com/*"]
 }

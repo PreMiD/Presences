@@ -57,5 +57,5 @@
 			"value": "%tags%",
 			"placeholder": "%tags%, %director%, %locationAndDate%, %minutes% or {0}"
 		}
-	]
+	], "matches": ["*://mubi.com/*"]
 }

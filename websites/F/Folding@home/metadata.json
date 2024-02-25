@@ -28,5 +28,7 @@
 		"foldingathome"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"matches": ["*://client.foldingathome.org/*"],
+	"iFrameMatches": ["*://*/*"]
 }

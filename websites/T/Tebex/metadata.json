@@ -33,5 +33,6 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	]
+	],
+		"matches": ["*://*.buycraft.net/*", "*://*.tebex.io/*"]
 }

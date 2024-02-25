@@ -47,5 +47,6 @@
 				"privacy": false
 			}
 		}
-	]
+	],
+	"matches": ["*://worldhideaway.com/*"]
 }

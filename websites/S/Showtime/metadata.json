@@ -77,5 +77,5 @@
 				"Skyshowtime"
 			]
 		}
-	]
+	], "matches": ["*://www.skyshowtime.com/*", "*://www.sho.com/*", "*://www.showtime.com/*"]
 }

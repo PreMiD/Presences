@@ -56,5 +56,6 @@
 				"privacy": false
 			}
 		}
-	]
+	],
+	"matches": ["*://www.q-dance.com/*"]
 }

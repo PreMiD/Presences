@@ -32,5 +32,6 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	]
+	],
+	"matches": ["*://archive.org/*", "*://web.archive.org/*", "*://www.web.archive.org/*"]
 }

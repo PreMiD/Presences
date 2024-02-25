@@ -35,5 +35,6 @@
 			"icon": "fad fa-user-secret",
 			"value": true
 		}
-	]
+	],
+	"matches": ["*://mail.yahoo.com/*"]
 }

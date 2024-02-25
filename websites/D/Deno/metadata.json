@@ -48,5 +48,6 @@
 				"privacy": false
 			}
 		}
-	]
+	],
+		"matches": ["*://*.deno.land/*", "*://*.deno.com", "*://deno.news/*", "*://wdenostatus.com/*"]
 }

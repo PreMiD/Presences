@@ -22,5 +22,6 @@
 		"stream",
 		"streaming",
 		"sharing"
-	]
+	],
+	"matches": ["*://*.doodstreams.*/*", "*://*.doods.*/*"]
 }

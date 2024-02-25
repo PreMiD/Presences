@@ -35,5 +35,6 @@
 			"icon": "fad fa-album",
 			"value": true
 		}
-	]
+	],
+		"matches": ["*://*.cdkeys.com/*"]
 }

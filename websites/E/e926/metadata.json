@@ -47,5 +47,6 @@
 				"privacy": false
 			}
 		}
-	]
+	],
+	"matches": ["*://e926.net/*"]
 }

@@ -27,5 +27,6 @@
 		"direct",
 		"links",
 		"radio"
-	]
+	],
+	"matches": ["*://flavibot.xyz/*"]
 }

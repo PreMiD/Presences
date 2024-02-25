@@ -52,5 +52,6 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	]
+	],
+		"matches": ["*://uktvplay.uktv.co.uk/*", "*://uktvplay.co.uk/*"]
 }

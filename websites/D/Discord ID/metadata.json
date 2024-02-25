@@ -43,5 +43,6 @@
 			"icon": "fad fa-album",
 			"value": false
 		}
-	]
+	],
+		"matches": ["*://*.discord.id/*"],
 }

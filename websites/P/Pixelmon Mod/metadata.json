@@ -31,5 +31,6 @@
 				"Disable"
 			]
 		}
-	]
+	],
+	"matches": ["*://pixelmonnod.com/*"]
 }

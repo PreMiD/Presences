@@ -35,5 +35,6 @@
 				"Volledig Privé"
 			]
 		}
-	]
+	],
+		"matches": ["*://*.buienalarm.nl/*"]
 }

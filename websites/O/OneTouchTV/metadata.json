@@ -21,5 +21,7 @@
 		"serie"
 	],
 	"iframe": true,
-	"iFrameRegExp": "s[0-9]?[.]devcorp[.]me"
+	"iFrameRegExp": "s[0-9]?[.]devcorp[.]me",
+	"matches": ["*://*.onetouch.*/*"],
+	"iFrameMatches": ["*://s*.devcopr.me/*"]
 }

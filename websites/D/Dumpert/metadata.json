@@ -46,5 +46,6 @@
 				"privacy": false
 			}
 		}
-	]
+	],
+	"matches": ["*://*.dumpert.nl/*"]
 }

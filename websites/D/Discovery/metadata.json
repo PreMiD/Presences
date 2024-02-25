@@ -54,5 +54,6 @@
 				"privacy": false
 			}
 		}
-	]
+	],
+		"matches": ["*://*.discoveryplus.com/*", "*://*.discovery.com/*"]
 }

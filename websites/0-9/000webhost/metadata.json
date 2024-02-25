@@ -41,5 +41,6 @@
 				"privacy": false
 			}
 		}
-	]
+	],
+	"matches": ["*://*.000webhost.com/*"]
 }

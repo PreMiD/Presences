@@ -47,5 +47,6 @@
 			"title": "Show Cover",
 			"value": true
 		}
-	]
+	],
+	"matches": ["*://www.scribd.com/*"]
 }

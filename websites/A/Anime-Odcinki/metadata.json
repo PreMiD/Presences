@@ -50,5 +50,7 @@
 				"Black"
 			]
 		}
-	]
+	],
+	"matches": ["*://anime-odcinki.pl/*"],
+	"iFrameMatches": ["*://*/*"]
 }

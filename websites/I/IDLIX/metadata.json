@@ -8,7 +8,8 @@
 	"description": {
 		"en": "Watch the latest movies, TV series, dramas, anime with high quality available in Indonesian subtitles and updated every day. Box Office Movies to the Best TV Series are all available on the IDLIX site."
 	},
-	"url": "tv.idlixofficial.co",
+	"url": "idlix.com",
+	"regExp": "((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.](25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[/])|((tv[.])?idlix(plus)?[.]net)|((tv[.])?idlix(official)?[.]co)",
 	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/IDLIX/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/IDLIX/assets/thumbnail.png",
@@ -51,5 +52,7 @@
 				"privacy": false
 			}
 		}
-	]
+	],
+	"matches": ["*://*.idlix*.*/*", "*://*/*"],
+	"iFrameMatches": ["*://jeniusplay.com/*"]
 }

@@ -23,5 +23,6 @@
 		"friends",
 		"gaming",
 		"game"
-	]
+	],
+	"matches": ["*://*.epal.gg/*"]
 }

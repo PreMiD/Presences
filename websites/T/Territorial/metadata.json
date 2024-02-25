@@ -31,5 +31,6 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	]
+	],
+		"matches": ["*://www.territorial.io/*", "*://territorial.io/*"]
 }

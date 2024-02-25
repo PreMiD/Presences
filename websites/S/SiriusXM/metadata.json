@@ -27,5 +27,6 @@
 	"tags": [
 		"music",
 		"radio"
-	]
+	],
+	"matches": ["*://player.siriusxm.com/*", "*://player.siriusxm.ca/*"]
 }
