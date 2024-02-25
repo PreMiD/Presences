@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Dzlandis",
 		"id": "259708781166985217"
@@ -9,7 +9,7 @@
 		"en": "Ko-fi lets creators receive support from fans of their content for the price of a coffee!"
 	},
 	"url": "ko-fi.com",
-	"version": "1.0.16",
+	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Ko-Fi/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Ko-Fi/assets/thumbnail.png",
 	"color": "#28AAE0",

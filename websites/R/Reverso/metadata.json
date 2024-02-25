@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Kozou",
 		"id": "379362415428632576"
@@ -17,7 +17,7 @@
 	},
 	"url": "www.reverso.net",
 	"regExp": "([a-z0-9-_]+)[.]reverso[.]net",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Reverso/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Reverso/assets/thumbnail.png",
 	"color": "#0970ac",

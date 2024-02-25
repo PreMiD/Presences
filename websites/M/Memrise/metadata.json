@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "135058085386387457",
 		"name": "Extiriority"
@@ -15,7 +15,7 @@
 		"www.memrise.com",
 		"community.memrise.com"
 	],
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Memrise/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Memrise/assets/thumbnail.png",
 	"color": "#ffda3e",

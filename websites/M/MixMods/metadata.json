@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Pequeno",
 		"id": "323577179814494209"
@@ -13,7 +13,7 @@
 		"nl": "MixMods is een Braziliaanse mod-website voor GTA en andere games, opgericht door Junior_Djjr, is de grootste mod-website uit Latijns-Amerika."
 	},
 	"url": "www.mixmods.com.br",
-	"version": "1.2.19",
+	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MixMods/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MixMods/assets/thumbnail.png",
 	"color": "#640aa1",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -12,7 +12,7 @@
 		"territorial.io",
 		"www.territorial.io"
 	],
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Territorial/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Territorial/assets/thumbnail.jpg",
 	"color": "#07283C",

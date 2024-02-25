@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Rare Akuma ☆",
 		"id": "250044591686811669"
@@ -12,7 +12,7 @@
 	},
 	"url": "cuevana3.nu",
 	"regExp": "((www)?(wvw)?(ww)?([0-9]?[0-9])?[.])?(cuevana).*[.].*",
-	"version": "3.1.1",
+	"version": "3.1.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Cuevana%203/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Cuevana%203/assets/thumbnail.png",
 	"color": "#007AFF",

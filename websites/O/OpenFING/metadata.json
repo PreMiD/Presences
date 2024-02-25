@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Extra",
 		"id": "351816851380109332"
@@ -10,7 +10,7 @@
 		"es": "OpenFING es un proyecto estudiantil dedicado a digitalizar los cursos impartidos en la Facultad de Ingeniería de la UdelaR (Uruguay)."
 	},
 	"url": "open.fing.edu.uy",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/OpenFING/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/OpenFING/assets/thumbnail.png",
 	"color": "#4384fa",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Mokocchi",
 		"id": "503568040001273877"
@@ -13,7 +13,7 @@
 		"www.neko-sama.fr",
 		"neko-sama.fr"
 	],
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Neko-sama.fr/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Neko-sama.fr/assets/thumbnail.png",
 	"color": "#1CB9F4",

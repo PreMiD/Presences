@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -16,7 +16,7 @@
 		"boardgame-online.com",
 		"www.boardgame-online.com"
 	],
-	"version": "1.1.29",
+	"version": "1.1.30",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Online/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Online/assets/thumbnail.png",
 	"color": "#EF3A26",

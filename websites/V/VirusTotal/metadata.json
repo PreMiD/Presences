@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "MauriceX",
 		"id": "268768664411439115"
@@ -12,7 +12,7 @@
 		"nl": "Controleer elke software op uw veiligheid"
 	},
 	"url": "www.virustotal.com",
-	"version": "1.4.21",
+	"version": "1.4.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/VirusTotal/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/VirusTotal/assets/thumbnail.png",
 	"color": "#397eff",

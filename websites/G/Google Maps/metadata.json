@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Tofuine",
 		"id": "734631480541708291"
@@ -10,7 +10,7 @@
 	},
 	"url": "www.google.com",
 	"regExp": "www\\.google\\.com\\/maps",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Maps/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Maps/assets/thumbnail.png",
 	"color": "#4e85f2",

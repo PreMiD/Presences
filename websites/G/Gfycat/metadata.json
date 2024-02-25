@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Lacking",
 		"id": "132693143173857281"
@@ -10,7 +10,7 @@
 		"nl": "Gfycat is de topbestemming voor GIFs en video's. Maak je eigen GIF of blader door de beste gaming GIF's, reacties GIF's, grappige GIF's en meer."
 	},
 	"url": "gfycat.com",
-	"version": "1.2.21",
+	"version": "1.2.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Gfycat/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Gfycat/assets/thumbnail.png",
 	"color": "#3aa8ff",
