@@ -8,7 +8,7 @@
 	"description": {
 		"en": "The place for your favorite movies & shows"
 	},
-	"url": "movie-web.app",
+	"url": ["movie-web.app", "mw.lonelil.com", "mv-web.netlify.app"],
 	"regExp": "(dev[.])?(movie-web[.]app)",
 	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/logo.png",
