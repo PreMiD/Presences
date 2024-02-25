@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Kyrie",
 		"id": "368399721494216706"
@@ -10,7 +10,7 @@
 		"vi_VN": "VGMdb là dự án cộng đồng dành riêng cho việc lưu trữ âm nhạc và tranh ảnh của trò chơi điện tử."
 	},
 	"url": "vgmdb.net",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/thumbnail.png",
 	"color": "#B90000",

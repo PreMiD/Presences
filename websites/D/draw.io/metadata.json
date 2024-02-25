@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "348083986989449216",
 		"name": "hopperelec"
@@ -9,7 +9,7 @@
 		"en": "draw.io or diagrams.net is a configurable diagramming/whiteboarding visualization application"
 	},
 	"url": "app.diagrams.net",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/draw.io/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/draw.io/assets/thumbnail.png",
 	"color": "#d89000",

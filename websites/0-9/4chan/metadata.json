@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "623396579960946690",
 		"name": "bear_"
@@ -12,7 +12,7 @@
 		"www.4chan.org",
 		"4chan.org"
 	],
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/0-9/4chan/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/0-9/4chan/assets/thumbnail.png",
 	"color": "#789922",

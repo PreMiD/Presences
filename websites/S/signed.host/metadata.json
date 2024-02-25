@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "439084103690616844",
 		"name": "MalwarePad"
@@ -16,7 +16,7 @@
 		"signed.host",
 		"bio.signed.host"
 	],
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/signed.host/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/signed.host/assets/thumbnail.png",
 	"color": "#37b2eb",

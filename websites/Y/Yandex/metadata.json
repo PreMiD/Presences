@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "257151906038677504",
 		"name": "SHISEN"
@@ -13,7 +13,7 @@
 		"ya.ru",
 		"yandex.ru"
 	],
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex/assets/thumbnail.png",
 	"color": "#ff3333",

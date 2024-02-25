@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Sarcaster!",
 		"id": "592707660604899328"
@@ -12,7 +12,7 @@
 		"sofi.gg",
 		"gems.sofi.gg"
 	],
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Sofi/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Sofi/assets/thumbnail.png",
 	"color": "#EC91C8",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Viruz",
 		"id": "158973226465230848"
@@ -11,7 +11,7 @@
 		"nl": "LISTEN.moe is een door fans gemaakte website die 24/7 anime / Japanse / Doujin-muziek wil spelen"
 	},
 	"url": "listen.moe",
-	"version": "1.2.23",
+	"version": "1.2.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LISTEN.moe/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LISTEN.moe/assets/thumbnail.png",
 	"color": "#ff015b",

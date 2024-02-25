@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "202740603790819328",
+		"name": "aimslut"
+	},
+	"service": "Amazon Kindle",
+	"description": {
+		"en": "Access and read millions of titles instantly and comfortably on your phone, tablet, or computer."
+	},
+	"url": [
+		"lesen.amazon.de",
+		"read.amazon.com"
+	],
+	"version": "1.0.2",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Amazon%20Kindle/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Amazon%20Kindle/assets/thumbnail.jpg",
+	"color": "#FDEE00",
+	"category": "other",
+	"tags": [
+		"books"
+	]
+}

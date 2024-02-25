@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -11,7 +11,7 @@
 		"ga_IE": "Is raidió ar líne saor in aisce, faoi thiomáint ag an bpobal é UpBeat."
 	},
 	"url": "upbeatradio.net",
-	"version": "3.2.26",
+	"version": "3.2.27",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/U/UpBeatRadio/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/UpBeatRadio/assets/thumbnail.png",
 	"color": "#212121",

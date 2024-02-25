@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "The Gamerzs",
 		"id": "730142125181894657"
@@ -14,7 +14,7 @@
 		"nl": "WoolyPooly is een van de meest winstgevende pools met onze focus op minimale commissiekosten voor PPLNS & SOLO-beloningssystemen."
 	},
 	"url": "woolypooly.com",
-	"version": "1.1.20",
+	"version": "1.1.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/thumbnail.png",
 	"color": "#3d89f5",

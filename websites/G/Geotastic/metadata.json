@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Nate",
 		"id": "196817730257551360"
@@ -10,7 +10,7 @@
 		"fr": "Geotastic est un jeu de devinette de localisation géographique créé par Eduard But de Edutastic Games."
 	},
 	"url": "geotastic.net",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Geotastic/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Geotastic/assets/thumbnail.png",
 	"color": "#39bf7a",

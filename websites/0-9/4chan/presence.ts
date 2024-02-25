@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = document.location;
+		{ href, pathname } = document.location;
 
 	if (pathname === "/") presenceData.details = "Viewing the front page";
 	else if (pathname.startsWith("/faq"))
@@ -111,6 +111,13 @@ presence.on("UpdateData", async () => {
 		if (pathname.includes("/thread/")) {
 			const threadNum = pathname.split("/").at(-1),
 				threadSubject = document.querySelector(".subject").textContent;
+
+			presenceData.buttons = [
+				{
+					label: "View Thread",
+					url: href,
+				},
+			];
 
 			if (threadSubject)
 				presenceData.state = `>>${threadNum} - "${threadSubject}"`;

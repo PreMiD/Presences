@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "354233941550694400",
 		"name": "Kuriel"
@@ -10,7 +10,7 @@
 		"pt_BR": "TabNews é um site com conteúdo para quem trabalha com Programação e Tecnologia."
 	},
 	"url": "www.tabnews.com.br",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TabNews/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TabNews/assets/thumbnail.png",
 	"color": "#ffffff",

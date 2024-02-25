@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "272665050672660501",
 		"name": "Shiroko"
@@ -14,7 +14,7 @@
 		"anime.tempestfansub.com",
 		"ecchi.tempestfansub.com"
 	],
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/thumbnail.png",
 	"color": "#349eeb",
