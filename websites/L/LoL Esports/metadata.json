@@ -29,6 +29,7 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://player.twitch.tv/*",
+		"*://www.youtube.com/*"
 	]
 }
