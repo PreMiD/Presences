@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "1145729748803272815",
+		"name": "mallusrgreat"
+	},
+	"service": "neal.fun",
+	"description": {
+		"en": "Play various small games on the web"
+	},
+	"url": "neal.fun",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/sWGQF3D.png",
+	"thumbnail": "https://i.imgur.com/WN5AJ0F.png",
+	"color": "#606060",
+	"category": "games",
+	"matches": ["*://neal.fun/*"],
+	"tags": [
+		"games",
+		"neal",
+		"online",
+		"web"
+	],
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fa-regular fa-rectangle-list",
+			"value": true
+		},
+		{
+			"id": "location",
+			"title": "Show Location in Street View",
+			"icon": "fas fa-location-crosshairs",
+			"value": true
+		}
+	]
+}
