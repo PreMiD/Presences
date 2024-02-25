@@ -23,7 +23,8 @@
 	],
 	"regExp": "([a-z0-9-]+[.])*pornhub[.]com[/]|([a-z0-9-]+[.])*pornhubpremium[.]com[/]",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://*.pornhub.com/*",
+		"*://*.pornhubpremium.com/*"
 	],
 	"version": "2.2.25",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PornHub/assets/logo.jpg",
