@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Callum",
 		"id": "506899274748133376"
@@ -79,7 +79,7 @@
 		"www.theuselessweb.com",
 		"theuselessweb.com"
 	],
-	"version": "1.2.18",
+	"version": "1.2.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/The%20useless%20web/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/The%20useless%20web/assets/thumbnail.png",
 	"color": "#ae3484",

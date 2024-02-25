@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Dark_Ville",
 		"id": "638080361179512853"
@@ -11,7 +11,7 @@
 		"vi_VN": "Chơi các trò chơi trực tuyến miễn phí tại armorgames."
 	},
 	"url": "armorgames.com",
-	"version": "1.1.6",
+	"version": "1.1.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Armorgames/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Armorgames/assets/thumbnail.jpg",
 	"color": "#9ed2de",

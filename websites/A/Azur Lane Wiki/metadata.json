@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -12,7 +12,7 @@
 		"vi_VN": "Wiki Azur Lane bằng Tiếng Anh!"
 	},
 	"url": "azurlane.koumakan.jp",
-	"version": "1.2.18",
+	"version": "1.2.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Azur%20Lane%20Wiki/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Azur%20Lane%20Wiki/assets/thumbnail.png",
 	"color": "#eae0ed",

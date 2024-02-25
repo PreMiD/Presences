@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "AlbaySIMSEK",
 		"id": "432476132609228800"
@@ -14,7 +14,7 @@
 		"turkhackteam.org",
 		"www.turkhackteam.org"
 	],
-	"version": "1.2.18",
+	"version": "1.2.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/T%C3%BCrk%20Hack%20Team/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/T%C3%BCrk%20Hack%20Team/assets/thumbnail.png",
 	"color": "#1c1c1c",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "408597063098695692",
 		"name": "happypossum"
@@ -9,7 +9,7 @@
 		"en": "A presence for the LCPDFR website! This is a community for GTA V players who mod their game to play as police officers. LCPDFR's popularity has grown rapidly since its release in 2009, and it has become one of the most popular GTA V mods worldwide."
 	},
 	"url": "www.lcpdfr.com",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LCPDFR/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LCPDFR/assets/thumbnail.jpg",
 	"color": "#4c70ec",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -18,7 +18,7 @@
 		"support.fire-emblem-heroes.com"
 	],
 	"regExp": "(.*[.])?fire-emblem-heroes[.]com[/]",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Fire%20Emblem%20Heroes/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Fire%20Emblem%20Heroes/assets/thumbnail.jpg",
 	"color": "#f8d230",

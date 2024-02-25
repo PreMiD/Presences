@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "tuhana",
 		"id": "852582281112715284"
@@ -14,7 +14,7 @@
 		"www.blockbench.net",
 		"web.blockbench.net"
 	],
-	"version": "1.1.14",
+	"version": "1.1.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Blockbench/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Blockbench/assets/thumbnail.png",
 	"color": "#1E93D9",

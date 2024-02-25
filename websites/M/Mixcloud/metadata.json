@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Eai",
 		"id": "132779412771962880"
@@ -23,7 +23,7 @@
 		"nl": "Luister gratis naar de beste DJ's en radiopresentatoren ter wereld."
 	},
 	"url": "www.mixcloud.com",
-	"version": "1.2.23",
+	"version": "1.2.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Mixcloud/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Mixcloud/assets/thumbnail.jpg",
 	"color": "#5000ff",

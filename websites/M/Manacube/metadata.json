@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Jackelele",
 		"id": "377175513372033024"
@@ -10,7 +10,7 @@
 	},
 	"url": "manacube.com",
 	"regExp": "([a-z0-9-]+[.])*manacube[.]com[/]",
-	"version": "1.0.13",
+	"version": "1.0.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Manacube/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Manacube/assets/thumbnail.png",
 	"color": "#06D1DF",

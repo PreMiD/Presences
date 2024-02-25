@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Angelo II",
 		"id": "698966790356729907"
@@ -10,7 +10,7 @@
 		"bg": "Аниме, манга и азиатска култура"
 	},
 	"url": "animes-portal.info",
-	"version": "1.0.17",
+	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/thumbnail.jpg",
 	"color": "#365AA8",
