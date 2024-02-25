@@ -9,12 +9,14 @@
 		"en": "Play various small games on the web"
 	},
 	"url": "neal.fun",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/sWGQF3D.png",
-	"thumbnail": "https://i.imgur.com/WN5AJ0F.png",
+	"matches": [
+		"*://neal.fun/*"
+	],
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/neal.fun/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/neal.fun/assets/thumbnail.png",
 	"color": "#606060",
 	"category": "games",
-	"matches": ["*://neal.fun/*"],
 	"tags": [
 		"games",
 		"neal",
