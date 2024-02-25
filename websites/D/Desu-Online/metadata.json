@@ -20,7 +20,7 @@
 		"anime"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*",
+	"iFrameRegExp": "cda[.]pl|google[.]com|mega[.nz]|dailymotion[.]com|sibnet[.]ru|fileditchstuff[.]me|yourupload[.]com|vk[.]com|wolfstream[.]tv|ok[.]ru",
 	"iFrameMatches": ["*://*.cda.pl/*", "*://*.google.com/*", "*://*.mega.nz/*", "*://*.dailymotion.com/*", "*://*.sibnet.ru/*", "*://*.fileditchstuff.me/*", "*://*.yourupload.com/*", "*://*.vk.com/*", "*://*.wolfstream.tv/*", "*://*.ok.ru/*"],
 	"matches": ["*://desu-online.pl/*"]
 }
