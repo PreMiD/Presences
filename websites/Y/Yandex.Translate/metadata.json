@@ -18,7 +18,8 @@
 	],
 	"regExp": "(translate|ceviri).yandex([.][a-z]+)+[/]",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://translate.yandex.com/*",
+		"*://translate.yandex.ru/*"
 	],
 	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex.Translate/assets/logo.png",
