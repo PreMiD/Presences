@@ -30,7 +30,7 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://ok.ru/*"
 	],
 	"settings": [
 		{
