@@ -16,7 +16,7 @@
 	"regExp": "www[.]office[.]com|([a-z0-9-_]+)[-]my[.]sharepoint[.]com|onedrive[.]live[.]com",
 	"matches": [
 		"*://www.office.com/*",
-		"*://www.sharepoint.com/*",
+		"*://*.sharepoint.com/*",
 		"*://onedrive.live.com/*"
 	],
 	"version": "1.0.8",
@@ -33,7 +33,9 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://www.office.com/*",
+		"*://*.sharepoint.com/*",
+		"*://onedrive.live.com/*"
 	],
 	"settings": [
 		{
