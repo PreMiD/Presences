@@ -12,7 +12,11 @@
 	"url": "scratch.mit.edu",
 	"regExp": "([a-z0-9-]+[.])*(scratch|scratchfoundation|scratch-wiki|donationpay|scratched[.]gse[.]harvard|scratchjr)[.](mit[.]edu|org|info|edu)[/]",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://*.scratch.mit.edu/*",
+		"*://www.scratchjr.org/*",
+		"*://scratched.gse.harvard.edu/*",
+		"*://*.scratch-wiki.info/*",
+		"*://scratchfoundation.org/*"
 	],
 	"version": "1.3.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Scratch/assets/logo.png",
