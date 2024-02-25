@@ -23,5 +23,6 @@
 		"reviews",
 		"hardware",
 		"software"
-	]
+	],
+	"matches": ["*://*.tomshardware.com/*"]
 }

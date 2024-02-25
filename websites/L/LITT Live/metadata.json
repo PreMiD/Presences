@@ -18,5 +18,6 @@
 	"tags": [
 		"radio",
 		"music"
-	]
+	],
+	"matches": ["*://littlive.com/*", "*://www.littlive.com/*"]
 }
