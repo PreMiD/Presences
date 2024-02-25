@@ -13,9 +13,9 @@ let songName: HTMLElement,
 	thumbnail: HTMLImageElement;
 
 presence.on("UpdateData", async () => {
-	if (document.getElementsByClassName("MuiPaper-elevation")[0] && document.getElementsByClassName("MuiPaper-elevation")[0].childNodes[1]) {
-		thumbnail = document.getElementsByClassName("MuiPaper-elevation")[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0] as HTMLImageElement;
-	}
+	if (document.querySelectorAll(".MuiPaper-elevation")[0] && document.querySelectorAll(".MuiPaper-elevation")[0].childNodes[1]) 
+		thumbnail = document.querySelectorAll(".MuiPaper-elevation")[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0] as HTMLImageElement;
+	
 	const presenceData: PresenceData = {
 		largeImageKey:
 			thumbnail ? thumbnail : "logo",
