@@ -4,15 +4,15 @@
 		"name": "apprehends",
 		"id": "202236922217758721"
 	},
-	"service": "Dash Radio",
+	"service": "LITT Live",
 	"description": {
 		"en": "100% Free Music. More Variety. Zero Commercials. The Best DJ's & Stations. No BS",
 		"nl": "100% gratis muziek. Meer afwisseling. Geen reclames. De beste dj's en stations. Geen BS"
 	},
-	"url": "dashradio.com",
-	"version": "1.0.17",
-	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Dash%20Radio/assets/logo.png",
-	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Dash%20Radio/assets/thumbnail.png",
+	"url": "littlive.com",
+	"version": "1.1.0",
+	"logo": "https://cdn.discordapp.com/app-assets/575756169986048004/1211339369386999808.png",
+	"thumbnail": "https://cdn.discordapp.com/app-assets/575756169986048004/1211339525565976606.png",
 	"color": "#55effa",
 	"category": "music",
 	"tags": [

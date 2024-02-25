@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "761889098490183691",
+		clientId: "575756169986048004",
 	}),
 	strings = presence.getStrings({
 		play: "general.playing",
@@ -9,12 +9,16 @@ const presence = new Presence({
 let songName: HTMLElement,
 	songArtist: HTMLElement,
 	songNameS: string,
-	songArtistS: string;
+	songArtistS: string,
+	thumbnail: HTMLImageElement;
 
 presence.on("UpdateData", async () => {
+	if (document.getElementsByClassName("MuiPaper-elevation")[0] && document.getElementsByClassName("MuiPaper-elevation")[0].childNodes[1]) {
+		thumbnail = document.getElementsByClassName("MuiPaper-elevation")[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0] as HTMLImageElement;
+	}
 	const presenceData: PresenceData = {
 		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/D/Dash%20Radio/assets/logo.png",
+			thumbnail ? thumbnail : "logo",
 	};
 
 	songName = document.querySelector(
