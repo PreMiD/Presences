@@ -22,7 +22,7 @@
 	"url": "drive.google.com",
 	"regExp": "drive[.]google([.][a-z]+)+[/]",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://drive.google.com/*"
 	],
 	"version": "1.6.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Drive/assets/logo.png",

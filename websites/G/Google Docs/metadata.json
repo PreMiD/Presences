@@ -22,7 +22,7 @@
 	"url": "docs.google.com",
 	"regExp": "docs[.]google([.][a-z]+)+[/]",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://docs.google.com/*"
 	],
 	"version": "1.4.28",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Docs/assets/logo.png",

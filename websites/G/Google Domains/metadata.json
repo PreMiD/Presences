@@ -12,7 +12,8 @@
 	},
 	"url": "domains.google.com",
 	"matches": [
-		"*://domains.google.com/*"
+		"*://domains.google.com/*",
+		"*://domains.google/*"
 	],
 	"version": "1.0.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Domains/assets/logo.jpg",
