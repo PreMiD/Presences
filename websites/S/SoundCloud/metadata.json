@@ -27,9 +27,9 @@
 	},
 	"url": "soundcloud.com",
 	"matches": [
-		"*://soundcloud.com/*"
+		"*://*.soundcloud.com/*"
 	],
-	"version": "2.4.11",
+	"version": "2.4.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SoundCloud/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SoundCloud/assets/thumbnail.jpg",
 	"color": "#FF7E30",

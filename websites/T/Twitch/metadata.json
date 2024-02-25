@@ -42,18 +42,9 @@
 		"status.twitch.tv"
 	],
 	"matches": [
-		"*://www.twitch.tv/*",
-		"*://dashboard.twitch.tv/*",
-		"*://brand.twitch.tv/*",
-		"*://blog.twitch.tv/*",
-		"*://help.twitch.tv/*",
-		"*://affiliate.twitch.tv/*",
-		"*://dev.twitch.tv/*",
-		"*://discuss.dev.twitch.tv/*",
-		"*://devstatus.twitch.tv/*",
-		"*://status.twitch.tv/*"
+		"*://*.twitch.tv/*"
 	],
-	"version": "3.2.13",
+	"version": "3.2.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Twitch/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Twitch/assets/thumbnail.png",
 	"color": "#9146FF",
