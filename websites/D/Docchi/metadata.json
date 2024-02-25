@@ -22,7 +22,7 @@
 		"subs"
 	],
 	"iframe": true,
-	"iFrameRegExp": "cda[.]pl|google[.]com|mega[.]nz|dailymotion[.]com|video[.]sibnet[.]ru",
+	"iFrameMatches": ["*://*.cda.pl/*", "*://*.google.com/*", "*://*.mega.nz/*", "*://*.dailymotion.com/*", "*://*.sibnet.ru/*"],
 	"settings": [
 		{
 			"id": "privacy",
@@ -39,5 +39,6 @@
 				"privacy": false
 			}
 		}
-	]
+	],
+	"matches": ["*://*.docchi.pl/*"]
 }
