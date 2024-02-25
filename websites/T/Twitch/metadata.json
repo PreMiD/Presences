@@ -41,7 +41,7 @@
 		"devstatus.twitch.tv",
 		"status.twitch.tv"
 	],
-	"version": "3.2.13",
+	"version": "3.2.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Twitch/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Twitch/assets/thumbnail.png",
 	"color": "#9146FF",
@@ -165,5 +165,6 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	]
+	],
+	"matches": ["*://*.twitch.tv/*"]
 }
