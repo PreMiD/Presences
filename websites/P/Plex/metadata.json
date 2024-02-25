@@ -13,7 +13,8 @@
 	"url": "www.plex.tv",
 	"regExp": "(([a-z0-9-]+[.])*plex[.]tv[/])|( *[/]web[/]index[.]html#)",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://*.plex.tv/*",
+		"*://*/web/index.html"
 	],
 	"version": "1.9.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Plex/assets/logo.png",
