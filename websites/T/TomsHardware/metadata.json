@@ -11,7 +11,7 @@
 	},
 	"url": "tomshardware.com",
 	"regExp": "([a-z0-9-]+[.])*tomshardware[.]com[/]",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TomsHardware/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TomsHardware/assets/thumbnail.png",
 	"color": "#e03c3c",
@@ -23,5 +23,6 @@
 		"reviews",
 		"hardware",
 		"software"
-	]
+	],
+	"matches": ["*://*.tomshardware.com/*"]
 }
