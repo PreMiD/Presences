@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 	
 	const presenceData: PresenceData = {
 		largeImageKey:
-			thumbnail ?? "logo",
+			thumbnail ?? "https://cdn.discordapp.com/app-assets/575756169986048004/1211339369386999808.png?size=512",
 	};
 
 	songName = document.querySelector(
