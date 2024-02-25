@@ -44,5 +44,5 @@
 			"value": false
 		}
 	],
-		"matches": ["*://*.discord.id/*"],
+		"matches": ["*://*.discord.id/*"]
 }
