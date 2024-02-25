@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "1145729748803272815",
 		"name": "mallusrgreat"
@@ -14,6 +14,7 @@
 	"thumbnail": "https://i.imgur.com/WN5AJ0F.png",
 	"color": "#606060",
 	"category": "games",
+	"matches": ["*://neal.fun/*"],
 	"tags": [
 		"games",
 		"neal",
