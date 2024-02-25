@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 	
 	const presenceData: PresenceData = {
 		largeImageKey:
-			thumbnail ? thumbnail : "logo",
+			thumbnail ?? "logo",
 	};
 
 	songName = document.querySelector(
