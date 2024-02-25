@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "334411435633541121",
-		"name": "Meffiu"
+		"name": "meffiu"
 	},
 	"service": "Desu-Online",
 	"description": {
@@ -20,5 +20,6 @@
 		"anime"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameMatches": ["*://*.cda.pl/*", "*://*.google.com/*", "*://*.mega.nz/*", "*://*.dailymotion.com/*", "*://*.sibnet.ru/*", "*://*.fileditchstuff.me/*", "*://*.yourupload.com/*", "*://*.vk.com/*", "*://*.wolfstream.tv/*", "*://*.ok.ru/*"],
+	"matches": ["*://desu-online.pl/*"]
 }
