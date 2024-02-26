@@ -28,7 +28,7 @@
 	"iframe": true,
 	"iFrameRegExp": "(.*[.])?(youtube)([.].*)",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://www.youtube.com/*"
 	],
 	"settings": [
 		{
