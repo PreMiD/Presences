@@ -10,7 +10,10 @@
 		"pl": "Najlepsza strona z anime online pl! Anime z polskimi napisami w doskonałej jakości i bez reklam! Najlepsze odtwarzacze video."
 	},
 	"url": "desu-online.pl",
-	"version": "1.0.12",
+	"matches": [
+		"*://desu-online.pl/*"
+	],
+	"version": "1.0.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Desu-Online/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Desu-Online/assets/thumbnail.png",
 	"color": "#D9910F",
@@ -32,8 +35,5 @@
 		"*://*.vk.com/*",
 		"*://*.wolfstream.tv/*",
 		"*://*.ok.ru/*"
-	],
-	"matches": [
-		"*://desu-online.pl/*"
 	]
 }
