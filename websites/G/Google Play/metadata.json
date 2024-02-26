@@ -12,7 +12,7 @@
 	"url": "play.google.com",
 	"regExp": "play|google",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://play.google.com/*"
 	],
 	"version": "1.0.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Play/assets/logo.png",
