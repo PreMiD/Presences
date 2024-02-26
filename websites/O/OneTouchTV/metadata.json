@@ -26,6 +26,6 @@
 	"iframe": true,
 	"iFrameRegExp": "s[0-9]?[.]devcorp[.]me",
 	"iFrameMatches": [
-		"*://s*.devcopr.me/*"
+		"*://*.devcopr.me/*"
 	]
 }
