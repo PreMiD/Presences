@@ -10,7 +10,10 @@
 		"pl": "Polska strona z darmowymi filmami i serialami bez rejestracji."
 	},
 	"url": "vizjer.pl",
-	"version": "1.0.4",
+	"matches": [
+		"*://vizjer.pl/*"
+	],
+	"version": "1.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vizjer/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vizjer/assets/thumbnail.png",
 	"color": "#BABABA",
