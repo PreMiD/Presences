@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.9",
 	"author": {
 		"name": "bakzkndd",
 		"id": "343103632453009408"
@@ -23,6 +23,5 @@
 		"reviews",
 		"hardware",
 		"software"
-	],
-	"matches": ["*://*.tomshardware.com/*"]
+	]
 }
