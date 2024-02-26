@@ -20,7 +20,13 @@
 	],
 	"regExp": "asura.*?[.].*?[/]",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://asurascans.com/*",
+		"*://www.asurascans.com/*",
+		"*://asura.gg/*",
+		"*://asurascanstr.com/*",
+		"*://asura.nacm.xyz/*",
+		"*://asuracomics.com/*",
+		"*://asuratoon.com/*"
 	],
 	"version": "1.2.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Asura%20Scans/assets/logo.png",
