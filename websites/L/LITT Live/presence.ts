@@ -13,7 +13,7 @@ let songName: HTMLElement,
 	thumbnail: HTMLImageElement;
 
 presence.on("UpdateData", async () => {
-	const sidePanel = document.querySelectorAll(".MuiPaper-elevation")[0];
+	const sidePanel = document.querySelector(".MuiPaper-elevation");
 	if (sidePanel && sidePanel.childNodes[1]) 
 		thumbnail = sidePanel.childNodes[1].childNodes[0].childNodes[0].childNodes[0] as HTMLImageElement;
 	
