@@ -32,6 +32,6 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://www.youtube.com/*"
 	]
 }
