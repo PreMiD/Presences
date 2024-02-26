@@ -11,7 +11,7 @@
 	"url": ["movie-web.app", "mw.lonelil.com", "mv-web.netlify.app"],
 	"regExp": "(dev[.])?(movie-web[.]app)",
 	"matches" : ["*://movie-web.app/*", "*://mw.lonelil.com/*", "*://mv-web.netlify.app/*"],
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/thumbnail.png",
 	"color": "#533670",
