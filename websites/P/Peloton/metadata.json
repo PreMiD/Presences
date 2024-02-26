@@ -17,7 +17,10 @@
 	],
 	"regExp": "([a-z0-9-]+[.])*onepeloton([.][a-z]+)+[/]",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://*.onepeloton.com/*",
+		"*://*.onepeloton.co.uk/*",
+		"*://*.onepeloton.ca/*",
+		"*://*.onepeloton.de/*"
 	],
 	"version": "1.0.27",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Peloton/assets/logo.png",
