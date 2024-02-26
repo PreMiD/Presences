@@ -12,7 +12,10 @@
 	"url": "doods.pro",
 	"regExp": "((ww(w)?([0-9])?[.])?dood(s)?[.][a-z]*)|((ww(w)?([0-9])?[.])?doodstream[.][a-z]*([.][a-z]*)?)",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://*.doods.pro/*",
+		"*://*.doodstream.com/*",
+		"*://*.doodstream.com.tr/*",
+		"*://*.doodstream.me/*"
 	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Doodstreams/assets/logo.png",
