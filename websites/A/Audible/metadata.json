@@ -11,7 +11,17 @@
 	"url": "www.audible.com",
 	"regExp": "www[.]audible([.][a-z]+)",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://www.audible.com/*",
+		"*://www.audible.ca/*",
+		"*://www.audible.com.br/*",
+		"*://www.audible.co.uk/*",
+		"*://www.audible.de/*",
+		"*://www.audible.fr/*",
+		"*://www.audible.it/*",
+		"*://www.audible.es/*",
+		"*://www.audible.com.au/*",
+		"*://www.audible.in/*",
+		"*://www.audible.co.jp/*"
 	],
 	"version": "1.1.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Audible/assets/logo.png",
