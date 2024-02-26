@@ -22,7 +22,8 @@
 	"url": "shardhosting.co.uk",
 	"regExp": "([a-z0-9-]+[.])*shardhosting[.](co.uk)[/]|([a-z0-9-]+[.])*web-ore-01[.](co.uk)",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://*.shardhosting.co.uk/*",
+		"*://*.web-ore-01.co.uk/*"
 	],
 	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Shard%20Hosting/assets/logo.png",
