@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Nevylish",
 		"id": "343847696483745794"
@@ -10,7 +10,7 @@
 		"nl": "Het telefoonspel"
 	},
 	"url": "garticphone.com",
-	"version": "1.0.17",
+	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Gartic%20Phone/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Gartic%20Phone/assets/thumbnail.png",
 	"color": "#7424D9",

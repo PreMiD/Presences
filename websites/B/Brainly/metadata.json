@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "sryo",
 		"id": "467693206226862080"
@@ -16,7 +16,7 @@
 		"brainly.in",
 		"brainly.ro"
 	],
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Brainly/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Brainly/assets/thumbnail.png",
 	"color": "#000000",

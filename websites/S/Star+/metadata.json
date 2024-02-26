@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Tiemen",
 		"id": "152164749868662784"
@@ -25,7 +25,7 @@
 	},
 	"url": "www.starplus.com",
 	"regExp": "([a-z0-9-]+[.])*starplus[.]com[/]",
-	"version": "1.0.16",
+	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Star+/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Star+/assets/thumbnail.png",
 	"color": "#271f44",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "226622016986415104",
 		"name": "cramatsu#1999"
@@ -10,7 +10,7 @@
 		"ru": "Фоксфорд — онлайн-школа для учеников 1-11 классов, учителей и родителей."
 	},
 	"url": "foxford.ru",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Foxford/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Foxford/assets/thumbnail.jpg",
 	"color": "#E89020",

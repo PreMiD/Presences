@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "The Gamerzs",
 		"id": "730142125181894657"
@@ -17,7 +17,7 @@
 		"support.blockchain.com",
 		"www.blockchain-status.com"
 	],
-	"version": "1.0.16",
+	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Blockchain/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Blockchain/assets/thumbnail.png",
 	"color": "#3d89f5",

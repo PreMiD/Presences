@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -12,7 +12,7 @@
 		"ga_IE": "Is suíomh Gréasáin Brasaíle é Vizer chun féachaint ar scannáin / sraitheanna ar líne saor in aisce! Déanann Vizer innéacsú ar ábhar a fhaightear ar an ngréasán go huathoibríoch ag úsáid Robots agus Intleacht Shaorga."
 	},
 	"url": "vizer.tv",
-	"version": "1.0.21",
+	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vizer/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vizer/assets/thumbnail.png",
 	"color": "#fba0a8",

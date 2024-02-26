@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "TheDrop.",
 		"id": "293828021134295040"
@@ -14,7 +14,7 @@
 		"nl": "Simply Hentai is een gratis hostingservice voor hentai manga's."
 	},
 	"url": "www.simply-hentai.com",
-	"version": "2.2.18",
+	"version": "2.2.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Simply%20Hentai/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Simply%20Hentai/assets/thumbnail.png",
 	"color": "#f3c669",

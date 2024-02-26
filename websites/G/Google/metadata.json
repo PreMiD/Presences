@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "TheDrop.",
 		"id": "293828021134295040"
@@ -14,7 +14,7 @@
 	},
 	"url": "www.google.com",
 	"regExp": "www[.]google([.][a-z]+)+[/]",
-	"version": "2.4.7",
+	"version": "2.4.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google/assets/thumbnail.png",
 	"color": "#ffffff",

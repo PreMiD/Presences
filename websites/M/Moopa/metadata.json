@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "338295424479789057",
 		"name": "factiven"
@@ -9,7 +9,7 @@
 		"en": "Moopa is a free Anime and Manga streaming website with AniList integration where you can easily track your progress with a single click of a button."
 	},
 	"url": "moopa.live",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Moopa/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Moopa/assets/thumbnail.png",
 	"color": "#FF7F57",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Livixx",
 		"id": "502948927809781763"
@@ -10,7 +10,7 @@
 		"ru": "LZT (lolzteam, лолзтим) - форум об играх, способы заработка и раздачи"
 	},
 	"url": "lolz.guru",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/Lolz.guru/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Lolz.guru/assets/thumbnail.jpg",
 	"color": "#23a86d",

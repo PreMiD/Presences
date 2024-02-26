@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "rushia",
 		"id": "398752205043400724"
@@ -9,7 +9,7 @@
 		"en": "Site where players of the game osu! can track their progress and view the progression of others."
 	},
 	"url": "ameobea.me",
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/osu%20track/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/osu%20track/assets/thumbnail.png",
 	"color": "#ffffff",

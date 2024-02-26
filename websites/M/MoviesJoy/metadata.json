@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "638080361179512853",
 		"name": "dark_ville"
@@ -10,7 +10,7 @@
 	},
 	"url": "moviesjoy.is",
 	"regExp": "(www[.])?(ww[0-9]{0,2}[.])?moviesjoy[.].*",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MoviesJoy/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MoviesJoy/assets/thumbnail.png",
 	"color": "#6A43B0",

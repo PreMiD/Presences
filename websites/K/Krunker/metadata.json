@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Lacking",
 		"id": "132693143173857281"
@@ -10,7 +10,7 @@
 		"nl": "Krunker.io is een gratis io Multiplayer First Person Shooter. Geen download browser FPS! Vrij!"
 	},
 	"url": "krunker.io",
-	"version": "1.2.19",
+	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Krunker/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Krunker/assets/thumbnail.png",
 	"color": "#ffc147",

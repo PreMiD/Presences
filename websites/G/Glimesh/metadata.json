@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Nathaniel.",
 		"id": "147891648628654082"
@@ -15,7 +15,7 @@
 		"blog.glimesh.tv",
 		"glim.shop"
 	],
-	"version": "1.0.20",
+	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Glimesh/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Glimesh/assets/thumbnail.jpg",
 	"color": "#2c409b",
