@@ -16,7 +16,9 @@
 	],
 	"regExp": "(playerwatch[0-9]*.xyz)|(playerwatchlm[0-9]*.xyz)|(lookmovie[0-9]?[.][A-z]{2})",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://lookmovie2.to/*",
+		"*://lookmovies.ru/*",
+		"*://playerwatchlm25.xyz/*"
 	],
 	"version": "1.5.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LookMovie/assets/logo.png",
