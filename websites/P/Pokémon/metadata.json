@@ -20,7 +20,20 @@
 	"url": "www.pokemon.com",
 	"regExp": "([a-z0-9-]+[.])*(pokemon|portal-pokemon|pokemontcg|pokemoncenter|pokemoncenter-online|pokemon-cafe|pokemonkorea|pokemoncard|pokemonstore|pokemon-movie|pokemon-card)([.][a-z]+)+[/]",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://*.pokemon.com/*",
+		"*://*.pokemon.co.za/*",
+		"*://*.pokemon.co.jp/*",
+		"*://*.pokemonkorea.co.kr/*",
+		"*://*.portal-pokemon.com/*",
+		"*://forums.pokemontcg.com/*",
+		"*://www.pokemoncenter.com/*",
+		"*://www.pokemoncenter-online.com/*",
+		"*://pokemoncard.co.kr/*",
+		"*://www.pokemonstore.co.kr/*",
+		"*://www.pokemon-movie.jp/*",
+		"*://www.pokemon-card.com/*",
+		"*://map.pokemon-card.com/*",
+		"*://*.pokemon-cafe.jp/*"
 	],
 	"version": "1.1.27",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9mon/assets/logo.png",
