@@ -14,7 +14,7 @@
 	"url": "www.zalando.com",
 	"regExp": "([a-z0-9-]+[.])*zalando([.][a-z]+)+[/]",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://*.zalando.com/*"
 	],
 	"version": "1.2.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Z/Zalando/assets/logo.png",
