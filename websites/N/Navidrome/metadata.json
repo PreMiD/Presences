@@ -14,7 +14,8 @@
 	],
 	"regExp": "navidrome[.]([a-z0-9]+)[.]([a-z0-9]+)",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://navidrome.org/*",
+		"*://www.navidrome.org/*"
 	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Navidrome/assets/logo.png",
