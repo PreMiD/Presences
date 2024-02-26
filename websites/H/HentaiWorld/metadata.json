@@ -19,7 +19,8 @@
 	"url": "www.hentaiworld.eu",
 	"regExp": "([a-z0-9-]+[.])*hentaiworld([.][a-z]+)+[/]",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://*.hentaiworld.eu/*",
+		"*://*.hentaiworld.me/*"
 	],
 	"version": "2.4.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HentaiWorld/assets/logo.png",
@@ -35,6 +36,7 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://*.hentaiworld.eu/*",
+		"*://*.hentaiworld.me/*"
 	]
 }

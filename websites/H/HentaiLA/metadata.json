@@ -27,6 +27,12 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://yourupload.com/*",
+		"*://mega.nz/*",
+		"*://embedwish.com/*",
+		"*://mp4upload.com/*",
+		"*://voe.sx/*",
+		"*://burstcloud.co/*",
+		"*://hqq.tv/*"
 	]
 }

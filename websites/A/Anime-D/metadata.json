@@ -29,7 +29,7 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://stream.miku-box.com/*"
 	],
 	"settings": [
 		{

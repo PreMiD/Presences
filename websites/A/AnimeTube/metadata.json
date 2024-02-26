@@ -26,6 +26,7 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://anime-tube.tv/*",
+		"*://www.ani-stream.com/*"
 	]
 }

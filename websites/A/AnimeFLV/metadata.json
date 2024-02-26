@@ -42,6 +42,13 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://mega.nz/*",
+		"*://1fichier.com/*",
+		"*://streamtape.com/*",
+		"*://streamwish.to/*",
+		"*://yourupload.com/*",
+		"*://my.mail.ru/*",
+		"*://hqq.tv/*",
+		"*://ok.ru/*"
 	]
 }

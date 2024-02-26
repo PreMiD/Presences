@@ -14,7 +14,8 @@
 	},
 	"url": "anime47.com",
 	"matches": [
-		"*://anime47.com/*"
+		"*://anime47.com/*",
+		"*://anime47.xyz/*"
 	],
 	"version": "1.1.26",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/anime47/assets/logo.png",
@@ -28,6 +29,8 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://anime47.com/*",
+		"*://anime47.xyz/*",
+		"*://www.youtube.com/*"
 	]
 }

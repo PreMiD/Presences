@@ -27,6 +27,9 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://embtaku.pro/*",
+		"*://mp4upload.com/*",
+		"*://dood.wf/*",
+		"*://awish.pro/*"
 	]
 }

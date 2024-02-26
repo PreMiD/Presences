@@ -27,7 +27,7 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://crunchyroll.com/*"
 	],
 	"settings": [
 		{

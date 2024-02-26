@@ -46,7 +46,8 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://www.bbc.co.uk/*",
+		"*://www.bbc.com/*"
 	],
 	"settings": [
 		{

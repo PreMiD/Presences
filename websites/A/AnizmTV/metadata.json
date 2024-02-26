@@ -64,6 +64,20 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://anizmplayer.com/*",
+		"*://ok.ru/*",
+		"*://my.mail.ru/*",
+		"*://sendvid.com/*",
+		"*://drive.google.com/file/*",
+		"*://streamplay.to/*",
+		"*://filemoon.sx/*",
+		"*://userscloud.com/*",
+		"*://www.yourupload.com/*",
+		"*://embedrise.com/*",
+		"*://vidmoly.to/*",
+		"*://bestvidhd.site/*",
+		"*://voe.sx/*",
+		"*://jayservicestuff.com/*",
+		"*://streamtape.com/*"
 	]
 }

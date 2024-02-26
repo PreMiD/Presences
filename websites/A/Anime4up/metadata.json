@@ -27,7 +27,12 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://megamax.me/iframe/*",
+		"*://mega.nz/*",
+		"*://mp4upload.com/*",
+		"*://uqload.to/*",
+		"*://*.vidblue.online/*",
+		"*://leech.megamax.me/e/*"
 	],
 	"settings": [
 		{

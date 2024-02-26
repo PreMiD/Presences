@@ -30,7 +30,8 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://vbox7.com/*",
+		"*://www.youtube.com/*"
 	],
 	"settings": [
 		{

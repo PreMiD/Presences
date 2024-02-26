@@ -25,7 +25,8 @@
 	],
 	"regExp": "([a-z0-9-]+[.])*animeworld([.][a-z]+)+[/]",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://*.animeworld.tv/*",
+		"*://*.animeworld.so/*"
 	],
 	"version": "4.0.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeWorld/assets/logo.png",
@@ -41,6 +42,7 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://*.animeworld.tv/*",
+		"*://*.animeworld.so/*"
 	]
 }
