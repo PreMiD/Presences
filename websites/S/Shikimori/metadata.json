@@ -12,7 +12,7 @@
 	"url": "shikimori.one",
 	"regExp": "shikimori([.][a-z]+)+[/]",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://shikimori.one/*"
 	],
 	"version": "1.2.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Shikimori/assets/logo.png",
