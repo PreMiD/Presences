@@ -14,7 +14,8 @@
 	"url": "www.radio.net",
 	"regExp": "((www|uk|au|nz|ie|za|ca|co|mx|br|nl|za)[.]radio[.]net|www[.]radio[.](de|dk|at|es|fr|it|pl|pt|se)|corporate[.]radio[.](net|de))[/]",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://*.radio.net/*",
+		"*://*.radio.de/*"
 	],
 	"version": "4.0.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Radio.net/assets/logo.png",
