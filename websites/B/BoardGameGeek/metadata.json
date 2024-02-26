@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -9,7 +9,7 @@
 		"en": "The definitive source for board game and card game content. Find millions of ratings, reviews, videos, photos, and more from our community of experts."
 	},
 	"url": "boardgamegeek.com",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BoardGameGeek/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BoardGameGeek/assets/thumbnail.jpg",
 	"color": "#ff5100",

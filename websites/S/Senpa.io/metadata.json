@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Deleted 7.12i",
 		"id": "591702135310385157"
@@ -14,7 +14,7 @@
 		"senpa.io",
 		"forum.senpa.io"
 	],
-	"version": "1.4.17",
+	"version": "1.4.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Senpa.io/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Senpa.io/assets/thumbnail.png",
 	"color": "#e67bbe",

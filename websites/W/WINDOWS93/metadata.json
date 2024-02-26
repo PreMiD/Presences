@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "205984221859151873",
 		"name": "joerkig"
@@ -9,7 +9,7 @@
 		"en": "WINDOWS93 is a website stylised to look and work as an operating system and a parody of the Windows 9x series."
 	},
 	"url": "www.windows93.net",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WINDOWS93/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WINDOWS93/assets/thumbnail.png",
 	"color": "#C2FF00",

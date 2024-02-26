@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "NMW03",
 		"id": "534099893979971584"
@@ -10,7 +10,7 @@
 		"nl": "Marktleidend technisch interviewplatform om ontwikkelaars met de juiste vaardigheden te identificeren en in te huren."
 	},
 	"url": "www.hackerrank.com",
-	"version": "1.0.15",
+	"version": "1.0.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HackerRank/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HackerRank/assets/thumbnail.png",
 	"color": "#23BB5B",

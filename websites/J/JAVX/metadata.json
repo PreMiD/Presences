@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Minx",
 		"id": "829346671544107088"
@@ -12,7 +12,7 @@
 	},
 	"url": "javx.net",
 	"regExp": "([a-z0-9-]+[.])*javx([.][a-z]+)+[/]",
-	"version": "1.1.16",
+	"version": "1.1.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/JAVX/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/JAVX/assets/thumbnail.png",
 	"color": "#262626",

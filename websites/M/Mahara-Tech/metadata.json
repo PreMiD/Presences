@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "605894319408283678",
 		"name": "eljooker"
@@ -9,7 +9,7 @@
 		"en": "Maharatech is an online learning platform, offering high-quality courses authored by Information Technology Institute ITI"
 	},
 	"url": "maharatech.gov.eg",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Mahara-Tech/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Mahara-Tech/assets/thumbnail.png",
 	"color": "#8d1f28",

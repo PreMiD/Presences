@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "SHISEN",
 		"id": "257151906038677504"
@@ -11,7 +11,7 @@
 	},
 	"url": "shikimori.one",
 	"regExp": "shikimori([.][a-z]+)+[/]",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Shikimori/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Shikimori/assets/thumbnail.png",
 	"color": "#4f4f4f",
