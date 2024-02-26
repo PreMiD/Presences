@@ -11,7 +11,7 @@
 	"url": "onetouchtv.cc",
 	"regExp": "(ww(w)?[0-9]?[.])?onetouchtv[.].*",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://*.onetouchtv.cc/*"
 	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/OneTouchTV/assets/logo.png",
