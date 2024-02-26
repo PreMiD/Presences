@@ -33,6 +33,7 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://client.foldingathome.org/*",
+		"*://127.0.0.1:7396/*"
 	]
 }
