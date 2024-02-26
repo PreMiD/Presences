@@ -14,11 +14,8 @@
 		"replay.beatleader.xyz",
 		"royale.beatleader.xyz"
 	],
+	"matches": ["*://beatleader.xyz/*","*://beatleader.net/*","*://*.beatleader.xyz/*","*://*.beatleader.net/*"],
 	"regExp": ".+\\.beatleader\\.(?:xyz)|(?:net)",
-	"matches": [
-		"*://*.beatleader.xyz/*",
-		"*://*.beatleader.net/*"
-	],
 	"version": "1.7.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/thumbnail.png",
@@ -33,10 +30,8 @@
 		"vr"
 	],
 	"iframe": true,
+	"iFrameMatches": ["*://*.beatleader.xyz/*","*://*.beatleader.net/*"],
 	"iFrameRegExp": "https:\\/\\/replay\\.beatleader\\.xyz",
-	"iFrameMatches": [
-		"https://replay.beatleader.xyz/*"
-	],
 	"settings": [
 		{
 			"id": "logo",
@@ -68,8 +63,14 @@
 			]
 		},
 		{
+			"id": "context",
+			"title": "Show Context Icon",
+			"icon": "fad fa-images",
+			"value": true
+		},
+		{
 			"id": "time",
-			"title": "Show timestamps",
+			"title": "Show Timestamps",
 			"icon": "fad fa-stopwatch",
 			"value": true
 		},
