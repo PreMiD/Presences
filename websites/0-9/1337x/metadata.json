@@ -24,7 +24,12 @@
 	],
 	"regExp": "([a-z0-9-]+[.])*x?1337x([.][a-z]+)+[/]",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://1337x.to/*",
+		"*://1337x.st/*",
+		"*://x1337x.ws/*",
+		"*://x1337x.eu/*",
+		"*://x1337x.se/*",
+		"*://1337x.is/*"
 	],
 	"version": "1.5.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/0-9/1337x/assets/logo.png",
