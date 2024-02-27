@@ -16,11 +16,12 @@ const presence = new Presence({
 		`https://i.imgur.com${"/4dpoXYa.gif"}`, //Christmas 2023
 	],
 	contexts: Record<string, string> = {
-		beatleader: "https://i.joerkig.com/27hnf5.png",
-		nomods: "https://i.joerkig.com/6ob2zh.png",
-		nopause: "https://i.joerkig.com/qg0376.png",
-		golf: "https://i.joerkig.com/2ow21y.png",
-		scpm: "https://i.joerkig.com/5lewbj.png",
+		beatleader:
+			"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/114.png",
+		nomods: "https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/115.png",
+		nopause: "https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/116.png",
+		golf: "https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/117.png",
+		scpm: "https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/118.png",
 	},
 	leaderboardImages: Record<string, string> = {
 		"360DegreeEasy":
