@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "180731688844787712",
+		"name": "tuleyman"
+	},
+	"service": "Tabii",
+	"description": {
+		"en": "Special presence for tabi.com",
+		"tr": "tabi.com için özel durum"
+	},
+	"url": [
+		"www.tabii.com",
+		"tabii.com"
+	],
+	"version": "1.0.0",
+	"logo": "https://cms-tabii-public-image.tabii.com/int/webp/26087.jpeg",
+	"thumbnail": "https://i.imgur.com/cVhvZEO.png",
+	"color": "#00ff99",
+	"category": "videos",
+	"tags": [
+		"tabii",
+		"tb",
+		"tuleyman",
+		"tabiicom",
+		"wwwtabiicom"
+	]
+}
