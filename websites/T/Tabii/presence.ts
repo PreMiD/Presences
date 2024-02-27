@@ -7,14 +7,13 @@ const presence = new Presence({
 		view: "general.watching",
 	});
 
-const enum Assets { // Other default assets can be found at index.d.ts
+const enum Assets {
 	Logo = "https://cms-tabii-public-image.tabii.com/int/webp/26087.jpeg",
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
-		// startTimestamp: browsingTimestamp,
 	};
 
 	if (
@@ -84,13 +83,5 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "SSS'ye Göz Atıyor";
 	else presenceData.details = "Bilinmeyen Sayfada";
 
-	// console.log(presenceData.details);
-
-	// console.log(document.location.pathname.includes("/browse/"));
-
-	// console.log(document.querySelector("video")?.currentTime);
-
 	presence.setActivity(presenceData);
 });
-
-//
