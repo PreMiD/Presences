@@ -34,7 +34,8 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"*://*.flightradar24.com/*"
+		"*://player.blubrry.com/*",
+		"*://www.youtube.com/*"
 	],
 	"settings": [
 		{
