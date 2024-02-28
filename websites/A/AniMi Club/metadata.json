@@ -36,7 +36,7 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"*://*.animi.club/*",
+		"*://*.animi.club/*"
 	],
 	"settings": [
 		{
