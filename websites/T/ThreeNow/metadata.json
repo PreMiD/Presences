@@ -26,6 +26,6 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://www.threenow.co.nz/*"
 	]
 }
