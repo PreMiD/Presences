@@ -26,6 +26,9 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://mp4upload.com/*",
+		"*://mega.nz/*",
+		"*://video.sib.net/*",
+		"*://ebd.cda.pl/*"
 	]
 }
