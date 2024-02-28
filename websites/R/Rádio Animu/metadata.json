@@ -38,6 +38,6 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://www.animu.com.br/*"
 	]
 }
