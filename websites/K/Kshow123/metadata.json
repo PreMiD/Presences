@@ -11,7 +11,8 @@
 	},
 	"url": "kshow123.net",
 	"matches": [
-		"*://kshow123.net/*"
+		"*://kshow123.net/*",
+		"*://kshow123.tv/*"
 	],
 	"version": "2.2.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kshow123/assets/logo.png",
@@ -26,6 +27,7 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://kshow123.net/*",
+		"*://kshow123.tv/*"
 	]
 }
