@@ -12,7 +12,7 @@
 	"url": "kimcartoon.si",
 	"regExp": "(ww([0-9]?)(w)?[.])?kim(-)?cartoon[.].*",
 	"matches": [
-		"__REPLACE_ME__"
+		"*://*.kimcartoon.si/*"
 	],
 	"version": "2.0.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/KimCartoon/assets/logo.png",
@@ -26,7 +26,9 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://vidmoly.to/*",
+		"*://embed.vodstream.xyz/*",
+		"*://www.yourupload.com/embed/*"
 	],
 	"settings": [
 		{
