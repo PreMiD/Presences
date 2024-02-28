@@ -29,6 +29,7 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://www.megastudy.net/*",
+		"*://v.kr.kollus.com/*"
 	]
 }
