@@ -6,15 +6,19 @@
 	},
 	"service": "Tabii",
 	"description": {
-		"en": "Special presence for tabi.com",
-		"tr": "tabi.com için özel durum"
+		"en": "tabii - Watch TV Shows Movies and Series",
+		"tr": "tabii - TV Programları Filmleri ve Dizileri İzle"
 	},
 	"url": [
 		"www.tabii.com",
 		"tabii.com"
 	],
+	"matches": [
+		"*://www.tabii.com/*",
+		"*://tabii.com/*"
+	],
 	"version": "1.0.0",
-	"logo": "https://cms-tabii-public-image.tabii.com/int/webp/26087.jpeg",
+	"logo": "https://i.imgur.com/ZfDhD5n.png",
 	"thumbnail": "https://i.imgur.com/cVhvZEO.png",
 	"color": "#00ff99",
 	"category": "videos",

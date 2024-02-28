@@ -9,17 +9,17 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cms-tabii-public-image.tabii.com/int/webp/26087.jpeg",
+	pause = "pause",
+	play = "play",
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: Assets.Logo,
-	};
+			largeImageKey: Assets.Logo,
+		},
+		{ pathname, href } = document.location;
 
-	if (
-		document.location.pathname === "/" ||
-		document.location.pathname.includes("/browse/")
-	) {
+	if (pathname === "/" || pathname.includes("/browse/")) {
 		const pageIds = [
 			{ id: "154830_134666", name: "Anasayfa" },
 			{ id: "149106_149112", name: "Dizi" },
@@ -30,17 +30,17 @@ presence.on("UpdateData", async () => {
 		];
 
 		presenceData.details = `${
-			pageIds.find(x => document.location.pathname.includes(x.id))?.name
+			pageIds.find(x => pathname.includes(x.id))?.name
 		} Sayfasına Göz Atıyor`;
-	} else if (document.location.pathname.includes("/settings/account"))
+	} else if (pathname.includes("/settings/account"))
 		presenceData.details = "Hesap Ayarlarına Göz Atıyor";
-	else if (document.location.pathname.includes("/settings/profile"))
+	else if (pathname.includes("/settings/profile"))
 		presenceData.details = "Profil Ayarlarına Göz Atıyor";
-	else if (document.location.pathname.includes("/search")) {
+	else if (pathname.includes("/search")) {
 		if (document.querySelector("input").value)
 			presenceData.details = "Arama Yapıyor";
 		else presenceData.details = "Arama Sayfasına Göz Atıyor";
-	} else if (document.location.pathname.includes("/watch")) {
+	} else if (pathname.includes("/watch")) {
 		const video = document.querySelector("video");
 
 		if (video) {
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: `${stringsData.view} ${presenceData.state}`,
-					url: document.location.href,
+					url: href,
 				},
 			];
 
@@ -58,18 +58,13 @@ presence.on("UpdateData", async () => {
 				presenceData.endTimestamp =
 					Date.now() + (video.duration - video.currentTime) * 1000;
 
-				presenceData.smallImageKey = video.paused ? "pause" : "play";
+				presenceData.smallImageKey = video.paused ? Assets.pause : Assets.play;
 				presenceData.smallImageText = video.paused
 					? stringsData.pause
 					: stringsData.play;
 			}
-
-			presenceData.smallImageKey = video.paused ? "pause" : "play";
-			presenceData.smallImageText = video.paused
-				? stringsData.pause
-				: stringsData.play;
 		}
-	} else if (document.location.pathname.includes("/genre")) {
+	} else if (pathname.includes("/genre")) {
 		const catName = (
 			document.querySelector(
 				"#Main > div > div:nth-child(1) > main > div > div.flex.pt-8 > div > div > span:nth-child(2)"
@@ -77,9 +72,9 @@ presence.on("UpdateData", async () => {
 		).textContent;
 		if (catName) presenceData.details = `${catName} Kategorisine Göz Atıyor`;
 		else presenceData.details = "Kategori Sayfasına Göz Atıyor";
-	} else if (document.location.pathname.includes("/my-stuff"))
+	} else if (pathname.includes("/my-stuff"))
 		presenceData.details = "Kütüphanesine Göz Atıyor";
-	else if (document.location.pathname.includes("/faq"))
+	else if (pathname.includes("/faq"))
 		presenceData.details = "SSS'ye Göz Atıyor";
 	else presenceData.details = "Bilinmeyen Sayfada";
 
