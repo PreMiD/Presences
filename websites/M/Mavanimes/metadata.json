@@ -29,6 +29,9 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://vidmoly.to/*",
+		"*://voe.sx/e/*",
+		"*://jayservicestuff.com/e/*",
+		"*://streamtape.com/e/*"
 	]
 }
