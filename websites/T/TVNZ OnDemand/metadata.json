@@ -30,6 +30,6 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://*.tvnz.co.nz/*"
 	]
 }
