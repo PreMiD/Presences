@@ -13,7 +13,8 @@
 	},
 	"url": "vizer.tv",
 	"matches": [
-		"*://vizer.tv/*"
+		"*://vizer.tv/*",
+		"*://vizertv.in/*"
 	],
 	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vizer/assets/logo.png",
@@ -28,6 +29,8 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://vizer.tv/embed/*",
+		"*://vizertv.in/embed/*",
+		"*://warezcdn.com/player/*"
 	]
 }
