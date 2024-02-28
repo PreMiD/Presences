@@ -14,6 +14,10 @@
 		"www.coolmathgames.com",
 		"coolmathgames.com"
 	],
+	"matches": [
+		"*://www.coolmathgames.com/*",
+		"*://coolmathgames.com/*"
+	],
 	"version": "1.2.26",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/CoolMathGames/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/CoolMathGames/assets/thumbnail.png",

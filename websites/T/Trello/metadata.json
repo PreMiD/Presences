@@ -15,6 +15,12 @@
 		"blog.trello.com",
 		"developers.trello.com"
 	],
+	"matches": [
+		"*://trello.com/*",
+		"*://help.trello.com/*",
+		"*://blog.trello.com/*",
+		"*://developers.trello.com/*"
+	],
 	"version": "2.2.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Trello/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Trello/assets/thumbnail.png",

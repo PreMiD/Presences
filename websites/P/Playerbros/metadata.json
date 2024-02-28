@@ -11,6 +11,9 @@
 		"nl": "Playerbros is een Turkse nieuwswebsite over e-sport."
 	},
 	"url": "playerbros.com",
+	"matches": [
+		"*://playerbros.com/*"
+	],
 	"version": "1.1.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Playerbros/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Playerbros/assets/thumbnail.png",

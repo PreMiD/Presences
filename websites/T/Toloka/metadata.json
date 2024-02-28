@@ -15,6 +15,9 @@
 		"nl": "Toloka.to is de grootste BitTorrent-tracker van UKRnet, gespecialiseerd in de distributie van inhoud uitsluitend in de Oekraïense taal."
 	},
 	"url": "toloka.to",
+	"matches": [
+		"*://toloka.to/*"
+	],
 	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/thumbnail.png",

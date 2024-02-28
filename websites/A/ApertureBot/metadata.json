@@ -22,6 +22,10 @@
 		"aperturebot.science",
 		"dashboard.aperturebot.science"
 	],
+	"matches": [
+		"*://aperturebot.science/*",
+		"*://dashboard.aperturebot.science/*"
+	],
 	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/ApertureBot/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/ApertureBot/assets/thumbnail.png",

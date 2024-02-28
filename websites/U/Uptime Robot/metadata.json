@@ -16,6 +16,9 @@
 		"nl": "Uptime Robot helpt u uw websites up-to-date te houden."
 	},
 	"url": "uptimerobot.com",
+	"matches": [
+		"*://uptimerobot.com/*"
+	],
 	"version": "1.4.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/U/Uptime%20Robot/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/Uptime%20Robot/assets/thumbnail.png",

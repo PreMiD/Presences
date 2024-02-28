@@ -12,6 +12,9 @@
 	},
 	"url": "www.gamestar.de",
 	"regExp": "([a-z0-9-]+[.])*gamestar[.]de[/]",
+	"matches": [
+		"*://*.gamestar.de/*"
+	],
 	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GameStar/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GameStar/assets/thumbnail.png",

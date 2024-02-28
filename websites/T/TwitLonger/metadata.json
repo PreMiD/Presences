@@ -10,6 +10,9 @@
 		"nl": "Als je teveel praat voor Twitter."
 	},
 	"url": "www.twitlonger.com",
+	"matches": [
+		"*://www.twitlonger.com/*"
+	],
 	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TwitLonger/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TwitLonger/assets/thumbnail.png",

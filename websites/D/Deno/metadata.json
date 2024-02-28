@@ -23,6 +23,14 @@
 		"denostatus.com",
 		"deno.news"
 	],
+	"matches": [
+		"*://deno.land/*",
+		"*://doc.deno.land/*",
+		"*://deno.com/*",
+		"*://merch.deno.com/*",
+		"*://denostatus.com/*",
+		"*://deno.news/*"
+	],
 	"version": "1.1.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Deno/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Deno/assets/thumbnail.png",

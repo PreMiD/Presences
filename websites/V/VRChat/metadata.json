@@ -15,6 +15,11 @@
 		"hello.vrchat.com",
 		"feedback.vrchat.com"
 	],
+	"matches": [
+		"*://vrchat.com/*",
+		"*://hello.vrchat.com/*",
+		"*://feedback.vrchat.com/*"
+	],
 	"version": "1.0.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/VRChat/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/VRChat/assets/thumbnail.png",

@@ -15,6 +15,10 @@
 		"rule34.xxx",
 		"rule34.paheal.net"
 	],
+	"matches": [
+		"*://rule34.xxx/*",
+		"*://rule34.paheal.net/*"
+	],
 	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Rule34/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Rule34/assets/thumbnail.png",

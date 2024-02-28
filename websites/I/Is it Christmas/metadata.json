@@ -12,6 +12,9 @@
 		"en": "Check whether it is Christmas or not."
 	},
 	"url": "isitchristmas.com",
+	"matches": [
+		"*://isitchristmas.com/*"
+	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/Is%20it%20Christmas/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/Is%20it%20Christmas/assets/thumbnail.png",

@@ -10,6 +10,9 @@
 		"de": "Rich Presence für wumpus.store - Der #1 Discord Bot Store"
 	},
 	"url": "wumpus.store",
+	"matches": [
+		"*://wumpus.store/*"
+	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/wumpus.store/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/wumpus.store/assets/thumbnail.png",

@@ -13,6 +13,10 @@
 		"www.peacocktv.com",
 		"peacocktv.com"
 	],
+	"matches": [
+		"*://www.peacocktv.com/*",
+		"*://peacocktv.com/*"
+	],
 	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Peacock/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Peacock/assets/thumbnail.png",

@@ -10,6 +10,9 @@
 		"de": "BreathFM ist ein Webradio aus der Schweiz, welches in die ganze Welt streamt"
 	},
 	"url": "breathfm.de",
+	"matches": [
+		"*://breathfm.de/*"
+	],
 	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BreathFM/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BreathFM/assets/thumbnail.png",

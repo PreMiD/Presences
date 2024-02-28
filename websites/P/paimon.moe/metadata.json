@@ -15,6 +15,9 @@
 		"ru": "Твой лучший компаньон в Genshin Impact! Поможет тебе распланировать что фармить в калькуляторе возвышения, а также отслеживать свой прогресс с помощью счетчика молитв и cписка дел"
 	},
 	"url": "paimon.moe",
+	"matches": [
+		"*://paimon.moe/*"
+	],
 	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/paimon.moe/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/paimon.moe/assets/thumbnail.png",

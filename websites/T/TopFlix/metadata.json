@@ -11,6 +11,9 @@
 		"pt_BR": "TopFlix - Assistir filmes online grátis HD"
 	},
 	"url": "topflix.tv",
+	"matches": [
+		"*://topflix.tv/*"
+	],
 	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TopFlix/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TopFlix/assets/thumbnail.png",
@@ -22,5 +25,8 @@
 		"movies"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://topflix.tv/*"
+	]
 }

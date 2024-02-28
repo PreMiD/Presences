@@ -10,6 +10,9 @@
 		"nl": "Speedrunning leaderboards, bronnen, forums en meer!"
 	},
 	"url": "www.speedrun.com",
+	"matches": [
+		"*://www.speedrun.com/*"
+	],
 	"version": "1.2.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/speedrun.com/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/speedrun.com/assets/thumbnail.png",

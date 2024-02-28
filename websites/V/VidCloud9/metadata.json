@@ -11,6 +11,9 @@
 		"nl": "VidCloud9 is een geweldige plek om shows te vinden die je hebt gemist of films die je graag wilt zien."
 	},
 	"url": "vidcloud9.com",
+	"matches": [
+		"*://vidcloud9.com/*"
+	],
 	"version": "2.0.28",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/VidCloud9/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/VidCloud9/assets/thumbnail.png",
@@ -22,6 +25,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	],
 	"settings": [
 		{
 			"id": "sSI",

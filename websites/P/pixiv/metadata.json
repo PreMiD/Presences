@@ -27,6 +27,9 @@
 	},
 	"url": "www.pixiv.net",
 	"regExp": "([a-z0-9-]+[.])*pixiv[.]net[/]",
+	"matches": [
+		"*://*.pixiv.net/*"
+	],
 	"version": "2.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/pixiv/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/pixiv/assets/thumbnail.png",

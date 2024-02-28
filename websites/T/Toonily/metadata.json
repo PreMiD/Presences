@@ -12,6 +12,10 @@
 		"toonily.net",
 		"toonily.com"
 	],
+	"matches": [
+		"*://toonily.net/*",
+		"*://toonily.com/*"
+	],
 	"version": "1.1.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Toonily/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Toonily/assets/thumbnail.png",
@@ -24,6 +28,10 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://toonily.net/*",
+		"*://toonily.com/*"
+	],
 	"settings": [
 		{
 			"id": "buttons",

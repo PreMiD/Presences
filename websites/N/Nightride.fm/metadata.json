@@ -9,6 +9,9 @@
 		"en": "Nightride.FM is an independently owned and operated synthwave internet radio station."
 	},
 	"url": "nightride.fm",
+	"matches": [
+		"*://nightride.fm/*"
+	],
 	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Nightride.fm/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Nightride.fm/assets/thumbnail.png",

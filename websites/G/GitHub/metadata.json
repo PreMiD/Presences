@@ -33,6 +33,10 @@
 		"github.com",
 		"gist.github.com"
 	],
+	"matches": [
+		"*://github.com/*",
+		"*://gist.github.com/*"
+	],
 	"version": "2.11.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GitHub/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GitHub/assets/thumbnail.png",

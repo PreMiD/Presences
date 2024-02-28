@@ -15,6 +15,12 @@
 		"investors.etsy.com",
 		"help.etsy.com"
 	],
+	"matches": [
+		"*://www.etsy.com/*",
+		"*://community.etsy.com/*",
+		"*://investors.etsy.com/*",
+		"*://help.etsy.com/*"
+	],
 	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Etsy/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Etsy/assets/thumbnail.png",

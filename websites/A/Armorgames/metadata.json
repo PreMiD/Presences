@@ -11,6 +11,9 @@
 		"vi_VN": "Chơi các trò chơi trực tuyến miễn phí tại armorgames."
 	},
 	"url": "armorgames.com",
+	"matches": [
+		"*://armorgames.com/*"
+	],
 	"version": "1.1.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Armorgames/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Armorgames/assets/thumbnail.jpg",

@@ -12,6 +12,9 @@
 		"vi_VN": "Bots on Discord là danh sách các Discord bot."
 	},
 	"url": "bots.ondiscord.xyz",
+	"matches": [
+		"*://bots.ondiscord.xyz/*"
+	],
 	"version": "1.2.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Bots%20on%20Discord/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Bots%20on%20Discord/assets/thumbnail.png",

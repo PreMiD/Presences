@@ -14,6 +14,10 @@
 		"virginmedia.com",
 		"www.virginmedia.com"
 	],
+	"matches": [
+		"*://virginmedia.com/*",
+		"*://www.virginmedia.com/*"
+	],
 	"version": "1.3.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Virgin%20Media/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Virgin%20Media/assets/thumbnail.png",

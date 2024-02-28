@@ -15,6 +15,11 @@
 	},
 	"url": "kingdomofloathing.com",
 	"regExp": "([a-z0-9]+\\.)*kingdomofloathing.com|(127\\.0\\.0\\.1|localhost):6008\\d",
+	"matches": [
+		"*://*.kingdomofloathing.com/*",
+		"*://127.0.0.1:6008/*",
+		"*://localhost:6008/*"
+	],
 	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kingdom%20of%20Loathing/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kingdom%20of%20Loathing/assets/thumbnail.png",
@@ -26,5 +31,10 @@
 		"kol"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*?\\.php"
+	"iFrameRegExp": ".*?\\.php",
+	"iFrameMatches": [
+		"*://*.kingdomofloathing.com/*.php",
+		"*://127.0.0.1:6008/*.php",
+		"*://localhost:6008/*.php"
+	]
 }

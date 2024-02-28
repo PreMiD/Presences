@@ -13,6 +13,10 @@
 		"www.neko-sama.fr",
 		"neko-sama.fr"
 	],
+	"matches": [
+		"*://www.neko-sama.fr/*",
+		"*://neko-sama.fr/*"
+	],
 	"version": "1.0.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Neko-sama.fr/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Neko-sama.fr/assets/thumbnail.png",
@@ -24,5 +28,8 @@
 		"vf"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

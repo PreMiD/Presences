@@ -12,6 +12,10 @@
 		"ga_IE": "Is suíomh Gréasáin Brasaíle é Vizer chun féachaint ar scannáin / sraitheanna ar líne saor in aisce! Déanann Vizer innéacsú ar ábhar a fhaightear ar an ngréasán go huathoibríoch ag úsáid Robots agus Intleacht Shaorga."
 	},
 	"url": "vizer.tv",
+	"matches": [
+		"*://vizer.tv/*",
+		"*://vizertv.in/*"
+	],
 	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vizer/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vizer/assets/thumbnail.png",
@@ -23,5 +27,10 @@
 		"movies"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://vizer.tv/embed/*",
+		"*://vizertv.in/embed/*",
+		"*://warezcdn.com/player/*"
+	]
 }

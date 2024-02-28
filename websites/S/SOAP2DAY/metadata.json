@@ -26,6 +26,17 @@
 		"s2dfree.is",
 		"soap2day.pe"
 	],
+	"matches": [
+		"*://soap2day.to/*",
+		"*://soap2day.ac/*",
+		"*://soap2day.sh/*",
+		"*://soap2day.mx/*",
+		"*://s2dfree.to/*",
+		"*://s2dfree.cc/*",
+		"*://s2dfree.de/*",
+		"*://s2dfree.is/*",
+		"*://soap2day.pe/*"
+	],
 	"version": "3.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SOAP2DAY/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SOAP2DAY/assets/thumbnail.png",

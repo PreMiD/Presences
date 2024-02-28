@@ -11,6 +11,9 @@
 		"nl": "LISTEN.moe is een door fans gemaakte website die 24/7 anime / Japanse / Doujin-muziek wil spelen"
 	},
 	"url": "listen.moe",
+	"matches": [
+		"*://listen.moe/*"
+	],
 	"version": "1.2.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LISTEN.moe/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LISTEN.moe/assets/thumbnail.png",

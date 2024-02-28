@@ -9,6 +9,9 @@
 		"en": "MusicBrainz is an open music encyclopedia that collects music metadata and makes it available to the public."
 	},
 	"url": "musicbrainz.org",
+	"matches": [
+		"*://musicbrainz.org/*"
+	],
 	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MusicBrainz/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MusicBrainz/assets/thumbnail.png",

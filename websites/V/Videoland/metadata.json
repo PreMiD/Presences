@@ -15,6 +15,12 @@
 		"videoland.com",
 		"www.videoland.com"
 	],
+	"matches": [
+		"*://v2.videoland.com/*",
+		"*://www.v2.videoland.com/*",
+		"*://videoland.com/*",
+		"*://www.videoland.com/*"
+	],
 	"version": "1.2.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Videoland/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Videoland/assets/thumbnail.png",

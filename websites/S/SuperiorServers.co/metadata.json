@@ -13,6 +13,10 @@
 		"forum.superiorservers.co",
 		"superiorservers.co"
 	],
+	"matches": [
+		"*://forum.superiorservers.co/*",
+		"*://superiorservers.co/*"
+	],
 	"version": "1.0.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SuperiorServers.co/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SuperiorServers.co/assets/thumbnail.png",

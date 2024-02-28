@@ -13,6 +13,10 @@
 		"www.paramountplus.com",
 		"paramountplus.com"
 	],
+	"matches": [
+		"*://www.paramountplus.com/*",
+		"*://paramountplus.com/*"
+	],
 	"version": "2.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/thumbnail.png",

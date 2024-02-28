@@ -21,6 +21,12 @@
 		"stats.truckersmp.com",
 		"map.truckersmp.com"
 	],
+	"matches": [
+		"*://truckersmp.com/*",
+		"*://forum.truckersmp.com/*",
+		"*://stats.truckersmp.com/*",
+		"*://map.truckersmp.com/*"
+	],
 	"version": "3.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TruckersMP/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TruckersMP/assets/thumbnail.png",

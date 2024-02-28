@@ -14,6 +14,11 @@
 		"anime.tempestfansub.com",
 		"ecchi.tempestfansub.com"
 	],
+	"matches": [
+		"*://tempestfansub.com/*",
+		"*://anime.tempestfansub.com/*",
+		"*://ecchi.tempestfansub.com/*"
+	],
 	"version": "1.0.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/thumbnail.png",

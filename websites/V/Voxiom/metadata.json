@@ -9,6 +9,9 @@
 		"en": "Play the best browser multiplayer voxel first person shooter inspired by minecraft, fortnite, counter-strike, and call of duty!"
 	},
 	"url": "voxiom.io",
+	"matches": [
+		"*://voxiom.io/*"
+	],
 	"version": "1.0.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Voxiom/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Voxiom/assets/thumbnail.png",

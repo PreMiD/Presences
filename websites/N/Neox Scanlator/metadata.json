@@ -12,6 +12,9 @@
 		"nl": "Een van de giganten fansubs in Brazilië waar ze vertalen en verspreiden onder het publiek, ook bekend om het vertalen van Solo Leveling en andere beroemde manga."
 	},
 	"url": "neoxscans.net",
+	"matches": [
+		"*://neoxscans.net/*"
+	],
 	"version": "1.0.27",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Neox%20Scanlator/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Neox%20Scanlator/assets/thumbnail.png",

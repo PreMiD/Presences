@@ -15,6 +15,11 @@
 		"www.animi.club",
 		"dev.animi.club"
 	],
+	"matches": [
+		"*://animi.club/*",
+		"*://www.animi.club/*",
+		"*://dev.animi.club/*"
+	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AniMi%20Club/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AniMi%20Club/assets/thumbnail.png",
@@ -30,6 +35,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://*.animi.club/*"
+	],
 	"settings": [
 		{
 			"id": "privacy",

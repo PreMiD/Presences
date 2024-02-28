@@ -10,6 +10,9 @@
 		"en": "Here at CDKeys.com, we specialise in providing you with the best digital codes for the hottest games. There’s no need to pay full price or wait for a game again. We combine the lowest prices with rapid digital delivery, so you can start playing your favourite games, fast."
 	},
 	"url": "www.cdkeys.com",
+	"matches": [
+		"*://www.cdkeys.com/*"
+	],
 	"version": "1.1.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/CDKeys/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/CDKeys/assets/thumbnail.png",

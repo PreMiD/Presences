@@ -17,6 +17,11 @@
 		"www.animevost.org",
 		"v2.vost.pw"
 	],
+	"matches": [
+		"*://animevost.org/*",
+		"*://www.animevost.org/*",
+		"*://v2.vost.pw/*"
+	],
 	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/thumbnail.png",

@@ -15,6 +15,10 @@
 		"www.max.com"
 	],
 	"regExp": "([a-z]*[.])?(hbo)?max[.]com",
+	"matches": [
+		"*://*.hbomax.com/*",
+		"*://*.max.com/*"
+	],
 	"version": "2.2.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HBO%20Max/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HBO%20Max/assets/thumbnail.jpg",

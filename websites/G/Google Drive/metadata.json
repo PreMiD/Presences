@@ -21,6 +21,9 @@
 	},
 	"url": "drive.google.com",
 	"regExp": "drive[.]google([.][a-z]+)+[/]",
+	"matches": [
+		"*://drive.google.com/*"
+	],
 	"version": "1.6.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Drive/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Drive/assets/thumbnail.png",

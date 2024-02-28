@@ -17,6 +17,10 @@
 		"steamcommunity.com",
 		"store.steampowered.com"
 	],
+	"matches": [
+		"*://steamcommunity.com/*",
+		"*://store.steampowered.com/*"
+	],
 	"version": "2.2.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Steam/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Steam/assets/thumbnail.png",

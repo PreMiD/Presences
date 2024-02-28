@@ -38,6 +38,13 @@
 		"create.roblox.com",
 		"devforum.roblox.com"
 	],
+	"matches": [
+		"*://www.roblox.com/*",
+		"*://web.roblox.com/*",
+		"*://rbx.com/*",
+		"*://create.roblox.com/*",
+		"*://devforum.roblox.com/*"
+	],
 	"version": "3.1.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/thumbnail.png",

@@ -14,6 +14,9 @@
 		"nl": "Simply Hentai is een gratis hostingservice voor hentai manga's."
 	},
 	"url": "www.simply-hentai.com",
+	"matches": [
+		"*://www.simply-hentai.com/*"
+	],
 	"version": "2.2.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Simply%20Hentai/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Simply%20Hentai/assets/thumbnail.png",

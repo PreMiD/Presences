@@ -12,6 +12,9 @@
 	},
 	"url": "eggsy.xyz",
 	"regExp": "eggsy[.]xyz(?![/]projects[/]premid[/]custom-status)",
+	"matches": [
+		"*://eggsy.xyz/*"
+	],
 	"version": "1.2.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/eggsy.codes/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/eggsy.codes/assets/thumbnail.png",

@@ -14,6 +14,10 @@
 		"www.hepsiburada.com",
 		"hepsiburada.com"
 	],
+	"matches": [
+		"*://www.hepsiburada.com/*",
+		"*://hepsiburada.com/*"
+	],
 	"version": "1.2.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Hepsiburada/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Hepsiburada/assets/thumbnail.png",

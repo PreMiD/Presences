@@ -24,6 +24,11 @@
 		"animeflv.ac",
 		"animeflv.ru"
 	],
+	"matches": [
+		"*://www3.animeflv.net/*",
+		"*://animeflv.ac/*",
+		"*://animeflv.ru/*"
+	],
 	"version": "1.1.29",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeFLV/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeFLV/assets/thumbnail.png",
@@ -35,5 +40,15 @@
 		"embedded-links"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://mega.nz/*",
+		"*://1fichier.com/*",
+		"*://streamtape.com/*",
+		"*://streamwish.to/*",
+		"*://yourupload.com/*",
+		"*://my.mail.ru/*",
+		"*://hqq.tv/*",
+		"*://ok.ru/*"
+	]
 }

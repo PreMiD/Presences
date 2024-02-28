@@ -21,6 +21,12 @@
 		"www.jackboxgames.com",
 		"shop.jackboxgames.com"
 	],
+	"matches": [
+		"*://jackbox.tv/*",
+		"*://games.jackbox.tv/*",
+		"*://www.jackboxgames.com/*",
+		"*://shop.jackboxgames.com/*"
+	],
 	"version": "2.1.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/thumbnail.png",

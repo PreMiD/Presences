@@ -14,6 +14,10 @@
 		"vidio.com",
 		"www.vidio.com"
 	],
+	"matches": [
+		"*://vidio.com/*",
+		"*://www.vidio.com/*"
+	],
 	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vidio/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vidio/assets/thumbnail.jpg",

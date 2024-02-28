@@ -11,6 +11,9 @@
 	},
 	"url": "twitcasting.tv",
 	"regExp": "([a-z0-9]+[.])?twitcasting[.]tv",
+	"matches": [
+		"*://*.twitcasting.tv/*"
+	],
 	"version": "1.0.12",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TwitCasting/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TwitCasting/assets/thumbnail.png",

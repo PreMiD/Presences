@@ -11,6 +11,9 @@
 	},
 	"url": "nexusmods.com",
 	"regExp": "([a-z0-9-]+[.])*nexusmods([.][a-z]+)+[/]",
+	"matches": [
+		"*://*.nexusmods.com/*"
+	],
 	"version": "1.2.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Nexus%20Mods/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Nexus%20Mods/assets/thumbnail.png",

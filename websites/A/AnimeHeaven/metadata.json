@@ -18,6 +18,9 @@
 		"vi_VN": "animeheaven.ru là trang xem anime tốt nhất, nơi bạn có thể xem anime trực tuyến hoàn toàn miễn phí. Không cần tải về, không quấy nhiễu, chỉ dịch vụ phát trực tuyến cao cấp."
 	},
 	"url": "animeheaven.ru",
+	"matches": [
+		"*://animeheaven.ru/*"
+	],
 	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeHeaven/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeHeaven/assets/thumbnail.png",
@@ -29,6 +32,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	],
 	"settings": [
 		{
 			"id": "buttons",

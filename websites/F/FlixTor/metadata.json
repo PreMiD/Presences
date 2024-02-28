@@ -27,6 +27,16 @@
 		"flixtor.cz"
 	],
 	"regExp": "flixtor[.](to|ch|se|vc|nu|sx|tk|cz)",
+	"matches": [
+		"*://flixtor.to/*",
+		"*://flixtor.ch/*",
+		"*://flixtor.se/*",
+		"*://flixtor.vc/*",
+		"*://flixtor.nu/*",
+		"*://flixtor.sx/*",
+		"*://flixtor.tk/*",
+		"*://flixtor.cz/*"
+	],
 	"version": "2.3.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/FlixTor/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/FlixTor/assets/thumbnail.png",

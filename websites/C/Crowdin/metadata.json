@@ -26,6 +26,13 @@
 		"status.crowdin.com",
 		"blog.crowdin.com"
 	],
+	"matches": [
+		"*://crowdin.com/*",
+		"*://support.crowdin.com/*",
+		"*://store.crowdin.com/*",
+		"*://status.crowdin.com/*",
+		"*://blog.crowdin.com/*"
+	],
 	"version": "4.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Crowdin/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Crowdin/assets/thumbnail.png",

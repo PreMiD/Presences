@@ -15,6 +15,13 @@
 		"genshin-impact-map.appsample.com",
 		"mapgenie.io"
 	],
+	"matches": [
+		"*://act.hoyolab.com/*",
+		"*://webstatic-sea.mihoyo.com/*",
+		"*://webstatic-sea.hoyolab.com/*",
+		"*://genshin-impact-map.appsample.com/*",
+		"*://mapgenie.io/*"
+	],
 	"version": "1.3.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Genshin%20Impact%20Map/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Genshin%20Impact%20Map/assets/thumbnail.png",

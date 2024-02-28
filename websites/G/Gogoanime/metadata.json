@@ -21,6 +21,11 @@
 		"gogoanime.news"
 	],
 	"regExp": "((w)?ww([0-9]*)?[.])?(gogoanime[s]?)([0-9]+)?([.].*)",
+	"matches": [
+		"*://gogoanime.pe/*",
+		"*://gogoanime.vc/*",
+		"*://gogoanime.news/*"
+	],
 	"version": "2.1.12",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Gogoanime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Gogoanime/assets/thumbnail.png",
@@ -32,5 +37,14 @@
 		"streaming"
 	],
 	"iframe": true,
-	"iFrameRegExp": "(gogo(hd)?[.][a-z]*)|(sbplay([0-9]*)?[.][a-z]*)|(fembed(-hd)?[.][a-z]*)|(mp4(-)?upload[.][a-z]*)|(.*)"
+	"iFrameRegExp": "(gogo(hd)?[.][a-z]*)|(sbplay([0-9]*)?[.][a-z]*)|(fembed(-hd)?[.][a-z]*)|(mp4(-)?upload[.][a-z]*)|(.*)",
+	"iFrameMatches": [
+		"*://gogoanime.pe/*",
+		"*://gogoanime.vc/*",
+		"*://gogoanime.news/*",
+		"*://embtaku.pro/*",
+		"*://mp4upload.com/*",
+		"*://dood.wf/*",
+		"*://awish.pro/*"
+	]
 }

@@ -11,6 +11,9 @@
 		"nl": "Lees gratis Turkse manga online. Afbeeldingen van hoge kwaliteit en enorme bibliotheek."
 	},
 	"url": "serimanga.com",
+	"matches": [
+		"*://serimanga.com/*"
+	],
 	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SeriManga/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SeriManga/assets/thumbnail.png",

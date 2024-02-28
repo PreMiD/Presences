@@ -14,6 +14,10 @@
 		"www.figma.com",
 		"help.figma.com"
 	],
+	"matches": [
+		"*://www.figma.com/*",
+		"*://help.figma.com/*"
+	],
 	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Figma/assets/thumbnail.png",

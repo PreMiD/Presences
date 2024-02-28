@@ -9,6 +9,9 @@
 		"en": "Moopa is a free Anime and Manga streaming website with AniList integration where you can easily track your progress with a single click of a button."
 	},
 	"url": "moopa.live",
+	"matches": [
+		"*://moopa.live/*"
+	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Moopa/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Moopa/assets/thumbnail.png",

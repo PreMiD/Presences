@@ -15,6 +15,9 @@
 	},
 	"url": "wiktionary.org",
 	"regExp": "([a-z0-9-]+[.])+wiktionary[.]org[/]",
+	"matches": [
+		"*://*.wiktionary.org/*"
+	],
 	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wiktionary/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wiktionary/assets/thumbnail.png",

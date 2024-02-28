@@ -11,6 +11,9 @@
 		"nl": "MangasPROJECT - Lees online en organiseer je reads in mangasPROJECT. Lees in Portugese manga's en webtoons, de meeste leest in actie, romantiek, fantasie, isekai en anderen!"
 	},
 	"url": "leitor.net",
+	"matches": [
+		"*://leitor.net/*"
+	],
 	"version": "1.2.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangasPROJECT/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangasPROJECT/assets/thumbnail.png",

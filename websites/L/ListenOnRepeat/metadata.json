@@ -10,6 +10,9 @@
 		"nl": "Ontdek muziek, bekijk de nieuwste trending video's en 24/7 samengestelde inhoud! Probeer ListenOnRepeat vandaag nog."
 	},
 	"url": "listenonrepeat.com",
+	"matches": [
+		"*://listenonrepeat.com/*"
+	],
 	"version": "2.0.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/ListenOnRepeat/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/ListenOnRepeat/assets/thumbnail.png",
@@ -21,6 +24,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://www.youtube.com/*"
+	],
 	"settings": [
 		{
 			"id": "sGlobalRepeat",

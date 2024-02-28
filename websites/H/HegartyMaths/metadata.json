@@ -9,6 +9,9 @@
 		"en": "HegartyMaths is an educational tool used by schools in the United Kingdom to set mathematics homework tasks."
 	},
 	"url": "hegartymaths.com",
+	"matches": [
+		"*://hegartymaths.com/*"
+	],
 	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HegartyMaths/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HegartyMaths/assets/thumbnail.png",

@@ -11,6 +11,9 @@
 	},
 	"url": "www.stoodi.com.br",
 	"regExp": "([a-z0-9]+)[.]stoodi[.]com[.]br",
+	"matches": [
+		"*://*.stoodi.com.br/*"
+	],
 	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Stoodi/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Stoodi/assets/thumbnail.png",

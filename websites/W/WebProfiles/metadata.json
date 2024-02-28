@@ -9,6 +9,9 @@
 		"en": "Let people know which social accounts are really you"
 	},
 	"url": "webprofiles.me",
+	"matches": [
+		"*://webprofiles.me/*"
+	],
 	"version": "1.1.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WebProfiles/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WebProfiles/assets/thumbnail.png",

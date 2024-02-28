@@ -20,6 +20,16 @@
 		"experts.webflow.com",
 		"forum.webflow.com"
 	],
+	"matches": [
+		"*://webflow.com/*",
+		"*://preview.webflow.com/*",
+		"*://university.webflow.com/*",
+		"*://ebooks.webflow.com/*",
+		"*://wishlist.webflow.com/*",
+		"*://status.webflow.com/*",
+		"*://experts.webflow.com/*",
+		"*://forum.webflow.com/*"
+	],
 	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Webflow/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Webflow/assets/thumbnail.png",

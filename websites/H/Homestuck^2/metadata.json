@@ -12,6 +12,10 @@
 		"www.homestuck2.com",
 		"homestuck2.com"
 	],
+	"matches": [
+		"*://www.homestuck2.com/*",
+		"*://homestuck2.com/*"
+	],
 	"version": "1.0.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck%5E2/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Homestuck%5E2/assets/thumbnail.png",

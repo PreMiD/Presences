@@ -20,6 +20,16 @@
 		"apidocs.imgur.com",
 		"community.imgur.com"
 	],
+	"matches": [
+		"*://imgur.com/*",
+		"*://i.imgur.com/*",
+		"*://imgurinc.com/*",
+		"*://imgurstore.com/*",
+		"*://blog.imgur.com/*",
+		"*://help.imgur.com/*",
+		"*://apidocs.imgur.com/*",
+		"*://community.imgur.com/*"
+	],
 	"version": "1.1.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/Imgur/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/Imgur/assets/thumbnail.jpg",

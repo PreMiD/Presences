@@ -23,6 +23,9 @@
 		"vi_VN": "AniList: Theo dõi, tìm kiếm, chia sẻ Anime & Manga - Đăng ký ngay hôm nay!"
 	},
 	"url": "anilist.co",
+	"matches": [
+		"*://anilist.co/*"
+	],
 	"version": "2.1.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AniList/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AniList/assets/thumbnail.jpg",

@@ -14,6 +14,11 @@
 		"help.caards.me",
 		"status.caards.me"
 	],
+	"matches": [
+		"*://www.caards.me/*",
+		"*://help.caards.me/*",
+		"*://status.caards.me/*"
+	],
 	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Caards/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Caards/assets/thumbnail.jpg",

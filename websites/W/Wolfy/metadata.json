@@ -19,6 +19,14 @@
 		"www.wolfy.fr",
 		"www.wolfy.net"
 	],
+	"matches": [
+		"*://help.wolfy.fr/*",
+		"*://help.wolfy.net/*",
+		"*://wolfy.fr/*",
+		"*://wolfy.net/*",
+		"*://www.wolfy.fr/*",
+		"*://www.wolfy.net/*"
+	],
 	"version": "1.2.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/thumbnail.png",

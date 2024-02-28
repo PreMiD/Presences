@@ -19,6 +19,10 @@
 		"www.monkeytype.com",
 		"monkeytype.com"
 	],
+	"matches": [
+		"*://www.monkeytype.com/*",
+		"*://monkeytype.com/*"
+	],
 	"version": "2.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Monkeytype/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Monkeytype/assets/thumbnail.png",

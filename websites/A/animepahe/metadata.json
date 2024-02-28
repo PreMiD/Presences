@@ -17,6 +17,11 @@
 		"animepahe.ru",
 		"animepahe.org"
 	],
+	"matches": [
+		"*://animepahe.com/*",
+		"*://animepahe.ru/*",
+		"*://animepahe.org/*"
+	],
 	"version": "1.5.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/thumbnail.png",
@@ -29,6 +34,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": "kwik.cx/e",
+	"iFrameMatches": [
+		"*://kwik.cx/e*"
+	],
 	"settings": [
 		{
 			"id": "lang",

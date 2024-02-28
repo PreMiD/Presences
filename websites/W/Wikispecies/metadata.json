@@ -14,6 +14,9 @@
 		"nl": "Wikispecies is een soortendatabase voor taxonomie die levende en fossiele vertegenwoordigers van Animalia, Plantae, Fungi, Bacteria, Archaea, Protista en alle andere levensvormen omvat."
 	},
 	"url": "species.wikimedia.org",
+	"matches": [
+		"*://species.wikimedia.org/*"
+	],
 	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wikispecies/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wikispecies/assets/thumbnail.png",

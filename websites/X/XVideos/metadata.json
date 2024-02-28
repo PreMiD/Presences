@@ -15,6 +15,9 @@
 		"ga_IE": "Is seirbhís óstála saor in aisce é XVideos le haghaidh físeáin porn."
 	},
 	"url": "www.xvideos.com",
+	"matches": [
+		"*://www.xvideos.com/*"
+	],
 	"version": "2.3.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/X/XVideos/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/X/XVideos/assets/thumbnail.png",

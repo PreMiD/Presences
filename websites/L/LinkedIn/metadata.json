@@ -12,6 +12,9 @@
 		"vi_VN": "Quản lý hồ sơ chuyên nghiệp của bạn. Xây dựng và tham gia với mạng lưới chuyên nghiệp của bạn. Tiếp cận kiến thức, các góc nhìn và cơ hội."
 	},
 	"url": "www.linkedin.com",
+	"matches": [
+		"*://www.linkedin.com/*"
+	],
 	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LinkedIn/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LinkedIn/assets/thumbnail.png",

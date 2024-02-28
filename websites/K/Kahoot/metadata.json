@@ -25,6 +25,11 @@
 		"play.kahoot.it",
 		"create.kahoot.it"
 	],
+	"matches": [
+		"*://kahoot.it/*",
+		"*://play.kahoot.it/*",
+		"*://create.kahoot.it/*"
+	],
 	"version": "2.1.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kahoot/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kahoot/assets/thumbnail.png",
@@ -37,6 +42,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": "^https://play\\.kahoot\\.it",
+	"iFrameMatches": [
+		"https://play.kahoot.it/*"
+	],
 	"settings": [
 		{
 			"id": "lang",

@@ -18,6 +18,10 @@
 	},
 	"url": "www.hentaiworld.eu",
 	"regExp": "([a-z0-9-]+[.])*hentaiworld([.][a-z]+)+[/]",
+	"matches": [
+		"*://*.hentaiworld.eu/*",
+		"*://*.hentaiworld.me/*"
+	],
 	"version": "2.4.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HentaiWorld/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HentaiWorld/assets/thumbnail.png",
@@ -30,5 +34,9 @@
 		"hentaiworld"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://*.hentaiworld.eu/*",
+		"*://*.hentaiworld.me/*"
+	]
 }

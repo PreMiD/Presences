@@ -10,6 +10,9 @@
 		"nl": "Officiële Scan computeronderdelen, computerdiensten en zaken."
 	},
 	"url": "www.scan.co.uk",
+	"matches": [
+		"*://www.scan.co.uk/*"
+	],
 	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Scan/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Scan/assets/thumbnail.png",

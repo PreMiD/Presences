@@ -12,6 +12,10 @@
 		"soundgasm.net",
 		"www.soundgasm.net"
 	],
+	"matches": [
+		"*://soundgasm.net/*",
+		"*://www.soundgasm.net/*"
+	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Soundgasm/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Soundgasm/assets/thumbnail.png",

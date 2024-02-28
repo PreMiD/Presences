@@ -12,6 +12,10 @@
 		"territorial.io",
 		"www.territorial.io"
 	],
+	"matches": [
+		"*://territorial.io/*",
+		"*://www.territorial.io/*"
+	],
 	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Territorial/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Territorial/assets/thumbnail.jpg",

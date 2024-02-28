@@ -10,6 +10,9 @@
 		"nl": "De ultieme kleurencollectie!"
 	},
 	"url": "www.htmlcsscolor.com",
+	"matches": [
+		"*://www.htmlcsscolor.com/*"
+	],
 	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/htmlcsscolor/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/htmlcsscolor/assets/thumbnail.png",

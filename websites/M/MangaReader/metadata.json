@@ -12,6 +12,10 @@
 		"mangareader.to",
 		"www.mangareader.to"
 	],
+	"matches": [
+		"*://mangareader.to/*",
+		"*://www.mangareader.to/*"
+	],
 	"version": "1.0.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaReader/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaReader/assets/thumbnail.png",

@@ -16,6 +16,12 @@
 		"www.onepeloton.de"
 	],
 	"regExp": "([a-z0-9-]+[.])*onepeloton([.][a-z]+)+[/]",
+	"matches": [
+		"*://*.onepeloton.com/*",
+		"*://*.onepeloton.co.uk/*",
+		"*://*.onepeloton.ca/*",
+		"*://*.onepeloton.de/*"
+	],
 	"version": "1.0.27",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Peloton/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Peloton/assets/thumbnail.jpg",

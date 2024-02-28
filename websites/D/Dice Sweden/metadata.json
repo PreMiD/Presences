@@ -10,6 +10,9 @@
 		"nl": "Bij DICE delen we allemaal de passie om uitzonderlijke games te maken."
 	},
 	"url": "www.dice.se",
+	"matches": [
+		"*://www.dice.se/*"
+	],
 	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Dice%20Sweden/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Dice%20Sweden/assets/thumbnail.png",

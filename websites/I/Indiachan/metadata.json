@@ -14,6 +14,11 @@
 		"www.indiachan.com",
 		"pajeet.top"
 	],
+	"matches": [
+		"*://indiachan.com/*",
+		"*://www.indiachan.com/*",
+		"*://pajeet.top/*"
+	],
 	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/Indiachan/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/Indiachan/assets/thumbnail.png",

@@ -10,6 +10,9 @@
 		"pl": "Oglądaj najlepsze anime online na anime-odcinki.pl. Zapewniamy tysiące odcinków z różnych serii w wysokiej jakości za darmo!"
 	},
 	"url": "anime-odcinki.pl",
+	"matches": [
+		"*://anime-odcinki.pl/*"
+	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Anime-Odcinki/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Anime-Odcinki/assets/thumbnail.png",
@@ -21,6 +24,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	],
 	"settings": [
 		{
 			"id": "privacy",

@@ -15,6 +15,9 @@
 	},
 	"url": "ak151.anime-kage.eu",
 	"regExp": "([a-z0-9-]+[.])*anime-kage[.]eu[/]",
+	"matches": [
+		"*://*.anime-kage.eu/*"
+	],
 	"version": "1.2.26",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeKage/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeKage/assets/thumbnail.png",
@@ -25,5 +28,8 @@
 		"videos"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

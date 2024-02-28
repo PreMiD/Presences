@@ -27,6 +27,9 @@
 		"vi_VN": "Bot Waifu ?! Game bài Anime của Anime Soul Discord! Kết nối với tất cả cộng đồng Anime ngay hôm nay!"
 	},
 	"url": "shoob.gg",
+	"matches": [
+		"*://shoob.gg/*"
+	],
 	"version": "1.2.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Shoob/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Shoob/assets/thumbnail.jpeg",

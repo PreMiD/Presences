@@ -15,6 +15,10 @@
 		"www.mall.tv",
 		"sk.mall.tv"
 	],
+	"matches": [
+		"*://www.mall.tv/*",
+		"*://sk.mall.tv/*"
+	],
 	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MALL.TV/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MALL.TV/assets/thumbnail.png",

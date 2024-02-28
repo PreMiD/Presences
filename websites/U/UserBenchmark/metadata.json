@@ -18,6 +18,15 @@
 		"ram.userbenchmark.com",
 		"usb.userbenchmark.com"
 	],
+	"matches": [
+		"*://www.userbenchmark.com/*",
+		"*://cpu.userbenchmark.com/*",
+		"*://gpu.userbenchmark.com/*",
+		"*://ssd.userbenchmark.com/*",
+		"*://hdd.userbenchmark.com/*",
+		"*://ram.userbenchmark.com/*",
+		"*://usb.userbenchmark.com/*"
+	],
 	"version": "1.0.26",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/thumbnail.png",

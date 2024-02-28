@@ -38,6 +38,10 @@
 		"www.reddit.com",
 		"old.reddit.com"
 	],
+	"matches": [
+		"*://www.reddit.com/*",
+		"*://old.reddit.com/*"
+	],
 	"version": "3.1.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Reddit/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Reddit/assets/thumbnail.png",

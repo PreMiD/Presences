@@ -11,6 +11,9 @@
 		"nl": "dizilab is een van de grootste aanbieders van Turkse buitenlandse TV-programma's op internet."
 	},
 	"url": "dizilab.io",
+	"matches": [
+		"*://dizilab.io/*"
+	],
 	"version": "1.4.27",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/dizilab/assets/thumbnail.png",
@@ -22,5 +25,8 @@
 		"turkish"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

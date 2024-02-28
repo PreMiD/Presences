@@ -12,6 +12,9 @@
 		"vi_VN": "Cộng đồng Anime với hàng trăm bản Anime được phát trực tuyến."
 	},
 	"url": "anime-tube.tv",
+	"matches": [
+		"*://anime-tube.tv/*"
+	],
 	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeTube/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeTube/assets/thumbnail.png",
@@ -21,5 +24,9 @@
 		"anime"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://anime-tube.tv/*",
+		"*://www.ani-stream.com/*"
+	]
 }

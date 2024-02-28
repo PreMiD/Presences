@@ -10,6 +10,9 @@
 		"fr": "Votre site de streaming préféré pour vos animes et scans sans pubs."
 	},
 	"url": "anime-sama.fr",
+	"matches": [
+		"*://anime-sama.fr/*"
+	],
 	"version": "1.1.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Sama/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Sama/assets/thumbnail.png",
@@ -24,6 +27,12 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*((sendvid)|(sibnet)|(myvi)).*",
+	"iFrameMatches": [
+		"*://*.anime-sama.fr/*",
+		"*://video.sibnet.ru/*",
+		"*://sendvid.com/*",
+		"*://vk.com/*"
+	],
 	"settings": [
 		{
 			"id": "buttons",

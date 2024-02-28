@@ -11,6 +11,9 @@
 		"nl": "NSFW Porno Beeld bord draait op Gelbooru"
 	},
 	"url": "realbooru.com",
+	"matches": [
+		"*://realbooru.com/*"
+	],
 	"version": "1.2.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/RealBooru/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/RealBooru/assets/thumbnail.png",

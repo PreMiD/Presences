@@ -13,6 +13,10 @@
 		"nitrotype.com",
 		"www.nitrotype.com"
 	],
+	"matches": [
+		"*://nitrotype.com/*",
+		"*://www.nitrotype.com/*"
+	],
 	"version": "1.2.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/thumbnail.png",

@@ -15,6 +15,13 @@
 		"socialclub.rockstargames.com",
 		"signin.rockstargames.com"
 	],
+	"matches": [
+		"*://www.rockstargames.com/*",
+		"*://support.rockstargames.com/*",
+		"*://store.rockstargames.com/*",
+		"*://socialclub.rockstargames.com/*",
+		"*://signin.rockstargames.com/*"
+	],
 	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Rockstar%20Games/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Rockstar%20Games/assets/thumbnail.png",

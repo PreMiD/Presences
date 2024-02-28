@@ -11,6 +11,9 @@
 	},
 	"url": "namemc.com",
 	"regExp": "([a-z0-9-]+[.])*namemc[.]com[/]",
+	"matches": [
+		"*://*.namemc.com/*"
+	],
 	"version": "2.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/NameMC/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/NameMC/assets/thumbnail.png",

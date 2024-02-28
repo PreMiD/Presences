@@ -15,6 +15,9 @@
 		"www.rocketleagueesports.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*rocketleague[.]com[/]",
+	"matches": [
+		"*://*.rocketleague.com/*"
+	],
 	"version": "1.2.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Rocket%20League/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Rocket%20League/assets/thumbnail.jpg",

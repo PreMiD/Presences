@@ -11,6 +11,9 @@
 		"ga_IE": "Is raidió ar líne saor in aisce, faoi thiomáint ag an bpobal é UpBeat."
 	},
 	"url": "upbeatradio.net",
+	"matches": [
+		"*://upbeatradio.net/*"
+	],
 	"version": "3.2.27",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/U/UpBeatRadio/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/UpBeatRadio/assets/thumbnail.png",

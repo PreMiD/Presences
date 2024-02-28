@@ -20,6 +20,10 @@
 		"mangaworld.in",
 		"www.mangaworld.in"
 	],
+	"matches": [
+		"*://mangaworld.in/*",
+		"*://www.mangaworld.in/*"
+	],
 	"version": "3.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/thumbnail.png",

@@ -25,6 +25,9 @@
 	},
 	"url": "www.starplus.com",
 	"regExp": "([a-z0-9-]+[.])*starplus[.]com[/]",
+	"matches": [
+		"*://*.starplus.com/*"
+	],
 	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Star+/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Star+/assets/thumbnail.png",

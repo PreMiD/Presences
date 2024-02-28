@@ -12,6 +12,9 @@
 	},
 	"url": "zoom.us",
 	"regExp": "(.*?)[.]?zoom.us",
+	"matches": [
+		"*://*.zoom.us/*"
+	],
 	"version": "1.1.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Z/Zoom/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Z/Zoom/assets/thumbnail.jpg",

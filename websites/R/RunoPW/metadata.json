@@ -17,6 +17,9 @@
 		"nl": "Vrienden maken en chatten met miljoenen in een virtuele wereld"
 	},
 	"url": "runo.pw",
+	"matches": [
+		"*://runo.pw/*"
+	],
 	"version": "2.1.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/RunoPW/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/RunoPW/assets/thumbnail.png",

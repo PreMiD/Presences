@@ -14,6 +14,10 @@
 		"docs.botsfordiscord.com",
 		"botsfordiscord.com"
 	],
+	"matches": [
+		"*://docs.botsfordiscord.com/*",
+		"*://botsfordiscord.com/*"
+	],
 	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Bots%20For%20Discord/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Bots%20For%20Discord/assets/thumbnail.png",

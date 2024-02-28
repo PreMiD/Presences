@@ -15,6 +15,11 @@
 		"kickassanime.ro"
 	],
 	"regExp": "(([a-z0-9-]+[.])*kickassanime([.][a-z]+)+)|(kaas[.].*)|((www[0-9]*[.])?(kickassanime[.][a-z]+))",
+	"matches": [
+		"*://*.kickassanime.lol/*",
+		"*://*.kickassanime.ro/*",
+		"*://*.kickassanime.mx/*"
+	],
 	"version": "1.2.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/KickAssAnime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/KickAssAnime/assets/thumbnail.png",
@@ -27,6 +32,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://vidco.pro/*"
+	],
 	"settings": [
 		{
 			"id": "lang",

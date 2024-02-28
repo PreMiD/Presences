@@ -14,6 +14,9 @@
 		"nl": "WoolyPooly is een van de meest winstgevende pools met onze focus op minimale commissiekosten voor PPLNS & SOLO-beloningssystemen."
 	},
 	"url": "woolypooly.com",
+	"matches": [
+		"*://woolypooly.com/*"
+	],
 	"version": "1.1.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WoolyPooly/assets/thumbnail.png",

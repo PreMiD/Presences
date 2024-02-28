@@ -17,6 +17,9 @@
 	},
 	"url": "www.reverso.net",
 	"regExp": "([a-z0-9-_]+)[.]reverso[.]net",
+	"matches": [
+		"*://*.reverso.net/*"
+	],
 	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Reverso/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Reverso/assets/thumbnail.png",

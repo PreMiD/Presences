@@ -13,6 +13,10 @@
 		"www.tokopedia.com",
 		"seller.tokopedia.com"
 	],
+	"matches": [
+		"*://www.tokopedia.com/*",
+		"*://seller.tokopedia.com/*"
+	],
 	"version": "1.1.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tokopedia/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tokopedia/assets/thumbnail.png",

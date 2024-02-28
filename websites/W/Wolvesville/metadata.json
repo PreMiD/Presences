@@ -55,6 +55,16 @@
 		"voting.wolvesville.com",
 		"app.wolvesville.com"
 	],
+	"matches": [
+		"*://wolvesville.com/*",
+		"*://www.wolvesville.com/*",
+		"*://vouchers.wolvesville.com/*",
+		"*://blog.wolvesville.com/*",
+		"*://legal.wolvesville.com/*",
+		"*://heroes.wolvesville.com/*",
+		"*://voting.wolvesville.com/*",
+		"*://app.wolvesville.com/*"
+	],
 	"version": "1.4.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/thumbnail.png",

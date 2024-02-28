@@ -38,6 +38,10 @@
 	},
 	"url": "www.duolingo.com",
 	"regExp": "www\\.duolingo\\.(com|cn)",
+	"matches": [
+		"*://*.duolingo.com/*",
+		"*://*.duolingo.cn/*"
+	],
 	"version": "3.1.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Duolingo/assets/thumbnail.png",

@@ -12,6 +12,9 @@
 		"nl": "Webtekno is een van de grootste technologieblogs in Turkije."
 	},
 	"url": "www.webtekno.com",
+	"matches": [
+		"*://www.webtekno.com/*"
+	],
 	"version": "1.3.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/thumbnail.png",

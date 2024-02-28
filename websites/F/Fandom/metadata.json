@@ -12,6 +12,9 @@
 	},
 	"url": "fandom.com",
 	"regExp": "[a-z0-9-]+[.]fandom[.]com[/]",
+	"matches": [
+		"*://*.fandom.com/*"
+	],
 	"version": "1.2.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Fandom/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Fandom/assets/thumbnail.png",

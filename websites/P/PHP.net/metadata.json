@@ -12,6 +12,10 @@
 		"php.net",
 		"www.php.net"
 	],
+	"matches": [
+		"*://php.net/*",
+		"*://www.php.net/*"
+	],
 	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PHP.net/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PHP.net/assets/thumbnail.png",

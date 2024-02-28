@@ -11,6 +11,9 @@
 		"nl": "Loritta is een Discord-bot voor nut, plezier, entertainment, moderatie en meer!"
 	},
 	"url": "loritta.website",
+	"matches": [
+		"*://loritta.website/*"
+	],
 	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/Loritta/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Loritta/assets/thumbnail.png",

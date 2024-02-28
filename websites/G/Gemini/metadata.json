@@ -9,6 +9,9 @@
 		"en": "Gemini gives you direct access to Google AI. Get help with writing, planning, learning, and more."
 	},
 	"url": "gemini.google.com",
+	"matches": [
+		"*://gemini.google.com/*"
+	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Gemini/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Gemini/assets/thumbnail.png",

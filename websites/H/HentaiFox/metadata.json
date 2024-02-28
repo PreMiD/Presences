@@ -11,6 +11,9 @@
 		"nl": "HentaiFox is een van de meest populaire gratis hentai-sites voor Engels vertaalde hentai-manga en doujinshi."
 	},
 	"url": "hentaifox.com",
+	"matches": [
+		"*://hentaifox.com/*"
+	],
 	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HentaiFox/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HentaiFox/assets/thumbnail.png",

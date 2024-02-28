@@ -10,6 +10,9 @@
 		"nl": "Breng uw typen naar een hoger niveau! Een online typspel voor meerdere spelers waarin je het kunt opnemen tegen spelers over de hele wereld."
 	},
 	"url": "keyma.sh",
+	"matches": [
+		"*://keyma.sh/*"
+	],
 	"version": "1.0.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Keymash/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Keymash/assets/thumbnail.png",

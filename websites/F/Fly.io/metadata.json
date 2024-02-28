@@ -13,6 +13,11 @@
 		"www.fly.io",
 		"community.fly.io"
 	],
+	"matches": [
+		"*://fly.io/*",
+		"*://www.fly.io/*",
+		"*://community.fly.io/*"
+	],
 	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Fly.io/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Fly.io/assets/thumbnail.png",

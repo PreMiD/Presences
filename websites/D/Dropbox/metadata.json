@@ -14,6 +14,10 @@
 		"www.dropbox.com",
 		"showcase.dropbox.com"
 	],
+	"matches": [
+		"*://www.dropbox.com/*",
+		"*://showcase.dropbox.com/*"
+	],
 	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Dropbox/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Dropbox/assets/thumbnail.png",

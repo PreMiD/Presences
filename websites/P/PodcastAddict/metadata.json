@@ -19,6 +19,10 @@
 		"podcastaddict.com",
 		"www.podcastaddict.com"
 	],
+	"matches": [
+		"*://podcastaddict.com/*",
+		"*://www.podcastaddict.com/*"
+	],
 	"version": "1.1.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PodcastAddict/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PodcastAddict/assets/thumbnail.jpg",

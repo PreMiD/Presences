@@ -11,6 +11,9 @@
 	},
 	"url": "kimcartoon.si",
 	"regExp": "(ww([0-9]?)(w)?[.])?kim(-)?cartoon[.].*",
+	"matches": [
+		"*://*.kimcartoon.si/*"
+	],
 	"version": "2.0.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/KimCartoon/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/KimCartoon/assets/thumbnail.png",
@@ -22,6 +25,11 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://vidmoly.to/*",
+		"*://embed.vodstream.xyz/*",
+		"*://www.yourupload.com/embed/*"
+	],
 	"settings": [
 		{
 			"id": "cover",

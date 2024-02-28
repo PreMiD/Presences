@@ -12,6 +12,9 @@
 		"ga_IE": "Féach ar anime Vietsub ardchaighdeáin ar líne saor in aisce le tarchur tapa, déantar HOT anime a nuashonrú is luaithe i Vítneam i gcónaí."
 	},
 	"url": "vuighe.net",
+	"matches": [
+		"*://vuighe.net/*"
+	],
 	"version": "1.2.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vui%20Gh%C3%AA/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vui%20Gh%C3%AA/assets/thumbnail.png",

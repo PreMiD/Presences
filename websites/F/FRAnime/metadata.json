@@ -10,6 +10,9 @@
 		"fr": "Regarder un animé en VF ou en VOSTFR est gratuit et sans pub sur FRAnime"
 	},
 	"url": "franime.fr",
+	"matches": [
+		"*://franime.fr/*"
+	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/FRAnime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/FRAnime/assets/thumbnail.png",

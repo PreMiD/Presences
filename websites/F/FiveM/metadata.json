@@ -21,6 +21,12 @@
 		"forum.cfx.re",
 		"servers.fivem.net"
 	],
+	"matches": [
+		"*://fivem.net/*",
+		"*://docs.fivem.net/*",
+		"*://forum.cfx.re/*",
+		"*://servers.fivem.net/*"
+	],
 	"version": "1.1.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/FiveM/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/FiveM/assets/thumbnail.png",

@@ -14,6 +14,10 @@
 		"mangahosted.com",
 		"www.mangahosted.com"
 	],
+	"matches": [
+		"*://mangahosted.com/*",
+		"*://www.mangahosted.com/*"
+	],
 	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaHost/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaHost/assets/thumbnail.png",

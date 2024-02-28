@@ -10,6 +10,9 @@
 	},
 	"url": "manacube.com",
 	"regExp": "([a-z0-9-]+[.])*manacube[.]com[/]",
+	"matches": [
+		"*://*.manacube.com/*"
+	],
 	"version": "1.0.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Manacube/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Manacube/assets/thumbnail.png",

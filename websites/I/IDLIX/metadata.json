@@ -9,6 +9,9 @@
 		"en": "Watch the latest movies, TV series, dramas, anime with high quality available in Indonesian subtitles and updated every day. Box Office Movies to the Best TV Series are all available on the IDLIX site."
 	},
 	"url": "tv.idlixofficial.co",
+	"matches": [
+		"*://tv.idlixofficial.co/*"
+	],
 	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/IDLIX/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/IDLIX/assets/thumbnail.png",
@@ -22,6 +25,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": "https://jeniusplay[.]com",
+	"iFrameMatches": [
+		"https://jeniusplay.com/*"
+	],
 	"settings": [
 		{
 			"id": "lang",

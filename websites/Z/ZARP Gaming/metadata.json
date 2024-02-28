@@ -12,6 +12,10 @@
 		"zarpgaming.com",
 		"control.zarpgaming.com"
 	],
+	"matches": [
+		"*://zarpgaming.com/*",
+		"*://control.zarpgaming.com/*"
+	],
 	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Z/ZARP%20Gaming/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Z/ZARP%20Gaming/assets/thumbnail.png",

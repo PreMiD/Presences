@@ -14,6 +14,10 @@
 		"www.tranimeizle.co",
 		"tranimeizle.co"
 	],
+	"matches": [
+		"*://www.tranimeizle.co/*",
+		"*://tranimeizle.co/*"
+	],
 	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TRanimeizle/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TRanimeizle/assets/thumbnail.png",
@@ -24,5 +28,8 @@
 		"anime"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

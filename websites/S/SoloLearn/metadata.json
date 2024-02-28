@@ -11,6 +11,9 @@
 	},
 	"url": "www.sololearn.com",
 	"regExp": "([a-z0-9-]+[.])*sololearn[.]com[/]",
+	"matches": [
+		"*://*.sololearn.com/*"
+	],
 	"version": "2.0.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SoloLearn/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SoloLearn/assets/thumbnail.png",

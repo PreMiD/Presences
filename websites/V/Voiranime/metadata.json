@@ -23,6 +23,9 @@
 	},
 	"url": "voiranime.com",
 	"regExp": "([a-z0-9-]+[.])*voiranime[.]com[/]",
+	"matches": [
+		"*://*.voiranime.com/*"
+	],
 	"version": "2.1.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Voiranime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Voiranime/assets/thumbnail.png",
@@ -35,6 +38,14 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://vidmoly.to/*",
+		"*://designparty.sx/e/*",
+		"*://voe.sx/e/*",
+		"*://jayservicestuff.com/e/*",
+		"*://streamtape.com/e/*",
+		"*://my.mail.ru/video/embed/*"
+	],
 	"settings": [
 		{
 			"id": "lang",

@@ -11,6 +11,9 @@
 		"nl": "Vietnamese schrijfgemeenschap"
 	},
 	"url": "spiderum.com",
+	"matches": [
+		"*://spiderum.com/*"
+	],
 	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Spiderum/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Spiderum/assets/thumbnail.png",

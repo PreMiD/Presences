@@ -14,6 +14,11 @@
 		"hentaivn.site",
 		"hentaivn.run"
 	],
+	"matches": [
+		"*://hentaivn.tv/*",
+		"*://hentaivn.site/*",
+		"*://hentaivn.run/*"
+	],
 	"version": "2.1.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HentaiVN/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HentaiVN/assets/thumbnail.png",

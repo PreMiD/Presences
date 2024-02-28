@@ -18,6 +18,13 @@
 	},
 	"url": "ifttt.com",
 	"regExp": "(ift[.]tt|((help|platform|status)[.]|)ifttt[.]com)[/]",
+	"matches": [
+		"*://*.ift.tt/*",
+		"*://help.ifttt.com/*",
+		"*://platform.ifttt.com/*",
+		"*://status.ifttt.com/*",
+		"*://ifttt.com/*"
+	],
 	"version": "2.0.12",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/IFTTT/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/IFTTT/assets/thumbnail.png",

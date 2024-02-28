@@ -10,6 +10,9 @@
 		"nl": "Maak flipbook-animaties online!"
 	},
 	"url": "flipanim.com",
+	"matches": [
+		"*://flipanim.com/*"
+	],
 	"version": "1.2.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/FlipAnim/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/FlipAnim/assets/thumbnail.png",

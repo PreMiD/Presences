@@ -14,6 +14,11 @@
 		"help.musescore.com",
 		"musescore.org"
 	],
+	"matches": [
+		"*://musescore.com/*",
+		"*://help.musescore.com/*",
+		"*://musescore.org/*"
+	],
 	"version": "1.2.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Musescore/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Musescore/assets/thumbnail.png",

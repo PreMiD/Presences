@@ -15,6 +15,11 @@
 		"blog.brick-hill.com",
 		"api.brick-hill.com"
 	],
+	"matches": [
+		"*://www.brick-hill.com/*",
+		"*://blog.brick-hill.com/*",
+		"*://api.brick-hill.com/*"
+	],
 	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Brick%20Hill/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Brick%20Hill/assets/thumbnail.png",

@@ -12,6 +12,10 @@
 		"hiven.io",
 		"app.hiven.io"
 	],
+	"matches": [
+		"*://hiven.io/*",
+		"*://app.hiven.io/*"
+	],
 	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Hiven/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Hiven/assets/thumbnail.png",

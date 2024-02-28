@@ -23,6 +23,10 @@
 		"dash.fortnite-api.com",
 		"fortnite-api.com"
 	],
+	"matches": [
+		"*://dash.fortnite-api.com/*",
+		"*://fortnite-api.com/*"
+	],
 	"version": "5.4.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Fortnite-API/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Fortnite-API/assets/thumbnail.png",

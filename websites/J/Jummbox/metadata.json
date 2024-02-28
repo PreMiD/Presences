@@ -10,6 +10,9 @@
 		"nl": "Hiermee kunnen gebruikers informatie over het maken van muziek en de gebruikte tijd zien"
 	},
 	"url": "jummbus.bitbucket.io",
+	"matches": [
+		"*://jummbus.bitbucket.io/*"
+	],
 	"version": "1.1.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/Jummbox/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/Jummbox/assets/thumbnail.png",

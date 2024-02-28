@@ -10,6 +10,9 @@
 		"nl": "Jstris is gewoon een standaard competitieve multiplayer Tetris, maar dan gemaakt met JS. LET OP: Om de 'Join'-knop te activeren zodat anderen via Discord aan je spel kunnen deelnemen, typ je' / link 'in de chat van de Jstris-lobby."
 	},
 	"url": "jstris.jezevec10.com",
+	"matches": [
+		"*://jstris.jezevec10.com/*"
+	],
 	"version": "1.1.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/Jstris/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/Jstris/assets/thumbnail.png",

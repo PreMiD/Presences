@@ -16,6 +16,12 @@
 		"habbocity.fr",
 		"www.habbocity.fr"
 	],
+	"matches": [
+		"*://www.habbocity.me/*",
+		"*://habbocity.me/*",
+		"*://habbocity.fr/*",
+		"*://www.habbocity.fr/*"
+	],
 	"version": "1.1.26",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HabboCity/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HabboCity/assets/thumbnail.png",

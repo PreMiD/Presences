@@ -14,6 +14,10 @@
 		"vanis.io",
 		"skins.vanis.io"
 	],
+	"matches": [
+		"*://vanis.io/*",
+		"*://skins.vanis.io/*"
+	],
 	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vanis.io/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vanis.io/assets/thumbnail.png",

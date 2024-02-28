@@ -14,6 +14,11 @@
 		"web.archive.org",
 		"www.web.archive.org"
 	],
+	"matches": [
+		"*://archive.org/*",
+		"*://web.archive.org/*",
+		"*://www.web.archive.org/*"
+	],
 	"version": "1.1.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WayBack%20Machine/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WayBack%20Machine/assets/thumbnail.png",

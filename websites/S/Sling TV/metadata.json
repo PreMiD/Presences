@@ -13,6 +13,10 @@
 		"sling.com",
 		"watch.sling.com"
 	],
+	"matches": [
+		"*://sling.com/*",
+		"*://watch.sling.com/*"
+	],
 	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Sling%20TV/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Sling%20TV/assets/thumbnail.png",

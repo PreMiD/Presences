@@ -13,6 +13,11 @@
 		"www.wcostream.net",
 		"www.wcostream.org"
 	],
+	"matches": [
+		"*://www.wcostream.com/*",
+		"*://www.wcostream.net/*",
+		"*://www.wcostream.org/*"
+	],
 	"version": "1.1.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wcostream/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wcostream/assets/thumbnail.png",
@@ -25,6 +30,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://embed.watchanimesub.net/inc/embed/*"
+	],
 	"settings": [
 		{
 			"id": "timestamps",

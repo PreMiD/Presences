@@ -12,6 +12,10 @@
 	},
 	"url": "www.snipes.com",
 	"regExp": "www[.]snipes(usa)?[.]([a-z]+)",
+	"matches": [
+		"*://www.snipes.com/*",
+		"*://www.snipesusa.com/*"
+	],
 	"version": "1.1.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/thumbnail.png",

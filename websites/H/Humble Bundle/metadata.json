@@ -11,6 +11,9 @@
 	},
 	"url": "www.humblebundle.com",
 	"regExp": "([a-z0-9-]+[.])*humblebundle[.]com[/]",
+	"matches": [
+		"*://*.humblebundle.com/*"
+	],
 	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Humble%20Bundle/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Humble%20Bundle/assets/thumbnail.png",

@@ -10,6 +10,9 @@
 		"nl": "Officieel Linus Tech Tips-forum."
 	},
 	"url": "linustechtips.com",
+	"matches": [
+		"*://linustechtips.com/*"
+	],
 	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/Linus%20Tech%20Tips/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Linus%20Tech%20Tips/assets/thumbnail.png",

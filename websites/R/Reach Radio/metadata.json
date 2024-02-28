@@ -10,6 +10,9 @@
 		"nl": "Het station gemaakt voor gaming - 24/7 alle hits spelen!"
 	},
 	"url": "reachradio.co.uk",
+	"matches": [
+		"*://reachradio.co.uk/*"
+	],
 	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Reach%20Radio/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Reach%20Radio/assets/thumbnail.png",

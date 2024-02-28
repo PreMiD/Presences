@@ -15,6 +15,10 @@
 		"www.buzzfeed.com",
 		"buzzfeed.com"
 	],
+	"matches": [
+		"*://www.buzzfeed.com/*",
+		"*://buzzfeed.com/*"
+	],
 	"version": "1.7.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BuzzFeed/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BuzzFeed/assets/thumbnail.png",

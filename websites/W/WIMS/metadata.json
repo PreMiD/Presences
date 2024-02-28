@@ -18,6 +18,10 @@
 		"wims-schaersvoorde.nl",
 		"85.148.206.56"
 	],
+	"matches": [
+		"*://wims-schaersvoorde.nl/*",
+		"*://85.148.206.56/*"
+	],
 	"version": "2.3.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WIMS/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WIMS/assets/thumbnail.png",

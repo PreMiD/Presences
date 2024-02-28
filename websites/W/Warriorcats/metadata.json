@@ -10,6 +10,9 @@
 		"de": "Entdecke die Welt der Warrior Cats und erfahre alles über die Fantasy-Bücher!"
 	},
 	"url": "www.warriorcats.de",
+	"matches": [
+		"*://www.warriorcats.de/*"
+	],
 	"version": "1.0.4",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Warriorcats/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Warriorcats/assets/thumbnail.png",

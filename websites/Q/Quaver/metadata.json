@@ -12,7 +12,11 @@
 		"quavergame.com",
 		"wiki.quavergame.com"
 	],
-	"version": "1.0.2",
+	"matches": [
+		"*://quavergame.com/*",
+		"*://wiki.quavergame.com/*"
+	],
+	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Q/Quaver/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Q/Quaver/assets/thumbnail.jpg",
 	"color": "#09a4c6",

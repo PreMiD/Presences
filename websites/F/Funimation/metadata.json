@@ -11,6 +11,9 @@
 		"vi_VN": "Chiếu trực tiếp và mua các bộ anime chính thức như My Hero Academia, Drifters và Fairy Tail. Xem anime miễn phí trực tuyến hoặc đăng kí và hơn nữa."
 	},
 	"url": "www.funimation.com",
+	"matches": [
+		"*://www.funimation.com/*"
+	],
 	"version": "1.2.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Funimation/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Funimation/assets/thumbnail.png",

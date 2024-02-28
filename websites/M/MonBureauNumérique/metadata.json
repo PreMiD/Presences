@@ -11,6 +11,9 @@
 	},
 	"url": "www.monbureaunumerique.fr",
 	"regExp": "\\b[a-zA-Z0-9.-]+\\.monbureaunumerique\\.fr\\b",
+	"matches": [
+		"*://*.monbureaunumerique.fr/*"
+	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MonBureauNum%C3%A9rique/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MonBureauNum%C3%A9rique/assets/thumbnail.png",

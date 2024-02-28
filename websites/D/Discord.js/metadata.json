@@ -12,6 +12,10 @@
 	},
 	"url": "discord.js.org",
 	"regExp": "([a-z0-9-]+[.])*(discord[.]js.org|old[.]discordjs.dev)[/]",
+	"matches": [
+		"*://*.discord.js.org/*",
+		"*://*.old.discordjs.dev/*"
+	],
 	"version": "1.2.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Discord.js/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Discord.js/assets/thumbnail.png",

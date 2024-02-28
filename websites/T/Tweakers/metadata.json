@@ -11,6 +11,9 @@
 	},
 	"url": "tweakers.net",
 	"regExp": "([a-z0-9-]+[.])*tweakers[.]net[/]",
+	"matches": [
+		"*://*.tweakers.net/*"
+	],
 	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tweakers/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tweakers/assets/thumbnail.png",

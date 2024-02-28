@@ -16,6 +16,12 @@
 		"comics.bungie.net",
 		"bungiestore.com"
 	],
+	"matches": [
+		"*://www.bungie.net/*",
+		"*://bungie.net/*",
+		"*://comics.bungie.net/*",
+		"*://bungiestore.com/*"
+	],
 	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Bungie/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Bungie/assets/thumbnail.png",

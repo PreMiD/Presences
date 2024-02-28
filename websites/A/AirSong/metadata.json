@@ -10,6 +10,9 @@
 	},
 	"url": "localhost",
 	"regExp": "192[.]168[.]1[.]([0-9]+)",
+	"matches": [
+		"*://192.168.1.*/*"
+	],
 	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AirSong/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AirSong/assets/thumbnail.png",

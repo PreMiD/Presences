@@ -13,6 +13,10 @@
 		"play.typeracer.com",
 		"data.typeracer.com"
 	],
+	"matches": [
+		"*://play.typeracer.com/*",
+		"*://data.typeracer.com/*"
+	],
 	"version": "1.1.26",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Typeracer/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Typeracer/assets/thumbnail.png",

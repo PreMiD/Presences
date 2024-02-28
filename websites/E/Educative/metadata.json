@@ -12,6 +12,10 @@
 		"educative.io",
 		"www.educative.io"
 	],
+	"matches": [
+		"*://educative.io/*",
+		"*://www.educative.io/*"
+	],
 	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Educative/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Educative/assets/thumbnail.png",

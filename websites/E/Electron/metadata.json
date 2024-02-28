@@ -22,6 +22,10 @@
 		"electronjs.org",
 		"www.electronjs.org"
 	],
+	"matches": [
+		"*://electronjs.org/*",
+		"*://www.electronjs.org/*"
+	],
 	"version": "1.2.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Electron/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Electron/assets/thumbnail.png",

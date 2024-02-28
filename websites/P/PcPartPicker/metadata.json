@@ -10,6 +10,9 @@
 	},
 	"url": "pcpartpicker.com",
 	"regExp": "([a-z]{2}.|)pcpartpicker.com",
+	"matches": [
+		"*://*.pcpartpicker.com/*"
+	],
 	"version": "1.0.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PcPartPicker/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PcPartPicker/assets/thumbnail.png",

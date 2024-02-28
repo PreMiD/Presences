@@ -9,6 +9,9 @@
 		"en": "Visual Studio Code for the Web Anywhere anytime, entirely in your browser [Parameters for Customisation](https://github.com/PreMiD/Presences/blob/master/websites/V/vscode.dev/README.md)"
 	},
 	"url": "vscode.dev",
+	"matches": [
+		"*://vscode.dev/*"
+	],
 	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/vscode.dev/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/vscode.dev/assets/thumbnail.png",

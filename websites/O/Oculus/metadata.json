@@ -20,6 +20,11 @@
 		"support.oculus.com",
 		"secure.oculus.com"
 	],
+	"matches": [
+		"*://www.oculus.com/*",
+		"*://support.oculus.com/*",
+		"*://secure.oculus.com/*"
+	],
 	"version": "1.2.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/Oculus/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/Oculus/assets/thumbnail.png",

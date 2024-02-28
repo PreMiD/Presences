@@ -13,6 +13,10 @@
 		"dev.to",
 		"shop.dev.to"
 	],
+	"matches": [
+		"*://dev.to/*",
+		"*://shop.dev.to/*"
+	],
 	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/DEV%20Community/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/DEV%20Community/assets/thumbnail.png",

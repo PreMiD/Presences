@@ -28,6 +28,14 @@
 		"developer.apple.com",
 		"www.icloud.com"
 	],
+	"matches": [
+		"*://www.apple.com/*",
+		"*://support.apple.com/*",
+		"*://getsupport.apple.com/*",
+		"*://apps.apple.com/*",
+		"*://developer.apple.com/*",
+		"*://www.icloud.com/*"
+	],
 	"version": "2.3.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/thumbnail.jpg",
@@ -44,6 +52,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": "https://www.icloud.com/applications/mail2/current/*",
+	"iFrameMatches": [
+		"https://www.icloud.com/applications/mail2/current/*"
+	],
 	"settings": [
 		{
 			"id": "lang",

@@ -12,6 +12,9 @@
 		"vi_VN": "Quizlet cung cấp các công cụ đơn giản để giúp bạn học tất cả mọi thứ. Hãy bắt đầu học tập từ ngay hôm nay với các thẻ ghi nhớ, trò chơi và công cụ học tập — tất cả đều miễn phí."
 	},
 	"url": "quizlet.com",
+	"matches": [
+		"*://quizlet.com/*"
+	],
 	"version": "1.1.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Q/Quizlet/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Q/Quizlet/assets/thumbnail.png",
@@ -23,6 +26,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://*.quizlet.com/*"
+	],
 	"settings": [
 		{
 			"id": "buttons",

@@ -11,6 +11,9 @@
 	},
 	"url": "vidoza.net",
 	"regExp": "(ww(w)?([0-9])?[.])?vidoza[.][a-z]*",
+	"matches": [
+		"*://*.vidoza.net/*"
+	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vidoza/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vidoza/assets/thumbnail.png",

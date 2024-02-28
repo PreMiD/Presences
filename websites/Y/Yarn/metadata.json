@@ -12,6 +12,9 @@
 		"nl": "Garen is een pakketbeheerder die ook dienst doet als projectmanager."
 	},
 	"url": "yarnpkg.com",
+	"matches": [
+		"*://yarnpkg.com/*"
+	],
 	"version": "1.2.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/Yarn/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/Yarn/assets/thumbnail.png",

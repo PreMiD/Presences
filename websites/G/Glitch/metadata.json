@@ -16,6 +16,9 @@
 		"status.glitch.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*glitch([.][a-z]+)+[/]",
+	"matches": [
+		"*://*.glitch.com/*"
+	],
 	"version": "1.8.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Glitch/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Glitch/assets/thumbnail.png",

@@ -9,6 +9,9 @@
 		"en": "draw.io or diagrams.net is a configurable diagramming/whiteboarding visualization application"
 	},
 	"url": "app.diagrams.net",
+	"matches": [
+		"*://app.diagrams.net/*"
+	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/draw.io/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/draw.io/assets/thumbnail.png",

@@ -10,6 +10,9 @@
 		"nl": "The Cutting Room Floor is een site gewijd aan het opgraven en onderzoeken van ongebruikte en geknipte inhoud uit videogames."
 	},
 	"url": "tcrf.net",
+	"matches": [
+		"*://tcrf.net/*"
+	],
 	"version": "1.4.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TCRF/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TCRF/assets/thumbnail.png",

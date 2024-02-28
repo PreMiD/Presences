@@ -9,6 +9,9 @@
 		"en": "Hitbloq is a competitive Beat Saber service with endless map pools where anything is rankable."
 	},
 	"url": "hitbloq.com",
+	"matches": [
+		"*://hitbloq.com/*"
+	],
 	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Hitbloq/assets/thumbnail.png",

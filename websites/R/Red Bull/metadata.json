@@ -9,6 +9,9 @@
 		"en": "The official website of RedBull"
 	},
 	"url": "www.redbull.com",
+	"matches": [
+		"*://www.redbull.com/*"
+	],
 	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Red%20Bull/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Red%20Bull/assets/thumbnail.png",

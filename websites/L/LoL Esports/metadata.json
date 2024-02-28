@@ -11,6 +11,9 @@
 		"nl": "De beste plek om League of Legends esports te bekijken en beloningen te verdienen!"
 	},
 	"url": "lolesports.com",
+	"matches": [
+		"*://lolesports.com/*"
+	],
 	"version": "1.1.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LoL%20Esports/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LoL%20Esports/assets/thumbnail.jpg",
@@ -24,5 +27,9 @@
 		"riotgames"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://player.twitch.tv/*",
+		"*://www.youtube.com/*"
+	]
 }

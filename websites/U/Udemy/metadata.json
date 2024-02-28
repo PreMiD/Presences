@@ -11,6 +11,9 @@
 		"nl": "Udemy is een online leer- en onderwijsmarktplaats met meer dan 100.000 cursussen en 24 miljoen studenten."
 	},
 	"url": "www.udemy.com",
+	"matches": [
+		"*://www.udemy.com/*"
+	],
 	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/U/Udemy/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/Udemy/assets/thumbnail.png",

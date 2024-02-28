@@ -10,6 +10,9 @@
 		"nl": "Node.js® is een JavaScript-runtime die is gebouwd op de V8 JavaScript-engine van Chrome."
 	},
 	"url": "nodejs.org",
+	"matches": [
+		"*://nodejs.org/*"
+	],
 	"version": "1.3.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Nodejs.org/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Nodejs.org/assets/thumbnail.png",

@@ -13,6 +13,10 @@
 		"minecraft.menu",
 		"www.minecraft.menu"
 	],
+	"matches": [
+		"*://minecraft.menu/*",
+		"*://www.minecraft.menu/*"
+	],
 	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Minecraft%20Menu/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Minecraft%20Menu/assets/thumbnail.jpg",

@@ -15,6 +15,11 @@
 		"beta.voidbots.net",
 		"docs.voidbots.net"
 	],
+	"matches": [
+		"*://voidbots.net/*",
+		"*://beta.voidbots.net/*",
+		"*://docs.voidbots.net/*"
+	],
 	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Void%20Bots/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Void%20Bots/assets/thumbnail.png",

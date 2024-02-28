@@ -23,6 +23,9 @@
 		"nl": "Luister gratis naar de beste DJ's en radiopresentatoren ter wereld."
 	},
 	"url": "www.mixcloud.com",
+	"matches": [
+		"*://www.mixcloud.com/*"
+	],
 	"version": "1.2.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Mixcloud/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Mixcloud/assets/thumbnail.jpg",

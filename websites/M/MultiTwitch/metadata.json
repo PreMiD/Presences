@@ -12,6 +12,10 @@
 		"multitwitch.tv",
 		"www.multitwitch.tv"
 	],
+	"matches": [
+		"*://multitwitch.tv/*",
+		"*://www.multitwitch.tv/*"
+	],
 	"version": "1.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MultiTwitch/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MultiTwitch/assets/thumbnail.png",

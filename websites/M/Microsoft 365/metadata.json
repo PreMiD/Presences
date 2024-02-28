@@ -14,6 +14,11 @@
 		"onedrive.live.com"
 	],
 	"regExp": "www[.]office[.]com|([a-z0-9-_]+)[-]my[.]sharepoint[.]com|onedrive[.]live[.]com",
+	"matches": [
+		"*://www.office.com/*",
+		"*://*.sharepoint.com/*",
+		"*://onedrive.live.com/*"
+	],
 	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Microsoft%20365/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Microsoft%20365/assets/thumbnail.png",
@@ -27,6 +32,11 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://www.office.com/*",
+		"*://*.sharepoint.com/*",
+		"*://onedrive.live.com/*"
+	],
 	"settings": [
 		{
 			"id": "privacy",

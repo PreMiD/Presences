@@ -17,6 +17,9 @@
 		"nl": "Speel de nummers, albums, afspeellijsten en podcasts af die je leuk vindt op de geheel nieuwe Pandora."
 	},
 	"url": "www.pandora.com",
+	"matches": [
+		"*://www.pandora.com/*"
+	],
 	"version": "2.1.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Pandora/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Pandora/assets/thumbnail.png",

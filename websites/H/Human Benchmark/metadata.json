@@ -10,6 +10,9 @@
 		"nl": "Meet je vaardigheden met hersenspellen en cognitieve tests."
 	},
 	"url": "humanbenchmark.com",
+	"matches": [
+		"*://humanbenchmark.com/*"
+	],
 	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Human%20Benchmark/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Human%20Benchmark/assets/thumbnail.jpg",

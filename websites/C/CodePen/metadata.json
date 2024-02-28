@@ -14,6 +14,10 @@
 		"codepen.io",
 		"www.codepen.io"
 	],
+	"matches": [
+		"*://codepen.io/*",
+		"*://www.codepen.io/*"
+	],
 	"version": "1.2.25",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/CodePen/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/CodePen/assets/thumbnail.png",

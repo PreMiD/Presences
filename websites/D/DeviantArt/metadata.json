@@ -20,6 +20,16 @@
 		"deviantartads.com",
 		"sta.sh"
 	],
+	"matches": [
+		"*://www.deviantart.com/*",
+		"*://chat.deviantart.com/*",
+		"*://groups.deviantart.com/*",
+		"*://portfolio.deviantart.com/*",
+		"*://shop.deviantart.com/*",
+		"*://www.deviantartsupport.com/*",
+		"*://deviantartads.com/*",
+		"*://sta.sh/*"
+	],
 	"version": "1.2.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/DeviantArt/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/DeviantArt/assets/thumbnail.png",

@@ -16,6 +16,13 @@
 		"ideas.streamlabs.com",
 		"support.streamlabs.com"
 	],
+	"matches": [
+		"*://streamlabs.com/*",
+		"*://dev.streamlabs.com/*",
+		"*://howto.streamlabs.com/*",
+		"*://ideas.streamlabs.com/*",
+		"*://support.streamlabs.com/*"
+	],
 	"version": "1.1.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Streamlabs/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Streamlabs/assets/thumbnail.png",

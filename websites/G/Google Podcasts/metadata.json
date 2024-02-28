@@ -12,6 +12,9 @@
 		"vi_VN": "Với Google Podcasts, bạn có thể tìm và lắng nghe các bản podcast trên thế giới miễn phí."
 	},
 	"url": "podcasts.google.com",
+	"matches": [
+		"*://podcasts.google.com/*"
+	],
 	"version": "1.1.12",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Podcasts/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Podcasts/assets/thumbnail.jpg",

@@ -9,6 +9,9 @@
 		"en": "An online ace attorney case maker and generator."
 	},
 	"url": "objection.lol",
+	"matches": [
+		"*://objection.lol/*"
+	],
 	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/Objection.lol/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/Objection.lol/assets/thumbnail.png",

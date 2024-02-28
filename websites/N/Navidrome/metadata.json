@@ -13,6 +13,10 @@
 		"www.navidrome.org"
 	],
 	"regExp": "navidrome[.]([a-z0-9]+)[.]([a-z0-9]+)",
+	"matches": [
+		"*://navidrome.org/*",
+		"*://www.navidrome.org/*"
+	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Navidrome/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Navidrome/assets/thumbnail.png",

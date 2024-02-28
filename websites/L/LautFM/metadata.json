@@ -11,6 +11,9 @@
 		"nl": "Laut.FM is een website om uw eigen muziekstation te maken of naar muziek te luisteren."
 	},
 	"url": "laut.fm",
+	"matches": [
+		"*://laut.fm/*"
+	],
 	"version": "1.3.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LautFM/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LautFM/assets/thumbnail.png",

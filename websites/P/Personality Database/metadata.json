@@ -10,6 +10,9 @@
 	},
 	"url": "personality-database.com",
 	"regExp": "([a-z0-9-]+[.])*personality-database[.]com[/]",
+	"matches": [
+		"*://*.personality-database.com/*"
+	],
 	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/thumbnail.png",

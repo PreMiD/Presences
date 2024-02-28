@@ -14,6 +14,10 @@
 		"www.n11.com",
 		"urun.n11.com"
 	],
+	"matches": [
+		"*://www.n11.com/*",
+		"*://urun.n11.com/*"
+	],
 	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/n11.com/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/n11.com/assets/thumbnail.png",

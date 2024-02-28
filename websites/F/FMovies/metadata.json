@@ -10,6 +10,9 @@
 	},
 	"url": "fmoviesz.to",
 	"regExp": "(ww(w)?([0-9]?)[.])?fmovies.*[.][a-z]*",
+	"matches": [
+		"__REPLACE_ME__"
+	],
 	"version": "1.2.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/FMovies/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/FMovies/assets/thumbnail.jpeg",
@@ -21,6 +24,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	],
 	"settings": [
 		{
 			"id": "image",

@@ -23,6 +23,13 @@
 	},
 	"url": "discord.com",
 	"regExp": "([a-z0-9-]+[.])*(discord[.]com|discord[.]gg|discordapp[.]com|discordmerch[.]com|discordstatus[.]com)[/]",
+	"matches": [
+		"*://*.discord.com/*",
+		"*://*.discord.gg/*",
+		"*://*.discordapp.com/*",
+		"*://*.discordmerch.com/*",
+		"*://*.discordstatus.com/*"
+	],
 	"version": "3.0.32",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Discord/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Discord/assets/thumbnail.png",

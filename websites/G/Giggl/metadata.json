@@ -19,6 +19,11 @@
 		"canary.giggl.app",
 		"status.giggl.app"
 	],
+	"matches": [
+		"*://giggl.app/*",
+		"*://canary.giggl.app/*",
+		"*://status.giggl.app/*"
+	],
 	"version": "2.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Giggl/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Giggl/assets/thumbnail.png",

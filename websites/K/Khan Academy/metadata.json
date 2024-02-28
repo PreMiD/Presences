@@ -12,6 +12,9 @@
 	},
 	"url": "www.khanacademy.org",
 	"regExp": "([a-z]+[.])+khanacademy[.]org[/]",
+	"matches": [
+		"*://*.khanacademy.org/*"
+	],
 	"version": "1.1.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Khan%20Academy/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Khan%20Academy/assets/thumbnail.png",

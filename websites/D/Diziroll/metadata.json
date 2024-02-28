@@ -14,6 +14,10 @@
 		"diziroll.com",
 		"www.diziroll.com"
 	],
+	"matches": [
+		"*://diziroll.com/*",
+		"*://www.diziroll.com/*"
+	],
 	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Diziroll/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Diziroll/assets/thumbnail.jpg",
@@ -26,5 +30,8 @@
 		"turkish"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

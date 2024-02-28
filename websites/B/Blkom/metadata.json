@@ -16,6 +16,12 @@
 		"www.blkom.com",
 		"www.animeblkom.net"
 	],
+	"matches": [
+		"*://blkom.com/*",
+		"*://animeblkom.net/*",
+		"*://www.blkom.com/*",
+		"*://www.animeblkom.net/*"
+	],
 	"version": "1.0.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Blkom/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Blkom/assets/thumbnail.png",
@@ -26,5 +32,8 @@
 		"streaming"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://videos.vid4up.xyz/*"
+	]
 }

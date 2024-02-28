@@ -11,6 +11,9 @@
 		"nl": "Tatsumaki biedt sociale aspecten, waaronder ledenprofielen, niveaus, leuke dingen en eenvoudige moderatie."
 	},
 	"url": "tatsu.gg",
+	"matches": [
+		"*://tatsu.gg/*"
+	],
 	"version": "1.2.25",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tatsumaki/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tatsumaki/assets/thumbnail.png",

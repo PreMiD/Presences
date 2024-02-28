@@ -16,6 +16,10 @@
 		"www.aniturk.net",
 		"aniturk.net"
 	],
+	"matches": [
+		"*://www.aniturk.net/*",
+		"*://aniturk.net/*"
+	],
 	"version": "1.0.27",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AniT%C3%BCrk/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AniT%C3%BCrk/assets/thumbnail.png",
@@ -27,5 +31,8 @@
 		"aniturk"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

@@ -16,6 +16,9 @@
 		"nl": "Folding@home is een project gericht op onderzoek naar ziektes. De problemen die we oplossen vereisen zo veel computerberekeningen - en we hebben jouw hulp nodig om de remedies te vinden! Bestrijd ziekten samen met ons."
 	},
 	"url": "client.foldingathome.org",
+	"matches": [
+		"*://client.foldingathome.org/*"
+	],
 	"version": "1.1.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Folding@home/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Folding@home/assets/thumbnail.png",
@@ -28,5 +31,9 @@
 		"foldingathome"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://client.foldingathome.org/*",
+		"*://127.0.0.1:7396/*"
+	]
 }

@@ -16,6 +16,14 @@
 		"hangar.papermc.dev",
 		"forums.papermc.io"
 	],
+	"matches": [
+		"*://papermc.io/*",
+		"*://docs.papermc.io/*",
+		"*://jd.papermc.io/*",
+		"*://hangar.papermc.io/*",
+		"*://hangar.papermc.dev/*",
+		"*://forums.papermc.io/*"
+	],
 	"version": "1.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PaperMC/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PaperMC/assets/thumbnail.png",

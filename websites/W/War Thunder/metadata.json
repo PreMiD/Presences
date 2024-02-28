@@ -15,6 +15,13 @@
 		"tss.warthunder.com",
 		"wiki.warthunder.com"
 	],
+	"matches": [
+		"*://warthunder.com/*",
+		"*://forum.warthunder.com/*",
+		"*://live.warthunder.com/*",
+		"*://tss.warthunder.com/*",
+		"*://wiki.warthunder.com/*"
+	],
 	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/War%20Thunder/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/War%20Thunder/assets/thumbnail.jpg",

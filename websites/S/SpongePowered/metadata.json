@@ -16,6 +16,13 @@
 		"docs.spongepowered.org",
 		"forums.spongepowered.org"
 	],
+	"matches": [
+		"*://jd.spongepowered.org/*",
+		"*://www.spongepowered.org/*",
+		"*://ore.spongepowered.org/*",
+		"*://docs.spongepowered.org/*",
+		"*://forums.spongepowered.org/*"
+	],
 	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SpongePowered/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SpongePowered/assets/thumbnail.png",

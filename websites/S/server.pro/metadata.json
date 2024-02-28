@@ -10,6 +10,9 @@
 	},
 	"url": "server.pro",
 	"regExp": "([a-z0-9-]+[.])*server[.]pro[/]",
+	"matches": [
+		"*://*.server.pro/*"
+	],
 	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/server.pro/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/server.pro/assets/thumbnail.png",

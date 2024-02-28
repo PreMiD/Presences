@@ -11,6 +11,9 @@
 		"nl": "Anime-streamingdienst in Korea."
 	},
 	"url": "laftel.net",
+	"matches": [
+		"*://laftel.net/*"
+	],
 	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/Laftel/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Laftel/assets/thumbnail.png",

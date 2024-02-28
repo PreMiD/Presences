@@ -11,6 +11,9 @@
 	},
 	"url": "www.artstation.com",
 	"regExp": "([a-z0-9-_]+)[.]artstation[.]com",
+	"matches": [
+		"*://*.artstation.com/*"
+	],
 	"version": "1.2.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/thumbnail.jpg",

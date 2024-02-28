@@ -11,6 +11,9 @@
 	},
 	"url": "magister.net",
 	"regExp": "([a-z0-9-]+[.])*magister[.]net[/]",
+	"matches": [
+		"*://*.magister.net/*"
+	],
 	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Magister/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Magister/assets/thumbnail.png",

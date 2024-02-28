@@ -16,6 +16,13 @@
 		"content.something.host",
 		"files.something.host"
 	],
+	"matches": [
+		"*://something.host/*",
+		"*://cp.something.host/*",
+		"*://support.something.host/*",
+		"*://content.something.host/*",
+		"*://files.something.host/*"
+	],
 	"version": "1.0.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Something.Host/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Something.Host/assets/thumbnail.png",

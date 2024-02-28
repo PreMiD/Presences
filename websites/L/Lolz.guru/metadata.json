@@ -10,6 +10,9 @@
 		"ru": "LZT (lolzteam, лолзтим) - форум об играх, способы заработка и раздачи"
 	},
 	"url": "lolz.guru",
+	"matches": [
+		"*://lolz.guru/*"
+	],
 	"version": "1.0.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/Lolz.guru/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Lolz.guru/assets/thumbnail.jpg",

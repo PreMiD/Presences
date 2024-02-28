@@ -10,6 +10,10 @@
 	},
 	"url": "www.miraheze.org",
 	"regExp": "([a-z0-9-]+[.])?miraheze[.](org|wiki)[/]",
+	"matches": [
+		"*://*.miraheze.org/*",
+		"*://*.miraheze.wiki/*"
+	],
 	"version": "1.0.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Miraheze/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Miraheze/assets/thumbnail.png",

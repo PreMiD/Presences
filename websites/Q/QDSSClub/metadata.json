@@ -21,6 +21,10 @@
 		"qdssclub.com",
 		"www.qdssclub.com"
 	],
+	"matches": [
+		"*://qdssclub.com/*",
+		"*://www.qdssclub.com/*"
+	],
 	"version": "1.2.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Q/QDSSClub/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Q/QDSSClub/assets/thumbnail.png",

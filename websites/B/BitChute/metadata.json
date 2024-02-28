@@ -10,6 +10,9 @@
 		"vi_VN": "BitChute là nền tảng chia sẻ nội dung qua hình thức peer-to-peer."
 	},
 	"url": "www.bitchute.com",
+	"matches": [
+		"*://www.bitchute.com/*"
+	],
 	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BitChute/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BitChute/assets/thumbnail.png",

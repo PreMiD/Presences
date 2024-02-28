@@ -11,6 +11,9 @@
 	},
 	"url": "www.curseforge.com",
 	"regExp": "([a-z0-9-]+[.])*curseforge[.]com[/]",
+	"matches": [
+		"*://*.curseforge.com/*"
+	],
 	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/CurseForge/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/CurseForge/assets/thumbnail.png",

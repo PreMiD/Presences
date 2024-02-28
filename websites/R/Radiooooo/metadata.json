@@ -10,6 +10,9 @@
 		"nl": "Radiooooo - De muzikale tijdmachine."
 	},
 	"url": "radiooooo.com",
+	"matches": [
+		"*://radiooooo.com/*"
+	],
 	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Radiooooo/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Radiooooo/assets/thumbnail.jpg",

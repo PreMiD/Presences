@@ -10,6 +10,9 @@
 	},
 	"url": "www.webnovel.com",
 	"regExp": "([a-z0-9]+[.])webnovel[.]com",
+	"matches": [
+		"*://*.webnovel.com/*"
+	],
 	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Webnovel/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Webnovel/assets/thumbnail.jpeg",

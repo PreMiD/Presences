@@ -17,6 +17,9 @@
 	},
 	"url": "www.daum.net",
 	"regExp": "(top[.])?([a-z]+)([.]v)?[.]daum[.]([a-z0-9]+)",
+	"matches": [
+		"*://*.daum.net/*"
+	],
 	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Daum/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Daum/assets/thumbnail.png",
@@ -29,6 +32,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://tv.kakao.com/embed/*"
+	],
 	"settings": [
 		{
 			"id": "timestamp",

@@ -11,6 +11,9 @@
 		"nl": "Website voor het lezen van manga in het Russisch"
 	},
 	"url": "mangalib.me",
+	"matches": [
+		"*://mangalib.me/*"
+	],
 	"version": "1.4.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Mangalib/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Mangalib/assets/thumbnail.png",

@@ -18,6 +18,9 @@
 	},
 	"url": "hypixel.net",
 	"regExp": "([a-z0-9-]+[.])*hypixel[.]net[/]",
+	"matches": [
+		"*://*.hypixel.net/*"
+	],
 	"version": "1.2.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Hypixel/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Hypixel/assets/thumbnail.jpg",

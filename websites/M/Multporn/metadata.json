@@ -11,6 +11,9 @@
 	},
 	"url": "www.multporn.net",
 	"regExp": "multporn[.]net",
+	"matches": [
+		"*://*.multporn.net/*"
+	],
 	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Multporn/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Multporn/assets/thumbnail.png",

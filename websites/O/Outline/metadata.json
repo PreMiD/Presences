@@ -13,6 +13,10 @@
 		"www.outline.com",
 		"outline.com"
 	],
+	"matches": [
+		"*://www.outline.com/*",
+		"*://outline.com/*"
+	],
 	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/Outline/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/Outline/assets/thumbnail.png",

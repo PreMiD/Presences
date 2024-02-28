@@ -10,6 +10,9 @@
 		"nl": "Beheer Trello-borden en ontvang rechtstreeks vanuit Discord op de hoogte van bordupdates!"
 	},
 	"url": "tacobot.app",
+	"matches": [
+		"*://tacobot.app/*"
+	],
 	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Taco/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Taco/assets/thumbnail.png",

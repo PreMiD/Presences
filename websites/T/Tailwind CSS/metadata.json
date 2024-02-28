@@ -15,6 +15,12 @@
 		"play.tailwindcss.com",
 		"blog.tailwindcss.com"
 	],
+	"matches": [
+		"*://tailwindcss.com/*",
+		"*://tailwindui.com/*",
+		"*://play.tailwindcss.com/*",
+		"*://blog.tailwindcss.com/*"
+	],
 	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tailwind%20CSS/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tailwind%20CSS/assets/thumbnail.png",

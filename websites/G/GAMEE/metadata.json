@@ -9,6 +9,9 @@
 		"en": "Play games, get tickets and WIN $$$. More tickets, more chances to WIN!"
 	},
 	"url": "www.gamee.com",
+	"matches": [
+		"*://www.gamee.com/*"
+	],
 	"version": "1.0.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GAMEE/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GAMEE/assets/thumbnail.png",

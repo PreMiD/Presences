@@ -11,6 +11,10 @@
 	},
 	"url": "readthedocs.io",
 	"regExp": "([a-z0-9-]+[.])*readthedocs[.](io|org)[/]?",
+	"matches": [
+		"*://*.readthedocs.io/*",
+		"*://*.readthedocs.org/*"
+	],
 	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Read%20the%20Docs/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Read%20the%20Docs/assets/thumbnail.png",

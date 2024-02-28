@@ -14,6 +14,10 @@
 		"simliveradio.net",
 		"laut.fm"
 	],
+	"matches": [
+		"*://simliveradio.net/*",
+		"*://laut.fm/*"
+	],
 	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SimLiveRadio/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SimLiveRadio/assets/thumbnail.png",

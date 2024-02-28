@@ -24,6 +24,10 @@
 		"www.bbc.co.uk",
 		"www.bbc.com"
 	],
+	"matches": [
+		"*://www.bbc.co.uk/*",
+		"*://www.bbc.com/*"
+	],
 	"version": "2.1.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/thumbnail.png",
@@ -41,6 +45,10 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://www.bbc.co.uk/*",
+		"*://www.bbc.com/*"
+	],
 	"settings": [
 		{
 			"multiLanguage": true,

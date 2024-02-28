@@ -10,6 +10,9 @@
 		"vi_VN": "Codeforces là trang web tổ chức các cuộc thi lập trình."
 	},
 	"url": "codeforces.com",
+	"matches": [
+		"*://codeforces.com/*"
+	],
 	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Codeforces/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Codeforces/assets/thumbnail.png",

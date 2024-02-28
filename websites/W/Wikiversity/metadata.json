@@ -15,6 +15,9 @@
 	},
 	"url": "wikiversity.org",
 	"regExp": "([a-z0-9-]+[.])+wikiversity[.]org[/]",
+	"matches": [
+		"*://*.wikiversity.org/*"
+	],
 	"version": "1.0.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wikiversity/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wikiversity/assets/thumbnail.png",

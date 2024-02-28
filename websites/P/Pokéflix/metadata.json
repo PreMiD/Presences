@@ -9,6 +9,9 @@
 		"en": "Watch all of your favourite Pokémon movies, episodes and specials for free online, right here on Pokéflix."
 	},
 	"url": "www.pokeflix.tv",
+	"matches": [
+		"*://www.pokeflix.tv/*"
+	],
 	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9flix/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9flix/assets/thumbnail.png",
@@ -22,6 +25,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://www.pokeflix.tv/*"
+	],
 	"settings": [
 		{
 			"id": "lang",

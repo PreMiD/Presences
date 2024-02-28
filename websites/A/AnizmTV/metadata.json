@@ -31,6 +31,25 @@
 		"turkanime.fun",
 		"turkceanimeizle.org"
 	],
+	"matches": [
+		"*://anizm.info/*",
+		"*://anizm.net/*",
+		"*://anizm.tv/*",
+		"*://puffytr.com/*",
+		"*://anizle.com/*",
+		"*://anizm.pro/*",
+		"*://turkanime.info/*",
+		"*://turkanime.pro/*",
+		"*://turkanime.shop/*",
+		"*://turkanime.xyz/*",
+		"*://turkanime.store/*",
+		"*://anizm.store/*",
+		"*://tranimeizle.org/*",
+		"*://animetr.fun/*",
+		"*://tranimeizle.xyz/*",
+		"*://turkanime.fun/*",
+		"*://turkceanimeizle.org/*"
+	],
 	"version": "2.0.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnizmTV/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnizmTV/assets/thumbnail.png",
@@ -43,5 +62,22 @@
 		"anizmtv"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://anizmplayer.com/*",
+		"*://ok.ru/*",
+		"*://my.mail.ru/*",
+		"*://sendvid.com/*",
+		"*://drive.google.com/file/*",
+		"*://streamplay.to/*",
+		"*://filemoon.sx/*",
+		"*://userscloud.com/*",
+		"*://www.yourupload.com/*",
+		"*://embedrise.com/*",
+		"*://vidmoly.to/*",
+		"*://bestvidhd.site/*",
+		"*://voe.sx/*",
+		"*://jayservicestuff.com/*",
+		"*://streamtape.com/*"
+	]
 }

@@ -10,6 +10,9 @@
 		"nl": "Streaming website voor de streamer Steven \"Destiny\" Bonnell II"
 	},
 	"url": "www.destiny.gg",
+	"matches": [
+		"*://www.destiny.gg/*"
+	],
 	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Destiny.gg/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Destiny.gg/assets/thumbnail.png",

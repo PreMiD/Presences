@@ -11,6 +11,9 @@
 		"nl": "Sinefy is een Turkse videostreamingdienst voor het bekijken van films en tv-programma's in full HD."
 	},
 	"url": "sinefy.com",
+	"matches": [
+		"*://sinefy.com/*"
+	],
 	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Sinefy/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Sinefy/assets/thumbnail.png",
@@ -22,6 +25,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	],
 	"settings": [
 		{
 			"icon": "fas fa-address-card",

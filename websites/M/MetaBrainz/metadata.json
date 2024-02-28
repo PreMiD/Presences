@@ -13,6 +13,11 @@
 		"blog.metabrainz.org",
 		"community.metabrainz.org"
 	],
+	"matches": [
+		"*://metabrainz.org/*",
+		"*://blog.metabrainz.org/*",
+		"*://community.metabrainz.org/*"
+	],
 	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MetaBrainz/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MetaBrainz/assets/thumbnail.png",

@@ -12,6 +12,10 @@
 		"3388.to",
 		"www.3388.to"
 	],
+	"matches": [
+		"*://3388.to/*",
+		"*://www.3388.to/*"
+	],
 	"version": "1.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/0-9/3388/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/0-9/3388/assets/thumbnail.png",

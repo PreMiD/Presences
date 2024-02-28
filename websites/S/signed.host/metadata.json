@@ -16,6 +16,11 @@
 		"signed.host",
 		"bio.signed.host"
 	],
+	"matches": [
+		"*://www.signed.host/*",
+		"*://signed.host/*",
+		"*://bio.signed.host/*"
+	],
 	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/signed.host/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/signed.host/assets/thumbnail.png",

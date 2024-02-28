@@ -13,6 +13,10 @@
 		"mangakakalot.com",
 		"manganato.com"
 	],
+	"matches": [
+		"*://mangakakalot.com/*",
+		"*://manganato.com/*"
+	],
 	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaKakalot/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaKakalot/assets/thumbnail.jpg",

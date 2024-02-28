@@ -14,6 +14,10 @@
 		"www.blockbench.net",
 		"web.blockbench.net"
 	],
+	"matches": [
+		"*://www.blockbench.net/*",
+		"*://web.blockbench.net/*"
+	],
 	"version": "1.1.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Blockbench/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Blockbench/assets/thumbnail.png",

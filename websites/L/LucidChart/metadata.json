@@ -13,6 +13,10 @@
 		"www.lucidchart.com",
 		"lucidchart.com"
 	],
+	"matches": [
+		"*://www.lucidchart.com/*",
+		"*://lucidchart.com/*"
+	],
 	"version": "1.3.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LucidChart/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LucidChart/assets/thumbnail.png",

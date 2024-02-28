@@ -16,6 +16,12 @@
 		"serien.sx",
 		"serienstream.to"
 	],
+	"matches": [
+		"*://s.to/*",
+		"*://serienstream.sx/*",
+		"*://serien.sx/*",
+		"*://serienstream.to/*"
+	],
 	"version": "1.6.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/s.to/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/s.to/assets/thumbnail.png",

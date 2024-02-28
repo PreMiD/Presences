@@ -26,6 +26,11 @@
 		"bunpro.jp",
 		"community.bunpro.jp"
 	],
+	"matches": [
+		"*://www.bunpro.jp/*",
+		"*://bunpro.jp/*",
+		"*://community.bunpro.jp/*"
+	],
 	"version": "2.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Bunpro/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Bunpro/assets/thumbnail.png",

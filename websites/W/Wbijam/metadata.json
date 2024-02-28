@@ -11,6 +11,9 @@
 	},
 	"url": "wbijam.pl",
 	"regExp": "([a-z0-9.]*)wbijam[.]pl",
+	"matches": [
+		"*://*.wbijam.pl/*"
+	],
 	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wbijam/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wbijam/assets/thumbnail.png",
@@ -21,5 +24,11 @@
 		"anime"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://mp4upload.com/*",
+		"*://mega.nz/*",
+		"*://video.sib.net/*",
+		"*://ebd.cda.pl/*"
+	]
 }

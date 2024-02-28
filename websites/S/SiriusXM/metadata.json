@@ -19,6 +19,10 @@
 		"player.siriusxm.com",
 		"player.siriusxm.ca"
 	],
+	"matches": [
+		"*://player.siriusxm.com/*",
+		"*://player.siriusxm.ca/*"
+	],
 	"version": "1.2.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SiriusXM/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SiriusXM/assets/thumbnail.png",

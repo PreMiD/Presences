@@ -32,6 +32,17 @@
 		"podcasters.spotify.com",
 		"accounts.spotify.com"
 	],
+	"matches": [
+		"*://www.spotify.com/*",
+		"*://open.spotify.com/*",
+		"*://newsroom.spotify.com/*",
+		"*://artists.spotify.com/*",
+		"*://developer.spotify.com/*",
+		"*://investors.spotify.com/*",
+		"*://support.spotify.com/*",
+		"*://podcasters.spotify.com/*",
+		"*://accounts.spotify.com/*"
+	],
 	"version": "2.3.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Spotify%20Podcasts/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Spotify%20Podcasts/assets/thumbnail.png",

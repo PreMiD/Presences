@@ -12,6 +12,10 @@
 		"opensea.io",
 		"docs.opensea.io"
 	],
+	"matches": [
+		"*://opensea.io/*",
+		"*://docs.opensea.io/*"
+	],
 	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/OpenSea/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/OpenSea/assets/thumbnail.png",

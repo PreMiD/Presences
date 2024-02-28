@@ -12,6 +12,10 @@
 		"animeflix.live",
 		"www.animeflix.live"
 	],
+	"matches": [
+		"*://animeflix.live/*",
+		"*://www.animeflix.live/*"
+	],
 	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Animeflix/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Animeflix/assets/thumbnail.jpg",

@@ -22,6 +22,16 @@
 		"original.tm-exchange.com",
 		"blog.tm-exchange.com"
 	],
+	"matches": [
+		"*://tm-exchange.com/*",
+		"*://www.tm-exchange.com/*",
+		"*://united.tm-exchange.com/*",
+		"*://tmnforever.tm-exchange.com/*",
+		"*://nations.tm-exchange.com/*",
+		"*://sunrise.tm-exchange.com/*",
+		"*://original.tm-exchange.com/*",
+		"*://blog.tm-exchange.com/*"
+	],
 	"version": "1.1.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TrackMania%20Exchange/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TrackMania%20Exchange/assets/thumbnail.png",

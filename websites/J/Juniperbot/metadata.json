@@ -15,6 +15,11 @@
 		"feedback.juniper.bot",
 		"juniper.bot"
 	],
+	"matches": [
+		"*://docs.juniper.bot/*",
+		"*://feedback.juniper.bot/*",
+		"*://juniper.bot/*"
+	],
 	"version": "2.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/Juniperbot/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/Juniperbot/assets/thumbnail.png",

@@ -12,6 +12,10 @@
 		"konachan.com",
 		"konachan.net"
 	],
+	"matches": [
+		"*://konachan.com/*",
+		"*://konachan.net/*"
+	],
 	"version": "1.0.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Konachan/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Konachan/assets/thumbnail.jpg",

@@ -21,6 +21,9 @@
 	},
 	"url": "docs.google.com",
 	"regExp": "docs[.]google([.][a-z]+)+[/]",
+	"matches": [
+		"*://docs.google.com/*"
+	],
 	"version": "1.4.28",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Docs/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Docs/assets/thumbnail.jpg",

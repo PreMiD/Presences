@@ -17,6 +17,13 @@
 		"support.blockchain.com",
 		"www.blockchain-status.com"
 	],
+	"matches": [
+		"*://www.blockchain.com/*",
+		"*://login.blockchain.com/*",
+		"*://exchange.blockchain.com/*",
+		"*://support.blockchain.com/*",
+		"*://www.blockchain-status.com/*"
+	],
 	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Blockchain/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Blockchain/assets/thumbnail.png",

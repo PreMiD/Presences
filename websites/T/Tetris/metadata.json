@@ -9,6 +9,9 @@
 		"en": "Visit the official Tetris® website to play FREE online Tetris, get game and merchandise updates, and read about global Tetris events."
 	},
 	"url": "tetris.com",
+	"matches": [
+		"*://tetris.com/*"
+	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tetris/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tetris/assets/thumbnail.jpg",
@@ -22,5 +25,8 @@
 		"official"
 	],
 	"iframe": true,
-	"iFrameRegExp": "tetris[.]com[/]games-content[/]play-tetris-content"
+	"iFrameRegExp": "tetris[.]com[/]games-content[/]play-tetris-content",
+	"iFrameMatches": [
+		"*://tetris.com/games-content/play-tetris-content*"
+	]
 }

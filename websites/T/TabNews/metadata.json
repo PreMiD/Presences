@@ -10,6 +10,9 @@
 		"pt_BR": "TabNews é um site com conteúdo para quem trabalha com Programação e Tecnologia."
 	},
 	"url": "www.tabnews.com.br",
+	"matches": [
+		"*://www.tabnews.com.br/*"
+	],
 	"version": "1.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TabNews/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TabNews/assets/thumbnail.png",

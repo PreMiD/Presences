@@ -19,6 +19,10 @@
 		"www.waze.com",
 		"beta.waze.com"
 	],
+	"matches": [
+		"*://www.waze.com/*",
+		"*://beta.waze.com/*"
+	],
 	"version": "1.2.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Waze/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Waze/assets/thumbnail.png",

@@ -14,6 +14,10 @@
 		"www.fullprogramlarindir.com",
 		"fullprogramlarindir.com"
 	],
+	"matches": [
+		"*://www.fullprogramlarindir.com/*",
+		"*://fullprogramlarindir.com/*"
+	],
 	"version": "1.0.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Full%20Programlar%20Indir/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Full%20Programlar%20Indir/assets/thumbnail.png",

@@ -11,6 +11,9 @@
 		"nl": "Website voor het lezen van hentai-manga in het Russisch"
 	},
 	"url": "hentailib.me",
+	"matches": [
+		"*://hentailib.me/*"
+	],
 	"version": "1.1.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Hentailib/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Hentailib/assets/thumbnail.png",

@@ -12,6 +12,9 @@
 		"ga_IE": "Is é VVVVID do theilifís phearsantaithe ar líne go hiomlán saor in aisce."
 	},
 	"url": "www.vvvvid.it",
+	"matches": [
+		"*://www.vvvvid.it/*"
+	],
 	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/VVVVID/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/VVVVID/assets/thumbnail.png",

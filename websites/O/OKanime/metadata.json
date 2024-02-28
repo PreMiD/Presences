@@ -13,6 +13,10 @@
 		"okanime.tv",
 		"www.okanime.tv"
 	],
+	"matches": [
+		"*://okanime.tv/*",
+		"*://www.okanime.tv/*"
+	],
 	"version": "1.1.29",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/OKanime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/OKanime/assets/thumbnail.png",
@@ -24,5 +28,8 @@
 		"streaming"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

@@ -12,6 +12,10 @@
 		"dashboard.emanate.live",
 		"emanate.live"
 	],
+	"matches": [
+		"*://dashboard.emanate.live/*",
+		"*://emanate.live/*"
+	],
 	"version": "1.0.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Emanate/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Emanate/assets/thumbnail.png",

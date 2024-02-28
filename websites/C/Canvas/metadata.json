@@ -14,6 +14,11 @@
 		"www.canvas.net"
 	],
 	"regExp": "((learn|www)[.]canvas[.]net|canvas[.]\\w+?([.]\\w+)+)|(\\w+?[.]instructure[.]com)",
+	"matches": [
+		"*://learn.canvas.net/*",
+		"*://www.canvas.net/*",
+		"*://*.instructure.com/*"
+	],
 	"version": "1.2.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Canvas/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Canvas/assets/thumbnail.png",

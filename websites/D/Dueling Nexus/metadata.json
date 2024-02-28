@@ -20,6 +20,9 @@
 		"nl": "duelingnexus.com is een gratis online Yu-Gi-Oh-simulator voor browsers"
 	},
 	"url": "duelingnexus.com",
+	"matches": [
+		"*://duelingnexus.com/*"
+	],
 	"version": "1.5.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Dueling%20Nexus/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Dueling%20Nexus/assets/thumbnail.jpg",

@@ -11,6 +11,9 @@
 		"pt_BR": "Leia online e organize suas leituras aqui. Leia em português (PT-BR) os mangás mais lidos como Naruto, Fairy Tail, One Piece e outros!"
 	},
 	"url": "mangalivre.net",
+	"matches": [
+		"*://mangalivre.net/*"
+	],
 	"version": "1.3.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Manga%20Livre/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Manga%20Livre/assets/thumbnail.png",

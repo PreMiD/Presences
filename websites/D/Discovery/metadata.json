@@ -15,6 +15,12 @@
 		"go.discovery.com",
 		"www.go.discovery.com"
 	],
+	"matches": [
+		"*://discoveryplus.com/*",
+		"*://www.discoveryplus.com/*",
+		"*://go.discovery.com/*",
+		"*://www.go.discovery.com/*"
+	],
 	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Discovery/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Discovery/assets/thumbnail.png",

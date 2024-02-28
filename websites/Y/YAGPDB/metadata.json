@@ -15,6 +15,10 @@
 		"yagpdb.xyz",
 		"docs.yagpdb.xyz"
 	],
+	"matches": [
+		"*://yagpdb.xyz/*",
+		"*://docs.yagpdb.xyz/*"
+	],
 	"version": "1.2.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/YAGPDB/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/YAGPDB/assets/thumbnail.png",

@@ -10,6 +10,9 @@
 		"nl": "flyte scribe is een blog geschreven door edo/flyte, waarin hij op de interwebs vertelt over zijn huidige leven in Tokio, Japan. Voornamelijk praat over fotografie en dergelijke."
 	},
 	"url": "flyte.moe",
+	"matches": [
+		"*://flyte.moe/*"
+	],
 	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/flyte%20scribe/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/flyte%20scribe/assets/thumbnail.png",

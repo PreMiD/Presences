@@ -11,6 +11,9 @@
 	},
 	"url": "shikimori.one",
 	"regExp": "shikimori([.][a-z]+)+[/]",
+	"matches": [
+		"*://shikimori.one/*"
+	],
 	"version": "1.2.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Shikimori/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Shikimori/assets/thumbnail.png",

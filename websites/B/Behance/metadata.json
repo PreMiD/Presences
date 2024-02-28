@@ -9,6 +9,9 @@
 		"en": "Behance is the world's largest creative network for showcasing and discovering creative work."
 	},
 	"url": "www.behance.net",
+	"matches": [
+		"*://www.behance.net/*"
+	],
 	"version": "1.0.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Behance/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Behance/assets/thumbnail.jpeg",
@@ -24,6 +27,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"https://livestream-cdn.adobe.io/*"
+	],
 	"settings": [
 		{
 			"id": "image",

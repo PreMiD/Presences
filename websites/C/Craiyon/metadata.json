@@ -9,6 +9,9 @@
 		"en": "Craiyon is an AI model that can draw images from any text prompt!"
 	},
 	"url": "www.craiyon.com",
+	"matches": [
+		"*://www.craiyon.com/*"
+	],
 	"version": "1.2.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Craiyon/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Craiyon/assets/thumbnail.png",

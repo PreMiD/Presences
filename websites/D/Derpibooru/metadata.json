@@ -11,6 +11,9 @@
 		"nl": "Derpibooru is een afbeeldingsrepository waarmee mensen kunst van over het hele internet kunnen samenbrengen, de afbeeldingen kunnen voorzien worden met tags en een originele URL voor eenvoudig zoeken en de kunstwerken te kunnen bespreken."
 	},
 	"url": "derpibooru.org",
+	"matches": [
+		"*://derpibooru.org/*"
+	],
 	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Derpibooru/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Derpibooru/assets/thumbnail.png",

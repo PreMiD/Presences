@@ -9,6 +9,9 @@
 		"en": "Unicode web service for character search. Find, copy and paste your favorite characters: 😎 Emoji, ❤ Hearts, 💲 Currencies, → Arrows, ★ Stars and many others 🚩"
 	},
 	"url": "unicode-table.com",
+	"matches": [
+		"*://unicode-table.com/*"
+	],
 	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/U/Unicode%20Character%20Table/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/Unicode%20Character%20Table/assets/thumbnail.png",

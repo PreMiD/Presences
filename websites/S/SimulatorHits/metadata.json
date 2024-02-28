@@ -22,6 +22,11 @@
 		"panel.simulatorhits.com",
 		"simulatorhits.dev"
 	],
+	"matches": [
+		"*://simulatorhits.com/*",
+		"*://panel.simulatorhits.com/*",
+		"*://simulatorhits.dev/*"
+	],
 	"version": "2.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SimulatorHits/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SimulatorHits/assets/thumbnail.png",

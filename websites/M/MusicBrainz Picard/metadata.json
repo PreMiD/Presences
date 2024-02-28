@@ -12,6 +12,10 @@
 		"picard.musicbrainz.org",
 		"picard-docs.musicbrainz.org"
 	],
+	"matches": [
+		"*://picard.musicbrainz.org/*",
+		"*://picard-docs.musicbrainz.org/*"
+	],
 	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MusicBrainz%20Picard/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MusicBrainz%20Picard/assets/thumbnail.png",

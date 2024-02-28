@@ -14,6 +14,9 @@
 		"nl": "Wikimedia Commons is 's werelds grootste gratis te gebruiken bibliotheek met illustraties, foto's, tekeningen, video's en muziek."
 	},
 	"url": "commons.wikimedia.org",
+	"matches": [
+		"*://commons.wikimedia.org/*"
+	],
 	"version": "1.0.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia%20Commons/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia%20Commons/assets/thumbnail.png",

@@ -10,6 +10,9 @@
 		"es": "OpenFING es un proyecto estudiantil dedicado a digitalizar los cursos impartidos en la Facultad de Ingeniería de la UdelaR (Uruguay)."
 	},
 	"url": "open.fing.edu.uy",
+	"matches": [
+		"*://open.fing.edu.uy/*"
+	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/OpenFING/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/OpenFING/assets/thumbnail.png",
@@ -23,5 +26,8 @@
 		"engineering"
 	],
 	"iframe": true,
-	"iFrameRegExp": "https:[/][/]open[.]fing[.]edu[.]uy[/]courses.*"
+	"iFrameRegExp": "https:[/][/]open[.]fing[.]edu[.]uy[/]courses.*",
+	"iFrameMatches": [
+		"https://open.fing.edu.uy/courses*"
+	]
 }

@@ -17,6 +17,13 @@
 		"vid.mint.lgbt",
 		"yewtu.be"
 	],
+	"matches": [
+		"*://iteroni.com/*",
+		"*://invidious.fdn.fr/*",
+		"*://invidious.snopyta.org/*",
+		"*://vid.mint.lgbt/*",
+		"*://yewtu.be/*"
+	],
 	"version": "1.0.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/Invidious/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/Invidious/assets/thumbnail.jpg",

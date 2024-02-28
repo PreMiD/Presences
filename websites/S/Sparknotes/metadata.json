@@ -10,6 +10,9 @@
 		"nl": "Uw bron voor hulp met Shakespeare en Engelse literatuur, plus geschiedenis, wiskunde, biologie, en meer."
 	},
 	"url": "www.sparknotes.com",
+	"matches": [
+		"*://www.sparknotes.com/*"
+	],
 	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Sparknotes/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Sparknotes/assets/thumbnail.png",

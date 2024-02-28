@@ -14,6 +14,9 @@
 		"www.nutaku.net"
 	],
 	"regExp": "([a-z]+[.])nutaku.net[/]",
+	"matches": [
+		"*://*.nutaku.net/*"
+	],
 	"version": "1.0.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Nutaku/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Nutaku/assets/thumbnail.jpg",

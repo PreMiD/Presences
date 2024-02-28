@@ -14,6 +14,10 @@
 		"www.teknobuk.com",
 		"teknobuk.com"
 	],
+	"matches": [
+		"*://www.teknobuk.com/*",
+		"*://teknobuk.com/*"
+	],
 	"version": "1.2.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Teknobuk/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Teknobuk/assets/thumbnail.png",

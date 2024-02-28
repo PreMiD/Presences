@@ -23,6 +23,10 @@
 		"www.aranzulla.it",
 		"aranzulla.it"
 	],
+	"matches": [
+		"*://www.aranzulla.it/*",
+		"*://aranzulla.it/*"
+	],
 	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Aranzulla.it/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Aranzulla.it/assets/thumbnail.png",

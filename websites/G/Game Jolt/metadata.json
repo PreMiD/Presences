@@ -11,6 +11,9 @@
 		"nl": "Game Jolt is een hostingdienst voor freeware en commerciële videospelletjes met sociale functies."
 	},
 	"url": "gamejolt.com",
+	"matches": [
+		"*://gamejolt.com/*"
+	],
 	"version": "1.2.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Game%20Jolt/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Game%20Jolt/assets/thumbnail.png",

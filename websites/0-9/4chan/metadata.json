@@ -12,6 +12,10 @@
 		"www.4chan.org",
 		"4chan.org"
 	],
+	"matches": [
+		"*://www.4chan.org/*",
+		"*://4chan.org/*"
+	],
 	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/0-9/4chan/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/0-9/4chan/assets/thumbnail.png",

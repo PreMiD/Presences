@@ -12,6 +12,10 @@
 		"sofi.gg",
 		"gems.sofi.gg"
 	],
+	"matches": [
+		"*://sofi.gg/*",
+		"*://gems.sofi.gg/*"
+	],
 	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Sofi/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Sofi/assets/thumbnail.png",

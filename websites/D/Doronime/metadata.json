@@ -10,6 +10,9 @@
 		"id": "Unduh anime, anime musik, anime ongoing, atau anime batch dengan subtitle Indonesia"
 	},
 	"url": "doroni.me",
+	"matches": [
+		"*://doroni.me/*"
+	],
 	"version": "1.1.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Doronime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Doronime/assets/thumbnail.png",

@@ -17,6 +17,9 @@
 	},
 	"url": "kissasian.li",
 	"regExp": "kissasian([.][a-z]+)+[/]",
+	"matches": [
+		"__REPLACE_ME__"
+	],
 	"version": "3.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/KissAsian/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/KissAsian/assets/thumbnail.png",
@@ -27,5 +30,8 @@
 		"drama"
 	],
 	"iframe": true,
-	"iFrameRegExp": "^(?!(disqus[.]org|disqus[.]com)$).*$"
+	"iFrameRegExp": "^(?!(disqus[.]org|disqus[.]com)$).*$",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	]
 }

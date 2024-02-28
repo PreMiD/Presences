@@ -15,6 +15,12 @@
 		"blog.glimesh.tv",
 		"glim.shop"
 	],
+	"matches": [
+		"*://glimesh.tv/*",
+		"*://support.glimesh.tv/*",
+		"*://blog.glimesh.tv/*",
+		"*://glim.shop/*"
+	],
 	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Glimesh/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Glimesh/assets/thumbnail.jpg",

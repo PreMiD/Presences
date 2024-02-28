@@ -11,6 +11,9 @@
 	},
 	"url": "dramacool.vc",
 	"regExp": "[0-9w]{0,6}.*dramacool.[a-z]+",
+	"matches": [
+		"*://*.dramacool.vc/*"
+	],
 	"version": "1.2.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/DramaCool/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/DramaCool/assets/thumbnail.png",
@@ -22,6 +25,9 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"__REPLACE_ME__"
+	],
 	"settings": [
 		{
 			"id": "lang",

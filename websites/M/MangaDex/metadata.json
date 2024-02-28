@@ -29,6 +29,11 @@
 		"www.mangadex.org",
 		"mangadex.cc"
 	],
+	"matches": [
+		"*://mangadex.org/*",
+		"*://www.mangadex.org/*",
+		"*://mangadex.cc/*"
+	],
 	"version": "3.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaDex/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaDex/assets/thumbnail.png",
