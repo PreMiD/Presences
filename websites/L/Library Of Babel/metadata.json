@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "358402930191106049",
+		"name": "ion606"
+	},
+	"service": "Library Of Babel",
+	"description": {
+		"en": "A rich presence for libraryofbabel.info"
+	},
+	"url": "libraryofbabel.info",
+	"version": "1.0.0",
+	"logo": "https://libraryofbabel.info/img/hex802.png",
+	"thumbnail": "https://libraryofbabel.info/img/hex802.png",
+	"color": "#808080",
+	"category": "other",
+	"tags": [
+		"library",
+		"libraryofbabbel",
+		"libraryofbabel"
+	]
+}
