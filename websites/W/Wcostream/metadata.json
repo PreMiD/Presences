@@ -31,7 +31,7 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://embed.watchanimesub.net/inc/embed/*"
 	],
 	"settings": [
 		{
