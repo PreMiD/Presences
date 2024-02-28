@@ -24,7 +24,11 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://sync-tube.de/*",
+		"*://www.youtube.com/*",
+		"*://player.vimeo.com/*",
+		"*://player.twitch.tv/*",
+		"*://w.soundcloud.com/*"
 	],
 	"settings": [
 		{
