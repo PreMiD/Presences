@@ -2,7 +2,6 @@ const presence = new Presence({
 	clientId: "1212508565802192936",
 });
 
-
 // Other default assets can be found at index.d.ts
 const enum Assets {
 	Logo = "https://libraryofbabel.info/img/hex802.png",
@@ -23,85 +22,97 @@ const enum Pages {
 	imgsearch = "/imagesearch.html",
 	imgSRes = "/imagesearch.cgi",
 	coloroscopy = "/coloroscopy.html",
-	refhex = "/referencehex.html"
+	refhex = "/referencehex.html",
 }
 
 presence.on("UpdateData", async () => {
-	const page = document.location.toString();
-	if (!page) return;
+	if (!document.location.toString()) return;
 
 	let base = window.location.pathname;
 	if (base.includes("theory")) base = "/theory.html";
 
-	const title = document.title.replace("Anglishized", "").replace("Theory - ", "").replace("Image Search: ", ""),
-	presenceData: PresenceData = {
-		largeImageKey: Assets.Logo,
-		largeImageText: "hex802",
-		name: "Library of Babel",
-		type: ActivityType.Watching,
-	},
-	p = (document.querySelector("#page") as HTMLInputElement)?.value;
+	const title = document.title
+			.replace("Anglishized", "")
+			.replace("Theory - ", "")
+			.replace("Image Search: ", ""),
+		presenceData: PresenceData = {
+			largeImageKey: Assets.Logo,
+			largeImageText: "hex802",
+			name: "Library of Babel",
+			type: ActivityType.Watching,
+		},
+		p = (document.querySelector("#page") as HTMLInputElement)?.value;
 
 	switch (base) {
 		case Pages.homepage:
-				presenceData.details = "in the lobby (home)";
+			presenceData.details = "in the lobby (home)";
 			break;
-			
+
 		case Pages.about:
-				presenceData.details = "learning about the archives";
+			presenceData.details = "learning about the archives";
 			break;
 
 		case Pages.search:
-				presenceData.details = "searching through the archives";
+			presenceData.details = "searching through the archives";
 			break;
 
 		case Pages.imgsearch:
-				presenceData.details = "searching through the image archives";
+			presenceData.details = "searching through the image archives";
 			break;
 
 		case Pages.imgSRes:
-				presenceData.details = `viewing image ${title}`;
+			presenceData.details = `viewing image ${title}`;
 			break;
 
-		case Pages.sRes: {
-				const keyWord = title.replace("Search - ", "");
-				presenceData.details = `searching the archives for ${keyWord}`;
+		case Pages.sRes:
+			{
+				presenceData.details = `searching the archives for ${title.replace(
+					"Search - ",
+					""
+				)}`;
 			}
 			break;
-			
-		case Pages.anglishized: {
-			presenceData.details = `reading ${title.replace(` ${p}`, "")} (page ${p}, anglishized)`;
-		}
-		break;
+
+		case Pages.anglishized:
+			{
+				presenceData.details = `reading ${title.replace(
+					` ${p}`,
+					""
+				)} (page ${p}, anglishized)`;
+			}
+			break;
 
 		case Pages.book:
 		case Pages.bookmark:
-				presenceData.details = `reading ${title.replace(` ${p}`, "")} (page ${p})`;
+			presenceData.details = `reading ${title.replace(
+				` ${p}`,
+				""
+			)} (page ${p})`;
 			break;
 
-		case Pages.browse: {
-			// find the shelf and page (nah)
-			presenceData.details = "browsing the archives";
-		}
+		case Pages.browse:
+			{
+				// find the shelf and page (nah)
+				presenceData.details = "browsing the archives";
+			}
 			break;
-
 
 		case Pages.theory:
 		case Pages.refhex:
-				presenceData.details = `learning about ${title}`;
+			presenceData.details = `learning about ${title}`;
 			break;
 
 		case Pages.images:
-				presenceData.details = "viewing images";
+			presenceData.details = "viewing images";
 			break;
 
 		case Pages.coloroscopy:
-				presenceData.details = "undergoing coloroscopy";
+			presenceData.details = "undergoing coloroscopy";
 			break;
 
 		default:
-				// console.log(base);
-				presenceData.details = "navigating the site";
+			// console.log(base);
+			presenceData.details = "navigating the site";
 			break;
 	}
 
