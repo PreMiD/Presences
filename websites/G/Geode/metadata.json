@@ -12,8 +12,11 @@
 		"geode-sdk.org",
 		"docs.geode-sdk.org"
 	],
-	"matches": ["*://geode-sdk.org/*","*://docs.geode-sdk.org/*"],
-	"version": "1.0.0",
+	"matches": [
+		"*://geode-sdk.org/*",
+		"*://docs.geode-sdk.org/*"
+	],
+	"version": "1.0.1",
 	"logo": "https://i.joerkig.com/gowo8n.png",
 	"thumbnail": "https://i.joerkig.com/s99rcj.png",
 	"color": "#f5dd9f",
