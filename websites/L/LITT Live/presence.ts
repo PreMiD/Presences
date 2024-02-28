@@ -14,12 +14,12 @@ let songName: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const sidePanel = document.querySelector(".MuiPaper-elevation");
-	if (sidePanel && sidePanel.childNodes[1]) 
-		thumbnail = sidePanel.childNodes[1].childNodes[0].childNodes[0].childNodes[0] as HTMLImageElement;
-	
+	if (sidePanel && sidePanel.childNodes[1])
+		thumbnail = sidePanel.childNodes[1].childNodes[0].childNodes[0]
+			.childNodes[0] as HTMLImageElement;
+
 	const presenceData: PresenceData = {
-		largeImageKey:
-			thumbnail ?? "https://cdn.discordapp.com/app-assets/575756169986048004/1211339369386999808.png?size=512",
+		largeImageKey: thumbnail ?? "https://i.imgur.com/bs7XU8u.png",
 	};
 
 	songName = document.querySelector(
