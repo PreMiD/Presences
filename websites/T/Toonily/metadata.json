@@ -29,7 +29,8 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://toonily.net/*",
+		"*://toonily.com/*"
 	],
 	"settings": [
 		{
