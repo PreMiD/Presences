@@ -33,6 +33,6 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://kodik.info/serial/*"
 	]
 }
