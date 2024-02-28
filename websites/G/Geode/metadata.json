@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "205984221859151873",
+		"name": "joerkig"
+	},
+	"service": "Geode",
+	"description": {
+		"en": "The main page for Geode SDK - a mod loader and modding framework for Geometry Dash."
+	},
+	"url": [
+		"geode-sdk.org",
+		"docs.geode-sdk.org"
+	],
+	"matches": ["*://geode-sdk.org/*","*://docs.geode-sdk.org/*"],
+	"version": "1.0.0",
+	"logo": "https://i.joerkig.com/gowo8n.png",
+	"thumbnail": "https://i.joerkig.com/s99rcj.png",
+	"color": "#f5dd9f",
+	"category": "games",
+	"tags": [
+		"gd",
+		"geometry",
+		"dash",
+		"modding"
+	],
+	"settings": [
+		{
+			"id": "time",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}
