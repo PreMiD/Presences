@@ -24,7 +24,13 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://mega.nz/*",
+		"*://vgfplay.com/*",
+		"*://voe.sx/e/*",
+		"*://jayservicestuff.com/e/*",
+		"*://ok.ru/videoembed/*",
+		"*://www.yourupload.com/embed/*",
+		"*://hqq.tv/player/*"
 	],
 	"settings": [
 		{
