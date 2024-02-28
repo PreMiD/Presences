@@ -26,6 +26,16 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://monoschinos2.com/*",
+		"*://filemoon.sx/e/*",
+		"*://d000d.com/e/*",
+		"*://ok.ru/videoembed/*",
+		"*://luluvdo.com/e/*",
+		"*://cdnwish.com/e/*",
+		"*://voe.sx/e/*",
+		"*://jayservicestuff.com/e/*",
+		"*://www.mp4upload.com/*",
+		"*://streamtape.com/e/*",
+		"*://gettapeads.com/e/*"
 	]
 }
