@@ -39,7 +39,12 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"iFrameMatches": [
-		"__REPLACE_ME__"
+		"*://vidmoly.to/*",
+		"*://designparty.sx/e/*",
+		"*://voe.sx/e/*",
+		"*://jayservicestuff.com/e/*",
+		"*://streamtape.com/e/*",
+		"*://my.mail.ru/video/embed/*"
 	],
 	"settings": [
 		{
