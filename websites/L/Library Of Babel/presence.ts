@@ -27,7 +27,7 @@ const enum Pages {
 presence.on("UpdateData", async () => {
 	if (!document.location.toString()) return;
 
-	let base = window.location.pathname;
+	let base = document.location.pathname;
 	if (base.includes("theory")) base = "/theory.html";
 
 	const title = document.title
