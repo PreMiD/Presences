@@ -45,8 +45,7 @@ presence.on("UpdateData", async () => {
 			.replace("</span>", "");
 		if (songNameS === "") songArtistS = "None";
 	} else if (songArtist) {
-		(songArtistS = songArtist.textContent),
-			(songArtistS = songArtistS.replace("&amp;", "&"));
+		songArtistS = songArtist.textContent.replace("&amp;", "&");
 	}
 
 	if ((songNameS === "None" && songArtistS === "None") || songArtistS === "") {
