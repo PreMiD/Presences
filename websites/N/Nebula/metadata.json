@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "189690228292845568",
+		"name": "angelolz"
+	},
+	"service": "Nebula",
+	"description": {
+		"en": "Nebula is the home of smart, thoughtful videos, podcasts, and classes from your favorite creators."
+	},
+	"matches": [
+		"*://nebula.tv/*"
+	],
+	"url": "nebula.tv",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/OzDunh4.png",
+	"thumbnail": "https://i.imgur.com/4wI2vwl.jpeg",
+	"color": "#ffffff",
+	"category": "videos",
+	"tags": [
+		"nebula",
+		"video",
+		"media"
+	]
+}
