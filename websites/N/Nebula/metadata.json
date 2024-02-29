@@ -21,5 +21,13 @@
 		"nebula",
 		"video",
 		"media"
+	],
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fa-regular fa-rectangle-list",
+			"value": true
+		}
 	]
 }

@@ -1,10 +1,6 @@
 const presence = new Presence({
 		clientId: "1212664221788274698",
 	}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets { // Other default assets can be found at index.d.ts
@@ -20,15 +16,15 @@ presence.on("UpdateData", async () => {
 	path = pathname.split("/");
 	path.shift(); 
 	if (pathname.endsWith("/")) path.pop();
-
+	[showButtons] = await Promise.all([
+		presence.getSetting<boolean>("buttons"),
+	]);
 	getDetails(presenceData, path);
 
 	presence.setActivity(presenceData);
 });
 
 function getDetails(presenceData: PresenceData, path: string[]): void {
-	// console.log(path);
-	// console.log(path.length);
 	if(path.length === 0) {
 		presenceData.details = "Viewing home page";
 		return;
@@ -48,7 +44,7 @@ function getDetails(presenceData: PresenceData, path: string[]): void {
 				presenceData.details = getExploreCategory(path[1].toLowerCase());
 			break;
 		case "classes":
-			presenceData.details = "Viewing classes page";
+			presenceData.details = "Viewing classes";
 			break;
 		case "settings":
 			presenceData.details = "Viewing account settings";
@@ -68,7 +64,10 @@ function getDetails(presenceData: PresenceData, path: string[]): void {
 		case "videos":
 			getVideoDetails(presenceData);
 			break;
-		default: //todo make it work for podcasts and classes
+		case "search":
+			getSearchDetails(presenceData);
+			break;
+		default:
 			getOtherDetails(presenceData);
 			break;
 	}
@@ -124,6 +123,11 @@ function getVideoDetails(presenceData: PresenceData): void {
 	setTimestamps(videoElement, presenceData);
 }
 
+function getSearchDetails(presenceData: PresenceData): void {
+	presenceData.details = "Searching for:";
+	presenceData.state = parseQueryParams().q || "...";
+}
+
 function getOtherDetails(presenceData: PresenceData): void {
 	const videoElement = document.querySelector("video"),
 	audioElement = document.querySelector("audio");
@@ -158,7 +162,6 @@ function getOtherDetails(presenceData: PresenceData): void {
 		presenceData.state = document.querySelector(".css-p7br9k").innerHTML;
 		setTimestamps(videoElement, presenceData);
 	}
-
 }
 
 function setTimestamps(element: HTMLAudioElement | HTMLVideoElement, presenceData: PresenceData): void {
@@ -169,5 +172,24 @@ function setTimestamps(element: HTMLAudioElement | HTMLVideoElement, presenceDat
 		presenceData.smallImageKey = Assets.Pause;
 	} else 
 		presenceData.smallImageKey = Assets.Play;
-	
+}
+
+interface QueryParams {
+    [key: string]: string;
+}
+
+function parseQueryParams(): QueryParams {
+    const queryParams: QueryParams = {},
+	queryString = window.location.search.split("?")[1];
+
+    if (queryString) {
+        const pairs = queryString.split("&");
+
+        for (const pair of pairs) {
+            const keyValue = pair.split("=");
+            queryParams[decodeURIComponent(keyValue[0])] = decodeURIComponent(keyValue[1] || "");
+        }
+    }
+
+    return queryParams;
 }
