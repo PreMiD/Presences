@@ -8,7 +8,14 @@
 	"description": {
 		"en": "A rich presence for libraryofbabel.info"
 	},
-	"url": "libraryofbabel.info",
+	"url": [
+		"libraryofbabel.info",
+		"www.libraryofbabel.info"
+	],
+	"matches": [
+		"*://libraryofbabel.info/*",
+		"*://www.libraryofbabel.info/*"
+	],
 	"version": "1.0.0",
 	"logo": "https://libraryofbabel.info/img/hex802.png",
 	"thumbnail": "https://libraryofbabel.info/img/hex802.png",
