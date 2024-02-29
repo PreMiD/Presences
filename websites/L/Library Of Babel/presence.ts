@@ -5,7 +5,6 @@ const presence = new Presence({
 // Other default assets can be found at index.d.ts
 const enum Assets {
 	Logo = "https://libraryofbabel.info/img/hex802.png",
-	smallImageKey = "",
 }
 
 const enum Pages {
