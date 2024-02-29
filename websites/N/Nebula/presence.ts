@@ -9,30 +9,33 @@ const enum Assets { // Other default assets can be found at index.d.ts
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: Assets.Logo,
-		startTimestamp: browsingTimestamp
-	},
-	{ pathname } = document.location,
-	[showButtons] = await Promise.all([
-		presence.getSetting<boolean>("buttons"),
-	]),
-	path = pathname.split("/");
+			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname } = document.location,
+		[showButtons] = await Promise.all([
+			presence.getSetting<boolean>("buttons"),
+		]),
+		path = pathname.split("/");
 
-	path.shift(); 
-	if (pathname.endsWith("/")) 
-		path.pop();
+	path.shift();
+	if (pathname.endsWith("/")) path.pop();
 
 	getDetails(presenceData, path, showButtons);
 	presence.setActivity(presenceData);
 });
 
-function getDetails(presenceData: PresenceData, path: string[], showButtons: boolean): void {
-	if(path.length === 0) {
+function getDetails(
+	presenceData: PresenceData,
+	path: string[],
+	showButtons: boolean
+): void {
+	if (path.length === 0) {
 		presenceData.details = "Viewing home page";
 		return;
 	}
 
-	switch(path[0].toLowerCase()) {
+	switch (path[0].toLowerCase()) {
 		case "classes":
 			presenceData.details = "Viewing classes";
 			break;
@@ -52,16 +55,12 @@ function getDetails(presenceData: PresenceData, path: string[], showButtons: boo
 			presenceData.details = "Viewing beta apps page";
 			break;
 		case "library":
-			if(path.length === 1)
-				presenceData.details = "Viewing library page";
-			else
-				presenceData.details = getLibraryCategory(path[1].toLowerCase());
+			if (path.length === 1) presenceData.details = "Viewing library page";
+			else presenceData.details = getLibraryCategory(path[1].toLowerCase());
 			break;
 		case "explore":
-			if(path.length === 1)
-				presenceData.details = "Viewing explore page";
-			else
-				presenceData.details = getExploreCategory(path[1].toLowerCase());
+			if (path.length === 1) presenceData.details = "Viewing explore page";
+			else presenceData.details = getExploreCategory(path[1].toLowerCase());
 			break;
 		case "videos":
 			getVideoDetails(presenceData, showButtons);
@@ -76,7 +75,7 @@ function getDetails(presenceData: PresenceData, path: string[], showButtons: boo
 }
 
 function getExploreCategory(category: string): string {
-	switch(category) {
+	switch (category) {
 		case "videos":
 			return "Exploring videos";
 		case "channels":
@@ -89,7 +88,7 @@ function getExploreCategory(category: string): string {
 }
 
 function getLibraryCategory(category: string): string {
-	switch(category) {
+	switch (category) {
 		case "latest-videos":
 			return "Viewing latest videos";
 		case "followed-channels":
@@ -115,13 +114,16 @@ function getLibraryCategory(category: string): string {
 	}
 }
 
-function getVideoDetails(presenceData: PresenceData, showButtons: boolean): void {
+function getVideoDetails(
+	presenceData: PresenceData,
+	showButtons: boolean
+): void {
 	const videoElement = document.querySelector("video");
-	
+
 	presenceData.details = document.querySelector(".css-11wyb0j").innerHTML;
 	presenceData.state = document.querySelector(".css-r06ha9").innerHTML;
 
-	if(videoElement === null) return;
+	if (videoElement === null) return;
 	setTimestamps(videoElement, presenceData);
 
 	if (showButtons) {
@@ -132,8 +134,10 @@ function getVideoDetails(presenceData: PresenceData, showButtons: boolean): void
 			},
 			{
 				label: "View channel",
-				url: getRootUrl() + document.querySelector(".css-1nacd6b").getAttribute("href"),
-			}
+				url:
+					getRootUrl() +
+					document.querySelector(".css-1nacd6b").getAttribute("href"),
+			},
 		];
 	}
 }
@@ -143,18 +147,21 @@ function getSearchDetails(presenceData: PresenceData): void {
 	presenceData.state = parseQueryParams().q || "...";
 }
 
-function getOtherDetails(presenceData: PresenceData, showButtons: boolean): void {
+function getOtherDetails(
+	presenceData: PresenceData,
+	showButtons: boolean
+): void {
 	const videoElement = document.querySelector("video"),
-	audioElement = document.querySelector("audio");
+		audioElement = document.querySelector("audio");
 
-	if(videoElement === null && audioElement === null) { // viewing a channel
+	if (videoElement === null && audioElement === null) {
+		// viewing a channel
 		const channelName = document.querySelector(".css-dv828b"),
-		podcastName = document.querySelector(".css-xdl2kn");
+			podcastName = document.querySelector(".css-xdl2kn");
 
-		if(channelName === null && podcastName === null)
-			return;
-	
-		if(channelName === null) {
+		if (channelName === null && podcastName === null) return;
+
+		if (channelName === null) {
 			presenceData.details = "Viewing a podcast";
 			presenceData.state = podcastName.innerHTML;
 		} else {
@@ -167,10 +174,11 @@ function getOtherDetails(presenceData: PresenceData, showButtons: boolean): void
 				{
 					label: "View channel",
 					url: document.location.href,
-				}
+				},
 			];
 		}
-	} else if(videoElement === null) { //its a podcast
+	} else if (videoElement === null) {
+		//its a podcast
 		const channelElement = document.querySelector(".css-2m8aus");
 
 		presenceData.details = document.querySelector(".css-l7qxoj").innerHTML;
@@ -186,17 +194,17 @@ function getOtherDetails(presenceData: PresenceData, showButtons: boolean): void
 				{
 					label: "View channel",
 					url: getRootUrl() + channelElement.getAttribute("href"),
-				}
+				},
 			];
 		}
-	} else { //its a class episode
+	} else {
+		//its a class episode
 		const episodeName = document.querySelector(".css-13igzay"),
-		className = document.querySelector(".css-1ls4t7r");
+			className = document.querySelector(".css-1ls4t7r");
 
-		if(episodeName !== null) 
+		if (episodeName !== null)
 			presenceData.details = `${episodeName.innerHTML} | ${className.innerHTML}`;
-		else
-			presenceData.details = className.innerHTML;
+		else presenceData.details = className.innerHTML;
 
 		presenceData.state = document.querySelector(".css-p7br9k").innerHTML;
 		setTimestamps(videoElement, presenceData);
@@ -206,42 +214,48 @@ function getOtherDetails(presenceData: PresenceData, showButtons: boolean): void
 				{
 					label: "Watch Episode",
 					url: document.location.href,
-				}
+				},
 			];
 		}
 	}
 }
 
-function setTimestamps(element: HTMLAudioElement | HTMLVideoElement, presenceData: PresenceData): void {
+function setTimestamps(
+	element: HTMLAudioElement | HTMLVideoElement,
+	presenceData: PresenceData
+): void {
 	delete presenceData.startTimestamp;
 	presenceData.endTimestamp = presence.getTimestampsfromMedia(element)[1];
 	if (element.paused) {
 		delete presenceData.endTimestamp;
 		presenceData.smallImageKey = Assets.Pause;
-	} else 
-		presenceData.smallImageKey = Assets.Play;
+	} else presenceData.smallImageKey = Assets.Play;
 }
 
 interface QueryParams {
-    [key: string]: string;
+	[key: string]: string;
 }
 
 function parseQueryParams(): QueryParams {
-    const queryParams: QueryParams = {},
-	queryString = window.location.search.split("?")[1];
+	const queryParams: QueryParams = {},
+		queryString = window.location.search.split("?")[1];
 
-    if (queryString) {
-        const pairs = queryString.split("&");
+	if (queryString) {
+		const pairs = queryString.split("&");
 
-        for (const pair of pairs) {
-            const keyValue = pair.split("=");
-            queryParams[decodeURIComponent(keyValue[0])] = decodeURIComponent(keyValue[1] || "");
-        }
-    }
+		for (const pair of pairs) {
+			const keyValue = pair.split("=");
+			queryParams[decodeURIComponent(keyValue[0])] = decodeURIComponent(
+				keyValue[1] || ""
+			);
+		}
+	}
 
-    return queryParams;
+	return queryParams;
 }
 
 function getRootUrl(): string {
-    return `${document.location.protocol}//${document.location.hostname}${document.location.port ? `:${document.location.port}` : ""}`;
+	return `${document.location.protocol}//${document.location.hostname}${
+		document.location.port ? `:${document.location.port}` : ""
+	}`;
 }
