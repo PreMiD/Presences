@@ -5,6 +5,7 @@ const presence = new Presence({
 // Other default assets can be found at index.d.ts
 const enum Assets {
 	Logo = "https://libraryofbabel.info/img/hex802.png",
+	smallImageKey = "",
 }
 
 const enum Pages {
@@ -27,7 +28,7 @@ const enum Pages {
 presence.on("UpdateData", async () => {
 	if (!document.location.toString()) return;
 
-	let base = document.location.pathname;
+	let base = window.location.pathname;
 	if (base.includes("theory")) base = "/theory.html";
 
 	const title = document.title
@@ -40,32 +41,32 @@ presence.on("UpdateData", async () => {
 			name: "Library of Babel",
 			type: ActivityType.Watching,
 		},
-		p = (document.querySelector("#page") as HTMLInputElement)?.value;
+		p = document.querySelector<HTMLInputElement>("#page")?.value;
 
 	switch (base) {
 		case Pages.homepage:
-			presenceData.details = "in the lobby (home)";
+			presenceData.details = "In the lobby (home)";
 			break;
 
 		case Pages.about:
-			presenceData.details = "learning about the archives";
+			presenceData.details = "Learning about the archives";
 			break;
 
 		case Pages.search:
-			presenceData.details = "searching through the archives";
+			presenceData.details = "Searching through the archives";
 			break;
 
 		case Pages.imgsearch:
-			presenceData.details = "searching through the image archives";
+			presenceData.details = "Searching through the image archives";
 			break;
 
 		case Pages.imgSRes:
-			presenceData.details = `viewing image ${title}`;
+			presenceData.details = `Viewing image ${title}`;
 			break;
 
 		case Pages.sRes:
 			{
-				presenceData.details = `searching the archives for ${title.replace(
+				presenceData.details = `Searching the archives for ${title.replace(
 					"Search - ",
 					""
 				)}`;
@@ -74,7 +75,7 @@ presence.on("UpdateData", async () => {
 
 		case Pages.anglishized:
 			{
-				presenceData.details = `reading ${title.replace(
+				presenceData.details = `Reading ${title.replace(
 					` ${p}`,
 					""
 				)} (page ${p}, anglishized)`;
@@ -83,7 +84,7 @@ presence.on("UpdateData", async () => {
 
 		case Pages.book:
 		case Pages.bookmark:
-			presenceData.details = `reading ${title.replace(
+			presenceData.details = `Reading ${title.replace(
 				` ${p}`,
 				""
 			)} (page ${p})`;
@@ -91,27 +92,26 @@ presence.on("UpdateData", async () => {
 
 		case Pages.browse:
 			{
-				// find the shelf and page (nah)
-				presenceData.details = "browsing the archives";
+				// find the shelf and page (not added for now, perhaps implement later)
+				presenceData.details = "Browsing the archives";
 			}
 			break;
 
 		case Pages.theory:
 		case Pages.refhex:
-			presenceData.details = `learning about ${title}`;
+			presenceData.details = `Learning about ${title}`;
 			break;
 
 		case Pages.images:
-			presenceData.details = "viewing images";
+			presenceData.details = "Viewing images";
 			break;
 
 		case Pages.coloroscopy:
-			presenceData.details = "undergoing coloroscopy";
+			presenceData.details = "Undergoing coloroscopy";
 			break;
 
 		default:
-			// console.log(base);
-			presenceData.details = "navigating the site";
+			presenceData.details = "Navigating the site";
 			break;
 	}
 
