@@ -10,6 +10,10 @@
 		"nl": "100% gratis muziek. Meer afwisseling. Geen reclames. De beste dj's en stations. Geen BS"
 	},
 	"url": "littlive.com",
+	"matches": [
+		"*://littlive.com/*",
+		"*://www.littlive.com/*"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/bs7XU8u.png",
 	"thumbnail": "https://i.imgur.com/lClvjkY.png",
@@ -18,6 +22,5 @@
 	"tags": [
 		"radio",
 		"music"
-	],
-	"matches": ["*://littlive.com/*", "*://www.littlive.com/*"]
+	]
 }
