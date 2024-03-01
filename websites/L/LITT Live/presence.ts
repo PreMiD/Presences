@@ -44,9 +44,7 @@ presence.on("UpdateData", async () => {
 			.replace('<span class="artist">', "")
 			.replace("</span>", "");
 		if (songNameS === "") songArtistS = "None";
-	} else if (songArtist) {
-		songArtistS = songArtist.textContent.replace("&amp;", "&");
-	}
+	} else if (songArtist) songArtistS = songArtist.textContent.replace("&amp;", "&");
 
 	if ((songNameS === "None" && songArtistS === "None") || songArtistS === "") {
 		presenceData.smallImageKey = Assets.Pause;
