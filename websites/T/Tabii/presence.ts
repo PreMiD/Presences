@@ -8,9 +8,7 @@ const presence = new Presence({
 	});
 
 const enum Assets {
-	Logo = "https://cms-tabii-public-image.tabii.com/int/webp/26087.jpeg",
-	pause = "pause",
-	play = "play",
+	Logo = "https://i.imgur.com/ZfDhD5n.png",
 }
 
 presence.on("UpdateData", async () => {
