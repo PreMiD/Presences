@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "noxzym",
 		"id": "243728573624614912"
@@ -10,7 +10,7 @@
 		"id": "Unduh anime, anime musik, anime ongoing, atau anime batch dengan subtitle Indonesia"
 	},
 	"url": "doroni.me",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Doronime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Doronime/assets/thumbnail.png",
 	"color": "#b11415",

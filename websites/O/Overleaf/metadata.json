@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Enevevet",
 		"id": "329669021043523594"
@@ -12,7 +12,7 @@
 	},
 	"url": "www.overleaf.com",
 	"regExp": "([a-z0-9-]+[.])*overleaf[.]com[/]",
-	"version": "1.0.20",
+	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/Overleaf/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/Overleaf/assets/thumbnail.png",
 	"color": "#138A07",

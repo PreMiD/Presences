@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "N0chteil ^^",
 		"id": "495901098926669825"
@@ -27,7 +27,7 @@
 		"music.apple.com",
 		"beta.music.apple.com"
 	],
-	"version": "1.5.13",
+	"version": "1.5.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Apple%20Music/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Apple%20Music/assets/thumbnail.png",
 	"color": "#FA273F",

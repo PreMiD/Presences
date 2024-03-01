@@ -14,21 +14,23 @@ let songName: HTMLElement,
 
 presence.on("UpdateData", async () => {
 	const sidePanel = document.querySelector(".MuiPaper-elevation");
-	if (sidePanel && sidePanel.childNodes[1]) 
-		thumbnail = sidePanel.childNodes[1].childNodes[0].childNodes[0].childNodes[0] as HTMLImageElement;
-	
+	if (sidePanel && sidePanel.childNodes[1]) {
+		thumbnail = sidePanel.childNodes[1].childNodes[0].childNodes[0]
+			.childNodes[0] as HTMLImageElement;
+	}
+
 	const presenceData: PresenceData = {
-		largeImageKey:
-			thumbnail ?? "https://cdn.discordapp.com/app-assets/575756169986048004/1211339369386999808.png?size=512",
+		largeImageKey: thumbnail ?? "https://i.imgur.com/bs7XU8u.png",
 	};
 
 	songName = document.querySelector(
 		"header.MuiAppBar-root > div.music-dataview-container > span.App-Player-Song-Title-Text"
 	);
 	if (!songName) {
-		(songNameS = document.querySelector("#marquee1").textContent),
-			(songNameS = songNameS.replace("<span>", "")),
-			(songNameS = songNameS.replace("</span>", ""));
+		songNameS = document
+			.querySelector("#marquee1")
+			.textContent.replace("<span>", "")
+			.replace("</span>", "");
 		if (songNameS === "") songNameS = "None";
 	} else if (songName) songNameS = songName.textContent;
 
@@ -36,14 +38,14 @@ presence.on("UpdateData", async () => {
 		"header.MuiAppBar-root > div.music-dataview-container > span.App-Player-Song-Artist-Text"
 	);
 	if (!songArtist) {
-		(songArtistS = document.querySelector("#marquee2").textContent),
-			(songArtistS = songArtistS.replaceAll("&amp;", "&")),
-			(songArtistS = songArtistS.replace('<span class="artist">', "")),
-			(songArtistS = songArtistS.replace("</span>", ""));
+		songArtistS = document
+			.querySelector("#marquee2")
+			.textContent.replaceAll("&amp;", "&")
+			.replace('<span class="artist">', "")
+			.replace("</span>", "");
 		if (songNameS === "") songArtistS = "None";
 	} else if (songArtist) {
-		(songArtistS = songArtist.textContent),
-			(songArtistS = songArtistS.replace("&amp;", "&"));
+		songArtistS = songArtist.textContent.replace("&amp;", "&");
 	}
 
 	if ((songNameS === "None" && songArtistS === "None") || songArtistS === "") {

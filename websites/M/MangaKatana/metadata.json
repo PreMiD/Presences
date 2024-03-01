@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "257151906038677504",
 		"name": "SHISEN"
@@ -9,7 +9,7 @@
 		"en": "MangaKatana.com is a website that offers free online manga search. Read manga online at MangaKatana, free and updated hourly!"
 	},
 	"url": "mangakatana.com",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaKatana/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaKatana/assets/thumbnail.png",
 	"color": "#009fdf",

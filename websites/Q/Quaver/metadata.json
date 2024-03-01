@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "205984221859151873",
 		"name": "joerkig"
@@ -12,7 +12,7 @@
 		"quavergame.com",
 		"wiki.quavergame.com"
 	],
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Q/Quaver/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Q/Quaver/assets/thumbnail.jpg",
 	"color": "#09a4c6",

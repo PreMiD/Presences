@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Lennart™",
 		"id": "398101340322136075"
@@ -11,7 +11,7 @@
 	},
 	"url": "timolia.de",
 	"regExp": "([a-z0-9-]+[.])*timolia[.]de[/]",
-	"version": "1.0.16",
+	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Timolia/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Timolia/assets/thumbnail.png",
 	"color": "#6b6b6b",

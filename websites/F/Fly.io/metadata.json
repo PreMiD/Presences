@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -13,7 +13,7 @@
 		"www.fly.io",
 		"community.fly.io"
 	],
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Fly.io/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Fly.io/assets/thumbnail.png",
 	"color": "#24185B",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -18,7 +18,7 @@
 		"ram.userbenchmark.com",
 		"usb.userbenchmark.com"
 	],
-	"version": "1.0.25",
+	"version": "1.0.26",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/UserBenchmark/assets/thumbnail.png",
 	"color": "#FDA217",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "nayumi#1111",
 		"id": "895438058621665331"
@@ -14,7 +14,7 @@
 		"hentaivn.site",
 		"hentaivn.run"
 	],
-	"version": "2.1.8",
+	"version": "2.1.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HentaiVN/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HentaiVN/assets/thumbnail.png",
 	"color": "#299CEE",

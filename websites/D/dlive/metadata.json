@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "TheDrop.",
 		"id": "293828021134295040"
@@ -14,7 +14,7 @@
 		"nl": "DLive.tv is de grootste live streaming community op blockchain die wordt aangedreven door Lino blockchain."
 	},
 	"url": "dlive.tv",
-	"version": "2.2.19",
+	"version": "2.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/dlive/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/dlive/assets/thumbnail.png",
 	"color": "#ffd300",

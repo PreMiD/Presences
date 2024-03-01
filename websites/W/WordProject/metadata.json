@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "वाह्य",
 		"id": "819696394180100106"
@@ -9,7 +9,7 @@
 		"en": "The Holy Bible International - in the major languages of the world"
 	},
 	"url": "www.wordproject.org",
-	"version": "1.0.16",
+	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WordProject/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WordProject/assets/thumbnail.png",
 	"color": "#aa2023",

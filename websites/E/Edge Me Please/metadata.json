@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Nekolen",
 		"id": "270125856679002113"
@@ -10,7 +10,7 @@
 		"nl": "Het is een edging website als je daar in geïnteresseerd bent."
 	},
 	"url": "www.edgemeplease.com",
-	"version": "1.3.22",
+	"version": "1.3.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Edge%20Me%20Please/assets/thumbnail.png",
 	"color": "#121110",

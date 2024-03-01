@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "807326854314590228",
 		"name": "Yuuto"
@@ -10,7 +10,7 @@
 		"fr": "Le \"pass Culture\" est un dispositif d'accès aux activités culturelles mis en place par le gouvernement français à destination des jeunes entre 15 et 18 ans."
 	},
 	"url": "passculture.app",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/pass%20Culture/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/pass%20Culture/assets/thumbnail.png",
 	"color": "#d6005c",

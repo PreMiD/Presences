@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "135058085386387457",
 		"name": "Extiriority"
@@ -10,7 +10,7 @@
 		"nl": "MangaFire.to is een volledig gratis online modern mangaplatform zonder vervelende pop-upadvertenties, waar we een uitgebreide collectie Manga, Light-Novel, Manhwa en nog veel meer aanbieden om te lezen."
 	},
 	"url": "mangafire.to",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaFire/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaFire/assets/thumbnail.png",
 	"color": "#007bff",

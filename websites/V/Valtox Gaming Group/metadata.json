@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -12,7 +12,7 @@
 	},
 	"url": "valtoxgaminggroup.com",
 	"regExp": "([a-z0-9-]+[.])*valtoxgaminggroup[.]com[/]",
-	"version": "1.2.20",
+	"version": "1.2.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Valtox%20Gaming%20Group/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Valtox%20Gaming%20Group/assets/thumbnail.png",
 	"color": "#ff0000",

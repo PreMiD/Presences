@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "853932304257908746",
 		"name": "BigBoi"
@@ -9,7 +9,7 @@
 		"en": "Create free music visualizers in our powerful online video editor. Attract more listeners and grow your audience with our professional music videos"
 	},
 	"url": "vizzy.io",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/thumbnail.png",
 	"color": "#5d336b",
