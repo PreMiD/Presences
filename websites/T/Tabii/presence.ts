@@ -31,13 +31,13 @@ presence.on("UpdateData", async () => {
 			pageIds.find(x => pathname.includes(x.id))?.name
 		} Sayfasına Göz Atıyor`;
 	} else if (pathname.includes("/settings/account"))
-		presenceData.details = "Hesap Ayarlarına Göz Atıyor";
+		presenceData.details = "Hesap Ayarlarına Göz Atıyor.";
 	else if (pathname.includes("/settings/profile"))
-		presenceData.details = "Profil Ayarlarına Göz Atıyor";
+		presenceData.details = "Profil Ayarlarına Göz Atıyor.";
 	else if (pathname.includes("/search")) {
 		if (document.querySelector("input").value)
-			presenceData.details = "Arama Yapıyor";
-		else presenceData.details = "Arama Sayfasına Göz Atıyor";
+			presenceData.details = "Arama Yapıyor.";
+		else presenceData.details = "Arama Sayfasına Göz Atıyor.";
 	} else if (pathname.includes("/watch")) {
 		const video = document.querySelector("video");
 
@@ -66,13 +66,13 @@ presence.on("UpdateData", async () => {
 		const catName = document.querySelector<HTMLElement>(
 			"#Main > div > div:nth-child(1) > main > div > div.flex.pt-8 > div > div > span:nth-child(2)"
 		).textContent;
-		if (catName) presenceData.details = `${catName} Kategorisine Göz Atıyor`;
-		else presenceData.details = "Kategori Sayfasına Göz Atıyor";
+		if (catName) presenceData.details = `${catName} Kategorisine Göz Atıyor.`;
+		else presenceData.details = "Kategori Sayfasına Göz Atıyor.";
 	} else if (pathname.includes("/my-stuff"))
-		presenceData.details = "Kütüphanesine Göz Atıyor";
+		presenceData.details = "Kütüphanesine Göz Atıyor.";
 	else if (pathname.includes("/faq"))
-		presenceData.details = "SSS'ye Göz Atıyor";
-	else presenceData.details = "Bilinmeyen Sayfada";
+		presenceData.details = "SSS'ye Göz Atıyor.";
+	else presenceData.details = "Bilinmeyen Sayfada.";
 
 	presence.setActivity(presenceData);
 });
