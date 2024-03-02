@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets { // Other default assets can be found at index.d.ts
-	Logo = "https://i.imgur.com/OzDunh4.png",
+	Logo = "https://i.imgur.com/VnwSEyu.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -120,26 +120,24 @@ function getVideoDetails(
 ): void {
 	const videoElement = document.querySelector("video");
 
-	presenceData.details = document.querySelector(".css-11wyb0j").innerHTML;
-	presenceData.state = document.querySelector(".css-r06ha9").innerHTML;
-
-	if (videoElement === null) return;
-	setTimestamps(videoElement, presenceData);
+	presenceData.details = document.querySelector("[aria-label='video description'] > div:nth-of-type(1) > h1").textContent;
+	presenceData.state = document.querySelector("[aria-label='video description'] > div:nth-of-type(2) > a:nth-of-type(2) > h2").textContent;
 
 	if (showButtons) {
 		presenceData.buttons = [
 			{
 				label: "Watch Video",
-				url: document.location.href,
+				url: document.location.href
 			},
 			{
-				label: "View channel",
-				url:
-					getRootUrl() +
-					document.querySelector(".css-1nacd6b").getAttribute("href"),
+				label: "View Channel",
+				url: getRootUrl() + document.querySelector("[aria-label='video description'] > div > a:nth-of-type(2)").getAttribute("href")
 			},
 		];
 	}
+
+	if (videoElement === null) return;
+	setTimestamps(videoElement, presenceData);
 }
 
 function getSearchDetails(presenceData: PresenceData): void {
@@ -156,57 +154,58 @@ function getOtherDetails(
 
 	if (videoElement === null && audioElement === null) {
 		// viewing a channel
-		const channelName = document.querySelector(".css-dv828b"),
-			podcastName = document.querySelector(".css-xdl2kn");
+		const channelName = document.querySelector("main > div:nth-of-type(1) > h1"),
+			podcastName = document.querySelector("main > div:nth-of-type(1) > div > div > div:nth-of-type(2) > h1");
 
 		if (channelName === null && podcastName === null) return;
 
 		if (channelName === null) {
 			presenceData.details = "Viewing a podcast";
-			presenceData.state = podcastName.innerHTML;
+			presenceData.state = podcastName.textContent;
 		} else {
 			presenceData.details = "Viewing a channel";
-			presenceData.state = channelName.innerHTML;
+			presenceData.state = channelName.textContent;
 		}
 
 		if (showButtons) {
 			presenceData.buttons = [
 				{
-					label: "View channel",
+					label: channelName === null ? "View Podcast" : "View Channel",
 					url: document.location.href,
 				},
 			];
 		}
 	} else if (videoElement === null) {
-		//its a podcast
-		const channelElement = document.querySelector(".css-2m8aus");
+		//it's a podcast
+		const channelElement = document.querySelector("main > div:nth-of-type(2) > div > div > div:nth-of-type(1) > div:nth-of-type(1) > a");
 
-		presenceData.details = document.querySelector(".css-l7qxoj").innerHTML;
-		presenceData.state = channelElement.innerHTML;
+		presenceData.details = document.querySelector("main > div:nth-of-type(1) > div:nth-of-type(3) > div > div:nth-of-type(2) > div:nth-of-type(1)").textContent;
+		presenceData.state = channelElement.textContent;
 		setTimestamps(audioElement, presenceData);
 
 		if (showButtons) {
 			presenceData.buttons = [
 				{
-					label: "Listen to podcast",
+					label: "Listen to Podcast",
 					url: document.location.href,
 				},
 				{
-					label: "View channel",
+					label: "View Channel",
 					url: getRootUrl() + channelElement.getAttribute("href"),
 				},
 			];
 		}
 	} else {
-		//its a class episode
-		const episodeName = document.querySelector(".css-13igzay"),
-			className = document.querySelector(".css-1ls4t7r");
+		//it's a class episode
+		const classInfoElementSelector = "main > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+			episodeName = document.querySelector(`${classInfoElementSelector} > div:nth-of-type(1)`),
+			className = document.querySelector(`${classInfoElementSelector} > div:nth-of-type(2)`);
 
 		if (episodeName !== null)
-			presenceData.details = `${episodeName.innerHTML} | ${className.innerHTML}`;
-		else presenceData.details = className.innerHTML;
+			presenceData.details = `${episodeName.textContent} | ${className.textContent}`;
+		else presenceData.details = className.textContent;
 
-		presenceData.state = document.querySelector(".css-p7br9k").innerHTML;
+		presenceData.state = document.querySelector(`${classInfoElementSelector} > div:nth-of-type(3)`).textContent;
 		setTimestamps(videoElement, presenceData);
 
 		if (showButtons) {
@@ -238,7 +237,7 @@ interface QueryParams {
 
 function parseQueryParams(): QueryParams {
 	const queryParams: QueryParams = {},
-		queryString = window.location.search.split("?")[1];
+		queryString = document.location.search.split("?")[1];
 
 	if (queryString) {
 		const pairs = queryString.split("&");
