@@ -142,13 +142,13 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `${
 				document.querySelector("#pre_content > div.g-title > div")?.textContent
 			} Koleksiyonuna Göz Atıyor`;
-		} else if (pathname.includes("@"))
+		} else if (pathname.includes("@")) {
 			presenceData.details = `${
 				document.querySelector(
 					"#container > div > aside > div > div > div.title"
 				)?.textContent
 			} Adlı Kullanıcının Profiline Göz Atıyor`;
-		else if (pathname === key) presenceData.details = value;
+		} else if (pathname === key) presenceData.details = value;
 	}
 
 	presence.setActivity(presenceData);
