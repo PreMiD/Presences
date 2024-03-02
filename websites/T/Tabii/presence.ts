@@ -64,9 +64,9 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (pathname.includes("/genre")) {
 		const catName = (
-			document.querySelector(
+			document.querySelector<HTMLElement>(
 				"#Main > div > div:nth-child(1) > main > div > div.flex.pt-8 > div > div > span:nth-child(2)"
-			) as HTMLElement
+			)
 		).textContent;
 		if (catName) presenceData.details = `${catName} Kategorisine Göz Atıyor`;
 		else presenceData.details = "Kategori Sayfasına Göz Atıyor";
