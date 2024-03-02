@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "180731688844787712",
+		"name": "tuleyman"
+	},
+	"service": "dizipal",
+	"description": {
+		"en": "Dizipal current, Dizipal new and real address. Dizipal offers the latest TV series and movies safely and quickly.",
+		"tr": "Dizipal güncel, Dizipal yeni ve gerçek adres. Dizipal en güncel dizi ve filmleri güvenli ve hızlı bir şekilde sunar."
+	},
+	"url": "dizipal733.com",
+	"regExp": "dizipal[0-9]*[.]com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/CMzeCH3.png",
+	"thumbnail": "https://i.imgur.com/AgTzkyb.png",
+	"color": "#db2424",
+	"category": "videos",
+	"tags": [
+		"dizipal",
+		"tv-series",
+		"exen",
+		"netflix",
+		"dizipalcom",
+		"tb",
+		"tuleyman"
+	],
+	"iframe": true,
+	"iFrameRegExp": ".*"
+}
