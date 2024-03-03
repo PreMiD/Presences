@@ -57,8 +57,8 @@ presence.on("UpdateData", async () => {
 		if (pathname.includes("/dizi/") && seriesPageCheck) {
 			const stringsData = await strings,
 				seriesTitle = document.querySelector(
-					"#container > div.popup-inner.auto > div.cover > h5"
-				)?.textContent,
+					"#container"
+				).querySelector('h5')?.textContent,
 				episode = document.querySelector(
 					"#container > div.episode-head > div:nth-child(1) > header > h2 > a"
 				)?.textContent,
