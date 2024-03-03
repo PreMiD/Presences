@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
 				];
 			}
 		} else if (
-			document.querySelector("#pre_content > div.g-title > div > span")
+			document.querySelector(".g-title > div > span")
 				?.textContent
 		) {
 			const stringsData = await strings;
