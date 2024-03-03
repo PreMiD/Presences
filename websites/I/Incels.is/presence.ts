@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 			  undefined,
 		threadTag =
 			document.querySelector('[class*="label label--custom-"]').textContent ??
-		  // eslint-disable-next-line no-undefined
+			// eslint-disable-next-line no-undefined
 			undefined,
 		{ pathname } = document.location,
 		{ search } = document.location;
