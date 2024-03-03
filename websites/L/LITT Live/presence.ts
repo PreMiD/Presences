@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "761889098490183691",
+		clientId: "575756169986048004",
 	}),
 	strings = presence.getStrings({
 		play: "general.playing",
@@ -9,21 +9,30 @@ const presence = new Presence({
 let songName: HTMLElement,
 	songArtist: HTMLElement,
 	songNameS: string,
-	songArtistS: string;
+	songArtistS: string,
+	thumbnail: HTMLImageElement;
 
 presence.on("UpdateData", async () => {
+	const sidePanel = document.querySelector(".MuiPaper-elevation");
+	if (sidePanel && sidePanel.childNodes[1]) {
+		thumbnail = sidePanel.childNodes[1].childNodes[0].childNodes[0]
+			.childNodes[0] as HTMLImageElement;
+	}
+
 	const presenceData: PresenceData = {
 		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/D/Dash%20Radio/assets/logo.png",
+			thumbnail ??
+			"https://cdn.rcd.gg/PreMiD/websites/L/LITT%20Live/assets/logo.png",
 	};
 
 	songName = document.querySelector(
 		"header.MuiAppBar-root > div.music-dataview-container > span.App-Player-Song-Title-Text"
 	);
 	if (!songName) {
-		(songNameS = document.querySelector("#marquee1").textContent),
-			(songNameS = songNameS.replace("<span>", "")),
-			(songNameS = songNameS.replace("</span>", ""));
+		songNameS = document
+			.querySelector("#marquee1")
+			.textContent.replace("<span>", "")
+			.replace("</span>", "");
 		if (songNameS === "") songNameS = "None";
 	} else if (songName) songNameS = songName.textContent;
 
@@ -31,15 +40,14 @@ presence.on("UpdateData", async () => {
 		"header.MuiAppBar-root > div.music-dataview-container > span.App-Player-Song-Artist-Text"
 	);
 	if (!songArtist) {
-		(songArtistS = document.querySelector("#marquee2").textContent),
-			(songArtistS = songArtistS.replaceAll("&amp;", "&")),
-			(songArtistS = songArtistS.replace('<span class="artist">', "")),
-			(songArtistS = songArtistS.replace("</span>", ""));
+		songArtistS = document
+			.querySelector("#marquee2")
+			.textContent.replaceAll("&amp;", "&")
+			.replace('<span class="artist">', "")
+			.replace("</span>", "");
 		if (songNameS === "") songArtistS = "None";
-	} else if (songArtist) {
-		(songArtistS = songArtist.textContent),
-			(songArtistS = songArtistS.replace("&amp;", "&"));
-	}
+	} else if (songArtist)
+		songArtistS = songArtist.textContent.replace("&amp;", "&");
 
 	if ((songNameS === "None" && songArtistS === "None") || songArtistS === "") {
 		presenceData.smallImageKey = Assets.Pause;
