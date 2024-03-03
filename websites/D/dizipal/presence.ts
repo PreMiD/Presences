@@ -29,8 +29,6 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://i.imgur.com/CMzeCH3.png",
-	play = "play",
-	pause = "pause",
 }
 
 interface IframeData {
