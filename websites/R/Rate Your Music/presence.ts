@@ -33,8 +33,8 @@ function updatePresence() {
 		},
 	};
 
-	//chart page
-	if (location.pathname.startsWith("/charts/")) {
+//chart page
+	if (pathname.startsWith("/charts/")) {
 		const chartNameElement = document.querySelector(
 			"#page_charts_section_charts_header_chart_name"
 		);
@@ -48,59 +48,59 @@ function updatePresence() {
 	}
 
 	//account page
-	if (location.pathname.startsWith("/account/"))
+	if (pathname.startsWith("/account/"))
 		presenceData.details = "Account";
 
 	//recs page
 	if (
-		location.pathname.startsWith("/recs/to/") ||
-		location.pathname.startsWith("/recs/from/")
+		pathname.startsWith("/recs/to/") ||
+		pathname.startsWith("/recs/from/")
 	) {
 		presenceData.details = "Viewing User Recs:";
-		presenceData.state = location.pathname.split("/")[3];
+		presenceData.state = pathname.split("/")[3];
 	}
 
 	//play history page
-	if (location.pathname.startsWith("/play-history/")) {
+	if (pathname.startsWith("/play-history/")) {
 		presenceData.details = "Viewing Play History:";
-		presenceData.state = `${location.pathname.split("/")[2]}`;
+		presenceData.state = `${pathname.split("/")[2]}`;
 	}
 
 	//user stats page
-	if (location.pathname.startsWith("/stats/userstats")) {
+	if (pathname.startsWith("/stats/userstats")) {
 		presenceData.details = "Viewing User Stats:";
-		presenceData.state = new URLSearchParams(location.search).get("user");
+		presenceData.state = new URLSearchParams(search).get("user");
 	}
 
 	//messages page
-	if (location.pathname.startsWith("/messages/"))
+	if (pathname.startsWith("/messages/"))
 		presenceData.details = "Messages";
 
 	//development page
-	if (location.pathname.startsWith("/development/"))
+	if (pathname.startsWith("/development/"))
 		presenceData.details = "Development";
 
 	//RYMzilla page
-	if (location.pathname.startsWith("/rymzilla/"))
+	if (pathname.startsWith("/rymzilla/"))
 		presenceData.details = "RYMzilla";
 
 	//wiki page
-	if (location.pathname.startsWith("/wiki/")) presenceData.details = "Wiki";
+	if (pathname.startsWith("/wiki/")) presenceData.details = "Wiki";
 
 	//privacy page
-	if (location.pathname.startsWith("/privacy/"))
+	if (pathname.startsWith("/privacy/"))
 		presenceData.details = "Privacy Policy";
 
 	//tos page
-	if (location.pathname.startsWith("/tos/"))
+	if (pathname.startsWith("/tos/"))
 		presenceData.details = "Terms of Service";
 
 	//contact page
-	if (location.pathname.startsWith("/contact/"))
+	if (pathname.startsWith("/contact/"))
 		presenceData.details = "Support / Feedback";
 
 	//latest reviews page
-	if (location.pathname.startsWith("/latest")) {
+	if (pathname.startsWith("/latest")) {
 		const dateElement = document.querySelector("h4");
 		if (dateElement) {
 			presenceData.details = "Latest Reviews";
@@ -109,7 +109,7 @@ function updatePresence() {
 	}
 
 	//feature page
-	if (location.pathname.startsWith("/feature/")) {
+	if (pathname.startsWith("/feature/")) {
 		const featureTitleElement = document.querySelector("h1");
 		if (featureTitleElement) {
 			presenceData.details = "Viewing Feature:";
@@ -118,19 +118,19 @@ function updatePresence() {
 	}
 
 	//recommendations page
-	if (location.pathname.startsWith("/recommendations/")) {
+	if (pathname.startsWith("/recommendations/")) {
 		presenceData.details = "Viewing Recommendations:";
-		presenceData.state = `${location.pathname.split("/")[2]}`;
+		presenceData.state = `${pathname.split("/")[2]}`;
 	}
 
 	//friends page
-	if (location.pathname.startsWith("/friends/")) {
+	if (pathname.startsWith("/friends/")) {
 		presenceData.details = "Viewing Friends:";
-		presenceData.state = location.pathname.split("/")[2];
+		presenceData.state = pathname.split("/")[2];
 	}
 
 	//label page
-	if (location.pathname.startsWith("/label/")) {
+	if (pathname.startsWith("/label/")) {
 		const labelNameElement = document.querySelector(
 			".page_company_music_section_name_inner h1"
 		);
@@ -141,7 +141,7 @@ function updatePresence() {
 	}
 
 	//work page
-	if (location.pathname.startsWith("/work/")) {
+	if (pathname.startsWith("/work/")) {
 		const workNameElement = document.querySelector(
 			"li#ui_breadcrumb_item_page_breadcrumb"
 		);
@@ -152,7 +152,7 @@ function updatePresence() {
 	}
 
 	//review page
-	if (location.pathname.startsWith("/music-review/")) {
+	if (pathname.startsWith("/music-review/")) {
 		const albumNameElement = document.querySelector("a.album"),
 			artistElement = document.querySelector("a.artist"),
 			userElement = document.querySelector("a.user");
@@ -164,15 +164,15 @@ function updatePresence() {
 
 	//submissions page
 	if (
-		location.pathname.startsWith("/submissions/") ||
-		location.pathname.startsWith("/admin/") ||
-		location.pathname.startsWith("/artist/profile_history?scope=") ||
-		location.pathname.startsWith("/rgenre/")
+		pathname.startsWith("/submissions/") ||
+		pathname.startsWith("/admin/") ||
+		pathname.startsWith("/artist/profile_history?scope=") ||
+		pathname.startsWith("/rgenre/")
 	)
 		presenceData.details = "Submissions";
 
 	//genre page
-	if (location.pathname.startsWith("/genre/")) {
+	if (pathname.startsWith("/genre/")) {
 		const genreNameElement = document.querySelector(
 			"#page_genre_section_name h1"
 		);
@@ -186,7 +186,7 @@ function updatePresence() {
 	}
 
 	//artist page
-	if (location.pathname.startsWith("/artist/")) {
+	if (pathname.startsWith("/artist/")) {
 		const artistNameElement = document.querySelector("h1.artist_name_hdr");
 		if (artistNameElement) {
 			const artistName = artistNameElement.textContent?.trim();
@@ -198,7 +198,7 @@ function updatePresence() {
 	}
 
 	//user page
-	if (location.pathname.startsWith("/~")) {
+	if (pathname.startsWith("/~")) {
 		const usernameElement = document.querySelector("#profilename");
 		if (usernameElement) {
 			const username = usernameElement.textContent?.trim();
@@ -210,11 +210,11 @@ function updatePresence() {
 	}
 
 	//list page
-	if (location.pathname.startsWith("/list/")) {
+	if (pathname.startsWith("/list/")) {
 		const listTitleElement = document.querySelector(
 				"h1[style='font-size:2.1em']"
 			),
-			listOwner = location.pathname.split("/")[2];
+			listOwner = pathname.split("/")[2];
 		if (listTitleElement) {
 			const listTitle = listTitleElement.textContent?.trim();
 			if (listTitle && listOwner) {
@@ -225,7 +225,7 @@ function updatePresence() {
 	}
 
 	//voting on descriptors page
-	if (location.pathname.startsWith("/rdescriptor/set")) {
+	if (pathname.startsWith("/rdescriptor/set")) {
 		const albumElement = document.querySelector("a.album"),
 			artistElement = document.querySelector("a.artist");
 		if (albumElement && artistElement) {
@@ -236,14 +236,14 @@ function updatePresence() {
 
 	//editing list page
 	if (
-		location.pathname.startsWith("/lists/edit") &&
+		pathname.startsWith("/lists/edit") &&
 		document.querySelector("span")
 	)
 		presenceData.details = "Editing List:";
 
 	//search page
-	if (location.pathname.startsWith("/search")) {
-		const searchTerm = new URLSearchParams(location.search).get("searchterm");
+	if (pathname.startsWith("/search")) {
+		const searchTerm = new URLSearchParams(search).get("searchterm");
 		if (searchTerm) {
 			presenceData.details = "Searching for:";
 			presenceData.state = searchTerm;
@@ -251,7 +251,7 @@ function updatePresence() {
 	}
 
 	//release page
-	if (location.pathname.startsWith("/release/")) {
+	if (pathname.startsWith("/release/")) {
 		const albumTitleElement = document.querySelector(".album_title");
 		if (
 			albumTitleElement &&
@@ -263,19 +263,19 @@ function updatePresence() {
 	}
 
 	//collection page
-	if (location.pathname.startsWith("/collection/")) {
+	if (pathname.startsWith("/collection/")) {
 		presenceData.details = "Viewing Collection:";
-		presenceData.state = `${location.pathname.split("/")[2]}`;
+		presenceData.state = `${pathname.split("/")[2]}`;
 	}
 
 	//compatibility page
-	if (location.pathname.startsWith("/find_similar_users")) {
+	if (pathname.startsWith("/find_similar_users")) {
 		presenceData.details = "Viewing Compatibility:";
-		presenceData.state = new URLSearchParams(location.search).get("user");
+		presenceData.state = new URLSearchParams(search).get("user");
 	}
 
 	for (const [path, data] of Object.entries(pages)) {
-		if (location.pathname === path) {
+		if (pathname === path) {
 			presenceData = { ...presenceData, ...data };
 			break;
 		}
