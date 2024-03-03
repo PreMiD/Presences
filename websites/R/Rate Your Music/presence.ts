@@ -13,28 +13,28 @@ function updatePresence() {
 	};
 
 	const pages: Record<string, PresenceData> = {
-		"/charts/": {
-			details: "Viewing Chart:",
+			"/charts/": {
+				details: "Viewing Chart:",
+			},
+			"/new-music/": {
+				details: "New Releases",
+			},
+			"/genres/": {
+				details: "Genres",
+			},
+			"/lists/": {
+				details: "Lists",
+			},
+			"/subscribe/": {
+				details: "Subscribe",
+			},
+			"/": {
+				details: "Home",
+			},
 		},
-		"/new-music/": {
-			details: "New Releases",
-		},
-		"/genres/": {
-			details: "Genres",
-		},
-		"/lists/": {
-			details: "Lists",
-		},
-		"/subscribe/": {
-			details: "Subscribe",
-		},
-		"/": {
-			details: "Home",
-		},
-	},
-	{ pathname } = document.location;
+		{ pathname } = document.location;
 
-//chart page
+	//chart page
 	if (pathname.startsWith("/charts/")) {
 		const chartNameElement = document.querySelector(
 			"#page_charts_section_charts_header_chart_name"
@@ -49,14 +49,10 @@ function updatePresence() {
 	}
 
 	//account page
-	if (pathname.startsWith("/account/"))
-		presenceData.details = "Account";
+	if (pathname.startsWith("/account/")) presenceData.details = "Account";
 
 	//recs page
-	if (
-		pathname.startsWith("/recs/to/") ||
-		pathname.startsWith("/recs/from/")
-	) {
+	if (pathname.startsWith("/recs/to/") || pathname.startsWith("/recs/from/")) {
 		presenceData.details = "Viewing User Recs:";
 		presenceData.state = pathname.split("/")[3];
 	}
@@ -70,31 +66,29 @@ function updatePresence() {
 	// user stats page
 	if (pathname.startsWith("/stats/userstats")) {
 		presenceData.details = "Viewing User Stats:";
-		presenceData.state = new URLSearchParams(window.location.search).get("user");
+		presenceData.state = new URLSearchParams(window.location.search).get(
+			"user"
+		);
 	}
 
 	//messages page
-	if (pathname.startsWith("/messages/"))
-		presenceData.details = "Messages";
+	if (pathname.startsWith("/messages/")) presenceData.details = "Messages";
 
 	//development page
 	if (pathname.startsWith("/development/"))
 		presenceData.details = "Development";
 
 	//RYMzilla page
-	if (pathname.startsWith("/rymzilla/"))
-		presenceData.details = "RYMzilla";
+	if (pathname.startsWith("/rymzilla/")) presenceData.details = "RYMzilla";
 
 	//wiki page
 	if (pathname.startsWith("/wiki/")) presenceData.details = "Wiki";
 
 	//privacy page
-	if (pathname.startsWith("/privacy/"))
-		presenceData.details = "Privacy Policy";
+	if (pathname.startsWith("/privacy/")) presenceData.details = "Privacy Policy";
 
 	//tos page
-	if (pathname.startsWith("/tos/"))
-		presenceData.details = "Terms of Service";
+	if (pathname.startsWith("/tos/")) presenceData.details = "Terms of Service";
 
 	//contact page
 	if (pathname.startsWith("/contact/"))
@@ -236,16 +230,15 @@ function updatePresence() {
 	}
 
 	//editing list page
-	if (
-		pathname.startsWith("/lists/edit") &&
-		document.querySelector("span")
-	)
+	if (pathname.startsWith("/lists/edit") && document.querySelector("span"))
 		presenceData.details = "Editing List:";
 
 	// search page
 	if (pathname.startsWith("/search")) {
 		presenceData.details = "Searching for:";
-		presenceData.state = new URLSearchParams(window.location.search).get("searchterm");
+		presenceData.state = new URLSearchParams(window.location.search).get(
+			"searchterm"
+		);
 	}
 
 	//release page
@@ -269,7 +262,9 @@ function updatePresence() {
 	// compatibility page
 	if (pathname.startsWith("/find_similar_users")) {
 		presenceData.details = "Viewing Compatibility:";
-		presenceData.state = new URLSearchParams(window.location.search).get("user");
+		presenceData.state = new URLSearchParams(window.location.search).get(
+			"user"
+		);
 	}
 
 	for (const [path, data] of Object.entries(pages)) {
