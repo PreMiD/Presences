@@ -70,8 +70,7 @@ function updatePresence() {
 	// user stats page
 	if (pathname.startsWith("/stats/userstats")) {
 		presenceData.details = "Viewing User Stats:";
-		const searchParams = new URLSearchParams(window.location.search);
-		presenceData.state = searchParams.get("user");
+		presenceData.state = new URLSearchParams(window.location.search).get("user");
 	}
 
 	//messages page
@@ -246,8 +245,7 @@ function updatePresence() {
 	// search page
 	if (pathname.startsWith("/search")) {
 		presenceData.details = "Searching for:";
-		const searchParams = new URLSearchParams(window.location.search);
-		presenceData.state = searchParams.get("searchterm");
+		presenceData.state = new URLSearchParams(window.location.search).get("searchterm");
 	}
 
 	//release page
@@ -271,8 +269,7 @@ function updatePresence() {
 	// compatibility page
 	if (pathname.startsWith("/find_similar_users")) {
 		presenceData.details = "Viewing Compatibility:";
-		const searchParams = new URLSearchParams(window.location.search);
-		presenceData.state = searchParams.get("user");
+		presenceData.state = new URLSearchParams(window.location.search).get("user");
 	}
 
 	for (const [path, data] of Object.entries(pages)) {
