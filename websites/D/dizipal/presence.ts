@@ -64,10 +64,8 @@ presence.on("UpdateData", async () => {
 				episode = document.querySelector(
 					"#container > div.episode-head > div:nth-child(1) > header > h2 > a"
 				)?.textContent,
-				seriesUrl = (
-					document.querySelector(
-						"#container > div.episode-head > div:nth-child(1) > header > h2 > a"
-					) as HTMLAnchorElement
+				seriesUrl = document.querySelector<HTMLAnchorElement>(
+					"#container > div.episode-head > div:nth-child(1) > header > h2 > a"
 				)?.href;
 
 			if (seriesTitle && !episode) {
