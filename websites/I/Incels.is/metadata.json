@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "351653707496292353",
 		"name": "ianhell666"
@@ -8,7 +8,10 @@
 	"description": {
 		"en": "Incels.is is a community for men that struggle with or are unable to get into romantic relationships with women despite trying. We welcome men from all walks of life, and from all cultural and racial backgrounds, as long as you are an incel."
 	},
-	"url": ["incels.is", "www.incels.is"],
+	"url": [
+		"incels.is",
+		"www.incels.is"
+	],
 	"version": "1.0.0",
 	"logo": "https://incels.is/logo/512x512.png",
 	"thumbnail": "https://incels.is/logo/512x512.png",
