@@ -87,9 +87,7 @@ presence.on("UpdateData", async () => {
 						)?.textContent
 					} ${video.paused ? stringsData.pause : stringsData.play}`;
 
-					presenceData.startTimestamp = Date.now() - video.currentTime * 1000;
-					presenceData.endTimestamp =
-						Date.now() + (video.duration - video.currentTime) * 1000;
+					[presenceData.startTimestamp, presenceData.endTimestamp] = 	presence.getTimestamps(video.currentTime, video.duration)
 				} else presenceData.details = `${episode} Adlı Bölüme Göz Atıyor.`;
 
 				presenceData.buttons = [
