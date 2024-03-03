@@ -4,7 +4,6 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://i.imgur.com/e9ewOCy.png",
-	smallImageKey = "",
 }
 
 const enum Pages {
