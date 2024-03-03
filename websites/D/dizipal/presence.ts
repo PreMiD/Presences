@@ -108,7 +108,7 @@ presence.on("UpdateData", async () => {
 			const stringsData = await strings;
 
 			presenceData.details = document.querySelector(
-				"#pre_content > div.g-title > div > span"
+				".g-title > div > span"
 			)?.textContent;
 
 			if (video?.currentTime && video?.duration) {
