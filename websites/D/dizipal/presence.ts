@@ -4,7 +4,7 @@ const presence = new Presence({
 	strings = presence.getStrings({
 		play: "general.playing",
 		pause: "general.paused",
-		viewShow: "general.viewShow",
+		buttonViewShow: "general.buttonViewShow",
 		viewMovie: "general.buttonWatchMovie",
 		viewEpisode: "general.buttonViewEpisode",
 	}),
