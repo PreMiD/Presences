@@ -137,7 +137,7 @@ presence.on("UpdateData", async () => {
 		} else if (pathname.includes("@")) {
 			presenceData.details = `${
 				document.querySelector(
-					"#container > div > aside > div > div > div.title"
+					".title"
 				)?.textContent
 			} Adlı Kullanıcının Profiline Göz Atıyor`;
 		} else if (pathname === key) presenceData.details = value;
