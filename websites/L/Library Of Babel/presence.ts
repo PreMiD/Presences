@@ -92,6 +92,15 @@ presence.on("UpdateData", async () => {
 			{
 				// find the shelf and page (not added for now, perhaps implement later)
 				presenceData.details = "Browsing the archives";
+				presenceData.state = `Hex ${
+	document.querySelector<HTMLTextAreaElement>("#hexer")?.value
+} - Wall ${document
+	.querySelector<HTMLSelectElement>("#inside1")
+	?.value?.slice(1)} - Shelf ${document
+	.querySelector<HTMLSelectElement>("#inside2")
+	?.value?.slice(1)} - Volume ${document
+	.querySelector<HTMLSelectElement>("#inside3")
+	?.value?.slice(1)}`;
 			}
 			break;
 
