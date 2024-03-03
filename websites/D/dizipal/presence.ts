@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 
 					presenceData.state = `${
 						document.querySelector(
-							"#container > div.episode-head > div:nth-child(1) > h6"
+							".episode-head").querySelector("h6"
 						)?.textContent
 					} ${video.paused ? stringsData.pause : stringsData.play}`;
 
