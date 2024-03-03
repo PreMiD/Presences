@@ -290,4 +290,4 @@ updatePresence();
 
 window.addEventListener("popstate", updatePresence);
 
-setInterval(updatePresence, 10000);
+setInterval(updatePresence, 3000);
