@@ -116,9 +116,7 @@ presence.on("UpdateData", async () => {
 					? stringsData.pause
 					: stringsData.play;
 
-				presenceData.startTimestamp = Date.now() - video.currentTime * 1000;
-				presenceData.endTimestamp =
-					Date.now() + (video.duration - video.currentTime) * 1000;
+[presenceData.startTimestamp, presenceData.endTimestamp] = 	presence.getTimestamps(video.currentTime, video.duration)
 
 				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
