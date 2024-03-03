@@ -67,10 +67,11 @@ function updatePresence() {
 		presenceData.state = `${pathname.split("/")[2]}`;
 	}
 
-	//user stats page
+	// user stats page
 	if (pathname.startsWith("/stats/userstats")) {
 		presenceData.details = "Viewing User Stats:";
-		presenceData.state = new URLSearchParams(search).get("user");
+		const searchParams = new URLSearchParams(window.location.search);
+		presenceData.state = searchParams.get("user");
 	}
 
 	//messages page
@@ -242,13 +243,11 @@ function updatePresence() {
 	)
 		presenceData.details = "Editing List:";
 
-	//search page
+	// search page
 	if (pathname.startsWith("/search")) {
-		const searchTerm = new URLSearchParams(search).get("searchterm");
-		if (searchTerm) {
-			presenceData.details = "Searching for:";
-			presenceData.state = searchTerm;
-		}
+		presenceData.details = "Searching for:";
+		const searchParams = new URLSearchParams(window.location.search);
+		presenceData.state = searchParams.get("searchterm");
 	}
 
 	//release page
@@ -269,10 +268,11 @@ function updatePresence() {
 		presenceData.state = `${pathname.split("/")[2]}`;
 	}
 
-	//compatibility page
+	// compatibility page
 	if (pathname.startsWith("/find_similar_users")) {
 		presenceData.details = "Viewing Compatibility:";
-		presenceData.state = new URLSearchParams(search).get("user");
+		const searchParams = new URLSearchParams(window.location.search);
+		presenceData.state = searchParams.get("user");
 	}
 
 	for (const [path, data] of Object.entries(pages)) {
