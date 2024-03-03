@@ -12,7 +12,7 @@
 	"matches": [
 		"*://nebula.tv/*"
 	],
-	"version": "1.0.1",
+	"version": "1.0.0",
 	"logo": "https://i.imgur.com/VnwSEyu.png",
 	"thumbnail": "https://i.imgur.com/fNXHoQg.jpeg",
 	"color": "#67bef5",
