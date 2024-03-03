@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
 			];
 		} else if (pathname.includes("/koleksiyon/")) {
 			presenceData.details = `${
-				document.querySelector("#pre_content > div.g-title > div")?.textContent
+				document.querySelector(".g-title > div")?.textContent
 			} Koleksiyonuna Göz Atıyor`;
 		} else if (pathname.includes("@")) {
 			presenceData.details = `${
