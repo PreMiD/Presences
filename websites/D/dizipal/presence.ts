@@ -47,6 +47,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
+		stringsData = await strings,
 		{ pathname, href } = document.location,
 		seriesPageCheck =
 			!!document.querySelector('.cover-actions > [data-request]')
