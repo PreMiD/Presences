@@ -71,8 +71,7 @@ presence.on("UpdateData", async () => {
 		playvdo = document.querySelector("#info > h1")?.textContent ?? "?",
 		pathArray = document.location.toString().split("/"),
 		presenceData: PresenceData = {
-			largeImageKey:
-				"site",
+			largeImageKey: "site",
 			startTimestamp: browsingTimestamp,
 		};
 	if (oldLang !== newLang || !strings) {
