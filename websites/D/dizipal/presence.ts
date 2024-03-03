@@ -49,9 +49,7 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, href } = document.location,
 		seriesPageCheck =
-			document.querySelector(
-				"#container > div.popup-inner.auto > div.cover > div > a:nth-child(1)"
-			) === null;
+			!!document.querySelector('.cover-actions > [data-request]')
 
 	for (const [key, value] of Object.entries(pages)) {
 		if (pathname.includes("/dizi/") && seriesPageCheck) {
