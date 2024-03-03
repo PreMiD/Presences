@@ -56,9 +56,9 @@ presence.on("UpdateData", async () => {
 	for (const [key, value] of Object.entries(pages)) {
 		if (pathname.includes("/dizi/") && seriesPageCheck) {
 			const stringsData = await strings,
-				seriesTitle = document.querySelector(
-					"#container"
-				).querySelector('h5')?.textContent,
+				seriesTitle = document
+					.querySelector("#container")
+					.querySelector("h5")?.textContent,
 				episode = document.querySelector(
 					"#container > div.episode-head > div:nth-child(1) > header > h2 > a"
 				)?.textContent,
@@ -87,7 +87,8 @@ presence.on("UpdateData", async () => {
 						)?.textContent
 					} ${video.paused ? stringsData.pause : stringsData.play}`;
 
-					[presenceData.startTimestamp, presenceData.endTimestamp] = 	presence.getTimestamps(video.currentTime, video.duration)
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestamps(video.currentTime, video.duration);
 				} else presenceData.details = `${episode} Adlı Bölüme Göz Atıyor.`;
 
 				presenceData.buttons = [
@@ -116,7 +117,8 @@ presence.on("UpdateData", async () => {
 					? stringsData.pause
 					: stringsData.play;
 
-[presenceData.startTimestamp, presenceData.endTimestamp] = 	presence.getTimestamps(video.currentTime, video.duration)
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(video.currentTime, video.duration);
 
 				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
@@ -136,9 +138,7 @@ presence.on("UpdateData", async () => {
 			} Koleksiyonuna Göz Atıyor`;
 		} else if (pathname.includes("@")) {
 			presenceData.details = `${
-				document.querySelector(
-					".title"
-				)?.textContent
+				document.querySelector(".title")?.textContent
 			} Adlı Kullanıcının Profiline Göz Atıyor`;
 		} else if (pathname === key) presenceData.details = value;
 	}
