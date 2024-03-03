@@ -140,7 +140,9 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `${
 				document.querySelector(".title")?.textContent
 			} Adlı Kullanıcının Profiline Göz Atıyor`;
-		} else if (pathname === key) presenceData.details = value;
+} else {
+		for (const [key, value] of Object.entries(pages))
+			if (pathname === key) presenceData.details = value;
 	}
 
 	presence.setActivity(presenceData);
