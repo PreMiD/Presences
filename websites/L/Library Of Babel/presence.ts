@@ -28,7 +28,7 @@ const enum Pages {
 presence.on("UpdateData", async () => {
 	if (!document.location.toString()) return;
 
-	let base = window.location.pathname;
+	let base = document.location.pathname;
 	if (base.includes("theory")) base = "/theory.html";
 
 	const title = document.title
@@ -92,8 +92,27 @@ presence.on("UpdateData", async () => {
 
 		case Pages.browse:
 			{
-				// find the shelf and page (not added for now, perhaps implement later)
 				presenceData.details = "Browsing the archives";
+
+				const hexVal =
+						document.querySelector<HTMLTextAreaElement>("#hexer")?.value,
+					wall = document.querySelector<HTMLSelectElement>("#inside1"),
+					wallVal = wall?.value?.slice(1),
+					shelf = document.querySelector<HTMLSelectElement>("#inside2"),
+					shelfVal = shelf?.value?.slice(1),
+					vol = document.querySelector<HTMLSelectElement>("#inside3"),
+					volVal = vol?.value?.slice(1);
+
+				presenceData.state = "";
+
+				// hex will always be visible
+				if (hexVal) presenceData.state += `Hex ${hexVal}`;
+				if (wall.style.display && wallVal)
+					presenceData.state += `, Wall ${wallVal}`;
+				if (shelf.style.display && shelfVal)
+					presenceData.state += `, Shelf ${shelfVal}`;
+				if (vol.style.display && volVal)
+					presenceData.state += `, Volume ${volVal}`;
 			}
 			break;
 
