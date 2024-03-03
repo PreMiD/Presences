@@ -120,18 +120,28 @@ function getVideoDetails(
 ): void {
 	const videoElement = document.querySelector("video");
 
-	presenceData.details = document.querySelector("[aria-label='video description'] > div:nth-of-type(1) > h1").textContent;
-	presenceData.state = document.querySelector("[aria-label='video description'] > div:nth-of-type(2) > a:nth-of-type(2) > h2").textContent;
+	presenceData.details = document.querySelector(
+		"[aria-label='video description'] > div:nth-of-type(1) > h1"
+	).textContent;
+	presenceData.state = document.querySelector(
+		"[aria-label='video description'] > div:nth-of-type(2) > a:nth-of-type(2) > h2"
+	).textContent;
 
 	if (showButtons) {
 		presenceData.buttons = [
 			{
 				label: "Watch Video",
-				url: document.location.href
+				url: document.location.href,
 			},
 			{
 				label: "View Channel",
-				url: getRootUrl() + document.querySelector("[aria-label='video description'] > div > a:nth-of-type(2)").getAttribute("href")
+				url:
+					getRootUrl() +
+					document
+						.querySelector(
+							"[aria-label='video description'] > div > a:nth-of-type(2)"
+						)
+						.getAttribute("href"),
 			},
 		];
 	}
@@ -154,8 +164,12 @@ function getOtherDetails(
 
 	if (videoElement === null && audioElement === null) {
 		// viewing a channel
-		const channelName = document.querySelector("main > div:nth-of-type(1) > h1"),
-			podcastName = document.querySelector("main > div:nth-of-type(1) > div > div > div:nth-of-type(2) > h1");
+		const channelName = document.querySelector(
+				"main > div:nth-of-type(1) > h1"
+			),
+			podcastName = document.querySelector(
+				"main > div:nth-of-type(1) > div > div > div:nth-of-type(2) > h1"
+			);
 
 		if (channelName === null && podcastName === null) return;
 
@@ -177,9 +191,13 @@ function getOtherDetails(
 		}
 	} else if (videoElement === null) {
 		//it's a podcast
-		const channelElement = document.querySelector("main > div:nth-of-type(2) > div > div > div:nth-of-type(1) > div:nth-of-type(1) > a");
+		const channelElement = document.querySelector(
+			"main > div:nth-of-type(2) > div > div > div:nth-of-type(1) > div:nth-of-type(1) > a"
+		);
 
-		presenceData.details = document.querySelector("main > div:nth-of-type(1) > div:nth-of-type(3) > div > div:nth-of-type(2) > div:nth-of-type(1)").textContent;
+		presenceData.details = document.querySelector(
+			"main > div:nth-of-type(1) > div:nth-of-type(3) > div > div:nth-of-type(2) > div:nth-of-type(1)"
+		).textContent;
 		presenceData.state = channelElement.textContent;
 		setTimestamps(audioElement, presenceData);
 
@@ -197,15 +215,22 @@ function getOtherDetails(
 		}
 	} else {
 		//it's a class episode
-		const classInfoElementSelector = "main > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
-			episodeName = document.querySelector(`${classInfoElementSelector} > div:nth-of-type(1)`),
-			className = document.querySelector(`${classInfoElementSelector} > div:nth-of-type(2)`);
+		const classInfoElementSelector =
+				"main > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+			episodeName = document.querySelector(
+				`${classInfoElementSelector} > div:nth-of-type(1)`
+			),
+			className = document.querySelector(
+				`${classInfoElementSelector} > div:nth-of-type(2)`
+			);
 
 		if (episodeName !== null)
 			presenceData.details = `${episodeName.textContent} | ${className.textContent}`;
 		else presenceData.details = className.textContent;
 
-		presenceData.state = document.querySelector(`${classInfoElementSelector} > div:nth-of-type(3)`).textContent;
+		presenceData.state = document.querySelector(
+			`${classInfoElementSelector} > div:nth-of-type(3)`
+		).textContent;
 		setTimestamps(videoElement, presenceData);
 
 		if (showButtons) {
