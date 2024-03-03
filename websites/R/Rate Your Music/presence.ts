@@ -31,7 +31,8 @@ function updatePresence() {
 		"/": {
 			details: "Home",
 		},
-	};
+	},
+	{ pathname } = document.location;
 
 //chart page
 	if (pathname.startsWith("/charts/")) {
