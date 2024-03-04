@@ -12,23 +12,22 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = document.location,
-		[showButtons] = await Promise.all([
-			presence.getSetting<boolean>("buttons"),
-		]),
+		{ pathname, href } = document.location,
+		showButtons = await presence.getSetting<boolean>("buttons"),
 		path = pathname.split("/");
 
 	path.shift();
 	if (pathname.endsWith("/")) path.pop();
 
-	getDetails(presenceData, path, showButtons);
+	getDetails(presenceData, path, showButtons, href);
 	presence.setActivity(presenceData);
 });
 
 function getDetails(
 	presenceData: PresenceData,
 	path: string[],
-	showButtons: boolean
+	showButtons: boolean,
+	href: string
 ): void {
 	if (path.length === 0) {
 		presenceData.details = "Viewing home page";
@@ -63,13 +62,13 @@ function getDetails(
 			else presenceData.details = getExploreCategory(path[1].toLowerCase());
 			break;
 		case "videos":
-			getVideoDetails(presenceData, showButtons);
+			getVideoDetails(presenceData, showButtons, href);
 			break;
 		case "search":
 			getSearchDetails(presenceData);
 			break;
 		default:
-			getOtherDetails(presenceData, showButtons);
+			getOtherDetails(presenceData, showButtons, href);
 			break;
 	}
 }
@@ -116,31 +115,32 @@ function getLibraryCategory(category: string): string {
 
 function getVideoDetails(
 	presenceData: PresenceData,
-	showButtons: boolean
+	showButtons: boolean,
+	href: string
 ): void {
-	const videoElement = document.querySelector("video");
+	const videoElement = document.querySelector("video"),
+		videoDescriptionLabel = "[aria-label='video description']";
 
-	presenceData.details = document.querySelector(
-		"[aria-label='video description'] > div:nth-of-type(1) > h1"
-	).textContent;
-	presenceData.state = document.querySelector(
-		"[aria-label='video description'] > div:nth-of-type(2) > a:nth-of-type(2) > h2"
-	).textContent;
+	presenceData.details = document
+		.querySelector(videoDescriptionLabel)
+		.querySelector("h1").textContent;
+	presenceData.state = document
+		.querySelector(videoDescriptionLabel)
+		.querySelector("h2").textContent;
 
 	if (showButtons) {
 		presenceData.buttons = [
 			{
 				label: "Watch Video",
-				url: document.location.href,
+				url: href,
 			},
 			{
 				label: "View Channel",
 				url:
 					getRootUrl() +
 					document
-						.querySelector(
-							"[aria-label='video description'] > div > a:nth-of-type(2)"
-						)
+						.querySelector(videoDescriptionLabel)
+						.querySelector("a")
 						.getAttribute("href"),
 			},
 		];
@@ -153,23 +153,21 @@ function getVideoDetails(
 function getSearchDetails(presenceData: PresenceData): void {
 	presenceData.details = "Searching for:";
 	presenceData.state = parseQueryParams().q || "...";
+	presenceData.smallImageKey = Assets.Search;
 }
 
 function getOtherDetails(
 	presenceData: PresenceData,
-	showButtons: boolean
+	showButtons: boolean,
+	href: string
 ): void {
 	const videoElement = document.querySelector("video"),
 		audioElement = document.querySelector("audio");
 
 	if (videoElement === null && audioElement === null) {
-		// viewing a channel
-		const channelName = document.querySelector(
-				"main > div:nth-of-type(1) > h1"
-			),
-			podcastName = document.querySelector(
-				"main > div:nth-of-type(1) > div > div > div:nth-of-type(2) > h1"
-			);
+		// viewing a channel or podcast page
+		const channelName = document.querySelector("main > div > h1"),
+			podcastName = document.querySelector("main > div > div > div > div > h1");
 
 		if (channelName === null && podcastName === null) return;
 
@@ -185,18 +183,16 @@ function getOtherDetails(
 			presenceData.buttons = [
 				{
 					label: channelName === null ? "View Podcast" : "View Channel",
-					url: document.location.href,
+					url: href,
 				},
 			];
 		}
 	} else if (videoElement === null) {
-		//it's a podcast
-		const channelElement = document.querySelector(
-			"main > div:nth-of-type(2) > div > div > div:nth-of-type(1) > div:nth-of-type(1) > a"
-		);
+		//listening to a podcast
+		const channelElement = document.querySelector("main").querySelector("a");
 
 		presenceData.details = document.querySelector(
-			"main > div:nth-of-type(1) > div:nth-of-type(3) > div > div:nth-of-type(2) > div:nth-of-type(1)"
+			"main > div > div > div > div > div"
 		).textContent;
 		presenceData.state = channelElement.textContent;
 		setTimestamps(audioElement, presenceData);
@@ -205,7 +201,7 @@ function getOtherDetails(
 			presenceData.buttons = [
 				{
 					label: "Listen to Podcast",
-					url: document.location.href,
+					url: href,
 				},
 				{
 					label: "View Channel",
@@ -214,30 +210,42 @@ function getOtherDetails(
 			];
 		}
 	} else {
-		//it's a class episode
+		//watching a class episode
 		const classInfoElementSelector =
-				"main > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
-			episodeName = document.querySelector(
+			"main > div:nth-of-type(2) > div > div > div";
+
+		if (
+			document.querySelector(classInfoElementSelector).childNodes.length === 2
+		) {
+			//there is no episode name
+			presenceData.details = document.querySelector(
 				`${classInfoElementSelector} > div:nth-of-type(1)`
-			),
-			className = document.querySelector(
+			).textContent;
+			presenceData.state = document.querySelector(
 				`${classInfoElementSelector} > div:nth-of-type(2)`
-			);
+			).textContent;
+		} else {
+			presenceData.details = `${
+				document.querySelector(
+					`${classInfoElementSelector} > div:nth-of-type(1)`
+				).textContent
+			} | ${
+				document.querySelector(
+					`${classInfoElementSelector} > div:nth-of-type(2)`
+				).textContent
+			}`;
+			presenceData.state = document.querySelector(
+				`${classInfoElementSelector} > div:nth-of-type(3)`
+			).textContent;
+		}
 
-		if (episodeName !== null)
-			presenceData.details = `${episodeName.textContent} | ${className.textContent}`;
-		else presenceData.details = className.textContent;
-
-		presenceData.state = document.querySelector(
-			`${classInfoElementSelector} > div:nth-of-type(3)`
-		).textContent;
 		setTimestamps(videoElement, presenceData);
 
 		if (showButtons) {
 			presenceData.buttons = [
 				{
 					label: "Watch Episode",
-					url: document.location.href,
+					url: href,
 				},
 			];
 		}
