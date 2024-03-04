@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("image"),
 		]);
 
-	if (privacy) presenceData.details = "Browsing";
+	if (privacy) presenceData.details = "Browsing...";
 	else {
 		if (
 			pathname.includes("/series/") ||
