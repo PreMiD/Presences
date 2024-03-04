@@ -23,6 +23,12 @@
 	"iFrameRegExp": ".*",
 	"settings": [
 		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
 			"id": "image",
 			"title": "Show Images",
 			"icon": "fad fa-images",
