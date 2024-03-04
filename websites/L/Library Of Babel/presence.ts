@@ -2,8 +2,9 @@ const presence = new Presence({
 	clientId: "1212508565802192936",
 });
 
+// Other default assets can be found at index.d.ts
 const enum Assets {
-	Logo = "https://i.imgur.com/e9ewOCy.png",
+	Logo = "https://libraryofbabel.info/img/hex802.png",
 }
 
 const enum Pages {
@@ -90,17 +91,27 @@ presence.on("UpdateData", async () => {
 
 		case Pages.browse:
 			{
-				// find the shelf and page (not added for now, perhaps implement later)
 				presenceData.details = "Browsing the archives";
-				presenceData.state = `Hex ${
-	document.querySelector<HTMLTextAreaElement>("#hexer")?.value
-} - Wall ${document
-	.querySelector<HTMLSelectElement>("#inside1")
-	?.value?.slice(1)} - Shelf ${document
-	.querySelector<HTMLSelectElement>("#inside2")
-	?.value?.slice(1)} - Volume ${document
-	.querySelector<HTMLSelectElement>("#inside3")
-	?.value?.slice(1)}`;
+
+				const hexVal =
+						document.querySelector<HTMLTextAreaElement>("#hexer")?.value,
+					wall = document.querySelector<HTMLSelectElement>("#inside1"),
+					wallVal = wall?.value?.slice(1),
+					shelf = document.querySelector<HTMLSelectElement>("#inside2"),
+					shelfVal = shelf?.value?.slice(1),
+					vol = document.querySelector<HTMLSelectElement>("#inside3"),
+					volVal = vol?.value?.slice(1);
+
+				presenceData.state = "";
+
+				// hex will always be visible
+				if (hexVal) presenceData.state += `Hex ${hexVal}`;
+				if (wall?.style.display && wallVal)
+					presenceData.state += `, Wall ${wallVal}`;
+				if (shelf?.style.display && shelfVal)
+					presenceData.state += `, Shelf ${shelfVal}`;
+				if (vol?.style.display && volVal)
+					presenceData.state += `, Volume ${volVal}`;
 			}
 			break;
 
