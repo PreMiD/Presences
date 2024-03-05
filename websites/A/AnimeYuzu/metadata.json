@@ -11,6 +11,9 @@
 		"vi_VN": "Xem những anime mới nhất trực tuyến có phụ đề và thuyết minh Tiếng Thái."
 	},
 	"url": "animeyuzu.com",
+	"matches": [
+		"*://animeyuzu.com/*"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/8PVGg8d.png",
 	"thumbnail": "https://i.imgur.com/EpEqmNI.png",
@@ -23,6 +26,10 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"iFrameMatches": [
+		"*://animeyuzu.com/ep/*",
+		"*://animeyuzu.com/movies/*"
+	],
 	"settings": [
 		{
 			"id": "lang",
