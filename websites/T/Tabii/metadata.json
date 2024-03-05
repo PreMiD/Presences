@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "180731688844787712",
+		"name": "tuleyman"
+	},
+	"service": "Tabii",
+	"description": {
+		"en": "tabii - Watch TV Shows Movies and Series",
+		"tr": "tabii - TV Programları Filmleri ve Dizileri İzle"
+	},
+	"url": [
+		"www.tabii.com",
+		"tabii.com"
+	],
+	"matches": [
+		"*://www.tabii.com/*",
+		"*://tabii.com/*"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/ZfDhD5n.png",
+	"thumbnail": "https://i.imgur.com/cVhvZEO.png",
+	"color": "#00ff99",
+	"category": "videos",
+	"tags": [
+		"tabii",
+		"tb",
+		"tuleyman",
+		"tabiicom",
+		"wwwtabiicom"
+	]
+}
