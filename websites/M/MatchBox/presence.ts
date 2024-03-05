@@ -4,8 +4,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const { pathname, href } = document.location,
 		presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/S/Smash%20Pros/assets/logo.png",
+			largeImageKey: "https://i.imgur.com/BUsAbPF.png",
 		};
 	if (pathname === "/matchmaking") {
 		const opponent = document.querySelectorAll(
