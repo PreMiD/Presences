@@ -11,6 +11,7 @@ let data: {
 
 const enum Assets {
 	AniWatchLogo = "https://cdn.rcd.gg/PreMiD/websites/A/AniWatch/assets/0.png",
+	HiAnimeLogo = "https://i.imgur.com/a9gT2wg.png",
 	Settings = "https://cdn.rcd.gg/PreMiD/websites/A/AniWatch/assets/1.png",
 	Notifications = "https://cdn.rcd.gg/PreMiD/websites/A/AniWatch/assets/2.png",
 }
@@ -27,15 +28,16 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-			largeImageKey: Assets.AniWatchLogo,
+	const isHiAnime = document.location.hostname === "hianime.to",
+		presenceData: PresenceData = {
+			largeImageKey: isHiAnime ? Assets.HiAnimeLogo : Assets.AniWatchLogo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
 		buttons = await presence.getSetting<boolean>("buttons");
 
 	if (pathname === "/" || pathname === "/home")
-		presenceData.details = "Exploring AniWatch.to";
+		presenceData.details = `Exploring ${isHiAnime ? "HiAnime" : "AniWatch"}.to`;
 	else if (
 		/\/(most-favorite|most-popular|movie|recently-added|recently-updated|tv|top-airing|top-upcoming|ona|ova|special|(genre\/.*))/.test(
 			pathname
