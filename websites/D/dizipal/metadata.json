@@ -25,6 +25,10 @@
 		"tb",
 		"tuleyman"
 	],
-	"iframe": true,
-	"iFrameRegExp": ".*"
+	"matches": [
+		"*://dizipal[0-9]*.com/*"
+	],
+	"iFrameMatches": [
+		"*://dizipal[0-9]*.com/*"
+	]
 }

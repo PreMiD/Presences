@@ -47,14 +47,14 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, href } = document.location;
+		{ pathname, href } = document.location,
+		stringsData = await strings;
 
 	if (
 		pathname.includes("/dizi/") &&
 		!!document.querySelector(".cover-actions > [data-request]")
 	) {
-		const stringsData = await strings,
-			seriesTitle = document
+		const seriesTitle = document
 				.querySelector("#container")
 				.querySelector("h5")?.textContent,
 			episode = document.querySelector(
@@ -100,7 +100,6 @@ presence.on("UpdateData", async () => {
 			];
 		}
 	} else if (document.querySelector(".g-title > div > span")?.textContent) {
-		const stringsData = await strings;
 
 		presenceData.details = document.querySelector(
 			".g-title > div > span"
