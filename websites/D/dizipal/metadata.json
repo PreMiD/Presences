@@ -25,6 +25,7 @@
 		"tb",
 		"tuleyman"
 	],
+	"iframe": true,
 	"matches": [
 		"*://dizipal[0-9]*.com/*"
 	],
