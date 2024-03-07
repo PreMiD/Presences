@@ -100,7 +100,6 @@ presence.on("UpdateData", async () => {
 			];
 		}
 	} else if (document.querySelector(".g-title > div > span")?.textContent) {
-
 		presenceData.details = document.querySelector(
 			".g-title > div > span"
 		)?.textContent;
