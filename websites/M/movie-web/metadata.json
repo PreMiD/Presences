@@ -11,6 +11,7 @@
 	"url": [
 		"movie-web.app",
 		"mw.lonelil.com",
+		"mw.lonelil.ru",
 		"mv-web.netlify.app"
 	],
 	"regExp": "(dev[.])?(movie-web[.]app)",
