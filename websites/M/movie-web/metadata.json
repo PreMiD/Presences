@@ -17,6 +17,7 @@
 	"matches": [
 		"*://movie-web.app/*",
 		"*://mw.lonelil.com/*",
+		"*://mw.lonelil.ru/*",
 		"*://mv-web.netlify.app/*"
 	],
 	"version": "1.0.6",
