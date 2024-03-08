@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/pDCUaZP.png",
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, host } = window.location;
+		{ pathname, host } = document.location;
 
 	if (pathname === "/") presenceData.details = "Browsing KQM";
 
