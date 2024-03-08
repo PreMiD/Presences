@@ -3,6 +3,9 @@ const enum Assets {
 }
 
 let browsingTimestamp: number;
+const presence = new Presence({
+	clientId: "1213365863470866462",
+});
 
 function updatePresence() {
 	if (!browsingTimestamp) browsingTimestamp = Math.floor(Date.now() / 1000);
@@ -199,9 +202,7 @@ function updatePresence() {
 		}
 	}
 
-	new Presence({
-		clientId: "1213365863470866462",
-	}).setActivity(presenceData);
+	presence.setActivity(presenceData);
 }
 
 updatePresence();
