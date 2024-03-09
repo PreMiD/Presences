@@ -66,8 +66,9 @@ presence.on("UpdateData", async () => {
 
 		case Pages.sRes:
 			{
-				presenceData.details = "Searching the archives for:"
-				presenceData.state = document.querySelector<HTMLTextAreaElement>("#find").value;
+				presenceData.details = "Searching the archives for:";
+				presenceData.state =
+					document.querySelector<HTMLTextAreaElement>("#find").value;
 			}
 			break;
 
@@ -77,7 +78,9 @@ presence.on("UpdateData", async () => {
 					` ${pageInp}`,
 					""
 				)} (page ${pageInp})`;
-				presenceData.details = `Reading ${document.querySelector(".bookcont > h3")?.textContent} (page ${pageInput})`;
+				presenceData.details = `Reading ${
+					document.querySelector(".bookcont > h3")?.textContent
+				} (page ${pageInput})`;
 			}
 			break;
 
