@@ -10,7 +10,7 @@
 	},
 	"url": "fmoviesz.to",
 	"regExp": "(ww(w)?([0-9]?)[.])?fmovies.*[.][a-z]*",
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/FMovies/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/FMovies/assets/thumbnail.jpeg",
 	"color": "#1BB3C6",
@@ -22,6 +22,12 @@
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
 		{
 			"id": "image",
 			"title": "Show Images",
