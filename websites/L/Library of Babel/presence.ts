@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
 				)} (page ${pageInp})`;
 				presenceData.details = `Reading ${
 					document.querySelector(".bookcont > h3")?.textContent
-				} (page ${pageInput})`;
+				} (page ${pageInp})`;
 			}
 			break;
 
