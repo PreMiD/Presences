@@ -80,10 +80,7 @@ presence.on("UpdateData", async () => {
 
 		case Pages.book:
 		case Pages.bookmark:
-			presenceData.details = `Reading ${title.replace(
-				` ${p}`,
-				""
-			)} (page ${p})`;
+			presenceData.details = `Reading ${document.querySelector('.bookcont > h3')?.textContent} (page ${pageInput})`
 			break;
 
 		case Pages.browse:
