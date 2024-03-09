@@ -25,7 +25,6 @@ presence.on("UpdateData", async () => {
 		}
 		case "https://diziwatch.net/anime-arsivi/": {
 			presenceData.details = "Anime arşivi görüntüleniyor";
-			presenceData.startTimestamp = browsingTimestamp;
 
 			break;
 		}
