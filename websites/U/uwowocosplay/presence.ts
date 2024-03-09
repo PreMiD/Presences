@@ -50,13 +50,25 @@ function getStyle(pathname: string) {
 }
 
 function setProduct(presenceData: PresenceData, href: string) {
-	const product = document
-		.querySelector(
-			"#ProductInfo-template--14675231342673__main > div.product__title > h1"
-		)
-		.textContent.split("Uwowo")[1]
-		.replace("Costume", "")
-		.trim();
+	let product = "Unknown Product";
+	try {
+		product = document
+			.querySelector(
+				"#ProductInfo-template--14675231342673__main > div.product__title > h1"
+			)
+			.textContent.split("Uwowo")[1]
+			.replace("Costume", "")
+			.trim();
+	} catch (e) {
+		product = document
+			.querySelector(
+				"#ProductInfo-template--14701912129617__main > div.product__title > h1"
+			)
+			.textContent.split("Uwowo")[1]
+			.replace("Uwowo Deposit Poll - ", "")
+			.trim();
+	}
+
 	presenceData.details = `Viewing ${product
 		.split(" ")
 		.slice(0, product.split(" ").length / 2)
@@ -71,4 +83,17 @@ function setProduct(presenceData: PresenceData, href: string) {
 			url: href,
 		},
 	];
+	if (
+		document.querySelector("#Thumbnail-template--14675231342673__main-1") !==
+		null
+	) {
+		presenceData.smallImageKey = "https://i.imgur.com/OczeyDO.jpeg";
+		presenceData.largeImageKey = `https://${
+			document
+				.querySelector("#Thumbnail-template--14675231342673__main-1")
+				.getAttribute("srcset")
+				.split("//")[1]
+				.split(".jpg")[0]
+		}.jpg`;
+	}
 }
