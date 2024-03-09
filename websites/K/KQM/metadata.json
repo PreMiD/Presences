@@ -10,7 +10,6 @@
 	},
 	"url": "keqingmains.com",
 	"matches": ["*://*.keqingmains.com/*"],
-	"iFrameMatches": ["*://*.keqingmains.com/*"],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/zPaoj5v.png",
 	"thumbnail": "https://keqingmains.com/wp-content/uploads/2023/12/KQM_Banner-1536x254.webp",
