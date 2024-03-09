@@ -10,6 +10,7 @@ const enum Assets {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
+		startTimestamp: browsingTimestamp,
 	};
 	switch (document.URL) {
 		case "https://diziwatch.net/": {
