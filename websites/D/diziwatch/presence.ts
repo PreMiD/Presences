@@ -63,8 +63,6 @@ presence.on("UpdateData", async () => {
 					"#benzerli > div > span"
 				).textContent;
 
-				presenceData.smallImageKey = Assets.Logo;
-				presenceData.smallImageText = "Diziwatch";
 			}
 	}
 
