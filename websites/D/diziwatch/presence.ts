@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 					).textContent,
 					animeImg = document
 						.querySelector(
-							"#player > div.jw-wrapper.jw-reset > div.jw-preview.jw-reset"
+							".jw-preview.jw-reset"
 						)
 						.getAttribute("style")
 						.split('"')[1],
