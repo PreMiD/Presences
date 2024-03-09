@@ -4,7 +4,7 @@ const presence = new Presence({
 
 // Other default assets can be found at index.d.ts
 const enum Assets {
-	Logo = "https://i.imgur.com/e9ewOCy.png",
+	Logo = "https://i.imgur.com/RewxZBr.png",
 	smallImageKey = "",
 }
 
@@ -28,7 +28,7 @@ const enum Pages {
 presence.on("UpdateData", async () => {
 	if (!document.location.toString()) return;
 
-	let base = window.location.pathname;
+	let base = document.location.pathname;
 	if (base.includes("theory")) base = "/theory.html";
 
 	const title = document.title
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 			name: "Library of Babel",
 			type: ActivityType.Watching,
 		},
-		p = document.querySelector<HTMLInputElement>("#page")?.value;
+		pageInp = document.querySelector<HTMLInputElement>("#page")?.value;
 
 	switch (base) {
 		case Pages.homepage:
@@ -66,34 +66,52 @@ presence.on("UpdateData", async () => {
 
 		case Pages.sRes:
 			{
-				presenceData.details = `Searching the archives for ${title.replace(
-					"Search - ",
-					""
-				)}`;
+				presenceData.details = "Searching the archives for:"
+				presenceData.state = document.querySelector<HTMLTextAreaElement>("#find").value;
 			}
 			break;
 
 		case Pages.anglishized:
 			{
 				presenceData.details = `Reading ${title.replace(
-					` ${p}`,
+					` ${pageInp}`,
 					""
-				)} (page ${p}, anglishized)`;
+				)} (page ${pageInp})`;
+				presenceData.details = `Reading ${document.querySelector(".bookcont > h3")?.textContent} (page ${pageInput})`;
 			}
 			break;
 
 		case Pages.book:
 		case Pages.bookmark:
 			presenceData.details = `Reading ${title.replace(
-				` ${p}`,
+				` ${pageInp}`,
 				""
-			)} (page ${p})`;
+			)} (page ${pageInp})`;
 			break;
 
 		case Pages.browse:
 			{
-				// find the shelf and page (not added for now, perhaps implement later)
 				presenceData.details = "Browsing the archives";
+
+				const hexVal =
+						document.querySelector<HTMLTextAreaElement>("#hexer")?.value,
+					wall = document.querySelector<HTMLSelectElement>("#inside1"),
+					wallVal = wall?.value?.slice(1),
+					shelf = document.querySelector<HTMLSelectElement>("#inside2"),
+					shelfVal = shelf?.value?.slice(1),
+					vol = document.querySelector<HTMLSelectElement>("#inside3"),
+					volVal = vol?.value?.slice(1);
+
+				presenceData.state = "";
+
+				// hex will always be visible
+				if (hexVal) presenceData.state += `Hex ${hexVal}`;
+				if (wall.style.display && wallVal)
+					presenceData.state += `, Wall ${wallVal}`;
+				if (shelf.style.display && shelfVal)
+					presenceData.state += `, Shelf ${shelfVal}`;
+				if (vol.style.display && volVal)
+					presenceData.state += `, Volume ${volVal}`;
 			}
 			break;
 
