@@ -109,11 +109,11 @@ presence.on("UpdateData", async () => {
 
 				// hex will always be visible
 				if (hexVal) presenceData.state += `Hex ${hexVal}`;
-				if (wall.style.display && wallVal)
+				if (wall?.style.display && wallVal)
 					presenceData.state += `, Wall ${wallVal}`;
-				if (shelf.style.display && shelfVal)
+				if (shelf?.style.display && shelfVal)
 					presenceData.state += `, Shelf ${shelfVal}`;
-				if (vol.style.display && volVal)
+				if (vol?.style.display && volVal)
 					presenceData.state += `, Volume ${volVal}`;
 			}
 			break;
