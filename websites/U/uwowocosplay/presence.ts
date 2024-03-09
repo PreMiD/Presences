@@ -6,8 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Uwowo Cosplay Homepage",
-			largeImageKey:
-				"https://i.imgur.com/OczeyDO.jpeg",
+			largeImageKey: "https://i.imgur.com/OczeyDO.jpeg",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location;
@@ -34,31 +33,42 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-		if(pathname.startsWith("/products/")) {
-			setProduct(presenceData, href);
-		}
+	if (pathname.startsWith("/products/")) setProduct(presenceData, href);
+
 	presence.setActivity(presenceData);
 });
 
-	function getStyle(pathname: string) {
-		const path = pathname.split("/collections/")[1];
-		const message = `Browsing the ${path} Collection`;
-		if (path !== undefined) {
-				return message.split("-").join(" ").replace("Collections", "").trim();
-		} else {
-			return "Unknown Page";
-		}
-		
-	}
+function getStyle(pathname: string) {
+	const path = pathname.split("/collections/")[1];
+	if (path !== null)
+		return `Browsing the ${path} Collection`
+			.split("-")
+			.join(" ")
+			.replace("Collections", "")
+			.trim();
+	else return "Unknown Page";
+}
 
-	function setProduct(presenceData: PresenceData, href: string) {
-		const product = document.querySelector("#ProductInfo-template--14675231342673__main > div.product__title > h1").textContent.split("Uwowo")[1].replace("Costume", "").trim();
-		presenceData.details = "Viewing " + product.split(" ").slice(0, product.split(" ").length / 2).join(" ");
-		presenceData.state = product.split(" ").slice(product.split(" ").length / 2).join(" ");
-		presenceData.buttons = [
-					{
-						label: "View Cosplay",
-						url: href,
-					},
-				];
-		}
+function setProduct(presenceData: PresenceData, href: string) {
+	const product = document
+		.querySelector(
+			"#ProductInfo-template--14675231342673__main > div.product__title > h1"
+		)
+		.textContent.split("Uwowo")[1]
+		.replace("Costume", "")
+		.trim();
+	presenceData.details = `Viewing ${product
+		.split(" ")
+		.slice(0, product.split(" ").length / 2)
+		.join(" ")}`;
+	presenceData.state = product
+		.split(" ")
+		.slice(product.split(" ").length / 2)
+		.join(" ");
+	presenceData.buttons = [
+		{
+			label: "View Cosplay",
+			url: href,
+		},
+	];
+}
