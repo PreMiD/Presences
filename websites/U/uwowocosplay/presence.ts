@@ -40,13 +40,13 @@ presence.on("UpdateData", async () => {
 
 function getStyle(pathname: string) {
 	const path = pathname.split("/collections/")[1];
-	if (path !== null)
+	if (path !== null) {
 		return `Browsing the ${path} Collection`
 			.split("-")
 			.join(" ")
 			.replace("Collections", "")
 			.trim();
-	else return "Unknown Page";
+	} else return "Unknown Page";
 }
 
 function setProduct(presenceData: PresenceData, href: string) {
