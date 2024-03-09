@@ -11,11 +11,13 @@
 	"url": "diziwatch.net",
 	"matches": ["*://diziwatch.net/*"],
 	"version": "1.0.0",
-	"logo": "https://i.imgur.com/p9ktkQw.png",
+	"logo": "https://i.imgur.com/RMrW6j3.png",
 	"thumbnail": "https://files.sikayetvar.com/lg/cmp/27/274975.png",
 	"color": "#0BA7BC",
 	"category": "videos",
 	"tags": [
-		"diziwatch"
+		"diziwatch",
+		"anime",
+		"movie"
 	]
 }
