@@ -14,7 +14,6 @@ presence.on("UpdateData", async () => {
 	switch (document.URL) {
 		case "https://diziwatch.net/": {
 			presenceData.details = "Ana sayfa görüntüleniyor";
-			presenceData.startTimestamp = browsingTimestamp;
 
 			break;
 		}
