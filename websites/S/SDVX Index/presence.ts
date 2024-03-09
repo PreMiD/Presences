@@ -5,8 +5,8 @@ const presence = new Presence({
 	clientId: "1214435082408820776",
 });
 
-const enum Assets { // Other default assets can be found at index.d.ts
-	Logo = "https://i.imgur.com/bonEHx6.png",
+const enum Assets {
+	Logo = "https://i.imgur.com/0bkkYu0.png",
 }
 
 presence.on("UpdateData", async () => {
