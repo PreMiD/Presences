@@ -20,7 +20,6 @@ presence.on("UpdateData", async () => {
 		}
 		case "https://diziwatch.net/calendar/": {
 			presenceData.details = "Takvim sayfası görüntüleniyor";
-			presenceData.startTimestamp = browsingTimestamp;
 
 			break;
 		}
