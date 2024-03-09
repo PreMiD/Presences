@@ -74,9 +74,9 @@ presence.on("UpdateData", async () => {
 		case Pages.anglishized:
 			{
 				presenceData.details = `Reading ${title.replace(
-					` ${p}`,
+					` ${pageInput}`,
 					""
-				)} (page ${p}, anglishized)`;
+				)} (page ${pageInput}, anglishized)`;
 			}
 			break;
 
