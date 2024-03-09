@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "358402930191106049",
+		"name": "ion606"
+	},
+	"service": "Library of Babel",
+	"description": {
+		"en": "A project towards a universal library. By this art you may contemplate the variation of the 23 letters."
+	},
+	"url": [
+		"libraryofbabel.info",
+		"www.libraryofbabel.info"
+	],
+	"matches": [
+		"*://libraryofbabel.info/*",
+		"*://www.libraryofbabel.info/*"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/RewxZBr.png",
+	"thumbnail": "https://i.imgur.com/Y29fvYy.png",
+	"color": "#808080",
+	"category": "other",
+	"tags": [
+		"library",
+		"libraryofbabbel",
+		"libraryofbabel"
+	]
+}
