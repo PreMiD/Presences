@@ -36,12 +36,7 @@ presence.on("UpdateData", async () => {
 				} inceleniyor`;
 				presenceData.startTimestamp = browsingTimestamp;
 			} else {
-				const currentTime = document.querySelector(
-						"#player > div.jw-wrapper.jw-reset > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-elapsed"
-					).textContent,
-					duration = document.querySelector(
-						"#player > div.jw-wrapper.jw-reset > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-duration"
-					).textContent,
+				const video = document.querySelector('video'),
 					videoTitle = document.querySelector(
 						"#player > div.jw-wrapper.jw-reset > div.jw-title.jw-reset-text > div.jw-title-primary.jw-reset-text"
 					).textContent,
