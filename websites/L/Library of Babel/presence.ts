@@ -64,10 +64,8 @@ presence.on("UpdateData", async () => {
 
 		case Pages.sRes:
 			{
-				presenceData.details = `Searching the archives for ${title.replace(
-					"Search - ",
-					""
-				)}`;
+				presenceData.details = "Searching the archives for:"
+				presenceData.state =  document.querySelector<HTMLTextAreaElement>('#find').value
 			}
 			break;
 
