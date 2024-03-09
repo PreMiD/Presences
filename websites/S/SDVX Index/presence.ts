@@ -58,9 +58,9 @@ function getSongDetails(
 		document.querySelector("#songTitle").textContent
 	} / ${document.querySelector("#artistName").textContent}`;
 	presenceData.state = `${
-		document.querySelector(".currentDiff > span:nth-of-type(1)").textContent
+		document.querySelector(".currentDiff .difficulty-abbreviation1").textContent
 	}${
-		document.querySelector(".currentDiff > span:nth-of-type(2)").textContent
+		document.querySelector(".currentDiff .difficulty-level1").textContent
 	} | BPM: ${document.querySelector("#bpmInfo").textContent} | Max EX: ${
 		document.querySelector("#exInfo").textContent
 	}`;
