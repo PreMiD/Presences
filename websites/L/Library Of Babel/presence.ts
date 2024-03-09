@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 			name: "Library of Babel",
 			type: ActivityType.Watching,
 		},
-		p = document.querySelector<HTMLInputElement>("#page")?.value;
+		pageInp = document.querySelector<HTMLInputElement>("#page")?.value;
 
 	switch (base) {
 		case Pages.homepage:
@@ -66,28 +66,27 @@ presence.on("UpdateData", async () => {
 
 		case Pages.sRes:
 			{
-				presenceData.details = `Searching the archives for ${title.replace(
-					"Search - ",
-					""
-				)}`;
+				presenceData.details = "Searching the archives for:"
+				presenceData.state = document.querySelector<HTMLTextAreaElement>("#find").value;
 			}
 			break;
 
 		case Pages.anglishized:
 			{
 				presenceData.details = `Reading ${title.replace(
-					` ${p}`,
+					` ${pageInp}`,
 					""
-				)} (page ${p}, anglishized)`;
+				)} (page ${pageInp})`;
+				presenceData.details = `Reading ${document.querySelector(".bookcont > h3")?.textContent} (page ${pageInput})`;
 			}
 			break;
 
 		case Pages.book:
 		case Pages.bookmark:
 			presenceData.details = `Reading ${title.replace(
-				` ${p}`,
+				` ${pageInp}`,
 				""
-			)} (page ${p})`;
+			)} (page ${pageInp})`;
 			break;
 
 		case Pages.browse:
