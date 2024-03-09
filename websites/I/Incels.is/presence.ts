@@ -12,17 +12,10 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		threadTitleElement = document.querySelectorAll(
-			".p-title-value"
-		)[0] as HTMLHeadingElement,
-		threadTitle: string | undefined = threadTitleElement
-			? threadTitleElement.textContent
-			: // eslint-disable-next-line no-undefined
-			  undefined,
-		threadTag =
-			document.querySelector('[class*="label label--custom-"]').textContent ??
-			// eslint-disable-next-line no-undefined
-			undefined,
+		threadTitle = document.querySelector(".p-title-value")?.textContent,
+		threadTag = document.querySelector(
+			'[class*="label label--custom-"]'
+		)?.textContent,
 		{ pathname } = document.location,
 		{ search } = document.location;
 
@@ -83,13 +76,9 @@ presence.on("UpdateData", async () => {
 	else if (pathname.includes("/account/account-details"))
 		presenceData.details = "Pimpin' out the profile";
 	else if (pathname.includes("/members/")) {
-		const selfElement = document.querySelectorAll(
-			".p-navgroup-user-linkText"
-		)[0] as HTMLSpanElement;
 		if (
 			pathname.includes(
-				// eslint-disable-next-line no-undefined
-				selfElement ? selfElement.textContent : undefined
+				document.querySelector(".p-navgroup-user-linkText")?.textContent
 			)
 		)
 			presenceData.details = "Looking at self with disgust";
@@ -108,12 +97,12 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Talking to like-minded (based) individuals";
 	else if (pathname.includes("/media/")) {
 		presenceData.details =
-			"Either looking at memes, porn or both (or posting them)";
+			"Either looking at memes, porn, or both (or posting them)";
 	} else if (pathname.includes("/search/") && search.includes("?q=") === false)
 		presenceData.details = "Searching for something really specific";
 	else if (pathname.includes("/search/")) {
 		presenceData.details = `Searching for "${
-			document.querySelectorAll(".p-title-value em")[0].textContent
+			document.querySelector(".p-title-value em").textContent
 		}"`;
 	} else if (pathname.includes("/threads/")) {
 		if (threadTitle) {
