@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 			name: "Library of Babel",
 			type: ActivityType.Watching,
 		},
-		p = document.querySelector<HTMLInputElement>("#page")?.value;
+		pageInput = document.querySelector<HTMLInputElement>("#page")?.value;
 
 	switch (base) {
 		case Pages.homepage:
