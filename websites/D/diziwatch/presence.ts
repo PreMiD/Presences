@@ -54,11 +54,9 @@ presence.on("UpdateData", async () => {
 
 				presenceData.details = videoTitle;
 
-				if (playStatus === "Oynat")
-					presenceData.state = `Duraklatıldı, ${currentTime} / ${duration}`;
-
-				if (playStatus === "Duraklat")
-					presenceData.state = `İzleniyor, ${currentTime} / ${duration}`;
+				if (playStatus) [, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video)
+				presenceData.smallImageKey = playStatus ? Assets.Paused : Assets.Play
+				
 
 				presenceData.largeImageKey = animeImg;
 				presenceData.largeImageText = document.querySelector(
