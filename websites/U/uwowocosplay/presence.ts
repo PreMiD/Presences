@@ -50,7 +50,7 @@ function getStyle(pathname: string) {
 }
 
 function setProduct(presenceData: PresenceData, href: string) {
-	let product = "Unknown Product";
+	let product;
 	try {
 		product = document
 			.querySelector(
@@ -68,6 +68,8 @@ function setProduct(presenceData: PresenceData, href: string) {
 			.replace("Uwowo Deposit Poll - ", "")
 			.trim();
 	}
+
+	if (product === null) product = "Unknown Product";
 
 	presenceData.details = `Viewing ${product
 		.split(" ")
