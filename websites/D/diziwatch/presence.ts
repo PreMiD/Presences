@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 			} else {
 				const video = document.querySelector('video'),
 					videoTitle = document.querySelector(
-						"#player > div.jw-wrapper.jw-reset > div.jw-title.jw-reset-text > div.jw-title-primary.jw-reset-text"
+						".title"
 					).textContent,
 					animeImg = document
 						.querySelector(
