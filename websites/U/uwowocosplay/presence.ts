@@ -2,7 +2,9 @@ const presence = new Presence({
 		clientId: "1216150866122244096",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-
+const enum Assets {
+Logo = "https://i.imgur.com/U2EMMgC.jpeg",
+}
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Uwowo Cosplay Homepage",
