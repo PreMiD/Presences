@@ -50,26 +50,7 @@ function getStyle(pathname: string) {
 }
 
 function setProduct(presenceData: PresenceData, href: string) {
-	let product;
-	try {
-		product = document
-			.querySelector(
-				"#ProductInfo-template--14675231342673__main > div.product__title > h1"
-			)
-			.textContent.split("Uwowo")[1]
-			.replace("Costume", "")
-			.trim();
-	} catch (e) {
-		product = document
-			.querySelector(
-				"#ProductInfo-template--14701912129617__main > div.product__title > h1"
-			)
-			.textContent.split("Uwowo")[1]
-			.replace("Uwowo Deposit Poll - ", "")
-			.trim();
-	}
-
-	if (product === null) product = "Unknown Product";
+const product = document.querySelector('.h2.product-single__title')?.textContent?.replace(/Uwowo /gm, "");
 
 	presenceData.details = `Viewing ${product
 		.split(" ")
