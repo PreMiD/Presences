@@ -66,17 +66,9 @@ const product = document.querySelector('.h2.product-single__title')?.textContent
 			url: href,
 		},
 	];
-	if (
-		document.querySelector("#Thumbnail-template--14675231342673__main-1") !==
-		null
-	) {
-		presenceData.smallImageKey = "https://i.imgur.com/OczeyDO.jpeg";
-		presenceData.largeImageKey = `https://${
-			document
-				.querySelector("#Thumbnail-template--14675231342673__main-1")
-				.getAttribute("srcset")
-				.split("//")[1]
-				.split(".jpg")[0]
-		}.jpg`;
-	}
+
+		presenceData.largeImageKey = document
+			.querySelector<HTMLMetaElement>('[property="og:image"]')
+			?.content?.split("?")?.[0] ?? Assets.Logo
+		if (presenceData.largeImageKey !== Assets.Logo) presenceData.smallImageKey = Assets.Logo
 }
