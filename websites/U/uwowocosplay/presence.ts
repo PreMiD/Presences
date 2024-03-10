@@ -53,13 +53,13 @@ function setProduct(presenceData: PresenceData, href: string) {
 const product = document.querySelector('.h2.product-single__title')?.textContent?.replace(/Uwowo /gm, "");
 
 	presenceData.details = `Viewing ${product
-		.split(" ")
-		.slice(0, product.split(" ").length / 2)
-		.join(" ")}`;
+		?.split(" ")
+		?.slice(0, product?.split(" ").length / 2)
+		?.join(" ") ?? "Unknown product"}` ;
 	presenceData.state = product
-		.split(" ")
-		.slice(product.split(" ").length / 2)
-		.join(" ");
+		?.split(" ")
+		?.slice(product?.split(" ")?.length / 2)
+		?.join(" ") ?? ""
 	presenceData.buttons = [
 		{
 			label: "View Cosplay",
