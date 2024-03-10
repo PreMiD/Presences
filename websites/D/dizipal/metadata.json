@@ -30,6 +30,6 @@
 		"*://dizipal[0-9]*.com/*"
 	],
 	"iFrameMatches": [
-		"*://dizipal[0-9]*.com/*"
+		"*://*/*"
 	]
 }
