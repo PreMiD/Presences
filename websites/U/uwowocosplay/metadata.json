@@ -16,5 +16,8 @@
 	"category": "other",
 	"tags": [
 		"cosplay", "cosplaying", "costumes", "anime"
+	], 
+		"matches": [
+		"*://uwowocosplay.com/*"
 	]
 }
