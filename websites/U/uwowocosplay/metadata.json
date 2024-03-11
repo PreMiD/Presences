@@ -9,15 +9,18 @@
 		"en": "Uwowo is a professional cosplay costume brand focusing on the high quality anime and game costumes and wigs with affordable price."
 	},
 	"url": "uwowocosplay.com",
+	"matches": [
+		"*://uwowocosplay.com/*"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/U2EMMgC.jpeg",
 	"thumbnail": "https://i.imgur.com/6091d7r.png",
 	"color": "#f17174",
 	"category": "other",
 	"tags": [
-		"cosplay", "cosplaying", "costumes", "anime"
-	], 
-		"matches": [
-		"*://uwowocosplay.com/*"
+		"cosplay",
+		"cosplaying",
+		"costumes",
+		"anime"
 	]
 }

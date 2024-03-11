@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 const enum Assets {
-Logo = "https://i.imgur.com/U2EMMgC.jpeg",
+	Logo = "https://i.imgur.com/U2EMMgC.jpeg",
 }
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -52,16 +52,21 @@ function getStyle(pathname: string) {
 }
 
 function setProduct(presenceData: PresenceData, href: string) {
-const product = document.querySelector('.h2.product-single__title')?.textContent?.replace(/Uwowo /gm, "");
+	const product = document
+		.querySelector(".h2.product-single__title")
+		?.textContent?.replace(/Uwowo /gm, "");
 
-	presenceData.details = `Viewing ${product
-		?.split(" ")
-		?.slice(0, product?.split(" ").length / 2)
-		?.join(" ") ?? "Unknown product"}` ;
-	presenceData.state = product
-		?.split(" ")
-		?.slice(product?.split(" ")?.length / 2)
-		?.join(" ") ?? ""
+	presenceData.details = `Viewing ${
+		product
+			?.split(" ")
+			?.slice(0, product?.split(" ").length / 2)
+			?.join(" ") ?? "Unknown product"
+	}`;
+	presenceData.state =
+		product
+			?.split(" ")
+			?.slice(product?.split(" ")?.length / 2)
+			?.join(" ") ?? "";
 	presenceData.buttons = [
 		{
 			label: "View Cosplay",
@@ -69,8 +74,10 @@ const product = document.querySelector('.h2.product-single__title')?.textContent
 		},
 	];
 
-		presenceData.largeImageKey = document
+	presenceData.largeImageKey =
+		document
 			.querySelector<HTMLMetaElement>('[property="og:image"]')
-			?.content?.split("?")?.[0] ?? Assets.Logo
-		if (presenceData.largeImageKey !== Assets.Logo) presenceData.smallImageKey = Assets.Logo
+			?.content?.split("?")?.[0] ?? Assets.Logo;
+	if (presenceData.largeImageKey !== Assets.Logo)
+		presenceData.smallImageKey = Assets.Logo;
 }
