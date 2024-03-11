@@ -8,7 +8,7 @@ Logo = "https://i.imgur.com/U2EMMgC.jpeg",
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Uwowo Cosplay Homepage",
-			largeImageKey: "https://i.imgur.com/OczeyDO.jpeg",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location;
