@@ -17,6 +17,10 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing the Homepage";
 			break;
 		}
+		case "/en-de": {
+			presenceData.details = "Browsing the Homepage";
+			break;
+		}
 		case "/collections/shop-all": {
 			presenceData.details = "Browsing the shop";
 			break;
@@ -34,7 +38,6 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 	}
-
 	if (pathname.startsWith("/products/")) setProduct(presenceData, href);
 
 	presence.setActivity(presenceData);
@@ -53,9 +56,10 @@ function getStyle(pathname: string) {
 
 function setProduct(presenceData: PresenceData, href: string) {
 	const product = document
+		// replace everything before Uwowo and remove the word "Costume" in regex
 		.querySelector(".h2.product-single__title")
-		?.textContent?.replace(/Uwowo /gm, "");
-
+		?.textContent?.replace(/.*Uwowo/, "")
+		?.replace(/Costume/g, "");
 	presenceData.details = `Viewing ${
 		product
 			?.split(" ")
