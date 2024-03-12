@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "870850875562819595",
+		clientId: "1213784073458421841",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 		pathArray = document.location.toString().split("/"),
 		presenceData: PresenceData = {
 			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/A/Animekimi/assets/logo.jpg",
+				"https://cdn.rcd.gg/PreMiD/websites/A/AnimeYuzu/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 	if (oldLang !== newLang || !strings) {
