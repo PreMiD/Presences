@@ -98,7 +98,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/ReqQMXo.png",
+			largeImageKey: "https://i.nuuls.com/L2tQx.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, host } = document.location;
