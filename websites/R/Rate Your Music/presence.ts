@@ -207,4 +207,4 @@ function updatePresence() {
 
 updatePresence();
 
-document.addEventListener("UpdateData", updatePresence);
+presence.on("UpdateData", updatePresence);
