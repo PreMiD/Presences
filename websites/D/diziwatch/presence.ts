@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		default:
-			if (document.location.href.startsWith("https://diziwatch.net/dizi/")) {
+			if (document.location.pathname.startsWith("/dizi/")) {
 				presenceData.details = `${
 					document.querySelector("#content > div.incontentx > div.title > h1")
 						.textContent
