@@ -26,7 +26,6 @@ presence.on("UpdateData", async () => {
 		}
 		case "/anime-arsivi/": {
 			presenceData.details = "Anime arşivi görüntüleniyor";
-			presenceData.startTimestamp = browsingTimestamp;
 
 			break;
 		}
