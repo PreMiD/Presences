@@ -45,16 +45,8 @@ presence.on("UpdateData", async () => {
 						.textContent
 				} inceleniyor`;
 			} else {
-				const currentTime = document.querySelector(
-						"#player .jw-icon.jw-text-elapsed"
-					).textContent,
-					duration = document.querySelector(
-						"#player .jw-icon.jw-text-duration"
-					).textContent,
-					videoTitle = document.querySelector(
-						"#player .jw-title-primary"
-					).textContent,
-					animeImg = document
+				presenceData.startTimestamp = null;
+				const animeImg = document
 						.querySelector("#player .jw-preview")
 						.getAttribute("style")
 						.split('"')[1],
@@ -62,21 +54,29 @@ presence.on("UpdateData", async () => {
 						.querySelector(".jw-icon.jw-icon-display.jw-button-color.jw-reset")
 						.getAttribute("aria-label");
 
-				presenceData.details = videoTitle;
+				presenceData.details = document.querySelector(
+					"#player .jw-title-primary"
+				).textContent;
+				presenceData.state = `${
+					document.querySelector("#player .jw-icon.jw-text-elapsed").textContent
+				} / ${
+					document.querySelector("#player .jw-icon.jw-text-duration")
+						.textContent
+				}`;
+				if (playStatus === "Oynat") {
+					presenceData.smallImageKey = Assets.Play;
+					presenceData.smallImageText = "Duraklatıldı";
+				}
 
-				if (playStatus === "Oynat")
-					presenceData.state = `Duraklatıldı, ${currentTime} / ${duration}`;
-
-				if (playStatus === "Duraklat")
-					presenceData.state = `İzleniyor, ${currentTime} / ${duration}`;
+				if (playStatus === "Duraklat") {
+					presenceData.smallImageKey = Assets.Pause;
+					presenceData.smallImageText = "Oynatılıyor";
+				}
 
 				presenceData.largeImageKey = animeImg;
 				presenceData.largeImageText = document.querySelector(
 					"#benzerli > div > span"
 				).textContent;
-
-				presenceData.smallImageKey = Assets.Logo;
-				presenceData.smallImageText = "Diziwatch";
 			}
 	}
 
