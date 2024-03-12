@@ -11,17 +11,14 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
 	};
+	presenceData.startTimestamp = browsingTimestamp;
 	switch (document.location.pathname) {
 		case "/": {
 			presenceData.details = "Ana sayfa görüntüleniyor";
-			presenceData.startTimestamp = browsingTimestamp;
-
 			break;
 		}
 		case "/calendar/": {
 			presenceData.details = "Takvim sayfası görüntüleniyor";
-			presenceData.startTimestamp = browsingTimestamp;
-
 			break;
 		}
 		case "/anime-arsivi/": {
@@ -31,20 +28,14 @@ presence.on("UpdateData", async () => {
 		}
 		case "/dizi-arsivi/": {
 			presenceData.details = "Dizi arşivi görüntüleniyor";
-			presenceData.startTimestamp = browsingTimestamp;
-
 			break;
 		}
 		case "/episodes/": {
 			presenceData.details = "Bölümler inceleniyor";
-			presenceData.startTimestamp = browsingTimestamp;
-
 			break;
 		}
 		case "/contact-us/": {
 			presenceData.details = "İletişim bilgileri inceleniyor 💀";
-			presenceData.startTimestamp = browsingTimestamp;
-
 			break;
 		}
 		default:
@@ -53,7 +44,6 @@ presence.on("UpdateData", async () => {
 					document.querySelector("#content > div.incontentx > div.title > h1")
 						.textContent
 				} inceleniyor`;
-				presenceData.startTimestamp = browsingTimestamp;
 			} else {
 				const currentTime = document.querySelector(
 						"#player .jw-icon.jw-text-elapsed"
