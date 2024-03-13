@@ -10,7 +10,7 @@ const searchToPres = (presenceData: PresenceData, station: string) => {
 		channel = getDropDownSelected("hash");
 
 	presenceData.details = `Searching ${station}'s playlists`;
-	if (title) presenceData.state = ` ${title ? `for ${title}` : ""}`;
+	if (title) presenceData.state = `for ${title}}`;
 	if (channel) presenceData.largeImageText = `in channel ${channel}`;
 
 	if (from && to) presenceData.state += `(from ${from} to ${to})`;
@@ -18,7 +18,7 @@ const searchToPres = (presenceData: PresenceData, station: string) => {
 	else if (to) presenceData.state += `(to ${to})`;
 };
 
-export function handleStation(presence: Presence, presenceData: PresenceData) {
+export function handleStation(presence: Presence, presenceData: PresenceData):void {
 	// first is nothing
 	const [, station, action] = document.location.pathname.split("/");
 
