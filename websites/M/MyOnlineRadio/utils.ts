@@ -1,12 +1,12 @@
-export const getDropDownSelected = (name: string) => {
+export const getDropDownSelected = (name: string):string => {
 		const dropDown = document.querySelector<HTMLSelectElement>(
 			`[name="${name}"]`
 		);
 		return dropDown?.children[Number(dropDown.selectedIndex)]?.textContent;
 	},
-	getInp = (name: string) =>
+	getInp = (name: string):string =>
 		document.querySelector<HTMLInputElement>(`[name="${name}"]`)?.value,
-	toDate = (inp: string) => {
+	toDate = (inp: string):string => {
 		if (!inp) return null;
 
 		const dateSplit = inp.split(".").map(Number),
@@ -16,7 +16,7 @@ export const getDropDownSelected = (name: string) => {
 		return `${d.getDate() + 1}/${d.getMonth() + 1}/${d.getFullYear()}`;
 	};
 
-export function tDiffInMS(time1: string, time2 = "00:00") {
+export function tDiffInMS(time1: string, time2 = "00:00"):number {
 	const toTotalSeconds = (time: string) => {
 			const parts = time.split(":").map(Number);
 			let seconds = 0;
