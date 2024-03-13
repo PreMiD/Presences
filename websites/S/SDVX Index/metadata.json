@@ -1,0 +1,34 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "189690228292845568",
+		"name": "angelolz"
+	},
+	"service": "SDVX Index",
+	"description": {
+		"en": "A chart viewer for Sound Voltex, providing top-down overviews of charts for players to study and practice."
+	},
+	"url": "sdvxindex.com",
+	"matches": [
+		"*://www.sdvxindex.com/*",
+		"*://sdvxindex.com/*"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.ibb.co/LvxK5RJ/0bkkYu0.png",
+	"thumbnail": "https://i.ibb.co/7pWq7rs/mWrqTjr.png",
+	"color": "#365191",
+	"category": "games",
+	"tags": [
+		"sdvx",
+		"games",
+		"arcade"
+	],
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fa-regular fa-rectangle-list",
+			"value": true
+		}
+	]
+}
