@@ -12,7 +12,7 @@
 	"matches": [
 		"*://rateyourmusic.com/*"
 	],
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://e.snmc.io/3.0/img/logo/sonemic-512.png",
 	"thumbnail": "https://i.imgur.com/0g03U2r.png",
 	"color": "#0b1528",
