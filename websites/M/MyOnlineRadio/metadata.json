@@ -1,0 +1,40 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "358402930191106049",
+		"name": "ion606"
+	},
+	"service": "MyOnlineRadio",
+	"description": {
+		"en": "online radio in over 30 countries"
+	},
+	"url": [
+		"myonlineradio.hu",
+		"myradioonline.ro",
+		"myonlineradio.sk",
+		"myonlineradio.de",
+		"ukradiolive.com",
+		"myonlineradio.at",
+		"myradioonline.it",
+		"myradioonline.es",
+		"myradioendirect.fr",
+		"irishradiolive.com",
+		"myradioonline.pl",
+		"myonlineradio.nl",
+		"myradioonline.cl",
+		"myradioenvivo.ar",
+		"myradioenvivo.mx"
+	],
+	"version": "1.0.0",
+	"logo": "https://ukradiolive.com/public/img/launcher/logo_192.png",
+	"thumbnail": "https://ukradiolive.com/public/img/mainbg/bg1v2_1920_1080.webp",
+	"color": "#800080",
+	"category": "music",
+	"tags": [
+		"radio",
+		"radiolive",
+		"myonlineradio",
+		"myradioonline",
+		"myradioenvivo"
+	]
+}
