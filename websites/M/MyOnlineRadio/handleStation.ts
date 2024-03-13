@@ -126,7 +126,7 @@ export function handleStation(
 
 				// check if they're recording
 				if (document.querySelector(".live")) {
-					presenceData.smallImageKey = "https://i.imgur.com/4xhphHG.png";
+					presenceData.smallImageKey = "https://i.ibb.co/QNhnC3z/mic.png";
 					presenceData.smallImageText = "Recording Broadcast";
 				}
 			}

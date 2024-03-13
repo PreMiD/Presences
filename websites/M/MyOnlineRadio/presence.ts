@@ -8,7 +8,7 @@ const presence = new Presence({
 
 // Other default assets can be found at index.d.ts
 const enum Assets {
-	Logo = "https://ukradiolive.com/public/img/launcher/logo_192.png",
+	Logo = "https://i.ibb.co/5LsDstd/mic2.png",
 	smallImageKey = "",
 }
 
