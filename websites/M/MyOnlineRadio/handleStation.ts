@@ -18,7 +18,10 @@ const searchToPres = (presenceData: PresenceData, station: string) => {
 	else if (to) presenceData.state += `(to ${to})`;
 };
 
-export function handleStation(presence: Presence, presenceData: PresenceData):void {
+export function handleStation(
+	presence: Presence,
+	presenceData: PresenceData
+): void {
 	// first is nothing
 	const [, station, action] = document.location.pathname.split("/");
 
