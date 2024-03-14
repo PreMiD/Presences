@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location;
-	switch (pathname.replace("/en-de", "").trim()) {
+	switch (pathname) {
 		case "/": {
 			presenceData.details = "Browsing the Homepage";
 			break;
@@ -22,6 +22,10 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/collections/shop-all": {
+			presenceData.details = "Browsing the shop";
+			break;
+		}
+		case "/en-de/collections/shop-all": {
 			presenceData.details = "Browsing the shop";
 			break;
 		}
@@ -38,9 +42,14 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 	}
-	if (pathname.startsWith("/products/")) setProduct(presenceData, href);
+	if (
+		pathname.startsWith("/products/") ||
+		pathname.startsWith("/en-de/products/")
+	)
+		setProduct(presenceData, href);
 
 	presence.setActivity(presenceData);
+	console.log(presenceData.details);
 });
 
 function getStyle(pathname: string) {
