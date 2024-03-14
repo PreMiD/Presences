@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "1019017287308693604",
+		"name": "cat"
+	},
+	"service": "Rate Your Music",
+	"description": {
+		"en": "Rate Your Music is an online encyclopedia of music releases and films. Users can catalog items from their personal collection, review them, and assign ratings in a five-star rating system. The site also features community-based charts that track highest-rated releases."
+	},
+	"url": "rateyourmusic.com",
+	"matches": [
+		"*://rateyourmusic.com/*"
+	],
+	"version": "1.0.0",
+	"logo": "https://e.snmc.io/3.0/img/logo/sonemic-512.png",
+	"thumbnail": "https://i.imgur.com/0g03U2r.png",
+	"color": "#0b1528",
+	"category": "music",
+	"tags": [
+		"music",
+		"rym",
+		"rateyourmusic"
+	]
+}
