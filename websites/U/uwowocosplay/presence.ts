@@ -49,7 +49,6 @@ presence.on("UpdateData", async () => {
 		setProduct(presenceData, href);
 
 	presence.setActivity(presenceData);
-	console.log(presenceData.details);
 });
 
 function getStyle(pathname: string) {
