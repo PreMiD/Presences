@@ -9,8 +9,10 @@
 		"en": "diziwatch is a platform you can watch animes,movies"
 	},
 	"url": "diziwatch.net",
-	"matches": ["*://diziwatch.net/*"],
-	"version": "1.0.0",
+	"matches": [
+		"*://diziwatch.net/*"
+	],
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/RMrW6j3.png",
 	"thumbnail": "https://files.sikayetvar.com/lg/cmp/27/274975.png",
 	"color": "#0BA7BC",
