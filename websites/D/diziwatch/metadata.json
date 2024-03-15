@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "510174958270545920",
+		"name": "emrovsky"
+	},
+	"service": "diziwatch",
+	"description": {
+		"en": "diziwatch is a platform you can watch animes,movies"
+	},
+	"url": "diziwatch.net",
+	"matches": ["*://diziwatch.net/*"],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/RMrW6j3.png",
+	"thumbnail": "https://files.sikayetvar.com/lg/cmp/27/274975.png",
+	"color": "#0BA7BC",
+	"category": "videos",
+	"tags": [
+		"diziwatch",
+		"anime",
+		"movie"
+	]
+}
