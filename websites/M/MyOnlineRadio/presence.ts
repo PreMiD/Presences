@@ -6,7 +6,6 @@ const presence = new Presence({
 	clientId: "1217153856665026580",
 });
 
-// Other default assets can be found at index.d.ts
 const enum Assets {
 	Logo = "https://i.ibb.co/5LsDstd/mic2.png",
 }
