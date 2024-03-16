@@ -1,6 +1,5 @@
 import { getDropDownSelected, getInp, toDate, tDiffInMS } from "./utils";
-import {Assets} from "./presence";
-
+import { Assets } from "./presence";
 
 const searchToPres = (presenceData: PresenceData, station: string) => {
 	const title = getInp("name") || "",

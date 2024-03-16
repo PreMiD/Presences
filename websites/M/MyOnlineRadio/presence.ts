@@ -8,7 +8,7 @@ const presence = new Presence({
 
 export const enum Assets {
 	Logo = "https://i.ibb.co/5LsDstd/mic2.png",
-	MicIco = "https://i.ibb.co/QNhnC3z/mic.png"
+	MicIco = "https://i.ibb.co/QNhnC3z/mic.png",
 }
 
 const enum Pages {
