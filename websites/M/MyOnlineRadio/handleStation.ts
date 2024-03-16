@@ -134,6 +134,6 @@ export function handleStation(
 	}
 
 	presenceData.buttons = [
-		{ label: "View Station", url: `${window.location.origin}/${station}/` },
+		{ label: "View Station", url: `${document.location.origin}/${station}/` },
 	];
 }
