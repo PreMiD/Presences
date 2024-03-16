@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 			.querySelector("img.bc-pub-block.bc-image-inset-border.js-only-element")
 			.getAttribute("src");
 	} else if (document.location.pathname.includes("/webplayer")) {
-		presenceData.details = `Listenting to ${document
+		presenceData.details = `Listening to ${document
 			.querySelector("#adbl-cloud-player-container-data")
 			.getAttribute("data-title")}`;
 		presenceData.state = document.querySelector(
