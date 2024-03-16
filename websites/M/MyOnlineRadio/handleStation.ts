@@ -1,8 +1,7 @@
 import { getDropDownSelected, getInp, toDate, tDiffInMS } from "./utils";
+import {Assets} from "./presence";
 
-/**
- * @param station
- */
+
 const searchToPres = (presenceData: PresenceData, station: string) => {
 	const title = getInp("name") || "",
 		from = toDate(getInp("from")),
@@ -126,7 +125,7 @@ export function handleStation(
 
 				// check if they're recording
 				if (document.querySelector(".live")) {
-					presenceData.smallImageKey = "https://i.ibb.co/QNhnC3z/mic.png";
+					presenceData.smallImageKey = Assets.MicIco;
 					presenceData.smallImageText = "Recording Broadcast";
 				}
 			}
