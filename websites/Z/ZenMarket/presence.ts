@@ -1,10 +1,6 @@
 const presence = new Presence({
 		clientId: "971483473024004157",
 	}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
@@ -98,7 +94,7 @@ presence.on("UpdateData", async () => {
 
 	if (path === '/profile/levels.aspx') {
 		presenceData.details = 'Checking current level';
-		presenceData.state = `Current Level: ${(document.querySelector('#lblCurrentTier') as HTMLSpanElement).innerText}`;
+		presenceData.state = `Current Level: ${(document.querySelector('#lblCurrentTier') as HTMLSpanElement).textContent}`;
 	}
 
 	if (path === '/profile/settings.aspx') {
@@ -115,8 +111,8 @@ presence.on("UpdateData", async () => {
 		const seller: HTMLSpanElement = document.querySelector('#seller');
 		const url: HTMLAnchorElement = document.querySelector('#productPage');
 
-		presenceData.details = `Looking at ${itemTitle.innerText}`;
-		presenceData.state = `Price: ${price.innerText} || Bids: ${bids.innerText} || Condition: ${condition.innerText} || Seller: ${seller.innerText}`;
+		presenceData.details = `Looking at ${itemTitle.textContent}`;
+		presenceData.state = `Price: ${price.textContent} || Bids: ${bids.textContent} || Condition: ${condition.textContent} || Seller: ${seller.textContent}`;
 		presenceData.buttons = [
 			{
 				label: 'View on ZenMarket',
@@ -136,8 +132,8 @@ presence.on("UpdateData", async () => {
 		const seller: HTMLSpanElement = document.querySelector('#seller');
 		const url: HTMLAnchorElement = document.querySelector('#productPage');
 
-		presenceData.details = `Looking at ${itemTitle.innerText}`;
-		presenceData.state = `Price: ${price.innerText} || Condition: ${condition.innerText} || Seller: ${seller.innerText}`;
+		presenceData.details = `Looking at ${itemTitle.textContent}`;
+		presenceData.state = `Price: ${price.textContent} || Condition: ${condition.textContent} || Seller: ${seller.textContent}`;
 		presenceData.buttons = [
 			{
 				label: 'View on ZenMarket',
@@ -156,8 +152,8 @@ presence.on("UpdateData", async () => {
 		const seller: HTMLSpanElement = document.querySelector('#seller');
 		const url: HTMLAnchorElement = document.querySelector('#productPage');
 
-		presenceData.details = `Looking at ${itemTitle.innerText}`;
-		presenceData.state = `Price: ${price.innerText} || Seller: ${seller.innerText}`;
+		presenceData.details = `Looking at ${itemTitle.textContent}`;
+		presenceData.state = `Price: ${price.textContent} || Seller: ${seller.textContent}`;
 		presenceData.buttons = [
 			{
 				label: 'View on ZenMarket',
@@ -176,8 +172,8 @@ presence.on("UpdateData", async () => {
 		const seller: HTMLSpanElement = document.querySelector('#seller');
 		const url: HTMLAnchorElement = document.querySelector('#productPage');
 
-		presenceData.details = `Looking at ${itemTitle.innerText}`;
-		presenceData.state = `Price: ${price.innerText} || Seller: ${seller.innerText}`;
+		presenceData.details = `Looking at ${itemTitle.textContent}`;
+		presenceData.state = `Price: ${price.textContent} || Seller: ${seller.textContent}`;
 		presenceData.buttons = [
 			{
 				label: 'View on ZenMarket',
@@ -196,8 +192,8 @@ presence.on("UpdateData", async () => {
 		const seller: HTMLSpanElement = document.querySelector('#seller');
 		const url: HTMLAnchorElement = document.querySelector('#productPage');
 
-		presenceData.details = `Looking at ${itemTitle.innerText}`;
-		presenceData.state = `Price: ${price.innerText} || Seller: ${seller.innerText}`;
+		presenceData.details = `Looking at ${itemTitle.textContent}`;
+		presenceData.state = `Price: ${price.textContent} || Seller: ${seller.textContent}`;
 		presenceData.buttons = [
 			{
 				label: 'View on ZenMarket',
@@ -216,8 +212,8 @@ presence.on("UpdateData", async () => {
 		const condition: HTMLSpanElement = document.querySelector('#lblConditionName');
 		const url: HTMLAnchorElement = document.querySelector('#productPage');
 
-		presenceData.details = `Looking at ${itemTitle.innerText}`;
-		presenceData.state = `Price: ${price.innerText} ${condition ? `|| Condition: ${condition.innerText}` : ''}`;
+		presenceData.details = `Looking at ${itemTitle.textContent}`;
+		presenceData.state = `Price: ${price.textContent} ${condition ? `|| Condition: ${condition.textContent}` : ''}`;
 		presenceData.buttons = [
 			{
 				label: 'View on ZenMarket',
@@ -235,8 +231,8 @@ presence.on("UpdateData", async () => {
 		const price: HTMLSpanElement = document.querySelector('#lblPrice');
 		const url: HTMLAnchorElement = document.querySelector('#productPage');
 
-		presenceData.details = `Looking at ${itemTitle.innerText}`;
-		presenceData.state = `Price: ${price.innerText}`;
+		presenceData.details = `Looking at ${itemTitle.textContent}`;
+		presenceData.state = `Price: ${price.textContent}`;
 		presenceData.buttons = [
 			{
 				label: 'View on ZenMarket',
@@ -254,8 +250,8 @@ presence.on("UpdateData", async () => {
 		const price: HTMLSpanElement = document.querySelector('#lblPrice');
 		const seller: HTMLSpanElement = document.querySelector('#aSeller');
 
-		presenceData.details = `Looking at ${itemTitle.innerText}`;
-		presenceData.state = `Price: ${price.innerText} || Seller: ${seller.innerText}`;
+		presenceData.details = `Looking at ${itemTitle.textContent}`;
+		presenceData.state = `Price: ${price.textContent} || Seller: ${seller.textContent}`;
 		presenceData.buttons = [
 			{
 				label: 'View on ZenMarket',
