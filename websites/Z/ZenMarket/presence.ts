@@ -9,8 +9,8 @@ const enum Assets {
 
 // Function to remove the lang prefixes that occur with different languages
 async function removeLangPath(path: string) {
-	const splitPath = path.split("/");
-	const locales: Set<string> = new Set(["en", "ru", "de", "ua", "ja", "cn", "tw", "es", "fr", "ms", "vi", "ar", "id" , "th", "it", "pt", "tr", "pl", "ko"]);
+	const splitPath = path.split("/"),
+	locales: Set<string> = new Set(["en", "ru", "de", "ua", "ja", "cn", "tw", "es", "fr", "ms", "vi", "ar", "id" , "th", "it", "pt", "tr", "pl", "ko"]);
 
 	if (locales.has(splitPath[1])) return splitPath.filter(part => !locales.has(part)).join("/");
 	else return path;
@@ -21,9 +21,8 @@ presence.on("UpdateData", async () => {
 		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 		details: "Browsing ZenMarket",
-	};
-
-	const path = await removeLangPath(document.location.pathname);
+	},
+	path = await removeLangPath(document.location.pathname);
 
 	// Home
 
@@ -35,11 +34,9 @@ presence.on("UpdateData", async () => {
 		const warehouseTable: HTMLTableElement = document.querySelector(
 			"#productsBought > div:nth-child(1) > table"
 		),
-		cartTable: HTMLTableElement = document.querySelector(".shop-stripped");
-
-		// remove one from cartItems as there is an information table row which isn"t one of the items
-		const cartItems = cartTable ? cartTable.rows.length - 1 : 0,
-		warehouseItems = warehouseTable ? warehouseTable.rows.length : 0;
+		cartTable: HTMLTableElement = document.querySelector(".shop-stripped"),
+		warehouseItems = warehouseTable ? warehouseTable.rows.length : 0,
+		cartItems = cartTable ? cartTable.rows.length - 1 : 0;
 
 		presenceData.details = "Viewing Account";
 		presenceData.state = `${warehouseItems > 1 || warehouseItems === 0 ? `${warehouseItems} items` : `${warehouseItems} item`} in warehouse || ${cartItems > 1 || cartItems === 0 ? `${cartItems} items` : `${cartItems} item`} in cart`;
