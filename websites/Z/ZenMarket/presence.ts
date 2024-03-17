@@ -13,7 +13,8 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			details: "Browsing ZenMarket",
 		},
-		path = document.location.pathname.replace(
+		{ pathname, search, href } = document.location,
+		path = pathname.replace(
 			`/${document.querySelector("html").getAttribute("lang")}`,
 			""
 		);
@@ -48,9 +49,9 @@ presence.on("UpdateData", async () => {
 
 	if (path === "/profile/watchlist.aspx") {
 		if (
-			(document.location.search.includes("tab=auctions") &&
-				!document.location.search.includes("history")) ||
-			!document.location.search
+			(search.includes("tab=auctions") &&
+				!search.includes("history")) ||
+			!search
 		) {
 			const products = document.querySelector(
 					"#auctions > div:nth-child(2) > .col-md-12"
@@ -64,11 +65,11 @@ presence.on("UpdateData", async () => {
 					: `${watchCount} item`
 			} on the watchlist`;
 		} else if (
-			document.location.search.includes("tab=auctions") &&
-			document.location.search.includes("history")
+			search.includes("tab=auctions") &&
+			search.includes("history")
 		)
 			presenceData.details = "Viewing history of watched auction items";
-		else if (document.location.search.includes("tab=products")) {
+		else if (search.includes("tab=products")) {
 			const products = document.querySelector(
 					"#products > div:nth-child(2) > .col-md-12"
 				),
@@ -80,9 +81,9 @@ presence.on("UpdateData", async () => {
 					? `${watchCount} items`
 					: `${watchCount} item`
 			} on the watchlist`;
-		} else if (document.location.search.includes("tab=sellers"))
+		} else if (search.includes("tab=sellers"))
 			presenceData.details = "Viewing watched sellers";
-		else if (document.location.search.includes("tab=recent"))
+		else if (search.includes("tab=recent"))
 			presenceData.details = "Looking at recently viewed items";
 	}
 
@@ -94,7 +95,7 @@ presence.on("UpdateData", async () => {
 	if (path === "/profile/levels.aspx") {
 		presenceData.details = "Checking current level";
 		presenceData.state = `Current Level: ${
-			(document.querySelector("#lblCurrentTier") as HTMLSpanElement).textContent
+			document.querySelector("#lblCurrentTier").textContent
 		}`;
 	}
 
@@ -118,11 +119,11 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View on ZenMarket",
-				url: document.location.href,
+				url: href,
 			},
 			{
 				label: "View on Yahoo Auctions",
-				url: (document.querySelector("#productPage") as HTMLAnchorElement).href,
+				url: document.querySelector("#productPage").getAttribute("href"),
 			},
 		];
 	}
@@ -139,11 +140,11 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View on ZenMarket",
-				url: document.location.href,
+				url: href,
 			},
 			{
 				label: "View on Yahoo Shopping",
-				url: (document.querySelector("#productPage") as HTMLAnchorElement).href,
+				url: document.querySelector("#productPage").getAttribute("href"),
 			},
 		];
 	}
@@ -158,11 +159,11 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View on ZenMarket",
-				url: document.location.href,
+				url: href,
 			},
 			{
 				label: "View on Mercari",
-				url: (document.querySelector("#productPage") as HTMLAnchorElement).href,
+				url: document.querySelector("#productPage").getAttribute("href"),
 			},
 		];
 	}
@@ -177,11 +178,11 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View on ZenMarket",
-				url: document.location.href,
+				url: href,
 			},
 			{
 				label: "View on Rakuma",
-				url: (document.querySelector("#productPage") as HTMLAnchorElement).href,
+				url: document.querySelector("#productPage").getAttribute("href"),
 			},
 		];
 	}
@@ -196,11 +197,11 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View on ZenMarket",
-				url: document.location.href,
+				url: href,
 			},
 			{
 				label: "View on Rakuten",
-				url: (document.querySelector("#productPage") as HTMLAnchorElement).href,
+				url: document.querySelector("#productPage").getAttribute("href"),
 			},
 		];
 	}
@@ -217,11 +218,11 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View on ZenMarket",
-				url: document.location.href,
+				url: href,
 			},
 			{
 				label: "View on Amazon",
-				url: (document.querySelector("#productPage") as HTMLAnchorElement).href,
+				url: document.querySelector("#productPage").getAttribute("href"),
 			},
 		];
 	}
@@ -236,11 +237,11 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View on ZenMarket",
-				url: document.location.href,
+				url: href,
 			},
 			{
-				label: "View on original page",
-				url: (document.querySelector("#productPage") as HTMLAnchorElement).href,
+				label: "View on Original page",
+				url: document.querySelector("#productPage").getAttribute("href"),
 			},
 		];
 	}
@@ -259,11 +260,11 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View on ZenMarket",
-				url: document.location.href,
+				url: href,
 			},
 			{
 				label: "View on ZenPlus",
-				url: (document.querySelector("#itemUrl") as HTMLAnchorElement).href,
+				url: document.querySelector("#itemUrl").getAttribute("href"),
 			},
 		];
 	}
