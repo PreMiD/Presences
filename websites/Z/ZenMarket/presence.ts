@@ -18,10 +18,6 @@ presence.on("UpdateData", async () => {
 			""
 		);
 
-	// Home
-
-	if (path === "/") presenceData.details = "Viewing Main Page";
-
 	// Profile
 
 	if (path === "/profile/" || path === "/profile/default.aspx") {
