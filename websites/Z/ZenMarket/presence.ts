@@ -49,8 +49,7 @@ presence.on("UpdateData", async () => {
 
 	if (path === "/profile/watchlist.aspx") {
 		if (
-			(search.includes("tab=auctions") &&
-				!search.includes("history")) ||
+			(search.includes("tab=auctions") && !search.includes("history")) ||
 			!search
 		) {
 			const products = document.querySelector(
@@ -64,10 +63,7 @@ presence.on("UpdateData", async () => {
 					? `${watchCount} items`
 					: `${watchCount} item`
 			} on the watchlist`;
-		} else if (
-			search.includes("tab=auctions") &&
-			search.includes("history")
-		)
+		} else if (search.includes("tab=auctions") && search.includes("history"))
 			presenceData.details = "Viewing history of watched auction items";
 		else if (search.includes("tab=products")) {
 			const products = document.querySelector(
@@ -104,10 +100,7 @@ presence.on("UpdateData", async () => {
 
 	// Product view
 
-	if (
-		path === "/auction.aspx" &&
-		search.includes("itemCode")
-	) {
+	if (path === "/auction.aspx" && search.includes("itemCode")) {
 		presenceData.details = `Looking at ${
 			document.querySelector("#itemTitle").textContent
 		}`;
