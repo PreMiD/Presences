@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			details: "Browsing ZenMarket",
 		},
-		path = document.location.pathname.replace(`/${document.querySelector('html').getAttribute('lang')}`, "");
+		path = document.location.pathname.replace(`/${document.querySelector("html").getAttribute("lang")}`, "");
 
 	// Home
 
