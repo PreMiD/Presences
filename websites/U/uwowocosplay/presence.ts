@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/U/uwowocosplay/assets/logo.jpeg",
+	Logo = "https://i.imgur.com/U2EMMgC.jpeg",
 }
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location;
-	switch (pathname.replace("/en-de", "").trim()) {
+	switch (pathname) {
 		case "/": {
 			presenceData.details = "Browsing the Homepage";
 			break;
@@ -22,6 +22,10 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "/collections/shop-all": {
+			presenceData.details = "Browsing the shop";
+			break;
+		}
+		case "/en-de/collections/shop-all": {
 			presenceData.details = "Browsing the shop";
 			break;
 		}
@@ -38,7 +42,11 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 	}
-	if (pathname.startsWith("/products/")) setProduct(presenceData, href);
+	if (
+		pathname.startsWith("/products/") ||
+		pathname.startsWith("/en-de/products/")
+	)
+		setProduct(presenceData, href);
 
 	presence.setActivity(presenceData);
 });
@@ -56,7 +64,6 @@ function getStyle(pathname: string) {
 
 function setProduct(presenceData: PresenceData, href: string) {
 	const product = document
-		// replace everything before Uwowo and remove the word "Costume" in regex
 		.querySelector(".h2.product-single__title")
 		?.textContent?.replace(/.*Uwowo/, "")
 		?.replace(/Costume/g, "");
