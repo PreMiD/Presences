@@ -4,37 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.ibb.co/n3h8QbV/zenlogo-sm.png",
-}
-
-// Function to remove the lang prefixes that occur with different languages
-async function removeLangPath(path: string) {
-	const splitPath = path.split("/"),
-		locales: Set<string> = new Set([
-			"en",
-			"ru",
-			"de",
-			"ua",
-			"ja",
-			"cn",
-			"tw",
-			"es",
-			"fr",
-			"ms",
-			"vi",
-			"ar",
-			"id",
-			"th",
-			"it",
-			"pt",
-			"tr",
-			"pl",
-			"ko",
-		]);
-
-	if (locales.has(splitPath[1]))
-		return splitPath.filter(part => !locales.has(part)).join("/");
-	else return path;
+	Logo = "https://i.ibb.co/YWQTYzh/cy0lojzy.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -43,7 +13,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			details: "Browsing ZenMarket",
 		},
-		path = await removeLangPath(document.location.pathname);
+		path = document.location.pathname.replace(`/${document.querySelector('html').getAttribute('lang')}`, "");
 
 	// Home
 
