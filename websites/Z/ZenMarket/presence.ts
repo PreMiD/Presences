@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
 
 	if (
 		path === "/auction.aspx" &&
-		document.location.search.includes("itemCode")
+		search.includes("itemCode")
 	) {
 		presenceData.details = `Looking at ${
 			document.querySelector("#itemTitle").textContent
