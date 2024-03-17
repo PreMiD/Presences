@@ -12,11 +12,8 @@ async function removeLangPath(path: string) {
 	const splitPath = path.split("/");
 	const locales: Set<string> = new Set(["en", "ru", "de", "ua", "ja", "cn", "tw", "es", "fr", "ms", "vi", "ar", "id" , "th", "it", "pt", "tr", "pl", "ko"]);
 
-	if (locales.has(splitPath[1])) {
-		return splitPath.filter(part => !locales.has(part)).join("/");
-	} else {
-		return path;
-	}
+	if (locales.has(splitPath[1])) return splitPath.filter(part => !locales.has(part)).join("/");
+	else return path;
 }
 
 presence.on("UpdateData", async () => {
@@ -61,9 +58,9 @@ presence.on("UpdateData", async () => {
 
 			presenceData.details = "Looking at watched auction items";
 			presenceData.state = `${watchCount > 1 || watchCount === 0 ? `${watchCount} items` : `${watchCount} item`} on the watchlist`;
-		} else if (document.location.search.includes("tab=auctions") && document.location.search.includes("history")) {
-			presenceData.details = "Viewing history of watched auction items";
-		} else if (document.location.search.includes("tab=products")) {
+		}
+		else if (document.location.search.includes("tab=auctions") && document.location.search.includes("history")) presenceData.details = "Viewing history of watched auction items";
+		else if (document.location.search.includes("tab=products")) {
 			const products = document.querySelector(
                 "#products > div:nth-child(2) > .col-md-12"
             );
@@ -71,11 +68,9 @@ presence.on("UpdateData", async () => {
 
 			presenceData.details = "Looking at watched items";
 			presenceData.state = `${watchCount > 1 || watchCount === 0 ? `${watchCount} items` : `${watchCount} item`} on the watchlist`;
-		} else if (document.location.search.includes("tab=sellers")) {
-			presenceData.details = "Viewing watched sellers";
-		} else if (document.location.search.includes("tab=recent")) {
-			presenceData.details = "Looking at recently viewed items";
 		}
+		else if (document.location.search.includes("tab=sellers")) presenceData.details = "Viewing watched sellers";
+		else if (document.location.search.includes("tab=recent")) presenceData.details = "Looking at recently viewed items";
 	}
 
 	if (path === "/profile/parcel.aspx") presenceData.details = "Viewing parcels";
