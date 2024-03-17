@@ -58,8 +58,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.details = "Looking at watched auction items";
 			presenceData.state = `${watchCount > 1 || watchCount === 0 ? `${watchCount} items` : `${watchCount} item`} on the watchlist`;
-		}
-		else if (document.location.search.includes("tab=auctions") && document.location.search.includes("history")) presenceData.details = "Viewing history of watched auction items";
+		} else if (document.location.search.includes("tab=auctions") && document.location.search.includes("history")) presenceData.details = "Viewing history of watched auction items";
 		else if (document.location.search.includes("tab=products")) {
 			const products = document.querySelector(
                 "#products > div:nth-child(2) > .col-md-12"
@@ -68,8 +67,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.details = "Looking at watched items";
 			presenceData.state = `${watchCount > 1 || watchCount === 0 ? `${watchCount} items` : `${watchCount} item`} on the watchlist`;
-		}
-		else if (document.location.search.includes("tab=sellers")) presenceData.details = "Viewing watched sellers";
+		} else if (document.location.search.includes("tab=sellers")) presenceData.details = "Viewing watched sellers";
 		else if (document.location.search.includes("tab=recent")) presenceData.details = "Looking at recently viewed items";
 	}
 
