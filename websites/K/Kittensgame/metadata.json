@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "638080361179512853",
+		"name": "dark_ville"
+	},
+	"service": "Kittensgame",
+	"description": {
+		"en": "Kittens Game by bloodrizer is a text-based semi-idle incremental village management simulation browser game. You manage a village of kittens as they acquire resources and unlock new technologies. The game is currently under development, so prices and balancing are subject to change."
+	},
+	"url": ["kittensgame.com", "forum.kittensgame.com", "wiki.kittensgame.com"],
+	"matches": [ "*://*.kittensgame.com/"],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/ZnH9imj.png",
+	"thumbnail": "https://i.imgur.com/px9EJ1v.png",
+	"color": "#ffffff",
+	"category": "games",
+	"tags": [
+		"cat",
+		"kitten",
+		"kittens",
+		"game"
+	]
+
+}
