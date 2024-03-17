@@ -10,7 +10,7 @@ const enum Assets {
 // Function to remove the lang prefixes that occur with different languages
 async function removeLangPath(path: string) {
 	const splitPath = path.split("/");
-	const locales: Set<String> = new Set(["en", "ru", "de", "ua", "ja", "cn", "tw", "es", "fr", "ms", "vi", "ar", "id" , "th", "it", "pt", "tr", "pl", "ko"]);
+	const locales: Set<string> = new Set(["en", "ru", "de", "ua", "ja", "cn", "tw", "es", "fr", "ms", "vi", "ar", "id" , "th", "it", "pt", "tr", "pl", "ko"]);
 
 	if (locales.has(splitPath[1])) {
 		return splitPath.filter(part => !locales.has(part)).join("/");
@@ -30,9 +30,7 @@ presence.on("UpdateData", async () => {
 
 	// Home
 
-	if (path === "/") {
-		presenceData.details = "Viewing Main Page";
-	}
+	if (path === "/") presenceData.details = "Viewing Main Page";
 
 	// Profile
 
@@ -50,13 +48,9 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `${warehouseItems > 1 || warehouseItems === 0 ? `${warehouseItems} items` : `${warehouseItems} item`} in warehouse || ${cartItems > 1 || cartItems === 0 ? `${cartItems} items` : `${cartItems} item`} in cart`;
 	}
 
-	if (path === "/profile/messages.aspx" || path === "/profile/support.aspx") {
-		presenceData.details = "Viewing Messages";
-	}
+	if (path === "/profile/messages.aspx" || path === "/profile/support.aspx") presenceData.details = "Viewing Messages";
 
-	if (path === "/profile/actions.aspx") {
-		presenceData.details = "Looking at Events";
-	}
+	if (path === "/profile/actions.aspx") presenceData.details = "Looking at Events";
 
 	if (path === "/profile/watchlist.aspx") {
 		if (document.location.search.includes("tab=auctions") && !document.location.search.includes("history") || !document.location.search) {
@@ -84,22 +78,16 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (path === "/profile/parcel.aspx") {
-		presenceData.details = "Viewing parcels";
-	}
+	if (path === "/profile/parcel.aspx") presenceData.details = "Viewing parcels";
 
-	if (path === "/profile/payments.aspx") {
-		presenceData.details = "Viewing transactions";
-	}
+	if (path === "/profile/payments.aspx") presenceData.details = "Viewing transactions";
 
 	if (path === "/profile/levels.aspx") {
 		presenceData.details = "Checking current level";
 		presenceData.state = `Current Level: ${(document.querySelector("#lblCurrentTier") as HTMLSpanElement).textContent}`;
 	}
 
-	if (path === "/profile/settings.aspx") {
-		presenceData.details = "Viewing settings";
-	}
+	if (path === "/profile/settings.aspx") presenceData.details = "Viewing settings";
 
 	// Product view
 
