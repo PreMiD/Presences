@@ -34,12 +34,12 @@ presence.on("UpdateData", async () => {
 	if (path === "/profile/" || path === "/profile/default.aspx") {
 		const warehouseTable: HTMLTableElement = document.querySelector(
 			"#productsBought > div:nth-child(1) > table"
-		);
-		const cartTable: HTMLTableElement = document.querySelector(".shop-stripped");
+		),
+		cartTable: HTMLTableElement = document.querySelector(".shop-stripped");
 
 		// remove one from cartItems as there is an information table row which isn"t one of the items
-		const cartItems = cartTable ? cartTable.rows.length - 1 : 0;
-		const warehouseItems = warehouseTable ? warehouseTable.rows.length : 0;
+		const cartItems = cartTable ? cartTable.rows.length - 1 : 0,
+		warehouseItems = warehouseTable ? warehouseTable.rows.length : 0;
 
 		presenceData.details = "Viewing Account";
 		presenceData.state = `${warehouseItems > 1 || warehouseItems === 0 ? `${warehouseItems} items` : `${warehouseItems} item`} in warehouse || ${cartItems > 1 || cartItems === 0 ? `${cartItems} items` : `${cartItems} item`} in cart`;
@@ -53,8 +53,8 @@ presence.on("UpdateData", async () => {
 		if (document.location.search.includes("tab=auctions") && !document.location.search.includes("history") || !document.location.search) {
 			const products = document.querySelector(
                 "#auctions > div:nth-child(2) > .col-md-12"
-            );
-			const watchCount = products ? products.children.length - 1 : 0;
+            ),
+			watchCount = products ? products.children.length - 1 : 0;
 
 			presenceData.details = "Looking at watched auction items";
 			presenceData.state = `${watchCount > 1 || watchCount === 0 ? `${watchCount} items` : `${watchCount} item`} on the watchlist`;
@@ -63,8 +63,8 @@ presence.on("UpdateData", async () => {
 		else if (document.location.search.includes("tab=products")) {
 			const products = document.querySelector(
                 "#products > div:nth-child(2) > .col-md-12"
-            );
-			const watchCount = products ? products.children.length : 0;
+            ),
+			watchCount = products ? products.children.length : 0;
 
 			presenceData.details = "Looking at watched items";
 			presenceData.state = `${watchCount > 1 || watchCount === 0 ? `${watchCount} items` : `${watchCount} item`} on the watchlist`;
@@ -87,12 +87,12 @@ presence.on("UpdateData", async () => {
 	// Product view
 
 	if (path === "/auction.aspx" && document.location.search.includes("itemCode")) {
-		const itemTitle: HTMLSpanElement = document.querySelector("#itemTitle");
-		const price: HTMLSpanElement = document.querySelector("#lblPriceY");
-		const bids: HTMLSpanElement = document.querySelector("#bidNum");
-		const condition: HTMLSpanElement = document.querySelector("#lblItemStatus");
-		const seller: HTMLSpanElement = document.querySelector("#seller");
-		const url: HTMLAnchorElement = document.querySelector("#productPage");
+		const itemTitle: HTMLSpanElement = document.querySelector("#itemTitle"),
+		price: HTMLSpanElement = document.querySelector("#lblPriceY"),
+		bids: HTMLSpanElement = document.querySelector("#bidNum"),
+		condition: HTMLSpanElement = document.querySelector("#lblItemStatus"),
+		seller: HTMLSpanElement = document.querySelector("#seller"),
+		url: HTMLAnchorElement = document.querySelector("#productPage");
 
 		presenceData.details = `Looking at ${itemTitle.textContent}`;
 		presenceData.state = `Price: ${price.textContent} || Bids: ${bids.textContent} || Condition: ${condition.textContent} || Seller: ${seller.textContent}`;
@@ -109,11 +109,11 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (path === "/yshoppingproduct.aspx") {
-		const itemTitle: HTMLSpanElement = document.querySelector("#itemTitle");
-		const price: HTMLSpanElement = document.querySelector("#lblPrice");
-		const condition: HTMLSpanElement = document.querySelector("#lblItemCondition");
-		const seller: HTMLSpanElement = document.querySelector("#seller");
-		const url: HTMLAnchorElement = document.querySelector("#productPage");
+		const itemTitle: HTMLSpanElement = document.querySelector("#itemTitle"),
+		price: HTMLSpanElement = document.querySelector("#lblPrice"),
+		condition: HTMLSpanElement = document.querySelector("#lblItemCondition"),
+		seller: HTMLSpanElement = document.querySelector("#seller"),
+		url: HTMLAnchorElement = document.querySelector("#productPage");
 
 		presenceData.details = `Looking at ${itemTitle.textContent}`;
 		presenceData.state = `Price: ${price.textContent} || Condition: ${condition.textContent} || Seller: ${seller.textContent}`;
@@ -130,10 +130,10 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (path === "/mercariproduct.aspx") {
-		const itemTitle: HTMLSpanElement = document.querySelector("#itemTitle");
-		const price: HTMLSpanElement = document.querySelector("#lblPrice");
-		const seller: HTMLSpanElement = document.querySelector("#seller");
-		const url: HTMLAnchorElement = document.querySelector("#productPage");
+		const itemTitle: HTMLSpanElement = document.querySelector("#itemTitle"),
+		price: HTMLSpanElement = document.querySelector("#lblPrice"),
+		seller: HTMLSpanElement = document.querySelector("#seller"),
+		url: HTMLAnchorElement = document.querySelector("#productPage");
 
 		presenceData.details = `Looking at ${itemTitle.textContent}`;
 		presenceData.state = `Price: ${price.textContent} || Seller: ${seller.textContent}`;
@@ -150,10 +150,10 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (path === "/rakumaproduct.aspx") {
-		const itemTitle: HTMLSpanElement = document.querySelector("#itemTitle");
-		const price: HTMLSpanElement = document.querySelector("#lblPrice");
-		const seller: HTMLSpanElement = document.querySelector("#seller");
-		const url: HTMLAnchorElement = document.querySelector("#productPage");
+		const itemTitle: HTMLSpanElement = document.querySelector("#itemTitle"),
+		price: HTMLSpanElement = document.querySelector("#lblPrice"),
+		seller: HTMLSpanElement = document.querySelector("#seller"),
+		url: HTMLAnchorElement = document.querySelector("#productPage");
 
 		presenceData.details = `Looking at ${itemTitle.textContent}`;
 		presenceData.state = `Price: ${price.textContent} || Seller: ${seller.textContent}`;
@@ -170,10 +170,10 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (path === "/rakutenproduct.aspx") {
-		const itemTitle: HTMLSpanElement = document.querySelector("#itemTitle");
-		const price: HTMLSpanElement = document.querySelector("#lblPrice");
-		const seller: HTMLSpanElement = document.querySelector("#seller");
-		const url: HTMLAnchorElement = document.querySelector("#productPage");
+		const itemTitle: HTMLSpanElement = document.querySelector("#itemTitle"),
+		price: HTMLSpanElement = document.querySelector("#lblPrice"),
+		seller: HTMLSpanElement = document.querySelector("#seller"),
+		url: HTMLAnchorElement = document.querySelector("#productPage");
 
 		presenceData.details = `Looking at ${itemTitle.textContent}`;
 		presenceData.state = `Price: ${price.textContent} || Seller: ${seller.textContent}`;
@@ -190,10 +190,10 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (path === "/amazonproduct.aspx") {
-		const itemTitle: HTMLSpanElement = document.querySelector("#itemTitle");
-		const price: HTMLSpanElement = document.querySelector("#lblPrice");
-		const condition: HTMLSpanElement = document.querySelector("#lblConditionName");
-		const url: HTMLAnchorElement = document.querySelector("#productPage");
+		const itemTitle: HTMLSpanElement = document.querySelector("#itemTitle"),
+		price: HTMLSpanElement = document.querySelector("#lblPrice"),
+		condition: HTMLSpanElement = document.querySelector("#lblConditionName"),
+		url: HTMLAnchorElement = document.querySelector("#productPage");
 
 		presenceData.details = `Looking at ${itemTitle.textContent}`;
 		presenceData.state = `Price: ${price.textContent} ${condition ? `|| Condition: ${condition.textContent}` : ""}`;
@@ -210,9 +210,9 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (path === "/othershopproduct.aspx") {
-		const itemTitle: HTMLSpanElement = document.querySelector("#itemTitle");
-		const price: HTMLSpanElement = document.querySelector("#lblPrice");
-		const url: HTMLAnchorElement = document.querySelector("#productPage");
+		const itemTitle: HTMLSpanElement = document.querySelector("#itemTitle"),
+		price: HTMLSpanElement = document.querySelector("#lblPrice"),
+		url: HTMLAnchorElement = document.querySelector("#productPage");
 
 		presenceData.details = `Looking at ${itemTitle.textContent}`;
 		presenceData.state = `Price: ${price.textContent}`;
@@ -229,9 +229,9 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (path.includes("/s/") && path.split("/").length === 4 && document.querySelector("#itemTitle")) {
-		const itemTitle: HTMLSpanElement = document.querySelector("#itemTitle");
-		const price: HTMLSpanElement = document.querySelector("#lblPrice");
-		const seller: HTMLSpanElement = document.querySelector("#aSeller");
+		const itemTitle: HTMLSpanElement = document.querySelector("#itemTitle"),
+		price: HTMLSpanElement = document.querySelector("#lblPrice"),
+		seller: HTMLSpanElement = document.querySelector("#aSeller");
 
 		presenceData.details = `Looking at ${itemTitle.textContent}`;
 		presenceData.state = `Price: ${price.textContent} || Seller: ${seller.textContent}`;
