@@ -28,7 +28,7 @@
 		"*://mw.lonelil.ru/*",
 		"*://mv-web.netlify.app/*"
 	],
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/thumbnail.png",
 	"color": "#533670",
