@@ -79,16 +79,16 @@ presence.on("UpdateData", async () => {
 				)} (page ${pageInp})`;
 				presenceData.details = `Reading ${
 					document.querySelector(".bookcont > h3")?.textContent
-				} (page ${pageInp})`;
+				} (page ${pageInp}, Anglishized)`;
 			}
 			break;
 
 		case Pages.book:
 		case Pages.bookmark:
-			presenceData.details = `Reading ${title.replace(
+			presenceData.details = `Reading Bookmark ${title.replace(
 				` ${pageInp}`,
 				""
-			)} (page ${pageInp})`;
+			)}`;
 			break;
 
 		case Pages.browse:
