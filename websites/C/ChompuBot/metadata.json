@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "919878532228841532",
+		"name": "somboytiger"
+	},
+	"service": "ChompuBot",
+	"description": {
+		"en": "Chompu is Discord bot music spport stream Joox, TikTok, Distrokid, Spotify, AppleMusic, Soundcloud, Clyp, PornHub and etc. Can req song on website/dashboard [TH]",
+		"th": "Chompu คือ บอทดิสคอร์ดที่มาพร้อมด้วยระบบสตรีมเล่นเพลงที่สามารถจัดการหรือเพิ่มคิวเพลงบนเว็บไซต์! รองรับสตรีมเล่นเพลงหลายแพลตฟอร์ม Joox, TikTok, Distrokid, Spotify, AppleMusic, Soundcloud, Clyp, PornHub และอื่นๆอีกมากมาย!"
+	},
+	"url": "chompubot.work",
+	"matches": [
+		"*://chompubot.work/*"
+	],
+	"version": "1.0.0",
+	"logo": "https://chompubot.work/bot.png",
+	"thumbnail": "https://chompubot.work/bot.png",
+	"color": "#ffbcff",
+	"category": "music",
+	"tags": [
+		"music",
+		"music-room",
+		"discordbot",
+		"dashboard",
+		"chompu",
+		"chompubot",
+		"player"
+	]
+} 
