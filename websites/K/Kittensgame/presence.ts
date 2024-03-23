@@ -5,7 +5,31 @@ const presence = new Presence({
 
 const enum Assets { // Other default assets can be found at index.d.ts
 	Logo = "https://i.imgur.com/ZnH9imj.png",
+	Loading = "https://i.imgur.com/9sInqXl.gif",
 }
+
+interface Window {
+	gamePage: {
+		calendar: {
+			day: number;
+			season: number;
+			seasonsPerYear: number;
+			weather: any;
+			year: number;
+			yearsPerCycle: number;
+		};
+	};
+}
+
+const template = document.createElement("template"),
+	script = document.createElement("script"),
+	output = document.createElement("textarea");
+
+output.id = "PreMiD-test-presence-output";
+output.style.display = "none";
+script.id = "PreMiD-test-presence-script";
+script.textContent = `console.log(window.gamePage)`;
+template.append(script, output);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -14,8 +38,20 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, href, hostname } = document.location;
 
+	document.head.append(template.cloneNode(true));
 	switch (hostname) {
 		case "kittensgame.com": {
+			const loadingBar = document.querySelector<HTMLProgressElement>(
+				"#loadingProgressBar"
+			);
+			if (loadingBar.value !== 100) {
+				presenceData.details = "Loading..";
+				presenceData.smallImageKey = Assets.Loading;
+			} else {
+				// const mainData = w.gamePage;
+				// console.log(mainData);
+				// presenceData.details = `Day ${mainData.day} - Year ${mainData.year} - Season ${mainData.season}`;
+			}
 			break;
 		}
 		case "forum.kittensgame.com": {
