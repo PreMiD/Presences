@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/U/uwowocosplay/assets/logo.jpeg",
+	Logo = "https://i.imgur.com/U2EMMgC.jpeg",
 }
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location;
-	switch (pathname) {
+		switch (pathname) {
 		case "/": {
 			presenceData.details = "Browsing the Homepage";
 			break;
