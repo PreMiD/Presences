@@ -6,7 +6,7 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/SDVX%20Index/assets/logo.png",
+	Logo = "https://i.ibb.co/LvxK5RJ/0bkkYu0.png",
 }
 
 presence.on("UpdateData", async () => {

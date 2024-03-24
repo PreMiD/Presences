@@ -3,12 +3,12 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	keys: Record<string, string> = {
-		"4K": "https://cdn.rcd.gg/PreMiD/websites/Q/Quaver/assets/0.png",
-		"7K": "https://cdn.rcd.gg/PreMiD/websites/Q/Quaver/assets/1.png",
+		"4K": "https://i.imgur.com/Fljj2PD.png",
+		"7K": "https://i.imgur.com/DFS2JsB.png",
 	};
 
 const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/Q/Quaver/assets/logo.png",
+	Logo = "https://i.imgur.com/Ja2zIvV.png",
 }
 
 presence.on("UpdateData", async () => {

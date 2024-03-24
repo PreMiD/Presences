@@ -1,5 +1,5 @@
 const enum Assets {
-	logo = "https://cdn.rcd.gg/PreMiD/websites/R/Rate%20Your%20Music/assets/0.png",
+	logo = "https://i.imgur.com/4hrNGBS.png",
 }
 
 let browsingTimestamp: number;
