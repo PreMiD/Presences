@@ -8,7 +8,7 @@ const presence = new Presence({
 	});
 
 const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/Tabii/assets/logo.png",
+	Logo = "https://i.imgur.com/ZfDhD5n.png",
 }
 
 presence.on("UpdateData", async () => {
