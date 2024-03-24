@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "193714715631812608",
+		"name": "theusaf"
+	},
+	"service": "Japanese Mahjong Wiki",
+	"description": {
+		"en": "A wiki whose main purpose is to provide English speakers easy access and material pertaining to Japanese mahjong."
+	},
+	"url": "riichi.wiki",
+	"matches": [
+		"https://riichi.wiki/*"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/3xMqFwy.png",
+	"thumbnail": "https://riichi.wiki/images/Mahjong_Tiles.jpg",
+	"color": "#F1ECE6",
+	"category": "games",
+	"tags": [
+		"mahjong",
+		"japan",
+		"japanese",
+		"riichi",
+		"wiki",
+		"culture"
+	]
+}
