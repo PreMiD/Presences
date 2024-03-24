@@ -4,32 +4,10 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets { // Other default assets can be found at index.d.ts
+	Advice = "https://i.imgur.com/f5RrPFn.png",
 	Logo = "https://i.imgur.com/ZnH9imj.png",
 	Loading = "https://i.imgur.com/9sInqXl.gif",
 }
-
-interface Window {
-	gamePage: {
-		calendar: {
-			day: number;
-			season: number;
-			seasonsPerYear: number;
-			weather: any;
-			year: number;
-			yearsPerCycle: number;
-		};
-	};
-}
-
-const template = document.createElement("template"),
-	script = document.createElement("script"),
-	output = document.createElement("textarea");
-
-output.id = "PreMiD-test-presence-output";
-output.style.display = "none";
-script.id = "PreMiD-test-presence-script";
-script.textContent = `console.log(window.gamePage)`;
-template.append(script, output);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -38,7 +16,6 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, href, hostname } = document.location;
 
-	document.head.append(template.cloneNode(true));
 	switch (hostname) {
 		case "kittensgame.com": {
 			const loadingBar = document.querySelector<HTMLProgressElement>(
@@ -48,9 +25,25 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Loading..";
 				presenceData.smallImageKey = Assets.Loading;
 			} else {
-				// const mainData = w.gamePage;
-				// console.log(mainData);
-				// presenceData.details = `Day ${mainData.day} - Year ${mainData.year} - Season ${mainData.season}`;
+				const mainData = await presence.getPageVariable(
+						"gamePage.calendar.day",
+						"gamePage.calendar.season",
+						"gamePage.calendar.year",
+						"gamePage.calendar.cycle"
+					),
+					advice = document.querySelector<HTMLDivElement>("#advisorsContainer");
+				presenceData.details = `Day ${mainData["gamePage.calendar.day"]} - Season ${mainData["gamePage.calendar.season"]}`;
+				presenceData.state = `Year ${mainData["gamePage.calendar.year"]} - Cycle ${mainData["gamePage.calendar.cycle"]}`;
+
+				if (
+					advice?.textContent &&
+					advice.getAttribute("style").includes("display: block")
+				) {
+					presenceData.smallImageKey = Assets.Advice;
+					presenceData.smallImageText = advice?.textContent;
+				}
+
+				presenceData.buttons = [{ label: "Play Game", url: href }];
 			}
 			break;
 		}
