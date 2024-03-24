@@ -20,6 +20,7 @@ const strategies = new Set([
 		"Tenpai",
 		"Ukeire",
 		"What_would_you_discard",
+		"Dora",
 	]),
 	yaku = new Set([
 		"Menzenchin_tsumohou",
@@ -59,7 +60,8 @@ const strategies = new Set([
 		"Suukantsu",
 		"Tenhou_and_chiihou",
 		"Nagashi_mangan",
-	]);
+	]),
+	games = new Set(["Riichi_City", "Majsoul", "Sega_MJ", "Tenhou.net"]);
 
 /**
  * Applies page details based on the current location.
@@ -148,6 +150,10 @@ export function specialPageHandler(
 				presenceData.details = "Reading about seat winds";
 				break;
 			}
+			case "List_of_mahjong_video_games": {
+				presenceData.details = "Viewing the list of mahjong video games";
+				break;
+			}
 			case "List_of_yaku": {
 				const tables = document.querySelectorAll<HTMLDivElement>(
 					".content-table-wrapper"
@@ -168,6 +174,10 @@ export function specialPageHandler(
 					tmpPresenceData.buttons = [{ label: "View Yaku", url: mainName }];
 					slideshow.addSlide(mainName.textContent, tmpPresenceData, 5e3);
 				}
+				break;
+			}
+			case "Local_yaku": {
+				presenceData.details = "Viewing local yaku";
 				break;
 			}
 			case "Mahjong_equipment": {
@@ -224,6 +234,14 @@ export function specialPageHandler(
 				presenceData.details = "Reading about a yaku";
 				presenceData.state = pageTitle;
 				presenceData.buttons = [{ label: "View Yaku", url: href }];
+				break;
+			}
+		}
+		for (const game of games) {
+			if (firstPath === game) {
+				presenceData.details = "Reading about a mahjong game";
+				presenceData.state = pageTitle;
+				presenceData.buttons = [{ label: "View Game", url: href }];
 				break;
 			}
 		}

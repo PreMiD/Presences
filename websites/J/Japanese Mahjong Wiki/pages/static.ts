@@ -1,3 +1,4 @@
+// MediaWiki static pages
 export const staticPages: Record<string, PresenceData> = {
 	"/Main_Page": {
 		details: "Viewing the main page",
