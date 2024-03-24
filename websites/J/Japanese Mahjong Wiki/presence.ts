@@ -17,6 +17,7 @@ presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
+			name: "Japanese Mahjong Wiki",
 		},
 		{ pathname } = document.location;
 
