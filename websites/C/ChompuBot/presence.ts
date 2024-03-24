@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://chompubot.work/bot.png",
+	Logo = "https://chompubot.work/logo.jpg",
 }
 
 const enum Pages {
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 	const base = document.location.pathname;
 
 	if (/\/dashboard\/guild\/(.*[0-9_].*)\/music-room/gi.test(base)) {
-		let guildName,
+		let username,
 			title,
 			author,
 			playing,
@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 			endTimestamp;
 
 		if (!isPlayer()) {
-			guildName = document.querySelector<HTMLAnchorElement>(
+			username = document.querySelector<HTMLAnchorElement>(
 				"[data-label='player-requester']"
 			).textContent;
 			title = document.querySelector<HTMLAnchorElement>(
@@ -53,23 +53,22 @@ presence.on("UpdateData", async () => {
 				"svg.-player-playing"
 			);
 			pause = document.querySelector<HTMLAnchorElement>("svg.-player-pause");
-
-			(timeStartPlayer = document.querySelectorAll<HTMLElement>(
+			timeStartPlayer = document.querySelector<HTMLElement>(
 				"p.text-small.-player-position-start"
-			)[0].textContent),
-				(timeEndPlayer = document.querySelectorAll<HTMLElement>(
-					"p.text-small.text-foreground\\/50.-player-position-end"
-				)[0].textContent),
-				([StartPlayer, durationPlayer] = [
-					presence.timestampFromFormat(timeStartPlayer),
-					(() => {
-						return presence.timestampFromFormat(timeEndPlayer);
-					})(),
-				]),
-				([startTimestamp, endTimestamp] = presence.getTimestamps(
-					StartPlayer,
-					durationPlayer
-				));
+			).textContent;
+			timeEndPlayer = document.querySelector<HTMLElement>(
+				"p.text-small.text-foreground\\/50.-player-position-end"
+			).textContent;
+			[StartPlayer, durationPlayer] = [
+				presence.timestampFromFormat(timeStartPlayer),
+				(() => {
+					return presence.timestampFromFormat(timeEndPlayer);
+				})(),
+			];
+			[startTimestamp, endTimestamp] = presence.getTimestamps(
+				StartPlayer,
+				durationPlayer
+			);
 		}
 
 		presenceData = {
@@ -98,7 +97,7 @@ presence.on("UpdateData", async () => {
 			presenceData.endTimestamp = endTimestamp;
 			presenceData.buttons = [
 				{
-					label: `Join Player ${guildName}`,
+					label: `Join Player ${username}`,
 					url: `https://chompubot.work${base}`,
 				},
 			];
@@ -115,12 +114,6 @@ presence.on("UpdateData", async () => {
 			smallImageKey: Assets.Reading,
 			smallImageText: "Zzz",
 			startTimestamp: browsingTimestamp,
-			buttons: [
-				{
-					label: "Website",
-					url: "https://chompubot.work/",
-				},
-			],
 		};
 
 		switch (base) {

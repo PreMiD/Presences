@@ -6,7 +6,7 @@
 	},
 	"service": "ChompuBot",
 	"description": {
-		"en": "Chompu is Discord bot music spport stream Joox, TikTok, Distrokid, Spotify, AppleMusic, Soundcloud, Clyp, PornHub and etc. Can req song on website/dashboard [TH]",
+		"en": "Chompu is Discord bot music support stream Joox, TikTok, Distrokid, Spotify, AppleMusic, Soundcloud, Clyp, PornHub and etc. Can req song on website/dashboard",
 		"th": "Chompu คือ บอทดิสคอร์ดที่มาพร้อมด้วยระบบสตรีมเล่นเพลงที่สามารถจัดการหรือเพิ่มคิวเพลงบนเว็บไซต์! รองรับสตรีมเล่นเพลงหลายแพลตฟอร์ม Joox, TikTok, Distrokid, Spotify, AppleMusic, Soundcloud, Clyp, PornHub และอื่นๆอีกมากมาย!"
 	},
 	"url": "chompubot.work",
@@ -14,8 +14,8 @@
 		"*://chompubot.work/*"
 	],
 	"version": "1.0.0",
-	"logo": "https://chompubot.work/bot.png",
-	"thumbnail": "https://chompubot.work/bot.png",
+	"logo": "https://chompubot.work/logo.jpg",
+	"thumbnail": "https://chompubot.work/thumbnail.jpg",
 	"color": "#ffbcff",
 	"category": "music",
 	"tags": [
