@@ -42,9 +42,9 @@
 		"*://myradioenvivo.ar/*",
 		"*://myradioenvivo.mx/*"
 	],
-	"version": "1.0.2",
-	"logo": "https://i.ibb.co/5LsDstd/mic2.png",
-	"thumbnail": "https://ukradiolive.com/public/img/mainbg/bg1v2_1920_1080.webp",
+	"version": "1.0.3",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MyOnlineRadio/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MyOnlineRadio/assets/thumbnail.webp",
 	"color": "#800080",
 	"category": "music",
 	"tags": [

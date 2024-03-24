@@ -12,9 +12,9 @@
 	"matches": [
 		"*://rateyourmusic.com/*"
 	],
-	"version": "1.0.2",
-	"logo": "https://e.snmc.io/3.0/img/logo/sonemic-512.png",
-	"thumbnail": "https://i.imgur.com/0g03U2r.png",
+	"version": "1.0.3",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Rate%20Your%20Music/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Rate%20Your%20Music/assets/thumbnail.png",
 	"color": "#0b1528",
 	"category": "music",
 	"tags": [

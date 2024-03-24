@@ -12,9 +12,9 @@
 	"matches": [
 		"*://meow.camera/*"
 	],
-	"version": "1.0.2",
-	"logo": "https://i.postimg.cc/GhMJx6PB/logo.png",
-	"thumbnail": "https://i.postimg.cc/GhshXyGk/Screenshot-1.jpg",
+	"version": "1.0.3",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/meow.camera/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/meow.camera/assets/thumbnail.jpg",
 	"color": "#000000",
 	"category": "videos",
 	"tags": [
