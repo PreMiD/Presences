@@ -17,12 +17,6 @@ const enum Pages {
 
 let presenceData: PresenceData;
 
-function isPlayer(): boolean {
-	return !!document.querySelector<HTMLAnchorElement>(
-		"p.text-neutral-200.text-xl.text-center.mb-2"
-	);
-}
-
 presence.on("UpdateData", async () => {
 	const base = document.location.pathname;
 
@@ -38,7 +32,13 @@ presence.on("UpdateData", async () => {
 			startTimestamp,
 			endTimestamp;
 
-		if (!isPlayer()) {
+		const status = document.querySelector<HTMLElement>(
+			"div.hidden.-player-status"
+		).textContent;
+		while (status === "loading")
+			await new Promise(resolve => setTimeout(resolve, 250));
+
+		if (status === "true") {
 			username = document.querySelector<HTMLAnchorElement>(
 				"[data-label='player-requester']"
 			).textContent;
@@ -67,28 +67,12 @@ presence.on("UpdateData", async () => {
 				StartPlayer,
 				durationPlayer
 			);
-		}
 
-		presenceData = {
-			details: "No song queue found",
-			state: "In the server...",
-			largeImageKey: document.querySelector<HTMLImageElement>(
-				"[data-label='guild-logo']"
-			).src,
-			smallImageKey: Assets.Reading,
-			smallImageText: "Zzz",
-			startTimestamp: browsingTimestamp,
-			buttons: [
-				{
-					label: "Join Player",
-					url: `https://chompubot.work${base}`,
-				},
-			],
-		};
-
-		if (title) {
 			presenceData.details = title;
 			presenceData.state = author;
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+				"[data-label='guild-logo']"
+			).src;
 			presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
 			presenceData.smallImageText = playing ? "Playing" : "Pause";
 			presenceData.startTimestamp = startTimestamp;
@@ -99,10 +83,26 @@ presence.on("UpdateData", async () => {
 					url: `https://chompubot.work${base}`,
 				},
 			];
+
 			if (!playing) {
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
 			}
+		} else {
+			presenceData.details = "No song queue found";
+			presenceData.state = "In the server...";
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
+				"[data-label='guild-logo']"
+			).src;
+			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageText = "Zzz";
+			presenceData.startTimestamp = browsingTimestamp;
+			presenceData.buttons = [
+				{
+					label: "Join Player",
+					url: `https://chompubot.work${base}`,
+				},
+			];
 		}
 	} else {
 		presenceData = {
