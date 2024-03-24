@@ -2,25 +2,64 @@ import { findNearestAboveElement } from "../util/util";
 
 // Wiki-specific groups of pages
 const strategies = new Set([
-	"Sakigiri",
-	"Suji",
-	"Kabe",
-	"Betaori",
-	"Kawa",
-	"Sashikomi",
-	"Defense",
-	"Tile_efficiency",
-	"Atozuke",
-	"Yaku_compatibility",
-	"Damaten",
-	"Kan",
-	"Machi",
-	"Riichi_strategy",
-	"Shanten",
-	"Tenpai",
-	"Ukeire",
-	"What_would_you_discard",
-]);
+		"Sakigiri",
+		"Suji",
+		"Kabe",
+		"Betaori",
+		"Kawa",
+		"Sashikomi",
+		"Defense",
+		"Tile_efficiency",
+		"Atozuke",
+		"Yaku_compatibility",
+		"Damaten",
+		"Kan",
+		"Machi",
+		"Riichi_strategy",
+		"Shanten",
+		"Tenpai",
+		"Ukeire",
+		"What_would_you_discard",
+	]),
+	yaku = new Set([
+		"Menzenchin_tsumohou",
+		"Riichi",
+		"Ippatsu",
+		"Pinfu",
+		"Iipeikou",
+		"Haitei raoyue and houtei raoyui",
+		"Rinshan_kaihou",
+		"Chankan",
+		"Tanyao",
+		"Yakuhai",
+		"Daburu_riichi",
+		"Chanta",
+		"Sanshouku_doujun",
+		"Ikkitsuukan",
+		"Toitoihou",
+		"Sanankou",
+		"Sanshoku_doukou",
+		"Sankantsu",
+		"Chiitoitsu",
+		"Honroutou",
+		"Shousangen",
+		"Honiisou",
+		"Junchantaiyaochuu",
+		"Ryanpeikou",
+		"Chiniisou",
+		"Kazoe_yakuman",
+		"Kokushi_musou",
+		"Suuankou",
+		"Daisangen",
+		"Suushiihou",
+		"Tsuuiisou",
+		"Chinroutou",
+		"Ryuuiisou",
+		"Chuuren_poutou",
+		"Suukantsu",
+		"Tenhou_and_chiihou",
+		"Nagashi_mangan",
+	]);
 
 /**
  * Applies page details based on the current location.
@@ -177,6 +216,14 @@ export function specialPageHandler(
 				presenceData.details = "Reading about a strategy";
 				presenceData.state = pageTitle;
 				presenceData.buttons = [{ label: "View Strategy", url: href }];
+				break;
+			}
+		}
+		for (const yakuPage of yaku) {
+			if (firstPath === yakuPage) {
+				presenceData.details = "Reading about a yaku";
+				presenceData.state = pageTitle;
+				presenceData.buttons = [{ label: "View Yaku", url: href }];
 				break;
 			}
 		}
