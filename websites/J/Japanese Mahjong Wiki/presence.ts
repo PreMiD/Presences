@@ -13,7 +13,7 @@ const enum Assets {
 	Logo = "https://i.imgur.com/3xMqFwy.png",
 }
 
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
@@ -36,11 +36,9 @@ presence.on("UpdateData", () => {
 		}
 	}
 
-	if (!isStatic) usesSlideshows = specialPageHandler(presenceData, slideshow);
+	if (!isStatic)
+		usesSlideshows = await specialPageHandler(presenceData, slideshow);
 
-	if (usesSlideshows) {
-		presence.setActivity(slideshow);
-	} else if (presenceData.details) {
-		presence.setActivity(presenceData);
-	}
+	if (usesSlideshows) presence.setActivity(slideshow);
+	else if (presenceData.details) presence.setActivity(presenceData);
 });

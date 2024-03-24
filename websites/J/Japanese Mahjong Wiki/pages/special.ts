@@ -1,4 +1,4 @@
-import { findNearestAboveElement } from "../util/util";
+import { findNearestAboveElement, squareImage } from "../util/util";
 
 // Wiki-specific groups of pages
 const strategies = new Set([
@@ -61,9 +61,8 @@ const strategies = new Set([
 		"Tenhou_and_chiihou",
 		"Nagashi_mangan",
 	]),
-	games = new Set(["Riichi_City", "Majsoul", "Sega_MJ", "Tenhou.net"]);
-
-const SLIDESHOW_TIMEOUT = 6e3;
+	games = new Set(["Riichi_City", "Majsoul", "Sega_MJ", "Tenhou.net"]),
+	SLIDESHOW_TIMEOUT = 6e3;
 
 /**
  * Applies page details based on the current location.
@@ -71,10 +70,10 @@ const SLIDESHOW_TIMEOUT = 6e3;
  * @param presenceData
  * @returns Whether the page uses slideshows.
  */
-export function specialPageHandler(
+export async function specialPageHandler(
 	presenceData: PresenceData,
 	slideshow: Slideshow
-): boolean {
+): Promise<boolean> {
 	const { pathname, href, search } = document.location,
 		searchParams = new URLSearchParams(search),
 		pageTitle = document.querySelector<HTMLSpanElement>(".mw-page-title-main");
@@ -124,8 +123,9 @@ export function specialPageHandler(
 			case firstPath.startsWith("File:"): {
 				presenceData.details = "Viewing a file";
 				presenceData.state = pageTitle;
-				presenceData.smallImageKey =
-					document.querySelector<HTMLImageElement>("#file img");
+				presenceData.smallImageKey = await squareImage(
+					document.querySelector<HTMLImageElement>("#file img")
+				);
 				break;
 			}
 			case firstPath.startsWith("Category:"): {
@@ -162,7 +162,7 @@ export function specialPageHandler(
 					const tmpPresenceData: PresenceData = { ...presenceData },
 						characterImage = character.querySelector("img"),
 						characterName = character.querySelector("p > b");
-					tmpPresenceData.smallImageKey = characterImage;
+					tmpPresenceData.smallImageKey = await squareImage(characterImage);
 					tmpPresenceData.smallImageText = characterName.textContent;
 					tmpPresenceData.state = characterName.textContent;
 					slideshow.addSlide(
@@ -187,7 +187,7 @@ export function specialPageHandler(
 					const tmpPresenceData: PresenceData = { ...presenceData },
 						characterImage = character.querySelector("img"),
 						characterName = character.querySelector("p > b");
-					tmpPresenceData.smallImageKey = characterImage;
+					tmpPresenceData.smallImageKey = await squareImage(characterImage);
 					tmpPresenceData.smallImageText = characterName.textContent;
 					tmpPresenceData.state = characterName.textContent;
 					slideshow.addSlide(
@@ -248,9 +248,9 @@ export function specialPageHandler(
 						descriptions = table
 							.querySelector<HTMLTableRowElement>("tbody > tr + tr")
 							.querySelectorAll<HTMLTableCellElement>("td");
-					for (let i = 0; i < images.length; i++) {
+					for (const [i, image] of images.entries()) {
 						const tmpPresenceData: PresenceData = { ...presenceData };
-						tmpPresenceData.smallImageKey = images[i];
+						tmpPresenceData.smallImageKey = await squareImage(image);
 						tmpPresenceData.smallImageText = descriptions[i];
 						tmpPresenceData.state = sectionTitle;
 						slideshow.addSlide(
