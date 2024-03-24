@@ -12,7 +12,7 @@
 	"matches": [
 		"*://zenmarket.jp/*"
 	],
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Z/ZenMarket/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Z/ZenMarket/assets/thumbnail.jpg",
 	"color": "#42749A",
