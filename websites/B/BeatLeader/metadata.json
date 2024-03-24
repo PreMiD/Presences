@@ -21,7 +21,7 @@
 		"*://*.beatleader.xyz/*",
 		"*://*.beatleader.net/*"
 	],
-	"version": "1.8.1",
+	"version": "1.8.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/thumbnail.png",
 	"color": "#c81c9f",

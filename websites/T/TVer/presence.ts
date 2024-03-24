@@ -36,8 +36,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			name: "Tver",
 			type: ActivityType.Watching,
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/T/TVer/assets/logo.png",
+			largeImageKey: "https://i.imgur.com/rcCekWy.png",
 			startTimestamp: browsingTimestamp,
 		},
 		[

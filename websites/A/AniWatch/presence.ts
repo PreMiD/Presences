@@ -11,7 +11,7 @@ let data: {
 
 const enum Assets {
 	AniWatchLogo = "https://cdn.rcd.gg/PreMiD/websites/A/AniWatch/assets/0.png",
-	HiAnimeLogo = "https://cdn.rcd.gg/PreMiD/websites/A/AniWatch/assets/3.png",
+	HiAnimeLogo = "https://i.imgur.com/a9gT2wg.png",
 	Settings = "https://cdn.rcd.gg/PreMiD/websites/A/AniWatch/assets/1.png",
 	Notifications = "https://cdn.rcd.gg/PreMiD/websites/A/AniWatch/assets/2.png",
 }

@@ -8,22 +8,12 @@
 	"description": {
 		"en": "A project towards a universal library. By this art you may contemplate the variation of the 23 letters."
 	},
-	"url": [
-		"libraryofbabel.info",
-		"www.libraryofbabel.info"
-	],
-	"matches": [
-		"*://libraryofbabel.info/*",
-		"*://www.libraryofbabel.info/*"
-	],
-	"version": "1.0.2",
-	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/Library%20of%20Babel/assets/logo.png",
-	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Library%20of%20Babel/assets/thumbnail.png",
+	"url": ["libraryofbabel.info", "www.libraryofbabel.info"],
+	"matches": ["*://libraryofbabel.info/*", "*://www.libraryofbabel.info/*"],
+	"version": "1.0.3",
+	"logo": "https://i.imgur.com/RewxZBr.png",
+	"thumbnail": "https://i.imgur.com/Y29fvYy.png",
 	"color": "#808080",
 	"category": "other",
-	"tags": [
-		"library",
-		"libraryofbabbel",
-		"libraryofbabel"
-	]
+	"tags": ["library", "libraryofbabbel", "libraryofbabel"]
 }
