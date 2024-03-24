@@ -1,6 +1,6 @@
 const presence = new Presence({
-		clientId: "1219713910165209169",
-	}),
+	clientId: "1219713910165209169",
+}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
@@ -97,6 +97,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Zzz";
 			presenceData.startTimestamp = browsingTimestamp;
+			delete presenceData.endTimestamp;
 			presenceData.buttons = [
 				{
 					label: "Join Player",
