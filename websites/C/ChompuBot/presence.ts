@@ -24,12 +24,10 @@ presence.on("UpdateData", async () => {
 		let username,
 			title,
 			author,
-
 			playing,
 			timeStartPlayer,
 			timeEndPlayer,
-			StartPlayer,
-
+			startPlayer,
 			durationPlayer,
 			startTimestamp,
 			endTimestamp;
@@ -59,14 +57,14 @@ presence.on("UpdateData", async () => {
 			timeEndPlayer = document.querySelector<HTMLElement>(
 				"p.text-small.text-foreground\\/50.-player-position-end"
 			).textContent;
-			[StartPlayer, durationPlayer] = [
+			[startPlayer, durationPlayer] = [
 				presence.timestampFromFormat(timeStartPlayer),
 				(() => {
 					return presence.timestampFromFormat(timeEndPlayer);
 				})(),
 			];
 			[startTimestamp, endTimestamp] = presence.getTimestamps(
-				StartPlayer,
+				startPlayer,
 				durationPlayer
 			);
 
