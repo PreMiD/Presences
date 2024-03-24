@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location;
-		switch (pathname) {
+	switch (pathname) {
 		case "/": {
 			presenceData.details = "Browsing the Homepage";
 			break;
