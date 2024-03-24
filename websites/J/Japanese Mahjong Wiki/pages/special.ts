@@ -63,6 +63,8 @@ const strategies = new Set([
 	]),
 	games = new Set(["Riichi_City", "Majsoul", "Sega_MJ", "Tenhou.net"]);
 
+const SLIDESHOW_TIMEOUT = 6e3;
+
 /**
  * Applies page details based on the current location.
  *
@@ -85,8 +87,8 @@ export function specialPageHandler(
 		presenceData.state = document.querySelector<HTMLInputElement>(
 			"#searchText > input"
 		)?.value;
-	} else if (searchParams.has("action")) {
-		const action = searchParams.get("action");
+	} else if (searchParams.has("action") || searchParams.has("veaction")) {
+		const action = searchParams.get("action") ?? searchParams.get("veaction");
 		switch (action) {
 			case "edit": {
 				presenceData.details = "Editing a page";
@@ -105,7 +107,7 @@ export function specialPageHandler(
 		// Common WikiMedia pages
 		switch (true) {
 			case firstPath.startsWith("Talk:"): {
-				presenceData.details = `Viewing the talk page for '${pageTitle}'`;
+				presenceData.details = `Viewing the talk page for '${pageTitle.textContent}'`;
 				break;
 			}
 			case firstPath.startsWith("User:"): {
@@ -151,8 +153,9 @@ export function specialPageHandler(
 				break;
 			}
 			case "List_of_Mahjong_Soul_characters": {
-				const characters =
-					document.querySelectorAll<HTMLLIElement>("h2 + ul > li");
+				const characters = document.querySelectorAll<HTMLLIElement>(
+					"h2 + ul[style] > li"
+				);
 				presenceData.details = "Viewing Mahjong Soul characters";
 				usesSlideshows = true;
 				for (const character of characters) {
@@ -162,7 +165,11 @@ export function specialPageHandler(
 					tmpPresenceData.smallImageKey = characterImage;
 					tmpPresenceData.smallImageText = characterName.textContent;
 					tmpPresenceData.state = characterName.textContent;
-					slideshow.addSlide(characterName.textContent, tmpPresenceData, 5e3);
+					slideshow.addSlide(
+						characterName.textContent,
+						tmpPresenceData,
+						SLIDESHOW_TIMEOUT
+					);
 				}
 				break;
 			}
@@ -172,7 +179,7 @@ export function specialPageHandler(
 			}
 			case "List_of_Riichi_City_characters": {
 				const characters = document.querySelectorAll<HTMLLIElement>(
-					"h2 + ul > li, h3 + ul > li"
+					".riichi-city-characters > li"
 				);
 				presenceData.details = "Viewing Riichi City characters";
 				usesSlideshows = true;
@@ -183,7 +190,11 @@ export function specialPageHandler(
 					tmpPresenceData.smallImageKey = characterImage;
 					tmpPresenceData.smallImageText = characterName.textContent;
 					tmpPresenceData.state = characterName.textContent;
-					slideshow.addSlide(characterName.textContent, tmpPresenceData, 5e3);
+					slideshow.addSlide(
+						characterName.textContent,
+						tmpPresenceData,
+						SLIDESHOW_TIMEOUT
+					);
 				}
 				break;
 			}
@@ -200,12 +211,19 @@ export function specialPageHandler(
 						closed = table.querySelector("dd + dd"),
 						description =
 							table.querySelector<HTMLTableCellElement>("td:last-child"),
-						sectionHeader = findNearestAboveElement(table, "h2");
+						sectionHeader = findNearestAboveElement(table, "h2").querySelector(
+							".mw-headline"
+						);
+					if (!table.querySelector(".wikitable")) continue;
 					tmpPresenceData.state = `${mainName.textContent} (${englishName.textContent}) - ${sectionHeader.textContent}`;
 					tmpPresenceData.smallImageKey = Assets.Question;
 					tmpPresenceData.smallImageText = `${closed.textContent} - ${description.textContent}`;
 					tmpPresenceData.buttons = [{ label: "View Yaku", url: mainName }];
-					slideshow.addSlide(mainName.textContent, tmpPresenceData, 5e3);
+					slideshow.addSlide(
+						mainName.textContent,
+						tmpPresenceData,
+						SLIDESHOW_TIMEOUT
+					);
 				}
 				break;
 			}
@@ -238,7 +256,7 @@ export function specialPageHandler(
 						slideshow.addSlide(
 							descriptions[i].textContent,
 							tmpPresenceData,
-							5e3
+							SLIDESHOW_TIMEOUT
 						);
 					}
 				}
