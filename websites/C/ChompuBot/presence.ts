@@ -24,10 +24,12 @@ presence.on("UpdateData", async () => {
 		let username,
 			title,
 			author,
+
 			playing,
 			timeStartPlayer,
 			timeEndPlayer,
 			StartPlayer,
+
 			durationPlayer,
 			startTimestamp,
 			endTimestamp;
@@ -80,7 +82,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: `Join Player ${username}`,
-					url: `https://chompubot.work${base}`,
+					url: document.location.href,
 				},
 			];
 
@@ -101,7 +103,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: "Join Player",
-					url: `https://chompubot.work${base}`,
+					url: document.location.href,
 				},
 			];
 		}
