@@ -1,3 +1,27 @@
+import { findNearestAboveElement } from "../util/util";
+
+// Wiki-specific groups of pages
+const strategies = new Set([
+	"Sakigiri",
+	"Suji",
+	"Kabe",
+	"Betaori",
+	"Kawa",
+	"Sashikomi",
+	"Defense",
+	"Tile_efficiency",
+	"Atozuke",
+	"Yaku_compatibility",
+	"Damaten",
+	"Kan",
+	"Machi",
+	"Riichi_strategy",
+	"Shanten",
+	"Tenpai",
+	"Ukeire",
+	"What_would_you_discard",
+]);
+
 /**
  * Applies page details based on the current location.
  *
@@ -78,13 +102,35 @@ export function specialPageHandler(
 				);
 				break;
 			}
-			default: {
-				presenceData.details = "Viewing a page";
-				presenceData.state = pageTitle;
-			}
 		}
 		// Wiki-specific pages
 		switch (firstPath) {
+			case "Jikaze": {
+				presenceData.details = "Reading about seat winds";
+				break;
+			}
+			case "List_of_yaku": {
+				const tables = document.querySelectorAll<HTMLDivElement>(
+					".content-table-wrapper"
+				);
+				presenceData.details = "Viewing list of yaku";
+				usesSlideshows = true;
+				for (const table of tables) {
+					const tmpPresenceData: PresenceData = { ...presenceData },
+						mainName = table.querySelector("a"),
+						englishName = table.querySelector("dd dl"),
+						closed = table.querySelector("dd + dd"),
+						description =
+							table.querySelector<HTMLTableCellElement>("td:last-child"),
+						sectionHeader = findNearestAboveElement(table, "h2");
+					tmpPresenceData.state = `${mainName.textContent} (${englishName.textContent}) - ${sectionHeader.textContent}`;
+					tmpPresenceData.smallImageKey = Assets.Question;
+					tmpPresenceData.smallImageText = `${closed.textContent} - ${description.textContent}`;
+					tmpPresenceData.buttons = [{ label: "View Yaku", url: mainName }];
+					slideshow.addSlide(mainName.textContent, tmpPresenceData, 5e3);
+				}
+				break;
+			}
 			case "Mahjong_equipment": {
 				const tables = document.querySelectorAll<HTMLDivElement>(
 					".content-table-wrapper"
@@ -116,10 +162,28 @@ export function specialPageHandler(
 				}
 				break;
 			}
-			case "Rules_overview": {
-				presenceData.details = "Reading about the rules";
+			case "Mentsu": {
+				presenceData.details = "Reading about tile groups";
 				break;
 			}
+			case "Rules_overview": {
+				presenceData.details = "Reading the rules";
+				break;
+			}
+		}
+		// Wiki-specific groups of pages
+		for (const strategy of strategies) {
+			if (firstPath === strategy) {
+				presenceData.details = "Reading about a strategy";
+				presenceData.state = pageTitle;
+				presenceData.buttons = [{ label: "View Strategy", url: href }];
+				break;
+			}
+		}
+
+		if (!presenceData.details) {
+			presenceData.details = "Viewing a page";
+			presenceData.state = pageTitle;
 		}
 	}
 	return usesSlideshows;
