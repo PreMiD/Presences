@@ -14,7 +14,7 @@
 	"matches": [
 		"*://animeyuzu.com/*"
 	],
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"logo": "https://i.imgur.com/8PVGg8d.png",
 	"thumbnail": "https://i.imgur.com/EpEqmNI.png",
 	"color": "#e67e22",
