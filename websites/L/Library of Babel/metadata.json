@@ -10,7 +10,7 @@
 	},
 	"url": ["libraryofbabel.info", "www.libraryofbabel.info"],
 	"matches": ["*://libraryofbabel.info/*", "*://www.libraryofbabel.info/*"],
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://i.imgur.com/RewxZBr.png",
 	"thumbnail": "https://i.imgur.com/Y29fvYy.png",
 	"color": "#808080",
