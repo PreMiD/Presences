@@ -23,13 +23,6 @@ function isPlayer(): boolean {
 	);
 }
 
-function isPlaying(): boolean {
-	return !!document.querySelector<HTMLAnchorElement>("svg.-player-playing");
-}
-function isPause(): boolean {
-	return !!document.querySelector<HTMLAnchorElement>("svg.-player-pause");
-}
-
 presence.on("UpdateData", async () => {
 	const base = document.location.pathname;
 
@@ -37,6 +30,7 @@ presence.on("UpdateData", async () => {
 		let username,
 			title,
 			author,
+			playing,
 			timeStartPlayer,
 			timeEndPlayer,
 			StartPlayer,
@@ -53,6 +47,9 @@ presence.on("UpdateData", async () => {
 			);
 			author = document.querySelector<HTMLAnchorElement>(
 				"p.text-small.mt-1.text-foreground\\/80.-player-author"
+			);
+			playing = document.querySelector<HTMLAnchorElement>(
+				"svg.-player-playing"
 			);
 			timeStartPlayer = document.querySelector<HTMLElement>(
 				"p.text-small.-player-position-start"
@@ -92,8 +89,8 @@ presence.on("UpdateData", async () => {
 		if (title) {
 			presenceData.details = title;
 			presenceData.state = author;
-			presenceData.smallImageKey = isPlaying() ? Assets.Play : Assets.Pause;
-			presenceData.smallImageText = isPlaying() ? "Playing" : "Pause";
+			presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
+			presenceData.smallImageText = playing ? "Playing" : "Pause";
 			presenceData.startTimestamp = startTimestamp;
 			presenceData.endTimestamp = endTimestamp;
 			presenceData.buttons = [
@@ -102,7 +99,7 @@ presence.on("UpdateData", async () => {
 					url: `https://chompubot.work${base}`,
 				},
 			];
-			if (isPause()) {
+			if (!playing) {
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
 			}
