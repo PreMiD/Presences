@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/I/Incels.is/assets/logo.png",
+	Logo = "https://incels.is/logo/512x512.png",
 }
 
 presence.on("UpdateData", async () => {
