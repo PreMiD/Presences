@@ -150,8 +150,41 @@ export function specialPageHandler(
 				presenceData.details = "Reading about seat winds";
 				break;
 			}
+			case "List_of_Mahjong_Soul_characters": {
+				const characters =
+					document.querySelectorAll<HTMLLIElement>("h2 + ul > li");
+				presenceData.details = "Viewing Mahjong Soul characters";
+				usesSlideshows = true;
+				for (const character of characters) {
+					const tmpPresenceData: PresenceData = { ...presenceData },
+						characterImage = character.querySelector("img"),
+						characterName = character.querySelector("p > b");
+					tmpPresenceData.smallImageKey = characterImage;
+					tmpPresenceData.smallImageText = characterName.textContent;
+					tmpPresenceData.state = characterName.textContent;
+					slideshow.addSlide(characterName.textContent, tmpPresenceData, 5e3);
+				}
+				break;
+			}
 			case "List_of_mahjong_video_games": {
 				presenceData.details = "Viewing the list of mahjong video games";
+				break;
+			}
+			case "List_of_Riichi_City_characters": {
+				const characters = document.querySelectorAll<HTMLLIElement>(
+					"h2 + ul > li, h3 + ul > li"
+				);
+				presenceData.details = "Viewing Riichi City characters";
+				usesSlideshows = true;
+				for (const character of characters) {
+					const tmpPresenceData: PresenceData = { ...presenceData },
+						characterImage = character.querySelector("img"),
+						characterName = character.querySelector("p > b");
+					tmpPresenceData.smallImageKey = characterImage;
+					tmpPresenceData.smallImageText = characterName.textContent;
+					tmpPresenceData.state = characterName.textContent;
+					slideshow.addSlide(characterName.textContent, tmpPresenceData, 5e3);
+				}
 				break;
 			}
 			case "List_of_yaku": {
