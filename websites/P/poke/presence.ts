@@ -2,24 +2,15 @@ const presence = new Presence({
   clientId: "1188371319776100463",
 });
 
-function getTime() {
-const timeElement = document.querySelector("video");
-const currentTime = timeElement.currentTime;
 
-// Convert currentTime to minutes and seconds
-const seconds = Math.floor(currentTime % 60);
-const minutes = Math.floor((currentTime / 60) % 60);
-const hours = Math.floor(currentTime / 3600);
+function getEndTimestamp() {
+  const timeElement = document.querySelector("video");
+  const [_startTimestamp, endTimestamp] = presence.getTimestamps(
+    Math.floor(timeElement.currentTime),
+    Math.floor(timeElement.duration)
+  );
 
-// Format the currentTime
-let formattedCurrentTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-// Add hours if they exist
-if (hours > 0) {
-  formattedCurrentTime = `${hours.toString().padStart(2, '0')}:${formattedCurrentTime}`;
-}
-  
-return formattedCurrentTime;
+  return endTimestamp;
 }
 
 presence.on("UpdateData", async () => {
@@ -65,8 +56,9 @@ presence.on("UpdateData", async () => {
       const videoPlayer = document.querySelector("video");
 
       if (videoPlayer && !videoPlayer.paused) {
-        presenceData.startTimestamp = getTime();
+        presenceData.endTimestamp = getEndTimestamp();
       } 
+      break;
 
     case "channel":
       const nameElement = document.querySelector(".name p");
