@@ -11,12 +11,12 @@
 	"url": [
 		"poketube.fun",
 		"poke.ggtyler.dev",
-		"poke.vern.cc",
+		"poke.vern.cc"
 	],  
 	"matches": [
         "*://poketube.fun/*",
         "*://poke.vern.cc/*",
-        "*://poke.ggtyler.dev/*",
+        "*://poke.ggtyler.dev/*"
         ],    
 	"version": "1.0.0",
 	"logo": "https://autumn.revolt.chat/attachments/-iPmhfbzO10ZNQiFDzWd0bCPRkKAaLaGyZ3x2ofu8s",
