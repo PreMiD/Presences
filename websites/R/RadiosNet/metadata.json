@@ -10,6 +10,9 @@
 		"pt_BR": "O agregador de rádios mais famoso da internet brasileira, em atividade desde 1997."
 	},
 	"url": "radios.com.br",
+	"matches": [
+		"*://radios.com.br/*"
+	],
 	"version": "1.0.0",
 	"logo": "https://static.radios.com.br/img/logo-radiosnet-512-solid.png",
 	"thumbnail": "https://suporte.obacast.com.br/wp-content/uploads/2019/07/banner_radios_net.png",
