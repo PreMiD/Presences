@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "1221866611611402363",
-});
-const browsingTimestamp = Math.floor(Date.now() / 1000);
+}),
+browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum AssetsRadios {
     Logo = "https://static.radios.com.br/img/logo-radiosnet-512-solid.png",
@@ -94,9 +94,8 @@ presence.on("UpdateData", async () => {
         document.location.href.includes("http://play.radios.com.br/")
     ) {
         const station = document
-            .querySelector(".info")?.innerHTML.split("<h1>")[1].split("</h1>")[0];
-
-        const state = document
+            .querySelector(".info")?.innerHTML.split("<h1>")[1].split("</h1>")[0],
+		state = document
             .querySelector(".info")?.innerHTML.split("<h1>")[1].split("</h1>")[1].split("<h2>")[1].split("</h2>")[0];
 
         try {
