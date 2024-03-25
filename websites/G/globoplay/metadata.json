@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "fror",
 		"id": "515668127829458945"
@@ -21,7 +21,7 @@
 		"pt_BR": "Assista aos melhores vídeos de entretenimento, esportes ao vivo, jornalismo e muito mais quando e onde quiser."
 	},
 	"url": "globoplay.globo.com",
-	"version": "2.2.6",
+	"version": "2.2.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/globoplay/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/globoplay/assets/thumbnail.png",
 	"color": "#ED1A37",

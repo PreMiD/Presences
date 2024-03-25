@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Callum",
 		"id": "506899274748133376"
@@ -13,7 +13,7 @@
 	},
 	"url": "bladefm.com.au",
 	"regExp": "([a-z0-9-]+[.])*(bladefm[.]com[.]au)[/]",
-	"version": "1.0.17",
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BladeFM/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BladeFM/assets/thumbnail.png",
 	"color": "#203391",

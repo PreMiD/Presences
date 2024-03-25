@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Slowlife",
 		"id": "374905512661221377"
@@ -16,7 +16,7 @@
 		"vi_VN": "Chúng tôi đem cho bạn các dịch vụ nghe nhạc yêu thích để tham gia lắng nghe, theo dõi và chia sẻ để kết nối với thế giới âm nhạc."
 	},
 	"url": "www.last.fm",
-	"version": "1.1.11",
+	"version": "1.1.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/Last.fm/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Last.fm/assets/thumbnail.png",
 	"color": "#E31B23",

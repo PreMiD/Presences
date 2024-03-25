@@ -3,14 +3,22 @@ const presence = new Presence({
 	}),
 	time = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Riot%20Games/assets/logo.png",
+	Valorant = "https://cdn.rcd.gg/PreMiD/websites/R/Riot%20Games/assets/0.png",
+	Lol = "https://cdn.rcd.gg/PreMiD/websites/R/Riot%20Games/assets/1.png",
+	Tft = "https://cdn.rcd.gg/PreMiD/websites/R/Riot%20Games/assets/2.png",
+	Wildrift = "https://cdn.rcd.gg/PreMiD/websites/R/Riot%20Games/assets/3.png",
+	Lor = "https://cdn.rcd.gg/PreMiD/websites/R/Riot%20Games/assets/4.png",
+}
+
 presence.on("UpdateData", async () => {
 	const path = location.href
 		.replace(/\/?$/, "/")
 		.replace(`https://${location.hostname}`, "")
 		.replace("?", "/");
 	let presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/R/Riot%20Games/assets/logo.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: time,
 	};
 	if (location.hostname.includes("riotgames.com")) {
@@ -55,7 +63,7 @@ presence.on("UpdateData", async () => {
 		};
 		for (const [k, v] of Object.entries(statics)) {
 			if (path.match(k)) {
-				presenceData.largeImageKey = "riot_games";
+				presenceData.largeImageKey = Assets.Logo;
 				presenceData = { ...presenceData, ...v };
 			}
 		}
@@ -83,7 +91,7 @@ presence.on("UpdateData", async () => {
 				};
 				for (const [k, v] of Object.entries(statics)) {
 					if (path.match(k)) {
-						presenceData.largeImageKey = "tft_t";
+						presenceData.largeImageKey = Assets.Tft;
 						presenceData = { ...presenceData, ...v };
 					}
 				}
@@ -116,7 +124,7 @@ presence.on("UpdateData", async () => {
 				};
 				for (const [k, v] of Object.entries(statics)) {
 					if (path.match(k)) {
-						presenceData.largeImageKey = "wildrift_w";
+						presenceData.largeImageKey = Assets.Wildrift;
 						presenceData = { ...presenceData, ...v };
 					}
 				}
@@ -165,7 +173,7 @@ presence.on("UpdateData", async () => {
 				};
 				for (const [k, v] of Object.entries(statics)) {
 					if (path.match(k)) {
-						presenceData.largeImageKey = "valorant_v";
+						presenceData.largeImageKey = Assets.Valorant;
 						presenceData = { ...presenceData, ...v };
 					}
 				}
@@ -247,7 +255,7 @@ presence.on("UpdateData", async () => {
 					};
 					for (const [k, v] of Object.entries(statics)) {
 						if (path.match(k)) {
-							presenceData.largeImageKey = "lol_l";
+							presenceData.largeImageKey = Assets.Lol;
 							presenceData = { ...presenceData, ...v };
 						}
 					}
@@ -273,7 +281,7 @@ presence.on("UpdateData", async () => {
 					};
 					for (const [k, v] of Object.entries(statics)) {
 						if (path.match(k)) {
-							presenceData.largeImageKey = "lor_r";
+							presenceData.largeImageKey = Assets.Lor;
 							presenceData = { ...presenceData, ...v };
 						}
 					}

@@ -185,7 +185,8 @@ presence.on("UpdateData", async () => {
 								presenceData.state = `${
 									document.querySelector<HTMLHeadingElement>("h1").textContent
 								}`;
-								presenceData.smallImageKey = "user";
+								presenceData.smallImageKey =
+									"https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/0.png";
 								presenceData.smallImageText = `${
 									document.querySelector<HTMLDivElement>(
 										"#userDetails > div > div > div:nth-child(3) > div"

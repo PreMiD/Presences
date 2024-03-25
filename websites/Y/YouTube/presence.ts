@@ -1,12 +1,10 @@
 import youtubeOldResolver from "./video_sources/old";
-import youtubeShortsResolver, {
-	cacheShortData,
-	getCache as getShortsCache,
-} from "./video_sources/shorts";
+import youtubeShortsResolver from "./video_sources/shorts";
 import youtubeEmbedResolver from "./video_sources/embed";
 import youtubeMoviesResolver from "./video_sources/movies";
 import youtubeTVResolver from "./video_sources/tv";
 import youtubeResolver from "./video_sources/default";
+import youtubeApiResolver from "./video_sources/api";
 import {
 	Resolver,
 	adjustTimeError,
@@ -14,7 +12,9 @@ import {
 	strings,
 	getSetting,
 	checkStringLanguage,
+	getThumbnail,
 } from "./util";
+import { pvPrivacyUI } from "./util/pvPrivacyUI";
 
 const browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -34,12 +34,16 @@ const nullResolver: Resolver = {
 	isActive: () => true,
 	getTitle: () => document.title,
 	getUploader: () => "",
+	getChannelURL: () => "",
+	getVideoID: () => "",
 };
 
 presence.on("UpdateData", async () => {
 	const [
 			newLang,
 			privacy,
+			privacyTtl,
+			privacyButtonShown,
 			time,
 			vidDetail,
 			vidState,
@@ -49,6 +53,8 @@ presence.on("UpdateData", async () => {
 		] = [
 			getSetting<string>("lang", "en"),
 			getSetting<boolean>("privacy", true),
+			getSetting<number>("privacy-ttl", 1),
+			getSetting<boolean>("privacy-shown", true),
 			getSetting<boolean>("time", true),
 			getSetting<string>("vidDetail", "%title%"),
 			getSetting<string>("vidState", "%uploader%"),
@@ -68,19 +74,16 @@ presence.on("UpdateData", async () => {
 
 	if (video) {
 		const resolver = [
-			youtubeEmbedResolver,
-			youtubeShortsResolver,
-			youtubeOldResolver,
-			youtubeTVResolver,
-			youtubeResolver,
-			youtubeMoviesResolver,
-			nullResolver,
-		].find(resolver => resolver.isActive());
-
-		if (resolver === youtubeShortsResolver)
-			await cacheShortData(hostname, pathname.split("/shorts/")[1]);
-
-		const title = resolver.getTitle(),
+				youtubeEmbedResolver,
+				youtubeShortsResolver,
+				youtubeOldResolver,
+				youtubeTVResolver,
+				youtubeResolver,
+				youtubeMoviesResolver,
+				youtubeApiResolver,
+				nullResolver,
+			].find(resolver => resolver.isActive()),
+			title = resolver.getTitle(),
 			uploaderName = resolver.getUploader();
 
 		let pfp: string;
@@ -128,11 +131,9 @@ presence.on("UpdateData", async () => {
 				unlistedBadgeElement &&
 				unlistedPathElement?.getAttribute("d") ===
 					unlistedBadgeElement?.getAttribute("d"),
-			videoId =
-				document
-					.querySelector("#page-manager > ytd-watch-flexy")
-					?.getAttribute("video-id") ?? pathname.split("/shorts/")[1],
+			videoId = resolver.getVideoID(),
 			presenceData: PresenceData = {
+				type: ActivityType.Watching,
 				details: vidDetail
 					.replace("%title%", title.trim())
 					.replace("%uploader%", uploaderName.trim())
@@ -147,7 +148,7 @@ presence.on("UpdateData", async () => {
 					unlistedVideo || logo === LogoMode.YouTubeLogo || pfp === ""
 						? YouTubeAssets.Logo
 						: logo === LogoMode.Thumbnail
-						? `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`
+						? await getThumbnail(videoId)
 						: pfp,
 				smallImageKey: video.paused
 					? Assets.Pause
@@ -182,11 +183,31 @@ presence.on("UpdateData", async () => {
 			}
 		}
 
+		let perVideoPrivacy = privacy;
+		if (resolver === youtubeResolver) {
+			if (privacyButtonShown) {
+				perVideoPrivacy = pvPrivacyUI(
+					privacy,
+					new URLSearchParams(search).get("v"),
+					privacyTtl
+				);
+			} else {
+				const enablePrivacyElement =
+					document.querySelector("#pmdEnablePrivacy");
+
+				if (enablePrivacyElement) {
+					enablePrivacyElement.remove();
+					document.querySelector("#pmdEnablePrivacyTooltip").remove();
+				}
+			}
+		}
+
 		// Update title to indicate when an ad is being played
 		if (document.querySelector(".ytp-ad-player-overlay")) {
 			presenceData.details = strings.ad;
 			delete presenceData.state;
-		} else if (privacy) {
+		} else if (perVideoPrivacy) {
+			//defaults to privacy setting, but allows it to be overwritten
 			if (live) presenceData.details = strings.watchLive;
 			else presenceData.details = strings.watchVid;
 
@@ -204,11 +225,7 @@ presence.on("UpdateData", async () => {
 				},
 				{
 					label: strings.viewChannelButton,
-					url:
-						getShortsCache()?.channelURL ??
-						document.querySelector<HTMLLinkElement>(
-							"#top-row ytd-video-owner-renderer > a"
-						)?.href,
+					url: resolver.getChannelURL(),
 				},
 			];
 		}
@@ -230,6 +247,7 @@ presence.on("UpdateData", async () => {
 		const presenceData: PresenceData = {
 			largeImageKey: YouTubeAssets.Logo,
 			startTimestamp: browsingTimestamp,
+			type: ActivityType.Watching,
 		};
 		let searching = false;
 

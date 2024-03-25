@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Dragonism",
 		"id": "694943372720341045"
@@ -15,7 +15,7 @@
 		"blog.brick-hill.com",
 		"api.brick-hill.com"
 	],
-	"version": "1.0.20",
+	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Brick%20Hill/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Brick%20Hill/assets/thumbnail.png",
 	"color": "#00A9FE",

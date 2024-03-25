@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData & {
 			partySize?: number;
 			partyMax?: number;
-		} = { startTimestamp: browsingTimestamp },
+		} = { startTimestamp: browsingTimestamp, type: ActivityType.Watching },
 		video = document.querySelector<HTMLVideoElement>("video");
 
 	if (oldLang !== newLang || !strings) {

@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.details = "Watching live match:";
 			presenceData.state = `${title.textContent} vs. ${user.textContent}`;
-			presenceData.smallImageKey = "live";
+			presenceData.smallImageKey = Assets.Live;
 		} else if (document.location.pathname.includes("/fantasy/")) {
 			presenceData.details = "Viewing fantasy of:";
 			title = document.querySelector(

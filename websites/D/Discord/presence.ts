@@ -77,6 +77,12 @@ let browsingTimestamp = Math.floor(Date.now() / 1000),
 	strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
+const enum Assets {
+	DiscordBlack = "https://cdn.rcd.gg/PreMiD/websites/D/Discord/assets/0.png",
+	Discord = "https://cdn.rcd.gg/PreMiD/websites/D/Discord/assets/1.png",
+	DiscordWhite = "https://cdn.rcd.gg/PreMiD/websites/D/Discord/assets/2.png",
+}
+
 presence.on("UpdateData", async () => {
 	const [
 		showBrowsing,
@@ -100,7 +106,8 @@ presence.on("UpdateData", async () => {
 
 	let presenceData: PresenceData = {
 		largeImageKey:
-			["discordwhite", "discord", "discordblack"][logo] || "discordwhite",
+			[Assets.DiscordWhite, Assets.Discord, Assets.DiscordBlack][logo] ||
+			Assets.DiscordWhite,
 	};
 
 	if (document.location.href !== prevUrl) {
@@ -185,7 +192,7 @@ presence.on("UpdateData", async () => {
 									.split("{0}")[1]
 									?.replace("{1}", serverChannel)
 									.replace("{2}", serverServerName),
-						smallImageKey: serverTyping ? "writing" : "reading",
+						smallImageKey: serverTyping ? Assets.Writing : Assets.Reading,
 						smallImageText: serverTyping ? strings.writing : strings.reading,
 					},
 					"/channels/@me/": {
@@ -234,7 +241,7 @@ presence.on("UpdateData", async () => {
 							: strings.dmReading
 									.split("{0}")[1]
 									?.replace("{1}", dmsUserGroupName),
-						smallImageKey: dmsTyping ? "writing" : "reading",
+						smallImageKey: dmsTyping ? Assets.Writing : Assets.Reading,
 						smallImageText: dmsTyping ? strings.writing : strings.reading,
 					},
 					"/invite/(\\w*\\d*)/": {
@@ -254,7 +261,7 @@ presence.on("UpdateData", async () => {
 							: strings.inviteServer
 									.split("{0}")[1]
 									?.replace("{1}", document.title),
-						smallImageKey: "reading",
+						smallImageKey: Assets.Reading,
 						// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 						//@ts-expect-error
 						buttons: showInvites
@@ -368,7 +375,7 @@ presence.on("UpdateData", async () => {
 								c.className?.includes("appDetails")
 							)?.textContent
 						),
-						smallImageKey: "writing",
+						smallImageKey: Assets.Writing,
 					},
 					"/developers/teams/": {
 						details: strings.portal,
@@ -380,7 +387,7 @@ presence.on("UpdateData", async () => {
 							"{0}",
 							document.querySelector("div.Select-value")?.textContent
 						),
-						smallImageKey: "writing",
+						smallImageKey: Assets.Writing,
 					},
 					"/developers/servers/": {
 						details: strings.portal,
@@ -394,12 +401,12 @@ presence.on("UpdateData", async () => {
 								c.className.includes("itemName")
 							)?.textContent
 						),
-						smallImageKey: "reading",
+						smallImageKey: Assets.Reading,
 					},
 					"/developers/docs/": {
 						details: strings.portal,
 						state: strings.docs,
-						smallImageKey: "reading",
+						smallImageKey: Assets.Reading,
 						smallImageText: strings.reading,
 					},
 				};
@@ -588,7 +595,7 @@ presence.on("UpdateData", async () => {
 					state: `${strings.searchFor} ${
 						(document.querySelector("#query") as HTMLInputElement)?.value
 					}`,
-					smallImageKey: "search",
+					smallImageKey: Assets.Search,
 					smallImageText: strings.searching,
 				},
 				"/articles/": {
@@ -596,7 +603,7 @@ presence.on("UpdateData", async () => {
 					state: `${strings.readingArticle} ${document
 						.querySelector("h1")
 						?.textContent.trim()}`,
-					smallImageKey: "reading",
+					smallImageKey: Assets.Reading,
 					smallImageText: strings.reading,
 				},
 			};
@@ -725,7 +732,7 @@ presence.on("UpdateData", async () => {
 					state: `${strings.searchFor} ${
 						(document.querySelector("input") as HTMLInputElement)?.value
 					}`,
-					smallImageKey: "search",
+					smallImageKey: Assets.Search,
 					smallImageText: strings.searching,
 				},
 			};

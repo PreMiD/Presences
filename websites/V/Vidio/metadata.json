@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Zen",
 		"id": "725331428962992131"
@@ -14,7 +14,7 @@
 		"vidio.com",
 		"www.vidio.com"
 	],
-	"version": "1.0.19",
+	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vidio/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vidio/assets/thumbnail.jpg",
 	"color": "#ffffff",

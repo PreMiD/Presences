@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Jackelele",
 		"id": "377175513372033024"
@@ -10,7 +10,7 @@
 	},
 	"url": "server.pro",
 	"regExp": "([a-z0-9-]+[.])*server[.]pro[/]",
-	"version": "1.0.13",
+	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/server.pro/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/server.pro/assets/thumbnail.png",
 	"color": "#418AC9",

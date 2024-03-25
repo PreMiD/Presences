@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 			}
 			if (buttons)
 				presenceData.buttons = [{ label: "Xem video", url: document.URL }];
-			presenceData.smallImageKey = paused ? "paused" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? "Đã dừng" : "Đang phát";
 		}
 	} else if (
@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
 			}
 			if (buttons)
 				presenceData.buttons = [{ label: "Nghe bài hát", url: document.URL }];
-			presenceData.smallImageKey = paused ? "paused" : "play";
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? "Đã dừng" : "Đang phát";
 		}
 	} else if (

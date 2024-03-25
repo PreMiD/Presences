@@ -22,10 +22,13 @@ presence.on(
 	}
 );
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/B/Behance/assets/logo.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/B/Behance/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			details: "Browsing",
 			startTimestamp: browsingTimestamp,
 		},
@@ -49,7 +52,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>(
 					"div.Popover-activator-14J.Miniprofile-activator-1QJ > span > a > div > img"
-				)?.src ?? "logo";
+				)?.src ?? Assets.Logo;
 			presenceData.buttons = [
 				{
 					label: "View Work",
@@ -88,7 +91,7 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey =
 			document.querySelector<HTMLImageElement>(
 				"#site-content div > div > div > img"
-			)?.src ?? "logo";
+			)?.src ?? Assets.Logo;
 		presenceData.buttons = [{ label: "View Profile", url: document.URL }];
 	} else if (pathname.startsWith("/search")) {
 		const searchContent = document.querySelector<HTMLSpanElement>(
@@ -110,9 +113,9 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey =
 			document
 				.querySelector('meta[name="twitter:image"]')
-				?.getAttribute("content") ?? "logo";
+				?.getAttribute("content") ?? Assets.Logo;
 		if (video.live) {
-			presenceData.smallImageKey = "live";
+			presenceData.smallImageKey = Assets.Live;
 			presenceData.smallImageText = "Live";
 			presenceData.buttons = [
 				{
@@ -167,7 +170,7 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>(
 					"div.JobDetailContent-teamAvatar-3qv > div > a > img"
-				)?.src ?? "logo";
+				)?.src ?? Assets.Logo;
 			presenceData.smallImageKey = Assets.Reading;
 		}
 	}

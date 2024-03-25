@@ -1,7 +1,16 @@
 let elapsed = Math.floor(Date.now() / 1000),
 	prevUrl = document.location.href;
 
-const presence = new Presence({
+const assets = {
+		zdf: "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/0.png",
+		"3sat": "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/1.png",
+		phoenix: "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/2.png",
+		arte: "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/3.png",
+		zdfinfo: "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/4.png",
+		zdfneo: "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/5.png",
+		kika: "https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/6.png",
+	},
+	presence = new Presence({
 		clientId: "854999470357217290",
 	}),
 	// TODO: Add multiLang
@@ -55,8 +64,9 @@ presence.on("UpdateData", async () => {
 				}
 			}
 
-			presenceData.largeImageKey = mediathekLivechannel.toLowerCase();
-			presenceData.smallImageKey = "live";
+			presenceData.largeImageKey =
+				assets[mediathekLivechannel.toLowerCase() as keyof typeof assets];
+			presenceData.smallImageKey = Assets.Live;
 			presenceData.smallImageText = "Live";
 			presenceData.details = `${mediathekLivechannel} Live`;
 			presenceData.state = videoInfoTag

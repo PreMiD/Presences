@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
 						)?.textContent ??
 						"".replace("ดูช่อง ", "").replace("ออนไลน์", "").split("–")[0]
 					}`;
-					presenceData.smallImageKey = "live";
+					presenceData.smallImageKey = Assets.Live;
 					if (buttons) {
 						presenceData.buttons = [
 							{

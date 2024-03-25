@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
 					"yazar",
 					""
 				)} (${time.textContent.trim().replace("eklendi", "")})`,
-				smallImageKey: "read",
+				smallImageKey: Assets.Reading,
 				smallImageText: "Bir gönderi okuyor...",
 				startTimestamp: Math.floor(Date.now() / 1000),
 			});
@@ -113,7 +113,7 @@ presence.on("UpdateData", async () => {
 					searchingFor && searchingFor.textContent
 						? searchingFor.textContent.replaceAll('"', "")
 						: "Belirsiz",
-				smallImageKey: "search",
+				smallImageKey: Assets.Search,
 				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (pages[page] || pages[page.slice(0, -1)]) {
@@ -189,7 +189,8 @@ presence.on("UpdateData", async () => {
 						? author.textContent
 						: "Belirsiz Gönderi Sahibi"
 				} ${time && time.textContent !== "" ? `(${time.textContent})` : ""}`,
-				smallImageKey: "forum",
+				smallImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/S/ShiftDelete.Net/assets/0.png",
 				smallImageText: "Bir forum gönderisi okuyor.",
 				startTimestamp: Math.floor(Date.now() / 1000),
 			});
@@ -206,7 +207,7 @@ presence.on("UpdateData", async () => {
 					searchingFor && searchingFor.textContent !== ""
 						? searchingFor.textContent
 						: "Belirsiz",
-				smallImageKey: "search",
+				smallImageKey: Assets.Search,
 				startTimestamp: Math.floor(Date.now() / 1000),
 			});
 		} else if (pages[page] || pages[page.slice(0, -1)]) {
@@ -215,7 +216,8 @@ presence.on("UpdateData", async () => {
 					"https://cdn.rcd.gg/PreMiD/websites/S/ShiftDelete.Net/assets/logo.png",
 				details: "Bir sayfaya göz atıyor:",
 				state: pages[page] || pages[page.slice(0, -1)],
-				smallImageKey: "forum",
+				smallImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/S/ShiftDelete.Net/assets/0.png",
 				smallImageText: "Bu kullanıcı şuan da SDN Forum'da.",
 				startTimestamp: Math.floor(Date.now() / 1000),
 			});

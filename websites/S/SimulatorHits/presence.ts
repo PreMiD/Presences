@@ -27,7 +27,7 @@ presence.on("UpdateData", () => {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/S/SimulatorHits/assets/logo.png",
 		smallImageText: `Current Presenter: ${presenter}`,
-		smallImageKey: "play",
+		smallImageKey: Assets.Play,
 		startTimestamp: currentTime,
 	};
 

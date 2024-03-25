@@ -3,11 +3,11 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let iFrameData: {
-	currTime: number;
-	duration: number;
-	paused: boolean;
-} = null;
+let iFrameData = {
+	currTime: -1,
+	duration: -1,
+	paused: true,
+};
 
 presence.on(
 	"iFrameData",
@@ -15,38 +15,6 @@ presence.on(
 		iFrameData = data;
 	}
 );
-
-function setCommonData(
-	presenceData: PresenceData,
-	document: Document,
-	iFrameData: { currTime: number; duration: number; paused: boolean },
-	href: string
-) {
-	if (document) {
-		delete presenceData.startTimestamp;
-		presenceData.details =
-			document.querySelector('[itemprop="image"]')?.getAttribute("alt") ??
-			document.querySelector('[itemprop="name"]')?.textContent ??
-			"Unknown";
-		presenceData.largeImageKey =
-			document.querySelector('[itemprop="image"]')?.getAttribute("src") ??
-			Assets.Logo;
-		if (iFrameData && !iFrameData.paused) {
-			[, presenceData.endTimestamp] = presence.getTimestamps(
-				iFrameData.currTime,
-				iFrameData.duration
-			);
-			presenceData.smallImageKey = Assets.Play;
-		} else presenceData.smallImageKey = Assets.Pause;
-		presenceData.buttons = [
-			{
-				label: href.includes("/movie") ? "Watch Movie" : "Watch Series",
-				url: href,
-			},
-		];
-	}
-	return presenceData;
-}
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/F/FMovies/assets/logo.png",
@@ -58,36 +26,89 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 		},
 		{ href, pathname } = document.location,
-		[buttons, image] = await Promise.all([
+		[privacy, buttons, image] = await Promise.all([
+			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("image"),
 		]);
 
-	if (pathname.includes("/series/") || pathname.includes("/tv/")) {
-		const matches = href.match(/\/(\d+-\d+)/);
-
-		if (matches) {
-			const [season, episode] = matches[1].split("-");
-			presenceData.state = `S${season}:E${episode}`;
-		} else presenceData.state = "";
-
-		setCommonData(presenceData, document, iFrameData, href);
-	} else if (pathname.startsWith("/movie/"))
-		setCommonData(presenceData, document, iFrameData, href);
-	else if (pathname === "/user/profile")
-		presenceData.details = "Checking Profile";
-	else if (pathname === "/user/watchlist")
-		presenceData.details = "Checking Watchlist";
+	if (privacy) presenceData.details = "Browsing...";
 	else {
-		const genre = document.querySelector<HTMLHeadingElement>("section.bl h1");
-		if (genre) {
-			presenceData.details = genre.textContent;
-			presenceData.smallImageKey = Assets.Search;
-		} else presenceData.details = "Browsing";
+		if (
+			pathname.includes("/series/") ||
+			pathname.includes("/tv/") ||
+			pathname.includes("/watch") ||
+			pathname.includes("/film/") ||
+			pathname.includes("/movie/")
+		) {
+			delete presenceData.startTimestamp;
+			const isMovie =
+					href.includes("-movie") ||
+					href.includes("/movie") ||
+					href.includes("-film") ||
+					href.includes("/film"),
+				title =
+					document.querySelector(
+						'[aria-current="page"],[itemprop="name"],#name,.card-title fs-4,.Title'
+					)?.textContent ??
+					document.querySelector('[itemprop="image"]')?.getAttribute("alt") ??
+					document.querySelector(".film-poster-img")?.getAttribute("title") ??
+					document
+						.querySelector(".lazy.img-fluid.rounded")
+						?.getAttribute("alt") ??
+					"Unknown";
+			if (!iFrameData?.currTime || iFrameData?.currTime === -1) {
+				presenceData.details = isMovie ? "Viewing movie:" : "Viewing series:";
+				presenceData.state = title;
+
+				presenceData.buttons = [
+					{
+						label: isMovie ? "View Movie" : "View Series",
+						url: href,
+					},
+				];
+			} else {
+				if (!isMovie && title.toLowerCase().includes("season")) {
+					const splitEl = title.split("-");
+					presenceData.details = splitEl?.[0];
+					presenceData.state = `${splitEl?.[1] ?? "Unknown season"} - ${
+						splitEl?.[2]?.split(":")?.[0] ?? "unknown episode"
+					}`;
+				} else presenceData.details = title;
+
+				presenceData.largeImageKey =
+					document.querySelector('[itemprop="image"]')?.getAttribute("src") ??
+					Assets.Logo;
+				if (!iFrameData?.paused) {
+					[, presenceData.endTimestamp] = presence.getTimestamps(
+						iFrameData.currTime,
+						iFrameData.duration
+					);
+					presenceData.smallImageKey = Assets.Play;
+				} else presenceData.smallImageKey = Assets.Pause;
+				presenceData.buttons = [
+					{
+						label: isMovie ? "Watch Movie" : "Watch Series",
+						url: href,
+					},
+				];
+			}
+		} else if (pathname === "/user/profile")
+			presenceData.details = "Checking Profile";
+		else if (pathname === "/user/watchlist")
+			presenceData.details = "Checking Watchlist";
+		else {
+			const genre = document.querySelector<HTMLHeadingElement>("section.bl h1");
+			if (genre) {
+				presenceData.details = genre.textContent;
+				presenceData.smallImageKey = Assets.Search;
+			} else presenceData.details = "Browsing";
+		}
+
+		if (presenceData.buttons && !buttons) delete presenceData.buttons;
+		if (presenceData.largeImageKey !== Assets.Logo && !image)
+			presenceData.largeImageKey = Assets.Logo;
 	}
 
-	if (presenceData.buttons && !buttons) delete presenceData.buttons;
-	if (presenceData.largeImageKey !== Assets.Logo && !image)
-		presenceData.largeImageKey = Assets.Logo;
 	presence.setActivity(presenceData);
 });

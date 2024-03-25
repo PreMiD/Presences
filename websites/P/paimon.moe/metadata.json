@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "rushia",
 		"id": "398752205043400724"
@@ -15,7 +15,7 @@
 		"ru": "Твой лучший компаньон в Genshin Impact! Поможет тебе распланировать что фармить в калькуляторе возвышения, а также отслеживать свой прогресс с помощью счетчика молитв и cписка дел"
 	},
 	"url": "paimon.moe",
-	"version": "1.0.16",
+	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/paimon.moe/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/paimon.moe/assets/thumbnail.png",
 	"color": "#25294A",

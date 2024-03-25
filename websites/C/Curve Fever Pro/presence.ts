@@ -1,36 +1,61 @@
 const presence = new Presence({
-		clientId: "775356824240128021",
-	}),
-	skinNames = new Map<string, string>()
-		.set("Angel", "angel")
-		.set("Blue Racer", "blue_racer")
-		.set("Bumble Bee", "bumble_bee")
-		.set("Candy Cane", "candy_cane")
-		.set("Jack-o'-lantern", "jack-o_-lantern")
-		.set("Joker", "joker")
-		.set("Jungle Leaf", "jungle_leaf")
-		.set("O Christmas Tree", "o_christmas_tree")
-		.set("Poopy", "poopy")
-		.set("Red&Yellow", "red_yellow")
-		.set("Robot", "robot")
-		.set("Spider Curve", "spider_curve")
-		.set("Starfish", "starfish")
-		.set("The Mummy", "the_mummy")
-		.set("Think Pink", "think_pink")
-		.set("Vampire", "vampire")
-		.set("VIP Gold", "vip_gold")
-		.set("Witchy Cauldron", "witchy_cauldron")
-		.set("Zombie Hand", "zombie_hand")
-		.set("Ice-Cream", "ice-cream")
-		.set("Pineapple", "pineapple")
-		.set("Rasta", "rasta");
+	clientId: "775356824240128021",
+});
+const enum Assets {
+	Index = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/0.png",
+	Angel = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/1.png",
+	BlueRacer = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/2.png",
+	CandyCane = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/3.png",
+	BumbleBee = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/4.png",
+	Joker = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/5.png",
+	JackoLantern = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/6.png",
+	Poopy = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/7.png",
+	JungleLeaf = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/8.png",
+	OChristmasTree = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/9.png",
+	Robot = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/10.png",
+	Vampire = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/11.png",
+	RedYellow = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/12.png",
+	TheMummy = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/13.png",
+	ThinkPink = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/14.png",
+	WitchyCauldron = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/15.png",
+	VipGold = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/16.png",
+	ZombieHand = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/17.png",
+	SpiderCurve = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/18.png",
+	Starfish = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/19.png",
+	IceCream = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/20.png",
+	Rasta = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/21.png",
+	Pineapple = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/22.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/logo.png",
+}
+const skinNames = new Map<string, string>()
+	.set("Angel", Assets.Angel)
+	.set("Blue Racer", Assets.BlueRacer)
+	.set("Bumble Bee", Assets.BumbleBee)
+	.set("Candy Cane", Assets.CandyCane)
+	.set("Jack-o'-lantern", Assets.JackoLantern)
+	.set("Joker", Assets.Joker)
+	.set("Jungle Leaf", Assets.JungleLeaf)
+	.set("O Christmas Tree", Assets.OChristmasTree)
+	.set("Poopy", Assets.Poopy)
+	.set("Red&Yellow", Assets.RedYellow)
+	.set("Robot", Assets.Robot)
+	.set("Spider Curve", Assets.SpiderCurve)
+	.set("Starfish", Assets.Starfish)
+	.set("The Mummy", Assets.TheMummy)
+	.set("Think Pink", Assets.ThinkPink)
+	.set("Vampire", Assets.Vampire)
+	.set("VIP Gold", Assets.VipGold)
+	.set("Witchy Cauldron", Assets.WitchyCauldron)
+	.set("Zombie Hand", Assets.ZombieHand)
+	.set("Ice-Cream", Assets.IceCream)
+	.set("Pineapple", Assets.Pineapple)
+	.set("Rasta", Assets.Rasta);
 
 let lastlobbyName = "",
 	lastName = "Unnamed";
 
 const presenceData: PresenceData = {
-	largeImageKey:
-		"https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/logo.png",
+	largeImageKey: Assets.Logo,
 	startTimestamp: Date.now(),
 	details: "Main Menu",
 	state: "Just Started Playing",
@@ -142,7 +167,7 @@ function RefreshData() {
 			break;
 	}
 
-	presenceData.largeImageKey = "index";
+	presenceData.largeImageKey = Assets.Index;
 }
 
 function getActualGamePage() {

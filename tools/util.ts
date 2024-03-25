@@ -3,6 +3,7 @@ import { basename, dirname, extname } from "node:path";
 
 import actions from "@actions/core";
 import got from "got";
+import semver from "semver";
 
 export type ValidEventName = "push" | "pull_request" | "uncommitted";
 
@@ -55,17 +56,41 @@ export function getFolderLetter(service: string) {
 }
 
 export async function getLatestSchema() {
-	const schemas = await got(
+	const fetchedSchemas = await got(
 		"https://api.github.com/repos/PreMiD/Schemas/contents/schemas/metadata",
 		{ responseType: "json" }
 	);
 
-	if (schemas.statusCode !== 200 || !Array.isArray(schemas.body)) {
+	if (
+		fetchedSchemas.statusCode !== 200 ||
+		!Array.isArray(fetchedSchemas.body)
+	) {
 		actions.setFailed("Could not fetch latest schema");
 		process.exit();
 	}
 
-	const schema = schemas.body.filter(f => f.name.endsWith(".json")).at(-1);
+	//* schema names have the format of x.x.x.json
+	const latestVersion = semver.sort(
+		fetchedSchemas.body
+			.filter(f => f.name.endsWith(".json"))
+			.map(f => {
+				const version = f.name.replace(".json", "");
+
+				//* Make it semver compatible
+				if (!semver.valid(version)) return `${version}.0`;
+
+				return version;
+			})
+	);
+
+	//* Remove prefixed .0 from the version
+	latestVersion[latestVersion.length - 1] = latestVersion[
+		latestVersion.length - 1
+	].replace(".0", "");
+
+	const schema = fetchedSchemas.body.find(
+		f => f.name === `${latestVersion.at(-1)}.json`
+	);
 
 	if (!schema) {
 		actions.setFailed("Could not find latest schema");

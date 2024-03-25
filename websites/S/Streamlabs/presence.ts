@@ -149,8 +149,8 @@ presence.on("UpdateData", async () => {
 				).getTime();
 				break;
 			default:
-				presenceData.smallImageKey = null;
-				presenceData.smallImageText = null;
+				delete presenceData.smallImageKey;
+				delete presenceData.smallImageText;
 				break;
 		}
 		presenceData.details = `Watching ${clipTitle[0]} to`;

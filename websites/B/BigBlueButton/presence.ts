@@ -91,11 +91,25 @@ async function getData() {
 
 setInterval(getData, 1000);
 
+const assets = {
+	logo: "https://cdn.rcd.gg/PreMiD/websites/B/BigBlueButton/assets/logo.png",
+	muted: "https://cdn.rcd.gg/PreMiD/websites/B/BigBlueButton/assets/0.png",
+	microphone: "https://cdn.rcd.gg/PreMiD/websites/B/BigBlueButton/assets/1.png",
+	disconnected:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BigBlueButton/assets/2.png",
+	headphones: "https://cdn.rcd.gg/PreMiD/websites/B/BigBlueButton/assets/3.png",
+	presentation:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BigBlueButton/assets/4.png",
+	video: "https://cdn.rcd.gg/PreMiD/websites/B/BigBlueButton/assets/5.png",
+	screen: "https://cdn.rcd.gg/PreMiD/websites/B/BigBlueButton/assets/6.png",
+};
+
 presence.on("UpdateData", async () => {
 	const presenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/B/BigBlueButton/assets/logo.png",
-		smallImageKey: inCall ? userState : "logo",
+		largeImageKey: assets.logo,
+		smallImageKey: inCall
+			? assets[userState as keyof typeof assets]
+			: assets.logo,
 		smallImageText: inCall
 			? userState === "screen"
 				? "Sharing screen..."

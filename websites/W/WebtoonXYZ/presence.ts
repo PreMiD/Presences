@@ -3,13 +3,21 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/W/WebtoonXYZ/assets/0.png",
+	View = "https://cdn.rcd.gg/PreMiD/websites/W/WebtoonXYZ/assets/1.png",
+	Logo2 = "https://cdn.rcd.gg/PreMiD/websites/W/WebtoonXYZ/assets/2.png",
+	Settings = "https://cdn.rcd.gg/PreMiD/websites/W/WebtoonXYZ/assets/3.png",
+	Solo = "https://cdn.rcd.gg/PreMiD/websites/W/WebtoonXYZ/assets/4.png",
+}
+
 presence.on("UpdateData", async () => {
 	const [logo, buttons] = await Promise.all([
 			presence.getSetting<number>("logo"),
 			presence.getSetting<boolean>("buttons"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: !logo ? "logo" : "logo-v2",
+			largeImageKey: !logo ? Assets.Logo : Assets.Logo2,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location;
@@ -55,10 +63,10 @@ presence.on("UpdateData", async () => {
 		presenceData.details = title;
 		presenceData.state = `📖 ${chapter} 🔸 ${progress}%`;
 		presenceData.largeImageKey = title.includes("Solo Leveling")
-			? "solo"
+			? Assets.Solo
 			: logo === 0
-			? "logo"
-			: "logo-v2";
+			? Assets.Logo
+			: Assets.Logo2;
 		presenceData.smallImageKey = Assets.Reading;
 		if (buttons) {
 			presenceData.buttons = [
@@ -72,12 +80,12 @@ presence.on("UpdateData", async () => {
 		const title = document.querySelector(".post-title").textContent;
 		presenceData.details = "Viewing:";
 		presenceData.state = title;
-		presenceData.smallImageKey = "view";
+		presenceData.smallImageKey = Assets.Viewing;
 		presenceData.largeImageKey = title.includes("Solo Leveling")
-			? "solo"
+			? Assets.Solo
 			: logo === 0
-			? "logo"
-			: "logo-v2";
+			? Assets.Logo
+			: Assets.Logo2;
 		if (buttons) {
 			presenceData.buttons = [
 				{
@@ -87,7 +95,7 @@ presence.on("UpdateData", async () => {
 			];
 		}
 	} else if (pathname === "/user-settings/") {
-		presenceData.smallImageKey = "settings";
+		presenceData.smallImageKey = Assets.Settings;
 		switch (window.location.search) {
 			case "?tab=history":
 				presenceData.details = "User settings:";

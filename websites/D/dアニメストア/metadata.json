@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Eai",
 		"id": "132779412771962880"
@@ -13,7 +13,7 @@
 		"nl": "De beste anime streaming website in Japan! Eerste maand gratis! Onbeperkt bekijken van meer dan 2900 animes voor 400 yen per maand (exclusief belasting)! U kunt andere dan DoCoMo mobiele apparaten ook gebruiken. Nog betere kwaliteit op tablets, pc's, Chromecasts en Fire TV!"
 	},
 	"url": "animestore.docomo.ne.jp",
-	"version": "2.0.8",
+	"version": "2.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/d%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%B9%E3%83%88%E3%82%A2/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/d%E3%82%A2%E3%83%8B%E3%83%A1%E3%82%B9%E3%83%88%E3%82%A2/assets/thumbnail.jpg",
 	"color": "#ea552a",

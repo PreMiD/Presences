@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "1105810827224809532",
 		"name": "for"
@@ -9,7 +9,7 @@
 		"en": "feds.lol is a freemium biolink service."
 	},
 	"url": "feds.lol",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/feds/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/feds/assets/thumbnail.jpg",
 	"color": "#000000",

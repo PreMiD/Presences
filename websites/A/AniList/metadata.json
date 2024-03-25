@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Viruz",
 		"id": "158973226465230848"
@@ -23,7 +23,7 @@
 		"vi_VN": "AniList: Theo dõi, tìm kiếm, chia sẻ Anime & Manga - Đăng ký ngay hôm nay!"
 	},
 	"url": "anilist.co",
-	"version": "2.1.6",
+	"version": "2.1.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AniList/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AniList/assets/thumbnail.jpg",
 	"color": "#02A9FF",

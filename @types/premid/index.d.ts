@@ -4,37 +4,98 @@
  */
 interface PresenceData {
 	/**
-	 * Top row of the status
+	 * Name to show in activity
+	 * @example "YouTube"
+	 * @since 2.6
 	 */
-	details?: string;
+	name?: string;
+	/**
+	 * Type of activity.
+	 *
+	 * @example
+	 * - ActivityType.Playing: "Playing [name]"
+	 * - ActivityType.Listening: "Listening to [name]"
+	 * - ActivityType.Watching: "Watching [name]"
+	 * - ActivityType.Competing: "Competing in [name]"
+	 *
+	 * @since 2.6
+	 */
+	type?: ActivityType;
+	/**
+	 * Top row of the status
+	 *
+	 * Supports:
+	 *
+	 * `String`: A string
+	 *
+	 * `Node`: An element to use (it will use `.textContent`)
+	 */
+	details?: string | Node;
 	/**
 	 * Bottom row of the status
+	 *
+	 * Supports:
+	 *
+	 * `String`: A string
+	 *
+	 * `Node`: An element to use (it will use `.textContent`)
 	 */
-	state?: string;
+	state?: string | Node;
 	/**
 	 * Timestamp in seconds or milliseconds for the start of the activity.
 	 * Including this will show time as "elapsed"
 	 */
-	startTimestamp?: number;
+	startTimestamp?: number | Date;
 	/**
 	 * Timestamp in seconds or milliseconds until the end of the activity.
 	 * Including this will show time as "remaining" and it takes priority over startTimestamp
 	 */
-	endTimestamp?: number;
+	endTimestamp?: number | Date;
 	/**
-	 * Key of an image uploaded to the Rich Presence Art Assets of your Presence or a URL to an image.
 	 * Will display as the large profile artwork
+	 *
+	 * Supports:
+	 *
+	 * `String`: An URL to the image or a base64 encoded image
+	 *
+	 * `Blob`: A blob of the image
+	 *
+	 * `HTMLImageElement`: An image element to use (it will be converted to a blob)
 	 */
-	largeImageKey?: string;
+	largeImageKey?: string | Blob | HTMLImageElement;
 	/**
-	 * Key of an image uploaded to the Rich Presence Art Assets of your Presence or a URL to an image.
 	 * Will display as the small profile artwork
+	 *
+	 * Supports:
+	 *
+	 * `String`: An URL to the image or a base64 encoded image
+	 *
+	 * `Blob`: A blob of the image
+	 *
+	 * `HTMLImageElement`: An image element to use (it will be converted to a blob)
 	 */
-	smallImageKey?: string;
+	smallImageKey?: string | Blob | HTMLImageElement;
+	/**
+	 * Tooltip for the largeImageKey
+	 *
+	 * Supports:
+	 *
+	 * `String`: A string
+	 *
+	 * `Node`: An element to use (it will use `.textContent`)
+	 * @since 2.6
+	 */
+	largeImageText?: string | Node;
 	/**
 	 * Tooltip for the smallImageKey
+	 *
+	 * Supports:
+	 *
+	 * `String`: A string
+	 *
+	 * `Node`: An element to use (it will use `.textContent`)
 	 */
-	smallImageText?: string;
+	smallImageText?: string | Node;
 	/**
 	 * Array of buttons, max 2, label is the button text, and url is the link
 	 */
@@ -44,12 +105,39 @@ interface PresenceData {
 interface ButtonData {
 	/**
 	 * Text for the button
+	 *
+	 * Supports:
+	 *
+	 * `String`: A string
+	 *
+	 * `Node`: An element to use (it will use `.textContent`)
 	 */
-	label: string;
+	label: string | Node;
 	/**
 	 * URL of button link
+	 *
+	 * Supports:
+	 *
+	 * `String`: A string
+	 *
+	 * `HTMLAnchorElement`: An anchor element to use (it will use `.href`)
 	 */
-	url: string;
+	url: string | HTMLAnchorElement;
+}
+
+interface PresenceDataFinal {
+	state?: string;
+	details?: string;
+	startTimestamp?: number | Date;
+	endTimestamp?: number | Date;
+	largeImageKey?: string;
+	smallImageKey?: string;
+	smallImageText?: string;
+	buttons?: { label: string; url: string }[];
+}
+
+interface PresenceDataFull extends PresenceDataFinal {
+	largeImageText?: string;
 }
 
 /**
@@ -64,15 +152,27 @@ interface PresenceOptions {
 	/**
 	 * The `UpdateData` event for both the presence and the iframe
 	 * will only be fired when the page has fully loaded.
-	 * @deprecated since 2.2.4
 	 */
 	injectOnComplete?: boolean;
+}
+
+const enum ActivityType {
 	/**
-	 * Empty presence data will show the application (image and name) on
-	 * the user's profile.
-	 * @deprecated since 2.2.4
+	 * Playing {name}
 	 */
-	appMode?: boolean;
+	Playing = 0,
+	/**
+	 * Listening to {name}
+	 */
+	Listening = 2,
+	/**
+	 * Watching {name}
+	 */
+	Watching = 3,
+	/**
+	 * Competing in {name}
+	 */
+	Competing = 5,
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const enum Assets {
@@ -274,28 +374,66 @@ interface Contributor {
 	id: string;
 }
 
+type PresenceClassSetActivityEvent = {
+	event: "setActivity";
+	data: { clientId: string; presenceData: PresenceDataFinal };
+};
+
+type PresenceClassClearActivityEvent = { event: "clearActivity" };
+
+type PresenceClassGetPresenceLetiableEvent = {
+	event: "getPresenceLetiable";
+	data: string;
+	nonce: string;
+};
+
+type PresenceClassGetPageVariablesEvent = {
+	event: "getPageVariables";
+	data: string[];
+	nonce: string;
+};
+
+type PresenceClassReconnectEvent = {
+	event: "reconnect";
+};
+
+type PresenceClassEvents =
+	| PresenceClassSetActivityEvent
+	| PresenceClassClearActivityEvent
+	| PresenceClassGetPresenceLetiableEvent
+	| PresenceClassGetPageVariablesEvent
+	| PresenceClassReconnectEvent;
+
+type ConsoleLogType = "log" | "info" | "warn" | "error";
+interface ConsoleLog<T = unknown> {
+	id: string;
+	timestamp: number;
+	type: ConsoleLogType;
+	content: T;
+}
+
 /**
  * Useful tools for developing presences
  * @link https://docs.premid.app/en/dev/presence/class
  */
 declare class Presence {
-	metadata: Metadata;
-	_events: any;
 	private clientId;
 	private injectOnComplete;
-	private appMode;
-	private trayTitle;
-	private playback;
 	private internalPresence;
 	private port;
-	private genericStyle;
-	private presenceStyle;
-	private encryptionKey;
-	private normalizeLanguageCode;
+	private pmd;
+	private service;
+	private isTemporary;
+	private log;
+	private logInfo;
+	private logError;
+	private logSuccess;
 	/**
 	 * Create a new Presence
 	 */
 	constructor(presenceOptions: PresenceOptions);
+	private injectVariableGetter(): Promise<void>;
+	private connectToBackground(): void;
 	/**
 	 * Get the current activity
 	 * @link https://docs.premid.app/en/dev/presence/class#getactivity
@@ -305,10 +443,20 @@ declare class Presence {
 	/**
 	 * Sets the presence activity and sends it to the application.
 	 * @param data PresenceData or Slideshow
-	 * @param playback Is presence playing
+	 * @param _playback DEPRECATED: Is presence playing
 	 * @link https://docs.premid.app/dev/presence/class#setactivitypresencedata-boolean
 	 */
-	setActivity(data?: PresenceData | Slideshow, playback?: boolean): void;
+	setActivity(
+		data?: PresenceData | Slideshow,
+		_playback?: boolean
+	): Promise<void>;
+	private getTextFromElement(element: string | Node): string | undefined;
+	private imageSrcToBlob;
+	private getImageFromElement(
+		element: string | Blob | HTMLImageElement
+	): Promise<string | undefined>;
+	private uploadedBlobs;
+	private uploadBlob(blob: Blob): Promise<string | undefined>;
 	/**
 	 * Clears the activity shown in discord as well as the Tray and keybinds
 	 * @link https://docs.premid.app/dev/presence/class#clearactivity
@@ -316,35 +464,87 @@ declare class Presence {
 	clearActivity(): void;
 	/**
 	 * Sets the tray title on the Menubar in Mac OS (Mac OS only, supports ANSI colors)
-	 * @param trayTitle Tray Title
+	 * @param _trayTitle Tray Title
 	 * @link https://docs.premid.app/dev/presence/class#settraytitlestring
 	 * @since 2.0-BETA3
-	 * @deprecated since 2.2.3
+	 * @deprecated 2.5
 	 */
-	setTrayTitle(trayTitle?: string): void;
+	setTrayTitle(_trayTitle?: string): void;
 	/**
 	 * Get translations from the extension
 	 * @param strings String object with keys being the key for string, keyValue is the string value
-	 * @param language Language
+	 * @param language DEPRECATED: Language to get strings for
 	 * @link https://docs.premid.app/dev/presence/class#getstringsobject
 	 */
 	getStrings<
 		T extends {
 			[K: string]: string;
 		}
-	>(strings: T, language?: string): Promise<T>;
+	>(strings: T, _language?: string): Promise<T>;
 	/**
-	 * Get letiables from the actual site *IMPORTANT: This function can make site lagging when it has been used too many times*
+	 * Get letiables from the actual site
 	 * @param {Array} letiables Array of letiable names to get
 	 * @example let pagelet = getPageletiable('pagelet') -> "letiable content"
 	 * @link https://docs.premid.app/presence-development/coding/presence-class#getpageletiable-string
+	 * @deprecated 2.5 - Use getPageVariable instead
 	 */
-	getPageletiable<T>(letiable: string): Promise<T>;
+	getPageletiable<T = unknown>(letiable: string): Promise<T>;
 	/**
 	 * Returns an array of the past 100 logs, you can filter these logs with a RegExp.
-	 * @param regExp Filter of the logs
+	 * @param regExp Filter for the logs content
+	 * @param options Options for the logs
 	 */
-	getLogs(regExp?: RegExp): Promise<any[]>;
+	getLogs<T = unknown>(
+		regExp?: RegExp,
+		options?: {
+			/**
+			 * Types of logs to get
+			 *
+			 * Default: `["log"]`
+			 */
+			types?: ConsoleLogType[];
+			/**
+			 * Whether to only get the content of the logs
+			 *
+			 * Default: `true`
+			 */
+			contentOnly?: true;
+		}
+	): Promise<T[]>;
+	getLogs<T = unknown>(
+		regExp?: RegExp,
+		options?: {
+			/**
+			 * Types of logs to get
+			 *
+			 * Default: `["log"]`
+			 */
+			types?: ConsoleLogType[];
+			/**
+			 * Whether to only get the content of the logs
+			 *
+			 * Default: `true`
+			 */
+			contentOnly: false;
+		}
+	): Promise<ConsoleLog<T>[]>;
+	getLogs<T = unknown>(
+		regExp?: RegExp,
+		options?: {
+			/**
+			 * Types of logs to get
+			 *
+			 * Default: `["log"]`
+			 */
+			types?: ConsoleLogType[];
+			/**
+			 * Whether to only get the content of the logs
+			 *
+			 * Default: `true`
+			 */
+			contentOnly?: boolean;
+		}
+	): Promise<T[] | ConsoleLog<T>[]>;
 	/**
 	 * Returns extension version
 	 * @param onlyNumeric version number without dots
@@ -390,16 +590,6 @@ declare class Presence {
 	 */
 	timestampFromFormat(format: string): number;
 	/**
-	 * Converts a hex string into an RGB object
-	 * @param hex The hex string
-	 */
-	private hexToRGB(hex: `#${string}`): { r: number; g: number; b: number };
-	/**
-	 * Calculates the font color based on the luminosity of the background
-	 * @param backgroundHex The hex string of the background
-	 */
-	private getFontColor(backgroundHex: string): "white" | "black";
-	/**
 	 * Console logs with an info message
 	 * @param message The log message
 	 */
@@ -420,19 +610,21 @@ declare class Presence {
 	 */
 	createSlideshow(): Slideshow;
 	/**
+	 * Get variables from the web page
+	 * Supports nested variables using dot notation (e.g. `document.title`)
+	 *
+	 * NOTE: This function can be very heavy if you are not directly accessing a variable with primitive value!
+	 * @param variables Variables to get
+	 * @since 2.5
+	 */
+	getPageVariable<T extends Record<string, unknown>>(
+		...variables: string[]
+	): Promise<T>;
+	/**
 	 * Sends data back to application
-	 * @param data Data to send back to application
+	 * @param event Event
 	 */
-	private sendData(data: Record<string, unknown>): void;
-	/**
-	 * Generates a AES key from the app identifier
-	 */
-	private getEncryptionKey(): Uint8Array;
-	/**
-	 * Encrypts a string using AES algorithm
-	 * @param data String to be encrypted
-	 */
-	private encryptData(data: string): string;
+	private postEvent(data: PresenceClassEvents): void;
 	/**
 	 * Subscribe to events emitted by the extension
 	 * @param eventName EventName to subscribe to

@@ -92,7 +92,8 @@ presence.on("UpdateData", async () => {
 				0,
 				-1
 			)} ${strings.docsViewer2.toLowerCase()}:`;
-			presenceData.smallImageKey = "img_icon_code";
+			presenceData.smallImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/V/Void%20Bots/assets/0.png";
 			presenceData.smallImageText = "Confusion 100";
 			presenceData.state =
 				document.querySelector("title").textContent || "Home";

@@ -62,6 +62,6 @@ presence.on("UpdateData", async () => {
 			delete presenceData.endTimestamp;
 		}
 		presence.setActivity(presenceData);
-	} else if (presence.getExtensionVersion() < 224) presence.setActivity();
+	} else if (+presence.getExtensionVersion() < 224) presence.setActivity();
 	else presence.clearActivity();
 });

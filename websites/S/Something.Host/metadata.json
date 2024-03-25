@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Amaury",
 		"id": "239487545791086592"
@@ -16,7 +16,7 @@
 		"content.something.host",
 		"files.something.host"
 	],
-	"version": "1.0.15",
+	"version": "1.0.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Something.Host/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Something.Host/assets/thumbnail.png",
 	"color": "#7A64EF",

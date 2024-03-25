@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png",
 	};
-	if (!document.querySelector('[data-test="player-container"]')) {
+	if (document.querySelector('[data-test="player-container"]')) {
 		const playerText = document.querySelector('[data-test="player-text"]');
 		if (
 			!document.querySelector('[data-test="controls-container"]').children[1]
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 				subtitle = checkLength(subtitle);
 				presenceData.state = subtitle;
 
-				presenceData.smallImageKey = "live";
+				presenceData.smallImageKey = Assets.Live;
 				presenceData.smallImageText = (await strings).live;
 				if (!elapsed) elapsed = Math.floor(Date.now() / 1000);
 

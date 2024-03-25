@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Stringy",
 		"id": "577743466940071949"
@@ -21,7 +21,7 @@
 		"www.jackboxgames.com",
 		"shop.jackboxgames.com"
 	],
-	"version": "2.1.0",
+	"version": "2.1.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/thumbnail.png",
 	"color": "#4254f4",

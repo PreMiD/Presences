@@ -4,10 +4,13 @@ const presence = new Presence({
 	elapsed = Math.floor(Date.now() / 1000);
 let text;
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Dueling%20Nexus/assets/logo.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/D/Dueling%20Nexus/assets/logo.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: elapsed,
 	};
 
@@ -21,19 +24,19 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = `Online as ${text.split(",")[1]}`;
 		presenceData.state = "waiting in lobby";
-		presenceData.smallImageKey = "logo";
+		presenceData.smallImageKey = Assets.Logo;
 		presenceData.smallImageText = "in game";
 	} else if (document.location.pathname === "/decks") {
 		(presenceData.details = `Online as ${localStorage.getItem("name")}`),
 			(presenceData.state = "Looking at decklists");
-		presenceData.smallImageKey = "logo";
+		presenceData.smallImageKey = Assets.Logo;
 		presenceData.smallImageText = "in game";
 	} else if (document.location.pathname.includes("/editor")) {
 		presenceData.details = "Building Decks";
 		presenceData.state = `Editing: ${
 			document.querySelectorAll("strong")[0].textContent
 		}`;
-		presenceData.smallImageKey = "logo";
+		presenceData.smallImageKey = Assets.Logo;
 		presenceData.smallImageText = "in game";
 	} else if (document.location.pathname.includes("/game")) {
 		let opponent = document.querySelector("#game-opponent-name").textContent;
@@ -75,27 +78,27 @@ presence.on("UpdateData", async () => {
 */
 		presenceData.details = status;
 		presenceData.state = state;
-		presenceData.smallImageKey = "logo";
+		presenceData.smallImageKey = Assets.Logo;
 		presenceData.smallImageText = document.location.href;
 	} else if (document.location.pathname.includes("/hostgame")) {
 		presenceData.details = "Hosting Game ";
 		presenceData.state = `as ${localStorage.getItem("name")}`;
-		presenceData.smallImageKey = "logo";
+		presenceData.smallImageKey = Assets.Logo;
 		presenceData.smallImageText = "in game";
 	} else if (document.location.pathname.includes("/gamelist")) {
 		presenceData.details = "Looking for Game";
 		presenceData.state = "at All game list";
-		presenceData.smallImageKey = "logo";
+		presenceData.smallImageKey = Assets.Logo;
 		presenceData.smallImageText = "in game";
 	} else if (document.location.pathname.includes("/profile")) {
 		presenceData.details = "Editing Profile";
 		presenceData.state = "changing stuffs";
-		presenceData.smallImageKey = "logo";
+		presenceData.smallImageKey = Assets.Logo;
 		presenceData.smallImageText = "in game";
 	} else if (document.location.pathname.includes("/duel")) {
 		presenceData.details = "Searching for Duels";
 		presenceData.state = "Choosing game mode";
-		presenceData.smallImageKey = "logo";
+		presenceData.smallImageKey = Assets.Logo;
 		presenceData.smallImageText = "in game";
 	}
 

@@ -48,7 +48,7 @@ export default class AssetsManager {
 	}
 
 	getFileExtension(url: string) {
-		return extname(url);
+		return extname(new URL(url).pathname);
 	}
 
 	async allTsFiles() {

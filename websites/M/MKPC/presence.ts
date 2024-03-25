@@ -30,7 +30,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{ label: "Play Game", url: "https://mkpc.malahieude.net/mariokart.php" },
 		];
-		presenceData.smallImageKey = "wheel";
+		presenceData.smallImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/M/MKPC/assets/0.png";
 	} else {
 		switch (document.location.pathname) {
 			case "/mariokart.php": {

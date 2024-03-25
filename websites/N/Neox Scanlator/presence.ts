@@ -163,9 +163,10 @@ presence.on("UpdateData", async () => {
 	if (
 		window.getComputedStyle(bodyWrap).getPropertyValue("background-color") ===
 		"rgb(38, 38, 38)"
-	)
-		presenceData.largeImageKey = "logo2";
-	else if (
+	) {
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/N/Neox%20Scanlator/assets/0.png";
+	} else if (
 		window.getComputedStyle(bodyWrap).getPropertyValue("background-color") !==
 		"rgb(38, 38, 38)"
 	) {
@@ -177,7 +178,8 @@ presence.on("UpdateData", async () => {
 		"body > div.wrap > div > header > div.c-sub-header-nav.with-border.hide-sticky-menu > div > div > div.c-modal_item > div > span"
 	);
 	if (UsuarioTexto && PesquisaTexto === null) {
-		presenceData.smallImageKey = "user";
+		presenceData.smallImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/N/Neox%20Scanlator/assets/1.png";
 		presenceData.smallImageText = UsuarioTexto.textContent.slice(
 			UsuarioTexto.textContent.search(",") + 1
 		);

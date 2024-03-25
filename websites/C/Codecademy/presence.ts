@@ -6,6 +6,7 @@ const presence = new Presence({
 		pause: "general.paused",
 	}),
 	start = Date.now();
+
 let videoTitle: string,
 	videoCurrentTime: number,
 	videoDuration: number,
@@ -17,12 +18,42 @@ interface DataInterface {
 	duration: number;
 	paused: boolean;
 }
+
+/* eslint-disable camelcase */
+const assets: Record<string, string> = {
+	git: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/0.png",
+	html: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/1.png",
+	css: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/2.png",
+	the_command_line:
+		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/3.png",
+	node_with_sqlite:
+		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/4.png",
+	ruby_on_rails: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/5.png",
+	python_2: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/6.png",
+	javascript: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/7.png",
+	go: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/8.png",
+	authentication_with_ruby_on_rails:
+		"https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/9.png",
+	java: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/10.png",
+	python_3: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/11.png",
+	swift: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/12.png",
+	r: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/13.png",
+	kotlin: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/14.png",
+	ruby: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/15.png",
+	sql: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/16.png",
+	php: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/17.png",
+	csharp: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/18.png",
+	cplusplus: "https://cdn.rcd.gg/PreMiD/websites/C/Codecademy/assets/19.png",
+};
+/* eslint-enable camelcase */
+
 presence.on("iFrameData", (data: DataInterface) => {
 	videoTitle = data.title;
 	videoCurrentTime = data.currentTime;
 	videoDuration = data.duration;
 	videoPaused = data.paused;
 });
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
@@ -47,15 +78,18 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `"${
 						document.querySelector("main h1").textContent
 					}"`;
-					presenceData.smallImageKey = document
-						.querySelector("main h1")
-						.textContent.split(" ")
-						.slice(1)
-						.join(" ")
-						.toLowerCase()
-						.replace(" ", "_")
-						.replace("+", "plus")
-						.replace("#", "sharp");
+					presenceData.smallImageKey =
+						assets[
+							document
+								.querySelector("main h1")
+								.textContent.split(" ")
+								.slice(1)
+								.join(" ")
+								.toLowerCase()
+								.replace(" ", "_")
+								.replace("+", "plus")
+								.replace("#", "sharp")
+						];
 					presenceData.smallImageText = document
 						.querySelector("main h1")
 						.textContent.split(" ")
@@ -88,14 +122,17 @@ presence.on("UpdateData", async () => {
 			if (heading.className.startsWith("trackTitle__")) premiumPath = true;
 			heading = heading.textContent;
 			if (pathArray[0] === "courses" && heading.startsWith("Learn ")) {
-				presenceData.smallImageKey = heading
-					.split(" ")
-					.slice(1)
-					.join(" ")
-					.toLowerCase()
-					.replace(" ", "_")
-					.replace("+", "plus")
-					.replace("#", "sharp");
+				presenceData.smallImageKey =
+					assets[
+						heading
+							.split(" ")
+							.slice(1)
+							.join(" ")
+							.toLowerCase()
+							.replace(" ", "_")
+							.replace("+", "plus")
+							.replace("#", "sharp")
+					];
 				presenceData.smallImageText = heading.split(" ").slice(1).join(" ");
 			}
 			presenceData.details = heading.startsWith("Learn ")
@@ -144,12 +181,15 @@ presence.on("UpdateData", async () => {
 					document.querySelector("#catalog-heading").textContent
 				}`;
 				presenceData.state = "in the catalog";
-				presenceData.smallImageKey = document
-					.querySelector("#catalog-heading")
-					.textContent.toLowerCase()
-					.replace(" ", "_")
-					.replace("+", "plus")
-					.replace("#", "sharp");
+				presenceData.smallImageKey =
+					assets[
+						document
+							.querySelector("#catalog-heading")
+							.textContent.toLowerCase()
+							.replace(" ", "_")
+							.replace("+", "plus")
+							.replace("#", "sharp")
+					];
 				presenceData.smallImageText =
 					document.querySelector("#catalog-heading").textContent;
 			} else if (pathArray[1] === "subject") {

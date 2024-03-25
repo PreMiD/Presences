@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Viruz",
 		"id": "158973226465230848"
@@ -38,7 +38,7 @@
 		"www.reddit.com",
 		"old.reddit.com"
 	],
-	"version": "3.1.6",
+	"version": "3.1.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Reddit/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Reddit/assets/thumbnail.png",
 	"color": "#ff4500",

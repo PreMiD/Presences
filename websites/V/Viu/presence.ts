@@ -105,6 +105,11 @@ interface SeriesInfo {
 }
 /* eslint-enable camelcase */
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/V/Viu/assets/0.png",
+	LogoText = "https://cdn.rcd.gg/PreMiD/websites/V/Viu/assets/1.png",
+}
+
 presence.on("UpdateData", async () => {
 	const [newLang, buttonsOn, presenceLogo] = await Promise.all([
 		presence.getSetting<string>("lang").catch(() => "en"),
@@ -134,8 +139,8 @@ presence.on("UpdateData", async () => {
 
 	const presenceData: PresenceData = {
 		details: strings.browse,
-		smallImageKey: "reading",
-		largeImageKey: ["viu_logo", "viu_logo_text", "viu_logo", "viu_logo"][
+		smallImageKey: Assets.Reading,
+		largeImageKey: [Assets.Logo, Assets.LogoText, Assets.Logo, Assets.Logo][
 			presenceLogo
 		],
 		startTimestamp: browsingTimestamp,
@@ -179,7 +184,7 @@ presence.on("UpdateData", async () => {
 					[
 						coverPortraitImage || coverLandscapeImage,
 						coverLandscapeImage || coverPortraitImage,
-					][presenceLogo - 2] || "viu_logo";
+					][presenceLogo - 2] || Assets.Logo;
 			}
 
 			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;

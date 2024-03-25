@@ -11,7 +11,8 @@ presence.on("UpdateData", async () => {
 
 	if (document.location.href.includes("/game-pass")) {
 		//Game Pass
-		presenceData.largeImageKey = "gamepass";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/X/Xbox/assets/0.png";
 		presenceData.details = "Reading about Xbox Game Pass";
 		if (document.location.href.includes("games"))
 			presenceData.details = "Browsing Xbox Game Pass games";
@@ -61,7 +62,8 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Reading about backward compatible games";
 	} else if (document.location.href.includes("/play")) {
 		//Play
-		presenceData.largeImageKey = "gamepass";
+		presenceData.largeImageKey =
+			"https://cdn.rcd.gg/PreMiD/websites/X/Xbox/assets/0.png";
 		if (document.location.href.includes("play/games")) {
 			presenceData.details = "Viewing an Xbox Cloud Gaming game";
 

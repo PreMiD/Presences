@@ -7,7 +7,7 @@ presence.on("UpdateData", () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/N/Nodejs.org/assets/logo.png",
-		smallImageKey: "reading",
+		smallImageKey: Assets.Reading,
 		smallImageText: "Reading Node.js Doc's",
 		startTimestamp: browsingTimestamp,
 	};

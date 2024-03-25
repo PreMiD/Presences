@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Holfz",
 		"id": "405397046691102740"
@@ -12,7 +12,7 @@
 		"vi_VN": "Xem các bộ Anime phụ đề/thuyết minh Tiếng Thái trực tuyến miễn phí."
 	},
 	"url": "www.animelizm.com",
-	"version": "1.0.22",
+	"version": "1.0.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Animelizm/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Animelizm/assets/thumbnail.png",
 	"color": "#0F62E0",

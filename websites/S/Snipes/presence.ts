@@ -3,10 +3,25 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/logo.png",
+}
+
+const assets = {
+	fr: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/0.png",
+	at: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/1.png",
+	es: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/2.png",
+	nl: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/3.png",
+	it: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/4.png",
+	be: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/5.png",
+	ch: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/6.png",
+	usa: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/7.png",
+	de: "https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/8.png",
+};
+
 presence.on("UpdateData", async function () {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/logo.png",
+			largeImageKey: Assets.Logo,
 		},
 		setTimeElapsed = await presence.getSetting<boolean>("timeElapsed"),
 		setShowButtons = await presence.getSetting<boolean>("showButtons"),
@@ -154,7 +169,7 @@ presence.on("UpdateData", async function () {
 				document.location.hostname === "www.snipesusa.com" ? "usa" : "de";
 		}
 
-		presenceData.smallImageKey = smallimage;
+		presenceData.smallImageKey = assets[smallimage as keyof typeof assets];
 		presenceData.smallImageText = `SNIPES ${smallimage.toUpperCase()}`;
 	}
 

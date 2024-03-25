@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Encrypted",
 		"id": "564434085708038144"
@@ -21,7 +21,7 @@
 	},
 	"url": "docs.google.com",
 	"regExp": "docs[.]google([.][a-z]+)+[/]",
-	"version": "1.4.24",
+	"version": "1.4.28",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Docs/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Docs/assets/thumbnail.jpg",
 	"color": "#3a404a",

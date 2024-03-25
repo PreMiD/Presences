@@ -116,7 +116,7 @@ presence.on("UpdateData", async () => {
 				searchingFor && searchingFor.textContent
 					? searchingFor.textContent
 					: "Belirsiz",
-			smallImageKey: "search",
+			smallImageKey: Assets.Search,
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (page.includes("/ilan/")) {

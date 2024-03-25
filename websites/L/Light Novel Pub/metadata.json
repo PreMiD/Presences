@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "239381559482777600",
 		"name": "youka"
@@ -13,7 +13,7 @@
 		"lightnovelpub.com"
 	],
 	"regExp": "([a-z0-9]+[.])?lightnovelpub[.]com",
-	"version": "1.0.8",
+	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/Light%20Novel%20Pub/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Light%20Novel%20Pub/assets/thumbnail.png",
 	"color": "#546573",

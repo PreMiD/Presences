@@ -2,13 +2,20 @@ const presence = new Presence({
 	clientId: "731659541904621708",
 });
 
+const enum Assets {
+	Skindb = "https://cdn.rcd.gg/PreMiD/websites/S/skindb.co/assets/0.png",
+	Fortnite = "https://cdn.rcd.gg/PreMiD/websites/S/skindb.co/assets/1.png",
+	Valorant = "https://cdn.rcd.gg/PreMiD/websites/S/skindb.co/assets/2.png",
+	Fallguys = "https://cdn.rcd.gg/PreMiD/websites/S/skindb.co/assets/3.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		startTimestamp: Date.now(),
 	};
 	let path = document.location.pathname;
 	if (path.startsWith("/fortnite")) {
-		presenceData.largeImageKey = "fortnite";
+		presenceData.largeImageKey = Assets.Fortnite;
 		path = path.substring(9);
 		if (path.length === 0) {
 			presenceData.details = "Viewing homepage";
@@ -50,7 +57,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(".item-title").textContent;
 		} else presenceData.details = `Viewing ${path.substring(1)}`;
 	} else if (path.startsWith("/valorant")) {
-		presenceData.largeImageKey = "valorant";
+		presenceData.largeImageKey = Assets.Valorant;
 		path = path.substring(9);
 		if (path.length === 0) {
 			presenceData.details = "Viewing homepage";
@@ -82,7 +89,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector(".skin-detail h1").textContent;
 		} else presenceData.details = `Viewing ${path.substring(1)}`;
 	} else if (path.startsWith("/fallguys")) {
-		presenceData.largeImageKey = "fallguys";
+		presenceData.largeImageKey = Assets.Fallguys;
 		path = path.substring(9);
 		if (path.length === 0) {
 			presenceData.details = "Viewing homepage";
@@ -125,7 +132,7 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	} else {
-		presenceData.largeImageKey = "skindb";
+		presenceData.largeImageKey = Assets.Skindb;
 		if (path === "/") presenceData.details = "Viewing homepage";
 		else presenceData.details = `Viewing ${path.substring(1)}`;
 	}

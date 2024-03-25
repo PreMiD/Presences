@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "TheDrop.",
 		"id": "293828021134295040"
@@ -16,6 +16,10 @@
 		{
 			"name": "Kyrie",
 			"id": "368399721494216706"
+		},
+		{
+			"name": "Dark_Ville",
+			"id": "638080361179512853"
 		}
 	],
 	"service": "Roblox",
@@ -31,10 +35,10 @@
 		"www.roblox.com",
 		"web.roblox.com",
 		"rbx.com",
-		"talent.roblox.com",
+		"create.roblox.com",
 		"devforum.roblox.com"
 	],
-	"version": "3.0.13",
+	"version": "3.1.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/thumbnail.png",
 	"color": "#1b1d1e",

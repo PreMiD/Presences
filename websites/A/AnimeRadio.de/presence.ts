@@ -3,10 +3,18 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeRadio.de/assets/logo.png",
+	Animetreff = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeRadio.de/assets/0.png",
+	Animenews = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeRadio.de/assets/1.png",
+	Animekino = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeRadio.de/assets/2.png",
+	Animemesse = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeRadio.de/assets/3.png",
+	Animefanshop = "https://cdn.rcd.gg/PreMiD/websites/A/AnimeRadio.de/assets/4.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/A/AnimeRadio.de/assets/logo.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -25,7 +33,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "www.animetreff.de": {
-			presenceData.largeImageKey = "animetreff";
+			presenceData.largeImageKey = Assets.Animetreff;
 			if (document.URL.includes("/CustomPage/?id=1")) {
 				presenceData.details = "Chattet";
 				presenceData.smallImageKey = Assets.Writing;
@@ -83,14 +91,14 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "www.animenews.de": {
-			presenceData.largeImageKey = "animenews";
+			presenceData.largeImageKey = Assets.Animenews;
 			presenceData.details = "Liest Neuigkeiten";
 			presenceData.smallImageKey = Assets.Reading;
 
 			break;
 		}
 		case "www.animekino.de": {
-			presenceData.largeImageKey = "animekino";
+			presenceData.largeImageKey = Assets.Animekino;
 			if (document.URL.includes("partner"))
 				presenceData.details = "Betrachtet Partner";
 			else if (document.URL.includes("kontakt"))
@@ -150,7 +158,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "www.animemesse.de": {
-			presenceData.largeImageKey = "animemesse";
+			presenceData.largeImageKey = Assets.Animemesse;
 			presenceData.details = `Betrachtet ${
 				document.querySelector("#content > li.active > a").textContent
 			}`;
@@ -158,7 +166,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "www.animefanshop.de": {
-			presenceData.largeImageKey = "animefanshop";
+			presenceData.largeImageKey = Assets.Animefanshop;
 			const product = document.querySelector(
 				".product-info-title-desktop > span"
 			);

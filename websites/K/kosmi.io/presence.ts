@@ -18,17 +18,24 @@ const noGames: string[] = [
 	"Watch Party",
 ];
 
+const enum Assets {
+	Kosmimain = "https://cdn.rcd.gg/PreMiD/websites/K/kosmi.io/assets/0.png",
+	Vcall = "https://cdn.rcd.gg/PreMiD/websites/K/kosmi.io/assets/1.png",
+	Gamepad = "https://cdn.rcd.gg/PreMiD/websites/K/kosmi.io/assets/2.png",
+	Paintbrush = "https://cdn.rcd.gg/PreMiD/websites/K/kosmi.io/assets/3.png",
+}
+
 presence.on("UpdateData", async () => {
 	if (location.pathname === "/") {
 		details = "Viewing the Home Page...";
 		location.hash === "#contactScreen"
 			? (state = "Viewing Contact Information")
 			: (state = null);
-		smallImageKey = "reading";
+		smallImageKey = Assets.Reading;
 	} else if (location.pathname === "/lobby") {
 		details = "Browsing public rooms...";
 		state = null;
-		smallImageKey = "search";
+		smallImageKey = Assets.Search;
 	} else if (location.pathname.includes("room")) {
 		/*Try to get Metadata: Viewers, Game Name, if the elements don't exist, assume the user is on the indexpage */
 		try {
@@ -49,32 +56,32 @@ presence.on("UpdateData", async () => {
 		}
 		/* Re-set the index status, as user is likely on the index page again and the Metadata objects exist now */
 		details = "Choosing an activity";
-		smallImageKey = "reading";
+		smallImageKey = Assets.Reading;
 		/* Show the usercount in the lower text */
 		state = userCount === 0 ? "Alone" : `With ${userCount} others`;
 
 		/* This is executed if the user plays a game that is not in the "Special Activities" Array */
 		if (activityName && !noGames.includes(activityName.textContent)) {
 			details = `Playing ${activityName.textContent}`;
-			smallImageKey = "gamepad";
+			smallImageKey = Assets.Gamepad;
 		} else if (activityName && noGames.includes(activityName.textContent)) {
 			switch (
 				activityName.textContent /* Proper Grammar for the Activities */
 			) {
 				case "Watch Party":
 					details = `In a ${activityName.textContent}`;
-					smallImageKey = "live";
+					smallImageKey = Assets.Live;
 					break;
 				case "Paint":
 					details = "Painting";
-					smallImageKey = "paintbrush";
+					smallImageKey = Assets.Paintbrush;
 					break;
 				case "Table":
 					details = "At the Table";
 					break;
 				default:
 					details = `In a ${activityName.textContent}`;
-					smallImageKey = "vcam";
+					smallImageKey = Assets.Vcall;
 					break;
 			}
 		}

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "334411435633541121",
 		"name": "meffiu"
@@ -10,7 +10,10 @@
 		"pl": "Polska strona z darmowymi filmami i serialami bez rejestracji."
 	},
 	"url": "vizjer.pl",
-	"version": "1.0.3",
+	"matches": [
+		"*://vizjer.pl/*"
+	],
+	"version": "1.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Vizjer/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Vizjer/assets/thumbnail.png",
 	"color": "#BABABA",
@@ -23,5 +26,21 @@
 		"tv"
 	],
 	"iframe": true,
-	"iFrameRegExp": "prefulfilloverdoor[.]com|vidoza[.]net|vembed[.]net|upstream[.]to|streamvid[.]net|ds2play[.]com|doodstream[.]com|voe[.]sx|streamhide[.]to|vid-guard[.]com|mixdrop[.]co|filelions[.]site|wolfstream[.]tv"
+	"iFrameRegExp": "prefulfilloverdoor[.]com|vidoza[.]net|vembed[.]net|upstream[.]to|streamvid[.]net|ds2play[.]com|doodstream[.]com|voe[.]sx|streamhide[.]to|vid-guard[.]com|mixdrop[.]co|filelions[.]site|wolfstream[.]tv|streamhub[.]to",
+	"iFrameMatches": [
+		"*://prefulfilloverdoor.com/*",
+		"*://vidoza.net/*",
+		"*://vembed.net/*",
+		"*://upstream.to/*",
+		"*://streamvid.net/*",
+		"*://ds2play.com/*",
+		"*://doodstream.com/*",
+		"*://voe.sx/*",
+		"*://streamhide.to/*",
+		"*://vid-guard.com/*",
+		"*://mixdrop.co/*",
+		"*://filelions.site/*",
+		"*://wolfstream.tv/*",
+		"*://streamhub.to/*"
+	]
 }

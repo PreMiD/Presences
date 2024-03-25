@@ -3,6 +3,13 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	LogoRedText = "https://cdn.rcd.gg/PreMiD/websites/T/Tesla/assets/0.png",
+	LogoRed = "https://cdn.rcd.gg/PreMiD/websites/T/Tesla/assets/1.png",
+	LogoWhite = "https://cdn.rcd.gg/PreMiD/websites/T/Tesla/assets/2.png",
+	LogoWhiteText = "https://cdn.rcd.gg/PreMiD/websites/T/Tesla/assets/3.png",
+}
+
 presence.on("UpdateData", async function () {
 	const [timeElapsed, showButtons, logo, showCheckout] = await Promise.all([
 			presence.getSetting<boolean>("timeElapsed"),
@@ -10,7 +17,12 @@ presence.on("UpdateData", async function () {
 			presence.getSetting<number>("logo"),
 			presence.getSetting<boolean>("showCheckout"),
 		]),
-		logoArr = ["logo_red", "logo_red_text", "logo_white", "logo_white_text"],
+		logoArr = [
+			Assets.LogoRed,
+			Assets.LogoRedText,
+			Assets.LogoWhite,
+			Assets.LogoWhiteText,
+		],
 		urlpath = window.location.pathname.split("/"),
 		langs = [
 			"en_ca",
@@ -54,7 +66,7 @@ presence.on("UpdateData", async function () {
 		],
 		urlpNum = langs.includes(urlpath[1]) ? 2 : 1,
 		presenceData: PresenceData = {
-			largeImageKey: logoArr[logo] ?? "logo_red",
+			largeImageKey: logoArr[logo] ?? Assets.LogoRed,
 		};
 
 	if (timeElapsed) presenceData.startTimestamp = browsingTimestamp;

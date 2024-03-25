@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -14,7 +14,7 @@
 		"www.canvas.net"
 	],
 	"regExp": "((learn|www)[.]canvas[.]net|canvas[.]\\w+?([.]\\w+)+)|(\\w+?[.]instructure[.]com)",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Canvas/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Canvas/assets/thumbnail.png",
 	"color": "#e63d2f",

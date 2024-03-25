@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Vasilis",
 		"id": "241929388403195914"
@@ -16,7 +16,7 @@
 		"vi_VN": "Google Keep là dịch vụ ghi chú, nằm trong bộ Google Docs Editors của Google."
 	},
 	"url": "keep.google.com",
-	"version": "1.1.11",
+	"version": "1.1.12",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Keep/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Keep/assets/thumbnail.png",
 	"color": "#FFBA00",

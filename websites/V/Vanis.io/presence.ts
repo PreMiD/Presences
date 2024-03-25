@@ -12,7 +12,10 @@ let Server: string, Region: string, Nickname: string, Mass: string;
 
 presence.on("UpdateData", async () => {
 	// Presence Data
-	const presenceData: PresenceData = { largeImageKey: "vanis_image" },
+	const presenceData: PresenceData = {
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/V/Vanis.io/assets/0.png",
+		},
 		massElement = document.querySelector("#hud .stats div:nth-child(3)"),
 		overlay = <HTMLElement>document.querySelector("#overlay");
 

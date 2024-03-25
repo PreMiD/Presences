@@ -79,7 +79,35 @@ const presence = new Presence({
 		isChecked: false,
 		service: null,
 		presence: null,
+	},
+	/* eslint-disable camelcase */
+	assets: Record<string, string> = {
+		naver: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/0.png",
+		naver_webtoon: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/1.png",
+		naver_now: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/2.png",
+		naver_tv: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/3.png",
+		naver_tv_play: Assets.Play,
+		naver_tv_pause: Assets.Pause,
+		naver_papago: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/4.png",
+		naver_now_play: Assets.Play,
+		naver_now_pause: Assets.Pause,
+		naver_browse: Assets.Search,
+		naver_tv_browse: Assets.Search,
+		naver_papago_language:
+			"https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/5.png",
+		naver_webtoon_browse: Assets.Search,
+		naver_now_browse: Assets.Search,
+		naver_now_live: Assets.Live,
+		naver_book: Assets.Reading,
+		naver_webtoon_book: Assets.Reading,
+		naver_blog: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/6.png",
+		naver_blog_browse: Assets.Search,
+		naver_cafe: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/7.png",
+		naver_cafe_browse: Assets.Search,
+		book: Assets.Reading,
+		browse: Assets.Search,
 	};
+/* eslint-enable camelcase */
 
 let blog: string, cafeTitle: string;
 
@@ -101,9 +129,9 @@ presence.on("UpdateData", async () => {
 			sChannelName: document.querySelector("strong.rmc_name")?.textContent,
 		},
 		presenceData: PresenceData = {
-			largeImageKey: data.service?.toLowerCase(),
+			largeImageKey: assets[data.service?.toLowerCase()],
 			details: "Browsing...",
-			smallImageKey: `${data.service.toLowerCase()}_browse`,
+			smallImageKey: assets[`${data.service.toLowerCase()}_browse`],
 		},
 		getImageOrTimestamp = (
 			video: HTMLVideoElement,
@@ -125,7 +153,7 @@ presence.on("UpdateData", async () => {
 				} = {
 					startTimestamp: timestamps[0],
 					endTimestamp: timestamps[1],
-					smallImageKey: `${data.service.toLowerCase()}_play`,
+					smallImageKey: assets[`${data.service.toLowerCase()}_play`],
 					smallImageText: "Playing",
 				};
 
@@ -133,7 +161,7 @@ presence.on("UpdateData", async () => {
 				delete tempData.startTimestamp;
 				delete tempData.endTimestamp;
 
-				tempData.smallImageKey = `${data.service.toLowerCase()}_pause`;
+				tempData.smallImageKey = assets[`${data.service.toLowerCase()}_pause`];
 				tempData.smallImageText = "Paused";
 			}
 
@@ -312,7 +340,7 @@ presence.on("UpdateData", async () => {
 					],
 				},
 				smallImageKey: {
-					setTo: `${data.service.toLowerCase()}_book`,
+					setTo: assets[`${data.service.toLowerCase()}_book`],
 				},
 			},
 		},
@@ -334,7 +362,7 @@ presence.on("UpdateData", async () => {
 					],
 				},
 				smallImageKey: {
-					setTo: `${data.service.toLowerCase()}_book`,
+					setTo: assets[`${data.service.toLowerCase()}_book`],
 				},
 			},
 		},
@@ -356,7 +384,7 @@ presence.on("UpdateData", async () => {
 					],
 				},
 				smallImageKey: {
-					setTo: `${data.service.toLowerCase()}_book`,
+					setTo: assets[`${data.service.toLowerCase()}_book`],
 				},
 			},
 		},
@@ -410,7 +438,7 @@ presence.on("UpdateData", async () => {
 							k: !!document.querySelector('[class="badge_live"]'),
 							v: true,
 							then: {
-								v: `${data.service.toLowerCase()}_live`,
+								v: assets[`${data.service.toLowerCase()}_live`],
 							},
 						},
 					},
@@ -487,7 +515,7 @@ presence.on("UpdateData", async () => {
 					}`,
 				},
 				smallImageKey: {
-					setTo: `${data.service.toLowerCase()}_language`,
+					setTo: assets[`${data.service.toLowerCase()}_language`],
 				},
 			},
 		},
@@ -507,7 +535,7 @@ presence.on("UpdateData", async () => {
 					}`,
 				},
 				smallImageKey: {
-					setTo: `${data.service.toLowerCase()}_language`,
+					setTo: assets[`${data.service.toLowerCase()}_language`],
 				},
 			},
 		},

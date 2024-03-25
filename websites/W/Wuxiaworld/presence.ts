@@ -17,8 +17,10 @@ presence.on("UpdateData", () => {
 		).value;
 		presenceData.smallImageKey = Assets.Search;
 	} else {
-		if (pathname.includes("emperors-domination"))
-			presenceData.largeImageKey = "emperor";
+		if (pathname.includes("emperors-domination")) {
+			presenceData.largeImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/W/Wuxiaworld/assets/0.png";
+		}
 		if (/^\/$/.test(pathname)) presenceData.details = "Viewing Home Page";
 		else if (/^\/novels\/?$/.test(pathname)) {
 			// Counting comics
@@ -29,7 +31,7 @@ presence.on("UpdateData", () => {
 		} else if (/^\/novel\/[0-9a-z-]+\/?$/i.test(pathname)) {
 			presenceData.details = "Viewing Novel";
 			presenceData.state = document.querySelector(".novel-body h2").textContent;
-			presenceData.smallImageKey = "eye";
+			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.buttons = [
 				{
 					label: "Visit Novel Page",

@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"name": "nesi",
+		"id": "476522405725077519"
+	},
+	"service": "Anim",
+	"description": {
+		"en": "Anim is a site to watch anime without ads.",
+		"pt_BR": "Anim Animes é um site para ver animes sem anúncios."
+	},
+	"url": "anim.wtf",
+	"version": "1.0.2",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Anim/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Anim/assets/thumbnail.png",
+	"color": "#0e0e12",
+	"category": "anime",
+	"tags": [
+		"video",
+		"anime",
+		"manga"
+	]
+}

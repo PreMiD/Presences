@@ -1,8 +1,8 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "334411435633541121",
-		"name": "Meffiu"
+		"name": "meffiu"
 	},
 	"service": "Desu-Online",
 	"description": {
@@ -10,7 +10,10 @@
 		"pl": "Najlepsza strona z anime online pl! Anime z polskimi napisami w doskonałej jakości i bez reklam! Najlepsze odtwarzacze video."
 	},
 	"url": "desu-online.pl",
-	"version": "1.0.10",
+	"matches": [
+		"*://desu-online.pl/*"
+	],
+	"version": "1.0.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Desu-Online/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Desu-Online/assets/thumbnail.png",
 	"color": "#D9910F",
@@ -20,5 +23,17 @@
 		"anime"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": "cda[.]pl|google[.]com|mega[.nz]|dailymotion[.]com|sibnet[.]ru|fileditchstuff[.]me|yourupload[.]com|vk[.]com|wolfstream[.]tv|ok[.]ru",
+	"iFrameMatches": [
+		"*://*.cda.pl/*",
+		"*://*.google.com/*",
+		"*://*.mega.nz/*",
+		"*://*.dailymotion.com/*",
+		"*://*.sibnet.ru/*",
+		"*://*.fileditchstuff.me/*",
+		"*://*.yourupload.com/*",
+		"*://*.vk.com/*",
+		"*://*.wolfstream.tv/*",
+		"*://*.ok.ru/*"
+	]
 }

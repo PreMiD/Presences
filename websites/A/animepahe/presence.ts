@@ -157,11 +157,19 @@ presence.on(
 	}
 );
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/logo.png",
+	BrowsingHome = "https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/0.png",
+	BrowsingAll = "https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/1.png",
+	BrowsingGenre = "https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/2.png",
+	BrowsingTime = "https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/3.png",
+	BrowsingSeason = "https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/4.png",
+}
+
 presence.on("UpdateData", async () => {
 	const path = document.location.pathname.split("/").slice(1),
 		presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			details: "loading",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		},
@@ -188,7 +196,7 @@ presence.on("UpdateData", async () => {
 				if (page === "") page = "1";
 
 				presenceData.state = `${strings.page} ${page}`;
-				presenceData.smallImageKey = "presence_browsing_home";
+				presenceData.smallImageKey = Assets.BrowsingHome;
 				presenceData.smallImageText = strings.browse;
 			}
 			break;
@@ -199,7 +207,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = `${viewing} A-Z:`;
 					presenceData.state =
 						document.querySelector("a.nav-link.active").textContent;
-					presenceData.smallImageKey = "presence_browsing_all";
+					presenceData.smallImageKey = Assets.BrowsingAll;
 					presenceData.smallImageText = strings.browse;
 				} else {
 					switch (path[1]) {
@@ -208,7 +216,7 @@ presence.on("UpdateData", async () => {
 								// viewing genre
 								presenceData.details = strings.viewGenre;
 								presenceData.state = capitalize(path[2]);
-								presenceData.smallImageKey = "presence_browsing_genre";
+								presenceData.smallImageKey = Assets.BrowsingGenre;
 								presenceData.smallImageText = strings.browse;
 							}
 							break;
@@ -218,7 +226,7 @@ presence.on("UpdateData", async () => {
 								presenceData.details = `${viewing} Anime ${strings.timeSeason}:`;
 								presenceData.state =
 									document.querySelectorAll("h1")[0].textContent;
-								presenceData.smallImageKey = "presence_browsing_time";
+								presenceData.smallImageKey = Assets.BrowsingTime;
 								presenceData.smallImageText = strings.browse;
 							}
 							break;
@@ -238,7 +246,7 @@ presence.on("UpdateData", async () => {
 											.map(s => capitalize(s))
 											.join(" ")
 									: capitalize(heading);
-								presenceData.smallImageKey = "presence_browsing_all";
+								presenceData.smallImageKey = Assets.BrowsingAll;
 								presenceData.smallImageText = strings.browse;
 							} else {
 								// viewing specific
@@ -283,7 +291,7 @@ presence.on("UpdateData", async () => {
 										".youtube-preview"
 									).href;
 
-								presenceData.smallImageKey = "presence_browsing_season";
+								presenceData.smallImageKey = Assets.BrowsingSeason;
 								presenceData.smallImageText = strings.browse;
 
 								presenceData.buttons = [

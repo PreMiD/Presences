@@ -3,6 +3,12 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/SCP%20Wiki/assets/logo.png",
+	LogoInt = "https://cdn.rcd.gg/PreMiD/websites/S/SCP%20Wiki/assets/0.png",
+	LogoSandbox = "https://cdn.rcd.gg/PreMiD/websites/S/SCP%20Wiki/assets/1.png",
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
@@ -11,9 +17,9 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (document.location.hostname === "scp-int.wikidot.com")
-		presenceData.largeImageKey = "logo-int";
+		presenceData.largeImageKey = Assets.LogoInt;
 	if (document.location.hostname === "scp-sandbox-3.wikidot.com")
-		presenceData.largeImageKey = "logo-sandbox";
+		presenceData.largeImageKey = Assets.LogoSandbox;
 
 	if (document.location.pathname === "/" || !document.location.pathname)
 		presenceData.state = "Front Page";

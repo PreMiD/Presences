@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -17,7 +17,7 @@
 	},
 	"url": "www.labymod.net",
 	"regExp": "([a-z0-9-]+[.])*labymod[.]net[/]",
-	"version": "1.2.21",
+	"version": "1.2.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LabyMod/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LabyMod/assets/thumbnail.png",
 	"color": "#008fe8",

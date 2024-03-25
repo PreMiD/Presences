@@ -90,6 +90,12 @@ async function pushScript() {
 	});
 }
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/1.png",
+	Noback = "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/2.png",
+	Animated = "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/0.gif",
+}
+
 const presence = new Presence({
 		clientId: "926541425682829352",
 	}),
@@ -166,14 +172,11 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover"),
 		]),
 		largeImage =
-			[
-				"https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/0.gif",
-				"nflix_lg",
-				"noback",
-			][logo] || "nflix_lg";
+			[Assets.Animated, Assets.Logo, Assets.Noback][logo] || Assets.Logo;
 
 	let presenceData: PresenceData = {
 			largeImageKey: largeImage,
+			type: ActivityType.Watching,
 		},
 		[videoMetadata] = Object.values(latestData?.videoMetadata || {});
 	//* Reset browsingTimestamp if href has changed.
@@ -320,10 +323,10 @@ presence.on("UpdateData", async () => {
 					delete presenceData.endTimestamp;
 				}
 
-				if (presenceData.details.length < 3)
+				if ((presenceData.details as string).length < 3)
 					presenceData.details = ` ${presenceData.details}`;
 
-				if (presenceData.state?.length < 3)
+				if ((presenceData.state as string)?.length < 3)
 					presenceData.state = ` ${presenceData.state}`;
 
 				if (showMovie) return presence.setActivity(presenceData);
@@ -375,7 +378,7 @@ presence.on("UpdateData", async () => {
 				if (presenceData.details.length < 3)
 					presenceData.details = ` ${presenceData.details}`;
 
-				if (presenceData.state.length < 3)
+				if ((presenceData.state as string).length < 3)
 					presenceData.state = ` ${presenceData.state}`;
 
 				if (showSeries) return presence.setActivity(presenceData);
@@ -441,7 +444,7 @@ presence.on("UpdateData", async () => {
 			details: strings.searchFor,
 			state: document.querySelector<HTMLInputElement>(".searchInput > input")
 				?.value,
-			smallImageKey: "search",
+			smallImageKey: Assets.Search,
 		},
 		"jbv/(\\d*)/": {
 			...(await (async () => {
@@ -503,7 +506,7 @@ presence.on("UpdateData", async () => {
 
 	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
-	if (privacy && presenceData.smallImageKey === "search") {
+	if (privacy && presenceData.smallImageKey === Assets.Search) {
 		presenceData.details = strings.searchSomething;
 		delete presenceData.state;
 	} else if (privacy) {

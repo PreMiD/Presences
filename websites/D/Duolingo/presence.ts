@@ -1,4 +1,5 @@
 import {
+	assets,
 	deEsser,
 	giveArticle,
 	makeProgressBar,
@@ -153,7 +154,7 @@ function handleLesson(_path: string | string[]) {
 		presenceData.state = `${makeProgressBar(
 			PBProgression,
 			Number(progressBarElement?.getAttribute("aria-valuemax")),
-			presenceData.details.length / 3.2,
+			(presenceData.details as string).length / 3.2,
 			/--web-ui_progress-bar-color: rgb\(var\(--color-(\w+)\)\);/.exec(
 				progressBarElement?.getAttribute("style")
 			)?.[1]
@@ -201,7 +202,7 @@ function setLang(code: string) {
 			}[language.code]
 		);
 	} else if (language.name && language.code) {
-		presenceData.smallImageKey = `lang_${language.code.split("-")[0]}`;
+		presenceData.smallImageKey = assets[`lang_${language.code.split("-")[0]}`];
 		presenceData.smallImageText = `${language.name}`;
 	} else presenceData.smallImageKey = IMAGE.duoGlobe;
 }

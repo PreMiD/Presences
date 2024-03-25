@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"name": "Dzlandis",
 		"id": "259708781166985217"
@@ -13,7 +13,7 @@
 		"my.brain.fm",
 		"try.brain.fm"
 	],
-	"version": "1.0.7",
+	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Brain.fm/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Brain.fm/assets/thumbnail.png",
 	"color": "#952fc0",

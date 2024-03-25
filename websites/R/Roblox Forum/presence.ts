@@ -6,7 +6,6 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/R/Roblox%20Forum/assets/logo.png",
-		smallImageKey: "small",
 	};
 	if (document.location.pathname === "/")
 		presenceData.details = "Viewing the homepage";

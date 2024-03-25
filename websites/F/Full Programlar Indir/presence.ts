@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 			state: searchingFor.textContent
 				? searchingFor.textContent.slice(17, searchingFor.textContent.length)
 				: "Belirsiz",
-			smallImageKey: "search",
+			smallImageKey: Assets.Search,
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
 	} else if (page.includes("/page/")) {

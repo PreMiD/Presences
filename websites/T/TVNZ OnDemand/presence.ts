@@ -22,14 +22,12 @@ presence.on("UpdateData", () => {
 				"https://cdn.rcd.gg/PreMiD/websites/T/TVNZ%20OnDemand/assets/logo.png",
 		};
 
-	if (document.location.href.includes("login.tech.tvnz.co.nz")) {
+	if (document.location.href.includes("login.tech.tvnz.co.nz"))
 		presenceData.details = "Logging in...";
-		presenceData.smallImageKey = "login";
-	} else if (document.location.pathname.includes("/1-news-special")) {
+	else if (document.location.pathname.includes("/1-news-special")) {
 		presenceData.details = "Watching a live 1 NEWS Special";
 		presenceData.state =
 			document.querySelectorAll(".Hero-title")[1].textContent;
-		presenceData.smallImageKey = "one";
 		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 	} else if (
 		document.location.pathname.includes("/choose-profile") ||
@@ -93,7 +91,6 @@ presence.on("UpdateData", () => {
 			}
 			case "https://www.tvnz.co.nz/livetv/tvnz-1": {
 				presenceData.details = "Watching TVNZ 1 Live";
-				presenceData.smallImageKey = "one";
 				presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 				presenceData.state =
 					document.querySelectorAll(".Player-title")[0].textContent;
@@ -102,7 +99,6 @@ presence.on("UpdateData", () => {
 			}
 			case "https://www.tvnz.co.nz/livetv/tvnz-2": {
 				presenceData.details = "Watching TVNZ 2 Live";
-				presenceData.smallImageKey = "two";
 				presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 				presenceData.state =
 					document.querySelectorAll(".Player-title")[0].textContent;
@@ -111,7 +107,6 @@ presence.on("UpdateData", () => {
 			}
 			case "https://www.tvnz.co.nz/livetv/tvnz-duke": {
 				presenceData.details = "Watching TVNZ Duke Live";
-				presenceData.smallImageKey = "duke";
 				presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 				presenceData.state =
 					document.querySelectorAll(".Player-title")[0].textContent;
@@ -119,10 +114,8 @@ presence.on("UpdateData", () => {
 				break;
 			}
 			default:
-				if (document.location.pathname.includes("/one-news")) {
+				if (document.location.pathname.includes("/one-news"))
 					presenceData.details = "Browsing 1 NEWS";
-					presenceData.smallImageKey = "one";
-				}
 		}
 	}
 

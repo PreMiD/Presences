@@ -2,6 +2,10 @@ const presence = new Presence({
 	clientId: "630570838084812801",
 });
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png",
+}
+
 presence.on("UpdateData", async () => {
 	const path = document.location.pathname,
 		topic = document.querySelector("#section_0"),
@@ -22,9 +26,8 @@ presence.on("UpdateData", async () => {
 					? ` (${date.textContent.replace("Updated: ", "")})`
 					: ""
 			} `,
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png",
-			smallImageKey: "logo",
+			largeImageKey: Assets.Logo,
+			smallImageKey: Assets.Logo,
 			smallImageText: decodeURIComponent(document.location.href),
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
@@ -36,7 +39,7 @@ presence.on("UpdateData", async () => {
 			state: category.textContent,
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png",
-			smallImageKey: "logo",
+			smallImageKey: Assets.Logo,
 			smallImageText: decodeURIComponent(document.location.href),
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
@@ -53,7 +56,7 @@ presence.on("UpdateData", async () => {
 			state: `Topic: ${newTopic ?? "Unknown."} `,
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png",
-			smallImageKey: "logo",
+			smallImageKey: Assets.Logo,
 			smallImageText: decodeURIComponent(document.location.href),
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
@@ -70,7 +73,7 @@ presence.on("UpdateData", async () => {
 			state: `${searching[0].toUpperCase() + searching.slice(1).toLowerCase()}`,
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png",
-			smallImageKey: "logo",
+			smallImageKey: Assets.Logo,
 			smallImageText: "Searching...",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		});
@@ -81,7 +84,7 @@ presence.on("UpdateData", async () => {
 		state: "Homepage",
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png",
-		smallImageKey: "logo",
+		smallImageKey: Assets.Logo,
 		startTimestamp: Math.floor(Date.now() / 1000),
 	});
 });

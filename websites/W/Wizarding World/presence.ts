@@ -1,7 +1,17 @@
 const presence = new Presence({
 		clientId: "843731213893107713",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	assets = {
+		gryffindor:
+			"https://cdn.rcd.gg/PreMiD/websites/W/Wizarding%20World/assets/0.png",
+		hufflepuff:
+			"https://cdn.rcd.gg/PreMiD/websites/W/Wizarding%20World/assets/1.png",
+		ravenclaw:
+			"https://cdn.rcd.gg/PreMiD/websites/W/Wizarding%20World/assets/2.png",
+		slytherin:
+			"https://cdn.rcd.gg/PreMiD/websites/W/Wizarding%20World/assets/3.png",
+	};
 
 presence.on("UpdateData", async function () {
 	const setting = {
@@ -172,9 +182,12 @@ presence.on("UpdateData", async function () {
 		if (urlpath[1] === "passport") presenceData.details = "Passport";
 
 		if (document.querySelector("span.HogwartsHouse_houseName__CykI1")) {
-			presenceData.smallImageKey = document
-				.querySelector("span.HogwartsHouse_houseName__CykI1")
-				?.textContent.toLocaleLowerCase();
+			presenceData.smallImageKey =
+				assets[
+					document
+						.querySelector("span.HogwartsHouse_houseName__CykI1")
+						?.textContent.toLocaleLowerCase() as keyof typeof assets
+				];
 			presenceData.smallImageText = document.querySelector(
 				"span.HogwartsHouse_houseName__CykI1"
 			)?.textContent;
