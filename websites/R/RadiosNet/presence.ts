@@ -1,0 +1,149 @@
+const presence = new Presence({
+		clientId: "1221866611611402363",
+	}),
+	strings = presence.getStrings({
+		play: "presence.playback.playing",
+		pause: "presence.playback.paused",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+const enum AssetsRadios { // Other default assets can be found at index.d.ts
+	Logo = "https://static.radios.com.br/img/logo-radiosnet-512-solid.png",
+}
+
+presence.on("UpdateData", async () => {
+	const presenceData: PresenceData = {
+		largeImageKey: AssetsRadios.Logo,
+		startTimestamp: browsingTimestamp,
+	};
+
+	if (document.location.pathname == "/") {
+		presenceData.details = "Página Inicial";
+	} else if (document.location.pathname.includes("/favoritos")) {
+		presenceData.details = "Favoritos";
+		presenceData.smallImageKey = Assets.Reading;
+	} else if (document.location.pathname.includes("/lista/pais/brasil/33")) {
+		presenceData.details = "Rádios do Brasil";
+		presenceData.smallImageKey = Assets.Search;
+	} else if (document.location.pathname.includes("/lista/pais")) {
+		let hasCountry =
+			document.getElementsByClassName("page-header")[0].innerHTML;
+		if (hasCountry == "Lista de países") {
+			presenceData.details = "Rádios Internacionais";
+			presenceData.smallImageKey = Assets.Search;
+		} else {
+			let countryName = document
+				.getElementsByClassName("page-header")[0]
+				.innerHTML.split("<small>")[1]
+				.split("</small>")[0];
+			presenceData.details = `Navegando pelas rádios de "${countryName}"`;
+			presenceData.smallImageKey = Assets.Search;
+		}
+	} else if (document.location.pathname.includes("/radio/cidade")) {
+		let cityName = document
+			.getElementsByClassName("page-header")[0]
+			.innerHTML.split("<small>")[1]
+			.split("</small>")[0];
+		presenceData.details = `Navegando pelas rádios de "${cityName}"`;
+		presenceData.smallImageKey = Assets.Search;
+	} else if (document.location.pathname.includes("/lista/segmento")) {
+		presenceData.details = "Gêneros";
+		presenceData.smallImageKey = Assets.Search;
+	} else if (document.location.pathname.includes("/radio/segmento")) {
+		let gender = document
+			.getElementsByClassName("page-header")[0]
+			.innerHTML.split("<small>")[1]
+			.split("</small>")[0];
+
+		presenceData.details = `Navegando pelo gênero "${gender}"`;
+		presenceData.smallImageKey = Assets.Search;
+	} else if (document.location.pathname.includes("/futebol")) {
+		presenceData.details = "Futebol ao Vivo";
+		presenceData.smallImageKey = Assets.Search;
+	} else if (document.location.pathname.includes("/estatistica")) {
+		presenceData.details = "Estatística";
+		presenceData.smallImageKey = Assets.Reading;
+	} else if (document.location.pathname.includes("/adicionar")) {
+		presenceData.details = "Adicionar Rádio";
+		presenceData.smallImageKey = Assets.Writing;
+	} else if (document.location.pathname.includes("/atualizar")) {
+		presenceData.details = "Atualizar Rádio";
+		presenceData.smallImageKey = Assets.Writing;
+	} else if (document.location.pathname.includes("/excluir")) {
+		presenceData.details = "Excluir Rádio";
+		presenceData.smallImageKey = Assets.Stop;
+	} else if (document.location.pathname.includes("/anunciar")) {
+		presenceData.details = "Anunciar Rádio";
+		presenceData.smallImageKey = Assets.Live;
+	} else if (document.location.pathname.includes("/divulgue")) {
+		presenceData.details = "Divulgação";
+		presenceData.smallImageKey = Assets.Call;
+	} else if (document.location.pathname.includes("/contato")) {
+		presenceData.details = "Contato";
+		presenceData.smallImageKey = Assets.Call;
+	} else if (document.location.pathname.includes("/privacidade")) {
+		presenceData.details = "Políticas de Privacidade";
+		presenceData.smallImageKey = Assets.Reading;
+	} else if (document.location.pathname.includes("/tos")) {
+		presenceData.details = "Termos de Serviço";
+		presenceData.smallImageKey = Assets.Reading;
+	} else if (document.location.pathname.includes("/lista")) {
+		let place = document
+			.getElementsByClassName("page-header")[0]
+			.innerHTML.split("<small>")[1]
+			.split("</small>")[0];
+
+		presenceData.details = `Navegando pelas rádios de "${place}"`;
+		presenceData.smallImageKey = Assets.Search;
+	} else if (document.location.pathname.includes("/busca")) {
+		presenceData.details = `Buscando por "${
+			document.location.search.split("=")[1].split("&")[0]
+		}"`;
+
+		presenceData.smallImageKey = Assets.Search;
+	} else if (
+		document.location.pathname.includes("/aovivo/") ||
+		document.location.href.includes("http://play.radios.com.br/")
+	) {
+		let station: string, state: string, image: string, slogan: string;
+
+		station = document
+			.getElementsByClassName("info")[0]
+			.innerHTML.split("<h1>")[1]
+			.split("</h1>")[0];
+
+		state = document
+			.getElementsByClassName("info")[0]
+			.innerHTML.split("<h1>")[1]
+			.split("</h1>")[1]
+			.split("<h2>")[1]
+			.split("</h2>")[0];
+
+		try {
+			slogan = document
+				.getElementsByClassName("info")[0]
+				.innerHTML.split("<h1>")[1]
+				.split("</h1>")[1]
+				.split("<h2>")[1]
+				.split("</h2>")[1]
+				.split('"slogan">')[1]
+				.split("</p>")[0];
+		} catch (error) {
+			slogan = "Desde 1997 trazendo o melhor compilado de emissoras de rádio!";
+		}
+
+		image = (
+			document.getElementsByClassName("img-rounded")[0] as HTMLImageElement
+		).src;
+
+		presenceData.details = station;
+		presenceData.state = state;
+
+		presenceData.largeImageKey = image;
+
+		presenceData.smallImageKey = Assets.PremiereLive;
+		presenceData.smallImageText = slogan;
+	}
+
+	presence.setActivity(presenceData);
+});
