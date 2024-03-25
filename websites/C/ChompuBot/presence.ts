@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: "1219713910165209169",
-}),
+		clientId: "1219713910165209169",
+	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
@@ -68,42 +68,45 @@ presence.on("UpdateData", async () => {
 				durationPlayer
 			);
 
-			presenceData.details = title;
-			presenceData.state = author;
-			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-				"[data-label='guild-logo']"
-			).src;
-			presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
-			presenceData.smallImageText = playing ? "Playing" : "Pause";
-			presenceData.startTimestamp = startTimestamp;
-			presenceData.endTimestamp = endTimestamp;
-			presenceData.buttons = [
-				{
-					label: `Join Player ${username}`,
-					url: document.location.href,
-				},
-			];
+			presenceData = {
+				details: title,
+				state: author,
+				largeImageKey: document.querySelector<HTMLImageElement>(
+					"[data-label='guild-logo']"
+				).src,
+				smallImageKey: playing ? Assets.Play : Assets.Pause,
+				smallImageText: playing ? "Playing" : "Pause",
+				startTimestamp,
+				endTimestamp,
+				buttons: [
+					{
+						label: `Join Player ${username}`,
+						url: document.location.href,
+					},
+				],
+			};
 
 			if (!playing) {
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
 			}
 		} else {
-			presenceData.details = "No song queue found";
-			presenceData.state = "In the server...";
-			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
-				"[data-label='guild-logo']"
-			).src;
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.smallImageText = "Zzz";
-			presenceData.startTimestamp = browsingTimestamp;
-			delete presenceData.endTimestamp;
-			presenceData.buttons = [
-				{
-					label: "Join Player",
-					url: document.location.href,
-				},
-			];
+			presenceData = {
+				details: "No song queue found",
+				state: "In the server...",
+				largeImageKey: document.querySelector<HTMLImageElement>(
+					"[data-label='guild-logo']"
+				).src,
+				smallImageKey: Assets.Reading,
+				smallImageText: "Zzz",
+				startTimestamp: browsingTimestamp,
+				buttons: [
+					{
+						label: "Join Player",
+						url: document.location.href,
+					},
+				],
+			};
 		}
 	} else {
 		presenceData = {
