@@ -10,10 +10,10 @@ const enum AssetsRadios {
 const { pathname, href, search } = document.location;
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-		largeImageKey: AssetsRadios.Logo,
-		startTimestamp: browsingTimestamp,
-	};
+    const presenceData: PresenceData = {
+        largeImageKey: AssetsRadios.Logo,
+        startTimestamp: browsingTimestamp,
+    };
 
 	if (pathname === "/") presenceData.details = "Página Inicial";
 	else if (pathname.includes("/favoritos")) {
