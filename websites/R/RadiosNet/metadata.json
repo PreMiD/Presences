@@ -11,7 +11,8 @@
 	},
 	"url": "radios.com.br",
 	"matches": [
-		"*://radios.com.br/*"
+		"*://www.radios.com.br/*",
+		"*://play.radios.com.br/*"
 	],
 	"version": "1.0.0",
 	"logo": "https://static.radios.com.br/img/logo-radiosnet-512-solid.png",
