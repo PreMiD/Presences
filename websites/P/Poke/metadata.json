@@ -12,15 +12,15 @@
 		"poketube.fun",
 		"poke.ggtyler.dev",
 		"poke.vern.cc"
-	],  
+	],
 	"matches": [
-        "*://poketube.fun/*",
-        "*://poke.vern.cc/*",
-        "*://poke.ggtyler.dev/*"
-        ],    
-	"version": "1.0.0",
-	"logo": "https://poketube.fun/css/yt-ukraine-512.png",
-	"thumbnail": "https://cdn.glitch.global/d68d17bb-f2c0-4bc3-993f-50902734f652/aa70111e-5bcd-4379-8b23-332a33012b78.image.png",
+		"*://poketube.fun/*",
+		"*://poke.vern.cc/*",
+		"*://poke.ggtyler.dev/*"
+	],
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Poke/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Poke/assets/thumbnail.png",
 	"color": "#414161",
 	"category": "videos",
 	"tags": [
