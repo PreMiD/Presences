@@ -38,8 +38,8 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey =
 				document.querySelector("video") &&
 				!document.querySelector("video").paused
-					? "play"
-					: "pause";
+					? Assets.Play
+					: Assets.Pause;
 			const videoTitleElement = document.querySelector(".video-title.t");
 			presenceData.details = videoTitleElement
 				? videoTitleElement.textContent.trim()
