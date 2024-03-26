@@ -43,11 +43,9 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Gêneros";
 		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname.includes("/radio/segmento")) {
-		const genre = document
-			.querySelector(".page-header")
-			?.textContent.split(": ")[1];
-
-		presenceData.details = `Navegando pelo gênero "${genre}"`;
+		presenceData.details = `Navegando pelo gênero "${
+			document.querySelector(".page-header")?.textContent.split(": ")[1]
+		}"`;
 		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname.includes("/futebol")) {
 		presenceData.details = "Futebol ao Vivo";
@@ -94,28 +92,27 @@ presence.on("UpdateData", async () => {
 		pathname.includes("/aovivo/") ||
 		href.includes("play.radios.com.br/")
 	) {
-		const station = document.querySelector(".info")?.textContent.split("\n")[1],
-			state = document.querySelector(".info")?.textContent.split("\n")[2];
+		presenceData.details = document
+			.querySelector(".info")
+			?.textContent.split("\n")[1];
 
-		if (
-			document
-				.querySelector(".info")
-				?.textContent.split("\n")[3]
-				.split("\t")[9] !== ""
-		) {
-			presenceData.smallImageText = document
-				.querySelector(".info")
-				?.textContent.split("\n")[3];
-		} else {
+		const slogan = document
+			.querySelector(".info")
+			?.textContent.split("\n")[3]
+			?.split("\t")[9];
+
+		if (slogan === undefined || slogan === "") {
 			presenceData.smallImageText =
 				"Desde 1997 trazendo o melhor compilado de emissoras de rádio!";
+		} else {
+			presenceData.smallImageText = slogan;
 		}
 
-		const image = document.querySelector<HTMLImageElement>(".img-rounded")?.src;
-
-		presenceData.details = station;
-		presenceData.state = state;
-		presenceData.largeImageKey = image;
+		presenceData.state = document
+			.querySelector(".info")
+			?.textContent.split("\n")[2];
+		presenceData.largeImageKey =
+			document.querySelector<HTMLImageElement>(".img-rounded")?.src;
 		presenceData.smallImageKey = Assets.PremiereLive;
 	}
 
