@@ -62,7 +62,7 @@ const strategies = new Set([
 		"Nagashi_mangan",
 	]),
 	games = new Set(["Riichi_City", "Majsoul", "Sega_MJ", "Tenhou.net"]),
-	SLIDESHOW_TIMEOUT = 6e3;
+	SLIDESHOW_TIMEOUT = 6000;
 
 /**
  * Applies page details based on the current location.
