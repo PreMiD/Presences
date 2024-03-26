@@ -105,6 +105,7 @@ presence.on("UpdateData", async () => {
 		else {
 			presenceData.smallImageText =
 				"Desde 1997 trazendo o melhor compilado de emissoras de rádio!";
+		}
 
 		presenceData.state = document
 			.querySelector(".info")
