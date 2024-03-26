@@ -9,19 +9,33 @@
 		"en": "The place for your favorite movies & shows"
 	},
 	"url": [
-		"movie-web.app",
+		"watch.qtchaos.de",
 		"mw.lonelil.com",
 		"mw.lonelil.ru",
-		"mv-web.netlify.app"
+		"mv-web.netlify.app",
+		"bmov.vercel.app",
+		"stream.thehairy.me",
+		"scootydooter.vercel.app",
+		"movie-web-me.vercel.app",
+		"sudo-flix.lol",
+		"movie.exorbgn.net",
+		"movie-web.x"
 	],
 	"regExp": "(dev[.])?(movie-web[.]app)",
 	"matches": [
-		"*://movie-web.app/*",
+		"*://watch.qtchaos.de/*",
 		"*://mw.lonelil.com/*",
 		"*://mw.lonelil.ru/*",
-		"*://mv-web.netlify.app/*"
+		"*://mv-web.netlify.app/*",
+		"*://bmov.vercel.app/*",
+		"*://stream.thehairy.me/*",
+		"*://scootydooter.vercel.app/*",
+		"*://movie-web-me.vercel.app/*",
+		"*://sudo-flix.lol/*",
+		"*://movie.exorbgn.net/*",
+		"*://movie-web.x/*"
 	],
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/thumbnail.png",
 	"color": "#533670",
