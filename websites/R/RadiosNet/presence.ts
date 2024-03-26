@@ -97,7 +97,12 @@ presence.on("UpdateData", async () => {
 		const station = document.querySelector(".info")?.textContent.split("\n")[1],
 			state = document.querySelector(".info")?.textContent.split("\n")[2];
 
-		if (document.querySelector(".info")?.textContent.split("\n")[3].split('\t')[9] !== "") {
+		if (
+			document
+				.querySelector(".info")
+				?.textContent.split("\n")[3]
+				.split("\t")[9] !== ""
+		) {
 			presenceData.smallImageText = document
 				.querySelector(".info")
 				?.textContent.split("\n")[3];
