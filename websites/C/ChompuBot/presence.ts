@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: "1219713910165209169",
-}),
+		clientId: "1219713910165209169",
+	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
@@ -32,11 +32,10 @@ presence.on("UpdateData", async () => {
 			startTimestamp,
 			endTimestamp;
 
-		const status = document.querySelector<HTMLElement>(
-			"div.hidden.-player-status"
-		).textContent;
-
-		if (status === "true") {
+		if (
+			document.querySelector<HTMLElement>("div.hidden.-player-status")
+				.textContent === "true"
+		) {
 			username = document.querySelector<HTMLAnchorElement>(
 				"[data-label='player-requester']"
 			).textContent;
