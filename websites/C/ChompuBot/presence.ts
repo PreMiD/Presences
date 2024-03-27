@@ -35,10 +35,27 @@ presence.on("UpdateData", async () => {
 		const status = document.querySelector<HTMLElement>(
 			"div.hidden.-player-status"
 		).textContent;
-		while (status === "loading")
-			await new Promise(resolve => setTimeout(resolve, 250));
 
-		if (status === "true") {
+		if (status === "loading") {
+			presenceData = {
+				details: document.querySelector<HTMLAnchorElement>(
+					"p.text-white.text-lg.-guild-name"
+				).textContent,
+				state: "Loading...",
+				largeImageKey: document.querySelector<HTMLImageElement>(
+					"[data-label='guild-logo']"
+				).src,
+				smallImageKey: Assets.Reading,
+				smallImageText: "Zzz",
+				startTimestamp: browsingTimestamp,
+				buttons: [
+					{
+						label: "Join Player",
+						url: document.location.href,
+					},
+				],
+			};
+		} else if (status === "true") {
 			username = document.querySelector<HTMLAnchorElement>(
 				"[data-label='player-requester']"
 			).textContent;
