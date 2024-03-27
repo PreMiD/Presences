@@ -17,9 +17,10 @@
 	},
 	"url": [
 		"comick.cc",
-		"comick.ink"
+		"comick.ink",
+		"comick.io"
 	],
-	"version": "1.2.8",
+	"version": "1.2.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/ComicK/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/ComicK/assets/thumbnail.png",
 	"color": "#f698c7",
