@@ -1,6 +1,6 @@
 const presence = new Presence({
-		clientId: "1219713910165209169",
-	}),
+	clientId: "1219713910165209169",
+}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
@@ -36,26 +36,7 @@ presence.on("UpdateData", async () => {
 			"div.hidden.-player-status"
 		).textContent;
 
-		if (status === "loading") {
-			presenceData = {
-				details: document.querySelector<HTMLAnchorElement>(
-					"p.text-white.text-lg.-guild-name"
-				).textContent,
-				state: "Loading...",
-				largeImageKey: document.querySelector<HTMLImageElement>(
-					"[data-label='guild-logo']"
-				).src,
-				smallImageKey: Assets.Reading,
-				smallImageText: "Zzz",
-				startTimestamp: browsingTimestamp,
-				buttons: [
-					{
-						label: "Join Player",
-						url: document.location.href,
-					},
-				],
-			};
-		} else if (status === "true") {
+		if (status === "true") {
 			username = document.querySelector<HTMLAnchorElement>(
 				"[data-label='player-requester']"
 			).textContent;
