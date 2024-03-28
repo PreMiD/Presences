@@ -5,10 +5,10 @@ const variableCache: Record<string, unknown> = {};
 const variableCacheTimes: Record<string, number> = {};
 
 export enum GameScreenType {
-	playerTurn,
-	otherTurn,
-	handEnd,
-	gameEnd,
+	PlayerTurn,
+	OtherTurn,
+	HandEnd,
+	GameEnd,
 }
 
 interface GameEndResult {
@@ -67,11 +67,11 @@ export async function getGameType(): Promise<GameScreenType> {
 		}
 	);
 	if (enableWinScreen || enableScoreChangeScreen) {
-		return GameScreenType.handEnd;
+		return GameScreenType.HandEnd;
 	}
-	if (gameEndResult) return GameScreenType.gameEnd;
-	if (playerIndex === activePlayerIndex) return GameScreenType.playerTurn;
-	return GameScreenType.otherTurn;
+	if (gameEndResult) return GameScreenType.GameEnd;
+	if (playerIndex === activePlayerIndex) return GameScreenType.PlayerTurn;
+	return GameScreenType.OtherTurn;
 }
 
 export async function getBasicGameInfo(): Promise<{
@@ -313,22 +313,22 @@ export async function getAccountInfo(): Promise<{
 }
 
 export enum HomeScreenType {
-	shop,
-	dorm,
-	createRoom,
-	roomLobby,
-	gacha,
-	rules,
-	playerInfo,
-	achievement,
-	rankedQueue,
-	friendlyQueue,
-	tournamentQueue,
-	loading,
-	home,
+	Shop,
+	Dorm,
+	CreateRoom,
+	RoomLobby,
+	Gacha,
+	Rules,
+	PlayerInfo,
+	Achievement,
+	RankedQueue,
+	FriendlyQueue,
+	TournamentQueue,
+	Loading,
+	Home,
 }
 
-export async function getLobbyType(): Promise<HomeScreenType> {
+export async function getHomeScreenType(): Promise<HomeScreenType> {
 	const {
 		uiscript: {
 			UI_Lobby: {
@@ -390,15 +390,15 @@ export async function getLobbyType(): Promise<HomeScreenType> {
 			},
 		}
 	);
-	if (enabledShop) return HomeScreenType.shop;
-	if (enabledDorm) return HomeScreenType.dorm;
-	if (enabledCreateRoom) return HomeScreenType.createRoom;
-	if (enabledGacha) return HomeScreenType.gacha;
-	if (enabledRules) return HomeScreenType.rules;
-	if (enabledPlayerInfo) return HomeScreenType.playerInfo;
-	if (enabledAchievement) return HomeScreenType.achievement;
-	if (enabledLoading) return HomeScreenType.loading;
-	if (enabledRoomLobby) return HomeScreenType.roomLobby;
+	if (enabledShop) return HomeScreenType.Shop;
+	if (enabledDorm) return HomeScreenType.Dorm;
+	if (enabledCreateRoom) return HomeScreenType.CreateRoom;
+	if (enabledGacha) return HomeScreenType.Gacha;
+	if (enabledRules) return HomeScreenType.Rules;
+	if (enabledPlayerInfo) return HomeScreenType.PlayerInfo;
+	if (enabledAchievement) return HomeScreenType.Achievement;
+	if (enabledLoading) return HomeScreenType.Loading;
+	if (enabledRoomLobby) return HomeScreenType.RoomLobby;
 	if (enabledLobby) {
 		const {
 			uiscript: {
@@ -417,15 +417,15 @@ export async function getLobbyType(): Promise<HomeScreenType> {
 		});
 		switch (lobbyPage) {
 			case 1:
-				return HomeScreenType.rankedQueue;
+				return HomeScreenType.RankedQueue;
 			case 2:
-				return HomeScreenType.friendlyQueue;
+				return HomeScreenType.FriendlyQueue;
 			case 3:
-				return HomeScreenType.tournamentQueue;
+				return HomeScreenType.TournamentQueue;
 		}
-		return HomeScreenType.home;
+		return HomeScreenType.Home;
 	}
-	return HomeScreenType.loading;
+	return HomeScreenType.Loading;
 }
 
 export async function getGachaInfo(): Promise<string> {
