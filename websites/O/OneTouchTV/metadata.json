@@ -10,7 +10,10 @@
 	},
 	"url": "onetouchtv.cc",
 	"regExp": "(ww(w)?[0-9]?[.])?onetouchtv[.].*",
-	"version": "1.0.2",
+	"matches": [
+		"*://*.onetouch.*/*"
+	],
+	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/OneTouchTV/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/OneTouchTV/assets/thumbnail.png",
 	"color": "#000000",
@@ -21,5 +24,8 @@
 		"serie"
 	],
 	"iframe": true,
-	"iFrameRegExp": "s[0-9]?[.]devcorp[.]me"
+	"iFrameRegExp": "s[0-9]?[.]devcorp[.]me",
+	"iFrameMatches": [
+		"*://*.devcopr.me/*"
+	]
 }
