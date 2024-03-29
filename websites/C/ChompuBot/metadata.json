@@ -13,7 +13,7 @@
 	"matches": [
 		"*://chompubot.work/*"
 	],
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/ChompuBot/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/ChompuBot/assets/thumbnail.jpg",
 	"color": "#ffbcff",
