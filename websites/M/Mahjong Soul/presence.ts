@@ -93,12 +93,14 @@ presence.on("UpdateData", async () => {
 				);
 				if (popup) {
 					presenceData.details = "Viewing a wallpaper";
-					presenceData.state = popup.querySelector<HTMLSpanElement>(".title");
+					presenceData.state = `${
+						popup.querySelector<HTMLSpanElement>(".title").textContent
+					} - ${
+						popup.querySelector<HTMLParagraphElement>(".text").textContent
+					}`;
 					presenceData.largeImageKey = await squareImage(
 						popup.querySelector("img")
 					);
-					presenceData.largeImageText =
-						popup.querySelector<HTMLParagraphElement>(".text");
 					presenceData.buttons = [
 						{
 							label: "View Wallpaper",

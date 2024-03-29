@@ -64,32 +64,44 @@ export function assignRecursive(
 }
 
 const imageCache: Record<string, Promise<Blob | string>> = {};
-export async function squareImage(
-	image: HTMLImageElement
-): Promise<Blob | string> {
-	const { src, width, height } = image;
+export function squareImage(image: HTMLImageElement): Promise<Blob | string> {
+	const { src, complete } = image;
+	image.crossOrigin = "anonymous";
 	if (imageCache[src]) return imageCache[src];
-	const canvas = document.createElement("canvas"),
-		ctx = canvas.getContext("2d");
-	canvas.width = width;
-	canvas.height = height;
-	if (width > height) canvas.height = width;
-	if (height > width) canvas.width = height;
-	if (width === height) {
-		imageCache[src] = Promise.resolve(src);
-		return src;
-	}
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	ctx.drawImage(
-		image,
-		(canvas.width - width) / 2,
-		(canvas.height - height) / 2
-	);
-	const output = new Promise<Blob>(resolve => {
-		canvas.toBlob(blob => {
-			resolve(blob);
+	const render = () => {
+		const { naturalHeight: height, naturalWidth: width } = image;
+		const canvas = document.createElement("canvas"),
+			ctx = canvas.getContext("2d");
+		canvas.width = width;
+		canvas.height = height;
+		if (width > height) canvas.height = width;
+		if (height > width) canvas.width = height;
+		if (width === height) {
+			imageCache[src] = Promise.resolve(src);
+			return imageCache[src];
+		}
+    console.log(canvas.width, canvas.height, width, height);
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.drawImage(
+			image,
+			(canvas.width - width) / 2,
+			(canvas.height - height) / 2
+		);
+		const output = new Promise<Blob>(resolve => {
+			canvas.toBlob(blob => {
+				resolve(blob);
+			});
 		});
-	});
-	imageCache[src] = output;
-	return output;
+		imageCache[src] = output;
+		return output;
+	};
+	if (!complete) {
+		return new Promise(resolve => {
+			image.onload = () => {
+				resolve(render());
+			};
+		});
+	} else {
+		return render();
+	}
 }
