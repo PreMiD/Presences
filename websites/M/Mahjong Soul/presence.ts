@@ -175,6 +175,10 @@ presence.on("UpdateData", async () => {
 				}
 				break;
 			}
+			case "faq": {
+				presenceData.details = "Viewing the FAQ";
+				break;
+			}
 			default: {
 				presenceData.details = "Browsing";
 			}
