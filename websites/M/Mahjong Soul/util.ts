@@ -29,3 +29,24 @@ export function getPositionString(position: number): string {
 			return "th";
 	}
 }
+
+type ObjectIndex = string | number | symbol;
+
+export function assignRecursive(
+	target: Record<ObjectIndex, unknown>,
+	src: Record<ObjectIndex, unknown>
+) {
+	for (const key in src) {
+		if (typeof src[key] === "object") {
+			if (!target[key]) {
+				target[key] = {};
+			}
+			assignRecursive(
+				target[key] as Record<ObjectIndex, unknown>,
+				src[key] as Record<ObjectIndex, unknown>
+			);
+		} else {
+			target[key] = src[key];
+		}
+	}
+}

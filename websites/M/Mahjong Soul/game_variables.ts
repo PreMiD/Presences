@@ -1,4 +1,4 @@
-import { presence } from "./util";
+import { assignRecursive, presence } from "./util";
 
 const CACHE_TIME = 1500;
 const variableCache: Record<string, unknown> = {};
@@ -593,7 +593,7 @@ export async function getVariable<T extends Record<string, unknown>>(
 	const result = await presence
 		.getPageVariable(...variables)
 		.catch(() => fallback);
-	Object.assign(variableCache, result); // TODO: Assign recursively
+	assignRecursive(variableCache, result);
 	variables.forEach(variable => {
 		variableCacheTimes[variable] = performance.now();
 	});
