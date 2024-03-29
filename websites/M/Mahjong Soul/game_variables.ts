@@ -132,11 +132,11 @@ export async function getHandEndInfo(): Promise<{
 }> {
 	const {
 		// while there can be more than one winner, this presence currently only displays the first
-		"uiscript.UI_ScoreChange.Inst.data.hules[0].dadian": handScore,
-		"uiscript.UI_ScoreChange.Inst.data.hules[0].seat": seat,
+		"uiscript.UI_Win.Inst.data.hules[0].dadian": handScore,
+		"uiscript.UI_Win.Inst.data.hules[0].seat": seat,
 	} = await getVariable({
-		"uiscript.UI_ScoreChange.Inst.data.hules[0].dadian": 0,
-		"uiscript.UI_ScoreChange.Inst.data.hules[0].seat": 0,
+		"uiscript.UI_Win.Inst.data.hules[0].dadian": 0,
+		"uiscript.UI_Win.Inst.data.hules[0].seat": 0,
 	});
 	return { handScore, seat };
 }

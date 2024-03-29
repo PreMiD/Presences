@@ -198,9 +198,10 @@ presence.on("UpdateData", async () => {
 			const { playerSeat, playerName, playerScore } = await getPlayerInfo(
 				playerIndex
 			);
+			presenceData.type = ActivityType.Competing;
 			presenceData.smallImageKey = Assets.Question;
-			presenceData.smallImageKey = `${playerName} - ${playerScore} points`;
-			presenceData.largeImageKey = `${getWindString(windIndex)} ${
+			presenceData.smallImageText = `${playerName} - ${playerScore} points`;
+			presenceData.details = `${getWindString(windIndex)} ${
 				roundCount + 1
 			} | ${honbaCount} honba | ${tilesLeft} tiles left`;
 			switch (gameType) {
@@ -213,8 +214,8 @@ presence.on("UpdateData", async () => {
 					const { playerName: winnerName } = await getPlayerInfoBySeat(
 						winner.seat
 					);
-					presenceData.details = "Viewing end of game results";
-					presenceData.state = `${winnerName} won the game (${
+					presenceData.state = "Viewing end of game results";
+					presenceData.largeImageText = `${winnerName} won the game (${
 						winner.part_point_1
 					}) | ${playerName} placed ${playerPosition + 1}${getPositionString(
 						playerPosition + 1
@@ -224,19 +225,19 @@ presence.on("UpdateData", async () => {
 				case GameScreenType.HandEnd: {
 					const { handScore, seat } = await getHandEndInfo(),
 						{ playerName: winnerName } = await getPlayerInfoBySeat(seat);
-					presenceData.details = "Viewing winning hand results";
-					presenceData.state = `${winnerName} won the hand | Value: ${handScore}`;
+					presenceData.state = "Viewing winning hand results";
+					presenceData.largeImageText = `${winnerName} won the hand | Value: ${handScore}`;
 					break;
 				}
 				case GameScreenType.OtherTurn: {
 					const { playerName: activePlayerName } = await getPlayerInfoBySeat(
 						activePlayerIndex
 					);
-					presenceData.details = `Waiting for ${activePlayerName}'s to do their turn`;
+					presenceData.state = `Waiting for ${activePlayerName} to do their turn`;
 					break;
 				}
 				case GameScreenType.PlayerTurn: {
-					presenceData.details = "Taking their turn";
+					presenceData.state = "Taking their turn";
 					break;
 				}
 			}
