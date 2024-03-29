@@ -5,7 +5,7 @@ export async function getVideoData(data: { videoId: string; apiKey: string; clie
 		runningPromise = runningPromises[videoId];
 	if (runningPromise) return runningPromise;
 
-	const newPromise = new Promise<VideoDetails>(resolve => {
+	const newPromise = new Promise<VideoDetails>((resolve) => {
 		void (async () => {
 			const response = await fetch(`https://www.youtube.com/youtubei/v1/player?key=${apiKey}`, {
 					body: JSON.stringify({
