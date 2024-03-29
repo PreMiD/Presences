@@ -34,7 +34,7 @@
 			"id": "show_invite",
 			"icon": "fas fa-users",
 			"title": "Show Invite Button",
-			"value": "true"
+			"value": false
 		}
 	]
 }

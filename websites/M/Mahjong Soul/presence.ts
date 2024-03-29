@@ -39,9 +39,6 @@ presence.on("UpdateData", async () => {
 		pathList = pathname.split("/").filter(Boolean);
 
 	let usesSlideshow = false;
-
-	const { nickname, coppers, signature } = await getAccountInfo();
-
 	if (hostname === "mahjongsoul.yo-star.com") {
 		switch (pathList[0]) {
 			case "news": {
@@ -184,6 +181,7 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	} else {
+		const { nickname, coppers, signature } = await getAccountInfo();
 		if (await isInGame()) {
 			presenceData.type = ActivityType.Competing;
 			const gameType = await getGameType(),
