@@ -5,7 +5,7 @@ export const presence = new Presence({
 export let browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let currentTimestampKey: string;
-export function registerTimestampUpdate(key: string) {
+export function registerTimestampUpdate(key: string): void {
 	if (currentTimestampKey !== key) {
 		currentTimestampKey = key;
 		browsingTimestamp = Math.floor(Date.now() / 1000);
@@ -17,7 +17,7 @@ export const slideshow = presence.createSlideshow();
 export const SLIDESHOW_TIMEOUT = 5000;
 
 let currentSlideshowKey: string;
-export function registerSlideshowKey(key: string) {
+export function registerSlideshowKey(key: string): void {
 	if (currentSlideshowKey !== key) {
 		currentSlideshowKey = key;
 		slideshow.deleteAllSlides();
