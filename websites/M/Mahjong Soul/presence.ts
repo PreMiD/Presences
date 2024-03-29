@@ -25,7 +25,7 @@ import {
 } from "./util";
 
 const enum Asset {
-	Logo = "https://i.imgur.com/X0BvMqW.jpeg",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/Mahjong%20Soul/assets/logo.jpeg",
 }
 
 presence.on("UpdateData", async () => {
