@@ -5,8 +5,10 @@ const variableCache: Record<string, unknown> = {};
 const variableCacheTimes: Record<string, number> = {};
 
 export enum GameScreenType {
+	Loading,
 	PlayerTurn,
 	OtherTurn,
+	DrawEnd,
 	HandEnd,
 	GameEnd,
 }
@@ -19,22 +21,33 @@ interface GameEndResult {
 	}[]; // index indicates the position of the player
 }
 
+let wasDrawScreen = false;
 export async function getGameType(): Promise<GameScreenType> {
 	const {
-		"view.DesktopMgr.Inst.seat": playerIndex,
 		"uiscript.UI_Win.Inst.enable": enableWinScreen,
 		"uiscript.UI_ScoreChange.Inst.enable": enableScoreChangeScreen,
+		"uiscript.UI_Huleshow.Inst.enable": enableDrawScreen,
+		"uiscript.UI_Loading.Inst.enable": enableLoadingScreen,
 		"view.DesktopMgr.Inst.index_player": activePlayerIndex,
 		"view.DesktopMgr.Inst.gameEndResult": gameEndResult,
+		"view.DesktopMgr.Inst.seat": playerIndex,
 	} = await getVariable({
 		"view.DesktopMgr.Inst.seat": 0,
 		"view.DesktopMgr.Inst.gameEndResult": null as GameEndResult | null,
 		"view.DesktopMgr.Inst.index_player": 0,
 		"uiscript.UI_Win.Inst.enable": false,
 		"uiscript.UI_ScoreChange.Inst.enable": false,
+		"uiscript.UI_Huleshow.Inst.enable": false,
+		"uiscript.UI_Loading.Inst.enable": false,
 	});
-	if (enableWinScreen || enableScoreChangeScreen) {
+	if (enableLoadingScreen) return GameScreenType.Loading;
+	if (enableDrawScreen) wasDrawScreen = true;
+	if (enableWinScreen) {
+		wasDrawScreen = false;
 		return GameScreenType.HandEnd;
+	}
+	if (enableScoreChangeScreen) {
+		return wasDrawScreen ? GameScreenType.DrawEnd : GameScreenType.HandEnd;
 	}
 	if (gameEndResult) return GameScreenType.GameEnd;
 	if (playerIndex === activePlayerIndex) return GameScreenType.PlayerTurn;
@@ -88,14 +101,18 @@ export async function getPlayerInfo(playerIndex: number): Promise<{
 	playerName: string;
 }> {
 	const {
-		[`view.DesktopMgr.Inst.players[${playerIndex}].seat`]: playerSeat,
-		[`view.DesktopMgr.Inst.players[${playerIndex}].score`]: playerScore,
 		[`view.DesktopMgr.Inst.player_datas[${playerIndex}].nickname`]: playerName,
 	} = await getVariable({
-		[`view.DesktopMgr.Inst.players[${playerIndex}].seat`]: 0,
-		[`view.DesktopMgr.Inst.players[${playerIndex}].score`]: 0,
 		[`view.DesktopMgr.Inst.player_datas[${playerIndex}].nickname`]:
 			"Unknown Player",
+	});
+	const seatIndex = await getPlayerListIndexFromSeat(playerIndex);
+	const {
+		[`view.DesktopMgr.Inst.players[${seatIndex}].seat`]: playerSeat,
+		[`view.DesktopMgr.Inst.players[${seatIndex}].score`]: playerScore,
+	} = await getVariable({
+		[`view.DesktopMgr.Inst.players[${seatIndex}].seat`]: 0,
+		[`view.DesktopMgr.Inst.players[${seatIndex}].score`]: 0,
 	});
 	return {
 		playerSeat: playerSeat as number,
@@ -104,9 +121,7 @@ export async function getPlayerInfo(playerIndex: number): Promise<{
 	};
 }
 
-export async function getPlayerInfoBySeat(
-	playerSeat: number
-): ReturnType<typeof getPlayerInfo> {
+async function getPlayerListIndexFromSeat(playerSeat: number): Promise<number> {
 	const {
 		"view.DesktopMgr.Inst.players[0].seat": seat0,
 		"view.DesktopMgr.Inst.players[1].seat": seat1,
@@ -123,7 +138,7 @@ export async function getPlayerInfoBySeat(
 	else if (seat1 === playerSeat) playerIndex = 1;
 	else if (seat2 === playerSeat) playerIndex = 2;
 	else if (seat3 === playerSeat) playerIndex = 3;
-	return getPlayerInfo(playerIndex);
+	return playerIndex;
 }
 
 export async function getHandEndInfo(): Promise<{

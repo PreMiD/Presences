@@ -9,7 +9,6 @@ import {
 	getHandEndInfo,
 	getHomeScreenType,
 	getPlayerInfo,
-	getPlayerInfoBySeat,
 	getWaitingRoomInfo,
 	isInGame,
 } from "./game_variables";
@@ -213,9 +212,7 @@ presence.on("UpdateData", async () => {
 						playerPosition = players.indexOf(
 							players.find(p => p.seat === playerSeat)
 						);
-					const { playerName: winnerName } = await getPlayerInfoBySeat(
-						winner.seat
-					);
+					const { playerName: winnerName } = await getPlayerInfo(winner.seat);
 					presenceData.state = "Viewing end of game results";
 					presenceData.largeImageText = `${winnerName} won the game (${
 						winner.part_point_1
@@ -224,15 +221,19 @@ presence.on("UpdateData", async () => {
 					)} (${playerScore})`;
 					break;
 				}
+				case GameScreenType.DrawEnd: {
+					presenceData.state = "Hand ended in a draw";
+					break;
+				}
 				case GameScreenType.HandEnd: {
 					const { handScore, seat } = await getHandEndInfo(),
-						{ playerName: winnerName } = await getPlayerInfoBySeat(seat);
+						{ playerName: winnerName } = await getPlayerInfo(seat);
 					presenceData.state = "Viewing winning hand results";
 					presenceData.largeImageText = `${winnerName} won the hand | Value: ${handScore}`;
 					break;
 				}
 				case GameScreenType.OtherTurn: {
-					const { playerName: activePlayerName } = await getPlayerInfoBySeat(
+					const { playerName: activePlayerName } = await getPlayerInfo(
 						activePlayerIndex
 					);
 					presenceData.state = `Waiting for ${activePlayerName} to do their turn`;
@@ -241,6 +242,9 @@ presence.on("UpdateData", async () => {
 				case GameScreenType.PlayerTurn: {
 					presenceData.state = "Taking their turn";
 					break;
+				}
+				default: {
+					presenceData.details = "Loading...";
 				}
 			}
 		} else {
