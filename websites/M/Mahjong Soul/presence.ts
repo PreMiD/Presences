@@ -100,6 +100,8 @@ presence.on("UpdateData", async () => {
 					presenceData.largeImageKey = await squareImage(
 						popup.querySelector("img")
 					);
+					presenceData.largeImageText =
+						popup.querySelector<HTMLParagraphElement>(".text");
 					presenceData.buttons = [
 						{
 							label: "View Wallpaper",
@@ -120,6 +122,49 @@ presence.on("UpdateData", async () => {
 					for (const wallpaper of wallpapers) {
 						const title =
 							wallpaper.querySelector<HTMLDivElement>(".wallpapers-title");
+						const tempData: PresenceData = {
+							...presenceData,
+							smallImageKey: await squareImage(wallpaper.querySelector("img")),
+							smallImageText: title,
+						};
+						slideshow.addSlide(title.textContent, tempData, SLIDESHOW_TIMEOUT);
+					}
+				}
+				break;
+			}
+			case "birthday": {
+				const popup = document.querySelector<HTMLDivElement>(
+					".birthdayPopup-wrap.active"
+				);
+				if (popup) {
+					const title = popup.querySelector<HTMLSpanElement>(".title");
+					const images =
+						popup.querySelectorAll<HTMLImageElement>(".content img");
+					presenceData.details = "Viewing a birthday present";
+					presenceData.state = title;
+					registerSlideshowKey(`birthday-popup-${title.textContent}`);
+					usesSlideshow = true;
+					for (const image of images) {
+						const tempData: PresenceData = {
+							...presenceData,
+							smallImageKey: image,
+						};
+						slideshow.addSlide(image.src, tempData, SLIDESHOW_TIMEOUT);
+					}
+				} else {
+					const page = document.querySelector<HTMLLIElement>(
+						".ant-pagination-item-active"
+					).textContent;
+					const wallpapers = [
+						...document.querySelector<HTMLDivElement>(".birthday-list")
+							.children,
+					];
+					presenceData.details = "Browsing birthday arts";
+					registerSlideshowKey(`birthday-${page}`);
+					usesSlideshow = true;
+					for (const wallpaper of wallpapers) {
+						const title =
+							wallpaper.querySelector<HTMLDivElement>(".birthday-title");
 						const tempData: PresenceData = {
 							...presenceData,
 							smallImageKey: await squareImage(wallpaper.querySelector("img")),
