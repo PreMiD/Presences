@@ -1,13 +1,24 @@
 import {
+	GameScreenType,
 	HomeScreenType,
 	getAccountInfo,
 	getAchievementInfo,
+	getBasicGameInfo,
 	getGachaInfo,
+	getGameType,
+	getHandEndInfo,
 	getHomeScreenType,
+	getPlayerInfo,
+	getPlayerInfoBySeat,
 	getWaitingRoomInfo,
 	isInGame,
 } from "./game_variables";
-import { browsingTimestamp, presence } from "./util";
+import {
+	browsingTimestamp,
+	getPositionString,
+	getWindString,
+	presence,
+} from "./util";
 
 const enum Asset {
 	Logo = "https://i.imgur.com/X0BvMqW.jpeg",
@@ -30,6 +41,62 @@ presence.on("UpdateData", async () => {
 	} else {
 		if (await isInGame()) {
 			presenceData.type = ActivityType.Competing;
+			const gameType = await getGameType(),
+				{
+					playerIndex,
+					activePlayerIndex,
+					honbaCount,
+					roundCount,
+					windIndex,
+					tilesLeft,
+					gameMode, // TODO: Add game mode to the presence
+					gameEndResult,
+				} = await getBasicGameInfo();
+			const { playerSeat, playerName, playerScore } = await getPlayerInfo(
+				playerIndex
+			);
+			presenceData.smallImageKey = Assets.Question;
+			presenceData.smallImageKey = `${playerName} - ${playerScore} points`;
+			presenceData.largeImageKey = `${getWindString(windIndex)} ${
+				roundCount + 1
+			} | ${honbaCount} honba | ${tilesLeft} tiles left`;
+			switch (gameType) {
+				case GameScreenType.GameEnd: {
+					const { players } = gameEndResult,
+						winner = players[0],
+						playerPosition = players.indexOf(
+							players.find(p => p.seat === playerSeat)
+						);
+					const { playerName: winnerName } = await getPlayerInfoBySeat(
+						winner.seat
+					);
+					presenceData.details = "Viewing end of game results";
+					presenceData.state = `${winnerName} won the game (${
+						winner.part_point_1
+					}) | ${playerName} placed ${playerPosition + 1}${getPositionString(
+						playerPosition + 1
+					)} (${playerScore})`;
+					break;
+				}
+				case GameScreenType.HandEnd: {
+					const { handScore, seat } = await getHandEndInfo(),
+						{ playerName: winnerName } = await getPlayerInfoBySeat(seat);
+					presenceData.details = "Viewing winning hand results";
+					presenceData.state = `${winnerName} won the hand | Value: ${handScore}`;
+					break;
+				}
+				case GameScreenType.OtherTurn: {
+					const { playerName: activePlayerName } = await getPlayerInfoBySeat(
+						activePlayerIndex
+					);
+					presenceData.details = `Waiting for ${activePlayerName}'s to do their turn`;
+					break;
+				}
+				case GameScreenType.PlayerTurn: {
+					presenceData.details = "Taking their turn";
+					break;
+				}
+			}
 		} else {
 			const homePageType = await getHomeScreenType();
 			switch (homePageType) {
