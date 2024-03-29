@@ -244,6 +244,10 @@ presence.on("UpdateData", async () => {
 		} else {
 			const homePageType = await getHomeScreenType();
 			switch (homePageType) {
+				case HomeScreenType.LoggingIn: {
+					presenceData.details = "Logging in";
+					break;
+				}
 				case HomeScreenType.Achievement: {
 					const {
 						totalCountString,

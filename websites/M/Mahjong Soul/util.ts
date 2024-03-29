@@ -42,27 +42,6 @@ export function getPositionString(position: number): string {
 	}
 }
 
-type ObjectIndex = string | number | symbol;
-
-export function assignRecursive(
-	target: Record<ObjectIndex, unknown>,
-	src: Record<ObjectIndex, unknown>
-) {
-	for (const key in src) {
-		if (typeof src[key] === "object") {
-			if (!target[key]) {
-				target[key] = {};
-			}
-			assignRecursive(
-				target[key] as Record<ObjectIndex, unknown>,
-				src[key] as Record<ObjectIndex, unknown>
-			);
-		} else {
-			target[key] = src[key];
-		}
-	}
-}
-
 const imageCache: Record<string, Promise<Blob | string>> = {};
 export function squareImage(image: HTMLImageElement): Promise<Blob | string> {
 	const { src, complete } = image;
@@ -80,7 +59,6 @@ export function squareImage(image: HTMLImageElement): Promise<Blob | string> {
 			imageCache[src] = Promise.resolve(src);
 			return imageCache[src];
 		}
-    console.log(canvas.width, canvas.height, width, height);
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.drawImage(
 			image,
