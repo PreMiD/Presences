@@ -20,6 +20,7 @@ import {
 	getWindString,
 	presence,
 	registerSlideshowKey,
+	registerTimestampUpdate,
 	slideshow,
 	squareImage,
 } from "./util";
@@ -185,6 +186,7 @@ presence.on("UpdateData", async () => {
 	} else {
 		const { nickname, coppers, signature } = await getAccountInfo();
 		if (await isInGame()) {
+			registerTimestampUpdate("game");
 			const gameType = await getGameType(),
 				{
 					playerIndex,
@@ -242,6 +244,7 @@ presence.on("UpdateData", async () => {
 				}
 			}
 		} else {
+			registerTimestampUpdate("home");
 			const homePageType = await getHomeScreenType();
 			switch (homePageType) {
 				case HomeScreenType.LoggingIn: {

@@ -4,6 +4,14 @@ export const presence = new Presence({
 
 export let browsingTimestamp = Math.floor(Date.now() / 1000);
 
+let currentTimestampKey: string;
+export function registerTimestampUpdate(key: string) {
+  if (currentTimestampKey !== key) {
+    currentTimestampKey = key;
+    browsingTimestamp = Math.floor(Date.now() / 1000);
+  }
+}
+
 export const slideshow = presence.createSlideshow();
 
 export const SLIDESHOW_TIMEOUT = 5000;
