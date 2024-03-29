@@ -47,15 +47,14 @@ presence.on("UpdateData", async () => {
 					presenceData.state =
 						document.querySelector<HTMLSpanElement>(".title-text");
 					presenceData.buttons = [{ label: "Read Article", url: href }];
-				} else {
-					presenceData.details = "Browsing news articles";
-				}
+				} else presenceData.details = "Browsing news articles";
+
 				break;
 			}
 			case "characters": {
-				const name = document.querySelector<HTMLSpanElement>(".name");
-				const images =
-					document.querySelectorAll<HTMLImageElement>(".avatarBox img");
+				const name = document.querySelector<HTMLSpanElement>(".name"),
+					images =
+						document.querySelectorAll<HTMLImageElement>(".avatarBox img");
 				presenceData.details = "Viewing a character";
 				presenceData.state = name;
 				presenceData.smallImageText =
@@ -63,11 +62,14 @@ presence.on("UpdateData", async () => {
 				registerSlideshowKey(`characters-${name.textContent}`);
 				usesSlideshow = true;
 				for (const image of images) {
-					const tempData: PresenceData = {
-						...presenceData,
-						smallImageKey: image,
-					};
-					slideshow.addSlide(image.src, tempData, SLIDESHOW_TIMEOUT);
+					slideshow.addSlide(
+						image.src,
+						{
+							...presenceData,
+							smallImageKey: image,
+						},
+						SLIDESHOW_TIMEOUT
+					);
 				}
 				break;
 			}
@@ -108,24 +110,29 @@ presence.on("UpdateData", async () => {
 						},
 					];
 				} else {
-					const page = document.querySelector<HTMLLIElement>(
-						".ant-pagination-item-active"
-					).textContent;
 					const wallpapers = [
 						...document.querySelector<HTMLDivElement>(".wallpapers-list")
 							.children,
 					];
 					presenceData.details = "Browsing wallpapers";
-					registerSlideshowKey(`wallpapers-${page}`);
+					registerSlideshowKey(
+						`wallpapers-${
+							document.querySelector<HTMLLIElement>(
+								".ant-pagination-item-active"
+							).textContent
+						}`
+					);
 					usesSlideshow = true;
 					for (const wallpaper of wallpapers) {
 						const title =
-							wallpaper.querySelector<HTMLDivElement>(".wallpapers-title");
-						const tempData: PresenceData = {
-							...presenceData,
-							smallImageKey: await squareImage(wallpaper.querySelector("img")),
-							smallImageText: title,
-						};
+								wallpaper.querySelector<HTMLDivElement>(".wallpapers-title"),
+							tempData: PresenceData = {
+								...presenceData,
+								smallImageKey: await squareImage(
+									wallpaper.querySelector("img")
+								),
+								smallImageText: title,
+							};
 						slideshow.addSlide(title.textContent, tempData, SLIDESHOW_TIMEOUT);
 					}
 				}
@@ -136,39 +143,46 @@ presence.on("UpdateData", async () => {
 					".birthdayPopup-wrap.active"
 				);
 				if (popup) {
-					const title = popup.querySelector<HTMLSpanElement>(".title");
-					const images =
-						popup.querySelectorAll<HTMLImageElement>(".content img");
+					const title = popup.querySelector<HTMLSpanElement>(".title"),
+						images = popup.querySelectorAll<HTMLImageElement>(".content img");
 					presenceData.details = "Viewing a birthday present";
 					presenceData.state = title;
 					registerSlideshowKey(`birthday-popup-${title.textContent}`);
 					usesSlideshow = true;
 					for (const image of images) {
-						const tempData: PresenceData = {
-							...presenceData,
-							smallImageKey: image,
-						};
-						slideshow.addSlide(image.src, tempData, SLIDESHOW_TIMEOUT);
+						slideshow.addSlide(
+							image.src,
+							{
+								...presenceData,
+								smallImageKey: image,
+							},
+							SLIDESHOW_TIMEOUT
+						);
 					}
 				} else {
-					const page = document.querySelector<HTMLLIElement>(
-						".ant-pagination-item-active"
-					).textContent;
 					const wallpapers = [
 						...document.querySelector<HTMLDivElement>(".birthday-list")
 							.children,
 					];
 					presenceData.details = "Browsing birthday arts";
-					registerSlideshowKey(`birthday-${page}`);
+					registerSlideshowKey(
+						`birthday-${
+							document.querySelector<HTMLLIElement>(
+								".ant-pagination-item-active"
+							).textContent
+						}`
+					);
 					usesSlideshow = true;
 					for (const wallpaper of wallpapers) {
 						const title =
-							wallpaper.querySelector<HTMLDivElement>(".birthday-title");
-						const tempData: PresenceData = {
-							...presenceData,
-							smallImageKey: await squareImage(wallpaper.querySelector("img")),
-							smallImageText: title,
-						};
+								wallpaper.querySelector<HTMLDivElement>(".birthday-title"),
+							tempData: PresenceData = {
+								...presenceData,
+								smallImageKey: await squareImage(
+									wallpaper.querySelector("img")
+								),
+								smallImageText: title,
+							};
 						slideshow.addSlide(title.textContent, tempData, SLIDESHOW_TIMEOUT);
 					}
 				}
@@ -195,10 +209,10 @@ presence.on("UpdateData", async () => {
 					windIndex,
 					tilesLeft,
 					gameEndResult,
-				} = await getBasicGameInfo();
-			const { playerSeat, playerName, playerScore } = await getPlayerInfo(
-				playerIndex
-			);
+				} = await getBasicGameInfo(),
+				{ playerSeat, playerName, playerScore } = await getPlayerInfo(
+					playerIndex
+				);
 			presenceData.type = ActivityType.Competing;
 			presenceData.smallImageKey = Assets.Question;
 			presenceData.smallImageText = `${playerName} - ${playerScore} points`;
@@ -211,8 +225,8 @@ presence.on("UpdateData", async () => {
 						winner = players[0],
 						playerPosition = players.indexOf(
 							players.find(p => p.seat === playerSeat)
-						);
-					const { playerName: winnerName } = await getPlayerInfo(winner.seat);
+						),
+						{ playerName: winnerName } = await getPlayerInfo(winner.seat);
 					presenceData.state = "Viewing end of game results";
 					presenceData.largeImageText = `${winnerName} won the game (${
 						winner.part_point_1
@@ -246,6 +260,12 @@ presence.on("UpdateData", async () => {
 				default: {
 					presenceData.details = "Loading...";
 				}
+			}
+			// If using older extension, Competing type is not used, so shift the details a bit
+			// As a side effect, the round information is lost.
+			if (+presence.getExtensionVersion() < 260) {
+				presenceData.details = presenceData.state;
+				presenceData.state = presenceData.largeImageText;
 			}
 		} else {
 			registerTimestampUpdate("home");
@@ -338,9 +358,6 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (usesSlideshow) {
-		presence.setActivity(slideshow);
-	} else {
-		presence.setActivity(presenceData);
-	}
+	if (usesSlideshow) presence.setActivity(slideshow);
+	else presence.setActivity(presenceData);
 });

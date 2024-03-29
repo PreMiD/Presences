@@ -1,8 +1,7 @@
 import { presence } from "./util";
 
-const CACHE_TIME = 1500;
-const variableCache: Record<string, unknown> = {};
-const variableCacheTimes: Record<string, number> = {};
+const variableCache: Record<string, unknown> = {},
+	variableCacheTimes: Record<string, number> = {};
 
 export enum GameScreenType {
 	Loading,
@@ -46,9 +45,9 @@ export async function getGameType(): Promise<GameScreenType> {
 		wasDrawScreen = false;
 		return GameScreenType.HandEnd;
 	}
-	if (enableScoreChangeScreen) {
+	if (enableScoreChangeScreen)
 		return wasDrawScreen ? GameScreenType.DrawEnd : GameScreenType.HandEnd;
-	}
+
 	if (gameEndResult) return GameScreenType.GameEnd;
 	if (playerIndex === activePlayerIndex) return GameScreenType.PlayerTurn;
 	return GameScreenType.OtherTurn;
@@ -101,19 +100,20 @@ export async function getPlayerInfo(playerIndex: number): Promise<{
 	playerName: string;
 }> {
 	const {
-		[`view.DesktopMgr.Inst.player_datas[${playerIndex}].nickname`]: playerName,
-	} = await getVariable({
-		[`view.DesktopMgr.Inst.player_datas[${playerIndex}].nickname`]:
-			"Unknown Player",
-	});
-	const seatIndex = await getPlayerListIndexFromSeat(playerIndex);
-	const {
-		[`view.DesktopMgr.Inst.players[${seatIndex}].seat`]: playerSeat,
-		[`view.DesktopMgr.Inst.players[${seatIndex}].score`]: playerScore,
-	} = await getVariable({
-		[`view.DesktopMgr.Inst.players[${seatIndex}].seat`]: 0,
-		[`view.DesktopMgr.Inst.players[${seatIndex}].score`]: 0,
-	});
+			[`view.DesktopMgr.Inst.player_datas[${playerIndex}].nickname`]:
+				playerName,
+		} = await getVariable({
+			[`view.DesktopMgr.Inst.player_datas[${playerIndex}].nickname`]:
+				"Unknown Player",
+		}),
+		seatIndex = await getPlayerListIndexFromSeat(playerIndex),
+		{
+			[`view.DesktopMgr.Inst.players[${seatIndex}].seat`]: playerSeat,
+			[`view.DesktopMgr.Inst.players[${seatIndex}].score`]: playerScore,
+		} = await getVariable({
+			[`view.DesktopMgr.Inst.players[${seatIndex}].seat`]: 0,
+			[`view.DesktopMgr.Inst.players[${seatIndex}].score`]: 0,
+		});
 	return {
 		playerSeat: playerSeat as number,
 		playerScore: playerScore as number,
@@ -134,10 +134,26 @@ async function getPlayerListIndexFromSeat(playerSeat: number): Promise<number> {
 		"view.DesktopMgr.Inst.players[3].seat": 3,
 	});
 	let playerIndex = 0;
-	if (seat0 === playerSeat) playerIndex = 0;
-	else if (seat1 === playerSeat) playerIndex = 1;
-	else if (seat2 === playerSeat) playerIndex = 2;
-	else if (seat3 === playerSeat) playerIndex = 3;
+	switch (playerSeat) {
+		case seat0: {
+			playerIndex = 0;
+			break;
+		}
+		case seat1: {
+			playerIndex = 1;
+			break;
+		}
+		case seat2: {
+			playerIndex = 2;
+			break;
+		}
+		case seat3:
+			{
+				playerIndex = 3;
+				// No default
+			}
+			break;
+	}
 	return playerIndex;
 }
 
@@ -251,15 +267,16 @@ export async function getHomeScreenType(): Promise<HomeScreenType> {
 }
 
 export async function getGachaInfo(): Promise<string> {
-	const { "uiscript.UI_Treasure.Inst.tab_index": tab_index } =
-		await getVariable({
-			"uiscript.UI_Treasure.Inst.tab_index": 0,
-		});
-	const {
-		[`uiscript.UI_Treasure.Inst.tabs[${tab_index}].name.text`]: tabName,
-	} = await getVariable({
-		[`uiscript.UI_Treasure.Inst.tabs[${tab_index}].name.text`]: `Unknown Tab`,
-	});
+	const { "uiscript.UI_Treasure.Inst.tab_index": tabIndex } = await getVariable(
+			{
+				"uiscript.UI_Treasure.Inst.tab_index": 0,
+			}
+		),
+		{ [`uiscript.UI_Treasure.Inst.tabs[${tabIndex}].name.text`]: tabName } =
+			await getVariable({
+				[`uiscript.UI_Treasure.Inst.tabs[${tabIndex}].name.text`]:
+					"Unknown Tab",
+			});
 	return tabName;
 }
 
@@ -319,14 +336,13 @@ export async function getWaitingRoomInfo(): Promise<{
 export async function getVariable<T extends Record<string, unknown>>(
 	fallback: T
 ): Promise<T> {
-	const variables = Object.keys(fallback);
-	const results = await Promise.all(
-		variables.map(variable => getVariableWrapper(variable).catch(() => ({})))
-	);
-	const output = Object.assign({}, fallback);
-	for (const result of results) {
-		Object.assign(output, result);
-	}
+	const variables = Object.keys(fallback),
+		results = await Promise.all(
+			variables.map(variable => getVariableWrapper(variable).catch(() => ({})))
+		),
+		output = Object.assign({}, fallback);
+	for (const result of results) Object.assign(output, result);
+
 	return output as T;
 }
 
@@ -334,12 +350,9 @@ function getVariableWrapper(
 	variable: string
 ): Promise<Record<string, unknown>> {
 	const now = performance.now();
-	if (
-		variableCacheTimes[variable] &&
-		now - variableCacheTimes[variable] < CACHE_TIME
-	) {
+	if (variableCacheTimes[variable] && now - variableCacheTimes[variable] < 1500)
 		return Promise.resolve(variableCache[variable] as Record<string, unknown>);
-	}
+
 	return new Promise((resolve, reject) => {
 		const timeout = setTimeout(() => {
 			reject(new Error("Variable retrieval timed out"));
