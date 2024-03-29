@@ -21,6 +21,7 @@ import {
 	presence,
 	registerSlideshowKey,
 	slideshow,
+	squareImage,
 } from "./util";
 
 const enum Asset {
@@ -63,6 +64,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText =
 					document.querySelector<HTMLParagraphElement>(".lines");
 				registerSlideshowKey(`characters-${name.textContent}`);
+				usesSlideshow = true;
 				for (const image of images) {
 					const tempData: PresenceData = {
 						...presenceData,
@@ -85,6 +87,46 @@ presence.on("UpdateData", async () => {
 				} else {
 					presenceData.details = "Browsing manga";
 					presenceData.state = document.querySelector(".menu.active");
+				}
+				break;
+			}
+			case "wallpapers": {
+				const popup = document.querySelector<HTMLDivElement>(
+					".wallpapersPopup-wrap.active"
+				);
+				if (popup) {
+					presenceData.details = "Viewing a wallpaper";
+					presenceData.state = popup.querySelector<HTMLSpanElement>(".title");
+					presenceData.largeImageKey = await squareImage(
+						popup.querySelector("img")
+					);
+					presenceData.buttons = [
+						{
+							label: "View Wallpaper",
+							url: document.querySelector<HTMLAnchorElement>(".content a"),
+						},
+					];
+				} else {
+					const page = document.querySelector<HTMLLIElement>(
+						".ant-pagination-item-active"
+					).textContent;
+					const wallpapers = [
+						...document.querySelector<HTMLDivElement>(".wallpapers-list")
+							.children,
+					];
+					presenceData.details = "Browsing wallpapers";
+					registerSlideshowKey(`wallpapers-${page}`);
+					usesSlideshow = true;
+					for (const wallpaper of wallpapers) {
+						const title =
+							wallpaper.querySelector<HTMLDivElement>(".wallpapers-title");
+						const tempData: PresenceData = {
+							...presenceData,
+							smallImageKey: await squareImage(wallpaper.querySelector("img")),
+							smallImageText: title,
+						};
+						slideshow.addSlide(title.textContent, tempData, SLIDESHOW_TIMEOUT);
+					}
 				}
 				break;
 			}
