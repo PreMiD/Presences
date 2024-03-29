@@ -72,6 +72,22 @@ presence.on("UpdateData", async () => {
 				}
 				break;
 			}
+			case "manga": {
+				if (pathList[1]) {
+					const isSpecial = pathList[2] === "2";
+					presenceData.details = `Reading a ${
+						isSpecial ? "special manga" : "manga"
+					} episode`;
+					presenceData.state = `Episode ${
+						isSpecial ? pathList[1] : +pathList[1] - 1
+					}`;
+					presenceData.buttons = [{ label: "Read Manga", url: href }];
+				} else {
+					presenceData.details = "Browsing manga";
+					presenceData.state = document.querySelector(".menu.active");
+				}
+				break;
+			}
 			default: {
 				presenceData.details = "Browsing";
 			}
