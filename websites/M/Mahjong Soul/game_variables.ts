@@ -88,13 +88,13 @@ export async function getPlayerInfo(playerIndex: number): Promise<{
 	playerName: string;
 }> {
 	const {
-		[`view.DesktopMgr.Inst.players.${playerIndex}.seat`]: playerSeat,
-		[`view.DesktopMgr.Inst.players.${playerIndex}.score`]: playerScore,
-		[`view.DesktopMgr.Inst.player_datas.${playerIndex}.nickname`]: playerName,
+		[`view.DesktopMgr.Inst.players[${playerIndex}].seat`]: playerSeat,
+		[`view.DesktopMgr.Inst.players[${playerIndex}].score`]: playerScore,
+		[`view.DesktopMgr.Inst.player_datas[${playerIndex}].nickname`]: playerName,
 	} = await getVariable({
-		[`view.DesktopMgr.Inst.players.${playerIndex}.seat`]: 0,
-		[`view.DesktopMgr.Inst.players.${playerIndex}.score`]: 0,
-		[`view.DesktopMgr.Inst.player_datas.${playerIndex}.nickname`]:
+		[`view.DesktopMgr.Inst.players[${playerIndex}].seat`]: 0,
+		[`view.DesktopMgr.Inst.players[${playerIndex}].score`]: 0,
+		[`view.DesktopMgr.Inst.player_datas[${playerIndex}].nickname`]:
 			"Unknown Player",
 	});
 	return {
@@ -108,15 +108,15 @@ export async function getPlayerInfoBySeat(
 	playerSeat: number
 ): ReturnType<typeof getPlayerInfo> {
 	const {
-		"view.DesktopMgr.Inst.players.0.seat": seat0,
-		"view.DesktopMgr.Inst.players.1.seat": seat1,
-		"view.DesktopMgr.Inst.players.2.seat": seat2,
-		"view.DesktopMgr.Inst.players.3.seat": seat3,
+		"view.DesktopMgr.Inst.players[0].seat": seat0,
+		"view.DesktopMgr.Inst.players[1].seat": seat1,
+		"view.DesktopMgr.Inst.players[2].seat": seat2,
+		"view.DesktopMgr.Inst.players[3].seat": seat3,
 	} = await getVariable({
-		"view.DesktopMgr.Inst.players.0.seat": 0,
-		"view.DesktopMgr.Inst.players.1.seat": 1,
-		"view.DesktopMgr.Inst.players.2.seat": 2,
-		"view.DesktopMgr.Inst.players.3.seat": 3,
+		"view.DesktopMgr.Inst.players[0].seat": 0,
+		"view.DesktopMgr.Inst.players[1].seat": 1,
+		"view.DesktopMgr.Inst.players[2].seat": 2,
+		"view.DesktopMgr.Inst.players[3].seat": 3,
 	});
 	let playerIndex = 0;
 	if (seat0 === playerSeat) playerIndex = 0;
@@ -132,11 +132,11 @@ export async function getHandEndInfo(): Promise<{
 }> {
 	const {
 		// while there can be more than one winner, this presence currently only displays the first
-		"uiscript.UI_ScoreChange.Inst.data.hules.0.dadian": handScore,
-		"uiscript.UI_ScoreChange.Inst.data.hules.0.seat": seat,
+		"uiscript.UI_ScoreChange.Inst.data.hules[0].dadian": handScore,
+		"uiscript.UI_ScoreChange.Inst.data.hules[0].seat": seat,
 	} = await getVariable({
-		"uiscript.UI_ScoreChange.Inst.data.hules.0.dadian": 0,
-		"uiscript.UI_ScoreChange.Inst.data.hules.0.seat": 0,
+		"uiscript.UI_ScoreChange.Inst.data.hules[0].dadian": 0,
+		"uiscript.UI_ScoreChange.Inst.data.hules[0].seat": 0,
 	});
 	return { handScore, seat };
 }
@@ -184,11 +184,11 @@ export enum HomeScreenType {
 
 export async function getHomeScreenType(): Promise<HomeScreenType> {
 	const {
-		"uiscript.UI_Entrace.Inst.enable": enabledEntrance,
+		"uiscript.UI_Entrance.Inst.enable": enabledEntrance,
 		"uiscript.UI_Lobby.Inst.enable": enabledLobby,
 		"uiscript.UI_Shop.Inst.enable": enabledShop,
 		"uiscript.UI_Sushe.Inst.enable": enabledDorm,
-		"uiscript.UI_CreateRoom.Inst.enable": enabledCreateRoom,
+		"uiscript.UI_Create_Room.Inst.enable": enabledCreateRoom,
 		"uiscript.UI_Treasure.Inst.enable": enabledGacha,
 		"uiscript.UI_Rules.Inst.enable": enabledRules,
 		"uiscript.UI_PlayerInfo.Inst.enable": enabledPlayerInfo,
@@ -196,7 +196,7 @@ export async function getHomeScreenType(): Promise<HomeScreenType> {
 		"uiscript.UI_Loading.Inst.enable": enabledLoading,
 		"uiscript.UI_WaitingRoom.Inst.enable": enabledRoomLobby,
 	} = await getVariable({
-		"uiscript.UI_Entrace.Inst.enable": false,
+		"uiscript.UI_Entrance.Inst.enable": false,
 		"uiscript.UI_Lobby.Inst.enable": false,
 		"uiscript.UI_Shop.Inst.enable": false,
 		"uiscript.UI_Sushe.Inst.enable": false,
@@ -206,7 +206,7 @@ export async function getHomeScreenType(): Promise<HomeScreenType> {
 		"uiscript.UI_PlayerInfo.Inst.enable": false,
 		"uiscript.UI_Achievement.Inst.enable": false,
 		"uiscript.UI_Loading.Inst.enable": false,
-		"uiscript.UI_CreateRoom.Inst.enable": false,
+		"uiscript.UI_Create_Room.Inst.enable": false,
 	});
 	if (enabledEntrance) return HomeScreenType.LoggingIn;
 	if (enabledShop) return HomeScreenType.Shop;
@@ -240,10 +240,11 @@ export async function getGachaInfo(): Promise<string> {
 		await getVariable({
 			"uiscript.UI_Treasure.Inst.tab_index": 0,
 		});
-	const { [`uiscript.UI_Treasure.Inst.tabs.${tab_index}.name.text`]: tabName } =
-		await getVariable({
-			[`uiscript.UI_Treasure.Inst.tabs.${tab_index}.name.text`]: `Unknown Tab`,
-		});
+	const {
+		[`uiscript.UI_Treasure.Inst.tabs[${tab_index}].name.text`]: tabName,
+	} = await getVariable({
+		[`uiscript.UI_Treasure.Inst.tabs[${tab_index}].name.text`]: `Unknown Tab`,
+	});
 	return tabName;
 }
 
@@ -258,18 +259,18 @@ export async function getAchievementInfo(): Promise<{
 		"uiscript.UI_Achievement.Inst.total_achievement_count":
 			totalAchievementCount,
 		"uiscript.UI_Achievement.Inst.total_count.text": totalCountString,
-		"uiscript.UI_Achievement.Inst.total_achievement.lst.0.text":
+		"uiscript.UI_Achievement.Inst.total_achievement.lst[0].text":
 			bronzeAchievementCount,
-		"uiscript.UI_Achievement.Inst.total_achievement.lst.1.text":
+		"uiscript.UI_Achievement.Inst.total_achievement.lst[1].text":
 			silverAchievementCount,
-		"uiscript.UI_Achievement.Inst.total_achievement.lst.2.text":
+		"uiscript.UI_Achievement.Inst.total_achievement.lst[2].text":
 			goldAchievementCount,
 	} = await getVariable({
 		"uiscript.UI_Achievement.Inst.total_achievement_count": 0,
 		"uiscript.UI_Achievement.Inst.total_count.text": "0",
-		"uiscript.UI_Achievement.Inst.total_achievement.lst.0.text": "0",
-		"uiscript.UI_Achievement.Inst.total_achievement.lst.1.text": "0",
-		"uiscript.UI_Achievement.Inst.total_achievement.lst.2.text": "0",
+		"uiscript.UI_Achievement.Inst.total_achievement.lst[0].text": "0",
+		"uiscript.UI_Achievement.Inst.total_achievement.lst[1].text": "0",
+		"uiscript.UI_Achievement.Inst.total_achievement.lst[2].text": "0",
 	});
 	return {
 		totalAchievementCount,
@@ -288,12 +289,12 @@ export async function getWaitingRoomInfo(): Promise<{
 }> {
 	const {
 		"uiscript.UI_WaitingRoom.Inst.room_id": roomId,
-		"uiscript.UI_WaitingRoom.Inst.container_rules.modes.0": mode,
+		"uiscript.UI_WaitingRoom.Inst.container_rules.modes[0]": mode,
 		"uiscript.UI_WaitingRoom.Inst.max_player_count": maxPlayers,
 		"uiscript.UI_WaitingRoom.Inst.players.length": currentPlayers,
 	} = await getVariable({
 		"uiscript.UI_WaitingRoom.Inst.room_id": 0,
-		"uiscript.UI_WaitingRoom.Inst.container_rules.modes.0": "Unknown Mode",
+		"uiscript.UI_WaitingRoom.Inst.container_rules.modes[0]": "Unknown Mode",
 		"uiscript.UI_WaitingRoom.Inst.max_player_count": 0,
 		"uiscript.UI_WaitingRoom.Inst.players.length": 0,
 	});

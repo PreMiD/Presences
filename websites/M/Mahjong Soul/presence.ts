@@ -185,7 +185,6 @@ presence.on("UpdateData", async () => {
 	} else {
 		const { nickname, coppers, signature } = await getAccountInfo();
 		if (await isInGame()) {
-			presenceData.type = ActivityType.Competing;
 			const gameType = await getGameType(),
 				{
 					playerIndex,
@@ -267,7 +266,7 @@ presence.on("UpdateData", async () => {
 						),
 						{ roomId, mode, maxPlayers, currentPlayers } =
 							await getWaitingRoomInfo();
-					presenceData.details = "Creating a room";
+					presenceData.details = "In a room";
 					presenceData.state = `${mode} | ${currentPlayers}/${maxPlayers} players`;
 					if (showInviteButton) {
 						presenceData.buttons = [
