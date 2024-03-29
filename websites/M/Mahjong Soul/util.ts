@@ -4,6 +4,18 @@ export const presence = new Presence({
 
 export let browsingTimestamp = Math.floor(Date.now() / 1000);
 
+export const slideshow = presence.createSlideshow();
+
+export const SLIDESHOW_TIMEOUT = 5000;
+
+let currentSlideshowKey: string;
+export function registerSlideshowKey(key: string) {
+	if (currentSlideshowKey !== key) {
+		currentSlideshowKey = key;
+		slideshow.deleteAllSlides();
+	}
+}
+
 export function getWindString(windIndex: number): string {
 	switch (windIndex) {
 		case 0:

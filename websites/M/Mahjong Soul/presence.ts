@@ -14,10 +14,13 @@ import {
 	isInGame,
 } from "./game_variables";
 import {
+	SLIDESHOW_TIMEOUT,
 	browsingTimestamp,
 	getPositionString,
 	getWindString,
 	presence,
+	registerSlideshowKey,
+	slideshow,
 } from "./util";
 
 const enum Asset {
@@ -31,13 +34,48 @@ presence.on("UpdateData", async () => {
 			name: "Mahjong Soul",
 			type: ActivityType.Playing,
 		},
-		{ hostname, pathname, protocol } = document.location,
+		{ hostname, pathname, protocol, href } = document.location,
 		pathList = pathname.split("/").filter(Boolean);
+
+	let usesSlideshow = false;
 
 	const { nickname, coppers, signature } = await getAccountInfo();
 
 	if (hostname === "mahjongsoul.yo-star.com") {
-		// TODO: Add presence for the main website
+		switch (pathList[0]) {
+			case "news": {
+				if (pathList[1]) {
+					presenceData.details = "Reading a news article";
+					presenceData.state =
+						document.querySelector<HTMLSpanElement>(".title-text");
+					presenceData.buttons = [{ label: "Read Article", url: href }];
+				} else {
+					presenceData.details = "Browsing news articles";
+				}
+				break;
+			}
+			case "characters": {
+				const name = document.querySelector<HTMLSpanElement>(".name");
+				const images =
+					document.querySelectorAll<HTMLImageElement>(".avatarBox img");
+				presenceData.details = "Viewing a character";
+				presenceData.state = name;
+				presenceData.smallImageText =
+					document.querySelector<HTMLParagraphElement>(".lines");
+				registerSlideshowKey(`characters-${name.textContent}`);
+				for (const image of images) {
+					const tempData: PresenceData = {
+						...presenceData,
+						smallImageKey: image,
+					};
+					slideshow.addSlide(image.src, tempData, SLIDESHOW_TIMEOUT);
+				}
+				break;
+			}
+			default: {
+				presenceData.details = "Browsing";
+			}
+		}
 	} else {
 		if (await isInGame()) {
 			presenceData.type = ActivityType.Competing;
@@ -49,7 +87,6 @@ presence.on("UpdateData", async () => {
 					roundCount,
 					windIndex,
 					tilesLeft,
-					gameMode, // TODO: Add game mode to the presence
 					gameEndResult,
 				} = await getBasicGameInfo();
 			const { playerSeat, playerName, playerScore } = await getPlayerInfo(
@@ -183,5 +220,9 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	presence.setActivity(presenceData);
+	if (usesSlideshow) {
+		presence.setActivity(slideshow);
+	} else {
+		presence.setActivity(presenceData);
+	}
 });
