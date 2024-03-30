@@ -4,7 +4,7 @@ import { Assets } from "./presence";
 function handleArticle(presenceData: PresenceData): void {
 	const aBody = document.querySelector("#js-article-text"),
 		titleEl = aBody.querySelector("h1");
-	presenceData.buttons = [{ label: "Read Article", url: window.location.href }];
+	presenceData.buttons = [{ label: "Read Article", url: document.location.href }];
 
 	if (titleEl.querySelector(".is-exclusive")) {
 		presenceData.details = "Reading Article";
