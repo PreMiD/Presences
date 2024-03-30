@@ -4,7 +4,7 @@ import { Assets } from "./presence";
 function handleArticle(presenceData: PresenceData): void {
 	const aBody = document.querySelector("#js-article-text"),
 		titleEl = aBody.querySelector("h1");
-	presenceData.buttons = [{ label: "Read Article", url: window.location.href }];
+	presenceData.buttons = [{ label: "Read Article", url: document.location.href }];
 
 	if (titleEl.querySelector(".is-exclusive")) {
 		presenceData.details = "Reading Article";
@@ -14,7 +14,7 @@ function handleArticle(presenceData: PresenceData): void {
 	} else {
 		presenceData.details = "Reading Article";
 		presenceData.state = titleEl.textContent;
-		presenceData.smallImageKey = "";
+		delete presenceData.smallImageKey;
 	}
 
 	// authors
@@ -25,10 +25,10 @@ function handleArticle(presenceData: PresenceData): void {
 }
 
 export function handleNewsPage(presenceData: PresenceData): void {
-	const newsPaths = window.location.pathname
+	const newsPaths = document.location.pathname
 		.split("/")
 		.find(e => e && e !== "news");
 
 	if (newsPaths.includes("article-")) handleArticle(presenceData);
-	else findPage(window.location.pathname.substring(1), presenceData);
+	else findPage(document.location.pathname.substring(1), presenceData);
 }

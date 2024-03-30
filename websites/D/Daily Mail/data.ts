@@ -21,7 +21,7 @@ export const byHref: ByHrefMap = {
 	"auhome/index.html": {
 		subsectionTitle: "Australia",
 	},
-	"https://games.dailymail.co.uk/games/daily-crossword": {
+	"games/daily-crossword": {
 		subsectionTitle: "Games",
 		customMsg: "Playing games!",
 	},
@@ -122,7 +122,7 @@ export const byHref: ByHrefMap = {
 		subsections: [
 			{
 				template: ".sport > .listTitle",
-				format: "TRENDiNG {NAME[]} NEWS",
+				format: "TRENDING {NAME[]} NEWS",
 				pages: [
 					{
 						subsectionTitle: "Premier League",
@@ -145,7 +145,7 @@ export const byHref: ByHrefMap = {
 	"sport/wwe/index.html": {
 		subsectionTitle: "WWE",
 		template: ".sport > .listTitle",
-		format: "TRENDiNG {NAME[]} NEWS",
+		format: "TRENDING {NAME[]} NEWS",
 	},
 	"sport/football/index.html": {
 		subsectionTitle: "Soccer",

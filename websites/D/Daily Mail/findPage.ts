@@ -74,13 +74,12 @@ export function findPage(ext: string, presenceData: PresenceData): void {
 	if (ext === "video/index.html") {
 		presenceData.details = `Watching ${presenceData.details}`;
 		presenceData.buttons = [
-			{ label: "Watch Along", url: window.location.href },
+			{ label: "Watch Along", url: document.location.href },
 		];
 
 		const vid = document.querySelector("video");
-		// if (vid.readyState > 2) console.log("ERR");
-		if (!vid.paused && !vid.ended) presenceData.smallImageKey = Assets.PlayIco;
-		else presenceData.smallImageKey = Assets.PauseIco;
+		if (!vid.paused && !vid.ended) presenceData.smallImageKey = Assets.play;
+		else presenceData.smallImageKey = Assets.pause;
 	} else {
 		presenceData.buttons = [
 			{ label: "Browse Along", url: document.location.href },
