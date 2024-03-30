@@ -12,13 +12,12 @@
 		"incels.is",
 		"www.incels.is"
 	],
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/Incels.is/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/Incels.is/assets/thumbnail.png",
 	"color": "#182139",
 	"category": "socials",
 	"tags": [
-		"community",
-		"nsfw"
+		"community"
 	]
 }
