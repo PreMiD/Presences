@@ -10,7 +10,7 @@
 	},
 	"url": "www.dailymail.co.uk",
 	"matches": [
-		"*://dailymail.co.uk/*"
+		"*://*.dailymail.co.uk/*"
 	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/glm7on6.png",
