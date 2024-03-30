@@ -1,5 +1,4 @@
 function handleFootball(page: string, presenceData: PresenceData): void {
-	// console.log("EGG");
 	presenceData.state = "Football";
 	switch (page) {
 		case "results.html":
