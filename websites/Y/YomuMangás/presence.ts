@@ -6,10 +6,7 @@ presence.on("UpdateData", async () => {
 			"https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/0.png",
 	};
 	const { pathname, href } = document.location,
-		[privacy, nsfw] = await Promise.all([
-			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("nsfw"),
-		]),
+		privacy = await presence.getSetting<boolean>("privacy"),
 		pages: Record<string, PresenceData> = {
 			"/": { details: "Página Inicial" },
 			"/404": { details: "404", state: "Uhn? Onde estamos?" },
@@ -31,7 +28,7 @@ presence.on("UpdateData", async () => {
 				image = document.querySelector<HTMLImageElement>(
 					"#premid-manga-cover"
 				)?.src;
-			if (!isNsfw || (isNsfw && nsfw)) {
+			if (!isNsfw) {
 				presenceData.details =
 					document.querySelector("#premid-manga-title")?.textContent || "Obra";
 				presenceData.state = !isChapter
@@ -54,7 +51,7 @@ presence.on("UpdateData", async () => {
 				if (!isNsfw && !isChapter) presenceData.buttons?.pop();
 			} else {
 				presenceData.details = "Sua biblioteca virtual de mangás";
-				presenceData.state = "manhwas, hentais, doujin e mais!";
+				presenceData.state = "manhwas, doujin e mais!";
 			}
 		} else if (pathname.startsWith("/user")) {
 			const username =
@@ -82,7 +79,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else {
 		presenceData.details = "Sua biblioteca virtual de mangás";
-		presenceData.state = "manhwas, hentais, doujin e mais!";
+		presenceData.state = "manhwas, doujin e mais!";
 	}
 
 	presence.setActivity(presenceData);
