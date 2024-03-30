@@ -107,9 +107,13 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.includes("/threads/")) {
 		if (threadTitle) {
 			presenceData.details = "Reading a thread:";
-			presenceData.state = threadTag
+
+			if (document.querySelector("[class*='nsfw']")) presenceData.state = "looking at family friendly content";
+			else {
+				presenceData.state = threadTag
 				? threadTitle.replace(threadTag, `[${threadTag}]`)
 				: threadTitle;
+			}
 		}
 	} else presenceData.details = "Wandering around aimlessly";
 
