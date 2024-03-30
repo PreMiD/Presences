@@ -12,7 +12,7 @@
 	},
 	"url": "anime-d.com",
 	"regExp": "([a-z0-9-]+[.])*anime-d[.]com[/]",
-	"version": "1.0.22",
+	"version": "1.0.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Anime-D/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Anime-D/assets/thumbnail.jpg",
 	"color": "#cc6d00",
@@ -20,8 +20,7 @@
 	"tags": [
 		"anime",
 		"videos",
-		"thai",
-		"nsfw"
+		"thai"
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",

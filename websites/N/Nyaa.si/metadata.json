@@ -14,7 +14,7 @@
 		"nyaa.si",
 		"sukebei.nyaa.si"
 	],
-	"version": "1.3.19",
+	"version": "1.3.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Nyaa.si/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Nyaa.si/assets/thumbnail.png",
 	"color": "#0084FF",
@@ -35,7 +35,6 @@
 		"doujinshi",
 		"video",
 		"torrents",
-		"index",
-		"nsfw"
+		"index"
 	]
 }
