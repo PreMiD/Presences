@@ -14,7 +14,7 @@ function handleArticle(presenceData: PresenceData): void {
 	} else {
 		presenceData.details = "Reading Article";
 		presenceData.state = titleEl.textContent;
-		presenceData.smallImageKey = "";
+		delete presenceData.smallImageKey;
 	}
 
 	// authors
