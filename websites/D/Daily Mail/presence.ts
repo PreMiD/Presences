@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 			break;
 
 		default:
-			findPage(window.location.pathname.substring(1), presenceData);
+			findPage(document.location.pathname.substring(1), presenceData);
 			break;
 	}
 
