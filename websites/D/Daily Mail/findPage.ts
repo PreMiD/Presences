@@ -2,7 +2,7 @@ import { byHref } from "./data";
 import { handleSport } from "./handleSport";
 import { Assets } from "./presence";
 
-function noTemplate(ext: string, presenceData: PresenceData) {
+function noTemplate(ext: string, presenceData: PresenceData): void {
 	switch (ext.split("/")[0]) {
 		case "for-you":
 			presenceData.details = "browsing personalized feed";
@@ -17,7 +17,7 @@ function noTemplate(ext: string, presenceData: PresenceData) {
 	}
 }
 
-const formatTitle = (presenceData: PresenceData) => {
+const formatTitle = (presenceData: PresenceData): void => {
 	presenceData.details = "Browsing Section";
 	presenceData.state = document.title.split("|")[0].trim();
 };
@@ -47,7 +47,7 @@ function extractNameFromString(formattedString: string, formatPattern: string) {
 	);
 }
 
-export function findPage(ext: string, presenceData: PresenceData) {
+export function findPage(ext: string, presenceData: PresenceData): void {
 	// find by template
 	const template = byHref[ext];
 	if (ext.startsWith("sport")) handleSport(ext, presenceData);
@@ -64,9 +64,10 @@ export function findPage(ext: string, presenceData: PresenceData) {
 			el = el?.querySelector(CSSsel);
 
 		// format the title
-		const strToAdd = template.format
-			? extractNameFromString(el?.textContent, template.format)
-			: el?.textContent;
+		const strToAdd =
+			template.format && el?.textContent
+				? extractNameFromString(el.textContent, template.format)
+				: el.textContent;
 		presenceData.details = strToAdd || "the news";
 	}
 

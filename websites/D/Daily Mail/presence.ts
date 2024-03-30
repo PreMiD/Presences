@@ -19,7 +19,7 @@ const enum Pages {
 }
 
 // possible expansion for other countries, leave as helper function
-const catToCountry = (cat: string) => {
+const catToCountry = (cat: string): string[] => {
 	if (cat.startsWith("us")) return [cat.replace("us", ""), "Daily Mail (US)"];
 	else if (cat.startsWith("au"))
 		return [cat.replace("au", ""), "Daily Mail (US)"];

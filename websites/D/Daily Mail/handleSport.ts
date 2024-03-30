@@ -1,4 +1,4 @@
-function handleFootball(page: string, presenceData: PresenceData) {
+function handleFootball(page: string, presenceData: PresenceData): void {
 	// console.log("EGG");
 	presenceData.state = "Football";
 	switch (page) {
@@ -16,7 +16,7 @@ function handleFootball(page: string, presenceData: PresenceData) {
 	}
 }
 
-export function handleSport(_ext: string, presenceData: PresenceData) {
+export function handleSport(_ext: string, presenceData: PresenceData): void {
 	presenceData.details = "Browsing Sports";
 	const sportCat = _ext.split("/"),
 		// try first "most popular" method
