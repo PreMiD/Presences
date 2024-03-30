@@ -9,7 +9,7 @@ function handleArticle(presenceData: PresenceData): void {
 	if (titleEl.querySelector(".is-exclusive")) {
 		presenceData.details = "Reading Article";
 		presenceData.state = titleEl.textContent.replace("EXCLUSIVE", "");
-		presenceData.smallImageKey = Assets.exclIco;
+		presenceData.smallImageKey = Assets.ExclIco;
 		presenceData.smallImageText = "Exclusive!";
 	} else {
 		presenceData.details = "Reading Article";

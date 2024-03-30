@@ -7,9 +7,9 @@ const presence = new Presence({
 
 export const enum Assets {
 	Logo = "https://i.imgur.com/glm7on6.png",
-	exclIco = "https://www.pngmart.com/files/15/Red-Exclamation-Mark-PNG-Transparent-Image-279x279.png",
-	play = "https://static.vecteezy.com/system/resources/previews/000/426/027/original/play-icon-vector-illustration.jpg",
-	pause = "https://icons.iconarchive.com/icons/graphicloads/100-flat/256/pause-icon.png",
+	ExclIco = "https://i.imgur.com/FitEOZS.png",
+	PlayIco = "https://i.imgur.com/rmA1FMA.jpeg",
+	PauseIco = "https://i.imgur.com/DFFBv1a.png",
 }
 
 const enum Pages {

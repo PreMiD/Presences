@@ -79,8 +79,8 @@ export function findPage(ext: string, presenceData: PresenceData): void {
 
 		const vid = document.querySelector("video");
 		// if (vid.readyState > 2) console.log("ERR");
-		if (!vid.paused && !vid.ended) presenceData.smallImageKey = Assets.play;
-		else presenceData.smallImageKey = Assets.pause;
+		if (!vid.paused && !vid.ended) presenceData.smallImageKey = Assets.PlayIco;
+		else presenceData.smallImageKey = Assets.PauseIco;
 	} else {
 		presenceData.buttons = [
 			{ label: "Browse Along", url: document.location.href },

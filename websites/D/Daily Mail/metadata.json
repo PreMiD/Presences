@@ -9,6 +9,9 @@
 		"en": "The official website for the Daily Mail publication"
 	},
 	"url": "www.dailymail.co.uk",
+	"matches": [
+		"*://dailymail.co.uk/*"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/glm7on6.png",
 	"thumbnail": "https://i.dailymail.co.uk/i/sitelogos/dm-com-home.png",
