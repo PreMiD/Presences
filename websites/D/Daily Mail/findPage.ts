@@ -74,7 +74,7 @@ export function findPage(ext: string, presenceData: PresenceData): void {
 	if (ext === "video/index.html") {
 		presenceData.details = `Watching ${presenceData.details}`;
 		presenceData.buttons = [
-			{ label: "Watch Along", url: window.location.href },
+			{ label: "Watch Along", url: document.location.href },
 		];
 
 		const vid = document.querySelector("video");
