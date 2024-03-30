@@ -39,7 +39,10 @@ presence.on("UpdateData", async () => {
 		pathList = pathname.split("/").filter(Boolean);
 
 	let usesSlideshow = false;
-	if (hostname === "mahjongsoul.yo-star.com") {
+	if (
+		hostname === "mahjongsoul.yo-star.com" ||
+		hostname === "mahjongsoul.com"
+	) {
 		switch (pathList[0]) {
 			case "news": {
 				if (pathList[1]) {
