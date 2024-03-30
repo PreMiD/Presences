@@ -1,7 +1,7 @@
 import { findPage } from "./findPage";
 import { Assets } from "./presence";
 
-function handleArticle(presenceData: PresenceData) {
+function handleArticle(presenceData: PresenceData): void {
 	const aBody = document.querySelector("#js-article-text"),
 		titleEl = aBody.querySelector("h1");
 	presenceData.buttons = [{ label: "Read Article", url: window.location.href }];
@@ -24,7 +24,7 @@ function handleArticle(presenceData: PresenceData) {
 	presenceData.state = `By ${authors.join(", ") || "unknown"}`;
 }
 
-export function handleNewsPage(presenceData: PresenceData) {
+export function handleNewsPage(presenceData: PresenceData): void {
 	const newsPaths = window.location.pathname
 		.split("/")
 		.find(e => e && e !== "news");

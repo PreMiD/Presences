@@ -67,7 +67,7 @@ export function findPage(ext: string, presenceData: PresenceData): void {
 		const strToAdd =
 			template.format && el?.textContent
 				? extractNameFromString(el.textContent, template.format)
-				: el.textContent;
+				: el?.textContent;
 		presenceData.details = strToAdd || "the news";
 	}
 
