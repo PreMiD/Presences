@@ -122,7 +122,7 @@ export const byHref: ByHrefMap = {
 		subsections: [
 			{
 				template: ".sport > .listTitle",
-				format: "TRENDiNG {NAME[]} NEWS",
+				format: "TRENDING {NAME[]} NEWS",
 				pages: [
 					{
 						subsectionTitle: "Premier League",
