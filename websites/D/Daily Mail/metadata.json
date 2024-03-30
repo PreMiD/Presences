@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "358402930191106049",
+		"name": "ion606"
+	},
+	"service": "Daily Mail",
+	"description": {
+		"en": "The official website for the Daily Mail publication"
+	},
+	"url": "www.dailymail.co.uk",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/glm7on6.png",
+	"thumbnail": "https://i.dailymail.co.uk/i/sitelogos/dm-com-home.png",
+	"color": "#004db3",
+	"category": "other",
+	"tags": [
+		"dailymail",
+		"news",
+		"newspaper",
+		"publication"
+	]
+}
