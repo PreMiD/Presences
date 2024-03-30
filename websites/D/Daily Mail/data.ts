@@ -145,7 +145,7 @@ export const byHref: ByHrefMap = {
 	"sport/wwe/index.html": {
 		subsectionTitle: "WWE",
 		template: ".sport > .listTitle",
-		format: "TRENDiNG {NAME[]} NEWS",
+		format: "TRENDING {NAME[]} NEWS",
 	},
 	"sport/football/index.html": {
 		subsectionTitle: "Soccer",
