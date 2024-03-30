@@ -21,7 +21,7 @@ export const byHref: ByHrefMap = {
 	"auhome/index.html": {
 		subsectionTitle: "Australia",
 	},
-	"https://games.dailymail.co.uk/games/daily-crossword": {
+	"games/daily-crossword": {
 		subsectionTitle: "Games",
 		customMsg: "Playing games!",
 	},
