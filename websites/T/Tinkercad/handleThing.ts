@@ -1,4 +1,3 @@
-// import { Assets } from "./presence";
 
 export function handleThing(
 	presenceData: PresenceData,
