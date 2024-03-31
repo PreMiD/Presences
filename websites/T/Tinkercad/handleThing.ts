@@ -1,36 +1,51 @@
 // import { Assets } from "./presence";
 
-export function handleThing(presenceData:PresenceData, link:string, isEdit:boolean) {
+export function handleThing(
+	presenceData: PresenceData,
+	link: string,
+	isEdit: boolean
+) {
 	if (!link) {
 		presenceData.state = "Browing the Community Gallery";
-		presenceData.buttons = [{label: "View", url: document.location.href}];
+		presenceData.buttons = [{ label: "View", url: document.location.href }];
 	} else {
-		const username = document.querySelector("#design-detail-username")?.textContent || null,
-		in3d = document.querySelector(".editor-3d-container") || null, // 3D
-		inCircuit = document.querySelector(".editor") || null, // circuit
-		nameFull = document.title,
-		editType = nameFull.split("design")[0]?.trim() || null,
-		thingNameEl = document.querySelector(".sitemenu__title__span") || document.querySelector("#topnav-title") || null;
+		const username =
+				document.querySelector("#design-detail-username")?.textContent || null,
+			in3d = document.querySelector(".editor-3d-container") || null, // 3D
+			inCircuit = document.querySelector(".editor") || null, // circuit
+			nameFull = document.title,
+			editType = nameFull.split("design")[0]?.trim() || null,
+			thingNameEl =
+				document.querySelector(".sitemenu__title__span") ||
+				document.querySelector("#topnav-title") ||
+				null;
 
 		// this is a preview of a post
 		if (!isEdit) {
-			const thingType = document.querySelector(".user-lockup-type").textContent.replace("by", "").trim();
+			const thingType = document
+				.querySelector(".user-lockup-type")
+				.textContent.replace("by", "")
+				.trim();
 
 			if (document.querySelector(".design-detail-top-public")) {
 				presenceData.details = `Viewing ${nameFull}`;
 				presenceData.state = `By ${username}`;
 				if (in3d) presenceData.details += " (3D interactive)";
 				else if (inCircuit) {
-					const activeClasses = document.querySelector(".sitemenu__right").querySelector("[class*='active']").getAttribute("href");
-					let sectActive:string;
+					const activeClasses = document
+						.querySelector(".sitemenu__right")
+						.querySelector("[class*='active']")
+						.getAttribute("href");
+					let sectActive: string;
 
 					if (activeClasses === "#breadboard") sectActive = "Circuit View";
-					else if (activeClasses === "#schematic_view") sectActive = "Schematic View";
+					else if (activeClasses === "#schematic_view")
+						sectActive = "Schematic View";
 					else sectActive = "Component List";
 					presenceData.details += ` (in ${sectActive})`;
 				}
 
-				presenceData.buttons = [{label: "View", url: document.location.href}];
+				presenceData.buttons = [{ label: "View", url: document.location.href }];
 			} else if (document.querySelector(".design-detail-top-private")) {
 				presenceData.details = `Viewing Private ${thingType}`;
 				delete presenceData.smallImageKey;
@@ -45,22 +60,23 @@ export function handleThing(presenceData:PresenceData, link:string, isEdit:boole
 	}
 }
 
-
-export function handleCodeblocks(presenceData:PresenceData, isEdit:boolean) {
+export function handleCodeblocks(presenceData: PresenceData, isEdit: boolean) {
 	const title = document.querySelector(".design-detail-header-title") || "",
-	username = document.querySelector("#design-detail-username");
+		username = document.querySelector("#design-detail-username");
 
 	if (isEdit) {
 		// get name
-		const blockname = document.querySelector(".header-group")?.querySelector(".inline-text-input")?.textContent;
+		const blockname = document
+			.querySelector(".header-group")
+			?.querySelector(".inline-text-input")?.textContent;
 
 		presenceData.details = `Editing ${blockname} (codeblock)`;
 		delete presenceData.buttons;
 	} else if (document.querySelector(".design-detail-top-public")) {
-				presenceData.details = `Viewing ${title} (codeblock)`;
-				presenceData.state = `By ${username}`;
+		presenceData.details = `Viewing ${title} (codeblock)`;
+		presenceData.state = `By ${username}`;
 
-				presenceData.buttons = [{label: "View", url: document.location.href}];
+		presenceData.buttons = [{ label: "View", url: document.location.href }];
 	} else {
 		delete presenceData.buttons;
 		delete presenceData.details;

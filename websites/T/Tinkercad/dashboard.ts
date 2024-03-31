@@ -7,11 +7,13 @@ const enum SubPages {
 	collections = "collections",
 	tutorials = "tutorials",
 	challenges = "challenges",
-	bin = "bin"
+	bin = "bin",
 }
 
-
-const handleDesigns = (subsubpage: string, presenceData: PresenceData): void => {
+const handleDesigns = (
+	subsubpage: string,
+	presenceData: PresenceData
+): void => {
 	switch (subsubpage) {
 		case "3d": {
 			presenceData.details = "viewing 3D designs";
@@ -40,28 +42,38 @@ const handleDesigns = (subsubpage: string, presenceData: PresenceData): void => 
 	}
 };
 
-
-export function selectDashboardPage(presenceData: PresenceData, subpage:string, subsubpage?:string): void {
+export function selectDashboardPage(
+	presenceData: PresenceData,
+	subpage: string,
+	subsubpage?: string
+): void {
 	switch (subpage) {
-		case SubPages.dashboard: presenceData.details = "In Dashboard";
+		case SubPages.dashboard:
+			presenceData.details = "In Dashboard";
 			break;
 
-		case SubPages.classes: presenceData.details = "Viewing Classes";
+		case SubPages.classes:
+			presenceData.details = "Viewing Classes";
 			break;
 
-		case SubPages.designs: handleDesigns(subsubpage, presenceData);
+		case SubPages.designs:
+			handleDesigns(subsubpage, presenceData);
 			break;
 
-		case SubPages.collections: presenceData.details = "Viewing Collections";
+		case SubPages.collections:
+			presenceData.details = "Viewing Collections";
 			break;
 
-		case SubPages.tutorials: presenceData.details = "Viewing Tutorials";
+		case SubPages.tutorials:
+			presenceData.details = "Viewing Tutorials";
 			break;
 
-		case SubPages.challenges: presenceData.details = "Viewing Challenges";
+		case SubPages.challenges:
+			presenceData.details = "Viewing Challenges";
 			break;
 
-		case SubPages.bin: presenceData.details = "Viewing Trash Can";
+		case SubPages.bin:
+			presenceData.details = "Viewing Trash Can";
 			break;
 	}
 }
