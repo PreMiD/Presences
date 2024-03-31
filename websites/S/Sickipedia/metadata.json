@@ -15,13 +15,12 @@
 		"www.sickipedia.net"
 	],
 	"regExp": "([a-z0-9-]+[.])*(sickipedia[.]net)[/]",
-	"version": "1.0.17",
+	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Sickipedia/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Sickipedia/assets/thumbnail.png",
 	"color": "#333333",
 	"category": "socials",
 	"tags": [
-		"nsfw",
 		"memes",
 		"jokes"
 	],
