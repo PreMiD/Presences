@@ -21,14 +21,14 @@ presence.on("UpdateData", async () => {
 	if (!privacy) {
 		if (pathname.startsWith("/manga")) {
 			const isChapter = pathname.includes("/chapter/"),
-				isNsfw =
-					document.querySelector("#premid-manga-nsfw")?.textContent === "true",
 				chapter =
 					document.querySelector("#premid-manga-chapter")?.textContent || "0",
 				image = document.querySelector<HTMLImageElement>(
 					"#premid-manga-cover"
 				)?.src;
-			if (!isNsfw) {
+			if (
+				document.querySelector("#premid-manga-nsfw")?.textContent !== "true"
+			) {
 				presenceData.details =
 					document.querySelector("#premid-manga-title")?.textContent || "Obra";
 				presenceData.state = !isChapter
@@ -36,9 +36,9 @@ presence.on("UpdateData", async () => {
 					: isNaN(Number(chapter))
 					? chapter
 					: `Capítulo ${chapter}`;
-				presenceData.largeImageKey = !image
-					? "https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/1.png"
-					: image;
+				presenceData.largeImageKey =
+					image ||
+					"https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/1.png";
 				presenceData.smallImageKey =
 					"https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/logo.png";
 				presenceData.buttons = [

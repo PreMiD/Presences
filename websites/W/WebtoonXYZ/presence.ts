@@ -23,9 +23,8 @@ presence.on("UpdateData", async () => {
 		{ pathname, href, search } = document.location;
 
 	if (pathname === "/" && search.substring(0, 2) === "?s") {
-		const urlParams = new URLSearchParams(search);
 		presenceData.details = "Searching:";
-		presenceData.state = `'${urlParams.get("s")}' 🔸 ${
+		presenceData.state = `'${new URLSearchParams(search).get("s")}' 🔸 ${
 			document.querySelector(".c-blog__heading > .h4").textContent.split(" ")[0]
 		} results`;
 		presenceData.smallImageKey = Assets.Search;
