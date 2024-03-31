@@ -149,9 +149,7 @@ presence.on("UpdateData", async () => {
 				if (threadSubject)
 					presenceData.state = `>>${threadNum} - "${threadSubject}"`;
 				else presenceData.state = `>>${threadNum}`;
-			} else {
-				presenceData.state = "Viewing a thread";
-			}
+			} else presenceData.state = "Viewing a thread";
 		} else if (pathname.includes("/archive"))
 			presenceData.state = "Checking the archive";
 	}
