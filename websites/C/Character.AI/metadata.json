@@ -12,6 +12,10 @@
 		"beta.character.ai",
 		"character.ai"
 	],
+	"matches": [
+		"*://old.character.ai/*",
+		"*://character.ai/*"
+	],
 	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Character.AI/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Character.AI/assets/thumbnail.png",
@@ -21,10 +25,6 @@
 		"ai",
 		"chat",
 		"characterai"
-	],
-	"matches": [
-		"*://old.character.ai/*",
-		"*://character.ai/*"
 	],
 	"settings": [
 		{
