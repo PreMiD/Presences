@@ -6,11 +6,11 @@ const presence = new Presence({
 });
 
 export const enum Assets {
-	Logo = "https://i.imgur.com/XXez3yK.png",
-	ThreeDIco = "https://icon-library.com/images/3d-icon-png/3d-icon-png-17.jpg",
-	CircuitIco = "https://img.freepik.com/premium-vector/circuit-board-linecpuchip-icon-logo-illustration-vector-design_598213-3208.jpg",
-	CodeblockIco = "https://cdn.iconscout.com/icon/free/png-512/code-280-460136.png",
-	TrashCanIco = "https://www.nicepng.com/png/detail/208-2086588_trash-can-icon.png",
+	Logo = "https://i.imgur.com/2Nyp2DT.png",
+	ThreeDIco = "https://i.imgur.com/OAvYVsM.png",
+	CircuitIco = "https://i.imgur.com/plgAsZu.png",
+	CodeblockIco = "https://i.imgur.com/wk7x7PB.png",
+	TrashCanIco = "https://i.imgur.com/S5D4Qdj.jpeg",
 }
 
 const enum Pages {

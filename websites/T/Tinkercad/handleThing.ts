@@ -1,14 +1,10 @@
-// import { Assets } from "./presence";
-
 export function handleThing(
 	presenceData: PresenceData,
 	link: string,
 	isEdit: boolean
 ): void {
-	if (!link) {
-		presenceData.state = "Browing the Community Gallery";
-		presenceData.buttons = [{ label: "View", url: document.location.href }];
-	} else {
+	if (!link) presenceData.state = "Browing the Community Gallery";
+	else {
 		const username =
 				document.querySelector("#design-detail-username")?.textContent || null,
 			in3d = document.querySelector(".editor-3d-container") || null, // 3D
@@ -45,7 +41,9 @@ export function handleThing(
 					presenceData.details += ` (in ${sectActive})`;
 				}
 
-				presenceData.buttons = [{ label: "View", url: document.location.href }];
+				presenceData.buttons = [
+					{ label: `View ${thingType}`, url: document.location.href },
+				];
 			} else if (document.querySelector(".design-detail-top-private")) {
 				presenceData.details = `Viewing Private ${thingType}`;
 				delete presenceData.smallImageKey;
@@ -79,7 +77,9 @@ export function handleCodeblocks(
 		presenceData.details = `Viewing ${title} (codeblock)`;
 		presenceData.state = `By ${username}`;
 
-		presenceData.buttons = [{ label: "View", url: document.location.href }];
+		presenceData.buttons = [
+			{ label: "View codeblock", url: document.location.href },
+		];
 	} else {
 		delete presenceData.buttons;
 		delete presenceData.details;

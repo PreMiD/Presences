@@ -16,25 +16,25 @@ const handleDesigns = (
 ): void => {
 	switch (subsubpage) {
 		case "3d": {
-			presenceData.details = "viewing 3D designs";
+			presenceData.details = "Viewing 3D designs";
 			presenceData.smallImageKey = Assets.ThreeDIco;
 			presenceData.smallImageText = "3D";
 			break;
 		}
 		case "circuits": {
-			presenceData.details = "viewing circuits";
+			presenceData.details = "Viewing circuits";
 			presenceData.smallImageKey = Assets.CircuitIco;
 			presenceData.smallImageText = "circuit";
 			break;
 		}
 		case "codeblocks": {
-			presenceData.details = "viewing codeblocks";
+			presenceData.details = "Viewing codeblocks";
 			presenceData.smallImageKey = Assets.CodeblockIco;
 			presenceData.smallImageText = "code";
 			break;
 		}
 		case "bin": {
-			presenceData.details = "viewing Trash Can";
+			presenceData.details = "Viewing Trash Can";
 			presenceData.smallImageKey = Assets.TrashCanIco;
 			presenceData.smallImageText = "trash";
 			break;
