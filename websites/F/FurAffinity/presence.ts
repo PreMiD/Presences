@@ -125,9 +125,9 @@ presence.on("UpdateData", async () => {
 		case "view": {
 			if (
 				document.querySelector(".rating-box").textContent.trim() !== "General"
-			) {
+			)
 				presenceData.details = "Viewing a post";
-			} else {
+			else {
 				presenceData.details = document.querySelector(
 					'[class="submission-title"]'
 				)?.textContent;
