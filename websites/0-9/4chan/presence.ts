@@ -86,7 +86,28 @@ const boards: { [board: string]: string } = {
 		"/xs/": "Extreme Sports",
 		"/y/": "Yaoi",
 	},
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	nsfwBoards = new Set([
+		"/aco/",
+		"/bant/",
+		"/b/",
+		"/d/",
+		"/e/",
+		"/gif/",
+		"/hc/",
+		"/h/",
+		"/hm/",
+		"/hr/",
+		"/pol/",
+		"/r9k/",
+		"/r/",
+		"/s4s/",
+		"/s/",
+		"/soc/",
+		"/t/",
+		"/u/",
+		"/y/",
+	]);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -103,25 +124,34 @@ presence.on("UpdateData", async () => {
 	else if (pathname.startsWith("/4channews"))
 		presenceData.details = "Viewing news posts";
 	else {
+		let isNsfw = false;
 		for (const board in boards) {
-			if (pathname.includes(board))
-				presenceData.details = `Browsing ${board} - ${boards[board]}`;
+			if (pathname.includes(board)) {
+				isNsfw = nsfwBoards.has(board);
+				if (isNsfw) presenceData.details = "Browsing a board";
+				else presenceData.details = `Browsing ${board} - ${boards[board]}`;
+				break;
+			}
 		}
 
 		if (pathname.includes("/thread/")) {
-			const threadNum = pathname.split("/").at(-1),
-				threadSubject = document.querySelector(".subject").textContent;
+			if (!isNsfw) {
+				const threadNum = pathname.split("/").at(-1),
+					threadSubject = document.querySelector(".subject").textContent;
 
-			presenceData.buttons = [
-				{
-					label: "View Thread",
-					url: href,
-				},
-			];
+				presenceData.buttons = [
+					{
+						label: "View Thread",
+						url: href,
+					},
+				];
 
-			if (threadSubject)
-				presenceData.state = `>>${threadNum} - "${threadSubject}"`;
-			else presenceData.state = `>>${threadNum}`;
+				if (threadSubject)
+					presenceData.state = `>>${threadNum} - "${threadSubject}"`;
+				else presenceData.state = `>>${threadNum}`;
+			} else {
+				presenceData.state = "Viewing a thread";
+			}
 		} else if (pathname.includes("/archive"))
 			presenceData.state = "Checking the archive";
 	}
