@@ -9,6 +9,9 @@
 		"en": "Tinkercad is a free, easy-to-use app for 3D design, electronics, and coding"
 	},
 	"url": "www.tinkercad.com",
+	"matches": [
+		"*://www.tinkercad.com/*"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/XXez3yK.png",
 	"thumbnail": "https://i.imgur.com/dtyQMxs.png",
