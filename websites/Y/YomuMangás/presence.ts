@@ -36,19 +36,16 @@ presence.on("UpdateData", async () => {
 					: isNaN(Number(chapter))
 					? chapter
 					: `Capítulo ${chapter}`;
-				presenceData.largeImageKey =
-					isNsfw || !image
-						? "https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/1.png"
-						: image;
+				presenceData.largeImageKey = !image
+					? "https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/1.png"
+					: image;
 				presenceData.smallImageKey =
 					"https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/logo.png";
-				if (!isNsfw) {
-					presenceData.buttons = [
-						{ label: "Acessar Obra", url: href.split("/chapter/")[0] },
-						{ label: "Ler Capítulo", url: href },
-					];
-				}
-				if (!isNsfw && !isChapter) presenceData.buttons?.pop();
+				presenceData.buttons = [
+					{ label: "Acessar Obra", url: href.split("/chapter/")[0] },
+					{ label: "Ler Capítulo", url: href },
+				];
+				if (!isChapter) presenceData.buttons?.pop();
 			} else {
 				presenceData.details = "Sua biblioteca virtual de mangás";
 				presenceData.state = "manhwas, doujin e mais!";
