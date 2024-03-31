@@ -1,9 +1,13 @@
 import { findPage } from "./findPage";
 import { Assets } from "./presence";
 
-function handleArticle(presenceData: PresenceData, useArticleThumbnail:boolean): void {
-	const aBody = document.querySelector("#js-article-text"),
-		titleEl = aBody.querySelector("h1");
+function handleArticle(
+	presenceData: PresenceData,
+	useArticleThumbnail: boolean
+): void {
+	const titleEl = document
+		.querySelector("#js-article-text")
+		.querySelector("h1");
 	presenceData.buttons = [
 		{ label: "Read Article", url: document.location.href },
 	];
@@ -16,12 +20,18 @@ function handleArticle(presenceData: PresenceData, useArticleThumbnail:boolean):
 		presenceData.details = "Reading Article";
 		delete presenceData.smallImageKey;
 	}
-	
-	if (useArticleThumbnail) presenceData.largeImageKey = document.querySelector('[property="twitter:image"]')?.getAttribute("content");
-	else presenceData.largeImageKey = Assets.Logo;
+
+	if (useArticleThumbnail) {
+		presenceData.largeImageKey = document
+			.querySelector('[property="twitter:image"]')
+			?.getAttribute("content");
+	} else presenceData.largeImageKey = Assets.Logo;
 
 	// the twitter title preview is more concise and readable
-	presenceData.state = document.querySelector('[property="twitter:title"]')?.getAttribute("content") || titleEl.textContent.replace("EXCLUSIVE", "");
+	presenceData.state =
+		document
+			.querySelector('[property="twitter:title"]')
+			?.getAttribute("content") || titleEl.textContent.replace("EXCLUSIVE", "");
 
 	// authors (LEAVE THIS COMMENT PLEASE)
 	/*
@@ -32,11 +42,15 @@ function handleArticle(presenceData: PresenceData, useArticleThumbnail:boolean):
 	*/
 }
 
-export function handleNewsPage(presenceData: PresenceData, useArticleThumbnail:boolean): void {
+export function handleNewsPage(
+	presenceData: PresenceData,
+	useArticleThumbnail: boolean
+): void {
 	const newsPaths = document.location.pathname
 		.split("/")
 		.find(e => e && e !== "news");
 
-	if (newsPaths.includes("article-")) handleArticle(presenceData, useArticleThumbnail);
+	if (newsPaths.includes("article-"))
+		handleArticle(presenceData, useArticleThumbnail);
 	else findPage(document.location.pathname.substring(1), presenceData);
 }
