@@ -22,6 +22,10 @@
 		"chat",
 		"characterai"
 	],
+	"matches": [
+		"*://old.character.ai/*",
+		"*://character.ai/*"
+	],
 	"settings": [
 		{
 			"id": "time",
