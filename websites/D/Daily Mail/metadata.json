@@ -22,5 +22,12 @@
 		"news",
 		"newspaper",
 		"publication"
+	],
+	"settings": [
+		{
+			"id": "usearticlethumbnail",
+			"title": "Use Article Thumbnail as Image",
+			"value": false
+		}
 	]
 }

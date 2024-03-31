@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case Pages.news:
-			handleNewsPage(presenceData);
+			handleNewsPage(presenceData, await presence.getSetting("usearticlethumbnail"));
 			break;
 
 		default:
