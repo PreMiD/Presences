@@ -4,7 +4,7 @@ export function handleThing(
 	presenceData: PresenceData,
 	link: string,
 	isEdit: boolean
-) {
+): void {
 	if (!link) {
 		presenceData.state = "Browing the Community Gallery";
 		presenceData.buttons = [{ label: "View", url: document.location.href }];
@@ -60,7 +60,10 @@ export function handleThing(
 	}
 }
 
-export function handleCodeblocks(presenceData: PresenceData, isEdit: boolean) {
+export function handleCodeblocks(
+	presenceData: PresenceData,
+	isEdit: boolean
+): void {
 	const title = document.querySelector(".design-detail-header-title") || "",
 		username = document.querySelector("#design-detail-username");
 
