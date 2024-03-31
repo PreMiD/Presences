@@ -108,7 +108,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Reading a thread:";
 
 			if (document.querySelector("[class*='nsfw']"))
-				presenceData.state = "looking at family friendly content";
+				presenceData.state = "Looking at family friendly content";
 			else {
 				presenceData.state = threadTag
 					? threadTitle.replace(threadTag, `[${threadTag}]`)
