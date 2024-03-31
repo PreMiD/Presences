@@ -20,15 +20,12 @@ presence.on("UpdateData", async () => {
 			largeImageKey: !logo ? Assets.Logo : Assets.Logo2,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = document.location;
+		{ pathname, href, search } = document.location;
 
-	if (pathname === "/" && window.location.search.substr(0, 2) === "?s") {
-		const urlParams = new URLSearchParams(window.location.search),
-			nsfw = urlParams.get("adult");
+	if (pathname === "/" && search.substring(0, 2) === "?s") {
+		const urlParams = new URLSearchParams(search);
 		presenceData.details = "Searching:";
-		presenceData.state = `${
-			nsfw === "1" ? "nsfw" : nsfw === "0" ? "non nsfw" : urlParams.get("s")
-		} 🔸 ${
+		presenceData.state = `'${urlParams.get("s")}' 🔸 ${
 			document.querySelector(".c-blog__heading > .h4").textContent.split(" ")[0]
 		} results`;
 		presenceData.smallImageKey = Assets.Search;
@@ -52,15 +49,16 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname.startsWith("/read") && pathname.indexOf("/chapter") > 0) {
 		const [title, chapter] = document
-			.querySelector("#chapter-heading")
-			.textContent.split("-");
+				.querySelector("#chapter-heading")
+				.textContent.split("-"),
+			isAdult = !!document.querySelector(".btn-adult-confirm");
 		let progress =
 			(document.documentElement.scrollTop /
 				(document.querySelector(".reading-content").scrollHeight -
 					window.innerHeight)) *
 			100;
 		progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
-		presenceData.details = title;
+		presenceData.details = isAdult ? "Reading a webtoon" : title;
 		presenceData.state = `📖 ${chapter} 🔸 ${progress}%`;
 		presenceData.largeImageKey = title.includes("Solo Leveling")
 			? Assets.Solo
@@ -68,35 +66,41 @@ presence.on("UpdateData", async () => {
 			? Assets.Logo
 			: Assets.Logo2;
 		presenceData.smallImageKey = Assets.Reading;
-		if (buttons) {
+		if (buttons && !isAdult) {
 			presenceData.buttons = [
 				{
 					label: "Read Webtoon",
-					url: window.location.href,
+					url: href,
 				},
 			];
 		}
 	} else if (pathname.startsWith("/read")) {
-		const title = document.querySelector(".post-title").textContent;
-		presenceData.details = "Viewing:";
-		presenceData.state = title;
-		presenceData.smallImageKey = Assets.Viewing;
-		presenceData.largeImageKey = title.includes("Solo Leveling")
-			? Assets.Solo
-			: logo === 0
-			? Assets.Logo
-			: Assets.Logo2;
-		if (buttons) {
-			presenceData.buttons = [
-				{
-					label: "View Webtoon",
-					url: window.location.href,
-				},
-			];
+		if (document.querySelector(".manga-title-badges.adult")) {
+			presenceData.details = "Viewing a webtoon";
+			presenceData.smallImageKey = Assets.Viewing;
+			presenceData.largeImageKey = logo === 0 ? Assets.Logo : Assets.Logo2;
+		} else {
+			const title = document.querySelector(".post-title").textContent;
+			presenceData.details = "Viewing:";
+			presenceData.state = title;
+			presenceData.smallImageKey = Assets.Viewing;
+			presenceData.largeImageKey = title.includes("Solo Leveling")
+				? Assets.Solo
+				: logo === 0
+				? Assets.Logo
+				: Assets.Logo2;
+			if (buttons) {
+				presenceData.buttons = [
+					{
+						label: "View Webtoon",
+						url: href,
+					},
+				];
+			}
 		}
 	} else if (pathname === "/user-settings/") {
 		presenceData.smallImageKey = Assets.Settings;
-		switch (window.location.search) {
+		switch (search) {
 			case "?tab=history":
 				presenceData.details = "User settings:";
 				presenceData.state = "History";
