@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Talking to like-minded (based) individuals";
 	else if (pathname.includes("/media/")) {
 		presenceData.details =
-			"Either looking at memes, porn, or both (or posting them)";
+			"Either looking at memes, family friendly content, or both (or posting them)";
 	} else if (pathname.includes("/search/") && search.includes("?q=") === false)
 		presenceData.details = "Searching for something really specific";
 	else if (pathname.includes("/search/")) {
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Reading a thread:";
 
 			if (document.querySelector("[class*='nsfw']"))
-				presenceData.state = "looking at family friendly content";
+				presenceData.state = "Looking at family friendly content";
 			else {
 				presenceData.state = threadTag
 					? threadTitle.replace(threadTag, `[${threadTag}]`)
