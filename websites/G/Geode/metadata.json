@@ -16,7 +16,7 @@
 		"*://geode-sdk.org/*",
 		"*://docs.geode-sdk.org/*"
 	],
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"logo": "https://i.joerkig.com/gowo8n.png",
 	"thumbnail": "https://i.joerkig.com/s99rcj.png",
 	"color": "#f5dd9f",

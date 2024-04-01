@@ -14,7 +14,7 @@ function getTimestamps() {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://poketube.fun/css/yt-ukraine-512.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/Poke/assets/logo.png",
 	};
 	let clear = false;
 

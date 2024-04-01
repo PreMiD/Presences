@@ -12,9 +12,9 @@
 	"matches": [
 		"*://*.dailymail.co.uk/*"
 	],
-	"version": "1.0.2",
-	"logo": "https://i.imgur.com/glm7on6.png",
-	"thumbnail": "https://i.dailymail.co.uk/i/sitelogos/dm-com-home.png",
+	"version": "1.0.3",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Daily%20Mail/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Daily%20Mail/assets/thumbnail.png",
 	"color": "#004db3",
 	"category": "other",
 	"tags": [

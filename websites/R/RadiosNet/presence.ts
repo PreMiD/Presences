@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum AssetsRadios {
-	Logo = "https://static.radios.com.br/img/logo-radiosnet-512-solid.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/RadiosNet/assets/logo.png",
 }
 
 const { pathname, href, search } = document.location;

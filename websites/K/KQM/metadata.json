@@ -12,9 +12,9 @@
 	"matches": [
 		"*://*.keqingmains.com/*"
 	],
-	"version": "1.0.4",
-	"logo": "https://i.imgur.com/zPaoj5v.png",
-	"thumbnail": "https://keqingmains.com/wp-content/uploads/2023/12/KQM_Banner-1536x254.webp",
+	"version": "1.0.5",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/KQM/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/KQM/assets/thumbnail.webp",
 	"color": "#dab2f9",
 	"category": "games",
 	"tags": [

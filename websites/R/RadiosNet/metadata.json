@@ -14,9 +14,9 @@
 		"*://www.radios.com.br/*",
 		"*://play.radios.com.br/*"
 	],
-	"version": "1.0.2",
-	"logo": "https://static.radios.com.br/img/logo-radiosnet-512-solid.png",
-	"thumbnail": "https://suporte.obacast.com.br/wp-content/uploads/2019/07/banner_radios_net.png",
+	"version": "1.0.3",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/RadiosNet/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/RadiosNet/assets/thumbnail.png",
 	"color": "#005080",
 	"category": "music",
 	"tags": [
