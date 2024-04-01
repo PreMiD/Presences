@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-const enum Assets { // Other default assets can be found at index.d.ts
+const enum Assets {
 	Advice = "https://i.imgur.com/f5RrPFn.png",
 	Logo = "https://i.imgur.com/ZnH9imj.png",
 	Loading = "https://i.imgur.com/9sInqXl.gif",
@@ -18,10 +18,9 @@ presence.on("UpdateData", async () => {
 
 	switch (hostname) {
 		case "kittensgame.com": {
-			const loadingBar = document.querySelector<HTMLProgressElement>(
+			if (document.querySelector<HTMLProgressElement>(
 				"#loadingProgressBar"
-			);
-			if (loadingBar.value !== 100) {
+			).value !== 100) {
 				presenceData.details = "Loading..";
 				presenceData.smallImageKey = Assets.Loading;
 			} else {
