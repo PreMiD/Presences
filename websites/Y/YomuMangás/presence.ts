@@ -6,10 +6,7 @@ presence.on("UpdateData", async () => {
 			"https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/0.png",
 	};
 	const { pathname, href } = document.location,
-		[privacy, nsfw] = await Promise.all([
-			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("nsfw"),
-		]),
+		privacy = await presence.getSetting<boolean>("privacy"),
 		pages: Record<string, PresenceData> = {
 			"/": { details: "Página Inicial" },
 			"/404": { details: "404", state: "Uhn? Onde estamos?" },
@@ -24,14 +21,14 @@ presence.on("UpdateData", async () => {
 	if (!privacy) {
 		if (pathname.startsWith("/manga")) {
 			const isChapter = pathname.includes("/chapter/"),
-				isNsfw =
-					document.querySelector("#premid-manga-nsfw")?.textContent === "true",
 				chapter =
 					document.querySelector("#premid-manga-chapter")?.textContent || "0",
 				image = document.querySelector<HTMLImageElement>(
 					"#premid-manga-cover"
 				)?.src;
-			if (!isNsfw || (isNsfw && nsfw)) {
+			if (
+				document.querySelector("#premid-manga-nsfw")?.textContent !== "true"
+			) {
 				presenceData.details =
 					document.querySelector("#premid-manga-title")?.textContent || "Obra";
 				presenceData.state = !isChapter
@@ -40,21 +37,18 @@ presence.on("UpdateData", async () => {
 					? chapter
 					: `Capítulo ${chapter}`;
 				presenceData.largeImageKey =
-					isNsfw || !image
-						? "https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/1.png"
-						: image;
+					image ||
+					"https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/1.png";
 				presenceData.smallImageKey =
 					"https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/logo.png";
-				if (!isNsfw) {
-					presenceData.buttons = [
-						{ label: "Acessar Obra", url: href.split("/chapter/")[0] },
-						{ label: "Ler Capítulo", url: href },
-					];
-				}
-				if (!isNsfw && !isChapter) presenceData.buttons?.pop();
+				presenceData.buttons = [
+					{ label: "Acessar Obra", url: href.split("/chapter/")[0] },
+					{ label: "Ler Capítulo", url: href },
+				];
+				if (!isChapter) presenceData.buttons?.pop();
 			} else {
 				presenceData.details = "Sua biblioteca virtual de mangás";
-				presenceData.state = "manhwas, hentais, doujin e mais!";
+				presenceData.state = "manhwas, doujin e mais!";
 			}
 		} else if (pathname.startsWith("/user")) {
 			const username =
@@ -82,7 +76,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else {
 		presenceData.details = "Sua biblioteca virtual de mangás";
-		presenceData.state = "manhwas, hentais, doujin e mais!";
+		presenceData.state = "manhwas, doujin e mais!";
 	}
 
 	presence.setActivity(presenceData);
