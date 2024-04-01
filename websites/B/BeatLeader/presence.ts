@@ -587,6 +587,7 @@ presence.on("UpdateData", async () => {
 	}
 	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 
-	if (presenceData.details) presence.setActivity(presenceData);
+	if (presenceData.details && presenceData.largeImageKey)
+		presence.setActivity(presenceData);
 	else presence.setActivity();
 });
