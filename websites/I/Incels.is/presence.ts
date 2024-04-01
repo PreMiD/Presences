@@ -95,10 +95,10 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Checking up on watched threads";
 	else if (pathname.includes("/chat/"))
 		presenceData.details = "Talking to like-minded (based) individuals";
-	else if (pathname.includes("/media/"))
+	else if (pathname.includes("/media/")) {
 		presenceData.details =
 			"Either looking at memes, family friendly content, or both (or posting them)";
-	else if (pathname.includes("/search/") && search.includes("?q=") === false)
+	} else if (pathname.includes("/search/") && search.includes("?q=") === false)
 		presenceData.details = "Searching for something really specific";
 	else if (pathname.includes("/search/")) {
 		presenceData.details = `Searching for "${
