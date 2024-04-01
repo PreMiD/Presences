@@ -250,9 +250,18 @@ let replay = {
 	},
 	dynamicLogo = "";
 
+function doDefaultDynamic() {
+	if (random < 98) dynamicLogo = logoArr[1];
+	else if (random >= 98) {
+		if (random <= 98) dynamicLogo = logoArr[4];
+		else dynamicLogo = logoArr[5];
+	}
+}
+
 switch (date.getMonth()) {
 	case 3: {
 		if (date.getDate() === 22) dynamicLogo = logoArr[6];
+		else doDefaultDynamic();
 		break;
 	}
 	case 9: {
@@ -282,11 +291,7 @@ switch (date.getMonth()) {
 		break;
 	}
 	default: {
-		if (random < 98) dynamicLogo = logoArr[1];
-		else if (random >= 98) {
-			if (random <= 98) dynamicLogo = logoArr[4];
-			else dynamicLogo = logoArr[5];
-		}
+		doDefaultDynamic();
 		break;
 	}
 }
@@ -582,6 +587,6 @@ presence.on("UpdateData", async () => {
 	}
 	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 
-	if (presenceData.details) presence.setActivity(presenceData);
-	else presence.setActivity();
+	if (presenceData.details && presenceData.largeImageKey)
+		presence.setActivity(presenceData);
 });
