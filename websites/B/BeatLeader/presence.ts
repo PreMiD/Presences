@@ -456,7 +456,7 @@ presence.on("UpdateData", async () => {
 					presenceData.largeImageKey = document
 						.querySelector("header")
 						.style.backgroundImage.match(
-							/(https:\/\/.+\.((png)|(jpg)|(jpeg)))/g
+							/(https:\/\/.+\.((png)|(jpg)|(jpeg)|(webp)))/g
 						)
 						?.toString();
 				}
@@ -587,6 +587,6 @@ presence.on("UpdateData", async () => {
 	}
 	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 
-	if (presenceData.details && presenceData.largeImageKey)
-		presence.setActivity(presenceData);
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
