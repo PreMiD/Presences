@@ -13,9 +13,9 @@
 	"matches": [
 		"*://chompubot.work/*"
 	],
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/ChompuBot/assets/logo.jpg",
-	"thumbnail": "https://i.ibb.co/YPt4Htv/thumbnail-1.jpg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/ChompuBot/assets/thumbnail.jpg",
 	"color": "#ffbcff",
 	"category": "music",
 	"tags": [
