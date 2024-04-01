@@ -10,8 +10,8 @@
 	},
 	"url": "moddb.com",
 	"version": "1.0.5",
-	"logo": "https://i.imgur.com/KwVU2t6.png",
-	"thumbnail": "https://static.moddb.com/cutoff/images/default/splash.png",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/ModDB/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/ModDB/assets/thumbnail.png",
 	"color": "#a00e00",
 	"category": "games",
 	"tags": [

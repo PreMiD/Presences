@@ -10,7 +10,7 @@ const presence = new Presence({
 let oldPage: string;
 
 const enum Assets {
-	Logo = "https://i.imgur.com/3xMqFwy.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/J/Japanese%20Mahjong%20Wiki/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {

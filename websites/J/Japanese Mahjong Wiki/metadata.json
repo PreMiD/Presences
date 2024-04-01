@@ -13,8 +13,8 @@
 		"https://riichi.wiki/*"
 	],
 	"version": "1.0.2",
-	"logo": "https://i.imgur.com/3xMqFwy.png",
-	"thumbnail": "https://riichi.wiki/images/Mahjong_Tiles.jpg",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/Japanese%20Mahjong%20Wiki/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/Japanese%20Mahjong%20Wiki/assets/thumbnail.jpg",
 	"color": "#F1ECE6",
 	"category": "games",
 	"tags": [

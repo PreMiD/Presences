@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-		largeImageKey: thumbnail ?? "https://i.imgur.com/bs7XU8u.png",
+		largeImageKey: thumbnail ?? "https://cdn.rcd.gg/PreMiD/websites/L/LITT%20Live/assets/logo.png",
 	};
 
 	songName = document.querySelector(
