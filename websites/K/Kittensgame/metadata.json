@@ -8,8 +8,14 @@
 	"description": {
 		"en": "Kittens Game by bloodrizer is a text-based semi-idle incremental village management simulation browser game. You manage a village of kittens as they acquire resources and unlock new technologies. The game is currently under development, so prices and balancing are subject to change."
 	},
-	"url": ["kittensgame.com", "forum.kittensgame.com", "wiki.kittensgame.com"],
-	"matches": [ "*://*.kittensgame.com/"],
+	"url": [
+		"kittensgame.com",
+		"forum.kittensgame.com",
+		"wiki.kittensgame.com"
+	],
+	"matches": [
+		"*://*.kittensgame.com/"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/ZnH9imj.png",
 	"thumbnail": "https://i.imgur.com/px9EJ1v.png",
@@ -21,5 +27,4 @@
 		"kittens",
 		"game"
 	]
-
 }
