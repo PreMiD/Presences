@@ -14,7 +14,7 @@
 		"*://www.radios.com.br/*",
 		"*://play.radios.com.br/*"
 	],
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/RadiosNet/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/RadiosNet/assets/thumbnail.png",
 	"color": "#005080",
