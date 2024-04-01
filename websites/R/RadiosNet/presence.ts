@@ -96,9 +96,7 @@ presence.on("UpdateData", async () => {
 			.querySelector(".info")
 			?.textContent.split("\n")[1];
 
-		const slogan = document
-			.querySelector(".info")
-			?.textContent.split("\n")[3];
+		const slogan = document.querySelector(".info")?.textContent.split("\n")[3];
 
 		if (slogan) presenceData.smallImageText = slogan;
 		else {
