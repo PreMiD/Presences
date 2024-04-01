@@ -6,8 +6,8 @@ const presence = new Presence({
 });
 
 export const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Daily%20Mail/assets/logo.png",
-	ExclIco = "https://cdn.rcd.gg/PreMiD/websites/D/Daily%20Mail/assets/0.png",
+	Logo = "https://i.imgur.com/glm7on6.png",
+	ExclIco = "https://i.imgur.com/FitEOZS.png",
 	PlayIco = "https://cdn.rcd.gg/PreMiD/resources/play.png",
 	PauseIco = "https://cdn.rcd.gg/PreMiD/resources/pause.png",
 }
