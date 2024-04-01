@@ -29,16 +29,17 @@ presence.on("UpdateData", async () => {
 		}
 		case "chat2": {
 			presenceData.details = "Chatting with";
-			presenceData.state = document.querySelector(
-				"div > div > div > div > div > div > div > div"
-			).textContent;
+			presenceData.state = document
+				.querySelector(".swiper-no-swiping")
+				.parentElement.firstChild.textContent.replace("c.ai", "");
 			presenceData.buttons = [button];
 			break;
 		}
 		case "chat": {
 			presenceData.details = "Chatting with";
 			presenceData.state =
-				document.querySelector(".chattitle")?.childNodes[1]?.textContent;
+				document.querySelector(".chattitle")?.childNodes[1]?.textContent ||
+				document.title.split("|")[0].replace("Chat with", "").trim();
 			presenceData.buttons = [button];
 			break;
 		}
@@ -65,20 +66,10 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing chats";
 			break;
 		}
-		case "community": {
-			presenceData.details = "Browsing community";
-			break;
-		}
-		case "posts": {
-			presenceData.details = "Browsing posts";
-			presenceData.state = document.querySelector(
-				"div > div > div > div > div > div > div > div > div > div > div:last-child > div:last-child"
-			).textContent;
-			presenceData.buttons = [button];
-			break;
-		}
 		case "profile": {
-			presenceData.details = "Viewing their profile";
+			const { pathname } = document.location;
+			presenceData.details = "Viewing profile";
+			presenceData.state = `for ${pathname.split("/")[2]}`;
 			break;
 		}
 		case "character": {

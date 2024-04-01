@@ -12,7 +12,11 @@
 		"beta.character.ai",
 		"character.ai"
 	],
-	"version": "1.0.3",
+	"matches": [
+		"*://old.character.ai/*",
+		"*://character.ai/*"
+	],
+	"version": "1.0.4",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Character.AI/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Character.AI/assets/thumbnail.png",
 	"color": "#242525",
