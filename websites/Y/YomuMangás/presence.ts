@@ -22,10 +22,7 @@ presence.on("UpdateData", async () => {
 		if (pathname.startsWith("/manga")) {
 			const isChapter = pathname.includes("/chapter/"),
 				chapter =
-					document.querySelector("#premid-manga-chapter")?.textContent || "0",
-				image = document.querySelector<HTMLImageElement>(
-					"#premid-manga-cover"
-				)?.src;
+					document.querySelector("#premid-manga-chapter")?.textContent || "0";
 			if (
 				document.querySelector("#premid-manga-nsfw")?.textContent !== "true"
 			) {
@@ -37,7 +34,8 @@ presence.on("UpdateData", async () => {
 					? chapter
 					: `Capítulo ${chapter}`;
 				presenceData.largeImageKey =
-					image ||
+					document.querySelector<HTMLImageElement>("#premid-manga-cover")
+						?.src ||
 					"https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/1.png";
 				presenceData.smallImageKey =
 					"https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/logo.png";
