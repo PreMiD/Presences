@@ -22,9 +22,9 @@
 		"*://game.mahjongsoul.com/*",
 		"*://mahjongsoul.com/*"
 	],
-	"version": "1.1.0",
-	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Mahjong%20Soul/assets/logo.jpeg",
-	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Mahjong%20Soul/assets/thumbnail.jpg",
+	"version": "1.1.1",
+	"logo": "https://i.imgur.com/X0BvMqW.jpeg",
+	"thumbnail": "https://mahjongsoul.game.yo-star.com/v0.10.1.w/scene/Assets/Resource/lobby/beijing_chunying.jpg",
 	"color": "#A83A36",
 	"category": "games",
 	"tags": [

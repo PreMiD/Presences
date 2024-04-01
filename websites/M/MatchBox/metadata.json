@@ -18,9 +18,9 @@
 		"*://smashpros.gg/*",
 		"*://www.smashpros.gg/*"
 	],
-	"version": "1.0.3",
-	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MatchBox/assets/logo.png",
-	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MatchBox/assets/thumbnail.png",
+	"version": "1.0.4",
+	"logo": "https://i.imgur.com/BUsAbPF.png",
+	"thumbnail": "https://i.imgur.com/fU14eIO.png",
 	"color": "#52ff87",
 	"category": "games",
 	"tags": [

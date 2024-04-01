@@ -4,7 +4,7 @@ const presence = new Presence({
 
 // Other default assets can be found at index.d.ts
 const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/L/Library%20of%20Babel/assets/logo.png",
+	Logo = "https://i.imgur.com/RewxZBr.png",
 }
 
 const enum Pages {
