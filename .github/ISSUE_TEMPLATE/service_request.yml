@@ -30,7 +30,6 @@ body:
       label: Prerequisites
       options:
         - label: It is a paid service
-        - label: It displays NSFW content
         - label: It is region restricted
   - type: textarea
     validations:
