@@ -99,7 +99,6 @@ presence.on("UpdateData", async () => {
 		const slogan = document
 			.querySelector(".info")
 			?.textContent.split("\n")[3]
-			?.split("\t")[9];
 
 		if (slogan) presenceData.smallImageText = slogan;
 		else {
