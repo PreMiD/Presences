@@ -14,6 +14,7 @@
 		"wiki.kittensgame.com"
 	],
 	"matches": [
+		"*://kittensgame.com/",
 		"*://*.kittensgame.com/"
 	],
 	"version": "1.0.0",
