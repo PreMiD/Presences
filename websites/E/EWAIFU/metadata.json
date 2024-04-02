@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "779019106342141973",
+		"name": "hallerdaniel"
+	},
+	"service": "EWAIFU",
+	"description": {
+		"en": "EWAIFU: Uniting a worldwide community through common passions and experiences, fostering connections and friendships across borders."
+	},
+	"url": [
+		"www.ewaifu.gg",
+		"ewaifu.gg"
+	],
+	"version": "1.0.0",
+	"logo": "https://www.ewaifu.gg/img/logo.png",
+	"thumbnail": "https://www.ewaifu.gg/img/thumbnail.png",
+	"color": "#5C354C",
+	"category": "socials",
+	"tags": [
+		"ewaifu",
+		"friends",
+		"gaming"
+	]
+}
