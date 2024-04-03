@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-const enum Assets { // Other default assets can be found at index.d.ts
+const enum Assets {
 	Logo = "logo",
 }
 
