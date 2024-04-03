@@ -100,7 +100,6 @@ presence.on("UpdateData", async () => {
 					".user-folder.active"
 				).textContent;
 			}
-
 			break;
 	}
 
