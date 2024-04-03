@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "logo",
+	Logo = "https://i.imgur.com/YpdxIWv.png",
 }
 
 let data: {
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, href, search } = document.location,
 		pathArr = pathname.split("/"),
-		[buttons] = await Promise.all([presence.getSetting<boolean>("buttons")]);
+		buttons = await presence.getSetting<boolean>("buttons");
 
 	switch (pathArr[1]) {
 		default: {

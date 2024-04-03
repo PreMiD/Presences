@@ -13,7 +13,7 @@
 		"anix.to"
 	],
 	"version": "1.0.0",
-	"logo": "https://i.imgur.com/gtqJrml.png",
+	"logo": "https://i.imgur.com/YpdxIWv.png",
 	"thumbnail": "https://i.imgur.com/u2ZMJZV.png",
 	"color": "#95b6d0",
 	"category": "anime",
@@ -22,6 +22,14 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
+	"matches": [
+		"https://anix.vc/*",
+		"https://anix.to/*"
+	],
+	"iFrameMatches": [
+		"https://anix.vc/anime/*",
+		"https://anix.to/anime/*"
+	],
 	"settings": [
 		{
 			"id": "buttons",
