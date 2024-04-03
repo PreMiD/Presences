@@ -18,7 +18,7 @@
 		"*://poke.vern.cc/*",
 		"*://poke.ggtyler.dev/*"
 	],
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Poke/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Poke/assets/thumbnail.png",
 	"color": "#414161",

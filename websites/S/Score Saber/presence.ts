@@ -1,117 +1,216 @@
 const presence = new Presence({
 		clientId: "833644176967991346",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
-
-enum OtherAssets {
-	"360DegreeEasy" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/0.png",
-	"360DegreeExpert" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/1.png",
-	"360DegreeExpertPlus" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/2.png",
-	"360DegreeHard" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/3.png",
-	"360DegreeNormal" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/4.png",
-	"360Degree" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/5.png",
-	"90DegreeEasy" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/6.png",
-	"90DegreeExpert" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/7.png",
-	"90DegreeExpertPlus" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/8.png",
-	"90DegreeHard" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/9.png",
-	"90DegreeNormal" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/10.png",
-	"90Degree" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/11.png",
-	LawlessEasy = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/12.png",
-	LawlessExpert = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/13.png",
-	LawlessExpertPlus = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/14.png",
-	LawlessHard = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/15.png",
-	LawlessNormal = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/16.png",
-	Lawless = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/17.png",
-	LightshowEasy = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/18.png",
-	LightshowExpert = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/19.png",
-	LightshowExpertPlus = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/20.png",
-	LightshowHard = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/21.png",
-	LightshowNormal = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/22.png",
-	Lightshow = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/23.png",
-	LegacyEasy = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/24.png",
-	LegacyExpert = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/25.png",
-	LegacyExpertPlus = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/26.png",
-	LegacyHard = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/27.png",
-	LegacyNormal = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/28.png",
-	Legacy = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/29.png",
-	NoArrowsEasy = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/30.png",
-	NoArrowsExpert = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/31.png",
-	NoArrowsExpertPlus = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/32.png",
-	NoArrowsHard = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/33.png",
-	NoArrowsNormal = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/34.png",
-	NoArrows = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/35.png",
-	OneSaberEasy = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/36.png",
-	OneSaberExpert = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/37.png",
-	OneSaberExpertPlus = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/38.png",
-	OneSaberHard = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/39.png",
-	OneSaberNormal = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/40.png",
-	OneSaber = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/41.png",
-	StandardEasy = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/42.png",
-	StandardExpert = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/43.png",
-	StandardExpertPlus = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/44.png",
-	StandardHard = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/45.png",
-	StandardNormal = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/46.png",
-	Standard = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/47.png",
-	HorizontalEasy = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/48.png",
-	HorizontalHard = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/49.png",
-	HorizontalExpert = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/50.png",
-	HorizontalNormal = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/51.png",
-	HorizontalExpertPlus = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/52.png",
-	Horizontal = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/53.png",
-	VerticalHard = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/54.png",
-	VerticalEasy = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/55.png",
-	VerticalExpertPlus = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/56.png",
-	VerticalExpert = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/57.png",
-	VerticalNormal = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/58.png",
-	Vertical = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/59.png",
-	InvertedExpert = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/60.png",
-	InvertedEasy = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/61.png",
-	InvertedExpertPlus = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/62.png",
-	InvertedNormal = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/63.png",
-	InvertedHard = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/64.png",
-	Inverted = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/65.png",
-	InverseHard = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/66.png",
-	InverseExpertPlus = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/67.png",
-	InverseEasy = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/68.png",
-	InverseExpert = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/69.png",
-	InverseNormal = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/70.png",
-	Inverse = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/71.png",
-	RhythmGameStandardEasy = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/72.png",
-	RhythmGameStandardNormal = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/73.png",
-	RhythmGameStandardHard = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/74.png",
-	RhythmGameStandardExpert = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/75.png",
-	RhythmGameStandardExpertPlus = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/76.png",
-	RhythmGameStandard = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/77.png",
-	"Standard-PinkPlay_ControllableEasy" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/78.png",
-	"Standard-PinkPlay_ControllableNormal" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/79.png",
-	"Standard-PinkPlay_ControllableHard" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/80.png",
-	"Standard-PinkPlay_ControllableExpert" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/81.png",
-	"Standard-PinkPlay_ControllableExpertPlus" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/82.png",
-	"Standard-PinkPlay_Controllable" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/83.png",
-	"OneSaber-PinkPlay_ControllableEasy" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/84.png",
-	"OneSaber-PinkPlay_ControllableNormal" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/85.png",
-	"OneSaber-PinkPlay_ControllableHard" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/86.png",
-	"OneSaber-PinkPlay_ControllableExpert" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/87.png",
-	"OneSaber-PinkPlay_ControllableExpertPlus" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/88.png",
-	"OneSaber-PinkPlay_Controllable" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/89.png",
-	"Lawless-PinkPlay_ControllableEasy" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/90.png",
-	"Lawless-PinkPlay_ControllableNormal" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/91.png",
-	"Lawless-PinkPlay_ControllableHard" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/92.png",
-	"Lawless-PinkPlay_ControllableExpert" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/93.png",
-	"Lawless-PinkPlay_ControllableExpertPlus" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/94.png",
-	"Lawless-PinkPlay_Controllable" = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/95.png",
-	Easy = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/96.png",
-	Expert = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/97.png",
-	ExpertPlus = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/98.png",
-	Hard = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/99.png",
-	Normal = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/100.png",
-	UnknownEasy = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/101.png",
-	UnknownExpert = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/102.png",
-	UnknownExpertPlus = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/103.png",
-	UnknownHard = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/104.png",
-	UnknownNormal = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/105.png",
-	Unknown = "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/106.png",
-}
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	leaderboardImages: Record<string, string> = {
+		"360DegreeEasy":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/0.png",
+		"360DegreeExpert":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/1.png",
+		"360DegreeExpertPlus":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/2.png",
+		"360DegreeHard":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/3.png",
+		"360DegreeNormal":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/4.png",
+		"360Degree":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/5.png",
+		"90DegreeEasy":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/6.png",
+		"90DegreeExpert":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/7.png",
+		"90DegreeExpertPlus":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/8.png",
+		"90DegreeHard":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/9.png",
+		"90DegreeNormal":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/10.png",
+		"90Degree":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/11.png",
+		LawlessEasy:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/12.png",
+		LawlessExpert:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/13.png",
+		LawlessExpertPlus:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/14.png",
+		LawlessHard:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/15.png",
+		LawlessNormal:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/16.png",
+		Lawless: "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/17.png",
+		LightshowEasy:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/18.png",
+		LightshowExpert:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/19.png",
+		LightshowExpertPlus:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/20.png",
+		LightshowHard:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/21.png",
+		LightshowNormal:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/22.png",
+		Lightshow:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/23.png",
+		LegacyEasy:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/24.png",
+		LegacyExpert:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/25.png",
+		LegacyExpertPlus:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/26.png",
+		LegacyHard:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/27.png",
+		LegacyNormal:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/28.png",
+		Legacy: "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/29.png",
+		NoArrowsEasy:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/30.png",
+		NoArrowsExpert:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/31.png",
+		NoArrowsExpertPlus:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/32.png",
+		NoArrowsHard:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/33.png",
+		NoArrowsNormal:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/34.png",
+		NoArrows:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/35.png",
+		OneSaberEasy:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/36.png",
+		OneSaberExpert:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/37.png",
+		OneSaberExpertPlus:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/38.png",
+		OneSaberHard:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/39.png",
+		OneSaberNormal:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/40.png",
+		OneSaber:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/41.png",
+		StandardEasy:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/42.png",
+		StandardExpert:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/43.png",
+		StandardExpertPlus:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/44.png",
+		StandardHard:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/45.png",
+		StandardNormal:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/46.png",
+		Standard:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/47.png",
+		HorizontalEasy:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/48.png",
+		HorizontalHard:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/49.png",
+		HorizontalExpert:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/50.png",
+		HorizontalNormal:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/51.png",
+		HorizontalExpertPlus:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/52.png",
+		Horizontal:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/53.png",
+		VerticalHard:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/54.png",
+		VerticalEasy:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/55.png",
+		VerticalExpertPlus:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/56.png",
+		VerticalExpert:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/57.png",
+		VerticalNormal:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/58.png",
+		Vertical:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/59.png",
+		InvertedExpert:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/60.png",
+		InvertedEasy:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/61.png",
+		InvertedExpertPlus:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/62.png",
+		InvertedNormal:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/63.png",
+		InvertedHard:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/64.png",
+		Inverted:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/65.png",
+		InverseHard:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/66.png",
+		InverseExpertPlus:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/67.png",
+		InverseEasy:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/68.png",
+		InverseExpert:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/69.png",
+		InverseNormal:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/70.png",
+		Inverse: "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/71.png",
+		RhythmGameStandardEasy:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/72.png",
+		RhythmGameStandardNormal:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/73.png",
+		RhythmGameStandardHard:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/74.png",
+		RhythmGameStandardExpert:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/75.png",
+		RhythmGameStandardExpertPlus:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/76.png",
+		RhythmGameStandard:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/77.png",
+		"Standard-PinkPlay_ControllableEasy":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/78.png",
+		"Standard-PinkPlay_ControllableNormal":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/79.png",
+		"Standard-PinkPlay_ControllableHard":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/80.png",
+		"Standard-PinkPlay_ControllableExpert":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/81.png",
+		"Standard-PinkPlay_ControllableExpertPlus":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/82.png",
+		"Standard-PinkPlay_Controllable":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/83.png",
+		"OneSaber-PinkPlay_ControllableEasy":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/84.png",
+		"OneSaber-PinkPlay_ControllableNormal":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/85.png",
+		"OneSaber-PinkPlay_ControllableHard":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/86.png",
+		"OneSaber-PinkPlay_ControllableExpert":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/87.png",
+		"OneSaber-PinkPlay_ControllableExpertPlus":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/88.png",
+		"OneSaber-PinkPlay_Controllable":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/89.png",
+		"Lawless-PinkPlay_ControllableEasy":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/90.png",
+		"Lawless-PinkPlay_ControllableNormal":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/91.png",
+		"Lawless-PinkPlay_ControllableHard":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/92.png",
+		"Lawless-PinkPlay_ControllableExpert":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/93.png",
+		"Lawless-PinkPlay_ControllableExpertPlus":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/94.png",
+		"Lawless-PinkPlay_Controllable":
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/95.png",
+		Easy: "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/96.png",
+		Expert: "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/97.png",
+		ExpertPlus:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/98.png",
+		Hard: "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/99.png",
+		Normal: "https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/100.png",
+		UnknownEasy:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/101.png",
+		UnknownExpert:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/102.png",
+		UnknownExpertPlus:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/103.png",
+		UnknownHard:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/104.png",
+		UnknownNormal:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/105.png",
+		Unknown:
+			"https://cdn.rcd.gg/PreMiD/websites/S/Score%20Saber/assets/106.png",
+	};
 
 function simplifyKey(key: string): string {
 	let result = key;
@@ -177,7 +276,7 @@ presence.on("UpdateData", async () => {
 				"div.title.is-5.mb-0 > a"
 			)?.textContent;
 			presenceData.smallImageKey =
-				OtherAssets[
+				leaderboardImages[
 					simplifyKey(
 						`${
 							mapSmallImages === 0 || mapSmallImages === 1
@@ -191,16 +290,16 @@ presence.on("UpdateData", async () => {
 										?.title.replace("+", "Plus")
 								: ""
 						}`
-					) as keyof typeof OtherAssets
+					)
 				] ??
-				OtherAssets[
+				leaderboardImages[
 					`Unknown${
 						mapSmallImages === 0 || mapSmallImages === 2
 							? document
 									.querySelector<HTMLDivElement>(".tag")
 									?.title.replace("+", "Plus")
 							: ""
-					}` as keyof typeof OtherAssets
+					}`
 				];
 			presenceData.smallImageText = `${
 				mapSmallImages === 0 || mapSmallImages === 1
@@ -237,10 +336,10 @@ presence.on("UpdateData", async () => {
 			".media-content > .title"
 		)?.textContent;
 		presenceData.smallImageKey =
-			OtherAssets[
+			leaderboardImages[
 				document
 					.querySelector<HTMLDivElement>(".card-content .tag")
-					?.title.replace("+", "Plus") as keyof typeof OtherAssets
+					?.title.replace("+", "Plus")
 			];
 		presenceData.smallImageText =
 			document.querySelector(".selected > span")?.textContent;
@@ -299,5 +398,6 @@ presence.on("UpdateData", async () => {
 
 	if (privacy) delete presenceData.state, delete presenceData.buttons;
 
-	presence.setActivity(presenceData);
+	if (presenceData.details && presenceData.largeImageKey)
+		presence.setActivity(presenceData);
 });

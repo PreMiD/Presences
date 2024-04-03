@@ -13,15 +13,14 @@
 	"matches": [
 		"*://stake.com/*"
 	],
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Stake/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Stake/assets/thumbnail.png",
 	"color": "#1a2c3a",
 	"category": "games",
 	"tags": [
 		"stake",
-		"casino",
-		"nsfw"
+		"casino"
 	],
 	"settings": [
 		{
