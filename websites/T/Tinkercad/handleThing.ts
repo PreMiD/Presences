@@ -62,7 +62,7 @@ export function handleCodeblocks(
 	presenceData: PresenceData,
 	isEdit: boolean
 ): void {
-	const title = document.querySelector(".design-detail-header-title") || "",
+	const title = document.querySelector(".design-detail-header-title")?.textContent ?? "",
 		username = document.querySelector("#design-detail-username");
 
 	if (isEdit) {
