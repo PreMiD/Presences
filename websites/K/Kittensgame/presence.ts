@@ -18,9 +18,10 @@ presence.on("UpdateData", async () => {
 
 	switch (hostname) {
 		case "kittensgame.com": {
-			if (document.querySelector<HTMLProgressElement>(
-				"#loadingProgressBar"
-			).value !== 100) {
+			if (
+				document.querySelector<HTMLProgressElement>("#loadingProgressBar")
+					.value !== 100
+			) {
 				presenceData.details = "Loading...";
 				presenceData.smallImageKey = Assets.Loading;
 			} else {
