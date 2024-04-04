@@ -123,18 +123,24 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "view": {
-			presenceData.details = document.querySelector(
-				'[class="submission-title"]'
-			)?.textContent;
-			presenceData.state = document.querySelector(
-				'[class="submission-id-sub-container"] > a > strong'
-			)?.textContent;
-			presenceData.buttons = [
-				{
-					label: "View post",
-					url: href,
-				},
-			];
+			if (
+				document.querySelector(".rating-box").textContent.trim() !== "General"
+			)
+				presenceData.details = "Viewing a post";
+			else {
+				presenceData.details = document.querySelector(
+					'[class="submission-title"]'
+				)?.textContent;
+				presenceData.state = document.querySelector(
+					'[class="submission-id-sub-container"] > a > strong'
+				)?.textContent;
+				presenceData.buttons = [
+					{
+						label: "View post",
+						url: href,
+					},
+				];
+			}
 			break;
 		}
 		default: {

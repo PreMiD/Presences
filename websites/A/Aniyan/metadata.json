@@ -14,14 +14,13 @@
 		"vi_VN": "Aniyan là trang xem anime trực tuyến Tiếng Brazil."
 	},
 	"url": "www.aniyan.net",
-	"version": "1.0.13",
+	"version": "1.0.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Aniyan/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Aniyan/assets/thumbnail.png",
 	"color": "#1384c3",
 	"category": "anime",
 	"tags": [
 		"anime",
-		"hentai",
-		"nsfw"
+		"hentai"
 	]
 }

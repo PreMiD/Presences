@@ -25,13 +25,9 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "nacional":
-			presenceData.details = "Na página inicial";
-			presenceData.state = "Visualizando nacionais";
-			break;
-
 		case "nsfw":
 			presenceData.details = "Na página inicial";
-			presenceData.state = "Visualizando NSFW";
+			presenceData.state = "Visualizando nacionais";
 			break;
 
 		case "biblioteca":
