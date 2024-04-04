@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 			if (document.querySelector<HTMLProgressElement>(
 				"#loadingProgressBar"
 			).value !== 100) {
-				presenceData.details = "Loading..";
+				presenceData.details = "Loading...";
 				presenceData.smallImageKey = Assets.Loading;
 			} else {
 				const mainData = await presence.getPageVariable(
