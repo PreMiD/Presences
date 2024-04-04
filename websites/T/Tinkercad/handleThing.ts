@@ -63,7 +63,7 @@ export function handleCodeblocks(
 	isEdit: boolean
 ): void {
 	const title = document.querySelector(".design-detail-header-title")?.textContent ?? "",
-		username = document.querySelector("#design-detail-username");
+		username = document.querySelector("#design-detail-username")?.textContent ?? "";
 
 	if (isEdit) {
 		// get name
