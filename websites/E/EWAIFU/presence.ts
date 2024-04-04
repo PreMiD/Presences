@@ -18,7 +18,6 @@ const timestampCheck: {
 		"/": {
 			details: "Discovering Ewaifus",
 			smallImageKey: Assets.Home,
-			buttons: [{ label: "Discover Ewaifus", url: "https://www.ewaifu.gg/" }],
 		},
 		"/login": { details: "Sign In", smallImageKey: Assets.Logo },
 		"/register": { details: "Sign Up" },

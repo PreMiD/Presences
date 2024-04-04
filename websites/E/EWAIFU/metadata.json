@@ -8,9 +8,9 @@
 	"description": {
 		"en": "EWAIFU: Uniting a worldwide community through common passions and experiences, fostering connections and friendships across borders."
 	},
-	"url": [
-		"www.ewaifu.gg",
-		"ewaifu.gg"
+	"matches": [
+		"*://ewaifu.gg/",
+		"*://*.ewaifu.gg/"
 	],
 	"version": "1.0.0",
 	"logo": "https://www.ewaifu.gg/img/logo.png",
