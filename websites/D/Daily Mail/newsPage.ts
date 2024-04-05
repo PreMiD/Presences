@@ -50,7 +50,10 @@ export function handleNewsPage(
 		.split("/")
 		.find(e => e && e !== "news");
 
-	if (newsPaths.includes("article-") || document.location.pathname.split("/")[3]?.startsWith("article-"))
+	if (
+		newsPaths.includes("article-") ||
+		document.location.pathname.split("/")[3]?.startsWith("article-")
+	)
 		handleArticle(presenceData, useArticleThumbnail);
 	else findPage(document.location.pathname.substring(1), presenceData);
 }
