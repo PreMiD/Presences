@@ -63,7 +63,12 @@ presence.on("UpdateData", async () => {
 			break;
 
 		default:
-			findPage(document.location.pathname.substring(1), presenceData);
+			if (document.location.pathname.split("/")[3]?.startsWith("article-")) {
+				handleNewsPage(
+					presenceData,
+					await presence.getSetting("usearticlethumbnail")
+				);
+			} else findPage(document.location.pathname.substring(1), presenceData);
 			break;
 	}
 
