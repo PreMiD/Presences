@@ -2,7 +2,7 @@ import { findPage } from "./findPage";
 import { handleNewsPage } from "./newsPage";
 
 const presence = new Presence({
-	clientId: "1217153856665026580",
+	clientId: "1224125578504966165",
 });
 
 export const enum Assets {
@@ -56,7 +56,10 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case Pages.news:
-			handleNewsPage(presenceData);
+			handleNewsPage(
+				presenceData,
+				await presence.getSetting("usearticlethumbnail")
+			);
 			break;
 
 		default:
