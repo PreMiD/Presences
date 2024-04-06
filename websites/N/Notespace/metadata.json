@@ -4,15 +4,15 @@
 		"id": "630812692659044352",
 		"name": "itsmateo20"
 	},
-	"service": "Notespace",
+	"service": "notespace",
 	"description": {
-		"en": "Notespace is your learning platform. Here you will find tons of notes, videos and much more, all for free!",
-		"pl": "Notespace to twoja plaforma do nauki. Znajdziesz tutaj mnóstwo notatek, filmów i wiele więcej, a to wszystko za darmo!"
+		"en": "notespace is your learning platform. Here you will find tons of notes, videos and much more, all for free!",
+		"pl": "notespace to twoja plaforma do nauki. Znajdziesz tutaj mnóstwo notatek, filmów i wiele więcej, a to wszystko za darmo!"
 	},
 	"url": "notespace.edu.pl",
-	"version": "1.0.2",
-	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Notespace/assets/logo.png",
-	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Notespace/assets/thumbnail.png",
+	"version": "1.0.3",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/notespace/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/notespace/assets/thumbnail.png",
 	"color": "#111111",
 	"category": "other",
 	"tags": [
