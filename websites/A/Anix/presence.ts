@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/YpdxIWv.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Anix/assets/logo.png",
 }
 
 let data: {
