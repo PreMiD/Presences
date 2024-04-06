@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "819696394180100106",
+		"name": ".vahya"
+	},
+	"service": "Anix",
+	"description": {
+		"en": "Anix offers a freemium anime streaming experience with premium features, allowing you to watch anime online for free without registration."
+	},
+	"url": [
+		"anix.vc",
+		"anix.to"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/YpdxIWv.png",
+	"thumbnail": "https://i.imgur.com/u2ZMJZV.png",
+	"color": "#95b6d0",
+	"category": "anime",
+	"tags": [
+		"anime"
+	],
+	"iframe": true,
+	"iFrameRegExp": ".*",
+	"matches": [
+		"https://anix.vc/*",
+		"https://anix.to/*"
+	],
+	"iFrameMatches": [
+		"https://anix.vc/anime/*",
+		"https://anix.to/anime/*"
+	],
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}
