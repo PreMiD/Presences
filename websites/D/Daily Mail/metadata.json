@@ -28,6 +28,11 @@
 			"id": "usearticlethumbnail",
 			"title": "Use Article Thumbnail as Image",
 			"value": false
+		},
+		{
+			"id": "showtimestamp",
+			"title": "Show how long you've been browsing",
+			"value": true
 		}
 	]
 }

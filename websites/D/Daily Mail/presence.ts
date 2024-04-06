@@ -39,7 +39,8 @@ presence.on("UpdateData", async () => {
 			type: ActivityType.Playing,
 		};
 
-	presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+	if (await presence.getSetting("showtimestamp")) presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+	else delete presenceData.startTimestamp;
 
 	switch (catNoCountry) {
 		case Pages.homepage:
