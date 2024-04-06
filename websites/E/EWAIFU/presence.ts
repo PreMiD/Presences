@@ -3,8 +3,8 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Logo = "https://www.ewaifu.gg/img/logo.png",
-	Home = "https://www.ewaifu.gg/img/home.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/E/EWAIFU/assets/logo.png",
+	Home = "https://cdn.rcd.gg/PreMiD/websites/E/EWAIFU/assets/0.png",
 }
 
 const timestampCheck: {
