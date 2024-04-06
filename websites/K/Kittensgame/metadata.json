@@ -17,9 +17,9 @@
 		"*://kittensgame.com/",
 		"*://*.kittensgame.com/"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/ZnH9imj.png",
-	"thumbnail": "https://i.imgur.com/px9EJ1v.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kittensgame/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kittensgame/assets/thumbnail.png",
 	"color": "#ffffff",
 	"category": "games",
 	"tags": [
