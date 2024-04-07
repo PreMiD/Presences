@@ -35,23 +35,13 @@ presence.on("UpdateData", async () => {
 
 	if (currentPath.endsWith("/") && currentPath.includes("strona-glowna"))
 		presenceData.details = "Przegląda stronę główną";
-	else if (currentPath.includes("kursy")) {
-		presenceData.details = "Przegląda kursy";
-		presenceData.smallImageKey = Assets.Reading;
-		presenceData.smallImageText = "Czyta...";
-		presenceData.state = document.querySelector("h1").textContent;
-	} else if (currentPath.includes("kurs")) {
-		presenceData.details = "Przegląda kurs";
-		presenceData.smallImageKey = Assets.Reading;
-		presenceData.smallImageText = "Czyta...";
-		presenceData.state = document.querySelector("h1").textContent;
-	} else if (currentPath.includes("ankieta")) {
+	else if (currentPath.includes("ankieta")) {
 		presenceData.details = "Przegląda strone ankiety";
 		presenceData.state = "Wypełnia ankietę";
 		presenceData.smallImageKey = Assets.Writing;
 		presenceData.smallImageText = "Pisze...";
 		presenceData.buttons = [
-			{ label: "Wypełnij ankietę", url: "https://notespace.edu.pl/ankieta" },
+			{ label: "Wypełnij ankietę", url: document.location.href },
 		];
 	} else if (currentPath.includes("centrum-pomocy"))
 		presenceData.details = "Przegląda centrum pomocy";
@@ -64,7 +54,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Skontaktuj się z nami",
-				url: "https://notespace.edu.pl/kontakt",
+				url: document.location.href,
 			},
 		];
 	} else if (currentPath.includes("dokumenty"))
@@ -77,7 +67,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Dowiedz sie o naszej polityce o prywatności",
-				url: "https://notespace.edu.pl/polityka-prywatnosci",
+				url: document.location.href,
 			},
 		];
 	} else if (currentPath.includes("polityka-cookies")) {
@@ -88,7 +78,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Dowiedz sie o naszej polityce o ciasteczkach",
-				url: "https://notespace.edu.pl/polityka-cookies",
+				url: document.location.href,
 			},
 		];
 	} else if (currentPath.includes("rodo")) {
@@ -99,7 +89,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Dowiedz sie o naszej polityce o RODO",
-				url: "https://notespace.edu.pl/rodo",
+				url: document.location.href,
 			},
 		];
 	} else if (currentPath.includes("warunki-uzytkowania")) {
@@ -110,7 +100,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Dowiedz sie o naszych warunkach użytkowania",
-				url: "https://notespace.edu.pl/warunki-uzytkowania",
+				url: document.location.href,
 			},
 		];
 	} else if (currentPath.includes("archiwum-dokumentow")) {
@@ -120,7 +110,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Przejrzyj nasze stare dokumenty",
-				url: "https://notespace.edu.pl/archiwum-dokumentow",
+				url: document.location.href,
 			},
 		];
 	} else if (currentPath.includes("logowanie")) {
@@ -150,7 +140,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Przeglądnij swoją liste polubionych",
-						url: "https://notespace.edu.pl/app/#/biblioteka/ulubione",
+						url: document.location.href,
 					},
 				];
 			} else if (currentPath.includes("moje-notatki")) {
@@ -160,7 +150,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Przeglądnij swoje notatki",
-						url: "https://notespace.edu.pl/app/#/biblioteka/moje-notatki",
+						url: document.location.href,
 					},
 				];
 			} else if (currentPath.includes("notatka")) {
@@ -178,7 +168,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Przeglądnij swoją biblioteke",
-						url: "https://notespace.edu.pl/app/#/biblioteka",
+						url: document.location.href,
 					},
 				];
 			}
