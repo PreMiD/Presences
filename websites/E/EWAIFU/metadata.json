@@ -12,9 +12,9 @@
 	"matches": [
 		"*://*.ewaifu.gg/"
 	],
-	"version": "1.0.0",
-	"logo": "https://www.ewaifu.gg/img/logo.png",
-	"thumbnail": "https://www.ewaifu.gg/img/thumbnail.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/EWAIFU/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/EWAIFU/assets/thumbnail.png",
 	"color": "#5C354C",
 	"category": "socials",
 	"tags": [
