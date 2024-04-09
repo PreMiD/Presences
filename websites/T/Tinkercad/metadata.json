@@ -12,9 +12,9 @@
 	"matches": [
 		"*://www.tinkercad.com/*"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/2Nyp2DT.png",
-	"thumbnail": "https://i.imgur.com/dtyQMxs.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tinkercad/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tinkercad/assets/thumbnail.png",
 	"color": "#0060df",
 	"category": "other",
 	"tags": [
