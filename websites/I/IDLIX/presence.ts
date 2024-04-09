@@ -30,8 +30,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	current: number,
 	duration: number,
 	paused: boolean,
-	isVideo: boolean,
-	playingAds: boolean;
+	isVideo: boolean;
 
 presence.on(
 	"iFrameData",
@@ -40,9 +39,8 @@ presence.on(
 		duration: number;
 		paused: boolean;
 		isVideo: boolean;
-		playingAds: boolean;
 	}) => {
-		({ current, duration, paused, isVideo, playingAds } = data);
+		({ current, duration, paused, isVideo } = data);
 	}
 );
 
@@ -53,7 +51,7 @@ presence.on("UpdateData", async () => {
 			.querySelector('[property="og:site_name"]')
 			?.getAttribute("content")
 			.toLowerCase()
-			.includes("idlix")
+			.includes("idflix")
 	)
 		return;
 	const presenceData: PresenceData = {
@@ -128,13 +126,8 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
-				if (playingAds) {
-					presenceData.smallImageKey = Assets.Ad;
-					presenceData.smallImageText = "Watching an ad";
-				} else {
-					presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
-					presenceData.smallImageText = paused ? strings.paused : strings.play;
-				}
+				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
+				presenceData.smallImageText = paused ? strings.paused : strings.play;
 				if (!paused) {
 					[, presenceData.endTimestamp] = presence.getTimestamps(
 						current,
@@ -153,6 +146,7 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 		}
+		case "episodes":
 		case "episode":
 		case "tvseries": {
 			delete presenceData.startTimestamp;
@@ -183,13 +177,10 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
-				if (playingAds) {
-					presenceData.smallImageKey = Assets.Ad;
-					presenceData.smallImageText = "Watching an ad";
-				} else {
-					presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
-					presenceData.smallImageText = paused ? strings.paused : strings.play;
-				}
+
+				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
+				presenceData.smallImageText = paused ? strings.paused : strings.play;
+
 				if (!paused) {
 					[, presenceData.endTimestamp] = presence.getTimestamps(
 						current,
