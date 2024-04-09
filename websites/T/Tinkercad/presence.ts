@@ -6,11 +6,11 @@ const presence = new Presence({
 });
 
 export const enum Assets {
-	Logo = "https://i.imgur.com/2Nyp2DT.png",
-	ThreeDIco = "https://i.imgur.com/OAvYVsM.png",
-	CircuitIco = "https://i.imgur.com/plgAsZu.png",
-	CodeblockIco = "https://i.imgur.com/wk7x7PB.png",
-	TrashCanIco = "https://i.imgur.com/S5D4Qdj.jpeg",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/Tinkercad/assets/logo.png",
+	ThreeDIco = "https://cdn.rcd.gg/PreMiD/websites/T/Tinkercad/assets/0.png",
+	CircuitIco = "https://cdn.rcd.gg/PreMiD/websites/T/Tinkercad/assets/1.png",
+	CodeblockIco = "https://cdn.rcd.gg/PreMiD/websites/T/Tinkercad/assets/2.png",
+	TrashCanIco = "https://cdn.rcd.gg/PreMiD/websites/T/Tinkercad/assets/3.jpeg",
 }
 
 const enum Pages {

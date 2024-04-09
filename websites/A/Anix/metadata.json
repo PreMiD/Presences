@@ -12,9 +12,13 @@
 		"anix.vc",
 		"anix.to"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/YpdxIWv.png",
-	"thumbnail": "https://i.imgur.com/u2ZMJZV.png",
+	"matches": [
+		"https://anix.vc/*",
+		"https://anix.to/*"
+	],
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Anix/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Anix/assets/thumbnail.png",
 	"color": "#95b6d0",
 	"category": "anime",
 	"tags": [
@@ -22,10 +26,6 @@
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
-	"matches": [
-		"https://anix.vc/*",
-		"https://anix.to/*"
-	],
 	"iFrameMatches": [
 		"https://anix.vc/anime/*",
 		"https://anix.to/anime/*"
