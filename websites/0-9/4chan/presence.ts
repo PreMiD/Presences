@@ -136,6 +136,8 @@ presence.on("UpdateData", async () => {
 
 		if (pathname.includes("/thread/")) {
 			if (!isNsfw) {
+				if (await presence.getSetting("showThumbnail"))	presenceData.largeImageKey = document.querySelector(".fileThumb").getAttribute("href")
+
 				const threadNum = pathname.split("/").at(-1),
 					threadSubject = document.querySelector(".subject").textContent;
 
