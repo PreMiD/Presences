@@ -15,7 +15,12 @@
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/IDLIX/assets/thumbnail.png",
 	"color": "#e50914",
 	"category": "videos",
-	"tags": ["video", "anime", "indonesian", "idlix"],
+	"tags": [
+		"video",
+		"anime",
+		"indonesian",
+		"idlix"
+	],
 	"iframe": true,
 	"iFrameRegExp": ".*",
 	"settings": [
