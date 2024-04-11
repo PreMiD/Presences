@@ -18,10 +18,11 @@
 		"de": "Schauen Sie Anime-Serien und -Filme mit englischen Untertiteln und Synchronisation. Laden Sie hochwertige Anime kostenlos herunter."
 	},
 	"url": [
+		"gogotaku.info",
 		"gogoanime.pe",
 		"anitaku.so"
 	],
-	"regExp": "(ww(w*|[0-9]*)\\.)?(anitaku|gogoanime)([0-9]+)?\\..*",
+	"regExp": "(ww(w*|[0-9]*)\\.)?(anitaku|gogoanime|gogotaku)([0-9]+)?\\..*",
 	"version": "2.1.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Gogoanime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Gogoanime/assets/thumbnail.png",
