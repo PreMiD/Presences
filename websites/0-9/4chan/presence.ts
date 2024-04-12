@@ -143,10 +143,11 @@ presence.on("UpdateData", async () => {
 					const thumbnail = document.querySelector(
 						`#f${threadNum} .fileThumb img`
 					);
-					if (thumbnail)
+					if (thumbnail) {
 						presenceData.largeImageKey = `https:${thumbnail.getAttribute(
 							"src"
 						)}`;
+					}
 				}
 
 				presenceData.buttons = [
