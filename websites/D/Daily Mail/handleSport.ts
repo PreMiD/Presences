@@ -15,9 +15,9 @@ function handleFootball(page: string, presenceData: PresenceData): void {
 	}
 }
 
-export function handleSport(_ext: string, presenceData: PresenceData): void {
+export function handleSport(ext: string, presenceData: PresenceData): void {
 	presenceData.details = "Browsing Sports";
-	const sportCat = _ext.split("/"),
+	const sportCat = ext.split("/"),
 		// try first "most popular" method
 		title = document
 			.querySelector(".sport")

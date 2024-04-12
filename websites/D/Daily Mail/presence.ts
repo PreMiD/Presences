@@ -2,8 +2,9 @@ import { findPage } from "./findPage";
 import { handleNewsPage } from "./newsPage";
 
 const presence = new Presence({
-	clientId: "1224125578504966165",
-});
+		clientId: "1224125578504966165",
+	}),
+	sTs = Math.floor(Date.now() / 1000);
 
 export const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Daily%20Mail/assets/logo.png",
@@ -37,9 +38,11 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			name: titleWithCountry,
 			type: ActivityType.Playing,
+			startTimestamp: sTs,
 		};
 
-	presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+	if (!(await presence.getSetting("showtimestamp")))
+		delete presenceData.startTimestamp;
 
 	switch (catNoCountry) {
 		case Pages.homepage:
@@ -63,7 +66,12 @@ presence.on("UpdateData", async () => {
 			break;
 
 		default:
-			findPage(document.location.pathname.substring(1), presenceData);
+			if (document.location.pathname.split("/")[3]?.startsWith("article-")) {
+				handleNewsPage(
+					presenceData,
+					await presence.getSetting("usearticlethumbnail")
+				);
+			} else findPage(document.location.pathname.substring(1), presenceData);
 			break;
 	}
 
