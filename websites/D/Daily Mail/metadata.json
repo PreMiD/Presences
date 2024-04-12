@@ -12,7 +12,7 @@
 	"matches": [
 		"*://*.dailymail.co.uk/*"
 	],
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Daily%20Mail/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Daily%20Mail/assets/thumbnail.png",
 	"color": "#004db3",
@@ -28,6 +28,11 @@
 			"id": "usearticlethumbnail",
 			"title": "Use Article Thumbnail as Image",
 			"value": false
+		},
+		{
+			"id": "showtimestamp",
+			"title": "Show how long you've been browsing",
+			"value": true
 		}
 	]
 }
