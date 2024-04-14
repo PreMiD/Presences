@@ -14,9 +14,9 @@ const enum Assets {
 }
 presence.on(
 	"iFrameData",
-	(data: { paused: boolean; timeLeft: string; title: string }) => {
+	(data: { paused: boolean; timeLeft: string; titleV: string }) => {
 		if (data.paused || data.timeLeft) video = data;
-		else title = data.title;
+		else title = data.titleV;
 	}
 );
 
