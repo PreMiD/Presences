@@ -139,6 +139,17 @@ presence.on("UpdateData", async () => {
 				const threadNum = pathname.split("/").at(-1),
 					threadSubject = document.querySelector(".subject").textContent;
 
+				if (await presence.getSetting("showThumbnail")) {
+					const thumbnail = document.querySelector(
+						`#f${threadNum} .fileThumb img`
+					);
+					if (thumbnail) {
+						presenceData.largeImageKey = `https:${thumbnail.getAttribute(
+							"src"
+						)}`;
+					}
+				}
+
 				presenceData.buttons = [
 					{
 						label: "View Thread",
