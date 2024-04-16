@@ -8,6 +8,10 @@
 		{
 			"name": "Kyrie",
 			"id": "368399721494216706"
+		},
+		{
+			"name": "Haze.dev",
+			"id": "165102125746094080"
 		}
 	],
 	"service": "fbox.to",
@@ -16,7 +20,7 @@
 	},
 	"url": "fbox.to",
 	"regExp": "(www([0-9]*)?[.])?fbox[.]to",
-	"version": "1.2.14",
+	"version": "1.3.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/fbox.to/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/fbox.to/assets/thumbnail.png",
 	"color": "#565c67",
