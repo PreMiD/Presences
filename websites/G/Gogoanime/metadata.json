@@ -12,16 +12,18 @@
 	],
 	"service": "Gogoanime",
 	"description": {
-		"en": "Watch anime online in English. You can watch free series and movies online and English subtitle. Free download high quality anime.",
-		"nl": "Bekijk anime online in het Engels. U kunt gratis series en films online bekijken met Engelse ondertiteling. Gratis download anime van hoge kwaliteit."
+		"en": "Watch anime series and movies with English sub & dub options. Download high-quality anime for free.",
+		"nl": "Bekijk anime series en films met Engelse sub & dub opties. Download gratis anime van hoge kwaliteit.",
+		"es": "Ver series y películas de anime con subtítulos y doblaje en inglés. Descarga anime de alta calidad gratis.",
+		"de": "Schauen Sie Anime-Serien und -Filme mit englischen Untertiteln und Synchronisation. Laden Sie hochwertige Anime kostenlos herunter."
 	},
 	"url": [
+		"gogotaku.info",
 		"gogoanime.pe",
-		"gogoanime.vc",
-		"gogoanime.news"
+		"anitaku.so"
 	],
-	"regExp": "((w)?ww([0-9]*)?[.])?(gogoanime[s]?)([0-9]+)?([.].*)",
-	"version": "2.1.12",
+	"regExp": "(ww(w*|[0-9]*)\\.)?(anitaku|gogoanime|gogotaku)([0-9]+)?\\..*",
+	"version": "2.1.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Gogoanime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Gogoanime/assets/thumbnail.png",
 	"color": "#FFC119",
@@ -32,5 +34,5 @@
 		"streaming"
 	],
 	"iframe": true,
-	"iFrameRegExp": "(gogo(hd)?[.][a-z]*)|(sbplay([0-9]*)?[.][a-z]*)|(fembed(-hd)?[.][a-z]*)|(mp4(-)?upload[.][a-z]*)|(.*)"
+	"iFrameRegExp": "(gogo(hd)?\\.[a-z]*)|(sbplay([0-9]*)?\\.[a-z]*)|(fembed(-hd)?\\.[a-z]*)|(mp4(-)?upload\\.[a-z]*)|(embtaku\\.[a-z]*)|(.*)"
 }
