@@ -39,14 +39,11 @@ class TOD extends Presence {
 	}
 
 	isLive() {
-		if (document.querySelector("span.diva-live-now"))
-			return true;
-		else
-			return false;
+		return !!document.querySelector("span.diva-live-now");
 	}
 
 	isTrailer() {
-		return this.getVideoTitle().includes("Trailer") ? true : false;
+		return this.getVideoTitle().includes("Trailer");
 	}
 }
 
@@ -105,11 +102,11 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: "Watch Trailer",
-									url: document.URL,
+									url: document.location.href,
 								},
 							];
 						} else {
-							presenceData.details = `Watching ${presence.getVideoType() === "show" ? "show" : presence.getVideoType() === "movie" ? "movie" : "Unknown"}:`;
+							presenceData.details = `Watching ${presence.getVideoType()}`;
 							presenceData.state = presence.getVideoTitle();
 
 							presenceData.smallImageText = video.paused ? "Paused" : "Playing";
@@ -120,7 +117,7 @@ presence.on("UpdateData", async () => {
 							presenceData.buttons = [
 								{
 									label: `Watch ${presence.getVideoType() === "show" ? "Show" : presence.getVideoType() === "movie" ? "Movie" : "Unknown"}`,
-									url: document.URL,
+									url: document.location.href,
 								},
 					];
 						}
@@ -136,7 +133,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: `View ${presence.getVideoType() === "show" ? "Show" : presence.getVideoType() === "movie" ? "Movie" : "Unknown"}`,
-							url: document.URL,
+							url: document.location.href,
 						},
 					];
 				}
@@ -168,7 +165,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Watch Match",
-							url: document.URL,
+							url: document.location.href,
 						},
 					];
 
@@ -183,7 +180,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Watch Match",
-							url: document.URL,
+							url: document.location.href,
 						},
 					];
 				}
@@ -207,7 +204,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Preview Match",
-							url: document.URL,
+							url: document.location.href,
 						},
 					];
 
@@ -224,7 +221,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Preview Match",
-							url: document.URL,
+							url: document.location.href,
 						},
 					];
 				}
