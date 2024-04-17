@@ -7,7 +7,6 @@
 	"service": "TOD",
 	"description": {
 		"en": "TOD is a video-streaming platform which includes a lot of movies, TV shows and matches provided by BeIN.",
-		"ar": "تود هى منصة بث فيديو حيث تحتوي على الكثير من الأفلام والمسلسات والمباريات المقدمة من بي إن."
 	},
 	"url": [
 		"tod.tv",
