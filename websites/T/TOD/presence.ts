@@ -40,15 +40,15 @@ class TOD extends Presence {
 
 	isLive() {
 		if (document.querySelector("span.diva-live-now"))
-			return true
+			return true;
 		else
-			return false
+			return false;
 	}
 
 	isTrailer() {
 		return this.getVideoTitle().includes("Trailer") ? true : false;
 	}
-};
+}
 
 const enum Assets {
 	Logo = "https://i.imgur.com/2euETKm.png",
@@ -261,7 +261,12 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (!presenceSelect && presence.isWatching()) data.presence[presence.getVideoType() === "movie" || "show" ? "/movie/([a-zA-Z0-9-]+)" : "Unknown"].setPresenceData();
+if (!presenceSelect && presence.isWatching()) {
+    const videoType = presence.getVideoType();
+    const presenceKey = videoType === "movie" || videoType === "show" ? "/movie/([a-zA-Z0-9-]+)" : "Unknown";
+    data.presence[presenceKey].setPresenceData();
+}
+
 
 	for (const setting of data.settings) {
 		const settingValue = await presence.getSetting<boolean>(setting.id);
