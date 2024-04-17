@@ -4,22 +4,24 @@ class TOD extends Presence {
 	}
 
 	getVideo() {
-		return document.querySelector<HTMLMediaElement>(
-			"video"
-		);
+		return document.querySelector<HTMLMediaElement>("video");
 	}
 
 	getVideoType() {
-		if (this.getVideoTitle().match(/S\d+\s*\|\s*E\d+/i) || this.getVideoTitle().match(/EP\s*\d+/i))
+		if (
+			this.getVideoTitle().match(/S\d+\s*\|\s*E\d+/i) ||
+			this.getVideoTitle().match(/EP\s*\d+/i)
+		)
 			return "show";
-		 else 
-			return "movie";
+		else return "movie";
 	}
 
 	getTitle(eyebrow = false) {
 		if (this.isWatching() && eyebrow) return this.getVideoTitle();
 
-		const title = document.querySelector("div.bein-dh1-hero__head-container > h1.bein-dh1-hero__title.heading-shadow")?.textContent;
+		const title = document.querySelector(
+			"div.bein-dh1-hero__head-container > h1.bein-dh1-hero__title.heading-shadow"
+		)?.textContent;
 
 		return (
 			title ??
@@ -29,9 +31,7 @@ class TOD extends Presence {
 	}
 
 	getVideoTitle() {
-		return document.querySelector(
-			"div.diva-standard-title"
-		)?.textContent;
+		return document.querySelector("div.diva-standard-title")?.textContent;
 	}
 
 	isWatching() {
@@ -90,49 +90,67 @@ presence.on("UpdateData", async () => {
 					[, presenceData.endTimestamp] =
 						presence.getTimestampsfromMedia(video);
 
-						if (presence.isTrailer()) {
-							presenceData.details = "Watching a trailer";
-							presenceData.state = presence.getVideoTitle().replace(/- (.+)/, "");
+					if (presence.isTrailer()) {
+						presenceData.details = "Watching a trailer";
+						presenceData.state = presence.getVideoTitle().replace(/- (.+)/, "");
 
-							presenceData.smallImageText = video.paused ? "Paused" : "Playing";
-							presenceData.smallImageKey = video.paused
-								? Assets.Pause
-								: Assets.Play;
+						presenceData.smallImageText = video.paused ? "Paused" : "Playing";
+						presenceData.smallImageKey = video.paused
+							? Assets.Pause
+							: Assets.Play;
 
-							presenceData.buttons = [
-								{
-									label: "Watch Trailer",
-									url: document.location.href,
-								},
-							];
-						} else {
-							presenceData.details = `Watching ${presence.getVideoType()}`;
-							presenceData.state = presence.getVideoTitle();
+						presenceData.buttons = [
+							{
+								label: "Watch Trailer",
+								url: document.location.href,
+							},
+						];
+					} else {
+						presenceData.details = `Watching ${presence.getVideoType()}`;
+						presenceData.state = presence.getVideoTitle();
 
-							presenceData.smallImageText = video.paused ? "Paused" : "Playing";
-							presenceData.smallImageKey = video.paused
-								? Assets.Pause
-								: Assets.Play;
+						presenceData.smallImageText = video.paused ? "Paused" : "Playing";
+						presenceData.smallImageKey = video.paused
+							? Assets.Pause
+							: Assets.Play;
 
-							presenceData.buttons = [
-								{
-									label: `Watch ${presence.getVideoType() === "show" ? "Show" : presence.getVideoType() === "movie" ? "Movie" : "Unknown"}`,
-									url: document.location.href,
-								},
-					];
-						}
+						presenceData.buttons = [
+							{
+								label: `Watch ${
+									presence.getVideoType() === "show"
+										? "Show"
+										: presence.getVideoType() === "movie"
+										? "Movie"
+										: "Unknown"
+								}`,
+								url: document.location.href,
+							},
+						];
+					}
 
 					if (video.paused) {
 						delete presenceData.startTimestamp;
 						delete presenceData.endTimestamp;
 					}
 				} else {
-					presenceData.details = `Viewing ${presence.getVideoType() === "show" ? "show" : presence.getVideoType() === "movie" ? "movie" : "Unknown"}:`;
+					presenceData.details = `Viewing ${
+						presence.getVideoType() === "show"
+							? "show"
+							: presence.getVideoType() === "movie"
+							? "movie"
+							: "Unknown"
+					}:`;
 					presenceData.state = presence.getVideoTitle().replace(/(.+)/, "");
 
 					presenceData.buttons = [
 						{
-							label: `View ${presence.getVideoType() === "show" ? "Show" : presence.getVideoType() === "movie" ? "Movie" : "Unknown"}`,
+							label: `View ${
+								presence.getVideoType() === "show"
+									? "Show"
+									: presence.getVideoType() === "movie"
+									? "Movie"
+									: "Unknown"
+							}`,
 							url: document.location.href,
 						},
 					];
@@ -143,15 +161,14 @@ presence.on("UpdateData", async () => {
 			setPresenceData() {
 				if (presence.isWatching()) {
 					const video = presence.getVideo();
-					if(presence.isLive()) {
+					if (presence.isLive()) {
 						presenceData.smallImageText = video.paused ? "Paused" : "Live";
 						presenceData.smallImageKey = video.paused
 							? Assets.Pause
 							: Assets.Live;
-
 					} else {
 						[, presenceData.endTimestamp] =
-						presence.getTimestampsfromMedia(video);
+							presence.getTimestampsfromMedia(video);
 
 						presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 						presenceData.smallImageKey = video.paused
@@ -258,11 +275,13 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-if (!presenceSelect && presence.isWatching()) {
-    const presenceKey = presence.getVideoType() === "movie" || presence.getVideoType() === "show" ? "/movie/([a-zA-Z0-9-]+)" : "Unknown";
-    data.presence[presenceKey].setPresenceData();
-}
-
+	if (!presenceSelect && presence.isWatching()) {
+		const presenceKey =
+			presence.getVideoType() === "movie" || presence.getVideoType() === "show"
+				? "/movie/([a-zA-Z0-9-]+)"
+				: "Unknown";
+		data.presence[presenceKey].setPresenceData();
+	}
 
 	for (const setting of data.settings) {
 		const settingValue = await presence.getSetting<boolean>(setting.id);
