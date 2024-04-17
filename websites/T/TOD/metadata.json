@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "640526616350425100",
+		"name": "itswise"
+	},
+	"service": "TOD",
+	"description": {
+		"en": "TOD is a video-streaming platform which includes a lot of movies, TV shows and matches provided by BeIN.",
+		"ar": "تود هى منصة بث فيديو حيث تحتوي على الكثير من الأفلام والمسلسات والمباريات المقدمة من بي إن."
+	},
+	"url": [
+		"tod.tv",
+		"www.tod.tv"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/2euETKm.png",
+	"thumbnail": "https://i.imgur.com/4oCkPdW.jpeg",
+	"color": "#FEBC11",
+	"category": "videos",
+	"tags": [
+		"tod",
+		"video",
+		"media",
+		"sports",
+		"matches"
+	]
+}
