@@ -259,8 +259,7 @@ presence.on("UpdateData", async () => {
 	}
 
 if (!presenceSelect && presence.isWatching()) {
-    const videoType = presence.getVideoType();
-    const presenceKey = videoType === "movie" || videoType === "show" ? "/movie/([a-zA-Z0-9-]+)" : "Unknown";
+    const presenceKey = presence.getVideoType() === "movie" || presence.getVideoType() === "show" ? "/movie/([a-zA-Z0-9-]+)" : "Unknown";
     data.presence[presenceKey].setPresenceData();
 }
 
