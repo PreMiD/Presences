@@ -10,11 +10,10 @@ class TOD extends Presence {
 	}
 
 	getVideoType() {
-		if (this.getVideoTitle().match(/S\d+\s*\|\s*E\d+/i) || this.getVideoTitle().match(/EP\s*\d+/i)) {
+		if (this.getVideoTitle().match(/S\d+\s*\|\s*E\d+/i) || this.getVideoTitle().match(/EP\s*\d+/i))
 			return "show";
-		} else {
+		 else 
 			return "movie";
-		}
 	}
 
 	getTitle(eyebrow = false) {
@@ -40,17 +39,16 @@ class TOD extends Presence {
 	}
 
 	isLive() {
-		if (document.querySelector("span.diva-live-now")) {
+		if (document.querySelector("span.diva-live-now"))
 			return true
-		} else {
+		else
 			return false
-		}
 	}
 
 	isTrailer() {
-		return this.getVideoTitle().includes("Trailer") ? true : false
+		return this.getVideoTitle().includes("Trailer") ? true : false;
 	}
-}
+};
 
 const enum Assets {
 	Logo = "https://i.imgur.com/2euETKm.png",
@@ -263,14 +261,12 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (!presenceSelect && presence.isWatching()) {
-		data.presence[presence.getVideoType() === "movie" || "show" ? "/movie/([a-zA-Z0-9-]+)" : "Unknown"].setPresenceData();
-	}
+	if (!presenceSelect && presence.isWatching()) data.presence[presence.getVideoType() === "movie" || "show" ? "/movie/([a-zA-Z0-9-]+)" : "Unknown"].setPresenceData();
 
 	for (const setting of data.settings) {
 		const settingValue = await presence.getSetting<boolean>(setting.id);
 
-		if (!settingValue && setting.delete) {
+		if (!settingValue) {
 			for (const PData of setting.data)
 				delete presenceData[PData as keyof PresenceData];
 		}
