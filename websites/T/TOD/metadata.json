@@ -1,16 +1,27 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "640526616350425100",
 		"name": "itswise"
 	},
 	"service": "TOD",
 	"description": {
-		"en": "TOD is a video-streaming platform which includes a lot of movies, TV shows and matches provided by BeIN.",
+		"en": "TOD is a video-streaming platform which includes a lot of movies, TV shows and matches provided by BeIN."
 	},
 	"url": [
 		"tod.tv",
 		"www.tod.tv"
+	],
+	"matches": [
+		"https://www.tod.tv/",
+		"https://www.tod.tv/sports",
+		"https://www.tod.tv/ramadan",
+		"https://www.tod.tv/formula1",
+		"https://www.tod.tv/movies",
+		"https://www.tod.tv/tvshows",
+		"https://www.tod.tv/kids",
+		"https://www.tod.tv/channels",
+		"https://www.tod.tv/account"
 	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/2euETKm.png",
