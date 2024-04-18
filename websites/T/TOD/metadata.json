@@ -13,15 +13,7 @@
 		"www.tod.tv"
 	],
 	"matches": [
-		"https://www.tod.tv/",
-		"https://www.tod.tv/sports",
-		"https://www.tod.tv/ramadan",
-		"https://www.tod.tv/formula1",
-		"https://www.tod.tv/movies",
-		"https://www.tod.tv/tvshows",
-		"https://www.tod.tv/kids",
-		"https://www.tod.tv/channels",
-		"https://www.tod.tv/account"
+		"https://www.tod.tv/*"
 	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/2euETKm.png",
