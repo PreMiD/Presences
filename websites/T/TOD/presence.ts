@@ -25,7 +25,7 @@ class TOD extends Presence {
 
 		return (
 			title ??
-			this.getVideoTitle().replace(/\d+\s*-\s*\d+/ as RegExp, "vs") ??
+			this.getVideoTitle()?.replace(/\d+\s*-\s*\d+/, "vs") ??
 			"Unknown"
 		);
 	}
