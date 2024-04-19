@@ -119,9 +119,7 @@ presence.on("UpdateData", async () => {
 								label: `Watch ${
 									presence.getVideoType() === "show"
 										? "Show"
-										: presence.getVideoType() === "movie"
-										? "Movie"
-										: "Unknown"
+										: "Movie"
 								}`,
 								url: document.location.href,
 							},
