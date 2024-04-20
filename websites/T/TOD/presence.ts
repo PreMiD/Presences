@@ -129,24 +129,16 @@ presence.on("UpdateData", async () => {
 						delete presenceData.endTimestamp;
 					}
 				} else {
-					presenceData.details = `Viewing ${
-						presence.getVideoType() === "show"
-							? "show"
-							: presence.getVideoType() === "movie"
-							? "movie"
-							: "Unknown"
-					}:`;
-					presenceData.state = presence.getVideoTitle().replace(/(.+)/, "");
+					(presenceData.details = `Viewing ${
+						presence.getVideoType() === "show" ? "Show" : "Movie"
+					}:`),
+						(presenceData.state = presence.getVideoTitle().replace(/(.+)/, ""));
 
 					presenceData.buttons = [
 						{
 							label: `View ${
-								presence.getVideoType() === "show"
-									? "Show"
-									: presence.getVideoType() === "movie"
-									? "Movie"
-									: "Unknown"
-							}`,
+								presence.getVideoType() === "show" ? "Show" : "Movie"
+							}:`,
 							url: href,
 						},
 					];
