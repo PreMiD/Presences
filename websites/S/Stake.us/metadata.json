@@ -9,6 +9,9 @@
 		"en": "Stake.us offers an the best social casino games online, all available to play for fun & free. Enjoy free games, from slots to blackjack, roulette & more."
 	},
 	"url": "stake.us",
+	"matches": [
+		"*://stake.us/*"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/X9jCmBM.jpeg",
 	"thumbnail": "https://i.imgur.com/lobHZwr.jpeg",
