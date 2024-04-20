@@ -50,8 +50,12 @@ presence.on("UpdateData", async () => {
 			else currency = "Gold Coins";
 		}
 
-		if (pathname.includes("games"))
-			presenceData.details = "Balance: (In Use In Game)";
+		if (
+			pathname.includes("games") &&
+			document.querySelector("div.title-wrap > a").textContent.trim() !==
+				"Stake Originals"
+		)
+			presenceData.details = `Balance: (In Play) ${currency}`;
 		else if (!pathname.includes("games") && balance.includes(","))
 			presenceData.details = `Balance: ${balance} (${currency})`;
 		else presenceData.details = `Balance: ${balance} ${currency}`;
