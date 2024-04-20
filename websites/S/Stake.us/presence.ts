@@ -46,10 +46,8 @@ presence.on("UpdateData", async () => {
 
 		if (
 			pathname.includes("games") &&
-			!(
-				document.querySelector("div.title-wrap > a")?.textContent.trim() ===
+			document.querySelector("div.title-wrap > a")?.textContent.trim() !==
 				"Stake Originals"
-			)
 		)
 			presenceData.details = `Balance: (In Play) (${currency})`;
 		else {
