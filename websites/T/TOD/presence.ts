@@ -1,3 +1,5 @@
+const { href } = document.location;
+
 class TOD extends Presence {
 	constructor(presenceOptions: PresenceOptions) {
 		super(presenceOptions);
@@ -102,7 +104,7 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: "Watch Trailer",
-								url: document.location.href,
+								url: href,
 							},
 						];
 					} else {
@@ -121,7 +123,7 @@ presence.on("UpdateData", async () => {
 										? "Show"
 										: "Movie"
 								}`,
-								url: document.location.href,
+								url: href,
 							},
 						];
 					}
@@ -149,7 +151,7 @@ presence.on("UpdateData", async () => {
 									? "Movie"
 									: "Unknown"
 							}`,
-							url: document.location.href,
+							url: href,
 						},
 					];
 				}
@@ -180,7 +182,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Watch Match",
-							url: document.location.href,
+							url: href,
 						},
 					];
 
@@ -195,7 +197,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Watch Match",
-							url: document.location.href,
+							url: href,
 						},
 					];
 				}
@@ -219,7 +221,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Preview Match",
-							url: document.location.href,
+							url: href,
 						},
 					];
 
@@ -236,7 +238,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Preview Match",
-							url: document.location.href,
+							url: href,
 						},
 					];
 				}
