@@ -26,9 +26,7 @@ class TOD extends Presence {
 		)?.textContent;
 
 		return (
-			title ??
-			this.getVideoTitle()?.replace(/\d+\s*-\s*\d+/, "vs") ??
-			"Unknown"
+			title ?? this.getVideoTitle()?.replace(/\d+\s*-\s*\d+/, "vs") ?? "Unknown"
 		);
 	}
 
@@ -119,9 +117,7 @@ presence.on("UpdateData", async () => {
 						presenceData.buttons = [
 							{
 								label: `Watch ${
-									presence.getVideoType() === "show"
-										? "Show"
-										: "Movie"
+									presence.getVideoType() === "show" ? "Show" : "Movie"
 								}`,
 								url: href,
 							},
