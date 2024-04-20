@@ -33,46 +33,43 @@ presence.on("UpdateData", async () => {
 	} else presenceData.state = "Browsing...";
 
 	if (showBal) {
-		const balanceElement = document.querySelector(
-				"div.currency > span.content > span"
-			),
-			currencyElement = document.querySelector(
-				"div.currency > span.variant-subtle"
-			);
-		let balance = "Unknown",
-			currency = "Currency";
-		if (balanceElement)
-			balance = balanceElement.textContent.trim().replace("&nbsp;", " ");
-
-		if (currencyElement) {
-			if (currencyElement.getAttribute("title") === "sweeps")
-				currency = "Stake Cash";
-			else currency = "Gold Coins";
-		}
+		const balanceText =
+				document
+					.querySelector("div.currency > span.content > span")
+					?.textContent.trim()
+					.replace("&nbsp;", " ") ?? "Unknown",
+			isSweeps =
+				document
+					.querySelector("div.currency > span.variant-subtle")
+					?.getAttribute("title") === "sweeps",
+			currency = isSweeps ? "Stake Cash" : "Gold Coins";
 
 		if (
 			pathname.includes("games") &&
-			document.querySelector("div.title-wrap > a").textContent.trim() !==
+			!(
+				document.querySelector("div.title-wrap > a")?.textContent.trim() ===
 				"Stake Originals"
+			)
 		)
-			presenceData.details = `Balance: (In Play) ${currency}`;
-		else if (!pathname.includes("games") && balance.includes(","))
-			presenceData.details = `Balance: ${balance} (${currency})`;
-		else presenceData.details = `Balance: ${balance} ${currency}`;
-
-		if (search.includes("modal=wallet"))
-			presenceData.state = "Checking Wallet...";
-		else if (search.includes("modal=vault"))
-			presenceData.state = "Checking Vault...";
-		else if (search.includes("modal=vip"))
-			presenceData.state = "Checking VIP Progress...";
-		else if (search.includes("modal=user"))
-			presenceData.state = "Checking Statistics...";
-		else if (pathname.includes("/transactions/"))
-			presenceData.state = "Viewing Transactions...";
-		else if (pathname.includes("/settings/"))
-			presenceData.state = "Adjusting Settings...";
+			presenceData.details = `Balance: (In Play) (${currency})`;
+		else {
+			presenceData.details = `Balance: ${
+				isSweeps ? `$${balanceText}` : balanceText
+			} (${currency})`;
+		}
 	}
+	if (search.includes("modal=wallet"))
+		presenceData.state = "Checking Wallet...";
+	else if (search.includes("modal=vault"))
+		presenceData.state = "Checking Vault...";
+	else if (search.includes("modal=vip"))
+		presenceData.state = "Checking VIP Progress...";
+	else if (search.includes("modal=user"))
+		presenceData.state = "Checking Statistics...";
+	else if (pathname.includes("/transactions/"))
+		presenceData.state = "Viewing Transactions...";
+	else if (pathname.includes("/settings/"))
+		presenceData.state = "Adjusting Settings...";
 
 	presence.setActivity(presenceData);
 });
