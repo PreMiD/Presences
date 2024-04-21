@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "205984221859151873",
+		"name": "joerkig"
+	},
+	"service": "The Mahjong",
+	"description": {
+		"en": "Amazing free Mahjong that’ll knock your socks off. Play classic and modern Mahjong games in full screen, with lots of layouts and beautiful tiles."
+	},
+	"url": "themahjong.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/OtWKEII.png",
+	"thumbnail": "https://i.imgur.com/WhOrdAP.jpg",
+	"color": "#577e54",
+	"category": "games",
+	"tags": [
+		"game",
+		"mahjong",
+		"webgame"
+	]
+}
