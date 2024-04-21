@@ -36,7 +36,7 @@ function timeToString(nbr: number): string {
 	return nbrString;
 }
 
-const websiteDomain = "https://neko-sama.fr";
+const websiteDomain = "https://animecat.net";
 
 let video: Video = null;
 
