@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/9jDaQ1b.png",
 		},
-		{ pathname, search } = window.location;
+		{ pathname, search } = document.location;
 
 	if (showTimestamp) presenceData.startTimestamp = browsingTimestamp;
 
