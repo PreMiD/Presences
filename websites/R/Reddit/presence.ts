@@ -40,7 +40,7 @@ const presences: { [key in PresenceClients]?: Presence } = {
 		[PresenceClients.Reddit]: presence,
 	},
 	startTimestamp = Math.floor(Date.now() / 1000),
-	oldReddit = !!document.querySelector(".default-header");
+	oldReddit = !!document.querySelector("#header");
 
 function setClient(clientId: PresenceClients) {
 	presence.clearActivity();
