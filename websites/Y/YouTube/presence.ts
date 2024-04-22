@@ -116,11 +116,14 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (logo === LogoMode.Channel) {
-			pfp = document
-				.querySelector<HTMLImageElement>(
-					"#avatar.ytd-video-owner-renderer > img"
-				)
-				?.src.replace(/=s\d+/, "=s512");
+			pfp =
+				resolver === youtubeMiniplayerResolver
+					? ""
+					: document
+							.querySelector<HTMLImageElement>(
+								"#avatar.ytd-video-owner-renderer > img"
+							)
+							?.src.replace(/=s\d+/, "=s512");
 		}
 		const unlistedPathElement = document.querySelector<SVGPathElement>(
 				"g#privacy_unlisted > path"
