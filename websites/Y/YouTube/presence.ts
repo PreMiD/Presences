@@ -4,6 +4,7 @@ import youtubeEmbedResolver from "./video_sources/embed";
 import youtubeMoviesResolver from "./video_sources/movies";
 import youtubeTVResolver from "./video_sources/tv";
 import youtubeResolver from "./video_sources/default";
+import youtubeMiniplayerResolver from "./video_sources/miniplayer";
 import youtubeApiResolver from "./video_sources/api";
 import {
 	Resolver,
@@ -79,6 +80,7 @@ presence.on("UpdateData", async () => {
 				youtubeOldResolver,
 				youtubeTVResolver,
 				youtubeResolver,
+				youtubeMiniplayerResolver,
 				youtubeMoviesResolver,
 				youtubeApiResolver,
 				nullResolver,
