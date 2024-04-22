@@ -148,17 +148,10 @@ presence.on("UpdateData", async () => {
 		} else presenceData.details = strings.reading.slice(0, -1);
 	} else if (pathname.startsWith("/user/")) {
 		if (!privacy) {
-			username = document.querySelector("span._1LCAhi_8JjayVo7pJ0KIh0")
-				? document.querySelector("span._1LCAhi_8JjayVo7pJ0KIh0").textContent
-				: document
-						.querySelector("span._28nEhn86_R1ENZ59eAru8S")
-						.textContent.match(/u\/[A-Za-z0-9_-]+/i)[0]
-						.slice(2);
-			nickname = document.querySelector("h4._3W1eUu5jHdcamkzFiJDITJ")
-				? document.querySelector("h4._3W1eUu5jHdcamkzFiJDITJ").textContent
-				: "";
+			username = document.querySelector("p")?.textContent;
+			nickname = document.querySelector("h1")?.textContent;
 			presenceData.details = strings.profile;
-			presenceData.state = nickname !== "" ? nickname : username;
+			presenceData.state = nickname ?? username;
 			presenceData.buttons = [
 				{
 					url: href,
