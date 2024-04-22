@@ -182,13 +182,10 @@ presence.on("UpdateData", async () => {
 	} else if (!privacy) {
 		presenceData.details = strings.browsing;
 		presenceData.state = getSubreddit() ?? "Home";
-	} else {
-		if (getSubreddit()) {
-			presenceData.details = strings.insubreddit;
-		} else {
-			presenceData.details = strings.browsing;
-			presenceData.state = "Home";
-		}
+	} else if (getSubreddit()) presenceData.details = strings.insubreddit;
+	else {
+		presenceData.details = strings.browsing;
+		presenceData.state = "Home";
 	}
 
 	if (!buttons || privacy) delete presenceData.buttons;
