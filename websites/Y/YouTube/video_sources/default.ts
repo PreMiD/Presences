@@ -23,9 +23,12 @@ function getUploader(): string {
 }
 
 export function getVideoID(): string {
-	return document
-		.querySelector("#page-manager > ytd-watch-flexy")
-		?.getAttribute("video-id");
+	return (
+		document
+			.querySelector("#page-manager > ytd-watch-flexy")
+			?.getAttribute("video-id") ??
+		new URLSearchParams(document.location.search).get("v")
+	);
 }
 
 export function getChannelURL(): string {
