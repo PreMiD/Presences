@@ -15,9 +15,9 @@
 	"matches": [
 		"https://www.tod.tv/*"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/2euETKm.png",
-	"thumbnail": "https://i.imgur.com/4oCkPdW.jpeg",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TOD/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TOD/assets/thumbnail.jpeg",
 	"color": "#FEBC11",
 	"category": "videos",
 	"tags": [
