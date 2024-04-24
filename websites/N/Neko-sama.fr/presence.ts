@@ -36,7 +36,7 @@ function timeToString(nbr: number): string {
 	return nbrString;
 }
 
-const websiteDomain = "https://neko-sama.fr";
+const websiteDomain = "https://animecat.net";
 
 let video: Video = null;
 
@@ -61,18 +61,24 @@ presence.on("UpdateData", async () => {
 			switch (pathSplit[2]) {
 				case "episode": {
 					const episodeImage: string = document.querySelector<HTMLMetaElement>(
-						'meta[property="og:image"]'
-					).content;
+							'meta[property="og:image"]'
+						).content,
+						animeImage: string =
+							document.querySelector<HTMLImageElement>("a.cover img").src,
+						defaultThumbnail = `${websiteDomain}/images/default_thumbnail.png`;
+					presenceData.largeImageKey =
+						episodeImage === defaultThumbnail
+							? animeImage === defaultThumbnail
+								? Assets.Logo
+								: animeImage
+							: episodeImage;
 					if (video === null) {
 						presenceData.details = `Regarde ${
 							document.querySelector<HTMLMetaElement>(
 								'meta[property="og:title"]'
 							).content
 						}`;
-						presenceData.largeImageKey =
-							episodeImage === `${websiteDomain}/images/default_thumbnail.png`
-								? Assets.Logo
-								: episodeImage;
+
 						presenceData.buttons = [
 							{
 								label: "Voir Épisode",
@@ -94,10 +100,6 @@ presence.on("UpdateData", async () => {
 						document.querySelector<HTMLMetaElement>('meta[property="og:title"]')
 							.content
 					}`;
-					presenceData.largeImageKey =
-						episodeImage === `${websiteDomain}/images/default_thumbnail.png`
-							? Assets.Logo
-							: episodeImage;
 					presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 					presenceData.smallImageText = paused
 						? "En pause"
