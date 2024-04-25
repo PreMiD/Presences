@@ -12,7 +12,7 @@
 	"matches": [
 		"*://stake.us/*"
 	],
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/X9jCmBM.jpeg",
 	"thumbnail": "https://i.imgur.com/lobHZwr.jpeg",
 	"color": "#1a2c3a",
