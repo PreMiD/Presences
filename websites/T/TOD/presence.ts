@@ -48,7 +48,7 @@ class TOD extends Presence {
 }
 
 const enum Assets {
-	Logo = "https://i.imgur.com/2euETKm.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/TOD/assets/logo.png",
 }
 
 const presence = new TOD({
