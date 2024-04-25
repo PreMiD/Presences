@@ -1,4 +1,5 @@
 import ppcHandler from "./pages/ppc";
+import pocketPCHandler from "./pages/pocketpc";
 
 const presence = new Presence({
 		clientId: "1221562084253499452",
@@ -46,6 +47,8 @@ presence.on("UpdateData", async () => {
 		presenceData.state = pageTitle;
 	} else if (pathList[0] === "ppc") {
 		ppcHandler(pathList.slice(1), presenceData);
+	} else if (pathList[0] === "pocketpc") {
+		pocketPCHandler(pathList.slice(1), presenceData);
 	} else {
 		presenceData.details = "Viewing a page";
 		presenceData.state = pageTitle;

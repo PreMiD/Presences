@@ -2,7 +2,7 @@ export default function handler(
 	pathList: string[],
 	presenceData: PresenceData
 ) {
-	const mainPage = pathList[0];
+	const mainPage = pathList[0] ?? "index.htm";
 	if (mainPage === "index.htm") {
 		presenceData.details = "Viewing the PPC page";
 	} else if (mainPage === "intro.htm") {
