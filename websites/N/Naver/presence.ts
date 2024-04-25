@@ -1,26 +1,6 @@
 const presence = new Presence({
 		clientId: "825307070584586250",
 	}),
-	getServiceName = (url = document.location.hostname) => {
-		switch (true) {
-			case !!url.match(/tv[.]naver[.]([a-z0-9]+)/):
-				return ["Naver TV", "NAVER_TV"];
-			case !!url.match(/comic[.]naver[.]([a-z0-9]+)/):
-				return ["Naver Webtoon", "NAVER_WEBTOON"];
-			case !!url.match(/papago[.]naver[.]([a-z0-9]+)/):
-				return ["Papago", "NAVER_PAPAGO"];
-			case !!url.match(/blog[.]naver[.]([a-z0-9]+)/):
-				return ["Naver Blog", "NAVER_BLOG"];
-			case !!url.match(/cafe[.]naver[.]([a-z0-9]+)/):
-				return ["Naver Cafe", "NAVER_CAFE"];
-			case !!url.match(/(novel|series)[.]naver[.]([a-z0-9]+)/):
-				return ["Naver Series", "NAVER_SERIES"];
-			case !!url.match(/([a-z]+)[.]naver[.]([a-z0-9]+)/):
-				return ["Naver", "NAVER"];
-			default:
-				break;
-		}
-	},
 	data: {
 		isChecked: boolean;
 		service: [string, string];
@@ -32,7 +12,6 @@ const presence = new Presence({
 	} = {
 		isChecked: false,
 		service: null,
-		presence: null,
 	},
 	/* eslint-disable camelcase */
 	assets: Record<string, string> = {
@@ -55,12 +34,33 @@ const presence = new Presence({
 	};
 /* eslint-enable camelcase */
 
-const enum Assets {
+const enum MainAssets {
 	Browse = "https://cdn.discordapp.com/app-assets/825307070584586250/826435062756278273.png",
 	Book = "https://cdn.discordapp.com/app-assets/825307070584586250/826447462554140704.png",
 	Play = "https://cdn.discordapp.com/app-assets/827170810870890517/827172409979305995.png",
 	Pause = "https://cdn.discordapp.com/app-assets/827170810870890517/827172409936314378.png",
 	Language = "https://cdn.discordapp.com/app-assets/827170714729578546/827172528383590460.png",
+}
+
+function getServiceName(url = document.location.hostname): [string, string] {
+	switch (true) {
+		case !!url.match(/tv[.]naver[.]([a-z0-9]+)/):
+			return ["Naver TV", "NAVER_TV"];
+		case !!url.match(/comic[.]naver[.]([a-z0-9]+)/):
+			return ["Naver Webtoon", "NAVER_WEBTOON"];
+		case !!url.match(/papago[.]naver[.]([a-z0-9]+)/):
+			return ["Papago", "NAVER_PAPAGO"];
+		case !!url.match(/blog[.]naver[.]([a-z0-9]+)/):
+			return ["Naver Blog", "NAVER_BLOG"];
+		case !!url.match(/cafe[.]naver[.]([a-z0-9]+)/):
+			return ["Naver Cafe", "NAVER_CAFE"];
+		case !!url.match(/(novel|series)[.]naver[.]([a-z0-9]+)/):
+			return ["Naver Series", "NAVER_SERIES"];
+		case !!url.match(/([a-z]+)[.]naver[.]([a-z0-9]+)/):
+			return ["Naver", "NAVER"];
+		default:
+			break;
+	}
 }
 
 let blog: string, cafeTitle: string;
@@ -78,9 +78,9 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		name: data.service[0],
 		details: "Browsing...",
-		largeImageKey: assets[data.service?.toLowerCase()],
+		largeImageKey: assets[data.service[1].toLowerCase()],
 		smallImageKey:
-			assets[`${data.service.toLowerCase()}_browse`] ?? Assets.Browse,
+			assets[`${data.service[1].toLowerCase()}_browse`] ?? MainAssets.Browse,
 	};
 
 	data.settings = [
@@ -103,12 +103,12 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Currently watching an ad";
 					[presenceData.startTimestamp, presenceData.endTimestamp] =
 						presence.getTimestampsfromMedia(video);
-					presenceData.smallImageKey = Assets.Play;
+					presenceData.smallImageKey = MainAssets.Play;
 					presenceData.smallImageText = "Playing";
 
 					if (video.paused) {
-						presenceData.smallImageKey = Assets.Pause;
-						presenceData.smallIMageText = "Paused";
+						presenceData.smallImageKey = MainAssets.Pause;
+						presenceData.smallImageText = "Paused";
 						delete presenceData.startTimestamp;
 						delete presenceData.endTimestamp;
 					}
@@ -124,12 +124,12 @@ presence.on("UpdateData", async () => {
 
 					[presenceData.startTimestamp, presenceData.endTimestamp] =
 						presence.getTimestampsfromMedia(video);
-					presenceData.smallImageKey = Assets.Play;
+					presenceData.smallImageKey = MainAssets.Play;
 					presenceData.smallImageText = "Playing";
 
 					if (video.paused) {
-						presenceData.smallImageKey = Assets.Pause;
-						presenceData.smallIMageText = "Paused";
+						presenceData.smallImageKey = MainAssets.Pause;
+						presenceData.smallImageText = "Paused";
 						delete presenceData.startTimestamp;
 						delete presenceData.endTimestamp;
 					}
@@ -212,7 +212,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{ url: location.href, label: "Read Epiosde" },
 					];
-					presenceData.smallImageKey = assets.book;
+					presenceData.smallImageKey = MainAssets.Book;
 				}
 			}
 			break;
@@ -231,23 +231,20 @@ presence.on("UpdateData", async () => {
 				presenceData.details = ep;
 				presenceData.state = title;
 				presenceData.buttons = [{ url: location.href, label: "Read Episode" }];
-				presenceData.smallImageKey = assets.book;
+				presenceData.smallImageKey = MainAssets.Book;
 			}
 			break;
 		}
 		case "NAVER_PAPAGO": {
 			if (location.pathname.startsWith("/website")) {
 				presenceData.details = "Translating a website";
-				presenceData.smallImageKey =
-					assets[`${data.service.toLowerCase()}_language`];
+				presenceData.smallImageKey = MainAssets.Language;
 			} else if (location.pathname.startsWith("/docs")) {
 				presenceData.details = "Translating a document";
-				presenceData.smallImageKey =
-					assets[`${data.service.toLowerCase()}_language`];
+				presenceData.smallImageKey = MainAssets.Language;
 			} else if (location.pathname === "/") {
 				presenceData.details = "Translating something...";
-				presenceData.smallImageKey =
-					assets[`${data.service.toLowerCase()}_language`];
+				presenceData.smallImageKey = MainAssets.Language;
 			}
 			break;
 		}
