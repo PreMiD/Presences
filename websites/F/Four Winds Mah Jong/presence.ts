@@ -1,6 +1,7 @@
 import ppcHandler from "./pages/ppc";
 import pocketPCHandler from "./pages/pocketpc";
 import knowledgeBaseHandler from "./pages/knowledge";
+import storeHandler from "./pages/store";
 
 const presence = new Presence({
 		clientId: "1221562084253499452",
@@ -59,6 +60,10 @@ presence.on("UpdateData", async () => {
 				knowledgeBaseHandler(presenceData);
 				break;
 			}
+			case "store": {
+				storeHandler(pathList.slice(1), presenceData);
+				break;
+			}
 			default: {
 				presenceData.details = "Viewing a page";
 				presenceData.state = pageTitle;
@@ -66,5 +71,9 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	presence.setActivity(presenceData);
+	if (presenceData.details) {
+		presence.setActivity(presenceData);
+	} else {
+		presence.clearActivity();
+	}
 });
