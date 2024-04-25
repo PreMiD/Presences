@@ -60,8 +60,7 @@ presence.on("UpdateData", async () => {
 	presenceData.largeImageKey =
 		locationSpecificLogos[hostname.split(".")[0]] ?? Assets.Logo;
 
-	if (mainPath === "/") presenceData.details = strings.viewHome;
-	else if (
+	if (
 		searchParams.get("action") === "edit" ||
 		searchParams.get("veaction") === "edit"
 	) {
@@ -80,7 +79,8 @@ presence.on("UpdateData", async () => {
 			? strings.changeProtection
 			: strings.viewProtection;
 		presenceData.state = pageTitle;
-	} else if (mainPath.startsWith("User:")) {
+	} else if (mainPath === "/") presenceData.details = strings.viewHome;
+	else if (mainPath.startsWith("User:")) {
 		presenceData.details = strings.viewUser;
 		presenceData.state = pageTitle.slice(5);
 		presenceData.buttons = [{ label: strings.buttonViewProfile, url: href }];
