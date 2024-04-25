@@ -1,4 +1,4 @@
-export default function handler(presenceData: PresenceData) {
+export default function handler(presenceData: PresenceData): void {
 	const mainFrame = document.querySelector<HTMLFrameElement>(
 			"frame[src='kbstart.htm']"
 		),

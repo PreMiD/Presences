@@ -1,7 +1,7 @@
 export default function handler(
 	pathList: string[],
 	presenceData: PresenceData
-) {
+): void {
 	const { href, search, pathname } = document.location,
 		mainPath = pathList[0] ?? "/",
 		title = document.querySelector("h1");
