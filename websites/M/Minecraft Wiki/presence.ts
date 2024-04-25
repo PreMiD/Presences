@@ -7,6 +7,10 @@ const enum Assets {
 	Logo = "https://i.imgur.com/SPgKjjJ.png",
 }
 
+function hasPermissions(): boolean {
+	return !document.querySelector(".permissions-errors");
+}
+
 const locationSpecificLogos: Record<string, string> = {
 		ko: "https://i.imgur.com/Xox00yw.png",
 		pt: "https://i.imgur.com/pliOKN8.png",
@@ -61,21 +65,20 @@ presence.on("UpdateData", async () => {
 		searchParams.get("action") === "edit" ||
 		searchParams.get("veaction") === "edit"
 	) {
-		if (document.querySelector(".permissions-errors")) {
-			presenceData.details = strings.viewSourceOf;
-		} else {
-			presenceData.details = strings.editing;
-		}
+		presenceData.details = hasPermissions()
+			? strings.editing
+			: strings.viewSourceOf;
 		presenceData.state = pageTitle;
 	} else if (searchParams.get("action") === "history") {
 		presenceData.details = strings.viewHistory;
 		presenceData.state = pageTitle;
-	} else if (searchParams.get("action") === "protect") {
-		if (document.querySelector(".permissions-errors")) {
-			presenceData.details = strings.viewProtection;
-		} else {
-			presenceData.details = strings.changeProtection;
-		}
+	} else if (
+		searchParams.get("action") === "protect" ||
+		searchParams.get("action") === "unprotect"
+	) {
+		presenceData.details = hasPermissions()
+			? strings.changeProtection
+			: strings.viewProtection;
 		presenceData.state = pageTitle;
 	} else if (mainPath.startsWith("User:")) {
 		presenceData.details = strings.viewUser;
@@ -87,8 +90,29 @@ presence.on("UpdateData", async () => {
 			".mw-page-title-main"
 		);
 	} else if (mainPath.startsWith("Special:")) {
-		presenceData.details = strings.advancedSettings;
-		presenceData.state = pageTitle;
+		const specialAction = mainPath.split(":").slice(1).join(":");
+		switch (specialAction) {
+			case "MovePage": {
+				presenceData.details = strings.moving;
+				presenceData.state = pathname.split("/").pop();
+				break;
+			}
+			case "Preferences": {
+				presenceData.details = strings.advancedSettings;
+				break;
+			}
+			case "RecentChangesLinked": {
+				presenceData.details = strings.viewHistory;
+				presenceData.state = document.querySelector<HTMLAnchorElement>(
+					".mw-content-subtitle a"
+				);
+				break;
+			}
+			default: {
+				presenceData.details = strings.viewAPage;
+				presenceData.state = pageTitle;
+			}
+		}
 	} else if (
 		mainPath.split(":")[0] in specialNamespaces &&
 		mainPath.includes(":")
