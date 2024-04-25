@@ -9,19 +9,10 @@ const enum Assets {
 presence.on("UpdateData", async () => {
 	const song: string = document.title.split(" | ")[0],
 		artist = song.split(" - ")[0],
-		songname = song.split(" - ").pop(),
-		presenceDataKpop: PresenceData = {
-			largeImageKey: Assets.Logo,
-			details: "Listening to",
-			state: `${artist} - ${songname}`,
-			buttons: [
-				{
-					label: "Listen Along",
-					url: "https://ongaku.zvbt.space",
-				},
-			],
-		},
-		presenceDataJpop: PresenceData = {
+		songname = song.split(" - ").pop();
+
+	if (document.location.pathname.match("/jpop")) {
+		const presenceDataJpop: PresenceData = {
 			largeImageKey: Assets.Logo,
 			details: "Listening to",
 			state: `${artist} - ${songname}`,
@@ -31,8 +22,12 @@ presence.on("UpdateData", async () => {
 					url: "https://ongaku.zvbt.space/jpop",
 				},
 			],
-		},
-		presenceDataSong: PresenceData = {
+		};
+		presence.setActivity(presenceDataJpop);
+	}
+
+	if (document.location.pathname.match("/song")) {
+		const presenceDataSong: PresenceData = {
 			largeImageKey: Assets.Logo,
 			details: "Browsing the songs lists",
 			buttons: [
@@ -41,8 +36,12 @@ presence.on("UpdateData", async () => {
 					url: "https://ongaku.zvbt.space/song",
 				},
 			],
-		},
-		presenceDataAbout: PresenceData = {
+		};
+		presence.setActivity(presenceDataSong);
+	}
+
+	if (document.location.pathname.match("/about")) {
+		const presenceDataAbout: PresenceData = {
 			largeImageKey: Assets.Logo,
 			details: "Reading the about page",
 			buttons: [
@@ -52,16 +51,21 @@ presence.on("UpdateData", async () => {
 				},
 			],
 		};
-
-	if (document.location.pathname.match("/jpop"))
-		presence.setActivity(presenceDataJpop);
-
-	if (document.location.pathname.match("/song"))
-		presence.setActivity(presenceDataSong);
-
-	if (document.location.pathname.match("/about"))
 		presence.setActivity(presenceDataAbout);
+	}
 
-	if (document.location.pathname === "/")
+	if (document.location.pathname === "/") {
+		const presenceDataKpop: PresenceData = {
+			largeImageKey: Assets.Logo,
+			details: "Listening to",
+			state: `${artist} - ${songname}`,
+			buttons: [
+				{
+					label: "Listen Along",
+					url: "https://ongaku.zvbt.space",
+				},
+			],
+		};
 		presence.setActivity(presenceDataKpop);
+	}
 });
