@@ -8,22 +8,23 @@ const enum Assets {
 }
 
 const locationSpecificLogos: Record<string, string> = {
-	ko: "https://i.imgur.com/Xox00yw.png",
-	pt: "https://i.imgur.com/pliOKN8.png",
-	uk: "https://i.imgur.com/fUOurR4.png",
-};
-
-const specialNamespaces = {
-	Minecraft_Wiki: "Minecraft Wiki",
-	Minecraft_Dungeons: "Minecraft Dungeons",
-	MCD: "Minecraft Dungeons",
-	Minecraft_Legends: "Minecraft Legends",
-	MCL: "Minecraft Legends",
-	Minecraft_Earth: "Minecraft Earth",
-	MCE: "Minecraft Earth",
-	Minecraft_Story_Mode: "Minecraft Story Mode",
-	MCSM: "Minecraft Story Mode",
-};
+		ko: "https://i.imgur.com/Xox00yw.png",
+		pt: "https://i.imgur.com/pliOKN8.png",
+		uk: "https://i.imgur.com/fUOurR4.png",
+	},
+	/* eslint-disable camelcase */
+	specialNamespaces: Record<string, string> = {
+		Minecraft_Wiki: "Minecraft Wiki",
+		Minecraft_Dungeons: "Minecraft Dungeons",
+		MCD: "Minecraft Dungeons",
+		Minecraft_Legends: "Minecraft Legends",
+		MCL: "Minecraft Legends",
+		Minecraft_Earth: "Minecraft Earth",
+		MCE: "Minecraft Earth",
+		Minecraft_Story_Mode: "Minecraft Story Mode",
+		MCSM: "Minecraft Story Mode",
+	};
+/* eslint-enable camelcase */
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -31,7 +32,6 @@ presence.on("UpdateData", async () => {
 		},
 		{ href, hostname, pathname, search } = document.location,
 		searchParams = new URLSearchParams(search),
-		language = hostname.split(".")[0],
 		strings = await presence.getStrings({
 			viewHome: "general.viewHome",
 			viewUser: "general.viewUser",
@@ -42,14 +42,15 @@ presence.on("UpdateData", async () => {
 			advancedSettings: "gmail.advancedSettings",
 			viewAPage: "general.viewAPage",
 			buttonViewPage: "general.buttonViewPage",
+			readingAbout: "general.readingAbout",
 		}),
 		mainPath = pathname.split("/").filter(Boolean)[1] ?? "/";
 
-	presenceData.largeImageKey = locationSpecificLogos[language] ?? Assets.Logo;
+	presenceData.largeImageKey =
+		locationSpecificLogos[hostname.split(".")[0]] ?? Assets.Logo;
 
-	if (mainPath === "/") {
-		presenceData.details = strings.viewHome;
-	} else if (mainPath.startsWith("User:")) {
+	if (mainPath === "/") presenceData.details = strings.viewHome;
+	else if (mainPath.startsWith("User:")) {
 		presenceData.details = strings.viewUser;
 		presenceData.state = document.querySelector<HTMLSpanElement>(
 			".mw-page-title-main"
@@ -72,6 +73,16 @@ presence.on("UpdateData", async () => {
 		presenceData.details = strings.advancedSettings;
 		presenceData.state =
 			document.querySelector<HTMLHeadingElement>("#firstHeading");
+	} else if (
+		mainPath.split(":")[0] in specialNamespaces &&
+		mainPath.includes(":")
+	) {
+		presenceData.details = `${strings.readingAbout} ${
+			specialNamespaces[mainPath.split(":")[0]]
+		}`;
+		presenceData.state =
+			document.querySelector<HTMLHeadingElement>("#firstHeading");
+		presenceData.buttons = [{ label: strings.buttonViewPage, url: href }];
 	} else {
 		presenceData.details = strings.viewAPage;
 		presenceData.state =
