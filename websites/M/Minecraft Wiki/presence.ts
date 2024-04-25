@@ -90,8 +90,7 @@ presence.on("UpdateData", async () => {
 			".mw-page-title-main"
 		);
 	} else if (mainPath.startsWith("Special:")) {
-		const specialAction = mainPath.split(":").slice(1).join(":");
-		switch (specialAction) {
+		switch (mainPath.split(":").slice(1).join(":")) {
 			case "MovePage": {
 				presenceData.details = strings.moving;
 				presenceData.state = pathname.split("/").pop();
