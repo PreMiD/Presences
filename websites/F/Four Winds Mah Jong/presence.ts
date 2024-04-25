@@ -1,5 +1,6 @@
 import ppcHandler from "./pages/ppc";
 import pocketPCHandler from "./pages/pocketpc";
+import knowledgeBaseHandler from "./pages/knowledge";
 
 const presence = new Presence({
 		clientId: "1221562084253499452",
@@ -49,6 +50,8 @@ presence.on("UpdateData", async () => {
 		ppcHandler(pathList.slice(1), presenceData);
 	} else if (pathList[0] === "pocketpc") {
 		pocketPCHandler(pathList.slice(1), presenceData);
+	} else if (pathList[0] === "kb") {
+		knowledgeBaseHandler(presenceData);
 	} else {
 		presenceData.details = "Viewing a page";
 		presenceData.state = pageTitle;
