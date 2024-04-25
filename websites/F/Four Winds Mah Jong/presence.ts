@@ -1,9 +1,11 @@
+import ppcHandler from "./pages/ppc";
+
 const presence = new Presence({
 		clientId: "1221562084253499452",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-const enum Assets {
+const enum PresenceAssets {
 	Logo = "https://i.imgur.com/QyfS9WR.png",
 }
 
@@ -13,12 +15,12 @@ const staticPages: Record<string, PresenceData> = {
 	},
 	"/purchase.htm": {
 		details: "Viewing the purchase page",
-	}
+	},
 };
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: Assets.Logo,
+			largeImageKey: PresenceAssets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location,
@@ -43,7 +45,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing support resources";
 		presenceData.state = pageTitle;
 	} else if (pathList[0] === "ppc") {
-
+		ppcHandler(pathList.slice(1), presenceData);
 	} else {
 		presenceData.details = "Viewing a page";
 		presenceData.state = pageTitle;
