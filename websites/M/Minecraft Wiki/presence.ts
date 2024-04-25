@@ -88,22 +88,18 @@ presence.on("UpdateData", async () => {
 		);
 	} else if (mainPath.startsWith("Special:")) {
 		presenceData.details = strings.advancedSettings;
-		presenceData.state =
-			document.querySelector<HTMLHeadingElement>("#firstHeading");
+		presenceData.state = pageTitle;
 	} else if (
 		mainPath.split(":")[0] in specialNamespaces &&
 		mainPath.includes(":")
 	) {
-		presenceData.details = `${strings.readingAbout} ${
-			specialNamespaces[mainPath.split(":")[0]]
-		}`;
-		presenceData.state =
-			document.querySelector<HTMLHeadingElement>("#firstHeading");
+		const namespace = mainPath.split(":")[0];
+		presenceData.details = `${strings.readingAbout} ${specialNamespaces[namespace]}`;
+		presenceData.state = pageTitle.slice(namespace.length + 1);
 		presenceData.buttons = [{ label: strings.buttonViewPage, url: href }];
 	} else {
 		presenceData.details = strings.viewAPage;
-		presenceData.state =
-			document.querySelector<HTMLHeadingElement>("#firstHeading");
+		presenceData.state = pageTitle;
 		presenceData.buttons = [{ label: strings.buttonViewPage, url: href }];
 	}
 
