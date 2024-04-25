@@ -29,9 +29,8 @@ presence.on("UpdateData", async () => {
 		pathList = pathname.split("/").filter(Boolean),
 		pageTitle = document.querySelector("h3");
 
-	if (staticPages[pathname]) {
-		Object.assign(presenceData, staticPages[pathname]);
-	} else if (pathname.startsWith("/intro")) {
+	if (staticPages[pathname]) Object.assign(presenceData, staticPages[pathname]);
+	else if (pathname.startsWith("/intro")) {
 		presenceData.details = "Reading the introduction";
 		presenceData.state = pageTitle;
 	} else if (pathname.startsWith("/features")) {
@@ -46,15 +45,25 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.startsWith("/support")) {
 		presenceData.details = "Viewing support resources";
 		presenceData.state = pageTitle;
-	} else if (pathList[0] === "ppc") {
-		ppcHandler(pathList.slice(1), presenceData);
-	} else if (pathList[0] === "pocketpc") {
-		pocketPCHandler(pathList.slice(1), presenceData);
-	} else if (pathList[0] === "kb") {
-		knowledgeBaseHandler(presenceData);
 	} else {
-		presenceData.details = "Viewing a page";
-		presenceData.state = pageTitle;
+		switch (pathList[0]) {
+			case "ppc": {
+				ppcHandler(pathList.slice(1), presenceData);
+				break;
+			}
+			case "pocketpc": {
+				pocketPCHandler(pathList.slice(1), presenceData);
+				break;
+			}
+			case "kb": {
+				knowledgeBaseHandler(presenceData);
+				break;
+			}
+			default: {
+				presenceData.details = "Viewing a page";
+				presenceData.state = pageTitle;
+			}
+		}
 	}
 
 	presence.setActivity(presenceData);
