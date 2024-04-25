@@ -75,6 +75,8 @@ presence.on("UpdateData", async () => {
 		data.isChecked = true;
 	}
 
+	if (location.hostname.includes("chzzk")) return;
+
 	const presenceData: PresenceData = {
 		name: data.service[0],
 		details: "Browsing...",
