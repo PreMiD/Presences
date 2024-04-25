@@ -55,14 +55,15 @@ presence.on("UpdateData", async () => {
 			".mw-page-title-main"
 		);
 		presenceData.buttons = [{ label: strings.buttonViewProfile, url: href }];
-	} else if (/^[^:]*talk:/.test(mainPath)) {
+	} else if (/^[^:]*talk:/i.test(mainPath)) {
 		presenceData.details = strings.viewAThread;
 		presenceData.state =
 			document.querySelector<HTMLHeadingElement>("#firstHeading");
 	} else if (searchParams.get("action") === "edit") {
 		presenceData.details = strings.editing;
 		presenceData.state =
-			document.querySelector<HTMLHeadingElement>("#firstHeadingTitle");
+			document.querySelector<HTMLHeadingElement>("#firstHeadingTitle") ??
+			document.querySelector<HTMLAnchorElement>("#mw-content-subtitle a");
 	} else if (["history", "protect"].includes(searchParams.get("action"))) {
 		presenceData.details = strings.settings;
 		presenceData.state =
