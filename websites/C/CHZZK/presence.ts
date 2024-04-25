@@ -1,0 +1,112 @@
+const presence = new Presence({
+		clientId: "1232944311415603281",
+	}),
+	getStrings = async () => {
+		return presence.getStrings(
+			{
+				play: "general.playing",
+				pause: "general.paused",
+				live: "general.live",
+				browse: "general.browsing",
+				ad: "youtube.ad",
+				watchingLive: "general.watchingLive",
+				watchingVid: "general.watchingVid",
+				watchStream: "general.buttonWatchStream",
+				watchVideo: "general.buttonWatchVideo",
+			},
+			oldLang
+		);
+	},
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+const enum Assets {
+	Logo = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232944461047267338.png?size=512",
+}
+
+const enum ChzzkAssets {
+	Browse = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232952455562526731.png",
+	Live = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232952455369850910.png",
+	Play = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232952455625707581.png",
+	Pause = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232952455101419540.png",
+}
+
+let oldLang: string, strings: Awaited<ReturnType<typeof getStrings>>;
+
+presence.on("UpdateData", async () => {
+	const newLang = await presence.getSetting<string>("lang");
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
+
+	const presenceData: PresenceData = {
+		details: strings.browse,
+		largeImageKey: Assets.Logo,
+		smallImageKey: ChzzkAssets.Browse,
+		startTimestamp: browsingTimestamp,
+		type: ActivityType.Watching,
+	};
+
+	switch (location.pathname.split("/")[1]) {
+		case "video":
+		case "live":
+			{
+				const video = document.querySelector("video");
+				if (
+					document.querySelector<HTMLElement>("div.ad_info_area")?.offsetParent
+				) {
+					presenceData.details = strings.ad;
+					presenceData.smallImageKey = ChzzkAssets.Play;
+					presenceData.smallImageText = strings.play;
+				} else {
+					const streamerLogo = new URL(
+						document.querySelector<HTMLImageElement>(
+							"img[class^=video_information_image]"
+						).src
+					);
+					presenceData.details = document.querySelector(
+						"h2[class^=video_information_title]"
+					);
+					presenceData.state = document.querySelector(
+						"p[class^=video_information_name]"
+					);
+					presenceData.largeImageKey = (await presence.getSetting("logo"))
+						? streamerLogo.href.replace(streamerLogo.search, "")
+						: Assets.Logo;
+
+					if (location.pathname.startsWith("/live")) {
+						presenceData.smallImageKey = ChzzkAssets.Live;
+						presenceData.smallImageText = strings.live;
+						presenceData.startTimestamp =
+							Math.floor(Date.now() / 1000) -
+							presence.timestampFromFormat(
+								document.querySelector("span[class^=video_information_count]")
+									.textContent
+							);
+						presenceData.buttons = [
+							{ url: location.href, label: strings.watchStream },
+						];
+					} else {
+						presenceData.smallImageKey = ChzzkAssets.Play;
+						presenceData.smallImageText = strings.play;
+						[presenceData.startTimestamp, presenceData.endTimestamp] =
+							presence.getTimestampsfromMedia(video);
+						presenceData.buttons = [
+							{ url: location.href, label: strings.watchVideo },
+						];
+					}
+
+					if (video.paused) {
+						presenceData.smallImageKey = ChzzkAssets.Pause;
+						presenceData.smallImageText = strings.pause;
+						delete presenceData.startTimestamp;
+					}
+
+					break;
+				}
+			}
+			break;
+	}
+
+	presence.setActivity(presenceData);
+});
