@@ -71,11 +71,11 @@ function isActive(): boolean {
 }
 
 function getTitle(): string {
-	return videoCache.get(getVideoID())?.videoDetails.title;
+	return videoCache.get(getVideoID())?.videoDetails?.title;
 }
 
 function getUploader(): string {
-	return videoCache.get(getVideoID())?.videoDetails.author;
+	return videoCache.get(getVideoID())?.videoDetails?.author;
 }
 
 export function getVideoID(): string {
@@ -84,7 +84,7 @@ export function getVideoID(): string {
 
 export function getChannelURL(): string {
 	return `https://www.youtube.com/channel/${
-		videoCache.get(getVideoID())?.videoDetails.channelId
+		videoCache.get(getVideoID())?.videoDetails?.channelId
 	}`;
 }
 

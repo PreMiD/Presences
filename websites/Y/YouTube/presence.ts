@@ -4,6 +4,7 @@ import youtubeEmbedResolver from "./video_sources/embed";
 import youtubeMoviesResolver from "./video_sources/movies";
 import youtubeTVResolver from "./video_sources/tv";
 import youtubeResolver from "./video_sources/default";
+import youtubeMiniplayerResolver from "./video_sources/miniplayer";
 import youtubeApiResolver from "./video_sources/api";
 import {
 	Resolver,
@@ -79,6 +80,7 @@ presence.on("UpdateData", async () => {
 				youtubeOldResolver,
 				youtubeTVResolver,
 				youtubeResolver,
+				youtubeMiniplayerResolver,
 				youtubeMoviesResolver,
 				youtubeApiResolver,
 				nullResolver,
@@ -114,11 +116,14 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (logo === LogoMode.Channel) {
-			pfp = document
-				.querySelector<HTMLImageElement>(
-					"#avatar.ytd-video-owner-renderer > img"
-				)
-				?.src.replace(/=s\d+/, "=s512");
+			pfp =
+				resolver === youtubeMiniplayerResolver
+					? ""
+					: document
+							.querySelector<HTMLImageElement>(
+								"#avatar.ytd-video-owner-renderer > img"
+							)
+							?.src.replace(/=s\d+/, "=s512");
 		}
 		const unlistedPathElement = document.querySelector<SVGPathElement>(
 				"g#privacy_unlisted > path"
