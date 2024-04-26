@@ -32,6 +32,7 @@ presence.on("UpdateData", async () => {
 			viewHistory: "minecraft wiki.viewHistory",
 			changeProtection: "minecraft wiki.changeProtection",
 			viewProtection: "minecraft wiki.viewProtection",
+			search: "general.search",
 		}),
 		mainPath = pathname.split("/").filter(Boolean)[1] ?? "/",
 		pageTitle = document.querySelector<HTMLMetaElement>(
@@ -67,6 +68,9 @@ presence.on("UpdateData", async () => {
 			? strings.changeProtection
 			: strings.viewProtection;
 		presenceData.state = pageTitle;
+	} else if (searchParams.get("search")) {
+		presenceData.details = strings.search;
+		presenceData.state = searchParams.get("search");
 	} else if (mainPath === "/") presenceData.details = strings.viewHome;
 	else if (mainPath.startsWith("User:")) {
 		presenceData.details = strings.viewUser;
