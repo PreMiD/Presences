@@ -3,10 +3,6 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-const enum Assets {
-	Logo = "https://i.imgur.com/SPgKjjJ.png",
-}
-
 function hasPermissions(): boolean {
 	return !document.querySelector(".permissions-errors");
 }
@@ -85,18 +81,18 @@ presence.on("UpdateData", async () => {
 		mainPath.startsWith(`${specialNamespace}:`) &&
 		!mainPath.startsWith(`${specialNamespace}:_`)
 	) {
-		if (document.querySelector<HTMLFormElement>("#mw-prefs-form")) {
+		if (document.querySelector<HTMLFormElement>("#mw-prefs-form"))
 			presenceData.details = strings.advancedSettings;
-		} else if (
+		else if (
 			document.querySelector<HTMLUListElement>("#mw-whatlinkshere-list")
 		) {
 			presenceData.details = strings.viewHistory;
 			presenceData.state = document.querySelector<HTMLAnchorElement>(
 				"#mw-content-subtitle a"
 			);
-		} else if (document.querySelector<HTMLDivElement>("#mw-rcfilters-head")) {
+		} else if (document.querySelector<HTMLDivElement>("#mw-rcfilters-head"))
 			presenceData.details = strings.viewHistory;
-		} else if (document.querySelector<HTMLFormElement>("#movepage")) {
+		else if (document.querySelector<HTMLFormElement>("#movepage")) {
 			presenceData.details = strings.moving;
 			presenceData.state = document.querySelector<HTMLAnchorElement>(
 				"#mw-content-subtitle a"
