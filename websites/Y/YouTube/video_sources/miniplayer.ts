@@ -16,8 +16,8 @@ function getVideoID(): string {
 	const link =
 		document.querySelector<HTMLAnchorElement>("#video-title-link").href;
 	if (!link) return null;
-	const url = new URL(link);
-	return url.searchParams.get("v");
+
+	return new URL(link).searchParams.get("v");
 }
 
 function getChannelURL(): string {
