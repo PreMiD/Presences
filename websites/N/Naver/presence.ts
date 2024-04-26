@@ -76,13 +76,13 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-		name: data.service[0],
-		details: "Browsing...",
-		largeImageKey: assets[data.service[1].toLowerCase()],
-		smallImageKey:
-			assets[`${data.service[1].toLowerCase()}_browse`] ?? MainAssets.Browse,
-	},
-	 { pathname, href } = document.location;
+			name: data.service[0],
+			details: "Browsing...",
+			largeImageKey: assets[data.service[1].toLowerCase()],
+			smallImageKey:
+				assets[`${data.service[1].toLowerCase()}_browse`] ?? MainAssets.Browse,
+		},
+		{ pathname, href } = document.location;
 
 	data.settings = [
 		{
@@ -210,9 +210,7 @@ presence.on("UpdateData", async () => {
 					).textContent;
 					presenceData.state =
 						document.querySelector("#topVolumeList").textContent;
-					presenceData.buttons = [
-						{ url: href, label: "Read Epiosde" },
-					];
+					presenceData.buttons = [{ url: href, label: "Read Epiosde" }];
 					presenceData.smallImageKey = MainAssets.Book;
 				}
 			}
