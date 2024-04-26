@@ -36,7 +36,13 @@ presence.on("UpdateData", async () => {
 		mainPath = pathname.split("/").filter(Boolean)[1] ?? "/",
 		pageTitle = document.querySelector<HTMLMetaElement>(
 			"meta[property='og:title']"
-		)?.content;
+		)?.content,
+		specialNamespace = new URL(
+			document.querySelector<HTMLAnchorElement>("#t-specialpages a").href
+		).pathname
+			.split("/")
+			.filter(Boolean)[1]
+			.match(/.*(?=:[^_])/)?.[0];
 
 	presenceData.largeImageKey = getComputedStyle(
 		document.querySelector<HTMLAnchorElement>(".mw-wiki-logo")
@@ -71,28 +77,29 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector<HTMLSpanElement>(
 			".mw-page-title-main"
 		);
-	} else if (mainPath.startsWith("Special:")) {
-		switch (mainPath.split(":").slice(1).join(":")) {
-			case "MovePage": {
-				presenceData.details = strings.moving;
-				presenceData.state = pathname.split("/").pop();
-				break;
-			}
-			case "Preferences": {
-				presenceData.details = strings.advancedSettings;
-				break;
-			}
-			case "RecentChangesLinked": {
-				presenceData.details = strings.viewHistory;
-				presenceData.state = document.querySelector<HTMLAnchorElement>(
-					".mw-content-subtitle a"
-				);
-				break;
-			}
-			default: {
-				presenceData.details = strings.viewAPage;
-				presenceData.state = pageTitle;
-			}
+	} else if (
+		mainPath.startsWith(`${specialNamespace}:`) &&
+		!mainPath.startsWith(`${specialNamespace}:_`)
+	) {
+		if (document.querySelector<HTMLFormElement>("#mw-prefs-form")) {
+			presenceData.details = strings.advancedSettings;
+		} else if (
+			document.querySelector<HTMLUListElement>("#mw-whatlinkshere-list")
+		) {
+			presenceData.details = strings.viewHistory;
+			presenceData.state = document.querySelector<HTMLAnchorElement>(
+				"#mw-content-subtitle a"
+			);
+		} else if (document.querySelector<HTMLDivElement>("#mw-rcfilters-head")) {
+			presenceData.details = strings.viewHistory;
+		} else if (document.querySelector<HTMLFormElement>("#movepage")) {
+			presenceData.details = strings.moving;
+			presenceData.state = document.querySelector<HTMLAnchorElement>(
+				"#mw-content-subtitle a"
+			);
+		} else {
+			presenceData.details = strings.viewAPage;
+			presenceData.state = pageTitle;
 		}
 	} else if (/:[^_]/.test(mainPath)) {
 		const namespace = pageTitle.slice(
