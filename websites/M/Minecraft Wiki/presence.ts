@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
 		},
-		{ href, hostname, pathname, search } = document.location,
+		{ href, pathname, search } = document.location,
 		searchParams = new URLSearchParams(search),
 		strings = await presence.getStrings({
 			viewHome: "general.viewHome",
