@@ -44,7 +44,10 @@ presence.on("UpdateData", async () => {
 		).pathname
 			.split("/")
 			.filter(Boolean)[1]
-			.match(/.*(?=:[^_])/)?.[0];
+			.match(/.*(?=:[^_])/)?.[0],
+		userNamespace = await getUserNamespace(),
+		talkNamespace = await getTalkNamespace(),
+		currentNamespace = pageTitle.match(/.*(?=:[^_])/)?.[0] ?? "";
 
 	presenceData.largeImageKey = getComputedStyle(
 		document.querySelector<HTMLAnchorElement>(".mw-wiki-logo")
@@ -73,19 +76,19 @@ presence.on("UpdateData", async () => {
 		presenceData.details = strings.search;
 		presenceData.state = searchParams.get("search");
 	} else if (mainPath === "/") presenceData.details = strings.viewHome;
-	else if (mainPath.startsWith("User:")) {
+	else if (currentNamespace === userNamespace) {
 		presenceData.details = strings.viewUser;
 		presenceData.state = pageTitle.slice(5);
 		presenceData.buttons = [{ label: strings.buttonViewProfile, url: href }];
-	} else if (/^[^:]*talk:/i.test(mainPath)) {
-		presenceData.details = strings.viewAThread;
-		presenceData.state = document.querySelector<HTMLSpanElement>(
-			".mw-page-title-main"
-		);
 	} else if (
-		mainPath.startsWith(`${specialNamespace}:`) &&
-		!mainPath.startsWith(`${specialNamespace}:_`)
+		currentNamespace.toLowerCase().includes(talkNamespace.toLowerCase())
 	) {
+		presenceData.details = strings.viewAThread;
+		presenceData.state =
+			currentNamespace === talkNamespace
+				? document.querySelector<HTMLSpanElement>(".mw-page-title-main")
+				: pageTitle;
+	} else if (currentNamespace === specialNamespace) {
 		// Preferences (Special:Preferences)
 		if (document.querySelector<HTMLFormElement>("#mw-prefs-form"))
 			presenceData.details = strings.advancedSettings;
@@ -114,7 +117,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = strings.viewAPage;
 			presenceData.state = pageTitle;
 		}
-	} else if (/:[^_]/.test(mainPath)) {
+	} else if (currentNamespace) {
 		const namespace = pageTitle.slice(
 			0,
 			mainPath.match(/.*(?=:[^_])/)[0].length
