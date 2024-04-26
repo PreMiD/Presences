@@ -1,6 +1,6 @@
-const promiseCache = new Map<string, Promise<any>>();
+const promiseCache = new Map<string, Promise<Response>>();
 
-export async function getUserNamespace() {
+export async function getUserNamespace(): Promise<string> {
 	const cached = sessionStorage.getItem("PMD_UserNamespace");
 	if (cached) return cached;
 	let response: Response;
@@ -20,7 +20,7 @@ export async function getUserNamespace() {
 	return sessionStorage.getItem("PMD_UserNamespace");
 }
 
-export async function getTalkNamespace() {
+export async function getTalkNamespace(): Promise<string> {
 	const cached = sessionStorage.getItem("PMD_TalkNamespace");
 	if (cached) return cached;
 	let response: Response;

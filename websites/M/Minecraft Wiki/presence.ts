@@ -104,22 +104,18 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector<HTMLAnchorElement>(
 				"#mw-content-subtitle a"
 			);
-		}
-		// Moving a page (Special:MovePage)
-		else if (document.querySelector<HTMLFormElement>("#movepage")) {
+		} else if (document.querySelector<HTMLFormElement>("#movepage")) {
+			// Moving a page (Special:MovePage)
 			presenceData.details = strings.moving;
 			presenceData.state = document.querySelector<HTMLAnchorElement>(
 				"#mw-content-subtitle a"
 			);
-		}
-		// Logging in (Special:UserLogin, Special:CreateAccount)
-		else if (document.querySelector<HTMLDivElement>("#userloginForm")) {
+		} else if (document.querySelector<HTMLDivElement>("#userloginForm"))
+			// Logging in (Special:UserLogin, Special:CreateAccount)
 			presenceData.details = strings.login;
-		}
 		// Upload a file (Special:Upload)
-		else if (document.querySelector<HTMLFormElement>("#mw-upload-form")) {
+		else if (document.querySelector<HTMLFormElement>("#mw-upload-form"))
 			presenceData.details = strings.upload;
-		}
 		// Contributions (Special:Contributions)
 		else if (
 			document.querySelector<HTMLDivElement>(".mw-contributions-user-tools")
