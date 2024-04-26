@@ -20,14 +20,14 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232944461047267338.png?size=512",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/CHZZK/assets/0.png",
 }
 
 const enum ChzzkAssets {
-	Browse = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232952455562526731.png?size=512",
-	Live = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232952455369850910.png?size=512",
-	Play = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232952455625707581.png?size=512",
-	Pause = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232952455101419540.png?size=512",
+	Browse = "https://cdn.rcd.gg/PreMiD/websites/C/CHZZK/assets/1.png",
+	Live = "https://cdn.rcd.gg/PreMiD/websites/C/CHZZK/assets/2.png",
+	Play = "https://cdn.rcd.gg/PreMiD/websites/C/CHZZK/assets/3.png",
+	Pause = "https://cdn.rcd.gg/PreMiD/websites/C/CHZZK/assets/4.png",
 }
 
 let oldLang: string, strings: Awaited<ReturnType<typeof getStrings>>;
