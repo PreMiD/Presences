@@ -35,8 +35,8 @@ presence.on("UpdateData", async () => {
 			viewContributionsOf: "minecraft wiki.viewContributionsOf",
 			viewRecentChanges: "minecraft wiki.viewRecentChanges",
 			login: "kahoot.login",
-			subscriptions: "amazon.subscriptions",
 			btnViewThread: "apple.btnViewThread",
+			viewWatchlist: "minecraft wiki.viewWatchlist",
 		}),
 		mainPath = pathname.split("/").filter(Boolean)[1] ?? "/",
 		pageTitle = document.querySelector<HTMLMetaElement>(
@@ -100,7 +100,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = strings.advancedSettings;
 		else if (document.querySelector<HTMLFormElement>("#mw-watchlist-form"))
 			// Subscriptions (Special:Watchlist)
-			presenceData.details = strings.subscriptions;
+			presenceData.details = strings.viewWatchlist;
 		else if (document.querySelector<HTMLUListElement>(".mw-rcfilters-head")) {
 			// Recent changes (Special:RecentChanges, Special:RecentChangesLinked)
 			presenceData.details = strings.viewRecentChanges;
