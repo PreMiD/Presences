@@ -83,16 +83,12 @@ presence.on("UpdateData", async () => {
 	) {
 		if (document.querySelector<HTMLFormElement>("#mw-prefs-form"))
 			presenceData.details = strings.advancedSettings;
-		else if (
-			document.querySelector<HTMLUListElement>("#mw-whatlinkshere-list")
-		) {
+		else if (document.querySelector<HTMLUListElement>(".mw-rcfilters-head")) {
 			presenceData.details = strings.viewHistory;
 			presenceData.state = document.querySelector<HTMLAnchorElement>(
 				"#mw-content-subtitle a"
 			);
-		} else if (document.querySelector<HTMLDivElement>("#mw-rcfilters-head"))
-			presenceData.details = strings.viewHistory;
-		else if (document.querySelector<HTMLFormElement>("#movepage")) {
+		} else if (document.querySelector<HTMLFormElement>("#movepage")) {
 			presenceData.details = strings.moving;
 			presenceData.state = document.querySelector<HTMLAnchorElement>(
 				"#mw-content-subtitle a"
