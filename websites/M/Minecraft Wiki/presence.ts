@@ -95,14 +95,14 @@ presence.on("UpdateData", async () => {
 				: pageTitle;
 		presenceData.buttons = [{ label: strings.btnViewThread, url: href }];
 	} else if (currentNamespace === specialNamespace) {
-		// Preferences (Special:Preferences)
 		if (document.querySelector<HTMLFormElement>("#mw-prefs-form"))
+			// Preferences (Special:Preferences)
 			presenceData.details = strings.advancedSettings;
 		else if (document.querySelector<HTMLFormElement>("#mw-watchlist-form"))
 			// Subscriptions (Special:Watchlist)
 			presenceData.details = strings.subscriptions;
-		// Recent changes (Special:RecentChanges, Special:RecentChangesLinked)
 		else if (document.querySelector<HTMLUListElement>(".mw-rcfilters-head")) {
+			// Recent changes (Special:RecentChanges, Special:RecentChangesLinked)
 			presenceData.details = strings.viewRecentChanges;
 			presenceData.state = document.querySelector<HTMLAnchorElement>(
 				"#mw-content-subtitle a"
@@ -116,13 +116,13 @@ presence.on("UpdateData", async () => {
 		} else if (document.querySelector<HTMLDivElement>("#userloginForm"))
 			// Logging in (Special:UserLogin, Special:CreateAccount)
 			presenceData.details = strings.login;
-		// Upload a file (Special:Upload)
 		else if (document.querySelector<HTMLFormElement>("#mw-upload-form"))
+			// Upload a file (Special:Upload)
 			presenceData.details = strings.upload;
-		// Contributions (Special:Contributions)
 		else if (
 			document.querySelector<HTMLDivElement>(".mw-contributions-user-tools")
 		) {
+			// Contributions (Special:Contributions)
 			presenceData.details = strings.viewContributionsOf;
 			presenceData.state = pageTitle.split("/").slice(1).join("/");
 		} else {
