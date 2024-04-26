@@ -98,6 +98,9 @@ presence.on("UpdateData", async () => {
 		// Preferences (Special:Preferences)
 		if (document.querySelector<HTMLFormElement>("#mw-prefs-form"))
 			presenceData.details = strings.advancedSettings;
+		else if (document.querySelector<HTMLFormElement>("#mw-watchlist-form"))
+			// Subscriptions (Special:Watchlist)
+			presenceData.details = strings.subscriptions;
 		// Recent changes (Special:RecentChanges, Special:RecentChangesLinked)
 		else if (document.querySelector<HTMLUListElement>(".mw-rcfilters-head")) {
 			presenceData.details = strings.viewRecentChanges;
