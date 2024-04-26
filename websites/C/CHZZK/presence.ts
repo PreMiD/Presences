@@ -24,10 +24,10 @@ const enum Assets {
 }
 
 const enum ChzzkAssets {
-	Browse = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232952455562526731.png",
-	Live = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232952455369850910.png",
-	Play = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232952455625707581.png",
-	Pause = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232952455101419540.png",
+	Browse = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232952455562526731.png?size=512",
+	Live = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232952455369850910.png?size=512",
+	Play = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232952455625707581.png?size=512",
+	Pause = "https://cdn.discordapp.com/app-assets/1232944311415603281/1232952455101419540.png?size=512",
 }
 
 let oldLang: string, strings: Awaited<ReturnType<typeof getStrings>>;
@@ -40,14 +40,15 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-		details: strings.browse,
-		largeImageKey: Assets.Logo,
-		smallImageKey: ChzzkAssets.Browse,
-		startTimestamp: browsingTimestamp,
-		type: ActivityType.Watching,
-	};
+			details: strings.browse,
+			largeImageKey: Assets.Logo,
+			smallImageKey: ChzzkAssets.Browse,
+			startTimestamp: browsingTimestamp,
+			type: ActivityType.Watching,
+		},
+		{ pathname, href } = document.location;
 
-	switch (location.pathname.split("/")[1]) {
+	switch (pathname.split("/")[1]) {
 		case "video":
 		case "live":
 			{
@@ -74,7 +75,7 @@ presence.on("UpdateData", async () => {
 						? streamerLogo.href.replace(streamerLogo.search, "")
 						: Assets.Logo;
 
-					if (location.pathname.startsWith("/live")) {
+					if (pathname.startsWith("/live")) {
 						presenceData.smallImageKey = ChzzkAssets.Live;
 						presenceData.smallImageText = strings.live;
 						presenceData.startTimestamp =
@@ -83,17 +84,13 @@ presence.on("UpdateData", async () => {
 								document.querySelector("span[class^=video_information_count]")
 									.textContent
 							);
-						presenceData.buttons = [
-							{ url: location.href, label: strings.watchStream },
-						];
+						presenceData.buttons = [{ url: href, label: strings.watchStream }];
 					} else {
 						presenceData.smallImageKey = ChzzkAssets.Play;
 						presenceData.smallImageText = strings.play;
 						[presenceData.startTimestamp, presenceData.endTimestamp] =
 							presence.getTimestampsfromMedia(video);
-						presenceData.buttons = [
-							{ url: location.href, label: strings.watchVideo },
-						];
+						presenceData.buttons = [{ url: href, label: strings.watchVideo }];
 					}
 
 					if (video.paused) {
