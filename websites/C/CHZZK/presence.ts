@@ -33,9 +33,11 @@ const enum ChzzkAssets {
 let oldLang: string, strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
-	const newLang = await presence.getSetting<string>("lang"),
-		showStreamerLogo = await presence.getSetting<boolean>("logo"),
-		showElapsedTime = await presence.getSetting<boolean>("time");
+	const [newLang, showStreamerLogo, showElapsedTime] = await Promise.all([
+		presence.getSetting<string>("lang"),
+		presence.getSetting<boolean>("logo"),
+		presence.getSetting<boolean>("time"),
+	]);
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
