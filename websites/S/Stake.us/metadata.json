@@ -12,9 +12,9 @@
 	"matches": [
 		"*://stake.us/*"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/X9jCmBM.jpeg",
-	"thumbnail": "https://i.imgur.com/lobHZwr.jpeg",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Stake.us/assets/logo.jpeg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Stake.us/assets/thumbnail.jpeg",
 	"color": "#1a2c3a",
 	"category": "games",
 	"tags": [

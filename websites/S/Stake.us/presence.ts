@@ -10,7 +10,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("showCurrentGame"),
 		]),
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/9jDaQ1b.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/S/Stake.us/assets/0.png",
 		},
 		{ pathname, search } = document.location;
 
