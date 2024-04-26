@@ -119,6 +119,13 @@ presence.on("UpdateData", async () => {
 		// Upload a file (Special:Upload)
 		else if (document.querySelector<HTMLFormElement>("#mw-upload-form")) {
 			presenceData.details = strings.upload;
+		}
+		// Contributions (Special:Contributions)
+		else if (
+			document.querySelector<HTMLDivElement>(".mw-contributions-user-tools")
+		) {
+			presenceData.details = strings.viewContributionsOf;
+			presenceData.state = pageTitle.split("/").slice(1).join("/");
 		} else {
 			presenceData.details = strings.viewAPage;
 			presenceData.state = pageTitle;
