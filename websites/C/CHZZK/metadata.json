@@ -33,7 +33,7 @@
 		{
 			"id": "time",
 			"title": "Show Stream Elapsed Time",
-			"icon": "fad fa-images",
+			"icon": "fad fa-stopwatch",
 			"value": false
 		}
 	]
