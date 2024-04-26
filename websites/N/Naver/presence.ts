@@ -1,113 +1,67 @@
 const presence = new Presence({
 		clientId: "825307070584586250",
 	}),
-	getServiceName = (url = document.location.hostname) => {
-		switch (true) {
-			case !!url.match(/tv[.]naver[.]([a-z0-9]+)/):
-				return "NAVER_TV";
-			case !!url.match(/comic[.]naver[.]([a-z0-9]+)/):
-				return "NAVER_WEBTOON";
-			case !!url.match(/now[.]naver[.]([a-z0-9]+)/):
-				return "NAVER_NOW";
-			case !!url.match(/papago[.]naver[.]([a-z0-9]+)/):
-				return "NAVER_PAPAGO";
-			case !!url.match(/blog[.]naver[.]([a-z0-9]+)/):
-				return "NAVER_BLOG";
-			case !!url.match(/cafe[.]naver[.]([a-z0-9]+)/):
-				return "NAVER_CAFE";
-			case !!url.match(/([a-z]+)[.]naver[.]([a-z0-9]+)/):
-				return "NAVER";
-			default:
-				break;
-		}
-	},
 	data: {
 		isChecked: boolean;
-		service: string;
+		service: [string, string];
 		settings?: {
 			id: string;
 			delete?: boolean;
 			data: string[];
 		}[];
-		presence: {
-			[key: string]: {
-				env?: boolean;
-				service:
-					| "NAVER"
-					| "NAVER_PAPAGO"
-					| "NAVER_NOW"
-					| "NAVER_WEBTOON"
-					| "NAVER_TV"
-					| "NAVER_BLOG"
-					| "NAVER_CAFE"
-					| "ANY";
-				setPresenceData?: () => void;
-				data?: {
-					[key in keyof PresenceData]: {
-						setTo?: unknown;
-						if?: {
-							s: {
-								k: unknown;
-								v: unknown;
-								then?: {
-									v?: unknown;
-									delete?: boolean;
-								};
-								else?: {
-									v?: unknown;
-									delete?: boolean;
-								};
-							};
-							else?: {
-								k: unknown;
-								v: unknown;
-								then?: {
-									v?: unknown;
-									delete?: boolean;
-								};
-								else?: {
-									v?: unknown;
-									delete?: boolean;
-								};
-							}[];
-						};
-					};
-				};
-			};
-		};
 	} = {
 		isChecked: false,
 		service: null,
-		presence: null,
 	},
 	/* eslint-disable camelcase */
 	assets: Record<string, string> = {
-		naver: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/0.png",
-		naver_webtoon: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/1.png",
-		naver_now: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/2.png",
-		naver_tv: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/3.png",
-		naver_tv_play: Assets.Play,
-		naver_tv_pause: Assets.Pause,
-		naver_papago: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/4.png",
-		naver_now_play: Assets.Play,
-		naver_now_pause: Assets.Pause,
-		naver_browse: Assets.Search,
-		naver_tv_browse: Assets.Search,
-		naver_papago_language:
-			"https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/5.png",
-		naver_webtoon_browse: Assets.Search,
-		naver_now_browse: Assets.Search,
-		naver_now_live: Assets.Live,
-		naver_book: Assets.Reading,
-		naver_webtoon_book: Assets.Reading,
-		naver_blog: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/6.png",
-		naver_blog_browse: Assets.Search,
-		naver_cafe: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/7.png",
-		naver_cafe_browse: Assets.Search,
-		book: Assets.Reading,
-		browse: Assets.Search,
+		naver:
+			"https://cdn.discordapp.com/app-icons/825307070584586250/a68964d8b1379c3440b25fda7b91ddd3.png?size=512",
+		naver_webtoon:
+			"https://cdn.discordapp.com/app-icons/827171135970869269/0b6d3b9f2cb6581d2fecda2b62bf6de2.png?size=512",
+		naver_series:
+			"https://cdn.discordapp.com/app-icons/907151903564120135/a7f2fb845d4b281b2c4dc34dd494969c.png?size=512",
+		naver_tv:
+			"https://cdn.discordapp.com/app-icons/827170810870890517/d23dc00b5edfade991b32fdd8cd6faa6.png?size=512",
+		naver_papago:
+			"https://cdn.discordapp.com/app-icons/827170714729578546/b3f02012b4ae188f245d9cd4e78be721.png?size=512",
+		naver_blog:
+			"https://cdn.discordapp.com/app-icons/827171204288872449/92aa96637c18dab3a2a8866d09beff24.png?size=512",
+		naver_blog_browse:
+			"https://cdn.discordapp.com/app-assets/827171204288872449/827173061572296804.png?size=512",
+		naver_cafe:
+			"https://cdn.discordapp.com/app-icons/848153448041938952/7d62d53f5fc4bcfcfc76338ad23603ee.png?size=512",
 	};
 /* eslint-enable camelcase */
+
+const enum MainAssets {
+	Browse = "https://cdn.discordapp.com/app-assets/825307070584586250/826435062756278273.png?size=512",
+	Book = "https://cdn.discordapp.com/app-assets/825307070584586250/826447462554140704.png?size=512",
+	Play = "https://cdn.discordapp.com/app-assets/827170810870890517/827172409979305995.png?size=512",
+	Pause = "https://cdn.discordapp.com/app-assets/827170810870890517/827172409936314378.png?size=512",
+	Language = "https://cdn.discordapp.com/app-assets/827170714729578546/827172528383590460.png?size=512",
+}
+
+function getServiceName(url = document.location.hostname): [string, string] {
+	switch (true) {
+		case !!url.match(/tv[.]naver[.]([a-z0-9]+)/):
+			return ["Naver TV", "NAVER_TV"];
+		case !!url.match(/comic[.]naver[.]([a-z0-9]+)/):
+			return ["Naver Webtoon", "NAVER_WEBTOON"];
+		case !!url.match(/papago[.]naver[.]([a-z0-9]+)/):
+			return ["Papago", "NAVER_PAPAGO"];
+		case !!url.match(/blog[.]naver[.]([a-z0-9]+)/):
+			return ["Naver Blog", "NAVER_BLOG"];
+		case !!url.match(/cafe[.]naver[.]([a-z0-9]+)/):
+			return ["Naver Cafe", "NAVER_CAFE"];
+		case !!url.match(/(novel|series)[.]naver[.]([a-z0-9]+)/):
+			return ["Naver Series", "NAVER_SERIES"];
+		case !!url.match(/([a-z]+)[.]naver[.]([a-z0-9]+)/):
+			return ["Naver", "NAVER"];
+		default:
+			break;
+	}
+}
 
 let blog: string, cafeTitle: string;
 
@@ -121,52 +75,14 @@ presence.on("UpdateData", async () => {
 		data.isChecked = true;
 	}
 
-	const ghtEnv: {
-			sPageName: string;
-			sChannelName: string;
-		} = {
-			sPageName: document.querySelector("div.ch_inf.open") ? "channel" : "",
-			sChannelName: document.querySelector("strong.rmc_name")?.textContent,
-		},
-		presenceData: PresenceData = {
-			largeImageKey: assets[data.service?.toLowerCase()],
+	const presenceData: PresenceData = {
+			name: data.service[0],
 			details: "Browsing...",
-			smallImageKey: assets[`${data.service.toLowerCase()}_browse`],
+			largeImageKey: assets[data.service[1].toLowerCase()],
+			smallImageKey:
+				assets[`${data.service[1].toLowerCase()}_browse`] ?? MainAssets.Browse,
 		},
-		getImageOrTimestamp = (
-			video: HTMLVideoElement,
-			type:
-				| "startTimestamp"
-				| "endTimestamp"
-				| "smallImageKey"
-				| "smallImageText"
-		) => {
-			const timestamps = presence.getTimestamps(
-					video?.currentTime,
-					video?.duration
-				),
-				tempData: {
-					startTimestamp: number;
-					endTimestamp: number;
-					smallImageKey: string;
-					smallImageText: string;
-				} = {
-					startTimestamp: timestamps[0],
-					endTimestamp: timestamps[1],
-					smallImageKey: assets[`${data.service.toLowerCase()}_play`],
-					smallImageText: "Playing",
-				};
-
-			if (video?.paused) {
-				delete tempData.startTimestamp;
-				delete tempData.endTimestamp;
-
-				tempData.smallImageKey = assets[`${data.service.toLowerCase()}_pause`];
-				tempData.smallImageText = "Paused";
-			}
-
-			return tempData[type];
-		};
+		{ pathname, href } = document.location;
 
 	data.settings = [
 		{
@@ -176,458 +92,165 @@ presence.on("UpdateData", async () => {
 		},
 	];
 
-	data.presence = {
-		"/v/([0-9]+)": {
-			service: "NAVER_TV",
-			setPresenceData() {
+	switch (data.service[1]) {
+		case "NAVER_TV": {
+			if (pathname.match("/v/([0-9]+)")) {
 				if (
 					document.querySelector<HTMLElement>("div.ad_info_area")?.offsetParent
 				) {
+					const video = document.querySelector<HTMLVideoElement>(
+						'[data-role="videoEl"]'
+					);
 					presenceData.details = "Currently watching an ad";
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestampsfromMedia(video);
+					presenceData.smallImageKey = MainAssets.Play;
+					presenceData.smallImageText = "Playing";
 
-					presenceData.startTimestamp = <number>(
-						getImageOrTimestamp(
-							document.querySelector('[data-role="videoEl"]'),
-							"startTimestamp"
-						)
-					);
-					presenceData.endTimestamp = <number>(
-						getImageOrTimestamp(
-							document.querySelector('[data-role="videoEl"]'),
-							"endTimestamp"
-						)
-					);
-
-					presenceData.smallImageKey = <string>(
-						getImageOrTimestamp(
-							document.querySelector('[data-role="videoEl"]'),
-							"smallImageKey"
-						)
-					);
-					presenceData.smallImageText = <string>(
-						getImageOrTimestamp(
-							document.querySelector('[data-role="videoEl"]'),
-							"smallImageText"
-						)
-					);
+					if (video.paused) {
+						presenceData.smallImageKey = MainAssets.Pause;
+						presenceData.smallImageText = "Paused";
+						delete presenceData.startTimestamp;
+						delete presenceData.endTimestamp;
+					}
 				} else {
-					presenceData.details =
-						document.querySelector("h3._clipTitle")?.textContent;
-					presenceData.state = document
-						.querySelector("div.ch_tit")
-						?.textContent.trim();
-
-					presenceData.startTimestamp = <number>(
-						getImageOrTimestamp(
-							document.querySelector("video"),
-							"startTimestamp"
-						)
-					);
-					presenceData.endTimestamp = <number>(
-						getImageOrTimestamp(document.querySelector("video"), "endTimestamp")
-					);
-
-					presenceData.smallImageKey = <string>(
-						getImageOrTimestamp(
-							document.querySelector("video"),
-							"smallImageKey"
-						)
-					);
-					presenceData.smallImageText = <string>(
-						getImageOrTimestamp(
-							document.querySelector("video"),
-							"smallImageText"
-						)
-					);
-
-					presenceData.buttons = [
-						{
-							url: document.baseURI,
-							label: "Watch Video",
-						},
-						{
-							url: document.querySelector<HTMLAnchorElement>("div.ch_tit > a")
-								?.href,
-							label: "View Channel",
-						},
-					];
-				}
-			},
-		},
-		channel: {
-			env: true,
-			service: "NAVER_TV",
-			data: {
-				details: {
-					setTo: "Viewing channel:",
-				},
-				state: {
-					setTo: ghtEnv.sChannelName,
-				},
-				buttons: {
-					setTo: [
-						{
-							url: document.baseURI,
-							label: "View Channel",
-						},
-					],
-				},
-			},
-		},
-		"webnovel/list": {
-			service: "ANY",
-			data: {
-				details: {
-					setTo: "Viewing novel:",
-				},
-				state: {
-					setTo: document.querySelector("h2.book_title")?.textContent,
-				},
-				buttons: {
-					setTo: [
-						{
-							label: "View Novel",
-							url: document.baseURI,
-						},
-					],
-				},
-			},
-		},
-		"/webtoon/list": {
-			service: "NAVER_WEBTOON",
-			data: {
-				details: {
-					setTo: "Viewing comic:",
-				},
-				state: {
-					setTo: document
-						.querySelector("div.detail > h2")
-						?.textContent.replace(
-							document.querySelector("div.detail > h2 > span")?.textContent,
-							""
-						)
-						.trim(),
-				},
-				buttons: {
-					setTo: [
-						{
-							label: "View Comic",
-							url: document.baseURI,
-						},
-					],
-				},
-			},
-		},
-		"/webtoon/detail": {
-			service: "NAVER_WEBTOON",
-			data: {
-				details: {
-					setTo: (document
-						.querySelector<HTMLMetaElement>('[property="og:title"]')
-						?.content.split(" - ") || [])[0],
-				},
-				state: {
-					setTo: (document
-						.querySelector<HTMLMetaElement>('[property="og:title"]')
-						?.content.split(" - ") || [])[1],
-				},
-				buttons: {
-					setTo: [
-						{
-							url: document.baseURI,
-							label: "Read Episode",
-						},
-					],
-				},
-				smallImageKey: {
-					setTo: assets[`${data.service.toLowerCase()}_book`],
-				},
-			},
-		},
-		"/webnovel/detail": {
-			service: "ANY",
-			data: {
-				details: {
-					setTo: document.querySelector("#menuFloatingLayer > a")?.textContent,
-				},
-				state: {
-					setTo: document.querySelector("#topVolumeList")?.textContent,
-				},
-				buttons: {
-					setTo: [
-						{
-							url: document.baseURI,
-							label: "Read Episode",
-						},
-					],
-				},
-				smallImageKey: {
-					setTo: assets[`${data.service.toLowerCase()}_book`],
-				},
-			},
-		},
-		"/read": {
-			service: "NAVER",
-			data: {
-				details: {
-					setTo: "Reading article:",
-				},
-				state: {
-					setTo: document.querySelector("h2.end_tit")?.textContent,
-				},
-				buttons: {
-					setTo: [
-						{
-							url: document.baseURI,
-							label: "Read Article",
-						},
-					],
-				},
-				smallImageKey: {
-					setTo: assets[`${data.service.toLowerCase()}_book`],
-				},
-			},
-		},
-		"/player/([0-9]+)": {
-			service: "NAVER_NOW",
-			data: {
-				details: {
-					if: {
-						s: {
-							k: !!document.querySelector('[class="badge_live"]'),
-							v: true,
-							then: {
-								v: (
-									document.querySelector('[class="flow_text flow_text1"]') ||
-									document.querySelector('[class="episode_title"]')
-								)?.textContent,
-							},
-							else: {
-								v: "Viewing show:",
-							},
-						},
-					},
-				},
-				state: {
-					if: {
-						s: {
-							k: !!document.querySelector('[class="badge_live"]'),
-							v: true,
-							then: {
-								v: "• LIVE",
-							},
-							else: {
-								v: document.querySelector('[class="show_title"]')?.textContent,
-							},
-						},
-					},
-				},
-				buttons: {
-					setTo: [
-						{
-							label: document.querySelector('[class="badge_live"]')
-								? "Watch Stream"
-								: "View Show",
-							url: document.baseURI,
-						},
-					],
-				},
-				smallImageKey: {
-					if: {
-						s: {
-							k: !!document.querySelector('[class="badge_live"]'),
-							v: true,
-							then: {
-								v: assets[`${data.service.toLowerCase()}_live`],
-							},
-						},
-					},
-				},
-			},
-		},
-		"/show/([0-9]+)": {
-			service: "NAVER_NOW",
-			setPresenceData() {
-				if (
-					document.location.hash === "#highlight" &&
-					!!document.querySelector('[data-inview="true"]')
-				) {
-					const video =
-						document.querySelector<HTMLVideoElement>(
-							'[data-inview="true"] > div.video_wrap > a > video'
-						) || document.querySelector('[id="video_wrap"] > video');
+					const video = document.querySelector("video");
 
 					presenceData.details = document.querySelector(
-						'[data-inview="true"] > div.text_wrap > a.title'
+						"h2[class^=ArticleSection_article_title_]"
 					)?.textContent;
-					presenceData.state = "• HIGHLIGHT";
+					presenceData.state = document
+						.querySelector("strong[class^=ArticleSection_channel_title_]")
+						?.textContent.trim();
 
-					presenceData.startTimestamp = <number>(
-						getImageOrTimestamp(video, "startTimestamp")
-					);
-					presenceData.endTimestamp = <number>(
-						getImageOrTimestamp(video, "endTimestamp")
-					);
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestampsfromMedia(video);
+					presenceData.smallImageKey = MainAssets.Play;
+					presenceData.smallImageText = "Playing";
 
-					presenceData.smallImageKey = <string>(
-						getImageOrTimestamp(video, "smallImageKey")
-					);
-					presenceData.smallImageText = <string>(
-						getImageOrTimestamp(video, "smallImageText")
-					);
+					if (video.paused) {
+						presenceData.smallImageKey = MainAssets.Pause;
+						presenceData.smallImageText = "Paused";
+						delete presenceData.startTimestamp;
+						delete presenceData.endTimestamp;
+					}
 
 					presenceData.buttons = [
 						{
-							url: document.baseURI,
+							url: href,
 							label: "Watch Video",
 						},
-					];
-				} else {
-					presenceData.details = "Viewing show:";
-					presenceData.state = document.querySelector<HTMLImageElement>(
-						'[class="logo_show"]'
-					)?.alt;
-
-					presenceData.buttons = [
 						{
-							url: document.baseURI,
-							label: "View Show",
+							url: document.querySelector<HTMLAnchorElement>(
+								"a[class^=ArticleSection_link_channel_]"
+							).href,
+							label: "View Channel",
 						},
 					];
 				}
-			},
-		},
-		"/website": {
-			service: "NAVER_PAPAGO",
-			data: {
-				details: {
-					setTo: "Translating: Website",
-				},
-				state: {
-					setTo: `From: ${
-						document.querySelector(
-							"div.tool_box___3AiUH.select_wrap___1U1Ds > div:nth-child(1) > button > span:nth-child(1)"
-						)?.textContent
-					} - To: ${
-						document.querySelector(
-							"div.tool_box___3AiUH.select_wrap___1U1Ds > div:nth-child(3) > button > span:nth-child(1)"
-						)?.textContent
-					}`,
-				},
-				smallImageKey: {
-					setTo: assets[`${data.service.toLowerCase()}_language`],
-				},
-			},
-		},
-		"/": {
-			service: "NAVER_PAPAGO",
-			data: {
-				details: {
-					setTo: `Translating from: ${
-						document.querySelector("#ddSourceLanguageButton > span")
-							?.textContent
-					}`,
-				},
-				state: {
-					setTo: `To: ${
-						document.querySelector("#ddTargetLanguageButton > span")
-							?.textContent
-					}`,
-				},
-				smallImageKey: {
-					setTo: assets[`${data.service.toLowerCase()}_language`],
-				},
-			},
-		},
-		"/search.naver": {
-			service: "NAVER",
-			data: {
-				details: {
-					setTo: "Searching for:",
-				},
-				state: {
-					setTo:
-						new URLSearchParams(document.location.search).get("query") ||
-						"Something",
-				},
-			},
-		},
-		"/([a-z])": {
-			service: "ANY",
-			async setPresenceData() {
-				if (data.service === "NAVER_BLOG") {
-					presenceData.details = "Reading blog of:";
-					presenceData.state = blog;
+			} else if (document.querySelector("div[class^=showId_container]")) {
+				presenceData.details = "Viewing channel:";
+				presenceData.state = document.querySelector("h2").textContent;
+				presenceData.buttons = [
+					{
+						url: href,
+						label: "View Channel",
+					},
+				];
+			}
+			break;
+		}
+		case "NAVER_BLOG": {
+			if (pathname.match("/([a-z])")) {
+				presenceData.details = "Reading a blog post:";
+				presenceData.state = blog;
+
+				presenceData.buttons = [
+					{
+						url: href,
+						label: "Read Blog",
+					},
+				];
+			}
+			break;
+		}
+		case "NAVER_CAFE": {
+			if (pathname.match("/([a-z])")) {
+				cafeTitle ??= document.querySelector("h1.d-none")?.textContent;
+				if (cafeTitle) {
+					presenceData.details = "Viewing cafe:";
+					presenceData.state = cafeTitle;
 
 					presenceData.buttons = [
 						{
-							url: document.URL,
-							label: "Read Blog",
+							label: "View Cafe",
+							url: href,
 						},
 					];
-				} else if (data.service === "NAVER_CAFE") {
-					cafeTitle ??= document.querySelector("h1.d-none")?.textContent;
-					if (cafeTitle) {
-						presenceData.details = "Viewing cafe:";
-						presenceData.state = cafeTitle;
-
-						presenceData.buttons = [
-							{
-								label: "View Cafe",
-								url: document.URL,
-							},
-						];
-					} else if (document.location.pathname.includes("/search/")) {
-						presenceData.details = "Searching for:";
-						presenceData.state = new URLSearchParams(
-							document.location.search
-						).get("q");
-					}
-				}
-			},
-		},
-	};
-
-	for (const [k, v] of Object.entries(data.presence)) {
-		if (
-			(document.location.pathname.match(k) &&
-				(data.service === v.service || v.service === "ANY") &&
-				!v.env) ||
-			(v.env && k === ghtEnv.sPageName)
-		) {
-			if (v.setPresenceData) {
-				v.setPresenceData();
-				break;
+				} else if (pathname.includes("/search/"))
+					presenceData.details = "Searching for something";
 			}
-			for (const [key, PData] of Object.entries(v.data)) {
-				if (!PData.if && PData.setTo)
-					presenceData[<"state">key] = <string>PData.setTo;
-				else if (PData.if) {
-					if (PData.if.s.k === PData.if.s.v) {
-						if (!PData.if.s.then.delete)
-							presenceData[<"state">key] = <string>PData.if.s.then.v;
-						else delete presenceData[<"state">key];
-					} else if (PData.if.s.else) {
-						if (!PData.if.s.else.delete)
-							presenceData[<"state">key] = <string>PData.if.s.else.v;
-						else delete presenceData[<"state">key];
-					} else if (PData.if.else) {
-						for (const elseStatement of Object.values(PData.if.else)) {
-							if (elseStatement.k === elseStatement.v) {
-								if (!elseStatement.then.delete)
-									presenceData[<"state">key] = <string>elseStatement.then.v;
-								else delete presenceData[<"state">key];
-								break;
-							} else if (elseStatement.else) {
-								if (!elseStatement.else.delete)
-									presenceData[<"state">key] = <string>elseStatement.else.v;
-								else delete presenceData[<"state">key];
-								break;
-							}
-						}
-					}
+			break;
+		}
+		case "NAVER_SERIES": {
+			if (pathname.startsWith("/novel")) {
+				if (pathname.includes("detail.series")) {
+					presenceData.details = "Viewing novel:";
+					presenceData.state = document.querySelector("#content h2");
+					presenceData.buttons = [{ url: href, label: "View Novel" }];
+				}
+			} else if (pathname.startsWith("/webnovel")) {
+				if (pathname.includes("/list")) {
+					presenceData.details = "Viewing web novel:";
+					presenceData.state = document.querySelector("h2.title");
+					presenceData.buttons = [{ url: href, label: "View Novel" }];
+				} else if (pathname.includes("/detail")) {
+					presenceData.details = document.querySelector(
+						"#menuFloatingLayer > a"
+					).textContent;
+					presenceData.state =
+						document.querySelector("#topVolumeList").textContent;
+					presenceData.buttons = [{ url: href, label: "Read Epiosde" }];
+					presenceData.smallImageKey = MainAssets.Book;
 				}
 			}
+			break;
+		}
+		case "NAVER_WEBTOON": {
+			if (pathname.startsWith("/webtoon/list")) {
+				presenceData.details = "Viewing webtoon:";
+				presenceData.state = document.querySelector(
+					"h2[class^=EpisodeListInfo__title]"
+				);
+				presenceData.buttons = [{ url: href, label: "View Webtoon" }];
+			} else if (pathname.startsWith("/webtoon/detail")) {
+				const [title, ep] = document
+					.querySelector<HTMLMetaElement>('[property="og:title"]')
+					.content.split(" - ");
+				presenceData.details = ep;
+				presenceData.state = title;
+				presenceData.buttons = [{ url: href, label: "Read Episode" }];
+				presenceData.smallImageKey = MainAssets.Book;
+			}
+			break;
+		}
+		case "NAVER_PAPAGO": {
+			if (pathname.startsWith("/website")) {
+				presenceData.details = "Translating a website";
+				presenceData.smallImageKey = MainAssets.Language;
+			} else if (pathname.startsWith("/docs")) {
+				presenceData.details = "Translating a document";
+				presenceData.smallImageKey = MainAssets.Language;
+			} else if (pathname === "/") {
+				presenceData.details = "Translating something...";
+				presenceData.smallImageKey = MainAssets.Language;
+			}
+			break;
+		}
+		case "NAVER": {
+			if (pathname === "/search.naver")
+				presenceData.details = "Searching for something";
+
 			break;
 		}
 	}
