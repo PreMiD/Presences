@@ -51,6 +51,20 @@ presence.on("UpdateData", async () => {
 		case "archives": {
 			break;
 		}
+		case "games": {
+			if (pathList[2]) {
+				const gameTitle = document
+					.querySelector<HTMLParagraphElement>(".p-gameHeader__game_title")
+					.textContent.replace(/Walkthrough & Guides Wiki$/, "");
+				presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
+					".p-gameHeader__game_logo img"
+				);
+				presenceData.smallImageText = gameTitle;
+			} else {
+				presenceData.details = "Browsing games";
+			}
+			break;
+		}
 	}
 
 	presence.setActivity(presenceData);
