@@ -29,6 +29,11 @@ presence.on("UpdateData", async () => {
 			changeProtection: "minecraft wiki.changeProtection",
 			viewProtection: "minecraft wiki.viewProtection",
 			search: "general.search",
+			upload: "youtube.upload",
+			viewContributionsOf: "minecraft wiki.viewContributionsOf",
+			viewRecentChanges: "minecraft wiki.viewRecentChanges",
+			login: "kahoot.login",
+			subscriptions: "amazon.subscriptions",
 		}),
 		mainPath = pathname.split("/").filter(Boolean)[1] ?? "/",
 		pageTitle = document.querySelector<HTMLMetaElement>(
@@ -81,18 +86,30 @@ presence.on("UpdateData", async () => {
 		mainPath.startsWith(`${specialNamespace}:`) &&
 		!mainPath.startsWith(`${specialNamespace}:_`)
 	) {
+		// Preferences (Special:Preferences)
 		if (document.querySelector<HTMLFormElement>("#mw-prefs-form"))
 			presenceData.details = strings.advancedSettings;
+		// Recent changes (Special:RecentChanges, Special:RecentChangesLinked)
 		else if (document.querySelector<HTMLUListElement>(".mw-rcfilters-head")) {
-			presenceData.details = strings.viewHistory;
+			presenceData.details = strings.viewRecentChanges;
 			presenceData.state = document.querySelector<HTMLAnchorElement>(
 				"#mw-content-subtitle a"
 			);
-		} else if (document.querySelector<HTMLFormElement>("#movepage")) {
+		}
+		// Moving a page (Special:MovePage)
+		else if (document.querySelector<HTMLFormElement>("#movepage")) {
 			presenceData.details = strings.moving;
 			presenceData.state = document.querySelector<HTMLAnchorElement>(
 				"#mw-content-subtitle a"
 			);
+		}
+		// Logging in (Special:UserLogin, Special:CreateAccount)
+		else if (document.querySelector<HTMLDivElement>("#userloginForm")) {
+			presenceData.details = strings.login;
+		}
+		// Upload a file (Special:Upload)
+		else if (document.querySelector<HTMLFormElement>("#mw-upload-form")) {
+			presenceData.details = strings.upload;
 		} else {
 			presenceData.details = strings.viewAPage;
 			presenceData.state = pageTitle;

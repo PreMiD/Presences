@@ -34,7 +34,12 @@
 	],
 	"settings": [
 		{
-			"multiLanguage": "google classroom",
+			"multiLanguage": [
+				"google classroom",
+				"youtube",
+				"kahoot",
+				"amazon"
+			],
 			"id": "lang"
 		}
 	]
