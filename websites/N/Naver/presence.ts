@@ -28,18 +28,18 @@ const presence = new Presence({
 		naver_blog:
 			"https://cdn.discordapp.com/app-icons/827171204288872449/92aa96637c18dab3a2a8866d09beff24.png?size=512",
 		naver_blog_browse:
-			"https://cdn.discordapp.com/app-assets/827171204288872449/827173061572296804.png",
+			"https://cdn.discordapp.com/app-assets/827171204288872449/827173061572296804.png?size=512",
 		naver_cafe:
 			"https://cdn.discordapp.com/app-icons/848153448041938952/7d62d53f5fc4bcfcfc76338ad23603ee.png?size=512",
 	};
 /* eslint-enable camelcase */
 
 const enum MainAssets {
-	Browse = "https://cdn.discordapp.com/app-assets/825307070584586250/826435062756278273.png",
-	Book = "https://cdn.discordapp.com/app-assets/825307070584586250/826447462554140704.png",
-	Play = "https://cdn.discordapp.com/app-assets/827170810870890517/827172409979305995.png",
-	Pause = "https://cdn.discordapp.com/app-assets/827170810870890517/827172409936314378.png",
-	Language = "https://cdn.discordapp.com/app-assets/827170714729578546/827172528383590460.png",
+	Browse = "https://cdn.discordapp.com/app-assets/825307070584586250/826435062756278273.png?size=512",
+	Book = "https://cdn.discordapp.com/app-assets/825307070584586250/826447462554140704.png?size=512",
+	Play = "https://cdn.discordapp.com/app-assets/827170810870890517/827172409979305995.png?size=512",
+	Pause = "https://cdn.discordapp.com/app-assets/827170810870890517/827172409936314378.png?size=512",
+	Language = "https://cdn.discordapp.com/app-assets/827170714729578546/827172528383590460.png?size=512",
 }
 
 function getServiceName(url = document.location.hostname): [string, string] {
