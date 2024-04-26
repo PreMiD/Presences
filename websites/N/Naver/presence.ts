@@ -15,31 +15,24 @@ const presence = new Presence({
 	},
 	/* eslint-disable camelcase */
 	assets: Record<string, string> = {
-		naver:
-			"https://cdn.discordapp.com/app-icons/825307070584586250/a68964d8b1379c3440b25fda7b91ddd3.png?size=512",
-		naver_webtoon:
-			"https://cdn.discordapp.com/app-icons/827171135970869269/0b6d3b9f2cb6581d2fecda2b62bf6de2.png?size=512",
-		naver_series:
-			"https://cdn.discordapp.com/app-icons/907151903564120135/a7f2fb845d4b281b2c4dc34dd494969c.png?size=512",
-		naver_tv:
-			"https://cdn.discordapp.com/app-icons/827170810870890517/d23dc00b5edfade991b32fdd8cd6faa6.png?size=512",
-		naver_papago:
-			"https://cdn.discordapp.com/app-icons/827170714729578546/b3f02012b4ae188f245d9cd4e78be721.png?size=512",
-		naver_blog:
-			"https://cdn.discordapp.com/app-icons/827171204288872449/92aa96637c18dab3a2a8866d09beff24.png?size=512",
+		naver: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/0.png",
+		naver_webtoon: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/1.png",
+		naver_series: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/2.png",
+		naver_tv: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/3.png",
+		naver_papago: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/4.png",
+		naver_blog: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/5.png",
 		naver_blog_browse:
-			"https://cdn.discordapp.com/app-assets/827171204288872449/827173061572296804.png?size=512",
-		naver_cafe:
-			"https://cdn.discordapp.com/app-icons/848153448041938952/7d62d53f5fc4bcfcfc76338ad23603ee.png?size=512",
+			"https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/6.png",
+		naver_cafe: "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/7.png",
 	};
 /* eslint-enable camelcase */
 
 const enum MainAssets {
-	Browse = "https://cdn.discordapp.com/app-assets/825307070584586250/826435062756278273.png?size=512",
-	Book = "https://cdn.discordapp.com/app-assets/825307070584586250/826447462554140704.png?size=512",
-	Play = "https://cdn.discordapp.com/app-assets/827170810870890517/827172409979305995.png?size=512",
-	Pause = "https://cdn.discordapp.com/app-assets/827170810870890517/827172409936314378.png?size=512",
-	Language = "https://cdn.discordapp.com/app-assets/827170714729578546/827172528383590460.png?size=512",
+	Browse = "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/8.png",
+	Book = "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/9.png",
+	Play = "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/10.png",
+	Pause = "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/11.png",
+	Language = "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/12.png",
 }
 
 function getServiceName(url = document.location.hostname): [string, string] {
