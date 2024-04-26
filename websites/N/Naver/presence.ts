@@ -81,7 +81,8 @@ presence.on("UpdateData", async () => {
 		largeImageKey: assets[data.service[1].toLowerCase()],
 		smallImageKey:
 			assets[`${data.service[1].toLowerCase()}_browse`] ?? MainAssets.Browse,
-	};
+	},
+	 { pathname, href } = document.location;
 
 	data.settings = [
 		{
@@ -93,7 +94,7 @@ presence.on("UpdateData", async () => {
 
 	switch (data.service[1]) {
 		case "NAVER_TV": {
-			if (document.location.pathname.match("/v/([0-9]+)")) {
+			if (pathname.match("/v/([0-9]+)")) {
 				if (
 					document.querySelector<HTMLElement>("div.ad_info_area")?.offsetParent
 				) {
@@ -136,7 +137,7 @@ presence.on("UpdateData", async () => {
 
 					presenceData.buttons = [
 						{
-							url: location.href,
+							url: href,
 							label: "Watch Video",
 						},
 						{
@@ -152,7 +153,7 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document.querySelector("h2").textContent;
 				presenceData.buttons = [
 					{
-						url: location.href,
+						url: href,
 						label: "View Channel",
 					},
 				];
@@ -160,13 +161,13 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "NAVER_BLOG": {
-			if (location.pathname.match("/([a-z])")) {
+			if (pathname.match("/([a-z])")) {
 				presenceData.details = "Reading a blog post:";
 				presenceData.state = blog;
 
 				presenceData.buttons = [
 					{
-						url: location.href,
+						url: href,
 						label: "Read Blog",
 					},
 				];
@@ -174,7 +175,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "NAVER_CAFE": {
-			if (location.pathname.match("/([a-z])")) {
+			if (pathname.match("/([a-z])")) {
 				cafeTitle ??= document.querySelector("h1.d-none")?.textContent;
 				if (cafeTitle) {
 					presenceData.details = "Viewing cafe:";
@@ -183,34 +184,34 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Cafe",
-							url: location.href,
+							url: href,
 						},
 					];
-				} else if (document.location.pathname.includes("/search/"))
+				} else if (pathname.includes("/search/"))
 					presenceData.details = "Searching for something";
 			}
 			break;
 		}
 		case "NAVER_SERIES": {
-			if (location.pathname.startsWith("/novel")) {
-				if (location.pathname.includes("detail.series")) {
+			if (pathname.startsWith("/novel")) {
+				if (pathname.includes("detail.series")) {
 					presenceData.details = "Viewing novel:";
 					presenceData.state = document.querySelector("#content h2");
-					presenceData.buttons = [{ url: location.href, label: "View Novel" }];
+					presenceData.buttons = [{ url: href, label: "View Novel" }];
 				}
-			} else if (location.pathname.startsWith("/webnovel")) {
-				if (location.pathname.includes("/list")) {
+			} else if (pathname.startsWith("/webnovel")) {
+				if (pathname.includes("/list")) {
 					presenceData.details = "Viewing web novel:";
 					presenceData.state = document.querySelector("h2.title");
-					presenceData.buttons = [{ url: location.href, label: "View Novel" }];
-				} else if (location.pathname.includes("/detail")) {
+					presenceData.buttons = [{ url: href, label: "View Novel" }];
+				} else if (pathname.includes("/detail")) {
 					presenceData.details = document.querySelector(
 						"#menuFloatingLayer > a"
 					).textContent;
 					presenceData.state =
 						document.querySelector("#topVolumeList").textContent;
 					presenceData.buttons = [
-						{ url: location.href, label: "Read Epiosde" },
+						{ url: href, label: "Read Epiosde" },
 					];
 					presenceData.smallImageKey = MainAssets.Book;
 				}
@@ -218,38 +219,38 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "NAVER_WEBTOON": {
-			if (location.pathname.startsWith("/webtoon/list")) {
+			if (pathname.startsWith("/webtoon/list")) {
 				presenceData.details = "Viewing webtoon:";
 				presenceData.state = document.querySelector(
 					"h2[class^=EpisodeListInfo__title]"
 				);
-				presenceData.buttons = [{ url: location.href, label: "View Webtoon" }];
-			} else if (location.pathname.startsWith("/webtoon/detail")) {
+				presenceData.buttons = [{ url: href, label: "View Webtoon" }];
+			} else if (pathname.startsWith("/webtoon/detail")) {
 				const [title, ep] = document
 					.querySelector<HTMLMetaElement>('[property="og:title"]')
 					.content.split(" - ");
 				presenceData.details = ep;
 				presenceData.state = title;
-				presenceData.buttons = [{ url: location.href, label: "Read Episode" }];
+				presenceData.buttons = [{ url: href, label: "Read Episode" }];
 				presenceData.smallImageKey = MainAssets.Book;
 			}
 			break;
 		}
 		case "NAVER_PAPAGO": {
-			if (location.pathname.startsWith("/website")) {
+			if (pathname.startsWith("/website")) {
 				presenceData.details = "Translating a website";
 				presenceData.smallImageKey = MainAssets.Language;
-			} else if (location.pathname.startsWith("/docs")) {
+			} else if (pathname.startsWith("/docs")) {
 				presenceData.details = "Translating a document";
 				presenceData.smallImageKey = MainAssets.Language;
-			} else if (location.pathname === "/") {
+			} else if (pathname === "/") {
 				presenceData.details = "Translating something...";
 				presenceData.smallImageKey = MainAssets.Language;
 			}
 			break;
 		}
 		case "NAVER": {
-			if (location.pathname === "/search.naver")
+			if (pathname === "/search.naver")
 				presenceData.details = "Searching for something";
 
 			break;
