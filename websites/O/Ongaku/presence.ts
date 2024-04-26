@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Logo = "https://ongaku.zvbt.space/favicon.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/O/Ongaku/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {
