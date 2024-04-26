@@ -11,25 +11,6 @@ function hasPermissions(): boolean {
 	return !document.querySelector(".permissions-errors");
 }
 
-const locationSpecificLogos: Record<string, string> = {
-		ko: "https://i.imgur.com/Xox00yw.png",
-		pt: "https://i.imgur.com/pliOKN8.png",
-		uk: "https://i.imgur.com/fUOurR4.png",
-	},
-	/* eslint-disable camelcase */
-	specialNamespaces: Record<string, string> = {
-		Minecraft_Wiki: "Minecraft Wiki",
-		Minecraft_Dungeons: "Minecraft Dungeons",
-		MCD: "Minecraft Dungeons",
-		Minecraft_Legends: "Minecraft Legends",
-		MCL: "Minecraft Legends",
-		Minecraft_Earth: "Minecraft Earth",
-		MCE: "Minecraft Earth",
-		Minecraft_Story_Mode: "Minecraft Story Mode",
-		MCSM: "Minecraft Story Mode",
-	};
-/* eslint-enable camelcase */
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
@@ -57,8 +38,9 @@ presence.on("UpdateData", async () => {
 			"meta[property='og:title']"
 		)?.content;
 
-	presenceData.largeImageKey =
-		locationSpecificLogos[hostname.split(".")[0]] ?? Assets.Logo;
+	presenceData.largeImageKey = getComputedStyle(
+		document.querySelector<HTMLAnchorElement>(".mw-wiki-logo")
+	).backgroundImage.match(/url\("(.+)"\)/)[1];
 
 	if (
 		searchParams.get("action") === "edit" ||
@@ -112,12 +94,12 @@ presence.on("UpdateData", async () => {
 				presenceData.state = pageTitle;
 			}
 		}
-	} else if (
-		mainPath.split(":")[0] in specialNamespaces &&
-		mainPath.includes(":")
-	) {
-		const namespace = mainPath.split(":")[0];
-		presenceData.details = `${strings.readingAbout} ${specialNamespaces[namespace]}`;
+	} else if (/:[^_]/.test(mainPath)) {
+		const namespace = pageTitle.slice(
+			0,
+			mainPath.match(/.*(?=:[^_])/)[0].length
+		);
+		presenceData.details = `${strings.readingAbout} ${namespace}`;
 		presenceData.state = pageTitle.slice(namespace.length + 1);
 		presenceData.buttons = [{ label: strings.buttonViewPage, url: href }];
 	} else {
