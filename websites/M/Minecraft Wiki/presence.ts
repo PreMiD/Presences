@@ -1,3 +1,5 @@
+import { getUserNamespace, getTalkNamespace } from "./util";
+
 const presence = new Presence({
 		clientId: "1232903356025143297",
 	}),
@@ -34,6 +36,7 @@ presence.on("UpdateData", async () => {
 			viewRecentChanges: "minecraft wiki.viewRecentChanges",
 			login: "kahoot.login",
 			subscriptions: "amazon.subscriptions",
+			btnViewThread: "apple.btnViewThread",
 		}),
 		mainPath = pathname.split("/").filter(Boolean)[1] ?? "/",
 		pageTitle = document.querySelector<HTMLMetaElement>(
@@ -47,7 +50,7 @@ presence.on("UpdateData", async () => {
 			.match(/.*(?=:[^_])/)?.[0],
 		userNamespace = await getUserNamespace(),
 		talkNamespace = await getTalkNamespace(),
-		currentNamespace = pageTitle.match(/.*(?=:[^_])/)?.[0] ?? "";
+		currentNamespace = mainPath.match(/.*(?=:[^_])/)?.[0] ?? "";
 
 	presenceData.largeImageKey = getComputedStyle(
 		document.querySelector<HTMLAnchorElement>(".mw-wiki-logo")
@@ -78,7 +81,9 @@ presence.on("UpdateData", async () => {
 	} else if (mainPath === "/") presenceData.details = strings.viewHome;
 	else if (currentNamespace === userNamespace) {
 		presenceData.details = strings.viewUser;
-		presenceData.state = pageTitle.slice(5);
+		presenceData.state = pageTitle.slice(
+			decodeURIComponent(userNamespace).length + 1
+		);
 		presenceData.buttons = [{ label: strings.buttonViewProfile, url: href }];
 	} else if (
 		currentNamespace.toLowerCase().includes(talkNamespace.toLowerCase())
@@ -88,6 +93,7 @@ presence.on("UpdateData", async () => {
 			currentNamespace === talkNamespace
 				? document.querySelector<HTMLSpanElement>(".mw-page-title-main")
 				: pageTitle;
+		presenceData.buttons = [{ label: strings.btnViewThread, url: href }];
 	} else if (currentNamespace === specialNamespace) {
 		// Preferences (Special:Preferences)
 		if (document.querySelector<HTMLFormElement>("#mw-prefs-form"))
@@ -118,10 +124,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = pageTitle;
 		}
 	} else if (currentNamespace) {
-		const namespace = pageTitle.slice(
-			0,
-			mainPath.match(/.*(?=:[^_])/)[0].length
-		);
+		const namespace = decodeURIComponent(currentNamespace);
 		presenceData.details = `${strings.readingAbout} ${namespace}`;
 		presenceData.state = pageTitle.slice(namespace.length + 1);
 		presenceData.buttons = [{ label: strings.buttonViewPage, url: href }];
