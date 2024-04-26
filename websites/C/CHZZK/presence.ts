@@ -33,7 +33,10 @@ const enum ChzzkAssets {
 let oldLang: string, strings: Awaited<ReturnType<typeof getStrings>>;
 
 presence.on("UpdateData", async () => {
-	const newLang = await presence.getSetting<string>("lang");
+	const newLang = await presence.getSetting<string>("lang"),
+		showStreamerLogo = await presence.getSetting<boolean>("logo"),
+		showElapsedTime = await presence.getSetting<boolean>("time");
+
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
@@ -71,19 +74,21 @@ presence.on("UpdateData", async () => {
 					presenceData.state = document.querySelector(
 						"p[class^=video_information_name]"
 					);
-					presenceData.largeImageKey = (await presence.getSetting("logo"))
+					presenceData.largeImageKey = showStreamerLogo
 						? streamerLogo.href.replace(streamerLogo.search, "")
 						: Assets.Logo;
 
 					if (pathname.startsWith("/live")) {
 						presenceData.smallImageKey = ChzzkAssets.Live;
 						presenceData.smallImageText = strings.live;
-						presenceData.startTimestamp =
-							Math.floor(Date.now() / 1000) -
-							presence.timestampFromFormat(
-								document.querySelector("span[class^=video_information_count]")
-									.textContent
-							);
+						if (showElapsedTime) {
+							presenceData.startTimestamp =
+								Math.floor(Date.now() / 1000) -
+								presence.timestampFromFormat(
+									document.querySelector("span[class^=video_information_count]")
+										.textContent
+								);
+						}
 						presenceData.buttons = [{ url: href, label: strings.watchStream }];
 					} else {
 						presenceData.smallImageKey = ChzzkAssets.Play;

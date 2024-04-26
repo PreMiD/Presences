@@ -29,6 +29,12 @@
 			"title": "Show Streamer Logo",
 			"icon": "fad fa-images",
 			"value": true
+		},
+		{
+			"id": "time",
+			"title": "Show Stream Elapsed Time",
+			"icon": "fad fa-images",
+			"value": false
 		}
 	]
 }
