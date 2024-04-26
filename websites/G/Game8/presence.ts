@@ -9,9 +9,49 @@ const enum Assets {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: Assets.Logo,
-		startTimestamp: browsingTimestamp,
-	};
+			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname, href } = document.location,
+		pathList = pathname.split("/").filter(Boolean);
+
+	switch (pathList[0] ?? "/") {
+		case "/": {
+			presenceData.details = "Browsing home page";
+			break;
+		}
+		case "articles": {
+			if (pathList[1]) {
+				if (pathList[2]) {
+					if (pathList[1] === "author") {
+						presenceData.details = "Browsing articles by an author";
+						presenceData.state = document.querySelector<HTMLDivElement>(
+							".p-authorListItem__lead"
+						);
+						presenceData.smallImageKey =
+							document.querySelector<HTMLImageElement>(
+								".p-authorListItem__img"
+							);
+					} else {
+						presenceData.details = "Reading an article";
+						presenceData.state = document.querySelector("h1");
+						presenceData.buttons = [{ label: "Read article", url: href }];
+					}
+				} else if (pathList[1] === "author") {
+					presenceData.details = "Browsing authors";
+				} else {
+					presenceData.details = "Browsing articles by category";
+					presenceData.state = document.querySelector("h1");
+				}
+			} else {
+				presenceData.details = "Browsing articles";
+			}
+			break;
+		}
+		case "archives": {
+			break;
+		}
+	}
 
 	presence.setActivity(presenceData);
 });
