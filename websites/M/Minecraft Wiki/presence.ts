@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "1232903356025143297",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-var veactionLast: string | null = null;
+let veactionLast: string | null = null;
 
 function hasPermissions(): boolean {
 	return !document.querySelector(".permissions-errors");
@@ -37,17 +37,33 @@ async function prepare(): Promise<PresenceData> {
 			btnViewThread: "apple.btnViewThread",
 			viewWatchlist: "minecraft wiki.viewWatchlist",
 		}),
-		mwConfig = await presence.getPageletiable<{
-			wgPageName: string;
-			wgNamespaceNumber: number;
-			wgTitle: string;
-			wgCanonicalSpecialPageName: string | false;
-			wgRelevantPageName: string;
-			wgRelevantUserName: string | null;
-			wgIsMainPage: boolean | null;
-		}>('mw"]["config"]["values'),
+		{
+			"mw.config.values.wgPageName": wgPageName,
+			"mw.config.values.wgNamespaceNumber": wgNamespaceNumber,
+			"mw.config.values.wgTitle": wgTitle,
+			"mw.config.values.wgCanonicalSpecialPageName": wgCanonicalSpecialPageName,
+			"mw.config.values.wgRelevantPageName": wgRelevantPageName,
+			"mw.config.values.wgRelevantUserName": wgRelevantUserName,
+			"mw.config.values.wgIsMainPage": wgIsMainPage
+		} = await presence.getPageVariable<{
+			"mw.config.values.wgPageName": string,
+			"mw.config.values.wgNamespaceNumber": number,
+			"mw.config.values.wgTitle": string,
+			"mw.config.values.wgCanonicalSpecialPageName": string | false,
+			"mw.config.values.wgRelevantPageName": string,
+			"mw.config.values.wgRelevantUserName": string | null,
+			"mw.config.values.wgIsMainPage": boolean | null
+		}>([
+			"mw.config.values.wgPageName",
+			"mw.config.values.wgNamespaceNumber",
+			"mw.config.values.wgTitle",
+			"mw.config.values.wgCanonicalSpecialPageName",
+			"mw.config.values.wgRelevantPageName",
+			"mw.config.values.wgRelevantUserName",
+			"mw.config.values.wgIsMainPage"
+		]),
 		mainPath = pathname.split("/").filter(Boolean)[1] ?? "/",
-		pageTitle = mwConfig.wgPageName.replace(/_/g, "");
+		pageTitle = wgPageName.replace(/_/g, " ");
 	
 	veactionLast = searchParams.get("veaction");
 
@@ -79,22 +95,22 @@ async function prepare(): Promise<PresenceData> {
 	} else if (searchParams.get("search")) {
 		presenceData.details = strings.search;
 		presenceData.state = searchParams.get("search");
-	} else if (mwConfig.wgNamespaceNumber === 2) {
+	} else if (wgNamespaceNumber === 2) {
 		// User namespace
 		presenceData.details = strings.viewUser;
-		presenceData.state = mwConfig.wgTitle;
+		presenceData.state = wgTitle;
 		presenceData.buttons = [{ label: strings.buttonViewProfile, url: href }];
-	} else if (mwConfig.wgNamespaceNumber % 2 === 1) {
+	} else if (wgNamespaceNumber % 2 === 1) {
 		// All talk namespaces
 		presenceData.details = strings.viewAThread;
 		presenceData.state =
-			mwConfig.wgNamespaceNumber === 1
-				? mwConfig.wgTitle
+			wgNamespaceNumber === 1
+				? wgTitle
 				: pageTitle;
 		presenceData.buttons = [{ label: strings.btnViewThread, url: href }];
-	} else if (mwConfig.wgNamespaceNumber === -1) {
+	} else if (wgNamespaceNumber === -1) {
 		// Special namespace
-		switch (mwConfig.wgCanonicalSpecialPageName) {
+		switch (wgCanonicalSpecialPageName) {
 			case "Preferences":
 				// Preferences (Special:Preferences)
 				presenceData.details = strings.advancedSettings;
@@ -110,12 +126,12 @@ async function prepare(): Promise<PresenceData> {
 			case "Recentchangeslinked":
 				// Related changes (Special:RecentChangesLinked)
 				presenceData.details = strings.viewRecentChanges;
-				presenceData.state = mwConfig.wgRelevantPageName.replace(/_/g, '');
+				presenceData.state = wgRelevantPageName.replace(/_/g, " ");
 				break;
 		 	case "Movepage":
 				// Moving a page (Special:MovePage)
 				presenceData.details = strings.moving;
-				presenceData.state = mwConfig.wgRelevantPageName.replace(/_/g, '');
+				presenceData.state = wgRelevantPageName.replace(/_/g, " ");
 				break;
 			case "Userlogin":
 			case "CreateAccount":
@@ -130,25 +146,23 @@ async function prepare(): Promise<PresenceData> {
 		 	case "Contributions":
 				// Contributions (Special:Contributions)
 				presenceData.details = strings.viewContributionsOf;
-				presenceData.state = mwConfig.wgRelevantUserName;
+				presenceData.state = wgRelevantUserName;
 				break;
 			default:
 				presenceData.details = strings.viewAPage;
 				presenceData.state = pageTitle;
 		}
-	} else if (mwConfig.wgNamespaceNumber) {
+	} else if (wgNamespaceNumber) {
 		// Not main namespace
-		const namespace = pageTitle.split(':')[0];
+		const namespace = pageTitle.split(":")[0];
 		presenceData.details = `${strings.readingAbout} ${namespace}`;
-		presenceData.state = mwConfig.wgTitle;
+		presenceData.state = wgTitle;
 		presenceData.buttons = [{ label: strings.buttonViewPage, url: href }];
 	} else if (
 		mainPath === "/" ||
-		mwConfig.wgIsMainPage
-	) {
-		// Main Page
-		presenceData.details = strings.viewHome;
-	} else {
+		wgIsMainPage
+	) presenceData.details = strings.viewHome;
+	else {
 		presenceData.details = strings.viewAPage;
 		presenceData.state = pageTitle;
 		presenceData.buttons = [{ label: strings.buttonViewPage, url: href }];
@@ -157,7 +171,7 @@ async function prepare(): Promise<PresenceData> {
 }
 
 (async (): Promise<void> => {
-	var presenceData = await prepare();
+	let presenceData = await prepare();
 	presence.on("UpdateData", async () => {
 		const veaction = new URLSearchParams(document.location.search).get("veaction");
 		if ( veactionLast !== veaction ) {
