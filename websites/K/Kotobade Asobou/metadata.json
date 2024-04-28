@@ -16,9 +16,9 @@
 	"matches": [
 		"*://taximanli.github.io/*"
 	],
-	"version": "1.0.0",
-	"logo": "https://taximanli.github.io/kotobade-asobou/kotobade-asobou_logo_512x512.png",
-	"thumbnail": "https://taximanli.github.io/kotobade-asobou/kotobade-asobou_card_600x314.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kotobade%20Asobou/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kotobade%20Asobou/assets/thumbnail.png",
 	"color": "#22c55e",
 	"category": "games",
 	"tags": [
