@@ -12,7 +12,7 @@ async function prepare(): Promise<PresenceData> {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
 		},
-		{ href, pathname, search } = document.location,
+		{ href, search } = document.location,
 		searchParams = new URLSearchParams(search),
 		strings = await presence.getStrings({
 			viewHome: "general.viewHome",
