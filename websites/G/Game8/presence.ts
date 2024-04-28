@@ -12,7 +12,8 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, href } = document.location,
+		{ pathname, href, search } = document.location,
+		searchParams = new URLSearchParams(search),
 		pathList = pathname.split("/").filter(Boolean);
 
 	switch (pathList[0] ?? "/") {
@@ -49,6 +50,12 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "archives": {
+			if (pathList[1] === "search") {
+				presenceData.details = "Searching for articles";
+				presenceData.state = searchParams.get("query");
+			} else {
+				presenceData.details = "Browsing game walkthroughs";
+			}
 			break;
 		}
 		case "games": {
