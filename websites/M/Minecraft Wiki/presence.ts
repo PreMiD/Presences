@@ -103,12 +103,14 @@ async function prepare(): Promise<PresenceData> {
 				// Subscriptions (Special:Watchlist)
 				presenceData.details = strings.viewWatchlist;
 				break;
-			case "Recentchangeslinked":
-				// Related changes (Special:RecentChangesLinked)
-				presenceData.state = mwConfig.wgRelevantPageName.replace(/_/g, '');
 			case "Recentchanges":
 				// Recent changes (Special:RecentChanges)
 				presenceData.details = strings.viewRecentChanges;
+				break;
+			case "Recentchangeslinked":
+				// Related changes (Special:RecentChangesLinked)
+				presenceData.details = strings.viewRecentChanges;
+				presenceData.state = mwConfig.wgRelevantPageName.replace(/_/g, '');
 				break;
 		 	case "Movepage":
 				// Moving a page (Special:MovePage)
