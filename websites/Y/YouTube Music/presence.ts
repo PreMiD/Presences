@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 
 	if (["playing", "paused"].includes(mediaSession.playbackState)) {
 		if (privacyMode) {
-			presenceData.type = ActivityType.Playing;
+			presenceData.type = ActivityType.Listening;
 			return presence.setActivity({
 				...(mediaSession.playbackState === "playing" && {
 					largeImageKey:
@@ -151,7 +151,7 @@ presence.on("UpdateData", async () => {
 		};
 	} else if (showBrowsing) {
 		if (privacyMode) {
-			presenceData.type = ActivityType.Playing;
+			presenceData.type = ActivityType.Listening;
 			return presence.setActivity({
 				largeImageKey:
 					"https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/logo.png",
@@ -266,7 +266,7 @@ presence.on("UpdateData", async () => {
 
 	if (!showBrowsing) return presence.clearActivity();
 
-	presenceData.type = ActivityType.Playing;
+	presenceData.type = ActivityType.Listening;
 	presence.setActivity(presenceData);
 });
 
