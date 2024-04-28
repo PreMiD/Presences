@@ -14,6 +14,8 @@ presence.on("UpdateData", async () => {
 	};
 
 	presenceData.details = document.title;
-	presenceData.state = document.querySelector(".Mui-selected").querySelector("[data-tip]").textContent;
+	presenceData.state = document
+		.querySelector(".Mui-selected")
+		.querySelector("[data-tip]").textContent;
 	presence.setActivity(presenceData);
 });
