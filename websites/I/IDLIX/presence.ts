@@ -7,15 +7,13 @@ async function getStrings() {
 	return presence.getStrings(
 		{
 			browse: "general.browsing",
-			buttonViewEpisode: "general.buttonViewEpisode",
-			buttonViewMovie: "general.buttonViewMovie",
+			buttonWatchVideo: "general.buttonWatchVideo",
 			buttonViewPage: "general.buttonViewPage",
 			buttonWatchMovie: "general.buttonWatchVideo",
 			paused: "general.paused",
 			play: "general.playing",
 			search: "general.searchFor",
 			viewHome: "general.viewHome",
-			viewMovie: "general.viewMovie",
 			viewShow: "general.viewShow",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
@@ -44,14 +42,77 @@ presence.on(
 	}
 );
 
+function videoDetails(presenceData: PresenceData, href: string) {
+	delete presenceData.startTimestamp;
+	const title =
+		document
+			.querySelector('[class="pag_episodes"]')
+			?.querySelectorAll("a")[1]
+			?.getAttribute("title") ??
+		document.querySelector('[class="epih1"]')?.textContent ??
+		document.querySelector('[class="data"]').firstElementChild?.textContent ??
+		document
+			.querySelector('[property="og:title"]')
+			?.getAttribute("content")
+			?.replace(" - Subtitle Indonesia - IDLIX", "") ??
+		document
+			.querySelector("title")
+			?.textContent?.split("- Subtitle Indonesia - IDLIX")?.[0] ??
+		"Unknown";
+
+	presenceData.largeImageKey =
+		document
+			.querySelector('[class="poster"]')
+			?.querySelector("img")
+			?.getAttribute("src") ??
+		document
+			.querySelector('[class="owl-wrapper"]')
+			?.querySelector("img")
+			?.getAttribute("src") ??
+		Assets.Logo;
+	if (!isNaN(duration)) {
+		presenceData.details = title;
+		presenceData.state =
+			document.querySelector('[class="epih3"]')?.textContent ?? "";
+		presenceData.buttons = [
+			{
+				label: strings.buttonWatchVideo,
+				url: href,
+			},
+		];
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
+		presenceData.smallImageText = paused ? strings.paused : strings.play;
+		if (!paused) 
+			[, presenceData.endTimestamp] = presence.getTimestamps(current, duration);
+		
+	} else {
+		presenceData.details = strings.viewShow;
+		presenceData.state = title;
+		presenceData.buttons = [
+			{
+				label: strings.buttonViewPage,
+				url: href,
+			},
+		];
+	}
+	return presenceData;
+}
+
 presence.on("UpdateData", async () => {
 	// Check to see if the site name includes idlix if not then return
+	const { hostname } = document.location;
 	if (
 		!document
 			.querySelector('[property="og:site_name"]')
 			?.getAttribute("content")
 			.toLowerCase()
-			.includes("idflix")
+			.includes("idflix") &&
+		!document
+			.querySelector("title")
+			?.textContent.toLowerCase()
+			.includes("idlix") &&
+		!hostname?.toLowerCase().includes("idlix") &&
+		!hostname?.toLowerCase().includes("idflix")
 	)
 		return;
 	const presenceData: PresenceData = {
@@ -103,100 +164,18 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData);
 		return;
 	}
+
 	switch (pathname.split("/")[1]) {
 		case "": {
 			presenceData.details = strings.viewHome;
 			break;
 		}
-		case "movie": {
-			delete presenceData.startTimestamp;
-			const title = document
-				.querySelector('[property="og:title"]')
-				?.getAttribute("content")
-				?.replace(" - Subtitle Indonesia - IDLIX", "");
-			presenceData.largeImageKey = document
-				.querySelector('[class="poster"]')
-				?.querySelector("img")
-				?.getAttribute("src");
-			if (isVideo && !isNaN(duration)) {
-				presenceData.details = title;
-				presenceData.buttons = [
-					{
-						label: strings.buttonWatchMovie,
-						url: href,
-					},
-				];
-				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
-				presenceData.smallImageText = paused ? strings.paused : strings.play;
-				if (!paused) {
-					[, presenceData.endTimestamp] = presence.getTimestamps(
-						current,
-						duration
-					);
-				}
-			} else {
-				presenceData.details = strings.viewMovie;
-				presenceData.state = title;
-				presenceData.buttons = [
-					{
-						label: strings.buttonViewMovie,
-						url: href,
-					},
-				];
-			}
-			break;
-		}
+
 		case "episodes":
 		case "episode":
-		case "tvseries": {
-			delete presenceData.startTimestamp;
-			const title =
-				document
-					.querySelector('[class="pag_episodes"]')
-					?.querySelectorAll("a")[1]
-					?.getAttribute("title") ??
-				document.querySelector('[class="epih1"]')?.textContent ??
-				document.querySelector('[class="data"]').firstElementChild?.textContent;
-			presenceData.largeImageKey =
-				document
-					.querySelector('[class="poster"]')
-					?.querySelector("img")
-					?.getAttribute("src") ??
-				document
-					.querySelector('[class="owl-wrapper"]')
-					?.querySelector("img")
-					?.getAttribute("src") ??
-				Assets.Logo;
-			if (isVideo && !isNaN(duration)) {
-				presenceData.details = title;
-				presenceData.state =
-					document.querySelector('[class="epih3"]')?.textContent;
-				presenceData.buttons = [
-					{
-						label: strings.buttonViewEpisode,
-						url: href,
-					},
-				];
-
-				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
-				presenceData.smallImageText = paused ? strings.paused : strings.play;
-
-				if (!paused) {
-					[, presenceData.endTimestamp] = presence.getTimestamps(
-						current,
-						duration
-					);
-				}
-			} else {
-				presenceData.details = strings.viewShow;
-				presenceData.state = title;
-				presenceData.buttons = [
-					{
-						label: "View Show",
-						url: href,
-					},
-				];
-			}
+		case "tvseries":
+		case "movie": {
+			videoDetails(presenceData, href);
 			break;
 		}
 		case "trending":
@@ -217,7 +196,8 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		default: {
-			if (heading && category) {
+			if (isVideo) videoDetails(presenceData, href);
+			else if (heading && category) {
 				presenceData.details = `Viewing ${heading} ${category}`;
 				presenceData.state = `Viewing page ${
 					document.querySelector('[class="current"]')?.textContent
