@@ -59,14 +59,10 @@ presence.on("UpdateData", async () => {
 
 		case "watch":
 			if (!privacy) {
-				presenceData.smallImageKey = document.querySelector(
-					".vjs-playing"
-				)
+				presenceData.smallImageKey = document.querySelector(".vjs-playing")
 					? Assets.Play
 					: Assets.Pause;
-				presenceData.details = document
-					.querySelector("h1")
-					.textContent.trim();
+				presenceData.details = document.querySelector("h1").textContent.trim();
 				presenceData.state =
 					document.querySelector("#channel-name").textContent;
 				if (document.querySelector(".vjs-playing"))
