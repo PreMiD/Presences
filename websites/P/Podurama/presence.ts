@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 		},
 		[, sect, subsect] = document.location.pathname.split("/"),
 		player = document.querySelector(".audio-player"),
-		usetimeleft = await presence.getSetting<boolean>("usetimeleft");
+		useTimeLeft = await presence.getSetting<boolean>("usetimeleft");
 
 	if (player) {
 		const audioEl = document.querySelector("audio"),
