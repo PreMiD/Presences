@@ -17,9 +17,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("covers"),
-		]);
-
-	const video = document.querySelector("video"),
+		]),
+		video = document.querySelector("video"),
 		getInfo = document.querySelectorAll('[type="application/ld+json"]')?.[1]
 			?.innerHTML
 			? JSON.parse(
