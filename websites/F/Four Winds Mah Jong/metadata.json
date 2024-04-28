@@ -16,9 +16,9 @@
 		"*://www.4windsmj.com/*",
 		"*://4windsmj.com/*"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/QyfS9WR.png",
-	"thumbnail": "https://www.4windsmj.com/store/wp-content/uploads/2017/12/maisema.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Four%20Winds%20Mah%20Jong/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Four%20Winds%20Mah%20Jong/assets/thumbnail.png",
 	"color": "#8C3D36",
 	"category": "games",
 	"tags": [
