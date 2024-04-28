@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "1232903356025143297",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-var veactionLast: string? = null;
+var veactionLast: string | null = null;
 
 function hasPermissions(): boolean {
 	return !document.querySelector(".permissions-errors");
@@ -43,8 +43,8 @@ async function prepare(): Promise<PresenceData> {
 			wgTitle: string;
 			wgCanonicalSpecialPageName: string | false;
 			wgRelevantPageName: string;
-			wgRelevantUserName: string?;
-			wgIsMainPage: boolean?;
+			wgRelevantUserName: string | null;
+			wgIsMainPage: boolean | null;
 		}>('mw"]["config"]["values'),
 		mainPath = pathname.split("/").filter(Boolean)[1] ?? "/",
 		pageTitle = mwConfig.wgPageName.replace(/_/g, "");
