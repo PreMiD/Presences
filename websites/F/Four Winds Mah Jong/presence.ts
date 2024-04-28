@@ -9,7 +9,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum PresenceAssets {
-	Logo = "https://i.imgur.com/QyfS9WR.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/F/Four%20Winds%20Mah%20Jong/assets/logo.png",
 }
 
 const staticPages: Record<string, PresenceData> = {
