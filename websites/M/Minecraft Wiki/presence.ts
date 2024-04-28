@@ -62,7 +62,6 @@ async function prepare(): Promise<PresenceData> {
 			"mw.config.values.wgRelevantUserName",
 			"mw.config.values.wgIsMainPage"
 		),
-		mainPath = pathname.split("/").filter(Boolean)[1] ?? "/",
 		pageTitle = wgPageName.replace(/_/g, " ");
 	
 	veactionLast = searchParams.get("veaction");
@@ -154,14 +153,10 @@ async function prepare(): Promise<PresenceData> {
 		}
 	} else if (wgNamespaceNumber) {
 		// Not main namespace
-		const namespace = pageTitle.split(":")[0];
-		presenceData.details = `${strings.readingAbout} ${namespace}`;
+		presenceData.details = `${strings.readingAbout} ${pageTitle.split(":")[0]}`;
 		presenceData.state = wgTitle;
 		presenceData.buttons = [{ label: strings.buttonViewPage, url: href }];
-	} else if (
-		mainPath === "/" ||
-		wgIsMainPage
-	) presenceData.details = strings.viewHome;
+	} else if (wgIsMainPage) presenceData.details = strings.viewHome;
 	else {
 		presenceData.details = strings.viewAPage;
 		presenceData.state = pageTitle;
@@ -173,8 +168,8 @@ async function prepare(): Promise<PresenceData> {
 (async (): Promise<void> => {
 	let presenceData = await prepare();
 	presence.on("UpdateData", async () => {
-		const veaction = new URLSearchParams(document.location.search).get("veaction");
-		if ( veactionLast !== veaction ) presenceData = await prepare();
+		if ( veactionLast !== new URLSearchParams(document.location.search).get("veaction") )
+			presenceData = await prepare();
 		else presence.setActivity(presenceData);
 	});
 })();
