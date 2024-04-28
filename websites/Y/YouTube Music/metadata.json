@@ -82,7 +82,7 @@
 		},
 		{
 			"id": "usetimeleft",
-			"title": "Use time left",
+			"title": "Use Time Left",
 			"icon": "fad fa-stopwatch",
 			"value": true
 		}
