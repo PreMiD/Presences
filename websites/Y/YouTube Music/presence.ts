@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 			hidePaused,
 			showBrowsing,
 			privacyMode,
-			usetimeleft,
+			useTimeLeft,
 		] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("timestamps"),
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("hidePaused"),
 			presence.getSetting<boolean>("browsing"),
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("usetimeleft"),
+			presence.getSetting<boolean>("useTimeLeft"),
 		]),
 		{ mediaSession } = navigator,
 		watchID =
@@ -44,11 +44,11 @@ presence.on("UpdateData", async () => {
 		if (!videoListenerAttached) {
 			//* If video scrobbled, update timestamps
 			videoElement.addEventListener("seeked", () =>
-				updateSongTimestamps(usetimeleft)
+				updateSongTimestamps(useTimeLeft)
 			);
 			//* If video resumes playing, update timestamps
 			videoElement.addEventListener("play", () =>
-				updateSongTimestamps(usetimeleft)
+				updateSongTimestamps(useTimeLeft)
 			);
 
 			videoListenerAttached = true;
@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
 					.querySelector<HTMLSpanElement>("#left-controls > span")
 					.textContent.trim()
 		) {
-			updateSongTimestamps(usetimeleft);
+			updateSongTimestamps(useTimeLeft);
 
 			if (mediaTimestamps[0] === mediaTimestamps[1]) return;
 
@@ -270,7 +270,7 @@ presence.on("UpdateData", async () => {
 	presence.setActivity(presenceData);
 });
 
-function updateSongTimestamps(usetimeleft: boolean) {
+function updateSongTimestamps(useTimeLeft: boolean) {
 	const element = document
 			.querySelector<HTMLSpanElement>("#left-controls > span")
 			.textContent.trim()
@@ -278,7 +278,7 @@ function updateSongTimestamps(usetimeleft: boolean) {
 		[currTimes, totalTimes] = element;
 
 	mediaTimestamps = presence.getTimestamps(
-		usetimeleft ? presence.timestampFromFormat(currTimes) : Date.now(),
-		usetimeleft ? presence.timestampFromFormat(totalTimes) : null
+		useTimeLeft ? presence.timestampFromFormat(currTimes) : Date.now(),
+		useTimeLeft ? presence.timestampFromFormat(totalTimes) : null
 	);
 }
