@@ -6,7 +6,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum PresenceAssets {
-	Logo = "https://taximanli.github.io/kotobade-asobou/kotobade-asobou_logo_512x512.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/K/Kotobade%20Asobou/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {
