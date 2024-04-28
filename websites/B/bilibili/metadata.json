@@ -23,7 +23,7 @@
 		"biligame.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*(bilibili|biligame)[.]com[/]",
-	"version": "2.4.1",
+	"version": "2.4.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/bilibili/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/bilibili/assets/thumbnail.jpg",
 	"color": "#05acff",
