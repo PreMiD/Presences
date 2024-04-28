@@ -96,6 +96,15 @@
 			"value": false
 		},
 		{
+			"id": "hidePaused",
+			"title": "Hide Paused",
+			"icon": "fad fa-pause-circle",
+			"value": false,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
 			"id": "privacy-shown",
 			"title": "Show Privacy Button",
 			"icon": "fad fa-eye-low-vision",
