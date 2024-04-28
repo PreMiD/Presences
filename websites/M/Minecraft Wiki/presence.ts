@@ -1,15 +1,14 @@
-import { getUserNamespace, getTalkNamespace } from "./util";
-
 const presence = new Presence({
 		clientId: "1232903356025143297",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	veactionLast = null;
 
 function hasPermissions(): boolean {
 	return !document.querySelector(".permissions-errors");
 }
 
-presence.on("UpdateData", async () => {
+async function prepare(): Promise<PresenceData> {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
 		},
@@ -38,27 +37,29 @@ presence.on("UpdateData", async () => {
 			btnViewThread: "apple.btnViewThread",
 			viewWatchlist: "minecraft wiki.viewWatchlist",
 		}),
+		mwConfig = await presence.getPageletiable<{
+			wgPageName: string,
+			wgNamespaceNumber: number,
+			wgTitle: string,
+			wgCanonicalSpecialPageName: string | false,
+			wgRelevantPageName: string,
+			wgRelevantUserName: string?,
+			wgIsMainPage: boolean?
+		}>('mw"]["config"]["values'),
 		mainPath = pathname.split("/").filter(Boolean)[1] ?? "/",
-		pageTitle = document.querySelector<HTMLMetaElement>(
-			"meta[property='og:title']"
-		)?.content,
-		specialNamespace = new URL(
-			document.querySelector<HTMLAnchorElement>("#t-specialpages a").href
-		).pathname
-			.split("/")
-			.filter(Boolean)[1]
-			.match(/.*(?=:[^_])/)?.[0],
-		userNamespace = await getUserNamespace(),
-		talkNamespace = await getTalkNamespace(),
-		currentNamespace = mainPath.match(/.*(?=:[^_])/)?.[0] ?? "";
+		pageTitle = mwConfig.wgPageName.replace(/_/g, "");
+	
+	veactionLast = searchParams.get("veaction");
 
 	presenceData.largeImageKey = getComputedStyle(
 		document.querySelector<HTMLAnchorElement>(".mw-wiki-logo")
-	).backgroundImage.match(/url\("(.+)"\)/)[1];
+	).backgroundImage.match(/url\("(.+)"\)/)[1] ?? "https://cdn.rcd.gg/PreMiD/websites/M/Minecraft%20Wiki/assets/logo.png";
 
 	if (
 		searchParams.get("action") === "edit" ||
-		searchParams.get("veaction") === "edit"
+		searchParams.get("action") === "submit" ||
+		searchParams.get("veaction") === "edit" ||
+		searchParams.get("veaction") === "editsource"
 	) {
 		presenceData.details = hasPermissions()
 			? strings.editing
@@ -78,67 +79,88 @@ presence.on("UpdateData", async () => {
 	} else if (searchParams.get("search")) {
 		presenceData.details = strings.search;
 		presenceData.state = searchParams.get("search");
-	} else if (mainPath === "/") presenceData.details = strings.viewHome;
-	else if (currentNamespace === userNamespace) {
+	} else if (mwConfig.wgNamespaceNumber === 2) {
+		// User namespace
 		presenceData.details = strings.viewUser;
-		presenceData.state = pageTitle.slice(
-			decodeURIComponent(userNamespace).length + 1
-		);
+		presenceData.state = mwConfig.wgTitle;
 		presenceData.buttons = [{ label: strings.buttonViewProfile, url: href }];
-	} else if (
-		currentNamespace.toLowerCase().includes(talkNamespace.toLowerCase())
-	) {
+	} else if (mwConfig.wgNamespaceNumber % 2 === 1) {
+		// All talk namespaces
 		presenceData.details = strings.viewAThread;
 		presenceData.state =
-			currentNamespace === talkNamespace
-				? document.querySelector<HTMLSpanElement>(".mw-page-title-main")
+			mwConfig.wgNamespaceNumber === 1
+				? mwConfig.wgTitle
 				: pageTitle;
 		presenceData.buttons = [{ label: strings.btnViewThread, url: href }];
-	} else if (currentNamespace === specialNamespace) {
-		if (document.querySelector<HTMLFormElement>("#mw-prefs-form"))
-			// Preferences (Special:Preferences)
-			presenceData.details = strings.advancedSettings;
-		else if (document.querySelector<HTMLFormElement>("#mw-watchlist-form"))
-			// Subscriptions (Special:Watchlist)
-			presenceData.details = strings.viewWatchlist;
-		else if (document.querySelector<HTMLUListElement>(".mw-rcfilters-head")) {
-			// Recent changes (Special:RecentChanges, Special:RecentChangesLinked)
-			presenceData.details = strings.viewRecentChanges;
-			presenceData.state = document.querySelector<HTMLAnchorElement>(
-				"#mw-content-subtitle a"
-			);
-		} else if (document.querySelector<HTMLFormElement>("#movepage")) {
-			// Moving a page (Special:MovePage)
-			presenceData.details = strings.moving;
-			presenceData.state = document.querySelector<HTMLAnchorElement>(
-				"#mw-content-subtitle a"
-			);
-		} else if (document.querySelector<HTMLDivElement>("#userloginForm"))
-			// Logging in (Special:UserLogin, Special:CreateAccount)
-			presenceData.details = strings.login;
-		else if (document.querySelector<HTMLFormElement>("#mw-upload-form"))
-			// Upload a file (Special:Upload)
-			presenceData.details = strings.upload;
-		else if (
-			document.querySelector<HTMLDivElement>(".mw-contributions-user-tools")
-		) {
-			// Contributions (Special:Contributions)
-			presenceData.details = strings.viewContributionsOf;
-			presenceData.state = pageTitle.split("/").slice(1).join("/");
-		} else {
-			presenceData.details = strings.viewAPage;
-			presenceData.state = pageTitle;
+	} else if (mwConfig.wgNamespaceNumber === -1) {
+		// Special namespace
+		switch (mwConfig.wgCanonicalSpecialPageName) {
+			case "Preferences":
+				// Preferences (Special:Preferences)
+				presenceData.details = strings.advancedSettings;
+				break;
+			case "Watchlist":
+				// Subscriptions (Special:Watchlist)
+				presenceData.details = strings.viewWatchlist;
+				break;
+			case "Recentchangeslinked":
+				// Related changes (Special:RecentChangesLinked)
+				presenceData.state = mwConfig.wgRelevantPageName.replace(/_/g, '');
+			case "Recentchanges":
+				// Recent changes (Special:RecentChanges)
+				presenceData.details = strings.viewRecentChanges;
+				break;
+		 	case "Movepage":
+				// Moving a page (Special:MovePage)
+				presenceData.details = strings.moving;
+				presenceData.state = mwConfig.wgRelevantPageName.replace(/_/g, '');
+				break;
+			case "Userlogin":
+			case "CreateAccount":
+				// Logging in (Special:UserLogin, Special:CreateAccount)
+				presenceData.details = strings.login;
+				break;
+			case "Upload":
+				// Upload a file (Special:Upload)
+				presenceData.details = strings.upload;
+				presenceData.state = searchParams.get("wpDestFile");
+				break;
+		 	case "Contributions":
+				// Contributions (Special:Contributions)
+				presenceData.details = strings.viewContributionsOf;
+				presenceData.state = mwConfig.wgRelevantUserName;
+				break;
+			default:
+				presenceData.details = strings.viewAPage;
+				presenceData.state = pageTitle;
 		}
-	} else if (currentNamespace) {
-		const namespace = decodeURIComponent(currentNamespace);
+	} else if (mwConfig.wgNamespaceNumber) {
+		// Not main namespace
+		const namespace = pageTitle.split(':')[0];
 		presenceData.details = `${strings.readingAbout} ${namespace}`;
-		presenceData.state = pageTitle.slice(namespace.length + 1);
+		presenceData.state = mwConfig.wgTitle;
 		presenceData.buttons = [{ label: strings.buttonViewPage, url: href }];
+	} else if (
+		mainPath === "/" ||
+		mwConfig.wgIsMainPage
+	) {
+		// Main Page
+		presenceData.details = strings.viewHome;
 	} else {
 		presenceData.details = strings.viewAPage;
 		presenceData.state = pageTitle;
 		presenceData.buttons = [{ label: strings.buttonViewPage, url: href }];
 	}
+	return presenceData;
+}
 
-	presence.setActivity(presenceData);
-});
+(async (): Promise<void> => {
+	var presenceData = await prepare();
+	presence.on("UpdateData", async () => {
+		const veaction = new URLSearchParams(document.location.search).get("veaction");
+		if ( veactionLast !== veaction ) {
+			presenceData = await prepare();
+		}
+		else presence.setActivity(presenceData);
+	});
+})();
