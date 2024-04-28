@@ -16,10 +16,10 @@ const multiUploader = document.querySelector("div.membersinfo-normal");
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/B/bilibili/assets/logo.png",
-	},
-	privacy = await presence.getSetting<boolean>("privacy");
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/bilibili/assets/logo.png",
+		},
+		privacy = await presence.getSetting<boolean>("privacy");
 
 	async function getTimestamps() {
 		video = document.querySelector("bpx-player-container");
