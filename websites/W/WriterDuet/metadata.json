@@ -8,7 +8,7 @@
 	"description": {
 		"en": "Plan, write, and share with the industry-standard software used by over 1 million screenwriters, TV shows, and blockbusters"
 	},
-	"url": "writerduet.com",
+	"url": "www.writerduet.com",
 	"matches": [
 		"https://*.writerduet.com/*"
 	],
