@@ -53,7 +53,7 @@ async function prepare(): Promise<PresenceData> {
 			"mw.config.values.wgRelevantPageName": string,
 			"mw.config.values.wgRelevantUserName": string | null,
 			"mw.config.values.wgIsMainPage": boolean | null
-		}>([
+		}>(
 			"mw.config.values.wgPageName",
 			"mw.config.values.wgNamespaceNumber",
 			"mw.config.values.wgTitle",
@@ -61,7 +61,7 @@ async function prepare(): Promise<PresenceData> {
 			"mw.config.values.wgRelevantPageName",
 			"mw.config.values.wgRelevantUserName",
 			"mw.config.values.wgIsMainPage"
-		]),
+		),
 		mainPath = pathname.split("/").filter(Boolean)[1] ?? "/",
 		pageTitle = wgPageName.replace(/_/g, " ");
 	
