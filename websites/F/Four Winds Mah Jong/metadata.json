@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "193714715631812608",
+		"name": "nihongojouzu"
+	},
+	"service": "Four Winds Mah Jong",
+	"description": {
+		"en": "Four Winds is based on traditional Chinese board game for four players. The origins of Mah Jong can be traced back to set-forming card and domino games played for centuries in China, but in its present form the game has been played only for about a hundred years."
+	},
+	"url": [
+		"www.4windsmj.com",
+		"4windsmj.com"
+	],
+	"matches": [
+		"*://www.4windsmj.com/*",
+		"*://4windsmj.com/*"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/QyfS9WR.png",
+	"thumbnail": "https://www.4windsmj.com/store/wp-content/uploads/2017/12/maisema.png",
+	"color": "#8C3D36",
+	"category": "games",
+	"tags": [
+		"mahjong",
+		"software",
+		"rules"
+	]
+}
