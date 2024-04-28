@@ -83,10 +83,12 @@ presence.on("UpdateData", async () => {
 		case "channel":
 			presenceData.details = "Viewing channel";
 
-			if (!privacy)
+			if (!privacy) {
 				presenceData.state = document
 					.querySelectorAll(".channel-profile")[0]
 					.textContent.trim();
+			}
+
 			break;
 
 		default:
