@@ -77,8 +77,9 @@ presence.on("UpdateData", async () => {
 
 	if (video) {
 		const { mediaSession } = navigator;
-		if (mediaSession.playbackState !== "playing" && hidePaused) return presence.clearActivity();
-		
+		if (mediaSession.playbackState !== "playing" && hidePaused)
+			return presence.clearActivity();
+
 		const resolver = [
 				youtubeEmbedResolver,
 				youtubeShortsResolver,
