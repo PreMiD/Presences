@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 			delete presenceData.endTimestamp;
 		} else {
 			presenceData.startTimestamp = startTS;
-			if (usetimeleft) presenceData.endTimestamp = endTS;
+			if (useTimeLeft) presenceData.endTimestamp = endTS;
 			else delete presenceData.endTimestamp;
 		}
 
