@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 
 	if (["playing", "paused"].includes(mediaSession.playbackState)) {
 		if (privacyMode) {
-			presenceData.type = ActivityType.Playing;
+			presenceData.type = ActivityType.Listening;
 			return presence.setActivity({
 				...(mediaSession.playbackState === "playing" && {
 					largeImageKey:
