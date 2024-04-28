@@ -22,7 +22,7 @@
 		"*://minecraft.wiki/*",
 		"*://*.minecraft.wiki/*"
 	],
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Minecraft%20Wiki/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Minecraft%20Wiki/assets/thumbnail.png",
 	"color": "#3776A9",

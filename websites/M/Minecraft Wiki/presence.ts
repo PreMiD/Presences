@@ -1,8 +1,8 @@
 const presence = new Presence({
 		clientId: "1232903356025143297",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000),
-	veactionLast = null;
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+var veactionLast: string? = null;
 
 function hasPermissions(): boolean {
 	return !document.querySelector(".permissions-errors");
@@ -38,13 +38,13 @@ async function prepare(): Promise<PresenceData> {
 			viewWatchlist: "minecraft wiki.viewWatchlist",
 		}),
 		mwConfig = await presence.getPageletiable<{
-			wgPageName: string,
-			wgNamespaceNumber: number,
-			wgTitle: string,
-			wgCanonicalSpecialPageName: string | false,
-			wgRelevantPageName: string,
-			wgRelevantUserName: string?,
-			wgIsMainPage: boolean?
+			wgPageName: string;
+			wgNamespaceNumber: number;
+			wgTitle: string;
+			wgCanonicalSpecialPageName: string | false;
+			wgRelevantPageName: string;
+			wgRelevantUserName: string?;
+			wgIsMainPage: boolean?;
 		}>('mw"]["config"]["values'),
 		mainPath = pathname.split("/").filter(Boolean)[1] ?? "/",
 		pageTitle = mwConfig.wgPageName.replace(/_/g, "");
