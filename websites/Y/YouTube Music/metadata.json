@@ -79,6 +79,12 @@
 			"if": {
 				"privacy": false
 			}
+		},
+		{
+			"id": "usetimeleft",
+			"title": "Use time left",
+			"icon": "fad fa-stopwatch",
+			"value": true
 		}
 	]
 }

@@ -18,6 +18,7 @@ presence.on("UpdateData", async () => {
 			hidePaused,
 			showBrowsing,
 			privacyMode,
+			usetimeleft,
 		] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("timestamps"),
@@ -25,6 +26,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("hidePaused"),
 			presence.getSetting<boolean>("browsing"),
 			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("usetimeleft"),
 		]),
 		{ mediaSession } = navigator,
 		watchID =
@@ -41,9 +43,13 @@ presence.on("UpdateData", async () => {
 	if (videoElement) {
 		if (!videoListenerAttached) {
 			//* If video scrobbled, update timestamps
-			videoElement.addEventListener("seeked", updateSongTimestamps);
+			videoElement.addEventListener("seeked", () =>
+				updateSongTimestamps(usetimeleft)
+			);
 			//* If video resumes playing, update timestamps
-			videoElement.addEventListener("play", updateSongTimestamps);
+			videoElement.addEventListener("play", () =>
+				updateSongTimestamps(usetimeleft)
+			);
 
 			videoListenerAttached = true;
 		}
@@ -60,7 +66,7 @@ presence.on("UpdateData", async () => {
 
 	if (["playing", "paused"].includes(mediaSession.playbackState)) {
 		if (privacyMode) {
-			presenceData.type = ActivityType.Listening;
+			presenceData.type = ActivityType.Playing;
 			return presence.setActivity({
 				...(mediaSession.playbackState === "playing" && {
 					largeImageKey:
@@ -80,7 +86,7 @@ presence.on("UpdateData", async () => {
 					.querySelector<HTMLSpanElement>("#left-controls > span")
 					.textContent.trim()
 		) {
-			updateSongTimestamps();
+			updateSongTimestamps(usetimeleft);
 
 			if (mediaTimestamps[0] === mediaTimestamps[1]) return;
 
@@ -145,7 +151,7 @@ presence.on("UpdateData", async () => {
 		};
 	} else if (showBrowsing) {
 		if (privacyMode) {
-			presenceData.type = ActivityType.Listening;
+			presenceData.type = ActivityType.Playing;
 			return presence.setActivity({
 				largeImageKey:
 					"https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/logo.png",
@@ -260,12 +266,11 @@ presence.on("UpdateData", async () => {
 
 	if (!showBrowsing) return presence.clearActivity();
 
-	//* For some bizarre reason the timestamps are NaN eventho they are never actually set in testing, this spread is a workaround
-	presenceData.type = ActivityType.Listening;
+	presenceData.type = ActivityType.Playing;
 	presence.setActivity(presenceData);
 });
 
-function updateSongTimestamps() {
+function updateSongTimestamps(usetimeleft: boolean) {
 	const element = document
 			.querySelector<HTMLSpanElement>("#left-controls > span")
 			.textContent.trim()
@@ -273,7 +278,7 @@ function updateSongTimestamps() {
 		[currTimes, totalTimes] = element;
 
 	mediaTimestamps = presence.getTimestamps(
-		presence.timestampFromFormat(currTimes),
-		presence.timestampFromFormat(totalTimes)
+		usetimeleft ? presence.timestampFromFormat(currTimes) : Date.now(),
+		usetimeleft ? presence.timestampFromFormat(totalTimes) : null
 	);
 }
