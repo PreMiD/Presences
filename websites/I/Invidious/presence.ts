@@ -4,7 +4,7 @@ const presence = new Presence({
 
 function getTime() {
 	const time = document
-		.querySelectorAll(".vjs-current-time-display")[0]
+		.querySelector(".vjs-current-time-display")
 		.textContent.split(":")
 		.map(n => Number(n));
 	if (time.length === 3)
@@ -59,17 +59,17 @@ presence.on("UpdateData", async () => {
 
 		case "watch":
 			if (!privacy) {
-				presenceData.smallImageKey = document.querySelectorAll(
+				presenceData.smallImageKey = document.querySelector(
 					".vjs-playing"
-				)[0]
+				)
 					? Assets.Play
 					: Assets.Pause;
 				presenceData.details = document
-					.querySelectorAll("h1")[0]
+					.querySelector("h1")
 					.textContent.trim();
 				presenceData.state =
 					document.querySelector("#channel-name").textContent;
-				if (document.querySelectorAll(".vjs-playing")[0])
+				if (document.querySelector(".vjs-playing"))
 					presenceData.startTimestamp = getTime();
 			}
 			break;
@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
 		case "playlist":
 			presenceData.details = "Viewing playlist";
 			if (!privacy)
-				presenceData.state = document.querySelectorAll("h3")[0].textContent;
+				presenceData.state = document.querySelector("h3").textContent;
 			break;
 
 		case "channel":
@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
 
 			if (!privacy) {
 				presenceData.state = document
-					.querySelectorAll(".channel-profile")[0]
+					.querySelector(".channel-profile")
 					.textContent.trim();
 			}
 
