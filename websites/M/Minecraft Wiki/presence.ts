@@ -168,7 +168,7 @@ async function prepare(): Promise<PresenceData> {
 (async (): Promise<void> => {
 	let presenceData = await prepare();
 	presence.on("UpdateData", async () => {
-		if ( veactionLast !== new URLSearchParams(document.location.search).get("veaction") )
+		if (veactionLast !== new URLSearchParams(document.location.search).get("veaction"))
 			presenceData = await prepare();
 		else presence.setActivity(presenceData);
 	});
