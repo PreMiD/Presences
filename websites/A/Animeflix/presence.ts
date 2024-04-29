@@ -32,9 +32,11 @@ presence.on("UpdateData", async () => {
 		}
 		default:
 			if (pathname.includes("/watch")) {
-				const epData = JSON.parse(document.querySelector<HTMLMetaElement>('script[id="syncData"]').textContent);
-				presenceData.details = `Watching ${epData.name.replace(/\b[a-z]/g, (letter: string) => letter.toUpperCase())}`;
-				presenceData.state = `Watch for free on Animeflix!`;
+				presenceData.details = `Watching ${JSON.parse(
+					document.querySelector<HTMLMetaElement>('script[id="syncData"]')
+						.textContent
+				).name.replace(/\b[a-z]/g, (letter: string) => letter.toUpperCase())}`;
+				presenceData.state = "Watch for free on Animeflix!";
 			} else presenceData.details = "Exploring Animeflix";
 	}
 	presence.setActivity(presenceData);
