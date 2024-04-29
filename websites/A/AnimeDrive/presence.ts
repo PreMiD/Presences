@@ -5,15 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.discordapp.com/icons/702098578251841577/be50b5dbcb30bd99512b6df29284db0c.webp",
+			largeImageKey: "https://i.imgur.com/VlBtvJo.png",
 			startTimestamp: browsingTimestamp,
-			buttons: [
-				{
-					label: "Meglátogatás",
-					url: "https://animedrive.hu/",
-				},
-			],
 		},
 		{ pathname, search } = document.location;
 
@@ -44,10 +37,12 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `ID: ${animeId}`;
 				}
 
-				presenceData.buttons.push({
-					label: "Adatlap",
-					url: `https://animedrive.hu/anime/?id=${animeId}`,
-				});
+				presenceData.buttons = [
+					{
+						label: "Adatlap",
+						url: `https://animedrive.hu/anime/?id=${animeId}`,
+					},
+				];
 			} else presenceData.details = "Anime Böngészése";
 
 			break;
@@ -70,12 +65,14 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `ID: ${animeId}`;
 				}
 
-				presenceData.buttons.push({
-					label: "Lejátszás",
-					url: `https://animedrive.hu/watch/?id=${animeId}&ep=${
-						episodeElement.textContent.match(/\d+/)[0]
-					}`,
-				});
+				presenceData.buttons = [
+					{
+						label: "Lejátszás",
+						url: `https://animedrive.hu/watch/?id=${animeId}&ep=${
+							episodeElement.textContent.match(/\d+/)[0]
+						}`,
+					},
+				];
 			} else presenceData.details = "Anime Nézése";
 
 			break;
