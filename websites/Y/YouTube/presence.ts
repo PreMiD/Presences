@@ -51,6 +51,7 @@ presence.on("UpdateData", async () => {
 			channelPic,
 			logo,
 			buttons,
+			hidePaused,
 		] = [
 			getSetting<string>("lang", "en"),
 			getSetting<boolean>("privacy", true),
@@ -62,6 +63,7 @@ presence.on("UpdateData", async () => {
 			getSetting<boolean>("channelPic", false),
 			getSetting<number>("logo", 0),
 			getSetting<boolean>("buttons", true),
+			getSetting<boolean>("hidePaused", true),
 		],
 		{ pathname, hostname, search, href } = document.location;
 
@@ -74,6 +76,10 @@ presence.on("UpdateData", async () => {
 	).find(video => video.duration);
 
 	if (video) {
+		const { mediaSession } = navigator;
+		if (mediaSession.playbackState !== "playing" && hidePaused)
+			return presence.clearActivity();
+
 		const resolver = [
 				youtubeEmbedResolver,
 				youtubeShortsResolver,
