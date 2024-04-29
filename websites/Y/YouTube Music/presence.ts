@@ -18,6 +18,7 @@ presence.on("UpdateData", async () => {
 			hidePaused,
 			showBrowsing,
 			privacyMode,
+			useTimeLeft,
 		] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("timestamps"),
@@ -25,6 +26,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("hidePaused"),
 			presence.getSetting<boolean>("browsing"),
 			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("useTimeLeft"),
 		]),
 		{ mediaSession } = navigator,
 		watchID =
@@ -41,9 +43,13 @@ presence.on("UpdateData", async () => {
 	if (videoElement) {
 		if (!videoListenerAttached) {
 			//* If video scrobbled, update timestamps
-			videoElement.addEventListener("seeked", updateSongTimestamps);
+			videoElement.addEventListener("seeked", () =>
+				updateSongTimestamps(useTimeLeft)
+			);
 			//* If video resumes playing, update timestamps
-			videoElement.addEventListener("play", updateSongTimestamps);
+			videoElement.addEventListener("play", () =>
+				updateSongTimestamps(useTimeLeft)
+			);
 
 			videoListenerAttached = true;
 		}
@@ -80,7 +86,7 @@ presence.on("UpdateData", async () => {
 					.querySelector<HTMLSpanElement>("#left-controls > span")
 					.textContent.trim()
 		) {
-			updateSongTimestamps();
+			updateSongTimestamps(useTimeLeft);
 
 			if (mediaTimestamps[0] === mediaTimestamps[1]) return;
 
@@ -260,12 +266,11 @@ presence.on("UpdateData", async () => {
 
 	if (!showBrowsing) return presence.clearActivity();
 
-	//* For some bizarre reason the timestamps are NaN eventho they are never actually set in testing, this spread is a workaround
 	presenceData.type = ActivityType.Listening;
 	presence.setActivity(presenceData);
 });
 
-function updateSongTimestamps() {
+function updateSongTimestamps(useTimeLeft: boolean) {
 	const element = document
 			.querySelector<HTMLSpanElement>("#left-controls > span")
 			.textContent.trim()
@@ -273,7 +278,7 @@ function updateSongTimestamps() {
 		[currTimes, totalTimes] = element;
 
 	mediaTimestamps = presence.getTimestamps(
-		presence.timestampFromFormat(currTimes),
-		presence.timestampFromFormat(totalTimes)
+		useTimeLeft ? presence.timestampFromFormat(currTimes) : Date.now(),
+		useTimeLeft ? presence.timestampFromFormat(totalTimes) : null
 	);
 }
