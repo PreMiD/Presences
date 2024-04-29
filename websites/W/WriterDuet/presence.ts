@@ -20,14 +20,10 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
-	};
-	
-	let [,page, subpage] = document.location.pathname.split("/");
+	},
+	[,page, subpage] = document.location.pathname.split("/");
 
-	// /#home exists for some reason
-	if (page.startsWith("#")) page = page.split("#")[0];
-
-	switch(page) {
+	switch(page.split("#")[0]) {
 		case Pages.script: {
 			presenceData.details = document.title;
 			presenceData.state = document
