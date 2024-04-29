@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://www.writerduet.com/script/wd-logo-square.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/W/WriterDuet/assets/logo.png",
 }
 
 const enum Pages {

@@ -16,9 +16,9 @@
 		"https://*.writerduet.com/*",
 		"https://*writerduet.helpscoutdocs.com/*"
 	],
-	"version": "1.0.0",
-	"logo": "https://www.writerduet.com/script/wd-logo-square.png",
-	"thumbnail": "https://www.writerduet.com/static/media/logo.3fd682b7.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/WriterDuet/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WriterDuet/assets/thumbnail.png",
 	"color": "#4598d4",
 	"category": "other",
 	"tags": [
