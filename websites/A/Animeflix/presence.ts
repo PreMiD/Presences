@@ -32,21 +32,9 @@ presence.on("UpdateData", async () => {
 		}
 		default:
 			if (pathname.includes("/watch")) {
-				const episodeName = document.querySelector<HTMLMetaElement>(
-					'meta[name="anime-skip.episode.name"]'
-				);
-				presenceData.details = `Watching ${
-					document.querySelector<HTMLMetaElement>(
-						'meta[name="anime-skip.show.name"]'
-					).content
-				}`;
-				presenceData.state = episodeName.content.includes("Episode")
-					? episodeName.content
-					: `${
-							document.querySelector<HTMLMetaElement>(
-								'meta[name="anime-skip.episode.number"]'
-							).content
-					  }. ${episodeName.content}`;
+				const epData = JSON.parse(document.querySelector<HTMLMetaElement>('script[id="syncData"]').textContent);
+				presenceData.details = `Watching ${epData.name.replace(/\b[a-z]/g, (letter: string) => letter.toUpperCase())}`;
+				presenceData.state = `Watch for free on Animeflix!`;
 			} else presenceData.details = "Exploring Animeflix";
 	}
 	presence.setActivity(presenceData);
