@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "291136400068444161",
+		"name": "ferivoq"
+	},
+	"service": "AnimeDrive",
+	"description": {
+		"en": "AnimeDrive is an anime streaming website with Hungarian subs/dubs"
+	},
+	"url": [
+		"animedrive.hu",
+		"www.animedrive.hu"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/VlBtvJo.png",
+	"thumbnail": "https://i.imgur.com/uP6s5yc.png",
+	"color": "#6f0094",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"animes",
+		"animedrive"
+	]
+}
