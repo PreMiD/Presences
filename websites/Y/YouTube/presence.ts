@@ -51,6 +51,7 @@ presence.on("UpdateData", async () => {
 			channelPic,
 			logo,
 			buttons,
+			hideHome,
 		] = [
 			getSetting<string>("lang", "en"),
 			getSetting<boolean>("privacy", true),
@@ -62,6 +63,7 @@ presence.on("UpdateData", async () => {
 			getSetting<boolean>("channelPic", false),
 			getSetting<number>("logo", 0),
 			getSetting<boolean>("buttons", true),
+			getSetting<boolean>("hideHome", false),
 		],
 		{ pathname, hostname, search, href } = document.location;
 
@@ -273,7 +275,9 @@ presence.on("UpdateData", async () => {
 						"{0}",
 						child?.textContent.trim().toLowerCase()
 					);
-				} else presenceData.details = strings.viewHome;
+				} else if (hideHome) return presence.clearActivity();
+				else presenceData.details = strings.viewHome;
+
 				break;
 			}
 			case pathname.includes("/results"): {
