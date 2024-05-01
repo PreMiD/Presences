@@ -36,7 +36,6 @@ presence.on("UpdateData", async () => {
 					document.querySelector<HTMLMetaElement>('script[id="syncData"]')
 						.textContent
 				).name.replace(/\b[a-z]/g, (letter: string) => letter.toUpperCase())}`;
-				presenceData.state = "Watch for free on Animeflix!";
 			} else presenceData.details = "Exploring Animeflix";
 	}
 	presence.setActivity(presenceData);
