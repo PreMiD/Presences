@@ -9,5 +9,5 @@ iframe.on("UpdateData", async () => {
 			paused: video.paused,
 			duration: video.duration,
 		});
-	} else console.error("Video element not found.");
+	}
 });
