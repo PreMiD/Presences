@@ -16,9 +16,10 @@ const multiUploader = document.querySelector("div.membersinfo-normal");
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/B/bilibili/assets/logo.png",
-	};
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/B/bilibili/assets/logo.png",
+		},
+		privacy = await presence.getSetting<boolean>("privacy");
 
 	async function getTimestamps() {
 		video = document.querySelector("bpx-player-container");
@@ -51,6 +52,11 @@ presence.on("UpdateData", async () => {
 		case "www.bilibili.com": {
 			switch (urlpath[1]) {
 				case "video": {
+					if (privacy) {
+						presenceData.details = "Watching a video";
+						break;
+					}
+
 					getTimestamps();
 
 					if (multiUploader) {
@@ -71,7 +77,7 @@ presence.on("UpdateData", async () => {
 					}
 
 					uploaderLink = uploader.getAttribute("href");
-					title = document.querySelector("#viewbox_report > h1");
+					title = document.querySelector(".video-title");
 
 					presenceData.details = title.getAttribute("title");
 					presenceData.state = uploaderName;
