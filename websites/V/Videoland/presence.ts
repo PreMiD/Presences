@@ -20,10 +20,10 @@ presence.on("UpdateData", async () => {
 		]),
 		video = document.querySelector("video"),
 		getInfo = document.querySelectorAll('[type="application/ld+json"]')?.[1]
-			?.innerHTML
+			?.textContent
 			? JSON.parse(
 					document.querySelectorAll('[type="application/ld+json"]')?.[1]
-						?.innerHTML
+						?.textContent
 			  )
 			: "";
 
