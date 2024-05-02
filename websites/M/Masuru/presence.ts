@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/prefer-query-selector */
 /* eslint-disable camelcase */
-/* eslint-disable no-one-time-vars/no-one-time-vars */
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const presence = new Presence({
 		clientId: "861582205028794418",
@@ -56,7 +56,9 @@ presence.on("UpdateData", async () => {
 							presenceData.details = `Dashboard - ${title}`;
 							presenceData.state = pathname_.split("/").reverse()[0];
 							if (presenceData.state === "discovery") {
-								const link_code = document.getElementById("link_code") as HTMLInputElement;
+								const link_code = document.getElementById(
+									"link_code"
+								) as HTMLInputElement;
 								presenceData.buttons = [
 									{
 										label: "Discovery Page",
