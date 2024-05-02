@@ -70,6 +70,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Looking at their videos...";
 	else if (document.location.pathname.includes("/myprofile/mylooprs"))
 		presenceData.details = "Looking at their loops...";
+	else if (document.location.pathname.includes("/myprofile/myplaylists"))
+		presenceData.details = "Looking at their playlists...";
 	else if (document.location.pathname.includes("/myprofile/mywatchlater"))
 		presenceData.details = "Looking at their Watch Later list...";
 	else if (document.location.pathname.includes("/myprofile/mysubscribes"))
