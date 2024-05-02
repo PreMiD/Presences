@@ -75,7 +75,7 @@
 		"*://www.youtube.com/*",
 		"*://studio.youtube.com/*"
 	],
-	"version": "5.10.5",
+	"version": "5.11.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/thumbnail.jpg",
 	"color": "#E40813",
@@ -182,6 +182,15 @@
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
+		},
+		{
+			"id": "hideHome",
+			"if": {
+				"privacy": false
+			},
+			"title": "Hide Homepage",
+			"icon": "fad fa-user-secret",
+			"value": false
 		}
 	]
 }
