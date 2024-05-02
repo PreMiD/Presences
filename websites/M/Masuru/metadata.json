@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "527383789475856426",
+		"name": "aomkoyo"
+	},
+	"service": "Masuru",
+	"description": {
+		"en": "Content for everyone to enjoy with us."
+	},
+	"url": [
+		"www.masuru.in.th",
+		"masuru.in.th",
+		"bot.masuru.in.th",
+		"forum.masuru.in.th"
+	],
+	"version": "1.0.0",
+	"logo": "https://cdn.masuru.in.th/assets/masuru/apple-touch-icon.webp",
+	"thumbnail": "https://cdn.masuru.in.th/assets/masuru/og.webp",
+	"color": "#0891b2",
+	"category": "other",
+	"tags": [
+		"forum",
+		"anime",
+		"video",
+		"discord",
+		"content",
+		"music"
+	]
+}
