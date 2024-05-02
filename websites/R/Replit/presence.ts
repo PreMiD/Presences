@@ -11,8 +11,7 @@ const enum Assets {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/R/Replit/assets/logo.png",
+			largeImageKey: "https://i.imgur.com/rKlupJp.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ href, hash, pathname } = document.location,
