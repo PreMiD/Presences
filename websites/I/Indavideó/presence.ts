@@ -32,13 +32,13 @@ presence.on("UpdateData", async () => {
 		pathname.includes("/search/text/") ||
 		pathname.includes("/search/detailed/")
 	) {
-		searchBar = (<HTMLInputElement>document.querySelector("#ddl_search-what"))
-			.value;
+		searchBar =
+			document.querySelector<HTMLInputElement>("#ddl_search-what").value;
 		presenceData.details = `Searching for "${searchBar}"...`;
 	} else if (pathname.includes("/video/")) {
 		delete presenceData.startTimestamp;
-		(videoTitle = document.querySelector(".vid_header_title").textContent),
-			(uploader = document.querySelector(".vid_header_username").textContent);
+		videoTitle = document.querySelector(".vid_header_title").textContent;
+		uploader = document.querySelector(".vid_header_username").textContent;
 		presenceData.details = `Watching "${videoTitle.trim()}"`;
 		presenceData.state = `Uploaded by ${uploader.trim()}`;
 		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
