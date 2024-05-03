@@ -14,7 +14,8 @@ presence.on("iFrameData", (data: typeof videoData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/VlBtvJo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/A/AnimeDrive/assets/0.png",
 		},
 		{ pathname, search } = document.location;
 
