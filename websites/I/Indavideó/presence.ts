@@ -25,11 +25,8 @@ presence.on("UpdateData", async () => {
 			play: "general.playing",
 			pause: "general.paused",
 		}),
-		{hostname, href, pathname} = document.location;
-	if (
-		pathname === "/" &&
-		hostname === "indavideo.hu"
-	)
+		{ hostname, href, pathname } = document.location;
+	if (pathname === "/" && hostname === "indavideo.hu")
 		presenceData.details = "On the homepage";
 	else if (
 		pathname.includes("/search/text/") ||
