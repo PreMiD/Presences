@@ -6,12 +6,13 @@ const presence = new Presence({
 let prevURL: string;
 
 const enum Assets {
+	Logo = "https://i.imgur.com/rKlupJp.png",
 	CodeLine = "https://i.imgur.com/HNnl3oL.png",
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/rKlupJp.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ href, hash, pathname } = document.location,
@@ -51,10 +52,10 @@ presence.on("UpdateData", async () => {
 						.querySelector(".cm-lineNumbers")
 						?.querySelector(".cm-activeLineGutter")?.textContent;
 				presenceData.details = hash.split("#")?.[1]
-					? `Viewing replit: ${title} | File: ${hash.split("#")?.[1]}`
-					: `Viewing replit: ${title}`;
+					? `Viewing REPL: ${title} | File: ${hash.split("#")?.[1]}`
+					: `Viewing REPL: ${title}`;
 				presenceData.state = `Created by: ${pathname.split("/")[1]}`;
-				presenceData.buttons = [{ label: "View Replit", url: href }];
+				presenceData.buttons = [{ label: "View REPL", url: href }];
 				if (activeLine || lineNumbers) {
 					presenceData.smallImageKey = Assets.CodeLine;
 					presenceData.smallImageText =
