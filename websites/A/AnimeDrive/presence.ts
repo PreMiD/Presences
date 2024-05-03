@@ -1,13 +1,20 @@
 const presence = new Presence({
-		clientId: "1211027222815711282",
-	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	clientId: "1211027222815711282",
+});
+
+let videoData: {
+	duration: number;
+	paused: boolean;
+	currentTime: number;
+};
+
+presence.on("iFrameData", (data: typeof videoData) => {
+	videoData = data;
+});
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/A/AnimeDrive/assets/logo.png",
-			startTimestamp: browsingTimestamp,
+			largeImageKey: "https://i.imgur.com/VlBtvJo.png",
 		},
 		{ pathname, search } = document.location;
 
@@ -60,7 +67,9 @@ presence.on("UpdateData", async () => {
 					);
 				if (h2Element && h2Element.textContent.trim()) {
 					presenceData.details = `${h2Element.textContent.trim()}`;
-					presenceData.state = `Epizód: ${episodeElement.textContent.trim()}`;
+					presenceData.state = `${
+						episodeElement.textContent.match(/\d+/)[0]
+					}. rész`;
 				} else {
 					presenceData.details = "Adatlap böngészése:";
 					presenceData.state = `ID: ${animeId}`;
@@ -74,6 +83,22 @@ presence.on("UpdateData", async () => {
 						}`,
 					},
 				];
+
+				if (videoData) {
+					presenceData.smallImageKey = videoData.paused
+						? Assets.Pause
+						: Assets.Play;
+					presenceData.smallImageText = videoData.paused ? "Szünet" : "Néz";
+
+					if (!videoData.paused) {
+						const [startTimestamp, endTimestamp] = presence.getTimestamps(
+							videoData.currentTime,
+							videoData.duration
+						);
+						presenceData.startTimestamp = startTimestamp;
+						presenceData.endTimestamp = endTimestamp;
+					}
+				}
 			} else presenceData.details = "Anime Nézése";
 
 			break;

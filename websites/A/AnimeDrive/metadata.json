@@ -6,13 +6,14 @@
 	},
 	"service": "AnimeDrive",
 	"description": {
-		"en": "AnimeDrive is an anime streaming website with Hungarian subs/dubs"
+		"en": "AnimeDrive is an anime streaming website with Hungarian subs/dubs",
+		"hu": "Az AnimeDrive egy anime streaming weboldal Magyar felirattal/szinkronnal"
 	},
 	"url": [
 		"animedrive.hu",
 		"www.animedrive.hu"
 	],
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeDrive/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeDrive/assets/thumbnail.png",
 	"color": "#6f0094",
@@ -21,5 +22,7 @@
 		"anime",
 		"animes",
 		"animedrive"
-	]
+	],
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
