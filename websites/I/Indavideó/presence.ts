@@ -24,20 +24,21 @@ presence.on("UpdateData", async () => {
 		strings = await presence.getStrings({
 			play: "general.playing",
 			pause: "general.paused",
-		});
+		}),
+		{hostname, href, pathname} = document.location;
 	if (
-		document.location.pathname === "/" &&
-		document.location.hostname === "indavideo.hu"
+		pathname === "/" &&
+		hostname === "indavideo.hu"
 	)
 		presenceData.details = "On the homepage";
 	else if (
-		document.location.pathname.includes("/search/text/") ||
-		document.location.pathname.includes("/search/detailed/")
+		pathname.includes("/search/text/") ||
+		pathname.includes("/search/detailed/")
 	) {
 		searchBar = (<HTMLInputElement>document.querySelector("#ddl_search-what"))
 			.value;
 		presenceData.details = `Searching for "${searchBar}"...`;
-	} else if (document.location.pathname.includes("/video/")) {
+	} else if (pathname.includes("/video/")) {
 		delete presenceData.startTimestamp;
 		(videoTitle = document.querySelector(".vid_header_title").textContent),
 			(uploader = document.querySelector(".vid_header_username").textContent);
@@ -56,30 +57,30 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Watch video",
-				url: document.location.toString(),
+				url: href,
 			},
 		];
-	} else if (document.location.pathname.includes("/profile/")) {
+	} else if (pathname.includes("/profile/")) {
 		uploader = document.querySelector("#user").textContent;
 		presenceData.details = `Browsing user profile "${uploader.trim()}"...`;
-	} else if (document.location.pathname.includes("/myprofile/basicdata"))
+	} else if (pathname.includes("/myprofile/basicdata"))
 		presenceData.details = "Managing their account details...";
-	else if (document.location.pathname.includes("/myprofile/customize"))
+	else if (pathname.includes("/myprofile/customize"))
 		presenceData.details = "Customizing their account...";
-	else if (document.location.pathname.includes("/myprofile/myvideos"))
+	else if (pathname.includes("/myprofile/myvideos"))
 		presenceData.details = "Looking at their videos...";
-	else if (document.location.pathname.includes("/myprofile/mylooprs"))
+	else if (pathname.includes("/myprofile/mylooprs"))
 		presenceData.details = "Looking at their loops...";
-	else if (document.location.pathname.includes("/myprofile/myplaylists"))
+	else if (pathname.includes("/myprofile/myplaylists"))
 		presenceData.details = "Looking at their playlists...";
-	else if (document.location.pathname.includes("/myprofile/mywatchlater"))
+	else if (pathname.includes("/myprofile/mywatchlater"))
 		presenceData.details = "Looking at their Watch Later list...";
-	else if (document.location.pathname.includes("/myprofile/mysubscribes"))
+	else if (pathname.includes("/myprofile/mysubscribes"))
 		presenceData.details = "Looking at their subscriptions...";
-	else if (document.location.pathname.includes("/myprofile/stripfactory"))
+	else if (pathname.includes("/myprofile/stripfactory"))
 		presenceData.details = "Working on a strip embed...";
-	else if (document.location.hostname !== "indavideo.hu") {
-		switch (document.location.hostname) {
+	else if (hostname !== "indavideo.hu") {
+		switch (hostname) {
 			case "auto.indavideo.hu": {
 				presenceData.details = "Browsing the Autó category...";
 				break;
