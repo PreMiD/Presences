@@ -20,5 +20,5 @@
 		"video"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": ".*[.]indavideo[.]hu"
 }
