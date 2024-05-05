@@ -6,16 +6,14 @@ const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/logo.png",
 	ChartSearch = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/0.jpg",
 	ChartHypoRanked = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/1.jpg",
-	ChartExponential = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/2.jpg",
-	ChartHard = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/3.jpg",
-	ChartIntermediate = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/4.jpg",
-	ChartEasy = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/5.jpg",
+	ChartByDifficulty = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/4.jpg",
 	ChartNew = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/6.jpg",
 	ChartHistory = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/7.jpg",
 	ChartPossession = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/8.jpg",
 	ChartHot = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/9.jpg",
 	ChartCold = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/10.jpg",
 	ChartMultiPlayer = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/11.jpg",
+	ChartSpotlighted = "https://i.imgur.com/jfS5s7A.png"
 }
 
 presence.on("UpdateData", async () => {
@@ -150,21 +148,15 @@ presence.on("UpdateData", async () => {
 					imageKey = Assets.ChartHypoRanked;
 					menuName = "내 순위가 아래인 채보";
 					break;
-				case "EXPONENTIAL":
-					imageKey = Assets.ChartExponential;
-					menuName = "경지에 다다른 채보";
-					break;
-				case "HARD":
-					imageKey = Assets.ChartHard;
-					menuName = "어려운 채보";
-					break;
-				case "INTERMEDIATE":
-					imageKey = Assets.ChartIntermediate;
-					menuName = "적당한 채보";
-					break;
-				case "EASY":
-					imageKey = Assets.ChartEasy;
-					menuName = "쉬운 채보";
+				case "BY_DIFFICULTY":
+					imageKey = Assets.ChartByDifficulty;
+					menuName = "전체 채보";
+					for(let i = 0; i < 32; i++) {
+						if(document.querySelectorAll(".difficulty-bar>.item")[i].getAttribute("data-active") === "true") {
+							menuName = `난도 ${i === 31 ? "30+" : i.toString()} 채보`;
+							break;
+						}
+					}
 					break;
 				case "NEW":
 					imageKey = Assets.ChartNew;
@@ -186,13 +178,17 @@ presence.on("UpdateData", async () => {
 					imageKey = Assets.ChartCold;
 					menuName = "요즘 안 북적이는 채보";
 					break;
+				case "SPOTLIGHTED":
+					imageKey = Assets.ChartSpotlighted;
+					menuName = "오늘의 픽";
+					break;
 				case "MULTIPLAYER":
 					imageKey = Assets.ChartMultiPlayer;
 					presenceData.details = "자바! 멀티플레이어";
 					presenceData.state = "방 선택 중";
 					break;
 			}
-			if (menuName !== "") presenceData.state = `채보 선택 중: ${menuName}`;
+			if (menuName !== "") presenceData.state = `${document.querySelector(".mode-selection>.body>.mode-串").classList.contains("active") ? "串" : document.querySelector(".mode-selection>.body>.mode-本").classList.contains("active") ? "本" : "雙"} 채보 선택 중: ${menuName}`;
 
 			presenceData.largeImageKey = imageKey;
 			presenceData.buttons = [{ label: "자바! 플레이하기", url: href }];
