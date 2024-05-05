@@ -192,7 +192,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = "방 선택 중";
 					break;
 			}
-			if (menuName !== "")
+			if (menuName !== "") {
 				presenceData.state = `${
 					document
 						.querySelector(".mode-selection>.body>.mode-串")
@@ -204,6 +204,7 @@ presence.on("UpdateData", async () => {
 						? "本"
 						: "雙"
 				} 채보 선택 중: ${menuName}`;
+			}
 
 			presenceData.largeImageKey = imageKey;
 			presenceData.buttons = [{ label: "자바! 플레이하기", url: href }];
