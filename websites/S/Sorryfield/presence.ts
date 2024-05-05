@@ -13,7 +13,7 @@ const enum Assets {
 	ChartHot = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/9.jpg",
 	ChartCold = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/10.jpg",
 	ChartMultiPlayer = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/11.jpg",
-	ChartSpotlighted = "https://i.imgur.com/jfS5s7A.png"
+	ChartSpotlighted = "https://i.imgur.com/jfS5s7A.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -151,8 +151,12 @@ presence.on("UpdateData", async () => {
 				case "BY_DIFFICULTY":
 					imageKey = Assets.ChartByDifficulty;
 					menuName = "전체 채보";
-					for(let i = 0; i < 32; i++) {
-						if(document.querySelectorAll(".difficulty-bar>.item")[i].getAttribute("data-active") === "true") {
+					for (let i = 0; i < 32; i++) {
+						if (
+							document
+								.querySelectorAll(".difficulty-bar>.item")
+								[i].getAttribute("data-active") === "true"
+						) {
 							menuName = `난도 ${i === 31 ? "30+" : i.toString()} 채보`;
 							break;
 						}
@@ -188,7 +192,18 @@ presence.on("UpdateData", async () => {
 					presenceData.state = "방 선택 중";
 					break;
 			}
-			if (menuName !== "") presenceData.state = `${document.querySelector(".mode-selection>.body>.mode-串").classList.contains("active") ? "串" : document.querySelector(".mode-selection>.body>.mode-本").classList.contains("active") ? "本" : "雙"} 채보 선택 중: ${menuName}`;
+			if (menuName !== "")
+				presenceData.state = `${
+					document
+						.querySelector(".mode-selection>.body>.mode-串")
+						.classList.contains("active")
+						? "串"
+						: document
+								.querySelector(".mode-selection>.body>.mode-本")
+								.classList.contains("active")
+						? "本"
+						: "雙"
+				} 채보 선택 중: ${menuName}`;
 
 			presenceData.largeImageKey = imageKey;
 			presenceData.buttons = [{ label: "자바! 플레이하기", url: href }];
