@@ -239,6 +239,10 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [{ label: "리플레이 보기", url: href }];
 		} else if (pathname.includes("/shop")) presenceData.state = "상점";
 		else if (pathname.includes("/sync")) presenceData.state = "환경 설정";
+		else if (pathname.includes("/ranking"))
+			presenceData.state = `${
+				document.querySelector("h2").textContent
+			} 모드 짬 랭킹`;
 		else if (pathname === "/java/multiplayer") {
 			presenceData.details = "자바! 멀티플레이어";
 			presenceData.largeImageKey = Assets.ChartMultiPlayer;
