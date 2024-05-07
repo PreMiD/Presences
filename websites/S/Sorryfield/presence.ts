@@ -13,7 +13,7 @@ const enum Assets {
 	ChartHot = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/9.jpg",
 	ChartCold = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/10.jpg",
 	ChartMultiPlayer = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/11.jpg",
-	ChartSpotlighted = "https://i.imgur.com/GrClrlG.png",
+	ChartSpotlighted = "https://i.imgur.com/Tr2BDaQ.png",
 }
 
 presence.on("UpdateData", async () => {
