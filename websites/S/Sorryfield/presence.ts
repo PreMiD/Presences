@@ -4,8 +4,8 @@ const presence = new Presence({
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/logo.png",
-	ChartSearch = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/0.jpg",
-	ChartHypoRanked = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/1.jpg",
+	ChartSearch = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/3.jpg",
+	ChartHypoRanked = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/5.jpg",
 	ChartByDifficulty = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/4.jpg",
 	ChartNew = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/6.jpg",
 	ChartHistory = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/7.jpg",
@@ -13,7 +13,7 @@ const enum Assets {
 	ChartHot = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/9.jpg",
 	ChartCold = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/10.jpg",
 	ChartMultiPlayer = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/11.jpg",
-	ChartSpotlighted = "https://i.imgur.com/Tr2BDaQ.png",
+	ChartSpotlighted = "https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/2.png",
 }
 
 presence.on("UpdateData", async () => {
