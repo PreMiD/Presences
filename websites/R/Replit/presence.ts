@@ -6,8 +6,8 @@ const presence = new Presence({
 let prevURL: string;
 
 const enum Assets {
-	Logo = "https://i.imgur.com/rKlupJp.png",
-	CodeLine = "https://i.imgur.com/HNnl3oL.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Replit/assets/logo.png",
+	CodeLine = "https://cdn.rcd.gg/PreMiD/websites/R/Replit/assets/0.png",
 }
 
 presence.on("UpdateData", async () => {
