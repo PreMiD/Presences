@@ -327,9 +327,9 @@ presence.on("UpdateData", async () => {
 					).textContent;
 					// Get channel name when viewing a channel
 				} else if (
-					documentTitle.includes(
-						document.querySelector("#text.ytd-channel-name")?.textContent
-					)
+					document.querySelector("#text.ytd-channel-name")?.textContent != ''
+					&&
+					documentTitle.includes(document.querySelector("#text.ytd-channel-name")?.textContent)
 				)
 					user = document.querySelector("#text.ytd-channel-name").textContent;
 				// Get channel name from website's title
@@ -344,14 +344,10 @@ presence.on("UpdateData", async () => {
 					user = "null";
 
 				if (pathname.includes("/videos")) {
-					presenceData.details = `${
-						strings.browsingThrough
-					} ${tabSelected} ${document
-						.querySelector(
-							'[class="style-scope ytd-c4-tabbed-header-renderer iron-selected"]'
-						)
-						?.textContent.trim()
-						.toLowerCase()}`;
+					presenceData.details =
+						`${strings.browsingThrough} ${tabSelected} ${document.querySelector(
+							'[class="style-scope ytd-tabbed-page-header"] [aria-selected="true"]'
+						)?.textContent.trim().toLowerCase()}`;
 					presenceData.state = `${strings.ofChannel} ${user}`;
 				} else if (pathname.includes("/shorts")) {
 					presenceData.details = strings.browseShorts;
