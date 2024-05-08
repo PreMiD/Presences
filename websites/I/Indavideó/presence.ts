@@ -18,7 +18,8 @@ presence.on(
 );
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/WXPi1xl.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/I/Indavide%C3%B3/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		strings = await presence.getStrings({
