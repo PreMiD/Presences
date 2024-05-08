@@ -7,7 +7,7 @@
 	"service": "Threads",
 	"description": {
 		"en": "Say more with Threads — Instagram’s text-based conversation app, where communities come together to discuss everything from the topics you care about today to what’ll be trending tomorrow.",
-		"el": "Πείτε περισσότερα με το Threads — την εφαρμογή συνομιλίας με κείμενο του Instagram, όπου οι κοινότητες συγκεντρώνονται για να συζητήσουν τα πάντα, από τα θέματα που σας ενδιαφέρουν σήμερα μέχρι αυτά που θα είναι μοντέρνα αύριο."
+		"el_GR": "Πείτε περισσότερα με το Threads — την εφαρμογή συνομιλίας με κείμενο του Instagram, όπου οι κοινότητες συγκεντρώνονται για να συζητήσουν τα πάντα, από τα θέματα που σας ενδιαφέρουν σήμερα μέχρι αυτά που θα είναι μοντέρνα αύριο."
 	},
 	"url": "threads.net",
 	"version": "1.0.0",
