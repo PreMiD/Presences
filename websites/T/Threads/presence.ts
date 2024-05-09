@@ -34,11 +34,10 @@ presence.on("UpdateData", async () => {
 		presenceData.state = pathname.split("/")[1];
 
 		if (!privacy) {
-			presenceData.smallImageKey = (
-				document.querySelector(
+			presenceData.smallImageKey = presenceData.smallImageKey =
+				document.querySelector<HTMLImageElement>(
 					`img[alt*="${presenceData.state.split("@")[1]}"]`
-				) as HTMLImageElement
-			).src;
+				).src;
 
 			presenceData.smallImageText = presenceData.state.split("@")[1];
 		}
