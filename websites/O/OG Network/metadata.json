@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "630070645874622494",
+		"name": "johnfries"
+	},
+	"service": "OG Network",
+	"description": {
+		"en": "OG Network website presence"
+	},
+	"url": [
+		"og-network.net",
+		"shop-og-network.net"
+	],
+	"version": "1.0.0",
+	"logo": "https://www.og-network.net/assets/logo.png",
+	"thumbnail": "https://www.og-network.net/assets/logo.png",
+	"color": "#9eeb34",
+	"category": "games",
+	"tags": [
+		"minecraft",
+		"server"
+	]
+}
