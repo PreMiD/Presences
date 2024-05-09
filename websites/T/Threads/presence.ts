@@ -18,35 +18,33 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/bzknrFr.png",
 		};
 
-	let details: string, state: string;
+	presenceData.details = "Browsing...";
 
-	details = "Browsing...";
-
-	if (pathname.match("/following")) state = "Following feed";
-	else if (pathname.match("/saved")) state = "Saved threads";
-	else if (pathname.match("/liked")) state = "Liked threads";
+	if (pathname.match("/following")) presenceData.state = "Following feed";
+	else if (pathname.match("/saved")) presenceData.state = "Saved threads";
+	else if (pathname.match("/liked")) presenceData.state = "Liked threads";
 	else if (pathname.match("/login") || pathname.match("/nonconsent"))
-		details = "Logging in";
+		presenceData.details = "Logging in";
 	else if (pathname.match("/search") && !privacy) {
-		details = "Searching for:";
-		state = new URLSearchParams(search).get("q");
+		presenceData.details = "Searching for:";
+		presenceData.state = new URLSearchParams(search).get("q");
 
-		if (!state) details = "Search";
+		if (!presenceData.state) presenceData.details = "Search";
 	} else if (pathname.startsWith("/@")) {
-		state = pathname.split("/")[1];
+		presenceData.state = pathname.split("/")[1];
 
 		if (!privacy) {
 			presenceData.smallImageKey = (
 				document.querySelector(
-					`img[alt*="${state.split("@")[1]}"]`
+					`img[alt*="${presenceData.state.split("@")[1]}"]`
 				) as HTMLImageElement
 			).src;
 
-			presenceData.smallImageText = state.split("@")[1];
+			presenceData.smallImageText = presenceData.state.split("@")[1];
 		}
 
 		if (pathname.split("/")[2] === "post") {
-			details = "Viewing a thread";
+			presenceData.details = "Viewing a thread";
 
 			if (!privacy) {
 				presenceData.buttons = [
@@ -57,7 +55,7 @@ presence.on("UpdateData", async () => {
 				];
 			}
 		} else {
-			details = "Viewing a profile";
+			presenceData.details = "Viewing a profile";
 
 			if (!privacy) {
 				presenceData.buttons = [
@@ -69,13 +67,11 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	} else if (pathname.split("/")[1]) {
-		details = capitalize(pathname.split("/")[1]);
-		state = capitalize(pathname.split("/")[2] || "");
-	} else state = "For You feed";
+		presenceData.details = capitalize(pathname.split("/")[1]);
+		presenceData.state = capitalize(pathname.split("/")[2] || "");
+	} else presenceData.state = "For You feed";
 
-	presenceData.details = details;
-
-	if (!privacy) presenceData.state = state;
+	if (privacy) delete presenceData.state;
 
 	if (time) presenceData.startTimestamp = browsingTimestamp;
 
