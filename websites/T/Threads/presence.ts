@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 		]),
 		{ pathname, href, search } = document.location,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/qR37ayt.png",
+			largeImageKey: "https://i.imgur.com/bzknrFr.png",
 		};
 
 	let details: string, state: string;
