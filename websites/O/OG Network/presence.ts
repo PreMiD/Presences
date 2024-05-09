@@ -9,11 +9,7 @@ presence.on("UpdateData", async () => {
 	const url = window.location.href,
 		presenceData: PresenceData = {
 			largeImageKey: assets.logo,
-			startTimestamp: Math.floor(
-				Date.now() / 1000 - startTime
-					? Math.round((Date.now() - startTime) / 1000)
-					: 0
-			),
+			startTimestamp: browsingTimestamp;
 		};
 
 	if (url.includes("/forums")) {
