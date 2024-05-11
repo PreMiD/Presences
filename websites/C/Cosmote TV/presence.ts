@@ -53,6 +53,9 @@ presence.on("UpdateData", async () => {
 			livetv: {
 				details: "Browsing Live TV",
 			},
+			inbox: {
+				details: "Viewing Inbox",
+			},
 			"livetv/replaytv": {
 				details: "Browsing Replay TV",
 			},
@@ -104,7 +107,7 @@ presence.on("UpdateData", async () => {
 			)
 		) {
 			presenceData.details = document.querySelector<HTMLSpanElement>(
-				".meta-title[ng-bind='details.title']"
+				".meta-title[ng-bind~='details.title']"
 			)?.textContent;
 			presenceData.state = document.querySelector<HTMLSpanElement>(
 				".meta-title[ng-bind='details.channel.title']"
@@ -146,7 +149,7 @@ presence.on("UpdateData", async () => {
 		} else {
 			// On Demand
 			presenceData.details = document.querySelector<HTMLSpanElement>(
-				".meta-title[ng-bind='details.title']"
+				".meta-title[ng-bind~='details.title']"
 			).textContent;
 			// Series
 			if (

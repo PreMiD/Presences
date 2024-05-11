@@ -1,90 +1,128 @@
 const presence = new Presence({
 		clientId: "830504223153717311",
 	}),
-	browsingTimestamp = Math.floor(Date.now());
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-presence.on("UpdateData", () => {
+let prevURL: string;
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Replit/assets/logo.png",
+	CodeLine = "https://cdn.rcd.gg/PreMiD/websites/R/Replit/assets/0.png",
+}
+
+presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			details: "Viewing unsupported page",
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/R/Replit/assets/logo.png",
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname } = document.location;
+		{ href, hash, pathname } = document.location,
+		buttons = await presence.getSetting<boolean>("buttons"),
+		title = document
+			.querySelector("title")
+			?.textContent?.split("- Replit")?.[0],
+		isReplit =
+			!!document.evaluate(
+				"//span[text()='Made with']",
+				document,
+				null,
+				XPathResult.FIRST_ORDERED_NODE_TYPE,
+				null
+			)?.singleNodeValue ||
+			hash.includes(".") ||
+			document
+				.querySelector('[id="__NEXT_DATA__"]')
+				?.textContent?.toLowerCase()
+				?.includes("editor");
 
-	if (pathname === "/" || pathname === "/~")
-		presenceData.details = "Viewing home page";
-	else if (pathname.startsWith("/@")) {
-		if (
-			pathname
-				.replace("/@", "")
-				.split("/")
-				.filter(elm => elm !== "").length === 1
-		) {
-			presenceData.details = "Viewing a user's profile";
-			presenceData.state = pathname.replace("/@", "");
-		} else if (
-			document.querySelector<HTMLSpanElement>(".content span") &&
-			!document.querySelector(".breadcrumb-content")
-		) {
-			presenceData.details = `Viewing ${
-				pathname.replace("/@", "").split("/")[0]
-			}'s repl`;
-			presenceData.state =
-				document.querySelector<HTMLSpanElement>(".content span").textContent;
-		} else {
-			presenceData.details = `Editing ${
-				document.querySelector<HTMLDivElement>("div.language-icon-container")
-					.title
-			} repl`;
-			presenceData.state = `${
-				pathname.split("/").filter(elm => elm !== "")[1]
-			}${window.location.hash ? ` - ${window.location.hash.slice(1)}` : ""}`;
+	if (!prevURL) prevURL = href;
+	else if (prevURL !== href) delete presenceData.startTimestamp;
+
+	switch (true) {
+		case pathname === "/~":
+		case pathname === "/": {
+			presenceData.details = "Viewing the homepage";
+			break;
 		}
-	} else if (pathname.startsWith("/notifications"))
-		presenceData.details = "Viewing notifications";
-	else if (pathname.startsWith("/languages")) {
-		presenceData.details = "Browsing languages:";
-		presenceData.state = "All languages";
-	} else if (pathname.startsWith("/new")) {
-		presenceData.details = "Creating new repl:";
-		presenceData.state = `${
-			document.querySelector<HTMLInputElement>(
-				"input[data-cy='new-repl-language-input']"
-			).value || "No languages chosen"
-		}`;
-	} else if (pathname.startsWith("/repls")) {
-		const repls = document.querySelector<HTMLDivElement>(
-				"#__next > div > div > div.jsx-2888589246.content > div.jsx-1264267603.repl-content > div.jsx-4064465542 > div:nth-child(3)"
-			),
-			length = repls
-				? repls.children.length - (pathname === "/repls" ? 2 : 1)
-				: 0;
-		presenceData.details = `Viewing repls ${length ? `(Total ${length})` : ""}`;
-		presenceData.state = `${
-			pathname === "/repls"
-				? "In the main page"
-				: `In a folder : ${pathname.replace("/repls/folder/", "")}`
-		}`;
-	} else if (pathname.startsWith("/community")) {
-		presenceData.details = "Surfing feed";
-		const [postType] = pathname.replace("/community/", "").split("/"),
-			postElement: HTMLDivElement = document.querySelector(
-				"#__next > div > div.jsx-132086333.content > div.jsx-2019133593 > div.jsx-2019133593.post-page-content > div.jsx-347352367 > div.jsx-347352367.board-post-detail-header > div.jsx-347352367.board-post-detail-title"
-			);
-		switch (pathname.replace("/community/", "")) {
-			case "all":
-				presenceData.state = "All posts";
-				break;
-			default:
-				presenceData.state = `${postType
-					.charAt(0)
-					.toUpperCase()}${postType.slice(1)}${
-					postElement ? ` : ${postElement.textContent}` : ""
-				}`;
-				break;
+		case pathname.startsWith("/@"): {
+			if (isReplit) {
+				const lineNumbers = document
+						.querySelector(".cm-lineNumbers")
+						?.querySelectorAll(".cm-gutterElement"),
+					activeLine = document
+						.querySelector(".cm-lineNumbers")
+						?.querySelector(".cm-activeLineGutter")?.textContent;
+				presenceData.details = hash.split("#")?.[1]
+					? `Viewing REPL: ${title} | File: ${hash.split("#")?.[1]}`
+					: `Viewing REPL: ${title}`;
+				presenceData.state = `Created by: ${pathname.split("/")[1]}`;
+				presenceData.buttons = [{ label: "View REPL", url: href }];
+				if (activeLine || lineNumbers) {
+					presenceData.smallImageKey = Assets.CodeLine;
+					presenceData.smallImageText =
+						!activeLine && lineNumbers
+							? `Total lines ${
+									lineNumbers?.[lineNumbers?.length - 1]?.textContent
+							  }`
+							: `Line ${activeLine} / ${
+									lineNumbers?.[lineNumbers?.length - 1]?.textContent
+							  }`;
+				}
+			} else {
+				presenceData.details = "Viewing a user's profile";
+				presenceData.state = title;
+				presenceData.buttons = [{ label: "View Profile", url: href }];
+			}
+			break;
 		}
-	} else if (pathname.startsWith("/templates"))
-		presenceData.details = "Viewing replit templates";
+		case pathname === "/notifications": {
+			presenceData.details = "Viewing their notifications";
+			break;
+		}
+		case pathname === "/repls": {
+			presenceData.details = "Viewing their repls";
+			break;
+		}
+		case pathname === "/my-deployments": {
+			presenceData.details = "Viewing deployments";
+			break;
+		}
+		case pathname === "/my-teams": {
+			presenceData.details = "Viewing teams";
+			break;
+		}
+		case pathname === "/usage": {
+			presenceData.details = "Viewing usage";
+			break;
+		}
+		case pathname.includes("/templates"): {
+			const templateSearch = document.querySelector<HTMLInputElement>(
+				'[aria-label="Search Templates"]'
+			)?.value;
+			if (!templateSearch) presenceData.details = "Viewing all templates";
+			else {
+				presenceData.details = "Searching templates for:";
+				presenceData.state = templateSearch;
+				presenceData.smallImageKey = Assets.Search;
+			}
+			break;
+		}
+		case pathname.includes("/community"): {
+			const communitySearch =
+				document.querySelector<HTMLInputElement>("input[data-rac]")?.value;
+
+			if (communitySearch) {
+				presenceData.details = "Searching in the community for:";
+				presenceData.state = communitySearch;
+				presenceData.smallImageKey = Assets.Search;
+			} else presenceData.details = "Browsing through the community";
+
+			break;
+		}
+		default: {
+			presenceData.details = "Viewing an unsupported page";
+		}
+	}
+	if (!buttons && presenceData.buttons) delete presenceData.buttons;
+
 	presence.setActivity(presenceData);
 });

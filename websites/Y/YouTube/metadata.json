@@ -75,7 +75,7 @@
 		"*://www.youtube.com/*",
 		"*://studio.youtube.com/*"
 	],
-	"version": "5.10.4",
+	"version": "5.11.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/thumbnail.jpg",
 	"color": "#E40813",
@@ -94,6 +94,15 @@
 			"title": "Privacy Mode",
 			"icon": "fad fa-user-secret",
 			"value": false
+		},
+		{
+			"id": "hidePaused",
+			"title": "Hide Paused",
+			"icon": "fad fa-pause-circle",
+			"value": false,
+			"if": {
+				"privacy": false
+			}
 		},
 		{
 			"id": "privacy-shown",
@@ -173,6 +182,15 @@
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
+		},
+		{
+			"id": "hideHome",
+			"if": {
+				"privacy": false
+			},
+			"title": "Hide Homepage",
+			"icon": "fad fa-user-secret",
+			"value": false
 		}
 	]
 }

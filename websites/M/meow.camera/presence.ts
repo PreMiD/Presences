@@ -26,18 +26,24 @@ presence.on("UpdateData", async () => {
 });
 
 function getStats(): string {
-	let stats = "";
-	const snack = document.querySelector("[title='Snack stock']"),
-		kibble = document.querySelector("[title='Kibble stock']"),
-		temp = document.querySelector("[title='Feeder temperature']");
+	const stats: string[] = [],
+		time = document.querySelector(".time"),
+		snack = document.querySelector("[title='Snack stock']"),
+		kibble = document.querySelector("[title='Kibble stock']");
 
-	if (!snack || !kibble || !temp) return stats;
+	if (time) {
+		const timeArray: string[] = time.textContent.split(":");
+		let timeString = `🕒: ${timeArray[1]}:${timeArray[2]}`;
+		if (timeArray[timeArray.length - 1].includes("PM")) timeString += " PM";
+		else if (timeArray[timeArray.length - 1].includes("AM"))
+			timeString += " AM";
 
-	stats = `🍪: ${snack.textContent === "" ? "🚫" : snack.textContent} | 🍿: ${
-		kibble.textContent === "" ? "🚫" : kibble.textContent
-	} | 🌡️: ${temp.textContent === "" ? "🚫" : temp.textContent} `;
+		stats.push(timeString);
+	}
+	if (snack) stats.push(`🍪: ${snack.textContent}`);
+	if (kibble) stats.push(`🍚: ${kibble.textContent}`);
 
-	return stats;
+	return stats.join(" | ");
 }
 
 function setTimestamps(
