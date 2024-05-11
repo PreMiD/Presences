@@ -294,7 +294,10 @@ function updateSongTimestamps(useTimeLeft: boolean) {
 		// 	Date.now() / 1000 - presence.timestampFromFormat(currTimes),
 		// 	null,
 		// ];
-		mediaTimestamps = presence.getTimestamps(presence.timestampFromFormat(currTimes), null);
+		mediaTimestamps = presence.getTimestamps(
+			presence.timestampFromFormat(currTimes),
+			null
+		);
 		delete mediaTimestamps[1];
 	}
 }
