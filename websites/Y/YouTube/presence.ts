@@ -327,8 +327,7 @@ presence.on("UpdateData", async () => {
 					).textContent;
 					// Get channel name when viewing a channel
 				} else if (
-					document.querySelector("#text.ytd-channel-name")?.textContent !==
-						"" &&
+					!document.querySelector("#text.ytd-channel-name")?.textContent &&
 					documentTitle.includes(
 						document.querySelector("#text.ytd-channel-name")?.textContent
 					)
