@@ -41,12 +41,12 @@ presence.on("UpdateData", async () => {
 		videoElement =
 			document.querySelector<HTMLVideoElement>("video.video-stream");
 
-	if (useTimeLeftChanged !== useTimeLeft) {
+	if (useTimeLeftChanged !== useTimeLeft && !privacyMode) {
 		useTimeLeftChanged = useTimeLeft;
 		updateSongTimestamps(useTimeLeft);
 	}
 
-	if (videoElement) {
+	if (videoElement && !privacyMode) {
 		if (!videoListenerAttached) {
 			//* If video scrobbled, update timestamps
 			videoElement.addEventListener("seeked", () =>
