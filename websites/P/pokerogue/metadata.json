@@ -23,7 +23,7 @@
 	"settings": [
 		{
 			"id": "timePer",
-			"title": "Timestamps per wave",
+			"title": "Reset timestamp after each wave",
 			"icon": "fad fa-stopwatch",
 			"value": false
 		},
