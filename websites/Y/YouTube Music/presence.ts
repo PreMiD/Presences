@@ -288,7 +288,5 @@ function updateSongTimestamps(useTimeLeft: boolean) {
 			presence.timestampFromFormat(currTimes),
 			presence.timestampFromFormat(totalTimes)
 		);
-	} else {
-		mediaTimestamps[0] = Math.floor(Date.now() / 1000);
-	}
+	} else mediaTimestamps[0] = Math.floor(Date.now() / 1000);
 }
