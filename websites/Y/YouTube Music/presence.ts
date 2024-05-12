@@ -289,15 +289,6 @@ function updateSongTimestamps(useTimeLeft: boolean) {
 			presence.timestampFromFormat(totalTimes)
 		);
 	} else {
-		// leaving this here until it gets fixed in the extension, just in case
-		// mediaTimestamps = [
-		// 	Date.now() / 1000 - presence.timestampFromFormat(currTimes),
-		// 	null,
-		// ];
-		mediaTimestamps = presence.getTimestamps(
-			presence.timestampFromFormat(currTimes),
-			null
-		);
-		delete mediaTimestamps[1];
+		mediaTimestamps[0] = Math.floor(Date.now() / 1000);
 	}
 }
