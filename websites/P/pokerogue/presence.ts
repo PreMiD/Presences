@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-const enum Assets { // Other default assets can be found at index.d.ts
+const enum Assets {
 	Logo = "https://pokerogue.net/logo512.png",
 }
 
@@ -13,10 +13,6 @@ type gameInfo = {
 		gameMode: "";
 		biome: "";
 		wave: 0;
-		party: {
-			name: string;
-			level: number;
-		};
 	};
 };
 let prevWave: number;
@@ -39,9 +35,8 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("timePer"),
 			presence.getSetting<string>("gameDetail"),
 			presence.getSetting<string>("gameState"),
-		]);
-
-	const data: gameInfo = await presence.getPageVariable("gameInfo");
+		]),
+		data: gameInfo = await presence.getPageVariable("gameInfo");
 
 	if (!data) {
 		presence.error("Data couldn't be found.");
