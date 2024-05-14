@@ -10,9 +10,9 @@
 		"el_GR": "Πείτε περισσότερα με το Threads — την εφαρμογή συνομιλίας με κείμενο του Instagram, όπου οι κοινότητες συγκεντρώνονται για να συζητήσουν τα πάντα, από τα θέματα που σας ενδιαφέρουν σήμερα μέχρι αυτά που θα είναι μοντέρνα αύριο."
 	},
 	"url": "threads.net",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/bzknrFr.png",
-	"thumbnail": "https://i.imgur.com/DewlVPh.jpeg",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Threads/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Threads/assets/thumbnail.jpeg",
 	"color": "#000",
 	"category": "socials",
 	"tags": [
