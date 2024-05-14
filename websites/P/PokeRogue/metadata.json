@@ -9,9 +9,9 @@
 		"en": "A Pokémon fangame heavily inspired by the roguelite genre. Battle endlessly while gathering stacking items, exploring many different biomes, and reaching Pokémon stats you never thought possible."
 	},
 	"url": "pokerogue.net",
-	"version": "1.0.1",
-	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/pokerogue/assets/logo.png",
-	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/pokerogue/assets/thumbnail.png",
+	"version": "1.0.0",
+	"logo": "https://pokerogue.net/logo512.png",
+	"thumbnail": "https://i.imgur.com/stLsgKO.png",
 	"color": "#6b5a73",
 	"category": "games",
 	"tags": [

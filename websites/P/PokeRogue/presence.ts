@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/P/pokerogue/assets/logo.png",
+	Logo = "https://pokerogue.net/logo512.png",
 }
 
 type gameInfo = {
