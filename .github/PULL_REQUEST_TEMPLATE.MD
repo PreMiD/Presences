@@ -13,3 +13,7 @@
     Screenshots of the presence settings (if applicable) and at least TWO screenshots of the presence displaying correctly
     Including these screenshots will assist the reviewing processes thus speeding up the process of the pull request being merged
 -->
+
+
+
+</details>
