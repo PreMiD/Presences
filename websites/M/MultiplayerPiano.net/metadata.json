@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "224864947480297472",
+		"name": "antokek"
+	},
+	"service": "MultiplayerPiano.net",
+	"description": {
+		"en": "An online website used for playing piano with friends. It supports input from both MIDI keyboards and QWERTY keyboards."
+	},
+	"url": "multiplayerpiano.net",
+	"version": "1.0.0",
+	"logo": "https://cdn.discordapp.com/icons/813217128529264710/911b06d8a1a9af24fac16b843165cc0f.png",
+	"thumbnail": "https://multiplayerpiano.com/wp-content/uploads/2023/10/ae9cdbc0dcf1f870/multiplayer-piano-bot.jpeg",
+	"color": "#2f207a",
+	"category": "music",
+	"tags": [
+		"music",
+		"piano",
+		"game"
+	],
+
+	"settings": [
+		{
+			"id": "showRoomName",
+			"title": "Show room name",
+			"value": true
+		},
+		{
+			"id": "showJoinButton",
+			"title": "Show join room button",
+			"value": true
+		}
+
+	]
+}
