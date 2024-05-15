@@ -15,7 +15,8 @@ presence.on("UpdateData", async () => {
 		]),
 		{ pathname, href, search } = document.location,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/bzknrFr.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/T/Threads/assets/logo.png",
 		};
 
 	presenceData.details = "Browsing...";
