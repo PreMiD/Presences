@@ -38,24 +38,20 @@ presence.on("UpdateData", async () => {
 						presenceData.state = document.querySelector("h1");
 						presenceData.buttons = [{ label: "Read Article", url: href }];
 					}
-				} else if (pathList[1] === "author") {
+				} else if (pathList[1] === "author")
 					presenceData.details = "Browsing authors";
-				} else {
+				else {
 					presenceData.details = "Browsing articles by category";
 					presenceData.state = document.querySelector("h1");
 				}
-			} else {
-				presenceData.details = "Browsing articles";
-			}
+			} else presenceData.details = "Browsing articles";
 			break;
 		}
 		case "archives": {
 			if (pathList[1] === "search") {
 				presenceData.details = "Searching for articles";
 				presenceData.state = searchParams.get("query");
-			} else {
-				presenceData.details = "Browsing game walkthroughs";
-			}
+			} else presenceData.details = "Browsing game walkthroughs";
 			break;
 		}
 		case "games": {
@@ -86,9 +82,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = gameTitle;
 					presenceData.buttons = [{ label: "View Game", url: href }];
 				}
-			} else {
-				presenceData.details = "Browsing games";
-			}
+			} else presenceData.details = "Browsing games";
 			break;
 		}
 	}
