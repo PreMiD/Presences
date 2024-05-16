@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 					} else {
 						presenceData.details = "Reading an article";
 						presenceData.state = document.querySelector("h1");
-						presenceData.buttons = [{ label: "Read article", url: href }];
+						presenceData.buttons = [{ label: "Read Article", url: href }];
 					}
 				} else if (pathList[1] === "author") {
 					presenceData.details = "Browsing authors";
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "games": {
-			if (pathList[2]) {
+			if (pathList[1]) {
 				const gameTitle = document
 					.querySelector<HTMLParagraphElement>(".p-gameHeader__game_title")
 					.textContent.replace(/Walkthrough & Guides Wiki$/, "");
@@ -67,6 +67,25 @@ presence.on("UpdateData", async () => {
 					".p-gameHeader__game_logo img"
 				);
 				presenceData.smallImageText = gameTitle;
+				if (pathList[2] === "archives") {
+					const breadcrumbs = [
+						...document.querySelector(".l-breadcrumb__list").children,
+					].slice(2, -1);
+					presenceData.details = "Reading a game walkthrough";
+					presenceData.state = breadcrumbs.length
+						? `${breadcrumbs.map(a => a.textContent).join("/")}: ${
+								document.querySelector("h1").textContent
+						  }`
+						: document.querySelector("h1");
+					presenceData.buttons = [{ label: "Read Walkthrough", url: href }];
+				} else if (pathList[2] === "search") {
+					presenceData.details = "Searching for articles";
+					presenceData.state = searchParams.get("q");
+				} else {
+					presenceData.details = "Viewing a game";
+					presenceData.state = gameTitle;
+					presenceData.buttons = [{ label: "View Game", url: href }];
+				}
 			} else {
 				presenceData.details = "Browsing games";
 			}
