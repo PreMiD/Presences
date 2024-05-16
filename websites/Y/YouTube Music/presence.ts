@@ -282,11 +282,10 @@ function updateSongTimestamps(useTimeLeft: boolean) {
 			.textContent.trim()
 			.split(" / "),
 		[currTimes, totalTimes] = element,
-		TSNew = presence.getTimestamps(
+	if (useTimeLeft) mediaTimestamps = presence.getTimestamps(
 			presence.timestampFromFormat(currTimes),
 			presence.timestampFromFormat(totalTimes)
 		);
-	if (useTimeLeft) mediaTimestamps = TSNew;
 	else {
 		mediaTimestamps = [
 			Date.now() / 1000 - presence.timestampFromFormat(currTimes),
