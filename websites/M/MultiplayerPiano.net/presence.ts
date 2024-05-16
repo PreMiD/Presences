@@ -31,20 +31,16 @@ const presenceData: PresenceData = {
 };
 
 presence.on("UpdateData", async () => {
-    let showRoomName = await getShowRoomName();
-    let showJoinButton = await getShowJoinButton();
-    let roomName = getRoomName();
-    let isAFK = getAFK();
 
-    if (isAFK) presenceData.details = "Currently AFK";
+    if (getAFK()) presenceData.details = "Currently AFK";
     else presenceData.details = "Playing piano";
     
-    if (showRoomName) presenceData.state = `in room "${roomName}"`;
+    if (await getShowRoomName()) presenceData.state = `in room "${getRoomName()}"`;
 
-    if (showJoinButton) {
+    if (await getShowJoinButton()) {
         presenceData.buttons = [{
             label: "Join Room",
-            url: `https://multiplayerpiano.net/?c=${roomName}`
+            url: `https://multiplayerpiano.net/?c=${getRoomName()}`
         }];
     }
 
