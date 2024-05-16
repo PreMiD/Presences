@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "1240257888514080830",
+	clientId: "1240257888514080830",
 });
 
 const enum Assets { // Other default assets can be found at index.d.ts
@@ -7,41 +7,46 @@ const enum Assets { // Other default assets can be found at index.d.ts
 }
 
 async function getShowJoinButton(): Promise<boolean> {
-    const joinButtonSetting = await presence.getSetting<boolean>("showJoinButton");
-    return joinButtonSetting;
+	const joinButtonSetting =
+		await presence.getSetting<boolean>("showJoinButton");
+	return joinButtonSetting;
 }
 
 async function getShowRoomName(): Promise<boolean> {
-    const roomNameSetting = await presence.getSetting<boolean>("showRoomName");
-    return roomNameSetting;
+	const roomNameSetting = await presence.getSetting<boolean>("showRoomName");
+	return roomNameSetting;
 }
 
 function getRoomName(): string {
-    return document.location.href.match(/[?&]c=([^&#]*)/) ? document.location.href.match(/[?&]c=([^&#]*)/)[1] : "lobby";
+	return document.location.href.match(/[?&]c=([^&#]*)/)
+		? document.location.href.match(/[?&]c=([^&#]*)/)[1]
+		: "lobby";
 }
 
 function getAFK(): boolean {
-    return document.querySelector('.name.me [id^="afktag-"]') !== null;
+	return document.querySelector('.name.me [id^="afktag-"]') !== null;
 }
 
 const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
-    startTimestamp: Math.floor(Date.now() / 1000),
+	largeImageKey: Assets.Logo,
+	startTimestamp: Math.floor(Date.now() / 1000),
 };
 
 presence.on("UpdateData", async () => {
+	if (getAFK()) presenceData.details = "Currently AFK";
+	else presenceData.details = "Playing piano";
 
-    if (getAFK()) presenceData.details = "Currently AFK";
-    else presenceData.details = "Playing piano";
-    
-    if (await getShowRoomName()) presenceData.state = `in room "${getRoomName()}"`;
+	if (await getShowRoomName())
+		presenceData.state = `in room "${getRoomName()}"`;
 
-    if (await getShowJoinButton()) {
-        presenceData.buttons = [{
-            label: "Join Room",
-            url: `https://multiplayerpiano.net/?c=${getRoomName()}`
-        }];
-    }
+	if (await getShowJoinButton()) {
+		presenceData.buttons = [
+			{
+				label: "Join Room",
+				url: `https://multiplayerpiano.net/?c=${getRoomName()}`,
+			},
+		];
+	}
 
-    presence.setActivity(presenceData);
+	presence.setActivity(presenceData);
 });
