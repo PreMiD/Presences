@@ -21,8 +21,7 @@ function getRoomName(): string {
 }
 
 function getAFK(): boolean {
-    const afkElement = document.querySelector('.name.me [id^="afktag-"]');
-    return afkElement !== null;
+    return document.querySelector('.name.me [id^="afktag-"]') !== null;
 }
 
 const presenceData: PresenceData = {
