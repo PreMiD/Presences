@@ -17,10 +17,7 @@ async function getShowRoomName(): Promise<boolean> {
 }
 
 function getRoomName(): string {
-    const url = document.location.href;
-    const regex = /[?&]c=([^&#]*)/;
-    const matches = url.match(regex);
-    return matches ? matches[1] : "lobby";
+    return document.location.href.match(/[?&]c=([^&#]*)/) ? document.location.href.match(/[?&]c=([^&#]*)/)[1] : "lobby";
 }
 
 function getAFK(): boolean {
@@ -34,20 +31,15 @@ const presenceData: PresenceData = {
 };
 
 presence.on("UpdateData", async () => {
-    const showRoomName = await getShowRoomName();
-    const showJoinButton = await getShowJoinButton();
-    const roomName = getRoomName();
-    const isAFK = getAFK();
+    let showRoomName = await getShowRoomName();
+    let showJoinButton = await getShowJoinButton();
+    let roomName = getRoomName();
+    let isAFK = getAFK();
 
-    if (isAFK) {
-        presenceData.details = "Currently AFK";
-    } else {
-        presenceData.details = "Playing piano";
-    }
-
-    if (showRoomName) {
-        presenceData.state = `in room "${roomName}"`;
-    }
+    if (isAFK) presenceData.details = "Currently AFK";
+    else presenceData.details = "Playing piano";
+    
+    if (showRoomName) presenceData.state = `in room "${roomName}"`;
 
     if (showJoinButton) {
         presenceData.buttons = [{
