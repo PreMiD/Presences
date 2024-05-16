@@ -7,7 +7,8 @@ let prevTitleAuthor = "",
 	mediaTimestamps: [number, number],
 	oldPath: string,
 	startTimestamp: number,
-	videoListenerAttached = false;
+	videoListenerAttached = false,
+	useTimeLeftChanged = false;
 
 presence.on("UpdateData", async () => {
 	const { pathname, search, href } = document.location,
@@ -40,7 +41,12 @@ presence.on("UpdateData", async () => {
 		videoElement =
 			document.querySelector<HTMLVideoElement>("video.video-stream");
 
-	if (videoElement) {
+	if (useTimeLeftChanged !== useTimeLeft && !privacyMode) {
+		useTimeLeftChanged = useTimeLeft;
+		updateSongTimestamps(useTimeLeft);
+	}
+
+	if (videoElement && !privacyMode) {
 		if (!videoListenerAttached) {
 			//* If video scrobbled, update timestamps
 			videoElement.addEventListener("seeked", () =>
@@ -277,8 +283,15 @@ function updateSongTimestamps(useTimeLeft: boolean) {
 			.split(" / "),
 		[currTimes, totalTimes] = element;
 
-	mediaTimestamps = presence.getTimestamps(
-		useTimeLeft ? presence.timestampFromFormat(currTimes) : Date.now(),
-		useTimeLeft ? presence.timestampFromFormat(totalTimes) : null
-	);
+	if (useTimeLeft) {
+		mediaTimestamps = presence.getTimestamps(
+			presence.timestampFromFormat(currTimes),
+			presence.timestampFromFormat(totalTimes)
+		);
+	} else {
+		mediaTimestamps = [
+			Date.now() / 1000 - presence.timestampFromFormat(currTimes),
+			null,
+		];
+	}
 }
