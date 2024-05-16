@@ -281,12 +281,14 @@ function updateSongTimestamps(useTimeLeft: boolean) {
 			.querySelector<HTMLSpanElement>("#left-controls > span")
 			.textContent.trim()
 			.split(" / "),
-		[currTimes, totalTimes] = element,
-	if (useTimeLeft) mediaTimestamps = presence.getTimestamps(
+		[currTimes, totalTimes] = element;
+
+	if (useTimeLeft) {
+		mediaTimestamps = presence.getTimestamps(
 			presence.timestampFromFormat(currTimes),
 			presence.timestampFromFormat(totalTimes)
 		);
-	else {
+	} else {
 		mediaTimestamps = [
 			Date.now() / 1000 - presence.timestampFromFormat(currTimes),
 			null,
