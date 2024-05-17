@@ -12,9 +12,9 @@
 	"matches": [
 		"*://game8.co/*"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/NPFtbsz.png",
-	"thumbnail": "https://storage.googleapis.com/studio-design-asset-files/projects/65qm6x5naV/s-2295x747_v-frms_webp_ae98e723-bea7-43f8-a3ca-9cd451fc7446.webp",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Game8/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Game8/assets/thumbnail.webp",
 	"color": "#ffffff",
 	"category": "games",
 	"tags": [
