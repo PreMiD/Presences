@@ -85,11 +85,12 @@ function getVideoDetails(
 
 		if (selectElement === null)
 			presenceData.state = seriesNameElement.textContent.trim();
-		else
+		else {
 			presenceData.state = `${seriesNameElement.textContent.trim()}: ${selectElement.options[
 				selectElement.selectedIndex
 			].textContent.trim()}`;
-
+		}
+			
 		if (showButtons) {
 			presenceData.buttons = [
 				{
@@ -133,17 +134,17 @@ function getVideoDetails(
 					},
 				];
 			}
-		} else {
+		} else if (seriesLinkElement && episodeElement) {
 			//has series and episode indicator
-
 			const match = episodeElement.textContent.trim().match(/(\d+)[^\d]+(\d+)/);
 
 			presenceData.state = seriesLinkElement.textContent.trim();
 
-			if (match)
+			if (match) {
 				presenceData.details = `S${match[1]}E${
 					match[2]
 				}: ${videoNameElement.textContent.trim()}`;
+			}
 
 			if (showButtons) {
 				presenceData.buttons = [
