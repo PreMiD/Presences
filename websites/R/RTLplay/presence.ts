@@ -40,42 +40,42 @@ function getChannel(channel: string) {
 		case channel.includes("tvi"): {
 			return {
 				channel: "RTL TVi",
-				type: "tv",
+				type: ActivityType.Watching,
 				logo: Assets.RTLTVi,
 			};
 		}
 		case channel.includes("club"): {
 			return {
 				channel: "RTL club",
-				type: "tv",
+				type: ActivityType.Watching,
 				logo: Assets.RTLclub,
 			};
 		}
 		case channel.includes("plug"): {
 			return {
 				channel: "RTL plug",
-				type: "tv",
+				type: ActivityType.Watching,
 				logo: Assets.RTLplug,
 			};
 		}
 		case channel.includes("bel"): {
 			return {
 				channel: "Bel RTL",
-				type: "radio",
+				type: ActivityType.Listening,
 				logo: Assets.BelRTL,
 			};
 		}
 		case channel.includes("contact"): {
 			return {
 				channel: "Radio Contact",
-				type: "radio",
+				type: ActivityType.Listening,
 				logo: Assets.Contact,
 			};
 		}
 		default: {
 			return {
 				channel,
-				type: "tv",
+				type: ActivityType.Watching,
 				logo: Assets.RTLplay,
 			};
 		}
@@ -101,6 +101,7 @@ function getTitleTrimmed(title: string) {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Animated, // Default
+			type: ActivityType.Watching,
 		},
 		{ /*hostname,*/ href, pathname } = document.location,
 		[privacy, time, buttons] = await Promise.all([
