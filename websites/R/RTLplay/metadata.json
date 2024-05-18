@@ -1,0 +1,55 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "87107972676751360",
+		"name": "pierrequlroule"
+	},
+	"service": "RTLplay",
+	"description": {
+		"en": "With RTLplay, you'll find all the programs of our RTL TVI, Club RTL, Plug RTL, Bel RTL and Radio Contact channels live and in replay, as well as exclusive content.",
+		"fr": "Avec RTLplay, retrouvez tous les programmes de nos chaînes RTL TVI, Club RTL, Plug RTL, Bel RTL et Radio Contact en direct et en replay ainsi que des contenus exclusifs."
+	},
+	"url": "www.rtlplay.be",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/1f5rMxV.png",
+	"thumbnail": "https://i.imgur.com/WURTyw5.jpg",
+	"color": "#121726",
+	"category": "videos",
+	"tags": [
+		"rtl",
+		"rtl-tvi",
+		"tvi",
+		"club",
+		"plug",
+		"contact",
+		"belrtl",
+		"media",
+		"streaming",
+		"belgium",
+		"video",
+		"broadcast"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "time",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}
