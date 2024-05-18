@@ -35,43 +35,51 @@ const enum Assets { // Other default assets can be found at index.d.ts
 	Contact = "https://i.imgur.com/ULP7pgr.png",
 }
 
-function getLivestream(pathname: string) {
-	const livestream = {
-		channel: "",
-		type: "watching",
-		logo: Assets.Logo,
-	};
+function getChannel(channel: string) {
 	switch (true) {
-		case pathname.includes("tvi"): {
-			livestream.channel = "RTL TVi";
-			livestream.type = "watching";
-			livestream.logo = Assets.RTLTVi;
-			break;
+		case channel.includes("tvi"): {
+			return {
+				channel: "RTL TVi",
+				type: "tv",
+				logo: Assets.RTLTVi,
+			};
 		}
-		case pathname.includes("club"): {
-			livestream.channel = "RTL club";
-			livestream.type = "watching";
-			livestream.logo = Assets.RTLclub;
-			break;
+		case channel.includes("club"): {
+			return {
+				channel: "RTL club",
+				type: "tv",
+				logo: Assets.RTLclub,
+			};
 		}
-		case pathname.includes("plug"): {
-			livestream.channel = "RTL plug";
-			livestream.type = "watching";
-			livestream.logo = Assets.RTLplug;
-			break;
+		case channel.includes("plug"): {
+			return {
+				channel: "RTL plug",
+				type: "tv",
+				logo: Assets.RTLplug,
+			};
 		}
-		case pathname.includes("bel"): {
-			livestream.channel = "Bel RTL";
-			livestream.logo = Assets.BelRTL;
-			break;
+		case channel.includes("bel"): {
+			return {
+				channel: "Bel RTL",
+				type: "radio",
+				logo: Assets.BelRTL,
+			};
 		}
-		case pathname.includes("contact"): {
-			livestream.channel = "Radio Contact";
-			livestream.logo = Assets.Contact;
-			break;
+		case channel.includes("contact"): {
+			return {
+				channel: "Radio Contact",
+				type: "radio",
+				logo: Assets.Contact,
+			};
+		}
+		default: {
+			return {
+				channel,
+				type: "tv",
+				logo: Assets.RTLplay,
+			};
 		}
 	}
-	return livestream;
 }
 
 function getTitleTrimmed(title: string) {
@@ -119,7 +127,7 @@ presence.on("UpdateData", async () => {
 		/* Research page 
 	Page de recherche
 	(https://www.rtlplay.be/recherche) */
-		case pathname.includes("recherche"): {
+		case pathname.split("/")[1] === "recherche": {
 			presenceData.details = (await strings).searchSomething;
 
 			presenceData.smallImageKey = Assets.Search;
@@ -133,7 +141,7 @@ presence.on("UpdateData", async () => {
 		/* My account page 
 	Page Mon compte
 	(https://www.rtlplay.be/mon-compte) */
-		case pathname.includes("mon-compte"): {
+		case pathname.split("/")[1] === "mon-compte": {
 			presenceData.details = privacy
 				? (await strings).viewAPage
 				: (await strings).viewAccount;
@@ -178,17 +186,17 @@ presence.on("UpdateData", async () => {
 		/* Live channel page
 	Page d'une chaîne en direct
 	(ex: https://www.rtlplay.be/tvi/direct) */
-		case pathname.includes("direct"): {
+		case pathname.split("/")[2] === "direct": {
 			presenceData.details = privacy
 				? (await strings).watchingLive
-				: `${(await strings).watching} ${getLivestream(pathname).channel}`;
+				: `${(await strings).watching} ${getChannel(pathname).channel}`;
 			presenceData.state = privacy
 				? ""
 				: `${
 						document.querySelector("div.sc-18trp4n-3.bVsrtw > h1").textContent
 				  }`; // Content of the first line
 
-			presenceData.largeImageKey = getLivestream(pathname).logo;
+			presenceData.largeImageKey = getChannel(pathname).logo;
 			presenceData.smallImageKey = Assets.Live;
 			presenceData.smallImageText = (await strings).live;
 
@@ -231,17 +239,17 @@ presence.on("UpdateData", async () => {
 		/* Channel HUB page
 	Page HUB d'une chaîne
 	(ex: https://www.rtlplay.be/tvi) */
-		case pathname.includes("tvi") ||
-			pathname.includes("club") ||
-			pathname.includes("plug") ||
-			pathname.includes("bel") ||
-			pathname.includes("contact"): {
+		case pathname.split("/")[1] === "tvi" ||
+			pathname.split("/")[1] === "club" ||
+			pathname.split("/")[1] === "plug" ||
+			pathname.split("/")[1] === "bel" ||
+			pathname.split("/")[1] === "contact": {
 			presenceData.details = privacy
 				? (await strings).viewAPage
 				: (await strings).viewChannel;
-			presenceData.state = privacy ? "" : `${getLivestream(pathname).channel}`;
+			presenceData.state = privacy ? "" : `${getChannel(pathname).channel}`;
 
-			presenceData.largeImageKey = getLivestream(pathname).logo;
+			presenceData.largeImageKey = getChannel(pathname).logo;
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = (await strings).browsing;
 
