@@ -4,15 +4,13 @@ const presence = new Presence({
 	timebrowsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const [pages, state] = document.location.pathname.split("/").filter(p => p),
+	const pages = document.location.pathname.split("/").filter(p => p),
 		presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/C/Codewars/assets/logo.png",
+			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/C/Codewars/assets/logo.png",
 			startTimestamp: timebrowsed,
-			details: "Browsing ...",
+			details: "Browsing...",
 		},
 		displayStats = await presence.getSetting<boolean>("statsdisplay");
-
 	switch (pages[0]) {
 		case "dashboard": {
 			presenceData.details = "Viewing Dashboard";
@@ -21,15 +19,13 @@ presence.on("UpdateData", async () => {
 					document.querySelector(".ml-10px").textContent
 				} Honor`;
 			}
-
 			break;
 		}
 		case "topics": {
 			if (pages[1]) {
 				presenceData.details = "Viewing Topic";
-				presenceData.state = state;
+				presenceData.state = "Topic: " + pages[1];
 			} else presenceData.details = "Viewing Forum";
-
 			break;
 		}
 		case "kumite": {
@@ -44,12 +40,20 @@ presence.on("UpdateData", async () => {
 			if (pages[0] === "users" && pages[1] === "leaderboard")
 				presenceData.details = "Viewing Leaderboard";
 			else if (pages[0] === "kata") {
-				if (pages[2]) {
+				if (pages[2] && pages[2].startsWith("my-languages")) {
+					let search = (document.querySelectorAll('[name="q"]')[0] as HTMLInputElement).getAttribute("value") || "All Katas";
+					let difficultyFilter = (document.querySelectorAll('[Label="Difficulty"]')[0] as HTMLInputElement).getAttribute("value");
+					if (difficultyFilter) {
+						difficultyFilter = difficultyFilter.split(",").map((x: string) => {
+							return x.replace(/-/g, "").trim() + " kyu";
+						}).join(", ");
+					}
+					else difficultyFilter = "Any kyu";
 					presenceData.details = "Searching Katas";
-					presenceData.state = `${document.querySelector(".ml-0").textContent}`;
+					presenceData.state = `${search} | ${difficultyFilter}`;
 				} else {
 					presenceData.details = `Solving Kata | ${
-						document.querySelector(".inner-small-hex > span").textContent
+						document.querySelectorAll(".w-full>div>div>div>span")[0].textContent
 					}`;
 					presenceData.state =
 						document.querySelector(".items-center > h4").textContent;
@@ -67,22 +71,22 @@ presence.on("UpdateData", async () => {
 				pages[1] !== "leaderboard" &&
 				pages[1] !== "edit"
 			) {
-				if (Array.from(document.querySelectorAll(".h-full")).length > 6) {
-					presenceData.details = "Viewing own Profile";
+				let urls = Array.from(document.getElementsByTagName("img")).map(e => e.src);
+				let avatar = urls.find(e => e.includes("avatar"));
+				let avatar2 = urls.find(e => e.includes("avatar") && e !== avatar);
+				if (!avatar2) {
+					presenceData.details = "Viewing own profile";
 					if (displayStats) {
 						presenceData.state = `${
 							document.querySelector(".ml-10px").textContent
 						} Honor | ${document.querySelector(".small-hex").textContent}`;
 					}
 				} else {
-					presenceData.details = "Viewing Profile from";
+					presenceData.details = "Viewing profile of";
 					if (displayStats) {
-						presenceData.state = `${document
-							.querySelector(".stat")
-							.textContent.slice("Name:".length)} | ${Array.from(
-							document.querySelector(".stat-box").children
-						)
-							.find(e => e.textContent.startsWith("<b>Clan:</b>"))
+						presenceData.state = `${pages[1]} | 
+						${Array.from(document.querySelector(".stat-box").children)
+							.find(e => e.textContent.startsWith("Clan:"))
 							.textContent.slice("Clan:".length)}`;
 					}
 				}
