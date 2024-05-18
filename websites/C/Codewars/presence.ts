@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
             ).getAttribute("value") || "All Katas";
           let difficultyFilter = (
             document.querySelectorAll(
-              '[Label="Difficulty"]',
+              '[Label="Difficulty"]'
             )[0] as HTMLInputElement
           ).getAttribute("value");
           if (difficultyFilter) {
@@ -82,9 +82,15 @@ presence.on("UpdateData", async () => {
         pages[1] !== "edit"
       ) {
         const urls = Array.from(document.querySelectorAll("img")).map(
-          (e) => e.src,
+          (e) => e.src
         );
-        if (!urls.find((e) => e.includes("avatar") && e !== urls.find((e) => e.includes("avatar")))) {
+        if (
+          !urls.find(
+            (e) =>
+              e.includes("avatar") &&
+              e !== urls.find((e) => e.includes("avatar"))
+          )
+        ) {
           presenceData.details = "Viewing own profile";
           if (displayStats) {
             presenceData.state = `${
