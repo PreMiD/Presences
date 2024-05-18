@@ -9,10 +9,9 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (document.querySelector(".controls").ariaLabel.includes("Playing")) {
-		presenceData.details =
-			document.querySelector("div.episode > span").textContent;
+		presenceData.details = document.querySelector("div.episode").textContent;
 		presenceData.state = document.querySelector(
-			"div.podcast-title-date > span"
+			".player_podcast_title"
 		).textContent;
 
 		const time = document
@@ -30,10 +29,9 @@ presence.on("UpdateData", async () => {
 				Date.now() - (time[0] * 60 + time[1]) * 1000;
 		}
 	} else if (document.querySelector(".controls").ariaLabel.includes("Paused")) {
-		presenceData.details =
-			document.querySelector("div.episode > span").textContent;
+		presenceData.details = document.querySelector("div.episode").textContent;
 		presenceData.state = document.querySelector(
-			"div.podcast-title-date > span"
+			".player_podcast_title"
 		).textContent;
 		presenceData.smallImageKey = Assets.Pause;
 		delete presenceData.startTimestamp;
@@ -46,10 +44,9 @@ presence.on("UpdateData", async () => {
 			document.location.pathname.startsWith("/discover/podcast/")
 		) {
 			presenceData.details = "Viewing podcast";
-			presenceData.state =
-				document.querySelectorAll(
-					".title-and-actions"
-				)[0].children[0].textContent;
+			presenceData.state = document.querySelector(
+				"*[class*='PodcastTitle-sc']"
+			).textContent;
 		} else if (document.location.pathname === "/discover")
 			presenceData.details = "Viewing discover page";
 		else if (document.location.pathname.startsWith("/discover/list/")) {
