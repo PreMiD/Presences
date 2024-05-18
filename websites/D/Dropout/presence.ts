@@ -90,7 +90,7 @@ function getVideoDetails(
 				selectElement.selectedIndex
 			].textContent.trim()}`;
 		}
-			
+
 		if (showButtons) {
 			presenceData.buttons = [
 				{
