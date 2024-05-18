@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
     case "topics": {
       if (pages[1]) {
         presenceData.details = "Viewing Topic";
-        presenceData.state = "Topic: " + pages[1];
+        presenceData.state = `Topic: ${pages[1]}`;
       } else presenceData.details = "Viewing Forum";
       break;
     }
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing Leaderboard";
       else if (pages[0] === "kata") {
         if (pages[2] && pages[2].startsWith("my-languages")) {
-          let search =
+          const search =
             (
               document.querySelectorAll('[name="q"]')[0] as HTMLInputElement
             ).getAttribute("value") || "All Katas";
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
             difficultyFilter = difficultyFilter
               .split(",")
               .map((x: string) => {
-                return x.replace(/-/g, "").trim() + " kyu";
+                return `${x.replace(/-/g, "").trim()} kyu`;
               })
               .join(", ");
           } else difficultyFilter = "Any kyu";
@@ -81,11 +81,11 @@ presence.on("UpdateData", async () => {
         pages[1] !== "leaderboard" &&
         pages[1] !== "edit"
       ) {
-        let urls = Array.from(document.getElementsByTagName("img")).map(
+        const urls = Array.from(document.querySelectorAll("img")).map(
           (e) => e.src,
-        );
-        let avatar = urls.find((e) => e.includes("avatar"));
-        let avatar2 = urls.find((e) => e.includes("avatar") && e !== avatar);
+        ),
+	  avatar = urls.find((e) => e.includes("avatar")),
+	  avatar2 = urls.find((e) => e.includes("avatar") && e !== avatar);
         if (!avatar2) {
           presenceData.details = "Viewing own profile";
           if (displayStats) {
