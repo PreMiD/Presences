@@ -83,10 +83,8 @@ presence.on("UpdateData", async () => {
       ) {
         const urls = Array.from(document.querySelectorAll("img")).map(
           (e) => e.src,
-        ),
-	  avatar = urls.find((e) => e.includes("avatar")),
-	  avatar2 = urls.find((e) => e.includes("avatar") && e !== avatar);
-        if (!avatar2) {
+        );
+        if (!urls.find((e) => e.includes("avatar") && e !== urls.find((e) => e.includes("avatar")))) {
           presenceData.details = "Viewing own profile";
           if (displayStats) {
             presenceData.state = `${
