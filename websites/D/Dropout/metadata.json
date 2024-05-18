@@ -10,10 +10,8 @@
 	},
 	"url": "dropout.tv",
 	"matches": [
-		"*://nebula.tv/*"
+		"*://dropout.tv/*"
 	],
-	"iframe": true,
-	"iFrameRegExp": "embed.vhx.tv",
 	"version": "1.0.0",
 	"logo": "https://i.ibb.co/hCK6Lj3/dropout-logo.png",
 	"thumbnail": "https://i.ibb.co/TmWzv05/dropoutbanner.jpg",
@@ -26,6 +24,8 @@
 		"dropout",
 		"collegehumor"
 	],
+	"iframe": true,
+	"iFrameRegExp": "embed.vhx.tv",
 	"settings": [
 		{
 			"id": "buttons",

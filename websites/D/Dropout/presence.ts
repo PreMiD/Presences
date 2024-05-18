@@ -1,4 +1,4 @@
-import {QueryParams, IFrameData} from "./interfaces";
+import { QueryParams, IFrameData } from "./interfaces";
 
 const presence = new Presence({
 		clientId: "1240164154682249227",
@@ -6,10 +6,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	logo = "https://i.ibb.co/hCK6Lj3/dropout-logo.png";
 
-let duration: number,
-currentTime: number,
-paused: boolean,
-playback: boolean;
+let duration: number, currentTime: number, paused: boolean, playback: boolean;
 
 presence.on("iFrameData", (data: IFrameData) => {
 	playback = data.duration ? true : false;
@@ -18,12 +15,12 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: logo,
-		startTimestamp: browsingTimestamp,
-	},
-	{ pathname, href } = document.location,
-	showButtons = await presence.getSetting<boolean>("buttons"),
-	path = pathname.split("/");
+			largeImageKey: logo,
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname, href } = document.location,
+		showButtons = await presence.getSetting<boolean>("buttons"),
+		path = pathname.split("/");
 
 	path.shift();
 	if (pathname.endsWith("/")) path.pop();
@@ -72,79 +69,81 @@ function getSearchDetails(presenceData: PresenceData): void {
 }
 
 function getVideoDetails(
-    presenceData: PresenceData,
-    showButtons: boolean,
-    href: string
+	presenceData: PresenceData,
+	showButtons: boolean,
+	href: string
 ): void {
-    const mainSelector = "main > section > section > div > div > div";
-    const seriesNameElement = document.querySelector(mainSelector + " > h1");
+	const mainSelector = "main > section > section > div > div > div",
+		seriesNameElement = document.querySelector(`${mainSelector} > h1`);
 
-    if (seriesNameElement !== null) {
-        // Viewing a series
-        const selectElement = document.querySelector(mainSelector + " > form:nth-child(1) > select") as HTMLSelectElement;
-        presenceData.details = "Viewing a series";
+	if (seriesNameElement !== null) {
+		// Viewing a series
+		const selectElement = document.querySelector(
+			`${mainSelector} > form:nth-child(1) > select`
+		) as HTMLSelectElement;
+		presenceData.details = "Viewing a series";
 
-        if (selectElement === null) {
-            presenceData.state = seriesNameElement.textContent.trim();
-        } else {
-            const selectedOption = selectElement.options[selectElement.selectedIndex];
-            const optionName = selectedOption.textContent.trim();
-            presenceData.state = `${seriesNameElement.textContent.trim()}: ${optionName}`;
-        }
+		if (selectElement === null)
+			presenceData.state = seriesNameElement.textContent.trim();
+		else
+			presenceData.state = `${seriesNameElement.textContent.trim()}: ${selectElement.options[
+				selectElement.selectedIndex
+			].textContent.trim()}`;
 
-        if (showButtons) {
-            presenceData.buttons = [
-                {
-                    label: "View Series",
-                    url: href,
-                },
-            ];
-        }
-    } else {
-        const videoInfoString = "#watch-info > div > div > div > div > div";
-        const videoNameElement = document.querySelector(videoInfoString + " > h1");
-        const seriesLinkElement = document.querySelector(videoInfoString + " > h3 > a");
-        const episodeElement = document.querySelector(videoInfoString + " > h5 > a");
+		if (showButtons) {
+			presenceData.buttons = [
+				{
+					label: "View Series",
+					url: href,
+				},
+			];
+		}
+	} else {
+		const videoInfoString = "#watch-info > div > div > div > div > div",
+			videoNameElement = document.querySelector(`${videoInfoString} > h1`),
+			seriesLinkElement = document.querySelector(`${videoInfoString} > h3 > a`),
+			episodeElement = document.querySelector(`${videoInfoString} > h5 > a`);
 
-		if(!videoNameElement) return;
+		if (!videoNameElement) return;
 		presenceData.details = videoNameElement.textContent.trim();
 
-		if(!seriesLinkElement && !episodeElement) {
+		if (!seriesLinkElement && !episodeElement) {
 			//no series name or episode indicator
-			if(showButtons) {
-				presenceData.buttons = [{
-					label: "Watch Video",
-					url: href
-				}];
+			if (showButtons) {
+				presenceData.buttons = [
+					{
+						label: "Watch Video",
+						url: href,
+					},
+				];
 			}
-
-		}
-		else if(!seriesLinkElement && episodeElement) { 
+		} else if (!seriesLinkElement && episodeElement) {
 			//no series, has episode indicator
 			presenceData.state = episodeElement.textContent.trim();
 
-			if(showButtons) {
-				presenceData.buttons = [{
-					label: "Watch Video",
-					url: href
-				}, {
-					label: "View Series",
-					url: episodeElement.getAttribute("href")
-				}];
+			if (showButtons) {
+				presenceData.buttons = [
+					{
+						label: "Watch Video",
+						url: href,
+					},
+					{
+						label: "View Series",
+						url: episodeElement.getAttribute("href"),
+					},
+				];
 			}
-		}
-
-		else { 
+		} else {
 			//has series and episode indicator
-			const episodePart = episodeElement.textContent.trim();
-			const episodeRegex = /(\d+)[^\d]+(\d+)/;
-			const match = episodePart.match(episodeRegex);
+
+			const match = episodeElement.textContent.trim().match(/(\d+)[^\d]+(\d+)/);
 
 			presenceData.state = seriesLinkElement.textContent.trim();
 
-			if (match) {
-				presenceData.details = `S${match[1]}E${match[2]}: ${videoNameElement.textContent.trim()}`;
-			}
+			if (match)
+				presenceData.details = `S${match[1]}E${
+					match[2]
+				}: ${videoNameElement.textContent.trim()}`;
 
 			if (showButtons) {
 				presenceData.buttons = [
@@ -154,19 +153,17 @@ function getVideoDetails(
 					},
 					{
 						label: "View Series",
-						url: getUrl(seriesLinkElement.getAttribute("href"))
+						url: getUrl(seriesLinkElement.getAttribute("href")),
 					},
 				];
 			}
 		}
 
 		setTimestamps(presenceData);
-    }
+	}
 }
 
-function setTimestamps(
-	presenceData: PresenceData
-): void {
+function setTimestamps(presenceData: PresenceData): void {
 	delete presenceData.startTimestamp;
 	presenceData.endTimestamp = presence.getTimestamps(currentTime, duration)[1];
 	if (paused) {
@@ -193,14 +190,9 @@ function parseQueryParams(): QueryParams {
 	return queryParams;
 }
 
-function getUrl(url: string) : string {
-	if(url.startsWith("/")) {
-		return getRootUrl() + url;
-	}
-
-	else {
-		return url;
-	}
+function getUrl(url: string): string {
+	if (url.startsWith("/")) return getRootUrl() + url;
+	else return url;
 }
 
 function getRootUrl(): string {

@@ -3,7 +3,7 @@ export interface QueryParams {
 }
 
 export interface IFrameData {
-    currentTime: number;
-    duration: number;
-    paused: boolean;
+	currentTime: number;
+	duration: number;
+	paused: boolean;
 }
