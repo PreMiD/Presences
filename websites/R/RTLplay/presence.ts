@@ -82,25 +82,30 @@ function getChannel(channel: string) {
 	}
 }
 
-function getTitleTrimmed(title: string) {
-	switch (true) {
-		case /en replay sur RTLplay*/.test(title): {
-			return title.split("en replay sur RTLplay")[0].trim();
-		}
-		case /sur RTLplay*/.test(title): {
-			return title.split("sur RTLplay")[0].trim();
-		}
-		case /:/.test(title): {
-			return title.split(":")[0].trim();
-		}
-		default: {
-			return title;
-		}
-	}
+function exist(selector: string) {
+	return document.querySelector(selector) !== null;
 }
+/*
+To have a cover art as largeImageKey
+const shortenedURLs: Record<string, string> = {};
+async function getShortURL(url: string) {
+	if (!url || url.length < 256) return url;
+	if (shortenedURLs[url]) return shortenedURLs[url];
+	try {
+		const pdURL = await (
+			await fetch(`https://pd.premid.app/create/${url}`)
+		).text();
+		shortenedURLs[url] = pdURL;
+		return pdURL;
+	} catch (err) {
+		presence.error(err);
+		return url;
+	}
+}*/
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Animated, // Default
+			largeImageText: "RTLplay",
 			type: ActivityType.Watching,
 		},
 		{ /*hostname,*/ href, pathname } = document.location,
@@ -111,8 +116,8 @@ presence.on("UpdateData", async () => {
 		]);
 
 	switch (true) {
-		/* Main page 
-	Page principale
+		/* MAIN PAGE (Page principale)
+
 	(https://www.rtlplay.be/) */
 		case pathname === "/" || pathname === "/rtl_play": {
 			presenceData.details = (await strings).browsing;
@@ -125,8 +130,8 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 
-		/* Research page 
-	Page de recherche
+		/* RESEARCH PAGE (Page de recherche)
+
 	(https://www.rtlplay.be/recherche) */
 		case pathname.split("/")[1] === "recherche": {
 			presenceData.details = (await strings).searchSomething;
@@ -139,8 +144,8 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 
-		/* My account page 
-	Page Mon compte
+		/* ACCOUNT PAGE (Page Mon compte)
+
 	(https://www.rtlplay.be/mon-compte) */
 		case pathname.split("/")[1] === "mon-compte": {
 			presenceData.details = privacy
@@ -164,155 +169,105 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 
-		/* Watching an ad 
-	Regarde une publicité
-	(Any Player or Livestream page) */
-		case document.querySelector(
-			"div.sc-3kw2pp-0.jqFqPu.sc-18trp4n-6.sc-bff0kr-0.cQaAsL.lmxHAW > div.sc-18trp4n-3.bVsrtw > h1"
-		) !== null: {
-			// Check if the tag with the text Publicité exist
-			presenceData.details = (await strings).watchingAd;
-			presenceData.state = privacy
-				? ""
-				: getTitleTrimmed(document.querySelector("head > title").textContent); // Content of the title tag
-
-			presenceData.smallImageKey = Assets.Viewing;
-			presenceData.smallImageText = (await strings).viewing;
-
-			if (time) presenceData.startTimestamp = browsingTimestamp;
-
-			break;
-		}
-
-		/* Live channel page
-	Page d'une chaîne en direct
-	(ex: https://www.rtlplay.be/tvi/direct) */
-		case pathname.split("/")[2] === "direct": {
-			presenceData.details = privacy
-				? (await strings).watchingLive
-				: `${(await strings).watching} ${getChannel(pathname).channel}`;
-			presenceData.state = privacy
-				? ""
-				: `${
-						document.querySelector("div.sc-18trp4n-3.bVsrtw > h1").textContent
-				  }`; // Content of the first line
-
+		// CHANNEL PAGE (Page de chaine)
+		case ["tvi", "club", "plug", "bel", "contact"].includes(
+			pathname.split("/")[1]
+		): {
+			const { channel } = getChannel(pathname);
 			presenceData.largeImageKey = getChannel(pathname).logo;
-			presenceData.smallImageKey = Assets.Live;
-			presenceData.smallImageText = (await strings).live;
 
-			if (time) {
-				if (
-					document.querySelector('[type="duration"]').textContent.includes("-")
-				) {
-					presenceData.endTimestamp = presence.getTimestamps(
-						0,
-						presence.timestampFromFormat(
-							document
-								.querySelector('[type="duration"]')
-								.textContent.replace("-", "")
-						)
-					)[1];
-				} else {
-					presenceData.endTimestamp = presence.getTimestamps(
-						presence.timestampFromFormat(
-							document.querySelector('[type="currentTime"]').textContent
-						),
-						presence.timestampFromFormat(
-							document.querySelector('[type="duration"]').textContent
-						)
-					)[1];
+			switch (true) {
+				/* HUB CHANNEL PAGE (Page HUB d'une chaîne)
+
+				(ex: https://www.rtlplay.be/tvi) */
+				default: {
+					presenceData.details = privacy
+						? (await strings).viewAPage
+						: (await strings).viewChannel;
+					presenceData.state = privacy ? "" : `${channel}`;
+
+					presenceData.smallImageKey = Assets.Reading;
+					presenceData.smallImageText = (await strings).browsing;
+
+					if (time) presenceData.startTimestamp = browsingTimestamp;
+
+					break;
 				}
-			}
+				/* LIVE CHANNEL PAGE (Page d'une chaîne en direct)
+				aka LIVE VIDEO PLAYER (Player vidéo en direct)
 
-			if (buttons) {
-				presenceData.buttons = [
+				(ex: https://www.rtlplay.be/tvi/direct) */
+				case pathname.split("/")[2] === "direct":
 					{
-						label: (await strings).buttonWatchStream,
-						url: href, // We are not redirecting directly to the raw stream, it's only the livestream page
-					},
-				];
+						presenceData.details = privacy
+							? (await strings).watchingLive
+							: `${(await strings).watching} ${channel}`;
+						presenceData.state = privacy
+							? ""
+							: document.querySelector("div.sc-18trp4n-3.bVsrtw > h1")
+									.textContent; // Content of the first line
+
+						presenceData.largeImageKey = getChannel(pathname).logo;
+						presenceData.largeImageText = channel;
+						presenceData.smallImageKey = Assets.Live;
+						presenceData.smallImageText = (await strings).live;
+
+						presenceData.type = getChannel(pathname).type;
+
+						if (time) {
+							if (
+								document
+									.querySelector('[type="duration"]')
+									.textContent.includes("-")
+							) {
+								presenceData.endTimestamp = presence.getTimestamps(
+									0,
+									presence.timestampFromFormat(
+										document
+											.querySelector('[type="duration"]')
+											.textContent.replace("-", "")
+									)
+								)[1];
+							} else {
+								presenceData.endTimestamp = presence.getTimestamps(
+									presence.timestampFromFormat(
+										document.querySelector('[type="currentTime"]').textContent
+									),
+									presence.timestampFromFormat(
+										document.querySelector('[type="duration"]').textContent
+									)
+								)[1];
+							}
+						}
+
+						if (buttons) {
+							presenceData.buttons = [
+								{
+									label: (await strings).buttonWatchStream,
+									url: href, // We are not redirecting directly to the raw stream, it's only the livestream page
+								},
+							];
+						}
+					}
+
+					break;
 			}
-
 			break;
 		}
 
-		/* Channel HUB page
-	Page HUB d'une chaîne
-	(ex: https://www.rtlplay.be/tvi) */
-		case pathname.split("/")[1] === "tvi" ||
-			pathname.split("/")[1] === "club" ||
-			pathname.split("/")[1] === "plug" ||
-			pathname.split("/")[1] === "bel" ||
-			pathname.split("/")[1] === "contact": {
-			presenceData.details = privacy
-				? (await strings).viewAPage
-				: (await strings).viewChannel;
-			presenceData.state = privacy ? "" : `${getChannel(pathname).channel}`;
+		/* MOVIE PAGE & CATEGORY PAGE (Page d'un Film ou d'une Catégorie)
+	There's a little difference between a Movie page and a Category page.
+	The first one has a Play video button that the other one hasn't
 
-			presenceData.largeImageKey = getChannel(pathname).logo;
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.smallImageText = (await strings).browsing;
-
-			if (time) presenceData.startTimestamp = browsingTimestamp;
-
-			break;
-		}
-
-		/* Show, Serie, Movie page 
-	Page d'une émission, une série, un film
-	(ex: https://www.rtlplay.be/chicago-fire-p_8947) */
-		case document.querySelector("div.sc-gad7tv-0.enEPMo > span") !== null: {
-			presenceData.details = privacy
-				? (await strings).viewAPage
-				: `${(await strings).viewPage} ${document
-						.querySelector("div.sc-gad7tv-0.enEPMo > span")
-						.textContent.split("|")[0]
-						.trim()}`; // Content trimmed of tags line (ex: Série | Science-fiction | Drame)
+	(ex: https://www.rtlplay.be/chicago-fire-p_8947 and https://www.rtlplay.be/rtl_play/series-rtl-play-f_409) */
+		case exist(
+			"header > div > div > h1, div.sc-nqi6nw-0.cNDqJj > h1" // Movie name or Category name: Supports mobile and desktop layout
+		): {
 			presenceData.state = privacy
 				? ""
-				: getTitleTrimmed(document.querySelector("head > title").textContent);
-
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.smallImageText = (await strings).browsing;
-
-			if (time) presenceData.startTimestamp = browsingTimestamp;
-
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: (await strings).viewAPage,
-						url: href,
-					},
-				];
-			}
-
-			break;
-		}
-
-		/* Category (Theme) page 
-	Page Catégorie (Thématique)
-	(ex: https://www.rtlplay.be/rtl_play/divertissement-rtl-play-f_405)*/
-		case document.querySelector("div > header > div > div > h1") !== null ||
-			document.querySelector(
-				"div > header > div > div > nav > div.sc-nqi6nw-0.cNDqJj > h1"
-			) !== null: {
-			presenceData.details = (await strings).viewCategory;
-			if (document.querySelector("div > header > div > div > h1") !== null) {
-				// Responsive webpage hides and shows category name
-				presenceData.state = privacy
-					? ""
-					: document.querySelector("div > header > div > div > h1").textContent;
-			} else {
-				presenceData.state = privacy
-					? ""
-					: document.querySelector(
-							"div > header > div > div > nav > div.sc-nqi6nw-0.cNDqJj > h1"
-					  ).textContent;
-			}
-
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.smallImageText = (await strings).browsing;
+				: document.querySelector(
+						"header > div > div > h1, div.sc-nqi6nw-0.cNDqJj > h1" // Movie name or Category name: Supports mobile and desktop layout
+				  ).textContent;
 
 			if (time) presenceData.startTimestamp = browsingTimestamp;
 
@@ -325,34 +280,44 @@ presence.on("UpdateData", async () => {
 				];
 			}
 
+			if (
+				exist("div.sc-q5s88f-0.jzJNis > a > span") // Check if the button Play video exist
+			) {
+				const tagsLine = document.querySelector(
+					"div.sc-gad7tv-0.enEPMo > span" // Tags line (ex: Série | Science-fiction | Drame)
+				);
+				presenceData.details = privacy
+					? (await strings).viewAPage
+					: `${(await strings).viewPage} ${
+							tagsLine === null ? "" : tagsLine.textContent.split("|")[0].trim()
+					  }`;
+
+				presenceData.smallImageKey = Assets.Viewing;
+				presenceData.smallImageText = (await strings).viewAPage;
+			} else {
+				presenceData.details = (await strings).viewCategory;
+
+				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageText = (await strings).browsing;
+			}
+
 			break;
 		}
 
-		/* Video player 
-	Lecteur vidéo
+		/* VIDEO PLAYER (Lecteur vidéo)
+	
 	(ex: https://www.rtlplay.be/the-power-p_25630/episode-01-c_13062282) */
-		case document.querySelector("div.sc-18trp4n-3.bVsrtw > h1") !== null: {
-			presenceData.details = privacy
-				? (await strings).watchingShow
-				: `${(await strings).watching} ${
-						document.querySelector("div.sc-18trp4n-3.bVsrtw > h1").textContent
-				  }`; // Content of first line
-			// If 1st line === 2nd line then it's a Movie, 1st line !== 2nd line then it's a Tv Show
-			if (
-				document
-					.querySelector("div.sc-18trp4n-3.bVsrtw > h1")
-					.textContent.toLowerCase() !==
-				document
-					.querySelector("div.sc-3kw2pp-0.jqFqPu.sc-18trp4n-6.cQaAsL > h2")
-					.textContent.toLocaleLowerCase()
-			) {
-				presenceData.state = privacy
-					? ""
-					: document.querySelector(
-							"div.sc-3kw2pp-0.jqFqPu.sc-18trp4n-6.cQaAsL > h2"
-					  ).textContent; // Content of second line
-			}
+		case exist("div.sc-18trp4n-3.bVsrtw > h1"): {
+			const firstLine = document.querySelector(
+					"div.sc-18trp4n-3.bVsrtw > h1" // Video Player first line
+				).textContent,
+				secondLine = exist("div.sc-3kw2pp-0.jqFqPu.sc-18trp4n-6.cQaAsL > h2")
+					? document.querySelector(
+							"div.sc-3kw2pp-0.jqFqPu.sc-18trp4n-6.cQaAsL > h2" // Video Player second line, may hide in mobile layout
+					  ).textContent
+					: "";
 
+			// presenceData.largeImageKey = await getShortURL((document.querySelector("picture > img") as HTMLImageElement).src);
 			presenceData.largeImageKey = Assets.Logo;
 			if (
 				document
@@ -366,30 +331,6 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = (await strings).play;
 			}
 
-			if (time) {
-				if (
-					document.querySelector('[type="duration"]').textContent.includes("-")
-				) {
-					presenceData.endTimestamp = presence.getTimestamps(
-						0,
-						presence.timestampFromFormat(
-							document
-								.querySelector('[type="duration"]')
-								.textContent.replace("-", "")
-						)
-					)[1];
-				} else {
-					presenceData.endTimestamp = presence.getTimestamps(
-						presence.timestampFromFormat(
-							document.querySelector('[type="currentTime"]').textContent
-						),
-						presence.timestampFromFormat(
-							document.querySelector('[type="duration"]').textContent
-						)
-					)[1];
-				}
-			}
-
 			if (buttons) {
 				presenceData.buttons = [
 					{
@@ -399,11 +340,63 @@ presence.on("UpdateData", async () => {
 				];
 			}
 
+			switch (true) {
+				case firstLine === "Publicité": {
+					presenceData.details = (await strings).watchingAd;
+					presenceData.state = privacy
+						? ""
+						: `${
+								secondLine === null
+									? ""
+									: secondLine.split("commence")[0].trim()
+						  }`;
+
+					if (time) presenceData.startTimestamp = browsingTimestamp;
+					break;
+				}
+				default: {
+					presenceData.details = privacy
+						? (await strings).watchingShow
+						: `${(await strings).watching} ${firstLine}`;
+					// If 1st line === 2nd line then it's a Movie, 1st line !== 2nd line then it's a Tv Show
+					if (firstLine.toLowerCase() !== secondLine.toLowerCase())
+						presenceData.state = privacy ? "" : secondLine; // Content of second line
+
+					if (time) {
+						if (
+							document
+								.querySelector('[type="duration"]')
+								.textContent.includes("-")
+						) {
+							presenceData.endTimestamp = presence.getTimestamps(
+								0,
+								presence.timestampFromFormat(
+									document
+										.querySelector('[type="duration"]')
+										.textContent.replace("-", "")
+								)
+							)[1];
+						} else {
+							presenceData.endTimestamp = presence.getTimestamps(
+								presence.timestampFromFormat(
+									document.querySelector('[type="currentTime"]').textContent
+								),
+								presence.timestampFromFormat(
+									document.querySelector('[type="duration"]').textContent
+								)
+							)[1];
+						}
+					}
+					break;
+				}
+			}
 			break;
 		}
-
-		// In case we need a default
-		default: {
+		case pathname !== null: {
+			presenceData.details = (await strings).viewAPage;
+			presenceData.largeImageKey = Assets.Animated;
+			presenceData.smallImageKey = Assets.Viewing;
+			presenceData.smallImageText = (await strings).viewAPage;
 			break;
 		}
 	}
@@ -412,8 +405,8 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
-	if (presenceData.details === "") delete presenceData.details;
-	if (presenceData.state === "") delete presenceData.state;
+	// if (presenceData.details === "") delete presenceData.details;
+	// if (presenceData.state === "") delete presenceData.state;
 
 	if ((!buttons || privacy) && presenceData.buttons)
 		delete presenceData.buttons;

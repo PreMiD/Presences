@@ -10,6 +10,9 @@
 		"fr": "Avec RTLplay, retrouvez tous les programmes de nos chaînes RTL TVI, Club RTL, Plug RTL, Bel RTL et Radio Contact en direct et en replay ainsi que des contenus exclusifs."
 	},
 	"url": "www.rtlplay.be",
+	"matches": [
+		"*://*.rtlplay.be/*"
+	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/KNsI47l.png",
 	"thumbnail": "https://i.imgur.com/WURTyw5.jpg",
