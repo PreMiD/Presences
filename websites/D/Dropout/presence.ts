@@ -1,10 +1,10 @@
 import { QueryParams, IFrameData } from "./interfaces";
 
 const presence = new Presence({
-	clientId: "1240164154682249227",
-}),
-browsingTimestamp = Math.floor(Date.now() / 1000);
-	
+		clientId: "1240164154682249227",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
 const enum Assets {
 	Logo = "https://i.postimg.cc/kGkwmxKZ/dropout-logo.png",
 }
@@ -18,12 +18,12 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: Assets.Logo,
-		startTimestamp: browsingTimestamp,
-	},
-	{ pathname, href } = document.location,
-	showButtons = await presence.getSetting<boolean>("buttons"),
-	path = pathname.split("/");
+			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname, href } = document.location,
+		showButtons = await presence.getSetting<boolean>("buttons"),
+		path = pathname.split("/");
 
 	path.shift();
 	if (pathname.endsWith("/")) path.pop();
@@ -104,8 +104,11 @@ function getVideoDetails(
 		}
 	} else {
 		const videoNameElement = document.querySelector(".video-title"),
-			seriesLinkElement = document.querySelector<HTMLAnchorElement>(`.context-link`),
-			episodeElement = document.querySelector(`#watch-info > div > div > div > div > div > h5 > a`);
+			seriesLinkElement =
+				document.querySelector<HTMLAnchorElement>(".context-link"),
+			episodeElement = document.querySelector(
+				"#watch-info > div > div > div > div > div > h5 > a"
+			);
 
 		if (!videoNameElement) return;
 		presenceData.details = videoNameElement.textContent.trim();
@@ -168,7 +171,12 @@ function getVideoDetails(
 
 function setTimestamps(presenceData: PresenceData): void {
 	delete presenceData.startTimestamp;
-	if (!paused) presenceData.endTimestamp = presence.getTimestamps(currentTime, duration)[1];
+	if (!paused) {
+		presenceData.endTimestamp = presence.getTimestamps(
+			currentTime,
+			duration
+		)[1];
+	}
 	presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 }
 
