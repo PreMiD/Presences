@@ -1,13 +1,13 @@
 import { QueryParams, IFrameData } from "./interfaces";
 
 const presence = new Presence({
-		clientId: "1240164154682249227",
-	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	clientId: "1240164154682249227",
+}),
+browsingTimestamp = Math.floor(Date.now() / 1000);
 	
-	const Enum Assets {
-	Logo = "https://i.ibb.co/hCK6Lj3/dropout-logo.png",
-	}
+const enum Assets {
+	Logo = "https://i.postimg.cc/kGkwmxKZ/dropout-logo.png",
+}
 
 let duration: number, currentTime: number, paused: boolean, playback: boolean;
 
@@ -18,12 +18,12 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: Assets.Logo,
-			startTimestamp: browsingTimestamp,
-		},
-		{ pathname, href } = document.location,
-		showButtons = await presence.getSetting<boolean>("buttons"),
-		path = pathname.split("/");
+		largeImageKey: Assets.Logo,
+		startTimestamp: browsingTimestamp,
+	},
+	{ pathname, href } = document.location,
+	showButtons = await presence.getSetting<boolean>("buttons"),
+	path = pathname.split("/");
 
 	path.shift();
 	if (pathname.endsWith("/")) path.pop();
@@ -103,10 +103,9 @@ function getVideoDetails(
 			];
 		}
 	} else {
-		const videoInfoString = "#watch-info > div > div > div > div > div",
-			videoNameElement = document.querySelector(`${videoInfoString} > h1`),
-			seriesLinkElement = document.querySelector<HTMLAnchorElement>(`${videoInfoString} > h3 > a`),
-			episodeElement = document.querySelector(`${videoInfoString} > h5 > a`);
+		const videoNameElement = document.querySelector(".video-title"),
+			seriesLinkElement = document.querySelector<HTMLAnchorElement>(`.context-link`),
+			episodeElement = document.querySelector(`#watch-info > div > div > div > div > div > h5 > a`);
 
 		if (!videoNameElement) return;
 		presenceData.details = videoNameElement.textContent.trim();
@@ -189,11 +188,4 @@ function parseQueryParams(): QueryParams {
 	}
 
 	return queryParams;
-}
-
-
-function getRootUrl(): string {
-	return `${document.location.protocol}//${document.location.hostname}${
-		document.location.port ? `:${document.location.port}` : ""
-	}`;
 }
