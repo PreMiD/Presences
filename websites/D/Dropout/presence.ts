@@ -3,8 +3,11 @@ import { QueryParams, IFrameData } from "./interfaces";
 const presence = new Presence({
 		clientId: "1240164154682249227",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000),
-	logo = "https://i.ibb.co/hCK6Lj3/dropout-logo.png";
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+	
+	const Enum Assets {
+	Logo = "https://i.ibb.co/hCK6Lj3/dropout-logo.png",
+	}
 
 let duration: number, currentTime: number, paused: boolean, playback: boolean;
 
@@ -15,7 +18,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: logo,
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
@@ -102,7 +105,7 @@ function getVideoDetails(
 	} else {
 		const videoInfoString = "#watch-info > div > div > div > div > div",
 			videoNameElement = document.querySelector(`${videoInfoString} > h1`),
-			seriesLinkElement = document.querySelector(`${videoInfoString} > h3 > a`),
+			seriesLinkElement = document.querySelector<HTMLAnchorElement>(`${videoInfoString} > h3 > a`),
 			episodeElement = document.querySelector(`${videoInfoString} > h5 > a`);
 
 		if (!videoNameElement) return;
@@ -154,7 +157,7 @@ function getVideoDetails(
 					},
 					{
 						label: "View Series",
-						url: getUrl(seriesLinkElement.getAttribute("href")),
+						url: seriesLinkElement.href,
 					},
 				];
 			}
@@ -166,11 +169,8 @@ function getVideoDetails(
 
 function setTimestamps(presenceData: PresenceData): void {
 	delete presenceData.startTimestamp;
-	presenceData.endTimestamp = presence.getTimestamps(currentTime, duration)[1];
-	if (paused) {
-		delete presenceData.endTimestamp;
-		presenceData.smallImageKey = Assets.Pause;
-	} else presenceData.smallImageKey = Assets.Play;
+	if (!paused) presenceData.endTimestamp = presence.getTimestamps(currentTime, duration)[1];
+	presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 }
 
 function parseQueryParams(): QueryParams {
@@ -191,10 +191,6 @@ function parseQueryParams(): QueryParams {
 	return queryParams;
 }
 
-function getUrl(url: string): string {
-	if (url.startsWith("/")) return getRootUrl() + url;
-	else return url;
-}
 
 function getRootUrl(): string {
 	return `${document.location.protocol}//${document.location.hostname}${
