@@ -27,10 +27,10 @@ const presence = new Presence({
 const enum Assets { // Other default assets can be found at index.d.ts
 	Logo = "https://i.imgur.com/KNsI47l.png",
 	Animated = "https://imgur.com/uAqZdFg.gif",
-	RTLplay = "https://i.imgur.com/1f5rMxV.png",
+	RTLPlay = "https://i.imgur.com/1f5rMxV.png",
 	RTLTVi = "https://i.imgur.com/wnjbhCe.png",
-	RTLclub = "https://i.imgur.com/8FwZa7m.png",
-	RTLplug = "https://i.imgur.com/jfYLcJu.png",
+	RTLClub = "https://i.imgur.com/8FwZa7m.png",
+	RTLPlug = "https://i.imgur.com/jfYLcJu.png",
 	BelRTL = "https://i.imgur.com/1yZelPm.png",
 	Contact = "https://i.imgur.com/ULP7pgr.png",
 }
@@ -48,14 +48,14 @@ function getChannel(channel: string) {
 			return {
 				channel: "RTL club",
 				type: ActivityType.Watching,
-				logo: Assets.RTLclub,
+				logo: Assets.RTLClub,
 			};
 		}
 		case channel.includes("plug"): {
 			return {
 				channel: "RTL plug",
 				type: ActivityType.Watching,
-				logo: Assets.RTLplug,
+				logo: Assets.RTLPlug,
 			};
 		}
 		case channel.includes("bel"): {
@@ -76,7 +76,7 @@ function getChannel(channel: string) {
 			return {
 				channel,
 				type: ActivityType.Watching,
-				logo: Assets.RTLplay,
+				logo: Assets.RTLPlay,
 			};
 		}
 	}
