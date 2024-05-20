@@ -33,6 +33,7 @@ const presenceData: PresenceData = {
 };
 
 presence.on("UpdateData", async () => {
+const {href} = document.location;
 	if (getAFK()) presenceData.details = "Currently AFK";
 	else presenceData.details = "Playing piano";
 
