@@ -6,7 +6,7 @@
 	},
 	"service": "MultiplayerPiano.net",
 	"description": {
-		"en": "An online website used for playing piano with friends. It supports input from both MIDI keyboards and QWERTY keyboards."
+		"en": "An online piano you can play alone or with others in real-time. MIDI support, 88 keys, velocity sensitive. You can show off your skill or chat while listening to others play."
 	},
 	"url": "multiplayerpiano.net",
 	"version": "1.0.0",
