@@ -7,8 +7,9 @@ const enum Assets { // Other default assets can be found at index.d.ts
 }
 
 async function getShowJoinButton(): Promise<boolean> {
-	const joinButtonSetting =
-		await presence.getSetting<boolean>("showJoinButton");
+	const joinButtonSetting = await presence.getSetting<boolean>(
+		"showJoinButton"
+	);
 	return joinButtonSetting;
 }
 
@@ -33,7 +34,7 @@ const presenceData: PresenceData = {
 };
 
 presence.on("UpdateData", async () => {
-const {href} = document.location;
+	const { href } = document.location;
 	if (getAFK()) presenceData.details = "Currently AFK";
 	else presenceData.details = "Playing piano";
 
