@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "1074706064609656852",
+		clientId: "1112463096368353300",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -11,25 +11,28 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname } = document.location,
 		{ role } = document.querySelector("#apptab"),
-		searchvar = (<HTMLInputElement>(
-			document.querySelector("#sticky-list-header > div.Ccm27v > div > input")
-		))?.value,
 		obj: { [key: string]: string } = {
 			plus: "Viewing Plans",
-			mytabs: "Checking submitted tabs",
+			mytabs: "Checking Submitted Tabs",
 			submit: "Submitting Tabs",
 			help: "Reading FAQ",
-			howtoreadtab: "Learning how to read a tab",
+			howtoreadtab: "Learning How To Read A Tab",
 			account: "Viewing Account Settings",
 			favorites: "Viewing Favorite Tabs",
 			payment: "Buying Songsterr Plus",
 		};
 
-	if (role === "complementary")
-		presenceData.details = obj[pathname.split("/").at(-1)];
-	else if (typeof searchvar !== "undefined")
-		presenceData.details = `Searching tabs for ${searchvar}`;
-	else {
+	if (role === "complementary") {
+		if (pathname.split("/").at(-1) in obj)
+			presenceData.details = obj[pathname.split("/").at(-1)];
+		else {
+			presenceData.details = `Searching tabs for ${
+				(<HTMLInputElement>(
+					document.querySelector("div.Bt4t5 > div.Ccm27v > div > input")
+				))?.value
+			}`;
+		}
+	} else {
 		presenceData.state = `Author: ${
 			document.querySelector('[aria-label="artist"]').textContent
 		}`;
