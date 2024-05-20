@@ -44,7 +44,7 @@ const {href} = document.location;
 		presenceData.buttons = [
 			{
 				label: "Join Room",
-				url: `https://multiplayerpiano.net/?c=${getRoomName()}`,
+				url: href,
 			},
 		];
 	}
