@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `${search} | ${difficultyFilter}`;
 				} else {
 					presenceData.details = `Solving Kata | ${
-						document.querySelectorAll(".w-full>div>div>div>span")[0].textContent
+						document.querySelector(".w-full>div>div>div>span").textContent
 					}`;
 					presenceData.state =
 						document.querySelector(".items-center > h4").textContent;
