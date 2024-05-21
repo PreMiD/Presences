@@ -8,6 +8,10 @@
 		{
 			"name": "Alexx",
 			"id": "604182077088202784"
+		},
+		{
+			"name": "Aidan",
+			"id": "235532241403510795"
 		}
 	],
 	"service": "SiriusXM",
@@ -16,12 +20,12 @@
 		"nl": "SiriusXM is iets wat je nog nooit gehoord hebt - het is een hele nieuwe wereld van radio. Stel je kanalen en kanalen voor van alles waar je naar wilt luisteren."
 	},
 	"url": [
-		"player.siriusxm.com",
-		"player.siriusxm.ca"
+		"can.siriusxm.com",
+		"www.siriusxm.com"
 	],
-	"version": "1.2.15",
-	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SiriusXM/assets/logo.jpg",
-	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SiriusXM/assets/thumbnail.png",
+	"version": "2.0.0",
+	"logo": "https://i.imgur.com/WVRaXaV.png",
+	"thumbnail": "https://i.imgur.com/Z6R6cKO.png",
 	"color": "#0081FF",
 	"category": "music",
 	"tags": [
