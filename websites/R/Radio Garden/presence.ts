@@ -12,7 +12,9 @@ presence.on("UpdateData", async () => {
 				.querySelector('[class*="_channel_"]')
 				?.querySelector('[class*="_title_"]')?.textContent ?? "Unknown Radio"; // which radio we're tuning right now
 		state =
-			document.querySelector('[class*="_subtitle_"]')?.textContent ??
+			document
+				.querySelector('[class*="_channel_"]')
+				?.querySelector('[class*="_subtitle_"]')?.textContent ??
 			"Unknown State/Country"; // the state where the radio serves
 
 		const presenceData: PresenceData = {
