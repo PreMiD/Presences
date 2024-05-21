@@ -5,7 +5,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-const enum Assets {
+const enum PresenceAssets {
 	Logo = "https://i.postimg.cc/kGkwmxKZ/dropout-logo.png",
 }
 
@@ -18,15 +18,12 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: Assets.Logo,
-			startTimestamp: browsingTimestamp,
-		},
-		{ pathname, href } = document.location,
-		showButtons = await presence.getSetting<boolean>("buttons"),
-		path = pathname.split("/");
-
-	path.shift();
-	if (pathname.endsWith("/")) path.pop();
+		largeImageKey: PresenceAssets.Logo,
+		startTimestamp: browsingTimestamp,
+	},
+	{ pathname, href } = document.location,
+	showButtons = await presence.getSetting<boolean>("buttons"),
+	path = pathname.split("/").filter(Boolean)
 
 	getDetails(presenceData, path, showButtons, href);
 	presence.setActivity(presenceData);
@@ -81,9 +78,9 @@ function getVideoDetails(
 
 	if (seriesNameElement !== null) {
 		// Viewing a series
-		const selectElement = document.querySelector(
+		const selectElement = document.querySelector<HTMLSelectElement>(
 			`${mainSelector} > form:nth-child(1) > select`
-		) as HTMLSelectElement;
+		);
 		presenceData.details = "Viewing a series";
 
 		if (selectElement === null)
