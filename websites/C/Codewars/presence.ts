@@ -46,11 +46,9 @@ presence.on("UpdateData", async () => {
 						(
 							document.querySelectorAll('[name="q"]')[0] as HTMLInputElement
 						).getAttribute("value") || "All Katas";
-					let difficultyFilter = (
-						document.querySelector<HTMLInputElement>(
-							'[Label="Difficulty"]'
-						)
-					).getAttribute("value");
+					let difficultyFilter = document
+						.querySelector<HTMLInputElement>('[Label="Difficulty"]')
+						.getAttribute("value");
 					if (difficultyFilter) {
 						difficultyFilter = difficultyFilter
 							.split(",")
@@ -100,9 +98,9 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Viewing profile of";
 					if (displayStats) {
 						presenceData.state = `${pages[1]} | 
-						${Array.from(document.querySelector(".stat-box").children)
-							.find(e => e.textContent.startsWith("Clan:"))
-							.textContent.slice("Clan:".length)}`;
+					${Array.from(document.querySelector(".stat-box").children)
+						.find(e => e.textContent.startsWith("Clan:"))
+						.textContent.slice("Clan:".length)}`;
 					}
 				}
 			}
