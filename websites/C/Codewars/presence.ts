@@ -47,9 +47,9 @@ presence.on("UpdateData", async () => {
 							document.querySelectorAll('[name="q"]')[0] as HTMLInputElement
 						).getAttribute("value") || "All Katas";
 					let difficultyFilter = (
-						document.querySelectorAll(
+						document.querySelector<HTMLInputElement>(
 							'[Label="Difficulty"]'
-						)[0] as HTMLInputElement
+						)
 					).getAttribute("value");
 					if (difficultyFilter) {
 						difficultyFilter = difficultyFilter
