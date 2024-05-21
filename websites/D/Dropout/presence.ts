@@ -18,14 +18,18 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: PresenceAssets.Logo,
-		startTimestamp: browsingTimestamp,
-	},
-	{ pathname, href } = document.location,
-	showButtons = await presence.getSetting<boolean>("buttons"),
-	path = pathname.split("/").filter(Boolean)
+			largeImageKey: PresenceAssets.Logo,
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname, href } = document.location,
+		showButtons = await presence.getSetting<boolean>("buttons");
 
-	getDetails(presenceData, path, showButtons, href);
+	getDetails(
+		presenceData,
+		pathname.split("/").filter(Boolean),
+		showButtons,
+		href
+	);
 	presence.setActivity(presenceData);
 });
 
