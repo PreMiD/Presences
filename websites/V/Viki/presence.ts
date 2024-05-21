@@ -426,13 +426,10 @@ presence.on("UpdateData", async () => {
 					: (await strings).play,
 				startTimestamp: timestamps[0],
 				endTimestamp: timestamps[1],
-			};
-
-		presenceData.details = document.querySelector(
-			".vkp-pos-container-title"
-		).textContent;
-		presenceData.state =
-			document.querySelector("p.vkp-pos-subtitle").textContent;
+			},
+			title = document.querySelector("#channel-link > span").textContent;
+		presenceData.details = title.split(": ").pop();
+		presenceData.state = title.split(": ").shift();
 
 		if (video.paused) {
 			delete presenceData.startTimestamp;
