@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 						)?.textContent;
 						presenceData.state = document
 							.querySelector('[class="subtitle-field"]')
-							?.textContent.split(" ")[0];
+							?.textContent;
 
 						const paused = !!document.querySelector("[aria-label='Play']");
 						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
