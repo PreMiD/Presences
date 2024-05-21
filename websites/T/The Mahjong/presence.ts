@@ -33,14 +33,12 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, href } = document.location,
-		lang = SITE_LANGS.find(lang => lang == pathname.split("/")[1]);
-
+		{ pathname, href } = document.location;
 	let pathArr = pathname.split("/");
 
-	if (lang) {
+	if (SITE_LANGS.find(lang => lang === pathname.split("/")[1])) {
 		pathArr = ["", ...pathArr.slice(2)];
-		if (pathArr.length == 1) pathArr = ["", ""];
+		if (pathArr.length === 1) pathArr = ["", ""];
 	}
 
 	if (pathArr[1] === "" || pathArr[1] === "mahjong") {
