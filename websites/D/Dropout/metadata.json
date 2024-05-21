@@ -1,0 +1,37 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "189690228292845568",
+		"name": "angelolz"
+	},
+	"service": "Dropout",
+	"description": {
+		"en": "Independent, ad-free, uncensored original comedies that you won't find anywhere else."
+	},
+	"url": "dropout.tv",
+	"matches": [
+		"*://dropout.tv/*"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.postimg.cc/kGkwmxKZ/dropout-logo.png",
+	"thumbnail": "https://i.postimg.cc/pVn60TD7/dropoutbanner-Large.jpg",
+	"color": "#ffe93b",
+	"category": "videos",
+	"tags": [
+		"video",
+		"streaming",
+		"media",
+		"dropout",
+		"collegehumor"
+	],
+	"iframe": true,
+	"iFrameRegExp": "embed.vhx.tv",
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fa-regular fa-rectangle-list",
+			"value": true
+		}
+	]
+}
