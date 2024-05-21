@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 const enum Assets { // Other default assets can be found at index.d.ts
-	Logo = "https://cdn.discordapp.com/attachments/587336926533648409/1240591699034767380/mpp2.png?ex=66471e8e&is=6645cd0e&hm=b288e175fe293d96c41c4041773d370a231a52a4cdd818eaa88342731a6762f9&",
+	Logo = "https://www.virtualdrumming.com/icons-piano/icons-512.png",
 }
 
 async function getShowJoinButton(): Promise<boolean> {
