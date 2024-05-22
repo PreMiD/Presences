@@ -1,17 +1,17 @@
 const presence = new Presence({
-	clientId: "861582205028794418",
-}),
+		clientId: "861582205028794418",
+	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets { // Other default assets can be found at index.d.ts
 	Logo = "https://cdn.masuru.in.th/storage/masuru/7f8731ab214db1aeecb6d2c23956ac72.webp",
-	Bot = "https://cdn.masuru.in.th/storage/masuru/3648d2c34ecbbaa12ece7ed230a4b3d3.webp"
+	Bot = "https://cdn.masuru.in.th/storage/masuru/3648d2c34ecbbaa12ece7ed230a4b3d3.webp",
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		startTimestamp: browsingTimestamp,
-	},
+			startTimestamp: browsingTimestamp,
+		},
 		{ pathname, hostname, href } = document.location;
 	switch (hostname.replace("www.", "")) {
 		case "masuru.in.th": {
