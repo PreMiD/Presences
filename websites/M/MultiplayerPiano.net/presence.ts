@@ -7,9 +7,8 @@ const enum Assets { // Other default assets can be found at index.d.ts
 }
 
 async function getShowJoinButton(): Promise<boolean> {
-	const joinButtonSetting = await presence.getSetting<boolean>(
-		"showJoinButton"
-	);
+	const joinButtonSetting =
+		await presence.getSetting<boolean>("showJoinButton");
 	return joinButtonSetting;
 }
 
@@ -19,9 +18,11 @@ async function getShowRoomName(): Promise<boolean> {
 }
 
 function getRoomName(): string {
-	return document.location.href.match(/[?&]c=([^&#]*)/)
-		? document.location.href.match(/[?&]c=([^&#]*)/)[1]
-		: "lobby";
+	return decodeURIComponent(
+		document.location.href.match(/[?&]c=([^&#]*)/)
+			? document.location.href.match(/[?&]c=([^&#]*)/)[1]
+			: "lobby"
+	);
 }
 
 function getAFK(): boolean {
