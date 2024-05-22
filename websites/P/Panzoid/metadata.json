@@ -4,7 +4,7 @@
 		"id": "576435921390403623",
 		"name": "rag404"
 	},
-	"service": "PanzoidGen4",
+	"service": "Panzoid",
 	"description": {
 		"en": "Panzoid Gen4 is a video editing webapp."
 	},
@@ -13,9 +13,9 @@
 		"panzoid.com"
 	],
 	"version": "1.0.0",
-	"logo": "https://app.panzoid.com/d1e11f55f0b4a62fcd72.png",
-	"thumbnail": "https://app.panzoid.com/d1e11f55f0b4a62fcd72.png",
-	"color": "#0457ec",
+	"logo": "https://i.postimg.cc/3wgKPWjY/panzoid-discord.webp",
+	"thumbnail": "https://i.postimg.cc/3wgKPWjY/panzoid-discord.webp",
+	"color": "#000000",
 	"category": "other",
 	"tags": [
 		"editing"
