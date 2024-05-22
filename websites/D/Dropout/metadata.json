@@ -12,9 +12,9 @@
 	"matches": [
 		"*://dropout.tv/*"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.postimg.cc/kGkwmxKZ/dropout-logo.png",
-	"thumbnail": "https://i.postimg.cc/pVn60TD7/dropoutbanner-Large.jpg",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Dropout/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Dropout/assets/thumbnail.jpg",
 	"color": "#ffe93b",
 	"category": "videos",
 	"tags": [
