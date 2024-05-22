@@ -1,38 +1,50 @@
+import { Details, States, format, getRenderingState } from "./presence";
+
 const iframe = new iFrame();
 
 iframe.on("UpdateData", async () => {
-	let details = "",
-		state = "";
+	const presenceData: PresenceData = {};
 
-	// - - - - - - - - - - - - - - - - - - - - - Clipmaker 3 - - - - - - - - - - - - - - - - - - - - -
-	if (document.location.pathname.startsWith("/legacy/gen3/clipmaker.html")) {
-		details = Details.CM3;
+	if (document.location.pathname === "/legacy/gen3/clipmaker.html")
+		getCM3Data(presenceData);
+	else if (document.location.pathname === "/legacy/gen2/clipmaker.html")
+		getCM2Data(presenceData);
 
-		const renderingProgress = getRenderingProgress();
-		if (renderingProgress === null) {
-			state = format(States.CM3,
-				document.querySelectorAll("span.noselect").length,
-				document.querySelectorAll(".clip").length
-			);
-		} else
-			state = format(States.Rendering, renderingProgress.toFixed(2));
-
-	// - - - - - - - - - - - - - - - - - - - - - Clipmaker 2 - - - - - - - - - - - - - - - - - - - - -
-	} else if (document.location.pathname.startsWith("/legacy/gen2/clipmaker.html")) {
-		details = Details.CM2;
-
-		const renderingProgress = getRenderingProgress();
-		if (renderingProgress === null) {
-			state = format(States.CM2,
-				document.querySelectorAll("#controls > div:nth-child(4) > ul.pz-listbox > li").length,
-				document.querySelectorAll("#controls > div:nth-child(5) > ul.pz-listbox > li").length
-			);
-		} else
-			state = format(States.Rendering, renderingProgress.toFixed(2));
-	}
-
-	iframe.send({
-		details,
-		state,
-	});
+	iframe.send(presenceData);
 });
+
+function getCM3Data(presenceData: PresenceData) : void {
+	presenceData.details = Details.CM3;
+	const renderingState = getRenderingState();
+
+	// Check if rendering is running or not
+	if (renderingState !== null)
+		presenceData.state = renderingState;
+	else {
+		presenceData.state = format(
+			States.CM3,
+			document.querySelectorAll("span.noselect").length,
+			document.querySelectorAll(".clip").length
+		);
+	}
+}
+
+function getCM2Data(presenceData: PresenceData) : void {
+	presenceData.details = Details.CM2;
+	const renderingState = getRenderingState();
+
+	// Check if rendering is running or not
+	if (renderingState !== null)
+		presenceData.state = renderingState;
+	else {
+		presenceData.state = format(
+			States.CM2,
+			document.querySelectorAll(
+				"#controls > div:nth-child(4) > ul.pz-listbox > li"
+			).length,
+			document.querySelectorAll(
+				"#controls > div:nth-child(5) > ul.pz-listbox > li"
+			).length
+		);
+	}
+}
