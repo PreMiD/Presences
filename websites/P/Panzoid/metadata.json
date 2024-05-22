@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "576435921390403623",
 		"name": "rag404"
@@ -12,7 +12,7 @@
 		"app.panzoid.com",
 		"panzoid.com"
 	],
-	"version": "1.0.0",
+	"version": "0.2.3",
 	"logo": "https://i.postimg.cc/3wgKPWjY/panzoid-discord.webp",
 	"thumbnail": "https://i.postimg.cc/3wgKPWjY/panzoid-discord.webp",
 	"color": "#000000",
