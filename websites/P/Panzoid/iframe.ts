@@ -3,12 +3,6 @@
 const iframe = new iFrame();
 
 
-function getLegacyRenderingProgress() : number {
-	const element = document.querySelector<HTMLElement>("div.pz-progress > span");
-	return element ? Number(element.style.width.slice(0, -1)) : null;
-}
-
-
 iframe.on("UpdateData", async () => {
 	let details = "",
 		state = "";
@@ -17,7 +11,7 @@ iframe.on("UpdateData", async () => {
 	if (document.location.pathname.startsWith("/legacy/gen3/clipmaker.html")) {
 		details = "Editing in Clipmaker 3";
 
-		const renderingProgress = getLegacyRenderingProgress();
+		const renderingProgress = getRenderingProgress();
 		if (renderingProgress === null) {
 			state = document.querySelectorAll("span.noselect").length
 				+ " tracks | "
@@ -30,7 +24,7 @@ iframe.on("UpdateData", async () => {
 	} else if (document.location.pathname.startsWith("/legacy/gen2/clipmaker.html")) {
 		details = "Editing in Clipmaker 2";
 
-		const renderingProgress = getLegacyRenderingProgress();
+		const renderingProgress = getRenderingProgress();
 		if (renderingProgress === null) {
 			state = document.querySelectorAll("#controls > div:nth-child(4) > ul.pz-listbox > li").length
 				+ " objects | "

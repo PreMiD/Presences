@@ -14,32 +14,10 @@ let legacyData = {
 	state: ""
 };
 
-/**
- * Returns the first element that match the selector and text value,
- * or `null` if not found.
- * @param {string} selector The selector to match.
- * @param {string} textContent The text value to match.
- */
-function queryTextContent(selector: string, textContent: string) : Element {
-	for (const element of document.querySelectorAll(selector)) {
-		if (element.textContent === textContent)
-			return element;
-	}
-	return null;
-}
-
 function getRenderingProgress() : number {
-	const renderingTitle = queryTextContent("span.proplabel", "Exporting...");
-	if (renderingTitle === null)
-		return null;
-	return Number(
-		(renderingTitle.parentElement
-			.parentElement
-			.children[1]
-			.children[0]
-			.children[0] as HTMLElement)
-		.style.width.slice(0, -1)
-	);
+	const element = document.querySelector<HTMLSpanElement>("div.pz-progress > span");
+	// Get the width percentage and trim the % symbol
+	return element ? Number(element.style.width.slice(0, -1)) : null;
 }
 
 // CM3 and CM2 are built inside iframes, unlike Gen4
