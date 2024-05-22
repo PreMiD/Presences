@@ -1,0 +1,47 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "205984221859151873",
+		"name": "joerkig"
+	},
+	"service": "Dropout",
+	"description": {
+		"en": "Independent, ad-free, uncensored comedy. Watch new episodes of Dimension 20, Um, Actually, Game Changer every week."
+	},
+	"url": ["www.dropout.tv","store.dropout.tv"],
+	"matches": ["*://www.dropout.tv/*","*://store.dropout.tv/*"],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/nR0RcuW.png",
+	"thumbnail": "https://i.imgur.com/WSgz2Kk.png",
+	"color": "#feea3b",
+	"category": "videos",
+	"tags": [
+		"comedy",
+		"shows",
+		"streaming"
+	],
+	
+	"iframe": true,
+	"iFrameRegExp": "embed\\.vhx\\.tv",
+	"iFrameMatches": [],
+	"settings": [
+		{
+			"id": "timestamps",
+			"title": "Show Timestamps",
+			"icon": "fas fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		},
+		{
+			"id": "images",
+			"title": "Show Images",
+			"icon": "fas fa-images",
+			"value": true
+		}
+	]
+}
