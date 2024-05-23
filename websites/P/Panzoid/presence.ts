@@ -13,7 +13,7 @@ export const enum Details {
 	Gen4Editor = "Editing: {0}",
 	CM3 = "Editing in Clipmaker 3",
 	CM2 = "Editing in Clipmaker 2",
-	Website = "Lurking around the website"
+	Website = "Lurking around the website",
 }
 
 export const enum States {
@@ -21,12 +21,12 @@ export const enum States {
 	Gen4Editor = "{0} tracks | {1} clips",
 	CM3 = "{0} tracks | {1} clips",
 	CM2 = "{0} objects | {1} effects",
-	Rendering = "Rendering {0}%"
+	Rendering = "Rendering {0}%",
 }
 
 const enum ImageTexts {
 	Gen4 = "Gen4",
-	Legacy = "Legacy"
+	Legacy = "Legacy",
 }
 
 let legacyData = {
@@ -51,18 +51,13 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp,
 	};
 
-	// Check for Gen4 app
 	if (document.location.hostname === "app.panzoid.com")
 		getGen4Data(presenceData);
-
-	// Check for CM3 or CM2 (legacy apps)
 	else if (
 		document.location.pathname.startsWith("/tools/gen3/clipmaker") ||
 		document.location.pathname.startsWith("/tools/gen2/clipmaker")
 	)
 		getLegacyData(presenceData);
-
-	// By default, set the presence to the website
 	else
 		presenceData.details = Details.Website;
 
@@ -70,7 +65,7 @@ presence.on("UpdateData", async () => {
 	presence.setActivity(presenceData);
 });
 
-function getGen4Data(presenceData: PresenceData) : void {
+function getGen4Data(presenceData: PresenceData): void {
 	presenceData.smallImageKey = Icons.Gen4;
 	presenceData.smallImageText = ImageTexts.Gen4;
 
@@ -80,7 +75,7 @@ function getGen4Data(presenceData: PresenceData) : void {
 		getGen4MenuData(presenceData);
 }
 
-function getGen4EditorData(presenceData: PresenceData) : void {
+function getGen4EditorData(presenceData: PresenceData): void {
 	const projectNameInput = document.querySelector<HTMLInputElement>(
 		".editortabs-name > input"
 	);
@@ -110,17 +105,16 @@ function getGen4EditorData(presenceData: PresenceData) : void {
 	}
 }
 
-function getGen4MenuData(presenceData: PresenceData) : void {
+function getGen4MenuData(presenceData: PresenceData): void {
 	presenceData.details = Details.Gen4Menu;
 	presenceData.state = format(
 		States.Gen4Menu,
-		document.querySelectorAll(
-			".projectSelection-module__projectItem___214gY"
-		).length
+		document.querySelectorAll(".projectSelection-module__projectItem___214gY").length
 	);
 }
 
-function getLegacyData(presenceData: PresenceData) : void {
+function getLegacyData(presenceData: PresenceData): void {
+	// See iframe.ts for CM3 and CM2 specifically
 	presenceData.details = legacyData.details;
 	presenceData.state = legacyData.state;
 	presenceData.smallImageKey = Icons.Legacy;
@@ -133,10 +127,11 @@ export function getRenderingState(): string {
 	);
 	// Get the width percentage and trim the % symbol
 	// Or if the element was not found, return null
-	return format(
-		States.Rendering,
-		(element
-			? Number(element.style.width.slice(0, -1)).toFixed(2)
-			: null)
-	);
+	if (element) {
+		return format(
+			States.Rendering,
+			Number(element.style.width.slice(0, -1)).toFixed(2)
+		);
+	}
+	return null;
 }

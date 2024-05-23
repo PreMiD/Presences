@@ -13,7 +13,7 @@ iframe.on("UpdateData", async () => {
 	iframe.send(presenceData);
 });
 
-function getCM3Data(presenceData: PresenceData) : void {
+function getCM3Data(presenceData: PresenceData): void {
 	presenceData.details = Details.CM3;
 	const renderingState = getRenderingState();
 
@@ -29,7 +29,7 @@ function getCM3Data(presenceData: PresenceData) : void {
 	}
 }
 
-function getCM2Data(presenceData: PresenceData) : void {
+function getCM2Data(presenceData: PresenceData): void {
 	presenceData.details = Details.CM2;
 	const renderingState = getRenderingState();
 
