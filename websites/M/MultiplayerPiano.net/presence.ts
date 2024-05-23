@@ -2,7 +2,7 @@ const presence = new Presence({
 	clientId: "1240257888514080830",
 });
 
-const enum Assets { // Other default assets can be found at index.d.ts
+const enum Assets {
 	Logo = "https://www.virtualdrumming.com/icons-piano/icons-512.png",
 }
 
