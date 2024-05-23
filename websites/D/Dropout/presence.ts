@@ -6,7 +6,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum PresenceAssets {
-	Logo = "https://i.postimg.cc/kGkwmxKZ/dropout-logo.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/Dropout/assets/logo.png",
 }
 
 let duration: number, currentTime: number, paused: boolean, playback: boolean;
