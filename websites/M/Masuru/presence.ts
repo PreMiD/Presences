@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "861582205028794418",
+		clientId: "1138055195008454656",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -12,19 +12,19 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, hostname, href } = document.location;
+		{ pathname, hostname } = document.location;
 	switch (hostname.replace("www.", "")) {
 		case "masuru.in.th": {
 			const title = document.querySelector("title").textContent;
 			if (title) {
-				presenceData.details = title;
 				presenceData.largeImageKey = Assets.Logo;
-				presenceData.buttons = [
-					{
-						label: "View Page",
-						url: href,
-					},
-				];
+				presenceData.details = title;
+				if (pathname.replace("/th", "").replace("/en", "").startsWith("/s/")) {
+					presenceData.details = title;
+					presenceData.state = document.querySelector(
+						'meta[name="description"]'
+					);
+				}
 				presence.setActivity(presenceData);
 			}
 			break;
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 							if (presenceData.state === "discovery") {
 								presenceData.buttons = [
 									{
-										label: "Discovery Page",
+										label: "View Discovery",
 										url: "https://masuru.in.th/discovery",
 									},
 								];
