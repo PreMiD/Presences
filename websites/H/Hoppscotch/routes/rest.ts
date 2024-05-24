@@ -2,7 +2,7 @@ import { Assets } from "../presence";
 
 import { getWorkspaceName } from "../lib/workspace";
 
-function getEndpoint() {
+function getEndpoint(): string | null {
 	const cmLine = document.querySelector(".cm-line");
 
 	if (!cmLine) return null;
@@ -21,7 +21,7 @@ function getEndpoint() {
 	}
 }
 
-function getMethod() {
+function getMethod(): string | null {
 	const tab = document.querySelector('[id*="removable-tab"].active');
 
 	if (!tab) return null;
@@ -33,7 +33,7 @@ function getMethod() {
 	return method.textContent;
 }
 
-export function Rest() {
+export function Rest(): PresenceData | null {
 	const endpoint = getEndpoint();
 
 	if (!endpoint) return null;

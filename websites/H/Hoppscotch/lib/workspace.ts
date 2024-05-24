@@ -20,12 +20,12 @@ const getWorkspace = (): Workspace => {
 	else return { kind: "Error" };
 };
 
-export const getWorkspaceName = () => {
+export const getWorkspaceName = (): string => {
 	const workspace = getWorkspace();
 
 	if (workspace.kind === "Personal") return "📂 | Personal Workspace";
 
 	if (workspace.kind === "Team") return `📂 | ${workspace.name}`;
 
-	if (workspace.kind === "Error") return "📂 | Unknown workspace";
+	return "📂 | Unknown workspace";
 };

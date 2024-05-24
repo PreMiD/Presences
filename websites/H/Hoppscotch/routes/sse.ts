@@ -2,7 +2,7 @@ import { Assets } from "../presence";
 import { getWorkspaceName } from "../lib/workspace";
 import { getRealtimeEndpoint } from "../lib/realtime";
 
-export function ServerSentEvents() {
+export function ServerSentEvents(): PresenceData | null {
 	const endpoint = getRealtimeEndpoint();
 
 	if (!endpoint) return null;

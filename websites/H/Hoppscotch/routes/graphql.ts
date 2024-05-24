@@ -11,7 +11,7 @@ function getEndpoint() {
 	return `${url.hostname}${url.pathname}`;
 }
 
-export function GraphQL() {
+export function GraphQL(): PresenceData | null {
 	const endpoint = getEndpoint();
 
 	if (!endpoint) return null;
