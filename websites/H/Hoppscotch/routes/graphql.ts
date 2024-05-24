@@ -2,7 +2,7 @@ import { Assets } from "../presence";
 import { getWorkspaceName } from "../lib/workspace";
 
 function getEndpoint() {
-	const input = document.querySelector("input#url") as HTMLInputElement;
+	const input = document.querySelector<HTMLInputElement>("input#url");
 
 	if (!input) return null;
 

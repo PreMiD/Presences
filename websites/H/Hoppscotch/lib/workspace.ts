@@ -4,12 +4,9 @@ type Workspace =
 	| { kind: "Error" };
 
 const getWorkspace = (): Workspace => {
-	// eslint-disable-next-line no-one-time-vars/no-one-time-vars
-	const personalWorkspaceIcon = document.querySelector(
-		'svg:has(circle[cx="12"][cy="7"]'
-	);
-
-	if (personalWorkspaceIcon) return { kind: "Personal" };
+	// This selector is used to get the `Personal Workspace` svg, located in the header.
+	if (document.querySelector('svg:has(circle[cx="12"][cy="7"]'))
+		return { kind: "Personal" };
 
 	const teamWorkspace = document.querySelector(
 		'svg:has(path[d="M22 21v-2a4 4 0 0 0-3-3.87m-3-12a4 4 0 0 1 0 7.75"])+div'

@@ -1,5 +1,5 @@
 export function getRealtimeEndpoint(): string | null {
-	const input = document.querySelector("input[type=url]") as HTMLInputElement;
+	const input = document.querySelector<HTMLInputElement>("input[type=url]");
 
 	if (!input) return null;
 
