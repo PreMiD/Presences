@@ -12,13 +12,13 @@ const presence = new Presence({
 
 export const enum Assets {
 	Logo = "https://hoppscotch.io/icon.png",
-	Rest = "https://i.imgur.com/CKj7VUF.png",
-	GraphQL = "https://i.imgur.com/00szkIv.png",
-	Websocket = "https://i.imgur.com/daZZiEo.png",
-	ServerSentEvents = "https://i.imgur.com/CEL3dNu.png",
-	SocketIO = "https://i.imgur.com/UvlTI6Y.png",
-	MQTT = "https://i.imgur.com/r5NFbHF.png",
-	Settings = "https://i.imgur.com/UxuTIv7.png",
+	Rest = "https://i.imgur.com/nSEZ5mB.png",
+	GraphQL = "https://i.imgur.com/unKFP0O.png",
+	Websocket = "https://i.imgur.com/1d69yyz.png",
+	ServerSentEvents = "https://i.imgur.com/1yO70KH.png",
+	SocketIO = "https://i.imgur.com/bDqkuls.png",
+	MQTT = "https://i.imgur.com/CPaISN8.png",
+	Settings = "https://i.imgur.com/EVwzrxd.png",
 }
 
 const BASE = {
