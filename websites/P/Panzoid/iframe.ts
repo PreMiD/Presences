@@ -1,4 +1,4 @@
-import { Details, States, format, getRenderingState } from "./presence";
+import { Details, States, format, getRenderingState } from "./shared";
 
 const iframe = new iFrame();
 
