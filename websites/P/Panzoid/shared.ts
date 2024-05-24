@@ -10,6 +10,9 @@ export const enum Details {
 	Gen4Editor = "Editing: {0}",
 	CM3 = "Editing in Clipmaker 3",
 	CM2 = "Editing in Clipmaker 2",
+	CM1 = "Editing in Clipmaker 1",
+	Backgrounder = "Editing in Backgrounder",
+	VideoEditor = "Editing in Video Editor",
 	Website = "Lurking around the website",
 }
 

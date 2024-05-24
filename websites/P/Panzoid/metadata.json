@@ -6,19 +6,22 @@
 	},
 	"service": "Panzoid",
 	"description": {
-		"en": "Panzoid Gen4 is a video editing webapp."
+		"en": "Panzoid is a free online video editor that offers a wide range of features to help users create and edit their videos.",
+		"fr": "Panzoid est un outil en ligne gratuit fournissant une large palette de fonctionnalités afin de créer et modifier des vidéos."
 	},
 	"url": [
 		"app.panzoid.com",
 		"panzoid.com"
 	],
-	"version": "0.3.2",
+	"version": "0.3.3",
 	"logo": "https://i.postimg.cc/3wgKPWjY/panzoid-discord.webp",
-	"thumbnail": "https://i.postimg.cc/3wgKPWjY/panzoid-discord.webp",
+	"thumbnail": "https://i.postimg.cc/9QTV0PpG/panzoid-screenshot.png",
 	"color": "#000000",
 	"category": "other",
 	"tags": [
-		"editing"
+		"video",
+		"editing",
+		"animation"
 	],
 	"iframe": true,
 	"iFrameRegExp": ".*"

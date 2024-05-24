@@ -10,6 +10,7 @@ iframe.on("UpdateData", async () => {
 	else if (document.location.pathname === "/legacy/gen2/clipmaker.html")
 		getCM2Data(presenceData);
 
+	// Trigger the iframe event in presence.ts
 	iframe.send(presenceData);
 });
 
@@ -18,9 +19,9 @@ function getCM3Data(presenceData: PresenceData): void {
 	const renderingState = getRenderingState();
 
 	// Check if rendering is running or not
-	if (renderingState !== null)
-		presenceData.state = renderingState;
+	if (renderingState !== null) presenceData.state = renderingState;
 	else {
+		// Get the number of tracks and the number of clips
 		presenceData.state = format(
 			States.CM3,
 			document.querySelectorAll("span.noselect").length,
@@ -34,9 +35,9 @@ function getCM2Data(presenceData: PresenceData): void {
 	const renderingState = getRenderingState();
 
 	// Check if rendering is running or not
-	if (renderingState !== null)
-		presenceData.state = renderingState;
+	if (renderingState !== null) presenceData.state = renderingState;
 	else {
+		// Get the number of objects and the number of effects
 		presenceData.state = format(
 			States.CM2,
 			document.querySelectorAll(

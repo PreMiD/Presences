@@ -1,4 +1,11 @@
-import { Icons, Details, States, ImageTexts, format, getRenderingState } from "./shared";
+import {
+	Icons,
+	Details,
+	States,
+	ImageTexts,
+	format,
+	getRenderingState,
+} from "./shared";
 
 const presence = new Presence({ clientId: "1241878965535248527" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
@@ -14,20 +21,24 @@ presence.on("iFrameData", (data: { details: string; state: string }) => {
 });
 
 presence.on("UpdateData", async () => {
+	// Default presence data
 	const presenceData: PresenceData = {
 		largeImageKey: Icons.Discord,
 		startTimestamp: browsingTimestamp,
+		details: Details.Website,
 	};
 
+	// The order in which the URL is checked matters here
 	if (document.location.hostname === "app.panzoid.com")
 		getGen4Data(presenceData);
-	else if (
-		document.location.pathname.startsWith("/tools/gen3/clipmaker") ||
-		document.location.pathname.startsWith("/tools/gen2/clipmaker")
-	)
+	else if (document.location.pathname.includes("backgrounder"))
+		presenceData.details = Details.Backgrounder;
+	else if (document.location.pathname.includes("videoeditor"))
+		presenceData.details = Details.VideoEditor;
+	else if (document.location.pathname.includes("gen1"))
+		presenceData.details = Details.CM1;
+	else if (document.location.pathname.includes("clipmaker"))
 		getLegacyData(presenceData);
-	else
-		presenceData.details = Details.Website;
 
 	// Finally set the presence
 	presence.setActivity(presenceData);
@@ -39,11 +50,11 @@ function getGen4Data(presenceData: PresenceData): void {
 
 	if (document.location.pathname.startsWith("/edit"))
 		getGen4EditorData(presenceData);
-	else
-		getGen4MenuData(presenceData);
+	else getGen4MenuData(presenceData);
 }
 
-function getGen4EditorData(presenceData: PresenceData): void {
+function getGen4EditorData(presenceData: PresenceData): Promise<void> {
+	// Look for the project name
 	const projectNameInput = document.querySelector<HTMLInputElement>(
 		".editortabs-name > input"
 	);
@@ -62,8 +73,7 @@ function getGen4EditorData(presenceData: PresenceData): void {
 	const renderingState = getRenderingState();
 
 	// Check if rendering is running or not
-	if (renderingState !== null)
-		presenceData.state = renderingState;
+	if (renderingState !== null) presenceData.state = renderingState;
 	else {
 		presenceData.state = format(
 			States.Gen4Editor,
@@ -75,9 +85,12 @@ function getGen4EditorData(presenceData: PresenceData): void {
 
 function getGen4MenuData(presenceData: PresenceData): void {
 	presenceData.details = Details.Gen4Menu;
+
+	// Get the total number of projects
 	presenceData.state = format(
 		States.Gen4Menu,
-		document.querySelectorAll(".projectSelection-module__projectItem___214gY").length
+		document.querySelectorAll(".projectSelection-module__projectItem___214gY")
+			.length
 	);
 }
 
