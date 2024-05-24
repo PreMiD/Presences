@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "353760389747441665",
+		"name": "eudrino"
+	},
+	"service": "Hoppscotch",
+	"description": {
+		"en": "Hoppscotch is an open source API development ecosystem"
+	},
+	"url": "hoppscotch.io",
+	"version": "1.0.0",
+	"logo": "https://hoppscotch.io/icon.png",
+	"thumbnail": "https://hoppscotch.io/icon.png",
+	"color": "#181818",
+	"category": "other",
+	"tags": ["hoppscotch", "api", "development", "software"]
+}
