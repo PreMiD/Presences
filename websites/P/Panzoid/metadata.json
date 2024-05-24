@@ -1,4 +1,5 @@
 {
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "576435921390403623",
 		"name": "rag404"

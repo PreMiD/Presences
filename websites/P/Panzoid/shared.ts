@@ -36,7 +36,7 @@ export const enum ImageTexts {
  * @param args The values to replace the placeholders with.
  * @return The formatted string with placeholders replaced.
  */
-export function format(text: string, ...args: string[] | number[]) {
+export function format(text: string, ...args: string[] | number[]): string {
 	return text.replace(/{(\d+)}/g, (match, number) =>
 		typeof args[number] !== "undefined" ? String(args[number]) : match
 	);
