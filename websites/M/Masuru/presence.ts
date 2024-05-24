@@ -20,7 +20,6 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = Assets.Logo;
 				presenceData.details = title;
 				if (pathname.replace("/th", "").replace("/en", "").startsWith("/s/")) {
-					presenceData.details = title;
 					presenceData.state = document.querySelector(
 						'meta[name="description"]'
 					);
