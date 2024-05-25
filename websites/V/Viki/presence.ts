@@ -32,11 +32,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "the main page";
 		} else if (
 			document.location.hostname === "www.viki.com" &&
-			document.location.pathname.includes("/explore") &&
-			document.URL.includes("genre=")
+			document.location.pathname.includes("/categories/country/all/genre/")
 		) {
 			title = document.querySelector(
-				"#pjaxify-container > div.container.explore-content > div.row > div > div.clearfix.section > div.explore-page-description > strong"
+				"#__next > div.page-wrapper > main > div > div.sc-lzgak0-0.VQRoS > h1"
 			);
 
 			presenceData.details = "Browsing through genre:";
@@ -44,151 +43,61 @@ presence.on("UpdateData", async () => {
 			presenceData.state = title.textContent;
 		} else if (
 			document.location.hostname === "www.viki.com" &&
-			document.location.pathname.includes("/explore") &&
-			document.URL.includes("country=")
+			document.location.pathname.includes("/new-and-coming-soon")
 		) {
 			title = document.querySelector(
-				"#pjaxify-container > div.container.explore-content > div.row > div > div.clearfix.section > div.explore-page-description > strong"
+				"#__next > div.page-wrapper > main > div > div.sc-lzgak0-0.VQRoS > h1"
 			);
 
-			presenceData.details = "Browsing through country:";
+			presenceData.details = "Browsing through:";
 			presenceData.smallImageKey = Assets.Reading;
-			presenceData.state = title.textContent;
-		} else if (
-			document.location.hostname === "www.viki.com" &&
-			document.location.pathname.includes("/explore") &&
-			document.URL.includes("program=")
-		) {
-			title = document.querySelector(
-				"#pjaxify-container > div.container.explore-content > div.row > div > div.clearfix.section > div.explore-page-description > span:nth-child(3) > strong"
-			);
-
-			presenceData.details = "Browsing through";
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.state = `schedules: ${title.textContent}`;
-		} else if (
-			document.location.hostname === "www.viki.com" &&
-			document.location.pathname.includes("/explore")
-		) {
-			presenceData.details = "Browsing through";
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.state = "all shows";
-		} else if (
-			document.location.hostname === "www.viki.com" &&
-			document.location.pathname.includes("/collections/") &&
-			document.location.pathname.includes("/fan")
-		) {
-			presenceData.details = "Browsing through";
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.state = "fan-made collections";
-		} else if (
-			document.location.hostname === "www.viki.com" &&
-			document.location.pathname.includes("/collections/") &&
-			document.location.pathname.includes("/viki")
-		) {
-			presenceData.details = "Browsing through";
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.state = "Viki-made collections";
+			presenceData.state = `${title.textContent}`;
 		} else if (
 			document.location.hostname === "www.viki.com" &&
 			document.location.pathname.includes("/collections/")
 		) {
 			title = document.querySelector(
-				"body > div.page-wrapper > div.main-container > div > div.row > div.col.s12.m12.l8 > div.card.card-highlight > div > h2"
+				"#__next > div.page-wrapper > main > div.sc-ut95nx-0.fbdpde > div.sc-1bpy9iy-0.fPvbbo > div.sc-1bpy9iy-1.iRuisU > div.sc-mpx6ys-4.sOghX"
 			);
-
-			presenceData.details = "Browsing the collection:";
+			presenceData.details = "Browsing through the collection";
 			presenceData.smallImageKey = Assets.Reading;
-
-			if (title) presenceData.state = title.textContent;
-			else {
-				presenceData.state = document.querySelector(
-					"body > div.page-wrapper > div.main-container > div > div.card.billboard > div > div.col.s12.l4.m4.billboard-meta > h1"
-				).textContent;
-			}
+			presenceData.state = title.textContent;
 		} else if (
 			document.location.hostname === "www.viki.com" &&
 			document.location.pathname.includes("/partners")
 		) {
 			presenceData.details = "Viewing the partner page";
 			presenceData.smallImageKey = Assets.Reading;
-			delete presenceData.state;
-		} else if (
-			document.location.hostname === "www.viki.com" &&
-			document.location.pathname.includes("/networks")
-		) {
-			presenceData.details = "Viewing the networks page";
-			presenceData.smallImageKey = Assets.Reading;
-			delete presenceData.state;
 		} else if (
 			document.location.hostname === "www.viki.com" &&
 			document.location.pathname.includes("/advertise")
 		) {
 			presenceData.details = "Viewing the advertisers page";
 			presenceData.smallImageKey = Assets.Reading;
-			delete presenceData.state;
 		} else if (
 			document.location.hostname === "www.viki.com" &&
 			document.location.pathname.includes("/press")
 		) {
 			presenceData.details = "Viewing the press center";
 			presenceData.smallImageKey = Assets.Reading;
-			delete presenceData.state;
 		} else if (
 			document.location.hostname === "www.viki.com" &&
 			document.location.pathname.includes("/users/") &&
 			document.location.pathname.includes("/overview")
 		) {
 			title = document.querySelector(
-				"body > div.page-wrapper > header > div > div > div.col.s12.l8.profile-header-main > div > div > div.media-body > a"
+				"div.page-wrapper > main > div > div > div > div > span"
 			);
-
 			presenceData.details = "Viewing the profile of:";
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.state = title.textContent;
 		} else if (
 			document.location.hostname === "www.viki.com" &&
 			document.location.pathname.includes("/users/") &&
-			document.location.pathname.includes("/about")
-		) {
-			title = document.querySelector(
-				"body > div.page-wrapper > header > div > div > div.col.s12.l8.profile-header-main > div > div > div.media-body > a"
-			);
-
-			presenceData.details = "Viewing the about of:";
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.state = `${title.textContent}'s profile`;
-		} else if (
-			document.location.hostname === "www.viki.com" &&
-			document.location.pathname.includes("/users/") &&
-			document.location.pathname.includes("/badges")
-		) {
-			title = document.querySelector(
-				"body > div.page-wrapper > header > div > div > div > div > div.media > div.media-body > a"
-			);
-
-			presenceData.details = "Viewing the badges of:";
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.state = title.textContent;
-		} else if (
-			document.location.hostname === "www.viki.com" &&
-			document.location.pathname.includes("/users/") &&
-			document.location.pathname.includes("contributions")
-		) {
-			title = document.querySelector(
-				"body > div.page-wrapper > header > div > div > div > div > div.media > div.media-body > a"
-			);
-
-			presenceData.details = "Viewing the contributions";
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.state = `of: ${title.textContent}`;
-		} else if (
-			document.location.hostname === "www.viki.com" &&
-			document.location.pathname.includes("/users/") &&
 			document.location.pathname.includes("/reviews")
 		) {
 			title = document.querySelector(
-				"body > div.page-wrapper > header > div > div > div > div > div.media > div.media-body > a"
+				"div.page-wrapper > main > div > div > div > div > span"
 			);
 
 			presenceData.details = "Viewing the reviews by:";
@@ -200,7 +109,7 @@ presence.on("UpdateData", async () => {
 			document.location.pathname.includes("/collections")
 		) {
 			title = document.querySelector(
-				"body > div.page-wrapper > header > div > div > div > div > div.media > div.media-body > a"
+				"div.page-wrapper > main > div > div > div > div > span"
 			);
 
 			presenceData.details = "Viewing the collections by:";
@@ -212,7 +121,7 @@ presence.on("UpdateData", async () => {
 			document.location.pathname.includes("/connection")
 		) {
 			title = document.querySelector(
-				"body > div.page-wrapper > header > div > div > div > div > div.media > div.media-body > a"
+				"div.page-wrapper > main > div > div > div > div > span"
 			);
 
 			presenceData.details = "Viewing the connections";
@@ -224,7 +133,7 @@ presence.on("UpdateData", async () => {
 			document.location.pathname.includes("/following")
 		) {
 			title = document.querySelector(
-				"body > div.page-wrapper > header > div > div > div > div > div.media > div.media-body > a"
+				"div.page-wrapper > main > div > div > div > div > span"
 			);
 
 			presenceData.details = "Viewing all the things";
@@ -232,48 +141,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `${title.textContent} follows`;
 		} else if (
 			document.location.hostname === "www.viki.com" &&
-			document.location.pathname.includes("/about")
-		) {
-			presenceData.details = "Viewing the about page";
-			presenceData.smallImageKey = Assets.Reading;
-			delete presenceData.state;
-		} else if (
-			document.location.hostname === "www.viki.com" &&
-			document.location.pathname.includes("/tv-guide")
-		) {
-			presenceData.details = "Viewing the TV Guide";
-			presenceData.smallImageKey = Assets.Reading;
-			delete presenceData.state;
-		} else if (
-			document.location.hostname === "www.viki.com" &&
-			document.location.pathname.includes("/celebrities/") &&
-			document.URL.includes("-works")
-		) {
-			title = document.querySelector(
-				"body > div.page-wrapper > div.main-container > div > div.card.billboard > div > div.col.s12.l4.m4.billboard-meta > h1"
-			);
-
-			presenceData.details = "Viewing the works of:";
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.state = title.textContent;
-		} else if (
-			document.location.hostname === "www.viki.com" &&
-			document.location.pathname.includes("/celebrities/") &&
-			document.URL.includes("-honor")
-		) {
-			title = document.querySelector(
-				"body > div.page-wrapper > div.main-container > div > div.card.billboard > div > div.col.s12.l4.m4.billboard-meta > h1"
-			);
-
-			presenceData.details = "Viewing the awards of:";
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.state = title.textContent;
-		} else if (
-			document.location.hostname === "www.viki.com" &&
 			document.location.pathname.includes("/celebrities/")
 		) {
 			title = document.querySelector(
-				"body > div.page-wrapper > div.main-container > div > div.card.billboard > div > div.col.s12.l4.m4.billboard-meta > h1"
+				"div.page-wrapper > main > div.sc-t50ryb-0.chjqhy > div.sc-vn2ve1-0.icbNCN.sc-t50ryb-1.ddxSIs > div.sc-vn2ve1-1.gYHyae > span.sc-bdvvtL.fFPESN"
 			);
 
 			presenceData.details = "Viewing the celeb profile";
@@ -290,13 +161,6 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing through genre:";
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.state = title.textContent;
-		} else if (
-			document.location.hostname === "www.viki.com" &&
-			document.location.pathname.includes("/genres")
-		) {
-			presenceData.details = "Browsing through genres";
-			presenceData.smallImageKey = Assets.Reading;
-			delete presenceData.state;
 		} else if (
 			document.location.hostname === "blog.viki.com" &&
 			document.location.pathname.includes("/tagged/news")
@@ -334,19 +198,10 @@ presence.on("UpdateData", async () => {
 			delete presenceData.state;
 		} else if (
 			document.location.hostname === "blog.viki.com" &&
-			document.location.pathname.includes("/@")
-		) {
-			title = document.querySelector("div.u-flex1 h1.ui-h2.hero-title");
-
-			presenceData.details = "Viewing the profile page of:";
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.state = title.textContent;
-		} else if (
-			document.location.hostname === "blog.viki.com" &&
 			document.location.pathname.includes("/") &&
 			document.location.pathname.includes("-")
 		) {
-			title = document.querySelector("h1 > strong");
+			title = document.querySelector("#a29a");
 
 			presenceData.details = "Reading blog post:";
 			presenceData.smallImageKey = Assets.Reading;
@@ -355,8 +210,8 @@ presence.on("UpdateData", async () => {
 			document.location.hostname === "blog.viki.com" &&
 			document.location.pathname.includes("/search")
 		) {
-			title = document.querySelector<HTMLInputElement>(
-				"div > div.container.u-maxWidth640.u-marginTop40 > form > input"
+			title = document.querySelector(
+				"#root > div > div.l.c > div.l.m.n.o.c > div.p.q.r.ab.ac > div.ab.q.ae > div > div > input"
 			);
 
 			presenceData.details = "Searching for:";
@@ -381,7 +236,7 @@ presence.on("UpdateData", async () => {
 			document.location.pathname.includes("/search")
 		) {
 			title = document.querySelector(
-				"body > div.page-wrapper > header > div > h1 > q"
+				"#__next > div.page-wrapper > main > div > div.sc-k3yneb-1.ZJdyd > ol > li.sc-k3yneb-2.kZcrBo > span"
 			);
 
 			presenceData.details = "Searching for:";
@@ -397,16 +252,29 @@ presence.on("UpdateData", async () => {
 			delete presenceData.state;
 		} else if (
 			document.location.hostname === "www.viki.com" &&
-			document.location.pathname.includes("/tv/")
+			document.location.pathname.includes("/categories/") &&
+			document.location.pathname.includes("/country/")
 		) {
 			title = document.querySelector(
-				"body > div.page-wrapper > div.main-container > div.container > div:nth-child(2) > div > div.card.billboard > div > div.col.s12.l4.m4.billboard-meta > h1"
+				"#__next > div.page-wrapper > main > div > div.sc-lzgak0-0.VQRoS > h1"
 			);
-
-			presenceData.details = "Browsing for episodes of:";
+			presenceData.details = "Browsing through country";
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.state = title.textContent;
-		} else presence.setActivity();
+		} else if (
+			document.location.hostname === "www.viki.com" &&
+			document.location.pathname.includes("/categories/") &&
+			document.location.pathname.includes("/others")
+		) {
+			title = document.querySelector(
+				"#__next > div.page-wrapper > main > div > div.sc-lzgak0-0.VQRoS > h1"
+			);
+			presenceData.details = "Browsing through genre";
+			presenceData.smallImageKey = Assets.Reading;
+			presenceData.state = title.textContent;
+		}
+
+		presence.setActivity(presenceData);
 	}
 
 	// Check if it can find the video
@@ -426,13 +294,10 @@ presence.on("UpdateData", async () => {
 					: (await strings).play,
 				startTimestamp: timestamps[0],
 				endTimestamp: timestamps[1],
-			};
-
-		presenceData.details = document.querySelector(
-			".vkp-pos-container-title"
-		).textContent;
-		presenceData.state =
-			document.querySelector("p.vkp-pos-subtitle").textContent;
+			},
+			title = document.querySelector("#channel-link > span").textContent;
+		presenceData.details = title.split(": ").pop();
+		presenceData.state = title.split(": ").shift();
 
 		if (video.paused) {
 			delete presenceData.startTimestamp;
