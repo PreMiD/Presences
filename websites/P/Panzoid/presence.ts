@@ -89,8 +89,7 @@ function getGen4MenuData(presenceData: PresenceData): void {
 	// Get the total number of projects
 	presenceData.state = format(
 		States.Gen4Menu,
-		document.querySelectorAll(".projectSelection-module__projectItem___214gY")
-			.length
+		document.querySelectorAll("button[class*=projectItem]").length
 	);
 }
 

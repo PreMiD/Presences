@@ -1,7 +1,7 @@
 export const enum Icons {
-	Discord = "https://i.postimg.cc/3wgKPWjY/panzoid-discord.webp",
-	Legacy = "https://i.postimg.cc/9MV6SF27/panzoid-legacy.png",
-	Gen4 = "https://i.postimg.cc/Df5zvW9z/panzoid-gen4.png",
+	Discord = "https://i.postimg.cc/wjshTkB5/panzoid-discord.webp",
+	Legacy = "https://i.postimg.cc/vHTrCyFN/panzoid-legacy.png",
+	Gen4 = "https://i.postimg.cc/J4FNLFR4/panzoid-gen4.png",
 }
 
 export const enum Details {

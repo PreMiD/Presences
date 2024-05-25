@@ -14,7 +14,7 @@
 		"panzoid.com"
 	],
 	"version": "1.0.0",
-	"logo": "https://i.postimg.cc/3wgKPWjY/panzoid-discord.webp",
+	"logo": "https://i.postimg.cc/wjshTkB5/panzoid-discord.webp",
 	"thumbnail": "https://i.postimg.cc/9QTV0PpG/panzoid-screenshot.png",
 	"color": "#000000",
 	"category": "other",
@@ -25,5 +25,5 @@
 		"clipmaker"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*"
+	"iFrameRegExp": "https://panzoid\\.com/legacy/gen[23]/clipmaker\\.html"
 }
