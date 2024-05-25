@@ -27,9 +27,9 @@ presence.on("UpdateData", async () => {
 			presenceData.details = obj[pathname.split("/").at(-1)];
 		else {
 			presenceData.details = `Searching tabs for ${
-				(<HTMLInputElement>(
-					document.querySelector("div.Bt4t5 > div.Ccm27v > div > input")
-				))?.value
+				document.querySelector<HTMLInputElement>(
+					"#search-wrap > div > div > div > input"
+				)?.value
 			}`;
 		}
 	} else {
