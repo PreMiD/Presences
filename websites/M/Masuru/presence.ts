@@ -4,8 +4,8 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets { // Other default assets can be found at index.d.ts
-	Logo = "https://cdn.masuru.in.th/storage/masuru/7f8731ab214db1aeecb6d2c23956ac72.webp",
-	Bot = "https://cdn.masuru.in.th/storage/masuru/3648d2c34ecbbaa12ece7ed230a4b3d3.webp",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/M/Masuru/assets/logo.webp",
+	Bot = "https://cdn.rcd.gg/PreMiD/websites/M/Masuru/assets/0.webp",
 }
 
 presence.on("UpdateData", async () => {
