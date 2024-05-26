@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "166001598802296833",
+		"name": "drraccoony"
+	},
+	"service": "Wolfery",
+	"description": {
+		"en": "Support for online roleplaying tool, Wolfery "
+	},
+	"url": "wolfery.com",
+	"matches": [
+		"*://www.wolfery.com/*",
+		"*://beta.wolfery.com/*"
+	],
+	"version": "1.0.1",
+	"logo": "https://forum.wolfery.com/uploads/default/original/1X/96ef8d56ab7b19e7f69cf42fc9109c98bf93e588.png",
+	"thumbnail": "https://forum.wolfery.com/uploads/default/original/1X/96ef8d56ab7b19e7f69cf42fc9109c98bf93e588.png",
+	"color": "#D7BE69",
+	"category": "socials",
+	"tags": [
+		"roleplay", "chat", "muck"
+	],
+	"settings": [
+		{
+			"id": "characterPrivacy",
+			"title": "Hide Character Name",
+			"icon": "fas fa-tag",
+			"value": true
+		}
+	]
+}
