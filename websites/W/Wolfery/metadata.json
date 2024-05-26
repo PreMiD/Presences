@@ -13,7 +13,7 @@
 		"*://www.wolfery.com/*",
 		"*://beta.wolfery.com/*"
 	],
-	"version": "1.0.1",
+	"version": "1.0.0",
 	"logo": "https://forum.wolfery.com/uploads/default/original/1X/96ef8d56ab7b19e7f69cf42fc9109c98bf93e588.png",
 	"thumbnail": "https://forum.wolfery.com/uploads/default/original/1X/96ef8d56ab7b19e7f69cf42fc9109c98bf93e588.png",
 	"color": "#D7BE69",

@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 		presence.getSetting<boolean>("characterPrivacy")
 	]);
 
-	let characterName = document.querySelector(".namesection--title").textContent
+	let characterName = document.querySelector(".namesection--title").textContent;
 
 	if (characterPrivacy) {
 		stateMsg = "";
