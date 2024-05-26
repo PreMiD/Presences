@@ -1,4 +1,4 @@
-const presence = new Presence({ 
+	const presence = new Presence({ 
 		clientId: "1244143703660953651",
 	}),
 
@@ -12,13 +12,14 @@ const enum Assets { // Other default assets can be found at index.d.ts
 // TODO: Find potential links for adding presence button to open character sheet. (v1.1.0)
 
 const detailMsg = "Roleplaying on Wolfery.com";
-let stateMsg = "",
-	characterName = document.querySelector(".namesection--title").textContent;
+let stateMsg = "";
 
 presence.on("UpdateData", async () => {
 	const [characterPrivacy] = await Promise.all([
 		presence.getSetting<boolean>("characterPrivacy")
 	]);
+
+	let characterName = document.querySelector(".namesection--title").textContent
 
 	if (characterPrivacy) {
 		stateMsg = "";
