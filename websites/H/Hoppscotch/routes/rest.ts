@@ -17,7 +17,8 @@ function getEndpoint(): string | null {
 		return childNodes
 			.filter(node => node.nodeType === node.TEXT_NODE)
 			.map(node => node.textContent)
-			.join("");
+			.join("")
+			.split("?")[0];
 	}
 }
 
