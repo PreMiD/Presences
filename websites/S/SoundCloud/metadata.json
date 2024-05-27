@@ -29,7 +29,7 @@
 	"matches": [
 		"*://*.soundcloud.com/*"
 	],
-	"version": "2.4.13",
+	"version": "2.4.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SoundCloud/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SoundCloud/assets/thumbnail.jpg",
 	"color": "#FF7E30",
