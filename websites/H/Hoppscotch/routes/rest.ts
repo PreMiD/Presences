@@ -12,7 +12,7 @@ function getEndpoint(): string | null {
 
 	if (!firstNodeContent) return null;
 
-	if (childNodes[0]) return new URL(firstNodeContent).pathname;
+	if (childNodes.length === 1) return new URL(firstNodeContent).pathname;
 	else {
 		return childNodes
 			.filter(node => node.nodeType === node.TEXT_NODE)
