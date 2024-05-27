@@ -1,5 +1,6 @@
 import { GraphQL } from "./routes/graphql";
 import { MQTT } from "./routes/mqtt";
+import { Profile } from "./routes/profile";
 import { Rest } from "./routes/rest";
 import { Settings } from "./routes/settings";
 import { SocketIO } from "./routes/socketio";
@@ -19,6 +20,7 @@ export const enum Assets {
 	SocketIO = "https://i.imgur.com/bDqkuls.png",
 	MQTT = "https://i.imgur.com/CPaISN8.png",
 	Settings = "https://i.imgur.com/EVwzrxd.png",
+	Profile = "https://i.imgur.com/gw18FuY.png",
 }
 
 const BASE = {
@@ -34,6 +36,7 @@ const BASE = {
 		"/realtime/socketio": SocketIO,
 		"/realtime/mqtt": MQTT,
 		"/settings": Settings,
+		"/profile": Profile,
 	} as {
 		[key: string]: () => PresenceData | null;
 	};
