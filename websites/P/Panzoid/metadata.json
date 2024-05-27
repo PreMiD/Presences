@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "576435921390403623",
+		"name": "rag404"
+	},
+	"service": "Panzoid",
+	"description": {
+		"en": "Panzoid is a free online video editor that offers a wide range of features to help users create and edit their videos.",
+		"fr": "Panzoid est un outil en ligne gratuit fournissant une large palette de fonctionnalités afin de créer et modifier des vidéos."
+	},
+	"url": [
+		"app.panzoid.com",
+		"panzoid.com"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.postimg.cc/wjshTkB5/panzoid-discord.webp",
+	"thumbnail": "https://i.postimg.cc/9QTV0PpG/panzoid-screenshot.png",
+	"color": "#000000",
+	"category": "other",
+	"tags": [
+		"video",
+		"editing",
+		"animation",
+		"clipmaker"
+	],
+	"iframe": true,
+	"iFrameRegExp": "https://panzoid\\.com/legacy/gen[23]/clipmaker\\.html"
+}
