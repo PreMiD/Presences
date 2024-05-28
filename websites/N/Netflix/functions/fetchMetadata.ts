@@ -9,7 +9,7 @@ export let metadata: {
 	data?: Root;
 } | null = null;
 
-export async function fetchMetadata(id: string) {
+export async function fetchMetadata(id: string): Promise<void> {
 	await limit(async () => {
 		if (metadata?.url === document.location.href) return;
 
@@ -19,10 +19,9 @@ export async function fetchMetadata(id: string) {
 				`https://www.netflix.com/nq/website/memberapi/${buildIdentifier}/metadata?movieid=${id}`
 			)
 		).json();
-		console.log(await metadata.data);
 	});
 }
 
-export async function clearMetadata() {
+export function clearMetadata(): void {
 	metadata = null;
 }

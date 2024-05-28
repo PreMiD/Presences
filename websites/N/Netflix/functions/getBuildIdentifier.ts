@@ -1,6 +1,6 @@
 export let buildIdentifier: string | null = null;
 
-export async function getBuildIdentifier(presence: Presence) {
+export async function getBuildIdentifier(presence: Presence): Promise<void> {
 	if (!buildIdentifier) {
 		buildIdentifier = await presence
 			.getPageVariable(
