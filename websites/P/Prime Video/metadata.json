@@ -14,11 +14,12 @@
 	"description": {
 		"en": "Enjoy exclusive Amazon Originals as well as popular movies and TV shows. Watch anytime, anywhere. Start your free trial.",
 		"de": "Spielfilme und Serien online streamen, als Einzelabruf online leihen oder kaufen bei Prime Video, Amazons großer Video on Demand Online-Videothek.",
-		"nl": "Geniet van exclusieve Amazon Originals en populaire films en tv-programma's. Bekijk altijd en overal. Start uw gratis proefperiode."
+		"nl": "Geniet van exclusieve Amazon Originals en populaire films en tv-programma's. Bekijk altijd en overal. Start uw gratis proefperiode.",
+		"ja_JP": "ここでしか見れない、先行や独占配信作品が続々追加！まずは30日間無料でお試し"
 	},
 	"url": "www.primevideo.com",
-	"regExp": "(([a-z0-9-]+[.])*amazon([.][a-z]+)+[/](-[/]([a-z0-9]+)[/])?(Prime-Video|Prime-Instant-Video|Amazon-Video|gp[/]video))|([a-z0-9-]+[.])*primevideo([.][a-z]+)+[/]",
-	"version": "2.1.23",
+	"regExp": "(([a-z0-9-]+[.])*amazon([.][a-z]+)+([/](-[/]([a-z0-9]+)[/])?(Prime-Video|Prime-Instant-Video|Amazon-Video|gp[/]video)?)?)|([a-z0-9-]+[.])*primevideo([.][a-z]+)+([/]?)?",
+	"version": "2.1.25",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Prime%20Video/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Prime%20Video/assets/thumbnail.jpg",
 	"color": "#FFFFFF",
