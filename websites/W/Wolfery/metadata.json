@@ -10,7 +10,6 @@
 	},
 	"url": "wolfery.com",
 	"matches": [
-		"*://wolfery.com/*",
 		"*://www.wolfery.com/*",
 		"*://beta.wolfery.com/*"
 	],
