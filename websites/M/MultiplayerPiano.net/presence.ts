@@ -7,8 +7,9 @@ const enum Assets {
 }
 
 async function getShowJoinButton(): Promise<boolean> {
-	const joinButtonSetting =
-		await presence.getSetting<boolean>("showJoinButton");
+	const joinButtonSetting = await presence.getSetting<boolean>(
+		"showJoinButton"
+	);
 	return joinButtonSetting;
 }
 
