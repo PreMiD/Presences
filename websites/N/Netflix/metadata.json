@@ -58,7 +58,7 @@
 	"matches": [
 		"*://*.netflix.com/*"
 	],
-	"version": "5.2.7",
+	"version": "6.0.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/thumbnail.jpg",
 	"color": "#db0000",
@@ -80,80 +80,43 @@
 			"value": false
 		},
 		{
-			"id": "browse",
+			"id": "usePresenceName",
+			"title": "Show Title as Presence",
+			"icon": "fad fa-user-edit",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
+			"id": "showBrowsingStatus",
 			"title": "Show Browsing Status",
 			"icon": "fad fa-book-reader",
 			"value": true
 		},
 		{
-			"id": "movie",
+			"id": "showMovies",
 			"title": "Show Movies",
 			"icon": "fad fa-camera-movie",
 			"value": true
 		},
 		{
-			"id": "movieDetails",
-			"if": {
-				"privacy": false
-			},
-			"title": "Movie Details row1",
-			"icon": "fas fa-comment-alt-edit",
-			"value": "%title%",
-			"placeholder": "Use %title% or {0} to delete the row completely"
-		},
-		{
-			"id": "movieStates",
-			"if": {
-				"privacy": false
-			},
-			"title": "Movie Details row2",
-			"icon": "fas fa-comment-alt-edit",
-			"value": "Movie",
-			"placeholder": "Use %title% or {0} to delete the row completely"
-		},
-		{
-			"id": "series",
+			"id": "showSeries",
 			"title": "Show Series",
 			"icon": "fad fa-film",
 			"value": true
 		},
 		{
-			"id": "seriesDetails",
-			"if": {
-				"privacy": false
-			},
-			"title": "Series Details row1",
-			"icon": "fas fa-comment-alt-edit",
-			"value": "%title%",
-			"placeholder": "Use %title% or %episode% or %season% or %episodeTitle%"
-		},
-		{
-			"id": "seriesStates",
-			"if": {
-				"privacy": false
-			},
-			"title": "Video Details row2",
-			"icon": "fas fa-comment-alt-edit",
-			"value": "S%season%:E%episode% %episodeTitle%",
-			"placeholder": "Use %title% or %episode% or %season% or %episodeTitle% or {0} to delete the row completely"
-		},
-		{
 			"id": "timestamp",
 			"title": "Show Timestamps",
 			"icon": "fad fa-stopwatch",
-			"value": true
-		},
-		{
-			"id": "buttons",
+			"value": true,
 			"if": {
 				"privacy": false
-			},
-			"title": "Show Buttons",
-			"icon": "fas fa-compress-arrows-alt",
-			"value": true
+			}
 		},
 		{
-			"id": "logo",
+			"id": "logoType",
 			"title": "Icon",
 			"icon": "fad fa-images",
 			"value": 0,
@@ -162,12 +125,6 @@
 				"Still",
 				"Still, No Background"
 			]
-		},
-		{
-			"id": "cover",
-			"title": "Show Cover",
-			"icon": "fad fa-images",
-			"value": true
 		}
 	]
 }
