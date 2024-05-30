@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "709704536821858304",
+		"name": "cyadine"
+	},
+	"service": "Voirdrama",
+	"description": {
+		"en": "Voiranime is a streaming website where you can watch Asian drama."
+	},
+	"url": "voirdrama.org",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/th4BDX4.png",
+	"thumbnail": "https://i.imgur.com/RUEnOb4.png",
+	"color": "#c12035",
+	"category": "videos",
+	"tags": [
+		"drama",
+		"video",
+		"media"
+	],
+	"iframe": true,
+	"iFrameRegExp": ".*"
+}
