@@ -39,8 +39,11 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-	const newLang = await presence.getSetting<string>("lang").catch(() => "en"),
-		buttons = await presence.getSetting<boolean>("buttons");
+	const [newLang, privacy, buttons] = await Promise.all([
+		presence.getSetting<string>("lang").catch(() => "en"),
+		presence.getSetting<boolean>("privacy"),
+		presence.getSetting<boolean>("buttons"),
+	]);
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
@@ -157,21 +160,23 @@ presence.on("UpdateData", async () => {
 		},
 	};
 
-	for (const [k, v] of Object.entries(statics)) {
-		if (
-			location.href
-				.replace(/\/?$/, "/")
-				.replace(`https://${location.hostname}`, "")
-				.replace("?", "/")
-				.match(k)
-		) {
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.smallImageText = strings.browse;
-			presenceData = { ...presenceData, ...v };
+	if (privacy) presenceData.details = strings.browse;
+	else {
+		for (const [k, v] of Object.entries(statics)) {
+			if (
+				location.href
+					.replace(/\/?$/, "/")
+					.replace(`https://${location.hostname}`, "")
+					.replace("?", "/")
+					.match(k)
+			) {
+				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageText = strings.browse;
+				presenceData = { ...presenceData, ...v };
+			}
 		}
+		if (!buttons) delete presenceData.buttons;
 	}
-
-	if (!buttons) delete presenceData.buttons;
 
 	presence.setActivity(presenceData);
 });
