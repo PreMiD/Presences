@@ -12,7 +12,9 @@ let detailMsg = "Roleplaying on Wolfery.com",
 	appLocation = null;
 
 presence.on("UpdateData", async () => {
-	const characterPrivacy = await presence.getSetting<boolean>("characterPrivacy");
+	const characterPrivacy = await presence.getSetting<boolean>(
+		"characterPrivacy"
+	);
 
 	appLocation = document
 		.querySelector(".panel--titletxt")
