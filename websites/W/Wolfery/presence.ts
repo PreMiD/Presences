@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		default: {
-			stateMsg = "Roleplaying on Wolfery.com";
+			stateMsg = "Roleplaying";
 			detailMsg = null;
 		}
 	}
