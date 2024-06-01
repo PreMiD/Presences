@@ -20,7 +20,7 @@ export const enum Assets {
 	SocketIO = "https://cdn.rcd.gg/PreMiD/websites/H/Hoppscotch/assets/4.png",
 	MQTT = "https://cdn.rcd.gg/PreMiD/websites/H/Hoppscotch/assets/5.png",
 	Settings = "https://cdn.rcd.gg/PreMiD/websites/H/Hoppscotch/assets/6.png",
-	Profile = "https://i.imgur.com/gw18FuY.png",
+	Profile = "https://cdn.rcd.gg/PreMiD/websites/H/Hoppscotch/assets/7.png",
 }
 
 const BASE = {
