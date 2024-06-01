@@ -1,7 +1,7 @@
 const presence = new Presence({ clientId: "1244143703660953651" }),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-const enum Assets { // Other default assets can be found at index.d.ts
+const enum Assets {
 	Logo = "https://forum.wolfery.com/uploads/default/original/1X/96ef8d56ab7b19e7f69cf42fc9109c98bf93e588.png",
 }
 
