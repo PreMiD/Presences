@@ -25,24 +25,35 @@ presence.on("UpdateData", async () => {
 		video = document.querySelector<HTMLVideoElement>("video");
 
 	switch (true) {
-		case !!search?.value: {
-			presenceData.details = privacy ? "Is aan het zoeken" : "Zoekt naar:";
-			presenceData.state = search?.value;
-			presenceData.smallImageKey = Assets.Search;
-			break;
-		}
 		case !!video && !!video.currentTime: {
+			const titel = document
+				.querySelector('[data-testid="player-info"]')
+				.querySelector("span")
+				?.textContent?.replace(/•/gm, " • ");
 			delete presenceData.startTimestamp;
 			presenceData.details = privacy
 				? "Bekijkt een video"
 				: document.querySelector('[data-testid="txt-header"]')?.textContent;
-			presenceData.state = document
-				.querySelector('[data-testid="txt-metadata"] > span')
-				?.textContent?.replace(/•/gm, " • ");
-			if (!video.paused)
-				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
+			presenceData.state = !document.querySelector('[data-testid="lst-nicam"]') // Extra symbolen, waardoor eindigt met " • "
+				? titel
+				: titel.slice(0, -3);
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>("li.active,img")?.src ??
+				Assets.Logo;
 			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.buttons = [{ label: "Bekijk Video", url: href }];
+
+			if (!video.paused)
+				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
+
+			break;
+		}
+		case !!search?.value: {
+			presenceData.details = privacy
+				? "Is ergens naar aan het zoeken"
+				: "Zoekt naar:";
+			presenceData.state = search?.value;
+			presenceData.smallImageKey = Assets.Search;
 			break;
 		}
 		case path.includes("/categorie/"): {
@@ -133,5 +144,6 @@ presence.on("UpdateData", async () => {
 		delete presenceData.buttons;
 	if ((!covers || privacy) && presenceData.largeImageKey !== Assets.Logo)
 		presenceData.largeImageKey = Assets.Logo;
+	if (privacy && presenceData.smallImageKey) delete presenceData.smallImageKey;
 	presence.setActivity(presenceData);
 });
