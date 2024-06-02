@@ -31,13 +31,15 @@ presence.on("UpdateData", async () => {
 	// The order in which the URL is checked matters here
 	if (document.location.hostname === "app.panzoid.com")
 		getGen4Data(presenceData);
-	else if (document.location.pathname.includes("backgrounder"))
+	else if (document.location.pathname.startsWith("/community"))
+		presenceData.details = Details.Community;
+	else if (document.location.pathname.includes("/backgrounder"))
 		presenceData.details = Details.Backgrounder;
-	else if (document.location.pathname.includes("videoeditor"))
+	else if (document.location.pathname.includes("/videoeditor"))
 		presenceData.details = Details.VideoEditor;
-	else if (document.location.pathname.includes("gen1"))
+	else if (document.location.pathname.includes("/gen1"))
 		presenceData.details = Details.CM1;
-	else if (document.location.pathname.includes("clipmaker"))
+	else if (document.location.pathname.includes("/clipmaker"))
 		getLegacyData(presenceData);
 
 	// Finally set the presence

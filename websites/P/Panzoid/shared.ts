@@ -13,6 +13,7 @@ export const enum Details {
 	CM1 = "Editing in Clipmaker 1",
 	Backgrounder = "Editing in Backgrounder",
 	VideoEditor = "Editing in Video Editor",
+	Community = "Chatting with the community",
 	Website = "Lurking around the website",
 }
 
