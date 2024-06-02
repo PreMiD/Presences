@@ -1,5 +1,6 @@
 import { GraphQL } from "./routes/graphql";
 import { MQTT } from "./routes/mqtt";
+import { Profile } from "./routes/profile";
 import { Rest } from "./routes/rest";
 import { Settings } from "./routes/settings";
 import { SocketIO } from "./routes/socketio";
@@ -11,14 +12,15 @@ const presence = new Presence({
 });
 
 export const enum Assets {
-	Logo = "https://hoppscotch.io/icon.png",
-	Rest = "https://i.imgur.com/nSEZ5mB.png",
-	GraphQL = "https://i.imgur.com/unKFP0O.png",
-	Websocket = "https://i.imgur.com/1d69yyz.png",
-	ServerSentEvents = "https://i.imgur.com/1yO70KH.png",
-	SocketIO = "https://i.imgur.com/bDqkuls.png",
-	MQTT = "https://i.imgur.com/CPaISN8.png",
-	Settings = "https://i.imgur.com/EVwzrxd.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/H/Hoppscotch/assets/logo.png",
+	Rest = "https://cdn.rcd.gg/PreMiD/websites/H/Hoppscotch/assets/0.png",
+	GraphQL = "https://cdn.rcd.gg/PreMiD/websites/H/Hoppscotch/assets/1.png",
+	Websocket = "https://cdn.rcd.gg/PreMiD/websites/H/Hoppscotch/assets/2.png",
+	ServerSentEvents = "https://cdn.rcd.gg/PreMiD/websites/H/Hoppscotch/assets/3.png",
+	SocketIO = "https://cdn.rcd.gg/PreMiD/websites/H/Hoppscotch/assets/4.png",
+	MQTT = "https://cdn.rcd.gg/PreMiD/websites/H/Hoppscotch/assets/5.png",
+	Settings = "https://cdn.rcd.gg/PreMiD/websites/H/Hoppscotch/assets/6.png",
+	Profile = "https://cdn.rcd.gg/PreMiD/websites/H/Hoppscotch/assets/7.png",
 }
 
 const BASE = {
@@ -34,6 +36,7 @@ const BASE = {
 		"/realtime/socketio": SocketIO,
 		"/realtime/mqtt": MQTT,
 		"/settings": Settings,
+		"/profile": Profile,
 	} as {
 		[key: string]: () => PresenceData | null;
 	};
