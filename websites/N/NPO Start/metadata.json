@@ -25,7 +25,8 @@
 		"start",
 		"plus"
 	],
-	"settings": [		{
+	"settings": [
+		{
 			"id": "privacy",
 			"title": "Privacy Mode",
 			"icon": "fas fa-user-secret",
