@@ -37,6 +37,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = navigator.mediaSession.metadata.title;
 		presenceData.state = navigator.mediaSession.metadata.artist;
+		presenceData.type = ActivityType.Listening;
 
 		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused
