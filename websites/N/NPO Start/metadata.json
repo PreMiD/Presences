@@ -1,0 +1,53 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "638080361179512853",
+		"name": "dark_ville"
+	},
+	"service": "NPO Start",
+	"description": {
+		"en": "NPO Start (formerly Uitzending Gemist and NPO Gemist) is the free video-on-demand service of the Dutch Public Broadcasting Corporation.",
+		"nl": "NPO Start (voorheen Uitzending Gemist en NPO Gemist) is de gratis video-on-demanddienst van de Nederlandse Publieke Omroep."
+	},
+	"url": [
+		"npo.nl",
+		"www.npo.nl"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/FWKyCIS.png",
+	"thumbnail": "https://i.imgur.com/Z1g1UFP.png",
+	"color": "#FD6B00",
+	"category": "videos",
+	"tags": [
+		"nederlands",
+		"tv",
+		"npo",
+		"start",
+		"plus"
+	],
+	"settings": [		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fas fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
+			"id": "covers",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		}
+	]
+}
