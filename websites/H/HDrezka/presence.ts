@@ -42,6 +42,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/1191450515670843533/1191452075100479498.png";
 		}
 	}
+
 	presence.setActivity(presenceData);
 });
 
