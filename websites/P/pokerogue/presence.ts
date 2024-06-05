@@ -38,10 +38,8 @@ presence.on("UpdateData", async () => {
 		]),
 		data: gameInfo = await presence.getPageVariable("gameInfo");
 
-	if (!data) {
-		presence.error("Data couldn't be found.");
-		return presence.setActivity();
-	}
+	if (!data) return;
+
 	if (!data.gameInfo.biome || (!gameDetails && !gameStates)) {
 		presenceData.details = "Browsing...";
 		return presence.setActivity(presenceData);
