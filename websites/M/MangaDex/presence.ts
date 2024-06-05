@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
 				.querySelector("head > title")
 				.textContent.replace(` - ${title} - MangaDex`, "")}`;
 			presenceData.largeImageKey = await getCoverImage(
-				document.querySelector<HTMLLinkElement>("span > a").href.split("/")[4]
+				href.split("/")[4]
 			);
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.buttons = [{ label: "Read Chapter", url: href }];
