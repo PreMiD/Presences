@@ -63,9 +63,8 @@ presence.on("UpdateData", async () => {
 			delete presenceData.endTimestamp;
 		}
 
-		if (listening) {
+		if (listening) 
 			presenceData.type = ActivityType.Listening;
-		}
 		
 		presence.setActivity(presenceData);
 	} else if (+presence.getExtensionVersion() < 224) presence.setActivity();
