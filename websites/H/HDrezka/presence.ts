@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
 		if (document.location.pathname.match(/\/(films|series|cartoons)\/.+/)) {
 			presenceData.details = `Смотрит ${currentType}`;
 			presenceData.state = `${document.querySelector(".b-post__title h1").textContent}`;
-			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(".b-sidecover a img").src
+			presenceData.largeImageKey = document.querySelector<HTMLImageElement>(".b-sidecover a img").src;
 			presenceData.smallImageKey = "https://cdn.discordapp.com/app-assets/1191450515670843533/1247862870276833292.png";
 			presenceData.buttons = [{
 				label: "Открыть страницу",
