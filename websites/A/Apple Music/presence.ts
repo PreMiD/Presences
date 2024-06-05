@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 		[timestamps, cover, listening] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),
 			presence.getSetting<boolean>("cover"),
-			presence.getSetting<boolean>("listening")
+			presence.getSetting<boolean>("listening"),
 		]),
 		audio = document.querySelector<HTMLAudioElement>(
 			"audio#apple-music-player"
@@ -63,9 +63,8 @@ presence.on("UpdateData", async () => {
 			delete presenceData.endTimestamp;
 		}
 
-		if (listening) 
-			presenceData.type = ActivityType.Listening;
-		
+		if (listening) presenceData.type = ActivityType.Listening;
+
 		presence.setActivity(presenceData);
 	} else if (+presence.getExtensionVersion() < 224) presence.setActivity();
 	else presence.clearActivity();
