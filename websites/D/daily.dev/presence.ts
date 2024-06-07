@@ -22,30 +22,30 @@ const processPostSite = (): Partial<PresenceData> => {
 			}
 		]
 	};
-}
+},
 
-const processDiscussionSite = (): Partial<PresenceData> => {
+ processDiscussionSite = (): Partial<PresenceData> => {
 	return {
 		details: "Reading discussion for post",
 		state: document.querySelector("h1")?.textContent,
-	}
-}
+	};
+},
 
-const processSourceSite = () => {
+ processSourceSite = () => {
 	return {
 		details: "Reading a source",
 		state: `Source: ${document.querySelector("h1")?.textContent}`
-	}
-}
+	};
+},
 
-const processSearchSite = () => {
+ processSearchSite = () => {
 	return {
 		details: "Searching",
 		state: `Searching for ${new URLSearchParams(document.location.search).get("search")}`
-	}
-}
+	};
+},
 
-const siteDataMap = [
+ siteDataMap = [
 	{
 		path: /^\/$/,
 		process: () => ({
@@ -110,7 +110,7 @@ const siteDataMap = [
 			state: "Browsing personal history"
 		})
 	},
-]
+];
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
