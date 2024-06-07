@@ -1,9 +1,5 @@
 const presence = new Presence({
-	clientId: "1248642612169150594",
-}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		clientId: "1248642612169150594",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -18,59 +14,63 @@ presence.on("UpdateData", async () => {
 	};
 
 	const pages: Record<string, PresenceData> = {
-		pulls: {
-			details: "Viewing pull requests",
+			pulls: {
+				details: "Viewing pull requests",
+			},
+			notifications: {
+				details: "Viewing notifications",
+			},
+			issues: {
+				details: "Viewing issues",
+			},
+			milestones: {
+				details: "Viewing milestones",
+			},
+			"notifications/subscriptions": {
+				details: "Viewing subscribed notifications",
+			},
+			"user/settings": {
+				details: "Editing user settings",
+			},
+			"user/login": {
+				details: "Logging in",
+			},
+			"user/cbrgp/0XUjCUW": {
+				details: "Signing up",
+			},
+			"explore/repos": {
+				details: "Exploring repositories",
+			},
+			"explore/users": {
+				details: "Exploring users",
+			},
+			"explore/organizations": {
+				details: "Exploring organizations",
+			},
+			"org/create": {
+				details: "Creating an organization",
+			},
+			"repo/create": {
+				details: "Creating a repository",
+			},
+			"repo/migrate": {
+				details: "Migrating a repository",
+			},
 		},
-		notifications: {
-			details: "Viewing notifications",
-		},
-		issues: {
-			details: "Viewing issues",
-		},
-		milestones: {
-			details: "Viewing milestones",
-		},
-		"notifications/subscriptions": {
-			details: "Viewing subscribed notifications"
-		},
-		"user/settings": {
-			details: "Editing user settings",
-		},
-		"user/login": {
-			details: "Logging in"
-		},
-		"user/cbrgp/0XUjCUW": {
-			details: "Signing up"
-		},
-		"explore/repos": {
-			details: "Exploring repositories",
-		},
-		"explore/users": {
-			details: "Exploring users",
-		},
-		"explore/organizations": {
-			details: "Exploring organizations",
-		},
-		"org/create": {
-			details: "Creating an organization"
-		},
-		"repo/create": {
-			details: "Creating a repository"
-		},
-		"repo/migrate": {
-			details: "Migrating a repository"
-		}
-	},
-
 		{ pathname, href } = document.location;
 
 	for (const [path, data] of Object.entries(pages))
-		if (pathname.endsWith(`/${path}`)) presenceData = { ...presenceData, ...data };
-
+		if (pathname.endsWith(`/${path}`))
+			presenceData = { ...presenceData, ...data };
 
 	// Handle users
-	if (document.querySelector(".user.profile") && !document.querySelector(".user.profile.settings")) {
-		const profileDisplayName = document.querySelector(".profile-avatar-name").querySelector(".header")?.textContent,
+	if (
+		document.querySelector(".user.profile") &&
+		!document.querySelector(".user.profile.settings")
+	) {
+		const profileDisplayName = document
+				.querySelector(".profile-avatar-name")
+				.querySelector(".header")?.textContent,
 			// Returns as {name} · {pronouns} so I have to split it
 			profileName = document
 				.querySelector(".profile-avatar-name")
@@ -78,41 +78,48 @@ presence.on("UpdateData", async () => {
 				.textContent.split(" ")[0];
 
 		let name: string;
-		if (!profileDisplayName)
-			name = profileName;
-		else
-			name = `${profileDisplayName} (${profileName})`;
-
+		if (!profileDisplayName) name = profileName;
+		else name = `${profileDisplayName} (${profileName})`;
 
 		presenceData.details = `Viewing profile: ${name}`;
-		presenceData.buttons = [{
-			label: "View profile",
-			url: href
-		}];
+		presenceData.buttons = [
+			{
+				label: "View profile",
+				url: href,
+			},
+		];
 		presenceData.largeImageKey = `${href.split("?")[0]}.png`;
 		presenceData.smallImageKey = Assets.Logo;
 	}
 
 	// Handle repos
-	if (document.querySelector(".repository") && !document.querySelector(".repository.new")) {
-		const repoAvatar = document.querySelector(".flex-item-leading").querySelector("img"),
-			repoTitle = document.querySelector(".flex-item-main").querySelector(".flex-item-title").textContent.trim();
+	if (
+		document.querySelector(".repository") &&
+		!document.querySelector(".repository.new")
+	) {
+		const repoAvatar = document
+				.querySelector(".flex-item-leading")
+				.querySelector("img"),
+			repoTitle = document
+				.querySelector(".flex-item-main")
+				.querySelector(".flex-item-title")
+				.textContent.trim();
 
 		if (repoAvatar) {
 			presenceData.largeImageKey = repoAvatar.src;
 			presenceData.smallImageKey = Assets.Logo;
-		} else
-			presenceData.largeImageKey = Assets.Logo;
+		} else presenceData.largeImageKey = Assets.Logo;
 
-
-		presenceData.buttons = [{
-			label: "View repository",
-			url: href
-		}];
+		presenceData.buttons = [
+			{
+				label: "View repository",
+				url: href,
+			},
+		];
 
 		const repoPages: Record<string, PresenceData> = {
 			"": {
-				details: `Viewing repository: ${repoTitle}`
+				details: `Viewing repository: ${repoTitle}`,
 			},
 			issues: {
 				details: `Viewing ${repoTitle}'s issues`,
@@ -148,18 +155,18 @@ presence.on("UpdateData", async () => {
 				details: `Viewing ${repoTitle}'s forks`,
 			},
 			watchers: {
-				details: `Viewing ${repoTitle}'s watchers`
+				details: `Viewing ${repoTitle}'s watchers`,
 			},
 			stars: {
-				details: `Viewing ${repoTitle}'s stargazers`
-			}
+				details: `Viewing ${repoTitle}'s stargazers`,
+			},
 		};
 
 		for (const [path, data] of Object.entries(repoPages)) {
 			if (pathname.includes(`/${path}`)) {
 				presenceData = {
 					...data,
-					...presenceData
+					...presenceData,
 				};
 			}
 		}
@@ -167,14 +174,21 @@ presence.on("UpdateData", async () => {
 
 	// Handle orgs
 	if (document.querySelector(".organization.profile")) {
-
-
-		presenceData.details = `Viewing organization: ${document.querySelector("head").querySelector("title").textContent.split(" ")[0]}`;
-		presenceData.buttons = [{
-			label: "View organization",
-			url: href
-		}];
-		presenceData.largeImageKey = document.querySelector(".organization").querySelector("img").src;
+		presenceData.details = `Viewing organization: ${
+			document
+				.querySelector("head")
+				.querySelector("title")
+				.textContent.split(" ")[0]
+		}`;
+		presenceData.buttons = [
+			{
+				label: "View organization",
+				url: href,
+			},
+		];
+		presenceData.largeImageKey = document
+			.querySelector(".organization")
+			.querySelector("img").src;
 		presenceData.smallImageKey = Assets.Logo;
 	}
 
