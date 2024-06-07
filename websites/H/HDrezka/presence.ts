@@ -5,8 +5,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Где-то на сайте",
-			largeImageKey:
-				"https://i.imgur.com/0gTpbcv.png",
+			largeImageKey: "https://i.imgur.com/0gTpbcv.png",
 		},
 		contentType = document
 			.querySelector("meta[property='og:url']")
