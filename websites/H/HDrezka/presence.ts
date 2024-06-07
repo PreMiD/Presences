@@ -36,8 +36,7 @@ presence.on("UpdateData", async () => {
 			}`;
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>(".b-sidecover a img").src;
-			presenceData.smallImageKey =
-				"https://cdn.discordapp.com/app-assets/1191450515670843533/1247862870276833292.png";
+			presenceData.smallImageKey = "https://i.imgur.com/0gTpbcv.png";
 			presenceData.buttons = [
 				{
 					label: "Открыть страницу",
@@ -49,7 +48,7 @@ presence.on("UpdateData", async () => {
 		} else {
 			presenceData.details = `Ищет ${currentType}`;
 			presenceData.smallImageKey =
-				"https://cdn.discordapp.com/app-assets/1191450515670843533/1191452075100479498.png";
+				"https://cdn.discordapp.com/app-assets/1191450515670843533/1191452075100479498.png?size=512";
 		}
 	}
 	presence.setActivity(presenceData);
