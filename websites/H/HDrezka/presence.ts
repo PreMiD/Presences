@@ -6,7 +6,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Где-то на сайте",
 			largeImageKey:
-				"https://cdn.discordapp.com/app-assets/1191450515670843533/1247862870276833292.png",
+				"https://i.imgur.com/0gTpbcv.png",
 		},
 		contentType = document
 			.querySelector("meta[property='og:url']")
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		} else {
-			presenceData.details = `В поиске ${currentType}a`;
+			presenceData.details = `Ищет ${currentType}`;
 			presenceData.smallImageKey =
 				"https://cdn.discordapp.com/app-assets/1191450515670843533/1191452075100479498.png";
 		}
