@@ -60,29 +60,29 @@ presence.on("UpdateData", async () => {
 		"repo/migrate": {
 			details: "Migrating a repository"
 		}
-	}
+	},
 
-	const { pathname, href } = document.location
+		{ pathname, href } = document.location;
 
-	for (const [path, data] of Object.entries(pages)) {
-		if (pathname.endsWith(`/${path}`)) presenceData = { ...presenceData, ...data }
-	}
+	for (const [path, data] of Object.entries(pages))
+		if (pathname.endsWith(`/${path}`)) presenceData = { ...presenceData, ...data };
+
 
 	// Handle users
 	if (document.querySelector(".user.profile") && !document.querySelector(".user.profile.settings")) {
-		const profileDisplayName = document.querySelector(".profile-avatar-name").querySelector(".header")?.textContent;
-		// Returns as {name} · {pronouns} so I have to split it
-		const profileName = document
-			.querySelector(".profile-avatar-name")
-			.querySelector(".username")
-			.textContent.split(" ")[0];
+		const profileDisplayName = document.querySelector(".profile-avatar-name").querySelector(".header")?.textContent,
+			// Returns as {name} · {pronouns} so I have to split it
+			profileName = document
+				.querySelector(".profile-avatar-name")
+				.querySelector(".username")
+				.textContent.split(" ")[0];
 
 		let name: string;
-		if (!profileDisplayName) {
+		if (!profileDisplayName)
 			name = profileName;
-		} else {
+		else
 			name = `${profileDisplayName} (${profileName})`;
-		}
+
 
 		presenceData.details = `Viewing profile: ${name}`;
 		presenceData.buttons = [{
@@ -95,20 +95,20 @@ presence.on("UpdateData", async () => {
 
 	// Handle repos
 	if (document.querySelector(".repository") && !document.querySelector(".repository.new")) {
-		const repoAvatar = document.querySelector(".flex-item-leading").querySelector("img");
-		const repoTitle = document.querySelector(".flex-item-main").querySelector(".flex-item-title").textContent.trim()
+		const repoAvatar = document.querySelector(".flex-item-leading").querySelector("img"),
+			repoTitle = document.querySelector(".flex-item-main").querySelector(".flex-item-title").textContent.trim();
 
 		if (repoAvatar) {
-			presenceData.largeImageKey = repoAvatar.src
-			presenceData.smallImageKey = Assets.Logo
-		} else {
-			presenceData.largeImageKey = Assets.Logo
-		}
+			presenceData.largeImageKey = repoAvatar.src;
+			presenceData.smallImageKey = Assets.Logo;
+		} else
+			presenceData.largeImageKey = Assets.Logo;
+
 
 		presenceData.buttons = [{
 			label: "View repository",
 			url: href
-		}]
+		}];
 
 		const repoPages: Record<string, PresenceData> = {
 			"": {
@@ -136,29 +136,46 @@ presence.on("UpdateData", async () => {
 				details: `Viewing ${repoTitle}'s actions`,
 			},
 			packages: {
-				details: `Viewing ${repoTitle}'s packages`
+				details: `Viewing ${repoTitle}'s packages`,
+			},
+			branches: {
+				details: `Viewing ${repoTitle}'s branches`,
+			},
+			tags: {
+				details: `Viewing ${repoTitle}'s tags`,
+			},
+			forks: {
+				details: `Viewing ${repoTitle}'s forks`,
+			},
+			watchers: {
+				details: `Viewing ${repoTitle}'s watchers`
+			},
+			stars: {
+				details: `Viewing ${repoTitle}'s stargazers`
 			}
-		}
+		};
 
 		for (const [path, data] of Object.entries(repoPages)) {
-			if (pathname.includes(`/${path}`)) presenceData = {
-				...data,
-				...presenceData
+			if (pathname.includes(`/${path}`)) {
+				presenceData = {
+					...data,
+					...presenceData
+				};
 			}
 		}
 	}
 
 	// Handle orgs
 	if (document.querySelector(".organization.profile")) {
-		const orgName = document.querySelector("head").querySelector("title").textContent.split(" ")[0]
 
-		presenceData.details = `Viewing organization: ${orgName}`
+
+		presenceData.details = `Viewing organization: ${document.querySelector("head").querySelector("title").textContent.split(" ")[0]}`;
 		presenceData.buttons = [{
 			label: "View organization",
 			url: href
-		}]
-		presenceData.largeImageKey = document.querySelector(".organization").querySelector("img").src
-		presenceData.smallImageKey = Assets.Logo
+		}];
+		presenceData.largeImageKey = document.querySelector(".organization").querySelector("img").src;
+		presenceData.smallImageKey = Assets.Logo;
 	}
 
 	presence.setActivity(presenceData);
