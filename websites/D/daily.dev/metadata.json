@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "937757295453044806",
+		"name": "atsukoro"
+	},
+	"service": "daily.dev",
+	"description": {
+		"en": "The best developer social platform with latest technology-related news"
+	},
+	"url": "app.daily.dev",
+	"version": "1.0.0",
+	"logo": "https://files.catbox.moe/t45ajt.png",
+	"thumbnail": "https://files.catbox.moe/74vdse.png",
+	"color": "#0E1217",
+	"category": "socials",
+	"tags": [
+		"developer",
+		"social",
+		"news"
+	]
+}
