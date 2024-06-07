@@ -10,9 +10,9 @@
 		"fr": "Regarder et telecharger gratuitement vos dramas coréens chinois japonais asiatique en HD et FHD en VF et VOSTFR en streaming ddl sur VOIRDRAMA.COM VOIRDRAMA.ORG"
 	},
 	"url": "voirdrama.org",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/th4BDX4.png",
-	"thumbnail": "https://i.imgur.com/RUEnOb4.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Voirdrama/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Voirdrama/assets/thumbnail.png",
 	"color": "#c12035",
 	"category": "videos",
 	"tags": [
