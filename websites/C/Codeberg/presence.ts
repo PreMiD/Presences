@@ -59,9 +59,10 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, href } = document.location;
 
-	for (const [path, data] of Object.entries(pages))
+	for (const [path, data] of Object.entries(pages)) {
 		if (pathname.endsWith(`/${path}`))
 			presenceData = { ...presenceData, ...data };
+	}
 
 	// Handle users
 	if (
