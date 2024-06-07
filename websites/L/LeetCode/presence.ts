@@ -3,7 +3,7 @@ const presence = new Presence({
 		clientId: "719373053028728894",
 	}),
 	// time spent on current URL
-	timeElapsed: (Date.now() / 1000);
+	timeElapsed =Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	// default settings
