@@ -23,9 +23,9 @@
 		"ga_IE": "Éifeall na ceimhniú a thágthóg, uair éirinn."
 	},
 	"url": "www.deezer.com",
-	"version": "2.3.3",
-	"logo": "https://i.imgur.com/lIo79GI.png",
-	"thumbnail": "https://i.imgur.com/V7Sglzc.png",
+	"version": "2.3.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Deezer/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Deezer/assets/thumbnail.png",
 	"color": "#a238ff",
 	"category": "music",
 	"tags": [
