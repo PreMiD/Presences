@@ -202,22 +202,27 @@ presence.on("UpdateData", async () => {
 	}
 
 	// Handle orgs
-	if (document.querySelector(".organization.profile")) {
-		presenceData.details = `Viewing organization: ${
-			document
-				.querySelector("head")
-				.querySelector("title")
-				.textContent.split(" ")[0]
-		}`;
+	if (document.querySelector(".organization.page-content")) {
+		const orgAvatar = document
+				.querySelector(".organization")
+				.querySelector("img"),
+			orgName = orgAvatar.title;
+
+		if (href.includes("/-/projects"))
+			presenceData.details = `Viewing ${orgName}'s projects`;
+		else if (href.includes("/-/packages"))
+			presenceData.details = `Viewing ${orgName}'s packages`;
+		else if (href.includes("/org"))
+			presenceData.details = `Viewing ${orgName}'s teams/members`;
+		else presenceData.details = `Viewing organization: ${orgName}`;
+
 		presenceData.buttons = [
 			{
 				label: "View organization",
 				url: href,
 			},
 		];
-		presenceData.largeImageKey = document
-			.querySelector(".organization")
-			.querySelector("img").src;
+		presenceData.largeImageKey = orgAvatar.src;
 		presenceData.smallImageKey = Assets.Logo;
 	}
 
