@@ -82,14 +82,42 @@ presence.on("UpdateData", async () => {
 		if (!profileDisplayName) name = profileName;
 		else name = `${profileDisplayName} (${profileName})`;
 
-		presenceData.details = `Viewing profile: ${name}`;
+		const tabParam = new URL(href).searchParams.get("tab");
+
+		if (tabParam) {
+			switch (tabParam) {
+				case "stars": {
+					presenceData.details = `Viewing ${profileName}'s starred repositories`;
+
+					break;
+				}
+				case "activity": {
+					presenceData.details = `Viewing ${profileName}'s public activity`;
+
+					break;
+				}
+				case "repositories": {
+					presenceData.details = `Viewing ${profileName}'s repositories`;
+
+					break;
+				}
+				// No default
+			}
+		} else if (href.includes("/-/projects"))
+			presenceData.details = `Viewing ${profileName}'s projects`;
+		else if (href.includes("/-/packages"))
+			presenceData.details = `Viewing ${profileName}'s packages`;
+		else presenceData.details = `Viewing profile: ${name}`;
+
 		presenceData.buttons = [
 			{
 				label: "View profile",
 				url: href,
 			},
 		];
-		presenceData.largeImageKey = `${href.split("?")[0]}.png`;
+		presenceData.largeImageKey = document
+			.querySelector("#profile-avatar")
+			.querySelector("img").src;
 		presenceData.smallImageKey = Assets.Logo;
 	}
 
