@@ -9,46 +9,128 @@ const enum Assets {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
+			type: ActivityType.Listening,
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, href } = document.location;
+		{ pathname, href, hostname } = document.location;
 
-	switch (pathname.split("/")[1]) {
-		case "": {
-			presenceData.details = "Viewing homepage";
+	switch (hostname.split(".")[0]) {
+		case "www": {
+			switch (pathname.split("/")[1].replace(".php", "")) {
+				case "": {
+					presenceData.details = "Viewing homepage";
+					break;
+				}
+				case "index": {
+					presenceData.details = "Viewing homepage";
+					break;
+				}
+				case "search": {
+					const params = new URL(href).searchParams;
+
+					presenceData.details = "Searching";
+					presenceData.state = `${
+						params.get("freq")
+							? "Frequency: "
+							: params.get("icao")
+							? "ICAO: "
+							: ""
+					}${params.get("freq") || params.get("icao")?.toUpperCase() || ""}`;
+					params.get("freq");
+					params.get("icao");
+					break;
+				}
+				case "hlisten": {
+					const radioInfo = document
+						.querySelector("h1")
+						.childNodes.item(2)
+						.textContent.split(" - ");
+
+					presenceData.details = radioInfo[0];
+					presenceData.state = radioInfo[1];
+					presenceData.largeImageText = document
+						.querySelector("font")
+						.textContent.trim();
+					presenceData.smallImageKey = Assets.Live;
+					presenceData.buttons = [
+						{
+							url: href,
+							label: "Listen to Feed",
+						},
+					];
+					break;
+				}
+				case "archive": {
+					if (document.querySelector("audio")) {
+						const audio = document.querySelector("audio"),
+							timestamps = presence.getTimestampsfromMedia(audio);
+
+						presenceData.details = "Listening to archive";
+						presenceData.state = audio
+							.querySelector("source")
+							.src.split("/")[4]
+							.split(".")[0];
+						presenceData.smallImageKey = audio.paused
+							? Assets.Pause
+							: Assets.Play;
+						presenceData.smallImageText = audio.paused ? "Paused" : "Playing";
+						if (!audio.paused) {
+							presenceData.startTimestamp = timestamps[0];
+							presenceData.endTimestamp = timestamps[1];
+						}
+					} else presenceData.details = "Searching archive";
+					break;
+				}
+				case "recordings": {
+					presenceData.details = "Browsing recordings";
+					break;
+				}
+				case "feedindex": {
+					presenceData.details = "Browsing feeds";
+					presenceData.state = document.querySelector("h1 > font");
+					break;
+				}
+				case "topfeeds": {
+					presenceData.details = "Browsing top 50 feeds";
+					break;
+				}
+				case "map": {
+					presenceData.details = "Viewing feed map";
+					break;
+				}
+				case "badwxfeeds": {
+					presenceData.details = "Viewing bad weather airports";
+					break;
+				}
+				case "coverage": {
+					presenceData.details = "Viewing coverage guide";
+					break;
+				}
+				default: {
+					presenceData.details = pathname.split("/")[1].replace(".php", "");
+					break;
+				}
+			}
 			break;
 		}
-		case "search": {
-			const params = new URL(href).searchParams;
+		case "forums": {
+			const pageURL = document.querySelector<HTMLAnchorElement>(
+				".navigate_section .last a"
+			).href;
 
-			presenceData.details = "Searching";
-			presenceData.state = `${
-				params.get("freq") ? "Frequency: " : params.get("icao") ? "ICAO: " : ""
-			}${params.get("freq") || params.get("icao")?.toUpperCase() || ""}`;
-			params.get("freq");
-			params.get("icao");
-			break;
-		}
-		case "hlisten.php": {
-			presenceData.type = ActivityType.Listening;
-			const radioInfo = document
-				.querySelector("h1")
-				.childNodes.item(2)
-				.textContent.split(" - ");
-			presenceData.details = radioInfo[0];
-			presenceData.state = radioInfo[1];
-			presenceData.largeImageText = document
-				.querySelector("font")
-				.textContent.trim();
-			presenceData.smallImageKey = Assets.Live;
-			presenceData.buttons = [
-				{
-					url: href,
-					label: "Listen",
-				},
-			];
-			break;
+			presenceData.details = "Browsing the forums";
+			presenceData.state = document.querySelector(
+				".navigate_section .last span"
+			);
+			if (new URL(pageURL).pathname.split("/")[1] !== "index.php") {
+				presenceData.buttons = [
+					{
+						url: pageURL,
+						label: "View page",
+					},
+				];
+			}
 		}
 	}
 
