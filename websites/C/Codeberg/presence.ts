@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.buttons = [
 			{
-				label: "View profile",
+				label: "View Profile",
 				url: href,
 			},
 		];
@@ -141,7 +141,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.buttons = [
 			{
-				label: "View repository",
+				label: "View Repository",
 				url: href,
 			},
 		];
@@ -218,7 +218,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData.buttons = [
 			{
-				label: "View organization",
+				label: "View Organization",
 				url: href,
 			},
 		];
