@@ -57,10 +57,10 @@ presence.on("UpdateData", async () => {
 				details: "Migrating a repository",
 			},
 		},
-		{ pathname, href } = document.location;
+		{ href } = document.location;
 
 	for (const [path, data] of Object.entries(pages)) {
-		if (pathname.endsWith(`/${path}`))
+		if (`/${path}` === document.querySelector('.active.item').getAttribute('href'))
 			presenceData = { ...presenceData, ...data };
 	}
 
@@ -192,7 +192,7 @@ presence.on("UpdateData", async () => {
 		};
 
 		for (const [path, data] of Object.entries(repoPages)) {
-			if (pathname.includes(`/${path}`)) {
+			if (path === document.querySelector('.active.item').getAttribute('href')) {
 				presenceData = {
 					...data,
 					...presenceData,
