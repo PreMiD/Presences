@@ -195,7 +195,8 @@ presence.on("UpdateData", async () => {
 
 		for (const [path, data] of Object.entries(repoPages)) {
 			if (
-				`/${path}` === document.querySelector(".active.item").getAttribute("href")
+				`/${path}` ===
+				document.querySelector(".active.item").getAttribute("href")
 			) {
 				presenceData = {
 					...data,
