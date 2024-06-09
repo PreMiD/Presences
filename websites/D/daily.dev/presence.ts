@@ -13,7 +13,7 @@ const processPostSite = (): Partial<PresenceData> => {
 		state: document.querySelector("h1")?.textContent,
 		buttons: [
 			{
-				label: "Read this post",
+				label: "Read Post",
 				url: document.location.href
 			}
 		]
