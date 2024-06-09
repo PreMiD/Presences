@@ -60,7 +60,9 @@ presence.on("UpdateData", async () => {
 		{ href } = document.location;
 
 	for (const [path, data] of Object.entries(pages)) {
-		if (`/${path}` === document.querySelector('.active.item').getAttribute('href'))
+		if (
+			`/${path}` === document.querySelector(".active.item").getAttribute("href")
+		)
 			presenceData = { ...presenceData, ...data };
 	}
 
@@ -192,7 +194,9 @@ presence.on("UpdateData", async () => {
 		};
 
 		for (const [path, data] of Object.entries(repoPages)) {
-			if (path === document.querySelector('.active.item').getAttribute('href')) {
+			if (
+				path === document.querySelector(".active.item").getAttribute("href")
+			) {
 				presenceData = {
 					...data,
 					...presenceData,
