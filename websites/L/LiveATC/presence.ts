@@ -37,8 +37,6 @@ presence.on("UpdateData", async () => {
 							? "ICAO: "
 							: ""
 					}${params.get("freq") || params.get("icao")?.toUpperCase() || ""}`;
-					params.get("freq");
-					params.get("icao");
 					break;
 				}
 				case "hlisten": {
