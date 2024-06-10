@@ -170,11 +170,11 @@ presence.on("UpdateData", async () => {
 						subtitle.match(/: (.*)/)?.[1];
 
 					if (/Series [0-9]{1,2}: (Episode )?[0-9]{1,2}.?/i.test(subtitle)) {
-						if (usePresenceName)
+						if (usePresenceName) {
 							subtitle = `Season ${episodeNumber[0]}, Episode ${
 								episodeNumber[1] || 1
 							}`;
-						else {
+						} else {
 							subtitle = `S${episodeNumber[0]}${
 								episodeNumber[1] ? `:E${episodeNumber[1]}` : ""
 							}${episodeTitle ? ` ${episodeTitle}` : ""}`;
