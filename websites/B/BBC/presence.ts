@@ -165,7 +165,7 @@ presence.on("UpdateData", async () => {
 
 				if (subtitle) {
 					const episodeNumber = subtitle.match(/[0-9]{1,2}/g);
-					episodeTitle = episodeTitle =
+					episodeTitle =
 						subtitle.match(/: [0-9]{1,2}. (.*)/)?.[1] ??
 						subtitle.match(/: (.*)/)?.[1];
 
