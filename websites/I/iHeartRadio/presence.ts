@@ -37,11 +37,11 @@ presence.on("UpdateData", async () => {
 						"div"
 					)?.querySelector('img[alt="Player Artwork Image"]')?.getAttribute("src");
 					
-					if (srcImage) {
-						srcImage = srcImage.replace("ops=fit(150%2C150)", "ops=fit(512%2C512)");
-					}
+					
+					srcImage = srcImage.replace("ops=fit(150%2C150)", "ops=fit(512%2C512)");
+					
 			
-					presenceData.largeImageKey = srcImage ? `${srcImage}` : "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png";
+					presenceData.largeImageKey = srcImage.includes("ops=fit") ? `${srcImage}` : "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png";
 				}
 
 				title = playerText.children[0].textContent;
@@ -74,12 +74,12 @@ presence.on("UpdateData", async () => {
 						}
 
 						if (links.length > 0) {
-							stationData.push(
+							links[1].includes( "songs" ) ? stationData.push(
 								{
 									label: "View Song",
 									url: links[1]
 								}
-							);
+							) : null;
 						}
 					}
 				}
@@ -108,11 +108,11 @@ presence.on("UpdateData", async () => {
 					"div"
 				)?.querySelector('img[alt="Player Artwork Image"]')?.getAttribute("src");
 
-				if (srcImage) {
-					srcImage = srcImage.replace("ops=fit(150%2C150)", "ops=fit(512%2C512)");
-				}
+				
+				srcImage = srcImage.replace("ops=fit(150%2C150)", "ops=fit(512%2C512)");
+				
 
-				presenceData.largeImageKey = srcImage ? `${srcImage}` : "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png";
+				presenceData.largeImageKey = srcImage.includes("ops=fit") ? `${srcImage}` : "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png";
 			}
 
 			if (playerText.querySelectorAll("p").length > 1) {
