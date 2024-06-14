@@ -9,15 +9,15 @@
 		"en": "LiveATC.Net provides live air traffic control (ATC) broadcasts from air traffic control towers and radar facilities around the world"
 	},
 	"url": [
-		"www.liveatc.net", 
+		"www.liveatc.net",
 		"forums.liveatc.net"
 	],
 	"matches": [
 		"*://*.liveatc.net/*"
 	],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/yJqBgNp.png",
-	"thumbnail": "https://i.imgur.com/RemWSjn.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LiveATC/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LiveATC/assets/thumbnail.png",
 	"color": "#FF3333",
 	"category": "other",
 	"tags": [
