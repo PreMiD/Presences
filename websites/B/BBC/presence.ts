@@ -3,13 +3,13 @@ const presence = new Presence({
 });
 
 enum LogoAssets {
-	BbcFuture = "https://i.imgur.com/VFLWWMc.png",
-	BbciPlayer = "https://i.imgur.com/AZT47th.png",
-	Bbc = "https://i.imgur.com/jeXg35x.png",
-	BbcNews = "https://i.imgur.com/LJzOxK4.png",
-	BbcSounds = "https://i.imgur.com/mzgbEiS.png",
-	BbcSport = "https://i.imgur.com/kC4rskq.png",
-	BbcWeather = "https://i.imgur.com/EAB33ye.png",
+	BbcFuture = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/0.png",
+	BbciPlayer = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/1.png",
+	Bbc = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/2.png",
+	BbcNews = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/3.png",
+	BbcSounds = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/4.png",
+	BbcSport = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/5.png",
+	BbcWeather = "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/6.png",
 }
 
 const browsingTimestamp = Math.floor(Date.now() / 1000),
