@@ -125,9 +125,12 @@ presence.on("UpdateData", async () => {
 			author = playerText.children[2]?.textContent;
 			subtitle = `${song}${author ? ` - ${author}` : ""}`;
 
-			const paused = !!document.querySelector('[data-test="play-icon"]'); // timestamp.children[0].textContent, timestamp.children[2].textContent
+			const paused = !!document.querySelector('[data-test="play-icon"]');
+
 			const currentTime = presence.timestampFromFormat(timestamp.children[0].textContent);
+			
 			const duration = presence.timestampFromFormat(timestamp.children[2].textContent);
+
 			const timestamps = presence.getTimestamps(currentTime, duration);
 
 			title = checkLength(title);
