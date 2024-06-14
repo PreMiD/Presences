@@ -34,8 +34,9 @@ presence.on("UpdateData", async () => {
 					);
 
 					let srcImage = playerArtworkDiv?.querySelector(
-						'div'
+						"div"
 					)?.querySelector('img[alt="Player Artwork Image"]')?.getAttribute("src") ?? "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png";
+					
 					if (srcImage.includes("ops=fit(150%2C150)")) {
 						srcImage = srcImage.replace("ops=fit(150%2C150)", "ops=fit(512%2C512)");
 					}
@@ -93,14 +94,15 @@ presence.on("UpdateData", async () => {
 			}
 
 			if (playerText.querySelectorAll("p").length > 1) {
-				const data = playerText.querySelectorAll('p');
+				const data = playerText.querySelectorAll("p");
+
 				const links: string[] = [];
 
 				if (data.length > 1) {
 					const twoPara = Array.from(data).slice(-2);
 
 					twoPara.forEach(p => {
-						const a = p.querySelector('a');
+						const a = p.querySelector("a");
 						if (a) links.push(a?.href);
 					});
 				}
@@ -128,7 +130,7 @@ presence.on("UpdateData", async () => {
 			const paused = !!document.querySelector('[data-test="play-icon"]');
 
 			const currentTime = presence.timestampFromFormat(timestamp.children[0].textContent);
-			
+
 			const duration = presence.timestampFromFormat(timestamp.children[2].textContent);
 
 			const timestamps = presence.getTimestamps(currentTime, duration);
