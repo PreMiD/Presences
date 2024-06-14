@@ -25,21 +25,29 @@ presence.on("UpdateData", async () => {
 	};
 	if (document.querySelector('[data-test="player-container"]')) {
 		const playerText = document.querySelector('[data-test="player-text"]');
-		if ( !document.querySelector('[data-test="controls-container"]').children[1] ) {
-			if (document.querySelector('[data-test="controls-container"] [data-test-state="PLAYING"]')) {
-
+		if (
+			!document.querySelector('[data-test="controls-container"]').children[1]
+		) {
+			if (
+				document.querySelector(
+					'[data-test="controls-container"] [data-test-state="PLAYING"]'
+				)
+			) {
 				if (document.querySelector('[data-test="player-artwork-image"]')) {
-					let srcImage = document.querySelector(
-						'[data-test="player-artwork-image"]'
-					)?.querySelector(
-						"div"
-					)?.querySelector('img[alt="Player Artwork Image"]')?.getAttribute("src");
-					
-					
-					srcImage = srcImage.replace("ops=fit(150%2C150)", "ops=fit(512%2C512)");
-					
-			
-					presenceData.largeImageKey = srcImage.includes("ops=fit") ? `${srcImage}` : "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png";
+					let srcImage = document
+						.querySelector('[data-test="player-artwork-image"]')
+						?.querySelector("div")
+						?.querySelector('img[alt="Player Artwork Image"]')
+						?.getAttribute("src");
+
+					srcImage = srcImage.replace(
+						"ops=fit(150%2C150)",
+						"ops=fit(512%2C512)"
+					);
+
+					presenceData.largeImageKey = srcImage.includes("ops=fit")
+						? `${srcImage}`
+						: "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png";
 				}
 
 				title = playerText.children[0].textContent;
@@ -53,12 +61,12 @@ presence.on("UpdateData", async () => {
 				presenceData.state = subtitle;
 
 				if (document.URL.includes("live")) {
-					const stationData = presenceData.buttons = [
+					const stationData = (presenceData.buttons = [
 						{
 							label: "View Station",
-							url: document.URL
-						}
-					];
+							url: document.URL,
+						},
+					]);
 
 					if (playerText.querySelectorAll("p").length > 1) {
 						const data = playerText.querySelectorAll("p"),
@@ -72,12 +80,12 @@ presence.on("UpdateData", async () => {
 						}
 
 						if (links.length > 0) {
-							links[1].includes( "songs" ) ? stationData.push(
-								{
-									label: "View Song",
-									url: links[1]
-								}
-							) : null;
+							links[1].includes("songs")
+								? stationData.push({
+										label: "View Song",
+										url: links[1],
+								  })
+								: null;
 						}
 					}
 				}
@@ -98,18 +106,17 @@ presence.on("UpdateData", async () => {
 			).children;
 
 			if (document.querySelector('[data-test="player-artwork-image"]')) {
+				let srcImage = document
+					.querySelector('[data-test="player-artwork-image"]')
+					?.querySelector("div")
+					?.querySelector('img[alt="Player Artwork Image"]')
+					?.getAttribute("src");
 
-				let srcImage = document.querySelector(
-					'[data-test="player-artwork-image"]'
-				)?.querySelector(
-					"div"
-				)?.querySelector('img[alt="Player Artwork Image"]')?.getAttribute("src");
-
-				
 				srcImage = srcImage.replace("ops=fit(150%2C150)", "ops=fit(512%2C512)");
-				
 
-				presenceData.largeImageKey = srcImage.includes("ops=fit") ? `${srcImage}` : "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png";
+				presenceData.largeImageKey = srcImage.includes("ops=fit")
+					? `${srcImage}`
+					: "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png";
 			}
 
 			if (playerText.querySelectorAll("p").length > 1) {
@@ -129,15 +136,14 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "View Song",
-							url: links[0]
+							url: links[0],
 						},
 						{
 							label: "View Artist",
-							url: links[1]
-						}
+							url: links[1],
+						},
 					];
 				}
-				
 			}
 
 			title = playerText.children[0].textContent;
@@ -146,8 +152,11 @@ presence.on("UpdateData", async () => {
 			subtitle = `${song}${author ? ` - ${author}` : ""}`;
 
 			const paused = !!document.querySelector('[data-test="play-icon"]'),
-			currentTime = [presence.timestampFromFormat(timestamp.children[0].textContent), presence.timestampFromFormat(timestamp.children[2].textContent)],
-			timestamps = presence.getTimestamps(currentTime[0], currentTime[1]);
+				currentTime = [
+					presence.timestampFromFormat(timestamp.children[0].textContent),
+					presence.timestampFromFormat(timestamp.children[2].textContent),
+				],
+				timestamps = presence.getTimestamps(currentTime[0], currentTime[1]);
 
 			title = checkLength(title);
 			presenceData.details = title;
@@ -157,8 +166,10 @@ presence.on("UpdateData", async () => {
 				(presenceData.smallImageText = paused
 					? (await strings).pause
 					: (await strings).play),
-				([presenceData.startTimestamp, presenceData.endTimestamp] =
-					[timestamps[0], timestamps[1]]);
+				([presenceData.startTimestamp, presenceData.endTimestamp] = [
+					timestamps[0],
+					timestamps[1],
+				]);
 
 			if (paused) {
 				delete presenceData.startTimestamp;
@@ -167,7 +178,6 @@ presence.on("UpdateData", async () => {
 
 			await presence.setActivity(presenceData);
 		}
-
 	} else if (!document.querySelector('[data-test="player-container"]')) {
 		presenceData.details = "Browsing iHeartRadio...";
 		await presence.setActivity(presenceData);
