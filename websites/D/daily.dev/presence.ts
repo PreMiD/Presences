@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://files.catbox.moe/t45ajt.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/daily.dev/assets/logo.png",
 }
 
 const processPostSite = (): Partial<PresenceData> => {
