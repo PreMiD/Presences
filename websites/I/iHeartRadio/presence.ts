@@ -10,7 +10,7 @@ const presence = new Presence({
 function checkLength(string: string): string {
 	if (string.length > 128) return `${string.substring(0, 125)}...`;
 	else return string;
-};
+}
 
 let elapsed = Math.floor(Date.now() / 1000),
 	title,
@@ -35,15 +35,13 @@ presence.on("UpdateData", async () => {
 
 					let srcImage = playerArtworkDiv?.querySelector(
 						'div'
-					)?.querySelector('img[alt="Player Artwork Image"]')?.getAttribute('src') ?? "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png";
+					)?.querySelector('img[alt="Player Artwork Image"]')?.getAttribute("src") ?? "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png";
 					if (srcImage.includes("ops=fit(150%2C150)")) {
-						srcImage = srcImage.replace('ops=fit(150%2C150)', 'ops=fit(512%2C512)');
+						srcImage = srcImage.replace("ops=fit(150%2C150)", "ops=fit(512%2C512)");
 					}
 			
 					presenceData.largeImageKey = `${srcImage}`;
 				}
-
-				
 
 				title = playerText.children[0].textContent;
 				song = playerText.children[1].textContent;
@@ -61,7 +59,7 @@ presence.on("UpdateData", async () => {
 							label: "View Station",
 							url: document.URL
 						}
-					]
+					];
 				}
 
 				presenceData.smallImageKey = Assets.Live;
@@ -85,16 +83,16 @@ presence.on("UpdateData", async () => {
 				);
 
 				let srcImage = playerArtworkDiv?.querySelector(
-					'div'
-				)?.querySelector('img[alt="Player Artwork Image"]')?.getAttribute('src') ?? "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png";
+					"div"
+				)?.querySelector('img[alt="Player Artwork Image"]')?.getAttribute("src") ?? "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png";
 				if (srcImage.includes("ops=fit(150%2C150)")) {
-					srcImage = srcImage.replace('ops=fit(150%2C150)', 'ops=fit(512%2C512)');
+					srcImage = srcImage.replace("ops=fit(150%2C150)", "ops=fit(512%2C512)");
 				}
 
 				presenceData.largeImageKey = `${srcImage}`;
 			}
 
-			if (playerText.querySelectorAll('p').length > 1) {
+			if (playerText.querySelectorAll("p").length > 1) {
 				const data = playerText.querySelectorAll('p');
 				const links: string[] = [];
 
@@ -117,7 +115,7 @@ presence.on("UpdateData", async () => {
 							label: "View Artist",
 							url: links[1]
 						}
-					]
+					];
 				}
 				
 			}
