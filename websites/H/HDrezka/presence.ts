@@ -5,7 +5,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Где-то на сайте",
-			largeImageKey: "https://i.imgur.com/0gTpbcv.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/HDrezka/assets/logo.png",
 		},
 		contentType = document
 			.querySelector("meta[property='og:url']")
@@ -36,7 +37,8 @@ presence.on("UpdateData", async () => {
 			}`;
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>(".b-sidecover a img").src;
-			presenceData.smallImageKey = "https://i.imgur.com/0gTpbcv.png";
+			presenceData.smallImageKey =
+				"https://cdn.rcd.gg/PreMiD/websites/H/HDrezka/assets/logo.png";
 			presenceData.buttons = [
 				{
 					label: "Открыть страницу",
@@ -48,7 +50,7 @@ presence.on("UpdateData", async () => {
 		} else {
 			presenceData.details = `Ищет ${currentType}`;
 			presenceData.smallImageKey =
-				"https://cdn.discordapp.com/app-assets/1191450515670843533/1191452075100479498.png?size=512";
+				"https://cdn.rcd.gg/PreMiD/websites/H/HDrezka/assets/0.png";
 		}
 	}
 	presence.setActivity(presenceData);
