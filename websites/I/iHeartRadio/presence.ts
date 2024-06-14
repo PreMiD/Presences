@@ -29,11 +29,9 @@ presence.on("UpdateData", async () => {
 			if (document.querySelector('[data-test="controls-container"] [data-test-state="PLAYING"]')) {
 
 				if (document.querySelector('[data-test="player-artwork-image"]')) {
-					const playerArtworkDiv = document.querySelector(
+					let srcImage = document.querySelector(
 						'[data-test="player-artwork-image"]'
-					);
-
-					let srcImage = playerArtworkDiv?.querySelector(
+					)?.querySelector(
 						"div"
 					)?.querySelector('img[alt="Player Artwork Image"]')?.getAttribute("src");
 					
@@ -100,11 +98,10 @@ presence.on("UpdateData", async () => {
 			).children;
 
 			if (document.querySelector('[data-test="player-artwork-image"]')) {
-				const playerArtworkDiv = document.querySelector(
-					'[data-test="player-artwork-image"]'
-				);
 
-				let srcImage = playerArtworkDiv?.querySelector(
+				let srcImage = document.querySelector(
+					'[data-test="player-artwork-image"]'
+				)?.querySelector(
 					"div"
 				)?.querySelector('img[alt="Player Artwork Image"]')?.getAttribute("src");
 
