@@ -9,9 +9,9 @@
 		"en": "We know how hard it is to be a developer. It doesn't have to be. Personalized news feed, dev communities and search, much better than what’s out there. Maybe ;)"
 	},
 	"url": "app.daily.dev",
-	"version": "1.0.0",
-	"logo": "https://files.catbox.moe/t45ajt.png",
-	"thumbnail": "https://files.catbox.moe/74vdse.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/daily.dev/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/daily.dev/assets/thumbnail.png",
 	"color": "#0E1217",
 	"category": "socials",
 	"tags": [
