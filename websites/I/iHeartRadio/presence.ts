@@ -40,10 +40,12 @@ presence.on("UpdateData", async () => {
 						?.querySelector('img[alt="Player Artwork Image"]')
 						?.getAttribute("src");
 
-					srcImage = srcImage.replace(
-						"ops=fit(150%2C150)",
-						"ops=fit(512%2C512)"
-					);
+					srcImage
+						? (srcImage = srcImage.replace(
+								"ops=fit(150%2C150)",
+								"ops=fit(512%2C512)"
+						  ))
+						: null;
 
 					presenceData.largeImageKey = srcImage.includes("ops=fit")
 						? `${srcImage}`
@@ -112,7 +114,12 @@ presence.on("UpdateData", async () => {
 					?.querySelector('img[alt="Player Artwork Image"]')
 					?.getAttribute("src");
 
-				srcImage = srcImage.replace("ops=fit(150%2C150)", "ops=fit(512%2C512)");
+				srcImage
+					? (srcImage = srcImage.replace(
+							"ops=fit(150%2C150)",
+							"ops=fit(512%2C512)"
+					  ))
+					: null;
 
 				presenceData.largeImageKey = srcImage.includes("ops=fit")
 					? `${srcImage}`
