@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "937757295453044806",
+		"name": "atsukoro"
+	},
+	"service": "daily.dev",
+	"description": {
+		"en": "We know how hard it is to be a developer. It doesn't have to be. Personalized news feed, dev communities and search, much better than what’s out there. Maybe ;)"
+	},
+	"url": "app.daily.dev",
+	"version": "1.0.0",
+	"logo": "https://files.catbox.moe/t45ajt.png",
+	"thumbnail": "https://files.catbox.moe/74vdse.png",
+	"color": "#0E1217",
+	"category": "socials",
+	"tags": [
+		"developer",
+		"social",
+		"news"
+	]
+}
