@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 						: null;
 
 					presenceData.largeImageKey = srcImage.includes("ops=fit")
-						? srcImage
+						? `${srcImage}`
 						: "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png";
 				}
 
@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
 					: null;
 
 				presenceData.largeImageKey = srcImage.includes("ops=fit")
-					? srcImage
+					? `${srcImage}`
 					: "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png";
 			}
 
