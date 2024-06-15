@@ -140,7 +140,7 @@ presence.on("UpdateData", async () => {
 				}
 
 				if (links.length > 0) {
-					const btns = presenceData.buttons = [
+					const btns = (presenceData.buttons = [
 						{
 							label: "View Song",
 							url: links[0],
@@ -149,7 +149,7 @@ presence.on("UpdateData", async () => {
 							label: "View Artist",
 							url: links[1],
 						},
-					];
+					]);
 
 					if (document.URL.includes("podcast")) {
 						btns[0].label = "View Podcast";
