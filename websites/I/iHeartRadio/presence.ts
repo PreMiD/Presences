@@ -151,9 +151,9 @@ presence.on("UpdateData", async () => {
 						},
 					]);
 
-					if (document.URL.includes("podcast")) {
-						btns[0].label = "View Podcast";
-					}
+					document.URL.includes("podcast")
+						? (btns[0].label = "View Podcast")
+						: null;
 				}
 			}
 
