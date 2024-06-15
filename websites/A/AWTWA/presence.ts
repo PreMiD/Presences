@@ -73,17 +73,6 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = poster;
 			presenceData.smallImageKey = Assets.Play;
 
-			presenceData.details =
-				presenceStrings.onPage + document.querySelector("h1")?.textContent;
-			presenceData.state = `Saison ${
-				(document.querySelector("#season") as HTMLSelectElement).value
-			} - Épisode ${
-				(document.querySelector("#episode") as HTMLSelectElement).value
-			}`;
-			presenceData.smallImageText = presenceStrings.watchOn;
-			presenceData.largeImageKey = poster;
-			presenceData.smallImageKey = Assets.Play;
-
 			if (!iFrameData?.paused) {
 				[, presenceData.endTimestamp] = presence.getTimestamps(
 					iFrameData.currentTime,
