@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "456298243618504707",
+		"name": "sinkaroid"
+	},
+	"service": "NIKKE.GG",
+	"description": {
+		"en": "Nikke: Goddess of Victory Database, Wiki, Guides, and more"
+	},
+	"url": "nikke.gg",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/nA6br84.png",
+	"thumbnail": "https://i.imgur.com/II14H6k.jpeg",
+	"color": "#3eafff",
+	"category": "games",
+	"tags": [
+		"guide"
+	]
+}
