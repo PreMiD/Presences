@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing Tier List";
 		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
-		presenceData.buttons = [{ label: "View Tierlist", url: href }];
+		presenceData.buttons = [{ label: "View Tier List", url: href }];
 	} else if (pathname.startsWith("/") && pathname.length > 1) {
 		presenceData.largeImageKey = thumbnail || Assets.Logo;
 		presenceData.state = `${title.split("|")[0]}`;
