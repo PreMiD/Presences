@@ -40,12 +40,12 @@ presence.on("UpdateData", async () => {
 						?.querySelector('img[alt="Player Artwork Image"]')
 						?.getAttribute("src");
 
-					srcImage
-						? (srcImage = srcImage.replace(
-								"ops=fit(150%2C150)",
-								"ops=fit(512%2C512)"
-						  ))
-						: null;
+					if (srcImage && srcImage.includes("ops=fit(150%2C150)")) {
+						srcImage = srcImage.replace(
+							"ops=fit(150%2C150)",
+							"ops=fit(512%2C512)"
+						);
+					}
 
 					presenceData.largeImageKey = srcImage.includes("ops=fit")
 						? srcImage
@@ -62,12 +62,12 @@ presence.on("UpdateData", async () => {
 				subtitle = checkLength(subtitle);
 				presenceData.state = subtitle;
 
-				if (document.URL.includes("live")) {
+				if (document.location.href.includes("live")) {
 					const stationData = (presenceData.buttons = [
 						{
 							label: "View Station",
-							url: document.URL,
-						},
+							url: document.location.href
+						}
 					]);
 
 					if (playerText.querySelectorAll("p").length > 1) {
@@ -81,13 +81,11 @@ presence.on("UpdateData", async () => {
 							}
 						}
 
-						if (links.length > 0) {
-							links[1].includes("songs")
-								? stationData.push({
-										label: "View Song",
-										url: links[1],
-								  })
-								: null;
+						if (links.length > 0 && links[1].includes("songs")) {
+							stationData.push({
+								label: "View Song",
+								url: links[1]
+							});
 						}
 					}
 				}
@@ -114,12 +112,12 @@ presence.on("UpdateData", async () => {
 					?.querySelector('img[alt="Player Artwork Image"]')
 					?.getAttribute("src");
 
-				srcImage
-					? (srcImage = srcImage.replace(
-							"ops=fit(150%2C150)",
-							"ops=fit(512%2C512)"
-					  ))
-					: null;
+				if (srcImage && srcImage.includes("ops=fit(150%2C150)")) {
+					srcImage = srcImage.replace(
+						"ops=fit(150%2C150)",
+						"ops=fit(512%2C512)"
+					);
+				}
 
 				presenceData.largeImageKey = srcImage.includes("ops=fit")
 					? srcImage
@@ -143,17 +141,17 @@ presence.on("UpdateData", async () => {
 					const btns = (presenceData.buttons = [
 						{
 							label: "View Song",
-							url: links[0],
+							url: links[0]
 						},
 						{
 							label: "View Artist",
-							url: links[1],
-						},
+							url: links[1]
+						}
 					]);
 
-					document.URL.includes("podcast")
-						? (btns[0].label = "View Podcast")
-						: null;
+					if (document.location.href.includes("podcast")) {
+						btns[0].label = "View Podcast";
+					}
 				}
 			}
 
@@ -173,14 +171,14 @@ presence.on("UpdateData", async () => {
 			presenceData.details = title;
 			subtitle = checkLength(subtitle);
 			presenceData.state = subtitle;
-			(presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play),
-				(presenceData.smallImageText = paused
-					? (await strings).pause
-					: (await strings).play),
-				([presenceData.startTimestamp, presenceData.endTimestamp] = [
-					timestamps[0],
-					timestamps[1],
-				]);
+			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
+			presenceData.smallImageText = paused
+				? (await strings).pause
+				: (await strings).play;
+			[presenceData.startTimestamp, presenceData.endTimestamp] = [
+				timestamps[0],
+				timestamps[1],
+			];
 
 			if (paused) {
 				delete presenceData.startTimestamp;
