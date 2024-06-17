@@ -66,8 +66,8 @@ presence.on("UpdateData", async () => {
 					const stationData = (presenceData.buttons = [
 						{
 							label: "View Station",
-							url: document.location.href
-						}
+							url: document.location.href,
+						},
 					]);
 
 					if (playerText.querySelectorAll("p").length > 1) {
@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
 						if (links.length > 0 && links[1].includes("songs")) {
 							stationData.push({
 								label: "View Song",
-								url: links[1]
+								url: links[1],
 							});
 						}
 					}
@@ -141,17 +141,17 @@ presence.on("UpdateData", async () => {
 					const btns = (presenceData.buttons = [
 						{
 							label: "View Song",
-							url: links[0]
+							url: links[0],
 						},
 						{
 							label: "View Artist",
-							url: links[1]
-						}
+							url: links[1],
+						},
 					]);
 
-					if (document.location.href.includes("podcast")) {
-						btns[0].label = "View Podcast";
-					}
+					document.location.href.includes("podcast")
+						? (btns[0].label = "View Podcast")
+						: null;
 				}
 			}
 
