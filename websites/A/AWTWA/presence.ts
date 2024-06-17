@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Logo = "awtwa_logo",
+	Logo = "https://i.imgur.com/n8kQ5rV.png",
 }
 
 let iFrameData = {
@@ -65,9 +65,9 @@ presence.on("UpdateData", async () => {
 			presenceData.details =
 				presenceStrings.onPage + document.querySelector("h1")?.textContent;
 			presenceData.state = `Saison ${
-				(document.querySelector("#season") as HTMLSelectElement).value
+				document.querySelector<HTMLSelectElement>("#season").value
 			} - Épisode ${
-				(document.querySelector("#episode") as HTMLSelectElement).value
+				document.querySelector<HTMLSelectElement>("#episode").value
 			}`;
 			presenceData.smallImageText = presenceStrings.watchOn;
 			presenceData.largeImageKey = poster;
