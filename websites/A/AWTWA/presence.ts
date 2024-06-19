@@ -31,8 +31,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-	largeImageKey: Assets.Logo
-	},
+			largeImageKey: Assets.Logo,
+		},
 		{ pathname, href } = document.location;
 
 	if (pathname === "/") {
@@ -77,9 +77,13 @@ presence.on("UpdateData", async () => {
 					iFrameData.currentTime,
 					iFrameData.duration
 				);
-				}
-				presenceData.smallImageKey = iFrameData?.paused ? Assets.Pause : Assets.Play;
-				presenceData.smallImageText = iFrameData?.paused ? "En pause" : "En train de regarder";
+			}
+			presenceData.smallImageKey = iFrameData?.paused
+				? Assets.Pause
+				: Assets.Play;
+			presenceData.smallImageText = iFrameData?.paused
+				? "En pause"
+				: "En train de regarder";
 
 			presenceData.buttons = [
 				{
