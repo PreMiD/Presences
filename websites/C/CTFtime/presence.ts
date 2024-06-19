@@ -37,52 +37,48 @@ const { href, hostname } = document.location,
 			},
 			{
 				path: /^\/event\/list\/.*upcoming.*$/,
-				details: () => 
-					`Browsing upcoming CTFs`
-				,
+				details: () => "Browsing upcoming CTFs",
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
 			},
 			{
 				path: /^\/event\/list\/.*now.*$/,
-				details: () => 
-					`Browsing running CTFs`
-				,
+				details: () => `Browsing running CTFs`,
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
 			},
 			{
 				path: /^\/event\/list\/.*archive.*$/,
-				details: () => `Browsing past CTFs`,
+				details: () => "Browsing past CTFs",
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
 			},
 			{
 				path: /^\/tasks.*$/,
-				details: () => `Searching write ups`,
+				details: () => "Searching write ups",
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
 			},
 			{
 				path: /^\/calendar.*$/,
-				details: () => `Checking Calendar`,
+				details: () => "Checking Calendar",
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
 			},
 			{
 				path: /^\/profile.*$/,
-				details: () => `Editing their profile`,
+				details: () => "Editing their profile",
 				smallImageKey: () => Assets.Writing,
 			},
 			{
 				path: /^\/writeups$/,
-				details: () => `Looking for Writeups`,
+				details: () => "Looking for Writeups",
 				smallImageKey: () => Assets.Reading,
 			},
 			{
 				path: /^\/writeup.*$/,
 				details: () => "Reading a Challenge Writeup",
-				state:()=>document.querySelector('.page-header h2').textContent,
+				state: () => document.querySelector('.page-header h2').textContent,
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Learning",
 				buttons: () => [
@@ -95,7 +91,7 @@ const { href, hostname } = document.location,
 			{
 				path: /^\/task.*$/,
 				details: () => "Viewng a Challenge Info",
-				state:()=>document.querySelector('.page-header h2').textContent,
+				state: () => document.querySelector('.page-header h2').textContent,
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Learning",
 				buttons: () => [
@@ -108,16 +104,14 @@ const { href, hostname } = document.location,
 			{
 				path: /^\/task.*\/writeup.*$/,
 				details: () => "Making a Challenge Write up",
-				state:()=>document.querySelector('.page-header h2').textContent,
+				state: () => document.querySelector('.page-header h2').textContent,
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Learning",
 				buttons: () => [
 					{
 						label: "Challenge Link",
 						url: (() => {
-							const originalLink = href.split("/").slice(0, 5).join("/");
-							const modifiedLink = originalLink.replace(/\/writeup$/, "");
-							return modifiedLink
+							return (href.split("/").slice(0, 5).join("/")).replace(/\/writeup$/, "");
 						})(),
 					},
 				],
@@ -125,10 +119,10 @@ const { href, hostname } = document.location,
 			{
 				path: /^\/event.*$/,
 				details: () => "Viewing a CTF",
-				state:()=>document.querySelector('.page-header h2').textContent,
+				state: () => document.querySelector('.page-header h2').textContent,
 				largeImageKey: ()=>{
 					var imgElements = document.getElementsByClassName("span2");
-					return `https:\/\/ctftime.org\/${imgElements[0].querySelector("img").getAttribute("src")}`
+					return `https:\/\/ctftime.org\/${imgElements[0].querySelector("img").getAttribute("src")}`;
 				},
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
@@ -142,7 +136,7 @@ const { href, hostname } = document.location,
 			{
 				path: /^\/user.*$/,
 				details: () => "Viewing user profile",
-				state:()=>document.querySelector('.page-header h2').textContent,
+				state: () => document.querySelector('.page-header h2').textContent,
 				largeImageKey: ()=>{
 					var imgElements = document.getElementsByClassName("span2");
 					return `https:\/\/ctftime.org\/${imgElements[0].querySelector("img").getAttribute("src")}`
@@ -158,7 +152,7 @@ const { href, hostname } = document.location,
 			},
 			{
 				path: /^\/team.*$/,
-				state:()=>document.querySelector('.page-header h2').textContent,
+				state: ()=> document.querySelector('.page-header h2').textContent,
 				details: () => 
 					"Viewing a Team",
 				largeImageKey: ()=>{
@@ -176,7 +170,7 @@ const { href, hostname } = document.location,
 			},
 			{
 				path: /^\/stats.*$/,
-				state:()=>{
+				state: () => {
 					const h3Elements = document.querySelectorAll('h3');
 					if (h3Elements.length > 1) {
 							return`Region: ${(h3Elements[0].textContent)}`;
@@ -232,7 +226,7 @@ presence.on("UpdateData", async () => {
 	if (route.state) presenceData.state = route.state();
 	if (route.details) presenceData.details = route.details();
 	if (showButtons && route.buttons) presenceData.buttons = route.buttons();
-	if (route.largeImageKey&&showCovers) presenceData.largeImageKey = route.largeImageKey();
+	if (route.largeImageKey && showCovers) presenceData.largeImageKey = route.largeImageKey();
 	if (route.smallImageKey) presenceData.smallImageKey = route.smallImageKey();
 	if (route.smallImageText)
 		presenceData.smallImageText = route.smallImageText();
