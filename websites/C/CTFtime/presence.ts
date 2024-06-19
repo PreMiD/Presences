@@ -121,7 +121,7 @@ const { href, hostname } = document.location,
 				details: () => "Viewing a CTF",
 				state: () => document.querySelector(".page-header h2").textContent,
 				largeImageKey: ()=>{
-					const imgElements = document.getElementsByClassName("span2");
+					const imgElements = document.querySelectorAll("span2");
 					return `https://ctftime.org/${imgElements[0].querySelector("img").getAttribute("src")}`;
 				},
 				smallImageKey: () => Assets.Reading,
@@ -138,7 +138,7 @@ const { href, hostname } = document.location,
 				details: () => "Viewing user profile",
 				state: () => document.querySelector(".page-header h2").textContent,
 				largeImageKey: ()=>{
-					const imgElements = document.getElementsByClassName("span2");
+					const imgElements = document.querySelectorAll("span2");
 					return `https://ctftime.org/${imgElements[0].querySelector("img").getAttribute("src")}`;
 				},
 				smallImageKey: () => Assets.Reading,
@@ -156,7 +156,7 @@ const { href, hostname } = document.location,
 				details: () => 
 					"Viewing a Team",
 				largeImageKey: ()=>{
-					const imgElements = document.getElementsByClassName("span2");
+					const imgElements = document.querySelectorAll("span2");
 					return `https://ctftime.org/${imgElements[0].querySelector("img").getAttribute("src")}`;
 				},
 				smallImageKey: () => Assets.Reading,
