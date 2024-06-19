@@ -172,9 +172,8 @@ const { href, hostname } = document.location,
 				path: /^\/stats.*$/,
 				state: () => {
 					const h3Elements = document.querySelectorAll("h3");
-					if (h3Elements.length > 1) {
+					if (h3Elements.length > 1) 
 						return`Region: ${(h3Elements[0].textContent)}`;
-					}
 					 else 
 						return "Global Ranking";
 					},
