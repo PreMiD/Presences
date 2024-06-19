@@ -111,7 +111,11 @@ const { href, hostname } = document.location,
 					{
 						label: "Challenge Link",
 						url: (() => {
-							return (href.split("/").slice(0, 5).join("/")).replace(/\/writeup$/, "");
+							return href
+								.split("/")
+								.slice(0, 5)
+								.join("/")
+								.replace(/\/writeup$/, "");
 						})(),
 					},
 				],
@@ -120,9 +124,11 @@ const { href, hostname } = document.location,
 				path: /^\/event.*$/,
 				details: () => "Viewing a CTF",
 				state: () => document.querySelector(".page-header h2").textContent,
-				largeImageKey: ()=>{
+				largeImageKey: () => {
 					const imgElements = document.querySelectorAll("span2");
-					return `https://ctftime.org/${imgElements[0].querySelector("img").getAttribute("src")}`;
+					return `https://ctftime.org/${imgElements[0]
+						.querySelector("img")
+						.getAttribute("src")}`;
 				},
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
@@ -137,9 +143,11 @@ const { href, hostname } = document.location,
 				path: /^\/user.*$/,
 				details: () => "Viewing user profile",
 				state: () => document.querySelector(".page-header h2").textContent,
-				largeImageKey: ()=>{
+				largeImageKey: () => {
 					const imgElements = document.querySelectorAll("span2");
-					return `https://ctftime.org/${imgElements[0].querySelector("img").getAttribute("src")}`;
+					return `https://ctftime.org/${imgElements[0]
+						.querySelector("img")
+						.getAttribute("src")}`;
 				},
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
@@ -152,12 +160,13 @@ const { href, hostname } = document.location,
 			},
 			{
 				path: /^\/team.*$/,
-				state: ()=> document.querySelector(".page-header h2").textContent,
-				details: () => 
-					"Viewing a Team",
-				largeImageKey: ()=>{
+				state: () => document.querySelector(".page-header h2").textContent,
+				details: () => "Viewing a Team",
+				largeImageKey: () => {
 					const imgElements = document.querySelectorAll("span2");
-					return `https://ctftime.org/${imgElements[0].querySelector("img").getAttribute("src")}`;
+					return `https://ctftime.org/${imgElements[0]
+						.querySelector("img")
+						.getAttribute("src")}`;
 				},
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
@@ -172,14 +181,11 @@ const { href, hostname } = document.location,
 				path: /^\/stats.*$/,
 				state: () => {
 					const h3Elements = document.querySelectorAll("h3");
-					if (h3Elements.length > 1) 
-						return`Region: ${(h3Elements[0].textContent)}`;
-					 else 
-						return "Global Ranking";
-					},
-				details: () => 
-					"Viewing Teams Ranking"
-				,
+					if (h3Elements.length > 1)
+						return `Region: ${h3Elements[0].textContent}`;
+					else return "Global Ranking";
+				},
+				details: () => "Viewing Teams Ranking",
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
 				buttons: () => [
@@ -197,7 +203,7 @@ const { href, hostname } = document.location,
 				path: /^\/+.*$/,
 				details: () => {
 					return href.split("/")[3].toUpperCase().split("-").join(" ");
-				}
+				},
 			},
 		];
 
@@ -205,7 +211,7 @@ const { href, hostname } = document.location,
 	};
 
 presence.on("UpdateData", async () => {
-	const [showTimestamp, showButtons,showCovers] = await Promise.all([
+	const [showTimestamp, showButtons, showCovers] = await Promise.all([
 			presence.getSetting<boolean>(Settings.TIMESTAMP),
 			presence.getSetting<boolean>(Settings.BUTTONS),
 			presence.getSetting<boolean>(Settings.COVERS),
@@ -225,7 +231,8 @@ presence.on("UpdateData", async () => {
 	if (route.state) presenceData.state = route.state();
 	if (route.details) presenceData.details = route.details();
 	if (showButtons && route.buttons) presenceData.buttons = route.buttons();
-	if (route.largeImageKey && showCovers) presenceData.largeImageKey = route.largeImageKey();
+	if (route.largeImageKey && showCovers)
+		presenceData.largeImageKey = route.largeImageKey();
 	if (route.smallImageKey) presenceData.smallImageKey = route.smallImageKey();
 	if (route.smallImageText)
 		presenceData.smallImageText = route.smallImageText();
