@@ -43,7 +43,7 @@ const { href, hostname } = document.location,
 			},
 			{
 				path: /^\/event\/list\/.*now.*$/,
-				details: () => `Browsing running CTFs`,
+				details: () => "Browsing running CTFs",
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
 			},
@@ -78,7 +78,7 @@ const { href, hostname } = document.location,
 			{
 				path: /^\/writeup.*$/,
 				details: () => "Reading a Challenge Writeup",
-				state: () => document.querySelector('.page-header h2').textContent,
+				state: () => document.querySelector(".page-header h2").textContent,
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Learning",
 				buttons: () => [
@@ -91,7 +91,7 @@ const { href, hostname } = document.location,
 			{
 				path: /^\/task.*$/,
 				details: () => "Viewng a Challenge Info",
-				state: () => document.querySelector('.page-header h2').textContent,
+				state: () => document.querySelector(".page-header h2").textContent,
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Learning",
 				buttons: () => [
@@ -104,7 +104,7 @@ const { href, hostname } = document.location,
 			{
 				path: /^\/task.*\/writeup.*$/,
 				details: () => "Making a Challenge Write up",
-				state: () => document.querySelector('.page-header h2').textContent,
+				state: () => document.querySelector(".page-header h2").textContent,
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Learning",
 				buttons: () => [
@@ -119,10 +119,10 @@ const { href, hostname } = document.location,
 			{
 				path: /^\/event.*$/,
 				details: () => "Viewing a CTF",
-				state: () => document.querySelector('.page-header h2').textContent,
+				state: () => document.querySelector(".page-header h2").textContent,
 				largeImageKey: ()=>{
-					var imgElements = document.getElementsByClassName("span2");
-					return `https:\/\/ctftime.org\/${imgElements[0].querySelector("img").getAttribute("src")}`;
+					const imgElements = document.getElementsByClassName("span2");
+					return `https://ctftime.org/${imgElements[0].querySelector("img").getAttribute("src")}`;
 				},
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
@@ -136,10 +136,10 @@ const { href, hostname } = document.location,
 			{
 				path: /^\/user.*$/,
 				details: () => "Viewing user profile",
-				state: () => document.querySelector('.page-header h2').textContent,
+				state: () => document.querySelector(".page-header h2").textContent,
 				largeImageKey: ()=>{
-					var imgElements = document.getElementsByClassName("span2");
-					return `https:\/\/ctftime.org\/${imgElements[0].querySelector("img").getAttribute("src")}`
+					const imgElements = document.getElementsByClassName("span2");
+					return `https://ctftime.org/${imgElements[0].querySelector("img").getAttribute("src")}`;
 				},
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
@@ -152,12 +152,12 @@ const { href, hostname } = document.location,
 			},
 			{
 				path: /^\/team.*$/,
-				state: ()=> document.querySelector('.page-header h2').textContent,
+				state: ()=> document.querySelector(".page-header h2").textContent,
 				details: () => 
 					"Viewing a Team",
 				largeImageKey: ()=>{
-					var imgElements = document.getElementsByClassName("span2");
-					return `https:\/\/ctftime.org\/${imgElements[0].querySelector("img").getAttribute("src")}`
+					const imgElements = document.getElementsByClassName("span2");
+					return `https://ctftime.org/${imgElements[0].querySelector("img").getAttribute("src")}`;
 				},
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
@@ -171,13 +171,13 @@ const { href, hostname } = document.location,
 			{
 				path: /^\/stats.*$/,
 				state: () => {
-					const h3Elements = document.querySelectorAll('h3');
+					const h3Elements = document.querySelectorAll("h3");
 					if (h3Elements.length > 1) {
-							return`Region: ${(h3Elements[0].textContent)}`;
+						return`Region: ${(h3Elements[0].textContent)}`;
 					}
-					 else {
+					 else 
 						return "Global Ranking";
-					}},
+					},
 				details: () => 
 					"Viewing Teams Ranking"
 				,
