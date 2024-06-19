@@ -12,7 +12,7 @@ let iFrameData = {
 	paused: true,
 };
 
-const animeBrowsingTimestamp = Math.floor(Date.now() / 1000),
+const browsingTimestamp = Math.floor(Date.now() / 1000),
 	presenceStrings = {
 		home: "Se balade sur la page d'accueil",
 		browsing: "Utilise son haki de l'observation sur le catalogue",
