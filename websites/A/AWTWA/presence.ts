@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector<HTMLSelectElement>("#episode").value
 			}`;
 			presenceData.smallImageText = presenceStrings.watchOn;
-			presenceData.largeImageKey = poster;
+			presenceData.largeImageKey = poster ?? Assets.Logo;
 			presenceData.smallImageKey = Assets.Play;
 
 			if (!iFrameData?.paused) {
