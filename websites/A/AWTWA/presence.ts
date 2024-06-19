@@ -44,7 +44,6 @@ presence.on("UpdateData", async () => {
 		presenceData.details = presenceStrings.browsing;
 		presenceData.state = presenceStrings.branding;
 		presenceData.smallImageText = presenceStrings.websiteName;
-		presenceData.largeImageKey = Assets.Logo;
 		presenceData.smallImageKey = Assets.Search;
 		presenceData.startTimestamp = animeBrowsingTimestamp;
 	} else if (pathname.includes("/animes")) {
