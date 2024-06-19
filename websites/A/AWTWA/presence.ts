@@ -77,13 +77,9 @@ presence.on("UpdateData", async () => {
 					iFrameData.currentTime,
 					iFrameData.duration
 				);
-				presenceData.smallImageKey = Assets.Play;
-				presenceData.smallImageText = "En train de regarder";
-			} else {
-				presenceData.smallImageKey = Assets.Pause;
-				presenceData.smallImageText = "En pause";
-				delete presenceData.endTimestamp;
-			}
+				}
+				presenceData.smallImageKey = iFrameData?.paused ? Assets.Pause : Assets.Play;
+				presenceData.smallImageText = iFrameData?.paused ? "En pause" : "En train de regarder";
 
 			presenceData.buttons = [
 				{
