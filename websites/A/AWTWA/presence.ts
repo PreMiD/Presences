@@ -37,7 +37,6 @@ presence.on("UpdateData", async () => {
 		presenceData.details = presenceStrings.home;
 		presenceData.state = presenceStrings.branding;
 		presenceData.smallImageText = presenceStrings.websiteName;
-		presenceData.largeImageKey = Assets.Logo;
 		presenceData.smallImageKey = Assets.Viewing;
 	} else if (pathname === "/catalog") {
 		presenceData.details = presenceStrings.browsing;
