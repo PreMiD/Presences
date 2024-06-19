@@ -53,12 +53,9 @@ presence.on("UpdateData", async () => {
 					.getAttribute("content")
 					.replace(".png.png", ".png")
 			)}`;
-			presenceData.state = `${
-				document
-					.querySelectorAll<HTMLMetaElement>('meta[property="og:title"]')[1]
-					.getAttribute("content")
-					.split("|")[0]
-			}`;
+			presenceData.state = document
+				.querySelector("article")
+				?.querySelector("h1")?.textContent;
 			presenceData.details = "Viewing Rapture";
 			presenceData.buttons = [{ label: "View Rapture", url: href }];
 		}
@@ -73,7 +70,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing Guide";
 		presenceData.buttons = [{ label: "View Guide", url: href }];
 	}
-	if (!presenceData.smallImageKey) { 
+	if (!presenceData.smallImageKey) {
 		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
 	}
