@@ -59,7 +59,6 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `${presenceStrings.onPage}un anime`;
 			presenceData.state = presenceStrings.branding;
 			presenceData.smallImageText = presenceStrings.watchOn;
-			presenceData.largeImageKey = Assets.Logo;
 			presenceData.smallImageKey = Assets.Play;
 		} else {
 			presenceData.details =
