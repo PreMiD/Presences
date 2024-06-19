@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = presenceStrings.branding;
 		presenceData.smallImageText = presenceStrings.websiteName;
 		presenceData.smallImageKey = Assets.Search;
-		presenceData.startTimestamp = animeBrowsingTimestamp;
+		presenceData.startTimestamp = browsingTimestamp;
 	} else if (pathname.includes("/animes")) {
 		const poster = document
 				.querySelector("div[role='img']")
