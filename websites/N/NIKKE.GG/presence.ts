@@ -29,26 +29,21 @@ presence.on("UpdateData", async () => {
 			?.getAttribute("content");
 
 	if (search.startsWith("?s")) {
-		presenceData.largeImageKey = Assets.Logo;
 		presenceData.state = search.split("&")[0].split("=")[1].replace(/\+/g, " ");
 		presenceData.details = "Searching for";
 		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname.startsWith("/characters")) {
 		if (pathname === "/characters/") {
-			presenceData.largeImageKey = Assets.Logo;
 			presenceData.details = "Viewing Characters List";
 			presenceData.smallImageKey = Assets.Viewing;
 		} else {
 			presenceData.largeImageKey = getImageCharacter(thumbnail);
 			presenceData.state = `${title.split("|")[0]}`;
 			presenceData.details = "Viewing Character";
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.smallImageText = "Reading";
 			presenceData.buttons = [{ label: "View Character", url: href }];
 		}
 	} else if (pathname.startsWith("/monsters")) {
 		if (pathname === "/monsters/") {
-			presenceData.largeImageKey = Assets.Logo;
 			presenceData.details = "Viewing Rapture List";
 			presenceData.smallImageKey = Assets.Viewing;
 		} else {
@@ -65,24 +60,22 @@ presence.on("UpdateData", async () => {
 					.split("|")[0]
 			}`;
 			presenceData.details = "Viewing Rapture";
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.smallImageText = "Reading";
 			presenceData.buttons = [{ label: "View Rapture", url: href }];
 		}
 	} else if (pathname.startsWith("/tier-list")) {
 		presenceData.largeImageKey = thumbnail || Assets.Logo;
 		presenceData.state = `${title.split("|")[0]}`;
 		presenceData.details = "Viewing Tier List";
-		presenceData.smallImageKey = Assets.Reading;
-		presenceData.smallImageText = "Reading";
 		presenceData.buttons = [{ label: "View Tier List", url: href }];
 	} else if (pathname.startsWith("/") && pathname.length > 1) {
 		presenceData.largeImageKey = thumbnail || Assets.Logo;
 		presenceData.state = `${title.split("|")[0]}`;
 		presenceData.details = "Viewing Guide";
+		presenceData.buttons = [{ label: "View Guide", url: href }];
+	}
+	if (!presenceData.smallImageKey) { 
 		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Reading";
-		presenceData.buttons = [{ label: "View Guide", url: href }];
 	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
