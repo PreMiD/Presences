@@ -85,6 +85,33 @@ function getChannel(channel: string) {
 function exist(selector: string) {
 	return document.querySelector(selector) !== null;
 }
+
+function parseInformations(str: string) {
+
+	const jsonValue = JSON.parse(str);
+	switch (true) {
+		case jsonValue["@type"] === "BreadcrumbList": {
+			if (jsonValue.itemListElement.length === 2) {
+				// CATEGORY NAME
+				return {
+					name: jsonValue.itemListElement[1].item.name
+				};
+			} else {
+				// CONTENT NAME ON CONTENT PAGE
+				return {
+					name: jsonValue.itemListElement[0].item.name
+				};
+			}
+		}
+		case jsonValue["@type"] === "TVEpisode": {
+			return {
+				name: jsonValue.name,
+				season: jsonValue.partOfSeason.seasonNumber,
+				episode: jsonValue.episodeNumber,
+			};
+		}
+	}
+}
 /*
 To have a cover art as largeImageKey
 const shortenedURLs: Record<string, string> = {};
@@ -211,7 +238,7 @@ presence.on("UpdateData", async () => {
 						presenceData.largeImageText = channel;
 						presenceData.smallImageKey = Assets.Live;
 						presenceData.smallImageText = (await strings).live;
-
+						
 						presenceData.type = getChannel(pathname).type;
 
 						if (time) {
@@ -263,6 +290,8 @@ presence.on("UpdateData", async () => {
 		case exist(
 			"header > div > div > h1, div.sc-nqi6nw-0.cNDqJj > h1" // Movie name or Category name: Supports mobile and desktop layout
 		): {
+			presenceData.details = parseInformations(document.querySelector("div > div > div > script").textContent).name;
+			/*
 			presenceData.state = privacy
 				? ""
 				: document.querySelector(
@@ -300,14 +329,16 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = (await strings).browsing;
 			}
+			*/
 
+			
 			break;
 		}
 
 		/* VIDEO PLAYER (Lecteur vidéo)
 	
 	(ex: https://www.rtlplay.be/the-power-p_25630/episode-01-c_13062282) */
-		case exist("div.sc-18trp4n-3.bVsrtw > h1"): {
+		case parseInformations(document.querySelectorAll("div > div > div > script")[1].textContent): {
 			const firstLine = document.querySelector(
 					"div.sc-18trp4n-3.bVsrtw > h1" // Video Player first line
 				).textContent,
@@ -316,7 +347,7 @@ presence.on("UpdateData", async () => {
 							"div.sc-3kw2pp-0.jqFqPu.sc-18trp4n-6.cQaAsL > h2" // Video Player second line, may hide in mobile layout
 					  ).textContent
 					: "";
-
+			
 			// presenceData.largeImageKey = await getShortURL((document.querySelector("picture > img") as HTMLImageElement).src);
 			presenceData.largeImageKey = Assets.Logo;
 			if (
@@ -357,7 +388,7 @@ presence.on("UpdateData", async () => {
 				default: {
 					presenceData.details = privacy
 						? (await strings).watchingShow
-						: `${(await strings).watching} ${firstLine}`;
+						: `${(await strings).watching} ${parseInformations(document.querySelector("div > div > div > script").textContent).season}`;
 					// If 1st line === 2nd line then it's a Movie, 1st line !== 2nd line then it's a Tv Show
 					if (firstLine.toLowerCase() !== secondLine.toLowerCase())
 						presenceData.state = privacy ? "" : secondLine; // Content of second line
@@ -390,6 +421,8 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 			}
+
+			presenceData.largeImageKey = document.querySelector("meta[property=\"og:image\"]").getAttribute("content");
 			break;
 		}
 		case pathname !== null: {
