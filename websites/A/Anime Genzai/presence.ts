@@ -1,7 +1,6 @@
 const presence = new Presence({
-		clientId: "1071365131616915517",
-	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	clientId: "1071365131616915517",
+});
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Genzai/assets/logo.png",
@@ -10,7 +9,7 @@ const enum Assets {
 async function getStrings() {
 	return presence.getStrings(
 		{
-			anime: "general.anime",
+			browsing: "general.browsing",
 			viewHome: "general.viewHome",
 			viewing: "general.viewing",
 			search: "general.search",
@@ -18,12 +17,10 @@ async function getStrings() {
 			play: "general.watchingVid",
 			pause: "general.paused",
 			searchSomething: "general.searchSomething",
-			watchVideoButton: "general.buttonWatchVideo",
 			watchingSeries: "general.watchingSeries",
 			watchingMovie: "general.watchingMovie",
 			buttonViewPage: "general.buttonViewPage",
 			viewPage: "general.viewPage",
-			viewThread: "general.viewThread",
 			viewProfile: "general.viewProfile",
 		},
 		await presence.getSetting<string>("lang").catch(() => "es")
@@ -43,10 +40,7 @@ function textContent(tags: string) {
 }
 
 function getImage(tags: string) {
-	return document
-		.querySelector<HTMLImageElement>(tags)
-		?.style?.backgroundImage?.slice(4, -1)
-		?.replace(/"/g, "");
+	return document.querySelector<HTMLImageElement>(tags)?.src;
 }
 
 presence.on(
@@ -67,148 +61,114 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("time"),
 			presence.getSetting<boolean>("buttons"),
 		]),
-		{ pathname, href } = document.location,
-		path = pathname.split("/")[1];
+		{ pathname } = document.location;
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
 
-	switch (path) {
+	switch (pathname.split("/")[1]) {
 		case "":
 			presenceData.details = strings.viewHome;
 			break;
 
-		case "discovery":
-		case "trends":
-		case "actors":
-		case "tv-channels":
-		case "categories":
-		case "discussions":
-		case "collections":
-			presenceData.details = `${strings.viewing} ${textContent(
-				".app-aside.nav-aside .active"
-			)}`;
-			presenceData.smallImageKey = Assets.Viewing;
-			presenceData.smallImageText = strings.viewing;
-			break;
-
-		case "movies":
-		case "series":
-		case "series-latino":
-		case "category":
+		case "search":
+		case "tag":
 			presenceData.details = privacy
 				? strings.searchSomething
-				: `${strings.search} ${strings.anime}`;
-			presenceData.state = textContent(".app-section > div > div");
+				: strings.searchFor;
+			presenceData.state = textContent("h1.layout-title").split('"')[1];
 			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.search;
 			break;
 
-		case "actor":
-			presenceData.details = strings.viewPage;
-			presenceData.state = textContent(".pl-lg-4 h1");
-			presenceData.largeImageKey = getImage(".media");
+		case "explorar":
+		case "movies":
+		case "series":
+		case "top-imdb":
+		case "platforms":
+		case "platform":
+			presenceData.details = strings.viewing;
+			presenceData.state = textContent("li.breadcrumb-item.active");
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = strings.viewing;
 			break;
 
-		case "tv-channel":
-			presenceData.details = `${strings.viewing} ${textContent(
-				".app-aside.nav-aside .active"
-			)}`;
-			presenceData.state = textContent(".caption-content h1");
-			presenceData.smallImageKey = Assets.Viewing;
-			presenceData.smallImageText = strings.viewing;
-			if (time) presenceData.startTimestamp = browsingTimestamp;
-			break;
-
-		case "discussion":
-			presenceData.details = strings.viewThread;
-			presenceData.state = textContent(".forum-content h1");
+		case "comunidad":
+			presenceData.details = strings.viewing;
+			presenceData.state = `${textContent(
+				"li.breadcrumb-item.active"
+			)} / ${textContent("a.fs-sm.text-white")}`;
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = strings.viewing;
 			break;
 
 		case "collection":
-			presenceData.details = `${strings.viewing} collecciones`;
-			presenceData.state = textContent(".collection-detail h1");
-			presenceData.smallImageKey = Assets.Viewing;
-			presenceData.smallImageText = strings.viewing;
-			break;
-
-		case "profile":
-			presenceData.details = `${strings.viewProfile} ${textContent(
-				".profile-content .username"
+			presenceData.details = `${strings.viewing} ${textContent(
+				".breadcrumb-item a"
 			)}`;
-			presenceData.state = textContent(".nav.pt-0 li .active");
-			presenceData.largeImageKey =
-				getImage(".profile-avatar .avatar") || Assets.Logo;
+			presenceData.state = textContent(
+				".layout-section > div > div:nth-child(2) > h1"
+			);
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = strings.viewing;
 			break;
 
-		case "search":
-			presenceData.details = privacy
-				? strings.searchSomething
-				: `${strings.searchFor} ${textContent(".subtext").split('"')[1]}`;
-			presenceData.state = textContent(".subtext").split('"')[0].slice(0, -3);
-			presenceData.smallImageKey = Assets.Search;
-			presenceData.smallImageText = strings.search;
+		case "usuario":
+			presenceData.details = strings.viewProfile;
+			presenceData.state = textContent("li.breadcrumb-item.active");
+			presenceData.largeImageKey =
+				document
+					.querySelector<HTMLImageElement>(".layout-section .avatar")
+					?.style?.backgroundImage?.slice(4, -1)
+					?.replace(/"/g, "") || Assets.Logo;
+			presenceData.smallImageKey = Assets.Viewing;
+			presenceData.smallImageText = strings.viewing;
 			break;
 
 		case "serie":
-			presenceData.details = `${strings.viewPage} ${strings.anime}`;
+			presenceData.details = strings.viewPage;
 			presenceData.state =
-				textContent(".pl-md-4 h1") || textContent(".caption-content a h1");
-			presenceData.largeImageKey = getImage(".media");
-			presenceData.smallImageKey = Assets.Viewing;
+				textContent(
+					".container > div > div > div > div:nth-child(2) > div > div:nth-child(2) > h1"
+				) ||
+				textContent(
+					".container > div > div > div > div:nth-child(2) > div:nth-child(4) > div > div > div:nth-child(2) > div > div > h1 > a"
+				);
+			presenceData.largeImageKey = getImage("picture > img");
+			presenceData.smallImageKey = Assets.Logo;
 			presenceData.smallImageText = strings.viewing;
-			presenceData.buttons = [
-				{
-					label: strings.buttonViewPage,
-					url: href,
-				},
-			];
 
 			if (!privacy && video.currentTime > 0) {
-				presenceData.details = `${strings.watchingSeries} ${textContent(
-					".caption-content a h1"
-				)}`;
-				presenceData.state = `${textContent(
-					".episodes .active .active .episode"
-				)} ${textContent(".episodes .active .active .name")}`;
+				presenceData.details = presenceData.state;
+				presenceData.state = textContent(
+					".container > div > div > div > div:nth-child(2) > div:nth-child(4) > div > div > div:nth-child(2) > div > div > h1 > span"
+				);
 			} else if (privacy && video.currentTime > 0)
 				presenceData.details = strings.watchingSeries;
 			break;
 
 		case "movie":
-			presenceData.details = `${strings.viewPage} ${strings.anime}`;
-			presenceData.state = textContent(".caption-content h1");
-			presenceData.largeImageKey = getImage(".media");
-			presenceData.smallImageKey = Assets.Viewing;
+			presenceData.details = strings.viewPage;
+			presenceData.state = textContent(
+				".container > div > div > div > div:nth-child(2) > div:nth-child(4) > div > div > div:nth-child(2) > div > div > h1"
+			);
+			presenceData.largeImageKey = getImage("picture > img");
+			presenceData.smallImageKey = Assets.Logo;
 			presenceData.smallImageText = strings.viewing;
-			presenceData.buttons = [
-				{
-					label: strings.buttonViewPage,
-					url: href,
-				},
-			];
 
-			if (video.currentTime > 0) presenceData.details = strings.watchingMovie;
+			if (video.currentTime > 0) {
+				if (privacy) presenceData.details = strings.watchingMovie;
+				else presenceData.details = presenceData.state;
+				delete presenceData.state;
+			}
 			break;
 	}
 
-	if (!privacy && video.currentTime > 0 && path !== "tv-channel") {
+	if (!privacy && video.currentTime > 0) {
 		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? strings.pause : strings.play;
-		presenceData.buttons = [
-			{
-				label: strings.watchVideoButton,
-				url: href,
-			},
-		];
 
 		if (video.paused || !time) {
 			delete presenceData.startTimestamp;
