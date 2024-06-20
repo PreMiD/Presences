@@ -4,16 +4,16 @@
 		"id": "919878532228841532",
 		"name": "somboytiger"
 	},
-	"service": "ChompuBot",
+	"service": "Chompu",
 	"description": {
-		"en": "Chompu is Discord bot music support stream Joox, TikTok, Distrokid, Spotify, AppleMusic, Soundcloud, Clyp, PornHub and etc. Can req song on website/dashboard",
-		"th": "Chompu คือ บอทดิสคอร์ดที่มาพร้อมด้วยระบบสตรีมเล่นเพลงที่สามารถจัดการหรือเพิ่มคิวเพลงบนเว็บไซต์! รองรับสตรีมเล่นเพลงหลายแพลตฟอร์ม Joox, TikTok, Distrokid, Spotify, AppleMusic, Soundcloud, Clyp, PornHub และอื่นๆอีกมากมาย!"
+		"en": "Chompu is Discord bot music support stream Joox, TikTok, BiliBili, VK Music, Distrokid, Nico, AppleMusic, Spotify, Soundcloud, Clyp, PornHub and etc.",
+		"th": "Chompu คือ บอทดิสคอร์ดที่มาพร้อมด้วยระบบสตรีมเล่นเพลงที่สามารถจัดการหรือเพิ่มคิวเพลงบนเว็บไซต์! รองรับสตรีมเล่นเพลงหลายแพลตฟอร์ม Joox, TikTok, BiliBili, VK Music, Distrokid, Nico, AppleMusic, Spotify, Soundcloud, Clyp, PornHub และอื่นๆอีกมากมาย!"
 	},
 	"url": "chompubot.work",
 	"matches": [
 		"*://chompubot.work/*"
 	],
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/ChompuBot/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/ChompuBot/assets/thumbnail.jpg",
 	"color": "#ffbcff",
