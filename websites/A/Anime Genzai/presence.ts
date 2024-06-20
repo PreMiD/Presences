@@ -9,7 +9,6 @@ const enum Assets {
 async function getStrings() {
 	return presence.getStrings(
 		{
-			browsing: "general.browsing",
 			viewHome: "general.viewHome",
 			viewing: "general.viewing",
 			search: "general.search",
@@ -19,7 +18,6 @@ async function getStrings() {
 			searchSomething: "general.searchSomething",
 			watchingSeries: "general.watchingSeries",
 			watchingMovie: "general.watchingMovie",
-			buttonViewPage: "general.buttonViewPage",
 			viewPage: "general.viewPage",
 			viewProfile: "general.viewProfile",
 		},
