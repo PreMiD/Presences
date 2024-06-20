@@ -86,8 +86,103 @@ function exist(selector: string) {
 	return document.querySelector(selector) !== null;
 }
 
-function parseInformations(str: string) {
+interface DataFeedElement {
+    name: string;
+    partOfSeason: {
+        seasonNumber: number;
+    };
+    episodeNumber: number;
+    genre: string;
+}
 
+interface DataFeed {
+    dataFeedElement: DataFeedElement[];
+}
+
+interface TVEpisode {
+    name: string;
+    partOfSeason: {
+        seasonNumber: number;
+    };
+    episodeNumber: number;
+    genre: string;
+}
+
+interface BreadcrumbListItem {
+    item: {
+        name: string;
+    };
+}
+
+interface BreadcrumbList {
+    itemListElement: BreadcrumbListItem[];
+}
+
+type JsonValue = DataFeed | TVEpisode | BreadcrumbList;
+
+function parseInformations() {
+    let found = false;
+    let data: { list: JsonValue | null; type: string } = { list: null, type: '' };
+	const json = document.querySelectorAll("div > div > div > script")
+
+    const types = ["DataFeed", "TVEpisode", "BreadcrumbList"];
+    for (let i = 0; i < types.length && !found; i++) {
+        const type = types[i];
+
+        json.forEach(function (value) {
+            if (found) return;
+
+            const jsonValue = JSON.parse(value.textContent || '{}');
+            if (jsonValue["@type"] === type) {
+                console.log(`Handling ${type} type`);
+                data.list = jsonValue;
+                data.type = type;
+                found = true;
+            }
+        });
+    }
+
+    switch (data.type) {
+        case "DataFeed": {
+            const list = data.list as DataFeed;
+            return {
+                type: "TVSerie",
+                isPlayer: true,
+                name: list.dataFeedElement[0].name,
+                season: list.dataFeedElement[0].partOfSeason.seasonNumber,
+                episode: list.dataFeedElement[0].episodeNumber,
+                genre: list.dataFeedElement[0].genre.split("|").map(g => g.trim())
+            };
+        }
+        case "TVEpisode": {
+            const list = data.list as TVEpisode;
+            return {
+                type: "TVSerie",
+                isPlayer: true,
+                name: list.name,
+                season: list.partOfSeason.seasonNumber,
+                episode: list.episodeNumber,
+                genre: list.genre.split("|").map(g => g.trim())
+            };
+        }
+        case "BreadcrumbList": {
+            const list = data.list as BreadcrumbList;
+            const isPlayer = list.itemListElement.length > 1;
+            return {
+                type: isPlayer ? "Movie" : "TBD",
+                isPlayer: isPlayer,
+                name: list.itemListElement[list.itemListElement.length - 1].item.name
+            };
+        }
+        default: {
+            return {
+                type: "TBD"
+            };
+        }
+    }
+}
+
+	/*
 	const jsonValue = JSON.parse(str);
 	switch (true) {
 		case jsonValue["@type"] === "BreadcrumbList": {
@@ -110,10 +205,9 @@ function parseInformations(str: string) {
 				episode: jsonValue.episodeNumber,
 			};
 		}
-	}
-}
-/*
-To have a cover art as largeImageKey
+	}*/
+
+
 const shortenedURLs: Record<string, string> = {};
 async function getShortURL(url: string) {
 	if (!url || url.length < 256) return url;
@@ -128,7 +222,7 @@ async function getShortURL(url: string) {
 		presence.error(err);
 		return url;
 	}
-}*/
+}
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Animated, // Default
@@ -290,7 +384,7 @@ presence.on("UpdateData", async () => {
 		case exist(
 			"header > div > div > h1, div.sc-nqi6nw-0.cNDqJj > h1" // Movie name or Category name: Supports mobile and desktop layout
 		): {
-			presenceData.details = parseInformations(document.querySelector("div > div > div > script").textContent).name;
+			presenceData.details = parseInformations().name;
 			/*
 			presenceData.state = privacy
 				? ""
@@ -338,7 +432,7 @@ presence.on("UpdateData", async () => {
 		/* VIDEO PLAYER (Lecteur vidéo)
 	
 	(ex: https://www.rtlplay.be/the-power-p_25630/episode-01-c_13062282) */
-		case parseInformations(document.querySelectorAll("div > div > div > script")[1].textContent): {
+		case parseInformations().isPlayer: {
 			const firstLine = document.querySelector(
 					"div.sc-18trp4n-3.bVsrtw > h1" // Video Player first line
 				).textContent,
@@ -388,7 +482,7 @@ presence.on("UpdateData", async () => {
 				default: {
 					presenceData.details = privacy
 						? (await strings).watchingShow
-						: `${(await strings).watching} ${parseInformations(document.querySelector("div > div > div > script").textContent).season}`;
+						: `${(await strings).watching} ${parseInformations().name}`;
 					// If 1st line === 2nd line then it's a Movie, 1st line !== 2nd line then it's a Tv Show
 					if (firstLine.toLowerCase() !== secondLine.toLowerCase())
 						presenceData.state = privacy ? "" : secondLine; // Content of second line
@@ -422,7 +516,7 @@ presence.on("UpdateData", async () => {
 				}
 			}
 
-			presenceData.largeImageKey = document.querySelector("meta[property=\"og:image\"]").getAttribute("content");
+			presenceData.largeImageKey = await getShortURL(document.querySelector("meta[property=\"og:image\"]").getAttribute("content"));
 			break;
 		}
 		case pathname !== null: {
