@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "1214632755158319206",
+		"name": "arkhanths"
+	},
+	"service": "LOAP",
+	"description": {
+		"en": "Unofficial Discord Rich Presence for League of Angels: Pact. Works with R2Games and Game Hollywood."
+	},
+	"url": [
+		"nsh5api.gamehollywood.com",
+		"nsh5apisy.gamehollywood.com",
+		"r2games.com",
+		"www.r2games.com",
+		"gamehollywood.com",
+		"www.gamehollywood.com"
+	],
+	"version": "1.0.0",
+	"logo": "https://r2.arkhanths.com/logo.jpg",
+	"thumbnail": "https://r2.arkhanths.com/thumbnail.jpg",
+	"color": "#2BA2CE",
+	"category": "games",
+	"tags": [
+		"loap"
+	],
+	"settings": [
+		{
+			"id": "uid",
+			"title": "Show UID",
+			"icon": "fas fa-id-card",
+			"value": true
+		}
+	]
+}
