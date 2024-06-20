@@ -19,10 +19,8 @@ const { href, hostname } = document.location,
 	presence = new Presence({
 		clientId: "1253040451624370300",
 	}),
-	imgElements = `https://ctftime.org/${document
-		.querySelectorAll(".span2")[0]
-		.querySelector("img")
-		.getAttribute("src")}`,
+	imgElements =
+		document.querySelector<HTMLImageElement>(".span2 img")?.src ?? Assets.Logo,
 	startTimestamp: number = Math.floor(Date.now() / 1000),
 	router = ({ path }: { path: string; presenceData: PresenceData }): Route => {
 		const routes: Route[] = [
@@ -128,9 +126,7 @@ const { href, hostname } = document.location,
 				path: /^\/event.*$/,
 				details: () => "Viewing a CTF",
 				state: () => document.querySelector(".page-header h2").textContent,
-				largeImageKey: () => {
-					return imgElements ?? Assets.Logo;
-				},
+				largeImageKey: () => imgElements,
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
 				buttons: () => [
@@ -144,9 +140,7 @@ const { href, hostname } = document.location,
 				path: /^\/user.*$/,
 				details: () => "Viewing user profile",
 				state: () => document.querySelector(".page-header h2").textContent,
-				largeImageKey: () => {
-					return imgElements ?? Assets.Logo;
-				},
+				largeImageKey: () => imgElements,
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
 				buttons: () => [
@@ -160,9 +154,7 @@ const { href, hostname } = document.location,
 				path: /^\/team.*$/,
 				state: () => document.querySelector(".page-header h2").textContent,
 				details: () => "Viewing a Team",
-				largeImageKey: () => {
-					return imgElements ?? Assets.Logo;
-				},
+				largeImageKey: () => imgElements,
 				smallImageKey: () => Assets.Reading,
 				smallImageText: () => "Browsing",
 				buttons: () => [
