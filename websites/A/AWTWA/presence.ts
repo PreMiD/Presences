@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Logo = "https://i.imgur.com/n8kQ5rV.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AWTWA/assets/logo.png",
 }
 
 let iFrameData = {
