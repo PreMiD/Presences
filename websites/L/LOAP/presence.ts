@@ -3,7 +3,7 @@ const presence = new Presence({ clientId: "1252257462476738580" }),
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://r2.arkhanths.com/logo.jpg",
+			largeImageKey: "https://r2.arkhanths.com/logo_512.jpg",
 			startTimestamp: browsingTimestamp,
 		},
 		path = location.pathname + location.search,
@@ -11,19 +11,15 @@ presence.on("UpdateData", async () => {
 
 	if (path.includes("/web/oz/login.php")) {
 		const uid = new URL(
-			window.location.origin + window.location.pathname + window.location.search
+			document.location.href
 		).searchParams.get("uid");
 
 		if (uid && showUID) {
 			presenceData.details = "Playing...";
 			presenceData.state = `[API] UID: ${uid}`;
-
-			presence.setActivity(presenceData);
 		} else {
 			presenceData.details = "Playing...";
 			presenceData.state = "Via API";
-
-			presence.setActivity(presenceData);
 		}
 	}
 
@@ -33,13 +29,9 @@ presence.on("UpdateData", async () => {
 		if (uid && showUID) {
 			presenceData.details = "Playing...";
 			presenceData.state = `[R2] UID: ${uid.textContent}`;
-
-			presence.setActivity(presenceData);
 		} else {
 			presenceData.details = "Playing...";
 			presenceData.state = "From r2games.com";
-
-			presence.setActivity(presenceData);
 		}
 	}
 
@@ -51,13 +43,12 @@ presence.on("UpdateData", async () => {
 		if (uid && showUID) {
 			presenceData.details = "Playing...";
 			presenceData.state = `[GHG] UID: ${uid.textContent}`;
-
-			presence.setActivity(presenceData);
 		} else {
 			presenceData.details = "Playing...";
 			presenceData.state = "From gamehollywood.com";
-
-			presence.setActivity(presenceData);
 		}
 	}
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
