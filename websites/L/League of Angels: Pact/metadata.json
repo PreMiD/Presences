@@ -4,7 +4,7 @@
 		"id": "1214632755158319206",
 		"name": "arkhanths"
 	},
-	"service": "LOAP",
+	"service": "League of Angels: Pact",
 	"description": {
 		"en": "League of Angels: Pact is the latest action-idle MMORPG in the League of Angels series. Participate in fierce battles, awaken hundreds of Angels and empower them and finally, defend the Holy Land of Justice with their help!"
 	},
@@ -22,7 +22,9 @@
 	"color": "#2BA2CE",
 	"category": "games",
 	"tags": [
-		"loap"
+		"game",
+		"loap",
+		"mmorpg"
 	],
 	"settings": [
 		{
