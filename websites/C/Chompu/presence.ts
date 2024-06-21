@@ -9,9 +9,8 @@ const enum Assets {
 
 const enum Pages {
 	Home = "/",
-	Commands = "/commands",
 	Dashboard = "/dashboard",
-	FAQ = "/faq",
+	Status = "/status",
 	Contact = "/contact",
 }
 
@@ -119,14 +118,11 @@ presence.on("UpdateData", async () => {
 			case Pages.Home:
 				presenceData.details = "Home";
 				break;
-			case Pages.Commands:
-				presenceData.details = "Commands";
-				break;
 			case Pages.Dashboard:
 				presenceData.details = "Dashboard";
 				break;
-			case Pages.FAQ:
-				presenceData.details = "FAQ";
+			case Pages.Status:
+				presenceData.details = "Status";
 				break;
 			case Pages.Contact:
 				presenceData.details = "Contact";
