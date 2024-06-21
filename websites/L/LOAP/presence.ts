@@ -10,9 +10,7 @@ presence.on("UpdateData", async () => {
 		showUID: boolean = await presence.getSetting<boolean>("uid");
 
 	if (path.includes("/web/oz/login.php")) {
-		const uid = new URL(
-			document.location.href
-		).searchParams.get("uid");
+		const uid = new URL(document.location.href).searchParams.get("uid");
 
 		if (uid && showUID) {
 			presenceData.details = "Playing...";
