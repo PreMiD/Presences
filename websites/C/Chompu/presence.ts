@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/ChompuBot/assets/logo.jpg",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Chompu/assets/logo.jpg",
 }
 
 const enum Pages {
