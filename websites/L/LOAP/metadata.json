@@ -6,7 +6,7 @@
 	},
 	"service": "LOAP",
 	"description": {
-		"en": "Unofficial Discord Rich Presence for League of Angels: Pact. Works with R2Games and Game Hollywood."
+		"en": "League of Angels: Pact is the latest action-idle MMORPG in the League of Angels series. Participate in fierce battles, awaken hundreds of Angels and empower them and finally, defend the Holy Land of Justice with their help!"
 	},
 	"url": [
 		"nsh5api.gamehollywood.com",
@@ -17,7 +17,7 @@
 		"www.gamehollywood.com"
 	],
 	"version": "1.0.0",
-	"logo": "https://r2.arkhanths.com/logo.jpg",
+	"logo": "https://r2.arkhanths.com/logo_512.jpg",
 	"thumbnail": "https://r2.arkhanths.com/thumbnail.jpg",
 	"color": "#2BA2CE",
 	"category": "games",
