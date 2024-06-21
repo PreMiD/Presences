@@ -12,25 +12,15 @@ presence.on("UpdateData", async () => {
 	if (path.includes("/web/oz/login.php")) {
 		const uid = new URL(document.location.href).searchParams.get("uid");
 
-		if (uid && showUID) {
-			presenceData.details = "Playing...";
-			presenceData.state = `[API] UID: ${uid}`;
-		} else {
-			presenceData.details = "Playing...";
-			presenceData.state = "From API";
-		}
+		if (uid && showUID) presenceData.details = `[API] UID: ${uid}`;
+		else presenceData.details = "From API";
 	}
 
 	if (path.includes("/play/?game=719")) {
 		const uid = document.querySelector(".server-uid .txt-light");
 
-		if (uid && showUID) {
-			presenceData.details = "Playing...";
-			presenceData.state = `[R2] UID: ${uid.textContent}`;
-		} else {
-			presenceData.details = "Playing...";
-			presenceData.state = "From r2games.com";
-		}
+		if (uid && showUID) presenceData.details = `[R2] UID: ${uid.textContent}`;
+		else presenceData.details = "From r2games.com";
 	}
 
 	if (
@@ -38,13 +28,8 @@ presence.on("UpdateData", async () => {
 	) {
 		const uid = document.querySelector(".headerID span");
 
-		if (uid && showUID) {
-			presenceData.details = "Playing...";
-			presenceData.state = `[GHG] UID: ${uid.textContent}`;
-		} else {
-			presenceData.details = "Playing...";
-			presenceData.state = "From gamehollywood.com";
-		}
+		if (uid && showUID) presenceData.details = `[GHG] UID: ${uid.textContent}`;
+		else presenceData.details = "From gamehollywood.com";
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
