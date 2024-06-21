@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `[API] UID: ${uid}`;
 		} else {
 			presenceData.details = "Playing...";
-			presenceData.state = "Via API";
+			presenceData.state = "From API";
 		}
 	}
 
