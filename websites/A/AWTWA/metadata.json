@@ -1,0 +1,40 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "815513219120103424",
+		"name": "emberantz"
+	},
+	"service": "AWTWA",
+	"description": {
+		"en": "Discover the best free anime streaming site in high resolution.",
+		"fr": "Découvrez le meilleur site de streaming d'anime gratuit en haute résolution."
+	},
+	"url": [
+		"awtwa.site",
+		"www.awtwa.site"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/n8kQ5rV.png",
+	"thumbnail": "https://i.imgur.com/KyekyTN.png",
+	"color": "#c084fc",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"vostfr",
+		"francais",
+		"french",
+		"streaming",
+		"anime-streaming",
+		"french-streaming"
+	],
+	"iframe": true,
+	"iFrameRegExp": ".*",
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		}
+	]
+}
