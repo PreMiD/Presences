@@ -17,7 +17,7 @@
 		"www.gamehollywood.com"
 	],
 	"version": "1.0.0",
-	"logo": "https://r2.arkhanths.com/logo_512.jpg",
+	"logo": "https://r2.arkhanths.com/loap.jpg",
 	"thumbnail": "https://r2.arkhanths.com/thumbnail.jpg",
 	"color": "#2BA2CE",
 	"category": "games",
@@ -31,7 +31,7 @@
 			"id": "uid",
 			"title": "Show UID",
 			"icon": "fas fa-id-card",
-			"value": true
+			"value": false
 		}
 	]
 }
