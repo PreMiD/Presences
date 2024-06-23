@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
 	if (uiState === "MapSelection")
 		presenceData.details = "Selecting map or replay";
 	else if (uiState === "Previewer") {
-		presenceData.details = mapName;
+		presenceData.details = mapName ?? document.title.split(" - ")[1];
 		if (replay) presenceData.state = playerName;
 		else presenceData.state = mapperName;
 		if (mapSmallImages !== 3) {
