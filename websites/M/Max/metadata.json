@@ -9,9 +9,9 @@
 		"en": "The streaming platform with a personalized user experience that brings unique and unexpected stories ranging from the highest quality in scripted programming to the best of unscripted, family-friendly content, the HBO service, Max Originals and more."
 	},
 	"url": "play.max.com",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/hqhE5vo.png",
-	"thumbnail": "https://i.imgur.com/gBCWOG9.jpeg",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Max/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Max/assets/thumbnail.jpeg",
 	"color": "#0014a4",
 	"category": "videos",
 	"tags": [
