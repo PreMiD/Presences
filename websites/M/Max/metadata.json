@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"name": "Slowlife",
+		"id": "374905512661221377"
+	},
+	"service": "Max",
+	"description": {
+		"en": "The streaming platform with a personalized user experience that brings unique and unexpected stories ranging from the highest quality in scripted programming to the best of unscripted, family-friendly content, the HBO service, Max Originals and more."
+	},
+	"url": "play.max.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/hqhE5vo.png",
+	"thumbnail": "https://i.imgur.com/gBCWOG9.jpeg",
+	"color": "#0014a4",
+	"category": "videos",
+	"tags": [
+		"originals",
+		"streaming-platform",
+		"hulu-bundle"
+	],
+	"settings": [
+		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true
+		},
+		{
+			"id": "usePresenceName",
+			"title": "Show Title as Presence",
+			"icon": "fad fa-user-edit",
+			"value": true
+		}
+	]
+}
