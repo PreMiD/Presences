@@ -75,6 +75,8 @@ function getTitleInfo(usePresenceName?: boolean) {
 		const episodeInfo = findAlternateId(location.pathname.split("/")[3]),
 			showInfo = findAlternateId(episodeInfo?.relationships.show.data.id);
 
+		if (!episodeInfo || !showInfo) return;
+
 		return {
 			name: usePresenceName ? showInfo.attributes.name : "Max",
 			details: usePresenceName
@@ -84,8 +86,8 @@ function getTitleInfo(usePresenceName?: boolean) {
 				episodeInfo.attributes.videoType === "MOVIE"
 					? "Movie"
 					: usePresenceName
-					? `Season ${episodeInfo.attributes.seasonNumber}, Episode ${episodeInfo.attributes.episodeNumber}`
-					: `S${episodeInfo.attributes.seasonNumber}:E${episodeInfo.attributes.episodeNumber} ${episodeInfo.attributes.name}`,
+						? `Season ${episodeInfo.attributes.seasonNumber}, Episode ${episodeInfo.attributes.episodeNumber}`
+						: `S${episodeInfo.attributes.seasonNumber}:E${episodeInfo.attributes.episodeNumber} ${episodeInfo.attributes.name}`,
 			largeImageKey: findId(showInfo.relationships.images.data[5].id).attributes
 				.src,
 		};
@@ -101,9 +103,9 @@ function getTitleInfo(usePresenceName?: boolean) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			type: ActivityType.Watching,
-			largeImageKey: Assets.Logo,
-		},
+		type: ActivityType.Watching,
+		largeImageKey: Assets.Logo,
+	},
 		[usePresenceName, showCoverArt] = await Promise.all([
 			presence.getSetting<boolean>("usePresenceName"),
 			presence.getSetting<boolean>("cover"),
