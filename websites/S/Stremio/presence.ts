@@ -334,12 +334,12 @@ presence.on("UpdateData", async () => {
 						if (playerState.metaItem.type.toLowerCase() === "ready") {
 							const {
 								metaItem: { content },
-								seriesInfo: { season, episode },
+								seriesInfo,
 							} = playerState;
 							({ title } = playerState);
 							metaUrl = `${window.location.origin}/#/detail/${content.type}/${content.id}`;
 							if (content.type === "series")
-								metaUrl += `/${content.id}:${season}:${episode}`;
+								metaUrl += `/${content.id}:${seriesInfo.season}:${seriesInfo.episode}`;
 							presenceData.largeImageKey = content.logo ?? Assets.Logo;
 						}
 					}
