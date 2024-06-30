@@ -43,10 +43,17 @@ function _eval(js: string): Promise<any> {
 			script.id = eventName;
 			script.appendChild(
 				document.createTextNode(`
-			 var core = window.services.core;
-			 var pmdEvent = new CustomEvent("${eventName}", {detail: ${js}});
-			 window.dispatchEvent(pmdEvent);
-			 `)
+				var core = window.services.core;
+				var result = ${js};
+				
+				if (result instanceof Promise) {
+					result.then((awaitedResult) => {
+						window.dispatchEvent(new CustomEvent("${eventName}", { detail: awaitedResult }));
+					});
+				} else {
+					window.dispatchEvent(new CustomEvent("${eventName}", { detail: result }));
+				}				
+			`)
 			);
 
 			document.head.appendChild(script);
@@ -331,7 +338,7 @@ presence.on("UpdateData", async () => {
 						const playerState = await _eval(
 							"core.transport.getState('player')"
 						);
-						if (playerState.metaItem.type.toLowerCase() === "ready") {
+						if (playerState?.metaItem?.type?.toLowerCase() === "ready") {
 							const {
 								metaItem: { content },
 								seriesInfo,
