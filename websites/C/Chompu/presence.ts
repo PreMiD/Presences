@@ -4,14 +4,13 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/ChompuBot/assets/logo.jpg",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Chompu/assets/logo.jpg",
 }
 
 const enum Pages {
 	Home = "/",
-	Commands = "/commands",
 	Dashboard = "/dashboard",
-	FAQ = "/faq",
+	Status = "/status",
 	Contact = "/contact",
 }
 
@@ -119,14 +118,11 @@ presence.on("UpdateData", async () => {
 			case Pages.Home:
 				presenceData.details = "Home";
 				break;
-			case Pages.Commands:
-				presenceData.details = "Commands";
-				break;
 			case Pages.Dashboard:
 				presenceData.details = "Dashboard";
 				break;
-			case Pages.FAQ:
-				presenceData.details = "FAQ";
+			case Pages.Status:
+				presenceData.details = "Status";
 				break;
 			case Pages.Contact:
 				presenceData.details = "Contact";
