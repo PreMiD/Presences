@@ -35,7 +35,7 @@ export default class ModuleManager {
 
 		//* Run npm install
 		const job = exec("npm install --loglevel error --save-exact", {
-			cwd: this.cwd
+			cwd: this.cwd,
 		});
 
 		let errorChunks: any[] = [];

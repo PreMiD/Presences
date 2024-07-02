@@ -3,7 +3,7 @@ import { Client, User } from "discord-rpc";
 export let user: User | undefined;
 
 export default function getDiscordAppUser() {
-	return new Promise<User | undefined>(async (res, rej) => {
+	return new Promise<User | undefined>(async res => {
 		if (user) return res(user);
 
 		const client = new Client({ transport: "ipc" });

@@ -13,7 +13,7 @@ export default async function getDiscordUser(id: string) {
 				}
 			}
 		`,
-		variables: { id }
+		variables: { id },
 	});
 
 	return user.data.discordUsers[0];
