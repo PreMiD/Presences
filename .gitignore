@@ -7,7 +7,7 @@ yarn.lock
 
 # Compiled files
 **/*.js
-!tools/cli/bin/**/*.js
+!cli/bin/**/*.js
 !websites/*/*.js
 !programs/*/*.js
 */*/*/dist
