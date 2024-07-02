@@ -7,12 +7,6 @@ import { getDiff } from "../util.js";
 const compiler = new PresenceCompiler(),
 	changedFolders = getDiff();
 
-//ignore presence and metadata templates
-const templateIndex = changedFolders.indexOf("template");
-if (templateIndex > -1) {
-	changedFolders.splice(templateIndex, 1);
-}
-
 if (!changedFolders.length)
 	actions.info(chalk.green("No Presences changed, exiting..."));
 else {
