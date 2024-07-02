@@ -4,7 +4,7 @@ const presence = new Presence({ clientId: "1252257462476738580" }),
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/L/League%20of%20Angels:%20Pact/assets/logo.jpg",
+				"https://cdn.rcd.gg/PreMiD/websites/L/League%20of%20Angels%20Pact/assets/logo.jpg",
 			startTimestamp: browsingTimestamp,
 		},
 		path = location.pathname + location.search,
