@@ -9,7 +9,7 @@
 	"contributors": [
 		"Bas950 <me@bas950.com>",
 		"EncryptedDev",
-		"veryCrunchy <verycrunchydev@gmail.com>"
+		"veryCrunchy <me@verycrunchy.dev>"
 	],
 	"scripts": {
 		"dev": "tsc -w",
