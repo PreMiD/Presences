@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "484343723426054150",
+		"name": "atlaswuff"
+	},
+	"service": "LTTStore.com",
+	"description": {
+		"en": "The official merch store of Linus Tech Tips"
+	},
+	"url": "lttstore.com",
+	"version": "1.0.0",
+	"logo": "https://www.lttstore.com/cdn/shop/files/LTT_Logo.png",
+	"thumbnail": "https://cdn.shopify.com/s/files/1/0522/2980/0129/files/Additional_LTT_Screw_Driver_Photos_-_2000px-20.jpg",
+	"color": "#f94d0a",
+	"category": "other",
+	"tags": [
+		"lttstore",
+		"linustechtips",
+		"merch",
+		"youtube"
+	]
+}
