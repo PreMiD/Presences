@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Home";
 		} else if (document.location.pathname.includes("/products/")) {
 			const modalOpener = document.querySelector("modal-opener");
-			let firstImgSrcSplit: any[] = [];
+			let firstImgSrcSplit: string[] = [];
 			if (modalOpener) {
 				const imgSrc = modalOpener.querySelector("img")?.getAttribute("src");
 				if (imgSrc) {
