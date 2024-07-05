@@ -30,15 +30,16 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Home";
 		} else if (document.location.pathname.includes("/products/")) {
 			const modalOpener = document.querySelector("modal-opener");
-			let firstImgSrcSplit;
+			let firstImgSrcSplit: any[] = [];
 			if (modalOpener) {
-				firstImgSrcSplit = (
-					modalOpener.querySelector("img")?.getAttribute("src") as string
-				).split("");
-				for (let i = 0; i < firstImgSrcSplit.length; i++) {
-					if (firstImgSrcSplit[i] !== "/") {
-						firstImgSrcSplit.splice(0, i);
-						break;
+				const imgSrc = modalOpener.querySelector("img")?.getAttribute("src");
+				if (imgSrc) {
+					firstImgSrcSplit = imgSrc.split("");
+					for (let i = 0; i < firstImgSrcSplit.length; i++) {
+						if (firstImgSrcSplit[i] !== "/") {
+							firstImgSrcSplit.splice(0, i);
+							break;
+						}
 					}
 				}
 			}
