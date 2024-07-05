@@ -29,6 +29,11 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing";
 			presenceData.state = "Home";
 		} else if (document.location.pathname.includes("/products/")) {
+			// check if the variable document is null
+
+			if (document === null) {
+				return;
+			}
 			const firstImgSrcSplit = (
 				document
 					.querySelector("modal-opener")
@@ -42,8 +47,7 @@ presence.on("UpdateData", async () => {
 				}
 			}
 
-			presenceData.largeImageKey =
-				`https://${firstImgSrcSplit.join("")}` || Assets.Logo;
+			presenceData.largeImageKey = `https://${firstImgSrcSplit.join("")}`;
 			presenceData.smallImageKey = Assets.Logo;
 			presenceData.smallImageText = "LTTStore.com";
 			presenceData.details = "Viewing Product";
