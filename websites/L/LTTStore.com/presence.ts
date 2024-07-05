@@ -29,21 +29,16 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing";
 			presenceData.state = "Home";
 		} else if (document.location.pathname.includes("/products/")) {
-			// check if the variable document is null
-
-			if (document === null) {
-				return;
-			}
-			const firstImgSrcSplit = (
-				document
-					.querySelector("modal-opener")
-					?.querySelector("img")
-					?.getAttribute("src") as string
-			).split("");
-			for (let i = 0; i < firstImgSrcSplit.length; i++) {
-				if (firstImgSrcSplit[i] !== "/") {
-					firstImgSrcSplit.splice(0, i);
-					break;
+			const modalOpener = document.querySelector("modal-opener");
+			if (modalOpener) {
+				const firstImgSrcSplit = (
+					modalOpener.querySelector("img")?.getAttribute("src") as string
+				).split("");
+				for (let i = 0; i < firstImgSrcSplit.length; i++) {
+					if (firstImgSrcSplit[i] !== "/") {
+						firstImgSrcSplit.splice(0, i);
+						break;
+					}
 				}
 			}
 
