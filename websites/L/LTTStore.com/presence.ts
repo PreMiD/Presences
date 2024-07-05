@@ -1,7 +1,6 @@
 const presence = new Presence({
-		clientId: "1258619078201839646",
-	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	clientId: "1258619078201839646",
+});
 
 const enum Assets { // Other default assets can be found at index.d.ts
 	Logo = "https://www.lttstore.com/cdn/shop/files/LTT_Logo.png",
@@ -30,27 +29,27 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing";
 			presenceData.state = "Home";
 		} else if (document.location.pathname.includes("/products/")) {
-			const modalOpener = document.querySelector("modal-opener");
-			const firstImg = modalOpener?.querySelector("img");
-			const firstImgSrc = firstImg?.getAttribute("src") as string;
-
-			const firstImgSrcSplit = firstImgSrc.split("");
+			const firstImgSrcSplit = (
+				document
+					.querySelector("modal-opener")
+					?.querySelector("img")
+					?.getAttribute("src") as string
+			).split("");
 			for (let i = 0; i < firstImgSrcSplit.length; i++) {
 				if (firstImgSrcSplit[i] !== "/") {
 					firstImgSrcSplit.splice(0, i);
 					break;
 				}
 			}
-			const firstImgSrcJoined = "https://" + firstImgSrcSplit.join("");
-			presenceData.largeImageKey = firstImgSrcJoined || Assets.Logo;
 
-			const item = document.querySelector(
-				"div.product__title h1"
-			) as HTMLElement;
+			presenceData.largeImageKey =
+				`https://${firstImgSrcSplit.join("")}` || Assets.Logo;
 			presenceData.smallImageKey = Assets.Logo;
 			presenceData.smallImageText = "LTTStore.com";
 			presenceData.details = "Viewing Product";
-			presenceData.state = item.textContent;
+			presenceData.state = (
+				document.querySelector("div.product__title h1") as HTMLElement
+			).textContent;
 		} else if (document.location.pathname.includes("/collections/")) {
 			if (document.location.pathname.includes("/collections/accessories")) {
 				presenceData.details = "Browsing";
