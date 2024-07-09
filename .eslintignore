@@ -3,3 +3,4 @@ tools
 .vscode
 **/*.js
 *.json
+cli
