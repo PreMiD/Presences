@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
 	};
-	if (document.location.pathname === "/" || document.location.pathname === "") {
+	if (document.location.pathname === "/") {
 		presenceData.details = "Browsing";
 		presenceData.state = "Home";
 	} else if (document.location.pathname.includes("/products/")) {
@@ -19,11 +19,12 @@ presence.on("UpdateData", async () => {
 				?.content ?? Assets.Logo;
 
 		presenceData.smallImageKey = Assets.Logo;
-		presenceData.smallImageText = "LTTStore.com";
+		presenceData.smallImageText = "LTTStore";
 		presenceData.details = "Viewing Product";
-		presenceData.state = (
-			document.querySelector("div.product__title h1") as HTMLElement
-		).textContent;
+
+		presenceData.state = document.querySelector<Element>(
+			"div.product__title h1"
+		)?.textContent;
 	} else if (document.location.pathname.includes("/collections/")) {
 		if (document.location.pathname.includes("/collections/accessories")) {
 			presenceData.details = "Browsing";
