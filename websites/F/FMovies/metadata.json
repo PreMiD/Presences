@@ -15,7 +15,7 @@
 		"en": "Watch online movies for free, watch movies free in high quality without registration.  Just a better place for watching online movies for free. Fmovies.to, FFmovies.is, FFmovies.to"
 	},
 	"url": "https://fmovies24.to/",
-	"regExp": "^(www(\.[0-9]+)?\.fmovies\d{2}\.[a-z]+)$",
+	"regExp": "((ww(w)?([0-9]))?[\\.])?fmovies[0-9]{2}[\\.][a-z]+",
 	"version": "1.2.4",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/FMovies/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/FMovies/assets/thumbnail.jpeg",
