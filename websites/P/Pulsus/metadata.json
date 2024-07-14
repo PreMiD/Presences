@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "205984221859151873",
+		"name": "joerkig"
+	},
+	"service": "Pulsus",
+	"description": {
+		"en": "Play Pulsus, an online rhythm game in which you hit incoming beats on a 3x3 tile board!"
+	},
+	"url": "pulsus.cc",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/f5LFFUP.png",
+	"thumbnail": "https://i.imgur.com/O5Rmdfq.png",
+	"color": "#50AFFD",
+	"category": "games",
+	"tags": [
+		"rhythm",
+		"game",
+		"leaderboard"
+	]
+}
