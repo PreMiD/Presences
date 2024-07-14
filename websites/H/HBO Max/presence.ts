@@ -120,7 +120,7 @@ async function fetchVideoInfo() {
 	try {
 		const mediaInfo = (
 			await fetch(
-				`https://comet${routeKey}.api.max.com/express-content/${
+				`https://comet${routeKey}.api.hbo.com/express-content/${
 					location.pathname.split("/")[2]
 				}?device-code=desktop&product-code=hboMax&api-version=v9.0&country-code=${countryCode}&language=en-us`,
 				{
@@ -182,8 +182,7 @@ presence.on("UpdateData", async () => {
 			break;
 		case !!video: {
 			const timestamps = presence.getTimestampsfromMedia(video),
-				videoId =
-					location.pathname.split("/")[location.pathname.split("/").length - 1];
+				videoId = location.pathname.match(/:[a-z]+:([^:]+)$/)[1];
 
 			videosInfo[videoId] ??= await fetchVideoInfo();
 
