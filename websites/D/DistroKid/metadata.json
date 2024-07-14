@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "998540395455717376",
 		"name": "veraont"
@@ -11,7 +11,7 @@
 	"url": "distrokid.com",
 	"version": "1.0.0",
 	"logo": "https://i.ibb.co/0fzwDXR/unnamed.png",
-	"thumbnail": "https://i.ibb.co/0fzwDXR/unnamed.png",
+	"thumbnail": "https://i.ibb.co/6n8nw1x/image.png",
 	"color": "#FFFF00",
 	"category": "music",
 	"tags": [
