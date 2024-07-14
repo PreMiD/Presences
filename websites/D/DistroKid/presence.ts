@@ -34,7 +34,6 @@ presence.on("UpdateData", async () => {
         });
         break;
       }
-      default: break;
     }
   }
 });
