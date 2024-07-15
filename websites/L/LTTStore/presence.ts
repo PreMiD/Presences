@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Logo = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/2018_Linus_Tech_Tips_logo.svg/512px-2018_Linus_Tech_Tips_logo.svg.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/L/LTTStore/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {
