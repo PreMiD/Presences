@@ -1,31 +1,31 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.10",
-  "author": {
-    "id": "162969778699501569",
-    "name": "EGGSY#3388"
-  },
-  "service": "Papara Topluluk",
-  "description": {
-    "en": "Papara Community where you can ask questions to other users, get instant answers and share your ideas about the application, shape the future of Papara.",
-    "tr": "Diğer kullanıcılara soru sorabileceğiniz, anında yanıt alabileceğiniz ve uygulama ile ilgili fikirlerinizi paylaşabileceğiniz Papara Topluluğu, Papara'nın geleceğini şekillendiriyor."
-  },
-  "url": "topluluk.papara.com",
-  "version": "1.0.7",
-  "logo": "https://i.imgur.com/3L9gPyD.png",
-  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Papara%20Topluluk/assets/thumbnail.png",
-  "color": "#8C00A1",
-  "category": "socials",
-  "tags": [
-    "turkish",
-    "community",
-    "forum"
-  ],
-  "settings": [
-    {
-      "id": "privacyMode",
-      "title": "Gizlilik Modu",
-      "icon": "fas fa-eye",
-      "value": false
-    }
-  ]
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "162969778699501569",
+		"name": "EGGSY#3388"
+	},
+	"service": "Papara Topluluk",
+	"description": {
+		"en": "Papara Community where you can ask questions to other users, get instant answers and share your ideas about the application, shape the future of Papara.",
+		"tr": "Diğer kullanıcılara soru sorabileceğiniz, anında yanıt alabileceğiniz ve uygulama ile ilgili fikirlerinizi paylaşabileceğiniz Papara Topluluğu, Papara'nın geleceğini şekillendiriyor."
+	},
+	"url": "topluluk.papara.com",
+	"version": "1.0.7",
+	"logo": "https://i.imgur.com/3L9gPyD.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Papara%20Topluluk/assets/thumbnail.png",
+	"color": "#8C00A1",
+	"category": "socials",
+	"tags": [
+		"turkish",
+		"community",
+		"forum"
+	],
+	"settings": [
+		{
+			"id": "privacyMode",
+			"title": "Gizlilik Modu",
+			"icon": "fas fa-eye",
+			"value": false
+		}
+	]
 }
