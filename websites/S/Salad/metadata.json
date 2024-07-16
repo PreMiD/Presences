@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "852825042630475827",
+		"name": "daglaroglou"
+	},
+	"service": "Salad",
+	"description": {
+		"en": "Salad is a worldwide computesharing community composed of thousand of gamers. Our users, the mighty Salad Chefs, share resources from their idle PCs, power advanced computing projects, and score real-life-rewards."
+	},
+	"url": ["salad.com", "community.salad.com", "support.salad.io"],
+	"version": "1.0.0",
+	"logo": "https://blog.salad.com/wp-content/uploads/2023/08/Salad-Logo.png",
+	"thumbnail": "https://salad.com/images/blog_all_new_container_workloads.png",
+	"color": "#54a628",
+	"category": "other",
+	"tags": [
+		"salad", "mining", "crypto"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Hide Balance",
+			"icon": "fad fa-user-secret",
+			"value": false
+		}
+	]
+}
