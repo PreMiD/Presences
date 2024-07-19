@@ -6,22 +6,27 @@ const presence = new Presence({
 		pause: "general.paused",
 	});
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AnimationDigitalNetwork/assets/logo.png",
+}
+
 presence.on("UpdateData", async () => {
 	const video: HTMLVideoElement = document.querySelector("video.vjs-tech"),
 		presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/A/AnimationDigitalNetwork/assets/logo.png",
+			largeImageKey: Assets.Logo,
 		},
-		buttons = await presence.getSetting<boolean>("buttons");
+		{ pathname, href } = document.location,
+		buttons = await presence.getSetting<boolean>("buttons"),
+		episode = JSON.parse(
+			document.querySelector('[type="application/ld+json"]')?.textContent
+		);
 
-	if (document.location.pathname.includes("video") && video) {
+	if (pathname?.includes("video") && video) {
 		presenceData.largeImageKey =
 			document
 				.querySelector<HTMLMetaElement>('meta[property="og:image"]')
 				?.content?.replace(/\/web\/.*/, "/web/affiche_370x0.jpg") ?? "logo";
-		const episode = JSON.parse(
-			document.querySelector('[type="application/ld+json"]').textContent
-		);
+
 		if (!isNaN(video.duration)) {
 			presenceData.details = episode.partOfSeries.name;
 			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
@@ -29,14 +34,13 @@ presence.on("UpdateData", async () => {
 				? (await strings).pause
 				: (await strings).play;
 			[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: "Watch Episode",
-						url: document.location.href,
-					},
-				];
-			}
+
+			presenceData.buttons = [
+				{
+					label: "Watch Episode",
+					url: href,
+				},
+			];
 
 			if (video.paused) {
 				delete presenceData.startTimestamp;
@@ -44,43 +48,49 @@ presence.on("UpdateData", async () => {
 			}
 		} else {
 			presenceData.details = "Looking at";
-			presenceData.state = episode.partOfSeries.name;
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: "View Page",
-						url: document.location.href,
-					},
-				];
-			}
+			presenceData.state = episode?.partOfSeries?.name ?? "An episode";
+
+			presenceData.buttons = [
+				{
+					label: "View Page",
+					url: href,
+				},
+			];
 		}
-	} else if (document.location.pathname.includes("video") && !video) {
+	} else if (pathname?.includes("video") && !video) {
 		presenceData.largeImageKey =
-			document
-				.querySelector<HTMLMetaElement>('meta[property="og:image"]')
-				?.content?.replace(/\/web\/.*/, "/web/affiche_370x0.jpg") ?? "logo";
+			document.querySelector<HTMLMetaElement>('meta[property="og:image"]')
+				?.content ?? Assets.Logo;
 		if (
-			document.querySelector(
-				"#root > div > div > div.sc-pkSvE.kPCOPp > div > div > div.sc-AxjAm.khAjwj.sc-psDXd.iazofB > div > h2 > span"
-			)
+			document
+				.querySelector("div.sc-AxjAm.khAjwj.sc-psDXd.iazofB")
+				?.querySelector("span")
 		)
 			presenceData.details = "Browsing...";
 		else {
-			presenceData.details = "Looking at";
-			presenceData.state = JSON.parse(
-				document.querySelector('[type="application/ld+json"]').textContent
-			).name;
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: "View Page",
-						url: document.location.href,
-					},
-				];
-			}
+			const title = document
+				.querySelector<HTMLMetaElement>('[property="og:title"]')
+				?.content?.split("-");
+			presenceData.state = `Looking at ${
+				episode?.partOfSeries?.name ?? pathname?.includes("episode-")
+					? pathname
+							?.match(/episode-[0-9]*/gm)?.[0]
+							?.replace("episode-", "episode ")
+					: "An episode"
+			}`;
+			presenceData.details =
+				title?.length > 5 ? `${title?.[0]} - ${title?.[1]}` : title?.[0];
+
+			presenceData.buttons = [
+				{
+					label: "View Page",
+					url: href,
+				},
+			];
 		}
 	} else presenceData.details = "Browsing...";
 
+	if (presenceData.buttons && !buttons) delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
