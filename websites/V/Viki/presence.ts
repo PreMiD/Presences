@@ -17,6 +17,7 @@ presence.on("UpdateData", async () => {
 
 	if (!video) {
 		const presenceData: PresenceData = {
+			type: ActivityType.Watching,
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/V/Viki/assets/logo.png",
 		};
@@ -284,8 +285,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.duration)
 			),
 			presenceData: PresenceData = {
-				details: "",
-				state: "",
+				type: ActivityType.Watching,
 				largeImageKey:
 					"https://cdn.rcd.gg/PreMiD/websites/V/Viki/assets/logo.png",
 				smallImageKey: video.paused ? Assets.Pause : Assets.Play,

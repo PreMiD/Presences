@@ -25,7 +25,7 @@
 		"*://*.disneyplus.com/*",
 		"*://*.hotstar.com/*"
 	],
-	"version": "1.6.0",
+	"version": "1.6.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/thumbnail.png",
 	"color": "#233778",

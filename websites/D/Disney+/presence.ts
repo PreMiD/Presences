@@ -52,11 +52,10 @@ presence.on("UpdateData", async () => {
 					if (!privacy) {
 						if (presenceData.startTimestamp) delete presenceData.startTimestamp;
 						presenceData.details = document.querySelector(
-							"[class='title-field body-copy']"
+							".title-field.body-copy"
 						)?.textContent;
-						presenceData.state = document.querySelector(
-							'[class="subtitle-field"]'
-						)?.textContent;
+						presenceData.state =
+							document.querySelector(".subtitle-field")?.textContent;
 
 						const paused = !!document.querySelector("[aria-label='Play']");
 						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
