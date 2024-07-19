@@ -4,19 +4,15 @@
 		"id": "819696394180100106",
 		"name": ".vahya"
 	},
-	"service": "AniWatch",
+	"service": "HiAnime",
 	"description": {
-		"en": "AniWatch.to - A site to watch anime online for Free"
+		"en": "HiAnime.to - A site to watch anime online for Free"
 	},
-	"url": [
-		"aniwatch.to",
-		"aniwatchtv.to",
-		"hianime.to"
-	],
+	"url": "hianime.to",
 	"version": "1.0.11",
-	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AniWatch/assets/logo.png",
-	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AniWatch/assets/thumbnail.png",
-	"color": "#ffdd95",
+	"logo": "https://hianime.to/images/icons-512.png",
+	"thumbnail": "https://i.imgur.com/cNqKEKU.png",
+	"color": "#2d2b44",
 	"category": "anime",
 	"tags": [
 		"anime"
