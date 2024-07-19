@@ -27,7 +27,7 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-		const presenceData: PresenceData = {
+	const presenceData: PresenceData = {
 			name: "HiAnime",
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
