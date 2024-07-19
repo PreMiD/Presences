@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 					?.textContent ??
 				document.querySelector(".songTitlePreview")?.textContent ??
 				"";
-			if (presenceData.details) presenceData.state = "Brosing a page:";
+			if (presenceData.details) presenceData.state = "Browssing a page:";
 			else presenceData.details = "Browsing...";
 		}
 	}
