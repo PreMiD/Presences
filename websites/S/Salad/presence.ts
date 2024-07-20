@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Search;
 		}
 	}
-	else if (document.location.hostname.startsWith("community")) {
+	else if (hostname.startsWith("community")) {
 		presenceData.details = "In Community";
 		presenceData.state = "Browsing...";
 		presenceData.smallImageKey = Assets.Search;
