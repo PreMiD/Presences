@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 	privacy = await presence.getSetting<boolean>("privacy"),
 	{ hostname, pathname } = document.location;
 
-	if (document.location.pathname.includes("/earn/summary")) {
+	if (pathname.includes("/earn/summary")) {
 		presenceData.details = "In Summary";
 		presenceData.state = `Balance: ${document.querySelector(".c0116").textContent}`
 	}
