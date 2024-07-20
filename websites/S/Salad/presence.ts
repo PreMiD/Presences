@@ -94,5 +94,6 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Reading;
 		}
 	}
+if (privacy && presenceData.state) delete presenceData.state
 	presence.setActivity(presenceData);
 });
