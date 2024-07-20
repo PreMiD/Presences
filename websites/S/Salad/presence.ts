@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 
 	if (document.location.pathname.includes("/earn/summary")) {
 		presenceData.details = "In Summary";
-		presenceData.state = "Balance: " + document.querySelector(".c0116").textContent;
+		presenceData.state = `Balance: ${document.querySelector(".c0116").textContent}`
 		if (privacy) {
 			presenceData.state = "";
 		}
