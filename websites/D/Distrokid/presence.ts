@@ -14,7 +14,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.ibb.co/0fzwDXR/unnamed.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/D/Distrokid/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname } = document.location;
