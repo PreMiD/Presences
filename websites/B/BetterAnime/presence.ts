@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<string>("AnimeState"),
 			presence.getSetting<string>("MovieState"),
 		]),
-		{ href } = document.location;
+		{ search, href } = document.location;
 
 	if (data.oldLang !== newLang || !strings) {
 		data.oldLang = newLang;
@@ -247,9 +247,7 @@ presence.on("UpdateData", async () => {
 		"/pesquisa": {
 			async setPresenceData() {
 				data.presenceData.details = (await strings).searchFor;
-				data.presenceData.state = new URLSearchParams(
-					document.location.search
-				).get("titulo");
+				data.presenceData.state = new URLSearchParams(search).get("titulo");
 			},
 		},
 	};
@@ -374,7 +372,7 @@ presence.on("UpdateData", async () => {
 	];
 
 	for (const [k, v] of Object.entries(data.presence)) {
-		if (document.location.pathname.match(k) && !v.disabled) {
+		if (pathname.match(k) && !v.disabled) {
 			v.setPresenceData();
 			break;
 		}
@@ -394,7 +392,7 @@ presence.on("UpdateData", async () => {
 				delete data.presenceData[PData as keyof PresenceData];
 		} else if (setting.presence) {
 			for (const presenceSetting of setting.presence) {
-				if (document.location.pathname.match(presenceSetting.page)) {
+				if (pathname.match(presenceSetting.page)) {
 					if (presenceSetting.setTo && !presenceSetting.replace) {
 						data.presenceData[presenceSetting.uses as "details"] =
 							presenceSetting.setTo;
