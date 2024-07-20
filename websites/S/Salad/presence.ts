@@ -12,8 +12,9 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
-	};
-	const privacy = await presence.getSetting<boolean>("privacy");
+	},
+	privacy = await presence.getSetting<boolean>("privacy"),
+	{ hostname, pathname } = document.location;
 
 	if (document.location.pathname.includes("/earn/summary")) {
 		presenceData.details = "In Summary";
