@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<string>("AnimeState"),
 			presence.getSetting<string>("MovieState"),
 		]),
-		{ search, href } = document.location;
+		{ pathname, search, href } = document.location;
 
 	if (data.oldLang !== newLang || !strings) {
 		data.oldLang = newLang;
