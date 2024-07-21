@@ -64,11 +64,11 @@ presence.on("UpdateData", async () => {
 			let top3 = "";
 			for (let i = 0; i < 3; i++) {
 				top3 += `${i + 1}° ${
-					document.querySelectorAll(".name")[i].innerHTML
+					document.querySelectorAll(".name")[i].textContent
 				}\n`;
 			}
 			presenceData.details = `Viewing top-anime: ${
-				document.querySelector(".nav-link.active").innerHTML
+				document.querySelector(".nav-link.active").textContent
 			}`;
 			presenceData.state = top3;
 		}
@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? strings.paused : strings.play;
 
-			presenceData.details = document.querySelector(".title").innerHTML;
+			presenceData.details = document.querySelector(".title").textContent;
 			presenceData.state = `Episode ${
 				document
 					.querySelector(".episode.episode-item.active.seen")
