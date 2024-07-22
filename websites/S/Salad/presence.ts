@@ -35,10 +35,11 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Search;
 		} else presenceData.state = "Home";
 
-		if (!presenceData.details)
+		if (!presenceData.details) {
 			presenceData.details = privacy
 				? "Support - viewing"
 				: "Support - browsing";
+			}
 	} else if (hostname.startsWith("community")) {
 		if (pathname.includes("-")) {
 			presenceData.details = privacy
