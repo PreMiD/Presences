@@ -54,51 +54,42 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = Assets.Search;
 		presence.setActivity(presenceData);
 		return;
-	} 
-		if (pathname === "/") presenceData.details = strings.viewHome;
-		else if (pathname.startsWith("/archivio"))
-			presenceData.details = "Viewing Archive";
-
-		else if (pathname.startsWith("/calendario"))
-			presenceData.details = "Viewing Schedule";
-
-		else if (pathname.startsWith("/top-anime")) {
-			let top3 = "";
-			for (let i = 0; i < 3; i++) {
-				top3 += `${i + 1}° ${
-					document.querySelectorAll(".name")[i].textContent
-				}\n`;
-			}
-			presenceData.details = `Viewing top-anime: ${
-				document.querySelector(".nav-link.active").textContent
-			}`;
-			presenceData.state = top3;
-		}
-
-		else if (pathname.startsWith("/anime")) {
-			delete presenceData.startTimestamp;
-			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
-			presenceData.smallImageText = paused ? strings.paused : strings.play;
-
-			presenceData.details = document.querySelector(".title").textContent;
-			presenceData.state = `Episode ${
-				document
-					.querySelector(".episode.episode-item.active.seen")
-					.querySelector("a").textContent
-			}`;
-			presenceData.largeImageKey = cover
-				? (presenceData.largeImageKey = document
-						.querySelector<HTMLImageElement>(".cover")?.src ?? Assets.Logo
-				: Assets.Logo;
-
-			if (!isNaN(duration) && !paused) {
-				[, presenceData.endTimestamp] = presence.getTimestamps(
-					current,
-					duration
-				);
-			}
-		}
 	}
+	if (pathname === "/") presenceData.details = strings.viewHome;
+	else if (pathname.startsWith("/archivio"))
+		presenceData.details = "Viewing Archive";
+	else if (pathname.startsWith("/calendario"))
+		presenceData.details = "Viewing Schedule";
+	else if (pathname.startsWith("/top-anime")) {
+		let top3 = "";
+		for (let i = 0; i < 3; i++) {
+			top3 += `${i + 1}° ${
+				document.querySelectorAll(".name")[i].textContent
+			}\n`;
+		}
+		presenceData.details = `Viewing top-anime: ${
+			document.querySelector(".nav-link.active").textContent
+		}`;
+		presenceData.state = top3;
+	} else if (pathname.startsWith("/anime")) {
+		delete presenceData.startTimestamp;
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
+		presenceData.smallImageText = paused ? strings.paused : strings.play;
 
+		presenceData.details = document.querySelector(".title").textContent;
+		presenceData.state = `Episode ${
+			document
+				.querySelector(".episode.episode-item.active.seen")
+				.querySelector("a").textContent
+		}`;
+		presenceData.largeImageKey = cover
+			? (presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>(".cover")?.src ??
+					Assets.Logo)
+			: Assets.Logo;
+
+		if (!isNaN(duration) && !paused)
+			[, presenceData.endTimestamp] = presence.getTimestamps(current, duration);
+	}
 	presence.setActivity(presenceData);
 });
