@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
 	}
 	else if (document.location.pathname.includes("/search")) {
 		presenceData.details = "In Store";
-		presenceData.state = "Searching for " + (document.documentURI.split("?q=")[1]).split("&")[0].trim();
+		presenceData.state = "Searching for " + (document.location.href.split("?q=")[1]).split("&")[0].trim();
 		presenceData.smallImageKey = Assets.Search;
 	}
 	else if (document.location.pathname.endsWith("/vault")) {
