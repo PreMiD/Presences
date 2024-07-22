@@ -91,4 +91,3 @@ presence.on("UpdateData", async () => {
 	if (privacy && presenceData.state) delete presenceData.state;
 	presence.setActivity(presenceData);
 });
-
