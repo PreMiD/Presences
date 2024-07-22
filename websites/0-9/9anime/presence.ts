@@ -24,20 +24,20 @@ presence.on("UpdateData", async () => {
 		const coverArt = document
 				.querySelector<HTMLImageElement>('[class="anime-poster"]')
 				?.querySelector("img")
-				?.getAttribute("src"),
+				?.src,
 			episodeNumber = document
 				.querySelector('[class="item ep-item active"]')
 				?.textContent?.match(/[1-9]{1}[0-9]{0,}/)?.[0];
 
 		presenceData.state = `Episode ${episodeNumber}`;
-		presenceData.largeImageKey = coverArt;
+		presenceData.largeImageKey = coverArt ?? Assets.Logo;
 		presenceData.buttons = [
 			{
 				label: "View Anime",
 				url: href,
 			},
 		];
-		presenceData.smallImageKey = Assets.Logo;
+		presenceData.smallImageKey = coverArt ? Assets.Logo : "";
 	}
 
 	presence.setActivity(presenceData);
