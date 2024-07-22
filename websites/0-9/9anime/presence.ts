@@ -6,26 +6,6 @@ const presence = new Presence({
 const enum Assets {
 	Logo = "https://cdn2.steamgriddb.com/icon/6ef77bd3e3cfb00cd02bba48e6e9a9e3.png",
 }
-
-let video = {
-	exists: false,
-	duration: 0,
-	currentTime: 0,
-	paused: true,
-};
-
-presence.on(
-	"iFrameData",
-	(data: {
-		exists: boolean;
-		duration: number;
-		currentTime: number;
-		paused: boolean;
-	}) => {
-		video = data;
-	}
-);
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
@@ -57,10 +37,7 @@ presence.on("UpdateData", async () => {
 				url: href,
 			},
 		];
-		if (video.exists) {
-			if (video.paused) presenceData.smallImageKey = Assets.Pause;
-			else presenceData.smallImageKey = Assets.Play;
-		} else presenceData.smallImageKey = Assets.Logo;
+		presenceData.smallImageKey = Assets.Logo;
 	}
 
 	presence.setActivity(presenceData);
