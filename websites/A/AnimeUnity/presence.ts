@@ -49,9 +49,12 @@ presence.on("UpdateData", async () => {
 	}
 	if (document.querySelector("input.search-bar")) {
 		presenceData.details = `${strings.search} ${
-			(document.querySelector(".search-bar") as HTMLInputElement).value
+			document.querySelector<HTMLInputElement>(".search-bar")?.value
 		}`;
-	} else {
+		presenceData.smallImageKey = Assets.Search;
+		presence.setActivity(presenceData);
+		return;
+	} 
 		if (pathname === "/") presenceData.details = strings.viewHome;
 
 		if (pathname.startsWith("/archivio"))
