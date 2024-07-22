@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "606106561042972738",
+		"name": "lidldev"
+	},
+	"service": "OpenAnime",
+	"description": {
+		"en": "null"
+	},
+	"url": [
+		"openani.me",
+		"openanime.net"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/ZqscVFc.png",
+	"thumbnail": "https://i.imgur.com/FETnspN.png",
+	"color": "#5fcefb",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"watch",
+		"video"
+	]
+}
