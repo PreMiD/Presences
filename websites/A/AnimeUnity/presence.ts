@@ -56,14 +56,13 @@ presence.on("UpdateData", async () => {
 		return;
 	} 
 		if (pathname === "/") presenceData.details = strings.viewHome;
-
-		if (pathname.startsWith("/archivio"))
+		else if (pathname.startsWith("/archivio"))
 			presenceData.details = "Viewing Archive";
 
-		if (pathname.startsWith("/calendario"))
+		else if (pathname.startsWith("/calendario"))
 			presenceData.details = "Viewing Schedule";
 
-		if (pathname.startsWith("/top-anime")) {
+		else if (pathname.startsWith("/top-anime")) {
 			let top3 = "";
 			for (let i = 0; i < 3; i++) {
 				top3 += `${i + 1}° ${
@@ -76,7 +75,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = top3;
 		}
 
-		if (pathname.startsWith("/anime")) {
+		else if (pathname.startsWith("/anime")) {
 			delete presenceData.startTimestamp;
 			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? strings.paused : strings.play;
