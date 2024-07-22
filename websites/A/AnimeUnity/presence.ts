@@ -86,8 +86,7 @@ presence.on("UpdateData", async () => {
 			}`;
 			presenceData.largeImageKey = cover
 				? (presenceData.largeImageKey = document
-						.querySelector(".cover")
-						.getAttribute("src"))
+						.querySelector<HTMLImageElement>(".cover")?.src ?? Assets.Logo
 				: Assets.Logo;
 
 			if (!isNaN(duration) && !paused) {
