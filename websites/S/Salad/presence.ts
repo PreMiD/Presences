@@ -39,13 +39,14 @@ presence.on("UpdateData", async () => {
 			presenceData.details = privacy
 				? "Support - viewing"
 				: "Support - browsing";
-			}
+		}
 	} else if (hostname.startsWith("community")) {
 		if (pathname.includes("-")) {
 			presenceData.details = privacy
 				? "Community - reading a blog post"
 				: "Community - reading about";
-			presenceData.state = document.querySelector(".xpro-post-title")?.textContent;
+			presenceData.state =
+				document.querySelector(".xpro-post-title")?.textContent;
 			presenceData.smallImageKey = Assets.Reading;
 		} else {
 			presenceData.details = "Community - Browsing...";
