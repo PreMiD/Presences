@@ -8,8 +8,11 @@
 	"description": {
 		"en": "A Pokémon fangame heavily inspired by the roguelite genre. Battle endlessly while gathering stacking items, exploring many different biomes, and reaching Pokémon stats you never thought possible."
 	},
-	"url": "pokerogue.net",
-	"version": "1.0.2",
+	"url": [
+		"pokerogue.net",
+		"127.0.0.1"
+	],
+	"version": "1.0.4",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PokeRogue/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PokeRogue/assets/thumbnail.png",
 	"color": "#6b5a73",

@@ -209,9 +209,7 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		}
-	}
-
-	if ((!playing || !showSong) && showBrowsing) {
+	} else if ((!playing || !showSong) && showBrowsing) {
 		for (const [k, v] of Object.entries(statics))
 			if (path.match(k)) presenceData = { ...presenceData, ...v };
 

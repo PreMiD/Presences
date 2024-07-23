@@ -14,14 +14,14 @@
 		"replay.beatleader.xyz",
 		"royale.beatleader.xyz"
 	],
-	"regExp": ".+\\.beatleader\\.(?:xyz)|(?:net)",
+	"regExp": "beatleader\\.xyz|beatleader\\.net",
 	"matches": [
 		"*://beatleader.xyz/*",
 		"*://beatleader.net/*",
 		"*://*.beatleader.xyz/*",
 		"*://*.beatleader.net/*"
 	],
-	"version": "1.8.7",
+	"version": "1.8.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/thumbnail.png",
 	"color": "#c81c9f",

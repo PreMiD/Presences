@@ -12,10 +12,9 @@
 	},
 	"url": [
 		"www.hbomax.com",
-		"www.max.com"
+		"play.hbomax.com"
 	],
-	"regExp": "([a-z]*[.])?(hbo)?max[.]com",
-	"version": "2.2.10",
+	"version": "2.2.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HBO%20Max/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HBO%20Max/assets/thumbnail.jpg",
 	"color": "#c600ff",

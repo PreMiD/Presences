@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "648040813250478081",
+		"name": "blaze0_0"
+	},
+	"service": "HDrezka",
+	"description": {
+		"en": "Website for watching movies, cartoons and TV series.",
+		"ru": "Сайт для просмтра фильмов, мультфильмов и сериалов."
+	},
+	"url": [
+		"rezka.ag",
+		"hdrezka.ag"
+	],
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HDrezka/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HDrezka/assets/thumbnail.jpeg",
+	"color": "#DA3D36",
+	"category": "videos",
+	"tags": [
+		"video",
+		"media"
+	]
+}

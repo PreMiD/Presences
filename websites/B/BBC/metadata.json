@@ -24,7 +24,7 @@
 		"www.bbc.co.uk",
 		"www.bbc.com"
 	],
-	"version": "2.1.18",
+	"version": "2.2.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/thumbnail.png",
 	"color": "#000000",
@@ -47,6 +47,12 @@
 			"id": "lang"
 		},
 		{
+			"id": "usePresenceName",
+			"title": "Show iPlayer Title as Presence",
+			"icon": "fad fa-user-edit",
+			"value": true
+		},
+		{
 			"id": "cover",
 			"title": "Show Cover",
 			"icon": "fas fa-images",
@@ -56,12 +62,6 @@
 			"id": "buttons",
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
-			"value": true
-		},
-		{
-			"id": "search",
-			"title": "Show Search Query",
-			"icon": "fas fa-search",
 			"value": true
 		}
 	]

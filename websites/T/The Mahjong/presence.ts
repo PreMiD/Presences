@@ -7,13 +7,39 @@ const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/The%20Mahjong/assets/logo.png",
 }
 
+const SITE_LANGS = [
+	"ar",
+	"de",
+	"es",
+	"pt",
+	"da",
+	"fr",
+	"ru",
+	"id",
+	"it",
+	"nl",
+	"pl",
+	"sv",
+	"tr",
+	"vi",
+	"zh",
+	"hi",
+	"ko",
+	"ja",
+];
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, href } = document.location,
-		pathArr = pathname.split("/");
+		{ pathname, href } = document.location;
+	let pathArr = pathname.split("/");
+
+	if (SITE_LANGS.find(lang => lang === pathname.split("/")[1])) {
+		pathArr = ["", ...pathArr.slice(2)];
+		if (pathArr.length === 1) pathArr = ["", ""];
+	}
 
 	if (pathArr[1] === "" || pathArr[1] === "mahjong") {
 		if (pathArr[1] === "mahjong" && pathArr[2] === "")
