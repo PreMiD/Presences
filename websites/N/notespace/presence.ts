@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: "1193651901221306378",
-}),
+		clientId: "1193651901221306378",
+	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
@@ -8,11 +8,8 @@ const enum Assets {
 }
 
 presence.on("UpdateData", async () => {
-	const href = document.location.href,
-		currentPath = href.replace(
-			"https://notespace.edu.pl",
-			""
-		),
+	const { href } = document.location,
+		currentPath = href.replace("https://notespace.edu.pl", ""),
 		presenceData: PresenceData = {
 			details: "Nauka nigdy nie była prostsza.",
 			largeImageKey: Assets.Icon,
@@ -33,9 +30,12 @@ presence.on("UpdateData", async () => {
 		return presence.setActivity(presenceData);
 	}
 
-	if (href.endsWith("notespace.edu.pl/") || currentPath.includes("strona-glowna")) {
+	if (
+		href.endsWith("notespace.edu.pl/") ||
+		currentPath.includes("strona-glowna")
+	) {
 		presenceData.details = "Przegląda stronę główną";
-		const activeQuestion = document.querySelector('.faq-item-header.active');
+		const activeQuestion = document.querySelector(".faq-item-header.active");
 		if (activeQuestion) {
 			presenceData.details = "Przegląda wszystkie pytania - strona główna";
 			presenceData.smallImageKey = Assets.Question;
@@ -47,9 +47,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = "Wypełnia ankietę";
 		presenceData.smallImageKey = Assets.Writing;
 		presenceData.smallImageText = "Pisze...";
-		presenceData.buttons = [
-			{ label: "Wypełnij ankietę", url: href },
-		];
+		presenceData.buttons = [{ label: "Wypełnij ankietę", url: href }];
 	} else if (currentPath.includes("centrum-pomocy"))
 		presenceData.details = "Przegląda centrum pomocy";
 	else if (currentPath.includes("o-nas"))
@@ -123,7 +121,7 @@ presence.on("UpdateData", async () => {
 	} else if (currentPath.startsWith("/en")) {
 		if (href.endsWith("notespace.edu.pl/en/") || currentPath.includes("home")) {
 			presenceData.details = "Browsing the main page";
-			const activeQuestion = document.querySelector('.faq-item-header.active');
+			const activeQuestion = document.querySelector(".faq-item-header.active");
 			if (activeQuestion) {
 				presenceData.details = "Browsing all the questions - main page";
 				presenceData.smallImageKey = Assets.Question;
@@ -244,7 +242,9 @@ presence.on("UpdateData", async () => {
 				else if (currentPath.includes("dodaj-zbior"))
 					presenceData.state = "Dodaje zbiór";
 			} else if (currentPath.includes("profil")) {
-				presenceData.state = `Przegląda profil: ${currentPath.split("/")[currentPath.split("/").length - 1]}`;
+				presenceData.state = `Przegląda profil: ${
+					currentPath.split("/")[currentPath.split("/").length - 1]
+				}`;
 				presenceData.smallImageKey = Assets.Viewing;
 				presenceData.smallImageText = "Przegląda...";
 			}
