@@ -30,6 +30,33 @@ async function getCoverImage(newMangaId: string) {
 	return `https://uploads.mangadex.org/covers/${mangaId}/${coverFileName}`;
 }
 
+const titleImageCache = new Map<string, string>();
+
+async function getTitleImage(img: HTMLImageElement | null): Promise<string> {
+	return new Promise(resolve => {
+		if (img === null) return Assets.Logo;
+
+		const image = titleImageCache.get(img.src);
+
+		if (image) return resolve(image);
+
+		fetch(img.src)
+			.then(res => res.blob())
+			.then(blob => {
+				const reader = new FileReader();
+
+				reader.onload = function (e) {
+					const dataUrl = e.target.result.toString();
+
+					titleImageCache.set(img.src, dataUrl);
+					resolve(dataUrl);
+				};
+
+				reader.readAsDataURL(blob);
+			});
+	});
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
@@ -51,8 +78,9 @@ presence.on("UpdateData", async () => {
 				.querySelector("head > title")
 				.textContent.replace(" - MangaDex", "");
 			presenceData.buttons = [{ label: "View Manga", url: href }];
-			presenceData.largeImageKey =
-				document.querySelector<HTMLImageElement>("img.rounded").src;
+			presenceData.largeImageKey = await getTitleImage(
+				document.querySelector<HTMLImageElement>("img.rounded")
+			);
 			break;
 		case "titles":
 			presenceData.details = {
