@@ -27,6 +27,7 @@ const presence = new Presence({
 				listeningMusic: "general.listeningMusic",
 				buttonWatchStream: "general.buttonWatchStream",
 				buttonWatchVideo: "general.buttonWatchVideo",
+				buttonWatchEpisode: "general.buttonViewEpisode",
 				buttonWatchMovie: "general.buttonWatchMovie",
 				buttonListenAlong: "general.buttonListenAlong",
 				live: "general.live",
@@ -44,7 +45,7 @@ const enum Assets { // Other default assets can be found at index.d.ts
 	Animated = "https://imgur.com/uAqZdFg.gif",
 	Deferred = "https://i.imgur.com/o69hUKD.gif",
 	LiveAnimated = "https://i.imgur.com/6oezfP6.gif",
-	Listening = "https://i.imgur.com/0yWcS5h.png",
+	Listening = "https://i.imgur.com/9ZFChOG.png",
 	RTLPlay = "https://i.imgur.com/1f5rMxV.png",
 	RTLTVi = "https://i.imgur.com/wnjbhCe.png",
 	RTLClub = "https://i.imgur.com/8FwZa7m.png",
@@ -467,7 +468,7 @@ presence.on("UpdateData", async () => {
 						{
 							label:
 								episodeName !== ""
-									? "Regarder l'épisode"
+									? strings.buttonWatchEpisode
 									: (await strings).buttonWatchMovie, // Need to be a general string
 							url: href, // We are not redirecting directly to the raw video stream, it's only the media page
 						},
