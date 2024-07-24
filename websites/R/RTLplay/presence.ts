@@ -489,43 +489,59 @@ presence.on("UpdateData", async () => {
 
 		(https://www.rtlplay.be/rtlplay/salvation~2ab30366-51fe-4b29-a720-5e41c9bd6991) */
 		case pathname.split("/")[2].length > 15: {
-			let subtitle = document.querySelector(
-				'dd.detail__meta-label[title="Année de production"]'
-			)
-				? document.querySelector(
-						'dd.detail__meta-label[title="Année de production"]'
-				  ).textContent
-				: ""; // Get Release Year
-			subtitle += document.querySelector('dd.detail__meta-label[title="Durée"]')
-				? ` - ${
-						document.querySelector('dd.detail__meta-label[title="Durée"]')
-							.textContent
-				  }`
-				: ""; // Get Duration
-			for (
-				let i = 0;
-				document.querySelectorAll("dl:nth-child(1) > dd > a").length > i;
-				i++ // Get Genres
-			) {
-				subtitle += ` - ${
-					document.querySelectorAll("dl:nth-child(1) > dd > a")[i].textContent
-				}`;
-			}
-
-			presenceData.details = (await strings).viewPage;
-			presenceData.state =
-				document.querySelectorAll("h1.detail__title")[0].textContent;
-
-			presenceData.largeImageText = subtitle;
-
-			if (poster) {
-				presenceData.largeImageKey = await getShortURL(
-					document.querySelectorAll("img.detail__poster")[0].getAttribute("src")
-				);
-			}
-
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = (await strings).viewAPage;
+
+			if (privacy) presenceData.details = (await strings).viewAPage;
+			else {
+				let subtitle = document.querySelector(
+					'dd.detail__meta-label[title="Année de production"]'
+				)
+					? document.querySelector(
+							'dd.detail__meta-label[title="Année de production"]'
+					  ).textContent
+					: ""; // Get Release Year
+				subtitle += document.querySelector(
+					'dd.detail__meta-label[title="Durée"]'
+				)
+					? ` - ${
+							document.querySelector('dd.detail__meta-label[title="Durée"]')
+								.textContent
+					  }`
+					: ""; // Get Duration
+				for (
+					let i = 0;
+					document.querySelectorAll("dl:nth-child(1) > dd > a").length > i;
+					i++ // Get Genres
+				) {
+					subtitle += ` - ${
+						document.querySelectorAll("dl:nth-child(1) > dd > a")[i].textContent
+					}`;
+				}
+
+				presenceData.details = (await strings).viewPage;
+				presenceData.state =
+					document.querySelectorAll("h1.detail__title")[0].textContent;
+
+				presenceData.largeImageText = subtitle;
+
+				if (poster) {
+					presenceData.largeImageKey = await getShortURL(
+						document
+							.querySelectorAll("img.detail__poster")[0]
+							.getAttribute("src")
+					);
+				}
+
+				if (buttons) {
+					presenceData.buttons = [
+						{
+							label: (await strings).buttonViewPage, // Need to be a general string
+							url: href, // We are not redirecting directly to the raw video stream, it's only the media page
+						},
+					];
+				}
+			}
 			break;
 		}
 		default: {
