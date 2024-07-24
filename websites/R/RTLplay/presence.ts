@@ -199,9 +199,9 @@ presence.on("UpdateData", async () => {
 
 			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = (await strings).search;
-
 			break;
 		}
+
 		/* MY LIST (Ma Liste)
 
 		(https://www.rtlplay.be/rtlplay/ma-liste) */
@@ -219,9 +219,9 @@ presence.on("UpdateData", async () => {
 					];
 				}
 			}
-
 			break;
 		}
+
 		/* CATEGORY PAGE / COLLECTION PAGE (Page de catégorie)
 
 		(https://www.rtlplay.be/rtlplay/collection/c2dBY3Rpb24) */
@@ -258,9 +258,9 @@ presence.on("UpdateData", async () => {
 					];
 				}
 			}
-
 			break;
 		}
+
 		/* DIRECT PAGE (Page des chaines en direct)
 
 		(https://www.rtlplay.be/rtlplay/direct/tvi)*/
@@ -340,7 +340,6 @@ presence.on("UpdateData", async () => {
 							];
 						}
 					}
-
 					break;
 				}
 				case hostname === "www.radiocontact.be": {
@@ -390,12 +389,12 @@ presence.on("UpdateData", async () => {
 							];
 						}
 					}
-
 					break;
 				}
 			}
 			break;
 		}
+
 		/* MEDIA PLAYER PAGE (Lecteur video)
 
 		(https://www.rtlplay.be/rtlplay/player/75e9a91b-29d1-4856-be8c-0b3532862404) */
@@ -484,7 +483,6 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = (await strings).play;
 			}
-
 			break;
 		}
 		/* MEDIA PAGE (Page de media)
