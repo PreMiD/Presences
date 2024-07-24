@@ -18,8 +18,8 @@
 		"movies.levrx.lol",
 		"www.essential.wtf",
 		"streamerflix.xyz",
-		"movies.fmeee.ovh",
 		"envyflix.xyz",
+		"pseudo-flix.pro",
 		"movie-web.x"
 	],
 	"regExp": "(dev[.])?(movie-web[.]app)",
@@ -33,11 +33,11 @@
 		"*://movies.levrx.lol/*",
 		"*://www.essential.wtf/*",
 		"*://streamerflix.xyz/*",
-		"*://movies.fmeee.ovh/*",
 		"*://envyflix.xyz/*",
+		"*://pseudo-flix.pro/*",
 		"*://movie-web.x/*"
 	],
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/thumbnail.png",
 	"color": "#533670",
