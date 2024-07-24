@@ -10,7 +10,7 @@
 		"it": "AnimeUnity è un sito di streaming & download di anime ita/sub ita con un archivio molto vasto e streaming veloce"
 	},
 	"url": "animeunity.to",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/0Ak30uP.png",
 	"thumbnail": "https://i.imgur.com/bEJlxsX.png",
 	"color": "#ffffff",
@@ -20,6 +20,8 @@
 		"anime",
 		"sub-ita"
 	],
+	"iframe": true,
+	"iFrameRegExp": ".*",
 	"settings": [
 		{
 			"id": "lang",
@@ -31,7 +33,5 @@
 			"icon": "fad fa-images",
 			"value": true
 		}
-	],
-	"iframe": true,
-	"iFrameRegExp": ".*"
+	]
 }
