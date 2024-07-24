@@ -1,32 +1,50 @@
 const presence = new Presence({
 		clientId: "1240716875927916616",
 	}),
-	strings = presence.getStrings({
-		play: "general.playing",
-		pause: "general.paused",
-		search: "general.search",
-		searchSomething: "general.searchSomething",
-		browsing: "general.browsing",
-		viewing: "general.viewing",
-		viewPage: "general.viewPage",
-		viewAPage: "general.viewAPage",
-		viewAccount: "general.viewAccount",
-		viewChannel: "general.viewChannel",
-		viewCategory: "general.viewCategory",
-		buttonViewPage: "general.buttonViewPage",
-		watching: "general.watching",
-		watchingAd: "youtube.ad",
-		watchingLive: "general.watchingLive",
-		watchingShow: "general.watchingShow",
-		buttonWatchStream: "general.buttonWatchStream",
-		buttonWatchVideo: "general.buttonWatchVideo",
-		live: "general.live",
-	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	getStrings = async () => {
+		return presence.getStrings(
+			{
+				play: "general.playing",
+				pause: "general.paused",
+				search: "general.search",
+				searchSomething: "general.searchSomething",
+				browsing: "general.browsing",
+				viewing: "general.viewing",
+				viewPage: "general.viewPage",
+				viewAPage: "general.viewAPage",
+				viewHome: "general.viewHome",
+				viewAccount: "general.viewAccount",
+				viewChannel: "general.viewChannel",
+				viewCategory: "general.viewCategory",
+				viewList: "netflix.viewList",
+				buttonViewPage: "general.buttonViewPage",
+				watching: "general.watching",
+				watchingAd: "youtube.ad",
+				watchingLive: "general.watchingLive",
+				watchingShow: "general.watchingShow",
+				watchingMovie: "general.watchingMovie",
+				listeningMusic: "general.listeningMusic",
+				buttonWatchStream: "general.buttonWatchStream",
+				buttonWatchVideo: "general.buttonWatchVideo",
+				buttonWatchMovie: "general.buttonWatchMovie",
+				buttonListenAlong: "general.buttonListenAlong",
+				live: "general.live",
+				season: "general.season",
+				episode: "general.episode",
+			},
+			await presence.getSetting<string>("lang").catch(() => "en")
+		);
+	};
+let oldLang: string = null,
+	strings: Awaited<ReturnType<typeof getStrings>>;
 
 const enum Assets { // Other default assets can be found at index.d.ts
 	Logo = "https://i.imgur.com/KNsI47l.png",
 	Animated = "https://imgur.com/uAqZdFg.gif",
+	Deferred = "https://i.imgur.com/o69hUKD.gif",
+	LiveAnimated = "https://i.imgur.com/6oezfP6.gif",
+	Listening = "https://i.imgur.com/0yWcS5h.png",
 	RTLPlay = "https://i.imgur.com/1f5rMxV.png",
 	RTLTVi = "https://i.imgur.com/wnjbhCe.png",
 	RTLClub = "https://i.imgur.com/8FwZa7m.png",
@@ -86,128 +104,6 @@ function exist(selector: string) {
 	return document.querySelector(selector) !== null;
 }
 
-interface DataFeedElement {
-    name: string;
-    partOfSeason: {
-        seasonNumber: number;
-    };
-    episodeNumber: number;
-    genre: string;
-}
-
-interface DataFeed {
-    dataFeedElement: DataFeedElement[];
-}
-
-interface TVEpisode {
-    name: string;
-    partOfSeason: {
-        seasonNumber: number;
-    };
-    episodeNumber: number;
-    genre: string;
-}
-
-interface BreadcrumbListItem {
-    item: {
-        name: string;
-    };
-}
-
-interface BreadcrumbList {
-    itemListElement: BreadcrumbListItem[];
-}
-
-type JsonValue = DataFeed | TVEpisode | BreadcrumbList;
-
-function parseInformations() {
-    let found = false;
-    let data: { list: JsonValue | null; type: string } = { list: null, type: '' };
-	const json = document.querySelectorAll("div > div > div > script")
-
-    const types = ["DataFeed", "TVEpisode", "BreadcrumbList"];
-    for (let i = 0; i < types.length && !found; i++) {
-        const type = types[i];
-
-        json.forEach(function (value) {
-            if (found) return;
-
-            const jsonValue = JSON.parse(value.textContent || '{}');
-            if (jsonValue["@type"] === type) {
-                console.log(`Handling ${type} type`);
-                data.list = jsonValue;
-                data.type = type;
-                found = true;
-            }
-        });
-    }
-
-    switch (data.type) {
-        case "DataFeed": {
-            const list = data.list as DataFeed;
-            return {
-                type: "TVSerie",
-                isPlayer: true,
-                name: list.dataFeedElement[0].name,
-                season: list.dataFeedElement[0].partOfSeason.seasonNumber,
-                episode: list.dataFeedElement[0].episodeNumber,
-                genre: list.dataFeedElement[0].genre.split("|").map(g => g.trim())
-            };
-        }
-        case "TVEpisode": {
-            const list = data.list as TVEpisode;
-            return {
-                type: "TVSerie",
-                isPlayer: true,
-                name: list.name,
-                season: list.partOfSeason.seasonNumber,
-                episode: list.episodeNumber,
-                genre: list.genre.split("|").map(g => g.trim())
-            };
-        }
-        case "BreadcrumbList": {
-            const list = data.list as BreadcrumbList;
-            const isPlayer = list.itemListElement.length > 1;
-            return {
-                type: isPlayer ? "Movie" : "TBD",
-                isPlayer: isPlayer,
-                name: list.itemListElement[list.itemListElement.length - 1].item.name
-            };
-        }
-        default: {
-            return {
-                type: "TBD"
-            };
-        }
-    }
-}
-
-	/*
-	const jsonValue = JSON.parse(str);
-	switch (true) {
-		case jsonValue["@type"] === "BreadcrumbList": {
-			if (jsonValue.itemListElement.length === 2) {
-				// CATEGORY NAME
-				return {
-					name: jsonValue.itemListElement[1].item.name
-				};
-			} else {
-				// CONTENT NAME ON CONTENT PAGE
-				return {
-					name: jsonValue.itemListElement[0].item.name
-				};
-			}
-		}
-		case jsonValue["@type"] === "TVEpisode": {
-			return {
-				name: jsonValue.name,
-				season: jsonValue.partOfSeason.seasonNumber,
-				episode: jsonValue.episodeNumber,
-			};
-		}
-	}*/
-
-
 const shortenedURLs: Record<string, string> = {};
 async function getShortURL(url: string) {
 	if (!url || url.length < 256) return url;
@@ -223,232 +119,364 @@ async function getShortURL(url: string) {
 		return url;
 	}
 }
+
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-			largeImageKey: Assets.Animated, // Default
+	const { hostname, href, pathname } = document.location,
+		presenceData: PresenceData = {
+			name: "RTLplay",
+			largeImageKey:
+				hostname === "www.radiocontact.be" ? Assets.Contact : Assets.Animated, // Default
 			largeImageText: "RTLplay",
 			type: ActivityType.Watching,
 		},
-		{ /*hostname,*/ href, pathname } = document.location,
-		[privacy, time, buttons] = await Promise.all([
-			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<boolean>("time"),
-			presence.getSetting<number>("buttons"),
-		]);
+		[lang, usePresenceName, useChannelName, privacy, time, buttons, poster] =
+			await Promise.all([
+				presence.getSetting<string>("lang").catch(() => "en"),
+				presence.getSetting<boolean>("usePresenceName"),
+				presence.getSetting<boolean>("useChannelName"),
+				presence.getSetting<boolean>("privacy"),
+				presence.getSetting<boolean>("timestamp"),
+				presence.getSetting<number>("buttons"),
+				presence.getSetting<boolean>("usePosterImage"),
+			]);
+
+	if (oldLang !== lang) {
+		oldLang = lang;
+		strings = await getStrings();
+	}
 
 	switch (true) {
 		/* MAIN PAGE (Page principale)
 
-	(https://www.rtlplay.be/) */
-		case pathname === "/" || pathname === "/rtl_play": {
+		(https://www.rtlplay.be/) */
+		case pathname === "/" ||
+			(pathname.split("/")[1] === "rtlplay" &&
+				pathname.split("/").length <= 2): {
 			presenceData.details = (await strings).browsing;
 
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = (await strings).browsing;
 
-			if (time) presenceData.startTimestamp = browsingTimestamp;
+			if (!privacy) {
+				presenceData.state = (await strings).viewHome;
 
+				if (time) presenceData.startTimestamp = browsingTimestamp;
+			}
 			break;
 		}
 
 		/* RESEARCH PAGE (Page de recherche)
 
-	(https://www.rtlplay.be/recherche) */
-		case pathname.split("/")[1] === "recherche": {
-			presenceData.details = (await strings).searchSomething;
+		(https://www.rtlplay.be/rtlplay/recherche) */
+		case pathname.split("/")[2] === "recherche": {
+			if (privacy) presenceData.details = (await strings).searchSomething;
+			else {
+				presenceData.details = JSON.parse(
+					document
+						.querySelector("ol.search__results")
+						?.getAttribute("data-tracking")
+				).searchQuery
+					? (await strings).search
+					: (await strings).searchSomething;
+				presenceData.state = JSON.parse(
+					document
+						.querySelector("ol.search__results")
+						?.getAttribute("data-tracking")
+				).searchQuery.term;
+
+				if (time) presenceData.startTimestamp = browsingTimestamp;
+
+				if (buttons) {
+					presenceData.buttons = [
+						{
+							label: (await strings).buttonViewPage, // Need to be a general string
+							url: href, // We are not redirecting directly to the raw video stream, it's only the media page
+						},
+					];
+				}
+			}
 
 			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = (await strings).search;
 
-			if (time) presenceData.startTimestamp = browsingTimestamp;
-
 			break;
 		}
+		/* MY LIST (Ma Liste)
 
-		/* ACCOUNT PAGE (Page Mon compte)
-
-	(https://www.rtlplay.be/mon-compte) */
-		case pathname.split("/")[1] === "mon-compte": {
-			presenceData.details = privacy
-				? (await strings).viewAPage
-				: (await strings).viewAccount;
-
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.smallImageText = (await strings).browsing;
-
-			if (time) presenceData.startTimestamp = browsingTimestamp;
-
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: (await strings).viewPage,
-						url: href,
-					},
-				];
+		(https://www.rtlplay.be/rtlplay/ma-liste) */
+		case ["ma-liste"].includes(pathname.split("/")[2]): {
+			presenceData.details = (await strings).browsing;
+			presenceData.state = (await strings).viewAPage;
+			if (!privacy) {
+				presenceData.state = (await strings).viewList;
+				if (buttons) {
+					presenceData.buttons = [
+						{
+							label: (await strings).buttonViewPage, // Need to be a general string
+							url: href, // We are not redirecting directly to the raw video stream, it's only the media page
+						},
+					];
+				}
 			}
 
 			break;
 		}
+		/* CATEGORY PAGE / COLLECTION PAGE (Page de catégorie)
 
-		// CHANNEL PAGE (Page de chaine)
-		case ["tvi", "club", "plug", "bel", "contact"].includes(
-			pathname.split("/")[1]
+		(https://www.rtlplay.be/rtlplay/collection/c2dBY3Rpb24) */
+		case ["collection", "series", "films", "divertissement"].includes(
+			pathname.split("/")[2]
 		): {
-			const { channel } = getChannel(pathname);
-			presenceData.largeImageKey = getChannel(pathname).logo;
+			if (privacy) presenceData.details = (await strings).viewAPage;
+			else {
+				const data = JSON.parse(
+					document.querySelectorAll("script[type='application/ld+json']")[0]
+						.textContent
+				);
 
-			switch (true) {
-				/* HUB CHANNEL PAGE (Page HUB d'une chaîne)
+				presenceData.details = (await strings).viewCategory;
+				presenceData.state =
+					pathname.split("/")[2] !== "collection"
+						? pathname.split("/")[2][0].toUpperCase() +
+						  pathname.split("/")[2].substring(1) // to Upper Case the first letter
+						: data[0]["@type"] === "CollectionPage"
+						? data[0].name
+						: null;
 
-				(ex: https://www.rtlplay.be/tvi) */
-				default: {
-					presenceData.details = privacy
-						? (await strings).viewAPage
-						: (await strings).viewChannel;
-					presenceData.state = privacy ? "" : `${channel}`;
+				presenceData.smallImageKey = Assets.Viewing;
+				presenceData.smallImageText = (await strings).viewCategory;
 
-					presenceData.smallImageKey = Assets.Reading;
-					presenceData.smallImageText = (await strings).browsing;
+				if (time) presenceData.startTimestamp = browsingTimestamp;
 
-					if (time) presenceData.startTimestamp = browsingTimestamp;
-
-					break;
+				if (buttons) {
+					presenceData.buttons = [
+						{
+							label: (await strings).buttonViewPage, // Need to be a general string
+							url: href, // We are not redirecting directly to the raw video stream, it's only the media page
+						},
+					];
 				}
-				/* LIVE CHANNEL PAGE (Page d'une chaîne en direct)
-				aka LIVE VIDEO PLAYER (Player vidéo en direct)
+			}
 
-				(ex: https://www.rtlplay.be/tvi/direct) */
-				case pathname.split("/")[2] === "direct":
-					{
-						presenceData.details = privacy
-							? (await strings).watchingLive
-							: `${(await strings).watching} ${channel}`;
-						presenceData.state = privacy
-							? ""
-							: document.querySelector("div.sc-18trp4n-3.bVsrtw > h1")
-									.textContent; // Content of the first line
+			break;
+		}
+		/* DIRECT PAGE (Page des chaines en direct)
 
-						presenceData.largeImageKey = getChannel(pathname).logo;
-						presenceData.largeImageText = channel;
-						presenceData.smallImageKey = Assets.Live;
+		(https://www.rtlplay.be/rtlplay/direct/tvi)*/
+		case (hostname === "www.rtlplay.be" &&
+			pathname.split("/")[2] === "direct") ||
+			(hostname === "www.radiocontact.be" &&
+				pathname.split("/")[1] === "player"): {
+			switch (true) {
+				case hostname === "www.rtlplay.be": {
+					if (exist("i.playerui__icon--name-play")) {
+						// State paused
+						presenceData.smallImageKey = Assets.Pause;
+						presenceData.smallImageText = (await strings).pause;
+					} else if (exist("div.playerui__liveStat--deferred")) {
+						// State deferred
+						presenceData.smallImageKey = Assets.Deferred;
+						presenceData.smallImageText = "En Différé"; // Need to be a general string
+					} else {
+						// State live
+						presenceData.smallImageKey = Assets.LiveAnimated;
 						presenceData.smallImageText = (await strings).live;
-						
-						presenceData.type = getChannel(pathname).type;
+					}
+
+					if (privacy) {
+						presenceData.details = (await strings).watchingLive;
+						presenceData.largeImageKey = Assets.Logo;
+					} else {
+						if (
+							!useChannelName &&
+							document
+								.querySelectorAll("li[aria-current='true'] > a > div > h2")[0]
+								.textContent.toLowerCase() !== "aucune donnée disponible"
+						) {
+							presenceData.name = document.querySelectorAll(
+								"li[aria-current='true'] > a > div > h2"
+							)[0].textContent;
+						} else
+							presenceData.name = getChannel(pathname.split("/")[3]).channel;
+
+						presenceData.type = getChannel(pathname.split("/")[3]).type;
+
+						presenceData.details = (await strings).watchingLive;
+						presenceData.state = document.querySelectorAll(
+							"li[aria-current='true'] > a > div > h2"
+						)[0].textContent;
+
+						presenceData.largeImageKey = getChannel(
+							pathname.split("/")[3]
+						).logo;
+						presenceData.largeImageText = getChannel(
+							pathname.split("/")[3]
+						).channel;
 
 						if (time) {
-							if (
-								document
-									.querySelector('[type="duration"]')
-									.textContent.includes("-")
-							) {
-								presenceData.endTimestamp = presence.getTimestamps(
-									0,
-									presence.timestampFromFormat(
-										document
-											.querySelector('[type="duration"]')
-											.textContent.replace("-", "")
-									)
-								)[1];
-							} else {
-								presenceData.endTimestamp = presence.getTimestamps(
-									presence.timestampFromFormat(
-										document.querySelector('[type="currentTime"]').textContent
-									),
-									presence.timestampFromFormat(
-										document.querySelector('[type="duration"]').textContent
-									)
-								)[1];
-							}
+							presenceData.endTimestamp = presence.getTimestamps(
+								presence.timestampFromFormat(
+									document
+										.querySelector("span.playerui__controls__stat__time")
+										.textContent.split("/")[0]
+										.trim()
+								),
+								presence.timestampFromFormat(
+									document
+										.querySelector("span.playerui__controls__stat__time")
+										.textContent.split("/")[1]
+										.trim()
+								)
+							)[1];
 						}
 
 						if (buttons) {
 							presenceData.buttons = [
 								{
 									label: (await strings).buttonWatchStream,
-									url: href, // We are not redirecting directly to the raw stream, it's only the livestream page
+									url: href, // We are not redirecting directly to the raw video stream, it's only the media page
 								},
 							];
 						}
 					}
 
 					break;
+				}
+				case hostname === "www.radiocontact.be": {
+					presenceData.name = getChannel("contact").channel;
+					presenceData.type = getChannel("contact").type;
+
+					if (exist('button[aria-label="stop"]')) {
+						presenceData.smallImageKey = Assets.Listening;
+						presenceData.smallImageText = strings.listeningMusic;
+					} else {
+						presenceData.smallImageKey = Assets.Stop;
+						presenceData.smallImageText = strings.pause;
+					}
+
+					if (!privacy) {
+						// Fetch the data from the API
+						const response = await fetch(
+								"https://core-search.radioplayer.cloud/056/qp/v4/events/?rpId=1"
+							), // Website backend use radioplayer api
+							dataString = await response.text(),
+							data = JSON.parse(dataString);
+
+						if (data.results.now.type === "PE_E") {
+							// When a song is played
+							presenceData.details = data.results.now.name;
+							presenceData.state = data.results.now.artistName;
+							presenceData.largeImageKey = await getShortURL(
+								data.results.now.songArtURL
+							);
+						} else {
+							// When there's no song and only the show
+							presenceData.details = data.results.pis[0].programmeName;
+							presenceData.state = data.results.pis[0].programmeDescription;
+							presenceData.largeImageKey = await getShortURL(
+								data.results.pis[0].imageUrl
+							);
+						}
+
+						presenceData.largeImageText = getChannel("contact").channel;
+
+						if (buttons) {
+							presenceData.buttons = [
+								{
+									label: (await strings).buttonListenAlong,
+									url: href, // We are not redirecting directly to the raw video stream, it's only the media page
+								},
+							];
+						}
+					}
+
+					break;
+				}
 			}
 			break;
 		}
+		/* MEDIA PLAYER PAGE (Lecteur video)
 
-		/* MOVIE PAGE & CATEGORY PAGE (Page d'un Film ou d'une Catégorie)
-	There's a little difference between a Movie page and a Category page.
-	The first one has a Play video button that the other one hasn't
-
-	(ex: https://www.rtlplay.be/chicago-fire-p_8947 and https://www.rtlplay.be/rtl_play/series-rtl-play-f_409) */
-		case exist(
-			"header > div > div > h1, div.sc-nqi6nw-0.cNDqJj > h1" // Movie name or Category name: Supports mobile and desktop layout
-		): {
-			presenceData.details = parseInformations().name;
-			/*
-			presenceData.state = privacy
-				? ""
-				: document.querySelector(
-						"header > div > div > h1, div.sc-nqi6nw-0.cNDqJj > h1" // Movie name or Category name: Supports mobile and desktop layout
-				  ).textContent;
-
-			if (time) presenceData.startTimestamp = browsingTimestamp;
-
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: (await strings).buttonViewPage,
-						url: href,
-					},
-				];
-			}
-
-			if (
-				exist("div.sc-q5s88f-0.jzJNis > a > span") // Check if the button Play video exist
-			) {
-				const tagsLine = document.querySelector(
-					"div.sc-gad7tv-0.enEPMo > span" // Tags line (ex: Série | Science-fiction | Drame)
-				);
-				presenceData.details = privacy
-					? (await strings).viewAPage
-					: `${(await strings).viewPage} ${
-							tagsLine === null ? "" : tagsLine.textContent.split("|")[0].trim()
-					  }`;
-
-				presenceData.smallImageKey = Assets.Viewing;
-				presenceData.smallImageText = (await strings).viewAPage;
-			} else {
-				presenceData.details = (await strings).viewCategory;
-
-				presenceData.smallImageKey = Assets.Reading;
-				presenceData.smallImageText = (await strings).browsing;
-			}
-			*/
-
-			
-			break;
-		}
-
-		/* VIDEO PLAYER (Lecteur vidéo)
-	
-	(ex: https://www.rtlplay.be/the-power-p_25630/episode-01-c_13062282) */
-		case parseInformations().isPlayer: {
-			const firstLine = document.querySelector(
-					"div.sc-18trp4n-3.bVsrtw > h1" // Video Player first line
-				).textContent,
-				secondLine = exist("div.sc-3kw2pp-0.jqFqPu.sc-18trp4n-6.cQaAsL > h2")
-					? document.querySelector(
-							"div.sc-3kw2pp-0.jqFqPu.sc-18trp4n-6.cQaAsL > h2" // Video Player second line, may hide in mobile layout
-					  ).textContent
-					: "";
-			
-			// presenceData.largeImageKey = await getShortURL((document.querySelector("picture > img") as HTMLImageElement).src);
-			presenceData.largeImageKey = Assets.Logo;
-			if (
+		(https://www.rtlplay.be/rtlplay/player/75e9a91b-29d1-4856-be8c-0b3532862404) */
+		case pathname.split("/")[2] === "player": {
+			const {
+				mediaName = document.querySelectorAll("h1.lfvp-player__title")[0]
+					.textContent,
+				seasonNumber = "",
+				episodeNumber = "",
+				episodeName = "",
+			} = (
 				document
-					.querySelector("#player-control-playpause")
-					.getAttribute("aria-label") === "Lecture"
-			) {
+					.querySelectorAll("h1.lfvp-player__title")[0]
+					?.textContent.match(
+						/^(?<mediaName>.*?)\sS(?<seasonNumber>\d+)\sE(?<episodeNumber>\d+)\s(?<episodeName>.*)$/
+					) || {}
+			).groups || {};
+			if (privacy) {
+				presenceData.details =
+					episodeName !== ""
+						? (await strings).watchingShow
+						: (await strings).watchingMovie;
+				presenceData.largeImageKey = Assets.Logo;
+			} else {
+				if (usePresenceName) presenceData.name = mediaName;
+
+				presenceData.details =
+					episodeName !== ""
+						? `${(await strings).watching} ${mediaName}`
+						: (await strings).watchingMovie;
+				presenceData.state = episodeName !== "" ? episodeName : mediaName;
+
+				if (poster) {
+					presenceData.largeImageKey = await getShortURL(
+						document
+							.querySelector("#content > script")
+							.textContent.match(
+								/window\.App\.playerData\s*=\s*\{[\s\S]*?poster:\s*"(.*?)",/
+							)[1]
+							.replace(/\\u0026/g, "&")
+							.replace(/\\/g, "")
+					);
+				}
+
+				if (seasonNumber && episodeNumber) {
+					presenceData.largeImageText = `${
+						(await strings).season
+					} ${seasonNumber} - ${(await strings).episode} ${episodeNumber}`;
+				}
+
+				if (time) {
+					presenceData.endTimestamp = presence.getTimestamps(
+						presence.timestampFromFormat(
+							document
+								.querySelector("span.playerui__controls__stat__time")
+								.textContent.split("/")[0]
+								.trim()
+						),
+						presence.timestampFromFormat(
+							document
+								.querySelector("span.playerui__controls__stat__time")
+								.textContent.split("/")[1]
+								.trim()
+						)
+					)[1];
+				}
+
+				if (buttons) {
+					presenceData.buttons = [
+						{
+							label:
+								episodeName !== ""
+									? "Regarder l'épisode"
+									: (await strings).buttonWatchMovie, // Need to be a general string
+							url: href, // We are not redirecting directly to the raw video stream, it's only the media page
+						},
+					];
+				}
+			}
+
+			if (exist("i.playerui__icon--name-play")) {
+				// State paused
 				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = (await strings).pause;
 			} else {
@@ -456,74 +484,53 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = (await strings).play;
 			}
 
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: (await strings).buttonWatchVideo,
-						url: href, // We are not redirecting directly to the raw video stream, it's only the player page
-					},
-				];
-			}
-
-			switch (true) {
-				case firstLine === "Publicité": {
-					presenceData.details = (await strings).watchingAd;
-					presenceData.state = privacy
-						? ""
-						: `${
-								secondLine === null
-									? ""
-									: secondLine.split("commence")[0].trim()
-						  }`;
-
-					if (time) presenceData.startTimestamp = browsingTimestamp;
-					break;
-				}
-				default: {
-					presenceData.details = privacy
-						? (await strings).watchingShow
-						: `${(await strings).watching} ${parseInformations().name}`;
-					// If 1st line === 2nd line then it's a Movie, 1st line !== 2nd line then it's a Tv Show
-					if (firstLine.toLowerCase() !== secondLine.toLowerCase())
-						presenceData.state = privacy ? "" : secondLine; // Content of second line
-
-					if (time) {
-						if (
-							document
-								.querySelector('[type="duration"]')
-								.textContent.includes("-")
-						) {
-							presenceData.endTimestamp = presence.getTimestamps(
-								0,
-								presence.timestampFromFormat(
-									document
-										.querySelector('[type="duration"]')
-										.textContent.replace("-", "")
-								)
-							)[1];
-						} else {
-							presenceData.endTimestamp = presence.getTimestamps(
-								presence.timestampFromFormat(
-									document.querySelector('[type="currentTime"]').textContent
-								),
-								presence.timestampFromFormat(
-									document.querySelector('[type="duration"]').textContent
-								)
-							)[1];
-						}
-					}
-					break;
-				}
-			}
-
-			presenceData.largeImageKey = await getShortURL(document.querySelector("meta[property=\"og:image\"]").getAttribute("content"));
 			break;
 		}
-		case pathname !== null: {
-			presenceData.details = (await strings).viewAPage;
-			presenceData.largeImageKey = Assets.Animated;
+		/* MEDIA PAGE (Page de media)
+
+		(https://www.rtlplay.be/rtlplay/salvation~2ab30366-51fe-4b29-a720-5e41c9bd6991) */
+		case pathname.split("/")[2].length > 15: {
+			let subtitle = document.querySelector(
+				'dd.detail__meta-label[title="Année de production"]'
+			)
+				? document.querySelector(
+						'dd.detail__meta-label[title="Année de production"]'
+				  ).textContent
+				: ""; // Get Release Year
+			subtitle += document.querySelector('dd.detail__meta-label[title="Durée"]')
+				? ` - ${
+						document.querySelector('dd.detail__meta-label[title="Durée"]')
+							.textContent
+				  }`
+				: ""; // Get Duration
+			for (
+				let i = 0;
+				document.querySelectorAll("dl:nth-child(1) > dd > a").length > i;
+				i++ // Get Genres
+			) {
+				subtitle += ` - ${
+					document.querySelectorAll("dl:nth-child(1) > dd > a")[i].textContent
+				}`;
+			}
+
+			presenceData.details = (await strings).viewPage;
+			presenceData.state =
+				document.querySelectorAll("h1.detail__title")[0].textContent;
+
+			presenceData.largeImageText = subtitle;
+
+			if (poster) {
+				presenceData.largeImageKey = await getShortURL(
+					document.querySelectorAll("img.detail__poster")[0].getAttribute("src")
+				);
+			}
+
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = (await strings).viewAPage;
+			break;
+		}
+		default: {
+			presenceData.details = (await strings).viewAPage;
 			break;
 		}
 	}

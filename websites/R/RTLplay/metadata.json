@@ -9,9 +9,13 @@
 		"en": "With RTLplay, you'll find all the programs of our RTL TVI, Club RTL, Plug RTL, Bel RTL and Radio Contact channels live and in replay, as well as exclusive content.",
 		"fr": "Avec RTLplay, retrouvez tous les programmes de nos chaînes RTL TVI, Club RTL, Plug RTL, Bel RTL et Radio Contact en direct et en replay ainsi que des contenus exclusifs."
 	},
-	"url": "www.rtlplay.be",
+	"url": [
+		"www.rtlplay.be",
+		"www.radiocontact.be"
+	],
 	"matches": [
-		"*://*.rtlplay.be/*"
+		"*://*.rtlplay.be/*",
+		"*://*.radiocontact.be/*"
 	],
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/KNsI47l.png",
@@ -34,13 +38,48 @@
 	],
 	"settings": [
 		{
+			"id": "lang",
+			"multiLanguage": true
+		},
+		{
 			"id": "privacy",
 			"title": "Privacy Mode",
 			"icon": "fad fa-user-secret",
 			"value": false
 		},
 		{
+			"id": "usePresenceName",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Title as Presence",
+			"icon": "fad fa-user-edit",
+			"value": true
+		},
+		{
+			"id": "useChannelName",
+			"if": {
+				"privacy": false,
+				"usePresenceName": true
+			},
+			"title": "Show Live Channel as Presence",
+			"icon": "fad fa-signal-stream",
+			"value": true
+		},
+		{
+			"id": "usePosterImage",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Poster Image",
+			"icon": "fad fa-images",
+			"value": true
+		},
+		{
 			"id": "time",
+			"if": {
+				"privacy": false
+			},
 			"title": "Show Timestamps",
 			"icon": "fad fa-stopwatch",
 			"value": true
