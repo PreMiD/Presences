@@ -40,7 +40,7 @@ const presence = new Presence({
 let oldLang: string = null,
 	strings: Awaited<ReturnType<typeof getStrings>>;
 
-const enum Assets { // Other default assets can be found at index.d.ts
+const enum Assets {
 	Logo = "https://i.imgur.com/KNsI47l.png",
 	Animated = "https://imgur.com/uAqZdFg.gif",
 	Deferred = "https://i.imgur.com/o69hUKD.gif",
@@ -533,16 +533,6 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 	}
-
-	if ((presenceData.startTimestamp || presenceData.endTimestamp) && !time) {
-		delete presenceData.startTimestamp;
-		delete presenceData.endTimestamp;
-	}
-	// if (presenceData.details === "") delete presenceData.details;
-	// if (presenceData.state === "") delete presenceData.state;
-
-	if ((!buttons || privacy) && presenceData.buttons)
-		delete presenceData.buttons;
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
