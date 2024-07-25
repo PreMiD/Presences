@@ -120,7 +120,6 @@ async function getShortURL(url: string) {
 		return url;
 	}
 }
-let strings: Awaited<ReturnType<typeof getStrings>>
 
 presence.on("UpdateData", async () => {
 	const { hostname, href, pathname } = document.location,
@@ -253,7 +252,7 @@ presence.on("UpdateData", async () => {
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: strings.buttonViewPage, // Need to be a general string
+							label: strings.buttonViewPage,
 							url: href, // We are not redirecting directly to the raw video stream, it's only the media page
 						},
 					];
@@ -401,8 +400,7 @@ presence.on("UpdateData", async () => {
 		(https://www.rtlplay.be/rtlplay/player/75e9a91b-29d1-4856-be8c-0b3532862404) */
 		case pathname.split("/")[2] === "player": {
 			const {
-				mediaName = document.querySelector("h1.lfvp-player__title")
-					.textContent,
+				mediaName = document.querySelector("h1.lfvp-player__title").textContent,
 				seasonNumber = "",
 				episodeNumber = "",
 				episodeName = "",
@@ -414,18 +412,16 @@ presence.on("UpdateData", async () => {
 					) || {}
 			).groups || {};
 			if (privacy) {
-				presenceData.details =
-					!episodeName
-						? strings.watchingShow
-						: strings.watchingMovie;
+				presenceData.details = !episodeName
+					? strings.watchingShow
+					: strings.watchingMovie;
 				presenceData.largeImageKey = Assets.Logo;
 			} else {
 				if (usePresenceName) presenceData.name = mediaName;
 
-				presenceData.details =
-					!episodeName
-						? `${strings.watching} ${mediaName}`
-						: strings.watchingMovie;
+				presenceData.details = !episodeName
+					? `${strings.watching} ${mediaName}`
+					: strings.watchingMovie;
 				presenceData.state = episodeName !== "" ? episodeName : mediaName;
 
 				if (poster) {
@@ -440,11 +436,8 @@ presence.on("UpdateData", async () => {
 					);
 				}
 
-				if (seasonNumber && episodeNumber) {
-					presenceData.largeImageText = `${
-						strings.season
-					} ${seasonNumber} - ${strings.episode} ${episodeNumber}`;
-				}
+				if (seasonNumber && episodeNumber)
+					presenceData.largeImageText = `${strings.season} ${seasonNumber} - ${strings.episode} ${episodeNumber}`;
 
 				if (time) {
 					presenceData.endTimestamp = presence.getTimestamps(
@@ -528,16 +521,14 @@ presence.on("UpdateData", async () => {
 
 				if (poster) {
 					presenceData.largeImageKey = await getShortURL(
-						document
-							.querySelector("img.detail__poster")
-							.getAttribute("src")
+						document.querySelector("img.detail__poster").getAttribute("src")
 					);
 				}
 
 				if (buttons) {
 					presenceData.buttons = [
 						{
-							label: (await strings).buttonViewPage, // Need to be a general string
+							label: strings.buttonViewPage, // Need to be a general string
 							url: href, // We are not redirecting directly to the raw video stream, it's only the media page
 						},
 					];
