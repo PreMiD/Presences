@@ -8,14 +8,20 @@
 	"description": {
 		"en": "Salad is a worldwide computesharing community composed of thousand of gamers. Our users, the mighty Salad Chefs, share resources from their idle PCs, power advanced computing projects, and score real-life-rewards."
 	},
-	"url": ["salad.com", "community.salad.com", "support.salad.io"],
-	"version": "1.0.0",
-	"logo": "https://i.postimg.cc/Px59fwQx/Salad-Logo.png",
-	"thumbnail": "https://salad.com/images/blog_all_new_container_workloads.png",
+	"url": [
+		"salad.com",
+		"community.salad.com",
+		"support.salad.io"
+	],
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Salad/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Salad/assets/thumbnail.png",
 	"color": "#54a628",
 	"category": "other",
 	"tags": [
-		"salad", "mining", "crypto"
+		"salad",
+		"mining",
+		"crypto"
 	],
 	"settings": [
 		{
