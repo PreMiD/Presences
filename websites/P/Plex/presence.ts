@@ -221,7 +221,7 @@ presence.on("UpdateData", async () => {
 			if (cover && navigator.mediaSession.metadata?.artwork[0].src) {
 				const art = navigator.mediaSession.metadata.artwork?.[0]?.src;
 				presenceData.largeImageKey = art?.match(
-					/(\d+)(?<!10)\-(\d+)(192\-168)?(?<!172\-(1[6-9]|2\d|3[0-1]))\-(\d+)\.(\d+)/gm
+					/(\d+)(?<!10)-(\d+)(192-168)?(?<!172-(1[6-9]|2\d|3[0-1]))-(\d+)\.(\d+)/gm
 				)?.[0] // Checks if it's a private ip, since u can't access that to use as a large/smallimagekey.
 					? Assets.Logo // If it's a private ip, just use the logo.
 					: await getShortURL(
