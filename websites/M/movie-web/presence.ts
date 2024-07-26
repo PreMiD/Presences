@@ -97,9 +97,10 @@ presence.on("UpdateData", async () => {
 		}
 
 		const title = `${meta.title} (${meta.year})`;
+		presenceData.name = title;
 
 		if (meta.type === "show" && episode && season)
-			presenceData.details = `${title} - S${season.number}E${episode.number}`;
+			presenceData.details = `Season ${season.number}, Episode ${episode.number}`;
 		else presenceData.details = title;
 
 		if (controls.isLoading) {
