@@ -205,9 +205,9 @@ presence.on("UpdateData", async () => {
 			if (
 				document.querySelector("[class^=PlayerControls-buttonGroupCenter]")
 					.children.length > 1
-			) {
+			)
 				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(media);
-			} else {
+			else {
 				const formatTimestamps = document
 					.querySelector('[data-testid="mediaDuration"]')
 					?.textContent.split(" ");
