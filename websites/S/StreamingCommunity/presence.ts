@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 const enum Assets {
-	Logo = "https://i.imgur.com/QPYMT04.png",
+	Logo = "https://i.imgur.com/KbJrDH1.png",
 }
 
 async function getStrings() {
@@ -37,9 +37,9 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 		},
-		[newLang] = await Promise.all([
+		[newLang, cover] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
-			//presence.getSetting<boolean>("cover"),
+			presence.getSetting<boolean>("cover"),
 		]),
 		{ pathname } = document.location;
 
@@ -53,7 +53,28 @@ presence.on("UpdateData", async () => {
 		presenceData.details = `${strings.search} ${
 			document.querySelector<HTMLInputElement>(".search-input > input")?.value
 		}`;
-	} else presenceData.details = `${current} ${duration} ${paused}`; // TO DELETE
+	} else if (pathname.startsWith("/titles")) {
+		presenceData.smallImageKey = Assets.Viewing;
+		presenceData.smallImageText = strings.viewShow;
+		presenceData.details = `${strings.viewShow} ${pathname
+			.replace(/\/titles\/\d+/g, "")
+			.replaceAll("-", " ")}`;
+		presenceData.largeImageKey = cover
+			? document.querySelector<HTMLSourceElement>(
+					".background-image-loader > source"
+			  )?.srcset ?? Assets.Logo
+			: Assets.Logo;
+	} else if (pathname.startsWith("/watch")) {
+		delete presenceData.startTimestamp;
+		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
+		presenceData.smallImageText = paused ? strings.paused : strings.play;
+		presenceData.details = `${document
+			.querySelector("title")
+			?.textContent?.replace("- StreamingCommunity", "")
+			?.replace("Watch", "")}`;
+		if (!isNaN(duration) && !paused)
+			[, presenceData.endTimestamp] = presence.getTimestamps(current, duration);
+	}
 
 	presence.setActivity(presenceData);
 });
