@@ -135,6 +135,10 @@ function getTranslation(stringName: string): string {
 
 let isUploading = false;
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/P/Plex/assets/logo.png",
+}
+
 const uploadedImages: Record<string, string> = {};
 async function uploadImage(urlToUpload: string): Promise<string> {
 	if (isUploading) return "plex";
@@ -183,32 +187,48 @@ async function getShortURL(url: string) {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/Plex/assets/logo.png",
-		startTimestamp: browsingTimestamp,
-	};
+			largeImageKey: Assets.Logo,
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname, href } = document.location;
 
 	if (document.querySelector("#plex")) {
 		if (document.querySelector("#plex > div:nth-child(4) > div")) {
 			const media = document.querySelector<HTMLVideoElement | HTMLAudioElement>(
 					"#plex > div:nth-child(4) > div > div:nth-child(1) > :is(video, audio)"
 				),
-				cover = await presence.getSetting<boolean>("cover");
+				[cover, titlePresenceName] = await Promise.all([
+					presence.getSetting<boolean>("cover"),
+					presence.getSetting<boolean>("usePresenceName"),
+				]);
 
-			if (!media) return;
 			if (
 				document.querySelector("[class^=PlayerControls-buttonGroupCenter]")
 					.children.length > 1
-			) {
-				[presenceData.startTimestamp, presenceData.endTimestamp] =
-					presence.getTimestampsfromMedia(media);
+			)
+				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(media);
+			else {
+				const formatTimestamps = document
+					.querySelector('[data-testid="mediaDuration"]')
+					?.textContent.split(" ");
+
+				[, presenceData.endTimestamp] = presence.getTimestamps(
+					presence.timestampFromFormat(formatTimestamps?.[0]),
+					presence.timestampFromFormat(formatTimestamps?.[1])
+				);
 			}
 
 			if (cover && navigator.mediaSession.metadata?.artwork[0].src) {
-				presenceData.largeImageKey = await getShortURL(
-					navigator.mediaSession.metadata.artwork[0].src
-						.replace(/width=[0-9]{1,3}/, "width=1024")
-						.replace(/height=[0-9]{1,3}/, "height=1024")
-				);
+				const art = navigator.mediaSession.metadata.artwork?.[0]?.src;
+				presenceData.largeImageKey = art?.match(
+					/(\d+)(?<!10)-(\d+)(192-168)?(?<!172-(1[6-9]|2\d|3[0-1]))-(\d+)\.(\d+)/gm
+				)?.[0] // Checks if it's a private ip, since u can't access that to use as a large/smallimagekey.
+					? Assets.Logo // If it's a private ip, just use the logo.
+					: await getShortURL(
+							art
+								.replace(/width=[0-9]{1,3}/, "width=1024")
+								.replace(/height=[0-9]{1,3}/, "height=1024")
+					  );
 			}
 
 			presenceData.smallImageKey = media.paused ? Assets.Pause : Assets.Play;
@@ -225,14 +245,24 @@ presence.on("UpdateData", async () => {
 					.map(node => node.textContent)
 					.join(" ");
 
-			presenceData.details = title;
+			if (!titlePresenceName) presenceData.details = title;
+			else presenceData.name = title;
+
 			presenceData.state = subTitle;
+
+			if (
+				(!navigator.mediaSession.metadata.artist &&
+					!navigator.mediaSession.metadata.album) ||
+				!!document.querySelector(".application.show-video-player")
+			)
+				presenceData.type = ActivityType.Watching;
+			else presenceData.type = ActivityType.Listening;
 
 			if (media.paused) {
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
 			}
-		} else if (document.URL.includes("/tv.plex.provider.webshows")) {
+		} else if (href.includes("/tv.plex.provider.webshows")) {
 			presenceData.details = getTranslation("WebShows");
 			const title = document.querySelector(
 				"#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span"
@@ -241,9 +271,9 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing webshow:";
 				presenceData.state = title.textContent;
 			}
-		} else if (document.URL.includes("/tv.plex.provider.news"))
+		} else if (href.includes("/tv.plex.provider.news"))
 			presenceData.details = getTranslation("News");
-		else if (document.URL.includes("/tv.plex.provider.podcasts")) {
+		else if (href.includes("/tv.plex.provider.podcasts")) {
 			presenceData.details = getTranslation("Podcasts");
 			const title = document.querySelector(
 				"#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span"
@@ -252,7 +282,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing podcast:";
 				presenceData.state = title.textContent;
 			}
-		} else if (document.URL.includes("/tv.plex.provider.music")) {
+		} else if (href.includes("/tv.plex.provider.music")) {
 			presenceData.details = getTranslation("Music");
 			const title = document.querySelector(
 				"#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > span"
@@ -261,7 +291,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing album:";
 				presenceData.state = title.textContent;
 			}
-		} else if (document.URL.includes("/search")) {
+		} else if (href.includes("/search")) {
 			const search = document.querySelector(
 				"#plex > div:nth-child(3) > div > div:nth-child(2) > div > div:nth-child(2) > span"
 			);
@@ -269,18 +299,18 @@ presence.on("UpdateData", async () => {
 			presenceData.details = getTranslation("Search");
 			presenceData.state = search.textContent.split('"')[1].replace('"', "");
 			presenceData.smallImageKey = Assets.Search;
-		} else if (document.URL.includes("/com.plexapp.plugins.library")) {
+		} else if (href.includes("/com.plexapp.plugins.library")) {
 			presenceData.details = getTranslation("Library");
 			presenceData.state = document.querySelector(
 				"#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a > div:nth-child(1)"
 			).textContent;
-		} else if (document.URL.includes("content.collections")) {
+		} else if (href.includes("content.collections")) {
 			presenceData.details = getTranslation("Collection");
 			presenceData.state = document.querySelector(
 				"#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > span"
 			).textContent;
 		} else if (
-			document.URL.includes("content.playlists") &&
+			href.includes("content.playlists") &&
 			document.querySelector(
 				"#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > span"
 			)
@@ -289,27 +319,27 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				"#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > span"
 			).textContent;
-		} else if (document.URL.includes("tv.plex.provider.vod")) {
+		} else if (href.includes("tv.plex.provider.vod")) {
 			presenceData.details = getTranslation("Vod");
 			presenceData.state = document.querySelector(
 				"#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div > span"
 			).textContent;
-		} else if (document.URL.includes("/server/")) {
+		} else if (href.includes("/server/")) {
 			presenceData.details = getTranslation("Vod");
 			presenceData.state = document.querySelector(
 				"#plex > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div > span"
 			).textContent;
 		} else if (
-			document.URL === "https://app.plex.tv/" ||
-			document.URL === "https://app.plex.tv/desktop" ||
-			document.URL === "https://app.plex.tv/desktop#" ||
-			document.URL === "https://app.plex.tv/desktop/#!/" ||
-			document.location.pathname === "/web/index.html" ||
-			document.location.pathname === "/web/index.html#"
+			href === "https://app.plex.tv/" ||
+			href === "https://app.plex.tv/desktop" ||
+			href === "https://app.plex.tv/desktop#" ||
+			href === "https://app.plex.tv/desktop/#!/" ||
+			pathname === "/web/index.html" ||
+			pathname === "/web/index.html#"
 		)
 			presenceData.details = getTranslation("HomePage");
 
-		if (!presenceData.details) presence.setActivity();
+		if (!presenceData.details && !presenceData.name) presence.setActivity();
 		else presence.setActivity(presenceData);
 	}
 });
