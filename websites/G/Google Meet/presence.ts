@@ -90,7 +90,6 @@ presence.on("UpdateData", async () => {
 	const meetTime = document.querySelector('[jsname="W5i7Bf"]')?.textContent,
 		meetPeople = document.querySelector(".uGOf1d")?.textContent;
 
-	console.log(meetTitle);
 	if (
 		(!meetTitle ||
 			meetTitle?.includes("Read to join") ||
