@@ -43,19 +43,19 @@ let oldLang: string = null,
 	strings: Awaited<ReturnType<typeof getStrings>>;
 
 const enum Assets {
-	Logo = "https://i.imgur.com/KNsI47l.png",
-	Animated = "https://imgur.com/uAqZdFg.gif",
-	Deferred = "https://i.imgur.com/OFo18wQ.gif",
-	LiveAnimated = "https://i.imgur.com/9biNpEO.gif",
-	Listening = "https://i.imgur.com/9ZFChOG.png",
-	AdEn = "https://i.imgur.com/xtg8CWj.png",
-	AdFr = "https://i.imgur.com/gpIKYlf.png",
-	RTLPlay = "https://i.imgur.com/1f5rMxV.png",
-	RTLTVi = "https://i.imgur.com/wnjbhCe.png",
-	RTLClub = "https://i.imgur.com/8FwZa7m.png",
-	RTLPlug = "https://i.imgur.com/jfYLcJu.png",
-	BelRTL = "https://i.imgur.com/1yZelPm.png",
-	Contact = "https://i.imgur.com/ULP7pgr.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/logo.png",
+	Animated = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/0.gif",
+	Deferred = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/1.gif",
+	LiveAnimated = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/2.gif",
+	Listening = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/3.png",
+	AdEn = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/4.png",
+	AdFr = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/5.png",
+	RTLPlay = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/6.png",
+	RTLTVi = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/7.png",
+	RTLClub = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/8.png",
+	RTLPlug = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/9.png",
+	BelRTL = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/10.png",
+	Contact = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/11.png",
 }
 
 function getAdditionnalStrings(lang: string) {
