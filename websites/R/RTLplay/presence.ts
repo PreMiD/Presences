@@ -48,8 +48,8 @@ const enum Assets {
 	Deferred = "https://i.imgur.com/OFo18wQ.gif",
 	LiveAnimated = "https://i.imgur.com/9biNpEO.gif",
 	Listening = "https://i.imgur.com/9ZFChOG.png",
-	Ad_En = "https://i.imgur.com/xtg8CWj.png",
-	Ad_Fr = "https://i.imgur.com/gpIKYlf.png",
+	AdEn = "https://i.imgur.com/xtg8CWj.png",
+	AdFr = "https://i.imgur.com/gpIKYlf.png",
 	RTLPlay = "https://i.imgur.com/1f5rMxV.png",
 	RTLTVi = "https://i.imgur.com/wnjbhCe.png",
 	RTLClub = "https://i.imgur.com/8FwZa7m.png",
@@ -282,8 +282,8 @@ presence.on("UpdateData", async () => {
 				case hostname === "www.rtlplay.be": {
 					if (exist("div.playerui__adBreakInfo")) {
 						presenceData.smallImageKey = ["fr-FR"].includes(lang)
-							? Assets.Ad_Fr
-							: Assets.Ad_En;
+							? Assets.AdFr
+							: Assets.AdEn;
 						presenceData.smallImageText = strings.watchingAd;
 					} else if (exist("i.playerui__icon--name-play")) {
 						// State paused
@@ -525,15 +525,15 @@ presence.on("UpdateData", async () => {
 				// State paused
 				presenceData.smallImageKey = ad
 					? ["fr-FR"].includes(lang)
-						? Assets.Ad_Fr
-						: Assets.Ad_En
+						? Assets.AdFr
+						: Assets.AdEn
 					: Assets.Pause;
 				presenceData.smallImageText = ad ? strings.watchingAd : strings.pause;
 			} else {
 				presenceData.smallImageKey = ad
 					? ["fr-FR"].includes(lang)
-						? Assets.Ad_Fr
-						: Assets.Ad_En
+						? Assets.AdFr
+						: Assets.AdEn
 					: Assets.Play;
 				presenceData.smallImageText = ad ? strings.watchingAd : strings.play;
 			}
