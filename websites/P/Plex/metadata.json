@@ -12,7 +12,7 @@
 	},
 	"url": "www.plex.tv",
 	"regExp": "(([a-z0-9-]+[.])*plex[.]tv[/])|( *[/]web[/]index[.]html#)",
-	"version": "1.9.9",
+	"version": "1.10.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Plex/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Plex/assets/thumbnail.png",
 	"color": "#d78c14",
@@ -27,6 +27,12 @@
 			"title": "Show Cover",
 			"icon": "fad fa-images",
 			"value": true
+		},
+		{
+			"id": "usePresenceName",
+			"title": "Show Title as Presence",
+			"icon": "fad fa-user-edit",
+			"value": false
 		}
 	]
 }
