@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = "Loading";
 		} else if (controls.isPlaying) {
 			[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(
-				document.querySelector("video"),
+				document.querySelector("video")
 			);
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Playing";
@@ -134,7 +134,7 @@ function createProgressBar(
 		barTrack: string;
 		barFill: string;
 		showLabel: boolean;
-	},
+	}
 ): string {
 	const { barLengthString, barTrack, barFill, showLabel } = barOptions,
 		progress = Math.floor((time / duration) * 100),
@@ -144,7 +144,7 @@ function createProgressBar(
 		numChars = Math.floor((progress / 100) * barLength);
 
 	return `${barFill.repeat(numChars)}${barTrack.repeat(
-		barLength - numChars,
+		barLength - numChars
 	)}  ${showLabel ? `${progress}%` : ""}`.trimEnd();
 }
 
