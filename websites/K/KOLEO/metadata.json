@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "630812692659044352",
+		"name": "itsmateo20"
+	},
+	"service": "KOLEO",
+	"description": {
+		"en": "Check the PKP timetable and train ticket prices. Buy a ticket for POLREGIO, PKP SKM in Tricity and other railways quickly and conveniently without any fees!"
+	},
+	"url": [
+		"koleo.pl",
+		"pomoc.koleo.pl",
+		"sklep.koleo.pl",
+		"magazyn.koleo.pl",
+		"travel.koleo.pl",
+		"aplikacja.koleo.pl"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/idEEfM8.png",
+	"thumbnail": "https://i.imgur.com/IcSeLF4.png",
+	"color": "#1A7EED",
+	"category": "other",
+	"tags": [
+		"pkp",
+		"polskie-koleje",
+		"bilety-kolejowe",
+		"transport"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy mode",
+			"icon": "fas fa-user-secret",
+			"value": false
+		}
+	]
+}
