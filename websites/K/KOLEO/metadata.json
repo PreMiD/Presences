@@ -1,12 +1,13 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "630812692659044352",
 		"name": "itsmateo20"
 	},
 	"service": "KOLEO",
 	"description": {
-		"en": "Check the PKP timetable and train ticket prices. Buy a ticket for POLREGIO, PKP SKM in Tricity and other railways quickly and conveniently without any fees!"
+		"en": "Check the PKP timetable and train ticket prices. Buy a ticket for POLREGIO, PKP SKM in Tricity and other railways quickly and conveniently without any fees!",
+		"pl": "Sprawdź rozkład jazdy PKP oraz ceny biletów na pociągi. Kup bilet na POLREGIO, PKP SKM w Trójmieście i inne koleje szybko i wygodnie bez żadnych opłat!"
 	},
 	"url": [
 		"koleo.pl",
