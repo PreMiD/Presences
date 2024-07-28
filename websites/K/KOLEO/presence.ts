@@ -151,7 +151,6 @@ presence.on("UpdateData", async () => {
 				if (oldStations && oldStations[0] === href) {
 					if (!privacySetting) {
 						if (
-							oldStations &&
 							oldStations[0] === href &&
 							startText === oldStations[1] &&
 							endText === oldStations[2] &&
@@ -412,15 +411,11 @@ presence.on("UpdateData", async () => {
 
 					if (stations)
 						for (const station of stations) uniqueStations.add(station);
-
 					if (trainClasses)
 						uniqueClasses.add(trainClasses.replace("Klasa ", ""));
 					if (operators) uniqueOperators.add(operators);
-
-					if (distance && !isNaN(distance))
-						mergedTicketData.tempDistance += distance;
-
-					if (price && !isNaN(price)) mergedTicketData.tempPrice += price;
+					if (distance) mergedTicketData.tempDistance += distance;
+					if (price) mergedTicketData.tempPrice += price;
 				}
 
 				mergedTicketData.stations = Array.from(uniqueStations) as string[];
@@ -722,9 +717,7 @@ presence.on("UpdateData", async () => {
 					metaOfPage?.querySelector("div.meta-date span")?.textContent;
 			if (authorOfPage) {
 				presenceData.details = `Czyta temat${
-					authorOfPage && !privacySetting
-						? ` napisany przez ${authorOfPage}`
-						: ""
+					!privacySetting ? ` napisany przez ${authorOfPage}` : ""
 				}.`;
 				if (!privacySetting) {
 					presenceData.state = [
@@ -756,7 +749,6 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [{ label: "Przeczytaj artykuł", url: href }];
 		}
 	} else if (href.startsWith("https://travel.koleo.pl")) {
-		currentPath = href.replace("https://travel.koleo.pl", "");
 		presenceData.name = "KOLEO - travel";
 		presenceData.largeImageKey = Assets.Logo2;
 		presenceData.smallImageKey = Assets.Viewing;
