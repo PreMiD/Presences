@@ -130,6 +130,114 @@ function exist(selector: string) {
 	return document.querySelector(selector) !== null;
 }
 
+// Adapted veryCrunchy's function from YouTube Presence https://github.com/PreMiD/Presences/pull/8000
+async function getThumbnail(src: string): Promise<string> {
+	return new Promise(resolve => {
+		const img = new Image(),
+			wh = 320,
+			borderThickness = 15, // Thickness of the gradient border
+			cropLeftRightPercentage = 0.14, // Percentage to crop from left and right for landscape mode (e.g., 0.1 for 10%)
+			cropTopBottomPercentage = 0.025; // Percentage to crop from top and bottom for portrait mode (e.g., 0.1 for 10%)
+		img.crossOrigin = "anonymous";
+		img.src = src;
+
+		img.onload = function () {
+			let croppedWidth,
+				croppedHeight,
+				cropX = 0,
+				cropY = 0;
+
+			if (img.width > img.height) {
+				// Landscape mode: crop left and right
+				const cropLeftRight = img.width * cropLeftRightPercentage;
+				croppedWidth = img.width - 2 * cropLeftRight;
+				croppedHeight = img.height;
+				cropX = cropLeftRight;
+			} else {
+				// Portrait mode: crop top and bottom
+				const cropTopBottom = img.height * cropTopBottomPercentage;
+				croppedWidth = img.width;
+				croppedHeight = img.height - 2 * cropTopBottom;
+				cropY = cropTopBottom;
+			}
+
+			const isLandscape = croppedWidth >= croppedHeight;
+			let newWidth, newHeight, offsetX, offsetY;
+
+			if (isLandscape) {
+				newWidth = wh;
+				newHeight = (wh / croppedWidth) * croppedHeight;
+				offsetX = 0;
+				offsetY = (wh - newHeight) / 2;
+			} else {
+				newHeight = wh;
+				newWidth = (wh / croppedHeight) * croppedWidth;
+				offsetX = (wh - newWidth) / 2;
+				offsetY = 0;
+			}
+
+			const tempCanvas = document.createElement("canvas");
+			tempCanvas.width = wh;
+			tempCanvas.height = wh;
+			const ctx = tempCanvas.getContext("2d");
+
+			// Fill the canvas with the background color
+			ctx.fillStyle = "#172e4e";
+			ctx.fillRect(0, 0, wh, wh);
+
+			// Create the gradient
+			const gradient = ctx.createLinearGradient(0, 0, wh, 0);
+			gradient.addColorStop(0, "rgba(245,3,26,1)");
+			gradient.addColorStop(0.5, "rgba(63,187,244,1)");
+			gradient.addColorStop(1, "rgba(164,215,12,1)");
+
+			// Draw the gradient borders
+			if (isLandscape) {
+				// Top border
+				ctx.fillStyle = gradient;
+				ctx.fillRect(0, offsetY - borderThickness, wh, borderThickness);
+
+				// Bottom border
+				ctx.fillStyle = gradient;
+				ctx.fillRect(0, offsetY + newHeight, wh, borderThickness);
+			} else {
+				// Create a vertical gradient for portrait mode
+				const verticalGradient = ctx.createLinearGradient(0, 0, 0, wh);
+				verticalGradient.addColorStop(0, "rgba(245,3,26,1)");
+				verticalGradient.addColorStop(0.5, "rgba(63,187,244,1)");
+				verticalGradient.addColorStop(1, "rgba(164,215,12,1)");
+
+				// Left border
+				ctx.fillStyle = verticalGradient;
+				ctx.fillRect(offsetX - borderThickness, 0, borderThickness, wh);
+
+				// Right border
+				ctx.fillStyle = verticalGradient;
+				ctx.fillRect(offsetX + newWidth, 0, borderThickness, wh);
+			}
+
+			// Draw the cropped image
+			ctx.drawImage(
+				img,
+				cropX,
+				cropY,
+				croppedWidth,
+				croppedHeight,
+				offsetX,
+				offsetY,
+				newWidth,
+				newHeight
+			);
+
+			resolve(tempCanvas.toDataURL("image/png"));
+		};
+
+		img.onerror = function () {
+			resolve(src);
+		};
+	});
+}
+
 presence.on("UpdateData", async () => {
 	const { hostname, href, pathname } = document.location,
 		presenceData: PresenceData = {
@@ -335,7 +443,7 @@ presence.on("UpdateData", async () => {
 
 							if (media.results.now.type === "PE_E") {
 								// When a song is played
-								presenceData.largeImageKey = media.results.now.songArtURL;
+								presenceData.largeImageKey = media.results.now.songArtURL; // Song cover art are always square so we don't need to generate a thumbnail
 								presenceData.largeImageText = `${media.results.now.name} - ${media.results.now.artistName}`;
 							} else {
 								// When we don't have a song, we simply show the radio name as the show name is already displayed in state
@@ -416,12 +524,16 @@ presence.on("UpdateData", async () => {
 							// When a song is played
 							presenceData.details = data.results.now.name;
 							presenceData.state = data.results.now.artistName;
-							presenceData.largeImageKey = data.results.now.songArtURL;
+							presenceData.largeImageKey = await getThumbnail(
+								data.results.now.songArtURL
+							);
 						} else {
 							// When there's no song and only the show
 							presenceData.details = data.results.pis[0].programmeName;
 							presenceData.state = data.results.pis[0].programmeDescription;
-							presenceData.largeImageKey = data.results.pis[0].imageUrl;
+							presenceData.largeImageKey = await getThumbnail(
+								data.results.pis[0].imageUrl
+							);
 						}
 
 						presenceData.largeImageText = getChannel("contact").channel;
@@ -471,13 +583,15 @@ presence.on("UpdateData", async () => {
 				presenceData.state = episodeName || mediaName;
 
 				if (poster) {
-					presenceData.largeImageKey = document
-						.querySelector("#content > script")
-						.textContent.match(
-							/window\.App\.playerData\s*=\s*\{[\s\S]*?poster:\s*"(.*?)",/
-						)[1]
-						.replace(/\\u0026/g, "&")
-						.replace(/\\/g, "");
+					presenceData.largeImageKey = await getThumbnail(
+						document
+							.querySelector("#content > script")
+							.textContent.match(
+								/window\.App\.playerData\s*=\s*\{[\s\S]*?poster:\s*"(.*?)",/
+							)[1]
+							.replace(/\\u0026/g, "&")
+							.replace(/\\/g, "")
+					);
 				}
 
 				if (seasonNumber && episodeNumber)
@@ -580,9 +694,9 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageText = subtitle;
 
 				if (poster) {
-					presenceData.largeImageKey = document
-						.querySelector("img.detail__poster")
-						.getAttribute("src");
+					presenceData.largeImageKey = await getThumbnail(
+						document.querySelector("img.detail__poster").getAttribute("src")
+					);
 				}
 
 				if (buttons) {
