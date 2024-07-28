@@ -140,24 +140,15 @@ presence.on("UpdateData", async () => {
 				meetTitle,
 				meetPeople
 			);
-			pdCache = {
-				name: presenceData?.name,
-				details: presenceData?.details,
-				state: presenceData?.state,
-				meetTitle: presenceName ?? "",
-				meetDetails: presenceDetail ?? "",
-				meetState: presenceState ?? "",
-			};
-		} else {
-			pdCache = {
-				name: "",
-				details: presenceData?.details,
-				state: presenceData?.state,
-				meetTitle: presenceName ?? "",
-				meetDetails: presenceDetail ?? "",
-				meetState: presenceState ?? "",
-			};
 		}
+		pdCache = {
+			name: presenceData?.name ?? "",
+			details: presenceData?.details,
+			state: presenceData?.state,
+			meetTitle: presenceName ?? "",
+			meetDetails: presenceDetail ?? "",
+			meetState: presenceState ?? "",
+		};
 	} else if (pdCache?.details) {
 		if (usePresenceName) presenceData.name = pdCache.name;
 		presenceData.details = pdCache.details;
