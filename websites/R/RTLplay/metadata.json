@@ -20,8 +20,8 @@
 		"*://*.radiocontact.be/*"
 	],
 	"version": "1.0.0",
-	"logo": "https://i.imgur.com/KNsI47l.png",
-	"thumbnail": "https://i.imgur.com/WURTyw5.jpg",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/thumbnail.jpg",
 	"color": "#121726",
 	"category": "videos",
 	"tags": [
