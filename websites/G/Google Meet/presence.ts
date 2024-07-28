@@ -83,22 +83,12 @@ presence.on("UpdateData", async () => {
 		return presence.setActivity(presenceData);
 	}
 
-	let meetTitle =
-		document.querySelector('[id="ucc-8"]')?.textContent ??
-		document.querySelector('[jsname="r4nke"]')?.textContent;
+	let meetTitle = document.querySelector(".lefKC")?.textContent;
 
 	const meetTime = document.querySelector('[jsname="W5i7Bf"]')?.textContent,
 		meetPeople = document.querySelector(".uGOf1d")?.textContent;
 
-	if (
-		(!meetTitle ||
-			meetTitle?.includes("Read to join") ||
-			meetTitle?.includes("left the meeting") ||
-			meetTitle?.toLowerCase()?.includes("meeting details") ||
-			!document.querySelector(".google-symbols.ebW6mc.NtU4hc") ||
-			!meetPeople) &&
-		!meetTime
-	) {
+	if ((!meetTitle || !meetTitle?.includes(":") || !meetPeople) && !meetTime) {
 		presenceData.details = "Waiting for the meeting to start.";
 		presence.setActivity(presenceData);
 		return;
@@ -110,6 +100,7 @@ presence.on("UpdateData", async () => {
 		pdCache?.meetState !== presenceState || // If cached presence setting state !== current presence setting state
 		(usePresenceName && pdCache.meetTitle !== presenceName) // If use presenceName && cached presence setting name !== current presence setting name
 	) {
+		meetTitle = meetTitle?.replace(/([0-9]{2}:[0-9]{2})( )?((am)|(pm))?/gm, "");
 		if (
 			meetTitle?.toLowerCase()?.match(/[a-z]{3}-[a-z]{4}-[a-z]{3}/gm)?.[0] &&
 			hideInviteCode
