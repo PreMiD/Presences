@@ -42,6 +42,22 @@ const presence = new Presence({
 let oldLang: string = null,
 	strings: Awaited<ReturnType<typeof getStrings>>;
 
+const enum Assets {
+	Logo = "https://i.imgur.com/KNsI47l.png",
+	Animated = "https://imgur.com/uAqZdFg.gif",
+	Deferred = "https://i.imgur.com/OFo18wQ.gif",
+	LiveAnimated = "https://i.imgur.com/9biNpEO.gif",
+	Listening = "https://i.imgur.com/9ZFChOG.png",
+	Ad_En = "https://i.imgur.com/xtg8CWj.png",
+	Ad_Fr = "https://i.imgur.com/gpIKYlf.png",
+	RTLPlay = "https://i.imgur.com/1f5rMxV.png",
+	RTLTVi = "https://i.imgur.com/wnjbhCe.png",
+	RTLClub = "https://i.imgur.com/8FwZa7m.png",
+	RTLPlug = "https://i.imgur.com/jfYLcJu.png",
+	BelRTL = "https://i.imgur.com/1yZelPm.png",
+	Contact = "https://i.imgur.com/ULP7pgr.png",
+}
+
 function getAdditionnalStrings(lang: string) {
 	switch (true) {
 		case ["fr-FR"].includes(lang): {
@@ -61,21 +77,6 @@ function getAdditionnalStrings(lang: string) {
 			break;
 		}
 	}
-}
-
-const enum Assets {
-	Logo = "https://i.imgur.com/KNsI47l.png",
-	Animated = "https://imgur.com/uAqZdFg.gif",
-	Deferred = "https://i.imgur.com/OFo18wQ.gif",
-	LiveAnimated = "https://i.imgur.com/9biNpEO.gif",
-	Listening = "https://i.imgur.com/9ZFChOG.png",
-	Ad = "https://i.imgur.com/5hd5amM.png",
-	RTLPlay = "https://i.imgur.com/1f5rMxV.png",
-	RTLTVi = "https://i.imgur.com/wnjbhCe.png",
-	RTLClub = "https://i.imgur.com/8FwZa7m.png",
-	RTLPlug = "https://i.imgur.com/jfYLcJu.png",
-	BelRTL = "https://i.imgur.com/1yZelPm.png",
-	Contact = "https://i.imgur.com/ULP7pgr.png",
 }
 
 function getChannel(channel: string) {
@@ -127,35 +128,6 @@ function getChannel(channel: string) {
 
 function exist(selector: string) {
 	return document.querySelector(selector) !== null;
-}
-
-function timeStringToMinutes(timeString: string) {
-	const timeParts = timeString.split(":").map(Number);
-	let totalSeconds = 0;
-
-	// Handle different lengths of time parts
-	switch (timeParts.length) {
-		case 4: // DD:HH:MM:SS
-			totalSeconds += timeParts[0] * 24 * 3600;
-			totalSeconds += timeParts[1] * 3600;
-			totalSeconds += timeParts[2] * 60;
-			totalSeconds += timeParts[3];
-			break;
-		case 3: // HH:MM:SS
-			totalSeconds += timeParts[0] * 3600;
-			totalSeconds += timeParts[1] * 60;
-			totalSeconds += timeParts[2];
-			break;
-		case 2: // MM:SS
-			totalSeconds += timeParts[0] * 60;
-			totalSeconds += timeParts[1];
-			break;
-		case 1: // SS
-			totalSeconds += timeParts[0];
-			break;
-	}
-
-	return Math.round(totalSeconds / 60);
 }
 
 presence.on("UpdateData", async () => {
@@ -308,7 +280,12 @@ presence.on("UpdateData", async () => {
 				["player"].includes(pathname.split("/")[1])): {
 			switch (true) {
 				case hostname === "www.rtlplay.be": {
-					if (exist("i.playerui__icon--name-play")) {
+					if (exist("div.playerui__adBreakInfo")) {
+						presenceData.smallImageKey = ["fr-FR"].includes(lang)
+							? Assets.Ad_Fr
+							: Assets.Ad_En;
+						presenceData.smallImageText = strings.watchingAd;
+					} else if (exist("i.playerui__icon--name-play")) {
 						// State paused
 						presenceData.smallImageKey = Assets.Pause;
 						presenceData.smallImageText = strings.pause;
@@ -330,7 +307,8 @@ presence.on("UpdateData", async () => {
 							!useChannelName &&
 							document
 								.querySelector("li[aria-current='true'] > a > div > h2")
-								.textContent.toLowerCase() !== "aucune donnée disponible"
+								.textContent.toLowerCase() !== "aucune donnée disponible" &&
+							!["contact", "bel"].includes(pathname.split("/")[3]) // Radio show name are not relevant
 						) {
 							presenceData.name = document.querySelector(
 								"li[aria-current='true'] > a > div > h2"
@@ -345,14 +323,40 @@ presence.on("UpdateData", async () => {
 							"li[aria-current='true'] > a > div > h2"
 						).textContent;
 
-						presenceData.largeImageKey = getChannel(
-							pathname.split("/")[3]
-						).logo;
-						presenceData.largeImageText = getChannel(
-							pathname.split("/")[3]
-						).channel;
+						if (["contact", "bel"].includes(pathname.split("/")[3])) {
+							/* Songs played in the livestream are the same as the audio radio ones but with video clips
+							Fetch the data from the Radioplayer API. It is used on the official radio contact and bel rtl websites */
+							const url = ["bel"].includes(pathname.split("/")[3])
+									? "https://core-search.radioplayer.cloud/056/qp/v4/events/?rpId=6" /* Bel RTL */
+									: "https://core-search.radioplayer.cloud/056/qp/v4/events/?rpId=1" /* Radio Contact */,
+								response = await fetch(url),
+								dataString = await response.text(),
+								media = JSON.parse(dataString);
 
-						if (time) {
+							if (media.results.now.type === "PE_E") {
+								// When a song is played
+								presenceData.largeImageKey = media.results.now.songArtURL;
+								presenceData.largeImageText = `${media.results.now.name} - ${media.results.now.artistName}`;
+							} else {
+								// When we don't have a song, we simply show the radio name as the show name is already displayed in state
+								presenceData.largeImageKey = getChannel(
+									pathname.split("/")[3]
+								).logo;
+								presenceData.largeImageText = getChannel(
+									pathname.split("/")[3]
+								).channel;
+							}
+						} else {
+							presenceData.largeImageKey = getChannel(
+								pathname.split("/")[3]
+							).logo;
+							presenceData.largeImageText = getChannel(
+								pathname.split("/")[3]
+							).channel;
+						}
+
+						if (time && exist("span.playerui__controls__stat__time")) {
+							// Radio livestream doesn't have stat time
 							presenceData.endTimestamp = presence.getTimestamps(
 								presence.timestampFromFormat(
 									document
@@ -367,12 +371,14 @@ presence.on("UpdateData", async () => {
 										.trim()
 								)
 							)[1];
-						} else {
-							presenceData.largeImageText += ` - ${timeStringToMinutes(
-								document
-									.querySelector("span.playerui__controls__stat__time")
-									.textContent.split("/")[1]
-									.trim()
+						} else if (exist("span.playerui__controls__stat__time")) {
+							presenceData.largeImageText += ` - ${Math.round(
+								presence.timestampFromFormat(
+									document
+										.querySelector("span.playerui__controls__stat__time")
+										.textContent.split("/")[1]
+										.trim()
+								) / 60
 							)} min`;
 						}
 						if (buttons) {
@@ -493,11 +499,13 @@ presence.on("UpdateData", async () => {
 						)
 					)[1];
 				} else {
-					presenceData.largeImageText += ` - ${timeStringToMinutes(
-						document
-							.querySelector("span.playerui__controls__stat__time")
-							.textContent.split("/")[1]
-							.trim()
+					presenceData.largeImageText += ` - ${Math.round(
+						presence.timestampFromFormat(
+							document
+								.querySelector("span.playerui__controls__stat__time")
+								.textContent.split("/")[1]
+								.trim()
+						) / 60
 					)} min`;
 				}
 				if (buttons) {
@@ -515,10 +523,18 @@ presence.on("UpdateData", async () => {
 			const ad = exist("div.playerui__adBreakInfo");
 			if (exist("i.playerui__icon--name-play")) {
 				// State paused
-				presenceData.smallImageKey = ad ? Assets.Ad : Assets.Pause;
+				presenceData.smallImageKey = ad
+					? ["fr-FR"].includes(lang)
+						? Assets.Ad_Fr
+						: Assets.Ad_En
+					: Assets.Pause;
 				presenceData.smallImageText = ad ? strings.watchingAd : strings.pause;
 			} else {
-				presenceData.smallImageKey = ad ? Assets.Ad : Assets.Play;
+				presenceData.smallImageKey = ad
+					? ["fr-FR"].includes(lang)
+						? Assets.Ad_Fr
+						: Assets.Ad_En
+					: Assets.Play;
 				presenceData.smallImageText = ad ? strings.watchingAd : strings.play;
 			}
 			break;
