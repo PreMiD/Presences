@@ -64,9 +64,9 @@ presence.on("UpdateData", async () => {
 			let startText: string, endText: string, dateText: string;
 
 			if (href.endsWith("koleo.pl/") || href.endsWith("koleo.pl/#")) {
-				const startStation = document.querySelector(
+				const startStation = document.querySelector<HTMLInputElement>(
 						"#query_start_station"
-					) as HTMLInputElement,
+					),
 					endStation = document.querySelector(
 						"#query_end_station"
 					) as HTMLInputElement,
