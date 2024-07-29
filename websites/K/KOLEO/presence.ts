@@ -46,9 +46,7 @@ presence.on("UpdateData", async () => {
 			smallImageKey: Assets.Train,
 			startTimestamp: browsingTimestamp,
 		},
-		[privacySetting] = await Promise.all([
-			presence.getSetting<boolean>("privacy"),
-		]);
+		privacySetting = await presence.getSetting<boolean>("privacy");
 
 	let currentPath;
 
