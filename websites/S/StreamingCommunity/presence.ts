@@ -68,13 +68,16 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused ? strings.paused : strings.play;
-		presenceData.details = `${document
+		presenceData.details = `${strings.play} ${document
 			.querySelector("title")
 			?.textContent?.replace("- StreamingCommunity", "")
 			?.replace("Watch", "")}`;
 		if (!isNaN(duration) && !paused)
 			[, presenceData.endTimestamp] = presence.getTimestamps(current, duration);
-	}
+	} else if (pathname.startsWith("/serie-tv"))
+		presenceData.details = `${strings.viewCategory} tv series`;
+	else if (pathname.startsWith("/film"))
+		presenceData.details = `${strings.viewCategory} movie`;
 
 	presence.setActivity(presenceData);
 });
