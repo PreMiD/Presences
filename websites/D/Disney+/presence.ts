@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
 						const paused = !!document.querySelector("[aria-label='Play']"),
 							timeRemaining = document.querySelector(
 								".time-remaining-label"
-							).textContent;
+							)?.textContent;
 
 						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 						presenceData.smallImageText = paused ? strings.pause : strings.play;
