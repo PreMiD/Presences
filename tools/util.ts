@@ -28,6 +28,7 @@ export function getDiff(
 			.toString()
 			.split("\n")
 			.filter(file => {
+				if (file.startsWith("cli/")) return false;
 				if (type === "removed") return "metadata.json" === basename(file);
 				else {
 					return ["presence.ts", "iframe.ts", "metadata.json"].includes(
@@ -37,7 +38,6 @@ export function getDiff(
 			});
 
 	if (!changedPresenceFolders.length) return [];
-
 	return [...new Set(changedPresenceFolders.map(f => basename(dirname(f))))];
 }
 
