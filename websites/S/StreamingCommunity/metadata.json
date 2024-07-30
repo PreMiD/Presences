@@ -10,9 +10,9 @@
 		"it": "StreamingCommunity è un sito web per guardare serie tv e film in italiano gratuitamente"
 	},
 	"url": "streamingcommunity.photos",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/KbJrDH1.png",
-	"thumbnail": "https://i.imgur.com/TTYdQJw.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/StreamingCommunity/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/StreamingCommunity/assets/thumbnail.png",
 	"color": "#171c1f",
 	"category": "videos",
 	"tags": [
