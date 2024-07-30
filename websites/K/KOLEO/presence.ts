@@ -634,10 +634,10 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Przegląda pomoc KOLEO.";
 		else if (pathname.startsWith("/?s")) {
 			presenceData.details = "Korzysta z wyszukiwarki...";
-			if (!privacySetting)
+			if (!privacySetting) {
 				presenceData.state =
 					document.querySelector<HTMLInputElement>("#hkb-search")?.value;
-
+			}
 			presenceData.smallImageText = "Korzysta z wyszukiwarki...";
 			presenceData.smallImageKey = Assets.Search;
 		} else if (pathname.startsWith("/faq"))
