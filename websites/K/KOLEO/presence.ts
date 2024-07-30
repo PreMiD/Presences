@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
 			} else presenceData.details = "Szuka połączenia rozkładu koleji.";
 			presenceData.smallImageText = "Szuka połączenia...";
 			presenceData.buttons = [
-				{ label: "Rozkład jazdy", url: "https://koleo.pl/rozklad-jazdy" },
+				{ label: "Rozkład Jazdy", url: "https://koleo.pl/rozklad-jazdy" },
 			];
 		} else if (pathname.startsWith("/rozklad-pkp")) {
 			presenceData.state = "W rozkładzie PKP...";
@@ -153,7 +153,7 @@ presence.on("UpdateData", async () => {
 						}
 						presenceData.buttons = [
 							{
-								label: "Zobacz połączenia",
+								label: "Zobacz Połączenia",
 								url: `https://koleo.pl/${pathname
 									.split("/")
 									.slice(1, 5)
@@ -177,7 +177,7 @@ presence.on("UpdateData", async () => {
 						}
 						presenceData.buttons = [
 							{
-								label: "Zobacz połączenia",
+								label: "Zobacz Połączenia",
 								url: "https://koleo.pl/rozklad-jazdy",
 							},
 						];
@@ -455,7 +455,7 @@ presence.on("UpdateData", async () => {
 			}...`;
 			presenceData.smallImageKey = Assets.Ticket;
 			presenceData.buttons = [
-				{ label: "Moje bilety", url: "https://koleo.pl/my/orders" },
+				{ label: "Moje Bilety", url: "https://koleo.pl/my/orders" },
 			];
 		} else if (pathname.startsWith("/travel-options/")) {
 			const stationText = document.querySelector(
@@ -513,7 +513,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Przegląda swoje konto KOLEO.";
 			presenceData.smallImageText = "Przegląda konto...";
 			presenceData.smallImageKey = Assets.Viewing;
-			presenceData.buttons = [{ label: "Moje konto", url: href }];
+			presenceData.buttons = [{ label: "Moje Konto", url: href }];
 			if (pathname.startsWith("/my/account")) {
 				presenceData.details =
 					"Wprowadza zmiany w swoje dane konta KOLEO - konto KOLEO";
@@ -658,7 +658,7 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageText = "Korzysta z wyszukiwarki...";
 					presenceData.smallImageKey = Assets.Search;
 				}
-				presenceData.buttons = [{ label: "Przeczytaj artykuł", url: href }];
+				presenceData.buttons = [{ label: "Przeczytaj Artykuł", url: href }];
 			} else presenceData.details = "Czyta artykuł.";
 
 			presenceData.smallImageText = "Czyta artykuł...";
@@ -712,7 +712,7 @@ presence.on("UpdateData", async () => {
 					} gwiazdki.`;
 					presenceData.buttons = [
 						{
-							label: "Zobacz opinię",
+							label: "Zobacz Opinię",
 							url: opinionLinkElement.getAttribute("href"),
 						},
 					];
@@ -762,7 +762,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = "Przegląda profil przewoźnika...";
 			}
 			if (!privacySetting)
-				presenceData.buttons = [{ label: "Przeczytaj artykuł", url: href }];
+				presenceData.buttons = [{ label: "Przeczytaj Artykuł", url: href }];
 		}
 	} else if (href.startsWith("https://travel.koleo.pl")) {
 		presenceData.name = "KOLEO - travel";
@@ -809,7 +809,7 @@ presence.on("UpdateData", async () => {
 				}
 				if (!privacySetting) {
 					presenceData.buttons = [
-						{ label: "Przeczytaj informacje", url: href },
+						{ label: "Przeczytaj Informacje", url: href },
 					];
 				}
 			} else {
@@ -871,7 +871,7 @@ presence.on("UpdateData", async () => {
 			}.`;
 			if (pageNumber) presenceData.state = `Strona: ${pageNumber}`;
 			presenceData.smallImageText = "Przegląda katalog...";
-			presenceData.buttons = [{ label: "Zobacz katalog", url: href }];
+			presenceData.buttons = [{ label: "Zobacz Katalog", url: href }];
 		} else if (pathname.startsWith("/passy")) {
 			presenceData.details = "Przegląda dostępne passy.";
 			presenceData.smallImageText = "Przegląda passy...";
@@ -887,10 +887,10 @@ presence.on("UpdateData", async () => {
 							"div.woocommerce-variation-price span.price span.woocommerce-Price-amount.amount bdi"
 						)?.textContent
 					}`;
-					presenceData.buttons = [{ label: "Zobacz pass", url: href }];
+					presenceData.buttons = [{ label: "Zobacz Pass", url: href }];
 				} else {
 					presenceData.buttons = [
-						{ label: "Zobacz passy", url: "https://sklep.koleo.pl/passy" },
+						{ label: "Zobacz Passy", url: "https://sklep.koleo.pl/passy" },
 					];
 				}
 			}
@@ -989,10 +989,10 @@ presence.on("UpdateData", async () => {
 						document.querySelector(".price span.woocommerce-Price-amount bdi")
 							?.textContent
 					}`;
-					presenceData.buttons = [{ label: "Zobacz produkt", url: href }];
+					presenceData.buttons = [{ label: "Zobacz Produkt", url: href }];
 				} else {
 					presenceData.buttons = [
-						{ label: "Zobacz katalog", url: "https://sklep.koleo.pl/katalog" },
+						{ label: "Zobacz Katalog", url: "https://sklep.koleo.pl/katalog" },
 					];
 				}
 			} else NoPage(presenceData);
