@@ -1,11 +1,11 @@
 const presence = new Presence({
-		clientId: "1265368122689458378",
-	}),
+	clientId: "1265368122689458378",
+}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/idEEfM8.png",
-	Logo2 = "https://i.imgur.com/mYXLmgF.png",
+	Logo = "https://i.imgur.com/3AfDzcm.png",
+	Logo2 = "https://i.imgur.com/WSuZ0j9.png",
 	Buy = "https://i.imgur.com/Z8xQXY4.png",
 	Train = "https://i.imgur.com/Jz7uUX1.png",
 	Ticket = "https://i.imgur.com/PDNRKZ0.png",
@@ -13,13 +13,14 @@ const enum Assets {
 
 let oldStations: string | string[];
 
-function NoPage(presenceData: PresenceData): void {
+async function NoPage(presenceData: PresenceData): Promise<void> {
 	presenceData.name = "KOLEO - 404";
 	presenceData.details = "Nie znaleziono strony.";
 	presenceData.largeImageKey = Assets.Logo;
-	presenceData.state = "";
+	delete presenceData.state
 	presenceData.smallImageText = "Zgubił się...";
 	presenceData.smallImageKey = Assets.Question;
+	await presence.setActivity(presenceData);
 }
 
 const operators = [
@@ -38,7 +39,7 @@ const operators = [
 ];
 
 presence.on("UpdateData", async () => {
-	const { href } = document.location,
+	const { href, hostname, pathname } = document.location,
 		presenceData: PresenceData = {
 			details: "Ładowanie.",
 			largeImageKey: Assets.Logo,
@@ -48,36 +49,23 @@ presence.on("UpdateData", async () => {
 		},
 		privacySetting = await presence.getSetting<boolean>("privacy");
 
-	let currentPath;
-
-	if (href.startsWith("https://koleo.pl")) {
-		currentPath = href.replace("https://koleo.pl", "");
-		presenceData.details = "Szuka połączenia rozkładu koleji.";
-		if (
-			href.endsWith("koleo.pl/") ||
-			href.endsWith("koleo.pl/#") ||
-			currentPath.includes("rozklad-jazdy") ||
-			operators.includes(currentPath.split("/")[1])
-		) {
-			let startText: string, endText: string, dateText: string;
+	if (hostname === "koleo.pl") {
+		console.log(pathname, hostname, href, `koleo: ${href.endsWith("koleo.pl/") || href.endsWith("koleo.pl/#") || pathname.includes("rozklad-jazdy") || (operators.includes(pathname.split("/")[1]) && !pathname.includes("bilety-miesieczne"))}`, `rozkład pkp: ${pathname.startsWith("/rozklad-pkp")}`, `bilety: ${pathname.includes("bilety-miesieczne")}`, `summary: ${pathname.startsWith("/summary")}`, `ticket: ${pathname.startsWith("/ticket/")}`, `travel-options: ${pathname.startsWith("/travel-options/")}`, `my: ${pathname.startsWith("/my")}`, `signin: ${pathname.startsWith("/signin") || (pathname.startsWith("/users/auth") && pathname.includes("intent=login"))}`, `signup: ${pathname.startsWith("/signup") || (pathname.startsWith("/users/auth") && pathname.includes("intent=signup"))}`, `kontakt: ${pathname.startsWith("/kontakt")}`, `privacy_policy: ${pathname.startsWith("/privacy_policy")}`, `media: ${pathname.startsWith("/media")}`);
+		if (href.endsWith("koleo.pl/") || href.endsWith("koleo.pl/#") || pathname.includes("rozklad-jazdy") || (operators.includes(pathname.split("/")[1]) && !pathname.includes("bilety-miesieczne"))) {
+			let startText: string, endText: string, dateText: string, partOfSite: string;
 
 			if (href.endsWith("koleo.pl/") || href.endsWith("koleo.pl/#")) {
-				const startStation = document.querySelector<HTMLInputElement>(
-						"#query_start_station"
-					),
-					endStation = document.querySelector(
+				startText = document.querySelector<HTMLInputElement>(
+					"#query_start_station"
+				)?.value,
+					endText = document.querySelector<HTMLInputElement>(
 						"#query_end_station"
-					) as HTMLInputElement,
-					date = document.querySelector("#query_date") as HTMLInputElement;
-				if (startStation && endStation && date) {
-					startText = startStation.value;
-					endText = endStation.value;
-					dateText = date.value;
-					presenceData.state = "W całym KOLEO...";
-				}
+					)?.value,
+					dateText = document.querySelector<HTMLInputElement>("#query_date")?.value;
+				partOfSite = "całym KOLEO";
 			} else if (
-				currentPath.includes("rozklad-jazdy") ||
-				operators.includes(currentPath.split("/")[1])
+				pathname.includes("rozklad-jazdy") ||
+				operators.includes(pathname.split("/")[1])
 			) {
 				const startStationButton = document.querySelector(".closest-station"),
 					endStationButton = document.querySelector(".swap-stations"),
@@ -89,48 +77,37 @@ presence.on("UpdateData", async () => {
 					startText = (
 						startStationButton
 							.closest(".icon-input-action")
-							.querySelector("input") as HTMLInputElement
-					).value;
+							.querySelector<HTMLInputElement>("input")
+					)?.value;
 					endText = (
 						endStationButton
 							.closest(".icon-input-action")
-							.querySelector("input") as HTMLInputElement
-					).value;
+							.querySelector<HTMLInputElement>("input")
+					)?.value;
 					dateText = (
-						dateInputWrapper.querySelector("input") as HTMLInputElement
-					).value;
-
-					presenceData.state = `W ${
-						(
-							document.querySelector(".top-banner__heading") || {
-								textContent: "caŁym KOLEO",
-							}
-						).textContent
-					}...`;
+						dateInputWrapper.querySelector<HTMLInputElement>("input")
+					)?.value;
 				}
+				partOfSite = document.querySelector(".top-banner__heading").textContent || "caŁym KOLEO";
 			}
+
+			if (startText && endText) {
+				presenceData.details = `Szuka połączenia...`;
+				presenceData.state = `Z ${startText} - Do ${endText} - Na ${dateText} | W ${partOfSite}`;
+			} else presenceData.details = "Szuka połączenia rozkładu koleji.";
 			presenceData.smallImageText = "Szuka połączenia...";
 			presenceData.buttons = [
 				{ label: "Rozkład jazdy", url: "https://koleo.pl/rozklad-jazdy" },
 			];
-
-			if (!privacySetting) {
-				if (startText && endText)
-					presenceData.details = `Szuka połączenia z ${startText} do ${endText} na ${dateText}`;
-				else if (startText && !endText)
-					presenceData.details = `Szuka połączenia z ${startText} na ${dateText}`;
-				else if (!startText && endText)
-					presenceData.details = `Szuka połączenia do ${endText} na ${dateText}`;
-			}
-		} else if (currentPath.startsWith("/rozklad-pkp")) {
+		} else if (pathname.startsWith("/rozklad-pkp")) {
 			presenceData.state = "W rozkładzie PKP...";
-			const startStation = document.querySelector(
-					"##query_start_station"
-				) as HTMLInputElement,
-				endStation = document.querySelector(
+			const startStation = document.querySelector<HTMLInputElement>(
+				"#query_start_station"
+			),
+				endStation = document.querySelector<HTMLInputElement>(
 					"#query_end_station"
-				) as HTMLInputElement,
-				date = document.querySelector("#query_date") as HTMLInputElement;
+				),
+				date = document.querySelector<HTMLInputElement>("#query_date");
 			if (startStation && endStation && date) {
 				const [startText, endText, dateText] = [
 					startStation.value,
@@ -154,40 +131,18 @@ presence.on("UpdateData", async () => {
 							endText === oldStations[2] &&
 							dateText === oldStations[3]
 						) {
-							if (
-								startText === oldStations[1] &&
-								endText === oldStations[2] &&
-								dateText === oldStations[3]
-							)
-								presenceData.details = `Wybiera połączenie z ${startText} do ${endText} na ${dateText}`;
-							else if (
-								startText === oldStations[1] &&
-								!endText &&
-								dateText === oldStations[3]
-							)
-								presenceData.details = `Wybiera połączenie z ${startText} na ${dateText}`;
-							else if (
-								!startText &&
-								endText === oldStations[2] &&
-								dateText === oldStations[3]
-							)
-								presenceData.details = `Wybiera połączenie do ${endText} na ${dateText}`;
-
+							presenceData.details = `Wybiera połączenie...`;
+							presenceData.state = `Z ${startText} - Do ${endText} - Na ${dateText}`;
 							presenceData.smallImageText = "Wybiera najlepsze połączenie...";
 						} else {
-							if (startText && endText)
-								presenceData.details = `Szuka połączenia z ${startText} do ${endText} na ${dateText}`;
-							else if (startText && !endText)
-								presenceData.details = `Szuka połączenia z ${startText} na ${dateText}`;
-							else if (!startText && endText)
-								presenceData.details = `Szuka połączenia do ${endText} na ${dateText}`;
-
+							presenceData.details = `Szuka połączenia...`;
+							presenceData.state = `${startText.length > 0 ? `Z ${startText}` : ""}${(startText.length > 0 && endText.length > 0) ? " - " : ""}${endText.length > 0 ? `Do ${endText}` : ""}${(startText.length > 0 || endText.length > 0) ? " - " : ""}Na ${dateText}`;
 							presenceData.smallImageText = "Szuka połączenia...";
 						}
 						presenceData.buttons = [
 							{
 								label: "Zobacz połączenia",
-								url: `https://koleo.pl/${currentPath
+								url: `https://koleo.pl/${pathname
 									.split("/")
 									.slice(1, 5)
 									.join("/")}`,
@@ -200,12 +155,12 @@ presence.on("UpdateData", async () => {
 							dateText === oldStations[3]
 						) {
 							presenceData.details =
-								"Wyświetlanie wyników na rozkład kolei na wyznaczone stacje.";
+								"Wybiera ofertę połączenia na wyznaczone stacje.";
 							presenceData.smallImageText = "Wybiera najlepszą oferte...";
 							presenceData.smallImageKey = Assets.Ticket;
 						} else {
 							presenceData.details =
-								"Szuka połączenia rozkładu koleji na wyznaczone stacje.";
+								"Szuka połączenia na wyznaczone stacje.";
 							presenceData.smallImageText = "Szuka...";
 							presenceData.smallImageKey = Assets.Train;
 						}
@@ -218,10 +173,10 @@ presence.on("UpdateData", async () => {
 					}
 				}
 			}
-		} else if (currentPath.includes("bilety-miesieczne")) {
-			const transportation = document.querySelector(".top-banner__heading");
+		} else if (pathname.includes("bilety-miesieczne")) {
+			const transportation = document.querySelector("h1.top-banner__heading");
 			if (transportation) {
-				presenceData.details = `Przegląda bilety miesięczne w ${transportation.textContent}.`;
+				presenceData.details = `Przegląda bilety miesięczne${privacySetting ? "." : ` w ${transportation.textContent}.`}`;
 				presenceData.smallImageText = "Przegląda bilety...";
 				presenceData.smallImageKey = Assets.Ticket;
 			}
@@ -230,14 +185,12 @@ presence.on("UpdateData", async () => {
 			);
 			if (typeOfTicket) {
 				const stepOfBuying = document
-						.querySelector(".step-breadcrumbs__step--is-active")
-						.querySelector(".step-breadcrumbs__number-badge").textContent,
+					.querySelector(".step-breadcrumbs__step--is-active .step-breadcrumbs__number-badge").textContent,
 					offers = document.querySelector(
 						".carrier-season-ticket__total-price"
 					);
-				presenceData.details = `Kupuje ${typeOfTicket.textContent.toLowerCase()} w ${
-					document.querySelector(".active-ticket__carrier-name")?.textContent
-				}.`;
+				presenceData.details = `Kupuje ${privacySetting ? "bilet miesięczny." : `${typeOfTicket.textContent.toLowerCase()}.`}`;
+				presenceData.state = `W ${document.querySelector(".active-ticket__carrier-name")?.textContent}.`
 				presenceData.smallImageKey = Assets.Buy;
 				if (stepOfBuying === "2" && !offers) {
 					const startStationButton = document.querySelector(".closest-station"),
@@ -251,65 +204,90 @@ presence.on("UpdateData", async () => {
 							(
 								startStationButton
 									.closest(".icon-input-action")
-									.querySelector("input") as HTMLInputElement
+									.querySelector<HTMLInputElement>("input")
 							).value,
 							(
 								endStationButton
 									.closest(".icon-input-action")
-									.querySelector("input") as HTMLInputElement
+									.querySelector<HTMLInputElement>("input")
 							).value,
-							(dateInputWrapper.querySelector("input") as HTMLInputElement)
+							(dateInputWrapper.querySelector<HTMLInputElement>("input"))
 								.value,
 						];
 
 						presenceData.smallImageText = "Szuka połączenia...";
 						presenceData.smallImageKey = Assets.Train;
-						if (!privacySetting) {
-							if (startText && endText)
-								presenceData.state = `Szuka połączenia z ${startText} do ${endText} na ${dateText}`;
-							else if (startText && !endText)
-								presenceData.state = `Szuka połączenia z ${startText} na ${dateText}`;
-							else if (!startText && endText)
-								presenceData.state = `Szuka połączenia do ${endText} na ${dateText}`;
-						}
+						if (!privacySetting) presenceData.state = `Szuka połączenia ${startText.length > 0 ? `z ${startText}` : ""} ${endText.length > 0 ? `do ${endText}` : ""} na ${dateText}`;
+						else presenceData.state = "Szuka połączenia...";
+					} else {
+						presenceData.smallImageText = "Wybiera stację...";
+						presenceData.state = "Wybiera stację docelową...";
 					}
-
-					presenceData.smallImageText = "Wybiera stację...";
-					presenceData.state = "Wybiera stację docelową...";
 				} else if (stepOfBuying === "2" && offers) {
 					presenceData.state = "Wybiera offertę biletu...";
 					presenceData.smallImageText = "Wybiera offertę...";
 
-					const offerCost = document
-						.querySelector(".tile-radio--is-checked")
-						.querySelector(".tile-offer-radio__price").textContent;
+					const offerCost = document.querySelector(".tile-radio--is-checked .tile-offer-radio__price").textContent;
 					if (document.querySelector(".tile-radio--is-checked").textContent) {
-						presenceData.state = `Wybrał/a ofertę za ${offerCost}.`;
-						presenceData.smallImageKey = "";
-						presenceData.smallImageText = "";
+						if (!privacySetting) presenceData.state = `Wybrał/a ofertę za ${offerCost}.`;
+						else presenceData.state = `Wybrał/a ofertę.`;
+						presenceData.smallImageText = "Wybrał ofertę...";
+						presenceData.smallImageKey = Assets.Ticket;
 					}
 				}
 			}
-		} else if (currentPath.startsWith("/summary")) {
-			const tempTitleOfOrder = document.querySelector(
-				".tile-order .tile-order__name"
-			);
+		} else if (pathname.startsWith("/summary") || pathname.startsWith("/confirm")) {
 			let titleOfOrder: string;
-			if (tempTitleOfOrder) titleOfOrder = tempTitleOfOrder.textContent;
-			const tempDateOfTransport = document.querySelector(".tile-order__date");
 			let dateOfTransport: string;
-			if (tempDateOfTransport)
-				dateOfTransport = tempDateOfTransport.textContent;
-			const tempTypeOfTicket = document.querySelector(
-				".order-summary-info__content"
-			);
 			let typeOfTicket: string;
-			if (tempTypeOfTicket) typeOfTicket = tempTypeOfTicket.textContent;
-			const tempCostOfOrder = document.querySelector(
-				".order-summary-total__price"
-			);
 			let costOfOrder: string;
-			if (tempCostOfOrder) costOfOrder = tempCostOfOrder.textContent;
+			let paymentMethod: Element;
+			let title: string;
+
+			if (pathname.startsWith("/summary")) {
+				const tempTitleOfOrder = document.querySelector(
+					".tile-order .tile-order__name"
+				);
+				if (tempTitleOfOrder) titleOfOrder = tempTitleOfOrder?.textContent.toLowerCase();
+				const tempDateOfTransport = document.querySelector(".tile-order__date");
+				if (tempDateOfTransport)
+					dateOfTransport = tempDateOfTransport.textContent.toLowerCase();
+				const tempTypeOfTicket = document.querySelector(
+					".order-summary-info__content"
+				);
+				if (tempTypeOfTicket) typeOfTicket = tempTypeOfTicket.textContent;
+				const tempCostOfOrder = document.querySelector(
+					".order-summary-total__price"
+				);
+				if (tempCostOfOrder) costOfOrder = tempCostOfOrder.textContent;
+				paymentMethod = document.querySelector(
+					".tile-radio--is-checked .payment-method-radio__control span"
+				);
+			} else if (pathname.startsWith("/confirm")) {
+				const startStation = document.querySelector(
+					"li.koleoicon-arrow_right"
+				);
+				const endStation = document.querySelector(
+					"li.koleoicon-arrow_left"
+				);
+				console.log(startStation, endStation);
+				if (startStation && endStation) titleOfOrder = `${startStation.textContent} - ${endStation.textContent}`;
+				const tempDateOfTransport = document.querySelector("li.koleoicon-clock");
+				if (tempDateOfTransport)
+					dateOfTransport = tempDateOfTransport.textContent;
+				const tempTypeOfTicket = document.querySelector(
+					".koleoicon-offer.ticket-type-info"
+				);
+				if (tempTypeOfTicket) typeOfTicket = tempTypeOfTicket.textContent.toLowerCase();
+				const tempCostOfOrder = document.querySelector(
+					".payment-sum"
+				) || document.querySelector(".sum-to-pay");
+				if (tempCostOfOrder) costOfOrder = tempCostOfOrder.textContent;
+				paymentMethod = document.querySelector(
+					"li.active"
+				);
+			}
+			console.log(titleOfOrder, dateOfTransport, typeOfTicket, costOfOrder, paymentMethod);
 			if (!titleOfOrder || !dateOfTransport || !typeOfTicket || !costOfOrder) {
 				presenceData.details = "Ładuje zamówienie...";
 				presenceData.smallImageText = "Ładuje zamówienie...";
@@ -317,31 +295,26 @@ presence.on("UpdateData", async () => {
 				return presence.setActivity(presenceData);
 			}
 
-			const paymentMethod = document.querySelector(
-				".tile-radio--is-checked .payment-method-radio__control span"
-			);
-			let title = "";
 			if (paymentMethod) {
-				if (paymentMethod.classList.contains("payment-method-wallet__name"))
+				if (paymentMethod.classList.contains("payment-method-wallet__name") || paymentMethod.classList.contains("payment-koleo-account"))
 					title = "środków na koncie KOLEO";
-				else if (paymentMethod.classList.contains("payment-method-blik__name"))
+				else if (paymentMethod.classList.contains("payment-method-blik__name") || paymentMethod.classList.contains("payment-blik"))
 					title = "BLIKa";
-				else if (paymentMethod.classList.contains("payment-method-card__name"))
+				else if (paymentMethod.classList.contains("payment-method-card__name") || paymentMethod.classList.contains("payment-card"))
 					title = "karty płatniczej";
+				else if (paymentMethod.classList.contains("payment-trans"))
+					title = "szybkiego przelewu";
 			}
 
 			if (!privacySetting) {
-				presenceData.details = `Kupuje bilet ${typeOfTicket} z ${
-					titleOfOrder.split(" - ")[0]
-				} do ${
-					titleOfOrder.split(" - ")[1]
-				} na ${dateOfTransport} za ${costOfOrder}.`;
+				presenceData.details = `Kupuje bilet ${typeOfTicket}.`;
+				if (title) presenceData.state = `Za pomocą ${title}.`;
+				else presenceData.state = `Z ${titleOfOrder.split(" - ")[0]} - Do ${titleOfOrder.split(" - ")[1]} - ${dateOfTransport} - Za cenę ${costOfOrder}.`;
 			} else
-				presenceData.details = `Kupuje bilet ${typeOfTicket} za ${costOfOrder}.`;
-			if (title) presenceData.state = `Za pomocą ${title}.`;
+				presenceData.details = `Kupuje bilet.`;
 			presenceData.smallImageText = "Kupuje bilet...";
 			presenceData.smallImageKey = Assets.Buy;
-		} else if (currentPath.startsWith("/ticket/")) {
+		} else if (pathname.startsWith("/ticket/")) {
 			const tickets = document.querySelectorAll(".ticket");
 			if (!tickets) {
 				presenceData.details = "Ładuje bilet/y...";
@@ -352,33 +325,33 @@ presence.on("UpdateData", async () => {
 
 			if (!privacySetting && tickets.length > 0) {
 				const mergedTicketData: {
-						stations: string[];
-						trainClasses: string[];
-						operators: string[];
-						distance: string;
-						tempDistance: number;
-						price: string;
-						tempPrice: number;
-					} = {
-						stations: [],
-						trainClasses: [],
-						operators: [],
-						distance: "0 km",
-						tempDistance: 0,
-						price: "0 zł",
-						tempPrice: 0,
-					},
+					stations: string[];
+					trainClasses: string[];
+					operators: string[];
+					distance: string;
+					tempDistance: number;
+					price: string;
+					tempPrice: number;
+				} = {
+					stations: [],
+					trainClasses: [],
+					operators: [],
+					distance: "0 km",
+					tempDistance: 0,
+					price: "0 zł",
+					tempPrice: 0,
+				},
 					uniqueStations = new Set(),
 					uniqueClasses = new Set(),
 					uniqueOperators = new Set();
 
 				for (const ticket of tickets) {
 					const stations = ticket
-							.querySelector(".ticket-stations .ticket-station span")
-							?.textContent.replace(/\n/g, " ")
-							.trim()
-							.replace(/ {2}/g, " ")
-							.split(" — "),
+						.querySelector(".ticket-stations .ticket-station span")
+						?.textContent.replace(/\n/g, " ")
+						.trim()
+						.replace(/ {2}/g, " ")
+						.split(" — "),
 						trainClasses = ticket
 							.querySelector(".ticket-trains:nth-of-type(1) .train-class")
 							?.textContent.replace(/\n/g, " ")
@@ -428,29 +401,23 @@ presence.on("UpdateData", async () => {
 					{ distance } = mergedTicketData,
 					{ price } = mergedTicketData;
 
-				presenceData.details = `Przegląda ${
-					tickets.length > 1 ? "bilety" : "bilet"
-				} z ${stations.split(" - ")[0]} do ${
-					stations.split(" - ")[stations.split(" - ").length - 1]
-				} (${distance}) za ${price}.`;
-				presenceData.state = `${
-					trainClasses.length > 1 ? "Klasy pociągów" : "Klasa pociągu"
-				}: ${trainClasses}, ${
-					operators.length > 1 ? "Operatorzy" : "Operator"
-				}: ${operators}.`;
+				presenceData.details = `Przegląda ${tickets.length > 1 ? "bilety" : "bilet"
+					} z ${stations.split(" - ")[0]} do ${stations.split(" - ")[stations.split(" - ").length - 1]
+					} (${distance}) za ${price}.`;
+				presenceData.state = `${trainClasses.length > 1 ? "Klasy pociągów" : "Klasa pociągu"
+					}: ${trainClasses}, ${operators.length > 1 ? "Operatorzy" : "Operator"
+					}: ${operators}.`;
 			} else {
-				presenceData.details = `Przegląda ${
-					tickets.length > 1 ? "swoje bilety" : "swój bilet"
-				}.`;
+				presenceData.details = `Przegląda ${tickets.length > 1 ? "swoje bilety" : "swój bilet"
+					}.`;
 			}
-			presenceData.smallImageText = `Przegląda ${
-				tickets.length > 1 ? "bilety" : "bilet"
-			}...`;
+			presenceData.smallImageText = `Przegląda ${tickets.length > 1 ? "bilety" : "bilet"
+				}...`;
 			presenceData.smallImageKey = Assets.Ticket;
 			presenceData.buttons = [
 				{ label: "Moje bilety", url: "https://koleo.pl/my/orders" },
 			];
-		} else if (currentPath.startsWith("/travel-options/")) {
+		} else if (pathname.startsWith("/travel-options/")) {
 			const stationText = document.querySelector(
 				".traveloptions .connection-relation .small-16 h2"
 			);
@@ -473,9 +440,9 @@ presence.on("UpdateData", async () => {
 			for (const option of Array.from(
 				document.querySelectorAll(".traveloptions-option")
 			)) {
-				const input = option.querySelector(
+				const input = option.querySelector<HTMLInputElement>(
 					'input[type="radio"]'
-				) as HTMLInputElement;
+				);
 				if (input && input.checked) {
 					const offer = option.querySelector(".traveloptions-offers strong");
 					if (offer) travelOffer = offer.textContent.trim();
@@ -489,131 +456,128 @@ presence.on("UpdateData", async () => {
 			if (tempPriceText) priceText = `${tempPriceText.textContent.trim()} zł`;
 
 			if (travelOffer && priceText) {
-				if (!privacySetting)
-					presenceData.details = `Wybiera ofertę biletu ${travelOffer} z ${startStation} do ${endStation} na ${dateText}.`;
-				else presenceData.details = `Wybiera ofertę biletu ${travelOffer}.`;
-				presenceData.state = `Za cenę ${priceText}.`;
+				if (!privacySetting) {
+					presenceData.details = `Wybiera ofertę biletu ${travelOffer}.`;
+					presenceData.state = `Z ${startStation} - Do ${endStation} - Na ${dateText} - Za cenę ${priceText}.`;
+				} else presenceData.details = `Wybiera ofertę biletu.`;
 				presenceData.smallImageText = "Wybiera ofertę...";
 				presenceData.smallImageKey = Assets.Ticket;
 			} else {
-				if (!privacySetting)
-					presenceData.details = `Przegląda oferty biletów z ${startStation} do ${endStation} na ${dateText}.`;
-				else presenceData.details = "Przegląda oferty biletów.";
+				presenceData.details = `Przegląda oferty biletów.`;
+				if (!privacySetting) presenceData.state = `Z ${startStation} - Do ${endStation} - Na ${dateText}.`;
 				presenceData.smallImageText = "Przegląda oferty...";
 				presenceData.smallImageKey = Assets.Ticket;
 			}
-		} else if (currentPath.startsWith("/my")) {
+		} else if (pathname.startsWith("/my")) {
 			presenceData.details = "Przegląda swoje konto KOLEO.";
 			presenceData.smallImageText = "Przegląda konto...";
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.buttons = [{ label: "Moje konto", url: href }];
-			if (currentPath.startsWith("/my/account")) {
+			if (pathname.startsWith("/my/account")) {
 				presenceData.details =
 					"Wprowadza zmiany w swoje dane konta KOLEO - konto KOLEO";
 				presenceData.smallImageText = "Zmienia dane...";
 				presenceData.smallImageKey = Assets.Writing;
-				if (currentPath.startsWith("/my/account/change-password")) {
+				if (pathname.startsWith("/my/account/change-password")) {
 					presenceData.details =
 						"Zmienia swoje hasło do konta KOLEO - konto KOLEO";
 					presenceData.smallImageText = "Zmienia hasło...";
 					presenceData.smallImageKey = Assets.Writing;
 				}
-			} else if (currentPath.startsWith("/my/orders")) {
+			} else if (pathname.startsWith("/my/orders")) {
 				presenceData.details = "Przegląda swoje bilety - konto KOLEO";
 				presenceData.smallImageText = "Przegląda...";
-				if (currentPath.startsWith("/my/orders/archive")) {
+				if (pathname.startsWith("/my/orders/archive")) {
 					presenceData.details = "Przegląda swoje archiwalne bilety.";
 					presenceData.smallImageText = "Przegląda...";
 				}
-			} else if (currentPath.startsWith("/my/passengers")) {
+			} else if (pathname.startsWith("/my/passengers")) {
 				presenceData.details = "Przegląda swoich pasażerów - konto KOLEO";
 				presenceData.smallImageText = "Przegląda...";
-				if (currentPath.startsWith("/my/passengers/new")) {
+				if (pathname.startsWith("/my/passengers/new")) {
 					presenceData.details = "Dodaje nowego pasażera - konto KOLEO";
 					presenceData.smallImageText = "Dodaje...";
 					presenceData.smallImageKey = Assets.Writing;
-				} else if (currentPath.startsWith("/my/passengers/edit")) {
+				} else if (pathname.startsWith("/my/passengers/edit")) {
 					presenceData.details = "Edytuje swoich pasażerów - konto KOLEO";
 					presenceData.smallImageText = "Edytuje...";
 					presenceData.smallImageKey = Assets.Writing;
 				}
-			} else if (currentPath.startsWith("/my/finances")) {
+			} else if (pathname.startsWith("/my/finances")) {
 				presenceData.details =
 					"Przegląda środki na swoim koncie KOLEO - konto KOLEO";
 				presenceData.smallImageText = "Przegląda środki...";
 				if (
-					currentPath.startsWith("/my/finances/") &&
-					!currentPath.includes("invoice-details") &&
-					!currentPath.includes("transactions")
+					pathname.startsWith("/my/finances/") &&
+					!pathname.includes("invoice-details") &&
+					!pathname.includes("transactions")
 				) {
 					let title;
-					if (currentPath.endsWith("/blik")) title = "BLIKa";
-					else if (currentPath.endsWith("/transfer")) title = "przelewu";
-					else if (currentPath.endsWith("/postal-order"))
+					if (pathname.endsWith("/blik")) title = "BLIKa";
+					else if (pathname.endsWith("/transfer")) title = "przelewu";
+					else if (pathname.endsWith("/postal-order"))
 						title = "przekazu pocztowym";
-					else if (currentPath.endsWith("/payment-cards"))
+					else if (pathname.endsWith("/payment-cards"))
 						title = "karty płatniczej";
-					else if (currentPath.endsWith("/gift-card"))
+					else if (pathname.endsWith("/gift-card"))
 						title = "karty podarunkowej";
 
-					const formAmount = document.querySelector(
+					const formAmount = document.querySelector<HTMLInputElement>(
 						".form-base .form-input__control"
-					) as HTMLInputElement;
+					);
 
 					presenceData.details = "Doładowuje środki na swoje konto KOLEO.";
-					presenceData.state = `Przy użyciu ${title}.`;
-					presenceData.smallImageKey = Assets.Buy;
+					if (formAmount && formAmount.getAttribute("inputmode") === "decimal" && !privacySetting) presenceData.state = `Doładowuje konto o ${formAmount.value} przy użyciu ${title}.`;
+					else presenceData.state = `Przy użyciu ${title}.`;
 					presenceData.smallImageText = "Doładowuje konto...";
-					if (formAmount && formAmount.getAttribute("inputmode") === "decimal")
-						presenceData.state = `Doładowuje konto o ${formAmount.value} przy użyciu ${title}.`;
-				} else if (currentPath.includes("invoice-details")) {
+					presenceData.smallImageKey = Assets.Buy;
+				} else if (pathname.includes("invoice-details")) {
 					presenceData.details = "Wypełnia dane do faktury - konto KOLEO";
-					presenceData.smallImageKey = Assets.Writing;
 					presenceData.smallImageText = "Wypełnia...";
-				} else if (currentPath.includes("transactions")) {
+					presenceData.smallImageKey = Assets.Writing;
+				} else if (pathname.includes("transactions")) {
 					presenceData.details = "Przegląda swoje transakcje - konto KOLEO";
 					presenceData.smallImageText = "Przegląda...";
 				}
-			} else if (currentPath.startsWith("/my/linked-accounts")) {
+			} else if (pathname.startsWith("/my/linked-accounts")) {
 				presenceData.details = "Przegląda swoje połączone konta - konto KOLEO";
 				presenceData.smallImageText = "Przegląda...";
-			} else if (currentPath.startsWith("/my/settings")) {
+			} else if (pathname.startsWith("/my/settings")) {
 				presenceData.details =
 					"Wprowadza zmiany w swojich ustawieniach konta - konto KOLEO";
 				presenceData.smallImageText = "Zmienia ustawienia...";
 				presenceData.smallImageKey = Assets.Writing;
 			}
 		} else if (
-			currentPath.startsWith("/signin") ||
-			(currentPath.startsWith("/users/auth") &&
-				currentPath.includes("intent=login"))
+			pathname.startsWith("/signin") ||
+			(pathname.startsWith("/users/auth") &&
+				pathname.includes("intent=login"))
 		) {
 			presenceData.details = "Loguje się...";
 			presenceData.smallImageText = "Loguje się...";
 			presenceData.smallImageKey = Assets.Writing;
 		} else if (
-			currentPath.startsWith("/signup") ||
-			(currentPath.startsWith("/users/auth") &&
-				currentPath.includes("intent=signup"))
+			pathname.startsWith("/signup") ||
+			(pathname.startsWith("/users/auth") &&
+				pathname.includes("intent=signup"))
 		) {
 			presenceData.details = "Rejestruje się...";
 			presenceData.smallImageText = "Rejestruje się...";
 			presenceData.smallImageKey = Assets.Writing;
-		} else if (currentPath.startsWith("/kontakt")) {
+		} else if (pathname.startsWith("/kontakt")) {
 			presenceData.details = "Przegląda informacje kontaktowe.";
 			presenceData.smallImageText = "Przegląda informacje...";
 			presenceData.smallImageKey = Assets.Viewing;
-		} else if (currentPath.startsWith("/privacy_policy")) {
+		} else if (pathname.startsWith("/privacy_policy")) {
 			presenceData.details = "Czyta politykę prywatności.";
 			presenceData.smallImageText = "Czyta politykę...";
 			presenceData.smallImageKey = Assets.Reading;
-		} else if (currentPath.startsWith("/media")) {
+		} else if (pathname.startsWith("/media")) {
 			presenceData.details = "Przegląda media KOLEO.";
 			presenceData.smallImageText = "Przegląda media...";
 			presenceData.smallImageKey = Assets.Viewing;
 		} else NoPage(presenceData);
 	} else if (href.startsWith("https://pomoc.koleo.pl")) {
-		currentPath = href.replace("https://pomoc.koleo.pl", "");
 		presenceData.name = "KOLEO - pomoc";
 		presenceData.largeImageKey = Assets.Logo2;
 		presenceData.smallImageText = "Przegląda pomoc...";
@@ -624,27 +588,28 @@ presence.on("UpdateData", async () => {
 			href.endsWith("https://pomoc.koleo.pl/")
 		)
 			presenceData.details = "Przegląda pomoc KOLEO.";
-		else if (currentPath.startsWith("/?s")) {
-			presenceData.details = `Szuka: ${
-				(document.querySelector("#hkb-search") as HTMLInputElement)?.value
-			}`;
-			presenceData.smallImageText = "Szuka...";
+		else if (pathname.startsWith("/?s")) {
+			presenceData.details = "Korzysta z wyszukiwarki...";
+			if (!privacySetting) presenceData.state = document.querySelector<HTMLInputElement>("#hkb-search")?.value
+			presenceData.smallImageText = "Korzysta z wyszukiwarki...";
 			presenceData.smallImageKey = Assets.Search;
-		} else if (currentPath.startsWith("/faq"))
+		} else if (pathname.startsWith("/faq"))
 			presenceData.details = "Przegląda często zadane pytania.";
-		else if (currentPath.startsWith("/wp-content"))
+		else if (pathname.startsWith("/wp-content"))
 			presenceData.details = "Przegląda pliki.";
 		else {
 			if (!privacySetting) {
 				const articleTitle =
-						document.querySelector(".hkb-article__title") ||
-						document.querySelector(".entry-header .entry-title"),
-					searchTab = document.querySelector("#hkb-search") as HTMLInputElement;
-				presenceData.details = `Czyta artykuł${
-					articleTitle ? ` - ${articleTitle.textContent}` : "."
-				}`;
-				if (searchTab && searchTab.value.length > 0)
-					presenceData.state = `Szuka: ${searchTab.value}`;
+					document.querySelector(".hkb-article__title") ||
+					document.querySelector(".entry-header .entry-title"),
+					searchTab = document.querySelector<HTMLInputElement>("#hkb-search");
+				presenceData.details = `Czyta artykuł${articleTitle ? ` - ${articleTitle.textContent}` : "."
+					}`;
+				if (searchTab && searchTab.value.length > 0) {
+					presenceData.state = `Korzysta z wyszukiwarki: ${searchTab.value}`;
+					presenceData.smallImageText = "Korzysta z wyszukiwarki...";
+					presenceData.smallImageKey = Assets.Search;
+				}
 				presenceData.buttons = [{ label: "Przeczytaj artykuł", url: href }];
 			} else presenceData.details = "Czyta artykuł.";
 
@@ -652,7 +617,6 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Reading;
 		}
 	} else if (href.startsWith("https://magazyn.koleo.pl")) {
-		currentPath = href.replace("https://magazyn.koleo.pl", "");
 		presenceData.name = "KOLEO - magazyn";
 		presenceData.largeImageKey = Assets.Logo2;
 		presenceData.smallImageKey = Assets.Viewing;
@@ -662,24 +626,26 @@ presence.on("UpdateData", async () => {
 		) {
 			presenceData.details = "Przegląda artykuły w magazynie KOLEO.";
 			presenceData.smallImageText = "Przegląda artykuły...";
-		} else if (currentPath.startsWith("/o-koleo")) {
+		} else if (pathname.startsWith("/o-koleo")) {
 			presenceData.details = "Przegląda informacje o KOLEO.";
 			presenceData.smallImageText = "Przegląda informacje...";
-		} else if (currentPath.startsWith("/author/")) {
+		} else if (pathname.startsWith("/author/")) {
 			const authorName = document.querySelector(".module-title");
-			if (authorName) {
+			if (authorName && !privacySetting) {
 				presenceData.details = `Przegląda artykuły napisane przez ${authorName.textContent}.`;
-				presenceData.state = `Ilość artykułów: ${
-					document.querySelector(".gridlove-posts").children.length
-				}`;
+				presenceData.state = `Ilość artykułów: ${document.querySelector(".gridlove-posts").children.length
+					}`;
 				presenceData.smallImageText = "Przegląda profil...";
+			} else {
+				presenceData.details = "Przegląda artykuły.";
+				presenceData.smallImageText = "Przegląda artykuły...";
 			}
-		} else if (currentPath.startsWith("/opinie")) {
+		} else if (pathname.startsWith("/opinie")) {
 			presenceData.details = "Przegląda opinie ludzi.";
 			presenceData.smallImageText = "Przegląda opinie...";
 
 			const tempOpinion = document.querySelector("rw-popup-review.hydrated");
-			if (tempOpinion) {
+			if (tempOpinion && !privacySetting) {
 				const shadowRootOpinion = tempOpinion.shadowRoot,
 					opinionUserElement = shadowRootOpinion.querySelector(
 						".main .header .info .name"
@@ -692,9 +658,8 @@ presence.on("UpdateData", async () => {
 					);
 
 				if (opinionUserElement && opinionStarsElements && opinionLinkElement) {
-					presenceData.details = `Przegląda opinię ${opinionUserElement.textContent.trim()}, który/a ocenił/a KOLEO na ${
-						opinionStarsElements.length
-					} gwiazdki.`;
+					presenceData.details = `Przegląda opinię ${opinionUserElement.textContent.trim()}, który/a ocenił/a KOLEO na ${opinionStarsElements.length
+						} gwiazdki.`;
 					presenceData.buttons = [
 						{
 							label: "Zobacz opinię",
@@ -702,11 +667,14 @@ presence.on("UpdateData", async () => {
 						},
 					];
 				}
+			} else {
+				presenceData.details = "Przegląda opinie ludzi.";
+				presenceData.smallImageText = "Przegląda opinie...";
 			}
 		} else {
 			const topicOfPage =
-					document.title.split("›")[0].trim() ||
-					document.querySelector(".entry-header h1.entry-title")?.textContent,
+				document.title.split("›")[0].trim() ||
+				document.querySelector(".entry-header h1.entry-title")?.textContent,
 				authorOfPage = document.querySelector(
 					".mks_author_widget .widget-title"
 				)?.textContent,
@@ -714,9 +682,8 @@ presence.on("UpdateData", async () => {
 				dateOfPage =
 					metaOfPage?.querySelector("div.meta-date span")?.textContent;
 			if (authorOfPage) {
-				presenceData.details = `Czyta temat${
-					!privacySetting ? ` napisany przez ${authorOfPage}` : ""
-				}.`;
+				presenceData.details = `Czyta temat${!privacySetting ? ` napisany przez ${authorOfPage}` : ""
+					}.`;
 				if (!privacySetting) {
 					presenceData.state = [
 						topicOfPage,
@@ -729,17 +696,10 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = "Czyta temat...";
 				presenceData.smallImageKey = Assets.Reading;
 			} else {
-				presenceData.details = `Przegląda artykuły${
-					!privacySetting
-						? ` zawierające ${
-								document.querySelector(".module-title h1.h2")?.textContent
-						  }`
-						: ""
-				}.`;
+				presenceData.details = `Przegląda artykuły${!privacySetting ? ` zawierające ${document.querySelector(".module-title h1.h2")?.textContent}` : ""}.`;
 				if (!privacySetting) {
-					presenceData.state = `Ilość artykułów: ${
-						document.querySelector(".gridlove-posts").children.length
-					} | Utworzono: ${dateOfPage}`;
+					presenceData.state = `Ilość artykułów: ${document.querySelector(".gridlove-posts").children.length
+						} | Utworzono: ${dateOfPage}`;
 				}
 				presenceData.smallImageText = "Przegląda profil przewoźnika...";
 			}
@@ -759,18 +719,17 @@ presence.on("UpdateData", async () => {
 				document.querySelector(".entry-header h1.entry-title")?.textContent;
 			if (topicOfPage) {
 				const authorOfPage = document.querySelector(
-						".mks_author_widget .widget-title"
-					)?.textContent,
+					".mks_author_widget .widget-title"
+				)?.textContent,
 					dateOfPage = document.querySelector(
 						".entry-meta div.meta-date span"
 					)?.textContent;
 
 				if (dateOfPage) {
-					presenceData.details = `Czyta informacje${
-						authorOfPage && !privacySetting
-							? ` napisane przez ${authorOfPage}`
-							: ""
-					}.`;
+					presenceData.details = `Czyta informacje${authorOfPage && !privacySetting
+						? ` napisane przez ${authorOfPage}`
+						: ""
+						}...`;
 					if (!privacySetting) {
 						presenceData.state = [topicOfPage, dateOfPage]
 							.filter(Boolean)
@@ -779,13 +738,11 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageText = "Czyta informacje...";
 					presenceData.smallImageKey = Assets.Reading;
 				} else {
-					presenceData.details = `Przegląda informacji${
-						!privacySetting ? ` o ${topicOfPage.toLowerCase()}` : ""
-					}.`;
+					presenceData.details = `Przegląda informacji${!privacySetting ? ` o ${topicOfPage.toLowerCase()}` : ""
+						}.`;
 					if (!privacySetting) {
-						presenceData.state = `Ilość informacji: ${
-							document.querySelector(".gridlove-posts").children.length
-						}`;
+						presenceData.state = `Ilość informacji: ${document.querySelector(".gridlove-posts").children.length
+							}`;
 					}
 					presenceData.smallImageText = "Przegląda strone kraju...";
 				}
@@ -800,7 +757,6 @@ presence.on("UpdateData", async () => {
 			}
 		}
 	} else if (href.startsWith("https://sklep.koleo.pl")) {
-		currentPath = href.replace("https://sklep.koleo.pl", "");
 		presenceData.name = "KOLEO - sklep";
 		presenceData.largeImageKey = Assets.Logo2;
 		presenceData.smallImageKey = Assets.Viewing;
@@ -810,7 +766,7 @@ presence.on("UpdateData", async () => {
 		) {
 			presenceData.details = "Przegląda sklep KOLEO.";
 			presenceData.smallImageText = "Przegląda sklep...";
-		} else if (currentPath.startsWith("/katalog")) {
+		} else if (pathname.startsWith("/katalog")) {
 			const page = document.querySelector(".page-numbers.current")?.textContent;
 			presenceData.details = "Przegląda katalog produktów.";
 			if (page) presenceData.state = `Strona: ${page}`;
@@ -818,87 +774,75 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{ label: "Zobacz katalog", url: "https://sklep.koleo.pl/katalog" },
 			];
-		} else if (currentPath.startsWith("/koleo-kids")) {
-			const page = document.querySelector(".page-numbers.current")?.textContent;
-			presenceData.details = "Przegląda produkty dla dzieci.";
-			if (page) presenceData.state = `Strona: ${page}`;
-			presenceData.smallImageText = "Przegląda produkty...";
 		} else if (
-			currentPath.startsWith("/klocki-lego/") ||
-			currentPath.startsWith("/kolejki-drewniane") ||
-			currentPath.startsWith("/kdd") ||
-			currentPath.startsWith("/ksiazki-dla-dzieci") ||
-			currentPath.startsWith("/plakaty-kolejowe") ||
-			currentPath.startsWith("/kubki-barowe") ||
-			currentPath.startsWith("/odziez") ||
-			currentPath.startsWith("/ksiazki") ||
-			currentPath.startsWith("/karta-podarunkowa-koleo") ||
-			currentPath.startsWith("/modelarstwo") ||
-			currentPath.startsWith("/marka")
+			(pathname.startsWith("/koleo-kids/") ||
+				pathname.startsWith("/klocki-lego/") ||
+				pathname.startsWith("/kolejki-drewniane/") ||
+				pathname.startsWith("/kdd/") ||
+				pathname.startsWith("/ksiazki-dla-dzieci/") ||
+				pathname.startsWith("/plakaty-kolejowe/") ||
+				pathname.startsWith("/kubki-barowe/") ||
+				pathname.startsWith("/odziez/") ||
+				pathname.startsWith("/ksiazki/") ||
+				pathname.startsWith("/artykuly-podrozne/") ||
+				pathname.startsWith("/kalendarze/") ||
+				pathname.startsWith("/karta-podarunkowa-koleo/") ||
+				pathname.startsWith("/modelarstwo/") ||
+				pathname.startsWith("/czasopisma/") ||
+				pathname.startsWith("/gry/") ||
+				pathname.startsWith("/duch-podrozy/") ||
+				pathname.startsWith("/marka/") ||
+				pathname.split("/")[2].includes("page")) && !document.querySelector(".product_title")
 		) {
 			const pageNumber = document.querySelector(
 				".page-numbers.current"
 			)?.textContent;
-			presenceData.details = `Przegląda produkty ${
-				currentPath.startsWith("/marka") ? "marki" : "katalogu"
-			} - ${document
-				.querySelector(".woocommerce-products-header__title")
-				?.textContent.toLowerCase()}.`;
+			presenceData.details = `Przegląda produkty ${pathname.startsWith("/marka") ? "marki" : "katalogu"}${!privacySetting ? ` - ${document.querySelector(".woocommerce-products-header__title")?.textContent}` : ""}.`;
 			if (pageNumber) presenceData.state = `Strona: ${pageNumber}`;
 			presenceData.smallImageText = "Przegląda katalog...";
 			presenceData.buttons = [{ label: "Zobacz katalog", url: href }];
-		} else if (currentPath.startsWith("/passy")) {
+		} else if (pathname.startsWith("/passy")) {
 			presenceData.details = "Przegląda dostępne passy.";
 			presenceData.smallImageText = "Przegląda passy...";
 			const productTitle = document.querySelector(".product_title");
 			if (productTitle) {
-				presenceData.details = `Przegląda pass${
-					privacySetting ? "" : ` - ${productTitle.textContent}`
-				}.`;
-				presenceData.state = `Cena: ${
-					document.querySelector(
-						"div.woocommerce-variation-price span.price span.woocommerce-Price-amount.amount bdi"
-					)?.textContent
-				}`;
+				presenceData.details = `Przegląda pass${privacySetting ? "" : ` - ${productTitle.textContent}`
+					}.`;
 				presenceData.smallImageText = "Przegląda pass...";
-				if (!privacySetting)
+				if (!privacySetting) {
+					presenceData.state = `Cena: ${document.querySelector("div.woocommerce-variation-price span.price span.woocommerce-Price-amount.amount bdi")?.textContent}`;
 					presenceData.buttons = [{ label: "Zobacz pass", url: href }];
-				else {
+				} else {
 					presenceData.buttons = [
 						{ label: "Zobacz passy", url: "https://sklep.koleo.pl/passy" },
 					];
 				}
 			}
-		} else if (currentPath.startsWith("/koszyk/")) {
+		} else if (pathname.startsWith("/koszyk/")) {
 			const cartItems = document.querySelectorAll(".cart_item");
 			presenceData.details = "Przegląda swój koszyk.";
 			if (!privacySetting) {
-				presenceData.state = `${
-					cartItems.length > 0
-						? `Ilość produktów w koszyku: ${
-								cartItems.length
-						  } | Cena za wszystko: ${
-								document.querySelector(".order-total .woocommerce-Price-amount")
-									?.textContent
-						  }`
-						: "Nie ma nic w koszyku"
-				}`;
+				presenceData.state = `${cartItems.length > 0
+					? `Ilość produktów w koszyku: ${cartItems.length
+					} | Cena za wszystko: ${document.querySelector(".order-total .woocommerce-Price-amount")
+						?.textContent
+					}`
+					: "Nie ma nic w koszyku"
+					}`;
 			}
 			presenceData.smallImageText = "Przegląda koszyk...";
 			presenceData.smallImageKey = Assets.Buy;
-		} else if (currentPath.startsWith("/zamowienie")) {
+		} else if (pathname.startsWith("/zamowienie")) {
 			const cartItems = document.querySelectorAll(".cart_item");
 
 			if (cartItems.length > 0) {
 				presenceData.details = "Realizuje swoje zamówienie.";
-				presenceData.state = `Cena za ${
-					cartItems.length > 1
-						? `${cartItems.length} produktów`
-						: `${cartItems.length} produkt`
-				} wynosi ${
-					document.querySelector(".order-total .woocommerce-Price-amount bdi")
+				if (!privacySetting) presenceData.state = `Cena za ${cartItems.length > 1
+					? `${cartItems.length} produktów`
+					: `${cartItems.length} produkt`
+					} wynosi ${document.querySelector(".order-total .woocommerce-Price-amount bdi")
 						?.textContent
-				}`;
+					}`;
 				presenceData.smallImageText = "Realizuje zamówienie...";
 				presenceData.smallImageKey = Assets.Buy;
 			} else {
@@ -906,7 +850,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = "Przegląda zamówienie...";
 				presenceData.smallImageKey = Assets.Buy;
 			}
-		} else if (currentPath.startsWith("/moje-konto")) {
+		} else if (pathname.startsWith("/moje-konto")) {
 			if (document.querySelector(".woocommerce-form-login__submit")) {
 				presenceData.details = "Loguje się do swojego konta KOLEO.";
 				presenceData.smallImageText = "Loguje się...";
@@ -916,31 +860,30 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = "Przegląda konto...";
 			}
 
-			if (currentPath.startsWith("/moje-konto/lost-password")) {
+			if (pathname.startsWith("/moje-konto/lost-password")) {
 				presenceData.details = "Resetuje swoje hasło do konta KOLEO.";
 				presenceData.smallImageText = "Resetuje hasło...";
 				presenceData.smallImageKey = Assets.Writing;
 			}
-		} else if (currentPath.startsWith("/regulamin")) {
+		} else if (pathname.startsWith("/regulamin")) {
 			presenceData.details = "Czyta regulamin sklepu KOLEO.";
 			presenceData.smallImageText = "Czyta regulamin...";
 			presenceData.smallImageKey = Assets.Reading;
-		} else if (currentPath.startsWith("/polityka-prywatnosci")) {
+		} else if (pathname.startsWith("/polityka-prywatnosci")) {
 			presenceData.details = "Czyta politykę prywatności sklepu KOLEO.";
 			presenceData.smallImageText = "Czyta politykę...";
 			presenceData.smallImageKey = Assets.Reading;
-		} else if (currentPath.startsWith("/francuska-11a")) {
+		} else if (pathname.startsWith("/francuska-11a")) {
 			presenceData.details = "Przegląda informacje kontaktowe KOLEO.";
 			presenceData.smallImageText = "Przegląda informacje...";
-		} else if (currentPath.startsWith("/sklep-stacjonarny")) {
-			presenceData.details =
-				"Przegląda informacje o sklepie stacjonarnym KOLEO.";
+		} else if (pathname.startsWith("/sklep-stacjonarny")) {
+			presenceData.details = "Przegląda informacje o sklepie stacjonarnym KOLEO.";
 			presenceData.smallImageText = "Przegląda informacje...";
-		} else if (currentPath.startsWith("/dostawa")) {
+		} else if (pathname.startsWith("/dostawa")) {
 			presenceData.details = "Przegląda informacje o dostawie w sklepie KOLEO.";
 			presenceData.smallImageText = "Przegląda informacje...";
 		} else if (
-			currentPath.startsWith("/interrail-najczesciej-zadawane-pytania")
+			pathname.startsWith("/interrail-najczesciej-zadawane-pytania")
 		) {
 			presenceData.details =
 				"Przegląda najczęściej zadawane pytania o bilety Interrail.";
@@ -948,24 +891,13 @@ presence.on("UpdateData", async () => {
 		} else {
 			const productTitle = document.querySelector(".product_title");
 			if (productTitle) {
-				presenceData.details = `Przegląda produkt${
-					privacySetting ? "" : ` - ${productTitle.textContent}`
-				}.`;
-				presenceData.state = `${
-					privacySetting
-						? ""
-						: `Marka: ${
-								document.querySelector(".pwb-single-product-brands a")
-									.textContent
-						  } | `
-				}Cena: ${
-					document.querySelector(".price span.woocommerce-Price-amount bdi")
-						?.textContent
-				}`;
+				presenceData.details = `Przegląda produkt${privacySetting ? "" : ` - ${productTitle.textContent}`
+					}.`;
 				presenceData.smallImageText = "Przegląda produkt...";
-				if (!privacySetting)
+				if (!privacySetting) {
+					presenceData.state = `${document.querySelector(".pwb-single-product-brands a") ? `Marka: ${document.querySelector(".pwb-single-product-brands a").textContent} | ` : ""}Cena: ${document.querySelector(".price span.woocommerce-Price-amount bdi")?.textContent}`;
 					presenceData.buttons = [{ label: "Zobacz produkt", url: href }];
-				else {
+				} else {
 					presenceData.buttons = [
 						{ label: "Zobacz katalog", url: "https://sklep.koleo.pl/katalog" },
 					];
