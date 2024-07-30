@@ -232,11 +232,11 @@ presence.on("UpdateData", async () => {
 
 						presenceData.smallImageText = "Szuka połączenia...";
 						presenceData.smallImageKey = Assets.Train;
-						if (!privacySetting)
+						if (!privacySetting) {
 							presenceData.state = `Szuka połączenia ${
 								startText.length > 0 ? `z ${startText}` : ""
 							} ${endText.length > 0 ? `do ${endText}` : ""} na ${dateText}`;
-						else presenceData.state = "Szuka połączenia...";
+						} else presenceData.state = "Szuka połączenia...";
 					} else {
 						presenceData.smallImageText = "Wybiera stację...";
 						presenceData.state = "Wybiera stację docelową...";
@@ -246,13 +246,14 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageText = "Wybiera offertę...";
 
 					if (document.querySelector(".tile-radio--is-checked").textContent) {
-						if (!privacySetting)
+						if (!privacySetting) {
 							presenceData.state = `Wybrał/a ofertę za ${
 								document.querySelector(
 									".tile-radio--is-checked .tile-offer-radio__price"
 								).textContent
 							}.`;
-						else presenceData.state = "Wybrał/a ofertę...";
+						} else presenceData.state = "Wybrał/a ofertę...";
+
 						presenceData.smallImageText = "Wybrał ofertę...";
 						presenceData.smallImageKey = Assets.Ticket;
 					}
@@ -339,10 +340,11 @@ presence.on("UpdateData", async () => {
 			if (!privacySetting) {
 				presenceData.details = `Kupuje bilet ${typeOfTicket}.`;
 				if (title) presenceData.state = `Za pomocą ${title}.`;
-				else
+				else {
 					presenceData.state = `Z ${titleOfOrder.split(" - ")[0]} - Do ${
 						titleOfOrder.split(" - ")[1]
 					} - ${dateOfTransport} - Za cenę ${costOfOrder}.`;
+				}
 			} else presenceData.details = "Kupuje bilet.";
 			presenceData.smallImageText = "Kupuje bilet...";
 			presenceData.smallImageKey = Assets.Buy;
@@ -635,6 +637,7 @@ presence.on("UpdateData", async () => {
 			if (!privacySetting)
 				presenceData.state =
 					document.querySelector<HTMLInputElement>("#hkb-search")?.value;
+
 			presenceData.smallImageText = "Korzysta z wyszukiwarki...";
 			presenceData.smallImageKey = Assets.Search;
 		} else if (pathname.startsWith("/faq"))
