@@ -35,6 +35,8 @@ presence.on("UpdateData", () => {
 				presenceData.details = "Opening Mystery Box";
 			else if (path.startsWith("/garage"))
 				presenceData.details = "Hanging in the Garage";
+			else if (path.startsWith("/leagues"))
+				presenceData.details = "Viewing League standings";
 			else if (path.startsWith("/team/create"))
 				presenceData.details = "Creating a team";
 			else if (path.startsWith("/team/")) {

@@ -1,5 +1,6 @@
 import {
 	assets,
+	decompressGzip,
 	deEsser,
 	giveArticle,
 	makeProgressBar,
@@ -171,10 +172,9 @@ function handleLesson(_path: string | string[]) {
 }
 
 async function updateData(_inLesson = false) {
-	const state = JSON.parse(window.localStorage.getItem("duo.state"))?.state
-		?.redux;
+	let state = JSON.parse(window.localStorage.getItem("duo.state"));
+	state = JSON.parse(await decompressGzip(state))?.state?.redux;
 	if (!state) return;
-
 	// resets lesson variables to default on updateData()
 	// on updateData(true), lesson variables stay untouched
 	if (!_inLesson) {
