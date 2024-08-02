@@ -350,7 +350,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Buy;
 		} else if (pathname.startsWith("/ticket/")) {
 			const tickets = document.querySelectorAll(".ticket");
-			if (!tickets) {
+			if (tickets.length === 0) {
 				presenceData.details = "Ładuje bilet/y...";
 				presenceData.smallImageText = "Ładuje bilet/y...";
 				presenceData.smallImageKey = Assets.Ticket;
