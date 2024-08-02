@@ -42,6 +42,7 @@ presence.on("UpdateData", async () => {
 		usePresenceName,
 		showTimestamp,
 		showBrowsingStatus,
+		showCover,
 		showSeries,
 		showMovies,
 		logoType,
@@ -51,6 +52,7 @@ presence.on("UpdateData", async () => {
 		presence.getSetting<boolean>("usePresenceName"),
 		presence.getSetting<boolean>("timestamp"),
 		presence.getSetting<boolean>("showBrowsingStatus"),
+		presence.getSetting<boolean>("showCover"),
 		presence.getSetting<boolean>("showSeries"),
 		presence.getSetting<boolean>("showMovies"),
 		presence.getSetting<number>("logoType"),
@@ -79,7 +81,10 @@ presence.on("UpdateData", async () => {
 		return await presence.setActivity({
 			details: metadata.data.video.title,
 			state: metadata.data.video.synopsis.slice(0, 128),
-			largeImageKey: metadata.data.video.boxart.at(0).url,
+			largeImageKey: !showCover
+				? [LargImages.Animated, LargImages.Logo, LargImages.Noback][logoType] ||
+				  LargImages.Logo
+				: metadata.data.video.boxart.at(0).url,
 			smallImageKey: Assets.Reading,
 			smallImageText: strings.browse,
 			buttons: [
@@ -130,7 +135,11 @@ presence.on("UpdateData", async () => {
 					.replace("{0}", season.seq.toString())
 					.replace("{1}", episode.seq.toString())
 					.replace("{2}", episode.title),
-				largeImageKey: metadata.data.video.boxart.at(0).url,
+				largeImageKey: !showCover
+					? [LargImages.Animated, LargImages.Logo, LargImages.Noback][
+							logoType
+					  ] || LargImages.Logo
+					: metadata.data.video.boxart.at(0).url,
 				smallImageKey: paused ? Assets.Pause : Assets.Play,
 				smallImageText: paused ? strings.pause : strings.play,
 				...(showTimestamp && {
@@ -175,7 +184,11 @@ presence.on("UpdateData", async () => {
 						"{1}",
 						Math.floor(metadata.data.video.runtime / 60).toString()
 					),
-				largeImageKey: metadata.data.video.boxart.at(0).url,
+				largeImageKey: !showCover
+					? [LargImages.Animated, LargImages.Logo, LargImages.Noback][
+							logoType
+					  ] || LargImages.Logo
+					: metadata.data.video.boxart.at(0).url,
 				smallImageKey: paused ? Assets.Pause : Assets.Play,
 				smallImageText: paused ? strings.pause : strings.play,
 				...(showTimestamp && {
