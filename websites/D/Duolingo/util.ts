@@ -39,6 +39,29 @@ export function makeProgressBar(
 		size - completedSquares
 	)} ${progressPercentage}%`;
 }
+//have to define because outdated ts version
+type DecompressionStream = GenericTransformStream;
+type CompressionFormat = "deflate" | "deflate-raw" | "gzip";
+
+declare const DecompressionStream: {
+	prototype: DecompressionStream;
+	new (format: CompressionFormat): DecompressionStream;
+};
+
+export async function decompressGzip(
+	base64GzipString: string
+): Promise<string> {
+	const bytes = Uint8Array.from(atob(base64GzipString), c => c.charCodeAt(0)),
+		stream = new DecompressionStream("gzip"),
+		writer = stream.writable.getWriter();
+	writer.write(bytes);
+	writer.close();
+	return new Response(stream.readable)
+		.arrayBuffer()
+		.then(function (arrayBuffer) {
+			return new TextDecoder().decode(arrayBuffer);
+		});
+}
 
 type obj = Record<string, unknown>;
 export function updateUndefinedKeys(obj1: obj, obj2: obj): void {
