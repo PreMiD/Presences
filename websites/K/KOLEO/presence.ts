@@ -4,11 +4,11 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/3AfDzcm.png",
-	Logo2 = "https://i.imgur.com/WSuZ0j9.png",
-	Buy = "https://i.imgur.com/Z8xQXY4.png",
-	Train = "https://i.imgur.com/Jz7uUX1.png",
-	Ticket = "https://i.imgur.com/PDNRKZ0.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/K/KOLEO/assets/logo.png",
+	Logo2 = "https://cdn.rcd.gg/PreMiD/websites/K/KOLEO/assets/0.png",
+	Buy = "https://cdn.rcd.gg/PreMiD/websites/K/KOLEO/assets/1.png",
+	Train = "https://cdn.rcd.gg/PreMiD/websites/K/KOLEO/assets/2.png",
+	Ticket = "https://cdn.rcd.gg/PreMiD/websites/K/KOLEO/assets/3.png",
 }
 
 let oldStations: string | string[];
