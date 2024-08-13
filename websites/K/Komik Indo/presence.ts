@@ -4,21 +4,19 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/HccQ60t.png",
-	Home = "https://i.imgur.com/m6Cw03l.png",
+	Logo = "https://i.imgur.com/HccQ60t.png"
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Browsing...",
 			largeImageKey: Assets.Logo,
-			smallImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, href } = document.location,
+		{ pathname, href, hostname } = document.location,
 		buttons = await presence.getSetting<boolean>("buttons");
 	switch (true) {
-		case href === "https://komikindo.tv/":
+		case hostname === "komikindo.tv":
 			presenceData.details = "Viewing Homepage";
 			break;
 		case pathname.endsWith("/daftar-komik/"):
