@@ -55,6 +55,9 @@ presence.on("UpdateData", async () => {
 			"/fesTours": { details: "フェスツアーズをプレイ中" },
 			"/fesToursConcert": { details: "フェスツアーズをプレイ中" },
 			"/mastersFes": { details: "マスターズフェスをプレイ中" },
+			"/miniGamePortal": { details: "ミニゲーム" },
+			"/daifugo": { details: "大富豪をプレイ中" },
+			"/characterProfile": { details: "アイドルプロフィールを閲覧中" },
 		},
 		pathDetails = pathMap[pathname]?.details;
 	if (typeof pathDetails !== "undefined") presenceData.details = pathDetails;
