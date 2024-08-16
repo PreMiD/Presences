@@ -5,7 +5,6 @@ const presence = new Presence({
 const enum Assets {
 	Logo = "https://i.imgur.com/2hIOPb0.png",
 }
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Browsing",
