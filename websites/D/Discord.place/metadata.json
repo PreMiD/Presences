@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "682607343707488388",
+		"name": "nego"
+	},
+	"service": "Discord.place",
+	"description": {
+		"en": "A place for all things that related to Discord. No matter if you are a developer, a server owner, or just a user, you can find something useful here."
+	},
+	"url": "discord.place",
+	"version": "1.1.2",
+	"logo": "https://i.imgur.com/2hIOPb0.png",
+	"thumbnail": "https://i.imgur.com/3vnwTeL.png",
+	"color": "#000000",
+	"category": "other",
+	"tags": [
+		"discord",
+		"sfx",
+		"soundboard",
+        "templates",
+        "discord templates",
+        "discord bots",
+        "discord servers",
+        "discord sounds",
+        "discord emojis", 
+        "emoji packages",
+        "bots",
+        "servers",
+        "server",
+        "sounds",
+        "emoiis",
+        "emoji",
+        "discord bot list"
+	]
+}
