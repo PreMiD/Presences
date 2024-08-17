@@ -10,7 +10,7 @@ const ja: Record<keyof typeof en, string> = {
 	failure: "しっぱい",
 	guessing: "すいそく",
 	play: "あそぼう",
-	title: "ことばであそぼう",
+	title: "言葉で遊ぼう",
 };
 
 export default { en, ja };
