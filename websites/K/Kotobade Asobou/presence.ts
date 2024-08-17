@@ -1,9 +1,9 @@
 import languageStrings from "./strings";
 
 const presence = new Presence({
-	clientId: "1233147201559990292",
-}),
- browsingTimestamp = Math.floor(Date.now() / 1000);
+		clientId: "1233147201559990292",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum PresenceAssets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/K/Kotobade%20Asobou/assets/logo.png",
@@ -11,27 +11,27 @@ const enum PresenceAssets {
 
 presence.on("UpdateData", async () => {
 	const language = await presence.getSetting<number>("displayLanguage"),
-	 strings = languageStrings[["en", "ja"][language] as "en" | "ja"],
-	 presenceData: PresenceData = {
-		largeImageKey: PresenceAssets.Logo,
-		startTimestamp: browsingTimestamp,
-		name: strings.title,
-	},
-	 rows = [...document.querySelectorAll<HTMLDivElement>(".grid > div")],
-	 nextIndex = rows.findIndex(row =>
-		[...row.children].every(
-			tile =>
-				!tile.querySelector<HTMLDivElement>(".letter-container").textContent
-		)
-	),
-	 lastRow: HTMLDivElement = rows[nextIndex - 1],
-	 isComplete = !!(
-		(lastRow?.children.length &&
-			[...lastRow.children].every(tile =>
-				tile.classList.contains("correct")
-			)) ||
-		nextIndex === -1
-	);
+		strings = languageStrings[["en", "ja"][language] as "en" | "ja"],
+		presenceData: PresenceData = {
+			largeImageKey: PresenceAssets.Logo,
+			startTimestamp: browsingTimestamp,
+			name: strings.title,
+		},
+		rows = [...document.querySelectorAll<HTMLDivElement>(".grid > div")],
+		nextIndex = rows.findIndex(row =>
+			[...row.children].every(
+				tile =>
+					!tile.querySelector<HTMLDivElement>(".letter-container").textContent
+			)
+		),
+		lastRow: HTMLDivElement = rows[nextIndex - 1],
+		isComplete = !!(
+			(lastRow?.children.length &&
+				[...lastRow.children].every(tile =>
+					tile.classList.contains("correct")
+				)) ||
+			nextIndex === -1
+		);
 
 	if (isComplete) {
 		const finalScore = nextIndex === -1 ? 12 : nextIndex;
