@@ -52,28 +52,22 @@ presence.on("UpdateData", async () => {
 					if (!privacy) {
 						if (presenceData.startTimestamp) delete presenceData.startTimestamp;
 						presenceData.details = document.querySelector(
-							"[class='title-field body-copy']"
+							".title-field.body-copy"
 						)?.textContent;
-						presenceData.state = document.querySelector(
-							'[class="subtitle-field"]'
-						)?.textContent;
+						presenceData.state =
+							document.querySelector(".subtitle-field")?.textContent;
 
-						const paused = !!document.querySelector("[aria-label='Play']");
+						const paused = !!document.querySelector("[aria-label='Play']"),
+							timeRemaining = document.querySelector(
+								".time-remaining-label"
+							)?.textContent;
+
 						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 						presenceData.smallImageText = paused ? strings.pause : strings.play;
-						const stamps = document
-							.querySelectorAll('[class="slider-container"]')[1]
-							.getAttribute("aria-valuetext")
-							.split("of ");
-						if (!paused && !isNaN(Number(stamps[1]))) {
-							const endDateObj = new Date();
-							endDateObj.setSeconds(
-								endDateObj.getSeconds() +
-									presence.timestampFromFormat(
-										document.querySelector(".time-remaining-label").textContent
-									)
-							);
-							presenceData.endTimestamp = endDateObj.getTime();
+
+						if (!paused && timeRemaining) {
+							presenceData.endTimestamp =
+								Date.now() / 1000 + presence.timestampFromFormat(timeRemaining);
 						}
 					} else presenceData.details = "Watching content";
 

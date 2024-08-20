@@ -10,12 +10,13 @@ const enum PresenceAssets {
 }
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
+	const language = await presence.getSetting<number>("displayLanguage"),
+		strings = languageStrings[["en", "ja"][language] as "en" | "ja"],
+		presenceData: PresenceData = {
 			largeImageKey: PresenceAssets.Logo,
 			startTimestamp: browsingTimestamp,
+			name: strings.title,
 		},
-		language = await presence.getSetting<number>("displayLanguage"),
-		strings = languageStrings[["en", "ja"][language] as "en" | "ja"],
 		rows = [...document.querySelectorAll<HTMLDivElement>(".grid > div")],
 		nextIndex = rows.findIndex(row =>
 			[...row.children].every(

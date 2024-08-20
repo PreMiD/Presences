@@ -551,7 +551,7 @@ presence.on("UpdateData", async () => {
 		if (
 			document
 				.querySelector<HTMLIFrameElement>("iframe")
-				?.src.includes("replay.beatleader.xyz") &&
+				?.src.includes("replay.beatleader.") &&
 			replay.name
 		) {
 			presenceData.largeImageKey = cover ? replay.cover : Assets.Replay;

@@ -16,9 +16,9 @@
 		"vi_VN": "Xem anime online với phụ đề tiếng việt.",
 		"nl": "Bekijk jouw favoriete anime online met Vietnamese ondertiteling!"
 	},
-	"url": "animevietsub.art",
+	"url": "animevietsub.dev",
 	"regExp": "animevietsub\\..*",
-	"version": "1.0.13",
+	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Animevietsub/assets/logo.jpeg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Animevietsub/assets/thumbnail.png",
 	"color": "#8b0000",

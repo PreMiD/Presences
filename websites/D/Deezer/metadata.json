@@ -23,10 +23,10 @@
 		"ga_IE": "Éifeall na ceimhniú a thágthóg, uair éirinn."
 	},
 	"url": "www.deezer.com",
-	"version": "2.3.2",
+	"version": "2.3.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Deezer/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Deezer/assets/thumbnail.png",
-	"color": "#A31D7C",
+	"color": "#a238ff",
 	"category": "music",
 	"tags": [
 		"radio",
