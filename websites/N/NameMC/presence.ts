@@ -98,19 +98,16 @@ presence.on("UpdateData", async () => {
 		"/cape/": {
 			details: strings.viewCape,
 			state: `${
-				document
-					.querySelector(".default-skin main.container h1")
-					?.textContent.split("\n")[1]
-			} Cape`,
+				document.querySelector("main > h1")?.textContent.split("\n")[1]
+			}`,
 		},
 		"/minecraft-servers/": {
 			details: strings.servers,
 		},
 		"/server/": {
 			details: strings.viewServer,
-			state: document.querySelector(
-				"body > main > div.row.no-gutters.align-items-center > div.col > h1"
-			)?.textContent,
+			state: document.querySelector("body > main > div > div > h1")
+				?.textContent,
 			buttons: [
 				{
 					label: strings.buttonViewServer,
@@ -136,7 +133,8 @@ presence.on("UpdateData", async () => {
 		},
 		"/profile/": {
 			details: strings.viewProfile,
-			state: document.querySelector("body > main > h1")?.textContent,
+			state: document.querySelector("body > main > div > div > h1")
+				?.textContent,
 			buttons: [
 				{
 					label: strings.buttonViewProfile,
@@ -148,11 +146,9 @@ presence.on("UpdateData", async () => {
 			details: strings.viewing,
 			state: strings.privacy,
 		},
-		"/search/": {
+		"/search": {
 			details: strings.search,
-			state: document.querySelector(
-				"#status-bar > div > div > div.col-lg-7 > h1 > samp"
-			)?.textContent,
+			state: document.URL.split("/search?q=")[1],
 			smallImageKey: Assets.Search,
 		},
 		"/skin/": {
