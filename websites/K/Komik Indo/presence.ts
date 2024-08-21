@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/sraecZJ.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/K/Komik%20Indo/assets/logo.png",
 }
 
 function getTitleText(selector: string): string {
