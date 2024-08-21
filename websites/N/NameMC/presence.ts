@@ -148,7 +148,7 @@ presence.on("UpdateData", async () => {
 		},
 		"/search": {
 			details: strings.search,
-			state: document.URL.split("/search?q=")[1],
+			state: document.location.href.split("/search?q=")[1],
 			smallImageKey: Assets.Search,
 		},
 		"/skin/": {
@@ -160,9 +160,9 @@ presence.on("UpdateData", async () => {
 	else {
 		for (const [k, v] of Object.entries(statics)) {
 			if (
-				location.href
+				document.location.href
 					.replace(/\/?$/, "/")
-					.replace(`https://${location.hostname}`, "")
+					.replace(`https://${document.location.hostname}`, "")
 					.replace("?", "/")
 					.match(k)
 			) {
