@@ -3,15 +3,15 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000),
 	difficultyImages: Record<string, string> = {
-		Easy: "https://i.imgur.com/Bt0cKYs.png",
-		Normal: "https://i.imgur.com/fmxpgSU.png",
-		Hard: "https://i.imgur.com/IN1GT84.png",
-		Expert: "https://i.imgur.com/aibm4vl.png",
-		"Expert+": "https://i.imgur.com/LEHgcPp.png",
+		Easy: "https://cdn.rcd.gg/PreMiD/websites/A/AccSaber/assets/0.png",
+		Normal: "https://cdn.rcd.gg/PreMiD/websites/A/AccSaber/assets/1.png",
+		Hard: "https://cdn.rcd.gg/PreMiD/websites/A/AccSaber/assets/2.png",
+		Expert: "https://cdn.rcd.gg/PreMiD/websites/A/AccSaber/assets/3.png",
+		"Expert+": "https://cdn.rcd.gg/PreMiD/websites/A/AccSaber/assets/4.png",
 	};
 
 const enum Assets {
-	Logo = "https://i.imgur.com/VkOt2JM.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/AccSaber/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {
