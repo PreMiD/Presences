@@ -467,7 +467,7 @@ presence.on("UpdateData", async () => {
 						profilePic =
 							document
 								.querySelector<HTMLImageElement>(
-									".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
+									"#live-channel-stream-information > div > div > div.Layout-sc-1xcs6mc-0.dRGOOY > div > div.Layout-sc-1xcs6mc-0.iXRytg > div > div > div.Layout-sc-1xcs6mc-0.kpHsJz.avatar--t0iT1 > a > div > div.ScAvatar-sc-144b42z-0.dFBjte.tw-avatar > img"
 								)
 								?.src?.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600") ??
 							(logoArr[logo] || Assets.Logo);
@@ -487,7 +487,6 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageKey = Assets.Live;
 					presenceData.smallImageText = strings.live;
 					if (pfp) presenceData.largeImageKey = profilePic;
-
 					presenceData.buttons = [
 						{
 							label: strings.watchStream,
