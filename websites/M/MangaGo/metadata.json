@@ -1,0 +1,46 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "533014724569333770",
+		"name": "_hikki_"
+	},
+	"service": "MangaGo",
+	"description": {
+		"en": "MangaGo is a popular online platform for reading manga, manhwa and more, offering a vast library of titles across various genres",
+		"it": "MangaGo è una popolare piattaforma online per la lettura di manga, manhwa e altro ancora, che offre una vasta libreria di titoli di vari generi"
+	},
+	"url": "mangago.me",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/rP7IIzD.png",
+	"thumbnail": "https://i.imgur.com/dpAajQr.png",
+	"color": "#C19C93",
+	"category": "anime",
+	"tags": ["mangago", "manga", "manwha", "manhua", "reading"],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		},
+		{
+			"id": "time",
+			"title": "Show timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "cover",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		}
+	]
+}
