@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector("#dropdown-chapter-page").textContent
 				}/${
 					document
-						.querySelectorAll(".dropdown-menu.chapter")[0]
+						.querySelector(".dropdown-menu.chapter")
 						.querySelectorAll("li").length
 				}`;
 			}
