@@ -93,6 +93,72 @@ presence.on("UpdateData", async () => {
 					];
 					break;
 				}
+				case "opus": {
+					if (privacy) {
+						presenceData.details = "Viewing a tweet";
+						break;
+					}
+					presenceData.details = `Viewing ${document
+						.querySelector(".opus-module-author__name")
+						.textContent.trim()}'s tweet`;
+					presenceData.buttons = [
+						{
+							label: "View Tweet",
+							url: `https://www.bilibili.com/opus/${urlpath[2]}`,
+						},
+					];
+					presenceData.startTimestamp = browsingTimestamp;
+					break;
+				}
+				case "read": {
+					if (privacy) {
+						presenceData.details = "Reading an article";
+						break;
+					}
+					presenceData.details = document
+						.querySelector(".title")
+						.textContent.trim();
+					presenceData.state = document
+						.querySelector(".up-name")
+						.textContent.trim();
+					presenceData.buttons = [
+						{
+							label: "Read Article",
+							url: `https://www.bilibili.com/read/${urlpath[2]}`,
+						},
+					];
+					break;
+				}
+				case "list": {
+					if (privacy) {
+						presenceData.details = "Watching a playlist";
+						break;
+					}
+					if (urlpath[2] === "watchlater") {
+						presenceData.details = "Watching a watch later playlist";
+						break;
+					}
+					getTimestamps();
+					presenceData.details = document
+						.querySelector(".list-title")
+						.textContent.trim();
+					presenceData.state = document
+						.querySelector(".video-title")
+						.textContent.trim();
+					presenceData.buttons = [
+						{
+							label: "View Playlist",
+							url: `https://www.bilibili.com/list/${urlpath[2]}`,
+						},
+						{
+							label: "Watch Video",
+							url: `https:${document
+								.querySelector(".video-title-href")
+								.getAttribute("href")}`,
+						},
+					];
+					break;
+				}
 				default: {
 					presenceData.startTimestamp = browsingTimestamp;
 					break;
@@ -107,8 +173,39 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `${uploader.textContent} | UID:${urlpath[1]}`;
 			presenceData.buttons = [
 				{
-					label: "View Space", // getString() later
+					label: "View Space",
 					url: `https://space.bilibili.com/${urlpath[1]}`,
+				},
+			];
+			break;
+		}
+		case "t.bilibili.com": {
+			presenceData.details = "Viewing tweets";
+			presenceData.startTimestamp = browsingTimestamp;
+			break;
+		}
+		case "message.bilibili.com": {
+			presenceData.details = "Viewing messages";
+			presenceData.startTimestamp = browsingTimestamp;
+			break;
+		}
+		case "live.bilibili.com": {
+			if (document.querySelector(".small-title") === null) {
+				presenceData.details = document
+					.querySelector(".smaller-title")
+					.textContent.trim();
+			} else if (document.querySelector(".smaller-title") === null) {
+				presenceData.details = document
+					.querySelector(".small-title")
+					.textContent.trim();
+			}
+			presenceData.state = document
+				.querySelector(".room-owner-username")
+				.textContent.trim();
+			presenceData.buttons = [
+				{
+					label: "Watch Stream",
+					url: `https://live.bilibili.com/${urlpath[1]}`,
 				},
 			];
 			break;
