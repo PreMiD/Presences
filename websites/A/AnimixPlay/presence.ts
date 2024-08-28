@@ -28,8 +28,6 @@ presence.on(
 	}
 );
 
-alert("TEST");
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = { 
 		largeImageKey: Assets.Logo,
