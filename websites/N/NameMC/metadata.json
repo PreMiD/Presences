@@ -11,7 +11,7 @@
 	},
 	"url": "namemc.com",
 	"regExp": "([a-z0-9-]+[.])*namemc[.]com[/]",
-	"version": "2.0.20",
+	"version": "2.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/NameMC/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/NameMC/assets/thumbnail.png",
 	"color": "#000000",
@@ -25,6 +25,12 @@
 		{
 			"id": "lang",
 			"multiLanguage": true
+		},
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
 		},
 		{
 			"id": "buttons",
