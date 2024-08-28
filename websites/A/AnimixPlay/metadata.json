@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "871313769723228160",
 		"name": "safu.vsc"
@@ -9,10 +9,10 @@
 		"en": "Animixplay offers the best user experience unmatched by any other platform. Little to no ads, a friendly and ergonomic user interface, an incredibly well organised watchlist, and easy access to all the information you could possibly want about any anime."
 	},
 	"url": [
-        "animixplay.fun",
-        "animixplay.best",
-        "www1.animixplayer.top"
-    ],
+		"animixplay.fun",
+		"animixplay.best",
+		"www1.animixplayer.top"
+	],
 	"version": "1.0.0",
 	"logo": "https://animixplay.fun/themes/zanimix/icon.png",
 	"thumbnail": "https://i.ibb.co/jyxY56s/image.png",
@@ -20,9 +20,9 @@
 	"category": "anime",
 	"tags": [
 		"anime",
-        "streaming",
-        "video"
+		"streaming",
+		"video"
 	],
-    "iframe": true,
+	"iframe": true,
 	"iFrameRegExp": ".*"
 }
