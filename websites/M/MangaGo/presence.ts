@@ -4,8 +4,8 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/rP7IIzD.png",
-	LogoV2 = "https://i.imgur.com/09UtIX0.png",
+	Logo = "https://i.imgur.com/H99kQ0R.png",
+	LogoV2 = "https://i.imgur.com/n4K3YfZ.png",
 }
 
 async function getStrings() {
