@@ -9,13 +9,22 @@
 		"en": "MangaGo is a popular online platform for reading manga, manhwa and more, offering a vast library of titles across various genres",
 		"it": "MangaGo è una popolare piattaforma online per la lettura di manga, manhwa e altro ancora, che offre una vasta libreria di titoli di vari generi"
 	},
-	"url": ["www.mangago.me","mangago.me"],
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/H99kQ0R.png",
-	"thumbnail": "https://i.imgur.com/JuRQMxr.png",
+	"url": [
+		"www.mangago.me",
+		"mangago.me"
+	],
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaGo/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaGo/assets/thumbnail.png",
 	"color": "#C19C93",
 	"category": "anime",
-	"tags": ["mangago", "manga", "manwha", "manhua", "reading"],
+	"tags": [
+		"mangago",
+		"manga",
+		"manwha",
+		"manhua",
+		"reading"
+	],
 	"settings": [
 		{
 			"id": "lang",
