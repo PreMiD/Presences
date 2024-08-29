@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 				},
 			],
 		},
-		{ href } = document.location;
+		{ pathname, href } = document.location;
 
 	if (
 		href.startsWith("https://animixplay.fun/") ||
@@ -46,8 +46,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.duration)
 			),
 			TitleAndEpisode =
-				// eslint-disable-next-line unicorn/prefer-query-selector
-				document.getElementsByClassName("animetitle")[0].innerHTML;
+				document.querySelector(".animetitle").textContent;
 
 		presenceData.startTimestamp = startTimestamp;
 		presenceData.endTimestamp = endTimestamp;
@@ -60,6 +59,17 @@ presence.on("UpdateData", async () => {
 
 		presenceData.smallImageKey = Assets.Play;
 		presenceData.smallImageText = "Playing";
+	}
+
+	if (href.startsWith("https://animixplay.st/")) {
+		if (pathname.startsWith("/v1")) {
+			presenceData.details = `Watching ${document.querySelector(".animetitle").textContent}`;
+			presenceData.state = `On ${document.querySelector("#eptitleplace").textContent}`;
+
+			presenceData.smallImageKey = Assets.Play;
+			presenceData.smallImageText = "Playing";
+			} else 
+			presenceData.details = "Browsing Anime";
 	}
 	presence.setActivity(presenceData);
 });
