@@ -45,8 +45,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
 			),
-			TitleAndEpisode =
-				document.querySelector(".animetitle").textContent;
+			TitleAndEpisode = document.querySelector(".animetitle").textContent;
 
 		presenceData.startTimestamp = startTimestamp;
 		presenceData.endTimestamp = endTimestamp;
@@ -63,13 +62,16 @@ presence.on("UpdateData", async () => {
 
 	if (href.startsWith("https://animixplay.st/")) {
 		if (pathname.startsWith("/v1")) {
-			presenceData.details = `Watching ${document.querySelector(".animetitle").textContent}`;
-			presenceData.state = `On ${document.querySelector("#eptitleplace").textContent}`;
+			presenceData.details = `Watching ${
+				document.querySelector(".animetitle").textContent
+			}`;
+			presenceData.state = `On ${
+				document.querySelector("#eptitleplace").textContent
+			}`;
 
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Playing";
-			} else 
-			presenceData.details = "Browsing Anime";
+		} else presenceData.details = "Browsing Anime";
 	}
 	presence.setActivity(presenceData);
 });
