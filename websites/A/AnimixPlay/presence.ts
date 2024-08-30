@@ -1,11 +1,6 @@
 const presence = new Presence({
 		clientId: "1278380348731818081",
 	}),
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets { // Other default assets can be found at index.d.ts
@@ -24,12 +19,6 @@ presence.on("iFrameData", (data: { duration: number; currentTime: number }) => {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
-			buttons: [
-				{
-					label: "Visit AnimixPlay",
-					url: "https://animixplay.fun/",
-				},
-			],
 		},
 		{ pathname, href } = document.location;
 
@@ -45,16 +34,16 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
 			),
-			TitleAndEpisode = document.querySelector(".animetitle").textContent;
+			titleAndEpisode = document.querySelector(".animetitle").textContent;
 
 		presenceData.startTimestamp = startTimestamp;
 		presenceData.endTimestamp = endTimestamp;
 
-		presenceData.details = `Watching ${TitleAndEpisode.replace(
+		presenceData.details = `Watching ${titleAndEpisode.replace(
 			/Episode [0-9]+/,
 			""
 		)}`;
-		presenceData.state = `On ${TitleAndEpisode.match(/Episode [0-9]+/)}`;
+		presenceData.state = `On ${titleAndEpisode.match(/Episode [0-9]+/)}`;
 
 		presenceData.smallImageKey = Assets.Play;
 		presenceData.smallImageText = "Playing";
