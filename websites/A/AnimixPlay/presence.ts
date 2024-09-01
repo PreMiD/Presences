@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets { // Other default assets can be found at index.d.ts
-	Logo = "https://animixplay.fun/themes/zanimix/icon.png",
+	Logo = "https://i.postimg.cc/9XLKNDt8/icon-animixplay.png",
 }
 
 let video = {
