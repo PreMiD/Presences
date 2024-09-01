@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
 		"id": "708746139092123679",
 		"name": "mert.gg"
@@ -13,8 +13,6 @@
 		"www.animeelysium.com",
 		"animeelysium.com"
 	],
-	"iframe": true,
-	"iFrameRegExp": ".*",
 	"version": "1.0.0",
 	"logo": "https://animeelysium.com/logo512.png",
 	"thumbnail": "https://animeelysium.com/image.png",
@@ -27,5 +25,7 @@
 		"turkanime",
 		"animeelysium",
 		"elysium"
-	]
+	],
+	"iframe": true,
+	"iFrameRegExp": ".*"
 }
