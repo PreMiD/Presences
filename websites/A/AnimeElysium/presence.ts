@@ -5,8 +5,8 @@ interface Video {
 }
 
 const presence = new Presence({
-	clientId: "1278837516165713962",
-}),
+		clientId: "1278837516165713962",
+	}),
 	strings = presence.getStrings({
 		playing: "general.playing",
 		paused: "general.paused",
@@ -29,24 +29,37 @@ presence.on("iFrameData", (msg: Video) => {
 	video = msg;
 });
 
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: Assets.Logo,
-	},
-		infoTitle = document.querySelector("#root > div > div.bg-\\[\\#212121\\].shadow-lg.rounded-md.transition-all.duration-300.flex-row.mx-auto.w-4\\/6.xl\\:w-9\\/12.lg\\:w-10\\/12.md\\:w-full.sm\\:w-full.xs\\:w-full.h-full.drop-shadow-xl > div > div.w-full.mx-auto > div > div.relative.z-10.w-2\\/3.xs\\:w-full.sm\\:w-full > h2")?.textContent.trim(),
-		episodeTitle = document.querySelector("#root > div > div.bg-\\[\\#212121\\].shadow-lg.rounded-md.transition-all.duration-300.flex-row.mx-auto.w-4\\/6.xl\\:w-9\\/12.lg\\:w-10\\/12.md\\:w-full.sm\\:w-full.xs\\:w-full.h-full.drop-shadow-xl > div > div.w-full.h-16.p-2.m-2.bg-\\[\\#181818\\].flex.flex-row.justify-between > div:nth-child(1) > div.text-white.cursor-pointer > span.font-bold")?.textContent.trim(),
-		episode = document.querySelector("#root > div > div.bg-\\[\\#212121\\].shadow-lg.rounded-md.transition-all.duration-300.flex-row.mx-auto.w-4\\/6.xl\\:w-9\\/12.lg\\:w-10\\/12.md\\:w-full.sm\\:w-full.xs\\:w-full.h-full.drop-shadow-xl > div > div.w-full.h-16.p-2.m-2.bg-\\[\\#181818\\].flex.flex-row.justify-between > div:nth-child(1) > div.text-white.cursor-pointer > span.text-xs")?.textContent.trim(),
-		animeImage = document.querySelector("#root > div > div.bg-\\[\\#212121\\].shadow-lg.rounded-md.transition-all.duration-300.flex-row.mx-auto.w-4\\/6.xl\\:w-9\\/12.lg\\:w-10\\/12.md\\:w-full.sm\\:w-full.xs\\:w-full.h-full.drop-shadow-xl > div > div:nth-child(2) > div.w-4\\/12 > div > div.bg-\\[\\#181818\\].flex.flex-row.mb-2.h-20.items-center.p-2.rounded-md > img")?.getAttribute("src");
+			largeImageKey: Assets.Logo,
+		},
+		infoTitle = document
+			.querySelector(
+				"#root > div > div.bg-\\[\\#212121\\].shadow-lg.rounded-md.transition-all.duration-300.flex-row.mx-auto.w-4\\/6.xl\\:w-9\\/12.lg\\:w-10\\/12.md\\:w-full.sm\\:w-full.xs\\:w-full.h-full.drop-shadow-xl > div > div.w-full.mx-auto > div > div.relative.z-10.w-2\\/3.xs\\:w-full.sm\\:w-full > h2"
+			)
+			?.textContent.trim(),
+		episodeTitle = document
+			.querySelector(
+				"#root > div > div.bg-\\[\\#212121\\].shadow-lg.rounded-md.transition-all.duration-300.flex-row.mx-auto.w-4\\/6.xl\\:w-9\\/12.lg\\:w-10\\/12.md\\:w-full.sm\\:w-full.xs\\:w-full.h-full.drop-shadow-xl > div > div.w-full.h-16.p-2.m-2.bg-\\[\\#181818\\].flex.flex-row.justify-between > div:nth-child(1) > div.text-white.cursor-pointer > span.font-bold"
+			)
+			?.textContent.trim(),
+		episode = document
+			.querySelector(
+				"#root > div > div.bg-\\[\\#212121\\].shadow-lg.rounded-md.transition-all.duration-300.flex-row.mx-auto.w-4\\/6.xl\\:w-9\\/12.lg\\:w-10\\/12.md\\:w-full.sm\\:w-full.xs\\:w-full.h-full.drop-shadow-xl > div > div.w-full.h-16.p-2.m-2.bg-\\[\\#181818\\].flex.flex-row.justify-between > div:nth-child(1) > div.text-white.cursor-pointer > span.text-xs"
+			)
+			?.textContent.trim(),
+		animeImage = document
+			.querySelector(
+				"#root > div > div.bg-\\[\\#212121\\].shadow-lg.rounded-md.transition-all.duration-300.flex-row.mx-auto.w-4\\/6.xl\\:w-9\\/12.lg\\:w-10\\/12.md\\:w-full.sm\\:w-full.xs\\:w-full.h-full.drop-shadow-xl > div > div:nth-child(2) > div.w-4\\/12 > div > div.bg-\\[\\#181818\\].flex.flex-row.mb-2.h-20.items-center.p-2.rounded-md > img"
+			)
+			?.getAttribute("src");
 
 	if (window.location.pathname === "/") {
 		presenceData.details = `${(await strings).browsing}`;
 		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 		presenceData.smallImageText = (await strings).browsing;
 		presenceData.smallImageKey = Assets.Viewing;
-
 	} else if (window.location.pathname.startsWith("/info/") && infoTitle) {
-
 		presenceData.details = (await strings).viewAnime;
 		presenceData.state = infoTitle;
 		presenceData.buttons = [
@@ -55,17 +68,21 @@ presence.on("UpdateData", async () => {
 				url: document.URL,
 			},
 		];
-	} else if (window.location.pathname.startsWith("/watch/") && episodeTitle && episode) {
-
+	} else if (
+		window.location.pathname.startsWith("/watch/") &&
+		episodeTitle &&
+		episode
+	) {
 		const epNum = episode.match(/[0-9]+\.Bölüm/g);
 
 		presenceData.type = ActivityType.Watching;
 		presenceData.details = `${(await strings).watching} ${episodeTitle}`;
 		if (animeImage) presenceData.largeImageKey = animeImage;
 		if (epNum) {
-			presenceData.state = `${(await strings).episode} ${epNum[0].split(".")[0]
-				}`;
-		};
+			presenceData.state = `${(await strings).episode} ${
+				epNum[0].split(".")[0]
+			}`;
+		}
 		presenceData.buttons = [
 			{
 				label: (await strings).watchEpisode,
@@ -77,7 +94,7 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 		presenceData.smallImageText = (await strings).browsing;
 		presenceData.smallImageKey = Assets.Viewing;
-	};
+	}
 
 	if (episode && episodeTitle && video) {
 		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
@@ -91,7 +108,7 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.duration)
 			);
 		}
-	};
+	}
 
 	presence.setActivity(presenceData);
 });
