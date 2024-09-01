@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"author": {
+		"id": "708746139092123679",
+		"name": "mert.gg"
+	},
+	"service": "AnimeElysium",
+	"description": {
+		"en": "Anime Elysium is a streaming platform dedicated to anime enthusiasts. Here, you can watch a wide range of anime series and discover new titles to explore. The latest episodes are uploaded promptly, ensuring you stay up-to-date with the most current releases.",
+		"tr": "Anime Elysium, anime tutkunlarına özel olarak tasarlanmış bir izleme platformudur. Kullanıcılar, bu platform üzerinden geniş bir anime koleksiyonuna erişebilir ve yeni yapımları keşfetme imkanı bulabilir. Güncel animeler, hızlı ve anlık olarak sisteme yüklenerek izleyicilere en son içeriklere kolayca ulaşma olanağı sağlar."
+	},
+	"url": [
+		"www.animeelysium.com",
+		"animeelysium.com"
+	],
+	"iframe": true,
+	"iFrameRegExp": ".*",
+	"version": "1.0.0",
+	"logo": "https://animeelysium.com/logo512.png",
+	"thumbnail": "https://animeelysium.com/image.png",
+	"color": "#5D3FD3",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"turkceanimeizle",
+		"animeizle",
+		"turkanime",
+		"animeelysium",
+		"elysium"
+	]
+}
