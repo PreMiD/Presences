@@ -203,11 +203,14 @@ presence.on("UpdateData", async () => {
 					),
 					difficulty =
 						previewURL.searchParams.get("difficulty") ??
-						document.querySelector(".primary > span:last-of-type").textContent,
+						document
+							.querySelector(".diff-tab-button.primary > span")
+							?.textContent?.split(" ")[0],
 					mode =
 						previewURL.searchParams.get("mode") ??
-						document.querySelector<HTMLDivElement>(".primary > span > div")
-							?.title;
+						document.querySelector<HTMLDivElement>(
+							".primary.mode-tab-button > span > div"
+						)?.title;
 
 				let mappers = "";
 
@@ -223,11 +226,11 @@ presence.on("UpdateData", async () => {
 				if (mapSmallImages !== 3) {
 					presenceData.smallImageText = `${
 						mapSmallImages === 0 || mapSmallImages === 1
-							? mode.replaceAll("_", " ")
+							? mode?.replaceAll("_", " ")
 							: ""
 					} ${
 						mapSmallImages === 0 || mapSmallImages === 2
-							? difficulty.replace("Plus", "+")
+							? difficulty?.replace("Plus", "+")
 							: ""
 					}`;
 					presenceData.smallImageKey =
@@ -235,7 +238,7 @@ presence.on("UpdateData", async () => {
 							simplifyKey(
 								`${mapSmallImages === 0 || mapSmallImages === 1 ? mode : ""}${
 									mapSmallImages === 0 || mapSmallImages === 2
-										? difficulty.replace("+", "Plus")
+										? difficulty?.replace("+", "Plus")
 										: ""
 								}`
 							)
@@ -243,7 +246,7 @@ presence.on("UpdateData", async () => {
 						leaderboardImages[
 							`Unknown${
 								mapSmallImages === 0 || mapSmallImages === 2
-									? difficulty.replace("+", "Plus")
+									? difficulty?.replace("+", "Plus")
 									: ""
 							}`
 						];
@@ -251,7 +254,7 @@ presence.on("UpdateData", async () => {
 				if (cover) {
 					presenceData.largeImageKey = document
 						.querySelector<HTMLDivElement>(".map-cover")
-						.style.backgroundImage.match(
+						?.style.backgroundImage.match(
 							/(https:\/\/.+\.((png)|(jpg)|(jpeg)|(webp)))/g
 						)
 						?.toString();
@@ -385,5 +388,4 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details && presenceData.largeImageKey)
 		presence.setActivity(presenceData);
-	else presence.setActivity();
 });
