@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 			.querySelector("#titreOeuvre")
 			.textContent.trim();
 		presenceData.buttons = [{ label: "Voir la Page", url: href }];
-		presenceData.largeImageKey = 
+		presenceData.largeImageKey =
 			document.querySelector<HTMLMetaElement>("[property='og:image']")
 				?.content ?? Assets.Logo;
 	} else if (document.querySelector<HTMLSelectElement>("#selectEpisodes")) {
@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = Assets.Pause;
 		presenceData.smallImageText =
 			selectLecteur.options[selectLecteur.selectedIndex].value;
-		presenceData.largeImageKey = 
+		presenceData.largeImageKey =
 			document.querySelector<HTMLMetaElement>("[property='og:image']")
 				?.content ?? Assets.Logo;
 		if (!paused) {
@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText =
 			selectLecteur.options[selectLecteur.selectedIndex].value;
 		presenceData.buttons = [{ label: "Voir le Scan", url: href }];
-		presenceData.largeImageKey = 
+		presenceData.largeImageKey =
 			document.querySelector<HTMLMetaElement>("[property='og:image']")
 				?.content ?? Assets.Logo;
 	}
