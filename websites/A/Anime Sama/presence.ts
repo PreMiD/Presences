@@ -34,10 +34,7 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, href } = document.location,
 		pathArr = pathname.split("/"),
-		[
-			showButtons,
-			showCover,
-		] = await Promise.all([
+		[showButtons, showCover] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("cover"),
 		]);
