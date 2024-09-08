@@ -67,9 +67,9 @@ presence.on("UpdateData", async () => {
 				document.querySelectorAll(".name")[i].textContent
 			}\n`;
 		}
-		presenceData.details = `Viewing top-anime: ${
-			document.querySelector(".nav-link.active").textContent
-		}`;
+		presenceData.details = `Viewing top-anime: ${document
+			.querySelector(".nav-link.active")
+			.textContent.replace(/\n\s+/g, "")}`;
 		presenceData.state = top3;
 	} else if (pathname.startsWith("/anime")) {
 		delete presenceData.startTimestamp;
@@ -77,11 +77,10 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = paused ? strings.paused : strings.play;
 
 		presenceData.details = document.querySelector(".title").textContent;
-		presenceData.state = `Episode ${
-			document
-				.querySelector(".episode.episode-item.active.seen")
-				.querySelector("a").textContent
-		}`;
+		presenceData.state = `Episode ${document
+			.querySelector(".episode.episode-item.active.seen")
+			.querySelector("a")
+			.textContent.replace(/\n\s+/g, "")}`;
 		presenceData.largeImageKey = cover
 			? (presenceData.largeImageKey =
 					document.querySelector<HTMLImageElement>(".cover")?.src ??

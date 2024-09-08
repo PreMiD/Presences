@@ -8,6 +8,10 @@
 		{
 			"name": "Moe Kotoki",
 			"id": "276627005280092162"
+		},
+		{
+			"name": "TheWhiteDog9487",
+			"id": "531317938863603722"
 		}
 	],
 	"service": "bilibili",
@@ -23,7 +27,7 @@
 		"biligame.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*(bilibili|biligame)[.]com[/]",
-	"version": "2.4.2",
+	"version": "2.5.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/bilibili/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/bilibili/assets/thumbnail.jpg",
 	"color": "#05acff",

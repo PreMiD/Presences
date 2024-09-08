@@ -8,20 +8,16 @@ async function getCover(songId: string): Promise<string> {
 
 	coverCache[songId] = null;
 
-	try {
-		const response = await fetch(
-			`https://api.beatleader.xyz/leaderboard/${songId}?count=0`
-		);
-		if (!response.ok) throw new Error(`Response status: ${response.status}`);
+	const response = await fetch(
+		`https://api.beatleader.xyz/leaderboard/${songId}?count=0`
+	);
+	if (!response.ok) throw new Error(`Response status: ${response.status}`);
 
-		const json = await response.json();
+	const json = await response.json();
 
-		coverCache[songId] = json.song.coverImage;
+	coverCache[songId] = json.song.coverImage;
 
-		return json.song.coverImage;
-	} catch (error) {
-		presence.error(error.message);
-	}
+	return json.song.coverImage;
 }
 
 if (document.location.href.includes("https://replay.beatleader.")) {
