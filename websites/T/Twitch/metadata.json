@@ -8,6 +8,10 @@
 		{
 			"name": "RisingSunLight",
 			"id": "240521747852558347"
+		},
+		{
+			"name": "Hikki",
+			"id": "533014724569333770"
 		}
 	],
 	"service": "Twitch",
@@ -44,7 +48,7 @@
 	"matches": [
 		"*://*.twitch.tv/*"
 	],
-	"version": "3.2.15",
+	"version": "3.2.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Twitch/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Twitch/assets/thumbnail.png",
 	"color": "#9146FF",
