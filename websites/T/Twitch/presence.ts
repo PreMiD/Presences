@@ -467,7 +467,7 @@ presence.on("UpdateData", async () => {
 						profilePic =
 							document
 								.querySelector<HTMLImageElement>(
-									".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
+									"[class*=channel-info-content] [class*=tw-image]"
 								)
 								?.src?.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600") ??
 							(logoArr[logo] || Assets.Logo);
