@@ -8,7 +8,6 @@ import {
 	fetchMetadata,
 	metadata,
 } from "./functions/fetchMetadata";
-import { getBuildIdentifier } from "./functions/getBuildIdentifier";
 import { ShowVideo } from "./types";
 
 const presence = new Presence({
@@ -63,8 +62,6 @@ presence.on("UpdateData", async () => {
 		oldLang = lang;
 		strings = await getStrings();
 	}
-
-	await getBuildIdentifier(presence);
 
 	const path = document.location.href,
 		//* Match /title/id and get id (When you load the page / reload while browsing)
