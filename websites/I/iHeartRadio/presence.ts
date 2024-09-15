@@ -218,11 +218,14 @@ presence.on("UpdateData", async () => {
 					.querySelector('div[data-test="player-artwork-image"]')
 					?.querySelector("div")
 					?.querySelector("img")?.src,
-				metadataText = document
-					.querySelector('div[data-test="player-text"]')
-					?.querySelectorAll("a");
+				metadataText =
+					document
+						.querySelector('div[data-test="player-text"]')
+						?.querySelectorAll("a") ?? null;
 
-			presenceData.state = document.querySelector('div[data-test="player-text"]')?.querySelector("a")?.textContent;
+			presenceData.state = document
+				.querySelector('div[data-test="player-text"]')
+				?.querySelector("a")?.textContent;
 			presenceData.details =
 				metadataText[1]?.textContent && metadataText[2]?.textContent
 					? `${metadataText[1]?.textContent} · ${metadataText[2]?.textContent}`
@@ -266,7 +269,10 @@ presence.on("UpdateData", async () => {
 					.querySelector('div[data-test="player-artwork-image"]')
 					?.querySelector("div")
 					?.querySelector("img")?.src,
-				metadataText = document.querySelector('div[data-test="player-text"]')?.querySelectorAll("a"),
+				metadataText =
+					document
+						.querySelector('div[data-test="player-text"]')
+						?.querySelectorAll("a") ?? null,
 				currentTime = presence.timestampFromFormat(
 					document.querySelector('div[aria-label="Seekbar Position"]')
 						?.textContent
@@ -279,7 +285,9 @@ presence.on("UpdateData", async () => {
 					)
 				);
 
-			presenceData.state = document.querySelector('div[data-test="player-text"]')?.querySelector("a")?.textContent;
+			presenceData.state = document
+				.querySelector('div[data-test="player-text"]')
+				?.querySelector("a")?.textContent;
 			presenceData.details =
 				metadataText[1]?.textContent && metadataText[2]?.textContent
 					? `${metadataText[1]?.textContent} · ${metadataText[2]?.textContent}`
