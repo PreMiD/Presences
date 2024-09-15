@@ -164,14 +164,13 @@ presence.on("UpdateData", async () => {
 					?.querySelector("h1")?.textContent,
 				stationDesc = document
 					.querySelector('div[data-test="hero-container"]')
-					?.querySelector("h2")?.textContent
-				;
-
+					?.querySelector("h2")?.textContent;
 			presenceData.details = stationName
 				? `Viewing ${stationName} Station`
 				: "Viewing Station Page";
 			presenceData.state = stationDesc;
-			presenceData.largeImageKey = document
+			presenceData.largeImageKey =
+				document
 					.querySelector('div[data-test="hero-container"]')
 					?.querySelector("img")?.src ?? baseImage;
 			presenceData.buttons = [
@@ -190,15 +189,15 @@ presence.on("UpdateData", async () => {
 				?.querySelector("span") &&
 			document.location.pathname !== "/artist/"
 		) {
-			const 
-				artistName = document
-					.querySelector('h1[data-test="artist-title"]')
-					?.querySelector("p")
-					?.querySelector("span")?.textContent;
+			const artistName = document
+				.querySelector('h1[data-test="artist-title"]')
+				?.querySelector("p")
+				?.querySelector("span")?.textContent;
 
 			presenceData.details = "Viewing Artist";
 			presenceData.state = artistName;
-			presenceData.largeImageKey = document
+			presenceData.largeImageKey =
+				document
 					.querySelector('div[data-test="hero-artist"]')
 					?.querySelector("img")?.src ?? baseImage;
 			presenceData.buttons = [
@@ -219,10 +218,11 @@ presence.on("UpdateData", async () => {
 					.querySelector('div[data-test="player-artwork-image"]')
 					?.querySelector("div")
 					?.querySelector("img")?.src,
-				playerText = document.querySelector('div[data-test="player-text"]'),
-				metadataText = playerText?.querySelectorAll("a");
+				metadataText = document
+					.querySelector('div[data-test="player-text"]')
+					?.querySelectorAll("a");
 
-			presenceData.state = playerText?.querySelector("a")?.textContent;
+			presenceData.state = document.querySelector('div[data-test="player-text"]')?.querySelector("a")?.textContent;
 			presenceData.details =
 				metadataText[1]?.textContent && metadataText[2]?.textContent
 					? `${metadataText[1]?.textContent} · ${metadataText[2]?.textContent}`
@@ -266,19 +266,20 @@ presence.on("UpdateData", async () => {
 					.querySelector('div[data-test="player-artwork-image"]')
 					?.querySelector("div")
 					?.querySelector("img")?.src,
-				playerText = document.querySelector('div[data-test="player-text"]'),
-				metadataText = playerText?.querySelectorAll("a"),
-				
-				
-				currentTime = presence.timestampFromFormat(document.querySelector(
-					'div[aria-label="Seekbar Position"]'
-				)?.textContent),
-				
-				timestamps = presence.getTimestamps(currentTime, presence.timestampFromFormat(document.querySelector(
-					'div[aria-label="Seekbar Duration"]'
-				)?.textContent));
+				metadataText = document.querySelector('div[data-test="player-text"]')?.querySelectorAll("a"),
+				currentTime = presence.timestampFromFormat(
+					document.querySelector('div[aria-label="Seekbar Position"]')
+						?.textContent
+				),
+				timestamps = presence.getTimestamps(
+					currentTime,
+					presence.timestampFromFormat(
+						document.querySelector('div[aria-label="Seekbar Duration"]')
+							?.textContent
+					)
+				);
 
-			presenceData.state = playerText?.querySelector("a")?.textContent;
+			presenceData.state = document.querySelector('div[data-test="player-text"]')?.querySelector("a")?.textContent;
 			presenceData.details =
 				metadataText[1]?.textContent && metadataText[2]?.textContent
 					? `${metadataText[1]?.textContent} · ${metadataText[2]?.textContent}`
@@ -359,7 +360,6 @@ presence.on("UpdateData", async () => {
 			const stationName = document
 					.querySelector('main[data-test="main"]')
 					?.querySelector("h1")?.textContent,
-				
 				stationArtwork = document
 					.querySelector('main[data-test="main"]')
 					?.querySelector('div[data-test="image-container"]')
@@ -369,8 +369,8 @@ presence.on("UpdateData", async () => {
 				? `Viewing ${stationName} Station`
 				: "Viewing Station Page";
 			presenceData.state = document
-					.querySelector('main[data-test="main"]')
-					?.querySelector("p").textContent;
+				.querySelector('main[data-test="main"]')
+				?.querySelector("p").textContent;
 			presenceData.largeImageKey = stationArtwork ?? baseImage;
 			presenceData.buttons = [
 				{
@@ -385,16 +385,15 @@ presence.on("UpdateData", async () => {
 			document.querySelector('main[data-test="main"]') &&
 			!document.location.href.includes("/browse/artists")
 		) {
-			const 
-				artistArtwork = document
-					.querySelector('main[data-test="main"]')
-					?.querySelector('div[data-test="image-container"]')
-					?.querySelector("img").src;
+			const artistArtwork = document
+				.querySelector('main[data-test="main"]')
+				?.querySelector('div[data-test="image-container"]')
+				?.querySelector("img").src;
 
 			presenceData.details = "Viewing Artist";
-			presenceData.state = document
-					.querySelector('main[data-test="main"]')
-					?.querySelector("h1")?.textContent ?? "Unknown Artist";
+			presenceData.state =
+				document.querySelector('main[data-test="main"]')?.querySelector("h1")
+					?.textContent ?? "Unknown Artist";
 			presenceData.largeImageKey = artistArtwork ?? baseImage;
 			presenceData.buttons = [
 				{
@@ -492,15 +491,14 @@ presence.on("UpdateData", async () => {
 					?.querySelector("h1")?.textContent,
 				playlistCreator = document
 					.querySelector('div[data-test="hero-container"]')
-					?.querySelectorAll("p")[1]?.textContent
-				;
-
+					?.querySelectorAll("p")[1]?.textContent;
 			presenceData.details = "Viewing Playlist";
 			presenceData.state =
 				playlistTitle && playlistCreator
 					? `${playlistTitle} · ${playlistCreator}`
 					: "Unknown Playlist";
-			presenceData.largeImageKey = document
+			presenceData.largeImageKey =
+				document
 					.querySelector('div[data-test="image-container"]')
 					?.querySelector("img").src ?? baseImage;
 			presenceData.buttons = [
@@ -589,9 +587,10 @@ presence.on("UpdateData", async () => {
 				songDuration = document.querySelector(
 					'span[aria-label="duration"][role="timer"][data-kind="caption-4"]'
 				),
-				
-				
-				timestamps = presence.getTimestamps(presence.timestampFromFormat(songPosition?.textContent), presence.timestampFromFormat(songDuration?.textContent));
+				timestamps = presence.getTimestamps(
+					presence.timestampFromFormat(songPosition?.textContent),
+					presence.timestampFromFormat(songDuration?.textContent)
+				);
 
 			presenceData.largeImageKey = playerArtwork
 				? `${playerArtwork}`
@@ -670,18 +669,17 @@ presence.on("UpdateData", async () => {
 			if (stationDescription && stationFallbackDesc?.textContent)
 				stationDescription = null;
 			if (!stationDescription && !stationFallbackDesc?.textContent) {
-stationName?.textContent
+				stationName?.textContent
 					? (stationDescription = await getStationDesc(
 							stationName?.textContent
 					  ))
 					: (stationDescription = await getStationDesc(
 							stationFallbackName?.textContent
 					  ));
-}
+			}
 
-			if (stationArtwork && stationArtwork.includes("ops=cover")) 
+			if (stationArtwork && stationArtwork.includes("ops=cover"))
 				stationArtWorkFixed = stationArtwork.replace("(400,400)", "(500,500)");
-			
 
 			presenceData.state =
 				stationName?.textContent && stationDescription
