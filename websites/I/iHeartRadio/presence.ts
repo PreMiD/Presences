@@ -230,12 +230,20 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Live;
 			presenceData.smallImageText = (await strings).live;
 
-			if (metadataText && metadataText[0] && metadataText[1] && metadataText[2]) {
-				presenceData.details = metadataText[1]?.textContent && metadataText[2]?.textContent ? `${metadataText[1]?.textContent} · ${metadataText[2]?.textContent}` : "";
+			if (
+				metadataText &&
+				metadataText[0] &&
+				metadataText[1] &&
+				metadataText[2]
+			) {
+				presenceData.details =
+					metadataText[1]?.textContent && metadataText[2]?.textContent
+						? `${metadataText[1]?.textContent} · ${metadataText[2]?.textContent}`
+						: "";
 				presenceData.buttons = [
 					{
 						label: "View Station",
-						url: metadataText[0]?.href ?? null
+						url: metadataText[0]?.href ?? null,
 					},
 				];
 			}
@@ -289,7 +297,12 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document
 				.querySelector('div[data-test="player-text"]')
 				?.querySelector("a")?.textContent;
-			presenceData.details = metadataText && metadataText[1]?.textContent && metadataText[2]?.textContent ? `${metadataText[1]?.textContent} · ${metadataText[2]?.textContent}` : "";
+			presenceData.details =
+				metadataText &&
+				metadataText[1]?.textContent &&
+				metadataText[2]?.textContent
+					? `${metadataText[1]?.textContent} · ${metadataText[2]?.textContent}`
+					: "";
 			presenceData.largeImageKey = playerArtwork ?? baseImage;
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = (await strings).play;
