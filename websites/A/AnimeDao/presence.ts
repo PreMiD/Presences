@@ -112,10 +112,8 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = paused ? strings.paused : strings.play;
 				if (!isNaN(duration) && !paused) {
-					[, presenceData.endTimestamp] = presence.getTimestamps(
-						current,
-						duration
-					);
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestamps(current, duration);
 				}
 				presenceData.buttons = [
 					{

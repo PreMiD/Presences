@@ -23,7 +23,7 @@
 	},
 	"url": "voiranime.com",
 	"regExp": "([a-z0-9-]+[.])*voiranime[.]com[/]",
-	"version": "2.1.9",
+	"version": "2.1.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Voiranime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Voiranime/assets/thumbnail.png",
 	"color": "#1a1920",

@@ -101,8 +101,6 @@ presence.on("UpdateData", async () => {
 		},
 		buttons = await presence.getSetting<boolean>("buttons");
 
-	let endTimestamp = 0;
-
 	switch (true) {
 		case isShop():
 			presenceData.details = "Browsing Shop";
@@ -163,12 +161,10 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = assets[contentStateKey];
 			presenceData.smallImageText = contentStateText;
 
-			[, endTimestamp] = presence.getTimestampsfromMedia(
-				document.querySelector("video")
-			);
-			if (contentStateKey === "play" && endTimestamp > 0)
-				presenceData.endTimestamp = endTimestamp;
-			else {
+			if (contentStateKey === "play") {
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(document.querySelector("video"));
+			} else {
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
 			}
@@ -198,12 +194,10 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = assets[contentStateKey];
 			presenceData.smallImageText = contentStateText;
 
-			[, endTimestamp] = presence.getTimestampsfromMedia(
-				document.querySelector("#audio")
-			);
-			if (contentStateKey === "play" && endTimestamp > 0)
-				presenceData.endTimestamp = endTimestamp;
-			else {
+			if (contentStateKey === "play") {
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(document.querySelector("video"));
+			} else {
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
 			}
@@ -321,6 +315,5 @@ presence.on("UpdateData", async () => {
 		default:
 			presenceData.details = "General Feed";
 	}
-	if (endTimestamp === 0) delete presenceData.endTimestamp;
 	presence.setActivity(presenceData);
 });

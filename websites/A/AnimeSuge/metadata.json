@@ -11,7 +11,7 @@
 	},
 	"url": "animesuge.net",
 	"regExp": "(www[.])?animesuge[.]([a-z]+)",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeSuge/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeSuge/assets/thumbnail.png",
 	"color": "#161616",

@@ -10,7 +10,7 @@
 	},
 	"url": "www.ibroadcast.com",
 	"regExp": "(beta|media|edit).ibroadcast.com",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/iBroadcast/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/iBroadcast/assets/thumbnail.jpg",
 	"color": "#53abee",

@@ -311,10 +311,11 @@ presence.on("UpdateData", async () => {
 								if (player.isPlaying) {
 									presenceData.smallImageKey = Assets.Play;
 									presenceData.smallImageText = "Playing";
-									presenceData.endTimestamp =
-										Math.floor(Date.now() / 1000) +
-										(presence.timestampFromFormat(player.total) -
-											presence.timestampFromFormat(player.elapsed));
+									[presenceData.startTimestamp, presenceData.endTimestamp] =
+										presence.getTimestamps(
+											presence.timestampFromFormat(player.total),
+											presence.timestampFromFormat(player.elapsed)
+										);
 								} else {
 									presenceData.smallImageKey = Assets.Pause;
 									presenceData.smallImageText = "Paused";
@@ -324,12 +325,12 @@ presence.on("UpdateData", async () => {
 									"h1.elementor-heading-title.elementor-size-default > i.fas.fa-video"
 								)
 							) {
-								let timestamps: number[];
 								if (video.duration !== 0) {
-									timestamps = presence.getTimestamps(
-										video.currentTime,
-										video.duration
-									);
+									[presenceData.startTimestamp, presenceData.endTimestamp] =
+										presence.getTimestamps(
+											presence.timestampFromFormat(player.total),
+											presence.timestampFromFormat(player.elapsed)
+										);
 								} else if (document.querySelector("video")) {
 									timestamps = presence.getTimestampsfromMedia(
 										document.querySelector<HTMLMediaElement>("video")
@@ -391,8 +392,6 @@ presence.on("UpdateData", async () => {
 									} else {
 										presenceData.smallImageKey = Assets.Play;
 										presenceData.smallImageText = "Playing";
-										presenceData.startTimestamp = timestamps[0];
-										presenceData.endTimestamp = timestamps[1];
 									}
 								} else if (document.querySelector("video")) {
 									if (
@@ -403,8 +402,6 @@ presence.on("UpdateData", async () => {
 									} else {
 										presenceData.smallImageKey = Assets.Play;
 										presenceData.smallImageText = "Playing";
-										presenceData.startTimestamp = timestamps[0];
-										presenceData.endTimestamp = timestamps[1];
 									}
 								}
 							} else {

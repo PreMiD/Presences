@@ -82,8 +82,10 @@ function videoDetails(presenceData: PresenceData, href: string) {
 		];
 		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused ? strings.paused : strings.play;
-		if (!paused)
-			[, presenceData.endTimestamp] = presence.getTimestamps(current, duration);
+		if (!paused) {
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(current, duration);
+		}
 	} else {
 		presenceData.details = strings.viewShow;
 		presenceData.state = title;

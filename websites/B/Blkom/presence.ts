@@ -30,11 +30,6 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (location.pathname.startsWith("/watch")) {
-		const [startTimestamp, endTimestamp] = presence.getTimestamps(
-			Math.floor(video.currentTime),
-			Math.floor(video.duration)
-		);
-
 		presenceData.details = document
 			.querySelector(".anime-name")
 			.textContent.trim();
@@ -45,8 +40,11 @@ presence.on("UpdateData", async () => {
 
 		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? "Paused" : "Played";
-		presenceData.startTimestamp = startTimestamp;
-		presenceData.endTimestamp = endTimestamp;
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestamps(
+				Math.floor(video.currentTime),
+				Math.floor(video.duration)
+			);
 		if (video.paused) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;

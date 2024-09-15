@@ -133,10 +133,11 @@ presence.on("UpdateData", async () => {
 			// Intentional `delete` for pause boolean
 			delete presenceData.startTimestamp;
 			if (!video.paused) {
-				presenceData.endTimestamp =
-					Date.now() / 1000 +
-					presence.timestampFromFormat(video.duration) -
-					presence.timestampFromFormat(video.currentTime);
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(
+						Math.floor(video.current),
+						Math.floor(video.duration)
+					);
 			}
 
 			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;

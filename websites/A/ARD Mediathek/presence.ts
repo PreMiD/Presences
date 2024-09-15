@@ -85,10 +85,11 @@ presence.on("UpdateData", async () => {
 				videoDateDIV.textContent.indexOf("∙") - 1
 			)}`;
 
-			[, presenceData.endTimestamp] = presence.getTimestamps(
-				Math.floor(video.currentTime),
-				Math.floor(video.duration)
-			);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(
+					Math.floor(video.currentTime),
+					Math.floor(video.duration)
+				);
 			presenceData.buttons = [
 				{ label: (await strings).buttonWatchVideo, url: prevUrl },
 			];

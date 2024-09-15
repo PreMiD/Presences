@@ -44,10 +44,8 @@ presence.on("UpdateData", async function () {
 					presenceData.details = video.title;
 					presenceData.state = video.channel;
 
-					presenceData.endTimestamp = presence.getTimestamps(
-						Math.floor(video.current),
-						Math.floor(video.duration)
-					)[1];
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestampsfromMedia(video);
 				} else {
 					presenceData.state = document.querySelector(
 						"div.userCount.noselect"

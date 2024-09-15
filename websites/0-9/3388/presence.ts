@@ -72,8 +72,10 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
 		if (!video.paused) {
-			presenceData.startTimestamp = startTimestamp;
-			presenceData.endTimestamp = endTimestamp;
+			[presenceData.startTimestamp, presenceData.endTimestamp] = [
+				startTimestamp,
+				endTimestamp,
+			];
 		}
 	} else if (pathname === "/movies") presenceData.details = "Browsing Movies";
 	else if (pathname === "/tv-shows") presenceData.details = "Browsing TV Shows";

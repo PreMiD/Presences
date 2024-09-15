@@ -152,10 +152,8 @@ presence.on("UpdateData", async () => {
 					if (/_/.test(currentWord))
 						presenceData.state = `Current word: ${currentWord}`;
 				}
-				presenceData.endTimestamp = presence.getTimestamps(
-					0,
-					getTimeRemaining()
-				)[1];
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(0, getTimeRemaining());
 				break;
 			}
 		}

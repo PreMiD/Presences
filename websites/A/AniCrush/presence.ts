@@ -40,10 +40,6 @@ presence.on("UpdateData", async () => {
 					.find(div => div.querySelector(".avail .active"))
 					?.querySelector(".item-sub .name")
 					?.textContent?.toLowerCase(),
-				[startTimestamp, endTimestamp] = presence.getTimestamps(
-					Math.floor(video.currentTime),
-					Math.floor(video.duration)
-				),
 				currentEpisodeNumber = Number(
 					document.querySelector(".active .btn-ep")?.textContent
 				),
@@ -67,8 +63,11 @@ presence.on("UpdateData", async () => {
 			}`;
 			if (video.exists) {
 				if (showTimestamps) {
-					presenceData.startTimestamp = startTimestamp;
-					presenceData.endTimestamp = endTimestamp;
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestamps(
+							Math.floor(video.currentTime),
+							Math.floor(video.duration)
+						);
 				}
 				if (video.paused) {
 					presenceData.smallImageKey = Assets.Pause;
@@ -105,10 +104,6 @@ presence.on("UpdateData", async () => {
 					.querySelector(".live-header .other-items")
 					.children[1].querySelector(".text")
 					?.textContent?.toLowerCase(),
-				[startTimestamp, endTimestamp] = presence.getTimestamps(
-					Math.floor(video.currentTime),
-					Math.floor(video.duration)
-				),
 				totalEpisodes = Number(
 					Array.from(
 						document.querySelectorAll(`.item.item-${streamingType} .text`)
@@ -147,8 +142,11 @@ presence.on("UpdateData", async () => {
 			}
 			if (video.exists) {
 				if (showTimestamps) {
-					presenceData.startTimestamp = startTimestamp;
-					presenceData.endTimestamp = endTimestamp;
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestamps(
+							Math.floor(video.currentTime),
+							Math.floor(video.duration)
+						);
 				}
 				if (video.paused) {
 					presenceData.smallImageKey = Assets.Pause;
@@ -208,5 +206,7 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 	}
+	if (presenceData.endTimestamp && presenceData.startTimestamp)
+		presenceData.type = ActivityType.Watching;
 	presence.setActivity(presenceData);
 });

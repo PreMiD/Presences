@@ -45,9 +45,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Watching movie";
 		}
 
-		const [startTimestamp, endTimestamp] =
-				presence.getTimestampsfromMedia(video),
-			live = endTimestamp === Infinity;
+		const live = endTimestamp === Infinity;
 
 		presenceData.smallImageText = live
 			? (await strings).live
@@ -61,15 +59,13 @@ presence.on("UpdateData", async () => {
 			? Assets.Pause
 			: Assets.Play;
 
-		presenceData.startTimestamp = live ? elapsed : startTimestamp;
-		presenceData.endTimestamp = endTimestamp;
-
-		if (live) delete presenceData.endTimestamp;
-		if (video.paused) {
-			delete presenceData.startTimestamp;
-			delete presenceData.endTimestamp;
-			if (!isSeries) presenceData.state = "Paused";
+		if (live) presenceData.startTimestamp = elapsed;
+		else if (!video.paused) {
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestampsfromMedia(video);
 		}
+
+		if (!isSeries && video.paused) presenceData.state = "Paused";
 	}
 
 	if (!presenceData.details) presence.setActivity();

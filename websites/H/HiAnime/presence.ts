@@ -117,10 +117,8 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "In a room";
 			if (filmName) presenceData.state = `Watching ${filmName.textContent}`;
 			if (data && !data.paused) {
-				[, presenceData.endTimestamp] = presence.getTimestamps(
-					data.currTime,
-					data.duration
-				);
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(data.currTime, data.duration);
 			}
 			if (buttons) {
 				presenceData.buttons = [
@@ -146,10 +144,8 @@ presence.on("UpdateData", async () => {
 		if (title) presenceData.details = title.textContent;
 		if (episode) presenceData.state = `Episode ${episode.textContent}`;
 		if (data && !data.paused) {
-			[, presenceData.endTimestamp] = presence.getTimestamps(
-				data.currTime,
-				data.duration
-			);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(data.currTime, data.duration);
 			presenceData.smallImageKey = Assets.Play;
 		} else if (data) presenceData.smallImageKey = Assets.Pause;
 

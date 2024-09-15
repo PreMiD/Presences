@@ -39,7 +39,7 @@ function fullURL(cover: string, hostname: string) {
 	else return Assets.Logo;
 }
 
-let iFrameVideo: boolean, videoPaused: boolean, endTimestamp: number;
+let iFrameVideo: boolean, videoPaused: boolean;
 
 presence.on(
 	"iFrameData",
@@ -50,7 +50,6 @@ presence.on(
 		paused: boolean;
 	}) => {
 		({ iFrameVideo } = data);
-		[, endTimestamp] = presence.getTimestamps(data.currentTime, data.duration);
 		videoPaused = data.paused;
 	}
 );
@@ -126,7 +125,10 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = videoPaused
 					? strings.pause
 					: strings.play;
-				if (!videoPaused) presenceData.endTimestamp = endTimestamp;
+				if (!videoPaused) {
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestampsfromMedia(video);
+				}
 
 				if (buttons) {
 					presenceData.buttons = isSeries
