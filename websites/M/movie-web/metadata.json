@@ -15,12 +15,15 @@
 		"scootydooter.vercel.app",
 		"movie-web-me.vercel.app",
 		"www.vidbinge.com",
+		"vidbinge.app",
 		"movies.levrx.lol",
 		"www.essential.wtf",
 		"streamerflix.xyz",
 		"envyflix.xyz",
+		"sunnymovies.site",
 		"pseudo-flix.pro",
-		"movie-web.x"
+		"movie-web.x",
+		"sudo-flix.rip"
 	],
 	"regExp": "(dev[.])?(movie-web[.]app)",
 	"matches": [
@@ -30,14 +33,18 @@
 		"*://scootydooter.vercel.app/*",
 		"*://movie-web-me.vercel.app/*",
 		"*://www.vidbinge.com/*",
+		"*://vidbinge.app/*",
+		"*://www.freaky-flix.top/*",
 		"*://movies.levrx.lol/*",
 		"*://www.essential.wtf/*",
 		"*://streamerflix.xyz/*",
 		"*://envyflix.xyz/*",
+		"*://sunnymovies.site/*",
 		"*://pseudo-flix.pro/*",
-		"*://movie-web.x/*"
+		"*://movie-web.x/*",
+		"*://sudo-flix.rip/*"
 	],
-	"version": "1.1.2",
+	"version": "1.1.4",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/thumbnail.png",
 	"color": "#533670",
