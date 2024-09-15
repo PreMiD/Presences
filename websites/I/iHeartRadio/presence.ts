@@ -443,7 +443,7 @@ presence.on("UpdateData", async () => {
 				},
 				{
 					label: "View Artist",
-					url: songArtist?.href ? songArtist?.href : null,
+					url: songArtist?.href ?? null,
 				},
 			];
 		}
