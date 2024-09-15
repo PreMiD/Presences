@@ -227,7 +227,10 @@ presence.on("UpdateData", async () => {
 				.querySelector('div[data-test="player-text"]')
 				?.querySelector("a")?.textContent;
 			presenceData.details =
-				metadataText[1]?.textContent && metadataText[2]?.textContent
+				metadataText[1] &&
+				metadataText[2] &&
+				metadataText[1]?.textContent &&
+				metadataText[2]?.textContent
 					? `${metadataText[1]?.textContent} · ${metadataText[2]?.textContent}`
 					: "";
 			presenceData.largeImageKey = playerArtwork ?? baseImage;
@@ -289,7 +292,10 @@ presence.on("UpdateData", async () => {
 				.querySelector('div[data-test="player-text"]')
 				?.querySelector("a")?.textContent;
 			presenceData.details =
-				metadataText[1]?.textContent && metadataText[2]?.textContent
+				metadataText[1] &&
+				metadataText[2] &&
+				metadataText[1]?.textContent &&
+				metadataText[2]?.textContent
 					? `${metadataText[1]?.textContent} · ${metadataText[2]?.textContent}`
 					: "";
 			presenceData.largeImageKey = playerArtwork ?? baseImage;
