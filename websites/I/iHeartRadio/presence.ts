@@ -227,8 +227,7 @@ presence.on("UpdateData", async () => {
 				.querySelector('div[data-test="player-text"]')
 				?.querySelector("a")?.textContent;
 			presenceData.details =
-				metadataText[1] &&
-				metadataText[2] &&
+				metadataText &&
 				metadataText[1]?.textContent &&
 				metadataText[2]?.textContent
 					? `${metadataText[1]?.textContent} · ${metadataText[2]?.textContent}`
@@ -292,8 +291,7 @@ presence.on("UpdateData", async () => {
 				.querySelector('div[data-test="player-text"]')
 				?.querySelector("a")?.textContent;
 			presenceData.details =
-				metadataText[1] &&
-				metadataText[2] &&
+				metadataText &&
 				metadataText[1]?.textContent &&
 				metadataText[2]?.textContent
 					? `${metadataText[1]?.textContent} · ${metadataText[2]?.textContent}`
