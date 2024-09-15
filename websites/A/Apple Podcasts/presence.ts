@@ -79,11 +79,11 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing settings";
 	else if (document.location.pathname.includes("/search")) {
 		presenceData.details = "Searching for podcasts";
-		if (document.location.search.includes("?term="))
+		if (document.location.search.includes("?term=")) {
 			presenceData.details = `Searched for ${decodeURIComponent(
 				document.location.search.split("?term=")[1]
 			)}`;
-		else {
+		} else {
 			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Searching...";
 		}
