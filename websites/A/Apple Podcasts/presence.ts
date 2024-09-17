@@ -16,25 +16,19 @@ presence.on("UpdateData", async () => {
 		strings = await presence.getStrings({
 			play: "general.playing",
 			pause: "general.paused",
-			viewing: "general.viewing",
-			browsing: "general.browsing"
+			browsing: "general.browsing",
 		}),
-		[privacy, useEpisodeAsTitle] = await Promise.all(
-			[
-				presence.getSetting("privacy"),
-				presence.getSetting("useEpisodeAsTitle")
-			]
-		),
+		[privacy, useEpisodeAsTitle] = await Promise.all([
+			presence.getSetting("privacy"),
+			presence.getSetting("useEpisodeAsTitle"),
+		]),
 		shadowRootDir = document.querySelector(".lcd").shadowRoot;
-	
+
 	if (shadowRootDir?.querySelector(".lcd__active").ariaHidden !== "true") {
-		
 		presenceData.type = ActivityType.Listening;
-		const episodeImage = (
-			shadowRootDir.querySelector<HTMLImageElement>(
-				".lcd__artwork > picture > img"
-			)
-		).src.replace("88x88", "450x450"),
+		const episodeImage = shadowRootDir
+				.querySelector<HTMLImageElement>(".lcd__artwork > picture > img")
+				.src.replace("88x88", "450x450"),
 			playingShadow = document.querySelector(".chrome-player").shadowRoot,
 			episodeTitle = shadowRootDir.querySelector(
 				".lcd-meta-line__fragment"
@@ -44,7 +38,7 @@ presence.on("UpdateData", async () => {
 			)[2].textContent;
 
 		presenceData.largeImageKey = episodeImage;
-			
+
 		if (useEpisodeAsTitle) {
 			presenceData.name = episodeTitle;
 			presenceData.details = podcastName;
@@ -53,7 +47,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = episodeTitle;
 		}
 		presenceData.state = "on Apple Podcasts";
-			
+
 		const progress = shadowRootDir.querySelector("#playback-progress"),
 			elapsedSeconds = Number(progress.ariaValueNow);
 
@@ -75,11 +69,14 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = strings.pause;
 		}
 	} else if (document.location.pathname.includes("/podcast")) {
-		presenceData.details = document.querySelector(".headings > .headings__title").textContent;
-		presenceData.state = document.querySelector(".headings > .headings__subtitles").textContent;
-		presenceData.largeImageKey = (
-			document.querySelector<HTMLImageElement>("picture > img")
-		).currentSrc;
+		presenceData.details = document.querySelector(
+			".headings > .headings__title"
+		).textContent;
+		presenceData.state = document.querySelector(
+			".headings > .headings__subtitles"
+		).textContent;
+		presenceData.largeImageKey =
+			document.querySelector<HTMLImageElement>("picture > img").currentSrc;
 		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = strings.browsing;
 	} else if (document.location.pathname.includes("/home"))
