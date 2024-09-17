@@ -139,7 +139,7 @@ for (const presence of changedPresences) {
 	if (!existsSync(iframePath) && metadata.iframe) {
 		errors.push({
 			presence,
-			message: "Presence is missing iframe.ts",
+			message: `Presence (${presence}) is missing iframe.ts`,
 			properties: {
 				file: iframePath,
 			},
@@ -149,7 +149,7 @@ for (const presence of changedPresences) {
 	if (!metadata.iframe && existsSync(iframePath)) {
 		errors.push({
 			presence,
-			message: "Presence has iframe.ts but metadata.iframe is set to false",
+			message: `Presence (${presence}) has iframe.ts but metadata.iframe is set to false`,
 			properties: {
 				file: iframePath,
 			},
@@ -159,8 +159,7 @@ for (const presence of changedPresences) {
 	if (metadata.iFrameRegExp === ".*") {
 		warnings.push({
 			presence,
-			message:
-				"Presence has metadata.iFrameRegExp set to '.*', please change this if possible",
+			message: `Presence (${presence}) has metadata.iFrameRegExp set to '.*', please change this if possible`,
 			properties: {
 				file: resolve(presencePath, "metadata.json"),
 				startLine: getLine("iFrameRegExp"),
@@ -171,8 +170,7 @@ for (const presence of changedPresences) {
 	if (metadata.iFrameRegExp && !metadata.iframe) {
 		errors.push({
 			presence,
-			message:
-				"Presence has metadata.iFrameRegExp set but metadata.iframe is set to false",
+			message: `Presence (${presence}) has metadata.iFrameRegExp set but metadata.iframe is set to false`,
 			properties: {
 				file: resolve(presencePath, "metadata.json"),
 				startLine: getLine("iFrameRegExp"),
@@ -183,8 +181,7 @@ for (const presence of changedPresences) {
 	if (!metadata.iFrameRegExp && metadata.iframe) {
 		warnings.push({
 			presence,
-			message:
-				"Presence has metadata.iframe set to true but metadata.iFrameRegExp is not set, you may want to set it",
+			message: `Presence (${presence}) has metadata.iframe set to true but metadata.iFrameRegExp is not set, you may want to set it`,
 			properties: {
 				file: resolve(presencePath, "metadata.json"),
 				startLine: getLine("iFrameRegExp"),
