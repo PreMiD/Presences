@@ -31,9 +31,9 @@ presence.on("UpdateData", async () => {
 		
 		presenceData.type = ActivityType.Listening;
 		const episodeImage = (
-				shadowRootDir.querySelector<HTMLImageElement>(
-					".lcd__artwork > picture > img"
-				)
+			shadowRootDir.querySelector<HTMLImageElement>(
+				".lcd__artwork > picture > img"
+			)
 		).src.replace("88x88", "450x450"),
 			playingShadow = document.querySelector(".chrome-player").shadowRoot,
 			episodeTitle = shadowRootDir.querySelector(
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 				".lcd-meta-line__fragment"
 			)[2].textContent;
 
-			presenceData.largeImageKey = episodeImage;
+		presenceData.largeImageKey = episodeImage;
 			
 		if (useEpisodeAsTitle) {
 			presenceData.name = episodeTitle;
@@ -100,7 +100,11 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Searching...";
 		}
-	} else presenceData.details = "Browsing...";
+	} else {
+		presenceData.details = "Browsing...";
+		presenceData.smallImageKey = Assets.Search;
+		presenceData.smallImageText = strings.browsing;
+	}
 
 	if (presenceData.state && privacy) delete presenceData.state;
 
