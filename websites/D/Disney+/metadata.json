@@ -68,16 +68,6 @@
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
-		},
-		{
-			"id": "groupWatchBtn",
-			"if": {
-				"buttons": true,
-				"privacy": false
-			},
-			"title": "Join GroupWatch Button",
-			"icon": "fas fa-users",
-			"value": false
 		}
 	]
 }
