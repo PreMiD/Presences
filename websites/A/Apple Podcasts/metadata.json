@@ -31,7 +31,7 @@
 			"id": "useEpisodeAsTitle",
 			"title": "Use Episode as Title",
 			"icon": "fad fa-podcast",
-			"value": true
+			"value": false
 		}
 	]
 }
