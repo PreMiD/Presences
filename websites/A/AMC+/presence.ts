@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Watching movie";
 		}
 
-		const live = endTimestamp === Infinity;
+		const live = video.duration === Infinity;
 
 		presenceData.smallImageText = live
 			? (await strings).live
