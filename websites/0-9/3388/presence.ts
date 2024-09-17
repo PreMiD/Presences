@@ -42,11 +42,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = name;
 	} else if (pathname.includes("/watch/")) {
 		const video = document.querySelector<HTMLVideoElement>("#player"),
-			[startTimestamp, endTimestamp] = presence.getTimestamps(
-				Math.floor(video.currentTime),
-				Math.floor(video.duration)
-			);
-
+			[startTimestamp, endTimestamp] = presence.getTimestampsfromMedia(video);
 		if (document.querySelector("#menu-eps")) {
 			presenceData.details = `${
 				document.querySelector(".film-name").textContent

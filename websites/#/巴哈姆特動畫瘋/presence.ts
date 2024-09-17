@@ -27,10 +27,7 @@ presence.on("UpdateData", async () => {
 				"#ani_video_html5_api"
 			);
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
-				presence.getTimestamps(
-					Math.floor(video.currentTime),
-					Math.floor(video.duration)
-				);
+				presence.getTimestampsfromMedia(video);
 			if (!isNaN(video.duration)) {
 				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
