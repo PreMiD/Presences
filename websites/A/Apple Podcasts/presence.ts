@@ -17,24 +17,42 @@ presence.on("UpdateData", async () => {
 			play: "general.playing",
 			pause: "general.paused",
 		}),
-		[privacy] = await Promise.all([presence.getSetting("privacy")]),
+		[privacy, useEpisodeAsTitle] = await Promise.all(
+			[
+				presence.getSetting("privacy"),
+				presence.getSetting("useEpisodeAsTitle")
+			]
+		),
 		shadowRootDir = document.querySelector(".lcd").shadowRoot;
-	// document.querySelectorAll(".player > .artwork-container > .artwork-component > picture > img")[0].currentSrc
+	
 	if (shadowRootDir?.querySelector(".lcd__active").ariaHidden !== "true") {
+		
 		presenceData.type = ActivityType.Listening;
-
 		const episodeImage = (
-				shadowRootDir.querySelectorAll(
+				shadowRootDir.querySelector<HTMLImageElement>(
 					".lcd__artwork > picture > img"
-				)[0] as HTMLImageElement
-			).src.replace("88x88", "450x450"),
-			playingShadow = document.querySelector(".chrome-player").shadowRoot;
+				)
+		).src.replace("88x88", "450x450"),
+			playingShadow = document.querySelector(".chrome-player").shadowRoot,
+			episodeTitle = shadowRootDir.querySelector(
+				".lcd-meta-line__fragment"
+			).textContent,
+			podcastName = shadowRootDir.querySelectorAll(
+				".lcd-meta-line__fragment"
+			)[2].textContent;
 
-		presenceData.name = shadowRootDir.querySelectorAll(
-			".lcd-meta-line__fragment"
-		)[0].textContent;
-		presenceData.largeImageKey = episodeImage;
-		const progress = shadowRootDir.querySelectorAll("#playback-progress")[0],
+			presenceData.largeImageKey = episodeImage;
+			
+		if (useEpisodeAsTitle) {
+			presenceData.name = episodeTitle;
+			presenceData.details = podcastName;
+		} else {
+			presenceData.name = podcastName;
+			presenceData.details = episodeTitle;
+		}
+		presenceData.state = "on Apple Podcasts";
+			
+		const progress = shadowRootDir.querySelector("#playback-progress"),
 			elapsedSeconds = Number(progress.ariaValueNow);
 
 		if (
@@ -54,20 +72,16 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = strings.pause;
 		}
-		presenceData.details = shadowRootDir.querySelectorAll(
-			".lcd-meta-line__fragment"
-		)[2].textContent;
-		presenceData.state = "on Apple Podcasts";
 	} else if (document.location.pathname.includes("/podcast")) {
 		presenceData.details = `Might listen to ${
-			document.querySelectorAll(".headings > .headings__title")[0].textContent
+			document.querySelector(".headings > .headings__title").textContent
 		}`;
 		presenceData.state = `by ${
-			document.querySelectorAll(".headings > .headings__subtitles")[0]
+			document.querySelector(".headings > .headings__subtitles")
 				.textContent
 		}`;
 		presenceData.largeImageKey = (
-			document.querySelector("picture > img") as HTMLImageElement
+			document.querySelector<HTMLImageElement>("picture > img")
 		).currentSrc;
 	} else if (document.location.pathname.includes("/home"))
 		presenceData.details = "On the home page";
@@ -79,11 +93,11 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Viewing settings";
 	else if (document.location.pathname.includes("/search")) {
 		presenceData.details = "Searching for podcasts";
-		if (document.location.search.includes("?term="))
+		if (document.location.search.includes("?term=")) {
 			presenceData.details = `Searched for ${decodeURIComponent(
 				document.location.search.split("?term=")[1]
 			)}`;
-		else {
+		} else {
 			presenceData.smallImageKey = Assets.Search;
 			presenceData.details = "Searching...";
 		}

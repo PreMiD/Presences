@@ -26,6 +26,12 @@
 			"title": "Privacy Mode",
 			"icon": "fad fa-user-secret",
 			"value": false
+		},
+		{
+			"id": "useEpisodeAsTitle",
+			"title": "Use Episode as Title",
+			"icon": "fad fa-podcast",
+			"value": true
 		}
 	]
 }
