@@ -181,6 +181,10 @@ presence.on("UpdateData", async () => {
 					presence.getTimestampsfromMedia(video)[1],
 					0.75
 				),
+				startTimestamp: adjustTimeError(
+					presence.getTimestampsfromMedia(video)[0],
+					0.75
+				),
 			};
 
 		if (vidState.includes("{0}")) delete presenceData.state;
