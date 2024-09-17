@@ -46,7 +46,7 @@ for (const presence of changedPresences) {
 	if (!existsSync(resolve(presencePath, "metadata.json"))) {
 		errors.push({
 			presence,
-			message: "Presence is missing metadata.json",
+			message: `Presence (${presence}) is missing metadata.json`,
 			properties: {
 				file: resolve(presencePath, "metadata.json"),
 			},
@@ -61,7 +61,7 @@ for (const presence of changedPresences) {
 	} catch {
 		errors.push({
 			presence,
-			message: "Presence metadata.json is not a valid JSON file",
+			message: `Presence (${presence}) metadata.json is not a valid JSON file`,
 			properties: {
 				file: resolve(presencePath, "metadata.json"),
 			},
@@ -97,7 +97,7 @@ for (const presence of changedPresences) {
 	if (metadata.$schema !== schema.url) {
 		errors.push({
 			presence,
-			message: `Schema version is not up to date - expected: ${schema.url}, got: ${metadata.$schema}`,
+			message: `Schema version is not up to date for presence (${presence}) - expected: ${schema.url}, got: ${metadata.$schema}`,
 			properties: {
 				file: resolve(presencePath, "metadata.json"),
 				startLine: getLine("$schema"),
@@ -113,7 +113,7 @@ for (const presence of changedPresences) {
 		if (compare(metadata.version, storePresence.metadata.version) <= 0) {
 			errors.push({
 				presence,
-				message: "Version has not been bumped",
+				message: `Version has not been bumped for presence (${presence})`,
 				properties: {
 					file: resolve(presencePath, "metadata.json"),
 					startLine: getLine("version"),
@@ -123,7 +123,7 @@ for (const presence of changedPresences) {
 	} else if (metadata.version !== "1.0.0") {
 		errors.push({
 			presence,
-			message: "Initial version must be 1.0.0",
+			message: `Initial version must be 1.0.0 for presence (${presence})`,
 			properties: {
 				file: resolve(presencePath, "metadata.json"),
 				startLine: getLine("version"),
