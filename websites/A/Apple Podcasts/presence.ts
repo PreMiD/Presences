@@ -16,6 +16,8 @@ presence.on("UpdateData", async () => {
 		strings = await presence.getStrings({
 			play: "general.playing",
 			pause: "general.paused",
+			viewing: "general.viewing",
+			browsing: "general.browsing"
 		}),
 		[privacy, useEpisodeAsTitle] = await Promise.all(
 			[
@@ -73,16 +75,13 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = strings.pause;
 		}
 	} else if (document.location.pathname.includes("/podcast")) {
-		presenceData.details = `Might listen to ${
-			document.querySelector(".headings > .headings__title").textContent
-		}`;
-		presenceData.state = `by ${
-			document.querySelector(".headings > .headings__subtitles")
-				.textContent
-		}`;
+		presenceData.details = document.querySelector(".headings > .headings__title").textContent;
+		presenceData.state = document.querySelector(".headings > .headings__subtitles").textContent;
 		presenceData.largeImageKey = (
 			document.querySelector<HTMLImageElement>("picture > img")
 		).currentSrc;
+		presenceData.smallImageKey = Assets.Reading;
+		presenceData.smallImageText = strings.browsing;
 	} else if (document.location.pathname.includes("/home"))
 		presenceData.details = "On the home page";
 	else if (document.location.pathname.includes("/charts"))
