@@ -177,14 +177,12 @@ presence.on("UpdateData", async () => {
 					: isPlaylistLoop
 					? "Playlist on loop"
 					: strings.play,
-				endTimestamp: adjustTimeError(
-					presence.getTimestampsfromMedia(video)[1],
-					0.75
-				),
-				startTimestamp: adjustTimeError(
-					presence.getTimestampsfromMedia(video)[0],
-					0.75
-				),
+				endTimestamp: !video?.paused
+					? adjustTimeError(presence.getTimestampsfromMedia(video)[1], 0.75)
+					: -1,
+				startTimestamp: !video?.paused
+					? adjustTimeError(presence.getTimestampsfromMedia(video)[0], 0.75)
+					: -1,
 			};
 
 		if (vidState.includes("{0}")) delete presenceData.state;
