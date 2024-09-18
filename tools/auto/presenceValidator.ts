@@ -113,7 +113,7 @@ for (const presence of changedPresences) {
 		if (compare(metadata.version, storePresence.metadata.version) <= 0) {
 			errors.push({
 				presence,
-				message: `Version has not been bumped for presence (${presence})`,
+				message: `Version has not been bumped (Presence: ${presence})`,
 				properties: {
 					file: resolve(presencePath, "metadata.json"),
 					startLine: getLine("version"),
