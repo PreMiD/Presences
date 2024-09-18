@@ -31,7 +31,7 @@ let stationDescription: string | null = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/Z5CAqIw.png",
+		largeImageKey: baseImage,
 		details: "Browsing iHeartRadio...",
 	};
 
