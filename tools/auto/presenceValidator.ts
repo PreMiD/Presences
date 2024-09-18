@@ -123,7 +123,7 @@ for (const presence of changedPresences) {
 	} else if (metadata.version !== "1.0.0") {
 		errors.push({
 			presence,
-			message: `Initial version must be 1.0.0 for presence (${presence})`,
+			message: `Initial version must be 1.0.0 (Presence: ${presence})`,
 			properties: {
 				file: resolve(presencePath, "metadata.json"),
 				startLine: getLine("version"),
