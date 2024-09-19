@@ -150,12 +150,11 @@ export default class PresenceCompiler {
 				);
 
 				if (job.error) throw job.error;
-
-				if (job.stats?.compilation.errors.length)
+				const { service } = require(resolve(presencePath, "metadata.json"));
+				if (job.stats?.compilation.errors.length) {
+					actions.info(chalk.red(`Failed to compile ${service || presence}`));
 					errors.push(...(job.stats?.compilation?.errors || []));
-				else {
-					const { service } = require(resolve(presencePath, "metadata.json"));
-
+				} else {
 					actions.info(
 						chalk.green(`Successfully compiled ${service || presence}`)
 					);
