@@ -6,7 +6,8 @@ const presence = new Presence({
 		pause: "general.paused",
 		live: "general.live",
 	}),
-	baseImage = "https://i.imgur.com/Z5CAqIw.png";
+	baseImage =
+		"https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png";
 
 function checkLength(string: string): string {
 	if (string.length > 128) return `${string.substring(0, 125)}...`;
