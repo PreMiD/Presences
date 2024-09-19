@@ -65,9 +65,9 @@ presence.on("UpdateData", async () => {
 					}
 
 					if (!video.paused) {
-[data.startTimestamp, data.endTimestamp] =
+						[data.startTimestamp, data.endTimestamp] =
 							presence.getTimestampsfromMedia(video);
-}
+					}
 
 					data.buttons = [
 						{

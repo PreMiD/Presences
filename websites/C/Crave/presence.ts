@@ -24,7 +24,6 @@ presence.on("UpdateData", async () => {
 					)
 				);
 
-
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Playing";
 		} else {

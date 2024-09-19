@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
 			.querySelector("small")?.textContent;
 
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
-			presence.getTimestamps(video.current, video.duration);
+			presence.getTimestamps(video.currentTime, video.duration);
 
 		if (video.paused) {
 			delete presenceData.startTimestamp;

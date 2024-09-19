@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let video = {
-	current: 0,
+	currentTime: 0,
 	duration: 0,
 	paused: true,
 	title: "Unknown",
@@ -45,7 +45,7 @@ presence.on("UpdateData", async function () {
 					presenceData.state = video.channel;
 
 					[presenceData.startTimestamp, presenceData.endTimestamp] =
-						presence.getTimestampsfromMedia(video);
+						presence.getTimestamps(video.currentTime, video.duration);
 				} else {
 					presenceData.state = document.querySelector(
 						"div.userCount.noselect"
@@ -78,7 +78,7 @@ presence.on("UpdateData", async function () {
 presence.on(
 	"iFrameData",
 	(data: {
-		current: number;
+		currentTime: number;
 		duration: number;
 		paused: boolean;
 		title: string;

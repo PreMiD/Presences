@@ -43,9 +43,9 @@ presence.on("UpdateData", async () => {
 			const videoPlayer = document.querySelector("video");
 
 			if (videoPlayer && !videoPlayer.paused) {
-[presenceData.startTimestamp, presenceData.endTimestamp] =
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestampsfromMedia(document.querySelector("video"));
-}
+			}
 			break;
 		}
 		case "channel": {

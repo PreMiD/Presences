@@ -39,8 +39,6 @@ presence.on("UpdateData", async () => {
 		currentTime = document.querySelector<HTMLElement>(
 			'time[data-test="current-time"]'
 		).textContent,
-		
-		
 		paused =
 			document
 				.querySelector('div[data-test="play-controls"] div > button')
@@ -67,13 +65,17 @@ presence.on("UpdateData", async () => {
 			.getAttribute("src")
 			.replace("80x80", "640x640");
 	}
-	if ((parseFloat(currentTime[0]) * 60 + parseFloat(currentTime[1])) * 1000 > 0 || !paused) {
+	if (
+		(parseFloat(currentTime[0]) * 60 + parseFloat(currentTime[1])) * 1000 > 0 ||
+		!paused
+	) {
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			presence.getTimestamps(
 				presence.timestampFromFormat(currentTime),
-				presence.timestampFromFormat(document.querySelector<HTMLElement>(
-			'time[data-test="duration"]'
-		).textContent)
+				presence.timestampFromFormat(
+					document.querySelector<HTMLElement>('time[data-test="duration"]')
+						.textContent
+				)
 			);
 		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused

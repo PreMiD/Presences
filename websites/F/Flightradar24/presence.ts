@@ -332,9 +332,10 @@ presence.on("UpdateData", async () => {
 											presence.timestampFromFormat(player.elapsed)
 										);
 								} else if (document.querySelector("video")) {
-									timestamps = presence.getTimestampsfromMedia(
-										document.querySelector<HTMLMediaElement>("video")
-									);
+									[presenceData.startTimestamp, presenceData.endTimestamp] =
+										presence.getTimestampsfromMedia(
+											document.querySelector<HTMLMediaElement>("video")
+										);
 								} else {
 									presenceData.details = "Viewing Blog Post";
 									presenceData.state = document.querySelector(

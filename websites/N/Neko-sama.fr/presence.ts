@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
 							presence.getTimestamps(currentTime, duration);
 					}
 					presenceData.state = `${timeToString(
-						Math.floor(time)
+						Math.floor(currentTime)
 					)}/${timeToString(Math.floor(duration))}`;
 					presenceData.details = `Regarde ${
 						document.querySelector<HTMLMetaElement>('meta[property="og:title"]')
