@@ -200,8 +200,12 @@ presence.on("UpdateData", async () => {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestampsfromMedia(video);
 
-				title = document.querySelector("h1.ON_IMAGE.BUTTON1_MEDIUM")?.textContent;
-				subtitle = document.querySelector("p.ON_IMAGE_ALT2.BUTTON3_MEDIUM")?.textContent;
+				title = document.querySelector(
+					"h1.ON_IMAGE.BUTTON1_MEDIUM"
+				)?.textContent;
+				subtitle = document.querySelector(
+					"p.ON_IMAGE_ALT2.BUTTON3_MEDIUM"
+				)?.textContent;
 
 				if (!title) presence.error("Unable to get the title");
 
