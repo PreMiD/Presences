@@ -24,8 +24,6 @@ presence.on("UpdateData", async () => {
 					)
 				);
 
-			[presenceData.startTimestamp, presenceData.endTimestamp] =
-				presence.getTimestamps(elapsed, duration);
 
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Playing";

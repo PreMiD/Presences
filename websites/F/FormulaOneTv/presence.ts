@@ -115,7 +115,7 @@ async function setBrowsingActivity(presenceData: PresenceData) {
 	delete presenceData.endTimestamp;
 
 	presenceData.details = "Browsing...";
-	presenceData.startTimestamp = browingTimestamp;
+	presenceData.startTimestamp = browsingTimestamp;
 	presenceData.smallImageKey = Assets.Search;
 	presenceData.smallImageText = (await strings).browsing;
 }

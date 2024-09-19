@@ -703,9 +703,13 @@ presence.on("UpdateData", async () => {
 											timeElapsed.setTime(
 												timeElapsed.getTime() + daySeconds * 1000
 											);
-											delete presenceData.startTimestamp;
-											[presenceData.startTimestamp, presenceData.endTimestamp] =
-												presence.getTimestamps(elapsed, duration);
+											presenceData.startTimestamp = Math.floor(
+												timeElapsed.getTime() / 1000
+											);
+											[, presenceData.endTimestamp] = presence.getTimestamps(
+												elapsed,
+												duration
+											);
 										} else {
 											timeElapsed.setFullYear(
 												timeElapsed.getFullYear() - years

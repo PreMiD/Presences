@@ -58,7 +58,7 @@
 	"matches": [
 		"*://*.netflix.com/*"
 	],
-	"version": "6.0.2",
+	"version": "6.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/thumbnail.jpg",
 	"color": "#db0000",

@@ -127,7 +127,7 @@ presence.on("UpdateData", async () => {
 					: strings.play;
 				if (!videoPaused) {
 					[presenceData.startTimestamp, presenceData.endTimestamp] =
-						presence.getTimestampsfromMedia(video);
+						presence.getTimestamps(video.currentTime, video.duration);
 				}
 
 				if (buttons) {

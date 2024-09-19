@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
 							? (await strings).pause
 							: (await strings).play;
 						[presenceData.startTimestamp, presenceData.endTimestamp] =
-							presence.getTimestampsfromMedia(video);
+							presence.getTimestamps(video.currentTime, video.duration);
 						presenceData.details = details.stream;
 						presenceData.state = document.querySelector(
 							".entry-header-outer > .entry-header > h1 "
