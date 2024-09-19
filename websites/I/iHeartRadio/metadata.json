@@ -1,13 +1,13 @@
 {
 	"$schema": "https://schemas.premid.app/metadata/1.10",
 	"author": {
-		"name": "Striker",
-		"id": "215509157837537280"
+		"name": "iiTxicz",
+		"id": "950079325166780436"
 	},
 	"contributors": [
 		{
-			"name": "iiTxicz",
-			"id": "950079325166780436"
+			"name": "Striker",
+			"id": "215509157837537280"
 		}
 	],
 	"service": "iHeartRadio",
@@ -15,15 +15,19 @@
 		"en": "iHeartRadio is a free broadcast, podcast and streaming radio platform owned by iHeartMedia, Inc. It was founded in April 2008.",
 		"nl": "iHeartRadio is een gratis uitzend-, podcast- en streaming radioplatform dat eigendom is van iHeartMedia, Inc. Het werd opgericht in april 2008."
 	},
-	"url": "www.iheart.com",
-	"version": "1.2.19",
-	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png",
-	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/thumbnail.png",
+	"url": [
+		"www.iheart.com",
+		"listen.iheart.com"
+	],
+	"version": "1.2.21",
+	"logo": "https://i.imgur.com/Z5CAqIw.png",
+	"thumbnail": "https://i.imgur.com/yqFicQ9.png",
 	"color": "#C42224",
 	"category": "music",
 	"tags": [
 		"iheartradio",
 		"radio",
-		"music"
+		"music",
+		"podcast"
 	]
 }
