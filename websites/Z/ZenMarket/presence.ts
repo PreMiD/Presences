@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 		item = {
 			title: document.querySelector("#itemTitle")?.textContent ?? "",
 			seller:
-				document.querySelector("#seller").textContent ??
+				document.querySelector("#seller")?.textContent ??
 				document.querySelector("#aSeller")?.textContent ??
 				"",
 			productPage:
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 			condition:
 				document.querySelector("#lblConditionName")?.textContent ??
 				document.querySelector("#lblItemCondition")?.textContent ??
-				document.querySelector("#lblItemStatus").textContent ??
+				document.querySelector("#lblItemStatus")?.textContent ??
 				"",
 		};
 
@@ -133,13 +133,15 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		default: {
-			if (item?.title && item?.seller) {
+			console.log(item);
+			if (item?.title) {
 				presenceData.details = `Looking at ${item?.title}`;
-				presenceData.state = `${
-					item?.price ? `Price: ${item?.price} ||` : ""
-				}  ${
+				let text = `${item?.price ? `Price: ${item?.price} ||` : ""}  ${
 					item?.condition ? `Condition: ${item?.condition} ||` : ""
-				} Seller: ${item?.seller}`;
+				} ${item?.seller ? `Seller: ${item?.seller} ||` : ""}`;
+				if (text.endsWith(" || ")) text = text.slice(0, text.length - 4);
+
+				presenceData.state = text;
 				if (!item?.productPage && !item?.url) {
 					presenceData.buttons = [
 						{
