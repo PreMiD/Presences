@@ -133,7 +133,6 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		default: {
-			console.log(item);
 			if (item?.title) {
 				presenceData.details = `Looking at ${item?.title}`;
 				let text = `${item?.price ? `Price: ${item?.price} ||` : ""}  ${
