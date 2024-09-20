@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "84719369069805568",
+		"name": "laziestboy"
+	},
+	"service": "Shiroko",
+	"description": {
+		"en": "A website to watch anime online for free with no ads."
+	},
+	"url": "shiroko.co",
+	"version": "1.0.0",
+	"logo": "https://i.postimg.cc/1zN0SNrb/shiroko-vector-1.png",
+	"thumbnail": "https://i.postimg.cc/15CDNKWL/image.png",
+	"color": "#100C11",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"manga"
+	]
+}
