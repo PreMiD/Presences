@@ -38,8 +38,10 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = video.paused
 			? "Gepauzeerd"
 			: "Aan het afspelen";
-		if (!video.paused)
-			presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
+		if (!video.paused) {
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestampsfromMedia(video);
+		}
 		presenceData.buttons = [
 			{
 				label: "Bekijk Video",

@@ -37,7 +37,8 @@ presence.on("UpdateData", async () => {
 		if (title) {
 			const video = document.querySelector("video");
 			if (video) {
-				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(video);
 				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.details = "Watching";
 				presenceData.state = title.textContent;
@@ -106,8 +107,10 @@ presence.on("UpdateData", async () => {
 		if (subheading) presenceData.state = subheading.textContent;
 
 		if (video) {
-			if (!live)
-				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
+			if (!live) {
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(video);
+			}
 			presenceData.smallImageText = presenceData.smallImageKey = live
 				? Assets.Live
 				: video.paused

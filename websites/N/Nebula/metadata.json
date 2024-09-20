@@ -12,7 +12,7 @@
 	"matches": [
 		"*://nebula.tv/*"
 	],
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Nebula/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Nebula/assets/thumbnail.jpeg",
 	"color": "#67bef5",

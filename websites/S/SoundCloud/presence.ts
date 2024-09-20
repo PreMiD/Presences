@@ -185,18 +185,14 @@ presence.on("UpdateData", async () => {
 					}
 				})(),
 			],
-			[startTimestamp, endTimestamp] = presence.getTimestamps(
-				currentTime,
-				duration
-			),
 			pathLinkSong = document
 				.querySelector(
 					"#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__soundBadge > div > div.playbackSoundBadge__titleContextContainer > div > a"
 				)
 				.getAttribute("href");
 
-		presenceData.startTimestamp = startTimestamp;
-		presenceData.endTimestamp = endTimestamp;
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestamps(currentTime, duration);
 
 		if (showCover) {
 			presenceData.largeImageKey =

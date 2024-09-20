@@ -132,6 +132,8 @@ presence.on("UpdateData", async () => {
 			break;
 	}
 
+	if (presenceData.endTimestamp && presenceData.startTimestamp)
+		presenceData.type = ActivityType.Watching;
 	if (!logo || privacy) presenceData.largeImageKey = Assets.Logo;
 	if (!buttons || privacy) delete presenceData.buttons;
 	if (!time) delete presenceData.startTimestamp;

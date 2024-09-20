@@ -342,19 +342,17 @@ presence.on("UpdateData", async () => {
 					case "watch.pokemon.com": {
 						presenceData.largeImageKey = Assets.Pokemontv;
 						if (document.location.pathname.includes("/player")) {
-							const video = document.querySelector("video"),
-								[startTimestamp, endTimestamp] = presence.getTimestamps(
-									Math.floor(video.currentTime),
-									Math.floor(video.duration)
-								);
+							const video = document.querySelector("video");
+
 							presenceData.smallImageKey = video.paused
 								? Assets.Pause
 								: Assets.Play;
 							presenceData.smallImageText = video.paused
 								? (await strings).pause
 								: (await strings).play;
-							presenceData.startTimestamp = startTimestamp;
-							presenceData.endTimestamp = endTimestamp;
+							[presenceData.startTimestamp, presenceData.endTimestamp] =
+								presence.getTimestampsfromMedia(video);
+
 							const title = document
 								.querySelector(".header-bar-small > span:nth-child(4)")
 								.textContent.split(" - ")[1]

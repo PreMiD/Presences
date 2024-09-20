@@ -25,7 +25,7 @@
 		"*://*.disneyplus.com/*",
 		"*://*.hotstar.com/*"
 	],
-	"version": "1.6.2",
+	"version": "1.6.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/thumbnail.png",
 	"color": "#233778",
@@ -68,16 +68,6 @@
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
-		},
-		{
-			"id": "groupWatchBtn",
-			"if": {
-				"buttons": true,
-				"privacy": false
-			},
-			"title": "Join GroupWatch Button",
-			"icon": "fas fa-users",
-			"value": false
 		}
 	]
 }

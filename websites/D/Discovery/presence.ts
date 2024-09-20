@@ -175,16 +175,19 @@ presence.on("UpdateData", async () => {
 							)
 								presenceData.state = "Watching an ad";
 							else if (!video.paused) {
-								[, presenceData.endTimestamp] = presence.getTimestamps(
-									presence.timestampFromFormat(
-										document.querySelectorAll('[class*="TimeViewFontStyle"]')[0]
-											?.textContent
-									),
-									presence.timestampFromFormat(
-										document.querySelectorAll('[class*="TimeViewFontStyle"]')[1]
-											?.textContent
-									)
-								);
+								[presenceData.startTimestamp, presenceData.endTimestamp] =
+									presence.getTimestamps(
+										presence.timestampFromFormat(
+											document.querySelectorAll(
+												'[class*="TimeViewFontStyle"]'
+											)[0]?.textContent
+										),
+										presence.timestampFromFormat(
+											document.querySelectorAll(
+												'[class*="TimeViewFontStyle"]'
+											)[1]?.textContent
+										)
+									);
 							}
 						} else {
 							presenceData.buttons = [
@@ -260,7 +263,7 @@ presence.on("UpdateData", async () => {
 										? strings.paused
 										: strings.play;
 									if (!video.paused) {
-										[, presenceData.endTimestamp] =
+										[presenceData.startTimestamp, presenceData.endTimestamp] =
 											presence.getTimestampsfromMedia(video);
 									}
 								}

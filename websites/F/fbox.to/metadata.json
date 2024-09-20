@@ -20,7 +20,7 @@
 	},
 	"url": "fboxz.to",
 	"regExp": "(www([0-9]*)?[.])?fboxz?[.]to",
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/fbox.to/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/fbox.to/assets/thumbnail.png",
 	"color": "#565c67",

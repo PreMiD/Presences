@@ -133,10 +133,8 @@ presence.on("UpdateData", async () => {
 			document.querySelector<HTMLHeadingElement>("a > h4").textContent;
 		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused ? strings.pause : strings.play;
-		[, presenceData.endTimestamp] = presence.getTimestamps(
-			Math.floor(currentTime),
-			Math.floor(duration)
-		);
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
 
 		presenceData.details = videoTitle ?? "Title not found...";
 		presenceData.state =
