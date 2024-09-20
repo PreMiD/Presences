@@ -115,9 +115,8 @@ presence.on("UpdateData", async () => {
 						? data.strings.pause
 						: data.strings.play;
 
-					presenceData.endTimestamp = presence
-						.getTimestampsfromMedia(video)
-						.pop();
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestampsfromMedia(video);
 
 					presenceData.buttons = [
 						{

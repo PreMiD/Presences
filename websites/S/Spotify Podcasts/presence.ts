@@ -397,10 +397,8 @@ presence.on("UpdateData", async () => {
 
 		presenceData.smallImageKey = pause ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = pause ? strings.pause : strings.play;
-		[, presenceData.endTimestamp] = presence.getTimestamps(
-			currentTime,
-			duration
-		);
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestamps(currentTime, duration);
 
 		if (pause || !timestamps) {
 			delete presenceData.startTimestamp;

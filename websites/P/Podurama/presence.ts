@@ -41,11 +41,12 @@ presence.on("UpdateData", async () => {
 		if (audioEl.paused) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
-		} else {
-			presenceData.startTimestamp = startTS;
-			if (useTimeLeft) presenceData.endTimestamp = endTS;
-			else delete presenceData.endTimestamp;
-		}
+		} else if (useTimeLeft) {
+			[presenceData.startTimestamp, presenceData.endTimestamp] = [
+				startTS,
+				endTS,
+			];
+		} else presenceData.startTimestamp = startTS;
 
 		presenceData.smallImageKey = audioEl.paused ? Assets.Pause : Assets.Play;
 		presenceData.largeImageKey = player

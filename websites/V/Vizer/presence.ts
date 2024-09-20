@@ -57,12 +57,11 @@ presence.on("UpdateData", async () => {
 					} - ${episodeName.textContent.split(".")[1]}`;
 
 					if (iFrameVideo && !isNaN(duration)) {
-						const [startTimestamp, endTimestamp] = presence.getTimestamps(
-							Math.floor(currentTime),
-							Math.floor(duration)
-						);
-						presenceData.startTimestamp = startTimestamp;
-						presenceData.endTimestamp = endTimestamp;
+						[presenceData.startTimestamp, presenceData.endTimestamp] =
+							presence.getTimestamps(
+								Math.floor(currentTime),
+								Math.floor(duration)
+							);
 						presenceData.smallImageKey = Assets.Play;
 						presenceData.smallImageText = (await strings).play;
 					} else {
@@ -91,12 +90,11 @@ presence.on("UpdateData", async () => {
 				} - ${document.querySelector(".rating").textContent}`;
 
 				if (iFrameVideo && !isNaN(duration)) {
-					const [startTimestamp, endTimestamp] = presence.getTimestamps(
-						Math.floor(currentTime),
-						Math.floor(duration)
-					);
-					presenceData.startTimestamp = startTimestamp;
-					presenceData.endTimestamp = endTimestamp;
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestamps(
+							Math.floor(currentTime),
+							Math.floor(duration)
+						);
 					presenceData.smallImageKey = Assets.Play;
 					presenceData.smallImageText = (await strings).play;
 				} else {

@@ -67,10 +67,8 @@ presence.on("UpdateData", async () => {
 		} Best ${document.querySelector(".best-container")?.textContent}`;
 	}
 
-	if (!time) {
-		delete presenceData.startTimestamp;
-		delete presenceData.endTimestamp;
-	}
+	if (!time) delete presenceData.startTimestamp;
+
 	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 
 	presence.setActivity(presenceData);

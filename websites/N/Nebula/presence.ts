@@ -257,7 +257,8 @@ function setTimestamps(
 	presenceData: PresenceData
 ): void {
 	delete presenceData.startTimestamp;
-	presenceData.endTimestamp = presence.getTimestampsfromMedia(element)[1];
+	[presenceData.startTimestamp, presenceData.endTimestamp] =
+		presence.getTimestampsfromMedia(element);
 	if (element.paused) {
 		delete presenceData.endTimestamp;
 		presenceData.smallImageKey = Assets.Pause;

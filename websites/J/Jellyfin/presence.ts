@@ -620,7 +620,7 @@ async function setPresenceByMediaId(mediaId: string): Promise<void> {
 
 			// TODO: worth setting timestamps on remote playback? Requires WS connection
 			if (mediaElement && (await presence.getSetting("showMediaTimestamps"))) {
-				[, presenceData.endTimestamp] =
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestampsfromMedia(mediaElement);
 			}
 		}

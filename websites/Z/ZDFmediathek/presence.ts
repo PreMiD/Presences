@@ -84,8 +84,8 @@ presence.on("UpdateData", async () => {
 			) {
 				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = (await strings).pause;
-				presenceData.startTimestamp = 0;
-				presenceData.endTimestamp = 0;
+				delete presenceData.startTimestamp;
+				delete presenceData.endTimestamp;
 			}
 		} else {
 			// Video-on-demand
@@ -111,10 +111,11 @@ presence.on("UpdateData", async () => {
 						showTitleTag.length
 				  )
 				: showTitleTag;
-			[, presenceData.endTimestamp] = presence.getTimestamps(
-				Math.floor(video.currentTime),
-				Math.floor(video.duration)
-			);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(
+					Math.floor(video.currentTime),
+					Math.floor(video.duration)
+				);
 			presenceData.buttons = [
 				{ label: (await strings).buttonWatchVideo, url: prevUrl },
 			];

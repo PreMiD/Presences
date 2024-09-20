@@ -12,7 +12,7 @@ iframe.on("UpdateData", async () => {
 		// Exclude proxer ads
 		if (video.className.includes("ads")) return;
 		iframe.send({
-			time: video.currentTime,
+			currentTime: video.currentTime,
 			duration: video.duration,
 			paused: video.paused,
 		});

@@ -77,10 +77,8 @@ presence.on("UpdateData", async () => {
 						);
 					}
 					if (iframeData && !iframeData.paused) {
-						[, presenceData.endTimestamp] = presence.getTimestamps(
-							iframeData.currTime,
-							iframeData.duration
-						);
+						[presenceData.startTimestamp, presenceData.endTimestamp] =
+							presence.getTimestamps(iframeData.currTime, iframeData.duration);
 					}
 					presenceData.buttons = [
 						{

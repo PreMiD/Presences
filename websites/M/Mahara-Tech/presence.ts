@@ -63,10 +63,11 @@ const presence = new Presence({
 				path: /^\/mod\/hvp\/*/,
 
 				run: () => {
-					[, presenceData.endTimestamp] = presence.getTimestamps(
-						Math.floor(video.currentTime),
-						Math.floor(video.duration)
-					);
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestamps(
+							Math.floor(video.currentTime),
+							Math.floor(video.duration)
+						);
 
 					if (video.paused) presence.getTimestamps;
 

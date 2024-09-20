@@ -77,8 +77,10 @@ presence.on("UpdateData", async () => {
 					time,
 					time2
 				);
-				presenceData.startTimestamp = startTimestamp;
-				presenceData.endTimestamp = endTimestamp;
+				[presenceData.startTimestamp, presenceData.endTimestamp] = [
+					startTimestamp,
+					endTimestamp,
+				];
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Riproducendo";
 			}
