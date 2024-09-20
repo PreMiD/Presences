@@ -193,9 +193,8 @@ presence.on("UpdateData", async () => {
 				}
 			}
 
-			presenceData.endTimestamp = presence
-				.getTimestamps(Math.floor(currentTime), Math.floor(duration))
-				.pop();
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
 
 			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? strings.pause : strings.play;

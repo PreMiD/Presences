@@ -72,7 +72,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details =
 			document.querySelector("#watch-vid-title").children[1]; // Video name
 		presenceData.state = document.querySelector("#watch-channel-stats > a"); // Channel name
-		presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestampsfromMedia(video);
 		presenceData.buttons = [
 			{
 				label: "Watch Video",

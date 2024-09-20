@@ -408,7 +408,7 @@ async function handleAudioPlayback(): Promise<void> {
 			presenceData.smallImageText = "Playing";
 
 			if (await presence.getSetting<boolean>("showMediaTimestamps")) {
-				[, presenceData.endTimestamp] =
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestampsfromMedia(audioElement);
 			} else delete presenceData.endTimestamp;
 
@@ -558,7 +558,7 @@ async function handleVideoPlayback(): Promise<void> {
 			presenceData.smallImageText = "Playing";
 
 			if (await presence.getSetting<boolean>("showMediaTimestamps")) {
-				[, presenceData.endTimestamp] =
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestampsfromMedia(videoPlayerElem);
 			} else delete presenceData.endTimestamp;
 

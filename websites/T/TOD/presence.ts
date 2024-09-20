@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
 				if (presence.isWatching()) {
 					const video = presence.getVideo();
 
-					[, presenceData.endTimestamp] =
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
 						presence.getTimestampsfromMedia(video);
 
 					if (presence.isTrailer()) {
@@ -155,7 +155,7 @@ presence.on("UpdateData", async () => {
 							? Assets.Pause
 							: Assets.Live;
 					} else {
-						[, presenceData.endTimestamp] =
+						[presenceData.startTimestamp, presenceData.endTimestamp] =
 							presence.getTimestampsfromMedia(video);
 
 						presenceData.smallImageText = video.paused ? "Paused" : "Playing";
@@ -195,7 +195,7 @@ presence.on("UpdateData", async () => {
 			setPresenceData() {
 				if (presence.isWatching()) {
 					const video = presence.getVideo();
-					[, presenceData.endTimestamp] =
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
 						presence.getTimestampsfromMedia(video);
 
 					presenceData.details = presence.getTitle();

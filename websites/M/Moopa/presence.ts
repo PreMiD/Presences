@@ -112,9 +112,9 @@ presence.on("UpdateData", async () => {
 					?.textContent?.replace("Episode ", ""),
 				video: HTMLVideoElement = document.querySelector("video");
 			if (video && !Number.isNaN(Number(video.duration))) {
-				presenceData.endTimestamp = presence
-					.getTimestampsfromMedia(video)
-					.pop();
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(video);
+
 				if (video.paused) {
 					presenceData.smallImageText = "Paused";
 					presenceData.smallImageKey = Assets.Pause;

@@ -19,7 +19,7 @@
 		"*://*.rtlplay.be/*",
 		"*://*.radiocontact.be/*"
 	],
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/thumbnail.jpg",
 	"color": "#121726",

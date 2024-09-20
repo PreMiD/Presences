@@ -149,10 +149,7 @@ presence.on("UpdateData", async () => {
 				video.readyState > 2
 			) {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
-					presence.getTimestamps(
-						Math.floor(video.currentTime),
-						Math.floor(video.duration)
-					);
+					presence.getTimestampsfromMedia(video);
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "재생중";
 			} else {

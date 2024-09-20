@@ -12,7 +12,7 @@
 	},
 	"url": "fandom.com",
 	"regExp": "[a-z0-9-]+[.]fandom[.]com[/]",
-	"version": "1.2.23",
+	"version": "1.2.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Fandom/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Fandom/assets/thumbnail.png",
 	"color": "#002A32",

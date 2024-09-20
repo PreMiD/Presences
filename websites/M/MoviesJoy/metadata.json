@@ -10,7 +10,7 @@
 	},
 	"url": "moviesjoy.is",
 	"regExp": "(www[.])?(ww[0-9]{0,2}[.])?moviesjoy[.].*",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MoviesJoy/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MoviesJoy/assets/thumbnail.png",
 	"color": "#6A43B0",

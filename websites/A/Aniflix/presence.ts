@@ -56,8 +56,6 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			smallImageKey: paused ? Assets.Pause : Assets.Play,
 			smallImageText: paused ? (await strings).pause : (await strings).play,
-			startTimestamp,
-			endTimestamp,
 		};
 
 	search = document.querySelector<HTMLInputElement>(
@@ -82,14 +80,13 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.details = air.textContent;
 
-			if (paused) {
-				delete presenceData.startTimestamp;
-				delete presenceData.endTimestamp;
+			if (!paused) {
+				[presenceData.startTimestamp, presenceData.endTimestamp] = [
+					startTimestamp,
+					endTimestamp,
+				];
 			}
-
-			presence.setActivity(presenceData);
 		} else if (iFrameVideo === null && isNaN(duration)) {
-			delete presenceData.endTimestamp;
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.details = "Looking at: ";
 			title = document.querySelector(
@@ -101,17 +98,14 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `${title.textContent} (${views.textContent})`;
 			delete presenceData.smallImageText;
 			presenceData.smallImageKey = Assets.Reading;
-
-			presence.setActivity(presenceData);
 		}
-	} else if (search !== "" && search.length >= 2) {
+	} else if (search) {
 		presenceData.details = "Searching for:";
 		presenceData.state = search;
-		delete presenceData.endTimestamp;
+
 		presenceData.startTimestamp = browsingTimestamp;
 		delete presenceData.smallImageText;
 		presenceData.smallImageKey = Assets.Search;
-		presence.setActivity(presenceData);
 	} else if (
 		document.location.pathname.includes("/show/") &&
 		document.location.pathname.includes("/reviews")
@@ -121,76 +115,66 @@ presence.on("UpdateData", async () => {
 		);
 		presenceData.details = "Viewing reviews of show:";
 		presenceData.state = title.textContent.replace("Reviews zu ", "");
-		delete presenceData.endTimestamp;
+
 		presenceData.startTimestamp = browsingTimestamp;
 		delete presenceData.smallImageText;
 		delete presenceData.smallImageKey;
-
-		presence.setActivity(presenceData);
 	} else if (document.location.pathname.includes("/show/")) {
 		title = document.querySelector(
 			"#view-wrapper > div.show > div > div.header-wrapper > div.show-header > div > div:nth-child(1) > div.name-wrapper > h1"
 		);
 		presenceData.details = "Viewing show:";
 		presenceData.state = title.textContent;
-		delete presenceData.endTimestamp;
+
 		presenceData.startTimestamp = browsingTimestamp;
 		delete presenceData.smallImageText;
 		delete presenceData.smallImageKey;
-
-		presence.setActivity(presenceData);
 	} else {
 		switch (document.location.pathname) {
 			case "/airing": {
 				presenceData.details = "Viewing the calendar";
 				delete presenceData.state;
-				delete presenceData.endTimestamp;
+
 				presenceData.startTimestamp = browsingTimestamp;
 				delete presenceData.smallImageText;
 				delete presenceData.smallImageKey;
-
-				presence.setActivity(presenceData);
 
 				break;
 			}
 			case "/all": {
 				presenceData.details = "Viewing the list";
 				presenceData.state = "of all shows";
-				delete presenceData.endTimestamp;
+
 				presenceData.startTimestamp = browsingTimestamp;
 				delete presenceData.smallImageText;
 				delete presenceData.smallImageKey;
-
-				presence.setActivity(presenceData);
 
 				break;
 			}
 			case "/about": {
 				presenceData.details = "Viewing the about page";
 				delete presenceData.state;
-				delete presenceData.endTimestamp;
+
 				presenceData.startTimestamp = browsingTimestamp;
 				delete presenceData.smallImageText;
 				presenceData.smallImageKey = Assets.Reading;
-
-				presence.setActivity(presenceData);
 
 				break;
 			}
 			case "/": {
 				presenceData.details = "Viewing the main page";
 				delete presenceData.state;
-				delete presenceData.endTimestamp;
+
 				presenceData.startTimestamp = browsingTimestamp;
 				delete presenceData.smallImageText;
 				presenceData.smallImageKey = Assets.Reading;
 
-				presence.setActivity(presenceData);
-
 				break;
 			}
-			default:
-				presence.setActivity();
 		}
 	}
+	if (presenceData?.endTimestamp && presenceData?.startTimestamp)
+		presenceData.type = ActivityType.Watching;
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });

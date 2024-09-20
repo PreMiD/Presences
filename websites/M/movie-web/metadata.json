@@ -44,7 +44,7 @@
 		"*://movie-web.x/*",
 		"*://sudo-flix.rip/*"
 	],
-	"version": "1.1.4",
+	"version": "1.1.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/thumbnail.png",
 	"color": "#533670",

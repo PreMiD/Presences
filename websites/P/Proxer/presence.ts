@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 class VideoData {
-	time: number;
+	currentTime: number;
 	duration: number;
 	paused: boolean;
 }
@@ -35,16 +35,13 @@ presence.on("UpdateData", () => {
 			lang = getByXpath(
 				"//*[@id='wContainer']//*[@class='wLanguage']",
 				e => e.textContent
-			),
-			now = Date.now() / 1000;
+			);
 
 		if (videoData) {
 			if (!videoData.paused) {
 				presenceData.details = "Watching";
-				presenceData.startTimestamp = Math.floor(now - videoData.time);
-				presenceData.endTimestamp = Math.floor(
-					now + videoData.duration - videoData.time
-				);
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(videoData.currentTime, videoData.duration);
 			} else presenceData.details = "Paused";
 		} else if (
 			getByXpath("//*[@id='wContainer']//*[@class='wStream']/div/@style", e =>

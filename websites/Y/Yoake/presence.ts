@@ -67,20 +67,19 @@ presence.on("UpdateData", async () => {
 
 	if (video && !isNaN(video.duration)) {
 		const [titleArrOne, titleArrTwo] = (
-				document.querySelector("#title")
-					? document.querySelector("#title").textContent
-					: "Không thấy tên phim!... - Tập ?"
-			).split(" - "),
-			[startTimestamp, endTimestamp] = presence.getTimestamps(
-				Math.floor(video.currentTime),
-				Math.floor(video.duration)
-			);
+			document.querySelector("#title")
+				? document.querySelector("#title").textContent
+				: "Không thấy tên phim!... - Tập ?"
+		).split(" - ");
 		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused
 			? (await strings).pause
 			: (await strings).play;
-		presenceData.startTimestamp = startTimestamp;
-		presenceData.endTimestamp = endTimestamp;
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestamps(
+				Math.floor(video.currentTime),
+				Math.floor(video.duration)
+			);
 
 		presenceData.details = `Đang xem: ${titleArrOne}`;
 		presenceData.state = titleArrTwo;
