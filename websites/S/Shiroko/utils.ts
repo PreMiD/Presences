@@ -1,13 +1,9 @@
-/* eslint-disable */
-
-export function get_image() : string | undefined {
+export function getImage() : string | undefined {
 	for (const img of document.images) 
 		if (["poster anime", "Poster Anime", "Anime Cover"].includes(String(img.attributes.getNamedItem("alt")?.value))) return String(img.src);
-
-	return undefined;
 }
 
-export function get_title() {
+export function getTitle() {
 	const nt = document.querySelectorAll(".title-nt")[0],
 	 	  ro = document.querySelectorAll(".title-rm")[0],
 		  en = document.querySelectorAll(".title-en")[0];
@@ -27,23 +23,23 @@ export function get_title() {
 	}
 }
 
-export function get_episode() : number {
-	let episode = 1,
-		query = document.querySelector("#primary > div.flex.flex-col.px-3.lg\\:px-0.mt-2 > div.flex.flex-col.gap-2.font-karla.pt-2.pb-3.w-full > div.flex.justify-between.items-center > div:nth-child(1) > div");
+export function getEpisode() : number {
+	let episode = 1;
+	const query = document.querySelector("#primary > div.flex.flex-col.px-3.lg\\:px-0.mt-2 > div.flex.flex-col.gap-2.font-karla.pt-2.pb-3.w-full > div.flex.justify-between.items-center > div:nth-child(1) > div");
 
 	if (query) episode = Number(query.children[0].innerHTML.split(" ").pop());
 
 	return episode;
 }
 
-export function get_id() : number {
-	for (const [key, value] of location.search.substr(1).split('&').map(s => s.split('='))) {
-		if (key === 'id') return Number(value);
-	}
+export function getId() : number {
+	for (const [key, value] of location.search.substr(1).split("&").map(s => s.split("="))) 
+		if (key === "id") return Number(value);
+	
 
-	for (const path of location.pathname.split('/')) {
-		if (path.match(/^(\d+)$/)) {
+	for (const path of location.pathname.split("/")) {
+		if (path.match(/^(\d+)$/)) 
 			return Number(path);
-		}
+		
 	}
 }
