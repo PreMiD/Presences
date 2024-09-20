@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "717394071773118474",
+		"name": "neovillette."
+	},
+	"service": "Miruro",
+	"description": {
+		"en": "Miruro · Watch Free Anime Online · Stream Subbed & Dubbed Anime in HD"
+	},
+	"url": [
+		"miruro.tv",
+		"miruro.online"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/Wwd5S5f.png",
+	"thumbnail": "https://i.imgur.com/vXgG3y7.png",
+	"color": "#e0a10a",
+	"category": "anime",
+	"tags": [
+		"anime"
+	]
+}
