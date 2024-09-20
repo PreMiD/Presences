@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "205984221859151873",
 		"name": "joerkig"
@@ -11,9 +12,6 @@
 	"url": [
 		"www.liveatc.net",
 		"forums.liveatc.net"
-	],
-	"matches": [
-		"*://*.liveatc.net/*"
 	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LiveATC/assets/logo.png",

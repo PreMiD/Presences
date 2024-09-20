@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "87107972676751360",
 		"name": "pierrequlroule"
@@ -14,10 +15,6 @@
 	"url": [
 		"www.rtlplay.be",
 		"www.radiocontact.be"
-	],
-	"matches": [
-		"*://*.rtlplay.be/*",
-		"*://*.radiocontact.be/*"
 	],
 	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/logo.png",

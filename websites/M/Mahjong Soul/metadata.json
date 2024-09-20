@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "193714715631812608",
 		"name": "nihongojouzu"
@@ -14,13 +15,6 @@
 		"game.maj-soul.com",
 		"game.mahjongsoul.com",
 		"mahjongsoul.com"
-	],
-	"matches": [
-		"*://mahjongsoul.game.yo-star.com/*",
-		"*://mahjongsoul.yo-star.com/*",
-		"*://game.maj-soul.com/*",
-		"*://game.mahjongsoul.com/*",
-		"*://mahjongsoul.com/*"
 	],
 	"version": "1.1.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Mahjong%20Soul/assets/logo.jpeg",

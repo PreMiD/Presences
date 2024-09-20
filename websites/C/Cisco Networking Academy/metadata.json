@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "YJJcoolcool",
 		"id": "300929818231308288"
@@ -18,9 +19,6 @@
 	"url": [
 		"www.netacad.com",
 		"legacy.netacad.com"
-	],
-	"matches": [
-		"*://*.netacad.com/*"
 	],
 	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Cisco%20Networking%20Academy/assets/logo.png",

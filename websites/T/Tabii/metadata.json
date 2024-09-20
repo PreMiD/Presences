@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "180731688844787712",
 		"name": "tuleyman"
@@ -12,10 +13,6 @@
 	"url": [
 		"www.tabii.com",
 		"tabii.com"
-	],
-	"matches": [
-		"*://www.tabii.com/*",
-		"*://tabii.com/*"
 	],
 	"version": "1.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tabii/assets/logo.png",
