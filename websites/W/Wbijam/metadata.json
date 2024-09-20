@@ -12,7 +12,7 @@
 	},
 	"url": "wbijam.pl",
 	"regExp": "([a-z0-9.]*)wbijam[.]pl",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wbijam/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wbijam/assets/thumbnail.png",
 	"color": "#00b3ff",

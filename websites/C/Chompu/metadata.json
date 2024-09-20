@@ -11,7 +11,7 @@
 		"th": "Chompu คือ บอทดิสคอร์ดที่มาพร้อมด้วยระบบสตรีมเล่นเพลงที่สามารถจัดการหรือเพิ่มคิวเพลงบนเว็บไซต์! รองรับสตรีมเล่นเพลงหลายแพลตฟอร์ม Joox, TikTok, BiliBili, VK Music, Distrokid, Nico, AppleMusic, Spotify, Soundcloud, Clyp, PornHub และอื่นๆอีกมากมาย!"
 	},
 	"url": "chompubot.work",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Chompu/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Chompu/assets/thumbnail.jpg",
 	"color": "#ffbcff",
