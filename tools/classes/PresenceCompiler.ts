@@ -255,8 +255,8 @@ export interface Metadata {
 	description: { [lang: string]: string };
 	url: `${string}.${string}` | `${string}.${string}`[];
 	regExp?: string;
-	matches?: string[];
 	version: `${number}.${number}.${number}`;
+	apiVersion: number;
 	logo: `https://i.imgur.com/${string}.${ImageTypes}`;
 	thumbnail: `https://i.imgur.com/${string}.${ImageTypes}`;
 	color: `#${string}`;
@@ -264,7 +264,6 @@ export interface Metadata {
 	category: string;
 	iframe?: boolean;
 	iFrameRegExp?: string;
-	iFrameMatches?: string[];
 	readLogs?: boolean;
 	settings?:
 		| Setting
