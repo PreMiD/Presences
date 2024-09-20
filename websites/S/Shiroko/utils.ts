@@ -1,11 +1,15 @@
 export function getImage(): string | undefined {
 	for (const img of document.images) {
-		if (["poster anime", "Poster Anime", "Anime Cover"].includes(String(img.attributes.getNamedItem("alt")?.value)))
+		if (
+			["poster anime", "Poster Anime", "Anime Cover"].includes(
+				String(img.attributes.getNamedItem("alt")?.value)
+			)
+		)
 			return String(img.src);
 	}
 }
 
-export function getTitle() : string | undefined {
+export function getTitle(): string | undefined {
 	const nt = document.querySelectorAll(".title-nt")[0],
 		ro = document.querySelectorAll(".title-rm")[0],
 		en = document.querySelectorAll(".title-en")[0];
@@ -18,9 +22,8 @@ export function getTitle() : string | undefined {
 		if (
 			div.className === "flex flex-col gap-1 text-center md:text-start w-full"
 		) {
-			for (const element of div.children) 
+			for (const element of div.children)
 				if (element.tagName.toLowerCase() === "h1") return element.innerHTML;
-			
 		}
 	}
 }
@@ -43,7 +46,6 @@ export function getId(): number {
 		.map(s => s.split("=")))
 		if (key === "id") return Number(value);
 
-	for (const path of location.pathname.split("/")) 
+	for (const path of location.pathname.split("/"))
 		if (path.match(/^(\d+)$/)) return Number(path);
-	
 }
