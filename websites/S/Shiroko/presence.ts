@@ -3,15 +3,14 @@ import { getEpisode, getId, getImage, getTitle } from "./utils";
 const presence = new Presence({
 	clientId: "1286500193881161804"
 }),
-
- DOMAIN = "https://shiroko.co";
+	DOMAIN = "https://shiroko.co";
 
 let lastPlaybackState = false,
 	playback = false,
 	startTimestamp = Math.floor(Date.now() / 1e3),
+	lastHref : string,
+	lastUpdate = 0;
 
- lastHref : string,
- lastUpdate = 0;
 presence.on("UpdateData", async () => {
 		const presenceData: PresenceData = {
 		buttons: [ { label: "Visit Shiroko", url: "https://shiroko.co" } ],
@@ -46,16 +45,12 @@ presence.on("UpdateData", async () => {
 	if (pathname.includes("/search/anime")) presenceData.details = "Searching Anime...";
 	if (href.includes("/search/anime?season=")) presenceData.details = "Viewing Season...";
 	if (pathname.startsWith("/en/anime/") && !pathname.startsWith("/en/anime/watch")) {
-		
-
 		presenceData.details = `${getTitle()}`;
 		presenceData.state = "Viewing Anime...";
 
 		presenceData.buttons.unshift({ label: "View Anime", url: `${DOMAIN}/en/anime/${getId()}` });
 	} else
 	if (pathname.startsWith("/en/manga/")) {
-		
-
 		presenceData.details = `${getTitle()}`;
 		presenceData.state = "Viewing Manga...";
 
