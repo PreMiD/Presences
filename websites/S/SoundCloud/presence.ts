@@ -119,6 +119,7 @@ presence.on("UpdateData", async () => {
 			showTimestamps,
 			showCover,
 			showButtons,
+			usePresenceName,
 			newLang,
 		] = await Promise.all([
 			presence.getSetting<boolean>("browse"),
@@ -127,6 +128,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("timestamp"),
 			presence.getSetting<boolean>("cover"),
 			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("usePresenceName"),
 			presence.getSetting<string>("lang").catch(() => "en"),
 		]),
 		playing = Boolean(document.querySelector(".playControls__play.playing"));
@@ -152,10 +154,17 @@ presence.on("UpdateData", async () => {
 	}
 
 	if ((playing || (!playing && !showBrowsing)) && showSong) {
-		presenceData.details = getElement(
-			".playbackSoundBadge__titleLink > span:nth-child(2)"
-		);
-		presenceData.state = getElement(".playbackSoundBadge__lightLink");
+		if (!usePresenceName) {
+			presenceData.details = getElement(
+				".playbackSoundBadge__titleLink > span:nth-child(2)"
+			);
+			presenceData.state = getElement(".playbackSoundBadge__lightLink");
+		} else {
+			presenceData.name = getElement(
+				".playbackSoundBadge__titleLink > span:nth-child(2)"
+			);
+			presenceData.details = getElement(".playbackSoundBadge__lightLink");
+		}
 
 		const timePassed = document.querySelector(
 				"div.playbackTimeline__timePassed > span:nth-child(2)"
