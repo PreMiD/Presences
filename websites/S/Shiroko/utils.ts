@@ -5,7 +5,7 @@ export function getImage(): string | undefined {
 	}
 }
 
-export function getTitle() {
+export function getTitle() : string | undefined {
 	const nt = document.querySelectorAll(".title-nt")[0],
 		ro = document.querySelectorAll(".title-rm")[0],
 		en = document.querySelectorAll(".title-en")[0];
