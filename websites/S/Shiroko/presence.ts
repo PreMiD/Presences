@@ -12,12 +12,12 @@ let lastPlaybackState = false,
 	lastUpdate = 0;
 
 presence.on("UpdateData", async () => {
-		const presenceData: PresenceData = {
+	const presenceData: PresenceData = {
 		buttons: [ { label: "Visit Shiroko", url: "https://shiroko.co" } ],
 		startTimestamp
 	},
-	
-	 video = document.body.querySelectorAll("video")[0];
+	video = document.body.querySelectorAll("video")[0];
+
 	if (video) {
 		presenceData.type = ActivityType.Watching;
 		playback = !video.paused && !video.ended;
@@ -28,9 +28,6 @@ presence.on("UpdateData", async () => {
 
 		presenceData.smallImageKey = playback ? Assets.Play : Assets.Pause;
 		presenceData.smallImageText = playback ? "Playing" : "Paused";
-	} else {
-		lastPlaybackState = false;
-		playback = false;
 	}
 
 	if (video && lastPlaybackState === playback) return;
