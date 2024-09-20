@@ -17,7 +17,7 @@
 	},
 	"url": "kissasian.li",
 	"regExp": "kissasian([.][a-z]+)+[/]",
-	"version": "3.0.18",
+	"version": "3.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/KissAsian/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/KissAsian/assets/thumbnail.png",
 	"color": "#f5d80b",

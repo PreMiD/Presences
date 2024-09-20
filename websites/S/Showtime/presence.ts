@@ -144,7 +144,7 @@ presence.on("UpdateData", async () => {
 				}
 				case "playback": {
 					if (video && !isNaN(video.duration)) {
-						[, presenceData.endTimestamp] =
+						[presenceData.startTimestamp, presenceData.endTimestamp] =
 							presence.getTimestampsfromMedia(video);
 						presenceData.smallImageKey = video.paused
 							? Assets.Pause
@@ -235,7 +235,7 @@ presence.on("UpdateData", async () => {
 								}
 								case !!pathSplit[2].match(/[0-9]{5}/gm): {
 									if (video && !isNaN(video.duration)) {
-										[, presenceData.endTimestamp] =
+										[presenceData.startTimestamp, presenceData.endTimestamp] =
 											presence.getTimestampsfromMedia(video);
 										presenceData.smallImageKey = video.paused
 											? Assets.Pause

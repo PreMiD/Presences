@@ -70,8 +70,7 @@ presence.on("UpdateData", async () => {
 
 		// player is loaded
 	} else if (document.querySelectorAll("video")) {
-		const video = document.querySelector("video"),
-			[startTimestamp, endTimestamp] = presence.getTimestampsfromMedia(video);
+		const video = document.querySelector("video");
 
 		presenceData.details = `${jsonLD.name} - S${params.getAll(
 			"s"
@@ -79,8 +78,8 @@ presence.on("UpdateData", async () => {
 
 		presenceData.state = presenceStrings.branding;
 		presenceData.smallImageText = presenceStrings.websiteName;
-		presenceData.startTimestamp = startTimestamp;
-		presenceData.endTimestamp = endTimestamp;
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestampsfromMedia(video);
 		presenceData.largeImageKey = jsonLD.thumbnailUrl;
 		presenceData.buttons = [
 			{

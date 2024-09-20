@@ -131,15 +131,15 @@ presence.on("UpdateData", async () => {
 			? "Paused"
 			: "Playing";
 		if (document.querySelector("div.btn.pause")) {
-			const timestamps = presence.getTimestamps(
-				presence.timestampFromFormat(
-					document.querySelector("#songProgress").textContent
-				),
-				presence.timestampFromFormat(
-					document.querySelector("#songDuration").textContent
-				)
-			);
-			presenceData.endTimestamp = timestamps[1];
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(
+					presence.timestampFromFormat(
+						document.querySelector("#songProgress").textContent
+					),
+					presence.timestampFromFormat(
+						document.querySelector("#songDuration").textContent
+					)
+				);
 		}
 		presenceData.buttons = [
 			{
@@ -162,15 +162,15 @@ presence.on("UpdateData", async () => {
 			? "Paused"
 			: "Playing";
 		if (document.querySelector("div.btn.pause")) {
-			const timestamps = presence.getTimestamps(
-				presence.timestampFromFormat(
-					document.querySelector("#songProgress").textContent
-				),
-				presence.timestampFromFormat(
-					document.querySelector("#songDuration").textContent
-				)
-			);
-			presenceData.endTimestamp = timestamps[1];
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(
+					presence.timestampFromFormat(
+						document.querySelector("#songProgress").textContent
+					),
+					presence.timestampFromFormat(
+						document.querySelector("#songDuration").textContent
+					)
+				);
 		}
 		presenceData.buttons = [
 			{
@@ -359,11 +359,11 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = replay.playing ? Assets.Play : Assets.Pause;
 			presenceData.smallImageText = replay.playing ? "Playing" : "Paused";
 			if (replay.playing) {
-				const timestamps = presence.getTimestamps(
-					presence.timestampFromFormat(replay.currentTime),
-					presence.timestampFromFormat(replay.duration)
-				);
-				presenceData.endTimestamp = timestamps[1];
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(
+						presence.timestampFromFormat(replay.currentTime),
+						presence.timestampFromFormat(replay.duration)
+					);
 			}
 			presenceData.buttons = [
 				{

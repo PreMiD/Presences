@@ -25,12 +25,11 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	subtitle: string;
 
 presence.on("UpdateData", async () => {
-	const [newLang, privacy, time, buttons, groupWatchBtn] = await Promise.all([
+	const [newLang, privacy, time, buttons] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("time"),
 			presence.getSetting<number>("buttons"),
-			presence.getSetting<boolean>("groupWatchBtn"),
 		]),
 		{ hostname, href, pathname } = document.location,
 		presenceData: PresenceData & {
@@ -121,18 +120,6 @@ presence.on("UpdateData", async () => {
 						presenceData.state = search.value;
 						presenceData.smallImageKey = Assets.Search;
 					} else presenceData.details = strings.browsing;
-					break;
-				}
-				case pathname.includes("groupwatch"): {
-					presenceData.details = "Kaas";
-					if (groupWatchBtn) {
-						presenceData.buttons = [
-							{
-								label: "Join GroupWatch",
-								url: href,
-							},
-						];
-					}
 					break;
 				}
 				case pathname.includes("home"): {

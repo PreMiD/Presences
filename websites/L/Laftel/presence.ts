@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = Assets.Play;
 			} else {
 				presenceData.startTimestamp = null;
-				presenceData.endTimestamp = null;
+				delete presenceData.endTimestamp;
 				presenceData.state = "일시 정지됨";
 				presenceData.smallImageKey = Assets.Pause;
 			}

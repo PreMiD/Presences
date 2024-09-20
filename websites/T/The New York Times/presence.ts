@@ -78,10 +78,8 @@ presence.on("UpdateData", async () => {
 				presenceData.state = `${podcast.textContent}: ${title}`;
 
 			if (audioPlayer && !isNaN(audioPlayer.duration)) {
-				const timestamps = presence.getTimestampsfromMedia(audioPlayer);
-
-				presenceData.startTimestamp = timestamps[0];
-				presenceData.endTimestamp = timestamps[1];
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(audioPlayer);
 
 				if (audioPlayer.paused) {
 					delete presenceData.endTimestamp;

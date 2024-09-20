@@ -118,7 +118,7 @@ presence.on("UpdateData", async () => {
 						?.getAttribute("src") ?? "";
 
 				if (audio && !audio.paused) {
-					[, presenceData.endTimestamp] =
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
 						presence.getTimestampsfromMedia(audio);
 					presenceData.smallImageKey = Assets.Play;
 					presenceData.smallImageText = "Listening to audio";

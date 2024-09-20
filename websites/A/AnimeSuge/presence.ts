@@ -89,10 +89,8 @@ presence.on("UpdateData", async () => {
 
 		if (!paused) {
 			presenceData.smallImageKey = Assets.Play;
-			[, presenceData.endTimestamp] = presence.getTimestamps(
-				currentTime,
-				timeEnd
-			);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(currentTime, timeEnd);
 		} else {
 			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Paused";

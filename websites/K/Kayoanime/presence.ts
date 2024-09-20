@@ -62,18 +62,14 @@ presence.on("UpdateData", async () => {
 					everPlaying
 				) {
 					if (video && !isNaN(video.duration)) {
-						const [start, end] = presence.getTimestamps(
-							Math.floor(video.currentTime),
-							Math.floor(video.duration)
-						);
 						presenceData.smallImageKey = video.paused
 							? Assets.Pause
 							: Assets.Play;
 						presenceData.smallImageText = video.paused
 							? (await strings).pause
 							: (await strings).play;
-						presenceData.startTimestamp = start;
-						presenceData.endTimestamp = end;
+						[presenceData.startTimestamp, presenceData.endTimestamp] =
+							presence.getTimestamps(video.currentTime, video.duration);
 						presenceData.details = details.stream;
 						presenceData.state = document.querySelector(
 							".entry-header-outer > .entry-header > h1 "

@@ -55,8 +55,8 @@ presence.on("UpdateData", async () => {
 				delete presenceData.startTimestamp;
 
 				if (!paused) {
-					presenceData.endTimestamp =
-						Date.now() / 1000 + duration - currentTime;
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestamps(duration, currentTime);
 				}
 			}
 			if (buttons)
@@ -105,8 +105,8 @@ presence.on("UpdateData", async () => {
 				delete presenceData.startTimestamp;
 
 				if (!paused) {
-					presenceData.endTimestamp =
-						Date.now() / 1000 + duration - currentTime;
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestamps(duration, currentTime);
 				}
 			}
 			if (buttons)

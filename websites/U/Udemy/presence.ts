@@ -65,11 +65,6 @@ presence.on("UpdateData", async () => {
 			document.querySelector("div h1[class*=category--heading-primary] a")
 				?.textContent || "Unknown Category";
 	} else if (page.includes("/course/") && video && video.currentTime) {
-		const [, endTimestamp] = presence.getTimestamps(
-			Math.floor(video.currentTime),
-			Math.floor(video.duration)
-		);
-
 		presenceData.details =
 			document.querySelector("header h1[data-purpose=course-header-title] a")
 				?.textContent || "Unknown Course";
@@ -86,7 +81,10 @@ presence.on("UpdateData", async () => {
 			? (await strings).pause
 			: (await strings).play;
 
-		if (!isNaN(endTimestamp)) presenceData.endTimestamp = endTimestamp;
+		if (!isNaN(video.currentTime)) {
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestampsfromMedia(video);
+		}
 
 		if (video.paused) {
 			delete presenceData.startTimestamp;

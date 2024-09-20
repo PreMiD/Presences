@@ -61,17 +61,15 @@ presence.on("UpdateData", async () => {
 		// Only add bottom row status and timestamp if playing
 		if (presenceData.details === "Playing") {
 			presenceData.state = currentSong();
-
-			const timestamps = presence.getTimestamps(
-				presence.timestampFromFormat(
-					document.querySelector("#progress-current").textContent
-				),
-				presence.timestampFromFormat(
-					document.querySelector("#progress-length").textContent
-				)
-			);
-			presenceData.startTimestamp = timestamps[0];
-			presenceData.endTimestamp = timestamps[1];
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(
+					presence.timestampFromFormat(
+						document.querySelector("#progress-current").textContent
+					),
+					presence.timestampFromFormat(
+						document.querySelector("#progress-length").textContent
+					)
+				);
 		}
 	}
 
