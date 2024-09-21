@@ -1,9 +1,8 @@
 import { getEpisode, getId, getImage, getTitle } from "./utils";
 
 const presence = new Presence({
-		clientId: "1286500193881161804",
-	}),
-	DOMAIN = "https://shiroko.co";
+	clientId: "1286500193881161804",
+});
 
 let lastPlaybackState = false,
 	playback = false,
@@ -16,7 +15,8 @@ presence.on("UpdateData", async () => {
 			buttons: [{ label: "Visit Shiroko", url: "https://shiroko.co" }],
 			startTimestamp,
 		},
-		video = document.body.querySelectorAll("video")[0];
+		video = document.querySelector("video"),
+		{ pathname, href } = document.location;
 
 	if (video) {
 		presenceData.type = ActivityType.Watching;
@@ -34,13 +34,11 @@ presence.on("UpdateData", async () => {
 
 	presenceData.endTimestamp = null;
 
-	const { pathname, href } = location;
-
 	if (pathname.startsWith("/en/schedule")) {
 		presenceData.details = "Viewing Schedule...";
 		presenceData.buttons.unshift({
 			label: "View Schedule",
-			url: `${DOMAIN}/en/schedule`,
+			url: href,
 		});
 	}
 	if (pathname.includes("/search/manga"))
@@ -53,20 +51,20 @@ presence.on("UpdateData", async () => {
 		pathname.startsWith("/en/anime/") &&
 		!pathname.startsWith("/en/anime/watch")
 	) {
-		presenceData.details = `${getTitle()}`;
+		presenceData.details = getTitle();
 		presenceData.state = "Viewing Anime...";
 
 		presenceData.buttons.unshift({
 			label: "View Anime",
-			url: `${DOMAIN}/en/anime/${getId()}`,
+			url: href,
 		});
 	} else if (pathname.startsWith("/en/manga/")) {
-		presenceData.details = `${getTitle()}`;
+		presenceData.details = getTitle();
 		presenceData.state = "Viewing Manga...";
 
 		presenceData.buttons.unshift({
 			label: "View Manga",
-			url: `${DOMAIN}/en/manga/${getId()}`,
+			url: href,
 		});
 	} else if (typeof presenceData.details !== "string")
 		presenceData.details = "Viewing Home...";
@@ -74,7 +72,7 @@ presence.on("UpdateData", async () => {
 	if (pathname.startsWith("/en/anime/watch")) {
 		const episode = getEpisode();
 
-		presenceData.details = `${getTitle()}`;
+		presenceData.details = getTitle();
 		presenceData.state = !isNaN(episode)
 			? `Episode ${episode}`
 			: "Unable to retrieve episode";
@@ -82,19 +80,17 @@ presence.on("UpdateData", async () => {
 
 		presenceData.buttons.unshift({
 			label: "Watch Anime",
-			url: `${DOMAIN}/en/anime/watch?id=${getId()}&n=${episode}`,
+			url: `https://shiroko.co/en/anime/watch?id=${getId()}&n=${episode}`,
 		});
 	}
 
 	if (pathname.startsWith("/en/profile/")) {
-		const split = pathname.split("/").slice(1);
-		if (split.length === 3) {
-			const username = split.pop();
-
+		const username = pathname.split("/").pop();
+		if (username !== "profile" && username !== "") {
 			presenceData.details = `Viewing ${username}'s Profile`;
 			presenceData.buttons.unshift({
 				label: "View Profile",
-				url: `${DOMAIN}/en/profile/${username}`,
+				url: href,
 			});
 		}
 	}

@@ -10,31 +10,24 @@ export function getImage(): string | undefined {
 }
 
 export function getTitle(): string | undefined {
-	const nt = document.querySelectorAll(".title-nt")[0],
-		ro = document.querySelectorAll(".title-rm")[0],
-		en = document.querySelectorAll(".title-en")[0];
+	const nt = document.querySelector(".title-nt"),
+		ro = document.querySelector(".title-rm"),
+		en = document.querySelector(".title-en");
 
-	if (en) return en.innerHTML;
-	if (ro) return ro.innerHTML;
-	if (nt) return nt.innerHTML;
+	if (en) return en.textContent;
+	if (ro) return ro.textContent;
+	if (nt) return nt.textContent;
 
-	for (const div of document.querySelectorAll("div")) {
-		if (
-			div.className === "flex flex-col gap-1 text-center md:text-start w-full"
-		) {
-			for (const element of div.children)
-				if (element.tagName.toLowerCase() === "h1") return element.innerHTML;
-		}
-	}
+	return document.querySelector("h1")?.textContent;
 }
 
 export function getEpisode(): number {
 	let episode = 1;
-	const query = document.querySelector(
-		"#primary > div.flex.flex-col.px-3.lg\\:px-0.mt-2 > div.flex.flex-col.gap-2.font-karla.pt-2.pb-3.w-full > div.flex.justify-between.items-center > div:nth-child(1) > div"
-	);
+	const query = [...document.querySelectorAll("h3")]
+		.find(a => a.textContent.includes("Episode"))
+		?.textContent?.replace("Episode ", "");
 
-	if (query) episode = Number(query.children[0].innerHTML.split(" ").pop());
+	if (query) episode = Number(query);
 
 	return episode;
 }
