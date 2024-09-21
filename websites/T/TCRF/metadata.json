@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Nekolen",
 		"id": "270125856679002113"
@@ -10,7 +11,7 @@
 		"nl": "The Cutting Room Floor is een site gewijd aan het opgraven en onderzoeken van ongebruikte en geknipte inhoud uit videogames."
 	},
 	"url": "tcrf.net",
-	"version": "1.4.23",
+	"version": "1.4.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TCRF/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TCRF/assets/thumbnail.png",
 	"color": "#D3D3D3",

@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Hans5958",
 		"id": "279855717203050496"
@@ -13,7 +14,7 @@
 		"www.outline.com",
 		"outline.com"
 	],
-	"version": "1.0.20",
+	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/Outline/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/Outline/assets/thumbnail.png",
 	"color": "#ffffff",

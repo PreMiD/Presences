@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Timeraa",
 		"id": "223238938716798978"
@@ -19,10 +20,7 @@
 		"vi_VN": "Một dịch vụ phát nhạc với các album, đĩa đơn, video, bản remix, và các tiết mục trực tiếp chính thức và hơn nữa cho Android, iOS và máy tính. Tất cả đều tại đây."
 	},
 	"url": "music.youtube.com",
-	"matches": [
-		"*://music.youtube.com/*"
-	],
-	"version": "3.0.20",
+	"version": "3.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/thumbnail.png",
 	"color": "#E40813",

@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "QkeleQ10",
 		"id": "807917674477649943"
@@ -11,7 +12,7 @@
 	},
 	"url": "magister.net",
 	"regExp": "([a-z0-9-]+[.])*magister[.]net[/]",
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Magister/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Magister/assets/thumbnail.png",
 	"color": "#1F97F9",

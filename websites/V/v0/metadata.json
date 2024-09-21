@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "504392983244832780",
 		"name": "steellgold"
@@ -9,7 +10,7 @@
 		"en": "v0 is a generative user interface system by Vercel powered by AI. It generates copy-and-paste friendly React code based on shadcn/ui and Tailwind CSS that people can use in their projects."
 	},
 	"url": "v0.dev",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/v0/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/v0/assets/thumbnail.jpg",
 	"color": "#1a1a1a",
