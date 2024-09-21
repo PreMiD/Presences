@@ -33,12 +33,14 @@ export function getEpisode(): number {
 }
 
 export function getId(): number {
-	for (const [key, value] of location.search
+	const { search, pathname } = document.location;
+
+	for (const [key, value] of search
 		.substr(1)
 		.split("&")
 		.map(s => s.split("=")))
 		if (key === "id") return Number(value);
 
-	for (const path of location.pathname.split("/"))
+	for (const path of pathname.split("/"))
 		if (path.match(/^(\d+)$/)) return Number(path);
 }
