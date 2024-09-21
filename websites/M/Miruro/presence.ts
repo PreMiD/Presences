@@ -60,10 +60,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "Paused";
 			}
-		} else {
-			presenceData.smallImageKey = Assets.Logo;
-			presenceData.smallImageText = "miruro.com";
-		}
+		} else presenceData.smallImageKey = Assets.Logo;
 	} else {
 		switch (pathname) {
 			case "/":
