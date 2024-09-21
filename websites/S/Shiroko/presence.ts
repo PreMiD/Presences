@@ -12,7 +12,7 @@ let lastPlaybackState = false,
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			startTimestamp
+			startTimestamp,
 		},
 		video = document.querySelector("video"),
 		{ pathname, href } = document.location;
@@ -34,10 +34,12 @@ presence.on("UpdateData", async () => {
 	if (pathname.startsWith("/en/schedule")) {
 		presenceData.details = "Viewing Schedule...";
 
-		presenceData.buttons = [{
-			label: "View Schedule",
-			url: href,
-		}];
+		presenceData.buttons = [
+			{
+				label: "View Schedule",
+				url: href,
+			},
+		];
 	}
 	if (pathname.includes("/search/manga"))
 		presenceData.details = "Searching Manga...";
@@ -52,18 +54,22 @@ presence.on("UpdateData", async () => {
 		presenceData.details = getTitle();
 		presenceData.state = "Viewing Anime...";
 
-		presenceData.buttons = [{
-			label: "View Anime",
-			url: href,
-		}];
+		presenceData.buttons = [
+			{
+				label: "View Anime",
+				url: href,
+			},
+		];
 	} else if (pathname.startsWith("/en/manga/")) {
 		presenceData.details = getTitle();
 		presenceData.state = "Viewing Manga...";
 
-		presenceData.buttons = [{
-			label: "View Manga",
-			url: href,
-		}];
+		presenceData.buttons = [
+			{
+				label: "View Manga",
+				url: href,
+			},
+		];
 	} else if (typeof presenceData.details !== "string")
 		presenceData.details = "Viewing Home...";
 
@@ -76,20 +82,24 @@ presence.on("UpdateData", async () => {
 			: "Unable to retrieve episode";
 		presenceData.type = ActivityType.Watching;
 
-		presenceData.buttons = [{
-			label: "Watch Anime",
-			url: `https://shiroko.co/en/anime/watch?id=${getId()}&n=${episode}`,
-		}];
+		presenceData.buttons = [
+			{
+				label: "Watch Anime",
+				url: `https://shiroko.co/en/anime/watch?id=${getId()}&n=${episode}`,
+			},
+		];
 	}
 
 	if (pathname.startsWith("/en/profile/")) {
 		const username = pathname.split("/").pop();
 		if (username !== "profile" && username !== "") {
 			presenceData.details = `Viewing ${username}'s Profile`;
-			presenceData.buttons = [{
-				label: "View Profile",
-				url: href,
-			}];
+			presenceData.buttons = [
+				{
+					label: "View Profile",
+					url: href,
+				},
+			];
 		}
 	}
 
