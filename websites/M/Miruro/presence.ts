@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-const enum Assets { // Other default assets can be found at index.d.ts
+const enum Assets {
 	Logo = "https://i.imgur.com/Wwd5S5f.png",
 }
 
@@ -14,16 +14,13 @@ presence.on("UpdateData", async () => {
 			details: "Browsing",
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
-			buttons: [
-				{ label: "Watch Now", url: href },
-				{ label: "Join Discord", url: "https://discord.com/invite/pjsdJp96mY" }, // Miruro Discord server
-			],
+			type: ActivityType.Watching,
 		};
 
 	if (pathname.startsWith("/info")) {
 		const infoTitle = document
 				.querySelector<HTMLElement>("h1.sc-eZxvvn.cywezh")
-				?.childNodes[0]?.textContent.trim(),
+				?.firstChild?.textContent.trim(),
 			infoCover = document.querySelector<HTMLImageElement>(
 				"img.sc-fVHand.bPLeEN"
 			)?.src;
@@ -32,8 +29,8 @@ presence.on("UpdateData", async () => {
 		presenceData.state = "Diving into Details";
 		if (infoCover) {
 			presenceData.largeImageKey = infoCover;
-			presenceData.smallImageKey = Assets.Logo;
-			presenceData.smallImageText = "miruro.com";
+			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageText = "Reading info";
 		}
 	} else if (pathname.startsWith("/watch")) {
 		const video = document.querySelector<HTMLVideoElement>("video"),
@@ -44,32 +41,24 @@ presence.on("UpdateData", async () => {
 				?.textContent?.match(/\d+/)?.[0],
 			currentAnimeCover = document.querySelector<HTMLImageElement>(
 				"a.sc-dqMHui.bSMGmG img.sc-cgxxSg.kiWytg"
-			)?.src,
-			currentTime = document.querySelector<HTMLElement>(
-				'.vds-time[data-type="current"]'
-			)?.textContent,
-			duration = document.querySelector<HTMLElement>(
-				'.vds-time[data-type="duration"]'
-			)?.textContent;
-
-		let currentAnimeProgress;
-		if (currentTime && duration)
-			currentAnimeProgress = `${currentTime}/${duration}`;
+			)?.src;
 
 		if (currentAnimeTitle) {
 			presenceData.details = currentAnimeTitle;
 			if (episodeNumber) presenceData.state = `Episode ${episodeNumber}`;
+			presenceData.buttons = [{ label: "Watch Along", url: href }];
 		}
 		if (currentAnimeCover) presenceData.largeImageKey = currentAnimeCover;
 
 		if (video) {
 			if (!video.paused) {
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(video);
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Now Watching";
 			} else {
 				presenceData.smallImageKey = Assets.Pause;
-				if (currentAnimeProgress)
-					presenceData.smallImageText = `Paused | ${currentAnimeProgress}`;
+				presenceData.smallImageText = "Paused";
 			}
 		} else {
 			presenceData.smallImageKey = Assets.Logo;
