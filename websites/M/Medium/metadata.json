@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "EGGSY",
 		"id": "162969778699501569"
@@ -12,7 +13,7 @@
 	},
 	"url": "medium.com",
 	"regExp": "([a-z0-9|-]+[.])*medium[.]com[/]",
-	"version": "1.2.14",
+	"version": "1.2.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Medium/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Medium/assets/thumbnail.png",
 	"color": "#141210",

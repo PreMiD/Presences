@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "TheSlowly",
 		"id": "505071508851523599"
@@ -10,7 +11,7 @@
 		"nl": "Picarto is 's werelds toonaangevende live streamingplatform voor creatieve geesten. Doe mee en kijk naar artiesten van over de hele wereld tijdens hun creatieve proces!"
 	},
 	"url": "picarto.tv",
-	"version": "1.2.25",
+	"version": "1.2.26",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Picarto/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Picarto/assets/thumbnail.png",
 	"color": "#35A775",

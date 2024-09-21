@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Eren",
 		"id": "478937019758673931"
@@ -11,7 +12,7 @@
 		"nl": "Discord bots is een website die discord bots opsomt."
 	},
 	"url": "discord.bots.gg",
-	"version": "1.2.20",
+	"version": "1.2.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Bots/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Bots/assets/thumbnail.png",
 	"color": "#1C48D1",

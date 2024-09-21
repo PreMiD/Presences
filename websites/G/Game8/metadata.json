@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "193714715631812608",
 		"name": "nihongojouzu"
@@ -9,10 +10,7 @@
 		"en": "The Top Gaming and App Walkthroughs Straight from Japan! Game8 delivers the latest in gaming news, walkthrough information, and other useful tools so that you can get the most out of your gaming experience! Our pages for popular apps and new games are being updated every minute!"
 	},
 	"url": "game8.co",
-	"matches": [
-		"*://game8.co/*"
-	],
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Game8/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Game8/assets/thumbnail.webp",
 	"color": "#ffffff",

@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Hans5958",
 		"id": "279855717203050496"
@@ -13,7 +14,7 @@
 		"www.geoguessr.com",
 		"geoguessr.com"
 	],
-	"version": "1.2.25",
+	"version": "1.2.26",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GeoGuessr/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GeoGuessr/assets/thumbnail.png",
 	"color": "#CC2F2F",

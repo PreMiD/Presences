@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -16,7 +17,7 @@
 		"dev.bukkit.org",
 		"bukkit.gamepedia.com"
 	],
-	"version": "1.2.21",
+	"version": "1.2.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Bukkit/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Bukkit/assets/thumbnail.png",
 	"color": "#2096e1",
