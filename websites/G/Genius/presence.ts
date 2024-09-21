@@ -74,18 +74,9 @@ presence.on("UpdateData", async () => {
 		document.querySelector("div[class*='SongPageGrid']") !== null ||
 		document.querySelector(".song_body-lyrics") !== null
 	) {
+		const artist = await presence.getPageVariable("_sf_async_config.authors");
 		presenceData.details = strings.lyrics;
-		presenceData.state = `${
-			document
-				.querySelector("a[class*='SongHeaderdesktop__Artist']")
-				?.textContent.trim() ||
-			document
-				.querySelector("a[class*='SongHeadermobile__Artist']")
-				?.textContent.trim() ||
-			document
-				.querySelector("a[class*='HeaderArtistAndTracklistdesktop__Artist']")
-				?.textContent.trim()
-		} - ${
+		presenceData.state = `${artist["_sf_async_config.authors"]} - ${
 			document
 				.querySelector('h1[class*="SongHeaderdesktop__Title"]')
 				?.textContent.trim() ||

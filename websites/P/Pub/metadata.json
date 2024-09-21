@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -12,10 +13,7 @@
 		"en": "Pub is the package manager for the Dart programming language, containing reusable libraries & packages for Flutter and general Dart programs."
 	},
 	"url": "pub.dev",
-	"matches": [
-		"*://pub.dev/*"
-	],
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Pub/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Pub/assets/thumbnail.png",
 	"color": "#29B6F6",

@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Hans5958",
 		"id": "279855717203050496"
@@ -15,7 +16,7 @@
 	},
 	"url": "wikiversity.org",
 	"regExp": "([a-z0-9-]+[.])+wikiversity[.]org[/]",
-	"version": "1.0.23",
+	"version": "1.0.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wikiversity/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wikiversity/assets/thumbnail.png",
 	"color": "#f9f9f9",

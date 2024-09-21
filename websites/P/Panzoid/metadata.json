@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "576435921390403623",
 		"name": "rag404"
@@ -13,7 +14,7 @@
 		"app.panzoid.com",
 		"panzoid.com"
 	],
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Panzoid/assets/logo.webp",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Panzoid/assets/thumbnail.png",
 	"color": "#000000",

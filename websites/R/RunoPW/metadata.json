@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "め Kerem",
 		"id": "665482610859966464"
@@ -17,7 +18,7 @@
 		"nl": "Vrienden maken en chatten met miljoenen in een virtuele wereld"
 	},
 	"url": "runo.pw",
-	"version": "2.1.20",
+	"version": "2.1.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/RunoPW/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/RunoPW/assets/thumbnail.png",
 	"color": "#ffff00",

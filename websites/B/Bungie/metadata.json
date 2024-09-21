@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "RedBird16.com",
 		"id": "444872133504663552"
@@ -16,7 +17,7 @@
 		"comics.bungie.net",
 		"bungiestore.com"
 	],
-	"version": "1.0.20",
+	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Bungie/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Bungie/assets/thumbnail.png",
 	"color": "#12171C",

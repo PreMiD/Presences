@@ -188,11 +188,13 @@ presence.on("UpdateData", async () => {
 					presence.getTimestampsfromMedia(video);
 
 				title = document.querySelector(
-					".controls-overlay .primary-title"
+					"h1.ON_IMAGE.BUTTON1_MEDIUM"
 				)?.textContent;
 				subtitle = document.querySelector(
-					".controls-overlay .show-title"
-				)?.textContent; // episode or empty if it's a movie
+					"p.ON_IMAGE_ALT2.BUTTON3_MEDIUM"
+				)?.textContent;
+
+				if (!title) presence.error("Unable to get the title");
 
 				if (privacy) {
 					presenceData.state = subtitle

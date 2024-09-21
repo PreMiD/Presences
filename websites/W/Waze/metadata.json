@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "RedS",
 		"id": "389383409430167562"
@@ -19,7 +20,7 @@
 		"www.waze.com",
 		"beta.waze.com"
 	],
-	"version": "1.2.9",
+	"version": "1.2.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Waze/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Waze/assets/thumbnail.png",
 	"color": "#33ccff",

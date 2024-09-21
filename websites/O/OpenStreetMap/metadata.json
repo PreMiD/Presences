@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "frnk",
 		"id": "232904284004548608"
@@ -11,7 +12,7 @@
 	},
 	"url": "openstreetmap.org",
 	"regExp": "([a-z0-9]+)[.]openstreetmap[.]org",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/OpenStreetMap/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/OpenStreetMap/assets/thumbnail.png",
 	"color": "#7ebc6f",
