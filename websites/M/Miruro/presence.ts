@@ -19,10 +19,10 @@ presence.on("UpdateData", async () => {
 
 	if (pathname.startsWith("/info")) {
 		const infoTitle = document
-				.querySelector<HTMLElement>("h1.sc-eZxvvn.cywezh")
-				?.firstChild?.textContent.trim(),
+				.querySelector<HTMLTitleElement>("title")
+				?.textContent.trim(),
 			infoCover = document.querySelector<HTMLImageElement>(
-				"img.sc-fVHand.bPLeEN"
+				"img[src*='/file/anilistcdn/media/anime/cover/large']"
 			)?.src;
 
 		if (infoTitle) presenceData.details = infoTitle;
@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 				.querySelector<HTMLElement>(".ep-number")
 				?.textContent?.match(/\d+/)?.[0],
 			currentAnimeCover = document.querySelector<HTMLImageElement>(
-				"a.sc-dqMHui.bSMGmG img.sc-cgxxSg.kiWytg"
+				"img[src*='/file/anilistcdn/media/anime/cover/large']"
 			)?.src;
 
 		if (currentAnimeTitle) {
