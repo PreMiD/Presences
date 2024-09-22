@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Slowlife",
 		"id": "374905512661221377"
@@ -9,7 +10,7 @@
 		"en": "The streaming platform with a personalized user experience that brings unique and unexpected stories ranging from the highest quality in scripted programming to the best of unscripted, family-friendly content, the HBO service, Max Originals and more."
 	},
 	"url": "play.max.com",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Max/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Max/assets/thumbnail.jpeg",
 	"color": "#0014a4",

@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -13,7 +14,7 @@
 		"www.mc-market.org",
 		"status.mc-market.org"
 	],
-	"version": "1.2.19",
+	"version": "1.2.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MC-Market/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MC-Market/assets/thumbnail.png",
 	"color": "#3396d9",

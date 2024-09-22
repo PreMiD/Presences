@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "902671568856047636",
 		"name": "orion_off"
@@ -11,7 +12,7 @@
 	},
 	"url": "www.monbureaunumerique.fr",
 	"regExp": "\\b[a-zA-Z0-9.-]+\\.monbureaunumerique\\.fr\\b",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MonBureauNum%C3%A9rique/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MonBureauNum%C3%A9rique/assets/thumbnail.png",
 	"color": "#426494",

@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Cold",
 		"id": "254638264076468234"
@@ -16,7 +17,7 @@
 		"habbocity.fr",
 		"www.habbocity.fr"
 	],
-	"version": "1.1.26",
+	"version": "1.1.27",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HabboCity/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HabboCity/assets/thumbnail.png",
 	"color": "#FFEE51",
