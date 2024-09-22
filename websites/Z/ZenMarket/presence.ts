@@ -149,101 +149,19 @@ presence.on("UpdateData", async () => {
 						},
 					];
 					return presence.setActivity(presenceData);
-				}
-
-				switch (
-					document.querySelector(".active-tab")?.textContent?.toLowerCase()
-				) {
-					case "amazon": {
-						presenceData.buttons = [
-							{
-								label: "View On ZenMarket",
-								url: href,
-							},
-							{
-								label: "View On Amazon",
-								url: item?.productPage,
-							},
-						];
-						break;
-					}
-					case "rakuten": {
-						presenceData.buttons = [
-							{
-								label: "View On ZenMarket",
-								url: href,
-							},
-							{
-								label: "View On Rakuten",
-								url: item?.productPage,
-							},
-						];
-						break;
-					}
-					case "zenplus": {
-						presenceData.buttons = [
-							{
-								label: "View On ZenMarket",
-								url: href,
-							},
-							{
-								label: "View On ZenPlus",
-								url: item?.productPage,
-							},
-						];
-						break;
-					}
-					case "y! shopping": {
-						presenceData.buttons = [
-							{
-								label: "View On ZenMarket",
-								url: href,
-							},
-							{
-								label: "View On Yahoo Shopping",
-								url: item?.productPage,
-							},
-						];
-						break;
-					}
-					case "mercari": {
-						presenceData.buttons = [
-							{
-								label: "View On ZenMarket",
-								url: href,
-							},
-							{
-								label: "View On Mercari",
-								url: item?.productPage,
-							},
-						];
-						break;
-					}
-					case "rakuten rakuma": {
-						presenceData.buttons = [
-							{
-								label: "View On ZenMarket",
-								url: href,
-							},
-							{
-								label: "View On Rakuma",
-								url: item?.productPage,
-							},
-						];
-						break;
-					}
-					default: {
-						presenceData.buttons = [
-							{
-								label: "View On ZenMarket",
-								url: href,
-							},
-							{
-								label: "View On Other Market",
-								url: item?.productPage,
-							},
-						];
-					}
+				} else {
+					presenceData.buttons = [
+						{
+							label: "View On ZenMarket",
+							url: href,
+						},
+						{
+							label: `View On ${document
+								.querySelector(".active-tab")
+								?.textContent?.toLowerCase()}`,
+							url: item?.productPage,
+						},
+					];
 				}
 			} else if (path === "/auction.aspx" && search.includes("itemCode")) {
 				presenceData.details = `Looking at ${item?.title}`;
