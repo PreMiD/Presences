@@ -27,7 +27,7 @@
 		"vi_VN": "SoundCloud là nền tảng phát nhạc và podcast trực tuyến nơi bạn có thể nghe hàng triệu bài hát từ khắp thế giới, hoặc tự đăng tải tác phẩm của riêng mình."
 	},
 	"url": "soundcloud.com",
-	"version": "2.4.16",
+	"version": "2.5.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SoundCloud/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SoundCloud/assets/thumbnail.jpg",
 	"color": "#FF7E30",
@@ -76,6 +76,12 @@
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
+		},
+		{
+			"id": "usePresenceName",
+			"title": "Show Title as Presence",
+			"icon": "fad fa-user-edit",
+			"value": false
 		}
 	]
 }
