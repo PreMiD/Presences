@@ -74,14 +74,13 @@ presence.on("UpdateData", async () => {
 				case true:
 					presenceData.smallImageKey = Assets.Play;
 					presenceData.smallImageText = strings.play;
-					presenceData.endTimestamp = new Date(
-						Date.now() + (video.duration - video.currentTime) * 1000
-					).getTime();
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestampsfromMedia(video);
 					break;
 				case false:
 					presenceData.smallImageKey = Assets.Pause;
 					presenceData.smallImageText = strings.pause;
-					presenceData.endTimestamp = null;
+					delete presenceData.endTimestamp;
 					break;
 			}
 			presenceData.details = `Watching ${clipTitle[0]} to`;
@@ -137,16 +136,14 @@ presence.on("UpdateData", async () => {
 			case true:
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = strings.play;
-				presenceData.endTimestamp = new Date(
-					Date.now() + (video.duration - video.currentTime) * 1000
-				).getTime();
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(video);
 				break;
 			case false:
 				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = strings.pause;
-				presenceData.endTimestamp = new Date(
-					Date.now() + (video.duration - video.currentTime) * 1000
-				).getTime();
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(video);
 				break;
 			default:
 				delete presenceData.smallImageKey;

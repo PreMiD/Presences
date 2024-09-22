@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Nekolen",
 		"id": "270125856679002113"
@@ -16,7 +17,7 @@
 		"ga_IE": "Is bunachar sonraí de na liostaí deic is fearr é deiceanna barr Yu-Gi-Oh."
 	},
 	"url": "yugiohtopdecks.com",
-	"version": "1.2.24",
+	"version": "1.2.25",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/Yu-Gi-Oh%20Top%20Decks/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/Yu-Gi-Oh%20Top%20Decks/assets/thumbnail.jpg",
 	"color": "#FFD700",

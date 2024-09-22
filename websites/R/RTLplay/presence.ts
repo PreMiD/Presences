@@ -465,20 +465,21 @@ presence.on("UpdateData", async () => {
 
 						if (time && exist("span.playerui__controls__stat__time")) {
 							// Radio livestream doesn't have stat time
-							presenceData.endTimestamp = presence.getTimestamps(
-								presence.timestampFromFormat(
-									document
-										.querySelector("span.playerui__controls__stat__time")
-										.textContent.split("/")[0]
-										.trim()
-								),
-								presence.timestampFromFormat(
-									document
-										.querySelector("span.playerui__controls__stat__time")
-										.textContent.split("/")[1]
-										.trim()
-								)
-							)[1];
+							[presenceData.startTimestamp, presenceData.endTimestamp] =
+								presence.getTimestamps(
+									presence.timestampFromFormat(
+										document
+											.querySelector("span.playerui__controls__stat__time")
+											.textContent.split("/")[0]
+											.trim()
+									),
+									presence.timestampFromFormat(
+										document
+											.querySelector("span.playerui__controls__stat__time")
+											.textContent.split("/")[1]
+											.trim()
+									)
+								);
 						} else if (exist("span.playerui__controls__stat__time")) {
 							presenceData.largeImageText += ` - ${Math.round(
 								presence.timestampFromFormat(
@@ -598,20 +599,21 @@ presence.on("UpdateData", async () => {
 					presenceData.largeImageText = `${strings.season} ${seasonNumber} - ${strings.episode} ${episodeNumber}`;
 
 				if (time) {
-					presenceData.endTimestamp = presence.getTimestamps(
-						presence.timestampFromFormat(
-							document
-								.querySelector("span.playerui__controls__stat__time")
-								.textContent.split("/")[0]
-								.trim()
-						),
-						presence.timestampFromFormat(
-							document
-								.querySelector("span.playerui__controls__stat__time")
-								.textContent.split("/")[1]
-								.trim()
-						)
-					)[1];
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestamps(
+							presence.timestampFromFormat(
+								document
+									.querySelector("span.playerui__controls__stat__time")
+									.textContent.split("/")[0]
+									.trim()
+							),
+							presence.timestampFromFormat(
+								document
+									.querySelector("span.playerui__controls__stat__time")
+									.textContent.split("/")[1]
+									.trim()
+							)
+						);
 				} else {
 					presenceData.largeImageText += ` - ${Math.round(
 						presence.timestampFromFormat(

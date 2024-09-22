@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 interface Video {
-	time: number;
+	currentTime: number;
 	duration: number;
 	paused: boolean;
 }
@@ -87,14 +87,13 @@ presence.on("UpdateData", async () => {
 						];
 						break;
 					}
-					const { paused, time, duration } = video;
+					const { paused, currentTime, duration } = video;
 					if (!paused) {
-						const timestamps = presence.getTimestamps(time, duration);
-						presenceData.startTimestamp = timestamps[0];
-						presenceData.endTimestamp = timestamps[1];
+						[presenceData.startTimestamp, presenceData.endTimestamp] =
+							presence.getTimestamps(currentTime, duration);
 					}
 					presenceData.state = `${timeToString(
-						Math.floor(time)
+						Math.floor(currentTime)
 					)}/${timeToString(Math.floor(duration))}`;
 					presenceData.details = `Regarde ${
 						document.querySelector<HTMLMetaElement>('meta[property="og:title"]')

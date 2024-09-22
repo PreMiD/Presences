@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -10,7 +11,7 @@
 		"nl": "Help ons om tegen 1 januari 2020 wereldwijd 20 miljoen bomen over de hele wereld te planten."
 	},
 	"url": "teamtrees.org",
-	"version": "1.2.21",
+	"version": "1.2.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TeamTrees/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TeamTrees/assets/thumbnail.jpg",
 	"color": "#8ab740",

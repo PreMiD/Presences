@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "TheDrop.",
 		"id": "293828021134295040"
@@ -17,7 +18,7 @@
 		"steamcommunity.com",
 		"store.steampowered.com"
 	],
-	"version": "2.2.21",
+	"version": "2.2.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Steam/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Steam/assets/thumbnail.png",
 	"color": "#000000",

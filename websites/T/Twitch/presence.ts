@@ -528,10 +528,8 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageText = strings.play;
 					if (pfp) presenceData.largeImageKey = profilePic;
 
-					const [startTimestamp, endTimestamp] =
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
 						presence.getTimestampsfromMedia(video);
-					presenceData.startTimestamp = startTimestamp;
-					presenceData.endTimestamp = endTimestamp;
 
 					presenceData.buttons = [
 						{

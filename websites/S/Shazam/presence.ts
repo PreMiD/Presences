@@ -67,12 +67,8 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = Assets.Play;
 		presenceData.smallImageText = (await strings).play;
 
-		const [startTimestamp, endTimestamp] = presence.getTimestamps(
-			song.currentTime,
-			song.duration
-		);
-		presenceData.startTimestamp = startTimestamp;
-		presenceData.endTimestamp = endTimestamp;
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestampsfromMedia(song);
 	}
 
 	if (!songPlaying) {

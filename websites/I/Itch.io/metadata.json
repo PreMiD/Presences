@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "ayanamy.jy126",
 		"id": "243279723487035393"
@@ -11,7 +12,7 @@
 	},
 	"url": "itch.io",
 	"regExp": "([a-z0-9-]+[.])*itch[.]io[/]",
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/Itch.io/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/Itch.io/assets/thumbnail.png",
 	"color": "#e22c78",

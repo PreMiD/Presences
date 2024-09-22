@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -10,7 +11,7 @@
 	},
 	"url": "boardgamearena.com",
 	"regExp": "[a-z]*[.]?boardgamearena[.]com",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/thumbnail.png",
 	"color": "#4871b6",

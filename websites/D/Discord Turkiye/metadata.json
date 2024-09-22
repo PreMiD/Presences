@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "nowongame",
 		"id": "686990422198845452"
@@ -10,7 +11,7 @@
 		"tr": "Discord Turkiye, güncellemeler, haberler, sunucular, botlar, ticaret ve birçok kategoriyi içerisinde barındıran Türkiye'nin en büyük forum/Discord topluluğudur."
 	},
 	"url": "discordturkiye.com",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Turkiye/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Turkiye/assets/thumbnail.png",
 	"color": "#57F287",

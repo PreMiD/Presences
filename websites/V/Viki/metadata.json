@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -16,7 +17,7 @@
 		"blog.viki.com",
 		"support.viki.com"
 	],
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/Viki/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/Viki/assets/thumbnail.png",
 	"color": "#0b9bff",

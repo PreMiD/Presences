@@ -57,7 +57,7 @@ export function getFolderLetter(service: string) {
 
 export async function getLatestSchema() {
 	const fetchedSchemas = await got(
-		"https://api.github.com/repos/PreMiD/Schemas/contents/schemas/metadata",
+		"https://api.github.com/repos/PreMiD/PreMiD/contents/apps/schema-server/schemas/metadata?ref=monorepo",
 		{ responseType: "json" }
 	);
 

@@ -97,11 +97,6 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = Assets.Reading;
 		presenceData.smallImageText = "Bir tartışma okuyor";
 	} else if (Object.keys(video || {}).length > 0) {
-		const [startTimestamp, endTimestamp] = presence.getTimestamps(
-			video.currentTime,
-			video.duration
-		);
-
 		presenceData.details =
 			document.querySelector('[class="ui medium header"]').querySelector("a")
 				?.textContent ?? "Bilinmeyen İsim";
@@ -109,8 +104,8 @@ presence.on("UpdateData", async () => {
 			.querySelector('[class="ui medium header"]')
 			.querySelector("small")?.textContent;
 
-		presenceData.startTimestamp = startTimestamp;
-		presenceData.endTimestamp = endTimestamp;
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestamps(video.currentTime, video.duration);
 
 		if (video.paused) {
 			delete presenceData.startTimestamp;

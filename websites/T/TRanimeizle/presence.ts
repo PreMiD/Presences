@@ -75,14 +75,9 @@ presence.on("UpdateData", async () => {
 			document.querySelector(".post-head .title")?.textContent ??
 			"Bilinmeyen Liste";
 	} else if (Object.keys(video || {}).length > 0) {
-		const [startTimestamp, endTimestamp] = presence.getTimestamps(
-			video.currentTime,
-			video.duration
-		);
-
 		// Set timestamps
-		presenceData.startTimestamp = startTimestamp;
-		presenceData.endTimestamp = endTimestamp;
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestamps(video.currentTime, video.duration);
 
 		if (video.paused) {
 			delete presenceData.startTimestamp;

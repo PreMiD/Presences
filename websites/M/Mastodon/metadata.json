@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "533014724569333770",
 		"name": "Hikki"
@@ -262,7 +263,7 @@
 		"finsup.social",
 		"computerfairi.es"
 	],
-	"version": "1.1.5",
+	"version": "1.1.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Mastodon/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Mastodon/assets/thumbnail.png",
 	"color": "#6364ff",

@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "iiTxicz",
 		"id": "950079325166780436"
@@ -19,7 +20,7 @@
 		"www.iheart.com",
 		"listen.iheart.com"
 	],
-	"version": "1.2.22",
+	"version": "1.2.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/iHeartRadio/assets/thumbnail.png",
 	"color": "#C42224",

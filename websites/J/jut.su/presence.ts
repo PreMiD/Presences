@@ -64,7 +64,8 @@ presence.on("UpdateData", async () => {
 			delete presenceData.startTimestamp;
 
 			if (!video.paused && !isNaN(Number(video.duration))) {
-				presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(video);
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Воспроизводится";
 			} else {

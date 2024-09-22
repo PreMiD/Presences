@@ -25,12 +25,11 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	subtitle: string;
 
 presence.on("UpdateData", async () => {
-	const [newLang, privacy, time, buttons, groupWatchBtn] = await Promise.all([
+	const [newLang, privacy, time, buttons] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("time"),
 			presence.getSetting<number>("buttons"),
-			presence.getSetting<boolean>("groupWatchBtn"),
 		]),
 		{ hostname, href, pathname } = document.location,
 		presenceData: PresenceData & {
@@ -123,18 +122,6 @@ presence.on("UpdateData", async () => {
 					} else presenceData.details = strings.browsing;
 					break;
 				}
-				case pathname.includes("groupwatch"): {
-					presenceData.details = "Kaas";
-					if (groupWatchBtn) {
-						presenceData.buttons = [
-							{
-								label: "Join GroupWatch",
-								url: href,
-							},
-						];
-					}
-					break;
-				}
 				case pathname.includes("home"): {
 					presenceData.details = strings.browsing;
 					break;
@@ -201,11 +188,13 @@ presence.on("UpdateData", async () => {
 					presence.getTimestampsfromMedia(video);
 
 				title = document.querySelector(
-					".controls-overlay .primary-title"
+					"h1.ON_IMAGE.BUTTON1_MEDIUM"
 				)?.textContent;
 				subtitle = document.querySelector(
-					".controls-overlay .show-title"
-				)?.textContent; // episode or empty if it's a movie
+					"p.ON_IMAGE_ALT2.BUTTON3_MEDIUM"
+				)?.textContent;
+
+				if (!title) presence.error("Unable to get the title");
 
 				if (privacy) {
 					presenceData.state = subtitle

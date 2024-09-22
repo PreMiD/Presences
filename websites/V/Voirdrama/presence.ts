@@ -79,8 +79,10 @@ presence.on("UpdateData", async () => {
 					.querySelector("li.active")
 					.textContent.split("-")
 					.pop()}`;
-				presenceData.startTimestamp = startTimestamp;
-				presenceData.endTimestamp = endTimestamp;
+				[presenceData.startTimestamp, presenceData.endTimestamp] = [
+					startTimestamp,
+					endTimestamp,
+				];
 				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
 					? strings.pause

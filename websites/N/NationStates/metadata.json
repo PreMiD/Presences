@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Onegen",
 		"id": "258681302960701450"
@@ -12,7 +13,7 @@
 		"www.nationstates.net",
 		"forum.nationstates.net"
 	],
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/NationStates/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/NationStates/assets/thumbnail.png",
 	"color": "#cbcbcb",

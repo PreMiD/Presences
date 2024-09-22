@@ -5,7 +5,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets { // Other default assets can be found at index.d.ts
-	Logo = "https://i.imgur.com/ibW2CvC.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Apple%20Podcasts/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {

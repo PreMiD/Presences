@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "202740603790819328",
 		"name": "aimslut"
@@ -12,7 +13,7 @@
 		"lesen.amazon.de",
 		"read.amazon.com"
 	],
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Amazon%20Kindle/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Amazon%20Kindle/assets/thumbnail.jpg",
 	"color": "#FDEE00",

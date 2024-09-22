@@ -3,8 +3,6 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let mediaTimestamps: [number, number];
-
 const enum Assets {
 	HomePage = "https://cdn.rcd.gg/PreMiD/websites/P/Physics%20Wallah/assets/0.png",
 	Scrolling = "https://cdn.rcd.gg/PreMiD/websites/P/Physics%20Wallah/assets/1.png",
@@ -55,10 +53,8 @@ presence.on("UpdateData", async () => {
 			}`;
 			presenceData.buttons = [{ label: "Watch Lecture", url: href }];
 
-			updateVideoTimestamps();
-			presenceData.startTimestamp = mediaTimestamps[0];
-			presenceData.endTimestamp = mediaTimestamps[1];
-
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				updateVideoTimestamps();
 			if (document.querySelectorAll(".vjs-paused").length < 1) {
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Watching a lecture";
@@ -109,9 +105,8 @@ presence.on("UpdateData", async () => {
 
 		presenceData.buttons = [{ label: "Watch Lecture", url: href }];
 
-		updateVideoTimestamps();
-		presenceData.startTimestamp = mediaTimestamps[0];
-		presenceData.endTimestamp = mediaTimestamps[1];
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			updateVideoTimestamps();
 
 		if (document.querySelectorAll(".vjs-paused").length < 1) {
 			presenceData.smallImageKey = Assets.Play;
@@ -125,7 +120,7 @@ presence.on("UpdateData", async () => {
 });
 
 function updateVideoTimestamps() {
-	mediaTimestamps = presence.getTimestamps(
+	return presence.getTimestamps(
 		presence.timestampFromFormat(
 			document.querySelector(".vjs-current-time-display").textContent
 		),

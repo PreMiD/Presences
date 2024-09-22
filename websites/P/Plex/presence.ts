@@ -205,17 +205,19 @@ presence.on("UpdateData", async () => {
 			if (
 				document.querySelector("[class^=PlayerControls-buttonGroupCenter]")
 					.children.length > 1
-			)
-				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(media);
-			else {
+			) {
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(media);
+			} else {
 				const formatTimestamps = document
 					.querySelector('[data-testid="mediaDuration"]')
 					?.textContent.split(" ");
 
-				[, presenceData.endTimestamp] = presence.getTimestamps(
-					presence.timestampFromFormat(formatTimestamps?.[0]),
-					presence.timestampFromFormat(formatTimestamps?.[1])
-				);
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(
+						presence.timestampFromFormat(formatTimestamps?.[0]),
+						presence.timestampFromFormat(formatTimestamps?.[1])
+					);
 			}
 
 			if (cover && navigator.mediaSession.metadata?.artwork[0].src) {

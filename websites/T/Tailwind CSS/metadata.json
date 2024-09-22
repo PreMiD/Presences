@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "tarikcoskun",
 		"id": "474537652943847444"
@@ -15,7 +16,7 @@
 		"play.tailwindcss.com",
 		"blog.tailwindcss.com"
 	],
-	"version": "1.0.17",
+	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tailwind%20CSS/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tailwind%20CSS/assets/thumbnail.png",
 	"color": "#06b6d4",

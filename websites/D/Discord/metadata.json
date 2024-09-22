@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Bas950",
 		"id": "241278257335500811"
@@ -23,7 +24,7 @@
 	},
 	"url": "discord.com",
 	"regExp": "([a-z0-9-]+[.])*(discord[.]com|discord[.]gg|discordapp[.]com|discordmerch[.]com|discordstatus[.]com)[/]",
-	"version": "3.0.33",
+	"version": "3.0.34",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Discord/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Discord/assets/thumbnail.png",
 	"color": "#7289DA",

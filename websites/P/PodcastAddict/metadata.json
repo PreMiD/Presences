@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Harold",
 		"id": "141206144264699904"
@@ -19,7 +20,7 @@
 		"podcastaddict.com",
 		"www.podcastaddict.com"
 	],
-	"version": "1.1.14",
+	"version": "1.1.16",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PodcastAddict/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PodcastAddict/assets/thumbnail.jpg",
 	"color": "#f48529",
