@@ -1,5 +1,7 @@
 function getQuery(key: string): string | undefined {
-	for (const query of document.location.search.slice(1).split("&")) {
+	const { location } = document;
+
+	for (const query of location.search.slice(1).split("&")) {
 		const [name, value] = query.split("=");
 
 		if (name === key) return value;

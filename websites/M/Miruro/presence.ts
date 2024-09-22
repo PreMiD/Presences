@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
 				url: href,
 			},
 		];
-	} else lastEp = -1;
+	} else lastEp = null;
 
 	presence.setActivity(presenceData);
 });
