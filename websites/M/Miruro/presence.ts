@@ -61,6 +61,22 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = "Paused";
 			}
 		} else presenceData.smallImageKey = Assets.Logo;
+	} else if (pathname.startsWith("/search")) {
+		const searchQuery = new URLSearchParams(window.location.search).get(
+			"query"
+		);
+
+		if (searchQuery) {
+			presenceData.details = `Searching for: ${decodeURIComponent(
+				searchQuery
+			)}`;
+			presenceData.state = "Exploring search results";
+		} else {
+			presenceData.details = "Browsing Search Results";
+			presenceData.state = "Exploring the catalog";
+		}
+		presenceData.smallImageKey = Assets.Search;
+		presenceData.smallImageText = "Searching";
 	} else {
 		switch (pathname) {
 			case "/":
