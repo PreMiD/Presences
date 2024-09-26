@@ -30,7 +30,6 @@ presence.on("UpdateData", async () => {
 
 	if (playing) {
 		presenceData.type = ActivityType.Listening;
-		presenceData.name = "Rádio Animu";
 		presenceData.details = artist;
 		presenceData.state = title;
 		presenceData.smallImageKey = Assets.Play;
