@@ -62,9 +62,8 @@ presence.on("UpdateData", async () => {
 			}
 		} else presenceData.smallImageKey = Assets.Logo;
 	} else if (pathname.startsWith("/search")) {
-		const searchQuery = new URLSearchParams(window.location.search).get(
-			"query"
-		);
+		const { search } = document.location,
+			searchQuery = new URLSearchParams(search).get("query");
 
 		if (searchQuery) {
 			presenceData.details = `Searching for: ${decodeURIComponent(
