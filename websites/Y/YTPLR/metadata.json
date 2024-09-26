@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"name": "uwu_peter",
+		"id": "762219738570555412"
+	},
+	"service": "YTPLR",
+	"description": {
+		"en": "Shuffles a YouTube Playlist in random order"
+	},
+	"url": "youtube-playlist-randomizer.bitbucket.io",
+	"version": "1.1.8",
+	"logo": "https://youtube-playlist-randomizer.bitbucket.io/music-icon.png",
+	"thumbnail": "https://i.imgur.com/VhkOWl2.png",
+	"color": "#ff6d70",
+	"tags": [
+		"video",
+		"media"
+	],
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	],
+	"category": "videos",
+	"iFrameRegExp": ".*",
+	"iframe": true,
+	"readLogs": false
+}
