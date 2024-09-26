@@ -10,7 +10,7 @@
 		"en": "Shuffles a YouTube Playlist in random order"
 	},
 	"url": "youtube-playlist-randomizer.bitbucket.io",
-	"version": "1.1.8",
+	"version": "1.0.0",
 	"logo": "https://youtube-playlist-randomizer.bitbucket.io/music-icon.png",
 	"thumbnail": "https://i.imgur.com/VhkOWl2.png",
 	"color": "#ff6d70",
