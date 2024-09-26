@@ -253,7 +253,6 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = YouTubeAssets.Shorts;
 			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
-			delete presenceData.endTimestamp;
 		}
 
 		if (!presenceData.details) presence.setActivity();
