@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "1284161421957136486",
 	}),
 	strings = presence.getStrings({
-		play: "Watching",
-		pause: "Paused",
+		play: "general.watchingVid",
+		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -32,7 +32,7 @@ presence.on("iFrameData", (data: DataInterface) => {
 	videoDuration = data.duration;
 	videoPaused = data.paused;
 	videoPlaylistTotal = parseInt(document.querySelector("#all").textContent);
-	videoPlaylistID = (document.querySelector("#pid") as HTMLInputElement).value;
+	videoPlaylistID = document.querySelector<HTMLInputElement>("#pid").value;
 	videoPlaylistTitle = document.querySelector("#title").textContent;
 });
 
@@ -44,9 +44,7 @@ presence.on("UpdateData", async () => {
 			Math.floor(videoCurrentTime),
 			Math.floor(videoDuration)
 		),
-		[showButtons] = await Promise.all([
-			presence.getSetting<boolean>("buttons"),
-		]);
+		showButtons = await presence.getSetting<boolean>("buttons");
 
 	if (videoTitle) {
 		presenceData.type = ActivityType.Watching;

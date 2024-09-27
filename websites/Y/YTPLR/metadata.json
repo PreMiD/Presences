@@ -11,7 +11,7 @@
 	},
 	"url": "youtube-playlist-randomizer.bitbucket.io",
 	"version": "1.0.0",
-	"logo": "https://youtube-playlist-randomizer.bitbucket.io/music-icon.png",
+	"logo": "https://i.imgur.com/hsDOqgw.png",
 	"thumbnail": "https://i.imgur.com/VhkOWl2.png",
 	"color": "#ff6d70",
 	"tags": [
@@ -28,6 +28,5 @@
 	],
 	"category": "videos",
 	"iFrameRegExp": ".*",
-	"iframe": true,
-	"readLogs": false
+	"iframe": true
 }
