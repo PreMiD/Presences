@@ -29,6 +29,7 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (playing) {
+		presenceData.type = ActivityType.Listening;
 		presenceData.details = artist;
 		presenceData.state = title;
 		presenceData.smallImageKey = Assets.Play;
