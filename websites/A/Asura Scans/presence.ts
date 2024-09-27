@@ -21,11 +21,19 @@ presence.on("UpdateData", async () => {
 				"https://cdn.rcd.gg/PreMiD/websites/A/Asura%20Scans/assets/logo.png",
 			type: ActivityType.Watching,
 		},
-		displayPercentage = await presence.getSetting<boolean>("readingPercentage"),
-		privacyMode = await presence.getSetting<boolean>("privacy"),
-		displayChapter = await presence.getSetting<boolean>("chapterNumber"),
-		displayCover = await presence.getSetting<boolean>("showCover"),
-		displayButtons = await presence.getSetting<boolean>("showButtons");
+		[
+			displayPercentage,
+			privacyMode,
+			displayChapter,
+			displayCover,
+			displayButtons
+		] = await Promise.all([
+			presence.getSetting<boolean>("readingPercentage"),
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("chapterNumber"),
+			presence.getSetting<boolean>("showCover"),
+			presence.getSetting<boolean>("showButtons")
+		]);
 
 	if (privacyMode) {
 		presenceData.details = "Browsing Asura Scans";
