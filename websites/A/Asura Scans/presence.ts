@@ -26,13 +26,13 @@ presence.on("UpdateData", async () => {
 			privacyMode,
 			displayChapter,
 			displayCover,
-			displayButtons
+			displayButtons,
 		] = await Promise.all([
 			presence.getSetting<boolean>("readingPercentage"),
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("chapterNumber"),
 			presence.getSetting<boolean>("showCover"),
-			presence.getSetting<boolean>("showButtons")
+			presence.getSetting<boolean>("showButtons"),
 		]);
 
 	if (privacyMode) {
