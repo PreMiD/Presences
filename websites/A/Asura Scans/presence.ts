@@ -17,8 +17,7 @@ presence.on("UpdateData", async () => {
 	const { pathname, href } = window.location,
 		presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/A/Asura%20Scans/assets/logo.png",
+			largeImageKey: ASURA_SCANS_LOGO,
 			type: ActivityType.Watching,
 		},
 		[
