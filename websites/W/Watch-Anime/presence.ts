@@ -18,7 +18,8 @@ async function getInformationAnime(nameAnime: string): Promise<AnimeInfo | null>
 			throw new Error("Aucun anime trouvé");
 		}
 	} catch (error) {
-		console.error("Erreur lors de la récupération de l'image de l'anime:", error);
+		// Remplace console.error par un autre mécanisme de gestion des erreurs
+		alert("Erreur lors de la récupération de l'image de l'anime");
 		return null;
 	}
 }
@@ -27,8 +28,8 @@ async function getInformationAnime(nameAnime: string): Promise<AnimeInfo | null>
 //#region PRESENCEDECLARATION
 const presence = new Presence({
 	clientId: "1146930741570187385"
-}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+});
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
 	Logo = "https://watch-anime.fr/favicon.png"
@@ -37,11 +38,11 @@ const enum Assets {
 
 //#region PRESENCE CALL
 presence.on("UpdateData", async () => {
-	let details: string | undefined,
-		state: string | undefined,
-		presenceData: PresenceData,
-		animeInfo: AnimeInfo | null = null,
-		urlAnime: string | undefined;
+	let details: string | undefined;
+	let state: string | undefined;
+	let presenceData: PresenceData;
+	let animeInfo: AnimeInfo | null = null;
+	let urlAnime: string | undefined;
 
 	if (window.location.pathname === "/") {
 		details = "Dans le menu d'accueil";
@@ -54,10 +55,10 @@ presence.on("UpdateData", async () => {
 	} else {
 		const pathParts = window.location.pathname.split("/");
 		if (pathParts[1] === "player" && pathParts.length >= 6) {
-			const animeName = decodeURIComponent(pathParts[2]),
-				language = pathParts[3],
-				season = pathParts[4].split("-")[1],
-				episode = pathParts[5].split("-")[1];
+			const animeName = decodeURIComponent(pathParts[2]);
+			const language = pathParts[3];
+			const season = pathParts[4].split("-")[1];
+			const episode = pathParts[5].split("-")[1];
 
 			urlAnime = `https://watch-anime.fr/${pathParts[1]}/${pathParts[2]}`;
 			animeInfo = await getInformationAnime(animeName);
@@ -69,31 +70,25 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (window.location.pathname === "/" || window.location.pathname.startsWith("/settings") || window.location.pathname.startsWith("/search") || window.location.pathname.startsWith("/ublock")) {
+	if (details) {
 		presenceData = {
-			details: details!,
-			largeImageKey: Assets.Logo,
-			startTimestamp: browsingTimestamp
-		};
-	} else if (animeInfo) {
-		presenceData = {
-			details: details!,
-			state: state!,
-			largeImageKey: animeInfo.img,
+			details: details,
+			largeImageKey: animeInfo?.img || Assets.Logo,
 			startTimestamp: browsingTimestamp,
-			buttons: [
-				{
-					label: "Voir le site web",
-					url: "https://watch-anime.fr/"
-				},
-				{
-					label: "Voir l'animé",
-					url: urlAnime!
-				}
-			] as [ButtonData, ButtonData?]
+			...(animeInfo && {
+				buttons: [
+					{
+						label: "Voir le site web",
+						url: "https://watch-anime.fr/"
+					},
+					{
+						label: "Voir l'animé",
+						url: urlAnime || "https://watch-anime.fr/"
+					}
+				]
+			})
 		};
+		presence.setActivity(presenceData);
 	}
-
-	presence.setActivity(presenceData);
 });
 //#endregion PRESENCE CALL
