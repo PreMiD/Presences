@@ -23,32 +23,6 @@ async function getInformationAnime(nameAnime: string): Promise<AnimeInfo | null>
 		return null;
 	}
 }
-
-async function getVideoAnime(path: string[]) {
-	let urlAnime
-	let animeInfo
-	let details
-	let state
-	if (path[1] === "player" && path.length >= 6) {
-		const animeName = decodeURIComponent(path[2]);
-		const language = path[3];
-		const season = path[4].split("-")[1];
-		const episode = path[5].split("-")[1];
-
-		urlAnime = `https://watch-anime.fr/${path[1]}/${path[2]}`;
-		animeInfo = await getInformationAnime(animeName);
-
-		if (animeInfo) {
-			details = `Visite la page de l'animé : ${animeInfo.name}`;
-			state = `Saison ${season} • Épisode ${episode} • ${language.toUpperCase()}`;
-		}
-		return {
-			url: urlAnime,
-			details: details,
-			state: state
-		}
-	}
-}
 //#endregion FUNCTIONS
 
 //#region PRESENCEDECLARATION
@@ -70,65 +44,52 @@ presence.on("UpdateData", async () => {
 	let animeInfo: AnimeInfo | null = null;
 	let urlAnime: string | undefined;
 
-	switch (window.location.pathname) {
-		case "/":
-			details = "Dans le menu d'accueil";
-			presenceData = {
-				details: details,
-				largeImageKey: "https://watch-anime.fr/favicon.png",
-				startTimestamp: browsingTimestamp,
-			};
-			break;
-		case "/settings":
-			details = "Dans les paramètres";
-			presenceData = {
-				details: details,
-				largeImageKey: "https://watch-anime.fr/favicon.png",
-				startTimestamp: browsingTimestamp,
-			};
-			break;
-		case "/search":
-			details = "Recherche un animé dans le catalogue";
-			presenceData = {
-				details: details,
-				largeImageKey: "https://watch-anime.fr/favicon.png",
-				startTimestamp: browsingTimestamp,
-			};
-			break;
-		case "/ublock":
-			details = "Cherche à bloquer les publicités";
-			presenceData = {
-				details: details,
-				largeImageKey: "https://watch-anime.fr/favicon.png",
-				startTimestamp: browsingTimestamp,
-			};
-			break;
+	if (window.location.pathname === "/") {
+		details = "Dans le menu d'accueil";
+	} else if (window.location.pathname.startsWith("/search")) {
+		details = "Recherche un animé dans le catalogue";
+	} else if (window.location.pathname.startsWith("/settings")) {
+		details = "Dans les paramètres";
+	} else if (window.location.pathname.startsWith("/ublock")) {
+		details = "Cherche à bloquer les publicités";
+	} else {
+		const pathParts = window.location.pathname.split("/");
+		if (pathParts[1] === "player" && pathParts.length >= 6) {
+			const animeName = decodeURIComponent(pathParts[2]);
+			const language = pathParts[3];
+			const season = pathParts[4].split("-")[1];
+			const episode = pathParts[5].split("-")[1];
+
+			urlAnime = `https://watch-anime.fr/${pathParts[1]}/${pathParts[2]}`;
+			animeInfo = await getInformationAnime(animeName);
+
+			if (animeInfo) {
+				details = `Visite la page de l'animé : ${animeInfo.name}`;
+				state = `Saison ${season} • Épisode ${episode} • ${language.toUpperCase()}`;
+			}
+		}
 	}
 
-	getVideoAnime(window.location.pathname.split("/")).then(res => {
-		try {
-			if (res.details && res.state) {
-				presenceData = {
-					details: details,
-					state: state,
-					largeImageKey: animeInfo.img,
-					startTimestamp: browsingTimestamp,
-					buttons: [
-						{
-							label: "Voir le site web",
-							url: "https://watch-anime.fr/"
-						},
-						{
-							label: "Voir l'animé",
-							url: urlAnime
-						}
-					]
-				};
-			}
-		} catch (error) {
-			return null
-		}
-	})
-	presence.setActivity(presenceData);
+	if (details) {
+		presenceData = {
+			details: details,
+			state: state,
+			largeImageKey: animeInfo?.img || Assets.Logo,
+			startTimestamp: browsingTimestamp,
+			...(animeInfo && {
+				buttons: [
+					{
+						label: "Voir le site web",
+						url: "https://watch-anime.fr/"
+					},
+					{
+						label: "Voir l'animé",
+						url: urlAnime || "https://watch-anime.fr/"
+					}
+				]
+			})
+		};
+		presence.setActivity(presenceData);
+	}
 });
 //#endregion PRESENCE CALL
