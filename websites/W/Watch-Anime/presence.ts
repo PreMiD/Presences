@@ -6,8 +6,7 @@ interface AnimeInfo {
 
 async function getInformationAnime(nameAnime: string): Promise<AnimeInfo | null> {
 	try {
-		const response = await fetch(`https://api.watch-anime.fr/getAnime/${nameAnime}`);
-		const data = await response.json();
+		const response = await fetch(`https://api.watch-anime.fr/getAnime/${nameAnime}`), data = await response.json();
 
 		if (data.length > 0) {
 			return {
@@ -28,8 +27,7 @@ async function getInformationAnime(nameAnime: string): Promise<AnimeInfo | null>
 //#region PRESENCEDECLARATION
 const presence = new Presence({
 	clientId: "1146930741570187385"
-});
-const browsingTimestamp = Math.floor(Date.now() / 1000);
+}), browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
 	Logo = "https://watch-anime.fr/favicon.png"
@@ -38,11 +36,7 @@ const enum Assets {
 
 //#region PRESENCE CALL
 presence.on("UpdateData", async () => {
-	let details: string | undefined;
-	let state: string | undefined;
-	let presenceData: PresenceData;
-	let animeInfo: AnimeInfo | null = null;
-	let urlAnime: string | undefined;
+	let details: string | undefined, state: string | undefined, presenceData: PresenceData, animeInfo: AnimeInfo | null = null, urlAnime: string | undefined;
 
 	if (window.location.pathname === "/") {
 		details = "Dans le menu d'accueil";
@@ -55,10 +49,7 @@ presence.on("UpdateData", async () => {
 	} else {
 		const pathParts = window.location.pathname.split("/");
 		if (pathParts[1] === "player" && pathParts.length >= 6) {
-			const animeName = decodeURIComponent(pathParts[2]);
-			const language = pathParts[3];
-			const season = pathParts[4].split("-")[1];
-			const episode = pathParts[5].split("-")[1];
+			const animeName = decodeURIComponent(pathParts[2]), language = pathParts[3], season = pathParts[4].split("-")[1], episode = pathParts[5].split("-")[1];
 
 			urlAnime = `https://watch-anime.fr/${pathParts[1]}/${pathParts[2]}`;
 			animeInfo = await getInformationAnime(animeName);
