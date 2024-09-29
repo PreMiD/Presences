@@ -189,7 +189,7 @@ presence.on("UpdateData", async () => {
 				.querySelector(
 					"#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__soundBadge > div > div.playbackSoundBadge__titleContextContainer > div > a"
 				)
-				.getAttribute("href");
+				?.getAttribute("href");
 
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			presence.getTimestamps(currentTime, duration);
@@ -206,7 +206,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
 		presenceData.smallImageText = strings[playing ? "play" : "pause"];
 
-		if (showButtons) {
+		if (showButtons && pathLinkSong) {
 			presenceData.buttons = [
 				{
 					label: strings.listen,
