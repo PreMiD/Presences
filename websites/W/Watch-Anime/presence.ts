@@ -63,8 +63,8 @@ presence.on("UpdateData", async () => {
 
 	if (details) {
 		presenceData = {
-			details: details,
-			state: state,
+			details,
+			state,
 			largeImageKey: animeInfo?.img || Assets.Logo,
 			startTimestamp: browsingTimestamp,
 			...(animeInfo && {
