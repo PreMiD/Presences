@@ -36,7 +36,7 @@ const enum Assets {
 presence.on("UpdateData", async () => {
 	let details: string | undefined, state: string | undefined, presenceData: PresenceData, animeInfo: AnimeInfo | null = null, urlAnime: string | undefined;
 
-	if (window.location.pathname === "/") 
+	if (window.location.pathname === "/")
 		details = "Dans le menu d'accueil";
 	else if (window.location.pathname.startsWith("/search"))
 		details = "Recherche un animé dans le catalogue";
@@ -47,14 +47,12 @@ presence.on("UpdateData", async () => {
 	else {
 		const pathParts = window.location.pathname.split("/");
 		if (pathParts[1] === "player" && pathParts.length >= 6) {
-			const animeName = decodeURIComponent(pathParts[2]), language = pathParts[3], season = pathParts[4].split("-")[1], episode = pathParts[5].split("-")[1];
-
 			urlAnime = `https://watch-anime.fr/${pathParts[1]}/${pathParts[2]}`;
-			animeInfo = await getInformationAnime(animeName);
+			animeInfo = await getInformationAnime(decodeURIComponent(pathParts[2]));
 
 			if (animeInfo) {
 				details = `Visite la page de l'animé : ${animeInfo.name}`;
-				state = `Saison ${season} • Épisode ${episode} • ${language.toUpperCase()}`;
+				state = `Saison ${pathParts[4].split("-")[1]} • Épisode ${pathParts[5].split("-")[1]} • ${pathParts[3].toUpperCase()}`;
 			}
 		}
 	}
