@@ -13,8 +13,6 @@ async function getInformationAnime(nameAnime: string): Promise<AnimeInfo | null>
 				img: data[0].affiche_anime,
 				name: data[0].nom_anime
 			};
-		} else {
-			throw new Error("Aucun anime trouvé");
 		}
 	} catch (error) {
 		// Remplace console.error par un autre mécanisme de gestion des erreurs
@@ -38,15 +36,15 @@ const enum Assets {
 presence.on("UpdateData", async () => {
 	let details: string | undefined, state: string | undefined, presenceData: PresenceData, animeInfo: AnimeInfo | null = null, urlAnime: string | undefined;
 
-	if (window.location.pathname === "/") {
+	if (window.location.pathname === "/") 
 		details = "Dans le menu d'accueil";
-	} else if (window.location.pathname.startsWith("/search")) {
+	else if (window.location.pathname.startsWith("/search"))
 		details = "Recherche un animé dans le catalogue";
-	} else if (window.location.pathname.startsWith("/settings")) {
+	else if (window.location.pathname.startsWith("/settings"))
 		details = "Dans les paramètres";
-	} else if (window.location.pathname.startsWith("/ublock")) {
+	else if (window.location.pathname.startsWith("/ublock"))
 		details = "Cherche à bloquer les publicités";
-	} else {
+	else {
 		const pathParts = window.location.pathname.split("/");
 		if (pathParts[1] === "player" && pathParts.length >= 6) {
 			const animeName = decodeURIComponent(pathParts[2]), language = pathParts[3], season = pathParts[4].split("-")[1], episode = pathParts[5].split("-")[1];
