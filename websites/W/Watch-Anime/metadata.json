@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "330333765891129346",
+		"name": "tsukizo"
+	},
+	"service": "Watch-Anime",
+	"description": {
+		"en": "Watch-Anime est un site de streaming où vous pouvez regarder des animés ainsi que des films en VF et VOSTFR. Site développé par le créateur originel : rainbowyoshi | Extension Premid développée par : tsukizo"
+	},
+	"url": "watch-anime.fr",
+	"version": "1.0.2",
+	"logo": "https://watch-anime.fr/favicon.png",
+	"thumbnail": "https://watch-anime.fr/banner.png",
+	"color": "#0F0E13",
+	"category": "anime",
+	"tags": [
+		"anime"
+	],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		}
+	]
+}
