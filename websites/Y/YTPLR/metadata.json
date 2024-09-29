@@ -6,6 +6,7 @@
 		"id": "762219738570555412"
 	},
 	"service": "YTPLR",
+	"altnames": ["YouTube Playlist Randomizer"],
 	"description": {
 		"en": "Shuffles a YouTube Playlist in random order"
 	},
@@ -27,6 +28,6 @@
 		}
 	],
 	"category": "videos",
-	"iFrameRegExp": ".*",
+	"iFrameRegExp": "youtube[-]playlist[-]randomizer[.]bitbucket[.]io",
 	"iframe": true
 }

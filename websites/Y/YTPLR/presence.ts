@@ -23,7 +23,7 @@ interface DataInterface {
 }
 
 const enum Assets {
-	Logo = "https://youtube-playlist-randomizer.bitbucket.io/music-icon.png",
+	Logo = "https://i.imgur.com/hsDOqgw.png",
 }
 
 presence.on("iFrameData", (data: DataInterface) => {
