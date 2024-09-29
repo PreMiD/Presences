@@ -22,55 +22,26 @@ async function getInformationAnime(nameAnime: string): Promise<AnimeInfo | null>
 		return null;
 	}
 }
-
-function getTimestampsFromMedia(mediaElement: HTMLMediaElement) {
-	if (!mediaElement) {
-		throw new Error("L'élément média est invalide.");
-	}
-
-	const { currentTime, duration } = mediaElement;
-	const startTimestamp = Date.now() - currentTime * 1000;
-	const endTimestamp = startTimestamp + duration * 1000;
-
-	return {
-		currentTime,
-		duration,
-		startTimestamp,
-		endTimestamp
-	};
-}
-
-function debugMode(word: unknown) {
-	console.log("-------------------");
-	console.log(word);
-	console.log("-------------------");
-}
 //#endregion FUNCTIONS
 
-//#region PRESENCE DECLARATION
+//#region PRESENCEDECLARATION
 const presence = new Presence({
 	clientId: "1146930741570187385"
-});
-
-const strings = presence.getStrings({
-	play: "presence.playback.playing",
-	pause: "presence.playback.paused"
-});
-
-const browsingTimestamp = Math.floor(Date.now() / 1000);
+}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
 	Logo = "https://watch-anime.fr/favicon.png"
 }
-//#endregion PRESENCE DECLARATION
+//#endregion PRESENCEDECLARATION
 
 //#region PRESENCE CALL
 presence.on("UpdateData", async () => {
-	let details: string | undefined;
-	let state: string | undefined;
-	let presenceData: PresenceData;
-	let animeInfo: AnimeInfo | null = null;
-	let urlAnime: string | undefined;
+	let details: string | undefined,
+		state: string | undefined,
+		presenceData: PresenceData,
+		animeInfo: AnimeInfo | null = null,
+		urlAnime: string | undefined;
 
 	if (window.location.pathname === "/") {
 		details = "Dans le menu d'accueil";
@@ -83,12 +54,13 @@ presence.on("UpdateData", async () => {
 	} else {
 		const pathParts = window.location.pathname.split("/");
 		if (pathParts[1] === "player" && pathParts.length >= 6) {
-			const animeName = decodeURIComponent(pathParts[2]);
-			animeInfo = await getInformationAnime(animeName);
-			const language = pathParts[3];
-			const season = pathParts[4].split("-")[1]; // Saison
-			const episode = pathParts[5].split("-")[1]; // Episode
+			const animeName = decodeURIComponent(pathParts[2]),
+				language = pathParts[3],
+				season = pathParts[4].split("-")[1],
+				episode = pathParts[5].split("-")[1];
+
 			urlAnime = `https://watch-anime.fr/${pathParts[1]}/${pathParts[2]}`;
+			animeInfo = await getInformationAnime(animeName);
 
 			if (animeInfo) {
 				details = `Visite la page de l'animé : ${animeInfo.name}`;
