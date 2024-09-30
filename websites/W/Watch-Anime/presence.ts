@@ -4,9 +4,17 @@ interface AnimeInfo {
 	name: string;
 }
 
+// Cache object to store fetched anime info
+const animeCache: { [nameAnime: string]: AnimeInfo } = {};
+
 async function getInformationAnime(
 	nameAnime: string
 ): Promise<AnimeInfo | null> {
+	// Check if the information is already in the cache
+	if (animeCache[nameAnime]) {
+		return animeCache[nameAnime];
+	}
+
 	try {
 		const response = await fetch(
 				`https://api.watch-anime.fr/getAnime/${nameAnime}`
@@ -14,14 +22,17 @@ async function getInformationAnime(
 			data = await response.json();
 
 		if (data.length > 0) {
-			return {
+			// Store the fetched data in the cache
+			const animeInfo = {
 				img: data[0].affiche_anime,
 				name: data[0].nom_anime,
 			};
+			animeCache[nameAnime] = animeInfo;
+			return animeInfo;
 		}
 	} catch (error) {
-		// Remplace console.error par un autre mécanisme de gestion des erreurs
-		alert("Erreur lors de la récupération de l'image de l'anime");
+		// Handle errors (e.g., network issues)
+		presence.error("Erreur lors de la récupération de l'image de l'anime");
 		return null;
 	}
 }
@@ -34,7 +45,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://watch-anime.fr/favicon.png",
+	Logo = "https://watch-anime.fr/favicon512.png",
 }
 //#endregion PRESENCEDECLARATION
 
@@ -46,13 +57,14 @@ presence.on("UpdateData", async () => {
 		animeInfo: AnimeInfo | null = null,
 		urlAnime: string | undefined;
 
-	if (window.location.pathname === "/") details = "Dans le menu d'accueil";
-	else if (window.location.pathname.startsWith("/search"))
-		details = "Recherche un animé dans le catalogue";
-	else if (window.location.pathname.startsWith("/settings"))
-		details = "Dans les paramètres";
-	else if (window.location.pathname.startsWith("/ublock"))
-		details = "Cherche à bloquer les publicités";
+	if (document.location.pathname === "/") 
+    		details = "Dans le menu d'accueil";
+	else if (document.location.pathname.startsWith("/search"))
+    		details = "Recherche un animé dans le catalogue";
+	else if (document.location.pathname.startsWith("/settings"))
+    		details = "Dans les paramètres";
+	else if (document.location.pathname.startsWith("/ublock"))
+    		details = "Cherche à bloquer les publicités";
 	else {
 		const pathParts = window.location.pathname.split("/");
 		if (pathParts[1] === "player" && pathParts.length >= 6) {
@@ -76,10 +88,6 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			...(animeInfo && {
 				buttons: [
-					{
-						label: "Voir le site web",
-						url: "https://watch-anime.fr/",
-					},
 					{
 						label: "Voir l'animé",
 						url: urlAnime || "https://watch-anime.fr/",
