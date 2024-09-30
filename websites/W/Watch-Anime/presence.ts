@@ -11,9 +11,8 @@ async function getInformationAnime(
 	nameAnime: string
 ): Promise<AnimeInfo | null> {
 	// Check if the information is already in the cache
-	if (animeCache[nameAnime]) {
+	if (animeCache[nameAnime])
 		return animeCache[nameAnime];
-	}
 
 	try {
 		const response = await fetch(
