@@ -11,8 +11,7 @@ async function getInformationAnime(
 	nameAnime: string
 ): Promise<AnimeInfo | null> {
 	// Check if the information is already in the cache
-	if (animeCache[nameAnime])
-		return animeCache[nameAnime];
+	if (animeCache[nameAnime]) return animeCache[nameAnime];
 
 	try {
 		const response = await fetch(
@@ -56,14 +55,13 @@ presence.on("UpdateData", async () => {
 		animeInfo: AnimeInfo | null = null,
 		urlAnime: string | undefined;
 
-	if (document.location.pathname === "/") 
-    		details = "Dans le menu d'accueil";
+	if (document.location.pathname === "/") details = "Dans le menu d'accueil";
 	else if (document.location.pathname.startsWith("/search"))
-    		details = "Recherche un animé dans le catalogue";
+		details = "Recherche un animé dans le catalogue";
 	else if (document.location.pathname.startsWith("/settings"))
-    		details = "Dans les paramètres";
+		details = "Dans les paramètres";
 	else if (document.location.pathname.startsWith("/ublock"))
-    		details = "Cherche à bloquer les publicités";
+		details = "Cherche à bloquer les publicités";
 	else {
 		const pathParts = window.location.pathname.split("/");
 		if (pathParts[1] === "player" && pathParts.length >= 6) {
