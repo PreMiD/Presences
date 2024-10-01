@@ -4,6 +4,12 @@ interface AnimeInfo {
 	name: string;
 }
 
+interface EpisodeInfo {
+	nom_langue: string;
+	nom_saison: string;
+	nom_episode: string;
+}
+
 // Cache object to store fetched anime info
 const animeCache: { [nameAnime: string]: AnimeInfo } = {};
 
@@ -34,6 +40,44 @@ async function getInformationAnime(
 		return null;
 	}
 }
+
+const cache: { [key: string]: EpisodeInfo } = {};
+
+async function getEpisodeInfo(
+	nameAnime: string,
+	langue: string,
+	saison: string,
+	episode: string
+): Promise<EpisodeInfo | null> {
+	const cacheKey = `${nameAnime}-${langue}-${saison}-${episode}`;
+
+	// Check if the episode info is in cache
+	if (cache[cacheKey]) return cache[cacheKey];
+
+	try {
+		const response = await fetch(
+				`https://api.watch-anime.fr/getEpisodeInfo/${nameAnime}/${langue}/${saison}/${episode}`
+			),
+			data = await response.json();
+
+		if (data.length > 0) {
+			const episodeInfo: EpisodeInfo = {
+				nomLangue: data[0].nom_langue,
+				nomSaison: data[0].nom_saison,
+				nomEpisode: data[0].nom_episode,
+			};
+
+			// Store the fetched data in the cache
+			cache[cacheKey] = episodeInfo;
+
+			return episodeInfo;
+		}
+	} catch (error) {
+		// Handle errors (e.g., network issues)
+		presence.error("Erreur lors de la récupération de l'épisode de l'anime");
+		return null;
+	}
+}
 //#endregion FUNCTIONS
 
 //#region PRESENCEDECLARATION
@@ -53,6 +97,7 @@ presence.on("UpdateData", async () => {
 		state: string | undefined,
 		presenceData: PresenceData,
 		animeInfo: AnimeInfo | null = null,
+		episodeInfo: EpisodeInfo | null = null,
 		urlAnime: string | undefined;
 
 	if (document.location.pathname === "/") details = "Dans le menu d'accueil";
@@ -67,12 +112,18 @@ presence.on("UpdateData", async () => {
 		if (pathParts[1] === "player" && pathParts.length >= 6) {
 			urlAnime = `https://watch-anime.fr/${pathParts[1]}/${pathParts[2]}`;
 			animeInfo = await getInformationAnime(decodeURIComponent(pathParts[2]));
+			episodeInfo = await getEpisodeInfo(
+				decodeURIComponent(pathParts[2]),
+				decodeURIComponent(pathParts[3]),
+				decodeURIComponent(pathParts[4]),
+				decodeURIComponent(pathParts[5])
+			);
 
 			if (animeInfo) {
 				details = `Visite la page de l'animé : ${animeInfo.name}`;
-				state = `Saison ${pathParts[4].split("-")[1]} • Épisode ${
-					pathParts[5].split("-")[1]
-				} • ${pathParts[3].toUpperCase()}`;
+				state = `Saison ${episodeInfo.nom_saison} • Épisode ${
+					episodeInfo.nom_episode
+				} • ${episodeInfo.nom_langue.toUpperCase()}`;
 			}
 		}
 	}
