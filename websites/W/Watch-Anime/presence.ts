@@ -5,9 +5,9 @@ interface AnimeInfo {
 }
 
 interface EpisodeInfo {
-	nom_langue: string;
-	nom_saison: string;
-	nom_episode: string;
+	nomLangue: string;
+	nomSaison: string;
+	nomEpisode: string;
 }
 
 // Cache object to store fetched anime info
