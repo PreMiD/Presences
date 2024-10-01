@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"author": {
+		"id": "712745906876842025",
+		"name": "hanifhan1f"
+	},
+	"service": "Weverse",
+	"description": {
+		"en": "Displays the current live stream activity for a Weverse live page."
+	},
+	"url": "weverse.io",
+	"version": "1.0.0",
+	"logo": "https://res.cloudinary.com/debvitdiw/image/upload/v1726211085/Presences/weverse.jpg",
+	"thumbnail": "https://res.cloudinary.com/debvitdiw/image/upload/v1726211170/Presences/thumbnail.png",
+	"color": "#08ccc9",
+	"category": "music",
+	"tags": [
+		"weverse",
+		"kpop",
+		"live",
+		"streaming",
+		"music"
+	]
+}
