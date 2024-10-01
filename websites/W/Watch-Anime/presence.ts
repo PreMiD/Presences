@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.startsWith("/ublock"))
 		details = "Cherche à bloquer les publicités";
 	else {
-		const pathParts = window.location.pathname.split("/");
+		const pathParts = document.location.pathname.split("/");
 		if (pathParts[1] === "player" && pathParts.length >= 6) {
 			urlAnime = `https://watch-anime.fr/${pathParts[1]}/${pathParts[2]}`;
 			animeInfo = await getInformationAnime(decodeURIComponent(pathParts[2]));
