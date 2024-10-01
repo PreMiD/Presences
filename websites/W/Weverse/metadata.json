@@ -9,7 +9,7 @@
 		"en": "Displays the current live stream activity for a Weverse live page."
 	},
 	"url": "weverse.io",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://res.cloudinary.com/debvitdiw/image/upload/v1726211085/Presences/weverse.jpg",
 	"thumbnail": "https://res.cloudinary.com/debvitdiw/image/upload/v1726211170/Presences/thumbnail.png",
 	"color": "#08ccc9",
