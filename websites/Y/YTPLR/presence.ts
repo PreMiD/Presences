@@ -23,7 +23,7 @@ interface DataInterface {
 }
 
 const enum Assets {
-	Logo = "https://i.imgur.com/hsDOqgw.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/Y/YTPLR/assets/logo.png",
 }
 
 presence.on("iFrameData", (data: DataInterface) => {
