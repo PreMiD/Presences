@@ -5,6 +5,12 @@
 		"id": "135058085386387457",
 		"name": "Extiriority"
 	},
+	"contributors": [
+		{
+			"name": "Kaktuswerk",
+			"id": "1167417152664522764"
+		}
+	],
 	"service": "ChatGPT",
 	"description": {
 		"en": "ChatGPT is a natural language processing tool driven by AI technology that allows you to have human-like conversations and much more with the chatbot. The language model can answer questions and assist you with tasks, such as composing emails, essays, and code."

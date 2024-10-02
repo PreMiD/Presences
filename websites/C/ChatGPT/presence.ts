@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
 
 	if (pathname.split("/")[1] === "c") {
 		presenceData.details = showTitle
-			? document.querySelector("li a button > svg")?.closest("li").textContent
+			? document.title
 			: "Talking with AI about something";
 		presenceData.state = isTalking
 			? "AI is responding..."
