@@ -23,7 +23,7 @@
 		"subs"
 	],
 	"iframe": true,
-	"iFrameRegExp": "cda[.]pl|google[.]com|mega[.]nz|dailymotion[.]com|video[.]sibnet[.]ru",
+	"iFrameRegExp": "cda[.]pl|google[.]com|mega[.]nz|dailymotion[.]com|video[.]sibnet[.]ru|vk[.]com|www[.]lycoris[.]cafe|ok[.]ru",
 	"settings": [
 		{
 			"id": "privacy",
