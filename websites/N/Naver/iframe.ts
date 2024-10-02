@@ -1,9 +1,9 @@
 const iframe = new iFrame();
 
 iframe.on("UpdateData", () => {
-	if (document.querySelector("div.nick")) {
+	if (document.querySelector(".se-documentTitle span")) {
 		iframe.send({
-			blog: document.querySelector("div.nick").textContent,
+			blog: document.querySelector(".se-documentTitle span").textContent.trim(),
 		});
 	}
 });

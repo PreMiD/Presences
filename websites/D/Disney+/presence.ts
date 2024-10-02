@@ -25,19 +25,17 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	subtitle: string;
 
 presence.on("UpdateData", async () => {
-	const [newLang, privacy, time, buttons, groupWatchBtn] = await Promise.all([
+	const [newLang, privacy, time, buttons] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("time"),
 			presence.getSetting<number>("buttons"),
-			presence.getSetting<boolean>("groupWatchBtn"),
 		]),
 		{ hostname, href, pathname } = document.location,
 		presenceData: PresenceData & {
 			partySize?: number;
 			partyMax?: number;
-		} = { startTimestamp: browsingTimestamp, type: ActivityType.Watching },
-		video = document.querySelector<HTMLVideoElement>("video");
+		} = { startTimestamp: browsingTimestamp, type: ActivityType.Watching };
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
@@ -49,37 +47,39 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey =
 				"https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/logo.png";
 			switch (true) {
-				case pathname.includes("video"): {
-					if (presenceData.startTimestamp) delete presenceData.startTimestamp;
-					presenceData.details = document.querySelector(
-						"[class='title-field body-copy']"
-					)?.textContent;
-					presenceData.state = document
-						.querySelector('[class="subtitle-field"]')
-						?.textContent.split(" ")[0];
-					if (video) {
-						delete presenceData.startTimestamp;
-						presenceData.smallImageKey = video.paused
-							? Assets.Pause
-							: Assets.Play;
-						presenceData.smallImageText = video.paused
-							? strings.pause
-							: strings.play;
-						const stamps = document
-							.querySelectorAll('[class="slider-container"]')[1]
-							.getAttribute("aria-valuetext")
-							.split("of ");
-						if (!video.paused && !isNaN(Number(stamps[1]))) {
-							presenceData.endTimestamp = presence.getTimestamps(
-								video.currentTime,
-								presence.timestampFromFormat(stamps[1])
-							)[1];
+				case pathname.includes("play"): {
+					if (!privacy) {
+						if (presenceData.startTimestamp) delete presenceData.startTimestamp;
+						presenceData.details = document.querySelector(
+							".title-field.body-copy"
+						)?.textContent;
+						presenceData.state =
+							document.querySelector(".subtitle-field")?.textContent;
+
+						const paused = !!document.querySelector("[aria-label='Play']"),
+							timeRemaining = document.querySelector(
+								".time-remaining-label"
+							)?.textContent;
+
+						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
+						presenceData.smallImageText = paused ? strings.pause : strings.play;
+
+						if (!paused && timeRemaining) {
+							presenceData.endTimestamp =
+								Date.now() / 1000 + presence.timestampFromFormat(timeRemaining);
 						}
-					}
+					} else presenceData.details = "Watching content";
+
+					presenceData.buttons = [
+						{
+							label: "Watch Content",
+							url: href,
+						},
+					];
 					break;
 				}
-				case !!document.querySelector('[data-gv2containerkey="contentMeta"]'): {
-					if (pathname.includes("series")) {
+				case pathname.includes("entity"): {
+					if (document.querySelector("#episodes_control") !== null) {
 						presenceData.details = privacy
 							? "Viewing a series"
 							: "Viewing series";
@@ -100,15 +100,18 @@ presence.on("UpdateData", async () => {
 							},
 						];
 					}
-					presenceData.state = document
-						.querySelector('[id="details_index"]')
-						.querySelector("img")
-						.getAttribute("alt");
+					const titleImg = document.querySelector(
+						'[data-testid="details-title-treatment"] img, .explore-ui-main-content-container img'
+					);
+					if (titleImg) presenceData.state = titleImg.getAttribute("alt");
+					else if (document.title.includes("|"))
+						presenceData.state = document.title.split("|")[0].trim();
+					else presenceData.state = document.title;
 					break;
 				}
 				case pathname.includes("search"): {
 					const search = document.querySelector<HTMLInputElement>(
-						'[id="search-input"]'
+						'input[type="search"]'
 					);
 					if (search?.value) {
 						presenceData.details = privacy
@@ -117,18 +120,6 @@ presence.on("UpdateData", async () => {
 						presenceData.state = search.value;
 						presenceData.smallImageKey = Assets.Search;
 					} else presenceData.details = strings.browsing;
-					break;
-				}
-				case pathname.includes("groupwatch"): {
-					presenceData.details = "Kaas";
-					if (groupWatchBtn) {
-						presenceData.buttons = [
-							{
-								label: "Join GroupWatch",
-								url: href,
-							},
-						];
-					}
 					break;
 				}
 				case pathname.includes("home"): {
@@ -144,33 +135,51 @@ presence.on("UpdateData", async () => {
 				}
 				case pathname.includes("series"): {
 					presenceData.details = privacy ? strings.browsing : "Browsing series";
-					presenceData.state = `Sorted by ${document
-						.querySelector('[id="react-select-2-input"]')
-						?.parentElement?.textContent?.toLowerCase()}`;
+					const sortingChoice = document
+						.querySelector(
+							'[id="explore-ui-main-content-container"] div div [aria-selected="true"]'
+						)
+						?.textContent?.toLowerCase();
+					if (sortingChoice !== null)
+						presenceData.state = `Sorted by ${sortingChoice}`;
 					break;
 				}
 				case pathname.includes("movies"): {
 					presenceData.details = privacy ? strings.browsing : "Browsing movies";
-					presenceData.state = `Sorted by ${document
-						.querySelector('[id="react-select-2-input"]')
-						?.parentElement?.textContent?.toLowerCase()}`;
+					const sortingChoice = document
+						.querySelector(
+							'[id="explore-ui-main-content-container"] div div [aria-selected="true"]'
+						)
+						?.textContent?.toLowerCase();
+					if (sortingChoice !== null)
+						presenceData.state = `Sorted by ${sortingChoice}`;
 					break;
 				}
-				case pathname.includes("brand"): {
+				case pathname.includes("page"): {
 					presenceData.details = privacy
 						? "Browsing videos"
-						: `Viewing ${document
-								.querySelector("head > title")
-								?.textContent.match(
+						: `Viewing ${document.title
+								?.match(
 									/(pixar)|(marvel)|(star wars)|(national geographic)|(star)|(disney)/im
 								)[0]
 								?.toLowerCase()} content`;
+					break;
+				}
+				default: {
+					if (!privacy) {
+						if (document.title.includes("|")) {
+							presenceData.details = `Page: ${document.title
+								.split("|")[0]
+								.trim()}`;
+						} else presenceData.details = `Page: ${document.title}`;
+					} else presenceData.details = "No information";
 					break;
 				}
 			}
 			break;
 		}
 		case /(www\.)?hotstar\.com/.test(hostname): {
+			const video = document.querySelector<HTMLVideoElement>("video");
 			presenceData.largeImageKey =
 				"https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/0.png";
 
@@ -179,11 +188,13 @@ presence.on("UpdateData", async () => {
 					presence.getTimestampsfromMedia(video);
 
 				title = document.querySelector(
-					".controls-overlay .primary-title"
+					"h1.ON_IMAGE.BUTTON1_MEDIUM"
 				)?.textContent;
 				subtitle = document.querySelector(
-					".controls-overlay .show-title"
-				)?.textContent; // episode or empty if it's a movie
+					"p.ON_IMAGE_ALT2.BUTTON3_MEDIUM"
+				)?.textContent;
+
+				if (!title) presence.error("Unable to get the title");
 
 				if (privacy) {
 					presenceData.state = subtitle

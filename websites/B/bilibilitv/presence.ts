@@ -50,7 +50,8 @@ presence.on("UpdateData", async () => {
 	}
 	// Main Site
 	if (hostname === "www.bilibili.tv") {
-		switch (pathArray[2]) {
+		const pathKey = isNaN(Number(pathArray[2])) ? pathArray[2] : pathArray[1];
+		switch (pathKey) {
 			case "video": {
 				presenceData.details = strings.watchingVid;
 				presenceData.state = title;
@@ -115,20 +116,21 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 		}
-		if (pathArray[2] === "video" || pathArray[2] === "play") {
+		if (pathKey === "video" || pathKey === "play") {
 			presenceData.largeImageKey = thumbnail;
 			presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
 			if (playing) {
-				[, presenceData.endTimestamp] = presence.getTimestamps(
-					presence.timestampFromFormat(
-						document.querySelector(".player-mobile-time-current-text")
-							?.textContent ?? "00:00"
-					),
-					presence.timestampFromFormat(
-						document.querySelector(".player-mobile-time-total-text")
-							?.textContent ?? "00:00"
-					)
-				);
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(
+						presence.timestampFromFormat(
+							document.querySelector(".player-mobile-time-current-text")
+								?.textContent ?? "00:00"
+						),
+						presence.timestampFromFormat(
+							document.querySelector(".player-mobile-time-total-text")
+								?.textContent ?? "00:00"
+						)
+					);
 			}
 		}
 		// Studio

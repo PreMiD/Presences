@@ -28,25 +28,19 @@ presence.on("UpdateData", async () => {
 		[buttons, image] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("image"),
-		]),
-		search = document.querySelector<HTMLInputElement>('[type="text"]');
+		]);
 
-	if (search?.value) {
-		presenceData.details = "Searching for:";
-		presenceData.state = search.value;
-		presenceData.smallImageKey = Assets.Search;
-	} else if (pathname === "/home" || pathname === "/")
+	if (pathname === "/home" || pathname === "/")
 		presenceData.details = "Browsing";
-	else if (pathname.startsWith("/series/")) {
+	else if (pathname.startsWith("/tv/")) {
 		const title = document.querySelector<HTMLHeadingElement>(
-				"#watch > div.container > div.watch-extra > div.bl-1 > section.info > div.info > h1"
+				"section#w-info > div.info > h1.name"
 			),
-			season = document.querySelector<HTMLSpanElement>(".value"),
-			episode = document.querySelector<HTMLAnchorElement>("a.active");
+			{ season, episode } = extractSeasonEpisode(pathname);
 		if (title) presenceData.details = title.textContent;
 		if (season) {
-			presenceData.state = season.textContent.split("-")[0].trim();
-			if (episode) presenceData.state += ` - ${episode.textContent.trim()}`;
+			presenceData.state = `Season ${season}`;
+			if (episode) presenceData.state += ` Episode ${episode}`;
 		}
 		if (image) {
 			presenceData.largeImageKey =
@@ -59,10 +53,8 @@ presence.on("UpdateData", async () => {
 				Assets.Logo;
 		}
 		if (iFrameData && !iFrameData.paused) {
-			[, presenceData.endTimestamp] = presence.getTimestamps(
-				iFrameData.currTime,
-				iFrameData.duration
-			);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(iFrameData.currTime, iFrameData.duration);
 			presenceData.smallImageKey = Assets.Play;
 		} else presenceData.smallImageKey = Assets.Pause;
 		if (buttons) {
@@ -75,7 +67,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (pathname.startsWith("/movie/")) {
 		const title = document.querySelector<HTMLHeadingElement>(
-			"#watch > div.container > div.watch-extra > div.bl-1 > section.info > div.info > h1"
+			"section#w-info > div.info > h1.name"
 		);
 		if (title) presenceData.details = title.textContent;
 		if (image) {
@@ -89,10 +81,8 @@ presence.on("UpdateData", async () => {
 				Assets.Logo;
 		}
 		if (iFrameData && !iFrameData.paused) {
-			[, presenceData.endTimestamp] = presence.getTimestamps(
-				iFrameData.currTime,
-				iFrameData.duration
-			);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(iFrameData.currTime, iFrameData.duration);
 			presenceData.smallImageKey = Assets.Play;
 		} else presenceData.smallImageKey = Assets.Pause;
 		if (buttons) {
@@ -117,3 +107,19 @@ presence.on("UpdateData", async () => {
 
 	presence.setActivity(presenceData);
 });
+
+function extractSeasonEpisode(url: string): {
+	season: number;
+	episode: number;
+} {
+	// This regular expression matches URLs that follow the pattern /tv/show-name/season-number-episode-number
+	// It captures the season number and episode number from the URL
+	const match = url.match(/\/tv\/[^/]+\/(\d+)-(\d+)/);
+	if (match) {
+		return {
+			season: parseInt(match[1], 10),
+			episode: parseInt(match[2], 10),
+		};
+	}
+	return { season: 0, episode: 0 };
+}

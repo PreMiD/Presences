@@ -22,62 +22,61 @@ presence.on("UpdateData", async () => {
 				"https://cdn.rcd.gg/PreMiD/websites/T/Tio%20Anime/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
-		privacy = await presence.getSetting<boolean>("privacy"),
-		buttons = await presence.getSetting<boolean>("buttons");
+		[privacy, buttons] = await Promise.all([
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<string>("buttons"),
+		]),
+		{ href, pathname } = document.location;
 
-	if (document.location.pathname === "/")
-		presenceData.details = "En la página de inicio";
-	else if (document.location.pathname.includes("/anime/")) {
+	if (pathname === "/") presenceData.details = "En la página de inicio";
+	else if (pathname.includes("/anime/")) {
 		if (!privacy) {
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: "Ver Anime",
-						url: document.URL,
-					},
-				];
-			}
+			presenceData.buttons = [
+				{
+					label: "Ver Anime",
+					url: href,
+				},
+			];
 			presenceData.details = "Viendo lista de episodios:";
 			presenceData.state = document.querySelector(".title").textContent;
 		} else presenceData.details = "Viendo lista de episodios";
-	} else if (document.location.pathname.includes("/ver/")) {
-		if (!privacy) {
-			if (buttons) {
-				presenceData.buttons = [
-					{
-						label: "Ver Capítulo",
-						url: document.URL,
-					},
-				];
-			}
-			const capt = document.querySelector("h1").textContent;
-			presenceData.details = "Viendo Anime:";
-			presenceData.state = `${capt.substring(
-				0,
-				document.querySelector("h1").textContent.lastIndexOf(" ")
-			)} capítulo ${capt.split(" ").pop()}`;
-			[presenceData.startTimestamp, presenceData.endTimestamp] =
-				presence.getTimestamps(
-					Math.floor(video.currentTime),
-					Math.floor(video.duration)
-				);
-			presenceData.smallImageKey = video.paused ? Assets.Stop : Assets.Play;
-			presenceData.smallImageText = video.paused
-				? "Capítulo pausado"
-				: "Reproduciendo capítulo";
-			if (video.paused) {
-				delete presenceData.startTimestamp;
-				delete presenceData.endTimestamp;
-			}
-		} else {
-			presenceData.details = "Viendo anime";
-			presenceData.smallImageKey = video.paused ? Assets.Stop : Assets.Play;
-			presenceData.smallImageText = video.paused
-				? "Capítulo pausado"
-				: "Reproduciendo capítulo";
+	} else if (pathname.includes("/ver/")) {
+		presenceData.type = ActivityType.Watching;
+		presenceData.buttons = [
+			{
+				label: "Ver Capítulo",
+				url: href,
+			},
+		];
+		const capt = document.querySelector("h1").textContent;
+		presenceData.details = "Viendo Anime:";
+		presenceData.state = `${capt.substring(
+			0,
+			document.querySelector("h1").textContent.lastIndexOf(" ")
+		)} capítulo ${capt.split(" ").pop()}`;
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestamps(
+				Math.floor(video.currentTime),
+				Math.floor(video.duration)
+			);
+		presenceData.smallImageKey = video.paused ? Assets.Stop : Assets.Play;
+		presenceData.smallImageText = video.paused
+			? "Capítulo pausado"
+			: "Reproduciendo capítulo";
+		if (video.paused) {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
 		}
+	} else {
+		presenceData.type = ActivityType.Watching;
+		presenceData.details = "Viendo anime";
+		presenceData.smallImageKey = video.paused ? Assets.Stop : Assets.Play;
+		presenceData.smallImageText = video.paused
+			? "Capítulo pausado"
+			: "Reproduciendo capítulo";
 	}
-	switch (document.location.pathname) {
+
+	switch (pathname) {
 		case "/directorio":
 			presenceData.details = "Viendo el directorio de animes";
 			break;
@@ -89,6 +88,8 @@ presence.on("UpdateData", async () => {
 			break;
 	}
 
+	if ((privacy || !buttons) && presenceData.buttons)
+		delete presenceData.buttons;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

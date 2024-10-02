@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Kedi",
 		"id": "238668511222693888"
@@ -12,10 +13,9 @@
 	},
 	"url": [
 		"www.hbomax.com",
-		"www.max.com"
+		"play.hbomax.com"
 	],
-	"regExp": "([a-z]*[.])?(hbo)?max[.]com",
-	"version": "2.2.10",
+	"version": "2.2.12",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HBO%20Max/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HBO%20Max/assets/thumbnail.jpg",
 	"color": "#c600ff",

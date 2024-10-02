@@ -29,7 +29,10 @@ presence.on("UpdateData", async () => {
 			channelName = document.querySelector<HTMLAnchorElement>(
 				".details > .name > a"
 			),
-			video = document.querySelector<HTMLVideoElement>("video#player");
+			video = document.querySelector<HTMLVideoElement>("video#player"),
+			sensitivity = document.querySelector<HTMLAnchorElement>(
+				".video-detail-list tr:last-child a"
+			)?.textContent;
 		if (title) presenceData.details = `Watching ${title.textContent}`;
 		if (channelName) {
 			presenceData.state = `By ${channelName.textContent}`;
@@ -46,8 +49,14 @@ presence.on("UpdateData", async () => {
 				];
 			}
 		}
+		if (sensitivity?.startsWith("NSFW")) {
+			presenceData.details = "Watching a video";
+			delete presenceData.state;
+			delete presenceData.buttons;
+		}
 		if (time && video && !video.paused) {
-			[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestampsfromMedia(video);
 			presenceData.smallImageText = presenceData.smallImageKey = Assets.Play;
 		}
 	} else if (pathname.startsWith("/channel")) {

@@ -162,7 +162,7 @@ presence.on("UpdateData", async () => {
 					document
 						.querySelectorAll("title")[0]
 						?.textContent.split("| #")[1]
-						.split("|")[0] || "Undefined"
+						?.split("|")[0] || "Undefined"
 				}`,
 				serverServerName =
 					document.querySelectorAll("title")[0]?.textContent.split("|")[2] ||

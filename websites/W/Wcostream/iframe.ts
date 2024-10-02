@@ -1,16 +1,19 @@
 const iframe = new iFrame();
 
 iframe.on("UpdateData", async () => {
-	if (document.querySelector<HTMLVideoElement>("#video-js_html5_api")) {
+	const video = document.querySelector<HTMLVideoElement>("video");
+	if (video) {
 		iframe.send({
-			paused: document
-				.querySelector<HTMLButtonElement>(
-					"#video-js > div.vjs-control-bar > button"
-				)
-				.title.includes("Play"),
-			timeLeft: document.querySelector<HTMLSpanElement>(
-				"span.vjs-remaining-time-display"
-			).textContent,
+			paused: video?.paused,
+			timeLeft:
+				document.querySelectorAll('[role="timer"]')?.[1]?.textContent ??
+				document.querySelector(".vjs-remaining-time-display")?.textContent,
+		});
+	} else {
+		iframe.send({
+			titleV:
+				document.querySelector(".video-title")?.textContent ??
+				document.querySelector('[property="og:title"]')?.textContent,
 		});
 	}
 });

@@ -1,15 +1,15 @@
-const gain = new Presence({
+const presence = new Presence({
 		clientId: "926450473559547944",
 	}),
-	gainStrings = gain.getStrings({
+	presenceStrings = presence.getStrings({
 		play: "general.playing",
 		pause: "general.paused",
 	}),
-	gainSettings = async () => ({
-		showImages: await gain.getSetting<boolean>("showImages"),
-		showButtons: await gain.getSetting<boolean>("showButtons"),
+	presenceSettings = async () => ({
+		showImages: await presence.getSetting<boolean>("showImages"),
+		showButtons: await presence.getSetting<boolean>("showButtons"),
 	}),
-	gainPages: { [k: string]: string } = {
+	presencePages: { [k: string]: string } = {
 		"/": "Ana Sayfa",
 		"/guncel": "Güncel İçerikler",
 		"/haber": "Haber",
@@ -33,14 +33,14 @@ const gain = new Presence({
 		"/abonelik-sozlesmesi": "Abonelik Sözleşmesi",
 	};
 
-gain.on("UpdateData", async () => {
+presence.on("UpdateData", async () => {
 	const path = document.location.pathname,
 		presenceData: PresenceData = {
 			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/G/GAIN/assets/logo.jpg",
+				"https://cdn.rcd.gg/PreMiD/websites/G/presence/assets/logo.jpg",
 			startTimestamp: Math.floor(Date.now() / 1000),
 		},
-		settings = await gainSettings();
+		settings = await presenceSettings();
 
 	if (path.startsWith("/v/")) {
 		const video = document.querySelector<HTMLVideoElement>("video");
@@ -64,23 +64,22 @@ gain.on("UpdateData", async () => {
 			presenceData.buttons = [
 				{
 					label: presenceData.state ? "Bölüme Git" : "Filme Git",
-					url: `https://gain.tv${document.location.pathname}`,
+					url: `https://presence.tv${document.location.pathname}`,
 				},
 			];
 		}
 
 		if (!isNaN(video?.duration)) {
-			const [, endTimestamp] = gain.getTimestamps(
-				Math.floor(video?.currentTime),
-				Math.floor(video?.duration)
-			);
-
 			presenceData.smallImageKey = video?.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video?.paused
-				? (await gainStrings).pause
-				: (await gainStrings).play;
+				? (await presenceStrings).pause
+				: (await presenceStrings).play;
 
-			if (!isNaN(endTimestamp)) presenceData.endTimestamp = endTimestamp;
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(
+					Math.floor(video?.currentTime),
+					Math.floor(video?.duration)
+				);
 
 			if (video?.paused) {
 				delete presenceData.startTimestamp;
@@ -88,7 +87,7 @@ gain.on("UpdateData", async () => {
 			}
 		}
 
-		gain.setActivity(presenceData);
+		presence.setActivity(presenceData);
 	} else if (path.startsWith("/t/")) {
 		presenceData.details = "Bir içeriğe göz atıyor:";
 		presenceData.state =
@@ -103,11 +102,13 @@ gain.on("UpdateData", async () => {
 				)?.src || "g-logo";
 		}
 
-		gain.setActivity(presenceData);
-	} else if (gainPages[path] || gainPages[path.slice(0, -1)]) {
+		presence.setActivity(presenceData);
+	} else if (presencePages[path] || presencePages[path.slice(0, -1)]) {
 		presenceData.state =
-			gainPages[path] || gainPages[path.slice(0, -1)] || "Bilinmeyen Sayfa";
+			presencePages[path] ||
+			presencePages[path.slice(0, -1)] ||
+			"Bilinmeyen Sayfa";
 
-		gain.setActivity(presenceData);
-	} else gain.setActivity();
+		presence.setActivity(presenceData);
+	} else presence.setActivity();
 });

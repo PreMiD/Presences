@@ -28,12 +28,16 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
+			type: ActivityType.Watching,
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href } = document.location,
 		pathArr = pathname.split("/"),
-		showButtons = await presence.getSetting<boolean>("buttons");
+		[showButtons, showCover] = await Promise.all([
+			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("cover"),
+		]);
 
 	if (Object.keys(staticPages).includes(pathArr[1]) && pathArr.length <= 3)
 		presenceData.details = staticPages[pathArr[1]];
@@ -46,6 +50,9 @@ presence.on("UpdateData", async () => {
 			.querySelector("#titreOeuvre")
 			.textContent.trim();
 		presenceData.buttons = [{ label: "Voir la Page", url: href }];
+		presenceData.largeImageKey =
+			document.querySelector<HTMLMetaElement>("[property='og:image']")
+				?.content ?? Assets.Logo;
 	} else if (document.querySelector<HTMLSelectElement>("#selectEpisodes")) {
 		const season = document.querySelector("#avOeuvre").textContent,
 			selectEps = document.querySelector<HTMLSelectElement>("#selectEpisodes"),
@@ -62,7 +69,9 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = Assets.Pause;
 		presenceData.smallImageText =
 			selectLecteur.options[selectLecteur.selectedIndex].value;
-
+		presenceData.largeImageKey =
+			document.querySelector<HTMLMetaElement>("[property='og:image']")
+				?.content ?? Assets.Logo;
 		if (!paused) {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(currentTime, duration);
@@ -82,9 +91,13 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText =
 			selectLecteur.options[selectLecteur.selectedIndex].value;
 		presenceData.buttons = [{ label: "Voir le Scan", url: href }];
+		presenceData.largeImageKey =
+			document.querySelector<HTMLMetaElement>("[property='og:image']")
+				?.content ?? Assets.Logo;
 	}
 
 	if (!showButtons) delete presenceData.buttons;
+	if (!showCover) presenceData.largeImageKey = Assets.Logo;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

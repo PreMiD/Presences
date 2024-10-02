@@ -7,7 +7,8 @@ let prevTitleAuthor = "",
 	mediaTimestamps: [number, number],
 	oldPath: string,
 	startTimestamp: number,
-	videoListenerAttached = false;
+	videoListenerAttached = false,
+	useTimeLeftChanged = false;
 
 presence.on("UpdateData", async () => {
 	const { pathname, search, href } = document.location,
@@ -18,6 +19,7 @@ presence.on("UpdateData", async () => {
 			hidePaused,
 			showBrowsing,
 			privacyMode,
+			useTimeLeft,
 		] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("timestamps"),
@@ -25,6 +27,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("hidePaused"),
 			presence.getSetting<boolean>("browsing"),
 			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("useTimeLeft"),
 		]),
 		{ mediaSession } = navigator,
 		watchID =
@@ -38,12 +41,21 @@ presence.on("UpdateData", async () => {
 		videoElement =
 			document.querySelector<HTMLVideoElement>("video.video-stream");
 
-	if (videoElement) {
+	if (useTimeLeftChanged !== useTimeLeft && !privacyMode) {
+		useTimeLeftChanged = useTimeLeft;
+		updateSongTimestamps(useTimeLeft);
+	}
+
+	if (videoElement && !privacyMode) {
 		if (!videoListenerAttached) {
 			//* If video scrobbled, update timestamps
-			videoElement.addEventListener("seeked", updateSongTimestamps);
+			videoElement.addEventListener("seeked", () =>
+				updateSongTimestamps(useTimeLeft)
+			);
 			//* If video resumes playing, update timestamps
-			videoElement.addEventListener("play", updateSongTimestamps);
+			videoElement.addEventListener("play", () =>
+				updateSongTimestamps(useTimeLeft)
+			);
 
 			videoListenerAttached = true;
 		}
@@ -80,7 +92,7 @@ presence.on("UpdateData", async () => {
 					.querySelector<HTMLSpanElement>("#left-controls > span")
 					.textContent.trim()
 		) {
-			updateSongTimestamps();
+			updateSongTimestamps(useTimeLeft);
 
 			if (mediaTimestamps[0] === mediaTimestamps[1]) return;
 
@@ -260,20 +272,26 @@ presence.on("UpdateData", async () => {
 
 	if (!showBrowsing) return presence.clearActivity();
 
-	//* For some bizarre reason the timestamps are NaN eventho they are never actually set in testing, this spread is a workaround
 	presenceData.type = ActivityType.Listening;
 	presence.setActivity(presenceData);
 });
 
-function updateSongTimestamps() {
+function updateSongTimestamps(useTimeLeft: boolean) {
 	const element = document
 			.querySelector<HTMLSpanElement>("#left-controls > span")
 			.textContent.trim()
 			.split(" / "),
 		[currTimes, totalTimes] = element;
 
-	mediaTimestamps = presence.getTimestamps(
-		presence.timestampFromFormat(currTimes),
-		presence.timestampFromFormat(totalTimes)
-	);
+	if (useTimeLeft) {
+		mediaTimestamps = presence.getTimestamps(
+			presence.timestampFromFormat(currTimes),
+			presence.timestampFromFormat(totalTimes)
+		);
+	} else {
+		mediaTimestamps = [
+			Date.now() / 1000 - presence.timestampFromFormat(currTimes),
+			null,
+		];
+	}
 }

@@ -44,9 +44,9 @@ presence.on("UpdateData", async () => {
 						url: href,
 					},
 				];
-			} else if (document.querySelector(".images-reader-container")) {
+			} else if (document.querySelector(".reader-container")) {
 				const img = document.querySelectorAll<HTMLImageElement>(
-					".images-reader-container img"
+					".reader-container img"
 				)[1];
 				presenceData.details = `Reading ${img.alt.substring(
 					0,

@@ -35,10 +35,8 @@ function setCommonData(
 		Assets.Logo;
 	if (video?.exists) {
 		if (!video.paused) {
-			[, presenceData.endTimestamp] = presence.getTimestamps(
-				video.currentTime,
-				video.duration
-			);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(video.currentTime, video.duration);
 		}
 		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? "Paused" : "Playing back";

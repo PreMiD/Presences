@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "SlowLife",
 		"id": "374905512661221377"
@@ -32,15 +33,14 @@
 	"url": [
 		"www.naver.com",
 		"tv.naver.com",
-		"now.naver.com",
 		"papago.naver.com",
 		"comic.naver.com",
 		"entertain.naver.com",
 		"blog.naver.com",
 		"cafe.naver.com"
 	],
-	"regExp": "((section)[.])?([a-z]+)[.]naver[.]([a-z0-9]+)",
-	"version": "1.2.21",
+	"regExp": "((section)[.])?(?!chzzk)([a-z]+)[.]naver[.]([a-z0-9]+)",
+	"version": "2.0.2",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/thumbnail.png",
 	"color": "#03d05a",

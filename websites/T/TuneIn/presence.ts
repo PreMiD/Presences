@@ -80,13 +80,11 @@ presence.on("UpdateData", async () => {
 					duration = document.querySelector("#scrubberDuration").textContent;
 
 				if (elapsed !== "00:00" || duration !== "") {
-					const timestamps = presence.getTimestamps(
-						presence.timestampFromFormat(elapsed),
-						presence.timestampFromFormat(duration)
-					);
-
-					presenceData.startTimestamp = timestamps[0];
-					presenceData.endTimestamp = timestamps[1];
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestamps(
+							presence.timestampFromFormat(elapsed),
+							presence.timestampFromFormat(duration)
+						);
 				}
 			}
 

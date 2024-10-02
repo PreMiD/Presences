@@ -1,5 +1,5 @@
 import { Resolver } from "../util";
-import { getChannelURL, getVideoID } from "./default";
+import { getVideoID } from "./default";
 
 function isActive(): boolean {
 	return (
@@ -10,6 +10,12 @@ function isActive(): boolean {
 		!!getVideoID() &&
 		!!getChannelURL()
 	);
+}
+
+function getChannelURL(): string {
+	return document.querySelector<HTMLLinkElement>(
+		"#top-row ytd-video-owner-renderer > a"
+	)?.href;
 }
 
 function getTitle(): string {

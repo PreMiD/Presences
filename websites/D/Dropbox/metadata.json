@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "MrBartusek",
 		"id": "212988300137463809"
@@ -14,7 +15,7 @@
 		"www.dropbox.com",
 		"showcase.dropbox.com"
 	],
-	"version": "1.0.17",
+	"version": "1.0.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Dropbox/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Dropbox/assets/thumbnail.png",
 	"color": "#0062ff",

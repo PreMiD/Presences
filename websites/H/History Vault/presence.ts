@@ -118,8 +118,8 @@ presence.on("UpdateData", async () => {
 						'[class*="Component-typeSectionTitleMd"]'
 					)?.textContent;
 					if (video.duration && !video.paused) {
-						presenceData.endTimestamp =
-							presence.getTimestampsfromMedia(video)[1];
+						[presenceData.startTimestamp, presenceData.endTimestamp] =
+							presence.getTimestampsfromMedia(video);
 					}
 					presenceData.smallImageKey = video.paused
 						? Assets.Pause

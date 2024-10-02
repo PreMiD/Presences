@@ -51,18 +51,16 @@ presence.on("UpdateData", async () => {
 		fromPlaylist = !!document.querySelectorAll(
 			'div[class="player__track-album"] a'
 		)[2],
-		currentTimeSec =
-			presence.timestampFromFormat(
-				document.querySelector<HTMLElement>(
-					'span[class="player__track-time-text"]'
-				).textContent
-			) * 1000,
-		endTimeSec =
-			presence.timestampFromFormat(
-				document.querySelectorAll<HTMLElement>(
-					'span[class="player__track-time-text"]'
-				)[1].textContent
-			) * 1000,
+		currentTimeSec = presence.timestampFromFormat(
+			document.querySelector<HTMLElement>(
+				'span[class="player__track-time-text"]'
+			).textContent
+		),
+		endTimeSec = presence.timestampFromFormat(
+			document.querySelectorAll<HTMLElement>(
+				'span[class="player__track-time-text"]'
+			)[1].textContent
+		),
 		paused = !!document.querySelector(
 			'span[class="player__action-play pct pct-player-play "] '
 		),
@@ -87,7 +85,8 @@ presence.on("UpdateData", async () => {
 		playliststring;
 
 	if (currentTimeSec > 0 || !paused) {
-		presenceData.endTimestamp = Date.now() + (endTimeSec - currentTimeSec);
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestamps(currentTimeSec, endTimeSec);
 		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = paused ? strings.pause : strings.play;
 	}

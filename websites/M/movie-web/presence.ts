@@ -63,6 +63,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/logo.png",
+			type: ActivityType.Watching,
 		};
 
 	if (pathname === "" || pathname.startsWith("/search"))
@@ -96,9 +97,10 @@ presence.on("UpdateData", async () => {
 		}
 
 		const title = `${meta.title} (${meta.year})`;
+		presenceData.name = title;
 
 		if (meta.type === "show" && episode && season)
-			presenceData.details = `S${season.number}E${episode.number} — ${title}`;
+			presenceData.details = `Season ${season.number}, Episode ${episode.number}`;
 		else presenceData.details = title;
 
 		if (controls.isLoading) {
@@ -106,9 +108,8 @@ presence.on("UpdateData", async () => {
 				"https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/0.gif";
 			presenceData.smallImageText = "Loading";
 		} else if (controls.isPlaying) {
-			[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(
-				document.querySelector("video")
-			);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestampsfromMedia(document.querySelector("video"));
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Playing";
 		} else {

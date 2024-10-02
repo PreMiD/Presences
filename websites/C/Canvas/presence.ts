@@ -703,7 +703,9 @@ presence.on("UpdateData", async () => {
 											timeElapsed.setTime(
 												timeElapsed.getTime() + daySeconds * 1000
 											);
-											delete presenceData.startTimestamp;
+											presenceData.startTimestamp = Math.floor(
+												Date.now() / 1000
+											);
 											presenceData.endTimestamp = Math.floor(
 												timeElapsed.getTime() / 1000
 											);

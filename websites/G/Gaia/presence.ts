@@ -63,8 +63,10 @@ presence.on("UpdateData", async () => {
 					if (cover && coverUrl)
 						data.largeImageKey = await getShortURL(coverUrl);
 
-					if (!video.paused)
-						data.endTimestamp = presence.getTimestampsfromMedia(video).pop();
+					if (!video.paused) {
+						[data.startTimestamp, data.endTimestamp] =
+							presence.getTimestampsfromMedia(video);
+					}
 
 					data.buttons = [
 						{

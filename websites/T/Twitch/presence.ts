@@ -467,7 +467,7 @@ presence.on("UpdateData", async () => {
 						profilePic =
 							document
 								.querySelector<HTMLImageElement>(
-									".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
+									"[class*=channel-info-content] [class*=tw-image]"
 								)
 								?.src?.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600") ??
 							(logoArr[logo] || Assets.Logo);
@@ -528,10 +528,8 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageText = strings.play;
 					if (pfp) presenceData.largeImageKey = profilePic;
 
-					const [startTimestamp, endTimestamp] =
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
 						presence.getTimestampsfromMedia(video);
-					presenceData.startTimestamp = startTimestamp;
-					presenceData.endTimestamp = endTimestamp;
 
 					presenceData.buttons = [
 						{

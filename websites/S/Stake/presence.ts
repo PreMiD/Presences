@@ -37,12 +37,12 @@ presence.on("UpdateData", async () => {
 
 	if (showBal) {
 		const balance = document
-				.querySelector("div.currency > span.content > span")
-				.textContent.trim(),
+				.querySelector("div.currency > span.content > span > span")
+				.textContent.trim()
+				.replace("&nbsp;", " "),
 			currency = document
-				.querySelector("div.currency > span.variant-subtle > svg > use")
-				.getAttributeNS("http://www.w3.org/1999/xlink", "href")
-				.replace("#icon-currency-", "")
+				.querySelector("div.currency > span.variant-subtle")
+				.getAttribute("title")
 				.toUpperCase();
 
 		if (pathname.includes("games")) presenceData.details = "Balance: (In Game)";

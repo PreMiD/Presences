@@ -165,8 +165,10 @@ presence.on("UpdateData", async () => {
 				];
 			}
 
-			if (!paused && video?.duration && video?.currentTime)
-				[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
+			if (!paused && video?.duration && video?.currentTime) {
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(video);
+			}
 			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = paused ? strings.paused : strings.playing;
 
@@ -212,10 +214,8 @@ presence.on("UpdateData", async () => {
 				? strings.paused
 				: strings.playing;
 			if (!video.paused) {
-				[, presenceData.endTimestamp] = presence.getTimestamps(
-					video.currentTime,
-					video.duration
-				);
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(video.currentTime, video.duration);
 			}
 			presenceData.buttons = [
 				{ label: strings.buttonViewTikTok, url: href },

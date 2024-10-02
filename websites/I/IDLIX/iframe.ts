@@ -8,9 +8,6 @@ iframe.on("UpdateData", async () => {
 			duration: video.duration,
 			paused: video.paused,
 			isVideo: true,
-			playingAds: document.querySelector('[class="jw-skip jw-reset"]')
-				? true
-				: false,
 		});
 	} else {
 		iframe.send({

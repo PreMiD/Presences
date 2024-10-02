@@ -167,8 +167,10 @@ presence.on("UpdateData", async () => {
 						.querySelector("__next-route-announcer__")
 						?.textContent?.split("|")[0] ??
 					document.querySelector("title")?.textContent?.split("|")[0];
-				if (video.duration && !video.paused)
-					presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
+				if (video.duration && !video.paused) {
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestampsfromMedia(video);
+				}
 				presenceData.largeImageKey =
 					document
 						.querySelector("#__NEXT_DATA__")

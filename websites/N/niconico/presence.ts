@@ -53,39 +53,36 @@ function getTimesec(
 presence.on("UpdateData", async () => {
 	switch (location.hostname) {
 		case "www.nicovideo.jp": {
-			if (
-				location.pathname.startsWith("/watch/") &&
-				document.querySelector(".VideoPlayer video")
-			) {
-				const ownerElement =
-					document.querySelector(".ChannelInfo-pageLink") ||
-					document.querySelector(".VideoOwnerInfo-pageLink") ||
-					null;
-				let owner;
-				if (ownerElement) {
-					[, owner] = ownerElement.textContent.match(/(.+) さん$/) || [
-						ownerElement.textContent,
-					];
-				} else owner = "Deleted User";
-
-				const isPlaying = !!document.querySelector(".PlayerPauseButton"),
+			if (location.pathname.startsWith("/watch/")) {
+				const startTimeStamp = document
+						.querySelector(
+							'div[data-styling-id=":r4:"]  span.white-space_nowrap'
+						)
+						.textContent.split(":")
+						.map(e => parseInt(e))
+						.reverse()
+						.reduce((acc, cur, i) => acc + cur * Math.pow(60, i), 0),
+					ownerElement = document.querySelector(
+						'a[data-anchor-area="video_information"]:not(:has(div))'
+					),
+					imageElement = document.querySelector('meta[property="og:image"]'),
+					isPlaying = !!document.querySelector(
+						'#tooltip\\:\\:r5\\:\\:trigger  > svg > path[fill-rule="evenodd"]'
+					),
 					presenceData: PresenceData = {
-						details: document.querySelector(".VideoTitle").textContent,
-						state: `${owner} - ${location.pathname.match(/..\d+$/)[0]}`,
-						largeImageKey:
-							"https://cdn.rcd.gg/PreMiD/websites/N/niconico/assets/logo.png",
+						details: document.querySelector("main h1").textContent,
+						state: `${
+							ownerElement ? ownerElement.textContent : "Deleted User"
+						} - ${location.pathname.match(/..\d+$/)[0]}`,
+						largeImageKey: imageElement
+							? imageElement.attributes.getNamedItem("content").value
+							: "https://cdn.rcd.gg/PreMiD/websites/N/niconico/assets/logo.png",
 						smallImageKey: isPlaying ? Assets.Play : Assets.Pause,
 						smallImageText: isPlaying
 							? (await strings).play
 							: (await strings).pause,
-						startTimestamp:
-							Math.floor(Date.now() / 1000) -
-							Math.floor(
-								document.querySelector<HTMLVideoElement>(".VideoPlayer video")
-									.currentTime
-							),
+						startTimestamp: Math.floor(Date.now() / 1000) - startTimeStamp,
 					};
-
 				presence.setActivity(presenceData);
 			}
 			break;

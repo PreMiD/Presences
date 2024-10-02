@@ -75,7 +75,8 @@ presence.on("UpdateData", async () => {
 
 		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? strings.paused : strings.play;
-		[, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video);
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestampsfromMedia(video);
 		presenceData.largeImageKey =
 			document
 				.querySelector('[id="longInfo"]')

@@ -4,6 +4,7 @@ import youtubeEmbedResolver from "./video_sources/embed";
 import youtubeMoviesResolver from "./video_sources/movies";
 import youtubeTVResolver from "./video_sources/tv";
 import youtubeResolver from "./video_sources/default";
+import youtubeMiniplayerResolver from "./video_sources/miniplayer";
 import youtubeApiResolver from "./video_sources/api";
 import {
 	Resolver,
@@ -50,6 +51,8 @@ presence.on("UpdateData", async () => {
 			channelPic,
 			logo,
 			buttons,
+			hideHome,
+			hidePaused,
 		] = [
 			getSetting<string>("lang", "en"),
 			getSetting<boolean>("privacy", true),
@@ -61,6 +64,8 @@ presence.on("UpdateData", async () => {
 			getSetting<boolean>("channelPic", false),
 			getSetting<number>("logo", 0),
 			getSetting<boolean>("buttons", true),
+			getSetting<boolean>("hideHome", false),
+			getSetting<boolean>("hidePaused", true),
 		],
 		{ pathname, hostname, search, href } = document.location;
 
@@ -73,12 +78,17 @@ presence.on("UpdateData", async () => {
 	).find(video => video.duration);
 
 	if (video) {
+		const { mediaSession } = navigator;
+		if (mediaSession.playbackState !== "playing" && hidePaused)
+			return presence.clearActivity();
+
 		const resolver = [
 				youtubeEmbedResolver,
 				youtubeShortsResolver,
 				youtubeOldResolver,
 				youtubeTVResolver,
 				youtubeResolver,
+				youtubeMiniplayerResolver,
 				youtubeMoviesResolver,
 				youtubeApiResolver,
 				nullResolver,
@@ -114,11 +124,14 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (logo === LogoMode.Channel) {
-			pfp = document
-				.querySelector<HTMLImageElement>(
-					"#avatar.ytd-video-owner-renderer > img"
-				)
-				?.src.replace(/=s\d+/, "=s512");
+			pfp =
+				resolver === youtubeMiniplayerResolver
+					? ""
+					: document
+							.querySelector<HTMLImageElement>(
+								"#avatar.ytd-video-owner-renderer > img"
+							)
+							?.src.replace(/=s\d+/, "=s512");
 		}
 		const unlistedPathElement = document.querySelector<SVGPathElement>(
 				"g#privacy_unlisted > path"
@@ -164,10 +177,12 @@ presence.on("UpdateData", async () => {
 					: isPlaylistLoop
 					? "Playlist on loop"
 					: strings.play,
-				endTimestamp: adjustTimeError(
-					presence.getTimestampsfromMedia(video)[1],
-					0.75
-				),
+				endTimestamp: !video?.paused
+					? adjustTimeError(presence.getTimestampsfromMedia(video)[1], 0.75)
+					: -1,
+				startTimestamp: !video?.paused
+					? adjustTimeError(presence.getTimestampsfromMedia(video)[0], 0.75)
+					: -1,
 			};
 
 		if (vidState.includes("{0}")) delete presenceData.state;
@@ -238,7 +253,6 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = YouTubeAssets.Shorts;
 			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
-			delete presenceData.endTimestamp;
 		}
 
 		if (!presenceData.details) presence.setActivity();
@@ -268,7 +282,9 @@ presence.on("UpdateData", async () => {
 						"{0}",
 						child?.textContent.trim().toLowerCase()
 					);
-				} else presenceData.details = strings.viewHome;
+				} else if (hideHome) return presence.clearActivity();
+				else presenceData.details = strings.viewHome;
+
 				break;
 			}
 			case pathname.includes("/results"): {
@@ -312,6 +328,7 @@ presence.on("UpdateData", async () => {
 					).textContent;
 					// Get channel name when viewing a channel
 				} else if (
+					!document.querySelector("#text.ytd-channel-name")?.textContent &&
 					documentTitle.includes(
 						document.querySelector("#text.ytd-channel-name")?.textContent
 					)
@@ -333,7 +350,7 @@ presence.on("UpdateData", async () => {
 						strings.browsingThrough
 					} ${tabSelected} ${document
 						.querySelector(
-							'[class="style-scope ytd-c4-tabbed-header-renderer iron-selected"]'
+							'[class="style-scope ytd-tabbed-page-header"] [aria-selected="true"]'
 						)
 						?.textContent.trim()
 						.toLowerCase()}`;

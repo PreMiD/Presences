@@ -28,6 +28,7 @@ export function getDiff(
 			.toString()
 			.split("\n")
 			.filter(file => {
+				if (file.startsWith("cli/")) return false;
 				if (type === "removed") return "metadata.json" === basename(file);
 				else {
 					return ["presence.ts", "iframe.ts", "metadata.json"].includes(
@@ -37,7 +38,6 @@ export function getDiff(
 			});
 
 	if (!changedPresenceFolders.length) return [];
-
 	return [...new Set(changedPresenceFolders.map(f => basename(dirname(f))))];
 }
 
@@ -57,7 +57,7 @@ export function getFolderLetter(service: string) {
 
 export async function getLatestSchema() {
 	const fetchedSchemas = await got(
-		"https://api.github.com/repos/PreMiD/Schemas/contents/schemas/metadata",
+		"https://api.github.com/repos/PreMiD/PreMiD/contents/apps/schema-server/schemas/metadata?ref=monorepo",
 		{ responseType: "json" }
 	);
 

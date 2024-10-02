@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "705490775932403795",
 		"name": "jordaar"
@@ -9,17 +10,24 @@
 		"en": "The place for your favorite movies & shows"
 	},
 	"url": [
-		"movie-web.app",
+		"watch.qtchaos.de",
 		"mw.lonelil.com",
-		"mv-web.netlify.app"
+		"mw.lonelil.ru",
+		"scootydooter.vercel.app",
+		"movie-web-me.vercel.app",
+		"www.vidbinge.com",
+		"vidbinge.app",
+		"movies.levrx.lol",
+		"www.essential.wtf",
+		"streamerflix.xyz",
+		"envyflix.xyz",
+		"sunnymovies.site",
+		"pseudo-flix.pro",
+		"movie-web.x",
+		"sudo-flix.rip"
 	],
 	"regExp": "(dev[.])?(movie-web[.]app)",
-	"matches": [
-		"*://movie-web.app/*",
-		"*://mw.lonelil.com/*",
-		"*://mv-web.netlify.app/*"
-	],
-	"version": "1.0.6",
+	"version": "1.1.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/movie-web/assets/thumbnail.png",
 	"color": "#533670",

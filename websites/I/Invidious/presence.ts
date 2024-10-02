@@ -4,7 +4,7 @@ const presence = new Presence({
 
 function getTime() {
 	const time = document
-		.querySelectorAll(".vjs-current-time-display")[0]
+		.querySelector(".vjs-current-time-display")
 		.textContent.split(":")
 		.map(n => Number(n));
 	if (time.length === 3)
@@ -20,6 +20,8 @@ presence.on("UpdateData", async () => {
 			"https://cdn.rcd.gg/PreMiD/websites/I/Invidious/assets/0.png",
 	};
 	let clear = false;
+
+	const privacy = await presence.getSetting<boolean>("privacy");
 
 	switch (document.location.pathname.replace("/feed", "").split("/")[1]) {
 		case "":
@@ -56,28 +58,33 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "watch":
-			presenceData.smallImageKey = document.querySelectorAll(".vjs-playing")[0]
-				? Assets.Play
-				: Assets.Pause;
-			presenceData.details = document
-				.querySelectorAll("h1")[0]
-				.textContent.trim();
-			presenceData.state = document.querySelector("#channel-name").textContent;
-			if (document.querySelectorAll(".vjs-playing")[0])
-				presenceData.startTimestamp = getTime();
-
+			if (!privacy) {
+				presenceData.smallImageKey = document.querySelector(".vjs-playing")
+					? Assets.Play
+					: Assets.Pause;
+				presenceData.details = document.querySelector("h1").textContent.trim();
+				presenceData.state =
+					document.querySelector("#channel-name").textContent;
+				if (document.querySelector(".vjs-playing"))
+					presenceData.startTimestamp = getTime();
+			}
 			break;
 
 		case "playlist":
 			presenceData.details = "Viewing playlist";
-			presenceData.state = document.querySelectorAll("h3")[0].textContent;
+			if (!privacy)
+				presenceData.state = document.querySelector("h3").textContent;
 			break;
 
 		case "channel":
 			presenceData.details = "Viewing channel";
-			presenceData.state = document
-				.querySelectorAll(".channel-profile")[0]
-				.textContent.trim();
+
+			if (!privacy) {
+				presenceData.state = document
+					.querySelector(".channel-profile")
+					.textContent.trim();
+			}
+
 			break;
 
 		default:

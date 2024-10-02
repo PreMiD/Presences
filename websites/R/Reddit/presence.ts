@@ -40,7 +40,10 @@ const presences: { [key in PresenceClients]?: Presence } = {
 		[PresenceClients.Reddit]: presence,
 	},
 	startTimestamp = Math.floor(Date.now() / 1000),
-	oldReddit = !!document.querySelector(".default-header");
+	oldReddit = !!(
+		document.querySelector(".default-header") ??
+		document.querySelector("#header")
+	);
 
 function setClient(clientId: PresenceClients) {
 	presence.clearActivity();
@@ -132,17 +135,8 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.includes("/comments/")) {
 		if (!privacy) {
 			postTitle =
-				document.querySelector(
-					"div._2SdHzo12ISmrC8H86TgSCp._29WrubtjAcKqzJSPdQqQ4h"
-				)?.textContent || "";
-			subReddit = document.querySelector(
-				"span._19bCWnxeTjqzBElWZfIlJb"
-			).textContent;
-			subReddit =
-				subReddit === "Home" &&
-				document.querySelectorAll("._19bCWnxeTjqzBElWZfIlJb")[1] !== null
-					? document.querySelectorAll("._19bCWnxeTjqzBElWZfIlJb")[1].textContent
-					: subReddit;
+				document.querySelector("shreddit-title")?.getAttribute("title") ?? "";
+			subReddit = getSubreddit();
 			presenceData.details = `${strings.reading} '${postTitle}'`;
 			presenceData.state = subReddit;
 			presenceData.buttons = [
@@ -154,17 +148,10 @@ presence.on("UpdateData", async () => {
 		} else presenceData.details = strings.reading.slice(0, -1);
 	} else if (pathname.startsWith("/user/")) {
 		if (!privacy) {
-			username = document.querySelector("span._1LCAhi_8JjayVo7pJ0KIh0")
-				? document.querySelector("span._1LCAhi_8JjayVo7pJ0KIh0").textContent
-				: document
-						.querySelector("span._28nEhn86_R1ENZ59eAru8S")
-						.textContent.match(/u\/[A-Za-z0-9_-]+/i)[0]
-						.slice(2);
-			nickname = document.querySelector("h4._3W1eUu5jHdcamkzFiJDITJ")
-				? document.querySelector("h4._3W1eUu5jHdcamkzFiJDITJ").textContent
-				: "";
+			username = document.querySelector("p")?.textContent;
+			nickname = document.querySelector("h1")?.textContent;
 			presenceData.details = strings.profile;
-			presenceData.state = nickname !== "" ? nickname : username;
+			presenceData.state = nickname ?? username;
 			presenceData.buttons = [
 				{
 					url: href,
@@ -193,33 +180,20 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = Assets.Live;
 		presenceData.smallImageText = strings.live;
 	} else if (!privacy) {
-		const sub = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP");
-		if (sub === null) {
-			const sub2 = document.querySelector(
-				"#SHORTCUT_FOCUSABLE_DIV > div:nth-child(4) > div > div > div > div._3ozFtOe6WpJEMUtxDOIvtU > div.MSTY2ZpsdupobywLEfx9u > div._3JDs8KEQIXSMn1bTF2ZqJ_ > div.QscnL9OySMkHhGudEvEya > div._3I4Wpl_rl6oTm02aWPZayD > div._3TG57N4WQtubLLo8SbAXVF > h2"
-			);
-			presenceData.details = strings.browsing;
-			presenceData.state = !sub2 ? "Home" : sub2.textContent;
-		} else {
-			presenceData.details = strings.browsing;
-			presenceData.state = sub.textContent;
-		}
-	} else {
-		const sub = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP");
-		if (!sub) {
-			const sub2 = document.querySelector(
-				"#SHORTCUT_FOCUSABLE_DIV > div:nth-child(4) > div > div > div > div._3ozFtOe6WpJEMUtxDOIvtU > div.MSTY2ZpsdupobywLEfx9u > div._3JDs8KEQIXSMn1bTF2ZqJ_ > div.QscnL9OySMkHhGudEvEya > div._3I4Wpl_rl6oTm02aWPZayD > div._3TG57N4WQtubLLo8SbAXVF > h2"
-			);
-			presenceData.details = strings.browsing;
-			presenceData.state = !sub2 ? "Home" : sub2.textContent;
-		} else {
-			presenceData.details = strings.browsing;
-			if (sub.textContent.includes("r/"))
-				presenceData.state = strings.insubreddit;
-			else presenceData.state = sub.textContent;
-		}
+		presenceData.details = strings.browsing;
+		presenceData.state = getSubreddit() ?? "Home";
+	} else if (getSubreddit()) presenceData.details = strings.insubreddit;
+	else {
+		presenceData.details = strings.browsing;
+		presenceData.state = "Home";
 	}
 
 	if (!buttons || privacy) delete presenceData.buttons;
 	presence.setActivity(presenceData);
 });
+
+function getSubreddit(): string {
+	return document
+		.querySelector("shreddit-subreddit-header")
+		?.getAttribute("prefixed-name");
+}
