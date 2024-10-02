@@ -82,7 +82,7 @@ const presence = new Weverse({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
-			"https://res.cloudinary.com/debvitdiw/image/upload/v1726211085/Presences/weverse.jpg",
+			"https://res.cloudinary.com/debvitdiw/image/upload/v1727852958/Presences/WeverseLogo.png",
 	};
 
 	if (document.location.pathname.includes("/live/")) {
@@ -173,14 +173,6 @@ presence.on("UpdateData", async () => {
 			{
 				label: `Visit ${presence.getCommunityName()} Media`,
 				url: document.location.href,
-			},
-		];
-	} else {
-		presenceData.details = "Browsing Weverse";
-		presenceData.buttons = [
-			{
-				label: "Go to Weverse",
-				url: "https://weverse.io",
 			},
 		];
 	}
