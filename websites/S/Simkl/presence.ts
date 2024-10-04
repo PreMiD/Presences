@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-Logo =  "https://i.imgur.com/1m6HokC.png",
+	Logo = "https://i.imgur.com/1m6HokC.png",
 }
 function textContent(tags: string) {
 	return document.querySelector(tags)?.textContent?.trim();
@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 	const { pathname, search } = document.location,
 		path = pathname.split("/"),
 		presenceData: PresenceData = {
-		largeImageKey: Assets.Logo,
+			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		};
 
@@ -68,9 +68,7 @@ presence.on("UpdateData", async () => {
 						presenceData.details = `Reading a ${textContent(
 							"#global_div > div.SimklHeaderBgShaddow > div > div > div.SimklTVReviewHeaderBottom > table > tbody > tr > td > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(1) > td"
 						)}`;
-						presenceData.state = textContent(
-							"span.ajLinkInside"
-						);
+						presenceData.state = textContent("span.ajLinkInside");
 						presenceData.largeImageKey = getImage(".SimklTVReviewPoster");
 					} else if (path[4]) {
 						presenceData.state = `on ${textContent(
