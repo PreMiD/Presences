@@ -133,7 +133,9 @@ presence.on("UpdateData", async () => {
 						presenceData.largeImageKey = getImage(".SimklTVDetailEpisodeImage");
 						delete presenceData.state;
 					} else if (path[4] && path[4].startsWith("review")) {
-						presenceData.details = `Reading a review of ${textContent("span.ajLinkInside")}`;
+						presenceData.details = `Reading a review of ${textContent(
+							"span.ajLinkInside"
+						)}`;
 						presenceData.state = textContent(
 							".SimklTVReviewHeaderBottom > table > tbody > tr > td > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(2) > td"
 						);
