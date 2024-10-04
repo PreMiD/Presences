@@ -65,10 +65,12 @@ presence.on("UpdateData", async () => {
 							".simkltvcountdowninfoleftiage"
 						);
 					} else if (path[4] && path[4].startsWith("review")) {
-						presenceData.details = `Reading a ${textContent(
-							"#global_div > div.SimklHeaderBgShaddow > div > div > div.SimklTVReviewHeaderBottom > table > tbody > tr > td > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(1) > td"
+						presenceData.details = `Reading a review of ${textContent(
+							"span.ajLinkInside"
 						)}`;
-						presenceData.state = textContent("span.ajLinkInside");
+						presenceData.state = textContent(
+							".SimklTVReviewHeaderBottom > table > tbody > tr > td > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(2) > td"
+						);
 						presenceData.largeImageKey = getImage(".SimklTVReviewPoster");
 					} else if (path[4]) {
 						presenceData.state = `on ${textContent(
@@ -131,11 +133,9 @@ presence.on("UpdateData", async () => {
 						presenceData.largeImageKey = getImage(".SimklTVDetailEpisodeImage");
 						delete presenceData.state;
 					} else if (path[4] && path[4].startsWith("review")) {
-						presenceData.details = `Reading a ${textContent(
-							"#global_div > div.SimklHeaderBgShaddow > div > div > div.SimklTVReviewHeaderBottom > table > tbody > tr > td > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(1) > td"
-						)}`;
+						presenceData.details = `Reading a review of ${textContent("span.ajLinkInside")}`;
 						presenceData.state = textContent(
-							"#global_div > div.SimklHeaderBgShaddow > div > div > div.SimklTVReviewHeaderBottom > table > tbody > tr > td > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(2) > td"
+							".SimklTVReviewHeaderBottom > table > tbody > tr > td > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(2) > td"
 						);
 						presenceData.largeImageKey = getImage(".SimklTVReviewPoster");
 					} else if (path[4] && path[4].startsWith("countdown")) {
@@ -184,11 +184,11 @@ presence.on("UpdateData", async () => {
 						".SimklTVAboutTabsActive"
 					)} tab`;
 					if (path[4] && path[4].startsWith("review")) {
-						presenceData.details = `Reading a ${textContent(
-							"#global_div > div.SimklHeaderBgShaddow > div > div > div.SimklTVReviewHeaderBottom > table > tbody > tr > td > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(1) > td"
+						presenceData.details = `Reading a review of ${textContent(
+							"span.ajLinkInside"
 						)}`;
 						presenceData.state = textContent(
-							"#global_div > div.SimklHeaderBgShaddow > div > div > div.SimklTVReviewHeaderBottom > table > tbody > tr > td > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(2) > td"
+							".SimklTVReviewHeaderBottom > table > tbody > tr > td > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(2) > td"
 						);
 						presenceData.largeImageKey = getImage(".SimklTVReviewPoster");
 					}
@@ -362,7 +362,7 @@ presence.on("UpdateData", async () => {
 					case "list": {
 						presenceData.details = "On List:";
 						presenceData.state = textContent(
-							"#global_div > list-wrap > list > list-bottom > list-bottom-left > list-bottom-left-content > list-bottom-left-content-left > list-bottom-left-content-left-title > h1"
+							"list-bottom-left-content-left-title > h1"
 						);
 						break;
 					}
