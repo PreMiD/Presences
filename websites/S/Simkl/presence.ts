@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
 							"#global_div > div.SimklHeaderBgShaddow > div > div > div.SimklTVReviewHeaderBottom > table > tbody > tr > td > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(1) > td"
 						)}`;
 						presenceData.state = textContent(
-							"#global_div > div.SimklHeaderBgShaddow > div > div > div.SimklTVReviewHeaderBottom > table > tbody > tr > td > table > tbody > tr > td:nth-child(2) > table > tbody > tr:nth-child(2) > td"
+							"span.ajLinkInside"
 						);
 						presenceData.largeImageKey = getImage(".SimklTVReviewPoster");
 					} else if (path[4]) {
