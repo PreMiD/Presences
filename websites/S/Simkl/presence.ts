@@ -11,7 +11,7 @@ function textContent(tags: string) {
 }
 
 function getImage(tags: string) {
-	return document.querySelector<HTMLImageElement>(tags)?.src;
+	return document.querySelector<HTMLImageElement>(tags)?.src ?? Assets.Logo;
 }
 
 presence.on("UpdateData", async () => {
