@@ -6,19 +6,19 @@ class Weverse extends Presence {
 	getArtistName(): string {
 		return (
 			document
-				.querySelector(".LiveArtistProfileView_name_item__8W66y")
+				.querySelector("[class*=LiveArtistProfileView_name_item]")
 				?.textContent?.trim() ?? "Unknown Artist"
 		);
 	}
 
 	getStreamTitle(): string {
-		const titleElement = document.querySelector("h2.TitleView_title__SSnHb");
+		const titleElement = document.querySelector("h2[class*=TitleView_title]");
 		if (titleElement) {
 			const titleTextNodes = Array.from(titleElement.childNodes).filter(
 				node =>
 					!(
 						node instanceof HTMLElement &&
-						node.matches(".LiveBadgeView_badge__o2vFt")
+						node.matches("[class*=LiveBadgeView_badge]")
 					)
 			);
 
@@ -34,42 +34,42 @@ class Weverse extends Presence {
 
 	getThumbnailUrl(): string | undefined {
 		return document.querySelector<HTMLImageElement>(
-			".ProfileThumbnailView_thumbnail_wrap__ZgeTf img"
+			"[class*=ProfileThumbnailView_thumbnail_wrap] img"
 		)?.src;
 	}
 
 	getCommunityName(): string {
 		return (
 			document
-				.querySelector(".HeaderCommunityDropdownWrapperView_name__FZXsx")
+				.querySelector("[class*=HeaderCommunityDropdownWrapperView_name]")
 				?.textContent?.trim() ?? "Unknown Community"
 		);
 	}
 
 	getCommunityImageUrl(): string | undefined {
 		return document.querySelector<HTMLImageElement>(
-			".CommunityAsideWelcomeView_thumbnail__5MVun"
+			"[class*=CommunityAsideWelcomeView_thumbnail] img"
 		)?.src;
 	}
 
 	getArtistPageName(): string {
 		return (
 			document
-				.querySelector(".HeaderCommunityDropdownWrapperView_name__FZXsx")
+				.querySelector("[class*=HeaderCommunityDropdownWrapperView_name]")
 				?.textContent?.trim() ?? "Unknown Artist"
 		);
 	}
 
 	getMomentThumbnailUrl(): string | undefined {
 		return document.querySelector<HTMLImageElement>(
-			".ProfileThumbnailView_thumbnail_wrap__ZgeTf img"
+			"a[class*=PostHeaderView_thumbnail_wrap] img"
 		)?.src;
 	}
 
 	getMomentNickname(): string {
 		return (
 			document
-				.querySelector(".PostHeaderView_nickname__6Cb7X")
+				.querySelector("[class*=PostHeaderView_nickname]")
 				?.textContent?.trim() ?? "Unknown User"
 		);
 	}
@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = presence.getArtistName();
 
 		const video = document.querySelector("video");
-		if (document.querySelector(".LiveBadgeView_-replay__nNx34") !== null) {
+		if (document.querySelector("[class*=LiveBadgeView_-replay]") !== null) {
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Replay";
 			presenceData.buttons = [
