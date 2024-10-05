@@ -1,6 +1,7 @@
 const presence = new Presence({
-	clientId: "844108776793178122",
-});
+		clientId: "844108776793178122",
+	}),
+	startTimestamp = Math.floor(Date.now() / 1000);
 
 async function getStrings() {
 	return presence.getStrings({
@@ -19,86 +20,48 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/T/TuneIn/assets/logo.png",
+			type: ActivityType.Listening,
+			startTimestamp,
 		},
-		conditions = {
-			isPaused: document.querySelector('[data-testid="player-status-paused"]'),
-			isStopped: document.querySelector(
-				'[data-testid="player-status-stopped"]'
-			),
-			isConnecting: document.querySelector(
-				'[data-testid="player-status-connecting"]'
-			),
-			isLive: document.querySelector("#scrubberElapsed"),
-		},
-		[newLang, timestamps, cover, private] = await Promise.all([
+		[newLang, timestamps, cover, privacy] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("timestamps"),
 			presence.getSetting<boolean>("cover"),
 			presence.getSetting<boolean>("privacy"),
-		]);
+		]),
+		isLive = document.querySelector("[data-icon='stop']"),
+		isPlaying = document.querySelector("[data-testid='player-status-playing']");
 
 	if (oldLang !== newLang) {
 		oldLang = newLang;
 		strings = await getStrings();
 	}
 
-	if (!conditions.isConnecting && conditions.isLive) {
-		if (private) presenceData.details = strings.listening;
+	if (isLive || isPlaying) {
+		if (privacy) presenceData.details = strings.listening;
 		else {
 			const title = document.querySelector("#playerTitle").textContent,
 				author = document.querySelector("#playerSubtitle").textContent,
 				artwork = document.querySelector("#playerArtwork").getAttribute("src");
 
 			if (title) presenceData.details = title;
-
 			if (author) presenceData.state = author;
-
 			if (artwork && cover) presenceData.largeImageKey = artwork;
 		}
 
-		if (conditions.isLive.textContent === "") {
-			if (conditions.isStopped) {
-				delete presenceData.startTimestamp;
-				presenceData.smallImageKey = Assets.Pause;
-				presenceData.smallImageText = strings.pause;
-			} else {
-				if (!private && timestamps) {
-					const timeElapsed = presence.timestampFromFormat(
-						document
-							.querySelector("#scrubberElapsed")
-							.getAttribute("data-elapsedtime")
+		presenceData.smallImageKey = isLive ? Assets.Live : Assets.Play;
+		presenceData.smallImageText = isLive ? strings.live : strings.play;
+
+		if (!privacy && timestamps && !isLive && isPlaying) {
+			const elapsed = document.querySelector("#scrubberElapsed").textContent,
+				duration = document.querySelector("#scrubberDuration").textContent;
+
+			if (elapsed !== "00:00" || duration !== "") {
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(
+						presence.timestampFromFormat(elapsed),
+						presence.timestampFromFormat(duration)
 					);
-					presenceData.startTimestamp =
-						Math.floor(Date.now() / 1000) - timeElapsed;
-				}
-				presenceData.smallImageKey = Assets.Live;
-				presenceData.smallImageText = strings.live;
-			}
-		} else {
-			if (!private && timestamps) {
-				const elapsed = document.querySelector("#scrubberElapsed").textContent,
-					duration = document.querySelector("#scrubberDuration").textContent;
-
-				if (elapsed !== "00:00" || duration !== "") {
-					[presenceData.startTimestamp, presenceData.endTimestamp] =
-						presence.getTimestamps(
-							presence.timestampFromFormat(elapsed),
-							presence.timestampFromFormat(duration)
-						);
-				}
-			}
-
-			if (conditions.isPaused) {
-				delete presenceData.startTimestamp;
-				delete presenceData.endTimestamp;
-				presenceData.smallImageKey = Assets.Pause;
-				presenceData.smallImageText = strings.pause;
-			} else if (conditions.isStopped) {
-				presenceData.smallImageKey = Assets.Stop;
-				presenceData.smallImageText = strings.pause;
-			} else {
-				presenceData.smallImageKey = Assets.Play;
-				presenceData.smallImageText = strings.play;
 			}
 		}
 	} else presenceData.details = strings.browse;
