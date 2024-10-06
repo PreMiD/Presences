@@ -52,12 +52,8 @@ presence.on("UpdateData", async () => {
 
 		if (video) {
 			if (!video.paused) {
-				const { currentTime, duration } = video,
-					currentTimeStamp = Math.floor(Date.now() / 1000);
-				presenceData.startTimestamp =
-					currentTimeStamp - Math.floor(currentTime);
-				presenceData.endTimestamp =
-					currentTimeStamp + Math.floor(duration - currentTime);
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(video);
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Now Watching";
 			} else {
