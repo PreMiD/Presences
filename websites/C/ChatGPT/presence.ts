@@ -28,9 +28,16 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (pathname.split("/")[1] === "c") {
-		presenceData.details = showTitle
-			? document.querySelector("li a button > svg")?.closest("li").textContent
-			: "Talking with AI about something";
+		// check if the document title is the default title. If so, get the chat title from the UI. Otherwise, get it from the document title
+		if (document.title === "ChatGPT" && showTitle) {
+			presenceData.details = document.querySelector(
+				`[href="/c/${pathname.split("/")[2]}"]`
+			)?.textContent;
+		} else {
+			presenceData.details = showTitle
+				? document.title
+				: "Talking with AI about something";
+		}
 		presenceData.state = isTalking
 			? "AI is responding..."
 			: `asked (${Number(
