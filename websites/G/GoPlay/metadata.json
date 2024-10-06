@@ -13,13 +13,13 @@
 		"vi_VN": "GoPlay là nơi để xem kdrama trực tuyến. Bạn có thể xem các chương trình miễn phí, không bị gián đoạn bởi các quảng cáo."
 	},
 	"url": [
-                 "goplay.ml",
-                 "goplay.su",
-                 "kdrama.anontpp.com"
+		"goplay.ml",
+		"goplay.su",
+		"kdrama.anontpp.com"
 	],
-	"version": "1.0.0",
-	"logo": "https://files.catbox.moe/slht2f.png",
-	"thumbnail": "https://files.catbox.moe/pv310c.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GoPlay/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GoPlay/assets/thumbnail.png",
 	"color": "#F4ADEE",
 	"category": "videos",
 	"tags": [

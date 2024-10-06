@@ -6,19 +6,24 @@
 		"id": "762219738570555412"
 	},
 	"service": "YTPLR",
-	"altnames": ["YouTube Playlist Randomizer"],
+	"altnames": [
+		"YouTube Playlist Randomizer"
+	],
 	"description": {
 		"en": "Shuffles a YouTube Playlist in random order"
 	},
 	"url": "youtube-playlist-randomizer.bitbucket.io",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/hsDOqgw.png",
-	"thumbnail": "https://i.imgur.com/VhkOWl2.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/YTPLR/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/YTPLR/assets/thumbnail.png",
 	"color": "#ff6d70",
+	"category": "videos",
 	"tags": [
 		"video",
 		"media"
 	],
+	"iframe": true,
+	"iFrameRegExp": "youtube[-]playlist[-]randomizer[.]bitbucket[.]io",
 	"settings": [
 		{
 			"id": "buttons",
@@ -26,8 +31,5 @@
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
 		}
-	],
-	"category": "videos",
-	"iFrameRegExp": "youtube[-]playlist[-]randomizer[.]bitbucket[.]io",
-	"iframe": true
+	]
 }
