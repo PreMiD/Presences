@@ -48,6 +48,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 			type: ActivityType.Watching,
+			name: "Docchi",
 		},
 		{ pathname, href, origin } = document.location,
 		[privacy, buttons] = [
@@ -115,18 +116,18 @@ presence.on("UpdateData", async () => {
 					).nextElementSibling.textContent;
 					if (animetype === "Movie") {
 						privacy
-							? (presenceData.details = "Ogląda film anime")
-							: (presenceData.details = document.querySelector(
+							? (presenceData.name = "Film anime")
+							: (presenceData.name = document.querySelector(
 									"a[mal_sync='title']"
 							  ).textContent);
 						presenceData.buttons = [{ label: "Oglądaj", url: href }];
 					} else {
 						privacy
-							? (presenceData.details = "Ogląda anime")
-							: (presenceData.details = document.querySelector(
+							? (presenceData.name = "Anime")
+							: (presenceData.name = document.querySelector(
 									"a[mal_sync='title']"
 							  ).textContent);
-						presenceData.state = `Odcinek: ${
+						presenceData.details = `Odcinek: ${
 							document.querySelector("a[mal_sync='episode']").textContent
 						}`;
 						presenceData.buttons = [
