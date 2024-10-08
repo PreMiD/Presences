@@ -32,6 +32,7 @@ presence.on("UpdateData", async () => {
 	}
 	const presenceData: PresenceData = {
 			largeImageKey: LOGO_URL,
+			type: ActivityType.Listening,
 		},
 		songTitle = document.querySelector<HTMLAnchorElement>(
 			"[data-test='footer-track-title'] > div > a"
@@ -78,9 +79,7 @@ presence.on("UpdateData", async () => {
 				)
 			);
 		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
-		presenceData.smallImageText = paused
-			? (await strings).pause
-			: (await strings).play;
+		presenceData.smallImageText = paused ? strings.pause : strings.play;
 	}
 
 	if (
@@ -100,7 +99,7 @@ presence.on("UpdateData", async () => {
 	if (buttons) {
 		presenceData.buttons = [
 			{
-				label: (await strings).viewSong,
+				label: strings.viewSong,
 				url: songTitle.href,
 			},
 		];
