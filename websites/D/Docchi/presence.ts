@@ -140,7 +140,6 @@ presence.on("UpdateData", async () => {
 							},
 						];
 					}
-					presenceData.state = "Docchi.pl";
 					[presenceData.startTimestamp, presenceData.endTimestamp] =
 						presence.getTimestamps(video.current, video.duration);
 
