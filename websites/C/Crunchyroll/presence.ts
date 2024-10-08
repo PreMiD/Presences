@@ -71,6 +71,7 @@ presence.on("iFrameData", (data: iFrameData) => {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
+			type: ActivityType.Watching,
 		},
 		{ href, pathname } = window.location,
 		[newLang, showCover] = await Promise.all([
