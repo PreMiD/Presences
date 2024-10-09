@@ -16,6 +16,8 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, href, search } = document.location;
 
+	const privacy = presence.getSetting<boolean>("privacy")
+
 	if (pathname === "/") {
 		presenceData.details = "Home";
 		presenceData.state = "Browsing...";
@@ -41,17 +43,21 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = "Studying";
 			presenceData.buttons = [{ label: "View Batch", url: href }];
 		} else if (pathname.includes("batch-video-player")) {
-			const deta = localStorage.getItem("dpp_subject");
-			let detal = ` | ${deta}`;
+			if (!privacy) {
+				const deta = localStorage.getItem("dpp_subject");
+				let detal = ` | ${deta}`;
+	
+				if (deta === null) detal = "";
+				presenceData.details = `Watching Lecture${detal}`;
 
-			if (deta === null) detal = "";
-
-			presenceData.details = `Watching Lecture${detal}`;
-
-			presenceData.state = `${
-				JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
-			}`;
-			presenceData.buttons = [{ label: "Watch Lecture", url: href }];
+				presenceData.state = `${
+					JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
+				}`;
+				presenceData.buttons = [{ label: "Watch Lecture", url: href }];
+			}
+			else {
+				presenceData.details = "Watching a lecture";
+			}
 
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				updateVideoTimestamps();
@@ -79,31 +85,48 @@ presence.on("UpdateData", async () => {
 		} else if (pathname.includes("open-pdf")) {
 			if (localStorage.getItem("dpp_subject")) {
 				presenceData.details = "Solving DPP (PDF)";
-				presenceData.state = localStorage.getItem("dpp_subject");
+				if (!privacy) {
+					presenceData.state = localStorage.getItem("dpp_subject");
+				}
+				else {
+					presenceData.state = "Improving skills";
+				}
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.smallImageKey = Assets.Viewing;
 				presenceData.smallImageText = "Viewing DPP";
 			}
 		} else if (pathname.includes("q-bank-exercise")) {
 			presenceData.details = "Solving DPP (MCQ)";
-			presenceData.state = localStorage.getItem("dpp_subject");
+			if (!privacy) {
+				presenceData.state = localStorage.getItem("dpp_subject");
+			}
+			else {
+				presenceData.state = "Improving skills";
+			}
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = "Viewing DPP";
 		}
 	} else if (pathname.startsWith("/watch")) {
-		const deta = localStorage.getItem("dpp_subject");
-		let detal = ` | ${deta}`;
 
-		if (deta === null) detal = "";
+		if (!privacy) {
+			const deta = localStorage.getItem("dpp_subject");
+			let detal = ` | ${deta}`;
 
-		presenceData.details = `Watching Lecture${detal}`;
+			if (deta === null) detal = "";
 
-		presenceData.state = `${
-			JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
-		}`;
+			presenceData.details = `Watching Lecture${detal}`;
+		
 
-		presenceData.buttons = [{ label: "Watch Lecture", url: href }];
+			presenceData.state = `${
+				JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
+			}`;
+
+			presenceData.buttons = [{ label: "Watch Lecture", url: href }];
+		}
+		else {
+			presenceData.details = "Watching a lecture";
+		}
 
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			updateVideoTimestamps();

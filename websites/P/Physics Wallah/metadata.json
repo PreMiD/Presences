@@ -14,9 +14,18 @@
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Physics%20Wallah/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Physics%20Wallah/assets/thumbnail.png",
 	"color": "#2596be",
-	"category": "other",
+	"category": "videos",
 	"tags": [
 		"video",
 		"media"
+	],
+	"settings": [
+
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		}
 	]
 }
