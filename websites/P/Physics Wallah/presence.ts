@@ -15,8 +15,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href, search } = document.location,
-
-	privacy = presence.getSetting<boolean>("privacy");
+		privacy = presence.getSetting<boolean>("privacy");
 
 	if (pathname === "/") {
 		presenceData.details = "Home";
@@ -46,7 +45,7 @@ presence.on("UpdateData", async () => {
 			if (!privacy) {
 				const deta = localStorage.getItem("dpp_subject");
 				let detal = ` | ${deta}`;
-	
+
 				if (deta === null) detal = "";
 				presenceData.details = `Watching Lecture${detal}`;
 
@@ -54,9 +53,7 @@ presence.on("UpdateData", async () => {
 					JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
 				}`;
 				presenceData.buttons = [{ label: "Watch Lecture", url: href }];
-			} else {
-				presenceData.details = "Watching a lecture";
-			}
+			} else presenceData.details = "Watching a lecture";
 
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				updateVideoTimestamps();
@@ -84,28 +81,23 @@ presence.on("UpdateData", async () => {
 		} else if (pathname.includes("open-pdf")) {
 			if (localStorage.getItem("dpp_subject")) {
 				presenceData.details = "Solving DPP (PDF)";
-				if (!privacy) {
-					presenceData.state = localStorage.getItem("dpp_subject");
-				} else { 
-					presenceData.state = "Improving skills";
-				}
+				if (!privacy) presenceData.state = localStorage.getItem("dpp_subject");
+				else presenceData.state = "Improving skills";
+
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.smallImageKey = Assets.Viewing;
 				presenceData.smallImageText = "Viewing DPP";
 			}
 		} else if (pathname.includes("q-bank-exercise")) {
 			presenceData.details = "Solving DPP (MCQ)";
-			if (!privacy) {
-				presenceData.state = localStorage.getItem("dpp_subject");
-			} else {
-				presenceData.state = "Improving skills";
-			}
+			if (!privacy) presenceData.state = localStorage.getItem("dpp_subject");
+			else presenceData.state = "Improving skills";
+
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = "Viewing DPP";
 		}
 	} else if (pathname.startsWith("/watch")) {
-
 		if (!privacy) {
 			const deta = localStorage.getItem("dpp_subject");
 			let detal = ` | ${deta}`;
@@ -113,16 +105,13 @@ presence.on("UpdateData", async () => {
 			if (deta === null) detal = "";
 
 			presenceData.details = `Watching Lecture${detal}`;
-		
 
 			presenceData.state = `${
 				JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
 			}`;
 
 			presenceData.buttons = [{ label: "Watch Lecture", url: href }];
-		} else {
-			presenceData.details = "Watching a lecture";
-		}
+		} else presenceData.details = "Watching a lecture";
 
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			updateVideoTimestamps();
