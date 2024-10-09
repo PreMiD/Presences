@@ -9,11 +9,14 @@ const enum Assets {
 
 presence.on("UpdateData", async () => {
 	const { pathname } = document.location,
+		privacy = await presence.getSetting("privacy"),
 		presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 			details: "In Home",
-			state: document.querySelector<HTMLInputElement>("#searchbox")?.value,
+			state: privacy
+				? ""
+				: document.querySelector<HTMLInputElement>("#searchbox")?.value,
 		};
 
 	switch (pathname.split("/")[1]) {
@@ -23,30 +26,32 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "help": {
-			presenceData.details = "Viewing Help Page:";
-			presenceData.state = document
-				.querySelector(".post-title")
-				?.textContent?.trim();
+			if (!privacy) {
+				presenceData.details = "Viewing Help Page:";
+				presenceData.state = document
+					.querySelector(".post-title")
+					?.textContent?.trim();
+			} else presenceData.details = "Viewing Help Pages";
 			break;
 		}
 		case "search": {
-			presenceData.details = "Searching:";
+			presenceData.details = `Searching${!privacy ? ":" : "..."}`;
 			break;
 		}
 		case "images": {
-			presenceData.details = "Searching images:";
+			presenceData.details = `Searching images${!privacy ? ":" : "..."}`;
 			break;
 		}
 		case "news": {
-			presenceData.details = "Searching news:";
+			presenceData.details = `Searching news${!privacy ? ":" : "..."}`;
 			break;
 		}
 		case "videos": {
-			presenceData.details = "Searching videos:";
+			presenceData.details = `Searching videos${!privacy ? ":" : "..."}`;
 			break;
 		}
 		case "goggles": {
-			presenceData.details = "Searching goggles:";
+			presenceData.details = `Searching goggles${!privacy ? ":" : "..."}`;
 			break;
 		}
 		default: {
