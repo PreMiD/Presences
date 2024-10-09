@@ -14,9 +14,9 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, href, search } = document.location;
+		{ pathname, href, search } = document.location,
 
-	const privacy = presence.getSetting<boolean>("privacy")
+	privacy = presence.getSetting<boolean>("privacy");
 
 	if (pathname === "/") {
 		presenceData.details = "Home";
@@ -54,8 +54,7 @@ presence.on("UpdateData", async () => {
 					JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
 				}`;
 				presenceData.buttons = [{ label: "Watch Lecture", url: href }];
-			}
-			else {
+			} else {
 				presenceData.details = "Watching a lecture";
 			}
 
@@ -87,8 +86,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Solving DPP (PDF)";
 				if (!privacy) {
 					presenceData.state = localStorage.getItem("dpp_subject");
-				}
-				else {
+				} else { 
 					presenceData.state = "Improving skills";
 				}
 				presenceData.startTimestamp = browsingTimestamp;
@@ -99,8 +97,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Solving DPP (MCQ)";
 			if (!privacy) {
 				presenceData.state = localStorage.getItem("dpp_subject");
-			}
-			else {
+			} else {
 				presenceData.state = "Improving skills";
 			}
 			presenceData.startTimestamp = browsingTimestamp;
@@ -123,8 +120,7 @@ presence.on("UpdateData", async () => {
 			}`;
 
 			presenceData.buttons = [{ label: "Watch Lecture", url: href }];
-		}
-		else {
+		} else {
 			presenceData.details = "Watching a lecture";
 		}
 
