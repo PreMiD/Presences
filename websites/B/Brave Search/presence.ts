@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/Oxx2bFw.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/B/Brave%20Search/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {
