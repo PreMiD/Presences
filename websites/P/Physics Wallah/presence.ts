@@ -13,6 +13,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
+			type: ActivityType.Watching,
 		},
 		{ pathname, href, search } = document.location,
 		[privacyMode] = await Promise.all([
