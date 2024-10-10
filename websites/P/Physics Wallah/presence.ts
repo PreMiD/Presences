@@ -47,8 +47,8 @@ presence.on("UpdateData", async () => {
 		} else if (pathname.includes("batch-video-player")) {
 			const deta = localStorage.getItem("dpp_subject");
 			let detal = ` | ${deta}`;
+			if (deta === null) detal = "";
 			if (!privacyMode) {
-				if (deta === null) detal = "";
 				presenceData.details = `Watching Lecture${detal}`;
 
 				presenceData.state = `${
@@ -57,11 +57,11 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [{ label: "Watch Lecture", url: href }];
 			} else presenceData.details = `Watching a lecture${detal}`;
 
-			[presenceData.startTimestamp, presenceData.endTimestamp] =
-				updateVideoTimestamps();
 			if (document.querySelectorAll(".vjs-paused").length < 1) {
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Watching a lecture";
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					updateVideoTimestamps();
 			} else {
 				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "Paused";
@@ -104,9 +104,8 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.startsWith("/watch")) {
 		const deta = localStorage.getItem("dpp_subject");
 		let detal = ` | ${deta}`;
+		if (deta === null) detal = "";
 		if (!privacyMode) {
-			if (deta === null) detal = "";
-
 			presenceData.details = `Watching Lecture${detal}`;
 
 			presenceData.state = `${
@@ -116,12 +115,11 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [{ label: "Watch Lecture", url: href }];
 		} else presenceData.details = `Watching a lecture${detal}`;
 
-		[presenceData.startTimestamp, presenceData.endTimestamp] =
-			updateVideoTimestamps();
-
 		if (document.querySelectorAll(".vjs-paused").length < 1) {
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Watching a lecture";
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				updateVideoTimestamps();
 		} else {
 			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Paused";
