@@ -82,7 +82,7 @@ const presence = new Weverse({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
-			"https://res.cloudinary.com/debvitdiw/image/upload/v1727852958/Presences/WeverseLogo.png",
+			"https://cdn.rcd.gg/PreMiD/websites/W/Weverse/assets/logo.png",
 	};
 
 	if (document.location.pathname.includes("/live/")) {
