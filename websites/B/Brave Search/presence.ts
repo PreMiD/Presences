@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			details: "In Home",
 			state: privacy
-				? ""
+				? undefined
 				: document.querySelector<HTMLInputElement>("#searchbox")?.value,
 		};
 
