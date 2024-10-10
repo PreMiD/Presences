@@ -15,7 +15,11 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href, search } = document.location,
-		privacy = presence.getSetting<boolean>("privacy");
+		[
+			privacyMode,
+		] = await Promise.all([
+			presence.getSetting<boolean>("privacy")
+		]);
 
 	if (pathname === "/") {
 		presenceData.details = "Home";
@@ -42,9 +46,9 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = "Studying";
 			presenceData.buttons = [{ label: "View Batch", url: href }];
 		} else if (pathname.includes("batch-video-player")) {
-			if (!privacy) {
-				const deta = localStorage.getItem("dpp_subject");
-				let detal = ` | ${deta}`;
+			const deta = localStorage.getItem("dpp_subject");
+			let detal = ` | ${deta}`;
+			if (!privacyMode) {
 
 				if (deta === null) detal = "";
 				presenceData.details = `Watching Lecture${detal}`;
@@ -53,7 +57,7 @@ presence.on("UpdateData", async () => {
 					JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
 				}`;
 				presenceData.buttons = [{ label: "Watch Lecture", url: href }];
-			} else presenceData.details = "Watching a lecture";
+			} else presenceData.details = `Watching a lecture${detal}`;
 
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				updateVideoTimestamps();
@@ -81,7 +85,7 @@ presence.on("UpdateData", async () => {
 		} else if (pathname.includes("open-pdf")) {
 			if (localStorage.getItem("dpp_subject")) {
 				presenceData.details = "Solving DPP (PDF)";
-				if (!privacy) presenceData.state = localStorage.getItem("dpp_subject");
+				if (!privacyMode) presenceData.state = localStorage.getItem("dpp_subject");
 				else presenceData.state = "Improving skills";
 
 				presenceData.startTimestamp = browsingTimestamp;
@@ -90,7 +94,7 @@ presence.on("UpdateData", async () => {
 			}
 		} else if (pathname.includes("q-bank-exercise")) {
 			presenceData.details = "Solving DPP (MCQ)";
-			if (!privacy) presenceData.state = localStorage.getItem("dpp_subject");
+			if (!privacyMode) presenceData.state = localStorage.getItem("dpp_subject");
 			else presenceData.state = "Improving skills";
 
 			presenceData.startTimestamp = browsingTimestamp;
@@ -98,9 +102,9 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = "Viewing DPP";
 		}
 	} else if (pathname.startsWith("/watch")) {
-		if (!privacy) {
-			const deta = localStorage.getItem("dpp_subject");
-			let detal = ` | ${deta}`;
+		const deta = localStorage.getItem("dpp_subject");
+		let detal = ` | ${deta}`;
+		if (!privacyMode) {
 
 			if (deta === null) detal = "";
 
@@ -111,7 +115,7 @@ presence.on("UpdateData", async () => {
 			}`;
 
 			presenceData.buttons = [{ label: "Watch Lecture", url: href }];
-		} else presenceData.details = "Watching a lecture";
+		} else presenceData.details = `Watching a lecture${detal}`;
 
 		[presenceData.startTimestamp, presenceData.endTimestamp] =
 			updateVideoTimestamps();
