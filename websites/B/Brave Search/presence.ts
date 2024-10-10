@@ -15,7 +15,8 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			details: "In Home",
 			state: privacy
-				? undefined
+				? // eslint-disable-next-line no-undefined
+				  undefined
 				: document.querySelector<HTMLInputElement>("#searchbox")?.value,
 		};
 
