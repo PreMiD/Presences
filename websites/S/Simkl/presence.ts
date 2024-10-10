@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/1m6HokC.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Simkl/assets/logo.png",
 }
 function textContent(tags: string) {
 	return document.querySelector(tags)?.textContent?.trim();
