@@ -15,10 +15,8 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		{ pathname, href, search } = document.location,
-		[
-			privacyMode,
-		] = await Promise.all([
-			presence.getSetting<boolean>("privacy")
+		[privacyMode] = await Promise.all([
+			presence.getSetting<boolean>("privacy"),
 		]);
 
 	if (pathname === "/") {
@@ -49,7 +47,6 @@ presence.on("UpdateData", async () => {
 			const deta = localStorage.getItem("dpp_subject");
 			let detal = ` | ${deta}`;
 			if (!privacyMode) {
-
 				if (deta === null) detal = "";
 				presenceData.details = `Watching Lecture${detal}`;
 
@@ -85,7 +82,8 @@ presence.on("UpdateData", async () => {
 		} else if (pathname.includes("open-pdf")) {
 			if (localStorage.getItem("dpp_subject")) {
 				presenceData.details = "Solving DPP (PDF)";
-				if (!privacyMode) presenceData.state = localStorage.getItem("dpp_subject");
+				if (!privacyMode)
+					presenceData.state = localStorage.getItem("dpp_subject");
 				else presenceData.state = "Improving skills";
 
 				presenceData.startTimestamp = browsingTimestamp;
@@ -94,7 +92,8 @@ presence.on("UpdateData", async () => {
 			}
 		} else if (pathname.includes("q-bank-exercise")) {
 			presenceData.details = "Solving DPP (MCQ)";
-			if (!privacyMode) presenceData.state = localStorage.getItem("dpp_subject");
+			if (!privacyMode)
+				presenceData.state = localStorage.getItem("dpp_subject");
 			else presenceData.state = "Improving skills";
 
 			presenceData.startTimestamp = browsingTimestamp;
@@ -105,7 +104,6 @@ presence.on("UpdateData", async () => {
 		const deta = localStorage.getItem("dpp_subject");
 		let detal = ` | ${deta}`;
 		if (!privacyMode) {
-
 			if (deta === null) detal = "";
 
 			presenceData.details = `Watching Lecture${detal}`;
