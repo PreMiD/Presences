@@ -16,9 +16,7 @@ presence.on("UpdateData", async () => {
 			type: ActivityType.Watching,
 		},
 		{ pathname, href, search } = document.location,
-		[privacyMode] = await Promise.all([
-			presence.getSetting<boolean>("privacy"),
-		]);
+		privacyMode = await presence.getSetting<boolean>("privacy");
 
 	if (pathname === "/") {
 		presenceData.details = "Home";
