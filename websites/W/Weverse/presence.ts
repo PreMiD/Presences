@@ -73,6 +73,20 @@ class Weverse extends Presence {
 				?.textContent?.trim() ?? "Unknown User"
 		);
 	}
+
+	getProfileName(): string {
+		return (
+			document
+				.querySelector("h3[class*=CommunityProfileInfoView_profile_name]")
+				?.textContent?.trim() ?? "Unknown User"
+		);
+	}
+
+	getProfileThumbnailUrl(): string | undefined {
+		return document.querySelector<HTMLImageElement>(
+			"a[class*=CommunityProfileInfoView_link_thumbnail] img"
+		)?.src;
+	}
 }
 
 const presence = new Weverse({
@@ -82,10 +96,11 @@ const presence = new Weverse({
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
-			"https://res.cloudinary.com/debvitdiw/image/upload/v1727852958/Presences/WeverseLogo.png",
+			"https://cdn.rcd.gg/PreMiD/websites/W/Weverse/assets/logo.png",
 	};
 
 	if (document.location.pathname.includes("/live/")) {
+		// Handling live stream pages
 		const thumbnailUrl = presence.getThumbnailUrl();
 		presenceData.details = presence.getStreamTitle();
 		presenceData.state = presence.getArtistName();
@@ -126,10 +141,9 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (thumbnailUrl) presenceData.largeImageKey = thumbnailUrl;
-	} else if (document.location.pathname === "/") {
+	} else if (document.location.pathname === "/")
 		presenceData.details = "Browsing Weverse";
-		presenceData.state = "On Homepage";
-	} else if (document.location.pathname.includes("/feed")) {
+	else if (document.location.pathname.includes("/feed")) {
 		presenceData.details = "Viewing Community Feed";
 		presenceData.state = presence.getCommunityName();
 
@@ -172,6 +186,20 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: `Visit ${presence.getCommunityName()} Media`,
+				url: document.location.href,
+			},
+		];
+	} else if (document.location.pathname.includes("/profile")) {
+		const profileName = presence.getProfileName();
+		presenceData.details = `Viewing Profile of ${profileName}`;
+		presenceData.state = `Community: ${presence.getCommunityName()}`;
+
+		const profileThumbnailUrl = presence.getProfileThumbnailUrl();
+		if (profileThumbnailUrl) presenceData.largeImageKey = profileThumbnailUrl;
+
+		presenceData.buttons = [
+			{
+				label: `Visit ${profileName}'s Profile`,
 				url: document.location.href,
 			},
 		];
