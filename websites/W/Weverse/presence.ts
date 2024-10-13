@@ -100,7 +100,6 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (document.location.pathname.includes("/live/")) {
-		// Handling live stream pages
 		const thumbnailUrl = presence.getThumbnailUrl();
 		presenceData.details = presence.getStreamTitle();
 		presenceData.state = presence.getArtistName();
@@ -117,7 +116,7 @@ presence.on("UpdateData", async () => {
 			];
 		} else if (video) {
 			if (video.paused) {
-				presenceData.smallImageKey = Assets.Play;
+				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "Paused";
 			} else {
 				presenceData.smallImageKey = Assets.Live;
