@@ -263,7 +263,7 @@ interface MediaInfo {
 
 interface ServerLatest {
 	ManualAddress: string;
-	ManualAddressOnly: Boolean;
+	ManualAddressOnly: boolean;
 	IsLocalServer: true;
 	UserId: string;
 	DateLastAccessed: number;
@@ -391,7 +391,7 @@ function handleOfficialWebsite(): void {
  */
 async function getApiClient() {
 	const actualData = await presence.getPageVariable("ApiClient");
-	return actualData["ApiClient"] as ApiClient;
+	return actualData.ApiClient as ApiClient;
 }
 
 /**
@@ -534,17 +534,16 @@ async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
 		}
 	}
 	const url =
-		`${embyBasenameURL()}emby/Users/${getUserId()}/Items/${itemId.replace(
-			/\//gm,
-			""
-		)}?` +
-		`X-Emby-Client=${ApiClient._appName.replace(/ /gm, "_")}&` +
-		`X-Emby-Device-Name=${ApiClient._deviceName}&` +
-		`X-Emby-Device-Id=${ApiClient._deviceId}&` +
-		`X-Emby-Client-Version=${ApiClient._appVersion}&` +
-		`X-Emby-Token=${accessToken}`;
-
-	const res = await fetch(url.replace(/ /gm, "_")),
+			`${embyBasenameURL()}emby/Users/${getUserId()}/Items/${itemId.replace(
+				/\//gm,
+				""
+			)}?` +
+			`X-Emby-Client=${ApiClient._appName.replace(/ /gm, "_")}&` +
+			`X-Emby-Device-Name=${ApiClient._deviceName}&` +
+			`X-Emby-Device-Id=${ApiClient._deviceId}&` +
+			`X-Emby-Client-Version=${ApiClient._appVersion}&` +
+			`X-Emby-Token=${accessToken}`,
+		res = await fetch(url.replace(/ /gm, "_")),
 		mediaInfo: MediaInfo = await res.json();
 
 	mediaInfoCache.set(itemId, mediaInfo);
