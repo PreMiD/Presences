@@ -202,6 +202,7 @@ presence.on("UpdateData", async () => {
 				url: document.location.href,
 			},
 		];
+
 	}
 
 	presence.setActivity(presenceData);
