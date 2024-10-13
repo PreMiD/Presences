@@ -21,7 +21,6 @@ class Weverse extends Presence {
 						node.matches("[class*=LiveBadgeView_badge]")
 					)
 			);
-
 			return (
 				titleTextNodes
 					.map(node => node.textContent)
@@ -115,13 +114,8 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		} else if (video) {
-			if (video.paused) {
-				presenceData.smallImageKey = Assets.Pause;
-				presenceData.smallImageText = "Paused";
-			} else {
-				presenceData.smallImageKey = Assets.Live;
-				presenceData.smallImageText = "Live";
-			}
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Live;
+			presenceData.smallImageText = video.paused ? "Paused" : "Live";
 			presenceData.buttons = [
 				{
 					label: `Visit ${presence.getArtistName()} Live`,
@@ -158,7 +152,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/artist")) {
 		presenceData.details = "Viewing Artist";
 		presenceData.state = presence.getArtistPageName();
-
 		presenceData.buttons = [
 			{
 				label: `Visit ${presence.getArtistPageName()} Artist`,
@@ -181,7 +174,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/media")) {
 		presenceData.details = "Viewing Media";
 		presenceData.state = presence.getCommunityName();
-
 		presenceData.buttons = [
 			{
 				label: `Visit ${presence.getCommunityName()} Media`,
@@ -202,7 +194,6 @@ presence.on("UpdateData", async () => {
 				url: document.location.href,
 			},
 		];
-
 	}
 
 	presence.setActivity(presenceData);
