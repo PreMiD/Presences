@@ -544,7 +544,6 @@ async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
 		`X-Emby-Client-Version=${ApiClient._appVersion}&` +
 		`X-Emby-Token=${accessToken}`;
 
-	console.log(url.replace(/ /gm, "_"));
 	const res = await fetch(url.replace(/ /gm, "_")),
 		mediaInfo: MediaInfo = await res.json();
 
