@@ -582,7 +582,7 @@ async function handleVideoPlayback(): Promise<void> {
 				?.backgroundImage
 		) ||
 		/\/[0-9]+\//.exec(
-			document.querySelector<HTMLVideoElement>(".htmlVideoPlayerContainer")?.src
+			document.querySelector<HTMLVideoElement>(".htmlVideoPlayer")?.src
 		);
 
 	if (!regexResult) {
@@ -663,6 +663,8 @@ async function handleItemDetails(): Promise<void> {
 	const data = await obtainMediaInfo(
 		new URLSearchParams(location.hash.split("?")[1]).get("id")
 	);
+	delete presenceData.startTimestamp;
+	delete presenceData.endTimestamp;
 
 	if (!data) {
 		presenceData.details = "Browsing details of an item";
@@ -718,6 +720,7 @@ async function handleWebClient(): Promise<void> {
 	if (
 		audioElement &&
 		audioElement.classList.contains("mediaPlayerAudio") &&
+		document.querySelector(".nowPlayingBarInfoContainer") &&
 		audioElement.src
 	) {
 		await handleAudioPlayback();
