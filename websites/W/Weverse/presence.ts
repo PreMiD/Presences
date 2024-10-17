@@ -21,7 +21,6 @@ class Weverse extends Presence {
 						node.matches("[class*=LiveBadgeView_badge]")
 					)
 			);
-
 			return (
 				titleTextNodes
 					.map(node => node.textContent)
@@ -73,6 +72,20 @@ class Weverse extends Presence {
 				?.textContent?.trim() ?? "Unknown User"
 		);
 	}
+
+	getProfileName(): string {
+		return (
+			document
+				.querySelector("h3[class*=CommunityProfileInfoView_profile_name]")
+				?.textContent?.trim() ?? "Unknown User"
+		);
+	}
+
+	getProfileThumbnailUrl(): string | undefined {
+		return document.querySelector<HTMLImageElement>(
+			"a[class*=CommunityProfileInfoView_link_thumbnail] img"
+		)?.src;
+	}
 }
 
 const presence = new Weverse({
@@ -101,13 +114,8 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		} else if (video) {
-			if (video.paused) {
-				presenceData.smallImageKey = Assets.Play;
-				presenceData.smallImageText = "Paused";
-			} else {
-				presenceData.smallImageKey = Assets.Live;
-				presenceData.smallImageText = "Live";
-			}
+			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Live;
+			presenceData.smallImageText = video.paused ? "Paused" : "Live";
 			presenceData.buttons = [
 				{
 					label: `Visit ${presence.getArtistName()} Live`,
@@ -126,10 +134,9 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (thumbnailUrl) presenceData.largeImageKey = thumbnailUrl;
-	} else if (document.location.pathname === "/") {
+	} else if (document.location.pathname === "/")
 		presenceData.details = "Browsing Weverse";
-		presenceData.state = "On Homepage";
-	} else if (document.location.pathname.includes("/feed")) {
+	else if (document.location.pathname.includes("/feed")) {
 		presenceData.details = "Viewing Community Feed";
 		presenceData.state = presence.getCommunityName();
 
@@ -145,7 +152,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/artist")) {
 		presenceData.details = "Viewing Artist";
 		presenceData.state = presence.getArtistPageName();
-
 		presenceData.buttons = [
 			{
 				label: `Visit ${presence.getArtistPageName()} Artist`,
@@ -168,10 +174,23 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/media")) {
 		presenceData.details = "Viewing Media";
 		presenceData.state = presence.getCommunityName();
-
 		presenceData.buttons = [
 			{
 				label: `Visit ${presence.getCommunityName()} Media`,
+				url: document.location.href,
+			},
+		];
+	} else if (document.location.pathname.includes("/profile")) {
+		const profileName = presence.getProfileName();
+		presenceData.details = `Viewing Profile of ${profileName}`;
+		presenceData.state = `Community: ${presence.getCommunityName()}`;
+
+		const profileThumbnailUrl = presence.getProfileThumbnailUrl();
+		if (profileThumbnailUrl) presenceData.largeImageKey = profileThumbnailUrl;
+
+		presenceData.buttons = [
+			{
+				label: `Visit ${profileName}'s Profile`,
 				url: document.location.href,
 			},
 		];
