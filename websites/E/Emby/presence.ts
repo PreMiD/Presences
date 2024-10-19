@@ -1,3 +1,4 @@
+import { compare } from "compare-versions";
 /*
  * The interfaces may have some things missing,
  * I've tried to set as many properties as I could find.
@@ -514,7 +515,7 @@ const mediaInfoCache = new Map<string, MediaInfo>();
 async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
 	if (mediaInfoCache.has(itemId)) return mediaInfoCache.get(itemId);
 	let ae, accessToken: string;
-	if (!version.includes("4.7")) {
+	if (compare(version, "4.7.0", ">")) {
 		ae = ApiClient._serverInfo as ServerLatest;
 		accessToken = ae?.Users?.[1]?.AccessToken;
 	} else {
@@ -525,7 +526,7 @@ async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
 	if (!accessToken) {
 		// refresh the ApiClient
 		ApiClient = await getApiClient();
-		if (!version.includes("4.7")) {
+		if (compare(version, "4.7.0", ">")) {
 			ae = ApiClient._serverInfo as ServerLatest;
 			accessToken = ae?.Users?.[1]?.AccessToken;
 		} else {
