@@ -48,9 +48,9 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = Assets.Logo;
 
 	if (
-		presenceData.smallImageKey == Assets.Play ||
-		presenceData.smallImageKey == Assets.Pause ||
-		presenceData.smallImageKey == Assets.Viewing
+		presenceData.smallImageKey === Assets.Play ||
+		presenceData.smallImageKey === Assets.Pause ||
+		presenceData.smallImageKey === Assets.Viewing
 	)
 		presenceData.type = ActivityType.Watching;
 
@@ -150,7 +150,7 @@ function getPageData(
 						details: `Reading ${formatText(page)}...`,
 						smallImageKey: Assets.Reading,
 					};
-				default:
+				default: {
 					// watching/viewing a stream
 					const streamer = document.querySelector(
 							".stream-username,#channel-username"
@@ -184,7 +184,7 @@ function getPageData(
 								JSON.parse(
 									document.querySelectorAll('[type="application/ld+json"]')?.[1]
 										?.textContent
-								)?.["broadcastOfEvent"]?.["name"] ?? "Unknown title",
+								)?.broadcastOfEvent?.name ?? "Unknown title",
 							state,
 							largeImageKey:
 								document.querySelector<HTMLImageElement>(".owner-avatar img")
@@ -193,7 +193,7 @@ function getPageData(
 							buttons,
 						};
 					} else if (streamer && titleEl?.includes("VOD")) {
-						let smallImageKey = "";
+						const smallImageKey = "";
 						return {
 							details: document.querySelector<HTMLMetaElement>(
 								'meta[name="description"]'
@@ -215,6 +215,7 @@ function getPageData(
 							details: "Browsing Kick...",
 						};
 					}
+				}
 			}
 		}
 		case "help.kick.com": {
