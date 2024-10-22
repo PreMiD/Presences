@@ -107,7 +107,6 @@ presence.on("UpdateData", async () => {
 			.split(/[”"]/);
 		presenceData.smallImageKey = Assets.Search;
 	}
-	console.log(presenceData);
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
