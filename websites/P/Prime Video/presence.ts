@@ -1,12 +1,11 @@
 const presence = new Presence({
-	clientId: "705139844883677224",
-}),
+		clientId: "705139844883677224",
+	}),
 	strings = presence.getStrings({
 		paused: "general.paused",
 		playing: "general.playing",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
-
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -16,10 +15,10 @@ presence.on("UpdateData", async () => {
 	};
 	presenceData.startTimestamp = browsingTimestamp;
 	const title: string =
-		document.querySelector(
-			".webPlayerSDKUiContainer > div > div > div > div:nth-child(2) > div > div:nth-child(4) > div > div:nth-child(2) > div:nth-child(2) > div > div > div > h1"
-		)?.textContent ||
-		document.querySelector(".atvwebplayersdk-title-text")?.textContent,
+			document.querySelector(
+				".webPlayerSDKUiContainer > div > div > div > div:nth-child(2) > div > div:nth-child(4) > div > div:nth-child(2) > div:nth-child(2) > div > div > div > h1"
+			)?.textContent ||
+			document.querySelector(".atvwebplayersdk-title-text")?.textContent,
 		title2: string =
 			document.querySelector(".av-detail-section > div > h1")?.textContent ||
 			document.querySelector<HTMLImageElement>(
@@ -75,7 +74,7 @@ presence.on("UpdateData", async () => {
 			} else {
 				const [startTimestamp, endTimestamp] = presence.getTimestamps(
 					video.currentTime,
-					video.duration,
+					video.duration
 				);
 				[presenceData.startTimestamp, presenceData.endTimestamp] = [
 					startTimestamp,

@@ -193,7 +193,6 @@ function getPageData(
 							buttons,
 						};
 					} else if (streamer && titleEl?.includes("VOD")) {
-						const smallImageKey = "";
 						return {
 							details: document.querySelector<HTMLMetaElement>(
 								'meta[name="description"]'
@@ -202,7 +201,7 @@ function getPageData(
 							largeImageKey:
 								document.querySelector<HTMLImageElement>(".owner-avatar img")
 									?.src,
-							smallImageKey,
+							smallImageKey: "",
 							buttons: [
 								{
 									label: "Watch Stream VOD",
