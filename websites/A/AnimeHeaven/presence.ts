@@ -54,12 +54,8 @@ const paths = {
 				: (await strings).play;
 
 			if (!video.paused) {
-				const [startTimestamp, endTimestamp] = presence.getTimestamps(
-					video.currentTime,
-					video.duration
-				);
-				presenceData.startTimestamp = startTimestamp;
-				presenceData.endTimestamp = endTimestamp;
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(video.currentTime, video.duration);
 			}
 
 			return !video.paused;

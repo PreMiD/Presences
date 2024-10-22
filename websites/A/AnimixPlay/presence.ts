@@ -30,15 +30,13 @@ presence.on("UpdateData", async () => {
 	presenceData.startTimestamp = browsingTimestamp;
 
 	if (href.startsWith("https://www1.animixplayer.top/")) {
-		const [startTimestamp, endTimestamp] = presence.getTimestamps(
+		const titleAndEpisode = document.querySelector(".animetitle").textContent;
+
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestamps(
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
-			),
-			titleAndEpisode = document.querySelector(".animetitle").textContent;
-
-		presenceData.startTimestamp = startTimestamp;
-		presenceData.endTimestamp = endTimestamp;
-
+			);
 		presenceData.details = `Watching ${titleAndEpisode.replace(
 			/Episode [0-9]+/,
 			""

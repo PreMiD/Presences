@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "वाह्य",
 		"id": "819696394180100106"
@@ -20,7 +21,7 @@
 		"comick.ink",
 		"comick.io"
 	],
-	"version": "1.2.9",
+	"version": "1.2.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/ComicK/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/ComicK/assets/thumbnail.png",
 	"color": "#f698c7",

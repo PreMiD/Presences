@@ -53,8 +53,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector("#adblMediaBarTimeSpent")?.textContent
 				)
 		);
-		presenceData.startTimestamp = chapterRemaining[0];
-		presenceData.endTimestamp = chapterRemaining[1];
+		[presenceData.startTimestamp, presenceData.endTimestamp] = chapterRemaining;
 		presenceData.largeImageKey = document
 			.querySelector("#adbl-cloudBook")
 			.getAttribute("src");

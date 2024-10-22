@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "nFin1ty",
 		"id": "131877010157862912"
@@ -10,7 +11,7 @@
 		"el_GR": "Το dod Games είναι ένα από τα πιο γνωστά site online παιχνιδιών και chatting στην Ελλάδα"
 	},
 	"url": "www.dod.gr",
-	"version": "1.1.8",
+	"version": "1.1.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/dod%20Games/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/dod%20Games/assets/thumbnail.png",
 	"color": "#008fec",

@@ -150,12 +150,11 @@ export default class PresenceCompiler {
 				);
 
 				if (job.error) throw job.error;
-
-				if (job.stats?.compilation.errors.length)
+				const { service } = require(resolve(presencePath, "metadata.json"));
+				if (job.stats?.compilation.errors.length) {
+					actions.info(chalk.red(`Failed to compile ${service || presence}`));
 					errors.push(...(job.stats?.compilation?.errors || []));
-				else {
-					const { service } = require(resolve(presencePath, "metadata.json"));
-
+				} else {
 					actions.info(
 						chalk.green(`Successfully compiled ${service || presence}`)
 					);
@@ -256,8 +255,8 @@ export interface Metadata {
 	description: { [lang: string]: string };
 	url: `${string}.${string}` | `${string}.${string}`[];
 	regExp?: string;
-	matches?: string[];
 	version: `${number}.${number}.${number}`;
+	apiVersion: number;
 	logo: `https://i.imgur.com/${string}.${ImageTypes}`;
 	thumbnail: `https://i.imgur.com/${string}.${ImageTypes}`;
 	color: `#${string}`;
@@ -265,7 +264,6 @@ export interface Metadata {
 	category: string;
 	iframe?: boolean;
 	iFrameRegExp?: string;
-	iFrameMatches?: string[];
 	readLogs?: boolean;
 	settings?:
 		| Setting

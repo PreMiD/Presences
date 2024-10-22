@@ -92,7 +92,7 @@ presence.on("UpdateData", async () => {
 						delete presenceData.endTimestamp;
 						presenceData.smallImageKey = Assets.Pause;
 					}
-					[, presenceData.endTimestamp] =
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
 						presence.getTimestampsfromMedia(video);
 					presenceData.details = document.querySelector(
 						'[class="vjs-top-bar-title"]'

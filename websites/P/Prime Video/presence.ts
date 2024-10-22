@@ -59,8 +59,10 @@ presence.on("UpdateData", async () => {
 					video.currentTime,
 					video.duration
 				);
-				presenceData.startTimestamp = startTimestamp;
-				presenceData.endTimestamp = endTimestamp;
+				[presenceData.startTimestamp, presenceData.endTimestamp] = [
+					startTimestamp,
+					endTimestamp,
+				];
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = (await strings).playing;
 			}
@@ -75,8 +77,10 @@ presence.on("UpdateData", async () => {
 					video.currentTime,
 					video.duration,
 				);
-				presenceData.startTimestamp = startTimestamp;
-				presenceData.endTimestamp = endTimestamp;
+				[presenceData.startTimestamp, presenceData.endTimestamp] = [
+					startTimestamp,
+					endTimestamp,
+				];
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = (await strings).playing;
 			}

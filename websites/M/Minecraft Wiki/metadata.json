@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "193714715631812608",
 		"name": "theusaf"
@@ -18,11 +19,7 @@
 		"th": "ยินดีต้อนรับเข้าสู่วิกิที่มีเนื้อหาครอบคลุมที่สุดเกี่ยวกับแฟรนไชส์ Minecraft! วิกิแห่งนี้เป็นเว็บไซต์ที่ขับเคลื่อนโดยชุมชน เข้าถึงได้อย่างสาธารณะ และสามารถแก้ไขได้ ทุกคนสามารถมีส่วนร่วมในการพัฒนาวิกิแห่งนี้"
 	},
 	"url": "minecraft.wiki",
-	"matches": [
-		"*://minecraft.wiki/*",
-		"*://*.minecraft.wiki/*"
-	],
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Minecraft%20Wiki/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Minecraft%20Wiki/assets/thumbnail.png",
 	"color": "#3776A9",

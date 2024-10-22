@@ -177,10 +177,12 @@ presence.on("UpdateData", async () => {
 					: isPlaylistLoop
 					? "Playlist on loop"
 					: strings.play,
-				endTimestamp: adjustTimeError(
-					presence.getTimestampsfromMedia(video)[1],
-					0.75
-				),
+				endTimestamp: !video?.paused
+					? adjustTimeError(presence.getTimestampsfromMedia(video)[1], 0.75)
+					: -1,
+				startTimestamp: !video?.paused
+					? adjustTimeError(presence.getTimestampsfromMedia(video)[0], 0.75)
+					: -1,
 			};
 
 		if (vidState.includes("{0}")) delete presenceData.state;
@@ -251,7 +253,6 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = YouTubeAssets.Shorts;
 			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
-			delete presenceData.endTimestamp;
 		}
 
 		if (!presenceData.details) presence.setActivity();

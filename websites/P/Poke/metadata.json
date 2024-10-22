@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "ashley",
 		"id": "396571938081865741"
@@ -13,12 +14,7 @@
 		"poke.ggtyler.dev",
 		"poke.vern.cc"
 	],
-	"matches": [
-		"*://poketube.fun/*",
-		"*://poke.vern.cc/*",
-		"*://poke.ggtyler.dev/*"
-	],
-	"version": "1.0.3",
+	"version": "1.0.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Poke/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Poke/assets/thumbnail.png",
 	"color": "#414161",

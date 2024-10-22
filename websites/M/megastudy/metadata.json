@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "1LUXION",
 		"id": "249098414674018304"
@@ -13,7 +14,7 @@
 		"en": "Megastudy is a South Korean online education service company. Through its headquarters and affiliates, it is conducting publishing content projects, online and offline education projects, group meals projects, and investment projects for elementary, middle and high school students and ordinary adults."
 	},
 	"url": "www.megastudy.net",
-	"version": "1.0.19",
+	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/megastudy/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/megastudy/assets/thumbnail.png",
 	"color": "#0082ff",

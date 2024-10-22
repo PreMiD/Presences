@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "356827694572503051",
 		"name": "xela"
@@ -12,7 +13,7 @@
 		"3388.to",
 		"www.3388.to"
 	],
-	"version": "1.0.6",
+	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/0-9/3388/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/0-9/3388/assets/thumbnail.png",
 	"color": "#c13f34",

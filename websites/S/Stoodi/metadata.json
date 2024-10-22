@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "890325980126789663",
 		"name": "Luiz ♡"
@@ -11,7 +12,7 @@
 	},
 	"url": "www.stoodi.com.br",
 	"regExp": "([a-z0-9]+)[.]stoodi[.]com[.]br",
-	"version": "1.0.7",
+	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Stoodi/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Stoodi/assets/thumbnail.png",
 	"color": "#004EFF",

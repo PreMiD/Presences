@@ -48,9 +48,8 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = (await strings).paused;
 		} else {
 			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-			presenceData.endTimestamp = Math.floor(
-				presenceData.startTimestamp + (video.duration - video.currentTime)
-			);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestampsfromMedia(video);
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = (await strings).playing;
 		}

@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets { // Other default assets can be found at index.d.ts
-	Logo = "https://codeberg.org/Codeberg/Design/raw/commit/ac514aa9aaa2457d4af3c3e13df3ab136d22a49a/logo/icon/png/codeberg-logo_icon_blue-512x512.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Codeberg/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {

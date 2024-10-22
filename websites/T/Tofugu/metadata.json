@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "theusaf",
 		"id": "193714715631812608"
@@ -12,7 +13,7 @@
 		"www.tofugu.com",
 		"kana-quiz.tofugu.com"
 	],
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tofugu/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tofugu/assets/thumbnail.jpg",
 	"color": "#EE0144",

@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Chihiro Fujisaki",
 		"id": "560183438393737264"
@@ -12,7 +13,7 @@
 		"picoctf.org",
 		"play.picoctf.org"
 	],
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/picoCTF/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/picoCTF/assets/thumbnail.png",
 	"color": "#9b1e33",

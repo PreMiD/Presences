@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 								'[name="og:image"]'
 							).content;
 						if (!video.paused) {
-							[, presenceData.endTimestamp] =
+							[presenceData.startTimestamp, presenceData.endTimestamp] =
 								presence.getTimestampsfromMedia(video);
 							presenceData.smallImageKey = Assets.Play;
 						} else presenceData.smallImageKey = Assets.Pause;
@@ -117,7 +117,7 @@ presence.on("UpdateData", async () => {
 								'[name="og:image"]'
 							).content;
 						if (!video.paused) {
-							[, presenceData.endTimestamp] =
+							[presenceData.startTimestamp, presenceData.endTimestamp] =
 								presence.getTimestampsfromMedia(video);
 							presenceData.smallImageKey = Assets.Play;
 						} else presenceData.smallImageKey = Assets.Pause;

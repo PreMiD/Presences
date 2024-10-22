@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "815513219120103424",
 		"name": "emberantz"
@@ -13,7 +14,7 @@
 		"awtwa.site",
 		"www.awtwa.site"
 	],
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AWTWA/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AWTWA/assets/thumbnail.png",
 	"color": "#c084fc",

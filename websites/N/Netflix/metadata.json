@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Timeraa",
 		"id": "223238938716798978"
@@ -55,10 +56,7 @@
 		"www.netflix.com",
 		"netflix.com"
 	],
-	"matches": [
-		"*://*.netflix.com/*"
-	],
-	"version": "6.0.1",
+	"version": "6.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/thumbnail.jpg",
 	"color": "#db0000",

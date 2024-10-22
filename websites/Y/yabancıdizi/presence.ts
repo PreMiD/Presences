@@ -172,8 +172,10 @@ presence.on("UpdateData", async () => {
 				};
 
 			if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
-				presenceData.startTimestamp = startTimestamp;
-				presenceData.endTimestamp = endTimestamp;
+				[presenceData.startTimestamp, presenceData.endTimestamp] = [
+					startTimestamp,
+					endTimestamp,
+				];
 			}
 			if (video.paused) {
 				delete presenceData.startTimestamp;
@@ -203,8 +205,10 @@ presence.on("UpdateData", async () => {
 						: (await strings).play,
 				};
 
-			presenceData.startTimestamp = startTimestamp;
-			presenceData.endTimestamp = endTimestamp;
+			[presenceData.startTimestamp, presenceData.endTimestamp] = [
+				startTimestamp,
+				endTimestamp,
+			];
 
 			if (video.paused) {
 				delete presenceData.startTimestamp;
@@ -242,8 +246,10 @@ presence.on("UpdateData", async () => {
 				};
 
 			if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
-				presenceData.startTimestamp = startTimestamp;
-				presenceData.endTimestamp = endTimestamp;
+				[presenceData.startTimestamp, presenceData.endTimestamp] = [
+					startTimestamp,
+					endTimestamp,
+				];
 			}
 			if (video.paused) {
 				delete presenceData.startTimestamp;
@@ -274,8 +280,10 @@ presence.on("UpdateData", async () => {
 				};
 
 			if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
-				presenceData.startTimestamp = startTimestamp;
-				presenceData.endTimestamp = endTimestamp;
+				[presenceData.startTimestamp, presenceData.endTimestamp] = [
+					startTimestamp,
+					endTimestamp,
+				];
 			}
 			if (video.paused) {
 				delete presenceData.startTimestamp;

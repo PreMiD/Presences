@@ -83,8 +83,10 @@ presence.on("UpdateData", async () => {
 				!video.paused &&
 				!document.location.pathname.startsWith("/canli-yayin")
 			) {
-				presenceData.startTimestamp = startTimestamp;
-				presenceData.endTimestamp = endTimestamp;
+				[presenceData.startTimestamp, presenceData.endTimestamp] = [
+					startTimestamp,
+					endTimestamp,
+				];
 			}
 		}
 	} else {
