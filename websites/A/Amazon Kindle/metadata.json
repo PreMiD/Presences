@@ -7,13 +7,12 @@
 	},
 	"service": "Amazon Kindle",
 	"description": {
-		"en": "Access and read millions of titles instantly and comfortably on your phone, tablet, or computer."
+		"en": "Access and read millions of titles instantly and comfortably on your phone, tablet, or computer.",
+		"fr": "Accédez et lisez des millions de titres instantanément et confortablement sur votre téléphone, tablette ou ordinateur."
 	},
-	"url": [
-		"lesen.amazon.de",
-		"read.amazon.com"
-	],
-	"version": "1.0.7",
+	"url": "read.amazon.com",
+	"regExp": "(lire|read|leggi|leer|lesen|ler|lezen).amazon.[a-z]{2,3}([.][a-z]{2,3})?",
+	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Amazon%20Kindle/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Amazon%20Kindle/assets/thumbnail.jpg",
 	"color": "#FDEE00",
