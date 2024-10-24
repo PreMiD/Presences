@@ -86,17 +86,51 @@ class Weverse extends Presence {
 			"a[class*=CommunityProfileInfoView_link_thumbnail] img"
 		)?.src;
 	}
+
+	getFanPostNickname(): string {
+		const nicknameElement = document.querySelector(
+			"#modal [class*=PostHeaderView_nickname]"
+		);
+		if (nicknameElement) {
+			const tempDiv = document.createElement("div");
+			tempDiv.innerHTML = nicknameElement.innerHTML;
+
+			for (const el of Array.from(tempDiv.querySelectorAll("em, span")))
+				el.remove();
+
+			return tempDiv.textContent?.trim() ?? "Unknown User";
+		}
+		return "Unknown User";
+	}
+
+	getFanPostThumbnailUrl(): string | undefined {
+		return document.querySelector<HTMLImageElement>(
+			"#modal [class*=ProfileThumbnailView_thumbnail] img"
+		)?.src;
+	}
 }
 
 const presence = new Weverse({
-	clientId: "1284048129414402109",
-});
+		clientId: "1284048129414402109",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+let strings: Record<string, string>;
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/W/Weverse/assets/logo.png",
-	};
+	const privacy = await presence.getSetting<boolean>("privacy"),
+		showButtons = await presence.getSetting<boolean>("buttons"),
+		presenceData: PresenceData = {
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Weverse/assets/logo.png",
+			startTimestamp: browsingTimestamp,
+		};
+
+	if (privacy) {
+		presence.setActivity(presenceData);
+		return;
+	}
 
 	if (document.location.pathname.includes("/live/")) {
 		const thumbnailUrl = presence.getThumbnailUrl();
@@ -107,30 +141,36 @@ presence.on("UpdateData", async () => {
 		if (document.querySelector("[class*=LiveBadgeView_-replay]") !== null) {
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Replay";
-			presenceData.buttons = [
-				{
-					label: `Watch ${presence.getArtistName()} Replay`,
-					url: document.location.href,
-				},
-			];
+			if (showButtons) {
+				presenceData.buttons = [
+					{
+						label: `Watch ${presence.getArtistName()} Replay`,
+						url: document.location.href,
+					},
+				];
+			}
 		} else if (video) {
 			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Live;
 			presenceData.smallImageText = video.paused ? "Paused" : "Live";
-			presenceData.buttons = [
-				{
-					label: `Visit ${presence.getArtistName()} Live`,
-					url: document.location.href,
-				},
-			];
+			if (showButtons) {
+				presenceData.buttons = [
+					{
+						label: `Visit ${presence.getArtistName()} Live`,
+						url: document.location.href,
+					},
+				];
+			}
 		} else {
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Playing";
-			presenceData.buttons = [
-				{
-					label: `Watch ${presence.getArtistName()} Replay`,
-					url: document.location.href,
-				},
-			];
+			if (showButtons) {
+				presenceData.buttons = [
+					{
+						label: `Watch ${presence.getArtistName()} Replay`,
+						url: document.location.href,
+					},
+				];
+			}
 		}
 
 		if (thumbnailUrl) presenceData.largeImageKey = thumbnailUrl;
@@ -139,62 +179,31 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.includes("/feed")) {
 		presenceData.details = "Viewing Community Feed";
 		presenceData.state = presence.getCommunityName();
-
 		const communityImageUrl = presence.getCommunityImageUrl();
 		if (communityImageUrl) presenceData.largeImageKey = communityImageUrl;
-
-		presenceData.buttons = [
-			{
-				label: `Visit ${presence.getCommunityName()} Feed`,
-				url: document.location.href,
-			},
-		];
 	} else if (document.location.pathname.includes("/artist")) {
 		presenceData.details = "Viewing Artist";
 		presenceData.state = presence.getArtistPageName();
-		presenceData.buttons = [
-			{
-				label: `Visit ${presence.getArtistPageName()} Artist`,
-				url: document.location.href,
-			},
-		];
 	} else if (document.location.pathname.includes("/moment")) {
 		presenceData.details = "Viewing Moment";
 		presenceData.state = presence.getMomentNickname();
-
 		const momentThumbnailUrl = presence.getMomentThumbnailUrl();
 		if (momentThumbnailUrl) presenceData.largeImageKey = momentThumbnailUrl;
-
-		presenceData.buttons = [
-			{
-				label: `Visit ${presence.getMomentNickname()} Moment`,
-				url: document.location.href,
-			},
-		];
 	} else if (document.location.pathname.includes("/media")) {
 		presenceData.details = "Viewing Media";
 		presenceData.state = presence.getCommunityName();
-		presenceData.buttons = [
-			{
-				label: `Visit ${presence.getCommunityName()} Media`,
-				url: document.location.href,
-			},
-		];
 	} else if (document.location.pathname.includes("/profile")) {
-		const profileName = presence.getProfileName();
-		presenceData.details = `Viewing Profile of ${profileName}`;
+		presenceData.details = `Viewing Profile of ${presence.getProfileName()}`;
 		presenceData.state = `Community: ${presence.getCommunityName()}`;
-
 		const profileThumbnailUrl = presence.getProfileThumbnailUrl();
 		if (profileThumbnailUrl) presenceData.largeImageKey = profileThumbnailUrl;
-
-		presenceData.buttons = [
-			{
-				label: `Visit ${profileName}'s Profile`,
-				url: document.location.href,
-			},
-		];
+	} else if (document.location.pathname.includes("/fanpost/")) {
+		presenceData.details = "Viewing Fan Post";
+		presenceData.state = presence.getFanPostNickname();
+		const fanPostThumbnailUrl = presence.getFanPostThumbnailUrl();
+		if (fanPostThumbnailUrl) presenceData.largeImageKey = fanPostThumbnailUrl;
 	}
 
-	presence.setActivity(presenceData);
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
