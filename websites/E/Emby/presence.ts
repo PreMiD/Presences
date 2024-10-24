@@ -1,7 +1,12 @@
+import { compare } from "compare-versions";
 /*
  * The interfaces may have some things missing,
  * I've tried to set as many properties as I could find.
  */
+let version: string,
+	showMediaTimestamp = false;
+
+const uploadedMediaCache = new Map<string, string>();
 
 interface ApiClient {
 	enableAutomaticBitrateDetection: boolean;
@@ -86,7 +91,7 @@ interface ApiClient {
 		IsLocal: boolean;
 	};
 	_serverAddress: string;
-	_serverInfo: Server;
+	_serverInfo: Server | ServerLatest;
 	_serverVersion: string;
 	_webSocket: {
 		binaryType: string;
@@ -257,6 +262,30 @@ interface MediaInfo {
 	Height: number;
 }
 
+interface ServerLatest {
+	ManualAddress: string;
+	ManualAddressOnly: boolean;
+	IsLocalServer: true;
+	UserId: string;
+	DateLastAccessed: number;
+	LastConnectionMode: number;
+	Type: string;
+	Name: string;
+	Id: string;
+	Users: [
+		{
+			UserId: string;
+			AccessToken: string;
+		},
+		{
+			UserId: string;
+			AccessToken: string;
+		}
+	];
+	LocalAddress: string;
+	RemoteAddress: string;
+}
+
 interface Server {
 	AccessToken: string;
 	DateLastAccessed: number; // timestamp
@@ -291,6 +320,27 @@ const // official website
 	};
 
 let presence: Presence, ApiClient: ApiClient;
+
+async function createImageBlob() {
+	const largeImageKey = presenceData.largeImageKey as string;
+	if (isPrivateIP(largeImageKey)) {
+		if (uploadedMediaCache.has(largeImageKey))
+			presenceData.largeImageKey = uploadedMediaCache.get(largeImageKey);
+		else {
+			await fetch(largeImageKey)
+				.then(res => res.blob())
+				.then(blob => {
+					const reader = new FileReader();
+					reader.readAsDataURL(blob);
+					reader.onloadend = () => {
+						const result = reader.result as string;
+						uploadedMediaCache.set(largeImageKey, result);
+						presenceData.largeImageKey = result;
+					};
+				});
+		}
+	}
+}
 
 /**
  * handleOfficialWebsite - handle the presence while the user is in the official website
@@ -341,7 +391,8 @@ function handleOfficialWebsite(): void {
  * @return {ApiClient} ApiClient object
  */
 async function getApiClient() {
-	return presence.getPageletiable<ApiClient>("ApiClient");
+	const actualData = await presence.getPageVariable("ApiClient");
+	return actualData.ApiClient as ApiClient;
 }
 
 /**
@@ -382,6 +433,7 @@ function mediaPrimaryImage(mediaId: string): string {
 async function handleAudioPlayback(): Promise<void> {
 	// sometimes the buttons are not created fast enough
 	try {
+		presenceData.type = ActivityType.Listening;
 		const audioElement = document.querySelector<HTMLAudioElement>("audio"),
 			regexResult = /\/Audio\/(\w+)\/universal/.exec(audioElement.src);
 
@@ -399,15 +451,17 @@ async function handleAudioPlayback(): Promise<void> {
 			// some songs might not have albumart
 			document.querySelector<HTMLDivElement>(".nowPlayingBarImage").style
 				.backgroundImage
-		)
+		) {
 			presenceData.largeImageKey = mediaPrimaryImage(mediaId);
+			createImageBlob();
+		}
 
 		// playing
 		if (!audioElement.paused) {
 			presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
 			presenceData.smallImageText = "Playing";
 
-			if (await presence.getSetting<boolean>("showMediaTimestamps")) {
+			if (showMediaTimestamp) {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestampsfromMedia(audioElement);
 			} else delete presenceData.endTimestamp;
@@ -460,24 +514,37 @@ const mediaInfoCache = new Map<string, MediaInfo>();
  */
 async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
 	if (mediaInfoCache.has(itemId)) return mediaInfoCache.get(itemId);
-
-	let { AccessToken: accessToken } = ApiClient._serverInfo;
+	let ae, accessToken: string;
+	if (compare(version, "4.7.0", ">")) {
+		ae = ApiClient._serverInfo as ServerLatest;
+		accessToken = ae?.Users?.[1]?.AccessToken;
+	} else {
+		ae = ApiClient._serverInfo as Server;
+		accessToken = ae?.AccessToken;
+	}
 
 	if (!accessToken) {
 		// refresh the ApiClient
 		ApiClient = await getApiClient();
-
-		({ AccessToken: accessToken } = ApiClient._serverInfo);
+		if (compare(version, "4.7.0", ">")) {
+			ae = ApiClient._serverInfo as ServerLatest;
+			accessToken = ae?.Users?.[1]?.AccessToken;
+		} else {
+			ae = ApiClient._serverInfo as Server;
+			accessToken = ae?.AccessToken;
+		}
 	}
-
-	const res = await fetch(
-			`${embyBasenameURL()}emby/Users/${getUserId()}/Items/${itemId}?` +
-				`X-Emby-Client=${ApiClient._appName}&` +
-				`X-Emby-Device-Name=${ApiClient._deviceName}&` +
-				`X-Emby-Device-Id=${ApiClient._deviceId}&` +
-				`X-Emby-Client-Version=${ApiClient._appVersion}&` +
-				`X-Emby-Token=${accessToken}`
-		),
+	const url =
+			`${embyBasenameURL()}emby/Users/${getUserId()}/Items/${itemId.replace(
+				/\//gm,
+				""
+			)}?` +
+			`X-Emby-Client=${ApiClient._appName.replace(/ /gm, "_")}&` +
+			`X-Emby-Device-Name=${ApiClient._deviceName}&` +
+			`X-Emby-Device-Id=${ApiClient._deviceId}&` +
+			`X-Emby-Client-Version=${ApiClient._appVersion}&` +
+			`X-Emby-Token=${accessToken}`,
+		res = await fetch(url.replace(/ /gm, "_")),
 		mediaInfo: MediaInfo = await res.json();
 
 	mediaInfoCache.set(itemId, mediaInfo);
@@ -489,12 +556,15 @@ async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
  * handleVideoPlayback - handles the presence when the user is using the video player
  */
 async function handleVideoPlayback(): Promise<void> {
-	const videoPlayerPage = document.querySelector("[data-type='video-osd']");
+	const videoPlayerPage =
+		document.querySelector("[data-type='video-osd']") ||
+		document.querySelector(".htmlVideoPlayerContainer");
 
 	if (videoPlayerPage === null) {
 		// elements not loaded yet
 		return;
 	}
+	getApiClient();
 
 	const videoPlayerElem = document.querySelector<HTMLVideoElement>("video");
 
@@ -503,23 +573,31 @@ async function handleVideoPlayback(): Promise<void> {
 		subtitle,
 		largeImage = PRESENCE_ART_ASSETS.logo;
 
-	const regexResult = /\/Items\/(\d+)\//.exec(
-		document.querySelector<HTMLDivElement>(".pageTitle").style.backgroundImage
-	);
+	const regexResult =
+		/\/Items\/(\d+)\//.exec(
+			document.querySelector<HTMLDivElement>(".pageTitle")?.style
+				.backgroundImage
+		) ||
+		/\/Items\/(\d+)\//.exec(
+			document.querySelector<HTMLDivElement>(".itemBackdrop")?.style
+				?.backgroundImage
+		) ||
+		/\/[0-9]+\//.exec(
+			document.querySelector<HTMLVideoElement>(".htmlVideoPlayer")?.src
+		);
 
 	if (!regexResult) {
 		presence.error("Could not obtain video itemId");
 		return;
 	}
 
-	const mediaInfo = await obtainMediaInfo(regexResult[1]);
+	const mediaInfo = await obtainMediaInfo(regexResult[1] || regexResult[0]);
 
 	// display generic info
-	if (!mediaInfo) {
+	if (!mediaInfo || typeof mediaInfo === "string") {
 		title = "Watching unknown content";
 		subtitle = "No metadata could be obtained";
-	} else if (typeof mediaInfo === "string") return;
-	else {
+	} else {
 		switch (mediaInfo.Type) {
 			case "Movie":
 				title = "Watching a Movie";
@@ -546,34 +624,36 @@ async function handleVideoPlayback(): Promise<void> {
 		}
 
 		presenceData.largeImageKey = largeImage;
+		createImageBlob();
 
 		// watching live tv
 		if (mediaInfo && mediaInfo.Type === "TvChannel") {
+			presenceData.type = ActivityType.Watching;
 			presenceData.smallImageKey = PRESENCE_ART_ASSETS.live;
 			presenceData.smallImageText = "Live TV";
 
 			// playing
 		} else if (!videoPlayerElem.paused) {
+			presenceData.type = ActivityType.Watching;
 			presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
 			presenceData.smallImageText = "Playing";
 
-			if (await presence.getSetting<boolean>("showMediaTimestamps")) {
+			if (showMediaTimestamp) {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestampsfromMedia(videoPlayerElem);
 			} else delete presenceData.endTimestamp;
 
 			// paused
 		} else {
+			presenceData.type = ActivityType.Watching;
 			presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
 			presenceData.smallImageText = "Paused";
 
 			delete presenceData.endTimestamp;
 		}
 	}
-
 	presenceData.details = title;
 	presenceData.state = subtitle;
-
 	if (!presenceData.state) delete presenceData.state;
 }
 
@@ -584,6 +664,8 @@ async function handleItemDetails(): Promise<void> {
 	const data = await obtainMediaInfo(
 		new URLSearchParams(location.hash.split("?")[1]).get("id")
 	);
+	delete presenceData.startTimestamp;
+	delete presenceData.endTimestamp;
 
 	if (!data) {
 		presenceData.details = "Browsing details of an item";
@@ -639,6 +721,7 @@ async function handleWebClient(): Promise<void> {
 	if (
 		audioElement &&
 		audioElement.classList.contains("mediaPlayerAudio") &&
+		document.querySelector(".nowPlayingBarInfoContainer") &&
 		audioElement.src
 	) {
 		await handleAudioPlayback();
@@ -731,10 +814,10 @@ async function handleWebClient(): Promise<void> {
 			await handleItemDetails();
 			break;
 
-		case "videoosd/videoosd.html":
+		case "videoosd/videoosd.html": {
 			await handleVideoPlayback();
 			break;
-
+		}
 		default:
 			if (path.substr(0, 3) !== "dlg") presence.info(`path: ${path}`);
 	}
@@ -763,9 +846,17 @@ async function setDefaultsToPresence(): Promise<void> {
  * updateData - tick function, this is called several times a second by UpdateData event
  */
 async function updateData(): Promise<void> {
+	showMediaTimestamp = await presence.getSetting<boolean>(
+		"showMediaTimestamps"
+	);
 	await setDefaultsToPresence();
 
 	let showPresence = false;
+
+	const tempversion =
+		ApiClient?._appVersion ?? (await getApiClient())?._appVersion;
+
+	if (!version || version !== tempversion) version = tempversion;
 
 	// we are on the official emby page
 	if (location.host.toLowerCase() === EMBY_URL) {
@@ -787,6 +878,9 @@ async function updateData(): Promise<void> {
 
 	// if emby is detected init/update the presence status
 	if (showPresence) {
+		if (!presenceData.largeImageKey)
+			presenceData.largeImageKey = PRESENCE_ART_ASSETS.logo;
+
 		if (!presenceData.details) presence.setActivity();
 		else presence.setActivity(presenceData);
 	}
@@ -830,10 +924,15 @@ async function init(): Promise<void> {
 		presence = new Presence({
 			clientId: "671807692297207828",
 		});
-
-		if (isWebClient) presence.info("Emby web client detected");
-
 		presence.on("UpdateData", updateData);
+		if (isWebClient) presence.info("Emby web client detected");
 	}
 }
+
+function isPrivateIP(ip: string): boolean {
+	return /^http:\/\/(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.|127\.0\.0\.1|localhost)/.test(
+		ip
+	);
+}
+
 init();
