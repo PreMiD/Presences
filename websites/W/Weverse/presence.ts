@@ -115,9 +115,6 @@ const presence = new Weverse({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-let strings: Record<string, string>;
-
 presence.on("UpdateData", async () => {
 	const privacy = await presence.getSetting<boolean>("privacy"),
 		showButtons = await presence.getSetting<boolean>("buttons"),
