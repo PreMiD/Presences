@@ -42,10 +42,11 @@ presence.on("UpdateData", async () => {
 
 	if (Object.keys(staticPages).includes(pathArr[1]) && pathArr.length <= 3) {
 		presenceData.details = staticPages[pathArr[1]];
-		if (privacyMode)
-			presenceData.details = "Navigue...";
+		if (privacyMode) presenceData.details = "Navigue...";
 	} else if (pathArr.length === 4) {
-		const pageTitle = document.querySelector("h2.border-slate-500")?.textContent;
+		const pageTitle = document.querySelector(
+			"h2.border-slate-500"
+		)?.textContent;
 		presenceData.details =
 			pageTitle === "Anime"
 				? "Regarde la page de l'anime"
