@@ -30,7 +30,7 @@
 		"vostfr"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*((sendvid)|(sibnet)|(myvi)).*",
+	"iFrameRegExp": ".*",
 	"settings": [
 		{
 			"id": "buttons",

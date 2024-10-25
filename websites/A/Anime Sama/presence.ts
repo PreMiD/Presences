@@ -12,19 +12,18 @@ const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Sama/assets/logo.png",
 }
 
-interface IFrameData {
-	duration: number;
-	currentTime: number;
-	paused: boolean;
-}
+let video = {
+	duration: 0,
+	currentTime: 0,
+	paused: true,
+};
 
-let duration: number,
-	currentTime: number,
-	paused = true;
-
-presence.on("iFrameData", (data: IFrameData) => {
-	({ duration, currentTime, paused } = data);
-});
+presence.on(
+	"iFrameData",
+	(data: { duration: number; currentTime: number; paused: boolean }) => {
+		if (data?.duration) video = data;
+	}
+);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -73,21 +72,28 @@ presence.on("UpdateData", async () => {
 		presenceData.details = `Regarde ${
 			document.querySelector("#titreOeuvre").textContent
 		}`;
+		const [startTimestamp, endTimestamp] = presence.getTimestamps(
+			video.currentTime,
+			video.duration
+		);
 		presenceData.state = `${season ? `${season} - ` : ""}${
 			selectEps.options[selectEps.selectedIndex].value
 		}`;
 
 		presenceData.buttons = [{ label: "Voir l'Anime", url: href }];
-		presenceData.smallImageKey = Assets.Pause;
+		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText =
 			selectLecteur.options[selectLecteur.selectedIndex].value;
 		presenceData.largeImageKey =
 			document.querySelector<HTMLMetaElement>("[property='og:image']")
 				?.content ?? Assets.Logo;
-		if (!paused) {
-			[presenceData.startTimestamp, presenceData.endTimestamp] =
-				presence.getTimestamps(currentTime, duration);
-			presenceData.smallImageKey = Assets.Play;
+		[presenceData.startTimestamp, presenceData.endTimestamp] = [
+			startTimestamp,
+			endTimestamp,
+		];
+		if (video.paused) {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
 		}
 		if (privacyMode) {
 			delete presenceData.state;
