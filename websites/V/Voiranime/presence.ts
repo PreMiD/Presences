@@ -47,11 +47,14 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-	const [newLang, privacyMode, showButtons] = await Promise.all([
-		presence.getSetting<string>("lang").catch(() => "en"),
-		presence.getSetting<boolean>("privacy"),
-		presence.getSetting<boolean>("buttons"),
-	]);
+	const [newLang, privacyMode, showTimestamps, showButtons] = await Promise.all(
+		[
+			presence.getSetting<string>("lang").catch(() => "en"),
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("timestamps"),
+			presence.getSetting<boolean>("buttons"),
+		]
+	);
 
 	if (currentLang !== newLang || !strings) {
 		currentLang = newLang;
@@ -154,6 +157,10 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (!showButtons || privacyMode) delete presenceData.buttons;
+	if (!showTimestamps) {
+		delete presenceData.startTimestamp;
+		delete presenceData.endTimestamp;
+	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

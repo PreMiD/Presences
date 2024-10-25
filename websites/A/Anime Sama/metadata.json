@@ -45,6 +45,12 @@
 			"value": false
 		},
 		{
+			"id": "timestamps",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
 			"id": "cover",
 			"title": "Show Cover",
 			"icon": "fad fa-images",

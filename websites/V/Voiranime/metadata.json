@@ -52,6 +52,12 @@
 			"value": false
 		},
 		{
+			"id": "timestamps",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
 			"id": "buttons",
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",

@@ -33,9 +33,10 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, href } = document.location,
 		pathArr = pathname.split("/"),
-		[showButtons, privacyMode, showCover] = await Promise.all([
+		[showButtons, privacyMode, showTimestamps, showCover] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("timestamps"),
 			presence.getSetting<boolean>("cover"),
 		]);
 
@@ -125,6 +126,10 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (!showButtons || privacyMode) delete presenceData.buttons;
+	if (!showTimestamps) {
+		delete presenceData.startTimestamp;
+		delete presenceData.endTimestamp;
+	}
 	if (!showCover || privacyMode) presenceData.largeImageKey = Assets.Logo;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
