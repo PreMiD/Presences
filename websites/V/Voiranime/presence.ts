@@ -49,7 +49,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const [newLang, privacyMode, showTimestamps, showButtons] = await Promise.all(
 		[
-			presence.getSetting<string>("lang").catch(() => "en"),
+			presence.getSetting<string>("lang").catch(() => "fr"),
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("timestamps"),
 			presence.getSetting<boolean>("buttons"),
