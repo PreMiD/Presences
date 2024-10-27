@@ -4,7 +4,7 @@ const presence = new Presence({ clientId: "1016797607370162256" }),
 		"": "Visionne la page d'accueil",
 		planning: "Regarde le planning des sorties",
 		aide: "Lit la page d'aide",
-		profil: "visionne son profil",
+		profil: "Visionne son profil",
 		catalogue: "Parcourir le catalogue",
 	};
 
