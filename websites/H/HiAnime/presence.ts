@@ -1,6 +1,10 @@
 const presence = new Presence({
 		clientId: "1127962521609973881",
 	}),
+	strings = presence.getStrings({
+		play: "general.playing",
+		pause: "general.paused",
+	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let data: {
@@ -31,6 +35,7 @@ presence.on("UpdateData", async () => {
 			name: "HiAnime",
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
+			type: ActivityType.Watching,
 		},
 		{ pathname, href } = document.location,
 		buttons = await presence.getSetting<boolean>("buttons");
@@ -147,7 +152,13 @@ presence.on("UpdateData", async () => {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestamps(data.currTime, data.duration);
 			presenceData.smallImageKey = Assets.Play;
-		} else if (data) presenceData.smallImageKey = Assets.Pause;
+			presenceData.smallImageText = (await strings).play;
+		} else if (data) {
+			presenceData.smallImageKey = Assets.Pause;
+			presenceData.smallImageText = (await strings).pause;
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+		}
 
 		if (buttons) {
 			presenceData.buttons = [
