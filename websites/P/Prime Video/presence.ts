@@ -55,18 +55,15 @@ presence.on("UpdateData", async () => {
 				delete presenceData.startTimestamp;
 			} else {
 				const [unformattedCurrentTime, unformattedDuration] = document
-						.querySelector(".atvwebplayersdk-timeindicator-text")
-						.textContent.trim()
-						.split(" / "),
-					[startTimestamp, endTimestamp] = presence.getTimestamps(
-						timeToSeconds(unformattedCurrentTime),
-						timeToSeconds(unformattedDuration) +
-							timeToSeconds(unformattedCurrentTime)
+					.querySelector(".atvwebplayersdk-timeindicator-text")
+					.textContent.trim()
+					.split(" / ");
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(
+						presence.timestampFromFormat(unformattedCurrentTime),
+						presence.timestampFromFormat(unformattedDuration) +
+							presence.timestampFromFormat(unformattedCurrentTime)
 					);
-				[presenceData.startTimestamp, presenceData.endTimestamp] = [
-					startTimestamp,
-					endTimestamp,
-				];
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = (await strings).playing;
 			}
@@ -78,18 +75,15 @@ presence.on("UpdateData", async () => {
 				delete presenceData.startTimestamp;
 			} else {
 				const [unformattedCurrentTime, unformattedDuration] = document
-						.querySelector(".atvwebplayersdk-timeindicator-text")
-						.textContent.trim()
-						.split(" / "),
-					[startTimestamp, endTimestamp] = presence.getTimestamps(
-						timeToSeconds(unformattedCurrentTime),
-						timeToSeconds(unformattedDuration) +
-							timeToSeconds(unformattedCurrentTime)
+					.querySelector(".atvwebplayersdk-timeindicator-text")
+					.textContent.trim()
+					.split(" / ");
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(
+						presence.timestampFromFormat(unformattedCurrentTime),
+						presence.timestampFromFormat(unformattedDuration) +
+							presence.timestampFromFormat(unformattedCurrentTime)
 					);
-				[presenceData.startTimestamp, presenceData.endTimestamp] = [
-					startTimestamp,
-					endTimestamp,
-				];
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = (await strings).playing;
 			}
@@ -123,11 +117,3 @@ presence.on("UpdateData", async () => {
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
-function timeToSeconds(timeStr: string) {
-	const timeParts = timeStr.split(":").map(Number).reverse();
-	let seconds = 0;
-	if (timeParts.length >= 1) seconds += timeParts[0];
-	if (timeParts.length >= 2) seconds += timeParts[1] * 60;
-	if (timeParts.length === 3) seconds += timeParts[2] * 3600;
-	return seconds;
-}
