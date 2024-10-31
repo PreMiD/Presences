@@ -79,8 +79,10 @@ export async function getMetadata<T>(
 	if (now - getCacheTime(key) > 1000) {
 		setCacheTime(key, now);
 		const data = await getPageVariable<T>(`gameui.${key}`, presence, isString);
-		setCachedItem(key, data);
-		return data;
+		if (data) {
+			setCachedItem(key, data);
+			return data;
+		} else return "" as T;
 	} else return getCachedItem(key) as T;
 }
 

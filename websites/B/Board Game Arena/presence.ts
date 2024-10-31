@@ -35,12 +35,18 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "tutorial": {
-			const game = getGame(await getGameTag(presence));
-			presenceData.details = `Playing tutorial for ${await getMetadata<string>(
-				presence,
-				"game_name_displayed",
-				true
-			)}`;
+			const game = getGame(await getGameTag(presence)),
+				metadata = await getMetadata<string>(
+					presence,
+					"game_name_displayed",
+					true
+				);
+			presenceData.details = `Playing tutorial for ${
+				metadata ??
+				document
+					.querySelector("meta[property='og:title']")
+					?.getAttribute("content")
+			}`;
 			presenceData.largeImageKey = game.logo;
 			Object.assign(presenceData, await game.getData(presence));
 			break;
@@ -119,12 +125,18 @@ presence.on("UpdateData", async () => {
 		}
 		default: {
 			if (/^\d+$/.test(pathList[0])) {
-				const game = getGame(await getGameTag(presence));
-				presenceData.details = `Playing ${await getMetadata<string>(
-					presence,
-					"game_name_displayed",
-					true
-				)}`;
+				const game = getGame(await getGameTag(presence)),
+					metadata = await getMetadata<string>(
+						presence,
+						"game_name_displayed",
+						true
+					);
+				presenceData.details = `Playing ${
+					metadata ??
+					document
+						.querySelector("meta[property='og:title']")
+						?.getAttribute("content")
+				}`;
 				presenceData.largeImageKey = game.logo;
 				Object.assign(presenceData, await game.getData(presence));
 				break;
