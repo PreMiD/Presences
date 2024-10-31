@@ -49,15 +49,20 @@ presence.on("UpdateData", async () => {
 			)
 				presenceData.state = subtitle.textContent;
 
-			if (video.paused) {
+			if (video.paused || document.querySelector("button[aria-label=Play]")) {
 				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = (await strings).paused;
 				delete presenceData.startTimestamp;
 			} else {
-				const [startTimestamp, endTimestamp] = presence.getTimestamps(
-					video.currentTime,
-					video.duration
-				);
+				const [unformattedCurrentTime, unformattedDuration] = document
+						.querySelector(".atvwebplayersdk-timeindicator-text")
+						.textContent.trim()
+						.split(" / "),
+					[startTimestamp, endTimestamp] = presence.getTimestamps(
+						timeToSeconds(unformattedCurrentTime),
+						timeToSeconds(unformattedDuration) +
+							timeToSeconds(unformattedCurrentTime)
+					);
 				[presenceData.startTimestamp, presenceData.endTimestamp] = [
 					startTimestamp,
 					endTimestamp,
@@ -67,15 +72,21 @@ presence.on("UpdateData", async () => {
 			}
 		} else if (video && !video.className.includes("tst")) {
 			if (title2 !== "") presenceData.details = title2;
-			if (video.paused) {
+			if (video.paused || document.querySelector("button[aria-label=Play]")) {
 				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = (await strings).paused;
 				delete presenceData.startTimestamp;
+				delete presenceData.endTimestamp;
 			} else {
-				const [startTimestamp, endTimestamp] = presence.getTimestamps(
-					video.currentTime,
-					video.duration
-				);
+				const [unformattedCurrentTime, unformattedDuration] = document
+						.querySelector(".atvwebplayersdk-timeindicator-text")
+						.textContent.trim()
+						.split(" / "),
+					[startTimestamp, endTimestamp] = presence.getTimestamps(
+						timeToSeconds(unformattedCurrentTime),
+						timeToSeconds(unformattedDuration) +
+							timeToSeconds(unformattedCurrentTime)
+					);
 				[presenceData.startTimestamp, presenceData.endTimestamp] = [
 					startTimestamp,
 					endTimestamp,
@@ -113,3 +124,11 @@ presence.on("UpdateData", async () => {
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
+function timeToSeconds(timeStr: string) {
+	const timeParts = timeStr.split(":").map(Number).reverse();
+	let seconds = 0;
+	if (timeParts.length >= 1) seconds += timeParts[0];
+	if (timeParts.length >= 2) seconds += timeParts[1] * 60;
+	if (timeParts.length === 3) seconds += timeParts[2] * 3600;
+	return seconds;
+}
