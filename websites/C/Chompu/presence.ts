@@ -15,7 +15,7 @@ const enum Pages {
 }
 
 const presenceData: PresenceData = {
-	type: ActivityType.Watching,
+	type: ActivityType.Listening,
 	largeImageKey: Assets.Logo,
 };
 
