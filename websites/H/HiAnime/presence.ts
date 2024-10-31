@@ -35,7 +35,6 @@ presence.on("UpdateData", async () => {
 			name: "HiAnime",
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
-			type: ActivityType.Watching,
 		},
 		{ pathname, href } = document.location,
 		buttons = await presence.getSetting<boolean>("buttons");
@@ -120,7 +119,8 @@ presence.on("UpdateData", async () => {
 
 			presenceData.largeImageKey = thumbnail;
 			presenceData.details = "In a room";
-			if (filmName) presenceData.state = `Watching ${filmName.textContent}`;
+			presenceData.type = ActivityType.Watching;
+			if (filmName) presenceData.state = `${filmName.textContent}`;
 			if (data && !data.paused) {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestamps(data.currTime, data.duration);
@@ -148,16 +148,19 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = thumbnail;
 		if (title) presenceData.details = title.textContent;
 		if (episode) presenceData.state = `Episode ${episode.textContent}`;
-		if (data && !data.paused) {
-			[presenceData.startTimestamp, presenceData.endTimestamp] =
-				presence.getTimestamps(data.currTime, data.duration);
-			presenceData.smallImageKey = Assets.Play;
-			presenceData.smallImageText = (await strings).play;
-		} else if (data) {
-			presenceData.smallImageKey = Assets.Pause;
-			presenceData.smallImageText = (await strings).pause;
-			delete presenceData.startTimestamp;
-			delete presenceData.endTimestamp;
+		if (data) {
+			presenceData.type = ActivityType.Watching;
+			if (!data.paused) {
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(data.currTime, data.duration);
+				presenceData.smallImageKey = Assets.Play;
+				presenceData.smallImageText = (await strings).play;
+			} else {
+				presenceData.smallImageKey = Assets.Pause;
+				presenceData.smallImageText = (await strings).pause;
+				delete presenceData.startTimestamp;
+				delete presenceData.endTimestamp;
+			}
 		}
 
 		if (buttons) {
