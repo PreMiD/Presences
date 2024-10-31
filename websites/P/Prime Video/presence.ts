@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
 			)
 				presenceData.state = subtitle.textContent;
 
-			if (video.paused || document.querySelector("button[aria-label=Play]")) {
+			if (video.paused) {
 				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = (await strings).paused;
 				delete presenceData.startTimestamp;
@@ -72,11 +72,10 @@ presence.on("UpdateData", async () => {
 			}
 		} else if (video && !video.className.includes("tst")) {
 			if (title2 !== "") presenceData.details = title2;
-			if (video.paused || document.querySelector("button[aria-label=Play]")) {
+			if (video.paused) {
 				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = (await strings).paused;
 				delete presenceData.startTimestamp;
-				delete presenceData.endTimestamp;
 			} else {
 				const [unformattedCurrentTime, unformattedDuration] = document
 						.querySelector(".atvwebplayersdk-timeindicator-text")
