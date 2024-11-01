@@ -51,7 +51,9 @@ presence.on("UpdateData", async () => {
 			presenceData.details = `Watching ${
 				document.querySelector(".seoWidget.d-none")?.textContent ?? "?"
 			}`;
-			presenceData.largeImageKey = document.querySelector(".anime-thumbnail-img").getAttribute("src");
+			presenceData.largeImageKey = document
+				.querySelector(".anime-thumbnail-img")
+				.getAttribute("src");
 
 			presenceData.state = `Episode ${
 				isNaN(currentEpisodeNumber) || !currentEpisodeNumber
