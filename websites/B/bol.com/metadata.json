@@ -5,6 +5,12 @@
 		"name": "QkeleQ10",
 		"id": "807917674477649943"
 	},
+	"contributors": [
+		{
+			"id": "638080361179512853",
+			"name": "Dark_Ville"
+		}
+	],
 	"service": "bol.com",
 	"description": {
 		"en": "Bol.com is a webshop in the Netherlands and Belgium offering over 20 million products.",
@@ -12,7 +18,7 @@
 		"vi_VN": "Bol.com là cửa hàng trực tuyến của Hà Lan và Bỉ cung cấp hơn 20 triệu sản phẩm."
 	},
 	"url": "www.bol.com",
-	"version": "1.1.11",
+	"version": "1.2.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/bol.com/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/bol.com/assets/thumbnail.png",
 	"color": "#0000a4",
@@ -26,5 +32,31 @@
 		"nederland",
 		"belgium",
 		"belgië"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fas fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
+			"id": "covers",
+			"title": "Show Cover",
+			"icon": "fad fa-images",
+			"value": false,
+			"if": {
+				"privacy": false
+			}
+		}
 	]
 }
