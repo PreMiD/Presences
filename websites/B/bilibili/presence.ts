@@ -12,8 +12,6 @@ let uploader: HTMLElement,
 	duration: number,
 	timestamps: number[];
 
-const multiUploader = document.querySelector("div.membersinfo-normal");
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
@@ -48,49 +46,53 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
+	async function setVideoStatus() {
+		if (privacy) {
+			presenceData.details = "Watching a video";
+			return;
+		}
+
+		getTimestamps();
+
+		if (document.querySelector("div.membersinfo-normal")) {
+			uploader = document.querySelector(".staff-name");
+
+			uploaderName = `${uploader.textContent.trim()} + ${
+				parseInt(
+					document
+						.querySelector(".staff-amt")
+						.textContent.trim()
+						.replaceAll("人", "")
+				) - 1
+			} more`;
+		} else {
+			uploader = document.querySelector(".up-name");
+			// "\n      <USERNAME>\n      " -> "<USERNAME>"
+			uploaderName = uploader.textContent.trim();
+		}
+
+		uploaderLink = uploader.getAttribute("href");
+		title = document.querySelector(".video-title");
+
+		presenceData.details = title.getAttribute("title");
+		presenceData.state = uploaderName;
+		presenceData.buttons = [
+			{
+				label: "Watch Video", // getString() later
+				url: `https://www.bilibili.com/video/${urlpath[2]}`,
+			},
+			{
+				label: "View Space", // getString() later
+				url: `https:${uploaderLink}`,
+			},
+		];
+	}
+
 	switch (document.location.hostname) {
 		case "www.bilibili.com": {
 			switch (urlpath[1]) {
 				case "video": {
-					if (privacy) {
-						presenceData.details = "Watching a video";
-						break;
-					}
-
-					getTimestamps();
-
-					if (multiUploader) {
-						uploader = document.querySelector(".staff-name");
-
-						uploaderName = `${uploader.textContent.trim()} + ${
-							parseInt(
-								document
-									.querySelector(".staff-amt")
-									.textContent.trim()
-									.replaceAll("人", "")
-							) - 1
-						} more`;
-					} else {
-						uploader = document.querySelector(".up-name");
-						// "\n      <USERNAME>\n      " -> "<USERNAME>"
-						uploaderName = uploader.textContent.trim();
-					}
-
-					uploaderLink = uploader.getAttribute("href");
-					title = document.querySelector(".video-title");
-
-					presenceData.details = title.getAttribute("title");
-					presenceData.state = uploaderName;
-					presenceData.buttons = [
-						{
-							label: "Watch Video", // getString() later
-							url: `https://www.bilibili.com/video/${urlpath[2]}`,
-						},
-						{
-							label: "View Space", // getString() later
-							url: `https:${uploaderLink}`,
-						},
-					];
+					setVideoStatus();
 					break;
 				}
 				case "opus": {
@@ -135,7 +137,7 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 					if (urlpath[2] === "watchlater") {
-						presenceData.details = "Watching a watch later playlist";
+						setVideoStatus();
 						break;
 					}
 					getTimestamps();
@@ -161,6 +163,7 @@ presence.on("UpdateData", async () => {
 				}
 				default: {
 					presenceData.startTimestamp = browsingTimestamp;
+					presenceData.details = "Viewing the homepage";
 					break;
 				}
 			}
@@ -208,6 +211,20 @@ presence.on("UpdateData", async () => {
 					url: `https://live.bilibili.com/${urlpath[1]}`,
 				},
 			];
+			break;
+		}
+		case "search.bilibili.com": {
+			if (privacy) {
+				presenceData.details = "Searching for something";
+				break;
+			}
+			presenceData.details = `Searching for ${document
+				.querySelector(".search-input-el")
+				.getAttribute("value")}`;
+			presenceData.state = `Browsing ${
+				document.querySelector(".vui_tabs--nav-item-active").textContent
+			} Category`;
+			presenceData.startTimestamp = browsingTimestamp;
 			break;
 		}
 	}
