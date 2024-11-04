@@ -11,7 +11,7 @@
 		"th": "Chompu คือ แอปดิสคอร์ดที่มาพร้อมด้วยระบบสตรีมเล่นเพลงที่รองรับสตรีมเล่นเพลงหลายแพลตฟอร์ม Joox, TikTok, BiliBili, BiliBiliTV, VKMusic, Facebook Watch, TIDALMusic, AmazonMusic, Deezer, Nico, AppleMusic, Spotify, Soundcloud, Clyp, PornHub และอื่นๆอีกมากมาย!"
 	},
 	"url": "chompubot.work",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://cdn.chompubot.work/images/chompu/logo.png",
 	"thumbnail": "https://cdn.chompubot.work/images/chompu/thumbnail.png",
 	"color": "#ffbcff",
