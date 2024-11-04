@@ -1,6 +1,10 @@
 const presence = new Presence({
 		clientId: "1127962521609973881",
 	}),
+	strings = presence.getStrings({
+		play: "general.playing",
+		pause: "general.paused",
+	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 let data: {
@@ -115,7 +119,8 @@ presence.on("UpdateData", async () => {
 
 			presenceData.largeImageKey = thumbnail;
 			presenceData.details = "In a room";
-			if (filmName) presenceData.state = `Watching ${filmName.textContent}`;
+			presenceData.type = ActivityType.Watching;
+			if (filmName) presenceData.state = `${filmName.textContent}`;
 			if (data && !data.paused) {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestamps(data.currTime, data.duration);
@@ -143,11 +148,20 @@ presence.on("UpdateData", async () => {
 		presenceData.largeImageKey = thumbnail;
 		if (title) presenceData.details = title.textContent;
 		if (episode) presenceData.state = `Episode ${episode.textContent}`;
-		if (data && !data.paused) {
-			[presenceData.startTimestamp, presenceData.endTimestamp] =
-				presence.getTimestamps(data.currTime, data.duration);
-			presenceData.smallImageKey = Assets.Play;
-		} else if (data) presenceData.smallImageKey = Assets.Pause;
+		if (data) {
+			presenceData.type = ActivityType.Watching;
+			if (!data.paused) {
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(data.currTime, data.duration);
+				presenceData.smallImageKey = Assets.Play;
+				presenceData.smallImageText = (await strings).play;
+			} else {
+				presenceData.smallImageKey = Assets.Pause;
+				presenceData.smallImageText = (await strings).pause;
+				delete presenceData.startTimestamp;
+				delete presenceData.endTimestamp;
+			}
+		}
 
 		if (buttons) {
 			presenceData.buttons = [
