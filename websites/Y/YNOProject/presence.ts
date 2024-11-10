@@ -1,4 +1,5 @@
-async function fetchBlob(blob: Blob) {
+/** We still need this function for inspecting what format the image is in */
+async function blob2dataurl(blob: Blob) {
 	return new Promise<string>((resolve, reject) => {
 		const reader = new FileReader();
 		reader.addEventListener("load", () => resolve(String(reader.result)));
@@ -8,32 +9,29 @@ async function fetchBlob(blob: Blob) {
 }
 
 /**
- * Read live favicon of character face in game, or the cutie one at the portal.
- * Both sizes are 16 x 16 and encoded in Base64 Data URL.
+ * Read live favicon of character face in game.
+ * Size is 16 x 16 and encoded in Base64 Data URL.
+ *
+ * @returns Base64 URL or nothing at the portal
  */
-async function fetchFavIcon() {
-	return Promise.resolve(
-		(document.querySelector("#favicon") as HTMLLinkElement | null)?.href ||
-			"/favicon.ico"
-	)
-		.then(fetch)
-		.then(rsp => rsp.blob())
-		.then(fetchBlob);
+async function fetchFavIcon(): Promise<string | void> {
+	const el = document.querySelector("#favicon") as HTMLLinkElement | null;
+	return el?.href ? blob2dataurl(await (await fetch(el.href)).blob()) : void 0;
 }
 
 /**
- * What will match is the game name
- * @example "Yume 2kki - YNOproject".match(it)?.[0] // Yume 2kki
+ * What is the name of playing game, or nothing at the portal
+ * @example "Yume 2kki Online - YNOproject".match(it)?.[0] // Yume 2kki
  */
-
-/** @returns The original game or fan game, or nothing at the portal */
 async function fetchGameName(): Promise<string | void> {
 	return (
 		document.querySelector("title") as HTMLElement | null
-	)?.textContent?.match(RegExp("^.+(?= -)"))?.[0];
+	)?.textContent?.match(RegExp("^.+(?= Online -)"))?.[0];
 }
 
-/** Read current location in game */
+/**
+ * Read current location within the game.
+ */
 async function fetchGameLocation(): Promise<string | void> {
 	return (document.querySelector("#locationText") as HTMLElement | null)
 		?.textContent;
@@ -48,7 +46,11 @@ class GameState {
 	}
 }
 
-const presence = new Presence({ clientId: "1304833580291063848" });
+const PresenceAssets = {
+		Name: "YNOProject",
+		Logo: "https://imgur.com/2LD3PQV.png",
+	},
+	presence = new Presence({ clientId: "1304833580291063848" });
 // const strings = presence.getStrings({
 // 	play: "presence.playback.playing",
 // 	pause: "presence.playback.paused",
@@ -60,18 +62,20 @@ presence.on("UpdateData", async () => {
 		GameState.resetWith(gameName);
 
 	const presenceData: PresenceData = {
-		name: "YNOProject",
+		name: PresenceAssets.Name,
 		type: ActivityType.Playing,
 		startTimestamp: GameState.startedAt,
-		largeImageKey: await fetchFavIcon(),
+		largeImageKey: await fetchFavIcon().then(url => url || PresenceAssets.Logo),
+		details: gameName || "Choosing a game...",
 		buttons: gameName
 			? [{ label: `Play ${gameName}`, url: location.href }]
 			: void 0,
-		details: gameName || "Choosing a game...",
 		state: await Promise.resolve(gameLocation).then(loc => {
 			return loc ? `Location: ${loc}` : "Disconnected";
 		}),
 	};
+
+	// presence.success(String(JSON.stringify(presenceData)));
 
 	presence.setActivity(presenceData);
 });
