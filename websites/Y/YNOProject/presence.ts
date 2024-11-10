@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 		startTimestamp: GameState.startedAt,
 		largeImageKey: await fetchFavIcon().then(url => url || PresenceAssets.Logo),
 		details: gameName || "Choosing a game...",
-		state: gameName ? gameLocation ?? "Disconnected" : void 0,
+		state: gameName ? gameLocation || "Disconnected" : void 0,
 		buttons: gameName
 			? [{ label: `Play ${gameName}`, url: location.href }]
 			: void 0,
