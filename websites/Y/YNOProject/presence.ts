@@ -91,7 +91,7 @@ async function fetchBadge(): Promise<string | void> {
  */
 async function fetchGameName(): Promise<string | void> {
 	return document
-		.querySelector<HTMLElement>("title")
+		.querySelector("title")
 		?.textContent?.match(RegExp("^.+(?= Online -)"))?.[0];
 }
 
@@ -99,7 +99,7 @@ async function fetchGameName(): Promise<string | void> {
  * Read current location within the game.
  */
 async function fetchGameLocation(): Promise<string | void> {
-	return document.querySelector<HTMLElement>("#locationText")?.textContent;
+	return document.querySelector("#locationText")?.textContent;
 }
 
 class GameState {
@@ -127,7 +127,7 @@ async function fetchWithResizePixelatedImage(
 		canvas = document.createElement("canvas");
 	return new Promise((resolve, reject) => {
 		img.style.imageRendering = "pixelated";
-		img.onload = () => resolve(img);
+		img.onload = resolve;
 		img.onerror = reject;
 		img.src = href;
 	}).then(() => {
