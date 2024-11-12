@@ -273,8 +273,6 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (!showBrowsing) return presence.clearActivity();
-
 	presenceData.type = ActivityType.Listening;
 	presence.setActivity(presenceData);
 });
