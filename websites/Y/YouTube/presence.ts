@@ -400,7 +400,11 @@ presence.on("UpdateData", async () => {
 							// When viewing a community post
 							document.querySelector<HTMLImageElement>(
 								"#author-thumbnail > a > yt-img-shadow > img"
-							)
+							) ??
+							// When viewing a channel on the normal channel page
+							document
+								.querySelector(".yt-spec-avatar-shape")
+								?.querySelector("img")
 						)?.src.replace(/=s[0-9]+/, "=s512") ?? YouTubeAssets.Logo;
 					if (channelImg) presenceData.largeImageKey = channelImg;
 				}
