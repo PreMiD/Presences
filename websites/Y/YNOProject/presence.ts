@@ -1,12 +1,8 @@
-const PresenceAssets = {
+const { Name, Logo } = {
 		Name: "YNOProject",
 		Logo: "https://imgur.com/2LD3PQV.png",
 	},
 	presence = new Presence({ clientId: "1304833580291063848" });
-// const strings = presence.getStrings({
-// 	play: "presence.playback.playing",
-// 	pause: "presence.playback.paused",
-// });
 presence.on("UpdateData", async () => {
 	const gameName = await fetchGameName(),
 		gameLocation = await fetchGameLocation();
@@ -14,48 +10,79 @@ presence.on("UpdateData", async () => {
 		GameState.resetWith(gameName);
 
 	const presenceData: PresenceData = {
-		name: PresenceAssets.Name,
+		name: Name,
 		type: ActivityType.Playing,
 		startTimestamp: GameState.startedAt,
-		largeImageKey: await fetchFavIcon().then(url => url || PresenceAssets.Logo),
+		largeImageText: gameName || void 0,
+		largeImageKey: await fetchCharacterFace().then(url => url || Logo),
+		smallImageKey: await fetchBadge().then(url => url || void 0),
 		details: gameName || "Choosing a game...",
 		state: gameName ? gameLocation || "Disconnected" : void 0,
 		buttons: gameName
-			? [{ label: `Play ${gameName}`, url: location.href }]
+			? [{ label: `Play ${gameName}`, url: document.location.href }]
 			: void 0,
 	};
-
-	// presence.success(String(JSON.stringify(presenceData)));
 
 	presence.setActivity(presenceData);
 });
 
-/** Cache store of characters' faces, will clear on reset game */
-const characterFaceCaches = new Map<string, string>();
+/**
+ * Cache store of images, will clear on reset game.
+ * Consists of characters' faces urls start with "blob",
+ * and regular urls start with "http|https".
+ *
+ * Clear on reset game.
+ */
+const imageCaches = new Map<string, string>();
 
 /**
  * Read live favicon of character face in game.
  * Size is scaled up from 16 to 40 to be sharper
- * and encoded in Data URL.
+ * and encoded in Data URL (~800 bytes).
  *
  * @returns Data URL or nothing at the portal
  */
-async function fetchFavIcon(): Promise<string | void> {
-	const url = (
-		document.querySelector("#favicon") as HTMLLinkElement | undefined
-	)?.href;
-	if (url && characterFaceCaches.has(url)) {
-		// cache hit
-		return characterFaceCaches.get(url);
-	} else if (url) {
-		// build cahe
-		await SingleTaskExecutor.shared.postIfAbsent(url, async () => {
-			// presence.success(String("begin fetchWithResizePixelatedImage with " + url));
-
+async function fetchCharacterFace(): Promise<string | void> {
+	const url = document.querySelector<HTMLLinkElement>("#favicon")?.href;
+	if (url && imageCaches.has(url)) return imageCaches.get(url);
+	else if (url) {
+		return await SingleTaskExecutor.shared.postIfAbsent(url, async () => {
 			const blob = await fetchWithResizePixelatedImage(url, 40, 40);
-			if (blob) characterFaceCaches.set(url, await blob2dataurl(blob));
+			if (blob) {
+				return blob2dataurl(blob).then(optimizedImage => {
+					imageCaches.set(url, optimizedImage);
+					return optimizedImage;
+				});
+			}
 		});
-		return characterFaceCaches.get(url);
+	}
+}
+
+/**
+ * Read equipped badge of current sign-in player.
+ * Size is 37 and encoded in Data URL.
+ * (Surprisingly Discord supports GIFs in small image so it's no need to resample)
+ *
+ * @example 'url("star-transparent.gif")'.match(it)?.[2] // star-transparent.gif
+ * @example "url('https://example.org/me.png')".match(it)?.[2] // https://example.org/me.png
+ * @returns Entire URL or nothing for guest player
+ */
+async function fetchBadge(): Promise<string | void> {
+	if (!document.querySelector("#content")?.classList?.contains("loggedIn"))
+		return;
+	const badgeEl = document.querySelector<HTMLElement>("#badgeButton .badge"),
+		url = badgeEl?.style?.backgroundImage; // Gives path as segmented url only
+	if (url && imageCaches.has(url)) return imageCaches.get(url);
+	else if (url) {
+		return await SingleTaskExecutor.shared.postIfAbsent(url, async () => {
+			const fullUrl = window
+				.getComputedStyle(badgeEl)
+				.backgroundImage.match(
+					RegExp("(?:url)\\((\"|')([^\\1\\s]+)\\1\\)")
+				)?.[2];
+			imageCaches.set(url, fullUrl);
+			return fullUrl;
+		});
 	}
 }
 
@@ -64,17 +91,16 @@ async function fetchFavIcon(): Promise<string | void> {
  * @example "Yume 2kki Online - YNOproject".match(it)?.[0] // Yume 2kki
  */
 async function fetchGameName(): Promise<string | void> {
-	return (
-		document.querySelector("title") as HTMLElement | null
-	)?.textContent?.match(RegExp("^.+(?= Online -)"))?.[0];
+	return document
+		.querySelector<HTMLElement>("title")
+		?.textContent?.match(RegExp("^.+(?= Online -)"))?.[0];
 }
 
 /**
  * Read current location within the game.
  */
 async function fetchGameLocation(): Promise<string | void> {
-	return (document.querySelector("#locationText") as HTMLElement | null)
-		?.textContent;
+	return document.querySelector<HTMLElement>("#locationText")?.textContent;
 }
 
 class GameState {
@@ -83,7 +109,7 @@ class GameState {
 	static resetWith(game: string | void) {
 		this.game = game;
 		this.startedAt = Math.floor(Date.now() / 1000);
-		characterFaceCaches.clear();
+		imageCaches.clear();
 	}
 }
 
@@ -129,7 +155,8 @@ class SingleTaskExecutor {
 	static shared = new SingleTaskExecutor();
 	protected map = new Map<string, Promise<unknown>>();
 	postIfAbsent<T>(key: string, beginHeavyJob: () => Promise<T>) {
-		let runningJob = this.map.get(key);
+		// Force cast, don't result different types on the same key
+		let runningJob = this.map.get(key) as Promise<T>;
 		if (runningJob) return runningJob;
 		this.map.set(
 			key,
