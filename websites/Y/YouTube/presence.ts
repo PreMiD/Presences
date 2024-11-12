@@ -331,7 +331,8 @@ presence.on("UpdateData", async () => {
 					!document.querySelector("#text.ytd-channel-name")?.textContent &&
 					documentTitle.includes(
 						document.querySelector("#text.ytd-channel-name")?.textContent
-					)
+					) &&
+					document.querySelector("#text.ytd-channel-name")?.textContent
 				)
 					user = document.querySelector("#text.ytd-channel-name").textContent;
 				// Get channel name from website's title
