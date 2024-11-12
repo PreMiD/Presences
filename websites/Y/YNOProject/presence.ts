@@ -59,8 +59,7 @@ async function fetchCharacterFace(): Promise<string | void> {
 }
 
 /**
- * Read equipped badge of current sign-in player.
- * Size is 37 and encoded in Data URL.
+ * Read equipped badge of current sign-in player, size is squared 37.
  * (Surprisingly Discord supports GIFs in small image so it's no need to resample)
  *
  * @example 'url("star-transparent.gif")'.match(it)?.[2] // star-transparent.gif
