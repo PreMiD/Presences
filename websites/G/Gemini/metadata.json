@@ -9,6 +9,12 @@
 	"description": {
 		"en": "Gemini gives you direct access to Google AI. Get help with writing, planning, learning, and more."
 	},
+	"contributors": [
+		{
+			"name": "Kaktuswerk",
+			"id": "1167417152664522764"
+		}
+	],
 	"url": "gemini.google.com",
 	"version": "1.1.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Gemini/assets/logo.png",
