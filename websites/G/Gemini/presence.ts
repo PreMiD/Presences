@@ -33,8 +33,7 @@ presence.on("UpdateData", async () => {
 					// eslint-disable-next-line no-one-time-vars/no-one-time-vars
 					answerWords = elem[1].textContent.split(" ").length;
 				presenceData.state = `Asked ${askedWOrds} words | answered with ${answerWords} words.`;
-			} else
-				presenceData.details = "Asking questions";
+			} else presenceData.details = "Asking questions";
 			break;
 		case pathname.startsWith("/extensions"):
 			presenceData.details = "Managing extensions";
