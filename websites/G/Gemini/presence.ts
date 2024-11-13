@@ -13,9 +13,16 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			details: "Browsing website",
 		},
-		{ pathname } = document.location;
+		{ pathname } = document.location,
+		showTitle = await presence.getSetting<boolean>("showTitle");
 	switch (true) {
 		case pathname.startsWith("/app"):
+			// Check the selected conversation
+			if (showTitle) {
+				presenceData.state = document.querySelector(
+					"div.conversation.selected>div.conversation-title"
+				).textContent ?? "Thinking of a new Prompt...";
+			}
 			presenceData.details = "Asking questions";
 			break;
 		case pathname.startsWith("/extensions"):

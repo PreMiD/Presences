@@ -21,5 +21,13 @@
 		"llm",
 		"chatbot",
 		"model"
+	],
+	"settings": [
+		{
+			"id": "showTitle",
+			"title": "Show chat title",
+			"icon": "fa-solid fa-message-quote",
+			"value": true
+		}
 	]
 }
