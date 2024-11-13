@@ -28,7 +28,9 @@ presence.on("UpdateData", async () => {
 				const elem = document.querySelectorAll(
 						"p.query-text-line,div.response-optimization.markdown"
 					),
+					// eslint-disable-next-line no-one-time-vars/no-one-time-vars
 					askedWOrds = elem[0].textContent.split(" ").length,
+					// eslint-disable-next-line no-one-time-vars/no-one-time-vars
 					answerWords = elem[1].textContent.split(" ").length;
 				presenceData.state = `Asked ${askedWOrds} words | answered with ${answerWords} words.`;
 			} else
