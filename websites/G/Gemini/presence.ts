@@ -19,11 +19,20 @@ presence.on("UpdateData", async () => {
 		case pathname.startsWith("/app"):
 			// Check the selected conversation
 			if (showTitle) {
-				presenceData.state = document.querySelector(
-					"div.conversation.selected>div.conversation-title"
-				).textContent ?? "Thinking of a new Prompt...";
-			}
-			presenceData.details = "Asking questions";
+				presenceData.details =
+					document.querySelector(
+						"div.conversation.selected>div.conversation-title"
+					).textContent ?? "Thinking of a new Prompt...";
+
+				// Show word count
+				const elem = document.querySelectorAll(
+						"p.query-text-line,div.response-optimization.markdown"
+					),
+					askedWOrds = elem[0].textContent.split(" ").length,
+					answerWords = elem[1].textContent.split(" ").length;
+				presenceData.state = `Asked ${askedWOrds} words | answered with ${answerWords} words.`;
+			} else
+				presenceData.details = "Asking questions";
 			break;
 		case pathname.startsWith("/extensions"):
 			presenceData.details = "Managing extensions";
