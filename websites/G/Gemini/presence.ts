@@ -26,13 +26,13 @@ presence.on("UpdateData", async () => {
 
 				// Show word count
 				const elem = document.querySelectorAll(
-						"p.query-text-line,div.response-optimization.markdown"
-					),
-					// eslint-disable-next-line no-one-time-vars/no-one-time-vars
-					askedWOrds = elem[0].textContent.split(" ").length,
-					// eslint-disable-next-line no-one-time-vars/no-one-time-vars
-					answerWords = elem[1].textContent.split(" ").length;
-				presenceData.state = `Asked ${askedWOrds} words | answered with ${answerWords} words.`;
+					"p.query-text-line,div.response-optimization.markdown"
+				);
+				presenceData.state = `Asked ${
+					elem[0].textContent.split(" ").length
+				} words | answered with ${
+					elem[1].textContent.split(" ").length
+				} words.`;
 			} else presenceData.details = "Asking questions";
 			break;
 		case pathname.startsWith("/extensions"):
