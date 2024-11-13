@@ -31,13 +31,16 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("timestamps"),
 			presence.getSetting<boolean>("cover"),
 			presence.getSetting<boolean>("buttons"),
-		]);
+		]),
+		directVideo = document.querySelector<HTMLVideoElement>("video");
+
 	if (video.timeLeft !== "") {
 		if (!title) {
 			title =
 				document.querySelector('[itemprop="partOfSeries"]')?.textContent ??
 				document.querySelector(".video-title")?.textContent ??
-				document.querySelector(".entry-title")?.textContent;
+				document.querySelector(".entry-title")?.textContent ??
+				document.title.split("|")[0];
 		}
 		presenceData.details = "Watching:";
 		presenceData.state = title?.split("Episode")?.[0];
@@ -58,6 +61,27 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 		presenceData.buttons = [{ label: "Watch Episode", url: document.URL }];
+	} else if (directVideo) {
+		presenceData.smallImageKey = directVideo.paused
+			? Assets.Pause
+			: Assets.Play;
+		presenceData.smallImageText = directVideo.paused
+			? "Paused"
+			: "Playing back";
+
+		presenceData.details = "Watching:";
+		presenceData.state =
+			document.querySelector(".jw-title-primary.jw-reset")?.textContent ??
+			document.querySelector('[itemprop="partOfSeries"]')?.textContent ??
+			document.querySelector(".video-title")?.textContent ??
+			document.querySelector(".entry-title")?.textContent;
+
+		presenceData.buttons = [{ label: "Watch Episode", url: document.URL }];
+
+		if (!directVideo.paused) {
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestampsfromMedia(directVideo);
+		}
 	} else if (pathname === "/") presenceData.details = "Home page";
 	else if (pathname.startsWith("/search")) {
 		presenceData.details = "Searching...";
@@ -75,5 +99,6 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
+	if (presenceData.endTimestamp) presenceData.type = ActivityType.Watching;
 	presence.setActivity(presenceData);
 });
