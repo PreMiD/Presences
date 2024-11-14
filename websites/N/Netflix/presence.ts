@@ -44,6 +44,7 @@ presence.on("UpdateData", async () => {
 		showCover,
 		showSeries,
 		showMovies,
+		showSmallImages,
 		logoType,
 		privacyMode,
 	] = await Promise.all([
@@ -54,6 +55,7 @@ presence.on("UpdateData", async () => {
 		presence.getSetting<boolean>("showCover"),
 		presence.getSetting<boolean>("showSeries"),
 		presence.getSetting<boolean>("showMovies"),
+		presence.getSetting<boolean>("showSmallImages"),
 		presence.getSetting<number>("logoType"),
 		presence.getSetting<boolean>("privacy"),
 	]);
@@ -82,7 +84,7 @@ presence.on("UpdateData", async () => {
 				? [LargImages.Animated, LargImages.Logo, LargImages.Noback][logoType] ||
 				  LargImages.Logo
 				: metadata.data.video.boxart.at(0).url,
-			smallImageKey: Assets.Reading,
+			smallImageKey: showSmallImages ? Assets.Reading : "",
 			smallImageText: strings.browse,
 			buttons: [
 				{
@@ -137,7 +139,11 @@ presence.on("UpdateData", async () => {
 							logoType
 					  ] || LargImages.Logo
 					: metadata.data.video.boxart.at(0).url,
-				smallImageKey: paused ? Assets.Pause : Assets.Play,
+				smallImageKey: showSmallImages
+					? paused
+						? Assets.Pause
+						: Assets.Play
+					: "",
 				smallImageText: paused ? strings.pause : strings.play,
 				...(showTimestamp && {
 					startTimestamp: paused ? null : startTimestamp,
@@ -186,7 +192,11 @@ presence.on("UpdateData", async () => {
 							logoType
 					  ] || LargImages.Logo
 					: metadata.data.video.boxart.at(0).url,
-				smallImageKey: paused ? Assets.Pause : Assets.Play,
+				smallImageKey: showSmallImages
+					? paused
+						? Assets.Pause
+						: Assets.Play
+					: "",
 				smallImageText: paused ? strings.pause : strings.play,
 				...(showTimestamp && {
 					startTimestamp: paused ? null : startTimestamp,
