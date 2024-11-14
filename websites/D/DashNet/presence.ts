@@ -1,24 +1,33 @@
 let presence: Presence, newID: string, latestID: string;
 function presenceSet(): void {
-	if (document.location.pathname.includes("/cookieclicker/")) {
+	if (!latestID && !newID) {
+		newID = document.location.pathname.includes("/cookieclicker/")
+			? "676126246928777250"
+			: "676120967159742465";
+		presence = new Presence({ clientId: newID });
+	}
+
+	if (
+		document.location.pathname.includes("/cookieclicker/") &&
+		latestID !== "676126246928777250"
+	) {
 		presence = new Presence({ clientId: "676126246928777250" });
 		newID = "676126246928777250";
-	} else {
+	} else if (
+		!document.location.pathname.includes("/cookieclicker/") &&
+		latestID !== "676120967159742465"
+	) {
 		presence = new Presence({ clientId: "676120967159742465" });
 		newID = "676120967159742465";
 	}
-
-	if (newID !== latestID && latestID) {
-		presence.clearActivity();
-		latestID = newID;
-	}
+	latestID = newID;
 }
 
 const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presenceSet();
 
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/D/DashNet/assets/logo.png",
@@ -28,23 +37,18 @@ presence.on("UpdateData", () => {
 	presenceSet();
 
 	if (document.location.pathname.includes("/cookieclicker/")) {
-		const cookies = document
-			.querySelector("#cookies")
-			.textContent.replace(
-				document.querySelector("#cookies div").textContent,
-				""
-			);
-		if (cookies.includes(" cookies")) presenceData.details = cookies;
-		else presenceData.details = cookies.replace("cookies", " cookies");
-
-		presenceData.state = document
-			.querySelector("#cookies div")
-			.textContent.replace("per second :", "Per second:");
-		presenceData.smallImageKey =
-			"https://cdn.rcd.gg/PreMiD/websites/D/DashNet/assets/0.png";
-		presenceData.smallImageText = `Legacy level: ${
-			document.querySelector("#ascendNumber").textContent
-		}`;
+		const cookies = await presence.getPageVariable(
+			"Game.cookies",
+			"Game.cookiesPs",
+			"Game.ascendMeterLevel"
+		);
+		presenceData.details = `${
+			Math.round(Number(cookies["Game.cookies"]) * 100) / 100
+		} cookies`;
+		presenceData.state = `${
+			Math.round(Number(cookies["Game.cookiesPs"]) * 100) / 100
+		} cookies per second`;
+		presenceData.smallImageText = `Legacy level: ${cookies["Game.ascendMeterLevel"]}`;
 	} else if (document.location.pathname === "/") {
 		presenceData.details = "Browsing DashNet's";
 		presenceData.state = "video games and other fun things";
