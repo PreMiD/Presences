@@ -157,7 +157,7 @@ class SingleTaskExecutor {
 	}
 }
 
-type LRUKey = keyof any;
+type LRUKey = string | number | symbol;
 /**
  * @example
  * ```js
@@ -177,7 +177,7 @@ class SimpleLRU<V = unknown> {
 	constructor(protected cap: number) {
 		this.clear();
 	}
-	protected bubbleUp(key: keyof any) {
+	protected bubbleUp(key: LRUKey) {
 		if (key === this.queue.at(0)) return;
 		this.queue.sort(a => (a === key ? -1 : 0));
 	}
@@ -185,9 +185,8 @@ class SimpleLRU<V = unknown> {
 		return this.map.has(key);
 	}
 	set(key: LRUKey, value: V) {
-		if (this.map.has(key)) {
-			this.bubbleUp(key);
-		} else {
+		if (this.map.has(key)) this.bubbleUp(key);
+		else {
 			const lastKey = this.queue.at(-1);
 			this.bubbleUp(lastKey);
 			this.map.delete(lastKey);
@@ -197,7 +196,7 @@ class SimpleLRU<V = unknown> {
 		return this;
 	}
 	get(key: LRUKey): V {
-		let result = this.map.get(key);
+		const result = this.map.get(key);
 		if (result) this.bubbleUp(key);
 		return result;
 	}
@@ -216,10 +215,9 @@ class SimpleLRU<V = unknown> {
  * Switching to other effects for 5 times or taking any animated actions
  * to let the oldest cache is re-generated.
  */
-const characterFacesCache = new SimpleLRU<string>(5);
-
-/**
- * Badges are not frequently swithed normally.
- * Keys stand for url segments and values are entire urls from computed styles.
- */
-const badgesCache = new SimpleLRU<string>(2);
+const characterFacesCache = new SimpleLRU<string>(5),
+	/**
+	 * Badges are not frequently swithed normally.
+	 * Keys stand for url segments and values are entire urls from computed styles.
+	 */
+	badgesCache = new SimpleLRU<string>(2);
