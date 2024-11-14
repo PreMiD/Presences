@@ -27,15 +27,6 @@ presence.on("UpdateData", async () => {
 });
 
 /**
- * Cache store of images, will clear on reset game.
- * Consists of characters' faces urls start with "blob",
- * and regular urls start with "http|https".
- *
- * Clear on reset game.
- */
-const imageCaches = new Map<string, string>();
-
-/**
  * Read live favicon of character face in game.
  * Size is scaled up from 16 to 40 to be sharper
  * and encoded in Data URL (~800 bytes).
@@ -44,13 +35,13 @@ const imageCaches = new Map<string, string>();
  */
 async function fetchCharacterFace(): Promise<string | void> {
 	const url = document.querySelector<HTMLLinkElement>("#favicon")?.href;
-	if (url && imageCaches.has(url)) return imageCaches.get(url);
+	if (url && characterFacesCache.has(url)) return characterFacesCache.get(url);
 	else if (url) {
 		return await SingleTaskExecutor.shared.postIfAbsent(url, async () => {
 			const blob = await fetchWithResizePixelatedImage(url, 40, 40);
 			if (blob) {
 				return blob2dataurl(blob).then(optimizedImage => {
-					imageCaches.set(url, optimizedImage);
+					characterFacesCache.set(url, optimizedImage);
 					return optimizedImage;
 				});
 			}
@@ -71,7 +62,7 @@ async function fetchBadge(): Promise<string | void> {
 		return;
 	const badgeEl = document.querySelector<HTMLElement>("#badgeButton .badge"),
 		url = badgeEl?.style?.backgroundImage; // Gives path as segmented url only
-	if (url && imageCaches.has(url)) return imageCaches.get(url);
+	if (url && badgesCache.has(url)) return badgesCache.get(url);
 	else if (url) {
 		return await SingleTaskExecutor.shared.postIfAbsent(url, async () => {
 			const fullUrl = window
@@ -79,7 +70,7 @@ async function fetchBadge(): Promise<string | void> {
 				.backgroundImage.match(
 					RegExp("(?:url)\\((\"|')([^\\1\\s]+)\\1\\)")
 				)?.[2];
-			imageCaches.set(url, fullUrl);
+			if (fullUrl) badgesCache.set(url, fullUrl);
 			return fullUrl;
 		});
 	}
@@ -108,7 +99,8 @@ class GameState {
 	static resetWith(game: string | void) {
 		this.game = game;
 		this.startedAt = Math.floor(Date.now() / 1000);
-		imageCaches.clear();
+		characterFacesCache.clear();
+		badgesCache.clear();
 	}
 }
 
@@ -164,3 +156,70 @@ class SingleTaskExecutor {
 		return runningJob;
 	}
 }
+
+type LRUKey = keyof any;
+/**
+ * @example
+ * ```js
+ * it = new SimpleLRU(2)
+ * it.set("game", "Yume Nikki")
+ * it.set("name", "Madotsuki")
+ * it.set("age", 12)
+ *
+ * it.get("game") // undefined cuz already been evicted
+ * it.get("name") // Madotsuki
+ * it.get("age") // 12
+ * ```
+ */
+class SimpleLRU<V = unknown> {
+	protected queue: LRUKey[];
+	protected map = new Map<LRUKey, V>();
+	constructor(protected cap: number) {
+		this.clear();
+	}
+	protected bubbleUp(key: keyof any) {
+		if (key === this.queue.at(0)) return;
+		this.queue.sort(a => (a === key ? -1 : 0));
+	}
+	has(key: LRUKey) {
+		return this.map.has(key);
+	}
+	set(key: LRUKey, value: V) {
+		if (this.map.has(key)) {
+			this.bubbleUp(key);
+		} else {
+			const lastKey = this.queue.at(-1);
+			this.bubbleUp(lastKey);
+			this.map.delete(lastKey);
+			this.queue[0] = key;
+		}
+		this.map.set(key, value);
+		return this;
+	}
+	get(key: LRUKey): V {
+		let result = this.map.get(key);
+		if (result) this.bubbleUp(key);
+		return result;
+	}
+	clear() {
+		this.queue = Array.from(Array(this.cap).keys()).map(() => Symbol());
+		this.map.clear();
+	}
+}
+
+/**
+ * Cache store for cuties' faces, will clear on reset game.
+ * Keys stand for characters' faces urls start with "blob",
+ * and the values are their faces but large-scaled in Data URLs
+ *
+ * In case of something glitches on re-sampling...
+ * Switching to other effects for 5 times or taking any animated actions
+ * to let the oldest cache is re-generated.
+ */
+const characterFacesCache = new SimpleLRU<string>(5);
+
+/**
+ * Badges are not frequently swithed normally.
+ * Keys stand for url segments and values are entire urls from computed styles.
+ */
+const badgesCache = new SimpleLRU<string>(2);
