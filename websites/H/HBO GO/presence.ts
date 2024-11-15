@@ -6,6 +6,12 @@ const presence = new Presence({
 		pause: "general.paused",
 	});
 
+function convertToTitleCase(str: string): string {
+	if (!str) return "";
+
+	return str.toLowerCase().replace(/\b\w/g, s => s.toUpperCase());
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Browsing...",
@@ -16,16 +22,20 @@ presence.on("UpdateData", async () => {
 		video: HTMLVideoElement = document.querySelector("video");
 
 	if (!isNaN(video?.duration) && !!document.querySelector("div.movie-title")) {
-		const title = document.querySelector("div.movie-title").textContent;
-
+		const title = convertToTitleCase(
+			document.querySelector("div.movie-title").textContent
+		);
 		if (location.pathname.includes("/series/")) {
-			const lastColonIndex = title.lastIndexOf(":"),
-				episode = title.substring(0, lastColonIndex).split(" ");
+			const match = title.match(
+				/(?<series>.+?)\sS(?<season>\d+)\s(?<episode>\d{2})(?::\s*(?<title>.+))?/
+			);
 
-			presenceData.details = `Season ${episode[episode.length - 2]}, Episode ${
-				episode[episode.length - 1]
-			}`;
-			presenceData.state = title.substring(lastColonIndex + 1).trim();
+			match.groups.episode = parseInt(match.groups.episode).toString();
+
+			presenceData.name = match.groups.series;
+			presenceData.details =
+				match.groups.title || `Episode ${match.groups.episode}`;
+			presenceData.state = `Season ${match.groups.season}, Episode ${match.groups.episode}`;
 		} else {
 			presenceData.details = title;
 			presenceData.state = location.pathname.includes("/movies/")
