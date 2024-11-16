@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = `Season ${match.groups.season}, Episode ${match.groups.episode}`;
 		} else {
 			presenceData.details = title;
-			presenceData.state = location.pathname.includes("/movies/")
+			presenceData.state = document.location.pathname.includes("/movies/")
 				? "Movie"
 				: "Extra";
 		}
