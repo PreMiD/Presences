@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 		const title = convertToTitleCase(
 			document.querySelector("div.movie-title").textContent
 		);
-		if (location.pathname.includes("/series/")) {
+		if (document.location.pathname.includes("/series/")) {
 			const match = title.match(
 				/(?<series>.+?)\sS(?<season>\d+)\s(?<episode>\d{2})(?::\s*(?<title>.+))?/
 			);
