@@ -106,7 +106,8 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = "Viewing DPP";
 		}
 	} else if (pathname.startsWith("/watch")) {
-		const deta = JSON.parse(localStorage.getItem("SCHEDULE_DETAILS")).tags[0];
+		const deta = JSON.parse(localStorage.getItem("SCHEDULE_DETAILS")).subject
+			.name;
 		let detal = ` | ${deta}`;
 		if (deta === null) detal = "";
 		if (!privacyMode) {
@@ -117,8 +118,10 @@ presence.on("UpdateData", async () => {
 			}`;
 
 			presenceData.buttons = [{ label: "Watch Lecture", url: fullurl }];
-		} else presenceData.details = `Watching a lecture${detal}`;
-
+		} else {
+			presenceData.details = "Watching a lecture";
+			presenceData.state = `Subject: ${deta}`;
+		}
 		if (document.querySelectorAll(".vjs-paused").length < 1) {
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Watching a lecture";
