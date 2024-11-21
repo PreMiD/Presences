@@ -35,22 +35,6 @@ let since = Math.floor(Date.now() / 1000),
 	strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
-function calculateEndTime(elapsedTime: string, durationTime: string): number {
-	const elapsedParts: number[] = elapsedTime.split(":").map(Number),
-		elapsedSeconds: number = elapsedParts.reduce(
-			(acc, val, index) =>
-				acc + val * Math.pow(60, elapsedParts.length - index - 1),
-			0
-		),
-		durationParts: number[] = durationTime.split(":").map(Number),
-		durationSeconds: number = durationParts.reduce(
-			(acc, val, index) =>
-				acc + val * Math.pow(60, durationParts.length - index - 1),
-			0
-		);
-	return Date.now() - elapsedSeconds * 1000 + durationSeconds * 1000;
-}
-
 presence.on("UpdateData", async () => {
 	if (document.querySelector("#state")) {
 		const state = JSON.parse(
@@ -169,8 +153,13 @@ presence.on("UpdateData", async () => {
 						duration = document.querySelector(
 							'.jw-text-duration[role="timer"]'
 						)?.textContent;
-					if (elapsed && duration)
-						presenceData.endTimestamp = calculateEndTime(elapsed, duration);
+					if (elapsed && duration) {
+						[presenceData.startTimestamp, presenceData.endTimestamp] =
+							presence.getTimestamps(
+								presence.timestampFromFormat(elapsed),
+								presence.timestampFromFormat(duration)
+							);
+					}
 				}
 				break;
 

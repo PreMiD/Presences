@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Striker",
 		"id": "215509157837537280"
@@ -17,7 +18,7 @@
 		"nl": "openrec is een Japans streamingplatform vergelijkbaar met Twitch en bevat ook video's"
 	},
 	"url": "www.openrec.tv",
-	"version": "1.2.25",
+	"version": "1.2.26",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/openrec/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/openrec/assets/thumbnail.png",
 	"color": "#FF0000",

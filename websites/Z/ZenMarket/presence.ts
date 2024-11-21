@@ -17,249 +17,173 @@ presence.on("UpdateData", async () => {
 		path = pathname.replace(
 			`/${document.querySelector("html").getAttribute("lang")}`,
 			""
-		);
+		),
+		item = {
+			title: document.querySelector("#itemTitle")?.textContent ?? "",
+			seller:
+				document.querySelector("#seller")?.textContent ??
+				document.querySelector("#aSeller")?.textContent ??
+				"",
+			productPage:
+				document.querySelector<HTMLAnchorElement>("#productPage")?.href ?? "",
+			url: document.querySelector<HTMLAnchorElement>("#itemUrl")?.href ?? "",
+			price:
+				document.querySelector("#lblPrice")?.textContent ??
+				document.querySelector("#lblPriceY")?.textContent ??
+				"unknown price",
+			condition:
+				document.querySelector("#lblConditionName")?.textContent ??
+				document.querySelector("#lblItemCondition")?.textContent ??
+				document.querySelector("#lblItemStatus")?.textContent ??
+				"",
+		};
 
 	// Profile
 
-	if (path === "/profile/" || path === "/profile/default.aspx") {
-		const warehouseTable: HTMLTableElement = document.querySelector(
-				"#productsBought > div:nth-child(1) > table"
-			),
-			cartTable: HTMLTableElement = document.querySelector(".shop-stripped"),
-			warehouseItems = warehouseTable ? warehouseTable.rows.length : 0,
-			cartItems = cartTable ? cartTable.rows.length - 1 : 0;
-
-		presenceData.details = "Viewing Account";
-		presenceData.state = `${
-			warehouseItems > 1 || warehouseItems === 0
-				? `${warehouseItems} items`
-				: `${warehouseItems} item`
-		} in warehouse || ${
-			cartItems > 1 || cartItems === 0
-				? `${cartItems} items`
-				: `${cartItems} item`
-		} in cart`;
-	}
-
-	if (path === "/profile/messages.aspx" || path === "/profile/support.aspx")
-		presenceData.details = "Viewing Messages";
-
-	if (path === "/profile/actions.aspx")
-		presenceData.details = "Looking at Events";
-
-	if (path === "/profile/watchlist.aspx") {
-		if (
-			(search.includes("tab=auctions") && !search.includes("history")) ||
-			!search
-		) {
-			const products = document.querySelector(
-					"#auctions > div:nth-child(2) > .col-md-12"
+	switch (path) {
+		case "/profile/":
+		case "/profile/default.aspx": {
+			const warehouseTable: HTMLTableElement = document.querySelector(
+					"#productsBought > div:nth-child(1) > table"
 				),
-				watchCount = products ? products.children.length - 1 : 0;
+				cartTable: HTMLTableElement = document.querySelector(".shop-stripped"),
+				warehouseItems = warehouseTable ? warehouseTable.rows.length : 0,
+				cartItems = cartTable ? cartTable.rows.length - 1 : 0;
 
-			presenceData.details = "Looking at watched auction items";
+			presenceData.details = "Viewing Account";
 			presenceData.state = `${
-				watchCount > 1 || watchCount === 0
-					? `${watchCount} items`
-					: `${watchCount} item`
-			} on the watchlist`;
-		} else if (search.includes("tab=auctions") && search.includes("history"))
-			presenceData.details = "Viewing history of watched auction items";
-		else if (search.includes("tab=products")) {
-			const products = document.querySelector(
-					"#products > div:nth-child(2) > .col-md-12"
-				),
-				watchCount = products ? products.children.length : 0;
+				warehouseItems > 1 || warehouseItems === 0
+					? `${warehouseItems} items`
+					: `${warehouseItems} item`
+			} in warehouse || ${
+				cartItems > 1 || cartItems === 0
+					? `${cartItems} items`
+					: `${cartItems} item`
+			} in cart`;
+			break;
+		}
+		case "/profile/messages.aspx":
+		case "/profile/support.aspx": {
+			presenceData.details = "Viewing Messages";
+			break;
+		}
+		case "/profile/actions.aspx": {
+			presenceData.details = "Looking at Events";
+			break;
+		}
+		case "/profile/watchlist.aspx": {
+			switch (true) {
+				case search.includes("tab=auctions") && !search.includes("history"):
+				case !search: {
+					const products = document.querySelector(
+							"#auctions > div:nth-child(2) > .col-md-12"
+						),
+						watchCount = products ? products.children.length - 1 : 0;
 
-			presenceData.details = "Looking at watched items";
-			presenceData.state = `${
-				watchCount > 1 || watchCount === 0
-					? `${watchCount} items`
-					: `${watchCount} item`
-			} on the watchlist`;
-		} else if (search.includes("tab=sellers"))
-			presenceData.details = "Viewing watched sellers";
-		else if (search.includes("tab=recent"))
-			presenceData.details = "Looking at recently viewed items";
-	}
+					presenceData.details = "Looking at watched auction items";
+					presenceData.state = `${
+						watchCount > 1 || watchCount === 0
+							? `${watchCount} items`
+							: `${watchCount} item`
+					} on the watchlist`;
+					break;
+				}
+				case search.includes("tab=auctions") && search.includes("history"): {
+					presenceData.details = "Viewing history of watched auction items";
+					break;
+				}
+				case search.includes("tab=products"): {
+					const products = document.querySelector(
+							"#products > div:nth-child(2) > .col-md-12"
+						),
+						watchCount = products ? products.children.length : 0;
 
-	if (path === "/profile/parcel.aspx") presenceData.details = "Viewing parcels";
+					presenceData.details = "Looking at watched items";
+					presenceData.state = `${
+						watchCount > 1 || watchCount === 0
+							? `${watchCount} items`
+							: `${watchCount} item`
+					} on the watchlist`;
+					break;
+				}
+				case search.includes("tab=sellers"): {
+					presenceData.details = "Viewing watched sellers";
+					break;
+				}
+				case search.includes("tab=recent"): {
+					presenceData.details = "Looking at recently viewed items";
+					break;
+				}
+			}
+			break;
+		}
+		case "/profile/parcel.aspx": {
+			presenceData.details = "Viewing parcels";
+			break;
+		}
+		case "/profile/payments.aspx": {
+			presenceData.details = "Viewing transactions";
+			break;
+		}
+		case "/profile/levels.aspx": {
+			presenceData.details = "Checking current level";
+			presenceData.state = `Current Level: ${
+				document.querySelector("#lblCurrentTier").textContent
+			}`;
+			break;
+		}
+		default: {
+			if (item?.title) {
+				presenceData.details = `Looking at ${item?.title}`;
+				let text = `${item?.price ? `Price: ${item?.price} ||` : ""}  ${
+					item?.condition ? `Condition: ${item?.condition} ||` : ""
+				} ${item?.seller ? `Seller: ${item?.seller} ||` : ""}`;
+				if (text.endsWith(" || ")) text = text.slice(0, text.length - 4);
 
-	if (path === "/profile/payments.aspx")
-		presenceData.details = "Viewing transactions";
+				presenceData.state = text;
+				if (!item?.productPage && !item?.url) {
+					presenceData.buttons = [
+						{
+							label: "View On ZenMarket",
+							url: href,
+						},
+					];
+					return presence.setActivity(presenceData);
+				} else {
+					presenceData.buttons = [
+						{
+							label: "View On ZenMarket",
+							url: href,
+						},
+						{
+							label: `View On ${document
+								.querySelector(".active-tab")
+								?.textContent?.toLowerCase()}`,
+							url: item?.productPage,
+						},
+					];
+				}
+			} else if (path === "/auction.aspx" && search.includes("itemCode")) {
+				presenceData.details = `Looking at ${item?.title}`;
+				presenceData.state = `Price: ${item?.price} || Bids: ${
+					document.querySelector("#bidNum").textContent
+				} || Condition: ${item?.condition} || Seller: ${item?.seller}`;
 
-	if (path === "/profile/levels.aspx") {
-		presenceData.details = "Checking current level";
-		presenceData.state = `Current Level: ${
-			document.querySelector("#lblCurrentTier").textContent
-		}`;
-	}
+				presenceData.buttons = [
+					{
+						label: "View On ZenMarket",
+						url: href,
+					},
+					{
+						label: "View On Yahoo Auctions",
+						url: item?.productPage,
+					},
+				];
+				if (!item?.productPage) delete presenceData.buttons[1];
+			} else presenceData.details = "Browsing...";
 
-	if (path === "/profile/settings.aspx")
-		presenceData.details = "Viewing settings";
-
-	// Product view
-
-	if (path === "/auction.aspx" && search.includes("itemCode")) {
-		presenceData.details = `Looking at ${
-			document.querySelector("#itemTitle").textContent
-		}`;
-		presenceData.state = `Price: ${
-			document.querySelector("#lblPriceY").textContent
-		} || Bids: ${document.querySelector("#bidNum").textContent} || Condition: ${
-			document.querySelector("#lblItemStatus").textContent
-		} || Seller: ${document.querySelector("#seller").textContent}`;
-		presenceData.buttons = [
-			{
-				label: "View on ZenMarket",
-				url: href,
-			},
-			{
-				label: "View on Yahoo Auctions",
-				url: document.querySelector("#productPage").getAttribute("href"),
-			},
-		];
-	}
-
-	if (path === "/yshoppingproduct.aspx") {
-		presenceData.details = `Looking at ${
-			document.querySelector("#itemTitle").textContent
-		}`;
-		presenceData.state = `Price: ${
-			document.querySelector("#lblPrice").textContent
-		} || Condition: ${
-			document.querySelector("#lblItemCondition").textContent
-		} || Seller: ${document.querySelector("#seller").textContent}`;
-		presenceData.buttons = [
-			{
-				label: "View on ZenMarket",
-				url: href,
-			},
-			{
-				label: "View on Yahoo Shopping",
-				url: document.querySelector("#productPage").getAttribute("href"),
-			},
-		];
-	}
-
-	if (path === "/mercariproduct.aspx") {
-		presenceData.details = `Looking at ${
-			document.querySelector("#itemTitle").textContent
-		}`;
-		presenceData.state = `Price: ${
-			document.querySelector("#lblPrice").textContent
-		} || Seller: ${document.querySelector("#seller").textContent}`;
-		presenceData.buttons = [
-			{
-				label: "View on ZenMarket",
-				url: href,
-			},
-			{
-				label: "View on Mercari",
-				url: document.querySelector("#productPage").getAttribute("href"),
-			},
-		];
-	}
-
-	if (path === "/rakumaproduct.aspx") {
-		presenceData.details = `Looking at ${
-			document.querySelector("#itemTitle").textContent
-		}`;
-		presenceData.state = `Price: ${
-			document.querySelector("#lblPrice").textContent
-		} || Seller: ${document.querySelector("#seller").textContent}`;
-		presenceData.buttons = [
-			{
-				label: "View on ZenMarket",
-				url: href,
-			},
-			{
-				label: "View on Rakuma",
-				url: document.querySelector("#productPage").getAttribute("href"),
-			},
-		];
-	}
-
-	if (path === "/rakutenproduct.aspx") {
-		presenceData.details = `Looking at ${
-			document.querySelector("#itemTitle").textContent
-		}`;
-		presenceData.state = `Price: ${
-			document.querySelector("#lblPrice").textContent
-		} || Seller: ${document.querySelector("#seller").textContent}`;
-		presenceData.buttons = [
-			{
-				label: "View on ZenMarket",
-				url: href,
-			},
-			{
-				label: "View on Rakuten",
-				url: document.querySelector("#productPage").getAttribute("href"),
-			},
-		];
-	}
-
-	if (path === "/amazonproduct.aspx") {
-		const condition: HTMLSpanElement =
-			document.querySelector("#lblConditionName");
-		presenceData.details = `Looking at ${
-			document.querySelector("#itemTitle").textContent
-		}`;
-		presenceData.state = `Price: ${
-			document.querySelector("#lblPrice").textContent
-		} ${condition ? `|| Condition: ${condition.textContent}` : ""}`;
-		presenceData.buttons = [
-			{
-				label: "View on ZenMarket",
-				url: href,
-			},
-			{
-				label: "View on Amazon",
-				url: document.querySelector("#productPage").getAttribute("href"),
-			},
-		];
-	}
-
-	if (path === "/othershopproduct.aspx") {
-		presenceData.details = `Looking at ${
-			document.querySelector("#itemTitle").textContent
-		}`;
-		presenceData.state = `Price: ${
-			document.querySelector("#lblPrice").textContent
-		}`;
-		presenceData.buttons = [
-			{
-				label: "View on ZenMarket",
-				url: href,
-			},
-			{
-				label: "View on Original page",
-				url: document.querySelector("#productPage").getAttribute("href"),
-			},
-		];
-	}
-
-	if (
-		path.includes("/s/") &&
-		path.split("/").length === 4 &&
-		document.querySelector("#itemTitle")
-	) {
-		presenceData.details = `Looking at ${
-			document.querySelector("#itemTitle").textContent
-		}`;
-		presenceData.state = `Price: ${
-			document.querySelector("#lblPrice").textContent
-		} || Seller: ${document.querySelector("#aSeller").textContent}`;
-		presenceData.buttons = [
-			{
-				label: "View on ZenMarket",
-				url: href,
-			},
-			{
-				label: "View on ZenPlus",
-				url: document.querySelector("#itemUrl").getAttribute("href"),
-			},
-		];
+			break;
+		}
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);

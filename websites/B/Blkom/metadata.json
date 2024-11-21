@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Ghaith M. AlHallak",
 		"id": "448318357540962314"
@@ -16,7 +17,7 @@
 		"www.blkom.com",
 		"www.animeblkom.net"
 	],
-	"version": "1.0.23",
+	"version": "1.0.25",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Blkom/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Blkom/assets/thumbnail.png",
 	"color": "#FF6161",

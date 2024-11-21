@@ -397,12 +397,8 @@ presence.on("UpdateData", async () => {
 					[animename] = animename.split(" (ITA)");
 
 				const animenumber = document.querySelector(
-						"#episode-comment > span"
-					).textContent,
-					timestamps = presence.getTimestamps(
-						Math.floor(currentTime),
-						Math.floor(duration)
-					);
+					"#episode-comment > span"
+				).textContent;
 				if (iFrameVideo === true && !isNaN(duration)) {
 					if (currentTime === duration) {
 						presenceData.smallImageKey = Assets.Pause;
@@ -413,11 +409,16 @@ presence.on("UpdateData", async () => {
 						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 						presenceData.smallImageText = `${animename}｜Episodio: ${animenumber}`;
 						presenceData.details = `Guardando: ${animename}`;
-						presenceData.startTimestamp = paused ? null : timestamps[0];
 						presenceData.state = paused
 							? `Ep. ${animenumber}｜In pausa`
 							: `Ep. ${animenumber}｜In riproduzione`;
-						presenceData.endTimestamp = paused ? null : timestamps[1];
+						if (!paused) {
+							[presenceData.startTimestamp, presenceData.endTimestamp] =
+								presence.getTimestamps(
+									Math.floor(currentTime),
+									Math.floor(duration)
+								);
+						}
 					}
 				} else {
 					presenceData.smallImageKey = Assets.Viewing;
@@ -443,10 +444,6 @@ presence.on("UpdateData", async () => {
 				if (moviename.includes("(ITA)"))
 					[moviename] = moviename.split(" (ITA)");
 
-				const timestamps = presence.getTimestamps(
-					Math.floor(currentTime),
-					Math.floor(duration)
-				);
 				if (iFrameVideo === true && !isNaN(duration)) {
 					if (currentTime === duration) {
 						presenceData.smallImageKey = Assets.Pause;
@@ -460,8 +457,13 @@ presence.on("UpdateData", async () => {
 						presenceData.state = paused
 							? "Film｜In pausa"
 							: "Film｜In riproduzione";
-						presenceData.startTimestamp = paused ? null : timestamps[0];
-						presenceData.endTimestamp = paused ? null : timestamps[1];
+						if (!paused) {
+							[presenceData.startTimestamp, presenceData.endTimestamp] =
+								presence.getTimestamps(
+									Math.floor(currentTime),
+									Math.floor(duration)
+								);
+						}
 					}
 				} else {
 					presenceData.smallImageKey = Assets.Viewing;
@@ -487,12 +489,8 @@ presence.on("UpdateData", async () => {
 				if (oavname.includes("(ITA)")) [oavname] = oavname.split(" (ITA)");
 
 				const oavnumber = document.querySelector(
-						"#episode-comment > span"
-					).textContent,
-					timestamps = presence.getTimestamps(
-						Math.floor(currentTime),
-						Math.floor(duration)
-					);
+					"#episode-comment > span"
+				).textContent;
 				if (iFrameVideo === true && !isNaN(duration)) {
 					if (currentTime === duration) {
 						presenceData.smallImageKey = Assets.Pause;
@@ -503,11 +501,17 @@ presence.on("UpdateData", async () => {
 						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 						presenceData.smallImageText = `${oavname}｜${oavnumber}° OAV`;
 						presenceData.details = `Guardando: ${oavname}`;
-						presenceData.startTimestamp = paused ? null : timestamps[0];
+
 						presenceData.state = paused
 							? `${oavnumber}° OAV｜In pausa`
 							: `${oavnumber}° OAV｜In riproduzione`;
-						presenceData.endTimestamp = paused ? null : timestamps[1];
+						if (!paused) {
+							[presenceData.startTimestamp, presenceData.endTimestamp] =
+								presence.getTimestamps(
+									Math.floor(currentTime),
+									Math.floor(duration)
+								);
+						}
 					}
 				} else {
 					presenceData.smallImageKey = Assets.Viewing;
@@ -534,12 +538,8 @@ presence.on("UpdateData", async () => {
 				if (onaname.includes("(ITA)")) [onaname] = onaname.split(" (ITA)");
 
 				const onanumber = document.querySelector(
-						"#episode-comment > span"
-					).textContent,
-					timestamps = presence.getTimestamps(
-						Math.floor(currentTime),
-						Math.floor(duration)
-					);
+					"#episode-comment > span"
+				).textContent;
 				if (iFrameVideo === true && !isNaN(duration)) {
 					if (currentTime === duration) {
 						presenceData.smallImageKey = Assets.Pause;
@@ -553,8 +553,13 @@ presence.on("UpdateData", async () => {
 						presenceData.state = paused
 							? `${onanumber}° ONA｜In pausa`
 							: `${onanumber}° ONA｜In riproduzione`;
-						presenceData.startTimestamp = paused ? null : timestamps[0];
-						presenceData.endTimestamp = paused ? null : timestamps[1];
+						if (!paused) {
+							[presenceData.startTimestamp, presenceData.endTimestamp] =
+								presence.getTimestamps(
+									Math.floor(currentTime),
+									Math.floor(duration)
+								);
+						}
 					}
 				} else {
 					presenceData.smallImageKey = Assets.Viewing;
@@ -582,12 +587,8 @@ presence.on("UpdateData", async () => {
 					[specialname] = specialname.split(" (ITA)");
 
 				const specialnumber = document.querySelector(
-						"#episode-comment > span"
-					).textContent,
-					timestamps = presence.getTimestamps(
-						Math.floor(currentTime),
-						Math.floor(duration)
-					);
+					"#episode-comment > span"
+				).textContent;
 				if (iFrameVideo === true && !isNaN(duration)) {
 					if (currentTime === duration) {
 						presenceData.smallImageKey = Assets.Pause;
@@ -601,8 +602,13 @@ presence.on("UpdateData", async () => {
 						presenceData.state = paused
 							? `${specialnumber}° Special｜In pausa`
 							: `${specialnumber}° Special｜In riproduzione`;
-						presenceData.startTimestamp = paused ? null : timestamps[0];
-						presenceData.endTimestamp = paused ? null : timestamps[1];
+						if (!paused) {
+							[presenceData.startTimestamp, presenceData.endTimestamp] =
+								presence.getTimestamps(
+									Math.floor(currentTime),
+									Math.floor(duration)
+								);
+						}
 					}
 				} else {
 					presenceData.smallImageKey = Assets.Viewing;
@@ -629,10 +635,6 @@ presence.on("UpdateData", async () => {
 				if (previewname.includes("(ITA)"))
 					[previewname] = previewname.split(" (ITA)");
 
-				const timestamps = presence.getTimestamps(
-					Math.floor(currentTime),
-					Math.floor(duration)
-				);
 				if (iFrameVideo === true && !isNaN(duration)) {
 					if (currentTime === duration) {
 						presenceData.smallImageKey = Assets.Pause;
@@ -646,8 +648,13 @@ presence.on("UpdateData", async () => {
 						presenceData.state = paused
 							? "Preview｜In pausa"
 							: "Preview｜In riproduzione";
-						presenceData.startTimestamp = paused ? null : timestamps[0];
-						presenceData.endTimestamp = paused ? null : timestamps[1];
+						if (!paused) {
+							[presenceData.startTimestamp, presenceData.endTimestamp] =
+								presence.getTimestamps(
+									Math.floor(currentTime),
+									Math.floor(duration)
+								);
+						}
 					}
 				} else {
 					presenceData.smallImageKey = Assets.Viewing;

@@ -104,10 +104,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details =
 			document.querySelector(".text-white.mb-3").textContent;
 		if (!isNaN(video.duration) && !video.paused) {
-			[, presenceData.endTimestamp] = presence.getTimestamps(
-				video.currentTime,
-				video.duration
-			);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(video.currentTime, video.duration);
 		}
 		presenceData.buttons = [
 			{

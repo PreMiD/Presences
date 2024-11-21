@@ -3,8 +3,6 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let mediaTimestamps: [number, number];
-
 const enum Assets {
 	HomePage = "https://cdn.rcd.gg/PreMiD/websites/P/Physics%20Wallah/assets/0.png",
 	Scrolling = "https://cdn.rcd.gg/PreMiD/websites/P/Physics%20Wallah/assets/1.png",
@@ -15,8 +13,10 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
+			type: ActivityType.Watching,
 		},
-		{ pathname, href, search } = document.location;
+		{ pathname, href, search } = document.location,
+		privacyMode = await presence.getSetting<boolean>("privacy");
 
 	if (pathname === "/") {
 		presenceData.details = "Home";
@@ -45,23 +45,21 @@ presence.on("UpdateData", async () => {
 		} else if (pathname.includes("batch-video-player")) {
 			const deta = localStorage.getItem("dpp_subject");
 			let detal = ` | ${deta}`;
-
 			if (deta === null) detal = "";
+			if (!privacyMode) {
+				presenceData.details = `Watching Lecture${detal}`;
 
-			presenceData.details = `Watching Lecture${detal}`;
-
-			presenceData.state = `${
-				JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
-			}`;
-			presenceData.buttons = [{ label: "Watch Lecture", url: href }];
-
-			updateVideoTimestamps();
-			presenceData.startTimestamp = mediaTimestamps[0];
-			presenceData.endTimestamp = mediaTimestamps[1];
+				presenceData.state = `${
+					JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
+				}`;
+				presenceData.buttons = [{ label: "Watch Lecture", url: href }];
+			} else presenceData.details = `Watching a lecture${detal}`;
 
 			if (document.querySelectorAll(".vjs-paused").length < 1) {
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Watching a lecture";
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					updateVideoTimestamps();
 			} else {
 				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "Paused";
@@ -83,14 +81,20 @@ presence.on("UpdateData", async () => {
 		} else if (pathname.includes("open-pdf")) {
 			if (localStorage.getItem("dpp_subject")) {
 				presenceData.details = "Solving DPP (PDF)";
-				presenceData.state = localStorage.getItem("dpp_subject");
+				if (!privacyMode)
+					presenceData.state = localStorage.getItem("dpp_subject");
+				else presenceData.state = "Improving skills";
+
 				presenceData.startTimestamp = browsingTimestamp;
 				presenceData.smallImageKey = Assets.Viewing;
 				presenceData.smallImageText = "Viewing DPP";
 			}
 		} else if (pathname.includes("q-bank-exercise")) {
 			presenceData.details = "Solving DPP (MCQ)";
-			presenceData.state = localStorage.getItem("dpp_subject");
+			if (!privacyMode)
+				presenceData.state = localStorage.getItem("dpp_subject");
+			else presenceData.state = "Improving skills";
+
 			presenceData.startTimestamp = browsingTimestamp;
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = "Viewing DPP";
@@ -98,24 +102,22 @@ presence.on("UpdateData", async () => {
 	} else if (pathname.startsWith("/watch")) {
 		const deta = localStorage.getItem("dpp_subject");
 		let detal = ` | ${deta}`;
-
 		if (deta === null) detal = "";
+		if (!privacyMode) {
+			presenceData.details = `Watching Lecture${detal}`;
 
-		presenceData.details = `Watching Lecture${detal}`;
+			presenceData.state = `${
+				JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
+			}`;
 
-		presenceData.state = `${
-			JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
-		}`;
-
-		presenceData.buttons = [{ label: "Watch Lecture", url: href }];
-
-		updateVideoTimestamps();
-		presenceData.startTimestamp = mediaTimestamps[0];
-		presenceData.endTimestamp = mediaTimestamps[1];
+			presenceData.buttons = [{ label: "Watch Lecture", url: href }];
+		} else presenceData.details = `Watching a lecture${detal}`;
 
 		if (document.querySelectorAll(".vjs-paused").length < 1) {
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Watching a lecture";
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				updateVideoTimestamps();
 		} else {
 			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Paused";
@@ -125,7 +127,7 @@ presence.on("UpdateData", async () => {
 });
 
 function updateVideoTimestamps() {
-	mediaTimestamps = presence.getTimestamps(
+	return presence.getTimestamps(
 		presence.timestampFromFormat(
 			document.querySelector(".vjs-current-time-display").textContent
 		),

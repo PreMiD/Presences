@@ -150,8 +150,8 @@ presence.on("UpdateData", async () => {
 				delete presenceData.startTimestamp;
 
 				if (!paused) {
-					presenceData.endTimestamp =
-						Date.now() / 1000 + duration - currentTime;
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestamps(currentTime, duration);
 				}
 
 				presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
@@ -178,6 +178,22 @@ presence.on("UpdateData", async () => {
 	else if (pathname.includes("/mybacks")) {
 		presenceData.details = strings.viewTheir;
 		presenceData.state = strings.followList;
+	} else if (document.querySelector("video[src]")) {
+		presenceData.details = strings.watchingLive;
+		presenceData.state = `${document
+			.querySelector(".tw-player-page-title-title h2")
+			.textContent.trim()} - ${
+			document.querySelector("span.tw-live-author__info-username-inner")
+				.textContent
+		}`;
+		presenceData.type = ActivityType.Watching;
+	} else if (document.querySelector(".tw-user-nav2")) {
+		presenceData.details = strings.viewProfile;
+		presenceData.state = `${document
+			.querySelector(".tw-user-nav2-name")
+			.textContent.trim()} (${document
+			.querySelector(".tw-user-nav2-screen-id")
+			.textContent.trim()})`;
 	}
 	if (!showTimestamps) {
 		delete presenceData.startTimestamp;

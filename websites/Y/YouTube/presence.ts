@@ -177,6 +177,7 @@ presence.on("UpdateData", async () => {
 					? "Playlist on loop"
 					: strings.play,
 				endTimestamp: presence.getTimestampsfromMedia(video)[1],
+				startTimestamp: presence.getTimestampsfromMedia(video)[0],
 			};
 
 		if (vidState.includes("{0}")) delete presenceData.state;
@@ -247,7 +248,6 @@ presence.on("UpdateData", async () => {
 			presenceData.largeImageKey = YouTubeAssets.Shorts;
 			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 			presenceData.smallImageText = video.paused ? strings.pause : strings.play;
-			delete presenceData.endTimestamp;
 		}
 
 		if (!presenceData.details) presence.setActivity();
@@ -323,10 +323,10 @@ presence.on("UpdateData", async () => {
 					).textContent;
 					// Get channel name when viewing a channel
 				} else if (
-					!document.querySelector("#text.ytd-channel-name")?.textContent &&
 					documentTitle.includes(
 						document.querySelector("#text.ytd-channel-name")?.textContent
-					)
+					) &&
+					document.querySelector("#text.ytd-channel-name")?.textContent
 				)
 					user = document.querySelector("#text.ytd-channel-name").textContent;
 				// Get channel name from website's title
@@ -394,7 +394,11 @@ presence.on("UpdateData", async () => {
 							// When viewing a community post
 							document.querySelector<HTMLImageElement>(
 								"#author-thumbnail > a > yt-img-shadow > img"
-							)
+							) ??
+							// When viewing a channel on the normal channel page
+							document
+								.querySelector(".yt-spec-avatar-shape")
+								?.querySelector("img")
 						)?.src.replace(/=s[0-9]+/, "=s512") ?? YouTubeAssets.Logo;
 					if (channelImg) presenceData.largeImageKey = channelImg;
 				}

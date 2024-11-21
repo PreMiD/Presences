@@ -148,8 +148,8 @@ presence.on("UpdateData", async () => {
 					? (await strings).pause
 					: (await strings).play;
 				if (videoDuration && !videoPaused) {
-					presenceData.endTimestamp =
-						Date.now() + (videoDuration - videoCurrentTime) * 1000;
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestamps(videoDuration, videoCurrentTime);
 				}
 			} else {
 				presenceData.startTimestamp = start;

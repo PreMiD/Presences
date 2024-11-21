@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "theusaf",
 		"id": "193714715631812608"
@@ -15,7 +16,7 @@
 		"tss.warthunder.com",
 		"wiki.warthunder.com"
 	],
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/War%20Thunder/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/War%20Thunder/assets/thumbnail.jpg",
 	"color": "#e53935",

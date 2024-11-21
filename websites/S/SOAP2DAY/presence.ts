@@ -32,7 +32,6 @@ const presence = new Presence({
 		faq: "Reading the FAQ",
 		tv: "Relaxing to some TV",
 	};
-let watchStamp = 0;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -55,10 +54,8 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (getStatus() !== "Pause") {
-		[, watchStamp] = presence.getTimestampsfromMedia(
-			document.querySelector("video")
-		);
-		presenceData.endTimestamp = watchStamp;
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestampsfromMedia(document.querySelector("video"));
 		presenceData.smallImageKey = Assets.Play;
 	} else presenceData.smallImageKey = Assets.Pause;
 

@@ -43,9 +43,9 @@ presence.on("UpdateData", async () => {
 			smallImageText: "Browsing",
 			smallImageKey: Assets.Reading,
 			startTimestamp: startsTime,
+			type: ActivityType.Watching,
 		},
-		[covers, buttons, newLang] = await Promise.all([
-			presence.getSetting<boolean>("covers"),
+		[buttons, newLang] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<string>("lang").catch(() => "en"),
 		]),
@@ -108,17 +108,9 @@ presence.on("UpdateData", async () => {
 				},
 				{
 					label: strings.viewSeriesButton,
-					url: document
-						.querySelector('[class="Category"]')
-						.firstElementChild.firstElementChild.getAttribute("href"),
+					url: document.querySelector<HTMLAnchorElement>(".category a").href,
 				},
 			];
-
-			if (covers) {
-				presenceData.largeImageKey =
-					document.querySelector<HTMLMetaElement>('meta[property="og:image"]')
-						?.content ?? "dramacool_logo_b";
-			}
 
 			if (ShowData.paused) {
 				delete presenceData.startTimestamp;
@@ -137,6 +129,18 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		}
+	} else if (pathname.includes("movie-watch")) {
+		presenceData.details =
+			document.querySelector("div.category a")?.textContent;
+		presenceData.state = "Movie";
+
+		presenceData.smallImageKey = ShowData.paused ? Assets.Pause : Assets.Play;
+		presenceData.smallImageText = ShowData.paused
+			? strings.paused
+			: strings.play;
+
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestamps(ShowData.currentTime, ShowData.duration);
 	} else if (pathname.includes("/calendar")) {
 		presenceData.details = strings.viewPage;
 

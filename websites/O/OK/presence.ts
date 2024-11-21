@@ -56,14 +56,6 @@ function typeContent(string: string) {
 	return Content[string as keyof typeof Content];
 }
 
-function getMillisecondsFromString(timeString: string): number {
-	return (
-		(Number(timeString?.split(":")[0]) * 60 +
-			Number(timeString?.split(":")[1])) *
-		1000
-	);
-}
-
 presence.on(
 	"iFrameData",
 	(data: { duration: number; currentTime: number; paused: boolean }) => {
@@ -105,10 +97,11 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (timeMusic && playMusic) {
-			const startedAt = Date.now() - getMillisecondsFromString(timeMusic[0]);
-			presenceData.startTimestamp = startedAt;
-			presenceData.endTimestamp =
-				startedAt + getMillisecondsFromString(timeMusic[1]);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(
+					presence.timestampFromFormat(timeMusic[0]),
+					presence.timestampFromFormat(timeMusic[1])
+				);
 		}
 	}
 

@@ -49,8 +49,10 @@ presence.on("UpdateData", async () => {
 				Math.floor(currentTime),
 				Math.floor(duration)
 			);
-			presenceData.startTimestamp = startTimestamp;
-			presenceData.endTimestamp = endTimestamp;
+			[presenceData.startTimestamp, presenceData.endTimestamp] = [
+				startTimestamp,
+				endTimestamp,
+			];
 		}
 		presenceData.buttons = [
 			{

@@ -60,7 +60,8 @@ Each presence has a descriptor file called `metadata.json`, the metadata has a s
 
 ```json
 {
-  "$schema": "https://schemas.premid.app/metadata/1.9",
+  "$schema": "https://schemas.premid.app/metadata/1.11",
+  "apiVersion": 1,
   "author": {
     "name": "USER",
     "id": "ID"
@@ -77,7 +78,6 @@ Each presence has a descriptor file called `metadata.json`, the metadata has a s
     "en": "DESCRIPTION"
   },
   "url": "URL",
-  "matches": ["URL"],
   "version": "VERSION",
   "logo": "URL",
   "thumbnail": "URL",
@@ -87,7 +87,6 @@ Each presence has a descriptor file called `metadata.json`, the metadata has a s
   "regExp": "REGEXP",
   "iFrameRegExp": "REGEXP",
   "iframe": false,
-  "iFrameMatches": ["URL"],
   "readLogs": false,
   "settings": [
     {
@@ -131,6 +130,10 @@ A list of fields and their rules are listed below:
 
 - The schema _key_ **must** include a dollar sign at the beginning of it, this will signal your text editor that you want to validate your JSON file against a model. _As stated earlier, you do not need to include a schema, but if you include it you must take this into account._
 
+### **`*apiVersion`**
+
+- The Presence System version this presence was made for. This is **not** the same as the version field in the metadata. This field is **required** for all presences.
+
 ### **`author`**
 
 - The ID _value_ **must** be your Discord snowflake ID. You can get it by enabling [developer mode](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-). _Please do **not** confuse this with your application ID, which is only for your presence._
@@ -158,9 +161,6 @@ A list of fields and their rules are listed below:
 
 - The url **must** be a string if the website only uses one domain. If the website uses multiple, make this an array and specify each one.
 - Do **not** include protocols in the url (for e.g., `http` or `https`), and do not include query parameters in the url (for e.g., `www.google.com/search?gws_rd=ssl` which should be `www.google.com`)
-
-### **`matches`** or **`iFrameMatches`**
-- An array of strings which need to follow https://developer.chrome.com/docs/extensions/develop/concepts/match-patterns.
 
 ### **`version`**
 

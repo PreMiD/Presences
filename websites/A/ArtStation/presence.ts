@@ -120,17 +120,18 @@ presence.on("UpdateData", async () => {
 				"button.vjs-play-control.vjs-control.vjs-button.vjs-paused"
 			);
 			if (!paused) {
-				presenceData.endTimestamp =
-					Date.now() / 1000 +
-					presence.timestampFromFormat(
-						document
-							.querySelector("div.vjs-duration-display")
-							.textContent.slice(14)
-					) -
-					presence.timestampFromFormat(
-						document
-							.querySelector("div.vjs-current-time-display")
-							.textContent.slice(13)
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(
+						presence.timestampFromFormat(
+							document
+								.querySelector("div.vjs-duration-display")
+								.textContent.slice(14)
+						),
+						presence.timestampFromFormat(
+							document
+								.querySelector("div.vjs-current-time-display")
+								.textContent.slice(13)
+						)
 					);
 			}
 			presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;

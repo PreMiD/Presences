@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"name": "Lacking",
 		"id": "132693143173857281"
@@ -11,7 +12,7 @@
 		"vi_VN": "Xem các bộ phim Comedy Central mới nhất như South Park, The Daily Show và hơn nữa."
 	},
 	"url": "www.cc.com",
-	"version": "1.2.23",
+	"version": "1.2.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Comedy%20Central/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Comedy%20Central/assets/thumbnail.png",
 	"color": "#f8ba00",

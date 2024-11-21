@@ -1,30 +1,25 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
 	"author": {
 		"id": "919878532228841532",
 		"name": "somboytiger"
 	},
 	"service": "Chompu",
 	"description": {
-		"en": "Chompu is Discord bot music support stream Joox, TikTok, BiliBili, VK Music, Distrokid, Nico, AppleMusic, Spotify, Soundcloud, Clyp, PornHub and etc.",
-		"th": "Chompu คือ บอทดิสคอร์ดที่มาพร้อมด้วยระบบสตรีมเล่นเพลงที่สามารถจัดการหรือเพิ่มคิวเพลงบนเว็บไซต์! รองรับสตรีมเล่นเพลงหลายแพลตฟอร์ม Joox, TikTok, BiliBili, VK Music, Distrokid, Nico, AppleMusic, Spotify, Soundcloud, Clyp, PornHub และอื่นๆอีกมากมาย!"
+		"en": "Chompu is Discord app equipped with a music streaming system that supports multiple platforms, including Joox, TikTok, BiliBili, BiliBiliTV, VKMusic, Facebook Watch, TIDALMusic, AmazonMusic, Deezer, Nico, AppleMusic, Spotify, Soundcloud, Clyp, PornHub, and many more!",
+		"th": "Chompu คือ แอปดิสคอร์ดที่มาพร้อมด้วยระบบสตรีมเล่นเพลงที่รองรับสตรีมเล่นเพลงหลายแพลตฟอร์ม Joox, TikTok, BiliBili, BiliBiliTV, VKMusic, Facebook Watch, TIDALMusic, AmazonMusic, Deezer, Nico, AppleMusic, Spotify, Soundcloud, Clyp, PornHub และอื่นๆอีกมากมาย!"
 	},
 	"url": "chompubot.work",
-	"matches": [
-		"*://chompubot.work/*"
-	],
-	"version": "1.0.1",
-	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Chompu/assets/logo.jpg",
-	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Chompu/assets/thumbnail.jpg",
+	"version": "1.0.4",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Chompu/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Chompu/assets/thumbnail.png",
 	"color": "#ffbcff",
 	"category": "music",
 	"tags": [
 		"music",
 		"music-room",
-		"discordbot",
-		"dashboard",
-		"chompu",
-		"chompubot",
-		"player"
+		"discord",
+		"dashboard"
 	]
 }

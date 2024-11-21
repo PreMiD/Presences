@@ -1,6 +1,5 @@
 import pLimit from "p-limit";
 import { Root } from "../types";
-import { buildIdentifier } from "./getBuildIdentifier";
 
 const limit = pLimit(1);
 
@@ -16,7 +15,7 @@ export async function fetchMetadata(id: string): Promise<void> {
 		metadata = { url: document.location.href };
 		metadata.data = await (
 			await fetch(
-				`https://www.netflix.com/nq/website/memberapi/${buildIdentifier}/metadata?movieid=${id}`
+				`https://www.netflix.com/nq/website/memberapi/release/metadata?movieid=${id}`
 			)
 		).json();
 	});
