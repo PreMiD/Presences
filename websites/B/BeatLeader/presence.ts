@@ -17,13 +17,6 @@ function simplifyKey(key: string): string {
 		result = result.replace("-PinkPlay_Controllable", "");
 	if (result.match(/(Horizontal|Vertical|Inverted|Inverse)/))
 		result = result.replace(/Lawless|OneSaber|NoArrows|Standard|Legacy/, "");
-	if (result.match(/ReBeat_/)) {
-		result = result.replace(
-			/(Lawless|OneSaber|NoArrows|Standard|Legacy|90Degree|360Degree)/,
-			""
-		);
-		result = result.replaceAll("_", "");
-	}
 	return result;
 }
 
@@ -119,11 +112,13 @@ presence.on("UpdateData", async () => {
 		};
 
 	if (hostname.split(".")[0] === "replay") {
+		presenceData.type = ActivityType.Watching;
+		presenceData.name = "BL Replay";
 		presenceData.largeImageKey = cover
 			? document.querySelector<HTMLImageElement>("#songImage")
 			: replayIcon;
-		presenceData.details = document.querySelector("#songName").textContent;
-		presenceData.state = document.querySelector("#playerName").textContent;
+		presenceData.details = document.querySelector("#songName")?.textContent;
+		presenceData.state = document.querySelector("#playerName")?.textContent;
 		presenceData.smallImageKey = document.querySelector("div.btn.play")
 			? Assets.Pause
 			: Assets.Play;
@@ -148,6 +143,8 @@ presence.on("UpdateData", async () => {
 			},
 		];
 	} else if (hostname.split(".")[0] === "royale") {
+		presenceData.type = ActivityType.Watching;
+		presenceData.name = "BL Royale";
 		presenceData.largeImageKey = cover
 			? document.querySelector<HTMLImageElement>("#songImage")
 			: replayIcon;
@@ -353,6 +350,8 @@ presence.on("UpdateData", async () => {
 				?.src.includes("replay.beatleader.") &&
 			replay.name
 		) {
+			presenceData.type = ActivityType.Watching;
+			presenceData.name = "BL Replay";
 			presenceData.largeImageKey = cover ? replay.cover : replayIcon;
 			presenceData.details = replay.name;
 			presenceData.state = replay.playerName;
@@ -384,6 +383,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
+
 	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 
 	if (presenceData.details && presenceData.largeImageKey)
