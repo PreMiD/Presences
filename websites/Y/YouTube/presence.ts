@@ -8,7 +8,6 @@ import youtubeMiniplayerResolver from "./video_sources/miniplayer";
 import youtubeApiResolver from "./video_sources/api";
 import {
 	Resolver,
-	adjustTimeError,
 	presence,
 	strings,
 	getSetting,
@@ -41,19 +40,19 @@ const nullResolver: Resolver = {
 
 presence.on("UpdateData", async () => {
 	const [
-			newLang,
-			privacy,
-			privacyTtl,
-			privacyButtonShown,
-			time,
-			vidDetail,
-			vidState,
-			channelPic,
-			logo,
-			buttons,
-			hideHome,
-			hidePaused,
-		] = [
+		newLang,
+		privacy,
+		privacyTtl,
+		privacyButtonShown,
+		time,
+		vidDetail,
+		vidState,
+		channelPic,
+		logo,
+		buttons,
+		hideHome,
+		hidePaused,
+	] = [
 			getSetting<string>("lang", "en"),
 			getSetting<boolean>("privacy", true),
 			getSetting<number>("privacy-ttl", 1),
@@ -83,16 +82,16 @@ presence.on("UpdateData", async () => {
 			return presence.clearActivity();
 
 		const resolver = [
-				youtubeEmbedResolver,
-				youtubeShortsResolver,
-				youtubeOldResolver,
-				youtubeTVResolver,
-				youtubeResolver,
-				youtubeMiniplayerResolver,
-				youtubeMoviesResolver,
-				youtubeApiResolver,
-				nullResolver,
-			].find(resolver => resolver.isActive()),
+			youtubeEmbedResolver,
+			youtubeShortsResolver,
+			youtubeOldResolver,
+			youtubeTVResolver,
+			youtubeResolver,
+			youtubeMiniplayerResolver,
+			youtubeMoviesResolver,
+			youtubeApiResolver,
+			nullResolver,
+		].find(resolver => resolver.isActive()),
 			title = resolver.getTitle(),
 			uploaderName = resolver.getUploader();
 
@@ -128,14 +127,14 @@ presence.on("UpdateData", async () => {
 				resolver === youtubeMiniplayerResolver
 					? ""
 					: document
-							.querySelector<HTMLImageElement>(
-								"#avatar.ytd-video-owner-renderer > img"
-							)
-							?.src.replace(/=s\d+/, "=s512");
+						.querySelector<HTMLImageElement>(
+							"#avatar.ytd-video-owner-renderer > img"
+						)
+						?.src.replace(/=s\d+/, "=s512");
 		}
 		const unlistedPathElement = document.querySelector<SVGPathElement>(
-				"g#privacy_unlisted > path"
-			),
+			"g#privacy_unlisted > path"
+		),
 			unlistedBadgeElement = document.querySelector<SVGPathElement>(
 				"h1.title+ytd-badge-supported-renderer path"
 			),
@@ -143,7 +142,7 @@ presence.on("UpdateData", async () => {
 				unlistedPathElement &&
 				unlistedBadgeElement &&
 				unlistedPathElement?.getAttribute("d") ===
-					unlistedBadgeElement?.getAttribute("d"),
+				unlistedBadgeElement?.getAttribute("d"),
 			videoId = resolver.getVideoID(),
 			presenceData: PresenceData = {
 				type: ActivityType.Watching,
@@ -161,26 +160,24 @@ presence.on("UpdateData", async () => {
 					unlistedVideo || logo === LogoMode.YouTubeLogo || pfp === ""
 						? YouTubeAssets.Logo
 						: logo === LogoMode.Thumbnail
-						? await getThumbnail(videoId)
-						: pfp,
+							? await getThumbnail(videoId)
+							: pfp,
 				smallImageKey: video.paused
 					? Assets.Pause
 					: video.loop
-					? Assets.RepeatOne
-					: isPlaylistLoop
-					? Assets.Repeat
-					: Assets.Play,
+						? Assets.RepeatOne
+						: isPlaylistLoop
+							? Assets.Repeat
+							: Assets.Play,
 				smallImageText: video.paused
 					? strings.pause
 					: video.loop
-					? "On loop"
-					: isPlaylistLoop
-					? "Playlist on loop"
-					: strings.play,
-				endTimestamp: adjustTimeError(
+						? "On loop"
+						: isPlaylistLoop
+							? "Playlist on loop"
+							: strings.play,
+				endTimestamp:
 					presence.getTimestampsfromMedia(video)[1],
-					0.75
-				),
 			};
 
 		if (vidState.includes("{0}")) delete presenceData.state;
@@ -304,10 +301,10 @@ presence.on("UpdateData", async () => {
 			case pathname.includes("/c"):
 			case pathname.includes("/user"): {
 				const tabSelected = document
-						.querySelector(
-							'[class="style-scope ytd-feed-filter-chip-bar-renderer iron-selected"]'
-						)
-						?.textContent.trim(),
+					.querySelector(
+						'[class="style-scope ytd-feed-filter-chip-bar-renderer iron-selected"]'
+					)
+					?.textContent.trim(),
 					documentTitle = document.title.substring(
 						0,
 						document.title.lastIndexOf(" - YouTube")
@@ -345,14 +342,13 @@ presence.on("UpdateData", async () => {
 					user = "null";
 
 				if (pathname.includes("/videos")) {
-					presenceData.details = `${
-						strings.browsingThrough
-					} ${tabSelected} ${document
-						.querySelector(
-							'[class="style-scope ytd-tabbed-page-header"] [aria-selected="true"]'
-						)
-						?.textContent.trim()
-						.toLowerCase()}`;
+					presenceData.details = `${strings.browsingThrough
+						} ${tabSelected} ${document
+							.querySelector(
+								'[class="style-scope ytd-tabbed-page-header"] [aria-selected="true"]'
+							)
+							?.textContent.trim()
+							.toLowerCase()}`;
 					presenceData.state = `${strings.ofChannel} ${user}`;
 				} else if (pathname.includes("/shorts")) {
 					presenceData.details = strings.browseShorts;
@@ -366,11 +362,11 @@ presence.on("UpdateData", async () => {
 					presenceData.largeImageKey =
 						logo === LogoMode.Thumbnail
 							? document
-									.querySelector('[id="post"]')
-									?.querySelectorAll("img")[1]?.src
+								.querySelector('[id="post"]')
+								?.querySelectorAll("img")[1]?.src
 							: logo === LogoMode.Channel
-							? document.querySelector('[id="post"]')?.querySelector("img")?.src
-							: YouTubeAssets.Logo;
+								? document.querySelector('[id="post"]')?.querySelector("img")?.src
+								: YouTubeAssets.Logo;
 				} else if (pathname.includes("/about")) {
 					presenceData.details = strings.readChannel;
 					presenceData.state = user;
