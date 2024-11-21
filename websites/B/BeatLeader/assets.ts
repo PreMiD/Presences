@@ -198,42 +198,78 @@ export const leaderboardImages: Record<string, string> = {
 		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/135.png",
 	ReBeat_Standard:
 		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/136.png",
-	ReBeat_OneSaberEasy: "https://i.imgur.com/5Ao6Xqq.png",
-	ReBeat_OneSaberExpert: "https://i.imgur.com/laT9Byr.png",
-	ReBeat_OneSaberExpertPlus: "https://i.imgur.com/88ISudR.png",
-	ReBeat_OneSaberHard: "https://i.imgur.com/SUg4WDo.png",
-	ReBeat_OneSaberNormal: "https://i.imgur.com/8fEe1vq.png",
-	ReBeat_OneSaber: "https://i.imgur.com/FLTtn7z.png",
-	ReBeat_90DegreeEasy: "https://i.imgur.com/HSYa4m5.png",
-	ReBeat_90DegreeExpert: "https://i.imgur.com/ErLBlF2.png",
-	ReBeat_90DegreeExpertPlus: "https://i.imgur.com/mlBeHct.png",
-	ReBeat_90DegreeHard: "https://i.imgur.com/huNP7Se.png",
-	ReBeat_90DegreeNormal: "https://i.imgur.com/gJ0q523.png",
-	ReBeat_90Degree: "https://i.imgur.com/WJ0rz55.png",
-	ReBeat_360DegreeEasy: "https://i.imgur.com/8dn3fRK.png",
-	ReBeat_360DegreeExpert: "https://i.imgur.com/tCTvxQF.png",
-	ReBeat_360DegreeExpertPlus: "https://i.imgur.com/l5dD7w5.png",
-	ReBeat_360DegreeHard: "https://i.imgur.com/03vakEt.png",
-	ReBeat_360DegreeNormal: "https://i.imgur.com/TOfdQV5.png",
-	ReBeat_360Degree: "https://i.imgur.com/6Y8KECM.png",
-	ReBeat_LawlessEasy: "https://i.imgur.com/IBVZSmU.png",
-	ReBeat_LawlessExpert: "https://i.imgur.com/cNqtIR6.png",
-	ReBeat_LawlessExpertPlus: "https://i.imgur.com/b9mUDTG.png",
-	ReBeat_LawlessHard: "https://i.imgur.com/Pqh3UxI.png",
-	ReBeat_LawlessNormal: "https://i.imgur.com/4TRkLD5.png",
-	ReBeat_Lawless: "https://i.imgur.com/ABh5ohg.png",
-	ReBeat_NoArrowsEasy: "https://i.imgur.com/6CXF00d.png",
-	ReBeat_NoArrowsExpert: "https://i.imgur.com/XuoU1Fs.png",
-	ReBeat_NoArrowsExpertPlus: "https://i.imgur.com/xYNMJIy.png",
-	ReBeat_NoArrowsHard: "https://i.imgur.com/KC9ltqt.png",
-	ReBeat_NoArrowsNormal: "https://i.imgur.com/J8neyyr.png",
-	ReBeat_NoArrows: "https://i.imgur.com/zvMIe8I.png",
-	ReBeat_LightshowEasy: "https://i.imgur.com/8VftlDI.png",
-	ReBeat_LightshowExpert: "https://i.imgur.com/RIghQr3.png",
-	ReBeat_LightshowExpertPlus: "https://i.imgur.com/dKfcDXI.png",
-	ReBeat_LightshowHard: "https://i.imgur.com/SYtY2af.png",
-	ReBeat_LightshowNormal: "https://i.imgur.com/ggYwNNt.png",
-	ReBeat_Lightshow: "https://i.imgur.com/HCQw79Z.png",
+	ReBeat_OneSaberEasy:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/137.png",
+	ReBeat_OneSaberExpert:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/138.png",
+	ReBeat_OneSaberExpertPlus:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/139.png",
+	ReBeat_OneSaberHard:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/140.png",
+	ReBeat_OneSaberNormal:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/141.png",
+	ReBeat_OneSaber:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/142.png",
+	ReBeat_90DegreeEasy:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/143.png",
+	ReBeat_90DegreeExpert:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/144.png",
+	ReBeat_90DegreeExpertPlus:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/145.png",
+	ReBeat_90DegreeHard:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/146.png",
+	ReBeat_90DegreeNormal:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/147.png",
+	ReBeat_90Degree:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/148.png",
+	ReBeat_360DegreeEasy:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/149.png",
+	ReBeat_360DegreeExpert:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/150.png",
+	ReBeat_360DegreeExpertPlus:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/151.png",
+	ReBeat_360DegreeHard:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/152.png",
+	ReBeat_360DegreeNormal:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/153.png",
+	ReBeat_360Degree:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/154.png",
+	ReBeat_LawlessEasy:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/155.png",
+	ReBeat_LawlessExpert:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/156.png",
+	ReBeat_LawlessExpertPlus:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/157.png",
+	ReBeat_LawlessHard:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/158.png",
+	ReBeat_LawlessNormal:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/159.png",
+	ReBeat_Lawless:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/160.png",
+	ReBeat_NoArrowsEasy:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/161.png",
+	ReBeat_NoArrowsExpert:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/162.png",
+	ReBeat_NoArrowsExpertPlus:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/163.png",
+	ReBeat_NoArrowsHard:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/164.png",
+	ReBeat_NoArrowsNormal:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/165.png",
+	ReBeat_NoArrows:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/166.png",
+	ReBeat_LightshowEasy:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/167.png",
+	ReBeat_LightshowExpert:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/168.png",
+	ReBeat_LightshowExpertPlus:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/169.png",
+	ReBeat_LightshowHard:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/170.png",
+	ReBeat_LightshowNormal:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/171.png",
+	ReBeat_Lightshow:
+		"https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/172.png",
 	Easy: "https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/103.png",
 	Expert: "https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/104.png",
 	ExpertPlus: "https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/105.png",
