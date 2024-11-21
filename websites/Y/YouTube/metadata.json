@@ -165,7 +165,7 @@
 			"if": {
 				"privacy": false
 			},
-			"title": "Logo",
+			"title": "Image",
 			"icon": "fad fa-images",
 			"value": 1,
 			"values": [
