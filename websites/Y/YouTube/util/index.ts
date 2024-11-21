@@ -2,7 +2,6 @@ export const presence = new Presence({
 	clientId: "463097721130188830",
 });
 
-
 export function truncateAfter(str: string, pattern: string): string {
 	return str.slice(0, str.indexOf(pattern));
 }
