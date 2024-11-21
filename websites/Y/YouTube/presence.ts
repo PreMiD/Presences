@@ -144,6 +144,7 @@ presence.on("UpdateData", async () => {
 				unlistedPathElement?.getAttribute("d") ===
 					unlistedBadgeElement?.getAttribute("d"),
 			videoId = resolver.getVideoID(),
+			[startTimestamp, endTimestamp] = presence.getTimestampsfromMedia(video),
 			presenceData: PresenceData = {
 				type: ActivityType.Watching,
 				details: vidDetail
@@ -176,8 +177,8 @@ presence.on("UpdateData", async () => {
 					: isPlaylistLoop
 					? "Playlist on loop"
 					: strings.play,
-				endTimestamp: presence.getTimestampsfromMedia(video)[1],
-				startTimestamp: presence.getTimestampsfromMedia(video)[0],
+				startTimestamp,
+				endTimestamp,
 			};
 
 		if (vidState.includes("{0}")) delete presenceData.state;
