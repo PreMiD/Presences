@@ -15,8 +15,8 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			type: ActivityType.Watching,
 		},
-		{ pathname } = document.location,
-		fullurl = document.URL,
+		{ pathname, href } = document.location,
+		fullurl = href,
 		privacyMode = await presence.getSetting<boolean>("privacy");
 
 	if (pathname === "/") {
@@ -67,28 +67,24 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = "Paused";
 			}
 		} else if (fullurl.includes("subject-topics")) {
+			const details = JSON.parse(localStorage.getItem("SCHEDULE_DETAILS"));
 			if (fullurl.includes("chapterId")) {
-				presenceData.details = JSON.parse(
-					localStorage.getItem("SCHEDULE_DETAILS")
-				).tags[0];
-				presenceData.state = JSON.parse(
-					localStorage.getItem("SCHEDULE_DETAILS")
-				).subject.name;
+				presenceData.details = details.tags[0];
+				presenceData.state = details.subject.name;
 				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Browsing Resources";
 			} else if (!fullurl.includes("chapterId")) {
-				presenceData.details = JSON.parse(
-					localStorage.getItem("SCHEDULE_DETAILS")
-				).subject.name;
+				presenceData.details = details.subject.name;
 				presenceData.state = "Browsing Resources...";
 				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Browsing Resources";
 			}
 		} else if (fullurl.includes("open-pdf")) {
-			if (localStorage.getItem("dpp_subject")) {
+			const dpp_subject = localStorage.getItem("dpp_subject");
+			if (dpp_subject) {
 				presenceData.details = "Solving DPP (PDF)";
 				if (!privacyMode)
-					presenceData.state = localStorage.getItem("dpp_subject");
+					presenceData.state = dpp_subject;
 				else presenceData.state = "Improving skills";
 
 				presenceData.startTimestamp = browsingTimestamp;
@@ -106,15 +102,14 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = "Viewing DPP";
 		}
 	} else if (pathname.startsWith("/watch")) {
-		const deta = JSON.parse(localStorage.getItem("SCHEDULE_DETAILS")).subject
-			.name;
-		let detal = ` | ${deta}`;
-		if (deta === null) detal = "";
+		const deta = JSON.parse(localStorage.getItem("SCHEDULE_DETAILS"));
+		let detal = ` | ${deta.subject}`;
+		if (deta.subject === null) detal = "";
 		if (!privacyMode) {
 			presenceData.details = `Watching Lecture${detal}`;
 
 			presenceData.state = `${
-				JSON.parse(localStorage.getItem("SCHEDULE_DETAILS")).topic
+				deta.topic
 			}`;
 
 			presenceData.buttons = [{ label: "Watch Lecture", url: fullurl }];
