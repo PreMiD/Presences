@@ -80,11 +80,10 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = "Browsing Resources";
 			}
 		} else if (fullurl.includes("open-pdf")) {
-			const dpp_subject = localStorage.getItem("dpp_subject");
-			if (dpp_subject) {
+			const dppsubject = localStorage.getItem("dpp_subject");
+			if (dppsubject) {
 				presenceData.details = "Solving DPP (PDF)";
-				if (!privacyMode)
-					presenceData.state = dpp_subject;
+				if (!privacyMode) presenceData.state = dppsubject;
 				else presenceData.state = "Improving skills";
 
 				presenceData.startTimestamp = browsingTimestamp;
@@ -108,9 +107,7 @@ presence.on("UpdateData", async () => {
 		if (!privacyMode) {
 			presenceData.details = `Watching Lecture${detal}`;
 
-			presenceData.state = `${
-				deta.topic
-			}`;
+			presenceData.state = `${deta.topic}`;
 
 			presenceData.buttons = [{ label: "Watch Lecture", url: fullurl }];
 		} else {
