@@ -38,11 +38,18 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "chats": {
-			const chatNameElement = document.querySelector(
+			const chatName= document.querySelector(
 				"[class^='ChatUI_xoul_name']"
 			);
-			if (chatNameElement)
-				presenceData.details = `Chatting with ${chatNameElement.textContent.trim()}`;
+			if (chatName)
+				presenceData.details = `Chatting with ${chatName.textContent.trim()}`;
+
+				const chatImage = document.querySelector(
+					"[class^='ChatBubble_image']"
+				) as HTMLImageElement;;
+				if (chatImage)
+					presenceData.largeImageKey = chatImage?.src;		
+
 			else presenceData.details = "Chatting";
 
 			break;
@@ -68,9 +75,18 @@ presence.on("UpdateData", async () => {
 				?.textContent?.trim();
 
 			if (pathname.split("/")[3] === "edit")
-				presenceData.details = `Editing ${scenarioName} scenario`;
+				presenceData.details = `Editing ${scenarioName ?? ""} scenario`;
 			else {
-				presenceData.details = `Viewing ${scenarioName} scenario`;
+				presenceData.details = `Viewing ${scenarioName ?? ""} scenario`;
+
+				const scenarioImage = document.querySelector(
+					"[class^='ViewScenario_image__']"
+				) as HTMLImageElement;;
+				console.log(scenarioImage)
+				if (scenarioImage)
+					presenceData.largeImageKey = scenarioImage?.src;		
+
+
 				presenceData.buttons = [button];
 			}
 			break;
@@ -81,9 +97,16 @@ presence.on("UpdateData", async () => {
 				?.textContent?.trim();
 
 			if (pathname.split("/")[3] === "edit")
-				presenceData.details = `Editing ${xoulName}`;
+				presenceData.details = `Editing ${xoulName ?? "Xoul"}`;
 			else {
-				presenceData.details = `Viewing ${xoulName}`;
+				presenceData.details = `Viewing ${xoulName ?? "Xoul"}`;
+
+				const xoulImage = document.querySelector(
+					"[class^='ViewXoul_image__']"
+				) as HTMLImageElement;;
+				if (xoulImage)
+					presenceData.largeImageKey = xoulImage?.src;		
+
 				presenceData.buttons = [button];
 			}
 			break;
