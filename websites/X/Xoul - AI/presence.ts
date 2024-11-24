@@ -22,15 +22,6 @@ presence.on("UpdateData", async () => {
 			url: href,
 		};
 
-	console.log(
-		"0",
-		pathname.split("/")[0],
-		"1",
-		pathname.split("/")[1],
-		"2",
-		pathname.split("/")[2]
-	);
-
 	switch (pathname.split("/")[1]) {
 		case "": {
 			presenceData.details = "Browsing Homepage";
@@ -38,18 +29,14 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "chats": {
-			const chatName= document.querySelector(
-				"[class^='ChatUI_xoul_name']"
-			);
+			const chatName = document.querySelector("[class^='ChatUI_xoul_name']");
 			if (chatName)
 				presenceData.details = `Chatting with ${chatName.textContent.trim()}`;
 
-				const chatImage = document.querySelector(
-					"[class^='ChatBubble_image']"
-				) as HTMLImageElement;;
-				if (chatImage)
-					presenceData.largeImageKey = chatImage?.src;		
-
+			const chatImage = document.querySelector(
+				"[class^='ChatBubble_image']"
+			) as HTMLImageElement;
+			if (chatImage) presenceData.largeImageKey = chatImage?.src;
 			else presenceData.details = "Chatting";
 
 			break;
@@ -81,11 +68,8 @@ presence.on("UpdateData", async () => {
 
 				const scenarioImage = document.querySelector(
 					"[class^='ViewScenario_image__']"
-				) as HTMLImageElement;;
-				console.log(scenarioImage)
-				if (scenarioImage)
-					presenceData.largeImageKey = scenarioImage?.src;		
-
+				) as HTMLImageElement;
+				if (scenarioImage) presenceData.largeImageKey = scenarioImage?.src;
 
 				presenceData.buttons = [button];
 			}
@@ -103,9 +87,8 @@ presence.on("UpdateData", async () => {
 
 				const xoulImage = document.querySelector(
 					"[class^='ViewXoul_image__']"
-				) as HTMLImageElement;;
-				if (xoulImage)
-					presenceData.largeImageKey = xoulImage?.src;		
+				) as HTMLImageElement;
+				if (xoulImage) presenceData.largeImageKey = xoulImage?.src;
 
 				presenceData.buttons = [button];
 			}
