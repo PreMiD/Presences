@@ -1,0 +1,37 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
+	"author": {
+		"id": "1247644971595599872",
+		"name": "syd"
+	},
+	"service": "Xoul - AI",
+	"description": {
+		"en": "AI Entertainment Platform for Anime Lovers & Gamers"
+	},
+	"url": "xoul.ai",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/aTWK1eZ.png",
+	"thumbnail": "https://styles.redditmedia.com/t5_bq1z96/styles/bannerBackgroundImage_m1lag7w6jz5d1.png",
+	"color": "#242525",
+	"category": "other",
+	"tags": [
+		"xoul",
+		"ai",
+		"entertainment"
+	],
+	"settings": [
+		{
+			"id": "time",
+			"title": "Show timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}
