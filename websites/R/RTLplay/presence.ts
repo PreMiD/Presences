@@ -1,11 +1,14 @@
 import {
-	exist,
-	getThumbnail,
 	stringsMap,
 	getAdditionnalStrings,
-	limitText,
 	LargeAssets,
+	getLocalizedAssets,
+	limitText,
+	exist,
+	adjustTimeError,
 	getChannel,
+	cropPreset,
+	getThumbnail,
 } from "./util";
 
 const presence = new Presence({
@@ -17,12 +20,16 @@ const presence = new Presence({
 			stringsMap,
 			await presence.getSetting<string>("lang").catch(() => "en")
 		);
-	};
+	},
+	slideshow = presence.createSlideshow();
+
 let oldLang: string = null,
-	strings: Awaited<ReturnType<typeof getStrings>>;
+	strings: Awaited<ReturnType<typeof getStrings>>,
+	oldPath = document.location.pathname;
 
 presence.on("UpdateData", async () => {
 	const { hostname, href, pathname } = document.location,
+		pathParts = pathname.split("/"),
 		presenceData: PresenceData = {
 			name: "RTLplay",
 			largeImageKey:
@@ -55,20 +62,29 @@ presence.on("UpdateData", async () => {
 		strings = getAdditionnalStrings(lang, await getStrings());
 	}
 
+	if (oldPath !== pathname) {
+		oldPath = pathname;
+		slideshow.deleteAllSlides();
+	}
+
 	switch (true) {
 		/* MAIN PAGE (Page principale)
 
 		(https://www.rtlplay.be/) */
 		case pathname === "/" ||
-			(pathname.split("/")[1] === "rtlplay" &&
-				pathname.split("/").length <= 2): {
+			(pathParts[1] === "rtlplay" && pathParts.length <= 2): {
 			presenceData.details = strings.browsing;
 
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.smallImageText = strings.browsing;
+			if (usePrivacyMode) {
+				presenceData.state = strings.viewAPage;
 
-			if (!usePrivacyMode) {
+				presenceData.smallImageKey = LargeAssets.Privacy;
+				presenceData.smallImageText = strings.privacy;
+			} else {
 				presenceData.state = strings.viewHome;
+
+				presenceData.smallImageKey = LargeAssets.Binoculars;
+				presenceData.smallImageText = strings.browsing;
 
 				if (useTimestamps) presenceData.startTimestamp = browsingTimestamp;
 			}
@@ -78,14 +94,24 @@ presence.on("UpdateData", async () => {
 		/* RESEARCH PAGE (Page de recherche)
 
 		(https://www.rtlplay.be/rtlplay/recherche) */
-		case ["recherche"].includes(pathname.split("/")[2]): {
-			if (usePrivacyMode) presenceData.details = strings.searchSomething;
-			else {
-				const {searchQuery} = JSON.parse(document.querySelector("ol.search__results")?.getAttribute("data-tracking"));
-				presenceData.details = searchQuery
-					? strings.search
+		case ["recherche"].includes(pathParts[2]): {
+			if (usePrivacyMode) {
+				presenceData.details = strings.browsing;
+				presenceData.state = strings.searchSomething;
+
+				presenceData.smallImageKey = LargeAssets.Privacy;
+				presenceData.smallImageText = strings.privacy;
+			} else {
+				const { searchQuery } = JSON.parse(
+					document
+						.querySelector('div[js-element="searchResults"]')
+						?.getAttribute("data-tracking")
+				);
+
+				presenceData.details = strings.browsing;
+				presenceData.state = searchQuery
+					? `${strings.searchFor} ${searchQuery.term}`
 					: strings.searchSomething;
-				presenceData.state = searchQuery?.term;
 
 				if (useTimestamps) presenceData.startTimestamp = browsingTimestamp;
 
@@ -107,10 +133,15 @@ presence.on("UpdateData", async () => {
 		/* MY LIST (Ma Liste)
 
 		(https://www.rtlplay.be/rtlplay/ma-liste) */
-		case ["ma-liste"].includes(pathname.split("/")[2]): {
+		case ["ma-liste"].includes(pathParts[2]): {
 			presenceData.details = strings.browsing;
-			presenceData.state = strings.viewAPage;
-			if (!usePrivacyMode) {
+
+			if (usePrivacyMode) {
+				presenceData.state = strings.viewAPage;
+
+				presenceData.smallImageKey = LargeAssets.Privacy;
+				presenceData.smallImageText = strings.privacy;
+			} else {
 				presenceData.state = strings.viewList;
 				if (useButtons) {
 					presenceData.buttons = [
@@ -128,26 +159,29 @@ presence.on("UpdateData", async () => {
 
 		(https://www.rtlplay.be/rtlplay/collection/c2dBY3Rpb24) */
 		case ["collection", "series", "films", "divertissement"].includes(
-			pathname.split("/")[2]
+			pathParts[2]
 		): {
-			if (usePrivacyMode) presenceData.details = strings.viewAPage;
-			else {
+			if (usePrivacyMode) { 
+				presenceData.state = strings.viewAPage;
+
+				presenceData.smallImageKey = LargeAssets.Privacy;
+				presenceData.smallImageText = strings.privacy;
+			} else {
 				const data = JSON.parse(
 					document.querySelector("script[type='application/ld+json']")
 						.textContent
 				);
 
-				presenceData.details = strings.viewCategory;
-				presenceData.state =
-					pathname.split("/")[2] !== "collection"
-						? pathname.split("/")[2][0].toUpperCase() +
-						  pathname.split("/")[2].substring(1) // to Upper Case the first letter
+				presenceData.state = strings.viewCategory.replace(":", "");
+				presenceData.details =
+					pathParts[2] !== "collection"
+						? pathParts[2][0].toUpperCase() + pathParts[2].substring(1) // to Upper Case the first letter
 						: data[0]["@type"] === "CollectionPage"
 						? data[0].name
 						: null;
 
-				presenceData.smallImageKey = Assets.Viewing;
-				presenceData.smallImageText = strings.viewCategory;
+				presenceData.smallImageKey = LargeAssets.Binoculars;
+				presenceData.smallImageText = strings.browsing;
 
 				if (useTimestamps) presenceData.startTimestamp = browsingTimestamp;
 
@@ -166,104 +200,118 @@ presence.on("UpdateData", async () => {
 		/* DIRECT PAGE (Page des chaines en direct)
 
 		(https://www.rtlplay.be/rtlplay/direct/tvi)*/
-		case (hostname === "www.rtlplay.be" &&
-			["direct"].includes(pathname.split("/")[2])) ||
-			(hostname === "www.radiocontact.be" &&
-				["player"].includes(pathname.split("/")[1])): {
+		case (hostname === "www.rtlplay.be" && ["direct"].includes(pathParts[2])) ||
+			(["www.radiocontact.be", "www.belrtl.be"].includes(hostname) &&
+				["player"].includes(pathParts[1])): {
 			switch (true) {
 				case hostname === "www.rtlplay.be": {
-					if (exist("div.playerui__adBreakInfo")) {
-						presenceData.smallImageKey = ["fr-FR"].includes(lang)
-							? LargeAssets.AdFr
-							: LargeAssets.AdEn;
-						presenceData.smallImageText = strings.watchingAd;
-					} else if (exist("i.playerui__icon--name-play")) {
-						// State paused
-						presenceData.smallImageKey = Assets.Pause;
-						presenceData.smallImageText = strings.pause;
-					} else if (exist("div.playerui__liveStat--deferred")) {
-						// State deferred
-						presenceData.smallImageKey = LargeAssets.Deferred;
-						presenceData.smallImageText = strings.deferred;
-					} else {
-						// State live
-						presenceData.smallImageKey = LargeAssets.LiveAnimated;
-						presenceData.smallImageText = strings.live;
-					}
-
 					if (usePrivacyMode) {
 						presenceData.details = strings.watchingLive;
-						presenceData.largeImageKey = LargeAssets.Logo;
+
+						presenceData.smallImageKey = LargeAssets.Privacy;
+						presenceData.smallImageText = strings.privacy;
 					} else {
+						if (exist("div.playerui__adBreakInfo")) {
+							presenceData.smallImageKey = getLocalizedAssets(lang, "Ad");
+							presenceData.smallImageText = strings.watchingAd;
+						} else if (exist("i.playerui__icon--name-play")) {
+							// State paused
+							presenceData.smallImageKey = Assets.Pause;
+							presenceData.smallImageText = strings.pause;
+						} else if (exist("div.playerui__liveStat--deferred")) {
+							// State deferred
+							presenceData.smallImageKey = LargeAssets.Deferred;
+							presenceData.smallImageText = strings.deferred;
+						} else {
+							// State live
+							presenceData.smallImageKey = LargeAssets.LiveAnimated;
+							presenceData.smallImageText = strings.live;
+						}
+
 						if (
 							!useChannelName &&
 							document
 								.querySelector("li[aria-current='true'] > a > div > h2")
 								.textContent.toLowerCase() !== "aucune donnée disponible" &&
-							!["contact", "bel"].includes(pathname.split("/")[3]) // Radio show name are not relevant
+							!["contact", "bel"].includes(pathParts[3]) // Radio show name are not relevant
 						) {
 							presenceData.name = document.querySelector(
 								"li[aria-current='true'] > a > div > h2"
 							).textContent;
-						} else
-							presenceData.name = getChannel(pathname.split("/")[3]).channel;
+						} else presenceData.name = getChannel(pathParts[3]).channel;
 
-						presenceData.type = getChannel(pathname.split("/")[3]).type;
+						presenceData.type = getChannel(pathParts[3]).type;
 
-						presenceData.details = strings.watchingLive;
-						presenceData.state = document.querySelector(
+						presenceData.state = strings.watchingLive;
+						presenceData.details = document.querySelector(
 							"li[aria-current='true'] > a > div > h2"
 						).textContent;
 
-						if (["contact", "bel"].includes(pathname.split("/")[3])) {
+						if (["contact", "bel"].includes(pathParts[3])) {
 							/* Songs played in the livestream are the same as the audio radio ones but with video clips
 							Fetch the data from the Radioplayer API. It is used on the official radio contact and bel rtl websites */
-							const url = ["bel"].includes(pathname.split("/")[3])
-									? "https://core-search.radioplayer.cloud/056/qp/v4/events/?rpId=6" /* Bel RTL */
-									: "https://core-search.radioplayer.cloud/056/qp/v4/events/?rpId=1" /* Radio Contact */,
-								response = await fetch(url),
+							const response = await fetch(
+									getChannel(pathParts[3]).radioplayerAPI
+								),
 								dataString = await response.text(),
 								media = JSON.parse(dataString);
 
 							if (media.results.now.type === "PE_E") {
 								// When a song is played
-								presenceData.largeImageKey = media.results.now.songArtURL; // Song cover art are always square so we don't need to generate a thumbnail
-								presenceData.largeImageText = `${media.results.now.name} - ${media.results.now.artistName}`;
+								presenceData.largeImageKey = await getThumbnail(media.results.now.songArtURL); 
+								presenceData.state = `${media.results.now.name} - ${media.results.now.artistName}`;
 							} else {
 								// When we don't have a song, we simply show the radio name as the show name is already displayed in state
-								presenceData.largeImageKey = getChannel(
-									pathname.split("/")[3]
-								).logo;
-								presenceData.largeImageText = getChannel(
-									pathname.split("/")[3]
-								).channel;
+								presenceData.largeImageKey = getChannel(pathParts[3]).logo;
+								presenceData.state = getChannel(pathParts[3]).channel;
 							}
+
+							presenceData.largeImageText = strings.watchingLiveMusic;
+
+							presenceData.smallImageKey = LargeAssets.VinyleAnimated;
+							presenceData.smallImageText = strings.listeningMusic;
 						} else {
-							presenceData.largeImageKey = getChannel(
-								pathname.split("/")[3]
-							).logo;
-							presenceData.largeImageText = getChannel(
-								pathname.split("/")[3]
-							).channel;
+							presenceData.largeImageKey = getChannel(pathParts[3]).logo;
+							presenceData.largeImageText = getChannel(pathParts[3]).channel;
 						}
 
-						if (useTimestamps && exist("span.playerui__controls__stat__time")) {
-							// Radio livestream doesn't have stat time
-							[presenceData.startTimestamp, presenceData.endTimestamp] =
-								presence.getTimestamps(
-									presence.timestampFromFormat(
-										document
-											.querySelector("span.playerui__controls__stat__time")
-											.textContent.split("/")[0]
-											.trim()
-									),
-									presence.timestampFromFormat(
-										document
-											.querySelector("span.playerui__controls__stat__time")
-											.textContent.split("/")[1]
-											.trim()
-									)
-								);
+						if (useTimestamps) {
+							if (exist("span.playerui__controls__stat__time")) {
+								// Video method: Uses video viewing statistics near play button if displayed
+								[presenceData.startTimestamp, presenceData.endTimestamp] =
+									presence.getTimestamps(
+										presence.timestampFromFormat(
+											document
+												.querySelector("span.playerui__controls__stat__time")
+												.textContent.split("/")[0]
+												.trim()
+										),
+										presence.timestampFromFormat(
+											document
+												.querySelector("span.playerui__controls__stat__time")
+												.textContent.split("/")[1]
+												.trim()
+										)
+									);
+							} else {
+								// Fallback method: Uses program start and end times in tv guide overlay
+								presenceData.startTimestamp = Math.floor(new Date(
+									document
+										.querySelector(
+											'li.live-broadcast__channel[aria-current="true"] time[js-element="startTime"]'
+										)
+										.getAttribute("datetime")
+										.replace(/[+-]\d{2}:\d{2}\[.*\]/, "") // Removing UTC offset and the time zone
+								).getTime() / 1000);
+								presenceData.endTimestamp = Math.floor(new Date(
+											document
+												.querySelector(
+													'li.live-broadcast__channel[aria-current="true"] time[js-element="endTime"]'
+												)
+												.getAttribute("datetime")
+												.replace(/[+-]\d{2}:\d{2}\[.*\]/, "") // Removing UTC offset and the time zone
+										).getTime() / 1000);
+							}
 						} else if (exist("span.playerui__controls__stat__time")) {
 							presenceData.largeImageText += ` - ${Math.round(
 								presence.timestampFromFormat(
@@ -285,43 +333,77 @@ presence.on("UpdateData", async () => {
 					}
 					break;
 				}
-				case hostname === "www.radiocontact.be": {
-					presenceData.name = getChannel("contact").channel;
-					presenceData.type = getChannel("contact").type;
+				case ["www.radiocontact.be", "www.belrtl.be"].includes(hostname): {
+					if (usePrivacyMode) {
+						presenceData.details = strings.listeningMusic;
 
-					if (exist('button[aria-label="stop"]')) {
-						presenceData.smallImageKey = LargeAssets.Listening;
+						presenceData.type = ActivityType.Listening;
+
+						presenceData.smallImageKey = LargeAssets.VinyleAnimated;
 						presenceData.smallImageText = strings.listeningMusic;
 					} else {
-						presenceData.smallImageKey = Assets.Stop;
-						presenceData.smallImageText = strings.pause;
-					}
+						presenceData.name = getChannel(hostname).channel;
+						presenceData.type = getChannel(hostname).type;
 
-					if (!usePrivacyMode) {
-						// Fetch the data from the API
-						const response = await fetch(
-								"https://core-search.radioplayer.cloud/056/qp/v4/events/?rpId=1"
-							), // Website backend use radioplayer api
-							dataString = await response.text(),
-							data = JSON.parse(dataString);
-
-						if (data.results.now.type === "PE_E") {
-							// When a song is played
-							presenceData.details = data.results.now.name;
-							presenceData.state = data.results.now.artistName;
-							presenceData.largeImageKey = await getThumbnail(
-								data.results.now.songArtURL
-							);
+						if (exist('button[aria-label="stop"]')) {
+							presenceData.smallImageKey = LargeAssets.VinyleAnimated;
+							presenceData.smallImageText = strings.listeningMusic;
 						} else {
-							// When there's no song and only the show
-							presenceData.details = data.results.pis[0].programmeName;
-							presenceData.state = data.results.pis[0].programmeDescription;
-							presenceData.largeImageKey = await getThumbnail(
-								data.results.pis[0].imageUrl
-							);
+							presenceData.smallImageKey = LargeAssets.Vinyle;
+							presenceData.smallImageText = strings.pause;
 						}
 
-						presenceData.largeImageText = getChannel("contact").channel;
+						try {
+							// Fetch the data from the API
+							const response = await fetch(getChannel(hostname).radioplayerAPI), // Website backend use radioplayer api
+								dataString = await response.text(),
+								data = JSON.parse(dataString);
+							switch (data.results.now.type) {
+								// When a song is played
+								case "PE_E": {
+									presenceData.details = data.results.now.name;
+									presenceData.state = data.results.now.artistName;
+									presenceData.startTimestamp =
+										data.results.now.startTime || browsingTimestamp;
+									presenceData.endTimestamp =
+										data.results.now.stopTime ||
+										delete presenceData.endTimestamp;
+									presenceData.largeImageKey = await getThumbnail(
+										data.results.now.songArtURL
+									);
+									break;
+								}
+								// When there's no song and only the show (ex: radio host is speaking)
+								case "PI": {
+									presenceData.details = data.results.pis[0].programmeName;
+									presenceData.state = data.results.pis[0].programmeDescription;
+									presenceData.startTimestamp =
+										data.results.now.startTime || browsingTimestamp;
+									presenceData.endTimestamp =
+										data.results.now.stopTime ||
+										delete presenceData.endTimestamp;
+									presenceData.largeImageKey = await getThumbnail(
+										data.results.pis[0].imageUrl
+									);
+									break;
+								}
+								// When there's songs but no show (ex: late night)
+								default: {
+									presenceData.details = getChannel(hostname).channel;
+									presenceData.state = strings.listeningMusic;
+									presenceData.largeImageKey = getChannel(hostname).logo;
+									break;
+								}
+							}
+
+							presenceData.largeImageText = limitText(
+								`${getChannel(hostname).channel} - ${
+									data.results.now.serviceDescription
+								}`
+							);
+						} catch (error) {
+							presence.error(`Error fetching data from the API: ${error}`);
+						}
 
 						if (useButtons) {
 							presenceData.buttons = [
@@ -341,7 +423,7 @@ presence.on("UpdateData", async () => {
 		/* MEDIA PLAYER PAGE (Lecteur video)
 
 		(https://www.rtlplay.be/rtlplay/player/75e9a91b-29d1-4856-be8c-0b3532862404) */
-		case ["player"].includes(pathname.split("/")[2]): {
+		case ["player"].includes(pathParts[2]): {
 			const {
 				mediaName = document.querySelector("h1.lfvp-player__title").textContent,
 				seasonNumber,
@@ -366,75 +448,106 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = strings.privacy;
 			} else {
 				// Media Infos
-				if (usePresenceName) presenceData.name = mediaName;
+				if (usePresenceName) {
+					presenceData.name = mediaName; //  Watching MediaName
+					presenceData.details = episodeName; // EpisodeName
+					if (episodeName)
+						presenceData.state = `${strings.season} ${seasonNumber}, ${strings.episode} ${episodeNumber}`; // Season 0, Episode 0
+				} else {
+					presenceData.details = mediaName; // MediaName
+					if (episodeName)
+						presenceData.state = `S${seasonNumber} E${episodeNumber} - ${episodeName}`; // S0 - E0 - EpisodeName
+				}
 
-				presenceData.details = mediaName;
-				presenceData.state = episodeName
-					? `S${seasonNumber} E${episodeNumber} - ${episodeName}`
-					: strings.watchingMovie;
-
-				if (seasonNumber && episodeNumber)
-					presenceData.largeImageText = `${strings.season} ${seasonNumber} - ${strings.episode} ${episodeNumber}`;
+				if (seasonNumber && episodeNumber) {
+					// MediaName - Season 0 - Episode 0
+					presenceData.largeImageText = ` - ${strings.season} ${seasonNumber} - ${strings.episode} ${episodeNumber}`;
+					presenceData.largeImageText =
+						limitText(mediaName, 128 - presenceData.largeImageText.length) +
+						presenceData.largeImageText;
+				}
 
 				// Progress Bar / Timestamps
-				if (useTimestamps) {
-					const video = document.querySelector("video");
+				const ad = exist("div.playerui__adBreakInfo");
+				if (useTimestamps && !ad) {
+					const video = document.querySelector("video") as HTMLMediaElement;
 					if (video) {
-						// Getting timestamps directly from video
-						[presenceData.startTimestamp, presenceData.endTimestamp] =
-							presence.getTimestampsfromMedia(video as HTMLMediaElement);
+						// Video method: extracting from video object
+						presence.info("Timestamps is using video method");
+
 						isPaused = video.paused;
-					} else {
-						// Fallback method
-						const formattedTimestamps = document
-							.querySelector(".playerui__controls__stat__time")
-							?.textContent.split("/");
-						[presenceData.startTimestamp, presenceData.endTimestamp] =
-							presence.getTimestamps(
-								presence.timestampFromFormat(formattedTimestamps?.[0].trim()),
-								presence.timestampFromFormat(formattedTimestamps?.[1].trim())
+
+						if (isPaused) {
+							presenceData.startTimestamp = browsingTimestamp;
+							delete presenceData.endTimestamp;
+						} else {
+							presenceData.startTimestamp = adjustTimeError(
+								presence.getTimestampsfromMedia(video)[0],
+								5
 							);
+							presenceData.endTimestamp = adjustTimeError(
+								presence.getTimestampsfromMedia(video)[1],
+								5
+							);
+						}
+					} else {
+						// Fallback method: extracting from UI
+						presence.info("Timestamps is using fallback method");
+
 						isPaused = exist("i.playerui__icon--name-play");
+
+						if (isPaused) {
+							presenceData.startTimestamp = browsingTimestamp;
+							delete presenceData.endTimestamp;
+						} else {
+							const formattedTimestamps = document
+								.querySelector(".playerui__controls__stat__time")
+								?.textContent.split("/");
+
+							if (formattedTimestamps) {
+								[presenceData.startTimestamp, presenceData.endTimestamp] =
+									presence.getTimestamps(
+										adjustTimeError(
+											presence.timestampFromFormat(
+												formattedTimestamps[0].trim()
+											),
+											5
+										),
+										adjustTimeError(
+											presence.timestampFromFormat(
+												formattedTimestamps[1].trim()
+											),
+											5
+										)
+									);
+							}
+						}
 					}
 				} else {
-					presenceData.largeImageText += ` - ${Math.round(
-						presenceData.endTimestamp.valueOf() / 60
-					)} min`;
+					presenceData.startTimestamp = browsingTimestamp;
+					delete presenceData.endTimestamp;
 				}
+
+				// Key Art - Status
+				presenceData.smallImageKey = ad
+					? getLocalizedAssets(lang, "Ad")
+					: isPaused
+					? Assets.Pause
+					: Assets.Play;
+				presenceData.smallImageText = ad
+					? strings.watchingAd
+					: isPaused
+					? strings.pause
+					: strings.play;
 
 				// Key Art - Poster
 				if (usePoster) {
 					presenceData.largeImageKey = await getThumbnail(
-							document
-								.querySelector("#content > script")
-								.textContent.match(
-									/window\.App\.playerData\s*=\s*\{[\s\S]*?poster:\s*"(.*?)",/
-								)[1]
-								.replace(/\\u0026/g, "&")
-								.replace(/\\/g, "")
-						);
-				}
-
-				// Key Art - Status
-				const ad = exist("div.playerui__adBreakInfo");
-				if (isPaused) {
-					// State paused
-					presenceData.smallImageKey = ad
-						? ["fr-FR"].includes(lang)
-							? LargeAssets.AdFr
-							: LargeAssets.AdEn
-						: Assets.Pause;
-					presenceData.smallImageText = ad ? strings.watchingAd : strings.pause;
-					delete presenceData.startTimestamp;
-					delete presenceData.endTimestamp;
-				} else {
-					// State playing
-					presenceData.smallImageKey = ad
-						? ["fr-FR"].includes(lang)
-							? LargeAssets.AdFr
-							: LargeAssets.AdEn
-						: Assets.Play;
-					presenceData.smallImageText = ad ? strings.watchingAd : strings.play;
+						document
+							.querySelector('meta[property="og:image"')
+							.getAttribute("content"),
+						cropPreset.horizontal
+					);
 				}
 
 				if (useButtons) {
@@ -454,8 +567,8 @@ presence.on("UpdateData", async () => {
 		/* MEDIA PAGE (Page de media)
 
 		(https://www.rtlplay.be/rtlplay/salvation~2ab30366-51fe-4b29-a720-5e41c9bd6991) */
-		case pathname.split("/")[2].length > 15: {
-			
+		case pathParts[2].length > 15: {
+			presenceData.startTimestamp = browsingTimestamp;
 
 			if (usePrivacyMode) {
 				presenceData.details = strings.browsing;
@@ -464,39 +577,40 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = strings.privacy;
 			} else {
 				const summaryElement = document.querySelector("p.detail__description"),
-				yearElement = document.querySelector('dd.detail__meta-label[title="Année de production"]'),
-				durationElement = document.querySelector('dd.detail__meta-label[title="Durée"]'),
-				seasonElement = document.querySelector("dd.detail__meta-label:not([title])"),
-				genresArray = document.querySelectorAll("dl:nth-child(1) > dd > a"),
-				isMovie = document.querySelector('meta[property="og:type"]').getAttribute("content").includes("movie");
+					yearElement = document.querySelector(
+						'dd.detail__meta-label[title="Année de production"]'
+					),
+					durationElement = document.querySelector(
+						'dd.detail__meta-label[title="Durée"]'
+					),
+					seasonElement = document.querySelector(
+						"dd.detail__meta-label:not([title])"
+					),
+					genresArray = document.querySelectorAll("dl:nth-child(1) > dd > a"),
+					isMovie = document
+						.querySelector('meta[property="og:type"]')
+						.getAttribute("content")
+						.includes("movie");
 
 				let subtitle = isMovie ? strings.movie : strings.tvshow;
 				subtitle += yearElement ? ` - ${yearElement.textContent}` : ""; // Add Release Year
-				subtitle += seasonElement && !isMovie ? ` - ${seasonElement.textContent}` : ""; // Add amount of seasons
+				subtitle +=
+					seasonElement && !isMovie ? ` - ${seasonElement.textContent}` : ""; // Add amount of seasons
 				subtitle += durationElement ? ` - ${durationElement.textContent}` : ""; // Add Duration
 
-				for (
-					const element of genresArray // Add Genres
-				) {
-					subtitle += ` - ${
-						element.textContent
-					}`;
-				}
+				for (const element of genresArray) // Add Genres
+					subtitle += ` - ${element.textContent}`;
 
-				presenceData.details = document.querySelector("h1.detail__title").textContent; // Title
-				presenceData.state = subtitle;
+				presenceData.details =
+					document.querySelector("h1.detail__title").textContent; // MediaName
+				presenceData.state = subtitle; // MediaType - 2024 - 4 seasons or 50 min - Action - Drame
 
-				presenceData.largeImageText = summaryElement ? limitText(summaryElement.textContent) : subtitle; // Summary if available
+				presenceData.largeImageText = summaryElement
+					? limitText(summaryElement.textContent) // 128 characters is the limit
+					: subtitle; // Summary if available
 
 				presenceData.smallImageKey = LargeAssets.Binoculars;
 				presenceData.smallImageText = strings.browsing;
-
-				if (usePoster) {
-					presenceData.largeImageKey = LargeAssets.Logo; // Temp placeholder
-					presenceData.largeImageKey = await getThumbnail(
-						document.querySelector("img.detail__poster")?.getAttribute("src")
-					);
-				}
 
 				if (useButtons) {
 					presenceData.buttons = [
@@ -506,15 +620,37 @@ presence.on("UpdateData", async () => {
 						},
 					];
 				}
+
+				if (usePoster) {
+					const presenceDataSlide = structuredClone(presenceData); // Deep copy
+
+					presenceData.largeImageKey = await getThumbnail(
+						document.querySelector("img.detail__poster")?.getAttribute("src"),
+						cropPreset.vertical
+					);
+					presenceDataSlide.largeImageKey = await getThumbnail(
+						document.querySelector("img.detail__img")?.getAttribute("src"),
+						cropPreset.horizontal
+					);
+
+					slideshow.addSlide("poster-image", presenceData, 5000);
+					slideshow.addSlide("background-image", presenceDataSlide, 5000);
+				}
 			}
 			break;
 		}
 		default: {
-			presenceData.details = strings.viewAPage;
+			presenceData.details = strings.browsing;
+			presenceData.state = strings.viewAPage;
+
+			presenceData.smallImageKey = LargeAssets.Binoculars;
+			presenceData.smallImageText = strings.browsing;
+
+			if (useTimestamps) presenceData.startTimestamp = browsingTimestamp;
 			break;
 		}
 	}
-
-	if (presenceData.details) presence.setActivity(presenceData);
-	else presence.setActivity();
+	if (slideshow.getSlides().length > 0) presence.setActivity(slideshow);
+	else if (presenceData.details) presence.setActivity(presenceData);
+	else presence.clearActivity();
 });

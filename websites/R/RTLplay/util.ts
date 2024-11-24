@@ -1,30 +1,21 @@
-export function exist(selector: string) {
-	return document.querySelector(selector) !== null;
-}
-
 export const stringsMap = {
 	play: "general.playing",
 	pause: "general.paused",
 	search: "general.search",
+	searchFor: "general.searchFor",
 	searchSomething: "general.searchSomething",
 	browsing: "general.browsing",
-	viewing: "general.viewing",
-	viewPage: "general.viewPage",
 	viewAPage: "general.viewAPage",
 	viewHome: "general.viewHome",
-	viewAccount: "general.viewAccount",
-	viewChannel: "general.viewChannel",
 	viewCategory: "general.viewCategory",
 	viewList: "netflix.viewList",
 	buttonViewPage: "general.buttonViewPage",
-	watching: "general.watching",
 	watchingAd: "youtube.ad",
 	watchingLive: "general.watchingLive",
 	watchingShow: "general.watchingShow",
 	watchingMovie: "general.watchingMovie",
 	listeningMusic: "general.listeningMusic",
 	buttonWatchStream: "general.buttonWatchStream",
-	buttonWatchVideo: "general.buttonWatchVideo",
 	buttonWatchEpisode: "general.buttonViewEpisode",
 	buttonWatchMovie: "general.buttonWatchMovie",
 	buttonListenAlong: "general.buttonListenAlong",
@@ -36,60 +27,53 @@ export const stringsMap = {
 	movie: "general.movie",
 	tvshow: "general.tvshow",
 	privacy: "general.privacy",
+	watchingLiveMusic: "general.LiveMusic"
 };
 
-export function getAdditionnalStrings(lang: string, strings: typeof stringsMap) {
+export function getAdditionnalStrings(
+	lang: string,
+	strings: typeof stringsMap
+) {
 	switch (lang) {
 		case "fr-FR": {
 			strings.deferred = "En Différé";
 			strings.movie = "Film";
 			strings.tvshow = "Série";
 			strings.privacy = "Lecture privée";
+			strings.watchingLiveMusic = "Regarde un clip musical en direct";
 
 			// Improved translation in the context of this website
 			strings.watchingShow = "Regarde une émission ou une série";
+			strings.searchFor = "Recherche de :";
+			strings.viewList = "Regarde sa liste";
+			
 			break;
 		}
 		case "nl-NL": {
 			strings.deferred = "Uitgestelde";
 			strings.movie = "Film";
-			strings.tvshow = "Série";
-			strings.privacy = "";
+			strings.tvshow = "TV-Serie";
+			strings.privacy = "Privacy";
+			strings.watchingLiveMusic = "Kijkt naar een live muziekvideo";
 			break;
 		}
 		case "de-DE": {
 			strings.deferred = "Zeitversetzt";
 			strings.movie = "Film";
-			strings.tvshow = "Fernsehserie";
-			strings.privacy = "";
+			strings.tvshow = "TV-Serie";
+			strings.privacy = "Private Mode";
+			strings.watchingLiveMusic = "Schaut ein Musikvideo live";
 			break;
 		}
 		default: {
 			strings.deferred = "Deferred";
 			strings.movie = "Movie";
 			strings.tvshow = "TV Serie";
-			strings.privacy = "Private mode";
+			strings.privacy = "Privacy Mode";
+			strings.watchingLiveMusic = "Watching a live music video";
 		}
 	}
 	return strings;
-}
-
-// Mainly used to truncate largeImageKeyText because the limit is 128 characters
-export function limitText(input: string) {
-    const maxLength = 128,
-    ellipsis = " ...";
-
-    // If input is within limit, return it as is
-    if (input.length <= maxLength) return input;
-
-    // Truncate to 125 characters (leaving room for ellipsis)
-    let truncated = input.slice(0, maxLength - ellipsis.length);
-
-    // If the truncated text ends mid-word, remove the partial word
-    if (truncated.lastIndexOf(" ") !== -1) 
-        truncated = truncated.slice(0, truncated.lastIndexOf(" "));
-    
-    return truncated + ellipsis;
 }
 
 export const enum LargeAssets {
@@ -97,7 +81,8 @@ export const enum LargeAssets {
 	Animated = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/0.gif",
 	Deferred = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/1.gif",
 	LiveAnimated = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/2.gif",
-	Listening = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/3.png",
+	Vinyle = "https://i.imgur.com/6qvsVLa.png",
+	VinyleAnimated = "https://i.imgur.com/8nd4UdO.gif",
 	Binoculars = "https://imgur.com/aF3TWVK.png",
 	Privacy = "https://imgur.com/nokHvhE.png",
 	AdEn = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/4.png",
@@ -106,8 +91,51 @@ export const enum LargeAssets {
 	RTLTVi = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/7.png",
 	RTLClub = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/8.png",
 	RTLPlug = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/9.png",
+	RTLDistrict = "https://i.imgur.com/gZdD4LA.png",
 	BelRTL = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/10.png",
 	Contact = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/11.png",
+}
+
+export function getLocalizedAssets(lang: string, assetName: string) {
+	switch (assetName) {
+		case "Ad":
+			switch (lang) {
+				case "fr-FR":
+					return LargeAssets.AdFr;
+				default:
+					return LargeAssets.AdEn;
+			}
+		default:
+			return LargeAssets.Binoculars; // Default fallback
+	}
+}
+
+// Mainly used to truncate largeImageKeyText because the limit is 128 characters
+export function limitText(input: string, maxLength = 128) {
+	const ellipsis = " ...";
+
+	// If input is within limit, return it as is
+	if (input.length <= maxLength) return input;
+
+	// Truncate to 125 characters (leaving room for ellipsis)
+	let truncated = input.slice(0, maxLength - ellipsis.length);
+
+	// If the truncated text ends mid-word, remove the partial word
+	if (truncated.lastIndexOf(" ") !== -1)
+		truncated = truncated.slice(0, truncated.lastIndexOf(" "));
+
+	return truncated + ellipsis;
+}
+
+export function exist(selector: string) {
+	return document.querySelector(selector) !== null;
+}
+
+// Copy of the function in Youtube utils
+let cachedTime = 0;
+export function adjustTimeError(time: number, acceptableError: number): number {
+	if (Math.abs(time - cachedTime) > acceptableError) cachedTime = time;
+	return cachedTime;
 }
 
 export function getChannel(channel: string) {
@@ -133,18 +161,29 @@ export function getChannel(channel: string) {
 				logo: LargeAssets.RTLPlug,
 			};
 		}
-		case channel.includes("bel"): {
+		case ["rtlplay", "district"].includes(channel): {
+			return {
+				channel: "RTL district",
+				type: ActivityType.Watching,
+				logo: LargeAssets.RTLDistrict,
+			};
+		}
+		case ["bel", "www.belrtl.be"].includes(channel): {
 			return {
 				channel: "Bel RTL",
 				type: ActivityType.Listening,
 				logo: LargeAssets.BelRTL,
+				radioplayerAPI:
+					"https://core-search.radioplayer.cloud/056/qp/v4/events/?rpId=6",
 			};
 		}
-		case channel.includes("contact"): {
+		case ["contact", "www.radiocontact.be"].includes(channel): {
 			return {
 				channel: "Radio Contact",
 				type: ActivityType.Listening,
 				logo: LargeAssets.Contact,
+				radioplayerAPI:
+					"https://core-search.radioplayer.cloud/056/qp/v4/events/?rpId=1",
 			};
 		}
 		default: {
@@ -157,14 +196,25 @@ export function getChannel(channel: string) {
 	}
 }
 
-// Adapted veryCrunchy's function from YouTube Presence https://github.com/PreMiD/Presences/pull/8000
-export async function getThumbnail(src: string): Promise<string> {
+// Greatly adapted veryCrunchy's function from YouTube Presence https://github.com/PreMiD/Presences/pull/8000
+
+export const cropPreset = {
+	// Crop values in percent correspond to Left, Right, Top, Bottom.
+	squared: [0, 0, 0, 0],
+	vertical: [0.22, 0.22, 0, 0.3],
+	horizontal: [0.425, 0.025, 0, 0],
+};
+
+export async function getThumbnail(
+	src: string = LargeAssets.Logo,
+	cropPercentages: typeof cropPreset.squared = cropPreset.squared,
+	progress = 2,
+	borderWidth = 15
+): Promise<string> {
 	return new Promise(resolve => {
 		const img = new Image(),
-			wh = 320,
-			borderThickness = 15, // Thickness of the gradient border
-			cropLeftRightPercentage = 0.14, // Percentage to crop from left and right for landscape mode (e.g., 0.1 for 10%)
-			cropTopBottomPercentage = 0.025; // Percentage to crop from top and bottom for portrait mode (e.g., 0.1 for 10%)
+			wh = 320; // Size of the square thumbnail
+
 		img.crossOrigin = "anonymous";
 		img.src = src;
 
@@ -174,76 +224,75 @@ export async function getThumbnail(src: string): Promise<string> {
 				cropX = 0,
 				cropY = 0;
 
-			if (img.width > img.height) {
-				// Landscape mode: crop left and right
-				const cropLeftRight = img.width * cropLeftRightPercentage;
-				croppedWidth = img.width - 2 * cropLeftRight;
+			// Determine if the image is landscape or portrait
+			const isLandscape = img.width > img.height;
+
+			if (isLandscape) {
+				// Landscape mode: use left and right crop percentages
+				const cropLeft = img.width * cropPercentages[0];
+				croppedWidth = img.width - cropLeft - img.width * cropPercentages[1];
 				croppedHeight = img.height;
-				cropX = cropLeftRight;
+				cropX = cropLeft;
 			} else {
-				// Portrait mode: crop top and bottom
-				const cropTopBottom = img.height * cropTopBottomPercentage;
+				// Portrait mode: use top and bottom crop percentages
+				const cropTop = img.height * cropPercentages[2];
 				croppedWidth = img.width;
-				croppedHeight = img.height - 2 * cropTopBottom;
-				cropY = cropTopBottom;
+				croppedHeight = img.height - cropTop - img.height * cropPercentages[3];
+				cropY = cropTop;
 			}
 
-			const isLandscape = croppedWidth >= croppedHeight;
+			// Determine the scale to fit the cropped image into the square canvas
 			let newWidth, newHeight, offsetX, offsetY;
 
 			if (isLandscape) {
-				newWidth = wh;
-				newHeight = (wh / croppedWidth) * croppedHeight;
-				offsetX = 0;
+				newWidth = wh - 2 * borderWidth;
+				newHeight = (newWidth / croppedWidth) * croppedHeight;
+				offsetX = borderWidth;
 				offsetY = (wh - newHeight) / 2;
 			} else {
-				newHeight = wh;
-				newWidth = (wh / croppedHeight) * croppedWidth;
+				newHeight = wh - 2 * borderWidth;
+				newWidth = (newHeight / croppedHeight) * croppedWidth;
 				offsetX = (wh - newWidth) / 2;
-				offsetY = 0;
+				offsetY = borderWidth;
 			}
 
 			const tempCanvas = document.createElement("canvas");
 			tempCanvas.width = wh;
 			tempCanvas.height = wh;
-			const ctx = tempCanvas.getContext("2d");
+			const ctx = tempCanvas.getContext("2d"),
+				// Remap progress from 0-1 to 0.03-0.97 (smallImageKey borders)
+				remappedProgress = 0.07 + progress * (0.93 - 0.07);
 
-			// Fill the canvas with the background color
+			// 1. Fill the canvas with a black background
 			ctx.fillStyle = "#172e4e";
 			ctx.fillRect(0, 0, wh, wh);
 
-			// Create the gradient
-			const gradient = ctx.createLinearGradient(0, 0, wh, 0);
-			gradient.addColorStop(0, "rgba(245,3,26,1)");
-			gradient.addColorStop(0.5, "rgba(63,187,244,1)");
-			gradient.addColorStop(1, "rgba(164,215,12,1)");
+			// 2. Draw the radial progress bar
+			if (remappedProgress > 0) {
+				ctx.beginPath();
+				ctx.moveTo(wh / 2, wh / 2);
+				const startAngle = Math.PI / 4; // 45 degrees in radians, starting from bottom-right
 
-			// Draw the gradient borders
-			if (isLandscape) {
-				// Top border
+				ctx.arc(
+					wh / 2,
+					wh / 2,
+					wh,
+					startAngle,
+					startAngle + 2 * Math.PI * remappedProgress
+				);
+				ctx.lineTo(wh / 2, wh / 2);
+
+				// Create a triangular gradient
+				const gradient = ctx.createLinearGradient(0, 0, wh, wh);
+				gradient.addColorStop(0, "rgba(245, 3, 26, 1)");
+				gradient.addColorStop(0.5, "rgba(63, 187, 244, 1)");
+				gradient.addColorStop(1, "rgba(164, 215, 12, 1)");
 				ctx.fillStyle = gradient;
-				ctx.fillRect(0, offsetY - borderThickness, wh, borderThickness);
 
-				// Bottom border
-				ctx.fillStyle = gradient;
-				ctx.fillRect(0, offsetY + newHeight, wh, borderThickness);
-			} else {
-				// Create a vertical gradient for portrait mode
-				const verticalGradient = ctx.createLinearGradient(0, 0, 0, wh);
-				verticalGradient.addColorStop(0, "rgba(245,3,26,1)");
-				verticalGradient.addColorStop(0.5, "rgba(63,187,244,1)");
-				verticalGradient.addColorStop(1, "rgba(164,215,12,1)");
-
-				// Left border
-				ctx.fillStyle = verticalGradient;
-				ctx.fillRect(offsetX - borderThickness, 0, borderThickness, wh);
-
-				// Right border
-				ctx.fillStyle = verticalGradient;
-				ctx.fillRect(offsetX + newWidth, 0, borderThickness, wh);
+				ctx.fill();
 			}
 
-			// Draw the cropped image
+			// 3. Draw the cropped image centered and zoomed out based on the borderWidth
 			ctx.drawImage(
 				img,
 				cropX,
