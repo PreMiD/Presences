@@ -56,7 +56,7 @@
 		"www.netflix.com",
 		"netflix.com"
 	],
-	"version": "6.0.3",
+	"version": "6.1.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/thumbnail.jpg",
 	"color": "#db0000",
@@ -111,6 +111,12 @@
 			"id": "showSeries",
 			"title": "Show Series",
 			"icon": "fad fa-film",
+			"value": true
+		},
+		{
+			"id": "showSmallImages",
+			"title": "Show Small Images",
+			"icon": "fad fa-pause",
 			"value": true
 		},
 		{
