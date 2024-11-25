@@ -26,7 +26,6 @@ presence.on("UpdateData", async () => {
 		)}`;
 	} else {
 		presenceData.details = "Browsing LessWrong";
-		presenceData.state = " ";
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
