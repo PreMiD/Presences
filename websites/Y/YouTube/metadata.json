@@ -72,7 +72,7 @@
 		"www.youtube.com",
 		"studio.youtube.com"
 	],
-	"version": "5.13.3",
+	"version": "5.13.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/thumbnail.jpg",
 	"color": "#E40813",
@@ -162,9 +162,9 @@
 			"if": {
 				"privacy": false
 			},
-			"title": "Logo",
+			"title": "Image",
 			"icon": "fad fa-images",
-			"value": 0,
+			"value": 1,
 			"values": [
 				"YT Logo",
 				"Thumbnail",

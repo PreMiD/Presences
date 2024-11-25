@@ -5,12 +5,18 @@
 		"id": "1145729748803272815",
 		"name": "mallusrgreat"
 	},
+	"contributors": [
+		{
+			"name": "Kaktuswerk",
+			"id": "1167417152664522764"
+		}
+	],
 	"service": "Gemini",
 	"description": {
 		"en": "Gemini gives you direct access to Google AI. Get help with writing, planning, learning, and more."
 	},
 	"url": "gemini.google.com",
-	"version": "1.0.7",
+	"version": "1.1.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Gemini/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Gemini/assets/thumbnail.png",
 	"color": "#5286d2",
@@ -21,5 +27,13 @@
 		"llm",
 		"chatbot",
 		"model"
+	],
+	"settings": [
+		{
+			"id": "showTitle",
+			"title": "Show chat title",
+			"icon": "fa-solid fa-message-quote",
+			"value": true
+		}
 	]
 }
