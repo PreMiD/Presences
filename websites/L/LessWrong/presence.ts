@@ -24,9 +24,7 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `${capitalize(
 			data[3].replace(/-\d+$/, "").split("-").join(" ")
 		)}`;
-	} else {
-		presenceData.details = "Browsing LessWrong";
-	}
+	} else presenceData.details = "Browsing LessWrong";
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
