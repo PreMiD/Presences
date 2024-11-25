@@ -161,7 +161,7 @@ presence.on("UpdateData", async () => {
 		case ["collection", "series", "films", "divertissement"].includes(
 			pathParts[2]
 		): {
-			if (usePrivacyMode) { 
+			if (usePrivacyMode) {
 				presenceData.state = strings.viewAPage;
 
 				presenceData.smallImageKey = LargeAssets.Privacy;
@@ -258,7 +258,9 @@ presence.on("UpdateData", async () => {
 
 							if (media.results.now.type === "PE_E") {
 								// When a song is played
-								presenceData.largeImageKey = await getThumbnail(media.results.now.songArtURL); 
+								presenceData.largeImageKey = await getThumbnail(
+									media.results.now.songArtURL
+								);
 								presenceData.state = `${media.results.now.name} - ${media.results.now.artistName}`;
 							} else {
 								// When we don't have a song, we simply show the radio name as the show name is already displayed in state
@@ -295,22 +297,26 @@ presence.on("UpdateData", async () => {
 									);
 							} else {
 								// Fallback method: Uses program start and end times in tv guide overlay
-								presenceData.startTimestamp = Math.floor(new Date(
-									document
-										.querySelector(
-											'li.live-broadcast__channel[aria-current="true"] time[js-element="startTime"]'
-										)
-										.getAttribute("datetime")
-										.replace(/[+-]\d{2}:\d{2}\[.*\]/, "") // Removing UTC offset and the time zone
-								).getTime() / 1000);
-								presenceData.endTimestamp = Math.floor(new Date(
-											document
-												.querySelector(
-													'li.live-broadcast__channel[aria-current="true"] time[js-element="endTime"]'
-												)
-												.getAttribute("datetime")
-												.replace(/[+-]\d{2}:\d{2}\[.*\]/, "") // Removing UTC offset and the time zone
-										).getTime() / 1000);
+								presenceData.startTimestamp = Math.floor(
+									new Date(
+										document
+											.querySelector(
+												'li.live-broadcast__channel[aria-current="true"] time[js-element="startTime"]'
+											)
+											.getAttribute("datetime")
+											.replace(/[+-]\d{2}:\d{2}\[.*\]/, "") // Removing UTC offset and the time zone
+									).getTime() / 1000
+								);
+								presenceData.endTimestamp = Math.floor(
+									new Date(
+										document
+											.querySelector(
+												'li.live-broadcast__channel[aria-current="true"] time[js-element="endTime"]'
+											)
+											.getAttribute("datetime")
+											.replace(/[+-]\d{2}:\d{2}\[.*\]/, "") // Removing UTC offset and the time zone
+									).getTime() / 1000
+								);
 							}
 						} else if (exist("span.playerui__controls__stat__time")) {
 							presenceData.largeImageText += ` - ${Math.round(

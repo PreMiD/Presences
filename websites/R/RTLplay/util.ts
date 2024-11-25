@@ -27,13 +27,13 @@ export const stringsMap = {
 	movie: "general.movie",
 	tvshow: "general.tvshow",
 	privacy: "general.privacy",
-	watchingLiveMusic: "general.LiveMusic"
+	watchingLiveMusic: "general.LiveMusic",
 };
 
 export function getAdditionnalStrings(
 	lang: string,
 	strings: typeof stringsMap
-) {
+): typeof stringsMap {
 	switch (lang) {
 		case "fr-FR": {
 			strings.deferred = "En Différé";
@@ -46,7 +46,7 @@ export function getAdditionnalStrings(
 			strings.watchingShow = "Regarde une émission ou une série";
 			strings.searchFor = "Recherche de :";
 			strings.viewList = "Regarde sa liste";
-			
+
 			break;
 		}
 		case "nl-NL": {
@@ -96,7 +96,10 @@ export const enum LargeAssets {
 	Contact = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/11.png",
 }
 
-export function getLocalizedAssets(lang: string, assetName: string) {
+export function getLocalizedAssets(
+	lang: string,
+	assetName: string
+): LargeAssets {
 	switch (assetName) {
 		case "Ad":
 			switch (lang) {
@@ -111,7 +114,7 @@ export function getLocalizedAssets(lang: string, assetName: string) {
 }
 
 // Mainly used to truncate largeImageKeyText because the limit is 128 characters
-export function limitText(input: string, maxLength = 128) {
+export function limitText(input: string, maxLength = 128): string {
 	const ellipsis = " ...";
 
 	// If input is within limit, return it as is
@@ -127,7 +130,7 @@ export function limitText(input: string, maxLength = 128) {
 	return truncated + ellipsis;
 }
 
-export function exist(selector: string) {
+export function exist(selector: string): boolean {
 	return document.querySelector(selector) !== null;
 }
 
@@ -138,7 +141,14 @@ export function adjustTimeError(time: number, acceptableError: number): number {
 	return cachedTime;
 }
 
-export function getChannel(channel: string) {
+interface ChannelInfo {
+	channel: string;
+	type: ActivityType;
+	logo: LargeAssets;
+	radioplayerAPI?: string; // Optional property
+}
+
+export function getChannel(channel: string): ChannelInfo {
 	switch (true) {
 		case channel.includes("tvi"): {
 			return {
