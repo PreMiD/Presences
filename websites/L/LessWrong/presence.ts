@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 		document.location.pathname.startsWith("/posts/") 
 	) {
 		data = document.location.pathname.split("/");
-		presenceData.details = `Browsing ${data[1]}`;
+		presenceData.details = `Reading ${data[1]}`;
 		presenceData.state = `${capitalize(data[3].replace(/-\d+$/, "").split("-").join(" "))}`;
 	} else{
 		presenceData.details = "Browsing LessWrong";
