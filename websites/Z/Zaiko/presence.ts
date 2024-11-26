@@ -34,12 +34,12 @@ presence.on("UpdateData", async () => {
 
 		presenceData.details = strings.watchingLive;
 
-		if (privacy) {
-			presenceData.smallImageKey = Data.paused ? Assets.Pause : Assets.Play;
-			presenceData.smallImageText = Data.paused
-				? strings.paused
-				: strings.playing;
-		} else {
+		presenceData.smallImageKey = Data.paused ? Assets.Pause : Assets.Play;
+		presenceData.smallImageText = Data.paused
+			? strings.paused
+			: strings.playing;
+
+		if (!privacy) {
 			const eventTitle = document
 				.querySelector<HTMLHeadingElement>("h5.stream-sidebar-header-title")
 				?.textContent.trim();
@@ -55,11 +55,6 @@ presence.on("UpdateData", async () => {
 						Math.floor(Data.duration)
 					);
 			}
-
-			presenceData.smallImageKey = Data.paused ? Assets.Pause : Assets.Play;
-			presenceData.smallImageText = Data.paused
-				? strings.paused
-				: strings.playing;
 
 			presenceData.buttons = [
 				{
