@@ -75,8 +75,8 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (pathname.startsWith("/watch")) {
 		const deta = JSON.parse(localStorage.getItem("SCHEDULE_DETAILS"));
-		let detal = ` | ${deta.subject.name}`;
-		if (deta.subject === null) detal = "";
+		let detal = ``;
+		if (deta.subject === null) detal = ""; else detal = ` | ${deta.subject.name}`;
 		if (!privacyMode) {
 			presenceData.details = `Watching Lecture${detal}`;
 
