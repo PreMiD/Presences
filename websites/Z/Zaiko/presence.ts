@@ -3,7 +3,7 @@ import { iFrameData } from "./iframe";
 const presence = new Presence({
 		clientId: "1310622511419101235",
 	}),
-	strings = await presence.getStrings({
+	getStrings = presence.getStrings({
 		playing: "general.playing",
 		paused: "general.paused",
 		watching: "general.watching",
@@ -20,7 +20,8 @@ presence.on("iFrameData", async (data: iFrameData) => {
 });
 
 presence.on("UpdateData", async () => {
-	const privacy = await presence.getSetting("privacy"),
+	const strings = await getStrings,
+		privacy = await presence.getSetting("privacy"),
 		presenceData: PresenceData = {
 			type: ActivityType.Watching,
 			largeImageKey: "https://i.imgur.com/jEBa0Ti.png",
