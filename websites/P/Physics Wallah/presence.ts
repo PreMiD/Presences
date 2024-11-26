@@ -18,10 +18,7 @@ presence.on("UpdateData", async () => {
 		{ pathname, href } = document.location,
 		fullurl = href,
 		privacyMode = await presence.getSetting<boolean>("privacy"),
-		urlsobj = new URL(
-			JSON.parse(sessionStorage.getItem("batches_urls"))[3].value,
-			"https://www.pw.live"
-		);
+		jsonobj = JSON.parse(sessionStorage.getItem("batches_urls"));
 
 	if (pathname === "/") {
 		presenceData.details = "Home";
@@ -48,41 +45,24 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Studying";
 			presenceData.buttons = [{ label: "View Batch", url: fullurl }];
-		} else if (fullurl.includes("batch-video-player")) {
-			const deta = localStorage.getItem("dpp_subject");
-			let detal = ` | ${deta}`;
-			if (deta === null) detal = "";
-			if (!privacyMode) {
-				presenceData.details = `Watching Lecture${detal}`;
-
-				presenceData.state = `${
-					JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
-				}`;
-				presenceData.buttons = [{ label: "Watch Lecture", url: fullurl }];
-			} else presenceData.details = `Watching a lecture${detal}`;
-
-			if (document.querySelectorAll(".vjs-paused").length < 1) {
-				presenceData.smallImageKey = Assets.Play;
-				presenceData.smallImageText = "Watching a lecture";
-				[presenceData.startTimestamp, presenceData.endTimestamp] =
-					updateVideoTimestamps();
-			} else {
-				presenceData.smallImageKey = Assets.Pause;
-				presenceData.smallImageText = "Paused";
-			}
 		} else if (fullurl.includes("subject-topics")) {
 			if (fullurl.includes("chapterId")) {
+				const urlsobj = new URL(jsonobj[3].value, "https://www.pw.live");
 				presenceData.details = urlsobj.searchParams.get("subject");
 				presenceData.state = urlsobj.searchParams.get("topic");
 				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Browsing Resources";
 			} else if (!fullurl.includes("chapterId")) {
-				presenceData.details = urlsobj.searchParams.get("subject");
+				presenceData.details = new URL(
+					jsonobj[2].value,
+					"https://www.pw.live"
+				).searchParams.get("subject");
 				presenceData.state = "Browsing Resources...";
 				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Browsing Resources";
 			}
 		} else if (fullurl.includes("open-pdf")) {
+			const urlsobj = new URL(jsonobj[3].value, "https://www.pw.live");
 			presenceData.details = `Solving DPP (PDF) | ${urlsobj.searchParams.get(
 				"subject"
 			)}`;
@@ -117,6 +97,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = "Paused";
 		}
 	} else if (pathname.startsWith("/practice")) {
+		const urlsobj = new URL(jsonobj[3].value, "https://www.pw.live");
 		presenceData.details = `Solving DPP (MCQ) | ${urlsobj.searchParams.get(
 			"subject"
 		)}`;
