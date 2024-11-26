@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
 			presenceData.buttons = [{ label: "Watch Lecture", url: fullurl }];
 		} else {
 			presenceData.details = "Watching a lecture";
-			presenceData.state = `Subject: ${deta}`;
+			presenceData.state = `Subject: ${deta.subject.name}`;
 		}
 		if (document.querySelectorAll(".vjs-paused").length < 1) {
 			presenceData.smallImageKey = Assets.Play;
