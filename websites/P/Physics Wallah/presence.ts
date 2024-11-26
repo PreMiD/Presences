@@ -17,7 +17,11 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, href } = document.location,
 		fullurl = href,
-		privacyMode = await presence.getSetting<boolean>("privacy");
+		privacyMode = await presence.getSetting<boolean>("privacy"),
+		urlsobj = new URL(
+			JSON.parse(sessionStorage.getItem("batches_urls"))[3].value,
+			"https://www.pw.live"
+		);
 
 	if (pathname === "/") {
 		presenceData.details = "Home";
@@ -67,33 +71,22 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = "Paused";
 			}
 		} else if (fullurl.includes("subject-topics")) {
-			const details = JSON.parse(localStorage.getItem("SCHEDULE_DETAILS"));
 			if (fullurl.includes("chapterId")) {
-				presenceData.details = details.tags[0];
-				presenceData.state = details.subject.name;
+				presenceData.details = urlsobj.searchParams.get("subject");
+				presenceData.state = urlsobj.searchParams.get("topic");
 				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Browsing Resources";
 			} else if (!fullurl.includes("chapterId")) {
-				presenceData.details = details.subject.name;
+				presenceData.details = urlsobj.searchParams.get("subject");
 				presenceData.state = "Browsing Resources...";
 				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Browsing Resources";
 			}
 		} else if (fullurl.includes("open-pdf")) {
-			const dppsubject = localStorage.getItem("dpp_subject");
-			if (dppsubject) {
-				presenceData.details = "Solving DPP (PDF)";
-				if (!privacyMode) presenceData.state = dppsubject;
-				else presenceData.state = "Improving skills";
-
-				presenceData.startTimestamp = browsingTimestamp;
-				presenceData.smallImageKey = Assets.Viewing;
-				presenceData.smallImageText = "Viewing DPP";
-			}
-		} else if (fullurl.includes("q-bank-exercise")) {
-			presenceData.details = "Solving DPP (MCQ)";
-			if (!privacyMode)
-				presenceData.state = localStorage.getItem("dpp_subject");
+			presenceData.details = `Solving DPP (PDF) | ${urlsobj.searchParams.get(
+				"subject"
+			)}`;
+			if (!privacyMode) presenceData.state = urlsobj.searchParams.get("topic");
 			else presenceData.state = "Improving skills";
 
 			presenceData.startTimestamp = browsingTimestamp;
@@ -102,7 +95,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (pathname.startsWith("/watch")) {
 		const deta = JSON.parse(localStorage.getItem("SCHEDULE_DETAILS"));
-		let detal = ` | ${deta.subject}`;
+		let detal = ` | ${deta.subject.name}`;
 		if (deta.subject === null) detal = "";
 		if (!privacyMode) {
 			presenceData.details = `Watching Lecture${detal}`;
@@ -123,6 +116,16 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Paused";
 		}
+	} else if (pathname.startsWith("/practice")) {
+		presenceData.details = `Solving DPP (MCQ) | ${urlsobj.searchParams.get(
+			"subject"
+		)}`;
+		if (!privacyMode) presenceData.state = urlsobj.searchParams.get("topic");
+		else presenceData.state = "Improving skills";
+
+		presenceData.startTimestamp = browsingTimestamp;
+		presenceData.smallImageKey = Assets.Viewing;
+		presenceData.smallImageText = "Viewing DPP";
 	}
 	presence.setActivity(presenceData);
 });
