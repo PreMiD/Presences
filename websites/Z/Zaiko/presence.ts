@@ -26,7 +26,6 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/jEBa0Ti.png",
 			startTimestamp: browsingTimestamp,
 		},
-		ownerId = /(.+).zaiko.io/.exec(document.location.hostname)?.[1],
 		eventId = /\/event\/(\d+)\/stream.*/.exec(document.location.pathname)?.[1];
 
 	if (eventId) {
@@ -68,7 +67,7 @@ presence.on("UpdateData", async () => {
 				},
 			];
 		}
-	} else if (ownerId) {
+	} else if (/(.+).zaiko.io/.test(document.location.hostname)) {
 		let eventTitle, eventCover, ownerAvatar;
 		if (document.querySelector(".item-page")) {
 			// white background pattern e.g. 365423
@@ -108,8 +107,8 @@ presence.on("UpdateData", async () => {
 
 				presenceData.buttons = [
 					{
-						label: strings.buttonWatchStream,
-						url: `https://${ownerId}.zaiko.io/item/${eventId}`,
+						label: strings.buttonViewPage,
+						url: document.location.href,
 					},
 				];
 			}
