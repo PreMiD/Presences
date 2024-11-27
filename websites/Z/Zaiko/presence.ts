@@ -1,4 +1,4 @@
-import { iFrameData } from "./iframe";
+import { iFrameData as IFrameData } from "./iframe";
 
 const presence = new Presence({
 		clientId: "1310622511419101235",
@@ -13,9 +13,9 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let Data: iFrameData;
+let Data: IFrameData;
 
-presence.on("iFrameData", async (data: iFrameData) => {
+presence.on("iFrameData", async (data: IFrameData) => {
 	Data = data;
 });
 
@@ -67,14 +67,14 @@ presence.on("UpdateData", async () => {
 		let eventTitle, eventCover, ownerAvatar;
 		if (document.querySelector(".item-page")) {
 			// white background pattern e.g. 365423
-			(eventTitle = document
+			eventTitle = document
 				.querySelector(
 					".item-page > div > div.container > div > div.my-4.col-lg-7 > div > div > div.mb-2 > h1"
 				)
-				?.textContent.trim()),
-				(eventCover = document.querySelector<HTMLImageElement>(
-					".item-page > div > div.container-fluid > div > figure > img"
-				)?.src);
+				?.textContent.trim();
+			eventCover = document.querySelector<HTMLImageElement>(
+				".item-page > div > div.container-fluid > div > figure > img"
+			)?.src;
 			ownerAvatar =
 				document.querySelector<HTMLImageElement>(".img-profile-logo")?.src;
 		} else {
