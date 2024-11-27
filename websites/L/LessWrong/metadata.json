@@ -13,8 +13,8 @@
 	],
 	"service": "LessWrong",
 	"description": {
-		"en": "LessWrong - An online forum and community dedicated to improving human reasoning and decision-making",
-		"es": "LessWrong - Foro y comunidad en línea dedicados a mejorar el razonamiento humano y la toma de decisiones."
+		"en": "An online forum and community dedicated to improving human reasoning and decision-making",
+		"es": "Foro y comunidad en línea dedicados a mejorar el razonamiento humano y la toma de decisiones."
 	},
 	"url": "www.lesswrong.com",
 	"version": "1.0.0",
