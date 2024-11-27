@@ -16,7 +16,6 @@ presence.on("UpdateData", async () => {
 			type: ActivityType.Watching,
 		},
 		{ pathname, href } = document.location,
-		fullurl = href,
 		privacyMode = await presence.getSetting<boolean>("privacy"),
 		jsonobj = JSON.parse(sessionStorage.getItem("batches_urls"));
 
@@ -37,22 +36,22 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Studying";
 		}
-		if (fullurl.includes("batch-overview")) {
+		if (href.includes("batch-overview")) {
 			presenceData.details = "Studying...";
 			presenceData.state = `Viewing ${
 				JSON.parse(localStorage.getItem("BATCH_DETAILS")).name
 			}`;
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Studying";
-			presenceData.buttons = [{ label: "View Batch", url: fullurl }];
-		} else if (fullurl.includes("subject-topics")) {
-			if (fullurl.includes("chapterId")) {
+			presenceData.buttons = [{ label: "View Batch", url: href }];
+		} else if (href.includes("subject-topics")) {
+			if (href.includes("chapterId")) {
 				const urlsobj = new URL(jsonobj[3].value, "https://www.pw.live");
 				presenceData.details = urlsobj.searchParams.get("subject");
 				presenceData.state = urlsobj.searchParams.get("topic");
 				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Browsing Resources";
-			} else if (!fullurl.includes("chapterId")) {
+			} else if (!href.includes("chapterId")) {
 				presenceData.details = new URL(
 					jsonobj[2].value,
 					"https://www.pw.live"
@@ -61,7 +60,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Browsing Resources";
 			}
-		} else if (fullurl.includes("open-pdf")) {
+		} else if (href.includes("open-pdf")) {
 			const urlsobj = new URL(jsonobj[3].value, "https://www.pw.live");
 			presenceData.details = `Solving DPP (PDF) | ${urlsobj.searchParams.get(
 				"subject"
@@ -83,7 +82,7 @@ presence.on("UpdateData", async () => {
 
 			presenceData.state = `${deta.topic}`;
 
-			presenceData.buttons = [{ label: "Watch Lecture", url: fullurl }];
+			presenceData.buttons = [{ label: "Watch Lecture", url: href }];
 		} else {
 			presenceData.details = "Watching a lecture";
 			presenceData.state = `Subject: ${deta.subject.name}`;
