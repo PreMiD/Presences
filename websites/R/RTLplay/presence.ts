@@ -5,7 +5,6 @@ import {
 	getLocalizedAssets,
 	limitText,
 	exist,
-	adjustTimeError,
 	getChannel,
 	cropPreset,
 	getThumbnail,
@@ -32,10 +31,7 @@ presence.on("UpdateData", async () => {
 		pathParts = pathname.split("/"),
 		presenceData: PresenceData = {
 			name: "RTLplay",
-			largeImageKey:
-				hostname === "www.radiocontact.be"
-					? LargeAssets.Contact
-					: LargeAssets.Animated, // Default
+			largeImageKey: LargeAssets.Animated, // Default
 			largeImageText: "RTLplay",
 			type: ActivityType.Watching,
 		},
@@ -487,14 +483,10 @@ presence.on("UpdateData", async () => {
 							presenceData.startTimestamp = browsingTimestamp;
 							delete presenceData.endTimestamp;
 						} else {
-							presenceData.startTimestamp = adjustTimeError(
-								presence.getTimestampsfromMedia(video)[0],
-								5
-							);
-							presenceData.endTimestamp = adjustTimeError(
-								presence.getTimestampsfromMedia(video)[1],
-								5
-							);
+							presenceData.startTimestamp =
+								presence.getTimestampsfromMedia(video)[0];
+							presenceData.endTimestamp =
+								presence.getTimestampsfromMedia(video)[1];
 						}
 					} else {
 						// Fallback method: extracting from UI
@@ -513,18 +505,8 @@ presence.on("UpdateData", async () => {
 							if (formattedTimestamps) {
 								[presenceData.startTimestamp, presenceData.endTimestamp] =
 									presence.getTimestamps(
-										adjustTimeError(
-											presence.timestampFromFormat(
-												formattedTimestamps[0].trim()
-											),
-											5
-										),
-										adjustTimeError(
-											presence.timestampFromFormat(
-												formattedTimestamps[1].trim()
-											),
-											5
-										)
+										presence.timestampFromFormat(formattedTimestamps[0].trim()),
+										presence.timestampFromFormat(formattedTimestamps[1].trim())
 									);
 							}
 						}

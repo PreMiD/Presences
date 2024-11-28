@@ -22,7 +22,9 @@ export const stringsMap = {
 	live: "general.live",
 	season: "general.season",
 	episode: "general.episode",
-	// Custom strings
+
+	/* Since the Presence is for a service localized in Belgium, 
+	I recommend translating custom strings in the 3 official languages as well as English */
 	deferred: "general.deferred",
 	movie: "general.movie",
 	tvshow: "general.tvshow",
@@ -132,13 +134,6 @@ export function limitText(input: string, maxLength = 128): string {
 
 export function exist(selector: string): boolean {
 	return document.querySelector(selector) !== null;
-}
-
-// Copy of the function in Youtube utils
-let cachedTime = 0;
-export function adjustTimeError(time: number, acceptableError: number): number {
-	if (Math.abs(time - cachedTime) > acceptableError) cachedTime = time;
-	return cachedTime;
 }
 
 interface ChannelInfo {

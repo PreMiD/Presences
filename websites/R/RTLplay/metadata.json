@@ -6,6 +6,15 @@
 		"name": "pierrequlroule"
 	},
 	"service": "RTLplay",
+	"altnames": [
+		"RTL play",
+		"RTL TVI",
+		"Club RTL",
+		"Plug RTL",
+		"RTL District",
+		"Bel RTL",
+		"Radio Contact"
+	],
 	"description": {
 		"en": "With RTLplay, you'll find all the programs of our RTL TVI, Club RTL, Plug RTL, RTL District, Bel RTL and Radio Contact channels live and in replay, as well as exclusive content.",
 		"fr": "Avec RTLplay, retrouvez tous les programmes de nos chaînes RTL TVI, Club RTL, Plug RTL, RTL District, Bel RTL et Radio Contact en direct et en replay ainsi que des contenus exclusifs.",
@@ -33,6 +42,9 @@
 		"district",
 		"contact",
 		"belrtl",
+		"belgique",
+		"belgien",
+		"belgië",
 		"media",
 		"video",
 		"radio",
