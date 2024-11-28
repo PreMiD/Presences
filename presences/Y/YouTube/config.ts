@@ -1,6 +1,6 @@
-import { definePresence, type PresenceConfig } from "premid";
+import { definePresence } from "premid";
 
-const config = {
+const config = definePresence({
 	category: "video",
 	color: "#ff0000",
 	description: "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube.",
@@ -71,8 +71,8 @@ const config = {
 			},
 		],
 	},
-} as const satisfies PresenceConfig;
+});
 
-export default definePresence(config);
+export default config;
 
 export type YouTubeConfig = typeof config;

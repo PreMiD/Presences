@@ -2,7 +2,7 @@ import type { Category, Color, ImageURL, UUID } from "@presences/types";
 
 import type { WebsiteConfig } from "./website.js";
 
-export function definePresence<T extends PresenceConfig>(config: T): T {
+export function definePresence<const T extends PresenceConfig>(config: T): T {
 	return config;
 }
 
