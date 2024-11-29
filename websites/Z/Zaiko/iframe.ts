@@ -1,4 +1,4 @@
-export interface iFrameData {
+export interface IFrameData {
 	currentTime: number;
 	duration: number;
 	paused: boolean;
@@ -12,7 +12,7 @@ iframe.on("UpdateData", async () => {
 		"#vjs_video_3_html5_api"
 	);
 	if (video) {
-		const data: iFrameData = {
+		const data: IFrameData = {
 			currentTime: video.currentTime,
 			duration: video.duration,
 			paused: video.paused,

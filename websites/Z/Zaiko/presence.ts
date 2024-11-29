@@ -1,4 +1,4 @@
-import { iFrameData as IFrameData } from "./iframe";
+import { IFrameData } from "./iframe";
 
 const presence = new Presence({
 		clientId: "1310622511419101235",
