@@ -21,8 +21,12 @@ presence.on("UpdateData", async () => {
 
 	if (pathname.includes("/users/")) {
 		presenceData.details = `Profil de : ${
-			document.querySelector("p.text-md.text-neutral-500").childNodes[0].textContent.trim() +
-			document.querySelector("p.text-md.text-neutral-500").childNodes[1].textContent.trim()
+			document
+				.querySelector("p.text-md.text-neutral-500")
+				.childNodes[0].textContent.trim() +
+			document
+				.querySelector("p.text-md.text-neutral-500")
+				.childNodes[1].textContent.trim()
 		}`;
 		presenceData.state = `Regarde le profil de l'utilisateur ${
 			document.querySelector("h1").textContent
