@@ -13,10 +13,10 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let Data: IFrameData;
+let data: IFrameData;
 
-presence.on("iFrameData", async (data: IFrameData) => {
-	Data = data;
+presence.on("iFrameData", async (receivedData: IFrameData) => {
+	data = receivedData;
 });
 
 presence.on("UpdateData", async () => {
@@ -30,12 +30,12 @@ presence.on("UpdateData", async () => {
 		eventId = /\/event\/(\d+)\/stream.*/.exec(document.location.pathname)?.[1];
 
 	if (eventId) {
-		if (!Data) return;
+		if (!data) return;
 
 		presenceData.details = strings.watchingLive;
 
-		presenceData.smallImageKey = Data.paused ? Assets.Pause : Assets.Play;
-		presenceData.smallImageText = Data.paused
+		presenceData.smallImageKey = data.paused ? Assets.Pause : Assets.Play;
+		presenceData.smallImageText = data.paused
 			? strings.paused
 			: strings.playing;
 
@@ -47,12 +47,12 @@ presence.on("UpdateData", async () => {
 			presenceData.state = eventTitle;
 			presenceData.largeImageText = eventTitle;
 
-			if (Data.thumbnail) presenceData.largeImageKey = Data.thumbnail;
-			if (!Data.paused && !isNaN(Data.duration)) {
+			if (data.thumbnail) presenceData.largeImageKey = data.thumbnail;
+			if (!data.paused && !isNaN(data.duration)) {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestamps(
-						Math.floor(Data.currentTime),
-						Math.floor(Data.duration)
+						Math.floor(data.currentTime),
+						Math.floor(data.duration)
 					);
 			}
 
