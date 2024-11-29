@@ -21,7 +21,8 @@ presence.on("UpdateData", async () => {
 
 	if (pathname.includes("/users/")) {
 		presenceData.details = `Profil de : ${
-			document.querySelector("span").textContent
+			document.querySelector("p.text-md.text-neutral-500").childNodes[0].textContent.trim() +
+			document.querySelector("p.text-md.text-neutral-500").childNodes[1].textContent.trim()
 		}`;
 		presenceData.state = `Regarde le profil de l'utilisateur ${
 			document.querySelector("h1").textContent
@@ -101,7 +102,11 @@ presence.on("UpdateData", async () => {
 			case "/privacy":
 				presenceData.details = "Politique de confidentialité";
 				presenceData.state =
-					"Regarde la politique de confidentialité (il veur voir si on respecte le RGPD)...";
+					"Regarde la politique de confidentialité (il veut voir si on respecte le RGPD)...";
+				break;
+			case "/cacaxcoin":
+				presenceData.details = "CacaXCoin (CXC)";
+				presenceData.state = "Regarde la page CacaXCoin...";
 				break;
 			default:
 				presenceData.details = "Navigue";
