@@ -8,7 +8,7 @@
 	"service": "AniLibria",
 	"description": {
 		"en": "AniLibria.top is Russian anime website",
-		"ru": "Jut.su — это русский сайт с аниме"
+		"ru": "AniLibria.top — это русский сайт с аниме"
 	},
 	"url": "anilibria.top",
 	"version": "1.0.0",
@@ -16,9 +16,5 @@
 	"thumbnail": "https://i.imgur.com/cUAUbMU.png",
 	"color": "#fe3635",
 	"category": "anime",
-	"tags": [
-		"anilibria",
-        "libria",
-		"anime"
-	]
+	"tags": ["anilibria", "libria", "anime"]
 }
