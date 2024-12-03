@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
+	"author": {
+		"id": "1120534568018116669",
+		"name": "flimixofficial"
+	},
+	"service": "AniLibria",
+	"description": {
+		"en": "AniLibria.top is Russian anime website",
+		"ru": "Jut.su — это русский сайт с аниме"
+	},
+	"url": "anilibria.top",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/HrvpNEc.png",
+	"thumbnail": "https://i.imgur.com/cUAUbMU.png",
+	"color": "#fe3635",
+	"category": "anime",
+	"tags": [
+		"anilibria",
+        "libria",
+		"anime"
+	]
+}
