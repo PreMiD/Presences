@@ -1,24 +1,23 @@
-const presence = new Presence({ clientId: "1165759293576982578" });
-
-const PATHS = {
-	MAIN_PAGE: "/",
-	CATALOG: "/anime/catalog/",
-	SCHEDULE: "/anime/schedule",
-	LATEST_VIDEOS: "/media/videos/latest/",
-	LATEST_EPISODES: "/anime/releases/latest/",
-	FAVORITES: "/me/favorites/",
-	COLLECTIONS: "/me/collections/",
-	FRANCHISES: "/anime/franchises/",
-	GENRES: "/anime/genres/",
-	TORRENTS: "/anime/torrents/",
-	RULES: "/rules",
-	API_DOCS: "/api/docs/v1",
-	RELEASE_EPISODES: /\/anime\/releases\/release\/[^/]+\/episodes/,
-	RELEASE_FRANCHISES: /\/anime\/releases\/release\/[^/]+\/franchises/,
-	RELEASE_MEMBERS: /\/anime\/releases\/release\/[^/]+\/members/,
-	RELEASE_TORRENTS: /\/anime\/releases\/release\/[^/]+\/torrents/,
-	WATCH_EPISODE: /\/anime\/video\/episode\//,
-};
+const presence = new Presence({ clientId: "1165759293576982578" }),
+	PATHS = {
+		MAIN_PAGE: "/",
+		CATALOG: "/anime/catalog/",
+		SCHEDULE: "/anime/schedule",
+		LATEST_VIDEOS: "/media/videos/latest/",
+		LATEST_EPISODES: "/anime/releases/latest/",
+		FAVORITES: "/me/favorites/",
+		COLLECTIONS: "/me/collections/",
+		FRANCHISES: "/anime/franchises/",
+		GENRES: "/anime/genres/",
+		TORRENTS: "/anime/torrents/",
+		RULES: "/rules",
+		API_DOCS: "/api/docs/v1",
+		RELEASE_EPISODES: /\/anime\/releases\/release\/[^/]+\/episodes/,
+		RELEASE_FRANCHISES: /\/anime\/releases\/release\/[^/]+\/franchises/,
+		RELEASE_MEMBERS: /\/anime\/releases\/release\/[^/]+\/members/,
+		RELEASE_TORRENTS: /\/anime\/releases\/release\/[^/]+\/torrents/,
+		WATCH_EPISODE: /\/anime\/video\/episode\//,
+	};
 
 presence.on("UpdateData", async () => {
 	const { pathname, href } = document.location,
