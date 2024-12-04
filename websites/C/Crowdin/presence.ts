@@ -259,7 +259,11 @@ presence.on("UpdateData", async () => {
 						} else if (pathname.includes("/settings"))
 							presenceData.state = "Managing project settings";
 					}
-					if (!presenceData.details && presenceData.state && !(presenceData.state as string).split(" ").includes("translation")) {
+					if (
+						!presenceData.details &&
+						presenceData.state &&
+						!(presenceData.state as string).split(" ").includes("translation")
+					) {
 						const stateSplit = (presenceData.state as string).split(" ");
 						if (!stateSplit.includes("project"))
 							stateSplit.splice(1, 0, "a project's");
