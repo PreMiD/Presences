@@ -17,9 +17,9 @@
 		"es": "Foro y comunidad en línea dedicados a mejorar el razonamiento humano y la toma de decisiones."
 	},
 	"url": "www.lesswrong.com",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/suBFk2v.png",
-	"thumbnail": "https://i.imgur.com/SVKFc02.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LessWrong/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LessWrong/assets/thumbnail.png",
 	"color": "#FFFFFF",
 	"category": "other",
 	"tags": [
