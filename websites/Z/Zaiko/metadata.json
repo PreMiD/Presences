@@ -14,9 +14,9 @@
 	},
 	"url": "zaiko.io",
 	"regExp": "(.+\\.)?zaiko\\.io",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/jEBa0Ti.png",
-	"thumbnail": "https://i.imgur.com/WBViwOI.jpeg",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/Z/Zaiko/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Z/Zaiko/assets/thumbnail.jpeg",
 	"color": "#f4017a",
 	"category": "videos",
 	"tags": [
