@@ -26,9 +26,9 @@
 		"www.radiocontact.be",
 		"www.belrtl.be"
 	],
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/logo.png",
-	"thumbnail": "https://i.imgur.com/3M9DpsS.jpeg",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/thumbnail.jpeg",
 	"color": "#121726",
 	"category": "videos",
 	"tags": [
