@@ -1,37 +1,31 @@
 const presence = new Presence({ clientId: "1165759293576982578" });
 
-let cachedTime = 0;
-
-export function adjustTimeError(time: number, acceptableError: number): number {
-	if (Math.abs(time - cachedTime) > acceptableError) cachedTime = time;
-	return cachedTime;
-}
+const PATHS = {
+	MAIN_PAGE: "/",
+	CATALOG: "/anime/catalog/",
+	SCHEDULE: "/anime/schedule",
+	LATEST_VIDEOS: "/media/videos/latest/",
+	LATEST_EPISODES: "/anime/releases/latest/",
+	FAVORITES: "/me/favorites/",
+	COLLECTIONS: "/me/collections/",
+	FRANCHISES: "/anime/franchises/",
+	GENRES: "/anime/genres/",
+	TORRENTS: "/anime/torrents/",
+	RULES: "/rules",
+	API_DOCS: "/api/docs/v1",
+	RELEASE_EPISODES: /\/anime\/releases\/release\/[^/]+\/episodes/,
+	RELEASE_FRANCHISES: /\/anime\/releases\/release\/[^/]+\/franchises/,
+	RELEASE_MEMBERS: /\/anime\/releases\/release\/[^/]+\/members/,
+	RELEASE_TORRENTS: /\/anime\/releases\/release\/[^/]+\/torrents/,
+	WATCH_EPISODE: /\/anime\/video\/episode\//,
+};
 
 presence.on("UpdateData", async () => {
 	const { pathname, href } = document.location,
 		ogTitle = document
 			.querySelector('meta[property="og:title"]')
 			?.getAttribute("content"),
-		video = document.querySelector("video"),
-		PATHS = {
-			MAIN_PAGE: "/",
-			CATALOG: "/anime/catalog/",
-			SCHEDULE: "/anime/schedule",
-			LATEST_VIDEOS: "/media/videos/latest/",
-			LATEST_EPISODES: "/anime/releases/latest/",
-			FAVORITES: "/me/favorites/",
-			COLLECTIONS: "/me/collections/",
-			FRANCHISES: "/anime/franchises/",
-			GENRES: "/anime/genres/",
-			TORRENTS: "/anime/torrents/",
-			RULES: "/rules",
-			API_DOCS: "/api/docs/v1",
-			RELEASE_EPISODES: /\/anime\/releases\/release\/[^/]+\/episodes/,
-			RELEASE_FRANCHISES: /\/anime\/releases\/release\/[^/]+\/franchises/,
-			RELEASE_MEMBERS: /\/anime\/releases\/release\/[^/]+\/members/,
-			RELEASE_TORRENTS: /\/anime\/releases\/release\/[^/]+\/torrents/,
-			WATCH_EPISODE: /\/anime\/video\/episode\//,
-		};
+		video = document.querySelector("video");
 
 	let animeTitle = "",
 		episodeNumber = "",
@@ -39,7 +33,6 @@ presence.on("UpdateData", async () => {
 
 	if (ogTitle) {
 		const match = ogTitle.match(/(.*)\s*\|\s*(.*)/);
-
 		if (match && match[2]) {
 			episodeNumber = match[1];
 			releaseTitle = match[1];
@@ -48,7 +41,6 @@ presence.on("UpdateData", async () => {
 	}
 
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/HrvpNEc.png",
 		type: ActivityType.Watching,
 	};
 
@@ -117,12 +109,12 @@ presence.on("UpdateData", async () => {
 				const { paused, duration } = video,
 					[start, end] = presence.getTimestampsfromMedia(video);
 
-				presenceData.startTimestamp = adjustTimeError(start, 0.75);
-				presenceData.endTimestamp = adjustTimeError(end, 0.75);
+				presenceData.startTimestamp = start;
+				presenceData.endTimestamp = end;
 				presenceData.smallImageKey =
-					paused || isNaN(Number(duration)) ? Assets.Pause : Assets.Play;
+					paused || isNaN(duration) ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText =
-					paused || isNaN(Number(duration)) ? "На паузе" : "Воспроизводится";
+					paused || isNaN(duration) ? "На паузе" : "Воспроизводится";
 			}
 			break;
 	}
