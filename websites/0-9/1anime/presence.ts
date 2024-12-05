@@ -35,11 +35,6 @@ presence.on("UpdateData", async () => {
 					).textContent,
 					splitIndex = title.lastIndexOf(" - ");
 
-				//not needed for now
-				// const episodeName : string = document
-				// 	.querySelector("div#details div.flex.font-Archivo.font-bold")
-				// 	.textContent;
-
 				presenceData.details = `Watching ${title.slice(0, splitIndex).trim() || "something.."}.`;
 				presenceData.state = `Currently on ${title.slice(splitIndex + 3).trim() || "an episode.."}.`;
 				presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
