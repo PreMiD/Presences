@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/aTWK1eZ.png",
+	Logo = "https://i.imgur.com/3gRgAsL.jpeg",
 }
 
 presence.on("UpdateData", async () => {
@@ -25,27 +25,22 @@ presence.on("UpdateData", async () => {
 	switch (pathname.split("/")[1]) {
 		case "": {
 			presenceData.details = "Browsing Homepage";
-			presenceData.buttons = [button];
 			break;
 		}
 		case "chats": {
 			const chatName = document.querySelector("[class^='ChatUI_xoul_name']");
 			if (chatName)
 				presenceData.details = `Chatting with ${chatName.textContent.trim()}`;
-
-			const chatImage = document.querySelector(
-				"[class^='ChatBubble_image']"
-			) as HTMLImageElement;
-			if (chatImage) presenceData.largeImageKey = chatImage?.src;
 			else presenceData.details = "Chatting";
+
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>("[class^='ChatBubble_image']")
+					?.src ?? Assets.Logo;
 
 			break;
 		}
 		case "profile": {
-			const { pathname } = document.location;
-			presenceData.details = "Viewing profile";
-			presenceData.state = `for ${pathname.split("/")[2]}`;
-			presenceData.buttons = [button];
+			presenceData.details = "Viewing a profile";
 			break;
 		}
 		case "create": {
@@ -62,14 +57,14 @@ presence.on("UpdateData", async () => {
 				?.textContent?.trim();
 
 			if (pathname.split("/")[3] === "edit")
-				presenceData.details = `Editing ${scenarioName ?? ""} scenario`;
+				presenceData.details = `Editing ${scenarioName ?? "a"} scenario`;
 			else {
-				presenceData.details = `Viewing ${scenarioName ?? ""} scenario`;
+				presenceData.details = `Viewing ${scenarioName ?? "a"} scenario`;
 
-				const scenarioImage = document.querySelector(
-					"[class^='ViewScenario_image__']"
-				) as HTMLImageElement;
-				if (scenarioImage) presenceData.largeImageKey = scenarioImage?.src;
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>(
+						"[class^='ViewScenario_image__']"
+					)?.src ?? Assets.Logo;
 
 				presenceData.buttons = [button];
 			}
@@ -81,15 +76,13 @@ presence.on("UpdateData", async () => {
 				?.textContent?.trim();
 
 			if (pathname.split("/")[3] === "edit")
-				presenceData.details = `Editing ${xoulName ?? "Xoul"}`;
+				presenceData.details = `Editing ${xoulName ?? "a Xoul"}`;
 			else {
-				presenceData.details = `Viewing ${xoulName ?? "Xoul"}`;
-
-				const xoulImage = document.querySelector(
-					"[class^='ViewXoul_image__']"
-				) as HTMLImageElement;
-				if (xoulImage) presenceData.largeImageKey = xoulImage?.src;
-
+				presenceData.details = `Viewing ${xoulName ?? "a Xoul"}`;
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>(
+						"[class^='ViewXoul_image__']"
+					)?.src ?? Assets.Logo;
 				presenceData.buttons = [button];
 			}
 			break;
