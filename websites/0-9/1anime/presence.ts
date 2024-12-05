@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 	switch (document.location.hostname) {
 		case "1anime.one": {
 			if (document.location.pathname === "/")
-				(presenceData.details = "Checking out 1anime's homepage!");
+				presenceData.details = "Checking out 1anime's homepage!";
 			else if (document.location.pathname.includes("/anime/watch/")) {
 				//player state ig
 				playing = !document.querySelector("video").paused;
@@ -35,8 +35,12 @@ presence.on("UpdateData", async () => {
 					).textContent,
 					splitIndex = title.lastIndexOf(" - ");
 
-				presenceData.details = `Watching ${title.slice(0, splitIndex).trim() || "something.."}.`;
-				presenceData.state = `Currently on ${title.slice(splitIndex + 3).trim() || "an episode.."}.`;
+				presenceData.details = `Watching ${
+					title.slice(0, splitIndex).trim() || "something.."
+				}.`;
+				presenceData.state = `Currently on ${
+					title.slice(splitIndex + 3).trim() || "an episode.."
+				}.`;
 				presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
 				presenceData.smallImageText = playing
 					? (await strings).play
