@@ -24,7 +24,8 @@ presence.on("UpdateData", async () => {
 		privacy = await presence.getSetting("privacy"),
 		presenceData: PresenceData = {
 			type: ActivityType.Watching,
-			largeImageKey: "https://i.imgur.com/jEBa0Ti.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/Z/Zaiko/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		},
 		eventId = /\/event\/(\d+)\/stream.*/.exec(document.location.pathname)?.[1];
