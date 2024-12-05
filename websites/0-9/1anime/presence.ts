@@ -33,19 +33,15 @@ presence.on("UpdateData", async () => {
 				const title = document.querySelector(
 						"div#details h3.font-Archivo"
 					).textContent,
-					splitIndex = title.lastIndexOf(" - "),
-					animeTitle = title.slice(0, splitIndex).trim(), //anime title
-					episodeLiteral = title.slice(splitIndex + 3).trim(); //episode number
+					splitIndex = title.lastIndexOf(" - ");
 
 				//not needed for now
 				// const episodeName : string = document
 				// 	.querySelector("div#details div.flex.font-Archivo.font-bold")
 				// 	.textContent;
 
-				presenceData.details = `Watching ${animeTitle || "something.."}.`;
-				presenceData.state = `Currently on ${
-					episodeLiteral || "an episode.."
-				}.`;
+				presenceData.details = `Watching ${title.slice(0, splitIndex).trim() || "something.."}.`;
+				presenceData.state = `Currently on ${title.slice(splitIndex + 3).trim() || "an episode.."}.`;
 				presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
 				presenceData.smallImageText = playing
 					? (await strings).play
