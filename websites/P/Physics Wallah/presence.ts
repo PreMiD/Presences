@@ -15,8 +15,9 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			type: ActivityType.Watching,
 		},
-		{ pathname, href, search } = document.location,
-		privacyMode = await presence.getSetting<boolean>("privacy");
+		{ pathname, href } = document.location,
+		privacyMode = await presence.getSetting<boolean>("privacy"),
+		jsonobj = JSON.parse(sessionStorage.getItem("batches_urls"));
 
 	if (pathname === "/") {
 		presenceData.details = "Home";
@@ -34,65 +35,37 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "My Batches";
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Studying";
-		} else if (pathname.includes("batch-overview")) {
+		}
+		if (href.includes("batch-overview")) {
 			presenceData.details = "Studying...";
 			presenceData.state = `Viewing ${
-				document.querySelector(".bold.text-white").textContent
+				JSON.parse(localStorage.getItem("BATCH_DETAILS")).name
 			}`;
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = "Studying";
 			presenceData.buttons = [{ label: "View Batch", url: href }];
-		} else if (pathname.includes("batch-video-player")) {
-			const deta = localStorage.getItem("dpp_subject");
-			let detal = ` | ${deta}`;
-			if (deta === null) detal = "";
-			if (!privacyMode) {
-				presenceData.details = `Watching Lecture${detal}`;
-
-				presenceData.state = `${
-					JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
-				}`;
-				presenceData.buttons = [{ label: "Watch Lecture", url: href }];
-			} else presenceData.details = `Watching a lecture${detal}`;
-
-			if (document.querySelectorAll(".vjs-paused").length < 1) {
-				presenceData.smallImageKey = Assets.Play;
-				presenceData.smallImageText = "Watching a lecture";
-				[presenceData.startTimestamp, presenceData.endTimestamp] =
-					updateVideoTimestamps();
-			} else {
-				presenceData.smallImageKey = Assets.Pause;
-				presenceData.smallImageText = "Paused";
-			}
-		} else if (pathname.includes("subject-topics")) {
-			const urlParams = new URLSearchParams(search);
-
-			if (urlParams.has("chapterId")) {
-				presenceData.details = urlParams.get("subject");
-				presenceData.state = urlParams.get("topic");
+		} else if (href.includes("subject-topics")) {
+			if (href.includes("chapterId")) {
+				const urlsobj = new URL(jsonobj[3].value, "https://www.pw.live");
+				presenceData.details = urlsobj.searchParams.get("subject");
+				presenceData.state = urlsobj.searchParams.get("topic");
 				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Browsing Resources";
-			} else if (!urlParams.has("chapterId")) {
-				presenceData.details = urlParams.get("subject");
+			} else if (!href.includes("chapterId")) {
+				presenceData.details = new URL(
+					jsonobj[2].value,
+					"https://www.pw.live"
+				).searchParams.get("subject");
 				presenceData.state = "Browsing Resources...";
 				presenceData.smallImageKey = Assets.Reading;
 				presenceData.smallImageText = "Browsing Resources";
 			}
-		} else if (pathname.includes("open-pdf")) {
-			if (localStorage.getItem("dpp_subject")) {
-				presenceData.details = "Solving DPP (PDF)";
-				if (!privacyMode)
-					presenceData.state = localStorage.getItem("dpp_subject");
-				else presenceData.state = "Improving skills";
-
-				presenceData.startTimestamp = browsingTimestamp;
-				presenceData.smallImageKey = Assets.Viewing;
-				presenceData.smallImageText = "Viewing DPP";
-			}
-		} else if (pathname.includes("q-bank-exercise")) {
-			presenceData.details = "Solving DPP (MCQ)";
-			if (!privacyMode)
-				presenceData.state = localStorage.getItem("dpp_subject");
+		} else if (href.includes("open-pdf")) {
+			const urlsobj = new URL(jsonobj[3].value, "https://www.pw.live");
+			presenceData.details = `Solving DPP (PDF) | ${urlsobj.searchParams.get(
+				"subject"
+			)}`;
+			if (!privacyMode) presenceData.state = urlsobj.searchParams.get("topic");
 			else presenceData.state = "Improving skills";
 
 			presenceData.startTimestamp = browsingTimestamp;
@@ -100,19 +73,20 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = "Viewing DPP";
 		}
 	} else if (pathname.startsWith("/watch")) {
-		const deta = localStorage.getItem("dpp_subject");
-		let detal = ` | ${deta}`;
-		if (deta === null) detal = "";
+		const deta = JSON.parse(localStorage.getItem("SCHEDULE_DETAILS"));
+		let detal = "";
+		if (deta.subject === null) detal = "";
+		else detal = ` | ${deta.subject.name}`;
 		if (!privacyMode) {
 			presenceData.details = `Watching Lecture${detal}`;
 
-			presenceData.state = `${
-				JSON.parse(localStorage.getItem("VIDEO_DETAILS")).topic
-			}`;
+			presenceData.state = `${deta.topic}`;
 
 			presenceData.buttons = [{ label: "Watch Lecture", url: href }];
-		} else presenceData.details = `Watching a lecture${detal}`;
-
+		} else {
+			presenceData.details = "Watching a lecture";
+			presenceData.state = `Subject: ${deta.subject.name}`;
+		}
 		if (document.querySelectorAll(".vjs-paused").length < 1) {
 			presenceData.smallImageKey = Assets.Play;
 			presenceData.smallImageText = "Watching a lecture";
@@ -122,6 +96,17 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Pause;
 			presenceData.smallImageText = "Paused";
 		}
+	} else if (pathname.startsWith("/practice")) {
+		const urlsobj = new URL(jsonobj[3].value, "https://www.pw.live");
+		presenceData.details = `Solving DPP (MCQ) | ${urlsobj.searchParams.get(
+			"subject"
+		)}`;
+		if (!privacyMode) presenceData.state = urlsobj.searchParams.get("topic");
+		else presenceData.state = "Improving skills";
+
+		presenceData.startTimestamp = browsingTimestamp;
+		presenceData.smallImageKey = Assets.Viewing;
+		presenceData.smallImageText = "Viewing DPP";
 	}
 	presence.setActivity(presenceData);
 });

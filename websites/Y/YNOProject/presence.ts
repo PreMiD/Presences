@@ -1,6 +1,6 @@
 const { Name, Logo } = {
 		Name: "YNOProject",
-		Logo: "https://imgur.com/2LD3PQV.png",
+		Logo: "https://cdn.rcd.gg/PreMiD/websites/Y/YNOProject/assets/logo.png",
 	},
 	presence = new Presence({ clientId: "1304833580291063848" });
 presence.on("UpdateData", async () => {
@@ -54,7 +54,7 @@ async function fetchCharacterFace(): Promise<string | void> {
  * (Surprisingly Discord supports GIFs in small image so it's no need to resample)
  *
  * @example 'url("star-transparent.gif")'.match(it)?.[2] // star-transparent.gif
- * @example "url('https://example.org/me.png')".match(it)?.[2] // https://example.org/me.png
+ * @example "url('https://cdn.rcd.gg/PreMiD/websites/Y/YNOProject/assets/0.png')".match(it)?.[2] // https://cdn.rcd.gg/PreMiD/websites/Y/YNOProject/assets/0.png
  * @returns Entire URL or nothing for guest player
  */
 async function fetchBadge(): Promise<string | void> {
