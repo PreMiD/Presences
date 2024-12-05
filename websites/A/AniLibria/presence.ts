@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
 			break;
 		case PATHS.RGENRES.test(pathname):
 			presenceData.details = firstArg;
-			presenceData.state = `Смотрит релизы жанра`;
+			presenceData.state = "Смотрит релизы жанра";
 			break;
 		case PATHS.RELEASE_EPISODES.test(pathname):
 			presenceData.details = firstArg;
