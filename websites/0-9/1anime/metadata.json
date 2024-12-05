@@ -5,14 +5,14 @@
 		"id": "331606403057713154",
 		"name": "faetalize"
 	},
-	"service": "1anime",
+	"service": "1Anime",
 	"description": {
 		"en": "A presence integrating the famous 1anime streaming website!"
 	},
 	"url": "1anime.one",
 	"version": "1.0.0",
-	"logo": "https://1anime.co/logo.png",
-	"thumbnail": "https://1anime.co/thumbnail.png",
+	"logo": "https://1anime.co/android-chrome-512x512.png",
+	"thumbnail": "https://1anime.co/banner.jpg",
 	"color": "#C63BAD",
 	"category": "anime",
 	"tags": [
