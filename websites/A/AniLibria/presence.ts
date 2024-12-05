@@ -11,7 +11,9 @@ const presence = new Presence({ clientId: "1165759293576982578" }),
 		GENRES: "/anime/genres/",
 		TORRENTS: "/anime/torrents/",
 		RULES: "/rules",
+		SUPPORT: "/support",
 		API_DOCS: "/api/docs/v1",
+		RGENRES: /\/anime\/genres\/releasesOfGenre\//,
 		RELEASE_EPISODES: /\/anime\/releases\/release\/[^/]+\/episodes/,
 		RELEASE_FRANCHISES: /\/anime\/releases\/release\/[^/]+\/franchises/,
 		RELEASE_MEMBERS: /\/anime\/releases\/release\/[^/]+\/members/,
@@ -26,17 +28,15 @@ presence.on("UpdateData", async () => {
 			?.getAttribute("content"),
 		video = document.querySelector("video");
 
-	let animeTitle = "",
-		episodeNumber = "",
-		releaseTitle = "";
+	let firstArg = "",
+		secondArg = "";
 
 	if (ogTitle) {
 		const match = ogTitle.match(/(.*)\s*\|\s*(.*)/);
 		if (match && match[2]) {
-			episodeNumber = match[1];
-			releaseTitle = match[1];
-			animeTitle = match[3] || match[2];
-		} else releaseTitle = ogTitle;
+			firstArg = match[1];
+			secondArg = match[3] || match[2];
+		} else firstArg = ogTitle;
 	}
 
 	const presenceData: PresenceData = {
@@ -81,28 +81,35 @@ presence.on("UpdateData", async () => {
 		case pathname === PATHS.RULES:
 			presenceData.state = "Читает правила";
 			break;
+		case pathname === PATHS.SUPPORT:
+			presenceData.state = "На странице поддержки проекта";
+			break;
 		case pathname === PATHS.API_DOCS:
 			presenceData.state = "Смотрит API-документацию";
 			break;
+		case PATHS.RGENRES.test(pathname):
+			presenceData.details = firstArg;
+			presenceData.state = `Смотрит релизы жанра`;
+			break;
 		case PATHS.RELEASE_EPISODES.test(pathname):
-			presenceData.details = releaseTitle;
+			presenceData.details = firstArg;
 			presenceData.state = "Смотрит эпизоды релиза";
 			break;
 		case PATHS.RELEASE_FRANCHISES.test(pathname):
-			presenceData.details = releaseTitle;
+			presenceData.details = firstArg;
 			presenceData.state = "Смотрит связанное с релизом";
 			break;
 		case PATHS.RELEASE_MEMBERS.test(pathname):
-			presenceData.details = releaseTitle;
+			presenceData.details = firstArg;
 			presenceData.state = "Смотрит участников релиза";
 			break;
 		case PATHS.RELEASE_TORRENTS.test(pathname):
-			presenceData.details = releaseTitle;
+			presenceData.details = firstArg;
 			presenceData.state = "Смотрит торренты релиза";
 			break;
 		case PATHS.WATCH_EPISODE.test(pathname):
-			presenceData.details = animeTitle;
-			presenceData.state = `${episodeNumber}`;
+			presenceData.details = secondArg;
+			presenceData.state = firstArg;
 			presenceData.buttons = [{ label: "Смотреть эпизод", url: href }];
 			if (video) {
 				const { paused, duration } = video,
