@@ -15,7 +15,6 @@ const enum Assets {
 let playing = false;
 
 presence.on("UpdateData", async () => {
-	;
 	const presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
 		type: ActivityType.Watching,
@@ -36,10 +35,10 @@ presence.on("UpdateData", async () => {
 				playing = !player.paused;
 				//anime info ig
 				const title = document.querySelector(
-					"div#details h3.font-Archivo"
-				).textContent,
-				splitIndex = title.lastIndexOf(" - "); //title is in "Anime Title - Episode x" format
-				
+						"div#details h3.font-Archivo"
+					).textContent,
+					splitIndex = title.lastIndexOf(" - "); //title is in "Anime Title - Episode x" format
+
 				//setting up presence
 				presenceData.details = `${
 					title.slice(0, splitIndex).trim() || "something.."
@@ -51,7 +50,7 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = playing
 					? (await strings).play
 					: (await strings).pause;
-				if(playing) {
+				if (playing) {
 					presenceData.startTimestamp = timestamps[0];
 					presenceData.endTimestamp = timestamps[1];
 				} else {
@@ -62,7 +61,9 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Watch Now",
-						url: `https://1ani.me/a/${document.location.pathname.split("/")[3]}`,
+						url: `https://1ani.me/a/${
+							document.location.pathname.split("/")[3]
+						}`,
 					},
 				];
 			}
