@@ -2,8 +2,8 @@ const presence = new Presence({
 		clientId: "1314062632419852309",
 	}),
 	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
+		play: "general.playing",
+		pause: "general.paused",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -15,36 +15,56 @@ const enum Assets {
 let playing = false;
 
 presence.on("UpdateData", async () => {
+	;
 	const presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
-		startTimestamp: browsingTimestamp,
+		type: ActivityType.Watching,
 	};
 
 	switch (document.location.hostname) {
 		case "1anime.one": {
-			if (document.location.pathname === "/")
+			if (document.location.pathname === "/") {
 				presenceData.details = "Checking out 1anime's homepage!";
-			else if (document.location.pathname.includes("/anime/watch/")) {
+				presenceData.startTimestamp = browsingTimestamp;
+			} else if (document.location.pathname.includes("/anime/watch/")) {
 				//player state ig
-				playing = !document.querySelector("video").paused;
-
+				const player = document.querySelector("video"),
+					timestamps = presence.getTimestamps(
+						player.currentTime,
+						player.duration
+					);
+				playing = !player.paused;
 				//anime info ig
-				//title is in "Anime Title - Episode x" format
 				const title = document.querySelector(
-						"div#details h3.font-Archivo"
-					).textContent,
-					splitIndex = title.lastIndexOf(" - ");
-
-				presenceData.details = `Watching ${
+					"div#details h3.font-Archivo"
+				).textContent,
+				splitIndex = title.lastIndexOf(" - "); //title is in "Anime Title - Episode x" format
+				
+				//setting up presence
+				presenceData.details = `${
 					title.slice(0, splitIndex).trim() || "something.."
-				}.`;
+				}`;
 				presenceData.state = `Currently on ${
 					title.slice(splitIndex + 3).trim() || "an episode.."
-				}.`;
+				}`;
 				presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
 				presenceData.smallImageText = playing
 					? (await strings).play
 					: (await strings).pause;
+				if(playing) {
+					presenceData.startTimestamp = timestamps[0];
+					presenceData.endTimestamp = timestamps[1];
+				} else {
+					delete presenceData.startTimestamp;
+					delete presenceData.endTimestamp;
+				}
+				//buttons-actions
+				presenceData.buttons = [
+					{
+						label: "Watch Now",
+						url: `https://1ani.me/a/${document.location.pathname.split("/")[3]}`,
+					},
+				];
 			}
 			break;
 		}
