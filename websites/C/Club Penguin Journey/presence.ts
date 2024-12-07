@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 			} else if (document.location.pathname.startsWith("/news/")) {
 				presenceData.details = "Reading post:";
 				presenceData.state =
-					document.querySelector(".post_title__MNhEJ").textContent;
+					document.querySelector("[class*=post_title]").textContent;
 			} else if (document.location.pathname.startsWith("/news")) {
 				presenceData.details = "Waddling around";
 				presenceData.state = "Scrolling through the news";
