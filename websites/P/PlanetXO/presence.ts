@@ -9,12 +9,9 @@ presence.on("UpdateData", async () => {
 			"https://cdn.kaneproductions.co.uk/art/PlanetXO/shortlogo.png",
 	};
 
-	// const DocumentURL = document.URL;
-	const real = document.URL.replace(/\/[^\/]*$/, "");
-
 	if (document.location.hostname === "planetxo.uk") {
 		presenceData.startTimestamp = browsingTimestamp;
-		switch (real) {
+		switch (document.URL.replace(/\/[^\/]*$/, "")) {
 			case "https://planetxo.uk": {
 				presenceData.details = "Viewing the map";
 				presenceData.buttons = [
@@ -189,7 +186,5 @@ presence.on("UpdateData", async () => {
 	];
 
 	if (presenceData.details) presence.setActivity(presenceData);
-	else {
-		presence.setActivity();
-	}
+	else presence.setActivity();
 });
