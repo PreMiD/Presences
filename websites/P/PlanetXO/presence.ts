@@ -3,15 +3,15 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let title: HTMLElement, search: HTMLInputElement;
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://cdn.kaneproductions.co.uk/art/PlanetXO/shortlogo.png",
+		largeImageKey:
+			"https://cdn.kaneproductions.co.uk/art/PlanetXO/shortlogo.png",
 	};
 
-	let DocumentURL = document.URL;
-	let real = DocumentURL.replace(/\/[^\/]*$/, "");
+	const DocumentURL = document.URL;
+	const real = DocumentURL.replace(/\/[^\/]*$/, "");
+
 	if (document.location.hostname === "planetxo.uk") {
 		presenceData.startTimestamp = browsingTimestamp;
 		switch (real) {
@@ -46,7 +46,8 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "https://planetxo.uk/panel/admin": {
-				presenceData.details = "Viewing the PlanetXO System Administrator Panel";
+				presenceData.details =
+					"Viewing the PlanetXO System Administrator Panel";
 				presenceData.buttons = [
 					{
 						label: "Home",
@@ -166,27 +167,27 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			default:
-				if (document.location.hostname == "planetxo.uk") {
+				if (document.location.hostname === "planetxo.uk")
 					presenceData.details = "Viewing PlanetXO";
-					presenceData.buttons = [
-						{
-							label: "Home",
-							url: "https://planetxo.uk",
-						},
-					];
-				}
+				presenceData.buttons = [
+					{
+						label: "Home",
+						url: "https://planetxo.uk",
+					},
+				];
 		}
 	}
-	if (document.location.hostname === "panel.planetxo.uk") {
+
+	if (document.location.hostname === "panel.planetxo.uk")
 		presenceData.details = "Viewing the Panel for PlanetXO";
-		presenceData.startTimestamp = browsingTimestamp;
-		presenceData.buttons = [
-			{
-				label: "Home",
-				url: "https://planetxo.uk",
-			},
-		];
-	}
-	if (presenceData.details) {presence.setActivity(presenceData);
-}else{presence.setActivity();};
+	presenceData.startTimestamp = browsingTimestamp;
+	presenceData.buttons = [
+		{
+			label: "Home",
+			url: "https://planetxo.uk",
+		},
+	];
+
+	if (presenceData.details) presence.setActivity(presenceData);
+	else {presence.setActivity();}
 });
