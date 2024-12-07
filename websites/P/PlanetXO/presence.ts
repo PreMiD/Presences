@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 			case "https://planetxo.uk/panel/admin": {
-				presenceData.details = "Viewing the PlanetXO Systeam Administrator Panel";
+				presenceData.details = "Viewing the PlanetXO System Administrator Panel";
 				presenceData.buttons = [
 					{
 						label: "Home",
