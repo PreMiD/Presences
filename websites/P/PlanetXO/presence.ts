@@ -153,7 +153,7 @@ presence.on("UpdateData", async () => {
 				];
 				break;
 			}
-			case "https://planetxo.uk/panel/panel": {
+			case "https://planetxo.uk/panel": {
 				presenceData.details = "Viewing the Panel for PlanetXO Panel";
 				presenceData.buttons = [
 					{
