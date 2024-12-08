@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"apiVersion": 1,
+	"author": {
+		"id": "331606403057713154",
+		"name": "faetalize"
+	},
+	"service": "1Anime",
+	"description": {
+		"en": "Experience Anime & Manga without Ads, Completely Free!"
+	},
+	"url": "1anime.one",
+	"version": "1.0.0",
+	"logo": "https://1anime.co/android-chrome-512x512.png",
+	"thumbnail": "https://1anime.co/banner.jpg",
+	"color": "#C63BAD",
+	"category": "anime",
+	"tags": [
+		"anime",
+		"streaming"
+	]
+}
