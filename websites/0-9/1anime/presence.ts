@@ -28,10 +28,7 @@ presence.on("UpdateData", async () => {
 			} else if (document.location.pathname.includes("/anime/watch/")) {
 				//player state ig
 				const player = document.querySelector("video"),
-					timestamps = presence.getTimestamps(
-						player.currentTime,
-						player.duration
-					);
+					timestamps = presence.getTimestampsFromMedia(player);
 				playing = !player.paused;
 				//anime info ig
 				const title = document.querySelector(
