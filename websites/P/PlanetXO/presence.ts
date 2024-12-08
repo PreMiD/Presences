@@ -153,20 +153,11 @@ presence.on("UpdateData", async () => {
 				];
 				break;
 			}
-			case "https://planetxo.uk/panel": {
-				presenceData.details = "Viewing the Panel for PlanetXO Panel";
-				presenceData.buttons = [
-					{
-						label: "Home",
-						url: "https://planetxo.uk",
-					},
-				];
-				break;
-			}
+			break;
 			default:
 				if (document.location.hostname === "planetxo.uk")
 					presenceData.details = "Viewing PlanetXO";
-				presenceData.buttons = [
+				        presenceData.buttons = [
 					{
 						label: "Home",
 						url: "https://planetxo.uk",
