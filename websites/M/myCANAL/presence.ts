@@ -30,104 +30,104 @@ export async function getThumbnail(
 ): Promise<string> {
 	return new Promise(resolve => {
 		const img = new Image(),
-					   wh = 320; // Size of the square thumbnail
+			wh = 320; // Size of the square thumbnail
 
-					   img.crossOrigin = "anonymous";
-					   img.src = src;
+		img.crossOrigin = "anonymous";
+		img.src = src;
 
-					   img.onload = function () {
-						   let croppedWidth,
-						   croppedHeight,
-						   cropX = 0,
-						   cropY = 0;
+		img.onload = function () {
+			let croppedWidth,
+				croppedHeight,
+				cropX = 0,
+				cropY = 0;
 
-						   // Determine if the image is landscape or portrait
-						   const isLandscape = img.width > img.height;
+			// Determine if the image is landscape or portrait
+			const isLandscape = img.width > img.height;
 
-						   if (isLandscape) {
-							   // Landscape mode: use left and right crop percentages
-							   const cropLeft = img.width * cropPercentages[0];
-							   croppedWidth = img.width - cropLeft - img.width * cropPercentages[1];
-							   croppedHeight = img.height;
-							   cropX = cropLeft;
-						   } else {
-							   // Portrait mode: use top and bottom crop percentages
-							   const cropTop = img.height * cropPercentages[2];
-							   croppedWidth = img.width;
-							   croppedHeight = img.height - cropTop - img.height * cropPercentages[3];
-							   cropY = cropTop;
-						   }
+			if (isLandscape) {
+				// Landscape mode: use left and right crop percentages
+				const cropLeft = img.width * cropPercentages[0];
+				croppedWidth = img.width - cropLeft - img.width * cropPercentages[1];
+				croppedHeight = img.height;
+				cropX = cropLeft;
+			} else {
+				// Portrait mode: use top and bottom crop percentages
+				const cropTop = img.height * cropPercentages[2];
+				croppedWidth = img.width;
+				croppedHeight = img.height - cropTop - img.height * cropPercentages[3];
+				cropY = cropTop;
+			}
 
-						   // Determine the scale to fit the cropped image into the square canvas
-						   let newWidth, newHeight, offsetX, offsetY;
+			// Determine the scale to fit the cropped image into the square canvas
+			let newWidth, newHeight, offsetX, offsetY;
 
-						   if (isLandscape) {
-							   newWidth = wh - 2 * borderWidth;
-							   newHeight = (newWidth / croppedWidth) * croppedHeight;
-							   offsetX = borderWidth;
-							   offsetY = (wh - newHeight) / 2;
-						   } else {
-							   newHeight = wh - 2 * borderWidth;
-							   newWidth = (newHeight / croppedHeight) * croppedWidth;
-							   offsetX = (wh - newWidth) / 2;
-							   offsetY = borderWidth;
-						   }
+			if (isLandscape) {
+				newWidth = wh - 2 * borderWidth;
+				newHeight = (newWidth / croppedWidth) * croppedHeight;
+				offsetX = borderWidth;
+				offsetY = (wh - newHeight) / 2;
+			} else {
+				newHeight = wh - 2 * borderWidth;
+				newWidth = (newHeight / croppedHeight) * croppedWidth;
+				offsetX = (wh - newWidth) / 2;
+				offsetY = borderWidth;
+			}
 
-						   const tempCanvas = document.createElement("canvas");
-						   tempCanvas.width = wh;
-						   tempCanvas.height = wh;
-						   const ctx = tempCanvas.getContext("2d"),
-					   // Remap progress from 0-1 to 0.03-0.97 (smallImageKey borders)
-					   remappedProgress = 0.07 + progress * (0.93 - 0.07);
+			const tempCanvas = document.createElement("canvas");
+			tempCanvas.width = wh;
+			tempCanvas.height = wh;
+			const ctx = tempCanvas.getContext("2d"),
+				// Remap progress from 0-1 to 0.03-0.97 (smallImageKey borders)
+				remappedProgress = 0.07 + progress * (0.93 - 0.07);
 
-					   // 1. Fill the canvas with a black background
-					   ctx.fillStyle = "#172e4e";
-					   ctx.fillRect(0, 0, wh, wh);
+			// 1. Fill the canvas with a black background
+			ctx.fillStyle = "#172e4e";
+			ctx.fillRect(0, 0, wh, wh);
 
-					   // 2. Draw the radial progress bar
-					   if (remappedProgress > 0) {
-						   ctx.beginPath();
-						   ctx.moveTo(wh / 2, wh / 2);
-						   const startAngle = Math.PI / 4; // 45 degrees in radians, starting from bottom-right
+			// 2. Draw the radial progress bar
+			if (remappedProgress > 0) {
+				ctx.beginPath();
+				ctx.moveTo(wh / 2, wh / 2);
+				const startAngle = Math.PI / 4; // 45 degrees in radians, starting from bottom-right
 
-						   ctx.arc(
-							   wh / 2,
-				 wh / 2,
-				 wh,
-				 startAngle,
-				 startAngle + 2 * Math.PI * remappedProgress
-						   );
-						   ctx.lineTo(wh / 2, wh / 2);
+				ctx.arc(
+					wh / 2,
+					wh / 2,
+					wh,
+					startAngle,
+					startAngle + 2 * Math.PI * remappedProgress
+				);
+				ctx.lineTo(wh / 2, wh / 2);
 
-						   // Create a triangular gradient
-						   const gradient = ctx.createLinearGradient(0, 0, wh, wh);
-						   gradient.addColorStop(0, "rgba(245, 3, 26, 1)");
-						   gradient.addColorStop(0.5, "rgba(63, 187, 244, 1)");
-						   gradient.addColorStop(1, "rgba(164, 215, 12, 1)");
-						   ctx.fillStyle = gradient;
+				// Create a triangular gradient
+				const gradient = ctx.createLinearGradient(0, 0, wh, wh);
+				gradient.addColorStop(0, "rgba(245, 3, 26, 1)");
+				gradient.addColorStop(0.5, "rgba(63, 187, 244, 1)");
+				gradient.addColorStop(1, "rgba(164, 215, 12, 1)");
+				ctx.fillStyle = gradient;
 
-						   ctx.fill();
-					   }
+				ctx.fill();
+			}
 
-					   // 3. Draw the cropped image centered and zoomed out based on the borderWidth
-					   ctx.drawImage(
-						   img,
-						   cropX,
-						   cropY,
-						   croppedWidth,
-						   croppedHeight,
-						   offsetX,
-						   offsetY,
-						   newWidth,
-						   newHeight
-					   );
+			// 3. Draw the cropped image centered and zoomed out based on the borderWidth
+			ctx.drawImage(
+				img,
+				cropX,
+				cropY,
+				croppedWidth,
+				croppedHeight,
+				offsetX,
+				offsetY,
+				newWidth,
+				newHeight
+			);
 
-					   resolve(tempCanvas.toDataURL("image/png"));
-					   };
+			resolve(tempCanvas.toDataURL("image/png"));
+		};
 
-					   img.onerror = function () {
-						   resolve(src);
-					   };
+		img.onerror = function () {
+			resolve(src);
+		};
 	});
 }
 
@@ -183,7 +183,7 @@ presence.on("UpdateData", async () => {
 					? document.querySelector<HTMLImageElement>(
 							`#\\3${channelID}_onclick > div > div.card__content_0dae1b.cardContent___DuNAN.ratio--169 > div[class*="cardLogoChannel"] > div > img`
 					  ).src
-					  : myCANALAssets.Logo;
+					: myCANALAssets.Logo;
 				presenceData.smallImageKey = Assets.Live;
 				presenceData.smallImageText = "En direct";
 				delete presenceData.startTimestamp;
@@ -197,10 +197,10 @@ presence.on("UpdateData", async () => {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestamps(video.currentTime, video.duration);
 				presenceData.largeImageKey = showCover
-					? (presenceData.largeImageKey =
-							await getThumbnail(document.querySelector<HTMLMetaElement>(
-								"[property='og:image']"
-							)?.content))
+					? (presenceData.largeImageKey = await getThumbnail(
+							document.querySelector<HTMLMetaElement>("[property='og:image']")
+								?.content
+					  ))
 					: myCANALAssets.Logo;
 				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
@@ -214,10 +214,10 @@ presence.on("UpdateData", async () => {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestamps(video.currentTime, video.duration);
 				presenceData.largeImageKey = showCover
-					? (presenceData.largeImageKey =
-							await getThumbnail(document.querySelector<HTMLMetaElement>(
-								"[property='og:image']"
-							)?.content))
+					? (presenceData.largeImageKey = await getThumbnail(
+							document.querySelector<HTMLMetaElement>("[property='og:image']")
+								?.content
+					  ))
 					: myCANALAssets.Logo;
 				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 				presenceData.smallImageText = video.paused
