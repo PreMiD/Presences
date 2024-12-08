@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 
 	if (document.location.hostname === "planetxo.uk") {
 		presenceData.startTimestamp = browsingTimestamp;
-		switch (document.URL.replace(/\/[^\/]*$/, "")) {
+		switch (document.URL.split("/").slice(0, -1).join("/")) {
 			case "https://planetxo.uk": {
 				presenceData.details = "Viewing the map";
 				presenceData.buttons = [
@@ -153,11 +153,20 @@ presence.on("UpdateData", async () => {
 				];
 				break;
 			}
-			break;
+			case "https://planetxo.uk/panel/panel": {
+				presenceData.details = "Viewing the Panel for PlanetXO Panel";
+				presenceData.buttons = [
+					{
+						label: "Home",
+						url: "https://planetxo.uk",
+					},
+				];
+				break;
+			}
 			default:
 				if (document.location.hostname === "planetxo.uk")
 					presenceData.details = "Viewing PlanetXO";
-				        presenceData.buttons = [
+				presenceData.buttons = [
 					{
 						label: "Home",
 						url: "https://planetxo.uk",
