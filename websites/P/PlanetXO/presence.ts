@@ -11,54 +11,36 @@ presence.on("UpdateData", async () => {
 
 	if (document.location.hostname === "planetxo.uk") {
 		presenceData.startTimestamp = browsingTimestamp;
-		switch (document.URL.split("/").slice(0, -1).join("/")) {
+		switch (document.location.href.split("/").slice(0, -1).join("/")) {
 			case "https://planetxo.uk": {
 				presenceData.details = "Viewing the map";
-				presenceData.buttons = [
-					{
-						label: "Home",
-						url: "https://planetxo.uk",
-					},
-				];
 				break;
 			}
 			case "https://planetxo.uk/xoradio": {
 				presenceData.details = "Viewing XO Radio";
 				presenceData.buttons = [
 					{
-						label: "Home",
-						url: "https://planetxo.uk",
+						label: "Listen into the Tunes!",
+						url: "https://planetxo.uk/xoradio",
 					},
 				];
 				break;
 			}
 			case "https://planetxo.uk/panel/planetxo": {
 				presenceData.details = "Viewing the PlanetXO Global Panel";
-				presenceData.buttons = [
-					{
-						label: "Home",
-						url: "https://planetxo.uk",
-					},
-				];
 				break;
 			}
 			case "https://planetxo.uk/panel/admin": {
 				presenceData.details =
 					"Viewing the PlanetXO System Administrator Panel";
-				presenceData.buttons = [
-					{
-						label: "Home",
-						url: "https://planetxo.uk",
-					},
-				];
 				break;
 			}
 			case "https://planetxo.uk/blastradio": {
 				presenceData.details = "Viewing Blast Radio";
 				presenceData.buttons = [
 					{
-						label: "Home",
-						url: "https://planetxo.uk",
+						label: "Listen into the Tunes!",
+						url: "https://planetxo.uk/blastradio",
 					},
 				];
 				break;
@@ -67,8 +49,8 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing QTFM";
 				presenceData.buttons = [
 					{
-						label: "Home",
-						url: "https://planetxo.uk",
+						label: "Listen into the Tunes!",
+						url: "https://planetxo.uk/qtfm",
 					},
 				];
 				break;
@@ -77,8 +59,8 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing Lush Radio";
 				presenceData.buttons = [
 					{
-						label: "Home",
-						url: "https://planetxo.uk",
+						label: "Listen into the Tunes!",
+						url: "https://planetxo.uk/lushradio",
 					},
 				];
 				break;
@@ -87,8 +69,8 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing Every Radio";
 				presenceData.buttons = [
 					{
-						label: "Home",
-						url: "https://planetxo.uk",
+						label: "Listen into the Tunes!",
+						url: "https://planetxo.uk/everyradio",
 					},
 				];
 				break;
@@ -97,8 +79,8 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing PlanetXO Panel";
 				presenceData.buttons = [
 					{
-						label: "Home",
-						url: "https://planetxo.uk",
+						label: "Join the Team?",
+						url: "https://planetxo.uk/vacancies.php",
 					},
 				];
 				break;
@@ -107,8 +89,8 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing the Panel for XO Radio";
 				presenceData.buttons = [
 					{
-						label: "Home",
-						url: "https://planetxo.uk",
+						label: "Listen into the Tunes!",
+						url: "https://planetxo.uk/xoradio",
 					},
 				];
 				break;
@@ -117,8 +99,8 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing the Panel for Blast Radio";
 				presenceData.buttons = [
 					{
-						label: "Home",
-						url: "https://planetxo.uk",
+						label: "Listen into the Tunes!",
+						url: "https://planetxo.uk/blastradio",
 					},
 				];
 				break;
@@ -127,8 +109,8 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing the Panel for QTFM";
 				presenceData.buttons = [
 					{
-						label: "Home",
-						url: "https://planetxo.uk",
+						label: "Listen into the Tunes!",
+						url: "https://planetxo.uk/qtfm",
 					},
 				];
 				break;
@@ -137,8 +119,8 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing the Panel for Lush Radio";
 				presenceData.buttons = [
 					{
-						label: "Home",
-						url: "https://planetxo.uk",
+						label: "Listen into the Tunes!",
+						url: "https://planetxo.uk/lushradio",
 					},
 				];
 				break;
@@ -147,18 +129,8 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing the Panel for Every Radio";
 				presenceData.buttons = [
 					{
-						label: "Home",
-						url: "https://planetxo.uk",
-					},
-				];
-				break;
-			}
-			case "https://planetxo.uk/panel/panel": {
-				presenceData.details = "Viewing the Panel for PlanetXO Panel";
-				presenceData.buttons = [
-					{
-						label: "Home",
-						url: "https://planetxo.uk",
+						label: "Listen into the Tunes!",
+						url: "https://planetxo.uk/everyradio",
 					},
 				];
 				break;
@@ -166,32 +138,21 @@ presence.on("UpdateData", async () => {
 			default:
 				if (document.location.hostname === "planetxo.uk")
 					presenceData.details = "Viewing PlanetXO";
-				presenceData.buttons = [
-					{
-						label: "Home",
-						url: "https://planetxo.uk",
-					},
-				];
+				break;
 		}
 	}
 
 	if (document.location.hostname === "panel.planetxo.uk")
 		presenceData.details = "Viewing the Panel for PlanetXO";
 	presenceData.startTimestamp = browsingTimestamp;
-	presenceData.buttons = [
-		{
-			label: "Home",
-			url: "https://planetxo.uk",
-		},
-	];
 
 	if (document.location.hostname === "staff.planetxo.uk")
 		presenceData.details = "Viewing the Emails for PlanetXO";
 	presenceData.startTimestamp = browsingTimestamp;
 	presenceData.buttons = [
 		{
-			label: "Home",
-			url: "https://planetxo.uk",
+			label: "Join Our Team Today!",
+			url: "https://planetxo.uk/vacancies.php",
 		},
 	];
 
