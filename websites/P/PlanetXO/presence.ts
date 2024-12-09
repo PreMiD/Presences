@@ -10,7 +10,6 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (document.location.hostname === "planetxo.uk") {
-		presenceData.startTimestamp = browsingTimestamp;
 		switch (document.location.href.split("/").slice(0, -1).join("/")) {
 			case "https://planetxo.uk": {
 				presenceData.details = "Viewing the map";
