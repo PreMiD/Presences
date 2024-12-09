@@ -8,7 +8,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://1anime.co/android-chrome-512x512.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/0-9/1anime/assets/logo.png",
 }
 
 //state
