@@ -148,13 +148,6 @@ presence.on("UpdateData", async () => {
 
 	if (document.location.hostname === "staff.planetxo.uk")
 		presenceData.details = "Viewing the Emails for PlanetXO";
-	presenceData.startTimestamp = browsingTimestamp;
-	presenceData.buttons = [
-		{
-			label: "Join Our Team Today!",
-			url: "https://planetxo.uk/vacancies.php",
-		},
-	];
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
