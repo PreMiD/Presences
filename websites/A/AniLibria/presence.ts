@@ -41,7 +41,8 @@ presence.on("UpdateData", async () => {
 
 	const presenceData: PresenceData = {
 		type: ActivityType.Watching,
-		largeImageKey: "https://i.imgur.com/shUaioa.png",
+		largeImageKey:
+			"https://cdn.rcd.gg/PreMiD/websites/A/AniLibria/assets/logo.png",
 	};
 
 	switch (true) {
