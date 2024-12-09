@@ -144,7 +144,6 @@ presence.on("UpdateData", async () => {
 
 	if (document.location.hostname === "panel.planetxo.uk")
 		presenceData.details = "Viewing the Panel for PlanetXO";
-	presenceData.startTimestamp = browsingTimestamp;
 
 	if (document.location.hostname === "staff.planetxo.uk")
 		presenceData.details = "Viewing the Emails for PlanetXO";
