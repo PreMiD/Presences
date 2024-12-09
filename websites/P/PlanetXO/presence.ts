@@ -7,6 +7,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey:
 			"https://cdn.kaneproductions.co.uk/art/PlanetXO/shortlogo.png",
+		startTimestamp: browsingTimestamp,
 	};
 
 	if (document.location.hostname === "planetxo.uk") {
