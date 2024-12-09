@@ -8,7 +8,6 @@ presence.on("UpdateData", async () => {
 		largeImageKey:
 			"https://cdn.kaneproductions.co.uk/art/PlanetXO/shortlogo.png",
 	};
-
 	if (document.location.hostname === "planetxo.uk") {
 		presenceData.startTimestamp = browsingTimestamp;
 		switch (document.location.href.split("/").slice(0, -1).join("/")) {
