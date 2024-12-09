@@ -185,6 +185,16 @@ presence.on("UpdateData", async () => {
 		},
 	];
 
+	if (document.location.hostname === "staff.planetxo.uk")
+		presenceData.details = "Viewing the Emails for PlanetXO";
+	presenceData.startTimestamp = browsingTimestamp;
+	presenceData.buttons = [
+		{
+			label: "Home",
+			url: "https://planetxo.uk",
+		},
+	];
+
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
