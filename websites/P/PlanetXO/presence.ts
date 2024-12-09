@@ -8,6 +8,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey:
 			"https://cdn.kaneproductions.co.uk/art/PlanetXO/shortlogo.png",
 	};
+
 	if (document.location.hostname === "planetxo.uk") {
 		presenceData.startTimestamp = browsingTimestamp;
 		switch (document.location.href.split("/").slice(0, -1).join("/")) {
@@ -19,7 +20,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing XO Radio";
 				presenceData.buttons = [
 					{
-						label: "Listen into the Tunes!",
+						label: "Listen Along!",
 						url: "https://planetxo.uk/xoradio",
 					},
 				];
@@ -38,7 +39,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing Blast Radio";
 				presenceData.buttons = [
 					{
-						label: "Listen into the Tunes!",
+						label: "Listen Along!",
 						url: "https://planetxo.uk/blastradio",
 					},
 				];
@@ -48,7 +49,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing QTFM";
 				presenceData.buttons = [
 					{
-						label: "Listen into the Tunes!",
+						label: "Listen Along!",
 						url: "https://planetxo.uk/qtfm",
 					},
 				];
@@ -58,7 +59,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing Lush Radio";
 				presenceData.buttons = [
 					{
-						label: "Listen into the Tunes!",
+						label: "Listen Along!",
 						url: "https://planetxo.uk/lushradio",
 					},
 				];
@@ -68,7 +69,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing Every Radio";
 				presenceData.buttons = [
 					{
-						label: "Listen into the Tunes!",
+						label: "Listen Along!",
 						url: "https://planetxo.uk/everyradio",
 					},
 				];
@@ -88,7 +89,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing the Panel for XO Radio";
 				presenceData.buttons = [
 					{
-						label: "Listen into the Tunes!",
+						label: "Listen Along!",
 						url: "https://planetxo.uk/xoradio",
 					},
 				];
@@ -98,7 +99,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing the Panel for Blast Radio";
 				presenceData.buttons = [
 					{
-						label: "Listen into the Tunes!",
+						label: "Listen Along!",
 						url: "https://planetxo.uk/blastradio",
 					},
 				];
@@ -108,7 +109,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing the Panel for QTFM";
 				presenceData.buttons = [
 					{
-						label: "Listen into the Tunes!",
+						label: "Listen Along!",
 						url: "https://planetxo.uk/qtfm",
 					},
 				];
@@ -118,7 +119,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing the Panel for Lush Radio";
 				presenceData.buttons = [
 					{
-						label: "Listen into the Tunes!",
+						label: "Listen Along!",
 						url: "https://planetxo.uk/lushradio",
 					},
 				];
@@ -128,7 +129,7 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Viewing the Panel for Every Radio";
 				presenceData.buttons = [
 					{
-						label: "Listen into the Tunes!",
+						label: "Listen Along!",
 						url: "https://planetxo.uk/everyradio",
 					},
 				];
