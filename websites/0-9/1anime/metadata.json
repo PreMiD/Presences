@@ -10,9 +10,9 @@
 		"en": "Experience Anime & Manga without Ads, Completely Free!"
 	},
 	"url": "1anime.one",
-	"version": "1.0.0",
-	"logo": "https://1anime.co/android-chrome-512x512.png",
-	"thumbnail": "https://1anime.co/banner.jpg",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/0-9/1anime/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/0-9/1anime/assets/thumbnail.jpg",
 	"color": "#C63BAD",
 	"category": "anime",
 	"tags": [
