@@ -4,12 +4,15 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-	const showButtons = await presence.getSetting("showButtons"),
-		btnPrivacy = await presence.getSetting("btnPrivacy"),
-		presenceData: PresenceData = {
+	const [showButtons, btnPrivacy] = await Promise.all([
+		presence.getSetting("showButtons"),
+		presence.getSetting("btnPrivacy")
+	  ]);
+	const presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
+			largeImageKey: "https://i.imgur.com/zDNmRxT.png",
 		},
-		path = window.location.pathname;
+		path = document.location.pathname;
 
 	if (path === "/") presenceData.details = "Browsing the homepage.";
 	else if (path === "/fyp") {
