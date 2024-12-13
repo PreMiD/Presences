@@ -10,7 +10,8 @@ presence.on("UpdateData", async () => {
 		]),
 		presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-			largeImageKey: "https://i.imgur.com/zDNmRxT.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/W/Websim/assets/logo.png",
 		},
 		path = document.location.pathname;
 
