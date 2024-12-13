@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing the Privacy Policy";
 		else if (document.location.pathname.startsWith("/favorite"))
 			presenceData.details = "Viewing favorited games";
-		else if (window.location.search.startsWith("?s=")) {
+		else if (document.location.search.startsWith("?s=")) {
 			presenceData.details = "Searching";
 			presenceData.state = document.querySelector("#taginfo h1").textContent;
 		} else if (document.location.pathname.startsWith("/tag/")) {
