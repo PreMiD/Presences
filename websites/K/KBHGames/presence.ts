@@ -16,7 +16,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const { href, search, pathname } = document.location,
 		presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/c61Rzcw.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/K/KBHGames/assets/logo.png",
 			startTimestamp: browsingTimestamp,
 		};
 	if (pathname.startsWith("/new")) presenceData.details = "Viewing new games";
