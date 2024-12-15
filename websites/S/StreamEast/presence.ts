@@ -10,10 +10,12 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (document.title.includes("vs")) {
-		presenceData.details = document.title.replace(
+		presenceData.details = `[${window.location.pathname
+			.match(/^\/([^/]+)\//)[1]
+			.toUpperCase()}] ${document.title.replace(
 			" Live Stream - StreamEast",
 			""
-		);
+		)}`;
 	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
