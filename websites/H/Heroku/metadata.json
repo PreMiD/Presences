@@ -20,7 +20,7 @@
 		"help.heroku.com",
 		"status.heroku.com"
 	],
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Heroku/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Heroku/assets/thumbnail.png",
 	"color": "#211746",
@@ -34,7 +34,6 @@
 		{
 			"id": "showNames",
 			"value": false,
-			"multiLanguage": false,
 			"title": "Show Application Names",
 			"icon": "fas fa-text"
 		}
