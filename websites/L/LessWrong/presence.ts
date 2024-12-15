@@ -6,7 +6,7 @@ let data;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/GnuhkCJ.png",
+		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/L/LessWrong/assets/0.png",
 		startTimestamp: browsingTimestamp,
 	};
 
