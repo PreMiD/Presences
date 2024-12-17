@@ -10,7 +10,7 @@ const enum Assets {
 async function getStrings() {
 	return presence.getStrings(
 		{
-			buttonJoinGame: "kahoot.buttonJoinGame",
+			buttonJoinGame: "skribbl.io.buttonJoinGame",
 			viewHome: "general.viewHome",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
@@ -121,7 +121,7 @@ presence.on("UpdateData", async () => {
 		if (buttons) {
 			presenceData.buttons = [
 				{
-					label: strings.buttonJoinGame.replace(": {0}", ""),
+					label: strings.buttonJoinGame,
 					url: getInviteLink(),
 				},
 			];

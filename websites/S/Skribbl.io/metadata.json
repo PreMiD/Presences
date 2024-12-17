@@ -22,7 +22,7 @@
 		"nl": "Skribbl.io is een gratis multiplayer teken- en raadspel. Teken en raad woorden met je vrienden en mensen van over de hele wereld! Scoor de meeste punten en wees de winnaar!"
 	},
 	"url": "skribbl.io",
-	"version": "1.2.9",
+	"version": "1.2.10",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Skribbl.io/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Skribbl.io/assets/thumbnail.png",
 	"color": "#245195",
@@ -34,7 +34,7 @@
 	"settings": [
 		{
 			"id": "lang",
-			"multiLanguage": "kahoot"
+			"multiLanguage": true
 		},
 		{
 			"id": "buttons",
