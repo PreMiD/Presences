@@ -100,8 +100,8 @@ presence.on("UpdateData", async () => {
 						state.item.type === "anime"
 							? strings.viewAnime.replace(":", "")
 							: state.item.type === "movie"
-								? strings.viewAMovie
-								: strings.viewAShow,
+							? strings.viewAMovie
+							: strings.viewAShow,
 					state: state.item.title,
 					largeImageKey: state.item.poster,
 					smallImageText: state.item.shownType,
@@ -124,8 +124,8 @@ presence.on("UpdateData", async () => {
 						(state.item.type === "movie"
 							? strings.watchingMovie
 							: state.item.type === "tv"
-								? strings.watchingLive
-								: strings.watchingShow),
+							? strings.watchingLive
+							: strings.watchingShow),
 					state: state.item.title,
 					largeImageKey: state.item.poster,
 					smallImageKey: Assets.Play,
@@ -136,8 +136,8 @@ presence.on("UpdateData", async () => {
 								state.item.type === "movie"
 									? strings.buttonWatchMovie
 									: state.item.type === "tv"
-										? strings.buttonWatchStream
-										: strings.buttonWatchEpisode,
+									? strings.buttonWatchStream
+									: strings.buttonWatchEpisode,
 							url: `https://watch.lonelil.com/watch/${state.item.type}/${state.item.id}`,
 						},
 					],
