@@ -20,7 +20,7 @@
 		"twitter.com",
 		"x.com"
 	],
-	"version": "1.1.4",
+	"version": "1.1.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/X/X.com/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/X/X.com/assets/thumbnail.png",
 	"color": "#000000",
@@ -33,7 +33,7 @@
 	"settings": [
 		{
 			"id": "lang",
-			"multiLanguage": "x"
+			"multiLanguage": true
 		},
 		{
 			"id": "privacy",
