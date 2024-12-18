@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Post",
-				url: new URL(document.location.pathname, window.location.origin).href,
+				url: new URL(document.location.pathname, document.location.origin).href,
 			},
 		];
 	} else if (document.location.pathname.startsWith("/users/")) {
