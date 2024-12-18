@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "View Profile",
-				url: new URL(document.location.pathname, window.location.origin).href,
+				url: new URL(document.location.pathname, document.location.origin).href,
 			},
 		];
 	} else presenceData.details = "Browsing LessWrong";
