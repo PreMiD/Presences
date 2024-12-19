@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"$schema": "https://schemas.premid.app/metadata/1.12",
 	"apiVersion": 1,
 	"author": {
 		"id": "293803241110503426",
@@ -17,7 +17,7 @@
 		"pl": "Najłatwiejszy sposób nauki i ćwiczenia nowoczesnego Javascript'u. Nauka w interaktywnym środowisku. Czytaj krótkie lekcje, pisz notatki i ukończ zadania bezpośrednio w twojej przeglądarce."
 	},
 	"url": "learnjavascript.online",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/Learnjavascript/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Learnjavascript/assets/thumbnail.png",
 	"color": "#f7df1e",

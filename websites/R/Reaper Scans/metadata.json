@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"$schema": "https://schemas.premid.app/metadata/1.12",
 	"apiVersion": 1,
 	"author": {
 		"name": "Harold",
@@ -19,7 +19,7 @@
 		"reaperscans.com",
 		"reapercomics.com"
 	],
-	"version": "1.3.2",
+	"version": "1.3.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Reaper%20Scans/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Reaper%20Scans/assets/thumbnail.jpg",
 	"color": "#6E3CAA",

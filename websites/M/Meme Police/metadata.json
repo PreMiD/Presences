@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"$schema": "https://schemas.premid.app/metadata/1.12",
 	"apiVersion": 1,
 	"author": {
 		"name": "churuya",
@@ -12,7 +12,7 @@
 		"nl": "Onlineversies van populaire bordspellen"
 	},
 	"url": "meme-police.ru",
-	"version": "1.0.19",
+	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Meme%20Police/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Meme%20Police/assets/thumbnail.png",
 	"color": "#9C27B0",
