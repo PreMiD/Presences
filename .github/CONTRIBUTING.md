@@ -60,7 +60,7 @@ Each presence has a descriptor file called `metadata.json`, the metadata has a s
 
 ```json
 {
-  "$schema": "https://schemas.premid.app/metadata/1.11",
+  "$schema": "https://schemas.premid.app/metadata/1.12",
   "apiVersion": 1,
   "author": {
     "name": "USER",
