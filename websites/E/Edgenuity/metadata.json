@@ -13,10 +13,14 @@
 	"url": [
 		"auth.edgenuity.com",
 		"student.edgenuity.com",
+		"r10.core.learn.edgenuity.com",
+		"r11.core.learn.edgenuity.com",
+		"r12.core.learn.edgenuity.com",
 		"r22.core.learn.edgenuity.com",
-		"r23.core.learn.edgenuity.com"
+		"r23.core.learn.edgenuity.com",
+		"r24.core.learn.edgenuity.com"
 	],
-	"version": "1.0.23",
+	"version": "1.0.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Edgenuity/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Edgenuity/assets/thumbnail.png",
 	"color": "#FF0000",
