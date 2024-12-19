@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"$schema": "https://schemas.premid.app/metadata/1.12",
 	"apiVersion": 1,
 	"author": {
 		"name": "Kozou",
@@ -26,7 +26,7 @@
 		"nl": "Canal + is een Franse abonnementsaanbieder die is gekoppeld aan het kanaal met dezelfde naam. Het is eigendom van Vivendi met een aandeel van honderd procent."
 	},
 	"url": "www.canalplus.com",
-	"version": "2.0.13",
+	"version": "2.0.14",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/myCANAL/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/myCANAL/assets/thumbnail.png",
 	"color": "#000",
