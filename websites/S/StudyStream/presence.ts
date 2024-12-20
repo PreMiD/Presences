@@ -1,7 +1,7 @@
 const presence = new Presence({
-				clientId: "1319468567405662209",
-			}),
-			browsingTimestamp = Math.floor(Date.now() / 1000);
+		clientId: "1319468567405662209",
+	}),
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
 	Logo = "https://i.imgur.com/f4ehLFP.png",
