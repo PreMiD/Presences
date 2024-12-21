@@ -42,7 +42,9 @@ presence.on("UpdateData", async () => {
 		else {
 			const title = document.querySelector("#playerTitle").textContent,
 				author = document.querySelector("#playerSubtitle").textContent,
-				artwork = document.querySelector("#playerArtwork").getAttribute("src");
+				artwork = document.querySelector<HTMLImageElement>(
+					"#directoryStationArtwork,#playerArtwork"
+				)?.src;
 
 			if (title) presenceData.details = title;
 			if (author) presenceData.state = author;
