@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 				.replace(/смотреть\s/i, "")
 				.replace(/([0-9]* сезон)?\s?[0-9]* серия|[0-9] фильм/g, "")
 				.trim();
-			presenceData.details = `Смотрит аниме «${titles}»`;
+			presenceData.details = titles;
 			presenceData.state = name.textContent
 				.replace(/смотреть\s/i, "")
 				.replace(titles, "");
