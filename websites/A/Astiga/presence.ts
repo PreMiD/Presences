@@ -98,11 +98,6 @@ presence.on("UpdateData", async () => {
 		if (!play.style.display || currentTime === 0) playback = false;
 		else playback = true;
 
-		const [startTimestamp, endTimestamp] = presence.getTimestamps(
-			currentTime,
-			duration
-		);
-
 		presenceData.details = `Song: ${musicTitle.textContent}`;
 
 		if (
@@ -132,9 +127,8 @@ presence.on("UpdateData", async () => {
 			? (await strings).play
 			: (await strings).pause;
 
-		presenceData.startTimestamp = startTimestamp;
-
-		presenceData.endTimestamp = endTimestamp;
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestamps(Math.floor(currentTime), Math.floor(duration));
 
 		if (playback === false) {
 			delete presenceData.startTimestamp;

@@ -58,16 +58,14 @@ const pages: PageContext[] = [
 					".single-content.movie .title>h1"
 				)?.textContent;
 				if (frame) {
-					const [startTimestamp, endTimestamp] = context.getTimestamps(
-						frame.currentTime,
-						frame.duration
-					);
 					data.details = strings.playing;
 					data.smallImageKey = frame.paused ? images.PAUSE : images.PLAY;
 					data.smallImageText = `${strings.playing} ${data.state}`;
 					if (!frame.paused) {
-						data.startTimestamp = startTimestamp;
-						data.endTimestamp = endTimestamp;
+						[data.startTimestamp, data.endTimestamp] = context.getTimestamps(
+							frame.currentTime,
+							frame.duration
+						);
 					} else {
 						if (data.startTimestamp) delete data.startTimestamp;
 						if (data.endTimestamp) delete data.endTimestamp;

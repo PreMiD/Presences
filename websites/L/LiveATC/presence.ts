@@ -61,8 +61,7 @@ presence.on("UpdateData", async () => {
 				}
 				case "archive": {
 					if (document.querySelector("audio")) {
-						const audio = document.querySelector("audio"),
-							timestamps = presence.getTimestampsfromMedia(audio);
+						const audio = document.querySelector("audio");
 
 						presenceData.details = "Listening to archive";
 						presenceData.state = audio
@@ -74,8 +73,8 @@ presence.on("UpdateData", async () => {
 							: Assets.Play;
 						presenceData.smallImageText = audio.paused ? "Paused" : "Playing";
 						if (!audio.paused) {
-							presenceData.startTimestamp = timestamps[0];
-							presenceData.endTimestamp = timestamps[1];
+							[presenceData.startTimestamp, presenceData.endTimestamp] =
+								presence.getTimestampsfromMedia(audio);
 						}
 					} else presenceData.details = "Searching archive";
 					break;

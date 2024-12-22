@@ -2,16 +2,6 @@ const presence = new Presence({
 	clientId: "1188371319776100463",
 });
 
-function getTimestamps() {
-	const timeElement = document.querySelector("video"),
-		[startTimestamp, endTimestamp] = presence.getTimestamps(
-			Math.floor(timeElement.currentTime),
-			Math.floor(timeElement.duration)
-		);
-
-	return { startTimestamp, endTimestamp };
-}
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/P/Poke/assets/logo.png",
@@ -52,8 +42,10 @@ presence.on("UpdateData", async () => {
 				: "No Channel Name Available";
 			const videoPlayer = document.querySelector("video");
 
-			if (videoPlayer && !videoPlayer.paused)
-				presenceData.endTimestamp = getTimestamps().endTimestamp;
+			if (videoPlayer && !videoPlayer.paused) {
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(document.querySelector("video"));
+			}
 			break;
 		}
 		case "channel": {

@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"apiVersion": 1,
 	"author": {
 		"name": "Alexx",
 		"id": "604182077088202784"
@@ -12,10 +13,14 @@
 	"url": [
 		"auth.edgenuity.com",
 		"student.edgenuity.com",
+		"r10.core.learn.edgenuity.com",
+		"r11.core.learn.edgenuity.com",
+		"r12.core.learn.edgenuity.com",
 		"r22.core.learn.edgenuity.com",
-		"r23.core.learn.edgenuity.com"
+		"r23.core.learn.edgenuity.com",
+		"r24.core.learn.edgenuity.com"
 	],
-	"version": "1.0.22",
+	"version": "1.0.25",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Edgenuity/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Edgenuity/assets/thumbnail.png",
 	"color": "#FF0000",

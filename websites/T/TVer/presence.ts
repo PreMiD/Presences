@@ -148,12 +148,12 @@ presence.on("UpdateData", async () => {
 						.replace("%tvStation%", tvStation)
 						.replace("%seriesTitle%", seriesTitle ?? "")
 						.replace("%title%", title ?? "");
-					const { duration, currentTime, paused } =
-						document.querySelector<HTMLVideoElement>("video");
-					delete presenceData.startTimestamp;
+					const { paused } = document.querySelector<HTMLVideoElement>("video");
 					if (!paused) {
-						presenceData.endTimestamp =
-							Date.now() / 1000 + duration - currentTime;
+						[presenceData.startTimestamp, presenceData.endTimestamp] =
+							presence.getTimestampsfromMedia(
+								document.querySelector<HTMLVideoElement>("video")
+							);
 					}
 					presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
 					presenceData.smallImageText = paused

@@ -97,7 +97,8 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageKey = Assets.Pause;
 			} else {
 				presenceData.smallImageKey = Assets.Play;
-				presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(video);
 			}
 		} else {
 			const fetched = await fetchWithoutVideo();

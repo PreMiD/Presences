@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
 						[presenceData.details] = anime.textContent.split("-");
 						if (!isNaN(episode)) presenceData.state = `Episódio: ${episode}`;
 						if (video) {
-							[, presenceData.endTimestamp] =
+							[presenceData.startTimestamp, presenceData.endTimestamp] =
 								presence.getTimestampsfromMedia(video);
 						}
 

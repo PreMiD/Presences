@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 						if (!video.paused) {
 							presenceData.smallImageKey =
 								"https://cdn.rcd.gg/PreMiD/websites/E/Epic%20Games/assets/1.png";
-							[, presenceData.endTimestamp] =
+							[presenceData.startTimestamp, presenceData.endTimestamp] =
 								presence.getTimestampsfromMedia(video);
 						} else {
 							presenceData.smallImageKey =

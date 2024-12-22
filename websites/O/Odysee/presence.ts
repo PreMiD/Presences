@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
 					];
 				}
 				if (video) {
-					[, presenceData.endTimestamp] =
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
 						presence.getTimestampsfromMedia(video);
 					presenceData.smallImageKey = video.paused
 						? Assets.Pause

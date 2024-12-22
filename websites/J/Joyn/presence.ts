@@ -123,7 +123,6 @@ presence.on("UpdateData", async function () {
 						presenceData.details = strings.browsing;
 						presenceData.state = document.querySelector(".bISbKZ").textContent;
 					} else if (urlpath[1] === "play" && urlpath[2] === "filme") {
-						const videoStartTime = Date.now();
 						presenceData.details = document.title.replace(
 							"streamen | Joyn",
 							""
@@ -131,11 +130,8 @@ presence.on("UpdateData", async function () {
 						presenceData.state = "Movie";
 						if (!video.paused) {
 							if (setting.timeRemaining) {
-								presenceData.startTimestamp = videoStartTime;
-								presenceData.endTimestamp =
-									Math.floor(videoStartTime / 1000) -
-									video.currentTime +
-									video.duration;
+								[presenceData.startTimestamp, presenceData.endTimestamp] =
+									presence.getTimestampsfromMedia(video);
 							}
 							presenceData.smallImageKey = Assets.Play;
 							presenceData.smallImageText = strings.play;
@@ -152,17 +148,12 @@ presence.on("UpdateData", async function () {
 							];
 						}
 					} else if (urlpath[1] === "play" && urlpath[2] === "serien") {
-						const videoStartTime = Date.now();
-
 						presenceData.details = document.title.replace("streamen", "");
 						presenceData.state = "Series";
 						if (!video.paused) {
 							if (setting.timeRemaining) {
-								presenceData.startTimestamp = videoStartTime;
-								presenceData.endTimestamp =
-									Math.floor(videoStartTime / 1000) -
-									video.currentTime +
-									video.duration;
+								[presenceData.startTimestamp, presenceData.endTimestamp] =
+									presence.getTimestampsfromMedia(video);
 							}
 							presenceData.smallImageKey = Assets.Play;
 							presenceData.smallImageText = strings.play;
@@ -180,16 +171,12 @@ presence.on("UpdateData", async function () {
 							];
 						}
 					} else if (urlpath[1] === "play" && urlpath[2] === "trailer") {
-						const videoStartTime = Date.now();
 						presenceData.details = document.title.replace("Trailer | Joyn", "");
 						presenceData.state = "Trailer";
 						if (!video.paused) {
 							if (setting.timeRemaining) {
-								presenceData.startTimestamp = videoStartTime;
-								presenceData.endTimestamp =
-									Math.floor(videoStartTime / 1000) -
-									video.currentTime +
-									video.duration;
+								[presenceData.startTimestamp, presenceData.endTimestamp] =
+									presence.getTimestampsfromMedia(video);
 							}
 							presenceData.smallImageKey = Assets.Play;
 							presenceData.smallImageText = strings.play;
@@ -215,16 +202,12 @@ presence.on("UpdateData", async function () {
 							];
 						}
 					} else if (urlpath[1] === "play" && urlpath[2] === "compilation") {
-						const videoStartTime = Date.now();
 						presenceData.details = document.title.replace("| Joyn", "");
 						presenceData.state = "Compilation";
 						if (!video.paused) {
 							if (setting.timeRemaining) {
-								presenceData.startTimestamp = videoStartTime;
-								presenceData.endTimestamp =
-									Math.floor(videoStartTime / 1000) -
-									video.currentTime +
-									video.duration;
+								[presenceData.startTimestamp, presenceData.endTimestamp] =
+									presence.getTimestampsfromMedia(video);
 							}
 							presenceData.smallImageKey = Assets.Play;
 							presenceData.smallImageText = strings.play;
@@ -248,11 +231,8 @@ presence.on("UpdateData", async function () {
 						presenceData.state = "Sport";
 						if (!video.paused) {
 							if (setting.timeRemaining) {
-								presenceData.startTimestamp = Date.now();
-								presenceData.endTimestamp =
-									Math.floor(Date.now() / 1000) -
-									video.currentTime +
-									video.duration;
+								[presenceData.startTimestamp, presenceData.endTimestamp] =
+									presence.getTimestampsfromMedia(video);
 							}
 							presenceData.smallImageKey = Assets.Play;
 							presenceData.smallImageText = strings.play;

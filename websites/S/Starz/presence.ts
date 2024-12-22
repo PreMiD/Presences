@@ -36,11 +36,7 @@ presence.on("UpdateData", async () => {
 
 	if (video) {
 		const title = document.querySelector("title")?.textContent,
-			[startTimestamp, endTimestamp] = presence.getTimestamps(
-				Math.floor(video.currentTime),
-				Math.floor(video.duration)
-			),
-			live = endTimestamp === Infinity;
+			live = video.duration === Infinity;
 
 		presenceData.details = title;
 		presenceData.state = getStateText(video.paused, live);
@@ -54,9 +50,11 @@ presence.on("UpdateData", async () => {
 			: video.paused
 			? (await strings).pause
 			: (await strings).play;
-		presenceData.startTimestamp = live ? elapsed : startTimestamp;
-		if (!live) presenceData.endTimestamp = endTimestamp;
-		if (live) delete presenceData.endTimestamp;
+		if (!live) {
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestampsfromMedia(video);
+		} else if (live) delete presenceData.endTimestamp;
+
 		if (video.paused) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
