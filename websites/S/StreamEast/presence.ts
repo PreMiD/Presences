@@ -7,9 +7,10 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "https://i.ibb.co/gr5gcV8/file.jpg",
 		startTimestamp: browsingTimestamp,
-	};
+	},
+	{pathname} = document.location;
 
-	switch (document.location.pathname) {
+	switch (pathname) {
 		case "/v85": {
 			presenceData.details = "Viewing home page";
 			break;
@@ -51,10 +52,10 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		default:
-			if (document.location.pathname.includes("/blog/"))
+			if (pathname.includes("/blog/"))
 				presenceData.details = `Viewing blog: ${document.title}`;
 			else if (document.title.includes("vs")) {
-				presenceData.details = `Watching: [${window.location.pathname
+				presenceData.details = `Watching: [${pathname
 					.match(/^\/([^/]+)\//)[1]
 					.toUpperCase()}] ${document.title.replace(
 					" Live Stream - StreamEast",
