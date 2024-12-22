@@ -1,22 +1,21 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"$schema": "https://schemas.premid.app/metadata/1.12",
 	"apiVersion": 2,
 	"author": {
 		"id": "302616090461077514",
 		"name": "puppiesa"
 	},
-	"iframe": true,
 	"service": "Dek-d",
+	"altnames": [
+		"เด็กดี",
+		"dekd"
+	],
 	"description": {
 		"th": "พบปะเพื่อนวัยรุ่นจากทั่วประเทศไทยด้วยกันที่นี่ กับเรื่องสนุกๆ บอร์ด นิยาย แฟชั่น ไลฟ์สไตล์ บันเทิง การศึกษา แอดมิชชั่น เรียนต่อนอก ที่สร้างขึ้นสำหรับวัยรุ่นโดยเฉพาะ.",
 		"en": "Dek-D.com is a popular Thai online platform that serves as a hub for teenagers and young adults. The website offers a variety of features and content, including Educational Resources , Creative Writing Community , University Admissions Tools (TCAS) , Interactive Forums and Social Features"
 	},
-	"url" : "www.dek-d.com",
+	"url": "www.dek-d.com",
 	"regExp": "([a-z0-9-]+[.])*dek-d[.]com[/]",
-	"altnames": [
-			"เด็กดี",
-			"dekd"
-	],    
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/eq3Nmvz.png",
 	"thumbnail": "https://i.imgur.com/dIQlWyP.png",
