@@ -157,10 +157,9 @@ presence.on("UpdateData", async () => {
 					break;
 				case "detail": {
 					if (appVersion === AppVersion.V4) {
-						const title = document.querySelector(
+						presenceData.state = document.querySelector(
 							"#detail > div:nth-child(3) > div > div.sidebar-info-container > div > div.logo > div"
 						)?.textContent;
-						presenceData.state = title;
 						presenceData.largeImageKey =
 							document
 								.querySelector(
