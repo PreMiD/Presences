@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
 					delete presenceData.endTimestamp;
 					presenceData.smallImageKey = Assets.Stop;
 				}
-			} else delete presenceData.startTimestamp, presenceData.endTimestamp;
+			} else delete presenceData.startTimestamp;
 		}
 	}
 	if (pathname === "/playlist") presenceData.details = "재생 목록 확인 중";
@@ -115,7 +115,7 @@ presence.on("UpdateData", async () => {
 					delete presenceData.endTimestamp;
 					presenceData.smallImageKey = Assets.Stop;
 				}
-			} else delete presenceData.startTimestamp, presenceData.endTimestamp;
+			} else delete presenceData.startTimestamp;
 		}
 	}
 	if (pathname === "/karaoke") presenceData.details = "노래방: 로비";
