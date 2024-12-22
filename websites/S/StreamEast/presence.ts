@@ -5,10 +5,10 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.ibb.co/gr5gcV8/file.jpg",
-		startTimestamp: browsingTimestamp,
-	},
-	{pathname} = document.location;
+			largeImageKey: "https://i.ibb.co/gr5gcV8/file.jpg",
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname } = document.location;
 
 	switch (pathname) {
 		case "/v85": {
