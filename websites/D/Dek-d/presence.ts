@@ -135,9 +135,7 @@ presence.on("UpdateData", async () => {
 							) {
 								presenceData.details = `Doing ${pathSegments[2]}`;
 								presenceData.state = `${titleText}`;
-								const img = document.querySelectorAll(
-									"div.thumb-img .image"
-								)[0];
+								const img = document.querySelector("div.thumb-img .image");
 								if (img) {
 									const urlMatch = window
 										.getComputedStyle(img)
@@ -155,7 +153,7 @@ presence.on("UpdateData", async () => {
 						if (pathSegments[2] !== "" && !isNaN(Number(pathSegments[2]))) {
 							presenceData.state = titleText;
 							presenceData.largeImageKey = document
-								.querySelectorAll("a.link img")[0]
+								.querySelector("a.link img")
 								.getAttribute("src");
 							presenceData.smallImageKey = Assets.Logo;
 						} else if (
@@ -177,7 +175,7 @@ presence.on("UpdateData", async () => {
 						if (pathSegments[2] !== "" && !isNaN(Number(pathSegments[2]))) {
 							presenceData.state = titleText;
 							presenceData.largeImageKey = document
-								.querySelectorAll(".image img")[0]
+								.querySelector(".image img")
 								.getAttribute("src");
 							presenceData.smallImageKey = Assets.Logo;
 						} else if (sections.studyabroad.includes(pathSegments[2]))
