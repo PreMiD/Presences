@@ -23,5 +23,13 @@
 		"typing",
 		"games",
 		"gaming"
+	],
+	"settings": [
+		{
+			"id": "showCar",
+			"title": "Show Car",
+			"icon": "fas fa-car-mirrors",
+			"value": true
+		}
 	]
 }
