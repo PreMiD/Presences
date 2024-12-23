@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"$schema": "https://schemas.premid.app/metadata/1.12",
 	"apiVersion": 1,
 	"author": {
 		"name": "lunax",
@@ -14,7 +14,7 @@
 		"nl": "Web frontend voor LBRY. LBRY doet met publiceren, wat Bitcoin met geld deed."
 	},
 	"url": "odysee.com",
-	"version": "1.0.21",
+	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/O/Odysee/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/Odysee/assets/thumbnail.jpg",
 	"color": "#0a070d",
