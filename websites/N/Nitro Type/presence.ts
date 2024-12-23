@@ -89,9 +89,7 @@ presence.on("UpdateData", async () => {
 			}.${largeSrc[1]}`
 		);
 	}
-	const showCar = await Promise.resolve(
-			presence.getSetting<boolean>("showCar")
-		),
+	const showCar = await presence.getSetting<boolean>("showCar"),
 		presenceData: PresenceData = {
 			largeImageKey:
 				(loggedIn && showCar ? carImage : Assets.Logo) ?? Assets.Logo,
