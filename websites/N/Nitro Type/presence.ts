@@ -285,8 +285,5 @@ presence.on("UpdateData", async () => {
 		presence.error("no presence!");
 
 		presence.setActivity();
-	} else {
-		//log(presenceData)
-		presence.setActivity(presenceData);
-	}
+	} else presence.setActivity(presenceData);
 });
