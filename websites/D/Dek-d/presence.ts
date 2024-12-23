@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/9wQMfAA.png",
+	Logo = "https://i.imgur.com/EUDvEz9.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -111,9 +111,7 @@ presence.on("UpdateData", async () => {
 							presenceData.state = `${titleText}`;
 						else if (sections.tcas.includes(pathSegments[2]))
 							presenceData.details = `Browsing ${pathSegments[2]} on ${pathSegments[1]} thread`;
-						presenceData.buttons = [
-							{ label: "Visit", url: "https://example.com" },
-						];
+						presenceData.buttons = [{ label: "View", url: document.URL }];
 
 						break;
 					}
@@ -193,7 +191,7 @@ presence.on("UpdateData", async () => {
 						if (pathSegments[2] !== "" && !isNaN(Number(pathSegments[2]))) {
 							presenceData.state = titleText;
 							presenceData.largeImageKey = document
-								.querySelectorAll(".image img")[0]
+								.querySelector(".image img")
 								.getAttribute("src");
 							presenceData.smallImageKey = Assets.Logo;
 						}
@@ -202,11 +200,8 @@ presence.on("UpdateData", async () => {
 					case "teentrends": {
 						presenceData.details = `Browsing ${pathSegments[1]}`;
 						if (pathSegments[2] !== "" && !isNaN(Number(pathSegments[2]))) {
-							const img = document.querySelectorAll(".image img")[0];
+							const img = document.querySelector(".image img");
 							if (img) presenceData.largeImageKey = img.getAttribute("src");
-							else {
-								// No image found
-							}
 							presenceData.state = titleText;
 							presenceData.smallImageKey = Assets.Logo;
 						}
@@ -224,7 +219,7 @@ presence.on("UpdateData", async () => {
 						if (pathSegments[2] !== "" && !isNaN(Number(pathSegments[2]))) {
 							presenceData.state = titleText;
 							presenceData.largeImageKey = document
-								.querySelectorAll(".image img")[0]
+								.querySelector(".image img")
 								.getAttribute("src");
 							presenceData.smallImageKey = Assets.Logo;
 						}
@@ -242,9 +237,9 @@ presence.on("UpdateData", async () => {
 			switch (pathSegments[1]) {
 				// admin novel review
 				case "article": {
-					const headerTexts = document.querySelectorAll(".special-intro")[0],
+					const headerTexts = document.querySelector(".special-intro"),
 						headerT = headerTexts
-							? headerTexts.querySelectorAll("h2")[0].textContent
+							? headerTexts.querySelector("h2").textContent
 							: "";
 					presenceData.smallImageKey = Assets.Logo;
 					presenceData.details = "Reading Admin Novels Review";
@@ -272,7 +267,9 @@ presence.on("UpdateData", async () => {
 							.getComputedStyle(novelCoverElement)
 							.getPropertyValue("background-image")
 							.match(/url\(["']?([^"']*)["']?\)/);
-						presenceData.largeImageKey = urlMatch ? urlMatch[1] : "";
+						presenceData.largeImageKey = urlMatch ? urlMatch[1] : Assets.Logo;
+						if (presenceData.largeImageKey !== Assets.Logo)
+							presenceData.smallImageKey = Assets.Logo;
 					}
 					presenceData.state = document.querySelector("a.link").textContent;
 					presenceData.smallImageKey = Assets.Logo;
@@ -296,8 +293,9 @@ presence.on("UpdateData", async () => {
 						.getComputedStyle(novelCoverElement)
 						.getPropertyValue("background-image")
 						.match(/url\(["']?([^"']*)["']?\)/);
-					presenceData.largeImageKey = urlMatch ? urlMatch[1] : "";
-					presenceData.smallImageKey = Assets.Logo;
+					presenceData.largeImageKey = urlMatch ? urlMatch[1] : Assets.Logo;
+					if (presenceData.largeImageKey !== Assets.Logo)
+						presenceData.smallImageKey = Assets.Logo;
 				}
 				presenceData.state = document.querySelector("p.novel-name").textContent;
 			}
