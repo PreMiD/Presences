@@ -30,7 +30,7 @@
 	"iFrameRegExp": ".*",
 	"settings": [
 		{
-			"id": "settingElapsed",
+			"id": "elapsed",
 			"title": "Show Time Elapsed",
 			"icon": "fas fa-stopwatch",
 			"value": true

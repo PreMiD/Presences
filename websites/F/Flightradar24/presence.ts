@@ -3,9 +3,7 @@ const presence = new Presence({
 	}),
 	browsingStamp = Math.floor(Date.now() / 1000);
 let remaining = 0,
-	elapsed = 0,
 	leftTimestamp = 0,
-	elapsedTimestamp = 0,
 	player = {
 		total: "",
 		elapsed: "",
@@ -49,14 +47,13 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-	const [settingElapsed, buttons, images, timeLeft] = await Promise.all([
-			presence.getSetting<boolean>("settingElapsed"),
+	const [elapsed, buttons, images, timeLeft] = await Promise.all([
+			presence.getSetting<boolean>("elapsed"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("images"),
 			presence.getSetting<boolean>("timeLeft"),
 		]),
 		presenceData: PresenceData = {
-			type: ActivityType.Watching,
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/F/Flightradar24/assets/logo.png",
 			startTimestamp: browsingStamp,
@@ -501,46 +498,54 @@ presence.on("UpdateData", async () => {
 							presenceData.smallImageText = document.querySelector(
 								"[data-testid='aircraft-panel'] [data-testid='base-tooltip__content']"
 							).textContent;
-							const timeRemaining = [
-									...document
-										.querySelector(
-											"[data-testid='aircraft-panel__flight-time-remaining']"
-										)
-										.textContent.matchAll(/([0-9]{2}):([0-9]{2})/g),
-								][0],
-								timeElapsed = [
-									...document
-										.querySelector(
-											"[data-testid='aircraft-panel__flight-time-elapsed']"
-										)
-										.textContent.matchAll(/([0-9]{2}):([0-9]{2})/g),
-								][0];
-
-							if (timeRemaining) {
+							if (
+								document.querySelector(
+									"[data-testid='aircraft-panel__flight-time-remaining'] > span"
+								)
+							) {
 								if (
 									remaining !==
-									parseInt(timeRemaining[1]) * 3600 +
-										parseInt(timeRemaining[2]) * 60
+									parseInt(
+										document
+											.querySelector(
+												"[data-testid='aircraft-panel__flight-time-remaining'] > span"
+											)
+											.textContent.slice(5)
+											.split(":")[0]
+									) *
+										3600 +
+										parseInt(
+											document
+												.querySelector(
+													"[data-testid='aircraft-panel__flight-time-remaining'] > span"
+												)
+												.textContent.slice(5)
+												.split(":")[1]
+										) *
+											60
 								) {
 									remaining =
-										parseInt(timeRemaining[1]) * 3600 +
-										parseInt(timeRemaining[2]) * 60;
+										parseInt(
+											document
+												.querySelector(
+													"[data-testid='aircraft-panel__flight-time-remaining'] > span"
+												)
+												.textContent.slice(5)
+												.split(":")[0]
+										) *
+											3600 +
+										parseInt(
+											document
+												.querySelector(
+													"[data-testid='aircraft-panel__flight-time-remaining'] > span"
+												)
+												.textContent.slice(5)
+												.split(":")[1]
+										) *
+											60;
 									leftTimestamp = Math.floor(Date.now() / 1000) + remaining;
 									presenceData.endTimestamp = leftTimestamp;
 								} else presenceData.endTimestamp = leftTimestamp;
-							}
-							if (timeElapsed) {
-								if (
-									elapsed !==
-									parseInt(timeElapsed[1]) * 3600 +
-										parseInt(timeElapsed[2]) * 60
-								) {
-									elapsed =
-										parseInt(timeElapsed[1]) * 3600 +
-										parseInt(timeElapsed[2]) * 60;
-									elapsedTimestamp = Math.floor(Date.now() / 1000) - elapsed;
-									presenceData.startTimestamp = elapsedTimestamp;
-								} else presenceData.startTimestamp = elapsedTimestamp;
 							}
 							if (
 								images &&
@@ -725,7 +730,7 @@ presence.on("UpdateData", async () => {
 			break;
 	}
 
-	if (!settingElapsed) delete presenceData.startTimestamp;
+	if (!elapsed) delete presenceData.startTimestamp;
 	if (!timeLeft) delete presenceData.endTimestamp;
 	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 

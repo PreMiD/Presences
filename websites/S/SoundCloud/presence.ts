@@ -166,12 +166,24 @@ presence.on("UpdateData", async () => {
 			presenceData.details = getElement(".playbackSoundBadge__lightLink");
 		}
 
-		const timeline = document.querySelector<HTMLDivElement>(
-				"div.playbackTimeline__progressWrapper"
-			),
+		const timePassed = document.querySelector(
+				"div.playbackTimeline__timePassed > span:nth-child(2)"
+			).textContent,
+			durationString = document.querySelector(
+				"div.playbackTimeline__duration > span:nth-child(2)"
+			).textContent,
 			[currentTime, duration] = [
-				parseInt(timeline.ariaValueNow),
-				parseInt(timeline.ariaValueMax),
+				presence.timestampFromFormat(timePassed),
+				(() => {
+					if (!durationString.startsWith("-"))
+						return presence.timestampFromFormat(durationString);
+					else {
+						return (
+							presence.timestampFromFormat(durationString.slice(1)) +
+							presence.timestampFromFormat(timePassed)
+						);
+					}
+				})(),
 			],
 			pathLinkSong = document
 				.querySelector(
@@ -264,16 +276,7 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (
-		presenceData.details &&
-		typeof presenceData.details === "string" &&
-		!(
-			(presenceData.endTimestamp as number) -
-				Math.floor(Date.now() / 1000) -
-				20 <
-			0
-		)
-	) {
+	if (presenceData.details && typeof presenceData.details === "string") {
 		if (presenceData.details.match("(Browsing|Viewing|Discovering)")) {
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.smallImageText = strings.browse;
@@ -288,13 +291,6 @@ presence.on("UpdateData", async () => {
 			delete presenceData.endTimestamp;
 		}
 
-		console.log(
-			(presenceData.endTimestamp as number) -
-				Math.floor(Date.now() / 1000) -
-				20 <
-				0
-		);
-
 		presence.setActivity(presenceData);
-	}
+	} else presence.setActivity();
 });
