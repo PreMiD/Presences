@@ -66,6 +66,7 @@ presence.on("iFrameData", (data: iFrameData) => {
 			paused,
 		} = data.iFrameVideoData);
 	}
+	console.log(data.iFrameVideoData);
 });
 
 presence.on("UpdateData", async () => {
@@ -130,6 +131,7 @@ presence.on("UpdateData", async () => {
 		!isNaN(duration) &&
 		pathname.includes("/watch/")
 	) {
+		console.log(iFrameVideo);
 		const videoTitle =
 			document.querySelector<HTMLHeadingElement>("a > h4").textContent;
 		presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
@@ -207,6 +209,8 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (!showCover) presenceData.largeImageKey = Assets.Logo;
+
+	console.log(presenceData);
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
