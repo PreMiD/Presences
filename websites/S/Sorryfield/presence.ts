@@ -66,11 +66,8 @@ presence.on("UpdateData", async () => {
 					);
 				presenceData.startTimestamp = startTimestamp;
 				presenceData.endTimestamp = endTimestamp;
-				if (nowTime <= Math.floor(Date.now() / 1000)) {
-					delete presenceData.endTimestamp;
-					presenceData.smallImageKey = Assets.Stop;
-				}
-			} else delete presenceData.startTimestamp;
+				if (nowTime <= Math.floor(Date.now() / 1000)) presenceData.smallImageKey = Assets.Stop;
+			} else presenceData.smallImageKey = Assets.Stop;
 		}
 	}
 	if (pathname === "/playlist") presenceData.details = "재생 목록 확인 중";
@@ -111,11 +108,8 @@ presence.on("UpdateData", async () => {
 					);
 				presenceData.startTimestamp = startTimestamp;
 				presenceData.endTimestamp = endTimestamp;
-				if (nowTime <= Math.floor(Date.now() / 1000)) {
-					delete presenceData.endTimestamp;
-					presenceData.smallImageKey = Assets.Stop;
-				}
-			} else delete presenceData.startTimestamp;
+				if (nowTime <= Math.floor(Date.now() / 1000)) presenceData.smallImageKey = Assets.Stop;
+			} else presenceData.smallImageKey = Assets.Stop;
 		}
 	}
 	if (pathname === "/karaoke") presenceData.details = "노래방: 로비";
