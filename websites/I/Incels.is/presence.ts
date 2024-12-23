@@ -49,17 +49,17 @@ presence.on("UpdateData", async () => {
 	else if (
 		pathname.includes("/the-lounge") &&
 		pathname.includes("/post-thread")
-	) {
-		presenceData.details =
-			"Typing up something unrelated to inceldom";
-	} else if (pathname.includes("/the-lounge"))
+	) 
+		presenceData.details = "Typing up something unrelated to inceldom";
+	 else if (pathname.includes("/the-lounge"))
 		presenceData.details = "He be loungin'";
 	else if (
 		pathname.includes("/the-sewers") &&
 		pathname.includes("/post-thread")
-	)
-		presenceData.details = "Typing up a post for the sewer rats (probably just postmaxxing)";
-	else if (pathname.includes("/the-sewers"))
+	) {
+presenceData.details =
+			"Typing up a post for the sewer rats (probably just postmaxxing)";
+} else if (pathname.includes("/the-sewers"))
 		presenceData.details = "Swimming through the sewers (yuck)";
 	else if (
 		pathname.includes("/ban-appeals") &&
