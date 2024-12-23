@@ -66,7 +66,8 @@ presence.on("UpdateData", async () => {
 					);
 				presenceData.startTimestamp = startTimestamp;
 				presenceData.endTimestamp = endTimestamp;
-				if (nowTime <= Math.floor(Date.now() / 1000)) presenceData.smallImageKey = Assets.Stop;
+				if (nowTime <= Math.floor(Date.now() / 1000))
+					presenceData.smallImageKey = Assets.Stop;
 			} else presenceData.smallImageKey = Assets.Stop;
 		}
 	}
@@ -108,7 +109,8 @@ presence.on("UpdateData", async () => {
 					);
 				presenceData.startTimestamp = startTimestamp;
 				presenceData.endTimestamp = endTimestamp;
-				if (nowTime <= Math.floor(Date.now() / 1000)) presenceData.smallImageKey = Assets.Stop;
+				if (nowTime <= Math.floor(Date.now() / 1000))
+					presenceData.smallImageKey = Assets.Stop;
 			} else presenceData.smallImageKey = Assets.Stop;
 		}
 	}
