@@ -124,13 +124,23 @@ presence.on("UpdateData", async () => {
 		}
 		case "leagues": {
 			const leagueName =
-				document.querySelector(
-					".league-ranking--icon:not(.is-small) .league-ranking--icon--name"
-				)?.textContent ?? "Legend";
+					document.querySelector(
+						".league-ranking--icon:not(.is-small) .league-ranking--icon--name"
+					)?.textContent ?? "Legend",
+				leaguePlacement = getNumberWithOrdinal(
+					parseInt(
+						document.querySelector(
+							".is-self .leagues--standings--place-indicator"
+						).textContent ||
+							document.querySelector<HTMLImageElement>(
+								".is-self .leagues--standings--place-indicator img"
+							).alt
+					)
+				);
 			presenceData.details = `Viewing ${
 				document.querySelector(".card-cap > h1").childNodes[1].textContent
 			} League standings`;
-			presenceData.state = `Current league: ${leagueName}`;
+			presenceData.state = `League: ${leagueName} | Placement: ${leaguePlacement}`;
 			break;
 		}
 		case "racer": {
