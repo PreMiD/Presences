@@ -13,7 +13,7 @@ const presence = new Presence({
 				watchingShow: "general.watchingShow",
 				watchingLive: "general.watchingLive",
 				viewingHomePage: "general.viewHome",
-				loading: "kahoot.loadingPage",
+				loading: "watch.lonelil.com.loading",
 				browsing: "general.browsing",
 				buttonWatchMovie: "general.buttonWatchMovie",
 				buttonWatchEpisode: "general.buttonViewEpisode",

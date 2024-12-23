@@ -8,7 +8,6 @@ import youtubeMiniplayerResolver from "./video_sources/miniplayer";
 import youtubeApiResolver from "./video_sources/api";
 import {
 	Resolver,
-	adjustTimeError,
 	presence,
 	strings,
 	getSetting,
@@ -145,6 +144,7 @@ presence.on("UpdateData", async () => {
 				unlistedPathElement?.getAttribute("d") ===
 					unlistedBadgeElement?.getAttribute("d"),
 			videoId = resolver.getVideoID(),
+			[startTimestamp, endTimestamp] = presence.getTimestampsfromMedia(video),
 			presenceData: PresenceData = {
 				type: ActivityType.Watching,
 				details: vidDetail
@@ -177,12 +177,8 @@ presence.on("UpdateData", async () => {
 					: isPlaylistLoop
 					? "Playlist on loop"
 					: strings.play,
-				endTimestamp: !video?.paused
-					? adjustTimeError(presence.getTimestampsfromMedia(video)[1], 0.75)
-					: -1,
-				startTimestamp: !video?.paused
-					? adjustTimeError(presence.getTimestampsfromMedia(video)[0], 0.75)
-					: -1,
+				startTimestamp,
+				endTimestamp,
 			};
 
 		if (vidState.includes("{0}")) delete presenceData.state;

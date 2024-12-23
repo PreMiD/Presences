@@ -930,7 +930,7 @@ async function init(): Promise<void> {
 }
 
 function isPrivateIP(ip: string): boolean {
-	return /^http:\/\/(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.|127\.0\.0\.1|localhost)/.test(
+	return /http:\/\/(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.|127\.0\.0\.1|localhost)|firehostredux/gm.test(
 		ip
 	);
 }

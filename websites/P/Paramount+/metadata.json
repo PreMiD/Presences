@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"$schema": "https://schemas.premid.app/metadata/1.12",
 	"apiVersion": 1,
 	"author": {
 		"name": "Katsu",
@@ -14,7 +14,7 @@
 		"www.paramountplus.com",
 		"paramountplus.com"
 	],
-	"version": "2.0.7",
+	"version": "2.0.8",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/thumbnail.png",
 	"color": "#6c8fd0",

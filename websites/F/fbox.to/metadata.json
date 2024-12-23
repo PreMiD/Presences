@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"$schema": "https://schemas.premid.app/metadata/1.12",
 	"apiVersion": 1,
 	"author": {
 		"name": "वाह्य",
@@ -21,7 +21,7 @@
 	},
 	"url": "fboxz.to",
 	"regExp": "(www([0-9]*)?[.])?fboxz?[.]to",
-	"version": "1.4.2",
+	"version": "1.4.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/fbox.to/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/fbox.to/assets/thumbnail.png",
 	"color": "#565c67",
