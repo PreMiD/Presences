@@ -73,8 +73,7 @@ presence.on("UpdateData", async () => {
 			review: "",
 			collection: "",
 		},
-		titleElement = document.querySelector("h1.title"),
-		titleText = titleElement ? titleElement.textContent : "",
+		titleText = document.querySelector("h1.title")?.textContent ?? "",  
 		pathSegments = location.pathname.split("/"),
 		presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
