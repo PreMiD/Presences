@@ -49,15 +49,6 @@
 			"if": {
 				"privacy": false
 			}
-		},
-		{
-			"id": "author",
-			"title": "Hide Author",
-			"icon": "fas fa-user",
-			"value": false,
-			"if": {
-				"privacy": false
-			}
 		}
 	]
 }
