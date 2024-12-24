@@ -267,7 +267,7 @@ presence.on("UpdateData", async () => {
 					)?.textContent;
 					presenceData.largeImageKey = document
 						.querySelector(
-							"div.klz_XuZpllvTMzpJF1gw > div > img.mMx2LUixlnN_Fu45JpFB"
+							"div._gLjHpwOxHFwo5nLM8hb > div > img.mMx2LUixlnN_Fu45JpFB"
 						)
 						?.getAttribute("src");
 					presenceData.smallImageKey = Assets.Logo;
