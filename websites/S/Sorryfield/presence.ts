@@ -57,15 +57,12 @@ presence.on("UpdateData", async () => {
 				?.textContent.split(":");
 			if (duration && playing) {
 				const nowTime =
-						Math.floor(Date.now() / 1000) +
-						(parseInt(duration[0].replace("(-", "")) * 60 +
-							parseInt(duration[1].replace(")", ""))) +
-						1,
-					[startTimestamp, endTimestamp] = presence.getTimestampsfromMedia(
-						document.querySelector("video.back")
-					);
-				presenceData.startTimestamp = startTimestamp;
-				presenceData.endTimestamp = endTimestamp;
+					Math.floor(Date.now() / 1000) +
+					(parseInt(duration[0].replace("(-", "")) * 60 +
+						parseInt(duration[1].replace(")", ""))) +
+					1;
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(document.querySelector("video.back"));
 				if (nowTime <= Math.floor(Date.now() / 1000))
 					presenceData.smallImageKey = Assets.Stop;
 			} else presenceData.smallImageKey = Assets.Stop;
