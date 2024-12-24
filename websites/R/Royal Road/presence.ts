@@ -4,9 +4,10 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets { // Other default assets can be found at index.d.ts
-	Logo = "https://www.royalroad.com/icons/android-chrome-192x192.png",
+	Logo = "https://i.imgur.com/7LzTPVj.png",
 }
 
+// Todo - Multilanguage functionality as hard to test atm due to bugs.
 async function getStrings() {
 	return presence.getStrings(
 		{
@@ -28,7 +29,9 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
-		details: "Unsupported page.",
+		details: "Unsupported page",
+		smallImageKey: Assets.Viewing,
+		smallImageText: "Browsing on Royal Road",
 	};
 	const { href, pathname } = document.location,
 		[showTimestamp, showButtons, newLang, privacy] = await Promise.all([
@@ -51,19 +54,142 @@ presence.on("UpdateData", async () => {
 
 	const pages: Record<string, PresenceData> = {
 		"/home": {
-			details: strings.home,
-			buttons: [{ label: strings.buttonViewPage, url: href }],
+			details: "Home",
+			buttons: [{ label: "View Page", url: href }],
 		},
 		"/premium": {
 			details: "Viewing Premium Plans",
-			buttons: [{ label: strings.buttonViewPage, url: href }],
+			buttons: [{ label: "View Page", url: href }],
 		},
 	};
 
 	for (const [path, data] of Object.entries(pages))
 		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
 
-	if (pathname.includes("/chapter")) {
+	const page = `Page ${
+			document.URL.includes("?page=")
+				? document.URL.split("?page=")[1]?.split("&genre")[0]
+				: 1
+		}`,
+		genre = `${
+			document.URL.includes("genre=")
+				? document.URL.split("genre=")[1].toLocaleUpperCase()
+				: "ALL"
+		} Genre`;
+
+	// Read Navbar options - /functions/x
+	if (pathname.includes("/fictions/best-rated")) {
+		presenceData.details = "Viewing Best Rated fictions";
+		presenceData.state = `${page} · ${genre}`;
+		presenceData.smallImageKey = Assets.Viewing;
+		presenceData.smallImageText = "Viewing fictions on Royal Road";
+		presenceData.buttons = [
+			{
+				label: "View Page",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/fictions/trending")) {
+		presenceData.details = "Viewing Trending Fictions";
+		presenceData.state = `Top 50 · ${genre}`;
+		presenceData.smallImageKey = Assets.Viewing;
+		presenceData.smallImageText = "Viewing Trending Fictions on Royal Road";
+		presenceData.buttons = [
+			{
+				label: "View Page",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/fictions/active-popular")) {
+		presenceData.details = "Viewing Ongoing Fictions";
+		presenceData.state = `${page} · ${genre}`;
+		presenceData.smallImageKey = Assets.Viewing;
+		presenceData.smallImageText = "Viewing Ongoing Fictions on Royal Road";
+		presenceData.buttons = [
+			{
+				label: "View Page",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/fictions/complete")) {
+		presenceData.details = "Viewing Complete Fictions";
+		presenceData.state = `${page} · ${genre}`;
+		presenceData.smallImageKey = Assets.Viewing;
+		presenceData.smallImageText = "Viewing Complete Fictions on Royal Road";
+		presenceData.buttons = [
+			{
+				label: "View Page",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/fictions/weekly-popular")) {
+		presenceData.details = "Viewing Popular Fictions";
+		presenceData.state = `${page} · ${genre}`;
+		presenceData.smallImageKey = Assets.Viewing;
+		presenceData.smallImageText = "Viewing Popular Fictions on Royal Road";
+		presenceData.buttons = [
+			{
+				label: "View Page",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/fictions/latest-updates")) {
+		presenceData.details = "Viewing Updated Fictions";
+		presenceData.state = `${page} · ${genre}`;
+		presenceData.smallImageKey = Assets.Viewing;
+		presenceData.smallImageText = "Viewing Updated Fictions on Royal Road";
+		presenceData.buttons = [
+			{
+				label: "View Page",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/fictions/new")) {
+		presenceData.details = "Viewing Newest Fictions";
+		presenceData.state = `${page} · ${genre}`;
+		presenceData.smallImageKey = Assets.Viewing;
+		presenceData.smallImageText = "Viewing Newest Fictions on Royal Road";
+		presenceData.buttons = [
+			{
+				label: "View Page",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/fictions/rising-stars")) {
+		presenceData.details = "Viewing Rising Stars";
+		presenceData.state = `Top 50 · ${genre}`;
+		presenceData.smallImageKey = Assets.Viewing;
+		presenceData.smallImageText = "Viewing Rising Stars on Royal Road";
+		presenceData.buttons = [
+			{
+				label: "View Page",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/fictions/writathon")) {
+		presenceData.details = `Viewing ${
+			document.querySelector("div.caption > h1.font-red-sunglo")?.textContent
+		}`;
+		presenceData.state = `${page} · ${genre}`;
+		presenceData.smallImageKey = Assets.Viewing;
+		presenceData.smallImageText = "Viewing Writathon on Royal Road";
+		presenceData.buttons = [
+			{
+				label: "View Page",
+				url: href,
+			},
+		];
+	} else if (pathname.includes("/fictions/search")) {
+		presenceData.details = strings.search;
+		presenceData.smallImageKey = Assets.Search;
+		presenceData.smallImageText = "Searching on Royal Road";
+
+		if (document.URL.includes("?title="))
+			presenceData.state = document.URL.split("?title=")[1];
+		else presenceData.state = "Specific search criteria";
+
+		// Fiction pages
+	} else if (pathname.includes("/chapter")) {
 		presenceData.details = `${
 			document.querySelector("h2.font-white")?.textContent
 		} by ${document.querySelector("h3.font-white")?.textContent}`;
@@ -73,7 +199,7 @@ presence.on("UpdateData", async () => {
 			?.getAttribute("src");
 		presenceData.smallImageText = `Reading ${
 			document
-				.querySelector("a.btn.btn-primary.col-xs-12")
+				.querySelector("button.btn.btn-primary.col-xs-12")
 				?.getAttribute("disabled")
 				? `${strings.chapter} 1`
 				: ""
@@ -89,9 +215,12 @@ presence.on("UpdateData", async () => {
 		presenceData.details = `${
 			document.querySelector("h1.font-white")?.textContent
 		} ${document.querySelector("h4.font-white")?.textContent}`;
-		presenceData.state = document.querySelector(
-			"span.label.label-default.pull-right"
-		)?.textContent;
+		presenceData.state = `${
+			document.querySelector("span.label.label-default.pull-right")?.textContent
+		} · ${
+			document.querySelectorAll("ul.list-unstyled > li.font-red-sunglo")[5]
+				?.textContent
+		} Pages`;
 		presenceData.largeImageKey = document
 			.querySelector("img.thumbnail")
 			?.getAttribute("src");
@@ -99,9 +228,15 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = Assets.Logo;
 		presenceData.buttons = [
 			{
-				label: "Start reading",
+				label: "Start Reading",
 				url: `https://royalroad.com${document
 					.querySelector("a.btn.btn-lg.btn-primary")
+					?.getAttribute("href")}`,
+			},
+			{
+				label: "View Author",
+				url: `https://royalroad.com${document
+					.querySelector("h4.font-white > span > a.font-white")
 					?.getAttribute("href")}`,
 			},
 		];
@@ -109,10 +244,19 @@ presence.on("UpdateData", async () => {
 		const stats = document.querySelectorAll("span.stat-value");
 
 		presenceData.details = document.querySelector("h1")?.textContent;
-		presenceData.state = `${stats[0]?.textContent} Followers · ${stats[2]?.textContent} Fictions`;
-		presenceData.largeImageKey = document
-			.querySelector("img.img-circle")
-			?.getAttribute("src");
+		presenceData.state = `${stats[0]?.textContent} Followers · ${stats[3]?.textContent} Fictions`;
+		if (
+			document
+				.querySelector("img.img-circle")
+				?.getAttribute("src")
+				?.includes("anon")
+		)
+			presenceData.largeImageKey = Assets.Logo;
+		else {
+			presenceData.largeImageKey = document
+				.querySelector("img.img-circle")
+				?.getAttribute("src");
+		}
 		presenceData.smallImageKey = Assets.Logo;
 		presenceData.smallImageText = "Viewing on Royal Road";
 		presenceData.buttons = [
@@ -121,6 +265,28 @@ presence.on("UpdateData", async () => {
 				url: href,
 			},
 		];
+
+		// Forum pages
+	} else if (pathname.includes("/forums/thread")) {
+		presenceData.details = document.querySelector("div > h2")?.textContent;
+		presenceData.state = page;
+		presenceData.smallImageKey = Assets.Reading;
+		presenceData.smallImageText = "Reading forum on Royal Road";
+	} else if (pathname.includes("/forums")) {
+		presenceData.details = strings.browse;
+		presenceData.state = "Forum";
+		presenceData.smallImageKey = Assets.Viewing;
+		presenceData.smallImageText = "Browsing forums on Royal Road";
+	} else if (pathname.includes("/ideas")) {
+		presenceData.details = document.querySelector(
+			"div.ideas > div.image-header > div > h2"
+		)?.textContent;
+		presenceData.state = `Submitted by ${
+			document.querySelector("a.username > span")?.textContent
+		}`;
+		presenceData.smallImageKey = document
+			.querySelector("span.user > img.avatar")
+			?.getAttribute("src");
 	}
 
 	if (!showButtons) delete presenceData.buttons;
