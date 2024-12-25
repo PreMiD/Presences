@@ -1,0 +1,25 @@
+name: Stale
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Stale
+        uses: actions/stale@v9
+        with:
+          days-before-stale: 60
+          stale-issue-message: |
+            This issue has been marked as stale because it has been inactive for over 60 days.
+            If this is still relevant, please leave a comment to let us know.
+            Otherwise, this issue may be closed automatically in 7 days.
+          close-issue-message: |
+            This issue has been automatically closed due to inactivity for over 60 days.
+            If you believe this issue is still relevant, feel free to reopen it or create a new one with updated information.
+          stale-issue-label: inactive
+          only-labels: bug
+          debug-only: true
