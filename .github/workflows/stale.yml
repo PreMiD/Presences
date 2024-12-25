@@ -7,7 +7,9 @@ jobs:
   stale:
     runs-on: ubuntu-latest
     permissions:
+      contents: write
       issues: write
+      pull-requests: write
     steps:
       - name: Stale
         uses: actions/stale@v9
@@ -28,6 +30,7 @@ jobs:
           close-pr-message: |
             This PR has been automatically closed due to inactivity for over 14 days.
             If you believe this PR is still relevant, feel free to reopen it or create a new one with updated information.
-          stale-pr-label: stale
+          stale-pr-label: inactive
+          stale-issue-label: inactive
           only-issue-labels: bug
-          debug-only: true
+          operations-per-run: 1000
