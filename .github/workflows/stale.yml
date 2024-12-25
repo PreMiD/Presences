@@ -13,6 +13,7 @@ jobs:
         uses: actions/stale@v9
         with:
           days-before-stale: 60
+          days-before-pr-stale: 14
           stale-issue-message: |
             This issue has been marked as stale because it has been inactive for over 60 days.
             If this is still relevant, please leave a comment to let us know.
@@ -20,6 +21,13 @@ jobs:
           close-issue-message: |
             This issue has been automatically closed due to inactivity for over 60 days.
             If you believe this issue is still relevant, feel free to reopen it or create a new one with updated information.
-          stale-issue-label: inactive
-          only-labels: bug
+          stale-pr-message: |
+            This PR has been marked as stale because it has been inactive for over 14 days.
+            If you believe this PR is still relevant, please leave a comment to let us know.
+            Otherwise, this PR may be closed automatically in 7 days.
+          close-pr-message: |
+            This PR has been automatically closed due to inactivity for over 14 days.
+            If you believe this PR is still relevant, feel free to reopen it or create a new one with updated information.
+          stale-pr-label: stale
+          only-issue-labels: bug
           debug-only: true
