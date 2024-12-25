@@ -49,18 +49,18 @@ presence.on("UpdateData", async () => {
 	else if (
 		pathname.includes("/the-lounge") &&
 		pathname.includes("/post-thread")
-	) {
-		presenceData.details =
-			"Typing up something unrelated to inceldom (probably a lie)";
-	} else if (pathname.includes("/the-lounge"))
+	)
+		presenceData.details = "Typing up something unrelated to inceldom";
+	else if (pathname.includes("/the-lounge"))
 		presenceData.details = "He be loungin'";
 	else if (
 		pathname.includes("/the-sewers") &&
 		pathname.includes("/post-thread")
-	)
-		presenceData.details = "Typing up a post for the sewer rats";
-	else if (pathname.includes("/the-sewers"))
-		presenceData.details = "Going through the sewers (yuck)";
+	) {
+		presenceData.details =
+			"Typing up a post for the sewer rats (probably just postmaxxing)";
+	} else if (pathname.includes("/the-sewers"))
+		presenceData.details = "Swimming through the sewers (yuck)";
 	else if (
 		pathname.includes("/ban-appeals") &&
 		pathname.includes("/post-thread")
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 				document.querySelector(".p-navgroup-user-linkText")?.textContent
 			)
 		)
-			presenceData.details = "Looking at self with disgust";
+			presenceData.details = "Looking at self with disgust (it's over)";
 		else presenceData.details = "Watching over other lost souls";
 	} else if (pathname.includes("/account/preferences"))
 		presenceData.details = "Customizing the experience";
@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Talking to like-minded (based) individuals";
 	else if (pathname.includes("/media/")) {
 		presenceData.details =
-			"Either looking at memes, family friendly content, or both (or posting them)";
+			"Either looking at or posting memes, family friendly content (trust), or both";
 	} else if (pathname.includes("/search/") && search.includes("?q=") === false)
 		presenceData.details = "Searching for something really specific";
 	else if (pathname.includes("/search/")) {
@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Reading a thread:";
 
 			if (document.querySelector("[class*='nsfw']"))
-				presenceData.state = "Looking at family friendly content";
+				presenceData.state = "[Family friendly thread (trust)]";
 			else {
 				presenceData.state = threadTag
 					? threadTitle.replace(threadTag, `[${threadTag}]`)
