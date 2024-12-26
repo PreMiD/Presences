@@ -5,10 +5,10 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/zjBdwQ8.png",
-		startTimestamp: browsingTimestamp,
-	},
-	{ pathname } = document.location;
+			largeImageKey: "https://i.imgur.com/zjBdwQ8.png",
+			startTimestamp: browsingTimestamp,
+		},
+		{ pathname } = document.location;
 
 	switch (pathname) {
 		// Projects
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 					if (pathname.includes("/general"))
 						presenceData.state = "Managing Project Settings...";
 					// Members
-					else if (pathname.includes("/members")) 
+					else if (pathname.includes("/members"))
 						presenceData.state = "Managing Members...";
 					// Apps
 					else if (pathname.includes("/apps"))
@@ -39,9 +39,8 @@ presence.on("UpdateData", async () => {
 					// Showcase
 					else if (pathname.includes("/showcase"))
 						presenceData.state = "Viewing Showcase...";
-					else
-						presenceData.state = "";
-				// CMS
+					else presenceData.state = "";
+					// CMS
 				} else if (pathname.includes("/cms"))
 					presenceData.state = "Managing CMS...";
 				// CMS - Forms
@@ -53,11 +52,14 @@ presence.on("UpdateData", async () => {
 				// CMS - Plan
 				else if (pathname.includes("/plan"))
 					presenceData.state = "Managing Plan...";
-			// Payment
+				// Payment
 			} else if (pathname === "/payment")
 				presenceData.details = "Managing Payment Settings...";
 			// Editor
-			else if (pathname.includes("/projects/") && pathname.includes("/editor/")) {
+			else if (
+				pathname.includes("/projects/") &&
+				pathname.includes("/editor/")
+			) {
 				presenceData.details = "Design Editor";
 				presenceData.state = "Editing Pages...";
 			}
