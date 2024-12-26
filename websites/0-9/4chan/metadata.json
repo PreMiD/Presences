@@ -11,9 +11,11 @@
 	},
 	"url": [
 		"www.4chan.org",
-		"4chan.org"
+		"4chan.org",
+		"boards.4chan.org",
+		"www.boards.4chan.org"
 	],
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/0-9/4chan/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/0-9/4chan/assets/thumbnail.png",
 	"color": "#789922",

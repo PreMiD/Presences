@@ -72,7 +72,7 @@
 		"www.youtube.com",
 		"studio.youtube.com"
 	],
-	"version": "5.13.6",
+	"version": "5.13.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/thumbnail.jpg",
 	"color": "#E40813",
@@ -158,7 +158,7 @@
 			"value": false
 		},
 		{
-			"id": "logo",
+			"id": "largeImage",
 			"if": {
 				"privacy": false
 			},

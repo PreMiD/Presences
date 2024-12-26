@@ -4,6 +4,7 @@
 	"author": "Timeraa",
 	"license": "MPL-2.0",
 	"scripts": {
+		"dev": "pmd -m",
 		"lint": "eslint --cache --fix . && prettier --cache --write .",
 		"lint:ci": "eslint --cache . && prettier --cache --check .",
 		"format": "npm run metadataSorter && npm run lint",

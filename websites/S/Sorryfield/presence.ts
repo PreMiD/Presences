@@ -39,11 +39,13 @@ presence.on("UpdateData", async () => {
 				}`;
 			} else presenceData.details = "노래 추가 중";
 		} else {
-			presenceData.details = "노래 듣는 중";
 			presenceData.type = ActivityType.Listening;
-			presenceData.state = `${
-				document.querySelector(".song").children[2].childNodes[0].textContent
-			} - ${document.querySelector(".title").textContent.trim()}`;
+			presenceData.details = document
+				.querySelector(".title")
+				.textContent.trim();
+			presenceData.state = document
+				.querySelector(".song>.desc")
+				.textContent.trim();
 			presenceData.buttons = [{ label: "듣기", url: href }];
 			const playing = document
 				.querySelector<HTMLElement>(".control>button>i")
@@ -59,12 +61,11 @@ presence.on("UpdateData", async () => {
 					(parseInt(duration[0].replace("(-", "")) * 60 +
 						parseInt(duration[1].replace(")", ""))) +
 					1;
-				presenceData.endTimestamp = nowTime;
-				if (nowTime <= Math.floor(Date.now() / 1000)) {
-					delete presenceData.endTimestamp;
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(document.querySelector("video.back"));
+				if (nowTime <= Math.floor(Date.now() / 1000))
 					presenceData.smallImageKey = Assets.Stop;
-				}
-			} else delete presenceData.endTimestamp;
+			} else presenceData.smallImageKey = Assets.Stop;
 		}
 	}
 	if (pathname === "/playlist") presenceData.details = "재생 목록 확인 중";
@@ -79,16 +80,11 @@ presence.on("UpdateData", async () => {
 			}`;
 		} else {
 			presenceData.details = document
-				.querySelector("title")
-				.textContent.replace(" - 쏘리들", "")
-				.replace("재생 목록", "재생 목록 듣는 중");
-			presenceData.state = `${
-				document.querySelector(".current").children[0].children[7].childNodes[1]
-					.childNodes[0].textContent
-			} - ${
-				document.querySelector(".current").children[0].children[7].childNodes[0]
-					.textContent
-			}`;
+				.querySelector(".current>.song>.title>.highlight")
+				.textContent.trim();
+			presenceData.state = document
+				.querySelector(".current>.song>.title>.desc>.highlight")
+				.textContent.trim();
 			presenceData.buttons = [{ label: "듣기", url: href }];
 			presenceData.type = ActivityType.Listening;
 			const playing = document
@@ -105,12 +101,11 @@ presence.on("UpdateData", async () => {
 					(parseInt(duration[0].replace("(-", "")) * 60 +
 						parseInt(duration[1].replace(")", ""))) +
 					1;
-				presenceData.endTimestamp = nowTime;
-				if (nowTime <= Math.floor(Date.now() / 1000)) {
-					delete presenceData.endTimestamp;
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestampsfromMedia(document.querySelector("video.back"));
+				if (nowTime <= Math.floor(Date.now() / 1000))
 					presenceData.smallImageKey = Assets.Stop;
-				}
-			} else delete presenceData.endTimestamp;
+			} else presenceData.smallImageKey = Assets.Stop;
 		}
 	}
 	if (pathname === "/karaoke") presenceData.details = "노래방: 로비";
@@ -264,6 +259,17 @@ presence.on("UpdateData", async () => {
 					chartHeader.children[1].children[1].textContent
 				} - ${chartHeader.children[1].children[0].textContent}`;
 			}
+		} else if (
+			pathname.startsWith("/java/") &&
+			Number(pathname.split("/")[2])
+		) {
+			presenceData.details = "자바! 싱글플레이어";
+			presenceData.state = `채보 목록: ${
+				document.querySelector<HTMLDivElement>(".title>.body>div.desc")
+					.textContent
+			} - ${
+				document.querySelector<HTMLDivElement>(".title>.body>div").textContent
+			}`;
 		} else if (href.includes("?")) {
 			presenceData.details = "자바! 싱글플레이어";
 			const chartHeader = document.querySelector(".chart-header");
