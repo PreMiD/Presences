@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 			getSetting<string>("vidDetail", "%title%"),
 			getSetting<string>("vidState", "%uploader%"),
 			getSetting<boolean>("channelPic", false),
-			getSetting<number>("logo", 0),
+			getSetting<number>("largeImage", 0),
 			getSetting<boolean>("buttons", true),
 			getSetting<boolean>("hideHome", false),
 			getSetting<boolean>("hidePaused", true),

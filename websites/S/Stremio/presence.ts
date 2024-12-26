@@ -1,5 +1,5 @@
 const presence = new Presence({
-		clientId: "969208766807547917",
+		clientId: "503557087041683458",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -10,18 +10,17 @@ enum AppVersion {
 }
 
 const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/Stremio/assets/0.png",
+	Logo = "https://stremio.crun.zip/e8417074974250bc5c8613be8dac6aa46f432bad/images/stremio_symbol.png",
 }
 
 function getAppVersion(hostname: string) {
 	switch (hostname) {
-		case "web.strem.io":
-		case "web.stremio.com":
-			return AppVersion.V5;
+		case "www.stremio.com":
+			return AppVersion.Website;
 		case "app.strem.io":
 			return AppVersion.V4;
 		default:
-			return AppVersion.Website;
+			return AppVersion.V5;
 	}
 }
 
@@ -107,6 +106,8 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
+			type: ActivityType.Watching,
+			details: "Stremio",
 		},
 		{ hash, hostname, pathname, href } = document.location,
 		[privacy, thumbnails, buttons, search] = await Promise.all([
@@ -140,13 +141,13 @@ presence.on("UpdateData", async () => {
 			const video = findVideo(presence);
 
 			if (privacy) {
-				presenceData.details = video !== null ? "Watching" : "Browsing";
+				presenceData.state = video !== null ? "Watching" : "Browsing";
 				break;
 			}
 
 			switch (hash.replace("#/", "").split("/").shift().split("?").shift()) {
 				case "":
-					presenceData.details = "Board";
+					presenceData.state = "Browsing";
 					presenceData.buttons = [
 						{
 							label: "View Board",
@@ -156,10 +157,9 @@ presence.on("UpdateData", async () => {
 					break;
 				case "detail": {
 					if (appVersion === AppVersion.V4) {
-						const title = document.querySelector(
+						presenceData.state = document.querySelector(
 							"#detail > div:nth-child(3) > div > div.sidebar-info-container > div > div.logo > div"
 						)?.textContent;
-						presenceData.state = title;
 						presenceData.largeImageKey =
 							document
 								.querySelector(
@@ -168,10 +168,16 @@ presence.on("UpdateData", async () => {
 								?.firstElementChild.getAttribute("src") ?? Assets.Logo;
 					} else {
 						const imgElement = document.querySelector(
-							"div[class*='meta-info-container'] > img[class*='logo']"
-						);
+								"div[class*='meta-info-container'] > img[class*='logo']"
+							),
+							routeContents = document.querySelectorAll(".route-content");
 						presenceData.largeImageKey =
-							imgElement?.getAttribute("src") ?? Assets.Logo;
+							(routeContents.length > 1
+								? routeContents[routeContents.length - 1]
+								: routeContents[0]
+							).querySelector("img")?.src ??
+							imgElement?.getAttribute("src") ??
+							Assets.Logo;
 						presenceData.state =
 							imgElement?.getAttribute("title") ??
 							document.querySelector(
@@ -179,10 +185,11 @@ presence.on("UpdateData", async () => {
 							)?.textContent;
 					}
 
-					presenceData.details = `Viewing a ${hash.split("/")[2]}`;
+					const type = hash.split("/")[2];
+					presenceData.details = `Viewing a ${type}`;
 					presenceData.buttons = [
 						{
-							label: "View Metadata",
+							label: `View ${type}`,
 							url: href,
 						},
 					];
@@ -221,12 +228,6 @@ presence.on("UpdateData", async () => {
 								: "div[class*='settings-content'] div[class*='selected']"
 						)?.textContent ?? "General";
 					presenceData.details = `${section} settings`;
-					presenceData.buttons = [
-						{
-							label: "View Settings",
-							url: href,
-						},
-					];
 					break;
 				}
 				case "discover": {
@@ -261,7 +262,9 @@ presence.on("UpdateData", async () => {
 						type === "series" ? "" : "s"
 					}`;
 					presenceData.state = `${category ?? "All"}${
-						genre ? ` | ${genre}` : ""
+						genre && !["none", "genre"].includes(genre.toLowerCase())
+							? ` | ${genre}`
+							: ""
 					}`;
 
 					break;
@@ -293,13 +296,13 @@ presence.on("UpdateData", async () => {
 					];
 					break;
 				case "search":
-					presenceData.details = "Search";
+					presenceData.details = "Searching";
 					break;
 				case "player": {
 					if (video === null) break;
 
 					presenceData.endTimestamp = video.endTimestamp;
-					delete presenceData.startTimestamp;
+					presenceData.startTimestamp = video.startTimestamp;
 
 					if (
 						(appVersion === AppVersion.V4
@@ -312,18 +315,18 @@ presence.on("UpdateData", async () => {
 						video.isPaused
 					) {
 						presenceData.smallImageKey = Assets.Pause;
-						presenceData.smallImageText = "Player is paused";
+						presenceData.smallImageText = "Paused";
 						presenceData.state = "Paused";
 					} else {
 						presenceData.smallImageKey = Assets.Play;
-						presenceData.smallImageText = "Player is playing";
+						presenceData.smallImageText = "Playing";
 						presenceData.state = "Watching";
 					}
 
-					let metaUrl: string, title: string;
+					let metaUrl: string;
 
 					if (appVersion === AppVersion.V4) {
-						title = document
+						presenceData.details = document
 							.querySelector("head > title")
 							?.textContent?.replace("Stremio -", "")
 							?.trim();
@@ -342,16 +345,17 @@ presence.on("UpdateData", async () => {
 							const {
 								metaItem: { content },
 								seriesInfo,
+								title,
 							} = playerState;
-							({ title } = playerState);
 							metaUrl = `${window.location.origin}/#/detail/${content.type}/${content.id}`;
 							if (content.type === "series")
 								metaUrl += `/${content.id}:${seriesInfo.season}:${seriesInfo.episode}`;
-							presenceData.largeImageKey = content.logo ?? Assets.Logo;
+							presenceData.largeImageKey = content.poster ?? Assets.Logo;
+							presenceData.name = content.name;
+							presenceData.details =
+								title.replace(`${content.name} -`, "") ?? "Player";
 						}
 					}
-
-					presenceData.details = title ?? "Player";
 					if (metaUrl) {
 						presenceData.buttons = [
 							{
@@ -394,7 +398,7 @@ presence.on("UpdateData", async () => {
 					break;
 
 				default: {
-					const activeTab = document.querySelector("[class='active']");
+					const activeTab = document.querySelector("[class='nav-link active']");
 					if (
 						activeTab === null ||
 						activeTab.parentElement?.className === "langs"

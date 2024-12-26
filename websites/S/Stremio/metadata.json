@@ -2,10 +2,14 @@
 	"$schema": "https://schemas.premid.app/metadata/1.12",
 	"apiVersion": 1,
 	"author": {
-		"name": "Sleeyax",
-		"id": "226037514954080257"
+		"name": "veryCrunchy",
+		"id": "576097150359044106"
 	},
 	"contributors": [
+		{
+			"name": "Sleeyax",
+			"id": "226037514954080257"
+		},
 		{
 			"name": "Dark_Ville",
 			"id": "638080361179512853"
@@ -18,15 +22,15 @@
 	},
 	"url": [
 		"www.stremio.com",
-		"stremio.com",
 		"app.strem.io",
 		"web.strem.io",
-		"web.stremio.com"
+		"web.stremio.com",
+		"stremio.crun.zip"
 	],
-	"version": "2.0.7",
-	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Stremio/assets/logo.png",
-	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Stremio/assets/thumbnail.jpg",
-	"color": "#8A5AAB",
+	"version": "2.1.0",
+	"logo": "https://stremio.crun.zip/e8417074974250bc5c8613be8dac6aa46f432bad/images/icon.png",
+	"thumbnail": "https://www.stremio.com/website/posters-perspective-home.png",
+	"color": "#7b5bf5",
 	"category": "videos",
 	"tags": [
 		"streaming",
@@ -53,7 +57,7 @@
 			},
 			"title": "Show Thumbnail",
 			"icon": "fad fa-album",
-			"value": false
+			"value": true
 		},
 		{
 			"id": "buttons",
