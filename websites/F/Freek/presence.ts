@@ -1,7 +1,18 @@
 const presence = new Presence({
 		clientId: "1321328844497752124",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	strings = presence.getStrings({
+		playing: "general.playing",
+		pause: "general.paused",
+		home: "general.viewHome",
+		search: "general.searchFor",
+		browse: "general.browsing",
+		buttonViewPage: "general.buttonViewPage",
+		buttonViewEpisode: "general.buttonViewEpisode",
+		buttonWatchAnime: "general.buttonWatchAnime",
+		buttonWatchMovie: "general.buttonWatchMovie",
+	});
 
 const enum Assets {
 	Logo = "https://i.imgur.com/wmHltUl.png",
@@ -33,6 +44,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("timestamp"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<string>("lang").catch(() => "en"),
 		]);
 
 	if (privacy) {
@@ -43,15 +55,15 @@ presence.on("UpdateData", async () => {
 
 	const pages: Record<string, PresenceData> = {
 		"/": {
-			details: "Browsing Home",
+			details: (await strings).home,
 			smallImageKey: Assets.Viewing,
 		},
 		"/watchlist": {
-			details: "Browsing Watchlist",
+			details: `${(await strings).browse} Watchlist`,
 			smallImageKey: Assets.Viewing,
 		},
 		"/history": {
-			details: "Browsing History",
+			details: `${(await strings).browse} History`,
 			smallImageKey: Assets.Viewing,
 		},
 	};
@@ -95,10 +107,12 @@ presence.on("UpdateData", async () => {
 					)
 					?.getAttribute("src");
 				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
-				presenceData.smallImageText = video.paused ? "Paused" : "Playing";
+				presenceData.smallImageText = video.paused
+					? (await strings).pause
+					: (await strings).playing;
 				presenceData.buttons = [
 					{
-						label: "Watch Movie",
+						label: (await strings).buttonWatchMovie,
 						url: href,
 					},
 				];
@@ -117,10 +131,12 @@ presence.on("UpdateData", async () => {
 					)
 					?.getAttribute("src");
 				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
-				presenceData.smallImageText = video.paused ? "Paused" : "Playing";
+				presenceData.smallImageText = video.paused
+					? (await strings).pause
+					: (await strings).playing;
 				presenceData.buttons = [
 					{
-						label: "Watch Episode",
+						label: (await strings).buttonViewEpisode,
 						url: href,
 					},
 				];
@@ -151,17 +167,20 @@ presence.on("UpdateData", async () => {
 			case "movie":
 				presenceData.details = "Exploring Movies";
 
-				if (searchInput) presenceData.details = "Searching for Movies";
+				if (searchInput)
+					presenceData.details = `${(await strings).search} Movies`;
 
 				break;
 			case "tv":
 				presenceData.details = "Exploring TV Shows";
 
-				if (searchInput) presenceData.details = "Searching for TV Shows";
+				if (searchInput)
+					presenceData.details = `${(await strings).search} TV Shows`;
 				break;
 			case "anime":
 				presenceData.details = "Exploring Anime";
-				if (searchInput) presenceData.details = "Searching for Anime";
+				if (searchInput)
+					presenceData.details = `${(await strings).search} Anime`;
 				break;
 			default:
 				presenceData.details = "Exploring";
