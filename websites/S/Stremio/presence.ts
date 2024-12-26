@@ -345,7 +345,7 @@ presence.on("UpdateData", async () => {
 							const {
 								metaItem: { content },
 								seriesInfo,
-								title
+								title,
 							} = playerState;
 							metaUrl = `${window.location.origin}/#/detail/${content.type}/${content.id}`;
 							if (content.type === "series")
