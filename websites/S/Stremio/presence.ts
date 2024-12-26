@@ -323,10 +323,10 @@ presence.on("UpdateData", async () => {
 						presenceData.state = "Watching";
 					}
 
-					let metaUrl: string, title: string;
+					let metaUrl: string;
 
 					if (appVersion === AppVersion.V4) {
-						title = document
+						presenceData.details = document
 							.querySelector("head > title")
 							?.textContent?.replace("Stremio -", "")
 							?.trim();
@@ -345,8 +345,8 @@ presence.on("UpdateData", async () => {
 							const {
 								metaItem: { content },
 								seriesInfo,
+								title
 							} = playerState;
-							({ title } = playerState);
 							metaUrl = `${window.location.origin}/#/detail/${content.type}/${content.id}`;
 							if (content.type === "series")
 								metaUrl += `/${content.id}:${seriesInfo.season}:${seriesInfo.episode}`;
