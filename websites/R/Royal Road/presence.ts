@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-const enum Assets { // Other default assets can be found at index.d.ts
+const enum Assets {
 	Logo = "https://i.imgur.com/7LzTPVj.png",
 }
 
@@ -67,13 +67,13 @@ presence.on("UpdateData", async () => {
 		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
 
 	const page = `Page ${
-			document.URL.includes("?page=")
-				? document.URL.split("?page=")[1]?.split("&genre")[0]
+			href.includes("?page=")
+				? href.split("?page=")[1]?.split("&genre")[0]
 				: 1
 		}`,
 		genre = `${
-			document.URL.includes("genre=")
-				? document.URL.split("genre=")[1].toLocaleUpperCase()
+			href.includes("genre=")
+				? href.split("genre=")[1].toLocaleUpperCase()
 				: "ALL"
 		} Genre`;
 
@@ -184,8 +184,8 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching on Royal Road";
 
-		if (document.URL.includes("?title="))
-			presenceData.state = document.URL.split("?title=")[1];
+		if (href.includes("?title="))
+			presenceData.state = href.split("?title=")[1];
 		else presenceData.state = "Specific search criteria";
 
 		// Fiction pages
