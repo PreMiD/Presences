@@ -13,7 +13,7 @@
 	},
 	"url": "streamkiste.tv",
 	"regExp": "([a-z0-9-]+[.])*streamkiste([.][a-z]+)+[/]",
-	"version": "1.0.27",
+	"version": "1.0.28",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/StreamKiste/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/StreamKiste/assets/thumbnail.jpg",
 	"color": "#4DB8C9",
