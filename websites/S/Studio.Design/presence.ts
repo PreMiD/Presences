@@ -8,6 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/zjBdwQ8.png",
 			startTimestamp: browsingTimestamp,
 		},
+		[privacy] = await Promise.all([presence.getSetting<boolean>("privacy")]),
 		{ pathname } = document.location;
 
 	switch (pathname) {
@@ -24,7 +25,15 @@ presence.on("UpdateData", async () => {
 		default:
 			// Project Dashboard
 			if (pathname.includes("/projects/") && pathname.includes("/dashboard/")) {
-				presenceData.details = "Project Dashboard";
+				if (privacy) presenceData.details = "Project Dashboard";
+				else {
+					// Project Name
+					presenceData.details = `${
+						document.querySelector(
+							".LayoutPdDashboard > header > div._flex._gap-8._flex-initial._flex-row.o-layout-project-dashboard-header-left._mr-auto._h-full._py-6._pl-24 > div > button > div > p"
+						).textContent
+					} | Dashboard`;
+				}
 				// Home
 				if (pathname.includes("/home")) {
 					// Project Settings
@@ -55,13 +64,28 @@ presence.on("UpdateData", async () => {
 				// Payment
 			} else if (pathname === "/payment")
 				presenceData.details = "Managing Payment Settings...";
+			// Workspace
+			else if (pathname.includes("/workspace/"))
+				presenceData.details = "Managing Workspace...";
 			// Editor
 			else if (
 				pathname.includes("/projects/") &&
 				pathname.includes("/editor/")
 			) {
-				presenceData.details = "Design Editor";
-				presenceData.state = "Editing Pages...";
+				if (privacy) {
+					presenceData.details = "Design Editor";
+					presenceData.state = "Editing Pages...";
+				} else {
+					// Project Name
+					presenceData.details = `${
+						document.querySelector(".HeaderNavProject > div.block > p")
+							.textContent
+					} | Design Editor`;
+					// Page Title
+					presenceData.state = `Editing: ${
+						document.querySelector(".HeaderNavPage > div.block > p").textContent
+					}`;
+				}
 			}
 	}
 
