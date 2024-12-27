@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 			type: ActivityType.Watching,
 			// initial details in case of no match displaying the 1st path segment
 			details: `Browsing ${pathSegments[1]}`,
-			buttons: [{ label: "Visit", url: document.URL }],
+			// buttons: [{ label: "Visit", url: document.URL }],
 		},
 		// board thread play function
 		displaySec = (categorys = " ") => {
@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
 		};
 
 	// main
-	switch (location.hostname) {
+	switch (document.location.hostname) {
 		// handle subdomain ex novels.dek-d.com
 		case "www.dek-d.com": {
 			if (location.pathname === "/") presenceData.details = "Viewing home page";
@@ -110,8 +110,7 @@ presence.on("UpdateData", async () => {
 							presenceData.state = `${titleText}`;
 						else if (sections.tcas.includes(pathSegments[2]))
 							presenceData.details = `Browsing ${pathSegments[2]} on ${pathSegments[1]} thread`;
-						presenceData.buttons = [{ label: "View", url: document.URL }];
-
+						
 						break;
 					}
 					case "quiz": {
@@ -243,7 +242,6 @@ presence.on("UpdateData", async () => {
 					presenceData.largeImageKey = document
 						.querySelector("div.header-special picture img")
 						.getAttribute("src");
-					// console.log(headerT.split(" "));
 					// assign the name of the novel to the state
 					// incase there are white space in infront of the text but it worst for the Novel who have 2 or more words in the title
 					for (let i = 0; i < headerT.split(" ").length; i++) {
