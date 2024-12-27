@@ -111,7 +111,10 @@ let cachedResponse: CachedResponse;
 export class AnimeLib {
 	private static api = "https://api2.mangalib.me/api";
 
-	public static async getAnime(path: string, id: string) {
+	public static async getAnime(
+		path: string,
+		id: string
+	): Promise<CachedResponse> {
 		if (!cachedResponse || cachedResponse.id !== id) {
 			if (path.endsWith("/watch")) path = path.slice(0, -6);
 
@@ -126,7 +129,7 @@ export class AnimeLib {
 		return cachedResponse;
 	}
 
-	public static async getUser(id: string) {
+	public static async getUser(id: string): Promise<CachedResponse> {
 		if (!cachedResponse || cachedResponse.id !== id) {
 			cachedResponse = {
 				id,
@@ -137,7 +140,10 @@ export class AnimeLib {
 		return cachedResponse;
 	}
 
-	public static async getCharacter(path: string, id: string) {
+	public static async getCharacter(
+		path: string,
+		id: string
+	): Promise<CachedResponse> {
 		if (!cachedResponse || cachedResponse.id !== id) {
 			cachedResponse = {
 				id,
@@ -150,7 +156,10 @@ export class AnimeLib {
 		return cachedResponse;
 	}
 
-	public static async getPerson(path: string, id: string) {
+	public static async getPerson(
+		path: string,
+		id: string
+	): Promise<CachedResponse> {
 		if (!cachedResponse || cachedResponse.id !== id) {
 			cachedResponse = {
 				id,
@@ -163,7 +172,7 @@ export class AnimeLib {
 		return cachedResponse;
 	}
 
-	public static async getCollection(id: string) {
+	public static async getCollection(id: string): Promise<CachedResponse> {
 		if (!cachedResponse || cachedResponse.id !== id) {
 			cachedResponse = {
 				id,
@@ -174,7 +183,7 @@ export class AnimeLib {
 		return cachedResponse;
 	}
 
-	public static async getReview(id: string) {
+	public static async getReview(id: string): Promise<CachedResponse> {
 		if (!cachedResponse || cachedResponse.id !== id) {
 			cachedResponse = {
 				id,
@@ -185,7 +194,10 @@ export class AnimeLib {
 		return cachedResponse;
 	}
 
-	public static async getTeam(path: string, id: string) {
+	public static async getTeam(
+		path: string,
+		id: string
+	): Promise<CachedResponse> {
 		if (!cachedResponse || cachedResponse.id !== id) {
 			cachedResponse = {
 				id,
@@ -198,7 +210,10 @@ export class AnimeLib {
 		return cachedResponse;
 	}
 
-	public static async getPublisher(path: string, id: string) {
+	public static async getPublisher(
+		path: string,
+		id: string
+	): Promise<CachedResponse> {
 		if (!cachedResponse || cachedResponse.id !== id) {
 			cachedResponse = {
 				id,
