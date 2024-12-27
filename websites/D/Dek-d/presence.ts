@@ -110,7 +110,7 @@ presence.on("UpdateData", async () => {
 							presenceData.state = `${titleText}`;
 						else if (sections.tcas.includes(pathSegments[2]))
 							presenceData.details = `Browsing ${pathSegments[2]} on ${pathSegments[1]} thread`;
-						
+
 						break;
 					}
 					case "quiz": {
