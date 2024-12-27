@@ -1,13 +1,13 @@
 interface CommonData {
-    id: number;
-    name: string;
-    rus_name: string;
-    eng_name: string;
-    alt_name: string;
-    slug: string;
-    slug_url: string;
-    cover: Cover;
-    stats: Stat[];
+	id: number;
+	name: string;
+	rus_name: string;
+	eng_name: string;
+	alt_name: string;
+	slug: string;
+	slug_url: string;
+	cover: Cover;
+	stats: Stat[];
 }
 
 export interface AnimeData extends Omit<CommonData, "stats"> {
@@ -22,7 +22,7 @@ export interface AnimeData extends Omit<CommonData, "stats"> {
 	status: AnimeStatus;
 	type: AnimeType;
 	/**
-	 * Check if it exists. If it is, the anime is licensed and no anime data will be present 
+	 * Check if it exists. If it is, the anime is licensed and no anime data will be present
 	 */
 	toast?: {
 		message: string;
@@ -69,7 +69,7 @@ interface Author {
 
 interface Stat {
 	value: number;
-	formated: string; 
+	formated: string;
 	short: string;
 	tag: "titles" | "subscribers";
 	label: string;
@@ -81,9 +81,9 @@ interface UserAvatar {
 }
 
 interface Cover {
-    filename: string;
-    default: string;
-    thumbnail: string;
+	filename: string;
+	default: string;
+	thumbnail: string;
 }
 
 interface AnimeAgeRestriction {
@@ -109,95 +109,105 @@ interface CachedResponse {
 let cachedResponse: CachedResponse;
 
 export class AnimeLib {
-    private static api = "https://api2.mangalib.me/api";
+	private static api = "https://api2.mangalib.me/api";
 
-    public static async getAnime(path: string, id: string) {
-        if (!cachedResponse || cachedResponse.id !== id) {
-            if (path.endsWith("/watch")) path = path.slice(0, -6);
-    
-            cachedResponse = {
-                id,
-                ...await (await fetch(`${this.api}/anime/${path.split("/")[3]}`)).json()
-            };
-        }
-    
-        return cachedResponse;
-    }
-    
-    public static async getUser(id: string) {
-        if (!cachedResponse || cachedResponse.id !== id) {
-            cachedResponse = {
-                id,
-                ...await (await fetch(`${this.api}/user/${id}`)).json()
-            };
-        }
-    
-        return cachedResponse;
-    }
-    
-    public static async getCharacter(path: string, id: string) {
-        if (!cachedResponse || cachedResponse.id !== id) {
-            cachedResponse = {
-                id,
-                ...await (await fetch(`${this.api}/character/${path.split("/")[3]}`)).json()
-            };
-        }
-    
-        return cachedResponse;
-    }
-    
-    public static async getPerson(path: string, id: string) {
-        if (!cachedResponse || cachedResponse.id !== id) {
-            cachedResponse = {
-                id,
-                ...await (await fetch(`${this.api}/people/${path.split("/")[3]}`)).json()
-            };
-        }
-    
-        return cachedResponse;
-    }
-    
-    public static async getCollection(id: string) {
-        if (!cachedResponse || cachedResponse.id !== id) {
-            cachedResponse = {
-                id,
-                ...await (await fetch(`${this.api}/collections/${id}`)).json()
-            };
-        }
-    
-        return cachedResponse;
-    }
-    
-    public static async getReview(id: string) {
-        if (!cachedResponse || cachedResponse.id !== id) {
-            cachedResponse = {
-                id,
-                ...await (await fetch(`${this.api}/reviews/${id}`)).json()
-            };
-        }
-    
-        return cachedResponse;
-    }
+	public static async getAnime(path: string, id: string) {
+		if (!cachedResponse || cachedResponse.id !== id) {
+			if (path.endsWith("/watch")) path = path.slice(0, -6);
 
-    public static async getTeam(path: string, id: string) {
-        if (!cachedResponse || cachedResponse.id !== id) {
-            cachedResponse = {
-                id,
-                ...await (await fetch(`${this.api}/teams/${path.split("/")[3]}`)).json()
-            };
-        }
-    
-        return cachedResponse;
-    }
+			cachedResponse = {
+				id,
+				...(await (
+					await fetch(`${this.api}/anime/${path.split("/")[3]}`)
+				).json()),
+			};
+		}
 
-    public static async getPublisher(path: string, id: string) {
-        if (!cachedResponse || cachedResponse.id !== id) {
-            cachedResponse = {
-                id,
-                ...await (await fetch(`${this.api}/publisher/${path.split("/")[3]}`)).json()
-            };
-        }
-    
-        return cachedResponse;
-    }
+		return cachedResponse;
+	}
+
+	public static async getUser(id: string) {
+		if (!cachedResponse || cachedResponse.id !== id) {
+			cachedResponse = {
+				id,
+				...(await (await fetch(`${this.api}/user/${id}`)).json()),
+			};
+		}
+
+		return cachedResponse;
+	}
+
+	public static async getCharacter(path: string, id: string) {
+		if (!cachedResponse || cachedResponse.id !== id) {
+			cachedResponse = {
+				id,
+				...(await (
+					await fetch(`${this.api}/character/${path.split("/")[3]}`)
+				).json()),
+			};
+		}
+
+		return cachedResponse;
+	}
+
+	public static async getPerson(path: string, id: string) {
+		if (!cachedResponse || cachedResponse.id !== id) {
+			cachedResponse = {
+				id,
+				...(await (
+					await fetch(`${this.api}/people/${path.split("/")[3]}`)
+				).json()),
+			};
+		}
+
+		return cachedResponse;
+	}
+
+	public static async getCollection(id: string) {
+		if (!cachedResponse || cachedResponse.id !== id) {
+			cachedResponse = {
+				id,
+				...(await (await fetch(`${this.api}/collections/${id}`)).json()),
+			};
+		}
+
+		return cachedResponse;
+	}
+
+	public static async getReview(id: string) {
+		if (!cachedResponse || cachedResponse.id !== id) {
+			cachedResponse = {
+				id,
+				...(await (await fetch(`${this.api}/reviews/${id}`)).json()),
+			};
+		}
+
+		return cachedResponse;
+	}
+
+	public static async getTeam(path: string, id: string) {
+		if (!cachedResponse || cachedResponse.id !== id) {
+			cachedResponse = {
+				id,
+				...(await (
+					await fetch(`${this.api}/teams/${path.split("/")[3]}`)
+				).json()),
+			};
+		}
+
+		return cachedResponse;
+	}
+
+	public static async getPublisher(path: string, id: string) {
+		if (!cachedResponse || cachedResponse.id !== id) {
+			cachedResponse = {
+				id,
+				...(await (
+					await fetch(`${this.api}/publisher/${path.split("/")[3]}`)
+				).json()),
+			};
+		}
+
+		return cachedResponse;
+	}
 }

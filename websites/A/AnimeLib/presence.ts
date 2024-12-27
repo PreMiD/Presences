@@ -1,8 +1,17 @@
 import { AnimeLib } from "./lib";
-import type { AnimeData, UserData, CharacterData, PersonData, CollectionData, ReviewData, TeamData, PublisherData } from "./lib";
+import type {
+	AnimeData,
+	UserData,
+	CharacterData,
+	PersonData,
+	CollectionData,
+	ReviewData,
+	TeamData,
+	PublisherData,
+} from "./lib";
 
 const presence = new Presence({
-		clientId: "1320289587943444552"
+		clientId: "1320289587943444552",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -18,9 +27,7 @@ interface IFrameVideo {
 	paused: boolean;
 }
 
-let iFrameVideo: IFrameVideo,
-	startTimestamp: number,
-	endTimestamp: number;
+let iFrameVideo: IFrameVideo, startTimestamp: number, endTimestamp: number;
 
 presence.on("iFrameData", (data: IFrameVideo) => {
 	iFrameVideo = data;
@@ -28,18 +35,20 @@ presence.on("iFrameData", (data: IFrameVideo) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: Assets.Logo,
-		type: ActivityType.Watching,
-		startTimestamp: browsingTimestamp,
-		smallImageText: "AnimeLIB"
-	},
-	strings = await presence.getStrings({
-		play: "general.playing",
-		pause: "general.paused",
-	}),
-	isWatchingPrivately = await presence.getSetting<boolean>("private-watching"),
-	path = document.location.pathname;
-	
+			largeImageKey: Assets.Logo,
+			type: ActivityType.Watching,
+			startTimestamp: browsingTimestamp,
+			smallImageText: "AnimeLIB",
+		},
+		strings = await presence.getStrings({
+			play: "general.playing",
+			pause: "general.paused",
+		}),
+		isWatchingPrivately = await presence.getSetting<boolean>(
+			"private-watching"
+		),
+		path = document.location.pathname;
+
 	let animeData: AnimeData,
 		userData: UserData,
 		characterData: CharacterData,
@@ -55,7 +64,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Так внимательно изучает...";
 			break;
 		case "anime":
-			animeData = await AnimeLib.getAnime(path, path.split("/")[3].split("-")[0]).then((response) => <AnimeData> response.data);
+			animeData = await AnimeLib.getAnime(
+				path,
+				path.split("/")[3].split("-")[0]
+			).then(response => <AnimeData>response.data);
 
 			// Show anime watching in private mode if it's enabled, or enforce it when anime is RX rated (e.g hentai)
 			if (isWatchingPrivately || animeData.ageRestriction.id === 5) {
@@ -66,7 +78,8 @@ presence.on("UpdateData", async () => {
 			}
 
 			if (animeData.toast) {
-				const cover = document.querySelector<HTMLImageElement>(".cover__img")?.src,
+				const cover =
+						document.querySelector<HTMLImageElement>(".cover__img")?.src,
 					title = document.querySelector("h1")?.textContent,
 					altTitle = document.querySelector("h2")?.textContent;
 
@@ -81,11 +94,16 @@ presence.on("UpdateData", async () => {
 
 			if (path.endsWith("/watch")) {
 				const video = document.querySelector("video"),
-					dub = document.querySelector(".menu-item.is-active")?.querySelector(".menu-item__text").textContent;
+					dub = document
+						.querySelector(".menu-item.is-active")
+						?.querySelector(".menu-item__text").textContent;
 
 				if (dub) {
 					presenceData.details = animeData.rus_name;
-					presenceData.state = `${document.querySelector("[id^='episode'][class*=' ']")?.textContent ?? "Фильм"} | ${dub}`;
+					presenceData.state = `${
+						document.querySelector("[id^='episode'][class*=' ']")
+							?.textContent ?? "Фильм"
+					} | ${dub}`;
 					presenceData.largeImageKey = animeData.cover.default;
 
 					presenceData.smallImageKey = Assets.Pause;
@@ -94,15 +112,27 @@ presence.on("UpdateData", async () => {
 
 				if (video || iFrameVideo) {
 					if (video) {
-						[startTimestamp, endTimestamp] = presence.getTimestampsfromMedia(video);
-						presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
-						presenceData.smallImageText = video.paused ? strings.pause : strings.play;
+						[startTimestamp, endTimestamp] =
+							presence.getTimestampsfromMedia(video);
+						presenceData.smallImageKey = video.paused
+							? Assets.Pause
+							: Assets.Play;
+						presenceData.smallImageText = video.paused
+							? strings.pause
+							: strings.play;
 
 						iFrameVideo = null;
 					} else {
-						[startTimestamp, endTimestamp] = presence.getTimestamps(iFrameVideo.currentTime, iFrameVideo.duration);
-						presenceData.smallImageKey = iFrameVideo.paused ? Assets.Pause : Assets.Play;
-						presenceData.smallImageText = iFrameVideo.paused ? strings.pause : strings.play;
+						[startTimestamp, endTimestamp] = presence.getTimestamps(
+							iFrameVideo.currentTime,
+							iFrameVideo.duration
+						);
+						presenceData.smallImageKey = iFrameVideo.paused
+							? Assets.Pause
+							: Assets.Play;
+						presenceData.smallImageText = iFrameVideo.paused
+							? strings.pause
+							: strings.play;
 					}
 
 					presenceData.startTimestamp = startTimestamp;
@@ -115,7 +145,9 @@ presence.on("UpdateData", async () => {
 				}
 			} else {
 				presenceData.details = "Страница аниме";
-				presenceData.state = `${animeData.rus_name} (${animeData.eng_name ?? animeData.name})`;
+				presenceData.state = `${animeData.rus_name} (${
+					animeData.eng_name ?? animeData.name
+				})`;
 				presenceData.largeImageKey = animeData.cover.default;
 			}
 			break;
@@ -125,7 +157,10 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Добавляет персонажа";
 					presenceData.state = "Очередной аниме персонаж...";
 				} else {
-					characterData = await AnimeLib.getCharacter(path, path.split("/")[3].split("-")[0]).then((response) => <CharacterData> response.data);
+					characterData = await AnimeLib.getCharacter(
+						path,
+						path.split("/")[3].split("-")[0]
+					).then(response => <CharacterData>response.data);
 
 					presenceData.details = "Страница персонажа";
 					presenceData.state = `${characterData.rus_name} (${characterData.name})`;
@@ -142,15 +177,18 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Добавляет человека";
 					presenceData.state = "Какая-то известная личность?";
 				} else {
-					peopleData = await AnimeLib.getPerson(path, path.split("/")[3].split("-")[0]).then((response) => <PersonData> response.data);
+					peopleData = await AnimeLib.getPerson(
+						path,
+						path.split("/")[3].split("-")[0]
+					).then(response => <PersonData>response.data);
 
 					presenceData.details = "Страница человека";
 					presenceData.state = `${
 						peopleData.rus_name !== ""
-						? peopleData.rus_name
-						: peopleData.alt_name !== ""
-						? peopleData.alt_name
-						: peopleData.name
+							? peopleData.rus_name
+							: peopleData.alt_name !== ""
+							? peopleData.alt_name
+							: peopleData.name
 					} (${peopleData.name})`;
 					presenceData.largeImageKey = peopleData.cover.default;
 				}
@@ -165,7 +203,9 @@ presence.on("UpdateData", async () => {
 			break;
 		case "user":
 			if (path.split("/")[3]) {
-				userData = await AnimeLib.getUser(path.split("/")[3]).then((response) => <UserData> response.data);
+				userData = await AnimeLib.getUser(path.split("/")[3]).then(
+					response => <UserData>response.data
+				);
 
 				presenceData.details = "В профиле";
 				presenceData.state = userData.username;
@@ -185,7 +225,9 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Создаёт коллекцию";
 					presenceData.state = "В ней будет много интересного!";
 				} else {
-					collectionData = await AnimeLib.getCollection(path.split("/")[3]).then((response) => <CollectionData> response.data);
+					collectionData = await AnimeLib.getCollection(
+						path.split("/")[3]
+					).then(response => <CollectionData>response.data);
 
 					presenceData.details = "Страница коллекции";
 					presenceData.state = `${collectionData.name} от ${collectionData.user.username}`;
@@ -202,7 +244,9 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Пишет отзыв";
 					presenceData.state = "Излагает свои мысли...";
 				} else {
-					reviewData = await AnimeLib.getReview(path.split("/")[3]).then((response) => <ReviewData> response.data);
+					reviewData = await AnimeLib.getReview(path.split("/")[3]).then(
+						response => <ReviewData>response.data
+					);
 
 					presenceData.details = `Страница отзыва на ${reviewData.related.rus_name}`;
 					presenceData.state = `${reviewData.title} от ${reviewData.user.username}`;
@@ -221,7 +265,10 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Создаёт свою команду";
 					presenceData.state = "Она обязательно будет успешной!";
 				} else {
-					teamData = await AnimeLib.getTeam(path, path.split("/")[3].split("-")[0]).then((response) => <TeamData> response.data);
+					teamData = await AnimeLib.getTeam(
+						path,
+						path.split("/")[3].split("-")[0]
+					).then(response => <TeamData>response.data);
 
 					presenceData.details = "Страница команды";
 					presenceData.state = `${teamData.name} (${teamData.alt_name})`;
@@ -239,7 +286,9 @@ presence.on("UpdateData", async () => {
 
 				if (name && altName) {
 					presenceData.details = "Страница франшизы";
-					presenceData.state = `${name.textContent} (${altName.textContent.split("/")[0]})`;
+					presenceData.state = `${name.textContent} (${
+						altName.textContent.split("/")[0]
+					})`;
 				} else {
 					presenceData.details = "Страница франшиз";
 					presenceData.state = "Их так много...";
@@ -252,10 +301,15 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Добавляет издательство";
 					presenceData.state = "Да что они там издают?";
 				} else {
-					publisherData = await AnimeLib.getPublisher(path, path.split("/")[3].split("-")[0]).then((response) => <PublisherData> response.data);
+					publisherData = await AnimeLib.getPublisher(
+						path,
+						path.split("/")[3].split("-")[0]
+					).then(response => <PublisherData>response.data);
 
 					presenceData.details = "Страница издателя";
-					presenceData.state = `${publisherData.rus_name ?? publisherData.name} (${publisherData.name})`;
+					presenceData.state = `${
+						publisherData.rus_name ?? publisherData.name
+					} (${publisherData.name})`;
 					presenceData.largeImageKey = publisherData.cover.default;
 				}
 			} else {
@@ -271,8 +325,12 @@ presence.on("UpdateData", async () => {
 			break;
 		case "news":
 			if (path.split("/")[3]) {
-				const avatar = document.querySelector(".user-inline")?.querySelector<HTMLImageElement>(".avatar.is-rounded")?.src,
-					username = document.querySelector(".user-inline__username")?.textContent,
+				const avatar = document
+						.querySelector(".user-inline")
+						?.querySelector<HTMLImageElement>(".avatar.is-rounded")?.src,
+					username = document.querySelector(
+						".user-inline__username"
+					)?.textContent,
 					title = document.querySelector("h1")?.textContent;
 
 				if (avatar && username && title) {
