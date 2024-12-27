@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 		play: "general.playing",
 		pause: "general.paused",
 	}),
-	isWatchingPrivately = await presence.getSetting<boolean>("private-anime-watching"),
+	isWatchingPrivately = await presence.getSetting<boolean>("private-watching"),
 	path = document.location.pathname;
 	
 	let animeData: AnimeData,
