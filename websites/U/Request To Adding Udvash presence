@@ -1,0 +1,63 @@
+manifest.json 
+.
+.
+.
+
+{
+  "name": "Udvash",
+  "version": "1.0.0",
+  "author": "RidwanXD",
+  "website": "https://udvash.com",
+  "presence": {
+    "name": "Udvash Presence",
+    "description": "Tracks activity on Udvash.com",
+    "icon": "udvash_logo"
+  },
+  "main": "presence.js",
+  "preload": false
+}
+
+
+
+presence (javascript)
+.
+.
+.
+
+module.exports = {
+  // Called when the presence is loaded
+  load: () => console.log("Udvash Presence Loaded!"),
+
+  // Called when the presence is unloaded
+  unload: () => console.log("Udvash Presence Unloaded!"),
+
+  // Main function that gets called to update the Discord status
+  update: async () => {
+    // Get the current page title
+    const pageTitle = document.title;
+
+    // Detect metadata like video or article duration (example: find video)
+    const video = document.querySelector("video");
+    let activityDetails = {
+      details: `Browsing: ${pageTitle}`,
+      state: "On Udvash",
+      largeImageKey: "udvash_logo",
+      largeImageText: "Udvash.com",
+      startTimestamp: Date.now()
+    };
+
+    // If a video is found and playing
+    if (video && !video.paused) {
+      activityDetails = {
+        details: "Watching a video",
+        state: `Duration: ${Math.floor(video.currentTime)}s / ${Math.floor(video.duration)}s`,
+        largeImageKey: "udvash_logo",
+        largeImageText: "Watching video on Udvash",
+        startTimestamp: Date.now()
+      };
+    }
+
+    // Return the activity object
+    return activityDetails;
+  }
+};
