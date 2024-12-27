@@ -3,7 +3,7 @@
 	"apiVersion": 1,
 	"author": {
 		"id": "351653707496292353",
-		"name": "ianhell666"
+		"name": "pickmanprojectvictim"
 	},
 	"service": "Incels.is",
 	"description": {
@@ -13,7 +13,7 @@
 		"incels.is",
 		"www.incels.is"
 	],
-	"version": "1.0.10",
+	"version": "1.0.12",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/Incels.is/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/Incels.is/assets/thumbnail.png",
 	"color": "#182139",
