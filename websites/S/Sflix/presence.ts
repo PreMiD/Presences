@@ -34,7 +34,8 @@ presence.on("UpdateData", async () => {
 	switch (variables.currPage) {
 		case "": {
 			presenceData.details = "Searching";
-			presenceData.smallImageKey = Assets.Search; 
+			presenceData.smallImageKey = Assets.Search;
+			presenceData.smallImageText = "Searching";
 			presenceData.state = privacy ? "" : `${document.querySelector("h2[class*='cat-heading']").textContent.split('"')[1] || document.querySelector("h2[class*='cat-heading']").textContent}`; 
 			break;
 		}
@@ -43,12 +44,14 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing";
 			presenceData.state = "Home";
 			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageText = "Browsing";
 			break;
 		}
 		case "detail": {
 			presenceData.details = "Browsing";
 			presenceData.state = privacy ? "" : document.querySelector(".heading-name")?.textContent;
 			presenceData.smallImageKey = Assets.Reading;
+			presenceData.smallImageText = "Browsing";
 			break;
 		}
 		case "watch": {
@@ -64,12 +67,14 @@ presence.on("UpdateData", async () => {
 			if (!video.paused) {
 				const timestamps = presence.getTimestamps(video.currentTime, video.duration);
 				presenceData.smallImageKey = Assets.Play;
+				presenceData.smallImageText = "Playing";
 				if (!privacy) {
 					presenceData.startTimestamp = timestamps[0];
 					presenceData.endTimestamp = timestamps[1];
 				}
 			} else {
 				presenceData.smallImageKey = Assets.Pause;
+				presenceData.smallImageText = "Paused";
 				delete presenceData.startTimestamp;
 				delete presenceData.endTimestamp;
 			}
