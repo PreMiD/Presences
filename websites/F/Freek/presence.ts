@@ -8,10 +8,12 @@ const presence = new Presence({
 		home: "general.viewHome",
 		search: "general.searchFor",
 		browse: "general.browsing",
+		reading: "general.reading",
 		buttonViewPage: "general.buttonViewPage",
 		buttonViewEpisode: "general.buttonViewEpisode",
 		buttonWatchAnime: "general.buttonWatchAnime",
 		buttonWatchMovie: "general.buttonWatchMovie",
+		buttonViewSeries: "general.buttonViewSeries",
 	});
 
 const enum Assets {
@@ -36,7 +38,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 		type: ActivityType.Watching,
-		details: "Unsupported  Page",
+		details: "Unsupported Page",
 	};
 
 	const { href, pathname } = document.location,
@@ -44,7 +46,6 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("timestamp"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("privacy"),
-			presence.getSetting<string>("lang").catch(() => "en"),
 		]);
 
 	if (privacy) {
@@ -154,6 +155,30 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (video.paused) delete presenceData.endTimestamp;
+	} else if (pathname.includes("/read/")) {
+		const mangaName = document.querySelector(
+			"div.pointer-events-none > button > div > span.font-light"
+		);
+
+		presenceData.details = steamTitle;
+		presenceData.state = `📺 ${
+			mangaName
+				? `${mangaName?.textContent}`
+				: `Chapter ${href.includes("?ep=") ? href.split("?ep=")[1] : 1}`
+		}`;
+		presenceData.largeImageKey = document
+			.querySelector(
+				"div.flex > div.false > span.lazy-load-image-background > img"
+			)
+			?.getAttribute("src");
+		presenceData.smallImageKey = Assets.Reading;
+		presenceData.smallImageText = (await strings).reading;
+		presenceData.buttons = [
+			{
+				label: (await strings).buttonViewSeries,
+				url: href,
+			},
+		];
 	} else if (pathname.includes("/explore")) {
 		presenceData.state = `Page ${pageNumber} - ${searchResults}`;
 		presenceData.smallImageKey = Assets.Viewing;
@@ -163,6 +188,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = `Page ${pageNumber} - ${searchResults}`;
 		}
+
 		switch (pathname.split("/explore/")[1]) {
 			case "movie":
 				presenceData.details = "Exploring Movies";
@@ -181,6 +207,11 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Exploring Anime";
 				if (searchInput)
 					presenceData.details = `${(await strings).search} Anime`;
+				break;
+			case "manga":
+				presenceData.details = "Exploring Manga";
+				if (searchInput)
+					presenceData.details = `${(await strings).search} Manga`;
 				break;
 			default:
 				presenceData.details = "Exploring";
