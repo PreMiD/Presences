@@ -40,10 +40,6 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			smallImageText: "AnimeLIB",
 		},
-		strings = await presence.getStrings({
-			play: "general.playing",
-			pause: "general.paused",
-		}),
 		isWatchingPrivately = await presence.getSetting<boolean>(
 			"private-watching"
 		),
@@ -107,7 +103,7 @@ presence.on("UpdateData", async () => {
 					presenceData.largeImageKey = animeData.cover.default;
 
 					presenceData.smallImageKey = Assets.Pause;
-					presenceData.smallImageText = strings.pause;
+					presenceData.smallImageText = "На паузе";
 				}
 
 				if (video || iFrameVideo) {
@@ -118,8 +114,8 @@ presence.on("UpdateData", async () => {
 							? Assets.Pause
 							: Assets.Play;
 						presenceData.smallImageText = video.paused
-							? strings.pause
-							: strings.play;
+							? "На паузе"
+							: "Воспроизводится";
 
 						iFrameVideo = null;
 					} else {
@@ -131,8 +127,8 @@ presence.on("UpdateData", async () => {
 							? Assets.Pause
 							: Assets.Play;
 						presenceData.smallImageText = iFrameVideo.paused
-							? strings.pause
-							: strings.play;
+							? "На паузе"
+							: "Воспроизводится";
 					}
 
 					presenceData.startTimestamp = startTimestamp;

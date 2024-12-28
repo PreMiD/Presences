@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 interface CommonData {
 	id: number;
 	name: string;
