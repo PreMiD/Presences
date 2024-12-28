@@ -24,8 +24,9 @@ presence.on("UpdateData", async () => {
 		startTimestamp: browsingTimestamp,
 	},
 
-	[ thumbnail ] = await Promise.all([
+	[ thumbnail, privacy ] = await Promise.all([
 		presence.getSetting<boolean>("thumbnail"),
+		presence.getSetting<boolean>("privacy"),
 	]),
 
 	variables = await presence.getPageVariable("currPage");
@@ -33,8 +34,8 @@ presence.on("UpdateData", async () => {
 	switch (variables.currPage) {
 		case "": {
 			presenceData.details = "Searching";
-			presenceData.state = `${document.querySelector("h2[class*='cat-heading']").textContent.split('"')[1] || document.querySelector("h2[class*='cat-heading']").textContent}`;
-			presenceData.smallImageKey = Assets.Search;
+			presenceData.smallImageKey = Assets.Search; 
+			presenceData.state = privacy ? "" : `${document.querySelector("h2[class*='cat-heading']").textContent.split('"')[1] || document.querySelector("h2[class*='cat-heading']").textContent}`; 
 			break;
 		}
 		case "home_search":
@@ -46,7 +47,7 @@ presence.on("UpdateData", async () => {
 		}
 		case "detail": {
 			presenceData.details = "Browsing";
-			presenceData.state = document.querySelector(".heading-name")?.textContent;
+			presenceData.state = privacy ? "" : document.querySelector(".heading-name")?.textContent;
 			presenceData.smallImageKey = Assets.Reading;
 			break;
 		}
@@ -55,16 +56,18 @@ presence.on("UpdateData", async () => {
 			const showTitle = document.querySelector(".heading-name").textContent,
 				thumbnailURL = document.querySelector(`img[title*="${showTitle}"]`)?.getAttribute("src");
 			
-			presenceData.details = `${showTitle}`;
-			presenceData.state = `${document.querySelector(".on-air div h3")?.textContent || ""}`;
-			if (thumbnail && thumbnailURL) presenceData.largeImageKey = thumbnailURL;
+			presenceData.details = privacy ? "Watching" : `${showTitle}`;
+			presenceData.state = privacy ? "" : `${document.querySelector(".on-air div h3")?.textContent || ""}`;
+			presenceData.largeImageKey = (thumbnail && thumbnailURL && !privacy) ? Assets.Logo : thumbnailURL;
 			
 
 			if (!video.paused) {
 				const timestamps = presence.getTimestamps(video.currentTime, video.duration);
 				presenceData.smallImageKey = Assets.Play;
-				presenceData.startTimestamp = timestamps[0];
-				presenceData.endTimestamp = timestamps[1];
+				if (!privacy) {
+					presenceData.startTimestamp = timestamps[0];
+					presenceData.endTimestamp = timestamps[1];
+				}
 			} else {
 				presenceData.smallImageKey = Assets.Pause;
 				delete presenceData.startTimestamp;

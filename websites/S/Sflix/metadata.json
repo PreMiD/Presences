@@ -31,6 +31,12 @@
 			"title": "Show thumbnail",
 			"icon": "fad fa-album",
 			"value": true
+		},
+		{
+			"id": "privacy",
+			"title": "Privacy",
+			"icon": "fad fa-user-secret",
+			"value": false
 		}
 	],
 	"iframe": true,
