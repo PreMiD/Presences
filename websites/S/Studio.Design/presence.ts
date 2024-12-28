@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://i.imgur.com/zjBdwQ8.png",
 			startTimestamp: browsingTimestamp,
 		},
-		privacy = await(presence.getSetting<boolean>("privacy")),
+		privacy = await presence.getSetting<boolean>("privacy"),
 		{ pathname } = document.location;
 
 	switch (pathname) {
@@ -25,10 +25,13 @@ presence.on("UpdateData", async () => {
 		default:
 			// Project Dashboard
 			if (pathname.includes("/projects/") && pathname.includes("/dashboard/")) {
-					// Project Name
-					presenceData.details = privacy
-						? "Project dashboard"
-						: `${document?.title?.replace(/ \| Studio(\.Design)?$/, "")} | Dashboard`; // Global: Studio.Design / Japanese: Studio
+				// Project Name
+				presenceData.details = privacy
+					? "Project dashboard"
+					: `${document?.title?.replace(
+							/ \| Studio(\.Design)?$/, // Global: Studio.Design / Japanese: Studio
+							""
+					  )} | Dashboard`;
 				// Home
 				if (pathname.includes("/home")) {
 					// Project Settings
