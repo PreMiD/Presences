@@ -9,18 +9,15 @@ const enum Assets {
 
 // Todo - Multilanguage functionality as hard to test atm due to bugs.
 async function getStrings() {
-	return presence.getStrings(
-		{
-			home: "general.viewHome",
-			search: "general.searchFor",
-			browse: "general.browsing",
-			buttonViewPage: "general.buttonViewPage",
-			reading: "general.reading",
-			chapter: "general.chapter",
-			buttonViewProfile: "general.buttonViewProfile",
-		},
-		await presence.getSetting<string>("lang").catch(() => "en")
-	);
+	return presence.getStrings({
+		home: "general.viewHome",
+		search: "general.searchFor",
+		browse: "general.browsing",
+		buttonViewPage: "general.buttonViewPage",
+		reading: "general.reading",
+		chapter: "general.chapter",
+		buttonViewProfile: "general.buttonViewProfile",
+	});
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
@@ -54,12 +51,10 @@ presence.on("UpdateData", async () => {
 
 	const pages: Record<string, PresenceData> = {
 		"/home": {
-			details: "Home",
-			buttons: [{ label: "View Page", url: href }],
+			details: "Viewing home page",
 		},
 		"/premium": {
 			details: "Viewing Premium Plans",
-			buttons: [{ label: "View Page", url: href }],
 		},
 	};
 
@@ -67,9 +62,7 @@ presence.on("UpdateData", async () => {
 		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
 
 	const page = `Page ${
-			href.includes("?page=")
-				? href.split("?page=")[1]?.split("&genre")[0]
-				: 1
+			href.includes("?page=") ? href.split("?page=")[1]?.split("&genre")[0] : 1
 		}`,
 		genre = `${
 			href.includes("genre=")
@@ -184,8 +177,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = Assets.Search;
 		presenceData.smallImageText = "Searching on Royal Road";
 
-		if (href.includes("?title="))
-			presenceData.state = href.split("?title=")[1];
+		if (href.includes("?title=")) presenceData.state = href.split("?title=")[1];
 		else presenceData.state = "Specific search criteria";
 
 		// Fiction pages
