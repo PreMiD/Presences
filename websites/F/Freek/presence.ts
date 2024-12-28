@@ -67,6 +67,10 @@ presence.on("UpdateData", async () => {
 			details: `${(await strings).browse} History`,
 			smallImageKey: Assets.Viewing,
 		},
+		"/settings": {
+			details: `${(await strings).browse} Settings`,
+			smallImageKey: Assets.Viewing,
+		},
 	};
 
 	for (const [path, data] of Object.entries(pages))
