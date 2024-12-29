@@ -1,5 +1,5 @@
 name: Feature Request
-description: Request a new feature for an existing presence
+description: Request a new feature for an existing activity
 labels: [feature request]
 body:
   - type: markdown
@@ -8,9 +8,9 @@ body:
         Before requesting a new feature, ensure your request hasn't already been
         submitted before. If it has, reply to the open issue instead.
   - type: input
-    id: presence_name
+    id: activity_name
     attributes:
-      label: Presence name
+      label: Activity name
     validations:
       required: true
   - type: textarea
@@ -19,7 +19,7 @@ body:
       required: true
     attributes:
       label: Description
-      description: Describe in detail what would you like to see added to the presence and why.
+      description: Describe in detail what would you like to see added to the activity and why.
   - type: textarea
     id: alternatives
     validations:
