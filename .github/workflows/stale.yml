@@ -32,5 +32,5 @@ jobs:
             If you believe this PR is still relevant, feel free to reopen it or create a new one with updated information.
           stale-pr-label: inactive
           stale-issue-label: inactive
-          only-issue-labels: bug
+          only-issue-labels: bug,needs repro
           operations-per-run: 1000
