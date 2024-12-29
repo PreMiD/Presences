@@ -81,9 +81,7 @@ presence.on("UpdateData", async () => {
 			type: ActivityType.Watching,
 			// initial details in case of no match displaying the 1st path segment
 			details: `Browsing ${pathSegments[1]}`,
-			// buttons: [{ label: "Visit", url: document.URL }],
-		},
-		// board thread play function
+		}, // board thread play function
 		displaySec = (categorys = " ") => {
 			presenceData.details = `Viewing${categorys}discussion thread`;
 		};
@@ -279,8 +277,8 @@ presence.on("UpdateData", async () => {
 
 			if (
 				pathSegments[2] === "writer" &&
-				document.URL.includes(document.URL.split("/")[5]) &&
-				document.URL.split("/")[5].split(".")[0] === "view"
+				document.location.href.includes(document.location.href.split("/")[5]) &&
+				document.location.href.split("/")[5].split(".")[0] === "view"
 			) {
 				const novelCoverElement = document.querySelector("div.novel-cover-img");
 				if (novelCoverElement) {
