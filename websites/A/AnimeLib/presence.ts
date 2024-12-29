@@ -27,7 +27,7 @@ interface IFrameVideo {
 	paused: boolean;
 }
 
-let iFrameVideo: IFrameVideo, startTimestamp: number, endTimestamp: number;
+let iFrameVideo: IFrameVideo;
 
 presence.on("iFrameData", (data: IFrameVideo) => {
 	iFrameVideo = data;
@@ -38,7 +38,6 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			type: ActivityType.Watching,
 			startTimestamp: browsingTimestamp,
-			smallImageText: "AnimeLIB",
 		},
 		isWatchingPrivately = await presence.getSetting<boolean>(
 			"private-watching"
@@ -90,15 +89,23 @@ presence.on("UpdateData", async () => {
 
 			if (path.endsWith("/watch")) {
 				const video = document.querySelector("video"),
-					dub = document
-						.querySelector(".menu-item.is-active")
-						?.querySelector(".menu-item__text").textContent;
+					dub =
+						document
+							.querySelector(".menu-item.is-active")
+							?.querySelector(".menu-item__text").textContent ??
+						document
+							.querySelector(".btn.is-plain.is-outline")
+							?.querySelector("strong")?.textContent;
 
 				if (dub) {
 					presenceData.details = animeData.rus_name;
 					presenceData.state = `${
 						document.querySelector("[id^='episode'][class*=' ']")
-							?.textContent ?? "Фильм"
+							?.textContent ??
+						document
+							.querySelectorAll(".btn.is-outline")[6]
+							?.querySelector("span")?.textContent ??
+						"Фильм"
 					} | ${dub}`;
 					presenceData.largeImageKey = animeData.cover.default;
 
@@ -108,7 +115,7 @@ presence.on("UpdateData", async () => {
 
 				if (video || iFrameVideo) {
 					if (video) {
-						[startTimestamp, endTimestamp] =
+						[presenceData.startTimestamp, presenceData.endTimestamp] =
 							presence.getTimestampsfromMedia(video);
 						presenceData.smallImageKey = video.paused
 							? Assets.Pause
@@ -119,10 +126,11 @@ presence.on("UpdateData", async () => {
 
 						iFrameVideo = null;
 					} else {
-						[startTimestamp, endTimestamp] = presence.getTimestamps(
-							iFrameVideo.currentTime,
-							iFrameVideo.duration
-						);
+						[presenceData.startTimestamp, presenceData.endTimestamp] =
+							presence.getTimestamps(
+								iFrameVideo.currentTime,
+								iFrameVideo.duration
+							);
 						presenceData.smallImageKey = iFrameVideo.paused
 							? Assets.Pause
 							: Assets.Play;
@@ -130,9 +138,6 @@ presence.on("UpdateData", async () => {
 							? "На паузе"
 							: "Воспроизводится";
 					}
-
-					presenceData.startTimestamp = startTimestamp;
-					presenceData.endTimestamp = endTimestamp;
 
 					if (video?.paused || iFrameVideo?.paused) {
 						delete presenceData.startTimestamp;
@@ -267,7 +272,9 @@ presence.on("UpdateData", async () => {
 					).then(response => <TeamData>response.data);
 
 					presenceData.details = "Страница команды";
-					presenceData.state = `${teamData.name} (${teamData.alt_name})`;
+					presenceData.state = `${teamData.name} (${
+						teamData.alt_name ?? teamData.name
+					})`;
 					presenceData.largeImageKey = teamData.cover.default;
 				}
 			} else {
