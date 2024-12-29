@@ -7,16 +7,16 @@ async function getStrings() {
 	return presence.getStrings(
 		{
 			home: "general.viewHome",
-			calendar: "google classroom.calendar",
-			todo: "google classroom.todo",
-			assignmentPrivate: "google classroom.assignmentPrivate",
-			assignment: "google classroom.assignment",
-			class: "google classroom.class",
-			classworkPrivate: "google classroom.classworkPrivate",
-			classwork: "google classroom.classwork",
-			classmembersPrivate: "google classroom.classmembersPrivate",
-			classmembers: "google classroom.classmembers",
-			settings: "google classroom.settings",
+			calendar: "googleclassroom.calendar",
+			todo: "googleclassroom.todo",
+			assignmentPrivate: "googleclassroom.assignmentPrivate",
+			assignment: "googleclassroom.assignment",
+			class: "googleclassroom.class",
+			classworkPrivate: "googleclassroom.classworkPrivate",
+			classwork: "googleclassroom.classwork",
+			classmembersPrivate: "googleclassroom.classmembersPrivate",
+			classmembers: "googleclassroom.classmembers",
+			settings: "googleclassroom.settings",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);
