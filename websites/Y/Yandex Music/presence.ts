@@ -13,15 +13,11 @@ presence.on("UpdateData", async () => {
 			? navigator.mediaSession.metadata.artwork.at(-1).src
 			: "https://cdn.rcd.gg/PreMiD/websites/Y/Yandex%20Music/assets/logo.png",
 		timePassed = document.querySelector(".progress__left").textContent,
-		durationString = document.querySelector(".progress__right").textContent,
 		[currentTime, duration] = [
 			presence.timestampFromFormat(timePassed),
-			(() => {
-				return (
-					presence.timestampFromFormat(durationString) +
-					presence.timestampFromFormat(timePassed)
-				);
-			})(),
+			presence.timestampFromFormat(
+				document.querySelector(".progress__right").textContent
+			) + presence.timestampFromFormat(timePassed),
 		],
 		[startTimestamp, endTimestamp] = presence.getTimestamps(
 			currentTime,
