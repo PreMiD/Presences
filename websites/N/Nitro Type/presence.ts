@@ -264,7 +264,6 @@ presence.on("UpdateData", async () => {
 					presenceData.state = "Midtown Motors";
 					break;
 				}
-
 				case "Level 3": {
 					presenceData.state = "Hai Auto";
 					break;
