@@ -252,17 +252,28 @@ presence.on("UpdateData", async () => {
 		}
 		case "shop": {
 			presenceData.details = "Browsing shop";
-			const selectedShop = document.querySelector(
-				".page-shop--dealership-option.is-selected"
-			);
-			!selectedShop.classList.contains("season_shop")
-				? (presenceData.state = selectedShop
-						.querySelector("img")
-						.alt.replace("Level 1", "Loh's Cars")
-						.replace("Level 2", "Midtown Motors")
-						.replace("Level 3", "Hai Auto"))
-				: (presenceData.state = "Season Shop");
+			const selectedShop = document.querySelector<HTMLImageElement>(
+				".page-shop--dealership-option.is-selected img"
+			).alt;
+			switch (selectedShop) {
+				case "Level 1": {
+					presenceData.state = "Loh's Cars";
+					break;
+				}
+				case "Level 2": {
+					presenceData.state = "Midtown Motors";
+					break;
+				}
 
+				case "Level 3": {
+					presenceData.state = "Hai Auto";
+					break;
+				}
+				default: {
+					presenceData.state = selectedShop;
+					break;
+				}
+			}
 			break;
 		}
 		case "profile": {
