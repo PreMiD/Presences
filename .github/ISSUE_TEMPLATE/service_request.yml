@@ -1,6 +1,6 @@
 name: Service Request
-description: Request a new presence to be added to the store
-labels: [service request]
+description: Request a new activity to be added to the store
+labels: [activity request]
 body:
   - type: markdown
     attributes:
@@ -36,4 +36,4 @@ body:
       required: true
     attributes:
       label: Description
-      description: Provide a detailed description on what you would like to see displayed on this presence
+      description: Provide a detailed description on what you would like to see displayed on this activity
