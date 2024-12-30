@@ -7,8 +7,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey:
 				"https://www.heo-systems.net/Branding/heo%20systems%20modern%20transparent-1500w.png",
 		},
-		{ pathname } = document.location,
-		{ hostname } = document.location;
+		{ pathname, hostname } = document.location;
 
 	let serverName = null;
 
