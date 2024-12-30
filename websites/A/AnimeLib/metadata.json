@@ -23,7 +23,7 @@
 		"anime"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*",
+	"iFrameRegExp": "kodik[.]info",
 	"settings": [
 		{
 			"id": "private-watching",
