@@ -39,12 +39,11 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = "Searching";
 			presenceData.state = privacy
 				? ""
-				: 
-						document
-							.querySelector("h2[class*='cat-heading']")
-							.textContent.split('"')[1] ||
-						document.querySelector("h2[class*='cat-heading']").textContent
-				 
+				: document
+						.querySelector("h2[class*='cat-heading']")
+						.textContent.split('"')[1] ||
+				  document.querySelector("h2[class*='cat-heading']").textContent;
+
 			break;
 		}
 		case "home_search":
@@ -73,21 +72,17 @@ presence.on("UpdateData", async () => {
 			presenceData.details = privacy ? "Watching" : `${showTitle}`;
 			presenceData.state = privacy
 				? ""
-				: {document.querySelector(".on-air div h3")?.textContent ?? ""
+				: document.querySelector(".on-air div h3")?.textContent ?? "";
 			presenceData.largeImageKey =
 				thumbnail && thumbnailURL && !privacy ? thumbnailURL : Assets.Logo;
 
 			if (!video.paused) {
-				const timestamps = presence.getTimestamps(
-					video.currentTime,
-					video.duration
-				);
+				if (!privacy) {
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestamps(video.currentTime, video.duration);
+				}
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = "Playing";
-				if (!privacy) {
-					presenceData.startTimestamp = timestamps[0];
-					presenceData.endTimestamp = timestamps[1];
-				}
 			} else {
 				presenceData.smallImageKey = Assets.Pause;
 				presenceData.smallImageText = "Paused";
