@@ -39,12 +39,12 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = "Searching";
 			presenceData.state = privacy
 				? ""
-				: `${
+				: 
 						document
 							.querySelector("h2[class*='cat-heading']")
 							.textContent.split('"')[1] ||
 						document.querySelector("h2[class*='cat-heading']").textContent
-				  }`;
+				 
 			break;
 		}
 		case "home_search":
