@@ -14,6 +14,7 @@
 			"name": "Bas950",
 			"id": "241278257335500811"
 		}
+		
 	],
 	"service": "BBC",
 	"description": {
@@ -26,8 +27,8 @@
 		"www.bbc.com"
 	],
 	"version": "2.2.5",
-	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/logo.png",
-	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/thumbnail.png",
+	"logo": "https://i.imgur.com/EuQ5Aid.png",
+	"thumbnail": "https://i.imgur.com/dd3IywT.png",
 	"color": "#000000",
 	"category": "other",
 	"tags": [
