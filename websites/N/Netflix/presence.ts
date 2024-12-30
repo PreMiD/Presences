@@ -143,7 +143,7 @@ presence.on("UpdateData", async () => {
 					? paused
 						? Assets.Pause
 						: Assets.Play
-					: "",
+					: null,
 				smallImageText: paused ? strings.pause : strings.play,
 				...(showTimestamp && {
 					startTimestamp: paused ? 0 : startTimestamp,
@@ -196,7 +196,7 @@ presence.on("UpdateData", async () => {
 					? paused
 						? Assets.Pause
 						: Assets.Play
-					: "",
+					: null,
 				smallImageText: paused ? strings.pause : strings.play,
 				...(showTimestamp && {
 					startTimestamp: paused ? 0 : startTimestamp,
