@@ -4,7 +4,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/7LzTPVj.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/R/Royal%20Road/assets/logo.png",
 }
 
 // Todo - Multilanguage functionality as hard to test atm due to bugs.
