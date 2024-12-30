@@ -15,7 +15,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-const enum Assets { // Other default assets can be found at index.d.ts
+const enum Assets {
 	Logo = "https://i.imgur.com/8vAN1DA.png",
 	Play = "https://cdn.rcd.gg/PreMiD/resources/play.png",
 	Pause = "https://cdn.rcd.gg/PreMiD/resources/pause.png",
