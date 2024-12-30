@@ -146,8 +146,8 @@ presence.on("UpdateData", async () => {
 					: "",
 				smallImageText: paused ? strings.pause : strings.play,
 				...(showTimestamp && {
-					startTimestamp: paused ? null : startTimestamp,
-					endTimestamp: paused ? null : endTimestamp,
+					startTimestamp: paused ? 0 : startTimestamp,
+					endTimestamp: paused ? 0 : endTimestamp,
 				}),
 				...(usePresenceName && {
 					name: metadata.data.video.title,
@@ -199,8 +199,8 @@ presence.on("UpdateData", async () => {
 					: "",
 				smallImageText: paused ? strings.pause : strings.play,
 				...(showTimestamp && {
-					startTimestamp: paused ? null : startTimestamp,
-					endTimestamp: paused ? null : endTimestamp,
+					startTimestamp: paused ? 0 : startTimestamp,
+					endTimestamp: paused ? 0 : endTimestamp,
 				}),
 				...(usePresenceName && {
 					name: metadata.data.video.title,
