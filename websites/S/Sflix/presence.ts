@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = privacy ? "Watching" : `${showTitle}`;
 			presenceData.state = privacy
 				? ""
-				: `${document.querySelector(".on-air div h3")?.textContent || ""}`;
+				: {document.querySelector(".on-air div h3")?.textContent ?? ""
 			presenceData.largeImageKey =
 				thumbnail && thumbnailURL && !privacy ? thumbnailURL : Assets.Logo;
 
