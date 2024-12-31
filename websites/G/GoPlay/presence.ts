@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 
 		if (state[1] !== "Feature Film")
 			[presenceData.details, presenceData.state] = state;
-		else[presenceData.details] = state;
+		else [presenceData.details] = state;
 
 		if (presence.getSetting<boolean>("cover")) {
 			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
