@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
 				? [LargImages.Animated, LargImages.Logo, LargImages.Noback][logoType] ||
 				  LargImages.Logo
 				: metadata.data.video.boxart.at(0).url,
-			smallImageKey: showSmallImages ? Assets.Reading : "",
+			smallImageKey: showSmallImages ? Assets.Reading : null,
 			smallImageText: strings.browse,
 			buttons: [
 				{
@@ -143,11 +143,11 @@ presence.on("UpdateData", async () => {
 					? paused
 						? Assets.Pause
 						: Assets.Play
-					: "",
+					: null,
 				smallImageText: paused ? strings.pause : strings.play,
 				...(showTimestamp && {
-					startTimestamp: paused ? null : startTimestamp,
-					endTimestamp: paused ? null : endTimestamp,
+					startTimestamp: paused ? 0 : startTimestamp,
+					endTimestamp: paused ? 0 : endTimestamp,
 				}),
 				...(usePresenceName && {
 					name: metadata.data.video.title,
@@ -196,11 +196,11 @@ presence.on("UpdateData", async () => {
 					? paused
 						? Assets.Pause
 						: Assets.Play
-					: "",
+					: null,
 				smallImageText: paused ? strings.pause : strings.play,
 				...(showTimestamp && {
-					startTimestamp: paused ? null : startTimestamp,
-					endTimestamp: paused ? null : endTimestamp,
+					startTimestamp: paused ? 0 : startTimestamp,
+					endTimestamp: paused ? 0 : endTimestamp,
 				}),
 				...(usePresenceName && {
 					name: metadata.data.video.title,
