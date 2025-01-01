@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 					document.querySelector<HTMLImageElement>(".profile-ring img");
 				presenceData.details = "Viewing player";
 				presenceData.state = document.querySelector(".user-name");
-				presenceData.largeImageKey = profileImage.src.includes(".svg")
+				presenceData.largeImageKey = profileImage?.src.includes(".svg")
 					? Assets.Logo
 					: profileImage ?? Assets.Logo;
 				presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
