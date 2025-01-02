@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"apiVersion": 1,
+	"author": {
+		"id": "437154602626973697",
+		"name": "Kitosight"
+	},
+	"service": "AnimeLib",
+	"altnames": [
+		"AniLib"
+	],
+	"description": {
+		"en": "Watch anime online in Russian",
+		"ru": "Смотреть аниме онлайн на русском"
+	},
+	"url": "anilib.me",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/8vAN1DA.png",
+	"thumbnail": "https://i.imgur.com/W1iU6v0.png",
+	"color": "#A020F0",
+	"category": "anime",
+	"tags": [
+		"anime"
+	],
+	"iframe": true,
+	"iFrameRegExp": "kodik[.]info",
+	"settings": [
+		{
+			"id": "private-watching",
+			"title": "Private Anime Watching",
+			"icon": "fad fa-user-secret",
+			"value": false
+		}
+	]
+}
