@@ -15,16 +15,16 @@ function getTranslation(stringName: string): string {
 		case "HomePage":
 			switch (language) {
 				case "nl-NL":
-					return `Bekijkt de startpagina`;
+					return "Bekijkt de startpagina";
 				default:
-					return `Viewing the homepage `;
+					return "Viewing the homepage ";
 			}
 		case "Browsing":
 			switch (language) {
 				case "nl-NL":
-					return `Aan het bladeren`;
+					return "Aan het bladeren";
 				default:
-					return `Browsing `;
+					return "Browsing ";
 			}
 		case "ViewProductButton":
 			switch (language) {
