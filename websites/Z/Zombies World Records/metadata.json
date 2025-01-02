@@ -6,12 +6,14 @@
 		"name": "joerkig"
 	},
 	"service": "Zombies World Records",
-	"altnames": ["ZWR"],
+	"altnames": [
+		"ZWR"
+	],
 	"description": {
 		"en": "Zombies World Records (ZWR) is a community driven Call of Duty: Zombies leaderboard website with various competitive leaderboards and challenges."
 	},
 	"url": "zwr.gg",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/IWnmRUo.png",
 	"thumbnail": "https://i.imgur.com/TEbB9pK.png",
 	"color": "#c59531",
