@@ -10,3 +10,7 @@ files:
       - websites/**/package-lock.json
     translation: websites/**/%locale%/%original_file_name%
     dest: Activities/%original_file_name%
+
+  - source: websites/general.json
+    translation: websites/general.json
+    dest: Activities/%original_file_name%
