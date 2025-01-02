@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      - refactor
 jobs:
   push-to-crowdin:
     name: Push to Crowdin
