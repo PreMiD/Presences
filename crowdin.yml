@@ -12,5 +12,5 @@ files:
     dest: Activities/%original_file_name%
 
   - source: websites/general.json
-    translation: websites/general.json
+    translation: websites/%locale%/general.json
     dest: Activities/%original_file_name%
