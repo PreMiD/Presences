@@ -32,7 +32,7 @@ The general rules of activity development are as follows:
     - For 12+ month old domains: **45,000 unique visitors/day**.
   - The website can't be on a cheap domain like `.xyz`, `.club` and so on.
   - The website itself must have a very good quality, design, etc.
-- Activities should use [common details](https://github.com/PreMiD/Localization/blob/17439510645afbc123aaf655e0fa02f8a947fe72/src/Activity/general.json) (strings starting with "general."). You can achieve this using `multiLanguage` with the provided strings. If your activity requires custom strings, then you shouldn't use `multiLanguage` until the activity gets 1000 users. You can find an example [here](https://docs.premid.app/dev/presence/class#getstringsobject).
+- Activities should use [common details](https://github.com/PreMiD/Localization/blob/17439510645afbc123aaf655e0fa02f8a947fe72/src/Presence/general.json) (strings starting with "general."). You can achieve this using `multiLanguage` with the provided strings. If your activity requires custom strings, then you shouldn't use `multiLanguage` until the activity gets 1000 users. You can find an example [here](https://docs.premid.app/dev/presence/class#getstringsobject).
 - Including the `presence.ts` file, `iframe.ts` file, and `metadata.json` file is mandatory so the result would be what is represented in the following schema:
 
 ```bash
