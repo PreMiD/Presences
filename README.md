@@ -1,9 +1,9 @@
 <div align="center">
     <img src="https://avatars3.githubusercontent.com/u/46326568?s=400&amp;u=15e4a4988014780288d30ffb969fd1569fec23e6&amp;v=4" width="128px" style="max-width:100%;">
-    <h1>PreMiD Presences</h1>
+    <h1>PreMiD Activities</h1>
 </div>
 
-This repository contains the source code of all Presences that are available in [PreMiD's Store](https://premid.app/store). If you wish to add your Presence or update one, open a Pull Request.
+This repository contains the source code of all Activities that are available in [PreMiD's Store](https://premid.app/store). If you wish to add your Activity or update one, open a Pull Request.
 
 <div align="left">
     <a target="_blank" href="https://discord.premid.app/" title="Join our Discord!">
@@ -21,7 +21,7 @@ Please refer to our [documentation](https://docs.premid.app/dev/presence) to get
 
 ## Translator Tool
 
-Translate Presences by using `npx pmd` (or your package manager of choice).
+Translate Activities by using `npx pmd` (or your package manager of choice).
 
 ## Committing
 
