@@ -8,6 +8,7 @@ import type {
 	ReviewData,
 	TeamData,
 	PublisherData,
+	AgeRestriction,
 } from "./lib";
 
 const presence = new Presence({
@@ -27,6 +28,13 @@ interface IFrameVideo {
 	paused: boolean;
 }
 
+const isPrivacyMode = (setting: boolean, ageRestriction?: AgeRestriction) =>
+		setting || ageRestriction?.id === 5,
+	setPrivacyMode = (presenceData: PresenceData) => {
+		presenceData.details = "Приватный режим";
+		presenceData.state = "Вам не следует знать лишнего!";
+	};
+
 let iFrameVideo: IFrameVideo;
 
 presence.on("iFrameData", (data: IFrameVideo) => {
@@ -39,9 +47,7 @@ presence.on("UpdateData", async () => {
 			type: ActivityType.Watching,
 			startTimestamp: browsingTimestamp,
 		},
-		isWatchingPrivately = await presence.getSetting<boolean>(
-			"private-watching"
-		),
+		privacySetting = await presence.getSetting<boolean>("privacy-mode"),
 		path = document.location.pathname;
 
 	let animeData: AnimeData,
@@ -64,11 +70,9 @@ presence.on("UpdateData", async () => {
 				path.split("/")[3].split("-")[0]
 			).then(response => <AnimeData>response.data);
 
-			// Show anime watching in private mode if it's enabled, or enforce it when anime is RX rated (e.g hentai)
-			if (isWatchingPrivately || animeData.ageRestriction.id === 5) {
-				presenceData.details = "Приватный режим";
-				presenceData.state = "Явно что-то скрывает...";
-
+			// Show anime watching in privacy mode if it's enabled, or enforce it when anime is RX rated
+			if (isPrivacyMode(privacySetting, animeData.ageRestriction)) {
+				setPrivacyMode(presenceData);
 				break;
 			}
 
@@ -248,6 +252,14 @@ presence.on("UpdateData", async () => {
 					reviewData = await AnimeLib.getReview(path.split("/")[3]).then(
 						response => <ReviewData>response.data
 					);
+
+					// Show review reading in privacy mode if it's enabled, or enforce it when related anime is RX rated
+					if (
+						isPrivacyMode(privacySetting, reviewData.related.ageRestriction)
+					) {
+						setPrivacyMode(presenceData);
+						break;
+					}
 
 					presenceData.details = `Страница отзыва на ${reviewData.related.rus_name}`;
 					presenceData.state = `${reviewData.title} от ${reviewData.user.username}`;
