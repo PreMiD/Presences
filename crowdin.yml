@@ -6,5 +6,7 @@ files:
   - source: websites/**/*.json
     ignore:
       - websites/**/metadata.json
+      - websites/**/package.json
+      - websites/**/package-lock.json
     translation: websites/**/%locale%/%original_file_name%
     dest: Activities/%original_file_name%
