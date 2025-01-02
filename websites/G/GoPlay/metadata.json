@@ -17,7 +17,7 @@
 		"goplay.su",
 		"kdrama.anontpp.com"
 	],
-	"version": "1.0.2",
+	"version": "2.0.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GoPlay/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GoPlay/assets/thumbnail.png",
 	"color": "#F4ADEE",
@@ -29,24 +29,6 @@
 		"entertainment"
 	],
 	"settings": [
-		{
-			"id": "search",
-			"title": "Display Search Info",
-			"icon": "fas fa-search",
-			"value": true
-		},
-		{
-			"id": "browse",
-			"title": "Display Browsing Info",
-			"icon": "fas fa-book-open",
-			"value": true
-		},
-		{
-			"id": "video",
-			"title": "Display Video Info",
-			"icon": "fas fa-video",
-			"value": true
-		},
 		{
 			"id": "cover",
 			"title": "Show Cover",
