@@ -296,7 +296,7 @@ presence.on("UpdateData", async () => {
 		}
 		// handle in case of no match subdomain
 		default: {
-			presenceData.details = "Browsing dek-d.com";
+			presenceData.details = "Browsing...";
 		}
 	}
 	presence.setActivity(presenceData);
