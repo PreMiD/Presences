@@ -4,5 +4,6 @@
 		"esbenp.prettier-vscode",
 		"deepscan.vscode-deepscan",
 		"dbaeumer.vscode-eslint"
-	]
+	],
+	"discord.enabled": false,
 }
