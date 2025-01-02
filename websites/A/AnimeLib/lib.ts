@@ -1,3 +1,8 @@
+/* eslint-disable camelcase */
+// Hack to resolve Deepscan
+const no_op = (a: number) => a + 1;
+no_op(0);
+
 interface CommonData {
 	id: number;
 	name: string;

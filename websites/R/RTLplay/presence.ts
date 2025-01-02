@@ -226,23 +226,26 @@ presence.on("UpdateData", async () => {
 
 						if (
 							!useChannelName &&
-							document
-								.querySelector("li[aria-current='true'] > a > div > h2")
-								.textContent.toLowerCase() !== "aucune donnée disponible" &&
+							(
+								document.querySelector(
+									"li[aria-current='true'] > a > div > div.live-broadcast__channel-title"
+								)?.textContent || ""
+							).toLowerCase() !== "aucune donnée disponible" &&
 							!["contact", "bel"].includes(pathParts[3]) // Radio show name are not relevant
 						) {
-							presenceData.name = document.querySelector(
-								"li[aria-current='true'] > a > div > h2"
-							).textContent;
+							presenceData.name =
+								document.querySelector(
+									"li[aria-current='true'] > a > div > div.live-broadcast__channel-title"
+								)?.textContent || "";
 						} else presenceData.name = getChannel(pathParts[3]).channel;
 
 						presenceData.type = getChannel(pathParts[3]).type;
 
 						presenceData.state = strings.watchingLive;
-						presenceData.details = document.querySelector(
-							"li[aria-current='true'] > a > div > h2"
-						).textContent;
-
+						presenceData.details =
+							document.querySelector(
+								"li[aria-current='true'] > a > div > div.live-broadcast__channel-title"
+							)?.textContent || "";
 						if (["contact", "bel"].includes(pathParts[3])) {
 							/* Songs played in the livestream are the same as the audio radio ones but with video clips
 							Fetch the data from the Radioplayer API. It is used on the official radio contact and bel rtl websites */
@@ -426,18 +429,19 @@ presence.on("UpdateData", async () => {
 
 		(https://www.rtlplay.be/rtlplay/player/75e9a91b-29d1-4856-be8c-0b3532862404) */
 		case ["player"].includes(pathParts[2]): {
-			const {
-				mediaName = document.querySelector("h1.lfvp-player__title").textContent,
-				seasonNumber,
-				episodeNumber,
-				episodeName,
-			} = (
-				document
-					.querySelector("h1.lfvp-player__title")
-					?.textContent.match(
-						/^(?<mediaName>.*?)\sS(?<seasonNumber>\d+)\sE(?<episodeNumber>\d+)\s(?<episodeName>.*)$/
-					) || {}
-			).groups || {};
+			const titleText =
+					document.querySelector("h1.lfvp-player__title")?.textContent ||
+					"Unknown Media",
+				matchResult = titleText.match(
+					/^(?<mediaName>.*?)\sS(?<seasonNumber>\d+)\sE(?<episodeNumber>\d+)\s(?<episodeName>.*)$/
+				),
+				{
+					mediaName = titleText,
+					seasonNumber = null,
+					episodeNumber = null,
+					episodeName = null,
+				} = matchResult?.groups || {};
+
 			let isPaused = false;
 			presenceData.largeImageKey = LargeAssets.Logo; // Intializing default
 
@@ -452,7 +456,7 @@ presence.on("UpdateData", async () => {
 				// Media Infos
 				if (usePresenceName) {
 					presenceData.name = mediaName; //  Watching MediaName
-					presenceData.details = episodeName; // EpisodeName
+					presenceData.details = episodeName ?? mediaName; // EpisodeName
 					if (episodeName)
 						presenceData.state = `${strings.season} ${seasonNumber}, ${strings.episode} ${episodeNumber}`; // Season 0, Episode 0
 				} else {
@@ -460,7 +464,6 @@ presence.on("UpdateData", async () => {
 					if (episodeName)
 						presenceData.state = `S${seasonNumber} E${episodeNumber} - ${episodeName}`; // S0 - E0 - EpisodeName
 				}
-
 				if (seasonNumber && episodeNumber) {
 					// MediaName - Season 0 - Episode 0
 					presenceData.largeImageText = ` - ${strings.season} ${seasonNumber} - ${strings.episode} ${episodeNumber}`;
@@ -502,7 +505,7 @@ presence.on("UpdateData", async () => {
 								.querySelector(".playerui__controls__stat__time")
 								?.textContent.split("/");
 
-							if (formattedTimestamps) {
+							if (formattedTimestamps && formattedTimestamps.length === 2) {
 								[presenceData.startTimestamp, presenceData.endTimestamp] =
 									presence.getTimestamps(
 										presence.timestampFromFormat(formattedTimestamps[0].trim()),
@@ -529,7 +532,7 @@ presence.on("UpdateData", async () => {
 					: strings.play;
 
 				// Key Art - Poster
-				if (usePoster) {
+				if (usePoster && exist('meta[property="og:image"')) {
 					presenceData.largeImageKey = await getThumbnail(
 						document
 							.querySelector('meta[property="og:image"')
