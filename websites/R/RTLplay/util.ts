@@ -94,7 +94,7 @@ export const enum LargeAssets {
 	RTLClub = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/8.png",
 	RTLPlug = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/9.png",
 	RTLDistrict = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/15.png",
-	RTLSports = "https://i.imgur.com/pUw14pp.png",
+	RTLSports = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/16.png",
 	BelRTL = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/10.png",
 	Contact = "https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/11.png",
 }
