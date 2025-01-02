@@ -4,10 +4,10 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	_Logo = "1324137722079875112",
-	_Browsing = "1324141175866916864",
-	_Reading = "1324141174742581248",
-	_Selecting = "1324141175808196731",
+	SushiLogo = "https://cdn.discordapp.com/app-assets/1324071536017149973/1324137722079875112.png",
+	SushiBrowsing = "https://cdn.discordapp.com/app-assets/1324071536017149973/1324141175866916864.png",
+	SushiReading = "https://cdn.discordapp.com/app-assets/1324071536017149973/1324141174742581248.png",
+	SushiSelecting = "https://cdn.discordapp.com/app-assets/1324071536017149973/1324141175808196731.png",
 }
 
 class Comic {
@@ -28,8 +28,8 @@ setInterval(update, 5000);
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		startTimestamp: browsingTimestamp,
-		largeImageKey: Assets._Logo,
-		smallImageKey: Assets._Logo,
+		largeImageKey: Assets.SushiLogo,
+		smallImageKey: Assets.SushiLogo,
 		smallImageText: "Sushi Scan",
 		type: ActivityType.Watching,
 		name: "Sushi Scan !",
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Browsing Sushi Scan";
 		presenceData.state = document.title.split("-")[0].trim();
 
-		presenceData.largeImageKey = Assets._Browsing;
+		presenceData.largeImageKey = Assets.SushiBrowsing;
 
 		await presence.setActivity(presenceData);
 		return;
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = `${comic.fullTitle}`;
 		presenceData.state = "Reading";
 
-		presenceData.largeImageKey = Assets._Reading;
+		presenceData.largeImageKey = Assets.SushiReading;
 		presenceData.largeImageText = comic.title;
 
 		delete presenceData.smallImageKey;
@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = comic.title;
 		presenceData.state = "Selecting a chapter";
 
-		presenceData.largeImageKey = Assets._Selecting;
+		presenceData.largeImageKey = Assets.SushiSelecting;
 		presenceData.largeImageText = comic.title;
 
 		await presence.setActivity(presenceData);
