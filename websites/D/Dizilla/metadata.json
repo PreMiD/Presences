@@ -13,7 +13,7 @@
 	},
 	"url": "dizilla4.com",
 	"regExp": "(dizilla[0-9][.][a-z]{3})",
-	"version": "1.1.14",
+	"version": "1.1.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Dizilla/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Dizilla/assets/thumbnail.png",
 	"color": "#d32028",
