@@ -19,12 +19,6 @@ class Comic {
 
 let comic: Comic | undefined;
 
-async function update() {
-	if (!onOther()) comic = await getDetails();
-}
-
-setInterval(update, 5000);
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		startTimestamp: browsingTimestamp,
@@ -45,7 +39,7 @@ presence.on("UpdateData", async () => {
 		return;
 	}
 
-	if (!comic) await update();
+	await updateComic();
 
 	if (onComicPage()) {
 		presenceData.name = comic.title;
@@ -107,10 +101,14 @@ function getName(): string {
 	return getSplitPath()[0].substring(1).trim();
 }
 
+const detailsCache: { [key: string]: Comic } = {};
 async function getDetails(): Promise<Comic | null> {
 	let doc: Document, url: string;
 
 	if (onComicPage()) {
+		const name = getName();
+		if (detailsCache[name]) return detailsCache[name];
+
 		url = `https://sushiscan.net/catalogue/${getName()}`;
 		const resp = await fetch(url),
 			respBody = await resp.text();
@@ -121,10 +119,18 @@ async function getDetails(): Promise<Comic | null> {
 		doc = document;
 	} else return null;
 
-	return {
+	const comic: Comic = {
 		title: doc.querySelector(".entry-title").textContent,
 		fullTitle: document.querySelector(".entry-title").textContent,
 		pageUrl: `https://sushiscan.net${path()}`,
 		catalogueUrl: url,
 	};
+	if (onComicPage() && !detailsCache[getName()])
+		detailsCache[getName()] = comic;
+
+	return comic;
+}
+
+async function updateComic() {
+	comic = await getDetails();
 }
