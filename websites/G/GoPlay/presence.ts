@@ -1,34 +1,17 @@
 const presence = new Presence({
-		clientId: "708314580304003124",
-	}),
-	newStrings = presence.getStrings({
-		play: "general.playing",
-		pause: "general.paused",
-		browse: "general.browsing",
-		search: "general.search",
-	}),
-	getElement = (query: string): string => {
-		const element = document.querySelector(query);
-		if (element) return element.textContent.replace(/^\s+|\s+$/g, "");
-		else return "Loading...";
-	};
-const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/Anontpp/assets/logo.png",
-}
+	clientId: "708314580304003124",
+});
 
-let oldUrl: string, elapsed: number, strings: Awaited<typeof newStrings>;
+let oldUrl: string, elapsed: number;
 
 presence.on("UpdateData", async () => {
 	const path = location.pathname.replace(/\/?$/, "/"),
 		video: HTMLVideoElement = document.querySelector("video"),
-		[showSearchInfo, showBrowseInfo, showVideoInfo, cover] = await Promise.all([
-			presence.getSetting<boolean>("search"),
-			presence.getSetting<boolean>("browse"),
-			presence.getSetting<boolean>("video"),
-			presence.getSetting<boolean>("cover"),
-		]),
 		presenceData: PresenceData = {
-			largeImageKey: Assets.Logo,
+			details: "Browsing",
+			type: ActivityType.Watching,
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/G/GoPlay/assets/logo.png",
 		};
 
 	if (oldUrl !== path) {
@@ -36,56 +19,33 @@ presence.on("UpdateData", async () => {
 		elapsed = Math.floor(Date.now() / 1000);
 	}
 
-	strings ??= await newStrings;
-
 	if (elapsed) presenceData.startTimestamp = elapsed;
-	if (showBrowseInfo && path === "/") presenceData.details = "Browsing";
-
-	if (showVideoInfo && video) {
+	if (video) {
 		const state = Array.from(
-				document.querySelector<HTMLElement>("#infotitle").childNodes
-			).flatMap(node => node.textContent.trim() || []),
-			status = video.paused ? "pause" : "play";
+			document.querySelector<HTMLElement>("#infotitle").childNodes
+		).flatMap(node => node.textContent.trim() || []);
 
 		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
-		presenceData.smallImageText = strings[status];
-		if (status === "play") {
+		presenceData.smallImageText = video.paused ? "Paused" : "Playing";
+
+		if (!video.paused) {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
-				presence.getTimestamps(video.currentTime, video.duration);
+				presence.getTimestampsfromMedia(video);
 		}
 
-		if (getElement("#episodetitle") !== "Feature Film") {
-			presenceData.details = state[1];
-			presenceData.state = state[2];
-		} else presenceData.details = state[1];
+		if (state[1] !== "Feature Film")
+			[presenceData.details, presenceData.state] = state;
+		else [presenceData.details] = state;
 
-		if (cover) {
+		if (presence.getSetting<boolean>("cover")) {
 			presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
 				"meta[property='og:image']"
 			).content;
 		}
 	}
 
-	/* Search Info */
-	if (
-		showSearchInfo &&
-		getElement("#indextitle").split("\n")[0] === "Search Results"
-	) {
-		presenceData.details = "Searching for";
-		presenceData.state =
-			document.querySelector<HTMLInputElement>("input").value;
-	}
+	if (document.location.search.includes("search"))
+		presenceData.details = "Searching for something";
 
-	if (presenceData.details && typeof presenceData.details === "string") {
-		if (presenceData.details.match("(Browsing|Viewing)")) {
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.smallImageText = strings.browse;
-		}
-		if (presenceData.details.includes("Searching")) {
-			presenceData.smallImageKey = Assets.Search;
-			presenceData.smallImageText = strings.search;
-		}
-
-		presence.setActivity(presenceData);
-	} else presence.setActivity();
+	presence.setActivity(presenceData);
 });
