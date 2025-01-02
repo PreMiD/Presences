@@ -3,6 +3,6 @@ base_path: .
 base_url: "https://api.crowdin.com"
 preserve_hierarchy: true
 files:
-  - source: "websites/*/*/strings.json"
-    translation: "websites/*/*/%original_file_name%"
-    dest: "Activities/*/*.json"
+  - source: "websites/**/strings.json"
+    translation: "websites/**/%original_file_name%"
+    dest: "Activities/%original_file_name%"
