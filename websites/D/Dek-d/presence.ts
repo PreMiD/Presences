@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 			collection: "",
 		},
 		titleText = document.querySelector("h1.title")?.textContent ?? "",
-		pathSegments = location.pathname.split("/"),
+		pathSegments = document.location.pathname.split("/"),
 		presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
