@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.ibb.co/XD7ZnKj/heo-systems-modern-512x512.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/H/HEO%20Systems/assets/logo.png",
 		},
 		{ pathname, hostname } = document.location;
 
