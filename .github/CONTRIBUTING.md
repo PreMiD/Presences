@@ -32,13 +32,13 @@ The general rules of activity development are as follows:
     - For 12+ month old domains: **45,000 unique visitors/day**.
   - The website can't be on a cheap domain like `.xyz`, `.club` and so on.
   - The website itself must have a very good quality, design, etc.
-- Activities should use [common details](https://github.com/PreMiD/Localization/blob/17439510645afbc123aaf655e0fa02f8a947fe72/src/Activity/general.json) (strings starting with "general."). You can achieve this using `multiLanguage` with the provided strings. If your activity requires custom strings, then you shouldn't use `multiLanguage` until the activity gets 1000 users. You can find an example [here](https://docs.premid.app/dev/activity/class#getstringsobject).
-- Including the `activity.ts` file, `iframe.ts` file, and `metadata.json` file is mandatory so the result would be what is represented in the following schema:
+- Activities should use [common details](https://github.com/PreMiD/Localization/blob/17439510645afbc123aaf655e0fa02f8a947fe72/src/Activity/general.json) (strings starting with "general."). You can achieve this using `multiLanguage` with the provided strings. If your activity requires custom strings, then you shouldn't use `multiLanguage` until the activity gets 1000 users. You can find an example [here](https://docs.premid.app/dev/presence/class#getstringsobject).
+- Including the `presence.ts` file, `iframe.ts` file, and `metadata.json` file is mandatory so the result would be what is represented in the following schema:
 
 ```bash
 activity
 ├── metadata.json
-└── activity.ts
+└── presence.ts
 ```
 
 or if you're using a `iframe.ts` file:
@@ -46,11 +46,11 @@ or if you're using a `iframe.ts` file:
 ```bash
 activity
 ├── metadata.json
-├── activity.ts
+├── presence.ts
 └── iframe.ts
 ```
 
-## [**metadata.json**](https://docs.premid.app/dev/activity/metadata)
+## [**metadata.json**](https://docs.premid.app/dev/presence/metadata)
 
 > For the convenience of our activity developers, we have provided a schema which you can use to validate the integrity of your `metadata` file. This is entirely optional and is not required during the review process.
 
@@ -120,7 +120,7 @@ Each activity has a descriptor file called `metadata.json`, the metadata has a s
 }
 ```
 
-> If a field is listed as optional on the [documentation](https://docs.premid.app/dev/activity/metadata) or there is a `*` next to the key, and your activity uses the default value for it, do not include it in the `metadata` file. (for e.g., a activity without iframe support would not need the `iframe` field.)
+> If a field is listed as optional on the [documentation](https://docs.premid.app/dev/presence/metadata) or there is a `*` next to the key, and your activity uses the default value for it, do not include it in the `metadata` file. (for e.g., a activity without iframe support would not need the `iframe` field.)
 
 > All images in the `metadata` file must be hosted on `i.imgur.com`. Using content hosted on the website is **not** permitted as they can change the paths and files unwillingly.
 
@@ -189,12 +189,12 @@ A list of fields and their rules are listed below:
 
 ### **`category`**
 
-- The category **must** be one of the following listed on the [documentation](https://docs.premid.app/dev/activity/metadata#activity-categories).
+- The category **must** be one of the following listed on the [documentation](https://docs.premid.app/dev/presence/metadata#activity-categories).
 - The activity must use a category that matches the content of the website. (for e.g., don't use `anime` when the website isn't related to anime).
 
 ### **`*regExp`** <br /> **`*iFrameRegExp`**
 
-- Regular expressions **must** be valid. Please test your expressions with the tools listed on the [documentation](https://docs.premid.app/dev/activity/metadata#testing).
+- Regular expressions **must** be valid. Please test your expressions with the tools listed on the [documentation](https://docs.premid.app/dev/presence/metadata#testing).
 
 ### **`readLogs`**
 
@@ -213,18 +213,18 @@ A list of fields and their rules are listed below:
 - If you are using the `multiLanguage` option it can have the following types:
   - **True** type which will only enable strings from [`general.json`](https://github.com/PreMiD/Localization/blob/master/src/Activity/general.json) from the Localization repo or from the activity file (e.g. when the name of the activity is YouTube, the extension will get strings from `youtube.json` too.)
 
-## [**activity.ts**](https://docs.premid.app/dev/activity/class)
+## [**presence.ts**](https://docs.premid.app/dev/presence/class)
 
 > The code you write **must** be _well-written_ and **must** be _readable_ and all strings must be grammatically correct (grammar errors on websites can be ignored).
 
 > Each activity follows a strict linting ruleset which will be checked during the review process. A couple of recommendations can be seen below. [TypeScript Plugin Recommendations for Strict Type Checking](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules). [ESlint Recommendations](https://eslint.org/docs/rules). [Prettier](https://prettier.io/).
 
-Here is a list of rules you must follow when writing your `activity.ts` file:
+Here is a list of rules you must follow when writing your `presence.ts` file:
 
 - **Preferably** declare a new instance of the `Activity` class before any other variable to avoid rare issues that may occur.
 - **Always** use `document.location` to get current location information rather than `window.location` or `location`.
 - All assets **must** have a resolution of `512x512` pixels. You can upsize it using a tool like [waifu2x](http://waifu2x.udp.jp/).
-- **Never** use custom functions when [native variants are available](https://docs.premid.app/dev/activity#files-explained); this makes sure fixes on the extension level also apply to your activities. You're free to use whatever you need if you do not find them listed in the docs.
+- **Never** use custom functions when [native variants are available](https://docs.premid.app/dev/presence#files-explained); this makes sure fixes on the extension level also apply to your activities. You're free to use whatever you need if you do not find them listed in the docs.
 - It is **forbidden** to code activities for a site without adding support to its primary language (for e.g., a YouTube activity coded with support only for Portueguese and Japanese, but not English itself.)
 - The `smallImageKey` and `smallImageText` fields are intended to provide additional/secondary context (such as `playing/paused` for video sites, `browsing` for regular sites, and other cases) not to promote Discord profiles or anything unrelated to PreMiD.
 - When accessing cookies for stored data, please prefix the key with `PMD_`.
@@ -241,7 +241,7 @@ Here is a list of rules you must follow when writing your `activity.ts` file:
 
 ## Modification
 
-> You **must** change the version in the **metadata** to be a higher value from the previous version when making changes to either the **activity.ts**, **iframe.ts** or **metadata.json**.
+> You **must** change the version in the **metadata** to be a higher value from the previous version when making changes to either the **presence.ts**, **iframe.ts** or **metadata.json**.
 
 In some situations, activities may behave unexpectedly or could use some minor changes to improve their functionality. Here is a list of rules that you **must** follow while modifiying activities.
 
