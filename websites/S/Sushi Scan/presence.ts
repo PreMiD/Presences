@@ -20,8 +20,7 @@ class Comic {
 let comic: Comic | undefined;
 
 async function update() {
-	if (!onOther()) 
-		comic = await getDetails();
+	if (!onOther()) comic = await getDetails();
 }
 
 setInterval(update, 5000);
@@ -98,14 +97,10 @@ function onOther() {
 
 function getSplitPath() {
 	let a = path().split("-chapitre-");
-	if (a.length > 1)
-		return a;
-	
+	if (a.length > 1) return a;
 
 	a = path().split("-volume-");
-	if (a.length > 1)
-		return a;
-	
+	if (a.length > 1) return a;
 }
 
 function getName(): string {
@@ -124,9 +119,7 @@ async function getDetails(): Promise<Comic | null> {
 	} else if (onComicCatalogue()) {
 		url = `https://sushiscan.net${path()}`;
 		doc = document;
-	} else 
-		return null;
-	
+	} else return null;
 
 	return {
 		title: doc.querySelector(".entry-title").textContent,
