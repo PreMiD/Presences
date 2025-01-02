@@ -2,8 +2,8 @@
 	"$schema": "https://schemas.premid.app/metadata/1.12",
 	"apiVersion": 1,
 	"author": {
-		"name": "yolo",
-		"id": "277507281652940800"
+		"name": "vidhan",
+		"id": "1063329635569512520"
 	},
 	"service": "DMOJ",
 	"description": {
@@ -11,7 +11,7 @@
 		"nl": "De DMOJ is een modern wedstrijdplatform en een archief van programmeringsproblemen."
 	},
 	"url": "dmoj.ca",
-	"version": "2.0.22",
+	"version": "2.0.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/DMOJ/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/DMOJ/assets/thumbnail.png",
 	"color": "#fcdb05",
