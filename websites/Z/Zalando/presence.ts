@@ -3,7 +3,7 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let user: HTMLElement, title: HTMLElement, language: string;
+let language: string;
 
 // TODO: Convert to Presences#getStrings()
 /**
