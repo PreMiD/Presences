@@ -5,4 +5,4 @@ preserve_hierarchy: true
 files:
   - source: websites/**/strings.json
     translation: websites/**/%locale%/%original_file_name%
-    dest: Activities/%original_file_name%
+    dest: Activities/**/%original_file_name%
