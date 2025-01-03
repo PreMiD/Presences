@@ -16,7 +16,7 @@ interface CommonData {
 }
 
 export interface AnimeData extends Omit<CommonData, "stats"> {
-	ageRestriction: AnimeAgeRestriction;
+	ageRestriction: AgeRestriction;
 	cover: Cover;
 	/**
 	 * Example: 18 января 1991 г.
@@ -64,6 +64,7 @@ interface ReviewRelation {
 	rus_name: string;
 	eng_name: string;
 	cover: Cover;
+	ageRestriction: AgeRestriction;
 }
 
 interface Author {
@@ -91,10 +92,12 @@ interface Cover {
 	thumbnail: string;
 }
 
-interface AnimeAgeRestriction {
-	id: number; // yet to be typed properly
-	label: string;
-}
+export type AgeRestriction =
+	| { id: 1; label: "6+" }
+	| { id: 2; label: "12+" }
+	| { id: 3; label: "16+" }
+	| { id: 4; label: "18+" }
+	| { id: 5; label: "18+ (RX)" };
 
 interface AnimeStatus {
 	id: number; // yet to be typed properly
@@ -111,10 +114,37 @@ interface CachedResponse {
 	data: AnimeData | UserData | CharacterData | CollectionData | ReviewData;
 }
 
+type APIEndpoint =
+	| "anime"
+	| "user"
+	| "character"
+	| "people"
+	| "collections"
+	| "reviews"
+	| "teams"
+	| "publisher";
+
 let cachedResponse: CachedResponse;
 
 export class AnimeLib {
 	private static api = "https://api2.mangalib.me/api";
+
+	private static split = (path: string) => path.split("/")[3];
+
+	private static async request(
+		id: string,
+		endpoint: APIEndpoint,
+		endpointPart?: string
+	) {
+		return await fetch(`${this.api}/${endpoint}/${endpointPart ?? id}`).then(
+			async (response): Promise<CachedResponse> => {
+				return {
+					id,
+					data: (await response.json()).data,
+				};
+			}
+		);
+	}
 
 	public static async getAnime(
 		path: string,
@@ -123,24 +153,15 @@ export class AnimeLib {
 		if (!cachedResponse || cachedResponse.id !== id) {
 			if (path.endsWith("/watch")) path = path.slice(0, -6);
 
-			cachedResponse = {
-				id,
-				...(await (
-					await fetch(`${this.api}/anime/${path.split("/")[3]}`)
-				).json()),
-			};
+			cachedResponse = await this.request(id, "anime", this.split(path));
 		}
 
 		return cachedResponse;
 	}
 
 	public static async getUser(id: string): Promise<CachedResponse> {
-		if (!cachedResponse || cachedResponse.id !== id) {
-			cachedResponse = {
-				id,
-				...(await (await fetch(`${this.api}/user/${id}`)).json()),
-			};
-		}
+		if (!cachedResponse || cachedResponse.id !== id)
+			cachedResponse = await this.request(id, "user");
 
 		return cachedResponse;
 	}
@@ -149,14 +170,8 @@ export class AnimeLib {
 		path: string,
 		id: string
 	): Promise<CachedResponse> {
-		if (!cachedResponse || cachedResponse.id !== id) {
-			cachedResponse = {
-				id,
-				...(await (
-					await fetch(`${this.api}/character/${path.split("/")[3]}`)
-				).json()),
-			};
-		}
+		if (!cachedResponse || cachedResponse.id !== id)
+			cachedResponse = await this.request(id, "character", this.split(path));
 
 		return cachedResponse;
 	}
@@ -165,36 +180,22 @@ export class AnimeLib {
 		path: string,
 		id: string
 	): Promise<CachedResponse> {
-		if (!cachedResponse || cachedResponse.id !== id) {
-			cachedResponse = {
-				id,
-				...(await (
-					await fetch(`${this.api}/people/${path.split("/")[3]}`)
-				).json()),
-			};
-		}
+		if (!cachedResponse || cachedResponse.id !== id)
+			cachedResponse = await this.request(id, "people", this.split(path));
 
 		return cachedResponse;
 	}
 
 	public static async getCollection(id: string): Promise<CachedResponse> {
-		if (!cachedResponse || cachedResponse.id !== id) {
-			cachedResponse = {
-				id,
-				...(await (await fetch(`${this.api}/collections/${id}`)).json()),
-			};
-		}
+		if (!cachedResponse || cachedResponse.id !== id)
+			cachedResponse = await this.request(id, "collections");
 
 		return cachedResponse;
 	}
 
 	public static async getReview(id: string): Promise<CachedResponse> {
-		if (!cachedResponse || cachedResponse.id !== id) {
-			cachedResponse = {
-				id,
-				...(await (await fetch(`${this.api}/reviews/${id}`)).json()),
-			};
-		}
+		if (!cachedResponse || cachedResponse.id !== id)
+			cachedResponse = await this.request(id, "reviews");
 
 		return cachedResponse;
 	}
@@ -203,14 +204,8 @@ export class AnimeLib {
 		path: string,
 		id: string
 	): Promise<CachedResponse> {
-		if (!cachedResponse || cachedResponse.id !== id) {
-			cachedResponse = {
-				id,
-				...(await (
-					await fetch(`${this.api}/teams/${path.split("/")[3]}`)
-				).json()),
-			};
-		}
+		if (!cachedResponse || cachedResponse.id !== id)
+			cachedResponse = await this.request(id, "teams", this.split(path));
 
 		return cachedResponse;
 	}
@@ -219,14 +214,8 @@ export class AnimeLib {
 		path: string,
 		id: string
 	): Promise<CachedResponse> {
-		if (!cachedResponse || cachedResponse.id !== id) {
-			cachedResponse = {
-				id,
-				...(await (
-					await fetch(`${this.api}/publisher/${path.split("/")[3]}`)
-				).json()),
-			};
-		}
+		if (!cachedResponse || cachedResponse.id !== id)
+			cachedResponse = await this.request(id, "publisher", this.split(path));
 
 		return cachedResponse;
 	}
