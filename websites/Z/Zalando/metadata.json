@@ -7,14 +7,14 @@
 	},
 	"service": "Zalando",
 	"description": {
-		"en": "Zalando | Buy shoes online: Shoes from top brands.",
-		"nl": "Zalando online shop | Kleding, schoenen, sportartikelen, accessoires en meer | Jouw favoriete brands voor dames, heren en kids",
+		"en": "Zalando | Fashion, beauty, sport, accessoires | Your favorite brands for woman, men & kids.",
+		"nl": "Zalando online | Mode, beauty, sport & accessoires | Jouw favoriete merken voor dames, heren & kids.",
 		"zh_CN": "Zalando 是总部位于德国柏林的大型网络电子商城， 其主要产品是服装和鞋类。",
 		"ga_IE": "Zalando | Ceannaigh bróga ar líne: Bróga ó na brandaí is fearr."
 	},
 	"url": "www.zalando.com",
 	"regExp": "([a-z0-9-]+[.])*zalando([.][a-z]+)+[/]",
-	"version": "1.2.24",
+	"version": "1.3.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Z/Zalando/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Z/Zalando/assets/thumbnail.png",
 	"color": "#f47127",
@@ -22,5 +22,13 @@
 	"tags": [
 		"shop",
 		"fashion"
+	],
+	"settings": [
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
 	]
 }
