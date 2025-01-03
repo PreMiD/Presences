@@ -33,7 +33,9 @@ const isPrivacyMode = (setting: boolean, ageRestriction?: AgeRestriction) =>
 	setPrivacyMode = (presenceData: PresenceData) => {
 		presenceData.details = "Приватный режим";
 		presenceData.state = "Вам не следует знать лишнего!";
-	};
+	},
+	cleanUrl = (location: Location) =>
+		location.href.replace(location.search, "").replace("/watch", "");
 
 let iFrameVideo: IFrameVideo;
 
@@ -47,7 +49,10 @@ presence.on("UpdateData", async () => {
 			type: ActivityType.Watching,
 			startTimestamp: browsingTimestamp,
 		},
-		privacySetting = await presence.getSetting<boolean>("privacy-mode"),
+		[privacySetting, buttonsSetting] = await Promise.all([
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("buttons"),
+		]),
 		path = document.location.pathname;
 
 	let animeData: AnimeData,
@@ -112,6 +117,12 @@ presence.on("UpdateData", async () => {
 						"Фильм"
 					} | ${dub}`;
 					presenceData.largeImageKey = animeData.cover.default;
+					presenceData.buttons = [
+						{
+							label: "Открыть аниме",
+							url: cleanUrl(document.location),
+						},
+					];
 
 					presenceData.smallImageKey = Assets.Pause;
 					presenceData.smallImageText = "На паузе";
@@ -154,6 +165,12 @@ presence.on("UpdateData", async () => {
 					animeData.eng_name ?? animeData.name
 				})`;
 				presenceData.largeImageKey = animeData.cover.default;
+				presenceData.buttons = [
+					{
+						label: "Открыть аниме",
+						url: cleanUrl(document.location),
+					},
+				];
 			}
 			break;
 		case "characters":
@@ -170,6 +187,12 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Страница персонажа";
 					presenceData.state = `${characterData.rus_name} (${characterData.name})`;
 					presenceData.largeImageKey = characterData.cover.default;
+					presenceData.buttons = [
+						{
+							label: "Oткрыть персoнажа",
+							url: cleanUrl(document.location),
+						},
+					];
 				}
 			} else {
 				presenceData.details = "Страница персонажей";
@@ -196,6 +219,12 @@ presence.on("UpdateData", async () => {
 							: peopleData.name
 					} (${peopleData.name})`;
 					presenceData.largeImageKey = peopleData.cover.default;
+					presenceData.buttons = [
+						{
+							label: "Открыть человека",
+							url: cleanUrl(document.location),
+						},
+					];
 				}
 			} else {
 				presenceData.details = "Страница людей";
@@ -212,9 +241,16 @@ presence.on("UpdateData", async () => {
 					response => <UserData>response.data
 				);
 
-				presenceData.details = "В профиле";
+				presenceData.details = "Страница пользователя";
 				presenceData.state = userData.username;
 				presenceData.largeImageKey = userData.avatar.url;
+				presenceData.smallImageKey = Assets.Logo;
+				presenceData.buttons = [
+					{
+						label: "Открыть профиль",
+						url: cleanUrl(document.location),
+					},
+				];
 			} else {
 				presenceData.details = "Страница пользователей";
 				presenceData.state = "Столько интересных личностей!";
@@ -237,6 +273,12 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Страница коллекции";
 					presenceData.state = `${collectionData.name} от ${collectionData.user.username}`;
 					presenceData.largeImageKey = collectionData.user.avatar.url;
+					presenceData.buttons = [
+						{
+							label: "Oткрыть кoллекцию",
+							url: cleanUrl(document.location),
+						},
+					];
 				}
 			} else {
 				presenceData.details = "Страница коллекций";
@@ -266,6 +308,12 @@ presence.on("UpdateData", async () => {
 					presenceData.largeImageKey = reviewData.related.cover.default;
 					presenceData.smallImageKey = reviewData.user.avatar.url;
 					presenceData.smallImageText = reviewData.user.username;
+					presenceData.buttons = [
+						{
+							label: "Открыть отзыв",
+							url: cleanUrl(document.location),
+						},
+					];
 				}
 			} else {
 				presenceData.details = "Страница отзывов";
@@ -288,6 +336,13 @@ presence.on("UpdateData", async () => {
 						teamData.alt_name ?? teamData.name
 					})`;
 					presenceData.largeImageKey = teamData.cover.default;
+					presenceData.smallImageKey = Assets.Logo;
+					presenceData.buttons = [
+						{
+							label: "Открыть команду",
+							url: cleanUrl(document.location),
+						},
+					];
 				}
 			} else {
 				presenceData.details = "Страница команд";
@@ -304,10 +359,16 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `${name.textContent} (${
 						altName.textContent.split("/")[0]
 					})`;
-				} else {
-					presenceData.details = "Страница франшиз";
-					presenceData.state = "Их так много...";
+					presenceData.buttons = [
+						{
+							label: "Открыть франшизу",
+							url: cleanUrl(document.location),
+						},
+					];
 				}
+			} else {
+				presenceData.details = "Страница франшиз";
+				presenceData.state = "Их так много...";
 			}
 			break;
 		case "publisher":
@@ -326,6 +387,12 @@ presence.on("UpdateData", async () => {
 						publisherData.rus_name ?? publisherData.name
 					} (${publisherData.name})`;
 					presenceData.largeImageKey = publisherData.cover.default;
+					presenceData.buttons = [
+						{
+							label: "Открыть издателя",
+							url: cleanUrl(document.location),
+						},
+					];
 				}
 			} else {
 				presenceData.details = "Страница издетелей";
@@ -352,16 +419,43 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Читает новость";
 					presenceData.state = `${title} от ${username}`;
 					presenceData.largeImageKey = avatar;
+					presenceData.smallImageKey = Assets.Logo;
+					presenceData.buttons = [
+						{
+							label: "Открыть новость",
+							url: cleanUrl(document.location),
+						},
+					];
 				}
 			} else {
 				presenceData.details = "На странице новостей";
 				presenceData.state = "Ищет, чего бы почитать";
 			}
 			break;
+		case "faq":
+			if (path.split("/")[3]) {
+				if (document.querySelector("h1")) {
+					presenceData.details = "Страница вопросов и ответов";
+					presenceData.state = document.querySelector("h1").textContent;
+					presenceData.buttons = [
+						{
+							label: "Открыть страницу",
+							url: cleanUrl(document.location),
+						},
+					];
+				}
+			} else {
+				presenceData.details = "Страница вопросов и ответов";
+				presenceData.state = "Ответ на любой вопрос здесь!";
+			}
+			break;
 		default:
 			presenceData.details = "Где-то...";
 			presenceData.state = "Не пытайтесь найти!";
+			break;
 	}
+
+	if (!buttonsSetting) delete presenceData.buttons;
 
 	presence.setActivity(presenceData);
 });
