@@ -265,7 +265,6 @@ presence.on("UpdateData", async () => {
 							presenceData.smallImageKey = Assets.Logo;
 					}
 					presenceData.state = document.querySelector("a.link").textContent;
-					presenceData.smallImageKey = Assets.Logo;
 					presenceData.details = "Reader Novels Review";
 					break;
 				}
