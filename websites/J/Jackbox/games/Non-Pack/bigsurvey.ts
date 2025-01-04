@@ -18,9 +18,8 @@ export async function getPresenceData({
 			if (playerState.textEntry) {
 				const input = document.querySelector<HTMLInputElement>("#input");
 				let detailsText = playerState.textEntry.prompt;
-				if (input?.value) {
-					detailsText += ` - "${input.value}"`;
-				}
+				if (input?.value) detailsText += ` - "${input.value}"`;
+
 				return {
 					state: "Waiting in lobby",
 					smallImageKey: Assets.Question,
@@ -36,9 +35,9 @@ export async function getPresenceData({
 			switch (playerState.responseKey) {
 				case "objectGuess:3": {
 					const prompt = playerState.prompt as string;
-					if (prompt?.includes("MORE")) {
+					if (prompt?.includes("MORE"))
 						return { state: `Dare: Guessing ${prompt}` };
-					}
+
 					return { state: "High-Low: Guessing the more popular answer" };
 				}
 				case "voteResponse:3": {
@@ -51,9 +50,9 @@ export async function getPresenceData({
 			return { state: "Choosing their team" };
 		}
 		case "bounce": {
-			if (playerState.instructions?.includes("Try")) {
+			if (playerState.instructions?.includes("Try"))
 				return { state: "Bounce: Practicing answers" };
-			}
+
 			return {
 				state: "Bounce: Submitting answers",
 			};
@@ -94,9 +93,9 @@ export async function getPresenceData({
 			return { state: "Dare: Choosing opponent's difficulty" };
 		}
 		case "dareText": {
-			if (playerState.successfulGuess) {
+			if (playerState.successfulGuess)
 				return { state: "Dare: Guessing rank of submission" };
-			}
+
 			return {
 				state: "Dare: Providing guess",
 				smallImageKey: Assets.Question,

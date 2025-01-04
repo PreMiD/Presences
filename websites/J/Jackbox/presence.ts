@@ -19,84 +19,88 @@ let game: Game
 let browsingTimestamp = Math.round(Date.now() / 1000)
 let gametag: string
 
-if (document.location.hostname === 'jackbox.tv') {
-  setInterval(async () => {
-    const playerStateLogs = await presence.getLogs(
-      /recv <- .*?("key": "(bc:customer|player|info):[a-z0-9-]+",)/s,
-    )
-    if (playerStateLogs.length > 0) {
-      let updatedMainState = false
-      let updatedInfoState = false
-      for (
-        let i = playerStateLogs.length - 1;
-        !(updatedInfoState && updatedMainState)
-        && i >= playerStateLogs.length - 6
-        && i >= 0;
-        i--
-      ) {
-        const latestLog = playerStateLogs[i]
-        if (typeof latestLog !== 'string')
-          continue
-        let parsedLog
-        try {
-          parsedLog = JSON.parse(latestLog.slice(8))
-        }
-        catch {
-          presence.error(`Failed to parse log: ${latestLog}`)
-          continue
-        }
-        switch (true) {
-          case /recv <- .*?"entities": \{\n/s.test(latestLog): {
-            if (!updatedMainState) {
-              gamePlayerState = parsedLog.result.entities[
-                latestLog.match(
-                  /"key": "((?:bc:customer|player):[a-z0-9-]+)",/,
-                )?.[1] ?? ''
-              ]?.[1].val ?? parsedLog.result.val
-              updatedMainState = true
-            }
-            if (!updatedInfoState) {
-              gamePlayerInfoState = parsedLog.result.entities[
-                latestLog.match(/"key": "(info:\d+)",/)?.[1] ?? ''
-              ]?.[1].val ?? parsedLog.result
-              updatedInfoState = true
-            }
-            break
-          }
-          case /recv <- .*?"key": "(?:bc:customer|player):[a-z0-9-]+",/s.test(
-            latestLog,
-          ): {
-            if (!updatedMainState) {
-              gamePlayerState = parsedLog.result.val
-              updatedMainState = true
-            }
-            break
-          }
-          case /recv <- .*?"key": "info:\d+",/s.test(latestLog): {
-            if (!updatedInfoState) {
-              gamePlayerInfoState = parsedLog.result.val
-              updatedInfoState = true
-            }
-          }
-        }
-      }
-    }
-    if (!game) {
-      interface JackboxStorageLetiable {
-        tag: string
-      }
-      const { tag } = await presence.getPageletiable<JackboxStorageLetiable>(
-        'tv"]["storage',
-      )
-      gametag = tag
-      if (tag && tag !== '@connect') {
-        game = games[tag]!
-        browsingTimestamp = Math.round(Date.now() / 1000)
-        if (!game)
-          game = games.unknown!
-      }
-    }
-  }, 1000)
+if (document.location.hostname === "jackbox.tv") {
+	setInterval(async () => {
+		const playerStateLogs = await presence.getLogs(
+			/recv <- .*?("key": "(bc:customer|player|info):[a-z0-9-]+",|"opcode":\s*"client\/welcome")/s
+		);
+		if (playerStateLogs.length > 0) {
+			let updatedMainState = false,
+				updatedInfoState = false;
+			for (
+				let i = playerStateLogs.length - 1;
+				!(updatedInfoState && updatedMainState) &&
+				i >= playerStateLogs.length - 6 &&
+				i >= 0;
+				i--
+			) {
+				const latestLog = playerStateLogs[i];
+				if (typeof latestLog !== "string") continue;
+				let parsedLog;
+				try {
+					parsedLog = JSON.parse(latestLog.slice(8));
+				} catch {
+					presence.error(`Failed to parse log: ${latestLog}`);
+					continue;
+				}
+				switch (true) {
+					case /recv <- .*?"entities": {\n/s.test(latestLog): {
+						if (!updatedMainState) {
+							gamePlayerState =
+								parsedLog.result.entities[
+									latestLog.match(
+										/"key": "((?:bc:customer|player):(?:[a-z0-9-]+))",/s
+									)?.[1]
+								]?.[1].val ?? parsedLog.result.val;
+							updatedMainState = true;
+						}
+						if (!updatedInfoState) {
+							gamePlayerInfoState =
+								parsedLog.result.entities[
+									latestLog.match(/"key": "(info:\d+)",/s)?.[1]
+								]?.[1].val ?? parsedLog.result;
+							updatedInfoState = true;
+						}
+						break;
+					}
+					case /recv <- .*?"key": "((?:bc:customer|player):(?:[a-z0-9-]+))",/s.test(
+						latestLog
+					): {
+						if (!updatedMainState) {
+							gamePlayerState = parsedLog.result.val;
+							updatedMainState = true;
+						}
+						break;
+					}
+					case /recv <- .*?"key": "info:\d+",/s.test(latestLog): {
+						if (!updatedInfoState) {
+							gamePlayerInfoState = parsedLog.result.val;
+							updatedInfoState = true;
+						}
+						break;
+					}
+					case /recv <- .*?"opcode": "client\/welcome"/s.test(latestLog): {
+						if (!updatedInfoState) {
+							gamePlayerInfoState = parsedLog.result;
+							updatedInfoState = true;
+						}
+						break;
+					}
+				}
+			}
+		}
+		if (!game) {
+			const { "tv.storage.tag": tag } = await presence.getPageVariable<
+				Record<string, string>
+			>("tv.storage.tag");
+			gametag = tag;
+			if (tag && tag !== "@connect") {
+				game = games[tag];
+				browsingTimestamp = Math.round(Date.now() / 1000);
+				if (!game) game = games.unknown;
+			}
+		}
+	}, 1000);
 }
 
 presence.on('UpdateData', async () => {
