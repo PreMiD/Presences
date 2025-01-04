@@ -17,7 +17,7 @@ const presence = new Presence({
 	});
 
 const enum Assets {
-	Logo = "https://i.imgur.com/wmHltUl.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/F/Freek/assets/logo.png",
 }
 
 let video = {

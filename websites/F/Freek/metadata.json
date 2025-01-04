@@ -10,9 +10,9 @@
 		"en": "Freek.to is a free movie, tv show and more streaming application, supporting high quality streams and friendly UI and UX experiences."
 	},
 	"url": "freek.to",
-	"version": "1.0.0",
-	"logo": "https://i.imgur.com/wmHltUl.png",
-	"thumbnail": "https://i.imgur.com/YU9QbjM.png",
+	"version": "1.0.1",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/F/Freek/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Freek/assets/thumbnail.png",
 	"color": "#121212",
 	"category": "videos",
 	"tags": [
