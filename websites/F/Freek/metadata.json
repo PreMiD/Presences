@@ -22,7 +22,7 @@
 		"manga"
 	],
 	"iframe": true,
-	"iFrameRegExp": ".*",
+	"iFrameRegExp": "rmbed[.]su",
 	"settings": [
 		{
 			"id": "lang",
