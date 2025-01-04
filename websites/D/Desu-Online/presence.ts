@@ -139,12 +139,13 @@ presence.on("UpdateData", async () => {
 					: (presenceData.details = isNaN(parseInt(episodenum))
 							? episodenum
 							: `Odcinek:${playinfo[0].replace("Odc", "")}`);
-				if (playinfo.length > 2)
+				if (playinfo.length > 2) {
 					presenceData.state = document
 						.querySelector("li.selected > a > div.playinfo > span")
 						.textContent.match(/-.*-/gm)
 						.toString()
 						.slice(2, -2);
+				}
 
 				presenceData.buttons = [
 					{ label: "Oglądaj", url: document.URL },
