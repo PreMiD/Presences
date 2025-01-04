@@ -1,0 +1,56 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"apiVersion": 1,
+	"author": {
+		"id": "567885938160697377",
+		"name": "Anaxes"
+	},
+	"service": "Freek",
+	"description": {
+		"en": "Freek.to is a free movie, tv show and more streaming application, supporting high quality streams and friendly UI and UX experiences."
+	},
+	"url": "freek.to",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/wmHltUl.png",
+	"thumbnail": "https://i.imgur.com/YU9QbjM.png",
+	"color": "#121212",
+	"category": "videos",
+	"tags": [
+		"movies",
+		"anime",
+		"tv",
+		"manga"
+	],
+	"iframe": true,
+	"iFrameRegExp": "rmbed[.]su",
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		},
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fas fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "timestamp",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		},
+		{
+			"id": "buttons",
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true,
+			"if": {
+				"privacy": false
+			}
+		}
+	]
+}
