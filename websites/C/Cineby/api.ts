@@ -4,7 +4,7 @@ export interface Details {
 }
 
 export interface TvDetails extends Details {
-	name?: string
+	name?: string;
 	season_poster?: string;
 	episode_title?: string;
 	episode_number?: number;
@@ -18,7 +18,7 @@ export interface EpisodeDetails {
 }
 
 export interface MovieDetails extends Details {
-	title?: string
+	title?: string;
 	release_date?: string;
 	runtime?: number;
 }
@@ -42,9 +42,9 @@ export class CinebyApi {
 
 	private static readonly ANIME_URL = "https://api.cineby.app/hianime";
 
-	public static async getCurrent<
-		T extends TvDetails | MovieDetails
-	>(pathname: string): Promise<T> {
+	public static async getCurrent<T extends TvDetails | MovieDetails>(
+		pathname: string
+	): Promise<T> {
 		if (cache.has(pathname)) return cache.get(pathname) as T;
 
 		const [type, id] = pathname.split("/").slice(1),
@@ -74,7 +74,9 @@ export class CinebyApi {
 		return json;
 	}
 
-	private static async getCurrentEpisode(pathname: string): Promise<EpisodeDetails> {
+	private static async getCurrentEpisode(
+		pathname: string
+	): Promise<EpisodeDetails> {
 		const [id, season, episode] = pathname.split("/").slice(2),
 			response = await fetch(
 				`${this.BASE_URL}/tv/${id}/season/${season ?? 1}/episode/${
@@ -86,8 +88,7 @@ export class CinebyApi {
 	}
 
 	public static async getCurrentAnime(pathname: string): Promise<AnimeDetails> {
-		if (cache.has(pathname))
-			return cache.get(pathname) as AnimeDetails;
+		if (cache.has(pathname)) return cache.get(pathname) as AnimeDetails;
 
 		const { search } = document.location,
 			id = pathname.split("/")[2],

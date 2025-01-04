@@ -62,7 +62,8 @@ presence.on("UpdateData", async () => {
 			const { details } = await CinebyApi.getCurrentAnime(pathname),
 				{ title, thumbnail, episodes } = details,
 				{ episode, title: episodeTitle } = episodes.find(
-					({ episode }) => episode === (parseInt(pathname.split("/").pop()) || 1) 
+					({ episode }) =>
+						episode === (parseInt(pathname.split("/").pop()) || 1)
 				);
 
 			if (details) {
