@@ -60,7 +60,6 @@ interface GameStatus {
 		}[];
 	};
 	player: {
-		all_dead: boolean;
 		param: {
 			attr: Elements;
 			alive: 1 | 0;
@@ -68,7 +67,7 @@ interface GameStatus {
 			name: string;
 			hp: number;
 			hpmax: number;
-			pid_image: string;
+			pid: string;
 		}[];
 	};
 }
@@ -200,7 +199,7 @@ presence.on("UpdateData", async () => {
 			if (charaAlive) {
 				presenceData.smallImageKey = ElementIcons[charaAlive.attr];
 				presenceData.smallImageText = ElementsNames[charaAlive.attr];
-				presenceData.largeImageKey = `${userData.imgUri}/sp/assets/leader/raid_normal/${charaAlive.pid_image}.jpg`;
+				presenceData.largeImageKey = `${userData.imgUri}/sp/assets/leader/raid_normal/${charaAlive.pid}.jpg`;
 				presenceData.largeImageText = `${charaAlive.name} | ${
 					charaAlive.hp
 				} [${(charaAlive.hp / charaAlive.hpmax).toFixed(2)}%]`;
