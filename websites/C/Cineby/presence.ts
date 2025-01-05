@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-
 import { CinebyApi, MovieDetails, TvDetails } from "./api";
 
 const presence = new Presence({
@@ -21,41 +19,42 @@ presence.on("UpdateData", async () => {
 
 	switch (pathname.split("/")[1]) {
 		case "movie": {
-			const { title, poster_path, release_date, runtime } =
-				await CinebyApi.getCurrent<MovieDetails>(pathname);
+			const {
+				title,
+				poster_path: posterPath,
+				release_date: releaseDate,
+				runtime,
+			} = await CinebyApi.getCurrent<MovieDetails>(pathname);
 
-			if (title) {
-				if (usePresenceName) presenceData.name = title;
-				presenceData.details = title;
-				presenceData.state = `${release_date
-					.split("-")
-					.shift()} • ${runtime} minutes`;
+			if (usePresenceName) presenceData.name = title;
+			presenceData.details = title;
+			presenceData.state = `${releaseDate
+				.split("-")
+				.shift()} • ${runtime} minutes`;
 
-				if (showCover)
-					presenceData.largeImageKey = `https://image.tmdb.org/t/p/original${poster_path}`;
-			}
+			if (showCover)
+				presenceData.largeImageKey = `https://image.tmdb.org/t/p/original${posterPath}`;
 			break;
 		}
 		case "tv": {
 			const {
 				name: title,
-				season_poster,
-				episode_title,
-				season_number,
-				episode_number,
+				season_poster: seasonPoster,
+				episode_title: episodeTitle,
+				season_number: seasonNumber,
+				episode_number: episodeNumber,
 			} = await CinebyApi.getCurrent<TvDetails>(pathname);
 
-			if (title) {
-				if (usePresenceName) presenceData.name = title;
+			if (usePresenceName) presenceData.name = title;
 
-				presenceData.details = usePresenceName ? episode_title : title;
-				presenceData.state = usePresenceName
-					? `Season ${season_number}, Episode ${episode_number}`
-					: `S${season_number}:E${episode_number} ${episode_title}`;
+			presenceData.details = usePresenceName ? episodeTitle : title;
+			presenceData.state = usePresenceName
+				? `Season ${seasonNumber}, Episode ${episodeNumber}`
+				: `S${seasonNumber}:E${episodeNumber} ${episodeTitle}`;
 
-				if (showCover)
-					presenceData.largeImageKey = `https://image.tmdb.org/t/p/original${season_poster}`;
-			}
+			if (showCover)
+				presenceData.largeImageKey = `https://image.tmdb.org/t/p/original${seasonPoster}`;
+
 			break;
 		}
 		case "anime": {
@@ -66,16 +65,14 @@ presence.on("UpdateData", async () => {
 						episode === (parseInt(pathname.split("/").pop()) || 1)
 				);
 
-			if (details) {
-				if (usePresenceName) presenceData.name = title;
+			if (usePresenceName) presenceData.name = title;
 
-				presenceData.details = usePresenceName
-					? episodeTitle.replace(/E[0-9]{1,}: /, "").trim()
-					: title;
-				presenceData.state = `Episode ${episode}`;
+			presenceData.details = usePresenceName
+				? episodeTitle.replace(/E[0-9]{1,}: /, "").trim()
+				: title;
+			presenceData.state = `Episode ${episode}`;
 
-				if (showCover) presenceData.largeImageKey = thumbnail;
-			}
+			if (showCover) presenceData.largeImageKey = thumbnail;
 			break;
 		}
 		default:
