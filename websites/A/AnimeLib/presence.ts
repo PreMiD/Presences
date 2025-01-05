@@ -237,20 +237,25 @@ presence.on("UpdateData", async () => {
 			break;
 		case "user":
 			if (path.split("/")[3]) {
-				userData = await AnimeLib.getUser(path.split("/")[3]).then(
-					response => <UserData>response.data
-				);
+				if (path.split("/")[3] === "notifications") {
+					presenceData.details = "Страница уведомлений";
+					presenceData.state = "Что-то новенькое?";
+				} else {
+					userData = await AnimeLib.getUser(path.split("/")[3]).then(
+						response => <UserData>response.data
+					);
 
-				presenceData.details = "Страница пользователя";
-				presenceData.state = userData.username;
-				presenceData.largeImageKey = userData.avatar.url;
-				presenceData.smallImageKey = Assets.Logo;
-				presenceData.buttons = [
-					{
-						label: "Открыть профиль",
-						url: cleanUrl(document.location),
-					},
-				];
+					presenceData.details = "Страница пользователя";
+					presenceData.state = userData.username;
+					presenceData.largeImageKey = userData.avatar.url;
+					presenceData.smallImageKey = Assets.Logo;
+					presenceData.buttons = [
+						{
+							label: "Открыть профиль",
+							url: cleanUrl(document.location),
+						},
+					];
+				}
 			} else {
 				presenceData.details = "Страница пользователей";
 				presenceData.state = "Столько интересных личностей!";
@@ -448,6 +453,14 @@ presence.on("UpdateData", async () => {
 				presenceData.details = "Страница вопросов и ответов";
 				presenceData.state = "Ответ на любой вопрос здесь!";
 			}
+			break;
+		case "messages":
+			presenceData.details = "В личных сообщениях";
+			presenceData.state = "С кем-то общается...";
+			break;
+		case "downloads":
+			presenceData.details = "Страница загрузок";
+			presenceData.state = "Просматривает загруженные материалы";
 			break;
 		default:
 			presenceData.details = "Где-то...";
