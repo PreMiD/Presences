@@ -17,14 +17,14 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/VbU4HLa.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/S/SOOP/assets/logo.png",
 }
 
 const enum SoopAssets {
-	Browse = "https://i.imgur.com/MefUF9R.png",
-	Live = "https://i.imgur.com/XNGUK9X.png",
-	Play = "https://i.imgur.com/th6he6j.png",
-	Pause = "https://i.imgur.com/WN5FaFU.png",
+	Browse = "https://cdn.rcd.gg/PreMiD/websites/S/SOOP/assets/0.png",
+	Live = "https://cdn.rcd.gg/PreMiD/websites/S/SOOP/assets/1.png",
+	Play = "https://cdn.rcd.gg/PreMiD/websites/S/SOOP/assets/2.png",
+	Pause = "https://cdn.rcd.gg/PreMiD/websites/S/SOOP/assets/3.png",
 }
 
 let oldLang: string, strings: Awaited<ReturnType<typeof getStrings>>;
