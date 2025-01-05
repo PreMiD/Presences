@@ -120,8 +120,8 @@ presence.on("UpdateData", async () => {
 			);
 
 			if (animeInfo) {
-				details = `Visite la page de l'animé : ${animeInfo.name}`;
-				state = `Saison ${episodeInfo.nomSaison} • Épisode ${
+				details = `Regarde ${animeInfo.name}`;
+				state = `${episodeInfo.nomSaison} • ${
 					episodeInfo.nomEpisode
 				} • ${episodeInfo.nomLangue.toUpperCase()}`;
 			}
