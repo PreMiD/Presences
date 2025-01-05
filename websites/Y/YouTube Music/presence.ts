@@ -16,6 +16,7 @@ presence.on("UpdateData", async () => {
 			showButtons,
 			showTimestamps,
 			showCover,
+			smallImage,
 			hidePaused,
 			showBrowsing,
 			privacyMode,
@@ -24,6 +25,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("timestamps"),
 			presence.getSetting<boolean>("cover"),
+			presence.getSetting<boolean>("smallImage"),
 			presence.getSetting<boolean>("hidePaused"),
 			presence.getSetting<boolean>("browsing"),
 			presence.getSetting<boolean>("privacy"),
@@ -272,6 +274,8 @@ presence.on("UpdateData", async () => {
 			];
 		}
 	}
+
+	if (!smallImage) delete presenceData.smallImageKey;
 
 	presenceData.type = ActivityType.Listening;
 	presence.setActivity(presenceData);
