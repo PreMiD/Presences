@@ -11,9 +11,9 @@ presence.on("UpdateData", async () => {
 			type: ActivityType.Watching,
 		},
 		{ pathname } = document.location,
-		[showBrowsing, usePresenceName, showCover] = await Promise.all([
+		[showBrowsing, useActivityName, showCover] = await Promise.all([
 			presence.getSetting<boolean>("showBrowsing"),
-			presence.getSetting<boolean>("usePresenceName"),
+			presence.getSetting<boolean>("useActivityName"),
 			presence.getSetting<boolean>("showCover"),
 		]);
 
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 				runtime,
 			} = await CinebyApi.getCurrent<MovieDetails>(pathname);
 
-			if (usePresenceName) presenceData.name = title;
+			if (useActivityName) presenceData.name = title;
 			presenceData.details = title;
 			presenceData.state = `${releaseDate
 				.split("-")
@@ -45,10 +45,10 @@ presence.on("UpdateData", async () => {
 				episode_number: episodeNumber,
 			} = await CinebyApi.getCurrent<TvDetails>(pathname);
 
-			if (usePresenceName) presenceData.name = title;
+			if (useActivityName) presenceData.name = title;
 
-			presenceData.details = usePresenceName ? episodeTitle : title;
-			presenceData.state = usePresenceName
+			presenceData.details = useActivityName ? episodeTitle : title;
+			presenceData.state = useActivityName
 				? `Season ${seasonNumber}, Episode ${episodeNumber}`
 				: `S${seasonNumber}:E${episodeNumber} ${episodeTitle}`;
 
@@ -65,9 +65,9 @@ presence.on("UpdateData", async () => {
 						episode === (parseInt(pathname.split("/").pop()) || 1)
 				);
 
-			if (usePresenceName) presenceData.name = title;
+			if (useActivityName) presenceData.name = title;
 
-			presenceData.details = usePresenceName
+			presenceData.details = useActivityName
 				? episodeTitle.replace(/E[0-9]{1,}: /, "").trim()
 				: title;
 			presenceData.state = `Episode ${episode}`;

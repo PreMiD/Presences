@@ -28,8 +28,8 @@
 			"value": false
 		},
 		{
-			"id": "usePresenceName",
-			"title": "Show Title as Presence",
+			"id": "useActivityName",
+			"title": "Show Title as Activity",
 			"icon": "fad fa-user-edit",
 			"value": true
 		},
