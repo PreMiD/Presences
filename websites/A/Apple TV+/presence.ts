@@ -62,8 +62,10 @@ presence.on("UpdateData", async () => {
 				.find(x => x.startsWith("https://"));
 		}
 
-		[presenceData.startTimestamp, presenceData.endTimestamp] =
-			presence.getTimestampsfromMedia(video);
+		if (!video.paused) {
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestampsfromMedia(video);
+		}
 
 		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.buttons = [
