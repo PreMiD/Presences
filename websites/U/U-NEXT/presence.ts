@@ -218,7 +218,11 @@ presence.on("UpdateData", async () => {
 	//* Reset because no data can be fetched
 	clearMetadata();
 
-	const browsingLiveId = path.match(/lc=(\w+)/);
+	//* Match /livedetail/liv and get liv (When you load the page / reload while browsing)
+	const browsingLiveId =
+		path.match(/\/livedetail\/(\w+)/) ??
+		//* ?lc=lc when normally browsing and clicking on smth
+		path.match(/lc=(\w+)/);
 
 	if (browsingLiveId) {
 		if (privacyMode) return presence.clearActivity();
