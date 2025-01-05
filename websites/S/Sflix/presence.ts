@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
 					.querySelector(`img[title*="${showTitle}"]`)
 					?.getAttribute("src");
 
-			presenceData.details = privacy ? "Watching" : `${showTitle}`;
+			presenceData.name = privacy ? "Sflix" : `${showTitle}`;
 			presenceData.state = privacy
 				? ""
 				: document.querySelector(".on-air div h3")?.textContent ?? "";
