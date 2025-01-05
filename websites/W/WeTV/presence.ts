@@ -1,7 +1,7 @@
 const enum WeTvAssets {
-	Play = "https://i.imgur.com/aq7mtxW.png",
-	Pause = "https://i.imgur.com/bYqx0sQ.png",
-	Search = "https://i.imgur.com/G4iFoBS.png",
+	Play = "https://cdn.rcd.gg/PreMiD/websites/W/WeTV/assets/0.png",
+	Pause = "https://cdn.rcd.gg/PreMiD/websites/W/WeTV/assets/1.png",
+	Search = "https://cdn.rcd.gg/PreMiD/websites/W/WeTV/assets/2.png",
 }
 
 let parsedData: {
