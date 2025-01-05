@@ -202,7 +202,7 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey = `${userData.imgUri}/sp/assets/leader/raid_normal/${charaAlive.pid}.jpg`;
 				presenceData.largeImageText = `${charaAlive.name} | ${
 					charaAlive.hp
-				} [${(charaAlive.hp / charaAlive.hpmax).toFixed(2)}%]`;
+				} [${(charaAlive.hp * 100 / charaAlive.hpmax).toFixed(2)}%]`;
 			}
 		}
 	} else if (href.includes("/#party/index/0/npc/0"))
