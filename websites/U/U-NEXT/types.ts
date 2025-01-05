@@ -102,3 +102,65 @@ export type Root = {
 		__typename: string;
 	};
 };
+
+export type LiveRoot = {
+	webfrontGetLive: {
+		id: string;
+		name: string;
+		description: string;
+		attractions: string;
+		copyright: string;
+		note: string;
+		viewableDeviceText: string;
+		displayLiveMinute: number;
+		venue: string;
+		location: string;
+		deliveryStartDateTime: string;
+		deliveryEndDateTime: string;
+		displaySaleEndDateTime: unknown;
+		performanceStartDateTime: string;
+		isOnlyOn: boolean;
+		saleTypeCode: string;
+		allowsTimeshiftedPlayback: boolean;
+		timeshiftedPlaybackAllowedUntil: unknown;
+		paymentBadgeList: {
+			id: string;
+			name: string;
+			code: string;
+			__typename: string;
+		}[];
+		subContentList: {
+			typeCode: string;
+			publicStartDateTime: string;
+			publicEndDateTime: string;
+			__typename: string;
+		}[];
+		notices: {
+			id: string;
+			typeCode: string;
+			publicStartDateTime: string;
+			thumbnail: {
+				standard: string;
+				secondary: string;
+				__typename: string;
+			};
+			__typename: string;
+		}[];
+		tickets: unknown[];
+		purchased: boolean;
+		productLineupCodeList: string[];
+		hasPackRights: boolean;
+		testLiveId: string;
+		credits: {
+			personNameCode: string;
+			personName: string;
+			characterName: string;
+			castTypeName: string;
+			personCode: string;
+			__typename: string;
+		}[];
+		caution: string;
+		announcements: unknown[];
+		__typename: string;
+	};
+};

@@ -26,5 +26,9 @@
   "unext.movieDisplay": {
     "description": "Shown when watching a movie, example: 2024 • 120 minutes",
     "message": "{0} • {1} minutes"
+  },
+  "unext.liveDisplay": {
+    "description": "Shown when watching a livestream, example: 2024 • 120 minutes",
+    "message": "{0} • {1} minutes"
   }
 }
