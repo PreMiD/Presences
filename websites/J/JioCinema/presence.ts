@@ -14,10 +14,11 @@ presence.on("UpdateData", async () => {
 			startTimestamp,
 		},
 		url = window.location.href;
-	if (url.includes("/watch/")) {
-		const [video] = document.querySelectorAll("video");
-		presenceData.details =
-			document.querySelectorAll(".meta-data-title")[0].textContent;
+	if (url.includes("/movies") || url.includes("/tv-shows/")) {
+		presenceData.type = ActivityType.Watching;
+		const [video] = document.querySelectorAll("video"),
+		title =
+			document.querySelector('meta[property="og:title"]')?.getAttribute("content");
 		presenceData.largeImageKey =
 			"https://cdn.rcd.gg/PreMiD/websites/J/JioCinema/assets/logo.png";
 		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
@@ -29,15 +30,14 @@ presence.on("UpdateData", async () => {
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
 			);
-		if (url.includes("/tv/")) {
-			presenceData.state = (
-				document.querySelectorAll("div.now-playing") as NodeListOf<HTMLElement>
-			)[0].offsetParent
-				.querySelectorAll("span.jioTitle")[1]
-				.textContent.replace("| ", "");
-		} else if (url.includes("/movies/")) presenceData.state = "Movie";
-		else if (url.includes("/playlist/")) presenceData.state = "Music Video";
-		else presenceData.state = "Video";
+		if (url.includes("/watch")) {
+			presenceData.details = title.match(/^(.+?)\s*(\((\d{4})\))/)[1].trim();
+			presenceData.state = "Movie";
+		} else if (title) {
+			const tvshowtitle = title.match(/Watch\s+(.+?)\s+Season\s+(\d+)\s+Episode\s+(\d+)\s*:\s*(.+?)\s*-/);
+			presenceData.details = tvshowtitle[1].trim();
+			presenceData.state = `S${parseInt(tvshowtitle[2], 10)} E${parseInt(tvshowtitle[3], 10)} · ${tvshowtitle[4].trim()}`;
+        } else presenceData.state = "Video";
 
 		if (video.paused) {
 			delete presenceData.startTimestamp;
