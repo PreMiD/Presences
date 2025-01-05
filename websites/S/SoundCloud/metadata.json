@@ -82,6 +82,12 @@
 			"title": "Show Title as Presence",
 			"icon": "fad fa-user-edit",
 			"value": false
+		},
+		{
+			"id": "smallImage",
+			"title": "Show Small Icon",
+			"icon": "fas fa-circle-play",
+			"value": true
 		}
 	]
 }

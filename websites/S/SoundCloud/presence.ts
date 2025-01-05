@@ -120,6 +120,7 @@ presence.on("UpdateData", async () => {
 			showCover,
 			showButtons,
 			usePresenceName,
+			showSmallImage,
 			newLang,
 		] = await Promise.all([
 			presence.getSetting<boolean>("browse"),
@@ -129,6 +130,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("cover"),
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("usePresenceName"),
+			presence.getSetting<boolean>("smallImage"),
 			presence.getSetting<string>("lang").catch(() => "en"),
 		]),
 		playing = Boolean(document.querySelector(".playControls__play.playing"));
@@ -290,6 +292,8 @@ presence.on("UpdateData", async () => {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
+
+		if (!showSmallImage) delete presenceData.smallImageKey;
 
 		presence.setActivity(presenceData);
 	} else presence.setActivity();
