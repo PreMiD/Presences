@@ -282,6 +282,7 @@ const JELLYFIN_URL = "jellyfin.org",
 	// all the presence art assets uploaded to discord
 	presenceData: PresenceData = {
 		largeImageKey: Assets.logo,
+		startTimestamp: Math.floor(Date.now() / 1000),
 	};
 
 let ApiClient: ApiClient,
@@ -433,7 +434,8 @@ async function obtainMediaInfo(itemId: string): Promise<MediaInfo> {
 /**
  * Cache performed media searches
  */
-const searchMediaCache = new Map<string, MediaInfo[]>();
+const searchMediaCache = new Map<string, MediaInfo[]>(),
+	uploadedMediaCache = new Map<string, string>();
 
 /**
  * Search Movie and Series given a term
@@ -443,6 +445,9 @@ async function searchMedia(searchTerm: string): Promise<MediaInfo[]> {
 
 	if (/-[ ]S[0-9]+:E[0-9]+[ ]-/.test(searchTerm))
 		searchTerm = searchTerm.split(" - ").pop();
+
+	// The API does not like the year in the search term
+	searchTerm = searchTerm.replace(/\([0-9]{4}\)/, "").trim();
 
 	const res = await fetch(
 			`${jellyfinBasenameUrl()}Users/${getUserId()}/Items/?searchTerm=${searchTerm}` +
@@ -572,6 +577,7 @@ async function setPresenceByMediaId(mediaId: string): Promise<void> {
 
 	switch (mediaInfo.Type) {
 		case "Audio":
+			presenceData.type = ActivityType.Listening;
 			title = `Listening to ${mediaInfo.Name ?? "Unknown title"}`;
 			subtitle = `By ${mediaInfo.AlbumArtist ?? "Unknown artist"}`;
 			break;
@@ -594,6 +600,9 @@ async function setPresenceByMediaId(mediaId: string): Promise<void> {
 			title = `Watching ${mediaInfo.Type}`;
 			subtitle = mediaInfo.Name;
 	}
+
+	if (presenceData.type !== ActivityType.Listening)
+		presenceData.type = ActivityType.Watching;
 
 	if (await presence.getSetting("showThumbnails"))
 		presenceData.largeImageKey = mediaPrimaryImage(mediaInfo);
@@ -683,7 +692,7 @@ async function handleWebClient(): Promise<void> {
 	// obtain the path, on the example would return "login.html"
 	// https://media.domain.tld/web/index.html#!/login.html?serverid=randomserverid
 
-	const path = location.hash.split("?")[0].substring(3);
+	const path = location.hash.split("?")[0].substring(2);
 
 	if (path === "login.html") {
 		wasLogin = true;
@@ -799,15 +808,17 @@ async function setDefaultsToPresence(): Promise<void> {
 	if (isNaN(presenceData.endTimestamp as number))
 		delete presenceData.endTimestamp;
 
-	if (await presence.getSetting<boolean>("showTimestamps"))
-		presenceData.startTimestamp = Date.now();
+	if ((await presence.getSetting<boolean>("showTimestamps")) === false)
+		delete presenceData.startTimestamp;
 }
 
 /**
  * Initializes the ApiClient object
  */
 async function refreshApiClient(): Promise<void> {
-	ApiClient ??= await presence.getPageletiable<ApiClient>("ApiClient");
+	ApiClient ??= (
+		await presence.getPageVariable<Record<"ApiClient", ApiClient>>("ApiClient")
+	).ApiClient;
 }
 
 /**
@@ -846,20 +857,37 @@ async function updateData(): Promise<void> {
 		await handleWebClient();
 	}
 
-	// hide start timestamp on media playback
-	if (
-		presenceData.smallImageKey === Assets.Play ||
-		presenceData.smallImageKey === Assets.Pause
-	)
-		delete presenceData.startTimestamp;
-
 	// if jellyfin is detected init/update the presence status
 	if (showPresence) {
+		const largeImageKey = presenceData.largeImageKey as string;
+		if (isPrivateIP(largeImageKey)) {
+			if (uploadedMediaCache.has(largeImageKey))
+				presenceData.largeImageKey = uploadedMediaCache.get(largeImageKey);
+			else {
+				await fetch(largeImageKey)
+					.then(res => res.blob())
+					.then(blob => {
+						const reader = new FileReader();
+						reader.readAsDataURL(blob);
+						reader.onloadend = () => {
+							const result = reader.result as string;
+							uploadedMediaCache.set(largeImageKey, result);
+							presenceData.largeImageKey = result;
+						};
+					});
+			}
+		}
+
 		if (!presenceData.details) presence.setActivity();
 		else presence.setActivity(presenceData);
 	}
 }
 
+function isPrivateIP(ip: string): boolean {
+	return /^http:\/\/(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.|127\.0\.0\.1|localhost)/.test(
+		ip
+	);
+}
 /**
  * Check if the presence should be initialized, if so start doing the magic
  */

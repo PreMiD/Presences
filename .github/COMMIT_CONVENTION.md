@@ -72,7 +72,7 @@ Other prefixes are up to your discretion. Suggested prefixes are `chore`, `style
 
 ### Scope
 
-The scope could be anything specifying the place of the commit change, usually the name of a Presence. For example `YouTube`, `Netflix`, `SE` (syntax enforcer script), `Amazon Music` etc...
+The scope could be anything specifying the place of the commit change, usually the name of an Activity. For example `YouTube`, `Netflix`, `SE` (syntax enforcer script), `Amazon Music` etc...
 
 ### Subject
 

@@ -13,10 +13,27 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			details: "Browsing website",
 		},
-		{ pathname } = document.location;
+		{ pathname } = document.location,
+		showTitle = await presence.getSetting<boolean>("showTitle");
 	switch (true) {
 		case pathname.startsWith("/app"):
-			presenceData.details = "Asking questions";
+			// Check the selected conversation
+			if (showTitle) {
+				presenceData.details =
+					document.querySelector(
+						"div.conversation.selected>div.conversation-title"
+					).textContent ?? "Thinking of a new Prompt...";
+
+				// Show word count
+				const elem = document.querySelectorAll(
+					"p.query-text-line,div.response-optimization.markdown"
+				);
+				presenceData.state = `Asked ${
+					elem[0].textContent.split(" ").length
+				} words | answered with ${
+					elem[1].textContent.split(" ").length
+				} words.`;
+			} else presenceData.details = "Asking questions";
 			break;
 		case pathname.startsWith("/extensions"):
 			presenceData.details = "Managing extensions";

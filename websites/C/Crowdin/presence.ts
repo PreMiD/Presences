@@ -159,11 +159,11 @@ presence.on("UpdateData", async () => {
 				else {
 					if (showProject) {
 						presenceData.details =
-							document.querySelector(".project-name__title__text")
+							document.querySelector("a.side-menu__link--active > span")
 								?.textContent ??
 							document.querySelector<HTMLAnchorElement>(
-								"#wrap > div.section.project-page > div > div.clearfix.mb-2 > div > div:nth-child(2) > a"
-							).outerText;
+								"#back-end-header .application__header__breadcrumb a:nth-child(3)"
+							).textContent;
 						presenceData.buttons = [
 							{
 								label: "View project",
@@ -222,7 +222,7 @@ presence.on("UpdateData", async () => {
 						presenceData.state = "Viewing project home";
 					else if (
 						document.querySelector(
-							"#wrap > div.section.project-page > div > h1"
+							".language-container .breadcrumb-item > span"
 						)
 					) {
 						presenceData.state = `${await getLanguageName(
@@ -259,7 +259,11 @@ presence.on("UpdateData", async () => {
 						} else if (pathname.includes("/settings"))
 							presenceData.state = "Managing project settings";
 					}
-					if (!presenceData.details && presenceData.state) {
+					if (
+						!presenceData.details &&
+						presenceData.state &&
+						!(presenceData.state as string).split(" ").includes("translation")
+					) {
 						const stateSplit = (presenceData.state as string).split(" ");
 						if (!stateSplit.includes("project"))
 							stateSplit.splice(1, 0, "a project's");

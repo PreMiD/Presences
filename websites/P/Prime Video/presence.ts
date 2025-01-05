@@ -7,19 +7,6 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number): number[] {
-	const startTime = Date.now();
-	return [
-		Math.floor(startTime / 1000),
-		Math.floor(startTime / 1000) - videoTime + videoDuration,
-	];
-}
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		type: ActivityType.Watching,
@@ -67,14 +54,16 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = (await strings).paused;
 				delete presenceData.startTimestamp;
 			} else {
-				const [startTimestamp, endTimestamp] = getTimestamps(
-					Math.floor(video.currentTime),
-					Math.floor(video.duration)
-				);
-				[presenceData.startTimestamp, presenceData.endTimestamp] = [
-					startTimestamp,
-					endTimestamp,
-				];
+				const [unformattedCurrentTime, unformattedDuration] = document
+					.querySelector(".atvwebplayersdk-timeindicator-text")
+					.textContent.trim()
+					.split(" / ");
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(
+						presence.timestampFromFormat(unformattedCurrentTime),
+						presence.timestampFromFormat(unformattedDuration) +
+							presence.timestampFromFormat(unformattedCurrentTime)
+					);
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = (await strings).playing;
 			}
@@ -85,14 +74,16 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = (await strings).paused;
 				delete presenceData.startTimestamp;
 			} else {
-				const [startTimestamp, endTimestamp] = getTimestamps(
-					Math.floor(video.currentTime),
-					Math.floor(video.duration)
-				);
-				[presenceData.startTimestamp, presenceData.endTimestamp] = [
-					startTimestamp,
-					endTimestamp,
-				];
+				const [unformattedCurrentTime, unformattedDuration] = document
+					.querySelector(".atvwebplayersdk-timeindicator-text")
+					.textContent.trim()
+					.split(" / ");
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(
+						presence.timestampFromFormat(unformattedCurrentTime),
+						presence.timestampFromFormat(unformattedDuration) +
+							presence.timestampFromFormat(unformattedCurrentTime)
+					);
 				presenceData.smallImageKey = Assets.Play;
 				presenceData.smallImageText = (await strings).playing;
 			}
@@ -123,7 +114,6 @@ presence.on("UpdateData", async () => {
 			.split(/[”"]/);
 		presenceData.smallImageKey = Assets.Search;
 	}
-
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

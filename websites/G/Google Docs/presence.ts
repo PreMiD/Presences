@@ -8,18 +8,18 @@ let title: string;
 async function getStrings() {
 	return presence.getStrings(
 		{
-			editingDoc: "google docs.editingDoc",
-			viewingDoc: "google docs.viewingDoc",
-			browsingDoc: "google docs.browsingDoc",
-			editingForm: "google docs.editingForm",
-			viewingForm: "google docs.viewingForm",
-			browsingForm: "google docs.browsingForm",
-			editingSheet: "google docs.editingSheet",
-			viewingSheet: "google docs.viewingSheet",
-			browsingSheet: "google docs.browsingSheet",
-			editingPresentation: "google docs.editingPresentation",
-			browsingPresentation: "google docs.browsingPresentation",
-			vieiwngPresentation: "google docs.viewingPresentation",
+			editingDoc: "googledocs.editingDoc",
+			viewingDoc: "googledocs.viewingDoc",
+			browsingDoc: "googledocs.browsingDoc",
+			editingForm: "googledocs.editingForm",
+			viewingForm: "googledocs.viewingForm",
+			browsingForm: "googledocs.browsingForm",
+			editingSheet: "googledocs.editingSheet",
+			viewingSheet: "googledocs.viewingSheet",
+			browsingSheet: "googledocs.browsingSheet",
+			editingPresentation: "googledocs.editingPresentation",
+			browsingPresentation: "googledocs.browsingPresentation",
+			vieiwngPresentation: "googledocs.viewingPresentation",
 		},
 		await presence.getSetting<string>("lang").catch(() => "en")
 	);

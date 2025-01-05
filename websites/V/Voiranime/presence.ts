@@ -1,30 +1,43 @@
-const presence = new Presence({
-		clientId: "867411016836186112",
-	}),
-	pathArr = document.location.pathname.split("/"),
-	browsingTimestamp = Math.floor(Date.now() / 1000),
-	pages: Record<string, PresenceData> = {
-		"liste-danimes": {
-			details: "Visite la page :",
-			state: "Listes d'animes",
-		},
-		"nouveaux-ajouts": {
-			details: "Visite la page :",
-			state: "Nouveaux animes",
-		},
-		prochainement: {
-			details: "Visite la page :",
-			state: "Prochains animes",
-		},
-	};
-
 let video = {
 		duration: 0,
 		currentTime: 0,
 		paused: true,
 	},
-	currentLang: string,
-	strings: { [key: string]: string };
+	currentLang = "en",
+	strings: Awaited<ReturnType<typeof getStrings>>;
+
+const presence = new Presence({
+		clientId: "867411016836186112",
+	}),
+	getStrings = async () => {
+		return presence.getStrings(
+			{
+				play: "general.playing",
+				pause: "general.paused",
+				home: "general.viewHome",
+				viewEpisode: "general.buttonViewEpisode",
+				viewAnime: "general.buttonViewAnime",
+				watchingAnime: "general.watchingAnime",
+				browsing: "general.browsing",
+				viewPage: "general.viewPage",
+				searchFor: "general.searchFor",
+			},
+			currentLang
+		);
+	},
+	pathArr = document.location.pathname.split("/"),
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	pages: Record<string, PresenceData> = {
+		"liste-danimes": {
+			state: "Listes d'animes",
+		},
+		"nouveaux-ajouts": {
+			state: "Nouveaux animes",
+		},
+		prochainement: {
+			state: "Prochains animes",
+		},
+	};
 
 presence.on(
 	"iFrameData",
@@ -34,33 +47,29 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
+	const [newLang, privacyMode, showTimestamps, showButtons] = await Promise.all(
+		[
+			presence.getSetting<string>("lang").catch(() => "fr"),
+			presence.getSetting<boolean>("privacy"),
+			presence.getSetting<boolean>("timestamps"),
+			presence.getSetting<boolean>("buttons"),
+		]
+	);
+
+	if (currentLang !== newLang || !strings) {
+		currentLang = newLang;
+		strings = await getStrings();
+	}
+
 	let presenceData: PresenceData = {
-		details: "Page d'accueil",
+		details: strings.home,
+		type: ActivityType.Watching,
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/V/Voiranime/assets/logo.png",
 		startTimestamp: browsingTimestamp,
 	};
-	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
-	if (newLang !== currentLang) {
-		currentLang = newLang;
-		strings = await presence.getStrings(
-			{
-				browsing: "general.browsing",
-				watchingMovie: "general.watchingMovie",
-				watchingSeries: "general.watchingSeries",
-				buttonViewMovie: "general.buttonViewMovie",
-				buttonViewSeries: "general.buttonViewSeries",
-				buttonViewPage: "general.buttonViewPage",
-				viewPage: "general.viewPage",
-				playing: "general.playing",
-				searching: "general.search",
-				searchFor: "general.searchFor",
-				play: "general.playing",
-				pause: "general.paused",
-			},
-			newLang
-		);
-	}
+
+	if (privacyMode) presenceData.details = strings.browsing;
 	switch (pathArr[1]) {
 		case "anime": {
 			const title = document.querySelector("ol > li:nth-child(2) > a");
@@ -68,6 +77,10 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				"div.post-title > h1"
 			)?.textContent;
+			if (privacyMode) {
+				delete presenceData.state;
+				presenceData.details = strings.browsing;
+			}
 			if (
 				!isNaN(video.duration) &&
 				title &&
@@ -92,11 +105,11 @@ presence.on("UpdateData", async () => {
 					: strings.play;
 				presenceData.buttons = [
 					{
-						label: "Regarder l'épisode",
+						label: strings.viewEpisode,
 						url: document.location.href,
 					},
 					{
-						label: "Voir l'anime",
+						label: strings.viewAnime,
 						url: title.getAttribute("href"),
 					},
 				];
@@ -104,27 +117,50 @@ presence.on("UpdateData", async () => {
 					delete presenceData.startTimestamp;
 					delete presenceData.endTimestamp;
 				}
+				if (privacyMode) {
+					delete presenceData.buttons;
+					delete presenceData.smallImageKey;
+					delete presenceData.state;
+					delete presenceData.startTimestamp;
+					delete presenceData.endTimestamp;
+					presenceData.details = strings.watchingAnime;
+				}
 			}
 			break;
 		}
 		case "anime-genre":
-			presenceData.details = "Visite la page :";
+			presenceData.details = strings.viewPage;
 			presenceData.state = `Listes d'animes du genre "${
 				document.querySelector("h1")?.textContent
 			}"`;
+			if (privacyMode) {
+				delete presenceData.state;
+				presenceData.details = strings.browsing;
+			}
 			break;
 		default:
 			if (document.location.search.startsWith("?s")) {
-				presenceData.details = "Recherche un anime :";
+				presenceData.details = strings.searchFor;
 				presenceData.state = new URLSearchParams(document.location.search).get(
 					"s"
 				);
 				presenceData.smallImageKey = Assets.Search;
 			} else if (Object.keys(pages).includes(pathArr[1]))
-				presenceData = { ...presenceData, ...pages[pathArr[1]] };
+				presenceData.details = strings.viewPage;
+			presenceData = { ...presenceData, ...pages[pathArr[1]] };
+			if (privacyMode) {
+				delete presenceData.state;
+				delete presenceData.smallImageKey;
+				presenceData.details = strings.browsing;
+			}
 			break;
 	}
 
+	if (!showButtons || privacyMode) delete presenceData.buttons;
+	if (!showTimestamps) {
+		delete presenceData.startTimestamp;
+		delete presenceData.endTimestamp;
+	}
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

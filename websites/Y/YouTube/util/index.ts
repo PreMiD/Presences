@@ -2,12 +2,6 @@ export const presence = new Presence({
 	clientId: "463097721130188830",
 });
 
-let cachedTime = 0;
-export function adjustTimeError(time: number, acceptableError: number): number {
-	if (Math.abs(time - cachedTime) > acceptableError) cachedTime = time;
-	return cachedTime;
-}
-
 export function truncateAfter(str: string, pattern: string): string {
 	return str.slice(0, str.indexOf(pattern));
 }
@@ -69,7 +63,6 @@ const stringMap = {
 	watchStreamButton: "general.buttonWatchStream",
 	watchVideoButton: "general.buttonWatchVideo",
 	viewChannelButton: "general.buttonViewChannel",
-	videos: "youtube.videos",
 	perVideoPrivacyToolTip1: "youtube.perVideoPrivacy.tooltip.1",
 	perVideoPrivacyToolTip2: "youtube.perVideoPrivacy.tooltip.2",
 };

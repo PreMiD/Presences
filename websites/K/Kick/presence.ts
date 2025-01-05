@@ -7,6 +7,7 @@ const enum Assets {
 
 presence.on("UpdateData", async () => {
 	const { pathname, hostname, href } = document.location,
+		videoEl = document.querySelector<HTMLVideoElement>("video"),
 		pathArr = pathname.split("/"),
 		{ details, smallImageKey, largeImageKey, state, buttons } = getPageData(
 			pathArr[1],
@@ -24,6 +25,17 @@ presence.on("UpdateData", async () => {
 	if (smallImageKey) presenceData.smallImageKey = smallImageKey;
 	if (state) presenceData.state = state;
 
+	if (videoEl?.duration && presenceData.smallImageKey !== Assets.Viewing) {
+		presenceData.smallImageKey = videoEl?.paused ? Assets.Pause : Assets.Play;
+		presenceData.smallImageText = videoEl?.paused ? "Paused" : "Playing";
+		if (!videoEl?.paused) {
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestampsfromMedia(
+					document.querySelector<HTMLVideoElement>("video")
+				);
+		}
+	}
+
 	if (!(await presence.getSetting<boolean>("details"))) {
 		presenceData.details = "Browsing Kick...";
 		delete presenceData.state;
@@ -34,6 +46,13 @@ presence.on("UpdateData", async () => {
 
 	if (await presence.getSetting<boolean>("logo"))
 		presenceData.largeImageKey = Assets.Logo;
+
+	if (
+		presenceData.smallImageKey === Assets.Play ||
+		presenceData.smallImageKey === Assets.Pause ||
+		presenceData.smallImageKey === Assets.Viewing
+	)
+		presenceData.type = ActivityType.Watching;
 
 	if (details) presence.setActivity(presenceData);
 });
@@ -131,14 +150,16 @@ function getPageData(
 						details: `Reading ${formatText(page)}...`,
 						smallImageKey: Assets.Reading,
 					};
-				default:
+				default: {
 					// watching/viewing a stream
-					if (document.querySelector(".stream-username")) {
+					const streamer = document.querySelector(
+							".stream-username,#channel-username"
+						)?.textContent,
+						titleEl = document.querySelector("title")?.textContent;
+					if (streamer && titleEl.includes("Live")) {
 						let smallImageKey = "",
 							state = "",
 							buttons: [ButtonData, ButtonData?];
-						const streamer =
-							document.querySelector(".stream-username").textContent;
 						if (document.querySelector(".odometer-value")) {
 							state = `Watching: ${streamer}`;
 							smallImageKey = Assets.Live;
@@ -159,7 +180,11 @@ function getPageData(
 							];
 						}
 						return {
-							details: document.querySelector(".stream-title").textContent,
+							details:
+								JSON.parse(
+									document.querySelectorAll('[type="application/ld+json"]')?.[1]
+										?.textContent
+								)?.broadcastOfEvent?.name ?? "Unknown title",
 							state,
 							largeImageKey:
 								document.querySelector<HTMLImageElement>(".owner-avatar img")
@@ -167,25 +192,44 @@ function getPageData(
 							smallImageKey,
 							buttons,
 						};
+					} else if (streamer && titleEl?.includes("VOD")) {
+						return {
+							details: document.querySelector<HTMLMetaElement>(
+								'meta[name="description"]'
+							)?.content,
+							state: document.querySelector("#channel-username")?.textContent,
+							largeImageKey:
+								document.querySelector<HTMLImageElement>(".owner-avatar img")
+									?.src,
+							smallImageKey: "",
+							buttons: [
+								{
+									label: "Watch Stream VOD",
+									url,
+								},
+							],
+						};
 					} else {
 						return {
 							details: "Browsing Kick...",
 						};
 					}
+				}
 			}
 		}
 		case "help.kick.com": {
+			const topic = document.querySelector("header.text-2xl")?.textContent;
 			switch (pageDetail) {
 				case "collections": {
 					return {
-						details: document.querySelector("header.text-2xl").textContent,
+						details: topic ?? "Unknown title",
 						state: "Searching resource category...",
 						smallImageKey: Assets.Search,
 					};
 				}
 				case "articles": {
 					return {
-						details: document.querySelector("header.text-2xl").textContent,
+						details: topic ?? "Unknown title",
 						state: "Reading article...",
 						smallImageKey: Assets.Reading,
 					};

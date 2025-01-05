@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"$schema": "https://schemas.premid.app/metadata/1.12",
 	"apiVersion": 1,
 	"author": {
 		"name": "Bas950",
@@ -12,7 +12,7 @@
 	},
 	"url": "namemc.com",
 	"regExp": "([a-z0-9-]+[.])*namemc[.]com[/]",
-	"version": "2.0.22",
+	"version": "2.0.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/N/NameMC/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/NameMC/assets/thumbnail.png",
 	"color": "#000000",

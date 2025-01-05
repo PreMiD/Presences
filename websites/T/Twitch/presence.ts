@@ -311,11 +311,14 @@ presence.on("UpdateData", async () => {
 				if (user) {
 					const tab = getElement('a[aria-selected="true"] > div > div > p'),
 						profilePic =
-							document
-								.querySelector<HTMLImageElement>(
+							(
+								document.querySelector<HTMLImageElement>(
 									".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
-								)
-								?.src?.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600") ??
+								) ??
+								document
+									.querySelector(".channel-root__info")
+									.querySelector<HTMLImageElement>('img[class*="image-avatar"]')
+							)?.src?.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600") ??
 							(logoArr[logo] || Assets.Logo);
 					user += tab ? ` (${tab})` : "";
 

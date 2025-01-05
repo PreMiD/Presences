@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 				?.href.match(/v=([^&#]{5,})/)?.[1],
 		repeatMode = document
 			.querySelector('ytmusic-player-bar[slot="player-bar"]')
-			.getAttribute("repeat-Mode_"),
+			?.getAttribute("repeat-Mode_"),
 		videoElement =
 			document.querySelector<HTMLVideoElement>("video.video-stream");
 
@@ -67,10 +67,10 @@ presence.on("UpdateData", async () => {
 
 	presenceData = null;
 
-	if (hidePaused && mediaSession.playbackState !== "playing")
+	if (hidePaused && mediaSession?.playbackState !== "playing")
 		return presence.clearActivity();
 
-	if (["playing", "paused"].includes(mediaSession.playbackState)) {
+	if (["playing", "paused"].includes(mediaSession?.playbackState)) {
 		if (privacyMode) {
 			presenceData.type = ActivityType.Listening;
 			return presence.setActivity({
@@ -82,7 +82,8 @@ presence.on("UpdateData", async () => {
 			});
 		}
 
-		if (!mediaSession.metadata?.title || isNaN(videoElement.duration)) return;
+		if (!mediaSession?.metadata?.title || isNaN(videoElement?.duration ?? NaN))
+			return;
 
 		if (
 			prevTitleAuthor !==
@@ -90,7 +91,7 @@ presence.on("UpdateData", async () => {
 				mediaSession.metadata.artist +
 				document
 					.querySelector<HTMLSpanElement>("#left-controls > span")
-					.textContent.trim()
+					?.textContent?.trim()
 		) {
 			updateSongTimestamps(useTimeLeft);
 
@@ -101,11 +102,11 @@ presence.on("UpdateData", async () => {
 				mediaSession.metadata.artist +
 				document
 					.querySelector<HTMLSpanElement>("#left-controls > span")
-					.textContent.trim();
+					?.textContent?.trim();
 		}
 
-		const albumArtistBtnLink = mediaSession.metadata.album
-				? [...document.querySelectorAll<HTMLAnchorElement>(".byline a")].at(-1)
+		const albumArtistBtnLink = mediaSession?.metadata?.album
+				? [...document.querySelectorAll<HTMLAnchorElement>(".byline a")]?.at(-1)
 						?.href
 				: document.querySelector<HTMLAnchorElement>(".byline a")?.href,
 			buttons: [ButtonData, ButtonData?] = [
@@ -124,7 +125,8 @@ presence.on("UpdateData", async () => {
 
 		presenceData = {
 			largeImageKey: showCover
-				? mediaSession.metadata.artwork.at(-1).src
+				? mediaSession?.metadata?.artwork?.at(-1)?.src ??
+				  "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/1.png"
 				: "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/1.png",
 			details: mediaSession.metadata.title,
 			state: [mediaSession.metadata.artist, mediaSession.metadata.album]
@@ -185,7 +187,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing Library";
 			presenceData.state = document.querySelector(
 				"#tabs .iron-selected .tab"
-			).textContent;
+			)?.textContent;
 		}
 
 		if (pathname.match(/^\/playlist/)) {
@@ -194,7 +196,7 @@ presence.on("UpdateData", async () => {
 			if (search === "?list=LM") presenceData.state = "Liked Music";
 			else {
 				presenceData.state =
-					document.querySelector(".metadata .title").textContent;
+					document.querySelector(".metadata .title")?.textContent;
 
 				presenceData.buttons = [
 					{
@@ -205,7 +207,7 @@ presence.on("UpdateData", async () => {
 			}
 
 			presenceData.largeImageKey =
-				document.querySelector<HTMLImageElement>("#thumbnail img").src;
+				document.querySelector<HTMLImageElement>("#thumbnail img")?.src;
 			presenceData.smallImageKey =
 				"https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/0.png";
 		}
@@ -214,7 +216,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Searching";
 			presenceData.state = document.querySelector<HTMLInputElement>(
 				".search-container input"
-			).value;
+			)?.value;
 
 			presenceData.buttons = [
 				{
@@ -226,7 +228,8 @@ presence.on("UpdateData", async () => {
 
 		if (pathname.match(/^\/channel/)) {
 			presenceData.details = "Browsing Channel";
-			presenceData.state = document.querySelector("#header .title").textContent;
+			presenceData.state =
+				document.querySelector("#header .title")?.textContent;
 
 			presenceData.buttons = [
 				{
@@ -270,28 +273,26 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (!showBrowsing) return presence.clearActivity();
-
 	presenceData.type = ActivityType.Listening;
 	presence.setActivity(presenceData);
 });
 
 function updateSongTimestamps(useTimeLeft: boolean) {
-	const element = document
+	const [currTimes, totalTimes] =
+		document
 			.querySelector<HTMLSpanElement>("#left-controls > span")
-			.textContent.trim()
-			.split(" / "),
-		[currTimes, totalTimes] = element;
+			?.textContent?.trim()
+			?.split(" / ") ?? [];
 
-	if (useTimeLeft) {
+	if (useTimeLeft && currTimes && totalTimes) {
 		mediaTimestamps = presence.getTimestamps(
 			presence.timestampFromFormat(currTimes),
 			presence.timestampFromFormat(totalTimes)
 		);
-	} else {
+	} else if (currTimes) {
 		mediaTimestamps = [
 			Date.now() / 1000 - presence.timestampFromFormat(currTimes),
-			null,
+			0,
 		];
 	}
 }

@@ -22,9 +22,9 @@ presence.on("UpdateData", () => {
 			details: "Idle",
 			state: "Browsing Proxer.me",
 		},
-		path = document.location.pathname;
+		{ pathname } = document.location;
 
-	if (path.startsWith("/watch")) {
+	if (pathname.startsWith("/watch")) {
 		const ep = getByXpath(
 				"//*[@id='wContainer']//*[@class='wEp']",
 				e => e.textContent
@@ -38,6 +38,7 @@ presence.on("UpdateData", () => {
 			);
 
 		if (videoData) {
+			presenceData.type = ActivityType.Watching;
 			if (!videoData.paused) {
 				presenceData.details = "Watching";
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
@@ -69,26 +70,27 @@ presence.on("UpdateData", () => {
 		}
 		/*
     // For the future to make watch together requests
-    const id = /(?:\/watch\/)([0-9]*)\/([0-9]*)\/([a-z]*)/.exec(path);
+    const id = /(?:\/watch\/)([0-9]*)\/([0-9]*)\/([a-z]*)/.exec(pathname);
     if (id.length == 3) {
       const animeId = id[0],
        epId = id[1],
        langId = id[2];
     }
     */
-	} else if (path.startsWith("/info")) {
+	} else if (pathname.startsWith("/info")) {
 		presenceData.details = `Checking out ${document.title.replace(
 			/ - Proxer\.Me$/,
 			""
 		)}`;
-	} else if (path.startsWith("/anime") || path.startsWith("/season"))
+	} else if (pathname.startsWith("/anime") || pathname.startsWith("/season"))
 		presenceData.details = "Checking out Anime";
-	else if (path.startsWith("/chat")) presenceData.details = "Chatting";
-	else if (path.startsWith("/forum"))
+	else if (pathname.startsWith("/chat")) presenceData.details = "Chatting";
+	else if (pathname.startsWith("/forum"))
 		presenceData.details = "Checking the forum";
-	else if (path.startsWith("/gallery"))
+	else if (pathname.startsWith("/gallery"))
 		presenceData.details = "Checking the gallery";
-	else if (path.startsWith("/news")) presenceData.details = "Checking the news";
+	else if (pathname.startsWith("/news"))
+		presenceData.details = "Checking the news";
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

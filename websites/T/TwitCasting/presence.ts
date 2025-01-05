@@ -18,12 +18,12 @@ const presence = new Presence({
 				watchingLive: "general.watchingLive",
 				watchingVid: "general.watchingVid",
 				viewCategory: "general.viewCategory",
-				viewTheir: "twitch.viewTheir",
-				followList: "twitch.followList",
-				dashboardManage: "twitch.dashboardManage",
-				subs: "twitch.subs",
-				browsingVideos: "youtube.browsingVideos",
-				ofChannel: "youtube.ofChannel",
+				viewTheir: "twitcasting.viewTheir",
+				followList: "twitcasting.followList",
+				dashboardManage: "twitcasting.dashboardManage",
+				subs: "twitcasting.subs",
+				browsingVideos: "twitcasting.browsingVideos",
+				ofChannel: "twitcasting.ofChannel",
 				searchFor: "general.searchFor",
 				searchSomething: "general.searchSomething",
 				search: "general.search",
@@ -178,6 +178,22 @@ presence.on("UpdateData", async () => {
 	else if (pathname.includes("/mybacks")) {
 		presenceData.details = strings.viewTheir;
 		presenceData.state = strings.followList;
+	} else if (document.querySelector("video[src]")) {
+		presenceData.details = strings.watchingLive;
+		presenceData.state = `${document
+			.querySelector(".tw-player-page-title-title h2")
+			.textContent.trim()} - ${
+			document.querySelector("span.tw-live-author__info-username-inner")
+				.textContent
+		}`;
+		presenceData.type = ActivityType.Watching;
+	} else if (document.querySelector(".tw-user-nav2")) {
+		presenceData.details = strings.viewProfile;
+		presenceData.state = `${document
+			.querySelector(".tw-user-nav2-name")
+			.textContent.trim()} (${document
+			.querySelector(".tw-user-nav2-screen-id")
+			.textContent.trim()})`;
 	}
 	if (!showTimestamps) {
 		delete presenceData.startTimestamp;
