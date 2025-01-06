@@ -1,14 +1,16 @@
 import { CinebyApi, MovieDetails, TvDetails } from "./api";
 
 const presence = new Presence({
-	clientId: "1325115346696273993",
-});
+		clientId: "1325115346696273993",
+	}),
+	startTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: "https://i.imgur.com/zAKeytL.png",
 			details: "Browsing",
 			type: ActivityType.Watching,
+			startTimestamp,
 		},
 		{ pathname } = document.location,
 		[showBrowsing, useActivityName, showCover] = await Promise.all([
@@ -80,9 +82,11 @@ presence.on("UpdateData", async () => {
 	}
 
 	const video = document.querySelector("video");
-	if (video && !video.paused) {
-		[presenceData.startTimestamp, presenceData.endTimestamp] =
-			presence.getTimestampsfromMedia(video);
+	if (video) {
+		if (!video.paused) {
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestampsfromMedia(video);
+		} else presenceData.smallImageKey = Assets.Pause;
 	}
 
 	presence.setActivity(presenceData);
