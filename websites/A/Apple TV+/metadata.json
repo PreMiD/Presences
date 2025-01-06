@@ -35,12 +35,6 @@
 			"value": true
 		},
 		{
-			"id": "showSmallImage",
-			"title": "Show Small Image",
-			"icon": "fas fa-image",
-			"value": false
-		},
-		{
 			"id": "showCover",
 			"title": "Show Cover",
 			"icon": "fas fa-images",

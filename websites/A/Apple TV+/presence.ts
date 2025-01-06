@@ -12,13 +12,11 @@ presence.on("UpdateData", async () => {
 			smallImageKey: Assets.Search,
 			startTimestamp,
 		},
-		[showButton, showSmallImage, showCover, useActivityName] =
-			await Promise.all([
-				presence.getSetting<boolean>("showButton"),
-				presence.getSetting<boolean>("showSmallImage"),
-				presence.getSetting<boolean>("showCover"),
-				presence.getSetting<boolean>("useActivityName"),
-			]),
+		[showButton, showCover, useActivityName] = await Promise.all([
+			presence.getSetting<boolean>("showButton"),
+			presence.getSetting<boolean>("showCover"),
+			presence.getSetting<boolean>("useActivityName"),
+		]),
 		video = document.querySelector("video");
 
 	if (
@@ -65,9 +63,8 @@ presence.on("UpdateData", async () => {
 		if (!video.paused) {
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestampsfromMedia(video);
-		}
+		} else presenceData.smallImageKey = Assets.Pause;
 
-		presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
 		presenceData.buttons = [
 			{
 				label: `Watch ${subtitle ? "Episode" : "Show"}`,
@@ -76,7 +73,6 @@ presence.on("UpdateData", async () => {
 		];
 	}
 
-	if (!showSmallImage) delete presenceData.smallImageKey;
 	if (!showButton) delete presenceData.buttons;
 
 	presence.setActivity(presenceData);
