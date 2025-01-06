@@ -13,7 +13,7 @@
 		"sflix2.to",
 		"enorme.tv"
 	],
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://imgur.com/u3xBsLk.png",
 	"thumbnail": "https://img.sflix.to/xxrz/1300x700/100/8e/5a/8e5afb7b78cfcb3c3667504fd5830a0f/8e5afb7b78cfcb3c3667504fd5830a0f.jpeg",
 	"color": "#03abb8",
@@ -25,6 +25,8 @@
 		"movies",
 		"shows"
 	],
+	"iframe": true,
+	"iFrameRegExp": "megacloud[.]tube[/]embed-1[/]e-1[/]",
 	"settings": [
 		{
 			"id": "thumbnail",
@@ -38,7 +40,5 @@
 			"icon": "fad fa-user-secret",
 			"value": false
 		}
-	],
-	"iframe": true,
-	"iFrameRegExp": "megacloud[.]tube[/]embed-1[/]e-1[/]"
+	]
 }
