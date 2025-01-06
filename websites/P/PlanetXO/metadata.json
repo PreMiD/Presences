@@ -11,13 +11,11 @@
 	},
 	"url": [
 		"planetxo.uk",
-		"blastradio.uk",
-		"xoradio.uk",
 		"panel.planetxo.uk",
 		"api.planetxo.uk",
 		"staff.planetxo.uk"
 	],
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/PlanetXO/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PlanetXO/assets/thumbnail.jpg",
 	"color": "#8c52ff",
