@@ -70,6 +70,14 @@ interface GameStatus {
 			pid: string;
 		}[];
 	};
+	dungeonInfo: {
+		name: string;
+		floorNo: number;
+		stageId: number;
+	};
+	areaInfo: {
+		name: string;
+	};
 }
 interface UserData {
 	baseUri: string;
@@ -92,13 +100,19 @@ script.appendChild(
 				turn: window.stage?.gGameStatus.turn,
 				battle: window.stage?.pJsnData.battle,
 				boss: window.stage?.gGameStatus.boss,
-				player: window.stage?.pJsnData.player
+				player: window.stage?.pJsnData.player,
+				dungeonInfo: {
+					name: window.Game?.view?.dungeonInfo?.name,
+					floorNo: window.Game?.view?.stageInfo?.serial_floor_no,
+					stageId: window.Game?.view?.stageInfo?.stage_id,
+				},
+				areaInfo: window.Game?.view?.areaInfo,
 			});
 			const userData = JSON.stringify({
 				rank: window.Game?.userRank,
 				id: window.Game?.userId,
 				baseUri: window.Game?.baseUri,
-				imgUri: window.Game?.imgUri
+				imgUri: window.Game?.imgUri,
 			});
 			const pmdEvent = new CustomEvent("${eventId}", {
 				detail: {
@@ -175,7 +189,7 @@ presence.on("UpdateData", async () => {
 		} else {
 			presenceData.details =
 				document.querySelectorAll(".name")[0]?.textContent ||
-				"Starting raid...";
+				"Starting battle...";
 		}
 
 		if (health === 0) {
@@ -213,7 +227,7 @@ presence.on("UpdateData", async () => {
 		else if (href.includes("weapon")) presenceData.state = "Weapons";
 		else if (href.includes("summon")) presenceData.state = "Summons";
 	} else if (href.includes("/#evolution")) {
-		presenceData.details = "Uncapping :";
+		presenceData.details = "Uncapping:";
 
 		if (href.includes("npc")) presenceData.state = "Characters";
 		else if (href.includes("weapon")) presenceData.state = "Weapons";
@@ -254,18 +268,27 @@ presence.on("UpdateData", async () => {
 		presenceData.state = "Main menu";
 
 		if (href.includes("exchange/points")) presenceData.state = "Pendants shop";
+		else if (href.includes("exchange/fp")) presenceData.state = "Trading FP";
+		else if (href.includes("exchange/login_point"))
+			presenceData.state = "Trading Daily Points";
+		else if (href.includes("exchange/special_ticket"))
+			presenceData.state = "Redeeming Siero's Special Pick Ticket";
 		else if (href.includes("exchange/moon"))
 			presenceData.state = "Trading moons";
 		else if (href.includes("exchange/trajectory"))
 			presenceData.state = "Journey drops";
 		else if (href.includes("exchange/ceiling"))
 			presenceData.state = "Trading ceruleans stones";
+		else if (href.includes("exchange/job_equipment"))
+			presenceData.state = "Crafting Class-specific equipments";
 		else if (href.includes("skin/top")) presenceData.state = "Outfit shop";
 		else if (href.includes("skycompass/points"))
 			presenceData.state = "SkyCompass points exchange";
 		else if (href.includes("lupi/0")) presenceData.state = "Crystal shop";
 		else if (href.includes("exchange/list"))
 			presenceData.state = "Treasure trading";
+		else if (href.includes("passport"))
+			presenceData.state = "View Premium Pass";
 	} else if (href.includes("/#archaic")) {
 		presenceData.details = "Shop:";
 		presenceData.state = "Weapons Crafting";
@@ -285,9 +308,20 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Restoring Draconic weapons";
 		else if (href.includes("revans"))
 			presenceData.state = "Rebuilding Revans weapons";
-	} else if (href.includes("#arcarum2/enhancement")) {
-		presenceData.details = " Shop:";
-		presenceData.state = "Crafting Arcarum summons";
+	} else if (href.includes("#arcarum2")) {
+		presenceData.details = "In Arcarum: The World Beyond";
+		if (href.includes("enhancement")) {
+			presenceData.details = " Shop:";
+			presenceData.state = "Crafting Arcarum summons";
+		} else if (href.includes("stage") && gameStatus?.dungeonInfo)
+			presenceData.state = `${gameStatus.dungeonInfo.name} ${gameStatus.dungeonInfo.floorNo}-${gameStatus.dungeonInfo.stageId}`;
+		else if (href.includes("supporter"))
+			presenceData.state = "Starting a battle";
+		else if (href.includes("skip"))
+			presenceData.state = "Undergoing a Fast Expedition";
+	} else if (href.includes("/#replicard")) {
+		presenceData.details = "In Replicard Sandbox";
+		if (gameStatus?.areaInfo) presenceData.state = gameStatus.areaInfo.name;
 	} else if (href.includes("/#item")) presenceData.details = "Viewing supplies";
 	else if (href.includes("/#present")) presenceData.details = "Viewing Crate";
 	else if (href.includes("/#list")) presenceData.details = "Viewing inventory";
@@ -320,6 +354,8 @@ presence.on("UpdateData", async () => {
 	else if (href.includes("/#news")) presenceData.details = "Viewing the news";
 	else if (href.includes("/#comic"))
 		presenceData.details = "Reading Grand Blues";
+	else if (href.includes("#frontier/alchemy"))
+		presenceData.details = "In Alchemy Lab";
 
 	if (userData) {
 		if (profile && presenceData.largeImageText === "Granblue Fantasy")
