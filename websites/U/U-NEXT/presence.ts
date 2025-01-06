@@ -26,10 +26,10 @@ const presence = new Presence({
 				watchEpisode: "general.buttonViewEpisode",
 				watchMovie: "general.buttonWatchMovie",
 				watchStream: "general.buttonWatchStream",
-				seriesDisplayFull: "unext.seriesDisplay.full",
-				seriesDisplayShort: "unext.seriesDisplay.short",
-				movieDisplay: "unext.movieDisplay",
-				liveDisplay: "unext.liveDisplay",
+				seriesDisplayFull: "u-next.seriesDisplay.full",
+				seriesDisplayShort: "u-next.seriesDisplay.short",
+				movieDisplay: "u-next.movieDisplay",
+				liveDisplay: "u-next.liveDisplay",
 			},
 			await presence.getSetting<string>("lang").catch(() => "en")
 		);
