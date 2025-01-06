@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 			type: ActivityType.Watching,
 			name: "Desu-Online",
 		},
-		{ pathname, search } = document.location,
+		{ pathname, search, href } = document.location,
 		[privacy, buttons] = [
 			await presence.getSetting<boolean>("privacy"),
 			await presence.getSetting<boolean>("buttons"),
@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 					presenceData.buttons = [
 						{
 							label: "Odwiedź",
-							url: document.URL,
+							url: href,
 						},
 					];
 				}
@@ -95,7 +95,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = document
 						.querySelectorAll("h1")[0]
 						.textContent.replace("\n", "");
-					presenceData.buttons = [{ label: "Czytaj", url: document.URL }];
+					presenceData.buttons = [{ label: "Czytaj", url: href }];
 				}
 				break;
 			case pathname.startsWith("/season/") ? pathname : null:
