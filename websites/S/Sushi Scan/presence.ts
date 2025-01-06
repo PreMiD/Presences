@@ -4,10 +4,10 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	SushiLogo = "https://cdn.discordapp.com/app-assets/1324071536017149973/1324137722079875112.png?size=512",
-	SushiBrowsing = "https://cdn.discordapp.com/app-assets/1324071536017149973/1324141175866916864.png?size=512",
-	SushiReading = "https://cdn.discordapp.com/app-assets/1324071536017149973/1324141174742581248.png?size=512",
-	SushiSelecting = "https://cdn.discordapp.com/app-assets/1324071536017149973/1324141175808196731.png?size=512",
+	SushiLogo = "https://cdn.rcd.gg/PreMiD/websites/S/Sushi%20Scan/assets/0.png",
+	SushiBrowsing = "https://cdn.rcd.gg/PreMiD/websites/S/Sushi%20Scan/assets/1.png",
+	SushiReading = "https://cdn.rcd.gg/PreMiD/websites/S/Sushi%20Scan/assets/2.png",
+	SushiSelecting = "https://cdn.rcd.gg/PreMiD/websites/S/Sushi%20Scan/assets/3.png",
 }
 
 class Comic {
