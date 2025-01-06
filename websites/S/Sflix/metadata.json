@@ -40,5 +40,5 @@
 		}
 	],
 	"iframe": true,
-	"iFrameRegExp": "https://megacloud.tube/embed-1/e-1/"
+	"iFrameRegExp": "megacloud[.]tube[/]embed-1[/]e-1[/]"
 }
