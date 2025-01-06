@@ -4,7 +4,6 @@ const presence = new Presence({
 	getStrings = async () => {
 		return presence.getStrings(
 			{
-				play: "general.playing",
 				pause: "general.paused",
 				browse: "general.browsing",
 				search: "general.searchSomething",
@@ -191,8 +190,13 @@ presence.on("UpdateData", async () => {
 				)
 				?.getAttribute("href");
 
-		[presenceData.startTimestamp, presenceData.endTimestamp] =
-			presence.getTimestamps(currentTime, duration);
+		if (playing) {
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(currentTime, duration);
+		} else {
+			presenceData.smallImageKey = Assets.Pause;
+			presenceData.smallImageText = strings.pause;
+		}
 
 		if (showCover) {
 			presenceData.largeImageKey =
@@ -203,8 +207,6 @@ presence.on("UpdateData", async () => {
 					.style.backgroundImage.match(/"(.*)"/)?.[1]
 					.replace("-t50x50.jpg", "-t500x500.jpg") ?? "soundcloud";
 		}
-		presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
-		presenceData.smallImageText = strings[playing ? "play" : "pause"];
 
 		if (showButtons && pathLinkSong) {
 			presenceData.buttons = [
