@@ -5,6 +5,7 @@ on:
       - main
 jobs:
   push-to-crowdin:
+    if: github.repository_owner == 'PreMiD'
     name: Push to Crowdin
     runs-on: ubuntu-latest
     steps:
