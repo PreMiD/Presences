@@ -132,7 +132,6 @@ presence.on("UpdateData", async () => {
 					presenceData.state = document
 						.querySelector(".article-title")
 						?.textContent?.trim();
-					presenceData.buttons = [{ label: "View Page", url: href }];
 					break;
 				}
 			}
