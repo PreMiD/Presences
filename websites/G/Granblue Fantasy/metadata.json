@@ -22,7 +22,7 @@
 		"vi_VN": "Trò chơi đóng vai Nhật Bản"
 	},
 	"url": "game.granbluefantasy.jp",
-	"version": "1.4.13",
+	"version": "1.5.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/thumbnail.jpg",
 	"color": "#2F4F7A",
@@ -44,9 +44,27 @@
 			]
 		},
 		{
+			"id": "turn",
+			"title": "Show turn counter",
+			"icon": "fad fa-redo",
+			"value": false
+		},
+		{
 			"id": "djeeta",
-			"title": "Show main charater",
-			"icon": "fas fa-user",
+			"title": "Show MC portrait/element",
+			"icon": "fas fa-image",
+			"value": false
+		},
+		{
+			"id": "profile",
+			"title": "Show profile detaiils",
+			"icon": "fad fa-user",
+			"value": false
+		},
+		{
+			"id": "button",
+			"title": "Show profile button",
+			"icon": "fad fa-link",
 			"value": false
 		}
 	]
