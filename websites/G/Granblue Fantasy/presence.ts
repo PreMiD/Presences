@@ -1,9 +1,7 @@
 const presence = new Presence({
 		clientId: "632983924414349333",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000),
-	script = document.createElement("script"),
-	eventId = "PreMiD_GranBlueFantasy";
+	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 enum Elements {
 	Plain,
@@ -66,81 +64,36 @@ interface GameStatus {
 	};
 	dungeonInfo: {
 		name: string;
-		floorNo: number;
-		stageId: number;
+	};
+	stageInfo: {
+		serial_floor_no: number;
+		stage_id: number;
 	};
 	areaInfo: {
 		name: string;
 	};
+	[key: string]: unknown;
 }
 interface UserData {
 	baseUri: string;
 	imgUri: string;
-	rank: number;
-	id: number;
+	userRank: number;
+	userId: number;
+	[key: string]: unknown;
 }
 
-let gameStatus: GameStatus, userData: UserData;
+function simplifyKey<T>(obj: T): T {
+	// stage.gGameStatus.boss => boss
+	const kv = Object.entries(obj as Record<string, unknown>);
+	for (const [key, value] of kv) {
+		const i = key.lastIndexOf(".");
+		if (i === -1) continue;
+		(obj as Record<string, unknown>)[key.slice(i + 1)] = value;
+		delete (obj as Record<string, unknown>)[key];
+	}
 
-script.id = eventId;
-script.appendChild(
-	document.createTextNode(`
-  	let isRunning = false;
-  	setInterval(() => {
-		if (isRunning) return;
-		isRunning = true;
-		try {
-			const gGameStatus = JSON.stringify({
-				turn: window.stage?.gGameStatus.turn,
-				battle: window.stage?.pJsnData.battle,
-				boss: window.stage?.gGameStatus.boss,
-				player: window.stage?.pJsnData.player,
-				dungeonInfo: {
-					name: window.Game?.view?.dungeonInfo?.name,
-					floorNo: window.Game?.view?.stageInfo?.serial_floor_no,
-					stageId: window.Game?.view?.stageInfo?.stage_id,
-				},
-				areaInfo: window.Game?.view?.areaInfo,
-			});
-			const userData = JSON.stringify({
-				rank: window.Game?.userRank,
-				id: window.Game?.userId,
-				baseUri: window.Game?.baseUri,
-				imgUri: window.Game?.imgUri,
-			});
-			const pmdEvent = new CustomEvent("${eventId}", {
-				detail: {
-					gGameStatus,
-					userData
-				}
-			});
-			window.dispatchEvent(pmdEvent);
-			isRunning = false;
-		} catch (error) {
-			window.dispatchEvent(new CustomEvent("${eventId}", {
-				detail: {
-					gGameStatus: null,
-					userData: null,
-					error: error.message,
-					stack: error.stack
-				}
-			}));
-			isRunning = false;
-		}
-  	}, 3000);
-`)
-);
-document.head.appendChild(script);
-
-addEventListener(eventId, (data: CustomEvent) => {
-	if (data.detail.error) return;
-
-	if (!data.detail.gGameStatus) gameStatus = null;
-	else gameStatus = JSON.parse(data.detail.gGameStatus);
-
-	if (!data.detail.userData) return;
-	userData = JSON.parse(data.detail.userData);
-});
+	return obj;
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -157,6 +110,24 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("profile"),
 			presence.getSetting<boolean>("button"),
 		]);
+	let userData = await presence.getPageVariable<UserData>(
+			"Game.userRank",
+			"Game.userId",
+			"Game.baseUri",
+			"Game.imgUri"
+		),
+		gameStatus = await presence.getPageVariable<GameStatus>(
+			"stage.gGameStatus.turn",
+			"stage.pJsnData.battle",
+			"stage.gGameStatus.boss",
+			"stage.pJsnData.player",
+			"Game.view.dungeonInfo",
+			"Game.view.stageInfo",
+			"Game.view.areaInfo"
+		);
+
+	if (gameStatus) gameStatus = simplifyKey(gameStatus);
+	if (userData) userData = simplifyKey(userData);
 
 	if (href.includes("/#mypage")) presenceData.details = "Home page";
 	else if (href.includes("/#quest")) {
@@ -308,7 +279,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = " Shop:";
 			presenceData.state = "Crafting Arcarum summons";
 		} else if (href.includes("stage") && gameStatus?.dungeonInfo)
-			presenceData.state = `${gameStatus.dungeonInfo.name} ${gameStatus.dungeonInfo.floorNo}-${gameStatus.dungeonInfo.stageId}`;
+			presenceData.state = `${gameStatus.dungeonInfo.name} ${gameStatus.stageInfo.serial_floor_no}-${gameStatus.stageInfo.stage_id}`;
 		else if (href.includes("supporter"))
 			presenceData.state = "Starting a battle";
 		else if (href.includes("skip"))
@@ -351,15 +322,15 @@ presence.on("UpdateData", async () => {
 	else if (href.includes("#frontier/alchemy"))
 		presenceData.details = "In Alchemy Lab";
 
-	if (userData) {
+	if (userData?.userId) {
 		if (profile && presenceData.largeImageText === "Granblue Fantasy")
-			presenceData.largeImageText = `UID: ${userData.id} | Rank ${userData.rank}`;
+			presenceData.largeImageText = `UID: ${userData.userId} | Rank ${userData.userRank}`;
 
 		if (button) {
 			presenceData.buttons = [
 				{
 					label: "Profile",
-					url: `${userData.baseUri}/#profile/${userData.id}`,
+					url: `${userData.baseUri}/#profile/${userData.userId}`,
 				},
 			];
 		}
