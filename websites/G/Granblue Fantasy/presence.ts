@@ -1,69 +1,138 @@
+/* eslint-disable camelcase */
+// Hack to resolve Deepscan
+const no_op = (a: number) => a + 1;
+no_op(0);
 const presence = new Presence({
 		clientId: "632983924414349333",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000),
-	script = document.createElement("script"),
-	eventId = "PreMiD_GranBlueFantasy";
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+enum Elements {
+	Plain,
+	Fire,
+	Water,
+	Earth,
+	Wind,
+	Light,
+	Dark,
+}
+
+const ElementIcons = {
+		// Plain element isn't really a thing for characters, but it's here for the sake of completion
+		[Elements.Plain]:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/logo.png",
+		[Elements.Fire]: "https://i.imgur.com/DuChp5q.png",
+		[Elements.Water]: "https://i.imgur.com/CZhHXHL.png",
+		[Elements.Earth]: "https://i.imgur.com/yqE3ZSA.png",
+		[Elements.Wind]: "https://i.imgur.com/K4LXuGv.png",
+		[Elements.Light]: "https://i.imgur.com/b59SHQU.png",
+		[Elements.Dark]: "https://i.imgur.com/dIegqcO.png",
+	},
+	ElementsNames = {
+		[Elements.Plain]: "Plain",
+		[Elements.Fire]: "Fire",
+		[Elements.Water]: "Water",
+		[Elements.Earth]: "Earth",
+		[Elements.Wind]: "Wind",
+		[Elements.Light]: "Light",
+		[Elements.Dark]: "Dark",
+	};
 
 interface GameStatus {
+	turn: number;
+	battle: {
+		count: number;
+		total: number;
+	};
 	boss: {
 		param: {
 			hp: string;
 			hpmax: string;
 			alive: 1 | 0;
+			name: {
+				ja: string;
+				en: string;
+			};
 		}[];
 	};
+	player: {
+		param: {
+			attr: Elements;
+			alive: 1 | 0;
+			leader: 1 | 0;
+			name: string;
+			hp: number;
+			hpmax: number;
+			pid: string;
+		}[];
+	};
+	dungeonInfo: {
+		name: string;
+	};
+	stageInfo: {
+		serial_floor_no: number;
+		stage_id: number;
+	};
+	areaInfo: {
+		name: string;
+	};
+	[key: string]: unknown;
+}
+interface UserData {
+	baseUri: string;
+	imgUri: string;
+	userRank: number;
+	userId: number;
+	[key: string]: unknown;
 }
 
-let gameStatus: GameStatus;
+function simplifyKey<T>(obj: T): T {
+	// stage.gGameStatus.boss => boss
+	const kv = Object.entries(obj as Record<string, unknown>);
+	for (const [key, value] of kv) {
+		const i = key.lastIndexOf(".");
+		if (i === -1) continue;
+		(obj as Record<string, unknown>)[key.slice(i + 1)] = value;
+		delete (obj as Record<string, unknown>)[key];
+	}
 
-// Decreasing latency may greatly impact on gameplay/performance
-script.id = eventId;
-script.appendChild(
-	document.createTextNode(`
-  let isRunning = false;
-  setInterval(() => {
-    if (isRunning) return;
-    isRunning = true;
-    const getCircularReplacer = () => {
-      const seen = new WeakSet();
-      return (key, value) => {
-        if (typeof value === "object" && value !== null) {
-          if (seen.has(value)) return;
-          else seen.add(value);
-        }
-        return value;
-      };
-    };
-    const gGameStatus = JSON.stringify(window.stage?.gGameStatus, getCircularReplacer());
-    const pmdEvent = new CustomEvent("${eventId}", {
-      detail: {
-        gGameStatus
-      }
-    });
-    window.dispatchEvent(pmdEvent);
-    isRunning = false;
-  }, 4500);
-`)
-);
-document.head.appendChild(script);
-
-addEventListener(eventId, (data: CustomEvent) => {
-	if (!data.detail.gGameStatus) return (gameStatus = null);
-	else gameStatus = JSON.parse(data.detail.gGameStatus);
-});
+	return obj;
+}
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/logo.png",
 			startTimestamp: browsingTimestamp,
+			largeImageText: "Granblue Fantasy",
 		},
 		{ href } = document.location,
-		[health, djeeta] = await Promise.all([
+		[health, turn, djeeta, profile, button] = await Promise.all([
 			presence.getSetting<number>("health"),
+			presence.getSetting<number>("turn"),
 			presence.getSetting<boolean>("djeeta"),
+			presence.getSetting<boolean>("profile"),
+			presence.getSetting<boolean>("button"),
 		]);
+	let userData = await presence.getPageVariable<UserData>(
+			"Game.userRank",
+			"Game.userId",
+			"Game.baseUri",
+			"Game.imgUri"
+		),
+		gameStatus = await presence.getPageVariable<GameStatus>(
+			"stage.gGameStatus.turn",
+			"stage.pJsnData.battle",
+			"stage.gGameStatus.boss",
+			"stage.pJsnData.player",
+			"Game.view.dungeonInfo",
+			"Game.view.stageInfo",
+			"Game.view.areaInfo"
+		);
+
+	if (gameStatus) gameStatus = simplifyKey(gameStatus);
+	if (userData) userData = simplifyKey(userData);
+
 	if (href.includes("/#mypage")) presenceData.details = "Home page";
 	else if (href.includes("/#quest")) {
 		presenceData.details = "Selecting a quest";
@@ -78,41 +147,62 @@ presence.on("UpdateData", async () => {
 	} else if (href.includes("/#result"))
 		presenceData.details = "In a Quest result screen";
 	else if (href.includes("/#raid") || href.includes("/#raid_multi")) {
+		const boss = gameStatus?.boss?.param.find(x => x.alive);
+		if (boss) {
+			if (boss.name.ja !== boss.name.en)
+				presenceData.details = `${boss.name.en} (${boss.name.ja})`;
+			else presenceData.details = boss.name.en;
+
+			if (gameStatus.battle?.total && gameStatus.battle?.total > 1)
+				presenceData.details += ` (Wave ${gameStatus.battle.count}/${gameStatus.battle.total})`;
+		} else {
+			presenceData.details =
+				document.querySelectorAll(".name")[0]?.textContent ||
+				"Starting battle...";
+		}
+
 		if (health === 0) {
 			presenceData.state = `At ${
 				document.querySelectorAll(".btn-enemy-gauge.prt-enemy-percent.alive")[0]
 					.textContent
 			}`;
-		} else if (health === 1) {
-			const boss = gameStatus.boss.param.find(x => x.alive),
-				hp = parseInt(boss.hp);
+		} else if (health === 1 && boss) {
+			const hp = parseInt(boss.hp);
 			presenceData.state = `${hp.toLocaleString()} [${(
 				(hp * 100) /
 				parseInt(boss.hpmax)
 			).toFixed(2)}%]`;
 		}
-		presenceData.details = document.querySelectorAll(".name")[0].textContent;
-		if (djeeta) {
-			const charaAlive =
-				document.querySelector<HTMLImageElement>(".img-chara-command");
-			if (!charaAlive.src.includes("3999999999"))
-				presenceData.largeImageKey = charaAlive.src;
+
+		if (turn && gameStatus?.turn)
+			presenceData.state += ` | Turn ${gameStatus.turn}`;
+
+		if (djeeta && gameStatus?.player) {
+			const charaAlive = gameStatus.player.param.find(x => x.leader);
+			if (charaAlive) {
+				presenceData.smallImageKey = ElementIcons[charaAlive.attr];
+				presenceData.smallImageText = ElementsNames[charaAlive.attr];
+				presenceData.largeImageKey = `${userData.imgUri}/sp/assets/leader/raid_normal/${charaAlive.pid}.jpg`;
+				presenceData.largeImageText = `${charaAlive.name} | ${
+					charaAlive.hp
+				} [${((charaAlive.hp * 100) / charaAlive.hpmax).toFixed(2)}%]`;
+			}
 		}
 	} else if (href.includes("/#party/index/0/npc/0"))
 		presenceData.details = "Viewing party";
 	else if (href.includes("/#enhancement")) {
-		presenceData.details = "Upgrading : ";
+		presenceData.details = "Upgrading:";
 		if (href.includes("npc")) presenceData.state = "Characters";
 		else if (href.includes("weapon")) presenceData.state = "Weapons";
 		else if (href.includes("summon")) presenceData.state = "Summons";
 	} else if (href.includes("/#evolution")) {
-		presenceData.details = "Uncapping :";
+		presenceData.details = "Uncapping:";
 
 		if (href.includes("npc")) presenceData.state = "Characters";
 		else if (href.includes("weapon")) presenceData.state = "Weapons";
 		else if (href.includes("summon")) presenceData.state = "Summons";
 	} else if (href.includes("/#coopraid")) {
-		presenceData.details = "Co-op :";
+		presenceData.details = "Co-op:";
 
 		if (href.includes("offer"))
 			presenceData.state = "Searching a raid coop room";
@@ -121,7 +211,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Co-op :";
 		presenceData.state = "In a raid coop room";
 	} else if (href.includes("/#casino")) {
-		presenceData.details = "Casino :";
+		presenceData.details = "Casino:";
 		presenceData.state = "Main menu";
 		if (href.includes("list/poker")) presenceData.state = "Choosing poker bet";
 		else if (href.includes("game/poker")) presenceData.state = "Playing poker";
@@ -132,7 +222,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Choosing bingo bet";
 		else if (href.includes("game/bingo")) presenceData.state = "Playing bingo";
 		else if (href.includes("exchange"))
-			presenceData.state = " In the casino cage";
+			presenceData.state = "In the casino cage";
 		else if (href.includes("rule/casino"))
 			presenceData.state = "Viewing casino rules";
 	} else if (href.includes("/#gacha"))
@@ -143,24 +233,33 @@ presence.on("UpdateData", async () => {
 	else if (href.includes("/#title")) presenceData.details = "Viewing trophies";
 	else if (href.includes("/#guild")) presenceData.details = "Viewing crew";
 	else if (href.includes("/#shop")) {
-		presenceData.details = "Shop :";
+		presenceData.details = "Shop:";
 		presenceData.state = "Main menu";
 
 		if (href.includes("exchange/points")) presenceData.state = "Pendants shop";
+		else if (href.includes("exchange/fp")) presenceData.state = "Trading FP";
+		else if (href.includes("exchange/login_point"))
+			presenceData.state = "Trading Daily Points";
+		else if (href.includes("exchange/special_ticket"))
+			presenceData.state = "Redeeming Siero's Special Pick Ticket";
 		else if (href.includes("exchange/moon"))
 			presenceData.state = "Trading moons";
 		else if (href.includes("exchange/trajectory"))
 			presenceData.state = "Journey drops";
 		else if (href.includes("exchange/ceiling"))
 			presenceData.state = "Trading ceruleans stones";
+		else if (href.includes("exchange/job_equipment"))
+			presenceData.state = "Crafting Class-specific equipments";
 		else if (href.includes("skin/top")) presenceData.state = "Outfit shop";
 		else if (href.includes("skycompass/points"))
 			presenceData.state = "SkyCompass points exchange";
 		else if (href.includes("lupi/0")) presenceData.state = "Crystal shop";
 		else if (href.includes("exchange/list"))
 			presenceData.state = "Treasure trading";
+		else if (href.includes("passport"))
+			presenceData.state = "View Premium Pass";
 	} else if (href.includes("/#archaic")) {
-		presenceData.details = "Shop :";
+		presenceData.details = "Shop:";
 		presenceData.state = "Weapons Crafting";
 		if (href.includes("job"))
 			presenceData.state = "Crafting Class Champion weapons";
@@ -174,17 +273,35 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Crafting Bahamut weapons";
 		else if (href.includes("omega"))
 			presenceData.state = "Crafting Ultima weapons";
-	} else if (href.includes("#arcarum2/enhancement")) {
-		presenceData.details = " Shop :";
-		presenceData.state = "Crafting Arcarum summons";
+		else if (href.includes("draconic"))
+			presenceData.state = "Restoring Draconic weapons";
+		else if (href.includes("revans"))
+			presenceData.state = "Rebuilding Revans weapons";
+	} else if (href.includes("#arcarum2")) {
+		presenceData.details = "In Arcarum: The World Beyond";
+		if (href.includes("enhancement")) {
+			presenceData.details = " Shop:";
+			presenceData.state = "Crafting Arcarum summons";
+		} else if (href.includes("stage") && gameStatus?.dungeonInfo)
+			presenceData.state = `${gameStatus.dungeonInfo.name} ${gameStatus.stageInfo.serial_floor_no}-${gameStatus.stageInfo.stage_id}`;
+		else if (href.includes("supporter"))
+			presenceData.state = "Starting a battle";
+		else if (href.includes("skip"))
+			presenceData.state = "Undergoing a Fast Expedition";
+	} else if (href.includes("/#replicard")) {
+		presenceData.details = "In Replicard Sandbox";
+		if (gameStatus?.areaInfo) presenceData.state = gameStatus.areaInfo.name;
 	} else if (href.includes("/#item")) presenceData.details = "Viewing supplies";
 	else if (href.includes("/#present")) presenceData.details = "Viewing Crate";
 	else if (href.includes("/#list")) presenceData.details = "Viewing inventory";
 	else if (href.includes("/#container")) presenceData.details = "Viewing stash";
 	else if (href.includes("/#friend"))
 		presenceData.details = "Viewing friends list";
-	else if (href.includes("/#event")) presenceData.details = "Event Menu";
-	else if (href.includes("/#setting"))
+	else if (href.includes("/#event")) {
+		presenceData.details = "In event menu";
+		presenceData.state =
+			document.querySelector("#prt-head-current")?.textContent;
+	} else if (href.includes("/#setting"))
 		presenceData.details = "Changing settings";
 	else if (href.includes("/#teaser"))
 		presenceData.details = "Viewing event preview";
@@ -206,6 +323,22 @@ presence.on("UpdateData", async () => {
 	else if (href.includes("/#news")) presenceData.details = "Viewing the news";
 	else if (href.includes("/#comic"))
 		presenceData.details = "Reading Grand Blues";
+	else if (href.includes("#frontier/alchemy"))
+		presenceData.details = "In Alchemy Lab";
+
+	if (userData?.userId) {
+		if (profile && presenceData.largeImageText === "Granblue Fantasy")
+			presenceData.largeImageText = `UID: ${userData.userId} | Rank ${userData.userRank}`;
+
+		if (button) {
+			presenceData.buttons = [
+				{
+					label: "Profile",
+					url: `${userData.baseUri}/#profile/${userData.userId}`,
+				},
+			];
+		}
+	}
 
 	presence.setActivity(presenceData);
 });
