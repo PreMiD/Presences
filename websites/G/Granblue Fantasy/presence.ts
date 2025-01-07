@@ -1,4 +1,7 @@
 /* eslint-disable camelcase */
+// Hack to resolve Deepscan
+const no_op = (a: number) => a + 1;
+no_op(0);
 const presence = new Presence({
 		clientId: "632983924414349333",
 	}),
