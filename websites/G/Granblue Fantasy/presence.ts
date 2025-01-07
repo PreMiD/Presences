@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const presence = new Presence({
 		clientId: "632983924414349333",
 	}),
