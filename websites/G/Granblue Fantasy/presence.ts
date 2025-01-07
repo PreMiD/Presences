@@ -19,18 +19,12 @@ const ElementIcons = {
 		// Plain element isn't really a thing for characters, but it's here for the sake of completion
 		[Elements.Plain]:
 			"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/logo.png",
-		[Elements.Fire]:
-			"https://gbf.wiki/images/thumb/0/05/Icon_Element_Fire.png/20px-Icon_Element_Fire.png",
-		[Elements.Water]:
-			"https://gbf.wiki/images/thumb/8/80/Icon_Element_Water.png/20px-Icon_Element_Water.png",
-		[Elements.Earth]:
-			"https://gbf.wiki/images/thumb/9/94/Icon_Element_Earth.png/36px-Icon_Element_Earth.png",
-		[Elements.Wind]:
-			"https://gbf.wiki/images/thumb/6/62/Icon_Element_Wind.png/20px-Icon_Element_Wind.png",
-		[Elements.Light]:
-			"https://gbf.wiki/images/thumb/1/19/Icon_Element_Light.png/20px-Icon_Element_Light.png",
-		[Elements.Dark]:
-			"https://gbf.wiki/images/thumb/a/a5/Icon_Element_Dark.png/20px-Icon_Element_Dark.png",
+		[Elements.Fire]: "https://i.imgur.com/DuChp5q.png",
+		[Elements.Water]: "https://i.imgur.com/CZhHXHL.png",
+		[Elements.Earth]: "https://i.imgur.com/yqE3ZSA.png",
+		[Elements.Wind]: "https://i.imgur.com/K4LXuGv.png",
+		[Elements.Light]: "https://i.imgur.com/b59SHQU.png",
+		[Elements.Dark]: "https://i.imgur.com/dIegqcO.png",
 	},
 	ElementsNames = {
 		[Elements.Plain]: "Plain",
