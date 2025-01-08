@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
 				presenceData.buttons = [
 					{
 						label: "Listen Along!",
-						url: "https://planetxo.uk/",
+						url: "https://planetxo.uk/player",
 					},
 				];
 				break;
