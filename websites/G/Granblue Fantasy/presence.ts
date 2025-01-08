@@ -21,12 +21,18 @@ const ElementIcons = {
 		// Plain element isn't really a thing for characters, but it's here for the sake of completion
 		[Elements.Plain]:
 			"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/logo.png",
-		[Elements.Fire]: "https://i.imgur.com/DuChp5q.png",
-		[Elements.Water]: "https://i.imgur.com/CZhHXHL.png",
-		[Elements.Earth]: "https://i.imgur.com/yqE3ZSA.png",
-		[Elements.Wind]: "https://i.imgur.com/K4LXuGv.png",
-		[Elements.Light]: "https://i.imgur.com/b59SHQU.png",
-		[Elements.Dark]: "https://i.imgur.com/dIegqcO.png",
+		[Elements.Fire]:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/0.png",
+		[Elements.Water]:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/1.png",
+		[Elements.Earth]:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/2.png",
+		[Elements.Wind]:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/3.png",
+		[Elements.Light]:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/4.png",
+		[Elements.Dark]:
+			"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/5.png",
 	},
 	ElementsNames = {
 		[Elements.Plain]: "Plain",
@@ -147,7 +153,11 @@ presence.on("UpdateData", async () => {
 	} else if (href.includes("/#result"))
 		presenceData.details = "In a Quest result screen";
 	else if (href.includes("/#raid") || href.includes("/#raid_multi")) {
-		const boss = gameStatus?.boss?.param.find(x => x.alive);
+		const bosses = gameStatus?.boss?.param.sort(
+				(a, b) => parseInt(b.hpmax) - parseInt(a.hpmax)
+			),
+			boss = bosses?.find(x => x.alive) || bosses?.[0];
+
 		if (boss) {
 			if (boss.name.ja !== boss.name.en)
 				presenceData.details = `${boss.name.en} (${boss.name.ja})`;
@@ -174,8 +184,10 @@ presence.on("UpdateData", async () => {
 			).toFixed(2)}%]`;
 		}
 
-		if (turn && gameStatus?.turn)
-			presenceData.state += ` | Turn ${gameStatus.turn}`;
+		if (turn && gameStatus?.turn) {
+			if (!presenceData.state) presenceData.state = `Turn ${gameStatus.turn}`;
+			else presenceData.state += ` | Turn ${gameStatus.turn}`;
+		}
 
 		if (djeeta && gameStatus?.player) {
 			const charaAlive = gameStatus.player.param.find(x => x.leader);
