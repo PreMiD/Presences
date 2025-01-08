@@ -75,6 +75,16 @@ presence.on("UpdateData", async () => {
 				];
 				break;
 			}
+			case "https://planetxo.uk/player": {
+				presenceData.details = "Viewing Player";
+				presenceData.buttons = [
+					{
+						label: "Listen Along!",
+						url: "https://planetxo.uk/player",
+					},
+				];
+				break;
+			}
 			case "https://planetxo.uk/panel": {
 				presenceData.details = "Viewing PlanetXO Panel";
 				presenceData.buttons = [
