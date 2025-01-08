@@ -153,7 +153,11 @@ presence.on("UpdateData", async () => {
 	} else if (href.includes("/#result"))
 		presenceData.details = "In a Quest result screen";
 	else if (href.includes("/#raid") || href.includes("/#raid_multi")) {
-		const boss = gameStatus?.boss?.param.find(x => x.alive);
+		const bosses = gameStatus?.boss?.param.sort(
+				(a, b) => parseInt(b.hpmax) - parseInt(a.hpmax)
+			),
+			boss = bosses?.find(x => x.alive) || bosses?.[0];
+
 		if (boss) {
 			if (boss.name.ja !== boss.name.en)
 				presenceData.details = `${boss.name.en} (${boss.name.ja})`;
@@ -180,8 +184,10 @@ presence.on("UpdateData", async () => {
 			).toFixed(2)}%]`;
 		}
 
-		if (turn && gameStatus?.turn)
-			presenceData.state += ` | Turn ${gameStatus.turn}`;
+		if (turn && gameStatus?.turn) {
+			if (!presenceData.state) presenceData.state = `Turn ${gameStatus.turn}`;
+			else presenceData.state += ` | Turn ${gameStatus.turn}`;
+		}
 
 		if (djeeta && gameStatus?.player) {
 			const charaAlive = gameStatus.player.param.find(x => x.leader);
