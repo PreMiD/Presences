@@ -12,25 +12,25 @@ let difficulty = "",
 	replay = false,
 	playerName = "",
 	mapName = "",
-	mapperName = "";
+	artist = "";
 
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/logo.png",
 }
 
 enum OtherAssets {
-	"360DegreeEasy" = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/0.png",
-	"360DegreeExpert" = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/1.png",
-	"360DegreeExpertPlus" = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/2.png",
-	"360DegreeHard" = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/3.png",
-	"360DegreeNormal" = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/4.png",
-	"360Degree" = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/5.png",
-	"90DegreeEasy" = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/6.png",
-	"90DegreeExpert" = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/7.png",
-	"90DegreeExpertPlus" = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/8.png",
-	"90DegreeHard" = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/9.png",
-	"90DegreeNormal" = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/10.png",
-	"90Degree" = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/11.png",
+	ThreeSixtyEasy = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/0.png",
+	ThreeSixtyExpert = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/1.png",
+	ThreeSixtyExpertPlus = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/2.png",
+	ThreeSixtyHard = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/3.png",
+	ThreeSixtyNormal = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/4.png",
+	ThreeSixty = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/5.png",
+	NinetyEasy = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/6.png",
+	NinetyExpert = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/7.png",
+	NinetyExpertPlus = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/8.png",
+	NinetyHard = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/9.png",
+	NinetyNormal = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/10.png",
+	Ninety = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/11.png",
 	LawlessEasy = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/12.png",
 	LawlessExpert = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/13.png",
 	LawlessExpertPlus = "https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/14.png",
@@ -88,10 +88,29 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<number>("mapSmallImages"),
 		]),
 		presenceData: PresenceData = {
+			type: ActivityType.Watching,
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		logs = await presence.getLogs<string>();
+		logs = await presence.getLogs<string>(),
+		pageVars = await presence.getPageVariable<{
+			"clips[0].buffer.duration": number;
+			"soundOffsets[0]": number;
+			"soundStartTimes[0]": number;
+			"audioCtx.currentTime": number;
+			lastPlayed: number;
+			playbackSpeed: number;
+			playing: boolean;
+		}>(
+			"clips[0].buffer.duration",
+			"soundOffsets[0]",
+			"soundStartTimes[0]",
+			"audioCtx.currentTime",
+			"lastPlayed",
+			"playbackSpeed",
+			"playing"
+		),
+		{ lastPlayed, playbackSpeed, playing } = pageVars;
 
 	for (const line of logs) {
 		if (line.startsWith("Current diff is ")) {
@@ -114,8 +133,8 @@ presence.on("UpdateData", async () => {
 		if (line.startsWith("Loaded replay"))
 			playerName = line.split(", played by ")[1].split(", with score ")[0];
 		if (line.startsWith("Loaded info for ")) {
-			mapName = line.split(" - ")[1].split(", mapped by ")[0];
-			mapperName = line.split(", mapped by ")[1];
+			mapName = line.split(" - ")[1];
+			artist = line.split(" - ")[0].replace("Loaded info for ", "");
 		}
 	}
 
@@ -124,7 +143,7 @@ presence.on("UpdateData", async () => {
 	else if (uiState === "Previewer") {
 		presenceData.details = mapName;
 		if (replay) presenceData.state = playerName;
-		else presenceData.state = mapperName;
+		else presenceData.state = artist;
 		if (mapSmallImages !== 3) {
 			presenceData.smallImageText = `${
 				mapSmallImages === 0 || mapSmallImages === 1 ? characteristic : ""
@@ -163,11 +182,20 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
+	if (playing) {
+		[presenceData.startTimestamp, presenceData.endTimestamp] =
+			presence.getTimestamps(
+				pageVars["soundStartTimes[0]"] +
+					(pageVars["audioCtx.currentTime"] - lastPlayed) * playbackSpeed,
+				pageVars["clips[0].buffer.duration"] - pageVars["soundOffsets[0]"]
+			);
+	}
+
 	if (!time) {
 		delete presenceData.startTimestamp;
 		delete presenceData.endTimestamp;
 	}
 	if (!buttons && presenceData.buttons) delete presenceData.buttons;
 
-	presence.setActivity(presenceData);
+	if (presenceData.details) presence.setActivity(presenceData);
 });
