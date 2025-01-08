@@ -11,8 +11,7 @@
 		"bg": "Насладете се на милиони най-нови приложения за Android, игри, музика, филми, телевизия, книги, списания и др."
 	},
 	"url": "play.google.com",
-	"regExp": "play|google",
-	"version": "1.0.16",
+	"version": "1.0.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Play/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Play/assets/thumbnail.png",
 	"color": "#F0464B",
