@@ -15,9 +15,9 @@ async function getTokenInfo(
 ): Promise<DexTokenInfo | null> {
 	const fetchTokenInfo = async () => {
 		let response = await fetch(
-			`https://api.dexscreener.com/latest/dex/pairs/${chainId}/${tokenAddress}`
-		),
-		 data = await response.json();
+				`https://api.dexscreener.com/latest/dex/pairs/${chainId}/${tokenAddress}`
+			),
+			data = await response.json();
 		// Token have 2 addresses, "pair" and "token"
 		if (!data.pairs || data.pairs.length === 0) {
 			response = await fetch(
@@ -58,13 +58,9 @@ async function getTokenInfo(
 }
 
 function formatMarketCap(marketCap: number): string {
-	if (marketCap >= 1_000_000) 
-		return `${(marketCap / 1_000_000).toFixed(1)}M`;
-	 else if (marketCap >= 1_000) 
-		return `${(marketCap / 1_000).toFixed(1)}K`;
-	 else 
-		return marketCap.toString();
-	
+	if (marketCap >= 1_000_000) return `${(marketCap / 1_000_000).toFixed(1)}M`;
+	else if (marketCap >= 1_000) return `${(marketCap / 1_000).toFixed(1)}K`;
+	else return marketCap.toString();
 }
 
 function capitalize(string: string): string {
@@ -111,7 +107,6 @@ presence.on("UpdateData", async () => {
 		tokenInfo: DexTokenInfo | null = null,
 		urlToken: string | undefined;
 
-	
 	const path = document.location.pathname;
 	switch (true) {
 		case path === "/":
@@ -142,7 +137,6 @@ presence.on("UpdateData", async () => {
 		default: {
 			const pathParts = path.split("/");
 			if (pathParts.length === 2) {
-				
 				details = `Viewing ${capitalize(pathParts[1])} tokens`;
 				const smallImageKey =
 					new Map(Object.entries(chainLogo)).get(pathParts[1]) ||
@@ -157,17 +151,18 @@ presence.on("UpdateData", async () => {
 				return;
 			} else if (pathParts.length >= 3) {
 				const chainId = pathParts[1],
-				 tokenAddress = pathParts[2];
+					tokenAddress = pathParts[2];
 				tokenInfo = await getTokenInfo(
 					decodeURIComponent(tokenAddress),
 					chainId
 				);
 
 				if (tokenInfo) {
-					
 					urlToken = `https://dexscreener.com/${chainId}/${tokenAddress}`;
 					details = `(${tokenInfo.symbol}/${tokenInfo.chainSymbol}) ${tokenInfo.name}`;
-					state = `$${tokenInfo.price} - MC: $${formatMarketCap(tokenInfo.marketCap)}`;
+					state = `$${tokenInfo.price} - MC: $${formatMarketCap(
+						tokenInfo.marketCap
+					)}`;
 					presenceData = {
 						details,
 						state,
