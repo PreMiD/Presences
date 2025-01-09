@@ -48,6 +48,8 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			type: ActivityType.Watching,
 			startTimestamp: browsingTimestamp,
+			largeImageText: "AnimeLib",
+			smallImageText: "AnimeLib",
 		},
 		[privacySetting, buttonsSetting] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
@@ -81,22 +83,20 @@ presence.on("UpdateData", async () => {
 				break;
 			}
 
-			if (animeData.toast) {
-				const cover =
-						document.querySelector<HTMLImageElement>(".cover__img")?.src,
-					title = document.querySelector("h1")?.textContent,
-					altTitle = document.querySelector("h2")?.textContent;
+			if (path.endsWith("/watch")) {
+				if (animeData.toast) {
+					presenceData.details = "Смотрит лицензированное аниме";
+					presenceData.state = "Информация пока что не доступна";
+					presenceData.buttons = [
+						{
+							label: "Открыть аниме",
+							url: cleanUrl(document.location),
+						},
+					];
 
-				if (cover && title && altTitle) {
-					presenceData.details = "Страница лицензированного аниме";
-					presenceData.state = `${title} (${altTitle})`;
-					presenceData.largeImageKey = cover;
+					break;
 				}
 
-				break;
-			}
-
-			if (path.endsWith("/watch")) {
 				const video = document.querySelector("video"),
 					dub =
 						document
@@ -104,19 +104,26 @@ presence.on("UpdateData", async () => {
 							?.querySelector(".menu-item__text").textContent ??
 						document
 							.querySelector(".btn.is-plain.is-outline")
-							?.querySelector("strong")?.textContent;
-
-				if (dub) {
-					presenceData.details = animeData.rus_name;
-					presenceData.state = `${
-						document.querySelector("[id^='episode'][class*=' ']")
+							?.querySelector("strong")?.textContent,
+					episode =
+						document.querySelector("[id^='episode'][class*=' '] > span")
 							?.textContent ??
 						document
 							.querySelectorAll(".btn.is-outline")[6]
 							?.querySelector("span")?.textContent ??
-						"Фильм"
+						document
+							.querySelectorAll(".btn.is-outline")[7]
+							?.querySelector("span")?.textContent;
+
+				if (dub) {
+					presenceData.details =
+						animeData.rus_name !== "" ? animeData.rus_name : animeData.name;
+					presenceData.state = `${
+						episode ? (episode.includes("эпизод") ? episode : "Фильм") : "Фильм"
 					} | ${dub}`;
 					presenceData.largeImageKey = animeData.cover.default;
+					presenceData.largeImageText =
+						animeData.rus_name !== "" ? animeData.rus_name : animeData.name;
 					presenceData.buttons = [
 						{
 							label: "Открыть аниме",
@@ -160,11 +167,35 @@ presence.on("UpdateData", async () => {
 					}
 				}
 			} else {
+				if (animeData.toast) {
+					const cover =
+							document.querySelector<HTMLImageElement>(".cover__img")?.src,
+						title = document.querySelector("h1")?.textContent,
+						altTitle = document.querySelector("h2")?.textContent;
+
+					if (cover && title && altTitle) {
+						presenceData.details = "Страница лицензированного аниме";
+						presenceData.state = `${title} (${altTitle})`;
+						presenceData.largeImageKey = cover;
+						presenceData.largeImageText = title;
+						presenceData.buttons = [
+							{
+								label: "Открыть аниме",
+								url: cleanUrl(document.location),
+							},
+						];
+					}
+
+					break;
+				}
+
 				presenceData.details = "Страница аниме";
-				presenceData.state = `${animeData.rus_name} (${
-					animeData.eng_name ?? animeData.name
-				})`;
+				presenceData.state = `${
+					animeData.rus_name !== "" ? animeData.rus_name : animeData.name
+				} (${animeData.eng_name ?? animeData.name})`;
 				presenceData.largeImageKey = animeData.cover.default;
+				presenceData.largeImageText =
+					animeData.rus_name !== "" ? animeData.rus_name : animeData.name;
 				presenceData.buttons = [
 					{
 						label: "Открыть аниме",
@@ -187,6 +218,8 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Страница персонажа";
 					presenceData.state = `${characterData.rus_name} (${characterData.name})`;
 					presenceData.largeImageKey = characterData.cover.default;
+					presenceData.largeImageText = characterData.rus_name;
+					presenceData.smallImageKey = Assets.Logo;
 					presenceData.buttons = [
 						{
 							label: "Oткрыть персoнажа",
@@ -210,15 +243,18 @@ presence.on("UpdateData", async () => {
 						path.split("/")[3].split("-")[0]
 					).then(response => <PersonData>response.data);
 
-					presenceData.details = "Страница человека";
-					presenceData.state = `${
+					const name =
 						peopleData.rus_name !== ""
 							? peopleData.rus_name
 							: peopleData.alt_name !== ""
 							? peopleData.alt_name
-							: peopleData.name
-					} (${peopleData.name})`;
+							: peopleData.name;
+
+					presenceData.details = "Страница человека";
+					presenceData.state = `${name} (${peopleData.name})`;
 					presenceData.largeImageKey = peopleData.cover.default;
+					presenceData.largeImageText = name;
+					presenceData.smallImageKey = Assets.Logo;
 					presenceData.buttons = [
 						{
 							label: "Открыть человека",
@@ -248,6 +284,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Страница пользователя";
 					presenceData.state = userData.username;
 					presenceData.largeImageKey = userData.avatar.url;
+					presenceData.largeImageText = userData.username;
 					presenceData.smallImageKey = Assets.Logo;
 					presenceData.buttons = [
 						{
@@ -275,9 +312,30 @@ presence.on("UpdateData", async () => {
 						path.split("/")[3]
 					).then(response => <CollectionData>response.data);
 
-					presenceData.details = "Страница коллекции";
+					// Show collection viewing in privacy mode if it's enabled, or enforce it when collection was marked as for adults
+					if (privacySetting || collectionData.adult) {
+						setPrivacyMode(presenceData);
+						break;
+					}
+
+					let collectionType: string;
+					switch (collectionData.type) {
+						case "titles":
+							collectionType = "тайтлам";
+							break;
+						case "character":
+							collectionType = "персонажам";
+							break;
+						case "people":
+							collectionType = "людям";
+							break;
+					}
+
+					presenceData.details = `Коллекция по ${collectionType}`;
 					presenceData.state = `${collectionData.name} от ${collectionData.user.username}`;
-					presenceData.largeImageKey = collectionData.user.avatar.url;
+					presenceData.largeImageKey = Assets.Logo;
+					presenceData.smallImageKey = collectionData.user.avatar.url;
+					presenceData.smallImageText = collectionData.user.username;
 					presenceData.buttons = [
 						{
 							label: "Oткрыть кoллекцию",
@@ -308,9 +366,10 @@ presence.on("UpdateData", async () => {
 						break;
 					}
 
-					presenceData.details = `Страница отзыва на ${reviewData.related.rus_name}`;
+					presenceData.details = `Отзыв на ${reviewData.related.rus_name}`;
 					presenceData.state = `${reviewData.title} от ${reviewData.user.username}`;
 					presenceData.largeImageKey = reviewData.related.cover.default;
+					presenceData.largeImageText = reviewData.related.rus_name;
 					presenceData.smallImageKey = reviewData.user.avatar.url;
 					presenceData.smallImageText = reviewData.user.username;
 					presenceData.buttons = [
@@ -423,8 +482,9 @@ presence.on("UpdateData", async () => {
 				if (avatar && username && title) {
 					presenceData.details = "Читает новость";
 					presenceData.state = `${title} от ${username}`;
-					presenceData.largeImageKey = avatar;
-					presenceData.smallImageKey = Assets.Logo;
+					presenceData.largeImageKey = Assets.Logo;
+					presenceData.smallImageKey = avatar;
+					presenceData.smallImageText = username;
 					presenceData.buttons = [
 						{
 							label: "Открыть новость",

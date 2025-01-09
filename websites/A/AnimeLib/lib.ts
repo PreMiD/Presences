@@ -51,6 +51,8 @@ export interface CollectionData {
 	id: number;
 	name: string;
 	user: Author;
+	type: "titles" | "character" | "people";
+	adult: boolean;
 }
 
 export interface ReviewData {
@@ -93,6 +95,7 @@ interface Cover {
 }
 
 export type AgeRestriction =
+	| { id: 0; label: "Нет" }
 	| { id: 1; label: "6+" }
 	| { id: 2; label: "12+" }
 	| { id: 3; label: "16+" }
