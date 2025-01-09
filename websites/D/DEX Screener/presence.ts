@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
 	switch (true) {
 		case path === "/":
 			details = "Home Page";
-			state = "Exploring";
+			state = "Browsing";
 			break;
 		case path.startsWith("/watchlist"):
 			details = "Watchlist";
@@ -121,18 +121,18 @@ presence.on("UpdateData", async () => {
 			break;
 		case path.startsWith("/new-pairs"):
 			details = "New Pairs";
-			state = "Exploring";
+			state = "Browsing";
 			break;
 		case path.startsWith("/gainers"):
 			details = "Gainers and Losers";
-			state = "Exploring";
+			state = "Browsing";
 			break;
 		case path.startsWith("/portfolio"):
 			details = "Looking at Portfolio";
 			break;
 		case path.startsWith("/moonshot"):
 			details = "Moonshot";
-			state = "Exploring";
+			state = "Browsing";
 			break;
 		case path.startsWith("/search"):
 			query = new URLSearchParams(window.location.search).get("q") || "-";
