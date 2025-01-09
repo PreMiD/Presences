@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 			details: metadata.data.webfrontTitleStage.titleName,
 			state: metadata.data.webfrontTitleStage.attractions.slice(0, 128),
 			largeImageKey: !showCover
-				? "https://i.imgur.com/tuSR9Ef.png"
+				? "https://cdn.rcd.gg/PreMiD/websites/U/U-NEXT/assets/logo.png"
 				: `https://${metadata.data.webfrontTitleStage.thumbnail.standard}`,
 			...(showSmallImages && {
 				smallImageKey: Assets.Reading,
@@ -119,7 +119,8 @@ presence.on("UpdateData", async () => {
 				return await presence.setActivity({
 					type: ActivityType.Watching,
 					details: strings.watchingSeries,
-					largeImageKey: "https://i.imgur.com/tuSR9Ef.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/U/U-NEXT/assets/logo.png",
 				});
 			}
 
@@ -134,7 +135,7 @@ presence.on("UpdateData", async () => {
 					.replace("{0}", episode.displayNo)
 					.replace("{1}", episode.episodeName),
 				largeImageKey: !showCover
-					? "https://i.imgur.com/tuSR9Ef.png"
+					? "https://cdn.rcd.gg/PreMiD/websites/U/U-NEXT/assets/logo.png"
 					: `https://${metadata.data.webfrontTitleStage.thumbnail.standard}`,
 				...(showSmallImages && {
 					smallImageKey: paused ? Assets.Pause : Assets.Play,
@@ -172,7 +173,8 @@ presence.on("UpdateData", async () => {
 				return await presence.setActivity({
 					type: ActivityType.Watching,
 					details: strings.watchingMovie,
-					largeImageKey: "https://i.imgur.com/tuSR9Ef.png",
+					largeImageKey:
+						"https://cdn.rcd.gg/PreMiD/websites/U/U-NEXT/assets/logo.png",
 				});
 			}
 
@@ -188,7 +190,7 @@ presence.on("UpdateData", async () => {
 						).toString()
 					),
 				largeImageKey: !showCover
-					? "https://i.imgur.com/tuSR9Ef.png"
+					? "https://cdn.rcd.gg/PreMiD/websites/U/U-NEXT/assets/logo.png"
 					: `https://${metadata.data.webfrontTitleStage.thumbnail.standard}`,
 				...(showSmallImages && {
 					smallImageKey: paused ? Assets.Pause : Assets.Play,
@@ -233,7 +235,7 @@ presence.on("UpdateData", async () => {
 			details: liveMetadata.data.webfrontGetLive.name,
 			state: liveMetadata.data.webfrontGetLive.attractions.slice(0, 128),
 			largeImageKey: !showCover
-				? "https://i.imgur.com/tuSR9Ef.png"
+				? "https://cdn.rcd.gg/PreMiD/websites/U/U-NEXT/assets/logo.png"
 				: `https://${liveMetadata.data.webfrontGetLive.notices[0].thumbnail.standard}`,
 			...(showSmallImages && {
 				smallImageKey: Assets.Reading,
@@ -263,7 +265,8 @@ presence.on("UpdateData", async () => {
 			return await presence.setActivity({
 				type: ActivityType.Watching,
 				details: strings.watchingLive,
-				largeImageKey: "https://i.imgur.com/tuSR9Ef.png",
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/U/U-NEXT/assets/logo.png",
 			});
 		}
 
@@ -291,7 +294,7 @@ presence.on("UpdateData", async () => {
 					).toString()
 				),
 			largeImageKey: !showCover
-				? "https://i.imgur.com/tuSR9Ef.png"
+				? "https://cdn.rcd.gg/PreMiD/websites/U/U-NEXT/assets/logo.png"
 				: `https://${liveMetadata.data.webfrontGetLive.notices[0].thumbnail.standard}`,
 			...(showSmallImages && {
 				smallImageKey: paused ? Assets.Pause : Assets.Play,
@@ -320,7 +323,8 @@ presence.on("UpdateData", async () => {
 	if (showBrowsingStatus && !privacyMode) {
 		return await presence.setActivity({
 			details: strings.browse,
-			largeImageKey: "https://i.imgur.com/tuSR9Ef.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/U/U-NEXT/assets/logo.png",
 			smallImageKey: Assets.Reading,
 			smallImageText: strings.browse,
 		});
