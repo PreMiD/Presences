@@ -46,8 +46,9 @@ presence.on("UpdateData", async () => {
 			)
 		),
 		isTalking =
-			messageElements.at(-1).parentElement.getAttribute("data-is-streaming") ===
-			"true";
+			messageElements
+				.at(-1)
+				?.parentElement.getAttribute("data-is-streaming") === "true";
 
 	let wordCount = 0;
 	for (const element of messageElements) {
