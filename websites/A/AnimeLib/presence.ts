@@ -104,11 +104,8 @@ presence.on("UpdateData", async () => {
 							?.querySelector(".menu-item__text").textContent ??
 						document
 							.querySelector(".btn.is-plain.is-outline")
-							?.querySelector("strong")?.textContent;
-
-				if (dub) {
-					presenceData.details = animeData.rus_name;
-					presenceData.state = `${
+							?.querySelector("strong")?.textContent,
+					episode =
 						document.querySelector("[id^='episode'][class*=' '] > span")
 							?.textContent ??
 						document
@@ -116,11 +113,17 @@ presence.on("UpdateData", async () => {
 							?.querySelector("span")?.textContent ??
 						document
 							.querySelectorAll(".btn.is-outline")[7]
-							?.querySelector("span")?.textContent ??
-						"Фильм"
+							?.querySelector("span")?.textContent;
+
+				if (dub) {
+					presenceData.details =
+						animeData.rus_name !== "" ? animeData.rus_name : animeData.name;
+					presenceData.state = `${
+						episode ? (episode.includes("эпизод") ? episode : "Фильм") : "Фильм"
 					} | ${dub}`;
 					presenceData.largeImageKey = animeData.cover.default;
-					presenceData.largeImageText = animeData.rus_name;
+					presenceData.largeImageText =
+						animeData.rus_name !== "" ? animeData.rus_name : animeData.name;
 					presenceData.buttons = [
 						{
 							label: "Открыть аниме",
@@ -187,11 +190,12 @@ presence.on("UpdateData", async () => {
 				}
 
 				presenceData.details = "Страница аниме";
-				presenceData.state = `${animeData.rus_name} (${
-					animeData.eng_name ?? animeData.name
-				})`;
+				presenceData.state = `${
+					animeData.rus_name !== "" ? animeData.rus_name : animeData.name
+				} (${animeData.eng_name ?? animeData.name})`;
 				presenceData.largeImageKey = animeData.cover.default;
-				presenceData.largeImageText = animeData.rus_name;
+				presenceData.largeImageText =
+					animeData.rus_name !== "" ? animeData.rus_name : animeData.name;
 				presenceData.buttons = [
 					{
 						label: "Открыть аниме",
