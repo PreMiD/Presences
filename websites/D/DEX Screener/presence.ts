@@ -5,62 +5,62 @@ interface DexTokenInfo {
 	price: number;
 	chainId: string;
 	thumbnail: string;
-	marketCap: number;
 	chainSymbol: string;
 }
+
+const tokenCache: Map<string, DexTokenInfo> = new Map();
 
 async function getTokenInfo(
 	tokenAddress: string,
 	chainId: string
 ): Promise<DexTokenInfo | null> {
+	const cacheKey = `${chainId}-${tokenAddress}`;
+	if (tokenCache.has(cacheKey)) return tokenCache.get(cacheKey) || null;
+
 	const fetchTokenInfo = async () => {
 		let response = await fetch(
 				`https://api.dexscreener.com/latest/dex/pairs/${chainId}/${tokenAddress}`
 			),
 			data = await response.json();
-		// Token have 2 addresses, "pair" and "token"
+
 		if (!data.pairs || data.pairs.length === 0) {
 			response = await fetch(
 				`https://api.dexscreener.com/latest/dex/tokens/${tokenAddress}`
 			);
 			data = await response.json();
-			if (data && data.pairs) {
-				const tokenInfo: DexTokenInfo = {
-					name: data.pairs[0].baseToken.name,
-					symbol: data.pairs[0].baseToken.symbol,
-					price: data.pairs[0].priceUsd,
-					chainId: data.pairs[0].chainId,
-					thumbnail: data.pairs[0].info.imageUrl,
-					marketCap: data.pairs[0].marketCap,
-					chainSymbol: data.pairs[0].quoteToken.symbol,
-				};
-				return tokenInfo;
-			}
-			return null;
 		}
 
-		if (data && data.pairs) {
-			const tokenInfo: DexTokenInfo = {
-				name: data.pairs[0].baseToken.name,
-				symbol: data.pairs[0].baseToken.symbol,
-				price: data.pairs[0].priceUsd,
-				chainId: data.pairs[0].chainId,
-				thumbnail: data.pairs[0].info.imageUrl,
-				marketCap: data.pairs[0].marketCap,
-				chainSymbol: data.pairs[0].quoteToken.symbol,
+		if (data && data.pairs && data.pairs.length > 0) {
+			const pair = data.pairs[0],
+				getTitlePrice = () => {
+					const priceMatch = document.title.match(/\$([0-9.]+)/);
+					return priceMatch ? parseFloat(priceMatch[1]) : 0;
+				};
+			let price = getTitlePrice();
+			// price get from title instead of API, for efficiency
+			const tokenInfo = {
+				name: pair.baseToken.name,
+				symbol: pair.baseToken.symbol,
+				price,
+				chainId: pair.chainId,
+				thumbnail: pair.info.imageUrl,
+				chainSymbol: pair.quoteToken.symbol,
 			};
+			tokenCache.set(cacheKey, tokenInfo);
+
+			// Update price periodically based on title changes
+			setInterval(() => {
+				const newPrice = getTitlePrice();
+				if (newPrice !== price) {
+					tokenInfo.price = newPrice;
+					price = newPrice;
+				}
+			}, 10000);
 			return tokenInfo;
 		}
 		return null;
 	};
-	setInterval(fetchTokenInfo, 30000);
-	return fetchTokenInfo();
-}
-
-function formatMarketCap(marketCap: number): string {
-	if (marketCap >= 1_000_000) return `${(marketCap / 1_000_000).toFixed(1)}M`;
-	else if (marketCap >= 1_000) return `${(marketCap / 1_000).toFixed(1)}K`;
-	else return marketCap.toString();
+	return await fetchTokenInfo();
 }
 
 function capitalize(string: string): string {
@@ -105,8 +105,8 @@ presence.on("UpdateData", async () => {
 		state: string | undefined,
 		presenceData: PresenceData,
 		tokenInfo: DexTokenInfo | null = null,
-		urlToken: string | undefined;
-
+		urlToken: string | undefined,
+		query;
 	const path = document.location.pathname;
 	switch (true) {
 		case path === "/":
@@ -135,14 +135,11 @@ presence.on("UpdateData", async () => {
 			state = "Exploring";
 			break;
 		case path.startsWith("/search"):
-			const urlParams = new URLSearchParams(window.location.search);
-			const query = urlParams.get("q") || "";
+			query = new URLSearchParams(window.location.search).get("q") || "-";
 			if (query) {
-				details = `Searching for:`;
+				details = "Searching for:";
 				state = `${query}`;
-			} else {
-				details = "Searching tokens";
-			}
+			} else details = "Searching tokens";
 			break;
 		default: {
 			const pathParts = path.split("/");
@@ -170,14 +167,12 @@ presence.on("UpdateData", async () => {
 				if (tokenInfo) {
 					urlToken = `https://dexscreener.com/${chainId}/${tokenAddress}`;
 					details = `(${tokenInfo.symbol}/${tokenInfo.chainSymbol}) ${tokenInfo.name}`;
-					state = `$${tokenInfo.price} - MC: $${formatMarketCap(
-						tokenInfo.marketCap
-					)}`;
+					state = `$${tokenInfo.price}`;
 					presenceData = {
 						details,
 						state,
-						largeImageKey: Assets.Logo,
-						smallImageKey: tokenInfo.thumbnail,
+						largeImageKey: tokenInfo.thumbnail,
+						smallImageKey: Assets.Logo,
 						startTimestamp: browsingTimestamp,
 						buttons: [
 							{
