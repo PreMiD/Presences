@@ -1,7 +1,7 @@
 import { franc } from "franc-min";
 
 const presence = new Presence({
-		clientId: "1325519017527476316",
+		clientId: "1326893434073776181",
 	}),
 	getStrings = async () => {
 		return presence.getStrings(
