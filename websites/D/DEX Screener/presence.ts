@@ -136,7 +136,7 @@ presence.on("UpdateData", async () => {
 			break;
 		case path.startsWith("/search"):
 			query = new URLSearchParams(window.location.search).get("q") || "-";
-			if (query) {
+			if (query !== "-") {
 				details = "Searching for:";
 				state = `${query}`;
 			} else details = "Searching tokens";
@@ -177,7 +177,7 @@ presence.on("UpdateData", async () => {
 						buttons: [
 							{
 								label: "View Token",
-								url: urlToken || "https://dexscreener.com/",
+								url: urlToken,
 							},
 						],
 					};
