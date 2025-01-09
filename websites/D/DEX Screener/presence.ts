@@ -134,6 +134,16 @@ presence.on("UpdateData", async () => {
 			details = "Moonshot";
 			state = "Exploring";
 			break;
+		case path.startsWith("/search"):
+			const urlParams = new URLSearchParams(window.location.search);
+			const query = urlParams.get("q") || "";
+			if (query) {
+				details = `Searching for:`;
+				state = `${query}`;
+			} else {
+				details = "Searching tokens";
+			}
+			break;
 		default: {
 			const pathParts = path.split("/");
 			if (pathParts.length === 2) {
