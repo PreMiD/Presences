@@ -144,7 +144,7 @@ presence.on("UpdateData", async () => {
 		default: {
 			const pathParts = path.split("/");
 			if (pathParts.length === 2) {
-				details = `Viewing ${capitalize(pathParts[1])} tokens`;
+				details = `Browsing ${capitalize(pathParts[1])} tokens`;
 				const smallImageKey =
 					new Map(Object.entries(chainLogo)).get(pathParts[1]) ||
 					`https://dd.dexscreener.com/ds-data/chains/${pathParts[1]}.png`;
