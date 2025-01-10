@@ -20,7 +20,7 @@ let oldLang: string = null,
 	strings: Awaited<ReturnType<typeof getStrings>>;
 
 const enum Assets {
-	Logo = "https://i.imgur.com/SqUGiUx.png",
+	Logo = "https://i.imgur.com/t2w5Nso.png",
 	Talking = "https://i.imgur.com/rnAQvqx.png",
 }
 
