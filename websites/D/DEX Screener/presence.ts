@@ -135,7 +135,7 @@ presence.on("UpdateData", async () => {
 			state = "Browsing";
 			break;
 		case path.startsWith("/search"):
-			query = new URLSearchParams(window.location.search).get("q") || "-";
+			query = new URLSearchParams(document.location.search).get("q") || "-";
 			if (query !== "-") {
 				details = "Searching for:";
 				state = `${query}`;
