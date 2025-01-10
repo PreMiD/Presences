@@ -66,9 +66,7 @@ async function getTokenInfo(
 function capitalize(string: string): string {
 	return string.charAt(0).toUpperCase() + string.slice(1);
 }
-// end function
 
-// PRESENCEDECLARATION
 const presence = new Presence({
 		clientId: "1326168769403289683",
 	}),
@@ -77,29 +75,27 @@ const presence = new Presence({
 const enum Assets {
 	Logo = "https://i.imgur.com/LWNN5i1.jpeg",
 }
-// end PRESENCEDECLARATION
+
 const chainLogo = {
-	// i added this assets because these logo is not in .png while get from website
-	ethereum: "https://i.imgur.com/u2u5w93.jpeg",
-	bsc: "https://i.imgur.com/Eaa2uog.jpeg",
-	solana: "https://i.imgur.com/RUJenzh.jpeg",
-	base: "https://i.imgur.com/yMUaMZq.jpeg",
-	sui: "https://i.imgur.com/1U8Kuh0.jpeg",
-	aptos: "https://i.imgur.com/M2PnsZo.jpeg",
-	arbitrum: "https://i.imgur.com/C8y29U6.jpeg",
-	avalanche: "https://i.imgur.com/yApPGyO.jpeg",
-	cronos: "https://i.imgur.com/K9HSwqr.jpeg",
-	fantom: "https://i.imgur.com/2h7g96v.jpeg",
-	hyperliquid: "https://i.imgur.com/1YmOCAI.jpeg",
-	ink: "https://i.imgur.com/tvhGF3x.jpeg",
-	linea: "https://i.imgur.com/4kxwQYb.jpeg",
-	optimism: "https://i.imgur.com/NkMIdoE.jpeg",
-	osmosis: "https://i.imgur.com/7XyInA2.jpeg",
-	polygon: "https://i.imgur.com/OAj35XY.jpeg",
-	zksync: "https://i.imgur.com/su2f6QM.jpeg",
+	ethereum: "https://i.imgur.com/sRQsRgt.png",
+	bsc: "https://i.imgur.com/P3R5xml.png",
+	solana: "https://i.imgur.com/yzW1XmK.png",
+	base: "https://i.imgur.com/RFCn600.png",
+	sui: "https://i.imgur.com/nRLlRS3.png",
+	aptos: "https://i.imgur.com/HnRC0zH.png",
+	arbitrum: "https://i.imgur.com/62omOHV.png",
+	avalanche: "https://i.imgur.com/EnQN7bJ.png",
+	cronos: "https://i.imgur.com/X884cZX.png",
+	fantom: "https://i.imgur.com/nBuhY97.png",
+	hyperliquid: "https://i.imgur.com/4YsBubJ.png",
+	ink: "https://i.imgur.com/pqBMg7y.png",
+	linea: "https://i.imgur.com/9l7YKgI.png",
+	optimism: "https://i.imgur.com/8c49Wtl.png",
+	osmosis: "https://i.imgur.com/aPdpP43.png",
+	polygon: "https://i.imgur.com/GLDY9Z0.png",
+	zksync: "https://i.imgur.com/5bK6sx8.png",
 };
 
-// presence call
 presence.on("UpdateData", async () => {
 	let details: string | undefined,
 		state: string | undefined,
@@ -198,4 +194,3 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData);
 	}
 });
-// end presence call
