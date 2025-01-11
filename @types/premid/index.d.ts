@@ -108,7 +108,7 @@ interface MediaPresenceData extends BasePresenceData {
 }
 
 interface NonMediaPresenceData extends BasePresenceData {
-	type?: Exclude<ActivityType, ActivityType.Listening>;
+	type?: Exclude<ActivityType, ActivityType.Listening | ActivityType.Watching>;
 	largeImageText?: never;
 }
 
