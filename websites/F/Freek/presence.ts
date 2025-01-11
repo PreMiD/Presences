@@ -127,9 +127,12 @@ presence.on("UpdateData", async () => {
 				presenceData.details = steamTitle;
 				presenceData.state = `📺 ${
 					episodeName
-						? `${episodeNumber}. ${episodeName?.textContent}`
+						? `${episodeName?.textContent}`
 						: `Episode ${episodeNumber}`
 				}`;
+				presenceData.largeImageText = `Season ${
+					href.includes("?season=") ? href.split("?season=")[1] : 1
+				}, Episode ${episodeNumber}`;
 				presenceData.largeImageKey = document
 					.querySelector(
 						"div.flex > div.false > span.lazy-load-image-background > img"
