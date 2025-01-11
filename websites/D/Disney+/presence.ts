@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
 						const parts = document
 							.querySelector(".subtitle-field")
 							?.textContent.match(/S(\d+):E(\d+) /);
-						if (parts.length > 2)
+						if (parts?.length > 2)
 							presenceData.largeImageText = `Season ${parts[1]}, Episode ${parts[2]}`;
 
 						presenceData.state = document
