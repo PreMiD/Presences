@@ -16,13 +16,18 @@ function capitalize(text: string): string {
 let elapsed: number, oldUrl: string, header, title, item;
 
 presence.on("UpdateData", async () => {
+	const showAsWatching = await presence.getSetting("showAsWatching");
+
 	let video: HTMLVideoElement = null,
 		details,
 		state,
 		smallImageKey,
 		smallImageText,
 		startTimestamp,
-		endTimestamp;
+		endTimestamp,
+		buttons: ButtonData[] | null = null;
+
+	buttons = null;
 
 	const { href, pathname: path } = window.location;
 	if (href !== oldUrl) {
@@ -113,7 +118,7 @@ presence.on("UpdateData", async () => {
 		details = "Viewing My DVR";
 		if (item) state = capitalize(item.textContent);
 	} else if (path.includes("/watch")) {
-		video = document.querySelector(".content-video-player");
+		/* 		video = document.querySelector(".content-video-player");
 		if (video) {
 			title = document.querySelector(".metadata-area__second-line");
 			const content = document.querySelector(".metadata-area__third-line"),
@@ -142,47 +147,60 @@ presence.on("UpdateData", async () => {
 				if (!live) [startTimestamp, endTimestamp] = timestamps;
 				else startTimestamp = elapsed;
 			}
-		} else {
-			video = document.querySelector("video#content-video-player");
-			details = "Viewing Watch History";
-			if (video) {
-				title = document.querySelector(
-					"#web-player-app div.PlayerMetadata__titleText"
+		} else { */
+		video = document.querySelector("video#content-video-player");
+		details = "Viewing Watch History";
+		if (video) {
+			title = document.querySelector(
+				"#web-player-app div.PlayerMetadata__titleText"
+			);
+			const content = document.querySelector(
+					"#web-player-app div.PlayerMetadata__subTitle"
+				),
+				sliderEl = document.querySelector(".Timeline__slider"),
+				timestamps = presence.getTimestamps(
+					parseInt(sliderEl.getAttribute("aria-valuenow")),
+					parseInt(sliderEl.getAttribute("aria-valuemax"))
 				);
-				const content = document.querySelector(
-						"#web-player-app div.PlayerMetadata__subTitle"
-					),
-					timestamps = presence.getTimestamps(
-						Math.floor(video.currentTime),
-						Math.floor(video.duration)
-					),
-					live = timestamps[1] === Infinity;
-				details = "Watching";
-				if (title) details = title.textContent;
 
-				if (content && content.textContent.length > 0)
-					state = content.textContent;
-
-				smallImageKey = live
-					? Assets.Live
-					: video.paused
-					? Assets.Pause
-					: Assets.Play;
-				smallImageText = live
-					? (await strings).live
-					: video.paused
-					? (await strings).pause
-					: (await strings).play;
-				if (!video.paused) {
-					if (!live) [startTimestamp, endTimestamp] = timestamps;
-					else startTimestamp = elapsed;
-				}
+			if (!video.paused) {
+				startTimestamp = timestamps[0];
+				endTimestamp = timestamps[1];
+			} else {
+				startTimestamp = null;
+				endTimestamp = null;
 			}
+
+			details = "Watching";
+			if (title) details = title.textContent;
+
+			if (content && content.textContent.length > 0)
+				state = content.textContent;
+
+			smallImageKey = video.paused ? Assets.Pause : null;
+			smallImageText = video.paused ? (await strings).pause : null;
+			/* } */
 		}
+	}
+
+	let largeImageText = null;
+	const seasonAndEpisode = state?.match(/S(\d+) E(\d+)-/);
+	if (seasonAndEpisode?.length > 2) {
+		largeImageText = `Season ${seasonAndEpisode[1]}, Episode ${seasonAndEpisode[2]}`;
+		state = state.replace(/S(\d+) E(\d+)-/, "");
+		buttons = [
+			{
+				label: "Watch Episode",
+				url: href,
+			},
+		];
 	}
 
 	presence.setActivity(
 		{
+			...(showAsWatching &&
+				state && { name: details, type: ActivityType.Watching }),
+			...(largeImageText && { largeImageText }),
 			details,
 			state,
 			largeImageKey:
@@ -191,6 +209,7 @@ presence.on("UpdateData", async () => {
 			smallImageText,
 			startTimestamp,
 			endTimestamp,
+			...((buttons && { buttons }) as unknown as ButtonData[]),
 		},
 		video ? !video.paused : true
 	);

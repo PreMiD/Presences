@@ -7,6 +7,10 @@
 	},
 	"contributors": [
 		{
+			"name": "Timeraa",
+			"id": "223238938716798978"
+		},
+		{
 			"name": "DooMLorD",
 			"id": "465105167751315471"
 		},
@@ -38,5 +42,13 @@
 		"video",
 		"tv",
 		"movies"
+	],
+	"settings": [
+		{
+			"id": "showAsWatching",
+			"title": "Show as Watching",
+			"icon": "fad fa-video",
+			"value": false
+		}
 	]
 }
