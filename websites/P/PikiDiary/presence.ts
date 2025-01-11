@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 			if (userImage) presenceData.largeImageKey = userImage;
 			presenceData.buttons = [
 				{
-					label: "View profile",
+					label: "View Profile",
 					url: href,
 				},
 			];
