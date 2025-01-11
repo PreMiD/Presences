@@ -102,17 +102,17 @@ interface BasePresenceData {
 	buttons?: [ButtonData, ButtonData?];
 }
 
-interface ListeningPresenceData extends BasePresenceData {
-	type: ActivityType.Listening;
+interface MediaPresenceData extends BasePresenceData {
+	type: ActivityType.Listening | ActivityType.Watching;
 	largeImageText?: string | Node;
 }
 
-interface NonListeningPresenceData extends BasePresenceData {
+interface NonMediaPresenceData extends BasePresenceData {
 	type?: Exclude<ActivityType, ActivityType.Listening>;
 	largeImageText?: never;
 }
 
-type PresenceData = ListeningPresenceData | NonListeningPresenceData;
+type PresenceData = MediaPresenceData | NonMediaPresenceData;
 
 interface ButtonData {
 	/**
