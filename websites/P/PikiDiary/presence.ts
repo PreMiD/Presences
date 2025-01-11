@@ -25,7 +25,6 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, search, href, hostname } = document.location;
 
-
 	if (pathname === "/") presenceData.details = "Viewing home page";
 	else if (pathname.includes("@")) {
 		// the @ means that we're in a user page
