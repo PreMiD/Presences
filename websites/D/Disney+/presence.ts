@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
 
 						presenceData.buttons = [
 							{
-								label: parts.length > 2 ? "Watch Episode" : "Watch Movie",
+								label: parts?.length > 2 ? "Watch Episode" : "Watch Movie",
 								url: href,
 							},
 						];
