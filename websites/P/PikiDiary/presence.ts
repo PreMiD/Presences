@@ -25,8 +25,6 @@ presence.on("UpdateData", async () => {
 		},
 		{ pathname, search, href, hostname } = document.location;
 
-	// eslint-disable-next-line no-console
-	console.log(href);
 
 	if (pathname === "/") presenceData.details = "Viewing home page";
 	else if (pathname.includes("@")) {
