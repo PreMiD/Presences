@@ -7,7 +7,8 @@
 	},
 	"service": "Timeguessr",
 	"description": {
-		"en": "TimeGuessr is an interactive game that challenges you to guess the approximate year and location of a historical photo or event."
+		"en": "Timeguessr is an interactive game that challenges you to guess the approximate year and location of a historical photo or event.",
+		"nl": "Timeguessr is een interactief spel dat je uitdaagt om het geschatte jaar en de locatie van een historische foto of gebeurtenis te raden."
 	},
 	"url": "timeguessr.com",
 	"version": "1.0.0",

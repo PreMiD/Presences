@@ -45,7 +45,6 @@ presence.on("UpdateData", async () => {
 
 		if (/\/round(one|two|three|four|five)(daily)?/.test(pathname)) {
 			const round = pathname.match(/round(one|two|three|four|five)(daily)?/)[0],
-				mode = round.includes("daily") ? "Daily" : "Normal",
 				roundNumber = round.includes("one")
 					? 1
 					: round.includes("two")
@@ -54,13 +53,13 @@ presence.on("UpdateData", async () => {
 					? 3
 					: round.includes("four")
 					? 4
-					: 5,
-				currentScore = document.querySelector("#insertScore")?.textContent;
+					: 5
+				;
 
 			presenceData.details = "Pinpointing moments in history";
 			presenceData.state = `${roundNumber}/5 | Score: ${
-				currentScore ?? 0
-			} | Mode: ${mode}`;
+				document.querySelector("#insertScore")?.textContent ?? 0
+			} | Mode: ${round.includes("daily") ? "Daily" : "Normal"}`;
 		} else if (
 			pathname === "/roundresults" ||
 			pathname === "/dailyroundresults"
@@ -68,16 +67,14 @@ presence.on("UpdateData", async () => {
 			const yearScore =
 					document.querySelector("#insertYearScore")?.textContent || "0",
 				locationScore =
-					document.querySelector("#insertLocationScore")?.textContent || "0",
-				totalScore = parseInt(yearScore) + parseInt(locationScore);
+					document.querySelector("#insertLocationScore")?.textContent || "0"
+				;
 
-			presenceData.details = `Round results | Total score: ${totalScore}`;
+			presenceData.details = `Round results | Total score: ${parseInt(yearScore) + parseInt(locationScore)}`;
 			presenceData.state = `Year: ${yearScore} | Location: ${locationScore}`;
 		} else if (pathname === "/finalscore" || pathname === "/finalscoredaily") {
-			const finalScore = document.querySelector("#totalText")?.textContent;
-
 			presenceData.details = "Guessed all the places and times";
-			presenceData.state = `Final score: ${finalScore}/50,000`;
+			presenceData.state = `Final score: ${document.querySelector("#totalText")?.textContent}/50,000`;
 		}
 	} else {
 		presenceData.details = "Playing timeguessr under the radar";
