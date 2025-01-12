@@ -15,7 +15,6 @@ presence.on("UpdateData", async () => {
 		switch (pathname) {
 			case "/":
 				presenceData.details = "Warming up the time machine";
-
 				break;
 			case "/privacypolicy":
 				presenceData.details = "Reading the fine print of time travel";
