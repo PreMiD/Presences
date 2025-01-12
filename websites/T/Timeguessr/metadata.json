@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"apiVersion": 1,
+	"author": {
+		"id": "408597063098695692",
+		"name": "happypossum"
+	},
+	"service": "Timeguessr",
+	"description": {
+		"en": "TimeGuessr is an interactive game that challenges you to guess the approximate year and location of a historical photo or event."
+	},
+	"url": "timeguessr.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/7CtYHwJ.jpeg",
+	"thumbnail": "https://i.imgur.com/XpbfgwZ.png",
+	"color": "#DB5049",
+	"category": "games",
+	"tags": [
+		"games",
+		"timeguessr"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-shield-alt",
+			"value": false
+		}
+	]
+}
