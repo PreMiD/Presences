@@ -5,7 +5,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/7CtYHwJ.jpeg",
+			largeImageKey: "https://i.imgur.com/AdqBPUA.jpeg",
 			startTimestamp: browsingTimestamp,
 		},
 		privacy = await presence.getSetting<boolean>("privacy"),
@@ -44,32 +44,30 @@ presence.on("UpdateData", async () => {
 		}
 
 		if (/\/round(one|two|three|four|five)(daily)?/.test(pathname)) {
-			const round = pathname.match(/round(one|two|three|four|five)(daily)?/)[0],
-				roundNumber = round.includes("one")
-					? 1
-					: round.includes("two")
-					? 2
-					: round.includes("three")
-					? 3
-					: round.includes("four")
-					? 4
-					: 5;
 			presenceData.details = "Pinpointing moments in history";
-			presenceData.state = `${roundNumber}/5 | Score: ${
+			presenceData.state = `${
+				document.querySelector(".progressBarText2")?.textContent
+			} | Score: ${
 				document.querySelector("#insertScore")?.textContent ?? 0
-			} | Mode: ${round.includes("daily") ? "Daily" : "Normal"}`;
+			} | Mode: ${
+				pathname
+					.match(/round(one|two|three|four|five)(daily)?/)[0]
+					.includes("daily")
+					? "Daily"
+					: "Normal"
+			}`;
 		} else if (
 			pathname === "/roundresults" ||
 			pathname === "/dailyroundresults"
 		) {
-			const yearScore =
-					document.querySelector("#insertYearScore")?.textContent || "0",
-				locationScore =
-					document.querySelector("#insertLocationScore")?.textContent || "0";
 			presenceData.details = `Round results | Total score: ${
-				parseInt(yearScore) + parseInt(locationScore)
+				document.querySelector("#insertTotal")?.textContent ?? 0
 			}`;
-			presenceData.state = `Year: ${yearScore} | Location: ${locationScore}`;
+			presenceData.state = `Year: ${
+				document.querySelector("#insertYearScore")?.textContent || "0"
+			} | Location: ${
+				document.querySelector("#insertLocationScore")?.textContent || "0"
+			}`;
 		} else if (pathname === "/finalscore" || pathname === "/finalscoredaily") {
 			presenceData.details = "Guessed all the places and times";
 			presenceData.state = `Final score: ${
