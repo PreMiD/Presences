@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
 	if (pathname === "/") presenceData.details = "Viewing home page";
 	else if (pathname.includes("@")) {
 		// the @ means that we're in a user page
-		if (document.querySelector(".info > a") === null) {
+		if (!document.querySelector(".info > a")) {
 			presenceData.details = `Viewing ${getElement(".info > span")} profile`;
 			const userImage = document
 				.querySelector(".bar > div")
