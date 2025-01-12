@@ -53,9 +53,7 @@ presence.on("UpdateData", async () => {
 					? 3
 					: round.includes("four")
 					? 4
-					: 5
-				;
-
+					: 5;
 			presenceData.details = "Pinpointing moments in history";
 			presenceData.state = `${roundNumber}/5 | Score: ${
 				document.querySelector("#insertScore")?.textContent ?? 0
@@ -67,14 +65,16 @@ presence.on("UpdateData", async () => {
 			const yearScore =
 					document.querySelector("#insertYearScore")?.textContent || "0",
 				locationScore =
-					document.querySelector("#insertLocationScore")?.textContent || "0"
-				;
-
-			presenceData.details = `Round results | Total score: ${parseInt(yearScore) + parseInt(locationScore)}`;
+					document.querySelector("#insertLocationScore")?.textContent || "0";
+			presenceData.details = `Round results | Total score: ${
+				parseInt(yearScore) + parseInt(locationScore)
+			}`;
 			presenceData.state = `Year: ${yearScore} | Location: ${locationScore}`;
 		} else if (pathname === "/finalscore" || pathname === "/finalscoredaily") {
 			presenceData.details = "Guessed all the places and times";
-			presenceData.state = `Final score: ${document.querySelector("#totalText")?.textContent}/50,000`;
+			presenceData.state = `Final score: ${
+				document.querySelector("#totalText")?.textContent
+			}/50,000`;
 		}
 	} else {
 		presenceData.details = "Playing timeguessr under the radar";
