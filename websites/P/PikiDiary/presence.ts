@@ -23,17 +23,16 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, search, href, hostname } = document.location;
+		{ pathname, search, href } = document.location;
 
 	if (pathname === "/") presenceData.details = "Viewing home page";
 	else if (pathname.includes("@")) {
 		// the @ means that we're in a user page
 		if (!document.querySelector(".info > a")) {
 			presenceData.details = `Viewing ${getElement(".info > span")} profile`;
-			const userImage = document
-				.querySelector(".bar > div")
-				.querySelector("img");
-			if (userImage) presenceData.largeImageKey = userImage;
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>(".bar > div > img") ??
+				Assets.Logo;
 			presenceData.buttons = [
 				{
 					label: "View Profile",
@@ -59,9 +58,9 @@ presence.on("UpdateData", async () => {
 				presenceData.details =
 					document.querySelector("#title-text").textContent;
 				presenceData.state = `Live on PikiDiary // ${viewCount} viewers`;
-				presenceData.largeImageKey = `https://${hostname}${document
-					.querySelector(".avatar-small")
-					.getAttribute("src")}`; // user avatar
+				presenceData.largeImageKey =
+					document.querySelector<HTMLImageElement>(".avatar-small") ??
+					Assets.Logo; // user avatar
 				presenceData.smallImageKey = Assets.Live;
 				presenceData.smallImageText = "Live";
 				presenceData.buttons = [
@@ -75,9 +74,9 @@ presence.on("UpdateData", async () => {
 			presenceData.type = ActivityType.Watching;
 			presenceData.details = getElement("#title-text"); // live name
 			presenceData.state = document.querySelectorAll("a")[4].textContent; // user name
-			presenceData.largeImageKey = `https://${hostname}${document
-				.querySelector(".avatar-small")
-				.getAttribute("src")}`; // user avatar
+			presenceData.largeImageKey =
+				document.querySelector<HTMLImageElement>(".avatar-small") ??
+				Assets.Logo; // user avatar
 			presenceData.smallImageKey = Assets.Live;
 			presenceData.smallImageText = "Live";
 			presenceData.buttons = [
