@@ -152,7 +152,9 @@ presence.on("UpdateData", async () => {
 		}
 		case "search": {
 			presenceData.details = strings.search;
-			presenceData.state = decodeURIComponent(search.split("=")[1].replaceAll("+", " "));
+			presenceData.state = decodeURIComponent(
+				search.split("=")[1].replaceAll("+", " ")
+			);
 			break;
 		}
 		default: {
