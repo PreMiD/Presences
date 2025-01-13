@@ -122,13 +122,13 @@ presence.on("UpdateData", async () => {
 
 		presenceData = {
 			type: ActivityType.Listening,
-			name: mediaSession.metadata.title,
 			largeImageKey: showCover
 				? mediaSession?.metadata?.artwork?.at(-1)?.src ??
 				  "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/1.png"
 				: "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/1.png",
-			details: mediaSession.metadata.album,
+			details: mediaSession.metadata.title,
 			state: mediaSession.metadata.artist,
+			largeImageText: mediaSession.metadata.album,
 			...(showButtons && {
 				buttons,
 			}),
