@@ -269,11 +269,11 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Co-op:";
 
 		if (href.includes("offer"))
-			presenceData.state = "Searching a raid coop room";
-		else if (href.includes("room")) presenceData.state = "In a coop room";
+			presenceData.state = "Searching a raid co-op room";
+		else if (href.includes("room")) presenceData.state = "In a co-op room";
 	} else if (href.includes("/#lobby/room")) {
-		presenceData.details = "Co-op :";
-		presenceData.state = "In a raid coop room";
+		presenceData.details = "Co-op:";
+		presenceData.state = "In a raid co-op room";
 	} else if (href.includes("/#casino")) {
 		presenceData.details = "Casino:";
 		presenceData.state = "Main menu";
