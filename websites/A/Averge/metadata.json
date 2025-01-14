@@ -1,0 +1,22 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "service": "Averge.EU",
+    "author": {
+      "name": "lordreider",
+      "id": "853251440763600897"
+    },
+    "category": "other",
+    "logo": "https://media.hero-systems.eu/YofA2/naJoFUcO36.png/raw",
+    "thumbnail": "https://media.hero-systems.eu/YofA2/naJoFUcO36.png/raw",
+    "version": "1.0.0",
+    "color": "#0000ff",
+    "tags": [
+      "security",
+      "law"
+    ],
+    "url": "averge.eu",
+
+    "description": {
+      "en": "Averge n.e.V. - Verein zur Bekämpfung rechtswidriger Inhalte im Internet."
+    }
+  }
