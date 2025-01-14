@@ -155,7 +155,7 @@ presence.on("UpdateData", async () => {
 				...(usePresenceName && {
 					name: metadata.data.video.title,
 					details: episode.title,
-					state: episode.synopsis.slice(0, 128),
+					state: episode.synopsis,
 				}),
 				buttons: [
 					{
