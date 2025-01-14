@@ -26,12 +26,18 @@
 		"www.eurogamer.pl"
 	],
 	"version": "1.0.0",
-	"logo": "https://i.imgur.com/W7S7h1m.png",
+	"logo": "https://i.imgur.com/L2r2n5e.png",
 	"thumbnail": "https://i.imgur.com/TtRjcA3.png",
 	"color": "#007cbf",
 	"category": "games",
 	"tags": [
 		"news",
 		"gaming"
+	],
+	"settings": [
+		{
+			"id": "lang",
+			"multiLanguage": true
+		}
 	]
 }
