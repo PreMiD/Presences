@@ -124,21 +124,19 @@ presence.on("UpdateData", async () => {
 					 */
 					if (dub) currentDub = dub;
 
+					const title =
+						animeData.rus_name !== "" ? animeData.rus_name : animeData.name;
+
 					// presenceData.details =
 					// 	animeData.rus_name !== "" ? animeData.rus_name : animeData.name;
 					titleSetting
-						? (presenceData.name =
-								animeData.rus_name !== "" ? animeData.rus_name : animeData.name)
-						: (presenceData.details =
-								animeData.rus_name !== ""
-									? animeData.rus_name
-									: animeData.name);
+						? (presenceData.name = title)
+						: (presenceData.details = title);
 					presenceData.state = `${
 						episode ? (episode.includes("эпизод") ? episode : "Фильм") : "Фильм"
 					} | ${currentDub}`;
 					presenceData.largeImageKey = animeData.cover.default;
-					presenceData.largeImageText =
-						animeData.rus_name !== "" ? animeData.rus_name : animeData.name;
+					presenceData.largeImageText = title;
 					presenceData.buttons = [
 						{
 							label: "Открыть аниме",
