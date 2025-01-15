@@ -13,7 +13,7 @@ const presence = new Presence({
 	]);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/R0nvAIA.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/P/PikiDiary/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {
