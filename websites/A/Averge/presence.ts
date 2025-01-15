@@ -1,8 +1,7 @@
 const presence1 = new Presence({
   clientId: "1328861612735598664", // Deine Client ID
-});
-
-const browsingTimestamp1 = Math.floor(Date.now() / 1000);
+}),
+browsingTimestamp1 = Math.floor(Date.now() / 1000);
 
 presence1.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -45,9 +44,8 @@ presence1.on("UpdateData", () => {
     presenceData.state = "Unbekannte Seite";
   }
 
-  if (presenceData.details) {
+  if (presenceData.details)
     presence1.setActivity(presenceData);
-  } else {
+  else
     presence1.clearActivity();
-  }
 });
