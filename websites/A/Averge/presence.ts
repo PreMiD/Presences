@@ -1,7 +1,6 @@
 const presence1 = new Presence({
   clientId: "910193698644586536"
-});
-const browsingTimestamp2 = Math.floor(Date.now() / 1000);
+}), browsingTimestamp2 = Math.floor(Date.now() / 1000);
 
 presence1.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -9,9 +8,9 @@ presence1.on("UpdateData", () => {
     startTimestamp: browsingTimestamp2
   };
 
-   if (window.location.href.includes("averge.eu"))
+   if (window.location.href.includes("https://averge.eu"))
     presenceData.details = "https://averge.eu";
-  else if (window.location.href.includes("averge.eu")) {
+  else if (window.location.href.includes("https://averge.eu/")) {
     if (window.location.pathname.toLowerCase() === "/") {
       presenceData.details = "Schaut auf die Startseite";
       presenceData.state = "Dashboard";
