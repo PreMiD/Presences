@@ -29,7 +29,7 @@ presence1.on("UpdateData", () => {
     } else if (window.location.pathname.toLowerCase() === "/kontakt") {
       presenceData.details = "Schaut Kontakt an";
       presenceData.state = "Kontakt";
-    }  else if (window.location.pathname.toLowerCase().includes("/404")) {
+    } else if (window.location.pathname.toLowerCase().includes("/404")) {
       presenceData.details = "Schaut sich die Seite an:";
       presenceData.state = "404 Seite";
     } else if (window.location.pathname.toLowerCase().includes("/impressum")) {
