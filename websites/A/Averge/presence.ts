@@ -1,7 +1,6 @@
 const presence1 = new Presence({
   clientId: "1328861612735598664", // Deine Client ID
-}),
-browsingTimestamp1 = Math.floor(Date.now() / 1000);
+}), browsingTimestamp1 = Math.floor(Date.now() / 1000);
 
 presence1.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -30,13 +29,12 @@ presence1.on("UpdateData", () => {
         presenceData.state = "Informiert sich";
         break;
       default:
-        if (path.includes("/404")) {
+        if (path.includes("/404"))
           presenceData.details = "Hat eine ungültige Seite gefunden";
           presenceData.state = "404 - Seite nicht gefunden";
-        } else {
+        else
           presenceData.details = "Erforscht die Webseite";
           presenceData.state = "Stöbert durch Inhalte";
-        }
         break;
     }
   } else {
