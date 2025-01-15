@@ -37,6 +37,15 @@
 			"value": false
 		},
 		{
+			"id": "showAsListening",
+			"title": "Show song in status",
+			"icon": "fad fa-music",
+			"if": {
+				"privacy": false
+			},
+			"value": false
+		},
+		{
 			"id": "cover",
 			"title": "Show Cover",
 			"icon": "fad fa-images",

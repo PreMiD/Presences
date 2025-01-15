@@ -1,3 +1,16 @@
+//* I think this is a browser bug because the custom element does not have any properties when accessing it directly...
+window.addEventListener("message", e => {
+	if (e.data.type === "pmd-receive-image-id") ({ imageId } = e.data);
+});
+
+const script = document.createElement("script");
+script.textContent = `
+setInterval(() => {
+	window.postMessage({ type: "pmd-receive-image-id", imageId: document.querySelector("disney-web-player")?.mediaPlayer?.mediaPlaybackCriteria?.metadata?.images_experience?.standard?.tile["1.00"]?.imageId }, "*");
+}, 100);
+`;
+document.head.appendChild(script);
+
 const presence: Presence = new Presence({
 		clientId: "630236276829716483",
 	}),
@@ -22,7 +35,8 @@ async function getStrings() {
 let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null,
 	title: string,
-	subtitle: string;
+	subtitle: string,
+	imageId: string;
 
 presence.on("UpdateData", async () => {
 	const [newLang, privacy, time, buttons] = await Promise.all([
@@ -48,34 +62,54 @@ presence.on("UpdateData", async () => {
 				"https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/logo.png";
 			switch (true) {
 				case pathname.includes("play"): {
+					const video =
+						document.querySelector<HTMLVideoElement>("video#hivePlayer");
+
+					//* Wait for elements to load to prevent setactivity spam
+					if (!imageId || !video) return;
+
+					presenceData.largeImageKey = `https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/${imageId}/compose?format=png&width=512`;
+
 					if (!privacy) {
 						if (presenceData.startTimestamp) delete presenceData.startTimestamp;
 						presenceData.details = document.querySelector(
 							".title-field.body-copy"
 						)?.textContent;
-						presenceData.state =
-							document.querySelector(".subtitle-field")?.textContent;
 
-						const paused = !!document.querySelector("[aria-label='Play']"),
-							timeRemaining = document.querySelector(
-								".time-remaining-label"
-							)?.textContent;
+						const { paused } = video;
 
-						presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play;
-						presenceData.smallImageText = paused ? strings.pause : strings.play;
-
-						if (!paused && timeRemaining) {
-							presenceData.endTimestamp =
-								Date.now() / 1000 + presence.timestampFromFormat(timeRemaining);
+						if (!paused) {
+							const sliderEl = document.querySelector(
+									".progress-bar .slider-container"
+								),
+								timestamps = presence.getTimestamps(
+									parseInt(sliderEl.getAttribute("aria-valuenow")),
+									parseInt(sliderEl.getAttribute("aria-valuemax"))
+								);
+							presenceData.startTimestamp = timestamps[0];
+							presenceData.endTimestamp = timestamps[1];
+						} else {
+							presenceData.smallImageKey = Assets.Pause;
+							presenceData.smallImageText = strings.pause;
 						}
-					} else presenceData.details = "Watching content";
 
-					presenceData.buttons = [
-						{
-							label: "Watch Content",
-							url: href,
-						},
-					];
+						const parts = document
+							.querySelector(".subtitle-field")
+							?.textContent.match(/S(\d+):E(\d+) /);
+						if (parts?.length > 2)
+							presenceData.largeImageText = `Season ${parts[1]}, Episode ${parts[2]}`;
+
+						presenceData.state = document
+							.querySelector(".subtitle-field")
+							?.textContent.replace(/S(\d+):E(\d+) /, "");
+
+						presenceData.buttons = [
+							{
+								label: parts?.length > 2 ? "Watch Episode" : "Watch Movie",
+								url: href,
+							},
+						];
+					} else presenceData.details = "Watching content";
 					break;
 				}
 				case pathname.includes("entity"): {
