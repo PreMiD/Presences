@@ -141,10 +141,12 @@ presence.on("UpdateData", async () => {
 							logoType
 					  ] || LargImages.Logo
 					: metadata.data.video.boxart.at(0).url,
-				...(showSmallImages && {
-					smallImageKey: paused ? Assets.Pause : Assets.Play,
-				}),
-				smallImageText: paused ? strings.pause : strings.play,
+				largeImageText: `Season ${season.seq.toString()}, Episode ${episode.seq.toString()}`,
+				...(showSmallImages &&
+					paused && {
+						smallImageKey: Assets.Pause,
+						smallImageText: strings.pause,
+					}),
 				...(showTimestamp &&
 					!paused && {
 						startTimestamp,
@@ -153,9 +155,7 @@ presence.on("UpdateData", async () => {
 				...(usePresenceName && {
 					name: metadata.data.video.title,
 					details: episode.title,
-					state: strings.seriesDisplayFull
-						.replace("{0}", season.seq.toString())
-						.replace("{1}", episode.seq.toString()),
+					state: episode.synopsis,
 				}),
 				buttons: [
 					{
