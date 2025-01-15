@@ -73,27 +73,28 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/LWNN5i1.jpeg",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/logo.jpeg",
 }
 
 const chainLogo = {
-	ethereum: "https://i.imgur.com/sRQsRgt.png",
-	bsc: "https://i.imgur.com/P3R5xml.png",
-	solana: "https://i.imgur.com/yzW1XmK.png",
-	base: "https://i.imgur.com/RFCn600.png",
-	sui: "https://i.imgur.com/nRLlRS3.png",
-	aptos: "https://i.imgur.com/HnRC0zH.png",
-	arbitrum: "https://i.imgur.com/62omOHV.png",
-	avalanche: "https://i.imgur.com/EnQN7bJ.png",
-	cronos: "https://i.imgur.com/X884cZX.png",
-	fantom: "https://i.imgur.com/nBuhY97.png",
-	hyperliquid: "https://i.imgur.com/4YsBubJ.png",
-	ink: "https://i.imgur.com/pqBMg7y.png",
-	linea: "https://i.imgur.com/9l7YKgI.png",
-	optimism: "https://i.imgur.com/8c49Wtl.png",
-	osmosis: "https://i.imgur.com/aPdpP43.png",
-	polygon: "https://i.imgur.com/GLDY9Z0.png",
-	zksync: "https://i.imgur.com/5bK6sx8.png",
+	ethereum: "https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/0.png",
+	bsc: "https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/1.png",
+	solana: "https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/2.png",
+	base: "https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/3.png",
+	sui: "https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/4.png",
+	aptos: "https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/5.png",
+	arbitrum: "https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/6.png",
+	avalanche: "https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/7.png",
+	cronos: "https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/8.png",
+	fantom: "https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/9.png",
+	hyperliquid:
+		"https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/10.png",
+	ink: "https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/11.png",
+	linea: "https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/12.png",
+	optimism: "https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/13.png",
+	osmosis: "https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/14.png",
+	polygon: "https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/15.png",
+	zksync: "https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/16.png",
 };
 
 presence.on("UpdateData", async () => {
