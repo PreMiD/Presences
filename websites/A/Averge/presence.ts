@@ -1,12 +1,12 @@
 const presence1 = new Presence({
   clientId: "910193698644586536"
 });
-const browsingTimestamp = Math.floor(Date.now() / 1000);
+const browsingTimestamp2 = Math.floor(Date.now() / 1000);
 
 presence1.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "averge.eu",
-    startTimestamp: browsingTimetamp
+    startTimestamp: browsingTimestamp2
   };
 
    if (window.location.href.includes("averge.eu"))
