@@ -5,9 +5,17 @@ const presence = new Presence({
 		search: "general.searchFor",
 		searchPrivate: "general.searchSomething",
 		home: "general.viewHome",
-		settings: "discord.settings",
-		help: "twitch.help",
 		viewPage: "general.viewPage",
+		settings: "bravesearch.settings",
+		help: "bravesearch.help",
+		searchNews: "bravesearch.searchNewsFor",
+		searchNewsPrivate: "bravesearch.searchNewsSomething",
+		searchVid: "bravesearch.searchVidFor",
+		searchVidPrivate: "bravesearch.searchVidSomething",
+		searchImg: "bravesearch.searchImgFor",
+		searchImgPrivate: "bravesearch.searchImgSomething",
+		searchGoggles: "bravesearch.searchNewsFor",
+		searchGogglesPrivate: "bravesearch.searchNewsSomething",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
@@ -48,19 +56,27 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "images": {
-			presenceData.details = `Searching images${!privacy ? ":" : "..."}`;
+			presenceData.details = !privacy
+				? (await strings).searchImg
+				: (await strings).searchImgPrivate;
 			break;
 		}
 		case "news": {
-			presenceData.details = `Searching news${!privacy ? ":" : "..."}`;
+			presenceData.details = !privacy
+				? (await strings).searchNews
+				: (await strings).searchNewsPrivate;
 			break;
 		}
 		case "videos": {
-			presenceData.details = `Searching videos${!privacy ? ":" : "..."}`;
+			presenceData.details = !privacy
+				? (await strings).searchVid
+				: (await strings).searchVidPrivate;
 			break;
 		}
 		case "goggles": {
-			presenceData.details = `Searching goggles${!privacy ? ":" : "..."}`;
+			presenceData.details = !privacy
+				? (await strings).searchGoggles
+				: (await strings).searchGogglesPrivate;
 			break;
 		}
 		default: {
