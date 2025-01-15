@@ -7,7 +7,7 @@ presence1.on("UpdateData", () => {
 
   // Initial Presence Data
   const presenceData: PresenceData = {
-    largeImageKey: "averge.eu",
+    largeImageKey: "averge-eu-logo",
     startTimestamp: browsingTimestamp,
   };
 
