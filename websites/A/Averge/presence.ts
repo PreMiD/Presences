@@ -1,62 +1,86 @@
 const presence1 = new Presence({
-  clientId: "910193698644586536"
-}), browsingTimestamp2 = Math.floor(Date.now() / 1000);
+  clientId: "910193698644586536",
+});
 
 presence1.on("UpdateData", () => {
+  const browsingTimestamp = Math.floor(Date.now() / 1000);
+
+  // Initial Presence Data
   const presenceData: PresenceData = {
     largeImageKey: "averge.eu",
-    startTimestamp: browsingTimestamp2
+    startTimestamp: browsingTimestamp,
   };
 
-   if (window.location.href.includes("https://averge.eu"))
-    presenceData.details = "https://averge.eu";
-  else if (window.location.href.includes("https://averge.eu/")) {
-    if (window.location.pathname.toLowerCase() === "/") {
-      presenceData.details = "Schaut auf die Startseite";
-      presenceData.state = "Dashboard";
-    } else if (window.location.pathname.toLowerCase() === "/raidprotect") {
-      presenceData.details = "Schaut auf RaidProtect";
-      presenceData.state = "RaidProtect";
-    } else if (window.location.pathname.toLowerCase() === "/globalsecure") {
-      presenceData.details = "Schaut auf GlobalSecure";
-      presenceData.state = "GlobalSecure";
-    } else if (window.location.pathname.toLowerCase() === "/about") {
-      presenceData.details = "Schaut über uns an";
-      presenceData.state = "Über uns";
-    } else if (window.location.pathname.toLowerCase() === "/projectserver") {
-      presenceData.details = "Schaut auf ProjektServer";
-      presenceData.state = "ProjektServer";
-    } else if (window.location.pathname.toLowerCase() === "/kontakt") {
-      presenceData.details = "Schaut Kontakt an";
-      presenceData.state = "Kontakt";
-    } else if (window.location.pathname.toLowerCase().includes("/404")) {
-      presenceData.details = "Schaut sich die Seite an:";
-      presenceData.state = "404 Seite";
-    } else if (window.location.pathname.toLowerCase().includes("/impressum")) {
-      presenceData.details = "Schaut sich die Seite an:";
-      presenceData.state = "Impressum";
-    } else if (window.location.pathname.toLowerCase().includes("/datenschutz")) {
-      presenceData.details = "Schaut sich die Seite an:";
-      presenceData.state = "Datenschutz";
-    } 
+  // Base URL Check
+  if (window.location.href.startsWith("https://averge.eu")) {
+    const path = window.location.pathname.toLowerCase();
+
+    // Define Page Specific Presence Data
+    switch (path) {
+      case "/":
+        presenceData.details = "Schaut auf die Startseite";
+        presenceData.state = "Dashboard";
+        break;
+      case "/raidprotect":
+        presenceData.details = "Schaut auf RaidProtect";
+        presenceData.state = "RaidProtect";
+        break;
+      case "/globalsecure":
+        presenceData.details = "Schaut auf GlobalSecure";
+        presenceData.state = "GlobalSecure";
+        break;
+      case "/about":
+        presenceData.details = "Schaut über uns an";
+        presenceData.state = "Über uns";
+        break;
+      case "/projectserver":
+        presenceData.details = "Schaut auf ProjektServer";
+        presenceData.state = "ProjektServer";
+        break;
+      case "/kontakt":
+        presenceData.details = "Schaut Kontakt an";
+        presenceData.state = "Kontakt";
+        break;
+      default:
+        if (path.includes("/404")) {
+          presenceData.details = "Schaut sich die Seite an:";
+          presenceData.state = "404 Seite";
+        } else if (path.includes("/impressum")) {
+          presenceData.details = "Schaut sich die Seite an:";
+          presenceData.state = "Impressum";
+        } else if (path.includes("/datenschutz")) {
+          presenceData.details = "Schaut sich die Seite an:";
+          presenceData.state = "Datenschutz";
+        } else {
+          delete presenceData.details;
+        }
+        break;
+    }
   } else {
+    // Handle non-averge.eu URLs
     presenceData.details = "Schaut sich die Seite an:";
-    if (window.location.pathname.toLowerCase() === "/")
+    const path = window.location.pathname.toLowerCase();
+
+    if (path === "/") {
       presenceData.state = "Homepage";
-     else if (window.location.pathname.toLowerCase().includes("/404")) {
+    } else if (path.includes("/404")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "404 Seite";
-    } else if (window.location.pathname.toLowerCase().includes("/impressum")) {
+    } else if (path.includes("/impressum")) {
       presenceData.details = "Schaut sich die Seite an:";
       presenceData.state = "Impressum";
-    } else if (window.location.pathname.toLowerCase().includes("/datenschutz")) {
+    } else if (path.includes("/datenschutz")) {
       presenceData.details = "Schaut sich die Seite an:";
       presenceData.state = "Datenschutz";
-    } else delete presenceData.details;
+    } else {
+      delete presenceData.details;
+    }
   }
 
+  // Update the presence
   if (!presenceData.details) {
-    presence1.setTrayTitle();
-    presence1.setActivity();
-  } else presence1.setActivity(presenceData);
+    presence1.clearActivity();
+  } else {
+    presence1.setActivity(presenceData);
+  }
 });
