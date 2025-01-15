@@ -2,10 +2,14 @@
 // Hack to resolve Deepscan
 const no_op = (a: number) => a + 1;
 no_op(0);
+
 const presence = new Presence({
 		clientId: "632983924414349333",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	djeetas: Record<string, string> = {},
+	gameIcon =
+		"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/logo.png";
 
 enum Elements {
 	Plain,
@@ -19,8 +23,7 @@ enum Elements {
 
 const ElementIcons = {
 		// Plain element isn't really a thing for characters, but it's here for the sake of completion
-		[Elements.Plain]:
-			"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/logo.png",
+		[Elements.Plain]: gameIcon,
 		[Elements.Fire]:
 			"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/0.png",
 		[Elements.Water]:
@@ -105,10 +108,63 @@ function simplifyKey<T>(obj: T): T {
 	return obj;
 }
 
+function getDjeeta(imgUri: string, uri: string): Promise<string> {
+	return new Promise(resolve => {
+		if (djeetas[uri]) return resolve(djeetas[uri]);
+
+		const img = new Image();
+		img.crossOrigin = "anonymous";
+		img.src = `${imgUri}/sp/assets/leader/raid_normal/${uri}.jpg`;
+
+		img.onload = function () {
+			const tempCanvas = document.createElement("canvas");
+			tempCanvas.width = img.width;
+			tempCanvas.height = img.width;
+
+			const tempCtx = tempCanvas.getContext("2d");
+
+			// Draw the first 3 pixel rows of the image to the canvas (top border)
+			tempCtx.drawImage(img, 0, 0, img.width, 3, 0, 0, img.width, 3);
+
+			// Then the rest of the image and leaving 3 pixels at the bottom
+			tempCtx.drawImage(
+				img,
+				0,
+				35,
+				img.width,
+				img.width - 3,
+				0,
+				3,
+				img.width,
+				img.width - 3
+			);
+
+			// Then the last 3 pixel rows of the image to the canvas (bottom border)
+			tempCtx.drawImage(
+				img,
+				0,
+				img.height - 3,
+				img.width,
+				3,
+				0,
+				img.width - 3,
+				img.width,
+				3
+			);
+
+			djeetas[uri] = tempCanvas.toDataURL("image/png");
+			resolve(tempCanvas.toDataURL("image/png"));
+		};
+
+		img.onerror = function () {
+			resolve(gameIcon);
+		};
+	});
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/logo.png",
+			largeImageKey: gameIcon,
 			startTimestamp: browsingTimestamp,
 		},
 		{ href } = document.location,
@@ -190,7 +246,10 @@ presence.on("UpdateData", async () => {
 			if (charaAlive) {
 				presenceData.smallImageKey = ElementIcons[charaAlive.attr];
 				presenceData.smallImageText = ElementsNames[charaAlive.attr];
-				presenceData.largeImageKey = `${userData.imgUri}/sp/assets/leader/raid_normal/${charaAlive.pid}.jpg`;
+				presenceData.largeImageKey = await getDjeeta(
+					userData.imgUri,
+					charaAlive.pid
+				);
 			}
 		}
 	} else if (href.includes("/#party/index/0/npc/0"))
@@ -210,11 +269,11 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Co-op:";
 
 		if (href.includes("offer"))
-			presenceData.state = "Searching a raid coop room";
-		else if (href.includes("room")) presenceData.state = "In a coop room";
+			presenceData.state = "Searching a raid co-op room";
+		else if (href.includes("room")) presenceData.state = "In a co-op room";
 	} else if (href.includes("/#lobby/room")) {
-		presenceData.details = "Co-op :";
-		presenceData.state = "In a raid coop room";
+		presenceData.details = "Co-op:";
+		presenceData.state = "In a raid co-op room";
 	} else if (href.includes("/#casino")) {
 		presenceData.details = "Casino:";
 		presenceData.state = "Main menu";
