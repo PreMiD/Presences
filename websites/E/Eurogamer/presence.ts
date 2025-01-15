@@ -8,23 +8,20 @@ const enum Assets {
 }
 
 async function getStrings() {
-	return presence.getStrings(
-		{
-			search: "general.searchFor",
-			viewHome: "general.viewHome",
-			buttonViewPage: "general.buttonViewPage",
-			read: "general.readingArticle",
-			thread: "general.readingThread",
-			viewList: "general.viewList",
-			viewMovie: "general.viewMovie",
-			viewGenre: "general.viewGenre",
-			viewing: "general.viewing",
-			viewCategory: "general.viewCategory",
-			support: "general.support",
-			viewProfile: "general.viewProfile",
-		},
-		await presence.getSetting<string>("lang").catch(() => "en")
-	);
+	return presence.getStrings({
+		search: "general.searchFor",
+		viewHome: "general.viewHome",
+		buttonViewPage: "general.buttonViewPage",
+		read: "general.readingArticle",
+		thread: "general.readingThread",
+		viewList: "general.viewList",
+		viewMovie: "general.viewMovie",
+		viewGenre: "general.viewGenre",
+		viewing: "general.viewing",
+		viewCategory: "general.viewCategory",
+		support: "general.support",
+		viewProfile: "general.viewProfile",
+	});
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
