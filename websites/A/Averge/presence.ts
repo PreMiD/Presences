@@ -1,12 +1,12 @@
 const presence1 = new Presence({
   clientId: "910193698644586536"
 });
-const browsingStamp2 = Math.floor(Date.now() / 1000);
+const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence1.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "averge.eu",
-    startTimestamp: browsingStamp2
+    startTimestamp: browsingTimetamp
   };
 
    if (window.location.href.includes("averge.eu"))
@@ -50,10 +50,10 @@ presence1.on("UpdateData", () => {
     } else if (window.location.pathname.toLowerCase().includes("/impressum")) {
       presenceData.details = "Schaut sich die Seite an:";
       presenceData.state = "Impressum";
-    } else if (window.location.pathname.toLowerCase().includes("/legal/privacy")) {
+    } else if (window.location.pathname.toLowerCase().includes("/datenschutz")) {
       presenceData.details = "Schaut sich die Seite an:";
       presenceData.state = "Datenschutz";
-    }  else delete presenceData.details;
+    } else delete presenceData.details;
   }
 
   if (!presenceData.details) {
