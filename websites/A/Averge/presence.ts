@@ -1,6 +1,8 @@
 const presence1 = new Presence({
   clientId: "1328861612735598664", // Deine Client ID
-}), browsingTimestamp1 = Math.floor(Date.now() / 1000);
+});
+
+const browsingTimestamp1 = Math.floor(Date.now() / 1000);
 
 presence1.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -44,8 +46,8 @@ presence1.on("UpdateData", () => {
   }
 
   if (presenceData.details) {
-    presence.setActivity(presenceData);
+    presence1.setActivity(presenceData);
   } else {
-    presence.clearActivity();
+    presence1.clearActivity();
   }
 });
