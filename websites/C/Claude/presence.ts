@@ -20,8 +20,8 @@ let oldLang: string = null,
 	strings: Awaited<ReturnType<typeof getStrings>>;
 
 const enum Assets {
-	Logo = "https://i.imgur.com/t2w5Nso.png",
-	Talking = "https://i.imgur.com/rnAQvqx.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/Claude/assets/logo.png",
+	Talking = "https://cdn.rcd.gg/PreMiD/websites/C/Claude/assets/0.png",
 }
 
 presence.on("UpdateData", async () => {
