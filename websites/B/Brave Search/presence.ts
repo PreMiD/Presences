@@ -1,6 +1,14 @@
 const presence = new Presence({
 		clientId: "1293341957141303307",
 	}),
+	strings = presence.getStrings({
+		search: "general.searchFor",
+		searchPrivate: "general.searchSomething",
+		home: "general.viewHome",
+		settings: "discord.settings",
+		help: "twitch.help",
+		viewPage: "general.viewPage",
+	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
@@ -13,7 +21,7 @@ presence.on("UpdateData", async () => {
 		presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
-			details: "In Home",
+			details: (await strings).home,
 			state: privacy
 				? // eslint-disable-next-line no-undefined
 				  undefined
@@ -22,21 +30,21 @@ presence.on("UpdateData", async () => {
 
 	switch (pathname.split("/")[1]) {
 		case "settings": {
-			presenceData.details = "Viewing Settings";
+			presenceData.details = (await strings).settings;
 			delete presenceData.state;
 			break;
 		}
 		case "help": {
-			if (!privacy) {
-				presenceData.details = "Viewing Help Page:";
-				presenceData.state = document
-					.querySelector(".post-title")
-					?.textContent?.trim();
-			} else presenceData.details = "Viewing Help Pages";
+			presenceData.details = (await strings).viewPage;
+			presenceData.state = !privacy
+				? document.querySelector(".post-title")?.textContent?.trim()
+				: (await strings).help;
 			break;
 		}
 		case "search": {
-			presenceData.details = `Searching${!privacy ? ":" : "..."}`;
+			presenceData.details = !privacy
+				? (await strings).search
+				: (await strings).searchPrivate;
 			break;
 		}
 		case "images": {
