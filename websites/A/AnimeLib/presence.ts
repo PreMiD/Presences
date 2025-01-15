@@ -127,8 +127,6 @@ presence.on("UpdateData", async () => {
 					const title =
 						animeData.rus_name !== "" ? animeData.rus_name : animeData.name;
 
-					// presenceData.details =
-					// 	animeData.rus_name !== "" ? animeData.rus_name : animeData.name;
 					titleSetting
 						? (presenceData.name = title)
 						: (presenceData.details = title);
