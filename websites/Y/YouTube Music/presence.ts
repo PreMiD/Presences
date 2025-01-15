@@ -20,6 +20,7 @@ presence.on("UpdateData", async () => {
 			showBrowsing,
 			privacyMode,
 			useTimeLeft,
+			showAsListening,
 		] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("timestamps"),
@@ -28,6 +29,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("browsing"),
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("useTimeLeft"),
+			presence.getSetting<boolean>("showAsListening"),
 		]),
 		{ mediaSession } = navigator,
 		watchID =
@@ -122,7 +124,7 @@ presence.on("UpdateData", async () => {
 
 		presenceData = {
 			type: ActivityType.Listening,
-			name: mediaSession.metadata.title,
+			name: showAsListening ? mediaSession.metadata.title : "YouTube Music",
 			largeImageKey: showCover
 				? mediaSession?.metadata?.artwork?.at(-1)?.src ??
 				  "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/1.png"
