@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
 				];
 			}
 		} else {
-			presenceData.type = ActivityType.Watching;
+			(presenceData as PresenceData).type = ActivityType.Watching;
 			presenceData.details = getElement("#title-text"); // live name
 			presenceData.state = document.querySelectorAll("a")[4].textContent; // user name
 			presenceData.largeImageKey =
