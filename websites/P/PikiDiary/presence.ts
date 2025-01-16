@@ -13,7 +13,7 @@ const presence = new Presence({
 	]);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/R0nvAIA.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/P/PikiDiary/assets/logo.png",
 }
 
 presence.on("UpdateData", async () => {
@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
 				];
 			}
 		} else {
-			presenceData.type = ActivityType.Watching;
+			(presenceData as PresenceData).type = ActivityType.Watching;
 			presenceData.details = getElement("#title-text"); // live name
 			presenceData.state = document.querySelectorAll("a")[4].textContent; // user name
 			presenceData.largeImageKey =
