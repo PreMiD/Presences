@@ -458,7 +458,7 @@ presence.on("UpdateData", async () => {
 
 				if (showLive && live) {
 					//* Live
-					const title = getElement(".channel-info-content h2"),
+					const title = getElement("p[data-a-target='stream-title']"),
 						streamer =
 							document.querySelector(".channel-info-content h1")?.textContent ??
 							document
