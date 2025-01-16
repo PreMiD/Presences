@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		privacy = await presence.getSetting<boolean>("privacy"),
-		{ pathname } = window.location;
+		{ pathname } = document.location;
 
 	if (!privacy) {
 		switch (pathname) {
