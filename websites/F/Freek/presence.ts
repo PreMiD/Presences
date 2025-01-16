@@ -37,7 +37,6 @@ presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
-		type: ActivityType.Watching,
 		details: "Unsupported Page",
 	};
 
@@ -74,7 +73,7 @@ presence.on("UpdateData", async () => {
 	};
 
 	for (const [path, data] of Object.entries(pages))
-		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
+		if (pathname.includes(path)) presenceData = { ...presenceData, ...data, type: ActivityType.Watching };
 
 	const pageNumber = href.includes("?page=") ? href.split("?page=")[1] : 1,
 		searchInput = document.querySelector("input")
