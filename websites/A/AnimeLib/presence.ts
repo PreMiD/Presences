@@ -37,7 +37,7 @@ const isPrivacyMode = (setting: boolean, ageRestriction?: AgeRestriction) =>
 	cleanUrl = (location: Location) =>
 		location.href.replace(location.search, "").replace("/watch", "");
 
-let iFrameVideo: IFrameVideo;
+let iFrameVideo: IFrameVideo, currentDub: string;
 
 presence.on("iFrameData", (data: IFrameVideo) => {
 	iFrameVideo = data;
@@ -51,9 +51,10 @@ presence.on("UpdateData", async () => {
 			largeImageText: "AnimeLib",
 			smallImageText: "AnimeLib",
 		},
-		[privacySetting, buttonsSetting] = await Promise.all([
+		[privacySetting, buttonsSetting, titleSetting] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("titleAsPresence"),
 		]),
 		path = document.location.pathname;
 
@@ -115,15 +116,25 @@ presence.on("UpdateData", async () => {
 							.querySelectorAll(".btn.is-outline")[7]
 							?.querySelector("span")?.textContent;
 
-				if (dub) {
-					presenceData.details =
+				if (dub || currentDub) {
+					/**
+					 * This makes sure that the dub will always be defined.
+					 * When user changes menu between dubs/subs, the menu items are different,
+					 * so it's not possible to get the current active item if it's in a different menu.
+					 */
+					if (dub) currentDub = dub;
+
+					const title =
 						animeData.rus_name !== "" ? animeData.rus_name : animeData.name;
+
+					titleSetting
+						? (presenceData.name = title)
+						: (presenceData.details = title);
 					presenceData.state = `${
 						episode ? (episode.includes("эпизод") ? episode : "Фильм") : "Фильм"
-					} | ${dub}`;
+					} | ${currentDub}`;
 					presenceData.largeImageKey = animeData.cover.default;
-					presenceData.largeImageText =
-						animeData.rus_name !== "" ? animeData.rus_name : animeData.name;
+					presenceData.largeImageText = title;
 					presenceData.buttons = [
 						{
 							label: "Открыть аниме",
