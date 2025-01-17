@@ -117,6 +117,11 @@ class Compiler {
 							from: resolve(this.cwd, "metadata.json"),
 							to: "metadata.json",
 						},
+						{
+							from: resolve(this.cwd, `${service}.json`),
+							to: `${service}.json`,
+							noErrorOnMissing: true,
+						},
 					],
 				}),
 				new webpack.WatchIgnorePlugin({
