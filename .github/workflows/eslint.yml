@@ -11,10 +11,12 @@ name: ESLint
 
 on:
   push:
-    branches: ["main"]
+    branches: [main]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: ["main"]
+    branches: [main]
+  schedule:
+    - cron: '44 1 * * 4'
 
 jobs:
   eslint:
@@ -35,7 +37,7 @@ jobs:
 
       - name: Run ESLint
         env:
-          SARIF_ESLINT_IGNORE_SUPPRESSED: "true"
+          SARIF_ESLINT_IGNORE_SUPPRESSED: 'true'
         run: npx eslint . --config .eslintrc.json --ext .js,.jsx,.ts,.tsx --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif
         continue-on-error: true
 

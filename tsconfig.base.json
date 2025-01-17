@@ -1,4 +1,19 @@
 {
-	"extends": "@total-typescript/tsconfig/tsc/dom/library-monorepo",
-	"exclude": ["**/**/*.config.ts", "**/*.test.ts", "**/*/dist"]
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "typeRoots": ["@types"],
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "inlineSourceMap": true,
+    "newLine": "lf",
+    "noEmitOnError": true,
+    "removeComments": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  }
 }
