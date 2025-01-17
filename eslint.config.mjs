@@ -12,6 +12,10 @@ export default antfu(
         'error',
         'TSExportAssignment',
       ],
+      'new-cap': [
+        'error',
+        { newIsCapExceptions: ['iFrame'], capIsNew: false, newIsCap: true, properties: true },
+      ],
     },
   },
 )
