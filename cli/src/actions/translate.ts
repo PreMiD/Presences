@@ -9,7 +9,6 @@ import prompts from "prompts";
 import semver from "semver";
 
 import fetchSchema from "../functions/fetchSchema.js";
-import getFolderLetter from "../functions/getFolderLetter.js";
 import getPresences from "../functions/getPresences.js";
 import { apollo } from "../util/apollo.js";
 import { prefix } from "../util/prefix.js";
@@ -99,7 +98,9 @@ const { selPresences, category } = await prompts([
 		message: "Select the Presences you want to translate",
 		instructions: "Use arrow keys to select and space to toggle",
 		choices: presences.map(p => ({
-			title: p.service,
+			title: `${p.metadata.service} ${
+				p.versioned ? `(API v${p.metadata.apiVersion})` : ""
+			}`,
 			value: p,
 		})),
 		min: 1,
@@ -120,8 +121,10 @@ const { filterPresences } = await prompts([
 	},
 ]);
 
-if (filterPresences) presences = presences.filter(p => !p.description?.[lang]);
-if (category) presences = presences.filter(p => p.category === category);
+if (filterPresences)
+	presences = presences.filter(p => !p.metadata.description?.[lang]);
+if (category)
+	presences = presences.filter(p => p.metadata.category === category);
 
 await translatePresences(presences, lang);
 
@@ -130,8 +133,8 @@ process.exit(0);
 async function translatePresences(presences: any, lang: string) {
 	if (!Array.isArray(presences)) process.exit(0);
 	for (const presence of presences) {
-		const desc = presence.description?.[lang],
-			enDesc = presence.description?.en;
+		const desc = presence.metadata.description?.[lang],
+			enDesc = presence.metadata.description?.en;
 
 		console.log(
 			`${
@@ -141,7 +144,7 @@ async function translatePresences(presences: any, lang: string) {
 		const { translation } = await inquirer.prompt({
 			type: "input",
 			name: "translation",
-			message: presence.service,
+			message: presence.metadata.service,
 			default: desc,
 			validate: (input: string) =>
 				!!input ||
@@ -151,23 +154,22 @@ async function translatePresences(presences: any, lang: string) {
 		if (translation === "skip" || translation === desc) continue;
 		if (translation === "stop") break;
 
-		const presencePath = resolve(
-			`./websites/${getFolderLetter(presence.service)}/${presence.service
-				.replace("!", " ")
-				.trim()}`
-		);
+		const presencePath = resolve(`./${presence.path}`);
 
-		presence.description[lang] = translation;
-		if (valid(coerce(presence.version)))
-			presence.version = inc(valid(coerce(presence.version)!)!, "patch");
+		presence.metadata.description[lang] = translation;
+		if (valid(coerce(presence.metadata.version)))
+			presence.metadata.version = inc(
+				valid(coerce(presence.metadata.version)!)!,
+				"patch"
+			);
 		else
 			console.warn(
-				`Invalid version for ${presence.service}, skipping version bump.`
+				`Invalid version for ${presence.metadata.service}, skipping version bump.`
 			);
 
 		await writeFile(
 			resolve(presencePath, "metadata.json"),
-			JSON.stringify(presence, null, "\t")
+			JSON.stringify(presence.metadata, null, "\t")
 		);
 	}
 }

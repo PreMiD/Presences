@@ -12,7 +12,6 @@ import webpack from "webpack";
 import CopyPlugin from "copy-webpack-plugin";
 import { createRequire } from "module";
 import socket from "../util/socket.js";
-import getFolderLetter from "../functions/getFolderLetter.js";
 import getPresences from "../functions/getPresences.js";
 import { prefix } from "../util/prefix.js";
 import { ErrorInfo } from "ts-loader/dist/interfaces.js";
@@ -25,9 +24,11 @@ program
 	.option("-m, --modify [presence]")
 	.parse(process.argv);
 
-let service = program.getOptionValue("modify");
+const serviceIncoming = program.getOptionValue("modify");
 
-if (typeof service !== "string") {
+let service: { service: string; versioned: boolean; path: string };
+
+if (typeof serviceIncoming !== "string") {
 	service = (
 		await prompts({
 			name: "service",
@@ -35,39 +36,58 @@ if (typeof service !== "string") {
 			type: "autocomplete",
 			choices: (
 				await getPresences()
-			).map(s => ({
+			).map(({ metadata: s, path, versioned }) => ({
 				title: s.service,
-				description: "v" + s.version,
-				value: s.service,
+				description: `v${s.version} ${
+					versioned ? `(API v${s.apiVersion})` : ""
+				}`,
+				value: { service: s.service, path, versioned },
 			})),
 		})
 	).service;
 
 	if (!service) process.exit(0);
-	service = service.trim();
 } else {
 	//check if the requested presence (-m [presence]) exists
-	service = service.trim();
-	if (
-		!(await getPresences())
-			.map(s => ({
-				title: s.service,
-			}))
-			.find(
-				p =>
-					p.title.toLowerCase() ===
-					service.replace("!", " ").trim().toLowerCase()
-			)
-	) {
-		console.log(prefix, chalk.redBright("Could not find presence:", service));
+	const foundPresences = (await getPresences()).filter(
+		p =>
+			p.metadata.service.toLowerCase() ===
+			serviceIncoming.replace("!", " ").trim().toLowerCase()
+	);
+
+	if (foundPresences.length === 0) {
+		console.log(
+			prefix,
+			chalk.redBright("Could not find presence:", serviceIncoming)
+		);
 		process.exit(0);
+	}
+	if (foundPresences.length === 1) {
+		service = {
+			service: foundPresences[0].metadata.service,
+			path: foundPresences[0].path,
+			versioned: foundPresences[0].versioned,
+		};
+	} else {
+		service = (
+			await prompts({
+				name: "service",
+				message: "Select or search for a presence to modify",
+				type: "autocomplete",
+				choices: foundPresences.map(({ metadata: s, path, versioned }) => ({
+					title: s.service,
+					description: `v${s.version} (API v${s.apiVersion})`,
+					value: { service: s.service, path, versioned },
+				})),
+			})
+		).service;
+
+		if (!service) process.exit(0);
 	}
 }
 
 const require = createRequire(import.meta.url);
-const presencePath = resolve(
-	`./websites/${getFolderLetter(service)}/${service.replace("!", " ").trim()}`
-);
+const presencePath = resolve(`./${service.path}`);
 
 const moduleManager = new ModuleManager(presencePath);
 
@@ -75,7 +95,10 @@ await moduleManager.installDependencies();
 
 if (!existsSync(resolve(presencePath, "tsconfig.json")))
 	await cp(
-		resolve(fileURLToPath(import.meta.url), "../../../template/tsconfig.json"),
+		resolve(
+			fileURLToPath(import.meta.url),
+			`../../../template/tsconfig${service.versioned ? ".versioned" : ""}.json`
+		),
 		resolve(presencePath, "tsconfig.json")
 	);
 
@@ -118,8 +141,8 @@ class Compiler {
 							to: "metadata.json",
 						},
 						{
-							from: resolve(this.cwd, `${service}.json`),
-							to: `${service}.json`,
+							from: resolve(this.cwd, `${service.service}.json`),
+							to: `${service.service}.json`,
 							noErrorOnMissing: true,
 						},
 					],

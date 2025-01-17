@@ -12,5 +12,15 @@ export default async function isFirstTimeAuthor(author: string) {
 		return false;
 	}
 
+	for (const m of await globby("websites/*/*/v*/metadata.json")) {
+		const {
+			author: { id },
+		} = JSON.parse(await readFile(m, "utf-8"));
+
+		if (author !== id) continue;
+
+		return false;
+	}
+
 	return true;
 }
