@@ -131,7 +131,9 @@ presence.on("UpdateData", async () => {
 				: "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/1.png",
 			details: mediaSession.metadata.title,
 			state: mediaSession.metadata.artist,
-			largeImageText: mediaSession.metadata.album,
+			...(mediaSession.metadata.album && {
+				largeImageText: mediaSession.metadata.album,
+			}),
 			...(showButtons && {
 				buttons,
 			}),
