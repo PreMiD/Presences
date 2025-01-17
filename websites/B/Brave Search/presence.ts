@@ -1,7 +1,14 @@
 const presence = new Presence({
 		clientId: "1293341957141303307",
 	}),
-	strings = presence.getStrings({
+	browsingTimestamp = Math.floor(Date.now() / 1000);
+
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/B/Brave%20Search/assets/logo.png",
+}
+
+async function getStrings() {
+	return presence.getStrings({
 		search: "general.searchFor",
 		searchPrivate: "general.searchSomething",
 		home: "general.viewHome",
@@ -16,20 +23,26 @@ const presence = new Presence({
 		searchImgPrivate: "bravesearch.searchImgSomething",
 		searchGoggles: "bravesearch.searchNewsFor",
 		searchGogglesPrivate: "bravesearch.searchNewsSomething",
-	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
-
-const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/B/Brave%20Search/assets/logo.png",
+	});
 }
 
+let strings: Awaited<ReturnType<typeof getStrings>>,
+	oldLang: string = null;
+
 presence.on("UpdateData", async () => {
+	const newLang = await presence.getSetting<string>("lang").catch(() => "en");
+
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
+		strings = await getStrings();
+	}
+
 	const { pathname } = document.location,
 		privacy = await presence.getSetting("privacy"),
 		presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
-			details: (await strings).home,
+			details: strings.home,
 			state: privacy
 				? // eslint-disable-next-line no-undefined
 				  undefined
@@ -38,45 +51,43 @@ presence.on("UpdateData", async () => {
 
 	switch (pathname.split("/")[1]) {
 		case "settings": {
-			presenceData.details = (await strings).settings;
+			presenceData.details = strings.settings;
 			delete presenceData.state;
 			break;
 		}
 		case "help": {
-			presenceData.details = (await strings).viewPage;
+			presenceData.details = strings.viewPage;
 			presenceData.state = !privacy
 				? document.querySelector(".post-title")?.textContent?.trim()
-				: (await strings).help;
+				: strings.help;
 			break;
 		}
 		case "search": {
-			presenceData.details = !privacy
-				? (await strings).search
-				: (await strings).searchPrivate;
+			presenceData.details = !privacy ? strings.search : strings.searchPrivate;
 			break;
 		}
 		case "images": {
 			presenceData.details = !privacy
-				? (await strings).searchImg
-				: (await strings).searchImgPrivate;
+				? strings.searchImg
+				: strings.searchImgPrivate;
 			break;
 		}
 		case "news": {
 			presenceData.details = !privacy
-				? (await strings).searchNews
-				: (await strings).searchNewsPrivate;
+				? strings.searchNews
+				: strings.searchNewsPrivate;
 			break;
 		}
 		case "videos": {
 			presenceData.details = !privacy
-				? (await strings).searchVid
-				: (await strings).searchVidPrivate;
+				? strings.searchVid
+				: strings.searchVidPrivate;
 			break;
 		}
 		case "goggles": {
 			presenceData.details = !privacy
-				? (await strings).searchGoggles
-				: (await strings).searchGogglesPrivate;
+				? strings.searchGoggles
+				: strings.searchGogglesPrivate;
 			break;
 		}
 		default: {

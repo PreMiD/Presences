@@ -24,6 +24,10 @@
 			"title": "Privacy Mode",
 			"icon": "fad fa-user-secret",
 			"value": false
+		},
+		{
+			"id": "lang",
+			"multiLanguage": true
 		}
 	]
 }
