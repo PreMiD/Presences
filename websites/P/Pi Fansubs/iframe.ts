@@ -19,4 +19,3 @@ iframe.on("UpdateData", async () => {
 		});
 	}
 });
-
