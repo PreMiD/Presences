@@ -129,8 +129,11 @@ presence.on("UpdateData", async () => {
 				? mediaSession?.metadata?.artwork?.at(-1)?.src ??
 				  "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/1.png"
 				: "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/1.png",
-			details: mediaSession.metadata.album,
+			details: mediaSession.metadata.title,
 			state: mediaSession.metadata.artist,
+			...(mediaSession.metadata.album && {
+				largeImageText: mediaSession.metadata.album,
+			}),
 			...(showButtons && {
 				buttons,
 			}),
