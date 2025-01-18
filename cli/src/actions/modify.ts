@@ -89,6 +89,7 @@ class Compiler {
 	constructor(private cwd: string) {}
 
 	async watch() {
+		const hasI18n = existsSync(resolve(this.cwd, `${service}.json`));
 		this.compiler = webpack({
 			mode: "none",
 			resolveLoader: {
@@ -117,11 +118,14 @@ class Compiler {
 							from: resolve(this.cwd, "metadata.json"),
 							to: "metadata.json",
 						},
-						{
-							from: resolve(this.cwd, `${service}.json`),
-							to: `${service}.json`,
-							noErrorOnMissing: true,
-						},
+						...(hasI18n
+							? [
+									{
+										from: resolve(this.cwd, `${service}.json`),
+										to: `${service}.json`,
+									},
+							  ]
+							: []),
 					],
 				}),
 				new webpack.WatchIgnorePlugin({
@@ -244,7 +248,10 @@ const compiler = new Compiler(presencePath);
 watch(presencePath, { depth: 0, persistent: true, ignoreInitial: true }).on(
 	"all",
 	async (event, file) => {
-		if (["add", "unlink"].includes(event) && basename(file) === "iframe.ts")
+		if (
+			["add", "unlink"].includes(event) &&
+			["iframe.ts", `${service}.json`].includes(basename(file))
+		)
 			return await compiler.restart();
 
 		if (basename(file) === "package.json") {
@@ -298,7 +305,9 @@ async function sendPresenceToExtension(path: PathLike) {
 					if (extname(f) === ".json")
 						return {
 							file: f,
-							contents: JSON.parse(readFileSync(`${path}/${f}`).toString()),
+							contents: JSON.parse(
+								readFileSync(`${path}/${f}`).toString() || "{}"
+							),
 						};
 					else if (extname(f) === ".js")
 						return {
