@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"apiVersion": 1,
 	"author": {
 		"name": "TheDrop.",
 		"id": "293828021134295040"
@@ -8,11 +9,16 @@
 		{
 			"name": "Rodry",
 			"id": "240875059953139714"
+		},
+		{
+			"name": "Atom Skully",
+			"id": "671037171611729920"
 		}
 	],
 	"service": "Crowdin",
 	"description": {
 		"en": "Crowdin is a cloud-based solution that streamlines localization management for your team.",
+		"fr": "Crowdin est une solution basée sur le cloud qui rationalise la gestion de la localisation pour votre équipe.",
 		"ro": "Crowdin este o soluție bazată pe cloud care eficientizează gestionarea localizării pentru echipa ta.",
 		"nl": "Crowdin is een cloudgebaseerde oplossing die lokalisatiebeheer voor uw team stroomlijnt.",
 		"vi_VN": "Crowdin là giải pháp trực tuyến cho việc quản lý đội ngũ bản địa hoá của bạn.",
@@ -26,7 +32,7 @@
 		"status.crowdin.com",
 		"blog.crowdin.com"
 	],
-	"version": "4.0.9",
+	"version": "4.0.12",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/C/Crowdin/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/Crowdin/assets/thumbnail.png",
 	"color": "#2e3340",

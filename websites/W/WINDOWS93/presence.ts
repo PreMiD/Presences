@@ -110,13 +110,12 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "WideoLAN": {
-			const timestamps = presence.getTimestamps(
-				iFrameData.wlc.currentTime,
-				iFrameData.wlc.duration
-			);
 			if (!iFrameData.wlc.paused) {
-				presenceData.startTimestamp = timestamps[0];
-				presenceData.endTimestamp = timestamps[1];
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(
+						iFrameData.wlc.currentTime,
+						iFrameData.wlc.duration
+					);
 			}
 			presenceData.smallImageKey = iFrameData.wlc.paused
 				? Assets.Pause

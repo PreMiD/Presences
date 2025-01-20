@@ -1,5 +1,5 @@
 import getGame from "./games";
-import { getGameTag, getMetadata } from "./util";
+import { getGameTag } from "./util";
 
 const presence = new Presence({
 		clientId: "1089962805270171689",
@@ -36,11 +36,9 @@ presence.on("UpdateData", async () => {
 		}
 		case "tutorial": {
 			const game = getGame(await getGameTag(presence));
-			presenceData.details = `Playing tutorial for ${await getMetadata<string>(
-				presence,
-				"game_name_displayed",
-				true
-			)}`;
+			presenceData.details = `Playing tutorial for ${document
+				.querySelector("meta[property='og:title']")
+				.getAttribute("content")}`;
 			presenceData.largeImageKey = game.logo;
 			Object.assign(presenceData, await game.getData(presence));
 			break;
@@ -120,11 +118,9 @@ presence.on("UpdateData", async () => {
 		default: {
 			if (/^\d+$/.test(pathList[0])) {
 				const game = getGame(await getGameTag(presence));
-				presenceData.details = `Playing ${await getMetadata<string>(
-					presence,
-					"game_name_displayed",
-					true
-				)}`;
+				presenceData.details = `Playing ${document
+					.querySelector("meta[property='og:title']")
+					.getAttribute("content")}`;
 				presenceData.largeImageKey = game.logo;
 				Object.assign(presenceData, await game.getData(presence));
 				break;

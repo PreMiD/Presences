@@ -89,8 +89,10 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageText = video.paused ? "Pausado" : "Reproduzindo";
 
 		delete presenceData.startTimestamp;
-		if (!video.paused)
-			presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
+		if (!video.paused) {
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestampsfromMedia(video);
+		}
 	} else if (document.location.pathname.includes("/dashboard"))
 		presenceData.details = "Vendo a dashboard";
 	else if (document.location.pathname.includes("/formacao")) {
@@ -231,6 +233,7 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.includes("/points"))
 		presenceData.details = "Vendo pontos";
 
+	if (presenceData.endTimestamp) presenceData.type = ActivityType.Watching;
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });

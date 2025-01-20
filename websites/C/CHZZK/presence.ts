@@ -72,10 +72,10 @@ presence.on("UpdateData", async () => {
 					);
 					presenceData.details = document.querySelector(
 						"h2[class^=video_information_title]"
-					);
+					).textContent;
 					presenceData.state = document.querySelector(
-						"p[class^=video_information_name]"
-					);
+						"div[class^=video_information_name]>span>span"
+					).textContent;
 					presenceData.largeImageKey = showStreamerLogo
 						? streamerLogo.href.replace(streamerLogo.search, "")
 						: Assets.Logo;
@@ -111,6 +111,5 @@ presence.on("UpdateData", async () => {
 			}
 			break;
 	}
-
 	presence.setActivity(presenceData);
 });

@@ -39,8 +39,11 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 	oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-	const newLang = await presence.getSetting<string>("lang").catch(() => "en"),
-		buttons = await presence.getSetting<boolean>("buttons");
+	const [newLang, privacy, buttons] = await Promise.all([
+		presence.getSetting<string>("lang").catch(() => "en"),
+		presence.getSetting<boolean>("privacy"),
+		presence.getSetting<boolean>("buttons"),
+	]);
 
 	if (oldLang !== newLang || !strings) {
 		oldLang = newLang;
@@ -95,19 +98,16 @@ presence.on("UpdateData", async () => {
 		"/cape/": {
 			details: strings.viewCape,
 			state: `${
-				document
-					.querySelector(".default-skin main.container h1")
-					?.textContent.split("\n")[1]
-			} Cape`,
+				document.querySelector("main > h1")?.textContent.split("\n")[1]
+			}`,
 		},
 		"/minecraft-servers/": {
 			details: strings.servers,
 		},
 		"/server/": {
 			details: strings.viewServer,
-			state: document.querySelector(
-				"body > main > div.row.no-gutters.align-items-center > div.col > h1"
-			)?.textContent,
+			state: document.querySelector("body > main > div > div > h1")
+				?.textContent,
 			buttons: [
 				{
 					label: strings.buttonViewServer,
@@ -133,7 +133,8 @@ presence.on("UpdateData", async () => {
 		},
 		"/profile/": {
 			details: strings.viewProfile,
-			state: document.querySelector("body > main > h1")?.textContent,
+			state: document.querySelector("body > main > div > div > h1")
+				?.textContent,
 			buttons: [
 				{
 					label: strings.buttonViewProfile,
@@ -145,11 +146,9 @@ presence.on("UpdateData", async () => {
 			details: strings.viewing,
 			state: strings.privacy,
 		},
-		"/search/": {
+		"/search": {
 			details: strings.search,
-			state: document.querySelector(
-				"#status-bar > div > div > div.col-lg-7 > h1 > samp"
-			)?.textContent,
+			state: document.location.href.split("/search?q=")[1],
 			smallImageKey: Assets.Search,
 		},
 		"/skin/": {
@@ -157,21 +156,23 @@ presence.on("UpdateData", async () => {
 		},
 	};
 
-	for (const [k, v] of Object.entries(statics)) {
-		if (
-			location.href
-				.replace(/\/?$/, "/")
-				.replace(`https://${location.hostname}`, "")
-				.replace("?", "/")
-				.match(k)
-		) {
-			presenceData.smallImageKey = Assets.Reading;
-			presenceData.smallImageText = strings.browse;
-			presenceData = { ...presenceData, ...v };
+	if (privacy) presenceData.details = strings.browse;
+	else {
+		for (const [k, v] of Object.entries(statics)) {
+			if (
+				document.location.href
+					.replace(/\/?$/, "/")
+					.replace(`https://${document.location.hostname}`, "")
+					.replace("?", "/")
+					.match(k)
+			) {
+				presenceData.smallImageKey = Assets.Reading;
+				presenceData.smallImageText = strings.browse;
+				presenceData = { ...presenceData, ...v };
+			}
 		}
+		if (!buttons) delete presenceData.buttons;
 	}
-
-	if (!buttons) delete presenceData.buttons;
 
 	presence.setActivity(presenceData);
 });

@@ -80,8 +80,7 @@ presence.on("UpdateData", () => {
 			presenceData.smallImageText = `Watching - ${toProperCase(playbackState)}`;
 			presenceData.details = title;
 			presenceData.state = episodeName || "";
-			presenceData.startTimestamp = time.snowflake[0];
-			presenceData.endTimestamp = time.snowflake[1];
+			[presenceData.startTimestamp, presenceData.endTimestamp] = time.snowflake;
 			presenceData.buttons = [{ label: "Watch", url: episodeUrl.href }];
 			break;
 		}

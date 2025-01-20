@@ -8,7 +8,6 @@ import {
 	fetchMetadata,
 	metadata,
 } from "./functions/fetchMetadata";
-import { getBuildIdentifier } from "./functions/getBuildIdentifier";
 import { ShowVideo } from "./types";
 
 const presence = new Presence({
@@ -42,8 +41,10 @@ presence.on("UpdateData", async () => {
 		usePresenceName,
 		showTimestamp,
 		showBrowsingStatus,
+		showCover,
 		showSeries,
 		showMovies,
+		showSmallImages,
 		logoType,
 		privacyMode,
 	] = await Promise.all([
@@ -51,8 +52,10 @@ presence.on("UpdateData", async () => {
 		presence.getSetting<boolean>("usePresenceName"),
 		presence.getSetting<boolean>("timestamp"),
 		presence.getSetting<boolean>("showBrowsingStatus"),
+		presence.getSetting<boolean>("showCover"),
 		presence.getSetting<boolean>("showSeries"),
 		presence.getSetting<boolean>("showMovies"),
+		presence.getSetting<boolean>("showSmallImages"),
 		presence.getSetting<number>("logoType"),
 		presence.getSetting<boolean>("privacy"),
 	]);
@@ -61,8 +64,6 @@ presence.on("UpdateData", async () => {
 		oldLang = lang;
 		strings = await getStrings();
 	}
-
-	await getBuildIdentifier(presence);
 
 	const path = document.location.href,
 		//* Match /title/id and get id (When you load the page / reload while browsing)
@@ -79,8 +80,13 @@ presence.on("UpdateData", async () => {
 		return await presence.setActivity({
 			details: metadata.data.video.title,
 			state: metadata.data.video.synopsis.slice(0, 128),
-			largeImageKey: metadata.data.video.boxart.at(0).url,
-			smallImageKey: Assets.Reading,
+			largeImageKey: !showCover
+				? [LargImages.Animated, LargImages.Logo, LargImages.Noback][logoType] ||
+				  LargImages.Logo
+				: metadata.data.video.boxart.at(0).url,
+			...(showSmallImages && {
+				smallImageKey: Assets.Reading,
+			}),
 			smallImageText: strings.browse,
 			buttons: [
 				{
@@ -130,19 +136,26 @@ presence.on("UpdateData", async () => {
 					.replace("{0}", season.seq.toString())
 					.replace("{1}", episode.seq.toString())
 					.replace("{2}", episode.title),
-				largeImageKey: metadata.data.video.boxart.at(0).url,
-				smallImageKey: paused ? Assets.Pause : Assets.Play,
-				smallImageText: paused ? strings.pause : strings.play,
-				...(showTimestamp && {
-					startTimestamp: paused ? null : startTimestamp,
-					endTimestamp: paused ? null : endTimestamp,
-				}),
+				largeImageKey: !showCover
+					? [LargImages.Animated, LargImages.Logo, LargImages.Noback][
+							logoType
+					  ] || LargImages.Logo
+					: metadata.data.video.boxart.at(0).url,
+				largeImageText: `Season ${season.seq.toString()}, Episode ${episode.seq.toString()}`,
+				...(showSmallImages &&
+					paused && {
+						smallImageKey: Assets.Pause,
+						smallImageText: strings.pause,
+					}),
+				...(showTimestamp &&
+					!paused && {
+						startTimestamp,
+						endTimestamp,
+					}),
 				...(usePresenceName && {
 					name: metadata.data.video.title,
 					details: episode.title,
-					state: strings.seriesDisplayFull
-						.replace("{0}", season.seq.toString())
-						.replace("{1}", episode.seq.toString()),
+					state: episode.synopsis,
 				}),
 				buttons: [
 					{
@@ -175,13 +188,20 @@ presence.on("UpdateData", async () => {
 						"{1}",
 						Math.floor(metadata.data.video.runtime / 60).toString()
 					),
-				largeImageKey: metadata.data.video.boxart.at(0).url,
-				smallImageKey: paused ? Assets.Pause : Assets.Play,
-				smallImageText: paused ? strings.pause : strings.play,
-				...(showTimestamp && {
-					startTimestamp: paused ? null : startTimestamp,
-					endTimestamp: paused ? null : endTimestamp,
+				largeImageKey: !showCover
+					? [LargImages.Animated, LargImages.Logo, LargImages.Noback][
+							logoType
+					  ] || LargImages.Logo
+					: metadata.data.video.boxart.at(0).url,
+				...(showSmallImages && {
+					smallImageKey: paused ? Assets.Pause : Assets.Play,
 				}),
+				smallImageText: paused ? strings.pause : strings.play,
+				...(showTimestamp &&
+					!paused && {
+						startTimestamp,
+						endTimestamp,
+					}),
 				...(usePresenceName && {
 					name: metadata.data.video.title,
 				}),

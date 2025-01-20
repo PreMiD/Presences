@@ -39,18 +39,23 @@ function fullURL(cover: string, hostname: string) {
 	else return Assets.Logo;
 }
 
-let iFrameVideo: boolean, videoPaused: boolean, endTimestamp: number;
+let video: {
+		exists: boolean;
+		duration: number;
+		currentTime: number;
+		paused: boolean;
+	},
+	videoPaused: boolean;
 
 presence.on(
 	"iFrameData",
 	(data: {
-		iFrameVideo: boolean;
+		exists: boolean;
 		duration: number;
 		currentTime: number;
 		paused: boolean;
 	}) => {
-		({ iFrameVideo } = data);
-		[, endTimestamp] = presence.getTimestamps(data.currentTime, data.duration);
+		video = data;
 		videoPaused = data.paused;
 	}
 );
@@ -110,7 +115,7 @@ presence.on("UpdateData", async () => {
 						"",
 					hostname
 				);
-			if (iFrameVideo) {
+			if (video.exists) {
 				delete presenceData.startTimestamp;
 				presenceData.details = !privacy
 					? title.replace(episodeNumber, "")
@@ -126,7 +131,10 @@ presence.on("UpdateData", async () => {
 				presenceData.smallImageText = videoPaused
 					? strings.pause
 					: strings.play;
-				if (!videoPaused) presenceData.endTimestamp = endTimestamp;
+				if (!videoPaused) {
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestamps(video.currentTime, video.duration);
+				}
 
 				if (buttons) {
 					presenceData.buttons = isSeries

@@ -56,12 +56,13 @@ presence.on("UpdateData", async () => {
 				.querySelector("#play-pause-button")
 				.classList.contains("fa-play-circle")
 		) {
-			[, presenceData.endTimestamp] = presence.getTimestamps(
-				elapsedTime,
-				presence.timestampFromFormat(
-					document.querySelector("#remainingTime").textContent.substr(1)
-				) + elapsedTime
-			);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(
+					elapsedTime,
+					presence.timestampFromFormat(
+						document.querySelector("#remainingTime").textContent.substr(1)
+					) + elapsedTime
+				);
 			presenceData.smallImageKey = Assets.Play;
 		} else presenceData.smallImageKey = Assets.Pause;
 	}

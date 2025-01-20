@@ -53,10 +53,8 @@ presence.on("UpdateData", async () => {
 				Assets.Logo;
 		}
 		if (iFrameData && !iFrameData.paused) {
-			[, presenceData.endTimestamp] = presence.getTimestamps(
-				iFrameData.currTime,
-				iFrameData.duration
-			);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(iFrameData.currTime, iFrameData.duration);
 			presenceData.smallImageKey = Assets.Play;
 		} else presenceData.smallImageKey = Assets.Pause;
 		if (buttons) {
@@ -83,10 +81,8 @@ presence.on("UpdateData", async () => {
 				Assets.Logo;
 		}
 		if (iFrameData && !iFrameData.paused) {
-			[, presenceData.endTimestamp] = presence.getTimestamps(
-				iFrameData.currTime,
-				iFrameData.duration
-			);
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(iFrameData.currTime, iFrameData.duration);
 			presenceData.smallImageKey = Assets.Play;
 		} else presenceData.smallImageKey = Assets.Pause;
 		if (buttons) {

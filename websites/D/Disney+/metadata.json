@@ -1,9 +1,16 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.10",
+	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"apiVersion": 1,
 	"author": {
 		"name": "Tiemen",
 		"id": "152164749868662784"
 	},
+	"contributors": [
+		{
+			"name": "Timeraa",
+			"id": "223238938716798978"
+		}
+	],
 	"service": "Disney+",
 	"description": {
 		"en": "Disney+ is the exclusive home for your favorite movies and TV shows from Disney, Pixar, Marvel, Star Wars, National Geographic, and Star. Start streaming today.",
@@ -21,11 +28,7 @@
 	},
 	"url": "www.disneyplus.com",
 	"regExp": "([a-z0-9-]+[.])*disneyplus[.]com[/]|([a-z0-9-]+[.])*hotstar[.]com[/]",
-	"matches": [
-		"*://*.disneyplus.com/*",
-		"*://*.hotstar.com/*"
-	],
-	"version": "1.6.1",
+	"version": "1.7.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/thumbnail.png",
 	"color": "#233778",
@@ -68,16 +71,6 @@
 			"title": "Show Buttons",
 			"icon": "fas fa-compress-arrows-alt",
 			"value": true
-		},
-		{
-			"id": "groupWatchBtn",
-			"if": {
-				"buttons": true,
-				"privacy": false
-			},
-			"title": "Join GroupWatch Button",
-			"icon": "fas fa-users",
-			"value": false
 		}
 	]
 }

@@ -2,7 +2,7 @@
 /**
  * @link https://docs.premid.app/dev/presence/class#presencedata-interface
  */
-interface PresenceData {
+interface BasePresenceData {
 	/**
 	 * Name to show in activity
 	 * @example "YouTube"
@@ -101,6 +101,18 @@ interface PresenceData {
 	 */
 	buttons?: [ButtonData, ButtonData?];
 }
+
+interface MediaPresenceData extends BasePresenceData {
+	type: ActivityType.Listening | ActivityType.Watching;
+	largeImageText?: string | Node;
+}
+
+interface NonMediaPresenceData extends BasePresenceData {
+	type?: Exclude<ActivityType, ActivityType.Listening | ActivityType.Watching>;
+	largeImageText?: never;
+}
+
+type PresenceData = MediaPresenceData | NonMediaPresenceData;
 
 interface ButtonData {
 	/**
@@ -351,15 +363,9 @@ interface Metadata {
 		 */
 		values?: (string | number | boolean)[];
 		/**
-		 * `false`: default, it disables multi-localization.
-		 *
-		 * `true`: use this if you are only going to use strings from the [`general.json`](https://github.com/PreMiD/Localization/blob/main/src/Presence/general.json) file.
-		 *
-		 * `string`: name of the file, excluding the extension (.json), inside the [localization github repo](https://github.com/PreMiD/Localization/tree/master/src/Presence).
-		 *
-		 * `string[]`: if you are using more than one file, from inside of the [localization github repo](https://github.com/PreMiD/Localization/tree/master/src/Presence), you can specify all the values in an array. Only common languages of all the files will be listed.
+		 * `true`: use this if you are only going to use strings from the [`general.json`](https://github.com/PreMiD/Localization/blob/main/src/Presence/general.json) file, and your <service>.json file.
 		 */
-		multiLanguage?: boolean | string | string[];
+		multiLanguage?: true;
 	}[];
 }
 

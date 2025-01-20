@@ -190,10 +190,11 @@ presence.on("UpdateData", async () => {
 							)?.textContent;
 
 						if (currentTime && totalTime) {
-							presenceData.endTimestamp =
-								Date.now() / 1000 -
-								presence.timestampFromFormat(currentTime) +
-								presence.timestampFromFormat(totalTime);
+							[presenceData.startTimestamp, presenceData.endTimestamp] =
+								presence.getTimestamps(
+									presence.timestampFromFormat(currentTime),
+									presence.timestampFromFormat(totalTime)
+								);
 						}
 					}
 
@@ -230,10 +231,11 @@ presence.on("UpdateData", async () => {
 						)?.textContent;
 
 					if (currentTime && totalTime) {
-						presenceData.endTimestamp =
-							Date.now() / 1000 -
-							presence.timestampFromFormat(currentTime) +
-							presence.timestampFromFormat(totalTime);
+						[presenceData.startTimestamp, presenceData.endTimestamp] =
+							presence.getTimestamps(
+								presence.timestampFromFormat(currentTime),
+								presence.timestampFromFormat(totalTime)
+							);
 					}
 				}
 

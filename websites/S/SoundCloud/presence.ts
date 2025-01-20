@@ -4,7 +4,6 @@ const presence = new Presence({
 	getStrings = async () => {
 		return presence.getStrings(
 			{
-				play: "general.playing",
 				pause: "general.paused",
 				browse: "general.browsing",
 				search: "general.searchSomething",
@@ -119,6 +118,7 @@ presence.on("UpdateData", async () => {
 			showTimestamps,
 			showCover,
 			showButtons,
+			usePresenceName,
 			newLang,
 		] = await Promise.all([
 			presence.getSetting<boolean>("browse"),
@@ -127,6 +127,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("timestamp"),
 			presence.getSetting<boolean>("cover"),
 			presence.getSetting<boolean>("buttons"),
+			presence.getSetting<boolean>("usePresenceName"),
 			presence.getSetting<string>("lang").catch(() => "en"),
 		]),
 		playing = Boolean(document.querySelector(".playControls__play.playing"));
@@ -152,10 +153,17 @@ presence.on("UpdateData", async () => {
 	}
 
 	if ((playing || (!playing && !showBrowsing)) && showSong) {
-		presenceData.details = getElement(
-			".playbackSoundBadge__titleLink > span:nth-child(2)"
-		);
-		presenceData.state = getElement(".playbackSoundBadge__lightLink");
+		if (!usePresenceName) {
+			presenceData.details = getElement(
+				".playbackSoundBadge__titleLink > span:nth-child(2)"
+			);
+			presenceData.state = getElement(".playbackSoundBadge__lightLink");
+		} else {
+			presenceData.name = getElement(
+				".playbackSoundBadge__titleLink > span:nth-child(2)"
+			);
+			presenceData.details = getElement(".playbackSoundBadge__lightLink");
+		}
 
 		const timePassed = document.querySelector(
 				"div.playbackTimeline__timePassed > span:nth-child(2)"
@@ -176,18 +184,19 @@ presence.on("UpdateData", async () => {
 					}
 				})(),
 			],
-			[startTimestamp, endTimestamp] = presence.getTimestamps(
-				currentTime,
-				duration
-			),
 			pathLinkSong = document
 				.querySelector(
 					"#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div.playControls__elements > div.playControls__soundBadge > div > div.playbackSoundBadge__titleContextContainer > div > a"
 				)
-				.getAttribute("href");
+				?.getAttribute("href");
 
-		presenceData.startTimestamp = startTimestamp;
-		presenceData.endTimestamp = endTimestamp;
+		if (playing) {
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestamps(currentTime, duration);
+		} else {
+			presenceData.smallImageKey = Assets.Pause;
+			presenceData.smallImageText = strings.pause;
+		}
 
 		if (showCover) {
 			presenceData.largeImageKey =
@@ -198,10 +207,8 @@ presence.on("UpdateData", async () => {
 					.style.backgroundImage.match(/"(.*)"/)?.[1]
 					.replace("-t50x50.jpg", "-t500x500.jpg") ?? "soundcloud";
 		}
-		presenceData.smallImageKey = playing ? Assets.Play : Assets.Pause;
-		presenceData.smallImageText = strings[playing ? "play" : "pause"];
 
-		if (showButtons) {
+		if (showButtons && pathLinkSong) {
 			presenceData.buttons = [
 				{
 					label: strings.listen,

@@ -311,11 +311,14 @@ presence.on("UpdateData", async () => {
 				if (user) {
 					const tab = getElement('a[aria-selected="true"] > div > div > p'),
 						profilePic =
-							document
-								.querySelector<HTMLImageElement>(
+							(
+								document.querySelector<HTMLImageElement>(
 									".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
-								)
-								?.src?.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600") ??
+								) ??
+								document
+									.querySelector(".channel-root__info")
+									.querySelector<HTMLImageElement>('img[class*="image-avatar"]')
+							)?.src?.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600") ??
 							(logoArr[logo] || Assets.Logo);
 					user += tab ? ` (${tab})` : "";
 
@@ -455,7 +458,7 @@ presence.on("UpdateData", async () => {
 
 				if (showLive && live) {
 					//* Live
-					const title = getElement(".channel-info-content h2"),
+					const title = getElement("p[data-a-target='stream-title']"),
 						streamer =
 							document.querySelector(".channel-info-content h1")?.textContent ??
 							document
@@ -467,7 +470,7 @@ presence.on("UpdateData", async () => {
 						profilePic =
 							document
 								.querySelector<HTMLImageElement>(
-									".tw-halo > .tw-aspect > .tw-avatar > .tw-image-avatar"
+									"[class*=channel-info-content] [class*=tw-image]"
 								)
 								?.src?.replace(/-[0-9]{1,2}x[0-9]{1,2}/, "-600x600") ??
 							(logoArr[logo] || Assets.Logo);
@@ -528,10 +531,8 @@ presence.on("UpdateData", async () => {
 					presenceData.smallImageText = strings.play;
 					if (pfp) presenceData.largeImageKey = profilePic;
 
-					const [startTimestamp, endTimestamp] =
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
 						presence.getTimestampsfromMedia(video);
-					presenceData.startTimestamp = startTimestamp;
-					presenceData.endTimestamp = endTimestamp;
 
 					presenceData.buttons = [
 						{

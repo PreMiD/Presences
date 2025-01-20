@@ -20,6 +20,7 @@ presence.on("UpdateData", async () => {
 			showBrowsing,
 			privacyMode,
 			useTimeLeft,
+			showAsListening,
 		] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
 			presence.getSetting<boolean>("timestamps"),
@@ -28,6 +29,7 @@ presence.on("UpdateData", async () => {
 			presence.getSetting<boolean>("browsing"),
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<boolean>("useTimeLeft"),
+			presence.getSetting<boolean>("showAsListening"),
 		]),
 		{ mediaSession } = navigator,
 		watchID =
@@ -37,7 +39,7 @@ presence.on("UpdateData", async () => {
 				?.href.match(/v=([^&#]{5,})/)?.[1],
 		repeatMode = document
 			.querySelector('ytmusic-player-bar[slot="player-bar"]')
-			.getAttribute("repeat-Mode_"),
+			?.getAttribute("repeat-mode"),
 		videoElement =
 			document.querySelector<HTMLVideoElement>("video.video-stream");
 
@@ -65,24 +67,22 @@ presence.on("UpdateData", async () => {
 		videoListenerAttached = false;
 	}
 
-	presenceData = null;
+	presenceData = {};
 
-	if (hidePaused && mediaSession.playbackState !== "playing")
+	if (hidePaused && mediaSession?.playbackState !== "playing")
 		return presence.clearActivity();
 
-	if (["playing", "paused"].includes(mediaSession.playbackState)) {
+	if (["playing", "paused"].includes(mediaSession?.playbackState)) {
 		if (privacyMode) {
-			presenceData.type = ActivityType.Listening;
 			return presence.setActivity({
-				...(mediaSession.playbackState === "playing" && {
-					largeImageKey:
-						"https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/logo.png",
-					details: "Listening to music",
-				}),
+				type: ActivityType.Listening,
+				largeImageKey:
+					"https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/logo.png",
 			});
 		}
 
-		if (!mediaSession.metadata?.title || isNaN(videoElement.duration)) return;
+		if (!mediaSession?.metadata?.title || isNaN(videoElement?.duration ?? NaN))
+			return;
 
 		if (
 			prevTitleAuthor !==
@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
 				mediaSession.metadata.artist +
 				document
 					.querySelector<HTMLSpanElement>("#left-controls > span")
-					.textContent.trim()
+					?.textContent?.trim()
 		) {
 			updateSongTimestamps(useTimeLeft);
 
@@ -101,11 +101,11 @@ presence.on("UpdateData", async () => {
 				mediaSession.metadata.artist +
 				document
 					.querySelector<HTMLSpanElement>("#left-controls > span")
-					.textContent.trim();
+					?.textContent?.trim();
 		}
 
-		const albumArtistBtnLink = mediaSession.metadata.album
-				? [...document.querySelectorAll<HTMLAnchorElement>(".byline a")].at(-1)
+		const albumArtistBtnLink = mediaSession?.metadata?.album
+				? [...document.querySelectorAll<HTMLAnchorElement>(".byline a")]?.at(-1)
 						?.href
 				: document.querySelector<HTMLAnchorElement>(".byline a")?.href,
 			buttons: [ButtonData, ButtonData?] = [
@@ -123,32 +123,37 @@ presence.on("UpdateData", async () => {
 		}
 
 		presenceData = {
+			type: ActivityType.Listening,
+			name: showAsListening ? mediaSession.metadata.title : "YouTube Music",
 			largeImageKey: showCover
-				? mediaSession.metadata.artwork.at(-1).src
+				? mediaSession?.metadata?.artwork?.at(-1)?.src ??
+				  "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/1.png"
 				: "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/1.png",
 			details: mediaSession.metadata.title,
-			state: [mediaSession.metadata.artist, mediaSession.metadata.album]
-				.filter(Boolean)
-				.join(" - "),
+			state: mediaSession.metadata.artist,
+			...(mediaSession.metadata.album && {
+				largeImageText: mediaSession.metadata.album,
+			}),
 			...(showButtons && {
 				buttons,
 			}),
-			smallImageKey:
-				mediaSession.playbackState === "paused"
-					? Assets.Pause
-					: repeatMode === "ONE"
-					? Assets.RepeatOne
-					: repeatMode === "ALL"
-					? Assets.Repeat
-					: Assets.Play,
-			smallImageText:
-				mediaSession.playbackState === "paused"
-					? "Paused"
-					: repeatMode === "ONE"
-					? "On loop"
-					: repeatMode === "ALL"
-					? "Playlist on loop"
-					: "Playing",
+			...(mediaSession.playbackState === "paused" ||
+			(repeatMode && repeatMode !== "NONE")
+				? {
+						smallImageKey:
+							mediaSession.playbackState === "paused"
+								? Assets.Pause
+								: repeatMode === "ONE"
+								? Assets.RepeatOne
+								: Assets.Repeat,
+						smallImageText:
+							mediaSession.playbackState === "paused"
+								? "Paused"
+								: repeatMode === "ONE"
+								? "On loop"
+								: "Playlist on loop",
+				  }
+				: null),
 			...(showTimestamps &&
 				mediaSession.playbackState === "playing" && {
 					startTimestamp: mediaTimestamps[0],
@@ -157,7 +162,6 @@ presence.on("UpdateData", async () => {
 		};
 	} else if (showBrowsing) {
 		if (privacyMode) {
-			presenceData.type = ActivityType.Listening;
 			return presence.setActivity({
 				largeImageKey:
 					"https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/logo.png",
@@ -171,6 +175,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		presenceData = {
+			type: ActivityType.Playing,
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/logo.png",
 			details: "Browsing",
@@ -185,7 +190,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing Library";
 			presenceData.state = document.querySelector(
 				"#tabs .iron-selected .tab"
-			).textContent;
+			)?.textContent;
 		}
 
 		if (pathname.match(/^\/playlist/)) {
@@ -194,7 +199,7 @@ presence.on("UpdateData", async () => {
 			if (search === "?list=LM") presenceData.state = "Liked Music";
 			else {
 				presenceData.state =
-					document.querySelector(".metadata .title").textContent;
+					document.querySelector(".metadata .title")?.textContent;
 
 				presenceData.buttons = [
 					{
@@ -205,7 +210,7 @@ presence.on("UpdateData", async () => {
 			}
 
 			presenceData.largeImageKey =
-				document.querySelector<HTMLImageElement>("#thumbnail img").src;
+				document.querySelector<HTMLImageElement>("#thumbnail img")?.src;
 			presenceData.smallImageKey =
 				"https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/0.png";
 		}
@@ -214,7 +219,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Searching";
 			presenceData.state = document.querySelector<HTMLInputElement>(
 				".search-container input"
-			).value;
+			)?.value;
 
 			presenceData.buttons = [
 				{
@@ -226,7 +231,8 @@ presence.on("UpdateData", async () => {
 
 		if (pathname.match(/^\/channel/)) {
 			presenceData.details = "Browsing Channel";
-			presenceData.state = document.querySelector("#header .title").textContent;
+			presenceData.state =
+				document.querySelector("#header .title")?.textContent;
 
 			presenceData.buttons = [
 				{
@@ -270,28 +276,25 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	if (!showBrowsing) return presence.clearActivity();
-
-	presenceData.type = ActivityType.Listening;
 	presence.setActivity(presenceData);
 });
 
 function updateSongTimestamps(useTimeLeft: boolean) {
-	const element = document
+	const [currTimes, totalTimes] =
+		document
 			.querySelector<HTMLSpanElement>("#left-controls > span")
-			.textContent.trim()
-			.split(" / "),
-		[currTimes, totalTimes] = element;
+			?.textContent?.trim()
+			?.split(" / ") ?? [];
 
-	if (useTimeLeft) {
+	if (useTimeLeft && currTimes && totalTimes) {
 		mediaTimestamps = presence.getTimestamps(
 			presence.timestampFromFormat(currTimes),
 			presence.timestampFromFormat(totalTimes)
 		);
-	} else {
+	} else if (currTimes) {
 		mediaTimestamps = [
 			Date.now() / 1000 - presence.timestampFromFormat(currTimes),
-			null,
+			0,
 		];
 	}
 }

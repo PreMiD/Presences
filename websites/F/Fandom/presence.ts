@@ -108,7 +108,7 @@ if (
 										.querySelector(".jw-icon-playback")
 										.getAttribute("aria-label") === "Pause"
 								) {
-									[, presenceData.endTimestamp] =
+									[presenceData.startTimestamp, presenceData.endTimestamp] =
 										presence.getTimestampsfromMedia(
 											document.querySelector(".jw-video")
 										);

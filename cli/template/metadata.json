@@ -1,5 +1,6 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.9",
+	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"apiVersion": 1,
 	"author": {
 		"name": "",
 		"id": ""
@@ -14,5 +15,7 @@
 	"thumbnail": "",
 	"color": "",
 	"category": "",
-	"tags": [""]
+	"tags": [
+		""
+	]
 }

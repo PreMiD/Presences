@@ -83,11 +83,11 @@ presence.on("UpdateData", async () => {
 							)
 							?.textContent?.trim() === "Creations" // Profile tabs
 					) {
-						presenceData.details = `Profile: ${profileName.textContent}`;
+						presenceData.details = `Profile: ${profileName?.textContent}`;
 						presenceData.state = "Browsing creations...";
 					} else {
 						presenceData.details = "Looking on a profile: ";
-						presenceData.state = profileName.textContent;
+						presenceData.state = profileName?.textContent;
 					}
 
 					presenceData.largeImageKey =
@@ -119,7 +119,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Friends";
 					presenceData.state = `Tab: ${
 						document.querySelector<HTMLAnchorElement>(".rbx-tab-heading.active")
-							.textContent // Friends tab
+							?.textContent // Friends tab
 					}`;
 					break;
 				}
@@ -127,7 +127,7 @@ presence.on("UpdateData", async () => {
 					presenceData.details = "Inventory";
 					presenceData.state = document.querySelector<HTMLLIElement>(
 						"#vertical-menu > li.menu-option.ng-scope.active"
-					).textContent; // Inventory tab
+					)?.textContent; // Inventory tab
 					break;
 				}
 				case pathname.includes("/groups") &&
@@ -141,7 +141,7 @@ presence.on("UpdateData", async () => {
 					else {
 						presenceData.details = document.querySelector<HTMLHeadingElement>(
 							".group-name.text-overflow"
-						).textContent; // Groupname
+						)?.textContent; // Groupname
 
 						presenceData.largeImageKey =
 							document.querySelector<HTMLImageElement>("div.group-image img")
@@ -175,11 +175,11 @@ presence.on("UpdateData", async () => {
 				}
 				case pathname.includes("/games/") &&
 					!pathname.includes("/localization"): {
-					presenceData.details = `Game: ${gameName.textContent}`;
+					presenceData.details = `Game: ${gameName?.textContent}`;
 					presenceData.state = `Tab: ${
 						document.querySelector<HTMLLIElement>(
 							"#horizontal-tabs li.rbx-tab.active"
-						).textContent // Gametab
+						)?.textContent // Gametab
 					}`;
 					presenceData.largeImageKey =
 						document
@@ -225,16 +225,16 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `Tab: ${
 						document.querySelector<HTMLDivElement>(
 							"#MasterContainer #navbar div.selected a"
-						).textContent || "Unknown"
+						)?.textContent || "Unknown"
 					}`;
 					break;
 				}
 				case pathname.includes("/universes/configure"): {
-					presenceData.details = "Configuring Experience";
+					presenceData.details = "Configuring their experience";
 					presenceData.state = `Tab: ${
 						document.querySelector<HTMLDivElement>(
 							"#MasterContainer #navbar div.selected a"
-						).textContent || "Unknown"
+						)?.textContent || "Unknown"
 					}`;
 					break;
 				}
@@ -260,28 +260,29 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case pathname.includes("/develop"): {
-					presenceData.details = "Developer Page";
+					presenceData.name = "Roblox - Developers";
+					presenceData.details = "Viewing tab";
 					const developTabs = document.querySelector<HTMLDivElement>(
 						"#DevelopTabs .tab-active"
-					).textContent;
+					)?.textContent;
 
 					switch (developTabs) {
 						case "My Creations": {
-							presenceData.state = `Tab: ${developTabs} > ${
+							presenceData.state = `${developTabs} > ${
 								document.querySelector<HTMLAnchorElement>(".tab-item-selected")
-									.textContent
+									?.textContent
 							}`;
 							break;
 						}
 
 						case "Group Creations": {
-							presenceData.state = `Tab: ${developTabs} > ${
+							presenceData.state = `${developTabs} > ${
 								document.querySelector<HTMLAnchorElement>(
 									'#SelectedGroupId option[selected="selected"]'
-								).textContent
+								)?.textContent
 							} > ${
 								document.querySelector<HTMLAnchorElement>(".tab-item-selected")
-									.textContent
+									?.textContent
 							}`;
 							break;
 						}
@@ -291,17 +292,17 @@ presence.on("UpdateData", async () => {
 								presenceData.details = `Searching at ${developTabs} for: `;
 								presenceData.state = searchResult;
 							} else {
-								presenceData.state = `Tab: ${developTabs} > ${
+								presenceData.state = `${developTabs} > ${
 									document.querySelector<HTMLAnchorElement>(
 										".selectedAssetTypeFilter"
-									).textContent
+									)?.textContent
 								}`;
 							}
 							break;
 						}
 
 						default: {
-							presenceData.state = `Tab: ${developTabs}`;
+							presenceData.state = `${developTabs}`;
 							break;
 						}
 					}
@@ -339,7 +340,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `Tab: ${
 						document.querySelector<HTMLSpanElement>(
 							".transaction-type-dropdown .rbx-selection-label"
-						).textContent
+						)?.textContent
 						// Transaction tab
 					}`;
 					break;
@@ -418,7 +419,8 @@ presence.on("UpdateData", async () => {
 				"/categories": { state: "Browsing Categories" },
 			};
 
-			presenceData.details = "Surfing the DevForum";
+			presenceData.name = "Roblox - DevForum";
+			presenceData.details = "Browsing through the forum";
 			presenceData.largeImageKey = Assets.DeveloperLogo;
 			devImage = true;
 
@@ -459,7 +461,7 @@ presence.on("UpdateData", async () => {
 						presenceData.state = `Browsing ${
 							document
 								.querySelector(".container.show-badge h1")
-								.textContent.split("/")[1]
+								?.textContent?.split("/")?.[1]
 						} Badge`;
 					}
 					break;
@@ -469,13 +471,13 @@ presence.on("UpdateData", async () => {
 
 					if (document.querySelector(".group-info-name")) {
 						presenceData.state = `Browsing ${
-							document.querySelector(".group-info-name").textContent
+							document.querySelector(".group-info-name")?.textContent
 						} Group`;
 					}
 					break;
 				}
 				case pathname.includes("/u/"): {
-					const user = document.querySelector(".username").textContent;
+					const user = document.querySelector(".username")?.textContent;
 					presenceData.state = `Browsing ${user}'s Profile`;
 					presenceData.largeImageKey =
 						document.querySelector<HTMLImageElement>(".user-profile-avatar img")
@@ -533,7 +535,7 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `Replying To ${
 						document
 							.querySelector(".composer-action-reply")
-							.querySelector(".user-link").textContent
+							?.querySelector(".user-link")?.textContent
 					}`;
 					break;
 				}
@@ -557,6 +559,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		case "create.roblox.com": {
+			presenceData.name = "Roblox - Create";
 			presenceData.largeImageKey = Assets.CreateLogo;
 			const search = document.querySelector("#search-text-field");
 			switch (true) {
@@ -591,6 +594,7 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case pathname.includes("/docs"): {
+					presenceData.name = "Roblox - Create - Docs";
 					switch (true) {
 						case !!search: {
 							presenceData.details = search?.getAttribute("value")
@@ -617,13 +621,14 @@ presence.on("UpdateData", async () => {
 							break;
 						}
 						default: {
-							presenceData.details = "Documentation - homepage";
+							presenceData.details = "Viewing the homepage";
 							break;
 						}
 					}
 					break;
 				}
 				case pathname.includes("/marketplace/asset/"): {
+					presenceData.name = "Roblox - Create - Marketplace";
 					presenceData.details = `Viewing ${document
 						.querySelector('button[aria-selected="true"]')
 						?.textContent?.toLowerCase()}:`;
@@ -639,10 +644,11 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case pathname.includes("/marketplace"): {
-					presenceData.details = "Marketplace";
-					presenceData.state = `Tab: ${
-						document.querySelector('button[aria-selected="true"]')?.textContent
-					}`;
+					presenceData.name = "Roblox - Create - Marketplace";
+					presenceData.details = "Viewing tab";
+					presenceData.state = document.querySelector(
+						'button[aria-selected="true"]'
+					)?.textContent;
 					presenceData.buttons = [
 						{
 							label: "View Marketplace",
@@ -652,18 +658,18 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case pathname.includes("/talent/"): {
+					presenceData.name = "Roblox - Create - Talent";
 					if (document.querySelector("#text-input")?.getAttribute("value")) {
-						presenceData.details = "Talent - searching for:";
+						presenceData.details = "Searching for:";
 						presenceData.state = document
 							.querySelector("#text-input")
 							?.getAttribute("value");
 						presenceData.smallImageKey = Assets.Search;
 					} else {
-						presenceData.details = "Talent";
-						presenceData.state = `Tab: ${
-							document.querySelector('button[aria-selected="true"]')
-								?.textContent
-						}`;
+						presenceData.details = "Viewing tab";
+						presenceData.state = document.querySelector(
+							'button[aria-selected="true"]'
+						)?.textContent;
 					}
 					break;
 				}

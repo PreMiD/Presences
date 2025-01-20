@@ -349,10 +349,11 @@ presence.on("UpdateData", async () => {
 					: strings.play;
 
 				if (!iframeResponse.paused) {
-					[, presenceData.endTimestamp] = presence.getTimestamps(
-						Math.floor(iframeResponse.currentTime),
-						Math.floor(iframeResponse.duration)
-					);
+					[presenceData.startTimestamp, presenceData.endTimestamp] =
+						presence.getTimestamps(
+							Math.floor(iframeResponse.currentTime),
+							Math.floor(iframeResponse.duration)
+						);
 				} else {
 					presenceData.startTimestamp = null;
 					presenceData.smallImageText += ` - ${getTimestamp(
