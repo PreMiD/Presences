@@ -11,13 +11,8 @@
 		"tr": "Diğer kullanıcılara soru sorabileceğiniz, anında yanıt alabileceğiniz ve uygulama ile ilgili fikirlerinizi paylaşabileceğiniz Papara Topluluğu, Papara'nın geleceğini şekillendiriyor."
 	},
 	"url": "topluluk.papara.com",
-<<<<<<< HEAD
-	"version": "1.0.8",
-	"logo": "https://i.imgur.com/3zExiGz.png",
-=======
 	"version": "1.0.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/P/Papara%20Topluluk/assets/logo.png",
->>>>>>> 7d24efcf74e74746ecda25b0bf0ed1dcb4dad6ef
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Papara%20Topluluk/assets/thumbnail.png",
 	"color": "#8C00A1",
 	"category": "socials",
