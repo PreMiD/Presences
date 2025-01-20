@@ -1,9 +1,9 @@
 import {
-	logo as fibbageLogo,
-	getPresenceData as fibbageDataGetter,
-} from "./fibbage";
+  getPresenceData as fibbageDataGetter,
+  logo as fibbageLogo,
+} from './fibbage'
 
-export const name = "Fibbage 2";
-export const logo = fibbageLogo;
+export const name = 'Fibbage 2'
+export const logo = fibbageLogo
 
-export const getPresenceData = fibbageDataGetter;
+export const getPresenceData = fibbageDataGetter
