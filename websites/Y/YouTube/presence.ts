@@ -606,6 +606,57 @@ presence.on("UpdateData", async () => {
 				}
 				break;
 			}
+			case pathname.startsWith("/post/"): {
+				presenceData.details = strings.viewCPost;
+				const selector = document.querySelector<HTMLDivElement>(
+					".ytPostHeaderHostAuthorText"
+				);
+				if (selector)
+					presenceData.state = `${strings.ofChannel} ${selector.textContent}`;
+				break;
+			}
+			case pathname.startsWith("/feed/trending"): {
+				presenceData.details = strings.trending;
+				break;
+			}
+			case pathname.startsWith("/feed/subscriptions"): {
+				presenceData.details = strings.browsingThrough;
+				presenceData.state = strings.subscriptions;
+				break;
+			}
+			case pathname.startsWith("/feed/library"): {
+				presenceData.details = strings.browsingThrough;
+				presenceData.state = strings.library;
+				break;
+			}
+			case pathname.startsWith("/feed/history"): {
+				presenceData.details = strings.browsingThrough;
+				presenceData.state = strings.history;
+				break;
+			}
+			case pathname.startsWith("/paid_memberships"): {
+				presenceData.details = strings.browsingThrough;
+				presenceData.state = strings.purchases;
+				break;
+			}
+			case pathname.startsWith("/premium"): {
+				presenceData.details = strings.readAbout;
+				presenceData.state = "Youtube Premium";
+				presenceData.smallImageKey = Assets.Reading;
+				break;
+			}
+			case pathname.startsWith("/gaming"): {
+				presenceData.details = strings.browsingThrough;
+				presenceData.state = "Youtube Gaming";
+				presenceData.smallImageKey = Assets.Reading;
+				break;
+			}
+			case pathname.startsWith("/playlist"): {
+				presenceData.details = strings.viewPlaylist;
+				const title = document.querySelector("#playlist-title");
+				presenceData.state = title.textContent.trim();
+				break;
+			}
 		}
 
 		if (privacy) {
