@@ -70,9 +70,10 @@
 	},
 	"url": [
 		"www.youtube.com",
-		"studio.youtube.com"
+		"studio.youtube.com",
+		"m.youtube.com"
 	],
-	"version": "5.13.8",
+	"version": "6.0.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube/assets/thumbnail.jpg",
 	"color": "#E40813",
@@ -81,6 +82,7 @@
 		"video",
 		"media"
 	],
+	"mobile": true,
 	"settings": [
 		{
 			"id": "lang",

@@ -280,7 +280,6 @@ presence.on("UpdateData", async () => {
 					);
 				} else if (hideHome) return presence.clearActivity();
 				else presenceData.details = strings.viewHome;
-
 				break;
 			}
 			case pathname.includes("/results"): {
@@ -517,6 +516,114 @@ presence.on("UpdateData", async () => {
 
 		if (!presenceData.details) presence.setActivity();
 		else presence.setActivity(presenceData, true);
+	} else if (hostname === "m.youtube.com") {
+		const presenceData: PresenceData = {
+			largeImageKey: YouTubeAssets.Logo,
+			startTimestamp: browsingTimestamp,
+			type: ActivityType.Watching,
+		};
+		let searching = false;
+		switch (true) {
+			case pathname === "/": {
+				if (hideHome) {
+					return presence.clearActivity();
+				} else {
+					presenceData.details = strings.viewHome;
+				}
+				break;
+			}
+			case pathname === "/results": {
+				searching = true;
+				presenceData.details = strings.search;
+				presenceData.state = new URLSearchParams(search).get("search_query");
+				presenceData.smallImageKey = Assets.Search;
+				break;
+			}
+			case pathname.startsWith("/c/"):
+			case pathname.startsWith("/channel/"):
+			case pathname.startsWith("/user/"):
+			case pathname.startsWith("/@"): {
+				let user = document.querySelector("h1").textContent;
+				if (
+					user.replace(/\s+/g, "") === "" ||
+					user.replace(/\s+/g, "") === "\u200c"
+				)
+					user = "null";
+
+				if (pathname.includes("/videos")) {
+					presenceData.details = `${strings.browsingThrough} ${document
+						.querySelector<HTMLDivElement>(".selected[class*=chip]")
+						?.textContent.trim()} ${document
+						.querySelector<HTMLDivElement>("[class*=tab-selected]")
+						?.textContent.trim()
+						.toLowerCase()}`;
+					presenceData.state = `${strings.ofChannel} ${user}`;
+				} else if (pathname.includes("/shorts")) {
+					presenceData.details = strings.browseShorts;
+					presenceData.state = `${strings.ofChannel} ${user}`;
+				} else if (pathname.includes("/playlists")) {
+					presenceData.details = strings.browsingPlayl;
+					presenceData.state = `${strings.ofChannel} ${user}`;
+				} else if (pathname.includes("/community")) {
+					presenceData.details = strings.viewCPost;
+					presenceData.state = `${strings.ofChannel} ${user}`;
+					presenceData.largeImageKey =
+						logo === LogoMode.Thumbnail
+							? document.querySelector<HTMLImageElement>(
+									"ytm-backstage-post-renderer ytm-backstage-image-renderer img"
+							  )
+							: logo === LogoMode.Channel
+							? document.querySelector<HTMLImageElement>(
+									"ytm-backstage-post-renderer yt-post-header img"
+							  )
+							: YouTubeAssets.Logo;
+				} else if (pathname.includes("/about")) {
+					presenceData.details = strings.readChannel;
+					presenceData.state = user;
+					presenceData.smallImageKey = Assets.Reading;
+				} else if (pathname.includes("/search")) {
+					searching = true;
+					presenceData.details = strings.searchChannel.replace("{0}", user);
+					presenceData.state = new URLSearchParams(search).get("query");
+					presenceData.smallImageKey = Assets.Search;
+				} else {
+					presenceData.details = strings.viewChannel;
+					presenceData.state = user;
+				}
+				if (channelPic) {
+					const channelImg =
+						(
+							document.querySelector<HTMLImageElement>(
+								// When viewing a community post
+								"ytm-backstage-post-renderer yt-post-header img"
+							) ??
+							document.querySelector(
+								// When viewing a channel on the normal channel page
+								"yt-page-header-view-model [class*=yt-spec-avatar-shape] img"
+							)
+						)?.src.replace(/=s[0-9]+/, "=s512") ?? YouTubeAssets.Logo;
+					if (channelImg) presenceData.largeImageKey = channelImg;
+				}
+				break;
+			}
+		}
+
+		if (privacy) {
+			if (searching) {
+				presenceData.details = strings.searchSomething;
+				delete presenceData.state;
+			} else {
+				presenceData.details = strings.browsing;
+				delete presenceData.state;
+				delete presenceData.smallImageKey;
+			}
+		}
+		if (!time) {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+		}
+		if (!presenceData.details) presence.setActivity();
+		else presence.setActivity(presenceData);
 	} else if (hostname === "studio.youtube.com") {
 		const presenceData: PresenceData = {
 			largeImageKey: YouTubeAssets.Logo,
