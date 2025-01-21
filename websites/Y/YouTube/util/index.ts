@@ -179,3 +179,35 @@ export async function getThumbnail(videoId: string): Promise<string> {
 		};
 	});
 }
+
+export function getQuerySelectors(isMobile: boolean) {
+	return {
+		searchInput: isMobile
+			? ".yt-searchbox-input"
+			: "#search-input > div > div:nth-child(2) > input,\
+				#search-input > input",
+		userName: isMobile ? "h1" : "#author-text.ytd-backstage-post-renderer",
+		userName2: isMobile ? "h1" : "#text.ytd-channel-name",
+		userTab: isMobile
+			? "[class*=tab-selected]"
+			: '[class="style-scope ytd-tabbed-page-header"] [aria-selected="true"]',
+		userVideoTab: isMobile
+			? ".selected[class*=chip]"
+			: '[class="style-scope ytd-feed-filter-chip-bar-renderer iron-selected"]',
+		postThumbnail: isMobile
+			? "ytm-backstage-post-renderer ytm-backstage-image-renderer img"
+			: "#post #main img",
+		postChannelImage: isMobile
+			? "ytm-backstage-post-renderer yt-post-header img"
+			: "#post img",
+		postAuthor: isMobile ? ".ytPostHeaderHostAuthorText" : "#author-text",
+		channelImage: isMobile
+			? "yt-page-header-view-model [class*=yt-spec-avatar-shape] img"
+			: ".yt-spec-avatar-shape img",
+		playlistTitle: isMobile
+			? "#playlist-title"
+			: "#text-displayed,\
+				ytd-playlist-header-renderer yt-dynamic-sizing-formatted-string.ytd-playlist-header-renderer,\
+				#title > yt-formatted-string > a",
+	};
+}
