@@ -622,7 +622,7 @@ declare class Presence {
    * @param variables Variables to get
    * @since 2.5
    */
-  getPageVariable<T extends Record<string, unknown>>(
+  getPageVariable<T extends Record<string, any> = Record<string, unknown>>(
     ...variables: string[]
   ): Promise<T>
   /**
