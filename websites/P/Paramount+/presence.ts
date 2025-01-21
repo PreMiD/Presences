@@ -1,9 +1,8 @@
 const presence = new Presence({
-		clientId: "821433038335377418",
-	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	clientId: "821433038335377418",
+});
 
-let title: string, seasonEpisode: string, liveTitle: string;
+let liveTitle: string;
 
 function pathIncludes(path: string, str: string) {
 	return path.includes(str);
@@ -25,13 +24,14 @@ presence.on("UpdateData", async () => {
 		pause: "general.paused",
 		live: "general.live",
 	});
-	let video: HTMLVideoElement = null;
-	const vidArea = document.querySelector(".video__player-area"),
+	let video: HTMLVideoElement = null,
 		presenceData: PresenceData = {
+			name: "Paramount+",
 			largeImageKey: Logos.Paramount,
-			startTimestamp: browsingTimestamp,
-		},
-		{ pathname: path } = document.location;
+			type: ActivityType.Watching,
+		};
+	const { pathname: path } = document.location,
+		vidArea = document.querySelector(".video__player-area");
 
 	switch (true) {
 		case pathIncludes(path, "/home"):
@@ -46,26 +46,22 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case pathIncludes(path, "/shows"): {
-			if (vidArea && pathIncludes(path, "/video")) {
-				const data = JSON.parse(
-					document.querySelector('[type="application/ld+json"]').textContent
-				);
+			const showData = JSON.parse(
+				document.querySelector('[type="application/ld+json"]').textContent
+			);
 
+			if (vidArea && pathIncludes(path, "/video")) {
 				video = document.querySelector("video");
 
-				title = data.partOfSeries.name;
-
-				seasonEpisode = `S${data.partOfSeason.seasonNumber}:E${data.episodeNumber} - ${data.name}`;
-
-				if (title) presenceData.details = title;
-
-				if (seasonEpisode) presenceData.state = seasonEpisode;
-
-				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
-				presenceData.smallImageText = video.paused
-					? strings.pause
-					: strings.play;
-				presenceData.largeImageKey = data.image || Logos.Paramount;
+				presenceData = {
+					...presenceData,
+					name: showData.partOfSeries.name,
+					details: showData.partOfSeries.name,
+					state: `S${showData.partOfSeason.seasonNumber}:E${showData.episodeNumber} - ${showData.name}`,
+					smallImageKey: video?.paused ? Assets.Pause : Assets.Play,
+					smallImageText: video?.paused ? strings.pause : strings.play,
+					largeImageKey: showData.image || Logos.Paramount,
+				};
 
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestampsfromMedia(video);
@@ -78,10 +74,23 @@ presence.on("UpdateData", async () => {
 				!vidArea &&
 				document.querySelector('[type="application/ld+json"]') !== null
 			) {
-				presenceData.details = "Viewing series";
-				presenceData.state = JSON.parse(
-					document.querySelector('[type="application/ld+json"]').textContent
-				).name;
+				const showThumb = document
+					.querySelector("#hero-slider > div > li > div > picture > img")
+					.attributes.getNamedItem("src").textContent;
+				presenceData = {
+					...presenceData,
+					name: showData.name,
+					largeImageKey: showThumb,
+					largeImageText: showData.name,
+					details: "Viewing series details",
+					buttons: [
+						{
+							label: "View Series",
+							url: showData.url,
+						},
+					],
+					state: showData.name,
+				};
 			} else {
 				presenceData.details = "Browsing";
 				presenceData.state = "Viewing Shows";
@@ -95,27 +104,34 @@ presence.on("UpdateData", async () => {
 				document.querySelector("video.marqueeVideo") &&
 				!vidArea.querySelector("video")
 			) {
-				presenceData.details = "Previewing a movie";
-				presenceData.state = JSON.parse(
-					document.querySelector('[type="application/ld+json"]').textContent
-				).name;
-			} else if (vidArea && vidArea.querySelector("video")) {
-				const movData = JSON.parse(
+				const movieData = JSON.parse(
 					document.querySelector('[type="application/ld+json"]').textContent
 				);
-
+				presenceData = {
+					...presenceData,
+					largeImageKey: movieData.image,
+					largeImageText: movieData.name,
+					details: "Viewing movie details",
+					state: movieData.name,
+					name: movieData.name,
+				};
+			} else if (vidArea && vidArea.querySelector("video")) {
 				video = vidArea.querySelector("video");
+				const movieData = JSON.parse(
+						document.querySelector('[type="application/ld+json"]').textContent
+					),
+					timestamps = presence.getTimestampsfromMedia(video);
 
-				if (movData.name) presenceData.state = movData.name;
-				presenceData.details = "Watching a movie";
-
-				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
-				presenceData.smallImageText = video.paused
-					? strings.pause
-					: strings.play;
-
-				[presenceData.startTimestamp, presenceData.endTimestamp] =
-					presence.getTimestampsfromMedia(video);
+				presenceData = {
+					...presenceData,
+					largeImageKey: movieData.image,
+					largeImageText: movieData.name,
+					smallImageKey: video.paused ? Assets.Pause : Assets.Play,
+					smallImageText: video.paused ? strings.pause : strings.play,
+					startTimestamp: timestamps[0],
+					endTimestamp: timestamps[1],
+					name: movieData.name,
+				};
 
 				if (video.paused) {
 					delete presenceData.startTimestamp;
