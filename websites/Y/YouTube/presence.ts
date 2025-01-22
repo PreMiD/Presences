@@ -404,7 +404,7 @@ presence.on("UpdateData", async () => {
 			}
 			case pathname.includes("/post"): {
 				presenceData.details = strings.viewCPost;
-				const selector = document.querySelector("#author-text");
+				const selector = document.querySelector(selectors.postAuthor);
 				if (selector)
 					presenceData.state = `${strings.ofChannel} ${selector.textContent}`;
 				break;
