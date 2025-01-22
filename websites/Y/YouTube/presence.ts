@@ -67,7 +67,8 @@ presence.on("UpdateData", async () => {
 			getSetting<boolean>("hideHome", false),
 			getSetting<boolean>("hidePaused", true),
 		],
-		{ pathname, hostname, search, href } = document.location;
+		{ pathname, hostname, search, href } = document.location,
+		selectors = getQuerySelectors(hostname === "m.youtube.com");
 
 	// Update strings if user selected another language.
 	if (!checkStringLanguage(newLang)) return;
@@ -128,9 +129,7 @@ presence.on("UpdateData", async () => {
 				resolver === youtubeMiniplayerResolver
 					? ""
 					: document
-							.querySelector<HTMLImageElement>(
-								"#avatar.ytd-video-owner-renderer > img"
-							)
+							.querySelector<HTMLImageElement>(selectors.videoChannelImage)
 							?.src.replace(/=s\d+/, "=s512");
 		}
 		const unlistedPathElement = document.querySelector<SVGPathElement>(
@@ -265,7 +264,6 @@ presence.on("UpdateData", async () => {
 			type: ActivityType.Watching,
 		};
 		let searching = false;
-		const selectors = getQuerySelectors(hostname === "m.youtube.com");
 
 		switch (true) {
 			case pathname === "/": {

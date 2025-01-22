@@ -209,5 +209,8 @@ export function getQuerySelectors(isMobile: boolean) {
 			: "#text-displayed,\
 				ytd-playlist-header-renderer yt-dynamic-sizing-formatted-string.ytd-playlist-header-renderer,\
 				#title > yt-formatted-string > a",
+		videoChannelImage: isMobile
+			? "[class*=owner-icon-and-title] .ytProfileIconImage"
+			: "#avatar.ytd-video-owner-renderer > img",
 	};
 }
