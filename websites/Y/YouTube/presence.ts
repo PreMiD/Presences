@@ -6,6 +6,8 @@ import youtubeTVResolver from "./video_sources/tv";
 import youtubeResolver from "./video_sources/default";
 import youtubeMiniplayerResolver from "./video_sources/miniplayer";
 import youtubeApiResolver from "./video_sources/api";
+import youtubeMobileResolver from "./video_sources/mobile_default";
+import youtubeMobileShortsResolver from "./video_sources/mobile_shorts";
 import {
 	Resolver,
 	presence,
@@ -91,6 +93,8 @@ presence.on("UpdateData", async () => {
 				youtubeResolver,
 				youtubeMiniplayerResolver,
 				youtubeMoviesResolver,
+				youtubeMobileResolver,
+				youtubeMobileShortsResolver,
 				youtubeApiResolver,
 				nullResolver,
 			].find(resolver => resolver.isActive()),
