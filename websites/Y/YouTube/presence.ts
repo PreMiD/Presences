@@ -110,9 +110,7 @@ presence.on("UpdateData", async () => {
 					?.getAttribute("aria-pressed") === "true",
 			playlistTitle =
 				document
-					.querySelector(
-						"#content #header-description > h3:nth-child(1) > yt-formatted-string > a"
-					)
+					.querySelector(selectors.videoPlaylistTitle)
 					?.textContent.trim() ?? "",
 			playlistQueueElements = document.querySelectorAll<HTMLSpanElement>(
 				"#content #publisher-container > div > yt-formatted-string > span"

@@ -209,6 +209,9 @@ export function getQuerySelectors(isMobile: boolean) {
 			: "#text-displayed,\
 				ytd-playlist-header-renderer yt-dynamic-sizing-formatted-string.ytd-playlist-header-renderer,\
 				#title > yt-formatted-string > a",
+		videoPlaylistTitle: isMobile
+			? ".playlist-panel-list-title"
+			: "#content #header-description > h3:nth-child(1) > yt-formatted-string > a",
 		videoChannelImage: isMobile
 			? "[class*=owner-icon-and-title] .ytProfileIconImage"
 			: "#avatar.ytd-video-owner-renderer > img",
