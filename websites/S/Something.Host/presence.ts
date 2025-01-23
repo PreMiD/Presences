@@ -44,7 +44,7 @@ presence.on('UpdateData', async () => {
         .querySelector('head > title')
         ?.textContent
         ?.replace('SomethingHost', '')
-        .replace(/|/g, '')
+        .replace(/\|/g, '')
     }
   }
 
