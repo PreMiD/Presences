@@ -178,7 +178,7 @@ presence.on('UpdateData', async () => {
         `a[href='/${pathname.split('/')[1]}']`,
       )[1],
       'Post',
-    )?.split('@')
+    )?.split('@') ?? []
   }
 
   if (pathname.match('/messages') && objHeader) {

@@ -7,7 +7,7 @@ presence.on('UpdateData', () => {
     largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/S/Scratch/assets/logo.png',
   }
 
-  if (document.location.hostname.endsWith('scratch.mit.edu')) {
+  if (document.location.hostname.endsWith('.scratch.mit.edu') || document.location.hostname === ('scratch.mit.edu')) {
     if (document.location.pathname === '/') {
       presenceData.details = 'Community:'
       presenceData.state = 'Viewing public projects'
@@ -310,7 +310,7 @@ presence.on('UpdateData', () => {
     presenceData.state = 'Donate'
   }
   if (
-    document.location.hostname.toLowerCase().endsWith('scratched.gse.harvard.edu') || document.location.hostname.toLowerCase() === ('scratched.gse.harvard.edu')
+    document.location.hostname.toLowerCase().endsWith('.scratched.gse.harvard.edu') || document.location.hostname.toLowerCase() === ('scratched.gse.harvard.edu')
   ) {
     presenceData.details = 'Viewing page:'
     presenceData.state = 'Scratch ED'

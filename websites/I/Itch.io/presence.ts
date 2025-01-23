@@ -10,7 +10,7 @@ presence.on('UpdateData', async () => {
   }
   const { pathname, hostname } = document.location
 
-  if (hostname.endsWith('itch.io')) {
+  if (hostname.endsWith('.itch.io') || hostname === ('itch.io')) {
     if (hostname.split('.')[0] !== 'itch') {
       if (pathname === '/') {
         presenceData.details = 'Viewing Developer Profile'
