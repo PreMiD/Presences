@@ -5,7 +5,8 @@ const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/B/Brick%20Hill/assets/logo.png',
+    largeImageKey:
+      'https://cdn.rcd.gg/PreMiD/websites/B/Brick%20Hill/assets/logo.png',
     details: 'Viewing Page:',
     state: '404',
     startTimestamp: browsingTimestamp,
@@ -107,14 +108,16 @@ presence.on('UpdateData', async () => {
   }
 
   // Blog Presence
-  if (document.location.origin.includes('blog.brick-hill.com')) {
+  if (document.location.hostname === 'blog.brick-hill.com') {
     if (document.location.pathname === '/') {
       presenceData.details = 'Viewing Page:'
       presenceData.state = 'Blog'
     }
     else if (document.location.pathname.includes('/author/')) {
       presenceData.details = 'Viewing Blog Author:'
-      presenceData.state = document.querySelector('body > div > section > h1')?.textContent
+      presenceData.state = document.querySelector(
+        'body > div > section > h1',
+      )?.textContent
     }
     else if (document.location.pathname.includes('/page/')) {
       presenceData.details = 'Viewing Page:'
@@ -126,7 +129,7 @@ presence.on('UpdateData', async () => {
 
   // API Presence
   if (
-    document.location.origin.includes('api.brick-hill.com')
+    document.location.hostname === 'api.brick-hill.com'
     && document.location.pathname.includes('/docs')
   ) {
     presenceData.details = 'Viewing Page:'

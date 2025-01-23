@@ -7,6 +7,19 @@ const enum Assets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/B/Buienalarm/assets/logo.png',
 }
 
+function sanitizeContent(content: string) {
+  let sanitizedContent = content
+  let previousContent = ''
+  while (previousContent !== sanitizedContent) {
+    previousContent = sanitizedContent
+    sanitizedContent = sanitizedContent.replace(
+      /(<!-- {2})|( -->)|( HOST: )/g,
+      '',
+    )
+  }
+  return sanitizedContent
+}
+
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     largeImageKey: Assets.Logo,
@@ -14,11 +27,13 @@ presence.on('UpdateData', async () => {
   }
   const { pathname } = document.location
   const privacy = await presence.getSetting<number>('privacy')
-  let locationScript: {
-    name: string | null
-    region: string | null
-    country: string | null
-  } | undefined
+  let locationScript:
+    | {
+      name: string | null
+      region: string | null
+      country: string | null
+    }
+    | undefined
   if (
     document
       .querySelector('head')
@@ -27,11 +42,9 @@ presence.on('UpdateData', async () => {
       ?.includes('country":')
   ) {
     locationScript = JSON.parse(
-      document
-        .querySelector('head')
-        ?.childNodes[9]
-        ?.textContent
-        ?.replace(/(<!-- {2})|( -->)|( HOST: )/g, '') ?? '',
+      sanitizeContent(
+        document.querySelector('head')?.childNodes[9]?.textContent ?? '',
+      ),
     )
   }
   else if (
@@ -42,11 +55,9 @@ presence.on('UpdateData', async () => {
       ?.includes('country":')
   ) {
     locationScript = JSON.parse(
-      document
-        .querySelector('head')
-        ?.childNodes[10]
-        ?.textContent
-        ?.replace(/(<!-- {2})|( -->)|( HOST: )/g, '') ?? '',
+      sanitizeContent(
+        document.querySelector('head')?.childNodes[10]?.textContent ?? '',
+      ),
     )
   }
   else {
@@ -73,13 +84,14 @@ presence.on('UpdateData', async () => {
     else presenceData.details = 'Aan het browsen..'
   }
   else {
-    const locationTitle = privacy === 0
-      ? `Een locatie in ${locationScript?.country}`
-      : privacy === 1
-        ? `Een locatie in ${locationScript?.region}`
-        : privacy === 2
-          ? locationScript?.name
-          : 'Een Privé locatie'
+    const locationTitle
+      = privacy === 0
+        ? `Een locatie in ${locationScript?.country}`
+        : privacy === 1
+          ? `Een locatie in ${locationScript?.region}`
+          : privacy === 2
+            ? locationScript?.name
+            : 'Een Privé locatie'
 
     presenceData.state = locationTitle
     presenceData.smallImageKey = document
