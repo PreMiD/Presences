@@ -434,7 +434,6 @@ presence.on("UpdateData", async () => {
 			}
 			case pathname.includes("/playlist"): {
 				presenceData.details = strings.viewPlaylist;
-
 				presenceData.state = document
 					.querySelector(selectors.playlistTitle)
 					.textContent.trim();
