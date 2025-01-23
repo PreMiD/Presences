@@ -92,7 +92,7 @@ Each activity has a descriptor file called `metadata.json`, the metadata has a s
     {
       "id": "multiLanguage",
       "multiLanguage": true
-    }
+    },
     {
       "id": "ID",
       "title": "DISPLAY TITLE",
