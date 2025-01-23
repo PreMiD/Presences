@@ -158,12 +158,12 @@ presence.on("UpdateData", async () => {
 					.replace("%title%", title.trim())
 					.replace("%uploader%", uploaderName.trim())
 					.replace("%playlistTitle%", playlistTitle.trim())
-					.replace("%playlistQueue%", playlistQueue.trim()),
+					.replace("%playlistQueue%", playlistQueue?.trim() ?? ""),
 				state: vidState
 					.replace("%title%", title.trim())
 					.replace("%uploader%", uploaderName.trim())
 					.replace("%playlistTitle%", playlistTitle.trim())
-					.replace("%playlistQueue%", playlistQueue.trim()),
+					.replace("%playlistQueue%", playlistQueue?.trim() ?? ""),
 				largeImageKey:
 					unlistedVideo || logo === LogoMode.YouTubeLogo || pfp === ""
 						? YouTubeAssets.Logo

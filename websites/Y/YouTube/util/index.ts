@@ -180,44 +180,50 @@ export async function getThumbnail(videoId: string): Promise<string> {
 	});
 }
 
-export function getQuerySelectors(isMobile: boolean) {
-	return {
-		searchInput: isMobile
-			? ".yt-searchbox-input"
-			: "#search-input > div > div:nth-child(2) > input,\
-				#search-input > input",
-		userName: isMobile ? "h1" : "#author-text.ytd-backstage-post-renderer",
-		userName2: isMobile ? "h1" : "#text.ytd-channel-name",
-		userTab: isMobile
-			? "[class*=tab-selected]"
-			: '[class="style-scope ytd-tabbed-page-header"] [aria-selected="true"]',
-		userVideoTab: isMobile
-			? ".selected[class*=chip]"
-			: '[class="style-scope ytd-feed-filter-chip-bar-renderer iron-selected"]',
-		postThumbnail: isMobile
-			? "ytm-backstage-post-renderer ytm-backstage-image-renderer img"
-			: "#post #main img",
-		postChannelImage: isMobile
-			? "ytm-backstage-post-renderer yt-post-header img"
-			: "#post img",
-		postAuthor: isMobile ? ".ytPostHeaderHostAuthorText" : "#author-text",
-		channelImage: isMobile
-			? "yt-page-header-view-model [class*=yt-spec-avatar-shape] img"
-			: ".yt-spec-avatar-shape img",
-		playlistTitle: isMobile
-			? "#playlist-title"
-			: "#text-displayed,\
-				ytd-playlist-header-renderer yt-dynamic-sizing-formatted-string.ytd-playlist-header-renderer,\
-				#title > yt-formatted-string > a",
-		videoPlaylistTitle: isMobile
-			? ".playlist-panel-list-title"
-			: "#content #header-description > h3:nth-child(1) > yt-formatted-string > a",
-		videoChannelImage: isMobile
-			? "[class*=owner-icon-and-title] .ytProfileIconImage"
-			: "#avatar.ytd-video-owner-renderer > img",
-		videoLive: isMobile ? ".ytwPlayerTimeDisplayContentLiveDot" : ".ytp-live",
-		privacyParentBox: isMobile
-			? "[class*=video-action-bar-actions]"
-			: ".ytp-chrome-controls .ytp-right-controls",
+const desktopSelectors = {
+		searchInput:
+			"#search-input > div > div:nth-child(2) > input,\
+		#search-input > input",
+		userName: "#author-text.ytd-backstage-post-renderer",
+		userName2: "#text.ytd-channel-name",
+		userTab:
+			'[class="style-scope ytd-tabbed-page-header"] [aria-selected="true"]',
+		userVideoTab:
+			'[class="style-scope ytd-feed-filter-chip-bar-renderer iron-selected"]',
+		postThumbnail: "#post #main img",
+		postChannelImage: "#post img",
+		postAuthor: "#author-text",
+		channelImage: ".yt-spec-avatar-shape img",
+		playlistTitle:
+			"#text-displayed,\
+		ytd-playlist-header-renderer yt-dynamic-sizing-formatted-string.ytd-playlist-header-renderer,\
+		#title > yt-formatted-string > a",
+		videoPlaylistTitle:
+			"#content #header-description > h3:nth-child(1) > yt-formatted-string > a",
+		videoChannelImage: "#avatar.ytd-video-owner-renderer > img",
+		videoLive: ".ytp-live",
+		privacyParentBox: ".ytp-chrome-controls .ytp-right-controls",
+	},
+	mobileSelectors: Record<keyof typeof desktopSelectors, string> = {
+		searchInput: ".yt-searchbox-input",
+		userName: "h1",
+		userName2: "h1",
+		userTab: "[class*=tab-selected]",
+		userVideoTab: ".selected[class*=chip]",
+		postThumbnail:
+			"ytm-backstage-post-renderer ytm-backstage-image-renderer img",
+		postChannelImage: "ytm-backstage-post-renderer yt-post-header img",
+		postAuthor: ".ytPostHeaderHostAuthorText",
+		channelImage: "yt-page-header-view-model [class*=yt-spec-avatar-shape] img",
+		playlistTitle: "#playlist-title",
+		videoPlaylistTitle: ".playlist-panel-list-title",
+		videoChannelImage: "[class*=owner-icon-and-title] .ytProfileIconImage",
+		videoLive: ".ytwPlayerTimeDisplayContentLiveDot",
+		privacyParentBox: "[class*=video-action-bar-actions]",
 	};
+
+export function getQuerySelectors(
+	isMobile: boolean
+): Record<keyof typeof desktopSelectors, string> {
+	return isMobile ? mobileSelectors : desktopSelectors;
 }
