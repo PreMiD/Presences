@@ -7,25 +7,25 @@ presence.on('UpdateData', () => {
     largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/S/Scratch/assets/logo.png',
   }
 
-  if (window.location.href.toLowerCase().includes('scratch.mit.edu')) {
-    if (window.location.pathname === '' || window.location.pathname === '/') {
+  if (document.location.hostname.endsWith('scratch.mit.edu')) {
+    if (document.location.pathname === '/') {
       presenceData.details = 'Community:'
       presenceData.state = 'Viewing public projects'
     }
     if (
-      window.location.pathname.toLowerCase().includes('/projects')
-      || window.location.pathname.toLowerCase().includes('/editor')
+      document.location.pathname.toLowerCase().includes('/projects')
+      || document.location.pathname.toLowerCase().includes('/editor')
     ) {
       presenceData.details = 'Editing a project:'
-      if (window.location.href.toLowerCase().includes('/?tutorial=getstarted')) {
+      if (document.location.href.toLowerCase().includes('/?tutorial=getstarted')) {
         presenceData.state = 'Tutorial'
       }
-      else if (window.location.href.toLowerCase().includes('/?tutorial=all')) {
+      else if (document.location.href.toLowerCase().includes('/?tutorial=all')) {
         presenceData.details = 'Viewing projects:'
         presenceData.state = 'Tutorials'
       }
       else if (
-        window.location.pathname
+        document.location.pathname
           .toLowerCase()
           .includes('/projects/editor?tutorial=all')
       ) {
@@ -33,12 +33,12 @@ presence.on('UpdateData', () => {
         presenceData.state = 'Tutorials'
       }
     }
-    else if (window.location.pathname.toLowerCase().includes('/explore')) {
+    else if (document.location.pathname.toLowerCase().includes('/explore')) {
       if (
-        window.location.pathname.toLowerCase().includes('/explore/projects')
+        document.location.pathname.toLowerCase().includes('/explore/projects')
       ) {
         if (
-          window.location.pathname
+          document.location.pathname
             .toLowerCase()
             .includes('/explore/projects/all')
         ) {
@@ -46,7 +46,7 @@ presence.on('UpdateData', () => {
           presenceData.state = 'Projects - All'
         }
         if (
-          window.location.pathname
+          document.location.pathname
             .toLowerCase()
             .includes('/explore/projects/animations')
         ) {
@@ -54,7 +54,7 @@ presence.on('UpdateData', () => {
           presenceData.state = 'Projects - Animations'
         }
         if (
-          window.location.pathname
+          document.location.pathname
             .toLowerCase()
             .includes('/explore/projects/art')
         ) {
@@ -62,7 +62,7 @@ presence.on('UpdateData', () => {
           presenceData.state = 'Projects - Art'
         }
         if (
-          window.location.pathname
+          document.location.pathname
             .toLowerCase()
             .includes('/explore/projects/games')
         ) {
@@ -70,7 +70,7 @@ presence.on('UpdateData', () => {
           presenceData.state = 'Projects - Games'
         }
         if (
-          window.location.pathname
+          document.location.pathname
             .toLowerCase()
             .includes('/explore/projects/music')
         ) {
@@ -78,7 +78,7 @@ presence.on('UpdateData', () => {
           presenceData.state = 'Projects - Music'
         }
         if (
-          window.location.pathname
+          document.location.pathname
             .toLowerCase()
             .includes('/explore/projects/stories')
         ) {
@@ -86,7 +86,7 @@ presence.on('UpdateData', () => {
           presenceData.state = 'Projects - Stories'
         }
         if (
-          window.location.pathname
+          document.location.pathname
             .toLowerCase()
             .includes('/explore/projects/tutorials')
         ) {
@@ -94,9 +94,9 @@ presence.on('UpdateData', () => {
           presenceData.state = 'Projects - Tutorials'
         }
       }
-      if (window.location.pathname.toLowerCase().includes('/explore/studios')) {
+      if (document.location.pathname.toLowerCase().includes('/explore/studios')) {
         if (
-          window.location.pathname
+          document.location.pathname
             .toLowerCase()
             .includes('/explore/studios/all')
         ) {
@@ -104,7 +104,7 @@ presence.on('UpdateData', () => {
           presenceData.state = 'Studios - All'
         }
         if (
-          window.location.pathname
+          document.location.pathname
             .toLowerCase()
             .includes('/explore/studios/animations')
         ) {
@@ -112,7 +112,7 @@ presence.on('UpdateData', () => {
           presenceData.state = 'Studios - Animations'
         }
         if (
-          window.location.pathname
+          document.location.pathname
             .toLowerCase()
             .includes('/explore/studios/art')
         ) {
@@ -120,7 +120,7 @@ presence.on('UpdateData', () => {
           presenceData.state = 'Studios - Art'
         }
         if (
-          window.location.pathname
+          document.location.pathname
             .toLowerCase()
             .includes('/explore/studios/games')
         ) {
@@ -128,7 +128,7 @@ presence.on('UpdateData', () => {
           presenceData.state = 'Studios - Games'
         }
         if (
-          window.location.pathname
+          document.location.pathname
             .toLowerCase()
             .includes('/explore/studios/music')
         ) {
@@ -136,7 +136,7 @@ presence.on('UpdateData', () => {
           presenceData.state = 'Studios - Music'
         }
         if (
-          window.location.pathname
+          document.location.pathname
             .toLowerCase()
             .includes('/explore/studios/stories')
         ) {
@@ -144,7 +144,7 @@ presence.on('UpdateData', () => {
           presenceData.state = 'Studios - Stories'
         }
         if (
-          window.location.pathname
+          document.location.pathname
             .toLowerCase()
             .includes('/explore/studios/tutorials')
         ) {
@@ -153,83 +153,83 @@ presence.on('UpdateData', () => {
         }
       }
     }
-    else if (window.location.pathname.toLowerCase().includes('/ideas')) {
+    else if (document.location.pathname.toLowerCase().includes('/ideas')) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Ideas'
     }
     else if (
-      window.location.pathname.toLowerCase().includes('/starter-projects')
+      document.location.pathname.toLowerCase().includes('/starter-projects')
     ) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Starter Projects'
     }
-    else if (window.location.pathname.toLowerCase().includes('/parents')) {
+    else if (document.location.pathname.toLowerCase().includes('/parents')) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Parents'
     }
-    else if (window.location.pathname.toLowerCase().includes('/educators')) {
+    else if (document.location.pathname.toLowerCase().includes('/educators')) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Educators'
     }
-    else if (window.location.pathname.toLowerCase().includes('/developers')) {
+    else if (document.location.pathname.toLowerCase().includes('/developers')) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Developers'
     }
-    else if (window.location.pathname.toLowerCase().includes('/credits')) {
+    else if (document.location.pathname.toLowerCase().includes('/credits')) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Credits'
     }
-    else if (window.location.pathname.toLowerCase().includes('/jobs')) {
+    else if (document.location.pathname.toLowerCase().includes('/jobs')) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Jobs'
     }
     else if (
-      window.location.pathname.toLowerCase().includes('/community_guidelines')
+      document.location.pathname.toLowerCase().includes('/community_guidelines')
     ) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Community Guidelines'
     }
-    else if (window.location.pathname.toLowerCase().includes('/discuss')) {
+    else if (document.location.pathname.toLowerCase().includes('/discuss')) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Discussion'
     }
-    else if (window.location.pathname.toLowerCase().includes('/statistics')) {
+    else if (document.location.pathname.toLowerCase().includes('/statistics')) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Statistics'
     }
-    else if (window.location.pathname.toLowerCase().includes('/info/faq')) {
+    else if (document.location.pathname.toLowerCase().includes('/info/faq')) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Help, Info & FAQ'
     }
-    else if (window.location.pathname.toLowerCase().includes('/download')) {
+    else if (document.location.pathname.toLowerCase().includes('/download')) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Download offline editor'
     }
-    else if (window.location.pathname.toLowerCase().includes('/contact-us')) {
+    else if (document.location.pathname.toLowerCase().includes('/contact-us')) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Contact us'
     }
-    else if (window.location.pathname.toLowerCase().includes('/store')) {
+    else if (document.location.pathname.toLowerCase().includes('/store')) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Store'
     }
     else if (
-      window.location.pathname.toLowerCase().includes('/terms_of_use')
+      document.location.pathname.toLowerCase().includes('/terms_of_use')
     ) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Terms and conditions'
     }
     else if (
-      window.location.pathname.toLowerCase().includes('/privacy_policy')
+      document.location.pathname.toLowerCase().includes('/privacy_policy')
     ) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Privacy Policy'
     }
-    else if (window.location.pathname.toLowerCase().includes('/dmca')) {
+    else if (document.location.pathname.toLowerCase().includes('/dmca')) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'DMCA'
     }
-    else if (window.location.pathname.toLowerCase().includes('/conference')) {
+    else if (document.location.pathname.toLowerCase().includes('/conference')) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Scratch Conference'
     }
@@ -242,9 +242,9 @@ presence.on('UpdateData', () => {
       .replace('Scratch', '')
   }
   if (
-    window.location.hostname.toLowerCase().includes('scratchfoundation.org')
+    document.location.hostname.toLowerCase().endsWith('.scratchfoundation.org') || document.location.hostname.toLowerCase() === ('scratchfoundation.org')
   ) {
-    if (window.location.pathname.toLowerCase().includes('/media-kit')) {
+    if (document.location.pathname.toLowerCase().includes('/media-kit')) {
       presenceData.details = 'Viewing page:'
       presenceData.state = 'Press'
     }
@@ -253,8 +253,8 @@ presence.on('UpdateData', () => {
       presenceData.state = 'Scratch Foundation'
     }
   }
-  if (window.location.hostname.toLowerCase().includes('scratch-wiki.info')) {
-    switch (window.location.hostname.toLowerCase()) {
+  if (document.location.hostname.toLowerCase().endsWith('.scratch-wiki.info') || document.location.hostname.toLowerCase() === ('scratch-wiki.info')) {
+    switch (document.location.hostname.toLowerCase()) {
       case 'en.scratch-wiki.info':
         presenceData.details = 'Viewing page:'
         presenceData.state = 'English Scratch Wiki'
@@ -297,12 +297,12 @@ presence.on('UpdateData', () => {
         break
     }
   }
-  if (window.location.hostname.toLowerCase().includes('scratchjr.org')) {
+  if (document.location.hostname.toLowerCase().endsWith('.scratchjr.org') || document.location.hostname.toLowerCase() === ('scratchjr.org')) {
     presenceData.details = 'Viewing page:'
     presenceData.state = 'Scratch JR'
   }
   if (
-    window.location.href
+    document.location.href
       .toLowerCase()
       .includes('donationpay.org/scratchfoundation')
   ) {
@@ -310,7 +310,7 @@ presence.on('UpdateData', () => {
     presenceData.state = 'Donate'
   }
   if (
-    window.location.hostname.toLowerCase().includes('scratched.gse.harvard.edu')
+    document.location.hostname.toLowerCase().endsWith('scratched.gse.harvard.edu') || document.location.hostname.toLowerCase() === ('scratched.gse.harvard.edu')
   ) {
     presenceData.details = 'Viewing page:'
     presenceData.state = 'Scratch ED'

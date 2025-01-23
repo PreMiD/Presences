@@ -35,7 +35,7 @@ presence.on('UpdateData', async () => {
     )} 📄 ${document
       .querySelector('#pageSelect > option:checked')
       ?.textContent
-      ?.replace('\n', '')
+      ?.replace(/\n/g, '')
       .replace('SAYFA', '')}`
     presenceData.smallImageKey = Assets.Reading
     presenceData.buttons = [

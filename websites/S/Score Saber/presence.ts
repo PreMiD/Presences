@@ -124,8 +124,13 @@ function simplifyKey(key: string): string {
   }
   if (result.startsWith('Generated'))
     result = result.replace('Generated', '')
-  if (result.match(/(Horizontal|Vertical|Inverted|Inverse)/))
-    result = result.replace(/Lawless|OneSaber|NoArrows|Standard|Legacy/, '')
+  if (result.match(/(Horizontal|Vertical|Inverted|Inverse)/)) {
+    let previous = ''
+    while (previous !== result) {
+      previous = result
+      result = result.replace(/Lawless|OneSaber|NoArrows|Standard|Legacy/, '')
+    }
+  }
   return result
 }
 
