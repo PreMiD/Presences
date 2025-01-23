@@ -212,5 +212,8 @@ export function getQuerySelectors(isMobile: boolean) {
 		videoChannelImage: isMobile
 			? "[class*=owner-icon-and-title] .ytProfileIconImage"
 			: "#avatar.ytd-video-owner-renderer > img",
+		privacyParentBox: isMobile
+			? "[class*=video-action-bar-actions]"
+			: ".ytp-chrome-controls .ytp-right-controls",
 	};
 }

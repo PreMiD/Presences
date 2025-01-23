@@ -199,7 +199,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		let perVideoPrivacy = privacy;
-		if (resolver === youtubeResolver) {
+		if (resolver === youtubeResolver || resolver === youtubeMobileResolver) {
 			if (privacyButtonShown) {
 				perVideoPrivacy = pvPrivacyUI(
 					privacy,
