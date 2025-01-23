@@ -9,8 +9,8 @@ presence.on('UpdateData', async () => {
     startTimestamp: browsingTimestamp,
   }
 
-  if (document.location.hostname.match(/[A-Za-z]+.quora.com/)) {
-    if (document.location.hostname.match(/[A-Za-z]{4,}.quora.com/)) {
+  if (document.location.hostname.match(/[A-Za-z]+[.]quora[.]com/)) {
+    if (document.location.hostname.match(/[A-Za-z]{4,}[.]quora[.]com/)) {
       const taxonomy = document.querySelector(
         '#mainContent > div.q-flex.qu-alignItems--center.qu-flexWrap--wrap > div > span > span > a > span > span > span',
       )?.textContent

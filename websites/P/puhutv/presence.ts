@@ -65,7 +65,7 @@ presence.on('UpdateData', async () => {
                   '#widget_serie_detail_tab_5 > section > div > div > div > div.kunye-content-left > div:nth-child(3)',
                 )
                 ?.textContent
-                ?.replace('\n', ': ')
+                ?.replace(/\n/g, ': ')
               : null
           }`,
         smallImageKey: video.paused ? Assets.Pause : Assets.Play,
