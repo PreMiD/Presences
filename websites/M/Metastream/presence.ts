@@ -28,8 +28,8 @@ function getTimestamps(audioTime: string, audioDuration: string): number[] {
 let elapsed: number, oldUrl: string
 
 presence.on('UpdateData', async () => {
-  if (window.location.href !== oldUrl) {
-    oldUrl = window.location.href
+  if (document.location.href !== oldUrl) {
+    oldUrl = document.location.href
     elapsed = Math.floor(Date.now() / 1000)
   }
 
@@ -41,10 +41,10 @@ presence.on('UpdateData', async () => {
   let endTimestamp
   let playing = true
 
-  const path = window.location.pathname
+  const path = document.location.pathname
 
   try {
-    if (window.location.hostname.match('app.getmetastream.com')) {
+    if (document.location.hostname === ('app.getmetastream.com')) {
       if (path === '/') {
         details = 'Home'
 

@@ -17,7 +17,7 @@ presence.on('UpdateData', async () => {
   if (privacy) {
     presenceData.details = 'Browsing'
   }
-  else if (hostname.includes('mega.io')) {
+  else if (hostname === ('mega.io')) {
     const menu = document.querySelector('[class=\'pages-menu submenu-link clickurl\']')
     if (pathname === '/' || pathname.includes('/startpage')) {
       presenceData.details = 'Home page'
