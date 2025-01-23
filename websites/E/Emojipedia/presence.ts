@@ -8,15 +8,15 @@ presence.on('UpdateData', () => {
   }
 
   if (
-    document.URL === 'https://emojipedia.org/'
-    || document.URL === 'https://emojipedia.org'
+    document.location.href === 'https://emojipedia.org/'
+    || document.location.href === 'https://emojipedia.org'
   ) {
     presenceData.details = 'Staring at the main page'
   }
-  else if (document.location.href.includes('https://blog.emojipedia.org')) {
+  else if (document.location.hostname === 'blog.emojipedia.org') {
     if (
-      document.URL === 'https://blog.emojipedia.org/'
-      || document.URL === 'https://blog.emojipedia.org'
+      document.location.href === 'https://blog.emojipedia.org/'
+      || document.location.href === 'https://blog.emojipedia.org'
     ) {
       presenceData.details = 'Skimming through the blog homepage'
     }
@@ -25,11 +25,11 @@ presence.on('UpdateData', () => {
       presenceData.state = document.querySelectorAll('.post-full-title')[0].textContent
     }
   }
-  else if (document.location.href.includes('/search')) {
+  else if (document.location.pathname.includes('/search')) {
     presenceData.details = 'Searching for...'
     if (document.location.href.includes('/search/?q=')) {
       presenceData.state = (
-        document.querySelector('#id_q') as HTMLInputElement
+        document.querySelector<HTMLInputElement>('#id_q') as HTMLInputElement
       ).value
     }
     else {
@@ -96,7 +96,7 @@ presence.on('UpdateData', () => {
     let isEvent = false
 
     for (const categoryURL of categoryURLs) {
-      if (document.URL.includes(categoryURL)) {
+      if (document.location.href.includes(categoryURL)) {
         isCategory = true
         bypass = true
       }
@@ -104,18 +104,18 @@ presence.on('UpdateData', () => {
 
     if (bypass !== true) {
       for (const eventURL of eventURLs) {
-        if (document.URL.includes(eventURL)) {
+        if (document.location.href.includes(eventURL)) {
           isEvent = true
           bypass = true
         }
       }
     }
 
-    if (isCategory === true) {
+    if (isCategory) {
       presenceData.details = 'Viewing a category...'
       presenceData.state = document.querySelectorAll('h1')[0].textContent
     }
-    else if (isEvent === true) {
+    else if (isEvent) {
       presenceData.details = 'Viewing an event...'
       presenceData.state = document.querySelectorAll('h1')[0].textContent
     }
@@ -123,7 +123,7 @@ presence.on('UpdateData', () => {
       if (
         /[\u2700-\u27BF\u3299\u3297\u303D\u3030\u24C2\u203C\u2049\u25AA\u25AB\u25B6\u25C0\u25FB-\u25FE\u00A9\u00AE\u2122\u2139\u2600-\u26FF\u2B05\u2B06\u2B07\u2B1B\u2B1C\u2B50\u2B55\u231A\u231B\u2328\u23CF\u23E9-\u23F3\u23F8-\u23FA\u2934\u2935\u2190-\u21FF]|(?:\uD83C[\uDDE6-\uDDFF]){2}|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u0023-\u0039]\uFE0F?\u20E3/.test(
           document.querySelectorAll('h1')[0].textContent ?? '',
-        ) === true
+        )
       ) {
         presenceData.details = 'Viewing an emoji...'
         presenceData.state = document.querySelectorAll('h1')[0].textContent
