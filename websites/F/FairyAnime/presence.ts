@@ -94,8 +94,7 @@ presence.on('UpdateData', async () => {
         presenceData.details = 'เลือกตอน '
         presenceData.state = `${rate.textContent}⭐ -${ep?.textContent
           ?.replace('ตอนของ', ' ')
-          .replace('"', ' ')
-          .replace('"', ' ')}`
+          .replace(/"/g, ' ')}`
       }
     }
   }
