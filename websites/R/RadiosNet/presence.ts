@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
 		presenceData.smallImageKey = Assets.Search;
 	} else if (pathname.includes("/busca")) {
 		presenceData.details = `Buscando por "${
-			search.split("=")[1].split("&")[0]
+			search.split("=")[1].split("&")[0].replace("+", " ")
 		}"`;
 
 		presenceData.smallImageKey = Assets.Search;
