@@ -37,7 +37,7 @@ presence.on('UpdateData', async () => {
     details: 'Browsing iHeartRadio...',
   }
 
-  if (document.location.href.includes('www.iheart.com')) {
+  if (document.location.hostname === 'www.iheart.com') {
     switch (document.location.pathname) {
       case '/for-you/': {
         presenceData.details = 'Viewing For You'
@@ -332,7 +332,7 @@ presence.on('UpdateData', async () => {
 
     await presence.setActivity(presenceData)
   }
-  else if (document.location.href.includes('listen.iheart.com')) {
+  else if (document.location.hostname === 'listen.iheart.com') {
     presenceData.details = 'Browsing iHeartRadio [BETA]'
 
     switch (document.location.pathname) {
