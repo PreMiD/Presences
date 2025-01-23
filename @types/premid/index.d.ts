@@ -478,6 +478,17 @@ declare class Presence {
   /**
    * Get translations from the extension
    * @param strings String object with keys being the key for string, keyValue is the string value
+   * @link https://docs.premid.app/dev/presence/class#getstringsobject
+   */
+  getStrings<
+    T extends {
+      [K: string]: string
+    },
+  >(strings: T): Promise<T>
+  /**
+   * @deprecated Passing language is deprecated
+   * Get translations from the extension
+   * @param strings String object with keys being the key for string, keyValue is the string value
    * @param language DEPRECATED: Language to get strings for
    * @link https://docs.premid.app/dev/presence/class#getstringsobject
    */
