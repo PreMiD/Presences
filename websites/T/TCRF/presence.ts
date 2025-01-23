@@ -28,7 +28,7 @@ presence.on('UpdateData', async () => {
     const d = help[1].split(':')
     presenceData.details = `getting ${d[0]}`
     presenceData.state = `${d[1]}: ${help[2]
-      .replace('%26', '&')
+      .replace(/%26/g, '&')
       .split('_')
       .join(' ')}`
   }
