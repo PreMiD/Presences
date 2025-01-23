@@ -244,7 +244,7 @@ presence.on('UpdateData', async () => {
       }
       presence.setActivity(presenceData)
     }
-    else if (document.location.href.endsWith('grailed.com/')) {
+    else if (document.location.pathname === '/') {
       presenceData.details = 'Viewing:'
       presenceData.state = 'The Main Page'
       presence.setActivity(presenceData)
