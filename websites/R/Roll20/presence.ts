@@ -39,7 +39,7 @@ presence.on('UpdateData', async () => {
   else if (document.location.pathname.includes('/playerdirectory')) {
     presenceData.details = 'Browsing player directory'
   }
-  else if (document.location.hostname.includes('marketplace.roll20.net')) {
+  else if (document.location.hostname === ('marketplace.roll20.net')) {
     presenceData.details = 'Browsing Marketplace'
   }
   else if (document.location.pathname.includes('/vault/characters')) {
@@ -68,7 +68,7 @@ presence.on('UpdateData', async () => {
   else if (document.location.pathname.includes('/compendium')) {
     presenceData.details = 'Reading Compendium'
   }
-  else if (document.location.hostname.includes('wiki.roll20.net')) {
+  else if (document.location.hostname === ('wiki.roll20.net')) {
     presenceData.details = 'Reading Wiki'
     // don't include state for wiki creation discussion etc.
     if (
@@ -98,7 +98,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Browsing Forum'
     }
   }
-  else if (document.location.hostname.includes('blog.roll20.net')) {
+  else if (document.location.hostname === ('blog.roll20.net')) {
     if (document.location.pathname.includes('/post')) {
       presenceData.details = 'Reading Blog Post'
       if (document.querySelectorAll('h1').length > 0 && !hideDetails)

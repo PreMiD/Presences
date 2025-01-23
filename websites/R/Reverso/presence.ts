@@ -16,6 +16,7 @@ presence.on('UpdateData', async () => {
       ':is(link[hreflang=\'en\'], #interface-lang-menu > div.drop-down > a[data-value=\'en\'])',
     )
     ?.getAttribute('href')
+  const hrefEnUrl = new URL(hrefEn)
   if (hrefEn) {
     if (hrefEn.includes('/text-translation')) {
       presenceData.details = `Traduction en ${langLabel[0]?.textContent?.trim()} → ${langLabel[1]?.textContent?.trim()}`
@@ -87,14 +88,14 @@ presence.on('UpdateData', async () => {
         presenceData.smallImageKey = Assets.Search
       }
     }
-    else if (hrefEn.includes('documents.reverso.net')) {
+    else if (hrefEnUrl.hostname === ('documents.reverso.net')) {
       const langLabel = document.querySelectorAll(
         '.translation-language-header .translation-language-text',
       )
       presenceData.details = 'Traduction d\'un document en'
       presenceData.state = `${langLabel[0].textContent} → ${langLabel[1].textContent}`
     }
-    else if (hrefEn.includes('dictionary.reverso.net')) {
+    else if (hrefEnUrl.hostname === ('dictionary.reverso.net')) {
       if (document.location.pathname.startsWith('/CollabDict')) {
         const input = document.querySelector<HTMLInputElement>(
           '#ctl00_cC_ucCD_txtTargetContain',
