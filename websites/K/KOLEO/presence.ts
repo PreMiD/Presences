@@ -689,15 +689,14 @@ presence.on('UpdateData', async () => {
       NoPage(presenceData)
     }
   }
-  else if (href.startsWith('https://pomoc.koleo.pl')) {
+  else if (hostname === 'pomoc.koleo.pl') {
     presenceData.name = 'KOLEO - pomoc'
     presenceData.largeImageKey = Assets.Logo2
     presenceData.smallImageText = 'Przegląda pomoc...'
     presenceData.smallImageKey = Assets.Viewing
 
     if (
-      href.endsWith('https://pomoc.koleo.pl')
-      || href.endsWith('https://pomoc.koleo.pl/')
+      pathname === '/'
     ) {
       presenceData.details = 'Przegląda pomoc KOLEO.'
     }
@@ -738,13 +737,12 @@ presence.on('UpdateData', async () => {
       presenceData.smallImageKey = Assets.Reading
     }
   }
-  else if (href.startsWith('https://magazyn.koleo.pl')) {
+  else if (hostname === ('magazyn.koleo.pl')) {
     presenceData.name = 'KOLEO - magazyn'
     presenceData.largeImageKey = Assets.Logo2
     presenceData.smallImageKey = Assets.Viewing
     if (
-      href.endsWith('https://magazyn.koleo.pl')
-      || href.endsWith('https://magazyn.koleo.pl/')
+      pathname === '/'
     ) {
       presenceData.details = 'Przegląda artykuły w magazynie KOLEO.'
       presenceData.smallImageText = 'Przegląda artykuły...'
@@ -844,11 +842,11 @@ presence.on('UpdateData', async () => {
         presenceData.buttons = [{ label: 'Przeczytaj Artykuł', url: href }]
     }
   }
-  else if (href.startsWith('https://travel.koleo.pl')) {
+  else if (hostname === ('travel.koleo.pl')) {
     presenceData.name = 'KOLEO - travel'
     presenceData.largeImageKey = Assets.Logo2
     presenceData.smallImageKey = Assets.Viewing
-    if (href.endsWith('travel.koleo.pl') || href.endsWith('travel.koleo.pl/')) {
+    if (pathname === '/') {
       presenceData.details = 'Przegląda travel KOLEO.'
       presenceData.smallImageText = 'Przegląda travel...'
     }
@@ -900,13 +898,12 @@ presence.on('UpdateData', async () => {
       }
     }
   }
-  else if (href.startsWith('https://sklep.koleo.pl')) {
+  else if (hostname === ('sklep.koleo.pl')) {
     presenceData.name = 'KOLEO - sklep'
     presenceData.largeImageKey = Assets.Logo2
     presenceData.smallImageKey = Assets.Viewing
     if (
-      href.endsWith('https://sklep.koleo.pl')
-      || href.endsWith('https://sklep.koleo.pl/')
+      pathname === '/'
     ) {
       presenceData.details = 'Przegląda sklep KOLEO.'
       presenceData.smallImageText = 'Przegląda sklep...'
