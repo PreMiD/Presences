@@ -70,7 +70,8 @@ presence.on("UpdateData", async () => {
 			getSetting<boolean>("hidePaused", true),
 		],
 		{ pathname, hostname, search, href } = document.location,
-		selectors = getQuerySelectors(hostname === "m.youtube.com");
+		isMobile = hostname === "m.youtube.com",
+		selectors = getQuerySelectors(isMobile);
 
 	// Update strings if user selected another language.
 	if (!checkStringLanguage(newLang)) return;
@@ -103,7 +104,7 @@ presence.on("UpdateData", async () => {
 
 		let pfp: string;
 
-		const live = !!document.querySelector(".ytp-live"),
+		const live = !!document.querySelector(selectors.videoLive),
 			isPlaylistLoop =
 				document
 					.querySelector("#playlist-actions .yt-icon-button#button")
@@ -119,10 +120,14 @@ presence.on("UpdateData", async () => {
 		if (playlistTitle) {
 			if (playlistQueueElements.length > 1)
 				playlistQueue = `${playlistQueueElements[0].textContent} / ${playlistQueueElements[2].textContent}`;
-			else {
+			else if (isMobile) {
+				playlistQueue = document
+					.querySelector(selectors.videoPlaylistTitle)
+					?.nextSibling?.textContent.replace(/^ • /, "");
+			} else {
 				playlistQueue = document.querySelector<HTMLSpanElement>(
 					"#content #publisher-container > div > span"
-				).textContent;
+				)?.textContent;
 			}
 		}
 
@@ -290,12 +295,11 @@ presence.on("UpdateData", async () => {
 			}
 			case pathname.includes("/results"): {
 				searching = true;
-				const search = document.querySelector<HTMLInputElement>(
-					selectors.searchInput
-				);
 
 				presenceData.details = strings.search;
-				presenceData.state = search.value;
+				presenceData.state = document.querySelector<HTMLInputElement>(
+					selectors.searchInput
+				).value;
 				presenceData.smallImageKey = Assets.Search;
 				break;
 			}
@@ -303,13 +307,10 @@ presence.on("UpdateData", async () => {
 			case pathname.includes("/channel"):
 			case pathname.includes("/c"):
 			case pathname.includes("/user"): {
-				const tabSelected = document
-						.querySelector(selectors.userVideoTab)
-						?.textContent.trim(),
-					documentTitle = document.title.substring(
-						0,
-						document.title.lastIndexOf(" - YouTube")
-					);
+				const documentTitle = document.title.substring(
+					0,
+					document.title.lastIndexOf(" - YouTube")
+				);
 
 				let user: string;
 				// Get channel name when viewing a community post
@@ -317,10 +318,10 @@ presence.on("UpdateData", async () => {
 					documentTitle.includes(
 						document.querySelector(selectors.userName)?.textContent.trim()
 					)
-				) {
+				)
 					user = document.querySelector(selectors.userName).textContent;
-					// Get channel name when viewing a channel
-				} else if (
+				// Get channel name when viewing a channel
+				else if (
 					documentTitle.includes(
 						document.querySelector(selectors.userName2)?.textContent
 					) &&
@@ -339,9 +340,9 @@ presence.on("UpdateData", async () => {
 					user = "null";
 
 				if (pathname.includes("/videos")) {
-					presenceData.details = `${
-						strings.browsingThrough
-					} ${tabSelected} ${document
+					presenceData.details = `${strings.browsingThrough} ${document
+						.querySelector(selectors.userVideoTab)
+						?.textContent.trim()} ${document
 						.querySelector(selectors.userTab)
 						?.textContent.trim()
 						.toLowerCase()}`;
@@ -433,8 +434,10 @@ presence.on("UpdateData", async () => {
 			}
 			case pathname.includes("/playlist"): {
 				presenceData.details = strings.viewPlaylist;
-				const title = document.querySelector(selectors.playlistTitle);
-				presenceData.state = title.textContent.trim();
+
+				presenceData.state = document
+					.querySelector(selectors.playlistTitle)
+					.textContent.trim();
 				break;
 			}
 			case pathname.includes("/premium"): {
