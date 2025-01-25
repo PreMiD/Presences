@@ -14,7 +14,6 @@
   },
   "devDependencies": {
     "@types/discord-rpc": "^4.0.8",
-    "@types/jsonschema": "^1.1.1",
     "@types/ws": "^8.5.14",
     "cac": "^6.7.14",
     "chalk": "^5.4.1",

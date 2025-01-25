@@ -2,9 +2,9 @@
 
 import { readFile } from 'node:fs/promises'
 import { cac } from 'cac'
-import { devActivity } from './commands/dev.js'
 import { newActivity } from './commands/new.js'
 import { exit } from './util/log.js'
+import { buildActivity } from './commands/build.js'
 
 const cli = cac('pmd')
 const localPackageJson = JSON.parse(await readFile('./package.json', 'utf-8').catch(() => {
@@ -25,7 +25,11 @@ cli
 
 cli
   .command('dev [activity]', 'Run an activity in dev mode')
-  .action(devActivity)
+  .action((service) => buildActivity(service, true))
+
+cli
+  .command('build [activity]', 'Build an activity')
+  .action((service) => buildActivity(service))
 
 cli.help()
 cli.version(cliPackageJson.version)

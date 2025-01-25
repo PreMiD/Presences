@@ -12,7 +12,7 @@ import { getSchema } from '../util/getSchema.js'
 import { isFirstTimeAuthor } from '../util/isFirstTimeAuthor.js'
 import { exit, prefix, success } from '../util/log.js'
 import { sanitazeFolderName } from '../util/sanitazeFolderName.js'
-import { devActivity } from './dev.js'
+import { buildActivity } from './build.js'
 import { versionizeActivity } from './versionize.js'
 
 export async function newActivity(activity?: string) {
@@ -50,7 +50,7 @@ export async function newActivity(activity?: string) {
     })
 
     if (develop)
-      return devActivity(activity)
+      return buildActivity(activity, true)
 
     exit('Activity already exists')
   }
