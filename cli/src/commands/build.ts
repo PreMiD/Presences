@@ -5,11 +5,11 @@ import process from 'node:process'
 import { fileURLToPath } from 'node:url'
 import autocomplete from 'inquirer-autocomplete-standalone'
 import { ActivityCompiler, type ActivityMetadata } from '../classes/ActivityCompiler.js'
+import { getActivities } from '../util/getActivities.js'
 import { getFolderLetter } from '../util/getFolderLetter.js'
 import { exit } from '../util/log.js'
-import { sanitazeFolderName } from '../util/sanitazeFolderName.js'
 import { mapActivityToChoice } from '../util/mapActivityToChoice.js'
-import { getActivities } from '../util/getActivities.js'
+import { sanitazeFolderName } from '../util/sanitazeFolderName.js'
 
 export async function buildActivity(service?: string, watch: boolean = false) {
   const activities = await getActivities()

@@ -1,6 +1,7 @@
-import { readFile } from "node:fs/promises"
-import { ActivityMetadata } from "../classes/ActivityCompiler.js"
-import { globby } from "globby"
+import type { ActivityMetadata } from '../classes/ActivityCompiler.js'
+import { readFile } from 'node:fs/promises'
+import process from 'node:process'
+import { globby } from 'globby'
 
 export async function getActivities(): Promise<ActivityMetadata[]> {
   return (await Promise.all(

@@ -1,5 +1,5 @@
-import { ChoiceOrSeparatorArray } from "inquirer-autocomplete-standalone"
-import { ActivityMetadata } from "../classes/ActivityCompiler"
+import type { ChoiceOrSeparatorArray } from 'inquirer-autocomplete-standalone'
+import type { ActivityMetadata } from '../classes/ActivityCompiler'
 
 export function mapActivityToChoice(activity: ActivityMetadata, activities: ActivityMetadata[]): ChoiceOrSeparatorArray<{
   activity: ActivityMetadata
