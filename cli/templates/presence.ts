@@ -39,7 +39,7 @@ presence.on('UpdateData', async () => {
     // The text which is displayed when hovering over the small image
     smallImageText: 'Some hover text',
     // The upper section of the presence text
-    details: 'Browsing Page Name',
+    details: `Browsing Page Name ${(await strings).play}`,
     // The lower section of the presence text
     state: 'Reading section A',
     // The unix epoch timestamp for when to start counting from
@@ -48,6 +48,7 @@ presence.on('UpdateData', async () => {
     endTimestamp: 3133700400000,
     // Optionally you can set a largeImageKey here and change the rest as variable subproperties, for example presenceData.type = "blahblah"; type examples: details, state, etc.
   }
+
   // Update the presence with all the values from the presenceData object
   if (presenceData.details)
     presence.setActivity(presenceData)
