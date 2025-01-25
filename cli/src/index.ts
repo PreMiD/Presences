@@ -32,7 +32,7 @@ cli
   .option('--all', 'Build all activities')
   .option('--watch', 'Watch for changes and rebuild (Same as `dev`)')
   .option('--changed', 'Build only changed activities')
-  .option('--no-kill', 'Do not kill the process on error (Only works with --all or --changed)')
+  .option('--kill', 'Kill the process on error (Only works with --all or --changed)')
   .action((service, options) => build(service, options))
 
 cli.help()
