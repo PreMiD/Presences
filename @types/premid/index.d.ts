@@ -448,6 +448,15 @@ declare class Presence {
   /**
    * Sets the presence activity and sends it to the application.
    * @param data PresenceData or Slideshow
+   * @link https://docs.premid.app/dev/presence/class#setactivitypresencedata-boolean
+   */
+  setActivity(
+    data?: PresenceData | Slideshow,
+  ): Promise<void>
+  /**
+   * @deprecated 2.5 - The `_playback` parameter is deprecated.
+   * Sets the presence activity and sends it to the application.
+   * @param data PresenceData or Slideshow
    * @param _playback DEPRECATED: Is presence playing
    * @link https://docs.premid.app/dev/presence/class#setactivitypresencedata-boolean
    */
@@ -468,14 +477,6 @@ declare class Presence {
    */
   clearActivity(): void
   /**
-   * Sets the tray title on the Menubar in Mac OS (Mac OS only, supports ANSI colors)
-   * @param _trayTitle Tray Title
-   * @link https://docs.premid.app/dev/presence/class#settraytitlestring
-   * @since 2.0-BETA3
-   * @deprecated 2.5
-   */
-  setTrayTitle(_trayTitle?: string): void
-  /**
    * Get translations from the extension
    * @param strings String object with keys being the key for string, keyValue is the string value
    * @link https://docs.premid.app/dev/presence/class#getstringsobject
@@ -486,7 +487,7 @@ declare class Presence {
     },
   >(strings: T): Promise<T>
   /**
-   * @deprecated Passing language is deprecated
+   * @deprecated 2.5 - Passing language is deprecated
    * Get translations from the extension
    * @param strings String object with keys being the key for string, keyValue is the string value
    * @param language DEPRECATED: Language to get strings for
