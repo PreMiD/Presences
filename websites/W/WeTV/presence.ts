@@ -1,42 +1,21 @@
-class WeTV extends Presence {
-	constructor(options: PresenceOptions) {
-		super(options);
-	}
-
-	getTitle() {
-		return JSON.parse(
-			document.querySelector('[type="application/ld+json"]').textContent
-		)["@graph"][0].name;
-	}
-
-	getMovieTitle() {
-		return document.querySelector(".play-relevant__link").getAttribute("title");
-	}
-
-	getEpisodeTitle() {
-		const Element = document.querySelector(
-			".play-relevant__item.play-relevant__item--selected"
-		);
-
-		if (Element) return Element.children[2].textContent;
-	}
-
-	getEpisodeNumber() {
-		return document
-			.querySelector(".play-video__item.play-video__item--selected")
-			?.textContent.match(/[1-9][0-9]?[0-9]?/)[0];
-	}
-
-	isMovie() {
-		return this.getTitle() === this.getMovieTitle();
-	}
-
-	isClip() {
-		return this.getTitle() !== this.getEpisodeTitle();
-	}
+const enum WeTvAssets {
+	Play = "https://cdn.rcd.gg/PreMiD/websites/W/WeTV/assets/0.png",
+	Pause = "https://cdn.rcd.gg/PreMiD/websites/W/WeTV/assets/1.png",
+	Search = "https://cdn.rcd.gg/PreMiD/websites/W/WeTV/assets/2.png",
 }
 
-const presence = new WeTV({
+let parsedData: {
+	props?: {
+		pageProps: {
+			data: string;
+		};
+	};
+	coverInfo?: {
+		posterVt: string;
+	};
+};
+
+const presence = new Presence({
 	clientId: "840271335183351902",
 });
 
@@ -44,36 +23,53 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		details: "Browsing...",
 		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/W/WeTV/assets/logo.png",
-		smallImageKey: Assets.Search,
+		type: ActivityType.Watching,
+		smallImageKey: WeTvAssets.Search,
 	};
 
 	if (document.location.pathname.includes("/play/")) {
-		const video = document.querySelector("video");
+		const video = document.querySelector("video"),
+			nextdata = document.querySelector("#__NEXT_DATA__");
+
+		if (nextdata && !parsedData) {
+			parsedData = JSON.parse(nextdata.textContent);
+			parsedData = JSON.parse(parsedData.props.pageProps.data);
+		}
 
 		if (video) {
-			presenceData.details = presence.getTitle();
+			const episodeNumber = document.querySelector(
+					"li.play-video__item.play-video__item--selected"
+				),
+				episodeTitle = document.querySelector(
+					"li.play-relevant__item.play-relevant__item--selected"
+				);
+
+			presenceData.details = document.querySelector(
+				"div.play-sidebar__title"
+			).textContent;
+
+			presenceData.state = episodeNumber
+				? `Episode ${parseInt(episodeNumber.textContent)}`
+				: episodeTitle
+				? episodeTitle.textContent
+				: "Unknown";
+
+			if (parsedData && presence.getSetting<boolean>("showCover"))
+				presenceData.largeImageKey = parsedData.coverInfo.posterVt;
+
 			[presenceData.startTimestamp, presenceData.endTimestamp] =
 				presence.getTimestampsfromMedia(video);
 
-			presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
+			presenceData.smallImageKey = video.paused
+				? WeTvAssets.Pause
+				: WeTvAssets.Play;
 			presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-			if (video.paused) delete presenceData.endTimestamp;
-
-			if (presence.isMovie()) {
-				presenceData.state = "Movie";
-
-				if (presence.isClip()) presenceData.state = "Clip";
-			} else if (presence.getEpisodeNumber())
-				presenceData.state = `Episode ${presence.getEpisodeNumber()}`;
-			else presenceData.state = presence.getEpisodeTitle();
-		} else {
-			presenceData.details = "Viewing:";
-			presenceData.state = presence.getTitle();
+			if (video.paused) {
+				delete presenceData.startTimestamp;
+				delete presenceData.endTimestamp;
+			}
 		}
-	} else if (document.location.pathname.endsWith("/search")) {
-		presenceData.details = "Searching for:";
-		presenceData.state = document.querySelector("input").value;
 	}
 
 	presence.setActivity(presenceData);

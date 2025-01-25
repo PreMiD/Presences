@@ -78,10 +78,10 @@ presence.on("UpdateData", async () => {
 		presenceData.details = strings.lyrics;
 		presenceData.state = `${artist["_sf_async_config.authors"]} - ${
 			document
-				.querySelector('h1[class*="SongHeaderdesktop__Title"]')
+				.querySelector('h1[class*="SongHeader-desktop"]')
 				?.textContent.trim() ||
 			document
-				.querySelector('h1[class*="SongHeadermobile__Title"]')
+				.querySelector('h1[class*="SongHeader-mobile"]')
 				?.textContent.trim()
 		}`;
 		if (buttons) {

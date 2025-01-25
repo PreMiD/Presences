@@ -3,9 +3,12 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
+const enum Assets {
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/T/Trakt/assets/logo.png",
+}
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
-		largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/T/Trakt/assets/logo.png",
+		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 	};
 
@@ -74,7 +77,8 @@ presence.on("UpdateData", async () => {
 			"/auth/signin": { details: "Registering on Trakt" },
 			"/auth/login": { details: "Logging in to Trakt" },
 			"/widgets": { details: "Browsing widgets" },
-		};
+		},
+		imagePath = document.querySelector("img.real")?.getAttribute("src");
 
 	for (const [path, data] of Object.entries(pages))
 		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
@@ -115,6 +119,8 @@ presence.on("UpdateData", async () => {
 					"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1 > span.main-title"
 				).textContent
 			}`;
+			presenceData.largeImageKey = imagePath;
+			presenceData.smallImageKey = Assets.Logo;
 			presenceData.buttons = [{ label: "Check episode", url: href }];
 		} else if (pathname.includes("/seasons/")) {
 			presenceData.details = "Browsing season";
@@ -125,6 +131,8 @@ presence.on("UpdateData", async () => {
 					"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1"
 				).firstChild.textContent
 			}`;
+			presenceData.largeImageKey = imagePath;
+			presenceData.smallImageKey = Assets.Logo;
 			presenceData.buttons = [{ label: "Check season", url: href }];
 		} else {
 			try {
@@ -132,6 +140,8 @@ presence.on("UpdateData", async () => {
 				presenceData.state = document.querySelector(
 					"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1"
 				).firstChild.textContent;
+				presenceData.largeImageKey = imagePath;
+				presenceData.smallImageKey = Assets.Logo;
 				presenceData.buttons = [{ label: "Check TV show", url: href }];
 			} catch {
 				presenceData.details = "Browsing";
@@ -143,6 +153,8 @@ presence.on("UpdateData", async () => {
 			presenceData.state = document.querySelector(
 				"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1"
 			).childNodes[0].textContent;
+			presenceData.largeImageKey = imagePath;
+			presenceData.smallImageKey = Assets.Logo;
 			presenceData.buttons = [{ label: "Check movie", url: href }];
 		} catch {
 			presenceData.details = "Browsing";
@@ -152,6 +164,8 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(
 			"#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1"
 		).textContent;
+		presenceData.largeImageKey = imagePath;
+		presenceData.smallImageKey = Assets.Logo;
 		presenceData.buttons = [{ label: "Check actor", url: href }];
 	} else if (pathname.includes("/search")) {
 		presenceData.details = "Searching for";

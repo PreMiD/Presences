@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.11",
+	"$schema": "https://schemas.premid.app/metadata/1.12",
 	"apiVersion": 1,
 	"author": {
 		"name": "marino!",
@@ -10,7 +10,7 @@
 		"en": "Harmony broadcasts from all over the world and we all have the same desire to play the biggest hits!"
 	},
 	"url": "weareharmony.net",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/Harmony/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/Harmony/assets/thumbnail.png",
 	"color": "#4c1eff",

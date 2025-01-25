@@ -285,7 +285,7 @@ interface BaseSetting {
 }
 
 interface MultiLanguageSetting extends BaseSetting {
-	multiLanguage: true | string | string[];
+	multiLanguage: true;
 }
 
 interface Setting extends BaseSetting {

@@ -8,6 +8,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/J/jut.su/assets/logo.png",
 			startTimestamp: browsingTimestamp,
+			type: ActivityType.Watching,
 		},
 		{ pathname } = document.location,
 		title =
@@ -77,10 +78,22 @@ presence.on("UpdateData", async () => {
 				.replace(/смотреть\s/i, "")
 				.replace(/([0-9]* сезон)?\s?[0-9]* серия|[0-9] фильм/g, "")
 				.trim();
-			presenceData.details = `Смотрит аниме «${titles}»`;
+			presenceData.details = titles;
 			presenceData.state = name.textContent
 				.replace(/смотреть\s/i, "")
 				.replace(titles, "");
+
+			const coverArtElement = document.querySelector<HTMLDivElement>(
+				".all_anime_title.aat_ep"
+			);
+			if (coverArtElement) {
+				const coverArt = coverArtElement.style.backgroundImage;
+				if (coverArt) {
+					presenceData.largeImageKey = coverArt
+						.replace('url("', "")
+						.replace('")', "");
+				}
+			}
 			break;
 		}
 		case !!title:
