@@ -8,7 +8,7 @@ import { mapActivityToChoice } from '../../util/mapActivityToChoice.js'
 import { sanitazeFolderName } from '../../util/sanitazeFolderName.js'
 import { buildActivity } from './buildActivity.js'
 
-export async function buildSingle(activities: ActivityMetadata[], service: string | undefined, watch: boolean) {
+export async function buildSingle(activities: ActivityMetadata[], service: string | undefined, { watch, bumpCheck }: { watch: boolean, bumpCheck: boolean }) {
   let activity: ActivityMetadata
   let versionized: boolean
   if (!service) {
@@ -49,5 +49,5 @@ export async function buildSingle(activities: ActivityMetadata[], service: strin
   const sanitazedActivity = sanitazeFolderName(activity.service)
   const path = resolve(process.cwd(), 'websites', folderLetter, sanitazedActivity, versionized ? `v${activity.apiVersion}` : '')
 
-  return buildActivity({ path, activity, versionized, watch })
+  return buildActivity({ path, activity, versionized, watch, bumpCheck, kill: true })
 }

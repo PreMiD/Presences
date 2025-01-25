@@ -9,14 +9,16 @@ export async function buildActivity({
   path,
   activity,
   versionized,
-  watch = false,
-  killOnError = true,
+  watch,
+  kill,
+  bumpCheck,
 }: {
   path: string
   activity: ActivityMetadata
   versionized: boolean
-  watch?: boolean
-  killOnError?: boolean
+  watch: boolean
+  kill: boolean
+  bumpCheck: boolean
 }) {
   if (!existsSync(path)) {
     exit(`Activity ${activity.service} not found`)
@@ -30,11 +32,11 @@ export async function buildActivity({
     )
   }
 
-  const compiler = new ActivityCompiler(path, activity)
+  const compiler = new ActivityCompiler(path, activity, versionized)
   if (watch) {
-    await compiler.watch()
+    await compiler.watch({ bumpCheck })
   }
   else {
-    await compiler.compile(true, killOnError)
+    await compiler.compile({ kill, bumpCheck, preCheck: true })
   }
 }

@@ -33,6 +33,7 @@ cli
   .option('--watch', 'Watch for changes and rebuild (Same as `dev`)')
   .option('--changed', 'Build only changed activities')
   .option('--kill', 'Kill the process on error (Only works with --all or --changed)')
+  .option('--bump-check', 'Check if the version of the activity has been bumped')
   .action((service, options) => build(service, options))
 
 cli.help()

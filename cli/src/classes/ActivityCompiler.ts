@@ -1,18 +1,20 @@
 import { existsSync } from 'node:fs'
-import { cp, rm } from 'node:fs/promises'
+import { cp, readFile, rm } from 'node:fs/promises'
 import { basename, resolve } from 'node:path'
 import chalk from 'chalk'
 import { watch } from 'chokidar'
 import { build } from 'esbuild'
 import ora from 'ora'
-import { error, prefix } from '../util/log.js'
+import { error, exit, prefix } from '../util/log.js'
 import { DependenciesManager } from './DependenciesManager.js'
 import { TypescriptCompiler } from './TypescriptCompiler.js'
 import { WebSocketServer } from './WebSocketServer.js'
+import { compare, inc } from 'semver'
 
 export interface ActivityMetadata {
   service: string
   apiVersion: number
+  version: string
 }
 
 export class ActivityCompiler {
@@ -23,18 +25,23 @@ export class ActivityCompiler {
   constructor(
     public readonly cwd: string,
     public readonly activity: ActivityMetadata,
+    public readonly versionized: boolean,
   ) {
     this.dependencies = new DependenciesManager(cwd, activity)
     this.ts = new TypescriptCompiler(cwd, activity)
   }
 
-  async compile(
-    precheck = true,
-    killOnError = true,
-  ) {
-    if (precheck) {
+  async compile({ kill, bumpCheck, preCheck = true }: { kill: boolean, bumpCheck: boolean, preCheck?: boolean }) {
+    if (preCheck) {
       await this.dependencies.installDependencies()
-      const success = await this.ts.typecheck(killOnError)
+      const success = await this.ts.typecheck(kill)
+      if (!success) {
+        return
+      }
+    }
+
+    if (bumpCheck) {
+      const success = await this.bumpCheck({ kill })
       if (!success) {
         return
       }
@@ -70,7 +77,7 @@ export class ActivityCompiler {
     spinner.succeed(prefix + chalk.greenBright(` Compiled ${this.activity.service}!`))
   }
 
-  async watch() {
+  async watch({ bumpCheck }: { bumpCheck: boolean }) {
     await this.dependencies.installDependencies()
 
     this.ws = new WebSocketServer(this.cwd)
@@ -82,7 +89,7 @@ export class ActivityCompiler {
       persistent: true,
     }).on('all', async (event, path) => {
       if (['add', 'unlink'].includes(event) && basename(path) === 'iframe.ts') {
-        return this.ts.restart(this.compileAndSend.bind(this))
+        return this.ts.restart(this.compileAndSend.bind(this, { bumpCheck }))
       }
 
       if (basename(path) === 'package.json') {
@@ -106,15 +113,48 @@ export class ActivityCompiler {
           }
         }
 
-        await this.ts.restart(this.compileAndSend.bind(this))
+        await this.ts.restart(this.compileAndSend.bind(this, { bumpCheck }))
       }
     })
 
-    this.ts.watch(this.compileAndSend.bind(this))
+    this.ts.watch(this.compileAndSend.bind(this, { bumpCheck }))
   }
 
-  private async compileAndSend() {
-    await this.compile(false)
+  private async compileAndSend({ bumpCheck }: { bumpCheck: boolean }) {
+    await this.compile({ bumpCheck, preCheck: false, kill: false })
     await this.ws?.send()
+  }
+
+  private async bumpCheck({ kill }: { kill: boolean }): Promise<boolean> {
+    const metadata: ActivityMetadata = JSON.parse(await readFile(resolve(this.cwd, 'metadata.json'), 'utf-8'))
+    const libraryVersion: ActivityMetadata | null = await fetch(`https://api.premid.app/v6/activities${this.versionized ? `/v${metadata.apiVersion}` : ''}/${encodeURIComponent(metadata.service)}/metadata.json`).then(res => res.json()).catch(() => null)
+
+    if (!libraryVersion) {
+      if (metadata.version === '1.0.0') {
+        return true
+      }
+      else {
+        const message = `Expected initial version of activity ${metadata.service} to be 1.0.0`
+        if (kill) {
+          exit(message)
+        }
+
+        error(message)
+        return false
+      }
+    }
+
+    if (compare(metadata.version, libraryVersion.version) <= 0) {
+      const expectedVersions = [inc(metadata.version, 'patch'), inc(metadata.version, 'minor'), inc(metadata.version, 'major')]
+      const message = `Expected version of activity ${metadata.service} to be bumped to one of the following: ${expectedVersions.join(', ')}`
+      if (kill) {
+        exit(message)
+      }
+
+      error(message)
+      return false
+    }
+
+    return true
   }
 }

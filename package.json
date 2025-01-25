@@ -9,6 +9,7 @@
     "pnpm": ">=9.0.0"
   },
   "scripts": {
+    "prepare": "cd cli && npm ci && npm run build && cd ..",
     "lint": "eslint . --cache",
     "lint:fix": "eslint . --fix --cache",
     "dev": "pmd dev"

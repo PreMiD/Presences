@@ -1,8 +1,12 @@
 import type { ActivityMetadata } from '../classes/ActivityCompiler.js'
 import { readFile } from 'node:fs/promises'
 import { dirname } from 'node:path'
-import process from 'node:process'
 import { globby } from 'globby'
+import isCI from 'is-ci'
+import multimatch from 'multimatch'
+import { execSync } from 'node:child_process'
+import { exit } from './log.js'
+import { context, getOctokit } from '@actions/github'
 
 export interface ActivityMetadataAndFolder {
   metadata: ActivityMetadata
@@ -22,4 +26,59 @@ export async function getActivities(): Promise<ActivityMetadataAndFolder[]> {
       return a.service.localeCompare(b.service)
     return a.apiVersion - b.apiVersion
   })
+}
+
+export async function getChangedActivities() {
+  const changedFiles = isCI ? await getChangedFilesCi() : await getChangedFilesLocal()
+  const activityPaths = new Set<string>(multimatch(changedFiles, ['websites/*/*/metadata.json', 'websites/*/*/v*/metadata.json']))
+  return [...activityPaths]
+}
+
+async function getChangedFilesCi() {
+  if (!process.env.GITHUB_TOKEN) {
+    exit('GITHUB_TOKEN is not set')
+  }
+
+  let base: string | undefined
+  let head: string | undefined
+
+  switch (context.eventName) {
+    case 'pull_request':
+      base = context.payload.pull_request?.base?.sha
+      head = context.payload.pull_request?.head?.sha
+      break
+    case 'push':
+      base = context.payload.before
+      head = context.payload.after
+      break
+  }
+
+  if (!base || !head) {
+    exit('No base or head found')
+  }
+
+  const client = getOctokit(process.env.GITHUB_TOKEN)
+  const response = await client.rest.repos.compareCommits({
+    base,
+    head,
+    owner: context.repo.owner,
+    repo: context.repo.repo
+  })
+
+  if (response.status !== 200) {
+    exit(`Failed to get changed files, status: ${response.status}`)
+  }
+
+  if (response.data.status !== 'ahead') {
+    exit('The head commit is not ahead of the base commit, rebase and try again')
+  }
+
+  return (response.data.files ?? []).map((file) => file.filename)
+}
+
+async function getChangedFilesLocal() {
+  const base = execSync('git merge-base main HEAD').toString().trim()
+  const head = execSync('git rev-parse HEAD').toString().trim()
+  const changedFiles = execSync(`git diff --name-only ${base} ${head}`).toString().trim().split('\n')
+  return changedFiles
 }

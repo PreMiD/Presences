@@ -8,18 +8,20 @@ export async function build(service?: string, {
   all = false,
   changed = false,
   kill = true,
+  bumpCheck = false,
 }: {
   watch?: boolean
   all?: boolean
   changed?: boolean
   kill?: boolean
+  bumpCheck?: boolean
 } = {}) {
   const activities = await getActivities()
 
   if (changed)
-    return buildChanged(activities, kill)
+    return buildChanged({ kill, bumpCheck })
   if (all)
-    return buildAll(activities, kill)
+    return buildAll(activities, { kill, bumpCheck })
 
-  return buildSingle(activities.map(({ metadata }) => metadata), service, watch)
+  return buildSingle(activities.map(({ metadata }) => metadata), service, { watch, bumpCheck})
 }
