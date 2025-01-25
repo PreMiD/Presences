@@ -30,8 +30,8 @@ const routes = {
 };
 
 presence.on("UpdateData", async () => {
-	const page = document.location.pathname;
-	const presenceData: PresenceData = {
+	const page = document.location.pathname,
+		presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 		details: "Sur la page d'accueil"
