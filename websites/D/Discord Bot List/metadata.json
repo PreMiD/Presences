@@ -8,8 +8,8 @@
   "service": "Discord Bot List",
   "description": {
     "en": "Discord Bot List is listing discord bots.",
-    "tr": "Discord Bot List bir bot listesidir.",
-    "nl": "Discord Bot List is een lijst van discord bots."
+    "nl": "Discord Bot List is een lijst van discord bots.",
+    "tr": "Discord Bot List bir bot listesidir."
   },
   "url": "discordbotlist.com",
   "version": "1.2.25",

@@ -8,8 +8,8 @@
   "service": "osu!gatari",
   "description": {
     "en": "Welcome to the best osu! server osu!gatari.",
-    "zh_CN": "欢迎来到最棒的osu!私服:osu!gatari。",
-    "nl": "Welkom bij de beste osu! server osu! gatari."
+    "nl": "Welkom bij de beste osu! server osu! gatari.",
+    "zh_CN": "欢迎来到最棒的osu!私服:osu!gatari。"
   },
   "url": [
     "osu.gatari.pw",

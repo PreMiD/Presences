@@ -7,8 +7,8 @@
   },
   "service": "DiscordJS Guide",
   "description": {
-    "en": "A guide made by the community of discord.js for its users.",
     "de": "Ein Leitfaden der Community von discord.js für ihre Benutzer.",
+    "en": "A guide made by the community of discord.js for its users.",
     "nl": "Een gids gemaakt door de gemeenschap van discord.js voor haar gebruikers."
   },
   "url": "discordjs.guide",

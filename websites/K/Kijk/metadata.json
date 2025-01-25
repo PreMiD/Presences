@@ -7,8 +7,8 @@
   },
   "service": "Kijk",
   "description": {
-    "nl": "Kijk opent je ogen",
-    "en": "Kijk opens your eyes."
+    "en": "Kijk opens your eyes.",
+    "nl": "Kijk opent je ogen"
   },
   "url": "www.kijk.nl",
   "version": "1.2.10",

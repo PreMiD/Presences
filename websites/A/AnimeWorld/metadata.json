@@ -14,11 +14,11 @@
   "service": "AnimeWorld",
   "description": {
     "en": "Discover our Anime Streaming (Italian Subbed). Download or stream your favorite series completely for free.",
-    "nl": "Ontdek onze Anime Streaming (Italian Subbed). Download of stream je favoriete serie helemaal gratis.",
-    "it": "Scopri il nostro sito di Streaming Anime (Sub ITA). Scarica o guarda le tue serie preferite completamente gratis.",
-    "zh_CN": "在这里，你可以找到完全免费的意大利语字幕动漫视频。",
     "ga_IE": "Faigh amach ár Sruthlú Anime (Subbed Iodáilis). Íoslódáil nó sruthlaigh an tsraith is fearr leat go hiomlán saor in aisce.",
-    "vi_VN": "Tìm kiếm trong dịch vụ phát anime trực tuyến của chúng tôi (Phụ đề Tiếng Tây Ban Nha). Tải về hoặc xem trực tiếng sê-ri yêu thích của bạn hoàn toàn miễn phí."
+    "it": "Scopri il nostro sito di Streaming Anime (Sub ITA). Scarica o guarda le tue serie preferite completamente gratis.",
+    "nl": "Ontdek onze Anime Streaming (Italian Subbed). Download of stream je favoriete serie helemaal gratis.",
+    "vi_VN": "Tìm kiếm trong dịch vụ phát anime trực tuyến của chúng tôi (Phụ đề Tiếng Tây Ban Nha). Tải về hoặc xem trực tiếng sê-ri yêu thích của bạn hoàn toàn miễn phí.",
+    "zh_CN": "在这里，你可以找到完全免费的意大利语字幕动漫视频。"
   },
   "url": [
     "www.animeworld.tv",

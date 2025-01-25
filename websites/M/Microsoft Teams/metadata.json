@@ -7,11 +7,11 @@
   },
   "service": "Microsoft Teams",
   "description": {
-    "en": "Stay connected and organized. Accomplish more together across work, school, and life with Microsoft Teams.",
     "de": "Bleiben Sie gut vernetzt und organisiert – und erreichen Sie gemeinsam mehr mit Microsoft Teams: am Arbeitsplatz, in Schule und Studium und privat.",
-    "ru": "Будьте на связи и планируйте свои действия. Решайте поставленные задачи сообща и успевайте больше на работе, в школе и дома благодаря Microsoft Teams.",
-    "pl": "Bądź w kontakcie z innymi i zachowaj dobrą organizację pracy. Osiągaj więcej razem z innymi — w pracy, szkole i życiu — dzięki usłudze Microsoft Teams.",
+    "en": "Stay connected and organized. Accomplish more together across work, school, and life with Microsoft Teams.",
     "nl": "Blijf verbonden en georganiseerd. Bereik samen meer op het werk, op school en in het leven met Microsoft Teams.",
+    "pl": "Bądź w kontakcie z innymi i zachowaj dobrą organizację pracy. Osiągaj więcej razem z innymi — w pracy, szkole i życiu — dzięki usłudze Microsoft Teams.",
+    "ru": "Будьте на связи и планируйте свои действия. Решайте поставленные задачи сообща и успевайте больше на работе, в школе и дома благодаря Microsoft Teams.",
     "vi_VN": "Kết nối và quản lý. Đạt được nhiều hơn cùng nhau trong công việc, trường học, cuộc sống với Microsoft Teams."
   },
   "url": [

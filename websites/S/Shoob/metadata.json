@@ -22,10 +22,10 @@
   "service": "Shoob",
   "description": {
     "en": "Waifu Bot?! Anime Card Game by Anime Soul Discord! Connect with all Anime communities today!",
-    "zh_CN": "外福机器人？ ！动漫灵魂不和谐动漫纸牌游戏！立即与所有动漫社区联系！",
     "ga_IE": "Waifu Bot?! Cluiche Cárta Anime ag Anime Soul Discord! Déan teagmháil le gach pobal Anime inniu!",
     "nl": "Waifu-bot?! Anime-kaartspel van Anime Soul Discord! Maak vandaag nog contact met alle Anime-gemeenschappen!",
-    "vi_VN": "Bot Waifu ?! Game bài Anime của Anime Soul Discord! Kết nối với tất cả cộng đồng Anime ngay hôm nay!"
+    "vi_VN": "Bot Waifu ?! Game bài Anime của Anime Soul Discord! Kết nối với tất cả cộng đồng Anime ngay hôm nay!",
+    "zh_CN": "外福机器人？ ！动漫灵魂不和谐动漫纸牌游戏！立即与所有动漫社区联系！"
   },
   "url": "shoob.gg",
   "version": "1.2.9",

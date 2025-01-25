@@ -8,8 +8,8 @@
   "service": "osu!kawata",
   "description": {
     "en": "Kawata is the first osu! private server that allows cheating.",
-    "zh_CN": "Kawata是世界上第一个允许作弊的osu!私服",
-    "nl": "Kawata is de eerste osu! privéserver die valsspelen mogelijk maakt."
+    "nl": "Kawata is de eerste osu! privéserver die valsspelen mogelijk maakt.",
+    "zh_CN": "Kawata是世界上第一个允许作弊的osu!私服"
   },
   "url": "kawata.pw",
   "version": "1.3.25",

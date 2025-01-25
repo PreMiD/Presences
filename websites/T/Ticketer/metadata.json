@@ -7,8 +7,8 @@
   },
   "service": "Ticketer",
   "description": {
-    "en": "Simplifies ticketing for customer support, sales, and suggestions",
-    "de": "Vereinfacht das Ticketing für Kundensupport, Verkauf und Vorschläge"
+    "de": "Vereinfacht das Ticketing für Kundensupport, Verkauf und Vorschläge",
+    "en": "Simplifies ticketing for customer support, sales, and suggestions"
   },
   "url": "ticketerbot.com",
   "version": "1.0.9",

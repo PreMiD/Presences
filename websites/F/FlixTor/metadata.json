@@ -14,8 +14,8 @@
   "service": "FlixTor",
   "description": {
     "en": "FlixTor is a fully automated video search engine.",
-    "ro": "FlixTor este un motor de căutare automat pentru videoclipuri.",
-    "nl": "FlixTor is een volledig geautomatiseerde video zoekmachine."
+    "nl": "FlixTor is een volledig geautomatiseerde video zoekmachine.",
+    "ro": "FlixTor este un motor de căutare automat pentru videoclipuri."
   },
   "url": [
     "flixtor.to",

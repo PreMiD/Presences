@@ -8,9 +8,9 @@
   "service": "osu!ripple",
   "description": {
     "en": "Ripple is a private osu! server.There are many like it, but this one is ours.",
+    "nl": "Ripple is een privé-osu! Er zijn er veel van, maar deze is van ons.",
     "zh_CN": "Ripple 是一个 osu! 的私服。虽然一直被模仿，但从未被超越。",
-    "zh_TW": "Ripple 是一個私人 osu! 伺服器，雖然跟同類伺服器很相似，但從未被超越。",
-    "nl": "Ripple is een privé-osu! Er zijn er veel van, maar deze is van ons."
+    "zh_TW": "Ripple 是一個私人 osu! 伺服器，雖然跟同類伺服器很相似，但從未被超越。"
   },
   "url": [
     "ripple.moe",

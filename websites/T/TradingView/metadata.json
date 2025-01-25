@@ -8,8 +8,8 @@
   "service": "TradingView",
   "description": {
     "en": "Free Stock Charts, Stock Quotes and Trade Ideas",
-    "ru": "Бесплатные онлайн-графики акций, котировки и идеи",
-    "nl": "Gratis voorraadgrafieken, aandelenkoersen en handelsideeën"
+    "nl": "Gratis voorraadgrafieken, aandelenkoersen en handelsideeën",
+    "ru": "Бесплатные онлайн-графики акций, котировки и идеи"
   },
   "url": [
     "www.tradingview.com",

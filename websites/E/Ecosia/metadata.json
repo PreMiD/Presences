@@ -7,8 +7,8 @@
   },
   "service": "Ecosia",
   "description": {
-    "en": "Ecosia uses the ad revenue from your searches to plant trees where they are needed the most.",
     "de": "Ecosia verwendet die Werbeeinnahmen deiner Suchanfragen, um dort Bäume zu pflanzen, wo sie am meisten gebraucht werden.",
+    "en": "Ecosia uses the ad revenue from your searches to plant trees where they are needed the most.",
     "nl": "Ecosia gebruikt de advertentie-inkomsten van uw zoekopdrachten om bomen te planten waar ze het meest nodig zijn."
   },
   "url": "www.ecosia.org",

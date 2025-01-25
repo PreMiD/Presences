@@ -13,8 +13,8 @@
   ],
   "service": "dailymotion",
   "description": {
-    "en": "On dailymotion, you can discover and watch new music, news, sports, and trailers from dailymotion's best creators, brands, and channels",
     "de": "Auf dailymotion kannst du neue Musik, Nachrichten, Sportsendungen und Trailer von den besten Kreativen, Marken und Kanälen auf dailymotion entdecken und ansehen.",
+    "en": "On dailymotion, you can discover and watch new music, news, sports, and trailers from dailymotion's best creators, brands, and channels",
     "nl": "In Explore, kan je nieuwe muziek, nieuws, sport en trailers van de beste Dailymotion makers, merken en kanalen ontdekken en bekijken.",
     "pt_BR": "No dailymotion, você pode descobrir e assistir novas músicas, noticías, esportes, e trailers dos melhores criadores do dailymotion, marcas e canais"
   },

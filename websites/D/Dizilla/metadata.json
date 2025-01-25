@@ -8,8 +8,8 @@
   "service": "Dizilla",
   "description": {
     "en": "Dizilla is one of the most beautiful and populer Turkish TV series website.",
-    "tr": "Dizilla, Türkiye'de hizmet veren yerel bir dizi yayın platformudur.",
-    "nl": "Dizilla is één van de mooiste en populairste Turkse TV series website."
+    "nl": "Dizilla is één van de mooiste en populairste Turkse TV series website.",
+    "tr": "Dizilla, Türkiye'de hizmet veren yerel bir dizi yayın platformudur."
   },
   "url": "dizilla4.com",
   "regExp": "(dizilla[0-9][.][a-z]{3})",

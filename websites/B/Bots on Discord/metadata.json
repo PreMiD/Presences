@@ -8,8 +8,8 @@
   "service": "Bots on Discord",
   "description": {
     "en": "Bots on Discord is listing discord bots.",
-    "tr": "Bots on Discord, disscord botlarını listeler.",
     "nl": "Bots on Discord maakt een lijst van bots.",
+    "tr": "Bots on Discord, disscord botlarını listeler.",
     "vi_VN": "Bots on Discord là danh sách các Discord bot."
   },
   "url": "bots.ondiscord.xyz",

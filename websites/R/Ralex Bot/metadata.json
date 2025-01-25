@@ -8,8 +8,8 @@
   "service": "Ralex Bot",
   "description": {
     "en": "Ralex is a Turkish Discord bot, it is fully adjustable with it's dashboard, add this awesome bot to your server!",
-    "tr": "Ralex, Türkçe bir Discord botudur. Tamamiyle ayarlanabilir ve yönetim paneli ile sunucunuz için harika bir eğlence ve moderasyon botu!",
-    "nl": "Ralex is een Turkse Discord-bot, hij is volledig instelbaar met zijn dashboard, voeg deze geweldige bot toe aan je server!"
+    "nl": "Ralex is een Turkse Discord-bot, hij is volledig instelbaar met zijn dashboard, voeg deze geweldige bot toe aan je server!",
+    "tr": "Ralex, Türkçe bir Discord botudur. Tamamiyle ayarlanabilir ve yönetim paneli ile sunucunuz için harika bir eğlence ve moderasyon botu!"
   },
   "url": "bot.ralex.xyz",
   "version": "1.0.21",

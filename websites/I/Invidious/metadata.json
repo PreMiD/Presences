@@ -7,8 +7,8 @@
   },
   "service": "Invidious",
   "description": {
-    "en": "Invidious is an alternative front-end to YouTube.",
     "de": "Invidious ist eine alternative Oberfläche für YouTube.",
+    "en": "Invidious is an alternative front-end to YouTube.",
     "nl": "Invidious is een alternatieve front-end voor YouTube."
   },
   "url": [

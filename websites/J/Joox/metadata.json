@@ -8,8 +8,8 @@
   "service": "Joox",
   "description": {
     "en": "JOOX - music streaming platform that gives you an access to millions of songs. Download JOOX FREE, free music, free radio, top charts, playlists, new releases",
-    "th": "JOOX - music แพล็ตฟอร์มบริการฟังเพลง สตรีมเพลง ที่ให้คุณเข้าถึงเพลงนับล้าน ดาวน์โหลด JOOX ฟรี ฟังเพลงฟรี ฟังวิทยุออนไลน์ ชาร์ตเพลงล่าสุด เพลย์ลิสต์ เพลงออกใหม่",
-    "nl": "JOOX - muziekstreamingplatform dat u toegang geeft tot miljoenen nummers. Download JOOX GRATIS, gratis muziek, gratis radio, toplijsten, afspeellijsten, nieuwe releases"
+    "nl": "JOOX - muziekstreamingplatform dat u toegang geeft tot miljoenen nummers. Download JOOX GRATIS, gratis muziek, gratis radio, toplijsten, afspeellijsten, nieuwe releases",
+    "th": "JOOX - music แพล็ตฟอร์มบริการฟังเพลง สตรีมเพลง ที่ให้คุณเข้าถึงเพลงนับล้าน ดาวน์โหลด JOOX ฟรี ฟังเพลงฟรี ฟังวิทยุออนไลน์ ชาร์ตเพลงล่าสุด เพลย์ลิสต์ เพลงออกใหม่"
   },
   "url": "www.joox.com",
   "regExp": "([a-z0-9-]+[.])*joox[.]com[/]",

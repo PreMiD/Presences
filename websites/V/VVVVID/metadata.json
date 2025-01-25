@@ -8,9 +8,9 @@
   "service": "VVVVID",
   "description": {
     "en": "VVVVID is your personalized online TV completely free.",
-    "nl": "VVVVID is uw gepersonaliseerde online TV helemaal gratis.",
+    "ga_IE": "Is é VVVVID do theilifís phearsantaithe ar líne go hiomlán saor in aisce.",
     "it": "VVVVID e' la tua TV online personalizzata completamente gratuita.",
-    "ga_IE": "Is é VVVVID do theilifís phearsantaithe ar líne go hiomlán saor in aisce."
+    "nl": "VVVVID is uw gepersonaliseerde online TV helemaal gratis."
   },
   "url": "www.vvvvid.it",
   "version": "1.2.23",

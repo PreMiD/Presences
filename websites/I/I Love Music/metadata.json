@@ -13,8 +13,8 @@
   ],
   "service": "I Love Music",
   "description": {
-    "en": "The best Web-Radio of Germany - The best Music for everyone!",
     "de": "Das beste Internet-Radio in Deutschland - Die beste Musik für jeden!",
+    "en": "The best Web-Radio of Germany - The best Music for everyone!",
     "nl": "De beste webradio van Duitsland - de beste muziek voor iedereen!"
   },
   "url": "ilovemusic.de",

@@ -7,9 +7,9 @@
   },
   "service": "Full Programlar İndir",
   "description": {
-    "tr": "Full Programlar İndir Türkçe bir program indirme sitesidir",
     "en": "Full Programlar İndir is a website that allows you to download many programs and games",
-    "nl": "Full Programlar İndir is een website waar u vele programma's en spelletjes kunt downloaden"
+    "nl": "Full Programlar İndir is een website waar u vele programma's en spelletjes kunt downloaden",
+    "tr": "Full Programlar İndir Türkçe bir program indirme sitesidir"
   },
   "url": [
     "www.fullprogramlarindir.net",

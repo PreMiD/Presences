@@ -7,9 +7,9 @@
   },
   "service": "CHIP Online",
   "description": {
-    "tr": "Teknoloji/spor/gündem ve insanların blog oluşturduğu, Türkiye'de popüler bir site.",
     "en": "CHIP Online is the independent web portal of the CHIP brand.",
     "nl": "CHIP Online is het onafhankelijke webportaal van het merk CHIP.",
+    "tr": "Teknoloji/spor/gündem ve insanların blog oluşturduğu, Türkiye'de popüler bir site.",
     "vi_VN": "CHIP Online là cổng trang web độc lập của thương hiệu CHIP."
   },
   "url": "www.chip.com.tr",

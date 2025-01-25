@@ -14,11 +14,11 @@
   "service": "All The Flavors",
   "description": {
     "en": "alltheflavors.com is a DIY recipe and flavor information site.",
-    "nl": "alltheflavors.com is een doe-het-zelf recept- en smaakinformatiesite.",
-    "zh_CN": "alltheflavors.com是一个DIY食谱教程网站。",
-    "zh_TW": "alltheflavors.com是一個DIY食譜教程和調味資訊網站",
     "ga_IE": "Is oideas DIY agus láithreán faisnéise blas é alltheflavors.com.",
-    "vi_VN": "alltheflavors.com và trang web cung cấp các công thức và nguyên liệu có thể tự làm."
+    "nl": "alltheflavors.com is een doe-het-zelf recept- en smaakinformatiesite.",
+    "vi_VN": "alltheflavors.com và trang web cung cấp các công thức và nguyên liệu có thể tự làm.",
+    "zh_CN": "alltheflavors.com是一个DIY食谱教程网站。",
+    "zh_TW": "alltheflavors.com是一個DIY食譜教程和調味資訊網站"
   },
   "url": "alltheflavors.com",
   "version": "1.4.22",

@@ -7,9 +7,9 @@
   },
   "service": "CodAre",
   "description": {
-    "tr": "CodAre discord botları ve daha fazlası için basit bir kod paylaşım platformudur.",
     "en": "CodAre is a simple code sharing platform for discord bots and more.",
     "nl": "CodAre is een eenvoudig platform voor het delen van codes voor discord bots en meer.",
+    "tr": "CodAre discord botları ve daha fazlası için basit bir kod paylaşım platformudur.",
     "vi_VN": "CodAre là nền tảng chia sẻ mã đơn giản dành cho Discord bot và hơn nữa."
   },
   "url": "codare.fun",

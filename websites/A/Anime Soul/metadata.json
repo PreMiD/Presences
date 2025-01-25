@@ -8,10 +8,10 @@
   "service": "Anime Soul",
   "description": {
     "en": "The Largest Anime Discord Server in the World!",
-    "zh_CN": "世界上最大的动漫Discord服务器！",
     "ga_IE": "An Freastalaí Discord Anime is Mó ar Domhan!",
     "nl": "De grootste Anime Discord server ter wereld!",
-    "vi_VN": "Máy chủ Discord về Anime lớn nhất thế giới!"
+    "vi_VN": "Máy chủ Discord về Anime lớn nhất thế giới!",
+    "zh_CN": "世界上最大的动漫Discord服务器！"
   },
   "url": "animesoul.com",
   "version": "1.2.9",

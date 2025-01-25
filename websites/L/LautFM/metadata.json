@@ -7,8 +7,8 @@
   },
   "service": "LautFM",
   "description": {
-    "en": "Laut.FM is a Website to create your own Music station or listening to music.",
     "de": "Laut.FM ist eine Webseite um dein eigenes Radio zu erstellen oder um Musik zu hören.",
+    "en": "Laut.FM is a Website to create your own Music station or listening to music.",
     "nl": "Laut.FM is een website om uw eigen muziekstation te maken of naar muziek te luisteren."
   },
   "url": "laut.fm",

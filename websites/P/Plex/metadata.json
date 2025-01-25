@@ -7,9 +7,9 @@
   },
   "service": "Plex",
   "description": {
+    "de": "Mit Plex können Sie Ihre persönlichen Medien zusammen mit Premium-Inhalten verwalten und streamen. Genießen Sie Ihre eigenen Inhalte auf all Ihren Geräten, wo immer Sie mit Plex unterwegs sind.",
     "en": "Plex allows you to manage, curate, and stream your personal media along with premium content. Enjoy your own content on all your devices wherever you are with Plex.",
-    "nl": "Met Plex kunt u uw persoonlijke media beheren, samenstellen en streamen samen met premium inhoud. Geniet van uw eigen inhoud op al uw apparaten waar u ook bent met Plex.",
-    "de": "Mit Plex können Sie Ihre persönlichen Medien zusammen mit Premium-Inhalten verwalten und streamen. Genießen Sie Ihre eigenen Inhalte auf all Ihren Geräten, wo immer Sie mit Plex unterwegs sind."
+    "nl": "Met Plex kunt u uw persoonlijke media beheren, samenstellen en streamen samen met premium inhoud. Geniet van uw eigen inhoud op al uw apparaten waar u ook bent met Plex."
   },
   "url": "www.plex.tv",
   "regExp": "(([a-z0-9-]+[.])*plex[.]tv[/])|( *[/]web[/]index[.]html#)",

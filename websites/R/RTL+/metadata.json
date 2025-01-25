@@ -13,9 +13,9 @@
   ],
   "service": "RTL+",
   "description": {
+    "de": "RTL+ bietet Dir spannende Filme und Serien. Auch viele Shows und Dokus sind im Online-Stream zu finden! Deine Lieblingssendung jetzt online anschauen!",
     "en": "RTL+ offers you exciting films and series. Also many shows and documentaries can be found in the online stream! Watch your favorite show online now!",
-    "nl": "RTL+ biedt spannende films en series. Ook zijn er veel shows en documentaires te vinden in de online stream! Bekijk nu uw favoriete programma online!",
-    "de": "RTL+ bietet Dir spannende Filme und Serien. Auch viele Shows und Dokus sind im Online-Stream zu finden! Deine Lieblingssendung jetzt online anschauen!"
+    "nl": "RTL+ biedt spannende films en series. Ook zijn er veel shows en documentaires te vinden in de online stream! Bekijk nu uw favoriete programma online!"
   },
   "url": "plus.rtl.de",
   "version": "1.1.12",

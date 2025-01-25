@@ -8,8 +8,8 @@
   "service": "EternalNetwork TM",
   "description": {
     "bg": "Общностна мрежа за новини, уроци и споделяне.",
-    "en": "Community Network website for news, tutorials and sharing.",
     "de": "Community Network-Website für Neuigkeiten, Tutorials und Austausch.",
+    "en": "Community Network website for news, tutorials and sharing.",
     "es": "Sitio web de Community Network para noticias, tutoriales y compartir."
   },
   "url": [

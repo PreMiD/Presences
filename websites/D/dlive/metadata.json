@@ -7,12 +7,12 @@
   },
   "service": "dlive",
   "description": {
-    "en": "DLive.tv is the largest live streaming community on blockchain that powered by Lino blockchain.",
     "de": "DLive.tv ist die größte Livestreaming-Community auf Blockchain, die von Lino Blockchain unterstützt wird.",
-    "ro": "DLive.tv este cea mai mare comunitate de live streaming pe blockchain cu spirjinul blockchain-ului Lino.",
+    "en": "DLive.tv is the largest live streaming community on blockchain that powered by Lino blockchain.",
+    "nl": "DLive.tv is de grootste live streaming community op blockchain die wordt aangedreven door Lino blockchain.",
     "pt_BR": "DLive.tv é a maior comunidade de transmissão ao vivo em blockchain que é alimentada pela Lino blockchain.",
-    "uk_UA": "DLive.tv — найбільша спільнота потокової трансляції у блокчейні, що працює на базі блокчейна Lino.",
-    "nl": "DLive.tv is de grootste live streaming community op blockchain die wordt aangedreven door Lino blockchain."
+    "ro": "DLive.tv este cea mai mare comunitate de live streaming pe blockchain cu spirjinul blockchain-ului Lino.",
+    "uk_UA": "DLive.tv — найбільша спільнота потокової трансляції у блокчейні, що працює на базі блокчейна Lino."
   },
   "url": "dlive.tv",
   "version": "2.2.22",

@@ -8,8 +8,8 @@
   "service": "Trendyol",
   "description": {
     "en": "Trendyol is a popular shopping website in Turkey.",
-    "tr": "Trendyol, Türkiye'de hizmet gösteren en büyük alışveriş sitelerinden birisidir.",
-    "nl": "Trendyol is een populaire winkelwebsite in Turkije."
+    "nl": "Trendyol is een populaire winkelwebsite in Turkije.",
+    "tr": "Trendyol, Türkiye'de hizmet gösteren en büyük alışveriş sitelerinden birisidir."
   },
   "url": "www.trendyol.com",
   "version": "1.1.22",

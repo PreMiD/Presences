@@ -18,8 +18,8 @@
   "service": "Rádio Animu",
   "description": {
     "en": "The most moe radio in Brazil",
-    "pt_BR": "A rádio mais moe do Brasil",
-    "nl": "De meest moe radio in Brazilië"
+    "nl": "De meest moe radio in Brazilië",
+    "pt_BR": "A rádio mais moe do Brasil"
   },
   "url": "www.animu.com.br",
   "version": "1.2.34",

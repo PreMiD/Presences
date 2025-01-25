@@ -8,8 +8,8 @@
   "service": "Discord Bots",
   "description": {
     "en": "Discord bots is a website that lists discord bots.",
-    "tr": "Discord bots, bütün botları listeleyen bir sistemdir.",
-    "nl": "Discord bots is een website die discord bots opsomt."
+    "nl": "Discord bots is een website die discord bots opsomt.",
+    "tr": "Discord bots, bütün botları listeleyen bir sistemdir."
   },
   "url": "discord.bots.gg",
   "version": "1.2.22",

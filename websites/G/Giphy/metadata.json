@@ -8,11 +8,11 @@
   "service": "Giphy",
   "description": {
     "en": "Giphy is a Gif search and creation engine.",
-    "ro": "Giphy este un motor de căutare și creare Gif.",
-    "pt_BR": "Giphy é um mecanismo de pesquisa e criação de GIF.",
     "fr": "Giphy est un moteur de recherche et création de GIF.",
-    "uk_UA": "Giphy - це система пошуку та створення GIF.",
     "nl": "Giphy is een GIF-zoek- en creatiesysteem.",
+    "pt_BR": "Giphy é um mecanismo de pesquisa e criação de GIF.",
+    "ro": "Giphy este un motor de căutare și creare Gif.",
+    "uk_UA": "Giphy - це система пошуку та створення GIF.",
     "vi_VN": "Giphy là công cụ tìm kiếm và tạo Gif."
   },
   "url": "giphy.com",

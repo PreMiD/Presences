@@ -8,8 +8,8 @@
   "service": "MojeVideo",
   "description": {
     "en": "MojeVideo is a Slovak video streaming/sharing website mostly with funny, short videos",
-    "sk": "Nové zábavné videá každý deň, zabavte sa, zasmejte sa, alebo nám pošlite vaše videá",
-    "nl": "MojeVideo is een Slowaakse website voor het streamen / delen van video's, meestal met grappige, korte video's"
+    "nl": "MojeVideo is een Slowaakse website voor het streamen / delen van video's, meestal met grappige, korte video's",
+    "sk": "Nové zábavné videá každý deň, zabavte sa, zasmejte sa, alebo nám pošlite vaše videá"
   },
   "url": "www.mojevideo.sk",
   "version": "1.0.21",

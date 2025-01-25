@@ -8,8 +8,8 @@
   "service": "Valtox Gaming Group",
   "description": {
     "en": "Valtox Gaming Group is a Gaming Community creating a new experience.",
-    "nl": "Valtox Gaming Group is een gamingcommunity die een nieuwe ervaring creëert.",
-    "ga_IE": "Is Pobal Cearrbhachais é Grúpa Cearrbhachais Valtox a chruthaíonn eispéireas nua."
+    "ga_IE": "Is Pobal Cearrbhachais é Grúpa Cearrbhachais Valtox a chruthaíonn eispéireas nua.",
+    "nl": "Valtox Gaming Group is een gamingcommunity die een nieuwe ervaring creëert."
   },
   "url": "valtoxgaminggroup.com",
   "regExp": "([a-z0-9-]+[.])*valtoxgaminggroup[.]com[/]",

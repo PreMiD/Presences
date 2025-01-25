@@ -7,8 +7,8 @@
   },
   "service": "Koya",
   "description": {
-    "fr": "Un puissant bot Discord multifonctionnel et configurable.",
     "en": "A powerful multi-function and configurable Discord bot.",
+    "fr": "Un puissant bot Discord multifonctionnel et configurable.",
     "nl": "Een krachtige multifunctionele en configureerbare Discord-bot."
   },
   "url": "koya.gg",

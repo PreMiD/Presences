@@ -8,8 +8,8 @@
   "service": "Sinefy",
   "description": {
     "en": "Sinefy is a Turkish video streaming service for watching movies and TV shows in full HD.",
-    "tr": "Sinefy, yüksek kalitede Türkçe dublajlı ve altyazılı dizi ve film izleyebileceğiniz bir internet sitesidir.",
-    "nl": "Sinefy is een Turkse videostreamingdienst voor het bekijken van films en tv-programma's in full HD."
+    "nl": "Sinefy is een Turkse videostreamingdienst voor het bekijken van films en tv-programma's in full HD.",
+    "tr": "Sinefy, yüksek kalitede Türkçe dublajlı ve altyazılı dizi ve film izleyebileceğiniz bir internet sitesidir."
   },
   "url": "sinefy.com",
   "version": "1.0.24",

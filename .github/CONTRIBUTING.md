@@ -78,15 +78,15 @@ Each activity has a descriptor file called `metadata.json`, the metadata has a s
     "en": "DESCRIPTION"
   },
   "url": "URL",
+  "regExp": "REGEXP",
   "version": "VERSION",
   "logo": "URL",
   "thumbnail": "URL",
   "color": "#HEX000",
-  "tags": ["TAG1", "TAG2"],
   "category": "CATEGORY",
-  "regExp": "REGEXP",
-  "iFrameRegExp": "REGEXP",
+  "tags": ["TAG1", "TAG2"],
   "iframe": false,
+  "iFrameRegExp": "REGEXP",
   "readLogs": false,
   "settings": [
     {

@@ -18,8 +18,8 @@
   "service": "jut.su",
   "description": {
     "en": "Jut.su is Russian anime website",
-    "ru": "Jut.su — это русский сайт с аниме",
-    "nl": "Jut.su is een Russische anime-website"
+    "nl": "Jut.su is een Russische anime-website",
+    "ru": "Jut.su — это русский сайт с аниме"
   },
   "url": "jut.su",
   "version": "3.0.11",

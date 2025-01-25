@@ -15,13 +15,13 @@
   "description": {
     "en": "AniList: Track, Discover, Share Anime & Manga - Sign up for free!",
     "fr": "AniList : Suis, Découvre, Partage des Animes & Manga - Inscris-toi gratuitement !",
-    "pt_BR": "AniList: Rastreie, encontre e compartilhe animes e mangás - Inscreva-se de graça!",
-    "zh_CN": "AniList：追踪，发现，分享动漫和漫画-免费注册！赶快加入我们！",
-    "zh_TW": "AniList：追踪，發掘，分享動漫和漫畫-免費註冊！趕快加入我們！",
     "ga_IE": "AniList: Track, Discover, Share Anime & Manga - Sign up for free!",
-    "nl": "AniList: volg, ontdek, deel anime en manga - meld je gratis aan!",
     "it": "AniList: Traccia, Scopri, Condividi Anime & Manga - Registrati gratuitamente!",
-    "vi_VN": "AniList: Theo dõi, tìm kiếm, chia sẻ Anime & Manga - Đăng ký ngay hôm nay!"
+    "nl": "AniList: volg, ontdek, deel anime en manga - meld je gratis aan!",
+    "pt_BR": "AniList: Rastreie, encontre e compartilhe animes e mangás - Inscreva-se de graça!",
+    "vi_VN": "AniList: Theo dõi, tìm kiếm, chia sẻ Anime & Manga - Đăng ký ngay hôm nay!",
+    "zh_CN": "AniList：追踪，发现，分享动漫和漫画-免费注册！赶快加入我们！",
+    "zh_TW": "AniList：追踪，發掘，分享動漫和漫畫-免費註冊！趕快加入我們！"
   },
   "url": "anilist.co",
   "version": "2.1.10",

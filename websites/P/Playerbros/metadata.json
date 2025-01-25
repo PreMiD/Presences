@@ -8,8 +8,8 @@
   "service": "Playerbros",
   "description": {
     "en": "Playerbros is a Turkish e-sport news website.",
-    "tr": "Playerbros, Türkçe espor haberleri ve bu konuda özel videolar oluşturan bir internet sitesidir.",
-    "nl": "Playerbros is een Turkse nieuwswebsite over e-sport."
+    "nl": "Playerbros is een Turkse nieuwswebsite over e-sport.",
+    "tr": "Playerbros, Türkçe espor haberleri ve bu konuda özel videolar oluşturan bir internet sitesidir."
   },
   "url": "playerbros.com",
   "version": "1.1.24",

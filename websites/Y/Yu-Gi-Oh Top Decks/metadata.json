@@ -8,13 +8,13 @@
   "service": "Yu-Gi-Oh Top Decks",
   "description": {
     "en": "Yu-Gi-Oh top decks is a database of best decklists.",
-    "ro": "Yu-Gi-Oh top decks este o bază de date cu cele mai bune liste de pachete.",
-    "pt_BR": "Верхні колоди Yu-Gi-Oh - це база даних кращих колодних списків.",
     "fr": "Yu-Gi-Oh top decks est une base de données des meilleures listes de decks.",
-    "uk_UA": "Верхні колоди Yu-Gi-Oh - це база даних кращих колодних списків.",
+    "ga_IE": "Is bunachar sonraí de na liostaí deic is fearr é deiceanna barr Yu-Gi-Oh.",
     "nl": "Yu-Gi-Oh topdecks is een database met de beste decklists.",
-    "zh_CN": "Yu-Gi-Oh Top Decks是一个收集最好的甲板的数据库。",
-    "ga_IE": "Is bunachar sonraí de na liostaí deic is fearr é deiceanna barr Yu-Gi-Oh."
+    "pt_BR": "Верхні колоди Yu-Gi-Oh - це база даних кращих колодних списків.",
+    "ro": "Yu-Gi-Oh top decks este o bază de date cu cele mai bune liste de pachete.",
+    "uk_UA": "Верхні колоди Yu-Gi-Oh - це база даних кращих колодних списків.",
+    "zh_CN": "Yu-Gi-Oh Top Decks是一个收集最好的甲板的数据库。"
   },
   "url": "yugiohtopdecks.com",
   "version": "1.2.26",

@@ -7,8 +7,8 @@
   },
   "service": "ZeroTwo",
   "description": {
-    "en": "I'm a waifu Discord bot based on ZeroTwo (Darling in the FranXX). I serve a variety of needs and have tons of functionality you can try!",
     "de": "Ich bin ein Waifu Discord Bot basierend auf ZeroTwo (Darling in the FranXX). Ich erfülle eine Vielzahl von Bedürfnissen und habe jede Menge Funktionen, die Sie ausprobieren können!",
+    "en": "I'm a waifu Discord bot based on ZeroTwo (Darling in the FranXX). I serve a variety of needs and have tons of functionality you can try!",
     "ja_JP": "「ダーリン・イン・ザ・フランキス」に登場するゼロツーをモチーフにした、Waifu Discordボットです。様々なシーンで使用できる機能や、たくさんの試せる機能があります。"
   },
   "url": "zerotwo.bot",

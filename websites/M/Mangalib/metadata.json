@@ -7,9 +7,9 @@
   },
   "service": "Mangalib",
   "description": {
-    "ru": "Сайт для прочтения манги на русском языке.",
     "en": "Website for reading manga in Russian",
-    "nl": "Website voor het lezen van manga in het Russisch"
+    "nl": "Website voor het lezen van manga in het Russisch",
+    "ru": "Сайт для прочтения манги на русском языке."
   },
   "url": "mangalib.me",
   "version": "1.4.21",

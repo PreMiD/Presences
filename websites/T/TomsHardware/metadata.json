@@ -7,8 +7,8 @@
   },
   "service": "TomsHardware",
   "description": {
-    "nl": "TomsHardware is de leidende bestemming voor technologie fans van alle skill levels.",
-    "en": "TomsHardware is the leading destination for tech enthusiasts of all skill levels."
+    "en": "TomsHardware is the leading destination for tech enthusiasts of all skill levels.",
+    "nl": "TomsHardware is de leidende bestemming voor technologie fans van alle skill levels."
   },
   "url": "tomshardware.com",
   "regExp": "([a-z0-9-]+[.])*tomshardware[.]com[/]",

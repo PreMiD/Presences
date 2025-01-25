@@ -8,8 +8,8 @@
   "service": "Novel Mania",
   "description": {
     "en": "Read webnovels in Portuguese anywhere and anytime.",
-    "pt_BR": "Leia webnovels em português a qualquer momento e a qualquer hora.",
-    "nl": "Lees overal en altijd webnovels in het Portugees."
+    "nl": "Lees overal en altijd webnovels in het Portugees.",
+    "pt_BR": "Leia webnovels em português a qualquer momento e a qualquer hora."
   },
   "url": "novelmania.com.br",
   "version": "1.0.20",

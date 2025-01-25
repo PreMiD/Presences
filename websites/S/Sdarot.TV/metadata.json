@@ -8,8 +8,8 @@
   "service": "Sdarot.TV",
   "description": {
     "en": "Series for direct viewing and downloading with built-in Hebrew translation. Hundreds of Israeli and foreign series, tens of thousands of episodes with built-in Hebrew translation!",
-    "nl": "Serie voor direct bekijken en downloaden met ingebouwde Hebreeuwse vertaling. Honderden Israëlische en buitenlandse series, tienduizenden afleveringen met ingebouwde Hebreeuwse vertaling!",
-    "he_IL": "סדרות לצפייה ישירה ולהורדה עם תרגום מובנה בעברית. מאות סדרות ישראליות ומחו\"ל, עשרות אלפי פרקים עם תרגום מובנה בעברית!"
+    "he_IL": "סדרות לצפייה ישירה ולהורדה עם תרגום מובנה בעברית. מאות סדרות ישראליות ומחו\"ל, עשרות אלפי פרקים עם תרגום מובנה בעברית!",
+    "nl": "Serie voor direct bekijken en downloaden met ingebouwde Hebreeuwse vertaling. Honderden Israëlische en buitenlandse series, tienduizenden afleveringen met ingebouwde Hebreeuwse vertaling!"
   },
   "url": "sdarot.world",
   "regExp": "([a-z0-9-]+[.])*sdarot([.][a-z]+)+[/]",

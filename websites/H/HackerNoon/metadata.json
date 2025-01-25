@@ -8,8 +8,8 @@
   "service": "HackerNoon",
   "description": {
     "en": "HackerNoon is an Independent Tech Media Site",
-    "tr": "HackerNoon, Bağımsız bir Teknik Medya Sitesidir",
-    "nl": "HackerNoon is een onafhankelijke technische mediasite"
+    "nl": "HackerNoon is een onafhankelijke technische mediasite",
+    "tr": "HackerNoon, Bağımsız bir Teknik Medya Sitesidir"
   },
   "url": [
     "www.hackernoon.com",

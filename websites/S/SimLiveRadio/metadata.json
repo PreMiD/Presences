@@ -7,9 +7,9 @@
   },
   "service": "SimLiveRadio",
   "description": {
+    "de": "Deutschlands Radio Nr. 1 für Simulationsspiele",
     "en": "SimLiveRadio is the most successful infotainment radio for simulation games in Germany, Austria and Switzerland!",
-    "nl": "SimLiveRadio is de meest succesvolle infotainment radio voor simulatiespellen in Duitsland, Oostenrijk en Zwitserland!",
-    "de": "Deutschlands Radio Nr. 1 für Simulationsspiele"
+    "nl": "SimLiveRadio is de meest succesvolle infotainment radio voor simulatiespellen in Duitsland, Oostenrijk en Zwitserland!"
   },
   "url": [
     "simliveradio.net",

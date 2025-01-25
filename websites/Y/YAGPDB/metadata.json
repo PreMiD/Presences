@@ -8,9 +8,9 @@
   "service": "YAGPDB",
   "description": {
     "en": "YAGPDB is a multi-purpose Discord Bot.",
+    "ga_IE": "Is Bot Discord ilchuspóireach é YAGPDB.",
     "nl": "YAGPDB is een multifunctionele Discord Bot.",
-    "zh_CN": "YAGPDB 是一个多用途的 Discord 机器人",
-    "ga_IE": "Is Bot Discord ilchuspóireach é YAGPDB."
+    "zh_CN": "YAGPDB 是一个多用途的 Discord 机器人"
   },
   "url": [
     "yagpdb.xyz",

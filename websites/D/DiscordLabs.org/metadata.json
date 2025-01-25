@@ -8,8 +8,8 @@
   "service": "DiscordLabs.org",
   "description": {
     "en": "Check our our amazing list of lab approved discord bots!",
-    "pl": "Sprawdź naszą niesamowitą listę zatwierdzonych przez laboratorium botów discord!",
-    "nl": "Bekijk onze geweldige lijst van lab goedgekeurde discord bots!"
+    "nl": "Bekijk onze geweldige lijst van lab goedgekeurde discord bots!",
+    "pl": "Sprawdź naszą niesamowitą listę zatwierdzonych przez laboratorium botów discord!"
   },
   "url": "bots.discordlabs.org",
   "version": "1.2.22",

@@ -7,8 +7,8 @@
   },
   "service": "PresenceDB",
   "description": {
-    "en": "Tracks and saves the playtime of your Discord activities.",
-    "de": "Verfolgt und speichert die Spielzeit Ihrer Discord Aktivitäten."
+    "de": "Verfolgt und speichert die Spielzeit Ihrer Discord Aktivitäten.",
+    "en": "Tracks and saves the playtime of your Discord activities."
   },
   "url": [
     "www.presencedb.com",

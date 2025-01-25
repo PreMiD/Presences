@@ -14,11 +14,11 @@
   "service": "Dueling Nexus",
   "description": {
     "en": "duelingnexus.com is a free online Yu-Gi-Oh simulator for browsers.",
-    "ro": "duelingnexus.com este un simulator gratuit de Yu-Gi-Oh online pentru browsere.",
-    "pt_BR": "duelingnexus.com é um simulador de Yu-Gi-Oh online gratuito para navegadores.",
     "fr": "duelingnexus.com est un simulateur en ligne gratuit de Yu-Gi-Oh pour les navigateurs.",
-    "uk_UA": "duelingnexus.com не має симулятора, а також відвідає багато навігацій.",
-    "nl": "duelingnexus.com is een gratis online Yu-Gi-Oh-simulator voor browsers"
+    "nl": "duelingnexus.com is een gratis online Yu-Gi-Oh-simulator voor browsers",
+    "pt_BR": "duelingnexus.com é um simulador de Yu-Gi-Oh online gratuito para navegadores.",
+    "ro": "duelingnexus.com este un simulator gratuit de Yu-Gi-Oh online pentru browsere.",
+    "uk_UA": "duelingnexus.com не має симулятора, а також відвідає багато навігацій."
   },
   "url": "duelingnexus.com",
   "version": "1.5.24",

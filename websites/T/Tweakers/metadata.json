@@ -7,8 +7,8 @@
   },
   "service": "Tweakers",
   "description": {
-    "nl": "Tweakers is de grootste elektronica- en technologiewebsite van Nederland en België.",
-    "en": "Tweakers is the biggest electronics and technology website in the Netherlands and Belgium."
+    "en": "Tweakers is the biggest electronics and technology website in the Netherlands and Belgium.",
+    "nl": "Tweakers is de grootste elektronica- en technologiewebsite van Nederland en België."
   },
   "url": "tweakers.net",
   "regExp": "([a-z0-9-]+[.])*tweakers[.]net[/]",

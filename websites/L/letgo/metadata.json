@@ -7,9 +7,9 @@
   },
   "service": "letgo",
   "description": {
-    "tr": "Letgo yakın çevrede 2. el ve sıfır alışveriş yapmayı sağlayan bir uygulamadır.",
     "en": "Letgo is an app which allows yo to buy and sell some stuff to people around you",
-    "nl": "Letgo is een app waarmee je wat spullen kunt kopen en verkopen aan mensen om je heen"
+    "nl": "Letgo is een app waarmee je wat spullen kunt kopen en verkopen aan mensen om je heen",
+    "tr": "Letgo yakın çevrede 2. el ve sıfır alışveriş yapmayı sağlayan bir uygulamadır."
   },
   "url": [
     "www.letgo.com",

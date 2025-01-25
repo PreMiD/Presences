@@ -13,8 +13,8 @@
   ],
   "service": "openrec",
   "description": {
-    "en": "openrec is a japanese streaming platform similar to Twitch and also contains videos",
     "de": "openrec ist eine Japanische Streaming Plattform ähnlich wie Twitch und beinhaltet auch Videos",
+    "en": "openrec is a japanese streaming platform similar to Twitch and also contains videos",
     "nl": "openrec is een Japans streamingplatform vergelijkbaar met Twitch en bevat ook video's"
   },
   "url": "www.openrec.tv",

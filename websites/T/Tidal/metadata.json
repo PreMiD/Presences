@@ -13,10 +13,10 @@
   ],
   "service": "Tidal",
   "description": {
-    "tr": "Tidal yüksek ses kalitesi ve ucuz fiyatlarla hizmet sağlayan bir müzik sitesidir.",
     "en": "Tidal is a music stream service with very high sound quality.",
-    "pl": "Tidal to strona do streamingowania muzyki z bardzo wysoką jakością audio.",
     "nl": "Tidal is een muziekstreamdienst met een zeer hoge geluidskwaliteit.",
+    "pl": "Tidal to strona do streamingowania muzyki z bardzo wysoką jakością audio.",
+    "tr": "Tidal yüksek ses kalitesi ve ucuz fiyatlarla hizmet sağlayan bir müzik sitesidir.",
     "vi_VN": "Tidal là dịch vụ phát nhạc với chất lượng âm thanh rất cao."
   },
   "url": [

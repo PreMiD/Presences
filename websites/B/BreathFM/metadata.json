@@ -7,8 +7,8 @@
   },
   "service": "BreathFM",
   "description": {
-    "en": "BreathFM is a web radio from Switzerland that streams to the whole world",
-    "de": "BreathFM ist ein Webradio aus der Schweiz, welches in die ganze Welt streamt"
+    "de": "BreathFM ist ein Webradio aus der Schweiz, welches in die ganze Welt streamt",
+    "en": "BreathFM is a web radio from Switzerland that streams to the whole world"
   },
   "url": "breathfm.de",
   "version": "1.0.9",

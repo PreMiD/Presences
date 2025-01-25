@@ -7,8 +7,8 @@
   },
   "service": "WayBack Machine",
   "description": {
-    "nl": "Het internet archief.",
-    "en": "The internet archive."
+    "en": "The internet archive.",
+    "nl": "Het internet archief."
   },
   "url": [
     "archive.org",

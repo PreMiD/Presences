@@ -7,8 +7,8 @@
   },
   "service": "Coinbase",
   "description": {
-    "en": "Coinbase is a secure online platform for buying, selling, transferring, and storing digital currency.",
     "de": "Coinbase ist eine sichere online Plattform um digitale Währungen zu kaufen, überweisen, verkaufen und zu lagern.",
+    "en": "Coinbase is a secure online platform for buying, selling, transferring, and storing digital currency.",
     "nl": "Coinbase is een veilig online platform voor het kopen, verkopen, overdragen en opslaan van digitale valuta.",
     "vi_VN": "Coinbase là nền tảng trao đổi và tích trữ tiền ảo bảo mật."
   },

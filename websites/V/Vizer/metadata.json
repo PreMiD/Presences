@@ -8,9 +8,9 @@
   "service": "Vizer",
   "description": {
     "en": "Vizer is a brazilian website to watch movies/series online for free! Vizer indexes content found on the web automatically using Robots and Artificial Intelligence.",
+    "ga_IE": "Is suíomh Gréasáin Brasaíle é Vizer chun féachaint ar scannáin / sraitheanna ar líne saor in aisce! Déanann Vizer innéacsú ar ábhar a fhaightear ar an ngréasán go huathoibríoch ag úsáid Robots agus Intleacht Shaorga.",
     "nl": "Vizer is een Braziliaanse website om gratis films/series online te bekijken! Vizer indexeert inhoud die op internet wordt gevonden automatisch met behulp van Robots en kunstmatige intelligentie.",
-    "pt_BR": "Vizer é um site brasileiro para assistir filmes e séries de graça! O Vizer indexa conteudo encontrado na web automáticamente usando Robots e Inteligência artificial.",
-    "ga_IE": "Is suíomh Gréasáin Brasaíle é Vizer chun féachaint ar scannáin / sraitheanna ar líne saor in aisce! Déanann Vizer innéacsú ar ábhar a fhaightear ar an ngréasán go huathoibríoch ag úsáid Robots agus Intleacht Shaorga."
+    "pt_BR": "Vizer é um site brasileiro para assistir filmes e séries de graça! O Vizer indexa conteudo encontrado na web automáticamente usando Robots e Inteligência artificial."
   },
   "url": "vizer.tv",
   "version": "1.0.27",

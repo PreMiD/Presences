@@ -14,10 +14,10 @@
   "service": "Telegram",
   "description": {
     "en": "Telegram is a secure instant messaging service with multi-platform support.",
-    "tr": "Telegram, çoklu platform desteği sunan, güvenli anlık mesajlaşma servisidir.",
-    "ru": "Telegram - это безопасный сервис обмена мгновенными сообщениями с поддержкой нескольких платформ.",
-    "uk_UA": "Telegram - це безпечний та мультиплатформенний сервіс обміну миттєвими повідомленнями.",
     "nl": "Telegram is een veilige instant messaging-service met ondersteuning voor meerdere platforms.",
+    "ru": "Telegram - это безопасный сервис обмена мгновенными сообщениями с поддержкой нескольких платформ.",
+    "tr": "Telegram, çoklu platform desteği sunan, güvenli anlık mesajlaşma servisidir.",
+    "uk_UA": "Telegram - це безпечний та мультиплатформенний сервіс обміну миттєвими повідомленнями.",
     "vi_VN": "Telegram là dịch vụ nhắn tin bảo mật và xuyên nền tảng."
   },
   "url": "web.telegram.org",

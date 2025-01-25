@@ -7,8 +7,8 @@
   },
   "service": "Animes Portal",
   "description": {
-    "en": "Anime, manga and Asian culture",
-    "bg": "Аниме, манга и азиатска култура"
+    "bg": "Аниме, манга и азиатска култура",
+    "en": "Anime, manga and Asian culture"
   },
   "url": "animes-portal.info",
   "version": "1.0.22",

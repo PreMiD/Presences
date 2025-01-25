@@ -8,8 +8,8 @@
   "service": "R6Stats",
   "description": {
     "en": "View and compare your Rainbow Six: Siege statistics with millions of other players around the world!",
-    "ru": "Посматривайте и сравнивайте свою статистику в Rainbow Six: Siege с миллионами других игроков со всего мира!",
-    "nl": "Bekijk en vergelijk je Rainbow Six: Siege-statistieken met miljoenen andere spelers over de hele wereld!"
+    "nl": "Bekijk en vergelijk je Rainbow Six: Siege-statistieken met miljoenen andere spelers over de hele wereld!",
+    "ru": "Посматривайте и сравнивайте свою статистику в Rainbow Six: Siege с миллионами других игроков со всего мира!"
   },
   "url": "r6stats.com",
   "version": "1.0.18",

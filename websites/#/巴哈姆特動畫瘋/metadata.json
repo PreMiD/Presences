@@ -8,11 +8,11 @@
   "service": "巴哈姆特動畫瘋",
   "description": {
     "en": "Completely free animation platform.",
-    "nl": "Volledig gratis animatieplatform.",
-    "zh_CN": "完全免费的动画平台。",
-    "zh_TW": "完全免費的動畫平台。",
     "ga_IE": "Ardán beochana go hiomlán saor in aisce.",
-    "vi_VN": "Nền tảng cung cấp hoạt hình hoàn toàn miễn phí."
+    "nl": "Volledig gratis animatieplatform.",
+    "vi_VN": "Nền tảng cung cấp hoạt hình hoàn toàn miễn phí.",
+    "zh_CN": "完全免费的动画平台。",
+    "zh_TW": "完全免費的動畫平台。"
   },
   "url": "ani.gamer.com.tw",
   "version": "1.2.25",

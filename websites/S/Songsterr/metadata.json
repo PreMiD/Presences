@@ -8,8 +8,8 @@
   "service": "Songsterr",
   "description": {
     "en": "Songsterr is one of the most popular sites to find and play guitar or any instrument's tabs.",
-    "tr": "Songsterr gitar ya da herhangi bir çalgının tablarını bulmak ya da çalmak için en popüler sitelerden birisi.",
-    "pl": "Songsterr to jedna z najpopularniejszych witryn do znajdowania i grania na gitarze lub tabsy dla dowolnego instrumentu"
+    "pl": "Songsterr to jedna z najpopularniejszych witryn do znajdowania i grania na gitarze lub tabsy dla dowolnego instrumentu",
+    "tr": "Songsterr gitar ya da herhangi bir çalgının tablarını bulmak ya da çalmak için en popüler sitelerden birisi."
   },
   "url": [
     "www.songsterr.com",

@@ -7,9 +7,9 @@
   },
   "service": "Glynet",
   "description": {
-    "tr": "Glynet, yeni açılmış bir sosyal medya sitesi.",
     "en": "Glynet is a social media website that launched newly.",
-    "nl": "Glynet is een website voor sociale media die onlangs is gelanceerd."
+    "nl": "Glynet is een website voor sociale media die onlangs is gelanceerd.",
+    "tr": "Glynet, yeni açılmış bir sosyal medya sitesi."
   },
   "url": [
     "www.glynet.com",

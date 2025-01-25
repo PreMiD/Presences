@@ -26,11 +26,11 @@
   "service": "Roblox",
   "description": {
     "en": "Roblox’s mission is to bring the world together through play.",
-    "ro": "Misiunea Roblox-ului este de a aduce lumea mai aproape să se joace împreună.",
     "es": "La misión de Roblox es unir al mundo por medio del juego.",
     "nl": "De missie van Roblox is om de wereld samen te brengen door te spelen.",
-    "zh_CN": "Roblox的使命是通过游戏将世界融合在一起。",
-    "vi_VN": "Nhiệm vụ của Roblox là đem thế giới lại gần nhau qua trò chơi."
+    "ro": "Misiunea Roblox-ului este de a aduce lumea mai aproape să se joace împreună.",
+    "vi_VN": "Nhiệm vụ của Roblox là đem thế giới lại gần nhau qua trò chơi.",
+    "zh_CN": "Roblox的使命是通过游戏将世界融合在一起。"
   },
   "url": [
     "www.roblox.com",

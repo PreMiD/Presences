@@ -7,9 +7,9 @@
   },
   "service": "Juniperbot",
   "description": {
-    "ru": "Многофункциональный, полностью настраиваемый бот для платформы Discord, с панелью управления.",
     "en": "Fluffy Discord Bot (Music, Ranking, Reminder, Vk Community bridge, WikiFur)",
-    "nl": "Fluffy Discord Bot (Muziek, Ranking, Herinnering, Vk Community-brug, WikiFur)"
+    "nl": "Fluffy Discord Bot (Muziek, Ranking, Herinnering, Vk Community-brug, WikiFur)",
+    "ru": "Многофункциональный, полностью настраиваемый бот для платформы Discord, с панелью управления."
   },
   "url": [
     "docs.juniper.bot",

@@ -8,8 +8,8 @@
   "service": "Spiderum",
   "description": {
     "en": "Vietnamese writing community",
-    "vi_VN": "Nền tảng chia sẻ - thảo luận dành cho người Việt. Nơi tập trung những nội dung thú vị và hữu ích nhất do người dùng đóng góp và bình chọn.",
-    "nl": "Vietnamese schrijfgemeenschap"
+    "nl": "Vietnamese schrijfgemeenschap",
+    "vi_VN": "Nền tảng chia sẻ - thảo luận dành cho người Việt. Nơi tập trung những nội dung thú vị và hữu ích nhất do người dùng đóng góp và bình chọn."
   },
   "url": "spiderum.com",
   "version": "1.0.19",

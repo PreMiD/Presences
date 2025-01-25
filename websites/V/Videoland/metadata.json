@@ -7,8 +7,8 @@
   },
   "service": "Videoland",
   "description": {
-    "nl": "Videoland. Weet wat speelt.",
-    "en": "Videoland. Know what's going on."
+    "en": "Videoland. Know what's going on.",
+    "nl": "Videoland. Weet wat speelt."
   },
   "url": [
     "v2.videoland.com",

@@ -7,8 +7,8 @@
   },
   "service": "CoinMarketCap",
   "description": {
-    "en": "CoinMarketCap is the world's most-referenced price-tracking website for cryptoassets in the rapidly growing cryptocurrency space.",
     "de": "CoinMarketCap ist die weltweit am meisten referenzierte Preisverfolgungs-Website für Krypto-Assets im schnell wachsenden Kryptowährungsraum.",
+    "en": "CoinMarketCap is the world's most-referenced price-tracking website for cryptoassets in the rapidly growing cryptocurrency space.",
     "vi_VN": "CoinMarketCap là trang web nổi tiếng nhất thế giới nhằm theo dõi giá trị của các tài sản số trong nhịp độ ngày càng phát triển của không gian tiền ảo."
   },
   "url": [

@@ -8,8 +8,8 @@
   "service": "FairyAnime",
   "description": {
     "en": "FairyAnime stream your favorite anime completely for free with thai-sub and thai sound!",
-    "th": "FairyAnime เว็ปไซต์สตรีมมิ่งอนิเมะที่ทุกคนชื่นชอบ ฟรีเเละมีซับไทย",
-    "nl": "FairyAnime streamt uw favoriete anime helemaal gratis met thai-sub en thais geluid!"
+    "nl": "FairyAnime streamt uw favoriete anime helemaal gratis met thai-sub en thais geluid!",
+    "th": "FairyAnime เว็ปไซต์สตรีมมิ่งอนิเมะที่ทุกคนชื่นชอบ ฟรีเเละมีซับไทย"
   },
   "url": "fairyanime.com",
   "regExp": "([a-z0-9-]+[.])*fairyanime[.]com[/]",

@@ -13,15 +13,15 @@
   ],
   "service": "Deezer",
   "description": {
-    "en": "Listen to all the songs you love anytime, anywhere.",
     "de": "Höre dir all die Songs an, die du liebst. Jederzeit und überall.",
-    "ro": "Ascultă toate melodiile iubite, oricând, oriunde.",
-    "pt_BR": "Escute todas as músicas que você ama a qualquer hora, em qualquer lugar.",
+    "en": "Listen to all the songs you love anytime, anywhere.",
     "fr": "Écoutez toutes les musiques que vous aimez quand vous voulez, où vous voulez.",
-    "uk_UA": "Слухайте улюблену музику у будь-який час будь-де.",
+    "ga_IE": "Éifeall na ceimhniú a thágthóg, uair éirinn.",
     "nl": "Luister altijd en overal naar alle nummers waar je van houdt.",
-    "vi_VN": "Nghe tất cả những bài hát bạn yêu thích mọi lúc, mọi nơi.",
-    "ga_IE": "Éifeall na ceimhniú a thágthóg, uair éirinn."
+    "pt_BR": "Escute todas as músicas que você ama a qualquer hora, em qualquer lugar.",
+    "ro": "Ascultă toate melodiile iubite, oricând, oriunde.",
+    "uk_UA": "Слухайте улюблену музику у будь-який час будь-де.",
+    "vi_VN": "Nghe tất cả những bài hát bạn yêu thích mọi lúc, mọi nơi."
   },
   "url": "www.deezer.com",
   "version": "2.3.7",

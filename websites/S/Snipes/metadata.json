@@ -7,8 +7,8 @@
   },
   "service": "Snipes",
   "description": {
-    "en": "SNIPES is a store for popular brand clothes.",
     "de": "SNIPES ist ein Handel für beliebte marken Klamotten.",
+    "en": "SNIPES is a store for popular brand clothes.",
     "nl": "SNIPES is een winkel voor kleding van populaire merken."
   },
   "url": "www.snipes.com",

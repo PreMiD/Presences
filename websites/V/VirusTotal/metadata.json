@@ -7,8 +7,8 @@
   },
   "service": "VirusTotal",
   "description": {
-    "en": "Check every Software for your safety",
     "de": "Überprüfe deine Dateien für deine Sicherheit",
+    "en": "Check every Software for your safety",
     "ga_IE": "Seiceáil gach Bogearraí le haghaidh do shábháilteachta",
     "nl": "Controleer elke software op uw veiligheid"
   },
