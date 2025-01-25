@@ -1,10 +1,12 @@
 import antfu from '@antfu/eslint-config'
+import eslintPluginJsonSchemaValidator from 'eslint-plugin-json-schema-validator'
 
 export default antfu(
   {
     formatters: true,
     typescript: true,
   },
+  ...eslintPluginJsonSchemaValidator.configs['flat/recommended'],
   {
     // TODO remove this rule
     rules: {
@@ -55,6 +57,7 @@ export default antfu(
           order: { type: 'asc' },
         },
       ],
+      'json-schema-validator/no-invalid': 'error',
     },
   },
 )
