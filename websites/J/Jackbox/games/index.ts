@@ -1,3 +1,4 @@
+import type { Game } from '../types'
 import * as drawful from './Party Pack 1/drawful'
 import * as drawful2 from './Party Pack 1/drawful2'
 import * as drawful2international from './Party Pack 1/drawful2international'
@@ -52,7 +53,6 @@ import * as riskytext from './Party Pack 10/risky-text'
 import * as timetrivia from './Party Pack 10/time-trivia'
 import * as usthem from './Party Pack 10/us-them'
 import * as unknown from './unknown'
-import type { Game } from '../types'
 
 export default {
   unknown,
