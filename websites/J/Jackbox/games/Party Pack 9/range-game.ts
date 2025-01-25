@@ -1,3 +1,5 @@
+import type { GameCallbackParams } from '../../types'
+
 export const name = 'Nonsensory'
 export const logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/42.png'
 

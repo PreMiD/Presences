@@ -1,3 +1,5 @@
+import type { GameCallbackParams } from '../../types'
+
 import { getSVGImageData, uploadFile } from '../../util'
 
 export const name = 'Dodo Re Mi'

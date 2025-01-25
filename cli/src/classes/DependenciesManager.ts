@@ -1,3 +1,4 @@
+import type { ActivityMetadata } from './ActivityCompiler.js'
 import { exec } from 'node:child_process'
 import { existsSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
@@ -8,7 +9,10 @@ import ora from 'ora'
 import { prefix } from '../util/log.js'
 
 export class DependenciesManager {
-  constructor(public readonly cwd: string) {}
+  constructor(
+    public readonly cwd: string,
+    public readonly activity: ActivityMetadata,
+  ) { }
 
   async isValidPackageJson() {
     if (!existsSync(resolve(this.cwd, 'package.json')))
@@ -31,7 +35,7 @@ export class DependenciesManager {
       return
 
     const spinner = ora(
-      prefix + chalk.yellow(' Installing dependencies...'),
+      prefix + chalk.yellow(` Installing dependencies for ${this.activity.service}...`),
     ).start()
 
     //* Run npm install
@@ -47,7 +51,7 @@ export class DependenciesManager {
     await new Promise<void>(resolve =>
       job.once('exit', (code) => {
         if (code === 0) {
-          spinner.succeed(prefix + chalk.greenBright(' Installed dependencies!'))
+          spinner.succeed(prefix + chalk.greenBright(` Installed dependencies for ${this.activity.service}!`))
 
           return resolve()
         }

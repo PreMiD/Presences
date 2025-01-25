@@ -1,3 +1,5 @@
+import type { GameCallbackParams } from '../../types'
+
 export const name = 'The Wheel of Enormous Proportions'
 export const logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/37.png'
 

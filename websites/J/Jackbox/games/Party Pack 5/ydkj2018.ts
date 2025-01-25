@@ -1,3 +1,5 @@
+import type { GameCallbackParams } from '../../types'
+
 export const name = 'You Don\'t Know Jack: Full Stream'
 export const logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/22.png'
 

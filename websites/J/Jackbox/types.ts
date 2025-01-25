@@ -1,4 +1,4 @@
-interface Game {
+export interface Game {
   name: string
   logo: string
   getPresenceData: (
@@ -6,7 +6,7 @@ interface Game {
   ) => Promise<PresenceData> | PresenceData
 }
 
-interface GamePlayerState {
+export interface GamePlayerState {
   playerName?: string
   username?: string
   playerInfo?: {
@@ -29,11 +29,11 @@ interface GamePlayerState {
   [x: string]: unknown
 }
 
-interface GameInfoState {
+export interface GameInfoState {
   name?: string
 }
 
-interface GameCallbackParams {
+export interface GameCallbackParams {
   playerState: GamePlayerState
   infoState: GameInfoState
   tag: string

@@ -1,3 +1,4 @@
+import type { ActivityMetadata } from './ActivityCompiler.js'
 import { existsSync } from 'node:fs'
 import { basename, dirname, resolve } from 'node:path'
 import process from 'node:process'
@@ -7,11 +8,14 @@ import ts from 'typescript'
 import { error, exit, info, prefix } from '../util/log.js'
 
 export class TypescriptCompiler {
-  constructor(public readonly cwd: string) { }
+  constructor(
+    public readonly cwd: string,
+    public readonly activity: ActivityMetadata,
+  ) { }
 
-  async typecheck() {
+  async typecheck(killOnError: boolean): Promise<boolean> {
     const spinner = ora(
-      prefix + chalk.yellow(' Type checking...'),
+      prefix + chalk.yellow(` Type checking ${this.activity.service}...`),
     ).start()
 
     const hasIframe = existsSync(resolve(this.cwd, 'iframe.ts'))
@@ -31,7 +35,10 @@ export class TypescriptCompiler {
       parsedConfig.errors.forEach((diagnostic) => {
         error(ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n'))
       })
-      process.exit(1)
+      if (killOnError) {
+        process.exit(1)
+      }
+      return false
     }
 
     const program = ts.createProgram({
@@ -56,10 +63,14 @@ export class TypescriptCompiler {
           error(ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n'))
         }
       })
-      process.exit(1)
+      if (killOnError) {
+        process.exit(1)
+      }
+      return false
     }
 
-    spinner.succeed(prefix + chalk.greenBright(' Type checking passed!'))
+    spinner.succeed(prefix + chalk.greenBright(` Type checking ${this.activity.service} passed!`))
+    return true
   }
 
   private program: ts.WatchOfFilesAndCompilerOptions<ts.SemanticDiagnosticsBuilderProgram> | undefined

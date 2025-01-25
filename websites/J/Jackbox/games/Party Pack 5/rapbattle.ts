@@ -1,3 +1,5 @@
+import type { GameCallbackParams } from '../../types'
+
 export const name = 'Mad Verse City'
 export const logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/19.png'
 

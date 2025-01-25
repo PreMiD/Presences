@@ -1,3 +1,5 @@
+import type { GameCallbackParams } from '../../types'
+
 export const name = 'Push the Button'
 export const logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/24.png'
 

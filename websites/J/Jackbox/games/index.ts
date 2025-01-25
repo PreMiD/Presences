@@ -52,6 +52,7 @@ import * as riskytext from './Party Pack 10/risky-text'
 import * as timetrivia from './Party Pack 10/time-trivia'
 import * as usthem from './Party Pack 10/us-them'
 import * as unknown from './unknown'
+import type { Game } from '../types'
 
 export default {
   unknown,

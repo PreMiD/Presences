@@ -1,3 +1,5 @@
+import type { GameCallbackParams } from '../../types'
+
 export const name = 'Drawful Animate'
 export const logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/34.png'
 

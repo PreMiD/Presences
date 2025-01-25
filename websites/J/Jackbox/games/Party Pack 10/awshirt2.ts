@@ -1,3 +1,5 @@
+import type { GameCallbackParams } from '../../types'
+
 import { uploadFile } from '../../util'
 
 export const name = 'Tee-K.O. 2'

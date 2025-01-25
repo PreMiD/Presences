@@ -27,7 +27,7 @@ presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/I/Issou%20TV/assets/logo.png',
   }
-  const pageTitle = document.querySelector('title')?.textContent?.split(' | ')
+  const pageTitle = document.querySelector('title')?.textContent?.split(' | ') ?? []
   const browsingTimestamp = Math.floor(Date.now() / 1000)
   const route = document.location.pathname.split('/')
   const query = await parseQueryString(document.location.hash).search

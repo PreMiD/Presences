@@ -145,7 +145,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = `On profile ${tab} page`;
       [, presenceData.state] = document.location.pathname.match(
         /^\/u\/([^/]+)(?:\/([^/]+))?/,
-      )
+      ) ?? []
     }
     else if (document.location.pathname.match(/^\/repository\/create/)) {
       presenceData.details = 'Creating repository'
@@ -158,7 +158,7 @@ presence.on('UpdateData', async () => {
 
       [, tab] = document.location.pathname.match(
         /^\/repository(?:\/([^/?]+))+/,
-      )
+      ) ?? []
 
       page = params.get(searchItems.page)
       selector = document.querySelector(

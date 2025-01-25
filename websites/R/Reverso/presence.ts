@@ -16,7 +16,7 @@ presence.on('UpdateData', async () => {
       ':is(link[hreflang=\'en\'], #interface-lang-menu > div.drop-down > a[data-value=\'en\'])',
     )
     ?.getAttribute('href')
-  const hrefEnUrl = new URL(hrefEn)
+  const hrefEnUrl = new URL(hrefEn ?? '')
   if (hrefEn) {
     if (hrefEn.includes('/text-translation')) {
       presenceData.details = `Traduction en ${langLabel[0]?.textContent?.trim()} → ${langLabel[1]?.textContent?.trim()}`

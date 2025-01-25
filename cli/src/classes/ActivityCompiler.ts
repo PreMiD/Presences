@@ -24,14 +24,20 @@ export class ActivityCompiler {
     public readonly cwd: string,
     public readonly activity: ActivityMetadata,
   ) {
-    this.dependencies = new DependenciesManager(cwd)
-    this.ts = new TypescriptCompiler(cwd)
+    this.dependencies = new DependenciesManager(cwd, activity)
+    this.ts = new TypescriptCompiler(cwd, activity)
   }
 
-  async compile(precheck = true) {
+  async compile(
+    precheck = true,
+    killOnError = true,
+  ) {
     if (precheck) {
       await this.dependencies.installDependencies()
-      await this.ts.typecheck()
+      const success = await this.ts.typecheck(killOnError)
+      if (!success) {
+        return
+      }
     }
 
     const spinner = ora(prefix + chalk.greenBright(` Compiling ${this.activity.service}...`))

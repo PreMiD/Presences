@@ -1,3 +1,5 @@
+import type { GameCallbackParams } from '../types'
+
 export const tag = 'unknown'
 export const name = 'Unknown Game'
 export const logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/logo.png'

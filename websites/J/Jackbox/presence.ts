@@ -1,3 +1,4 @@
+import type { Game, GameInfoState, GamePlayerState } from './types'
 import games from './games/index'
 
 const presence = new Presence({

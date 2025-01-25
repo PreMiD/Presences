@@ -2,7 +2,7 @@
 
 import { readFile } from 'node:fs/promises'
 import { cac } from 'cac'
-import { buildActivity } from './commands/build.js'
+import { build } from './commands/build.js'
 import { newActivity } from './commands/new.js'
 import { exit } from './util/log.js'
 
@@ -25,11 +25,15 @@ cli
 
 cli
   .command('dev [activity]', 'Run an activity in dev mode')
-  .action(service => buildActivity(service, true))
+  .action(service => build(service, { watch: true }))
 
 cli
   .command('build [activity]', 'Build an activity')
-  .action(service => buildActivity(service))
+  .option('--all', 'Build all activities')
+  .option('--watch', 'Watch for changes and rebuild (Same as `dev`)')
+  .option('--changed', 'Build only changed activities')
+  .option('--no-kill', 'Do not kill the process on error (Only works with --all or --changed)')
+  .action((service, options) => build(service, options))
 
 cli.help()
 cli.version(cliPackageJson.version)
