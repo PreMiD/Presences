@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 		},
 		isTalking = document.querySelector(
-			'[class*="text-2xl"] > span:nth-child(3)'
+			".gap-x-1 > div > button[data-testid=stop-button]"
 		);
 
 	let wordCount = 0;
