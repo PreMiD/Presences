@@ -1,7 +1,7 @@
 import type { ActivityMetadata } from '../classes/ActivityCompiler.js'
 import { execSync } from 'node:child_process'
 import { readFile } from 'node:fs/promises'
-import { dirname } from 'node:path'
+import { dirname, resolve } from 'node:path'
 import process from 'node:process'
 import { context, getOctokit } from '@actions/github'
 import { globby } from 'globby'
@@ -30,8 +30,8 @@ export async function getActivities(): Promise<ActivityMetadataAndFolder[]> {
 }
 
 export async function getChangedActivities() {
-  const changedFiles = isCI ? await getChangedFilesCi() : await getChangedFilesLocal()
-  const activityPaths = new Set<string>(multimatch(changedFiles, ['websites/*/*/metadata.json', 'websites/*/*/v*/metadata.json']))
+  const changedFiles = (isCI ? await getChangedFilesCi() : await getChangedFilesLocal()).map(file => resolve(process.cwd(), file))
+  const activityPaths = new Set<string>(multimatch(changedFiles, [`${process.cwd()}/websites/*/*/metadata.json`, `${process.cwd()}/websites/*/*/v*/metadata.json`]))
   return [...activityPaths]
 }
 
