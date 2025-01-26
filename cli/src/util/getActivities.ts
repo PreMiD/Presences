@@ -1,12 +1,13 @@
 import type { ActivityMetadata } from '../classes/ActivityCompiler.js'
 import { execSync } from 'node:child_process'
+import { existsSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import process from 'node:process'
-import { context, getOctokit } from '@actions/github'
+import { context } from '@actions/github'
+import gitDiffParser from 'gitdiff-parser'
 import { globby } from 'globby'
 import isCI from 'is-ci'
-import multimatch from 'multimatch'
 import { exit, info } from './log.js'
 
 export interface ActivityMetadataAndFolder {
@@ -30,9 +31,32 @@ export async function getActivities(): Promise<ActivityMetadataAndFolder[]> {
 }
 
 export async function getChangedActivities() {
-  const changedFiles = (isCI ? await getChangedFilesCi() : await getChangedFilesLocal()).map(file => resolve(process.cwd(), file))
-  const activityPaths = new Set<string>(multimatch(changedFiles, [`${process.cwd()}/websites/*/*/metadata.json`, `${process.cwd()}/websites/*/*/v*/metadata.json`]))
-  return [...activityPaths]
+  const changedFiles = (isCI ? await getChangedFilesCi() : await getChangedFilesLocal()).map(file => resolve(process.cwd(), decodeUtf8Escapes(file)))
+  const activityPaths = new Set<string>()
+
+  const endAt = [
+    '/',
+    process.cwd(),
+    `${process.cwd()}/websites`,
+  ]
+
+  for (const file of changedFiles) {
+    let path = file
+    while (!existsSync(resolve(path, 'metadata.json'))) {
+      path = dirname(path)
+      if (endAt.includes(path)) {
+        break
+      }
+    }
+
+    if (endAt.includes(path)) {
+      continue
+    }
+
+    activityPaths.add(path)
+  }
+
+  return Array.from(activityPaths)
 }
 
 async function getChangedFilesCi() {
@@ -60,38 +84,14 @@ async function getChangedFilesCi() {
 
   info(`Getting changed files from ${base} to ${head}`)
 
-  const client = getOctokit(process.env.GITHUB_TOKEN)
-  const allFiles: string[] = []
-  let page = 1
+  const response = await fetch(`https://github.com/${context.repo.owner}/${context.repo.repo}/compare/${base}...${head}.diff`, {
+    headers: {
+      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+    },
+  })
 
-  //* Keep fetching pages until we get a response with fewer items than the per_page limit
-  while (true) {
-    const response = await client.rest.repos.compareCommits({
-      base,
-      head,
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      per_page: 100,
-      page,
-    })
-
-    if (response.status !== 200) {
-      exit(`Failed to get changed files, status: ${response.status}`)
-    }
-
-    if (response.data.status !== 'ahead') {
-      exit('The head commit is not ahead of the base commit, rebase and try again')
-    }
-
-    const files = response.data.files ?? []
-    allFiles.push(...files.map(file => file.filename))
-
-    if (files.length < 100)
-      break
-    page++
-  }
-
-  return allFiles
+  const files = gitDiffParser.parse(await response.text())
+  return files.map(file => file.newPath)
 }
 
 async function getChangedFilesLocal() {
@@ -99,4 +99,18 @@ async function getChangedFilesLocal() {
   const head = execSync('git rev-parse HEAD').toString().trim()
   const changedFiles = execSync(`git diff --name-only ${base} ${head}`).toString().trim().split('\n')
   return changedFiles
+}
+
+function decodeUtf8Escapes(filePath: string) {
+  filePath = filePath
+    .replace(/"$/, '')
+    .replace(/^"/, '')
+    .replace(/^\//, '')
+
+  const decodedPath = filePath.replace(/\\(\d{3})/g, (_, octalCode) =>
+    String.fromCharCode(Number.parseInt(octalCode, 8)))
+
+  const bytes = new Uint8Array([...decodedPath].map(char => char.charCodeAt(0)))
+  const decoder = new TextDecoder('utf-8')
+  return decoder.decode(bytes)
 }

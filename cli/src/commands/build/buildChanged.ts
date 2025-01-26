@@ -1,6 +1,6 @@
 import type { ActivityMetadata } from '../../classes/ActivityCompiler.js'
 import { readFile } from 'node:fs/promises'
-import { dirname, resolve } from 'node:path'
+import { resolve } from 'node:path'
 import process from 'node:process'
 import { getChangedActivities } from '../../util/getActivities.js'
 import { getFolderLetter } from '../../util/getFolderLetter.js'
@@ -26,14 +26,13 @@ export async function buildChanged({
   const activitiesToBuild: Parameters<typeof buildActivity>[0][] = []
   for (const activity of changedActivities) {
     try {
-      const directory = dirname(activity)
-      const metadata: ActivityMetadata = JSON.parse(await readFile(activity, 'utf-8'))
+      const metadata: ActivityMetadata = JSON.parse(await readFile(resolve(activity, 'metadata.json'), 'utf-8'))
       const folderLetter = getFolderLetter(metadata.service)
       const sanitazedActivity = sanitazeFolderName(metadata.service)
       const path = resolve(process.cwd(), 'websites', folderLetter, sanitazedActivity)
-      const versionized = path !== directory
+      const versionized = path !== activity
 
-      activitiesToBuild.push({ path: directory, activity: metadata, versionized, kill, checkMetadata, watch: false })
+      activitiesToBuild.push({ path: activity, activity: metadata, versionized, kill, checkMetadata, watch: false })
     }
     catch {}
   }
