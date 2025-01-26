@@ -24,20 +24,20 @@ const enum Assets {
 
 presence.on("UpdateData", async () => {
 	const { pathname } = document.location,
-		[lang, showTitle, logoType] = await Promise.all([
+		[newLang, showTitle, logo] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "en"),
 			presence.getSetting<boolean>("showTitle"),
 			presence.getSetting<number>("logo"),
 		]);
 
-	if (oldLang !== lang) {
-		oldLang = lang;
+	if (oldLang !== newLang || !strings) {
+		oldLang = newLang;
 		strings = await getStrings();
 	}
 
 	const presenceData: PresenceData = {
 			largeImageKey:
-				[Assets.Logo, Assets.Dark, Assets.Old][logoType] || Assets.Logo,
+				[Assets.Logo, Assets.Dark, Assets.Old][logo] || Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
 		isTalking = document.querySelector(
