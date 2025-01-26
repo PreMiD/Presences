@@ -23,33 +23,21 @@ export async function buildChanged({
     success('No changed activities found')
   }
 
-  const activitiesToBuild: Parameters<typeof buildActivity>[0][] = []
-  for (const activity of changedActivities) {
-    try {
-      const metadata: ActivityMetadata = JSON.parse(await readFile(resolve(activity, 'metadata.json'), 'utf-8'))
-      const folderLetter = getFolderLetter(metadata.service)
-      const sanitazedActivity = sanitazeFolderName(metadata.service)
-      const path = resolve(process.cwd(), 'websites', folderLetter, sanitazedActivity)
-      const versionized = path !== activity
-
-      activitiesToBuild.push({ path: activity, activity: metadata, versionized, kill, checkMetadata, watch: false })
-    }
-    catch {}
-  }
-
-  if (activitiesToBuild.length === 0) {
-    success('No changed activities found')
-  }
-
-  info(`Building ${activitiesToBuild.length} activities...`)
+  info(`Building ${changedActivities.length} activities...`)
 
   let successful = true
-  for (const activity of activitiesToBuild) {
-    const isSuccess = await buildActivity(activity)
+  for (const activity of changedActivities) {
+    const metadata: ActivityMetadata = JSON.parse(await readFile(resolve(activity, 'metadata.json'), 'utf-8'))
+    const folderLetter = getFolderLetter(metadata.service)
+    const sanitazedActivity = sanitazeFolderName(metadata.service)
+    const path = resolve(process.cwd(), 'websites', folderLetter, sanitazedActivity)
+    const versionized = path !== activity
+
+    const isSuccess = await buildActivity({ path: activity, activity: metadata, versionized, kill, checkMetadata, watch: false })
     successful = successful && isSuccess
   }
 
-  info(`${activitiesToBuild.length} activities built ${successful ? 'successfully' : 'with errors'}`)
+  info(`${changedActivities.length} activities built ${successful ? 'successfully' : 'with errors'}`)
 
   if (sarif) {
     await writeSarifLog()
