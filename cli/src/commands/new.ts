@@ -131,7 +131,7 @@ export async function newActivity(activity?: string) {
   }
 
   await mkdir(path, { recursive: true })
-  await writeFile(resolve(path, 'metadata.json'), JSON.stringify(metadata, null, 2))
+  await writeFile(resolve(path, 'metadata.json'), `${JSON.stringify(metadata, null, 2)}\n`)
   await cp(resolve(fileURLToPath(import.meta.url), '../../../templates/tsconfig.json'), resolve(path, 'tsconfig.json'))
   await cp(resolve(fileURLToPath(import.meta.url), `../../../templates/presence${await isFirstTimeAuthor(author!.id) ? '' : '.min'}.ts`), resolve(path, 'presence.ts'))
 

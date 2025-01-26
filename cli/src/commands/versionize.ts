@@ -39,7 +39,7 @@ export async function versionizeActivity(activity: string) {
     const newPath = resolve(path, `v${newVersion}`)
     await mkdir(newPath, { recursive: true })
     metadata.apiVersion = newVersion
-    await writeFile(resolve(newPath, 'metadata.json'), JSON.stringify(metadata, null, 2))
+    await writeFile(resolve(newPath, 'metadata.json'), `${JSON.stringify(metadata, null, 2)}\n`)
     await cp(resolve(fileURLToPath(import.meta.url), '../../../templates/tsconfig.versionized.json'), resolve(newPath, 'tsconfig.json'))
     await cp(resolve(fileURLToPath(import.meta.url), `../../../templates/presence.min.ts`), resolve(newPath, 'presence.ts'))
 
@@ -82,7 +82,7 @@ export async function versionizeActivity(activity: string) {
   const newPath = resolve(path, `v${newVersion}`)
   await mkdir(newPath, { recursive: true })
   metadata.apiVersion = newVersion
-  await writeFile(resolve(newPath, 'metadata.json'), JSON.stringify(metadata, null, 2))
+  await writeFile(resolve(newPath, 'metadata.json'), `${JSON.stringify(metadata, null, 2)}\n`)
   await cp(resolve(fileURLToPath(import.meta.url), '../../../templates/tsconfig.versionized.json'), resolve(newPath, 'tsconfig.json'))
   await cp(resolve(fileURLToPath(import.meta.url), `../../../templates/presence.min.ts`), resolve(newPath, 'presence.ts'))
 

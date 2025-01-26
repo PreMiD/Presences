@@ -76,7 +76,7 @@ async function bumpActivity(activity: ActivityMetadataAndFolder, version?: strin
     }
   }
 
-  await writeFile(resolve(activity.folder, 'metadata.json'), JSON.stringify(activity.metadata, null, 2))
+  await writeFile(resolve(activity.folder, 'metadata.json'), `${JSON.stringify(activity.metadata, null, 2)}\n`)
 
   console.log(chalk.greenBright('✔ ') + prefix, chalk.greenBright(`${activity.metadata.service} has been bumped to ${activity.metadata.version}`))
 }
