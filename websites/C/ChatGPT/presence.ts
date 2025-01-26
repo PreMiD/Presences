@@ -10,7 +10,6 @@ const presence = new Presence({
 				talkingWithAI: "chatgpt.talkingWithAI",
 				thinkingOfPrompt: "chatgpt.thinkingOfPrompt",
 			},
-			await presence.getSetting<string>("lang").catch(() => "en")
 		);
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000);
