@@ -12,7 +12,7 @@
   },
   "url": "app.gitbook.com",
   "regExp": "([a-z0-9-]+)[.]gitbook[.]io|app[.]gitbook[.]com",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/G/Gitbook/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Gitbook/assets/thumbnail.png",
   "color": "#3884FF",

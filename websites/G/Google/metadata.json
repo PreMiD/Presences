@@ -15,7 +15,7 @@
   },
   "url": "www.google.com",
   "regExp": "www[.]google([.][a-z]+)+[/]",
-  "version": "2.4.10",
+  "version": "2.4.11",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google/assets/thumbnail.png",
   "color": "#ffffff",

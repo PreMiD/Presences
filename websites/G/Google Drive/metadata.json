@@ -22,7 +22,7 @@
   },
   "url": "drive.google.com",
   "regExp": "drive[.]google([.][a-z]+)+[/]",
-  "version": "1.6.11",
+  "version": "1.6.12",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Drive/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google%20Drive/assets/thumbnail.png",
   "color": "#3aa154",
