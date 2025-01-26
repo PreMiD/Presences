@@ -135,6 +135,7 @@ export class ActivityCompiler {
     const metadata: ActivityMetadata = JSON.parse(await readFile(resolve(this.cwd, 'metadata.json'), 'utf-8'))
     const libraryVersion: ActivityMetadata | null = await fetch(`https://api.premid.app/v6/activities${this.versionized ? `/v${metadata.apiVersion}` : ''}/${encodeURIComponent(metadata.service)}/metadata.json`).then(res => res.json()).catch(() => null)
 
+    let valid = true
     if (!libraryVersion) {
       if (metadata.version === '1.0.0') {
         return true
@@ -155,11 +156,11 @@ export class ActivityCompiler {
             column: 0,
           },
         })
-        return false
+        valid = false
       }
     }
 
-    if (compare(metadata.version, libraryVersion.version) <= 0) {
+    if (libraryVersion && compare(metadata.version, libraryVersion.version) <= 0) {
       const expectedVersions = [inc(metadata.version, 'patch'), inc(metadata.version, 'minor'), inc(metadata.version, 'major')]
       const message = `Expected version of activity ${metadata.service} to be bumped to one of the following: ${expectedVersions.join(', ')}`
       if (kill) {
@@ -176,7 +177,7 @@ export class ActivityCompiler {
           column: 0,
         },
       })
-      return false
+      valid = false
     }
 
     if (metadata.iframe && !existsSync(resolve(this.cwd, 'iframe.ts'))) {
@@ -195,7 +196,7 @@ export class ActivityCompiler {
           column: 0,
         },
       })
-      return false
+      valid = false
     }
 
     if (!metadata.iframe && existsSync(resolve(this.cwd, 'iframe.ts'))) {
@@ -214,7 +215,7 @@ export class ActivityCompiler {
           column: 0,
         },
       })
-      return false
+      valid = false
     }
 
     if (metadata.iFrameRegExp === '.*') {
@@ -233,7 +234,7 @@ export class ActivityCompiler {
           column: 0,
         },
       })
-      return false
+      valid = false
     }
 
     const allowedLanguages = await fetch('https://api.premid.app/v6/locales').then(res => res.json()).catch(() => [])
@@ -254,10 +255,10 @@ export class ActivityCompiler {
             column: 0,
           },
         })
-        return false
+        valid = false
       }
     }
 
-    return true
+    return valid
   }
 }
