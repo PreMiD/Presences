@@ -2,15 +2,13 @@ const presence = new Presence({
 		clientId: "1102935778570547282",
 	}),
 	getStrings = async () => {
-		return presence.getStrings(
-			{
-				aiResponding: "chatgpt.aiResponding",
-				conversationStats: "chatgpt.conversationStats",
-				startNewConversation: "chatgpt.startNewConversation",
-				talkingWithAI: "chatgpt.talkingWithAI",
-				thinkingOfPrompt: "chatgpt.thinkingOfPrompt",
-			},
-		);
+		return presence.getStrings({
+			aiResponding: "chatgpt.aiResponding",
+			conversationStats: "chatgpt.conversationStats",
+			startNewConversation: "chatgpt.startNewConversation",
+			talkingWithAI: "chatgpt.talkingWithAI",
+			thinkingOfPrompt: "chatgpt.thinkingOfPrompt",
+		});
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
