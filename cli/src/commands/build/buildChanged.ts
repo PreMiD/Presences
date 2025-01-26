@@ -4,7 +4,7 @@ import { dirname, resolve } from 'node:path'
 import process from 'node:process'
 import { getChangedActivities } from '../../util/getActivities.js'
 import { getFolderLetter } from '../../util/getFolderLetter.js'
-import { success } from '../../util/log.js'
+import { info, success } from '../../util/log.js'
 import { sanitazeFolderName } from '../../util/sanitazeFolderName.js'
 import { writeSarifLog } from '../../util/sarif.js'
 import { buildActivity } from './buildActivity.js'
@@ -42,11 +42,15 @@ export async function buildChanged({
     success('No changed activities found')
   }
 
+  info(`Building ${activitiesToBuild.length} activities...`)
+
   let successful = true
   for (const activity of activitiesToBuild) {
     const isSuccess = await buildActivity(activity)
     successful = successful && isSuccess
   }
+
+  info(`${activitiesToBuild.length} activities built ${successful ? 'successfully' : 'with errors'}`)
 
   if (sarif) {
     await writeSarifLog()

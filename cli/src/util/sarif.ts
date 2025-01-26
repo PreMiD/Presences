@@ -117,14 +117,15 @@ export function addSarifLog(log: {
             uri: pathToFileURL(log.path),
             index: sarifArtifactIndices[log.path],
           },
-          ...(log.position
+          ...(log.position && log.position.line > 0
             ? {
                 region: {
                   startLine: log.position.line,
-                  startColumn: log.position.column,
+                  ...(log.position.column > 0 && { startColumn: log.position.column }),
                 },
               }
-            : {}),
+            : {}
+          ),
         },
       },
     ],
