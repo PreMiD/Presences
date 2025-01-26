@@ -1,4 +1,4 @@
-name: ESLint
+name: pmd
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  eslint:
-    name: Run eslint scanning
+  pmd:
+    name: Run compile, and metadata check
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -23,19 +23,15 @@ jobs:
           node-version-file: package.json
           cache: npm
 
-      - name: Install ESLint
-        run: |
-          HUSKY=0 npm ci
-          npm install @microsoft/eslint-formatter-sarif@3.1.0
+      - name: Install PMD
+        run: HUSKY=0 npm ci
 
-      - name: Run ESLint
-        env:
-          SARIF_ESLINT_IGNORE_SUPPRESSED: 'true'
-        run: npx eslint . --config eslint.config.mjs --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif
+      - name: Run PMD
+        run: npx pmd build --changed --no-kill --check-metadata --sarif
         continue-on-error: true
 
       - name: Upload analysis results to GitHub
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: eslint-results.sarif
+          sarif_file: pmd-results.sarif
           wait-for-processing: true

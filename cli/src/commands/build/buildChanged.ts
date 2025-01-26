@@ -1,14 +1,23 @@
-import { success } from '../../util/log.js'
-import process from 'node:process'
-import { dirname, resolve } from 'node:path'
-import { buildActivity } from './buildActivity.js'
+import type { ActivityMetadata } from '../../classes/ActivityCompiler.js'
 import { readFile } from 'node:fs/promises'
-import { getFolderLetter } from '../../util/getFolderLetter.js'
-import { ActivityMetadata } from '../../classes/ActivityCompiler.js'
-import { sanitazeFolderName } from '../../util/sanitazeFolderName.js'
+import { dirname, resolve } from 'node:path'
+import process from 'node:process'
 import { getChangedActivities } from '../../util/getActivities.js'
+import { getFolderLetter } from '../../util/getFolderLetter.js'
+import { success } from '../../util/log.js'
+import { sanitazeFolderName } from '../../util/sanitazeFolderName.js'
+import { writeSarifLog } from '../../util/sarif.js'
+import { buildActivity } from './buildActivity.js'
 
-export async function buildChanged({ kill, bumpCheck }: { kill: boolean, bumpCheck: boolean }) {
+export async function buildChanged({
+  kill,
+  checkMetadata,
+  sarif,
+}: {
+  kill: boolean
+  checkMetadata: boolean
+  sarif: boolean
+}) {
   const changedActivities = await getChangedActivities()
   if (changedActivities.length === 0) {
     success('No changed activities found')
@@ -24,15 +33,24 @@ export async function buildChanged({ kill, bumpCheck }: { kill: boolean, bumpChe
       const path = resolve(process.cwd(), 'websites', folderLetter, sanitazedActivity)
       const versionized = path !== directory
 
-      activitiesToBuild.push({ path: directory, activity: metadata, versionized, kill, bumpCheck, watch: false })
-    } catch {}
+      activitiesToBuild.push({ path: directory, activity: metadata, versionized, kill, checkMetadata, watch: false })
+    }
+    catch {}
   }
 
   if (activitiesToBuild.length === 0) {
     success('No changed activities found')
   }
 
+  let successful = true
   for (const activity of activitiesToBuild) {
-    await buildActivity(activity)
+    const isSuccess = await buildActivity(activity)
+    successful = successful && isSuccess
   }
+
+  if (sarif) {
+    await writeSarifLog()
+  }
+
+  process.exit(successful ? 0 : 1)
 }

@@ -6,9 +6,20 @@ import { getFolderLetter } from '../../util/getFolderLetter.js'
 import { exit } from '../../util/log.js'
 import { mapActivityToChoice } from '../../util/mapActivityToChoice.js'
 import { sanitazeFolderName } from '../../util/sanitazeFolderName.js'
+import { writeSarifLog } from '../../util/sarif.js'
 import { buildActivity } from './buildActivity.js'
 
-export async function buildSingle(activities: ActivityMetadata[], service: string | undefined, { watch, bumpCheck }: { watch: boolean, bumpCheck: boolean }) {
+export async function buildSingle(activities: ActivityMetadata[], service: string | undefined, {
+  watch,
+  checkMetadata,
+  sarif,
+  kill,
+}: {
+  watch: boolean
+  checkMetadata: boolean
+  sarif: boolean
+  kill: boolean
+}) {
   let activity: ActivityMetadata
   let versionized: boolean
   if (!service) {
@@ -49,5 +60,11 @@ export async function buildSingle(activities: ActivityMetadata[], service: strin
   const sanitazedActivity = sanitazeFolderName(activity.service)
   const path = resolve(process.cwd(), 'websites', folderLetter, sanitazedActivity, versionized ? `v${activity.apiVersion}` : '')
 
-  return buildActivity({ path, activity, versionized, watch, bumpCheck, kill: true })
+  const successful = await buildActivity({ path, activity, versionized, watch, checkMetadata, kill })
+
+  if (sarif) {
+    await writeSarifLog()
+  }
+
+  process.exit(successful ? 0 : 1)
 }

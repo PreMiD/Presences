@@ -5,16 +5,21 @@ import chalk from 'chalk'
 import { watch } from 'chokidar'
 import { build } from 'esbuild'
 import ora from 'ora'
+import { compare, inc } from 'semver'
+import { getLine } from '../util/getJsonPosition.js'
 import { error, exit, prefix } from '../util/log.js'
+import { addSarifLog, SarifRuleId } from '../util/sarif.js'
 import { DependenciesManager } from './DependenciesManager.js'
 import { TypescriptCompiler } from './TypescriptCompiler.js'
 import { WebSocketServer } from './WebSocketServer.js'
-import { compare, inc } from 'semver'
 
 export interface ActivityMetadata {
   service: string
   apiVersion: number
   version: string
+  iframe?: boolean
+  iFrameRegExp?: string
+  description: Record<string, string>
 }
 
 export class ActivityCompiler {
@@ -31,19 +36,19 @@ export class ActivityCompiler {
     this.ts = new TypescriptCompiler(cwd, activity)
   }
 
-  async compile({ kill, bumpCheck, preCheck = true }: { kill: boolean, bumpCheck: boolean, preCheck?: boolean }) {
+  async compile({ kill, checkMetadata, preCheck = true }: { kill: boolean, checkMetadata: boolean, preCheck?: boolean }): Promise<boolean> {
     if (preCheck) {
       await this.dependencies.installDependencies()
       const success = await this.ts.typecheck(kill)
       if (!success) {
-        return
+        return false
       }
     }
 
-    if (bumpCheck) {
-      const success = await this.bumpCheck({ kill })
+    if (checkMetadata) {
+      const success = await this.checkMetadata({ kill })
       if (!success) {
-        return
+        return false
       }
     }
 
@@ -75,9 +80,10 @@ export class ActivityCompiler {
     }
 
     spinner.succeed(prefix + chalk.greenBright(` Compiled ${this.activity.service}!`))
+    return true
   }
 
-  async watch({ bumpCheck }: { bumpCheck: boolean }) {
+  async watch({ checkMetadata }: { checkMetadata: boolean }) {
     await this.dependencies.installDependencies()
 
     this.ws = new WebSocketServer(this.cwd)
@@ -89,7 +95,7 @@ export class ActivityCompiler {
       persistent: true,
     }).on('all', async (event, path) => {
       if (['add', 'unlink'].includes(event) && basename(path) === 'iframe.ts') {
-        return this.ts.restart(this.compileAndSend.bind(this, { bumpCheck }))
+        return this.ts.restart(this.compileAndSend.bind(this, { checkMetadata }))
       }
 
       if (basename(path) === 'package.json') {
@@ -113,19 +119,19 @@ export class ActivityCompiler {
           }
         }
 
-        await this.ts.restart(this.compileAndSend.bind(this, { bumpCheck }))
+        await this.ts.restart(this.compileAndSend.bind(this, { checkMetadata }))
       }
     })
 
-    this.ts.watch(this.compileAndSend.bind(this, { bumpCheck }))
+    this.ts.watch(this.compileAndSend.bind(this, { checkMetadata }))
   }
 
-  private async compileAndSend({ bumpCheck }: { bumpCheck: boolean }) {
-    await this.compile({ bumpCheck, preCheck: false, kill: false })
+  private async compileAndSend({ checkMetadata }: { checkMetadata: boolean }) {
+    await this.compile({ checkMetadata, preCheck: false, kill: false })
     await this.ws?.send()
   }
 
-  private async bumpCheck({ kill }: { kill: boolean }): Promise<boolean> {
+  private async checkMetadata({ kill }: { kill: boolean }): Promise<boolean> {
     const metadata: ActivityMetadata = JSON.parse(await readFile(resolve(this.cwd, 'metadata.json'), 'utf-8'))
     const libraryVersion: ActivityMetadata | null = await fetch(`https://api.premid.app/v6/activities${this.versionized ? `/v${metadata.apiVersion}` : ''}/${encodeURIComponent(metadata.service)}/metadata.json`).then(res => res.json()).catch(() => null)
 
@@ -140,6 +146,15 @@ export class ActivityCompiler {
         }
 
         error(message)
+        addSarifLog({
+          path: resolve(this.cwd, 'metadata.json'),
+          message,
+          ruleId: SarifRuleId.bumpCheck,
+          position: {
+            line: await getLine(resolve(this.cwd, 'metadata.json'), 'version'),
+            column: 0,
+          },
+        })
         return false
       }
     }
@@ -152,7 +167,95 @@ export class ActivityCompiler {
       }
 
       error(message)
+      addSarifLog({
+        path: resolve(this.cwd, 'metadata.json'),
+        message,
+        ruleId: SarifRuleId.bumpCheck,
+        position: {
+          line: await getLine(resolve(this.cwd, 'metadata.json'), 'version'),
+          column: 0,
+        },
+      })
       return false
+    }
+
+    if (metadata.iframe && !existsSync(resolve(this.cwd, 'iframe.ts'))) {
+      const message = `Expected iframe.ts to exist for activity ${metadata.service}, as metadata.iframe is true`
+      if (kill) {
+        exit(message)
+      }
+
+      error(message)
+      addSarifLog({
+        path: resolve(this.cwd, 'metadata.json'),
+        message,
+        ruleId: SarifRuleId.iframeCheck,
+        position: {
+          line: await getLine(resolve(this.cwd, 'metadata.json'), 'iframe'),
+          column: 0,
+        },
+      })
+      return false
+    }
+
+    if (!metadata.iframe && existsSync(resolve(this.cwd, 'iframe.ts'))) {
+      const message = `Expected iframe.ts to not exist for activity ${metadata.service}, as metadata.iframe is false`
+      if (kill) {
+        exit(message)
+      }
+
+      error(message)
+      addSarifLog({
+        path: resolve(this.cwd, 'metadata.json'),
+        message,
+        ruleId: SarifRuleId.iframeCheck,
+        position: {
+          line: await getLine(resolve(this.cwd, 'metadata.json'), 'iframe'),
+          column: 0,
+        },
+      })
+      return false
+    }
+
+    if (metadata.iFrameRegExp === '.*') {
+      const message = `iFrameRegExp is not allowed to be .*, as it is a wildcard`
+      if (kill) {
+        exit(message)
+      }
+
+      error(message)
+      addSarifLog({
+        path: resolve(this.cwd, 'metadata.json'),
+        message,
+        ruleId: SarifRuleId.iframeRegexpCheck,
+        position: {
+          line: await getLine(resolve(this.cwd, 'metadata.json'), 'iFrameRegExp'),
+          column: 0,
+        },
+      })
+      return false
+    }
+
+    const allowedLanguages = await fetch('https://api.premid.app/v6/locales').then(res => res.json()).catch(() => [])
+    for (const language of Object.keys(metadata.description)) {
+      if (!allowedLanguages.includes(language)) {
+        const message = `Language ${language} is not a valid language`
+        if (kill) {
+          exit(message)
+        }
+
+        error(message)
+        addSarifLog({
+          path: resolve(this.cwd, 'metadata.json'),
+          message,
+          ruleId: SarifRuleId.languageCheck,
+          position: {
+            line: await getLine(resolve(this.cwd, 'metadata.json'), 'description', language),
+            column: 0,
+          },
+        })
+        return false
+      }
     }
 
     return true

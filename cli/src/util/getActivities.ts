@@ -1,12 +1,13 @@
 import type { ActivityMetadata } from '../classes/ActivityCompiler.js'
+import { execSync } from 'node:child_process'
 import { readFile } from 'node:fs/promises'
 import { dirname } from 'node:path'
+import process from 'node:process'
+import { context, getOctokit } from '@actions/github'
 import { globby } from 'globby'
 import isCI from 'is-ci'
 import multimatch from 'multimatch'
-import { execSync } from 'node:child_process'
 import { exit } from './log.js'
-import { context, getOctokit } from '@actions/github'
 
 export interface ActivityMetadataAndFolder {
   metadata: ActivityMetadata
@@ -62,7 +63,7 @@ async function getChangedFilesCi() {
     base,
     head,
     owner: context.repo.owner,
-    repo: context.repo.repo
+    repo: context.repo.repo,
   })
 
   if (response.status !== 200) {
@@ -73,7 +74,7 @@ async function getChangedFilesCi() {
     exit('The head commit is not ahead of the base commit, rebase and try again')
   }
 
-  return (response.data.files ?? []).map((file) => file.filename)
+  return (response.data.files ?? []).map(file => file.filename)
 }
 
 async function getChangedFilesLocal() {

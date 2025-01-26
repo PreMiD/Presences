@@ -6,6 +6,7 @@ import chalk from 'chalk'
 import ora from 'ora'
 import ts from 'typescript'
 import { error, exit, info, prefix } from '../util/log.js'
+import { addSarifLog, SarifRuleId } from '../util/sarif.js'
 
 export class TypescriptCompiler {
   constructor(
@@ -58,6 +59,15 @@ export class TypescriptCompiler {
           const { line, character } = ts.getLineAndCharacterOfPosition(diagnostic.file, diagnostic.start!)
           const message = ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')
           error(`${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`)
+          addSarifLog({
+            path: diagnostic.file.fileName,
+            message: ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n'),
+            ruleId: SarifRuleId.typeCheck,
+            position: {
+              line,
+              column: character,
+            },
+          })
         }
         else {
           error(ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n'))

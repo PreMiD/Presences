@@ -31,3 +31,6 @@ lerna-debug.log*
 
 # Cache files
 .eslintcache
+
+# SARIF files
+pmd-results.sarif
