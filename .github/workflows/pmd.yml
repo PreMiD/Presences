@@ -8,7 +8,7 @@ on:
 
 jobs:
   pmd:
-    name: Run compile, and metadata check
+    name: Validate metadata and build
     runs-on: ubuntu-latest
     permissions:
       contents: read

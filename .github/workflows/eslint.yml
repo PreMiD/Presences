@@ -8,7 +8,7 @@ on:
 
 jobs:
   eslint:
-    name: Run eslint scanning
+    name: Validate linting
     runs-on: ubuntu-latest
     permissions:
       contents: read
