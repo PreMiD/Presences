@@ -26,9 +26,9 @@ presence.on("UpdateData", async () => {
 
 				// Show word count for messages
 				const questions = document.querySelectorAll("p.query-text-line"),
-				 answers = document.querySelectorAll(
-					"message-content.model-response-text"
-				);
+					answers = document.querySelectorAll(
+						"message-content.model-response-text"
+					);
 
 				// Loop through all response messages, to count the total words
 				let askedWords = 0;
@@ -40,9 +40,7 @@ presence.on("UpdateData", async () => {
 					answeredWords += x.textContent.split(" ").length;
 
 				presenceData.state = `Asked ${askedWords} words | answered with ${answeredWords} words.`;
-			} else
-				presenceData.details = "Asking questions";
-
+			} else presenceData.details = "Asking questions";
 
 			break;
 		case pathname.startsWith("/extensions"):
