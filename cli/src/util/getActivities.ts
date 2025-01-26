@@ -59,22 +59,37 @@ async function getChangedFilesCi() {
   }
 
   const client = getOctokit(process.env.GITHUB_TOKEN)
-  const response = await client.rest.repos.compareCommits({
-    base,
-    head,
-    owner: context.repo.owner,
-    repo: context.repo.repo,
-  })
+  const allFiles: string[] = []
+  let page = 1
 
-  if (response.status !== 200) {
-    exit(`Failed to get changed files, status: ${response.status}`)
+  //* Keep fetching pages until we get a response with fewer items than the per_page limit
+  while (true) {
+    const response = await client.rest.repos.compareCommits({
+      base,
+      head,
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      per_page: 100,
+      page,
+    })
+
+    if (response.status !== 200) {
+      exit(`Failed to get changed files, status: ${response.status}`)
+    }
+
+    if (response.data.status !== 'ahead') {
+      exit('The head commit is not ahead of the base commit, rebase and try again')
+    }
+
+    const files = response.data.files ?? []
+    allFiles.push(...files.map(file => file.filename))
+
+    if (files.length < 100)
+      break
+    page++
   }
 
-  if (response.data.status !== 'ahead') {
-    exit('The head commit is not ahead of the base commit, rebase and try again')
-  }
-
-  return (response.data.files ?? []).map(file => file.filename)
+  return allFiles
 }
 
 async function getChangedFilesLocal() {
