@@ -30,7 +30,7 @@ export async function getActivities(): Promise<ActivityMetadataAndFolder[]> {
   })
 }
 
-export async function getChangedActivities() {
+export async function getChangedActivities(): Promise<ActivityMetadataAndFolder[]> {
   const changedFiles = (isCI ? await getChangedFilesCi() : await getChangedFilesLocal()).map(file => resolve(process.cwd(), decodeUtf8Escapes(file)))
   const activityPaths = new Set<string>()
 
@@ -56,7 +56,10 @@ export async function getChangedActivities() {
     activityPaths.add(path)
   }
 
-  return Array.from(activityPaths)
+  return (await Promise.all(Array.from(activityPaths).map(async (folder): Promise<ActivityMetadataAndFolder> => ({
+    metadata: JSON.parse(await readFile(resolve(folder, 'metadata.json'), 'utf-8')),
+    folder,
+  }))))
 }
 
 async function getChangedFilesCi() {

@@ -1,13 +1,13 @@
-import type { ActivityMetadataAndFolder } from '../../util/getActivities'
 import { resolve } from 'node:path'
 import process from 'node:process'
+import { getActivities } from '../../util/getActivities.js'
 import { getFolderLetter } from '../../util/getFolderLetter.js'
 import { info } from '../../util/log.js'
 import { sanitazeFolderName } from '../../util/sanitazeFolderName.js'
 import { writeSarifLog } from '../../util/sarif.js'
 import { buildActivity } from './buildActivity.js'
 
-export async function buildAll(activities: ActivityMetadataAndFolder[], {
+export async function buildAll({
   kill,
   checkMetadata,
   sarif,
@@ -16,6 +16,8 @@ export async function buildAll(activities: ActivityMetadataAndFolder[], {
   checkMetadata: boolean
   sarif: boolean
 }) {
+  const activities = await getActivities()
+
   info(`Building ${activities.length} activities...`)
 
   let success = true

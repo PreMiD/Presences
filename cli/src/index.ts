@@ -3,6 +3,7 @@
 import { readFile } from 'node:fs/promises'
 import { cac } from 'cac'
 import { build } from './commands/build.js'
+import { bump } from './commands/bump.js'
 import { newActivity } from './commands/new.js'
 import { getPackageJson } from './util/getPackageJson.js'
 import { exit } from './util/log.js'
@@ -35,6 +36,12 @@ cli
   .option('--check-metadata', 'Check if the metadata is valid')
   .option('--sarif', 'Output the result in SARIF format (Doesn\'t work with --kill)')
   .action((service, options) => build(service, options))
+
+cli
+  .command('bump [activity] [version]', 'Bump an activity')
+  .option('-all', 'Bump all activities')
+  .option('-changed', 'Bump only changed activities')
+  .action((service, version, options) => bump(service, version, options))
 
 cli.help()
 cli.version(cliPackageJson.version)
