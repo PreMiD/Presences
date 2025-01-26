@@ -28,6 +28,8 @@ jobs:
 
       - name: Run PMD
         run: npx pmd build --changed --no-kill --check-metadata --sarif
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true
 
       - name: Upload analysis results to GitHub
