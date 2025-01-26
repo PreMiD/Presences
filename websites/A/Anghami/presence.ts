@@ -19,6 +19,9 @@ function updateLogo() {
 				return url;
 			}
 		}
+	} else{
+		let url = "https://cdn.rcd.gg/PreMiD/websites/A/Anghami/assets/logo.png";
+		return url;
 	}
 }
 
