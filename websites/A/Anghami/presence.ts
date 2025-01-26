@@ -20,7 +20,7 @@ function updateLogo() {
 			}
 		}
 	} else {
-		let url = "https://cdn.rcd.gg/PreMiD/websites/A/Anghami/assets/logo.png";
+		const url = "https://cdn.rcd.gg/PreMiD/websites/A/Anghami/assets/logo.png";
 		return url;
 	}
 }
