@@ -7,7 +7,7 @@ import { context, getOctokit } from '@actions/github'
 import { globby } from 'globby'
 import isCI from 'is-ci'
 import multimatch from 'multimatch'
-import { exit } from './log.js'
+import { exit, info } from './log.js'
 
 export interface ActivityMetadataAndFolder {
   metadata: ActivityMetadata
@@ -57,6 +57,8 @@ async function getChangedFilesCi() {
   if (!base || !head) {
     exit('No base or head found')
   }
+
+  info(`Getting changed files from ${base} to ${head}`)
 
   const client = getOctokit(process.env.GITHUB_TOKEN)
   const allFiles: string[] = []
