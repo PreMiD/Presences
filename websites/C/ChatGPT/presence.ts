@@ -72,9 +72,9 @@ presence.on("UpdateData", async () => {
 					.replace(
 						"{0}",
 						`${Number(
-							document.querySelectorAll('[data-message-author-role="user"]').length
-							)
-						}`
+							document.querySelectorAll('[data-message-author-role="user"]')
+								.length
+						)}`
 					)
 					.replace("{1}", `${wordCount}`);
 		presenceData.smallImageKey = isTalking ? Assets.Talking : null;
