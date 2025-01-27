@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://i.imgur.com/zu43jYo.png",
+			largeImageKey:
+				"https://cdn.rcd.gg/PreMiD/websites/K/kisskh/assets/logo.png",
 			details: "Browsing",
 			type: ActivityType.Watching,
 			startTimestamp,
