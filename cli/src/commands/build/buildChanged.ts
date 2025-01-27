@@ -1,9 +1,7 @@
-import { resolve } from 'node:path'
 import process from 'node:process'
+import multimatch from 'multimatch'
 import { getChangedActivities } from '../../util/getActivities.js'
-import { getFolderLetter } from '../../util/getFolderLetter.js'
 import { info, success } from '../../util/log.js'
-import { sanitazeFolderName } from '../../util/sanitazeFolderName.js'
 import { writeSarifLog } from '../../util/sarif.js'
 import { buildActivity } from './buildActivity.js'
 
@@ -25,10 +23,7 @@ export async function buildChanged({
 
   let successful = true
   for (const activity of changedActivities) {
-    const folderLetter = getFolderLetter(activity.metadata.service)
-    const sanitazedActivity = sanitazeFolderName(activity.metadata.service)
-    const path = resolve(process.cwd(), 'websites', folderLetter, sanitazedActivity)
-    const versionized = path !== activity.folder
+    const versionized = multimatch(activity.folder, '**/websites/*/*/v*').length > 0
 
     const isSuccess = await buildActivity({ path: activity.folder, activity: activity.metadata, versionized, kill, checkMetadata, watch: false })
     successful = successful && isSuccess

@@ -1,13 +1,13 @@
 import type { ChoiceOrSeparatorArray } from 'inquirer-autocomplete-standalone'
-import type { ActivityMetadata } from '../classes/ActivityCompiler'
+import type { ActivityMetadataAndFolder } from './getActivities.js'
+import multimatch from 'multimatch'
 
-export function mapActivityToChoice(activity: ActivityMetadata, activities: ActivityMetadata[]): ChoiceOrSeparatorArray<{
-  activity: ActivityMetadata
+export function mapActivityToChoice(activity: ActivityMetadataAndFolder): ChoiceOrSeparatorArray<ActivityMetadataAndFolder & {
   versionized: boolean
 }>[number] {
-  const isVersionized = activities.filter(a => a.service === activity.service).length > 1
+  const versionized = multimatch(activity.folder, '**/websites/*/*/v*').length > 0
   return {
-    value: { activity, versionized: isVersionized },
-    name: `${activity.service}${isVersionized ? ` (APIv${activity.apiVersion})` : ''}`,
+    value: { ...activity, versionized },
+    name: `${activity.metadata.service}${versionized ? ` (APIv${activity.metadata.apiVersion})` : ''}`,
   }
 }
