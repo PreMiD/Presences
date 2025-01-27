@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"id": "223277933521928203",
@@ -8,10 +8,10 @@
 	"service": "TVer",
 	"description": {
 		"en": "TVer is a Japanese ad-supported video on demand (AVOD) service. It allows viewers to watch TV programs they missed during their initial broadcast for free for one week.",
-		"ja_JP": "TVer（ティーバー）は国内最大級の見逃し無料配信動画サービスです。ドラマ、バラエティ、アニメ、報道・ドキュメンタリー、スポーツなど人気番組を毎週750番組以上見放題！"
+		"ja": "TVer（ティーバー）は国内最大級の見逃し無料配信動画サービスです。ドラマ、バラエティ、アニメ、報道・ドキュメンタリー、スポーツなど人気番組を毎週750番組以上見放題！"
 	},
 	"url": "tver.jp",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/TVer/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TVer/assets/thumbnail.png",
 	"color": "#21ABE6",

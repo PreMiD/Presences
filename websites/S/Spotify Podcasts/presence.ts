@@ -215,8 +215,10 @@ presence.on("UpdateData", async () => {
 			":is(a[data-testid=cover-art-link], a[data-testid=context-link])"
 		);
 
-	for (const [path, data] of Object.entries(pages))
-		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
+	for (const [path, data] of Object.entries(pages)) {
+		if (pathname.includes(path))
+			presenceData = { ...presenceData, ...data } as PresenceData;
+	}
 
 	let searching = false;
 
