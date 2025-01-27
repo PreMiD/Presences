@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "Bas950",
@@ -9,7 +9,7 @@
 	"description": {
 		"en": "Rocket League® combines soccer with driving in an unbelievable physics-based multiplayer-focused sequel to Supersonic Acrobatic Rocket-Powered Battle-Cars!",
 		"nl": "Rocket League® combineert voetbal met autorijden in een ongelooflijk op physics gebaseerd multiplayer-gericht vervolg op Supersonic Acrobatische Rocket-Powered Battle-Cars!",
-		"zh_CN": "RocketLeague®将足球与驾驶结合在一起，成为超音速杂技火箭动力战车不可思议的基于物理学的多人游戏！"
+		"zh": "RocketLeague®将足球与驾驶结合在一起，成为超音速杂技火箭动力战车不可思议的基于物理学的多人游戏！"
 	},
 	"url": [
 		"www.rocketleague.com",

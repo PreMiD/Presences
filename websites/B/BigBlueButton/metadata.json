@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "Oranż Metylowy",
@@ -9,7 +9,7 @@
 	"description": {
 		"en": "BigBlueButton online learning platform",
 		"nl": "BigBlueButton is een online leerplatform",
-		"vi_VN": "BigBlueButton là nền tảng học tập trực tuyến"
+		"vi": "BigBlueButton là nền tảng học tập trực tuyến"
 	},
 	"url": [
 		"demo.bigbluebutton.org",

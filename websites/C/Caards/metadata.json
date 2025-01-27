@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "Anaxes",
@@ -8,7 +8,7 @@
 	"service": "Caards",
 	"description": {
 		"en": "Get people to know you. Now.",
-		"vi_VN": "Để mọi người biết đến bạn. Ngay bây giờ."
+		"vi": "Để mọi người biết đến bạn. Ngay bây giờ."
 	},
 	"url": [
 		"www.caards.me",

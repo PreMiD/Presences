@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "GURRMAN375D",
@@ -9,7 +9,7 @@
 	"description": {
 		"en": "GitLab is a project management and code versioning system as well as a social network platform made for developers.",
 		"nl": "GitLab is a project management and code versioning system as well as a social network platform made for developers.",
-		"vi_VN": "GitLab là hệ thống quản lý mã và dự án cũng như là nền tảng mạng xã hội dành cho các nhà phát triển."
+		"vi": "GitLab là hệ thống quản lý mã và dự án cũng như là nền tảng mạng xã hội dành cho các nhà phát triển."
 	},
 	"url": "gitlab.com",
 	"regExp": "([a-z0-9-]+[.])*gitlab[.]com[/]",

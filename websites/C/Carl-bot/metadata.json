@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "NMW03",
@@ -9,7 +9,7 @@
 	"description": {
 		"en": "A fully customizable and modular discord bot featuring reaction roles, automod, logging, custom commands and much more.",
 		"nl": "Een volledig aanpasbare en modulaire discord-bot met reactierollen, automod, logboekregistratie, aangepaste opdrachten en nog veel meer.",
-		"vi_VN": "Một Discord bot có thể tuỳ chỉnh cung cấp nhận thẻ vai trò qua việc tương tác, ghi chú, lệnh tuỳ chỉnh và hơn nữa."
+		"vi": "Một Discord bot có thể tuỳ chỉnh cung cấp nhận thẻ vai trò qua việc tương tác, ghi chú, lệnh tuỳ chỉnh và hơn nữa."
 	},
 	"url": [
 		"carl.gg",

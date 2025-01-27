@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "Bas950",
@@ -9,7 +9,7 @@
 	"description": {
 		"en": "Watch your favorite shows whenever you want in SVT Play - free television online.",
 		"nl": "Bekijk uw favoriete programma's wanneer u maar wilt in SVT Play - gratis televisie online.",
-		"sv_SE": "Se dina favoritprogram när du vill i SVT Play - fri television på nätet."
+		"sv": "Se dina favoritprogram när du vill i SVT Play - fri television på nätet."
 	},
 	"url": "www.svtplay.se",
 	"version": "1.2.28",

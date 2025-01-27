@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "Mirax",
@@ -8,7 +8,7 @@
 	"service": "Vanis.io",
 	"description": {
 		"en": "Vanis.io a free multiplayer game.",
-		"ga_IE": "Vanis.io cluiche ilimreora saor in aisce.",
+		"ga": "Vanis.io cluiche ilimreora saor in aisce.",
 		"nl": "Vanis.io een gratis spel voor meerdere spelers."
 	},
 	"url": [

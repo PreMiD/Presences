@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "Hans5958",
@@ -8,7 +8,7 @@
 	"service": "Wikiwand",
 	"description": {
 		"en": "Wikiwand is a modern reader for web and mobile, that optimizes Wikipedia's amazing content for a significantly improved reading experience.",
-		"ga_IE": "Is léitheoir nua-aimseartha é Wikiwand don ngréasán agus don fhón póca, a uasmhéadaíonn ábhar iontach Wikipedia go suntasach",
+		"ga": "Is léitheoir nua-aimseartha é Wikiwand don ngréasán agus don fhón póca, a uasmhéadaíonn ábhar iontach Wikipedia go suntasach",
 		"nl": "Wikiwand is een moderne reader voor web en mobiel, die de geweldige inhoud van Wikipedia optimaliseert voor een aanzienlijk verbeterde leeservaring."
 	},
 	"url": "www.wikiwand.com",

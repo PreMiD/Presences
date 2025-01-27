@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"id": "354233941550694400",
@@ -10,9 +10,9 @@
 		"en": "Your trusted source for video game news, reviews and guides, since 1999.",
 		"de": "Eurogamer.de berichtet über PC- und Videospiele mit aktuellen News und Tests, Kommentaren, Tipps und Reportagen.",
 		"pt": "Eurogamer.pt é o maior website nacional sobre videojogos pertencente à maior rede europeia, Gamer Network.",
-		"pt_BR": "Eurogamer.pt é o maior website nacional sobre videojogos pertencente à maior rede europeia, Gamer Network.",
+		"pt-br": "Eurogamer.pt é o maior website nacional sobre videojogos pertencente à maior rede europeia, Gamer Network.",
 		"nl": "Eurogamer.nl is de grootste nationale website over videogames van het grootste Europese netwerk, Gamer Network.",
-		"cs_CZ": "Eurogamer.cz je největší národní web o videohrách patřících do největší evropské sítě Gamer Network.",
+		"cs": "Eurogamer.cz je největší národní web o videohrách patřících do největší evropské sítě Gamer Network.",
 		"es": "Eurogamer.es es el sitio web nacional más grande sobre videojuegos que pertenecen a la red europea más grande, Gamer Network.",
 		"pl": "Eurogamer.pl to największa krajowa strona internetowa o grach wideo należących do największej sieci europejskiej, Gamer Network."
 	},

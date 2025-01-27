@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "Bas950",
@@ -9,7 +9,7 @@
 	"description": {
 		"en": "Discover amazing music and directly support the artists who make it.",
 		"nl": "Ontdek geweldige muziek en ondersteun direct de artiesten die het maken.",
-		"vi_VN": "Khám phá những bản nhạc tuyệt vời và ủng hộ trực tiếp các nghệ sĩ đã làm ra nó."
+		"vi": "Khám phá những bản nhạc tuyệt vời và ủng hộ trực tiếp các nghệ sĩ đã làm ra nó."
 	},
 	"url": "bandcamp.com",
 	"regExp": "([a-z0-9-]+[.])*bandcamp([.][a-z]+)+[/]",

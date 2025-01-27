@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "Drakonir",
@@ -10,7 +10,7 @@
 		"de": "Die Anime Community mit hunderten Anime als Livestream.",
 		"en": "The Anime Community with hundreds of Anime livestreams.",
 		"nl": "De Anime community met honderden Anime livestreams.",
-		"vi_VN": "Cộng đồng Anime với hàng trăm bản Anime được phát trực tuyến."
+		"vi": "Cộng đồng Anime với hàng trăm bản Anime được phát trực tuyến."
 	},
 	"url": "anime-tube.tv",
 	"version": "1.0.26",

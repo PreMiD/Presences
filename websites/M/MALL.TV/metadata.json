@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "DanielKrasny",
@@ -8,7 +8,7 @@
 	"service": "MALL.TV",
 	"description": {
 		"en": "MALL.TV offers its own series, shows, selected films and many famous faces in one place.",
-		"cs_CZ": "Internetová televize MALL.TV nabízí vlastní seriály, pořady, výběrové filmy a spoustu známých tváří. Sledujte nás. MALL.TV. Pořád je co objevovat.",
+		"cs": "Internetová televize MALL.TV nabízí vlastní seriály, pořady, výběrové filmy a spoustu známých tváří. Sledujte nás. MALL.TV. Pořád je co objevovat.",
 		"sk": "Internetová televízia MALL.TV ponúka vlastné seriály, relácie a kopec známých tvárí na jednom mieste. Sledujte nás. MALL.TV. Vždy je čo objavovať.",
 		"nl": "MALL.TV biedt zijn eigen series, shows, geselecteerde films en vele bekende gezichten op één plek."
 	},

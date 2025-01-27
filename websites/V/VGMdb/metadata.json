@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "Kyrie",
@@ -8,7 +8,7 @@
 	"service": "VGMdb",
 	"description": {
 		"en": "VGMdb is a community project dedicated to cataloging the music of visual arts and video games.",
-		"vi_VN": "VGMdb là dự án cộng đồng dành riêng cho việc lưu trữ âm nhạc và tranh ảnh của trò chơi điện tử."
+		"vi": "VGMdb là dự án cộng đồng dành riêng cho việc lưu trữ âm nhạc và tranh ảnh của trò chơi điện tử."
 	},
 	"url": "vgmdb.net",
 	"version": "1.0.17",

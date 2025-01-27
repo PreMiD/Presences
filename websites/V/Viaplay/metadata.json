@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "manish",
@@ -8,7 +8,7 @@
 	"service": "Viaplay",
 	"description": {
 		"en": "Stream TV, comics, movies and sports online!",
-		"ga_IE": "Sruthán teilifíse, greannáin, scannáin agus spóirt ar líne!",
+		"ga": "Sruthán teilifíse, greannáin, scannáin agus spóirt ar líne!",
 		"nl": "Stream tv, strips, films en sport online!"
 	},
 	"url": [

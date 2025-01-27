@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "Kyrie",
@@ -8,7 +8,7 @@
 	"service": "TwitCasting",
 	"description": {
 		"en": "TwitCasting is a live streaming community on App and PC.  Join us and share what you love, what you are playing, your moment. Or watch what other people are doing in the instance. You can also stream the entire screen of your mobile phone so viewers can see what you are playing.",
-		"ja_JP": "モイ！ツイキャスはライブ配信を通して世界中の人とコミュニケーションする場を提供しています。 雑談、ラジオ配信、ゲーム配信、アニメ、ガールズ、ボーイズ、ミュージックなど色々なカテゴリのライブが配信中！スマホやPCから誰でも簡単に配信が始められます。"
+		"ja": "モイ！ツイキャスはライブ配信を通して世界中の人とコミュニケーションする場を提供しています。 雑談、ラジオ配信、ゲーム配信、アニメ、ガールズ、ボーイズ、ミュージックなど色々なカテゴリのライブが配信中！スマホやPCから誰でも簡単に配信が始められます。"
 	},
 	"url": "twitcasting.tv",
 	"regExp": "([a-z0-9]+[.])?twitcasting[.]tv",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "Bas1C",
@@ -9,9 +9,9 @@
 	"description": {
 		"tr": "AniTürk online anime izleme sitesidir.",
 		"en": "AniTurk is an online anime viewing site.",
-		"ga_IE": "Is suíomh féachana anime ar líne é AniTurk.",
+		"ga": "Is suíomh féachana anime ar líne é AniTurk.",
 		"nl": "AniTurk is een online site voor het bekijken van anime.",
-		"vi_VN": "AniTürk là trang web xem anime trực tuyến."
+		"vi": "AniTürk là trang web xem anime trực tuyến."
 	},
 	"url": [
 		"www.aniturk.net",

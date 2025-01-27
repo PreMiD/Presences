@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "Kyrie",
@@ -8,7 +8,7 @@
 	"service": "Outlook",
 	"description": {
 		"en": "Outlook.com is a personal information manager web app from Microsoft consisting of webmail, calendaring, contacts, and tasks services.",
-		"vi_VN": "Outlook.com là ứng dụng quản lý thông tin cá nhân của Microsoft bao gồm thư điện tử, quản lý lịch, danh bạ và các nhiệm vụ."
+		"vi": "Outlook.com là ứng dụng quản lý thông tin cá nhân của Microsoft bao gồm thư điện tử, quản lý lịch, danh bạ và các nhiệm vụ."
 	},
 	"url": "outlook.live.com",
 	"version": "1.0.14",

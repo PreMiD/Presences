@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"id": "223277933521928203",
@@ -8,7 +8,7 @@
 	"service": "ABEMA",
 	"description": {
 		"en": "ABEMA is a video distribution business that aims to innovate television and develops it as a “new future television”. No registration is required, and about 20 channels in a variety of genres are broadcast 24 hours a day, 365 days a year, including the only 24-hour news channel in Japan, as well as original dramas, romance programs, anime, and sports.",
-		"ja_JP": "ABEMAは好きな時間に好きな場所で話題の動画を無料で楽しめる新しい未来のテレビ。ニュースや恋愛番組、アニメ、スポーツなど、多彩な番組をお楽しみいただけます。"
+		"ja": "ABEMAは好きな時間に好きな場所で話題の動画を無料で楽しめる新しい未来のテレビ。ニュースや恋愛番組、アニメ、スポーツなど、多彩な番組をお楽しみいただけます。"
 	},
 	"url": "abema.tv",
 	"version": "1.0.9",

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "madmendes",
@@ -14,7 +14,7 @@
 	"service": "Alura",
 	"description": {
 		"en": "The largest online technology school in Brazil.",
-		"pt_BR": "A maior escola online de tecnologia do Brasil."
+		"pt-br": "A maior escola online de tecnologia do Brasil."
 	},
 	"url": "www.alura.com.br",
 	"regExp": "([a-z0-9]+)[.]alura.com.br",

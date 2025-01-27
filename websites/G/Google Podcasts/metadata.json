@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "MrBartusek",
@@ -10,7 +10,7 @@
 		"en": "With Google Podcasts, you can find and listen to the world's podcasts for free",
 		"pl": "Z Google Podcasts, możesz odkrywac i słuchać podcasty za darmo",
 		"nl": "Met Google Podcasts kunt u gratis podcasts van over de hele wereld zoeken en beluisteren",
-		"vi_VN": "Với Google Podcasts, bạn có thể tìm và lắng nghe các bản podcast trên thế giới miễn phí."
+		"vi": "Với Google Podcasts, bạn có thể tìm và lắng nghe các bản podcast trên thế giới miễn phí."
 	},
 	"url": "podcasts.google.com",
 	"version": "1.1.14",

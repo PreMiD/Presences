@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "fror",
@@ -8,7 +8,7 @@
 	"service": "Nyaa.si",
 	"description": {
 		"en": "Nyaa.si is a BitTorrent website focused on East Asian media.",
-		"pt_BR": "Nyaa.si é um indexador público de BitTorrent focado em contéudo do Leste Asiático.",
+		"pt-br": "Nyaa.si é um indexador público de BitTorrent focado em contéudo do Leste Asiático.",
 		"nl": "Nyaa.si is een BitTorrent-website gericht op Oost-Aziatische media."
 	},
 	"url": [

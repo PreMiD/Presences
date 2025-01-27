@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "eaz",
@@ -8,7 +8,7 @@
 	"service": "WIRED",
 	"description": {
 		"en": "An American science and technology magazine and website.",
-		"ga_IE": "Iris agus suíomh Gréasáin eolaíochta agus teicneolaíochta Mheiriceá.",
+		"ga": "Iris agus suíomh Gréasáin eolaíochta agus teicneolaíochta Mheiriceá.",
 		"nl": "Een Amerikaans tijdschrift over wetenschap en technologie en een website."
 	},
 	"url": "www.wired.com",
