@@ -17,9 +17,9 @@ let oldLang: string = null,
 
 const enum Assets {
 	Talking = "https://cdn.rcd.gg/PreMiD/websites/C/ChatGPT/assets/0.png",
-	Logo = "https://i.imgur.com/24lgju4.png",
-	Dark = "https://i.imgur.com/NuNjxsu.png",
-	Old = "https://i.imgur.com/YW25Euf.png",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/C/ChatGPT/assets/logo.png",
+	Dark = "https://cdn.rcd.gg/PreMiD/websites/C/ChatGPT/assets/1.png",
+	Old = "https://cdn.rcd.gg/PreMiD/websites/C/ChatGPT/assets/2.png",
 }
 
 presence.on("UpdateData", async () => {
