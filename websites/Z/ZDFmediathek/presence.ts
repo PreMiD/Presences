@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/Z/ZDFmediathek/assets/logo.png",
-		},
+		} as PresenceData,
 		video = document.querySelector<HTMLVideoElement>(
 			"div.zdfplayer-video-container video"
 		);
