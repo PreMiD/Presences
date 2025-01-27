@@ -18,7 +18,7 @@ const presence = new Presence({
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-	Logo = "https://i.imgur.com/RNFFxad.jpeg",
+	Logo = "https://cdn.rcd.gg/PreMiD/websites/P/Pi%20Fansubs/assets/logo.jpeg",
 }
 
 let iFrameVideo: boolean, currentTime: number, duration: number;
