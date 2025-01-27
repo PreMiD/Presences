@@ -1,6 +1,6 @@
 import { existsSync } from 'node:fs'
 import { cp, readFile, rm } from 'node:fs/promises'
-import { basename, resolve } from 'node:path'
+import { basename, dirname, resolve } from 'node:path'
 import chalk from 'chalk'
 import { watch } from 'chokidar'
 import { build } from 'esbuild'
@@ -8,6 +8,7 @@ import ora from 'ora'
 import { compare, inc } from 'semver'
 import { getLine } from '../util/getJsonPosition.js'
 import { error, exit, prefix } from '../util/log.js'
+import { sanitazeFolderName } from '../util/sanitazeFolderName.js'
 import { addSarifLog, SarifRuleId } from '../util/sarif.js'
 import { DependenciesManager } from './DependenciesManager.js'
 import { TypescriptCompiler } from './TypescriptCompiler.js'
@@ -135,7 +136,35 @@ export class ActivityCompiler {
     const metadata: ActivityMetadata = JSON.parse(await readFile(resolve(this.cwd, 'metadata.json'), 'utf-8'))
     const libraryVersion: ActivityMetadata | null = await fetch(`https://api.premid.app/v6/activities${this.versionized ? `/v${metadata.apiVersion}` : ''}/${encodeURIComponent(metadata.service)}/metadata.json`).then(res => res.json()).catch(() => null)
 
+    let serviceFolder: string
+    if (this.versionized) {
+      serviceFolder = basename(dirname(this.cwd))
+    }
+    else {
+      serviceFolder = basename(this.cwd)
+    }
+
     let valid = true
+
+    if (serviceFolder !== sanitazeFolderName(metadata.service)) {
+      const message = `Expected service folder to be ${sanitazeFolderName(metadata.service)}, but got ${serviceFolder}`
+      if (kill) {
+        exit(message)
+      }
+
+      error(message)
+      addSarifLog({
+        path: resolve(this.cwd, 'metadata.json'),
+        message,
+        ruleId: SarifRuleId.serviceFolderCheck,
+        position: {
+          line: await getLine(resolve(this.cwd, 'metadata.json'), 'service'),
+          column: 0,
+        },
+      })
+      valid = false
+    }
+
     if (!libraryVersion) {
       if (metadata.version === '1.0.0') {
         return true

@@ -10,6 +10,7 @@ export enum SarifRuleId {
   iframeCheck = 'iframe-check',
   iframeRegexpCheck = 'iframe-regexp-check',
   languageCheck = 'language-check',
+  serviceFolderCheck = 'service-folder-check',
 }
 
 const sarifRules: Record<SarifRuleId, ReportingDescriptor> = {
@@ -46,6 +47,13 @@ const sarifRules: Record<SarifRuleId, ReportingDescriptor> = {
     name: 'Language Check',
     shortDescription: {
       text: 'Makes sure the `language` metadata property is correct',
+    },
+  },
+  [SarifRuleId.serviceFolderCheck]: {
+    id: SarifRuleId.serviceFolderCheck,
+    name: 'Service Folder Check',
+    shortDescription: {
+      text: 'Makes sure the service folder is correct',
     },
   },
 }
