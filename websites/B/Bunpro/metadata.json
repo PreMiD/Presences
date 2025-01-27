@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "JulianCDC",
@@ -18,9 +18,9 @@
   "description": {
     "en": "Bunpro is a japanese grammar learning application.",
     "fr": "Bunpro est une application d'apprentissage de la grammaire japonaise.",
-    "ja_JP": "Bunproは日本語の文法学ぶアプリ",
+    "ja": "Bunproは日本語の文法学ぶアプリ",
     "nl": "Bunpro is een japanse grammatica leer applicatie.",
-    "vi_VN": "Bunpro là phần mềm dạy ngữ pháp Tiếng Nhật."
+    "vi": "Bunpro là phần mềm dạy ngữ pháp Tiếng Nhật."
   },
   "url": [
     "www.bunpro.jp",

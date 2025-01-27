@@ -1,7 +1,7 @@
 export function getFolderLetter(activity: string) {
-  const firstLetter = activity.trim().charAt(0)
+  const firstLetter = activity.trim().charAt(0).toUpperCase()
 
-  if (/[a-z]/i.test(firstLetter))
+  if (/[A-Z]/.test(firstLetter))
     return firstLetter
   if (/\d/.test(firstLetter))
     return '0-9'

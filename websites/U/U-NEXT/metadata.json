@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "KohnoseLami",
@@ -12,7 +12,7 @@
   ],
   "description": {
     "en": "U-NEXT, operated by U-NEXT Corporation, a subsidiary of U-NEXT HOLDINGS, is a leading Japanese streaming platform offering over-the-top (OTT) content. As of May 2024, it boasts approximately 4.34 million paying subscribers, making it the largest homegrown video-on-demand (VOD) service in Japan.",
-    "ja_JP": "U-NEXTは、U-NEXT HOLDINGS子会社の株式会社U-NEXTが運営する、日本のOTTコンテンツ・プラットフォーム。有料会員数は2024年5月時点で約434万人で、国産のVODサービスとしては最大手。"
+    "ja": "U-NEXTは、U-NEXT HOLDINGS子会社の株式会社U-NEXTが運営する、日本のOTTコンテンツ・プラットフォーム。有料会員数は2024年5月時点で約434万人で、国産のVODサービスとしては最大手。"
   },
   "url": [
     "video.unext.jp",

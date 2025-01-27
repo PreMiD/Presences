@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "Striker",
@@ -8,7 +8,7 @@
   "service": "Yandex.Translate",
   "description": {
     "en": "Yandex's free service instantly translates words, phrases, and web pages between English and 98 other languages!",
-    "ga_IE": "Aistríonn seirbhís saor in aisce Yandex focail, frásaí agus leathanaigh ghréasáin láithreach idir Béarla agus 98 teanga eile!",
+    "ga": "Aistríonn seirbhís saor in aisce Yandex focail, frásaí agus leathanaigh ghréasáin láithreach idir Béarla agus 98 teanga eile!",
     "nl": "De gratis service van Yandex vertaalt onmiddellijk woorden, zinnen en webpagina's tussen het Engels en 98 andere talen!"
   },
   "url": [

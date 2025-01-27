@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "TheDrop.",
@@ -9,9 +9,9 @@
   "description": {
     "en": "Stack Overflow is an open community for anyone that codes. It helps you to get answers to your toughest coding questions, share knowledge with your coworkers in private, and find your next dream job.",
     "nl": "Stack Overflow is een open community voor iedereen die codeert. Het helpt je om antwoorden op je moeilijkste codeervragen te krijgen, kennis met je collega's privé te delen en je volgende droombaan te vinden.",
-    "pt_BR": "Stack Overflow é uma comunidade aberta para programadores. Ele te ajuda a conseguir respostas para suas mais difíceis perguntas, compartilhar conhecimento com seus colegas de trabalho em particular, e encontrar seu próximo emprego dos sonhos.",
+    "pt-br": "Stack Overflow é uma comunidade aberta para programadores. Ele te ajuda a conseguir respostas para suas mais difíceis perguntas, compartilhar conhecimento com seus colegas de trabalho em particular, e encontrar seu próximo emprego dos sonhos.",
     "ro": "Stack Overflow este o comunitate deschisă pentru oricine care programează. Te ajută să găsești răspunsuri la cele mai grele întrebări despre programare, împărtășește-ți cunoștințele cu colegii tăi în privat și găsește-ți următorul loc de muncă mult dorit.",
-    "uk_UA": "Stack Overflow — це відкрита спільнота для всіх, хто кодує. Це допомагає вам отримати відповіді на ваші найскладніші запитання з кодування, ділитися знаннями з колегами приватно і знайти наступну роботу мрії."
+    "uk": "Stack Overflow — це відкрита спільнота для всіх, хто кодує. Це допомагає вам отримати відповіді на ваші найскладніші запитання з кодування, ділитися знаннями з колегами приватно і знайти наступну роботу мрії."
   },
   "url": "stackoverflow.com",
   "version": "2.4.10",

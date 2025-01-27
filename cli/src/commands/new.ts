@@ -109,7 +109,7 @@ export async function newActivity(activity?: string) {
   ]).catch(() => exit('Something went wrong.'))
 
   const metadata = {
-    $schema: 'https://schemas.premid.app/metadata/1.12',
+    $schema: 'https://schemas.premid.app/metadata/1.13',
     apiVersion: 1,
     author,
     service: activity,

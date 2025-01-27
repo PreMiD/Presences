@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "Morrays",
@@ -19,7 +19,7 @@
   "description": {
     "en": "Japanese role playing game",
     "nl": "Japans rollenspel",
-    "vi_VN": "Trò chơi đóng vai Nhật Bản"
+    "vi": "Trò chơi đóng vai Nhật Bản"
   },
   "url": "game.granbluefantasy.jp",
   "version": "1.5.5",

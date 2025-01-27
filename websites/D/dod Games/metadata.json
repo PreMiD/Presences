@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "nFin1ty",
@@ -7,7 +7,7 @@
   },
   "service": "dod Games",
   "description": {
-    "el_GR": "Το dod Games είναι ένα από τα πιο γνωστά site online παιχνιδιών και chatting στην Ελλάδα",
+    "el": "Το dod Games είναι ένα από τα πιο γνωστά site online παιχνιδιών και chatting στην Ελλάδα",
     "en": "dod Games is one of the most famous multiplayer game and chatting community in Greece"
   },
   "url": "www.dod.gr",

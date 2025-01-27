@@ -1,3 +1,9 @@
 export function sanitazeFolderName(name: string) {
-  return name.replace('!', ' ').trim()
+  return name
+    //* Remove ! and replace with space
+    .replace('!', ' ')
+    //* Remove double spaces
+    .replace(/\s+/g, ' ')
+    //* Trim
+    .trim()
 }

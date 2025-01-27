@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "YJJcoolcool",
@@ -14,7 +14,7 @@
   "service": "Cisco Networking Academy",
   "description": {
     "en": "Cisco Networking Academy is a global IT and cybersecurity education platform.",
-    "vi_VN": "Cisco Networking Academy là nền tảng giáo dục an ninh mạng và IT toàn cầu."
+    "vi": "Cisco Networking Academy là nền tảng giáo dục an ninh mạng và IT toàn cầu."
   },
   "url": [
     "www.netacad.com",

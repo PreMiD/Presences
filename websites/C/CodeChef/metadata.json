@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "Palskie",
@@ -8,7 +8,7 @@
   "service": "CodeChef",
   "description": {
     "en": "CodeChef is a competitive programming community of programmers from across the globe.",
-    "vi_VN": "CodeChef là công đồng cạnh tranh của các lập trình viên toàn cầu."
+    "vi": "CodeChef là công đồng cạnh tranh của các lập trình viên toàn cầu."
   },
   "url": [
     "www.codechef.com",

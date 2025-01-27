@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "Snazzah",
@@ -9,7 +9,7 @@
   "description": {
     "en": "Contribute to projects without complicating your local setup. Spin up dev environments with a click — even for projects you haven't worked on before — and switch between them with ease.",
     "nl": "Draag bij aan projecten zonder uw lokale installatie ingewikkelder te maken. Zet met één klik een ontwikkelomgeving op, zelfs voor projecten waar u nog niet eerder aan hebt gewerkt, en schakel er gemakkelijk tussen.",
-    "vi_VN": "Đóng góp và dự án mà không cần rối tung hệ thống của bạn. Tạo các một trường phát triển với chỉ một nhấp — ngay cả với các dự án bạn chưa từng làm — và luân phiên giữa chúng một cách dễ dàng."
+    "vi": "Đóng góp và dự án mà không cần rối tung hệ thống của bạn. Tạo các một trường phát triển với chỉ một nhấp — ngay cả với các dự án bạn chưa từng làm — và luân phiên giữa chúng một cách dễ dàng."
   },
   "url": "github.dev",
   "regExp": "(.*[.])?github.dev",

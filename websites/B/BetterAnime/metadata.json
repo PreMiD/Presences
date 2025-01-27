@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "SlowLife",
@@ -9,8 +9,8 @@
   "description": {
     "en": "Come watch and download all Anime and Movie Episodes in high quality up to FullHD! Watch several anime online for free on BetterAnime!",
     "nl": "Bekijk en download alle anime- en filmafleveringen in hoge kwaliteit tot FullHD! Bekijk gratis verschillende anime online op BetterAnime!",
-    "pt_BR": "Vem assistir e baixar todos os Episódios de Animes e Filmes em alta qualidade até FullHD! Assista vários animes online de graça no BetterAnime!",
-    "vi_VN": "Xem các tập anime và phim mới nhất với chất lượng lên tới FullHD! Xem nhiều anime trực tuyến miễn phí trên BetterAnime!"
+    "pt-br": "Vem assistir e baixar todos os Episódios de Animes e Filmes em alta qualidade até FullHD! Assista vários animes online de graça no BetterAnime!",
+    "vi": "Xem các tập anime và phim mới nhất với chất lượng lên tới FullHD! Xem nhiều anime trực tuyến miễn phí trên BetterAnime!"
   },
   "url": "betteranime.net",
   "version": "1.0.16",

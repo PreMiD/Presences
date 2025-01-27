@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "Dragonism",
@@ -9,7 +9,7 @@
   "description": {
     "en": "Brick Hill is the ultimate building block game, allowing you to push the limits of digital bricks and make your own games.",
     "nl": "Brick Hill is het ultieme bouwsteenspel, waarmee je de grenzen van digitale stenen kunt verleggen en je eigen spellen kunt maken.",
-    "vi_VN": "Brick Hill là trò chơi xây hộp tối thượng, cho phép bạn vượt khỏi giới hạn của các hộp điện tử và tự tạo trò chơi của riêng mình."
+    "vi": "Brick Hill là trò chơi xây hộp tối thượng, cho phép bạn vượt khỏi giới hạn của các hộp điện tử và tự tạo trò chơi của riêng mình."
   },
   "url": [
     "www.brick-hill.com",

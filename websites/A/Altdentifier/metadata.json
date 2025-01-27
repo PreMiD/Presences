@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "NMW03",
@@ -14,11 +14,11 @@
   "service": "Altdentifier",
   "description": {
     "en": "The best Discord security and checkpoint bot!",
-    "ga_IE": "An bot slándála Discpoint agus seicphointe is fearr!",
+    "ga": "An bot slándála Discpoint agus seicphointe is fearr!",
     "nl": "De beste Discord-beveiligings- en checkpoint-bot!",
-    "vi_VN": "Bot bảo mật tốt nhất Discord!",
-    "zh_CN": "最好的Discord安全检查机器人！",
-    "zh_TW": "最好-最安全的Discord賬號驗證机器人！"
+    "vi": "Bot bảo mật tốt nhất Discord!",
+    "zh": "最好的Discord安全检查机器人！",
+    "zh-tw": "最好-最安全的Discord賬號驗證机器人！"
   },
   "url": "altdentifier.com",
   "version": "1.2.23",

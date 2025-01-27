@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "bossatossa",
@@ -19,7 +19,7 @@
   "description": {
     "en": "The most moe radio in Brazil",
     "nl": "De meest moe radio in Brazilië",
-    "pt_BR": "A rádio mais moe do Brasil"
+    "pt-br": "A rádio mais moe do Brasil"
   },
   "url": "www.animu.com.br",
   "version": "1.2.35",

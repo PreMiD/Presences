@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "allvzx",
@@ -9,8 +9,8 @@
   "description": {
     "en": "Minecraft servers. Free. Forever. Your very own Minecraft server, the only one that stays free forever.",
     "nl": "Minecraft servers. Gratis. Voor altijd. Je eigen Minecraft server, de enige die voor altijd gratis blijft.",
-    "vi_VN": "Máy chủ Minecraft. Miễn phí. Mãi mãi. Máy chủ Minecraft của riêng bạn, luôn luôn miễn phí.",
-    "zh_CN": "属于您自己的Minecraft服务器，我们永久免费。"
+    "vi": "Máy chủ Minecraft. Miễn phí. Mãi mãi. Máy chủ Minecraft của riêng bạn, luôn luôn miễn phí.",
+    "zh": "属于您自己的Minecraft服务器，我们永久免费。"
   },
   "url": [
     "aternos.org",

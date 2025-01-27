@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "Hibanka",
@@ -10,8 +10,8 @@
     "en": "The world's largest crypto exchange",
     "nl": "De grootste crypto uitwisseling ter wereld",
     "ru": "Крупнейшая в мире криптобиржа",
-    "uk_UA": "Найбільша в світі кріптобіржа",
-    "vi_VN": "Sàn giao dịch tiền ảo lớn nhất thế giới"
+    "uk": "Найбільша в світі кріптобіржа",
+    "vi": "Sàn giao dịch tiền ảo lớn nhất thế giới"
   },
   "url": [
     "www.binance.com",

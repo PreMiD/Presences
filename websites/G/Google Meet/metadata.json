@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "Drull",
@@ -9,8 +9,8 @@
   "description": {
     "en": " Google Meet is a communication platform, developed by Google, which includes instant messaging, video chat, SMS and VOIP.",
     "nl": "Google Meet is een communicatieplatform ontwikkeld door Google en heeft de mogelijkheid om te chatten, te (video)bellen en te sms'en.",
-    "pt_BR": "Google Meet é uma plataforma de comunicação, desenvolvida pela Google, que inclui mensagens instantâneas, chat de vídeo, SMS e VOIP.",
-    "vi_VN": "Google Meet là một dịch vụ liên lạc qua video do Google phát triển."
+    "pt-br": "Google Meet é uma plataforma de comunicação, desenvolvida pela Google, que inclui mensagens instantâneas, chat de vídeo, SMS e VOIP.",
+    "vi": "Google Meet là một dịch vụ liên lạc qua video do Google phát triển."
   },
   "url": "meet.google.com",
   "regExp": "meet[.]google([.][a-z]+)+[/]",

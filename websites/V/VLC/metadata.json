@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "fror",
@@ -8,9 +8,9 @@
   "service": "VLC",
   "description": {
     "en": "VLC presence for PreMiD! Please read [this page](https://github.com/PreMiD/Presences/blob/master/websites/V/VLC/readme.md) to get started!",
-    "ga_IE": "Láithreacht VLC do PreMiD! Léigh [an leathanach seo] le do thoil (https://github.com/PreMiD/Presences/blob/master/websites/V/VLC/readme.md) chun tosú",
+    "ga": "Láithreacht VLC do PreMiD! Léigh [an leathanach seo] le do thoil (https://github.com/PreMiD/Presences/blob/master/websites/V/VLC/readme.md) chun tosú",
     "nl": "VLC aanwezigheid voor PreMiD! Lees [deze pagina] (https://github.com/PreMiD/Presences/blob/master/websites/V/VLC/readme.md) om te beginnen!",
-    "vi_VN": "Presence VLC dành cho PreMiD! Hãy đọc [trang này](https://github.com/PreMiD/Presences/blob/master/websites/V/VLC/readme.md) để bắt đầu!"
+    "vi": "Presence VLC dành cho PreMiD! Hãy đọc [trang này](https://github.com/PreMiD/Presences/blob/master/websites/V/VLC/readme.md) để bắt đầu!"
   },
   "url": [
     "localhost",

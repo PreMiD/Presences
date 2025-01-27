@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "Dzardys",
@@ -7,7 +7,7 @@
   },
   "service": "LeoSight",
   "description": {
-    "cs_CZ": "Discordové RPC pro stránku LeoSight, které vám umožní sdílet vaši aktivitu s přáteli.",
+    "cs": "Discordové RPC pro stránku LeoSight, které vám umožní sdílet vaši aktivitu s přáteli.",
     "en": "Discord RPC for LeoSight, which can show your activity to your friends."
   },
   "url": [

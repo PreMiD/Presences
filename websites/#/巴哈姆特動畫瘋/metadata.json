@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "Bas950",
@@ -8,11 +8,11 @@
   "service": "巴哈姆特動畫瘋",
   "description": {
     "en": "Completely free animation platform.",
-    "ga_IE": "Ardán beochana go hiomlán saor in aisce.",
+    "ga": "Ardán beochana go hiomlán saor in aisce.",
     "nl": "Volledig gratis animatieplatform.",
-    "vi_VN": "Nền tảng cung cấp hoạt hình hoàn toàn miễn phí.",
-    "zh_CN": "完全免费的动画平台。",
-    "zh_TW": "完全免費的動畫平台。"
+    "vi": "Nền tảng cung cấp hoạt hình hoàn toàn miễn phí.",
+    "zh": "完全免费的动画平台。",
+    "zh-tw": "完全免費的動畫平台。"
   },
   "url": "ani.gamer.com.tw",
   "version": "1.2.26",

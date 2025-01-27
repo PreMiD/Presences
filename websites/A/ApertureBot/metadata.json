@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "AlbaySIMSEK",
@@ -14,10 +14,10 @@
   "service": "ApertureBot",
   "description": {
     "en": "ApertureBot is a fork of b1nzy's rowboat, a utilitarian and administration assistant for Discord.",
-    "ga_IE": "Is forc é ApertureBot de bhád rósta b1nzy, cúntóir utilitarian agus riaracháin do Discord.",
+    "ga": "Is forc é ApertureBot de bhád rósta b1nzy, cúntóir utilitarian agus riaracháin do Discord.",
     "nl": "ApertureBot is een fork van de rowboat van b1nzy, een utilitaire en administratieve assistent voor Discord.",
-    "vi_VN": "ApertureBot là một bản sao của b1nzy's rowboat, công cụ quản lý hữu hiệu dành cho Discord.",
-    "zh_CN": "ApertureBot, 你全新的Discord服务器助理！"
+    "vi": "ApertureBot là một bản sao của b1nzy's rowboat, công cụ quản lý hữu hiệu dành cho Discord.",
+    "zh": "ApertureBot, 你全新的Discord服务器助理！"
   },
   "url": [
     "aperturebot.science",

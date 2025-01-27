@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "Faelayis",
@@ -9,7 +9,7 @@
   "description": {
     "en": "Watch anime online cartoons Thai dubbed anime Thai subtitled anime latest episodes.",
     "th": "ดูอนิเมะออนไลน์ การ์ตูน อนิเมะพากย์ไทย อนิเมะซับไทย ตอนใหม่ล่าสุด",
-    "vi_VN": "Xem những anime mới nhất trực tuyến có phụ đề và thuyết minh Tiếng Thái."
+    "vi": "Xem những anime mới nhất trực tuyến có phụ đề và thuyết minh Tiếng Thái."
   },
   "url": "animeyuzu.com",
   "version": "1.0.11",

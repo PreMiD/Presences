@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "Prenses",
@@ -14,10 +14,10 @@
   "service": "AnimeWho",
   "description": {
     "en": "AnimeWho? is a site where you can watch Turkish subtitle anime & read manga.",
-    "ga_IE": "AnimeWho? Is suíomh é inar féidir leat féachaint ar anime fotheideal Tuircis & manga a léamh.",
+    "ga": "AnimeWho? Is suíomh é inar féidir leat féachaint ar anime fotheideal Tuircis & manga a léamh.",
     "nl": "Anime Wie? is een site waar je anime kunt bekijken met Turkse ondertiteling en manga kunt lezen.",
     "tr": "AnimeWho? Türkçe anime & manga izleyip, okuyabileceğiniz bir sitedir.",
-    "vi_VN": "AnimeWho? là trang web nơi bạn có thể xem anime phụ đề Thổ Nhĩ Kì & đọc manga."
+    "vi": "AnimeWho? là trang web nơi bạn có thể xem anime phụ đề Thổ Nhĩ Kì & đọc manga."
   },
   "url": [
     "www.animewho.com",

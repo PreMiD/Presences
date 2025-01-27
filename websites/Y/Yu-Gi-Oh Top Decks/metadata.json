@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.12",
+  "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
     "name": "Nekolen",
@@ -9,12 +9,12 @@
   "description": {
     "en": "Yu-Gi-Oh top decks is a database of best decklists.",
     "fr": "Yu-Gi-Oh top decks est une base de données des meilleures listes de decks.",
-    "ga_IE": "Is bunachar sonraí de na liostaí deic is fearr é deiceanna barr Yu-Gi-Oh.",
+    "ga": "Is bunachar sonraí de na liostaí deic is fearr é deiceanna barr Yu-Gi-Oh.",
     "nl": "Yu-Gi-Oh topdecks is een database met de beste decklists.",
-    "pt_BR": "Верхні колоди Yu-Gi-Oh - це база даних кращих колодних списків.",
+    "pt-br": "Верхні колоди Yu-Gi-Oh - це база даних кращих колодних списків.",
     "ro": "Yu-Gi-Oh top decks este o bază de date cu cele mai bune liste de pachete.",
-    "uk_UA": "Верхні колоди Yu-Gi-Oh - це база даних кращих колодних списків.",
-    "zh_CN": "Yu-Gi-Oh Top Decks是一个收集最好的甲板的数据库。"
+    "uk": "Верхні колоди Yu-Gi-Oh - це база даних кращих колодних списків.",
+    "zh": "Yu-Gi-Oh Top Decks是一个收集最好的甲板的数据库。"
   },
   "url": "yugiohtopdecks.com",
   "version": "1.2.27",
