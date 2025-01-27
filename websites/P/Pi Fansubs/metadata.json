@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"id": "354233941550694400",
@@ -9,7 +9,7 @@
 	"description": {
 		"en": "PiFansubs is a free brazilian streaming site where you can watch subtitled bls content.",
 		"pt": "PiFansubs é um site de streaming gratuito onde você pode assistir a conteúdos bls legendados.",
-		"pt_BR": "PiFansubs é um site de streaming gratuito onde você pode assistir a conteúdos bls legendados."
+		"pt-br": "PiFansubs é um site de streaming gratuito onde você pode assistir a conteúdos bls legendados."
 	},
 	"url": [
 		"pifansubs.club",
