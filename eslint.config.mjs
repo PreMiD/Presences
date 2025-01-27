@@ -42,6 +42,7 @@ export default antfu(
             'iFrameRegExp',
             'readLogs',
             'settings',
+            'mobile',
           ],
         },
         {
