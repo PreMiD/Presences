@@ -1,0 +1,49 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.13",
+	"apiVersion": 1,
+	"author": {
+		"name": "Noowz",
+		"id": "163656084714815491"
+	},
+	"service": "nadeshiko",
+	"description": {
+		"en": "View Hypixel stats and generate real-time stat cards - perfect for forum signatures or to show off to friends!"
+	},
+	"url": "nadeshiko.io",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/3QzrCo4.png",
+	"thumbnail": "https://i.imgur.com/9wL3Frb.png",
+	"color": "#872D4D",
+	"category": "games",
+	"tags": [
+		"nadeshiko",
+		"hypixel",
+		"stats",
+		"minecraft",
+		"gaming"
+	],
+	"settings": [
+		{
+			"id": "language",
+			"multiLanguage": true
+		},
+		{
+			"id": "privacyMode",
+			"title": "Privacy Mode",
+			"icon": "fa-solid fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "showSmallImages",
+			"title": "Show Small Images",
+			"icon": "fa-solid fa-image",
+			"value": true
+		},
+		{
+			"id": "showButtons",
+			"title": "Show Buttons",
+			"icon": "fa-solid fa-minimize",
+			"value": true
+		}
+	]
+}
