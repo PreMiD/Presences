@@ -262,32 +262,7 @@ if (errors.length) {
 } else actions.info("All Presences validated successfully");
 
 async function getValidLanguages() {
-	return (
-		await got<{
-			data: {
-				langFiles: [
-					{
-						lang: string;
-					}
-				];
-			};
-		}>("https://api.premid.app/v3", {
-			method: "post",
-			responseType: "json",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				query: `
-					query {
-						langFiles(project: "presence") {
-							lang
-						}
-					}
-				`,
-			}),
-		})
-	).body.data.langFiles.map(l => l.lang);
+	return got("https://api.premid.app/v6/locales").json<string[]>();
 }
 
 async function getStorePresence(presences: string) {

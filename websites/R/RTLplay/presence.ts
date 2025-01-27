@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: LargeAssets.Animated, // Default
 			largeImageText: "RTLplay",
 			type: ActivityType.Watching,
-		},
+		} as PresenceData,
 		[
 			lang,
 			usePresenceName,

@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			details: "Sorryfield",
 			largeImageKey: Assets.Logo,
-		},
+		} as PresenceData,
 		{ pathname, href } = document.location;
 	if (pathname === "/") {
 		presenceData.details = "곡 선택 중";

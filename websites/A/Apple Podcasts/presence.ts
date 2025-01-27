@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
-		},
+		} as PresenceData,
 		strings = await presence.getStrings({
 			play: "general.playing",
 			pause: "general.paused",

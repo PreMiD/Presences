@@ -31,8 +31,10 @@ presence.on("UpdateData", async () => {
 			"/signup": { details: "Signing up" },
 		};
 
-	for (const [path, data] of Object.entries(pages))
-		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
+	for (const [path, data] of Object.entries(pages)) {
+		if (pathname.includes(path))
+			presenceData = { ...presenceData, ...data } as PresenceData;
+	}
 
 	switch (host) {
 		case "www.caards.me": {
