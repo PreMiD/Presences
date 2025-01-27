@@ -8,7 +8,7 @@
 	"service": "wikiHow",
 	"description": {
 		"en": "wikiHow - How to do anything!",
-		"ga_IE": "wikiHow - Conas aon rud a dhéanamh!",
+		"ga": "wikiHow - Conas aon rud a dhéanamh!",
 		"nl": "wikiHow - Hoe iets te doen!"
 	},
 	"url": "www.wikihow.com",

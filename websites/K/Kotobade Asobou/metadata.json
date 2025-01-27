@@ -11,7 +11,7 @@
 	],
 	"description": {
 		"en": "Japanese Wordle - daily word puzzle game.",
-		"ja_JP": "日本語版 Wordle - 日替わり単語パズルゲーム。"
+		"ja": "日本語版 Wordle - 日替わり単語パズルゲーム。"
 	},
 	"url": "taximanli.github.io",
 	"version": "1.1.3",

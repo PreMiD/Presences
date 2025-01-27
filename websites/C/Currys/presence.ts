@@ -51,8 +51,10 @@ presence.on("UpdateData", async () => {
 		"/services/": { details: "Viewing", state: "Services" },
 	};
 
-	for (const [path, data] of Object.entries(pages))
-		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
+	for (const [path, data] of Object.entries(pages)) {
+		if (pathname.includes(path))
+			presenceData = { ...presenceData, ...data } as PresenceData;
+	}
 
 	// When searching for product
 	const search = document.querySelector<HTMLInputElement>('[id="Search"]');

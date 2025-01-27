@@ -8,7 +8,7 @@
 	"service": "Granblue Fantasy Wiki",
 	"description": {
 		"en": "Granblue Fantasy Wiki",
-		"vi_VN": "Granblue Fantasy Wiki"
+		"vi": "Granblue Fantasy Wiki"
 	},
 	"url": "gbf.wiki",
 	"version": "1.0.21",

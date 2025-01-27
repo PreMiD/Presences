@@ -11,7 +11,7 @@
 	],
 	"description": {
 		"en": "Studio.Design is the easiest and quickest design tool to turn any idea into a website. No code. All creative freedom.",
-		"ja_JP": "Studioは、コードを書かずにWebサイトの構築・公開・運用が完結するノーコードWeb制作プラットフォームです。7,600以上のフォントとデザインエディタによる豊かな表現力。CMS、フォーム、分析機能も提供。思い通りのサイト運用で、あなたの創造性を解放します。"
+		"ja": "Studioは、コードを書かずにWebサイトの構築・公開・運用が完結するノーコードWeb制作プラットフォームです。7,600以上のフォントとデザインエディタによる豊かな表現力。CMS、フォーム、分析機能も提供。思い通りのサイト運用で、あなたの創造性を解放します。"
 	},
 	"url": "app.studio.design",
 	"version": "1.0.2",

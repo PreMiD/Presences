@@ -8,7 +8,7 @@
 	"service": "Codeforces",
 	"description": {
 		"en": "Codeforces is a website that hosts competitive programming contests.",
-		"vi_VN": "Codeforces là trang web tổ chức các cuộc thi lập trình."
+		"vi": "Codeforces là trang web tổ chức các cuộc thi lập trình."
 	},
 	"url": "codeforces.com",
 	"version": "1.0.21",

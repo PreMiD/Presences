@@ -8,7 +8,7 @@
 	"service": "AnimeFillerList",
 	"description": {
 		"en": "Community created filler lists that help you get to the good stuff.",
-		"vi_VN": "Danh sách được chọn lọc bởi cộng đồng để bạn có thể chọn những bộ phim hay."
+		"vi": "Danh sách được chọn lọc bởi cộng đồng để bạn có thể chọn những bộ phim hay."
 	},
 	"url": "www.animefillerlist.com",
 	"version": "1.0.20",

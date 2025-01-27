@@ -8,7 +8,7 @@
 	"service": "SlimeRead",
 	"description": {
 		"en": "Discover and enjoy a vast collection of literary works, including manga, manhwa, manhua, novels, and much more.",
-		"pt_BR": "Descubra e desfrute de uma vasta coleção de obras literárias, incluindo mangás, manwhas, manhuas, novels e muito mais."
+		"pt-br": "Descubra e desfrute de uma vasta coleção de obras literárias, incluindo mangás, manwhas, manhuas, novels e muito mais."
 	},
 	"url": [
 		"slimeread.com",

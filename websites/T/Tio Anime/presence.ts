@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/T/Tio%20Anime/assets/logo.png",
 			startTimestamp: browsingTimestamp,
-		},
+		} as PresenceData,
 		[privacy, buttons] = await Promise.all([
 			presence.getSetting<boolean>("privacy"),
 			presence.getSetting<string>("buttons"),

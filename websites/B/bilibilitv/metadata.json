@@ -14,7 +14,7 @@
 	"service": "bilibilitv",
 	"description": {
 		"en": "bilibili.tv is an ad-free anime streaming website.",
-		"vi_VN": "bilibili.tv là nền tảng xem anime trực tuyến không có quảng cáo."
+		"vi": "bilibili.tv là nền tảng xem anime trực tuyến không có quảng cáo."
 	},
 	"url": [
 		"www.bilibili.tv",

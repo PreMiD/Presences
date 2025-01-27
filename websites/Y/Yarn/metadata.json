@@ -9,7 +9,7 @@
 	"description": {
 		"en": "Yarn is a package manager that doubles down as project manager.",
 		"fr": "Yarn est un gestionnaire de paquets.",
-		"ga_IE": "Is bainisteoir pacáiste é snáth a dhúblaíonn síos mar bhainisteoir tionscadail.",
+		"ga": "Is bainisteoir pacáiste é snáth a dhúblaíonn síos mar bhainisteoir tionscadail.",
 		"nl": "Garen is een pakketbeheerder die ook dienst doet als projectmanager."
 	},
 	"url": "yarnpkg.com",

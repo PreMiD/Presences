@@ -8,9 +8,9 @@
 	"service": "Animelizm",
 	"description": {
 		"en": "Watch Thai subbed/dubbed Animes Online for free.",
-		"ga_IE": "Féach ar Animes Online subbed / dubáilte Téalainnis saor in aisce.",
+		"ga": "Féach ar Animes Online subbed / dubáilte Téalainnis saor in aisce.",
 		"nl": "Bekijk gratis Thai ondertitelde/nagesynchroniseerde Animes Online.",
-		"vi_VN": "Xem các bộ Anime phụ đề/thuyết minh Tiếng Thái trực tuyến miễn phí."
+		"vi": "Xem các bộ Anime phụ đề/thuyết minh Tiếng Thái trực tuyến miễn phí."
 	},
 	"url": "www.animelizm.com",
 	"version": "1.0.29",

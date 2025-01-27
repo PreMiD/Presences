@@ -8,7 +8,7 @@
 	"service": "Stoodi",
 	"description": {
 		"en": "Stoodi is a platform to prepare you for exams and ENEM in Brazil.",
-		"pt_BR": "Stoodi é uma plataforma para te preparar para provas e ENEM no Brazil"
+		"pt-br": "Stoodi é uma plataforma para te preparar para provas e ENEM no Brazil"
 	},
 	"url": "www.stoodi.com.br",
 	"regExp": "([a-z0-9]+)[.]stoodi[.]com[.]br",

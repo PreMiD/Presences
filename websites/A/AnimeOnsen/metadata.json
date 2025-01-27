@@ -8,7 +8,7 @@
 	"service": "AnimeOnsen",
 	"description": {
 		"en": "AnimeOnsen is a video streaming platform for anime shows and movies.",
-		"vi_VN": "AnimeOnsen là nền tảng phát video trực tuyến dành cho chương trình và phim anime."
+		"vi": "AnimeOnsen là nền tảng phát video trực tuyến dành cho chương trình và phim anime."
 	},
 	"url": "animeonsen.xyz",
 	"regExp": "(www.)?(animeonsen.xyz)",

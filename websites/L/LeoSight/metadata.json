@@ -7,7 +7,7 @@
 	},
 	"service": "LeoSight",
 	"description": {
-		"cs_CZ": "Discordové RPC pro stránku LeoSight, které vám umožní sdílet vaši aktivitu s přáteli.",
+		"cs": "Discordové RPC pro stránku LeoSight, které vám umožní sdílet vaši aktivitu s přáteli.",
 		"en": "Discord RPC for LeoSight, which can show your activity to your friends."
 	},
 	"url": [

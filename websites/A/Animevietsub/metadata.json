@@ -14,7 +14,7 @@
 	"service": "Animevietsub",
 	"description": {
 		"en": "Watch your favorite anime online with Vietnamese subtitle!",
-		"vi_VN": "Xem anime online với phụ đề tiếng việt.",
+		"vi": "Xem anime online với phụ đề tiếng việt.",
 		"nl": "Bekijk jouw favoriete anime online met Vietnamese ondertiteling!"
 	},
 	"url": "animevietsub.dev",

@@ -8,7 +8,7 @@
 	"service": "TabNews",
 	"description": {
 		"en": "TabNews is a website with content for those who work with Programming and Technology.",
-		"pt_BR": "TabNews é um site com conteúdo para quem trabalha com Programação e Tecnologia."
+		"pt-br": "TabNews é um site com conteúdo para quem trabalha com Programação e Tecnologia."
 	},
 	"url": "www.tabnews.com.br",
 	"version": "1.0.9",

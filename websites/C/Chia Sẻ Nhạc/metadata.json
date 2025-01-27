@@ -11,7 +11,7 @@
 	],
 	"description": {
 		"en": "High-fidelity music sharing and ranking community",
-		"vi_VN": "Cộng đồng chia sẻ nhạc chất lượng cao và xếp hạng âm nhạc trực tuyến"
+		"vi": "Cộng đồng chia sẻ nhạc chất lượng cao và xếp hạng âm nhạc trực tuyến"
 	},
 	"url": "chiasenhac.vn",
 	"regExp": "([a-z0-9]+[.])?chiasenhac[.]vn",

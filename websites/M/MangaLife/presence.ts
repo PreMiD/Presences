@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 			document.location.pathname.startsWith(path) ||
 			document.location.pathname.includes(path)
 		)
-			presenceData = { ...presenceData, ...data };
+			presenceData = { ...presenceData, ...data } as PresenceData;
 	}
 
 	switch (true) {
