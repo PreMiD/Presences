@@ -22,7 +22,7 @@
 		"www.jackboxgames.com",
 		"shop.jackboxgames.com"
 	],
-	"version": "2.1.7",
+	"version": "2.1.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/thumbnail.png",
 	"color": "#4254f4",
@@ -31,6 +31,7 @@
 		"games"
 	],
 	"readLogs": true,
+	"mobile": true,
 	"settings": [
 		{
 			"id": "useName",
