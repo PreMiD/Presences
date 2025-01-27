@@ -9,10 +9,10 @@
 	"description": {
 		"en": "Watch your favorite shows whenever you want in SVT Play - free television online.",
 		"nl": "Bekijk uw favoriete programma's wanneer u maar wilt in SVT Play - gratis televisie online.",
-		"sv_SE": "Se dina favoritprogram när du vill i SVT Play - fri television på nätet."
+		"sv": "Se dina favoritprogram när du vill i SVT Play - fri television på nätet."
 	},
 	"url": "www.svtplay.se",
-	"version": "1.2.28",
+	"version": "1.2.29",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/SVT%20Play/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/SVT%20Play/assets/thumbnail.png",
 	"color": "#00c901",

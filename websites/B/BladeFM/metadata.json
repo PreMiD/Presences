@@ -8,13 +8,13 @@
 	"service": "BladeFM",
 	"description": {
 		"en": "Providing non-stop music, 24/7",
-		"ga_IE": "Ag soláthar ceoil gan stad, 24/7",
+		"ga": "Ag soláthar ceoil gan stad, 24/7",
 		"nl": "Bied 24/7 non-stop muziek aan",
-		"vi_VN": "Cung cấp âm nhạc không ngừng nghỉ, 24/7"
+		"vi": "Cung cấp âm nhạc không ngừng nghỉ, 24/7"
 	},
 	"url": "bladefm.com.au",
 	"regExp": "([a-z0-9-]+[.])*(bladefm[.]com[.]au)[/]",
-	"version": "1.0.21",
+	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/BladeFM/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BladeFM/assets/thumbnail.png",
 	"color": "#203391",

@@ -19,10 +19,10 @@
 	"description": {
 		"en": "Watch the best entertainment videos, live sports, journalism, and more whenever and wherever you want.",
 		"nl": "Bekijk de beste entertainmentvideo's, live sport, journalistiek en meer wanneer en waar u maar wilt.",
-		"pt_BR": "Assista aos melhores vídeos de entretenimento, esportes ao vivo, jornalismo e muito mais quando e onde quiser."
+		"pt-br": "Assista aos melhores vídeos de entretenimento, esportes ao vivo, jornalismo e muito mais quando e onde quiser."
 	},
 	"url": "globoplay.globo.com",
-	"version": "2.2.12",
+	"version": "2.2.13",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/globoplay/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/globoplay/assets/thumbnail.png",
 	"color": "#ED1A37",

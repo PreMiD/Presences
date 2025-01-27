@@ -19,12 +19,12 @@
 	"description": {
 		"en": "Listen to the best DJs and radio presenters in the world for free.",
 		"de": "Höre kostenlos den besten DJs und Radiomoderatoren der Welt zu.",
-		"pt_BR": "Escute os melhores DJs e apresentadores de rádio do mundo de graça.",
-		"uk_UA": "Слухайте найкращих діджеїв та радіоведучих у цілому світі безкоштовно.",
+		"pt-br": "Escute os melhores DJs e apresentadores de rádio do mundo de graça.",
+		"uk": "Слухайте найкращих діджеїв та радіоведучих у цілому світі безкоштовно.",
 		"nl": "Luister gratis naar de beste DJ's en radiopresentatoren ter wereld."
 	},
 	"url": "www.mixcloud.com",
-	"version": "1.2.26",
+	"version": "1.2.27",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/Mixcloud/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Mixcloud/assets/thumbnail.jpg",
 	"color": "#5000ff",

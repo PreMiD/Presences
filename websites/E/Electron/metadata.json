@@ -11,11 +11,11 @@
 		"en": "Build cross-platform desktop apps with JavaScript, HTML, and CSS",
 		"ru": "Создавайте кросс-платформенные приложения при помощи JavaScript, HTML и CSS",
 		"pl": "wórz wieloplatformowe aplikacje z użyciem języków JavaScript, HTML oraz CSS",
-		"ja_JP": "JavaScript, HTML, CSS でクロスプラットフォームなデスクトップアプリ開発",
-		"ko_KR": "JavaScript, HTML, CSS를 이용하여 크로스 플랫폼 데스크탑 앱을 만들어보세요",
+		"ja": "JavaScript, HTML, CSS でクロスプラットフォームなデスクトップアプリ開発",
+		"ko": "JavaScript, HTML, CSS를 이용하여 크로스 플랫폼 데스크탑 앱을 만들어보세요",
 		"de": "Plattformübergreifende Desktop-Anwendungen mit JavaScript, HTML und CSS entwickeln",
 		"es": "rea aplicaciones multiplataforma de escritorio con JavaScript, HTML y CSS",
-		"zh_CN": "使用 JavaScript，HTML 和 CSS 构建跨平台的桌面应用程序",
+		"zh": "使用 JavaScript，HTML 和 CSS 构建跨平台的桌面应用程序",
 		"th": "สร้างแอปที่ใช้งานข้ามแพลตฟอร์มได้ด้วย JavaScript, HTML และ CSS",
 		"nl": "Bouw cross-platform desktop apps met JavaScript, HTML en CSS"
 	},
@@ -23,7 +23,7 @@
 		"electronjs.org",
 		"www.electronjs.org"
 	],
-	"version": "1.2.23",
+	"version": "1.2.24",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Electron/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Electron/assets/thumbnail.png",
 	"color": "#74b1be",

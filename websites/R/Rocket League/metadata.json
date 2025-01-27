@@ -9,14 +9,14 @@
 	"description": {
 		"en": "Rocket League® combines soccer with driving in an unbelievable physics-based multiplayer-focused sequel to Supersonic Acrobatic Rocket-Powered Battle-Cars!",
 		"nl": "Rocket League® combineert voetbal met autorijden in een ongelooflijk op physics gebaseerd multiplayer-gericht vervolg op Supersonic Acrobatische Rocket-Powered Battle-Cars!",
-		"zh_CN": "RocketLeague®将足球与驾驶结合在一起，成为超音速杂技火箭动力战车不可思议的基于物理学的多人游戏！"
+		"zh": "RocketLeague®将足球与驾驶结合在一起，成为超音速杂技火箭动力战车不可思议的基于物理学的多人游戏！"
 	},
 	"url": [
 		"www.rocketleague.com",
 		"www.rocketleagueesports.com"
 	],
 	"regExp": "([a-z0-9-]+[.])*rocketleague[.]com[/]",
-	"version": "1.2.21",
+	"version": "1.2.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Rocket%20League/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Rocket%20League/assets/thumbnail.jpg",
 	"color": "#0055ab",

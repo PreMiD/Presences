@@ -9,7 +9,7 @@
 	"description": {
 		"en": "The World's Most Popular Way to Buy, Hold, and Use Crypto",
 		"nl": "De meest populaire manier ter wereld om cryptovaluta te kopen, vast te houden en te gebruiken",
-		"vi_VN": "Phương thức nổi tiếng nhất thế giới để mua, cất giữ, và sử dụng tiền ảo"
+		"vi": "Phương thức nổi tiếng nhất thế giới để mua, cất giữ, và sử dụng tiền ảo"
 	},
 	"url": [
 		"www.blockchain.com",
@@ -18,7 +18,7 @@
 		"support.blockchain.com",
 		"www.blockchain-status.com"
 	],
-	"version": "1.0.19",
+	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Blockchain/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Blockchain/assets/thumbnail.png",
 	"color": "#3d89f5",

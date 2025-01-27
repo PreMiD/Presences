@@ -143,8 +143,10 @@ presence.on("UpdateData", async () => {
 		},
 	};
 
-	for (const [key, value] of Object.entries(pages))
-		if (path.match(key)) presenceData = { ...presenceData, ...value };
+	for (const [key, value] of Object.entries(pages)) {
+		if (path.match(key))
+			presenceData = { ...presenceData, ...value } as PresenceData;
+	}
 
 	if (!showButtons) delete presenceData.buttons;
 

@@ -11,7 +11,7 @@
 	],
 	"description": {
 		"en": "Come share your knowledge and ideas with the world, meet new people and opinions",
-		"he_IL": "בואו לשתף את הידע והרעיונות שלכם עם העולם, להכיר אנשים חדשים ודעות חדשות",
+		"he": "בואו לשתף את הידע והרעיונות שלכם עם העולם, להכיר אנשים חדשים ודעות חדשות",
 		"nl": "Kom uw kennis en ideeën delen met de wereld, ontmoet nieuwe mensen en meningen"
 	},
 	"url": [
@@ -19,7 +19,7 @@
 		"www.stips.co.il",
 		"stipscdn-stips.netdna-ssl.com"
 	],
-	"version": "1.0.24",
+	"version": "1.0.25",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Stips/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Stips/assets/thumbnail.png",
 	"color": "#04d09d",

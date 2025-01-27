@@ -9,7 +9,7 @@
 	"description": {
 		"en": "An online Werewolf card-based multiplayer game. Stay awake.",
 		"fr": "Jeu de Loup-Garou en ligne multijoueur. Restez éveillés.",
-		"ga_IE": "Cluiche il-imreora ar líne bunaithe ar chárta Werewolf. Fan i do dhúiseacht.",
+		"ga": "Cluiche il-imreora ar líne bunaithe ar chárta Werewolf. Fan i do dhúiseacht.",
 		"nl": "Een online weerwolf-kaartspel voor meerdere spelers. Wakker blijven."
 	},
 	"url": [
@@ -20,7 +20,7 @@
 		"www.wolfy.fr",
 		"www.wolfy.net"
 	],
-	"version": "1.2.16",
+	"version": "1.2.17",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/thumbnail.png",
 	"color": "#1b1b2b",

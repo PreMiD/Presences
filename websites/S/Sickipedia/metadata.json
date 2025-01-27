@@ -8,7 +8,7 @@
 	"service": "Sickipedia",
 	"description": {
 		"en": "Sickipedia is an online forum for sharing innapropriate jokes and memes.",
-		"ga_IE": "Is fóram ar líne é Sickipedia chun scéalta grinn agus memes mí-oiriúnacha a roinnt.",
+		"ga": "Is fóram ar líne é Sickipedia chun scéalta grinn agus memes mí-oiriúnacha a roinnt.",
 		"nl": "Sickipedia is een online forum voor het delen van ongepaste grappen en memes."
 	},
 	"url": [
@@ -16,7 +16,7 @@
 		"www.sickipedia.net"
 	],
 	"regExp": "([a-z0-9-]+[.])*(sickipedia[.]net)[/]",
-	"version": "1.0.20",
+	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Sickipedia/assets/logo.jpg",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Sickipedia/assets/thumbnail.png",
 	"color": "#333333",

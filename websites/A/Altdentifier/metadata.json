@@ -15,13 +15,13 @@
 	"description": {
 		"en": "The best Discord security and checkpoint bot!",
 		"nl": "De beste Discord-beveiligings- en checkpoint-bot!",
-		"zh_CN": "最好的Discord安全检查机器人！",
-		"zh_TW": "最好-最安全的Discord賬號驗證机器人！",
-		"ga_IE": "An bot slándála Discpoint agus seicphointe is fearr!",
-		"vi_VN": "Bot bảo mật tốt nhất Discord!"
+		"zh": "最好的Discord安全检查机器人！",
+		"zh-tw": "最好-最安全的Discord賬號驗證机器人！",
+		"ga": "An bot slándála Discpoint agus seicphointe is fearr!",
+		"vi": "Bot bảo mật tốt nhất Discord!"
 	},
 	"url": "altdentifier.com",
-	"version": "1.2.22",
+	"version": "1.2.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Altdentifier/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Altdentifier/assets/thumbnail.png",
 	"color": "#7289D9",

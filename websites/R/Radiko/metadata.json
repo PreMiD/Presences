@@ -14,11 +14,11 @@
 	"service": "Radiko",
 	"description": {
 		"en": "Radiko is Japanese website that provides radio livestreaming in real time.",
-		"ja_JP": "ラジコは、あなたが今いるエリアで放送しているラジオ局をパソコンやスマートフォンで聴くことのできるサービスです。",
+		"ja": "ラジコは、あなたが今いるエリアで放送しているラジオ局をパソコンやスマートフォンで聴くことのできるサービスです。",
 		"nl": "Radiko is een Japanse website die livestreaming via de radio in realtime biedt."
 	},
 	"url": "radiko.jp",
-	"version": "1.1.5",
+	"version": "1.1.6",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/R/Radiko/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Radiko/assets/thumbnail.png",
 	"color": "#0064FF",

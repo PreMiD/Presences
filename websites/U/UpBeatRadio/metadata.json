@@ -9,10 +9,10 @@
 	"description": {
 		"en": "UpBeat is an ad-free, community powered online radio.",
 		"nl": "UpBeat is een advertentievrije, community aangedreven online radio.",
-		"ga_IE": "Is raidió ar líne saor in aisce, faoi thiomáint ag an bpobal é UpBeat."
+		"ga": "Is raidió ar líne saor in aisce, faoi thiomáint ag an bpobal é UpBeat."
 	},
 	"url": "upbeatradio.net",
-	"version": "3.2.29",
+	"version": "3.2.30",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/U/UpBeatRadio/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/UpBeatRadio/assets/thumbnail.png",
 	"color": "#212121",

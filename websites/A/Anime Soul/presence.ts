@@ -20,8 +20,10 @@ presence.on("UpdateData", async () => {
 	};
 	const { pathname } = window.location;
 
-	for (const [path, data] of Object.entries(staticPages))
-		if (pathname.startsWith(path)) presenceData = { ...presenceData, ...data };
+	for (const [path, data] of Object.entries(staticPages)) {
+		if (pathname.startsWith(path))
+			presenceData = { ...presenceData, ...data } as PresenceData;
+	}
 
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();

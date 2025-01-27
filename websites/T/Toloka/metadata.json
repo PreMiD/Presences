@@ -12,11 +12,11 @@
 	"description": {
 		"en": "Toloka.to is the largest BitTorrent tracker of UKRnet, specializing in the distribution of content exclusively in Ukrainian language.",
 		"ru": "Toloka.to - крупнейший BitTorrent-трекер в УКРнете, специализирующаяся на распространении контента исключительно на украинском языке",
-		"uk_UA": "Toloka.to — найбільший BitTorrent-трекер УКРнету, що спеціалізується на поширенні контенту виключно українською мовою.",
+		"uk": "Toloka.to — найбільший BitTorrent-трекер УКРнету, що спеціалізується на поширенні контенту виключно українською мовою.",
 		"nl": "Toloka.to is de grootste BitTorrent-tracker van UKRnet, gespecialiseerd in de distributie van inhoud uitsluitend in de Oekraïense taal."
 	},
 	"url": "toloka.to",
-	"version": "1.0.22",
+	"version": "1.0.23",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/thumbnail.png",
 	"color": "#9FB820",

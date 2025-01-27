@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey:
 			"https://cdn.rcd.gg/PreMiD/websites/R/R%C3%A1dio%20Animu/assets/logo.png",
 		startTimestamp: browsingTimestamp,
-	};
+	} as PresenceData;
 
 	if (playing) {
 		presenceData.type = ActivityType.Listening;

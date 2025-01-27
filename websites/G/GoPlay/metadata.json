@@ -8,16 +8,16 @@
 	"service": "GoPlay",
 	"description": {
 		"en": "Goplay is the home to the kdrama streaming service. You can watched free shows uninterupted in HD with no ads.",
-		"ga_IE": "Is é Goplay an baile don tseirbhís sruthú kdrama. Is féidir leat féachaint ar thaispeántais saor in aisce gan bhriseadh i HD gan aon fhógraí.",
+		"ga": "Is é Goplay an baile don tseirbhís sruthú kdrama. Is féidir leat féachaint ar thaispeántais saor in aisce gan bhriseadh i HD gan aon fhógraí.",
 		"nl": "GoPlay is de thuisbasis van de anime-streamingdienst GoPlay. U kunt ononderbroken gratis shows in HD bekijken zonder advertenties.",
-		"vi_VN": "GoPlay là nơi để xem kdrama trực tuyến. Bạn có thể xem các chương trình miễn phí, không bị gián đoạn bởi các quảng cáo."
+		"vi": "GoPlay là nơi để xem kdrama trực tuyến. Bạn có thể xem các chương trình miễn phí, không bị gián đoạn bởi các quảng cáo."
 	},
 	"url": [
 		"goplay.ml",
 		"goplay.su",
 		"kdrama.anontpp.com"
 	],
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/G/GoPlay/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GoPlay/assets/thumbnail.png",
 	"color": "#F4ADEE",

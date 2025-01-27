@@ -7,7 +7,7 @@
 	},
 	"service": "Indiachan",
 	"description": {
-		"hi_IN": "इंडियाचैन एक साधारण इमेजबोर्ड है जहां कोई भी किसी भी विषय के बारे में टिप्पणियां एवं चित्रों की सहायता से संवाद कर सकता है। आपको पोस्ट करने के लिए पंजीकरण करने की आवश्यकता नहीं है। इंडियाचैन विज्ञापनों या ट्रैकिंग का उपयोग नहीं करता है।",
+		"hi-in": "इंडियाचैन एक साधारण इमेजबोर्ड है जहां कोई भी किसी भी विषय के बारे में टिप्पणियां एवं चित्रों की सहायता से संवाद कर सकता है। आपको पोस्ट करने के लिए पंजीकरण करने की आवश्यकता नहीं है। इंडियाचैन विज्ञापनों या ट्रैकिंग का उपयोग नहीं करता है।",
 		"en": "Indiachan is a simple imageboard where anyone can post comments and share images about any topic. You do not need to register to post. Indiachan does not use ads or tracking. "
 	},
 	"url": [
@@ -15,7 +15,7 @@
 		"www.indiachan.com",
 		"pajeet.top"
 	],
-	"version": "1.0.20",
+	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/Indiachan/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/Indiachan/assets/thumbnail.png",
 	"color": "#ef8e00",

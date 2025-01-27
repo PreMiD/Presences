@@ -9,14 +9,14 @@
 	"description": {
 		"en": "KickAssAnime is a streaming website where you can watch TV Series, Movies & OVA in dubbed and subbed formats.",
 		"nl": "KickAssAnime is een streamingwebsite waar u tv-series, films en OVA kunt bekijken in nagesynchroniseerde en ondertitelde vorm.",
-		"ga_IE": "Is suíomh Gréasáin sruthaithe é KickAssAnime inar féidir leat féachaint ar Shraith Teilifíse, ar Scannáin & OVA i bhformáidí a bhfuil dubáil agus fo-leagan orthu."
+		"ga": "Is suíomh Gréasáin sruthaithe é KickAssAnime inar féidir leat féachaint ar Shraith Teilifíse, ar Scannáin & OVA i bhformáidí a bhfuil dubáil agus fo-leagan orthu."
 	},
 	"url": [
 		"kickassanime.lol",
 		"kickassanime.ro"
 	],
 	"regExp": "(([a-z0-9-]+[.])*kickassanime([.][a-z]+)+)|(kaas[.].*)|((www[0-9]*[.])?(kickassanime[.][a-z]+))",
-	"version": "1.2.6",
+	"version": "1.2.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/K/KickAssAnime/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/KickAssAnime/assets/thumbnail.png",
 	"color": "#c7c95b",
