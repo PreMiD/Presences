@@ -30,6 +30,7 @@ for (const presence of presences) {
 		tags,
 		url,
 		version,
+		mobile,
 	} = require(presence) as Metadata;
 
 	await writeFile(
@@ -55,6 +56,7 @@ for (const presence of presences) {
 				iFrameRegExp,
 				readLogs,
 				settings,
+				mobile,
 			},
 			null,
 			"\t"
