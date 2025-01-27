@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/A/Alura/assets/0.png",
 			details: "Vendo a Alura",
 			startTimestamp: browsingTimestamp,
-		},
+		} as PresenceData,
 		video = document.querySelector("video");
 
 	if (

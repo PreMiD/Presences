@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingTimestamp,
 			name: "Mahjong Soul",
 			type: ActivityType.Playing,
-		},
+		} as PresenceData,
 		{ hostname, pathname, protocol, href } = document.location,
 		pathList = pathname.split("/").filter(Boolean);
 
