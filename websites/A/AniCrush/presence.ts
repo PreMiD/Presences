@@ -25,7 +25,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
-	};
+	} as PresenceData;
 	const { pathname, href, search } = document.location,
 		[showButtons, showW2Button, showTimestamps] = await Promise.all([
 			presence.getSetting<boolean>("buttons"),
@@ -193,7 +193,7 @@ presence.on("UpdateData", async () => {
 				};
 			for (const [path, data] of Object.entries(pages)) {
 				if (pathname.startsWith(path)) {
-					presenceData = { ...presenceData, ...data };
+					presenceData = { ...presenceData, ...data } as PresenceData;
 					if (!presenceData.buttons && showButtons) {
 						presenceData.buttons = [
 							{

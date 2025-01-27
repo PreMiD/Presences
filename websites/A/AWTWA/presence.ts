@@ -32,7 +32,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
-		},
+		} as PresenceData,
 		{ pathname, href } = document.location;
 
 	if (pathname === "/") {
