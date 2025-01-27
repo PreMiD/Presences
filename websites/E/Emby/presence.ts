@@ -427,15 +427,42 @@ function mediaPrimaryImage(mediaId: string): string {
 	return `${embyBasenameURL()}/emby/Items/${mediaId}/Images/Primary?height=256`;
 }
 
+function audioVariablesReplaced(str: string, info: MediaInfo) {
+	if (!str || !info) {
+		console.error(
+			"Can't find audio variables str or info. Contact the presence developer."
+		);
+		return "";
+	}
+	return str
+		?.replace("%title%", info?.Name ?? "unknown title")
+		?.replace(
+			"%artist%",
+			info?.Artists.length === 0 ? "unknown artists" : info?.Artists?.join(", ")
+		)
+		?.replace("%releasedate%", info?.DateCreated ?? "unknown date")
+		?.replace(
+			"%albumartist%",
+			info?.AlbumArtists?.map(x => x.Name).join(", ") ?? "unknown album artists"
+		);
+}
 /**
  * handleAudioPlayback - handles the presence when the audio player is active
  */
 async function handleAudioPlayback(): Promise<void> {
 	// sometimes the buttons are not created fast enough
 	try {
+		const [audioDetails, audioState] = await Promise.all([
+			presence.getSetting<string>("audDetail"),
+			presence.getSetting<string>("audState"),
+		]);
 		presenceData.type = ActivityType.Listening;
 		const audioElement = document.querySelector<HTMLAudioElement>("audio"),
-			regexResult = /\/Audio\/(\w+)\/universal/.exec(audioElement.src);
+			regexResult =
+				/\/Audio\/(\w+)\/universal/.exec(audioElement?.src) ||
+				/(\d+)/gm.exec(
+					document.querySelector(".nowPlayingBar").getAttribute("data-id")
+				);
 
 		if (!regexResult) {
 			presence.error("Could not obtain audio itemId");
@@ -444,8 +471,9 @@ async function handleAudioPlayback(): Promise<void> {
 
 		const [, mediaId] = regexResult,
 			info = await obtainMediaInfo(mediaId);
-		presenceData.details = `Listening to ${info.Name ?? "Unknown title"}`;
-		presenceData.state = `By ${info.AlbumArtist ?? "Unknown artist"}`;
+		presenceData.details = audioVariablesReplaced(audioDetails, info);
+		presenceData.state = audioVariablesReplaced(audioState, info);
+
 		if (
 			(await presence.getSetting("showThumbnails")) &&
 			// some songs might not have albumart
@@ -582,11 +610,9 @@ async function handleVideoPlayback(): Promise<void> {
 			document.querySelector<HTMLDivElement>(".itemBackdrop")?.style
 				?.backgroundImage
 		) ||
-		/\/[0-9]+\//.exec(
-			document.querySelector<HTMLVideoElement>(".htmlVideoPlayer")?.src
-		);
+		/\/[0-9]+\//.exec(document.querySelector<HTMLVideoElement>("video")?.src);
 
-	if (!regexResult) {
+	if (!regexResult || !videoPlayerElem) {
 		presence.error("Could not obtain video itemId");
 		return;
 	}
@@ -880,7 +906,6 @@ async function updateData(): Promise<void> {
 	if (showPresence) {
 		if (!presenceData.largeImageKey)
 			presenceData.largeImageKey = PRESENCE_ART_ASSETS.logo;
-
 		if (!presenceData.details) presence.setActivity();
 		else presence.setActivity(presenceData);
 	}
