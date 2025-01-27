@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/T/TwitCasting/assets/logo.png",
 			startTimestamp: elapsed,
-		},
+		} as PresenceData,
 		[
 			showTimestamps,
 			newLang,

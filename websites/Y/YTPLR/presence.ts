@@ -39,7 +39,7 @@ presence.on("iFrameData", (data: DataInterface) => {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
-		},
+		} as PresenceData,
 		[startTimestamp, endTimestamp] = presence.getTimestamps(
 			Math.floor(videoCurrentTime),
 			Math.floor(videoDuration)

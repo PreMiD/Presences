@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"id": "533014724569333770",
@@ -14,7 +14,7 @@
 		"www.mangago.me",
 		"mangago.me"
 	],
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaGo/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaGo/assets/thumbnail.png",
 	"color": "#C19C93",

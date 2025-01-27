@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 		for (const [k, v] of Object.entries(statics)) {
 			if (path.match(k)) {
 				presenceData.largeImageKey = Assets.Logo;
-				presenceData = { ...presenceData, ...v };
+				presenceData = { ...presenceData, ...v } as PresenceData;
 			}
 		}
 	} else {
@@ -92,7 +92,7 @@ presence.on("UpdateData", async () => {
 				for (const [k, v] of Object.entries(statics)) {
 					if (path.match(k)) {
 						presenceData.largeImageKey = Assets.Tft;
-						presenceData = { ...presenceData, ...v };
+						presenceData = { ...presenceData, ...v } as PresenceData;
 					}
 				}
 
@@ -125,7 +125,7 @@ presence.on("UpdateData", async () => {
 				for (const [k, v] of Object.entries(statics)) {
 					if (path.match(k)) {
 						presenceData.largeImageKey = Assets.Wildrift;
-						presenceData = { ...presenceData, ...v };
+						presenceData = { ...presenceData, ...v } as PresenceData;
 					}
 				}
 
@@ -174,7 +174,7 @@ presence.on("UpdateData", async () => {
 				for (const [k, v] of Object.entries(statics)) {
 					if (path.match(k)) {
 						presenceData.largeImageKey = Assets.Valorant;
-						presenceData = { ...presenceData, ...v };
+						presenceData = { ...presenceData, ...v } as PresenceData;
 					}
 				}
 
@@ -256,7 +256,7 @@ presence.on("UpdateData", async () => {
 					for (const [k, v] of Object.entries(statics)) {
 						if (path.match(k)) {
 							presenceData.largeImageKey = Assets.Lol;
-							presenceData = { ...presenceData, ...v };
+							presenceData = { ...presenceData, ...v } as PresenceData;
 						}
 					}
 				} else if (location.hostname.includes("playruneterra.com")) {
@@ -282,7 +282,7 @@ presence.on("UpdateData", async () => {
 					for (const [k, v] of Object.entries(statics)) {
 						if (path.match(k)) {
 							presenceData.largeImageKey = Assets.Lor;
-							presenceData = { ...presenceData, ...v };
+							presenceData = { ...presenceData, ...v } as PresenceData;
 						}
 					}
 				}

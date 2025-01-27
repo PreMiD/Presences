@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "SlowLife",
@@ -8,11 +8,11 @@
 	"service": "iQIYI",
 	"description": {
 		"en": "iQIYI is the world's leading online movie and video streaming website, offering TV dramas, movies, variety shows, animation, and other quality content.",
-		"zh_TW": "愛奇藝-全球領先的線上影音視頻網站-正版高清影片影視免費線上看",
+		"zh-tw": "愛奇藝-全球領先的線上影音視頻網站-正版高清影片影視免費線上看",
 		"nl": "iQIYI is 's werelds toonaangevende website voor het online streamen van films en video's en biedt tv-drama's, films, variétéshows, animaties en andere inhoud van hoge kwaliteit."
 	},
 	"url": "www.iq.com",
-	"version": "1.2.17",
+	"version": "1.2.18",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/I/iQIYI/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/iQIYI/assets/thumbnail.png",
 	"color": "#0BBE06",
