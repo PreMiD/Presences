@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 
 	for (const [path, data] of Object.entries(pages)) {
 		if (document.location.pathname.includes(path))
-			presenceData = { ...presenceData, ...data };
+			presenceData = { ...presenceData, ...data } as PresenceData;
 	}
 
 	switch (document.location.host) {

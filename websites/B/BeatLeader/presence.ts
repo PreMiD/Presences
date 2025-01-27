@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
 			]),
 		presenceData: PresenceData = {
 			startTimestamp: browsingTimestamp,
-		},
+		} as PresenceData,
 		{ pathname, href, hostname } = document.location,
 		button = {
 			label: "View Page",
