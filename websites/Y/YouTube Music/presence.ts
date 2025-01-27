@@ -40,8 +40,7 @@ presence.on("UpdateData", async () => {
 		repeatMode = document
 			.querySelector('ytmusic-player-bar[slot="player-bar"]')
 			?.getAttribute("repeat-mode"),
-		videoElement =
-			document.querySelector<HTMLVideoElement>("video.video-stream");
+		videoElement = document.querySelector<HTMLMediaElement>(".video-stream");
 
 	if (useTimeLeftChanged !== useTimeLeft && !privacyMode) {
 		useTimeLeftChanged = useTimeLeft;
