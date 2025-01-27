@@ -8,8 +8,8 @@
         "message": "AI is responding..."
     },
     "claude.conversationStats": {
-        "description": "Displayed to show the number of times the user asked a question and total words used, e.g., 'asked (3) times | (150) words'.",
-        "message": "asked ({0}) times | ({1}) words"
+        "description": "Displayed to show the number of times the user asked a question and total words used, e.g., 'asked 3 times | 150 words'.",
+        "message": "asked {0} times | {1} words"
     },
     "claude.startNewConversation": {
         "description": "Button text to start a new conversation.",
