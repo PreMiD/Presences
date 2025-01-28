@@ -21,7 +21,7 @@ presence.on('UpdateData', async () => {
     largeImageKey: Assets.Logo,
     startTimestamp: time,
   }
-  if (location.hostname.includes('riotgames.com')) {
+  if (location.hostname === 'riotgames.com' || location.hostname === 'www.riotgames.com') {
     const statics: {
       [name: string]: PresenceData
     } = {
@@ -182,7 +182,7 @@ presence.on('UpdateData', async () => {
         break
       }
       default:
-        if (location.hostname.endsWith('leagueoflegends.com')) {
+        if (location.hostname === 'leagueoflegends.com' || location.hostname === 'www.leagueoflegends.com') {
           const statics: {
             [name: string]: PresenceData
           } = {
@@ -261,7 +261,7 @@ presence.on('UpdateData', async () => {
             }
           }
         }
-        else if (location.hostname.endsWith('playruneterra.com')) {
+        else if (location.hostname === 'playruneterra.com' || location.hostname === 'www.playruneterra.com') {
           const statics: {
             [name: string]: PresenceData
           } = {
