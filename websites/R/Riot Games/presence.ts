@@ -182,7 +182,7 @@ presence.on('UpdateData', async () => {
         break
       }
       default:
-        if (location.hostname.includes('leagueoflegends.com')) {
+        if (location.hostname.endsWith('leagueoflegends.com')) {
           const statics: {
             [name: string]: PresenceData
           } = {
@@ -261,7 +261,7 @@ presence.on('UpdateData', async () => {
             }
           }
         }
-        else if (location.hostname.includes('playruneterra.com')) {
+        else if (location.hostname.endsWith('playruneterra.com')) {
           const statics: {
             [name: string]: PresenceData
           } = {

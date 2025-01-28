@@ -125,7 +125,7 @@ presence.on('UpdateData', async () => {
           }`,
         },
         {
-          label: `${presenceData.state.replace('|', ' ')}`,
+          label: `${presenceData.state.replace(/\|/g, ' ')}`,
           url: `${document.location}`,
         },
       ]

@@ -315,7 +315,7 @@ presence.on('UpdateData', async () => {
       )
 
       presenceData.details = getTranslation('Search')
-      presenceData.state = search?.textContent?.split('"')[1].replace('"', '')
+      presenceData.state = search?.textContent?.split('"')[1].replace(/"/g, '')
       presenceData.smallImageKey = Assets.Search
     }
     else if (href.includes('/com.plexapp.plugins.library')) {

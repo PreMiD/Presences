@@ -16,8 +16,13 @@ function simplifyKey(key: string): string {
   ) {
     result = result.replace('-PinkPlay_Controllable', '')
   }
-  if (result.match(/(Horizontal|Vertical|Inverted|Inverse)/))
-    result = result.replace(/Lawless|OneSaber|NoArrows|Standard|Legacy/, '')
+  if (result.match(/(Horizontal|Vertical|Inverted|Inverse)/)) {
+    let previous
+    do {
+      previous = result
+      result = result.replace(/Lawless|OneSaber|NoArrows|Standard|Legacy/, '')
+    } while (result !== previous)
+  }
   return result
 }
 
