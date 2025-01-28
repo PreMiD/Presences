@@ -58,8 +58,10 @@ presence.on("UpdateData", async () => {
 		},
 	};
 
-	for (const [path, data] of Object.entries(pages))
-		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
+	for (const [path, data] of Object.entries(pages)) {
+		if (pathname.includes(path))
+			presenceData = { ...presenceData, ...data } as PresenceData;
+	}
 
 	const page = `Page ${
 			href.includes("?page=") ? href.split("?page=")[1]?.split("&genre")[0] : 1

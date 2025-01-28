@@ -265,6 +265,7 @@ export interface Metadata {
 	iframe?: boolean;
 	iFrameRegExp?: string;
 	readLogs?: boolean;
+	mobile?: boolean;
 	settings?:
 		| Setting
 		| MultiLanguageSetting

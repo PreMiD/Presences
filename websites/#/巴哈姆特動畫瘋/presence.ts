@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		type: ActivityType.Playing,
 		largeImageKey: Assets.Logo,
-	};
+	} as PresenceData;
 
 	if (document.location.hostname === "ani.gamer.com.tw") {
 		if (document.location.pathname === "/") {

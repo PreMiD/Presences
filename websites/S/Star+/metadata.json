@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "Tiemen",
@@ -22,11 +22,11 @@
 		"pt": "Star apresenta conteúdo de televisão e filme voltado para o público adulto, em contraste com a programação voltada para a família e franquia apresentada em outros lugares da Disney +. Este conteúdo é obtido principalmente de bibliotecas de subsidiárias da Disney, incluindo FX, Freeform, Hulu, ABC Signature, 20th Television, 20th Television Animation, 20th Century Studios, Searchlight Pictures, Touchstone Pictures e Hollywood Pictures.",
 		"no": "Star inneholder TV- og filminnhold beregnet på et modent publikum, i motsetning til den familie- og franchiseorienterte programmeringen som er omtalt andre steder i Disney+. Dette innholdet er først og fremst hentet fra bibliotekene til Disney -datterselskaper, inkludert FX, Freeform, Hulu, ABC Signature, 20th Television, 20th Television Animation, 20th Century Studios, Searchlight Pictures, Touchstone Pictures og Hollywood Pictures.",
 		"fi": "Star sisältää televisio- ja elokuvasisältöä, joka on tarkoitettu aikuisille, toisin kuin perhe- ja franchising-suuntautunut ohjelmointi, jota esitetään muualla Disney+: ssa. Tämä sisältö on peräisin pääasiassa Disneyn tytäryhtiöiden kirjastoista, kuten FX, Freeform, Hulu, ABC Signature, 20th Television, 20th Television Animation, 20th Century Studios, Searchlight Pictures, Touchstone Pictures ja Hollywood Pictures.",
-		"sv_SE": "Star innehåller tv- och filminnehåll avsett för mogen publik, i motsats till den familj- och franchiseinriktade programmeringen som finns på andra håll i Disney+. Detta innehåll hämtas främst från biblioteken i Disneys dotterbolag, inklusive FX, Freeform, Hulu, ABC Signature, 20th Television, 20th Television Animation, 20th Century Studios, Searchlight Pictures, Touchstone Pictures och Hollywood Pictures."
+		"sv": "Star innehåller tv- och filminnehåll avsett för mogen publik, i motsats till den familj- och franchiseinriktade programmeringen som finns på andra håll i Disney+. Detta innehåll hämtas främst från biblioteken i Disneys dotterbolag, inklusive FX, Freeform, Hulu, ABC Signature, 20th Television, 20th Television Animation, 20th Century Studios, Searchlight Pictures, Touchstone Pictures och Hollywood Pictures."
 	},
 	"url": "www.starplus.com",
 	"regExp": "([a-z0-9-]+[.])*starplus[.]com[/]",
-	"version": "1.0.19",
+	"version": "1.0.20",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/S/Star+/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Star+/assets/thumbnail.png",
 	"color": "#271f44",

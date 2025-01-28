@@ -126,8 +126,10 @@ presence.on("UpdateData", async () => {
 		},
 	};
 
-	for (const [path, data] of Object.entries(pages))
-		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
+	for (const [path, data] of Object.entries(pages)) {
+		if (pathname.includes(path))
+			presenceData = { ...presenceData, ...data } as PresenceData;
+	}
 
 	if (pathname === "/") presenceData.details = strings.viewHome;
 	else if (pageNav && !pathname.includes("/watch" ?? "/anime")) {

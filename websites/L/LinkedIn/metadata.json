@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "isladot",
@@ -10,10 +10,10 @@
 		"en": "Manage your professional identity. Build and engage with your professional network. Access knowledge, insights and opportunities.",
 		"it": "Gestisci la tua identità professionale. Costruisci e interagisci con la tua rete professionale. Accedi a conoscenze, approfondimenti e opportunità.",
 		"nl": "Beheer uw professionele identiteit. Bouw en maak contact met uw professionele netwerk. Toegang krijgen tot kennis, inzichten en kansen.",
-		"vi_VN": "Quản lý hồ sơ chuyên nghiệp của bạn. Xây dựng và tham gia với mạng lưới chuyên nghiệp của bạn. Tiếp cận kiến thức, các góc nhìn và cơ hội."
+		"vi": "Quản lý hồ sơ chuyên nghiệp của bạn. Xây dựng và tham gia với mạng lưới chuyên nghiệp của bạn. Tiếp cận kiến thức, các góc nhìn và cơ hội."
 	},
 	"url": "www.linkedin.com",
-	"version": "1.0.20",
+	"version": "1.0.21",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/L/LinkedIn/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/LinkedIn/assets/thumbnail.png",
 	"color": "#2867B2",

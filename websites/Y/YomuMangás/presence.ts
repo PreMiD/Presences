@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
 		} else {
 			for (const [path, data] of Object.entries(pages)) {
 				if (pathname.includes(path))
-					presenceData = { ...presenceData, ...data };
+					presenceData = { ...presenceData, ...data } as PresenceData;
 			}
 		}
 	} else {

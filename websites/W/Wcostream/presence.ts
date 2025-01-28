@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			details: "Browsing...",
 			startTimestamp: browsingTimestamp,
-		},
+		} as PresenceData,
 		{ pathname } = document.location,
 		[timestamps, cover, buttons] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),
