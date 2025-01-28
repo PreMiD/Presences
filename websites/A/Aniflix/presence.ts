@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			smallImageKey: paused ? Assets.Pause : Assets.Play,
 			smallImageText: paused ? (await strings).pause : (await strings).play,
-		};
+		} as PresenceData;
 
 	search = document.querySelector<HTMLInputElement>(
 		"#searchbar > div > input[type=text]"

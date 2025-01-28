@@ -111,8 +111,10 @@ presence.on("UpdateData", async () => {
 			?.textContent.toLowerCase()
 			.trim();
 
-	for (const [path, data] of Object.entries(pages))
-		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
+	for (const [path, data] of Object.entries(pages)) {
+		if (pathname.includes(path))
+			presenceData = { ...presenceData, ...data } as PresenceData;
+	}
 
 	if (pathname === "/") presenceData.details = strings.home;
 	else if (pathname.includes("/search/")) {

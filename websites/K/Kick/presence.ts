@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: largeImageKey || Assets.Logo,
 			startTimestamp: browsingTimestamp,
 			details,
-		};
+		} as PresenceData;
 	if (buttons) presenceData.buttons = buttons;
 	if (smallImageKey) presenceData.smallImageKey = smallImageKey;
 	if (state) presenceData.state = state;

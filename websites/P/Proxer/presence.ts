@@ -21,7 +21,7 @@ presence.on("UpdateData", () => {
 				"https://cdn.rcd.gg/PreMiD/websites/P/Proxer/assets/logo.png",
 			details: "Idle",
 			state: "Browsing Proxer.me",
-		},
+		} as PresenceData,
 		{ pathname } = document.location;
 
 	if (pathname.startsWith("/watch")) {

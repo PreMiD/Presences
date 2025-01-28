@@ -6,7 +6,7 @@ const presence = new Presence({
 const enum Assets {
 	Logo = "https://cdn.rcd.gg/PreMiD/websites/N/Nuxt.js/assets/0.png",
 
-	
+
 }
 
 async function getStrings() {
@@ -221,7 +221,7 @@ presence.on("UpdateData", async () => {
 			};
 			for (const [path, data] of Object.entries(pages)) {
 				if (pathname.replace(/-/gm, "").includes(path))
-					presenceData = { ...presenceData, ...data };
+					presenceData = { ...presenceData, ...data } as PresenceData;
 			}
 		}
 	}

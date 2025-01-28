@@ -515,7 +515,7 @@ presence.on("UpdateData", async () => {
 								.replace("=", "/")
 								.match(k)
 						) {
-							presenceData = { ...presenceData, ...v };
+							presenceData = { ...presenceData, ...v } as PresenceData;
 							if (!presenceData.smallImageKey) {
 								presenceData.smallImageKey = Assets.Reading;
 								presenceData.smallImageText = strings.browse;
@@ -564,7 +564,7 @@ presence.on("UpdateData", async () => {
 								.replace("=", "/")
 								.match(k)
 						) {
-							presenceData = { ...presenceData, ...v };
+							presenceData = { ...presenceData, ...v } as PresenceData;
 							if (!presenceData.smallImageKey) {
 								presenceData.smallImageKey = Assets.Reading;
 								presenceData.smallImageText = strings.browse;
@@ -623,7 +623,7 @@ presence.on("UpdateData", async () => {
 								.replace("=", "/")
 								.match(k)
 						) {
-							presenceData = { ...presenceData, ...v };
+							presenceData = { ...presenceData, ...v } as PresenceData;
 							if (!presenceData.smallImageKey) {
 								presenceData.smallImageKey = Assets.Reading;
 								presenceData.smallImageText = strings.browse;
@@ -685,7 +685,7 @@ presence.on("UpdateData", async () => {
 								.replace("=", "/")
 								.match(k)
 						) {
-							presenceData = { ...presenceData, ...v };
+							presenceData = { ...presenceData, ...v } as PresenceData;
 							if (!presenceData.smallImageKey) {
 								presenceData.smallImageKey = Assets.Reading;
 								presenceData.smallImageText = strings.browse;
@@ -752,7 +752,7 @@ presence.on("UpdateData", async () => {
 								.replace("=", "/")
 								.match(k)
 						) {
-							presenceData = { ...presenceData, ...v };
+							presenceData = { ...presenceData, ...v } as PresenceData;
 							if (!presenceData.smallImageKey) {
 								presenceData.smallImageKey = Assets.Reading;
 								presenceData.smallImageText = strings.browse;
