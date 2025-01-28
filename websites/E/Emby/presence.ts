@@ -429,7 +429,7 @@ function mediaPrimaryImage(mediaId: string): string {
 
 function audioVariablesReplaced(str: string, info: MediaInfo) {
 	if (!str || !info) {
-		console.error(
+		presence.error(
 			"Can't find audio variables str or info. Contact the presence developer."
 		);
 		return "";
