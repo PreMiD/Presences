@@ -13,7 +13,7 @@ let lastPlaybackState = false,
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			startTimestamp,
-		},
+		} as PresenceData,
 		video = document.querySelector("video"),
 		{ pathname, href } = document.location;
 

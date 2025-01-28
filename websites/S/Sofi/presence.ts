@@ -168,8 +168,10 @@ presence.on("UpdateData", async () => {
 			}
 		}
 
-		for (const [path, data] of Object.entries(pages))
-			if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
+		for (const [path, data] of Object.entries(pages)) {
+			if (pathname.includes(path))
+				presenceData = { ...presenceData, ...data } as PresenceData;
+		}
 	} else if (host === "gems.sofi.gg") {
 		if (pathname.includes("/orders")) return;
 		presenceData.details = "Buying Gems";
