@@ -188,49 +188,40 @@ export async function getThumbnail(videoId: string): Promise<string> {
 }
 
 const desktopSelectors = {
-		searchInput:
-			"#search-input > div > div:nth-child(2) > input,\
-		#search-input > input",
-		userName: "#author-text.ytd-backstage-post-renderer",
-		userName2: "#text.ytd-channel-name",
-		userTab:
-			'[class="style-scope ytd-tabbed-page-header"] [aria-selected="true"]',
-		userVideoTab:
-			'[class="style-scope ytd-feed-filter-chip-bar-renderer iron-selected"]',
-		postThumbnail: "#post #main img",
-		postChannelImage: "#post img",
-		postAuthor: "#author-text",
-		channelImage: ".yt-spec-avatar-shape img",
-		playlistTitle:
-			"#text-displayed,\
-		ytd-playlist-header-renderer yt-dynamic-sizing-formatted-string.ytd-playlist-header-renderer,\
-		#title > yt-formatted-string > a",
-		videoPlaylistTitle:
-			"#content #header-description > h3:nth-child(1) > yt-formatted-string > a",
-		videoChannelImage: "#avatar.ytd-video-owner-renderer > img",
-		videoLive: ".ytp-live",
-		privacyParentBox: ".ytp-chrome-controls .ytp-right-controls",
-	},
-	mobileSelectors: Record<keyof typeof desktopSelectors, string> = {
-		searchInput: ".yt-searchbox-input",
-		userName: "h1",
-		userName2: "h1",
-		userTab: "[class*=tab-selected]",
-		userVideoTab: ".selected[class*=chip]",
-		postThumbnail:
-			"ytm-backstage-post-renderer ytm-backstage-image-renderer img",
-		postChannelImage: "ytm-backstage-post-renderer yt-post-header img",
-		postAuthor: ".ytPostHeaderHostAuthorText",
-		channelImage: "yt-page-header-view-model [class*=yt-spec-avatar-shape] img",
-		playlistTitle: "#playlist-title",
-		videoPlaylistTitle: ".playlist-panel-list-title",
-		videoChannelImage: "[class*=owner-icon-and-title] .ytProfileIconImage",
-		videoLive: ".ytwPlayerTimeDisplayContentLiveDot",
-		privacyParentBox: "[class*=video-action-bar-actions]",
-	};
+  searchInput: '#search-input > div > div:nth-child(2) > input,#search-input > input',
+  userName: '#author-text.ytd-backstage-post-renderer',
+  userName2: '#text.ytd-channel-name',
+  userTab: '[class="style-scope ytd-tabbed-page-header"] [aria-selected="true"]',
+  userVideoTab: '[class="style-scope ytd-feed-filter-chip-bar-renderer iron-selected"]',
+  postThumbnail: '#post #main img',
+  postChannelImage: '#post img',
+  postAuthor: '#author-text',
+  channelImage: '.yt-spec-avatar-shape img',
+  playlistTitle: '#text-displayed,ytd-playlist-header-renderer yt-dynamic-sizing-formatted-string.ytd-playlist-header-renderer,#title > yt-formatted-string > a',
+  videoPlaylistTitle: '#content #header-description > h3:nth-child(1) > yt-formatted-string > a',
+  videoChannelImage: '#avatar.ytd-video-owner-renderer > img',
+  videoLive: '.ytp-live',
+  privacyParentBox: '.ytp-chrome-controls .ytp-right-controls',
+}
+const mobileSelectors: Record<keyof typeof desktopSelectors, string> = {
+  searchInput: '.yt-searchbox-input',
+  userName: 'h1',
+  userName2: 'h1',
+  userTab: '[class*=tab-selected]',
+  userVideoTab: '.selected[class*=chip]',
+  postThumbnail: 'ytm-backstage-post-renderer ytm-backstage-image-renderer img',
+  postChannelImage: 'ytm-backstage-post-renderer yt-post-header img',
+  postAuthor: '.ytPostHeaderHostAuthorText',
+  channelImage: 'yt-page-header-view-model [class*=yt-spec-avatar-shape] img',
+  playlistTitle: '#playlist-title',
+  videoPlaylistTitle: '.playlist-panel-list-title',
+  videoChannelImage: '[class*=owner-icon-and-title] .ytProfileIconImage',
+  videoLive: '.ytwPlayerTimeDisplayContentLiveDot',
+  privacyParentBox: '[class*=video-action-bar-actions]',
+}
 
 export function getQuerySelectors(
-	isMobile: boolean
+  isMobile: boolean,
 ): Record<keyof typeof desktopSelectors, string> {
-	return isMobile ? mobileSelectors : desktopSelectors;
+  return isMobile ? mobileSelectors : desktopSelectors
 }

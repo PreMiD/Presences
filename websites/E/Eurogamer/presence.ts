@@ -4,7 +4,7 @@ const presence = new Presence({
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 const enum Assets {
-	Logo = "https://cdn.rcd.gg/PreMiD/websites/E/Eurogamer/assets/logo.png",
+  Logo = 'https://cdn.rcd.gg/PreMiD/websites/E/Eurogamer/assets/logo.png',
 }
 
 async function getStrings() {

@@ -28,14 +28,14 @@ function capitalizeFirstLetter(string: string) {
 		string.trim().charAt(0).toUpperCase() + string.trim().slice(1).toLowerCase()
 	);
 }
-function imgPath(path: string, hostname: string) {
+function imgPath(path: string | undefined | null, hostname: string) {
 	if (!path) return Assets.Logo;
 	if (path.includes(hostname)) return `https://${path.replace("//", "")}`;
 	else return `https://${hostname}${path}`;
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>,
-	oldLang: string = null;
+	oldLang: string | null = null;
 
 presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
@@ -161,7 +161,7 @@ presence.on("UpdateData", async () => {
 		case "tutorials": {
 			if (!docusContent) {
 				presenceData.details = "Reading a tutorial about";
-				presenceData.state = capitalizeFirstLetter(ogTitle);
+				presenceData.state = capitalizeFirstLetter(ogTitle ?? '');
 				presenceData.buttons = [
 					{
 						label: "View Tutorial",

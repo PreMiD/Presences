@@ -662,7 +662,7 @@ interface PresenceEvents {
   /**
    * Emitted when data is received from the iframe.ts file
    */
-  iFrameData: [data: unknown]
+  iFrameData: [data: any]
 }
 
 type Awaitable<T> = Promise<T> | T
