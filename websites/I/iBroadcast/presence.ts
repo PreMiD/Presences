@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
 					".mgr-container-artwork-single,.mgr-player-artwork-image"
 				)?.src ?? Assets.Logo,
 			startTimestamp: browsingTimestamp,
-		},
+		} as PresenceData,
 		cover = await presence.getSetting<boolean>("cover"),
 		{ hostname } = document.location;
 

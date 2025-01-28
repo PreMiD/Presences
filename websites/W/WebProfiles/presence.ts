@@ -23,8 +23,10 @@ presence.on("UpdateData", async () => {
 			"/register": { details: "Registering..." },
 		};
 
-	for (const [path, data] of Object.entries(pages))
-		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
+	for (const [path, data] of Object.entries(pages)) {
+		if (pathname.includes(path))
+			presenceData = { ...presenceData, ...data } as PresenceData;
+	}
 
 	if (pathname === "/") presenceData.details = "Viewing home page";
 	else if (pathname.includes("/u/")) {

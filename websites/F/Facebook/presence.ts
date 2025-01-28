@@ -858,8 +858,10 @@ presence.on("UpdateData", async () => {
 			details: `Places - ${strings.browse}`,
 		},
 	};
-	for (const [path, data] of Object.entries(pages))
-		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
+	for (const [path, data] of Object.entries(pages)) {
+		if (pathname.includes(path))
+			presenceData = { ...presenceData, ...data } as PresenceData;
+	}
 
 	if (!showTimestamp || dontShowTmp || privacyMode) {
 		delete presenceData.startTimestamp;
