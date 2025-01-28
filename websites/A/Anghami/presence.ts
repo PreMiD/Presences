@@ -2,7 +2,7 @@ const presence = new Presence({
 		clientId: "721740741570986016",
 	}),
 	strings = presence.getStrings({
-		pause: "general.paused",
+		paused: "general.paused",
 		browse: "general.browsing",
 	});
 
