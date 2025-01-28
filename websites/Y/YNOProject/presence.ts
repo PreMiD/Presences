@@ -13,15 +13,15 @@ presence.on("UpdateData", async () => {
 		name: Name,
 		type: ActivityType.Playing,
 		startTimestamp: GameState.startedAt,
-		largeImageText: gameName || void 0,
+		largeImageText: gameName,
 		largeImageKey: await fetchCharacterFace().then(url => url || Logo),
-		smallImageKey: await fetchBadge().then(url => url || void 0),
+		smallImageKey: await fetchBadge(),
 		details: gameName || "Choosing a game...",
-		state: gameName ? gameLocation || "Disconnected" : void 0,
+		state: gameName ? gameLocation || "Disconnected" : null,
 		buttons: gameName
 			? [{ label: `Play ${gameName}`, url: document.location.href }]
-			: void 0,
-	};
+			: null,
+	} as unknown as PresenceData;
 
 	presence.setActivity(presenceData);
 });
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
  *
  * @returns Data URL or nothing at the portal
  */
-async function fetchCharacterFace(): Promise<string | void> {
+async function fetchCharacterFace(): Promise<string | undefined> {
 	const url = document.querySelector<HTMLLinkElement>("#favicon")?.href;
 	if (url && characterFacesCache.has(url)) return characterFacesCache.get(url);
 	else if (url) {
@@ -57,7 +57,7 @@ async function fetchCharacterFace(): Promise<string | void> {
  * @example "url('https://cdn.rcd.gg/PreMiD/websites/Y/YNOProject/assets/0.png')".match(it)?.[2] // https://cdn.rcd.gg/PreMiD/websites/Y/YNOProject/assets/0.png
  * @returns Entire URL or nothing for guest player
  */
-async function fetchBadge(): Promise<string | void> {
+async function fetchBadge(): Promise<string | undefined> {
 	if (!document.querySelector("#content")?.classList?.contains("loggedIn"))
 		return;
 	const badgeEl = document.querySelector<HTMLElement>("#badgeButton .badge"),
@@ -80,7 +80,7 @@ async function fetchBadge(): Promise<string | void> {
  * The name of playing game, or nothing at the portal
  * @example "Yume 2kki Online - YNOproject".match(it)?.[0] // Yume 2kki
  */
-async function fetchGameName(): Promise<string | void> {
+async function fetchGameName(): Promise<string | undefined> {
 	return document
 		.querySelector("title")
 		?.textContent?.match(RegExp("^.+(?= Online -)"))?.[0];
@@ -89,14 +89,14 @@ async function fetchGameName(): Promise<string | void> {
 /**
  * Read current location within the game.
  */
-async function fetchGameLocation(): Promise<string | void> {
+async function fetchGameLocation(): Promise<string | undefined> {
 	return document.querySelector("#locationText")?.textContent;
 }
 
 class GameState {
-	static game: string | void = void 0;
+	static game: string | undefined;
 	static startedAt = 0;
-	static resetWith(game: string | void) {
+	static resetWith(game: string | undefined) {
 		this.game = game;
 		this.startedAt = Math.floor(Date.now() / 1000);
 		characterFacesCache.clear();

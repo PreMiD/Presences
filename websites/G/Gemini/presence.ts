@@ -24,16 +24,24 @@ presence.on("UpdateData", async () => {
 						"div.conversation.selected>div.conversation-title"
 					).textContent ?? "Thinking of a new Prompt...";
 
-				// Show word count
-				const elem = document.querySelectorAll(
-					"p.query-text-line,div.response-optimization.markdown"
-				);
-				presenceData.state = `Asked ${
-					elem[0].textContent.split(" ").length
-				} words | answered with ${
-					elem[1].textContent.split(" ").length
-				} words.`;
+				// Show word count for messages
+				const questions = document.querySelectorAll("p.query-text-line"),
+					answers = document.querySelectorAll(
+						"message-content.model-response-text"
+					);
+
+				// Loop through all response messages, to count the total words
+				let askedWords = 0;
+				for (const x of questions)
+					askedWords += x.textContent.split(" ").length;
+
+				let answeredWords = 0;
+				for (const x of answers)
+					answeredWords += x.textContent.split(" ").length;
+
+				presenceData.state = `Asked ${askedWords} words | answered with ${answeredWords} words.`;
 			} else presenceData.details = "Asking questions";
+
 			break;
 		case pathname.startsWith("/extensions"):
 			presenceData.details = "Managing extensions";

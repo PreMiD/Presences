@@ -189,7 +189,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
-		},
+		} as PresenceData,
 		{ pathname, href } = document.location;
 
 	if (document.querySelector("#plex")) {
