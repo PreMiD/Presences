@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 		pause: "general.paused",
 		live: "general.live",
 	});
-	let video: HTMLVideoElement = null,
+	let video: HTMLVideoElement | null = null,
 		presenceData: PresenceData = {
 			name: "Paramount+",
 			largeImageKey: Logos.Paramount,
