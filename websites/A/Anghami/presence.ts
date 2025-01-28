@@ -2,7 +2,6 @@ const presence = new Presence({
 		clientId: "721740741570986016",
 	}),
 	strings = presence.getStrings({
-		play: "general.play",
 		pause: "general.paused",
 		browse: "general.browsing",
 	});
@@ -19,10 +18,8 @@ function updateLogo() {
 				return url;
 			}
 		}
-	} else {
-		const url = "https://cdn.rcd.gg/PreMiD/websites/A/Anghami/assets/logo.png";
-		return url;
 	}
+	return "https://cdn.rcd.gg/PreMiD/websites/A/Anghami/assets/logo.png";
 }
 
 function calculateEndTimestamp(
