@@ -11,6 +11,7 @@ export enum SarifRuleId {
   iframeRegexpCheck = 'iframe-regexp-check',
   languageCheck = 'language-check',
   serviceFolderCheck = 'service-folder-check',
+  imageCheck = 'image-check',
 }
 
 const sarifRules: Record<SarifRuleId, ReportingDescriptor> = {
@@ -54,6 +55,13 @@ const sarifRules: Record<SarifRuleId, ReportingDescriptor> = {
     name: 'Service Folder Check',
     shortDescription: {
       text: 'Makes sure the service folder is correct',
+    },
+  },
+  [SarifRuleId.imageCheck]: {
+    id: SarifRuleId.imageCheck,
+    name: 'Image Check',
+    shortDescription: {
+      text: 'Makes sure all images (logo and URLs) are exactly 512x512 pixels',
     },
   },
 }

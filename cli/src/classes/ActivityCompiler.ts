@@ -1,11 +1,15 @@
+import { Buffer } from 'node:buffer'
 import { existsSync } from 'node:fs'
 import { cp, readFile, rm } from 'node:fs/promises'
 import { basename, dirname, resolve } from 'node:path'
 import chalk from 'chalk'
 import { watch } from 'chokidar'
 import { build } from 'esbuild'
+import { globby } from 'globby'
+import ky from 'ky'
 import ora from 'ora'
 import { compare, inc } from 'semver'
+import sharp from 'sharp'
 import { getLine } from '../util/getJsonPosition.js'
 import { error, exit, prefix } from '../util/log.js'
 import { sanitazeFolderName } from '../util/sanitazeFolderName.js'
@@ -18,6 +22,7 @@ export interface ActivityMetadata {
   service: string
   apiVersion: number
   version: string
+  logo: string
   iframe?: boolean
   iFrameRegExp?: string
   description: Record<string, string>
@@ -37,7 +42,7 @@ export class ActivityCompiler {
     this.ts = new TypescriptCompiler(cwd, activity)
   }
 
-  async compile({ kill, checkMetadata, preCheck = true }: { kill: boolean, checkMetadata: boolean, preCheck?: boolean }): Promise<boolean> {
+  async compile({ kill, validate, preCheck = true }: { kill: boolean, validate: boolean, preCheck?: boolean }): Promise<boolean> {
     if (preCheck) {
       await this.dependencies.installDependencies()
       const success = await this.ts.typecheck(kill)
@@ -46,8 +51,8 @@ export class ActivityCompiler {
       }
     }
 
-    if (checkMetadata) {
-      const success = await this.checkMetadata({ kill })
+    if (validate) {
+      const success = await this.validate({ kill })
       if (!success) {
         return false
       }
@@ -84,7 +89,7 @@ export class ActivityCompiler {
     return true
   }
 
-  async watch({ checkMetadata }: { checkMetadata: boolean }) {
+  async watch({ validate }: { validate: boolean }) {
     await this.dependencies.installDependencies()
 
     this.ws = new WebSocketServer(this.cwd)
@@ -96,7 +101,7 @@ export class ActivityCompiler {
       persistent: true,
     }).on('all', async (event, path) => {
       if (['add', 'unlink'].includes(event) && basename(path) === 'iframe.ts') {
-        return this.ts.restart(this.compileAndSend.bind(this, { checkMetadata }))
+        return this.ts.restart(this.compileAndSend.bind(this, { validate }))
       }
 
       if (basename(path) === 'package.json') {
@@ -120,19 +125,19 @@ export class ActivityCompiler {
           }
         }
 
-        await this.ts.restart(this.compileAndSend.bind(this, { checkMetadata }))
+        await this.ts.restart(this.compileAndSend.bind(this, { validate }))
       }
     })
 
-    this.ts.watch(this.compileAndSend.bind(this, { checkMetadata }))
+    this.ts.watch(this.compileAndSend.bind(this, { validate }))
   }
 
-  private async compileAndSend({ checkMetadata }: { checkMetadata: boolean }) {
-    await this.compile({ checkMetadata, preCheck: false, kill: false })
+  private async compileAndSend({ validate }: { validate: boolean }) {
+    await this.compile({ validate, preCheck: false, kill: false })
     await this.ws?.send()
   }
 
-  private async checkMetadata({ kill }: { kill: boolean }): Promise<boolean> {
+  private async validate({ kill }: { kill: boolean }): Promise<boolean> {
     const metadata: ActivityMetadata = JSON.parse(await readFile(resolve(this.cwd, 'metadata.json'), 'utf-8'))
     const libraryVersion: ActivityMetadata | null = await fetch(`https://api.premid.app/v6/activities${this.versionized ? `/v${metadata.apiVersion}` : ''}/${encodeURIComponent(metadata.service)}/metadata.json`).then(res => res.json()).catch(() => null)
 
@@ -285,6 +290,94 @@ export class ActivityCompiler {
           },
         })
         valid = false
+      }
+    }
+
+    const imageCache = new Map<string, { width: number | null, height: number | null }>()
+
+    //* Helper function to validate image dimensions
+    const validateImage = async (url: string, filePath: string, line: number, column: number) => {
+      let dimensions = imageCache.get(url)
+
+      if (!dimensions) {
+        try {
+          const response = await ky.get(url).arrayBuffer()
+          const metadata = await sharp(Buffer.from(response)).metadata()
+          dimensions = { width: metadata.width ?? null, height: metadata.height ?? null }
+          imageCache.set(url, dimensions)
+        }
+        catch (err: unknown) {
+          const message = `Failed to validate image URL (${url}): ${err instanceof Error ? err.message : String(err)}`
+          if (kill) {
+            exit(message)
+          }
+
+          error(message)
+          addSarifLog({
+            path: filePath,
+            message,
+            ruleId: SarifRuleId.imageCheck,
+            position: {
+              line,
+              column,
+            },
+          })
+          return false
+        }
+      }
+
+      if (dimensions.width !== 512 || dimensions.height !== 512) {
+        const message = `Image URL dimensions must be exactly 512x512 pixels, got ${dimensions.width}x${dimensions.height} for URL: ${url}`
+        if (kill) {
+          exit(message)
+        }
+
+        error(message)
+        addSarifLog({
+          path: filePath,
+          message,
+          ruleId: SarifRuleId.imageCheck,
+          position: {
+            line,
+            column,
+          },
+        })
+        return false
+      }
+
+      return true
+    }
+
+    //* Check logo URL
+    const logoLine = await getLine(resolve(this.cwd, 'metadata.json'), 'logo')
+    if (!(await validateImage(metadata.logo, resolve(this.cwd, 'metadata.json'), logoLine, 0))) {
+      valid = false
+    }
+
+    //* Check image URLs in TypeScript files
+    const tsFiles = await globby('**/*.ts', { cwd: this.cwd, absolute: true })
+
+    for (const file of tsFiles) {
+      const content = await readFile(file, 'utf-8')
+      const imageUrlRegex = /(?<=["'`])(https?:\/\/.*?\.(?:png|jpg|jpeg|gif|webp)(?:\?[^'"`]+)?)(?=["'`])/g
+      const matches = content.matchAll(imageUrlRegex)
+
+      for (const match of matches) {
+        //* If the url contains a template literal, skip it
+        if (match[1].includes(`\${`))
+          continue
+
+        //* Regex to check if the url contains + " or + ' or + `
+        if (/(?<=\+ )["'`].*?["'`]/.test(match[1]))
+          continue
+
+        const url = match[1]
+        const line = content.substring(0, match.index).split('\n').length
+        const column = match.index - content.lastIndexOf('\n', match.index) - 1
+
+        if (!(await validateImage(url, file, line, column))) {
+          valid = false
+        }
       }
     }
 

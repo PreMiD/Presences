@@ -7,11 +7,11 @@ import { buildActivity } from './buildActivity.js'
 
 export async function buildAll({
   kill,
-  checkMetadata,
+  validate,
   sarif,
 }: {
   kill: boolean
-  checkMetadata: boolean
+  validate: boolean
   sarif: boolean
 }) {
   const activities = await getActivities()
@@ -22,7 +22,7 @@ export async function buildAll({
   for (const activity of activities) {
     const versionized = multimatch(activity.folder, '**/websites/*/*/v*').length > 0
 
-    const isSuccess = await buildActivity({ path: activity.folder, activity: activity.metadata, versionized, watch: false, kill, checkMetadata })
+    const isSuccess = await buildActivity({ path: activity.folder, activity: activity.metadata, versionized, watch: false, kill, validate })
     success = success && isSuccess
   }
 

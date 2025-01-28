@@ -13,14 +13,14 @@ export async function buildActivity({
   versionized,
   watch,
   kill,
-  checkMetadata,
+  validate,
 }: {
   path: string
   activity: ActivityMetadata
   versionized: boolean
   watch: boolean
   kill: boolean
-  checkMetadata: boolean
+  validate: boolean
 }): Promise<boolean> {
   if (isCI)
     startGroup(activity.service)
@@ -47,7 +47,7 @@ export async function buildActivity({
 
   const compiler = new ActivityCompiler(path, activity, versionized)
   if (watch) {
-    await compiler.watch({ checkMetadata })
+    await compiler.watch({ validate })
 
     if (isCI)
       endGroup()
@@ -55,7 +55,7 @@ export async function buildActivity({
     return true
   }
   else {
-    const success = await compiler.compile({ kill, checkMetadata, preCheck: true })
+    const success = await compiler.compile({ kill, validate, preCheck: true })
 
     if (isCI)
       endGroup()

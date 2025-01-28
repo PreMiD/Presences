@@ -33,7 +33,7 @@ cli
   .option('--watch', 'Watch for changes and rebuild (Same as `dev`)')
   .option('--changed', 'Build only changed activities')
   .option('--kill', 'Kill the process on error', { default: true })
-  .option('--check-metadata', 'Check if the metadata is valid')
+  .option('--validate', 'Check if the activity is valid (metadata, images, etc.)')
   .option('--sarif', 'Output the result in SARIF format (Doesn\'t work with --kill)')
   .action((service, options) => build(service, options))
 

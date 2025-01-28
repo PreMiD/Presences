@@ -7,11 +7,11 @@ import { buildActivity } from './buildActivity.js'
 
 export async function buildChanged({
   kill,
-  checkMetadata,
+  validate,
   sarif,
 }: {
   kill: boolean
-  checkMetadata: boolean
+  validate: boolean
   sarif: boolean
 }) {
   const changedActivities = await getChangedActivities()
@@ -25,7 +25,7 @@ export async function buildChanged({
   for (const activity of changedActivities) {
     const versionized = multimatch(activity.folder, '**/websites/*/*/v*').length > 0
 
-    const isSuccess = await buildActivity({ path: activity.folder, activity: activity.metadata, versionized, kill, checkMetadata, watch: false })
+    const isSuccess = await buildActivity({ path: activity.folder, activity: activity.metadata, versionized, kill, validate, watch: false })
     successful = successful && isSuccess
   }
 
