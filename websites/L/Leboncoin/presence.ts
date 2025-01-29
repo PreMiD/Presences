@@ -72,10 +72,12 @@ presence.on("UpdateData", () => {
 	} else if (document.location.pathname.includes("/ad/")) {
 		presenceData.details = `Annonce ${document.title.split("-")[0].trim()}`;
 		const adsPrice = getAdPrice(),
-			  advertiserName = getAdvertiserName();
-		if (adsPrice === "Prix inconnu" && advertiserName === "Vendeur inconnu")
-			return; // If both are unknown, don't update the presence
-		presenceData.state = `Vendu ${adsPrice} par ${advertiserName}`;
+		      advertiserName = getAdvertiserName();
+		if (adsPrice === "Prix inconnu" && advertiserName === "Vendeur inconnu") return; // If both are unknown, don't update the presence
+		const finalPrice = document.location.pathname.includes("/offres_d_emploi/")
+			? `Payé ${adsPrice} ${document.querySelector("div.py-lg:nth-child(2) > div:nth-child(1) > div:nth-child(1) > p:nth-child(2)")?.textContent || "?"}`
+			: `Vendu ${adsPrice}`;
+		presenceData.state = `${finalPrice} par ${advertiserName}`;
 		presenceData.buttons = [
 			{ label: "Consulter l'annonce", url: document.location.href },
 		];
