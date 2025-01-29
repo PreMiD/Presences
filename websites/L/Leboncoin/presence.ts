@@ -63,6 +63,11 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{ label: "Consulter le profil", url: document.location.href },
 		];
+	} else if (document.location.pathname.includes("/boutique")) {
+		presenceData.state = `Boutique ${document.querySelector("h1.mb-md")?.textContent}`;
+		presenceData.buttons = [
+			{ label: "Consulter la boutique", url: document.location.href },
+		];
 	} else if (document.location.pathname.includes("/recherche")) {
 		presenceData.details = "Dans les résultats de recherche :";
 
