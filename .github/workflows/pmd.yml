@@ -27,7 +27,7 @@ jobs:
         run: HUSKY=0 npm ci
 
       - name: Run PMD
-        run: npx pmd build --changed --no-kill --check-metadata --sarif
+        run: npx pmd build --changed --no-kill --validate --sarif
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true
