@@ -486,12 +486,12 @@ async function handleAudioPlayback(): Promise<void> {
     }
 
     // playing
-    if (!audioElement?.paused) {
+    if (audioElement && !audioElement.paused) {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.play
       presenceData.smallImageText = 'Playing'
 
       if (showMediaTimestamp) {
-        [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestampsfromMedia(audioElement!)
+        [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestampsfromMedia(audioElement)
       }
       else {
         delete presenceData.endTimestamp
@@ -507,6 +507,7 @@ async function handleAudioPlayback(): Promise<void> {
     }
   }
   catch {
+    // do nothing
   }
 }
 
@@ -663,13 +664,13 @@ async function handleVideoPlayback(): Promise<void> {
 
       // playing
     }
-    else if (!videoPlayerElem?.paused) {
+    else if (!videoPlayerElem.paused) {
       presenceData.type = ActivityType.Watching
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.play
       presenceData.smallImageText = 'Playing'
 
       if (showMediaTimestamp) {
-        [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestampsfromMedia(videoPlayerElem!)
+        [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestampsfromMedia(videoPlayerElem)
       }
       else {
         delete presenceData.endTimestamp

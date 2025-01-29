@@ -87,7 +87,7 @@ presence.on('UpdateData', async () => {
       delete presenceData.endTimestamp
     }
 
-    presence.setActivity(presenceData, playback)
+    presence.setActivity(presenceData)
   }
   else {
     presenceData.details = (await strings).browse
