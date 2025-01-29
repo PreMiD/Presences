@@ -35,40 +35,37 @@ presence.on("UpdateData", async () => {
 		strings = await getStrings();
 	}
 
-	if (pathname === "/") {
+	if (pathname === "/") 
 		presenceDetail = strings.newPrompt;
-	} else if (pathname.includes("/a/chat/s")) {
+	 else if (pathname.includes("/a/chat/s")) {
 		presenceDetail = showTitle
 			? document.querySelector("div.d8ed659a").textContent
 			: strings.talkingWithAi;
-	} else {
+	} else 
 		presenceDetail = strings.talkingWithAi;
-	}
+	
 
 	// Used for checking if the AI is currently responding
-	const talkingElement = document.querySelector(
-			"div[class='f9bf7997 d7dc56a8']"
-		),
-		stoppedTalkingElement = document.querySelector(
-			"div.f9bf7997.d7dc56a8.c05b5566"
-		);
+	
 	// Checking if the user is currently typing a question
-	if (document.querySelector("#chat-input").textContent !== "") {
+	if (document.querySelector("#chat-input").textContent !== "") 
 		presenceState = strings.askingQuestion;
-	} else if (talkingElement) {
+	 else if (document.querySelector(
+			"div[class='f9bf7997 d7dc56a8']"
+		)) 
 		presenceState = strings.aiTalking;
-	} else if (stoppedTalkingElement) {
+	 else if (document.querySelector(
+			"div.f9bf7997.d7dc56a8.c05b5566"
+		)) 
 		presenceState = strings.readingResponse;
-	} else {
+	 else 
 		presenceState = null;
-	}
+	
 
-	const presenceData: PresenceData = {
+	presence.setActivity({
 		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
 		details: presenceDetail,
 		state: presenceState,
-	};
-
-	presence.setActivity(presenceData);
+	});
 });
