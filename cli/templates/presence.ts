@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   // The client ID of the Application created at https://discordapp.com/developers/applications
   clientId: '000000000000000000',
@@ -9,7 +11,7 @@ const strings = presence.getStrings({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000) // Here you generate the time someone is spending on the page. You divivde the miliseconds to seconds (/ 1000)
 
-const enum Assets { // An Enum for collecting all images (that aren't loaded on the site or are better quality for usage for the presence.
+enum ActivityAssets { // An Enum for collecting all images (that aren't loaded on the site or are better quality for usage for the presence.
   Logo = '', // You should the logo link in here
 }
 
@@ -33,9 +35,9 @@ presence.on('UpdateData', async () => {
 
   const presenceData: PresenceData = {
     // The large image on the presence. This can be a key of an image that has been added to the enum Assets.
-    largeImageKey: Assets.Logo, // Assets enum key or image url
+    largeImageKey: ActivityAssets.Logo, // Assets enum key or image url
     // The small image on the presence. This can be a key of an image that has been added to the enum Assets.
-    smallImageKey: '', // Assets enum key or image url.
+    smallImageKey: Assets.Play, // Assets enum key or image url.
     // The text which is displayed when hovering over the small image
     smallImageText: 'Some hover text',
     // The upper section of the presence text

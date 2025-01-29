@@ -8,12 +8,7 @@ export default antfu(
   },
   ...eslintPluginJsonSchemaValidator.configs['flat/recommended'],
   {
-    // TODO remove this rule
     rules: {
-      'no-restricted-syntax': [
-        'error',
-        'TSExportAssignment',
-      ],
       'new-cap': [
         'error',
         { newIsCapExceptions: ['iFrame'], capIsNew: false, newIsCap: true, properties: true },
