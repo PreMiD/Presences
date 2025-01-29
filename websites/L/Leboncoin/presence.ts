@@ -15,6 +15,8 @@ presence.on("UpdateData", () => {
 
 	if (document.location.pathname.includes("/deposer-une-annonce"))
 		presenceData.state = "Déposer une annonce";
+	else if (document.location.pathname.includes("/favorites"))
+		presenceData.state = "Mes annonces sauvegardées";
 	else if (document.location.pathname.includes("/mes-recherches"))
 		presenceData.state = "Mes recherches sauvegardées";
 	else if (document.location.pathname.includes("/mes-annonces"))
