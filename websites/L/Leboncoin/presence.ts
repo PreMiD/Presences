@@ -118,7 +118,6 @@ presence.on("UpdateData", () => {
 		presenceData.state = "Page d'accueil";
 	else presenceData.details = "Explore";
 
-	// console.log("UpdateData", presenceData);
 	if (presenceData.details) presence.setActivity(presenceData);
 	else presence.setActivity();
 });
