@@ -83,7 +83,7 @@ presence.on('UpdateData', () => {
           break
         }
         default: {
-          if (/^\w{8}-\w{4}-\w{4}-\w{4}-\w{12}$/.test(pathSplit[1])) {
+          if (/^\w{8}-\w{4}-\w{4}-\w{4}-\w{12}$/.test(pathSplit[1] ?? '')) {
             presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.cover-art')?.src
               ?? presenceData.largeImageKey
             switch (pathSplit[2] || '') {

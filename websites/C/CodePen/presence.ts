@@ -43,7 +43,7 @@ presence.on('UpdateData', () => {
   }
   else if (window.location.pathname.includes('/topic/')) {
     presenceData.details = `Looking at topic ${
-      document.querySelectorAll('.Topics_topicTitle-3OfJU')[0].textContent
+      document.querySelectorAll('.Topics_topicTitle-3OfJU')[0]?.textContent
     }`
     presenceData.state = document
       .querySelectorAll('.Topics_topicDescription-2CNwF')[0]
@@ -57,8 +57,8 @@ presence.on('UpdateData', () => {
       ?.replace('From “', '')
       ?.replace('”', '')} on Codepen TV`
     presenceData.state = `${
-      document.querySelectorAll('.item-title')[0].textContent
-    } ${document.querySelectorAll('.pen-author')[0].textContent}`
+      document.querySelectorAll('.item-title')[0]?.textContent
+    } ${document.querySelectorAll('.pen-author')[0]?.textContent}`
   }
   else if (
     window.location.pathname.includes('/project/')

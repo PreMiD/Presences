@@ -1,7 +1,7 @@
 const presence = new Presence({
   clientId: '775356824240128021',
 })
-const enum Assets {
+enum ActivityAssets {
   Index = 'https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/0.png',
   Angel = 'https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/1.png',
   BlueRacer = 'https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/2.png',
@@ -28,34 +28,34 @@ const enum Assets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/Curve%20Fever%20Pro/assets/logo.png',
 }
 const skinNames = new Map<string, string>()
-  .set('Angel', Assets.Angel)
-  .set('Blue Racer', Assets.BlueRacer)
-  .set('Bumble Bee', Assets.BumbleBee)
-  .set('Candy Cane', Assets.CandyCane)
-  .set('Jack-o\'-lantern', Assets.JackoLantern)
-  .set('Joker', Assets.Joker)
-  .set('Jungle Leaf', Assets.JungleLeaf)
-  .set('O Christmas Tree', Assets.OChristmasTree)
-  .set('Poopy', Assets.Poopy)
-  .set('Red&Yellow', Assets.RedYellow)
-  .set('Robot', Assets.Robot)
-  .set('Spider Curve', Assets.SpiderCurve)
-  .set('Starfish', Assets.Starfish)
-  .set('The Mummy', Assets.TheMummy)
-  .set('Think Pink', Assets.ThinkPink)
-  .set('Vampire', Assets.Vampire)
-  .set('VIP Gold', Assets.VipGold)
-  .set('Witchy Cauldron', Assets.WitchyCauldron)
-  .set('Zombie Hand', Assets.ZombieHand)
-  .set('Ice-Cream', Assets.IceCream)
-  .set('Pineapple', Assets.Pineapple)
-  .set('Rasta', Assets.Rasta)
+  .set('Angel', ActivityAssets.Angel)
+  .set('Blue Racer', ActivityAssets.BlueRacer)
+  .set('Bumble Bee', ActivityAssets.BumbleBee)
+  .set('Candy Cane', ActivityAssets.CandyCane)
+  .set('Jack-o\'-lantern', ActivityAssets.JackoLantern)
+  .set('Joker', ActivityAssets.Joker)
+  .set('Jungle Leaf', ActivityAssets.JungleLeaf)
+  .set('O Christmas Tree', ActivityAssets.OChristmasTree)
+  .set('Poopy', ActivityAssets.Poopy)
+  .set('Red&Yellow', ActivityAssets.RedYellow)
+  .set('Robot', ActivityAssets.Robot)
+  .set('Spider Curve', ActivityAssets.SpiderCurve)
+  .set('Starfish', ActivityAssets.Starfish)
+  .set('The Mummy', ActivityAssets.TheMummy)
+  .set('Think Pink', ActivityAssets.ThinkPink)
+  .set('Vampire', ActivityAssets.Vampire)
+  .set('VIP Gold', ActivityAssets.VipGold)
+  .set('Witchy Cauldron', ActivityAssets.WitchyCauldron)
+  .set('Zombie Hand', ActivityAssets.ZombieHand)
+  .set('Ice-Cream', ActivityAssets.IceCream)
+  .set('Pineapple', ActivityAssets.Pineapple)
+  .set('Rasta', ActivityAssets.Rasta)
 
 let lastlobbyName = ''
 let lastName = 'Unnamed'
 
 const presenceData: PresenceData = {
-  largeImageKey: Assets.Logo,
+  largeImageKey: ActivityAssets.Logo,
   startTimestamp: Date.now(),
   details: 'Main Menu',
   state: 'Just Started Playing',
@@ -73,9 +73,7 @@ function RefreshData() {
     case 'in_lobby_picking_powers': {
       const [skinSlot] = document.querySelectorAll('.skin-slot.skin-slot--0')
       const [groupTitle] = document.querySelectorAll('.group-name__title')
-      const skinName = skinSlot
-        ? skinSlot.children[0].getAttribute('title')!
-        : 'skin_unknown'
+      const skinName = skinSlot?.children[0]?.getAttribute('title') ?? 'skin_unknown'
       const lobbyName = groupTitle ? groupTitle.textContent! : 'Unknown lobby'
 
       presenceData.details = 'Picking Powers'
@@ -166,7 +164,7 @@ function RefreshData() {
     }
   }
 
-  presenceData.largeImageKey = Assets.Index
+  presenceData.largeImageKey = ActivityAssets.Index
 }
 
 function getActualGamePage() {
@@ -177,7 +175,7 @@ function getActualGamePage() {
     return 'in_game_finished'
   }
   else if (document.querySelectorAll('.popup-header')[0]) {
-    switch (document.querySelectorAll('.popup-header')[0].textContent) {
+    switch (document.querySelectorAll('.popup-header')[0]?.textContent) {
       case 'Room settings':
         return 'creating_match'
       case 'Crates':

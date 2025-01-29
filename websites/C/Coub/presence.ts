@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 type LocalizedStrings = typeof localizedStrings
 interface PageContext {
   middleware: (ref: Window, ...args: unknown[]) => boolean
@@ -21,7 +23,7 @@ function getQuery() {
         const entry = r ? r.split('=', 2) : null
         if (entry === null)
           return l
-        return Object.assign(l, { [entry[0]]: entry[1] })
+        return Object.assign(l, { [entry[0]!]: entry[1] })
       }, {})
     : {}
   return query
@@ -71,14 +73,14 @@ const pages: PageContext[] = [
         ?.getAttributeNames()
         ?.map(x => x.match(/^pages-(\w+)-page/i))
         .filter(x => !!x && x.length > 1 && x[1])
-        .map(x => capitalizeFirstLetter(x![1]))
+        .map(x => capitalizeFirstLetter(x![1]!))
       data.state = `Browsing ${
         isCoubPicks && activeTabTitle.match(/^(\w+)/g)
           ? activeTabTitle.match(/^(\w+)/g)?.[0]
           : activeTabTitle
       }${
         (pageType?.length ?? 0) > 0
-        && activeTabTitle.toLowerCase() !== pageType![0].toLowerCase()
+        && activeTabTitle.toLowerCase() !== pageType![0]?.toLowerCase()
           ? ` in ${pageType![0]}`
           : document.querySelector('.page__content .page-menu.weekly__menu')
             ? ' in Weekly'

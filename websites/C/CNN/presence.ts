@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/CNN/assets/0.png',
   LogoTransp = 'https://cdn.rcd.gg/PreMiD/websites/C/CNN/assets/1.png',
 }
@@ -17,7 +17,7 @@ presence.on('UpdateData', async () => {
   }
   const urlpath = window.location.pathname.split('/')
   const presenceData: PresenceData = {
-    largeImageKey: [Assets.Logo, Assets.LogoTransp][setting.logo] || Assets.Logo,
+    largeImageKey: [ActivityAssets.Logo, ActivityAssets.LogoTransp][setting.logo] || ActivityAssets.Logo,
   }
 
   if (setting.timeElapsed && !setting.privacy)
@@ -69,12 +69,12 @@ presence.on('UpdateData', async () => {
     }
   }
   else if (
-    urlpath[1] >= '1900'
+    urlpath[1]! >= '1900'
     && Number.parseInt(urlpath[1]) <= new Date().getFullYear()
-    && urlpath[2] >= '01'
-    && urlpath[2] <= '12'
-    && urlpath[3] >= '01'
-    && urlpath[3] <= '31'
+    && urlpath[2]! >= '01'
+    && urlpath[2]! <= '12'
+    && urlpath[3]! >= '01'
+    && urlpath[3]! <= '31'
   ) {
     presenceData.details = setting.privacy ? 'Article' : 'Article:'
     if (!setting.privacy) {
@@ -137,7 +137,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Specials'
     }
   }
-  else if (urlpath[1] === 'election' && urlpath[2] >= '1900') {
+  else if (urlpath[1] === 'election' && urlpath[2]! >= '1900') {
     presenceData.details = `Election ${urlpath[2]}`
 
     if (urlpath[4] === 'president') {

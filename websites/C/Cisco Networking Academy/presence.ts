@@ -5,7 +5,7 @@ const presence = new Presence({
 let prevURL = ''
 let timestamp = Date.now()
 let details = ''
-let state: string | null = null
+let state: string | undefined | null = null
 presence.on('UpdateData', async () => {
   if (prevURL !== window.location.pathname) {
     prevURL = window.location.pathname
@@ -19,18 +19,18 @@ presence.on('UpdateData', async () => {
   }
   else if (window.location.pathname.startsWith('/course/')) {
     details = 'Viewing course'
-    state = document.querySelectorAll('h3')[0].textContent
+    state = document.querySelectorAll('h3')[0]?.textContent
   }
   else if (window.location.pathname.startsWith('/grade/report/')) {
     details = 'Viewing grades'
-    state = document.querySelectorAll('h3')[0].textContent
+    state = document.querySelectorAll('h3')[0]?.textContent
   }
   else if (window.location.pathname.startsWith('/local/mail/')) {
     details = 'Viewing messages'
   }
   else if (window.location.pathname.startsWith('/calendar/')) {
     details = 'Viewing calendar'
-    state = document.querySelectorAll('h3')[0].textContent
+    state = document.querySelectorAll('h3')[0]?.textContent
   }
   else if (window.location.pathname.startsWith('/mod/')) {
     if (
@@ -46,11 +46,11 @@ presence.on('UpdateData', async () => {
       details = 'Viewing course content'
     }
 
-    state = document.querySelectorAll('h3')[0].textContent
+    state = document.querySelectorAll('h3')[0]?.textContent
   }
   else if (window.location.pathname.startsWith('/srwe-dl/')) {
     details = 'Viewing course content'
-    state = document.querySelectorAll('h1')[0].textContent
+    state = document.querySelectorAll('h1')[0]?.textContent
   }
   else if (window.location.pathname.includes('assessment_history')) {
     details = 'Viewing Assesment History'

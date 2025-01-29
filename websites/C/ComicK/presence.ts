@@ -12,14 +12,14 @@ const staticPages: Record<string, PresenceData> = {
   privacy: { details: 'Privacy Policy' },
   installapp: { details: 'ComicK App' },
 }
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/ComicK/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
     details: 'Browsing',
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href } = document.location
@@ -49,11 +49,11 @@ presence.on('UpdateData', async () => {
         const img = document.querySelectorAll<HTMLImageElement>(
           '.reader-container img',
         )[1]
-        presenceData.details = `Reading ${img.alt.substring(
+        presenceData.details = `Reading ${img?.alt.substring(
           0,
           img.alt.indexOf('chapter'),
         )}`
-        presenceData.state = img.alt.substring(
+        presenceData.state = img?.alt.substring(
           img.alt.indexOf('chapter'),
           img.alt.indexOf(','),
         )
@@ -67,7 +67,7 @@ presence.on('UpdateData', async () => {
           },
           {
             label: 'Read Description',
-            url: href.split(/(.+)[\\/]/)[1],
+            url: href.split(/(.+)[\\/]/)[1]!,
           },
         ]
       }
@@ -96,12 +96,12 @@ presence.on('UpdateData', async () => {
       }
       break
     default:
-      if (Object.keys(staticPages).includes(arrPath[1]))
-        presenceData = { ...presenceData, ...staticPages[arrPath[1]] }
+      if (Object.keys(staticPages).includes(arrPath[1]!))
+        presenceData = { ...presenceData, ...staticPages[arrPath[1]!] }
   }
 
-  if (!image && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if (!image && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (!buttons && presenceData.buttons)
     delete presenceData.buttons
   presence.setActivity(presenceData)

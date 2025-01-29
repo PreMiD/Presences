@@ -30,7 +30,7 @@ const formats = [
   'rs',
 ]
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/logo.png',
   Square = 'https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/0.png',
   Create = 'https://cdn.rcd.gg/PreMiD/websites/C/CodeSandbox/assets/1.png',
@@ -80,8 +80,8 @@ const assets = {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
-    smallImageKey: Assets.Square,
+    largeImageKey: ActivityAssets.Logo,
+    smallImageKey: ActivityAssets.Square,
     smallImageText: 'CodeSandbox',
     details: 'Loading',
     startTimestamp: browsingTimestamp,
@@ -90,57 +90,57 @@ presence.on('UpdateData', async () => {
   if (pathname.startsWith('/')) {
     if (document.querySelector<HTMLDivElement>('[class="ReactModalPortal"]')) {
       presenceData.details = 'Creating a new sandbox!'
-      presenceData.largeImageKey = Assets.Create
+      presenceData.largeImageKey = ActivityAssets.Create
     }
     else if (pathname.includes('/dashboard/home')) {
       presenceData.details = 'Looking at their dashboard'
       presenceData.state = 'Page: Home'
-      presenceData.largeImageKey = Assets.Dashboard
+      presenceData.largeImageKey = ActivityAssets.Dashboard
     }
     else if (pathname.includes('/dashboard/discover')) {
       presenceData.details = 'Discovering other sandboxes'
       presenceData.state = 'Page: Discover'
-      presenceData.largeImageKey = Assets.Discover
+      presenceData.largeImageKey = ActivityAssets.Discover
     }
     else if (pathname.includes('/dashboard/drafts')) {
       presenceData.details = 'Looking at their drafts'
       presenceData.state = 'Page: Drafts'
-      presenceData.largeImageKey = Assets.Drafts
+      presenceData.largeImageKey = ActivityAssets.Drafts
     }
     else if (pathname.includes('/dashboard/all')) {
       presenceData.details = 'Looking through their sandboxes'
       presenceData.state = 'Page: All Sandboxes'
-      presenceData.largeImageKey = Assets.All
+      presenceData.largeImageKey = ActivityAssets.All
     }
     else if (pathname.includes('/dashboard/templates')) {
       presenceData.details = 'Looking through their templates'
       presenceData.state = 'Page: Templates'
-      presenceData.largeImageKey = Assets.Templates
+      presenceData.largeImageKey = ActivityAssets.Templates
     }
     else if (pathname.includes('/dashboard/repositories')) {
       presenceData.details = 'Looking through their repositories'
       presenceData.state = 'Page: Repositories'
-      presenceData.largeImageKey = Assets.Repositories
+      presenceData.largeImageKey = ActivityAssets.Repositories
     }
     else if (pathname.includes('/dashboard/recent')) {
       presenceData.details = 'Looking through their recent sandboxes'
       presenceData.state = 'Page: Recently Modified'
-      presenceData.largeImageKey = Assets.Recent
+      presenceData.largeImageKey = ActivityAssets.Recent
     }
     else if (pathname.includes('/dashboard/deleted')) {
       presenceData.details = 'Looking through their trashed sandboxes'
       presenceData.state = 'Page: Recently Deleted'
-      presenceData.largeImageKey = Assets.Deleted
+      presenceData.largeImageKey = ActivityAssets.Deleted
     }
     else if (pathname.includes('/dashboard/shared')) {
       presenceData.details = 'Looking at shared sandboxes'
       presenceData.state = 'Page: Shared With Me'
-      presenceData.largeImageKey = Assets.Shared
+      presenceData.largeImageKey = ActivityAssets.Shared
     }
     else if (pathname.includes('/dashboard/liked')) {
       presenceData.details = 'Looking at liked sandboxes'
       presenceData.state = 'Page: Liked Sandboxes'
-      presenceData.largeImageKey = Assets.Liked
+      presenceData.largeImageKey = ActivityAssets.Liked
     }
     else if (pathname.includes('/u/')) {
       presenceData.details = 'Looking at a user\'s profile:'
@@ -153,7 +153,7 @@ presence.on('UpdateData', async () => {
           '[class="sc-bdnylx sc-gtssRu gDXMLZ itZLEx"]',
         )?.textContent
       })`
-      presenceData.largeImageKey = Assets.Profile
+      presenceData.largeImageKey = ActivityAssets.Profile
       presenceData.buttons = [
         {
           label: 'View Profile',
@@ -169,7 +169,7 @@ presence.on('UpdateData', async () => {
         const formatImg = search.split('.').filter(elm => elm !== '')
         presenceData.details = `Editing ${
           search
-            ? ` ${cfile[cfile.length - 1].replace(
+            ? ` ${cfile[cfile.length - 1]?.replace(
               /(:)|\d|(-)/g,
               '',
             )} (${document
@@ -181,19 +181,19 @@ presence.on('UpdateData', async () => {
         presenceData.state = `Workspace: ${document.title.split('-')[0]}`
         if (
           formats.includes(
-            formatImg[formatImg.length - 1]
+            formatImg[formatImg.length - 1]!
             /* .toLowerCase() */
               .replace(/(:)|\d|(-)/g, ''),
           )
         ) {
           presenceData.largeImageKey = assets[
             `${formatImg[formatImg.length - 1]
-              .toLowerCase()
+              ?.toLowerCase()
               .replace(/(:)|\d|(-)/g, '')}` as keyof typeof assets
           ]
         }
         else {
-          presenceData.largeImageKey = Assets.Txt
+          presenceData.largeImageKey = ActivityAssets.Txt
         }
       }
       else {
@@ -207,7 +207,7 @@ presence.on('UpdateData', async () => {
             '[class="sc-bdnylx sc-gtssRu gDXMLZ efjlMo"]',
           )?.textContent
         }`
-        presenceData.largeImageKey = Assets.UserSandbox
+        presenceData.largeImageKey = ActivityAssets.UserSandbox
         presenceData.buttons = [
           {
             label: 'View Sandbox',
@@ -218,7 +218,7 @@ presence.on('UpdateData', async () => {
     }
     else {
       presenceData.details = 'Viewing an unsupported CodeSandbox page'
-      presenceData.largeImageKey = Assets.Unknown
+      presenceData.largeImageKey = ActivityAssets.Unknown
     }
   }
   presence.setActivity(presenceData)

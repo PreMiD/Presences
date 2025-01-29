@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '692436770775760927',
 })
@@ -39,7 +41,7 @@ presence.on('UpdateData', async () => {
     }
     else {
       presenceData.details = 'Jogando:'
-      presenceData.state = document.querySelectorAll('.game-header-title')[0].textContent
+      presenceData.state = document.querySelectorAll('.game-header-title')[0]?.textContent
     }
   }
 

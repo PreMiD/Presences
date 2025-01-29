@@ -1,3 +1,5 @@
+import { ActivityType } from 'premid'
+
 const presence = new Presence({
   clientId: '1232944311415603281',
 })
@@ -20,11 +22,11 @@ async function getStrings() {
 }
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/CHZZK/assets/0.png',
 }
 
-const enum ChzzkAssets {
+enum ChzzkAssets {
   Browse = 'https://cdn.rcd.gg/PreMiD/websites/C/CHZZK/assets/1.png',
   Live = 'https://cdn.rcd.gg/PreMiD/websites/C/CHZZK/assets/2.png',
   Play = 'https://cdn.rcd.gg/PreMiD/websites/C/CHZZK/assets/3.png',
@@ -47,7 +49,7 @@ presence.on('UpdateData', async () => {
 
   const presenceData: PresenceData = {
     details: strings.browse,
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     smallImageKey: ChzzkAssets.Browse,
     startTimestamp: browsingTimestamp,
     type: ActivityType.Watching,
@@ -80,7 +82,7 @@ presence.on('UpdateData', async () => {
           )?.textContent
           presenceData.largeImageKey = showStreamerLogo
             ? streamerLogo.href.replace(streamerLogo.search, '')
-            : Assets.Logo
+            : ActivityAssets.Logo
 
           if (pathname.startsWith('/live')) {
             presenceData.smallImageKey = ChzzkAssets.Live

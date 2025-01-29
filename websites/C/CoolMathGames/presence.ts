@@ -14,11 +14,11 @@ function capitalize(text: string[]): string {
     })
     .join(' ')
 }
-function parse(path: string): string[] {
+function parse(path: string): [string, string] {
   path = path.replace('/', '')
   const split: string[] = path.split('-')
 
-  return [split[0], capitalize(split.slice(1))]
+  return [split[0]!, capitalize(split.slice(1))]
 }
 
 let elapsed: number, oldUrl: string

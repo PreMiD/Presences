@@ -22,7 +22,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Browsing Top-Ranked'
       if (orderBy.selectedIndex !== 0) {
         presenceData.state = `Sorted By ${
-          orderBy.options[orderBy.selectedIndex].text
+          orderBy.options[orderBy.selectedIndex]?.text
         }`
       }
       break
@@ -30,7 +30,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Browsing Famous'
       if (orderBy.selectedIndex !== 0) {
         presenceData.state = `Sorted By ${
-          orderBy.options[orderBy.selectedIndex].text
+          orderBy.options[orderBy.selectedIndex]?.text
         }`
       }
       break
@@ -38,7 +38,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Browsing Recently Published'
       if (orderBy.selectedIndex !== 0) {
         presenceData.state = `Sorted By ${
-          orderBy.options[orderBy.selectedIndex].text
+          orderBy.options[orderBy.selectedIndex]?.text
         }`
       }
       break
@@ -46,7 +46,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Browsing Sorted Stories'
       if (orderBy.selectedIndex !== 0) {
         presenceData.state = `Sorted By ${
-          orderBy.options[orderBy.selectedIndex].text
+          orderBy.options[orderBy.selectedIndex]?.text
         }`
       }
       break
@@ -57,11 +57,11 @@ presence.on('UpdateData', async () => {
         ).options[
           (document.getElementsByName('tx_category')[0] as HTMLSelectElement)
             .selectedIndex
-        ].text.split('(')[0]
+        ]?.text.split('(')[0]
       }`
       if (orderBy.selectedIndex !== 0) {
         presenceData.state = `Sorted By ${
-          orderBy.options[orderBy.selectedIndex].text
+          orderBy.options[orderBy.selectedIndex]?.text
         }`
       }
       break
@@ -81,7 +81,7 @@ presence.on('UpdateData', async () => {
                 'tx_story_length',
               )[0] as HTMLSelectElement
             ).selectedIndex
-          ].text.split(/\(|\)/)[1]
+          ]?.text.split(/\(|\)/)[1]
         }`
       }
       else {
@@ -89,7 +89,7 @@ presence.on('UpdateData', async () => {
       }
       if (orderBy.selectedIndex !== 0) {
         presenceData.state = `Sorted By ${
-          orderBy.options[orderBy.selectedIndex].text
+          orderBy.options[orderBy.selectedIndex]?.text
         }`
       }
       break
@@ -100,11 +100,11 @@ presence.on('UpdateData', async () => {
         ).options[
           (document.getElementsByName('tx_authors')[0] as HTMLSelectElement)
             .selectedIndex
-        ].text.split('(')[0]
+        ]?.text.split('(')[0]
       }`
       if (orderBy.selectedIndex !== 0) {
         presenceData.state = `Sorted By ${
-          orderBy.options[orderBy.selectedIndex].text
+          orderBy.options[orderBy.selectedIndex]?.text
         }`
       }
       break
@@ -112,7 +112,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Browsing By Title'
       if (orderBy.selectedIndex !== 0) {
         presenceData.state = `Sorted By ${
-          orderBy.options[orderBy.selectedIndex].text
+          orderBy.options[orderBy.selectedIndex]?.text
         }`
       }
       break

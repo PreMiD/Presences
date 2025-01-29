@@ -36,7 +36,7 @@ presence.on('UpdateData', async () => {
       if (
         pathSplit[1] === 'today'
         || pathSplit[1] === 'month'
-        || /^\d{4}-\d{2}(?:-\d{2})?$/.test(pathSplit[1])
+        || /^\d{4}-\d{2}(?:-\d{2})?$/.test(pathSplit[1] ?? '')
       ) {
         presenceData.state = `In ${document
           .querySelector<HTMLSpanElement>(

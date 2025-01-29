@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '626536244670889985',
 })
@@ -284,7 +286,7 @@ presence.on('UpdateData', async () => {
     }
     else if (document.location.pathname.includes('/members')) {
       if (document.URL.includes('filter-user-sort=')) {
-        const [title] = document.URL.split('filter-user-sort=')[1].split('&')
+        const [title] = document.URL.split('filter-user-sort=')[1]?.split('&') ?? []
         switch (title) {
           case '1':
             presenceData.details = 'Forums, Viewing list of'

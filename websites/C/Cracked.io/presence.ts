@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1041324883793154098',
 })
@@ -25,7 +27,7 @@ function capitalizeFirstLetter(string: string) {
   )
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/Cracked.io/assets/logo.png',
 }
 
@@ -34,7 +36,7 @@ let oldLang: string | null = null
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browingTimestamp,
   }
   const search = document.querySelector<HTMLInputElement>('input[name="keywords"]')
@@ -60,7 +62,7 @@ presence.on('UpdateData', async () => {
     presence.setActivity(presenceData)
     return
   }
-  switch (pathname.split('/')[1].replace(/\.php/g, '')) {
+  switch (pathname.split('/')[1]?.replace(/\.php/g, '')) {
     case 'search': {
       if (search?.value) {
         presenceData.details = strings.search
@@ -85,7 +87,7 @@ presence.on('UpdateData', async () => {
         presenceData.largeImageKey = document
           .querySelector('[class="conv_users_avatar"]')
           ?.querySelector('img')
-          ?.getAttribute('src') ?? Assets.Logo
+          ?.getAttribute('src') ?? ActivityAssets.Logo
       }
       else if (checkForChat) {
         presenceData.details = 'Viewing private messages'
@@ -173,7 +175,7 @@ presence.on('UpdateData', async () => {
         presenceData.largeImageKey = document
           .querySelector('[class="post-avatar-mobile"]')
           ?.getAttribute('src')
-          ?.split('?')[0] ?? Assets.Logo
+          ?.split('?')[0] ?? ActivityAssets.Logo
         presenceData.buttons = [
           {
             label: 'View Thread',
@@ -199,7 +201,7 @@ presence.on('UpdateData', async () => {
           .querySelector('[class="p-avatar"]')
           ?.lastElementChild
           ?.getAttribute('src')
-          ?.split('?')[0] ?? Assets.Logo
+          ?.split('?')[0] ?? ActivityAssets.Logo
         presenceData.buttons = [
           {
             label: strings.buttonViewProfile,
@@ -229,8 +231,8 @@ presence.on('UpdateData', async () => {
 
   if (!buttons && presenceData.buttons)
     delete presenceData.buttons
-  if (!covers && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if (!covers && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (presenceData.details)
     presence.setActivity(presenceData)
   else presence.setActivity()

@@ -1,14 +1,16 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1001288215388495953',
 })
 const browsingStamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/Crave/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
-  const presenceData: PresenceData = { largeImageKey: Assets.Logo }
+  const presenceData: PresenceData = { largeImageKey: ActivityAssets.Logo }
 
   if (document.querySelector('.jw-video')) {
     // if contains video
@@ -47,8 +49,8 @@ presence.on('UpdateData', async () => {
 
       presenceData.state = `${
         /S\d+:E\d+/.exec(details)?.[0]
-      } - ${epDetails[1].trim()}` // {episodeNumber} - {episodeName}
-      presenceData.details = epDetails[0].trim() // {showName}
+      } - ${epDetails[1]?.trim()}` // {episodeNumber} - {episodeName}
+      presenceData.details = epDetails[0]?.trim() // {showName}
     }
     else {
       // video is a movie

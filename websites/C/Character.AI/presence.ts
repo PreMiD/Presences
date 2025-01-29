@@ -3,13 +3,13 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/Character.AI/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const [time, buttons] = await Promise.all([
@@ -41,7 +41,7 @@ presence.on('UpdateData', async () => {
     case 'chat': {
       presenceData.details = 'Chatting with'
       presenceData.state = document.querySelector('.chattitle')?.childNodes[1]?.textContent
-        || document.title.split('|')[0].replace('Chat with', '').trim()
+        || document.title.split('|')[0]?.replace('Chat with', '').trim()
       presenceData.buttons = [button]
       break
     }
@@ -59,7 +59,7 @@ presence.on('UpdateData', async () => {
     }
     case 'public-profile': {
       presenceData.details = 'Viewing profile'
-      presenceData.state = document.querySelector('span')?.childNodes[1].textContent
+      presenceData.state = document.querySelector('span')?.childNodes[1]?.textContent
       presenceData.buttons = [button]
       break
     }

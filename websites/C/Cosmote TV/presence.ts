@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '883446187099840562',
 })
@@ -167,26 +169,26 @@ presence.on('UpdateData', async () => {
           case 3:
             if (
               presenceData.details !== episode[2]
-              && !episode[2].endsWith(` ${episode[1]}`)
-              && !episode[2].endsWith(` ${episode[1].replace('Ε', 'E')}`)
+              && !episode[2]?.endsWith(` ${episode[1]}`)
+              && !episode[2]?.endsWith(` ${episode[1]?.replace('Ε', 'E')}`)
             ) {
               presenceData.state = `${episode[0]}:${episode[1]} ${episode[2]}`
             }
             else {
               presenceData.state = `${episode[0]
-                .replace('S', 'Season ')
+                ?.replace('S', 'Season ')
                 .replace('Κ', 'Κύκλος ')} ${episode[1]
-                .replace('E', 'Episode ')
+                ?.replace('E', 'Episode ')
                 .replace('Ε', 'Επεισόδιο ')}`
             }
             break
           case 2:
             presenceData.state = episode[0]
-              .replace('E', 'Episode ')
+              ?.replace('E', 'Episode ')
               .replace('Ε', 'Επεισόδιο ')
             if (
               presenceData.details !== episode[1]
-              && !episode[1].endsWith(` ${episode[0]}`)
+              && !episode[1]?.endsWith(` ${episode[0]}`)
             ) {
               presenceData.state += `: ${episode[1]}`
             }

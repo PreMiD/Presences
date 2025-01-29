@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '848293229409337444',
 })
@@ -92,7 +94,7 @@ presence.on('UpdateData', async () => {
           .querySelectorAll('div.sc-marketplace-author')[1]
           ?.querySelector('h1')
           ?.childNodes[0]
-          .textContent
+          ?.textContent
         presenceData.buttons = [{ label: 'View developer', url: href }]
       }
       else if (appName) {

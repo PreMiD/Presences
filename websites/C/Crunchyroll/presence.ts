@@ -1,8 +1,10 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '608065709741965327',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/Crunchyroll/assets/logo.png',
 
   OpenBook = 'https://cdn.rcd.gg/PreMiD/websites/C/Crunchyroll/assets/0.png',
@@ -71,7 +73,7 @@ presence.on('iFrameData', (inc: unknown) => {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     type: ActivityType.Watching,
   }
   const { href, pathname } = window.location
@@ -88,12 +90,12 @@ presence.on('UpdateData', async () => {
   if (pathname.includes('/manga')) {
     if (pathname.includes('/read')) {
       const queryTitle = document.querySelector<HTMLHeadingElement>('.chapter-header h1')
-      presenceData.details = queryTitle?.children[0].textContent?.trim()
+      presenceData.details = queryTitle?.children[0]?.textContent?.trim()
       presenceData.state = `${
         strings.reading
       } ${queryTitle?.lastChild?.textContent?.trim()}`
       presenceData.startTimestamp = browsingTimestamp
-      presenceData.smallImageKey = Assets.OpenBook
+      presenceData.smallImageKey = ActivityAssets.OpenBook
       const pageNumber = document.querySelector<HTMLOutputElement>(
         '.first-page-number',
       )?.textContent
@@ -142,7 +144,7 @@ presence.on('UpdateData', async () => {
     presenceData.state = document.querySelector<HTMLHeadingElement>('h1.title')?.textContent
 
     presenceData.largeImageKey = document.querySelector<HTMLMetaElement>('[property=\'og:image\']')
-      ?.content ?? Assets.Logo
+      ?.content ?? ActivityAssets.Logo
 
     if (paused) {
       delete presenceData.startTimestamp
@@ -165,7 +167,7 @@ presence.on('UpdateData', async () => {
   else if (pathname.includes('/series')) {
     presenceData.details = strings.viewPage
     presenceData.state = document.querySelector<HTMLHeadingElement>('h1.title')?.textContent
-    presenceData.largeImageKey = document.querySelector<HTMLMetaElement>('[property=\'og:image\']')?.content ?? Assets.Logo
+    presenceData.largeImageKey = document.querySelector<HTMLMetaElement>('[property=\'og:image\']')?.content ?? ActivityAssets.Logo
     presenceData.buttons = [
       {
         label: strings.viewSeries,
@@ -206,7 +208,7 @@ presence.on('UpdateData', async () => {
   }
 
   if (!showCover)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
 
   if (presenceData.details)
     presence.setActivity(presenceData)

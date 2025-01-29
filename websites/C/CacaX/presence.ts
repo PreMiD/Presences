@@ -120,7 +120,7 @@ presence.on('UpdateData', async () => {
         break
       default:
         presenceData.details = 'Navigue'
-        presenceData.state = capitalize(pathname.split('/')[1])
+        presenceData.state = capitalize(pathname.split('/')[1]!)
     }
   }
 

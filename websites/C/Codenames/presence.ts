@@ -1,6 +1,6 @@
 type availableColors = 'red' | 'blue' | 'beige'
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/logo.png',
   Beige5 = 'https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/0.png',
   Red6 = 'https://cdn.rcd.gg/PreMiD/websites/C/Codenames/assets/1.png',
@@ -35,34 +35,34 @@ const presence = new Presence({
 const slideshow = presence.createSlideshow()
 const icons = {
   red: [
-    Assets.Red1,
-    Assets.Red2,
-    Assets.Red3,
-    Assets.Red4,
-    Assets.Red5,
-    Assets.Red6,
-    Assets.Red7,
-    Assets.Red8,
-    Assets.Red9,
+    ActivityAssets.Red1,
+    ActivityAssets.Red2,
+    ActivityAssets.Red3,
+    ActivityAssets.Red4,
+    ActivityAssets.Red5,
+    ActivityAssets.Red6,
+    ActivityAssets.Red7,
+    ActivityAssets.Red8,
+    ActivityAssets.Red9,
   ],
   blue: [
-    Assets.Blue1,
-    Assets.Blue2,
-    Assets.Blue3,
-    Assets.Blue4,
-    Assets.Blue5,
-    Assets.Blue6,
-    Assets.Blue7,
-    Assets.Blue8,
-    Assets.Blue9,
+    ActivityAssets.Blue1,
+    ActivityAssets.Blue2,
+    ActivityAssets.Blue3,
+    ActivityAssets.Blue4,
+    ActivityAssets.Blue5,
+    ActivityAssets.Blue6,
+    ActivityAssets.Blue7,
+    ActivityAssets.Blue8,
+    ActivityAssets.Blue9,
   ],
   beige: [
-    Assets.Beige1,
-    Assets.Beige2,
-    Assets.Beige3,
-    Assets.Beige4,
-    Assets.Beige5,
-    Assets.Beige6,
+    ActivityAssets.Beige1,
+    ActivityAssets.Beige2,
+    ActivityAssets.Beige3,
+    ActivityAssets.Beige4,
+    ActivityAssets.Beige5,
+    ActivityAssets.Beige6,
   ],
 }
 
@@ -72,7 +72,7 @@ let currentlySetColor: availableColors = 'beige'
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
 
   const buttons = await presence.getSetting<boolean>('buttons')

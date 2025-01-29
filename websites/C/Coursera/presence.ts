@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 type Functionlize<T> = {
   [P in keyof T]: () => T[P];
 }
@@ -6,7 +8,7 @@ interface Route extends Functionlize<Partial<PresenceDataFull>> {
   path: RegExp
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/Coursera/assets/logo.png',
 }
 
@@ -59,7 +61,7 @@ function router({ path }: { path: string, presenceData: PresenceData }): Route {
       },
 
       details: () => {
-        return href.split('/')[4].split('-').join(' ')
+        return href.split('/')[4]?.split('-').join(' ')
       },
       buttons: () => [
         {
@@ -73,12 +75,12 @@ function router({ path }: { path: string, presenceData: PresenceData }): Route {
       smallImageKey: () => Assets.Reading,
       smallImageText: () => 'Learning',
       state: () => {
-        return href.split('/')[4].split('-').join(' ')
+        return href.split('/')[4]?.split('-').join(' ')
       },
       details: () => {
         return `Viewing : ${href
           .split('/')[6]
-          .split('-')
+          ?.split('-')
           .join(' ')
           .toUpperCase()} ${href.split('/')[7]}'s content`
       },
@@ -94,10 +96,10 @@ function router({ path }: { path: string, presenceData: PresenceData }): Route {
       smallImageKey: () => Assets.Reading,
       smallImageText: () => 'Learning',
       state: () => {
-        return `Viewing Course ${href.split('/')[6].split('-').join(' ')}`
+        return `Viewing Course ${href.split('/')[6]?.split('-').join(' ')}`
       },
       details: () => {
-        return href.split('/')[4].split('-').join(' ')
+        return href.split('/')[4]?.split('-').join(' ')
       },
       buttons: () => [
         {
@@ -114,7 +116,7 @@ function router({ path }: { path: string, presenceData: PresenceData }): Route {
         return 'Reading Course Discussions Forums'
       },
       details: () => {
-        return href.split('/')[4].split('-').join(' ')
+        return href.split('/')[4]?.split('-').join(' ')
       },
       buttons: () => [
         {
@@ -131,7 +133,7 @@ function router({ path }: { path: string, presenceData: PresenceData }): Route {
         return 'Viewing Course Resources'
       },
       details: () => {
-        return href.split('/')[4].split('-').join(' ')
+        return href.split('/')[4]?.split('-').join(' ')
       },
       buttons: () => [
         {
@@ -148,7 +150,7 @@ function router({ path }: { path: string, presenceData: PresenceData }): Route {
         return 'Checking Course Inbox'
       },
       details: () => {
-        return href.split('/')[4].split('-').join(' ')
+        return href.split('/')[4]?.split('-').join(' ')
       },
       buttons: () => [
         {
@@ -169,7 +171,7 @@ function router({ path }: { path: string, presenceData: PresenceData }): Route {
         )}`
       },
       details: () => {
-        return href.split('/')[4].split('-').join(' ')
+        return href.split('/')[4]?.split('-').join(' ')
       },
       buttons: () => [
         {
@@ -186,7 +188,7 @@ function router({ path }: { path: string, presenceData: PresenceData }): Route {
         return 'Taking a Quiz'
       },
       details: () => {
-        return href.split('/')[4].split('-').join(' ')
+        return href.split('/')[4]?.split('-').join(' ')
       },
       buttons: () => [
         {
@@ -203,7 +205,7 @@ function router({ path }: { path: string, presenceData: PresenceData }): Route {
         return 'Solving an Exam'
       },
       details: () => {
-        return href.split('/')[4].split('-').join(' ')
+        return href.split('/')[4]?.split('-').join(' ')
       },
       buttons: () => [
         {
@@ -223,7 +225,7 @@ function router({ path }: { path: string, presenceData: PresenceData }): Route {
         )}`
       },
       details: () => {
-        return href.split('/')[4].split('-').join(' ')
+        return href.split('/')[4]?.split('-').join(' ')
       },
       buttons: () => [
         {
@@ -278,7 +280,7 @@ function router({ path }: { path: string, presenceData: PresenceData }): Route {
         if (currentUrl.includes('my-learning'))
           return 'My Courses'
         else
-          return currentUrl.split('/')[3].toUpperCase().split('-').join(' ')
+          return currentUrl.split('/')[3]?.toUpperCase().split('-').join(' ')
       },
       smallImageKey: () => Assets.Reading,
       smallImageText: () => 'Browsing',
@@ -294,7 +296,7 @@ presence.on('UpdateData', async () => {
     presence.getSetting<boolean>(Settings.BUTTONS),
   ])
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
 
   if (showTimestamp)

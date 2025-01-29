@@ -1,16 +1,18 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '842486883128705024',
 })
 const path = location.pathname
 const timeElapsed = ~~(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/Codeforces/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: timeElapsed,
   }
 
@@ -65,7 +67,7 @@ presence.on('UpdateData', async () => {
       }
       else {
         presenceData.details = 'Waiting for contest'
-        presenceData.state = document.title.split('-')[0].trim()
+        presenceData.state = document.title.split('-')[0]?.trim()
       }
       break
     }
@@ -78,7 +80,7 @@ presence.on('UpdateData', async () => {
 
     case 'contestRegistrants': {
       presenceData.details = 'Viewing Registrants for'
-      presenceData.state = document.title.split('-')[1].trim()
+      presenceData.state = document.title.split('-')[1]?.trim()
       break
     }
 
@@ -110,11 +112,11 @@ presence.on('UpdateData', async () => {
         const [room, contestTitle] = document.title.split('-')
 
         presenceData.details = 'Viewing Room'
-        presenceData.state = `${room.trim()} | ${contestTitle.trim()}`
+        presenceData.state = `${room?.trim()} | ${contestTitle?.trim()}`
       }
       else if (path.includes('standings')) {
         presenceData.details = 'Viewing Final Standings'
-        presenceData.state = document.title.split('-')[1].trim()
+        presenceData.state = document.title.split('-')[1]?.trim()
       }
       else if (path.includes('ratings')) {
         presenceData.details = 'Viewing Rating Changes'
@@ -161,7 +163,7 @@ presence.on('UpdateData', async () => {
       }
       else if (path.includes('standings')) {
         presenceData.details = 'Viewing Final Standings'
-        presenceData.state = document.title.split('-')[1].trim()
+        presenceData.state = document.title.split('-')[1]?.trim()
       }
       else if (path.includes('customtest')) {
         presenceData.details = 'Performing Custom Test'
@@ -250,14 +252,14 @@ presence.on('UpdateData', async () => {
       }
       else if (path.includes('standings')) {
         presenceData.details = 'Viewing Final Standings'
-        presenceData.state = document.title.split('-')[1].trim()
+        presenceData.state = document.title.split('-')[1]?.trim()
       }
       else if (path.includes('customtest')) {
         presenceData.details = 'Performing Custom Test'
       }
       else if (path.includes('contest')) {
         presenceData.details = `Group Contest: ${groupTitle}`
-        presenceData.state = document.title.split('-')[1].trim()
+        presenceData.state = document.title.split('-')[1]?.trim()
       }
       break
     }
@@ -350,7 +352,7 @@ presence.on('UpdateData', async () => {
       }
       else if (path.includes('practice')) {
         presenceData.details = 'Viewing Edu practice'
-        presenceData.state = document.title.split('-')[1].trim()
+        presenceData.state = document.title.split('-')[1]?.trim()
       }
       else if (path.includes('lesson')) {
         presenceData.details = 'Taking a lesson'
@@ -389,7 +391,7 @@ presence.on('UpdateData', async () => {
 
     case 'profile': {
       presenceData.details = 'Viewing profile'
-      presenceData.state = document.title.split('-')[0].trim()
+      presenceData.state = document.title.split('-')[0]?.trim()
       break
     }
 

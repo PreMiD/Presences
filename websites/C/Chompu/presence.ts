@@ -1,13 +1,15 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1219713910165209169',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/Chompu/assets/logo.png',
 }
 
-const enum Pages {
+enum Pages {
   Home = '/',
   Dashboard = '/dashboard',
   Status = '/status',
@@ -16,7 +18,7 @@ const enum Pages {
 
 const presenceData: PresenceData = {
   type: ActivityType.Listening,
-  largeImageKey: Assets.Logo,
+  largeImageKey: ActivityAssets.Logo,
 }
 
 presence.on('UpdateData', async () => {
@@ -88,7 +90,7 @@ presence.on('UpdateData', async () => {
       )
         ? document.querySelector<HTMLImageElement>('[data-label=\'guild-logo\']')
           ?.src
-        : Assets.Logo
+        : ActivityAssets.Logo
       presenceData.smallImageText = 'Zzz'
       presenceData.startTimestamp = browsingTimestamp
       presenceData.buttons = [
@@ -104,7 +106,7 @@ presence.on('UpdateData', async () => {
   else {
     presenceData.details = 'Idk'
     presenceData.state = 'Browsing...'
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
     presenceData.smallImageKey = Assets.Reading
     presenceData.smallImageText = 'Zzz'
     presenceData.startTimestamp = browsingTimestamp

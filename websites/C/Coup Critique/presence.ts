@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1070406808113532989',
 })
@@ -16,21 +18,21 @@ const staticDatas: Record<string, string[]> = {
 }
 const slideshow = new Slideshow()
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/Coup%20Critique/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
     startTimestamp: browsingTimestamp,
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const { pathname, href } = document.location
   const pathArr = pathname.replace('entity/', '').split('/')
   const startPath = pathArr[1]
   const presenceDataSlide: PresenceData = {
     startTimestamp: browsingTimestamp,
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const [privacy, showImg, showButtons] = await Promise.all([
     presence.getSetting<boolean>('privacy'),
@@ -128,23 +130,23 @@ presence.on('UpdateData', async () => {
     case 'guides':
     case 'actualities':
     case 'tournaments':
-      presenceData.details = staticDatas[startPath][0]
+      presenceData.details = staticDatas[startPath]?.[0]
       if (pathArr.length > 2) {
-        presenceData.details = staticDatas[startPath][1]
+        presenceData.details = staticDatas[startPath]?.[1]
         presenceData.state = document.querySelector('h1')?.textContent
         presenceData.largeImageKey = document.querySelector<HTMLImageElement>('div > img')?.src
         presenceData.buttons = [{ label: 'Consulter la page', url: href }]
       }
       break
     default:
-      if (Object.keys(staticPages).includes(startPath))
-        presenceData = { ...presenceData, ...staticPages[startPath] }
+      if (Object.keys(staticPages).includes(startPath!))
+        presenceData = { ...presenceData, ...staticPages[startPath!] }
   }
 
   if ((privacy || !showButtons) && presenceData.buttons)
     delete presenceData.buttons
   if ((privacy || !showImg) && presenceData.largeImageKey)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
 
   if (slideshow.getSlides().length > 0)
     presence.setActivity(slideshow)

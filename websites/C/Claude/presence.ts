@@ -19,7 +19,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000)
 let oldLang: string | null = null
 let strings: Awaited<ReturnType<typeof getStrings>>
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/Claude/assets/logo.png',
   Talking = 'https://cdn.rcd.gg/PreMiD/websites/C/Claude/assets/0.png',
 }
@@ -37,7 +37,7 @@ presence.on('UpdateData', async () => {
 
   const { pathname } = document.location
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const messageElements = Array.from(
@@ -83,7 +83,7 @@ presence.on('UpdateData', async () => {
             }`,
           )
           .replace('{1}', `${wordCount}`)
-    presenceData.smallImageKey = isTalking ? Assets.Talking : null
+    presenceData.smallImageKey = isTalking ? ActivityAssets.Talking : null
   }
   else {
     presenceData.details = strings.startNewConversation

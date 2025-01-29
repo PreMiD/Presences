@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '804448815942860821',
 })
@@ -21,7 +23,7 @@ async function getStrings() {
   )
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/Cuevana%203/assets/logo.png',
 }
 
@@ -37,7 +39,7 @@ function fullURL(cover: string, hostname: string) {
     return `https://${cover2.replace('//', '')}`
   else if (cover2)
     return cover2
-  else return Assets.Logo
+  else return ActivityAssets.Logo
 }
 
 let video: {
@@ -59,7 +61,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, hostname, href } = document.location
@@ -155,7 +157,7 @@ presence.on('UpdateData', async () => {
 
   if (privacy && presenceData.state)
     delete presenceData.state
-  if (!thumbnails && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if (!thumbnails && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
   presence.setActivity(presenceData)
 })

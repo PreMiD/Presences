@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: '1078446138966954085',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/Chessly/assets/logo.png',
 }
 let browsingTimestamp = Math.floor(Date.now() / 1000)
@@ -15,7 +15,7 @@ presence.on('UpdateData', async () => {
     oldPath = pathname
   }
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const pathList = pathname.split('/').filter(path => path !== '')

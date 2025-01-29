@@ -13,8 +13,8 @@ function send(): void {
 }
 
 iframe.on('UpdateData', () => {
-  if (document.querySelectorAll('video').length !== 0) {
-    const [video] = document.querySelectorAll('video')
+  const video = document.querySelector('video')
+  if (video) {
     sendback = {
       audio: false,
       currentTime: video.currentTime,

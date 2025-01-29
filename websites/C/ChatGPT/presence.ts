@@ -15,7 +15,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000)
 let oldLang: string | null = null
 let strings: Awaited<ReturnType<typeof getStrings>>
 
-const enum Assets {
+enum ActivityAssets {
   Talking = 'https://cdn.rcd.gg/PreMiD/websites/C/ChatGPT/assets/0.png',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/ChatGPT/assets/logo.png',
   Dark = 'https://cdn.rcd.gg/PreMiD/websites/C/ChatGPT/assets/1.png',
@@ -36,7 +36,7 @@ presence.on('UpdateData', async () => {
   }
 
   const presenceData: PresenceData = {
-    largeImageKey: [Assets.Logo, Assets.Dark, Assets.Old][logo] || Assets.Logo,
+    largeImageKey: [ActivityAssets.Logo, ActivityAssets.Dark, ActivityAssets.Old][logo] || ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const isTalking = document.querySelector(
@@ -77,7 +77,7 @@ presence.on('UpdateData', async () => {
             )}`,
           )
           .replace('{1}', `${wordCount}`)
-    presenceData.smallImageKey = isTalking ? Assets.Talking : null
+    presenceData.smallImageKey = isTalking ? ActivityAssets.Talking : null
   }
   else {
     presenceData.details = strings.startNewConversation

@@ -17,11 +17,11 @@ presence.on('UpdateData', async () => {
     presenceData.state = `${
       document.querySelectorAll(
         'div[class=\'home-content\'] > div > div > div > div > home > div > home-react > div > div > section > section > div > div > div > div',
-      )[0].textContent
+      )[0]?.textContent
     } - Rank : ${
       document.querySelectorAll(
         'div[class=\'home-content\'] > div > div > div > div > home > div > home-react > div > div > section > section > div > div > div > div',
-      )[4].textContent
+      )[4]?.textContent
     }`
   }
   else if (pathname.includes('/training')) {
@@ -69,7 +69,7 @@ presence.on('UpdateData', async () => {
         } - Rank : ${
           document.querySelectorAll(
             'div[id=\'content-details-league\'] > div > div',
-          )[1].textContent
+          )[1]?.textContent
         }`
       }
       catch {
@@ -187,7 +187,7 @@ presence.on('UpdateData', async () => {
         document.querySelectorAll('h1[class=\'cg-ide-title\'] > span')[
           document.querySelectorAll('h1[class=\'cg-ide-title\'] > span').length
           - 1
-        ].textContent
+        ]?.textContent
       }`
       try {
         const score = document.querySelector(
@@ -226,7 +226,7 @@ presence.on('UpdateData', async () => {
         'h1[class=\'cg-ide-title\'] > span',
       )[
         document.querySelectorAll('h1[class=\'cg-ide-title\'] > span').length - 1
-      ].textContent
+      ]?.textContent
       presenceData.state = `Time left : ${
         document.querySelector('span[class*=\'minutes\']')?.textContent
       }m : ${document.querySelector('span[class*=\'seconds\']')?.textContent}s`

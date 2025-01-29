@@ -1,5 +1,6 @@
-import type { MovieDetails, TvDetails } from './api'
-import { CinebyApi } from './api'
+import type { MovieDetails, TvDetails } from './api.js'
+import { ActivityType, Assets } from 'premid'
+import { CinebyApi } from './api.js'
 
 const presence = new Presence({
   clientId: '1325115346696273993',

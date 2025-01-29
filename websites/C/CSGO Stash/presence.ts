@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/CSGO%20Stash/assets/logo.png',
   Skins = 'https://cdn.rcd.gg/PreMiD/websites/C/CSGO%20Stash/assets/0.png',
   Case = 'https://cdn.rcd.gg/PreMiD/websites/C/CSGO%20Stash/assets/1.png',
@@ -15,7 +15,7 @@ const enum Assets {
 presence.on('UpdateData', () => {
   const presenceData: PresenceData = {
     details: 'Browsing...',
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const shortTitle = document.title.substring(
@@ -53,13 +53,13 @@ presence.on('UpdateData', () => {
   else if (path.startsWith('/weapon')) {
     presenceData.details = 'Browsing weapon skins'
     presenceData.state = shortTitle
-    presenceData.smallImageKey = Assets.Skins
+    presenceData.smallImageKey = ActivityAssets.Skins
     presenceData.smallImageText = 'Viewing skins'
   }
   else if (path.startsWith('/skin-rarity')) {
     presenceData.details = 'Viewing a skin rarity catalog'
     presenceData.state = shortTitle
-    presenceData.smallImageKey = Assets.Skins
+    presenceData.smallImageKey = ActivityAssets.Skins
     presenceData.smallImageText = 'Viewing skins'
   }
   else if (path.startsWith('/case')) {
@@ -71,7 +71,7 @@ presence.on('UpdateData', () => {
   else if (path.startsWith('/containers')) {
     presenceData.details = 'Browsing containers'
     presenceData.state = shortTitle
-    presenceData.smallImageKey = Assets.Case
+    presenceData.smallImageKey = ActivityAssets.Case
     presenceData.smallImageText = 'Viewing containers'
   }
   else if (path.startsWith('/collection')) {
@@ -102,7 +102,7 @@ presence.on('UpdateData', () => {
       presenceData.details = `Viewing sticker: ${shortTitle}`
       presenceData.state = `Steam price: ${steamPrice?.textContent}`
       presenceData.largeImageKey = middleImage?.src
-      presenceData.smallImageKey = Assets.Sticker
+      presenceData.smallImageKey = ActivityAssets.Sticker
       presenceData.smallImageText = 'Viewing stickers'
       presenceData.buttons = [{ label: 'View Sticker', url: document.URL }]
     }
@@ -110,7 +110,7 @@ presence.on('UpdateData', () => {
   else if (path.startsWith('/glove')) {
     if (path === '/gloves') {
       presenceData.details = 'Browsing gloves'
-      presenceData.smallImageKey = Assets.Glove
+      presenceData.smallImageKey = ActivityAssets.Glove
       presenceData.smallImageText = 'Viewing gloves'
     }
     else {
@@ -179,7 +179,7 @@ presence.on('UpdateData', () => {
   else if (path.startsWith('/item')) {
     if (path === '/items') {
       presenceData.details = 'Browsing items'
-      presenceData.smallImageKey = Assets.Items
+      presenceData.smallImageKey = ActivityAssets.Items
       presenceData.smallImageText = 'Viewing items'
     }
     else {

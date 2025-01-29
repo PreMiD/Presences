@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '653639828826750976', // Contact if you want me to edit the discord assets/keys/whatever
 })
@@ -6,7 +8,11 @@ const strings = presence.getStrings({
   pause: 'general.paused',
 })
 
-function getTimes(time: number): Record<string, number> {
+function getTimes(time: number): {
+  sec: number
+  min: number
+  hrs: number
+} {
   let seconds = Math.round(time)
   let minutes = Math.floor(seconds / 60)
 
@@ -44,7 +50,7 @@ interface MatchList {
   [key: string]: Match
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/CyTube/assets/logo.png',
   ServiceYT = 'https://cdn.rcd.gg/PreMiD/websites/C/CyTube/assets/0.png',
   ServiceGD = 'https://cdn.rcd.gg/PreMiD/websites/C/CyTube/assets/1.png',
@@ -56,25 +62,25 @@ const enum Assets {
 }
 
 const matches: MatchList = {
-  'youtube': { display: 'YouTube', imageKey: Assets.ServiceYT },
-  'googlevideo': { display: 'YouTube', imageKey: Assets.ServiceYT },
+  'youtube': { display: 'YouTube', imageKey: ActivityAssets.ServiceYT },
+  'googlevideo': { display: 'YouTube', imageKey: ActivityAssets.ServiceYT },
 
-  'docs.google': { display: 'Google Drive', imageKey: Assets.ServiceGD },
+  'docs.google': { display: 'Google Drive', imageKey: ActivityAssets.ServiceGD },
   'googleusercontent': {
     display: 'Google Drive',
-    imageKey: Assets.ServiceGD,
+    imageKey: ActivityAssets.ServiceGD,
   },
 
-  'appspot': { display: 'Google Cloud', imageKey: Assets.ServiceGC },
-  'blogspot': { display: 'Google Cloud', imageKey: Assets.ServiceGC },
+  'appspot': { display: 'Google Cloud', imageKey: ActivityAssets.ServiceGC },
+  'blogspot': { display: 'Google Cloud', imageKey: ActivityAssets.ServiceGC },
 
-  'dropbox': { display: 'Dropbox', imageKey: Assets.ServiceDBX },
+  'dropbox': { display: 'Dropbox', imageKey: ActivityAssets.ServiceDBX },
 
-  'amazonaws': { display: 'Amazon AWS', imageKey: Assets.ServiceAWS },
+  'amazonaws': { display: 'Amazon AWS', imageKey: ActivityAssets.ServiceAWS },
 
   'soundcloud': { display: 'Soundcloud', imageKey: Assets.Question }, // asset not found
 
-  'discordapp': { display: 'Discord', imageKey: Assets.ServiceDC },
+  'discordapp': { display: 'Discord', imageKey: ActivityAssets.ServiceDC },
 
   'vimeo-prod-': { display: 'Vimeo', imageKey: Assets.Question }, // asset not found
 }
@@ -82,11 +88,11 @@ const matches: MatchList = {
 function service(service: string): Match {
   let returnMatch: Match = {
     display: 'Unknown Service',
-    imageKey: Assets.ServiceUK,
+    imageKey: ActivityAssets.ServiceUK,
   }
 
   for (const key of Object.keys(matches))
-    service.includes(key) && (returnMatch = matches[key])
+    service.includes(key) && (returnMatch = matches[key]!)
 
   return returnMatch
 }
@@ -114,7 +120,7 @@ presence.on('iFrameData', (data: unknown) => {
 presence.on('UpdateData', async () => {
   const path = document.location.pathname
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     details: 'loading',
     state: 'CyTube',
   }

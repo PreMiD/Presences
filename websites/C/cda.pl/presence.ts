@@ -86,7 +86,7 @@ presence.on('UpdateData', async () => {
   }
   else if (pathname.includes('/info')) {
     presenceData.details = 'Szuka:'
-    presenceData.state = pathname.split('/')[2].replace('_', ' ')
+    presenceData.state = pathname.split('/')[2]?.replace('_', ' ')
   }
   else if (
     pathname.split('/')[2]

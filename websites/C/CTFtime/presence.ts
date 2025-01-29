@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 type Functionlize<T> = {
   [P in keyof T]: () => T[P];
 }
@@ -6,7 +8,7 @@ interface Route extends Functionlize<Partial<PresenceDataFull>> {
   path: RegExp
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/CTFtime/assets/logo.png',
 }
 
@@ -19,7 +21,7 @@ const { href, hostname } = document.location
 const presence = new Presence({
   clientId: '1253040451624370300',
 })
-const imgElements = document.querySelector<HTMLImageElement>('.span2 img')?.src ?? Assets.Logo
+const imgElements = document.querySelector<HTMLImageElement>('.span2 img')?.src ?? ActivityAssets.Logo
 const startTimestamp: number = Math.floor(Date.now() / 1000)
 function router({ path }: { path: string, presenceData: PresenceData }): Route {
   const routes: Route[] = [
@@ -168,7 +170,7 @@ function router({ path }: { path: string, presenceData: PresenceData }): Route {
       state: () => {
         const h3Elements = document.querySelectorAll('h3')
         if (h3Elements.length > 1)
-          return `Region: ${h3Elements[0].textContent}`
+          return `Region: ${h3Elements[0]?.textContent}`
         else return 'Global Ranking'
       },
       details: () => 'Viewing Teams Ranking',
@@ -188,7 +190,7 @@ function router({ path }: { path: string, presenceData: PresenceData }): Route {
     {
       path: /^\/.*$/,
       details: () => {
-        return href.split('/')[3].toUpperCase().split('-').join(' ')
+        return href.split('/')[3]?.toUpperCase().split('-').join(' ')
       },
     },
   ]
@@ -203,7 +205,7 @@ presence.on('UpdateData', async () => {
     presence.getSetting<boolean>(Settings.COVERS),
   ])
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
 
   if (showTimestamp)

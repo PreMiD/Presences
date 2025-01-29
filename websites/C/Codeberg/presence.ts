@@ -3,13 +3,13 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets { // Other default assets can be found at index.d.ts
+enum ActivityAssets { // Other default assets can be found at index.d.ts
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/Codeberg/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 
@@ -128,7 +128,7 @@ presence.on('UpdateData', async () => {
       .querySelector('#profile-avatar')
       ?.querySelector('img')
       ?.src
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
   }
 
   // Handle repos
@@ -147,10 +147,10 @@ presence.on('UpdateData', async () => {
 
     if (repoAvatar) {
       presenceData.largeImageKey = repoAvatar.src
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
     }
     else {
-      presenceData.largeImageKey = Assets.Logo
+      presenceData.largeImageKey = ActivityAssets.Logo
     }
 
     presenceData.buttons = [
@@ -240,7 +240,7 @@ presence.on('UpdateData', async () => {
       },
     ]
     presenceData.largeImageKey = orgAvatar?.src
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
   }
 
   presence.setActivity(presenceData)

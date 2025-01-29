@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '653372675166568481',
 })
@@ -18,7 +20,7 @@ presence.on('UpdateData', () => {
         )
         ?.textContent
         ?.split('Jump to')[0]
-        .trim()
+        ?.trim()
     }
     else if (document.location.pathname.startsWith('/servers')) {
       presenceData.details = 'Browsing through'
