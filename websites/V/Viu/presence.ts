@@ -144,6 +144,7 @@ presence.on('UpdateData', async () => {
       presenceLogo
     ],
     startTimestamp: browsingTimestamp,
+    type: ActivityType.Watching,
   }
 
   if (document.location.pathname.includes('/vod/')) {

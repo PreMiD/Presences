@@ -11,8 +11,7 @@ const enum PresenceAssets {
 
 let duration: number, currentTime: number, paused: boolean, playback: boolean
 
-presence.on('iFrameData', (inc: unknown) => {
-  const data = inc as IFrameData
+presence.on('iFrameData', (data: IFrameData) => {
   playback = !!data.duration
   if (playback)
     ({ duration, currentTime, paused } = data)

@@ -21,11 +21,9 @@ function getVideoID(): string | undefined {
 }
 
 function getChannelURL(): string | undefined {
-  return document
-    .querySelector<HTMLAnchorElement>(
-      '#ytd-player .ytp-ce-channel-title.ytp-ce-link',
-    )
-    ?.href
+  return document.querySelector<HTMLAnchorElement>(
+    '#ytd-player .ytp-ce-channel-title.ytp-ce-link',
+  )?.href
 }
 
 const resolver: Resolver = {

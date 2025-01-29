@@ -174,8 +174,8 @@ export async function getThumbnail(videoId: string): Promise<string> {
       tempCanvas.height = wh
 
       tempCanvas
-        .getContext('2d')!
-        .drawImage(img, offsetX, offsetY, newWidth, newHeight)
+        .getContext('2d')
+        ?.drawImage(img, offsetX, offsetY, newWidth, newHeight)
 
       generatedId = videoId
       generatedImage = tempCanvas.toDataURL('image/png')

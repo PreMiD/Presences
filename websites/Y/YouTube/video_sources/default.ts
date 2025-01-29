@@ -28,9 +28,9 @@ export function getVideoID(): string | undefined {
 }
 
 export function getChannelURL(): string | undefined {
-  return getBaseSection()
-    ?.querySelector<HTMLAnchorElement>('#upload-info #channel-name a')
-    ?.href
+  return getBaseSection()?.querySelector<HTMLAnchorElement>(
+    '#upload-info #channel-name a',
+  )?.href
 }
 
 function getBaseSection(): HTMLElement | null {

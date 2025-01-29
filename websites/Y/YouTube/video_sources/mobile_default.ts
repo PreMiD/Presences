@@ -10,25 +10,25 @@ function isActive(): boolean {
   )
 }
 
-function getTitle(): string {
+function getTitle(): string | undefined {
   return document
     .querySelector('h2[class*=video-information-title]')
     ?.textContent
-    .trim()
+    ?.trim()
 }
 
-function getUploader(): string {
+function getUploader(): string | undefined {
   return document
     .querySelector('[class*=owner-channel-name]')
     ?.textContent
-    .trim()
+    ?.trim()
 }
 
-export function getVideoID(): string {
-  return new URLSearchParams(document.location.search).get('v')
+export function getVideoID(): string | undefined {
+  return new URLSearchParams(document.location.search).get('v') ?? undefined
 }
 
-export function getChannelURL(): string {
+export function getChannelURL(): string | undefined {
   return document.querySelector<HTMLAnchorElement>(
     'a[class*=owner-icon-and-title]',
   )?.href

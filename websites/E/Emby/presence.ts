@@ -522,7 +522,7 @@ function getUserId(): string {
   }
   catch {
     const servers: Server[] = JSON.parse(
-      localStorage.getItem('servercredentials3') ?? '',
+      localStorage.getItem('servercredentials3')!,
     ).Servers
 
     return (

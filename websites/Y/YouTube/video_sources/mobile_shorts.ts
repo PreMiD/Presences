@@ -11,22 +11,22 @@ function isActive(): boolean {
   )
 }
 
-function getTitle(): string {
+function getTitle(): string | undefined {
   return getShortsElement()?.querySelector(
     '.ytShortsVideoTitleViewModelShortsVideoTitle',
-  )?.textContent
+  )?.textContent ?? undefined
 }
 
-function getUploader(): string {
+function getUploader(): string | undefined {
   return getShortsElement()
     ?.querySelector<HTMLAnchorElement>(
       '.ytReelChannelBarViewModelChannelName a',
     )
     ?.textContent
-    .replace(/^@/, '')
+    ?.replace(/^@/, '')
 }
 
-function getChannelURL(): string {
+function getChannelURL(): string | undefined {
   const shortsLink = getShortsElement()?.querySelector<HTMLAnchorElement>(
     '.ytReelChannelBarViewModelChannelName a',
   )
@@ -35,14 +35,14 @@ function getChannelURL(): string {
     split.pop() // remove last item
     return split.join('/').replace(/^@/, '')
   }
-  return ''
+  return undefined
 }
 
 export function getVideoID(): string {
   return document.location.pathname.split('/shorts/')[1]
 }
 
-function getShortsElement(): HTMLElement {
+function getShortsElement(): HTMLElement | null {
   return document.querySelector(
     '.ytShortsCarouselCarouselItem[aria-hidden=false] shorts-video',
   )

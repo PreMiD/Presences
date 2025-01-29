@@ -29,13 +29,13 @@ presence.on('UpdateData', async () => {
         'mat-card-subtitle mat-list-item:nth-child(5)',
       )?.textContent
 
-      if (episodeNumber) {
+      if (episodeNumber && title) {
         const video = document.querySelector('video')
 
         if (showCover)
           presenceData.largeImageKey = video?.poster
         if (useActivityName) {
-          presenceData.name = title!
+          presenceData.name = title
           presenceData.details = category !== 'Movie' ? `Episode ${episodeNumber}` : category
           presenceData.state = `${document
             .querySelector('mat-card-subtitle')

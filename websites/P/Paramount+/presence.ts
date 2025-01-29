@@ -22,6 +22,7 @@ presence.on('UpdateData', async () => {
     pause: 'general.paused',
     live: 'general.live',
   })
+  let video: HTMLVideoElement | null = null
   let presenceData: PresenceData = {
     name: 'Paramount+',
     largeImageKey: Logos.Paramount,
@@ -48,7 +49,7 @@ presence.on('UpdateData', async () => {
       )
 
       if (vidArea && pathIncludes(pathname, '/video')) {
-        const video = document.querySelector('video')!
+        video = document.querySelector('video')
 
         presenceData = {
           ...presenceData,
@@ -117,7 +118,7 @@ presence.on('UpdateData', async () => {
         }
       }
       else if (vidArea && vidArea.querySelector('video')) {
-        const video = vidArea.querySelector('video')!
+        video = vidArea.querySelector('video')!
         const movieData = JSON.parse(
           document.querySelector('[type="application/ld+json"]')?.textContent ?? '{}',
         )

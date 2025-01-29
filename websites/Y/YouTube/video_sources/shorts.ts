@@ -18,7 +18,7 @@ function getTitle(): string | undefined {
     ?.trim()
 }
 
-function getShortsElement(): HTMLElement | null | undefined {
+function getShortsElement(): HTMLElement | undefined {
   return (
     document
       .querySelector('video')
@@ -30,7 +30,7 @@ function getShortsElement(): HTMLElement | null | undefined {
         .querySelectorAll('video')[1]
         ?.closest('ytd-reel-video-renderer')
         ?.querySelector('yt-formatted-string#text.style-scope.ytd-channel-name')
-  )
+  ) ?? undefined
 }
 
 function getUploader(): string {
