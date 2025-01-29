@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: '778092541836656712',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/B/Bonk.io/assets/logo.png',
   Arrows = 'https://cdn.rcd.gg/PreMiD/websites/B/Bonk.io/assets/0.png',
   Arrows2 = 'https://cdn.rcd.gg/PreMiD/websites/B/Bonk.io/assets/1.png',
@@ -10,9 +10,9 @@ const enum Assets {
   Grapple = 'https://cdn.rcd.gg/PreMiD/websites/B/Bonk.io/assets/3.png',
 }
 const modePair: { [key: string]: string } = {
-  'Arrows': Assets.Arrows,
-  'Death Arrows': Assets.Arrows2,
-  'Grapple': Assets.Grapple,
+  'Arrows': ActivityAssets.Arrows,
+  'Death Arrows': ActivityAssets.Arrows2,
+  'Grapple': ActivityAssets.Grapple,
 }
 
 interface IFrameData {
@@ -27,7 +27,7 @@ let ifd: IFrameData | null = null
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
 
   if (ifd?.id) {
@@ -62,7 +62,7 @@ presence.on('UpdateData', async () => {
         presenceData.details = `In a lobby - ${ifd.lastGameMode} (${
           ifd.playerCount
         } player${ifd.playerCount === 1 ? '' : 's'})`
-        presenceData.smallImageKey = modePair[ifd.lastGameMode ?? ''] || Assets.Classic
+        presenceData.smallImageKey = modePair[ifd.lastGameMode ?? ''] || ActivityAssets.Classic
         presenceData.smallImageText = ifd.lastGameMode
         break
       case 'mapeditorcontainer':
@@ -75,7 +75,7 @@ presence.on('UpdateData', async () => {
         presenceData.details = 'In Game'
         if (ifd.lastGameMode) {
           presenceData.details += ` - ${ifd.lastGameMode}`
-          presenceData.smallImageKey = modePair[ifd.lastGameMode] || Assets.Classic
+          presenceData.smallImageKey = modePair[ifd.lastGameMode] || ActivityAssets.Classic
           presenceData.smallImageText = ifd.lastGameMode
         }
         break

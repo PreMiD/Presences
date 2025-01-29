@@ -48,7 +48,7 @@ function removeRubyCharacters(element: HTMLElement) {
   let text = ''
   for (const child of element.childNodes) {
     if (child.nodeName === 'RUBY')
-      text += child.childNodes[0].textContent
+      text += child.childNodes[0]?.textContent
     else text += child.textContent
   }
   return text

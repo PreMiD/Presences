@@ -172,7 +172,7 @@ export const logoArr = [
   'https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/81.gif', // EarthDay
   `https://i.imgur.com${'/Kf8bXNc.gif'}`, // Christmas 2022
   `https://i.imgur.com${'/4dpoXYa.gif'}`, // Christmas 2023
-]
+] as const
 
 export const contexts: Record<string, string> = {
   beatleader: 'https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/114.png',

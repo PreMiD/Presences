@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1194078283919274004',
 })
@@ -6,14 +8,14 @@ const slideshow = presence.createSlideshow()
 let oldPath = document.location.pathname
 let browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/B/BoardGameGeek/assets/logo.png',
   RatingIcon = 'https://cdn.rcd.gg/PreMiD/websites/B/BoardGameGeek/assets/0.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href, search } = document.location
@@ -89,7 +91,7 @@ presence.on('UpdateData', async () => {
               ...presenceData,
               largeImageKey: expansion.querySelector<HTMLImageElement>('.media img'),
               state: expansionLink,
-              smallImageKey: Assets.RatingIcon,
+              smallImageKey: ActivityAssets.RatingIcon,
               smallImageText: `Rating: ${ratingContainer?.childNodes[2]?.textContent?.trim()} (${ratingContainer?.getAttribute(
                 'uib-tooltip',
               )})`,
@@ -334,7 +336,7 @@ presence.on('UpdateData', async () => {
             ?.querySelector('p')
             ?.textContent
             ?.trim()}`
-          presenceData.smallImageKey = Assets.RatingIcon
+          presenceData.smallImageKey = ActivityAssets.RatingIcon
           presenceData.smallImageText = `Rating: ${document
             .querySelector('overall-rating [ng-show=showRating]')
             ?.textContent
@@ -532,7 +534,7 @@ presence.on('UpdateData', async () => {
         presenceData.buttons = [{ label: 'View Guild', url: href }]
       }
 
-      if (Number.isNaN(+pathList[1])) {
+      if (Number.isNaN(+pathList[1]!)) {
         switch (pathList[2]) {
           case 'category': {
             presenceData.details = 'Viewing a guild category'

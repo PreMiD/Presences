@@ -19,7 +19,7 @@ async function getData() {
   }
 
   if (document.querySelectorAll('h1')[0]) {
-    roomName = document.querySelectorAll('h1')[0].textContent ?? ''
+    roomName = document.querySelectorAll('h1')[0]?.textContent ?? ''
 
     userCount = 0
 

@@ -98,7 +98,7 @@ presence.on('UpdateData', async () => {
     else if (window.location.pathname.startsWith('/bots/search/')) {
       presenceData.state = `Search results (${window.location.pathname
         .split('/search/')[1]
-        .trim()}` + ')'
+        ?.trim()}` + ')'
     }
   }
   else if (

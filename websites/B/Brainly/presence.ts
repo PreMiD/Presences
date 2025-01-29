@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '937439130613350480',
 })
@@ -19,7 +21,7 @@ const pathNameLocalize = [
     question: '/tema',
   },
 ]
-let pathName: { hostname: string, subject: string, question: string }
+let pathName: { hostname: string, subject: string, question: string } | undefined
 
 function setPathName() {
   if (
@@ -55,7 +57,7 @@ presence.on('UpdateData', async () => {
   else if (page.includes('/all-questions')) {
     presenceData.details = 'Viewing all questions'
   }
-  else if (page.includes(pathName.subject)) {
+  else if (pathName && page.includes(pathName.subject)) {
     presenceData.details = 'Viewing subject:'
     presenceData.state = (
       page.replace(`${pathName.subject}/`, '').charAt(0).toUpperCase()
@@ -64,7 +66,7 @@ presence.on('UpdateData', async () => {
       .split('_')
       .join(' ')
   }
-  else if (page.includes(pathName.question)) {
+  else if (pathName && page.includes(pathName.question)) {
     presenceData.details = 'Reading question:'
     presenceData.smallImageKey = Assets.Reading
     presenceData.state = document.title.replace(
@@ -103,7 +105,7 @@ presence.on('UpdateData', async () => {
   }
   else if (page.includes('/app/profile')) {
     presenceData.details = 'Viewing profile:'
-    presenceData.state = document.title.replace(`- ${pathName.hostname}`, '')
+    presenceData.state = document.title.replace(`- ${pathName?.hostname}`, '')
     presenceData.buttons = [
       {
         label: 'View Profile',

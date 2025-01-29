@@ -27,7 +27,7 @@ iframe.on('UpdateData', async () => {
 
   if (title.textContent.includes('Bölüm')) {
     const titleArr = title.textContent.split('.')
-    const epTitle = `${titleArr[0].charAt(titleArr[0].length - 1)}.${titleArr[1]}`
+    const epTitle = `${titleArr[0]?.charAt(titleArr[0].length - 1)}.${titleArr[1]}`
 
     iframe.send({
       video: {

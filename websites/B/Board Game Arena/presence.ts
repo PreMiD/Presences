@@ -1,5 +1,5 @@
-import getGame from './games'
-import { getGameTag } from './util'
+import getGame from './games/index.js'
+import { getGameTag } from './util.js'
 
 const presence = new Presence({
   clientId: '1089962805270171689',
@@ -113,7 +113,7 @@ presence.on('UpdateData', async () => {
       break
     }
     default: {
-      if (/^\d+$/.test(pathList[0])) {
+      if (/^\d+$/.test(pathList[0]!)) {
         const game = getGame(await getGameTag(presence))
         presenceData.details = `Playing ${document
           .querySelector('meta[property=\'og:title\']')

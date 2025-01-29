@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '684570342085099546',
 })
@@ -11,7 +13,7 @@ function getElement(query: string): string {
   else return ''
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Online/assets/logo.png',
 }
 
@@ -109,14 +111,14 @@ function setObject(path: string) {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const path = location.pathname
   const query = location.search
   const detailsObj = setObject(path)
 
   if (location.host === 'www.boardgame-online.com') {
-    if (path || (query && query.split('page=')[1].split('&')[0])) {
+    if (path || (query && query.split('page=')[1]?.split('&')[0])) {
       presenceData.details = detailsObj?.details
       presenceData.state = detailsObj?.state
     }

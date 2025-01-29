@@ -1,8 +1,10 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '813110347165728849',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/B/bol.com/assets/logo.png',
 }
 
@@ -16,7 +18,7 @@ function lowerCase(str: string, capitalFirstLetter?: boolean) {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     buttons: [{ label: 'Pagina bekijken', url: document.location.href }],
   }
   const { pathname, href } = document.location
@@ -43,7 +45,7 @@ presence.on('UpdateData', async () => {
     case !!product?.title: {
       const categorie = document.querySelectorAll('.breadcrumbs__item')
       presenceData.largeImageKey = document.querySelector<HTMLMetaElement>('meta[property="og:image"]')
-        ?.content ?? Assets.Logo
+        ?.content ?? ActivityAssets.Logo
       presenceData.details = privacy
         ? 'Bekijkt een product'
         : `Bekijkt '${lowerCase(product?.title)}'`
@@ -105,8 +107,8 @@ presence.on('UpdateData', async () => {
     delete presenceData.buttons
   if (privacy && presenceData.state)
     delete presenceData.state
-  if (!covers && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if (!covers && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
 
   if (presenceData.details)
     presence.setActivity(presenceData)

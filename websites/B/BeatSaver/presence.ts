@@ -76,7 +76,7 @@ presence.on('UpdateData', async () => {
           .querySelector<HTMLImageElement>('a[class~=\'active\'] img')
           ?.title
           .split(' ')[0]
-          .replace('+', 'Plus')}` as keyof typeof OtherAssets
+          ?.replace('+', 'Plus')}` as keyof typeof OtherAssets
       ]
       presenceData.smallImageText = `${
         (
@@ -106,7 +106,7 @@ presence.on('UpdateData', async () => {
 
       presenceData.details = document.querySelector(
         '.card-header.d-flex',
-      )?.childNodes[0].textContent
+      )?.childNodes[0]?.textContent
       if (presenceData.details === '')
         presenceData.details = '<NO NAME>'
 

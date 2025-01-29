@@ -1,4 +1,5 @@
-import { contexts, leaderboardImages, logoArr, replayIcon } from './assets'
+import { ActivityType, Assets } from 'premid'
+import { contexts, leaderboardImages, logoArr, replayIcon } from './assets.js'
 
 const presence = new Presence({
   clientId: '939893188448104468',
@@ -378,7 +379,7 @@ presence.on('UpdateData', async () => {
   }
 
   if (context && presenceData.largeImageKey && !presenceData.smallImageKey) {
-    presenceData.smallImageKey = contexts[hostname.split('.')[0]]
+    presenceData.smallImageKey = contexts[hostname.split('.')[0]!]
     presenceData.smallImageText = document.querySelector('.leaderboard-type')?.textContent
   }
 

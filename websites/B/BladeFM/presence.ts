@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({ clientId: '821776987570962532' })
 const timestamp = Math.floor(Date.now() / 1000)
 

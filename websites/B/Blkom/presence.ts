@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '769568486263095327',
 })
@@ -15,7 +17,7 @@ presence.on(
   },
 )
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/B/Blkom/assets/logo.png',
   Location = 'https://cdn.rcd.gg/PreMiD/websites/B/Blkom/assets/0.png',
   Discovery = 'https://cdn.rcd.gg/PreMiD/websites/B/Blkom/assets/1.png',
@@ -25,7 +27,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: Math.floor(Date.now() / 1000),
   }
 
@@ -84,7 +86,7 @@ presence.on('UpdateData', async () => {
     presenceData.state = 'Downloading Anime'
   }
   else if (location.pathname.startsWith('/anime/')) {
-    presenceData.smallImageKey = Assets.Location
+    presenceData.smallImageKey = ActivityAssets.Location
     presenceData.smallImageText = 'Viewing'
     presenceData.details = document
       .querySelector('.name')
@@ -94,47 +96,47 @@ presence.on('UpdateData', async () => {
     presenceData.state = 'Viewing an Anime'
   }
   else if (location.pathname.startsWith('/anime-list')) {
-    presenceData.smallImageKey = Assets.Discovery
+    presenceData.smallImageKey = ActivityAssets.Discovery
     presenceData.smallImageText = 'Browsing'
     presenceData.details = 'Browsing for Anime'
   }
   else if (location.pathname.startsWith('/series-list')) {
-    presenceData.smallImageKey = Assets.Discovery
+    presenceData.smallImageKey = ActivityAssets.Discovery
     presenceData.smallImageText = 'Browsing'
     presenceData.details = 'Browsing for Series'
   }
   else if (location.pathname.startsWith('/movie-list')) {
-    presenceData.smallImageKey = Assets.Discovery
+    presenceData.smallImageKey = ActivityAssets.Discovery
     presenceData.smallImageText = 'Browsing'
     presenceData.details = 'Browsing for Movie'
   }
   else if (location.pathname.startsWith('/ova-list')) {
-    presenceData.smallImageKey = Assets.Discovery
+    presenceData.smallImageKey = ActivityAssets.Discovery
     presenceData.smallImageText = 'Browsing'
     presenceData.details = 'Browsing for Ova'
   }
   else if (location.pathname.startsWith('/ona-list')) {
-    presenceData.smallImageKey = Assets.Discovery
+    presenceData.smallImageKey = ActivityAssets.Discovery
     presenceData.smallImageText = 'Browsing'
     presenceData.details = 'Browsing for Ona'
   }
   else if (location.pathname.startsWith('/special-list')) {
-    presenceData.smallImageKey = Assets.Discovery
+    presenceData.smallImageKey = ActivityAssets.Discovery
     presenceData.smallImageText = 'Browsing'
     presenceData.details = 'Browsing for Special'
   }
   else if (location.pathname.startsWith('/premium')) {
-    presenceData.smallImageKey = Assets.Discovery
+    presenceData.smallImageKey = ActivityAssets.Discovery
     presenceData.smallImageText = 'Discovering'
     presenceData.details = 'Discovering Premium'
   }
   else if (location.pathname === '/blog') {
-    presenceData.smallImageKey = Assets.Discovery
+    presenceData.smallImageKey = ActivityAssets.Blog
     presenceData.smallImageText = 'Discovering'
     presenceData.details = 'Discovering Blog'
   }
   else if (location.pathname.startsWith('/post')) {
-    presenceData.smallImageKey = Assets.Blog
+    presenceData.smallImageKey = ActivityAssets.Blog
     presenceData.smallImageText = 'Reading'
     presenceData.details = document
       .querySelector('.post-title')
@@ -146,7 +148,7 @@ presence.on('UpdateData', async () => {
       ?.trim()}'s Post`
   }
   else if (location.pathname.startsWith('/timeline')) {
-    presenceData.smallImageKey = Assets.Discovery
+    presenceData.smallImageKey = ActivityAssets.Discovery
     presenceData.smallImageText = 'Discovering'
     presenceData.details = 'Discovering Timeline'
   }
@@ -154,7 +156,7 @@ presence.on('UpdateData', async () => {
     location.pathname.startsWith('/user')
     && location.pathname.includes('/ratings')
   ) {
-    presenceData.smallImageKey = Assets.Profile
+    presenceData.smallImageKey = ActivityAssets.Profile
     presenceData.smallImageText = 'Viewing'
     presenceData.details = 'Ratings List'
     presenceData.state = `Viewing ${document
@@ -166,7 +168,7 @@ presence.on('UpdateData', async () => {
     location.pathname.startsWith('/user')
     && location.pathname.includes('/watching')
   ) {
-    presenceData.smallImageKey = Assets.Profile
+    presenceData.smallImageKey = ActivityAssets.Profile
     presenceData.smallImageText = 'Viewing'
     presenceData.details = 'Watching List'
     presenceData.state = `Viewing ${document
@@ -178,7 +180,7 @@ presence.on('UpdateData', async () => {
     location.pathname.startsWith('/user')
     && location.pathname.includes('/completed')
   ) {
-    presenceData.smallImageKey = Assets.Profile
+    presenceData.smallImageKey = ActivityAssets.Profile
     presenceData.smallImageText = 'Viewing'
     presenceData.details = 'Completed List'
     presenceData.state = `Viewing ${document
@@ -190,7 +192,7 @@ presence.on('UpdateData', async () => {
     location.pathname.startsWith('/user')
     && location.pathname.includes('/on-hold')
   ) {
-    presenceData.smallImageKey = Assets.Profile
+    presenceData.smallImageKey = ActivityAssets.Profile
     presenceData.smallImageText = 'Viewing'
     presenceData.details = 'On-Hold List'
     presenceData.state = `Viewing ${document
@@ -202,7 +204,7 @@ presence.on('UpdateData', async () => {
     location.pathname.startsWith('/user')
     && location.pathname.includes('/dropped')
   ) {
-    presenceData.smallImageKey = Assets.Profile
+    presenceData.smallImageKey = ActivityAssets.Profile
     presenceData.smallImageText = 'Viewing'
     presenceData.details = 'Dropped List'
     presenceData.state = `Viewing ${document
@@ -214,7 +216,7 @@ presence.on('UpdateData', async () => {
     location.pathname.startsWith('/user')
     && location.pathname.includes('/plan-to-watch')
   ) {
-    presenceData.smallImageKey = Assets.Profile
+    presenceData.smallImageKey = ActivityAssets.Profile
     presenceData.smallImageText = 'Viewing'
     presenceData.details = 'Planned List'
     presenceData.state = `Viewing ${document
@@ -223,7 +225,7 @@ presence.on('UpdateData', async () => {
       ?.trim()}'s Profile`
   }
   else if (location.pathname.startsWith('/user')) {
-    presenceData.smallImageKey = Assets.Profile
+    presenceData.smallImageKey = ActivityAssets.Profile
     presenceData.smallImageText = 'Viewing'
     presenceData.details = 'Main Page'
     presenceData.state = `Viewing ${document

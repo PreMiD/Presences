@@ -11,7 +11,7 @@ presence.on('UpdateData', async () => {
     && !document.querySelector<HTMLAudioElement>('audio')?.paused
   ) {
     presenceData = {
-      largeImageKey: navigator.mediaSession.metadata.artwork[0].src,
+      largeImageKey: navigator.mediaSession.metadata.artwork[0]?.src,
       details: navigator.mediaSession.metadata.title,
       state: navigator.mediaSession.metadata.artist,
       buttons: [

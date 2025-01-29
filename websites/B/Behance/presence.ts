@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '934826046824542279',
 })
@@ -17,13 +19,13 @@ presence.on(
   },
 )
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/B/Behance/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     details: 'Browsing',
     startTimestamp: browsingTimestamp,
   }
@@ -45,7 +47,7 @@ presence.on('UpdateData', async () => {
       )?.textContent
       presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
         'div.Popover-activator-14J.Miniprofile-activator-1QJ > span > a > div > img',
-      )?.src ?? Assets.Logo
+      )?.src ?? ActivityAssets.Logo
       presenceData.buttons = [
         {
           label: 'View Work',
@@ -85,7 +87,7 @@ presence.on('UpdateData', async () => {
     )?.textContent
     presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
       '#site-content div > div > div > img',
-    )?.src ?? Assets.Logo
+    )?.src ?? ActivityAssets.Logo
     presenceData.buttons = [{ label: 'View Profile', url: document.URL }]
   }
   else if (pathname.startsWith('/search')) {
@@ -110,7 +112,7 @@ presence.on('UpdateData', async () => {
     )?.textContent
     presenceData.largeImageKey = document
       .querySelector('meta[name="twitter:image"]')
-      ?.getAttribute('content') ?? Assets.Logo
+      ?.getAttribute('content') ?? ActivityAssets.Logo
     if (video.live) {
       presenceData.smallImageKey = Assets.Live
       presenceData.smallImageText = 'Live'
@@ -170,7 +172,7 @@ presence.on('UpdateData', async () => {
       presenceData.state = jobLocation.textContent
       presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
         'div.JobDetailContent-teamAvatar-3qv > div > a > img',
-      )?.src ?? Assets.Logo
+      )?.src ?? ActivityAssets.Logo
       presenceData.smallImageKey = Assets.Reading
     }
   }

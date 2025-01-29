@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '901821070263336971',
 })
@@ -13,7 +15,7 @@ const pages: Record<string, string> = {
 }
 const browsingTimestamp = Math.round(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/B/Blockbench/assets/logo.png',
   Generic = 'https://cdn.rcd.gg/PreMiD/websites/B/Blockbench/assets/0.png',
   BlockItem = 'https://cdn.rcd.gg/PreMiD/websites/B/Blockbench/assets/1.png',
@@ -26,7 +28,7 @@ const enum Assets {
 presence.on('UpdateData', async () => {
   const page = location.pathname
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const pluginHeader = document.querySelector(
@@ -40,22 +42,22 @@ presence.on('UpdateData', async () => {
 
     switch (modelType?.toLowerCase()) {
       case 'generic model':
-        presenceData.smallImageKey = Assets.Generic
+        presenceData.smallImageKey = ActivityAssets.Generic
         break
       case 'java block/item':
-        presenceData.smallImageKey = Assets.BlockItem
+        presenceData.smallImageKey = ActivityAssets.BlockItem
         break
       case 'bedrock model':
-        presenceData.smallImageKey = Assets.Bedrock
+        presenceData.smallImageKey = ActivityAssets.Bedrock
         break
       case 'modded entity':
-        presenceData.smallImageKey = Assets.Modded
+        presenceData.smallImageKey = ActivityAssets.Modded
         break
       case 'optifine entity':
-        presenceData.smallImageKey = Assets.Optifine
+        presenceData.smallImageKey = ActivityAssets.Optifine
         break
       case 'minecraft skin':
-        presenceData.smallImageKey = Assets.Skin
+        presenceData.smallImageKey = ActivityAssets.Skin
         break
       default:
         break

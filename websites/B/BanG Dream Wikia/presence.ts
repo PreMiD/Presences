@@ -6,7 +6,7 @@ presence.on('UpdateData', async () => {
   if (document.location.pathname.startsWith('/wiki/')) {
     const [page] = document.querySelectorAll('.page-header__title')
     let pageText
-    if (page === null)
+    if (!page)
       pageText = 'Unknown Page'
     else pageText = page.textContent
 

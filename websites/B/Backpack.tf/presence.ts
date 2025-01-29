@@ -3,13 +3,13 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/B/Backpack.tf/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   if (document.location.pathname === '/') {
@@ -21,7 +21,7 @@ presence.on('UpdateData', async () => {
         'head > meta[property=\'og:image\']',
       ) as HTMLMetaElement
     ).content
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.details = 'Viewing item stats:'
     presenceData.state = (
       document.querySelector(
@@ -78,7 +78,7 @@ presence.on('UpdateData', async () => {
     }
     else {
       presenceData.details = 'Viewing item:'
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
       presenceData.smallImageText = 'Backpack.tf Item stats'
       presenceData.largeImageKey = (
         document.querySelector(
@@ -124,7 +124,7 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname.includes('/u/')) {
     presenceData.details = 'Viewing a profile page:'
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.largeImageKey = (
       document.querySelector(
         '#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.avatar-container > a > img',
@@ -144,7 +144,7 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname.includes('/profiles/')) {
     presenceData.details = 'Viewing a profile page:'
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.largeImageKey = (
       document.querySelector(
         '#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.avatar-container > a > img',
@@ -164,7 +164,7 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname.includes('/friends/')) {
     presenceData.details = 'Viewing a profile page:'
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.largeImageKey = (
       document.querySelector(
         '#page-content > div.panel.panel-main.user-panel- > div.panel-body > div > div.information > div.avatar-container > a > img',

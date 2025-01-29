@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/B/Brave%20Search/assets/logo.png',
 }
 
@@ -40,7 +40,7 @@ presence.on('UpdateData', async () => {
   const { pathname } = document.location
   const privacy = await presence.getSetting('privacy')
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     details: strings.home,
     state: privacy

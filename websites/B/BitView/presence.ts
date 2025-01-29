@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '899181356372860958',
 })
@@ -32,7 +34,7 @@ function getChannelSuscribers() {
     ?.textContent
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/B/BitView/assets/logo.png',
 }
 
@@ -42,7 +44,7 @@ presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     name: 'BitView',
     type: ActivityType.Watching,
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const baseViewingPresence = () => {
     presenceData.smallImageKey = Assets.Viewing
@@ -109,7 +111,7 @@ presence.on('UpdateData', async () => {
       ?.querySelector('div') // Channel name
 
     presenceData.largeImageKey = getChannelAvatar()
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = `${getChannelSuscribers()} Suscribers`
     presenceData.buttons = [{ label: 'View Channel', url: href }]
     presenceData.startTimestamp = browsingTimestamp
@@ -125,7 +127,7 @@ presence.on('UpdateData', async () => {
   else if (pathname.includes('my') || pathname.includes('viewing')) {
     // my_videos, my_subscriptons... and viewing_historial
     baseViewingPresence()
-    presenceData.details = VIEW_PAGES.get(pathname.split('_')[1]) || 'Viewing a page'
+    presenceData.details = VIEW_PAGES.get(pathname.split('_')[1]!) || 'Viewing a page'
   }
   else if (pathname.includes('inbox')) {
     baseViewingPresence()

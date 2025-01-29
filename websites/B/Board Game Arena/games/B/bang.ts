@@ -1,4 +1,4 @@
-import type { GamePresence } from '..'
+import type { GamePresence } from '../index.js'
 import {
   getActivePlayerId,
   getCurrentGameState,
@@ -7,7 +7,7 @@ import {
   getPlayerData,
   getPlayerScore,
   getUserPlayerId,
-} from '../../util'
+} from '../../util.js'
 
 const bang: GamePresence = {
   logo: 'https://cdn.rcd.gg/PreMiD/websites/B/Board%20Game%20Arena/assets/31.png',

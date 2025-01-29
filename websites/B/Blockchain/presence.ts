@@ -93,7 +93,7 @@ presence.on('UpdateData', async () => {
     else if (window.location.hash.includes('/airdrops')) {
       presenceData.details = 'Airdrops'
     }
-    else if (currencyList.includes(window.location.hash.split('/')[1])) {
+    else if (currencyList.includes(window.location.hash.split('/')[1]!)) {
       currencyTitle = document.querySelector(
         '#app > div > div.sc-eTpRJs.chWNvr > div.sc-iomxrj.kkzpGP > div > div > div > div > div.sc-jZRpAH.cBnkKE > div.sc-cNfOsU.hJFgdt > div.sc-eWciec.hrSHFN > div',
       )?.textContent

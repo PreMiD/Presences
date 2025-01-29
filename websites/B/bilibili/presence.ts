@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({ clientId: '639591760791732224' })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 const urlpath = document.location.pathname.split('/')

@@ -1,6 +1,6 @@
 import type { GameCallbackParams } from '../../types'
 
-import { getSVGImageData, uploadFile } from '../../util'
+import { getSVGImageData, uploadFile } from '../../util.js'
 
 export const name = 'Dodo Re Mi'
 export const logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/44.png'

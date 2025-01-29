@@ -1,5 +1,5 @@
 import type { GameCallbackParams } from '../../types'
-import { uploadFile } from '../../util'
+import { uploadFile } from '../../util.js'
 
 export const name = 'Champ\'d Up'
 export const logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/32.png'
