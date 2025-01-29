@@ -5,6 +5,12 @@
 		"name": "frnk",
 		"id": "232904284004548608"
 	},
+	"contributors": [
+		{
+			"name": "LenochJade",
+			"id": "390265556357611521"
+		}
+	],
 	"service": "Leboncoin",
 	"description": {
 		"en": "Leboncoin is a french classified ads website where users and professionals can sell or buy products online and offline.",
