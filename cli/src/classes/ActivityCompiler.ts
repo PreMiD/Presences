@@ -194,8 +194,12 @@ export class ActivityCompiler {
       }
     }
 
-    if (libraryVersion && compare(metadata.version, libraryVersion.version) <= 0) {
-      const expectedVersions = [inc(metadata.version, 'patch'), inc(metadata.version, 'minor'), inc(metadata.version, 'major')]
+    if (libraryVersion && compare(metadata.version, libraryVersion.version) === -1) {
+      const expectedVersions = [
+        inc(libraryVersion.version, 'patch'),
+        inc(libraryVersion.version, 'minor'),
+        inc(libraryVersion.version, 'major'),
+      ]
       const message = `Expected version of activity ${metadata.service} to be bumped to one of the following: ${expectedVersions.join(', ')}`
       if (kill) {
         exit(message)

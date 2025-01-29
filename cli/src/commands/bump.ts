@@ -46,7 +46,7 @@ async function bumpActivity(activity: ActivityMetadataAndFolder, version?: strin
       break
     default: {
       if (version) {
-        if (valid(version) && compare(activity.metadata.version, version) < 0) {
+        if (valid(version) && compare(activity.metadata.version, version) === -1) {
           activity.metadata.version = version
           break
         }
