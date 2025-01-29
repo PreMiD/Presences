@@ -31,7 +31,7 @@ presence.on("UpdateData", () => {
 		presenceData.state = "Informations légales";
 	else if (document.location.pathname.includes("/annonces/offres"))
 		presenceData.state = "Annonces pour toute la France";
-	else if (document.location.pathname.includes("/compte"))
+	else if (document.location.pathname.includes("/compte") || document.location.pathname.includes("/account/"))
 		presenceData.state = "Paramètres du compte";
 	else if (document.location.pathname.includes("/profil/")) {
 		const profileName = document.querySelector(
