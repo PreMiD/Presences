@@ -7,9 +7,9 @@
 	},
 	"contributors": [
 		{
-    "name": "Aphex2in",
-    "id": "577284974001258507"
-  		}
+			"name": "Aphex2in",
+			"id": "577284974001258507"
+		}
 	],
 	"service": "Anghami",
 	"altnames": [
@@ -19,7 +19,7 @@
 		"en": "Make some noise, the world is listening."
 	},
 	"url": "play.anghami.com",
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/Anghami/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Anghami/assets/thumbnail.jpg",
 	"color": "#FF00FE",
