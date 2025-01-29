@@ -86,7 +86,10 @@ presence.on("UpdateData", () => {
 		presenceData.buttons = [
 			{ label: "Consulter l'annonce", url: document.location.href },
 		];
-	}
+	} else if (document.location.pathname === "/")
+		presenceData.state = "Page d'accueil";
+	else
+		presenceData.details = "Explore";
 	
 	// console.log("UpdateData", presenceData);
 	if (presenceData.details) presence.setActivity(presenceData);
