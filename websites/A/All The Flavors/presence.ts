@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '631122124630654979',
 })
@@ -80,8 +82,8 @@ presence.on('UpdateData', async () => {
       .replace(/\d/, '')
       .replace('#', '')
       .split('_by_')
-    presenceData.details = `Recipe : ${data[0].split('_').join(' ')} `
-    presenceData.state = `Creator: ${data[1].split('_').join(' ')}`
+    presenceData.details = `Recipe : ${data[0]?.split('_').join(' ')} `
+    presenceData.state = `Creator: ${data[1]?.split('_').join(' ')}`
     presenceData.smallImageKey = Assets.Search
     presenceData.smallImageText = 'browsing'
   }

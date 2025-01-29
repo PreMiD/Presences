@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1096792677888053308',
 })
@@ -54,7 +56,7 @@ const animegenres: { [key: string]: string } = {
   'etti': 'Эччи',
 }
 
-const enum Assets {
+enum ActivityAssets {
   VostLogo = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/logo.png',
   Ongoing = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/0.png',
   Anons = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeVost/assets/1.png',
@@ -107,7 +109,7 @@ presence.on('UpdateData', async () => {
   ])
   const presenceData: PresenceData = {
     details: 'Где-то на сайте',
-    largeImageKey: Assets.VostLogo,
+    largeImageKey: ActivityAssets.VostLogo,
     smallImageText: '🏴‍☠️ AnimeVost',
   }
   const websiteloc = document.location.pathname.split('/')
@@ -117,7 +119,7 @@ presence.on('UpdateData', async () => {
     if (websiteloc[1] === '')
       presenceData.details = 'На главной странице'
     if (websiteloc[1] === 'zhanr') {
-      const animegenre = animegenres[websiteloc[2]]
+      const animegenre = animegenres[websiteloc[2] ?? '']
       presenceData.details = `🔎 В поисках аниме жанра ${animegenre}`
       presenceData.smallImageKey = otherAssets[websiteloc[2] as keyof typeof otherAssets]
       presenceData.smallImageText = `🔎 В поисках аниме жанра ${animegenre}`
@@ -126,30 +128,30 @@ presence.on('UpdateData', async () => {
       presenceData.details = `🔎 В поисках аниме ${websiteloc[2]} года`
     if (websiteloc[1] === 'ongoing') {
       presenceData.details = '🔎 В поисках онгоинга'
-      presenceData.smallImageKey = Assets.Ongoing
+      presenceData.smallImageKey = ActivityAssets.Ongoing
       presenceData.smallImageText = '🔎 В поисках Онгоинга'
     }
     if (websiteloc[1] === 'preview') {
       presenceData.details = '🔎 В поисках анонса'
-      presenceData.smallImageKey = Assets.Anons
+      presenceData.smallImageKey = ActivityAssets.Anons
       presenceData.smallImageText = '🔎 В поисках Анонса'
     }
     if (websiteloc[1] === 'user') {
       presenceData.details = `На странице пользователя ${decodeURIComponent(
-        websiteloc[2],
+        websiteloc[2] ?? '',
       )}`
       if (logo) {
         presenceData.largeImageKey = document
           .querySelector('.userinfoCenterAva')
           ?.querySelector('img')
           ?.src
-        presenceData.smallImageKey = Assets.VostLogo
+        presenceData.smallImageKey = ActivityAssets.VostLogo
         presenceData.smallImageText = '🏴‍☠️ AnimeVost'
       }
     }
   }
   else {
-    presenceData.largeImageKey = Assets.VostLogo
+    presenceData.largeImageKey = ActivityAssets.VostLogo
     presenceData.smallImageText = '🏴‍☠️ AnimeVost'
     presenceData.details = 'Где-то на сайте'
     delete presenceData.startTimestamp
@@ -157,7 +159,7 @@ presence.on('UpdateData', async () => {
     delete presenceData.state
   }
   if (websiteloc[1] === 'tip' && websiteloc[2] !== '') {
-    const animetype = animetypes[document.location.pathname.split('/')[2]]
+    const animetype = animetypes[document.location.pathname.split('/')[2] ?? '']
     const animename = document
       .querySelectorAll('.shortstoryHead')[0]
       ?.textContent
@@ -167,12 +169,12 @@ presence.on('UpdateData', async () => {
     if (websiteloc[3] !== '') {
       if (!privacy && logo) {
         presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.imgRadius')?.src
-        presenceData.smallImageKey = Assets.VostLogo
+        presenceData.smallImageKey = ActivityAssets.VostLogo
         presenceData.smallImageText = '🏴‍☠️ AnimeVost'
       }
       else {
         delete presenceData.smallImageKey
-        presenceData.largeImageKey = Assets.VostLogo
+        presenceData.largeImageKey = ActivityAssets.VostLogo
       }
       if (video.duration) {
         presenceData.details = `Смотрит ${animetype} ${

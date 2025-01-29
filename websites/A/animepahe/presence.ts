@@ -66,7 +66,7 @@ class AnimeStorage {
         delete this.list[
           Object.entries(Object.assign({}, this.list)).sort(
             (a, b) => a[1].time - b[1].time,
-          )[0][0]
+          )[0]![0]
         ]
       }
 
@@ -82,7 +82,7 @@ class AnimeStorage {
 
       this.list = storage as storeType
 
-      if (!Object.entries(this.list)[0][1].listing)
+      if (!Object.entries(this.list)[0]![1].listing)
         this.list = {}
     }
     else {
@@ -93,7 +93,11 @@ class AnimeStorage {
 
 const animeStore = new AnimeStorage()
 
-function getTimes(time: number): Record<string, number> {
+function getTimes(time: number): {
+  sec: number
+  min: number
+  hrs: number
+} {
   let seconds = Math.round(time)
   let minutes = Math.floor(seconds / 60)
 
@@ -140,7 +144,7 @@ function parseInfo(dom: HTMLParagraphElement[]) {
       title = uncapitalize(title)
     }
 
-    if (secondChild.nodeName === '#text' && entry.childNodes.length === 2) {
+    if (secondChild?.nodeName === '#text' && entry.childNodes.length === 2) {
       entries[title] = secondChild.textContent ?? ''
     }
     else {
@@ -165,7 +169,7 @@ presence.on(
   },
 )
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/logo.png',
   BrowsingHome = 'https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/0.png',
   BrowsingAll = 'https://cdn.rcd.gg/PreMiD/websites/A/animepahe/assets/1.png',
@@ -177,7 +181,7 @@ const enum Assets {
 presence.on('UpdateData', async () => {
   const path = document.location.pathname.split('/').slice(1)
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     details: 'loading',
     startTimestamp: Math.floor(Date.now() / 1000),
   }
@@ -206,7 +210,7 @@ presence.on('UpdateData', async () => {
           page = '1'
 
         presenceData.state = `${strings.page} ${page}`
-        presenceData.smallImageKey = Assets.BrowsingHome
+        presenceData.smallImageKey = ActivityAssets.BrowsingHome
         presenceData.smallImageText = strings.browse
       }
       break
@@ -214,8 +218,8 @@ presence.on('UpdateData', async () => {
       // browsing a-z all
       if (path.length === 1) {
         presenceData.details = `${viewing} A-Z:`
-        presenceData.state = document.querySelector('a.nav-link.active')?.textContent ?? ''
-        presenceData.smallImageKey = Assets.BrowsingAll
+        presenceData.state = document.querySelector('a.nav-link.active')?.textContent
+        presenceData.smallImageKey = ActivityAssets.BrowsingAll
         presenceData.smallImageText = strings.browse
       }
       else {
@@ -224,8 +228,8 @@ presence.on('UpdateData', async () => {
           {
             // viewing genre
             presenceData.details = strings.viewGenre
-            presenceData.state = capitalize(path[2])
-            presenceData.smallImageKey = Assets.BrowsingGenre
+            presenceData.state = capitalize(path[2]!)
+            presenceData.smallImageKey = ActivityAssets.BrowsingGenre
             presenceData.smallImageText = strings.browse
             break
           }
@@ -233,42 +237,42 @@ presence.on('UpdateData', async () => {
           {
             // viewing anime/time season
             presenceData.details = `${viewing} Anime ${strings.timeSeason}:`
-            presenceData.state = document.querySelectorAll('h1')[0].textContent
-            presenceData.smallImageKey = Assets.BrowsingTime
+            presenceData.state = document.querySelectorAll('h1')[0]?.textContent
+            presenceData.smallImageKey = ActivityAssets.BrowsingTime
             presenceData.smallImageText = strings.browse
             break
           }
           default: {
             if (
-              !path[1].match(
+              !path[1]?.match(
                 /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i,
               )
             ) {
               // viewing a misc. category (eg. Airing, TV, etc)
               presenceData.details = strings.viewCategory
 
-              const heading = document.querySelectorAll('h1')[0].textContent
+              const heading = document.querySelectorAll('h1')[0]?.textContent
               presenceData.state = heading?.includes(' ')
                 ? heading
                     .split(' ')
                     .map(s => capitalize(s))
                     .join(' ')
                 : capitalize(heading ?? '')
-              presenceData.smallImageKey = Assets.BrowsingAll
+              presenceData.smallImageKey = ActivityAssets.BrowsingAll
               presenceData.smallImageText = strings.browse
             }
             else {
               // viewing specific
               const info = parseInfo(
                 document.querySelectorAll('.anime-info')[0]
-                  .children as unknown as HTMLParagraphElement[],
+                  ?.children as unknown as HTMLParagraphElement[],
               )
-              const title = document.querySelectorAll('.title-wrapper')[0].children[1]
-                .textContent
+              const title = document.querySelectorAll('.title-wrapper')[0]?.children[1]
+                ?.textContent
               const listing = (() => {
                 const links = info.external_links as HTMLAnchorElement[]
 
-                if (links[0].textContent === 'AniList')
+                if (links?.[0]?.textContent === 'AniList')
                   return ['AniList', links[0].href]
 
                 for (const link of links) {
@@ -278,7 +282,7 @@ presence.on('UpdateData', async () => {
               })() as [string, string]
 
               presenceData.details = (() => {
-                switch ((info.type[0] as HTMLAnchorElement).textContent) {
+                switch ((info.type?.[0] as HTMLAnchorElement)?.textContent) {
                   case 'Movie':
                     return strings.viewMovie
                   case 'TV':
@@ -287,7 +291,7 @@ presence.on('UpdateData', async () => {
                     return `${viewing} ${strings.special}:`
                   default:
                     return `${viewing} ${
-                      (info.type[0] as HTMLAnchorElement).textContent
+                      (info.type?.[0] as HTMLAnchorElement)?.textContent
                     }:`
                 }
               })()
@@ -298,7 +302,7 @@ presence.on('UpdateData', async () => {
                 '.youtube-preview',
               )?.href ?? ''
 
-              presenceData.smallImageKey = Assets.BrowsingSeason
+              presenceData.smallImageKey = ActivityAssets.BrowsingSeason
               presenceData.smallImageText = strings.browse
 
               presenceData.buttons = [
@@ -322,11 +326,11 @@ presence.on('UpdateData', async () => {
     // playback
     case 'play':
       {
-        const movie: boolean = document.querySelectorAll('.anime-status')[0].firstElementChild
+        const movie: boolean = document.querySelectorAll('.anime-status')[0]?.firstElementChild
           ?.textContent === 'Movie'
-        const title = document.querySelectorAll('.theatre-info')[0].children[1]
-          .children[1]
-          .textContent
+        const title = document.querySelectorAll('.theatre-info')[0]?.children[1]
+          ?.children[1]
+          ?.textContent
         const episode = Number.parseInt(
           document
             .querySelector('#episodeMenu')
@@ -392,7 +396,7 @@ presence.on('UpdateData', async () => {
       break
     default: {
       presenceData.details = strings.viewPage
-      presenceData.state = document.querySelectorAll('h1')[0].textContent
+      presenceData.state = document.querySelectorAll('h1')[0]?.textContent
     }
   }
   presence.setActivity(presenceData, playback)

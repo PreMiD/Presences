@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1213784073458421841',
 })
@@ -75,7 +77,7 @@ presence.on('UpdateData', async () => {
     oldLang = newLang
     strings = await getStrings()
   }
-  if (pathArray[3].includes('?s=')) {
+  if (pathArray[3]?.includes('?s=')) {
     presenceData.details = `${
       privacy ? strings.searchSomething : strings.searchFor
     }`

@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1211027222815711282',
 })
@@ -29,7 +31,7 @@ presence.on('UpdateData', async () => {
     }
     case '/anime/': {
       if (search.startsWith('?id=')) {
-        const animeId = search.split('?id=')[1].split('&')[0]
+        const animeId = search.split('?id=')[1]?.split('&')[0]
         const contentDiv = document.querySelector('.col-sm-12.col-md-8.col-lg-9')
         const h2Content = contentDiv ? contentDiv.querySelector('h2') : null
         const h4Content = contentDiv ? contentDiv.querySelector('h4') : null
@@ -62,7 +64,7 @@ presence.on('UpdateData', async () => {
     }
     case '/watch/': {
       if (search.startsWith('?id=')) {
-        const animeId = search.split('?id=')[1].split('&')[0]
+        const animeId = search.split('?id=')[1]?.split('&')[0]
         const linkElement = document.querySelector(
           'a.text-white[href^="https://animedrive.hu/anime/?id="]',
         )

@@ -1,24 +1,26 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1002575262292131910',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 const slideshow = new Slideshow()
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/Artfight/assets/logo.jpg',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const presenceDataSlide: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const presenceDataTeam: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href, origin } = document.location
@@ -50,14 +52,14 @@ presence.on('UpdateData', async () => {
       }
 
       const tableAttackData = document.querySelectorAll('tbody > tr > td')
-      presenceDataSlide.state = `From ${tableAttackData[1].textContent?.trim()} to ${tableAttackData[3].textContent?.trim()}`
-      presenceDataTeam.state = `Team ${tableAttackData[5].textContent?.trim()}`
+      presenceDataSlide.state = `From ${tableAttackData[1]?.textContent?.trim()} to ${tableAttackData[3]?.textContent?.trim()}`
+      presenceDataTeam.state = `Team ${tableAttackData[5]?.textContent?.trim()}`
 
       presenceData.buttons = presenceDataSlide.buttons = presenceDataTeam.buttons = [
         { label: 'View Drawing', url: href },
         {
           label: 'View Artist',
-          url: `${origin}/~${tableAttackData[1].textContent?.trim()}`,
+          url: `${origin}/~${tableAttackData[1]?.textContent?.trim()}`,
         },
       ]
 
@@ -68,11 +70,11 @@ presence.on('UpdateData', async () => {
     }
     case 'browse':
       presenceData.details = 'Browsing'
-      if (pathArr[2].startsWith('attacks'))
+      if (pathArr[2]?.startsWith('attacks'))
         presenceData.state = 'attacks'
-      else if (pathArr[2].startsWith('characters'))
+      else if (pathArr[2]?.startsWith('characters'))
         presenceData.state = 'characters'
-      else if (pathArr[2].startsWith('tags'))
+      else if (pathArr[2]?.startsWith('tags'))
         presenceData.state = 'characters by tags'
       break
     case 'info':
@@ -103,7 +105,7 @@ presence.on('UpdateData', async () => {
         'rules': 'artfight rules',
         'tos': 'ToS page',
         'privacy': 'Privacy policy',
-      }[pathArr[2]]
+      }[pathArr[2] ?? '']
       break
     case 'shop':
       presenceData.details = 'Browsing the shop'
@@ -126,7 +128,7 @@ presence.on('UpdateData', async () => {
       const browsingPageNumber = href.split('?')
       presenceData.state = browsingPageNumber.length === 1
         ? 'Page 1'
-        : `Page ${browsingPageNumber[1].split('=')[1]}`
+        : `Page ${browsingPageNumber[1]?.split('=')[1]}`
       presenceData.largeImageKey = document
         .querySelector<HTMLSpanElement>('span.icon-user')
         ?.style
@@ -186,7 +188,7 @@ presence.on('UpdateData', async () => {
       presenceData.buttons = [{ label: 'View character', url: href }]
       break
     default:
-      if (pathArr[1].startsWith('~')) {
+      if (pathArr[1]?.startsWith('~')) {
         presenceData.details = `Viewing ${
           document.querySelector('.profile-header-name > strong')?.textContent
         }`
@@ -204,7 +206,7 @@ presence.on('UpdateData', async () => {
   }
 
   if (!showCover) {
-    presenceData.largeImageKey = presenceDataSlide.largeImageKey = presenceDataTeam.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = presenceDataSlide.largeImageKey = presenceDataTeam.largeImageKey = ActivityAssets.Logo
   }
   if (!showButtons) {
     delete presenceData.buttons

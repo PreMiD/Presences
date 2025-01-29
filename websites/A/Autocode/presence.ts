@@ -10,7 +10,7 @@ const supportedLanguages: string[] = [
   'css',
 ]
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/logo.jpg',
   Snippet = 'https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/0.png',
   Apps = 'https://cdn.rcd.gg/PreMiD/websites/A/Autocode/assets/1.png',
@@ -30,7 +30,7 @@ const assets = {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: startedAt,
   }
   const { pathname, hostname } = window.location
@@ -52,7 +52,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Looking for Snippets'
     }
     presenceData.state = `${hostname}/${path[0]}`
-    presenceData.smallImageKey = Assets.Snippet
+    presenceData.smallImageKey = ActivityAssets.Snippet
   }
   else if (pathname.includes('/app')) {
     if (path.length >= 3) {
@@ -65,14 +65,14 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Looking for Apps'
     }
     presenceData.state = `${hostname}/${path[0]}`
-    presenceData.smallImageKey = Assets.Apps
+    presenceData.smallImageKey = ActivityAssets.Apps
   }
   else if (pathname.includes('/lib')) {
     if (path.length >= 3)
       presenceData.details = `Reading ${path[1]} docs`
     else presenceData.details = 'Looking for Docs'
     presenceData.state = `${hostname}/${path[0]}`
-    presenceData.smallImageKey = Assets.Lib
+    presenceData.smallImageKey = ActivityAssets.Lib
   }
   else if (pathname.includes('/mp/')) {
     const filename = document
@@ -90,22 +90,22 @@ presence.on('UpdateData', async () => {
       const replaceTemplate = (str: string) => {
         if (str !== '{0}') {
           return str
-            .replace('%project%', path[2])
+            .replace('%project%', path[2] ?? '')
             .replace('%file%', filename)
-            .replace('%line%', line)
-            .replace('%column%', column)
+            .replace('%line%', line ?? '')
+            .replace('%column%', column ?? '')
         }
       }
 
       presenceData.details = replaceTemplate(details)
       presenceData.state = replaceTemplate(state)
-      presenceData.smallImageKey = Assets.Autocode
+      presenceData.smallImageKey = ActivityAssets.Autocode
 
       if (extension && supportedLanguages.includes(extension)) {
         presenceData.largeImageKey = assets[`lang-${extension}` as keyof typeof assets]
       }
       else {
-        presenceData.largeImageKey = Assets.Autocode
+        presenceData.largeImageKey = ActivityAssets.Autocode
       }
     }
   }

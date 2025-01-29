@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({ clientId: '1165759293576982578' })
 const PATHS = {
   MAIN_PAGE: '/',
@@ -35,7 +37,7 @@ presence.on('UpdateData', async () => {
     // eslint-disable-next-line regexp/no-super-linear-backtracking
     const match = ogTitle.match(/(.*)\s*\|\s*(.*)/)
     if (match && match[2]) {
-      firstArg = match[1]
+      firstArg = match[1] ?? ''
       secondArg = match[3] || match[2]
     }
     else {

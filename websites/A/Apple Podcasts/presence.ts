@@ -1,16 +1,18 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1281538997235224596',
   injectOnComplete: true,
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets { // Other default assets can be found at index.d.ts
+enum ActivityAssets { // Other default assets can be found at index.d.ts
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/Apple%20Podcasts/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   } as PresenceData
   const strings = await presence.getStrings({
@@ -98,7 +100,7 @@ presence.on('UpdateData', async () => {
     presenceData.details = 'Searching for podcasts'
     if (document.location.search.includes('?term=')) {
       presenceData.details = `Searched for ${decodeURIComponent(
-        document.location.search.split('?term=')[1],
+        document.location.search.split('?term=')[1]!,
       )}`
     }
     else {

@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 let elapsed = Math.floor(Date.now() / 1000)
 let prevUrl = document.location.href
 
@@ -13,7 +15,7 @@ const strings = presence.getStrings({
   buttonWatchStream: 'general.buttonWatchStream',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/ARD%20Mediathek/assets/logo.png',
   ThreeSat = 'https://cdn.rcd.gg/PreMiD/websites/A/ARD%20Mediathek/assets/0.png',
   Deutschewelle = 'https://cdn.rcd.gg/PreMiD/websites/A/ARD%20Mediathek/assets/1.png',
@@ -23,7 +25,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const path = location.pathname.replace(/\/?$/, '/')
 
@@ -54,13 +56,13 @@ presence.on('UpdateData', async () => {
         const channelLinkIMG = document
           .querySelector('.src__Box-sc-1sbtrzs-0.Column-wbrv0h-1.llCdnS.hkXjQv')
           ?.children[0]
-          .children[0]
-          .getAttribute('src')
+          ?.children[0]
+          ?.getAttribute('src')
         if (channelLinkIMG === '/images/KdbelgIm.svg')
-          presenceData.largeImageKey = Assets.ThreeSat
+          presenceData.largeImageKey = ActivityAssets.ThreeSat
         else if (channelLinkIMG === '/images/siBNbNWW.svg')
-          presenceData.largeImageKey = Assets.Deutschewelle
-        else presenceData.largeImageKey = Assets.Kika
+          presenceData.largeImageKey = ActivityAssets.Deutschewelle
+        else presenceData.largeImageKey = ActivityAssets.Kika
       }
 
       presenceData.smallImageKey = Assets.Live
@@ -76,14 +78,14 @@ presence.on('UpdateData', async () => {
     }
     else if (path.startsWith('/video/')) {
       // Video-on-demand
-      presenceData.largeImageKey = Assets.ArdMediathek
+      presenceData.largeImageKey = ActivityAssets.ArdMediathek
       presenceData.smallImageKey = Assets.Play
       presenceData.smallImageText = (await strings).play
       presenceData.details = videoTitle
 
       const videoDateDIV = document.querySelector('.Line-epbftj-1.dgMIUj')
       presenceData.state = `${
-        videoDateDIV?.children[0].textContent
+        videoDateDIV?.children[0]?.textContent
       } from ${videoDateDIV?.textContent?.substring(
         0,
         videoDateDIV.textContent.indexOf('∙') - 1,

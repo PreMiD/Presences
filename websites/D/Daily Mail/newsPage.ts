@@ -28,7 +28,7 @@ function handleArticle(
       ?.getAttribute('content')
   }
   else {
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
   }
 
   // the twitter title preview is more concise and readable

@@ -8,15 +8,16 @@ import type {
   ReviewData,
   TeamData,
   UserData,
-} from './lib'
-import { AnimeLib } from './lib'
+} from './lib.js'
+import { ActivityType, Assets } from 'premid'
+import { AnimeLib } from './lib.js'
 
 const presence = new Presence({
   clientId: '1320289587943444552',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeLib/assets/logo.png',
   Play = 'https://cdn.rcd.gg/PreMiD/resources/play.png',
   Pause = 'https://cdn.rcd.gg/PreMiD/resources/pause.png',
@@ -48,7 +49,7 @@ presence.on('iFrameData', (data: unknown) => {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     type: ActivityType.Watching,
     startTimestamp: browsingTimestamp,
     largeImageText: 'AnimeLib',
@@ -78,7 +79,7 @@ presence.on('UpdateData', async () => {
     case 'anime':
       animeData = await AnimeLib.getAnime(
         path,
-        path.split('/')[3].split('-')[0],
+        path.split('/')[3]!.split('-')[0]!,
       ).then(response => <AnimeData>response.data)
 
       // Show anime watching in privacy mode if it's enabled, or enforce it when anime is RX rated
@@ -227,14 +228,14 @@ presence.on('UpdateData', async () => {
         else {
           characterData = await AnimeLib.getCharacter(
             path,
-            path.split('/')[3].split('-')[0],
+            path.split('/')[3]!.split('-')[0]!,
           ).then(response => <CharacterData>response.data)
 
           presenceData.details = 'Страница персонажа'
           presenceData.state = `${characterData.rus_name} (${characterData.name})`
           presenceData.largeImageKey = characterData.cover.default
           presenceData.largeImageText = characterData.rus_name
-          presenceData.smallImageKey = Assets.Logo
+          presenceData.smallImageKey = ActivityAssets.Logo
           presenceData.buttons = [
             {
               label: 'Oткрыть персoнажа',
@@ -257,7 +258,7 @@ presence.on('UpdateData', async () => {
         else {
           peopleData = await AnimeLib.getPerson(
             path,
-            path.split('/')[3].split('-')[0],
+            path.split('/')[3]!.split('-')[0]!,
           ).then(response => <PersonData>response.data)
 
           const name = peopleData.rus_name !== ''
@@ -270,7 +271,7 @@ presence.on('UpdateData', async () => {
           presenceData.state = `${name} (${peopleData.name})`
           presenceData.largeImageKey = peopleData.cover.default
           presenceData.largeImageText = name
-          presenceData.smallImageKey = Assets.Logo
+          presenceData.smallImageKey = ActivityAssets.Logo
           presenceData.buttons = [
             {
               label: 'Открыть человека',
@@ -295,7 +296,7 @@ presence.on('UpdateData', async () => {
           presenceData.state = 'Что-то новенькое?'
         }
         else {
-          userData = await AnimeLib.getUser(path.split('/')[3]).then(
+          userData = await AnimeLib.getUser(path.split('/')[3]!).then(
             response => <UserData>response.data,
           )
 
@@ -303,7 +304,7 @@ presence.on('UpdateData', async () => {
           presenceData.state = userData.username
           presenceData.largeImageKey = userData.avatar.url
           presenceData.largeImageText = userData.username
-          presenceData.smallImageKey = Assets.Logo
+          presenceData.smallImageKey = ActivityAssets.Logo
           presenceData.buttons = [
             {
               label: 'Открыть профиль',
@@ -329,7 +330,7 @@ presence.on('UpdateData', async () => {
         }
         else {
           collectionData = await AnimeLib.getCollection(
-            path.split('/')[3],
+            path.split('/')[3]!,
           ).then(response => <CollectionData>response.data)
 
           // Show collection viewing in privacy mode if it's enabled, or enforce it when collection was marked as for adults
@@ -353,7 +354,7 @@ presence.on('UpdateData', async () => {
 
           presenceData.details = `Коллекция по ${collectionType}`
           presenceData.state = `${collectionData.name} от ${collectionData.user.username}`
-          presenceData.largeImageKey = Assets.Logo
+          presenceData.largeImageKey = ActivityAssets.Logo
           presenceData.smallImageKey = collectionData.user.avatar.url
           presenceData.smallImageText = collectionData.user.username
           presenceData.buttons = [
@@ -376,7 +377,7 @@ presence.on('UpdateData', async () => {
           presenceData.state = 'Излагает свои мысли...'
         }
         else {
-          reviewData = await AnimeLib.getReview(path.split('/')[3]).then(
+          reviewData = await AnimeLib.getReview(path.split('/')[3]!).then(
             response => <ReviewData>response.data,
           )
 
@@ -416,7 +417,7 @@ presence.on('UpdateData', async () => {
         else {
           teamData = await AnimeLib.getTeam(
             path,
-            path.split('/')[3].split('-')[0],
+            path.split('/')[3]!.split('-')[0]!,
           ).then(response => <TeamData>response.data)
 
           presenceData.details = 'Страница команды'
@@ -424,7 +425,7 @@ presence.on('UpdateData', async () => {
             teamData.alt_name ?? teamData.name
           })`
           presenceData.largeImageKey = teamData.cover.default
-          presenceData.smallImageKey = Assets.Logo
+          presenceData.smallImageKey = ActivityAssets.Logo
           presenceData.buttons = [
             {
               label: 'Открыть команду',
@@ -470,7 +471,7 @@ presence.on('UpdateData', async () => {
         else {
           publisherData = await AnimeLib.getPublisher(
             path,
-            path.split('/')[3].split('-')[0],
+            path.split('/')[3]!.split('-')[0]!,
           ).then(response => <PublisherData>response.data)
 
           presenceData.details = 'Страница издателя'
@@ -511,7 +512,7 @@ presence.on('UpdateData', async () => {
         if (avatar && username && title) {
           presenceData.details = 'Читает новость'
           presenceData.state = `${title} от ${username}`
-          presenceData.largeImageKey = Assets.Logo
+          presenceData.largeImageKey = ActivityAssets.Logo
           presenceData.smallImageKey = avatar
           presenceData.smallImageText = username
           presenceData.buttons = [

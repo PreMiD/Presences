@@ -29,7 +29,7 @@ presence.on('UpdateData', async () => {
   ) {
     data = document.location.pathname.split('/')
     presenceData.details = `Browsing ${data[1]}`
-    presenceData.state = `Title: ${capitalize(data[3].split('-').join(' '))} (${
+    presenceData.state = `Title: ${capitalize(data[3]?.split('-').join(' ') ?? '')} (${
       data[2]
     })`
   }
@@ -43,15 +43,15 @@ presence.on('UpdateData', async () => {
   ) {
     presenceData.details = 'Browsing Animes'
     presenceData.state = `in ${capitalize(
-      document.location.pathname.split('/')[1].split('-').join(' '),
+      document.location.pathname.split('/')[1]?.split('-').join(' ') ?? '',
     )}`
   }
   else if (document.location.pathname.startsWith('/review/')) {
     data = document.location.pathname.split('/')
     presenceData.details = 'Browsing Reviews'
     presenceData.state = `for ${capitalize(
-      data[2].split('-').join(' '),
-    )} (${data[3].split('-').join(' ')})`
+      data[2]?.split('-').join(' ') ?? '',
+    )} (${data[3]?.split('-').join(' ')})`
   }
   else if (document.location.pathname.startsWith('/encyclopedia/')) {
     presenceData.details = 'Browsing Encyclopedia'

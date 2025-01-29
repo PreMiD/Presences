@@ -1,8 +1,10 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1249362206072635483',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/AWTWA/assets/logo.png',
 }
 
@@ -31,7 +33,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   } as PresenceData
   const { pathname, href } = document.location
 
@@ -53,8 +55,8 @@ presence.on('UpdateData', async () => {
       .querySelector('div[role=\'img\']')
       ?.getAttribute('style')
       ?.split('url(')[1]
-      .split(')')[0]
-      .replace(/['"]/g, '')
+      ?.split(')')[0]
+      ?.replace(/['"]/g, '')
     const isPrivacyMode = await presence.getSetting('privacy')
 
     if (isPrivacyMode) {
@@ -71,7 +73,7 @@ presence.on('UpdateData', async () => {
         document.querySelector<HTMLSelectElement>('#episode')?.value
       }`
       presenceData.smallImageText = presenceStrings.watchOn
-      presenceData.largeImageKey = poster ?? Assets.Logo
+      presenceData.largeImageKey = poster ?? ActivityAssets.Logo
       presenceData.smallImageKey = Assets.Play
 
       if (!iFrameData?.paused) {

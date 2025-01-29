@@ -1,14 +1,16 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '924791712944099389',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/Animes%20Portal/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const { pathname, href } = document.location
   const [showThumb, showMessaging] = await Promise.all([
@@ -64,7 +66,7 @@ presence.on('UpdateData', async () => {
       )
 
       presenceData.details = `Viewing otaku ${username}`
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
     }
   }
   else if (pathname.startsWith('/animes')) {
@@ -96,10 +98,10 @@ presence.on('UpdateData', async () => {
       )?.src
 
       if (image)
-        presenceData.smallImageKey = Assets.Logo
+        presenceData.smallImageKey = ActivityAssets.Logo
 
       presenceData.details = `Viewing ${name}`
-      presenceData.largeImageKey = image ?? Assets.Logo
+      presenceData.largeImageKey = image ?? ActivityAssets.Logo
       presenceData.buttons = [
         {
           label: 'View anime',
@@ -129,7 +131,7 @@ presence.on('UpdateData', async () => {
 
         if (thumb !== 'logo' && showThumb) {
           presenceData.largeImageKey = thumb
-          presenceData.smallImageKey = Assets.Logo
+          presenceData.smallImageKey = ActivityAssets.Logo
         }
       }
     }
@@ -160,11 +162,11 @@ presence.on('UpdateData', async () => {
     )?.src
 
     if (image)
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
 
     presenceData.details = 'Viewing movie'
     presenceData.state = name
-    presenceData.largeImageKey = image ?? Assets.Logo
+    presenceData.largeImageKey = image ?? ActivityAssets.Logo
   }
   else if (pathname.startsWith('/manga')) {
     if (paths[1] === 'search' && paths[2]) {
@@ -187,9 +189,9 @@ presence.on('UpdateData', async () => {
           'body > main.animated > div.wrapper > div.heading > b#num',
         )?.textContent ?? ''
 
-        presenceData.details = `Reading manga ${list[1].textContent}`
+        presenceData.details = `Reading manga ${list[1]?.textContent}`
         presenceData.state = `Volume: ${tom}, Chapter: ${between(
-          list[3].textContent ?? '',
+          list[3]?.textContent ?? '',
           'Глава ',
           ' -',
         )}, Page: ${page}`
@@ -217,7 +219,7 @@ presence.on('UpdateData', async () => {
         ]
       }
     }
-    else if (hasNumber(paths[1])) {
+    else if (hasNumber(paths[1] ?? '')) {
       const name = document.querySelector<HTMLHeadingElement>(
         'body > main.animated > div.wrapper > article.rowView > header.rowView-head > h1.heading',
       )?.textContent ?? ''
@@ -228,10 +230,10 @@ presence.on('UpdateData', async () => {
       if (name)
         presenceData.details = `Viewing manga ${name}`
 
-      presenceData.largeImageKey = image ?? Assets.Logo
+      presenceData.largeImageKey = image ?? ActivityAssets.Logo
 
       if (image)
-        presenceData.smallImageKey = Assets.Logo
+        presenceData.smallImageKey = ActivityAssets.Logo
 
       presenceData.buttons = [
         {
@@ -263,7 +265,7 @@ presence.on('iFrameData', async (data2: unknown) => {
   if (!data.currentTime || !data.duration)
     return
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const showThumb = await presence.getSetting<boolean>('showthumb')
   const epInfo = getInfo()
@@ -297,7 +299,7 @@ presence.on('iFrameData', async (data2: unknown) => {
 
   if (thumb !== 'logo' && showThumb) {
     presenceData.largeImageKey = thumb
-    presenceData.smallImageKey = data.paused ? Assets.Pause : Assets.Logo
+    presenceData.smallImageKey = data.paused ? Assets.Pause : ActivityAssets.Logo
   }
 
   if (presenceData.details)
@@ -344,7 +346,7 @@ function parseAvatarFromAttr(attr: string, def?: string): string {
     avatar === 'https://static.animes-portal.info/assets/images/avatar.svg'
     || !avatar
   ) {
-    avatar = def || Assets.Logo
+    avatar = def || ActivityAssets.Logo
   }
 
   return avatar

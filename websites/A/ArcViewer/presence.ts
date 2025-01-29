@@ -1,3 +1,5 @@
+import { ActivityType } from 'premid'
+
 const presence = new Presence({
   clientId: '939893132156366860',
 })
@@ -14,7 +16,7 @@ let playerName = ''
 let mapName = ''
 let artist = ''
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/ArcViewer/assets/logo.png',
 }
 
@@ -89,7 +91,7 @@ presence.on('UpdateData', async () => {
   ])
   const presenceData: PresenceData = {
     type: ActivityType.Watching,
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const logs = await presence.getLogs<string>()
@@ -117,8 +119,8 @@ presence.on('UpdateData', async () => {
       characteristic = line
         .replace('Current diff is ', '')
         .split(', ')[0]
-        .trim()
-      difficulty = line.replace('Current diff is ', '').split(', ')[1].trim()
+        ?.trim() ?? ''
+      difficulty = line.replace('Current diff is ', '').split(', ')[1]?.trim() ?? ''
     }
     if (
       line.startsWith('Downloading map data from:')
@@ -127,16 +129,16 @@ presence.on('UpdateData', async () => {
       mapHash = line.match(/[A-Z0-9]{40}/i)![0]
     }
     if (line.startsWith('UI state '))
-      uiState = line.split(' ')[2].trim()
+      uiState = line.split(' ')[2]?.trim() ?? ''
     if (line.trim().startsWith('Loading difficulties asynchronously.'))
       replay = false
     if (line.trim().startsWith('Loading single difficulty for replay.'))
       replay = true
     if (line.startsWith('Loaded replay'))
-      playerName = line.split(', played by ')[1].split(', with score ')[0]
+      playerName = line.split(', played by ')[1]?.split(', with score ')[0] ?? ''
     if (line.startsWith('Loaded info for ')) {
-      mapName = line.split(' - ')[1]
-      artist = line.split(' - ')[0].replace('Loaded info for ', '')
+      mapName = line.split(' - ')[1] ?? ''
+      artist = line.split(' - ')[0]?.replace('Loaded info for ', '') ?? ''
     }
   }
 

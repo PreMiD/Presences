@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1101840416866844672',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/Aodesu/assets/logo.jpg',
   Home = 'https://cdn.rcd.gg/PreMiD/websites/A/Aodesu/assets/0.jpg',
   Emitting = 'https://cdn.rcd.gg/PreMiD/websites/A/Aodesu/assets/1.jpg',
@@ -42,24 +44,24 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { href, pathname } = document.location
 
   if (pathname === '/') {
-    presenceData.smallImageKey = Assets.Home
+    presenceData.smallImageKey = ActivityAssets.Home
     presenceData.smallImageText = 'Página de inicio'
     presenceData.details = 'Viendo la página de inicio'
   }
   else if (pathname === '/emitiendo') {
-    presenceData.smallImageKey = Assets.Emitting
+    presenceData.smallImageKey = ActivityAssets.Emitting
     presenceData.smallImageText = 'En Emisión'
     presenceData.details = 'Explorando animes en emisión'
   }
   else if (pathname.startsWith('/ajustes')) {
     if (pathname === '/ajustes') {
-      presenceData.smallImageKey = Assets.Settings
+      presenceData.smallImageKey = ActivityAssets.Settings
       presenceData.smallImageText = 'Ajustes'
       presenceData.details = 'Personalizando uwu'
     }
@@ -70,18 +72,18 @@ presence.on('UpdateData', async () => {
   }
   else if (pathname.startsWith('/auth/')) {
     if (pathname === '/auth/iniciar-sesion') {
-      presenceData.smallImageKey = Assets.Login
+      presenceData.smallImageKey = ActivityAssets.Login
       presenceData.smallImageText = 'Inicio de sesión'
       presenceData.details = 'Iniciando sesión'
     }
     else if (pathname === '/auth/registrarse') {
-      presenceData.smallImageKey = Assets.Register
+      presenceData.smallImageKey = ActivityAssets.Register
       presenceData.smallImageText = 'Registro de usuario'
       presenceData.details = '¡Creando nueva cuenta!'
     }
   }
   else if (pathname.startsWith('/serie/')) {
-    presenceData.smallImageKey = Assets.Preview
+    presenceData.smallImageKey = ActivityAssets.Preview
     presenceData.smallImageText = 'Serie'
     presenceData.details = `A punto de ver ${
       document.querySelector('h1')?.textContent
@@ -108,7 +110,7 @@ presence.on('UpdateData', async () => {
     const title = document.querySelector(
       '.reproductor-container > div:nth-child(2) > div.reproductor-centralizer > div > a',
     )?.textContent
-    const cap = pathname.split('/')[2].split('-')[2]
+    const cap = pathname.split('/')[2]?.split('-')[2]
 
     presenceData.details = `Viendo ${title}`
 

@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '917417055458852865',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/logo.png',
   Inbox = 'https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/0.png',
   User = 'https://cdn.rcd.gg/PreMiD/websites/A/ArtStation/assets/1.png',
@@ -15,7 +17,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const shortTitle = document.title.split(/-(.+)/)[1]
@@ -28,7 +30,7 @@ presence.on('UpdateData', async () => {
 
   if (document.location.pathname.startsWith('/messages')) {
     presenceData.details = 'Checking inbox'
-    presenceData.smallImageKey = Assets.Inbox
+    presenceData.smallImageKey = ActivityAssets.Inbox
     presenceData.smallImageText = 'Checking inbox'
   }
   else if (
@@ -41,7 +43,7 @@ presence.on('UpdateData', async () => {
     presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
       'div.user-profile > user-header > div > div > div.avatar > img',
     )?.src
-    presenceData.smallImageKey = Assets.User
+    presenceData.smallImageKey = ActivityAssets.User
     presenceData.smallImageText = 'Viewing profile'
     presenceData.buttons = [{ label: 'View Artist', url: document.URL }]
   }
@@ -63,7 +65,7 @@ presence.on('UpdateData', async () => {
       )?.src
     }
     else {
-      presenceData.smallImageKey = Assets.Artwork
+      presenceData.smallImageKey = ActivityAssets.Artwork
       presenceData.smallImageText = 'Viewing artwork'
     }
     presenceData.buttons = [
@@ -87,7 +89,7 @@ presence.on('UpdateData', async () => {
     presenceData.state = document
       .querySelector('meta[property="og:title"]')
       ?.getAttribute('content')
-    presenceData.smallImageKey = Assets.Searchjob
+    presenceData.smallImageKey = ActivityAssets.Searchjob
     presenceData.smallImageText = 'Viewing jobs'
   }
   else if (document.location.pathname.startsWith('/blogs')) {
@@ -180,7 +182,7 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.href.includes('profile/edit')) {
     presenceData.details = 'Editing profile'
-    presenceData.smallImageKey = Assets.Editprofile
+    presenceData.smallImageKey = ActivityAssets.Editprofile
     presenceData.smallImageText = 'Editing profile'
   }
   else if (document.location.href.includes('project/new')) {
@@ -194,7 +196,7 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.hostname === 'www.artstation.com') {
     presenceData.details = 'Exploring artworks'
-    presenceData.smallImageKey = Assets.Artwork
+    presenceData.smallImageKey = ActivityAssets.Artwork
     presenceData.smallImageText = 'Exploring artworks'
   }
   else {
@@ -205,7 +207,7 @@ presence.on('UpdateData', async () => {
     presenceData.largeImageKey = document
       .querySelector('head > meta[name=image]')
       ?.getAttribute('content')
-    presenceData.smallImageKey = Assets.Portfolio
+    presenceData.smallImageKey = ActivityAssets.Portfolio
     presenceData.smallImageText = 'Viewing portfolio'
   }
   if (!image) {

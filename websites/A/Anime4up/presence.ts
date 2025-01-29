@@ -63,7 +63,7 @@ function router({
       state: () =>
         document
           .querySelectorAll('.container')[1]
-          .textContent
+          ?.textContent
           ?.slice(1, -1)
           .split(' ')
           .slice(0, -2)
@@ -95,7 +95,7 @@ function router({
       state: () =>
         `Searching: ${document
           .querySelectorAll('.container')[1]
-          .textContent
+          ?.textContent
           ?.split(' ')
           .slice(4, -1)
           .join(' ')}`,

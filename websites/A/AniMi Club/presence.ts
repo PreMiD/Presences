@@ -1,8 +1,10 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1127599137374871563',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/AniMi%20Club/assets/logo.png',
 }
 
@@ -40,7 +42,7 @@ presence.on('UpdateData', async () => {
   ])
   const presenceData: PresenceData = {
     details: 'Где-то на сайте',
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     smallImageText: 'AniMi Club',
   }
 

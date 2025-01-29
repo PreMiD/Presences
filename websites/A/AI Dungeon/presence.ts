@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '713563682722021436',
 })
@@ -80,7 +82,7 @@ presence.on('UpdateData', async () => {
           '.elementor-headline-dynamic-letter.elementor-headline-animation-in',
         )
         if (textArray) {
-          switch (textArray[0].textContent) {
+          switch (textArray[0]?.textContent) {
             case 's': {
               presenceData.state = 'Create your own Story'
               break

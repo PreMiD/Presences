@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1209858023279820931',
 })
@@ -111,7 +113,7 @@ presence.on('UpdateData', async () => {
         else {
           if (videoPic) {
             presenceData.largeImageKey = `https://image.p-c2-x.abema-tv.com/image/series/${
-              pathname.split('/')[3].split('_')[0]
+              pathname.split('/')[3]?.split('_')[0]
             }/thumb.png`
           }
           presenceData.details = document.querySelector(

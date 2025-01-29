@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1016991973531451502',
 })
@@ -19,7 +21,7 @@ async function getStrings() {
 presence.on('UpdateData', async () => {
   const playback = !!document.querySelector('#title')
     || (document.querySelectorAll('video').length
-      && document.querySelectorAll('video')[0].className !== 'previewVideo')
+      && document.querySelectorAll('video')[0]?.className !== 'previewVideo')
   const { pathname, href } = document.location
   const [newLang, buttons] = await Promise.all([
     presence.getSetting<string>('lang').catch(() => 'en'),

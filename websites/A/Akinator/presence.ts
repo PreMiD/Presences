@@ -21,7 +21,7 @@ presence.on('UpdateData', async () => {
     }
     case '/game': {
       presenceData.details = `Q: ${
-        document.querySelectorAll('.bubble-body')[0].textContent
+        document.querySelectorAll('.bubble-body')[0]?.textContent
       }`
       presenceData.state = `Selecting: ${
         document.querySelectorAll(':hover')?.[12]?.textContent

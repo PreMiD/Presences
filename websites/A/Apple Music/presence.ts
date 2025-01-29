@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '842112189618978897',
 })
@@ -48,7 +50,7 @@ presence.on('UpdateData', async () => {
       : (await strings).play
 
     if (cover) {
-      presenceData.largeImageKey = navigator.mediaSession.metadata?.artwork[0].src.replace(
+      presenceData.largeImageKey = navigator.mediaSession.metadata?.artwork[0]?.src.replace(
         /\d{1,2}x\d{1,2}[a-z]{1,2}/,
         '1024x1024',
       )

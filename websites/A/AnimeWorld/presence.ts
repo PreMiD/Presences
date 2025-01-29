@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '678265146883178519',
 })
@@ -9,7 +11,7 @@ let iFrameVideo: boolean,
   paused: boolean,
   playback: boolean
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeWorld/assets/logo.png',
   Home = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeWorld/assets/0.png',
   Info = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeWorld/assets/1.png',
@@ -56,7 +58,7 @@ presence.on('UpdateData', async () => {
 
   if (document.location.pathname === '/') {
     // Homepage
-    presenceData.smallImageKey = Assets.Home
+    presenceData.smallImageKey = ActivityAssets.Home
     presenceData.smallImageText = 'Homepage'
     presenceData.details = 'Nella homepage'
   }
@@ -67,21 +69,21 @@ presence.on('UpdateData', async () => {
     || document.location.pathname.startsWith('/termini')
   ) {
     // Contact
-    presenceData.smallImageKey = Assets.Info
+    presenceData.smallImageKey = ActivityAssets.Info
     presenceData.smallImageText = 'Contatti'
     presenceData.details = 'Sta leggendo le info'
     presenceData.state = 'su AnimeWorld'
   }
   else if (document.location.pathname.startsWith('/login')) {
     // Contact
-    presenceData.smallImageKey = Assets.Info
+    presenceData.smallImageKey = ActivityAssets.Info
     presenceData.smallImageText = 'Login'
     presenceData.details = 'Sta accedendo al suo'
     presenceData.state = 'account'
   }
   else if (document.location.pathname.startsWith('/settings')) {
     // General Settings
-    presenceData.smallImageKey = Assets.Settings
+    presenceData.smallImageKey = ActivityAssets.Settings
     presenceData.smallImageText = 'Impostazioni'
     presenceData.details = 'Nelle sue impostazioni'
   }
@@ -94,27 +96,27 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname.startsWith('/notifications')) {
     // Notifications
-    presenceData.smallImageKey = Assets.Notifications
+    presenceData.smallImageKey = ActivityAssets.Notifications
     presenceData.smallImageText = 'Notifiche'
     presenceData.details = 'Sfoglia le notifiche'
   }
   else if (document.location.pathname.startsWith('/profile')) {
     const [, username] = document.title.split('Profilo di ')
-    presenceData.smallImageKey = Assets.User
+    presenceData.smallImageKey = ActivityAssets.User
     presenceData.smallImageText = `Profilo di ${username}`
     presenceData.details = 'Guarda il profilo di:'
     presenceData.state = username
   }
   else if (document.location.href.includes('watchlist')) {
     if (document.querySelector('#rich-presence-proprietary')) {
-      presenceData.smallImageKey = Assets.WLSettings
+      presenceData.smallImageKey = ActivityAssets.WLSettings
       presenceData.smallImageText = 'Imposta la WatchList'
       presenceData.details = 'Sta modificando la sua'
       presenceData.state = 'WatchList'
     }
     else {
       const [, usernamewl] = document.title.split('Watchlist di ')
-      presenceData.smallImageKey = Assets.UserWL
+      presenceData.smallImageKey = ActivityAssets.UserWL
       presenceData.smallImageText = `WatchList di ${usernamewl}`
       presenceData.details = 'Guarda la WatchList di:'
       presenceData.state = usernamewl
@@ -122,7 +124,7 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname.startsWith('/request-serie')) {
     // Import WL
-    presenceData.smallImageKey = Assets.New
+    presenceData.smallImageKey = ActivityAssets.New
     presenceData.smallImageText = 'Richiede un\'anime'
     presenceData.details = 'Sta facendo la richiesta'
     presenceData.state = 'per aggiungere un\'anime'
@@ -147,7 +149,7 @@ presence.on('UpdateData', async () => {
   else if (document.location.pathname.startsWith('/newest')) {
     // Newest
     if (document.location.href.includes('newest?page=')) {
-      presenceData.smallImageKey = Assets.New
+      presenceData.smallImageKey = ActivityAssets.New
       presenceData.smallImageText = 'Nuove aggiunte'
       presenceData.details = 'Sfoglia le nuove aggiunte'
       presenceData.state = `Pagina: ${
@@ -155,7 +157,7 @@ presence.on('UpdateData', async () => {
       }`
     }
     else {
-      presenceData.smallImageKey = Assets.New
+      presenceData.smallImageKey = ActivityAssets.New
       presenceData.smallImageText = 'Nuove aggiunte'
       presenceData.details = 'Sfoglia le nuove aggiunte'
       presenceData.state = 'Pagina: 1'
@@ -164,7 +166,7 @@ presence.on('UpdateData', async () => {
   else if (document.location.pathname.startsWith('/updated')) {
     // Updated
     if (document.location.href.includes('updated?page=')) {
-      presenceData.smallImageKey = Assets.New
+      presenceData.smallImageKey = ActivityAssets.New
       presenceData.smallImageText = 'Nuovi episodi'
       presenceData.details = 'Sfoglia i nuovi episodi'
       presenceData.state = `Pagina: ${
@@ -172,7 +174,7 @@ presence.on('UpdateData', async () => {
       }`
     }
     else {
-      presenceData.smallImageKey = Assets.New
+      presenceData.smallImageKey = ActivityAssets.New
       presenceData.smallImageText = 'Nuovi episodi'
       presenceData.details = 'Sfoglia i nuovi episodi'
       presenceData.state = 'Pagina: 1'
@@ -181,7 +183,7 @@ presence.on('UpdateData', async () => {
   else if (document.location.pathname.startsWith('/ongoing')) {
     // On Going
     if (document.location.href.includes('ongoing?page=')) {
-      presenceData.smallImageKey = Assets.Schedule
+      presenceData.smallImageKey = ActivityAssets.Schedule
       presenceData.smallImageText = 'Anime in corso'
       presenceData.details = 'Sfoglia gli anime in'
       presenceData.state = `corso. Pagina: ${
@@ -189,7 +191,7 @@ presence.on('UpdateData', async () => {
       }`
     }
     else {
-      presenceData.smallImageKey = Assets.Schedule
+      presenceData.smallImageKey = ActivityAssets.Schedule
       presenceData.smallImageText = 'Anime in corso'
       presenceData.details = 'Sfoglia gli anime in'
       presenceData.state = 'corso. Pagina: 1'
@@ -197,7 +199,7 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname.startsWith('/upcoming')) {
     // Upcoming
-    presenceData.smallImageKey = Assets.Clock
+    presenceData.smallImageKey = ActivityAssets.Clock
     presenceData.smallImageText = 'Prossime uscite'
     presenceData.details = 'Sfoglia le prossime'
     presenceData.state = 'uscite'
@@ -205,13 +207,13 @@ presence.on('UpdateData', async () => {
   else if (document.location.pathname.startsWith('/az-list')) {
     // A-Z List
     if (document.location.href.includes('?page=')) {
-      presenceData.smallImageKey = Assets.Archive
+      presenceData.smallImageKey = ActivityAssets.Archive
       presenceData.smallImageText = 'Archivio'
       presenceData.details = 'Sfoglia tutti gli anime'
       presenceData.state = `Pagina: ${document.location.href.split('=')[1]}`
     }
     else {
-      presenceData.smallImageKey = Assets.Archive
+      presenceData.smallImageKey = ActivityAssets.Archive
       presenceData.smallImageText = 'Archivio'
       presenceData.details = 'Sfoglia tutti gli anime'
       presenceData.state = 'Pagina: 1'
@@ -219,7 +221,7 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname.startsWith('/schedule')) {
     // On Going
-    presenceData.smallImageKey = Assets.Schedule
+    presenceData.smallImageKey = ActivityAssets.Schedule
     presenceData.smallImageText = 'Calendario'
     presenceData.details = 'Consulta il calendario degli'
     presenceData.state = 'anime'
@@ -241,13 +243,13 @@ presence.on('UpdateData', async () => {
       || document.location.pathname === '/news/'
     ) {
       if (document.location.href.includes('?page=')) {
-        presenceData.smallImageKey = Assets.Paper
+        presenceData.smallImageKey = ActivityAssets.Paper
         presenceData.smallImageText = 'Notizie'
         presenceData.details = 'Legge le notizie'
         presenceData.state = `Pagina: ${document.location.href.split('=')[1]}`
       }
       else {
-        presenceData.smallImageKey = Assets.Paper
+        presenceData.smallImageKey = ActivityAssets.Paper
         presenceData.smallImageText = 'Notizie'
         presenceData.details = 'Legge le notizie'
         presenceData.state = 'Pagina: 1'
@@ -255,7 +257,7 @@ presence.on('UpdateData', async () => {
     }
     else {
       const [, newsName] = document.title.split('- ')
-      presenceData.smallImageKey = Assets.Paper
+      presenceData.smallImageKey = ActivityAssets.Paper
       presenceData.smallImageText = newsName
       presenceData.details = 'Legge la notizia:'
       presenceData.state = newsName
@@ -404,11 +406,11 @@ presence.on('UpdateData', async () => {
     if (document.querySelector('#unavailable')) {
       let [newname] = document.title
         .split('AnimeWorld - ')[1]
-        .split(' Streaming & ')
-      if (newname.includes('(ITA)'))
+        ?.split(' Streaming & ') ?? []
+      if (newname?.includes('(ITA)'))
         [newname] = newname.split(' (ITA)')
 
-      presenceData.smallImageKey = Assets.New
+      presenceData.smallImageKey = ActivityAssets.New
       presenceData.smallImageText = newname
       presenceData.details = `Guarda l'annunciato:\n${newname}`
       presenceData.state = `${'Più informazioni quì 📌\n' + '\nUscirà il: '}${releaseDate}\n`
@@ -436,7 +438,7 @@ presence.on('UpdateData', async () => {
         let [animename] = document.title
           .replace('AnimeWorld - ', '')
           .split(' Episodio')
-        if (animename.includes('(ITA)'))
+        if (animename?.includes('(ITA)'))
           [animename] = animename.split(' (ITA)')
 
         const animenumber = document.querySelector('#episode-comment > span')?.textContent
@@ -484,7 +486,7 @@ presence.on('UpdateData', async () => {
         let [moviename] = document.title
           .replace('AnimeWorld - ', '')
           .split(' Episodio')
-        if (moviename.includes('(ITA)'))
+        if (moviename?.includes('(ITA)'))
           [moviename] = moviename.split(' (ITA)')
 
         if (iFrameVideo === true && !Number.isNaN(duration)) {
@@ -531,7 +533,7 @@ presence.on('UpdateData', async () => {
         let [oavname] = document.title
           .replace('AnimeWorld - ', '')
           .split(' Episodio')
-        if (oavname.includes('(ITA)'))
+        if (oavname?.includes('(ITA)'))
           [oavname] = oavname.split(' (ITA)')
 
         const oavnumber = document.querySelector('#episode-comment > span')?.textContent
@@ -581,7 +583,7 @@ presence.on('UpdateData', async () => {
         let [onaname] = document.title
           .replace('AnimeWorld - ', '')
           .split(' Episodio')
-        if (onaname.includes('(ITA)'))
+        if (onaname?.includes('(ITA)'))
           [onaname] = onaname.split(' (ITA)')
 
         const onanumber = document.querySelector(
@@ -632,7 +634,7 @@ presence.on('UpdateData', async () => {
         let [specialname] = document.title
           .replace('AnimeWorld - ', '')
           .split(' Episodio')
-        if (specialname.includes('(ITA)'))
+        if (specialname?.includes('(ITA)'))
           [specialname] = specialname.split(' (ITA)')
 
         const specialnumber = document.querySelector(
@@ -683,7 +685,7 @@ presence.on('UpdateData', async () => {
         let [previewname] = document.title
           .replace('AnimeWorld - ', '')
           .split(' Episodio')
-        if (previewname.includes('(ITA)'))
+        if (previewname?.includes('(ITA)'))
           [previewname] = previewname.split(' (ITA)')
 
         if (iFrameVideo === true && !Number.isNaN(duration)) {
@@ -721,14 +723,14 @@ presence.on('UpdateData', async () => {
     }
   }
   else if (document.location.pathname.startsWith('/admin')) {
-    presenceData.largeImageKey = Assets.Yuriko
-    presenceData.smallImageKey = Assets.Working
+    presenceData.largeImageKey = ActivityAssets.Yuriko
+    presenceData.smallImageKey = ActivityAssets.Working
     presenceData.smallImageText = 'AnimeWorld Lover'
     presenceData.details = 'Sta lavorando su'
     presenceData.state = 'AnimeWorld'
   }
   else {
-    presenceData.largeImageKey = Assets.Pokemon
+    presenceData.largeImageKey = ActivityAssets.Pokemon
     presenceData.smallImageKey = Assets.Search
     presenceData.smallImageText = 'Navigando...'
     presenceData.details = 'Navigando...'

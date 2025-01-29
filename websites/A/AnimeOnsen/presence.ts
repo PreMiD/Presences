@@ -1,4 +1,6 @@
-const enum Assets {
+import { Assets } from 'premid'
+
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeOnsen/assets/logo.png',
   Account = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeOnsen/assets/0.png',
   Browse = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeOnsen/assets/1.png',
@@ -23,21 +25,21 @@ const qs = document.querySelector.bind(document)
 const initMillis = Date.now()
 const rpaImage = {
   general: {
-    account: Assets.Account,
-    browse: Assets.Browse,
-    read: Assets.Read,
+    account: ActivityAssets.Account,
+    browse: ActivityAssets.Browse,
+    read: ActivityAssets.Read,
     search: Assets.Search,
   },
   player: { play: Assets.Play, pause: Assets.Pause },
 }
-const toProperCase = (str: string) => str[0].toUpperCase() + str.slice(1)
+const toProperCase = (str: string) => str[0]?.toUpperCase() + str.slice(1)
 let playerData: PlayerData
 let pageLoaded = false
 
 presence.info('PreMiD extension has loaded')
 
 function updateData() {
-  if (/^watch$/i.test(page)) {
+  if (/^watch$/i.test(page!)) {
     const player = <HTMLVideoElement>qs('div.ao-player-media video')
     const { paused, currentTime: progress, duration } = player
     playerData = {
@@ -52,7 +54,7 @@ function updateData() {
       ),
       episodeName: (<HTMLSelectElement>qs('select.ao-player-metadata-episode'))
         .selectedOptions[0]
-        .textContent ?? '',
+        ?.textContent ?? '',
       playbackState: paused ? 'paused' : 'playing',
     }
     if (document.body.contains(player) && !pageLoaded)
@@ -68,13 +70,13 @@ presence.on('UpdateData', () => {
   if (!pageLoaded)
     return
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     smallImageKey: rpaImage.general.browse,
     smallImageText: 'Browsing',
     details: 'Browsing',
     startTimestamp: initMillis,
   }
-  switch (page.toLowerCase()) {
+  switch (page?.toLowerCase()) {
     case 'watch': {
       const { title, episode, episodeName, playbackState, time } = playerData
       const episodeUrl = new URL(window.location.href)

@@ -1,8 +1,10 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1071365131616915517',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Genzai/assets/logo.png',
 }
 
@@ -50,7 +52,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const [newLang, privacy, logo, time, buttons] = await Promise.all([
     presence.getSetting<string>('lang').catch(() => 'es'),
@@ -121,7 +123,7 @@ presence.on('UpdateData', async () => {
         ?.style
         ?.backgroundImage
         ?.slice(4, -1)
-        ?.replace(/"/g, '') || Assets.Logo
+        ?.replace(/"/g, '') || ActivityAssets.Logo
       presenceData.smallImageKey = Assets.Viewing
       presenceData.smallImageText = strings.viewing
       break
@@ -135,7 +137,7 @@ presence.on('UpdateData', async () => {
         '.container > div > div > div > div:nth-child(2) > div:nth-child(4) > div > div > div:nth-child(2) > div > div > h1 > a',
       )
       presenceData.largeImageKey = getImage('picture > img')
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
       presenceData.smallImageText = strings.viewing
 
       if (!privacy && video.currentTime > 0) {
@@ -155,7 +157,7 @@ presence.on('UpdateData', async () => {
         '.container > div > div > div > div:nth-child(2) > div:nth-child(4) > div > div > div:nth-child(2) > div > div > h1',
       )
       presenceData.largeImageKey = getImage('picture > img')
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
       presenceData.smallImageText = strings.viewing
 
       if (video.currentTime > 0) {
@@ -181,7 +183,7 @@ presence.on('UpdateData', async () => {
   }
 
   if (!logo || privacy)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (!buttons || privacy)
     delete presenceData.buttons
   if (!time)

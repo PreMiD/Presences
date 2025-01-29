@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '719865208515854369',
 })
@@ -22,7 +24,7 @@ presence.on(
   },
 )
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/AIS%20Play/assets/logo.png',
 }
 
@@ -32,7 +34,7 @@ presence.on('UpdateData', async () => {
     return presence.setActivity({
       details: 'Searching for :',
       state: document.location.search.replace('?q=', ''),
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       smallImageKey: Assets.Search,
       smallImageText: 'Searching...',
     })
@@ -46,7 +48,7 @@ presence.on('UpdateData', async () => {
     })
   }
 
-  const presenceData: PresenceData = { largeImageKey: Assets.Logo }
+  const presenceData: PresenceData = { largeImageKey: ActivityAssets.Logo }
   if (Number.isNaN(video.duration) || video.duration <= 0) {
     presenceData.details = 'Browsing...'
 

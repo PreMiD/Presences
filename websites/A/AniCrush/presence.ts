@@ -1,7 +1,9 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1208440916461887488',
 })
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/AniCrush/assets/logo.png',
 }
 let video = {
@@ -24,7 +26,7 @@ presence.on(
 )
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   } as PresenceData
   const { pathname, href, search } = document.location
   const [showButtons, showW2Button, showTimestamps] = await Promise.all([
@@ -108,7 +110,7 @@ presence.on('UpdateData', async () => {
       const streamingType = document
         .querySelector('.live-header .other-items')
         ?.children[1]
-        .querySelector('.text')
+        ?.querySelector('.text')
         ?.textContent
         ?.toLowerCase()
       const totalEpisodes = Number(

@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '633637979952250881',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeDao/assets/logo.png',
 }
 async function getStrings() {
@@ -28,7 +30,7 @@ async function imgPath(path: string, hostname: string) {
     else return `https://${hostname}${path}`
   }
   else {
-    return Assets.Logo
+    return ActivityAssets.Logo
   }
 }
 let strings: Awaited<ReturnType<typeof getStrings>>
@@ -52,7 +54,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, hostname, href } = document.location
@@ -113,7 +115,7 @@ presence.on('UpdateData', async () => {
           .querySelector('[class="lozad img-fluid"]')
           ?.getAttribute('src') ?? '',
         hostname,
-      )) ?? Assets.Logo
+      )) ?? ActivityAssets.Logo
       if (isVideo) {
         presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play
         presenceData.smallImageText = paused ? strings.paused : strings.play
@@ -161,14 +163,14 @@ presence.on('UpdateData', async () => {
           .querySelector('[class="lozad img-fluid main-poster"]')
           ?.getAttribute('src') ?? '',
         hostname,
-      )) ?? Assets.Logo
+      )) ?? ActivityAssets.Logo
       break
     }
   }
   if (!buttons && presenceData.buttons)
     delete presenceData.buttons
-  if (!covers && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if (!covers && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
 
   if (presenceData.details)
     presence.setActivity(presenceData)

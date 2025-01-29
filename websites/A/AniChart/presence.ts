@@ -1,14 +1,16 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '795125406264066099',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/AniChart/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: Math.floor(Date.now() / 1000),
   }
   const { pathname } = document.location

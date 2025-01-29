@@ -67,7 +67,7 @@ setInterval(async () => {
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 

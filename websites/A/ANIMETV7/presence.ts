@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1106959657735561256',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/ANIMETV7/assets/logo.png',
 }
 
@@ -29,7 +31,7 @@ function getTitle(titleLang: number) {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const titleLang = (await presence.getSetting('title')) as number
@@ -67,7 +69,7 @@ presence.on('UpdateData', async () => {
 
       presenceData.largeImageKey = document
         .querySelector('img[alt="poster anime"]')
-        ?.getAttribute('src') || Assets.Logo
+        ?.getAttribute('src') || ActivityAssets.Logo
       presenceData.details = title || 'Getting data...'
       presenceData.state = 'Viewing info'
 
@@ -94,7 +96,7 @@ presence.on('UpdateData', async () => {
       delete presenceData.startTimestamp
       const title = document.querySelector('h1.title')?.textContent
       presenceData.largeImageKey = document.querySelector('img[alt="cover image"]')?.getAttribute('src')
-        || Assets.Logo
+        || ActivityAssets.Logo
       presenceData.details = title || 'Getting data...'
       presenceData.state = 'Viewing info'
 
@@ -148,7 +150,7 @@ presence.on('UpdateData', async () => {
         ]
       }
       presenceData.largeImageKey = document.querySelector('img[alt="Anime Cover"]')?.getAttribute('src')
-        || Assets.Logo
+        || ActivityAssets.Logo
       presenceData.details = title || 'Getting data...'
       if (playingEpisode) {
         presenceData.state = `Episode ${playingEpisode} of ${
@@ -165,7 +167,7 @@ presence.on('UpdateData', async () => {
 
     presenceData.largeImageKey = document
       .querySelector('meta[id="CoverImage"]')
-      ?.getAttribute('data-manga-cover') || Assets.Logo
+      ?.getAttribute('data-manga-cover') || ActivityAssets.Logo
     presenceData.details = title || 'Getting data...'
     presenceData.state = `Reading Chapter ${document
       .querySelector('input[id="chapter-progress"]')

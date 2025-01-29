@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '935597176426491924',
 })
@@ -104,7 +106,7 @@ presence.on('UpdateData', async () => {
       const selected = document.querySelector<HTMLSelectElement>(
         'select[name=\'series\']',
       )
-      const serie = `${selected?.options[selected?.selectedIndex].text} - ${
+      const serie = `${selected?.options[selected?.selectedIndex]?.text} - ${
         document.querySelector(
           '.episode-info-item:nth-child(2) span:nth-child(2)',
         )?.textContent ?? ''

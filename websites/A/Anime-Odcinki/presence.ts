@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1136991710291955752',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo0 = 'https://cdn.rcd.gg/PreMiD/websites/A/Anime-Odcinki/assets/logo.png',
   Logo1 = 'https://cdn.rcd.gg/PreMiD/websites/A/Anime-Odcinki/assets/0.png',
 }
@@ -33,7 +35,7 @@ presence.on('UpdateData', async () => {
     presence.getSetting<number>('logo'),
   ])
   const presenceData: PresenceData = {
-    largeImageKey: logo === 0 ? Assets.Logo0 : Assets.Logo1,
+    largeImageKey: logo === 0 ? ActivityAssets.Logo0 : ActivityAssets.Logo1,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href } = document.location

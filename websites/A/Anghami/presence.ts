@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '721740741570986016',
 })
@@ -31,10 +33,10 @@ function calculateEndTimestamp(
     .trim()
     .split(':')
     .map(Number)
-  const endTotalSeconds = startMinutes * 60
-    + startSeconds
-    + remainingMinutes * 60
-    + remainingSeconds
+  const endTotalSeconds = (startMinutes ?? 0) * 60
+    + (startSeconds ?? 0)
+    + (remainingMinutes ?? 0) * 60
+    + (remainingSeconds ?? 0)
 
   let endMinutes = Math.floor(endTotalSeconds / 60)
   let endSeconds = endTotalSeconds % 60
@@ -70,12 +72,12 @@ presence.on('UpdateData', async () => {
     }
     const duration = presence.timestampFromFormat(
       calculateEndTimestamp(
-        selectors[0].textContent ?? '',
-        selectors[1].textContent ?? '',
+        selectors[0]?.textContent ?? '',
+        selectors[1]?.textContent ?? '',
       ),
     )
     const timestamps = presence.getTimestamps(
-      presence.timestampFromFormat(selectors[0].textContent ?? ''),
+      presence.timestampFromFormat(selectors[0]?.textContent ?? ''),
       duration,
     )
 

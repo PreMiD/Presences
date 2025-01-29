@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({ clientId: '1006563035957182545' })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
@@ -64,7 +66,7 @@ presence.on('UpdateData', async () => {
         ?.trim()
       break
     case 'serie': {
-      if (pathnameArray[2].includes('-episode')) {
+      if (pathnameArray[2]?.includes('-episode')) {
         presenceData.details = `Regarde ${document
           .querySelector('a > h1')
           ?.textContent
@@ -72,7 +74,7 @@ presence.on('UpdateData', async () => {
         const queryText: string[] = document
           .querySelector<HTMLHeadingElement>('.mb-1')!.textContent!.trim()!.split('.')
         presenceData.state = `Saison ${queryText[0]}, Épisode ${
-          queryText[1].split(' ')[1]
+          queryText[1]?.split(' ')[1]
         }`;
 
         [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(video.current, video.duration)

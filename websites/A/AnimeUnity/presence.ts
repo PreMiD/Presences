@@ -1,8 +1,10 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1264199486910234725',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeUnity/assets/logo.png',
 }
 
@@ -35,7 +37,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const [newLang, cover] = await Promise.all([
     presence.getSetting<string>('lang').catch(() => 'en'),
@@ -68,7 +70,7 @@ presence.on('UpdateData', async () => {
     let top3 = ''
     for (let i = 0; i < 3; i++) {
       top3 += `${i + 1}° ${
-        document.querySelectorAll('.name')[i].textContent
+        document.querySelectorAll('.name')[i]?.textContent
       }\n`
     }
     presenceData.details = `Viewing top-anime: ${document
@@ -89,8 +91,8 @@ presence.on('UpdateData', async () => {
       ?.textContent
       ?.replace(/\n\s+/g, '')}`
     presenceData.largeImageKey = cover
-      ? (document.querySelector<HTMLImageElement>('.cover')?.src ?? Assets.Logo)
-      : Assets.Logo
+      ? (document.querySelector<HTMLImageElement>('.cover')?.src ?? ActivityAssets.Logo)
+      : ActivityAssets.Logo
 
     if (!Number.isNaN(duration) && !paused) {
       [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(current, duration)

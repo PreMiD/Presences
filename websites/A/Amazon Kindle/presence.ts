@@ -21,7 +21,7 @@ presence.on('UpdateData', async () => {
         )
         ?.textContent
         ?.split('●')[0]
-        .replace('Page', ' ')
+        ?.replace('Page', ' ')
         .replace('of', '/')
         .replace('Location', ' ')
         .trim()

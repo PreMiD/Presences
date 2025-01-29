@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({ clientId: '1016797607370162256' })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 const staticPages: { [name: string]: string } = {
@@ -8,7 +10,7 @@ const staticPages: { [name: string]: string } = {
   'catalogue': 'Parcourir le catalogue',
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/Anime%20Sama/assets/logo.png',
 }
 
@@ -30,7 +32,7 @@ presence.on(
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     type: ActivityType.Watching,
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href } = document.location
@@ -42,7 +44,7 @@ presence.on('UpdateData', async () => {
     presence.getSetting<boolean>('cover'),
   ])
 
-  if (Object.keys(staticPages).includes(pathArr[1]) && pathArr.length <= 3) {
+  if (pathArr[1] && Object.keys(staticPages).includes(pathArr[1]) && pathArr.length <= 3) {
     presenceData.details = staticPages[pathArr[1]]
     if (privacyMode)
       presenceData.details = 'Navigue...'
@@ -60,7 +62,7 @@ presence.on('UpdateData', async () => {
       ?.trim()
     presenceData.buttons = [{ label: 'Voir la Page', url: href }]
     presenceData.largeImageKey = document.querySelector<HTMLMetaElement>('[property=\'og:image\']')
-      ?.content ?? Assets.Logo
+      ?.content ?? ActivityAssets.Logo
     if (privacyMode) {
       delete presenceData.state
       presenceData.details = pageTitle === 'Anime'
@@ -80,14 +82,14 @@ presence.on('UpdateData', async () => {
       video.duration,
     )
     presenceData.state = `${season ? `${season} - ` : ''}${
-      selectEps?.options[selectEps.selectedIndex].value ?? ''
+      selectEps?.options[selectEps.selectedIndex]?.value ?? ''
     }`
 
     presenceData.buttons = [{ label: 'Voir l\'Anime', url: href }]
     presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play
-    presenceData.smallImageText = selectLecteur?.options[selectLecteur.selectedIndex].value ?? ''
+    presenceData.smallImageText = selectLecteur?.options[selectLecteur.selectedIndex]?.value ?? ''
     presenceData.largeImageKey = document.querySelector<HTMLMetaElement>('[property=\'og:image\']')
-      ?.content ?? Assets.Logo;
+      ?.content ?? ActivityAssets.Logo;
     [presenceData.startTimestamp, presenceData.endTimestamp] = [
       startTimestamp,
       endTimestamp,
@@ -107,13 +109,13 @@ presence.on('UpdateData', async () => {
     presenceData.details = `Lit ${
       document.querySelector('#titreOeuvre')?.textContent ?? ''
     }`
-    presenceData.state = selectChapitres?.options[selectChapitres.selectedIndex].value.trim() ?? ''
+    presenceData.state = selectChapitres?.options[selectChapitres.selectedIndex]?.value?.trim() ?? ''
     const selectLecteur = document.querySelector<HTMLSelectElement>('#selectLecteurs')
     presenceData.smallImageKey = Assets.Reading
-    presenceData.smallImageText = selectLecteur?.options[selectLecteur.selectedIndex].value ?? ''
+    presenceData.smallImageText = selectLecteur?.options[selectLecteur.selectedIndex]?.value ?? ''
     presenceData.buttons = [{ label: 'Voir le Scan', url: href }]
     presenceData.largeImageKey = document.querySelector<HTMLMetaElement>('[property=\'og:image\']')
-      ?.content ?? Assets.Logo
+      ?.content ?? ActivityAssets.Logo
     if (privacyMode) {
       delete presenceData.state
       delete presenceData.smallImageKey
@@ -128,7 +130,7 @@ presence.on('UpdateData', async () => {
     delete presenceData.endTimestamp
   }
   if (!showCover || privacyMode)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (presenceData.details)
     presence.setActivity(presenceData)
   else presence.setActivity()

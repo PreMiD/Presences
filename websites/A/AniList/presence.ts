@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence: Presence = new Presence({
   clientId: '614220272790274199',
 })
@@ -10,7 +12,7 @@ async function getStrings() {
   })
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/AniList/assets/logo.png',
 }
 
@@ -18,7 +20,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp,
   }
   const pathnameArray = document.location.pathname.split('/')
@@ -34,8 +36,8 @@ presence.on('UpdateData', async () => {
       if (showCover) {
         presenceData.largeImageKey = document
           .querySelectorAll('.avatar')[1]
-          .getAttribute('src')
-        presenceData.smallImageKey = Assets.Logo
+          ?.getAttribute('src')
+        presenceData.smallImageKey = ActivityAssets.Logo
       }
       switch (pathnameArray[3]) {
         case 'mangalist':
@@ -63,7 +65,7 @@ presence.on('UpdateData', async () => {
       presenceData.buttons = [
         {
           label: 'View user\'s page',
-          url: document.location.href.replace(pathnameArray[3], ''),
+          url: document.location.href.replace(pathnameArray[3] ?? '', ''),
         },
       ]
       break

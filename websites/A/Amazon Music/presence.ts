@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '808756700022702120',
 })
@@ -89,7 +91,7 @@ presence.on('UpdateData', async () => {
       )
 
     if (cover) {
-      presenceData.largeImageKey = navigator.mediaSession.metadata.artwork[0].src
+      presenceData.largeImageKey = navigator.mediaSession.metadata.artwork[0]?.src
     }
 
     if (paused) {

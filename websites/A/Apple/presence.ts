@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '839150832036872213',
 })
@@ -92,7 +94,7 @@ let strings: ReturnType<typeof getStrings> extends PromiseLike<infer U>
     : unknown,
   oldLang: string
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/logo.png',
   LogoRainbow = 'https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/0.png',
   AppleStore = 'https://cdn.rcd.gg/PreMiD/websites/A/Apple/assets/1.png',
@@ -193,7 +195,7 @@ presence.on('UpdateData', async () => {
     'maps',
   ]
   const presenceData: PresenceData = {
-    largeImageKey: [Assets.Logo, Assets.LogoRainbow][logo] || Assets.Logo,
+    largeImageKey: [ActivityAssets.Logo, ActivityAssets.LogoRainbow][logo] || ActivityAssets.Logo,
   }
 
   if (!oldLang || oldLang !== newLang) {
@@ -224,7 +226,7 @@ presence.on('UpdateData', async () => {
         presenceData.details = strings.comparing
         presenceData.state = document.title
           .split('-')[0]
-          .replace(/ *\([^)]*\) */g, '')
+          ?.replace(/ *\([^)]*\) */g, '')
       }
       else {
         presenceData.details = strings.viewProduct
@@ -406,7 +408,7 @@ presence.on('UpdateData', async () => {
   ) {
     const num = urlpath[1] === 'shop' ? 2 : 3
 
-    presenceData.largeImageKey = Assets.AppleStore
+    presenceData.largeImageKey = ActivityAssets.AppleStore
 
     if (!urlpath[num]) {
       presenceData.details = 'Shop'
@@ -567,7 +569,7 @@ presence.on('UpdateData', async () => {
           'displays',
         ]
 
-        presenceData.largeImageKey = Assets.AppleSupport
+        presenceData.largeImageKey = ActivityAssets.AppleSupport
 
         if (sProducts.find(e => urlpath.includes(e))) {
           presenceData.details = strings.support
@@ -608,7 +610,7 @@ presence.on('UpdateData', async () => {
         break
       }
       case 'apps.apple.com': {
-        presenceData.largeImageKey = Assets.AppStore
+        presenceData.largeImageKey = ActivityAssets.AppStore
 
         if (urlpath.includes('app')) {
           if (document.querySelector('p.we-connecting__instructions')) {
@@ -658,7 +660,7 @@ presence.on('UpdateData', async () => {
         break
       }
       case 'www.icloud.com': {
-        presenceData.largeImageKey = Assets.ICloud
+        presenceData.largeImageKey = ActivityAssets.ICloud
         presenceData.details = 'iCloud'
 
         if (!urlpath[1]) {
@@ -667,7 +669,7 @@ presence.on('UpdateData', async () => {
         else {
           if (urlpath[1] !== 'iclouddrive') {
             presenceData.largeImageKey = assets[`icloud_${urlpath[1]}`]
-            presenceData.smallImageKey = Assets.ICloud
+            presenceData.smallImageKey = ActivityAssets.ICloud
           }
 
           switch (urlpath[1]) {
@@ -693,14 +695,7 @@ presence.on('UpdateData', async () => {
 
                   presenceData.state = state
                 }
-                else {
-                  presenceData.state = iframeData.currentMailbox
-                }
               }
-              else {
-                presenceData.state = strings.iCloudMail
-              }
-
               break
             }
             case 'contacts': {
@@ -772,7 +767,7 @@ presence.on('UpdateData', async () => {
             default:
               if (urlpath[1] === 'keynote-live' && urlpath[2]) {
                 presenceData.details = 'iCloud Keynote Live'
-                presenceData.largeImageKey = Assets.Keynote
+                presenceData.largeImageKey = ActivityAssets.Keynote
 
                 if (document.querySelector('iframe')?.style.display === 'none')
                   presenceData.state = strings.iCloudKeynoteWait
@@ -789,7 +784,7 @@ presence.on('UpdateData', async () => {
         break
       }
       case 'card.apple.com': {
-        presenceData.largeImageKey = Assets.AppleCard
+        presenceData.largeImageKey = ActivityAssets.AppleCard
         presenceData.details = 'Apple Card'
 
         if (!urlpath[1])
@@ -819,7 +814,7 @@ presence.on('UpdateData', async () => {
         const cpage = document.querySelector('body')?.id
           || document.querySelector('body')?.classList[0]?.replace('nav-', '')
 
-        presenceData.largeImageKey = Assets.AppleDeveloper
+        presenceData.largeImageKey = ActivityAssets.AppleDeveloper
         presenceData.details = 'Apple Developer'
         presenceData.state = 'Home'
 
@@ -836,7 +831,7 @@ presence.on('UpdateData', async () => {
             || document.querySelector('h1.typography-headline')?.textContent
             || 'Unknown'
         }
-        else if (urlpath[1].startsWith('wwdc')) {
+        else if (urlpath[1]?.startsWith('wwdc')) {
           const wwdc = document
             .querySelector('a.ac-ln-title-logo>img')
             ?.getAttribute('alt')

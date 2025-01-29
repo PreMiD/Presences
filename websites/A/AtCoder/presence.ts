@@ -49,14 +49,14 @@ presence.on('UpdateData', async () => {
             presenceData.details = 'Viewing Clarifications'
             presenceData.state = `Contest: ${location.pathname
               .split('/')[2]
-              .toUpperCase()}`
+              ?.toUpperCase()}`
             break
           }
 
           case 'submit': {
             presenceData.details = `Submitting Solution: ${location.pathname
               .split('/')[2]
-              .toUpperCase()}`
+              ?.toUpperCase()}`
             presenceData.state = `${
               document.querySelectorAll('.select2-selection__rendered').item(0).textContent
             } [${
@@ -87,7 +87,7 @@ presence.on('UpdateData', async () => {
 
             presenceData.state = `Contest: ${location.pathname
               .split('/')[2]
-              .toUpperCase()}`
+              ?.toUpperCase()}`
             break
           }
 
@@ -95,7 +95,7 @@ presence.on('UpdateData', async () => {
             presenceData.details = 'Viewing Result'
             presenceData.state = `Contest: ${location.pathname
               .split('/')[2]
-              .toUpperCase()}`
+              ?.toUpperCase()}`
             break
           }
 
@@ -103,13 +103,13 @@ presence.on('UpdateData', async () => {
             presenceData.details = 'Viewing Editorial'
             presenceData.state = `Contest: ${location.pathname
               .split('/')[2]
-              .toUpperCase()}`
+              ?.toUpperCase()}`
 
             if (location.pathname.split('/').length === 5) {
               presenceData.details = 'Reading Editorial'
               presenceData.state = `${location.pathname
                 .split('/')[2]
-                .toUpperCase()}: ${
+                ?.toUpperCase()}: ${
                 document
                   ?.querySelector('#main-container')
                   ?.querySelector('h2')
@@ -124,7 +124,7 @@ presence.on('UpdateData', async () => {
             presenceData.details = 'Performing Custom Test'
             presenceData.state = `Contest: ${location.pathname
               .split('/')[2]
-              .toUpperCase()}`
+              ?.toUpperCase()}`
             break
           }
         }
@@ -157,7 +157,7 @@ presence.on('UpdateData', async () => {
         }
         else {
           presenceData.details = 'Reading Post'
-          presenceData.state = document.querySelector('.panel-title')?.childNodes[0].textContent
+          presenceData.state = document.querySelector('.panel-title')?.childNodes[0]?.textContent
           break
         }
       }

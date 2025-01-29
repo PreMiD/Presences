@@ -1,8 +1,10 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '806539630878261328',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/Animelon/assets/logo.png',
 }
 async function getStrings() {
@@ -29,8 +31,8 @@ let paused = true
 let lastPlaybackState: boolean | null = null
 let playback: boolean
 let currentAnimeWatching: string[]
-let currentAnimeTitle: string
-let currentAnimeEpisode: string
+let currentAnimeTitle: string | undefined
+let currentAnimeEpisode: string | undefined
 let strings: Awaited<ReturnType<typeof getStrings>>
 let oldLang: string | null = null
 
@@ -52,7 +54,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const [buttons, newLang] = await Promise.all([
@@ -87,7 +89,7 @@ presence.on('UpdateData', async () => {
           },
           {
             label: strings.viewSeries,
-            url: `https://animelon.com/series/${encodeURI(currentAnimeTitle)}`,
+            url: `https://animelon.com/series/${encodeURI(currentAnimeTitle!)}`,
           },
         ]
       }
@@ -115,7 +117,7 @@ presence.on('UpdateData', async () => {
           },
           {
             label: strings.viewSeries,
-            url: `https://animelon.com/series/${encodeURI(currentAnimeTitle)}`,
+            url: `https://animelon.com/series/${encodeURI(currentAnimeTitle!)}`,
           },
         ]
       }

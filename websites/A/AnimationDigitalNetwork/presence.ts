@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '808758769424138252',
 })
@@ -6,14 +8,14 @@ const strings = presence.getStrings({
   pause: 'general.paused',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimationDigitalNetwork/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const video = document.querySelector<HTMLVideoElement>('video.vjs-tech')
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const { pathname, href } = document.location
   const buttons = await presence.getSetting<boolean>('buttons')
@@ -61,7 +63,7 @@ presence.on('UpdateData', async () => {
   }
   else if (pathname?.includes('video') && !video) {
     presenceData.largeImageKey = document.querySelector<HTMLMetaElement>('meta[property="og:image"]')
-      ?.content ?? Assets.Logo
+      ?.content ?? ActivityAssets.Logo
     if (
       document
         .querySelector('div.sc-AxjAm.khAjwj.sc-psDXd.iazofB')

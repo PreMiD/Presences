@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({ clientId: '980817205480550410' })
 const strings = presence.getStrings({
   playing: 'general.playing',
@@ -80,7 +82,7 @@ presence.on('UpdateData', async () => {
   else if (window.location.href.indexOf('?sayfa=') > 1) {
     presenceData.details = (await strings).browsing
     presenceData.state = `Sayfa: ${document.URL.split('?sayfa=')[1]
-      .split('#episodes')
+      ?.split('#episodes')
       .slice(0)
       .join(' ')}`
   }
@@ -93,7 +95,7 @@ presence.on('UpdateData', async () => {
     presenceData.buttons = [
       {
         label: 'Bölümü İzle',
-        url: document.URL.split('&')[0],
+        url: document.URL.split('&')[0] ?? '',
       },
       {
         label: (await strings).anime,

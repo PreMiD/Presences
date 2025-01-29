@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '640990409224486971',
 })
@@ -6,18 +8,16 @@ const strings = presence.getStrings({
   pause: 'general.paused',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/anime47/assets/logo.png',
 }
 
-let browsingTimestamp = Math.floor(Date.now() / 1000)
+const browsingTimestamp = Math.floor(Date.now() / 1000)
 let title: string
 let iFrameVideo: boolean
 let currentTime: number
 let duration: number
 let paused: boolean
-let lastPlaybackState: boolean
-let playback: boolean
 
 interface IFrameData {
   iframeVideo: {
@@ -41,16 +41,12 @@ presence.on('iFrameData', (data: unknown) => {
 })
 
 presence.on('UpdateData', async () => {
-  if (lastPlaybackState !== playback) {
-    lastPlaybackState = playback
-    browsingTimestamp = Math.floor(Date.now() / 1000)
-  }
   const [startTimestamp, endTimestamp] = presence.getTimestamps(
     Math.floor(currentTime),
     Math.floor(duration),
   )
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 
@@ -109,7 +105,7 @@ presence.on('UpdateData', async () => {
       )
       ?.textContent
       ?.split(':')[1]
-      .replace(' - Anime Vietsub Online', '') ?? ''
+      ?.replace(' - Anime Vietsub Online', '') ?? ''
   }
   else {
     presenceData.details = 'Đang xem:'

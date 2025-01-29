@@ -10,13 +10,13 @@ const difficultyImages: Record<string, string> = {
   'Expert+': 'https://cdn.rcd.gg/PreMiD/websites/A/AccSaber/assets/4.png',
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/AccSaber/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { href, pathname, hostname } = document.location

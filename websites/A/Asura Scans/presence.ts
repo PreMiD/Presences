@@ -1,3 +1,5 @@
+import { ActivityType } from 'premid'
+
 const presence = new Presence({ clientId: '864304063804997702' })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 const ASURA_SCANS_LOGO = 'https://cdn.rcd.gg/PreMiD/websites/A/Asura%20Scans/assets/logo.png'
@@ -43,12 +45,12 @@ presence.on('UpdateData', async () => {
   }
 
   if (onComicOrChapterPage(pathname) && isNewComic(href, comic)) {
-    comic.url = href.split('/chapter')[0]
+    comic.url = href.split('/chapter')[0]!
     comic.title = document.title
-      .split('Chapter')[0]
-      .trim()
-      .split(' - ')[0]
-      .trim()
+      ?.split('Chapter')[0]
+      ?.trim()
+      ?.split(' - ')[0]
+      ?.trim() ?? ''
     if (displayCover)
       comic.image = (await getComicImage(comic.url)) ?? ASURA_SCANS_LOGO
     else comic.image = ASURA_SCANS_LOGO
@@ -126,7 +128,7 @@ function isNewComic(path: string, comic: Comic) {
 }
 
 function getChapterNumber() {
-  return document.title.split('Chapter')[1].split('-')[0].trim()
+  return document.title.split('Chapter')[1]?.split('-')[0]?.trim()
 }
 
 function getChapterProgress() {

@@ -1,8 +1,10 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1266069361928704072',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeSaturn/assets/logo.png',
 }
 
@@ -27,7 +29,7 @@ let oldLang: string | null = null
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const [newLang, cover] = await Promise.all([
     presence.getSetting<string>('lang').catch(() => 'en'),
@@ -83,8 +85,8 @@ presence.on('UpdateData', async () => {
     }`
     presenceData.largeImageKey = cover
       ? document.querySelector<HTMLImageElement>('.cover-anime')?.src
-      ?? Assets.Logo
-      : Assets.Logo
+      ?? ActivityAssets.Logo
+      : ActivityAssets.Logo
     presenceData.buttons = [
       {
         label: strings.buttonViewShow,
@@ -100,8 +102,8 @@ presence.on('UpdateData', async () => {
     presenceData.state = document.querySelector('h3')?.textContent
     presenceData.largeImageKey = cover
       ? document.querySelector<HTMLImageElement>('.img-fluid')?.src
-      ?? Assets.Logo
-      : Assets.Logo
+      ?? ActivityAssets.Logo
+      : ActivityAssets.Logo
   }
   else if (pathname.startsWith('/watch')) {
     // watch anime
@@ -150,7 +152,7 @@ presence.on('UpdateData', async () => {
     presenceData.details = 'Viewing info'
     presenceData.state = document.querySelector('.p-3 > b')?.textContent
     presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.p-3 div > img')?.src
-      ?? Assets.Logo
+      ?? ActivityAssets.Logo
   }
   presence.setActivity(presenceData)
 })

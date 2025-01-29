@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '640244531346014214',
 })
@@ -6,15 +8,13 @@ const strings = presence.getStrings({
   pause: 'general.paused',
 })
 
-let browsingTimestamp = Math.floor(Date.now() / 1000)
+const browsingTimestamp = Math.floor(Date.now() / 1000)
 let title: HTMLElement | null = null
 let air: HTMLElement | null = null
 let iFrameVideo: boolean
 let currentTime: number
 let duration: number
 let paused: boolean
-let lastPlaybackState: boolean
-let playback: boolean
 
 interface IFrameData {
   iframeVideo: {
@@ -37,17 +37,13 @@ presence.on('iFrameData', (data: unknown) => {
   }
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeKage/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
-  if (lastPlaybackState !== playback) {
-    lastPlaybackState = playback
-    browsingTimestamp = Math.floor(Date.now() / 1000)
-  }
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 

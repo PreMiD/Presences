@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '611657413350654010',
 })
@@ -10,7 +12,7 @@ let lastPlaybackState = null
 let playback
 let browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/Aniyan/assets/logo.png',
 }
 
@@ -28,7 +30,7 @@ presence.on('UpdateData', async () => {
 
   if (!playback) {
     const presenceData: PresenceData = {
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       details: 'Browsing...',
       startTimestamp: browsingTimestamp,
     }
@@ -53,7 +55,7 @@ presence.on('UpdateData', async () => {
     const presenceData: PresenceData = {
       details: videoTitle?.textContent,
       state: episode?.textContent,
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       smallImageKey: video.paused ? Assets.Pause : Assets.Play,
       smallImageText: video.paused
         ? (await strings).pause
