@@ -1,15 +1,17 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '647973934603567130',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/%23/%E5%B7%B4%E5%93%88%E5%A7%86%E7%89%B9/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
 
   if (document.location.hostname === 'forum.gamer.com.tw') {
@@ -34,7 +36,7 @@ presence.on('UpdateData', async () => {
         presenceData.details = document.querySelector('div.BH-menu > ul.BH-menuE > li > a[title]')?.getAttribute('title')
         presenceData.state = document.querySelectorAll(
           '.c-post__header__title',
-        )[0].textContent
+        )[0]?.textContent
         presence.setActivity(presenceData)
         presenceData.smallImageKey = Assets.Reading
       }

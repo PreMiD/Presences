@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({ clientId: '1035124482735607838' })
 const strings = presence.getStrings({
   play: 'general.playing',
@@ -5,7 +7,7 @@ const strings = presence.getStrings({
   listen: 'general.buttonListenAlong',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/%23/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90/assets/logo.png',
 }
 
@@ -30,7 +32,7 @@ presence.on('UpdateData', async () => {
     const presenceData: PresenceData = {
       details: title,
       state: author,
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       smallImageKey: paused ? Assets.Pause : Assets.Play,
       smallImageText: paused ? (await strings).pause : (await strings).play,
       startTimestamp,

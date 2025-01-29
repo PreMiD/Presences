@@ -2,14 +2,14 @@ const presence = new Presence({
   clientId: '1167164781426380931',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/%23/%E3%83%83%E3%83%84%20Ebook%20Reader/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     details: 'Browsing',
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname } = document.location
