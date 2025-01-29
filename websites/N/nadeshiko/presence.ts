@@ -1,50 +1,32 @@
 const presence = new Presence({
-	clientId: "1332497160406695947",
-}),
+		clientId: "1332497160406695947",
+	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
 	Logo = "https://i.imgur.com/tDAXNRP.png",
 }
 
-async function getStrings() {
-	return presence.getStrings({
-		browsing: "general.browsing",
-		search: "general.search",
-		viewHome: "general.viewHome",
-		viewPage: "general.viewPage",
-		viewing: "general.viewing",
-		viewAPage: "general.viewAPage",
-		viewProfile: "general.viewProfile",
-		viewAProfile: "general.viewAProfile",
-		buttonViewPage: "general.buttonViewPage",
-		buttonViewProfile: "general.buttonViewProfile",
-	});
-}
-
-let strings: Awaited<ReturnType<typeof getStrings>>,
-	oldLang: string = null;
-
 const gameNames: Record<string, string> = {
-	network: "Network",
-	bedwars: "Bed Wars",
-	duels: "Duels",
-	skywars: "SkyWars",
-	arcade: "Arcade",
-	blitz: "Blitz",
-	buildbattle: "Build Battle",
-	classic: "Classic",
-	copsandcrims: "Cops and Crims",
-	megawalls: "Mega Walls",
-	murdermystery: "Murder Mystery",
-	pit: "Pit",
-	smashheroes: "Smash Heroes",
-	tntgames: "TNT Games",
-	uhc: "UHC",
-	warlords: "Warlords",
-	woolgames: "Wool Games",
-	fishing: "Fishing",
-},
+		network: "Network",
+		bedwars: "Bed Wars",
+		duels: "Duels",
+		skywars: "SkyWars",
+		arcade: "Arcade",
+		blitz: "Blitz",
+		buildbattle: "Build Battle",
+		classic: "Classic",
+		copsandcrims: "Cops and Crims",
+		megawalls: "Mega Walls",
+		murdermystery: "Murder Mystery",
+		pit: "Pit",
+		smashheroes: "Smash Heroes",
+		tntgames: "TNT Games",
+		uhc: "UHC",
+		warlords: "Warlords",
+		woolgames: "Wool Games",
+		fishing: "Fishing",
+	},
 	achievementsGameNames: Record<string, string> = {
 		overall: "Overall",
 		legacy: "Legacy",
@@ -80,28 +62,28 @@ const gameNames: Record<string, string> = {
 	};
 
 presence.on("UpdateData", async () => {
-	const [
-		languageSetting,
-		privacyModeSetting,
-		showSmallImagesSetting,
-		showButtonsSetting,
-	] = await Promise.all([
-		presence.getSetting<string>("language").catch(() => "en"),
-		presence.getSetting<boolean>("privacyMode"),
-		presence.getSetting<boolean>("showSmallImages"),
-		presence.getSetting<boolean>("showButtons"),
-	]);
-
-	if (oldLang !== languageSetting) {
-		oldLang = languageSetting;
-
-		strings = await getStrings();
-	}
-
-	const presenceData: PresenceData = {
-		startTimestamp: browsingTimestamp,
-		largeImageKey: Assets.Logo,
-	},
+	const [privacyModeSetting, showSmallImagesSetting, showButtonsSetting] =
+			await Promise.all([
+				presence.getSetting<boolean>("privacyMode"),
+				presence.getSetting<boolean>("showSmallImages"),
+				presence.getSetting<boolean>("showButtons"),
+			]),
+		strings = await presence.getStrings({
+			browsing: "general.browsing",
+			search: "general.search",
+			viewHome: "general.viewHome",
+			viewPage: "general.viewPage",
+			viewing: "general.viewing",
+			viewAPage: "general.viewAPage",
+			viewProfile: "general.viewProfile",
+			viewAProfile: "general.viewAProfile",
+			buttonViewPage: "general.buttonViewPage",
+			buttonViewProfile: "general.buttonViewProfile",
+		}),
+		presenceData: PresenceData = {
+			startTimestamp: browsingTimestamp,
+			largeImageKey: Assets.Logo,
+		},
 		{ pathname, href } = document.location,
 		playerOrGuild = document.title.split(" | ")[0],
 		game = pathname.split("/")[3];
@@ -121,32 +103,23 @@ presence.on("UpdateData", async () => {
 
 	function leaderboardsPage() {
 		const gameSelected = document.querySelector(
-			"#game-selector .leaderboard-selector-button.selected"
-		),
+				"#game-selector .leaderboard-selector-button.selected"
+			),
 			leaderboardSelected = document.querySelector(
 				"#leaderboard-selector .leaderboard-selector-button.selected"
 			);
 
-		presenceData.details = `${strings.viewPage} Leaderboards`;
+		presenceData.details = `${strings.viewPage} leaderboards page`;
 		presenceData.state =
 			gameSelected && leaderboardSelected
-				? `${strings.viewing
-				} ${gameSelected?.textContent.trim()} - ${leaderboardSelected?.textContent.trim()} leaderboard`
+				? `${
+						strings.viewing
+				  } ${gameSelected?.textContent.trim()} - ${leaderboardSelected?.textContent.trim()} leaderboard`
 				: `${strings.search} for a leaderboard...`;
 		presenceData.smallImageKey =
 			gameSelected && leaderboardSelected ? Assets.Viewing : Assets.Search;
 		presenceData.smallImageText =
 			gameSelected && leaderboardSelected ? strings.viewAPage : strings.search;
-		presenceData.details = `${strings.viewPage} Leaderboards`;
-		presenceData.state = `${strings.viewing} ${document
-			.querySelector("#game-selector .leaderboard-selector-button.selected")
-			?.textContent.trim()} - ${document
-				.querySelector(
-					"#leaderboard-selector .leaderboard-selector-button.selected"
-				)
-				?.textContent.trim()} leaderboard`;
-		presenceData.smallImageKey = Assets.Viewing;
-		presenceData.smallImageText = strings.viewAPage;
 		presenceData.buttons = [
 			{
 				label: strings.buttonViewPage,
@@ -177,7 +150,7 @@ presence.on("UpdateData", async () => {
 			return homePage();
 		else {
 			presenceData.details = `${strings.viewProfile} ${playerOrGuild}`;
-			presenceData.state = `${strings.viewing} Guild stats`;
+			presenceData.state = `${strings.viewing} guild stats`;
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = strings.viewAProfile;
 			presenceData.buttons = [
@@ -211,7 +184,7 @@ presence.on("UpdateData", async () => {
 			return homePage();
 		else {
 			presenceData.details = `${strings.viewProfile} ${playerOrGuild}`;
-			presenceData.state = `${strings.viewing} Quests`;
+			presenceData.state = `${strings.viewing} quests`;
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = strings.viewAProfile;
 			presenceData.buttons = [
