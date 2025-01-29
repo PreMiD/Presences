@@ -3,13 +3,13 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/0-9/5Mods/assets/logo.jpg',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const [privacy, buttons, covers] = await Promise.all([
@@ -59,7 +59,7 @@ presence.on('UpdateData', async () => {
         case 'user': {
           presenceData.details = 'Viewing forum user'
           presenceData.state = document.querySelector('[class="fullname"]')?.textContent
-          presenceData.largeImageKey = document.querySelector('[class="avatar-wrapper"]')?.firstElementChild?.getAttribute('src') ?? Assets.Logo
+          presenceData.largeImageKey = document.querySelector('[class="avatar-wrapper"]')?.firstElementChild?.getAttribute('src') ?? ActivityAssets.Logo
           presenceData.buttons = [
             {
               label: 'View Forum User',
@@ -106,7 +106,7 @@ presence.on('UpdateData', async () => {
           presenceData.state = document.querySelector('[class="username"]')?.textContent
           presenceData.largeImageKey = document
             .querySelector('[class="img-responsive"]')
-            ?.getAttribute('src') ?? Assets.Logo
+            ?.getAttribute('src') ?? ActivityAssets.Logo
           presenceData.buttons = [
             {
               label: 'View User',
@@ -155,7 +155,7 @@ presence.on('UpdateData', async () => {
     }
   }
   if (!covers)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (!buttons)
     delete presenceData.buttons
 

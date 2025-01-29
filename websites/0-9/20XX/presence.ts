@@ -146,7 +146,7 @@ presence.on('UpdateData', async () => {
 
       // Character
       presenceData.smallImageKey = assets[`char_${data20XX.game.character.split('_')[0]}`]
-      presenceData.smallImageText = characterNameMap[data20XX.game.character.split('_')[0]]
+      presenceData.smallImageText = characterNameMap[data20XX.game.character.split('_')[0]!]
 
       // Map
       if (data20XX.game.map) {

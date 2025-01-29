@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: '1195051461822914640',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/0-9/4chan/assets/logo.png',
 }
 
@@ -111,7 +111,7 @@ const nsfwBoards = new Set([
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { href, pathname } = document.location

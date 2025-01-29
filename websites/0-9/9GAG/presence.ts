@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '631566704648126503',
 })
@@ -26,7 +28,7 @@ presence.on('UpdateData', async () => {
       if (document.location.pathname === '/') {
         presenceData.details = 'Viewing home page'
       }
-      else if (!sections.includes(document.location.pathname.split('/')[1])) {
+      else if (!sections.includes(document.location.pathname.split('/')[1]!)) {
         presenceData.details = `Viewing section: ${
           document.querySelector('h2')?.textContent
         }`

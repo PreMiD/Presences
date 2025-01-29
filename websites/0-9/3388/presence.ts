@@ -1,14 +1,16 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1094931941616267344',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/0-9/3388/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     smallImageKey: Assets.Search,
     smallImageText: 'Browsing',
   }
@@ -24,7 +26,7 @@ presence.on('UpdateData', async () => {
       filmItems.length >= 3
       && !Number.isNaN(Number.parseInt(filmItems[2]?.textContent ?? 'NaN'))
     ) {
-      name += ` (${filmItems[2].textContent})`
+      name += ` (${filmItems[2]?.textContent})`
     }
 
     if (

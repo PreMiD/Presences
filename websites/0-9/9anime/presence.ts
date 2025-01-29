@@ -1,14 +1,16 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1264754447276310599',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/0-9/9anime/assets/logo.png',
 }
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     type: ActivityType.Watching,
   }
@@ -21,7 +23,7 @@ presence.on('UpdateData', async () => {
     case pathname === '/search':
       presenceData.details = `Viewing results: ${search
         .split('=')[1]
-        .replace(/\+/g, ' ')}`
+        ?.replace(/\+/g, ' ')}`
       presenceData.smallImageKey = Assets.Search
       break
     case pathname.includes('/genre/'):
@@ -41,14 +43,14 @@ presence.on('UpdateData', async () => {
         ?.match(/[1-9]\d*/)?.[0]
 
       presenceData.state = `Episode ${episodeNumber}`
-      presenceData.largeImageKey = coverArt ?? Assets.Logo
+      presenceData.largeImageKey = coverArt ?? ActivityAssets.Logo
       presenceData.buttons = [
         {
           label: 'View Anime',
           url: href,
         },
       ]
-      presenceData.smallImageKey = coverArt ? Assets.Logo : ''
+      presenceData.smallImageKey = coverArt ?? ActivityAssets.Logo
       break
     }
     case pathname.includes('/az-list'):

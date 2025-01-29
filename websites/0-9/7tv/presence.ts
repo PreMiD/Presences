@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1253713118803263568',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/0-9/7tv/assets/logo.png',
 }
 
@@ -41,7 +43,7 @@ function getImage(tags: string) {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const [newLang, privacy, showEmotes] = await Promise.all([
@@ -95,7 +97,7 @@ presence.on('UpdateData', async () => {
                 presenceData.largeImageKey = getImage(
                   '.preview-size.is-large > img',
                 )
-                presenceData.smallImageKey = Assets.Logo
+                presenceData.smallImageKey = ActivityAssets.Logo
               }
             }
             break
@@ -111,8 +113,8 @@ presence.on('UpdateData', async () => {
       presenceData.smallImageText = strings.viewing
 
       if (!privacy) {
-        presenceData.largeImageKey = getImage('.user-card .user-picture-wrapper img') ?? Assets.Logo
-        presenceData.smallImageKey = Assets.Logo
+        presenceData.largeImageKey = getImage('.user-card .user-picture-wrapper img') ?? ActivityAssets.Logo
+        presenceData.smallImageKey = ActivityAssets.Logo
       }
       break
 

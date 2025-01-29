@@ -14,15 +14,15 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Viewing home page'
     }
     else if (document.location.pathname.includes('/new')) {
-      presenceData.details = document.querySelectorAll('.news-header-title')[0].textContent
+      presenceData.details = document.querySelectorAll('.news-header-title')[0]?.textContent
       presenceData.state = `Category: ${
-        document.querySelectorAll('.news-header-category')[0].textContent
+        document.querySelectorAll('.news-header-category')[0]?.textContent
       }`
     }
     else if (document.location.pathname.includes('magazine')) {
-      presenceData.details = document.querySelectorAll('.magazine-content-title')[0].textContent
+      presenceData.details = document.querySelectorAll('.magazine-content-title')[0]?.textContent
       presenceData.state = `Publish Date: ${
-        document.querySelectorAll('.magazine-content-time')[0].textContent
+        document.querySelectorAll('.magazine-content-time')[0]?.textContent
       }`
     }
     else if (document.location.pathname.includes('tournament')) {

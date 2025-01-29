@@ -76,6 +76,10 @@ interface Spawn20XX {
 // Since maps don't have IDs in the game object, we can infer
 // what map is being played by it's data.
 
+interface ItemMap {
+  [key: string]: string
+}
+
 const guessKeys: ItemMap = {
   // 'xBound:yBound:camPosX:camPosY:spawnCount:doodadCount': 'mapID'
   '32:32:11:15.75:24:36': 'attack',
