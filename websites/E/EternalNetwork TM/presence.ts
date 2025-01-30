@@ -19,7 +19,7 @@ async function getStrings() {
 let strings: Awaited<ReturnType<typeof getStrings>>
 let oldLang: string | null = null
 
-const enum Assets {
+enum ActivityAssets {
   EternalradioLogo = 'https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/0.png',
   EternalcraftSmp = 'https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/1.png',
   EternalnetworktmLogo = 'https://cdn.rcd.gg/PreMiD/websites/E/EternalNetwork%20TM/assets/2.png',
@@ -52,10 +52,10 @@ presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     details: strings.viewPage,
     largeImageKey: [
-      Assets.EternalnetworktmLogo,
-      Assets.EternalnetworktmLogo2,
-      Assets.EternalnetworktmLogo3,
-    ][bigicon] || Assets.EternalnetworktmLogo,
+      ActivityAssets.EternalnetworktmLogo,
+      ActivityAssets.EternalnetworktmLogo2,
+      ActivityAssets.EternalnetworktmLogo3,
+    ][bigicon] || ActivityAssets.EternalnetworktmLogo,
     smallImageText: hostname + pathname,
     startTimestamp: browsingTimestamp,
     buttons: [
@@ -72,7 +72,7 @@ presence.on('UpdateData', async () => {
   switch (hostname) {
     case etrnl:
     case `www.${etrnl}`: {
-      presenceData.smallImageKey = Assets.EternalnetworktmLogo
+      presenceData.smallImageKey = ActivityAssets.EternalnetworktmLogo
 
       if (pathname.startsWith('/'))
         presenceData.state = ttl
@@ -87,7 +87,7 @@ presence.on('UpdateData', async () => {
     }
     case `forum.${etrnl}`:
     case `www.forum.${etrnl}`: {
-      presenceData.smallImageKey = Assets.EternalnetworktmLogo2
+      presenceData.smallImageKey = ActivityAssets.EternalnetworktmLogo2
 
       if (pathname.startsWith('/'))
         presenceData.state = ttl
@@ -147,7 +147,7 @@ presence.on('UpdateData', async () => {
     }
     case `radio.${etrnl}`:
     case `www.radio.${etrnl}`: {
-      presenceData.smallImageKey = Assets.EternalradioLogo
+      presenceData.smallImageKey = ActivityAssets.EternalradioLogo
       presenceData.details = strings.listeningMusic
 
       if (pathname.startsWith('/'))
@@ -169,7 +169,7 @@ presence.on('UpdateData', async () => {
     }
     case `status.${etrnl}`:
     case `www.status.${etrnl}`: {
-      presenceData.smallImageKey = Assets.EternalnetworktmStatus
+      presenceData.smallImageKey = ActivityAssets.EternalnetworktmStatus
 
       if (pathname.startsWith('/'))
         presenceData.state = ttl
@@ -188,7 +188,7 @@ presence.on('UpdateData', async () => {
     }
     case `et-log.${etrnl}`:
     case `www.et-log.${etrnl}`: {
-      presenceData.smallImageKey = Assets.EternallogisticLogo
+      presenceData.smallImageKey = ActivityAssets.EternallogisticLogo
       if (pathname.startsWith('/'))
         presenceData.state = ttl
 
@@ -211,7 +211,7 @@ presence.on('UpdateData', async () => {
     }
     case `dev.${etrnl}`:
     case `www.dev.${etrnl}`: {
-      presenceData.smallImageKey = Assets.EternalnetworktmDev
+      presenceData.smallImageKey = ActivityAssets.EternalnetworktmDev
 
       if (pathname.includes('/etlog')) {
         presenceData.state = 'Working on ET-LOG system'
@@ -229,7 +229,7 @@ presence.on('UpdateData', async () => {
     }
     case `shortener.${etrnltm}`:
     case `www.shortener.${etrnltm}`: {
-      presenceData.smallImageKey = Assets.EternalshortenerLogo
+      presenceData.smallImageKey = ActivityAssets.EternalshortenerLogo
 
       if (pathname.startsWith('/'))
         presenceData.state = ttl

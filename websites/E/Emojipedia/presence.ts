@@ -22,7 +22,7 @@ presence.on('UpdateData', () => {
     }
     else {
       presenceData.details = 'Reading a blog post...'
-      presenceData.state = document.querySelectorAll('.post-full-title')[0].textContent
+      presenceData.state = document.querySelectorAll('.post-full-title')[0]?.textContent
     }
   }
   else if (document.location.pathname.includes('/search')) {
@@ -113,24 +113,24 @@ presence.on('UpdateData', () => {
 
     if (isCategory) {
       presenceData.details = 'Viewing a category...'
-      presenceData.state = document.querySelectorAll('h1')[0].textContent
+      presenceData.state = document.querySelectorAll('h1')[0]?.textContent
     }
     else if (isEvent) {
       presenceData.details = 'Viewing an event...'
-      presenceData.state = document.querySelectorAll('h1')[0].textContent
+      presenceData.state = document.querySelectorAll('h1')[0]?.textContent
     }
     else if (document.querySelectorAll('h1').length >= 1) {
       if (
         /[\u2700-\u27BF\u3299\u3297\u303D\u3030\u24C2\u203C\u2049\u25AA\u25AB\u25B6\u25C0\u25FB-\u25FE\u00A9\u00AE\u2122\u2139\u2600-\u26FF\u2B05\u2B06\u2B07\u2B1B\u2B1C\u2B50\u2B55\u231A\u231B\u2328\u23CF\u23E9-\u23F3\u23F8-\u23FA\u2934\u2935\u2190-\u21FF]|(?:\uD83C[\uDDE6-\uDDFF]){2}|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u0023-\u0039]\uFE0F?\u20E3/.test(
-          document.querySelectorAll('h1')[0].textContent ?? '',
+          document.querySelectorAll('h1')[0]?.textContent ?? '',
         )
       ) {
         presenceData.details = 'Viewing an emoji...'
-        presenceData.state = document.querySelectorAll('h1')[0].textContent
+        presenceData.state = document.querySelectorAll('h1')[0]?.textContent
       }
       else {
         presenceData.details = 'Viewing a page...'
-        presenceData.state = document.querySelectorAll('h1')[0].textContent
+        presenceData.state = document.querySelectorAll('h1')[0]?.textContent
       }
     }
   }

@@ -1,7 +1,9 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({ clientId: '1196469492310618142' })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Icon = 'https://cdn.rcd.gg/PreMiD/websites/E/Emberspark%20Games/assets/logo.png',
   DesolationIcon = 'https://cdn.rcd.gg/PreMiD/websites/E/Emberspark%20Games/assets/0.png',
   ConsumerCatalog = 'https://cdn.rcd.gg/PreMiD/websites/E/Emberspark%20Games/assets/1.png',
@@ -17,12 +19,12 @@ presence.on('UpdateData', async () => {
 
   if (!currentPath[1]) {
     presenceData.details = 'Emberspark Games'
-    presenceData.largeImageKey = Assets.Icon
+    presenceData.largeImageKey = ActivityAssets.Icon
     presenceData.state = 'Viewing the home page'
   }
   else if (currentPath[1] === 'desolation') {
     presenceData.details = 'Portal 2: Desolation mod'
-    presenceData.largeImageKey = Assets.DesolationIcon
+    presenceData.largeImageKey = ActivityAssets.DesolationIcon
     presenceData.buttons = [
       {
         label: 'View the mod page',
@@ -57,7 +59,7 @@ presence.on('UpdateData', async () => {
         case 'catalog': {
           presenceData.details = 'Portal 2: Desolation mod - Catalog'
           presenceData.state = 'In the test subject waiting area'
-          presenceData.smallImageKey = Assets.ConsumerCatalog
+          presenceData.smallImageKey = ActivityAssets.ConsumerCatalog
           presenceData.smallImageText = 'Sitting in the waiting area...'
           presenceData.buttons = [
             {
@@ -124,8 +126,8 @@ presence.on('UpdateData', async () => {
               Number.parseInt(
                 activeImage.id
                   .split('-')[2]
-                  .split('slide')[1]
-                  .replace(/^0+/, ''),
+                  ?.split('slide')[1]
+                  ?.replace(/^0+/, '') ?? '',
               ),
             )} image`
           }

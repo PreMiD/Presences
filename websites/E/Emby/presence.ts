@@ -1,4 +1,6 @@
 import { compare } from 'compare-versions'
+import { ActivityType, Assets } from 'premid'
+
 /*
  * The interfaces may have some things missing,
  * I've tried to set as many properties as I could find.
@@ -472,7 +474,7 @@ async function handleAudioPlayback(): Promise<void> {
     }
 
     const [, mediaId] = regexResult
-    const info = await obtainMediaInfo(mediaId)
+    const info = await obtainMediaInfo(mediaId!)
     presenceData.details = audioVariablesReplaced(audioDetails, info)
     presenceData.state = audioVariablesReplaced(audioState, info)
 
@@ -481,7 +483,7 @@ async function handleAudioPlayback(): Promise<void> {
       // some songs might not have albumart
       && document.querySelector<HTMLDivElement>('.nowPlayingBarImage')?.style.backgroundImage
     ) {
-      presenceData.largeImageKey = mediaPrimaryImage(mediaId)
+      presenceData.largeImageKey = mediaPrimaryImage(mediaId!)
       createImageBlob()
     }
 
@@ -766,7 +768,7 @@ async function handleWebClient(): Promise<void> {
 
   // obtain the path, on the example would return "login.html"
   // https://media.domain.tld/web/index.html#!/login.html?serverid=randomserverid
-  const path = location.hash.split('?')[0].substring(3)
+  const path = location.hash.split('?')[0]?.substring(3)
 
   switch (path) {
     case 'startup/login.html':
@@ -853,7 +855,7 @@ async function handleWebClient(): Promise<void> {
       break
     }
     default:
-      if (path.substr(0, 3) !== 'dlg')
+      if (path?.substr(0, 3) !== 'dlg')
         presence.info(`path: ${path}`)
   }
 }

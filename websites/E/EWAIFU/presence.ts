@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: '1224473731070689331',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/E/EWAIFU/assets/logo.png',
   Home = 'https://cdn.rcd.gg/PreMiD/websites/E/EWAIFU/assets/0.png',
 }
@@ -17,16 +17,16 @@ const timestampCheck: {
 const staticPages: Record<string, PresenceData> = {
   '/': {
     details: 'Discovering Ewaifus',
-    smallImageKey: Assets.Home,
+    smallImageKey: ActivityAssets.Home,
   },
-  '/login': { details: 'Sign In', smallImageKey: Assets.Logo },
+  '/login': { details: 'Sign In', smallImageKey: ActivityAssets.Logo },
   '/register': { details: 'Sign Up' },
   '/wallet': { details: 'Wallet' },
 }
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: timestampCheck.timestamp,
   }
   const { href, pathname } = document.location
@@ -51,9 +51,9 @@ presence.on('UpdateData', async () => {
       else {
         presenceData.details = `Viewing ${ewaifuName}'s profile`
 
-        presenceData.largeImageKey = avatar ?? Assets.Logo
+        presenceData.largeImageKey = avatar ?? ActivityAssets.Logo
 
-        presenceData.smallImageKey = Assets.Logo
+        presenceData.smallImageKey = ActivityAssets.Logo
       }
       presenceData.buttons = [{ label: 'View EWAIFU', url: href }]
       break

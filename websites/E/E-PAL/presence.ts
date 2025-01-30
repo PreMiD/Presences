@@ -1,8 +1,10 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1160565099883397211',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Likes = 'https://cdn.rcd.gg/PreMiD/websites/E/E-PAL/assets/0.png',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/E/E-PAL/assets/logo.png',
   Loading = 'https://cdn.rcd.gg/PreMiD/websites/E/E-PAL/assets/1.gif',
@@ -30,7 +32,7 @@ const staticPages: Record<string, PresenceData> = {
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: timestampCheck.timestamp,
   }
   const { href, pathname } = document.location
@@ -65,7 +67,7 @@ presence.on('UpdateData', async () => {
   switch (true) {
     case document.readyState !== 'complete': {
       presenceData.details = 'Loading'
-      presenceData.smallImageKey = Assets.Loading
+      presenceData.smallImageKey = ActivityAssets.Loading
       break
     }
     case !!extraDrawer && extraDrawer.innerHTML.includes('Message'): {
@@ -99,7 +101,7 @@ presence.on('UpdateData', async () => {
         ?.querySelector<HTMLAudioElement>('audio')
       if (!epalName) {
         presenceData.details = 'Loading'
-        presenceData.smallImageKey = Assets.Loading
+        presenceData.smallImageKey = ActivityAssets.Loading
       }
       else {
         presenceData.details = epalName
@@ -108,7 +110,7 @@ presence.on('UpdateData', async () => {
           ? `${activeTab} - ${servicesSelected}`
           : activeTab
 
-        presenceData.largeImageKey = epalAvatar ?? Assets.Logo
+        presenceData.largeImageKey = epalAvatar ?? ActivityAssets.Logo
 
         presenceData.smallImageKey = document
           .querySelector('[class*="bg-surface-element-normal"]')
@@ -126,7 +128,7 @@ presence.on('UpdateData', async () => {
     }
     case pathname.includes('/topic/'): {
       presenceData.details = `Viewing ${epalName}'s post`
-      presenceData.smallImageKey = epalAvatar ?? Assets.Logo
+      presenceData.smallImageKey = epalAvatar ?? ActivityAssets.Logo
       presenceData.buttons = [{ label: 'View Post', url: href }]
       break
     }
@@ -147,7 +149,7 @@ presence.on('UpdateData', async () => {
         .querySelector('[class="flex items-center flex-1 min-w-0"]')
         ?.querySelector('img')
         ?.getAttribute('src')
-        ?.split('?')[0] ?? Assets.Logo
+        ?.split('?')[0] ?? ActivityAssets.Logo
       presenceData.smallImageKey = document
         .querySelector('[class="w-24"]')
         ?.querySelector('img')

@@ -9,7 +9,7 @@ presence.on('UpdateData', async () => {
   )
 
   if (page.includes('/kategori/')) {
-    const category = document.title[0].toUpperCase()
+    const category = document.title[0]?.toUpperCase()
       + document.title
         .replace(' - Ekşi Şeyler', '')
         .slice(1, document.title.length)
@@ -23,7 +23,7 @@ presence.on('UpdateData', async () => {
     })
   }
   else if (page.includes('/kanal/')) {
-    const channel = document.title[0].toUpperCase()
+    const channel = document.title[0]?.toUpperCase()
       + document.title
         .replace(' - Ekşi Şeyler', '')
         .slice(1, document.title.length)

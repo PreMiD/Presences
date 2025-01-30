@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '794408060847390760',
 })
@@ -16,8 +18,8 @@ presence.on('UpdateData', async () => {
   if (document.location.pathname.includes('watch')) {
     const video = document.querySelector<HTMLVideoElement>('.rmp-video')!
     const episodeName = document.querySelector('.content-name')?.textContent
-    const episode = episodeName?.split('.Bölüm')[0].split(' ')[
-      episodeName?.split('.Bölüm')[0].split(' ').length - 1
+    const episode = episodeName?.split('.Bölüm')[0]?.split(' ')[
+      (episodeName?.split('.Bölüm')[0]?.split(' ').length ?? 0) - 1
     ]
     const [startTimestamp, endTimestamp] = presence.getTimestamps(
       video.currentTime,

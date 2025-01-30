@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 class Emanate extends Presence {
   constructor(options: PresenceOptions) {
     super(options)

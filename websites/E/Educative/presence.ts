@@ -19,24 +19,24 @@ function setCourseInfo() {
   // Sets course info from page
   if (pathStartsWith('/courses')) {
     if (isInCourse()) {
-      courseName = document.querySelectorAll('h4')[0].textContent;
+      courseName = document.querySelectorAll('h4')[0]?.textContent;
       [courseCompletion] = document
         .querySelectorAll('.whitespace-pre-wrap')[0]
-        .querySelectorAll('span')[0]
+        ?.querySelectorAll('span')[0]
         ?.textContent
         ?.split('%') ?? []
       const [lessonEl] = document
         .querySelectorAll('.bePFDW')[0]
-        .querySelectorAll('span')
-      const lesson = lessonEl.textContent
+        ?.querySelectorAll('span') ?? []
+      const lesson = lessonEl?.textContent
       const chapter = lessonEl
-        .closest('.CollectionSidebarCategory-sc-15b6owa-0')
+        ?.closest('.CollectionSidebarCategory-sc-15b6owa-0')
         ?.querySelectorAll('h5')[0]
         ?.textContent ?? ''
       chapterName = chapter + lesson && chapter ? ' - ' : `${lesson}`
     }
     else {
-      courseName = document.querySelectorAll('h1')[0].textContent
+      courseName = document.querySelectorAll('h1')[0]?.textContent
     }
   }
 }

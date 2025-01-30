@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/E/Eurogamer/assets/logo.png',
 }
 
@@ -29,7 +29,7 @@ let oldLang: string | null = null
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const newLang = await presence.getSetting<string>('lang').catch(() => 'en')
@@ -54,7 +54,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = strings.viewProfile
       presenceData.state = document.querySelector('.page_title')
       presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.avatar_image')?.src
-        ?? Assets.Logo
+        ?? ActivityAssets.Logo
       break
     }
     case 'pc':
@@ -91,7 +91,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = strings.viewMovie
       presenceData.state = document.querySelector('.page_title')
       presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.cover_image')?.src
-        ?? Assets.Logo
+        ?? ActivityAssets.Logo
       break
     }
     case 'video-game-franchises': {
@@ -103,7 +103,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Viewing game:'
       presenceData.state = document.querySelector('.page_title')
       presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.cover_image')?.src
-        ?? Assets.Logo
+        ?? ActivityAssets.Logo
       break
     }
     case 'authors': {
@@ -147,13 +147,13 @@ presence.on('UpdateData', async () => {
     case 'search': {
       presenceData.details = strings.search
       presenceData.state = decodeURIComponent(
-        search.split('=')[1].replaceAll('+', ' '),
+        search?.split('=')[1]?.replaceAll('+', ' ') ?? '',
       )
       break
     }
     default: {
-      if (pathname.split('/')[1].length >= 1) {
-        if (search && search.split('=')[1].includes('comments')) {
+      if ((pathname.split('/')[1]?.length ?? 0) >= 1) {
+        if (search && search.split('=')[1]?.includes('comments')) {
           presenceData.details = strings.thread
           presenceData.state = document
             .querySelector('.page_title')

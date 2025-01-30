@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 const presence = new Presence({
   clientId: '629653820405710848',
@@ -16,7 +18,7 @@ presence.on('UpdateData', () => {
     && urlParams.has('q')
   ) {
     presenceData.details = `Searching for ${urlParams.get('q')}`
-    presenceData.state = document.querySelectorAll('.result-count')[0].textContent
+    presenceData.state = document.querySelectorAll('.result-count')[0]?.textContent
 
     presenceData.smallImageKey = Assets.Search
   }

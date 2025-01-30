@@ -118,7 +118,7 @@ presence.on('UpdateData', async () => {
         presenceData.buttons = [
           {
             label: 'View Page',
-            url: href.split('?')[0],
+            url: href.split('?')[0] ?? '',
           },
         ]
       }
