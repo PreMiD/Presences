@@ -89,13 +89,10 @@ presence.on("UpdateData", () => {
 	} else if (document.location.pathname.includes("/recherche")) {
 		presenceData.details = "Dans les résultats de recherche :";
 
+		const searchTitle = document.querySelector("h1")?.textContent?.trim();
+		if (!searchTitle) return;
 		presenceData.state = `Annonces pour «${
-			document
-				.querySelector("h1")
-				?.textContent.trim()
-				.split("«")
-				.pop()
-				.split("»")[0]
+			searchTitle.split("«").pop().split("»")[0]
 		}»`;
 	} else if (document.location.pathname.includes("/ad/")) {
 		presenceData.details = `Annonce ${document.title.split("-")[0].trim()}`;
