@@ -13,9 +13,8 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (document.location.pathname === "/") {
-		const searchInput = (
-			document.querySelector(".search-input") as HTMLInputElement
-		)?.value;
+		const searchInput =
+			document.querySelector<HTMLInputElement>(".search-input")?.value;
 		if (searchInput && searchInput.length > 0)
 			presenceData.state = `Searching for: "${searchInput}"`;
 		else presenceData.state = "Browsing content to watch";
@@ -49,16 +48,12 @@ presence.on("UpdateData", async () => {
 					"p.text-gray-300:nth-child(5) > span:nth-child(1) > span:nth-child(1)"
 				)
 				?.textContent.split(" (")[0];
-			season = (
-				document.querySelector(
-					"select.bg-gray-700:nth-child(1)"
-				) as HTMLSelectElement
-			)?.selectedOptions[0].textContent.replace("Season ", "");
-			episode = (
-				document.querySelector(
-					"select.rounded-lg:nth-child(2)"
-				) as HTMLSelectElement
-			)?.selectedOptions[0].textContent.replace("Episode ", "");
+			season = document
+				.querySelector<HTMLSelectElement>("select.bg-gray-700:nth-child(1)")
+				?.selectedOptions[0].textContent.replace("Season ", "");
+			episode = document
+				.querySelector<HTMLSelectElement>("select.rounded-lg:nth-child(2)")
+				?.selectedOptions[0].textContent.replace("Episode ", "");
 			if (season && episode) seasonEpisode = `S${season}E${episode}  •  `;
 		}
 		const releaseYear = releaseDate?.substring(0, 4);
@@ -77,12 +72,10 @@ presence.on("UpdateData", async () => {
 
 	// Watchlist modal
 	const watchListElements =
-		(document.querySelector(
+		document.querySelector<HTMLInputElement>(
 			"div.fixed:nth-child(9) .grid-cols-1"
-		) as HTMLInputElement) ||
-		(document.querySelector(
-			"div.grid-cols-1:nth-child(2)"
-		) as HTMLInputElement);
+		) ||
+		document.querySelector<HTMLInputElement>("div.grid-cols-1:nth-child(2)");
 	if (
 		watchListElements &&
 		window.getComputedStyle(
