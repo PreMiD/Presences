@@ -1,8 +1,10 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1090817608154108046',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Rumble = 'https://cdn.rcd.gg/PreMiD/websites/R/Rumble/assets/logo.png',
 }
 
@@ -22,7 +24,7 @@ presence.on('UpdateData', async () => {
       .slice(18)
     : null
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Rumble,
+    largeImageKey: ActivityAssets.Rumble,
   }
 
   if (

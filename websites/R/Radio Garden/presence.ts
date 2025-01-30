@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '687070418804408445', // The client ID of the Application created at https://discordapp.com/developers/applications
 })

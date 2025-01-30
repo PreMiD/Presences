@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '830504223153717311',
 })
@@ -5,14 +7,14 @@ const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 let prevURL: string
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/R/Replit/assets/logo.png',
   CodeLine = 'https://cdn.rcd.gg/PreMiD/websites/R/Replit/assets/0.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { href, hash, pathname } = document.location
@@ -61,7 +63,7 @@ presence.on('UpdateData', async () => {
         presenceData.state = `Created by: ${pathname.split('/')[1]}`
         presenceData.buttons = [{ label: 'View REPL', url: href }]
         if (activeLine || lineNumbers) {
-          presenceData.smallImageKey = Assets.CodeLine
+          presenceData.smallImageKey = ActivityAssets.CodeLine
           presenceData.smallImageText = !activeLine && lineNumbers
             ? `Total lines ${
               lineNumbers?.[lineNumbers?.length - 1]?.textContent

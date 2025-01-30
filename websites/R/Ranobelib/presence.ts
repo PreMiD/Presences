@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '743233111097081886',
 })
@@ -69,7 +71,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Каталог ранобэ'
 
       if (!Array.isArray(Queries.types))
-        Queries.types = [Queries.types]
+        Queries.types = [Queries.types!]
 
       // Search Types
       if (Queries.types && Queries.types.length === 1) {
@@ -707,7 +709,7 @@ presence.on('UpdateData', async () => {
         const { title } = document
 
         presenceData.details = 'Смотрит ранобэ'
-        presenceData.state = title.split('/')[0].split(' ').slice(1).join(' ')
+        presenceData.state = title.split('/')[0]?.split(' ').slice(1).join(' ')
         presenceData.smallImageText = 'Читает'
         presenceData.smallImageKey = Assets.Reading
       }

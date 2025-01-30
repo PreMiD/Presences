@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1033504954763198545',
 })
@@ -12,21 +14,17 @@ async function getStrings() {
 }
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/R/RTL+/assets/0.jpg',
 }
 
-let video: HTMLVideoElement
+let video: HTMLVideoElement | null = null
 let vidTitle: string | undefined
 let strings: Awaited<ReturnType<typeof getStrings>>
 
 presence.on('UpdateData', async () => {
-  const [startTimestamp, endTimestamp] = presence.getTimestamps(
-    Math.floor(video?.currentTime),
-    Math.floor(video?.duration),
-  )
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const { pathname, href } = document.location
 
@@ -34,7 +32,7 @@ presence.on('UpdateData', async () => {
     strings = await getStrings()
 
   if (document.querySelector('#bitmovinplayer-video-player_container')) {
-    const video = document.querySelector<HTMLVideoElement>(
+    video = document.querySelector<HTMLVideoElement>(
       '#bitmovinplayer-video-player_container',
     )
 
@@ -44,10 +42,7 @@ presence.on('UpdateData', async () => {
 
       presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play
       presenceData.smallImageText = video.paused ? strings.pause : strings.play;
-      [presenceData.startTimestamp, presenceData.endTimestamp] = [
-        startTimestamp,
-        endTimestamp,
-      ]
+      [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video)
       presenceData.buttons = [
         {
           label: 'View',

@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const time = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/R/Riot%20Games/assets/logo.png',
   Valorant = 'https://cdn.rcd.gg/PreMiD/websites/R/Riot%20Games/assets/0.png',
   Lol = 'https://cdn.rcd.gg/PreMiD/websites/R/Riot%20Games/assets/1.png',
@@ -18,7 +18,7 @@ presence.on('UpdateData', async () => {
     .replace(`https://${location.hostname}`, '')
     .replace('?', '/')
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: time,
   }
   if (location.hostname === 'riotgames.com' || location.hostname === 'www.riotgames.com') {
@@ -63,7 +63,7 @@ presence.on('UpdateData', async () => {
     }
     for (const [k, v] of Object.entries(statics)) {
       if (path.match(k)) {
-        presenceData.largeImageKey = Assets.Logo
+        presenceData.largeImageKey = ActivityAssets.Logo
         presenceData = { ...presenceData, ...v } as PresenceData
       }
     }
@@ -92,7 +92,7 @@ presence.on('UpdateData', async () => {
         }
         for (const [k, v] of Object.entries(statics)) {
           if (path.match(k)) {
-            presenceData.largeImageKey = Assets.Tft
+            presenceData.largeImageKey = ActivityAssets.Tft
             presenceData = { ...presenceData, ...v } as PresenceData
           }
         }
@@ -125,7 +125,7 @@ presence.on('UpdateData', async () => {
         }
         for (const [k, v] of Object.entries(statics)) {
           if (path.match(k)) {
-            presenceData.largeImageKey = Assets.Wildrift
+            presenceData.largeImageKey = ActivityAssets.Wildrift
             presenceData = { ...presenceData, ...v } as PresenceData
           }
         }
@@ -174,7 +174,7 @@ presence.on('UpdateData', async () => {
         }
         for (const [k, v] of Object.entries(statics)) {
           if (path.match(k)) {
-            presenceData.largeImageKey = Assets.Valorant
+            presenceData.largeImageKey = ActivityAssets.Valorant
             presenceData = { ...presenceData, ...v } as PresenceData
           }
         }
@@ -256,7 +256,7 @@ presence.on('UpdateData', async () => {
           }
           for (const [k, v] of Object.entries(statics)) {
             if (path.match(k)) {
-              presenceData.largeImageKey = Assets.Lol
+              presenceData.largeImageKey = ActivityAssets.Lol
               presenceData = { ...presenceData, ...v } as PresenceData
             }
           }
@@ -283,7 +283,7 @@ presence.on('UpdateData', async () => {
           }
           for (const [k, v] of Object.entries(statics)) {
             if (path.match(k)) {
-              presenceData.largeImageKey = Assets.Lor
+              presenceData.largeImageKey = ActivityAssets.Lor
               presenceData = { ...presenceData, ...v } as PresenceData
             }
           }

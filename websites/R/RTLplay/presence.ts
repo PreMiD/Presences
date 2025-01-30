@@ -1,14 +1,15 @@
+import { ActivityType, Assets } from 'premid'
 import {
+  ActivityAssets,
   cropPreset,
   exist,
   getAdditionnalStrings,
   getChannel,
   getLocalizedAssets,
   getThumbnail,
-  LargeAssets,
   limitText,
   stringsMap,
-} from './util'
+} from './util.js'
 
 const presence = new Presence({
   clientId: '1240716875927916616',
@@ -31,7 +32,7 @@ presence.on('UpdateData', async () => {
   const pathParts = pathname.split('/')
   const presenceData: PresenceData = {
     name: 'RTLplay',
-    largeImageKey: LargeAssets.Animated, // Default
+    largeImageKey: ActivityAssets.Animated, // Default
     largeImageText: 'RTLplay',
     type: ActivityType.Watching,
   } as PresenceData
@@ -74,13 +75,13 @@ presence.on('UpdateData', async () => {
       if (usePrivacyMode) {
         presenceData.state = strings.viewAPage
 
-        presenceData.smallImageKey = LargeAssets.Privacy
+        presenceData.smallImageKey = ActivityAssets.Privacy
         presenceData.smallImageText = strings.privacy
       }
       else {
         presenceData.state = strings.viewHome
 
-        presenceData.smallImageKey = LargeAssets.Binoculars
+        presenceData.smallImageKey = ActivityAssets.Binoculars
         presenceData.smallImageText = strings.browsing
 
         if (useTimestamps)
@@ -92,12 +93,12 @@ presence.on('UpdateData', async () => {
     /* RESEARCH PAGE (Page de recherche)
 
     (https://www.rtlplay.be/rtlplay/recherche) */
-    case ['recherche'].includes(pathParts[2]): {
+    case ['recherche'].includes(pathParts[2]!): {
       if (usePrivacyMode) {
         presenceData.details = strings.browsing
         presenceData.state = strings.searchSomething
 
-        presenceData.smallImageKey = LargeAssets.Privacy
+        presenceData.smallImageKey = ActivityAssets.Privacy
         presenceData.smallImageText = strings.privacy
       }
       else {
@@ -133,13 +134,13 @@ presence.on('UpdateData', async () => {
     /* MY LIST (Ma Liste)
 
     (https://www.rtlplay.be/rtlplay/ma-liste) */
-    case ['ma-liste'].includes(pathParts[2]): {
+    case ['ma-liste'].includes(pathParts[2]!): {
       presenceData.details = strings.browsing
 
       if (usePrivacyMode) {
         presenceData.state = strings.viewAPage
 
-        presenceData.smallImageKey = LargeAssets.Privacy
+        presenceData.smallImageKey = ActivityAssets.Privacy
         presenceData.smallImageText = strings.privacy
       }
       else {
@@ -160,12 +161,12 @@ presence.on('UpdateData', async () => {
 
     (https://www.rtlplay.be/rtlplay/collection/c2dBY3Rpb24) */
     case ['collection', 'series', 'films', 'divertissement'].includes(
-      pathParts[2],
+      pathParts[2]!,
     ): {
       if (usePrivacyMode) {
         presenceData.state = strings.viewAPage
 
-        presenceData.smallImageKey = LargeAssets.Privacy
+        presenceData.smallImageKey = ActivityAssets.Privacy
         presenceData.smallImageText = strings.privacy
       }
       else {
@@ -176,12 +177,12 @@ presence.on('UpdateData', async () => {
 
         presenceData.state = strings.viewCategory.replace(':', '')
         presenceData.details = pathParts[2] !== 'collection'
-          ? pathParts[2][0].toUpperCase() + pathParts[2].substring(1) // to Upper Case the first letter
+          ? pathParts[2]![0]!.toUpperCase() + pathParts[2]!.substring(1) // to Upper Case the first letter
           : data[0]['@type'] === 'CollectionPage'
             ? data[0].name
             : null
 
-        presenceData.smallImageKey = LargeAssets.Binoculars
+        presenceData.smallImageKey = ActivityAssets.Binoculars
         presenceData.smallImageText = strings.browsing
 
         if (useTimestamps)
@@ -202,15 +203,15 @@ presence.on('UpdateData', async () => {
     /* DIRECT PAGE (Page des chaines en direct)
 
     (https://www.rtlplay.be/rtlplay/direct/tvi) */
-    case (hostname === 'www.rtlplay.be' && ['direct'].includes(pathParts[2]))
+    case (hostname === 'www.rtlplay.be' && ['direct'].includes(pathParts[2]!))
       || (['www.radiocontact.be', 'www.belrtl.be'].includes(hostname)
-        && ['player'].includes(pathParts[1])): {
+        && ['player'].includes(pathParts[1]!)): {
       switch (true) {
         case hostname === 'www.rtlplay.be': {
           if (usePrivacyMode) {
             presenceData.details = strings.watchingLive
 
-            presenceData.smallImageKey = LargeAssets.Privacy
+            presenceData.smallImageKey = ActivityAssets.Privacy
             presenceData.smallImageText = strings.privacy
           }
           else {
@@ -225,12 +226,12 @@ presence.on('UpdateData', async () => {
             }
             else if (exist('div.playerui__liveStat--deferred')) {
               // State deferred
-              presenceData.smallImageKey = LargeAssets.Deferred
+              presenceData.smallImageKey = ActivityAssets.Deferred
               presenceData.smallImageText = strings.deferred
             }
             else {
               // State live
-              presenceData.smallImageKey = LargeAssets.LiveAnimated
+              presenceData.smallImageKey = ActivityAssets.LiveAnimated
               presenceData.smallImageText = strings.live
             }
 
@@ -241,27 +242,27 @@ presence.on('UpdateData', async () => {
                   'li[aria-current=\'true\'] > a > div > div.live-broadcast__channel-title',
                 )?.textContent || ''
               ).toLowerCase() !== 'aucune donnée disponible'
-              && !['contact', 'bel'].includes(pathParts[3]) // Radio show name are not relevant
+              && !['contact', 'bel'].includes(pathParts[3]!) // Radio show name are not relevant
             ) {
               presenceData.name = document.querySelector(
                 'li[aria-current=\'true\'] > a > div > div.live-broadcast__channel-title',
               )?.textContent || ''
             }
             else {
-              presenceData.name = getChannel(pathParts[3]).channel
+              presenceData.name = getChannel(pathParts[3]!).channel
             }
 
-            presenceData.type = getChannel(pathParts[3]).type
+            presenceData.type = getChannel(pathParts[3]!).type
 
             presenceData.state = strings.watchingLive
             presenceData.details = document.querySelector(
               'li[aria-current=\'true\'] > a > div > div.live-broadcast__channel-title',
             )?.textContent || ''
-            if (['contact', 'bel'].includes(pathParts[3])) {
+            if (['contact', 'bel'].includes(pathParts[3]!)) {
               /* Songs played in the livestream are the same as the audio radio ones but with video clips
               Fetch the data from the Radioplayer API. It is used on the official radio contact and bel rtl websites */
               const response = await fetch(
-                getChannel(pathParts[3]).radioplayerAPI!,
+                getChannel(pathParts[3]!).radioplayerAPI!,
               )
               const dataString = await response.text()
               const media = JSON.parse(dataString)
@@ -275,18 +276,18 @@ presence.on('UpdateData', async () => {
               }
               else {
                 // When we don't have a song, we simply show the radio name as the show name is already displayed in state
-                presenceData.largeImageKey = getChannel(pathParts[3]).logo
-                presenceData.state = getChannel(pathParts[3]).channel
+                presenceData.largeImageKey = getChannel(pathParts[3]!).logo
+                presenceData.state = getChannel(pathParts[3]!).channel
               }
 
               presenceData.largeImageText = strings.watchingLiveMusic
 
-              presenceData.smallImageKey = LargeAssets.VinyleAnimated
+              presenceData.smallImageKey = ActivityAssets.VinyleAnimated
               presenceData.smallImageText = strings.listeningMusic
             }
             else {
-              presenceData.largeImageKey = getChannel(pathParts[3]).logo
-              presenceData.largeImageText = getChannel(pathParts[3]).channel
+              presenceData.largeImageKey = getChannel(pathParts[3]!).logo
+              presenceData.largeImageText = getChannel(pathParts[3]!).channel
             }
 
             if (useTimestamps) {
@@ -361,7 +362,7 @@ presence.on('UpdateData', async () => {
 
             presenceData.type = ActivityType.Listening
 
-            presenceData.smallImageKey = LargeAssets.VinyleAnimated
+            presenceData.smallImageKey = ActivityAssets.VinyleAnimated
             presenceData.smallImageText = strings.listeningMusic
           }
           else {
@@ -369,11 +370,11 @@ presence.on('UpdateData', async () => {
             presenceData.type = getChannel(hostname).type
 
             if (exist('button[aria-label="stop"]')) {
-              presenceData.smallImageKey = LargeAssets.VinyleAnimated
+              presenceData.smallImageKey = ActivityAssets.VinyleAnimated
               presenceData.smallImageText = strings.listeningMusic
             }
             else {
-              presenceData.smallImageKey = LargeAssets.Vinyle
+              presenceData.smallImageKey = ActivityAssets.Vinyle
               presenceData.smallImageText = strings.pause
             }
 
@@ -444,7 +445,7 @@ presence.on('UpdateData', async () => {
     /* MEDIA PLAYER PAGE (Lecteur video)
 
     (https://www.rtlplay.be/rtlplay/player/75e9a91b-29d1-4856-be8c-0b3532862404) */
-    case ['player'].includes(pathParts[2]): {
+    case ['player'].includes(pathParts[2]!): {
       const titleText = document.querySelector('h1.lfvp-player__title')?.textContent
         || 'Unknown Media'
       const matchResult = titleText.match(
@@ -458,14 +459,14 @@ presence.on('UpdateData', async () => {
       } = matchResult?.groups || {}
 
       let isPaused = false
-      presenceData.largeImageKey = LargeAssets.Logo // Intializing default
+      presenceData.largeImageKey = ActivityAssets.Logo // Intializing default
 
       if (usePrivacyMode) {
         presenceData.details = episodeName
           ? strings.watchingShow
           : strings.watchingMovie
 
-        presenceData.smallImageKey = LargeAssets.Privacy
+        presenceData.smallImageKey = ActivityAssets.Privacy
         presenceData.smallImageText = strings.privacy
       }
       else {
@@ -525,8 +526,8 @@ presence.on('UpdateData', async () => {
 
               if (formattedTimestamps && formattedTimestamps.length === 2) {
                 [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(
-                  presence.timestampFromFormat(formattedTimestamps[0].trim()),
-                  presence.timestampFromFormat(formattedTimestamps[1].trim()),
+                  presence.timestampFromFormat(formattedTimestamps[0]!.trim()),
+                  presence.timestampFromFormat(formattedTimestamps[1]!.trim()),
                 )
               }
             }
@@ -576,13 +577,13 @@ presence.on('UpdateData', async () => {
     /* MEDIA PAGE (Page de media)
 
     (https://www.rtlplay.be/rtlplay/salvation~2ab30366-51fe-4b29-a720-5e41c9bd6991) */
-    case pathParts[2].length > 15: {
+    case pathParts[2]!.length > 15: {
       presenceData.startTimestamp = browsingTimestamp
 
       if (usePrivacyMode) {
         presenceData.details = strings.browsing
         presenceData.state = strings.viewAPage
-        presenceData.smallImageKey = LargeAssets.Privacy
+        presenceData.smallImageKey = ActivityAssets.Privacy
         presenceData.smallImageText = strings.privacy
       }
       else {
@@ -617,7 +618,7 @@ presence.on('UpdateData', async () => {
           ? limitText(summaryElement.textContent) // 128 characters is the limit
           : subtitle // Summary if available
 
-        presenceData.smallImageKey = LargeAssets.Binoculars
+        presenceData.smallImageKey = ActivityAssets.Binoculars
         presenceData.smallImageText = strings.browsing
 
         if (useButtons) {
@@ -651,7 +652,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = strings.browsing
       presenceData.state = strings.viewAPage
 
-      presenceData.smallImageKey = LargeAssets.Binoculars
+      presenceData.smallImageKey = ActivityAssets.Binoculars
       presenceData.smallImageText = strings.browsing
 
       if (useTimestamps)

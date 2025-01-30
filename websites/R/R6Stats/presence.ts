@@ -15,15 +15,15 @@ presence.on('UpdateData', async () => {
     const selects = document.querySelectorAll('select')
     const labels = []
 
-    if (selects[0].selectedIndex === 0) {
+    if (selects[0]?.selectedIndex === 0) {
       labels.push('General')
-      labels.push(selects[2].options[selects[2].selectedIndex].label) // Stat Type
-      labels.push(selects[1].options[selects[1].selectedIndex].label) // Platform
+      labels.push(selects[2]!.options[selects[2]!.selectedIndex]!.label) // Stat Type
+      labels.push(selects[1]!.options[selects[1]!.selectedIndex]!.label) // Platform
     }
     else {
       labels.push('Seasonal')
-      labels.push(selects[4].options[selects[4].selectedIndex].label) // Stat Type
-      labels.push(selects[2].options[selects[2].selectedIndex].label) // Platform
+      labels.push(selects[4]!.options[selects[4]!.selectedIndex]!.label) // Stat Type
+      labels.push(selects[2]!.options[selects[2]!.selectedIndex]!.label) // Platform
     }
 
     presenceData.state = labels.join(' | ')

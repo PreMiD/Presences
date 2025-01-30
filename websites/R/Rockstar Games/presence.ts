@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Rockstargamestransparent = 'https://cdn.rcd.gg/PreMiD/websites/R/Rockstar%20Games/assets/0.png',
   Rockstargamespurple = 'https://cdn.rcd.gg/PreMiD/websites/R/Rockstar%20Games/assets/1.png',
   Rockstargamesspecial3 = 'https://cdn.rcd.gg/PreMiD/websites/R/Rockstar%20Games/assets/2.png',
@@ -12,7 +12,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, hostname } = document.location
@@ -72,7 +72,7 @@ presence.on('UpdateData', async () => {
     hostname === 'support.rockstargames.com'
     || hostname === 'www.support.rockstargames.com'
   ) {
-    presenceData.largeImageKey = Assets.Rockstargamestransparent
+    presenceData.largeImageKey = ActivityAssets.Rockstargamestransparent
     if (pathname === '/') {
       presenceData.details = 'Browsing Support Homepage'
     }
@@ -86,7 +86,7 @@ presence.on('UpdateData', async () => {
     hostname === 'socialclub.rockstargames.com'
     || hostname === 'www.socialclub.rockstargames.com'
   ) {
-    presenceData.largeImageKey = Assets.Rockstargamespurple
+    presenceData.largeImageKey = ActivityAssets.Rockstargamespurple
     if (pathname === '/') {
       presenceData.details = 'Browsing Social Club Homepage'
     }
@@ -131,7 +131,7 @@ presence.on('UpdateData', async () => {
     hostname === 'store.rockstargames.com'
     || hostname === 'www.store.rockstargames.com'
   ) {
-    presenceData.largeImageKey = Assets.Rockstargamesspecial3
+    presenceData.largeImageKey = ActivityAssets.Rockstargamesspecial3
     if (pathname === '/en') {
       presenceData.details = 'Browsing Store Homepage'
     }

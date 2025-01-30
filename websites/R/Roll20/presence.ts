@@ -24,7 +24,7 @@ presence.on('UpdateData', async () => {
   else if (document.location.pathname.includes('/campaigns/details')) {
     presenceData.details = 'Viewing game details'
     if (document.querySelectorAll('.campaignname').length > 0 && !hideDetails) {
-      presenceData.state = document.querySelectorAll('.campaignname')[0].textContent
+      presenceData.state = document.querySelectorAll('.campaignname')[0]?.textContent
     }
   }
   else if (document.location.pathname.includes('/lfg')) {
@@ -51,9 +51,9 @@ presence.on('UpdateData', async () => {
   else if (document.location.pathname.includes('/user')) {
     presenceData.details = 'Viewing player profile'
     if (document.querySelectorAll('h1').length > 0 && !hideDetails) {
-      if (document.querySelectorAll('h1')[0].classList.contains('editable'))
+      if (document.querySelectorAll('h1')[0]?.classList.contains('editable'))
         presenceData.details = 'Viewing own profile'
-      else presenceData.state = document.querySelectorAll('h1')[0].textContent
+      else presenceData.state = document.querySelectorAll('h1')[0]?.textContent
     }
   }
   else if (document.location.pathname.includes('/wishlist')) {
@@ -83,7 +83,7 @@ presence.on('UpdateData', async () => {
     if (document.location.pathname.includes('/post') && !hideDetails) {
       presenceData.details = 'Reading Forum Post'
       if (document.querySelectorAll('.posttitle').length > 0) {
-        presenceData.state = document.querySelectorAll('.posttitle')[0].textContent
+        presenceData.state = document.querySelectorAll('.posttitle')[0]?.textContent
       }
     }
     else if (
@@ -92,7 +92,7 @@ presence.on('UpdateData', async () => {
     ) {
       presenceData.details = 'Browsing Forum Category'
       if (document.querySelectorAll('h1').length > 0)
-        presenceData.state = document.querySelectorAll('h1')[0].textContent
+        presenceData.state = document.querySelectorAll('h1')[0]?.textContent
     }
     else {
       presenceData.details = 'Browsing Forum'
@@ -102,7 +102,7 @@ presence.on('UpdateData', async () => {
     if (document.location.pathname.includes('/post')) {
       presenceData.details = 'Reading Blog Post'
       if (document.querySelectorAll('h1').length > 0 && !hideDetails)
-        presenceData.state = document.querySelectorAll('h1')[0].textContent
+        presenceData.state = document.querySelectorAll('h1')[0]?.textContent
     }
     else {
       presenceData.details = 'Reading Blog'

@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1320791530956652544',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/R/Royal%20Road/assets/logo.png',
 }
 
@@ -25,7 +27,7 @@ let oldLang: string | null = null
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     details: 'Unsupported page',
     smallImageKey: Assets.Viewing,
     smallImageText: 'Browsing on Royal Road',
@@ -68,7 +70,7 @@ presence.on('UpdateData', async () => {
   }`
   const genre = `${
     href.includes('genre=')
-      ? href.split('genre=')[1].toLocaleUpperCase()
+      ? href.split('genre=')[1]?.toLocaleUpperCase()
       : 'ALL'
   } Genre`
 
@@ -231,7 +233,7 @@ presence.on('UpdateData', async () => {
       .querySelector('img.thumbnail')
       ?.getAttribute('src')
     presenceData.smallImageText = 'Viewing on Royal Road'
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.buttons = [
       {
         label: 'Start Reading',
@@ -258,14 +260,14 @@ presence.on('UpdateData', async () => {
         ?.getAttribute('src')
         ?.includes('anon')
     ) {
-      presenceData.largeImageKey = Assets.Logo
+      presenceData.largeImageKey = ActivityAssets.Logo
     }
     else {
       presenceData.largeImageKey = document
         .querySelector('img.img-circle')
         ?.getAttribute('src')
     }
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = 'Viewing on Royal Road'
     presenceData.buttons = [
       {

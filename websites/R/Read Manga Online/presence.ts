@@ -1,16 +1,18 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '839455068855861248',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/R/Read%20Manga%20Online/assets/logo.png',
   Settings = 'https://cdn.rcd.gg/PreMiD/websites/R/Read%20Manga%20Online/assets/0.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href } = document.location
@@ -39,7 +41,7 @@ presence.on('UpdateData', async () => {
         presenceData.details = 'Looking at'
         presenceData.state = `Completed Manga on ${pathname
           .split('/')[2]
-          .toUpperCase()}`
+          ?.toUpperCase()}`
       }
       else if (
         pathname.startsWith('/manga-list')
@@ -48,11 +50,11 @@ presence.on('UpdateData', async () => {
         presenceData.details = 'Looking at'
         presenceData.state = `Ongoing Manga on ${pathname
           .split('/')[2]
-          .toUpperCase()}`
+          ?.toUpperCase()}`
       }
       else if (pathname.startsWith('/manga-list')) {
         presenceData.details = 'Viewing:'
-        presenceData.state = `Manga on ${pathname.split('/')[2].toUpperCase()}`
+        presenceData.state = `Manga on ${pathname.split('/')[2]?.toUpperCase()}`
       }
       else {
         switch (pathname) {
@@ -94,7 +96,7 @@ presence.on('UpdateData', async () => {
             }
             else if (pathname.startsWith('/category')) {
               presenceData.details = 'Browsing category:'
-              presenceData.state = pathname.split('/')[2].replace('-', ' ')
+              presenceData.state = pathname.split('/')[2]?.replace('-', ' ')
             }
             else if (pathname.endsWith('/all-pages')) {
               presenceData.details = document.querySelector('.page-title > a')?.textContent
@@ -111,7 +113,7 @@ presence.on('UpdateData', async () => {
             else if (pathname.startsWith('/user-panel')) {
               presenceData.details = 'Viewing their:'
               presenceData.state = document.querySelector('a.active')?.textContent
-              presenceData.smallImageKey = Assets.Settings
+              presenceData.smallImageKey = ActivityAssets.Settings
             }
         }
       }

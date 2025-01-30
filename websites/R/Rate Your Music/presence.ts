@@ -1,4 +1,4 @@
-const enum Assets {
+enum ActivityAssets {
   logo = 'https://cdn.rcd.gg/PreMiD/websites/R/Rate%20Your%20Music/assets/0.png',
 }
 
@@ -12,7 +12,7 @@ function updatePresence() {
     browsingTimestamp = Math.floor(Date.now() / 1000)
 
   let presenceData: PresenceData = {
-    largeImageKey: Assets.logo,
+    largeImageKey: ActivityAssets.logo,
     startTimestamp: browsingTimestamp,
   }
 

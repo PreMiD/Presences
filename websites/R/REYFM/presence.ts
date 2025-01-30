@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 interface Channel {
   id: string
   name: string
@@ -59,7 +61,7 @@ function findChannel(): string {
           !channel.className.includes('desktop')
           && (
             channel.firstElementChild?.children[2]
-              .firstElementChild as HTMLImageElement
+              ?.firstElementChild as HTMLImageElement
           )?.src.includes('stop.png')
         ) {
           return channel.firstElementChild?.id?.replace('channel-', '') ?? 'YOU FAILED'
@@ -79,7 +81,7 @@ setInterval(() => {
   newStats()
 }, 10_000)
 
-const enum Assets {
+enum ActivityAssets {
   WhiteBackSmall = 'https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/0.png',
   BlackBackSmall = 'https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/1.png',
   ColorBackSmall = 'https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/2.png',
@@ -102,18 +104,18 @@ presence.on('UpdateData', async () => {
     presence.getSetting<number>('logo'),
   ])
   const logoArr = [
-    Assets.WhiteBackSmall,
-    Assets.BlackBackSmall,
-    Assets.ColorBackSmall,
-    Assets.WhiteBack,
-    Assets.BlackBack,
-    Assets.ColorBack,
-    Assets.White,
-    Assets.Black,
-    Assets.Logo,
+    ActivityAssets.WhiteBackSmall,
+    ActivityAssets.BlackBackSmall,
+    ActivityAssets.ColorBackSmall,
+    ActivityAssets.WhiteBack,
+    ActivityAssets.BlackBack,
+    ActivityAssets.ColorBack,
+    ActivityAssets.White,
+    ActivityAssets.Black,
+    ActivityAssets.Logo,
   ]
   const presenceData: PresenceData = {
-    largeImageKey: logoArr[logo] || Assets.WhiteBackSmall,
+    largeImageKey: logoArr[logo] || ActivityAssets.WhiteBackSmall,
     smallImageKey: Assets.Reading,
   }
 

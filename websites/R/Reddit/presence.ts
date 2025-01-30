@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 enum PresenceClients {
   Reddit = '609183409440555018',
   RedditNetflix = '869992823854870588',
@@ -6,7 +8,7 @@ let presence = new Presence({ clientId: PresenceClients.Reddit })
 let strings: Awaited<ReturnType<typeof getStrings>>
 let oldLang: string | null = null
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/R/Reddit/assets/logo.png',
   NetflixLogo = 'https://i.imgur.com/Aw5rIOI\u002Egif',
 }
@@ -62,9 +64,9 @@ presence.on('UpdateData', async () => {
   const { href, pathname } = document.location
   const presenceData: PresenceData = {
     largeImageKey: !pathname.includes('/r/netflix')
-      ? Assets.Logo
-      : Assets.NetflixLogo,
-    smallImageKey: pathname.includes('/r/netflix') ? Assets.Logo : '',
+      ? ActivityAssets.Logo
+      : ActivityAssets.NetflixLogo,
+    smallImageKey: pathname.includes('/r/netflix') ? ActivityAssets.Logo : '',
     startTimestamp,
   }
 
@@ -72,13 +74,13 @@ presence.on('UpdateData', async () => {
     setClient(PresenceClients.RedditNetflix)
 
     containsNetflix = true
-    presenceData.largeImageKey = Assets.NetflixLogo
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.NetflixLogo
+    presenceData.smallImageKey = ActivityAssets.Logo
   }
   else if (!pathname.includes('/r/netflix') && containsNetflix) {
     setClient(PresenceClients.Reddit)
     containsNetflix = false
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
   }
 
   if (oldLang !== newLang || !strings) {

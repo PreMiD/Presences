@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '937350108780052571',
 })
@@ -42,7 +44,7 @@ presence.on('UpdateData', async () => {
           '#pair-selector .option.front',
         )
         presenceData.details = `Traduction de ${input?.value}`
-        presenceData.state = `${langLabel[0].textContent} → ${langLabel[1].textContent}`
+        presenceData.state = `${langLabel[0]?.textContent} → ${langLabel[1]?.textContent}`
       }
     }
     else if (hrefEn.includes('/spell-checker/')) {
@@ -93,7 +95,7 @@ presence.on('UpdateData', async () => {
         '.translation-language-header .translation-language-text',
       )
       presenceData.details = 'Traduction d\'un document en'
-      presenceData.state = `${langLabel[0].textContent} → ${langLabel[1].textContent}`
+      presenceData.state = `${langLabel[0]?.textContent} → ${langLabel[1]?.textContent}`
     }
     else if (hrefEnUrl.hostname === ('dictionary.reverso.net')) {
       if (document.location.pathname.startsWith('/CollabDict')) {

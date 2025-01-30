@@ -77,7 +77,7 @@ presence.on('UpdateData', async () => {
   }
   else if (loc.match(/profiles/)) {
     presenceData.details = await getStringFromSettings(presence, 'profile', {
-      name: loc.split('/')[loc.split('/').length - 1],
+      name: loc.split('/')[loc.split('/').length - 1]!,
     })
   }
   else if (loc.endsWith('dashboard')) {

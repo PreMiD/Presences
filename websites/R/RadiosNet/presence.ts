@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1221866611611402363',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum AssetsRadios {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/R/RadiosNet/assets/logo.png',
 }
 
@@ -11,7 +13,7 @@ const { pathname, href, search } = document.location
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: AssetsRadios.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 
@@ -105,8 +107,8 @@ presence.on('UpdateData', async () => {
   else if (pathname.includes('/busca')) {
     presenceData.details = `Buscando por "${search
       .split('=')[1]
-      .split('&')[0]
-      .replace('+', ' ')}"`
+      ?.split('&')[0]
+      ?.replace('+', ' ')}"`
 
     presenceData.smallImageKey = Assets.Search
   }

@@ -3,14 +3,14 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Info = 'https://cdn.rcd.gg/PreMiD/websites/R/Rate%20My%20Professors/assets/0.png',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/R/Rate%20My%20Professors/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname } = document.location
@@ -83,7 +83,7 @@ presence.on('UpdateData', async () => {
         .querySelector<HTMLDivElement>('[class*=\'NameTitle__Name\']')
         ?.textContent
         ?.trim()
-      presenceData.smallImageKey = Assets.Info
+      presenceData.smallImageKey = ActivityAssets.Info
       presenceData.smallImageText = `Quality: ${
         document.querySelector<HTMLDivElement>(
           '[class*=\'RatingValue__Numerator\']',
@@ -96,7 +96,7 @@ presence.on('UpdateData', async () => {
       presenceData.state = document.querySelector<HTMLDivElement>(
         '[class*=\'StyledTitleName\']',
       )?.textContent
-      presenceData.smallImageKey = Assets.Info
+      presenceData.smallImageKey = ActivityAssets.Info
       presenceData.smallImageText = `Quality: ${
         document.querySelector<HTMLDivElement>(
           '[class*=\'OverallRating__Number\']',

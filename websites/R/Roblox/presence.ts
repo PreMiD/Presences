@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '612416330003382314',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/logo.png',
   DeveloperLogo = 'https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/0.png',
   CreateLogo = 'https://cdn.rcd.gg/PreMiD/websites/R/Roblox/assets/1.png',
@@ -18,7 +20,7 @@ presence.on('UpdateData', async () => {
   ])
   const presenceData: PresenceData = {
     details: 'Unknown page',
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, hostname, href } = document.location
@@ -93,7 +95,7 @@ presence.on('UpdateData', async () => {
           presenceData.largeImageKey = document
             .querySelector('.avatar-card-link.avatar-image-link')
             ?.querySelector('img')
-            ?.getAttribute('src') ?? Assets.Logo
+            ?.getAttribute('src') ?? ActivityAssets.Logo
 
           presenceData.buttons = [
             {
@@ -145,7 +147,7 @@ presence.on('UpdateData', async () => {
             )?.textContent // Groupname
 
             presenceData.largeImageKey = document.querySelector<HTMLImageElement>('div.group-image img')
-              ?.src ?? Assets.Logo // Groupimage
+              ?.src ?? ActivityAssets.Logo // Groupimage
 
             presenceData.buttons = [
               {
@@ -184,7 +186,7 @@ presence.on('UpdateData', async () => {
           }`
           presenceData.largeImageKey = document
             .querySelector('[class*=\'carousel-item\'] > img')
-            ?.getAttribute('src') ?? Assets.Logo
+            ?.getAttribute('src') ?? ActivityAssets.Logo
 
           presenceData.buttons = [
             {
@@ -206,7 +208,7 @@ presence.on('UpdateData', async () => {
           }
           else if (itemImage) {
             presenceData.details = 'Looking at Catalog Item:'
-            presenceData.largeImageKey = itemImage?.src ?? Assets.Logo
+            presenceData.largeImageKey = itemImage?.src ?? ActivityAssets.Logo
             presenceData.state = item
 
             presenceData.buttons = [
@@ -243,7 +245,7 @@ presence.on('UpdateData', async () => {
         case pathname.includes('/bundles/'): {
           presenceData.details = 'Looking at Bundle:'
           presenceData.largeImageKey = document.querySelector<HTMLImageElement>('span.thumbnail-span img')
-            ?.src ?? Assets.Logo
+            ?.src ?? ActivityAssets.Logo
           presenceData.state = item
 
           presenceData.buttons = [
@@ -349,7 +351,7 @@ presence.on('UpdateData', async () => {
         case pathname.includes('/badges/'): {
           presenceData.details = 'Looking at Badge:'
           presenceData.largeImageKey = document.querySelector<HTMLImageElement>('span.thumbnail-span img')
-            ?.src ?? Assets.Logo
+            ?.src ?? ActivityAssets.Logo
           presenceData.state = item
 
           presenceData.buttons = [
@@ -363,7 +365,7 @@ presence.on('UpdateData', async () => {
         case pathname.includes('/library/'): {
           presenceData.details = 'Looking at Asset:'
           presenceData.largeImageKey = document.querySelector<HTMLImageElement>('span.thumbnail-span img')
-            ?.src ?? Assets.Logo
+            ?.src ?? ActivityAssets.Logo
           presenceData.state = item
 
           presenceData.buttons = [
@@ -377,7 +379,7 @@ presence.on('UpdateData', async () => {
         case pathname.includes('/game-pass/'): {
           presenceData.details = 'Looking at Gamepass:'
           presenceData.largeImageKey = document.querySelector<HTMLImageElement>('span.thumbnail-span img')
-            ?.src ?? Assets.Logo
+            ?.src ?? ActivityAssets.Logo
           presenceData.state = item
 
           presenceData.buttons = [
@@ -421,7 +423,7 @@ presence.on('UpdateData', async () => {
 
       presenceData.name = 'Roblox - DevForum'
       presenceData.details = 'Browsing through the forum'
-      presenceData.largeImageKey = Assets.DeveloperLogo
+      presenceData.largeImageKey = ActivityAssets.DeveloperLogo
       devImage = true
 
       switch (true) {
@@ -481,7 +483,7 @@ presence.on('UpdateData', async () => {
           const user = document.querySelector('.username')?.textContent
           presenceData.state = `Browsing ${user}'s Profile`
           presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.user-profile-avatar img')
-            ?.src ?? Assets.DeveloperLogo
+            ?.src ?? ActivityAssets.DeveloperLogo
           devImage = true
           presenceData.buttons = [
             {
@@ -568,7 +570,7 @@ presence.on('UpdateData', async () => {
 
     case 'create.roblox.com': {
       presenceData.name = 'Roblox - Create'
-      presenceData.largeImageKey = Assets.CreateLogo
+      presenceData.largeImageKey = ActivityAssets.CreateLogo
       const search = document.querySelector('#search-text-field')
       switch (true) {
         case pathname === '/landing': {
@@ -702,26 +704,26 @@ presence.on('UpdateData', async () => {
     delete presenceData.buttons
   if (
     !imagesEnabled
-    && presenceData.largeImageKey !== Assets.Logo
+    && presenceData.largeImageKey !== ActivityAssets.Logo
     && !devImage
-    && hostname !== 'create.roblox.com' // ImagesEnabled setting off & The largeimagekey isnt Assets.Logo & & Its NOT somewhere that uses the devimage
+    && hostname !== 'create.roblox.com' // ImagesEnabled setting off & The largeimagekey isnt ActivityAssets.Logo & & Its NOT somewhere that uses the devimage
   ) {
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
   }
   else if (
     !imagesEnabled
-    && presenceData.largeImageKey !== Assets.DeveloperLogo
+    && presenceData.largeImageKey !== ActivityAssets.DeveloperLogo
     && devImage // ImagesEnabled setting off & The largeimagekey isnt Assets.DeveloperLogo & Its somewhere that uses the devimage
   ) {
-    presenceData.largeImageKey = Assets.DeveloperLogo
+    presenceData.largeImageKey = ActivityAssets.DeveloperLogo
   }
   else if (
     !imagesEnabled
-    && presenceData.largeImageKey !== Assets.CreateLogo
+    && presenceData.largeImageKey !== ActivityAssets.CreateLogo
     && !devImage
     && hostname === 'create.roblox.com'
   ) {
-    presenceData.largeImageKey = Assets.CreateLogo
+    presenceData.largeImageKey = ActivityAssets.CreateLogo
   }
 
   if (onlyDevForums && !hostname.includes('devforum'))

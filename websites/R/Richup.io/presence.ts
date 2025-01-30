@@ -47,7 +47,7 @@ presence.on('UpdateData', async () => {
         .filter(Boolean)
 
       /* Replace room ID */
-      latestInfo = latestInfo.replace(pathname.split('/')[2], '')
+      latestInfo = latestInfo.replace(pathname.split('/')[2]!, '')
 
       /* Replace player names */
       for (const player of players)

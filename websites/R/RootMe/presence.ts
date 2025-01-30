@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '673322920809988120',
 })
@@ -9,14 +11,14 @@ function parseQueryString(queryString?: string): { [key: string]: string } {
   const queries = queryString.split('&')
   for (const indexQuery of queries) {
     const indexPair = indexQuery.split('=')
-    params[decodeURIComponent(indexPair[0])] = decodeURIComponent(
-      indexPair.length > 1 ? indexPair[1] : '',
+    params[decodeURIComponent(indexPair[0]!)] = decodeURIComponent(
+      indexPair.length > 1 ? indexPair[1]! : '',
     )
   }
   return params
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/R/RootMe/assets/logo.png',
   Ctf = 'https://cdn.rcd.gg/PreMiD/websites/R/RootMe/assets/0.png',
   Chall = 'https://cdn.rcd.gg/PreMiD/websites/R/RootMe/assets/1.png',
@@ -28,7 +30,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const route = document.location.pathname.split('/')
 
@@ -86,7 +88,7 @@ presence.on('UpdateData', async () => {
     }
   }
   else if (document.location.pathname.includes('/Challenges/')) {
-    presenceData.smallImageKey = Assets.Chall
+    presenceData.smallImageKey = ActivityAssets.Chall
     presenceData.smallImageText = 'Challenges'
     presenceData.details = route[3]
       ? `${route[2]} - ${route[3].replaceAll('-', ' ')}`
@@ -96,11 +98,11 @@ presence.on('UpdateData', async () => {
       : document.querySelector('.crayon')?.textContent
   }
   else if (document.location.pathname.includes('/Capture-The-Flag/')) {
-    presenceData.smallImageKey = Assets.Ctf
+    presenceData.smallImageKey = ActivityAssets.Ctf
     presenceData.smallImageText = 'Capture The Flag'
     presenceData.details = route[3]
-      ? `${route[2].replaceAll('-', ' ')} - ${route[3].replaceAll('-', ' ')}`
-      : route[2].replaceAll('-', ' ')
+      ? `${route[2]?.replaceAll('-', ' ')} - ${route[3].replaceAll('-', ' ')}`
+      : route[2]?.replaceAll('-', ' ')
     presenceData.state = 'Navigating...'
   }
   else if (
@@ -108,7 +110,7 @@ presence.on('UpdateData', async () => {
     || document.location.pathname.includes('/Comunidad/')
     || document.location.pathname.includes('/Community/')
   ) {
-    presenceData.smallImageKey = Assets.Commu
+    presenceData.smallImageKey = ActivityAssets.Commu
     presenceData.smallImageText = 'Communaute'
     presenceData.details = route[3]
       ? `${route[2]} - ${route[3].replaceAll('-', ' ')}`
@@ -121,7 +123,7 @@ presence.on('UpdateData', async () => {
     || document.location.pathname.includes('/Documentacion/')
     || document.location.pathname.includes('/Docs/')
   ) {
-    presenceData.smallImageKey = Assets.Docu
+    presenceData.smallImageKey = ActivityAssets.Docu
     presenceData.smallImageText = 'Documentation'
     if (route[3] !== 'Reseaux') {
       presenceData.details = route[3]
@@ -145,7 +147,7 @@ presence.on('UpdateData', async () => {
     || document.location.pathname.includes('/Information/')
     || document.location.pathname.includes('/Info/')
   ) {
-    presenceData.smallImageKey = Assets.Infos
+    presenceData.smallImageKey = ActivityAssets.Infos
     presenceData.smallImageText = 'Informations'
     presenceData.details = `${route[2]}`
     presenceData.state = !route[3]
@@ -157,7 +159,7 @@ presence.on('UpdateData', async () => {
     || document.location.pathname.includes('/Herramientas/')
     || document.location.pathname.includes('/Outils/')
   ) {
-    presenceData.smallImageKey = Assets.Tools
+    presenceData.smallImageKey = ActivityAssets.Tools
     presenceData.smallImageText = 'Tools'
     presenceData.details = route[3]
       ? `${route[2]} - ${route[3].replaceAll('-', ' ')}`

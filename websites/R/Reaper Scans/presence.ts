@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '900717839713959967',
 })
 const elapsed = Math.floor(Date.now() / 1e3)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/R/Reaper%20Scans/assets/logo.png',
 }
 
@@ -15,7 +17,7 @@ presence.on('UpdateData', () => {
   const { pathname, href } = window.location
   const presenceData: PresenceData = {
     startTimestamp: elapsed,
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const pathSplit = pathname.split('/').slice(1)
 
@@ -34,9 +36,9 @@ presence.on('UpdateData', () => {
     }
     case 'comics':
     case 'novels': {
-      const captitalizedPath = capitalize(pathSplit[0]).slice(
+      const captitalizedPath = capitalize(pathSplit[0]!).slice(
         0,
-        pathSplit[0].length - 1,
+        pathSplit[0]!.length - 1,
       )
       if (pathSplit[1]) {
         if (pathSplit[2] === 'chapters') {
@@ -91,7 +93,7 @@ presence.on('UpdateData', () => {
       break
     }
     case 'latest': {
-      presenceData.details = `Browsing Latest ${capitalize(pathSplit[1])}`
+      presenceData.details = `Browsing Latest ${capitalize(pathSplit[1]!)}`
       break
     }
     case 'account': {

@@ -21,27 +21,27 @@ presence.on('UpdateData', async () => {
       if (pathname.includes('/grades')) {
         const grade = pathname.match(/\/grades\/(\d+)/)
         if (grade)
-          presenceData.state = `Grade ${Number.parseInt(grade[1])} kanji`
+          presenceData.state = `Grade ${Number.parseInt(grade[1]!)} kanji`
       }
       else if (pathname.includes('/jlpt')) {
         const jlptlevel = pathname.match(/\/jlpt\/(\d+)/)
         if (jlptlevel)
-          presenceData.state = `JLPT N${Number.parseInt(jlptlevel[1])} kanji`
+          presenceData.state = `JLPT N${Number.parseInt(jlptlevel[1]!)} kanji`
       }
       else if (pathname.includes('/genki')) {
         const genkilesson = pathname.match(/\/genki\/(\d+)/)
         if (genkilesson)
-          presenceData.state = `Genki lesson ${Number.parseInt(genkilesson[1])} kanji`
+          presenceData.state = `Genki lesson ${Number.parseInt(genkilesson[1]!)} kanji`
       }
       else if (pathname.includes('/rtk')) {
         const rtklesson = pathname.match(/\/rtk\/(\d+)/)
         if (rtklesson)
-          presenceData.state = `RTK lesson ${Number.parseInt(rtklesson[1])} kanji`
+          presenceData.state = `RTK lesson ${Number.parseInt(rtklesson[1]!)} kanji`
       }
       else if (pathname.includes('/wk')) {
         const wklevel = pathname.match(/\/wk\/(\d+)/)
         if (wklevel)
-          presenceData.state = `Wanikani level ${Number.parseInt(wklevel[1])} kanji`
+          presenceData.state = `Wanikani level ${Number.parseInt(wklevel[1]!)} kanji`
       }
       else {
         delete presenceData.state
@@ -57,15 +57,15 @@ presence.on('UpdateData', async () => {
     if (pathname.includes('/jlpt/')) {
       const jlptdetails = pathname.match(/\/jlpt\/(\d+)\/(\d+)/)
       if (jlptdetails) {
-        presenceData.state = `JLPT N${Number.parseInt(jlptdetails[1])} page ${Number.parseInt(
-          jlptdetails[2],
+        presenceData.state = `JLPT N${Number.parseInt(jlptdetails[1]!)} page ${Number.parseInt(
+          jlptdetails[2]!,
         )}`
       }
     }
     else if (pathname.includes('/genki')) {
       const genkilesson = pathname.match(/\/genki\/(\d+)/)
       if (genkilesson)
-        presenceData.state = `Genki lesson ${Number.parseInt(genkilesson[1])}`
+        presenceData.state = `Genki lesson ${Number.parseInt(genkilesson[1]!)}`
     }
     else if (pathname.includes('/unit')) {
       const unitname = document.querySelector('#vocabulary-unit h2')

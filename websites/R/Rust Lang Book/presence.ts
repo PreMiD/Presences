@@ -28,7 +28,7 @@ presence.on('UpdateData', async () => {
       path.replace('ch', '').split('-')[0]
     }`
     if (path.split('-')[1] === '00')
-      presenceData.state = document.querySelectorAll('h1')[1].textContent
+      presenceData.state = document.querySelectorAll('h1')[1]?.textContent
     else presenceData.state = document.querySelector('h2')?.textContent
   }
   else if (path.startsWith('appendix')) {
@@ -36,7 +36,7 @@ presence.on('UpdateData', async () => {
       path.replace('appendix', '').split('-')[0]
     }`
     if (path.split('-')[1] === '00')
-      presenceData.state = document.querySelectorAll('h1')[1].textContent
+      presenceData.state = document.querySelectorAll('h1')[1]?.textContent
     else presenceData.state = document.querySelector('h2')?.textContent
   }
 

@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '748698437720997888',
 })
@@ -93,20 +95,20 @@ presence.on('UpdateData', async () => {
 
         switch (timeArray.length) {
           case 3: {
-            podcastDuration = Number.parseInt(timeArray[2])
-              + Number.parseInt(timeArray[1].replace('-', '')) * 60
-              + Number.parseInt(timeArray[0].replace('-', '')) * 60 * 60
+            podcastDuration = Number.parseInt(timeArray[2]!)
+              + Number.parseInt(timeArray[1]!.replace('-', '')) * 60
+              + Number.parseInt(timeArray[0]!.replace('-', '')) * 60 * 60
 
             break
           }
           case 2: {
-            podcastDuration = Number.parseInt(timeArray[1])
-              + Number.parseInt(timeArray[0].replace('-', '')) * 60
+            podcastDuration = Number.parseInt(timeArray[1]!)
+              + Number.parseInt(timeArray[0]!.replace('-', '')) * 60
 
             break
           }
           case 1: {
-            podcastDuration = Number.parseInt(timeArray[1])
+            podcastDuration = Number.parseInt(timeArray[1]!)
             break
           }
         }
@@ -140,12 +142,12 @@ presence.on('UpdateData', async () => {
     const presenter = document.querySelector('.show_time')?.textContent
 
     presenceData.details = format1
-      .replace('%title%', title)
-      .replace('%artist%', artist)
+      .replace('%title%', title ?? '')
+      .replace('%artist%', artist ?? '')
       .replace('%presenter%', presenter ?? '')
     presenceData.state = format2
-      .replace('%title%', title)
-      .replace('%artist%', artist)
+      .replace('%title%', title ?? '')
+      .replace('%artist%', artist ?? '')
       .replace('%presenter%', presenter ?? '')
 
     if (document.querySelector('#message > div')) {

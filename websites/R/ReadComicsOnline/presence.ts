@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '868465354014359672',
 })
@@ -90,7 +92,7 @@ presence.on('UpdateData', async () => {
         else if (include.length > 0) {
           setCookie(
             'PMD_searchQuery',
-            `Searching for Genre: ${include[0].textContent} ${
+            `Searching for Genre: ${include[0]?.textContent} ${
               include.length > 1 ? `and ${include.length - 1} more` : ''
             }`,
             1,
@@ -99,7 +101,7 @@ presence.on('UpdateData', async () => {
         else if (exclude.length > 0) {
           setCookie(
             'PMD_searchQuery',
-            `Searching for all Genres except: ${exclude[0].textContent} ${
+            `Searching for all Genres except: ${exclude[0]?.textContent} ${
               exclude.length > 1 ? `and ${exclude.length - 1} more` : ''
             }`,
             1,
@@ -108,7 +110,7 @@ presence.on('UpdateData', async () => {
         else if (status) {
           setCookie(
             'PMD_searchQuery',
-            `Looking for: ${status.selectedOptions[0].textContent} comics`,
+            `Looking for: ${status.selectedOptions[0]?.textContent} comics`,
             1,
           )
         }
@@ -144,10 +146,10 @@ presence.on('UpdateData', async () => {
             )
             presenceData.smallImageKey = Assets.Reading
             if (episode) {
-              presenceData.state = episode.selectedOptions[0].textContent?.trim()
+              presenceData.state = episode.selectedOptions[0]?.textContent?.trim()
             }
             if (page)
-              presenceData.state += `, Page: ${page.selectedOptions[0].textContent?.trim()}`
+              presenceData.state += `, Page: ${page.selectedOptions[0]?.textContent?.trim()}`
             if (buttons) {
               presenceData.buttons = [
                 {

@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '736620343279484959',
 })
@@ -42,7 +44,7 @@ presence.on('UpdateData', async () => {
     // If play
     if (document.querySelector('.icon--play-02')?.classList.contains('on')) {
       // This logic make timestamp can't changed.
-      if (codeChannel !== radioStation) {
+      if (codeChannel && codeChannel !== radioStation) {
         radioStation = codeChannel
         startTimeStamp = Date.now()
       }

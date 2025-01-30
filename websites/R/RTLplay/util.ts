@@ -1,3 +1,5 @@
+import { ActivityType } from 'premid'
+
 export const stringsMap = {
   play: 'general.playing',
   pause: 'general.paused',
@@ -78,7 +80,7 @@ export function getAdditionnalStrings(
   return strings
 }
 
-export const enum LargeAssets {
+export enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/logo.png',
   Animated = 'https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/0.gif',
   Deferred = 'https://cdn.rcd.gg/PreMiD/websites/R/RTLplay/assets/1.gif',
@@ -102,17 +104,17 @@ export const enum LargeAssets {
 export function getLocalizedAssets(
   lang: string,
   assetName: string,
-): LargeAssets {
+): ActivityAssets {
   switch (assetName) {
     case 'Ad':
       switch (lang) {
         case 'fr-FR':
-          return LargeAssets.AdFr
+          return ActivityAssets.AdFr
         default:
-          return LargeAssets.AdEn
+          return ActivityAssets.AdEn
       }
     default:
-      return LargeAssets.Binoculars // Default fallback
+      return ActivityAssets.Binoculars // Default fallback
   }
 }
 
@@ -141,7 +143,7 @@ export function exist(selector: string): boolean {
 interface ChannelInfo {
   channel: string
   type: ActivityType
-  logo: LargeAssets
+  logo: ActivityAssets
   radioplayerAPI?: string // Optional property
 }
 
@@ -151,35 +153,35 @@ export function getChannel(channel: string): ChannelInfo {
       return {
         channel: 'RTL TVi',
         type: ActivityType.Watching,
-        logo: LargeAssets.RTLTVi,
+        logo: ActivityAssets.RTLTVi,
       }
     }
     case channel.includes('club'): {
       return {
         channel: 'RTL club',
         type: ActivityType.Watching,
-        logo: LargeAssets.RTLClub,
+        logo: ActivityAssets.RTLClub,
       }
     }
     case channel.includes('plug'): {
       return {
         channel: 'RTL plug',
         type: ActivityType.Watching,
-        logo: LargeAssets.RTLPlug,
+        logo: ActivityAssets.RTLPlug,
       }
     }
     case ['rtlplay', 'district'].includes(channel): {
       return {
         channel: 'RTL district',
         type: ActivityType.Watching,
-        logo: LargeAssets.RTLDistrict,
+        logo: ActivityAssets.RTLDistrict,
       }
     }
     case ['bel', 'www.belrtl.be'].includes(channel): {
       return {
         channel: 'Bel RTL',
         type: ActivityType.Listening,
-        logo: LargeAssets.BelRTL,
+        logo: ActivityAssets.BelRTL,
         radioplayerAPI: 'https://core-search.radioplayer.cloud/056/qp/v4/events/?rpId=6',
       }
     }
@@ -187,7 +189,7 @@ export function getChannel(channel: string): ChannelInfo {
       return {
         channel: 'Radio Contact',
         type: ActivityType.Listening,
-        logo: LargeAssets.Contact,
+        logo: ActivityAssets.Contact,
         radioplayerAPI: 'https://core-search.radioplayer.cloud/056/qp/v4/events/?rpId=1',
       }
     }
@@ -195,14 +197,14 @@ export function getChannel(channel: string): ChannelInfo {
       return {
         channel: 'RTL sports',
         type: ActivityType.Watching,
-        logo: LargeAssets.RTLSports,
+        logo: ActivityAssets.RTLSports,
       }
     }
     default: {
       return {
         channel,
         type: ActivityType.Watching,
-        logo: LargeAssets.RTLPlay,
+        logo: ActivityAssets.RTLPlay,
       }
     }
   }
@@ -218,7 +220,7 @@ export const cropPreset = {
 }
 
 export async function getThumbnail(
-  src: string = LargeAssets.Logo,
+  src: string = ActivityAssets.Logo,
   cropPercentages: typeof cropPreset.squared = cropPreset.squared,
   progress = 2,
   borderWidth = 15,
@@ -241,16 +243,16 @@ export async function getThumbnail(
 
       if (isLandscape) {
         // Landscape mode: use left and right crop percentages
-        const cropLeft = img.width * cropPercentages[0]
-        croppedWidth = img.width - cropLeft - img.width * cropPercentages[1]
+        const cropLeft = img.width * cropPercentages[0]!
+        croppedWidth = img.width - cropLeft - img.width * cropPercentages[1]!
         croppedHeight = img.height
         cropX = cropLeft
       }
       else {
         // Portrait mode: use top and bottom crop percentages
-        const cropTop = img.height * cropPercentages[2]
+        const cropTop = img.height * cropPercentages[2]!
         croppedWidth = img.width
-        croppedHeight = img.height - cropTop - img.height * cropPercentages[3]
+        croppedHeight = img.height - cropTop - img.height * cropPercentages[3]!
         cropY = cropTop
       }
 
