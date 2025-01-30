@@ -56,10 +56,10 @@ presence.on('UpdateData', async () => {
   else if (path.includes('/featured/')) {
     let featuredFonts
     if (document.querySelectorAll('.gmat-headline-1')[0]) {
-      featuredFonts = document.querySelectorAll('.gmat-headline-1')[0].textContent
+      featuredFonts = document.querySelectorAll('.gmat-headline-1')[0]?.textContent
     }
     else if (!document.querySelectorAll('.gmat-headline-1')[0]) {
-      featuredFonts = document.querySelectorAll('.gmat-headline-4')[0].textContent
+      featuredFonts = document.querySelectorAll('.gmat-headline-4')[0]?.textContent
     }
     presenceData.details = 'Looking at a featured font:'
     presenceData.state = featuredFonts

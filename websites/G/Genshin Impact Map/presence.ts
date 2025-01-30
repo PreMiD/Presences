@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '973729201104511007',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   EmblemMondstadt = 'https://cdn.rcd.gg/PreMiD/websites/G/Genshin%20Impact%20Map/assets/1.png',
   EmblemLiyue = 'https://cdn.rcd.gg/PreMiD/websites/G/Genshin%20Impact%20Map/assets/2.png',
   EmblemInazuma = 'https://cdn.rcd.gg/PreMiD/websites/G/Genshin%20Impact%20Map/assets/3.png',
@@ -55,18 +57,18 @@ const map: Maps[] = [
     map: 'Teyvat',
     city: true,
     image: {
-      small: Assets.EmblemUnknown,
-      default: Assets.TeyvatMap,
-      preview: Assets.TeyvatMap,
+      small: ActivityAssets.EmblemUnknown,
+      default: ActivityAssets.TeyvatMap,
+      preview: ActivityAssets.TeyvatMap,
     },
   },
   {
     id: 7,
     map: 'Enkanomiya',
     image: {
-      small: Assets.EmblemEnkanomiya,
-      default: Assets.EnkanomiyaMap,
-      preview: Assets.PreviewEnkanomiya,
+      small: ActivityAssets.EmblemEnkanomiya,
+      default: ActivityAssets.EnkanomiyaMap,
+      preview: ActivityAssets.PreviewEnkanomiya,
     },
   },
   {
@@ -74,9 +76,9 @@ const map: Maps[] = [
     map: 'The Chasm: Underground Mines',
     key: ['chasm', 'the-chasm-underground'],
     image: {
-      small: Assets.EmblemThechasm,
-      default: Assets.TheChasmUndergroundMinesMap,
-      preview: Assets.PreviewTheChasmUndergroundMines,
+      small: ActivityAssets.EmblemThechasm,
+      default: ActivityAssets.TheChasmUndergroundMinesMap,
+      preview: ActivityAssets.PreviewTheChasmUndergroundMines,
     },
   },
   {
@@ -86,9 +88,9 @@ const map: Maps[] = [
     map: 'Golden Apple Archipelago',
     key: ['isles', 'golden-apple-archipelago-2-8'],
     image: {
-      small: Assets.EmblemIsles,
-      default: Assets.GoldenAppleArchipelagoMap28,
-      preview: Assets.PreviewGoldenAppleArchipelago28,
+      small: ActivityAssets.EmblemIsles,
+      default: ActivityAssets.GoldenAppleArchipelagoMap28,
+      preview: ActivityAssets.PreviewGoldenAppleArchipelago28,
     },
     starting: 1657854000, // Fri, 15 Jul 2022 03:00 GMT
     ending: 1661295600, // Wed, 24 Aug 2022 23:00 GMT
@@ -97,8 +99,8 @@ const map: Maps[] = [
     id: 0,
     map: 'Unknown',
     image: {
-      small: Assets.EmblemUnknown,
-      default: Assets.EmblemUnknown,
+      small: ActivityAssets.EmblemUnknown,
+      default: ActivityAssets.EmblemUnknown,
     },
   },
 ]
@@ -107,36 +109,36 @@ const city: City[] = [
     position: 1200,
     map: 'Mondstadt',
     image: {
-      small: Assets.EmblemMondstadt,
-      default: Assets.PreviewMondstadt,
-      preview: Assets.PreviewMondstadt,
+      small: ActivityAssets.EmblemMondstadt,
+      default: ActivityAssets.PreviewMondstadt,
+      preview: ActivityAssets.PreviewMondstadt,
     },
   },
   {
     position: 2500,
     map: 'Liyue',
     image: {
-      small: Assets.EmblemLiyue,
-      default: Assets.PreviewLiyue,
-      preview: Assets.PreviewLiyue,
+      small: ActivityAssets.EmblemLiyue,
+      default: ActivityAssets.PreviewLiyue,
+      preview: ActivityAssets.PreviewLiyue,
     },
   },
   {
     position: 5000,
     map: 'Sumeru',
     image: {
-      small: Assets.EmblemSumeru,
-      default: Assets.PreviewSumeru,
-      preview: [Assets.PreviewSumeru, Assets.PreviewSumeru2],
+      small: ActivityAssets.EmblemSumeru,
+      default: ActivityAssets.PreviewSumeru,
+      preview: [ActivityAssets.PreviewSumeru, ActivityAssets.PreviewSumeru2],
     },
   },
   {
     position: 9000,
     map: 'Inazuma',
     image: {
-      small: Assets.EmblemInazuma,
-      default: Assets.PreviewTenshukaku,
-      preview: Assets.PreviewTenshukaku,
+      small: ActivityAssets.EmblemInazuma,
+      default: ActivityAssets.PreviewTenshukaku,
+      preview: ActivityAssets.PreviewTenshukaku,
     },
   },
 ]
@@ -155,7 +157,7 @@ presence.on('UpdateData', async () => {
   ])
   const presenceData: PresenceData = {
     details: 'Genshin Impact Map',
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     smallImageKey: Assets.Search,
     startTimestamp: browsingTimestamp,
   }
@@ -177,7 +179,7 @@ presence.on('UpdateData', async () => {
     case 'mapgenie.io':
       current = map.find(
         i =>
-          i.key?.includes(pathname?.split('/maps/')[1]?.toLowerCase())
+          i.key?.includes(pathname?.split('/maps/')[1]?.toLowerCase() ?? '')
           ?? i.map
             .toLowerCase()
             .includes(pathname?.split('/maps/')[1]?.toLowerCase() || 'teyvat'),
@@ -187,7 +189,7 @@ presence.on('UpdateData', async () => {
       if (pathname.includes('signin-sea'))
         return
       current = map.find(
-        i => i.id === (Number.parseInt(hash?.split('/map/')[1]?.split('?')[0]) || 2),
+        i => i.id === (Number.parseInt(hash?.split('/map/')[1]?.split('?')[0] ?? '') || 2),
       )!
       getPosition = Number.parseInt(new URLSearchParams(hash).get('center') ?? '')
       if (current?.city)
@@ -208,7 +210,7 @@ presence.on('UpdateData', async () => {
       current.starting < Date.now() / 1000 && current.ending > Date.now() / 1000
     )
   ) {
-    current = map[0]
+    current = map[0]!
   }
   else if (
     (current.starting && current.ending)
@@ -216,7 +218,7 @@ presence.on('UpdateData', async () => {
       current.starting < Date.now() / 1000 || current.ending > Date.now() / 1000
     )
   ) {
-    current = map[0]
+    current = map[0]!
   }
   presenceData.details = current.map
   presenceData.state = current.city && currentCity ? currentCity.map : null

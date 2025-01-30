@@ -28,7 +28,7 @@ async function getStrings() {
 let strings: Awaited<ReturnType<typeof getStrings>>
 let oldLang: string | null = null
 
-const enum Assets {
+enum ActivityAssets {
   DocsLogo = 'https://cdn.rcd.gg/PreMiD/websites/G/Google%20Docs/assets/0.png',
   FormsLogo = 'https://cdn.rcd.gg/PreMiD/websites/G/Google%20Docs/assets/1.png',
   SheetsLogo = 'https://cdn.rcd.gg/PreMiD/websites/G/Google%20Docs/assets/2.png',
@@ -54,7 +54,7 @@ presence.on('UpdateData', async () => {
     .replace('- Google Slides', '')
 
   if (document.location.pathname.includes('/document')) {
-    presenceData.largeImageKey = Assets.DocsLogo
+    presenceData.largeImageKey = ActivityAssets.DocsLogo
     if (document.location.pathname.includes('/edit'))
       presenceData.details = strings.editingDoc
     else if (document.location.pathname.includes('/document/u/'))
@@ -62,7 +62,7 @@ presence.on('UpdateData', async () => {
     else presenceData.details = strings.viewingDoc
   }
   else if (document.location.pathname.includes('/forms/')) {
-    presenceData.largeImageKey = Assets.FormsLogo
+    presenceData.largeImageKey = ActivityAssets.FormsLogo
     if (document.location.pathname.includes('/edit'))
       presenceData.details = strings.editingForm
     else if (document.location.pathname.includes('/forms/u/'))
@@ -70,7 +70,7 @@ presence.on('UpdateData', async () => {
     else presenceData.details = strings.viewingForm
   }
   else if (document.location.pathname.includes('/spreadsheets')) {
-    presenceData.largeImageKey = Assets.SheetsLogo
+    presenceData.largeImageKey = ActivityAssets.SheetsLogo
     if (document.location.pathname.includes('/edit'))
       presenceData.details = strings.editingSheet
     else if (document.location.pathname.includes('/spreadsheets/u/'))
@@ -78,7 +78,7 @@ presence.on('UpdateData', async () => {
     else presenceData.details = strings.viewingSheet
   }
   else if (document.location.pathname.includes('/presentation/')) {
-    presenceData.largeImageKey = Assets.SlidesLogo
+    presenceData.largeImageKey = ActivityAssets.SlidesLogo
     if (document.location.pathname.includes('/edit'))
       presenceData.details = strings.editingPresentation
     else if (document.location.pathname.includes('/presentation/u/'))

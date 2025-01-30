@@ -137,14 +137,14 @@ presence.on('UpdateData', async () => {
             }
             case 'category': {
               let msg = 'Browsing for apps'
-              if (paths[3].startsWith('GAME_')) {
-                msg = `Browsing for ${paths[3]
+              if (paths[3]!.startsWith('GAME_')) {
+                msg = `Browsing for ${paths[3]!
                   .replace('GAME_', '')
                   .replace('_', ' ')
                   .toLowerCase()} games`
               }
-              if (appCategories[paths[3]])
-                msg = appCategories[paths[3]]
+              if (appCategories[paths[3]!])
+                msg = appCategories[paths[3]!]!
               if (paths[3] === 'GAME')
                 msg = 'Browsing for games'
 

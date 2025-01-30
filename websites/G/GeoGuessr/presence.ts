@@ -143,7 +143,7 @@ function resetData(defaultData: PresenceData = {
                 'badges': 'Badges',
                 'maps': 'My maps',
                 'map-maker': 'Map Maker',
-              }[currentURL.pathname.split('/')[2]]
+              }[currentURL.pathname.split('/')[2]!]
             }
 
             break

@@ -1,15 +1,17 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '928868301105426463',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/G/GG%20App/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const path = document.location.pathname
@@ -33,7 +35,7 @@ presence.on('UpdateData', async () => {
       presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
         '#root > div > div.css-1dbjc4n > div > div > div > div.css-1dbjc4n > img',
       )?.src
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
     }
     presenceData.buttons = [{ label: 'View Game', url: document.URL }]
   }
@@ -63,7 +65,7 @@ presence.on('UpdateData', async () => {
       presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
         '#root > div > div.css-1dbjc4n > div > div:nth-child(3) > div.w-full > div > div > a > img',
       )?.src
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
     }
   }
   else if (path.includes('/games/')) {
@@ -108,7 +110,7 @@ presence.on('UpdateData', async () => {
       presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
         '#root > div > div.css-1dbjc4n > div > div > div > div > a > img',
       )?.src
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
     }
     presenceData.buttons = [{ label: 'Read Review', url: document.URL }]
   }
@@ -128,7 +130,7 @@ presence.on('UpdateData', async () => {
       presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
         '#root > div > div.css-1dbjc4n > div > div > div.w-full > div > div > a > img',
       )?.src
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
     }
     presenceData.buttons = [{ label: 'View Lists', url: document.URL }]
   }

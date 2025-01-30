@@ -74,7 +74,7 @@ presence.on('UpdateData', async () => {
           .querySelector('span.p-nickname')
           ?.textContent
           ?.split('·')[0]
-          .trim()
+          ?.trim()
         presenceData.buttons = [{ label: 'View Profile', url: href }]
         if (cover) {
           presenceData.largeImageKey = `${

@@ -26,7 +26,7 @@ presence.on('UpdateData', async () => {
       }
 
       presenceData.details = `Viewing ${lettersOnly(
-        place.substring(indexes[4] + 1, indexes[5]),
+        place.substring(indexes[4]! + 1, indexes[5]),
       )}`
       presenceData.buttons = [
         { label: 'View Place', url: document.location.href },
@@ -75,7 +75,7 @@ presence.on('UpdateData', async () => {
       }
 
       presenceData.details = `Searching for ${lettersOnly(
-        search.substring(indexes[4] + 1, indexes[5]),
+        search.substring(indexes[4]! + 1, indexes[5]),
       )}`
     }
   }

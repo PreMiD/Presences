@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 /**
  * Google's Coding Competitions = 848587645760176148
  * Google Kick Start = 848588920437604382
@@ -21,7 +23,7 @@ const timeElapsed: number = ~~(Date.now() / 1000)
 
 setPresence()
 
-const enum Assets {
+enum ActivityAssets {
   Kickstart = 'https://cdn.rcd.gg/PreMiD/websites/G/Google\'s%20Coding%20Competitions/assets/0.png',
   Codejam = 'https://cdn.rcd.gg/PreMiD/websites/G/Google\'s%20Coding%20Competitions/assets/1.png',
   Hashcode = 'https://cdn.rcd.gg/PreMiD/websites/G/Google\'s%20Coding%20Competitions/assets/2.png',
@@ -36,7 +38,7 @@ presence?.on('UpdateData', async () => {
 
   switch (location.pathname.split('/')[1]) {
     case 'kickstart': {
-      presenceData.largeImageKey = Assets.Kickstart
+      presenceData.largeImageKey = ActivityAssets.Kickstart
 
       switch (location.pathname.split('/')[2]) {
         case 'about': {
@@ -114,7 +116,7 @@ presence?.on('UpdateData', async () => {
     }
 
     case 'codejam': {
-      presenceData.largeImageKey = Assets.Codejam
+      presenceData.largeImageKey = ActivityAssets.Codejam
 
       switch (location.pathname.split('/')[2]) {
         case 'about': {
@@ -192,7 +194,7 @@ presence?.on('UpdateData', async () => {
     }
 
     case 'hashcode': {
-      presenceData.largeImageKey = Assets.Hashcode
+      presenceData.largeImageKey = ActivityAssets.Hashcode
 
       switch (location.pathname.split('/')[2]) {
         case 'about': {

@@ -512,8 +512,8 @@ presence.on('UpdateData', async () => {
 
       presenceData.details = 'Contributing'
       presenceData.state = `${languageCode(
-        langs?.[1].replaceAll('"', '') ?? '',
-      )} → ${languageCode(langs?.[2].replaceAll('"', '') ?? '')}: ${contr?.textContent ?? ''}`
+        langs?.[1]?.replaceAll('"', '') ?? '',
+      )} → ${languageCode(langs?.[2]?.replaceAll('"', '') ?? '')}: ${contr?.textContent ?? ''}`
     }
   }
   else {

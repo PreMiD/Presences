@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '641394369651277834',
 })
@@ -7,7 +9,7 @@ const strings = presence.getStrings({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Vcall = 'https://cdn.rcd.gg/PreMiD/websites/G/globoplay/assets/0.png',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/G/globoplay/assets/logo.png',
   Gnt = 'https://cdn.rcd.gg/PreMiD/websites/G/globoplay/assets/1.png',
@@ -46,7 +48,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 
@@ -268,115 +270,115 @@ presence.on('UpdateData', async () => {
         presenceData.details = `TV Globo - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.TVGlobo
+        presenceData.largeImageKey = ActivityAssets.TVGlobo
       }
       else if (document.location.pathname.includes('/7339131/')) {
         presenceData.details = `Multishow - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Multishow
+        presenceData.largeImageKey = ActivityAssets.Multishow
       }
       else if (document.location.pathname.includes('/7339101/')) {
         presenceData.details = `GloboNews - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Globonews
+        presenceData.largeImageKey = ActivityAssets.Globonews
       }
       else if (document.location.pathname.includes('/7339108/')) {
         presenceData.details = `sportv - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Sportv
+        presenceData.largeImageKey = ActivityAssets.Sportv
       }
       else if (document.location.pathname.includes('/7339117/')) {
         presenceData.details = `sportv2 - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Sportv2
+        presenceData.largeImageKey = ActivityAssets.Sportv2
       }
       else if (document.location.pathname.includes('/7339123/')) {
         presenceData.details = `sportv3 - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Sportv3
+        presenceData.largeImageKey = ActivityAssets.Sportv3
       }
       else if (document.location.pathname.includes('/7339128/')) {
         presenceData.details = `GNT - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Gnt
+        presenceData.largeImageKey = ActivityAssets.Gnt
       }
       else if (document.location.pathname.includes('/7339091/')) {
         presenceData.details = `Viva - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Viva
+        presenceData.largeImageKey = ActivityAssets.Viva
       }
       else if (document.location.pathname.includes('/7339146/')) {
         presenceData.details = `Gloob - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Gloob
+        presenceData.largeImageKey = ActivityAssets.Gloob
       }
       else if (document.location.pathname.includes('/7339323/')) {
         presenceData.details = `Gloobinho - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Gloobinho
+        presenceData.largeImageKey = ActivityAssets.Gloobinho
       }
       else if (document.location.pathname.includes('/7339152/')) {
         presenceData.details = `Megapix - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Megapix
+        presenceData.largeImageKey = ActivityAssets.Megapix
       }
       else if (document.location.pathname.includes('/7339279/')) {
         presenceData.details = `Universal TV - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Universalplus
+        presenceData.largeImageKey = ActivityAssets.Universalplus
       }
       else if (document.location.pathname.includes('/7339326/')) {
         presenceData.details = `Studio Universal - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Studiouniversal
+        presenceData.largeImageKey = ActivityAssets.Studiouniversal
       }
       else if (document.location.pathname.includes('/7339224/')) {
         presenceData.details = `SYFY - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Syfy
+        presenceData.largeImageKey = ActivityAssets.Syfy
       }
       else if (document.location.pathname.includes('/7339060/')) {
         presenceData.details = `Canal Brasil - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Canalbrasil
+        presenceData.largeImageKey = ActivityAssets.Canalbrasil
       }
       else if (document.location.pathname.includes('/7339078/')) {
         presenceData.details = `Canal OFF - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Canaloff
+        presenceData.largeImageKey = ActivityAssets.Canaloff
       }
       else if (document.location.pathname.includes('/7339140/')) {
         presenceData.details = `BIS - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Bis
+        presenceData.largeImageKey = ActivityAssets.Bis
       }
       else if (document.location.pathname.includes('/7339135/')) {
         presenceData.details = `Modo Viagem - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Modoviagem
+        presenceData.largeImageKey = ActivityAssets.Modoviagem
       }
       else if (document.location.pathname.includes('/7420604/')) {
         presenceData.details = `Futura - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Futura
+        presenceData.largeImageKey = ActivityAssets.Futura
       }
       else if (document.location.pathname.includes('/8223631/')) {
         presenceData.details = `Premiere - ${programTitle?.textContent}`
@@ -399,115 +401,115 @@ presence.on('UpdateData', async () => {
         presenceData.details = `Combate - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Combate
+        presenceData.largeImageKey = ActivityAssets.Combate
       }
       else if (document.location.pathname.includes('/10221110/')) {
         presenceData.details = `Telecine Premium - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Tcpremium
+        presenceData.largeImageKey = ActivityAssets.Tcpremium
       }
       else if (document.location.pathname.includes('/10221184/')) {
         presenceData.details = `Telecine Action - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Tcaction
+        presenceData.largeImageKey = ActivityAssets.Tcaction
       }
       else if (document.location.pathname.includes('/10221239/')) {
         presenceData.details = `Telecine Touch - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Tctouch
+        presenceData.largeImageKey = ActivityAssets.Tctouch
       }
       else if (document.location.pathname.includes('/10223522/')) {
         presenceData.details = `Telecine Fun - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Tcfun
+        presenceData.largeImageKey = ActivityAssets.Tcfun
       }
       else if (document.location.pathname.includes('/10221225/')) {
         presenceData.details = `Telecine Pipoca - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Tcpipoca
+        presenceData.largeImageKey = ActivityAssets.Tcpipoca
       }
       else if (document.location.pathname.includes('/10221109/')) {
         presenceData.details = `Telecine Cult - ${programTitle?.textContent}`
         presenceData.state = programMetadata?.textContent
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Tccult
+        presenceData.largeImageKey = ActivityAssets.Tccult
       }
       else if (document.location.pathname.includes('/9182156/')) {
         presenceData.details = 'CBN São Paulo'
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Cbn
+        presenceData.largeImageKey = ActivityAssets.Cbn
       }
       else if (document.location.pathname.includes('/9182126/')) {
         presenceData.details = 'CBN Rio de Janeiro'
         presenceData.smallImageKey = Assets.Live
-        presenceData.largeImageKey = Assets.Cbn
+        presenceData.largeImageKey = ActivityAssets.Cbn
       }
     }
     else if (document.location.pathname.includes('/canais/')) {
       if (document.location.pathname.includes('/globo/')) {
         presenceData.details = 'TV Globo'
-        presenceData.largeImageKey = Assets.TVGlobo
+        presenceData.largeImageKey = ActivityAssets.TVGlobo
       }
       else if (document.location.pathname.includes('/multishow/')) {
         presenceData.details = 'Multishow'
-        presenceData.largeImageKey = Assets.Multishow
+        presenceData.largeImageKey = ActivityAssets.Multishow
       }
       else if (document.location.pathname.includes('/globonews/')) {
         presenceData.details = 'GloboNews'
-        presenceData.largeImageKey = Assets.Globonews
+        presenceData.largeImageKey = ActivityAssets.Globonews
       }
       else if (document.location.pathname.includes('/sportv/')) {
         presenceData.details = 'sportv'
-        presenceData.largeImageKey = Assets.Sportv
+        presenceData.largeImageKey = ActivityAssets.Sportv
       }
       else if (document.location.pathname.includes('/gnt/')) {
         presenceData.details = 'GNT'
-        presenceData.largeImageKey = Assets.Gnt
+        presenceData.largeImageKey = ActivityAssets.Gnt
       }
       else if (document.location.pathname.includes('/viva/')) {
         presenceData.details = 'Viva'
-        presenceData.largeImageKey = Assets.Viva
+        presenceData.largeImageKey = ActivityAssets.Viva
       }
       else if (document.location.pathname.includes('/gloob/')) {
         presenceData.details = 'Gloob'
-        presenceData.largeImageKey = Assets.Gloob
+        presenceData.largeImageKey = ActivityAssets.Gloob
       }
       else if (document.location.pathname.includes('/gloobinho/')) {
         presenceData.details = 'Gloobinho'
-        presenceData.largeImageKey = Assets.Gloobinho
+        presenceData.largeImageKey = ActivityAssets.Gloobinho
       }
       else if (document.location.pathname.includes('/megapix/')) {
         presenceData.details = 'Megapix'
-        presenceData.largeImageKey = Assets.Megapix
+        presenceData.largeImageKey = ActivityAssets.Megapix
       }
       else if (document.location.pathname.includes('/universal/')) {
         presenceData.details = 'Universal+'
-        presenceData.largeImageKey = Assets.Universalplus
+        presenceData.largeImageKey = ActivityAssets.Universalplus
       }
       else if (document.location.pathname.includes('/canal-brasil/')) {
         presenceData.details = 'Canal Brasil'
-        presenceData.largeImageKey = Assets.Canalbrasil
+        presenceData.largeImageKey = ActivityAssets.Canalbrasil
       }
       else if (document.location.pathname.includes('/canal-off/')) {
         presenceData.details = 'Canal OFF'
-        presenceData.largeImageKey = Assets.Canaloff
+        presenceData.largeImageKey = ActivityAssets.Canaloff
       }
       else if (document.location.pathname.includes('/bis/')) {
         presenceData.details = 'BIS'
-        presenceData.largeImageKey = Assets.Bis
+        presenceData.largeImageKey = ActivityAssets.Bis
       }
       else if (document.location.pathname.includes('/modo-viagem/')) {
         presenceData.details = 'Modo Viagem'
-        presenceData.largeImageKey = Assets.Modoviagem
+        presenceData.largeImageKey = ActivityAssets.Modoviagem
       }
       else if (document.location.pathname.includes('/futura/')) {
         presenceData.details = 'Futura'
-        presenceData.largeImageKey = Assets.Futura
+        presenceData.largeImageKey = ActivityAssets.Futura
       }
       else if (document.location.pathname.includes('/premiere/')) {
         presenceData.details = Assets.Premiere
@@ -515,15 +517,15 @@ presence.on('UpdateData', async () => {
       }
       else if (document.location.pathname.includes('/combate/')) {
         presenceData.details = 'Combate'
-        presenceData.largeImageKey = Assets.Combate
+        presenceData.largeImageKey = ActivityAssets.Combate
       }
       else if (document.location.pathname.includes('/telecine/')) {
         presenceData.details = 'Telecine'
-        presenceData.largeImageKey = Assets.Telecine
+        presenceData.largeImageKey = ActivityAssets.Telecine
       }
       else if (document.location.pathname.includes('/starzplay/')) {
         presenceData.details = 'STARZPLAY'
-        presenceData.largeImageKey = Assets.Starzplay
+        presenceData.largeImageKey = ActivityAssets.Starzplay
       }
       else {
         presenceData.details = 'Canais'

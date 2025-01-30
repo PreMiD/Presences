@@ -29,12 +29,12 @@ presence.on('UpdateData', async () => {
     || document.location.pathname.toLowerCase() === '/weekly'
   ) {
     presenceData.state = `🔽 ${
-      document.querySelectorAll('.inline.smaller.spaced')[0].textContent
+      document.querySelectorAll('.inline.smaller.spaced')[0]?.textContent
     } | 👍 ${document.querySelectorAll('.inline.smaller.spaced')[1]} | 🔵 ${
-      document.querySelectorAll('.orbs')[1].textContent
+      document.querySelectorAll('.orbs')[1]?.textContent
     }`
     presenceData.details = `${
-      document.querySelectorAll('h1')[0].textContent
+      document.querySelectorAll('h1')[0]?.textContent
     } ${document.querySelector('#authorLink')?.textContent}`
     presenceData.smallImageKey = assets[
       `diff_${document

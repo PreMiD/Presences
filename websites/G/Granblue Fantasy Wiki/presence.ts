@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '914354609370329098',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy%20Wiki/assets/logo.png',
   Tierlist = 'https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy%20Wiki/assets/0.png',
   Login = 'https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy%20Wiki/assets/1.png',
@@ -12,7 +14,7 @@ const enum Assets {
 
 presence.on('UpdateData', () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 
@@ -21,17 +23,17 @@ presence.on('UpdateData', () => {
   }
   else if (document.querySelector('#wpLoginAttempt')) {
     presenceData.details = 'Logging in'
-    presenceData.smallImageKey = Assets.Login
+    presenceData.smallImageKey = ActivityAssets.Login
     presenceData.smallImageText = 'Logging in'
   }
   else if (document.querySelector('#wpCreateaccount')) {
     presenceData.details = 'Creating an account'
-    presenceData.smallImageKey = Assets.Newaccount
+    presenceData.smallImageKey = ActivityAssets.Newaccount
     presenceData.smallImageText = 'Creating an account'
   }
   else if (document.location.pathname.startsWith('/Character_Tier_List')) {
     presenceData.details = 'Viewing the character tier list'
-    presenceData.smallImageKey = Assets.Tierlist
+    presenceData.smallImageKey = ActivityAssets.Tierlist
     presenceData.smallImageText = 'Viewing tier list'
   }
   else if (document.location.pathname === '/Collection_Tracker') {

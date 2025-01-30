@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '696341580096733185',
 })
@@ -53,9 +55,9 @@ presence.on('iFrameData', (inc: unknown) => {
   }
 })
 
-function upperCaseFirstChar(word: string) {
+function upperCaseFirstChar(word: string | undefined) {
   if (word)
-    return `${word[0].toUpperCase()}${word.slice(1, word.length)}`
+    return `${word[0]?.toUpperCase()}${word.slice(1, word.length)}`
 }
 
 function formatStr(anime: string[]): string {

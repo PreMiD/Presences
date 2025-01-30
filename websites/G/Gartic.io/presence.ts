@@ -16,7 +16,7 @@ presence.on('UpdateData', async () => {
     presenceData.details = 'Viewing Rooms'
   }
   else if (
-    document.location.pathname.split('/')[1].match(/^\d/)
+    document.location.pathname.split('/')[1]?.match(/^\d/)
     || path === '/room'
   ) {
     if (document.querySelector('.infosUsers')) {

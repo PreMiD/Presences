@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '713726722671116330',
 })
@@ -39,12 +41,12 @@ presence.on('UpdateData', async () => {
     presenceData.details = 'Browsing a profile...'
     presenceData.state = document.querySelectorAll(
       '.ipsType_reset.ipsPageHead_barText',
-    )[0].textContent
+    )[0]?.textContent
   }
   else if (document.location.pathname.startsWith('/forum/')) {
     delete presenceData.details
     presenceData.details = 'Browsing a category...'
-    presenceData.state = document.querySelectorAll('.ipsType_pageTitle')[0].textContent
+    presenceData.state = document.querySelectorAll('.ipsType_pageTitle')[0]?.textContent
     if (document.location.href.match('/?do=add')) {
       delete presenceData.details
       delete presenceData.state
@@ -56,7 +58,7 @@ presence.on('UpdateData', async () => {
     presenceData.details = 'Browsing a topic...'
     presenceData.state = document.querySelectorAll(
       '.ipsType_break.ipsContained',
-    )[0].textContent
+    )[0]?.textContent
   }
   else if (document.location.pathname.startsWith('/search/')) {
     delete presenceData.details

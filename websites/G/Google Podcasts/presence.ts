@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '777530802887983124',
 })
@@ -7,7 +9,7 @@ presence.on('UpdateData', async () => {
     largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/G/Google%20Podcasts/assets/logo.png',
   }
   const podcastTitle = document.querySelectorAll('.Ut8Gr').length > 0
-    && document.querySelectorAll('.Ut8Gr')[1].textContent
+    && document.querySelectorAll('.Ut8Gr')[1]?.textContent
 
   if (podcastTitle) {
     presenceData.details = (
@@ -37,8 +39,8 @@ presence.on('UpdateData', async () => {
     // It's quite tricky to locate the right podcast title because
     // website makes new element for each of them
     for (const element of document.querySelectorAll('.dbCu3e')) {
-      if (element.children[0].textContent === document.title)
-        presenceData.state = `${document.title} by ${element.children[1].textContent}`
+      if (element.children[0]?.textContent === document.title)
+        presenceData.state = `${document.title} by ${element.children[1]?.textContent}`
     }
   }
   else if (document.location.pathname.includes('/subscriptions')) {

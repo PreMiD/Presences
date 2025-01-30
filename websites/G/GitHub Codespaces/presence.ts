@@ -585,7 +585,7 @@ const assets = {
   gatsbyjs: 'https://cdn.rcd.gg/PreMiD/websites/G/GitHub%20Codespaces/assets/130.png',
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/G/GitHub%20Codespaces/assets/131.png',
   Idle = 'https://cdn.rcd.gg/PreMiD/websites/G/GitHub%20Codespaces/assets/132.png',
   Logo2 = 'https://cdn.rcd.gg/PreMiD/websites/G/GitHub%20Codespaces/assets/133.png',
@@ -595,7 +595,7 @@ let lastFile: string | null = null
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    smallImageKey: Assets.Logo,
+    smallImageKey: ActivityAssets.Logo,
     smallImageText: 'GitHub Codespaces',
   }
   const activeTab = document.querySelector('.tab.active')
@@ -603,7 +603,7 @@ presence.on('UpdateData', async () => {
 
   // Preparing Screen
   if (document.querySelector('.vscs-splash-screen-steps-pane')) {
-    presenceData.largeImageKey = Assets.Logo2
+    presenceData.largeImageKey = ActivityAssets.Logo2
     presenceData.details = 'Preparing a codespace...'
     delete presenceData.smallImageKey
 
@@ -628,7 +628,7 @@ presence.on('UpdateData', async () => {
         const match = /^\/(.*)\/([mgiy]+)$/.exec(key)
         if (!match)
           return false
-        return new RegExp(match[1], match[2]).test(filename ?? '')
+        return new RegExp(match[1]!, match[2]).test(filename ?? '')
       }) ?? ''
     ] ?? (syntaxMode in langMap ? langMap[syntaxMode] : null)
 
@@ -669,7 +669,7 @@ presence.on('UpdateData', async () => {
       )
   }
   else if (!editorMode) {
-    presenceData.largeImageKey = Assets.Idle
+    presenceData.largeImageKey = ActivityAssets.Idle
     presenceData.details = 'Idling'
   }
 

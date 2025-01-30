@@ -69,7 +69,7 @@ presence.on('UpdateData', async () => {
       break
     }
     case `#label/${id}`: {
-      if (!privacy) {
+      if (!privacy && id) {
         presenceData.details = 'Viewing a label:'
         presenceData.state = decodeURIComponent(id)
       }

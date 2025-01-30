@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '857504938443407360',
 })
@@ -35,7 +37,7 @@ function getGenre(code: string) {
   else return '그 외 장르'
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/G/Genie%20Music/assets/logo.png',
   TV = 'https://cdn.rcd.gg/PreMiD/websites/G/Genie%20Music/assets/0.png',
   Mnet = 'https://cdn.rcd.gg/PreMiD/websites/G/Genie%20Music/assets/1.png',
@@ -47,7 +49,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const { location } = document
   // If player
@@ -151,7 +153,7 @@ presence.on('UpdateData', async () => {
         }
       }
       else if (location.pathname.startsWith('/chart')) {
-        presenceData.smallImageKey = Assets.Chart
+        presenceData.smallImageKey = ActivityAssets.Chart
         presenceData.details = '지니차트'
         switch (location.pathname) {
           case '/chart/top200': {
@@ -173,7 +175,7 @@ presence.on('UpdateData', async () => {
         }
       }
       else if (location.pathname.startsWith('/newest')) {
-        presenceData.smallImageKey = Assets.Music
+        presenceData.smallImageKey = ActivityAssets.Music
         presenceData.details = '최신음악'
         if (location.pathname === '/newest/song')
           presenceData.details += '(곡)'
@@ -181,19 +183,19 @@ presence.on('UpdateData', async () => {
           presenceData.details += '(앨범)'
       }
       else if (location.pathname.startsWith('/genre')) {
-        presenceData.smallImageKey = Assets.Music
+        presenceData.smallImageKey = ActivityAssets.Music
         presenceData.details = '장르음악'
         presenceData.details += `(${getGenre(
           location.pathname.replace('/genre/', ''),
         )})`
       }
       else if (location.pathname.startsWith('/genietv')) {
-        presenceData.smallImageKey = Assets.TV
+        presenceData.smallImageKey = ActivityAssets.TV
         presenceData.details = '지니TV'
         switch (location.pathname) {
           case '/genietv/broadcast': {
             presenceData.details += '(Mnet 방송)'
-            presenceData.smallImageKey = Assets.Mnet
+            presenceData.smallImageKey = ActivityAssets.Mnet
 
             break
           }
@@ -211,7 +213,7 @@ presence.on('UpdateData', async () => {
         }
       }
       else if (location.pathname.startsWith('/playlist')) {
-        presenceData.smallImageKey = Assets.Playlist
+        presenceData.smallImageKey = ActivityAssets.Playlist
         presenceData.details = '추천'
         switch (location.pathname) {
           case '/playlist/popular': {
@@ -229,11 +231,11 @@ presence.on('UpdateData', async () => {
         }
       }
       else if (location.pathname.startsWith('/magazine')) {
-        presenceData.smallImageKey = Assets.Playlist
+        presenceData.smallImageKey = ActivityAssets.Playlist
         presenceData.details = '매거진'
       }
       else if (location.pathname.startsWith('/edm')) {
-        presenceData.smallImageKey = Assets.Music
+        presenceData.smallImageKey = ActivityAssets.Music
         presenceData.details = 'EDM'
         if (location.pathname === '/edm/album')
           presenceData.details += '(최신)'
@@ -282,7 +284,7 @@ presence.on('UpdateData', async () => {
         }
       }
       else if (location.pathname.startsWith('/myMusic')) {
-        presenceData.smallImageKey = Assets.Profile
+        presenceData.smallImageKey = ActivityAssets.Profile
         presenceData.details = '마이 뮤직'
         if (location.pathname.startsWith('/myMusic/profile')) {
           presenceData.details += '(프로필)'

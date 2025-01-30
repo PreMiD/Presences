@@ -141,7 +141,7 @@ presence.on('UpdateData', async () => {
       }
     }
     else if (
-      sections.includes(document.location.pathname.slice(1).split('/')[0])
+      sections.includes(document.location.pathname.slice(1).split('/')[0]!)
     ) {
       if (document.location.pathname.includes('/games/')) {
         presenceData.details = `Browsing ${document
@@ -189,7 +189,7 @@ presence.on('UpdateData', async () => {
         else if (header.textContent.includes(' : ')) {
           presenceData.state = header.textContent
             .split('- A')[0]
-            .split(' : ')[1]
+            ?.split(' : ')[1]
           if (document.location.pathname.includes('/edit')) {
             presenceData.details = `Editing a ${document
               .querySelector<HTMLMetaElement>(
@@ -223,7 +223,7 @@ presence.on('UpdateData', async () => {
           else {
             presenceData.details = `Viewing ${header.textContent
               .split(' : ')[0]
-              .toLowerCase()
+              ?.toLowerCase()
               .replace('license', 'the license')
               .replace('withhold', 'the withhold page')
               .replace('team', 'the team')} for a ${document
@@ -345,7 +345,7 @@ presence.on('UpdateData', async () => {
         if (document.location.pathname.includes('/submissions')) {
           if (
             sections.includes(
-              document.location.pathname.split('submissions/')[1].split('/')[0],
+              document.location.pathname.split('submissions/')[1]!.split('/')[0]!,
             )
           ) {
             presenceData.details = presenceData.details

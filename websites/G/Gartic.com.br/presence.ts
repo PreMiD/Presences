@@ -8,7 +8,7 @@ presence.on('UpdateData', async () => {
     largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/G/Gartic.com.br/assets/logo.png',
     startTimestamp: browsingTimestamp,
   }
-  if (document.location.pathname.split('/')[1].match(/^\d/)) {
+  if (document.location.pathname.split('/')[1]?.match(/^\d/)) {
     presenceData.details = `${
       document.querySelector('div.user.proprio .dados span')?.textContent
     } - ${document

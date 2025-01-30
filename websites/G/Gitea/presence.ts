@@ -65,14 +65,14 @@ presence.on('UpdateData', async () => {
       else if (document.querySelector('.user.profile')) {
         // Profile Page
         presenceData.details = `Viewing Profile: ${
-          document.querySelectorAll('.username')[0].textContent
+          document.querySelectorAll('.username')[0]?.textContent
         }`
         if (
-          document.querySelectorAll('.username')[0].parentElement
+          document.querySelectorAll('.username')[0]?.parentElement
             ?.firstElementChild
         ) {
           presenceData.details += ` (${
-            document.querySelectorAll('.username')[0].parentElement
+            document.querySelectorAll('.username')[0]?.parentElement
               ?.firstElementChild
               ?.textContent
           })`
@@ -160,14 +160,14 @@ presence.on('UpdateData', async () => {
         }
         else if (document.location.pathname.split('/')[3] === 'src') {
           presenceData.state = `Viewing Files... (${
-            document.querySelectorAll('.octicon-git-branch')[1].parentNode
+            document.querySelectorAll('.octicon-git-branch')[1]?.parentNode
               ?.lastChild
               ?.textContent
           } Branch)`
         }
         else if (document.location.pathname.split('/')[3] === 'commits') {
           presenceData.state = `Viewing Commits... (${
-            document.querySelectorAll('.octicon-git-branch')[1].parentNode
+            document.querySelectorAll('.octicon-git-branch')[1]?.parentNode
               ?.lastChild
               ?.textContent
           } Branch)`

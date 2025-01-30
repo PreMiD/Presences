@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '633419305836347393',
 })
@@ -48,7 +50,7 @@ presence.on('UpdateData', async () => {
     const tagName = page.replace('/games/tag-', '')
 
     presenceData.details = 'Browsing games by tag:'
-    presenceData.state = tagName[0].toUpperCase() + tagName.slice(1)
+    presenceData.state = tagName[0]?.toUpperCase() + tagName.slice(1)
   }
   else if (page.includes('/dashboard/fireside/add')) {
     presenceData.details = pages[page]
@@ -103,7 +105,7 @@ presence.on('UpdateData', async () => {
         ? ' a user'
         : `${page.includes('/search/games') ? ' a game' : ''}`
     }:`
-    presenceData.state = fixedSearchName[0].toUpperCase() + fixedSearchName.slice(1)
+    presenceData.state = fixedSearchName[0]?.toUpperCase() + fixedSearchName.slice(1)
     presenceData.smallImageKey = Assets.Search
   }
   else if (profile && profile.textContent !== '') {

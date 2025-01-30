@@ -189,7 +189,7 @@ presence.on('UpdateData', async () => {
             .length
           // Online anon count
             + (onlineAnonsElem
-              ? Number.parseInt(onlineAnonsElem.textContent?.split(' ')[0].trim() ?? '0')
+              ? Number.parseInt(onlineAnonsElem.textContent?.split(' ')[0]?.trim() ?? '0')
               : 0)
         } online`
         presenceData.buttons = [
@@ -289,7 +289,7 @@ presence.on('UpdateData', async () => {
         new: 'Browsing the newest games',
         random: 'Browsing random games',
       }
-      presenceData.details = categories[path[1]] || 'Browsing for games'
+      presenceData.details = categories[path[1]!] || 'Browsing for games'
       presenceData.buttons = [
         {
           label: 'Explore Games',

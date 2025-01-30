@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/G/Google%20Colab/assets/logo.png',
   Comment = 'https://cdn.rcd.gg/PreMiD/websites/G/Google%20Colab/assets/0.png',
   Information = 'https://cdn.rcd.gg/PreMiD/websites/G/Google%20Colab/assets/1.png',
@@ -11,7 +11,7 @@ const enum Assets {
 
 presence.on('UpdateData', () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const notebookTitle = document.querySelector<HTMLInputElement>('#doc-name')?.value
@@ -26,14 +26,14 @@ presence.on('UpdateData', () => {
     else if (document.querySelector('.diff-inline[aria-checked=true]')) {
       const [diff1, diff2] = document.querySelectorAll('.view-zones')
       presenceData.state = `${
-        diff1.querySelector('.view-line')?.textContent
-      } vs ${diff2.querySelector('.view-line')?.textContent}`
+        diff1?.querySelector('.view-line')?.textContent
+      } vs ${diff2?.querySelector('.view-line')?.textContent}`
     }
     else {
       const [diff1, diff2] = document.querySelectorAll('.view-lines')
       presenceData.state = `${
-        diff1.querySelector('.view-line')?.textContent
-      } vs ${diff2.querySelector('.view-line')?.textContent}`
+        diff1?.querySelector('.view-line')?.textContent
+      } vs ${diff2?.querySelector('.view-line')?.textContent}`
     }
   }
   else if (document.querySelector('#notebook-info')) {
@@ -78,7 +78,7 @@ presence.on('UpdateData', () => {
 
     // Checking if the user is commenting
     if (document.querySelector('.comment-fragment.editing.focused')) {
-      presenceData.smallImageKey = Assets.Comment
+      presenceData.smallImageKey = ActivityAssets.Comment
       presenceData.smallImageText = 'Commenting'
     }
     else {
@@ -87,7 +87,7 @@ presence.on('UpdateData', () => {
         'colab-connect-button',
       )?.shadowRoot
       if (connectShadowRoot?.querySelector('#connect-button-resource-display')) {
-        presenceData.smallImageKey = Assets.Information
+        presenceData.smallImageKey = ActivityAssets.Information
         presenceData.smallImageText = `Ram: ${
           connectShadowRoot
             ?.querySelector('.ram')

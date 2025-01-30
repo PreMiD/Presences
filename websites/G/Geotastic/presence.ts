@@ -68,15 +68,15 @@ presence.on('UpdateData', async () => {
       if (document.querySelector('.side-bar')) {
         presenceData.details = 'In an online battle'
         presenceData.state = `Playing map ${
-          document.querySelector('.meta-infos')?.querySelectorAll('span')[1].textContent
+          document.querySelector('.meta-infos')?.querySelectorAll('span')[1]?.textContent
         }`
       }
       else {
         const info = document
           .querySelector('.meta-infos')
           ?.querySelectorAll('span') ?? []
-        presenceData.details = `Playing map ${info[1].textContent}`
-        presenceData.state = `${info[2].textContent} ${info[3].textContent}`
+        presenceData.details = `Playing map ${info[1]?.textContent}`
+        presenceData.state = `${info[2]?.textContent} ${info[3]?.textContent}`
       }
     }
     else if (document.querySelector('.active-component-result')) {

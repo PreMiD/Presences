@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/G/GX.games/assets/logo.png',
 }
 
@@ -14,7 +14,7 @@ presence.on('UpdateData', async () => {
     presence.getSetting<boolean>('time'),
   ])
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href } = document.location
@@ -45,7 +45,7 @@ presence.on('UpdateData', async () => {
     case 'games': {
       const tags = document.querySelectorAll('[href*=\'tagAlias\'] > span')
       presenceData.details = document.querySelector('h3')
-      presenceData.state = `${tags[0].textContent}, ${tags[1].textContent}, ${tags[2].textContent}`
+      presenceData.state = `${tags[0]?.textContent}, ${tags[1]?.textContent}, ${tags[2]?.textContent}`
       presenceData.buttons = [{ label: 'View Game', url: href }]
       if (cover) {
         presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(

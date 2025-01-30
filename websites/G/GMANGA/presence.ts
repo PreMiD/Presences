@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 type Functionlize<T> = {
   [P in keyof T]: () => T[P];
 }
@@ -14,7 +16,7 @@ enum Settings {
   LOGO = 'logo',
 }
 
-const enum Assets {
+enum ActivityAssets {
   Discovery = 'https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/0.png',
   Library = 'https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/1.png',
   Team = 'https://cdn.rcd.gg/PreMiD/websites/G/GMANGA/assets/2.png',
@@ -36,7 +38,7 @@ function router({ path, data }: { path: string, data: PresenceData }): Route {
     { path: /^\/$/, details: () => 'On Homepage' },
     {
       path: /^\/(mangas|mangas\/featured|mangas\/latest)$/,
-      smallImageKey: () => Assets.Discovery,
+      smallImageKey: () => ActivityAssets.Discovery,
       smallImageText: () => 'Browsing',
       details: () => 'Browsing for Manga',
       buttons: () => [{ label: 'Browse', url: location.href }],
@@ -77,7 +79,7 @@ function router({ path, data }: { path: string, data: PresenceData }): Route {
       path: /^\/mangas\/\d+\/(.*)$/,
       details: () => 'Viewing a manga',
       state: () => document.querySelector('h1.header')?.textContent ?? undefined,
-      smallImageKey: () => Assets.Manga,
+      smallImageKey: () => ActivityAssets.Manga,
       smallImageText: () => 'Viewing',
       buttons: () => [
         { label: 'View Manga', url: location.href },
@@ -91,7 +93,7 @@ function router({ path, data }: { path: string, data: PresenceData }): Route {
     },
     {
       path: /^\/news+/,
-      smallImageKey: () => Assets.News,
+      smallImageKey: () => ActivityAssets.News,
       smallImageText: () => 'Reading',
       details: () => 'Reading News',
       state: () => document.querySelector('h1.header')?.textContent ?? undefined,
@@ -99,7 +101,7 @@ function router({ path, data }: { path: string, data: PresenceData }): Route {
     },
     {
       path: /\/colorings$/,
-      smallImageKey: () => Assets.Paintings,
+      smallImageKey: () => ActivityAssets.Paintings,
       smallImageText: () => 'Viewing',
       details: () => 'Viewing Paintings',
       state: () =>
@@ -111,7 +113,7 @@ function router({ path, data }: { path: string, data: PresenceData }): Route {
     },
     {
       path: /^\/teams/,
-      smallImageKey: () => Assets.Team,
+      smallImageKey: () => ActivityAssets.Team,
       smallImageText: () => 'Viewing',
       details: () => 'Viewing a Team',
       state: () => document.querySelector('h2.header')?.textContent ?? undefined,
@@ -119,7 +121,7 @@ function router({ path, data }: { path: string, data: PresenceData }): Route {
     },
     {
       path: /^\/members/,
-      smallImageKey: () => Assets.Library,
+      smallImageKey: () => ActivityAssets.Library,
       smallImageText: () => 'Viewing',
       details: () => 'Viewing a User',
       state: () => document.querySelector('h2.header')?.textContent ?? undefined,
@@ -150,7 +152,7 @@ presence.on('UpdateData', async () => {
   const showButtons = await presence.getSetting<boolean>(Settings.BUTTONS)
   const logo = await presence.getSetting<number>(Settings.LOGO)
   let presenceData: PresenceData = {
-    largeImageKey: [Assets.LightLogo, Assets.DarkLogo][logo] || Assets.LightLogo,
+    largeImageKey: [ActivityAssets.LightLogo, ActivityAssets.DarkLogo][logo] || ActivityAssets.LightLogo,
   }
 
   if (showTimestamp)

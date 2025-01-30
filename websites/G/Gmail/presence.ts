@@ -95,7 +95,7 @@ presence.on('UpdateData', async () => {
   }
   const currentPage = path.split('#')[1]
 
-  if (pages[currentPage]) {
+  if (currentPage && pages[currentPage]) {
     presenceData.details = pages[currentPage]
   }
   else if (path.includes('compose=')) {
