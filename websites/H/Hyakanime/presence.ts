@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/H/Hyakanime/assets/logo.png',
 }
 
@@ -34,7 +34,7 @@ const pageDetails = {
 presence.on('UpdateData', async () => {
   const page = document.location.pathname
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     details: 'Sur la page d\'accueil',
   }
@@ -52,8 +52,8 @@ presence.on('UpdateData', async () => {
       ?.textContent
       ?.split('Adulte')[0]
     presenceData.largeImageKey = document.querySelector('.anime-affiche')?.getAttribute('src')
-      || Assets.Logo
-    presenceData.smallImageKey = Assets.Logo
+      || ActivityAssets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.buttons = [
       {
         label: 'Afficher la fiche',
@@ -71,8 +71,8 @@ presence.on('UpdateData', async () => {
       '.user-banner__username',
     )?.textContent
     presenceData.largeImageKey = document.querySelector('.user-banner__picture')?.getAttribute('src')
-      || Assets.Logo
-    presenceData.smallImageKey = Assets.Logo
+      || ActivityAssets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.buttons = [
       {
         label: 'Afficher le profil',

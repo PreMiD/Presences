@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1047847313118351421',
 })
 const browsingStamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/H/History%20Vault/assets/logo.png',
 }
 
@@ -24,7 +26,7 @@ async function getStrings() {
 async function imgPath(path: string) {
   if (path)
     return `https://${path.replace('//', '')}`
-  else return Assets.Logo
+  else return ActivityAssets.Logo
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>
@@ -33,7 +35,7 @@ let oldLang: string | null = null
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     startTimestamp: browsingStamp,
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const { href, pathname } = document.location
   const [newLang, privacy, buttons, covers] = await Promise.all([
@@ -159,8 +161,8 @@ presence.on('UpdateData', async () => {
     }
   }
 
-  if (!covers && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if (!covers && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (!buttons && presenceData.buttons)
     delete presenceData.buttons
   if (presenceData.details)

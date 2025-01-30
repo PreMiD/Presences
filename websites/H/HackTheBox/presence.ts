@@ -88,16 +88,16 @@ function getHomePageDetails() {
   return `${
     document
       .querySelectorAll('.text-left.font-size15.col')[0]
-      .querySelectorAll('.color-green')[0]
-      .textContent
+      ?.querySelectorAll('.color-green')[0]
+      ?.textContent
   }, Rank: ${
     document.querySelectorAll('.htb-text2.font-size15.text-left.mb-0')[0]
-      .textContent
+      ?.textContent
   }`
 }
 
 function getPersonalProfileDetails() {
-  return document.querySelectorAll('.htb-subtitle.greenOnHover')[0].textContent
+  return document.querySelectorAll('.htb-subtitle.greenOnHover')[0]?.textContent ?? null
 }
 
 function getMachineDetails() {
@@ -122,7 +122,7 @@ function getChallengeDetails() {
 
   return `${name} - ${
     document.querySelectorAll('.htb-label2.offline-text.text-left.pl-3')[0]
-      .textContent
+      ?.textContent
   }`
 }
 

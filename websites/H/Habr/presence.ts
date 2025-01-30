@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1064607977996296262',
 })
@@ -24,7 +26,7 @@ async function getStrings() {
 let strings: Awaited<ReturnType<typeof getStrings>>
 let oldLang: string | null = null
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/H/Habr/assets/logo.png',
 }
 
@@ -35,7 +37,7 @@ function textContent(tags: string) {
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     details: 'Где-то на сайте',
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const [newLang, privacy, logo, time, buttons] = await Promise.all([
     presence.getSetting<string>('lang').catch(() => 'ru'),
@@ -108,7 +110,7 @@ presence.on('UpdateData', async () => {
         )?.firstChild?.textContent
         presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
           '.tm-user-card__header-data .tm-entity-image__pic',
-        )?.src || Assets.Logo
+        )?.src || ActivityAssets.Logo
         presenceData.buttons = [
           {
             label: strings.buttonViewPage,
@@ -192,7 +194,7 @@ presence.on('UpdateData', async () => {
   }
 
   if (!logo || privacy)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (!buttons || privacy)
     delete presenceData.buttons
   if (time)

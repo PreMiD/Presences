@@ -43,7 +43,7 @@ presence.on('UpdateData', async () => {
   }
 
   if (document.location.pathname.split('/games/')[1]) {
-    switch (document.location.pathname.split('/games/')[1].split('/')[0]) {
+    switch (document.location.pathname.split('/games/')[1]!.split('/')[0]) {
       case 'hitman':
         presenceData.details = 'Viewing HITMAN™'
         break
@@ -71,7 +71,7 @@ presence.on('UpdateData', async () => {
   ) {
     presenceData.state = capitaliseEachWord(
       document.location.pathname
-        .split('/')[3]
+        .split('/')[3]!
         .replace(/\d/g, '')
         .replaceAll('-', ' '),
     )
@@ -81,7 +81,7 @@ presence.on('UpdateData', async () => {
     }
     else if (document.location.pathname.split('/')[4]) {
       presenceData.state += ` - ${capitaliseEachWord(
-        document.location.pathname.split('/')[4].replaceAll('-', ' '),
+        document.location.pathname.split('/')[4]!.replaceAll('-', ' '),
       )}`
     }
     if (
@@ -103,7 +103,7 @@ presence.on('UpdateData', async () => {
 function capitaliseEachWord(string: string) {
   const words = string.split(' ')
   for (let i = 0; i < words.length; i++)
-    words[i] = words[i][0].toUpperCase() + words[i].substr(1)
+    words[i] = words[i]![0]!.toUpperCase() + words[i]!.substr(1)
 
   return words.join(' ')
 }

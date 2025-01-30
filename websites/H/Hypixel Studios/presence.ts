@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '812069625067077662',
 })
@@ -94,7 +96,7 @@ presence.on('UpdateData', async () => {
           .replace('press-release-', '')
           .split('-')
         for (let i = 0; i < docName.length; i++)
-          docName[i] = docName[i].charAt(0).toUpperCase() + docName[i].slice(1)
+          docName[i] = docName[i]!.charAt(0).toUpperCase() + docName[i]!.slice(1)
         presenceData.details = 'Reading the document'
         presenceData.state = docName.join(' ')
         presenceData.smallImageKey = Assets.Reading

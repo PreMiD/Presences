@@ -1,6 +1,6 @@
-import { getRealtimeEndpoint } from '../lib/realtime'
-import { getWorkspaceName } from '../lib/workspace'
-import { Assets } from '../presence'
+import { getRealtimeEndpoint } from '../lib/realtime.js'
+import { getWorkspaceName } from '../lib/workspace.js'
+import { ActivityAssets } from '../presence.js'
 
 export function Websocket(): PresenceData | null {
   const endpoint = getRealtimeEndpoint()
@@ -9,7 +9,7 @@ export function Websocket(): PresenceData | null {
     return null
 
   return {
-    smallImageKey: Assets.Websocket,
+    smallImageKey: ActivityAssets.Websocket,
     smallImageText: 'Websocket',
     details: getWorkspaceName(),
     state: `🧑‍💻 | ${endpoint}`,

@@ -1,6 +1,6 @@
-import { getRealtimeEndpoint } from '../lib/realtime'
-import { getWorkspaceName } from '../lib/workspace'
-import { Assets } from '../presence'
+import { getRealtimeEndpoint } from '../lib/realtime.js'
+import { getWorkspaceName } from '../lib/workspace.js'
+import { ActivityAssets } from '../presence.js'
 
 export function ServerSentEvents(): PresenceData | null {
   const endpoint = getRealtimeEndpoint()
@@ -9,7 +9,7 @@ export function ServerSentEvents(): PresenceData | null {
     return null
 
   return {
-    smallImageKey: Assets.ServerSentEvents,
+    smallImageKey: ActivityAssets.ServerSentEvents,
     smallImageText: 'Server Sent Events',
     details: getWorkspaceName(),
     state: `🧑‍💻 | ${endpoint}`,

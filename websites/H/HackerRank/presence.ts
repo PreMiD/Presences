@@ -27,7 +27,7 @@ presence.on('UpdateData', () => {
   else if (path('/skills-verification')) {
     presenceData.details = 'Skills Certification'
     if (title !== 'Get Your Skills Certified')
-      presenceData.state = title?.split('Skills Certification Test')[0].trim()
+      presenceData.state = title?.split('Skills Certification Test')[0]?.trim()
   }
   else if (path('/competitions')) {
     presenceData.details = 'Viewing a competition:'
@@ -66,7 +66,7 @@ presence.on('UpdateData', () => {
       .querySelector('p')
       ?.textContent
       ?.split('More about')[1]
-      .trim()
+      ?.trim()
   }
   else if (path('/leaderboard')) {
     presenceData.details = 'Viewing a leaderboard:'

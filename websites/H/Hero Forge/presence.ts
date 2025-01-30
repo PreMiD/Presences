@@ -88,7 +88,7 @@ presence.on('UpdateData', async () => {
             }
             if (chosenItemContainer)
               subState = `${characterCreatorMenu[1]} - ${chosenItemName}`
-            else subState = characterCreatorMenu[1]
+            else subState = characterCreatorMenu[1]!
             break
           }
           case 'body': {
@@ -97,7 +97,7 @@ presence.on('UpdateData', async () => {
               subState = 'Measurements'
             else if (chosenItemContainer)
               subState = `${characterCreatorMenu[1]} - ${chosenItemName}`
-            else subState = characterCreatorMenu[1]
+            else subState = characterCreatorMenu[1]!
             break
           }
           case 'clothing': {
@@ -106,7 +106,7 @@ presence.on('UpdateData', async () => {
               subState = 'Outfit'
             else if (chosenItemContainer)
               subState = `${characterCreatorMenu[1]} - ${chosenItemName}`
-            else subState = characterCreatorMenu[1]
+            else subState = characterCreatorMenu[1]!
             break
           }
           case 'pose': {
@@ -206,12 +206,12 @@ presence.on('UpdateData', async () => {
           }
         }
         if (subState) {
-          presenceData.state = `${mainState[0].toUpperCase()}${mainState.slice(
+          presenceData.state = `${mainState[0]?.toUpperCase()}${mainState.slice(
             1,
-          )}: ${subState[0].toUpperCase()}${subState.slice(1)}`
+          )}: ${subState[0]?.toUpperCase()}${subState.slice(1)}`
         }
         else {
-          presenceData.state = `${mainState[0].toUpperCase()}${mainState.slice(
+          presenceData.state = `${mainState[0]?.toUpperCase()}${mainState.slice(
             1,
           )}`
         }
@@ -246,7 +246,7 @@ presence.on('UpdateData', async () => {
       break
     }
     default: {
-      if (path.startsWith('load_config')) {
+      if (path?.startsWith('load_config')) {
         presenceData.details = 'Loading character'
       }
       else {

@@ -1,6 +1,5 @@
-import { getWorkspaceName } from '../lib/workspace'
-
-import { Assets } from '../presence'
+import { getWorkspaceName } from '../lib/workspace.js'
+import { ActivityAssets } from '../presence.js'
 
 function getEndpoint(): string | null {
   const cmLine = document.querySelector('.cm-line')
@@ -22,7 +21,7 @@ function getEndpoint(): string | null {
       .filter(node => node.nodeType === node.TEXT_NODE)
       .map(node => node.textContent)
       .join('')
-      .split('?')[0]
+      .split('?')[0]!
   }
 }
 
@@ -52,7 +51,7 @@ export function Rest(): PresenceData | null {
     return null
 
   return {
-    smallImageKey: Assets.Rest,
+    smallImageKey: ActivityAssets.Rest,
     smallImageText: 'REST',
     details: getWorkspaceName(),
     state: `🧑‍💻 | ${method} ${endpoint}`,

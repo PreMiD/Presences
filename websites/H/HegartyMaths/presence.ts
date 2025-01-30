@@ -33,7 +33,7 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname === '/assessment') {
     if (
-      document.querySelectorAll('ul.Assessment__breadcrumb li')[0].innerHTML
+      document.querySelectorAll('ul.Assessment__breadcrumb li')[0]?.innerHTML
       === 'Fix Up 5'
     ) {
       presenceData.details = 'Revising'
@@ -44,7 +44,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Doing a lesson'
       if (!privacy) {
         presenceData.state = new DOMParser().parseFromString(
-          document.querySelectorAll('ul.Assessment__breadcrumb li')[2]
+          document.querySelectorAll('ul.Assessment__breadcrumb li')[2]!
             .innerHTML,
           'text/html',
         ).documentElement.textContent

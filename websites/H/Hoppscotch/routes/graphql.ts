@@ -1,5 +1,5 @@
-import { getWorkspaceName } from '../lib/workspace'
-import { Assets } from '../presence'
+import { getWorkspaceName } from '../lib/workspace.js'
+import { ActivityAssets } from '../presence.js'
 
 function getEndpoint() {
   const input = document.querySelector<HTMLInputElement>('input#url')
@@ -19,7 +19,7 @@ export function GraphQL(): PresenceData | null {
     return null
 
   return {
-    smallImageKey: Assets.GraphQL,
+    smallImageKey: ActivityAssets.GraphQL,
     smallImageText: 'GraphQL',
     details: getWorkspaceName(),
     state: `🧑‍💻 | ${endpoint}`,

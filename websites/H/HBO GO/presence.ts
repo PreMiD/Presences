@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '605437254776651786',
 })
@@ -30,7 +32,7 @@ presence.on('UpdateData', async () => {
         /(?<series>.+?)\sS(?<season>\d+)\s(?<episode>\d{2})(?::\s*(?<title>.+))?/,
       )!
 
-      match.groups!.episode = Number.parseInt(match.groups!.episode).toString()
+      match.groups!.episode = Number.parseInt(match.groups!.episode!).toString()
 
       presenceData.name = match.groups!.series
       presenceData.details = match.groups!.title || `Episode ${match.groups!.episode}`

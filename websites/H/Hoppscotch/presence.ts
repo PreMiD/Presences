@@ -1,17 +1,17 @@
-import { GraphQL } from './routes/graphql'
-import { MQTT } from './routes/mqtt'
-import { Profile } from './routes/profile'
-import { Rest } from './routes/rest'
-import { Settings } from './routes/settings'
-import { SocketIO } from './routes/socketio'
-import { ServerSentEvents } from './routes/sse'
-import { Websocket } from './routes/websocket'
+import { GraphQL } from './routes/graphql.js'
+import { MQTT } from './routes/mqtt.js'
+import { Profile } from './routes/profile.js'
+import { Rest } from './routes/rest.js'
+import { Settings } from './routes/settings.js'
+import { SocketIO } from './routes/socketio.js'
+import { ServerSentEvents } from './routes/sse.js'
+import { Websocket } from './routes/websocket.js'
 
 const presence = new Presence({
   clientId: '792735245488488458',
 })
 
-export const enum Assets {
+export enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/H/Hoppscotch/assets/logo.png',
   Rest = 'https://cdn.rcd.gg/PreMiD/websites/H/Hoppscotch/assets/0.png',
   GraphQL = 'https://cdn.rcd.gg/PreMiD/websites/H/Hoppscotch/assets/1.png',
@@ -25,7 +25,7 @@ export const enum Assets {
 
 const BASE = {
   name: 'Hoppscotch',
-  largeImageKey: Assets.Logo,
+  largeImageKey: ActivityAssets.Logo,
   startTimestamp: Math.floor(Date.now() / 1000),
 }
 const Route = {

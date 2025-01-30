@@ -93,9 +93,9 @@ presence.on('UpdateData', async () => {
       break
     }
     case 'circles': {
-      presenceData.details = `${circleName[Number.parseInt(pathList[1])]} Circle`
+      presenceData.details = `${circleName[Number.parseInt(pathList[1]!)]} Circle`
       presenceData.state = `Scrolling through ${
-        circleTabName[Number.parseInt(pathList[2])]
+        circleTabName[Number.parseInt(pathList[2]!)]
       }`
       break
     }
@@ -106,7 +106,7 @@ presence.on('UpdateData', async () => {
 
       presenceData.details = `${strings.viewingUser} ${username}`
       presenceData.state = `${strings.viewingList} ${
-        accountCenterState[pathList[1]]
+        accountCenterState[pathList[1]!]
       }`
       presenceData.buttons = [
         {

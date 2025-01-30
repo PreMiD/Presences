@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '860224040060715018',
 })
@@ -8,7 +10,7 @@ const strings = presence.getStrings({
 
 let iFrameVideo: { isPaused: boolean, thumbnail: string }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/logo.png',
   Mdihome = 'https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/0.png',
   Mdiheart = 'https://cdn.rcd.gg/PreMiD/websites/H/Holodex/assets/1.png',
@@ -46,8 +48,8 @@ const getInfo = {
   },
   watch: () => {
     return {
-      title: document.querySelectorAll('.v-card__title')[0].children[0]
-        .textContent,
+      title: document.querySelectorAll('.v-card__title')[0]?.children[0]
+        ?.textContent,
       channel: document
         .querySelector('.uploader-data-list>div:nth-child(1)')
         ?.textContent
@@ -192,7 +194,7 @@ const data = {
   details: `Unsupported Page: ${window.location.pathname}`,
   state: '' as string | undefined,
   smallimage: {
-    image: Assets.Logo,
+    image: ActivityAssets.Logo as ActivityAssets | Assets,
     hover: 'Holodex',
   },
   startTime: ~~(Date.now() / 1000),
@@ -290,44 +292,44 @@ const dataUpdater = {
     switch (path[1]) {
       case 'home':
         return {
-          image: Assets.Mdihome,
+          image: ActivityAssets.Mdihome,
           hover: 'Home Page',
         }
       case 'favorites':
         return {
-          image: Assets.Mdiheart,
+          image: ActivityAssets.Mdiheart,
           hover: 'Favorites',
         }
       case 'channel':
         return {
           image: path.length < 3
-            ? Assets.Mdiaccountboxmultiple
-            : Assets.Mdiaccountbox,
+            ? ActivityAssets.Mdiaccountboxmultiple
+            : ActivityAssets.Mdiaccountbox,
           hover: path.length < 3 ? 'Channels' : `${getInfo.channel().title}`,
         }
       case 'library':
         return {
-          image: Assets.Mdianimationplay,
+          image: ActivityAssets.Mdianimationplay,
           hover: 'Library',
         }
       case 'playlists':
         return {
-          image: Assets.Mdiplaylistplay,
+          image: ActivityAssets.Mdiplaylistplay,
           hover: 'Playlists',
         }
       case 'multiview':
         return {
-          image: Assets.Multiview,
+          image: ActivityAssets.Multiview,
           hover: 'MultiView',
         }
       case 'music':
         return {
-          image: Assets.Mdimusic,
+          image: ActivityAssets.Mdimusic,
           hover: 'Music',
         }
       case 'infinite':
         return {
-          image: Assets.Mdiinfinity,
+          image: ActivityAssets.Mdiinfinity,
           hover: 'Mugen Clips',
         }
       case 'about':
@@ -337,12 +339,12 @@ const dataUpdater = {
         }
       case 'settings':
         return {
-          image: Assets.Mdisettings,
+          image: ActivityAssets.Mdisettings,
           hover: 'Settings',
         }
       case 'login':
         return {
-          image: Assets.Mdiloginvariant,
+          image: ActivityAssets.Mdiloginvariant,
           hover: document.querySelector('.v-card.ma-auto.v-sheet .v-list') === null
             ? 'Login Screen'
             : 'Account Settings',
@@ -364,7 +366,7 @@ const dataUpdater = {
 
       default:
         return {
-          image: Assets.Logo,
+          image: ActivityAssets.Logo,
           hover: 'Holodex',
         }
     }
@@ -375,7 +377,7 @@ presence.on('UpdateData', async () => {
   dataUpdater.updateAll()
 
   const presenceData: PresenceData = {
-    largeImageKey: iFrameVideo.thumbnail ?? Assets.Logo,
+    largeImageKey: iFrameVideo.thumbnail ?? ActivityAssets.Logo,
     smallImageKey: data.smallimage.image,
     smallImageText: data.smallimage.hover,
     details: data.details,

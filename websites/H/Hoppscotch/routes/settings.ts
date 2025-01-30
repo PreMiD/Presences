@@ -1,9 +1,9 @@
-import { getWorkspaceName } from '../lib/workspace'
-import { Assets } from '../presence'
+import { getWorkspaceName } from '../lib/workspace.js'
+import { ActivityAssets } from '../presence.js'
 
 export function Settings(): PresenceData {
   return {
-    smallImageKey: Assets.Settings,
+    smallImageKey: ActivityAssets.Settings,
     smallImageText: 'Settings',
     details: getWorkspaceName(),
     state: 'Configuring settings',

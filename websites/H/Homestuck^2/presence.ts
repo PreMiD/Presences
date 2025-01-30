@@ -3,14 +3,14 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/H/Homestuck%5E2/assets/logo.png',
   Heart = 'https://cdn.rcd.gg/PreMiD/websites/H/Homestuck%5E2/assets/0.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname } = document.location
@@ -23,7 +23,7 @@ presence.on('UpdateData', async () => {
 
     case 'story':
       presenceData.details = 'Reading Homestuck^2'
-      presenceData.smallImageKey = Assets.Heart
+      presenceData.smallImageKey = ActivityAssets.Heart
       if (!pathArr[2])
         presenceData.state = `Page 1 of ${await getPages()}`
       else presenceData.state = `Page ${pathArr[2]} of ${await getPages()}`
@@ -47,7 +47,7 @@ presence.on('UpdateData', async () => {
       switch (pathArr[2]) {
         case 'catnapped':
           presenceData.details = 'Reading Catnapped'
-          presenceData.smallImageKey = Assets.Heart
+          presenceData.smallImageKey = ActivityAssets.Heart
           presenceData.state = `Page ${pathArr[3]} of 28`
           presenceData.smallImageText = document.querySelector('h2')?.textContent
           presenceData.buttons = [
@@ -60,7 +60,7 @@ presence.on('UpdateData', async () => {
 
         case 'a-treatise-on-representational-democracy':
           presenceData.details = 'Reading A Treatise on Representational Democracy'
-          presenceData.smallImageKey = Assets.Heart
+          presenceData.smallImageKey = ActivityAssets.Heart
           presenceData.state = `Page ${pathArr[3]} of 13`
           presenceData.smallImageText = document.querySelector('h2')?.textContent
           presenceData.buttons = [
@@ -73,7 +73,7 @@ presence.on('UpdateData', async () => {
 
         case 'diamonds-dames-and-dads':
           presenceData.details = 'Reading Diamonds, Dames, and Dads'
-          presenceData.smallImageKey = Assets.Heart
+          presenceData.smallImageKey = ActivityAssets.Heart
           presenceData.state = `Page ${pathArr[3]} of 46`
           presenceData.smallImageText = document.querySelector('h2')?.textContent
           presenceData.buttons = [
@@ -86,7 +86,7 @@ presence.on('UpdateData', async () => {
 
         case 'a-threat-sensed':
           presenceData.details = 'Reading A Threat, Sensed'
-          presenceData.smallImageKey = Assets.Heart
+          presenceData.smallImageKey = ActivityAssets.Heart
           presenceData.state = `Page ${pathArr[3]} of 13`
           presenceData.smallImageText = document.querySelector('h2')?.textContent
           presenceData.buttons = [
@@ -99,7 +99,7 @@ presence.on('UpdateData', async () => {
 
         case 'the-influencers':
           presenceData.details = 'Reading The Influencers'
-          presenceData.smallImageKey = Assets.Heart
+          presenceData.smallImageKey = ActivityAssets.Heart
           presenceData.state = `Page ${pathArr[3]} of 34`
           presenceData.smallImageText = document.querySelector('h2')?.textContent
           presenceData.buttons = [

@@ -80,7 +80,7 @@ presence.on('UpdateData', async () => {
               presenceData.state = 'Viewing build log'
           }
           else {
-            presenceData.state = `${subpath[0].toUpperCase()}${subpath.slice(
+            presenceData.state = `${subpath[0]?.toUpperCase()}${subpath.slice(
               1,
             )}`
           }

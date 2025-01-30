@@ -1,9 +1,9 @@
-import { getWorkspaceName } from '../lib/workspace'
-import { Assets } from '../presence'
+import { getWorkspaceName } from '../lib/workspace.js'
+import { ActivityAssets } from '../presence.js'
 
 export function Profile(): PresenceData | null {
   return {
-    smallImageKey: Assets.Profile,
+    smallImageKey: ActivityAssets.Profile,
     smallImageText: 'Profile',
     details: getWorkspaceName(),
     state: 'Viewing their profile',
