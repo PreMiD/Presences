@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1002899869599551508',
 })
@@ -50,7 +52,7 @@ presence.on('UpdateData', async () => {
       ?.lastChild
       ?.textContent
       ?.replace(/,/g, '')
-      ?? title?.content.replace(title.content.split(',')[0], '')
+      ?? title?.content.replace(title.content.split(',')[0] ?? '', '')
 
     presenceData.details = document.querySelector(
       '[class="vod-episode__title margin-bottom--xxs invert-text semi-bold"]',
@@ -59,7 +61,7 @@ presence.on('UpdateData', async () => {
     ?? title?.content.split(',')[0]
     presenceData.state = episodeSeason
       ?.split('-')[0]
-      .replace(/,/g, '')
+      ?.replace(/,/g, '')
       .replace('Series', 'S')
       .replace('Episode', ':E')
       .replace(/ /g, '')

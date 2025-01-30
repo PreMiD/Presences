@@ -13,7 +13,7 @@ presence.on('UpdateData', async () => {
   else if (document.location.pathname.startsWith('/t/')) {
     presenceData.details = 'Browsing tag'
     if (document.querySelectorAll('h1').length > 0)
-      presenceData.state = document.querySelectorAll('h1')[0].textContent
+      presenceData.state = document.querySelectorAll('h1')[0]?.textContent
   }
   else if (document.location.pathname === '/t') {
     presenceData.details = 'Browsing topics'
@@ -24,7 +24,7 @@ presence.on('UpdateData', async () => {
   else if (document.location.pathname.startsWith('/@')) {
     presenceData.details = 'Viewing profile'
     if (document.querySelectorAll('._3FvGs').length === 1)
-      presenceData.state = document.querySelectorAll('._3FvGs')[0].textContent
+      presenceData.state = document.querySelectorAll('._3FvGs')[0]?.textContent
     else presenceData.state = document.location.pathname.replace('/', '')
   }
   else if (document.location.pathname.includes('/account')) {
@@ -44,7 +44,7 @@ presence.on('UpdateData', async () => {
 
     if (document.querySelectorAll('h1').length > 0) {
       presenceData.state = `"${
-        document.querySelectorAll('h1')[0].textContent
+        document.querySelectorAll('h1')[0]?.textContent
       }"`
     }
   }
@@ -58,7 +58,7 @@ presence.on('UpdateData', async () => {
       presenceData.state = `by ${
         document.querySelectorAll(
           '._3XzpS._1ByhS._4kjHg._1O9Y0._3l__V._1CBrG.xLon9',
-        )[0].textContent
+        )[0]?.textContent
       }`
     }
   }

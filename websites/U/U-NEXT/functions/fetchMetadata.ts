@@ -1,4 +1,4 @@
-import type { Root } from '../types'
+import type { Root } from '../types.js'
 import pLimit from 'p-limit'
 
 const limit = pLimit(1)

@@ -2,13 +2,13 @@ const presence = new Presence({
   clientId: '1216150866122244096',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/U/uwowocosplay/assets/logo.jpeg',
 }
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     details: 'Uwowo Cosplay Homepage',
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href } = document.location
@@ -92,7 +92,7 @@ function setProduct(presenceData: PresenceData, href: string) {
   presenceData.largeImageKey = document
     .querySelector<HTMLMetaElement>('[property="og:image"]')
     ?.content
-    ?.split('?')?.[0] ?? Assets.Logo
-  if (presenceData.largeImageKey !== Assets.Logo)
-    presenceData.smallImageKey = Assets.Logo
+    ?.split('?')?.[0] ?? ActivityAssets.Logo
+  if (presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.smallImageKey = ActivityAssets.Logo
 }

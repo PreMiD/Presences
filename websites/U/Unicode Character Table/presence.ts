@@ -101,7 +101,7 @@ presence.on('UpdateData', async () => {
       break
     }
     default: {
-      if (/^[0-9A-F]{4,6}$/.test(pathSplit[0])) {
+      if (/^[0-9A-F]{4,6}$/.test(pathSplit[0]!)) {
         presenceData.details = 'Viewing a unicode character'
         presenceData.state = document.querySelector<HTMLHeadingElement>(
           '#symbol-title',

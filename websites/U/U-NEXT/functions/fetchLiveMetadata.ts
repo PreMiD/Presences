@@ -1,4 +1,4 @@
-import type { LiveRoot } from '../types'
+import type { LiveRoot } from '../types.js'
 import pLimit from 'p-limit'
 
 const limit = pLimit(1)

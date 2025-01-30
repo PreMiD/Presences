@@ -55,12 +55,12 @@ presence.on('UpdateData', async () => {
     const [, path] = document.location.pathname.match(
       /^\/([a-z.]+)/i,
     ) ?? []
-    if (Object.prototype.hasOwnProperty.call(URLMap, path)) {
-      const [details, state] = URLMap[path]
+    if (path && Object.prototype.hasOwnProperty.call(URLMap, path)) {
+      const [details, state] = URLMap[path]!
       presenceData.details = details instanceof Function ? details() : details
       presenceData.state = state instanceof Function ? state() : state
     }
-    else if (path.endsWith('.jsp')) {
+    else if (path?.endsWith('.jsp')) {
       presenceData.details = 'Viewing page'
       presenceData.state = getText('.mainContent > h2:nth-child(2)')
     }

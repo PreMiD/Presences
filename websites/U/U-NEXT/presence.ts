@@ -2,12 +2,13 @@ import {
   clearLiveMetadata,
   fetchLiveMetadata,
   liveMetadata,
-} from './functions/fetchLiveMetadata'
+} from './functions/fetchLiveMetadata.js'
 import {
   clearMetadata,
   fetchMetadata,
   metadata,
-} from './functions/fetchMetadata'
+} from './functions/fetchMetadata.js'
+import { ActivityType, Assets } from 'premid'
 
 const presence = new Presence({
   clientId: '1325519017527476316',
@@ -75,7 +76,7 @@ presence.on('UpdateData', async () => {
     if (privacyMode)
       return presence.clearActivity()
 
-    await fetchMetadata(browsingMediaId[1])
+    await fetchMetadata(browsingMediaId[1]!)
 
     return await presence.setActivity({
       details: metadata?.data?.webfrontTitleStage.titleName,
@@ -102,7 +103,7 @@ presence.on('UpdateData', async () => {
   //* Match /play/sid/ed and get ed
   const watchingMediaId = path.match(/\/play\/(\w+)\/(\w+)/)
   if (watchingMediaId) {
-    await fetchMetadata(watchingMediaId[1])
+    await fetchMetadata(watchingMediaId[1]!)
     const video = document.querySelector('video')
 
     if (!video)
@@ -154,7 +155,7 @@ presence.on('UpdateData', async () => {
         buttons: [
           {
             label: strings.watchEpisode,
-            url: document.location.href.split('?')[0],
+            url: document.location.href.split('?')[0]!,
           },
           {
             label: strings.viewSeries,
@@ -206,7 +207,7 @@ presence.on('UpdateData', async () => {
         buttons: [
           {
             label: strings.watchMovie,
-            url: document.location.href.split('?')[0],
+            url: document.location.href.split('?')[0]!,
           },
         ],
       })
@@ -228,14 +229,14 @@ presence.on('UpdateData', async () => {
     if (privacyMode)
       return presence.clearActivity()
 
-    await fetchLiveMetadata(browsingLiveId[1])
+    await fetchLiveMetadata(browsingLiveId[1]!)
 
     return await presence.setActivity({
       details: liveMetadata?.data?.webfrontGetLive.name,
       state: liveMetadata?.data?.webfrontGetLive.attractions.slice(0, 128),
       largeImageKey: !showCover
         ? 'https://cdn.rcd.gg/PreMiD/websites/U/U-NEXT/assets/logo.png'
-        : `https://${liveMetadata?.data?.webfrontGetLive.notices[0].thumbnail.standard}`,
+        : `https://${liveMetadata?.data?.webfrontGetLive.notices[0]?.thumbnail.standard}`,
       ...(showSmallImages && {
         smallImageKey: Assets.Reading,
       }),
@@ -252,7 +253,7 @@ presence.on('UpdateData', async () => {
   //* Match /live/liv and get liv
   const watchingLiveId = path.match(/\/live\/(\w+)/)
   if (watchingLiveId) {
-    await fetchLiveMetadata(watchingLiveId[1])
+    await fetchLiveMetadata(watchingLiveId[1]!)
     const video = document.querySelector('video')
 
     if (!video)
@@ -294,7 +295,7 @@ presence.on('UpdateData', async () => {
         ),
       largeImageKey: !showCover
         ? 'https://cdn.rcd.gg/PreMiD/websites/U/U-NEXT/assets/logo.png'
-        : `https://${liveMetadata?.data?.webfrontGetLive.notices[0].thumbnail.standard}`,
+        : `https://${liveMetadata?.data?.webfrontGetLive.notices[0]?.thumbnail.standard}`,
       ...(showSmallImages && {
         smallImageKey: paused ? Assets.Pause : Assets.Play,
       }),
@@ -310,7 +311,7 @@ presence.on('UpdateData', async () => {
       buttons: [
         {
           label: strings.watchStream,
-          url: document.location.href.split('?')[0],
+          url: document.location.href.split('?')[0]!,
         },
       ],
     })
