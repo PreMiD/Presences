@@ -3,8 +3,8 @@ const presence = new Presence({
 	}),
 	getStrings = async () => {
 		return presence.getStrings({
-			play: "presence.playback.playing",
-			pause: "presence.playback.paused",
+			play: "general.playing",
+			pause: "general.paused",
 			newPrompt: "deepSeek.startingPrompt",
 			talkingWithAi: "deepSeek.talkingWithAi",
 			aiTalking: "deepSeek.aiTalking",
