@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1272521587912081428',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/K/Komik%20Indo/assets/logo.png',
 }
 
@@ -15,7 +17,7 @@ function getTitleText(selector: string): string {
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     details: 'Browsing...',
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href } = document.location
@@ -106,7 +108,7 @@ presence.on('UpdateData', async () => {
         {
           label: 'View Comic',
           url: document
-            .querySelectorAll('div.nextprev > a')[1]
+            .querySelectorAll('div.nextprev > a')[1]!
             .getAttribute('href'),
         },
       ]

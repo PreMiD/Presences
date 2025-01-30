@@ -285,7 +285,7 @@ presence.on('UpdateData', async () => {
             const [correct, total] = correctCount.textContent?.match(/\d+/g) ?? []
             presenceData.state = strings.questionsCorrect.replace(
               '{0}',
-              strings.of.replace('{0}', correct ?? '').replace('{1}', total),
+              strings.of.replace('{0}', correct ?? '').replace('{1}', total ?? ''),
             )
           }
           else {
@@ -318,8 +318,9 @@ presence.on('UpdateData', async () => {
               presenceData.state = `${strings.questionNumber.replace(
                 '{0}',
                 `${strings.of
-                  .replace('{0}', currentQuestion)
-                  .replace('{1}', totalQuestions)}`,
+                  .replace('{0}', currentQuestion ?? '')
+                  .replace('{1}', totalQuestions ?? '')
+                }`,
               )}`
             }
           }

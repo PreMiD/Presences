@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '681116862930747520',
 })
@@ -23,7 +25,7 @@ presence.on('UpdateData', async () => {
 
   if (current.hostname.split('.')[0] === 'bombmanual') {
     // Bomb manual page
-    switch (isLanguageCode(path[0]) ? path[1] : path[0]) {
+    switch (isLanguageCode(path[0]!) ? path[1] : path[0]) {
       // Web manual, PDF manual
       case 'web':
       case 'print': {
@@ -51,7 +53,7 @@ presence.on('UpdateData', async () => {
         else {
           presenceData.state = `${strings.page} ${page + 1} / ${
             pages.length
-          }: ${pages[page].children[0].children[1].textContent}`
+          }: ${pages[page]?.children[0]?.children[1]?.textContent}`
         }
         break
       }
@@ -106,7 +108,7 @@ presence.on('UpdateData', async () => {
         if (window.location.hash?.length > 0) {
           presenceData.state = document.querySelector(
             window.location.hash,
-          )?.children[0].children[0].children[0].children[0].children[0].textContent
+          )?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.textContent
         }
         break
         // Commercial Licensing

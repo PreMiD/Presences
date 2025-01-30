@@ -1,7 +1,9 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({ clientId: '1125405319594512404' })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/K/Kick/assets/logo.png',
 }
 
@@ -10,14 +12,14 @@ presence.on('UpdateData', async () => {
   const videoEl = document.querySelector<HTMLVideoElement>('video')
   const pathArr = pathname.split('/')
   const { details, smallImageKey, largeImageKey, state, buttons } = getPageData(
-    pathArr[1],
-    pathArr[2],
-    pathArr[3],
+    pathArr[1]!,
+    pathArr[2]!,
+    pathArr[3]!,
     hostname,
     href,
   )!
   const presenceData: PresenceData = {
-    largeImageKey: largeImageKey || Assets.Logo,
+    largeImageKey: largeImageKey || ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     details,
   } as PresenceData
@@ -41,13 +43,13 @@ presence.on('UpdateData', async () => {
   if (!(await presence.getSetting<boolean>('details'))) {
     presenceData.details = 'Browsing Kick...'
     delete presenceData.state
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
     delete presenceData.smallImageKey
     delete presenceData.buttons
   }
 
   if (await presence.getSetting<boolean>('logo'))
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
 
   if (
     presenceData.smallImageKey === Assets.Play

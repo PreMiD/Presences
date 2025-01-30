@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '640253556078673951',
 })
@@ -9,7 +11,7 @@ let currentTime = 0
 let duration = 0
 let paused = true
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/K/KimCartoon/assets/logo.png',
 }
 interface IFrameData {
@@ -33,7 +35,7 @@ function fullURL(covers: string, hostname: string) {
     return covers
   else if (covers?.includes('Uploads'))
     return `https://${hostname}${covers}`
-  else return Assets.Logo
+  else return ActivityAssets.Logo
 }
 
 presence.on('iFrameData', (inc: unknown) => {
@@ -45,7 +47,7 @@ presence.on('iFrameData', (inc: unknown) => {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const cover = await presence.getSetting<boolean>('cover')
@@ -118,10 +120,10 @@ presence.on('UpdateData', async () => {
     }
     case pathname.includes('/Cartoon/'): {
       presenceData.details = 'Viewing cartoon:'
-      presenceData.state = document.querySelector('[class="bigChar"]')?.textContent ?? pathname.split('/')[2].replace('-', ' ')
+      presenceData.state = document.querySelector('[class="bigChar"]')?.textContent ?? pathname.split('/')[2]?.replace('-', ' ')
       presenceData.largeImageKey = document
         .querySelector('[property="og:image"]')
-        ?.getAttribute('content') ?? Assets.Logo
+        ?.getAttribute('content') ?? ActivityAssets.Logo
       presenceData.buttons = [{ label: 'View Cartoon', url: href }]
       break
     }
@@ -131,8 +133,8 @@ presence.on('UpdateData', async () => {
     }
   }
 
-  if (!cover && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if (!cover && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
 
   if (presenceData.details)
     presence.setActivity(presenceData)

@@ -123,7 +123,7 @@ presence.on('UpdateData', () => {
   }
   const paths: string[] = window.location.pathname.split('/').splice(1)
 
-  switch (paths[0].toLowerCase()) {
+  switch (paths[0]?.toLowerCase()) {
     case '':
       presenceData.details = 'Looking at the home page'
       break

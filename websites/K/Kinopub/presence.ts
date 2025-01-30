@@ -1,8 +1,10 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1054755173198737458',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/K/Kinopub/assets/logo.png',
 }
 
@@ -51,7 +53,7 @@ presence.on(
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     details: 'Где-то на сайте',
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const [privacy, time, buttons, cover] = await Promise.all([
     presence.getSetting<boolean>('privacy'),

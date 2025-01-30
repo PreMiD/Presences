@@ -1,7 +1,9 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '802964241179082822',
 })
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/K/KickAssAnime/assets/logo.png',
 }
 
@@ -49,7 +51,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const [buttons, newLang, cover] = await Promise.all([
@@ -59,7 +61,7 @@ presence.on('UpdateData', async () => {
   ])
   const { pathname, hostname, href } = document.location
   const fullUrl = (string: string) =>
-    string ? `https://${hostname}${string}` : Assets.Logo
+    string ? `https://${hostname}${string}` : ActivityAssets.Logo
 
   if (oldLang !== newLang) {
     oldLang = newLang
@@ -145,7 +147,7 @@ presence.on('UpdateData', async () => {
 
   if (!buttons && presenceData.buttons)
     delete presenceData.buttons
-  if (!cover && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if (!cover && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
   presence.setActivity(presenceData)
 })

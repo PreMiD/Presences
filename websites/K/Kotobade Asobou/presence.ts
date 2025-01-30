@@ -1,11 +1,12 @@
-import languageStrings from './strings'
+import { Assets } from 'premid'
+import languageStrings from './strings.js'
 
 const presence = new Presence({
   clientId: '1233147201559990292',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum PresenceAssets {
+enum PresenceAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/K/Kotobade%20Asobou/assets/logo.png',
 }
 
@@ -24,7 +25,7 @@ presence.on('UpdateData', async () => {
         !tile.querySelector<HTMLDivElement>('.letter-container')?.textContent,
     ),
   )
-  const lastRow: HTMLDivElement = rows[nextIndex - 1]
+  const lastRow: HTMLDivElement = rows[nextIndex - 1]!
   const isComplete = !!(
     (lastRow?.children.length
       && [...lastRow.children].every(tile =>
@@ -37,12 +38,12 @@ presence.on('UpdateData', async () => {
     const finalScore = nextIndex === -1 ? 12 : nextIndex
     let outcome = ''
     for (let i = 0; i < finalScore; i++) {
-      outcome += getRowEmojis(rows[i])
+      outcome += getRowEmojis(rows[i]!)
       outcome += ' | '
     }
     presenceData.details = nextIndex === -1 ? strings.failure : strings.victory
     presenceData.state = `${finalScore}/12 - ${getRowEmojis(
-      rows[finalScore - 1],
+      rows[finalScore - 1]!,
     )}`
     presenceData.smallImageKey = Assets.Question
     presenceData.smallImageText = outcome
@@ -65,15 +66,15 @@ function getRowEmojis(row: HTMLDivElement): string {
   let emojis = ''
   for (let i = 0; i < row.children.length; i++) {
     const tile = row.children[i]
-    if (tile.classList.contains('correct'))
+    if (tile?.classList.contains('correct'))
       emojis += '🟩'
-    else if (tile.classList.contains('present'))
+    else if (tile?.classList.contains('present'))
       emojis += '🟨'
-    else if (tile.classList.contains('vowel'))
+    else if (tile?.classList.contains('vowel'))
       emojis += '↔️'
-    else if (tile.classList.contains('consonant'))
+    else if (tile?.classList.contains('consonant'))
       emojis += '↕️'
-    else if (tile.classList.contains('close'))
+    else if (tile?.classList.contains('close'))
       emojis += '🟢'
     else emojis += darkMode ? '⬛' : '⬜'
   }

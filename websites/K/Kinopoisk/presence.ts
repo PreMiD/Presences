@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1034799018980679680',
 })
@@ -29,7 +31,7 @@ function pageTitle(string: string) {
     ?.split(string)
 }
 
-const enum Assets {
+enum ActivityAssets {
   Library = 'https://cdn.rcd.gg/PreMiD/websites/K/Kinopoisk/assets/logo.png',
   Movies = 'https://cdn.rcd.gg/PreMiD/websites/K/Kinopoisk/assets/0.png',
 }
@@ -45,14 +47,14 @@ presence.on('UpdateData', async () => {
   ])
   const { hostname, pathname } = document.location
 
-  let isPaused, contentTimestamps: number[]
+  let isPaused
 
   if (!strings)
     strings = await getStrings()
 
   switch (hostname) {
     case 'www.kinopoisk.ru':
-      presenceData.largeImageKey = Assets.Library
+      presenceData.largeImageKey = ActivityAssets.Library
       switch (pathname.split('/')[1]) {
         case '':
           presenceData.details = 'На главной странице'
@@ -182,7 +184,7 @@ presence.on('UpdateData', async () => {
 
     case 'hd.kinopoisk.ru':
       presenceData.details = 'В онлайн-кинотеатре'
-      presenceData.largeImageKey = Assets.Movies
+      presenceData.largeImageKey = ActivityAssets.Movies
 
       if (document.querySelector('.FilmContent_wrapper__EicQU')) {
         presenceData.details = `Смотрит информацию ${textContent(
@@ -223,7 +225,7 @@ presence.on('UpdateData', async () => {
             !privacy ? contentTitle : contentSerieTitle ? 'сериал' : 'фильм'
           }`
 
-          contentTimestamps = presence.getTimestampsfromMedia(
+          const contentTimestamps = presence.getTimestampsfromMedia(
             document.querySelector('video')!,
           );
 

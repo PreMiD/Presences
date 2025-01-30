@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1265368122689458378',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/K/KOLEO/assets/logo.png',
   Logo2 = 'https://cdn.rcd.gg/PreMiD/websites/K/KOLEO/assets/0.png',
   Buy = 'https://cdn.rcd.gg/PreMiD/websites/K/KOLEO/assets/1.png',
@@ -16,7 +18,7 @@ let oldStations: string | string[]
 async function NoPage(presenceData: PresenceData): Promise<void> {
   presenceData.name = 'KOLEO - 404'
   presenceData.details = 'Nie znaleziono strony.'
-  presenceData.largeImageKey = Assets.Logo
+  presenceData.largeImageKey = ActivityAssets.Logo
   delete presenceData.state
   presenceData.smallImageText = 'Zgubił się...'
   presenceData.smallImageKey = Assets.Question
@@ -42,9 +44,9 @@ presence.on('UpdateData', async () => {
   const { href, hostname, pathname } = document.location
   const presenceData: PresenceData = {
     details: 'Ładowanie.',
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     smallImageText: 'Ładowanie...',
-    smallImageKey: Assets.Train,
+    smallImageKey: ActivityAssets.Train,
     startTimestamp: browsingTimestamp,
   }
   const privacySetting = await presence.getSetting<boolean>('privacy')
@@ -54,7 +56,7 @@ presence.on('UpdateData', async () => {
       href.endsWith('koleo.pl/')
       || href.endsWith('koleo.pl/#')
       || pathname.includes('rozklad-jazdy')
-      || (operators.includes(pathname.split('/')[1])
+      || (operators.includes(pathname.split('/')[1]!)
         && !pathname.includes('bilety-miesieczne'))
     ) {
       let startText: string | undefined,
@@ -74,7 +76,7 @@ presence.on('UpdateData', async () => {
       }
       else if (
         pathname.includes('rozklad-jazdy')
-        || operators.includes(pathname.split('/')[1])
+        || operators.includes(pathname.split('/')[1]!)
       ) {
         const startStationButton = document.querySelector('.closest-station')
         const endStationButton = document.querySelector('.swap-stations')
@@ -173,12 +175,12 @@ presence.on('UpdateData', async () => {
             ) {
               presenceData.details = 'Wybiera ofertę połączenia na wyznaczone stacje.'
               presenceData.smallImageText = 'Wybiera najlepszą oferte...'
-              presenceData.smallImageKey = Assets.Ticket
+              presenceData.smallImageKey = ActivityAssets.Ticket
             }
             else {
               presenceData.details = 'Szuka połączenia na wyznaczone stacje.'
               presenceData.smallImageText = 'Szuka...'
-              presenceData.smallImageKey = Assets.Train
+              presenceData.smallImageKey = ActivityAssets.Train
             }
             presenceData.buttons = [
               {
@@ -197,7 +199,7 @@ presence.on('UpdateData', async () => {
           privacySetting ? '.' : ` w ${transportation.textContent}.`
         }`
         presenceData.smallImageText = 'Przegląda bilety...'
-        presenceData.smallImageKey = Assets.Ticket
+        presenceData.smallImageKey = ActivityAssets.Ticket
       }
       const typeOfTicket = document.querySelector(
         '.active-ticket__ticket-name',
@@ -217,7 +219,7 @@ presence.on('UpdateData', async () => {
         presenceData.state = `W ${
           document.querySelector('.active-ticket__carrier-name')?.textContent
         }.`
-        presenceData.smallImageKey = Assets.Buy
+        presenceData.smallImageKey = ActivityAssets.Buy
         if (stepOfBuying === '2' && !offers) {
           const startStationButton = document.querySelector('.closest-station')
           const endStationButton = document.querySelector('.swap-stations')
@@ -241,7 +243,7 @@ presence.on('UpdateData', async () => {
             ]
 
             presenceData.smallImageText = 'Szuka połączenia...'
-            presenceData.smallImageKey = Assets.Train
+            presenceData.smallImageKey = ActivityAssets.Train
             if (!privacySetting) {
               presenceData.state = `Szuka połączenia ${
                 startText && startText.length > 0 ? `z ${startText}` : ''
@@ -273,7 +275,7 @@ presence.on('UpdateData', async () => {
             }
 
             presenceData.smallImageText = 'Wybrał ofertę...'
-            presenceData.smallImageKey = Assets.Ticket
+            presenceData.smallImageKey = ActivityAssets.Ticket
           }
         }
       }
@@ -335,7 +337,7 @@ presence.on('UpdateData', async () => {
       if (!titleOfOrder || !dateOfTransport || !typeOfTicket || !costOfOrder) {
         presenceData.details = 'Ładuje zamówienie...'
         presenceData.smallImageText = 'Ładuje zamówienie...'
-        presenceData.smallImageKey = Assets.Buy
+        presenceData.smallImageKey = ActivityAssets.Buy
         return presence.setActivity(presenceData)
       }
 
@@ -378,14 +380,14 @@ presence.on('UpdateData', async () => {
         presenceData.details = 'Kupuje bilet.'
       }
       presenceData.smallImageText = 'Kupuje bilet...'
-      presenceData.smallImageKey = Assets.Buy
+      presenceData.smallImageKey = ActivityAssets.Buy
     }
     else if (pathname.startsWith('/ticket/')) {
       const tickets = document.querySelectorAll('.ticket')
       if (tickets.length === 0) {
         presenceData.details = 'Ładuje bilet/y...'
         presenceData.smallImageText = 'Ładuje bilet/y...'
-        presenceData.smallImageKey = Assets.Ticket
+        presenceData.smallImageKey = ActivityAssets.Ticket
         return presence.setActivity(presenceData)
       }
 
@@ -495,7 +497,7 @@ presence.on('UpdateData', async () => {
       presenceData.smallImageText = `Przegląda ${
         tickets.length > 1 ? 'bilety' : 'bilet'
       }...`
-      presenceData.smallImageKey = Assets.Ticket
+      presenceData.smallImageKey = ActivityAssets.Ticket
       presenceData.buttons = [
         { label: 'Moje Bilety', url: 'https://koleo.pl/my/orders' },
       ]
@@ -517,7 +519,7 @@ presence.on('UpdateData', async () => {
       )
       let dateText: string | undefined
       if (dateTimeText)
-        dateText = dateTimeText.textContent?.split('–')[0].trim()
+        dateText = dateTimeText.textContent?.split('–')[0]?.trim()
 
       let travelOffer: string | undefined
       for (const option of Array.from(
@@ -549,14 +551,14 @@ presence.on('UpdateData', async () => {
           presenceData.details = 'Wybiera ofertę biletu...'
         }
         presenceData.smallImageText = 'Wybiera ofertę...'
-        presenceData.smallImageKey = Assets.Ticket
+        presenceData.smallImageKey = ActivityAssets.Ticket
       }
       else {
         presenceData.details = 'Przegląda oferty biletów...'
         if (!privacySetting)
           presenceData.state = `Z ${startStation} - Do ${endStation} - Na ${dateText}.`
         presenceData.smallImageText = 'Przegląda oferty...'
-        presenceData.smallImageKey = Assets.Ticket
+        presenceData.smallImageKey = ActivityAssets.Ticket
       }
     }
     else if (pathname.startsWith('/my')) {
@@ -632,7 +634,7 @@ presence.on('UpdateData', async () => {
             presenceData.state = `Przy użyciu ${title}.`
           }
           presenceData.smallImageText = 'Doładowuje konto...'
-          presenceData.smallImageKey = Assets.Buy
+          presenceData.smallImageKey = ActivityAssets.Buy
         }
         else if (pathname.includes('invoice-details')) {
           presenceData.details = 'Wypełnia dane do faktury - konto KOLEO'
@@ -691,7 +693,7 @@ presence.on('UpdateData', async () => {
   }
   else if (hostname === 'pomoc.koleo.pl') {
     presenceData.name = 'KOLEO - pomoc'
-    presenceData.largeImageKey = Assets.Logo2
+    presenceData.largeImageKey = ActivityAssets.Logo2
     presenceData.smallImageText = 'Przegląda pomoc...'
     presenceData.smallImageKey = Assets.Viewing
 
@@ -739,7 +741,7 @@ presence.on('UpdateData', async () => {
   }
   else if (hostname === ('magazyn.koleo.pl')) {
     presenceData.name = 'KOLEO - magazyn'
-    presenceData.largeImageKey = Assets.Logo2
+    presenceData.largeImageKey = ActivityAssets.Logo2
     presenceData.smallImageKey = Assets.Viewing
     if (
       pathname === '/'
@@ -800,7 +802,7 @@ presence.on('UpdateData', async () => {
       }
     }
     else {
-      const topicOfPage = document.title.split('›')[0].trim()
+      const topicOfPage = document.title.split('›')[0]?.trim()
         || document.querySelector('.entry-header h1.entry-title')?.textContent
       const authorOfPage = document.querySelector(
         '.mks_author_widget .widget-title',
@@ -844,14 +846,14 @@ presence.on('UpdateData', async () => {
   }
   else if (hostname === ('travel.koleo.pl')) {
     presenceData.name = 'KOLEO - travel'
-    presenceData.largeImageKey = Assets.Logo2
+    presenceData.largeImageKey = ActivityAssets.Logo2
     presenceData.smallImageKey = Assets.Viewing
     if (pathname === '/') {
       presenceData.details = 'Przegląda travel KOLEO.'
       presenceData.smallImageText = 'Przegląda travel...'
     }
     else {
-      const topicOfPage = document.title.split('›')[0].trim()
+      const topicOfPage = document.title.split('›')[0]?.trim()
         || document.querySelector('.entry-header h1.entry-title')?.textContent
       if (topicOfPage) {
         const authorOfPage = document.querySelector(
@@ -900,7 +902,7 @@ presence.on('UpdateData', async () => {
   }
   else if (hostname === ('sklep.koleo.pl')) {
     presenceData.name = 'KOLEO - sklep'
-    presenceData.largeImageKey = Assets.Logo2
+    presenceData.largeImageKey = ActivityAssets.Logo2
     presenceData.smallImageKey = Assets.Viewing
     if (
       pathname === '/'
@@ -936,7 +938,7 @@ presence.on('UpdateData', async () => {
         || pathname.startsWith('/gry/')
         || pathname.startsWith('/duch-podrozy/')
         || pathname.startsWith('/marka/')
-        || pathname.split('/')[2].includes('page'))
+        || pathname.split('/')[2]?.includes('page'))
       && !document.querySelector('.product_title')
     ) {
       const pageNumber = document.querySelector(
@@ -997,7 +999,7 @@ presence.on('UpdateData', async () => {
         }`
       }
       presenceData.smallImageText = 'Przegląda koszyk...'
-      presenceData.smallImageKey = Assets.Buy
+      presenceData.smallImageKey = ActivityAssets.Buy
     }
     else if (pathname.startsWith('/zamowienie')) {
       const cartItems = document.querySelectorAll('.cart_item')
@@ -1015,12 +1017,12 @@ presence.on('UpdateData', async () => {
           }`
         }
         presenceData.smallImageText = 'Realizuje zamówienie...'
-        presenceData.smallImageKey = Assets.Buy
+        presenceData.smallImageKey = ActivityAssets.Buy
       }
       else {
         presenceData.details = 'Przegląda swoje zamówienie.'
         presenceData.smallImageText = 'Przegląda zamówienie...'
-        presenceData.smallImageKey = Assets.Buy
+        presenceData.smallImageKey = ActivityAssets.Buy
       }
     }
     else if (pathname.startsWith('/moje-konto')) {

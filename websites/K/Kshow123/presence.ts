@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '614388233886760972',
 })
@@ -6,13 +8,11 @@ const strings = presence.getStrings({
   pause: 'general.paused',
 })
 
-let browsingTimestamp = Math.floor(Date.now() / 1000)
+const browsingTimestamp = Math.floor(Date.now() / 1000)
 let iFrameVideo: boolean
 let currentTime: number
 let duration: number
 let paused: boolean
-let lastPlaybackState: boolean
-let playback: boolean
 
 interface IFrameData {
   iframeVideo: {
@@ -40,13 +40,7 @@ if (document.location.pathname.includes('.html')) {
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/K/Kshow123/assets/logo.png',
-  }
-
-  presenceData.startTimestamp = browsingTimestamp
-
-  if (lastPlaybackState !== playback) {
-    lastPlaybackState = playback
-    browsingTimestamp = Math.floor(Date.now() / 1000)
+    startTimestamp: browsingTimestamp,
   }
 
   if (

@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '813518808634621952',
 })
@@ -18,7 +20,7 @@ const noGames: string[] = [
   'Watch Party',
 ]
 
-const enum Assets {
+enum ActivityAssets {
   Kosmimain = 'https://cdn.rcd.gg/PreMiD/websites/K/kosmi.io/assets/0.png',
   Vcall = 'https://cdn.rcd.gg/PreMiD/websites/K/kosmi.io/assets/1.png',
   Gamepad = 'https://cdn.rcd.gg/PreMiD/websites/K/kosmi.io/assets/2.png',
@@ -49,7 +51,7 @@ presence.on('UpdateData', async () => {
           .querySelectorAll<HTMLDivElement>(
             'div[class="ui tabular swipableMenu-xjk menu"] > a',
           )[1]
-          .textContent
+          ?.textContent
           ?.trim() ?? '0',
         10,
       ) - 1
@@ -66,7 +68,7 @@ presence.on('UpdateData', async () => {
     /* This is executed if the user plays a game that is not in the "Special Activities" Array */
     if (activityName && !noGames.includes(activityName.textContent ?? '')) {
       details = `Playing ${activityName.textContent}`
-      smallImageKey = Assets.Gamepad
+      smallImageKey = ActivityAssets.Gamepad
     }
     else if (activityName && noGames.includes(activityName.textContent ?? '')) {
       switch (
@@ -78,14 +80,14 @@ presence.on('UpdateData', async () => {
           break
         case 'Paint':
           details = 'Painting'
-          smallImageKey = Assets.Paintbrush
+          smallImageKey = ActivityAssets.Paintbrush
           break
         case 'Table':
           details = 'At the Table'
           break
         default:
           details = `In a ${activityName.textContent}`
-          smallImageKey = Assets.Vcall
+          smallImageKey = ActivityAssets.Vcall
           break
       }
     }

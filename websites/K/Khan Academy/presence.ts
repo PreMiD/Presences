@@ -10,7 +10,7 @@ const strings = presence.getStrings({
   profile: 'general.viewProfile',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/K/Khan%20Academy/assets/logo.png',
   Video = 'https://cdn.rcd.gg/PreMiD/websites/K/Khan%20Academy/assets/0.png',
   Article = 'https://cdn.rcd.gg/PreMiD/websites/K/Khan%20Academy/assets/1.png',
@@ -19,7 +19,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     details: (await strings).watching,
   }
 
@@ -83,10 +83,10 @@ presence.on('UpdateData', async () => {
       )?.textContent
 
       if (document.location.pathname.includes('/v/'))
-        presenceData.smallImageKey = Assets.Video
+        presenceData.smallImageKey = ActivityAssets.Video
       else if (document.location.pathname.includes('/a/'))
-        presenceData.smallImageKey = Assets.Article
-      else presenceData.smallImageKey = Assets.Exercise
+        presenceData.smallImageKey = ActivityAssets.Article
+      else presenceData.smallImageKey = ActivityAssets.Exercise
     }
   }
 

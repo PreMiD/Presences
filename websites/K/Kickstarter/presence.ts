@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({ clientId: '1014441192106229790' })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 const slideshow = presence.createSlideshow()
@@ -23,17 +25,17 @@ const staticPages: { [name: string]: string } = {
   'blog': 'Reading blog posts',
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/K/Kickstarter/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const presenceDataSlide: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { href, pathname } = document.location
@@ -41,7 +43,7 @@ presence.on('UpdateData', async () => {
   const showButtons = await presence.getSetting<boolean>('buttons')
 
   if (pathArr[1] === 'projects') {
-    presenceData.details = presenceDataSlide.details = pathArr.length > 4 ? staticsTabsProject[pathArr[4]] : 'Viewing a project'
+    presenceData.details = presenceDataSlide.details = pathArr.length > 4 ? staticsTabsProject[pathArr[4]!] : 'Viewing a project'
     presenceData.state = document.querySelector('.project-name')?.textContent
       ?? document.querySelector('span > a')?.textContent
     if (!pathname.includes('pledge')) {
@@ -55,13 +57,13 @@ presence.on('UpdateData', async () => {
 
     presenceData.smallImageKey = presenceDataSlide.smallImageKey = Assets.Reading
     presenceData.buttons = presenceDataSlide.buttons = [
-      { label: 'View Project', url: href.split('pledge')[0] },
+      { label: 'View Project', url: href.split('pledge')[0]! },
     ]
 
     slideshow.addSlide('projectName', presenceData, 5000)
   }
-  else if (Object.keys(staticPages).includes(pathArr[1])) {
-    presenceData.details = staticPages[pathArr[1]]
+  else if (Object.keys(staticPages).includes(pathArr[1]!)) {
+    presenceData.details = staticPages[pathArr[1]!]
   }
   else {
     presenceData.details = 'Browsing'

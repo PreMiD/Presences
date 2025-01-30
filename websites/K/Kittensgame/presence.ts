@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1218931024592113744',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Advice = 'https://cdn.rcd.gg/PreMiD/websites/K/Kittensgame/assets/0.png',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/K/Kittensgame/assets/logo.png',
   Loading = 'https://cdn.rcd.gg/PreMiD/websites/K/Kittensgame/assets/1.gif',
@@ -11,7 +13,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href, hostname } = document.location
@@ -23,7 +25,7 @@ presence.on('UpdateData', async () => {
           ?.value !== 100
       ) {
         presenceData.details = 'Loading...'
-        presenceData.smallImageKey = Assets.Loading
+        presenceData.smallImageKey = ActivityAssets.Loading
       }
       else {
         const mainData = await presence.getPageVariable(
@@ -40,7 +42,7 @@ presence.on('UpdateData', async () => {
           advice?.textContent
           && advice.getAttribute('style')?.includes('display: block')
         ) {
-          presenceData.smallImageKey = Assets.Advice
+          presenceData.smallImageKey = ActivityAssets.Advice
           presenceData.smallImageText = advice?.textContent
         }
 
