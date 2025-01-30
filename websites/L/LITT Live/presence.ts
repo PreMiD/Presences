@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '575756169986048004',
 })
@@ -10,8 +12,8 @@ presence.on('UpdateData', async () => {
   const sidePanel = document.querySelector('.MuiPaper-elevation')
   let thumbnail: HTMLImageElement | null = null
   if (sidePanel && sidePanel.childNodes[1]) {
-    thumbnail = sidePanel.childNodes[1].childNodes[0].childNodes[0]
-      .childNodes[0] as HTMLImageElement
+    thumbnail = sidePanel.childNodes[1].childNodes[0]?.childNodes[0]
+      ?.childNodes[0] as HTMLImageElement
   }
 
   const presenceData: PresenceData = {

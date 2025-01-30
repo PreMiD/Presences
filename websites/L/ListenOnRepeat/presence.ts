@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '639534386538348565',
 })
@@ -51,16 +53,16 @@ presence.on('UpdateData', async () => {
     )
     ?.textContent
     ?.split(':')[1]
-    .split('(')[0]
-    .trim()
+    ?.split('(')[0]
+    ?.trim()
   const globalRepeats = document
     .querySelector(
       '#content > div.main-area-offset > div:nth-child(2) > div.player-card > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1) > div > div > span',
     )
     ?.textContent
     ?.split(':')[1]
-    .split('(')[0]
-    .trim()
+    ?.split('(')[0]
+    ?.trim()
 
   if (lastPlaybackState !== playback) {
     lastPlaybackState = playback

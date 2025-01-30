@@ -1,23 +1,25 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1247668968395903030',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/L/LiveATC/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     type: ActivityType.Listening,
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href, hostname } = document.location
 
   switch (hostname.split('.')[0]) {
     case 'www': {
-      switch (pathname.split('/')[1].replace('.php', '')) {
+      switch (pathname.split('/')[1]?.replace('.php', '')) {
         case '': {
           presenceData.details = 'Viewing homepage'
           break
@@ -70,8 +72,8 @@ presence.on('UpdateData', async () => {
             presenceData.state = audio
               .querySelector('source')
               ?.src
-              .split('/')[4]
-              .split('.')[0]
+              ?.split('/')[4]
+              ?.split('.')[0]
             presenceData.smallImageKey = audio.paused
               ? Assets.Pause
               : Assets.Play
@@ -111,7 +113,7 @@ presence.on('UpdateData', async () => {
           break
         }
         default: {
-          presenceData.details = pathname.split('/')[1].replace('.php', '')
+          presenceData.details = pathname.split('/')[1]?.replace('.php', '')
           break
         }
       }

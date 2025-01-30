@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '938606998650519663',
 })
@@ -69,7 +71,7 @@ presence.on('UpdateData', async () => {
     presenceData.details = 'Viewing game activity:'
     presenceData.state = document.querySelectorAll<HTMLAnchorElement>(
       'div.card-body.pt-2.pb-2 a.active',
-    )[1].textContent
+    )[1]?.textContent
     presenceData.buttons = [
       {
         label: 'View Game Activity',

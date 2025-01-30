@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/L/LeoSight/assets/logo.png',
   Lsminilogo = 'https://cdn.rcd.gg/PreMiD/websites/L/LeoSight/assets/0.png',
   Artic = 'https://cdn.rcd.gg/PreMiD/websites/L/LeoSight/assets/1.png',
@@ -15,8 +15,8 @@ const enum Assets {
 let item, item2
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
-    smallImageKey: Assets.Lsminilogo,
+    largeImageKey: ActivityAssets.Logo,
+    smallImageKey: ActivityAssets.Lsminilogo,
     smallImageText: 'leosight.cz',
     startTimestamp: browsingTimestamp,
   }
@@ -319,7 +319,7 @@ presence.on('UpdateData', async () => {
                   }
                   default:
                     if (window.location.href.includes('artic')) {
-                      presenceData.smallImageKey = Assets.Artic
+                      presenceData.smallImageKey = ActivityAssets.Artic
                       presenceData.smallImageText = 'artic.leosight.cz'
                       presenceData.details = 'Artic'
                       if (path === '/' || path === '')
@@ -495,7 +495,7 @@ presence.on('UpdateData', async () => {
                       }
                     }
                     else if (window.location.href.includes('ctf')) {
-                      presenceData.smallImageKey = Assets.Ctf
+                      presenceData.smallImageKey = ActivityAssets.Ctf
                       presenceData.smallImageText = 'ctf.leosight.cz'
                       presenceData.details = 'Leosight CTF'
                       if (path.includes('login.php'))
@@ -504,12 +504,12 @@ presence.on('UpdateData', async () => {
                         presenceData.state = 'Odvařuje si mozek'
                     }
                     else if (window.location.href.includes('eco')) {
-                      presenceData.smallImageKey = Assets.Eco
+                      presenceData.smallImageKey = ActivityAssets.Eco
                       presenceData.smallImageText = 'eco.leosight.cz'
                       presenceData.details = 'Hraje Leosight ECO'
                     }
                     else if (window.location.href.includes('guard')) {
-                      presenceData.smallImageKey = Assets.Guard
+                      presenceData.smallImageKey = ActivityAssets.Guard
                       presenceData.smallImageText = 'guard.leosight.cz'
                       presenceData.details = 'Leosigh Guard'
                       if (path === '' || path === '/')

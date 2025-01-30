@@ -17,11 +17,11 @@ presence.on('UpdateData', async () => {
     'csgo': 'CS:GO',
     'l4d': 'Left 4 Dead',
   }
-  const page: string[] = ['Viewing', 'trending']
+  const page: [string, string] = ['Viewing', 'trending']
   if (window.location.hostname.includes('lambdabuilds')) {
     if (splitted[0]) {
       page[0] += ' competition:'
-      page[1] = document.querySelectorAll('h1.Title')[0].innerHTML
+      page[1] = document.querySelectorAll('h1.Title')[0]?.innerHTML ?? ''
     }
     else {
       page[0] += ':'
@@ -34,8 +34,8 @@ presence.on('UpdateData', async () => {
         page[0] += ':'
         if (window.location.hostname.includes('lft'))
           page[1] = 'LFTs'
-        else if (subComms[splitted[0]])
-          page[1] += ` in ${subComms[splitted[0]]}`
+        else if (subComms[splitted[0]!])
+          page[1] += ` in ${subComms[splitted[0]!]}`
         else if (splitted[0])
           page[1] = splitted[0]
         break
@@ -47,14 +47,14 @@ presence.on('UpdateData', async () => {
           page[0] += ' user:'
           page[1] = document.querySelectorAll(
             '.PROFILE_NAME.Title',
-          )[0].innerHTML
+          )[0]?.innerHTML ?? ''
           break
         }
         else if (splitted[1] === 'post') {
           page[0] += ' post by:'
           page[1] = document.querySelectorAll(
             '.TEXT_CLIP.POST_DISPLAY_NAME.AuthorName',
-          )[0].innerHTML
+          )[0]?.innerHTML ?? ''
           break
         }
         else if (splitted[0] === 'search') {
@@ -63,33 +63,33 @@ presence.on('UpdateData', async () => {
             page[0] += ' user'
 
           page[0] += ':'
-          page[1] = document.querySelectorAll('.Title')[0].innerHTML
+          page[1] = document.querySelectorAll('.Title')[0]?.innerHTML ?? ''
           break
         }
         else if (
-          splitted[0].includes('image')
-          || splitted[0].includes('video')
-          || splitted[1].includes('img')
+          splitted[0]?.includes('image')
+          || splitted[0]?.includes('video')
+          || splitted[1]?.includes('img')
         ) {
           page[0] += ' directly:'
           page[1] = 'media'
           break
         }
-        else if (subComms[splitted[0]]) {
+        else if (subComms[splitted[0]!]) {
           page[0] += ':'
           if (!splitted[2]) {
-            page[1] = `${splitted[1]} in ${subComms[splitted[0]]}`
+            page[1] = `${splitted[1]} in ${subComms[splitted[0]!]}`
           }
           else {
             page[1] = `${splitted[2]} ${splitted[1]} in ${
-              subComms[splitted[0]]
+              subComms[splitted[0]!]
             }`
           }
 
           break
         }
         page[0] += ':'
-        page[1] = splitted[0]
+        page[1] = splitted[0] ?? ''
         break
       }
     }

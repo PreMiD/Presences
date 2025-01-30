@@ -1,13 +1,15 @@
+import { ActivityType } from 'premid'
+
 const presence = new Presence({
   clientId: '1212508565802192936',
 })
 
 // Other default assets can be found at index.d.ts
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/L/Library%20of%20Babel/assets/logo.png',
 }
 
-const enum Pages {
+enum Pages {
   homepage = '/',
   about = '/about.html',
   search = '/search.html',
@@ -37,7 +39,7 @@ presence.on('UpdateData', async () => {
     .replace('Theory - ', '')
     .replace('Image Search: ', '')
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     largeImageText: 'hex802',
     name: 'Library of Babel',
     type: ActivityType.Watching,

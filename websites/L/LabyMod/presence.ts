@@ -178,7 +178,7 @@ presence.on('UpdateData', async () => {
           if (document.URL.includes('#'))
             [lang] = lang.split('#')
 
-          presenceData.smallImageKey = assets[lang.toLowerCase()]
+          presenceData.smallImageKey = assets[lang!.toLowerCase()]
           presenceData.state = 'Translating Website'
         }
         else if (document.URL.includes('?project=notification')) {
@@ -189,7 +189,7 @@ presence.on('UpdateData', async () => {
           if (document.URL.includes('#'))
             [lang] = lang.split('#')
 
-          presenceData.smallImageKey = assets[lang.toLowerCase()]
+          presenceData.smallImageKey = assets[lang!.toLowerCase()]
           presenceData.state = 'Translating Notification'
         }
         else if (document.URL.includes('?project=client')) {
@@ -200,7 +200,7 @@ presence.on('UpdateData', async () => {
           if (document.URL.includes('#'))
             [lang] = lang.split('#')
 
-          presenceData.smallImageKey = assets[lang.toLowerCase()]
+          presenceData.smallImageKey = assets[lang!.toLowerCase()]
           presenceData.state = 'Translating Client'
         }
       }

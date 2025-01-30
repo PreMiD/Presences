@@ -35,7 +35,7 @@ function filterIterable<T extends Element>(
   return Array.from(itr).find((element, ind) => fnc(element, ind))
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/L/Letterboxd/assets/logo.png',
 }
 
@@ -44,7 +44,7 @@ presence.on('UpdateData', async () => {
   path.pop()
 
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 
@@ -63,7 +63,7 @@ presence.on('UpdateData', async () => {
         presenceData.buttons = generateButtonText(presenceData.details)
         break
       case 'search':
-        presenceData.details = `Searching for ${path[1].replaceAll('+', ' ')}`
+        presenceData.details = `Searching for ${path[1]?.replaceAll('+', ' ')}`
         break
 
       case 'settings': {
@@ -109,7 +109,7 @@ presence.on('UpdateData', async () => {
           path[0] === 'director' ? 'director' : 'actor'
         }: ${name}`
         presenceData.largeImageKey = pfp
-        presenceData.smallImageKey = Assets.Logo
+        presenceData.smallImageKey = ActivityAssets.Logo
         presenceData.buttons = generateButtonText(presenceData.details)
 
         break
@@ -118,8 +118,8 @@ presence.on('UpdateData', async () => {
       case 'activity': {
         const name = (
           document.querySelectorAll('.title-3')[0]
-            .firstElementChild as HTMLAnchorElement
-        ).textContent
+            ?.firstElementChild as HTMLAnchorElement
+        )?.textContent
         presenceData.smallImageKey = getImageURLByAlt(name ?? '')
         presenceData.smallImageText = name
 
@@ -191,7 +191,7 @@ presence.on('UpdateData', async () => {
                       ?.textContent
                   }`
                   presenceData.largeImageKey = getImageURLByAlt(title)
-                  presenceData.smallImageKey = Assets.Logo
+                  presenceData.smallImageKey = ActivityAssets.Logo
                   delete presenceData.startTimestamp
                   presenceData.buttons = [
                     { label: 'Watch trailer', url: window.location.href },
@@ -200,7 +200,7 @@ presence.on('UpdateData', async () => {
                 else {
                   const title = document.querySelectorAll(
                     '.contextual-title',
-                  )[0].firstElementChild?.firstElementChild
+                  )[0]?.firstElementChild?.firstElementChild
                     ?.nextElementSibling
                   const year = title?.nextElementSibling
                     ?.firstElementChild
@@ -233,7 +233,7 @@ presence.on('UpdateData', async () => {
                   presenceData.largeImageKey = getImageURLByAlt(
                     clarifyString(title?.textContent ?? ''),
                   )
-                  presenceData.smallImageKey = Assets.Logo
+                  presenceData.smallImageKey = ActivityAssets.Logo
                 }
               }
               else {
@@ -256,7 +256,7 @@ presence.on('UpdateData', async () => {
                   { label: `View ${title}`, url: window.location.href },
                 ]
                 presenceData.largeImageKey = getImageURLByAlt(title)
-                presenceData.smallImageKey = Assets.Logo
+                presenceData.smallImageKey = ActivityAssets.Logo
                 break
               }
             }
@@ -367,13 +367,13 @@ presence.on('UpdateData', async () => {
 
             case 'stats': {
               const name = document.querySelectorAll('.yir-member-subtitle')[0]
-                .lastElementChild
+                ?.lastElementChild
               presenceData.details = `Viewing ${name?.textContent}'s statistics`
               presenceData.largeImageKey = (
                 name?.previousElementSibling
                   ?.firstElementChild as HTMLImageElement
               )?.src
-              presenceData.smallImageKey = Assets.Logo
+              presenceData.smallImageKey = ActivityAssets.Logo
               presenceData.buttons = [
                 {
                   label: `View ${name?.textContent}'s stats`,
@@ -392,8 +392,8 @@ presence.on('UpdateData', async () => {
               ).textContent
               const name = (
                 document.querySelectorAll('.name')[0]
-                  .firstElementChild as HTMLSpanElement
-              ).textContent
+                  ?.firstElementChild as HTMLSpanElement
+              )?.textContent
               presenceData.details = `Viewing the list ${title}`
               presenceData.buttons = generateButtonText(presenceData.details)
               presenceData.state = `By ${name}`
@@ -440,7 +440,7 @@ presence.on('UpdateData', async () => {
               presenceData.largeImageKey = getImageURLByAlt(
                 clarifyString(title?.textContent ?? ''),
               )
-              presenceData.smallImageKey = Assets.Logo
+              presenceData.smallImageKey = ActivityAssets.Logo
 
               break
             }
@@ -449,7 +449,7 @@ presence.on('UpdateData', async () => {
               const title = clarifyString(
                 (
                   document.querySelectorAll('.film-title-wrapper')[0]
-                    .firstElementChild as HTMLAnchorElement
+                    ?.firstElementChild as HTMLAnchorElement
                 )?.textContent ?? '',
               )
               const rater = filterIterable(
@@ -497,8 +497,8 @@ presence.on('UpdateData', async () => {
           ) {
             const name = (
               document.querySelectorAll('.title-3')[0]
-                .firstElementChild as HTMLAnchorElement
-            ).textContent
+                ?.firstElementChild as HTMLAnchorElement
+            )?.textContent
             if (user && path[0] !== user && path[0] !== user.toLowerCase()) {
               presenceData.details = (presenceData.details as string)
                 .replace('their', `${name}'s`)
@@ -524,7 +524,7 @@ presence.on('UpdateData', async () => {
             document.querySelector('#avatar-zoom')
               ?.previousElementSibling as HTMLImageElement
           )?.src
-          presenceData.smallImageKey = Assets.Logo
+          presenceData.smallImageKey = ActivityAssets.Logo
           presenceData.buttons = [
             { label: `View ${name}`, url: window.location.href },
           ]

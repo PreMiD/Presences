@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '934789855962083359',
 })
@@ -16,7 +18,7 @@ async function getStrings() {
   )
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/L/LookMovie/assets/logo.png',
 }
 
@@ -25,7 +27,7 @@ let oldLang: string | null = null
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browingTimestamp,
   }
   const video = document.querySelector<HTMLVideoElement>('video')
@@ -65,7 +67,7 @@ presence.on('UpdateData', async () => {
     presenceData.largeImageKey = document
       .querySelector('[class="movie-img"]')
       ?.firstElementChild
-      ?.getAttribute('data-background-image') ?? Assets.Logo
+      ?.getAttribute('data-background-image') ?? ActivityAssets.Logo
   }
   else if (video?.duration) {
     delete presenceData.startTimestamp
@@ -86,7 +88,7 @@ presence.on('UpdateData', async () => {
       ?.getAttribute('src')
       ?? document.querySelector<HTMLMetaElement>('[property="og:image"]')
         ?.content
-        ?? Assets.Logo
+        ?? ActivityAssets.Logo
     presenceData.buttons = [
       {
         label: strings.buttonWatchVideo,
@@ -109,7 +111,7 @@ presence.on('UpdateData', async () => {
   if (!buttons)
     delete presenceData.buttons
   if (!covers)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (presenceData.details)
     presence.setActivity(presenceData)
   else presence.setActivity()

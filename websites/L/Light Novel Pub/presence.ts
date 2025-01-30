@@ -20,21 +20,21 @@ presence.on('UpdateData', async () => {
         presenceData.state = title.split(' | Light')[0]
         presenceData.buttons = [
           {
-            label: title.split(' | Light')[0].length >= 30
+            label: title.split(' | Light')[0]!.length >= 30
               ? 'View Novel'
-              : title.split(' | Light')[0],
+              : title.split(' | Light')[0]!,
             url: `${document.location}`,
           },
         ]
         break
       case pathname.endsWith('/reviews'):
         presenceData.details = 'Viewing the Reviews'
-        presenceData.state = title.split(' | Light')[0].split('Novel User')[0]
+        presenceData.state = title.split(' | Light')[0]!.split('Novel User')[0]
         presenceData.buttons = [
           {
-            label: presenceData.state.length >= 30
+            label: presenceData.state!.length >= 30
               ? 'View Novel'
-              : presenceData.state,
+              : presenceData.state!,
             url: `${document.location}`,
           },
         ]
@@ -42,29 +42,29 @@ presence.on('UpdateData', async () => {
       case pathname.endsWith('/chapters'):
         presenceData.details = 'Viewing the Chapters'
         presenceData.state = title
-          .split(' | Light')[0]
+          .split(' | Light')[0]!
           .split('Novel Chapters')[0]
         presenceData.buttons = [
           {
-            label: presenceData.state.length >= 30
+            label: presenceData.state!.length >= 30
               ? 'View Novel'
-              : presenceData.state,
+              : presenceData.state!,
             url: `${document.location}`,
           },
         ]
         break
       default:
         presenceData.details = title
-          .split(' | Light')[0]
+          .split(' | Light')[0]!
           .split('- Chapter ')[0]
         presenceData.state = `Chapter ${
-          title.split(' | Light')[0].split('- Chapter ')[1].split(' | ')[0]
+          title.split(' | Light')[0]?.split('- Chapter ')[1]?.split(' | ')[0]
         }`
         presenceData.buttons = [
           {
-            label: presenceData.details.length >= 30
+            label: presenceData.details!.length >= 30
               ? 'View Novel'
-              : presenceData.details,
+              : presenceData.details!,
             url: `${href.split('12032016/')[0]}12032016`,
           },
           {

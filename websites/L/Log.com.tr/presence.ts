@@ -39,7 +39,7 @@ presence.on('UpdateData', () => {
   if (page.includes('/page')) {
     presenceData.details = 'Ana Sayfa'
     presenceData.state = `Sayfa: ${Number.parseInt(
-      document.location.pathname.split('/')[2],
+      document.location.pathname.split('/')[2]!,
     )}`
   }
   if (page.includes('/asfalt'))

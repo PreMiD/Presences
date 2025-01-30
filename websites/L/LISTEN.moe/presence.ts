@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence: Presence = new Presence({
   clientId: '615652705565933581',
 })
@@ -30,7 +32,7 @@ function getArtists(): string {
 
   if (elemt) {
     for (let i = 0; i < elemt.length; i++)
-      artists.push(elemt[i].textContent?.replace(/\s+/g, ' ').trim())
+      artists.push(elemt[i]?.textContent?.replace(/\s+/g, ' ').trim())
 
     artist = artists.join(' ')
   }
@@ -44,7 +46,7 @@ function getTrack(): string {
     ?.replace(/\s+/g, ' ')
     .trim()
     .split('[')[0]
-    .trim() ?? 'Loading....'
+    ?.trim() ?? 'Loading....'
   return track
 }
 

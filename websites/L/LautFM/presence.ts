@@ -11,7 +11,7 @@ presence.on('UpdateData', async () => {
   switch (
     document
       .querySelectorAll('.btn.playbutton')[0]
-      .getAttributeNode('data-trackingaction')
+      ?.getAttributeNode('data-trackingaction')
       ?.textContent
   ) {
     case 'stop': {

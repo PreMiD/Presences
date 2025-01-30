@@ -59,8 +59,8 @@ presence.on('UpdateData', () => {
           presenceData.details = 'Reading a LucidChart Blog'
           presenceData.state = document
             .querySelectorAll('.main-article')[0]
-            .querySelectorAll('h1')[0]
-            .textContent
+            ?.querySelectorAll('h1')[0]
+            ?.textContent
         }
         else if (path === '/pages/tour') {
           presenceData.details = 'Browsing LucidChart'

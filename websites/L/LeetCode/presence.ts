@@ -28,7 +28,7 @@ presence.on('UpdateData', async () => {
     presenceData.details = 'Explore'
 
     if (document.querySelectorAll('.question-title')) {
-      presenceData.state = document.querySelectorAll('.question-title')[0].textContent
+      presenceData.state = document.querySelectorAll('.question-title')[0]?.textContent
     }
   }
   else if (document.location.pathname.startsWith('/contest')) {

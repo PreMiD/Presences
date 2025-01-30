@@ -1,15 +1,17 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '917456087299534858',
 })
 const browsingTimestamp = Date.now() / 1000
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/L/Last.fm/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     smallImageKey: Assets.Search,
     startTimestamp: browsingTimestamp,
   }
@@ -91,15 +93,15 @@ presence.on('UpdateData', async () => {
             return (
               document.querySelector<HTMLImageElement>(
                 '.album-overview-cover-art > .cover-art > img',
-              )?.src ?? Assets.Logo
+              )?.src ?? ActivityAssets.Logo
             )
           }
           else {
-            return Assets.Logo
+            return ActivityAssets.Logo
           }
         }
         else {
-          return Assets.Logo
+          return ActivityAssets.Logo
         }
       })(),
       state: document.querySelector('h1.header-new-title')?.textContent,
@@ -168,7 +170,7 @@ presence.on('UpdateData', async () => {
       )?.src
 
       presenceData.largeImageKey = artwork?.includes('player_default_album')
-        ? Assets.Logo
+        ? ActivityAssets.Logo
         : artwork?.replace('/174s/', '/1024s/')
     }
     else {

@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/L/Los%20Angeles%20Times/assets/logo.jpg',
   Bestcovery = 'https://cdn.rcd.gg/PreMiD/websites/L/Los%20Angeles%20Times/assets/0.png',
   LogoSmall = 'https://cdn.rcd.gg/PreMiD/websites/L/Los%20Angeles%20Times/assets/1.png',
@@ -20,7 +20,7 @@ presence.on('UpdateData', async () => {
   const { pathname, href, search } = window.location
   const path = pathname.split('/')
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 
@@ -144,11 +144,11 @@ presence.on('UpdateData', async () => {
         ]
         const title = document.title.replace(' - Bestcovery', '')
 
-        presenceData.largeImageKey = Assets.Bestcovery
-        presenceData.smallImageKey = Assets.LogoSmall
+        presenceData.largeImageKey = ActivityAssets.Bestcovery
+        presenceData.smallImageKey = ActivityAssets.LogoSmall
         presenceData.smallImageText = 'Bestcovery powered by L.A. Times'
 
-        if (categories.includes(path[2])) {
+        if (categories.includes(path[2]!)) {
           presenceData.details = 'Viewing a Category'
           presenceData.buttons![0].label = 'View Category'
 

@@ -2,13 +2,13 @@ const presence = new Presence({
   clientId: '1258619078201839646',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/L/LTTStore/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   if (document.location.pathname === '/') {
     presenceData.details = 'Browsing'
@@ -16,9 +16,9 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname.includes('/products/')) {
     presenceData.largeImageKey = document.querySelector<HTMLMetaElement>('[property="og:image"]')
-      ?.content ?? Assets.Logo
+      ?.content ?? ActivityAssets.Logo
 
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = 'LTTStore'
     presenceData.details = 'Viewing Product'
 
