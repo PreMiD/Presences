@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1081552715609542686',
 })
@@ -36,14 +38,14 @@ function removePlural(string: string) {
     return string.slice(0, -1)
   else return string
 }
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/Scribd/assets/logo.png',
 }
 let strings: Awaited<ReturnType<typeof getStrings>>
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingStamp,
   }
   const { href, pathname } = document.location
@@ -66,7 +68,7 @@ presence.on('UpdateData', async () => {
       ?.textContent
       ?.replace(/ /g, '') ?? '',
   ).replace('doc', 'document')
-  const type = selected.match(
+  const type = selected?.match(
     /(everything)|(book)|(doc)|(podcast)|(sheeetmusic)|(snapshot)/g,
   )
     ? true
@@ -105,7 +107,7 @@ presence.on('UpdateData', async () => {
                     ?? document.querySelector('[class="_2mzx8C"] > span')
                       ?.textContent
                       ?? selected
-                        .replace(/doc/g, 'document')
+                        ?.replace(/doc/g, 'document')
                         .match(
                           /(everything)|(book)|(document)|(podcast)|(snapshot)/g,
                         )?.[0]
@@ -121,7 +123,7 @@ presence.on('UpdateData', async () => {
             ?? document.querySelector('[data-e2e="doc_page_title"]')?.textContent
           presenceData.largeImageKey = document
             .querySelector('meta[property="og:image"]')
-            ?.getAttribute('content') ?? Assets.Logo
+            ?.getAttribute('content') ?? ActivityAssets.Logo
 
           presenceData.buttons = [
             {
@@ -187,7 +189,7 @@ presence.on('UpdateData', async () => {
       )?.textContent
       presenceData.largeImageKey = document
         .querySelector('[class*=\'profile_thumbnail\'] > img')
-        ?.getAttribute('src') ?? Assets.Logo
+        ?.getAttribute('src') ?? ActivityAssets.Logo
       break
     }
     case pathname === '/': {
@@ -244,7 +246,7 @@ presence.on('UpdateData', async () => {
             privacy
               ? ''
               : document.querySelector('[data-e2e="pill-selected"]')
-                ?.textContent ?? pathnameSplit[2].slice(0, -1)
+                ?.textContent ?? pathnameSplit[2]?.slice(0, -1)
           } bestsellers`
           presenceData.state = `In category: ${selected}`
           break
@@ -257,7 +259,7 @@ presence.on('UpdateData', async () => {
             .querySelector('[data-testid="results-header"]')
             ?.textContent
             ?.split('“')[1]
-            .slice(0, -1)
+            ?.slice(0, -1)
           break
         }
       }
@@ -268,8 +270,8 @@ presence.on('UpdateData', async () => {
   if (privacy && presenceData.state)
     delete presenceData.state
 
-  if ((!covers || privacy) && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if ((!covers || privacy) && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
 
   if ((!buttons || privacy) && presenceData.buttons)
     delete presenceData.buttons

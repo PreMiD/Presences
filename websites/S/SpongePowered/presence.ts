@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '626496186496450570',
 })
@@ -31,7 +33,7 @@ presence.on('UpdateData', async () => {
         presenceData.details = 'Forums, viewing category:';
         [, presenceData.state] = title?.textContent
           ?.split('topics')[0]
-          .split('Latest') ?? []
+          ?.split('Latest') ?? []
 
         delete presenceData.smallImageKey
 
@@ -115,7 +117,7 @@ presence.on('UpdateData', async () => {
       const title = document.querySelector('head > title')
       const [title2] = title?.textContent?.split(' (') ?? []
       presenceData.details = 'Java Docs, viewing:'
-      if (title2.length > 128)
+      if (title2 && title2.length > 128)
         presenceData.state = `${title2.substring(0, 125)}...`
       else presenceData.state = title2
 

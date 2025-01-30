@@ -1,8 +1,10 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '934863156356972584',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/Shikimori/assets/logo.png',
 }
 
@@ -17,7 +19,7 @@ presence.on('UpdateData', async () => {
     presence.getSetting<boolean>('buttons'),
   ])
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     details: 'Где-то на сайте',
   }
   const title = document
@@ -32,7 +34,7 @@ presence.on('UpdateData', async () => {
   const isImageExist = (tags: string) => {
     return document.querySelector<HTMLImageElement>(tags) && !privacy && logo
       ? document.querySelector<HTMLImageElement>(tags)?.src
-      : Assets.Logo
+      : ActivityAssets.Logo
   }
 
   presenceData.buttons = [
@@ -191,7 +193,7 @@ presence.on('UpdateData', async () => {
     case 'versions':
     case 'topics':
       presenceData.details = `Профиль ${
-        !privacy ? pathname.split('/')[1].replace('+', ' ') : 'пользователя'
+        !privacy ? pathname.split('/')[1]?.replace('+', ' ') : 'пользователя'
       }`
       presenceData.state = title
       presenceData.smallImageKey = Assets.Viewing
@@ -209,7 +211,7 @@ presence.on('UpdateData', async () => {
 
     case 'history':
       presenceData.details = `Профиль ${
-        !privacy ? pathname.split('/')[1].replace('+', ' ') : 'пользователя'
+        !privacy ? pathname.split('/')[1]?.replace('+', ' ') : 'пользователя'
       }`
       presenceData.state = 'История списка'
       presenceData.largeImageKey = isImageExist('.submenu-triangle img')
@@ -217,7 +219,7 @@ presence.on('UpdateData', async () => {
       break
 
     case 'list':
-      if (pathname.split('/')[3].match(/anime|manga/)) {
+      if (pathname.split('/')[3]?.match(/anime|manga/)) {
         presenceData.details = `${textContent('.subheadline')} ${
           !privacy ? pathname.split('/')[1] : 'пользователя'
         }`

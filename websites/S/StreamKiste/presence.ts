@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 interface PageContext {
   middleware: (ref: Window, ...args: unknown[]) => boolean
   exec: (
@@ -29,7 +31,7 @@ function getQuery() {
         const entry = r ? r.split('=', 2) : null
         if (entry === null)
           return l
-        return Object.assign(l, { [entry[0]]: entry[1] })
+        return Object.assign(l, { [entry[0]!]: entry[1] })
       }, {})
     : {}
   return query
@@ -90,7 +92,7 @@ const pages: PageContext[] = [
               series: 'buttonViewSeries',
               other: 'buttonViewPage',
             }[type]
-          ],
+          ]!,
           url: document.location.href,
         },
       ]
@@ -201,9 +203,9 @@ presence.on('UpdateData', async () => {
         lastPageIndex
         && lastPageIndex !== pageIndex
         && pages[lastPageIndex]
-        && typeof pages[lastPageIndex].destroy === 'function'
+        && typeof pages[lastPageIndex]!.destroy === 'function'
       ) {
-        pages[lastPageIndex].destroy?.(data ?? undefined)
+        pages[lastPageIndex]!.destroy!(data ?? undefined)
         lastPageIndex = pageIndex
       }
       if (!data) {

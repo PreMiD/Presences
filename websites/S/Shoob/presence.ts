@@ -42,13 +42,13 @@ const staticPages: Record<string, PresenceData> = {
 function convertSuffixedToNumber(amount: string): number {
   const [, number, suffix] = amount.match(/([\d.]+)\s*([A-Z])?/) ?? []
   return (
-    Number.parseFloat(number)
+    Number.parseFloat(number ?? '0')
     * ({
       K: 1e3,
       M: 1e6,
       B: 1e9,
       T: 1e12,
-    }[suffix] ?? 1)
+    }[suffix ?? ''] ?? 1)
   )
 }
 
@@ -61,8 +61,8 @@ function convertNumberToSuffixed(amount: number): string {
   }
   const suffixes = Object.keys(amounts).reverse()
   for (const suffix of suffixes) {
-    if (amount >= amounts[suffix])
-      return `${(amount / amounts[suffix]).toFixed(1)}${suffix}`
+    if (amount >= amounts[suffix]!)
+      return `${(amount / amounts[suffix]!).toFixed(1)}${suffix}`
   }
   return `${amount}`
 }

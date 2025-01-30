@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1079537235076071524',
 })
@@ -12,7 +14,7 @@ let video = {
   paused: true,
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/Sosac/assets/logo.png',
 }
 
@@ -26,7 +28,7 @@ presence.on(
 presence.on('UpdateData', async () => {
   const strs = await strings
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   if (
     video
@@ -41,7 +43,7 @@ presence.on('UpdateData', async () => {
     const firstH3Title = document.querySelector('h3')
     const subdomain = document.location.href
       .match(/^(?:https?:\/\/)?([^/]+)/i)?.[1]
-      .split('.')[0]
+      ?.split('.')[0]
 
     if (firstH3Title) {
       const originalText = firstH3Title.textContent
@@ -87,7 +89,7 @@ let isUploading = false
 const uploadedImages: Record<string, string> = {}
 async function uploadImage(urlToUpload: string): Promise<string> {
   if (isUploading)
-    return Assets.Logo
+    return ActivityAssets.Logo
 
   if (uploadedImages[urlToUpload])
     return uploadedImages[urlToUpload]

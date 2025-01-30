@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '619561001234464789',
 })
@@ -5,7 +7,7 @@ const browsingStamp = Math.floor(Date.now() / 1000)
 
 let recentlyCleared = 0
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/Spotify%20Podcasts/assets/logo.png',
 }
 
@@ -52,7 +54,7 @@ let oldLang: string | null = null
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     type: ActivityType.Listening,
   }
 
@@ -265,7 +267,7 @@ presence.on('UpdateData', async () => {
           ]
           if (playlistCover) {
             presenceData.largeImageKey = playlistCover
-            presenceData.smallImageKey = Assets.Logo
+            presenceData.smallImageKey = ActivityAssets.Logo
           }
         }
         else if (pathname.includes('/show/')) {
@@ -278,7 +280,7 @@ presence.on('UpdateData', async () => {
               'div._gLjHpwOxHFwo5nLM8hb > div > img.mMx2LUixlnN_Fu45JpFB',
             )
             ?.getAttribute('src')
-          presenceData.smallImageKey = Assets.Logo
+          presenceData.smallImageKey = ActivityAssets.Logo
           presenceData.buttons = [
             {
               label: strings.artist,

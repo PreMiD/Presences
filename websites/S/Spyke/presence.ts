@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: '1161544315105976342',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/Spyke/assets/logo.jpg', // The main logo of the site
   Avatar = 'https://cdn.rcd.gg/PreMiD/websites/S/Spyke/assets/0.png', // The avatar of the user will be using DOM in future
   SmallImg = 'https://cdn.rcd.gg/PreMiD/websites/S/Spyke/assets/1.png', // The thumbnail basically
@@ -34,8 +34,8 @@ presence.on('UpdateData', async () => {
   const nurl = document.location.href
   if (nurl !== url) {
     const presenceData: PresenceData = {
-      largeImageKey: Assets.Logo,
-      smallImageKey: Assets.SmallImg,
+      largeImageKey: ActivityAssets.Logo,
+      smallImageKey: ActivityAssets.SmallImg,
       details: 'A Community Discussion Platform',
       state: 'On Homepage',
       startTimestamp: browsingTimestamp,
@@ -58,7 +58,7 @@ presence.on('UpdateData', async () => {
       }
       else {
         presenceData.largeImageKey = res.data.comments[0].communities[0].dp
-        presenceData.smallImageKey = Assets.SmallImg
+        presenceData.smallImageKey = ActivityAssets.SmallImg
         presenceData.details = `Reading post in ${res.data.comments[0].communities[0].name}`
         presenceData.state = res.data.comments[0].title
         presenceData.buttons = [
@@ -83,15 +83,15 @@ presence.on('UpdateData', async () => {
       presence.setActivity(presenceData)
     }
     else if (document.location.href.includes('/upload')) {
-      presenceData.largeImageKey = Assets.Logo
-      presenceData.smallImageKey = Assets.SmallImg
+      presenceData.largeImageKey = ActivityAssets.Logo
+      presenceData.smallImageKey = ActivityAssets.SmallImg
       presenceData.details = 'Uploading a post'
       delete presenceData.state
       presence.setActivity(presenceData)
     }
     else if (document.location.href.includes('/u/')) {
-      presenceData.largeImageKey = Assets.Avatar
-      presenceData.smallImageKey = Assets.SmallImg
+      presenceData.largeImageKey = ActivityAssets.Avatar
+      presenceData.smallImageKey = ActivityAssets.SmallImg
       presenceData.details = 'Viewing a user profile'
       presenceData.state = `@${document.location.href.split('/u/')[1]}`
       presenceData.buttons = [

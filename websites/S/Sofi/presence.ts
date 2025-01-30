@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1028679580027977839',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Buy = 'https://cdn.rcd.gg/PreMiD/websites/S/Sofi/assets/0.png',
   Submit = 'https://cdn.rcd.gg/PreMiD/websites/S/Sofi/assets/1.png',
   Edit = 'https://cdn.rcd.gg/PreMiD/websites/S/Sofi/assets/2.png',
@@ -13,7 +15,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     details: 'Viewing Homepage',
     smallImageKey: Assets.Viewing,
     startTimestamp: browsingTimestamp,
@@ -131,7 +133,7 @@ presence.on('UpdateData', async () => {
       ]
       if (pathname.includes('/edit')) {
         presenceData.details = 'Editing Profile'
-        presenceData.smallImageKey = Assets.Edit
+        presenceData.smallImageKey = ActivityAssets.Edit
         presenceData.buttons = [
           {
             label: 'Edit Profile',
@@ -161,7 +163,7 @@ presence.on('UpdateData', async () => {
 
       if (pathname.includes('/submit')) {
         presenceData.details = 'Submitting Art'
-        presenceData.smallImageKey = Assets.Submit
+        presenceData.smallImageKey = ActivityAssets.Submit
         presenceData.buttons = [
           {
             label: 'Submit Art',
@@ -181,7 +183,7 @@ presence.on('UpdateData', async () => {
     if (pathname.includes('/orders'))
       return
     presenceData.details = 'Buying Gems'
-    presenceData.smallImageKey = Assets.Buy
+    presenceData.smallImageKey = ActivityAssets.Buy
     presenceData.buttons = [
       {
         label: 'Buy Gems',
@@ -196,7 +198,7 @@ presence.on('UpdateData', async () => {
 
   if (privacy) {
     presenceData.details = 'Browsing...'
-    presenceData.smallImageKey = Assets.Browse
+    presenceData.smallImageKey = ActivityAssets.Browse
     delete presenceData.smallImageText
     delete presenceData.state
     delete presenceData.buttons

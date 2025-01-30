@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 
 function translate(isMale: boolean) {
-  const refferGender = (arr: string[]): string => (isMale ? arr[0] : arr[1])
+  const refferGender = (arr: [string, string]): string => (isMale ? arr[0] : arr[1])
   const reporting: string = refferGender(['מדווח', 'מדווחת'])
   const removingQuestion: string = refferGender(['מוחק שאלה', 'מוחקת שאלה'])
   const removingAnswer: string = refferGender(['מוחק תשובה', 'מוחקת תשובה'])
@@ -119,7 +119,7 @@ fetch('https://stips.co.il/api?name=user.get_app_user').then(resp =>
   }),
 )
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/Stips/assets/logo.png',
   StipspiLight = 'https://cdn.rcd.gg/PreMiD/websites/S/Stips/assets/0.png',
   StipspinDark = 'https://cdn.rcd.gg/PreMiD/websites/S/Stips/assets/1.png',
@@ -240,7 +240,7 @@ presence.on('UpdateData', () => {
         details = cnlObj.edit
 
       details ??= cnlObj.main
-        .replace('%channel%', decodeURI(location.pathname.split('/')[2])) // %D7%90%D7%91%D7%92 => אבג
+        .replace('%channel%', decodeURI(location.pathname.split('/')[2]!)) // %D7%90%D7%91%D7%92 => אבג
         .replace('-', ' ') // סדרות-וסרטים => סדרות וסרטים
 
       action = `${Path} & ${details}`
@@ -303,7 +303,7 @@ presence.on('UpdateData', () => {
 
       details ??= tpcObj.main.replace(
         '%topic%',
-        decodeURI(location.pathname.split('/')[2]),
+        decodeURI(location.pathname.split('/')[2]!),
       )
 
       action = `${Path} & ${details}`
@@ -370,8 +370,8 @@ presence.on('UpdateData', () => {
 
   presence.setActivity({
     details: details ?? translate(isMale).default,
-    largeImageKey: Assets.Logo,
-    smallImageKey: hasDark ? Assets.StipspinDark : Assets.StipspiLight,
+    largeImageKey: ActivityAssets.Logo,
+    smallImageKey: hasDark ? ActivityAssets.StipspinDark : ActivityAssets.StipspiLight,
     startTimestamp: elapsed,
     smallImageText,
   })

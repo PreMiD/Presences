@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: '808664560936026122',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/Skribbl.io/assets/logo.png',
   Avatar = 'https://cdn.rcd.gg/PreMiD/websites/S/Skribbl.io/assets/0.png',
 }
@@ -113,7 +113,7 @@ let oldLang: string | null = null
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const buttons = await presence.getSetting<boolean>('buttons')
   const newLang = await presence.getSetting<string>('lang').catch(() => 'en')
@@ -166,7 +166,7 @@ presence.on('UpdateData', async () => {
       }
     }
     presenceData.details += ` - ${getGameRound()}`
-    presenceData.smallImageKey = Assets.Avatar
+    presenceData.smallImageKey = ActivityAssets.Avatar
     presenceData.smallImageText = `Rank: ${currentPlayer.rank} | Score: ${currentPlayer.score} | Name: ${currentPlayer.name}`.substring(
       0,
       127,

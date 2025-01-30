@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '819942708604174376',
 })
@@ -11,7 +13,7 @@ presence.on('UpdateData', async () => {
   const showButtons = await presence.getSetting<boolean>('buttons')
 
   SouthParkData ??= await presence.getPageletiable<Data>('__DATA__')
-  const data = SouthParkData.children[0].handleTVEAuthRedirection
+  const data = SouthParkData.children[0]!.handleTVEAuthRedirection
 
   let presenceData: PresenceData = {
     largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/S/South%20Park/assets/logo.jpg',

@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/Snipes/assets/logo.png',
 }
 
@@ -21,13 +21,13 @@ const assets = {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const setTimeElapsed = await presence.getSetting<boolean>('timeElapsed')
   const setShowButtons = await presence.getSetting<boolean>('showButtons')
   const setSmallImages = await presence.getSetting<boolean>('showSmallImages')
   const urlpath = window.location.pathname.split('/')
-  const urlpNum = /nl|fr|de/.test(urlpath[1]) ? 1 : 0
+  const urlpNum = /nl|fr|de/.test(urlpath[1]!) ? 1 : 0
 
   if (setTimeElapsed)
     presenceData.startTimestamp = browsingTimestamp
@@ -130,7 +130,7 @@ presence.on('UpdateData', async () => {
       .replace(/\s+/g, ' ')
       .trim()
   }
-  else if (urlpath[urlpNum + 1].startsWith('search')) {
+  else if (urlpath[urlpNum + 1]?.startsWith('search')) {
     presenceData.details = 'Search:'
     presenceData.state = new URLSearchParams(window.location.search).get('q')
 

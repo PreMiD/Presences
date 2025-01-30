@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence: Presence = new Presence({
   clientId: '897325334200975360',
 })

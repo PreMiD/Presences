@@ -1,4 +1,5 @@
-import { getEpisode, getId, getImage, getTitle } from './utils'
+import { ActivityType, Assets } from 'premid'
+import { getEpisode, getId, getImage, getTitle } from './utils.js'
 
 const presence = new Presence({
   clientId: '1286500193881161804',

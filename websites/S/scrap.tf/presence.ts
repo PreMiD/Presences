@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingStamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/scrap.tf/assets/logo.png',
   Cards = 'https://cdn.rcd.gg/PreMiD/websites/S/scrap.tf/assets/0.png',
   Hats = 'https://cdn.rcd.gg/PreMiD/websites/S/scrap.tf/assets/1.png',
@@ -23,7 +23,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingStamp,
   }
 
@@ -37,7 +37,7 @@ presence.on('UpdateData', async () => {
   else if (document.location.pathname.includes('/partswap')) {
     presenceData.details = 'MvM Part Swap'
     presenceData.state = 'Trading MvM Parts'
-    presenceData.smallImageKey = Assets.Mvm
+    presenceData.smallImageKey = ActivityAssets.Mvm
   }
   else if (document.location.pathname.includes('/itemvalues')) {
     presenceData.details = 'Checking Item Values for Premium'
@@ -145,44 +145,44 @@ presence.on('UpdateData', async () => {
     )
     presenceData.details = 'Key Trading'
     presenceData.state = `Buy price: ${buyp?.textContent} | Sell price: ${sellp?.textContent}`
-    presenceData.smallImageKey = Assets.Keys
+    presenceData.smallImageKey = ActivityAssets.Keys
   }
   else if (document.location.pathname.includes('/sell')) {
     presenceData.details = 'Selling Items'
     if (document.location.pathname.includes('/weapons')) {
       presenceData.state = 'Trading with Weapons'
-      presenceData.smallImageKey = Assets.Weapons
+      presenceData.smallImageKey = ActivityAssets.Weapons
     }
     else if (document.location.pathname.includes('/hats')) {
       presenceData.state = 'Trading with Hats'
-      presenceData.smallImageKey = Assets.Hats
+      presenceData.smallImageKey = ActivityAssets.Hats
     }
     else if (document.location.pathname.includes('/items')) {
       presenceData.state = 'Trading with Items'
-      presenceData.smallImageKey = Assets.Items
+      presenceData.smallImageKey = ActivityAssets.Items
     }
     else if (document.location.pathname.includes('/stranges')) {
       presenceData.state = 'Trading with Stranges'
-      presenceData.smallImageKey = Assets.Stranges
+      presenceData.smallImageKey = ActivityAssets.Stranges
     }
     else if (document.location.pathname.includes('/killstreaks')) {
       presenceData.state = 'Trading with Killstreak Kits'
-      presenceData.smallImageKey = Assets.Killstreaks
+      presenceData.smallImageKey = ActivityAssets.Killstreaks
     }
     else if (document.location.pathname.includes('/gifts')) {
       presenceData.state = 'Trading with Steam Games'
     }
     else if (document.location.pathname.includes('/cards')) {
       presenceData.state = 'Trading with Steam Trade Cards'
-      presenceData.smallImageKey = Assets.Cards
+      presenceData.smallImageKey = ActivityAssets.Cards
     }
     else if (document.location.pathname.includes('/skins')) {
       presenceData.state = 'Trading with Warpaints/Skins'
-      presenceData.smallImageKey = Assets.Skins
+      presenceData.smallImageKey = ActivityAssets.Skins
     }
     else if (document.location.pathname.includes('/unusuals')) {
       presenceData.state = 'Trading with Unusuals'
-      presenceData.smallImageKey = Assets.Unusuals
+      presenceData.smallImageKey = ActivityAssets.Unusuals
     }
     else if (document.location.pathname.includes('/incinerator')) {
       presenceData.state = 'Incinerating Items FOR FREE!'
@@ -194,38 +194,38 @@ presence.on('UpdateData', async () => {
   else if (document.location.pathname.includes('/buy')) {
     if (document.location.pathname.includes('/weapons')) {
       presenceData.details = 'Buying Weapons'
-      presenceData.smallImageKey = Assets.Weapons
+      presenceData.smallImageKey = ActivityAssets.Weapons
     }
     else if (document.location.pathname.includes('/hats')) {
       presenceData.details = 'Buying Hats'
-      presenceData.smallImageKey = Assets.Hats
+      presenceData.smallImageKey = ActivityAssets.Hats
     }
     else if (document.location.pathname.includes('/items')) {
       presenceData.details = 'Buying Items'
-      presenceData.smallImageKey = Assets.Items
+      presenceData.smallImageKey = ActivityAssets.Items
     }
     else if (document.location.pathname.includes('/stranges')) {
       presenceData.details = 'Buying Stranges'
-      presenceData.smallImageKey = Assets.Stranges
+      presenceData.smallImageKey = ActivityAssets.Stranges
     }
     else if (document.location.pathname.includes('/killstreaks')) {
       presenceData.details = 'Buying Killstreak Kits'
-      presenceData.smallImageKey = Assets.Killstreaks
+      presenceData.smallImageKey = ActivityAssets.Killstreaks
     }
     else if (document.location.pathname.includes('/gifts')) {
       presenceData.details = 'Buying Steam Games'
     }
     else if (document.location.pathname.includes('/cards')) {
       presenceData.details = 'Buying Steam Trade Cards'
-      presenceData.smallImageKey = Assets.Cards
+      presenceData.smallImageKey = ActivityAssets.Cards
     }
     else if (document.location.pathname.includes('/skins')) {
       presenceData.details = 'Buying Warpaints/Skins'
-      presenceData.smallImageKey = Assets.Skins
+      presenceData.smallImageKey = ActivityAssets.Skins
     }
     else if (document.location.pathname.includes('/unusuals')) {
       presenceData.details = 'Buying Unusuals'
-      presenceData.smallImageKey = Assets.Unusuals
+      presenceData.smallImageKey = ActivityAssets.Unusuals
     }
   }
   else if (document.location.pathname.includes('/raffles')) {
@@ -417,7 +417,7 @@ presence.on('UpdateData', async () => {
   else if (
     document.location.pathname !== '/sell/weapons'
     && document.location.pathname !== '/buy/weapons'
-    && document.location.pathname.includes(Assets.Weapons)
+    && document.location.pathname.includes(ActivityAssets.Weapons)
   ) {
     if (document.location.pathname.includes('weapons/')) {
       const title = document
@@ -431,13 +431,13 @@ presence.on('UpdateData', async () => {
     }
     else {
       presenceData.details = 'Weapon Trading'
-      presenceData.smallImageKey = Assets.Weapons
+      presenceData.smallImageKey = ActivityAssets.Weapons
     }
   }
   else if (
     document.location.pathname !== '/sell/hats'
     && document.location.pathname !== '/buy/hats'
-    && document.location.pathname.includes(Assets.Hats)
+    && document.location.pathname.includes(ActivityAssets.Hats)
   ) {
     if (document.location.pathname.includes('hats/')) {
       const title = document
@@ -451,13 +451,13 @@ presence.on('UpdateData', async () => {
     }
     else {
       presenceData.details = 'Hat Trading'
-      presenceData.smallImageKey = Assets.Hats
+      presenceData.smallImageKey = ActivityAssets.Hats
     }
   }
   else if (
     document.location.pathname !== '/sell/items'
     && document.location.pathname !== '/buy/items'
-    && document.location.pathname.includes(Assets.Items)
+    && document.location.pathname.includes(ActivityAssets.Items)
   ) {
     if (document.location.pathname.includes('items/')) {
       const title = document
@@ -472,21 +472,21 @@ presence.on('UpdateData', async () => {
     else {
       presenceData.details = 'Item Trading'
       presenceData.state = 'Viewing item pricelist'
-      presenceData.smallImageKey = Assets.Items
+      presenceData.smallImageKey = ActivityAssets.Items
     }
   }
   else if (
     document.location.pathname !== '/sell/unusuals'
     && document.location.pathname !== '/buy/unusuals'
-    && document.location.pathname.includes(Assets.Unusuals)
+    && document.location.pathname.includes(ActivityAssets.Unusuals)
   ) {
     presenceData.details = 'Unusual Trading'
-    presenceData.smallImageKey = Assets.Unusuals
+    presenceData.smallImageKey = ActivityAssets.Unusuals
   }
   else if (
     document.location.pathname !== '/sell/skins'
     && document.location.pathname !== '/buy/skins'
-    && document.location.pathname.includes(Assets.Skins)
+    && document.location.pathname.includes(ActivityAssets.Skins)
   ) {
     if (document.location.pathname.includes('skins/')) {
       const title = document
@@ -500,13 +500,13 @@ presence.on('UpdateData', async () => {
     }
     else {
       presenceData.details = 'Skin & War Paint Trading'
-      presenceData.smallImageKey = Assets.Skins
+      presenceData.smallImageKey = ActivityAssets.Skins
     }
   }
   else if (
     document.location.pathname !== '/sell/killstreaks'
     && document.location.pathname !== '/buy/killstreaks'
-    && document.location.pathname.includes(Assets.Killstreaks)
+    && document.location.pathname.includes(ActivityAssets.Killstreaks)
   ) {
     if (document.location.pathname.includes('killstreaks/')) {
       const title = document
@@ -520,13 +520,13 @@ presence.on('UpdateData', async () => {
     }
     else {
       presenceData.details = 'Killstreak Kit Trading'
-      presenceData.smallImageKey = Assets.Killstreaks
+      presenceData.smallImageKey = ActivityAssets.Killstreaks
     }
   }
   else if (
     document.location.pathname !== '/sell/stranges'
     && document.location.pathname !== '/buy/stranges'
-    && document.location.pathname.includes(Assets.Stranges)
+    && document.location.pathname.includes(ActivityAssets.Stranges)
   ) {
     if (document.location.pathname.includes('stranges/')) {
       const title = document
@@ -540,13 +540,13 @@ presence.on('UpdateData', async () => {
     }
     else {
       presenceData.details = 'Strange Items Trading'
-      presenceData.smallImageKey = Assets.Stranges
+      presenceData.smallImageKey = ActivityAssets.Stranges
     }
   }
   else if (
     document.location.pathname !== '/sell/cards'
     && document.location.pathname !== '/buy/cards'
-    && document.location.pathname.includes(Assets.Cards)
+    && document.location.pathname.includes(ActivityAssets.Cards)
   ) {
     if (document.location.pathname.includes('cards/')) {
       const title = document
@@ -560,7 +560,7 @@ presence.on('UpdateData', async () => {
     }
     else {
       presenceData.details = 'Card Trading'
-      presenceData.smallImageKey = Assets.Cards
+      presenceData.smallImageKey = ActivityAssets.Cards
     }
   }
   else if (

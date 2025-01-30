@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '503557087041683458',
 })
@@ -9,7 +11,7 @@ enum AppVersion {
   V5 = 5,
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/Stremio/assets/0.png',
 }
 
@@ -107,7 +109,7 @@ function findVideo(presence: Presence): Video | null {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     type: ActivityType.Watching,
     details: 'Stremio',
@@ -168,7 +170,7 @@ presence.on('UpdateData', async () => {
                 '#detail > div.details-less-info > div.details-top > div:nth-child(1)',
               )
               ?.firstElementChild
-              ?.getAttribute('src') ?? Assets.Logo
+              ?.getAttribute('src') ?? ActivityAssets.Logo
           }
           else {
             const imgElement = document.querySelector(
@@ -178,9 +180,9 @@ presence.on('UpdateData', async () => {
             presenceData.largeImageKey = (routeContents.length > 1
               ? routeContents[routeContents.length - 1]
               : routeContents[0]
-            ).querySelector('img')?.src
+            )?.querySelector('img')?.src
             ?? imgElement?.getAttribute('src')
-            ?? Assets.Logo
+            ?? ActivityAssets.Logo
             presenceData.state = imgElement?.getAttribute('title')
               ?? document.querySelector(
                 'div[class*=\'logo-placeholder\']:last-child',
@@ -341,7 +343,7 @@ presence.on('UpdateData', async () => {
               .replace('player', 'detail')
             presenceData.largeImageKey = document
               .querySelector('#loading-logo')
-              ?.getAttribute('data-image') ?? Assets.Logo
+              ?.getAttribute('data-image') ?? ActivityAssets.Logo
           }
           else {
             const playerState = await _eval(
@@ -356,7 +358,7 @@ presence.on('UpdateData', async () => {
               metaUrl = `${window.location.origin}/#/detail/${content.type}/${content.id}`
               if (content.type === 'series')
                 metaUrl += `/${content.id}:${seriesInfo.season}:${seriesInfo.episode}`
-              presenceData.largeImageKey = content.poster ?? Assets.Logo
+              presenceData.largeImageKey = content.poster ?? ActivityAssets.Logo
               presenceData.name = content.name
               presenceData.details = title.replace(`${content.name} -`, '') ?? 'Player'
             }
@@ -420,7 +422,7 @@ presence.on('UpdateData', async () => {
   if (!buttons)
     delete presenceData.buttons
   if (!thumbnails)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (presenceData.details)
     presence.setActivity(presenceData)
   else presence.setActivity()

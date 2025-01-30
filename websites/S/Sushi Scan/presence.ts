@@ -1,9 +1,11 @@
+import { ActivityType } from 'premid'
+
 const presence = new Presence({
   clientId: '1324071536017149973',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   SushiLogo = 'https://cdn.rcd.gg/PreMiD/websites/S/Sushi%20Scan/assets/0.png',
   SushiBrowsing = 'https://cdn.rcd.gg/PreMiD/websites/S/Sushi%20Scan/assets/1.png',
   SushiReading = 'https://cdn.rcd.gg/PreMiD/websites/S/Sushi%20Scan/assets/2.png',
@@ -22,8 +24,8 @@ let comic: Comic | null = null
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     startTimestamp: browsingTimestamp,
-    largeImageKey: Assets.SushiLogo,
-    smallImageKey: Assets.SushiLogo,
+    largeImageKey: ActivityAssets.SushiLogo,
+    smallImageKey: ActivityAssets.SushiLogo,
     smallImageText: 'Sushi Scan',
     type: ActivityType.Watching,
     name: 'Sushi Scan !',
@@ -31,9 +33,9 @@ presence.on('UpdateData', async () => {
 
   if (onOther()) {
     presenceData.details = 'Browsing Sushi Scan'
-    presenceData.state = document.title.split('-')[0].trim()
+    presenceData.state = document.title.split('-')[0]?.trim()
 
-    presenceData.largeImageKey = Assets.SushiBrowsing
+    presenceData.largeImageKey = ActivityAssets.SushiBrowsing
 
     await presence.setActivity(presenceData)
     return
@@ -47,7 +49,7 @@ presence.on('UpdateData', async () => {
     presenceData.details = `${comic?.fullTitle}`
     presenceData.state = 'Reading'
 
-    presenceData.largeImageKey = Assets.SushiReading
+    presenceData.largeImageKey = ActivityAssets.SushiReading
     presenceData.largeImageText = comic?.title
 
     delete presenceData.smallImageKey
@@ -63,7 +65,7 @@ presence.on('UpdateData', async () => {
     presenceData.details = comic?.title
     presenceData.state = 'Selecting a chapter'
 
-    presenceData.largeImageKey = Assets.SushiSelecting
+    presenceData.largeImageKey = ActivityAssets.SushiSelecting
     presenceData.largeImageText = comic?.title
 
     await presence.setActivity(presenceData)
@@ -110,7 +112,7 @@ async function getDetails(): Promise<Comic | null> {
   if (onComicPage()) {
     const name = getName()
     if (name && name in detailsCache)
-      return detailsCache[name]
+      return detailsCache[name]!
 
     url = `https://sushiscan.net/catalogue/${getName()}`
     const resp = await fetch(url)

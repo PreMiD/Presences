@@ -35,13 +35,13 @@ presence.on('UpdateData', async () => {
     document.location.pathname.includes('/users')
     || document.location.pathname.includes('/tags')
   ) {
-    lastPage = allPages[allPages.length - 2].textContent
+    lastPage = allPages[allPages.length - 2]?.textContent
   }
   else if (document.location.pathname.includes('/jobs')) {
-    lastPage = jobLastPage[jobLastPage.length - 2].textContent
+    lastPage = jobLastPage[jobLastPage.length - 2]?.textContent
   }
   else if (document.location.pathname === '/questions') {
-    lastPage = questionsLastPage[questionsLastPage.length - 2].textContent
+    lastPage = questionsLastPage[questionsLastPage.length - 2]?.textContent
   }
 
   if (title && document.location.pathname.includes('/questions/')) {

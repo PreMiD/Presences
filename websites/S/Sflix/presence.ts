@@ -1,9 +1,11 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1322565714128797798',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/Sflix/assets/logo.png',
 }
 
@@ -22,7 +24,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     type: ActivityType.Watching,
     startTimestamp: browsingTimestamp,
   }
@@ -74,7 +76,7 @@ presence.on('UpdateData', async () => {
       presenceData.state = privacy
         ? ''
         : document.querySelector('.on-air div h3')?.textContent ?? ''
-      presenceData.largeImageKey = thumbnail && thumbnailURL && !privacy ? thumbnailURL : Assets.Logo
+      presenceData.largeImageKey = thumbnail && thumbnailURL && !privacy ? thumbnailURL : ActivityAssets.Logo
 
       if (!video.paused) {
         if (!privacy) {

@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '844107447933075498',
 })
@@ -164,10 +166,10 @@ presence.on('UpdateData', async () => {
             ]
           }
           presenceData.details = privacy ? strings.watchingVid : title
-          presenceData.state = `${episodeEtc?.[0].replace(
+          presenceData.state = `${episodeEtc?.[0]?.replace(
             ' ',
             ':',
-          )} - ${episodeEtc?.[1].trim()}`
+          )} - ${episodeEtc?.[1]?.trim()}`
           break
         }
         default: {
@@ -239,7 +241,7 @@ presence.on('UpdateData', async () => {
                   presenceData.details = 'Browsing all free full episodes'
                   break
                 }
-                case !!pathSplit[2].match(/\d{5}/g): {
+                case !!pathSplit[2]?.match(/\d{5}/g): {
                   if (video && !Number.isNaN(video.duration)) {
                     [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video)
                     presenceData.smallImageKey = video.paused
@@ -283,9 +285,9 @@ presence.on('UpdateData', async () => {
 
                   presenceData.state = title && title.length > 2
                     ? `${title[1]
-                      .replace(/ /g, '')
+                      ?.replace(/ /g, '')
                       .replace('Season', 'S')}${title[2]
-                      .replace(/ /g, '')
+                      ?.replace(/ /g, '')
                       .replace('Episode', ':E')}`
                     : title?.[1]
                   presenceData.largeImageKey = document

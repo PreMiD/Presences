@@ -76,12 +76,12 @@ presence.on('UpdateData', async () => {
           presenceData.details = 'Viewing Steam Charts'
           if (tagSelected?.value !== '0') {
             presenceData.state = `Filter: ${
-              tagSelected?.options[tagSelected.selectedIndex].textContent
+              tagSelected?.options[tagSelected.selectedIndex]?.textContent
             }`
           }
           if (categorySelect?.value !== '0') {
             presenceData.state = `Filter: ${
-              categorySelect?.options[categorySelect.selectedIndex].textContent
+              categorySelect?.options[categorySelect.selectedIndex]?.textContent
             }`
           }
           break
@@ -149,7 +149,7 @@ presence.on('UpdateData', async () => {
             },
           ]
           if (tabnavSelected)
-            presenceData.details = `Viewing App ${tabnavSelected.childNodes[1].textContent}`
+            presenceData.details = `Viewing App ${tabnavSelected.childNodes[1]?.textContent}`
           else if (pathname.includes('/patchnotes/'))
             presenceData.details = 'Viewing App Patchnotes'
           break
@@ -167,7 +167,7 @@ presence.on('UpdateData', async () => {
               url: href,
             },
           ]
-          presenceData.details = `Viewing Sub ${tabnavSelected?.childNodes[1].textContent}`
+          presenceData.details = `Viewing Sub ${tabnavSelected?.childNodes[1]?.textContent}`
           break
         }
         case 'subs': {
@@ -368,13 +368,13 @@ presence.on('UpdateData', async () => {
             },
           ]
           presenceData.state = document.querySelector('h1')?.lastChild?.textContent
-          presenceData.details = `Viewing Depot ${tabnavSelected?.childNodes[1].textContent}`
+          presenceData.details = `Viewing Depot ${tabnavSelected?.childNodes[1]?.textContent}`
           break
         }
         case 'upcoming': {
           if (tagSelected?.value !== '0') {
             presenceData.state = `Filter: ${
-              tagSelected?.options[tagSelected.selectedIndex].textContent
+              tagSelected?.options[tagSelected.selectedIndex]?.textContent
             }`
           }
           if (pathname.includes('/free/'))
@@ -400,7 +400,7 @@ presence.on('UpdateData', async () => {
               if (categorySelect?.value !== '0') {
                 presenceData.state = `Filter: ${
                   categorySelect?.options[categorySelect.selectedIndex]
-                    .textContent
+                    ?.textContent
                 }`
               }
               break
@@ -431,7 +431,7 @@ presence.on('UpdateData', async () => {
               presenceData.details = 'Viewing Game Release Summary'
               if (tagSelected?.value !== '0') {
                 presenceData.state = `Filter: ${
-                  tagSelected?.options[tagSelected.selectedIndex].textContent
+                  tagSelected?.options[tagSelected.selectedIndex]?.textContent
                 }`
               }
               break
@@ -483,19 +483,19 @@ presence.on('UpdateData', async () => {
                 document.querySelector<HTMLSelectElement>('#inputQuery-app')
                   ?.value
               } Type: ${
-                inputType?.options[inputType.selectedIndex].textContent
+                inputType?.options[inputType.selectedIndex]?.textContent
               } Category: ${
-                inputCategory?.options[inputCategory.selectedIndex].textContent
+                inputCategory?.options[inputCategory.selectedIndex]?.textContent
               }`
               break
             }
             case 'App Keys': {
               presenceData.state = `${
-                inputType?.options[inputType.selectedIndex].textContent
+                inputType?.options[inputType.selectedIndex]?.textContent
               } ${
-                inputKeyName?.options[inputKeyName.selectedIndex].textContent
+                inputKeyName?.options[inputKeyName.selectedIndex]?.textContent
               } ${
-                inputOperator?.options[inputOperator.selectedIndex].textContent
+                inputOperator?.options[inputOperator.selectedIndex]?.textContent
               } ${
                 document.querySelector<HTMLInputElement>('#inputKeyValue')
                   ?.value
@@ -508,9 +508,9 @@ presence.on('UpdateData', async () => {
             }
             case 'Package Keys': {
               presenceData.state = `${
-                inputKeyName?.options[inputKeyName.selectedIndex].textContent
+                inputKeyName?.options[inputKeyName.selectedIndex]?.textContent
               } ${
-                inputOperator?.options[inputOperator.selectedIndex].textContent
+                inputOperator?.options[inputOperator.selectedIndex]?.textContent
               } ${
                 document.querySelector<HTMLInputElement>('#inputKeyValue2')
                   ?.value

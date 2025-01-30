@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '689724677274337290',
 })
@@ -14,9 +16,9 @@ presence.on('UpdateData', async () => {
 
   if (document.querySelector('.player_playing__N2IaC')) {
     const songInfoArray = document.querySelectorAll('.marquee_marquee__1MS_n')
-    presenceData.details = presenceDataSlide.details = songInfoArray[1].textContent
-    presenceData.state = `By ${songInfoArray[0].textContent}`
-    presenceDataSlide.state = `From ${songInfoArray[2].textContent}`
+    presenceData.details = presenceDataSlide.details = songInfoArray[1]?.textContent
+    presenceData.state = `By ${songInfoArray[0]?.textContent}`
+    presenceDataSlide.state = `From ${songInfoArray[2]?.textContent}`
     presenceData.smallImageKey = presenceDataSlide.smallImageKey = Assets.Live
     presenceData.startTimestamp = presenceDataSlide.startTimestamp = timeElapsed
     slideshow.addSlide('slideArtist', presenceData, 5000)

@@ -1,15 +1,17 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1043638037042712637',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/Stoodi/assets/0.png',
 }
 presence.on('UpdateData', async () => {
   const selector = document.querySelector
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     details: 'Vendo o Stoodi',
     startTimestamp: browsingTimestamp,
   }

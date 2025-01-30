@@ -16,7 +16,7 @@ presence.on('UpdateData', async () => {
       .querySelector('.you span')
       ?.textContent
       ?.split('pts')[0]
-      .trim()} points`
+      ?.trim()} points`
     presenceData.state = `${'Round: ' + ' '}${
       document.querySelector('.rounds span')?.textContent
     }${document.querySelector('.rounds p:nth-child(3)')?.textContent}`

@@ -12,7 +12,7 @@ let video = {
   url: null as unknown as string,
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/SyncTube/assets/0.png',
   Logo2 = 'https://cdn.rcd.gg/PreMiD/websites/S/SyncTube/assets/1.png',
 }
@@ -26,7 +26,7 @@ presence.on('UpdateData', async () => {
     presence.getSetting<number>('logo'),
   ])
   const presenceData: PresenceData = {
-    largeImageKey: logo === 0 ? Assets.Logo : Assets.Logo2,
+    largeImageKey: logo === 0 ? ActivityAssets.Logo : ActivityAssets.Logo2,
   }
   const urlpath = window.location.pathname.split('/')
 

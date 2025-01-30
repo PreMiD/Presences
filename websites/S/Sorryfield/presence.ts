@@ -1,8 +1,10 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1016312551958642698',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/logo.png',
   ChartSearch = 'https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/3.jpg',
   ChartHypoRanked = 'https://cdn.rcd.gg/PreMiD/websites/S/Sorryfield/assets/5.jpg',
@@ -19,7 +21,7 @@ const enum Assets {
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     details: 'Sorryfield',
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   } as PresenceData
   const { pathname, href } = document.location
   if (pathname === '/') {
@@ -66,8 +68,8 @@ presence.on('UpdateData', async () => {
         ?.split(':')
       if (duration && playing) {
         const nowTime = Math.floor(Date.now() / 1000)
-          + (Number.parseInt(duration[0].replace('(-', '')) * 60
-            + Number.parseInt(duration[1].replace(')', '')))
+          + (Number.parseInt(duration[0]!.replace('(-', '')) * 60
+            + Number.parseInt(duration[1]!.replace(')', '')))
           + 1;
         [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestampsfromMedia(document.querySelector('video.back')!)
         if (nowTime <= Math.floor(Date.now() / 1000))
@@ -112,8 +114,8 @@ presence.on('UpdateData', async () => {
         ?.split(':')
       if (duration && playing) {
         const nowTime = Math.floor(Date.now() / 1000)
-          + (Number.parseInt(duration[0].replace('(-', '')) * 60
-            + Number.parseInt(duration[1].replace(')', '')))
+          + (Number.parseInt(duration[0]!.replace('(-', '')) * 60
+            + Number.parseInt(duration[1]!.replace(')', '')))
           + 1;
         [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestampsfromMedia(document.querySelector('video.back')!)
         if (nowTime <= Math.floor(Date.now() / 1000))
@@ -131,13 +133,13 @@ presence.on('UpdateData', async () => {
       .querySelector('title')
       ?.textContent
       ?.replace(' - 노래방 - 쏘리들', '')} | ${
-      document.querySelectorAll('.right')[1].textContent
+      document.querySelectorAll('.right')[1]?.textContent
     }곡 대기 중`
-    presenceData.state = document.querySelectorAll('.left')[1].textContent
+    presenceData.state = document.querySelectorAll('.left')[1]?.textContent
   }
   if (pathname.startsWith('/java')) {
     presenceData.details = '자바!'
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
     delete presenceData.smallImageKey
     if (pathname === '/java' && !href.includes('?')) {
       presenceData.details = '자바! 싱글플레이어'
@@ -149,27 +151,27 @@ presence.on('UpdateData', async () => {
         .toUpperCase()
       let imageKey = ''
       let menuName = ''
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
 
       switch (image) {
         case 'SEARCH':
-          imageKey = Assets.ChartSearch
+          imageKey = ActivityAssets.ChartSearch
           presenceData.state = `채보 검색 중: ${
             document.querySelector<HTMLInputElement>('#search')?.value
           }`
           break
         case 'HYPORANKED':
-          imageKey = Assets.ChartHypoRanked
+          imageKey = ActivityAssets.ChartHypoRanked
           menuName = '내 순위가 아래인 채보'
           break
         case 'BY_DIFFICULTY':
-          imageKey = Assets.ChartByDifficulty
+          imageKey = ActivityAssets.ChartByDifficulty
           menuName = '전체 채보'
           for (let i = 0; i < 32; i++) {
             if (
               document
                 .querySelectorAll('.difficulty-bar>.item')[i]
-                .getAttribute('data-active') === 'true'
+                ?.getAttribute('data-active') === 'true'
             ) {
               menuName = `난도 ${i === 31 ? '30+' : i.toString()} 채보`
               break
@@ -177,31 +179,31 @@ presence.on('UpdateData', async () => {
           }
           break
         case 'NEW':
-          imageKey = Assets.ChartNew
+          imageKey = ActivityAssets.ChartNew
           menuName = '신상 채보'
           break
         case 'HISTORY':
-          imageKey = Assets.ChartHistory
+          imageKey = ActivityAssets.ChartHistory
           menuName = '내가 최근 완주한 채보'
           break
         case 'POSSESSION':
-          imageKey = Assets.ChartPossession
+          imageKey = ActivityAssets.ChartPossession
           menuName = '내가 소장한 곡의 채보'
           break
         case 'HOT':
-          imageKey = Assets.ChartHot
+          imageKey = ActivityAssets.ChartHot
           menuName = '요즘 북적이는 채보'
           break
         case 'COLD':
-          imageKey = Assets.ChartCold
+          imageKey = ActivityAssets.ChartCold
           menuName = '요즘 안 북적이는 채보'
           break
         case 'SPOTLIGHTED':
-          imageKey = Assets.ChartSpotlighted
+          imageKey = ActivityAssets.ChartSpotlighted
           menuName = '오늘의 픽'
           break
         case 'MULTIPLAYER':
-          imageKey = Assets.ChartMultiPlayer
+          imageKey = ActivityAssets.ChartMultiPlayer
           presenceData.details = '자바! 멀티플레이어'
           presenceData.state = '방 선택 중'
           break
@@ -254,7 +256,7 @@ presence.on('UpdateData', async () => {
         .querySelector<HTMLTitleElement>('title')
         ?.textContent
         ?.split(' by ')[0]
-        .slice(2)} ${
+        ?.slice(2)} ${
         document.querySelector<HTMLDivElement>('.chart-header>.tail>div')
           ?.textContent
       }`
@@ -274,14 +276,14 @@ presence.on('UpdateData', async () => {
     }
     else if (pathname === '/java/multiplayer') {
       presenceData.details = '자바! 멀티플레이어'
-      presenceData.largeImageKey = Assets.ChartMultiPlayer
+      presenceData.largeImageKey = ActivityAssets.ChartMultiPlayer
       if (document.querySelector('.room-header')) {
         presenceData.state = `${
-          document.querySelector('.room-header')?.children[0].childNodes[1].textContent
+          document.querySelector('.room-header')?.children[0]?.childNodes[1]?.textContent
         } (${document
           .querySelector('.room-header')
           ?.children[1]
-          .textContent
+          ?.textContent
           ?.trim()
           .replace('/', ' of ')})`
         presenceData.buttons = [{ label: '방 참여하기', url: href }]
@@ -289,10 +291,10 @@ presence.on('UpdateData', async () => {
       if (document.querySelector('.chart-header')) {
         const chartHeader = document.querySelector('.chart-header')
         presenceData.state = `${
-          chartHeader?.children[2].children[0].textContent
+          chartHeader?.children[2]?.children[0]?.textContent
         } Lv.${document.querySelector('.level')?.textContent} / ${
-          chartHeader?.children[1].children[1].textContent
-        } - ${chartHeader?.children[1].children[0].textContent}`
+          chartHeader?.children[1]?.children[1]?.textContent
+        } - ${chartHeader?.children[1]?.children[0]?.textContent}`
       }
     }
     else if (
@@ -311,10 +313,10 @@ presence.on('UpdateData', async () => {
       presenceData.details = '자바! 싱글플레이어'
       const chartHeader = document.querySelector('.chart-header')
       presenceData.state = `${
-        chartHeader?.children[2].children[0].textContent
+        chartHeader?.children[2]?.children[0]?.textContent
       } Lv.${document.querySelector('.level')?.textContent} / ${
-        chartHeader?.children[1].children[1].textContent
-      } - ${chartHeader?.children[1].children[0].textContent}`
+        chartHeader?.children[1]?.children[1]?.textContent
+      } - ${chartHeader?.children[1]?.children[0]?.textContent}`
       presenceData.buttons = [{ label: '채보 플레이하기', url: href }]
     }
   }

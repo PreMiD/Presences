@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '694885187116597309',
 })
@@ -10,9 +12,7 @@ let iFrameVideo: boolean
 let currentTime: number
 let duration: number
 let paused: boolean
-let lastPlaybackState = false
-let playback: boolean
-let browsingTimestamp = Math.floor(Date.now() / 1000)
+const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 interface IFrameData {
   iframeVideo: {
@@ -35,13 +35,7 @@ presence.on('iFrameData', (inc: unknown) => {
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/S/Shinden/assets/logo.png',
-  }
-
-  presenceData.startTimestamp = browsingTimestamp
-
-  if (lastPlaybackState !== playback) {
-    lastPlaybackState = playback
-    browsingTimestamp = Math.floor(Date.now() / 1000)
+    startTimestamp: browsingTimestamp,
   }
 
   if (document.location.host === 'shinden.pl') {

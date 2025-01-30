@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '802958833214423081',
 })
@@ -18,7 +20,7 @@ function getElement(query: string): string | undefined {
   const element = document.querySelector(query)
   if (element) {
     if (element.childNodes.length > 1)
-      text = element.childNodes[0].textContent ?? undefined
+      text = element.childNodes[0]?.textContent ?? undefined
     else text = element.textContent ?? undefined
   }
   return text?.trimStart().trimEnd()
@@ -207,7 +209,7 @@ presence.on('UpdateData', async () => {
         ?.style
         .backgroundImage
         .match(/"(.*)"/)?.[1]
-        .replace('-t50x50.jpg', '-t500x500.jpg') ?? 'soundcloud'
+        ?.replace('-t50x50.jpg', '-t500x500.jpg') ?? 'soundcloud'
     }
 
     if (showButtons && pathLinkSong) {

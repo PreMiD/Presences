@@ -1,3 +1,5 @@
+import { ActivityType } from 'premid'
+
 const presence = new Presence({
   clientId: '1325035374430519392',
 })
@@ -15,11 +17,11 @@ async function getStrings() {
 }
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/SOOP/assets/logo.png',
 }
 
-const enum SoopAssets {
+enum SoopAssets {
   Browse = 'https://cdn.rcd.gg/PreMiD/websites/S/SOOP/assets/0.png',
   Live = 'https://cdn.rcd.gg/PreMiD/websites/S/SOOP/assets/1.png',
   Play = 'https://cdn.rcd.gg/PreMiD/websites/S/SOOP/assets/2.png',
@@ -42,7 +44,7 @@ presence.on('UpdateData', async () => {
 
   const presenceData: PresenceData = {
     details: strings.browse,
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     smallImageKey: SoopAssets.Browse,
     startTimestamp: browsingTimestamp,
     type: ActivityType.Watching,
@@ -55,7 +57,7 @@ presence.on('UpdateData', async () => {
       presenceData.state = document.querySelector('a#infoNickName')?.textContent
       presenceData.largeImageKey = showStreamerLogo
         ? document.querySelector<HTMLImageElement>('#bjThumbnail img')?.src
-        : Assets.Logo
+        : ActivityAssets.Logo
 
       presenceData.smallImageKey = SoopAssets.Live
       presenceData.smallImageText = strings.live
@@ -85,7 +87,7 @@ presence.on('UpdateData', async () => {
           ? document.querySelector<HTMLImageElement>(
             isCatch ? 'div.author_inner img' : 'div.thumbnail_box img',
           )?.src
-          : Assets.Logo
+          : ActivityAssets.Logo
 
         presenceData.smallImageKey = video.paused
           ? SoopAssets.Pause

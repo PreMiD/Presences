@@ -56,7 +56,7 @@ presence.on('UpdateData', () => {
       else if (document.location.href.includes('/weather')) {
         presenceData.details = 'Viewing the weather...'
         presenceData.state = document.querySelectorAll('.section-location-header')[0]
-          .textContent || 'National Forecast'
+          ?.textContent || 'National Forecast'
       }
       else if (document.location.href.includes('/quizzies')) {
         presenceData.details = 'Looking at quizzes'
@@ -369,7 +369,7 @@ presence.on('UpdateData', () => {
     presenceData.details = 'Reading an article...'
     presenceData.state = document.querySelectorAll(
       '.sics-component__headline__title',
-    )[0].textContent
+    )[0]?.textContent
     presenceData.startTimestamp = Math.floor(Date.now() / 1000)
   }
 

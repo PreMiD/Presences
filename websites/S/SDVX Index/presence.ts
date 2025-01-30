@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 let browsingTimestamp = Math.floor(Date.now() / 1000)
 let lastPage = document.location.href
 
@@ -5,13 +7,13 @@ const presence = new Presence({
   clientId: '1214435082408820776',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/SDVX%20Index/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href } = document.location
@@ -32,25 +34,25 @@ presence.on('UpdateData', async () => {
   }
   else {
     presenceData.details = 'Looking for a chart'
-    if (path[0].startsWith('level_sort')) {
+    if (path[0]?.startsWith('level_sort')) {
       presenceData.state = 'Sorting by level'
     }
-    else if (path[0].startsWith('date_sort')) {
+    else if (path[0]?.startsWith('date_sort')) {
       presenceData.state = 'Sorting by game version'
     }
-    else if (path[0].startsWith('diff_sort')) {
+    else if (path[0]?.startsWith('diff_sort')) {
       presenceData.state = 'Sorting by difficulty'
     }
-    else if (path[0].startsWith('title_sort')) {
+    else if (path[0]?.startsWith('title_sort')) {
       presenceData.state = 'Sorting by title'
     }
-    else if (path[0].startsWith('genre_sort')) {
+    else if (path[0]?.startsWith('genre_sort')) {
       presenceData.state = 'Sorting by genre'
     }
-    else if (path[0].startsWith('radar_sort')) {
+    else if (path[0]?.startsWith('radar_sort')) {
       presenceData.state = 'Sorting by radar category'
     }
-    else if (path[0].startsWith('search_song')) {
+    else if (path[0]?.startsWith('search_song')) {
       presenceData.state = 'Searching...'
       presenceData.smallImageKey = Assets.Search
     }

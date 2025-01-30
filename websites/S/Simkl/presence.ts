@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/Simkl/assets/logo.png',
 }
 function textContent(tags: string) {
@@ -11,14 +11,14 @@ function textContent(tags: string) {
 }
 
 function getImage(tags: string) {
-  return document.querySelector<HTMLImageElement>(tags)?.src ?? Assets.Logo
+  return document.querySelector<HTMLImageElement>(tags)?.src ?? ActivityAssets.Logo
 }
 
 presence.on('UpdateData', async () => {
   const { pathname, search } = document.location
   const path = pathname.split('/')
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 
@@ -243,7 +243,7 @@ presence.on('UpdateData', async () => {
     }
     case 'search': {
       presenceData.details = 'Searching for'
-      presenceData.state = decodeURIComponent(search.split('=')[2])
+      presenceData.state = decodeURIComponent(search.split('=')[2]!)
       break
     }
     case 'settings': {

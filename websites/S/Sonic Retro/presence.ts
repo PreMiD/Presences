@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '970743721404530798',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Forums512 = 'https://cdn.rcd.gg/PreMiD/websites/S/Sonic%20Retro/assets/0.png',
   Home512 = 'https://cdn.rcd.gg/PreMiD/websites/S/Sonic%20Retro/assets/1.png',
   Info512 = 'https://cdn.rcd.gg/PreMiD/websites/S/Sonic%20Retro/assets/2.png',
@@ -22,7 +24,7 @@ presence.on('UpdateData', async () => {
   const { pathname, search, hostname, href } = window.location
   switch (hostname) {
     case 'sonicretro.org': {
-      presenceData.smallImageKey = Assets.Home512
+      presenceData.smallImageKey = ActivityAssets.Home512
       if (search) {
         presenceData.largeImageKey = Assets.Search
         if (!new URLSearchParams(search).get('s')) {
@@ -38,7 +40,7 @@ presence.on('UpdateData', async () => {
         !search
         && (pathname === '/' || pathname === '/#' || pathname.includes('/page/'))
       ) {
-        presenceData.largeImageKey = Assets.Home
+        presenceData.largeImageKey = ActivityAssets.Home
         presenceData.details = 'Zooming through the main page'
       }
       else if (pathname.includes('/category/')) {
@@ -71,7 +73,7 @@ presence.on('UpdateData', async () => {
         ]
       }
       else {
-        presenceData.largeImageKey = Assets.Logo1024
+        presenceData.largeImageKey = ActivityAssets.Logo1024
         presenceData.details = 'Viewing an unsupported page'
       }
       break
@@ -93,18 +95,18 @@ presence.on('UpdateData', async () => {
         'Blocked users - Sonic Retro',
         'File list - Sonic Retro',
       ]
-      presenceData.smallImageKey = Assets.Info512
+      presenceData.smallImageKey = ActivityAssets.Info512
       if (
         pathname === '/'
         || pathname.includes('/Main_Page')
         || (pathname.includes('/index.php') && !search)
       ) {
-        presenceData.largeImageKey = Assets.Info
+        presenceData.largeImageKey = ActivityAssets.Info
         presenceData.details = 'Zooming through the main page'
       }
       else if (pathname.includes('Special:')) {
         if (unsupported.includes(document.title)) {
-          presenceData.largeImageKey = Assets.Logo1024
+          presenceData.largeImageKey = ActivityAssets.Logo1024
           presenceData.details = 'Viewing an unsupported page'
         }
         else if (pathname.includes('/Special:SpecialPages')) {
@@ -116,7 +118,7 @@ presence.on('UpdateData', async () => {
           presenceData.details = 'Searching for something...'
         }
         else {
-          presenceData.largeImageKey = Assets.Category
+          presenceData.largeImageKey = ActivityAssets.Category
           presenceData.details = 'Browsing a special page:'
           presenceData.state = document.title.split(' - Sonic Retro')[0]
           presenceData.buttons = [
@@ -132,7 +134,7 @@ presence.on('UpdateData', async () => {
         presenceData.details = 'Reading an article:'
         presenceData.state = document.title
           .split('Category:')[1]
-          .split(' - Sonic Retro')[0]
+          ?.split(' - Sonic Retro')[0]
         presenceData.buttons = [
           {
             label: 'View Article',
@@ -145,14 +147,14 @@ presence.on('UpdateData', async () => {
         presenceData.details = 'Browsing a talk page:'
         presenceData.state = document.title
           .split('Talk:')[1]
-          .split(' - Sonic Retro')[0]
+          ?.split(' - Sonic Retro')[0]
       }
       else if (document.title.startsWith('Sonic Retro:')) {
         presenceData.largeImageKey = Assets.Reading
         presenceData.details = 'Reading an article:'
         presenceData.state = document.title
           .split('Sonic Retro:')[1]
-          .split(' - Sonic Retro')[0]
+          ?.split(' - Sonic Retro')[0]
         presenceData.buttons = [
           {
             label: 'View Article',
@@ -164,7 +166,7 @@ presence.on('UpdateData', async () => {
         presenceData.largeImageKey = Assets.Reading
         presenceData.details = 'Viewing a user\'s page:'
         presenceData.state = `@${
-          document.title.split('User:')[1].split(' - Sonic Retro')[0]
+          document.title.split('User:')[1]?.split(' - Sonic Retro')[0]
         }`
         presenceData.buttons = [
           {
@@ -177,7 +179,7 @@ presence.on('UpdateData', async () => {
         pathname.includes('/File:')
         || pathname.includes('/Sonic_Retro:General_disclaimer')
       ) {
-        presenceData.largeImageKey = Assets.Logo1024
+        presenceData.largeImageKey = ActivityAssets.Logo1024
         presenceData.details = 'Viewing an unsupported page'
       }
       else if (pathname === '/index.php' && search.includes('search=')) {
@@ -189,7 +191,7 @@ presence.on('UpdateData', async () => {
           presenceData.details = `Searching for ${
             document.title
               .split('Search results for ')[1]
-              .split(' - Sonic Retro')[0]
+              ?.split(' - Sonic Retro')[0]
           }`
         }
       }
@@ -197,7 +199,7 @@ presence.on('UpdateData', async () => {
         pathname === '/index.php'
         || pathname.startsWith('User_talk:')
       ) {
-        presenceData.largeImageKey = Assets.Logo1024
+        presenceData.largeImageKey = ActivityAssets.Logo1024
         presenceData.details = 'Viewing an unsupported page'
       }
       else {
@@ -214,7 +216,7 @@ presence.on('UpdateData', async () => {
       break
     }
     case 'forums.sonicretro.org': {
-      presenceData.smallImageKey = Assets.Forums512
+      presenceData.smallImageKey = ActivityAssets.Forums512
       if (search) {
         const forumTitle = document.title.split(
           ' | Sonic and Sega Retro Forums',
@@ -285,7 +287,7 @@ presence.on('UpdateData', async () => {
             presenceData.details = `Searching for ${
               document.title
                 .split('Search Results for Query: ')[1]
-                .split(' | Sonic and Sega Retro Forums')[0]
+                ?.split(' | Sonic and Sega Retro Forums')[0]
             }`
           }
         }
@@ -294,16 +296,16 @@ presence.on('UpdateData', async () => {
             search,
           )
         ) {
-          presenceData.largeImageKey = Assets.Logo1024
+          presenceData.largeImageKey = ActivityAssets.Logo1024
           presenceData.details = 'Viewing an unsupported page'
         }
       }
       else if (pathname === '/index.php' && !search) {
-        presenceData.largeImageKey = Assets.Forums
+        presenceData.largeImageKey = ActivityAssets.Forums
         presenceData.details = 'Zooming through the main page'
       }
       else {
-        presenceData.largeImageKey = Assets.Logo1024
+        presenceData.largeImageKey = ActivityAssets.Logo1024
         presenceData.details = 'Viewing an unsupported page'
       }
       break
@@ -311,7 +313,7 @@ presence.on('UpdateData', async () => {
     default: {
       presenceData.smallImageKey = Assets.Question
       presenceData.smallImageText = 'Unknown Page'
-      presenceData.largeImageKey = Assets.Logo1024
+      presenceData.largeImageKey = ActivityAssets.Logo1024
       presenceData.details = 'Viewing an unsupported page'
     }
   }

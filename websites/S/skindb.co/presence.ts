@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: '731659541904621708',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Skindb = 'https://cdn.rcd.gg/PreMiD/websites/S/skindb.co/assets/0.png',
   Fortnite = 'https://cdn.rcd.gg/PreMiD/websites/S/skindb.co/assets/1.png',
   Valorant = 'https://cdn.rcd.gg/PreMiD/websites/S/skindb.co/assets/2.png',
@@ -15,7 +15,7 @@ presence.on('UpdateData', async () => {
   }
   let path = document.location.pathname
   if (path.startsWith('/fortnite')) {
-    presenceData.largeImageKey = Assets.Fortnite
+    presenceData.largeImageKey = ActivityAssets.Fortnite
     path = path.substring(9)
     if (path.length === 0) {
       presenceData.details = 'Viewing homepage'
@@ -67,7 +67,7 @@ presence.on('UpdateData', async () => {
     }
   }
   else if (path.startsWith('/valorant')) {
-    presenceData.largeImageKey = Assets.Valorant
+    presenceData.largeImageKey = ActivityAssets.Valorant
     path = path.substring(9)
     if (path.length === 0) {
       presenceData.details = 'Viewing homepage'
@@ -111,7 +111,7 @@ presence.on('UpdateData', async () => {
     }
   }
   else if (path.startsWith('/fallguys')) {
-    presenceData.largeImageKey = Assets.Fallguys
+    presenceData.largeImageKey = ActivityAssets.Fallguys
     path = path.substring(9)
     if (path.length === 0) {
       presenceData.details = 'Viewing homepage'
@@ -155,7 +155,7 @@ presence.on('UpdateData', async () => {
     }
   }
   else {
-    presenceData.largeImageKey = Assets.Skindb
+    presenceData.largeImageKey = ActivityAssets.Skindb
     if (path === '/')
       presenceData.details = 'Viewing homepage'
     else presenceData.details = `Viewing ${path.substring(1)}`

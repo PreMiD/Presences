@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/Secret%20Hitler/assets/logo.png',
   Private = 'https://cdn.rcd.gg/PreMiD/websites/S/Secret%20Hitler/assets/0.png',
   Unlisted = 'https://cdn.rcd.gg/PreMiD/websites/S/Secret%20Hitler/assets/1.png',
@@ -15,7 +15,7 @@ presence.on('UpdateData', async () => {
     presence.getSetting<boolean>('buttons'),
   ])
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, hash, href } = document.location
@@ -66,14 +66,14 @@ presence.on('UpdateData', async () => {
             document.querySelector('.game-name')?.textContent
           }`
           if (document.querySelector('.option-icons .lock')) {
-            presenceData.smallImageKey = Assets.Private
+            presenceData.smallImageKey = ActivityAssets.Private
             presenceData.smallImageText = 'Private game'
           }
           if (!document.querySelector('.option-icons .lock.green')) {
             presenceData.buttons = [{ label: 'View Table', url: href }]
           }
           else {
-            presenceData.smallImageKey = Assets.Unlisted
+            presenceData.smallImageKey = ActivityAssets.Unlisted
             presenceData.smallImageText = 'Unlisted game'
           }
           break
@@ -89,14 +89,14 @@ presence.on('UpdateData', async () => {
             document.querySelector('.game-name')?.textContent
           }`
           if (document.querySelector('.option-icons .lock')) {
-            presenceData.smallImageKey = Assets.Private
+            presenceData.smallImageKey = ActivityAssets.Private
             presenceData.smallImageText = 'Private game'
           }
           if (!document.querySelector('.option-icons .lock.green')) {
             presenceData.buttons = [{ label: 'View Replay', url: href }]
           }
           else {
-            presenceData.smallImageKey = Assets.Unlisted
+            presenceData.smallImageKey = ActivityAssets.Unlisted
             presenceData.smallImageText = 'Unlisted game'
           }
           break
@@ -125,14 +125,14 @@ presence.on('UpdateData', async () => {
             document.querySelector('.game-name')?.textContent
           }`
           if (document.querySelector('.option-icons .lock')) {
-            presenceData.smallImageKey = Assets.Private
+            presenceData.smallImageKey = ActivityAssets.Private
             presenceData.smallImageText = 'Private game'
           }
           if (!document.querySelector('.option-icons .lock.green')) {
             presenceData.buttons = [{ label: 'View Table', url: href }]
           }
           else {
-            presenceData.smallImageKey = Assets.Unlisted
+            presenceData.smallImageKey = ActivityAssets.Unlisted
             presenceData.smallImageText = 'Unlisted game'
           }
           break
@@ -148,14 +148,14 @@ presence.on('UpdateData', async () => {
             document.querySelector('.game-name')?.textContent
           }`
           if (document.querySelector('.option-icons .lock')) {
-            presenceData.smallImageKey = Assets.Private
+            presenceData.smallImageKey = ActivityAssets.Private
             presenceData.smallImageText = 'Private game'
           }
           if (!document.querySelector('.option-icons .lock.green')) {
             presenceData.buttons = [{ label: 'View Replay', url: href }]
           }
           else {
-            presenceData.smallImageKey = Assets.Unlisted
+            presenceData.smallImageKey = ActivityAssets.Unlisted
             presenceData.smallImageText = 'Unlisted game'
           }
           break

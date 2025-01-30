@@ -61,7 +61,7 @@ presence.on('UpdateData', async () => {
     case 'manga': {
       presenceData.largeImageKey = document.querySelectorAll<HTMLImageElement>(
         'img[title="Imagem"]',
-      )[2].src
+      )[2]?.src
       presenceData.details = document.querySelector(
         '[class="mt-4 sm:ml-4 sm:mt-0  "] > p',
       )?.textContent
@@ -78,8 +78,8 @@ presence.on('UpdateData', async () => {
       )?.content
       if (mediaCover)
         presenceData.largeImageKey = mediaCover
-      presenceData.details = chapterInfo?.split('/')[0].trim()
-      presenceData.state = chapterInfo?.split('/')[1].trim()
+      presenceData.details = chapterInfo?.split('/')[0]?.trim()
+      presenceData.state = chapterInfo?.split('/')[1]?.trim()
       presenceData.buttons = [
         { label: 'Ler capítulo', url: href.replace(/\/[^/]*$/, '') },
         {

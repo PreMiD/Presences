@@ -1,15 +1,17 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '911546577485725706',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/Salad/assets/0.gif',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const privacy = await presence.getSetting<boolean>('privacy')

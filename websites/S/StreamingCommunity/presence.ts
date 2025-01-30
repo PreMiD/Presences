@@ -1,8 +1,10 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1143161714293080104',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/StreamingCommunity/assets/logo.png',
 }
 
@@ -35,7 +37,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const [newLang, cover] = await Promise.all([
     presence.getSetting<string>('lang').catch(() => 'en'),
@@ -65,8 +67,8 @@ presence.on('UpdateData', async () => {
     presenceData.largeImageKey = cover
       ? document.querySelector<HTMLSourceElement>(
         '.background-image-loader > source',
-      )?.srcset ?? Assets.Logo
-      : Assets.Logo
+      )?.srcset ?? ActivityAssets.Logo
+      : ActivityAssets.Logo
   }
   else if (pathname.startsWith('/watch')) {
     delete presenceData.startTimestamp

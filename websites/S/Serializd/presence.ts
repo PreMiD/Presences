@@ -68,7 +68,7 @@ presence.on('UpdateData', async () => {
     }`
     presenceData.state = `With ${
       document.querySelectorAll('.show-stats-icon-container span')[2]
-        .textContent
+        ?.textContent
     } reviews`
   }
   else if (document.location.pathname.includes('search')) {

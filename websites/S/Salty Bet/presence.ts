@@ -1,5 +1,5 @@
 const presence = new Presence({ clientId: '802246778010730548' })
-const SelectorMap: { [index: string]: string } = {
+const SelectorMap = {
   Red: 'div#sbettors1 > span.redtext > strong',
   Blue: 'div#sbettors2 > span.bluetext > strong',
   estatus: 'div#status > span#betstatus',
@@ -21,7 +21,7 @@ function getText(selector: string) {
   return document.querySelector(selector)?.textContent
 }
 
-const enum Assets {
+enum ActivityAssets {
   Salero = 'https://cdn.rcd.gg/PreMiD/websites/S/Salty%20Bet/assets/0.png',
   Trofeo = 'https://cdn.rcd.gg/PreMiD/websites/S/Salty%20Bet/assets/1.png',
   Saltgirl = 'https://cdn.rcd.gg/PreMiD/websites/S/Salty%20Bet/assets/2.png',
@@ -33,16 +33,16 @@ function getModeImageKey(): string[] {
     || getText(SelectorMap.footer)?.includes('bracket!')
     || getText(SelectorMap.footer)?.includes('FINAL')
   ) {
-    return [Assets.Trofeo, 'Tournament Mode']
+    return [ActivityAssets.Trofeo, 'Tournament Mode']
   }
   else if (
     getText(SelectorMap.footer)?.includes('exhibition')
     || getText(SelectorMap.footer)?.includes('Exhibition')
   ) {
-    return [Assets.Saltgirl, 'Exhibition Mode']
+    return [ActivityAssets.Saltgirl, 'Exhibition Mode']
   }
   else {
-    return [Assets.Salero, 'Matchmaking Mode']
+    return [ActivityAssets.Salero, 'Matchmaking Mode']
   }
 }
 
@@ -102,7 +102,7 @@ function getBetStatus(show: boolean): string {
       }
     }
     else if (getText(SelectorMap.estatus)) {
-      if (getText(SelectorMap.estatus)!.split('wins!')[0].length <= 32) {
+      if (getText(SelectorMap.estatus)!.split('wins!')[0]!.length <= 32) {
         return `${getText(SelectorMap.estatus)!.split('wins!')[0]}wins!`
       }
       else {

@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '828549761376059441',
 })
@@ -57,7 +59,7 @@ presence.on('UpdateData', async () => {
 
   if (showTitle) {
     presenceData.details = document.querySelector('.alert > a:nth-child(3)')?.textContent
-      ?? document.querySelector('.alert')?.textContent?.split('>>')[2].trim()
+      ?? document.querySelector('.alert')?.textContent?.split('>>')[2]?.trim()
   }
 
   if (getStatus() !== 'Pause') {
