@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '930914836773224498',
 })
@@ -82,7 +84,7 @@ presence.on('UpdateData', async () => {
                 } ${document
                   .querySelector('small')
                   ?.textContent
-                  ?.split(' ')[2][0]
+                  ?.split(' ')[2]?.[0]
                   ?.toUpperCase()}${document
                   .querySelector('small')
                   ?.textContent
@@ -274,7 +276,7 @@ presence.on('UpdateData', async () => {
           } ${document
             .querySelector('a.active')
             ?.textContent
-            ?.split(' ')[1][0]
+            ?.split(' ')[1]?.[0]
             ?.toUpperCase()}${document
             .querySelector('a.active')
             ?.textContent
@@ -724,7 +726,7 @@ presence.on('UpdateData', async () => {
       }
       else if (document.querySelector('h1.main-title')) {
         presenceData.details = `Viewing ${
-          document.querySelectorAll('h1.main-title')[1].textContent
+          document.querySelectorAll('h1.main-title')[1]?.textContent
         }`
         presenceData.buttons = [
           {

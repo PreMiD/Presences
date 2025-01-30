@@ -1,4 +1,4 @@
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/F/Fandom/assets/logo.png',
 }
 if (
@@ -18,7 +18,7 @@ if (
     let currentPath = currentURL.pathname.replace(/^\/|\/$/g, '').split('/')
     let presenceData: PresenceData = {
       details: 'Viewing an unsupported page',
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       startTimestamp: browsingTimestamp,
     }
     const updateCallback = {
@@ -39,7 +39,7 @@ if (
     const resetData = (
       defaultData: PresenceData = {
         details: 'Viewing an unsupported page',
-        largeImageKey: Assets.Logo,
+        largeImageKey: ActivityAssets.Logo,
         startTimestamp: browsingTimestamp,
       },
     ): void => {

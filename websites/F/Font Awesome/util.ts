@@ -40,7 +40,7 @@ export function getIconImage(
   const key = `${fontFamily}-${fontWeight}-${backgroundColor}-${color}-${text}`
 
   if (key in iconCache)
-    return iconCache[key]
+    return iconCache[key]!
   // render the background
   ctx.fillStyle = backgroundColor
   ctx.fillRect(0, 0, 512, 512)
@@ -114,7 +114,7 @@ export async function batch<I, O>(
 
   async function executeBatch() {
     for (let i = batchIndex, j = 0; i < batchItems.length && j < 10; i++, j++) {
-      const data = await mapper((batchItems as I[])[i])
+      const data = await mapper((batchItems as I[])[i]!)
       if (batchAborter.signal.aborted) {
         presence.info('Batch aborted')
         batchAborter = new AbortController()

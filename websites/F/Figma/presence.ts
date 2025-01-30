@@ -496,7 +496,7 @@ presence.on('UpdateData', async () => {
   else if (document.location.pathname.includes('search')) {
     // Searching files
     const [search] = document.title.split('- Figma')
-    shortpresence('search', search, search)
+    shortpresence('search', search!, search!)
   }
   else if (document.location.pathname.endsWith('drafts')) {
     // Drafts page
@@ -568,11 +568,11 @@ presence.on('UpdateData', async () => {
     // Viewing and editing files
     if (document.location.pathname.includes('community')) {
       const [filename] = document.title.split('- Figma')
-      figmapresence('view', filename, 'Viewing:', filename)
+      figmapresence('view', filename!, 'Viewing:', filename!)
     }
     else {
       const [filename] = document.title.split('- Figma')
-      figmapresence('edit', filename, 'Editing:', filename)
+      figmapresence('edit', filename!, 'Editing:', filename!)
     }
   }
   else if (document.location.pathname.includes('Community')) {

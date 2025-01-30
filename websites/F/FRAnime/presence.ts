@@ -1,7 +1,9 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1102272266278027296',
 })
-const enum Assets {
+enum ActivityAssets {
   FRAnimeLogo = 'https://cdn.rcd.gg/PreMiD/websites/F/FRAnime/assets/logo.png',
   FRAnimeLogoBg = 'https://cdn.rcd.gg/PreMiD/websites/F/FRAnime/assets/0.png',
 }
@@ -28,7 +30,7 @@ presence.on('UpdateData', async () => {
     presenceData.details = presenceStrings.browsing
     presenceData.state = presenceStrings.branding
     presenceData.smallImageText = presenceStrings.websiteName
-    presenceData.largeImageKey = Assets.FRAnimeLogoBg
+    presenceData.largeImageKey = ActivityAssets.FRAnimeLogoBg
     presenceData.smallImageKey = Assets.Search
     presenceData.startTimestamp = animeBrowsingTimestamp
 

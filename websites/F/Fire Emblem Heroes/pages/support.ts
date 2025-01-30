@@ -1,4 +1,4 @@
-import { slideshow } from '../util'
+import { slideshow } from '../util.js'
 
 export default function applySupportDetails(
   presenceData: PresenceData,
@@ -55,9 +55,9 @@ export default function applySupportDetails(
           ].filter(section => !!section.querySelector('h2'))
           for (let i = roundSections.length - 1; i >= 0; i--) {
             for (const [j, battle] of [
-              ...roundSections[i].querySelectorAll<HTMLDivElement>(
+              ...(roundSections[i]?.querySelectorAll<HTMLDivElement>(
                 '.tournaments-battle',
-              ),
+              ) ?? []),
             ].entries()) {
               const nameElements = [
                 ...battle.querySelectorAll<HTMLParagraphElement>('.name'),

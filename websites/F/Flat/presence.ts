@@ -69,7 +69,7 @@ presence.on('UpdateData', async () => {
     )?.textContent
     presenceData.details = 'Viewing a user'
     presenceData.state = name
-      ? `${name} (@${pathname.split('/')[1].slice(1)})`
+      ? `${name} (@${pathname.split('/')[1]?.slice(1)})`
       : 'Unknown user'
     presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
       '[data-cy="user-info"] img',

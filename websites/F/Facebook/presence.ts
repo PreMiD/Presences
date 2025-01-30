@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '631803867708915732',
 })
@@ -35,7 +37,7 @@ async function getStrings() {
   )
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/F/Facebook/assets/logo.png',
   MessengerLogo = 'https://cdn.rcd.gg/PreMiD/websites/F/Facebook/assets/0.png',
   WatchLogo = 'https://cdn.rcd.gg/PreMiD/websites/F/Facebook/assets/1.png',
@@ -50,7 +52,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>,
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href } = document.location
@@ -98,7 +100,7 @@ presence.on('UpdateData', async () => {
       break
     }
     case pathname.includes('/messages'): {
-      presenceData.largeImageKey = Assets.MessengerLogo
+      presenceData.largeImageKey = ActivityAssets.MessengerLogo
       switch (true) {
         case pathname.includes('/t/'): {
           const username = document
@@ -204,7 +206,7 @@ presence.on('UpdateData', async () => {
       break
     }
     case pathname.includes('/watch'): {
-      presenceData.largeImageKey = Assets.WatchLogo
+      presenceData.largeImageKey = ActivityAssets.WatchLogo
       const hrefReplaced = href
         .replace(/\/\?ref=.*/g, '')
         .replace('web.facebook.com', 'www.facebook.com')
@@ -299,7 +301,7 @@ presence.on('UpdateData', async () => {
                       ?.firstElementChild
                       ?.getAttribute('href')
                       ?.split('?v=')[1]
-                      .split('_')[0]
+                      ?.split('_')[0]
                   }`,
                 },
               ]
@@ -405,7 +407,7 @@ presence.on('UpdateData', async () => {
     }
     case pathname.includes('/reel'): {
       presenceData.details = 'Watching a reel'
-      presenceData.largeImageKey = Assets.ReelLogo
+      presenceData.largeImageKey = ActivityAssets.ReelLogo
       presenceData.state = `From ${document
         .querySelector<HTMLLinkElement>('h2 > span > span > a.oajrlxb2')
         ?.textContent
@@ -419,7 +421,7 @@ presence.on('UpdateData', async () => {
       break
     }
     case pathname.includes('/marketplace'): {
-      presenceData.largeImageKey = Assets.MarketplaceLogo
+      presenceData.largeImageKey = ActivityAssets.MarketplaceLogo
 
       switch (true) {
         case pathname.includes('/search/'): {
@@ -446,7 +448,7 @@ presence.on('UpdateData', async () => {
               .querySelector('head > title')
               ?.textContent
               ?.split(' | Facebook')[0]
-              .split('– ')[1]
+              ?.split('– ')[1]
           break
         }
         default: {
@@ -571,7 +573,7 @@ presence.on('UpdateData', async () => {
       break
     }
     case pathname.includes('/gaming/'): {
-      presenceData.largeImageKey = Assets.GamingLogo
+      presenceData.largeImageKey = ActivityAssets.GamingLogo
       presenceData.details = 'Gaming'
       switch (true) {
         case /gaming\/play\/\d/.test(pathname): {
@@ -649,11 +651,11 @@ presence.on('UpdateData', async () => {
         .trim()
 
       presenceData.largeImageKey = privacyMode || !showCover
-        ? Assets.Logo
+        ? ActivityAssets.Logo
         : document
           .querySelector('[mask*="url(#js"]')
           ?.firstElementChild
-          ?.getAttribute('xlink:href') ?? Assets.Logo
+          ?.getAttribute('xlink:href') ?? ActivityAssets.Logo
       if (profileUsername) {
         if (privacyMode) {
           presenceData.details = strings.viewAProfile

@@ -3,7 +3,7 @@ export const presence = new Presence({
 })
 export const slideshow = presence.createSlideshow()
 
-export const enum Assets {
+export enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/F/Fire%20Emblem%20Heroes/assets/logo.png',
 }
 
@@ -42,7 +42,7 @@ export async function squareImage(url: string): Promise<string> {
   if (squareImageCache[url])
     return squareImageCache[url]
   if (isUploading)
-    return Assets.Logo
+    return ActivityAssets.Logo
   isUploading = true
   const image = document.createElement('img')
   image.crossOrigin = 'anonymous'

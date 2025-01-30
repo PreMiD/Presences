@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '861567034706100234',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/F/fbox.to/assets/logo.png',
 }
 
@@ -22,7 +24,7 @@ presence.on(
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     startTimestamp: browsingTimestamp,
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const { pathname, href } = document.location
   const [buttons, image] = await Promise.all([
@@ -52,7 +54,7 @@ presence.on('UpdateData', async () => {
         ?? document
           .querySelector('[class="poster"] > [itemprop="image"]')
           ?.getAttribute('src')
-          ?? Assets.Logo
+          ?? ActivityAssets.Logo
     }
     if (iFrameData && !iFrameData.paused) {
       [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(iFrameData.currTime, iFrameData.duration)
@@ -83,7 +85,7 @@ presence.on('UpdateData', async () => {
         ?? document
           .querySelector('[class="poster"] > [itemprop="image"]')
           ?.getAttribute('src')
-          ?? Assets.Logo
+          ?? ActivityAssets.Logo
     }
     if (iFrameData && !iFrameData.paused) {
       [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(iFrameData.currTime, iFrameData.duration)
@@ -127,8 +129,8 @@ function extractSeasonEpisode(url: string): {
   const match = url.match(/\/tv\/[^/]+\/(\d+)-(\d+)/)
   if (match) {
     return {
-      season: Number.parseInt(match[1], 10),
-      episode: Number.parseInt(match[2], 10),
+      season: Number.parseInt(match[1]!, 10),
+      episode: Number.parseInt(match[2]!, 10),
     }
   }
   return { season: 0, episode: 0 }

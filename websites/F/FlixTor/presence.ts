@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1001112348192423946',
 })
@@ -6,14 +8,7 @@ const strings = presence.getStrings({
   pause: 'general.paused',
 })
 
-let lastPlaybackState
-let playback: boolean | undefined
-let browsingTimestamp = Math.floor(Date.now() / 1000)
-
-if (lastPlaybackState !== playback) {
-  lastPlaybackState = playback
-  browsingTimestamp = Math.floor(Date.now() / 1000)
-}
+const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
@@ -24,7 +19,7 @@ presence.on('UpdateData', async () => {
     '#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video',
   )
 
-  playback = !!video
+  const playback = !!video
 
   if (!playback) {
     presenceData.details = 'Browsing...'
@@ -67,7 +62,7 @@ presence.on('UpdateData', async () => {
           label: presenceData.details!.length >= 30
             ? 'View Now'
             : presenceData.details,
-          url: document.location.href.split('/season/')[0],
+          url: document.location.href.split('/season/')[0]!,
         },
         {
           label: presenceData.state,
@@ -85,7 +80,7 @@ presence.on('UpdateData', async () => {
           label: presenceData.details!.length >= 30
             ? 'View Now'
             : presenceData.details,
-          url: document.location.href.split('/episode/')[0],
+          url: document.location.href.split('/episode/')[0]!,
         },
         {
           label: presenceData.state,

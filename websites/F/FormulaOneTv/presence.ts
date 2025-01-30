@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 interface VideoDetails {
   [contentId: string]: {
     metadata?: {
@@ -133,7 +135,7 @@ presence.on('UpdateData', async () => {
   let contentId = ''
 
   if (document.location.href.includes('detail'))
-    contentId = window.location.pathname.split('/')[2]
+    contentId = window.location.pathname.split('/')[2]!
 
   // Fetch the metadata for the current video based on the ID of the content found in the URL
   if (!videoDetails[contentId] && !fetchingVideoDetails && contentId !== '') {

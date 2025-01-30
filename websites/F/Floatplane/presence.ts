@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '889918462477095012',
 })
@@ -99,7 +101,7 @@ presence.on('UpdateData', async () => {
 
         presenceData.details = 'Viewing channel:'
         presenceData.state = channelTitle
-        presenceData.largeImageKey = assets[pageType.toLowerCase() as keyof typeof assets]
+        presenceData.largeImageKey = assets[pageType?.toLowerCase() as keyof typeof assets]
         presenceData.smallImageKey = 'https://cdn.rcd.gg/PreMiD/websites/F/Floatplane/assets/logo.png'
         presenceData.smallImageText = document.title
         presenceData.buttons = [{ label: 'View Channel', url: location.href }]

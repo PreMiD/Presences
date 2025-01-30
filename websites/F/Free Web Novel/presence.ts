@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Smallimagekey = 'https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/0.png',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/logo.png',
   Browsing = 'https://cdn.rcd.gg/PreMiD/websites/F/Free%20Web%20Novel/assets/1.png',
@@ -26,7 +26,7 @@ presence.on('UpdateData', async () => {
     presence.getSetting<boolean>('showReading'),
   ])
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname } = window.location
@@ -51,7 +51,7 @@ presence.on('UpdateData', async () => {
     showButtons = false
   }
   else {
-    presenceData.smallImageKey = Assets.Closed
+    presenceData.smallImageKey = ActivityAssets.Closed
     presenceData.smallImageText = 'Not Reading'
   }
   if (!showBook)
@@ -118,7 +118,7 @@ presence.on('UpdateData', async () => {
       break
     }
     case privacy: {
-      presenceData.largeImageKey = Assets.Incognito
+      presenceData.largeImageKey = ActivityAssets.Incognito
       if (!showReading)
         break
       if (
@@ -131,12 +131,12 @@ presence.on('UpdateData', async () => {
         document.querySelector<HTMLAnchorElement>('[title="Read Next chapter"]')
       ) {
         presenceData.details = 'Reading...'
-        presenceData.smallImageKey = Assets.Open
+        presenceData.smallImageKey = ActivityAssets.Open
       }
       break
     }
     case showLogo: {
-      presenceData.largeImageKey = Assets.Logo
+      presenceData.largeImageKey = ActivityAssets.Logo
       delete presenceData.smallImageKey
       delete presenceData.details
       delete presenceData.state
@@ -188,7 +188,7 @@ presence.on('UpdateData', async () => {
           delete presenceData.state
         }
         if (showReading) {
-          presenceData.smallImageKey = Assets.Open
+          presenceData.smallImageKey = ActivityAssets.Open
           presenceData.smallImageText = 'Reading'
         }
         else {

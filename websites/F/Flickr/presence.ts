@@ -2,11 +2,11 @@ const presence = new Presence({
   clientId: '758864138897850368',
 })
 const startTimeStamp = Math.round(Date.now())
-let author: string,
-  title: string,
-  language: string,
-  searchQuery: string,
-  username: string
+let author: string | undefined,
+  title: string | undefined,
+  language: string | undefined,
+  searchQuery: string | undefined,
+  username: string | undefined
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/F/Flickr/assets/logo.png',
@@ -28,7 +28,7 @@ presence.on('UpdateData', async () => {
       ) {
         username = document.location.pathname.split('/')[2]
         presenceData.details = `Viewing user: ${username}`
-        if (document.location.pathname.split('/')[3].length !== 0) {
+        if (document.location.pathname.split('/')[3]?.length !== 0) {
           presenceData.state = `Viewing their: ${
             document.location.pathname.split('/')[3]
           }`
@@ -108,7 +108,7 @@ presence.on('UpdateData', async () => {
           else if (document.location.pathname.startsWith('/search/')) {
             searchQuery = document.querySelector('title')?.textContent ?? '';
             [, searchQuery] = searchQuery.split(':');
-            [searchQuery] = searchQuery.split('|')
+            [searchQuery] = searchQuery?.split('|') ?? []
             presenceData.details = `Searching:${searchQuery}`
           }
           else if (document.location.pathname === '/map') {

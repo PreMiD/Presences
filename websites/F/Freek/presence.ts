@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1321328844497752124',
 })
@@ -16,7 +18,7 @@ const strings = presence.getStrings({
   buttonViewSeries: 'general.buttonViewSeries',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/F/Freek/assets/logo.png',
 }
 
@@ -35,7 +37,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     details: 'Unsupported Page',
   }
@@ -98,7 +100,7 @@ presence.on('UpdateData', async () => {
     )
     const episodeNumber = href.includes('?ep=') ? href.split('?ep=')[1] : 1
 
-    switch (pathname.split('/watch')[1].split('/')[1]) {
+    switch (pathname.split('/watch')[1]?.split('/')[1]) {
       case 'movie':
         presenceData.details = steamTitle
         presenceData.state = `⭐ ${
@@ -238,7 +240,7 @@ presence.on('UpdateData', async () => {
       ?.getAttribute('value')}`
     presenceData.smallImageKey = Assets.Search
     presenceData.smallImageText = `Page ${
-      href.includes('page=') ? href.split('page=')[1].split('&type')[0] : 1
+      href.includes('page=') ? href.split('page=')[1]?.split('&type')[0] : 1
     } - ${searchResults}`
   }
 

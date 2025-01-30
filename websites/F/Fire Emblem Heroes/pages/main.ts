@@ -1,4 +1,4 @@
-import { activateIntersectionObservers, getSection, slideshow } from '../util'
+import { activateIntersectionObservers, getSection, slideshow } from '../util.js'
 
 export default function applyMainHostDetails(
   presenceData: PresenceData,

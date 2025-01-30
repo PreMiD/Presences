@@ -1,4 +1,4 @@
-import { slideshow, squareImage } from '../util'
+import { slideshow, squareImage } from '../util.js'
 
 export default async function applyCYLDetails(
   presenceData: PresenceData,
@@ -35,7 +35,7 @@ export default async function applyCYLDetails(
     case 'results': {
       if (
         new URLSearchParams(document.location.search).get('overall')
-          || pathList[0].includes('detail')
+          || pathList[0]?.includes('detail')
           || (pathList[0] === 'result' && pathList[1])
       ) {
         presenceData.details = `Viewing ${campaignTitle} results`

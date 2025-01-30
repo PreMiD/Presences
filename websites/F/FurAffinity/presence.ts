@@ -1,7 +1,9 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({ clientId: '760624576550928455' })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/F/FurAffinity/assets/logo.png',
 }
 
@@ -19,7 +21,7 @@ async function getStrings() {
 }
 function imgPath(path: string, hostname: string) {
   if (!path)
-    return Assets.Logo
+    return ActivityAssets.Logo
   if (path.includes(hostname))
     return `https://${path.replace('//', '')}`
   else return `https://${hostname}${path}`
@@ -30,7 +32,7 @@ let oldLang: string | null = null
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const search = document.querySelector<HTMLInputElement>('input[type="search"]')
@@ -191,8 +193,8 @@ presence.on('UpdateData', async () => {
   }
   if (!buttons && presenceData.buttons)
     delete presenceData.buttons
-  if (!covers && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if (!covers && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (presenceData.details)
     presence.setActivity(presenceData)
   else presence.setActivity()

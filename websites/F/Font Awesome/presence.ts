@@ -1,3 +1,4 @@
+import { ActivityType } from 'premid'
 import {
   batch,
   browsingTimestamp,
@@ -5,7 +6,7 @@ import {
   presence,
   registerSlideshowKey,
   slideshow,
-} from './util'
+} from './util.js'
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
@@ -78,7 +79,7 @@ presence.on('UpdateData', async () => {
           ...document.querySelectorAll('#icons-results > article'),
         ]
         if (iconCards.length) {
-          const key = `search-${searchQuery}-${iconCards[0].id}`
+          const key = `search-${searchQuery}-${iconCards[0]?.id}`
           registerSlideshowKey(key)
           usesSlideshow = true
           const batchData = await batch(key, iconCards, async (card) => {

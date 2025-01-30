@@ -1,4 +1,4 @@
-import { slideshow, truncateText } from '../util'
+import { slideshow, truncateText } from '../util.js'
 
 export default function applyGuideDetails(
   presenceData: PresenceData,
@@ -26,7 +26,7 @@ export default function applyGuideDetails(
           case 'intermediate':
           case 'advanced': {
             presenceData.details = 'Browsing the Guide: Advanced Training Tips'
-            presenceData.details = `Browsing the Guide: ${pathList[2][0].toUpperCase()}${pathList[2].slice(
+            presenceData.details = `Browsing the Guide: ${pathList[2]?.[0]?.toUpperCase()}${pathList[2]?.slice(
               1,
             )} Training Tips`
             break

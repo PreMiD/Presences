@@ -1,10 +1,10 @@
-import applyCYLDetails from './pages/cyl'
-import applyFehPassDetails from './pages/fehpass'
-import applyGuideDetails from './pages/guide'
-import applyMainHostDetails from './pages/main'
-import applyNewGuideDetails from './pages/newguide'
-import applySupportDetails from './pages/support'
-import { Assets, presence, resetObservers, slideshow } from './util'
+import applyCYLDetails from './pages/cyl.js'
+import applyFehPassDetails from './pages/fehpass.js'
+import applyGuideDetails from './pages/guide.js'
+import applyMainHostDetails from './pages/main.js'
+import applyNewGuideDetails from './pages/newguide.js'
+import applySupportDetails from './pages/support.js'
+import { ActivityAssets, presence, resetObservers, slideshow } from './util.js'
 
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 

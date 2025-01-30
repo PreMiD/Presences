@@ -1,15 +1,17 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '730897382937591848',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/F/FiveM/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { href, hostname, pathname } = document.location
@@ -124,7 +126,7 @@ presence.on('UpdateData', async () => {
             .querySelector('[class="username"]')
             ?.textContent
             ?.split('\n')[1]
-            .trim()
+            ?.trim()
           presenceData.buttons = [
             {
               label: 'View Profile',
@@ -194,7 +196,7 @@ presence.on('UpdateData', async () => {
   }
 
   if (!covers)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (!buttons)
     delete presenceData.buttons
   if (presenceData.details)

@@ -1,4 +1,6 @@
-import { truncateText } from '../util'
+import { Assets } from 'premid'
+
+import { truncateText } from '../util.js'
 
 export default function applyFehPassDetails(
   presenceData: PresenceData,

@@ -17,20 +17,20 @@ const browsingTimetsamp = Math.floor(Date.now() / 1000)
 let anime
 for (let i = 0; i < tags.length; i++) crossover.push([`/crossovers${tags[i]}`])
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/F/Fanfiction/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimetsamp,
   }
 
   if (document.location.pathname === '/') {
     presenceData.details = 'Browing fanfics'
     presenceData.state = 'at Homepage'
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = 'browsing'
   }
   else if (tags.includes(document.location.pathname)) {
@@ -39,7 +39,7 @@ presence.on('UpdateData', async () => {
       '/',
       ' ',
     )} `
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = document.location.href
   }
   else if (document.location.pathname.startsWith('/s/')) {
@@ -52,7 +52,7 @@ presence.on('UpdateData', async () => {
       .replace('crossovers', '')
       .split('-')
       .join(' ')} `
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = document.location.href
     presence.setActivity(presenceData)
   }
@@ -61,7 +61,7 @@ presence.on('UpdateData', async () => {
     presenceData.state = `Catagory: ${document.location.pathname
       .replace('crossovers', '')
       .replace('/', ' ')} (Crossover) `
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = document.location.href
   }
   else if (/\d/.test(document.location.pathname)) {
@@ -73,7 +73,7 @@ presence.on('UpdateData', async () => {
 
     presenceData.details = 'Exploring Fanfics'
     presenceData.state = `Looking for ${anime} `
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = document.location.href
   }
 

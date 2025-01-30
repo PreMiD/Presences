@@ -1,14 +1,14 @@
-import knowledgeBaseHandler from './pages/knowledge'
-import pocketPCHandler from './pages/pocketpc'
-import ppcHandler from './pages/ppc'
-import storeHandler from './pages/store'
+import knowledgeBaseHandler from './pages/knowledge.js'
+import pocketPCHandler from './pages/pocketpc.js'
+import ppcHandler from './pages/ppc.js'
+import storeHandler from './pages/store.js'
 
 const presence = new Presence({
   clientId: '1221562084253499452',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum PresenceAssets {
+enum PresenceAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/F/Four%20Winds%20Mah%20Jong/assets/logo.png',
 }
 
