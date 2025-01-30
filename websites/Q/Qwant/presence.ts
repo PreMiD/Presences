@@ -27,7 +27,7 @@ interface ItemMap {
   [key: string]: string
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/Q/Qwant/assets/logo.png',
   Qwantjunior = 'https://cdn.rcd.gg/PreMiD/websites/Q/Qwant/assets/0.png',
   Music = 'https://cdn.rcd.gg/PreMiD/websites/Q/Qwant/assets/1.png',
@@ -37,7 +37,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 
@@ -56,7 +56,7 @@ presence.on('UpdateData', async () => {
         }
         break
       case 'music':
-        presenceData.smallImageKey = Assets.Music
+        presenceData.smallImageKey = ActivityAssets.Music
         presenceData.smallImageText = 'Qwant Music'
         if (location.pathname === '/music/search') {
           query = new URLSearchParams(location.search)
@@ -70,14 +70,14 @@ presence.on('UpdateData', async () => {
         }
         break
       case 'maps':
-        presenceData.smallImageKey = Assets.Maps
+        presenceData.smallImageKey = ActivityAssets.Maps
         presenceData.smallImageText = 'Qwant Maps'
         presenceData.details = 'Looking at maps'
         break
     }
   }
   else if (location.hostname === 'www.qwantjunior.com') {
-    presenceData.largeImageKey = Assets.Qwantjunior
+    presenceData.largeImageKey = ActivityAssets.Qwantjunior
     query = new URLSearchParams(location.search)
     switch (location.pathname) {
       case '/':
@@ -92,7 +92,7 @@ presence.on('UpdateData', async () => {
         }
         break
       case '/news':
-        presenceData.smallImageKey = Assets.News
+        presenceData.smallImageKey = ActivityAssets.News
         presenceData.smallImageText = 'Qwant Junior News'
         if (query.has('q')) {
           presenceData.details = 'Searching the news on Qwant Junior'

@@ -7,7 +7,7 @@ const keys: Record<string, string> = {
   '7K': 'https://cdn.rcd.gg/PreMiD/websites/Q/Quaver/assets/1.png',
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/Q/Quaver/assets/logo.png',
 }
 
@@ -19,7 +19,7 @@ presence.on('UpdateData', async () => {
     presence.getSetting<boolean>('buttons'),
   ])
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href } = document.location

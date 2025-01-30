@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '921861694190407730',
 })
@@ -17,13 +19,13 @@ async function getStrings() {
 let strings: Awaited<ReturnType<typeof getStrings>> | null = null
 let oldLang: string | null = null
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/Q/Qobuz/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   if (!document.querySelector('#root'))
-    return presence.setActivity({ largeImageKey: Assets.Logo })
+    return presence.setActivity({ largeImageKey: ActivityAssets.Logo })
 
   const [newLang, timestamps, cover] = await Promise.all([
     presence.getSetting<string>('lang').catch(() => 'en'),
@@ -44,7 +46,7 @@ presence.on('UpdateData', async () => {
         )
         ?.src
         .replaceAll('230', '600')
-      : Assets.Logo,
+      : ActivityAssets.Logo,
   }
   const songTitle = document.querySelector<HTMLAnchorElement>(
     'a[class="player__track-name"]',
@@ -79,7 +81,7 @@ presence.on('UpdateData', async () => {
 
   let playliststring = ''
   if (fromPlaylist)
-    playliststring = ` | From: ${obj.songPlaylist.textContent}`
+    playliststring = ` | From: ${obj.songPlaylist?.textContent}`
 
   presenceData.details = songTitle?.textContent
   presenceData.state = document.querySelector('div[class="player__track-album"] > a')?.textContent
@@ -110,7 +112,7 @@ presence.on('UpdateData', async () => {
   if (fromPlaylist) {
     presenceData.buttons.push({
       label: strings.viewPlaylist,
-      url: obj.songPlaylist.href,
+      url: obj.songPlaylist?.href ?? '',
     })
   }
   presence.setActivity(presenceData)

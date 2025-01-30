@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '719784356725653504',
 })
@@ -18,7 +20,7 @@ interface QuizletData {
 let qzData: QuizletData | null = null
 let actionTimestamp: number | null = null
 
-const enum Assets {
+enum ActivityAssets {
   Quizlet = 'https://cdn.rcd.gg/PreMiD/websites/Q/Quizlet/assets/0.png',
   Flashcards = 'https://cdn.rcd.gg/PreMiD/websites/Q/Quizlet/assets/1.png',
   Match = 'https://cdn.rcd.gg/PreMiD/websites/Q/Quizlet/assets/2.png',
@@ -95,14 +97,14 @@ presence.on('UpdateData', async () => {
         break
       case 'Gravity': // Set > Gravity
         actionTimestamp ??= Date.now()
-        presenceData.smallImageKey = Assets.Gravity
+        presenceData.smallImageKey = ActivityAssets.Gravity
         presenceData.smallImageText = 'Gravity'
         presenceData.details = 'Playing Gravity'
         presenceData.state = `with "${qzData.layer.studyableTitle}" set`
         break
       case 'Match': // Set > Match
         actionTimestamp ??= Date.now()
-        presenceData.smallImageKey = Assets.Match
+        presenceData.smallImageKey = ActivityAssets.Match
         presenceData.smallImageText = 'Match'
         presenceData.details = 'Playing Match'
         presenceData.state = `with "${qzData.layer.studyableTitle}" set`
@@ -116,21 +118,21 @@ presence.on('UpdateData', async () => {
         break
       case 'Assistant': // Set > Learn
         actionTimestamp ??= Date.now()
-        presenceData.smallImageKey = Assets.Learn
+        presenceData.smallImageKey = ActivityAssets.Learn
         presenceData.smallImageText = 'Learn'
         presenceData.details = 'Learning set'
         presenceData.state = qzData.layer.studyableTitle
         break
       case 'Cards': // Set > Flashcards
         actionTimestamp ??= Date.now()
-        presenceData.smallImageKey = Assets.Flashcards
+        presenceData.smallImageKey = ActivityAssets.Flashcards
         presenceData.smallImageText = 'Flashcards'
         presenceData.details = 'Reviewing flashcards'
         presenceData.state = `on ${qzData.layer.studyableTitle}`
         break
       case 'Test': // Set > Test
         actionTimestamp ??= Date.now()
-        presenceData.smallImageKey = Assets.Test
+        presenceData.smallImageKey = ActivityAssets.Test
         presenceData.smallImageText = 'Test'
         presenceData.details = 'Testing'
         presenceData.state = `on ${qzData.layer.studyableTitle}`
@@ -144,7 +146,7 @@ presence.on('UpdateData', async () => {
         break
       case 'Spell': // Set > Spell
         actionTimestamp ??= Date.now()
-        presenceData.smallImageKey = Assets.Spell
+        presenceData.smallImageKey = ActivityAssets.Spell
         presenceData.smallImageText = 'Spell'
         presenceData.details = 'Spelling'
         presenceData.state = `on ${qzData.layer.studyableTitle}`
