@@ -521,7 +521,7 @@ const assets = {
   processing: 'https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/131.png',
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/logo.png',
   Idle = 'https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/132.png',
   PylonD = 'https://cdn.rcd.gg/PreMiD/websites/P/Pylon/assets/133.png',
@@ -532,7 +532,7 @@ let lastElement: Element | null = null
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const docsSelector = '.current.tsd-kind-namespace > a, .current.tsd-parent-kind-namespace > a'
 
@@ -556,7 +556,7 @@ presence.on('UpdateData', async () => {
   else if (document.location.pathname.startsWith('/studio')) {
     presenceData.details = 'Studio'
     if (document.location.pathname.endsWith('editor')) {
-      presenceData.smallImageKey = Assets.PylonD
+      presenceData.smallImageKey = ActivityAssets.PylonD
       presenceData.smallImageText = 'Pylon Studio Editor'
       const guildName = document.querySelector(
         '#root > div.PageStudioGuildEdit_studioContainer__2vaAW > div > div.PylonEditor_editorContainerOuter__3o4x4 > div.PylonEditor_editorContainerGridVertical__10qLF > div > div:nth-child(1) > div > div.SideBar_header__2dvwm > h3',
@@ -570,7 +570,7 @@ presence.on('UpdateData', async () => {
             const match = /^\/(.*)\/([mgiy]+)$/.exec(key)
             if (!match)
               return false
-            return new RegExp(match[1], match[2]).test(
+            return new RegExp(match[1]!, match[2]).test(
               currentFile.textContent ?? '',
             )
           })!
@@ -601,7 +601,7 @@ presence.on('UpdateData', async () => {
           )
       }
       else {
-        presenceData.largeImageKey = Assets.Idle
+        presenceData.largeImageKey = ActivityAssets.Idle
         presenceData.details = 'Idling'
       }
     }

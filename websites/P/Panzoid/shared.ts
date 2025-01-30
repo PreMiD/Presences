@@ -1,10 +1,10 @@
-export const enum Icons {
+export enum Icons {
   Discord = 'https://cdn.rcd.gg/PreMiD/websites/P/Panzoid/assets/logo.webp',
   Legacy = 'https://cdn.rcd.gg/PreMiD/websites/P/Panzoid/assets/0.png',
   Gen4 = 'https://cdn.rcd.gg/PreMiD/websites/P/Panzoid/assets/1.png',
 }
 
-export const enum Details {
+export enum Details {
   Gen4Menu = 'In Gen4 menu',
   Gen4Loading = 'Loading project...',
   Gen4Editor = 'Editing: {0}',
@@ -17,7 +17,7 @@ export const enum Details {
   Website = 'Lurking around the website',
 }
 
-export const enum States {
+export enum States {
   Gen4Menu = '{0} projects',
   Gen4Editor = '{0} tracks | {1} clips',
   // eslint-disable-next-line ts/no-duplicate-enum-values
@@ -26,7 +26,7 @@ export const enum States {
   Rendering = 'Rendering {0}%',
 }
 
-export const enum ImageTexts {
+export enum ImageTexts {
   Gen4 = 'Gen4',
   Legacy = 'Legacy',
 }

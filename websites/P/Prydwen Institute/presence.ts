@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/P/Prydwen%20Institute/assets/0.png',
   Employees = 'https://cdn.rcd.gg/PreMiD/websites/P/Prydwen%20Institute/assets/1.png',
   Gearbuilder = 'https://cdn.rcd.gg/PreMiD/websites/P/Prydwen%20Institute/assets/2.png',
@@ -26,8 +26,8 @@ presence.on('UpdateData', () => {
 
   if (document.location.pathname === '/employees') {
     presenceData.details = 'Viewing employees'
-    presenceData.largeImageKey = Assets.Ships
-    presenceData.smallImageKey = Assets.Employees
+    presenceData.largeImageKey = ActivityAssets.Ships
+    presenceData.smallImageKey = ActivityAssets.Employees
     presenceData.smallImageText = 'Viewing employees'
   }
   else if (document.location.pathname.startsWith('/employees')) {
@@ -36,14 +36,14 @@ presence.on('UpdateData', () => {
     presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
       '#gatsby-focus-wrapper > div > main > div > div > div > div.unit-header.align-items-center.d-flex.flex-wrap > div:nth-child(1) > span > a > div > div > picture > img',
     )?.src
-    presenceData.smallImageKey = Assets.Ships
+    presenceData.smallImageKey = ActivityAssets.Ships
     presenceData.smallImageText = 'Prydwen Institute'
     presenceData.buttons = [{ label: 'View Employee', url: document.URL }]
   }
   else if (document.location.pathname === '/operators') {
     presenceData.details = 'Viewing operators'
-    presenceData.largeImageKey = Assets.Ships
-    presenceData.smallImageKey = Assets.Operators
+    presenceData.largeImageKey = ActivityAssets.Ships
+    presenceData.smallImageKey = ActivityAssets.Operators
     presenceData.smallImageText = 'Viewing operators'
   }
   else if (document.location.pathname.startsWith('/operators')) {
@@ -52,14 +52,14 @@ presence.on('UpdateData', () => {
     presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
       '#gatsby-focus-wrapper > div > main > div > div > div.unit-page.operator > div.unit-header.align-items-center.d-flex.flex-wrap > div:nth-child(1) > span > a > div > div > picture > img',
     )?.src
-    presenceData.smallImageKey = Assets.Ships
+    presenceData.smallImageKey = ActivityAssets.Ships
     presenceData.smallImageText = 'Prydwen Institute'
     presenceData.buttons = [{ label: 'View Operator', url: document.URL }]
   }
   else if (document.location.pathname === '/ships') {
     presenceData.details = 'Viewing ships'
-    presenceData.largeImageKey = Assets.Ships
-    presenceData.smallImageKey = Assets.Ships
+    presenceData.largeImageKey = ActivityAssets.Ships
+    presenceData.smallImageKey = ActivityAssets.Ships
     presenceData.smallImageText = 'Viewing ships'
   }
   else if (document.location.pathname.startsWith('/ships')) {
@@ -68,7 +68,7 @@ presence.on('UpdateData', () => {
     presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
       '#gatsby-focus-wrapper > div > main > div > div > div.unit-page.ship > div.unit-header.align-items-center.d-flex.flex-wrap > div:nth-child(1) > span > a > div > div > picture > img',
     )?.src
-    presenceData.smallImageKey = Assets.Ships
+    presenceData.smallImageKey = ActivityAssets.Ships
     presenceData.smallImageText = 'Viewing ships'
     presenceData.buttons = [{ label: 'View Ship', url: document.URL }]
   }
@@ -91,40 +91,40 @@ presence.on('UpdateData', () => {
           ?.textContent
           ?.lastIndexOf('-') ?? 0) - 1,
       )
-    presenceData.largeImageKey = Assets.Ships
-    presenceData.smallImageKey = Assets.Skins
+    presenceData.largeImageKey = ActivityAssets.Ships
+    presenceData.smallImageKey = ActivityAssets.Skins
     presenceData.smallImageText = 'Viewing skins'
   }
   else {
     switch (document.location.pathname) {
       case '/skins': {
         presenceData.details = 'Viewing skins'
-        presenceData.largeImageKey = Assets.Ships
-        presenceData.smallImageKey = Assets.Skins
+        presenceData.largeImageKey = ActivityAssets.Ships
+        presenceData.smallImageKey = ActivityAssets.Skins
         presenceData.smallImageText = 'Viewing skins'
 
         break
       }
       case '/stats': {
         presenceData.details = 'Viewing stats'
-        presenceData.largeImageKey = Assets.Ships
-        presenceData.smallImageKey = Assets.Stats
+        presenceData.largeImageKey = ActivityAssets.Ships
+        presenceData.smallImageKey = ActivityAssets.Stats
         presenceData.smallImageText = 'Viewing stats'
 
         break
       }
       case '/tier-list': {
         presenceData.details = 'Viewing the tier list'
-        presenceData.largeImageKey = Assets.Ships
-        presenceData.smallImageKey = Assets.Tierlist
+        presenceData.largeImageKey = ActivityAssets.Ships
+        presenceData.smallImageKey = ActivityAssets.Tierlist
         presenceData.smallImageText = 'Viewing tier list'
 
         break
       }
       case '/guides': {
         presenceData.details = 'Finding guides'
-        presenceData.largeImageKey = Assets.Ships
-        presenceData.smallImageKey = Assets.Guide
+        presenceData.largeImageKey = ActivityAssets.Ships
+        presenceData.smallImageKey = ActivityAssets.Guide
         presenceData.smallImageText = 'Viewing guides'
 
         break
@@ -133,38 +133,38 @@ presence.on('UpdateData', () => {
         if (document.location.pathname.startsWith('/guides')) {
           presenceData.details = 'Reading a guide:'
           presenceData.state = shortTitle
-          presenceData.largeImageKey = Assets.Guide
-          presenceData.smallImageKey = Assets.Ships
+          presenceData.largeImageKey = ActivityAssets.Guide
+          presenceData.smallImageKey = ActivityAssets.Ships
           presenceData.smallImageText = 'Prydwen Institute'
           presenceData.buttons = [{ label: 'Read Guide', url: document.URL }]
         }
         else if (document.location.pathname === '/blog') {
           presenceData.details = 'Finding blogs'
-          presenceData.largeImageKey = Assets.Ships
-          presenceData.smallImageKey = Assets.Blogs
+          presenceData.largeImageKey = ActivityAssets.Ships
+          presenceData.smallImageKey = ActivityAssets.Blogs
           presenceData.smallImageText = 'Viewing blogs'
         }
         else if (document.location.pathname.startsWith('/blog')) {
           presenceData.details = 'Reading a blog:'
           presenceData.state = shortTitle
-          presenceData.largeImageKey = Assets.Blogs
-          presenceData.smallImageKey = Assets.Ships
+          presenceData.largeImageKey = ActivityAssets.Blogs
+          presenceData.smallImageKey = ActivityAssets.Ships
           presenceData.smallImageText = 'Prydwen Institute'
           presenceData.buttons = [{ label: 'Read Blog', url: document.URL }]
         }
         else if (document.location.href.includes('gear-builder')) {
           presenceData.details = 'Making a Gear Builder template'
-          presenceData.largeImageKey = Assets.Ships
-          presenceData.smallImageKey = Assets.Gearbuilder
+          presenceData.largeImageKey = ActivityAssets.Ships
+          presenceData.smallImageKey = ActivityAssets.Gearbuilder
           presenceData.smallImageText = 'Gear building'
         }
         else if (document.location.href === 'https://www.prydwen.co/') {
           presenceData.details = 'Viewing home page'
-          presenceData.largeImageKey = Assets.Ships
+          presenceData.largeImageKey = ActivityAssets.Ships
         }
         else {
           presenceData.details = 'Browsing the wiki'
-          presenceData.largeImageKey = Assets.Ships
+          presenceData.largeImageKey = ActivityAssets.Ships
         }
     }
   }

@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '821433038335377418',
 })
@@ -6,7 +8,7 @@ function pathIncludes(path: string, str: string) {
   return path.includes(str)
 }
 
-const enum Logos {
+enum Logos {
   Paramount = 'https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/logo.jpg',
   CBS = 'https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/0.png',
   BET = 'https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/1.png',

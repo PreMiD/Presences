@@ -1,4 +1,4 @@
-import { Details, format, getRenderingState, States } from './shared'
+import { Details, format, getRenderingState, States } from './shared.js'
 
 const iframe = new iFrame()
 

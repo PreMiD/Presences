@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({ clientId: '1013183483750907904' })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 const statics: {
@@ -10,17 +12,17 @@ const statics: {
   'login': 'Log in Patreon',
 }
 const slideshow = presence.createSlideshow()
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/P/Patreon/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     startTimestamp: browsingTimestamp,
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const presenceDataSlide: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const showButtons = await presence.getSetting<boolean>('buttons')
@@ -46,7 +48,7 @@ presence.on('UpdateData', async () => {
           'nonprofits': 'nonprofit organizations',
           'tutorials-and-education': 'education & tutorial creators',
           'local-businesses': 'local businesses',
-        }[pathArr[2]]
+        }[pathArr[2]!]
       }`
       break
     case 'apps':
@@ -64,7 +66,7 @@ presence.on('UpdateData', async () => {
     case 'settings':
       presenceData.details = 'Editing their settings'
       presenceData.state = `Page: ${
-        document.querySelectorAll('a[aria-current="page"]')[1].textContent
+        document.querySelectorAll('a[aria-current="page"]')[1]?.textContent
       }`
       break
     case 'search':
@@ -97,10 +99,10 @@ presence.on('UpdateData', async () => {
       slideshow.addSlide('slideCreatorName', presenceDataSlide, 5000)
       break
     default:
-      if (Object.keys(statics).includes(pathArr[1])) {
-        presenceData.details = statics[pathArr[1]]
+      if (Object.keys(statics).includes(pathArr[1]!)) {
+        presenceData.details = statics[pathArr[1]!]
       }
-      else if (pathArr[1].includes('messages')) {
+      else if (pathArr[1]!.includes('messages')) {
         presenceData.details = 'Reading their messages'
       }
       else {

@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '909403157686288414',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Group = 'https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/0.png',
   Home = 'https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/1.png',
   Notification = 'https://cdn.rcd.gg/PreMiD/websites/P/Personality%20Database/assets/2.png',
@@ -39,7 +41,7 @@ presence.on('UpdateData', async () => {
 
     if (profilePicture)
       presenceData.largeImageKey = profilePicture
-    presenceData.smallImageKey = Assets.Poll
+    presenceData.smallImageKey = ActivityAssets.Poll
     presenceData.details = 'Viewing:'
 
     const firstType = profilePersonality?.split(' - ')[0]
@@ -72,30 +74,30 @@ presence.on('UpdateData', async () => {
     presenceData.state = urlParams.get('keyword') || urlParams.get('q')
   }
   else if (document.location.pathname === '/vote') {
-    presenceData.smallImageKey = Assets.Home
+    presenceData.smallImageKey = ActivityAssets.Home
     presenceData.details = 'Viewing homepage'
   }
   else if (document.location.pathname.includes('/profile')) {
-    presenceData.smallImageKey = Assets.List
+    presenceData.smallImageKey = ActivityAssets.List
     presenceData.details = 'Viewing category:'
     presenceData.state = document.title?.split(' | ')[0]
   }
   else if (document.location.pathname.includes('/community')) {
-    presenceData.smallImageKey = Assets.Group
+    presenceData.smallImageKey = ActivityAssets.Group
     presenceData.details = 'Viewing community feed'
   }
   else if (document.location.pathname.includes('/topic')) {
-    presenceData.smallImageKey = Assets.Star
+    presenceData.smallImageKey = ActivityAssets.Star
     presenceData.details = 'Viewing topic:'
     presenceData.state = document.title?.split(' | ')[0]
   }
   else if (document.location.pathname.includes('/notification')) {
-    presenceData.smallImageKey = Assets.Notification
+    presenceData.smallImageKey = ActivityAssets.Notification
     presenceData.details = 'Viewing notification'
   }
   else if (document.location.pathname.includes('/user/')) {
     if (showUserNameInUserProfile) {
-      const userName: string = document.title?.split(' | ')[0]
+      const userName = document.title?.split(' | ')[0]
       presenceData.details = 'Viewing user\'s profile:'
       presenceData.state = userName
 
@@ -109,7 +111,7 @@ presence.on('UpdateData', async () => {
     else {
       presenceData.details = 'Viewing user\'s profile'
     }
-    presenceData.smallImageKey = Assets.User
+    presenceData.smallImageKey = ActivityAssets.User
   }
   else {
     presenceData.details = 'Viewing page:'

@@ -15,7 +15,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Reading a guide:'
       presenceData.state = `${document.location.pathname
         .split('/')[2]
-        .replaceAll('-', ' ')
+        ?.replaceAll('-', ' ')
         .slice(6, -4)}`
     }
     else if (document.location.pathname.includes('/pdfs/')) {
@@ -28,7 +28,7 @@ presence.on('UpdateData', async () => {
     else if (document.location.pathname === '/get_started.html') {
       const viewing = document.querySelectorAll(
         'ul#competition-tabs li a:not([aria-selected="false"])',
-      )[0].innerHTML === 'User Guide'
+      )[0]?.innerHTML === 'User Guide'
         ? 'Viewing the user guide'
         : 'Viewing the FAQ'
 
@@ -46,7 +46,7 @@ presence.on('UpdateData', async () => {
               .querySelectorAll(
                 'ul#guide-tabs li a:not([aria-selected="false"])',
               )[0]
-              .innerHTML
+              ?.innerHTML
               .includes('Learner')
               ? 0
               : 2,
@@ -104,10 +104,10 @@ presence.on('UpdateData', async () => {
         const catText = document
           .querySelector('ul.filter-list')
           ?.children[cat]
-          .innerHTML
+          ?.innerHTML
           .toLowerCase()
           .split(' ')
-        const amount = Number.parseInt(catText?.[catText.length - 1].replace(/\D/g, '') ?? '') || ''
+        const amount = Number.parseInt(catText?.[catText.length - 1]?.replace(/\D/g, '') ?? '') || ''
 
         if (cat === 0)
           return amount
@@ -173,7 +173,7 @@ presence.on('UpdateData', async () => {
       }`
     }
     else if (document.location.pathname.includes('/classrooms')) {
-      if (Number.parseInt(document.location.pathname.split('/')[2]) && !privacy) {
+      if (Number.parseInt(document.location.pathname.split('/')[2]!) && !privacy) {
         presenceData.details = `Viewing classroom "${
           document.querySelector('div.col-md-6 h2.card-title')?.innerHTML
         }"`

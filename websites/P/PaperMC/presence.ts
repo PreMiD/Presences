@@ -5,7 +5,7 @@ const logoURL = 'https://cdn.rcd.gg/PreMiD/websites/P/PaperMC/assets/logo.png'
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 // https://stackoverflow.com/a/7224605
 // to always return type string event when s may be falsy other than empty-string
-const capitalize = (s: string) => (s && s[0].toUpperCase() + s.slice(1)) || ''
+const capitalize = (s: string) => (s && s[0]!.toUpperCase() + s.slice(1)) || ''
 
 // Many thanks to the Modrinth Presence for the inspiration and the code for the Hangar Presence.
 
@@ -54,7 +54,7 @@ presence.on('UpdateData', async () => {
       if (pageType === PageType.Project) {
         presenceData.state = !pathSplit[2]
           ? 'Viewing Project Overview'
-          : `Viewing Project ${variable.split('|')[0].trim()}`
+          : `Viewing Project ${variable.split('|')[0]?.trim()}`
         // Project Image URL has no special class, so we're using the alt attribute of the image.
         // I doubt this will change anytime soon.
         presenceData.largeImageKey = document.querySelector<HTMLImageElement>(

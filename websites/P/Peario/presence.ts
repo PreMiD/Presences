@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '969204609845428234',
 })
@@ -12,7 +14,7 @@ let cached: Data
 
 async function fetchWithoutVideo() {
   const split = window.location.href.split('/')
-  if (!cached || !JSON.stringify(cached).includes(split[5])) {
+  if (!cached || !JSON.stringify(cached).includes(split[5]!)) {
     if (
       document.querySelector(
         '#app > div > div > div > div.loading > div > ion-icon',
@@ -33,7 +35,7 @@ async function fetchWithoutVideo() {
 async function fetchWithVideo(video: HTMLMediaElement) {
   if (
     !cached
-    || !JSON.stringify(cached).includes(window.location.href.split('/')[5])
+    || !JSON.stringify(cached).includes(window.location.href.split('/')[5]!)
   ) {
     const fetched = await fetch(
       `https://v3-cinemeta.strem.io/meta/movie/${

@@ -1,9 +1,11 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1134044987277975616',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   HomePage = 'https://cdn.rcd.gg/PreMiD/websites/P/Physics%20Wallah/assets/0.png',
   Scrolling = 'https://cdn.rcd.gg/PreMiD/websites/P/Physics%20Wallah/assets/1.png',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/P/Physics%20Wallah/assets/logo.png',
@@ -11,7 +13,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     type: ActivityType.Watching,
   }
@@ -22,13 +24,13 @@ presence.on('UpdateData', async () => {
   if (pathname === '/') {
     presenceData.details = 'Home'
     presenceData.state = 'Browsing...'
-    presenceData.smallImageKey = Assets.HomePage
+    presenceData.smallImageKey = ActivityAssets.HomePage
     presenceData.smallImageText = 'Browsing Home Page'
   }
   else if (pathname.startsWith('/study')) {
     presenceData.details = 'Browsing...'
     presenceData.state = 'In website'
-    presenceData.smallImageKey = Assets.Scrolling
+    presenceData.smallImageKey = ActivityAssets.Scrolling
     presenceData.smallImageText = 'Browsing the website'
 
     if (pathname.endsWith('/my-batches')) {

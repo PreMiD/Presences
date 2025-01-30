@@ -1,8 +1,10 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1055612773419196476',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/P/Pok%C3%A9flix/assets/logo.png',
 }
 
@@ -47,7 +49,7 @@ presence.on(
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     details: 'Somewhere on the site',
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const [privacy, time, buttons] = await Promise.all([
     presence.getSetting<boolean>('privacy'),

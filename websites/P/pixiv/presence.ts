@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '640234287525920834',
 })
@@ -46,7 +48,7 @@ const staticPages: Record<string, PresenceData> = {
   'ranking.php': { details: 'Viewing novels ranking' },
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/P/pixiv/assets/logo.png',
 }
 
@@ -55,7 +57,7 @@ let lastPath: string
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href, hostname } = document.location
@@ -162,8 +164,8 @@ presence.on('UpdateData', async () => {
     case 'novel': {
       presenceData.details = 'Browsing for novels...'
       const title = document.querySelector('h1')
-      if (Object.keys(staticPages).includes(arrPath[2])) {
-        presenceData = { ...presenceData, ...staticPages[arrPath[2]] }
+      if (Object.keys(staticPages).includes(arrPath[2]!)) {
+        presenceData = { ...presenceData, ...staticPages[arrPath[2]!] }
       }
       else if (title) {
         presenceData.details = 'Viewing novel:'
@@ -175,8 +177,8 @@ presence.on('UpdateData', async () => {
       break
     }
     default:
-      if (Object.keys(staticPages).includes(arrPath[1]))
-        presenceData = { ...presenceData, ...staticPages[arrPath[1]] }
+      if (Object.keys(staticPages).includes(arrPath[1]!))
+        presenceData = { ...presenceData, ...staticPages[arrPath[1]!] }
   }
 
   if (hostname === 'sketch.pixiv.net')

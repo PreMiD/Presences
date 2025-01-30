@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '661889916635971616',
 })
@@ -22,10 +24,10 @@ presence.on('UpdateData', async () => {
       .map(Number) ?? []
     presenceData.smallImageKey = Assets.Play
     if (time.length === 3) {
-      presenceData.startTimestamp = Date.now() - (time[0] * 3600 + time[1] * 60 + time[2]) * 1000
+      presenceData.startTimestamp = Date.now() - (time[0]! * 3600 + time[1]! * 60 + time[2]!) * 1000
     }
     else {
-      presenceData.startTimestamp = Date.now() - (time[0] * 60 + time[1]) * 1000
+      presenceData.startTimestamp = Date.now() - (time[0]! * 60 + time[1]!) * 1000
     }
   }
   else if (document.querySelector('.controls')?.ariaLabel?.includes('Paused')) {
@@ -54,7 +56,7 @@ presence.on('UpdateData', async () => {
     }
     else if (document.location.pathname.startsWith('/discover/list/')) {
       presenceData.details = 'Viewing discover page'
-      presenceData.state = document.querySelectorAll('h1')[0].textContent
+      presenceData.state = document.querySelectorAll('h1')[0]?.textContent
     }
     else {
       switch (document.location.pathname) {
@@ -86,7 +88,7 @@ presence.on('UpdateData', async () => {
           presenceData.details = 'Viewing listening stats'
           presenceData.state = `Listened for ${
             document.querySelectorAll('.styled__TimeListened-sc-1nd51k4-2')[0]
-              .textContent
+              ?.textContent
           }`
 
           break

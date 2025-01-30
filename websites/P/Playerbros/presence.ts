@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '643848955586805770',
 })
@@ -71,8 +73,8 @@ presence.on('UpdateData', async () => {
       details: 'Bir etikete göz atıyor:',
       state: tag && tag.textContent
         ? tag.textContent
-            .split(' ')[tag.textContent.split(' ').length - 1]
-            .replaceAll('"', '')
+          .split(' ')[tag.textContent.split(' ').length - 1]
+          ?.replaceAll('"', '')
         : 'Belirsiz',
       startTimestamp: Math.floor(Date.now() / 1000),
     })
@@ -87,11 +89,11 @@ presence.on('UpdateData', async () => {
       details: 'Bir şey arıyor:',
       state: searchingFor && searchingFor.textContent
         ? searchingFor.textContent
-            .split(' ')[searchingFor.textContent.split(' ').length - 1]
-            .replaceAll(
-              '"',
-              '',
-            )
+          .split(' ')[searchingFor.textContent.split(' ').length - 1]
+          ?.replaceAll(
+            '"',
+            '',
+          )
         : 'Belirsiz',
       smallImageKey: Assets.Search,
       startTimestamp: Math.floor(Date.now() / 1000),

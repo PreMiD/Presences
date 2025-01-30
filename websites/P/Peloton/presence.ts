@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '712294190339588209',
 })
@@ -162,7 +164,7 @@ presence.on('UpdateData', async () => {
           presenceData.smallImageKey = Assets.Live
           presenceData.smallImageText = strings.live
           presenceData.endTimestamp = new Date(
-            Date.now() + (clipTimeLeft[0] * 1 + clipTimeLeft[1] * 1) * 10,
+            Date.now() + (clipTimeLeft[0]! * 1 + clipTimeLeft[1]! * 1) * 10,
           ).getTime()
           break
         case false:

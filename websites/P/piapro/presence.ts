@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '641416608790609942',
 })
@@ -96,7 +98,7 @@ presence.on('UpdateData', async () => {
           .querySelector('head > title')
           ?.textContent
           ?.split('|')[1]
-          .split('「')[0]
+          ?.split('「')[0]
       }:`
       presenceData.state = document.querySelector(
         '#main > div.cd_works-whole.illust > div.cd_works-mainclm > h1',

@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '629428243061145640',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Likes = 'https://cdn.rcd.gg/PreMiD/websites/P/Pinterest/assets/0.png',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/P/Pinterest/assets/logo.png',
   Loading = 'https://i.imgur.com/6s5f2TA\u002Egif',
@@ -11,7 +13,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, hostname, href } = document.location
@@ -31,7 +33,7 @@ presence.on('UpdateData', async () => {
   switch (true) {
     case document.readyState !== 'complete': {
       presenceData.details = 'Loading'
-      presenceData.smallImageKey = Assets.Loading
+      presenceData.smallImageKey = ActivityAssets.Loading
       break
     }
     case !!search?.value: {
@@ -89,7 +91,7 @@ presence.on('UpdateData', async () => {
       }
       else {
         if (likesEl) {
-          presenceData.smallImageKey = Assets.Likes
+          presenceData.smallImageKey = ActivityAssets.Likes
           presenceData.smallImageText = `${likesEl} likes`
         }
         presenceData.state = `Viewing pin by: ${

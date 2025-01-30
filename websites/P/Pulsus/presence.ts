@@ -1,5 +1,5 @@
-import type { dataObject, PageVars } from './types'
-import { Assets, rankedImages, unrankedImages } from './assets'
+import type { dataObject, PageVars } from './types.js'
+import { ActivityAssets, rankedImages, unrankedImages } from './assets.js'
 
 const presence = new Presence({
   clientId: '770491262997889055',
@@ -37,8 +37,8 @@ function getLevelPresence(presenceData: PresenceData) {
   }
   if (gameData.special) {
     presenceData.smallImageKey = gameData.ranked
-      ? Assets.RankedSpecial
-      : Assets.UnrankedSpecial
+      ? ActivityAssets.RankedSpecial
+      : ActivityAssets.UnrankedSpecial
   }
   else if (gameData.ranked) {
     presenceData.smallImageKey = rankedImages[Math.floor(gameData.stars)] || rankedImages.at(-1)

@@ -34,7 +34,7 @@ presence.on('UpdateData', async () => {
     if (inputValues.length > 0) {
       presenceData.state = 'Página de inicio'
 
-      if (inputValues[0].replace(/ /g, '') !== '') {
+      if (inputValues[0]?.replace(/ /g, '') !== '') {
         presenceData.details = 'Página de inicio'
         presenceData.state = `Buscando: ${inputValues[0]}`
       }
@@ -214,7 +214,7 @@ presence.on('UpdateData', async () => {
       document.querySelector<HTMLHeadingElement>('.Header-class-title h1')
         ?.textContent
     } [${actualEpisode}/ ${finalEpisode}]`
-    presenceData.state = `${course?.children[0].textContent}`
+    presenceData.state = `${course?.children[0]?.textContent}`
     presenceData.buttons = [
       {
         label: 'Ver Curso',

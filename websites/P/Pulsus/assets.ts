@@ -1,4 +1,4 @@
-export const enum Assets {
+export enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/P/Pulsus/assets/logo.png',
   RankedBeginner = 'https://cdn.rcd.gg/PreMiD/websites/P/Pulsus/assets/0.png',
   RankedEasy = 'https://cdn.rcd.gg/PreMiD/websites/P/Pulsus/assets/1.png',
@@ -19,21 +19,21 @@ export const enum Assets {
 }
 
 export const rankedImages = [
-  Assets.RankedBeginner,
-  Assets.RankedEasy,
-  Assets.RankedNormal,
-  Assets.RankedHard,
-  Assets.RankedAdvanced,
-  Assets.RankedInsane,
-  Assets.RankedExpert,
+  ActivityAssets.RankedBeginner,
+  ActivityAssets.RankedEasy,
+  ActivityAssets.RankedNormal,
+  ActivityAssets.RankedHard,
+  ActivityAssets.RankedAdvanced,
+  ActivityAssets.RankedInsane,
+  ActivityAssets.RankedExpert,
 ]
 
 export const unrankedImages = [
-  Assets.UnrankedBeginner,
-  Assets.UnrankedEasy,
-  Assets.UnrankedNormal,
-  Assets.UnrankedHard,
-  Assets.UnrankedAdvanced,
-  Assets.UnrankedInsane,
-  Assets.UnrankedExpert,
+  ActivityAssets.UnrankedBeginner,
+  ActivityAssets.UnrankedEasy,
+  ActivityAssets.UnrankedNormal,
+  ActivityAssets.UnrankedHard,
+  ActivityAssets.UnrankedAdvanced,
+  ActivityAssets.UnrankedInsane,
+  ActivityAssets.UnrankedExpert,
 ]

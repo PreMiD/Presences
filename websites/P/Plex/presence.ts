@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '645028677033132033',
 })
@@ -135,7 +137,7 @@ function getTranslation(stringName: string): string {
 
 let isUploading = false
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/P/Plex/assets/logo.png',
 }
 
@@ -193,7 +195,7 @@ async function getShortURL(url: string) {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   } as PresenceData
   const { pathname, href } = document.location
@@ -227,12 +229,12 @@ presence.on('UpdateData', async () => {
         )
       }
 
-      if (cover && navigator.mediaSession.metadata?.artwork[0].src) {
+      if (cover && navigator.mediaSession.metadata?.artwork[0]?.src) {
         const art = navigator.mediaSession.metadata.artwork?.[0]?.src
         presenceData.largeImageKey = art?.match(
           /(\d+)(?<!10)-(\d+)(192-168)?(?<!172-(1[6-9]|2\d|3[01]))-(\d+)\.(\d+)/g,
         )?.[0] // Checks if it's a private ip, since u can't access that to use as a large/smallimagekey.
-          ? Assets.Logo // If it's a private ip, just use the logo.
+          ? ActivityAssets.Logo // If it's a private ip, just use the logo.
           : await getShortURL(
             art
               .replace(/width=\d{1,3}/, 'width=1024')
@@ -315,7 +317,7 @@ presence.on('UpdateData', async () => {
       )
 
       presenceData.details = getTranslation('Search')
-      presenceData.state = search?.textContent?.split('"')[1].replace(/"/g, '')
+      presenceData.state = search?.textContent?.split('"')[1]?.replace(/"/g, '')
       presenceData.smallImageKey = Assets.Search
     }
     else if (href.includes('/com.plexapp.plugins.library')) {

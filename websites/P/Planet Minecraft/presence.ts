@@ -176,8 +176,8 @@ presence.on('UpdateData', async () => {
                   text = ''
                   for (let i = 0; i < length; i++) {
                     const childElement = parentElement.children[i]
-                    if (childElement.tagName.toLowerCase() !== 'i') {
-                      const { childNodes } = childElement
+                    if (childElement?.tagName.toLowerCase() !== 'i') {
+                      const { childNodes } = childElement!
                       for (const childNode of childNodes) {
                         if (childNode.nodeType === Node.TEXT_NODE)
                           text += (i > 0 ? ' > ' : '') + childNode.textContent

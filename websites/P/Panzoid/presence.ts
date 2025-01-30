@@ -5,7 +5,7 @@ import {
   Icons,
   ImageTexts,
   States,
-} from './shared'
+} from './shared.js'
 
 const presence = new Presence({ clientId: '1241878965535248527' })
 const browsingTimestamp = Math.floor(Date.now() / 1000)

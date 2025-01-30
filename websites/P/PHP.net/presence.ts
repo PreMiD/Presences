@@ -38,16 +38,16 @@ presence.on('UpdateData', () => {
       presenceData.buttons = [
         { label: 'Open Documentation', url: document.location.href },
       ]
-      if (route[3].includes('function.')) {
+      if (route[3]?.includes('function.')) {
         presenceData.state = `Function: ${manualTitle}`
         presenceData.buttons = [
           { label: 'View Function', url: document.location.href },
         ]
       }
-      else if (route[3].includes('language.')) {
-        const c = route[3].split('.')[1]
+      else if (route[3]?.includes('language.')) {
+        const c = route[3]!.split('.')[1]
         presenceData.state = `${
-          c.charAt(0).toUpperCase() + c.slice(1)
+          c!.charAt(0).toUpperCase() + c!.slice(1)
         }: ${manualTitle}`
       }
       else {
@@ -68,7 +68,7 @@ presence.on('UpdateData', () => {
       presenceData.details = 'Browsing the website'
   }
 
-  if (route[1].toLowerCase().includes('changelog'))
+  if (route[1]?.toLowerCase().includes('changelog'))
     presenceData.details = 'Reading the changelogs'
 
   presence.setActivity(presenceData)

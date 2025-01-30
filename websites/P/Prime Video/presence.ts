@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '705139844883677224',
 })
@@ -58,9 +60,9 @@ presence.on('UpdateData', async () => {
           ?.trim()
           .split(' / ') ?? [];
         [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(
-          presence.timestampFromFormat(unformattedCurrentTime),
-          presence.timestampFromFormat(unformattedDuration)
-          + presence.timestampFromFormat(unformattedCurrentTime),
+          presence.timestampFromFormat(unformattedCurrentTime ?? ''),
+          presence.timestampFromFormat(unformattedDuration ?? '')
+          + presence.timestampFromFormat(unformattedCurrentTime ?? ''),
         )
         presenceData.smallImageKey = Assets.Play
         presenceData.smallImageText = (await strings).playing
@@ -81,9 +83,9 @@ presence.on('UpdateData', async () => {
           ?.trim()
           .split(' / ') ?? [];
         [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(
-          presence.timestampFromFormat(unformattedCurrentTime),
-          presence.timestampFromFormat(unformattedDuration)
-          + presence.timestampFromFormat(unformattedCurrentTime),
+          presence.timestampFromFormat(unformattedCurrentTime ?? ''),
+          presence.timestampFromFormat(unformattedDuration ?? '')
+          + presence.timestampFromFormat(unformattedCurrentTime ?? ''),
         )
         presenceData.smallImageKey = Assets.Play
         presenceData.smallImageText = (await strings).playing
@@ -124,7 +126,7 @@ presence.on('UpdateData', async () => {
       .querySelector('.av-refine-bar-summaries')
       ?.textContent
       ?.split(/["„]/)[1]
-      .split(/[”"]/) ?? []
+      ?.split(/[”"]/) ?? []
     presenceData.smallImageKey = Assets.Search
   }
   if (presenceData.details)

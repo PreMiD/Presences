@@ -1,13 +1,15 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1234257543467892826',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/P/Podurama/assets/logo.png',
 }
 
-const enum Pages {
+enum Pages {
   home = 'home',
   podcast = 'podcast',
   episode = 'episode',
@@ -26,7 +28,7 @@ const enum Pages {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const [, sect, subsect] = document.location.pathname.split('/')
@@ -83,7 +85,7 @@ presence.on('UpdateData', async () => {
 
       case Pages.Trending: {
         presenceData.details = 'Browsing Trending Podcasts!'
-        presenceData.state = `In the '${subsect.replaceAll(
+        presenceData.state = `In the '${subsect?.replaceAll(
           '-',
           ' ',
         )}' category`

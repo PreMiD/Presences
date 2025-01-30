@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1092957554365182033',
 })
@@ -58,7 +60,7 @@ presence.on('UpdateData', async () => {
   }
   else if (page.includes('/tag/')) {
     presenceData.details = 'Bir etikete göz atıyor:'
-    presenceData.state = `#${decodeURIComponent(page.split('/')[2])}`
+    presenceData.state = `#${decodeURIComponent(page.split('/')[2]!)}`
     presenceData.smallImageKey = Assets.Search
   }
   else if (!privacyMode && page.includes('/u/')) {

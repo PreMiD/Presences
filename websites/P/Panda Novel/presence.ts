@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1064394161807167568',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/P/Panda%20Novel/assets/logo.png',
 }
 
@@ -45,7 +47,7 @@ function textContent(tags: string) {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     details: 'Somewhere on the site',
   }
   const [privacy, logo, time, buttons] = await Promise.all([
@@ -215,8 +217,8 @@ presence.on('UpdateData', async () => {
       break
   }
 
-  if ((!logo || privacy) && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if ((!logo || privacy) && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (!buttons || privacy)
     delete presenceData.buttons
   if (time)

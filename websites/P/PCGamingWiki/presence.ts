@@ -3,14 +3,14 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/P/PCGamingWiki/assets/0.png',
 }
 
 presence.on('UpdateData', async () => {
   const { pathname, search, href, hostname } = document.location
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     details: 'Viewing Page:',
   }
@@ -77,7 +77,7 @@ presence.on('UpdateData', async () => {
         }
         case 'tags': {
           presenceData.details = 'Searching for tag:'
-          presenceData.state = decodeURIComponent(pathname.split('/')[2])
+          presenceData.state = decodeURIComponent(pathname.split('/')[2]!)
           break
         }
         case 'search': {
@@ -85,7 +85,7 @@ presence.on('UpdateData', async () => {
           if (search.split('=')[1]) {
             presenceData.details = 'Searching the Community for:'
             presenceData.state = decodeURIComponent(
-              search.split('=')[1],
+              search.split('=')[1]!,
             ).replace('&search_and_or', '')
           }
           break
@@ -112,7 +112,7 @@ presence.on('UpdateData', async () => {
           break
         }
         case 'index.php': {
-          if (decodeURIComponent(search.split('=')[2]) === 'edit') {
+          if (decodeURIComponent(search.split('=')[2]!) === 'edit') {
             presenceData.details = 'Viewing Source of:'
             presenceData.state = document
               .querySelector('.article-title')
@@ -120,7 +120,7 @@ presence.on('UpdateData', async () => {
               ?.trim()
               .replace('View source for ', '')
           }
-          if (decodeURIComponent(search.split('=')[2]) === 'history') {
+          if (decodeURIComponent(search.split('=')[2]!) === 'history') {
             presenceData.details = 'Viewing revision history of:'
             presenceData.state = document
               .querySelector('.article-title')
@@ -132,7 +132,7 @@ presence.on('UpdateData', async () => {
           else {
             presenceData.details = 'Searching for:'
             presenceData.state = decodeURIComponent(
-              search.split('=')[1],
+              search.split('=')[1]!,
             ).replace('&title', '')
           }
           break

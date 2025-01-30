@@ -1,14 +1,16 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1174478441450573924',
 })
 
 // Function to convert the site's duration timer to raw seconds
 function convertToSeconds(duration: string): number {
-  const [minutes, seconds] = duration.split(':').map(Number)
+  const [minutes, seconds] = duration.split(':').map(Number) as [number, number]
   return minutes * 60 + seconds
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/P/Poolsuite%20FM/assets/logo.jpg',
 }
 
@@ -35,7 +37,7 @@ presence.on('UpdateData', async () => {
     const presenceData: PresenceData = {
       details,
       state,
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       startTimestamp: elapsed,
       endTimestamp: elapsed
         + (convertToSeconds(
@@ -54,7 +56,7 @@ presence.on('UpdateData', async () => {
     const presenceData: PresenceData = {
       details,
       state,
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       endTimestamp: 0,
       smallImageKey: Assets.Pause,
       smallImageText: 'Paused',

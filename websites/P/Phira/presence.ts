@@ -3,13 +3,13 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/P/Phira/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href } = document.location
@@ -24,7 +24,7 @@ presence.on('UpdateData', async () => {
       if (!pathArr[2]) {
         const selector = document.querySelector<HTMLSelectElement>('.select')
         presenceData.details = 'Browsing charts'
-        presenceData.state = selector?.options[selector?.options.selectedIndex].textContent
+        presenceData.state = selector?.options[selector?.options.selectedIndex]?.textContent
         if (!presenceData.state)
           return
       }

@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1329883342132351058',
 })
@@ -17,7 +19,7 @@ const strings = presence.getStrings({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/P/Pi%20Fansubs/assets/logo.jpeg',
 }
 
@@ -44,14 +46,14 @@ function textContent(tags: string) {
 }
 
 function getImage(tags: string) {
-  return document.querySelector<HTMLImageElement>(tags)?.src ?? Assets.Logo
+  return document.querySelector<HTMLImageElement>(tags)?.src ?? ActivityAssets.Logo
 }
 
 presence.on('UpdateData', async () => {
   const { pathname, href, search } = document.location
   const path = pathname.split('/')
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     details: (await strings).viewHome,
     type: ActivityType.Watching,
@@ -169,12 +171,12 @@ presence.on('UpdateData', async () => {
     default: {
       if (search) {
         presenceData.details = (await strings).searchFor
-        presenceData.state = decodeURI(search.split('=')[1]).replaceAll(
+        presenceData.state = decodeURI(search.split('=')[1]!).replaceAll(
           '+',
           ' ',
         )
       }
-      else if (path[1].length >= 1) {
+      else if (path[1]!.length >= 1) {
         presenceData.details = (await strings).viewPage
         presenceData.state = textContent('.titl')
       }

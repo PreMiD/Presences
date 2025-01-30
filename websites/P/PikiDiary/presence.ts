@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1327078556802482206',
 })
@@ -12,7 +14,7 @@ const BROWSING_TEXTS = new Map<string, string>([
   ['tagged', 'their tagged posts...'],
 ])
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/P/PikiDiary/assets/logo.png',
 }
 
@@ -20,7 +22,7 @@ presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     name: 'PikiDiary',
     type: ActivityType.Playing,
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, search, href } = document.location
@@ -33,7 +35,7 @@ presence.on('UpdateData', async () => {
     if (!document.querySelector('.info > a')) {
       presenceData.details = `Viewing ${getElement('.info > span')} profile`
       presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.bar > div > img')
-        ?? Assets.Logo
+        ?? ActivityAssets.Logo
       presenceData.buttons = [
         {
           label: 'View Profile',
@@ -62,7 +64,7 @@ presence.on('UpdateData', async () => {
         presenceData.details = document.querySelector('#title-text')?.textContent
         presenceData.state = `Live on PikiDiary // ${viewCount} viewers`
         presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.avatar-small')
-          ?? Assets.Logo // user avatar
+          ?? ActivityAssets.Logo // user avatar
         presenceData.smallImageKey = Assets.Live
         presenceData.smallImageText = 'Live'
         presenceData.buttons = [
@@ -76,9 +78,9 @@ presence.on('UpdateData', async () => {
     else {
       (presenceData as PresenceData).type = ActivityType.Watching
       presenceData.details = getElement('#title-text') // live name
-      presenceData.state = document.querySelectorAll('a')[4].textContent // user name
+      presenceData.state = document.querySelectorAll('a')[4]?.textContent // user name
       presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.avatar-small')
-        ?? Assets.Logo // user avatar
+        ?? ActivityAssets.Logo // user avatar
       presenceData.smallImageKey = Assets.Live
       presenceData.smallImageText = 'Live'
       presenceData.buttons = [
@@ -96,7 +98,7 @@ presence.on('UpdateData', async () => {
   else if (pathname.includes('posts')) {
     presenceData.details = `Reading a post of ${getElement('.post-name')}`
     presenceData.state = `${getElement('.like-count')} likes // ${
-      document.querySelectorAll('.post-button')[1].textContent
+      document.querySelectorAll('.post-button')[1]?.textContent
     } replys`
     presenceData.buttons = [
       {
