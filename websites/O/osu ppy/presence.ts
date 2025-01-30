@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '609774216430092298',
 })
@@ -177,7 +179,7 @@ presence.on('UpdateData', async () => {
       const selected = document.querySelector('div.u-ellipsis-overflow')
       presenceData.details = strings.browsing
       presenceData.state = `${strings.spotlights} (${selected?.textContent})`
-        .replace('{0}', gamemode)
+        .replace('{0}', gamemode ?? '')
         .replace('{1}', selected?.textContent ?? '')
       presenceData.smallImageKey = Assets.Search
     }
@@ -214,7 +216,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = strings.readingForum
       presenceData.smallImageKey = Assets.Reading
     }
-    else if (Number.isNaN(Number.parseInt(pathname.split('/')[3])) === false) {
+    else if (Number.isNaN(Number.parseInt(pathname.split('/')[3]!)) === false) {
       const forumName = document
         .querySelector('h1.forum-title__name a.link--white.link--no-underline')
         ?.textContent

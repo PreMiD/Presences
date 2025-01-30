@@ -2,18 +2,18 @@ const presence = new Presence({
   clientId: '1232447632765485126',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/O/Ongaku/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
-  const song: string = document.title.split(' | ')[0]
+  const song: string = document.title.split(' | ')[0]!
   const artist = song.split(' - ')[0]
   const songname = song.split(' - ').pop()
 
   if (document.location.pathname.match('/jpop')) {
     const presenceDataJpop: PresenceData = {
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       details: 'Listening to',
       state: `${artist} - ${songname}`,
       buttons: [
@@ -28,7 +28,7 @@ presence.on('UpdateData', async () => {
 
   if (document.location.pathname.match('/song')) {
     const presenceDataSong: PresenceData = {
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       details: 'Browsing the songs lists',
       buttons: [
         {
@@ -42,7 +42,7 @@ presence.on('UpdateData', async () => {
 
   if (document.location.pathname.match('/about')) {
     const presenceDataAbout: PresenceData = {
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       details: 'Reading the about page',
       buttons: [
         {
@@ -56,7 +56,7 @@ presence.on('UpdateData', async () => {
 
   if (document.location.pathname === '/') {
     const presenceDataKpop: PresenceData = {
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       details: 'Listening to',
       state: `${artist} - ${songname}`,
       buttons: [

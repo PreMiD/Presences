@@ -10,7 +10,7 @@ const assets = {
 presence.on('UpdateData', async () => {
   const title = document.title.split('-')
   const [fileName] = title
-  const fileType = title[1].replace('Microsoft', '').replace('Online', '').trim()
+  const fileType = title[1]?.replace('Microsoft', '').replace('Online', '').trim()
   const presenceData: PresenceData = {
     largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/O/OneDrive/assets/logo.png',
     startTimestamp: Math.round(Date.now() / 1000),

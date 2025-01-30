@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '719985436075753492',
 })
@@ -65,7 +67,7 @@ presence.on('UpdateData', async () => {
     else if (path.includes('/community/')) {
       title = document.querySelector('#pagetitle > h1') as HTMLTextAreaElement
       if (title) {
-        presenceData.details = title.childNodes[0].textContent
+        presenceData.details = title.childNodes[0]?.textContent
         if (title.childNodes[1]) {
           presenceData.state = title.childNodes[1].textContent
         }

@@ -67,7 +67,7 @@ presence.on('UpdateData', () => {
     }
     else {
       presenceData.details = 'Searching by categories'
-      presenceData.state = `${pageGen2.textContent}: ${pageGen4.textContent} ${pageGen3.textContent}: ${pageGen5.textContent}`
+      presenceData.state = `${pageGen2?.textContent}: ${pageGen4?.textContent} ${pageGen3?.textContent}: ${pageGen5?.textContent}`
     }
   }
   else if (document.location.pathname.startsWith('/search')) {
@@ -82,9 +82,9 @@ presence.on('UpdateData', () => {
       presenceData.state = pageText6
     }
     else {
-      if (pageSch2.value === '')
+      if (pageSch2?.value === '')
         pageText7 = 'Browsing...'
-      else pageText7 = `Keyword: ${pageSch2.value}`
+      else pageText7 = `Keyword: ${pageSch2?.value}`
 
       presenceData.details = 'Searching for beatmaps'
       presenceData.state = pageText7

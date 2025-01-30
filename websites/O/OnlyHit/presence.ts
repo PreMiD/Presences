@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '666412985513672715',
 })
@@ -12,7 +14,7 @@ let songTimestamp = Math.floor(Date.now() / 1000)
 let currentTitle = ''
 let lastTitle = ''
 
-const enum Assets {
+enum ActivityAssets {
   Gold = 'https://cdn.rcd.gg/PreMiD/websites/O/OnlyHit/assets/0.png',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/O/OnlyHit/assets/1.png',
   Japan = 'https://cdn.rcd.gg/PreMiD/websites/O/OnlyHit/assets/2.png',
@@ -33,7 +35,7 @@ presence.on('UpdateData', async () => {
     if (showElapsed)
       presenceData.startTimestamp = browsingTimestamp
 
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
     presenceData.smallImageKey = Assets.Reading
 
     //* If they have site information enabled
@@ -58,16 +60,16 @@ presence.on('UpdateData', async () => {
     //* Set largeImageKey to the radio type
     switch (document.querySelector('.stream-name')?.textContent) {
       case 'OnlyHit Gold':
-        presenceData.largeImageKey = Assets.Gold
+        presenceData.largeImageKey = ActivityAssets.Gold
         break
       case 'OnlyHit Japan':
-        presenceData.largeImageKey = Assets.Japan
+        presenceData.largeImageKey = ActivityAssets.Japan
         break
       case 'OnlyHit K-Pop':
-        presenceData.largeImageKey = Assets.Kpop
+        presenceData.largeImageKey = ActivityAssets.Kpop
         break
       default:
-        presenceData.largeImageKey = Assets.Logo
+        presenceData.largeImageKey = ActivityAssets.Logo
         break
     }
 

@@ -116,7 +116,7 @@ presence.on('UpdateData', async () => {
   else if (document.location.pathname.includes('/user/')) {
     presenceData.details = `On ${document.title
       .split('|')[0]
-      .trim()}'s profile:`
+      ?.trim()}'s profile:`
     const userEdits = document.querySelector(
       '#content > div.content-heading > div > div > div.col > nav > ul > li:nth-child(1) > span',
     )?.textContent
@@ -190,8 +190,8 @@ presence.on('UpdateData', async () => {
     if (!selectedObject)
       presenceData.details = 'On the map editor'
     else presenceData.details = `Editing "${editedObject}"`
-    x = document.location.href.split('/')[4]
-    y = document.location.href.split('/')[5]
+    x = document.location.href.split('/')[4]!
+    y = document.location.href.split('/')[5]!
     if (typeof locationcountry === 'undefined' || privacySettings)
       presenceData.state = 'Somewhere on planet earth'
     else
@@ -204,8 +204,8 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.hash.includes('#map=')) {
     presenceData.details = 'Looking at the map'
-    x = document.location.href.split('/')[4]
-    y = document.location.href.split('/')[5]
+    x = document.location.href.split('/')[4]!
+    y = document.location.href.split('/')[5]!
     if (typeof locationcountry === 'undefined' || privacySettings)
       presenceData.state = 'Somewhere on planet earth'
     else

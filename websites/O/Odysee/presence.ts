@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({ clientId: '837270687638224906' })
 
 presence.on('UpdateData', async () => {

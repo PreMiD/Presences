@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '837833278777065503',
 })
@@ -131,7 +133,7 @@ presence.on('UpdateData', async () => {
           case 'legal': {
             presenceData.smallImageKey = Assets.Reading
             presenceData.smallImageText = 'Reading'
-            presenceData.details = splitOnDashes(path[1], false)
+            presenceData.details = splitOnDashes(path[1]!, false)
             break
           }
 
@@ -184,7 +186,7 @@ presence.on('UpdateData', async () => {
               || path[1] === 'go'
               ? 'Viewing Accessories for:'
               : 'Viewing Accessory:'
-            presenceData.state = splitOnDashes(path[1])
+            presenceData.state = splitOnDashes(path[1]!)
 
             if (
               path[1] !== 'quest-2'

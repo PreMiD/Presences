@@ -46,9 +46,9 @@ presence.on('UpdateData', async () => {
         prevPage = currPage
         currPage = 'bs'
         presenceData.details = 'Browsing sequences'
-        if (document.querySelectorAll('input')[2].value !== '') {
+        if (document.querySelectorAll('input')[2]?.value !== '') {
           presenceData.state = `Searching: ${
-            document.querySelectorAll('input')[2].value
+            document.querySelectorAll('input')[2]?.value
           }`
         }
 
@@ -58,9 +58,9 @@ presence.on('UpdateData', async () => {
         prevPage = currPage
         currPage = 'ml'
         presenceData.details = 'Viewing members'
-        if (document.querySelectorAll('input')[2].value !== '') {
+        if (document.querySelectorAll('input')[2]?.value !== '') {
           presenceData.state = `Searching: ${
-            document.querySelectorAll('input')[2].value
+            document.querySelectorAll('input')[2]?.value
           }`
         }
 

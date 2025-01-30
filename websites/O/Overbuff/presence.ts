@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: '701201789365518337',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/O/Overbuff/assets/logo.png',
   Ps4 = 'https://cdn.rcd.gg/PreMiD/websites/O/Overbuff/assets/0.png',
   Xbox = 'https://cdn.rcd.gg/PreMiD/websites/O/Overbuff/assets/1.png',
@@ -11,7 +11,7 @@ const enum Assets {
 
 presence.on('UpdateData', () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
 
   if (window.location.pathname.includes('/players/')) {
@@ -19,15 +19,15 @@ presence.on('UpdateData', () => {
       'div.layout-header-primary-bio > h1',
     )?.firstChild?.textContent
     if (window.location.pathname.includes('pc')) {
-      presenceData.smallImageKey = Assets.Windows
+      presenceData.smallImageKey = ActivityAssets.Windows
       presenceData.smallImageText = 'Playing on PC'
     }
     else if (window.location.pathname.includes('xbl')) {
-      presenceData.smallImageKey = Assets.Xbox
+      presenceData.smallImageKey = ActivityAssets.Xbox
       presenceData.smallImageText = 'Playing on Xbox'
     }
     else if (window.location.pathname.includes('psn')) {
-      presenceData.smallImageKey = Assets.Ps4
+      presenceData.smallImageKey = ActivityAssets.Ps4
       presenceData.smallImageText = 'Playing on Playstation'
     }
     presenceData.details = 'Viewing a player:'

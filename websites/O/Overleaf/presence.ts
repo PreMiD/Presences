@@ -17,12 +17,12 @@ presence.on('UpdateData', async () => {
     presenceData.details = 'Browsing Projects'
     const actif = document
       .querySelectorAll('.project-list-sidebar')[0]
-      .querySelectorAll('.active')
-    const maybecustom = actif[0].querySelectorAll('.name.ng-binding')
-    if (maybecustom.length !== 0)
-      presenceData.state = maybecustom[0].textContent
+      ?.querySelectorAll('.active')
+    const maybecustom = actif?.[0]?.querySelectorAll('.name.ng-binding')
+    if (maybecustom?.length !== 0)
+      presenceData.state = maybecustom?.[0]?.textContent
     // Take care of (i) logo
-    else presenceData.state = actif[0].querySelectorAll('a')[0].textContent
+    else presenceData.state = actif?.[0]?.querySelectorAll('a')[0]?.textContent
   }
   else if (pth.includes('/project')) {
     // Project page
@@ -32,9 +32,9 @@ presence.on('UpdateData', async () => {
     )
     presenceData.state = document
       .querySelectorAll('.file-tree-list')[0]
-      .querySelectorAll('.selected')[0]
-      .querySelectorAll('span')[0]
-      .textContent
+      ?.querySelectorAll('.selected')[0]
+      ?.querySelectorAll('span')[0]
+      ?.textContent
   }
   else if (pth.includes('/learn')) {
     // Documentation

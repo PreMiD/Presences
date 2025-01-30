@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1036732879725658213',
 })
@@ -98,8 +100,8 @@ presence.on('UpdateData', async () => {
 
     if (timeMusic && playMusic) {
       [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(
-        presence.timestampFromFormat(timeMusic[0]),
-        presence.timestampFromFormat(timeMusic[1]),
+        presence.timestampFromFormat(timeMusic[0]!),
+        presence.timestampFromFormat(timeMusic[1]!),
       )
     }
   }
@@ -151,7 +153,7 @@ presence.on('UpdateData', async () => {
               document.querySelector('.nav-side_i-w')?.lastChild?.textContent
             }`
           }
-          presenceData.state = typeContent(pathname.split('/')[3])
+          presenceData.state = typeContent(pathname.split('/')[3]!)
         }
 
         if (privacy)
@@ -169,14 +171,14 @@ presence.on('UpdateData', async () => {
       case 'mall':
       case 'payments':
       case 'online':
-        presenceData.details = `Смотрит ${typeContent(pathname.split('/')[1])}`
+        presenceData.details = `Смотрит ${typeContent(pathname.split('/')[1]!)}`
         presenceData.smallImageKey = Assets.Viewing
         presenceData.smallImageText = strings.viewing
         break
 
       case 'feed':
       case 'messages':
-        presenceData.details = `Читает ${typeContent(pathname.split('/')[1])}`
+        presenceData.details = `Читает ${typeContent(pathname.split('/')[1]!)}`
         presenceData.smallImageKey = Assets.Reading
         presenceData.smallImageText = strings.reading
         break
