@@ -10,7 +10,7 @@ function capitalize(string: string | null | undefined, d = /[ -]/): string | nul
   const a = string.split(d)
   for (let i = 0; i < a.length; i++) {
     if (i === 0) {
-      r = a[i].charAt(0).toUpperCase() + a[i].slice(1)
+      r = a[i]!.charAt(0).toUpperCase() + a[i]!.slice(1)
     }
     else {
       r = r
@@ -18,8 +18,8 @@ function capitalize(string: string | null | undefined, d = /[ -]/): string | nul
           a.slice(0, i).join().length,
           a.slice(0, i).join().length + 1,
         )
-        + a[i].charAt(0).toUpperCase()
-        + a[i].slice(1)
+        + a[i]!.charAt(0).toUpperCase()
+        + a[i]!.slice(1)
     }
   }
   return r

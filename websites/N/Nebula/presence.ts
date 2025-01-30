@@ -1,15 +1,17 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1212664221788274698',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets { // Other default assets can be found at index.d.ts
+enum ActivityAssets { // Other default assets can be found at index.d.ts
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/N/Nebula/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href } = document.location
@@ -35,7 +37,7 @@ function getDetails(
     return
   }
 
-  switch (path[0].toLowerCase()) {
+  switch (path[0]?.toLowerCase()) {
     case 'classes':
       presenceData.details = 'Viewing classes'
       break
@@ -57,12 +59,12 @@ function getDetails(
     case 'library':
       if (path.length === 1)
         presenceData.details = 'Viewing library page'
-      else presenceData.details = getLibraryCategory(path[1].toLowerCase())
+      else presenceData.details = getLibraryCategory(path[1]!.toLowerCase())
       break
     case 'explore':
       if (path.length === 1)
         presenceData.details = 'Viewing explore page'
-      else presenceData.details = getExploreCategory(path[1].toLowerCase())
+      else presenceData.details = getExploreCategory(path[1]!.toLowerCase())
       break
     case 'videos':
       getVideoDetails(presenceData, showButtons, href)
@@ -289,7 +291,7 @@ function parseQueryParams(): QueryParams {
 
     for (const pair of pairs) {
       const keyValue = pair.split('=')
-      queryParams[decodeURIComponent(keyValue[0])] = decodeURIComponent(
+      queryParams[decodeURIComponent(keyValue[0]!)] = decodeURIComponent(
         keyValue[1] || '',
       )
     }

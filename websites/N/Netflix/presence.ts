@@ -1,11 +1,12 @@
-import type { ShowVideo } from './types'
+import type { ShowVideo } from './types.js'
+import { ActivityType, Assets } from 'premid'
 import {
   clearMetadata,
   fetchMetadata,
   metadata,
-} from './functions/fetchMetadata'
+} from './functions/fetchMetadata.js'
 
-const enum LargImages {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/1.png',
   Noback = 'https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/2.png',
   Animated = 'https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/0.gif',
@@ -76,14 +77,14 @@ presence.on('UpdateData', async () => {
     if (privacyMode)
       return presence.clearActivity()
 
-    await fetchMetadata(browsingMediaId[1])
+    await fetchMetadata(browsingMediaId[1]!)
 
     return await presence.setActivity({
       details: metadata?.data?.video.title,
       state: metadata?.data?.video.synopsis.slice(0, 128),
       largeImageKey: !showCover
-        ? [LargImages.Animated, LargImages.Logo, LargImages.Noback][logoType]
-        || LargImages.Logo
+        ? [ActivityAssets.Animated, ActivityAssets.Logo, ActivityAssets.Noback][logoType]
+        || ActivityAssets.Logo
         : metadata?.data?.video.boxart.at(0)?.url,
       ...(showSmallImages && {
         smallImageKey: Assets.Reading,
@@ -103,7 +104,7 @@ presence.on('UpdateData', async () => {
   //* Match /watch/id and get id
   const watchingMediaId = path.match(/\/watch\/(\d+)/)
   if (watchingMediaId) {
-    await fetchMetadata(watchingMediaId[1])
+    await fetchMetadata(watchingMediaId[1]!)
     const video = document.querySelector('video')
 
     if (!video)
@@ -117,7 +118,7 @@ presence.on('UpdateData', async () => {
         return await presence.setActivity({
           type: ActivityType.Watching,
           details: strings.watchingSeries,
-          largeImageKey: LargImages.Logo,
+          largeImageKey: ActivityAssets.Logo,
         })
       }
 
@@ -138,9 +139,9 @@ presence.on('UpdateData', async () => {
           .replace('{1}', episode?.seq.toString() ?? '')
           .replace('{2}', episode?.title ?? ''),
         largeImageKey: !showCover
-          ? [LargImages.Animated, LargImages.Logo, LargImages.Noback][
+          ? [ActivityAssets.Animated, ActivityAssets.Logo, ActivityAssets.Noback][
               logoType
-            ] || LargImages.Logo
+            ] || ActivityAssets.Logo
           : metadata?.data?.video.boxart.at(0)?.url,
         largeImageText: `Season ${season?.seq.toString()}, Episode ${episode?.seq.toString()}`,
         ...(showSmallImages
@@ -161,7 +162,7 @@ presence.on('UpdateData', async () => {
         buttons: [
           {
             label: strings.watchEpisode,
-            url: document.location.href.split('?')[0],
+            url: document.location.href.split('?')[0]!,
           },
           {
             label: strings.viewSeries,
@@ -176,7 +177,7 @@ presence.on('UpdateData', async () => {
         return await presence.setActivity({
           type: ActivityType.Watching,
           details: strings.watchingMovie,
-          largeImageKey: LargImages.Logo,
+          largeImageKey: ActivityAssets.Logo,
         })
       }
 
@@ -190,9 +191,9 @@ presence.on('UpdateData', async () => {
             Math.floor(metadata.data.video.runtime / 60).toString(),
           ),
         largeImageKey: !showCover
-          ? [LargImages.Animated, LargImages.Logo, LargImages.Noback][
+          ? [ActivityAssets.Animated, ActivityAssets.Logo, ActivityAssets.Noback][
               logoType
-            ] || LargImages.Logo
+            ] || ActivityAssets.Logo
           : metadata.data.video.boxart.at(0)?.url,
         ...(showSmallImages && {
           smallImageKey: paused ? Assets.Pause : Assets.Play,
@@ -209,7 +210,7 @@ presence.on('UpdateData', async () => {
         buttons: [
           {
             label: strings.watchMovie,
-            url: document.location.href.split('?')[0],
+            url: document.location.href.split('?')[0]!,
           },
         ],
       })
@@ -225,8 +226,8 @@ presence.on('UpdateData', async () => {
   if (showBrowsingStatus && !privacyMode) {
     return await presence.setActivity({
       details: strings.browse,
-      largeImageKey: [LargImages.Animated, LargImages.Logo, LargImages.Noback][logoType]
-        || LargImages.Logo,
+      largeImageKey: [ActivityAssets.Animated, ActivityAssets.Logo, ActivityAssets.Noback][logoType]
+        || ActivityAssets.Logo,
       smallImageKey: Assets.Reading,
       smallImageText: strings.browse,
     })

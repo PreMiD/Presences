@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '704585837949747330',
 })
@@ -106,18 +108,18 @@ presence.on('UpdateData', async () => {
           }`
           presenceData.state = `${capituloLeitor?.textContent} | ${
             paginaLeitor!.selectedIndex + 1
-          } de ${paginaLeitor![0].textContent?.slice(
-            paginaLeitor![0].textContent.search('/') + 1,
-            paginaLeitor![0].textContent.search('/') + 6,
+          } de ${paginaLeitor![0]!.textContent?.slice(
+            paginaLeitor![0]!.textContent.search('/') + 1,
+            paginaLeitor![0]!.textContent.search('/') + 6,
           )}`
         }
         else {
           presenceData.details = nomeObraLeitor?.textContent
           presenceData.state = `${capituloLeitor?.textContent} | ${
             paginaLeitor!.selectedIndex + 1
-          } de ${paginaLeitor![0].textContent?.slice(
-            paginaLeitor![0].textContent.search('/') + 1,
-            paginaLeitor![0].textContent.search('/') + 6,
+          } de ${paginaLeitor![0]!.textContent?.slice(
+            paginaLeitor![0]!.textContent.search('/') + 1,
+            paginaLeitor![0]!.textContent.search('/') + 6,
           )}`
         }
       }

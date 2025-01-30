@@ -97,7 +97,7 @@ presence.on('UpdateData', async () => {
   const path = document.location.pathname
   const params = document.location.search
   const [, action] = path.split('/')
-  const details = boardTypeMapping[action]
+  const details = boardTypeMapping[action!]
   const presenceData: PresenceData = {
     largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/N/namu.wiki/assets/logo.png',
   }
@@ -120,7 +120,7 @@ presence.on('UpdateData', async () => {
     page = validateMembershipUrl.exec(path)
     /* View Membership */
     presenceData.details = 'Member Page'
-    page = membersMapping[page![1]]
+    page = membersMapping[page![1]!]
   }
   else {
     switch (action) {
@@ -174,10 +174,10 @@ presence.on('UpdateData', async () => {
     const members = document.querySelectorAll(
       '#app > div > div > nav > ul > li > div > div > div',
     )
-    if (!members[1].textContent?.includes('Please login!')) {
+    if (!members[1]?.textContent?.includes('Please login!')) {
       presenceData.smallImageKey = 'https://cdn.rcd.gg/PreMiD/websites/N/namu.wiki/assets/0.png'
       if (!privacy)
-        presenceData.smallImageText = members[0].textContent
+        presenceData.smallImageText = members[0]?.textContent
     }
   }
 

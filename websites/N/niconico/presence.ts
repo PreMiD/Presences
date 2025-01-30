@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '609220157910286346',
 })
@@ -20,30 +22,30 @@ function getTimesec(
 
   switch (elapsed.length) {
     case 3: {
-      elapsedSec = elapsed[0] * 60 * 60 + elapsed[1] * 60 + elapsed[2]
+      elapsedSec = (elapsed[0] ?? 0) * 60 * 60 + (elapsed[1] ?? 0) * 60 + (elapsed[2] ?? 0)
       break
     }
     case 2: {
-      elapsedSec = elapsed[0] * 60 + elapsed[1]
+      elapsedSec = (elapsed[0] ?? 0) * 60 + (elapsed[1] ?? 0)
       break
     }
     case 1: {
-      [elapsedSec] = elapsed
+      [elapsedSec] = elapsed as [number]
       break
     }
   }
 
   switch (duration.length) {
     case 3: {
-      durationSec = duration[0] * 60 * 60 + duration[1] * 60 + duration[2]
+      durationSec = (duration[0] ?? 0) * 60 * 60 + (duration[1] ?? 0) * 60 + (duration[2] ?? 0)
       break
     }
     case 2: {
-      durationSec = duration[0] * 60 + duration[1]
+      durationSec = (duration[0] ?? 0) * 60 + (duration[1] ?? 0)
       break
     }
     case 1: {
-      [durationSec] = duration
+      [durationSec] = duration as [number]
       break
     }
   }

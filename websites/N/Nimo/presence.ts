@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 let elapsed = Math.floor(Date.now() / 1000)
 let oldLang = 'en'
 let prevUrl = document.location.href

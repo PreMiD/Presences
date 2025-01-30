@@ -1,15 +1,17 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1230509717055602849',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/N/NIKKE.GG/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const getImageCharacter = (url: string) =>
@@ -29,7 +31,7 @@ presence.on('UpdateData', async () => {
     ?.getAttribute('content')
 
   if (search.startsWith('?s')) {
-    presenceData.state = search.split('&')[0].split('=')[1].replace(/\+/g, ' ')
+    presenceData.state = search.split('&')[0]?.split('=')[1]?.replace(/\+/g, ' ')
     presenceData.details = 'Searching for'
     presenceData.smallImageKey = Assets.Search
   }
@@ -66,13 +68,13 @@ presence.on('UpdateData', async () => {
     }
   }
   else if (pathname.startsWith('/tier-list')) {
-    presenceData.largeImageKey = thumbnail || Assets.Logo
+    presenceData.largeImageKey = thumbnail || ActivityAssets.Logo
     presenceData.state = `${title?.split('|')[0]}`
     presenceData.details = 'Viewing Tier List'
     presenceData.buttons = [{ label: 'View Tier List', url: href }]
   }
   else if (pathname.startsWith('/') && pathname.length > 1) {
-    presenceData.largeImageKey = thumbnail || Assets.Logo
+    presenceData.largeImageKey = thumbnail || ActivityAssets.Logo
     presenceData.state = `${title?.split('|')[0]}`
     presenceData.details = 'Viewing Guide'
     presenceData.buttons = [{ label: 'View Guide', url: href }]

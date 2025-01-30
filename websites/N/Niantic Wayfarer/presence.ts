@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '684174415415476240',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/N/Niantic%20Wayfarer/assets/logo.png',
   Pin = 'https://cdn.rcd.gg/PreMiD/websites/N/Niantic%20Wayfarer/assets/0.png',
 }
@@ -15,7 +17,7 @@ async function getShortURL(url: string) {
   if (shortenedURLs[url])
     return shortenedURLs[url]
   try {
-    shortenedURLs[url] = Assets.Logo
+    shortenedURLs[url] = ActivityAssets.Logo
     const pdURL = await (
       await fetch(`https://pd.premid.app/create/${url}`)
     ).text()
@@ -30,7 +32,7 @@ async function getShortURL(url: string) {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname } = document.location
@@ -51,12 +53,12 @@ presence.on('UpdateData', async () => {
           'app-photo-b .wf-image-modal > img',
         )?.src ?? '',
       )
-      presenceData.smallImageKey = Assets.Pin
-      presenceData.details = `Reviewing: ${title.childNodes[0].textContent?.trim()}`
+      presenceData.smallImageKey = ActivityAssets.Pin
+      presenceData.details = `Reviewing: ${title.childNodes[0]?.textContent?.trim()}`
       presenceData.state = `Description: ${description.textContent?.trim()}`
       presenceData.smallImageText = `Address: ${location.textContent
         ?.split(':')[1]
-        .trim()}`
+        ?.trim()}`
     }
     else if (document.querySelector('app-review-photo')) {
       presenceData.details = 'Reviewing photos'
@@ -86,7 +88,7 @@ presence.on('UpdateData', async () => {
       .querySelector('wf-page-header h2 a + span')
       ?.textContent
       ?.split('>')[1]
-      .trim()
+      ?.trim()
     presenceData.smallImageKey = Assets.Reading
     if (article) {
       presenceData.details = 'Reading article:'

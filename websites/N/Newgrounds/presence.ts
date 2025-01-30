@@ -1,10 +1,12 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '779342189884997633',
 })
 function getTime(list: string[]): number {
   let ret = 0
   for (let index = list.length - 1; index >= 0; index--)
-    ret += Number.parseInt(list[index]) * 60 ** index
+    ret += Number.parseInt(list[index]!) * 60 ** index
 
   return ret
 }
@@ -21,7 +23,7 @@ function getTimestamps(audioTime: string, audioDuration: string): number[] {
 let lastGameChange: number | null | undefined = null
 let lastGame: string | null | undefined = null
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/N/Newgrounds/assets/logo.jpeg',
   Art = 'https://cdn.rcd.gg/PreMiD/websites/N/Newgrounds/assets/0.png',
   Audio = 'https://cdn.rcd.gg/PreMiD/websites/N/Newgrounds/assets/1.png',
@@ -40,7 +42,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const itemName = document.querySelector('[itemprop="name"]')
     ? document.querySelector('[itemprop="name"]')?.textContent
@@ -50,7 +52,7 @@ presence.on('UpdateData', async () => {
   if (location.hostname !== 'www.newgrounds.com') {
     const userName = document.querySelector('.user-link')?.textContent
     presenceData.details = 'Viewing a user\'s profile'
-    presenceData.smallImageKey = Assets.User
+    presenceData.smallImageKey = ActivityAssets.User
     presenceData.smallImageText = 'User Profile'
 
     if (await presence.getSetting<boolean>('showprofilename')) {
@@ -86,17 +88,17 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname.startsWith('/movies')) {
     presenceData.details = 'Browsing movies'
-    presenceData.smallImageKey = Assets.Movies
+    presenceData.smallImageKey = ActivityAssets.Movies
     presenceData.smallImageText = 'Movies'
   }
   else if (document.location.pathname.startsWith('/games')) {
     presenceData.details = 'Browsing games'
-    presenceData.smallImageKey = Assets.Games
+    presenceData.smallImageKey = ActivityAssets.Games
     presenceData.smallImageText = 'Games'
   }
   else if (document.location.pathname.startsWith('/audio')) {
     presenceData.details = 'Browsing audio'
-    presenceData.smallImageKey = Assets.Audio
+    presenceData.smallImageKey = ActivityAssets.Audio
     presenceData.smallImageText = 'Audio'
     if (document.location.pathname.startsWith('/audio/listen')) {
       presenceData.details = 'Listening to audio'
@@ -114,7 +116,7 @@ presence.on('UpdateData', async () => {
           ]
         }
       }
-      presenceData.smallImageKey = Assets.AudioPause
+      presenceData.smallImageKey = ActivityAssets.AudioPause
       presenceData.smallImageText = 'Audio - Paused'
       if (
         document.querySelector('#audio-listen-play[style="display: none;"]')
@@ -125,14 +127,14 @@ presence.on('UpdateData', async () => {
             document.querySelector('#audio-listen-duration')?.textContent ?? '',
           )
         }
-        presenceData.smallImageKey = Assets.AudioPlay
+        presenceData.smallImageKey = ActivityAssets.AudioPlay
         presenceData.smallImageText = 'Audio - Playing'
       }
     }
   }
   else if (document.location.pathname.startsWith('/art')) {
     presenceData.details = 'Browsing art'
-    presenceData.smallImageKey = Assets.Art
+    presenceData.smallImageKey = ActivityAssets.Art
     presenceData.smallImageText = 'Art'
     if (document.location.pathname.startsWith('/art/view')) {
       presenceData.details = 'Viewing art'
@@ -172,7 +174,7 @@ presence.on('UpdateData', async () => {
           }
           // Some movies might not have the NG player
           if (document.querySelector('.ng-video-player')) {
-            presenceData.smallImageKey = Assets.MoviesPause
+            presenceData.smallImageKey = ActivityAssets.MoviesPause
             presenceData.smallImageText = 'Movies - Paused'
             if (
               document.querySelector(
@@ -187,12 +189,12 @@ presence.on('UpdateData', async () => {
                     ?.textContent ?? '',
                 )
               }
-              presenceData.smallImageKey = Assets.MoviesPlay
+              presenceData.smallImageKey = ActivityAssets.MoviesPlay
               presenceData.smallImageText = 'Movies - Playing'
             }
           }
           else {
-            presenceData.smallImageKey = Assets.Movies
+            presenceData.smallImageKey = ActivityAssets.Movies
             presenceData.smallImageText = 'Movies'
           }
           break
@@ -213,7 +215,7 @@ presence.on('UpdateData', async () => {
               ]
             }
           }
-          presenceData.smallImageKey = Assets.GamesPlay
+          presenceData.smallImageKey = ActivityAssets.GamesPlay
           presenceData.smallImageText = 'Games - Playing'
           if (await presence.getSetting<boolean>('timestamp'))
             presenceData.startTimestamp = lastGameChange
@@ -223,7 +225,7 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname.startsWith('/bbs')) {
     presenceData.details = 'Browsing the forums'
-    presenceData.smallImageKey = Assets.Forum
+    presenceData.smallImageKey = ActivityAssets.Forum
     presenceData.smallImageText = 'Forums'
     if (document.location.pathname.startsWith('/bbs/search/author/')) {
       const [, userName] = document
@@ -231,7 +233,7 @@ presence.on('UpdateData', async () => {
         ?.textContent
         ?.split('"') ?? []
       presenceData.details = 'Viewing a user\'s posts'
-      presenceData.smallImageKey = Assets.User
+      presenceData.smallImageKey = ActivityAssets.User
       presenceData.smallImageText = 'User Profile'
       if (await presence.getSetting<boolean>('showprofilename')) {
         presenceData.state = userName && userName.length < 2 ? `User: ${userName}` : userName
@@ -281,7 +283,7 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname.startsWith('/pm')) {
     presenceData.details = 'Browsing Private Messages'
-    presenceData.smallImageKey = Assets.PM
+    presenceData.smallImageKey = ActivityAssets.PM
     presenceData.smallImageText = 'Private Messages'
   }
   else if (document.location.pathname.startsWith('/dump')) {

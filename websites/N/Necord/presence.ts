@@ -1,4 +1,6 @@
-const enum Assets {
+import { Assets } from 'premid'
+
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/N/Necord/assets/0.png',
   Idle = 'https://cdn.rcd.gg/PreMiD/websites/N/Necord/assets/1.png',
 }
@@ -21,7 +23,7 @@ let lastActivity: number = Date.now()
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { href, pathname, search } = document.location
@@ -41,7 +43,7 @@ presence.on('UpdateData', async () => {
 
   switch (true) {
     case lastActivity + IDLE_TIMEOUT < Date.now() && isIdlingPublic: {
-      presenceData.smallImageKey = Assets.Idle
+      presenceData.smallImageKey = ActivityAssets.Idle
       presenceData.smallImageText = 'Idling'
       presenceData.details = 'Idling at page: '
       presenceData.state = title

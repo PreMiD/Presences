@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1014298173314961481',
 })
@@ -46,7 +48,7 @@ const websiteDomain = 'https://animecat.net'
 
 let video: Video | null = null
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/N/Neko-sama.fr/assets/logo.png',
 }
 
@@ -56,7 +58,7 @@ presence.on('iFrameData', (data: unknown) => {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     details: 'Navigue sur Neko-sama',
   }
   const { pathname } = document.location
@@ -73,7 +75,7 @@ presence.on('UpdateData', async () => {
           const defaultThumbnail = `${websiteDomain}/images/default_thumbnail.png`
           presenceData.largeImageKey = episodeImage === defaultThumbnail
             ? animeImage === defaultThumbnail
-              ? Assets.Logo
+              ? ActivityAssets.Logo
               : animeImage
             : episodeImage
           if (video === null) {
@@ -121,7 +123,7 @@ presence.on('UpdateData', async () => {
           presenceData.details = 'Regarde la page d\'un animé :'
           presenceData.state = document.querySelector('h1')?.firstChild?.textContent
           presenceData.largeImageKey = animeImage === `${websiteDomain}/images/default_thumbnail.png`
-            ? Assets.Logo
+            ? ActivityAssets.Logo
             : animeImage
           presenceData.buttons = [
             {

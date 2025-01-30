@@ -40,7 +40,7 @@ presence.on('UpdateData', async () => {
           } [${pathnameArray[3]}]`
           presenceData.largeImageKey = bookCoverPath.replace(
             '%bookId%',
-            pathnameArray[2],
+            pathnameArray[2]!,
           )
         }
       }
@@ -49,7 +49,7 @@ presence.on('UpdateData', async () => {
         presenceData.buttons = presenceDataSlide.buttons = [
           { label: 'View Book', url: document.documentURI },
         ]
-        presenceData.largeImageKey = presenceDataSlide.largeImageKey = bookCoverPath.replace('%bookId%', pathnameArray[2])
+        presenceData.largeImageKey = presenceDataSlide.largeImageKey = bookCoverPath.replace('%bookId%', pathnameArray[2]!)
         presenceData.state = `from ${
           document.querySelector('a.author-element span')?.textContent
         } [${pathnameArray[3]}]`
@@ -81,7 +81,7 @@ presence.on('UpdateData', async () => {
               url: `https://neovel.io/book/${pathnameArray[2]}/${pathnameArray[3]}`,
             },
           ]
-      presenceData.largeImageKey = presenceDataSlide.largeImageKey = bookCoverPath.replace('%bookId%', pathnameArray[2])
+      presenceData.largeImageKey = presenceDataSlide.largeImageKey = bookCoverPath.replace('%bookId%', pathnameArray[2]!)
       presenceData.state = `from ${
         document.querySelector('div.book-info span')?.textContent
       } [${pathnameArray[3]}]`
@@ -119,7 +119,7 @@ presence.on('UpdateData', async () => {
           0: 'In its recents novels',
           1: 'In its lists',
           2: 'Reading its comments',
-        }[pathnameArray[2]]
+        }[pathnameArray[2]!]
       }
       break
     case 'write':
@@ -148,7 +148,7 @@ presence.on('UpdateData', async () => {
         }"`
         presenceData.largeImageKey = bookCoverPath.replace(
           '%bookId%',
-          pathnameArray[2],
+          pathnameArray[2]!,
         )
       }
       break
@@ -160,7 +160,7 @@ presence.on('UpdateData', async () => {
         } [${pathnameArray[3]}]`
         presenceData.largeImageKey = bookCoverPath.replace(
           '%bookId%',
-          pathnameArray[2],
+          pathnameArray[2]!,
         )
       }
       break
@@ -168,9 +168,9 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Contacting Neovel staff'
       break
     default:
-      if (pathnameArray[1].includes('profile'))
+      if (pathnameArray[1]!.includes('profile'))
         presenceData.details = 'Managing their reader profile'
-      else if (pathnameArray[1].includes('search'))
+      else if (pathnameArray[1]!.includes('search'))
         presenceData.details = 'Looking for a book'
       break
   }

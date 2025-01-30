@@ -3,13 +3,13 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets { // Other default assets can be found at index.d.ts
+enum ActivityAssets { // Other default assets can be found at index.d.ts
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/N/neal.fun/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href } = document.location
@@ -218,7 +218,7 @@ presence.on('UpdateData', async () => {
         ?.textContent
         ?.trim()
         .split('now\n')[1]
-        .trim()
+        ?.trim()
         .split('.')
       presenceData.state = `${
         document.querySelector('.fold-count')?.textContent || '0 folds'

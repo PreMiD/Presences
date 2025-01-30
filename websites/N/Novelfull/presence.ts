@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '914175371744800779',
 })
@@ -32,7 +34,7 @@ presence.on('UpdateData', async () => {
       ?.content
       .split('-') ?? []
     presenceData.details = split[0]
-    presenceData.state = split[1].replace('online free', '')
+    presenceData.state = split[1]?.replace('online free', '')
     presenceData.buttons = [
       { label: 'Read Chapter', url: href },
       {

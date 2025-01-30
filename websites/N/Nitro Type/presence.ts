@@ -7,7 +7,7 @@ let pageVariables: PageVarsType, carImage: string
 function getNumberWithOrdinal(n: number): string {
   const s = ['th', 'st', 'nd', 'rd']
   const v = n % 100
-  return n + (s[(v - 20) % 10] || s[v] || s[0])
+  return n + (s[(v - 20) % 10] || s[v] || s[0]!)
 }
 
 async function resizeImage(image: string): Promise<string> {
@@ -45,7 +45,7 @@ async function resizeImage(image: string): Promise<string> {
   })
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/logo.png',
   User = 'https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/0.png',
   Guest = 'https://cdn.rcd.gg/PreMiD/websites/N/Nitro%20Type/assets/1.png',
@@ -94,8 +94,8 @@ presence.on('UpdateData', async () => {
   }
   const showCar = await presence.getSetting<boolean>('showCar')
   const presenceData: PresenceData = {
-    largeImageKey: (loggedIn && showCar ? carImage : Assets.Logo) ?? Assets.Logo,
-    smallImageKey: loggedIn ? Assets.User : Assets.Guest,
+    largeImageKey: (loggedIn && showCar ? carImage : ActivityAssets.Logo) ?? ActivityAssets.Logo,
+    smallImageKey: loggedIn ? ActivityAssets.User : ActivityAssets.Guest,
     smallImageText: loggedIn
       ? document.querySelector('.dropdown--account span')?.textContent
       : 'Racing as a guest',
@@ -140,7 +140,7 @@ presence.on('UpdateData', async () => {
         ),
       )
       presenceData.details = `Viewing ${
-        document.querySelector('.card-cap > h1')?.childNodes[1].textContent
+        document.querySelector('.card-cap > h1')?.childNodes[1]?.textContent
       } League standings`
       presenceData.state = `League: ${leagueName} | Placement: ${leaguePlacement}`
       break

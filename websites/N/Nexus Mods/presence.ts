@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '683438933841018928',
 })
@@ -947,7 +949,7 @@ function getCategorizedPresenceData(
     && path[0] !== ''
     && path[1] === typeUrl
     && path[2] === 'categories'
-    && Number.parseInt(path[3])
+    && Number.parseInt(path[3]!)
   ) {
     // Example: /game/mods/categories/1
     presenceData.details = `${gameTitle} - Viewing ${typeSingle} category`
@@ -988,7 +990,7 @@ function getCategorizedPresenceData(
     && path[0] !== ''
     && path[1] === typeUrl
     && path[2] !== 'categories'
-    && Number.parseInt(path[2])
+    && Number.parseInt(path[2]!)
   ) {
     // Example: /game/mods/1
     presenceData.details = `${gameTitle} - Viewing ${typeSingle}`
@@ -1106,7 +1108,7 @@ presence.on('UpdateData', () => {
       }
 
       // www. entry point
-      if (path.length > 0 && isValidGame(path[0])) {
+      if (path.length > 0 && isValidGame(path[0]!)) {
         // Games
         if (path.length > 1 && path[1] !== '') {
           switch (path[1]) {
@@ -1175,7 +1177,7 @@ presence.on('UpdateData', () => {
             break
 
           case 'news': {
-            if (path.length > 1 && Number.parseInt(path[1])) {
+            if (path.length > 1 && Number.parseInt(path[1]!)) {
               presenceData.details = 'Reading a news article'
               presenceData.state = pageTitle
             }

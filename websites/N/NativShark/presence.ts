@@ -2,7 +2,7 @@ const presence: Presence = new Presence({
   clientId: '787034842084016158',
 })
 const startTimestamp: number = Math.floor(Date.now() / 1000)
-const pathDescriptors = [
+const pathDescriptors: [string, string][] = [
   ['/learn/vocabulary', 'Learning new vocabulary'],
   ['/learn/kanji', 'Learning new kanji'],
   ['/learn/hiragana', 'Learning the Hiragana'],

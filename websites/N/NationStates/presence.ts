@@ -1,4 +1,4 @@
-const enum Assets {
+enum ActivityAssets {
   Header = 'https://cdn.rcd.gg/PreMiD/websites/N/NationStates/assets/0.png',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/N/NationStates/assets/logo.png',
   Envelope = 'https://cdn.rcd.gg/PreMiD/websites/N/NationStates/assets/1.png',
@@ -17,7 +17,7 @@ const presence = new Presence({
   clientId: '1006869424441131109',
 })
 const presenceData: PresenceData = {
-  largeImageKey: Assets.Logo,
+  largeImageKey: ActivityAssets.Logo,
   startTimestamp: browsingTimestamp,
 }
 
@@ -120,7 +120,7 @@ async function updatePresenceData(): Promise<void> {
       case 'nation': {
         if (isLoggedIn && page === username) {
           presenceData.state = 'Viewing Nation'
-          presenceData.smallImageKey = Assets.Flag
+          presenceData.smallImageKey = ActivityAssets.Flag
           presenceData.smallImageText = 'My Nation'
         }
         else {
@@ -128,7 +128,7 @@ async function updatePresenceData(): Promise<void> {
           presenceData.state = nationname
             ? `Viewing Nation: ${nationname}`
             : 'Viewing a Nation'
-          presenceData.smallImageKey = Assets.Globe
+          presenceData.smallImageKey = ActivityAssets.Globe
           presenceData.smallImageText = 'World'
         }
         return
@@ -139,7 +139,7 @@ async function updatePresenceData(): Promise<void> {
         presenceData.state = regionname
           ? `Viewing Region: ${regionname}`
           : 'Viewing a Region'
-        presenceData.smallImageKey = Assets.Globe
+        presenceData.smallImageKey = ActivityAssets.Globe
         presenceData.smallImageText = 'World'
         return
       }
@@ -156,7 +156,7 @@ async function updatePresenceData(): Promise<void> {
     switch (page) {
       case 'create_nation':
         presenceData.state = 'Declaring a New Nation'
-        presenceData.smallImageKey = Assets.Flag
+        presenceData.smallImageKey = ActivityAssets.Flag
         presenceData.smallImageText = 'My Nation'
         break
 
@@ -165,7 +165,7 @@ async function updatePresenceData(): Promise<void> {
       case 'region_history':
       case 'region_rank':
         presenceData.state = 'Attending Regional Activities'
-        presenceData.smallImageKey = Assets.Flag
+        presenceData.smallImageKey = ActivityAssets.Flag
         presenceData.smallImageText = 'Region'
         break
 
@@ -175,14 +175,14 @@ async function updatePresenceData(): Promise<void> {
       case 'notices':
       case 'notice':
         presenceData.state = 'Reading Telegrams'
-        presenceData.smallImageKey = Assets.Envelope
+        presenceData.smallImageKey = ActivityAssets.Envelope
         presenceData.smallImageText = 'Telegrams'
         break
 
       case 'write_telegram':
       case 'compose_telegram':
         presenceData.state = 'Writing a Telegram'
-        presenceData.smallImageKey = Assets.Envelope
+        presenceData.smallImageKey = ActivityAssets.Envelope
         presenceData.smallImageText = 'Telegrams'
         break
 
@@ -195,7 +195,7 @@ async function updatePresenceData(): Promise<void> {
       case 'tag_search':
       case 'activity':
         presenceData.state = 'Observing the World'
-        presenceData.smallImageKey = Assets.Globe
+        presenceData.smallImageKey = ActivityAssets.Globe
         presenceData.smallImageText = 'World'
         break
 
@@ -208,7 +208,7 @@ async function updatePresenceData(): Promise<void> {
       case 'cart':
       case 'order':
         presenceData.state = 'Browsing the Store'
-        presenceData.smallImageKey = Assets.Gift
+        presenceData.smallImageKey = ActivityAssets.Gift
         presenceData.smallImageText = 'Store'
         break
 
@@ -225,7 +225,7 @@ async function updatePresenceData(): Promise<void> {
         if (opponent && opponent.textContent)
           presenceData.state = `Challenging ${opponent.textContent}`
         else presenceData.state = 'Challenging'
-        presenceData.smallImageKey = Assets.Target
+        presenceData.smallImageKey = ActivityAssets.Target
         presenceData.smallImageText = 'Challenge'
         break
       }
@@ -241,7 +241,7 @@ async function updatePresenceData(): Promise<void> {
 
       case 'dispatches':
         presenceData.state = 'Browsing Dispatches'
-        presenceData.smallImageKey = Assets.Page
+        presenceData.smallImageKey = ActivityAssets.Page
         presenceData.smallImageText = 'Dispatches'
         break
 
@@ -261,7 +261,7 @@ async function updatePresenceData(): Promise<void> {
         else {
           presenceData.state = 'Browsing Dispatches'
         }
-        presenceData.smallImageKey = Assets.Page
+        presenceData.smallImageKey = ActivityAssets.Page
         presenceData.smallImageText = 'Dispatches'
         break
       }
@@ -269,7 +269,7 @@ async function updatePresenceData(): Promise<void> {
       case 'issues':
       case 'dilemmas':
         presenceData.state = 'Browsing Issues'
-        presenceData.smallImageKey = Assets.Person
+        presenceData.smallImageKey = ActivityAssets.Person
         presenceData.smallImageText = 'Issues'
         break
 
@@ -288,7 +288,7 @@ async function updatePresenceData(): Promise<void> {
         else {
           presenceData.state = 'Browsing Issues'
         }
-        presenceData.smallImageKey = Assets.Person
+        presenceData.smallImageKey = ActivityAssets.Person
         presenceData.smallImageText = 'Issues'
         break
       }
@@ -308,7 +308,7 @@ async function updatePresenceData(): Promise<void> {
         else {
           presenceData.state = 'Browsing Issues'
         }
-        presenceData.smallImageKey = Assets.Person
+        presenceData.smallImageKey = ActivityAssets.Person
         presenceData.smallImageText = 'Issues'
         break
       }
@@ -320,7 +320,7 @@ async function updatePresenceData(): Promise<void> {
       case 'un_proposal':
       case 'wa_proposal':
         presenceData.state = 'Attending the World Assembly'
-        presenceData.smallImageKey = Assets.WorldAssembly
+        presenceData.smallImageKey = ActivityAssets.WorldAssembly
         presenceData.smallImageText = 'World Assembly'
         break
 
@@ -329,7 +329,7 @@ async function updatePresenceData(): Promise<void> {
       case 'un_new_proposal':
       case 'wa_new_proposal':
         presenceData.state = 'Writing a new WA proposal'
-        presenceData.smallImageKey = Assets.WorldAssembly
+        presenceData.smallImageKey = ActivityAssets.WorldAssembly
         presenceData.smallImageText = 'World Assembly'
         break
 
@@ -353,7 +353,7 @@ async function updatePresenceData(): Promise<void> {
         else {
           presenceData.state = 'Attending the World Assembly'
         }
-        presenceData.smallImageKey = Assets.WorldAssembly
+        presenceData.smallImageKey = ActivityAssets.WorldAssembly
         presenceData.smallImageText = 'World Assembly'
         break
       }
@@ -366,7 +366,7 @@ async function updatePresenceData(): Promise<void> {
   }
   else if (document.location.hostname === 'forum.nationstates.net') {
     presenceData.details = 'Browsing the Forums'
-    presenceData.smallImageKey = Assets.Forum
+    presenceData.smallImageKey = ActivityAssets.Forum
     presenceData.smallImageText = 'Forums'
     delete presenceData.buttons
 

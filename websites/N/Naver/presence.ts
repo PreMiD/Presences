@@ -24,7 +24,7 @@ const assets: Record<string, string> = {
   naver_cafe: 'https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/7.png',
 }
 
-const enum MainAssets {
+enum MainAssets {
   Browse = 'https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/8.png',
   Book = 'https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/9.png',
   Play = 'https://cdn.rcd.gg/PreMiD/websites/N/Naver/assets/10.png',

@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '620204628608417832',
 })
@@ -29,10 +31,10 @@ presence.on('UpdateData', async () => {
   }
   else if (header.length === 2) {
     let rating: HTMLButtonElement | null = null
-    if (header[1].textContent === 'Ratings')
+    if (header[1]?.textContent === 'Ratings')
       rating = document.querySelector('button.active')
     presenceData.details = `Looking at ${rating ? rating.textContent : ''} ${
-      header[1].textContent
+      header[1]?.textContent
     }`
   }
   else {
@@ -65,7 +67,7 @@ presence.on('UpdateData', async () => {
         ?.split('/')
         .map(time => presence.timestampFromFormat(time)) ?? [];
 
-      [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(currentTime, duration)
+      [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(currentTime ?? 0, duration ?? 0)
     }
   }
 

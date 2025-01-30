@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1193651901221306378',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Icon = 'https://cdn.rcd.gg/PreMiD/websites/N/notespace/assets/logo.png',
 }
 
@@ -12,7 +14,7 @@ presence.on('UpdateData', async () => {
   const currentPath = href.replace('https://notespace.edu.pl', '')
   const presenceData: PresenceData = {
     details: 'Nauka nigdy nie była prostsza.',
-    largeImageKey: Assets.Icon,
+    largeImageKey: ActivityAssets.Icon,
     smallImageKey: Assets.Viewing,
     smallImageText: 'Przegląda...',
     startTimestamp: browsingTimestamp,
