@@ -14,26 +14,19 @@ const presence = new Presence({
 	},
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-let oldLang: string = null,
-	strings: Awaited<ReturnType<typeof getStrings>>;
-
 const enum Assets { // Other default assets can be found at index.d.ts
 	Logo = "https://i.imgur.com/aP2g0Og.png",
 }
 
 presence.on("UpdateData", async () => {
 	const { pathname } = document.location,
-		[showTitle, newLang] = await Promise.all([
+		[showTitle] = await Promise.all([
 			presence.getSetting<boolean>("showTitle"),
-			presence.getSetting<string>("lang").catch(() => "en"),
 		]);
 
 	let presenceDetail: string, presenceState: string;
 
-	if (oldLang !== newLang || !strings) {
-		oldLang = newLang;
-		strings = await getStrings();
-	}
+	const strings = await getStrings();
 
 	if (pathname === "/") presenceDetail = strings.newPrompt;
 	else if (pathname.includes("/a/chat/s")) {
