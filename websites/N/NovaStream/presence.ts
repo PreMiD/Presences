@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 		const searchInput = (
 			document.querySelector(".search-input") as HTMLInputElement
 		)?.value;
-		if (searchInput.length > 0)
+		if (searchInput && searchInput.length > 0)
 			presenceData.state = `Searching for: "${searchInput}"`;
 		else presenceData.state = "Browsing content to watch";
 	} else if (document.location.pathname.includes("/watch")) {
