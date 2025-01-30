@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '754149249335296010',
 })
@@ -23,7 +25,7 @@ presence.on('UpdateData', async () => {
   if (joinLinkArr.length !== 0) {
     tempButtons.push({
       label: 'Join',
-      url: joinLinkArr[joinLinkArr.length - 1].textContent,
+      url: joinLinkArr[joinLinkArr.length - 1]!.textContent,
     })
   }
   // Sets button for viewing profile.

@@ -48,7 +48,7 @@ export function getSVGImageData(initialSvg: SVGElement): Promise<string> {
 
   for (const [i, initialPath] of initialPaths.entries()) {
     const fillStyle = getComputedStyle(initialPath).fill
-    clonePaths[i].setAttribute('fill', fillStyle)
+    clonePaths[i]?.setAttribute('fill', fillStyle)
   }
 
   const xml = new XMLSerializer().serializeToString(clone)

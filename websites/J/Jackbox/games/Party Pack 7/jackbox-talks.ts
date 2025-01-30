@@ -1,4 +1,4 @@
-import type { GameCallbackParams } from '../../types'
+import type { GameCallbackParams } from '../../types.js'
 
 export const name = 'Talking Points'
 export const logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/30.png'
@@ -52,7 +52,7 @@ export function getPresenceData({
             else return { state: 'Assisting their presenter' }
           }
           default: {
-            if ((choices as { className: string }[])[0].className === 'voteUp')
+            if ((choices as { className: string }[])[0]?.className === 'voteUp')
               return { state: 'Reacting to the speech' }
           }
         }

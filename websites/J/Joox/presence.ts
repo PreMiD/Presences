@@ -1,8 +1,10 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '715116675346989096',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Joox/assets/0.png',
 }
 
@@ -19,11 +21,11 @@ presence.on('UpdateData', async () => {
     const currentSong = Array.from(document.querySelectorAll('div')).find(
       x =>
         x.children.length === 2
-        && x.children[0].tagName === 'B'
-        && x.children[1].tagName === 'SPAN',
+        && x.children[0]?.tagName === 'B'
+        && x.children[1]?.tagName === 'SPAN',
     )!
-    const title = currentSong.children[0].textContent
-    const author = currentSong.children[1].textContent
+    const title = currentSong.children[0]?.textContent
+    const author = currentSong.children[1]?.textContent
     const timestamps = presence.getTimestamps(
       presence.timestampFromFormat(
         document.querySelector('#currentTime')?.textContent ?? '',
@@ -37,7 +39,7 @@ presence.on('UpdateData', async () => {
       state: author,
       largeImageKey: cover
         ? document.querySelector<HTMLImageElement>(`img[alt="${title}"]`)?.src
-        : Assets.Logo,
+        : ActivityAssets.Logo,
       smallImageKey: paused ? Assets.Pause : Assets.Play,
       smallImageText: paused ? 'Paused' : 'Playing',
       startTimestamp: timestamps[0],

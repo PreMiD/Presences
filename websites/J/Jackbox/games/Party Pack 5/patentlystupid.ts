@@ -1,4 +1,4 @@
-import type { GameCallbackParams } from '../../types'
+import type { GameCallbackParams } from '../../types.js'
 
 export const name = 'Patently Stupid'
 export const logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/18.png'

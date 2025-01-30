@@ -1,4 +1,5 @@
-import { findNearestAboveElement, squareImage } from '../util/util'
+import { Assets } from 'premid'
+import { findNearestAboveElement, squareImage } from '../util/util.js'
 
 // Wiki-specific groups of pages
 const strategies = new Set([

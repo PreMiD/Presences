@@ -1,4 +1,4 @@
-import type { GameCallbackParams } from '../../types'
+import type { GameCallbackParams } from '../../types.js'
 
 export const name = 'Quiplash 3'
 export const logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/31.png'

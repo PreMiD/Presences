@@ -24,14 +24,14 @@ presence.on('UpdateData', async () => {
     stext = document.location.search.split('=')
     presenceData.details = 'Searching novels'
     presenceData.state = `Keyword: ${capitalize(
-      stext[1].split('+').join(' '),
+      stext[1]!.split('+').join(' '),
     )}`
   }
   else if (document.location.pathname.startsWith('/category/')) {
     stext = document.location.pathname.split('/')
     presenceData.details = 'Searching novels '
-    presenceData.state = `${capitalize(stext[1])}: ${capitalize(
-      stext[2].split('-').join(' '),
+    presenceData.state = `${capitalize(stext[1]!)}: ${capitalize(
+      stext[2]!.split('-').join(' '),
     )}`
   }
   else if (
@@ -46,7 +46,7 @@ presence.on('UpdateData', async () => {
     const d = document.location.pathname.split('/')
     if (d.length === 5) {
       presenceData.details = `Reading ${capitalize(
-        d[3].split('-').join(' '),
+        d[3]!.split('-').join(' '),
       )}(${d[1]})`
       presenceData.state = `Looking at ${
         document.location.hash.length === 0

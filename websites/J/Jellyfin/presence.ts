@@ -1,3 +1,4 @@
+import { ActivityType, Assets } from 'premid'
 /*
  * The interfaces may have some things missing,
  * I've tried to set as many properties as I could find.
@@ -275,13 +276,13 @@ interface Server {
 }
 
 // #endregion
-const enum Assets {
+enum ActivityAssets {
   logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Jellyfin/assets/logo.png',
 }
 const JELLYFIN_URL = 'jellyfin.org'
 // all the presence art assets uploaded to discord
 const presenceData: PresenceData = {
-  largeImageKey: Assets.logo,
+  largeImageKey: ActivityAssets.logo,
   startTimestamp: Math.floor(Date.now() / 1000),
 }
 
@@ -334,7 +335,7 @@ async function handleAudioPlayback(): Promise<void> {
     return
   }
 
-  await setPresenceByMediaId(regexResult[1])
+  await setPresenceByMediaId(regexResult[1]!)
 }
 
 /**
@@ -370,7 +371,7 @@ function handleOfficialWebsite(): void {
       if (location.pathname.indexOf('/docs/') === 0) {
         presenceData.state = `Reading the docs: ${document.title
           .split('|')[0]
-          .trim()}`
+          ?.trim()}`
         presenceData.smallImageKey = Assets.Reading
       }
   }
@@ -510,7 +511,7 @@ async function handleRemotePlayback(): Promise<void> {
     document.querySelector<HTMLDivElement>('.nowPlayingImage')?.style.backgroundImage ?? '',
   ) ?? []
 
-  await setPresenceByMediaId(mediaId)
+  await setPresenceByMediaId(mediaId!)
 }
 
 /**
@@ -694,7 +695,7 @@ async function handleWebClient(): Promise<void> {
   // obtain the path, on the example would return "login.html"
   // https://media.domain.tld/web/index.html#!/login.html?serverid=randomserverid
 
-  const path = location.hash.split('?')[0].substring(2)
+  const path = location.hash.split('?')[0]?.substring(2)
 
   if (path === 'login.html') {
     wasLogin = true
@@ -798,7 +799,7 @@ async function handleWebClient(): Promise<void> {
  * Sets default values to the presenceData object
  */
 async function setDefaultsToPresence(): Promise<void> {
-  presenceData.largeImageKey = Assets.logo
+  presenceData.largeImageKey = ActivityAssets.logo
 
   if (presenceData.smallImageKey)
     delete presenceData.smallImageKey

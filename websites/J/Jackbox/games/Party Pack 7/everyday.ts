@@ -1,4 +1,4 @@
-import type { GameCallbackParams } from '../../types'
+import type { GameCallbackParams } from '../../types.js'
 
 export const name = 'The Devils and the Details'
 export const logo

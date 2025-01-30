@@ -172,7 +172,7 @@ presence.on('UpdateData', async () => {
     }
     else if (pathname.match(/^\/\d+\/\d+\/\d+\//)) {
       presenceData.state = `Reading ${
-        document.querySelectorAll('.entry-title.entry--item.h2')[0].innerHTML
+        document.querySelectorAll('.entry-title.entry--item.h2')[0]?.innerHTML
       }`
       presenceData.buttons = [
         {
@@ -221,7 +221,7 @@ function newsUrlToCategory(url: string) {
   const urlSplit = url.split('/')
   // Get last sub category in category list
   if (urlSplit.length > 1)
-    url = urlSplit[urlSplit.length - 1]
+    url = urlSplit[urlSplit.length - 1]!
 
   url = url.replaceAll('-', ' ')
   url = toTitleCase(url)

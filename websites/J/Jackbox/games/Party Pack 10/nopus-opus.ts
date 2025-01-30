@@ -1,5 +1,5 @@
-import type { GameCallbackParams } from '../../types'
-
+import type { GameCallbackParams } from '../../types.js'
+import { Assets } from 'premid'
 import { getSVGImageData, uploadFile } from '../../util.js'
 
 export const name = 'Dodo Re Mi'

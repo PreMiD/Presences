@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence: Presence = new Presence({
   clientId: '632479205707350037',
 })
@@ -14,8 +16,8 @@ presence.on('UpdateData', async () => {
   }
   const url = window.location.href
   if (url.includes('/watch/')) {
-    const [video] = document.querySelectorAll('video')
-    presenceData.details = document.querySelectorAll('.meta-data-title')[0].textContent
+    const [video] = document.querySelectorAll('video') as unknown as [HTMLVideoElement]
+    presenceData.details = document.querySelectorAll('.meta-data-title')[0]?.textContent
     presenceData.largeImageKey = 'https://cdn.rcd.gg/PreMiD/websites/J/JioCinema/assets/logo.png'
     presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play
     presenceData.smallImageText = video.paused

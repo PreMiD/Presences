@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '811305223783448627',
 })
@@ -30,7 +32,7 @@ presence.on('UpdateData', async () => {
     presenceData.state = `Pagina '${document.title
       .replace(' |', '|')
       .split('|')[0]
-      .replace(
+      ?.replace(
         'JUKE - Luister nu jouw favoriete radiozenders, non-stop muziek en podcasts!',
         'Home',
       )}'`

@@ -1,5 +1,5 @@
-import { specialPageHandler } from './pages/special'
-import { staticPages } from './pages/static'
+import { specialPageHandler } from './pages/special.js'
+import { staticPages } from './pages/static.js'
 
 const presence = new Presence({
   clientId: '1221269583567261786',
@@ -9,13 +9,13 @@ const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 let oldPage: string
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Japanese%20Mahjong%20Wiki/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     name: 'Japanese Mahjong Wiki',
   }

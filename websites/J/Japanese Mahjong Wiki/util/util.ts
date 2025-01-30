@@ -17,7 +17,7 @@ export async function squareImage(
 ): Promise<Blob | string> {
   const { src, width, height } = image
   if (src in imageCache)
-    return imageCache[src]
+    return imageCache[src]!
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')!
   canvas.width = width

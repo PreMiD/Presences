@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1066684228726698014',
 })
@@ -38,11 +40,11 @@ presence.on('UpdateData', async () => {
       break
     case !!pathname.match(/\/user\//):
       presenceData.details = 'Смотрит профиль'
-      presenceData.state = pathname.split('/')[2].replace(/\+/g, ' ')
+      presenceData.state = pathname.split('/')[2]?.replace(/\+/g, ' ')
       break
     case !!pathname.match(/\/rewards\//):
       presenceData.details = 'Смотрит награды пользователя'
-      presenceData.state = pathname.split('/')[2].replace(/\+/g, ' ')
+      presenceData.state = pathname.split('/')[2]?.replace(/\+/g, ' ')
       break
     case !!pathname.match(/\/tests\//):
       presenceData.details = 'Проходит тест'

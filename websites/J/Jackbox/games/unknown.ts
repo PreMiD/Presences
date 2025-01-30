@@ -1,4 +1,4 @@
-import type { GameCallbackParams } from '../types'
+import type { GameCallbackParams } from '../types.js'
 
 export const tag = 'unknown'
 export const name = 'Unknown Game'

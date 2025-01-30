@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingStamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Just%20Dance%20Now/assets/logo.png',
 }
 
@@ -14,7 +14,7 @@ presence.on('UpdateData', async () => {
     presence.getSetting<boolean>('roomCode'),
   ])
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingStamp,
   }
   const coverURL = document.querySelector<HTMLImageElement>(
@@ -98,7 +98,7 @@ presence.on('UpdateData', async () => {
           if (cover) {
             presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
               '.playlist--banner__selected > img',
-            )?.src ?? Assets.Logo
+            )?.src ?? ActivityAssets.Logo
           }
           if (roomCode) {
             presenceData.details = `Browsing ${

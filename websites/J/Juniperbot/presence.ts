@@ -30,7 +30,7 @@ async function getStrings() {
 let strings: Awaited<ReturnType<typeof getStrings>>
 let oldLang: string | null = null
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Juniperbot/assets/logo.png',
   Stats = 'https://cdn.rcd.gg/PreMiD/websites/J/Juniperbot/assets/0.png',
   Donate = 'https://cdn.rcd.gg/PreMiD/websites/J/Juniperbot/assets/1.png',
@@ -38,7 +38,7 @@ const enum Assets {
 }
 
 presence.on('UpdateData', async () => {
-  const presenceData: PresenceData = { largeImageKey: Assets.Logo }
+  const presenceData: PresenceData = { largeImageKey: ActivityAssets.Logo }
   const newLang = await presence.getSetting<string>('lang').catch(() => 'en')
 
   if (oldLang !== newLang || !strings) {
@@ -55,7 +55,7 @@ presence.on('UpdateData', async () => {
         presenceData.state = document.querySelector(
           '.guild--info h1.font-weight-thin.display-2',
         )?.textContent
-        presenceData.smallImageKey = Assets.List
+        presenceData.smallImageKey = ActivityAssets.List
         break
       case pathIncludes('/dashboard/'):
         presenceData.details = strings.serverdash
@@ -68,22 +68,22 @@ presence.on('UpdateData', async () => {
 
       case pathIncludes('/donate'):
         presenceData.details = strings.donate
-        presenceData.smallImageKey = Assets.Donate
+        presenceData.smallImageKey = ActivityAssets.Donate
         break
 
       case pathIncludes('/servers'):
         presenceData.details = strings.servers
-        presenceData.smallImageKey = Assets.List
+        presenceData.smallImageKey = ActivityAssets.List
         break
 
       case pathIncludes('/commands'):
         presenceData.details = strings.commands
-        presenceData.smallImageKey = Assets.List
+        presenceData.smallImageKey = ActivityAssets.List
         break
 
       case pathIncludes('/status'):
         presenceData.details = strings.stats
-        presenceData.smallImageKey = Assets.Stats
+        presenceData.smallImageKey = ActivityAssets.Stats
         break
 
       case pathIncludes('/user/card'):
@@ -92,17 +92,17 @@ presence.on('UpdateData', async () => {
 
       case pathIncludes('/terms'):
         presenceData.details = `${strings.reading} ${strings.terms}`
-        presenceData.smallImageKey = Assets.List
+        presenceData.smallImageKey = ActivityAssets.List
         break
 
       case pathIncludes('/cookie'):
         presenceData.details = `${strings.reading} ${strings.cookies}`
-        presenceData.smallImageKey = Assets.List
+        presenceData.smallImageKey = ActivityAssets.List
         break
 
       case pathIncludes('/privacy'):
         presenceData.details = `${strings.reading} ${strings.privacy}`
-        presenceData.smallImageKey = Assets.List
+        presenceData.smallImageKey = ActivityAssets.List
         break
 
       default:
@@ -114,7 +114,7 @@ presence.on('UpdateData', async () => {
     presenceData.startTimestamp = browsingTimestamp
     presenceData.details = document.title
     presenceData.state = 'docs.juniper.bot'
-    presenceData.smallImageKey = Assets.List
+    presenceData.smallImageKey = ActivityAssets.List
   }
   if (host === 'feedback.juniper.bot') {
     presenceData.startTimestamp = browsingTimestamp

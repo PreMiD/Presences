@@ -1,4 +1,4 @@
-import type { GameCallbackParams } from '../../types'
+import type { GameCallbackParams } from '../../types.js'
 
 export const name = 'Junktopia'
 export const logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/38.png'

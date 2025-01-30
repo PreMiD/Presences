@@ -1,5 +1,5 @@
-import type { Game, GameInfoState, GamePlayerState } from './types'
-import games from './games/index'
+import type { Game, GameInfoState, GamePlayerState } from './types.js'
+import games from './games/index.js'
 
 const presence = new Presence({
   clientId: '638118757453004820',
@@ -90,10 +90,10 @@ if (document.location.hostname === 'jackbox.tv') {
       )
       gametag = tag
       if (tag && tag !== '@connect') {
-        game = games[tag]
+        game = games[tag]!
         browsingTimestamp = Math.round(Date.now() / 1000)
         if (!game)
-          game = games.unknown
+          game = games.unknown!
       }
     }
   }, 1000)
