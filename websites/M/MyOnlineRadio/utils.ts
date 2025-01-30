@@ -13,7 +13,7 @@ export function toDate(inp: string): string | null {
 
   const dateSplit = inp.split('.').map(Number)
   // switch day and month to convert to US time
-  const d = new Date(dateSplit[2], dateSplit[0], dateSplit[1])
+  const d = new Date(dateSplit[2]!, dateSplit[0]!, dateSplit[1]!)
 
   return `${d.getDate() + 1}/${d.getMonth() + 1}/${d.getFullYear()}`
 }
@@ -24,11 +24,11 @@ export function tDiffInMS(time1: string, time2 = '00:00'): number {
     let seconds = 0
     if (parts.length === 3) {
       // HH:MM:SS format
-      seconds = parts[0] * 3600 + parts[1] * 60 + parts[2]
+      seconds = parts[0]! * 3600 + parts[1]! * 60 + parts[2]!
     }
     else if (parts.length === 2) {
       // MM:SS format
-      seconds = parts[0] * 60 + parts[1]
+      seconds = parts[0]! * 60 + parts[1]!
     }
     return seconds
   }

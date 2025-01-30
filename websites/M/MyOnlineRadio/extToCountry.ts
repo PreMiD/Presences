@@ -1,7 +1,7 @@
 function getDomainExtension(url: string): string | null {
   try {
     const match = /\.([a-z0-9-]+)$/i.exec(new URL(url).hostname)
-    return match ? match[1] : null
+    return match ? match[1]! : null
   }
   catch {
     return 'com'
@@ -28,6 +28,6 @@ export function extToCountry(url: string): string {
   let country: string
   if (extension === 'com')
     country = url.includes('irish') ? 'Ireland' : 'UK'
-  else country = extensionToCountry[extension!.toLowerCase()]
+  else country = extensionToCountry[extension!.toLowerCase()]!
   return country ? ` (${country})` : ''
 }

@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '808749649325719562',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/MangaDex/assets/logo.png',
 }
 
@@ -22,7 +24,7 @@ async function getCoverImage(newMangaId: string) {
     `https://api.mangadex.org/manga/${mangaId}?includes%5B%5D=cover_art`,
   )
   if (!req.ok)
-    return Assets.Logo
+    return ActivityAssets.Logo
   const { relationships } = (await req.json()).data
   coverFileName = relationships.find(
     (relation: { type: string }) => relation.type === 'cover_art',
@@ -35,7 +37,7 @@ const titleImageCache = new Map<string, string>()
 async function getTitleImage(img: HTMLImageElement | null): Promise<string> {
   return new Promise((resolve) => {
     if (img === null)
-      return Assets.Logo
+      return ActivityAssets.Logo
 
     const image = titleImageCache.get(img.src)
 
@@ -61,7 +63,7 @@ async function getTitleImage(img: HTMLImageElement | null): Promise<string> {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href } = document.location
@@ -92,7 +94,7 @@ presence.on('UpdateData', async () => {
         'feed': 'Viewing Feed',
         'recent': 'Browsing Recents Mangas',
         'follows': 'Viewing their Library',
-      }[pathArr[2]]
+      }[pathArr[2]!]
       presenceData.smallImageKey = Assets.Search
       break
     case 'chapter': {
@@ -133,7 +135,7 @@ presence.on('UpdateData', async () => {
         history: 'Viewing History',
         lists: 'Viewing Lists',
         groups: 'Viewing Followed Groups',
-      }[pathArr[2]]
+      }[pathArr[2]!]
       break
     default:
       presenceData.details = {
@@ -144,11 +146,11 @@ presence.on('UpdateData', async () => {
         'list': 'Viewing an MDList',
         'users': 'Viewing Users',
         'groups': 'Viewing Groups',
-      }[pathArr[1]]
+      }[pathArr[1]!]
   }
 
   if (!showCover)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (!showButtons)
     delete presenceData.buttons
 

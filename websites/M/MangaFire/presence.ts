@@ -1,7 +1,9 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({ clientId: '1080885668248559648' })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/MangaFire/assets/logo.png',
 }
 
@@ -16,12 +18,12 @@ presence.on('UpdateData', async () => {
   const { pathname } = document.location
   const pathArr = pathname.split('/')
   const { details, smallImageKey, largeImageKey, state } = getPageData(
-    pathArr[1],
-    pathArr[2],
+    pathArr[1]!,
+    pathArr[2]!,
     document.querySelector('h1')?.textContent ?? '',
   )
   const presenceData: PresenceData = {
-    largeImageKey: largeImageKey || Assets.Logo,
+    largeImageKey: largeImageKey || ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     details,
   }
@@ -34,7 +36,7 @@ presence.on('UpdateData', async () => {
     !(await presence.getSetting<boolean>('details'))
     && (pathArr[1] === 'manga' || pathArr[1] === 'read')
   ) {
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
     presenceData.details = 'Reading manga...'
     presenceData.state = ''
   }

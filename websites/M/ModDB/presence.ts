@@ -3,13 +3,13 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets { // Other default assets can be found at index.d.ts
+enum ActivityAssets { // Other default assets can be found at index.d.ts
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/ModDB/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href } = document.location
@@ -41,12 +41,12 @@ presence.on('UpdateData', async () => {
     case /\/(?:games|mods|addons|downloads|articles|engines|company|groups)\/add/.test(
       pathname,
     ): {
-      const type = locations[0].split('')
-      if (type.at(-1) === 's')
-        type.pop()
-      const typeJoined = type.join('')
+      const type = locations[0]?.split('')
+      if (type?.at(-1) === 's')
+        type?.pop()
+      const typeJoined = type?.join('')
       presenceData.details = `Adding a${
-        typeJoined.startsWith('a') ? 'n' : ''
+        typeJoined?.startsWith('a') ? 'n' : ''
       } ${typeJoined}`
       break
     }
@@ -57,14 +57,14 @@ presence.on('UpdateData', async () => {
         '.title h2[itemprop=\'name\']',
       )?.textContent
       showLinkButton()
-      const type = locations[0].split('')
-      if (type.at(-1) === 's')
-        type.pop()
-      const typeJoined = type.join('')
+      const type = locations[0]?.split('')
+      if (type?.at(-1) === 's')
+        type?.pop()
+      const typeJoined = type?.join('')
       presenceData.details = `Viewing ${
         gameName
           ? `${gameName} ${typeJoined}`
-          : `${typeJoined.startsWith('a') ? 'an' : 'a'} ${typeJoined}`
+          : `${typeJoined?.startsWith('a') ? 'an' : 'a'} ${typeJoined}`
       }'s ${locations[2]}`
       const heading = document.querySelector('.normalcorner .title .heading')
       if (heading?.textContent && !heading.textContent.startsWith('Reviews'))
@@ -76,14 +76,14 @@ presence.on('UpdateData', async () => {
         '.title h2[itemprop=\'name\']',
       )?.textContent
       showLinkButton()
-      const type = locations[0].split('')
-      if (type.at(-1) === 's')
-        type.pop()
-      const typeJoined = type.join('')
+      const type = locations[0]?.split('')
+      if (type?.at(-1) === 's')
+        type?.pop()
+      const typeJoined = type?.join('')
       presenceData.details = `Viewing ${
         gameName
           ? `${gameName} ${typeJoined}`
-          : `${typeJoined.startsWith('a') ? 'an' : 'a'} ${typeJoined}`
+          : `${typeJoined?.startsWith('a') ? 'an' : 'a'} ${typeJoined}`
       }`
       break
     }

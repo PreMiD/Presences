@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '813680039354826784',
 })
@@ -43,7 +45,7 @@ presence.on('UpdateData', async () => {
         label: videoLive?.style.display === 'none'
           ? strings.watchVideo
           : strings.watchStream,
-        url: document.URL.split('?')[0],
+        url: document.URL.split('?')[0]!,
       },
       {
         label: strings.viewChannel,

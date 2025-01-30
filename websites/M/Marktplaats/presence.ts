@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '811572600294735902',
 })
@@ -9,14 +11,14 @@ const timestampCheck: {
   timestamp: Math.floor(Date.now() / 1000),
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/Marktplaats/assets/logo.png',
   Loading = 'https://cdn.rcd.gg/PreMiD/websites/M/Marktplaats/assets/0.gif',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: timestampCheck.timestamp,
   }
   const [privacy, buttons] = await Promise.all([
@@ -40,7 +42,7 @@ presence.on('UpdateData', async () => {
       switch (true) {
         case document.readyState !== 'complete': {
           presenceData.details = 'Marktplaats is aan het laden'
-          presenceData.smallImageKey = Assets.Loading
+          presenceData.smallImageKey = ActivityAssets.Loading
           break
         }
         case pathname.includes('/q/'):
@@ -211,7 +213,7 @@ presence.on('UpdateData', async () => {
       switch (true) {
         case document.readyState !== 'complete': {
           presenceData.details = 'Marktplaats help is aan het laden'
-          presenceData.smallImageKey = Assets.Loading
+          presenceData.smallImageKey = ActivityAssets.Loading
           break
         }
         case !!search?.value: {

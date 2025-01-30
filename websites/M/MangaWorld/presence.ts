@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '860298084512038964',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/logo.png',
   LogoDark = 'https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/0.png',
   LogoLight = 'https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/1.png',
@@ -30,7 +32,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   /* Query dell'URI - URI query */
   const searchParams = new URLSearchParams(
@@ -41,13 +43,13 @@ presence.on('UpdateData', async () => {
 
   /* Homepage */
   if (document.location.pathname === '/') {
-    presenceData.smallImageKey = Assets.Home
+    presenceData.smallImageKey = ActivityAssets.Home
     presenceData.smallImageText = 'Homepage'
     presenceData.details = 'Nella homepage'
   }
   else if (document.location.href.includes('/bookmarks/')) {
     /* Preferiti - Bookmarks */
-    presenceData.smallImageKey = Assets.Bookmark
+    presenceData.smallImageKey = ActivityAssets.Bookmark
     presenceData.smallImageText = 'Preferiti'
     presenceData.details = 'Sfogliando i preferiti'
 
@@ -59,7 +61,7 @@ presence.on('UpdateData', async () => {
       'DROPPED': 'Droppati',
       'READING': 'In lettura',
     }
-    const category = document.location.pathname.split('/')[3]
+    const category = document.location.pathname.split('/')[3]!
     if (category in categories)
       presenceData.state = categories[category]
   }
@@ -73,14 +75,14 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.href.includes('author=')) {
     /* Ricerca per autore - Search by author */
-    presenceData.smallImageKey = Assets.Pen
+    presenceData.smallImageKey = ActivityAssets.Pen
     presenceData.smallImageText = 'Ricerca per autore'
     presenceData.details = 'Sfogliando i contenuti dell\'autore:'
     presenceData.state = searchParams.get('author')
   }
   else if (document.location.href.includes('artist=')) {
     /* Ricerca per artista - Search by artist */
-    presenceData.smallImageKey = Assets.Brush
+    presenceData.smallImageKey = ActivityAssets.Brush
     presenceData.smallImageText = 'Ricerca per artista'
     presenceData.details = 'Sfogliando i contenuti dell\'artista:'
     presenceData.state = searchParams.get('artist')
@@ -89,22 +91,22 @@ presence.on('UpdateData', async () => {
     /* Ricerca per genere - Search by genre */
     const genre = searchParams.get('genre')!.split(' ')
     for (let i = 0; i < genre.length; i++)
-      genre[i] = genre[i][0].toUpperCase() + genre[i].substr(1)
-    presenceData.smallImageKey = Assets.Tags
+      genre[i] = genre[i]![0]!.toUpperCase() + genre[i]!.substr(1)
+    presenceData.smallImageKey = ActivityAssets.Tags
     presenceData.smallImageText = 'Ricerca per genere'
     presenceData.details = 'Sfogliando i contenuti del genere:'
     presenceData.state = genre.join(' ')
   }
   else if (document.location.href.includes('year=')) {
     /* Ricerca per anno - Search by year of release */
-    presenceData.smallImageKey = Assets.Calendar2
+    presenceData.smallImageKey = ActivityAssets.Calendar2
     presenceData.smallImageText = 'Ricerca per anno'
     presenceData.details = 'Sfogliando i contenuti dell\'anno:'
     presenceData.state = searchParams.get('year')
   }
   else if (document.location.href.includes('status=')) {
     /* Ricerca per stato - Search by status */
-    presenceData.smallImageKey = Assets.Slash
+    presenceData.smallImageKey = ActivityAssets.Slash
     presenceData.smallImageText = 'Ricerca per stato'
     presenceData.details = 'Sfogliando i contenuti:'
 
@@ -122,14 +124,14 @@ presence.on('UpdateData', async () => {
   else if (document.location.href.includes('type=')) {
     /* Ricerca per formato - Search by format */
     const rawtype = searchParams.get('type')!
-    presenceData.smallImageKey = Assets.File3
+    presenceData.smallImageKey = ActivityAssets.File3
     presenceData.smallImageText = 'Ricerca per formato'
     presenceData.details = 'Sfogliando i contenuti in formato:'
-    presenceData.state = rawtype[0].toUpperCase() + rawtype.substring(1)
+    presenceData.state = rawtype[0]?.toUpperCase() + rawtype.substring(1)
   }
   else if (document.location.href.includes('sort=')) {
     /* Ricerca per ordinamento - Order by */
-    presenceData.smallImageKey = Assets.Sort
+    presenceData.smallImageKey = ActivityAssets.Sort
     presenceData.smallImageText = 'Ricerca per ordinamento'
     presenceData.details = 'Sfogliando i contenuti:'
 
@@ -149,7 +151,7 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.href.includes('archive')) {
     /* Pagina principale - Main page */
-    presenceData.smallImageKey = Assets.Archive
+    presenceData.smallImageKey = ActivityAssets.Archive
     presenceData.smallImageText = 'Archivio'
     presenceData.details = 'Nell\'archivio'
     presenceData.state = 'Sfogliando...'
@@ -165,16 +167,16 @@ presence.on('UpdateData', async () => {
       const [, chapter0n] = document.title
         .replace(' Scan ITA - MangaWorld', '')
         .split('Capitolo')
-      let chapter = chapter0n
-      if (Number.parseInt(chapter0n, 10) < 10)
-        chapter = chapter0n.replace('0', '')
+      let chapter = chapter0n!
+      if (Number.parseInt(chapter0n!, 10) < 10)
+        chapter = chapter0n!.replace('0', '')
       let chapterString = 'Capitolo'
       if (typeof chapter0n === 'undefined') {
         chapterString = 'Oneshot'
         chapter = ''
       }
 
-      presenceData.smallImageKey = Assets.Book3
+      presenceData.smallImageKey = ActivityAssets.Book3
       presenceData.smallImageText = mangaName
       presenceData.details = `Leggendo: ${mangaName}`
       presenceData.state = `${chapterString + chapter} | Pagina ${

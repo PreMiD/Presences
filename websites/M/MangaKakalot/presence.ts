@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '698217762660548799',
 })
@@ -48,7 +50,7 @@ presence.on('UpdateData', async () => {
           .querySelector('.title.update-title')
           ?.textContent
           ?.split(' ')[1]
-          .replaceAll('_', ' ')
+          ?.replaceAll('_', ' ')
         presenceData.smallImageKey = Assets.Search
       }
       else {
@@ -88,7 +90,7 @@ presence.on('UpdateData', async () => {
           ?.childNodes[4]
           ?.textContent
           ?.split(':')[1]
-          .trim()
+          ?.trim()
           .replaceAll('_', ' ')
         presenceData.smallImageKey = Assets.Search
       }

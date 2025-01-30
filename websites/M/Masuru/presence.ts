@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets { // Other default assets can be found at index.d.ts
+enum ActivityAssets { // Other default assets can be found at index.d.ts
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/Masuru/assets/logo.webp',
   Bot = 'https://cdn.rcd.gg/PreMiD/websites/M/Masuru/assets/0.webp',
 }
@@ -17,7 +17,7 @@ presence.on('UpdateData', async () => {
     case 'masuru.in.th': {
       const title = document.querySelector('title')?.textContent
       if (title) {
-        presenceData.largeImageKey = Assets.Logo
+        presenceData.largeImageKey = ActivityAssets.Logo
         presenceData.details = title
         if (pathname.replace('/th', '').replace('/en', '').startsWith('/s/')) {
           presenceData.state = document.querySelector(
@@ -32,7 +32,7 @@ presence.on('UpdateData', async () => {
       const title = document.querySelector('title')?.textContent
       if (title) {
         presenceData.details = title
-        presenceData.largeImageKey = Assets.Bot
+        presenceData.largeImageKey = ActivityAssets.Bot
         const pathname_ = pathname.replace('/th', '').replace('/en', '')
         switch (pathname_) {
           case '/':
@@ -63,7 +63,7 @@ presence.on('UpdateData', async () => {
       const title = document.querySelector('title')?.textContent
       if (title) {
         presenceData.details = title
-        presenceData.largeImageKey = Assets.Logo
+        presenceData.largeImageKey = ActivityAssets.Logo
         presence.setActivity(presenceData)
       }
       break

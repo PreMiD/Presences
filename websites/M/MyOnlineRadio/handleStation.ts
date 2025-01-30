@@ -1,5 +1,5 @@
-import { Assets } from './presence'
-import { getDropDownSelected, getInp, tDiffInMS, toDate } from './utils'
+import { ActivityAssets } from './presence.js'
+import { getDropDownSelected, getInp, tDiffInMS, toDate } from './utils.js'
 
 function searchToPres(presenceData: PresenceData, station: string) {
   const title = getInp('name') || ''
@@ -31,7 +31,7 @@ export function handleStation(
   presenceData.details = `Browsing ${station}`
   switch (action) {
     case 'playlist': {
-      searchToPres(presenceData, station)
+      searchToPres(presenceData, station!)
       try {
         const yPath = new URL(
           document.querySelector<HTMLIFrameElement>(
@@ -61,7 +61,7 @@ export function handleStation(
 
     case 'archive':
       {
-        searchToPres(presenceData, station)
+        searchToPres(presenceData, station!)
         const audioPlayer = document.querySelector('[title="Pause"]')
         if (audioPlayer) {
           presenceData.details = `From ${station}`
@@ -101,7 +101,7 @@ export function handleStation(
     case 'schedule': {
       presenceData.details = `Viewing Schedule for ${station}`
       delete presenceData.state
-      searchToPres(presenceData, station)
+      searchToPres(presenceData, station!)
       break
     }
 
@@ -132,7 +132,7 @@ export function handleStation(
 
         // check if they're recording
         if (document.querySelector('.live')) {
-          presenceData.smallImageKey = Assets.MicIco
+          presenceData.smallImageKey = ActivityAssets.MicIco
           presenceData.smallImageText = 'Recording Broadcast'
         }
       }

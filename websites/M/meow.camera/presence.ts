@@ -1,15 +1,17 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1219194850767929374',
 })
 let browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/meow.camera/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 
@@ -34,9 +36,9 @@ function getStats(): string {
   if (time) {
     const timeArray: string[] = time.textContent?.split(':') ?? []
     let timeString = `🕒: ${timeArray[1]}:${timeArray[2]}`
-    if (timeArray[timeArray.length - 1].includes('PM'))
+    if (timeArray[timeArray.length - 1]?.includes('PM'))
       timeString += ' PM'
-    else if (timeArray[timeArray.length - 1].includes('AM'))
+    else if (timeArray[timeArray.length - 1]?.includes('AM'))
       timeString += ' AM'
 
     stats.push(timeString)

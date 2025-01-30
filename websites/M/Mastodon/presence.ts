@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1107321415243415574',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/Mastodon/assets/logo.png',
   FediverseLogo = 'https://cdn.rcd.gg/PreMiD/websites/M/Mastodon/assets/0.png',
 }
@@ -17,7 +19,7 @@ function checkPositionAccountAvatar() {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const [time, privacy] = await Promise.all([
     presence.getSetting<boolean>('time'),
@@ -42,7 +44,7 @@ presence.on('UpdateData', async () => {
       break
     }
     case '/public': {
-      presenceData.largeImageKey = Assets.FediverseLogo
+      presenceData.largeImageKey = ActivityAssets.FediverseLogo
       presenceData.details = 'Looking in fediverse'
       break
     }
@@ -67,7 +69,7 @@ presence.on('UpdateData', async () => {
     case '/about': {
       presenceData.smallImageKey = document
         .querySelectorAll('.account__avatar')[checkPositionAccountAvatar()]
-        .querySelector('img')
+        ?.querySelector('img')
         ?.getAttribute('src')
       presenceData.largeImageKey = document
         .querySelector('.about__header__hero img')

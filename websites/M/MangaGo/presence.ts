@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1276562016332546049',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/MangaGo/assets/logo.png',
   LogoV2 = 'https://cdn.rcd.gg/PreMiD/websites/M/MangaGo/assets/0.png',
 }
@@ -28,7 +30,7 @@ let oldLang: string | null = null
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const [newLang, time, privacy, cover] = await Promise.all([
     presence.getSetting<string>('lang').catch(() => 'en'),
@@ -64,13 +66,13 @@ presence.on('UpdateData', async () => {
   else if (pathname.startsWith('/genre')) {
     presenceData.details = `${strings.viewGenre} ${pathname
       .split('/')[2]
-      .replaceAll('%20', ' ')}`
+      ?.replaceAll('%20', ' ')}`
   }
   else if (pathname.startsWith('/read-manga')) {
     if (document.querySelector('#dropdown-chapter-page')) {
       presenceData.smallImageKey = Assets.Reading
       presenceData.smallImageText = strings.reading
-      presenceData.largeImageKey = Assets.LogoV2
+      presenceData.largeImageKey = ActivityAssets.LogoV2
       presenceData.details = privacy
         ? strings.reading
         : `${strings.reading}: ${
@@ -101,8 +103,8 @@ presence.on('UpdateData', async () => {
       }/10 `
       presenceData.largeImageKey = !privacy && cover
         ? document.querySelector<HTMLImageElement>('.left.cover > img')
-          ?.src ?? Assets.LogoV2
-        : Assets.LogoV2
+          ?.src ?? ActivityAssets.LogoV2
+        : ActivityAssets.LogoV2
     }
   }
 

@@ -1,3 +1,4 @@
+import { ActivityType, Assets } from 'premid'
 import {
   GameScreenType,
   getAccountInfo,
@@ -11,7 +12,7 @@ import {
   getWaitingRoomInfo,
   HomeScreenType,
   isInGame,
-} from './game_variables'
+} from './game_variables.js'
 import {
   browsingTimestamp,
   getPositionString,
@@ -22,15 +23,15 @@ import {
   slideshow,
   SLIDESHOW_TIMEOUT,
   squareImage,
-} from './util'
+} from './util.js'
 
-const enum Asset {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/Mahjong%20Soul/assets/logo.jpeg',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Asset.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     name: 'Mahjong Soul',
     type: ActivityType.Playing,
@@ -227,7 +228,7 @@ presence.on('UpdateData', async () => {
       switch (gameType) {
         case GameScreenType.GameEnd: {
           const { players } = gameEndResult!
-          const winner = players[0]
+          const winner = players[0]!
           const playerPosition = players.indexOf(
             players.find(p => p.seat === playerSeat)!,
           )

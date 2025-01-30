@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1044942179958804552',
 })
@@ -23,7 +25,7 @@ interface Directors {
   slug: string
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/MUBI/assets/logo.png',
 }
 let strings: Awaited<ReturnType<typeof getStrings>>
@@ -32,7 +34,7 @@ let oldLang: string | null = null
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     startTimestamp: browsingStamp,
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const { href, pathname } = document.location
   const [newLang, privacy, buttons, covers, viewState] = await Promise.all([
@@ -116,7 +118,7 @@ presence.on('UpdateData', async () => {
       presenceData.largeImageKey = document
         .querySelector('[data-cy="avatar-image-container"]')
         ?.querySelector('img')
-        ?.getAttribute('src') ?? Assets.Logo
+        ?.getAttribute('src') ?? ActivityAssets.Logo
       break
     }
     case pathname.includes('films'):
@@ -177,7 +179,7 @@ presence.on('UpdateData', async () => {
           ?.match(
             /https:\/\/images\.mubicdn\.net\/images\/(film|show)\/\d*\/cache-\d*-\d*\/image-w1280\.jpg/,
           )
-          ?.at(0) ?? Assets.Logo
+          ?.at(0) ?? ActivityAssets.Logo
         presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play
         presenceData.smallImageText = video.paused
           ? strings.paused
@@ -228,8 +230,8 @@ presence.on('UpdateData', async () => {
     }
   }
 
-  if (!covers && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if (!covers && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (!buttons && presenceData.buttons)
     delete presenceData.buttons
   if (presenceData.details)

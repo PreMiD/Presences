@@ -1,7 +1,9 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({ clientId: '1095377958241304586' })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/Memrise/assets/logo.png',
 }
 
@@ -9,13 +11,13 @@ presence.on('UpdateData', async () => {
   const { pathname } = document.location
   const pathArr = pathname.split('/')
   const { details, smallImageKey, largeImageKey, state, buttons } = getPageData(
-    pathArr[1],
-    pathArr[2],
-    pathArr[3],
-    pathArr[4],
+    pathArr[1]!,
+    pathArr[2]!,
+    pathArr[3]!,
+    pathArr[4]!,
   )
   const presenceData: PresenceData = {
-    largeImageKey: largeImageKey || Assets.Logo,
+    largeImageKey: largeImageKey || ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     details,
   }

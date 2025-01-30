@@ -1,9 +1,11 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1280494760418738247',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/Miruro/assets/logo.png',
 }
 
@@ -12,7 +14,7 @@ presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     name: 'Miruro',
     details: 'Browsing',
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     type: ActivityType.Watching,
   }
@@ -67,7 +69,7 @@ presence.on('UpdateData', async () => {
       }
     }
     else {
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
     }
   }
   else if (pathname.startsWith('/search')) {

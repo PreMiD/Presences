@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '814986239681626143',
 })
@@ -58,7 +60,7 @@ presence.on('UpdateData', async () => {
   }
   else {
     presenceData.details = 'Regarde un animé :'
-    presenceData.state = document.querySelectorAll('.entry-title')[0].textContent
+    presenceData.state = document.querySelectorAll('.entry-title')[0]?.textContent
     const timestamps = presence.getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration),

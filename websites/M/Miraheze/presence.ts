@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Donate = 'https://cdn.rcd.gg/PreMiD/websites/M/Miraheze/assets/0.png',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/Miraheze/assets/logo.png',
   Phabricator = 'https://cdn.rcd.gg/PreMiD/websites/M/Miraheze/assets/1.png',
@@ -13,7 +13,7 @@ let currentURL = new URL(document.location.href)
 let currentPath = currentURL.pathname.replace(/^\/|\/$/g, '').split('/')
 let presenceData: PresenceData = {
   details: 'Viewing an unsupported page',
-  largeImageKey: Assets.Logo,
+  largeImageKey: ActivityAssets.Logo,
   startTimestamp: browsingTimestamp,
 }
 
@@ -34,7 +34,7 @@ const updateCallback = {
  */
 function resetData(defaultData: PresenceData = {
   details: 'Viewing an unsupported page',
-  largeImageKey: Assets.Logo,
+  largeImageKey: ActivityAssets.Logo,
   startTimestamp: browsingTimestamp,
 }): void {
   currentURL = new URL(document.location.href)
@@ -68,7 +68,7 @@ async function prepare(): Promise<void> {
   else {
     switch (currentURL.hostname) {
       case 'phabricator.miraheze.org': {
-        presenceData.smallImageKey = Assets.Phabricator
+        presenceData.smallImageKey = ActivityAssets.Phabricator
         presenceData.smallImageText = 'Phabricator'
 
         if (currentPath[0] === '') {
@@ -84,7 +84,7 @@ async function prepare(): Promise<void> {
         ) {
           presenceData.details = 'Logging in'
         }
-        else if (/^T\d+$/.test(currentPath[0])) {
+        else if (/^T\d+$/.test(currentPath[0]!)) {
           presenceData.details = 'Viewing a task'
           presenceData.state = document.title.replace(/^[^\w\s] /, '')
         }
@@ -188,7 +188,7 @@ async function prepare(): Promise<void> {
               break
             }
             default:
-              if (/^P\d+$/.test(currentPath[0])) {
+              if (/^P\d+$/.test(currentPath[0]!)) {
                 presenceData.details = 'Viewing a paste'
                 presenceData.state = document.title.replace(
                   /^[^\w\s] /,
@@ -206,7 +206,7 @@ async function prepare(): Promise<void> {
                   )?.textContent
                 }
               }
-              else if (/^M\d+$/.test(currentPath[0])) {
+              else if (/^M\d+$/.test(currentPath[0]!)) {
                 presenceData.details = 'Viewing a mock'
                 presenceData.state = document.title.replace(
                   /^[^\w\s] /,
@@ -224,7 +224,7 @@ async function prepare(): Promise<void> {
                   )?.textContent
                 }
               }
-              else if (/^U\d+$/.test(currentPath[0])) {
+              else if (/^U\d+$/.test(currentPath[0]!)) {
                 presenceData.details = 'Viewing a short URL'
                 presenceData.state = document.title.replace(
                   /^[^\w\s] /,
@@ -263,7 +263,7 @@ async function prepare(): Promise<void> {
         break
       }
       case 'blog.miraheze.org': {
-        presenceData.smallImageKey = Assets.Phabricator
+        presenceData.smallImageKey = ActivityAssets.Phabricator
         presenceData.smallImageText = 'Phabricator (blog)'
 
         if (!currentPath[1]) {
@@ -282,7 +282,7 @@ async function prepare(): Promise<void> {
         break
       }
       case 'donate.miraheze.org': {
-        presenceData.smallImageKey = Assets.Donate
+        presenceData.smallImageKey = ActivityAssets.Donate
         presenceData.smallImageText = 'Donation Gateway'
 
         presenceData.details = 'Donating to Miraheze'

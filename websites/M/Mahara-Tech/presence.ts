@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 type Functionlize<T> = {
   [P in keyof T]: () => T[P];
 }
@@ -8,7 +10,7 @@ interface Route extends Functionlize<Partial<PresenceDataFull>> {
   run?: () => PresenceData
 }
 
-const enum LoAssets {
+enum LoAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/Mahara-Tech/assets/logo.png',
 }
 

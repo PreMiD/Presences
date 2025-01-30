@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '630462023003799583',
 })
@@ -10,12 +12,12 @@ const strings = presence.getStrings({
 function getTime(list: string[]): number {
   let ret = 0
   for (let index = list.length - 1; index >= 0; index--)
-    ret += Number.parseInt(list[index]) * 60 ** index
+    ret += Number.parseInt(list[index]!) * 60 ** index
 
   return ret
 }
 
-function getTimestamps(audioTime: string, audioDuration: string): number[] {
+function getTimestamps(audioTime: string, audioDuration: string): [number, number] {
   const startTime = Date.now()
   return [
     Math.floor(startTime / 1000),

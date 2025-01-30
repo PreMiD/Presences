@@ -59,7 +59,7 @@ presence.on('UpdateData', async () => {
         presenceData.state = `${title?.textContent?.slice(
           title.textContent.indexOf('- Capítulo') + 2,
           title.textContent.indexOf('- Mark') - 1,
-        )} | ${paginacao?.[paginacao.selectedIndex].textContent}`
+        )} | ${paginacao?.[paginacao.selectedIndex]?.textContent}`
       },
     }
 

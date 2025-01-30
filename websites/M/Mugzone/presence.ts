@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '823408394098311178',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Key = 'https://cdn.rcd.gg/PreMiD/websites/M/Mugzone/assets/0.png',
   Slide = 'https://cdn.rcd.gg/PreMiD/websites/M/Mugzone/assets/1.png',
   Catch = 'https://cdn.rcd.gg/PreMiD/websites/M/Mugzone/assets/2.png',
@@ -43,54 +45,54 @@ presence.on('UpdateData', async () => {
     presenceData.details = 'Malody Main Page'
   }
   else if (document.location.pathname === '/index') {
-    presenceData.smallImageKey = Assets.Home
+    presenceData.smallImageKey = ActivityAssets.Home
     presenceData.details = 'Viewing Home Page'
   }
   else if (document.location.pathname.endsWith('/chart')) {
-    presenceData.smallImageKey = Assets.Store
+    presenceData.smallImageKey = ActivityAssets.Store
     presenceData.details = 'Browsing Chart Store'
   }
   else if (document.location.pathname.startsWith('/page/all/player')) {
-    presenceData.smallImageKey = Assets.Leaderboard
+    presenceData.smallImageKey = ActivityAssets.Leaderboard
     presenceData.details = 'Viewing Leaderboard'
     if (document.location.href.endsWith('?from=0&mode=0')) {
-      presenceData.smallImageKey = Assets.Key
+      presenceData.smallImageKey = ActivityAssets.Key
       presenceData.smallImageText = 'KeyMode'
       presenceData.state = 'Key Mode'
     }
     else if (document.location.href.endsWith('?from=0&mode=3')) {
-      presenceData.smallImageKey = Assets.Catch
+      presenceData.smallImageKey = ActivityAssets.Catch
       presenceData.smallImageText = 'CatchMode'
       presenceData.state = 'Catch Mode'
     }
     else if (document.location.href.endsWith('?from=0&mode=4')) {
-      presenceData.smallImageKey = Assets.Pad
+      presenceData.smallImageKey = ActivityAssets.Pad
       presenceData.smallImageText = 'PadMode'
       presenceData.state = 'Pad mode'
     }
     else if (document.location.href.endsWith('?from=0&mode=5')) {
-      presenceData.smallImageKey = Assets.Taiko
+      presenceData.smallImageKey = ActivityAssets.Taiko
       presenceData.smallImageText = 'TaikoMode'
       presenceData.state = 'Taiko Mode'
     }
     else if (document.location.href.endsWith('?from=0&mode=6')) {
-      presenceData.smallImageKey = Assets.Ring
+      presenceData.smallImageKey = ActivityAssets.Ring
       presenceData.smallImageText = 'RingMode'
       presenceData.state = 'Ring Mode'
     }
     else if (document.location.href.endsWith('?from=0&mode=7')) {
-      presenceData.smallImageKey = Assets.Slide
+      presenceData.smallImageKey = ActivityAssets.Slide
       presenceData.smallImageText = 'SlideMode'
       presenceData.state = 'Slide Mode'
     }
     else if (document.location.pathname.endsWith('/player')) {
-      presenceData.smallImageKey = Assets.Key
+      presenceData.smallImageKey = ActivityAssets.Key
       presenceData.smallImageText = 'KeyMode'
       presenceData.state = 'Key Mode'
     }
   }
   else if (document.location.href.includes('/song')) {
-    presenceData.smallImageKey = Assets.Song
+    presenceData.smallImageKey = ActivityAssets.Song
     presenceData.details = 'Viewing a song'
     presenceData.state = document.querySelector(
       '#content > div.song_title.g_rblock > div.right > h2.textfix.title',
@@ -103,7 +105,7 @@ presence.on('UpdateData', async () => {
     ]
   }
   else if (document.location.href.includes('/chart')) {
-    presenceData.smallImageKey = Assets.Song
+    presenceData.smallImageKey = ActivityAssets.Song
     presenceData.details = document.querySelector(
       '#content > div.song_title.g_rblock > div.right > h2.textfix.title',
     )?.textContent
@@ -119,11 +121,11 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname.startsWith('/store')) {
     if (document.location.pathname.endsWith('/skin')) {
-      presenceData.smallImageKey = Assets.Skin
+      presenceData.smallImageKey = ActivityAssets.Skin
       presenceData.details = 'Browsing Skin Store'
     }
     else if (document.location.pathname.includes('/skin/detail')) {
-      presenceData.smallImageKey = Assets.Skin
+      presenceData.smallImageKey = ActivityAssets.Skin
       presenceData.details = 'Viewing a skin:'
       presenceData.state = document.querySelector(
         '#content > div.song_title.g_rblock > div.right > h2.textfix.title',
@@ -136,17 +138,17 @@ presence.on('UpdateData', async () => {
       ]
     }
     else if (document.location.pathname.endsWith('/all')) {
-      presenceData.smallImageKey = Assets.Store
+      presenceData.smallImageKey = ActivityAssets.Store
       presenceData.details = 'Browsing Item Store'
     }
     else if (document.location.pathname.endsWith('/my')) {
-      presenceData.smallImageKey = Assets.Inventory
+      presenceData.smallImageKey = ActivityAssets.Inventory
       presenceData.details = 'Viewing Inventory'
     }
   }
   else if (document.location.pathname.startsWith('/talk')) {
     if (document.location.pathname.includes('/topic')) {
-      presenceData.smallImageKey = Assets.Talk
+      presenceData.smallImageKey = ActivityAssets.Talk
       presenceData.details = `Viewing topic: ${
         document.querySelector('#chead > div > a')?.textContent
       }`
@@ -156,30 +158,30 @@ presence.on('UpdateData', async () => {
     }
     else if (document.location.pathname.includes('/user')) {
       if (document.location.pathname.endsWith('/user')) {
-        presenceData.smallImageKey = Assets.Talk
+        presenceData.smallImageKey = ActivityAssets.Talk
         presenceData.details = 'Checking Inbox'
       }
       else if (document.location.pathname.endsWith('/notify')) {
-        presenceData.smallImageKey = Assets.Notification
+        presenceData.smallImageKey = ActivityAssets.Notification
         presenceData.details = 'Viewing Notification'
       }
     }
     else if (document.location.pathname.includes('/group')) {
       presenceData.details = 'Viewing Discussion Page'
       if (document.location.href.endsWith('/1')) {
-        presenceData.smallImageKey = Assets.Gameplay
+        presenceData.smallImageKey = ActivityAssets.Gameplay
         presenceData.state = 'Gameplay Disscussion'
       }
       else if (document.location.href.endsWith('/2')) {
-        presenceData.smallImageKey = Assets.Charting
+        presenceData.smallImageKey = ActivityAssets.Charting
         presenceData.state = 'Chart Discussion'
       }
       else if (document.location.href.endsWith('/3')) {
-        presenceData.smallImageKey = Assets.Resource
+        presenceData.smallImageKey = ActivityAssets.Resource
         presenceData.state = 'Skin & Resource'
       }
       else if (document.location.href.endsWith('/4')) {
-        presenceData.smallImageKey = Assets.Feedback
+        presenceData.smallImageKey = ActivityAssets.Feedback
         presenceData.state = 'Feedback'
       }
     }
@@ -189,7 +191,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Logging in'
     }
     else if (document.location.pathname.endsWith('/accounts/limit')) {
-      presenceData.smallImageKey = Assets.Jail
+      presenceData.smallImageKey = ActivityAssets.Jail
       presenceData.details = 'Visiting the Jail'
       presenceData.state = 'What Is This Place Anyway?'
       presenceData.buttons = [
@@ -253,7 +255,7 @@ presence.on('UpdateData', async () => {
           )?.textContent
         }`
         presenceData.state = `Best Rank: ${top}`
-        presenceData.smallImageKey = Assets.User
+        presenceData.smallImageKey = ActivityAssets.User
         presenceData.buttons = [
           {
             label: 'Visit My Profile!',
@@ -266,11 +268,11 @@ presence.on('UpdateData', async () => {
         presenceData.state = document.querySelector(
           '#content > div.user_head.g_rblock > div.right > p.name > span',
         )?.textContent
-        presenceData.smallImageKey = Assets.User
+        presenceData.smallImageKey = ActivityAssets.User
       }
     }
     else if (document.location.pathname.endsWith('/friend')) {
-      presenceData.smallImageKey = Assets.User
+      presenceData.smallImageKey = ActivityAssets.User
       presenceData.details = 'Viewing Friends List'
     }
     else if (document.location.pathname.includes('/config/profile')) {
@@ -308,7 +310,7 @@ presence.on('UpdateData', async () => {
     presenceData.details = 'Creating a Template'
   }
   else if (document.location.pathname.startsWith('/wiki')) {
-    presenceData.smallImageKey = Assets.Wiki
+    presenceData.smallImageKey = ActivityAssets.Wiki
     presenceData.details = 'Viewing Wiki'
     presenceData.state = document.querySelector(
       '#content > div.wiki_title.g_rblock > div.title',

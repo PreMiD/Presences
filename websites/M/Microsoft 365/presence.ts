@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '937622209260826664',
 })
@@ -11,7 +13,7 @@ let microsoft = {
   ExcelActiveTab: '',
 }
 
-const enum Assets {
+enum ActivityAssets {
   Microsoft = 'https://cdn.rcd.gg/PreMiD/websites/M/Microsoft%20365/assets/logo.png',
 }
 
@@ -31,7 +33,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Microsoft,
+    largeImageKey: ActivityAssets.Microsoft,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, hostname } = document.location
@@ -45,7 +47,7 @@ presence.on('UpdateData', async () => {
       presenceData.largeImageKey = OtherAssets[
         document.querySelector('[aria-pressed="true"]')
           ?.textContent as keyof typeof OtherAssets
-      ] ?? Assets.Microsoft
+      ] ?? ActivityAssets.Microsoft
       presenceData.details = `Browsing ${
         document.title.split('|')[0]
       } documents`
@@ -75,7 +77,7 @@ presence.on('UpdateData', async () => {
       .replace('ppt', 'PowerPoint')
       .replace('word', 'Word')
       .replace('excel', 'Excel')
-    presenceData.largeImageKey = OtherAssets[appName as keyof typeof OtherAssets] ?? Assets.Microsoft
+    presenceData.largeImageKey = OtherAssets[appName as keyof typeof OtherAssets] ?? ActivityAssets.Microsoft
     presenceData.smallImageKey = Assets.Writing
     presenceData.smallImageText = 'Editing'
     if (appName === 'OneNote') {

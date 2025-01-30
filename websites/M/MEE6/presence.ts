@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '632002763483512843',
 })
@@ -25,7 +27,7 @@ function capitalizeFirstLetter(string: string) {
   }
 }
 
-const enum Assets {
+enum ActivityAssets {
   Loading = 'https://cdn.rcd.gg/PreMiD/websites/M/MEE6/assets/0.gif',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/MEE6/assets/1.png',
 }
@@ -33,7 +35,7 @@ let strings: Awaited<ReturnType<typeof getStrings>>
 let oldLang: string | null = null
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, hostname, href } = document.location
@@ -61,7 +63,7 @@ presence.on('UpdateData', async () => {
           document.querySelector('[class="sc-jgbSNz bsZrWF"]')?.textContent
         }`
         presenceData.largeImageKey = document.querySelector('svg > image')?.getAttribute('xlink:href')
-          ?? Assets.Logo
+          ?? ActivityAssets.Logo
       }
       else {
         switch (pathnameSplit[2]) {
@@ -140,7 +142,7 @@ presence.on('UpdateData', async () => {
                   )
                   if (!command) {
                     presenceData.details = 'Loading'
-                    presenceData.smallImageKey = Assets.Loading
+                    presenceData.smallImageKey = ActivityAssets.Loading
                   }
                   else {
                     presenceData.details = 'Editing command'
@@ -152,7 +154,7 @@ presence.on('UpdateData', async () => {
                   presenceData.state = capitalizeFirstLetter(
                     document.querySelector(
                       '[class="font-bold text-dark-100 text-h5"]',
-                    )?.textContent ?? pathnameSplit[4].trim(),
+                    )?.textContent ?? pathnameSplit[4]!.trim(),
                   )
                 }
               }
@@ -211,8 +213,8 @@ presence.on('UpdateData', async () => {
       },
     ]
   }
-  if (!covers && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if (!covers && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (!buttons && presenceData.buttons)
     delete presenceData.buttons
   if (presenceData.details)

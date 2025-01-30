@@ -17,9 +17,9 @@ presence.on('UpdateData', async () => {
     presenceData.details = 'Visualizando categoria:'
     presenceData.state = decodeURI(
       document.location.href
-        .split('/label/')[1]
-        .split('?&max')[0]
-        .split('?&max')[0],
+        .split('/label/')[1]!
+        .split('?&max')[0]!
+        .split('?&max')[0]!,
     )
   }
   else if (document.location.pathname.startsWith('/p')) {
@@ -50,7 +50,7 @@ presence.on('UpdateData', async () => {
     presenceData.details = 'Visualizando um post:'
     presenceData.state = document.querySelectorAll(
       '.post-title.entry-title',
-    )[0].textContent
+    )[0]?.textContent
 
     presenceData.smallImageText = `Postado por Junior_Djjr em ${
       document.querySelector('[itemprop=datePublished]')?.textContent
@@ -60,7 +60,7 @@ presence.on('UpdateData', async () => {
     presenceData.details = 'Navegando no site'
 
     presenceData.state = `Página ${
-      document.location.href.split('#')[1].split('=')[1]
+      document.location.href.split('#')[1]?.split('=')[1]
     }`
   }
 

@@ -36,7 +36,7 @@ presence.on('UpdateData', () => {
           }
           default: {
             presenceData.state = route[2]
-              .replaceAll('-', '')
+              ?.replaceAll('-', '')
               .replace(/^[a-z]/i, c => c.toUpperCase())
           }
         }
@@ -114,8 +114,8 @@ presence.on('UpdateData', () => {
         else if (route[2].startsWith('tag')) {
           presenceData.details = 'Viendo bots de:'
           presenceData.state = route[2]
-            .split('?c=')[1]
-            .replace(/^[a-z]/i, c => c.toUpperCase())
+            ?.split('?c=')[1]
+            ?.replace(/^[a-z]/i, c => c.toUpperCase())
         }
         else if (route[2] === 'me') {
           presenceData.details = 'Viendo su perfil'

@@ -10,7 +10,7 @@ interface SongPlayingData {
 
 let songInfo: SongPlayingData | null = null
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/Maliki/assets/0.png',
   Malimode = 'https://cdn.rcd.gg/PreMiD/websites/M/Maliki/assets/1.png',
 }
@@ -18,8 +18,8 @@ const enum Assets {
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     largeImageKey: document.location.hostname === 'malimode.maliki.com'
-      ? Assets.Malimode
-      : Assets.Logo,
+      ? ActivityAssets.Malimode
+      : ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const [privacy, time] = await Promise.all([
@@ -64,11 +64,11 @@ presence.on('UpdateData', async () => {
       break
     case '/personnalisation':
       presenceData.details = 'Personnalise son personnage'
-      presenceData.largeImageKey = Assets.Malimode
+      presenceData.largeImageKey = ActivityAssets.Malimode
       break
     case '/partager':
       presenceData.details = 'Partage son personnage'
-      presenceData.largeImageKey = Assets.Malimode
+      presenceData.largeImageKey = ActivityAssets.Malimode
       break
     default: {
       if (document.location.pathname.includes('/strips/')) {

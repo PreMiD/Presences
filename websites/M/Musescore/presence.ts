@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '629473655218241557',
 })
@@ -8,17 +10,17 @@ const strings = presence.getStrings({
 
 function getTime(timegone: string[], timetotal: string[]): number[] {
   return [
-    Number.parseInt(timegone[0]) + Number.parseInt(timegone[1]) * 60,
-    Number.parseInt(timetotal[0]) + Number.parseInt(timetotal[1]) * 60,
+    Number.parseInt(timegone[0]!) + Number.parseInt(timegone[1]!) * 60,
+    Number.parseInt(timetotal[0]!) + Number.parseInt(timetotal[1]!) * 60,
   ]
 }
 
 function getTimeLeft(Time: string[]): number[] {
   const parsedAudioDuration = getTime(
-    Time[0].split(':').reverse(),
-    Time[1].split(':').reverse(),
+    Time[0]!.split(':').reverse(),
+    Time[1]!.split(':').reverse(),
   )
-  return [parsedAudioDuration[0], parsedAudioDuration[1]]
+  return [parsedAudioDuration[0]!, parsedAudioDuration[1]!]
 }
 
 presence.on('UpdateData', async () => {
@@ -179,15 +181,15 @@ presence.on('UpdateData', async () => {
             '#jmuse-container > div:nth-child(1) > div > div > div > div._1DDmo.undefined > div:nth-child(1) > div > div > div._3vWaq > span',
           )!
           .textContent!
-          .split('/')[0],
+          .split('/')[0]!,
         document
           .querySelector(
             '#jmuse-container > div:nth-child(1) > div > div > div > div._1DDmo.undefined > div:nth-child(1) > div > div > div._3vWaq > span',
           )!
           .textContent!
-          .split('/')[1],
+          .split('/')[1]!,
       ]);
-      [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(time[0], time[1])
+      [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(time[0]!, time[1]!)
       presenceData.smallImageKey = Assets.Play
       presenceData.details = 'Listening to'
       presenceData.state = document.querySelector(

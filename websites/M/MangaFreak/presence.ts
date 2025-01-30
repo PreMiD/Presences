@@ -1,13 +1,15 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({ clientId: '1007662369058594937' })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/MangaFreak/assets/logo.jpg',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const [time, showButtons, showCover] = await Promise.all([
@@ -53,7 +55,7 @@ presence.on('UpdateData', async () => {
       const mangaData = document.querySelector<HTMLHeadingElement>(
         '.manga_series_data',
       )?.children ?? []
-      presenceData.state = `${mangaData[0].textContent} (${mangaData[4].textContent})`
+      presenceData.state = `${mangaData[0]?.textContent} (${mangaData[4]?.textContent})`
       presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
         '.manga_series_image > img',
       )?.src
@@ -88,7 +90,7 @@ presence.on('UpdateData', async () => {
   if (!showButtons)
     delete presenceData.buttons
   if (!showCover)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
 
   if (presenceData.details)
     presence.setActivity(presenceData)

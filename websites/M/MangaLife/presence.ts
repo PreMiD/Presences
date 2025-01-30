@@ -1,7 +1,9 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({ clientId: '906057236927893576' })
 const browsingStamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/logo.png',
   LogoPng = 'https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/0.png',
   Subscriptions = 'https://cdn.rcd.gg/PreMiD/websites/M/MangaLife/assets/1.png',
@@ -35,43 +37,43 @@ presence.on('UpdateData', async () => {
       details: 'Searching...',
     },
     '/discussion': {
-      smallImageKey: !privacy ? Assets.Discussions : '',
+      smallImageKey: !privacy ? ActivityAssets.Discussions : '',
       state: 'Discussions',
     },
     'hot.php': {
-      smallImageKey: !privacy ? Assets.Hot : '',
+      smallImageKey: !privacy ? ActivityAssets.Hot : '',
       state: 'Hot Manga Updates',
       buttons: [{ label: 'Hot Manga Updates', url: `${document.location}` }],
     },
     'subscription.php': {
-      smallImageKey: !privacy ? Assets.Subscriptions : '',
+      smallImageKey: !privacy ? ActivityAssets.Subscriptions : '',
       state: 'Subscriptions',
     },
     'feed.php': {
-      smallImageKey: !privacy ? Assets.Subscriptions : '',
+      smallImageKey: !privacy ? ActivityAssets.Subscriptions : '',
       state: 'Subscriptions Feed',
     },
     'bookmark.php': {
-      smallImageKey: !privacy ? Assets.Bookmark : '',
+      smallImageKey: !privacy ? ActivityAssets.Bookmark : '',
       state: 'Bookmarks',
     },
     'settings.php': {
-      smallImageKey: Assets.Settings,
+      smallImageKey: ActivityAssets.Settings,
       details: 'Editing...',
       state: 'User Settings',
     },
     '/contact': {
-      smallImageKey: !privacy ? Assets.Contact : '',
+      smallImageKey: !privacy ? ActivityAssets.Contact : '',
       state: 'Contact Page',
     },
     '/privacy': {
-      smallImageKey: !privacy ? Assets.Privacy : '',
+      smallImageKey: !privacy ? ActivityAssets.Privacy : '',
       state: 'Privacy Policy Page',
     },
   }
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
-    smallImageKey: !privacy ? Assets.Home : '',
+    largeImageKey: ActivityAssets.Logo,
+    smallImageKey: !privacy ? ActivityAssets.Home : '',
     details: 'Browsing...',
     state: 'Home Page',
     startTimestamp: browsingStamp,
@@ -90,8 +92,8 @@ presence.on('UpdateData', async () => {
     case path.startsWith('/manga/'):
       presenceData.largeImageKey = !privacy && cover
         ? `https://temp.compsci88.com/cover/${path.split('/manga/')[1]}.jpg`
-        : Assets.Logo
-      presenceData.smallImageKey = !privacy && cover ? Assets.LogoPng : Assets.Search
+        : ActivityAssets.Logo
+      presenceData.smallImageKey = !privacy && cover ? ActivityAssets.LogoPng : Assets.Search
       presenceData.buttons = [
         {
           label: (presenceData.state as string).length >= 30
@@ -104,24 +106,24 @@ presence.on('UpdateData', async () => {
     case path.startsWith('/read-online/'):
       presenceData.largeImageKey = !privacy && cover
         ? `https://temp.compsci88.com/cover/${
-          path.split('/read-online/')[1].split('-chapter-')[0]
+          path.split('/read-online/')[1]?.split('-chapter-')[0]
         }.jpg`
-        : Assets.Logo
+        : ActivityAssets.Logo
       presenceData.details = !privacy
         ? document.querySelector('.col-12 > a')?.textContent?.trim()
         : 'Reading a Manga...'
       presenceData.state = path.includes('-page-')
-        ? `Chapter ${path.split('-chapter-')[1].split('-page-')[0]} | Page ${
-          path.split('-page-')[1].split('.html')[0]
+        ? `Chapter ${path.split('-chapter-')[1]?.split('-page-')[0]} | Page ${
+          path.split('-page-')[1]?.split('.html')[0]
         }`
-        : `Chapter ${path.split('-chapter-')[1].split('.html')[0]}`
+        : `Chapter ${path.split('-chapter-')[1]?.split('.html')[0]}`
       presenceData.buttons = [
         {
           label: (presenceData.details ?? '').length >= 30
             ? 'View Manga'
             : presenceData.details as string,
           url: `${document.location.origin}/manga/${
-            path.split('/read-online/')[1].split('-chapter-')[0]
+            path.split('/read-online/')[1]?.split('-chapter-')[0]
           }`,
         },
         {

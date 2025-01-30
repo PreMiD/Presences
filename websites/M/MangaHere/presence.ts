@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '831262912815300638',
 })
@@ -120,7 +122,7 @@ presence.on('UpdateData', async () => {
           presenceData.state = `${chapter} page ${`${
             document.querySelector('.pager-list-left > span > .active')
               ?.textContent
-          }/${current.children[current.children.length - 2].textContent}`}`
+          }/${current.children[current.children.length - 2]?.textContent}`}`
         }
         presenceData.details = document.querySelector(
           '.reader-header-title-1',

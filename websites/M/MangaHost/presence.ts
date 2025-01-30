@@ -22,7 +22,7 @@ presence.on('UpdateData', async () => {
       presenceData.state = 'Lançamentos'
     }
     if (pathname.startsWith('/scans')) {
-      if (!pathname.split('/').slice(-1)[0].includes('scans')) {
+      if (!pathname.split('/').slice(-1)[0]?.includes('scans')) {
         presenceData.details = 'Vendo Scan:'
         presenceData.state = document.querySelector('h1')?.textContent
       }
@@ -54,10 +54,10 @@ presence.on('UpdateData', async () => {
 
     if (pathname.startsWith('/mangas')) {
       const [pathsplitted] = pathname.split('/').slice(-1)
-      if (!pathsplitted.startsWith('mangas')) {
+      if (!pathsplitted?.startsWith('mangas')) {
         presenceData.details = 'Vendo Mangás:'
         presenceData.state = pathsplitted
-          .replace('-', ' ')
+          ?.replace('-', ' ')
           .replace(/(\w)(\w*)/g, (_, g1, g2) => {
             return g1.toUpperCase() + g2.toLowerCase()
           })
@@ -75,11 +75,11 @@ presence.on('UpdateData', async () => {
 
     if (pathname.startsWith('/manga/') && pathname.includes('-mh')) {
       const [pathsplitted] = pathname.split('/').slice(-1)
-      if (!pathsplitted.includes('-mh')) {
+      if (!pathsplitted?.includes('-mh')) {
         const e = document.querySelector('#capitulos-3') as HTMLSelectElement
 
         presenceData.details = document.querySelector('h1 a')?.textContent
-        presenceData.state = `Capítulo ${pathsplitted.split('#')[0]} - Pg ${
+        presenceData.state = `Capítulo ${pathsplitted?.split('#')[0]} - Pg ${
           (<HTMLOptionElement>e.options[e.selectedIndex]).text
         }`
       }

@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1138058486262005863',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/MoviesJoy/assets/logo.png',
 }
 
@@ -26,7 +28,7 @@ function setCommonData(
   },
 ) {
   presenceData.largeImageKey = document.querySelector('img.film-poster-img')?.getAttribute('src')
-    ?? Assets.Logo
+    ?? ActivityAssets.Logo
   if (video?.exists) {
     if (!video.paused) {
       [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(video.currentTime, video.duration)
@@ -39,7 +41,7 @@ function setCommonData(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const [privacy, buttons, covers] = await Promise.all([
@@ -218,8 +220,8 @@ presence.on('UpdateData', async () => {
           : '4'
     }`
   }
-  if ((!covers || privacy) && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if ((!covers || privacy) && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (privacy && presenceData.state)
     delete presenceData.state
   if (!buttons && presenceData.buttons)

@@ -1,17 +1,18 @@
-import { extToCountry } from './extToCountry'
-import { handleStation } from './handleStation'
-import { getDropDownSelected, getInp, toDate } from './utils'
+import { ActivityType } from 'premid'
+import { extToCountry } from './extToCountry.js'
+import { handleStation } from './handleStation.js'
+import { getDropDownSelected, getInp, toDate } from './utils.js'
 
 const presence = new Presence({
   clientId: '1217153856665026580',
 })
 
-export const enum Assets {
+export enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/MyOnlineRadio/assets/logo.png',
   MicIco = 'https://cdn.rcd.gg/PreMiD/websites/M/MyOnlineRadio/assets/0.png',
 }
 
-const enum Pages {
+enum Pages {
   homepage = '/',
   contact = '/contact',
   playlists = '/playlists',
@@ -26,7 +27,7 @@ presence.on('UpdateData', async () => {
     return
 
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     name: `My Online Radio${extToCountry(document.location.origin)}`,
     type: ActivityType.Listening,
   }

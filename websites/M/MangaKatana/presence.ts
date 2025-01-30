@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1104842127034306724',
 })
@@ -28,7 +30,7 @@ async function getStrings() {
   )
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/MangaKatana/assets/logo.png',
 }
 
@@ -54,7 +56,7 @@ const observer = new IntersectionObserver(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const [newLang, privacy, cover, time, buttons, pages] = await Promise.all([
@@ -110,10 +112,10 @@ presence.on('UpdateData', async () => {
         if (pages) {
           for (const page of document.querySelectorAll('#imgs img'))
             observer.observe(page)
-          presenceData.largeImageKey = currentMangaPage ?? Assets.Logo
+          presenceData.largeImageKey = currentMangaPage ?? ActivityAssets.Logo
         }
         else {
-          presenceData.largeImageKey = Assets.Logo
+          presenceData.largeImageKey = ActivityAssets.Logo
         }
 
         presenceData.smallImageKey = Assets.Reading
@@ -161,7 +163,7 @@ presence.on('UpdateData', async () => {
     case 'bookmarks':
       presenceData.details = strings.editing
       presenceData.state = title
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
       break
   }
 
@@ -175,7 +177,7 @@ presence.on('UpdateData', async () => {
   }
 
   if (!cover || privacy)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
   if ((!buttons || privacy) && presenceData.buttons)
     delete presenceData.buttons
   if (!time && presenceData.startTimestamp)

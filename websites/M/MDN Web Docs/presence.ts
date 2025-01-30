@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Homepage = 'https://cdn.rcd.gg/PreMiD/websites/M/MDN%20Web%20Docs/assets/0.png',
   Extension = 'https://cdn.rcd.gg/PreMiD/websites/M/MDN%20Web%20Docs/assets/1.png',
   Mathml = 'https://cdn.rcd.gg/PreMiD/websites/M/MDN%20Web%20Docs/assets/2.png',
@@ -19,17 +19,17 @@ presence.on('UpdateData', async () => {
   const paths = document.location.pathname.split('/')
 
   if (!paths[2]) {
-    presenceData.largeImageKey = Assets.Homepage
+    presenceData.largeImageKey = ActivityAssets.Homepage
     presenceData.details = 'Looking at the main page...'
   }
   else if (!paths[3]) {
-    presenceData.largeImageKey = Assets.Homepage
+    presenceData.largeImageKey = ActivityAssets.Homepage
     presenceData.details = 'Looking at Web Technologies'
   }
   else {
     switch (paths[4]) {
       case 'JavaScript': {
-        presenceData.largeImageKey = Assets.Javascript
+        presenceData.largeImageKey = ActivityAssets.Javascript
 
         if (paths[5]) {
           paths.splice(0, 5)
@@ -46,7 +46,7 @@ presence.on('UpdateData', async () => {
         break
       }
       case 'HTML': {
-        presenceData.largeImageKey = Assets.Html
+        presenceData.largeImageKey = ActivityAssets.Html
 
         if (paths[5]) {
           paths.splice(0, 5)
@@ -63,7 +63,7 @@ presence.on('UpdateData', async () => {
         break
       }
       case 'CSS': {
-        presenceData.largeImageKey = Assets.Css
+        presenceData.largeImageKey = ActivityAssets.Css
 
         if (paths[5]) {
           paths.splice(0, 5)
@@ -80,7 +80,7 @@ presence.on('UpdateData', async () => {
         break
       }
       case 'MathML': {
-        presenceData.largeImageKey = Assets.Mathml
+        presenceData.largeImageKey = ActivityAssets.Mathml
 
         if (paths[5]) {
           paths.splice(0, 5)
@@ -97,7 +97,7 @@ presence.on('UpdateData', async () => {
         break
       }
       case 'WebExtensions': {
-        presenceData.largeImageKey = Assets.Extension
+        presenceData.largeImageKey = ActivityAssets.Extension
 
         if (paths[4]) {
           paths.splice(0, 5)
@@ -114,7 +114,7 @@ presence.on('UpdateData', async () => {
         break
       }
       default: {
-        presenceData.largeImageKey = Assets.Homepage
+        presenceData.largeImageKey = ActivityAssets.Homepage
 
         const tech = paths[4]
 

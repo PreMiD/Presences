@@ -719,7 +719,7 @@ presence.on('UpdateData', () => {
         default: {
           if (profilePath?.startsWith('subscriptions/')) {
             presenceData.state = `${username}'s ${
-              profilePath.match(/^subscriptions\/(.*?)\/?$/)?.[1][1]
+              profilePath.match(/^subscriptions\/(.*?)\/?$/)?.[1]?.[1]
             } subscriptions`
           }
           else {

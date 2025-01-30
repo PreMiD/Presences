@@ -1,4 +1,4 @@
-import { presence } from './util'
+import { presence } from './util.js'
 
 const variableCache: Record<string, unknown> = {}
 const variableCacheTimes: Record<string, number> = {}
@@ -291,7 +291,7 @@ export async function getGachaInfo(): Promise<string> {
   } = await getVariable({
     [`uiscript.UI_Treasure.Inst.tabs[${tabIndex}].name.text`]: 'Unknown Tab',
   })
-  return tabName
+  return tabName!
 }
 
 export async function getAchievementInfo(): Promise<{

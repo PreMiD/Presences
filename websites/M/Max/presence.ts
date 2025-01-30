@@ -1,10 +1,12 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1256196660657393714',
 })
 
 let isFetching = false
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/Max/assets/logo.png',
 }
 
@@ -75,7 +77,7 @@ function getTitleInfo(usePresenceName?: boolean) {
     return
 
   if (location.pathname.includes('/video/')) {
-    const episodeInfo = findAlternateId(location.pathname.split('/')[3])
+    const episodeInfo = findAlternateId(location.pathname.split('/')[3]!)
     const showInfo = findAlternateId(episodeInfo?.relationships?.show.data.id ?? '')
 
     if (!episodeInfo || !showInfo)
@@ -91,21 +93,21 @@ function getTitleInfo(usePresenceName?: boolean) {
         : usePresenceName
           ? `Season ${episodeInfo.attributes.seasonNumber}, Episode ${episodeInfo.attributes.episodeNumber}`
           : `S${episodeInfo.attributes.seasonNumber}:E${episodeInfo.attributes.episodeNumber} ${episodeInfo.attributes.name}`,
-      largeImageKey: findId(showInfo.relationships?.images.data[5].id ?? '')?.attributes.src,
+      largeImageKey: findId(showInfo.relationships?.images.data[5]?.id ?? '')?.attributes.src,
     }
   }
 
-  const info = findAlternateId(location.pathname.split('/')[2])
+  const info = findAlternateId(location.pathname.split('/')[2]!)
   return {
     state: info?.attributes.name,
-    largeImageKey: findId(info?.relationships?.images.data[5].id ?? '')?.attributes.src,
+    largeImageKey: findId(info?.relationships?.images.data[5]?.id ?? '')?.attributes.src,
   }
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     type: ActivityType.Watching,
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const [usePresenceName, showCoverArt] = await Promise.all([
     presence.getSetting<boolean>('usePresenceName'),
@@ -145,7 +147,7 @@ presence.on('UpdateData', async () => {
   }
 
   if (!showCoverArt)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
 
   if (presenceData.details)
     presence.setActivity(presenceData)

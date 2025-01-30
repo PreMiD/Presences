@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 interface PageAction {
   id: string
   path: string
@@ -24,7 +26,7 @@ const strings = presence.getStrings({
 let video: VideoContext | null = null
 let lastVideoOption = 1
 
-const enum Assets {
+enum ActivityAssets {
   Season = 'https://cdn.rcd.gg/PreMiD/websites/M/Monos%20Chinos/assets/0.png',
   Directory = 'https://cdn.rcd.gg/PreMiD/websites/M/Monos%20Chinos/assets/1.png',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/M/Monos%20Chinos/assets/logo.png',
@@ -36,10 +38,10 @@ presence.on('iFrameData', async (context: unknown) => {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const browsingData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     details: (await strings).browsing,
     smallImageKey: Assets.Viewing,
     smallImageText: (await strings).browsing,
@@ -54,25 +56,25 @@ presence.on('UpdateData', async () => {
       id: 'seasonList',
       path: '/emision',
       text: 'viendo lista de emisión',
-      icon: Assets.Season,
+      icon: ActivityAssets.Season,
     },
     {
       id: 'directory',
       path: '/animes',
       text: 'viendo el directorio',
-      icon: Assets.Directory,
+      icon: ActivityAssets.Directory,
     },
     {
       id: 'seasonCalendar',
       path: '/calendario',
       text: 'viendo el calendario',
-      icon: Assets.Season,
+      icon: ActivityAssets.Season,
     },
     {
       id: 'directoryAnime',
       path: '/anime/',
       text: 'viendo lista de episodios',
-      icon: Assets.Directory,
+      icon: ActivityAssets.Directory,
     },
     {
       id: 'search',
@@ -90,7 +92,7 @@ presence.on('UpdateData', async () => {
 
   for (const [i, info] of actions.entries()) {
     if (document.location.pathname.startsWith(info.path)) {
-      action = actions[i]
+      action = actions[i]!
       break
     }
   }

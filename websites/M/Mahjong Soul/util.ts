@@ -58,7 +58,7 @@ export function squareImage(image: HTMLImageElement): Promise<Blob | string> {
   const { src, complete } = image
   image.crossOrigin = 'anonymous'
   if (src in imageCache)
-    return imageCache[src]
+    return imageCache[src]!
   const render = () => {
     const { naturalHeight: height, naturalWidth: width } = image
     const canvas = document.createElement('canvas')

@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '844106861711196179',
 })
@@ -17,9 +19,9 @@ enum myCANALAssets {
 
 export const cropPreset = {
   // Crop values in percent correspond to Left, Right, Top, Bottom.
-  squared: [0, 0, 0, 0],
-  vertical: [0.22, 0.22, 0, 0.3],
-  horizontal: [0.425, 0.025, 0, 0],
+  squared: [0, 0, 0, 0] as [number, number, number, number],
+  vertical: [0.22, 0.22, 0, 0.3] as [number, number, number, number],
+  horizontal: [0.425, 0.025, 0, 0] as [number, number, number, number],
 }
 
 export async function getThumbnail(
@@ -209,8 +211,8 @@ presence.on('UpdateData', async () => {
         break
       case containsTerm('series'):
       case containsTerm('jeunesse'):
-        presenceData.details = titleTvShows[0].textContent?.trim()
-        presenceData.state = titleTvShows[1].textContent?.trim();
+        presenceData.details = titleTvShows[0]?.textContent?.trim()
+        presenceData.state = titleTvShows[1]?.textContent?.trim();
         [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(video.currentTime, video.duration)
         presenceData.largeImageKey = showCover
           ? (presenceData.largeImageKey = await getThumbnail(

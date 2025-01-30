@@ -44,7 +44,7 @@ presence.on('UpdateData', () => {
     }
     else if (pathname.includes('/search')) {
       presenceData.details = 'Searching'
-      presenceData.state = pathname.split('/')[2].replaceAll('%20', ' ')
+      presenceData.state = pathname.split('/')[2]?.replaceAll('%20', ' ')
     }
     else if (
       pathname.includes('/lyrics')

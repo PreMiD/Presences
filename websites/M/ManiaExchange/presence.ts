@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '731069087031230487',
 })
@@ -54,7 +56,7 @@ function getTimestamps(videoTime: number, videoDuration: number): number[] {
   ]
 }
 
-const enum Assets {
+enum ActivityAssets {
   Sm = 'https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/0.png',
   Accounts = 'https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/1.png',
   Tm = 'https://cdn.rcd.gg/PreMiD/websites/M/ManiaExchange/assets/2.png',
@@ -80,7 +82,7 @@ const enum Assets {
         tac: 'Terms and Conditions',
         privacy: 'Privacy Policy',
         logos: 'Logos & Signpacks',
-      }[currentPath[0]]
+      }[currentPath[0]!]
     }
   }
   else if (
@@ -94,22 +96,22 @@ const enum Assets {
      * @param sm String for ShootMania
      */
     const chooseTwo = (tm: string, sm: string): string => {
-      return presenceData.smallImageKey === Assets.Tm ? tm : sm
+      return presenceData.smallImageKey === ActivityAssets.Tm ? tm : sm
     }
 
     switch (currentURL.hostname.split('.')[0]) {
       case 'tm':
-        presenceData.smallImageKey = Assets.Tm
+        presenceData.smallImageKey = ActivityAssets.Tm
         presenceData.smallImageText = 'TrackMania²'
         break
       case 'sm':
-        presenceData.smallImageKey = Assets.Sm
+        presenceData.smallImageKey = ActivityAssets.Sm
         presenceData.smallImageText = 'ShootMania'
         break
       case 'trackmania':
-        presenceData.smallImageKey = Assets.Tm2020
+        presenceData.smallImageKey = ActivityAssets.Tm2020
         presenceData.smallImageText = 'Trackmania (2020)'
-        presenceData.largeImageKey = Assets.Tmx
+        presenceData.largeImageKey = ActivityAssets.Tmx
         break
     }
 
@@ -189,7 +191,7 @@ const enum Assets {
             }, ${searchSummary}`
           }
           else {
-            presenceData.state = `${searchSummary?.[0].toUpperCase()}${searchSummary?.slice(1)}`
+            presenceData.state = `${searchSummary?.[0]?.toUpperCase()}${searchSummary?.slice(1)}`
           }
 
           break
@@ -319,7 +321,7 @@ const enum Assets {
                 ?.textContent
                 ?.trim()
                 .split(' ...')[0]
-                .slice(15)
+                ?.slice(15)
               const usernameSearched = (
                 document.querySelector('#UserUsername') as HTMLInputElement
               ).value
@@ -330,7 +332,7 @@ const enum Assets {
                 )}`
               }
               else {
-                presenceData.state = `${searchSummary?.[0].toUpperCase()}${searchSummary?.slice(1)}`
+                presenceData.state = `${searchSummary?.[0]?.toUpperCase()}${searchSummary?.slice(1)}`
               }
 
               break
@@ -408,9 +410,9 @@ const enum Assets {
     }
   }
   else if (currentURL.hostname.startsWith('item')) {
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = 'ItemExchange'
-    presenceData.largeImageKey = Assets.Item
+    presenceData.largeImageKey = ActivityAssets.Item
 
     if (currentPath[0] === 'error') {
       presenceData.details = 'On a non-existent page'
@@ -424,14 +426,14 @@ const enum Assets {
     else if (currentPath[0] === 'auth') {
       presenceData.details = 'Logging in'
     }
-    else if (currentPath[0].toLowerCase() === 'item') {
+    else if (currentPath[0]?.toLowerCase() === 'item') {
       presenceData.details = document.querySelector('h3')?.textContent
       presenceData.state = document
         .querySelector('.panel-body dd:nth-of-type(2)')
         ?.textContent
         ?.trim()
     }
-    else if (currentPath[0].toLowerCase() === 'set') {
+    else if (currentPath[0]?.toLowerCase() === 'set') {
       presenceData.details = document.querySelector('h3')?.textContent
       presenceData.state = `${document
         .querySelector('.panel-body dd:nth-of-type(2)')
@@ -538,7 +540,7 @@ const enum Assets {
     }
   }
   else if (currentURL.hostname.startsWith('accounts')) {
-    presenceData.smallImageKey = Assets.Accounts
+    presenceData.smallImageKey = ActivityAssets.Accounts
     presenceData.smallImageText = 'Accounts'
 
     if (currentPath[0] === 'auth') {
@@ -563,9 +565,9 @@ const enum Assets {
     }
   }
   else if (currentURL.hostname.startsWith('tmtube')) {
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = 'TMTube Archive'
-    presenceData.largeImageKey = Assets.Tmtube
+    presenceData.largeImageKey = ActivityAssets.Tmtube
 
     updateCallback.function = (): void => {
       switch (currentPath[0]) {
@@ -619,7 +621,7 @@ const enum Assets {
     }
   }
   else if (currentURL.hostname.startsWith('api')) {
-    presenceData.smallImageKey = Assets.Api
+    presenceData.smallImageKey = ActivityAssets.Api
     presenceData.smallImageText = 'API Documentation'
 
     if (currentPath[0] === '') {

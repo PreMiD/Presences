@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '684124119146692619',
 })
@@ -9,8 +11,7 @@ function getTimeStamp() {
 
 // Variables
 let Routes: string[],
-  Queries,
-  DiscussionTitle: string
+  Queries
 
 presence.on('UpdateData', async () => {
   // Presence Data
@@ -195,20 +196,20 @@ presence.on('UpdateData', async () => {
           break
         }
         case 'discussion': {
+          const titleElement = document.querySelector(
+            '.discussion .discussion__title',
+          )
+          const DiscussionTitle = titleElement?.textContent
           // Discussion page
           if (Routes[2] && !Routes[3]) {
             // Opened discussion
             presenceData.smallImageText = 'Читает'
             presenceData.smallImageKey = Assets.Reading
 
-            const titleElement = document.querySelector(
-              '.discussion .discussion__title',
-            )
             const authorElement = document.querySelector(
               '.discussion .discussion-creator__username',
             )
 
-            const DiscussionTitle = titleElement?.textContent
             const DiscussionAuthor = authorElement?.textContent
 
             if (DiscussionAuthor && DiscussionTitle)
@@ -694,7 +695,7 @@ presence.on('UpdateData', async () => {
         presenceData.details = 'Смотрит тайтл'
         presenceData.state = document.title
           .split('/')[0]
-          .split(' ')
+          ?.split(' ')
           .slice(1)
           .join(' ')
         presenceData.smallImageText = 'Читает'
