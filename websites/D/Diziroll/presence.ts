@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({ clientId: '818550584994168934' })
 
 let stream: { duration: number, currentTime: number, paused: boolean }
@@ -39,7 +41,7 @@ presence.on('UpdateData', async () => {
     presenceData.state = document.querySelector('div.top > h1')?.textContent
   }
   else if (document.querySelectorAll('.episode-detail').length > 0) {
-    presenceData.details = document.querySelectorAll<HTMLElement>('.series-name')[0].title
+    presenceData.details = document.querySelectorAll<HTMLElement>('.series-name')[0]?.title
       || 'Bulunamadı'
     presenceData.state = `${
       document.querySelector('div.select-season > a')?.textContent

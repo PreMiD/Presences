@@ -35,7 +35,7 @@ async function getTokenInfo(
       const pair = data.pairs[0]
       const getTitlePrice = () => {
         const priceMatch = document.title.match(/\$([0-9.]+)/)
-        return priceMatch ? Number.parseFloat(priceMatch[1]) : 0
+        return priceMatch?.[1] ? Number.parseFloat(priceMatch[1]) : 0
       }
       let price = getTitlePrice()
       // price get from title instead of API, for efficiency
@@ -73,7 +73,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/DEX%20Screener/assets/logo.jpeg',
 }
 
@@ -144,12 +144,12 @@ presence.on('UpdateData', async () => {
     default: {
       const pathParts = path.split('/')
       if (pathParts.length === 2) {
-        details = `Browsing ${capitalize(pathParts[1])} tokens`
-        const smallImageKey = new Map(Object.entries(chainLogo)).get(pathParts[1])
+        details = `Browsing ${capitalize(pathParts[1]!)} tokens`
+        const smallImageKey = new Map(Object.entries(chainLogo)).get(pathParts[1]!)
           || `https://dd.dexscreener.com/ds-data/chains/${pathParts[1]}.png`
         presenceData = {
           details,
-          largeImageKey: Assets.Logo,
+          largeImageKey: ActivityAssets.Logo,
           smallImageKey,
           startTimestamp: browsingTimestamp,
         }
@@ -157,8 +157,8 @@ presence.on('UpdateData', async () => {
         return
       }
       else if (pathParts.length >= 3) {
-        const chainId = pathParts[1]
-        const tokenAddress = pathParts[2]
+        const chainId = pathParts[1]!
+        const tokenAddress = pathParts[2]!
         tokenInfo = await getTokenInfo(
           decodeURIComponent(tokenAddress),
           chainId,
@@ -172,7 +172,7 @@ presence.on('UpdateData', async () => {
             details,
             state,
             largeImageKey: tokenInfo.thumbnail,
-            smallImageKey: Assets.Logo,
+            smallImageKey: ActivityAssets.Logo,
             startTimestamp: browsingTimestamp,
             buttons: [
               {
@@ -192,7 +192,7 @@ presence.on('UpdateData', async () => {
     presenceData = {
       details,
       state,
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       startTimestamp: browsingTimestamp,
     }
     presence.setActivity(presenceData)

@@ -228,7 +228,7 @@ presence.on('UpdateData', async () => {
         presenceData.state = new URLSearchParams(search).get('search')
       }
       else if (pathSplit[1]) {
-        if (/^\d+-/.test(pathSplit[pathSplit.length - 1])) {
+        if (/^\d+-/.test(pathSplit[pathSplit.length - 1]!)) {
           presenceData.details = 'Reading a forum post'
           presenceData.state = pageTitle
           presenceData.buttons = [

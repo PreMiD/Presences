@@ -1,15 +1,17 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '580032576434077707',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/Desu-Online/assets/logo.png',
   Home = 'https://cdn.rcd.gg/PreMiD/websites/D/Desu-Online/assets/0.png',
 }
 
-const pages: { [key: string]: { desc: string, image: Assets } } = {
-  '/': { desc: 'Strona Główna', image: Assets.Home },
+const pages: { [key: string]: { desc: string, image: Assets | ActivityAssets } } = {
+  '/': { desc: 'Strona Główna', image: ActivityAssets.Home },
   '/zakladki/': { desc: 'Przegląda zakładki...', image: Assets.Viewing },
   '/gatunki/': { desc: 'Przegląda gatunki...', image: Assets.Viewing },
   '/sezony/': { desc: 'Przegląda sezony...', image: Assets.Viewing },
@@ -34,7 +36,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     type: ActivityType.Watching,
     name: 'Desu-Online',
@@ -145,7 +147,7 @@ presence.on('UpdateData', async () => {
           ? (presenceData.details = 'Ogląda anime')
           : (presenceData.details = Number.isNaN(Number.parseInt(episodenum ?? ''))
               ? episodenum
-              : `Odcinek:${playinfo?.[0].replace('Odc', '')}`)
+              : `Odcinek:${playinfo?.[0]?.replace('Odc', '')}`)
         if (playinfo && playinfo.length > 2) {
           presenceData.state = document
             .querySelector('li.selected > a > div.playinfo > span')
@@ -180,8 +182,8 @@ presence.on('UpdateData', async () => {
         break
       }
       default:
-        presenceData.details = pages[pathname].desc || 'Nieznana aktywność 🤨'
-        presenceData.smallImageKey = pages[pathname].image || Assets.Viewing
+        presenceData.details = pages[pathname]?.desc || 'Nieznana aktywność 🤨'
+        presenceData.smallImageKey = pages[pathname]?.image || Assets.Viewing
         break
     }
   }
@@ -189,7 +191,7 @@ presence.on('UpdateData', async () => {
   if (!buttons || privacy)
     delete presenceData.buttons
   if (privacy) {
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
     delete presenceData.state
   }
   if (presenceData.details)

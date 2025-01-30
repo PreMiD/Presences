@@ -1,6 +1,6 @@
-import { byHref } from './data'
-import { handleSport } from './handleSport'
-import { Assets } from './presence'
+import { byHref } from './data.js'
+import { handleSport } from './handleSport.js'
+import { ActivityAssets } from './presence.js'
 
 function noTemplate(ext: string, presenceData: PresenceData): void {
   switch (ext.split('/')[0]) {
@@ -19,7 +19,7 @@ function noTemplate(ext: string, presenceData: PresenceData): void {
 
 function formatTitle(presenceData: PresenceData): void {
   presenceData.details = 'Browsing Section'
-  presenceData.state = document.title.split('|')[0].trim()
+  presenceData.state = document.title.split('|')[0]?.trim()
 }
 
 // I'm leaving this well-commented because I hate regex
@@ -93,8 +93,8 @@ export function findPage(ext: string, presenceData: PresenceData): void {
 
     const vid = document.querySelector('video')!
     if (!vid.paused && !vid.ended)
-      presenceData.smallImageKey = Assets.PlayIco
-    else presenceData.smallImageKey = Assets.PauseIco
+      presenceData.smallImageKey = ActivityAssets.PlayIco
+    else presenceData.smallImageKey = ActivityAssets.PauseIco
   }
   else {
     presenceData.buttons = [

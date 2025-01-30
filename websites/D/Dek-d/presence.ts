@@ -1,9 +1,11 @@
+import { ActivityType } from 'premid'
+
 const presence = new Presence({
   clientId: '1314484095614451822',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/Dek-d/assets/logo.png',
 }
 
@@ -76,7 +78,7 @@ presence.on('UpdateData', async () => {
   const titleText = document.querySelector('h1.title')?.textContent ?? ''
   const pathSegments = document.location.pathname.split('/')
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     type: ActivityType.Watching,
     // initial details in case of no match displaying the 1st path segment
@@ -93,11 +95,11 @@ presence.on('UpdateData', async () => {
       if (location.pathname === '/') {
         presenceData.details = 'Viewing home page'
       }
-      else if (Object.keys(sections).includes(pathSegments[1])) {
+      else if (pathSegments[1] && Object.keys(sections).includes(pathSegments[1])) {
         switch (pathSegments[1]) {
           case 'board': {
             displaySec(' ')
-            if (sections.board.includes(pathSegments[2]))
+            if (pathSegments[2] && sections.board.includes(pathSegments[2]))
               displaySec(` ${pathSegments[2]} `)
 
             if (pathSegments[3] !== '')
@@ -109,7 +111,7 @@ presence.on('UpdateData', async () => {
             presenceData.details = `Viewing ${pathSegments[1]} thread`
             if (!Number.isNaN(Number(pathSegments[2])))
               presenceData.state = `${titleText}`
-            else if (sections.tcas.includes(pathSegments[2]))
+            else if (pathSegments[2] && sections.tcas.includes(pathSegments[2]))
               presenceData.details = `Browsing ${pathSegments[2]} on ${pathSegments[1]} thread`
 
             break
@@ -118,7 +120,7 @@ presence.on('UpdateData', async () => {
             presenceData.details = `Choosing ${pathSegments[1]}`
             // all quiz type
             if (
-              sections.quiz.includes(pathSegments[3])
+              pathSegments[3] && sections.quiz.includes(pathSegments[3])
               && pathSegments[2] === 'all'
             ) {
               presenceData.details = `Choosing ${pathSegments[3]} ${pathSegments[1]}`
@@ -146,7 +148,7 @@ presence.on('UpdateData', async () => {
                   presenceData.largeImageKey = urlMatch ? urlMatch[1] : ''
                 }
               }
-              else if (sections.quiz.includes(pathSegments[3])) {
+              else if (pathSegments[3] && sections.quiz.includes(pathSegments[3])) {
                 presenceData.details = `Choosing ${pathSegments[3]} ${pathSegments[2]}`
               }
             }
@@ -159,7 +161,7 @@ presence.on('UpdateData', async () => {
               presenceData.largeImageKey = document
                 .querySelector('a.link img')
                 ?.getAttribute('src')
-              presenceData.smallImageKey = Assets.Logo
+              presenceData.smallImageKey = ActivityAssets.Logo
             }
             else if (
               pathSegments[3] !== ''
@@ -169,7 +171,7 @@ presence.on('UpdateData', async () => {
               presenceData.largeImageKey = document
                 .querySelector('img.sharethumb')
                 ?.getAttribute('src')
-              presenceData.smallImageKey = Assets.Logo
+              presenceData.smallImageKey = ActivityAssets.Logo
               presenceData.details = `Reading ${pathSegments[1]}`
               presenceData.state = `${texts ? texts.textContent : ''}`
             }
@@ -182,9 +184,9 @@ presence.on('UpdateData', async () => {
               presenceData.largeImageKey = document
                 .querySelector('.image img')
                 ?.getAttribute('src')
-              presenceData.smallImageKey = Assets.Logo
+              presenceData.smallImageKey = ActivityAssets.Logo
             }
-            else if (sections.studyabroad.includes(pathSegments[2])) {
+            else if (pathSegments[2] && sections.studyabroad.includes(pathSegments[2])) {
               presenceData.details = `Browsing ${pathSegments[2]} on ${pathSegments[1]}`
             }
 
@@ -197,7 +199,7 @@ presence.on('UpdateData', async () => {
               presenceData.largeImageKey = document
                 .querySelector('.image img')
                 ?.getAttribute('src')
-              presenceData.smallImageKey = Assets.Logo
+              presenceData.smallImageKey = ActivityAssets.Logo
             }
             break
           }
@@ -208,7 +210,7 @@ presence.on('UpdateData', async () => {
               if (img)
                 presenceData.largeImageKey = img.getAttribute('src')
               presenceData.state = titleText
-              presenceData.smallImageKey = Assets.Logo
+              presenceData.smallImageKey = ActivityAssets.Logo
             }
             break
           }
@@ -226,7 +228,7 @@ presence.on('UpdateData', async () => {
               presenceData.largeImageKey = document
                 .querySelector('.image img')
                 ?.getAttribute('src')
-              presenceData.smallImageKey = Assets.Logo
+              presenceData.smallImageKey = ActivityAssets.Logo
             }
             break
           }
@@ -236,7 +238,7 @@ presence.on('UpdateData', async () => {
     }
     case 'novel.dek-d.com': {
       presenceData.details = 'Choosing novel to read'
-      if (Object.keys(sections).includes(pathSegments[1]))
+      if (pathSegments[1] && Object.keys(sections).includes(pathSegments[1]))
         presenceData.details = `Viewing novels ${pathSegments[1]}`
 
       switch (pathSegments[1]) {
@@ -246,7 +248,7 @@ presence.on('UpdateData', async () => {
           const headerT = headerTexts
             ? headerTexts.querySelector('h2')!.textContent!
             : ''
-          presenceData.smallImageKey = Assets.Logo
+          presenceData.smallImageKey = ActivityAssets.Logo
           presenceData.details = 'Reading Admin Novels Review'
           presenceData.largeImageKey = document
             .querySelector('div.header-special picture img')
@@ -271,9 +273,9 @@ presence.on('UpdateData', async () => {
               .getComputedStyle(novelCoverElement)
               .getPropertyValue('background-image')
               .match(/url\(["']?([^"']*)["']?\)/)
-            presenceData.largeImageKey = urlMatch ? urlMatch[1] : Assets.Logo
-            if (presenceData.largeImageKey !== Assets.Logo)
-              presenceData.smallImageKey = Assets.Logo
+            presenceData.largeImageKey = urlMatch ? urlMatch[1] : ActivityAssets.Logo
+            if (presenceData.largeImageKey !== ActivityAssets.Logo)
+              presenceData.smallImageKey = ActivityAssets.Logo
           }
           presenceData.state = document.querySelector('a.link')?.textContent
           presenceData.details = 'Reader Novels Review'
@@ -287,8 +289,8 @@ presence.on('UpdateData', async () => {
 
       if (
         pathSegments[2] === 'writer'
-        && document.location.href.includes(document.location.href.split('/')[5])
-        && document.location.href.split('/')[5].split('.')[0] === 'view'
+        && document.location.href.includes(document.location.href.split('/')[5]!)
+        && document.location.href.split('/')[5]!.split('.')[0] === 'view'
       ) {
         const novelCoverElement = document.querySelector('div.novel-cover-img')
         if (novelCoverElement) {
@@ -296,9 +298,9 @@ presence.on('UpdateData', async () => {
             .getComputedStyle(novelCoverElement)
             .getPropertyValue('background-image')
             .match(/url\(["']?([^"']*)["']?\)/)
-          presenceData.largeImageKey = urlMatch ? urlMatch[1] : Assets.Logo
-          if (presenceData.largeImageKey !== Assets.Logo)
-            presenceData.smallImageKey = Assets.Logo
+          presenceData.largeImageKey = urlMatch ? urlMatch[1] : ActivityAssets.Logo
+          if (presenceData.largeImageKey !== ActivityAssets.Logo)
+            presenceData.smallImageKey = ActivityAssets.Logo
         }
         presenceData.state = document.querySelector('p.novel-name')?.textContent
       }

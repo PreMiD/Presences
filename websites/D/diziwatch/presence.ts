@@ -1,15 +1,17 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1214974615202299994',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/diziwatch/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   } as PresenceData
   presenceData.startTimestamp = browsingTimestamp
   switch (document.location.pathname) {

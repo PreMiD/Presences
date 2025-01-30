@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '616940877042155531',
 })
@@ -77,7 +79,7 @@ let prevUrl = document.location.href
 let strings: Awaited<ReturnType<typeof getStrings>>
 let oldLang: string | null = null
 
-const enum Assets {
+enum ActivityAssets {
   DiscordBlack = 'https://cdn.rcd.gg/PreMiD/websites/D/Discord/assets/0.png',
   Discord = 'https://cdn.rcd.gg/PreMiD/websites/D/Discord/assets/1.png',
   DiscordWhite = 'https://cdn.rcd.gg/PreMiD/websites/D/Discord/assets/2.png',
@@ -105,8 +107,8 @@ presence.on('UpdateData', async () => {
   ])
 
   let presenceData: PresenceData = {
-    largeImageKey: [Assets.DiscordWhite, Assets.Discord, Assets.DiscordBlack][logo]
-      || Assets.DiscordWhite,
+    largeImageKey: [ActivityAssets.DiscordWhite, ActivityAssets.Discord, ActivityAssets.DiscordBlack][logo]
+      || ActivityAssets.DiscordWhite,
   }
 
   if (document.location.href !== prevUrl) {
@@ -143,7 +145,7 @@ presence.on('UpdateData', async () => {
       const serverTyping = Array.from(
         document.querySelectorAll('div[contenteditable=true]'),
       ).find(c =>
-        c.attributes[0].textContent?.includes(
+        c.attributes[0]?.textContent?.includes(
           Array.from(document.querySelectorAll('h3')).find(c =>
             c.className?.includes('title'),
           )?.textContent ?? '',
@@ -167,13 +169,13 @@ presence.on('UpdateData', async () => {
         '/channels/(\\d*)/(\\d*)/': {
           details: serverTyping
             ? strings.channelTyping
-                .split('{0}')[0]
-                .replace('{1}', serverChannel)
-                .replace('{2}', serverServerName)
+              .split('{0}')[0]
+              ?.replace('{1}', serverChannel)
+              .replace('{2}', serverServerName)
             : strings.channelReading
-                .split('{0}')[0]
-                .replace('{1}', serverChannel)
-                .replace('{2}', serverServerName),
+              .split('{0}')[0]
+              ?.replace('{1}', serverChannel)
+              .replace('{2}', serverServerName),
           state: serverTyping
             ? strings.channelTyping
               .split('{0}')[1]
@@ -193,24 +195,24 @@ presence.on('UpdateData', async () => {
           details: dmsTyping
             ? groupDm
               ? strings.dmGroupTyping
-                  .split('{0}')[0]
-                  .replace('{1}', dmsUserGroupName)
+                .split('{0}')[0]
+                ?.replace('{1}', dmsUserGroupName)
               : strings.dmTyping
-                  .split('{0}')[0]
-                  .replace('{1}', dmsUserGroupName)
+                .split('{0}')[0]
+                ?.replace('{1}', dmsUserGroupName)
             : groupDm
               ? document.querySelector('head > title')?.textContent
               === 'Discord'
                 ? ''
                 : strings.dmGroupReading
-                    .split('{0}')[0]
-                    .replace('{1}', dmsUserGroupName)
+                  .split('{0}')[0]
+                  ?.replace('{1}', dmsUserGroupName)
               : document.querySelector('head > title')?.textContent
                 === 'Discord'
                 ? ''
                 : strings.dmReading
-                    .split('{0}')[0]
-                    .replace('{1}', dmsUserGroupName),
+                  .split('{0}')[0]
+                  ?.replace('{1}', dmsUserGroupName),
           state: dmsTyping
             ? groupDm
               ? strings.dmGroupTyping
@@ -238,16 +240,16 @@ presence.on('UpdateData', async () => {
         '/invite/(\\w*\\d*)/': {
           details: showInvites
             ? strings.invite
-                .split('{0}')[0]
-                .replace('{1}', document.URL.split('/')[4])
-                .replace('{2}', document.title)
+              .split('{0}')[0]
+              ?.replace('{1}', document.URL.split('/')[4]!)
+              .replace('{2}', document.title)
             : strings.inviteServer
-                .split('{0}')[0]
-                .replace('{1}', document.title),
+              .split('{0}')[0]
+              ?.replace('{1}', document.title),
           state: showInvites
             ? strings.invite
               .split('{0}')[1]
-              ?.replace('{1}', document.URL.split('/')[4])
+              ?.replace('{1}', document.URL.split('/')[4]!)
               .replace('{2}', document.title)
             : strings.inviteServer
               .split('{0}')[1]
@@ -431,18 +433,18 @@ presence.on('UpdateData', async () => {
 
           presenceData.details = connectedToDm
             ? strings.voiceConnectedWith
-                .split('{0}')[0]
-                .replace('{1}', connectedTo.textContent ?? '')
+              .split('{0}')[0]
+              ?.replace('{1}', connectedTo.textContent ?? '')
             : strings.voiceConnectedTo
-                .split('{0}')[0]
-                .replace(
-                  '{1}',
-                  connectedTo.textContent?.replace(
-                    ` / ${connectedTo.textContent?.split(' / ').pop()}`,
-                    '',
-                  ) ?? '',
-                )
-                .replace('{2}', connectedTo.textContent?.split(' / ').pop() ?? '')
+              .split('{0}')[0]
+              ?.replace(
+                '{1}',
+                connectedTo.textContent?.replace(
+                  ` / ${connectedTo.textContent?.split(' / ').pop()}`,
+                  '',
+                ) ?? '',
+              )
+              .replace('{2}', connectedTo.textContent?.split(' / ').pop() ?? '')
           presenceData.state = connectedToDm
             ? strings.voiceConnectedWith
               .split('{0}')[1]
@@ -491,7 +493,7 @@ presence.on('UpdateData', async () => {
           )?.textContent || 'Undefined'
           presenceData.details = strings.serverSettings
             .split('{0}')[0]
-            .replace('{1}', server)
+            ?.replace('{1}', server)
           presenceData.state = strings.serverSettings
             .split('{0}')[1]
             ?.replace('{1}', server)

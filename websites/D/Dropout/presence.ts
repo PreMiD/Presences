@@ -1,11 +1,12 @@
-import type { IFrameData, QueryParams } from './interfaces'
+import type { IFrameData, QueryParams } from './interfaces.js'
+import { Assets } from 'premid'
 
 const presence = new Presence({
   clientId: '1240164154682249227',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum PresenceAssets {
+enum PresenceAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/Dropout/assets/logo.png',
 }
 
@@ -40,7 +41,7 @@ function getDetails(
   showButtons: boolean,
   href: string,
 ): void {
-  switch (path[0].toLowerCase()) {
+  switch (path[0]?.toLowerCase()) {
     case 'browse':
       presenceData.details = 'Browsing home page'
       break
@@ -94,7 +95,7 @@ function getVideoDetails(
     else {
       presenceData.state = `${seriesNameElement.textContent?.trim()}: ${selectElement.options[
         selectElement.selectedIndex
-      ].textContent?.trim()}`
+      ]?.textContent?.trim()}`
     }
 
     if (showButtons) {
@@ -192,7 +193,7 @@ function parseQueryParams(): QueryParams {
 
     for (const pair of pairs) {
       const keyValue = pair.split('=')
-      queryParams[decodeURIComponent(keyValue[0])] = decodeURIComponent(
+      queryParams[decodeURIComponent(keyValue[0] ?? '')] = decodeURIComponent(
         keyValue[1] || '',
       )
     }

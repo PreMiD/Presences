@@ -4,41 +4,41 @@ const presence = new Presence({
 const elapsed = Math.floor(Date.now() / 1000)
 let text
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/Dueling%20Nexus/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: elapsed,
   }
 
   if (document.location.pathname === '/home') {
-    if (document.querySelectorAll('p')[1].textContent?.includes('Welcome back'))
-      text = document.querySelectorAll('p')[1].textContent
-    else text = document.querySelectorAll('p')[3].textContent
+    if (document.querySelectorAll('p')[1]?.textContent?.includes('Welcome back'))
+      text = document.querySelectorAll('p')[1]?.textContent
+    else text = document.querySelectorAll('p')[3]?.textContent
 
     if (localStorage.getItem('name'))
       localStorage.setItem('name', text?.split(',')[1] ?? '')
 
     presenceData.details = `Online as ${text?.split(',')[1] ?? ''}`
     presenceData.state = 'waiting in lobby'
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = 'in game'
   }
   else if (document.location.pathname === '/decks') {
     presenceData.details = `Online as ${localStorage.getItem('name')}`
     presenceData.state = 'Looking at decklists'
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = 'in game'
   }
   else if (document.location.pathname.includes('/editor')) {
     presenceData.details = 'Building Decks'
     presenceData.state = `Editing: ${
-      document.querySelectorAll('strong')[0].textContent
+      document.querySelectorAll('strong')[0]?.textContent
     }`
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = 'in game'
   }
   else if (document.location.pathname.includes('/game')) {
@@ -77,31 +77,31 @@ presence.on('UpdateData', async () => {
 */
     presenceData.details = status
     presenceData.state = state
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = document.location.href
   }
   else if (document.location.pathname.includes('/hostgame')) {
     presenceData.details = 'Hosting Game '
     presenceData.state = `as ${localStorage.getItem('name')}`
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = 'in game'
   }
   else if (document.location.pathname.includes('/gamelist')) {
     presenceData.details = 'Looking for Game'
     presenceData.state = 'at All game list'
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = 'in game'
   }
   else if (document.location.pathname.includes('/profile')) {
     presenceData.details = 'Editing Profile'
     presenceData.state = 'changing stuffs'
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = 'in game'
   }
   else if (document.location.pathname.includes('/duel')) {
     presenceData.details = 'Searching for Duels'
     presenceData.state = 'Choosing game mode'
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = 'in game'
   }
 

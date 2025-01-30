@@ -1,5 +1,5 @@
-import { findPage } from './findPage'
-import { Assets } from './presence'
+import { findPage } from './findPage.js'
+import { ActivityAssets } from './presence.js'
 
 function handleArticle(
   presenceData: PresenceData,
@@ -14,7 +14,7 @@ function handleArticle(
 
   if (titleEl?.querySelector('.is-exclusive')) {
     presenceData.details = 'Reading Article'
-    presenceData.smallImageKey = Assets.ExclIco
+    presenceData.smallImageKey = ActivityAssets.ExclIco
     presenceData.smallImageText = 'Exclusive!'
   }
   else {

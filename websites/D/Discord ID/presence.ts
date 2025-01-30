@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1003206856958816296',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/Discord%20ID/assets/logo.png',
 }
 
@@ -17,7 +19,7 @@ function getEl(el: HTMLElement | null) {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { hostname, href } = document.location
@@ -69,12 +71,12 @@ presence.on('UpdateData', async () => {
           if (badge.length > 0) {
             presenceData.smallImageKey = `${href}${badge[
               badge.length - 1
-            ].getAttribute('src')}`
+            ]?.getAttribute('src')}`
             presenceData.smallImageText = `Created on: ${getEl(
               document.querySelector('.fas.fa-asterisk'),
             )}`
           }
-          presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.avyimg') ?? Assets.Logo
+          presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.avyimg') ?? ActivityAssets.Logo
           switch (true) {
             case idAndUsername: {
               if (!username)
@@ -102,8 +104,8 @@ presence.on('UpdateData', async () => {
     }
   }
 
-  if (!covers && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if (!covers && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
 
   if (presenceData.details)
     presence.setActivity(presenceData)

@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '712838005165129728',
 })
@@ -76,7 +78,7 @@ presence.on('UpdateData', async () => {
 
     if (query) {
       presenceData.details = 'Bir şey arıyor:'
-      presenceData.state = query[0].toUpperCase() + query.slice(1).toLowerCase()
+      presenceData.state = query[0]?.toUpperCase() + query.slice(1).toLowerCase()
       presenceData.smallImageKey = Assets.Search
     }
     else {

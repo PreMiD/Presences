@@ -26,8 +26,6 @@ presence.on('UpdateData', async () => {
     params: URLSearchParams,
     selector: Node | null,
     arch: string | null,
-    owner: string,
-    name: string,
     page: string | null,
     tab: string | null
 
@@ -80,7 +78,7 @@ presence.on('UpdateData', async () => {
     else if (
       document.location.pathname.match(/^\/orgs\/([^/]+)(?:\/([^/]+))?/)
     ) {
-      [, name, tab] = document.location.pathname.match(
+      let [, name, tab] = document.location.pathname.match(
         /^\/orgs\/([^/]+)(?:\/([^/]+))?/,
       ) ?? []
       tab = tab || 'members'
@@ -89,9 +87,9 @@ presence.on('UpdateData', async () => {
     }
     else if (document.location.pathname.match(/^\/_\/([^?]+)/)) {
       url = new URL(document.location.href)
-      params = url.searchParams;
+      params = url.searchParams
 
-      [, name] = document.location.pathname.match(/^\/_\/([^?]+)/) ?? []
+      const [, name] = document.location.pathname.match(/^\/_\/([^?]+)/) ?? []
 
       tab = params.get(searchItems.tab)
 
@@ -102,9 +100,9 @@ presence.on('UpdateData', async () => {
       document.location.pathname.match(/^\/r\/([^/]+)\/([^/]+)(?:\/([^?]+))?/)
     ) {
       url = new URL(document.location.href)
-      params = url.searchParams;
+      params = url.searchParams
 
-      [, owner, name, tab] = document.location.pathname.match(
+      const [, owner, name, tab] = document.location.pathname.match(
         /^\/r\/([^/]+)\/([^/]+)(?:\/([^?]+))?/,
       ) ?? []
 
@@ -130,7 +128,7 @@ presence.on('UpdateData', async () => {
         presenceData.state = 'Image history'
       }
       else {
-        [, owner, name] = match
+        const [, owner, name] = match
         selector = document.querySelector('.Select-value') || null
         arch = (selector && selector.textContent) || null
 
@@ -154,9 +152,9 @@ presence.on('UpdateData', async () => {
       url = new URL(document.location.href)
       params = url.searchParams
 
-      presenceData.details = 'On personal repository';
+      presenceData.details = 'On personal repository'
 
-      [, tab] = document.location.pathname.match(
+      let [, tab] = document.location.pathname.match(
         /^\/repository(?:\/([^/?]+))+/,
       ) ?? []
 

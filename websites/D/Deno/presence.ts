@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '843058683100266526',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/Deno/assets/logo.png',
   NewsLogo = 'https://cdn.rcd.gg/PreMiD/websites/D/Deno/assets/0.png',
   MerchLogo = 'https://cdn.rcd.gg/PreMiD/websites/D/Deno/assets/1.png',
@@ -11,7 +13,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { href, hash, hostname, pathname } = document.location
@@ -22,7 +24,7 @@ presence.on('UpdateData', async () => {
   const search = document.querySelector<HTMLInputElement>('[id="search-input"]')
   const pathnameSplit = pathname.split('/')
   if (privacy) {
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
     presenceData.details = 'Browsing'
     presence.setActivity(presenceData)
     return
@@ -185,7 +187,7 @@ presence.on('UpdateData', async () => {
           url: href,
         },
       ]
-      presenceData.largeImageKey = Assets.NewsLogo
+      presenceData.largeImageKey = ActivityAssets.NewsLogo
       presenceData.details = 'Viewing the news page'
       break
     }
@@ -200,7 +202,7 @@ presence.on('UpdateData', async () => {
       break
     }
     case 'merch.deno.com': {
-      presenceData.largeImageKey = Assets.MerchLogo
+      presenceData.largeImageKey = ActivityAssets.MerchLogo
       presenceData.buttons = [
         {
           label: 'View Merge Store',

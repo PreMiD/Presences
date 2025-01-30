@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 //* I think this is a browser bug because the custom element does not have any properties when accessing it directly...
 
 let imageId: string | undefined
@@ -147,7 +149,7 @@ presence.on('UpdateData', async () => {
           if (titleImg)
             presenceData.state = titleImg.getAttribute('alt')
           else if (document.title.includes('|'))
-            presenceData.state = document.title.split('|')[0].trim()
+            presenceData.state = document.title.split('|')[0]?.trim()
           else presenceData.state = document.title
           break
         }
@@ -217,7 +219,7 @@ presence.on('UpdateData', async () => {
             if (document.title.includes('|')) {
               presenceData.details = `Page: ${document.title
                 .split('|')[0]
-                .trim()}`
+                ?.trim()}`
             }
             else {
               presenceData.details = `Page: ${document.title}`

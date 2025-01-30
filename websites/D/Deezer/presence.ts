@@ -1,10 +1,12 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '607651992567021580',
 })
 
 let oldLang: string | null = null
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/Deezer/assets/logo.png',
 }
 
@@ -33,7 +35,7 @@ async function getStrings() {
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   let strings = await getStrings()
   let paused = false
@@ -127,8 +129,8 @@ presence.on('UpdateData', async () => {
       .querySelector('[data-testid="item_cover"]')
       ?.querySelector('img')
       ?.getAttribute('src')
-      ?.replace(/(264x264)|(48x48)/g, '512x512') ?? Assets.Logo
-    : Assets.Logo
+      ?.replace(/(264x264)|(48x48)/g, '512x512') ?? ActivityAssets.Logo
+    : ActivityAssets.Logo
   presenceData.smallImageKey = paused ? Assets.Pause : Assets.Play
   presenceData.smallImageText = paused ? strings.pause : strings.play;
   [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps

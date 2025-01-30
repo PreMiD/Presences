@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1034382710589898882',
 })
@@ -21,7 +23,7 @@ async function capitalizeFirstLetter(string: string) {
   const stringTrimmed = string.trim()
   return stringTrimmed.charAt(0).toUpperCase() + stringTrimmed.slice(1)
 }
-const enum Assets {
+enum ActivityAssets {
   Loading = 'https://cdn.rcd.gg/PreMiD/websites/D/Discovery/assets/0.gif',
   LogoDiscoveryPlus = 'https://cdn.rcd.gg/PreMiD/websites/D/Discovery/assets/1.png',
   LogoDiscovery = 'https://cdn.rcd.gg/PreMiD/websites/D/Discovery/assets/logo.png',
@@ -31,7 +33,7 @@ let oldLang: string | null = null
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.LogoDiscovery,
+    largeImageKey: ActivityAssets.LogoDiscovery,
     startTimestamp: browingTimestamp,
   }
   const video = document.querySelector<HTMLVideoElement>('video')
@@ -82,7 +84,7 @@ presence.on('UpdateData', async () => {
   else {
     switch (hostnameReplaced) {
       case 'go.discovery.com': {
-        presenceData.largeImageKey = Assets.LogoDiscovery
+        presenceData.largeImageKey = ActivityAssets.LogoDiscovery
         switch (pathname.split('/')[1]) {
           case '': {
             presenceData.details = strings.viewHome
@@ -131,7 +133,7 @@ presence.on('UpdateData', async () => {
             presenceData.largeImageKey = document
               .querySelector('[class*="showLogo-"]')
               ?.getAttribute('src')
-              ?.split('?')[0] ?? Assets.LogoDiscovery
+              ?.split('?')[0] ?? ActivityAssets.LogoDiscovery
             presenceData.buttons = [
               {
                 label: 'View Show',
@@ -173,7 +175,7 @@ presence.on('UpdateData', async () => {
                   .includes('<circle')
               ) {
                 presenceData.smallImageText = strings.paused
-                presenceData.smallImageKey = Assets.Loading
+                presenceData.smallImageKey = ActivityAssets.Loading
               }
               else if (
                 document
@@ -213,7 +215,7 @@ presence.on('UpdateData', async () => {
         break
       }
       case 'discoveryplus.com': {
-        presenceData.largeImageKey = Assets.LogoDiscoveryPlus
+        presenceData.largeImageKey = ActivityAssets.LogoDiscoveryPlus
         if (
           pathname === ''
           || pathname
@@ -232,7 +234,7 @@ presence.on('UpdateData', async () => {
             case 'show': {
               presenceData.details = `${
                 strings.viewShow
-              } ${await capitalizeFirstLetter(titleSplit2[0])}`
+              } ${await capitalizeFirstLetter(titleSplit2[0] ?? '')}`
               presenceData.state = `${current} - ${
                 current
                 === document.querySelector('[id="tab-generic-show-episodes"]')
@@ -254,9 +256,9 @@ presence.on('UpdateData', async () => {
             }
             case 'video': {
               delete presenceData.startTimestamp
-              presenceData.state = await capitalizeFirstLetter(titleSplit2[0])
+              presenceData.state = await capitalizeFirstLetter(titleSplit2[0] ?? '')
               presenceData.details = await capitalizeFirstLetter(
-                titleSplit2[1],
+                titleSplit2[1] ?? '',
               )
               if (video && !Number.isNaN(video.duration)) {
                 if (
@@ -266,7 +268,7 @@ presence.on('UpdateData', async () => {
                     .includes('<circle')
                 ) {
                   presenceData.smallImageText = strings.paused
-                  presenceData.smallImageKey = Assets.Loading
+                  presenceData.smallImageKey = ActivityAssets.Loading
                 }
                 else {
                   presenceData.smallImageKey = video.paused
@@ -303,7 +305,7 @@ presence.on('UpdateData', async () => {
               presenceData.details = strings.browse
               presenceData.state = `${
                 category[1]?.textContent === ''
-                  ? href.split('?network=')[1].toUpperCase()
+                  ? href.split('?network=')[1]?.toUpperCase()
                   : category[1]?.textContent
               } Shows - Sorted by ${category[2]?.textContent}`
               break
@@ -346,16 +348,16 @@ presence.on('UpdateData', async () => {
   if (
     hostnameReplaced === 'go.discovery.com'
     && !covers
-    && presenceData.largeImageKey !== Assets.LogoDiscovery
+    && presenceData.largeImageKey !== ActivityAssets.LogoDiscovery
   ) {
-    presenceData.largeImageKey = Assets.LogoDiscovery
+    presenceData.largeImageKey = ActivityAssets.LogoDiscovery
   }
   else if (
     hostnameReplaced === 'discoveryplus.com'
     && !covers
-    && presenceData.largeImageKey !== Assets.LogoDiscoveryPlus
+    && presenceData.largeImageKey !== ActivityAssets.LogoDiscoveryPlus
   ) {
-    presenceData.largeImageKey = Assets.LogoDiscoveryPlus
+    presenceData.largeImageKey = ActivityAssets.LogoDiscoveryPlus
   }
 
   if (!buttons && presenceData.buttons)

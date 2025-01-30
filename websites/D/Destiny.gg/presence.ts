@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 const presence = new Presence({
   clientId: '759921592926339072',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/Destiny.gg/assets/logo.png',
   SmallImage = 'https://cdn.rcd.gg/PreMiD/websites/D/Destiny.gg/assets/0.png',
   Money = 'https://cdn.rcd.gg/PreMiD/websites/D/Destiny.gg/assets/1.png',
@@ -12,8 +14,8 @@ const enum Assets {
 }
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
-    smallImageKey: Assets.SmallImage,
+    largeImageKey: ActivityAssets.Logo,
+    smallImageKey: ActivityAssets.SmallImage,
     startTimestamp: browsingTimestamp,
   }
 
@@ -29,19 +31,19 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname.includes('/donate')) {
     presenceData.details = 'Donating to Destiny.'
-    presenceData.smallImageKey = Assets.Money
+    presenceData.smallImageKey = ActivityAssets.Money
   }
   else if (document.location.pathname.includes('/subscribe')) {
     presenceData.details = 'Subscribing to Destiny.'
-    presenceData.smallImageKey = Assets.Money
+    presenceData.smallImageKey = ActivityAssets.Money
   }
   else if (document.location.pathname.includes('/profile')) {
     presenceData.details = 'Editing D.gg profile.'
-    presenceData.smallImageKey = Assets.Profile
+    presenceData.smallImageKey = ActivityAssets.Profile
   }
   else if (document.location.pathname.includes('/embed/chat')) {
     presenceData.details = 'Chatting'
-    presenceData.smallImageKey = Assets.Chat
+    presenceData.smallImageKey = ActivityAssets.Chat
   }
 
   if (presenceData.details)

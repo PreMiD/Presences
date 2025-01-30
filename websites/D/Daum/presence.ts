@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 class DaumPresence extends Presence {
   constructor(presenceOptions: PresenceOptions) {
     super(presenceOptions)
@@ -82,7 +84,7 @@ let video: {
     article: string
   }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/Daum/assets/logo.png',
   DaumMail = 'https://cdn.rcd.gg/PreMiD/websites/D/Daum/assets/0.png',
   DaumCafe = 'https://cdn.rcd.gg/PreMiD/websites/D/Daum/assets/1.png',
@@ -101,17 +103,17 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: startTime,
   }
 
   switch (presence.serviceName) {
     case 'DAUM_MAIL':
-      presenceData.largeImageKey = Assets.DaumMail
+      presenceData.largeImageKey = ActivityAssets.DaumMail
       break
 
     case 'DAUM_CAFE':
-      presenceData.largeImageKey = Assets.DaumCafe
+      presenceData.largeImageKey = ActivityAssets.DaumCafe
       break
 
     default:

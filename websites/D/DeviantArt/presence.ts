@@ -148,7 +148,7 @@ async function prepare(): Promise<void> {
         }
         catch {
           if (
-            currentPath[0].toLowerCase()
+            currentPath[0]?.toLowerCase()
             === document
               .querySelector('title')
               ?.textContent
@@ -161,7 +161,7 @@ async function prepare(): Promise<void> {
               ?.split(' ')[0]
           }
           else if (
-            currentPath[0].toLowerCase()
+            currentPath[0]?.toLowerCase()
             === document
               .querySelector('title')
               ?.textContent
@@ -243,7 +243,7 @@ async function prepare(): Promise<void> {
                     .replaceAll('-', ' ')
                     .toLowerCase()
                     .split(' ')
-                    .map(w => w.replace(w[0], w[0].toUpperCase()))
+                    .map(w => w.replace(w[0]!, w[0]!.toUpperCase()))
                     .join(' ')
 
                   break
@@ -717,7 +717,7 @@ async function prepare(): Promise<void> {
       break
     }
     case 'www.deviantartsupport.com': {
-      let currentTitle = ''
+      let currentTitle: string | undefined
       let presenceDataPlaced: PresenceData = {}
 
       updateCallback.function = (): void => {

@@ -1,15 +1,17 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '840126038205923369',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/Dumpert/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { href, pathname } = window.location
@@ -51,7 +53,7 @@ presence.on('UpdateData', async () => {
       if (video) {
         delete presenceData.startTimestamp
         presenceData.largeImageKey = document.querySelector<HTMLMetaElement>('[property="og:image" ]')
-          ?.content ?? Assets.Logo
+          ?.content ?? ActivityAssets.Logo
         presenceData.smallImageKey = video?.paused ? Assets.Pause : Assets.Play
         if (!video.paused) {
           [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video)
@@ -65,7 +67,7 @@ presence.on('UpdateData', async () => {
       }
       else {
         presenceData.largeImageKey = document.querySelectorAll('img')[1]?.getAttribute('src')
-          ?? Assets.Logo
+          ?? ActivityAssets.Logo
         presenceData.buttons = [
           {
             label: 'Bekijk Foto',
@@ -131,8 +133,8 @@ presence.on('UpdateData', async () => {
     delete presenceData.state
   if ((!buttons || privacy) && presenceData.buttons)
     delete presenceData.buttons
-  if (!covers && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if (!covers && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
 
   if (presenceData.details)
     presence.setActivity(presenceData)

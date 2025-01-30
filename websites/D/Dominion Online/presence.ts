@@ -41,7 +41,7 @@ presence.on('UpdateData', () => {
       if (!logs[i])
         continue
 
-      const logText = logs[i].textContent?.trim()
+      const logText = logs[i]?.textContent?.trim()
 
       // Append turn
       if (logRegex.test(logText!)) {

@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Editorial = 'https://cdn.rcd.gg/PreMiD/websites/D/DMOJ/assets/0.png',
   Post = 'https://cdn.rcd.gg/PreMiD/websites/D/DMOJ/assets/1.png',
   EditProfile = 'https://cdn.rcd.gg/PreMiD/websites/D/DMOJ/assets/2.png',
@@ -28,7 +28,7 @@ const enum Assets {
 
 presence.on('UpdateData', () => {
   const presenceData: PresenceData = {
-    smallImageKey: Assets.Icon,
+    smallImageKey: ActivityAssets.Icon,
     smallImageText: 'DMOJ: Modern Online Judge',
     startTimestamp: browsingTimestamp,
   }
@@ -39,14 +39,14 @@ presence.on('UpdateData', () => {
       .querySelector('#content > h2')
       ?.textContent
       ?.trim()
-    presenceData.largeImageKey = Assets.Post
+    presenceData.largeImageKey = ActivityAssets.Post
     presenceData.buttons = [
-      { label: 'View Post', url: `https://dmoj.ca/post/${url[2][2]}` },
+      { label: 'View Post', url: `https://dmoj.ca/post/${url[2]?.[2]}` },
     ]
   }
   else if (url.includes('problems')) {
     presenceData.details = 'Browsing problems'
-    presenceData.largeImageKey = Assets.ProblemList
+    presenceData.largeImageKey = ActivityAssets.ProblemList
   }
   else if (url.includes('problem')) {
     const problemURL = `https://dmoj.ca/problem/${url[2]}`
@@ -59,15 +59,15 @@ presence.on('UpdateData', () => {
         .querySelector('#content > h2 > a')
         ?.textContent
         ?.trim()
-      presenceData.largeImageKey = Assets.Submit
+      presenceData.largeImageKey = ActivityAssets.Submit
     }
     else if (url.includes('submissions')) {
       presenceData.details = 'Viewing submissions to problem:'
       presenceData.state = document.querySelectorAll('.tabs > h2 > a')[
       // eslint messed up the next line
         document.querySelectorAll('.tabs > h2 > a').length - 1
-      ].textContent?.trim()
-      presenceData.largeImageKey = Assets.SubmissionList
+      ]?.textContent?.trim()
+      presenceData.largeImageKey = ActivityAssets.SubmissionList
       presenceData.buttons.push({
         label: 'View Submissions',
         url: `${problemURL}/submissions/`,
@@ -79,7 +79,7 @@ presence.on('UpdateData', () => {
         .querySelector('.tabs > h2 > a')
         ?.textContent
         ?.trim()
-      presenceData.largeImageKey = Assets.SubmissionList
+      presenceData.largeImageKey = ActivityAssets.SubmissionList
       presenceData.buttons.push({
         label: 'View Best Submissions',
         url: `${problemURL}/rank/`,
@@ -91,7 +91,7 @@ presence.on('UpdateData', () => {
         .querySelector('#content > h2 > a')
         ?.textContent
         ?.trim()
-      presenceData.largeImageKey = Assets.Editorial
+      presenceData.largeImageKey = ActivityAssets.Editorial
       presenceData.buttons.push({
         label: 'View Editorial',
         url: `${problemURL}/editorial/`,
@@ -103,7 +103,7 @@ presence.on('UpdateData', () => {
         .querySelector('#content > h2 > a')
         ?.textContent
         ?.trim()
-      presenceData.largeImageKey = Assets.Ticket
+      presenceData.largeImageKey = ActivityAssets.Ticket
     }
     else {
       const problemName = document
@@ -113,7 +113,7 @@ presence.on('UpdateData', () => {
       const problemPoints = document.querySelector('.pi-value')?.textContent?.trim()
 
       presenceData.details = 'Viewing problem:'
-      presenceData.largeImageKey = Assets.Problem
+      presenceData.largeImageKey = ActivityAssets.Problem
 
       if (problemPoints === '1')
         presenceData.state = `${problemName} (${problemPoints} point)`
@@ -133,7 +133,7 @@ presence.on('UpdateData', () => {
           ?.textContent
           ?.trim()
         presenceData.state = user
-        presenceData.largeImageKey = Assets.SubmissionList
+        presenceData.largeImageKey = ActivityAssets.SubmissionList
         presenceData.buttons = [
           {
             label: 'View Submissions',
@@ -148,7 +148,7 @@ presence.on('UpdateData', () => {
           ?.textContent
           ?.trim()
         presenceData.state = user
-        presenceData.largeImageKey = Assets.SubmissionList
+        presenceData.largeImageKey = ActivityAssets.SubmissionList
         presenceData.buttons = [
           {
             label: 'View Submissions',
@@ -160,7 +160,7 @@ presence.on('UpdateData', () => {
     }
     else {
       presenceData.details = 'Browsing submissions'
-      presenceData.largeImageKey = Assets.SubmissionList
+      presenceData.largeImageKey = ActivityAssets.SubmissionList
     }
   }
   else if (url.includes('submission')) {
@@ -169,7 +169,7 @@ presence.on('UpdateData', () => {
       .querySelector('#content > h2 > a')
       ?.textContent
       ?.trim()
-    presenceData.largeImageKey = Assets.Submission
+    presenceData.largeImageKey = ActivityAssets.Submission
     presenceData.buttons = [
       {
         label: 'View Submission',
@@ -183,11 +183,11 @@ presence.on('UpdateData', () => {
       .querySelector('#content > h2 > a')
       ?.textContent
       ?.trim()
-    presenceData.largeImageKey = Assets.Source
+    presenceData.largeImageKey = ActivityAssets.Source
   }
   else if (url.includes('organizations')) {
     presenceData.details = 'Browsing organizations'
-    presenceData.largeImageKey = Assets.Organization
+    presenceData.largeImageKey = ActivityAssets.Organization
   }
   else if (url.includes('organization')) {
     const organizationURL = `https://dmoj.ca/organization/${url[2]}`
@@ -203,16 +203,16 @@ presence.on('UpdateData', () => {
 
     if (url.includes('users')) {
       presenceData.details = 'Viewing members of organization:'
-      presenceData.largeImageKey = Assets.Users
+      presenceData.largeImageKey = ActivityAssets.Users
     }
     else {
       presenceData.details = 'Viewing organization:'
-      presenceData.largeImageKey = Assets.Organization
+      presenceData.largeImageKey = ActivityAssets.Organization
     }
   }
   else if (url.includes('users')) {
     presenceData.details = 'Viewing leaderboard'
-    presenceData.largeImageKey = Assets.Leaderboard
+    presenceData.largeImageKey = ActivityAssets.Leaderboard
   }
   else if (url.includes('user')) {
     const userHeader = document.querySelector('.tabs > h2')?.textContent?.trim()
@@ -234,7 +234,7 @@ presence.on('UpdateData', () => {
         const userURL = `https://dmoj.ca/user/${user}`
 
         presenceData.state = `${user} (Rank: #${userRank})`
-        presenceData.largeImageKey = Assets.SubmissionList
+        presenceData.largeImageKey = ActivityAssets.SubmissionList
         presenceData.buttons = [
           { label: 'View User', url: userURL },
           { label: 'View Solved Problems', url: `${userURL}/solved` },
@@ -249,7 +249,7 @@ presence.on('UpdateData', () => {
         const userURL = `https://dmoj.ca/user/${user}`
 
         presenceData.state = `${user} (Rank: #${userRank})`
-        presenceData.largeImageKey = Assets.SubmissionList
+        presenceData.largeImageKey = ActivityAssets.SubmissionList
         presenceData.buttons = [
           { label: 'View User', url: userURL },
           { label: 'View Solved Problems', url: `${userURL}/solved` },
@@ -271,7 +271,7 @@ presence.on('UpdateData', () => {
           ?.textContent
           ?.trim()
         presenceData.state = `${user} (Rank: #${userRank})`
-        presenceData.largeImageKey = Assets.User
+        presenceData.largeImageKey = ActivityAssets.User
         presenceData.buttons = [
           { label: 'View User', url: `https://dmoj.ca/user/${user}` },
         ]
@@ -284,7 +284,7 @@ presence.on('UpdateData', () => {
           ?.split(' ') ?? []
 
         presenceData.state = `${user} (Rank: #${userRank})`
-        presenceData.largeImageKey = Assets.User
+        presenceData.largeImageKey = ActivityAssets.User
         presenceData.buttons = [
           { label: 'View User', url: `https://dmoj.ca/user/${user}` },
         ]
@@ -297,11 +297,11 @@ presence.on('UpdateData', () => {
       .querySelector('#user-links > ul > li > a > span > span > b')
       ?.textContent
       ?.trim()
-    presenceData.largeImageKey = Assets.EditProfile
+    presenceData.largeImageKey = ActivityAssets.EditProfile
   }
   else if (url.includes('contests')) {
     presenceData.details = 'Browsing contests'
-    presenceData.largeImageKey = Assets.Contest
+    presenceData.largeImageKey = ActivityAssets.Contest
   }
   else if (url.includes('contest')) {
     const contestURL = `https://dmoj.ca/contests/${url[2]}`
@@ -314,7 +314,7 @@ presence.on('UpdateData', () => {
 
     if (url.includes('stats')) {
       presenceData.details = 'Viewing statistics of contest:'
-      presenceData.largeImageKey = Assets.Statistics
+      presenceData.largeImageKey = ActivityAssets.Statistics
       presenceData.buttons.push({
         label: 'View Statistics',
         url: `${contestURL}/stats`,
@@ -322,7 +322,7 @@ presence.on('UpdateData', () => {
     }
     else if (url.includes('ranking')) {
       presenceData.details = 'Viewing rankings of contest:'
-      presenceData.largeImageKey = Assets.Leaderboard
+      presenceData.largeImageKey = ActivityAssets.Leaderboard
       presenceData.buttons.push({
         label: 'View Rankings',
         url: `${contestURL}/ranking`,
@@ -330,7 +330,7 @@ presence.on('UpdateData', () => {
     }
     else if (url.includes('participations')) {
       presenceData.details = 'Viewing participation of contest:'
-      presenceData.largeImageKey = Assets.Users
+      presenceData.largeImageKey = ActivityAssets.Users
       presenceData.buttons.push({
         label: 'View Participation',
         url: `${contestURL}/participations`,
@@ -338,38 +338,38 @@ presence.on('UpdateData', () => {
     }
     else {
       presenceData.details = 'Viewing contest:'
-      presenceData.largeImageKey = Assets.Contest
+      presenceData.largeImageKey = ActivityAssets.Contest
     }
   }
   else if (url.includes('about')) {
     presenceData.details = 'Viewing about page'
-    presenceData.largeImageKey = Assets.About
+    presenceData.largeImageKey = ActivityAssets.About
   }
   else if (url.includes('status')) {
     presenceData.details = 'Viewing status'
-    presenceData.largeImageKey = Assets.Status
+    presenceData.largeImageKey = ActivityAssets.Status
   }
   else if (url.includes('runtimes')) {
     if (url.includes('matrix')) {
       presenceData.details = 'Viewing version matrix'
-      presenceData.largeImageKey = Assets.Source
+      presenceData.largeImageKey = ActivityAssets.Source
     }
     else {
       presenceData.details = 'Viewing runtimes'
-      presenceData.largeImageKey = Assets.Source
+      presenceData.largeImageKey = ActivityAssets.Source
     }
   }
   else if (url.includes('tips')) {
     presenceData.details = 'Viewing tips'
-    presenceData.largeImageKey = Assets.About
+    presenceData.largeImageKey = ActivityAssets.About
   }
   else if (url.includes('api')) {
     presenceData.details = 'Viewing API'
-    presenceData.largeImageKey = Assets.Source
+    presenceData.largeImageKey = ActivityAssets.Source
   }
   else {
     presenceData.details = 'Viewing home page'
-    presenceData.largeImageKey = Assets.Home
+    presenceData.largeImageKey = ActivityAssets.Home
   }
 
   presence.setActivity(presenceData)

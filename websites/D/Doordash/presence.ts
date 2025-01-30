@@ -65,7 +65,7 @@ presence.on('UpdateData', async () => {
       const spanArray = Array.from(document.querySelectorAll('.sc-hFLmAl'))
 
       for (const span of spanArray) {
-        if (span.attributes[1].value === '#EB1700')
+        if (span.attributes[1]?.value === '#EB1700')
           activeSpan = span as HTMLSpanElement
       }
 

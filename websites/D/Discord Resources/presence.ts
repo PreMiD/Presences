@@ -1,8 +1,10 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '973710731549745152',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
-const enum Assets {
+enum ActivityAssets {
   Drw = 'https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Resources/assets/0.png',
   Wiki = 'https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Resources/assets/1.png',
   Blog = 'https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Resources/assets/2.png',
@@ -17,7 +19,7 @@ presence.on('UpdateData', async () => {
   const { pathname, search } = window.location
   switch (true) {
     case pathname.includes('/resources/'): {
-      presenceData.smallImageKey = Assets.Wiki
+      presenceData.smallImageKey = ActivityAssets.Wiki
       presenceData.smallImageText = 'Wiki'
       presenceData.details = 'Reading a wiki page'
       presenceData.state = document.title.split('|')[0]
@@ -31,7 +33,7 @@ presence.on('UpdateData', async () => {
       break
     }
     case pathname.includes('/blog'): {
-      presenceData.smallImageKey = Assets.Blog
+      presenceData.smallImageKey = ActivityAssets.Blog
       presenceData.smallImageText = 'Blog'
       if (document.title === 'Blog | Discord Resources') {
         presenceData.details = 'Viewing the main page'
@@ -71,7 +73,7 @@ presence.on('UpdateData', async () => {
       break
     }
     default: {
-      presenceData.smallImageKey = Assets.Unsupported
+      presenceData.smallImageKey = ActivityAssets.Unsupported
       presenceData.smallImageText = 'Unknown'
       presenceData.details = 'Viewing an unsupported page'
     }

@@ -5,7 +5,7 @@ import {
   giveArticle,
   makeProgressBar,
   updateUndefinedKeys,
-} from './util'
+} from './util.js'
 
 const presence = new Presence({
   clientId: '1177802176140156998',
@@ -306,7 +306,7 @@ presence.on('UpdateData', async () => {
       break
 
     case 'placement':
-      setLang(path[2])
+      setLang(path[2] ?? '')
       presenceData.details = `Taking ${language.name} placement test`
       handleLesson(path)
       break
@@ -329,7 +329,7 @@ presence.on('UpdateData', async () => {
       presenceData.smallImageText = 'viewing courses'
       break
     case 'enroll':
-      setLang(path[2])
+      setLang(path[2] ?? '')
       presenceData.details = `Viewing ${language.name} course`
       break
 
@@ -348,7 +348,7 @@ presence.on('UpdateData', async () => {
       const i = users.findIndex(user => user.username === username)
 
       if (i !== -1) {
-        updateUndefinedKeys(users[i], {
+        updateUndefinedKeys(users[i]!, {
           username,
           displayName,
           img,
@@ -377,7 +377,7 @@ presence.on('UpdateData', async () => {
       break
     }
     case 'settings':
-      presenceData.details = `In ${deEsser(path[2])} settings`
+      presenceData.details = `In ${deEsser(path[2] ?? '')} settings`
       presenceData.smallImageKey = IMAGE.duoTool
       break
   }

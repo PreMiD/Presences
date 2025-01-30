@@ -1,9 +1,11 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1204425198741491742',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/Docchi/assets/logo.png',
 }
 
@@ -46,7 +48,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     type: ActivityType.Watching,
     name: 'Docchi',
@@ -220,15 +222,15 @@ presence.on('UpdateData', async () => {
       }
       break
     default:
-      presenceData.details = pages[pathname].desc || 'Nieznana aktywność 🤨'
-      presenceData.smallImageKey = pages[pathname].image || Assets.Viewing
+      presenceData.details = pages[pathname]?.desc || 'Nieznana aktywność 🤨'
+      presenceData.smallImageKey = pages[pathname]?.image || Assets.Viewing
       break
   }
 
   if (!buttons || privacy)
     delete presenceData.buttons
   if (privacy) {
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
     delete presenceData.state
   }
   if (!presenceData.details)

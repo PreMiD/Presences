@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '843711390539841577',
 })
@@ -65,12 +67,12 @@ presence.on('UpdateData', async () => {
         default:
           if (pathname.includes('/dashboard/l/')) {
             const [, link] = pathname.split('/dashboard/l/')
-            presenceData.details = `Editing 🔗 ${link.split('/')[0]} link`
-            presenceData.state = `🏓 Tab: ${link.split('/')[1]}`
+            presenceData.details = `Editing 🔗 ${link?.split('/')[0]} link`
+            presenceData.state = `🏓 Tab: ${link?.split('/')[1]}`
             presenceData.buttons = [
               {
                 label: 'Visit Link',
-                url: `https://dsc.gg/${link.split('/')[0]}`,
+                url: `https://dsc.gg/${link?.split('/')[0]}`,
               },
             ]
           }

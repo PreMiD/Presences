@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 let presence: Presence, newID: string, latestID: string
 function presenceSet(pathname: string): Presence {
   if (!latestID && !newID) {

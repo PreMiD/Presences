@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/Destiny%20Item%20Manager/assets/logo.png',
   GuardianWarlock = 'https://cdn.rcd.gg/PreMiD/websites/D/Destiny%20Item%20Manager/assets/0.png',
   GuardianTitan = 'https://cdn.rcd.gg/PreMiD/websites/D/Destiny%20Item%20Manager/assets/1.png',
@@ -12,7 +12,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 
@@ -39,15 +39,15 @@ presence.on('UpdateData', async () => {
 
       switch (guardian) {
         case 'Titan': {
-          presenceData.smallImageKey = Assets.GuardianTitan
+          presenceData.smallImageKey = ActivityAssets.GuardianTitan
           break
         }
         case 'Warlock': {
-          presenceData.smallImageKey = Assets.GuardianWarlock
+          presenceData.smallImageKey = ActivityAssets.GuardianWarlock
           break
         }
         case 'Hunter': {
-          presenceData.smallImageKey = Assets.GuardianHunter
+          presenceData.smallImageKey = ActivityAssets.GuardianHunter
           break
         }
       }

@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '691534544301457449',
 })
@@ -75,7 +77,7 @@ presence.on('UpdateData', async () => {
     else if (document.location.href.includes('&ia=stock')) {
       presenceData.details = await handleFormatting(
         'stockSearch',
-        document.querySelectorAll('.stocks__header')[0].querySelectorAll('a')[0]
+        document.querySelectorAll('.stocks__header')[0]?.querySelectorAll('a')[0]
           ?.textContent ?? '',
       )
     }

@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '937393073539911730',
 })
@@ -35,7 +37,7 @@ presence.on('UpdateData', async () => {
       case 'drawit': {
         const scores = document.querySelectorAll('#playersContainer .player')
         for (let i = 0; i < scores.length; i++) {
-          if (scores[i].querySelector('.name')?.textContent === playerName) {
+          if (scores[i]!.querySelector('.name')?.textContent === playerName) {
             if (
               document.querySelector<HTMLDivElement>('#drawtools')?.style.display !== 'none'
             ) {
@@ -44,12 +46,12 @@ presence.on('UpdateData', async () => {
             }
 
             presenceData.state = `Σκορ: ${
-              scores[i].querySelector('.score')?.textContent
+              scores[i]!.querySelector('.score')?.textContent
             } | Γύρος: ${document
               .querySelector('#round b')
               ?.textContent
               ?.replaceAll(' ', '')} | Θέση #${
-              Number.parseInt(scores[i].getAttribute('index') ?? '0') + 1
+              Number.parseInt(scores[i]!.getAttribute('index') ?? '0') + 1
             }/${scores.length}`
           }
         }
@@ -67,15 +69,15 @@ presence.on('UpdateData', async () => {
         )
         for (let i = 0; i < scores.length; i++) {
           if (
-            scores[i].querySelector('.quiz_playerName')?.textContent
+            scores[i]!.querySelector('.quiz_playerName')?.textContent
             === playerName
           ) {
             presenceData.state = `Σκορ: ${
-              scores[i].querySelector('.quiz_playerPoints')?.textContent
+              scores[i]!.querySelector('.quiz_playerPoints')?.textContent
             } | Γύρος: ${
               Number.parseInt(document.querySelector('#countRound')?.textContent ?? '0') || '–'
             } | Θέση #${Number.parseInt(
-              scores[i].querySelector('.quiz_playerNumber')?.textContent ?? '0',
+              scores[i]!.querySelector('.quiz_playerNumber')?.textContent ?? '0',
             )}/${scores.length}`
           }
         }
@@ -129,15 +131,15 @@ presence.on('UpdateData', async () => {
             ) {
               const winnerName = player.getAttribute('shownname')!
               if (winnerName in state)
-                state[winnerName].winner = true
+                state[winnerName]!.winner = true
             }
           }
         }
         let stateString = ''
         for (const key in state) {
           const value = state[key]
-          stateString += `${value.winner ? ' 🏆 ' : ''}${key}: ${
-            value.score
+          stateString += `${value!.winner ? ' 🏆 ' : ''}${key}: ${
+            value!.score
           } – `
         }
         if (Object.keys(state).length === nPlayers || gameOverVisible) {
@@ -177,23 +179,23 @@ presence.on('UpdateData', async () => {
             `#nickholder_${pos} #tichugrand`,
           )
           if (betElement?.style.display !== 'none')
-            playerState[pos].bet = betElement!.className
+            playerState[pos]!.bet = betElement!.className
         }
 
         let betElement = document.querySelector<HTMLDivElement>('#btnTichuToggle')
         if (betElement?.style.display !== 'none')
-          playerState.bot.bet = 'tichu'
+          playerState.bot!.bet = 'tichu'
 
         betElement = document.querySelector<HTMLDivElement>('#btnGrandToggle')
         if (betElement?.style.display !== 'none')
-          playerState.bot.bet = 'grand'
+          playerState.bot!.bet = 'grand'
 
         for (const pos in playerState) {
           const player = playerState[pos];
           (['bottom', 'up'].includes(pos) ? teamPlayers : opPlayers).push(
             `${
-              player.bet === 'tichu' ? '🟠' : player.bet === 'grand' ? '🔴' : ''
-            }${player.name}`,
+              player!.bet === 'tichu' ? '🟠' : player!.bet === 'grand' ? '🔴' : ''
+            }${player!.name}`,
           )
         }
 

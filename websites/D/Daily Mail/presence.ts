@@ -1,19 +1,21 @@
-import { findPage } from './findPage'
-import { handleNewsPage } from './newsPage'
+import { ActivityType } from 'premid'
+
+import { findPage } from './findPage.js'
+import { handleNewsPage } from './newsPage.js'
 
 const presence = new Presence({
   clientId: '1224125578504966165',
 })
 const sTs = Math.floor(Date.now() / 1000)
 
-export const enum Assets {
+export enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/Daily%20Mail/assets/logo.png',
   ExclIco = 'https://cdn.rcd.gg/PreMiD/websites/D/Daily%20Mail/assets/0.png',
   PlayIco = 'https://cdn.rcd.gg/PreMiD/resources/play.png',
   PauseIco = 'https://cdn.rcd.gg/PreMiD/resources/pause.png',
 }
 
-const enum Pages {
+enum Pages {
   homepage = 'home',
   news = 'news',
   wellness = 'wellness-us', // apparently there's....no uk page?
@@ -34,10 +36,10 @@ presence.on('UpdateData', async () => {
 
   // all urls are formatted "category/pagename"
   const [catNoCountry, titleWithCountry] = catToCountry(
-    document.location.pathname.split('/')[1],
+    document.location.pathname.split('/')[1]!,
   )
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     name: titleWithCountry,
     type: ActivityType.Playing,
     startTimestamp: sTs,
