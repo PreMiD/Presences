@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1051110545723506718',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/I/India%20Today%20News/assets/logo.png',
 }
 
@@ -49,7 +51,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     details: 'Unsupported page',
   }
 
@@ -146,7 +148,7 @@ presence.on('UpdateData', async () => {
       .querySelector('div.PhotoCard_card__pic__axT6x')
       ?.querySelector('img')
       ?.src
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.smallImageText = 'India Today News - Photos'
     presenceData.buttons = [
       {
@@ -160,8 +162,8 @@ presence.on('UpdateData', async () => {
         .split('/photos')[0]
         ?.replace('/', '')
         ?.split('/')[1]
-        .toUpperCase()} Photo Gallery`
-      presenceData.largeImageKey = Assets.Logo
+        ?.toUpperCase()} Photo Gallery`
+      presenceData.largeImageKey = ActivityAssets.Logo
       presenceData.smallImageKey = Assets.Reading
       presenceData.smallImageText = 'India Today News - Photo Gallery'
       presenceData.buttons = [
@@ -206,7 +208,7 @@ presence.on('UpdateData', async () => {
         .split('/videos')[0]
         ?.replace('/', '')
         ?.split('/')[1]
-        .toUpperCase()} Videos`
+        ?.toUpperCase()} Videos`
       presenceData.smallImageKey = Assets.Reading
       presenceData.smallImageText = 'India Today News - Videos'
       presenceData.buttons = [
@@ -223,8 +225,8 @@ presence.on('UpdateData', async () => {
       ?.querySelector('h1')
       ?.textContent
       ?.split('Today')
-    presenceData.details = weather?.[0].trim()
-    presenceData.state = weather?.[1].trim()
+    presenceData.details = weather?.[0]?.trim()
+    presenceData.state = weather?.[1]?.trim()
     presenceData.smallImageKey = document
       .querySelector('span.wkl_li_icn')
       ?.querySelector('img')
@@ -280,10 +282,10 @@ presence.on('UpdateData', async () => {
     ]
 
     if (pathname.includes('/india/story'))
-      presenceData.largeImageKey = Assets.Logo
+      presenceData.largeImageKey = ActivityAssets.Logo
 
     if (multipleAuthors) {
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
       presenceData.smallImageText = 'Multiple Authors'
     }
   }

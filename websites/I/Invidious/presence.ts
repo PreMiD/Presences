@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '761617743593209869',
 })
@@ -9,8 +11,8 @@ function getTime() {
     ?.split(':')
     .map(n => Number(n)) ?? []
   if (time.length === 3)
-    return Date.now() - (time[0] * 3600 + time[1] * 60 + time[2]) * 1000
-  else return Date.now() - (time[0] * 60 + time[1]) * 1000
+    return Date.now() - (time[0]! * 3600 + time[1]! * 60 + time[2]!) * 1000
+  else return Date.now() - (time[0]! * 60 + time[1]!) * 1000
 }
 
 presence.on('UpdateData', async () => {

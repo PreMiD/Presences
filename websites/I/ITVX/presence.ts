@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 interface ChannelSlotData {
   displayTitle: string
   start: string
@@ -52,7 +54,7 @@ interface ProgrammeNextData {
   }
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/I/ITVX/assets/logo.png',
 }
 
@@ -71,7 +73,7 @@ function fetchNextData<T>(): T | null {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: Date.now(),
   }
   const { pathname: path } = document.location
@@ -107,8 +109,8 @@ presence.on('UpdateData', async () => {
 
         // If the current timestamp is after the slot starts, and before it ends
         if (
-          timestampNow > nowSlotTimestamps[0]
-          && timestampNow < nowSlotTimestamps[1]
+          timestampNow > nowSlotTimestamps[0]!
+          && timestampNow < nowSlotTimestamps[1]!
         ) {
           currentSlot = currentChannelMetadata.slots.now
         }
@@ -148,7 +150,7 @@ presence.on('UpdateData', async () => {
         }
         else if (
           /^[-+]?[0-9A-F]+(?:\.[0-9A-F]*)?$/i.test(
-            path.split('/')[path.split('/').length - 1],
+            path.split('/')[path.split('/').length - 1]!,
           )
         ) {
           delete presenceData.startTimestamp
@@ -165,7 +167,7 @@ presence.on('UpdateData', async () => {
 
           const [video] = document.querySelectorAll('video')
 
-          if (!video.paused) {
+          if (video && !video.paused) {
             [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(
               Math.floor(video.currentTime),
               Math.floor(video.duration),

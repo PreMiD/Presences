@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1052119362015866882',
 })
@@ -19,7 +21,7 @@ async function getStrings() {
     await presence.getSetting<string>('lang').catch(() => 'en'),
   )
 }
-const enum Assets {
+enum ActivityAssets {
   Ad = 'https://cdn.rcd.gg/PreMiD/websites/I/IDLIX/assets/0.png',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/I/IDLIX/assets/logo.png',
 }
@@ -68,7 +70,7 @@ function videoDetails(presenceData: PresenceData, href: string) {
       .querySelector('[class="owl-wrapper"]')
       ?.querySelector('img')
       ?.getAttribute('src')
-      ?? Assets.Logo
+      ?? ActivityAssets.Logo
   if (!Number.isNaN(duration)) {
     presenceData.details = title
     presenceData.state = document.querySelector('[class="epih3"]')?.textContent ?? ''
@@ -117,7 +119,7 @@ presence.on('UpdateData', async () => {
     return
   }
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
     type: ActivityType.Watching,
   }
@@ -223,8 +225,8 @@ presence.on('UpdateData', async () => {
   }
   if (!buttons && presenceData.buttons)
     delete presenceData.buttons
-  if (!covers && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if (!covers && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
 
   if (presenceData.details)
     presence.setActivity(presenceData)

@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '809748404963770398',
 })
@@ -27,7 +29,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000)
 let strings: Awaited<ReturnType<typeof getStrings>>
 let oldLang: string | null = null
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/I/iQIYI/assets/0.png',
   Logo2 = 'https://cdn.rcd.gg/PreMiD/websites/I/iQIYI/assets/1.png',
 }
@@ -47,7 +49,7 @@ presence.on('UpdateData', async () => {
   }
 
   const presenceData: PresenceData = {
-    largeImageKey: [Assets.Logo2, Assets.Logo][logo],
+    largeImageKey: [ActivityAssets.Logo2, ActivityAssets.Logo][logo],
     details: strings.browse,
     smallImageKey: Assets.Search,
     startTimestamp: browsingTimestamp,
@@ -112,16 +114,16 @@ presence.on('UpdateData', async () => {
       ? data.ep?.match(/([1-9]\d{0,2} ?\([1-9]\d?\))/g) ?? []
       : data.ep?.match(/[1-9]\d{0,2}/g) ?? []
     const isPreview = lastestEp && contentEp && !isVShow && !possiblyVShow
-      ? Number.parseInt(contentEp[0], 10) > Number.parseInt(lastestEp[0], 10)
+      ? Number.parseInt(contentEp[0]!, 10) > Number.parseInt(lastestEp[0]!, 10)
       : data.ep?.toLowerCase().includes('preview')
 
     if (!data.ep && !isVShow && isMovie)
       data.ep = 'Movie'
     if (possiblyVShow) {
       if (contentEp?.length) {
-        data.ep = `${strings.episode} ${contentEp[0].match(/.+?(?=\()/g)?.[0]} ${
-          contentEp[0].includes('(')
-            ? `- ${contentEp[0].match(/(\([1-9]\d?\))/g)?.[0]}`
+        data.ep = `${strings.episode} ${contentEp[0]?.match(/.+?(?=\()/g)?.[0]} ${
+          contentEp[0]?.includes('(')
+            ? `- ${contentEp[0]?.match(/(\([1-9]\d?\))/g)?.[0]}`
             : 'Variety show'
         }`
       }
@@ -167,7 +169,7 @@ presence.on('UpdateData', async () => {
                 ? strings.watchMovie
                 : strings.watchEpisode,
             url: `https://www.iq.com/play/${
-              document.URL.split('?')[0].split('/')[4]
+              document.URL.split('?')[0]?.split('/')[4]
             }`,
           },
         ]

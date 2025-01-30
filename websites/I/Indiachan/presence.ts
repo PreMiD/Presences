@@ -33,8 +33,8 @@ presence.on('UpdateData', async () => {
     presenceData.details = 'Dhandho'
 
   const parts = p.split('/')
-  presenceData.smallImageText = `Browsing /${parts[1].split('.')[0]}/ - ${
-    parts[2] === '' ? '1' : parts[2].split('.')[0]
+  presenceData.smallImageText = `Browsing /${parts[1]?.split('.')[0]}/ - ${
+    parts[2] === '' ? '1' : parts[2]?.split('.')[0]
   }`
 
   if (p.endsWith('catalog.html')) {
@@ -48,7 +48,7 @@ presence.on('UpdateData', async () => {
   }
   else if (p.includes('res')) {
     presenceData.smallImageText = `Reading thread #${
-      p.split('/')[3].split('.')[0]
+      p.split('/')[3]?.split('.')[0]
     }`
   }
   else if (p.endsWith('Rules.html') || p.endsWith('rules.html')) {

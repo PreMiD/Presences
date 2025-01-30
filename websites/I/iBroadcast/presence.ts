@@ -1,9 +1,11 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '861594094623129691',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/I/iBroadcast/assets/logo.png',
 }
 
@@ -11,7 +13,7 @@ presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     largeImageKey: document.querySelector<HTMLImageElement>(
       '.mgr-container-artwork-single,.mgr-player-artwork-image',
-    )?.src ?? Assets.Logo,
+    )?.src ?? ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   } as PresenceData
   const cover = await presence.getSetting<boolean>('cover')
@@ -68,7 +70,7 @@ presence.on('UpdateData', async () => {
           }
           else {
             presenceData.details = 'Viewing all album artists'
-            presenceData.largeImageKey = Assets.Logo
+            presenceData.largeImageKey = ActivityAssets.Logo
           }
           break
         }
@@ -79,8 +81,8 @@ presence.on('UpdateData', async () => {
     }
   }
 
-  if (!cover && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if (!cover && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (presenceData.details)
     presence.setActivity(presenceData)
   else presence.setActivity()

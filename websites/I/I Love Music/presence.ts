@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '477919120789078026',
 })
@@ -15,7 +17,7 @@ async function getStrings() {
 let strings: Awaited<ReturnType<typeof getStrings>>
 let oldLang: string | null = null
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/I/I%20Love%20Music/assets/logo.png',
 }
 
@@ -26,7 +28,7 @@ async function imgPath(path: string, hostname: string) {
     else return `https://${hostname}${path}`
   }
   else {
-    return Assets.Logo
+    return ActivityAssets.Logo
   }
 }
 function capitalizeFirstLetter(string: string) {
@@ -39,7 +41,7 @@ function capitalizeFirstLetter(string: string) {
 }
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingStamp,
   }
   const { pathname, hostname, href } = document.location

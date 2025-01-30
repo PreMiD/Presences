@@ -163,7 +163,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Direct Messages'
       break
     }
-    case profileName?.split(')')[0].replace('@', '') === path[1]: {
+    case profileName?.split(')')[0]?.replace('@', '') === path[1]: {
       const profilePicture = document.querySelector<HTMLImageElement>('img._6q-tv')
 
       presenceData.details = `Viewing a Profile${privacySetting ? '' : ':'}`
@@ -172,8 +172,8 @@ presence.on('UpdateData', async () => {
           .querySelector('head > title')
           ?.textContent
           ?.split('(')[0]
-          .trim() ?? 'Unknown'
-      } (${profileName.split(')')[0]})`
+          ?.trim() ?? 'Unknown'
+      } (${profileName?.split(')')[0]})`
 
       if (profilePicture)
         presenceData.smallImageKey = await getShortURL(profilePicture.src)
