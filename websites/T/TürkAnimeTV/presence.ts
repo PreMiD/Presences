@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 interface Video {
   paused: boolean
   duration: number
@@ -62,7 +64,7 @@ presence.on('UpdateData', async () => {
     presenceData.buttons = [
       {
         label: (await strings).watchEpisode,
-        url: document.URL.split('&')[0],
+        url: document.URL.split('&')[0]!,
       },
       {
         label: (await strings).anime,

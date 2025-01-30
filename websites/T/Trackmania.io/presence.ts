@@ -26,7 +26,7 @@ presence.on('UpdateData', async () => {
   if (window.location.hash.startsWith('#')) {
     if (window.location.hash.startsWith('#/totd')) {
       if (!window.location.hash.includes('leaderboard')) {
-        const title = document.querySelectorAll('.title')[1].textContent
+        const title = document.querySelectorAll('.title')[1]?.textContent
         presenceData.details = 'Track Of The Day'
         presenceData.state = title?.substring(title.indexOf('-') + 2)
       }
@@ -141,7 +141,7 @@ presence.on('UpdateData', async () => {
       }
     }
     else if (window.location.hash.startsWith('#/top')) {
-      presenceData.details = document.querySelectorAll('.title')[1].textContent
+      presenceData.details = document.querySelectorAll('.title')[1]?.textContent
       presenceData.state = 'Leaderboard'
     }
     else if (window.location.hash.startsWith('#/matches')) {
@@ -151,7 +151,7 @@ presence.on('UpdateData', async () => {
       presenceData.state = 'Matches'
       if (!window.location.hash.endsWith('match')) {
         presenceData.details = 'Match'
-        presenceData.state = document.querySelectorAll('.title')[1].textContent
+        presenceData.state = document.querySelectorAll('.title')[1]?.textContent
       }
     }
     else if (window.location.hash.startsWith('#/players')) {
@@ -171,14 +171,14 @@ presence.on('UpdateData', async () => {
       presenceData.state = 'Player'
       if (!window.location.hash.endsWith('player')) {
         presenceData.details = 'Player'
-        presenceData.state = document.querySelectorAll('.title')[1].textContent
+        presenceData.state = document.querySelectorAll('.title')[1]?.textContent
       }
     }
     else if (
       window.location.hash.startsWith('#/news')
       || window.location.hash.startsWith('#/ads')
     ) {
-      presenceData.state = document.querySelectorAll('.title')[1].textContent
+      presenceData.state = document.querySelectorAll('.title')[1]?.textContent
     }
     else if (window.location.hash.startsWith('#/leaderboard')) {
       presenceData.details = 'Leaderboard'

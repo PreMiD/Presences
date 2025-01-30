@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   United = 'https://cdn.rcd.gg/PreMiD/websites/T/TrackMania%20Exchange/assets/0.png',
   Nforever = 'https://cdn.rcd.gg/PreMiD/websites/T/TrackMania%20Exchange/assets/1.png',
   Sunrise = 'https://cdn.rcd.gg/PreMiD/websites/T/TrackMania%20Exchange/assets/2.png',
@@ -72,7 +72,7 @@ function getURLParam(urlParam: string): string {
     }
   }
   else {
-    let pageType: string | null = null
+    let pageType: string | undefined | null = null
     let idPrefix = 'ctl03'
 
     /*
@@ -176,25 +176,25 @@ function getURLParam(urlParam: string): string {
 
     switch (currentURL.host) {
       case 'united.tm-exchange.com':
-        presenceData.smallImageKey = Assets.United
+        presenceData.smallImageKey = ActivityAssets.United
         presenceData.smallImageText = 'United (TMUF-X)'
         idPrefix = '_ctl1'
         break
       case 'tmnforever.tm-exchange.com':
-        presenceData.smallImageKey = Assets.Nforever
+        presenceData.smallImageKey = ActivityAssets.Nforever
         presenceData.smallImageText = 'Nations Forever (TMNF-X)'
         idPrefix = 'ctl01'
         break
       case 'nations.tm-exchange.com':
-        presenceData.smallImageKey = Assets.Nations
+        presenceData.smallImageKey = ActivityAssets.Nations
         presenceData.smallImageText = 'Nations'
         break
       case 'sunrise.tm-exchange.com':
-        presenceData.smallImageKey = Assets.Sunrise
+        presenceData.smallImageKey = ActivityAssets.Sunrise
         presenceData.smallImageText = 'Sunrise'
         break
       case 'original.tm-exchange.com':
-        presenceData.smallImageKey = Assets.Original
+        presenceData.smallImageKey = ActivityAssets.Original
         presenceData.smallImageText = 'Original'
         break
     }
@@ -266,7 +266,7 @@ function getURLParam(urlParam: string): string {
               ?.slice(9, textFilter.textContent.length - 1)}, ${searchSummary}`
           }
           else {
-            presenceData.state = `${searchSummary?.[0].toUpperCase()}${searchSummary?.slice(1)}`
+            presenceData.state = `${searchSummary?.[0]?.toUpperCase()}${searchSummary?.slice(1)}`
           }
 
           break
@@ -303,7 +303,7 @@ function getURLParam(urlParam: string): string {
             }, ${searchSummary}`
           }
           else {
-            presenceData.state = `${searchSummary?.[0].toUpperCase()}${searchSummary?.slice(1)}`
+            presenceData.state = `${searchSummary?.[0]?.toUpperCase()}${searchSummary?.slice(1)}`
           }
 
           break
@@ -353,7 +353,7 @@ function getURLParam(urlParam: string): string {
             }, ${searchSummary}`
           }
           else {
-            presenceData.state = `${searchSummary?.[0].toUpperCase()}${searchSummary?.slice(1)}`
+            presenceData.state = `${searchSummary?.[0]?.toUpperCase()}${searchSummary?.slice(1)}`
           }
 
           break
@@ -379,7 +379,7 @@ function getURLParam(urlParam: string): string {
             }, ${searchSummary}`
           }
           else {
-            presenceData.state = `${searchSummary?.[0].toUpperCase()}${searchSummary?.slice(1)}`
+            presenceData.state = `${searchSummary?.[0]?.toUpperCase()}${searchSummary?.slice(1)}`
           }
 
           break

@@ -1,8 +1,10 @@
+import { ActivityType, Assets } from 'premid'
+
 let elapsed = Math.floor(Date.now() / 1000)
 let prevUrl = document.location.href
 let oldLang = 'en'
 
-const enum Assets {
+enum ActivityAssets {
   BlackOps = 'https://cdn.rcd.gg/PreMiD/websites/T/Twitch/assets/0.png',
   DevMain = 'https://cdn.rcd.gg/PreMiD/websites/T/Twitch/assets/1.png',
   Purple = 'https://cdn.rcd.gg/PreMiD/websites/T/Twitch/assets/2.png',
@@ -115,13 +117,13 @@ async function getStrings() {
     oldLang,
   )
 }
-const devLogoArr = [Assets.DevMain, Assets.DevWhite, Assets.DevPurple]
+const devLogoArr = [ActivityAssets.DevMain, ActivityAssets.DevWhite, ActivityAssets.DevPurple]
 const logoArr = [
-  Assets.Logo,
-  Assets.BlackOps,
-  Assets.White,
-  Assets.Purple,
-  Assets.Pride,
+  ActivityAssets.Logo,
+  ActivityAssets.BlackOps,
+  ActivityAssets.White,
+  ActivityAssets.Purple,
+  ActivityAssets.Pride,
 ]
 
 let strings: Awaited<ReturnType<typeof getStrings>>
@@ -167,7 +169,7 @@ presence.on('UpdateData', async () => {
 
   let presenceData: PresenceData = {
     type: ActivityType.Watching,
-    largeImageKey: logoArr[logo] || Assets.Logo,
+    largeImageKey: logoArr[logo] || ActivityAssets.Logo,
     startTimestamp: elapsed,
   }
 
@@ -318,7 +320,7 @@ presence.on('UpdateData', async () => {
               .querySelector('.channel-root__info')
               ?.querySelector<HTMLImageElement>('img[class*="image-avatar"]')
           )?.src?.replace(/-\d{1,2}x\d{1,2}/, '-600x600')
-          ?? (logoArr[logo] || Assets.Logo)
+          ?? (logoArr[logo] || ActivityAssets.Logo)
           user += tab ? ` (${tab})` : ''
 
           presenceData.details = strings.viewProfile
@@ -362,8 +364,8 @@ presence.on('UpdateData', async () => {
           for (const drop of document.querySelector(
             '.drops-root__content > div:nth-child(4)',
           )?.children ?? []) {
-            if (drop.children[0].children[0].ariaExpanded === 'true')
-              activeDrop = `${drop.firstElementChild?.firstElementChild?.firstElementChild?.children[1].firstElementChild?.children[0].textContent} (${drop.firstElementChild?.firstElementChild?.firstElementChild?.children[1].firstElementChild?.children[1].textContent})`
+            if (drop.children[0]?.children[0]?.ariaExpanded === 'true')
+              activeDrop = `${drop.firstElementChild?.firstElementChild?.firstElementChild?.children[1]?.firstElementChild?.children[0]?.textContent} (${drop.firstElementChild?.firstElementChild?.firstElementChild?.children[1]?.firstElementChild?.children[1]?.textContent})`
           }
 
           if (activeDrop)
@@ -409,7 +411,7 @@ presence.on('UpdateData', async () => {
           }
         }
         else if (
-          ['gaming', 'irl', 'music', 'creative'].includes(pathSplit[2])
+          ['gaming', 'irl', 'music', 'creative'].includes(pathSplit[2]!)
         ) {
           presenceData.details = strings.viewCategory
           presenceData.state = getElement('h1.tw-title')
@@ -478,7 +480,7 @@ presence.on('UpdateData', async () => {
             )
             ?.src
             ?.replace(/-\d{1,2}x\d{1,2}/, '-600x600')
-            ?? (logoArr[logo] || Assets.Logo)
+            ?? (logoArr[logo] || ActivityAssets.Logo)
           presenceData.details = streamDetail
             .replace('%title%', title ?? '')
             .replace('%streamer%', streamer ?? '')
@@ -500,7 +502,7 @@ presence.on('UpdateData', async () => {
           presenceData.buttons = [
             {
               label: strings.watchStream,
-              url: document.URL.split('?')[0],
+              url: document.URL.split('?')[0]!,
             },
           ]
         }
@@ -523,7 +525,7 @@ presence.on('UpdateData', async () => {
             )
             ?.src
             ?.replace(/-\d{1,2}x\d{1,2}/, '-600x600')
-            ?? (logoArr[logo] || Assets.Logo)
+            ?? (logoArr[logo] || ActivityAssets.Logo)
           presenceData.details = vidDetail
             .replace('%title%', title ?? '')
             .replace('%uploader%', uploader ?? '')
@@ -542,7 +544,7 @@ presence.on('UpdateData', async () => {
           presenceData.buttons = [
             {
               label: strings.watchVideo,
-              url: document.URL.split('?')[0],
+              url: document.URL.split('?')[0]!,
             },
           ]
         }
@@ -726,7 +728,7 @@ presence.on('UpdateData', async () => {
           '/(\\w*|\\w*-\\w*)/archive/': {
             details: strings.blogArchive.replace(
               '{0}',
-              location.pathname.replace(/\/?$/, '/').split('/')[3],
+              location.pathname.replace(/\/?$/, '/').split('/')[3] ?? '',
             ),
           },
           '/(\\w*|\\w*-\\w*)/(\\d*)/(\\d*)/(\\d*)/((\\w*|\\w*-\\w*)*)/': {
@@ -808,7 +810,7 @@ presence.on('UpdateData', async () => {
     }
     case 'dev.twitch.tv': {
       //* Dev docs
-      presenceData.largeImageKey = devLogoArr[devLogo] || Assets.DevMain
+      presenceData.largeImageKey = devLogoArr[devLogo] || ActivityAssets.DevMain
       if (showBrowsing) {
         const statics = {
           '/': {
@@ -855,7 +857,7 @@ presence.on('UpdateData', async () => {
     }
     case 'discuss.dev.twitch.tv': {
       // ! Development forums
-      presenceData.largeImageKey = devLogoArr[devLogo] || Assets.DevMain
+      presenceData.largeImageKey = devLogoArr[devLogo] || ActivityAssets.DevMain
       if (showBrowsing) {
         const statics = {
           '/': {
@@ -896,7 +898,7 @@ presence.on('UpdateData', async () => {
     case 'status.twitch.tv': {
       //* Status pages
       if (document.location.hostname === 'devstatus.twitch.tv')
-        presenceData.largeImageKey = devLogoArr[devLogo] || Assets.DevMain
+        presenceData.largeImageKey = devLogoArr[devLogo] || ActivityAssets.DevMain
       if (showBrowsing) {
         const statics = {
           '/': {

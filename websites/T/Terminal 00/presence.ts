@@ -12,7 +12,7 @@ presence.on('UpdateData', async () => {
 
   if (
     location.pathname === '/'
-    || location.href.split(location.host)[1].toLowerCase() === '/index'
+    || location.href.split(location.host)[1]?.toLowerCase() === '/index'
   ) {
     presenceData.details = '/index'
   }

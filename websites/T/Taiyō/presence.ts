@@ -55,7 +55,7 @@ presence.on('UpdateData', async () => {
 
     case 'chapter': {
       const mediaLink = document.querySelector<HTMLAnchorElement>('.media-title')!.href
-      const links = getCover(mediaLink.split('/')[4])
+      const links = getCover(mediaLink.split('/')[4]!)
       if (links.length > 0)
         presenceData.largeImageKey = `https://www.taiyo.moe${links[1]}`
       presenceData.details = document.querySelector('.media-title')?.textContent
@@ -91,7 +91,7 @@ presence.on('UpdateData', async () => {
     for (const element of elements) {
       const imageSrcSet = element.getAttribute('imagesrcset')
       if (imageSrcSet)
-        links.push(imageSrcSet.split(', ')[0].split(' ')[0])
+        links.push(imageSrcSet.split(', ')[0]!.split(' ')[0]!)
     }
     return links.filter(link => link.includes(uuid))
   }

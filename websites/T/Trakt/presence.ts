@@ -3,12 +3,12 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/T/Trakt/assets/logo.png',
 }
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 
@@ -124,7 +124,7 @@ presence.on('UpdateData', async () => {
         )?.textContent
       }`
       presenceData.largeImageKey = imagePath
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
       presenceData.buttons = [{ label: 'Check episode', url: href }]
     }
     else if (pathname.includes('/seasons/')) {
@@ -137,7 +137,7 @@ presence.on('UpdateData', async () => {
         )?.firstChild?.textContent
       }`
       presenceData.largeImageKey = imagePath
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
       presenceData.buttons = [{ label: 'Check season', url: href }]
     }
     else {
@@ -147,7 +147,7 @@ presence.on('UpdateData', async () => {
           '#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1',
         )?.firstChild?.textContent
         presenceData.largeImageKey = imagePath
-        presenceData.smallImageKey = Assets.Logo
+        presenceData.smallImageKey = ActivityAssets.Logo
         presenceData.buttons = [{ label: 'Check TV show', url: href }]
       }
       catch {
@@ -160,9 +160,9 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Browsing movie'
       presenceData.state = document.querySelector(
         '#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1',
-      )?.childNodes[0].textContent
+      )?.childNodes[0]?.textContent
       presenceData.largeImageKey = imagePath
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
       presenceData.buttons = [{ label: 'Check movie', url: href }]
     }
     catch {
@@ -175,7 +175,7 @@ presence.on('UpdateData', async () => {
       '#summary-wrapper > div.container.summary > div > div > div.col-md-10.col-md-offset-2.col-sm-9.col-sm-offset-3.mobile-title > h1',
     )?.textContent
     presenceData.largeImageKey = imagePath
-    presenceData.smallImageKey = Assets.Logo
+    presenceData.smallImageKey = ActivityAssets.Logo
     presenceData.buttons = [{ label: 'Check actor', url: href }]
   }
   else if (pathname.includes('/search')) {

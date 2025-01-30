@@ -18,7 +18,7 @@ presence.on('UpdateData', async () => {
     // Making 100% sure it's the english wiki
     let page = 'N/A'
     try {
-      page = document.querySelectorAll('.page-header__title')[0].textContent ?? 'N/A'
+      page = document.querySelectorAll('.page-header__title')[0]?.textContent ?? 'N/A'
     }
     catch (err) {
       presence.info(
@@ -40,7 +40,7 @@ presence.on('UpdateData', async () => {
       // Making 100% sure it's the german wiki
       let page = 'N/A'
       try {
-        page = document.querySelectorAll('.page-header__title')[0].textContent ?? 'N/A'
+        page = document.querySelectorAll('.page-header__title')[0]?.textContent ?? 'N/A'
       }
       catch (err) {
         germanPresence.info(

@@ -52,7 +52,7 @@ presence.on('UpdateData', async () => {
           break
         case document.location.pathname.includes('/events/'):
           presenceData.details = 'Viewing an event'
-          presenceData.state = document.querySelectorAll<HTMLHeadingElement>('h1')[1].textContent
+          presenceData.state = document.querySelectorAll<HTMLHeadingElement>('h1')[1]?.textContent
           presenceData.buttons = [{ label: 'View Event', url: document.URL }]
           break
         case document.location.pathname.includes('/members/'):

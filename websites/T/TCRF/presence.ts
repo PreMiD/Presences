@@ -25,10 +25,10 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname.startsWith('/Help:Contents/')) {
     const help = document.location.pathname.split('/')
-    const d = help[1].split(':')
+    const d = help[1]!.split(':')
     presenceData.details = `getting ${d[0]}`
     presenceData.state = `${d[1]}: ${help[2]
-      .replace(/%26/g, '&')
+      ?.replace(/%26/g, '&')
       .split('_')
       .join(' ')}`
   }
@@ -38,8 +38,8 @@ presence.on('UpdateData', async () => {
       ?.textContent
       ?.replace(')', '')
       .split('(')
-    if (name?.[0].startsWith('Prerelease:')) {
-      const d = name[0].split(':')
+    if (name?.[0]?.startsWith('Prerelease:')) {
+      const d = name[0]?.split(':')
       x = `Game: ${d[1]}(${d[0]})`
     }
     else {

@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '937290941285429311',
 })
@@ -17,7 +19,7 @@ async function getStrings() {
     await presence.getSetting<string>('lang').catch(() => 'en'),
   )
 }
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/T/Tubi/assets/logo.png',
 }
 let strings: Awaited<ReturnType<typeof getStrings>>
@@ -25,7 +27,7 @@ let oldLang: string | null = null
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const video = document.querySelector<HTMLVideoElement>('video')
   const search = document.querySelector<HTMLInputElement>('[type="search"]')
@@ -103,7 +105,7 @@ presence.on('UpdateData', async () => {
   if (!buttons)
     delete presenceData.buttons
   if (!covers)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (presenceData.details)
     presence.setActivity(presenceData)
   else presence.setActivity()

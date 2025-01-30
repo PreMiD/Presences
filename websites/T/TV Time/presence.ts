@@ -1,15 +1,17 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '844109006679179265',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/T/TV%20Time/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { href, pathname } = document.location
@@ -65,7 +67,7 @@ presence.on('UpdateData', async () => {
           case 'browse': {
             const hrefSplit = href
               .split('?')[1]
-              .replace('filter=', '')
+              ?.replace('filter=', '')
               .replace(/_/g, ' ')
             presenceData.details = 'Viewing shows filtered by'
             presenceData.state = `${hrefSplit
@@ -82,7 +84,7 @@ presence.on('UpdateData', async () => {
               ?? document
                 .querySelector('[property="og:image"]')
                 ?.getAttribute('content')
-                ?? Assets.Logo
+                ?? ActivityAssets.Logo
             if (title?.match(/S\d*E\d/g)) {
               presenceData.buttons = [
                 {
@@ -109,7 +111,7 @@ presence.on('UpdateData', async () => {
         presenceData.state = title
         presenceData.largeImageKey = document
           .querySelector('[property="og:image"]')
-          ?.getAttribute('content') ?? Assets.Logo
+          ?.getAttribute('content') ?? ActivityAssets.Logo
         presenceData.buttons = [
           {
             label: 'View Actor',
@@ -197,7 +199,7 @@ presence.on('UpdateData', async () => {
     }
   }
   if (!covers)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (!buttons)
     delete presenceData.buttons
   if (presenceData.details)

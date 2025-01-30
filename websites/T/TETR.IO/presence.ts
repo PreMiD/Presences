@@ -31,7 +31,7 @@ function getText(selector: string): string | null {
   }
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/T/TETR.IO/assets/logo.jpg',
   Qp = 'https://cdn.rcd.gg/PreMiD/websites/T/TETR.IO/assets/0.png',
   Ct = 'https://cdn.rcd.gg/PreMiD/websites/T/TETR.IO/assets/1.png',
@@ -40,7 +40,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const showPrivButton = await presence.getSetting<boolean>('privateRoom')
   const showButtons = await presence.getSetting<boolean>('showButtons')
@@ -73,7 +73,7 @@ presence.on('UpdateData', async () => {
     browsingTimestamp = Math.floor(Date.now() / 1000)
     presenceData.details = 'ROOM LISTING'
     presenceData.state = 'Browsing public rooms'
-    presenceData.smallImageKey = Assets.Ct
+    presenceData.smallImageKey = ActivityAssets.Ct
     presenceData.smallImageText = 'ROOM LISTING'
   }
   else if (status?.includes('custom room')) {
@@ -82,7 +82,7 @@ presence.on('UpdateData', async () => {
     else browsingTimestamp = Math.floor(Date.now() / 1000)
     presenceData.details = 'CUSTOM GAME'
     presenceData.state = status.replace(/([a-z]+) .* ([a-z]+)/i, '$1 $2')
-    presenceData.smallImageKey = Assets.Ct
+    presenceData.smallImageKey = ActivityAssets.Ct
     presenceData.smallImageText = game
     if (status.includes('public')) {
       presenceData.buttons = [
@@ -107,7 +107,7 @@ presence.on('UpdateData', async () => {
     else browsingTimestamp = Math.floor(Date.now() / 1000)
     presenceData.details = game
     presenceData.state = status.replace(/([a-z]+) .* ([a-z]+)/i, '$1 $2')
-    presenceData.smallImageKey = Assets.Qp
+    presenceData.smallImageKey = ActivityAssets.Qp
     presenceData.smallImageText = game
   }
   else if (status?.includes('LEAGUE')) {
@@ -116,13 +116,13 @@ presence.on('UpdateData', async () => {
     else browsingTimestamp = Math.floor(Date.now() / 1000)
     presenceData.details = game
     presenceData.state = status.replace(/([a-z]+) .* ([a-z]+)/i, '$1 $2')
-    presenceData.smallImageKey = Assets.Tl
+    presenceData.smallImageKey = ActivityAssets.Tl
     presenceData.smallImageText = game
   }
   else if (header?.includes('LEAGUE')) {
     browsingTimestamp = Math.floor(Date.now() / 1000)
     presenceData.details = header
-    presenceData.smallImageKey = Assets.Tl
+    presenceData.smallImageKey = ActivityAssets.Tl
     presenceData.smallImageText = header
   }
   else if (Object.values(soloModes).includes(game ?? '')) {

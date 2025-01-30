@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '798502531847421962',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Toloka = 'https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/0.png',
   Film = 'https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/1.png',
   Video = 'https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/2.png',
@@ -30,7 +32,7 @@ presence.on('UpdateData', async () => {
       presenceData.startTimestamp = browsingTimestamp
       presenceData.details = 'Переглядаю головну'
       presenceData.state = 'сторінку'
-      presenceData.smallImageKey = Assets.Home
+      presenceData.smallImageKey = ActivityAssets.Home
       presenceData.smallImageText = 'Головна'
 
       break
@@ -39,7 +41,7 @@ presence.on('UpdateData', async () => {
       presenceData.startTimestamp = browsingTimestamp
       presenceData.details = 'Переглядаю розділ:'
       presenceData.state = 'Загальне'
-      presenceData.smallImageKey = Assets.Home
+      presenceData.smallImageKey = ActivityAssets.Home
       presenceData.smallImageText = 'Загальне'
 
       break
@@ -48,7 +50,7 @@ presence.on('UpdateData', async () => {
       presenceData.startTimestamp = browsingTimestamp
       presenceData.details = 'Переглядаю розділ:'
       presenceData.state = 'Проект Відео Гуртом'
-      presenceData.smallImageKey = Assets.Video
+      presenceData.smallImageKey = ActivityAssets.Video
       presenceData.smallImageText = 'Відео Гуртом'
 
       break
@@ -57,7 +59,7 @@ presence.on('UpdateData', async () => {
       presenceData.startTimestamp = browsingTimestamp
       presenceData.details = 'Переглядаю розділ:'
       presenceData.state = 'Фільми українською'
-      presenceData.smallImageKey = Assets.Film
+      presenceData.smallImageKey = ActivityAssets.Film
       presenceData.smallImageText = 'Фільми'
 
       break
@@ -66,7 +68,7 @@ presence.on('UpdateData', async () => {
       presenceData.startTimestamp = browsingTimestamp
       presenceData.details = 'Переглядаю розділ:'
       presenceData.state = 'Українська музика'
-      presenceData.smallImageKey = Assets.Music
+      presenceData.smallImageKey = ActivityAssets.Music
       presenceData.smallImageText = 'Музика'
 
       break
@@ -75,7 +77,7 @@ presence.on('UpdateData', async () => {
       presenceData.startTimestamp = browsingTimestamp
       presenceData.details = 'Переглядаю розділ:'
       presenceData.state = 'Література українською'
-      presenceData.smallImageKey = Assets.Book
+      presenceData.smallImageKey = ActivityAssets.Book
       presenceData.smallImageText = 'Література'
 
       break
@@ -84,7 +86,7 @@ presence.on('UpdateData', async () => {
       presenceData.startTimestamp = browsingTimestamp
       presenceData.details = 'Переглядаю розділ:'
       presenceData.state = 'Програми українською'
-      presenceData.smallImageKey = Assets.Desktop
+      presenceData.smallImageKey = ActivityAssets.Desktop
       presenceData.smallImageText = 'Програми'
 
       break
@@ -93,7 +95,7 @@ presence.on('UpdateData', async () => {
       presenceData.startTimestamp = browsingTimestamp
       presenceData.details = 'Переглядаю розділ:'
       presenceData.state = 'Ігри українською'
-      presenceData.smallImageKey = Assets.Gamepad
+      presenceData.smallImageKey = ActivityAssets.Gamepad
       presenceData.smallImageText = 'Ігри'
 
       break
@@ -102,7 +104,7 @@ presence.on('UpdateData', async () => {
       presenceData.startTimestamp = browsingTimestamp
       presenceData.details = 'Переглядаю розділ:'
       presenceData.state = 'Архів та смітник'
-      presenceData.smallImageKey = Assets.Archive
+      presenceData.smallImageKey = ActivityAssets.Archive
       presenceData.smallImageText = 'Архів'
 
       break
@@ -123,7 +125,7 @@ presence.on('UpdateData', async () => {
         presenceData.startTimestamp = browsingTimestamp
         presenceData.details = 'Переглядаю профіль:'
         presenceData.state = title?.textContent
-        presenceData.smallImageKey = Assets.User
+        presenceData.smallImageKey = ActivityAssets.User
         presenceData.smallImageText = 'Профіль'
       }
       else if (/\/t\d+/.test(document.location.pathname)) {
@@ -167,7 +169,7 @@ presence.on('UpdateData', async () => {
       }
       else if (document.location.pathname.includes('/privmsg.php')) {
         presenceData.startTimestamp = browsingTimestamp
-        presenceData.smallImageKey = Assets.Sms
+        presenceData.smallImageKey = ActivityAssets.Sms
         presenceData.smallImageText = 'ПП'
         if (document.location.search.includes('?folder=inbox&mode=read')) {
           const title = document.querySelector(

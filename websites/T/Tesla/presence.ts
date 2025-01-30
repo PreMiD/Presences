@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   LogoRedText = 'https://cdn.rcd.gg/PreMiD/websites/T/Tesla/assets/0.png',
   LogoRed = 'https://cdn.rcd.gg/PreMiD/websites/T/Tesla/assets/1.png',
   LogoWhite = 'https://cdn.rcd.gg/PreMiD/websites/T/Tesla/assets/2.png',
@@ -18,10 +18,10 @@ presence.on('UpdateData', async () => {
     presence.getSetting<boolean>('showCheckout'),
   ])
   const logoArr = [
-    Assets.LogoRed,
-    Assets.LogoRedText,
-    Assets.LogoWhite,
-    Assets.LogoWhiteText,
+    ActivityAssets.LogoRed,
+    ActivityAssets.LogoRedText,
+    ActivityAssets.LogoWhite,
+    ActivityAssets.LogoWhiteText,
   ]
   const urlpath = window.location.pathname.split('/')
   const langs = [
@@ -64,9 +64,9 @@ presence.on('UpdateData', async () => {
     'en_au',
     'en_nz',
   ]
-  const urlpNum = langs.includes(urlpath[1]) ? 2 : 1
+  const urlpNum = langs.includes(urlpath[1]!) ? 2 : 1
   const presenceData: PresenceData = {
-    largeImageKey: logoArr[logo] ?? Assets.LogoRed,
+    largeImageKey: logoArr[logo] ?? ActivityAssets.LogoRed,
   }
 
   if (timeElapsed)

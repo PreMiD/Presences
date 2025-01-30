@@ -1,11 +1,13 @@
-import { selectDashboardPage } from './dashboard'
-import { handleCodeblocks, handleThing } from './handleThing'
+import { ActivityType } from 'premid'
+
+import { selectDashboardPage } from './dashboard.js'
+import { handleCodeblocks, handleThing } from './handleThing.js'
 
 const presence = new Presence({
   clientId: '1217153856665026580',
 })
 
-export const enum Assets {
+export enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/T/Tinkercad/assets/logo.png',
   ThreeDIco = 'https://cdn.rcd.gg/PreMiD/websites/T/Tinkercad/assets/0.png',
   CircuitIco = 'https://cdn.rcd.gg/PreMiD/websites/T/Tinkercad/assets/1.png',
@@ -13,7 +15,7 @@ export const enum Assets {
   TrashCanIco = 'https://cdn.rcd.gg/PreMiD/websites/T/Tinkercad/assets/3.jpeg',
 }
 
-const enum Pages {
+enum Pages {
   homepage = 'dashboard',
   things = 'things',
   codeblocks = 'codeblocks',
@@ -24,7 +26,7 @@ presence.on('UpdateData', async () => {
     return
 
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     name: 'Tinkercad',
     type: ActivityType.Playing,
   }
@@ -32,15 +34,15 @@ presence.on('UpdateData', async () => {
 
   switch (page) {
     case Pages.homepage:
-      selectDashboardPage(presenceData, subpage, subsubpage)
+      selectDashboardPage(presenceData, subpage!, subsubpage)
       break
 
     case Pages.things:
-      handleThing(presenceData, subpage, subsubpage?.includes('edit')) // can be "edit" or "editel"
+      handleThing(presenceData, subpage!, !!subsubpage?.includes('edit')) // can be "edit" or "editel"
       break
 
     case Pages.codeblocks:
-      handleCodeblocks(presenceData, subpage?.includes('edit'))
+      handleCodeblocks(presenceData, !!subpage?.includes('edit'))
       break
 
     default:

@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: '1047102386478534727',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/logo.png',
   EcchiLogo = 'https://cdn.rcd.gg/PreMiD/websites/T/Tempest%20Fansub/assets/0.png',
 }
@@ -10,7 +10,7 @@ presence.on('UpdateData', async () => {
   const { pathname, hostname, href } = document.location
   const presenceData: PresenceData = {
     startTimestamp: browsingTimestamp,
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   const searchParams = new URLSearchParams(location.search)
   if (
@@ -19,8 +19,8 @@ presence.on('UpdateData', async () => {
   ) {
     // Manga-----------------------------------------------------------------------
     if (hostname.startsWith('ecchi'))
-      presenceData.largeImageKey = Assets.EcchiLogo
-    else presenceData.largeImageKey = Assets.Logo
+      presenceData.largeImageKey = ActivityAssets.EcchiLogo
+    else presenceData.largeImageKey = ActivityAssets.Logo
     // Manga arama
     if (searchParams.get('s')) {
       if (hostname.startsWith('ecchi'))
@@ -99,12 +99,12 @@ presence.on('UpdateData', async () => {
           }
         }
         presenceData.details = title
-          ?.replace(tsplited[tsplited.length - 1], '')
+          ?.replace(tsplited[tsplited.length - 1]!, '')
           .replace('#', '')
         presenceData.state = `Bölüm ${tsplited[tsplited.length - 1]} Okuyor.`
         const panels = document.querySelectorAll('div[id=\'readerarea\'] > img')
         if (panels)
-          presenceData.largeImageKey = panels[0].getAttribute('src')
+          presenceData.largeImageKey = panels[0]?.getAttribute('src')
       }
       catch {
         presenceData.details = 'Bilinmeyen Adres.'

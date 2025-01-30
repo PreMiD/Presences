@@ -1,6 +1,6 @@
-import { Assets } from './presence'
+import { ActivityAssets } from './presence.js'
 
-const enum SubPages {
+enum SubPages {
   dashboard = '',
   classes = 'classes',
   designs = 'designs',
@@ -14,25 +14,25 @@ function handleDesigns(subsubpage: string, presenceData: PresenceData): void {
   switch (subsubpage) {
     case '3d': {
       presenceData.details = 'Viewing 3D designs'
-      presenceData.smallImageKey = Assets.ThreeDIco
+      presenceData.smallImageKey = ActivityAssets.ThreeDIco
       presenceData.smallImageText = '3D'
       break
     }
     case 'circuits': {
       presenceData.details = 'Viewing circuits'
-      presenceData.smallImageKey = Assets.CircuitIco
+      presenceData.smallImageKey = ActivityAssets.CircuitIco
       presenceData.smallImageText = 'circuit'
       break
     }
     case 'codeblocks': {
       presenceData.details = 'Viewing codeblocks'
-      presenceData.smallImageKey = Assets.CodeblockIco
+      presenceData.smallImageKey = ActivityAssets.CodeblockIco
       presenceData.smallImageText = 'code'
       break
     }
     case 'bin': {
       presenceData.details = 'Viewing Trash Can'
-      presenceData.smallImageKey = Assets.TrashCanIco
+      presenceData.smallImageKey = ActivityAssets.TrashCanIco
       presenceData.smallImageText = 'trash'
       break
     }

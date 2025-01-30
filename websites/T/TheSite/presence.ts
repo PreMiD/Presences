@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '702668334990098523',
 })
@@ -276,8 +278,8 @@ presence.on('UpdateData', async () => {
         const { episode } = regex?.groups ?? {}
         const state = format
           .replace('%show%', title)
-          .replace('%season%', season)
-          .replace('%episode%', episode)
+          .replace('%season%', season ?? '')
+          .replace('%episode%', episode ?? '')
 
         if (menu) {
           if (menu.style.display === 'none') {
@@ -308,8 +310,8 @@ presence.on('UpdateData', async () => {
         const { episode } = regex?.groups ?? {}
         const state = format
           .replace('%show%', title)
-          .replace('%season%', season)
-          .replace('%episode%', episode)
+          .replace('%season%', season ?? '')
+          .replace('%episode%', episode ?? '')
 
         if (menu) {
           if (menu.style.display === 'none') {

@@ -146,7 +146,7 @@ function resetData(defaultData: PresenceData = {
             presenceData.details = 'Viewing a race result'
             presenceData.state = `Race ${
               currentURL.searchParams.get('id')?.split('|')[2]
-            } of ${currentURL.searchParams.get('id')?.split('|')[1].slice(3)}`
+            } of ${currentURL.searchParams.get('id')?.split('|')[1]?.slice(3)}`
 
             break
           }
@@ -202,7 +202,7 @@ function resetData(defaultData: PresenceData = {
               privacy_poicy: 'Privacy Policy',
             }
             presenceData.details = 'Viewing a page'
-            presenceData.state = pageNames[currentPath[1]]
+            presenceData.state = pageNames[currentPath[1]!]
           }
         }
         break

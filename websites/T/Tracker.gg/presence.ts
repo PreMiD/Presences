@@ -1,7 +1,7 @@
 const presence = new Presence({ clientId: '929349462365704222' })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/T/Tracker.gg/assets/logo.png',
   Valorant = 'https://cdn.rcd.gg/PreMiD/websites/T/Tracker.gg/assets/0.png',
   Hyperscape = 'https://cdn.rcd.gg/PreMiD/websites/T/Tracker.gg/assets/1.png',
@@ -14,7 +14,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname } = window.location
@@ -125,7 +125,7 @@ presence.on('UpdateData', async () => {
               case '/valorant': {
                 presenceData.details = 'Viewing Valorant Page'
                 presenceData.smallImageText = 'TRN'
-                presenceData.largeImageKey = Assets.Valorant
+                presenceData.largeImageKey = ActivityAssets.Valorant
 
                 break
               }
@@ -138,7 +138,7 @@ presence.on('UpdateData', async () => {
                   + document.querySelector<HTMLSpanElement>(
                     '#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-details > div.ph-details__identifier > span > span.trn-ign__discriminator',
                   )!.textContent
-                  presenceData.smallImageKey = Assets.Valorant
+                  presenceData.smallImageKey = ActivityAssets.Valorant
                   presenceData.smallImageText = document.querySelector<HTMLSpanElement>(
                     '#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-details > div.ph-details__identifier > span > span.trn-ign__username',
                   )?.textContent
@@ -153,7 +153,7 @@ presence.on('UpdateData', async () => {
                     presenceData.details = 'Viewing:'
                     presenceData.state = 'Valorant Leaderboards Ranked'
                     presenceData.smallImageText = 'TRN'
-                    presenceData.largeImageKey = Assets.Valorant
+                    presenceData.largeImageKey = ActivityAssets.Valorant
                   }
                   else if (
                     pathname.includes('/valorant/leaderboards/stats')
@@ -161,7 +161,7 @@ presence.on('UpdateData', async () => {
                     presenceData.details = 'Viewing:'
                     presenceData.state = 'Valorant Leaderboards Seasonal'
                     presenceData.smallImageText = 'TRN'
-                    presenceData.largeImageKey = Assets.Valorant
+                    presenceData.largeImageKey = ActivityAssets.Valorant
                   }
                 }
                 else if (pathname.includes('/valorant/guides')) {
@@ -169,7 +169,7 @@ presence.on('UpdateData', async () => {
                     presenceData.details = 'Submitting Valorant Clip'
 
                     presenceData.smallImageText = 'TRN'
-                    presenceData.largeImageKey = Assets.Valorant
+                    presenceData.largeImageKey = ActivityAssets.Valorant
                   }
                   else if (pathname.includes('/clips')) {
                     try {
@@ -181,20 +181,20 @@ presence.on('UpdateData', async () => {
                         presenceData.state = 'Valorant Lineup Clip'
 
                         presenceData.smallImageText = 'TRN'
-                        presenceData.largeImageKey = Assets.Valorant
+                        presenceData.largeImageKey = ActivityAssets.Valorant
                       }
                       else {
                         presenceData.details = 'Viewing:'
                         presenceData.state = 'Valorant Lineup Guides'
 
                         presenceData.smallImageText = 'TRN'
-                        presenceData.largeImageKey = Assets.Valorant
+                        presenceData.largeImageKey = ActivityAssets.Valorant
                       }
                     }
                     catch {
                       presenceData.details = 'Viewing:'
                       presenceData.state = 'Valorant Lineup Guides'
-                      presenceData.smallImageKey = Assets.Valorant
+                      presenceData.smallImageKey = ActivityAssets.Valorant
                       presenceData.smallImageText = 'Valorant'
                     }
                   }
@@ -203,7 +203,7 @@ presence.on('UpdateData', async () => {
                     presenceData.state = 'own Valorant Guides'
 
                     presenceData.smallImageText = 'TRN'
-                    presenceData.largeImageKey = Assets.Valorant
+                    presenceData.largeImageKey = ActivityAssets.Valorant
                   }
                   else {
                     try {
@@ -217,14 +217,14 @@ presence.on('UpdateData', async () => {
                           '#app > div.trn-wrapper > div.trn-container > div > main > article > div.guide__main > div > div.guide-main__hero.card.header-bordered.responsive > div.guide-main-metadata > div.guide-main__author.guide-main-metadata__author > span.guide-main__author-username',
                         )?.textContent
                       }`
-                      presenceData.largeImageKey = Assets.Valorant
+                      presenceData.largeImageKey = ActivityAssets.Valorant
                     }
                     catch {
                       presenceData.details = 'Viewing:'
                       presenceData.state = 'Valorant Guides'
 
                       presenceData.smallImageText = 'TRN'
-                      presenceData.largeImageKey = Assets.Valorant
+                      presenceData.largeImageKey = ActivityAssets.Valorant
                     }
                   }
                 }
@@ -235,7 +235,7 @@ presence.on('UpdateData', async () => {
                       presenceData.state = 'Valorant Looking for Group'
 
                       presenceData.smallImageText = 'TRN'
-                      presenceData.largeImageKey = Assets.Valorant
+                      presenceData.largeImageKey = ActivityAssets.Valorant
 
                       break
                     }
@@ -244,7 +244,7 @@ presence.on('UpdateData', async () => {
                       presenceData.state = 'Valorant Insights'
 
                       presenceData.smallImageText = 'TRN'
-                      presenceData.largeImageKey = Assets.Valorant
+                      presenceData.largeImageKey = ActivityAssets.Valorant
 
                       break
                     }
@@ -253,7 +253,7 @@ presence.on('UpdateData', async () => {
                       presenceData.state = 'Valorant Agents'
 
                       presenceData.smallImageText = 'TRN'
-                      presenceData.largeImageKey = Assets.Valorant
+                      presenceData.largeImageKey = ActivityAssets.Valorant
 
                       break
                     }
@@ -265,14 +265,14 @@ presence.on('UpdateData', async () => {
                         )?.textContent
 
                         presenceData.smallImageText = 'TRN'
-                        presenceData.largeImageKey = Assets.Valorant
+                        presenceData.largeImageKey = ActivityAssets.Valorant
                       }
                       else if (pathname === '/valorant/weapons') {
                         presenceData.details = 'Viewing:'
                         presenceData.state = 'Valorant Weapons'
 
                         presenceData.smallImageText = 'TRN'
-                        presenceData.largeImageKey = Assets.Valorant
+                        presenceData.largeImageKey = ActivityAssets.Valorant
                       }
                       else if (pathname.includes('/valorant/weapons')) {
                         presenceData.details = 'Viewing Valorant Weapon:'
@@ -281,14 +281,14 @@ presence.on('UpdateData', async () => {
                         )?.textContent
 
                         presenceData.smallImageText = 'TRN'
-                        presenceData.largeImageKey = Assets.Valorant
+                        presenceData.largeImageKey = ActivityAssets.Valorant
                       }
                       else if (pathname === '/valorant/maps') {
                         presenceData.details = 'Viewing:'
                         presenceData.state = 'Valorant Maps'
 
                         presenceData.smallImageText = 'TRN'
-                        presenceData.largeImageKey = Assets.Valorant
+                        presenceData.largeImageKey = ActivityAssets.Valorant
                       }
                       else if (pathname.includes('/valorant/maps')) {
                         presenceData.details = 'Viewing Valorant Map:'
@@ -300,7 +300,7 @@ presence.on('UpdateData', async () => {
                           ?.replace(' - Valorant Map', '')
 
                         presenceData.smallImageText = 'TRN'
-                        presenceData.largeImageKey = Assets.Valorant
+                        presenceData.largeImageKey = ActivityAssets.Valorant
                       }
                       else {
                         switch (pathname) {
@@ -309,7 +309,7 @@ presence.on('UpdateData', async () => {
                             presenceData.state = 'Valorant Cards'
 
                             presenceData.smallImageText = 'TRN'
-                            presenceData.largeImageKey = Assets.Valorant
+                            presenceData.largeImageKey = ActivityAssets.Valorant
 
                             break
                           }
@@ -318,7 +318,7 @@ presence.on('UpdateData', async () => {
                             presenceData.state = 'Valorant Buddies'
 
                             presenceData.smallImageText = 'TRN'
-                            presenceData.largeImageKey = Assets.Valorant
+                            presenceData.largeImageKey = ActivityAssets.Valorant
 
                             break
                           }
@@ -327,7 +327,7 @@ presence.on('UpdateData', async () => {
                             presenceData.state = 'Valorant Sprays'
 
                             presenceData.smallImageText = 'TRN'
-                            presenceData.largeImageKey = Assets.Valorant
+                            presenceData.largeImageKey = ActivityAssets.Valorant
 
                             break
                           }
@@ -336,7 +336,7 @@ presence.on('UpdateData', async () => {
                             presenceData.state = 'Hyper Scape'
 
                             presenceData.smallImageText = 'TRN'
-                            presenceData.largeImageKey = Assets.Hyperscape
+                            presenceData.largeImageKey = ActivityAssets.Hyperscape
 
                             break
                           }
@@ -348,7 +348,7 @@ presence.on('UpdateData', async () => {
 
                               presenceData.details = 'Viewing HyperScape Profile:'
                               presenceData.state = playerName
-                              presenceData.smallImageKey = Assets.Hyperscape
+                              presenceData.smallImageKey = ActivityAssets.Hyperscape
                               presenceData.smallImageText = playerName
                               presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
                                 '#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-avatar > img',
@@ -362,28 +362,28 @@ presence.on('UpdateData', async () => {
                                 presenceData.state = 'HyperScape Leaderboards Lifetime'
 
                                 presenceData.smallImageText = 'TRN'
-                                presenceData.largeImageKey = Assets.Hyperscape
+                                presenceData.largeImageKey = ActivityAssets.Hyperscape
                               }
                               else if (pathname.includes('/career-bests/')) {
                                 presenceData.details = 'Viewing:'
                                 presenceData.state = 'HyperScape Leaderboards Career Bests'
 
                                 presenceData.smallImageText = 'TRN'
-                                presenceData.largeImageKey = Assets.Hyperscape
+                                presenceData.largeImageKey = ActivityAssets.Hyperscape
                               }
                               else if (pathname.includes('/playlists/')) {
                                 presenceData.details = 'Viewing:'
                                 presenceData.state = 'HyperScape Leaderboards Playlists'
 
                                 presenceData.smallImageText = 'TRN'
-                                presenceData.largeImageKey = Assets.Hyperscape
+                                presenceData.largeImageKey = ActivityAssets.Hyperscape
                               }
                               else if (pathname.includes('/weapons/')) {
                                 presenceData.details = 'Viewing:'
                                 presenceData.state = 'HyperScape Leaderboards Weapons'
 
                                 presenceData.smallImageText = 'TRN'
-                                presenceData.largeImageKey = Assets.Hyperscape
+                                presenceData.largeImageKey = ActivityAssets.Hyperscape
                               }
                             }
                             else if (pathname === '/csgo') {
@@ -391,7 +391,7 @@ presence.on('UpdateData', async () => {
                               presenceData.state = 'CS:GO'
 
                               presenceData.smallImageText = 'TRN'
-                              presenceData.largeImageKey = Assets.Csgo
+                              presenceData.largeImageKey = ActivityAssets.Csgo
                             }
                             else if (pathname.includes('/csgo/profile/')) {
                               const playerName = document.querySelector<HTMLSpanElement>(
@@ -400,7 +400,7 @@ presence.on('UpdateData', async () => {
 
                               presenceData.details = 'Viewing CSGO Profile:'
                               presenceData.state = playerName
-                              presenceData.smallImageKey = Assets.Csgo
+                              presenceData.smallImageKey = ActivityAssets.Csgo
                               presenceData.smallImageText = playerName
                               presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
                                 '#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-avatar > img',
@@ -413,14 +413,14 @@ presence.on('UpdateData', async () => {
                               presenceData.state = 'CSGO Leaderboard'
 
                               presenceData.smallImageText = 'TRN'
-                              presenceData.largeImageKey = Assets.Csgo
+                              presenceData.largeImageKey = ActivityAssets.Csgo
                             }
                             else if (pathname === '/lol') {
                               presenceData.details = 'Viewing Game:'
                               presenceData.state = 'Leage of Legends'
 
                               presenceData.smallImageText = 'TRN'
-                              presenceData.largeImageKey = Assets.Lol
+                              presenceData.largeImageKey = ActivityAssets.Lol
                             }
                             else if (pathname.includes('/lol/profile')) {
                               const playerName = document.querySelector<HTMLSpanElement>(
@@ -429,7 +429,7 @@ presence.on('UpdateData', async () => {
 
                               presenceData.details = 'Viewing LoL Profile:'
                               presenceData.state = playerName
-                              presenceData.smallImageKey = Assets.Lol
+                              presenceData.smallImageKey = ActivityAssets.Lol
                               presenceData.smallImageText = playerName
                               presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
                                 '#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-avatar > img',
@@ -442,14 +442,14 @@ presence.on('UpdateData', async () => {
                               presenceData.state = 'LoL Leaderboard'
 
                               presenceData.smallImageText = 'TRN'
-                              presenceData.largeImageKey = Assets.Lol
+                              presenceData.largeImageKey = ActivityAssets.Lol
                             }
                             else if (pathname === '/splitgate') {
                               presenceData.details = 'Viewing Game:'
                               presenceData.state = 'Splitgate'
 
                               presenceData.smallImageText = 'TRN'
-                              presenceData.largeImageKey = Assets.Splitgate
+                              presenceData.largeImageKey = ActivityAssets.Splitgate
                             }
                             else if (
                               pathname.includes('/splitgate/profile/')
@@ -460,7 +460,7 @@ presence.on('UpdateData', async () => {
 
                               presenceData.details = 'Viewing Splitgate Profile:'
                               presenceData.state = playerName
-                              presenceData.smallImageKey = Assets.Splitgate
+                              presenceData.smallImageKey = ActivityAssets.Splitgate
                               presenceData.smallImageText = playerName
                               presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
                                 '#app > div.trn-wrapper > div.trn-container > div > main > div.content.no-card-margin > div.ph > div.ph__container > div.ph-avatar > img.ph-avatar__image',
@@ -474,14 +474,14 @@ presence.on('UpdateData', async () => {
                                 presenceData.state = 'Playlist'
 
                                 presenceData.smallImageText = 'TRN'
-                                presenceData.largeImageKey = Assets.Splitgate
+                                presenceData.largeImageKey = ActivityAssets.Splitgate
                               }
                               else if (pathname.includes('/stats/')) {
                                 presenceData.details = 'Viewing Leaderboard:'
                                 presenceData.state = 'Overall'
 
                                 presenceData.smallImageText = 'TRN'
-                                presenceData.largeImageKey = Assets.Splitgate
+                                presenceData.largeImageKey = ActivityAssets.Splitgate
                               }
                             }
                             else if (pathname === '/splitgate/challenges') {
@@ -489,7 +489,7 @@ presence.on('UpdateData', async () => {
                               presenceData.state = 'Splitgate Challenges'
 
                               presenceData.smallImageText = 'TRN'
-                              presenceData.largeImageKey = Assets.Splitgate
+                              presenceData.largeImageKey = ActivityAssets.Splitgate
                             }
                             else if (
                               pathname.includes('/splitgate/challenges/')
@@ -502,7 +502,7 @@ presence.on('UpdateData', async () => {
                               presenceData.state = challengeTitle
 
                               presenceData.smallImageText = 'TRN'
-                              presenceData.largeImageKey = Assets.Splitgate
+                              presenceData.largeImageKey = ActivityAssets.Splitgate
                             }
                         }
                       }
@@ -519,7 +519,7 @@ presence.on('UpdateData', async () => {
         presenceData.details = 'Viewing Fortnite Page'
 
         presenceData.smallImageText = 'TRN'
-        presenceData.largeImageKey = Assets.Fn
+        presenceData.largeImageKey = ActivityAssets.Fn
       }
       else if (pathname.includes('/profile/all/')) {
         const playerName = document.querySelector<HTMLSpanElement>(
@@ -528,7 +528,7 @@ presence.on('UpdateData', async () => {
 
         presenceData.details = 'Viewing Fortnite Profile:'
         presenceData.state = playerName
-        presenceData.smallImageKey = Assets.Fn
+        presenceData.smallImageKey = ActivityAssets.Fn
         presenceData.smallImageText = playerName
         presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
           '#profile > div.trn-card.trn-profile-header > div > div.trn-profile-header__avatar.trn-roundavatar.trn-roundavatar--white > img',
@@ -541,7 +541,7 @@ presence.on('UpdateData', async () => {
             presenceData.state = 'Looking for Player'
 
             presenceData.smallImageText = 'TRN'
-            presenceData.largeImageKey = Assets.Fn
+            presenceData.largeImageKey = ActivityAssets.Fn
 
             break
           }
@@ -550,7 +550,7 @@ presence.on('UpdateData', async () => {
             presenceData.state = 'Events'
 
             presenceData.smallImageText = 'TRN'
-            presenceData.largeImageKey = Assets.Fn
+            presenceData.largeImageKey = ActivityAssets.Fn
 
             break
           }
@@ -559,7 +559,7 @@ presence.on('UpdateData', async () => {
             presenceData.state = 'Power Ranking'
 
             presenceData.smallImageText = 'TRN'
-            presenceData.largeImageKey = Assets.Fn
+            presenceData.largeImageKey = ActivityAssets.Fn
 
             break
           }
@@ -568,7 +568,7 @@ presence.on('UpdateData', async () => {
             presenceData.state = 'Hype'
 
             presenceData.smallImageText = 'TRN'
-            presenceData.largeImageKey = Assets.Fn
+            presenceData.largeImageKey = ActivityAssets.Fn
 
             break
           }
@@ -577,7 +577,7 @@ presence.on('UpdateData', async () => {
             presenceData.state = 'Earnings'
 
             presenceData.smallImageText = 'TRN'
-            presenceData.largeImageKey = Assets.Fn
+            presenceData.largeImageKey = ActivityAssets.Fn
 
             break
           }
@@ -586,7 +586,7 @@ presence.on('UpdateData', async () => {
             presenceData.state = 'Win Streak'
 
             presenceData.smallImageText = 'TRN'
-            presenceData.largeImageKey = Assets.Fn
+            presenceData.largeImageKey = ActivityAssets.Fn
 
             break
           }
@@ -596,7 +596,7 @@ presence.on('UpdateData', async () => {
               presenceData.state = 'Single Match Kills'
 
               presenceData.smallImageText = 'TRN'
-              presenceData.largeImageKey = Assets.Fn
+              presenceData.largeImageKey = ActivityAssets.Fn
             }
             else if (pathname.includes('/leaderboards/')) {
               if (pathname.includes('/TRNRating')) {
@@ -604,7 +604,7 @@ presence.on('UpdateData', async () => {
                 presenceData.state = 'Tracker Network Rating'
 
                 presenceData.smallImageText = 'TRN'
-                presenceData.largeImageKey = Assets.Fn
+                presenceData.largeImageKey = ActivityAssets.Fn
               }
             }
             else if (pathname === '/challenges') {
@@ -612,7 +612,7 @@ presence.on('UpdateData', async () => {
               presenceData.state = 'Challanges'
 
               presenceData.smallImageText = 'TRN'
-              presenceData.largeImageKey = Assets.Fn
+              presenceData.largeImageKey = ActivityAssets.Fn
             }
             else if (pathname.includes('/challenges/')) {
               presenceData.details = 'Viewing Challange:'
@@ -621,14 +621,14 @@ presence.on('UpdateData', async () => {
               )?.textContent
 
               presenceData.smallImageText = 'TRN'
-              presenceData.largeImageKey = Assets.Fn
+              presenceData.largeImageKey = ActivityAssets.Fn
             }
             else if (pathname === '/creative') {
               presenceData.details = 'Viewing:'
               presenceData.state = 'Creative Maps'
 
               presenceData.smallImageText = 'TRN'
-              presenceData.largeImageKey = Assets.Fn
+              presenceData.largeImageKey = ActivityAssets.Fn
             }
         }
       }

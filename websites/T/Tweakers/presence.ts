@@ -12,7 +12,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Leest een artikel...'
       presenceData.state = `Artikel: '${document.location.pathname
         .split('/')[3]
-        .replace('.html', '')}'`
+        ?.replace('.html', '')}'`
     }
     else {
       presenceData.details = 'Scrollt nieuws artikelen...'
@@ -23,7 +23,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Leest een review...'
       presenceData.state = `Review: '${document.location.pathname
         .split('/')[3]
-        .replace('.html', '')}'`
+        ?.replace('.html', '')}'`
     }
     else if (
       document.location.pathname.split('/')[2]
@@ -43,7 +43,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Bekijkt een product...'
       presenceData.state = `Product: '${document.location.pathname
         .split('/')[3]
-        .replace('.html', '')}'`
+        ?.replace('.html', '')}'`
     }
     else {
       presenceData.details = 'Scrollt pricewatch...'
@@ -54,7 +54,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Bekijkt een aanbod...'
       presenceData.state = `Aanbod: '${document.location.pathname
         .split('/')[3]
-        .replace('.html', '')}'`
+        ?.replace('.html', '')}'`
     }
     else {
       presenceData.details = 'Scrollt Vraag en Aanbod...'
@@ -68,7 +68,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Bekijkt een baan...'
       presenceData.state = `Baan: '${document.location.pathname
         .split('/')[4]
-        .replace('.html', '')}'`
+        ?.replace('.html', '')}'`
     }
     else {
       presenceData.details = 'Zoekt een baan via tweakers...'
@@ -79,7 +79,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Bekijkt een video...'
       presenceData.state = `Video: '${document.location.pathname
         .split('/')[3]
-        .replace('.html', '')}'`
+        ?.replace('.html', '')}'`
     }
     else {
       presenceData.details = 'Scrollt video\'s...'
@@ -93,7 +93,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Download een bestand...'
       presenceData.state = `Download: '${document.location.pathname
         .split('/')[3]
-        .replace('.html', '')}'`
+        ?.replace('.html', '')}'`
     }
     else {
       presenceData.details = 'Scrollt downloads...'
@@ -115,7 +115,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Bekijkt een plan...'
       presenceData.state = `Plan: '${document.location.pathname
         .split('/')[3]
-        .replace('.html', '')}'`
+        ?.replace('.html', '')}'`
     }
     else {
       presenceData.details = 'Scrollt plannen...'

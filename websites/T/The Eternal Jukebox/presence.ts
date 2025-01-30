@@ -22,7 +22,7 @@ presence.on('UpdateData', async () => {
         ?.textContent
         ?.match(/(\d+):(\d+):(\d+)/)
         ?.map(x => +x) ?? []
-      const totalSeconds = hours * 3600 + mins * 60 + secs
+      const totalSeconds = (hours ?? 0) * 3600 + (mins ?? 0) * 60 + (secs ?? 0)
       const title = document
         .querySelector<HTMLSpanElement>('#song-title')
         ?.textContent
@@ -78,7 +78,7 @@ presence.on('UpdateData', async () => {
         ?.textContent
         ?.match(/(\d+):(\d+):(\d+)/)
         ?.map(x => +x) ?? []
-      const totalSeconds = hours * 3600 + mins * 60 + secs
+      const totalSeconds = (hours ?? 0) * 3600 + (mins ?? 0) * 60 + (secs ?? 0)
       const audioSource = await presence.getPageletiable<string>(
         'canonizerData.ogAudioURL',
       )

@@ -14,7 +14,7 @@ presence.on('UpdateData', async () => {
   const context = document
     .querySelector<HTMLCanvasElement>('#canvasA')!
     .getContext('2d')!
-  let tryOne: number
+  let tryOne: number | undefined
   const start = context.getImageData(100, 550, 400, 60).data[0]
   if (start === 57 || start === 27 || start === 45) {
     tryOne = Number(context.getImageData(810, 140, 400, 60).data[0])

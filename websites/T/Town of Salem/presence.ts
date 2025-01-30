@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: '754771926857285782',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Day = 'https://cdn.rcd.gg/PreMiD/websites/T/Town%20of%20Salem/assets/0.png',
   Discussion = 'https://cdn.rcd.gg/PreMiD/websites/T/Town%20of%20Salem/assets/1.png',
   Night = 'https://cdn.rcd.gg/PreMiD/websites/T/Town%20of%20Salem/assets/2.png',
@@ -70,7 +70,7 @@ function handleLog(log: string) {
   ) {
     const scene = log
       .match(/^Switched(?: additively)? to(?: scene)? (.*) Scene/m)?.[1]
-      .trim()
+      ?.trim()
     currentState.scene = scene
     if (scene === 'BigPreGame')
       currentState.state = GameState.PreGame
@@ -80,10 +80,10 @@ function handleLog(log: string) {
       .match(
         /^Entered HomeSceneController.ShowView\(\) - View passed in: (.*)$/m,
       )?.[1]
-      .trim()
+      ?.trim()
   }
   else if (log.startsWith('Entered ')) {
-    switch (log.match(/^Entered (.*)$/m)?.[1].trim()) {
+    switch (log.match(/^Entered (.*)$/m)?.[1]?.trim()) {
       case 'HandleStartRanked': {
         currentState.scene = 'BigLobby'
         currentState.gameMode = GameType.Ranked
@@ -177,20 +177,20 @@ setInterval(async () => {
   const logs: Log[] = await presence.getPageletiable('console"]["logs')
   let lastUnreadLogIndex = 0
   for (let i = logs.length - 1; i >= 0; i--) {
-    if (logs[i].id === lastId) {
+    if (logs[i]!.id === lastId) {
       lastUnreadLogIndex = i + 1
       break
     }
   }
   for (let i = lastUnreadLogIndex; i < logs.length; i++)
-    handleLog(logs[i].content)
+    handleLog(logs[i]!.content)
   if (logs.length > 0)
-    lastId = logs[logs.length - 1].id
+    lastId = logs[logs.length - 1]!.id
 }, 1000)
 
 presence.on('UpdateData', () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
 
   if (window.location.pathname !== '/TownOfSalem/') {
@@ -258,16 +258,16 @@ presence.on('UpdateData', () => {
             break
           }
           case GameState.Day: {
-            presenceData.smallImageKey = Assets.Day
+            presenceData.smallImageKey = ActivityAssets.Day
             switch (currentState.page) {
               case 'StartDiscussion': {
                 presenceData.state = `Discussion | Day ${currentState.day}`
-                presenceData.smallImageKey = Assets.Discussion
+                presenceData.smallImageKey = ActivityAssets.Discussion
                 break
               }
               case 'StartVoting': {
                 presenceData.state = `Voting | Day ${currentState.day}`
-                presenceData.smallImageKey = Assets.Voting
+                presenceData.smallImageKey = ActivityAssets.Voting
                 break
               }
               case 'WhoDiedAndHow': {
@@ -276,12 +276,12 @@ presence.on('UpdateData', () => {
               }
               case 'StartDefense': {
                 presenceData.state = `Defense | Day ${currentState.day}`
-                presenceData.smallImageKey = Assets.Defense
+                presenceData.smallImageKey = ActivityAssets.Defense
                 break
               }
               case 'StartJudgement': {
                 presenceData.state = `Judgement | Day ${currentState.day}`
-                presenceData.smallImageKey = Assets.Judgement
+                presenceData.smallImageKey = ActivityAssets.Judgement
                 break
               }
               default: {
@@ -291,7 +291,7 @@ presence.on('UpdateData', () => {
             break
           }
           case GameState.Night: {
-            presenceData.smallImageKey = Assets.Night
+            presenceData.smallImageKey = ActivityAssets.Night
             if (currentState.page === 'FullMoonNight')
               presenceData.state = `Night ${currentState.day} (Full Moon)`
             else presenceData.state = `Night ${currentState.day}`

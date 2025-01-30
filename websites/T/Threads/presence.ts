@@ -44,10 +44,10 @@ presence.on('UpdateData', async () => {
 
     if (!privacy) {
       presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
-        `img[alt*="${presenceData.state.split('@')[1]}"]`,
+        `img[alt*="${presenceData.state?.split('@')[1]}"]`,
       )?.src
 
-      presenceData.smallImageText = presenceData.state.split('@')[1]
+      presenceData.smallImageText = presenceData.state?.split('@')[1]
     }
 
     if (pathname.split('/')[2] === 'post') {
@@ -76,7 +76,7 @@ presence.on('UpdateData', async () => {
     }
   }
   else if (pathname.split('/')[1]) {
-    presenceData.details = capitalize(pathname.split('/')[1])
+    presenceData.details = capitalize(pathname.split('/')[1]!)
     presenceData.state = capitalize(pathname.split('/')[2] || '')
   }
   else {

@@ -1,15 +1,17 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '974646056161804398',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/T/Tebex/assets/logo.jpg',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { hostname, href, pathname } = document.location
@@ -98,7 +100,7 @@ presence.on('UpdateData', async () => {
     default: {
       const viewing = `Viewing ${
         document.querySelector('[class*=store-name]')?.textContent
-        ?? document.querySelector('head > title')?.textContent?.split('|')[0].trim()
+        ?? document.querySelector('head > title')?.textContent?.split('|')[0]?.trim()
       }'s`
       switch (pathnameSplit[1]) {
         case '': {

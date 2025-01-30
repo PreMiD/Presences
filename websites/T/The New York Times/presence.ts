@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '813781191308083239',
 })
@@ -251,7 +253,7 @@ async function getSettings() {
     [key: string]: boolean
   } = {}
 
-  for (const [i, name] of names.entries()) obj[name] = settings[i]
+  for (const [i, name] of names.entries()) obj[name] = settings[i]!
 
   return obj
 }

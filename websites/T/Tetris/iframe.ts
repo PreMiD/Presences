@@ -68,9 +68,9 @@ function iframeInject() {
       document.querySelector<HTMLTextAreaElement>(
         '#PreMiD-tetris-presence-output',
       )!.value = JSON.stringify({
-        lines: values.mLinesValueView.mText,
-        score: values.mScoreValueView.mText,
-        level: values.mLevelValueView.mText,
+        lines: values.mLinesValueView?.mText,
+        score: values.mScoreValueView?.mText,
+        level: values.mLevelValueView?.mText,
       })
     }
     catch {

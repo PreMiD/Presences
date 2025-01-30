@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({ clientId: '1014873319419424869' })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 const staticsPages: { [name: string]: string } = {
@@ -6,13 +8,13 @@ const staticsPages: { [name: string]: string } = {
   '~tos': 'Reading ToS',
   '~account': 'Managing their account',
 }
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/T/Toyhouse/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname } = document.location
@@ -31,8 +33,8 @@ presence.on('UpdateData', async () => {
     }
     default: {
       const pageType = document.querySelector('li.header')?.textContent?.trim()
-      if (Object.keys(staticsPages).includes(pathArr[1])) {
-        presenceData.details = staticsPages[pathArr[1]]
+      if (Object.keys(staticsPages).includes(pathArr[1]!)) {
+        presenceData.details = staticsPages[pathArr[1]!]
       }
       else if (pageType === 'User') {
         presenceData.details = 'Viewing an user page'

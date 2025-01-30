@@ -20,7 +20,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Reading an article...'
       presenceData.state = `Article: '${pathname
         .split('/')[2]
-        .replace('.html', '')}'`
+        ?.replace('.html', '')}'`
     }
     else {
       presenceData.details = 'Scrolling through news articles...'
@@ -31,7 +31,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Reading a review...'
       presenceData.state = `Review: '${pathname
         .split('/')[2]
-        .replace('.html', '')}'`
+        ?.replace('.html', '')}'`
     }
     else {
       presenceData.details = 'Scrolling through reviews...'
@@ -42,7 +42,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Looking at best picks...'
       presenceData.state = `The best picks for: '${pathname
         .split('/')[3]
-        .replace('.html', '')
+        ?.replace('.html', '')
         .replace('best-', '')}'`
     }
     else {
@@ -57,7 +57,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Looking at coupons...'
       presenceData.state = `Coupons for: '${pathname
         .split('/')[3]
-        .replace('.html', '')}'`
+        ?.replace('.html', '')}'`
     }
     else {
       presenceData.details = 'Scrolling through coupons...'
@@ -67,14 +67,14 @@ presence.on('UpdateData', async () => {
     if (pathname.includes('forums')) {
       presenceData.state = `Category: '${pathname
         .split('/')[2]
-        .split('.')[0]
-        .replace('.html', '')}'`
+        ?.split('.')[0]
+        ?.replace('.html', '')}'`
     }
     else if (pathname.includes('threads')) {
       presenceData.state = `Category: '${pathname
         .split('/')[2]
-        .split('.')[0]
-        .replace('.html', '')}'`
+        ?.split('.')[0]
+        ?.replace('.html', '')}'`
     }
     else if (pathname.includes('featured')) {
       presenceData.state = 'Looking at featured threads...'
@@ -104,7 +104,7 @@ presence.on('UpdateData', async () => {
     if (pathname.split('/')[3]) {
       presenceData.state = `Subcategory: '${pathname
         .split('/')[3]
-        .replace('.html', '')}'`
+        ?.replace('.html', '')}'`
     }
     presenceData.details = `Looking at the topic: ${pathname.split('/')[2]}`
   }
@@ -115,7 +115,7 @@ presence.on('UpdateData', async () => {
     if (pathname.split('=')[1]) {
       presenceData.state = `Searching Term: '${pathname
         .split('=')[1]
-        .replace('.html', '')}'`
+        ?.replace('.html', '')}'`
     }
     presenceData.details = 'Searching the site...'
   }

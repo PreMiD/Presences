@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '691491207356088320',
 })
@@ -30,7 +32,7 @@ presence.on('UpdateData', () => {
       [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(Math.floor(currentTime), Math.floor(duration))
       presenceData.state = document.querySelectorAll(
         '.EpisodeSynopsis-title',
-      )[0].textContent
+      )[0]?.textContent
 
       if (paused) {
         presenceData.details = 'Watching a show'
@@ -47,7 +49,7 @@ presence.on('UpdateData', () => {
       presenceData.details = 'Viewing a show'
       presenceData.state = document.querySelectorAll(
         '.HeroSynopsis-title',
-      )[0].textContent
+      )[0]?.textContent
     }
   }
   else if (document.location.pathname.includes('/search')) {

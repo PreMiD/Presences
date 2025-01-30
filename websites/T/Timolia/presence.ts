@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/T/Timolia/assets/logo.png',
   Minecraft = 'https://cdn.rcd.gg/PreMiD/websites/T/Timolia/assets/0.png',
   Gitlab = 'https://cdn.rcd.gg/PreMiD/websites/T/Timolia/assets/1.png',
@@ -11,7 +11,7 @@ const enum Assets {
 
 presence.on('UpdateData', () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 
@@ -19,7 +19,7 @@ presence.on('UpdateData', () => {
     case 'www.timolia.de': {
       if (document.location.pathname === '/') {
         presenceData.details = 'Viewing home page'
-        presenceData.smallImageKey = Assets.Minecraft
+        presenceData.smallImageKey = ActivityAssets.Minecraft
         presenceData.smallImageText = `${
           document.querySelector('#liveplayercount')?.textContent
         } online players`
@@ -85,7 +85,7 @@ presence.on('UpdateData', () => {
       }
       else if (document.location.hostname.includes('gitlab.timolia.de')) {
         presenceData.details = 'Viewing GitLab Server'
-        presenceData.smallImageKey = Assets.Gitlab
+        presenceData.smallImageKey = ActivityAssets.Gitlab
       }
   }
 

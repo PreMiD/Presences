@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const { href } = document.location
 
 class TOD extends Presence {
@@ -51,7 +53,7 @@ class TOD extends Presence {
   }
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/T/TOD/assets/logo.png',
 }
 
@@ -80,7 +82,7 @@ presence.on('UpdateData', async () => {
     type: ActivityType.Watching,
     smallImageKey: Assets.Search,
     smallImageText: 'Browsing',
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     details: 'Browsing...',
     startTimestamp: data.startedSince,
   }

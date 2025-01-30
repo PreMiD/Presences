@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 let elapsed = Math.floor(Date.now() / 1000)
 let oldLang = 'en'
 let prevUrl = document.location.href
@@ -105,7 +107,7 @@ presence.on('UpdateData', async () => {
         .querySelector<HTMLHeadingElement>('h2')
         ?.textContent
         ?.split(':')[1]
-        .trim()
+        ?.trim()
     }
     presenceData.smallImageKey = Assets.Search
     presenceData.smallImageText = strings.search

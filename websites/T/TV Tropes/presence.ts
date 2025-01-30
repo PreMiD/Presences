@@ -38,7 +38,7 @@ presence.on('UpdateData', () => {
   if (pathCheck === 'pmwiki') {
     switch (mainPath) {
       case 'pmwiki.php': {
-        mainWikiPathDetails(namespace)
+        mainWikiPathDetails(namespace!)
         break
       }
       case 'profile.php': {

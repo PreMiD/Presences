@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const LOGO_URL = 'https://cdn.rcd.gg/PreMiD/websites/T/Tidal/assets/logo.png'
 const presence = new Presence({ clientId: '901591802342150174' })
 

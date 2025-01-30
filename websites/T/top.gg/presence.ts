@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: '629380028576301093',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Dblstaff = 'https://cdn.rcd.gg/PreMiD/websites/T/top.gg/assets/0.png',
   Dslregular = 'https://cdn.rcd.gg/PreMiD/websites/T/top.gg/assets/1.png',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/T/top.gg/assets/logo.png',
@@ -10,18 +10,18 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   presenceData.details = 'Viewing Page:'
 
   // Discord Bot List
   if (window.location.pathname.startsWith('/moderation')) {
     presenceData.details = 'Viewing DBL Staff section:'
-    presenceData.largeImageKey = Assets.Dblstaff
+    presenceData.largeImageKey = ActivityAssets.Dblstaff
 
     switch (window.location.pathname) {
       case '/moderation': {
-        const personalquota = document.querySelectorAll('.quotaindiv')[0].textContent
+        const personalquota = document.querySelectorAll('.quotaindiv')[0]?.textContent
 
         presenceData.state = `Reviewed ${personalquota?.substring(
           personalquota.indexOf('reviewed') + 9,
@@ -79,7 +79,7 @@ presence.on('UpdateData', async () => {
         .querySelector('.entity-header__name')
         ?.textContent
         ?.trim()}`
-      presenceData.largeImageKey = Assets.Dblstaff
+      presenceData.largeImageKey = ActivityAssets.Dblstaff
       presenceData.state = 'Bot isn\'t approved yet'
     }
     else {
@@ -96,7 +96,7 @@ presence.on('UpdateData', async () => {
       .querySelector('#botlistitle')
       ?.textContent
       ?.split('-')[0]
-      .trim()
+      ?.trim()
   }
   else if (window.location.pathname.startsWith('/tag/')) {
     presenceData.details = 'Viewing Discord bots with tag:'
@@ -104,7 +104,7 @@ presence.on('UpdateData', async () => {
       .querySelector('#botlistitle')
       ?.textContent
       ?.split('-')[0]
-      .trim()
+      ?.trim()
   }
   else if (
     window.location.pathname.startsWith('/user/')
@@ -118,7 +118,7 @@ presence.on('UpdateData', async () => {
   }
   // Discord Server List
   else if (window.location.pathname.startsWith('/servers')) {
-    presenceData.largeImageKey = Assets.Dslregular
+    presenceData.largeImageKey = ActivityAssets.Dslregular
     if (
       window.location.pathname.startsWith('/servers/list/')
       || window.location.pathname.startsWith('/servers/tag/')

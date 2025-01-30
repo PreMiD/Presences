@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({ clientId: '818756651279450144' })
 
 presence.on('UpdateData', async () => {
@@ -15,7 +17,7 @@ presence.on('UpdateData', async () => {
         const pathnames = location.pathname.split('/')
         presenceData.details = 'Viewing component:'
         presenceData.state = `${pathnames[pathnames.length - 2]
-          .replaceAll('-', ' ')
+          ?.replaceAll('-', ' ')
           .replace(/(^\w|\s\w)/g, m => m.toUpperCase())} - ${
           document.querySelector('main .max-w-8xl h2')?.textContent
           || 'Unknown component'

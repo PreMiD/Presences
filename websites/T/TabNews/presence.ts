@@ -18,7 +18,7 @@ presence.on('UpdateData', async () => {
       if (secondLevelPath === 'pagina')
         presenceData.state = `Página ${thirdLevelPath}`
       break
-    case secondLevelPath.startsWith('recentes'):
+    case secondLevelPath?.startsWith('recentes'):
       presenceData.details = 'Vendo conteúdos recentes'
       if (fourLevelPath)
         presenceData.state = `Página ${fourLevelPath}`

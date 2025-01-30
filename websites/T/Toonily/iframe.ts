@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const iframe = new iFrame()
 
 iframe.on('UpdateData', async () => {

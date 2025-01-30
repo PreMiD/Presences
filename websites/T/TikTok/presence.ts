@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '809093093600133165',
 })
@@ -288,7 +290,7 @@ presence.on('UpdateData', async () => {
         { label: strings.buttonWatchStream, url: href },
         {
           label: strings.buttonViewProfile,
-          url: href?.split('/live')?.[0],
+          url: href?.split('/live')?.[0] || '',
         },
       ]
       break

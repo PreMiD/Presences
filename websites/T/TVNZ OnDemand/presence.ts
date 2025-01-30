@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '687426695417823238',
 })
@@ -28,7 +30,7 @@ presence.on('UpdateData', () => {
   }
   else if (document.location.pathname.includes('/1-news-special')) {
     presenceData.details = 'Watching a live 1 NEWS Special'
-    presenceData.state = document.querySelectorAll('.Hero-title')[1].textContent
+    presenceData.state = document.querySelectorAll('.Hero-title')[1]?.textContent
     presenceData.startTimestamp = Math.floor(Date.now() / 1000)
   }
   else if (
@@ -53,7 +55,7 @@ presence.on('UpdateData', () => {
       ]
     }
 
-    presenceData.state = document.querySelectorAll('.Player-title')[0].textContent
+    presenceData.state = document.querySelectorAll('.Player-title')[0]?.textContent
 
     if (paused) {
       presenceData.details = 'Watching a show'
@@ -68,7 +70,7 @@ presence.on('UpdateData', () => {
   }
   else if (document.location.pathname.includes('/shows/')) {
     presenceData.details = 'Viewing a show'
-    presenceData.state = document.querySelectorAll('.Hero-title')[1].textContent
+    presenceData.state = document.querySelectorAll('.Hero-title')[1]?.textContent
   }
   else if (
     document.URL === 'https://www.tvnz.co.nz/categories/my-favourites'
@@ -79,7 +81,7 @@ presence.on('UpdateData', () => {
   else if (document.location.pathname.includes('/categories/')) {
     presenceData.details = 'Browsing a category'
     presenceData.startTimestamp = Math.floor(Date.now() / 1000)
-    presenceData.state = document.querySelectorAll('.PageHeader-title')[0].textContent
+    presenceData.state = document.querySelectorAll('.PageHeader-title')[0]?.textContent
   }
   else if (
     document.location.pathname.includes('/manage-profiles')
@@ -103,21 +105,21 @@ presence.on('UpdateData', () => {
       case 'https://www.tvnz.co.nz/livetv/tvnz-1': {
         presenceData.details = 'Watching TVNZ 1 Live'
         presenceData.startTimestamp = Math.floor(Date.now() / 1000)
-        presenceData.state = document.querySelectorAll('.Player-title')[0].textContent
+        presenceData.state = document.querySelectorAll('.Player-title')[0]?.textContent
 
         break
       }
       case 'https://www.tvnz.co.nz/livetv/tvnz-2': {
         presenceData.details = 'Watching TVNZ 2 Live'
         presenceData.startTimestamp = Math.floor(Date.now() / 1000)
-        presenceData.state = document.querySelectorAll('.Player-title')[0].textContent
+        presenceData.state = document.querySelectorAll('.Player-title')[0]?.textContent
 
         break
       }
       case 'https://www.tvnz.co.nz/livetv/tvnz-duke': {
         presenceData.details = 'Watching TVNZ Duke Live'
         presenceData.startTimestamp = Math.floor(Date.now() / 1000)
-        presenceData.state = document.querySelectorAll('.Player-title')[0].textContent
+        presenceData.state = document.querySelectorAll('.Player-title')[0]?.textContent
 
         break
       }
