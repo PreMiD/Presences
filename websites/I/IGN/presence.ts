@@ -51,23 +51,14 @@ async function getStrings() {
 	});
 }
 
-let strings: Awaited<ReturnType<typeof getStrings>>,
-	oldLang: string = null;
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		newLang = await presence.getSetting<string>("lang").catch(() => "en"),
-		{ pathname, href } = document.location;
-
-	if (oldLang !== newLang || !strings) {
-		oldLang = newLang;
-		strings = await getStrings();
-	}
-
-	const pathOne = pathname.split("/")[1],
+		{ pathname, href } = document.location,
+		strings = await getStrings(),
+		pathOne = pathname.split("/")[1],
 		pathTwo = pathname.split("/")[2],
 		pathThree = pathname.split("/")[3];
 
