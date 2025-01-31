@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1035433850593095740',
 })
@@ -5,7 +7,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000)
 const homepageInput = document.querySelector<HTMLInputElement>('input[name="text"]')
 const { host, pathname } = document.location
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/Y/Yandex/assets/logo.png',
 }
 
@@ -32,7 +34,7 @@ function textContent(tags: string) {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const [newLang, privacy, logo, time] = await Promise.all([

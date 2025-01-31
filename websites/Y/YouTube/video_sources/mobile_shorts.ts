@@ -1,4 +1,4 @@
-import type { Resolver } from '../util'
+import type { Resolver } from '../util/index.js'
 
 function isActive(): boolean {
   return (
@@ -39,7 +39,7 @@ function getChannelURL(): string | undefined {
 }
 
 export function getVideoID(): string {
-  return document.location.pathname.split('/shorts/')[1]
+  return document.location.pathname.split('/shorts/')[1]!
 }
 
 function getShortsElement(): HTMLElement | null {

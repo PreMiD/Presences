@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1284161421957136486',
 })
@@ -22,7 +24,7 @@ interface DataInterface {
   paused: boolean
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/Y/YTPLR/assets/logo.png',
 }
 
@@ -38,7 +40,7 @@ presence.on('iFrameData', (data: DataInterface) => {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   } as PresenceData
   const [startTimestamp, endTimestamp] = presence.getTimestamps(
     Math.floor(videoCurrentTime),

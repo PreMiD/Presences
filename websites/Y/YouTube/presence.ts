@@ -1,6 +1,7 @@
 import type {
   Resolver,
-} from './util'
+} from './util/index.js'
+import { ActivityType, Assets } from 'premid'
 import {
   checkStringLanguage,
   getQuerySelectors,
@@ -8,18 +9,18 @@ import {
   getThumbnail,
   presence,
   strings,
-} from './util'
-import { pvPrivacyUI } from './util/pvPrivacyUI'
-import youtubeApiResolver from './video_sources/api'
-import youtubeResolver from './video_sources/default'
-import youtubeEmbedResolver from './video_sources/embed'
-import youtubeMiniplayerResolver from './video_sources/miniplayer'
-import youtubeMobileResolver from './video_sources/mobile_default'
-import youtubeMobileShortsResolver from './video_sources/mobile_shorts'
-import youtubeMoviesResolver from './video_sources/movies'
-import youtubeOldResolver from './video_sources/old'
-import youtubeShortsResolver from './video_sources/shorts'
-import youtubeTVResolver from './video_sources/tv'
+} from './util/index.js'
+import { pvPrivacyUI } from './util/pvPrivacyUI.js'
+import youtubeApiResolver from './video_sources/api.js'
+import youtubeResolver from './video_sources/default.js'
+import youtubeEmbedResolver from './video_sources/embed.js'
+import youtubeMiniplayerResolver from './video_sources/miniplayer.js'
+import youtubeMobileResolver from './video_sources/mobile_default.js'
+import youtubeMobileShortsResolver from './video_sources/mobile_shorts.js'
+import youtubeMoviesResolver from './video_sources/movies.js'
+import youtubeOldResolver from './video_sources/old.js'
+import youtubeShortsResolver from './video_sources/shorts.js'
+import youtubeTVResolver from './video_sources/tv.js'
 
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
@@ -121,7 +122,7 @@ presence.on('UpdateData', async () => {
     let playlistQueue: string | undefined
     if (playlistTitle) {
       if (playlistQueueElements.length > 1) {
-        playlistQueue = `${playlistQueueElements[0].textContent} / ${playlistQueueElements[2].textContent}`
+        playlistQueue = `${playlistQueueElements[0]?.textContent} / ${playlistQueueElements[2]?.textContent}`
       }
       else if (isMobile) {
         playlistQueue = document
@@ -246,7 +247,7 @@ presence.on('UpdateData', async () => {
         {
           label: live ? strings.watchStreamButton : strings.watchVideoButton,
           url: href.includes('/watch?v=')
-            ? href.split('&')[0]
+            ? href.split('&')[0]!
             : `https://www.youtube.com/watch?v=${videoId}`,
         },
         {

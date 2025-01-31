@@ -1,5 +1,5 @@
-import type { Resolver } from '../util'
-import { getVideoID } from './default'
+import type { Resolver } from '../util/index.js'
+import { getVideoID } from './default.js'
 
 function isActive(): boolean {
   return (

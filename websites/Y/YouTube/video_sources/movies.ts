@@ -1,5 +1,5 @@
-import type { Resolver } from '../util'
-import { getChannelURL, getVideoID } from './default'
+import type { Resolver } from '../util/index.js'
+import { getChannelURL, getVideoID } from './default.js'
 
 function isActive(): boolean {
   return !!getTitle() && !!getUploader() && !!getVideoID() && !!getChannelURL()

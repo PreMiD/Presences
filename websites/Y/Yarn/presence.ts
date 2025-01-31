@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '690635264124518493',
 })
@@ -13,8 +15,8 @@ function parseQueryString(queryString?: string): {
   const queries = queryString.split('&')
   for (const indexQuery in queries) {
     const indexPair = indexQuery.split('=')
-    params[decodeURIComponent(indexPair[0])] = decodeURIComponent(
-      indexPair.length > 1 ? indexPair[1] : '',
+    params[decodeURIComponent(indexPair[0]!)] = decodeURIComponent(
+      indexPair.length > 1 ? indexPair[1]! : '',
     )
   }
   return params

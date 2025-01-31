@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1056816638466457613',
 })
@@ -50,7 +52,7 @@ let video = {
 let strings: Awaited<ReturnType<typeof getStrings>>
 let oldLang: string | null = null
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/Y/Yugen%20Anime/assets/logo.png',
 }
 
@@ -63,7 +65,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     details: 'Unsupported page',
     smallImageKey: Assets.Reading,
   }
@@ -180,7 +182,7 @@ presence.on('UpdateData', async () => {
       ?? `Episode ${jsonIt.episode}`
     presenceData.largeImageKey = await getShortURL(
       document.querySelector('div.img-icon > img')?.getAttribute('src')
-      ?? Assets.Logo,
+      ?? ActivityAssets.Logo,
     )
     presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play
     presenceData.smallImageText = video.paused ? strings.pause : strings.play
@@ -244,7 +246,7 @@ presence.on('UpdateData', async () => {
         .querySelector('div.banner')
         ?.getAttribute('style')
         ?.split('url(')[1]
-        .split(')')[0]
+        ?.split(')')[0]
         ?.replaceAll('\'', ''),
     )
     presenceData.smallImageText = `By ${document
@@ -269,7 +271,7 @@ presence.on('UpdateData', async () => {
   }
 
   if (!showCovers && presenceData.largeImageKey)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
 
   if (presenceData.details)
     presence.setActivity(presenceData)

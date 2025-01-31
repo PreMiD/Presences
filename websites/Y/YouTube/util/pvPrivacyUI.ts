@@ -1,4 +1,4 @@
-import { getQuerySelectors, presence, strings } from './'
+import { getQuerySelectors, presence, strings } from './index.js'
 
 type VPArray = { videoId: string, ttl: number }[]
 
@@ -44,7 +44,7 @@ export function pvPrivacyUI(
       button.className = 'ytp-button'
       button.addEventListener('click', () => {
         const videoId = new URLSearchParams(document.location.search).get('v')!
-        const ttl = Date.now() + [5, 12, 24, 168][privacyTtl] * 60 * 60 * 1000
+        const ttl = Date.now() + [5, 12, 24, 168][privacyTtl]! * 60 * 60 * 1000
         if (localStorage.getItem('pmdPrivacyEnabled') === 'true') {
           isVideoInArray(videoId, perVideoNonPrivacyArray)
             ? (perVideoNonPrivacyArray = perVideoNonPrivacyArray.filter(

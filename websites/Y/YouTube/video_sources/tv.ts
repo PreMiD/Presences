@@ -1,6 +1,6 @@
-import type { Resolver } from '../util'
-import { truncateAfter } from '../util'
-import { getChannelURL, getVideoID } from './default'
+import type { Resolver } from '../util/index.js'
+import { truncateAfter } from '../util/index.js'
+import { getChannelURL, getVideoID } from './default.js'
 
 function isActive(): boolean {
   return (

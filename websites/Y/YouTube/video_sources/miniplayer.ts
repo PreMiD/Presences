@@ -1,4 +1,4 @@
-import type { Resolver } from '../util'
+import type { Resolver } from '../util/index.js'
 
 function isActive(): boolean {
   return !!getTitle() && !!getUploader() && !!getVideoID() && !!getChannelURL()

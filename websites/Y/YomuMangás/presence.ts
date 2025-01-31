@@ -35,7 +35,7 @@ presence.on('UpdateData', async () => {
           || 'https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/1.png'
         presenceData.smallImageKey = 'https://cdn.rcd.gg/PreMiD/websites/Y/YomuMang%C3%A1s/assets/logo.png'
         presenceData.buttons = [
-          { label: 'Acessar Obra', url: href.split('/chapter/')[0] },
+          { label: 'Acessar Obra', url: href.split('/chapter/')[0]! },
           { label: 'Ler Capítulo', url: href },
         ]
         if (!isChapter)
@@ -57,7 +57,7 @@ presence.on('UpdateData', async () => {
       presenceData.buttons = [
         {
           label: 'Ver Perfil',
-          url: href.replace('settings', username.split('(')[0].trim()),
+          url: href.replace('settings', username.split('(')[0]?.trim() ?? ''),
         },
       ]
     }

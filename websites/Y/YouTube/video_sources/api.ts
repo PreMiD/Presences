@@ -1,7 +1,7 @@
-import type { Resolver } from '../util'
-import { presence } from '../util'
-import { getVideoID as getDefaultVideoID } from './default'
-import { getVideoID as getShortsVideoID } from './shorts'
+import type { Resolver } from '../util/index.js'
+import { presence } from '../util/index.js'
+import { getVideoID as getDefaultVideoID } from './default.js'
+import { getVideoID as getShortsVideoID } from './shorts.js'
 
 const videoCache = new Map<string, YouTubeAPIResponse>()
 const videoCacheLoading = new Set<string>()

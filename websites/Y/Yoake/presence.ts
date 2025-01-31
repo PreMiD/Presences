@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '787715073007026187',
 })
@@ -13,7 +15,7 @@ let browsingTimestamp = Math.floor(Date.now() / 1000)
 presence.on('UpdateData', async () => {
   const playback = !!document.querySelector('#title')
     || (document.querySelectorAll('video').length
-      && document.querySelectorAll('video')[0].className !== 'previewVideo')
+      && document.querySelectorAll('video')[0]!.className !== 'previewVideo')
   const curPath = document.location.pathname
   const presenceData: PresenceData = {
     largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/Y/Yoake/assets/logo.png',

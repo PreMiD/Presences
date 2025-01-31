@@ -1,4 +1,5 @@
-import { SimpleLRU } from './utilities/lru'
+import { ActivityType } from 'premid'
+import { SimpleLRU } from './utilities/lru.js'
 
 /**
  * Cache store for cuties' faces, will clear on reset game.

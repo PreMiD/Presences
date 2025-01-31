@@ -4,15 +4,15 @@ const presence = new Presence({
 
 let deck
 
-const enum Assets {
+enum ActivityAssets {
   Banner = 'https://cdn.rcd.gg/PreMiD/websites/Y/Yu-Gi-Oh%20Top%20Decks/assets/0.png',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/Y/Yu-Gi-Oh%20Top%20Decks/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
-    smallImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
+    smallImageKey: ActivityAssets.Logo,
   }
 
   switch (document.location.pathname) {
@@ -26,7 +26,7 @@ presence.on('UpdateData', async () => {
     case '/decklists': {
       presenceData.details = 'Looking at Decklists'
       presenceData.state = `Page: ${
-        document.querySelectorAll('.current')[0].firstElementChild?.textContent
+        document.querySelectorAll('.current')[0]?.firstElementChild?.textContent
       } top: ${
         document.querySelector('#deck_lists')?.lastElementChild?.firstElementChild?.children[2]?.textContent
       } by ${
@@ -50,8 +50,8 @@ presence.on('UpdateData', async () => {
           'Most Used Cards',
           '',
         )}`
-      presenceData.largeImageKey = Assets.Banner
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.largeImageKey = ActivityAssets.Banner
+      presenceData.smallImageKey = ActivityAssets.Logo
       presenceData.smallImageText = 'looking'
 
       break
@@ -65,8 +65,8 @@ presence.on('UpdateData', async () => {
         ?.children[4]
         ?.textContent
       }`
-      presenceData.largeImageKey = Assets.Banner
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.largeImageKey = ActivityAssets.Banner
+      presenceData.smallImageKey = ActivityAssets.Logo
       presenceData.smallImageText = 'looking'
 
       break
@@ -76,8 +76,8 @@ presence.on('UpdateData', async () => {
         .value
       presenceData.details = 'Building Deck'
       presenceData.state = `Editing: ${deck}`
-      presenceData.largeImageKey = Assets.Banner
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.largeImageKey = ActivityAssets.Banner
+      presenceData.smallImageKey = ActivityAssets.Logo
       presenceData.smallImageText = 'creating deck'
 
       break
@@ -91,14 +91,14 @@ presence.on('UpdateData', async () => {
           ?.firstElementChild
           ?.textContent
         presenceData.details = `Viewing deck: ${deck} (archetype: ${
-          document.querySelectorAll('.large-12.columns.panel')[0].children[1]
-            .children[10]
-            .textContent
+          document.querySelectorAll('.large-12.columns.panel')[0]?.children[1]
+            ?.children[10]
+            ?.textContent
         })`
         presenceData.state = `by: ${
-          document.querySelectorAll('.large-12.columns.panel')[0].children[1]
-            .children[1]
-            .textContent
+          document.querySelectorAll('.large-12.columns.panel')[0]?.children[1]
+            ?.children[1]
+            ?.textContent
         }, price: ${
           document
             .querySelectorAll('.large-12.columns.panel')[1]
@@ -107,8 +107,8 @@ presence.on('UpdateData', async () => {
             ?.replace('\n', ':')
             ?.split(':')[1]
         }`
-        presenceData.largeImageKey = Assets.Banner
-        presenceData.smallImageKey = Assets.Logo
+        presenceData.largeImageKey = ActivityAssets.Banner
+        presenceData.smallImageKey = ActivityAssets.Logo
         presenceData.smallImageText = document.location.href
       }
   }
