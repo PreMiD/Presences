@@ -51,8 +51,8 @@ presence.on('UpdateData', async () => {
         )
       ) {
         [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(
-          presence.timestampFromFormat(playerTime[0].textContent ?? ''),
-          presence.timestampFromFormat(playerTime[1].textContent ?? ''),
+          presence.timestampFromFormat(playerTime[0]?.textContent ?? ''),
+          presence.timestampFromFormat(playerTime[1]?.textContent ?? ''),
         )
       }
       if (invite) {

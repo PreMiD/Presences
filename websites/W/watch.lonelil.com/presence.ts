@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1147910465134002276',
 })
@@ -25,7 +27,7 @@ async function getStrings() {
   )
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/W/watch.lonelil.com/assets/logo.png',
   Home = 'https://cdn.rcd.gg/PreMiD/websites/W/watch.lonelil.com/assets/0.png',
 }
@@ -63,9 +65,9 @@ presence.on('UpdateData', async () => {
     }
 
     const defaultData: PresenceData = {
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       smallImageText: 'watch.lonelil.com',
-      smallImageKey: Assets.Logo,
+      smallImageKey: ActivityAssets.Logo,
       startTimestamp: since,
     }
     const newLang = await presence.getSetting<string>('lang').catch(() => 'en')
@@ -82,14 +84,14 @@ presence.on('UpdateData', async () => {
           presenceData = {
             ...defaultData,
             details: `${strings.browsing.slice(0, -3)} ${state.shownType}`,
-            largeImageKey: Assets.Home,
+            largeImageKey: ActivityAssets.Home,
           }
         }
         else {
           presenceData = {
             ...defaultData,
             details: strings.viewingHomePage,
-            largeImageKey: Assets.Home,
+            largeImageKey: ActivityAssets.Home,
           }
         }
         break

@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '959109938779684874',
 })
@@ -33,18 +35,18 @@ presence.on('UpdateData', async () => {
           presenceData.details = 'Viewing Rankings'
         if (!privacy) {
           const activeTab = document.querySelectorAll<HTMLAnchorElement>('a[class~=\'_on\']')
-          presenceData.details = `Viewing ${activeTab[0].title.replace(
+          presenceData.details = `Viewing ${activeTab[0]?.title.replace(
             ',',
             '',
           )}`
-          presenceData.state = activeTab[1].title
+          presenceData.state = activeTab[1]?.title
         }
         presenceData.smallImageKey = Assets.Search
       }
       else if (book || comic) {
         if (cover) {
           presenceData.largeImageKey = `https://img.webnovel.com/bookcover/${
-            pathname.split('/')[2].split('_')[1]
+            pathname.split('/')[2]?.split('_')[1]
           }/600/600.jpg`
         }
         if (document.querySelector('.cha-hd-mn')) {
@@ -57,8 +59,8 @@ presence.on('UpdateData', async () => {
           else if (comic)
             presenceData.details = 'Reading a Comic'
           if (!privacy && novelInfo) {
-            presenceData.details = novelInfo[0].trim()
-            presenceData.state = novelInfo[1].trim()
+            presenceData.details = novelInfo[0]?.trim()
+            presenceData.state = novelInfo[1]?.trim()
             presenceData.smallImageKey = Assets.Reading
             presenceData.smallImageText = 'Reading'
             presenceData.buttons = [

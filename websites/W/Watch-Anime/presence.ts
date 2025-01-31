@@ -4,7 +4,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/W/Watch-Anime/assets/logo.png',
 }
 // #endregion PRESENCEDECLARATION
@@ -120,12 +120,12 @@ presence.on('UpdateData', async () => {
     const pathParts = document.location.pathname.split('/')
     if (pathParts[1] === 'player' && pathParts.length >= 6) {
       urlAnime = `https://watch-anime.fr/${pathParts[1]}/${pathParts[2]}`
-      animeInfo = await getInformationAnime(decodeURIComponent(pathParts[2]))
+      animeInfo = await getInformationAnime(decodeURIComponent(pathParts[2]!))
       episodeInfo = await getEpisodeInfo(
-        decodeURIComponent(pathParts[2]),
-        decodeURIComponent(pathParts[3]),
-        decodeURIComponent(pathParts[4]),
-        decodeURIComponent(pathParts[5]),
+        decodeURIComponent(pathParts[2]!),
+        decodeURIComponent(pathParts[3]!),
+        decodeURIComponent(pathParts[4]!),
+        decodeURIComponent(pathParts[5]!),
       )
 
       if (animeInfo) {
@@ -141,7 +141,7 @@ presence.on('UpdateData', async () => {
     presenceData = {
       details,
       state,
-      largeImageKey: animeInfo?.img || Assets.Logo,
+      largeImageKey: animeInfo?.img || ActivityAssets.Logo,
       startTimestamp: browsingTimestamp,
       ...(animeInfo && {
         buttons: [

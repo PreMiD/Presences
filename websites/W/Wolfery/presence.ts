@@ -1,7 +1,7 @@
 const presence = new Presence({ clientId: '1244143703660953651' })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/W/Wolfery/assets/logo.png',
 }
 
@@ -57,7 +57,7 @@ presence.on('UpdateData', async () => {
   presence.setActivity({
     details: detailMsg,
     state: stateMsg,
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   })
 })

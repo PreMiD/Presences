@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '860146992284958762',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   ChartBar = 'https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/0.png',
   Envelope = 'https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/1.png',
   Donate = 'https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/2.png',
@@ -24,7 +26,7 @@ let currentURL = new URL(document.location.href)
 let currentPath = currentURL.pathname.replace(/^\/|\/$/g, '').split('/')
 let presenceData: PresenceData = {
   details: 'Viewing an unsupported page',
-  largeImageKey: Assets.Logo,
+  largeImageKey: ActivityAssets.Logo,
   startTimestamp: browsingTimestamp,
 }
 const updateCallback = {
@@ -44,7 +46,7 @@ const updateCallback = {
  */
 function resetData(defaultData: PresenceData = {
   details: 'Viewing an unsupported page',
-  largeImageKey: Assets.Logo,
+  largeImageKey: ActivityAssets.Logo,
   startTimestamp: browsingTimestamp,
 }): void {
   currentURL = new URL(document.location.href)
@@ -61,14 +63,14 @@ function getURLParam(urlParam: string): string {
 async function prepare(): Promise<void> {
   switch (currentURL.hostname) {
     case 'www.wikimedia.org': {
-      presenceData.smallImageKey = Assets.LogoBlack
+      presenceData.smallImageKey = ActivityAssets.LogoBlack
       presenceData.smallImageText = 'wikimedia.org landing page'
       presenceData.details = 'On the home page'
 
       break
     }
     case 'wikimediafoundation.org': {
-      presenceData.smallImageKey = Assets.LogoBlack
+      presenceData.smallImageKey = ActivityAssets.LogoBlack
       presenceData.smallImageText = 'Wikimedia Foundation website'
 
       if (currentPath[0] === '') {
@@ -87,9 +89,9 @@ async function prepare(): Promise<void> {
             ?.textContent
             ?.split(': ')
           if (/^[aeiou]/i.test(titleSplit?.[0] ?? ''))
-            presenceData.details = `Viewing an ${titleSplit?.[0].toLowerCase()}`
+            presenceData.details = `Viewing an ${titleSplit?.[0]?.toLowerCase()}`
           else
-            presenceData.details = `Viewing a ${titleSplit?.[0].toLowerCase()}`;
+            presenceData.details = `Viewing a ${titleSplit?.[0]?.toLowerCase()}`;
           [, presenceData.state] = titleSplit ?? []
         }
         else {
@@ -134,10 +136,10 @@ async function prepare(): Promise<void> {
           .querySelector('h1')
           ?.textContent
           ?.split(': ') ?? []
-        if (/^[aeiou]/i.test(titleSplit[0]))
-          presenceData.details = `Viewing an ${titleSplit[0].toLowerCase()}`
+        if (/^[aeiou]/i.test(titleSplit[0] ?? ''))
+          presenceData.details = `Viewing an ${titleSplit[0]?.toLowerCase()}`
         else
-          presenceData.details = `Viewing a ${titleSplit[0].toLowerCase()}`;
+          presenceData.details = `Viewing a ${titleSplit[0]?.toLowerCase()}`;
         [, presenceData.state] = titleSplit
       }
       else {
@@ -159,7 +161,7 @@ async function prepare(): Promise<void> {
     }
     case 'lists.wikimedia.org': {
       if (currentPath[0] === 'postorius' && currentPath[1] === 'lists') {
-        presenceData.smallImageKey = Assets.Envelope
+        presenceData.smallImageKey = ActivityAssets.Envelope
         presenceData.smallImageText = 'Mailing Lists'
 
         if (!currentPath[2]) {
@@ -212,7 +214,7 @@ async function prepare(): Promise<void> {
       break
     }
     case 'stats.wikimedia.org': {
-      presenceData.smallImageKey = Assets.ChartBar
+      presenceData.smallImageKey = ActivityAssets.ChartBar
       presenceData.smallImageText = 'Wikimedia Statistics'
 
       presenceData.details = 'Viewing Wikimedia Statistics'
@@ -229,7 +231,7 @@ async function prepare(): Promise<void> {
     }
     case 'phabricator.wikimedia.org':
     case 'phab.wmflabs.org': {
-      presenceData.smallImageKey = Assets.Phabricator
+      presenceData.smallImageKey = ActivityAssets.Phabricator
       presenceData.smallImageText = 'Wikimedia Phabricator'
       if (currentURL.hostname === 'phab.wmflabs.org')
         presenceData.smallImageText += ' (test)'
@@ -237,7 +239,7 @@ async function prepare(): Promise<void> {
       if (currentPath[0] === '') {
         presenceData.details = 'On the home page'
       }
-      else if (/^T\d+$/.test(currentPath[0])) {
+      else if (/^T\d+$/.test(currentPath[0] ?? '')) {
         presenceData.details = 'Viewing a task'
         presenceData.state = document.title.replace(/^[^\w\s] /, '')
       }
@@ -341,7 +343,7 @@ async function prepare(): Promise<void> {
             break
           }
           default:
-            if (/^P\d+$/.test(currentPath[0])) {
+            if (/^P\d+$/.test(currentPath[0] ?? '')) {
               presenceData.details = 'Viewing a paste'
               presenceData.state = document.title.replace(
                 /^[^\w\s] /,
@@ -359,7 +361,7 @@ async function prepare(): Promise<void> {
                 )?.textContent
               }
             }
-            else if (/^M\d+$/.test(currentPath[0])) {
+            else if (/^M\d+$/.test(currentPath[0] ?? '')) {
               presenceData.details = 'Viewing a mock'
               presenceData.state = document.title.replace(
                 /^[^\w\s] /,
@@ -377,7 +379,7 @@ async function prepare(): Promise<void> {
                 )?.textContent
               }
             }
-            else if (/^U\d+$/.test(currentPath[0])) {
+            else if (/^U\d+$/.test(currentPath[0] ?? '')) {
               presenceData.details = 'Viewing a short URL'
               presenceData.state = document.title.replace(
                 /^[^\w\s] /,
@@ -415,7 +417,7 @@ async function prepare(): Promise<void> {
       break
     }
     case 'xtools.wmflabs.org': {
-      presenceData.smallImageKey = Assets.Xtools
+      presenceData.smallImageKey = ActivityAssets.Xtools
       presenceData.smallImageText = 'XTools'
 
       const titleArray = document.title.split(' - ')
@@ -449,13 +451,13 @@ async function prepare(): Promise<void> {
           'legal.html': 'License information',
           'mirrors.html': 'Mirrors of database backup dumps',
         }
-        presenceData.state = pageNames[currentPath[0]]
+        presenceData.state = pageNames[currentPath[0]!]
       }
 
       break
     }
     case 'donate.wikimedia.org': {
-      presenceData.smallImageKey = Assets.Donate
+      presenceData.smallImageKey = ActivityAssets.Donate
       presenceData.smallImageText = 'Donation Gateway'
 
       presenceData.details = 'Donating to the Wikimedia Foundation'
@@ -476,28 +478,28 @@ async function prepare(): Promise<void> {
 
       switch (currentURL.hostname) {
         case 'meta.wikimedia.org': {
-          presenceData.smallImageKey = Assets.Meta
+          presenceData.smallImageKey = ActivityAssets.Meta
           break
         }
         case 'incubator.wikimedia.org': {
-          presenceData.smallImageKey = Assets.Incubator
+          presenceData.smallImageKey = ActivityAssets.Incubator
           break
         }
         case 'wikitech.wikimedia.org': {
-          presenceData.smallImageKey = Assets.Wikitech
+          presenceData.smallImageKey = ActivityAssets.Wikitech
           break
         }
         case 'www.mediawiki.org': {
-          presenceData.smallImageKey = Assets.Mediawiki
+          presenceData.smallImageKey = ActivityAssets.Mediawiki
           break
         }
         default:
           if (currentURL.hostname.startsWith('wikimania'))
-            presenceData.smallImageKey = Assets.Wikimania
+            presenceData.smallImageKey = ActivityAssets.Wikimania
           else if (currentURL.hostname === 'foundation.wikimedia.org')
-            presenceData.smallImageKey = Assets.LogoBlack
+            presenceData.smallImageKey = ActivityAssets.LogoBlack
           else if (currentURL.hostname === 'wikispore.wmflabs.org')
-            presenceData.smallImageKey = Assets.Wikispore
+            presenceData.smallImageKey = ActivityAssets.Wikispore
       }
 
       const siteName = mwConfig.wgSiteName

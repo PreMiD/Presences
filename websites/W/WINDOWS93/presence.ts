@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '841014953439264841',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   LogoWhite = 'https://cdn.rcd.gg/PreMiD/websites/W/WINDOWS93/assets/logo.png',
   LogoBlack = 'https://cdn.rcd.gg/PreMiD/websites/W/WINDOWS93/assets/0.png',
 }
@@ -52,7 +54,7 @@ presence.on('UpdateData', async () => {
     presence.getSetting<number>('logo'),
   ])
   const presenceData: PresenceData = {
-    largeImageKey: logo ? Assets.LogoBlack : Assets.LogoWhite,
+    largeImageKey: logo ? ActivityAssets.LogoBlack : ActivityAssets.LogoWhite,
     startTimestamp: browsingTimestamp,
   }
   const activeWindow = document.querySelector('.ui_window--active')

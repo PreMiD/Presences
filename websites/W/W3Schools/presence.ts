@@ -38,7 +38,7 @@ presence.on('UpdateData', () => {
 
   if (exercise) {
     presenceData.details = `${capitalize(
-      window.location.pathname.split('/')[1],
+      window.location.pathname.split('/')[1]!,
     )} Exercise`;
     [presenceData.state] = exercise.textContent?.match('[0-9](.*)[0-9]') ?? []
   }

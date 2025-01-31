@@ -6,7 +6,7 @@ const puzzleNumber = Math.trunc(
   (Date.now() - new Date('06/19/2021').getTime()) / (1000 * 3600 * 24),
 )
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/W/Wordle/assets/logo.png',
   Thought = 'https://cdn.rcd.gg/PreMiD/websites/W/Wordle/assets/0.png',
   Fail = 'https://cdn.rcd.gg/PreMiD/websites/W/Wordle/assets/1.png',
@@ -16,7 +16,7 @@ const enum Assets {
 presence.on('UpdateData', async () => {
   if (document.location.pathname.includes('/wordle')) {
     const presenceData: PresenceData = {
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       startTimestamp: browsingTimestamp,
     }
     const guess = await presence.getSetting<boolean>('guess')
@@ -32,13 +32,13 @@ presence.on('UpdateData', async () => {
       if (correct === 5) {
         presenceData.details = `Solved (#${puzzleNumber})`
         presenceData.state = `Guess ${i + 1} / 6`
-        presenceData.smallImageKey = Assets.Solved
+        presenceData.smallImageKey = ActivityAssets.Solved
         break
       }
       else if (i === 5 && guessed) {
         presenceData.details = `Failed (#${puzzleNumber})`
         presenceData.state = 'Guess X / 6'
-        presenceData.smallImageKey = Assets.Fail
+        presenceData.smallImageKey = ActivityAssets.Fail
         break
       }
       else if (!guessed) {
@@ -46,7 +46,7 @@ presence.on('UpdateData', async () => {
           presenceData.details = `Warming up... (#${puzzleNumber})`
         else presenceData.details = `Guessing... (#${puzzleNumber})`
         presenceData.state = `Guess ${i + 1} / 6`
-        presenceData.smallImageKey = Assets.Thought
+        presenceData.smallImageKey = ActivityAssets.Thought
         break
       }
     }

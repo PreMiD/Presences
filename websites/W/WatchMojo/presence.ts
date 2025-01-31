@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '822457774574272592',
 })
@@ -32,7 +34,7 @@ function capitalize(s: string) {
     let newStr = ''
     for (let i = 0; i < s.split('-').length; i++) {
       const str = s.split('-')[i]
-      newStr += `${str.charAt(0).toUpperCase() + str.slice(1)} `
+      newStr += `${str!.charAt(0).toUpperCase() + str!.slice(1)} `
     }
     return newStr
   }
@@ -128,8 +130,8 @@ presence.on('UpdateData', async () => {
                 .querySelector('#questnum')
                 ?.textContent
                 ?.split('of')[0]
-                .split(' ')[1]
-                .trim() ?? '',
+                ?.split(' ')[1]
+                ?.trim() ?? '',
             )
             .replace(
               '{1}',
@@ -137,8 +139,8 @@ presence.on('UpdateData', async () => {
                 .querySelector('#questnum')
                 ?.textContent
                 ?.split('of')[1]
-                .split(' ')[1]
-                .trim() ?? '',
+                ?.split(' ')[1]
+                ?.trim() ?? '',
             )
             .replace(
               '{2}',
@@ -146,7 +148,7 @@ presence.on('UpdateData', async () => {
                 .querySelector('.scorequiz > b')
                 ?.textContent
                 ?.split('/')[0]
-                .split(' ')[2] ?? '',
+                ?.split(' ')[2] ?? '',
             )
             .replace(
               '{3}',
@@ -173,7 +175,7 @@ presence.on('UpdateData', async () => {
     '/categories/': {
       details: strings.category,
       state: typeof location.pathname.split('/')[2] === 'string'
-        ? capitalize(location.pathname.split('/')[2])
+        ? capitalize(location.pathname.split('/')[2]!)
         : 'NEEDS RESET',
     },
     '/channels/': {

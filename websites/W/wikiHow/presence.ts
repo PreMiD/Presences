@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: '630570838084812801',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png',
 }
 
@@ -25,8 +25,8 @@ presence.on('UpdateData', async () => {
           ? ` (${date.textContent?.replace('Updated: ', '')})`
           : ''
       } `,
-      largeImageKey: Assets.Logo,
-      smallImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
+      smallImageKey: ActivityAssets.Logo,
       smallImageText: decodeURIComponent(document.location.href),
       startTimestamp: Math.floor(Date.now() / 1000),
     })
@@ -37,7 +37,7 @@ presence.on('UpdateData', async () => {
       details: 'Viewing a category:',
       state: category.textContent,
       largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png',
-      smallImageKey: Assets.Logo,
+      smallImageKey: ActivityAssets.Logo,
       smallImageText: decodeURIComponent(document.location.href),
       startTimestamp: Math.floor(Date.now() / 1000),
     })
@@ -46,14 +46,14 @@ presence.on('UpdateData', async () => {
   if (path === '/index.php') {
     // Note that I (EGGSY) didn't work on this part, I don't know if it's working on the main site but I'm sure it doesn't work on Spanish version.
     const newTopic = document.querySelectorAll('.firstHeading')[0]
-      ? document.querySelectorAll('.firstHeading')[0].textContent
+      ? document.querySelectorAll('.firstHeading')[0]?.textContent
       : null
 
     return presence.setActivity({
       details: 'Editing/Writing How to',
       state: `Topic: ${newTopic ?? 'Unknown.'} `,
       largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png',
-      smallImageKey: Assets.Logo,
+      smallImageKey: ActivityAssets.Logo,
       smallImageText: decodeURIComponent(document.location.href),
       startTimestamp: Math.floor(Date.now() / 1000),
     })
@@ -67,9 +67,9 @@ presence.on('UpdateData', async () => {
 
     return presence.setActivity({
       details: 'Searching for:',
-      state: `${searching[0].toUpperCase() + searching.slice(1).toLowerCase()}`,
+      state: `${searching[0]?.toUpperCase() + searching.slice(1).toLowerCase()}`,
       largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png',
-      smallImageKey: Assets.Logo,
+      smallImageKey: ActivityAssets.Logo,
       smallImageText: 'Searching...',
       startTimestamp: Math.floor(Date.now() / 1000),
     })
@@ -79,7 +79,7 @@ presence.on('UpdateData', async () => {
     details: 'Viewing a page:',
     state: 'Homepage',
     largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/W/wikiHow/assets/logo.png',
-    smallImageKey: Assets.Logo,
+    smallImageKey: ActivityAssets.Logo,
     startTimestamp: Math.floor(Date.now() / 1000),
   })
 })

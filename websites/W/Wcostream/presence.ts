@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '936985014560755753',
 })
@@ -9,7 +11,7 @@ let video = {
 }
 let title = ''
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/W/Wcostream/assets/logo.png',
 }
 presence.on(
@@ -24,7 +26,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     details: 'Browsing...',
     startTimestamp: browsingTimestamp,
   } as PresenceData
@@ -41,7 +43,7 @@ presence.on('UpdateData', async () => {
       title = document.querySelector('[itemprop="partOfSeries"]')?.textContent
         ?? document.querySelector('.video-title')?.textContent
         ?? document.querySelector('.entry-title')?.textContent
-        ?? document.title.split('|')[0]
+        ?? document.title.split('|')[0]!
     }
     presenceData.details = 'Watching:'
     presenceData.state = title?.split('Episode')?.[0]
@@ -49,7 +51,7 @@ presence.on('UpdateData', async () => {
     if (document.querySelector<HTMLImageElement>('[class*="s-post-image"]')) {
       // This is where they store their thumbnails/posters
       presenceData.largeImageKey = document.querySelector<HTMLImageElement>('[class*="s-post-image"]')
-        ?.src ?? Assets.Logo
+        ?.src ?? ActivityAssets.Logo
     }
     delete presenceData.startTimestamp
     const timeLeft = presence.timestampFromFormat(video.timeLeft)
@@ -92,8 +94,8 @@ presence.on('UpdateData', async () => {
     presenceData.smallImageKey = Assets.Search
   }
 
-  if (!cover && presenceData.largeImageKey !== Assets.Logo)
-    presenceData.largeImageKey = Assets.Logo
+  if (!cover && presenceData.largeImageKey !== ActivityAssets.Logo)
+    presenceData.largeImageKey = ActivityAssets.Logo
 
   if (!buttons && presenceData.buttons)
     delete presenceData.buttons

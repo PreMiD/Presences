@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 class Weverse extends Presence {
   constructor(options: PresenceOptions) {
     super(options)

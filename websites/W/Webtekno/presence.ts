@@ -1,8 +1,10 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '628269030901547037',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/logo.png',
   Video = 'https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/0.png',
   Post = 'https://cdn.rcd.gg/PreMiD/websites/W/Webtekno/assets/1.png',
@@ -26,8 +28,8 @@ const pages: { [key: string]: string } = {
 }
 const smallImageKey: { [key: string]: string } = {
   '/ara': Assets.Search,
-  '/video': Assets.Video,
-  '/uye/favorilerim': Assets.Star,
+  '/video': ActivityAssets.Video,
+  '/uye/favorilerim': ActivityAssets.Star,
 }
 
 presence.on('UpdateData', async () => {
@@ -45,7 +47,7 @@ presence.on('UpdateData', async () => {
     )
 
     presence.setActivity({
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       details: 'Bir yazara göz atıyor:',
       state: author && author.textContent !== '' ? author.textContent : 'Belirsiz',
       startTimestamp: Math.floor(Date.now() / 1000),
@@ -53,7 +55,7 @@ presence.on('UpdateData', async () => {
   }
   else if (title && title.textContent !== '') {
     presence.setActivity({
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       details: `${title.textContent}`,
       state: `Yazar: ${
         document.querySelector(
@@ -72,14 +74,14 @@ presence.on('UpdateData', async () => {
           )?.textContent
           : 'Belirsiz Süre'
       })`,
-      smallImageKey: Assets.Post,
+      smallImageKey: ActivityAssets.Post,
       smallImageText: 'Bir gönderi okuyor...',
       startTimestamp: Math.floor(Date.now() / 1000),
     })
   }
   else if (videoTitle && videoTitle.textContent !== '') {
     presence.setActivity({
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       details: `${videoTitle.textContent}`,
       state: `Yazar: ${
         document.querySelector(
@@ -98,14 +100,14 @@ presence.on('UpdateData', async () => {
           )?.textContent
           : 'Belirsiz Süre'
       })`,
-      smallImageKey: Assets.Video,
+      smallImageKey: ActivityAssets.Video,
       smallImageText: 'Bir video gönderi okuyor...',
       startTimestamp: Math.floor(Date.now() / 1000),
     })
   }
   else {
     presence.setActivity({
-      largeImageKey: Assets.Logo,
+      largeImageKey: ActivityAssets.Logo,
       details: 'Bir sayfaya göz atıyor:',
       state: pages[page] || pages[page.slice(0, -1)] || 'Ana Sayfa',
       smallImageKey: smallImageKey[page] || smallImageKey[page.slice(0, -1)],

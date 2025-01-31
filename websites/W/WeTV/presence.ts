@@ -1,4 +1,6 @@
-const enum WeTvAssets {
+import { ActivityType } from 'premid'
+
+enum ActivityAssets {
   Play = 'https://cdn.rcd.gg/PreMiD/websites/W/WeTV/assets/0.png',
   Pause = 'https://cdn.rcd.gg/PreMiD/websites/W/WeTV/assets/1.png',
   Search = 'https://cdn.rcd.gg/PreMiD/websites/W/WeTV/assets/2.png',
@@ -24,7 +26,7 @@ presence.on('UpdateData', async () => {
     details: 'Browsing...',
     largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/W/WeTV/assets/logo.png',
     type: ActivityType.Watching,
-    smallImageKey: WeTvAssets.Search,
+    smallImageKey: ActivityAssets.Search,
   }
 
   if (document.location.pathname.includes('/play/')) {
@@ -60,8 +62,8 @@ presence.on('UpdateData', async () => {
       [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video)
 
       presenceData.smallImageKey = video.paused
-        ? WeTvAssets.Pause
-        : WeTvAssets.Play
+        ? ActivityAssets.Pause
+        : ActivityAssets.Play
       presenceData.smallImageText = video.paused ? 'Paused' : 'Playing'
 
       if (video.paused) {

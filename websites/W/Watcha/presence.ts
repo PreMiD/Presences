@@ -47,7 +47,7 @@ class Watcha extends Presence {
   defaultToReplace?: DefaultToReplace
   startedAt: number
   data?: PresenceData
-  meta?: Record<string, string>
+  meta?: Record<string, string | undefined>
 
   constructor(options: PresenceOptions) {
     super(options)
@@ -72,8 +72,8 @@ class Watcha extends Presence {
   }
 
   async getAssets2(): Promise<Assets2> {
-    const setting = await this.getSetting<number>('logo')
-    const images: Record<string, string> = {
+    const setting = await this.getSetting<0 | 1>('logo')
+    const images = {
       'logo-0': 'logo',
       'play-0': 'play',
       'pause-0': 'pause',
@@ -82,7 +82,7 @@ class Watcha extends Presence {
       'play-1': 'play-red',
       'pause-1': 'pause-red',
       'brwose-1': 'browse-red',
-    }
+    } as const
 
     return {
       play: images[`play-${setting}`],

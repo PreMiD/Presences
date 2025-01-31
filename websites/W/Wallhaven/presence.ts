@@ -13,7 +13,7 @@ function getQuery() {
         const entry = r ? r.split('=', 2) : null
         if (entry === null)
           return l
-        return Object.assign(l, { [entry[0]]: entry[1] })
+        return Object.assign(l, { [entry[0]!]: entry[1] })
       }, {})
     : {}
   return query

@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '941298758598164481',
 })
@@ -48,14 +50,14 @@ presence.on('UpdateData', async () => {
           ?? 'https://cdn.rcd.gg/PreMiD/websites/W/WayBack%20Machine/assets/logo.png'
         presenceData.details = document.location.pathname
           .split('/')[5]
-          .replace('www.', '')
-        presenceData.state = `${split.substring(6, 8)}/${split.substring(
+          ?.replace('www.', '')
+        presenceData.state = `${split?.substring(6, 8)}/${split?.substring(
           4,
           6,
-        )}/${split.substring(0, 4)} ${split.substring(8, 10)}:${split.substring(
+        )}/${split?.substring(0, 4)} ${split?.substring(8, 10)}:${split?.substring(
           10,
           12,
-        )}:${split.substring(12, 14)}`
+        )}:${split?.substring(12, 14)}`
       }
       presenceData.buttons = [
         {

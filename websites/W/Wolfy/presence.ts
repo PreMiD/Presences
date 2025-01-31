@@ -1,8 +1,10 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '501842028569559061', // Official Wolfy Discord App Client ID, owned by Wolfy's Admin
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/logo.png',
   Skin = 'https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/0.png',
   Shop = 'https://cdn.rcd.gg/PreMiD/websites/W/Wolfy/assets/1.png',
@@ -24,7 +26,7 @@ const waitingString = {
 function getTime(list: string[]): number {
   let ret = 0
   for (let index = list.length - 1; index >= 0; index--)
-    ret += (Number.parseInt(list[index]) * 60) ** index
+    ret += (Number.parseInt(list[index]!) * 60) ** index
 
   return ret
 }
@@ -109,7 +111,7 @@ async function handleCheckingLeaderboard(
   presenceData: PresenceData,
   username?: string,
 ) {
-  presenceData.smallImageKey = Assets.Leaderboard
+  presenceData.smallImageKey = ActivityAssets.Leaderboard
   presenceData.smallImageText = 'Consulte le classement'
 
   if (!username) {
@@ -141,7 +143,7 @@ function resolveLanguage(lang: string): keyof typeof waitingString {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
 
   path = document.location.pathname.split('/')
@@ -267,7 +269,7 @@ presence.on('UpdateData', async () => {
 
     switch (path[0]) {
       case 'skin':
-        presenceData.smallImageKey = Assets.Skin
+        presenceData.smallImageKey = ActivityAssets.Skin
         presenceData.smallImageText = 'Choisis ton skin'
         presenceData.state = 'Consulte ses Skins'
         break
@@ -275,7 +277,7 @@ presence.on('UpdateData', async () => {
         presenceData.state = 'Change ses paramètres'
         break
       case 'shop':
-        presenceData.smallImageKey = Assets.Shop
+        presenceData.smallImageKey = ActivityAssets.Shop
         presenceData.smallImageText = 'Achète des skins'
         presenceData.state = 'Consulte la Boutique'
         break

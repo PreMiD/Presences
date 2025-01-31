@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const startedTime = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   WovHeroes = 'https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/1.png',
   WovBlog = 'https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/2.png',
   Vouchers = 'https://cdn.rcd.gg/PreMiD/websites/W/Wolvesville/assets/3.png',
@@ -40,9 +40,9 @@ presence.on('UpdateData', async () => {
     presence.getSetting<boolean>('showTimestamp'),
     presence.getSetting<number>('logo'),
   ])
-  const logoArr = [Assets.Logo, Assets.WovWhite, Assets.WovNoBg, Assets.WovText]
+  const logoArr = [ActivityAssets.Logo, ActivityAssets.WovWhite, ActivityAssets.WovNoBg, ActivityAssets.WovText]
   const presenceData: PresenceData = {
-    largeImageKey: logoArr[logo] || Assets.Logo,
+    largeImageKey: logoArr[logo] || ActivityAssets.Logo,
   }
 
   if (showTimestamp)
@@ -50,7 +50,7 @@ presence.on('UpdateData', async () => {
 
   // Wolvesville Blog
   if (document.location.href.includes('blog.wolvesville.com')) {
-    presenceData.smallImageKey = Assets.WovBlog
+    presenceData.smallImageKey = ActivityAssets.WovBlog
     presenceData.smallImageText = 'Development Blog'
     if (
       document.location.pathname === '/'
@@ -90,7 +90,7 @@ presence.on('UpdateData', async () => {
   else if (document.location.href.includes('heroes.wolvesville.com')) {
     presenceData.details = 'Wolvesville Heroes'
     presenceData.state = 'Home page'
-    presenceData.smallImageKey = Assets.WovHeroes
+    presenceData.smallImageKey = ActivityAssets.WovHeroes
     presenceData.smallImageText = 'Wolvesville Heroes'
 
     if (document.location.pathname.includes('overview')) {
@@ -158,7 +158,7 @@ presence.on('UpdateData', async () => {
   // Vouchers
   else if (document.location.href.includes('vouchers.wolvesville.com')) {
     presenceData.details = 'Redeeming a code'
-    presenceData.smallImageKey = Assets.Vouchers
+    presenceData.smallImageKey = ActivityAssets.Vouchers
     presenceData.smallImageText = 'Redeem'
 
     // Game
@@ -294,15 +294,15 @@ presence.on('UpdateData', async () => {
 
       if (!privacyMode && showStatus) {
         if (root?.getAttribute('premid-status') === 'lets_play') {
-          presenceData.smallImageKey = Assets.LetsPlay
+          presenceData.smallImageKey = ActivityAssets.LetsPlay
           presenceData.smallImageText = 'Let\'s Play'
         }
         else if (root?.getAttribute('premid-status') === 'online') {
-          presenceData.smallImageKey = Assets.Online
+          presenceData.smallImageKey = ActivityAssets.Online
           presenceData.smallImageText = 'Online'
         }
         else if (root?.getAttribute('premid-status') === 'dnd') {
-          presenceData.smallImageKey = Assets.Dnd
+          presenceData.smallImageKey = ActivityAssets.Dnd
           presenceData.smallImageText = 'Do Not Disturb'
         }
       }
@@ -504,7 +504,7 @@ presence.on('UpdateData', async () => {
         }
       }
       presenceData.smallImageText = 'Lobby'
-      presenceData.smallImageKey = Assets.Friends
+      presenceData.smallImageKey = ActivityAssets.Friends
     }
 
     // In game
@@ -528,7 +528,7 @@ presence.on('UpdateData', async () => {
             .includes('')
         ) {
           presenceData.details = 'In pre-game lobby'
-          presenceData.smallImageKey = Assets.Stopwatch
+          presenceData.smallImageKey = ActivityAssets.Stopwatch
           presenceData.smallImageText = 'Waiting'
           if (!privacyMode) {
             const playerCountPreGame = document.querySelector(
@@ -565,7 +565,7 @@ presence.on('UpdateData', async () => {
                   ?.includes('color: rgb(255, 64, 129)')
             ) {
               playerState = 'Spectator'
-              presenceData.smallImageKey = Assets.Popcorn
+              presenceData.smallImageKey = ActivityAssets.Popcorn
               presenceData.smallImageText = playerState
               if (privacyMode)
                 presenceData.details = 'Spectating a game'
@@ -589,7 +589,7 @@ presence.on('UpdateData', async () => {
                     && player.getAttribute('style')?.includes('line-through')
               ) {
                 playerState = 'Dead'
-                presenceData.smallImageKey = Assets.Skull
+                presenceData.smallImageKey = ActivityAssets.Skull
               }
               else if (
                 player.textContent?.replace('|', '')
@@ -602,7 +602,7 @@ presence.on('UpdateData', async () => {
                     ?.includes('color: rgb(255, 64, 129)')
               ) {
                 playerState = 'Alive'
-                presenceData.smallImageKey = Assets.Heart
+                presenceData.smallImageKey = ActivityAssets.Heart
               }
             }
             presenceData.smallImageText = playerState

@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '836962986451140609',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/W/WebtoonXYZ/assets/0.png',
   View = 'https://cdn.rcd.gg/PreMiD/websites/W/WebtoonXYZ/assets/1.png',
   Logo2 = 'https://cdn.rcd.gg/PreMiD/websites/W/WebtoonXYZ/assets/2.png',
@@ -17,7 +19,7 @@ presence.on('UpdateData', async () => {
     presence.getSetting<boolean>('buttons'),
   ])
   const presenceData: PresenceData = {
-    largeImageKey: !logo ? Assets.Logo : Assets.Logo2,
+    largeImageKey: !logo ? ActivityAssets.Logo : ActivityAssets.Logo2,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href, search } = document.location
@@ -65,11 +67,11 @@ presence.on('UpdateData', async () => {
     progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress)
     presenceData.details = isAdult ? 'Reading a webtoon' : title
     presenceData.state = `📖 ${chapter} 🔸 ${progress}%`
-    presenceData.largeImageKey = title.includes('Solo Leveling')
-      ? Assets.Solo
+    presenceData.largeImageKey = title?.includes('Solo Leveling')
+      ? ActivityAssets.Solo
       : logo === 0
-        ? Assets.Logo
-        : Assets.Logo2
+        ? ActivityAssets.Logo
+        : ActivityAssets.Logo2
     presenceData.smallImageKey = Assets.Reading
     if (buttons && !isAdult) {
       presenceData.buttons = [
@@ -84,7 +86,7 @@ presence.on('UpdateData', async () => {
     if (document.querySelector('.manga-title-badges.adult')) {
       presenceData.details = 'Viewing a webtoon'
       presenceData.smallImageKey = Assets.Viewing
-      presenceData.largeImageKey = logo === 0 ? Assets.Logo : Assets.Logo2
+      presenceData.largeImageKey = logo === 0 ? ActivityAssets.Logo : ActivityAssets.Logo2
     }
     else {
       const title = document.querySelector('.post-title')?.textContent
@@ -92,10 +94,10 @@ presence.on('UpdateData', async () => {
       presenceData.state = title
       presenceData.smallImageKey = Assets.Viewing
       presenceData.largeImageKey = title?.includes('Solo Leveling')
-        ? Assets.Solo
+        ? ActivityAssets.Solo
         : logo === 0
-          ? Assets.Logo
-          : Assets.Logo2
+          ? ActivityAssets.Logo
+          : ActivityAssets.Logo2
       if (buttons) {
         presenceData.buttons = [
           {
@@ -107,7 +109,7 @@ presence.on('UpdateData', async () => {
     }
   }
   else if (pathname === '/user-settings/') {
-    presenceData.smallImageKey = Assets.Settings
+    presenceData.smallImageKey = ActivityAssets.Settings
     switch (search) {
       case '?tab=history':
         presenceData.details = 'User settings:'

@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '978186598669758504',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/W/Wiki.gg/assets/logo.png',
 }
 let title: string
@@ -33,7 +35,7 @@ let oldLang: string | null = null
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, hostname, href } = document.location
@@ -85,8 +87,8 @@ presence.on('UpdateData', async () => {
     let search: HTMLInputElement | NodeListOf<HTMLInputElement> = document.querySelectorAll<HTMLInputElement>('input[id=\'searchInput\']')
       ?? document.querySelectorAll<HTMLInputElement>('input[name=\'search\']')
     if (search.length === 1)
-      search = search[0]
-    else search = search[1]
+      search = search[0]!
+    else search = search[1]!
     presenceData.largeImageKey = `https://${hostname}/images/e/e6/Site-logo.png`
     if (search?.value) {
       presenceData.state = search.value

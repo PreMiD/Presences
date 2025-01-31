@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '857964031700238356',
 })
@@ -43,7 +45,7 @@ presence.on('UpdateData', async () => {
         0,
         mangaName.textContent.indexOf('Chapter'),
       )}`
-      presenceData.state = `${chapterNumber.selectedOptions[0].textContent} Slide ${pageNumber.selectedOptions[0].textContent}`
+      presenceData.state = `${chapterNumber.selectedOptions[0]?.textContent} Slide ${pageNumber.selectedOptions[0]?.textContent}`
     }
 
     presenceData.buttons = [

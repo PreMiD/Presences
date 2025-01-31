@@ -3,7 +3,7 @@ const presence: Presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/W/WaniKani/assets/logo.png',
   Avatar = 'https://cdn.rcd.gg/PreMiD/websites/W/WaniKani/assets/0.png',
   Kanji = 'https://cdn.rcd.gg/PreMiD/websites/W/WaniKani/assets/1.png',
@@ -32,11 +32,11 @@ function capitalize(string: string) {
 function getTypeAsset(string: string) {
   switch (string.toLowerCase()) {
     case 'kanji':
-      return Assets.Kanji
+      return ActivityAssets.Kanji
     case 'radical':
-      return Assets.Radical
+      return ActivityAssets.Radical
     case 'vocabulary':
-      return Assets.Vocabulary
+      return ActivityAssets.Vocabulary
     default:
       return null
   }
@@ -103,14 +103,14 @@ function getLessonPresence(): PresenceData {
       ?.split('--')[1] ?? '',
   )
   if (totalStats.length === 3)
-    presenceData.smallImageText = `${totalStats[0].textContent} radicals | ${totalStats[1].textContent} kanji | ${totalStats[2].textContent} vocab`
+    presenceData.smallImageText = `${totalStats[0]?.textContent} radicals | ${totalStats[1]?.textContent} kanji | ${totalStats[2]?.textContent} vocab`
   return presenceData
 }
 
 presence.on('UpdateData', () => {
   const { hostname, pathname } = document.location
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 
@@ -125,8 +125,8 @@ presence.on('UpdateData', () => {
             '.lessons-and-reviews',
           )?.children ?? []
           if (buttons.length === 2) {
-            const lessons = +buttons[0].querySelector<HTMLSpanElement>('[class*=__count]')!.textContent!
-            const reviews = +buttons[1].querySelector<HTMLSpanElement>('[class*=__count]')!.textContent!
+            const lessons = +buttons[0]!.querySelector<HTMLSpanElement>('[class*=__count]')!.textContent!
+            const reviews = +buttons[1]!.querySelector<HTMLSpanElement>('[class*=__count]')!.textContent!
             presenceData.details = 'Viewing Dashboard'
             presenceData.state = `${lessons} lessons | ${reviews} reviews`
             presenceData.smallImageText = document.querySelector<HTMLAnchorElement>(
@@ -134,37 +134,37 @@ presence.on('UpdateData', () => {
             )?.textContent
             if (lessons > reviews) {
               if (lessons < 25)
-                presenceData.smallImageKey = Assets.Lessons1
+                presenceData.smallImageKey = ActivityAssets.Lessons1
               else if (lessons < 50)
-                presenceData.smallImageKey = Assets.Lessons25
+                presenceData.smallImageKey = ActivityAssets.Lessons25
               else if (lessons < 100)
-                presenceData.smallImageKey = Assets.Lessons50
+                presenceData.smallImageKey = ActivityAssets.Lessons50
               else if (lessons < 250)
-                presenceData.smallImageKey = Assets.Lessons100
+                presenceData.smallImageKey = ActivityAssets.Lessons100
               else if (lessons < 500)
-                presenceData.smallImageKey = Assets.Lessons250
-              else presenceData.smallImageKey = Assets.Lessons500
+                presenceData.smallImageKey = ActivityAssets.Lessons250
+              else presenceData.smallImageKey = ActivityAssets.Lessons500
             }
             else if (reviews < 1) {
-              presenceData.smallImageKey = Assets.Reviews0
+              presenceData.smallImageKey = ActivityAssets.Reviews0
             }
             else if (reviews < 50) {
-              presenceData.smallImageKey = Assets.Reviews1
+              presenceData.smallImageKey = ActivityAssets.Reviews1
             }
             else if (reviews < 100) {
-              presenceData.smallImageKey = Assets.Reviews50
+              presenceData.smallImageKey = ActivityAssets.Reviews50
             }
             else if (reviews < 250) {
-              presenceData.smallImageKey = Assets.Reviews100
+              presenceData.smallImageKey = ActivityAssets.Reviews100
             }
             else if (reviews < 500) {
-              presenceData.smallImageKey = Assets.Reviews250
+              presenceData.smallImageKey = ActivityAssets.Reviews250
             }
             else if (reviews < 1000) {
-              presenceData.smallImageKey = Assets.Reviews500
+              presenceData.smallImageKey = ActivityAssets.Reviews500
             }
             else {
-              presenceData.smallImageKey = Assets.Reviews1000
+              presenceData.smallImageKey = ActivityAssets.Reviews1000
             }
           }
           else {
@@ -220,24 +220,24 @@ presence.on('UpdateData', () => {
           if (textDescription && textDescription.length >= 50)
             textDescription = `${textDescription.substring(0, 50)}...`
 
-          presenceData.details = `Browsing ${capitalize(type)}`
+          presenceData.details = `Browsing ${capitalize(type!)}`
           presenceData.state = `${
             document.querySelector<HTMLSpanElement>(
-              `.${type.replace(/s$/, '')}-icon`,
+              `.${type!.replace(/s$/, '')}-icon`,
             )?.textContent
           } | ${
             document.querySelector<HTMLSpanElement>(
-              `.${type.replace(/s$/, '')}-icon`,
+              `.${type!.replace(/s$/, '')}-icon`,
             )?.parentNode?.childNodes[4]?.textContent
           }`
           presenceData.smallImageText = textDescription
-          presenceData.smallImageKey = getTypeAsset(type.replace(/s$/, ''))
+          presenceData.smallImageKey = getTypeAsset(type!.replace(/s$/, ''))
           break
         }
         case pathname.match(/^\/users\/.+$/)?.input: {
           presenceData.details = 'Viewing User Profile'
           presenceData.state = document.querySelector<HTMLSpanElement>('.username')?.textContent
-          presenceData.smallImageKey = Assets.Avatar
+          presenceData.smallImageKey = ActivityAssets.Avatar
           break
         }
         default: {
@@ -258,7 +258,7 @@ presence.on('UpdateData', () => {
     case 'community.wanikani.com': {
       if (/^\/u\/.+$/.test(pathname)) {
         presenceData.details = 'Viewing User Profile'
-        presenceData.smallImageKey = Assets.Avatar
+        presenceData.smallImageKey = ActivityAssets.Avatar
         presenceData.state = document.querySelector<HTMLHeadingElement>('.username')?.textContent
         break
       }

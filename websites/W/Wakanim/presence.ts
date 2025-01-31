@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '662841394171346955',
 })
@@ -11,7 +13,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000)
 function capitalize(str: string): string {
   const text = str.toLowerCase().split(' ')
   for (let i = 0; i < text.length; i++)
-    text[i] = text[i].charAt(0).toUpperCase() + text[i].substr(1)
+    text[i] = text[i]!.charAt(0).toUpperCase() + text[i]!.substr(1)
 
   return text.join(' ')
 }

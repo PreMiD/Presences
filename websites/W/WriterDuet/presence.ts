@@ -3,11 +3,11 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/W/WriterDuet/assets/logo.png',
 }
 
-const enum Pages {
+enum Pages {
   home = '',
   script = 'script',
   blog = 'blog',
@@ -18,12 +18,12 @@ const enum Pages {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const [, page, subpage] = document.location.pathname.split('/')
 
-  switch (page.split('#')[0]) {
+  switch (page?.split('#')[0]) {
     case Pages.script: {
       presenceData.details = document.title
       presenceData.state = document

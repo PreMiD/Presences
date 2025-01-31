@@ -67,7 +67,7 @@ presence.on('UpdateData', async () => {
       presenceData.startTimestamp = browsingTimestamp
     }
   }
-  else if (document.location.pathname.split('/')[1].match(/^\d/)) {
+  else if (document.location.pathname.split('/')[1]?.match(/^\d/)) {
     story = document.querySelector(
       '#funbar-part-details > span > span.info > h2',
     )?.textContent

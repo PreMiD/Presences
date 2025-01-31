@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '848082293427273748',
 })
@@ -71,7 +73,7 @@ presence.on('UpdateData', async () => {
         presenceData.state = `${
           document.querySelector<HTMLSelectElement>('#chapter')
             ?.selectedOptions[0]
-            .textContent
+            ?.textContent
         } of ${
           document.querySelector('#chapter > option:nth-child(2)')?.textContent
         }`

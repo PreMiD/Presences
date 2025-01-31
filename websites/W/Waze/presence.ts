@@ -57,7 +57,7 @@ function fnd() {
       const fullRoadName = document.querySelector<HTMLSpanElement>(
         '#segment-edit-general > div.address-edit > div > div.clearfix.preview > div.full-address-container > span',
       )?.textContent ?? 'Roads'
-      mapElem = fullRoadName.split(',')[0]
+      mapElem = fullRoadName.split(',')[0]!
     }
     else if (
       document.querySelector<HTMLSpanElement>(

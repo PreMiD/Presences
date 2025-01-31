@@ -100,7 +100,7 @@ presence.on('UpdateData', async () => {
         url: href,
       },
     ]
-    presenceData.details = `Staffel ${pathname.split('/')[1].split('-')[1]}`
+    presenceData.details = `Staffel ${pathname.split('/')[1]?.split('-')[1]}`
   }
 
   function getStaffelName(postNumber: string) {
@@ -110,7 +110,7 @@ presence.on('UpdateData', async () => {
     const result3 = staffelName
       ?.replace(/^Warrior Cats \| /, '')
       .replace(/Staffel /, '')
-      .replace(pathname.split('/')[2].split('-')[1].toUpperCase(), '')
+      .replace(pathname.split('/')[2]?.split('-')[1]?.toUpperCase() ?? '', '')
     return result3?.replace(/[^a-z ]/gi, '').trim()
   }
 
