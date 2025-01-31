@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1103408220921397349',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/Z/Zee5/assets/logo.jpg',
 }
 function getVideoStatus(presenceData: PresenceData, video: HTMLVideoElement) {
@@ -22,7 +24,7 @@ function getVideoStatus(presenceData: PresenceData, video: HTMLVideoElement) {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname } = document.location

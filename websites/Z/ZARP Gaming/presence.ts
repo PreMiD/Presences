@@ -49,7 +49,7 @@ presence.on('UpdateData', () => {
           presenceData.state = document
             .querySelector<HTMLSelectElement>('#postcatid')
             ?.selectedOptions[0]
-            .text
+            ?.text
             .replace(/^[-\s]+/, '')
             .replace(/[-\s]+/g, ' ')
           break

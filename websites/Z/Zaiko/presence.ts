@@ -1,4 +1,5 @@
-import type { IFrameData } from './iframe'
+import type { IFrameData } from './iframe.js'
+import { ActivityType, Assets } from 'premid'
 
 const presence = new Presence({
   clientId: '1310622511419101235',

@@ -3,13 +3,13 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/Z/Zombies%20World%20Records/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href } = document.location
@@ -29,8 +29,8 @@ presence.on('UpdateData', async () => {
         presenceData.details = 'Viewing player'
         presenceData.state = document.querySelector('.user-name')
         presenceData.largeImageKey = profileImage?.src.includes('.svg')
-          ? Assets.Logo
-          : profileImage ?? Assets.Logo
+          ? ActivityAssets.Logo
+          : profileImage ?? ActivityAssets.Logo
         presenceData.smallImageKey = document.querySelector<HTMLImageElement>(
           '.user-country__flag img',
         )?.src

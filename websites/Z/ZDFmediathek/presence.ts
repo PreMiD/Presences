@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 let elapsed = Math.floor(Date.now() / 1000)
 let prevUrl = document.location.href
 

@@ -1,8 +1,10 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1071912828027535462',
 })
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/Z/Zerion/assets/logo.png',
 }
 
@@ -46,7 +48,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   } as PresenceData
   const [newLang, privacy, logo, time, buttons] = await Promise.all([
     presence.getSetting<string>('lang').catch(() => 'pl'),
@@ -136,7 +138,7 @@ presence.on('UpdateData', async () => {
   if (presenceData.endTimestamp && presenceData.startTimestamp)
     presenceData.type = ActivityType.Watching
   if (!logo || privacy)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (!buttons || privacy)
     delete presenceData.buttons
   if (!time)
