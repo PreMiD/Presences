@@ -1,3 +1,4 @@
+import { ActivityType, Assets } from 'premid'
 import {
   clearLiveMetadata,
   fetchLiveMetadata,
@@ -8,7 +9,6 @@ import {
   fetchMetadata,
   metadata,
 } from './functions/fetchMetadata.js'
-import { ActivityType, Assets } from 'premid'
 
 const presence = new Presence({
   clientId: '1325519017527476316',
