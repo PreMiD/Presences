@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			startTimestamp: browsingTimestamp,
 		},
-		{ pathname, href } = document.location,
+		{ pathname, href, search } = document.location,
 		strings = await getStrings(),
 		pathOne = pathname.split("/")[1],
 		pathTwo = pathname.split("/")[2],
@@ -407,6 +407,13 @@ presence.on("UpdateData", async () => {
 				presenceData.details = strings.viewCategory;
 				presenceData.state = document.querySelector(".title1").textContent;
 			}
+			break;
+		}
+		case "se": {
+			presenceData.details = strings.search;
+			presenceData.state = decodeURIComponent(
+				search.split("=")[2].replaceAll("+", " ")
+			);
 			break;
 		}
 		default: {
