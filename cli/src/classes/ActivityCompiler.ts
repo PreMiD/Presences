@@ -305,7 +305,7 @@ export class ActivityCompiler {
 
       if (!dimensions) {
         try {
-          const response = await ky.get(url).arrayBuffer()
+          const response = await ky.get(url.replaceAll(/\\/g, '')).arrayBuffer()
           const metadata = await sharp(Buffer.from(response)).metadata()
           dimensions = { width: metadata.width ?? null, height: metadata.height ?? null }
           imageCache.set(url, dimensions)
