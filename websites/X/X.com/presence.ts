@@ -107,7 +107,7 @@ presence.on('UpdateData', async () => {
   }
 
   let title: string
-  let info: string | null = null
+  let info: string | undefined | null = null
 
   const { pathname, href } = document.location
 
@@ -117,10 +117,10 @@ presence.on('UpdateData', async () => {
   }
 
   title = strings.browsing
-  info = capitalize(pathname.split('/')[1])
+  info = capitalize(pathname.split('/')[1]!)
 
   if (pathname.match('/i/')) {
-    info = capitalize(pathname.split('/')[2])
+    info = capitalize(pathname.split('/')[2]!)
     if (info === 'Bookmarks')
       info = strings.bookmarks
   }
@@ -159,7 +159,7 @@ presence.on('UpdateData', async () => {
     title = strings.viewPosts
     info = `${
       stripText(objHeader, 'Object Header')?.split('@')[0]
-    } // ${capitalize(pathname.split('/')[1])}`
+    } // ${capitalize(pathname.split('/')[1]!)}`
 
     if (pathname.match('/with_replies'))
       title = strings.viewPostsWithReplies
@@ -176,7 +176,7 @@ presence.on('UpdateData', async () => {
     [info] = stripText(
       document.querySelectorAll<HTMLAnchorElement>(
         `a[href='/${pathname.split('/')[1]}']`,
-      )[1],
+      )[1]!,
       'Post',
     )?.split('@') ?? []
   }
@@ -194,12 +194,12 @@ presence.on('UpdateData', async () => {
 
   if (pathname.match('/moments') && etcHeader) {
     title = 'Browsing Moments...'
-    info = capitalize(pathname.split('/')[1])
+    info = capitalize(pathname.split('/')[1]!)
   }
 
   if (pathname.match('/lists') && etcHeader) {
     title = strings.viewList
-    info = capitalize(pathname.split('/')[1])
+    info = capitalize(pathname.split('/')[1]!)
   }
 
   const presenceData: PresenceData = {

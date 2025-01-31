@@ -17,7 +17,7 @@ presence.on('UpdateData', () => {
       .querySelector('[property="og:url"]')
       ?.getAttribute('content')
       ?.split('xkcd.com/')[1]
-      .split('/')[0]
+      ?.split('/')[0]
     let text = document.querySelector('#comic > img')?.getAttribute('title')
     if (text && text.length > 127)
       text = `${text.substring(0, 124)}...`
