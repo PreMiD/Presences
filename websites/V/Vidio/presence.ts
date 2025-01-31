@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '795564487910227968',
 })
@@ -92,7 +94,7 @@ presence.on('UpdateData', async () => {
         if (video) {
           presenceData.details = document.querySelectorAll(
             '.b-livestreaming-detail__title.section__title',
-          )[1].textContent
+          )[1]?.textContent
           presenceData.state = document.querySelector(
             '.b-livestreaming-user__name',
           )?.textContent

@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1234098856376012860',
 })
@@ -120,8 +122,8 @@ presence.on('UpdateData', async () => {
         )
         presenceData.smallImageKey = Assets.Search
       }
-      else if (Object.keys(pages).includes(pathArr[1])) {
-        presenceData = { ...presenceData, ...pages[pathArr[1]] }
+      else if (Object.keys(pages).includes(pathArr[1]!)) {
+        presenceData = { ...presenceData, ...pages[pathArr[1]!] }
       }
       break
   }

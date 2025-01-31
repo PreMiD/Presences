@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '721748388143562852',
 })
@@ -167,8 +169,8 @@ const getStatus = setLoop(() => {
           if (i > 0)
             i = 0;
 
-          (req.responseXML?.querySelectorAll('state')[0].textContent?.length ?? 0) > 0
-            ? (media.state = req.responseXML?.querySelectorAll('state')[0].textContent ?? undefined)
+          (req.responseXML?.querySelectorAll('state')[0]?.textContent?.length ?? 0) > 0
+            ? (media.state = req.responseXML?.querySelectorAll('state')[0]?.textContent ?? undefined)
             : (media.state = 'stopped')
 
           if (media.state !== 'stopped') {

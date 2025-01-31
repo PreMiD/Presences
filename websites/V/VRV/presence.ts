@@ -1,9 +1,11 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '640150336547454976',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/V/VRV/assets/logo.png',
 }
 
@@ -54,7 +56,7 @@ presence.on('iFrameData', (inc: unknown) => {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { href, pathname } = document.location
@@ -76,7 +78,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = strings.viewing
       presenceData.smallImageKey = Assets.Reading
       presenceData.largeImageKey = document.querySelector<HTMLImageElement>('img.c-content-image')?.src
-        ?? Assets.Logo
+        ?? ActivityAssets.Logo
 
       presenceData.buttons = [{ label: strings.buttonViewEpisode, url: href }]
 
@@ -109,7 +111,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = strings.viewSeries
       presenceData.state = document.querySelector('div.series-title')?.textContent
       presenceData.largeImageKey = document.querySelector<HTMLImageElement>('img.c-content-image')?.src
-        ?? Assets.Logo
+        ?? ActivityAssets.Logo
       presenceData.buttons = [{ label: strings.buttonViewSeries, url: href }]
       break
     case 'watchlist':
@@ -133,14 +135,14 @@ presence.on('UpdateData', async () => {
     presenceData.state = href.split('?q=')[1]
     presenceData.startTimestamp = browsingTimestamp
     delete presenceData.endTimestamp
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
     presenceData.smallImageKey = Assets.Search
     presenceData.smallImageText = strings.search
     delete presenceData.buttons
   }
 
   if (!showCover)
-    presenceData.largeImageKey = Assets.Logo
+    presenceData.largeImageKey = ActivityAssets.Logo
   if (!showButtons)
     delete presenceData.buttons
   if (!time) {

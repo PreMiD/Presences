@@ -3,13 +3,13 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const cover = await presence.getSetting<boolean>('cover')
@@ -28,10 +28,10 @@ presence.on('UpdateData', async () => {
         presenceData.largeImageKey = document.querySelector<HTMLMetaElement>(
           'meta[property=\'og:image\']',
         )?.content
-        presenceData.smallImageKey = Assets.Logo
+        presenceData.smallImageKey = ActivityAssets.Logo
       }
       else {
-        presenceData.largeImageKey = Assets.Logo
+        presenceData.largeImageKey = ActivityAssets.Logo
       }
     }
     presenceData.buttons = [{ label: 'View Album', url: document.URL }]
@@ -44,7 +44,7 @@ presence.on('UpdateData', async () => {
         presenceData.largeImageKey = document.querySelector<HTMLAnchorElement>(
           '#leftfloat > div > a',
         )?.href
-        presenceData.smallImageKey = Assets.Logo
+        presenceData.smallImageKey = ActivityAssets.Logo
       }
       else if (
         document.querySelector<HTMLAnchorElement>('#innermain > div > a')
@@ -52,7 +52,7 @@ presence.on('UpdateData', async () => {
         presenceData.largeImageKey = document.querySelector<HTMLAnchorElement>(
           '#innermain > div > a',
         )?.href
-        presenceData.smallImageKey = Assets.Logo
+        presenceData.smallImageKey = ActivityAssets.Logo
       }
       else {
         presenceData.largeImageKey = 'https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/logo.png'
@@ -75,7 +75,7 @@ presence.on('UpdateData', async () => {
         presenceData.largeImageKey = document.querySelector<HTMLAnchorElement>(
           '#innermain > div > a',
         )?.href
-        presenceData.smallImageKey = Assets.Logo
+        presenceData.smallImageKey = ActivityAssets.Logo
       }
       else {
         presenceData.largeImageKey = 'https://cdn.rcd.gg/PreMiD/websites/V/VGMdb/assets/logo.png'

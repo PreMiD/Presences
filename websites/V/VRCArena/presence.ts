@@ -15,7 +15,7 @@ presence.on('UpdateData', async () => {
       presenceData.buttons = [
         {
           label: 'View on VRCArena',
-          url: document.URL.split('?')[0],
+          url: document.URL.split('?')[0]!,
         },
       ]
     }

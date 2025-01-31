@@ -21,17 +21,17 @@ presence.on('UpdateData', async () => {
     case !urlpath[1]:
       presenceData.details = 'Home'
       break
-    case urlpath[1].startsWith('members'):
+    case urlpath[1]!.startsWith('members'):
       presenceData.details = `In ${
         document.querySelector('[class="data"]')?.textContent
       }`
       presenceData.state = urlpath[2]
       break
-    case urlpath[1].startsWith('forums'):
+    case urlpath[1]!.startsWith('forums'):
       if (urlpath[2]) {
         if (urlpath[2].startsWith('search')) {
           presenceData.details = 'Searching for:'
-          presenceData.state = decodeURI(urlpath[3]).replace('+', ' ')
+          presenceData.state = decodeURI(urlpath[3]!).replace('+', ' ')
           break
         }
         else {

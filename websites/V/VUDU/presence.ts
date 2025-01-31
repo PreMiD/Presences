@@ -5,7 +5,7 @@ const presence = new Presence({
 
 // Global variables
 let startTime = Date.now()
-let videoPlayer: HTMLVideoElement
+let videoPlayer: HTMLVideoElement | null = null
 let videoDuration: number
 let cuTime: number
 let endTime: number
@@ -27,7 +27,7 @@ function grabMetadata(): void {
     return
 
   // Get all the elements inside of the parent that are span (there should only be one) and get the innerHTML
-  metadata = closeButton.parentElement?.querySelectorAll('span')[0].textContent ?? undefined
+  metadata = closeButton.parentElement?.querySelectorAll('span')[0]?.textContent ?? undefined
 }
 
 // Get the video player element
@@ -37,7 +37,7 @@ function getVideoPlayer(): void {
     '#contentPlayerFrame',
   ) as HTMLIFrameElement
   // Finally... get the video
-  const videoPlayer = (
+  videoPlayer = (
     VUDUIFrame.contentDocument || VUDUIFrame.contentWindow?.document
   )?.querySelector('#videoPlayer') as HTMLVideoElement
 

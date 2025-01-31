@@ -18,7 +18,7 @@ function hasMeta(metaName: string): boolean {
   metaName = `PreMiD_${metaName}`
   const metas = document.querySelectorAll('meta')
   for (let i = 0; i < metas.length; i++) {
-    if (metas[i].getAttribute('name') === metaName)
+    if (metas[i]?.getAttribute('name') === metaName)
       return true
   }
 

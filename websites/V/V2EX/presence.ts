@@ -4,7 +4,7 @@ const presence = new Presence({
 
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/V/V2EX/assets/logo.png',
   Famous = 'https://cdn.rcd.gg/PreMiD/websites/V/V2EX/assets/0.png',
   Tongue = 'https://cdn.rcd.gg/PreMiD/websites/V/V2EX/assets/1.png',
@@ -15,7 +15,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const path = document.location.pathname
@@ -23,12 +23,12 @@ presence.on('UpdateData', async () => {
   if (path === '/') {
     presenceData.state = 'Home'
     presenceData.details = 'Browsing Thread'
-    presenceData.smallImageKey = Assets.Curious
+    presenceData.smallImageKey = ActivityAssets.Curious
   }
   else if (path.includes('/t/')) {
     const title = document.querySelector('#Main > div.box > div.header > h1')
     presenceData.state = title?.textContent?.trim()
-    presenceData.smallImageKey = Assets.Famous
+    presenceData.smallImageKey = ActivityAssets.Famous
 
     if (
       document
@@ -46,7 +46,7 @@ presence.on('UpdateData', async () => {
     const title = document.querySelector('#Main > div.box h1')
     presenceData.state = title?.textContent?.trim()
     presenceData.details = 'Viewing Profile'
-    presenceData.smallImageKey = Assets.Happy
+    presenceData.smallImageKey = ActivityAssets.Happy
   }
   else if (path.includes('/go/')) {
     const title = document.querySelector('head > title')
@@ -55,12 +55,12 @@ presence.on('UpdateData', async () => {
       ?.replace('›', '')
       ?.trim()
     presenceData.details = 'Browsing node'
-    presenceData.smallImageKey = Assets.Tongue
+    presenceData.smallImageKey = ActivityAssets.Tongue
   }
   else if (path === '/new') {
     presenceData.state = 'Compose'
     presenceData.details = 'New post'
-    presenceData.smallImageKey = Assets.Famous2
+    presenceData.smallImageKey = ActivityAssets.Famous2
   }
 
   if (presenceData.details)

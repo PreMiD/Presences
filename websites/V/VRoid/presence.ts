@@ -4,7 +4,7 @@ const presence = new Presence({
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 const slideshow = presence.createSlideshow()
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/V/VRoid/assets/logo.png',
 }
 
@@ -19,7 +19,7 @@ function getImportantPath(): string[] {
 
 function getTitle(): string {
   const split = document.title.match(/(.*) [|-]/)
-  return split ? split[1].trim() : document.title
+  return split ? split[1]!.trim() : document.title
 }
 
 function applyCharacterSlideshow(presenceData: PresenceData): void {
@@ -155,7 +155,7 @@ function getSetting<E extends string | boolean | number>(
 
 presence.on('UpdateData', () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const lang = getSetting<string>('language')
@@ -213,12 +213,12 @@ presence.on('UpdateData', () => {
                 break
               }
               case 'character_models': {
-                presenceData.state = `${appTitle} - ${selectedTab.textContent}`
+                presenceData.state = `${appTitle} - ${selectedTab?.textContent}`
                 applyCharacterSlideshow(presenceData)
                 break
               }
               case 'artworks': {
-                presenceData.state = `${appTitle} - ${selectedTab.textContent}`
+                presenceData.state = `${appTitle} - ${selectedTab?.textContent}`
                 applyArtworkSlideshow(presenceData)
                 break
               }
@@ -386,7 +386,7 @@ presence.on('UpdateData', () => {
   const slides = slideshow.getSlides()
   if (slides.length) {
     if (!slideshow.currentSlide.details)
-      slideshow.currentSlide = slides[0].data
+      slideshow.currentSlide = slides[0]!.data
     presence.setActivity(slideshow)
   }
   else if (presenceData.details) {

@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '815947069117169684',
 })
@@ -41,7 +43,7 @@ async function getSeriesInfo(
     platformFlagLabel: 'web',
     areaId: '2',
     languageFlagId: '3',
-    countryCode: location.pathname.split('/')[2].toUpperCase(),
+    countryCode: location.pathname.split('/')[2]!.toUpperCase(),
     ut: '0',
     r: request,
     series_id: id,
@@ -79,7 +81,7 @@ async function generateToken() {
       },
       body: JSON.stringify({
         appVersion: '3.0.10',
-        countryCode: location.pathname.split('/')[2].toUpperCase(),
+        countryCode: location.pathname.split('/')[2]!.toUpperCase(),
         language: 4,
         platform: 'browser',
         platformFlagLabel: 'web',
@@ -105,7 +107,7 @@ interface SeriesInfo {
   number?: string
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/V/Viu/assets/0.png',
   LogoText = 'https://cdn.rcd.gg/PreMiD/websites/V/Viu/assets/1.png',
 }
@@ -130,17 +132,17 @@ presence.on('UpdateData', async () => {
     oldPath = location.pathname
 
     const info = await getSeriesInfo(
-      location.pathname.split('/')[5],
+      location.pathname.split('/')[5]!,
       '/product/listall',
     )
     if (info)
-      seriesInfo = await getSeriesInfo(info[0].series_id, '/vod/product-list')
+      seriesInfo = await getSeriesInfo(info[0]!.series_id, '/vod/product-list')
   }
 
   const presenceData: PresenceData = {
     details: strings.browse,
     smallImageKey: Assets.Reading,
-    largeImageKey: [Assets.Logo, Assets.LogoText, Assets.Logo, Assets.Logo][
+    largeImageKey: [ActivityAssets.Logo, ActivityAssets.LogoText, ActivityAssets.Logo, ActivityAssets.Logo][
       presenceLogo
     ],
     startTimestamp: browsingTimestamp,
@@ -161,7 +163,7 @@ presence.on('UpdateData', async () => {
       let part: string[] = []
 
       if (fullEpisodeName) {
-        episodeNumber = fullEpisodeName.split('.')[0]
+        episodeNumber = fullEpisodeName.split('.')[0]!
         episodeName = fullEpisodeName.split('.').slice(1).join('.')
         hasEpName = !episodeName.includes('EP.')
         part = episodeName.match(/([1-9]\/[1-9])/g) ?? []
@@ -177,14 +179,14 @@ presence.on('UpdateData', async () => {
         }${hasEpName ? ` • ${episodeName}` : ''}`
       }
 
-      const coverPortraitImage = seriesInfo?.[0].series_cover_portrait_image_url
-      const coverLandscapeImage = seriesInfo?.[0].series_cover_landscape_image_url
+      const coverPortraitImage = seriesInfo?.[0]?.series_cover_portrait_image_url
+      const coverLandscapeImage = seriesInfo?.[0]?.series_cover_landscape_image_url
 
       if (presenceLogo > 1) {
         presenceData.largeImageKey = [
           coverPortraitImage || coverLandscapeImage,
           coverLandscapeImage || coverPortraitImage,
-        ][presenceLogo - 2] || Assets.Logo
+        ][presenceLogo - 2] || ActivityAssets.Logo
       }
 
       presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play

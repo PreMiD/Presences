@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1191396494381694976',
 })
@@ -20,7 +22,7 @@ presence.on('UpdateData', async () => {
     const el = document
       .querySelector('.body-container')
       ?.querySelectorAll('[type="text/javascript"]')
-    const title = el?.[el.length - 1].innerHTML
+    const title = el?.[el.length - 1]?.innerHTML
       .split('var curFileName =')?.[1]
       ?.replace(/(\.)/g, ' ')
       .replace('"', '')

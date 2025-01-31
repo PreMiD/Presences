@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '514771696134389760',
 })
@@ -22,12 +24,12 @@ function getLocale(): string {
 }
 
 function getLocalizedString(stringPath: string): string {
-  if (localeStrings[getLocale()] && localeStrings[getLocale()][stringPath]) {
-    return localeStrings[getLocale()][stringPath]
+  if (localeStrings[getLocale()] && localeStrings[getLocale()]![stringPath]) {
+    return localeStrings[getLocale()]![stringPath]!
   }
   else {
     presence.info(`Language for [${stringPath}] was not found!`)
-    return localeStrings.en[stringPath]
+    return localeStrings.en![stringPath]!
   }
 }
 

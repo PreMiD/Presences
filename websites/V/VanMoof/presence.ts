@@ -26,7 +26,7 @@ presence.on('UpdateData', async () => {
   }
 
   switch (true) {
-    case /[a-z]{2}-[A-Z]{2}/.test(urlpath[1]) && !urlpath[2]:
+    case /[a-z]{2}-[A-Z]{2}/.test(urlpath[1] ?? '') && !urlpath[2]:
       presenceData.details = 'Home'
       delete presenceData.buttons
 
@@ -35,7 +35,7 @@ presence.on('UpdateData', async () => {
     case urlpath[1] === 'shop':
       presenceData.details = 'Shop'
 
-      if (urlpath[2].startsWith('outlet')) {
+      if (urlpath[2]?.startsWith('outlet')) {
         presenceData.state = 'Outlet'
 
         switch (urlpath[3]) {
@@ -60,7 +60,7 @@ presence.on('UpdateData', async () => {
       else {
         const hash = window.location.hash.replace('#', '')
 
-        if (urlpath[3].startsWith('configure-')) {
+        if (urlpath[3]?.startsWith('configure-')) {
           presenceData.state = 'Configuring'
           return
         }
@@ -80,7 +80,7 @@ presence.on('UpdateData', async () => {
           case 'checkout':
             if (hash) {
               presenceData.details = 'Shop - Checkout'
-              presenceData.state = hash[0].toUpperCase() + hash.slice(1)
+              presenceData.state = hash[0]?.toUpperCase() + hash.slice(1)
             }
             else {
               presenceData.state = 'Checkout'
@@ -121,7 +121,7 @@ presence.on('UpdateData', async () => {
         case 'rewards':
         case 'help':
         case 'profile':
-          presenceData.state = `${urlpath[3][0].toUpperCase()}${urlpath[3].slice(
+          presenceData.state = `${urlpath[3][0]?.toUpperCase()}${urlpath[3].slice(
             1,
           )}`
 
@@ -307,7 +307,7 @@ presence.on('UpdateData', async () => {
           presenceData.details = `Viewing ${urlpath[2]
             .replaceAll(/-/g, ' ')
             .split(/ /g)
-            .map(word => `${word[0].toUpperCase()}${word.slice(1)}`)
+            .map(word => `${word[0]?.toUpperCase()}${word.slice(1)}`)
             .join(' ')}`
 
           break

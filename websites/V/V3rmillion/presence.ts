@@ -1,10 +1,12 @@
+import { Assets } from 'premid'
+
 /* Global variables */
 const presence = new Presence({
   clientId: '650569876993343529',
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/V/V3rmillion/assets/logo.png',
   House = 'https://cdn.rcd.gg/PreMiD/websites/V/V3rmillion/assets/0.png',
   Memo = 'https://cdn.rcd.gg/PreMiD/websites/V/V3rmillion/assets/1.png',
@@ -16,7 +18,7 @@ const enum Assets {
 /* Main eventHandler */
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
   }
   presenceData.startTimestamp = browsingTimestamp
   if (document.location.hostname.includes('v3rmillion.net')) {
@@ -28,20 +30,20 @@ presence.on('UpdateData', async () => {
       const profile = document.querySelector('#panel strong')
       presenceData.details = 'Viewing Homepage'
       presenceData.state = `Logged in as ${profile?.textContent}`
-      presenceData.smallImageKey = Assets.House
+      presenceData.smallImageKey = ActivityAssets.House
     }
     else if (document.location.pathname.includes('showthread.php')) {
       /* Viewing Thread */
       const title = document.querySelector('.thread_title')
       presenceData.details = 'Browsing Thread:'
       presenceData.state = title?.textContent
-      presenceData.smallImageKey = Assets.Paper
+      presenceData.smallImageKey = ActivityAssets.Paper
 
       /* User is replying to thread using quick-reply box. */
       if (document.querySelector('form #message') === document.activeElement) {
         presenceData.details = 'Replying to Thread:'
         presenceData.state = title?.textContent
-        presenceData.smallImageKey = Assets.Memo
+        presenceData.smallImageKey = ActivityAssets.Memo
       }
     }
     else if (document.location.pathname.includes('forumdisplay.php')) {
@@ -49,7 +51,7 @@ presence.on('UpdateData', async () => {
       const title = document.querySelector('.navigation .active')
       presenceData.details = 'Viewing Forum:'
       presenceData.state = title?.textContent
-      presenceData.smallImageKey = Assets.Paper
+      presenceData.smallImageKey = ActivityAssets.Paper
     }
     else if (document.location.pathname.includes('newreply.php')) {
       /* User is replying to thread */
@@ -66,20 +68,20 @@ presence.on('UpdateData', async () => {
       const profile = document.querySelector('.profile_header strong span')
       presenceData.details = 'Viewing Profile:'
       presenceData.state = profile?.textContent
-      presenceData.smallImageKey = Assets.Spy
+      presenceData.smallImageKey = ActivityAssets.Spy
     }
     else if (document.location.pathname === '/siterules.php') {
       /* Viewing rules page */
       presenceData.details = 'Viewing Rules'
       delete presenceData.state
-      presenceData.smallImageKey = Assets.Paper
+      presenceData.smallImageKey = ActivityAssets.Paper
     }
     else if (document.location.pathname === '/usercp.php') {
       /* Editing settings */
       const profile = document.querySelector('#panel strong')
       presenceData.details = 'User Control Panel'
       presenceData.state = `Logged in as ${profile?.textContent}`
-      presenceData.smallImageKey = Assets.Cog
+      presenceData.smallImageKey = ActivityAssets.Cog
     }
     else if (document.location.pathname.includes('search.php')) {
       /* Searching */
@@ -92,7 +94,7 @@ presence.on('UpdateData', async () => {
       const page = document.URL.substring(document.URL.indexOf('.php') + 10)
       presenceData.details = 'Reading page:'
       presenceData.state = page.charAt(0).toUpperCase() + page.substring(1)
-      presenceData.smallImageKey = Assets.Paper
+      presenceData.smallImageKey = ActivityAssets.Paper
     }
   }
   /* Unknown site location */

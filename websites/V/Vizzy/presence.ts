@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '968353669491871754',
 })
@@ -13,7 +15,7 @@ function getElementByXpath(path: string) {
   ).singleNodeValue
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/logo.png',
   Home = 'https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/0.png',
   Profile = 'https://cdn.rcd.gg/PreMiD/websites/V/Vizzy/assets/1.png',
@@ -24,7 +26,7 @@ const enum Assets {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, search, href } = document.location
@@ -32,17 +34,17 @@ presence.on('UpdateData', async () => {
   switch (pathname) {
     case '/': {
       presenceData.details = 'Viewing the homepage'
-      presenceData.smallImageKey = Assets.Home
+      presenceData.smallImageKey = ActivityAssets.Home
       break
     }
     case '/creations':
     case '/community': {
       presenceData.details = 'Viewing community creations'
-      presenceData.smallImageKey = Assets.Discover
+      presenceData.smallImageKey = ActivityAssets.Discover
       break
     }
     case '/project': {
-      presenceData.smallImageKey = Assets.Discover
+      presenceData.smallImageKey = ActivityAssets.Discover
       presenceData.details = 'Viewing a project'
       presenceData.state = getElementByXpath(
         '/html/body/div[1]/div/main/div/div/div[2]/div/div[2]/div[1]/h4',
@@ -56,7 +58,7 @@ presence.on('UpdateData', async () => {
       break
     }
     case '/user': {
-      presenceData.smallImageKey = Assets.Discover
+      presenceData.smallImageKey = ActivityAssets.Discover
       presenceData.details = 'Viewing a user\'s page'
       presenceData.state = `@${
         getElementByXpath('/html/body/div[1]/div/h5')?.textContent
@@ -71,7 +73,7 @@ presence.on('UpdateData', async () => {
     }
     case '/profile': {
       presenceData.details = 'Viewing their profile'
-      presenceData.smallImageKey = Assets.Profile
+      presenceData.smallImageKey = ActivityAssets.Profile
       if (tabParams)
         presenceData.state = `Tab: ${tabParams}`
 
@@ -93,11 +95,11 @@ presence.on('UpdateData', async () => {
           '/html/body/div[1]/div[2]/header/div[4]/div[1]/span/span',
         )?.textContent
       }`
-      presenceData.smallImageKey = Assets.Editor
+      presenceData.smallImageKey = ActivityAssets.Editor
       break
     }
     case '/export': {
-      presenceData.smallImageKey = Assets.Export
+      presenceData.smallImageKey = ActivityAssets.Export
       presenceData.details = 'Exporting a video'
       break
     }
@@ -109,7 +111,7 @@ presence.on('UpdateData', async () => {
           break
         }
         case 'creator': {
-          presenceData.smallImageKey = Assets.Discover
+          presenceData.smallImageKey = ActivityAssets.Discover
           presenceData.details = 'Reading about creator mode'
           break
         }
@@ -125,12 +127,12 @@ presence.on('UpdateData', async () => {
       break
     }
     case '/privacy': {
-      presenceData.smallImageKey = Assets.Discover
+      presenceData.smallImageKey = ActivityAssets.Discover
       presenceData.details = 'Reading the privacy policy'
       break
     }
     case '/terms-of-service': {
-      presenceData.smallImageKey = Assets.Discover
+      presenceData.smallImageKey = ActivityAssets.Discover
       presenceData.details = 'Reading the terms of use'
       break
     }

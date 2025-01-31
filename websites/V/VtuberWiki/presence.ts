@@ -1,4 +1,4 @@
-const enum Assets {
+enum ActivityAssets {
   Cog = 'https://cdn.rcd.gg/PreMiD/websites/V/VtuberWiki/assets/0.png',
   Book = 'https://cdn.rcd.gg/PreMiD/websites/V/VtuberWiki/assets/1.png',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/V/VtuberWiki/assets/logo.png',
@@ -25,7 +25,7 @@ const staticPages: StaticPagesType = {
   },
   '/changelog': {
     details: 'Viewing the Changelog',
-    largeImageKey: Assets.Log,
+    largeImageKey: ActivityAssets.Log,
     buttons: [
       {
         label: 'View the Changelog',
@@ -66,7 +66,7 @@ presence.on('UpdateData', async () => {
   const pageTitle = document.title.split(' | ')[0]?.trim()
 
   let presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 
@@ -87,7 +87,7 @@ presence.on('UpdateData', async () => {
             presenceData.state = `${pageTitle} • ${
               document.querySelector('#vtuber-desc')?.textContent
             }`
-            presenceData.smallImageKey = Assets.Logo
+            presenceData.smallImageKey = ActivityAssets.Logo
             presenceData.smallImageText = 'Vtuber Wiki'
             presenceData.buttons = [{ label: `View ${pageTitle}`, url: href }]
           }
@@ -98,8 +98,8 @@ presence.on('UpdateData', async () => {
           break
         case 'software':
           if (pathSplit[2]) {
-            presenceData.largeImageKey = Assets.Cog
-            presenceData.smallImageKey = Assets.Logo
+            presenceData.largeImageKey = ActivityAssets.Cog
+            presenceData.smallImageKey = ActivityAssets.Logo
             presenceData.smallImageText = 'Vtuber Wiki'
             presenceData.details = 'Viewing Software'
             presenceData.state = `${pageTitle}`
@@ -112,8 +112,8 @@ presence.on('UpdateData', async () => {
           break
         case 'guides':
           if (pathSplit[2]) {
-            presenceData.largeImageKey = Assets.Book
-            presenceData.smallImageKey = Assets.Logo
+            presenceData.largeImageKey = ActivityAssets.Book
+            presenceData.smallImageKey = ActivityAssets.Logo
             presenceData.details = 'Viewing Guides'
             presenceData.state = `${pageTitle}`
             presenceData.buttons = [{ label: 'View Guide', url: href }]
@@ -125,7 +125,7 @@ presence.on('UpdateData', async () => {
         case 'agencies':
           if (pathSplit[2]) {
             presenceData.largeImageKey = `https://vtubers.wiki/static/agencies/${pathSplit[2]}/logo.png`
-            presenceData.smallImageKey = Assets.Logo
+            presenceData.smallImageKey = ActivityAssets.Logo
             presenceData.details = 'Viewing a Vtuber Agency'
             presenceData.state = `${document
               .querySelector('.vw-article-title')
@@ -146,13 +146,13 @@ presence.on('UpdateData', async () => {
       break
     case 'blog':
       if (pathSplit[1]) {
-        presenceData.largeImageKey = Assets.Log
+        presenceData.largeImageKey = ActivityAssets.Log
         presenceData.details = 'Viewing a Blog Post'
         presenceData.state = pageTitle
         presenceData.buttons = [{ label: 'View Blog Post', url: href }]
       }
       else {
-        presenceData.largeImageKey = Assets.Log
+        presenceData.largeImageKey = ActivityAssets.Log
         presenceData.details = 'Viewing The Blog'
         presenceData.buttons = [{ label: 'View Blog', url: href }]
       }
@@ -177,7 +177,7 @@ presence.on('UpdateData', async () => {
         ]
       }
       else {
-        presenceData.largeImageKey = Assets.Cog
+        presenceData.largeImageKey = ActivityAssets.Cog
         presenceData.details = 'Viewing The SDK\'s'
         presenceData.buttons = [{ label: 'View SDK\'s', url: href }]
       }

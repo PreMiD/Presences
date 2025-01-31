@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '1167822908526170153',
 })
@@ -9,7 +11,7 @@ let video = {
   paused: true,
 }
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/V/Vizjer/assets/logo.png',
 }
 
@@ -22,7 +24,7 @@ presence.on(
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, search, href } = document.location
@@ -112,10 +114,10 @@ presence.on('UpdateData', async () => {
       break
     case pathname.startsWith('/film/') ? pathname : null:
       for (const info of document.querySelectorAll('div.info>ul')) {
-        if (info.children[0].textContent === 'Rok: ') {
+        if (info.children[0]?.textContent === 'Rok: ') {
           presenceData.details = `${
             document.querySelector('h2>span')?.textContent?.split('/')[0]
-          } (${info.children[1].textContent})`
+          } (${info.children[1]?.textContent})`
         }
       }
       presenceData.buttons = [{ label: 'Oglądaj', url: href }];

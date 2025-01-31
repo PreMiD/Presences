@@ -1,9 +1,9 @@
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/V/v0/assets/logo.png',
 }
 const presence = new Presence({ clientId: '1160993221854380132' })
 const presenceData: PresenceData = {
-  largeImageKey: Assets.Logo,
+  largeImageKey: ActivityAssets.Logo,
   startTimestamp: Math.floor(Date.now() / 1000),
 }
 
@@ -19,7 +19,7 @@ presence.on('UpdateData', async () => {
   ) {
     case '/':
       presenceData.details = 'Viewing homepage'
-      presenceData.largeImageKey = Assets.Logo
+      presenceData.largeImageKey = ActivityAssets.Logo
       delete presenceData.smallImageKey
       break
     case `/r/${document.location.pathname.split('/')[2]}`:
@@ -57,7 +57,7 @@ presence.on('UpdateData', async () => {
       presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
         'img.rounded-full.h-12.w-12',
       )?.src
-      presenceData.smallImageKey = Assets.Logo
+      presenceData.smallImageKey = ActivityAssets.Logo
       presenceData.buttons = [
         {
           label: 'View profile',

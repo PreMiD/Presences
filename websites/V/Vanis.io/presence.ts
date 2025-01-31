@@ -34,7 +34,7 @@ presence.on('UpdateData', async () => {
   }
   else {
     // Game Started
-    Mass = massElement?.textContent?.split(':')[1].trim()
+    Mass = massElement?.textContent?.split(':')[1]?.trim()
   }
 
   if (overlay.style.display !== 'none' && Mass?.startsWith('0')) {

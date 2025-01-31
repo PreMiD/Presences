@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
   clientId: '925799512205844490',
 })
@@ -5,7 +7,7 @@ const path = document.location.pathname
 const browsingStamp = Math.floor(Date.now() / 1000)
 const search = document.querySelector('#dle-content > h2')
 function getGenreTitle(genre: string) {
-  genre = genre.split('/')[2]
+  genre = genre.split('/')[2]!
   return genre
 }
 

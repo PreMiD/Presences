@@ -1,3 +1,5 @@
+import { ActivityType, Assets } from 'premid'
+
 let video = {
   duration: 0,
   currentTime: 0,
@@ -148,10 +150,10 @@ presence.on('UpdateData', async () => {
         )
         presenceData.smallImageKey = Assets.Search
       }
-      else if (Object.keys(pages).includes(pathArr[1])) {
+      else if (Object.keys(pages).includes(pathArr[1]!)) {
         presenceData.details = strings.viewPage
       }
-      presenceData = { ...presenceData, ...pages[pathArr[1]] } as PresenceData
+      presenceData = { ...presenceData, ...pages[pathArr[1]!] } as PresenceData
       if (privacyMode) {
         delete presenceData.state
         delete presenceData.smallImageKey
