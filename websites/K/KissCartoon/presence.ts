@@ -70,7 +70,6 @@ presence.on('UpdateData', async () => {
       }
     }
     else if (Number.isNaN(duration)) {
-      presenceData.startTimestamp = browsingTimestamp
       presenceData.details = 'Looking at:'
       presenceData.state = `${document
         .querySelector('#adsIfrme > div > div > div > h1 > strong')

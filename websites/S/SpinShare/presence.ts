@@ -36,25 +36,21 @@ presence.on('UpdateData', async () => {
         break
     }
     if (pathname.startsWith('/song')) {
-      presenceData.startTimestamp = browsingTimestamp
       presenceData.details = document.querySelector('.song-title')?.textContent
       presenceData.state = document.querySelector('.song-artist')?.textContent
       if (document.querySelector('.player-active'))
         presenceData.smallImageKey = Assets.Play
     }
     else if (pathname.startsWith('/user')) {
-      presenceData.startTimestamp = browsingTimestamp
       presenceData.details = 'Browsing User Profile:'
       presenceData.state = document.querySelector('.user-name')
         ?.textContent
     }
     else if (pathname.startsWith('/search')) {
-      presenceData.startTimestamp = browsingTimestamp
       presenceData.details = 'Searching'
       presenceData.state = '🔍'
     }
     else if (pathname.startsWith('/report')) {
-      presenceData.startTimestamp = browsingTimestamp
       presenceData.details = 'Reporting Something...'
       presenceData.state = '🔨'
     }

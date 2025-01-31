@@ -519,7 +519,6 @@ presence.on('UpdateData', async () => {
             + `Studio: ${studio}\n`
             + `Voto: ${vote}\n`
             + `Visualizzazioni: ${visual}`
-          presenceData.startTimestamp = browsingTimestamp
         } // OAV
       }
       else if (

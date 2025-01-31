@@ -141,7 +141,7 @@ presence.on('UpdateData', async () => {
 
     presence.setActivity(presenceData)
   }
-  else if (isVideoData && video && video.currentTime) {
+  else if (isVideoData && video.currentTime) {
     const title = document.querySelector(
       '#main-wrapper > div.content-wrapper > div.title > h1 > span.tv-title-archive > span',
     )

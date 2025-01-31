@@ -8,17 +8,10 @@ const strings = presence.getStrings({
   pause: 'general.paused',
 })
 
-let lastPlaybackState = null
-let playback
-let browsingTimestamp = Math.floor(Date.now() / 1000)
+const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/Aniyan/assets/logo.png',
-}
-
-if (lastPlaybackState !== playback) {
-  lastPlaybackState = playback
-  browsingTimestamp = Math.floor(Date.now() / 1000)
 }
 
 presence.on('UpdateData', async () => {
@@ -26,7 +19,7 @@ presence.on('UpdateData', async () => {
     '#player > div.jw-media.jw-reset > video',
   )
 
-  playback = video !== null
+  const playback = video !== null
 
   if (!playback) {
     const presenceData: PresenceData = {

@@ -34,14 +34,8 @@ async function getStrings() {
 
 let strings: Awaited<ReturnType<typeof getStrings>>
 let oldLang: string | null = null
-let lastPlaybackState = null
 let playback: boolean = false
-let browsingTimestamp = Math.floor(Date.now() / 1000)
-
-if (lastPlaybackState !== playback) {
-  lastPlaybackState = playback
-  browsingTimestamp = Math.floor(Date.now() / 1000)
-}
+const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 let iFrameVideo: boolean,
   currentTime: number,

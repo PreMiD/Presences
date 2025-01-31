@@ -4,17 +4,10 @@ const presence = new Presence({
   clientId: '609531561389588480',
 })
 
-let lastPlaybackState = null
-let playback: boolean | null = null
-let browsingTimestamp = Math.floor(Date.now() / 1000)
-
-if (lastPlaybackState !== playback) {
-  lastPlaybackState = playback
-  browsingTimestamp = Math.floor(Date.now() / 1000)
-}
+const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 presence.on('UpdateData', async () => {
-  playback = document.querySelector('video.dplayer-video.dplayer-video-current') !== null
+  const playback = document.querySelector('video.dplayer-video.dplayer-video-current') !== null
 
   if (!playback) {
     const presenceData: PresenceData = {

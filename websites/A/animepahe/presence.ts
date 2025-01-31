@@ -264,15 +264,15 @@ presence.on('UpdateData', async () => {
             else {
               // viewing specific
               const info = parseInfo(
-                document.querySelectorAll('.anime-info')[0]
-                  ?.children as unknown as HTMLParagraphElement[],
+                document.querySelectorAll('.anime-info')[0]!
+                  .children as unknown as HTMLParagraphElement[],
               )
               const title = document.querySelectorAll('.title-wrapper')[0]?.children[1]
                 ?.textContent
               const listing = (() => {
                 const links = info.external_links as HTMLAnchorElement[]
 
-                if (links?.[0]?.textContent === 'AniList')
+                if (links[0]?.textContent === 'AniList')
                   return ['AniList', links[0].href]
 
                 for (const link of links) {
