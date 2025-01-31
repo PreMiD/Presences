@@ -1,0 +1,90 @@
+{
+  "IGN.wiki": {
+    "description": "",
+    "message": "Viewing Wiki:"
+  },
+  "IGN.buttonViewWiki": {
+    "description": "Used as the title for the button in Discord.",
+    "message": "View Wiki"
+  },
+  "IGN.playlists": {
+    "description": "Playlists on IGN are lists with games.",
+    "message": "Viewing Playlists"
+  },
+  "IGN.followedPlaylists": {
+    "description": "Followed Playlists are lists with games.",
+    "message": "Viewing Followed Playlists"
+  },
+  "IGN.library": {
+    "description": "",
+    "message": "Viewing Library"
+  },
+  "IGN.playing": {
+    "description": "",
+    "message": "Viewing Playling Games"
+  },
+  "IGN.backlog": {
+    "description": "",
+    "message": "Viewing Backlogged Games"
+  },
+  "IGN.paused": {
+    "description": "",
+    "message": "Viewing Paused Games"
+  },
+  "IGN.beat": {
+    "description": "",
+    "message": "Viewing Beated Games"
+  },
+  "IGN.quit": {
+    "description": "",
+    "message": "Viewing Quitted Games"
+  },
+  "IGN.exploringMaps": {
+    "description": "",
+    "message": "Exploring Maps"
+  },
+  "IGN.rewards": {
+    "description": "",
+    "message": "Viewing Rewards"
+  },
+  "IGN.viewGame": {
+    "description": "",
+    "message": "Viewing game:"
+  },
+  "IGN.buttonViewGame": {
+    "description": "Used as the title for the button in Discord.",
+    "message": "View Game"
+  },
+  "IGN.viewComics": {
+    "description": "",
+    "message": "Viewing comic:"
+  },
+  "IGN.buttonViewComics": {
+    "description": "Used as the title for the button in Discord.",
+    "message": "View Comic"
+  },
+  "IGN.viewTV": {
+    "description": "",
+    "message": "Viewing TV Show:"
+  },
+  "IGN.buttonViewTV": {
+    "description": "Used as the title for the button in Discord.",
+    "message": "View TV Show"
+  },
+  "IGN.viewTech": {
+    "description": "",
+    "message": "Viewing tech gadget:"
+  },
+  "IGN.buttonViewTech": {
+    "description": "Used as the title for the button in Discord.",
+    "message": "View Tech Gadget"
+  },
+  "IGN.video": {
+    "description": "",
+    "message": "Videos"
+  },
+  "IGN.cinema": {
+    "description": "",
+    "message": "Cinema"
+  }
+}
