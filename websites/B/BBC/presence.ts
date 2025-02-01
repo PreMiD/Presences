@@ -120,7 +120,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey: LogoAssets[`Bbc${serviceName}`],
 		details: strings.browse,
 		startTimestamp: browsingTimestamp,
-	};
+	} as PresenceData;
 
 	if (path.includes("/iplayer")) {
 		presenceData.type = ActivityType.Watching;
@@ -591,7 +591,7 @@ presence.on("UpdateData", async () => {
 
 		for (const [key, value] of Object.entries(weatherPages)) {
 			if (path.match(key) && !VideoMedia.duration) {
-				presenceData = { ...presenceData, ...value };
+				presenceData = { ...presenceData, ...value } as PresenceData;
 				break;
 			} else if (VideoMedia.duration) {
 				presenceData.details = title;
@@ -684,7 +684,7 @@ presence.on("UpdateData", async () => {
 				!path.includes("/world/") &&
 				!VideoMedia.duration
 			) {
-				presenceData = { ...presenceData, ...value };
+				presenceData = { ...presenceData, ...value } as PresenceData;
 				break;
 			} else if (path.includes("/world/") && !VideoMedia.duration) {
 				presenceData.details = strings.viewPage;

@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "Cairo",
@@ -11,14 +11,14 @@
 		"en": "Discord's unbiased list, giving bots and servers of all sizes a big chance!",
 		"es": "¡Lista imparcial de Discord, que ofrece a los bots y servidores de todos los tamaños una gran oportunidad!",
 		"fr": "La liste impartiale de Discord, qui donne une grande chance aux bots et aux serveurs de toutes tailles !",
-		"he_IL": "הרשימה הבלתי משוחדת של דיסקורד, נותנת הזדמנות שווה לשרתים ובוטים בכל הגדלים!",
+		"he": "הרשימה הבלתי משוחדת של דיסקורד, נותנת הזדמנות שווה לשרתים ובוטים בכל הגדלים!",
 		"hu": "Discord-nak elfogulatlan listája, megadja a botoknak és a szervereknek a nagy lehetőséget!",
 		"id": "List Discord tidak ber-bias, memberikan bot dan server peluang yang sama!",
-		"is": "Óhlutdrægur listi Discord, sem gefur vélum og netþjónum af öllum stærðum stór tækifæri!",
+		"is-is": "Óhlutdrægur listi Discord, sem gefur vélum og netþjónum af öllum stærðum stór tækifæri!",
 		"nl": "Discord's onbevooroordeelde lijst, die bots en servers van elke omvang een grote kans geeft!",
 		"pl": "Niezależna lista Discord, która daje dużą szansę botom i serwerom każdej wielkości!",
 		"pt": "Lista de discord imparcial, dá a bots e servidores de todos os tamanhos uma grande chance!",
-		"sv_SE": "Discords opartiska lista, ger alla bots och servrar en stor chans!",
+		"sv": "Discords opartiska lista, ger alla bots och servrar en stor chans!",
 		"tr": "Discord'un tarafsız bot listesi, büyüklüğü ne olursa olsun bütün botlara ve sunuculara büyük bir şans veriyor!"
 	},
 	"url": [
@@ -27,7 +27,7 @@
 		"discordextremelist.gay",
 		"staging.discordextremelist.gay"
 	],
-	"version": "1.0.21",
+	"version": "1.0.22",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Extreme%20List/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Discord%20Extreme%20List/assets/thumbnail.png",
 	"color": "#b114ff",

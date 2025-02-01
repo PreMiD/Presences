@@ -2,7 +2,7 @@
 /**
  * @link https://docs.premid.app/dev/presence/class#presencedata-interface
  */
-interface PresenceData {
+interface BasePresenceData {
 	/**
 	 * Name to show in activity
 	 * @example "YouTube"
@@ -101,6 +101,18 @@ interface PresenceData {
 	 */
 	buttons?: [ButtonData, ButtonData?];
 }
+
+interface MediaPresenceData extends BasePresenceData {
+	type: ActivityType.Listening | ActivityType.Watching;
+	largeImageText?: string | Node;
+}
+
+interface NonMediaPresenceData extends BasePresenceData {
+	type?: Exclude<ActivityType, ActivityType.Listening | ActivityType.Watching>;
+	largeImageText?: never;
+}
+
+type PresenceData = MediaPresenceData | NonMediaPresenceData;
 
 interface ButtonData {
 	/**

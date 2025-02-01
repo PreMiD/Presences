@@ -10,7 +10,7 @@ const enum Assets {
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
-	};
+	} as PresenceData;
 	presenceData.startTimestamp = browsingTimestamp;
 	switch (document.location.pathname) {
 		case "/": {

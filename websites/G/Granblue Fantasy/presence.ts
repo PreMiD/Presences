@@ -2,10 +2,14 @@
 // Hack to resolve Deepscan
 const no_op = (a: number) => a + 1;
 no_op(0);
+
 const presence = new Presence({
 		clientId: "632983924414349333",
 	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+	browsingTimestamp = Math.floor(Date.now() / 1000),
+	djeetas: Record<string, string> = {},
+	gameIcon =
+		"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/logo.png";
 
 enum Elements {
 	Plain,
@@ -19,8 +23,7 @@ enum Elements {
 
 const ElementIcons = {
 		// Plain element isn't really a thing for characters, but it's here for the sake of completion
-		[Elements.Plain]:
-			"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/logo.png",
+		[Elements.Plain]: gameIcon,
 		[Elements.Fire]:
 			"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/0.png",
 		[Elements.Water]:
@@ -105,19 +108,70 @@ function simplifyKey<T>(obj: T): T {
 	return obj;
 }
 
+function getDjeeta(imgUri: string, uri: string): Promise<string> {
+	return new Promise(resolve => {
+		if (djeetas[uri]) return resolve(djeetas[uri]);
+
+		const img = new Image();
+		img.crossOrigin = "anonymous";
+		img.src = `${imgUri}/sp/assets/leader/raid_normal/${uri}.jpg`;
+
+		img.onload = function () {
+			const tempCanvas = document.createElement("canvas");
+			tempCanvas.width = img.width;
+			tempCanvas.height = img.width;
+
+			const tempCtx = tempCanvas.getContext("2d");
+
+			// Draw the first 3 pixel rows of the image to the canvas (top border)
+			tempCtx.drawImage(img, 0, 0, img.width, 3, 0, 0, img.width, 3);
+
+			// Then the rest of the image and leaving 3 pixels at the bottom
+			tempCtx.drawImage(
+				img,
+				0,
+				35,
+				img.width,
+				img.width - 3,
+				0,
+				3,
+				img.width,
+				img.width - 3
+			);
+
+			// Then the last 3 pixel rows of the image to the canvas (bottom border)
+			tempCtx.drawImage(
+				img,
+				0,
+				img.height - 3,
+				img.width,
+				3,
+				0,
+				img.width - 3,
+				img.width,
+				3
+			);
+
+			djeetas[uri] = tempCanvas.toDataURL("image/png");
+			resolve(tempCanvas.toDataURL("image/png"));
+		};
+
+		img.onerror = function () {
+			resolve(gameIcon);
+		};
+	});
+}
+
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey:
-				"https://cdn.rcd.gg/PreMiD/websites/G/Granblue%20Fantasy/assets/logo.png",
+			largeImageKey: gameIcon,
 			startTimestamp: browsingTimestamp,
-			largeImageText: "Granblue Fantasy",
 		},
 		{ href } = document.location,
-		[health, turn, djeeta, profile, button] = await Promise.all([
+		[health, turn, djeeta, button] = await Promise.all([
 			presence.getSetting<number>("health"),
 			presence.getSetting<number>("turn"),
 			presence.getSetting<boolean>("djeeta"),
-			presence.getSetting<boolean>("profile"),
 			presence.getSetting<boolean>("button"),
 		]);
 	let userData = await presence.getPageVariable<UserData>(
@@ -153,7 +207,11 @@ presence.on("UpdateData", async () => {
 	} else if (href.includes("/#result"))
 		presenceData.details = "In a Quest result screen";
 	else if (href.includes("/#raid") || href.includes("/#raid_multi")) {
-		const boss = gameStatus?.boss?.param.find(x => x.alive);
+		const bosses = gameStatus?.boss?.param.sort(
+				(a, b) => parseInt(b.hpmax) - parseInt(a.hpmax)
+			),
+			boss = bosses?.find(x => x.alive) || bosses?.[0];
+
 		if (boss) {
 			if (boss.name.ja !== boss.name.en)
 				presenceData.details = `${boss.name.en} (${boss.name.ja})`;
@@ -167,31 +225,31 @@ presence.on("UpdateData", async () => {
 				"Starting battle...";
 		}
 
-		if (health === 0) {
-			presenceData.state = `At ${
-				document.querySelectorAll(".btn-enemy-gauge.prt-enemy-percent.alive")[0]
-					.textContent
-			}`;
-		} else if (health === 1 && boss) {
-			const hp = parseInt(boss.hp);
-			presenceData.state = `${hp.toLocaleString()} [${(
-				(hp * 100) /
-				parseInt(boss.hpmax)
-			).toFixed(2)}%]`;
+		if (boss) {
+			const hp = parseInt(boss.hp),
+				percentage = (hp * 100) / parseInt(boss.hpmax);
+			if (health === 0) presenceData.state = `At ${Math.ceil(percentage)}%`;
+			else if (health === 1) {
+				presenceData.state = `${hp.toLocaleString()} [${percentage.toFixed(
+					2
+				)}%]`;
+			}
 		}
 
-		if (turn && gameStatus?.turn)
-			presenceData.state += ` | Turn ${gameStatus.turn}`;
+		if (turn && gameStatus?.turn) {
+			if (!presenceData.state) presenceData.state = `Turn ${gameStatus.turn}`;
+			else presenceData.state += ` | Turn ${gameStatus.turn}`;
+		}
 
 		if (djeeta && gameStatus?.player) {
 			const charaAlive = gameStatus.player.param.find(x => x.leader);
 			if (charaAlive) {
 				presenceData.smallImageKey = ElementIcons[charaAlive.attr];
 				presenceData.smallImageText = ElementsNames[charaAlive.attr];
-				presenceData.largeImageKey = `${userData.imgUri}/sp/assets/leader/raid_normal/${charaAlive.pid}.jpg`;
-				presenceData.largeImageText = `${charaAlive.name} | ${
-					charaAlive.hp
-				} [${((charaAlive.hp * 100) / charaAlive.hpmax).toFixed(2)}%]`;
+				presenceData.largeImageKey = await getDjeeta(
+					userData.imgUri,
+					charaAlive.pid
+				);
 			}
 		}
 	} else if (href.includes("/#party/index/0/npc/0"))
@@ -211,11 +269,11 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Co-op:";
 
 		if (href.includes("offer"))
-			presenceData.state = "Searching a raid coop room";
-		else if (href.includes("room")) presenceData.state = "In a coop room";
+			presenceData.state = "Searching a raid co-op room";
+		else if (href.includes("room")) presenceData.state = "In a co-op room";
 	} else if (href.includes("/#lobby/room")) {
-		presenceData.details = "Co-op :";
-		presenceData.state = "In a raid coop room";
+		presenceData.details = "Co-op:";
+		presenceData.state = "In a raid co-op room";
 	} else if (href.includes("/#casino")) {
 		presenceData.details = "Casino:";
 		presenceData.state = "Main menu";
@@ -332,18 +390,13 @@ presence.on("UpdateData", async () => {
 	else if (href.includes("#frontier/alchemy"))
 		presenceData.details = "In Alchemy Lab";
 
-	if (userData?.userId) {
-		if (profile && presenceData.largeImageText === "Granblue Fantasy")
-			presenceData.largeImageText = `UID: ${userData.userId} | Rank ${userData.userRank}`;
-
-		if (button) {
-			presenceData.buttons = [
-				{
-					label: "Profile",
-					url: `${userData.baseUri}/#profile/${userData.userId}`,
-				},
-			];
-		}
+	if (userData?.userId && button) {
+		presenceData.buttons = [
+			{
+				label: "Profile",
+				url: `${userData.baseUri}/#profile/${userData.userId}`,
+			},
+		];
 	}
 
 	presence.setActivity(presenceData);

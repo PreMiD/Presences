@@ -37,7 +37,6 @@ presence.on("UpdateData", async () => {
 	let presenceData: PresenceData = {
 		largeImageKey: Assets.Logo,
 		startTimestamp: browsingTimestamp,
-		type: ActivityType.Watching,
 		details: "Unsupported Page",
 	};
 
@@ -73,8 +72,10 @@ presence.on("UpdateData", async () => {
 		},
 	};
 
-	for (const [path, data] of Object.entries(pages))
-		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
+	for (const [path, data] of Object.entries(pages)) {
+		if (pathname.includes(path))
+			presenceData = { ...presenceData, ...data, type: ActivityType.Watching };
+	}
 
 	const pageNumber = href.includes("?page=") ? href.split("?page=")[1] : 1,
 		searchInput = document.querySelector("input")
@@ -127,9 +128,12 @@ presence.on("UpdateData", async () => {
 				presenceData.details = steamTitle;
 				presenceData.state = `📺 ${
 					episodeName
-						? `${episodeNumber}. ${episodeName?.textContent}`
+						? `${episodeName?.textContent}`
 						: `Episode ${episodeNumber}`
 				}`;
+				presenceData.largeImageText = `Season ${
+					href.includes("?season=") ? href.split("?season=")[1] : 1
+				}, Episode ${episodeNumber}`;
 				presenceData.largeImageKey = document
 					.querySelector(
 						"div.flex > div.false > span.lazy-load-image-background > img"
