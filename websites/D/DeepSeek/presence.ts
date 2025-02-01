@@ -20,9 +20,7 @@ const enum Assets {
 
 presence.on("UpdateData", async () => {
 	const { pathname } = document.location,
-		[showTitle] = await Promise.all([
-			presence.getSetting<boolean>("showTitle"),
-		]);
+		showTitle = await presence.getSetting<boolean>("showTitle");
 
 	let presenceDetail: string, presenceState: string;
 
