@@ -141,9 +141,8 @@ async function fetchWithResizePixelatedImage(
  * @example "665557", "0fce53", "87c9db"
  */
 function randomRGBColor() {
-	const colorInHex = Math.floor(Math.random() * 0xffffff).toString(16);
-	// Do the same as padStart(color, 6, "0")
-	const slot = Array.from(Array(6), () => "0");
+	const colorInHex = Math.floor(Math.random() * 0xffffff).toString(16),
+		slot = Array.from(Array(6), () => "0");
 	slot.splice(
 		slot.length - colorInHex.length,
 		colorInHex.length,
