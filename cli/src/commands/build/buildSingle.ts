@@ -18,6 +18,11 @@ export async function buildSingle(service: string | undefined, {
 
   const successful = await buildActivity({ path: folder, activity: metadata, versionized, watch, validate, kill })
 
+  if (watch) {
+    // ! Don't exit if watching
+    return
+  }
+
   if (sarif) {
     await writeSarifLog()
   }
