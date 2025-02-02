@@ -146,7 +146,7 @@ function randomRGBColor() {
 	slot.splice(
 		slot.length - colorInHex.length,
 		colorInHex.length,
-		...colorInHex.split("")
+		...colorInHex
 	);
 	return slot.join("");
 }
