@@ -106,6 +106,8 @@ class GameState {
 
 /**
  * Resize pixelated image. Beware of high perf cost.
+ * The result image is unique even though it originates from the same source,
+ * for dealing with discord cache problem.
  * @param href url
  * @param dw destination width
  * @param dh destination height
@@ -126,10 +128,27 @@ async function fetchWithResizePixelatedImage(
 		canvas.width = dw;
 		canvas.height = dh;
 		const g = canvas.getContext("2d");
+		g.fillStyle = `#${randomRGBColor()}01`;
+		g.fillRect(0, 0, 1, 1);
 		g.imageSmoothingEnabled = false;
 		g.drawImage(img, 0, 0, img.width, img.height, 0, 0, dw, dh);
 		return new Promise<Blob>(resolve => canvas.toBlob(resolve, "image/png"));
 	});
+}
+
+/**
+ * Pick a random RGB color in hex
+ * @example "665557", "0fce53", "87c9db"
+ */
+function randomRGBColor() {
+	const colorInHex = Math.floor(Math.random() * 0xffffff).toString(16),
+		slot = Array.from(Array(6), () => "0");
+	slot.splice(
+		slot.length - colorInHex.length,
+		colorInHex.length,
+		...colorInHex
+	);
+	return slot.join("");
 }
 
 /** We still need this function for inspecting what format the image is in */
@@ -211,9 +230,9 @@ class SimpleLRU<V = unknown> {
  * Keys stand for characters' faces urls start with "blob",
  * and the values are their faces but large-scaled in Data URLs
  *
- * In case of something glitches on re-sampling...
+ * In case of something glitches on re-sampling, or discord cache problem...
  * Switching to other effects for 5 times or taking any animated actions
- * to let the oldest cache is re-generated.
+ * to evict the oldest cache.
  */
 const characterFacesCache = new SimpleLRU<string>(5),
 	/**
