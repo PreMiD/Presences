@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 				? "сериал"
 				: contentType === "cartoons"
 				? "мультфильм"
-				: contentType === "animation"  
+				: contentType === "animation"
 				? "аниме"
 				: "чего-то";
 
@@ -30,11 +30,13 @@ presence.on("UpdateData", async () => {
 		document.location.pathname === "/films" ||
 		document.location.pathname === "/series" ||
 		document.location.pathname === "/cartoons" ||
-		document.location.pathname === "/animation" ||  
+		document.location.pathname === "/animation" ||
 		document.location.pathname.match(/\/(films|series|cartoons|animation)\//)
 	) {
 		if (
-			document.location.pathname.match(/\/(films|series|cartoons|animation)\/.+/)
+			document.location.pathname.match(
+				/\/(films|series|cartoons|animation)\/.+/
+			)
 		) {
 			presenceData.details = `Смотрит ${currentType}`;
 			presenceData.state = `${
