@@ -25,9 +25,9 @@
 		"www.eurogamer.nl",
 		"www.eurogamer.pl"
 	],
-	"version": "1.0.1",
-	"logo": "https://i.imgur.com/L2r2n5e.png",
-	"thumbnail": "https://i.imgur.com/TtRjcA3.png",
+	"version": "1.0.2",
+	"logo": "https://cdn.rcd.gg/PreMiD/websites/E/Eurogamer/assets/logo.png",
+	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Eurogamer/assets/thumbnail.png",
 	"color": "#007cbf",
 	"category": "games",
 	"tags": [

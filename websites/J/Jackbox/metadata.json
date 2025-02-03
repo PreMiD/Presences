@@ -2,13 +2,13 @@
 	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
-		"name": "Stringy",
-		"id": "577743466940071949"
+		"name": "theusaf",
+		"id": "193714715631812608"
 	},
 	"contributors": [
 		{
-			"name": "theusaf",
-			"id": "193714715631812608"
+			"name": "Stringy",
+			"id": "577743466940071949"
 		}
 	],
 	"service": "Jackbox",
@@ -22,7 +22,7 @@
 		"www.jackboxgames.com",
 		"shop.jackboxgames.com"
 	],
-	"version": "2.1.5",
+	"version": "2.1.7",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/thumbnail.png",
 	"color": "#4254f4",
@@ -50,5 +50,6 @@
 			"icon": "fas fa-circle-info",
 			"value": true
 		}
-	]
+	],
+	"mobile": true
 }
