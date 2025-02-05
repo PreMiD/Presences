@@ -32,6 +32,12 @@ export async function updateAssets() {
     return exit(MESSAGES.noPullRequest)
   }
 
+  //* Only run for PreMiD/Presences repository
+  if (github.context.repo.owner !== 'PreMiD' || github.context.repo.repo !== 'Presences') {
+    core.info('Skipping assets update - not in PreMiD/Presences repository')
+    return success('Skipping - not in PreMiD/Presences repository')
+  }
+
   const token = process.env.GITHUB_TOKEN
   if (!token) {
     return exit(MESSAGES.noToken)
