@@ -12,7 +12,7 @@ async function getStrings() {
 		{
 			viewHome: "general.viewHome",
 			buttonViewPage: "general.buttonViewPage",
-			viewing: "general.viewing",
+			view: "general.view",
 			reading: "general.reading",
 			search: "general.search",
 			searchFor: "general.searchFor",
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "details":
-			presenceData.details = `${strings.viewing} ${NotTranslated.NovelPage}`;
+			presenceData.details = `${strings.view} ${NotTranslated.NovelPage}`;
 			presenceData.state = textContent(".novel-desc h1");
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>(
@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "rankings":
-			presenceData.details = `${strings.viewing} ${NotTranslated.TopNovelsRead}`;
+			presenceData.details = `${strings.view} ${NotTranslated.TopNovelsRead}`;
 			presenceData.state = textContent(".ranking-tabs .current");
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = "Viewing";
@@ -118,7 +118,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = "Searching";
 			if (path[2] === "works") {
-				presenceData.details = `${strings.viewing} ${NotTranslated.WorksOfTheAuthor}`;
+				presenceData.details = `${strings.view} ${NotTranslated.WorksOfTheAuthor}`;
 				presenceData.state = textContent(".author-desc dl dd h4");
 				presenceData.largeImageKey =
 					document.querySelector<HTMLImageElement>(
@@ -136,14 +136,14 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "manga":
-			presenceData.details = `${strings.viewing} ${NotTranslated.PopularManga}`;
+			presenceData.details = `${strings.view} ${NotTranslated.PopularManga}`;
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = "Viewing";
 			switch (path[2]) {
 				case "details":
 				case "novel":
 					presenceData.details = `${
-						strings.viewing
+						strings.view
 					} ${strings.chapter.toLowerCase()} ${textContent(
 						".details-tabs .current"
 					).toLowerCase()}`;
@@ -180,7 +180,7 @@ presence.on("UpdateData", async () => {
 			break;
 
 		case "newnovel":
-			presenceData.details = `${strings.viewing} ${NotTranslated.ThisWeeksNewNovels}`;
+			presenceData.details = `${strings.view} ${NotTranslated.ThisWeeksNewNovels}`;
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = "Viewing";
 			break;
@@ -202,14 +202,14 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = "Viewing";
 			if (path[2] === "reviews") {
-				presenceData.details = `${strings.viewing} ${NotTranslated.Comments}`;
+				presenceData.details = `${strings.view} ${NotTranslated.Comments}`;
 				presenceData.state = textContent(".header-tabs .current");
 			}
 			break;
 
 		case "library":
 		case "history":
-			presenceData.details = `${strings.viewing} ${NotTranslated.Library}`;
+			presenceData.details = `${strings.view} ${NotTranslated.Library}`;
 			presenceData.state = textContent(".header-tabs .current");
 			presenceData.smallImageKey = Assets.Viewing;
 			presenceData.smallImageText = "Viewing";

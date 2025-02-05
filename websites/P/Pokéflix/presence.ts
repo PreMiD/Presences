@@ -10,7 +10,7 @@ async function getStrings() {
 	return presence.getStrings(
 		{
 			viewHome: "general.viewHome",
-			viewing: "general.viewing",
+			view: "general.view",
 			search: "general.search",
 			searchFor: "general.searchFor",
 			play: "general.watchingVid",
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 		case "v":
 		case "video":
 			presenceData.details = !privacy
-				? `${strings.viewing} ${document
+				? `${strings.view} ${document
 						.querySelector(".fluid-container h2")
 						.firstChild?.textContent?.trim()}`
 				: strings.play;

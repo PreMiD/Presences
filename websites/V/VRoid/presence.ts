@@ -93,7 +93,7 @@ function fetchStrings() {
 				viewCategory: "general.viewCategory",
 				viewHome: "general.viewHome",
 				viewList: "general.viewList",
-				viewing: "general.viewing",
+				view: "general.view",
 			},
 			targetLang
 		)
@@ -216,7 +216,7 @@ presence.on("UpdateData", () => {
 							}
 						}
 					} else {
-						presenceData.details = `VRoid Hub - ${strings.viewing}`;
+						presenceData.details = `VRoid Hub - ${strings.view}`;
 						presenceData.state = getTitle();
 					}
 					break;
@@ -336,7 +336,7 @@ presence.on("UpdateData", () => {
 				}
 				case "wear": {
 					if (pathList[1]) {
-						presenceData.details = strings.viewing;
+						presenceData.details = strings.view;
 						presenceData.state = getTitle();
 					} else {
 						presenceData.details = strings.readingAbout;
