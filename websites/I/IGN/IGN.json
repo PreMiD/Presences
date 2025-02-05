@@ -3,10 +3,6 @@
     "description": "",
     "message": "Viewing Wiki:"
   },
-  "IGN.buttonViewWiki": {
-    "description": "Used as the title for the button in Discord.",
-    "message": "View Wiki"
-  },
   "IGN.followedPlaylists": {
     "description": "Followed Playlists are lists with games.",
     "message": "Viewing Followed Playlists"
