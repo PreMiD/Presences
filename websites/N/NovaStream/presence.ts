@@ -29,30 +29,26 @@ presence.on("UpdateData", async () => {
 
 		if (document.location.search.includes("type=movie")) {
 			releaseDate = document.querySelector(
-				"div.space-y-2:nth-child(3) > p:nth-child(2) > span:nth-child(2)"
+				'[x-text*="content?.release_date"], [x-text*="content?.first_air_date"]'
 			)?.textContent;
-			rating = document
-				.querySelector(
-					"div.space-y-2:nth-child(3) > p:nth-child(4) > span:nth-child(1) > span:nth-child(1)"
-				)
-				?.textContent?.split(" (")[0];
+			rating = document.querySelector(
+				'[x-text*="content?.vote_average?"]'
+			)?.textContent;
 			runtime = document.querySelector(
-				"p.text-gray-300:nth-child(8) > span:nth-child(2)"
+				"[x-text*=\"Math.floor(content.runtime / 60) + 'h ' + (content.runtime % 60) + 'm'\"]"
 			)?.textContent;
 		} else {
 			releaseDate = document.querySelector(
-				"div.bg-gray-800:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > p:nth-child(2) > span:nth-child(2)"
+				'[x-text*="content?.release_date"], [x-text*="content?.first_air_date"]'
 			)?.textContent;
-			rating = document
-				.querySelector(
-					"p.text-gray-300:nth-child(5) > span:nth-child(1) > span:nth-child(1)"
-				)
-				?.textContent.split(" (")[0];
+			rating = document.querySelector<HTMLSelectElement>(
+				'[x-text*="content?.vote_average?"]'
+			)?.textContent;
 			season = document
-				.querySelector<HTMLSelectElement>("select.bg-gray-700:nth-child(1)")
+				.querySelector<HTMLSelectElement>('[x-model*="selectedSeason"]')
 				?.selectedOptions[0].textContent.replace("Season ", "");
 			episode = document
-				.querySelector<HTMLSelectElement>("select.rounded-lg:nth-child(2)")
+				.querySelector<HTMLSelectElement>('[x-model*="selectedEpisode"]')
 				?.selectedOptions[0].textContent.replace("Episode ", "");
 			if (season && episode) seasonEpisode = `S${season}E${episode}  •  `;
 		}
@@ -66,16 +62,14 @@ presence.on("UpdateData", async () => {
 		presenceData.state = [
 			runtime ? `${runtime}  •  ` : "",
 			seasonEpisode ?? "",
-			rating ? `⭐${rating}` : "",
+			rating ? `⭐${rating}/10` : "",
 		].join("");
 	}
 
 	// Watchlist modal
-	const watchListElements =
-		document.querySelector<HTMLInputElement>(
-			"div.fixed:nth-child(9) .grid-cols-1"
-		) ||
-		document.querySelector<HTMLInputElement>("div.grid-cols-1:nth-child(2)");
+	const watchListElements = document.querySelector<HTMLInputElement>(
+		'[x-for*="item in watchLaterItems"]'
+	);
 	if (
 		watchListElements &&
 		window.getComputedStyle(
