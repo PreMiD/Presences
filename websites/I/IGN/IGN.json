@@ -7,10 +7,6 @@
     "description": "Used as the title for the button in Discord.",
     "message": "View Wiki"
   },
-  "IGN.playlists": {
-    "description": "Playlists on IGN are lists with games.",
-    "message": "Viewing Playlists"
-  },
   "IGN.followedPlaylists": {
     "description": "Followed Playlists are lists with games.",
     "message": "Viewing Followed Playlists"
