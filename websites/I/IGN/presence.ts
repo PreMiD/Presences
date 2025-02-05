@@ -20,7 +20,7 @@ async function getStrings() {
 		buttonViewWiki: "IGN.buttonViewWiki",
 		viewAccount: "general.viewAccount",
 		viewList: "general.viewList",
-		playlists: "IGN.playlists",
+		viewPlaylists: "general.viewingPlaylists",
 		followedPlaylists: "IGN.followedPlaylists",
 		viewingAWishlist: "general.viewingAWishlist",
 		library: "IGN.library",
