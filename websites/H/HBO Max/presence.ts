@@ -25,7 +25,7 @@ function parseHelpUrl(pathname: string) {
 
 	return {
 		language: segments[0] || "en",
-		helpType: segments[1] || null,
+		helpType: segments[1] || null,	
 		detailKeyword: segments[2] || null,
 		item: segments[3] || null,
 	};
@@ -128,11 +128,13 @@ presence.on("UpdateData", async () => {
 	}
 
 	if (regex.test(pathname)) {
-		const documentTitle = document.title.split("•")[0].trim(),
+		const match = pathname.match(regex),
+			type = match[1],
+			documentTitle = document.title.split("•")[0].trim(),
 			description = document.querySelector(
 				".StyledDescription-Beam-Web-Ent__sc-1d8dfnx-11"
 			)?.textContent;
-		if (pathname.match(regex)[1] === "show") {
+		if (type === "show") {
 			presenceData.name = convertToTitleCase(documentTitle);
 			presenceData.details = "Watching information about a show";
 			presenceData.state = description;
@@ -188,46 +190,44 @@ presence.on("UpdateData", async () => {
 		presenceData.name = "HBO Max Help";
 		switch (helpType) {
 			case "Category": {
-				presenceData.details = "Looking at category:";
-				presenceData.state = item
-					? item.replace(/_/g, " ")
-					: "Unknown Category";
-
-				presenceData.buttons = [
-					{
-						label: "View Category",
-						url: `https://help.hbomax.com/${language}/Category/Detail/${item}`,
-					},
-				];
-				break;
+			  presenceData.details = "Looking at category:";
+			  presenceData.state = item ? item.replace(/_/g, " ") : "Unknown Category";
+		
+			  presenceData.buttons = [
+				{
+				  label: "View Category",
+				  url: `https://help.hbomax.com/${language}/Category/Detail/${item}`,
+				},
+			  ];
+			  break;
 			}
-
+		
 			case "Answer": {
-				presenceData.details = "Reading answer";
-				presenceData.state = "To a question";
-
-				presenceData.buttons = [
-					{
-						label: "View Answer",
-						url: `https://help.hbomax.com/${language}/Answer/Detail/${item}`,
-					},
-				];
-				break;
+			  presenceData.details = "Reading answer";
+			  presenceData.state = "To a question";
+		
+			  presenceData.buttons = [
+				{
+				  label: "View Answer",
+				  url: `https://help.hbomax.com/${language}/Answer/Detail/${item}`,
+				},
+			  ];
+			  break;
 			}
-
+		
 			default: {
-				presenceData.details = "Browsing HBO Max Help";
-				presenceData.state = "For information";
-
-				presenceData.buttons = [
-					{
-						label: "Open HBO Max Help",
-						url: `https://help.hbomax.com/${language}/`,
-					},
-				];
-				break;
+			  presenceData.details = "Browsing HBO Max Help";
+			  presenceData.state = "For information";
+		
+			  presenceData.buttons = [
+				{
+				  label: "Open HBO Max Help",
+				  url: `https://help.hbomax.com/${language}/`,
+				},
+			  ];
+			  break;
 			}
-		}
+		  }
 	}
 
 	if (
