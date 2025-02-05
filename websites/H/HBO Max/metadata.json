@@ -1,0 +1,52 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.13",
+	"apiVersion": 1,
+	"author": {
+		"id": "408597063098695692",
+		"name": "happypossum"
+	},
+	"service": "HBO Max",
+	"description": {
+		"en": "What is HBO Max? HBO Max brings the worlds of HBO, Warner Bros., the DC Universe, Harry Potter and so much more together with live sports from Eurosport, and favorite brands like Discovery and TLC."
+	},
+	"url": [
+		"play.max.com",
+		"www.max.com",
+		"hbo.max.com",
+		"help.hbomax.com",
+		"auth.max.com"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/jwP2Lsc.png",
+	"thumbnail": "https://i.imgur.com/XYn3uNp.png",
+	"color": "#4C0FE0",
+	"category": "videos",
+	"tags": [
+		"movies",
+		"hbo",
+		"hbomax"
+	],
+	"settings": [
+		{
+			"id": "privacy",
+			"title": "Privacy Mode",
+			"icon": "fad fa-user-secret",
+			"value": false
+		},
+		{
+			"id": "time",
+			"title": "Show Timestamps",
+			"icon": "fad fa-stopwatch",
+			"value": true
+		},
+		{
+			"id": "buttons",
+			"if": {
+				"privacy": false
+			},
+			"title": "Show Buttons",
+			"icon": "fas fa-compress-arrows-alt",
+			"value": true
+		}
+	]
+}
