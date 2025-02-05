@@ -36,19 +36,19 @@ jobs:
         env:
           CDN_TOKEN: ${{ secrets.CDN_TOKEN }}
         run: |
-          //* Configure git
+          # Configure git
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
-          //* Run PMD update-assets command
+          # Run PMD update-assets command
           npx pmd update-assets
 
-          //* Check if there are changes
+          # Check if there are changes
           if [[ -n $(git status --porcelain) ]]; then
-            //* Run ESLint on changed files
+            # Run ESLint on changed files
             npx eslint --fix $(git diff --name-only HEAD | grep -E '\.(ts|json)$' | xargs)
 
-            //* Commit the changes
+            # Commit the changes
             git add .
             git commit -m "chore: update assets"
             git push origin HEAD:${{ github.event.pull_request.head.ref }}
