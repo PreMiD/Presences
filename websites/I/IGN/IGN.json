@@ -39,10 +39,6 @@
     "description": "",
     "message": "Viewing Rewards"
   },
-  "IGN.buttonViewGame": {
-    "description": "Used as the title for the button in Discord.",
-    "message": "View Game"
-  },
   "IGN.viewComics": {
     "description": "",
     "message": "Viewing comic:"
