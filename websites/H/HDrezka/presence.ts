@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 	) {
 		if (
 			document.location.pathname.match(
-				/\/(films|series|cartoons|animation)\/.+/
+				/\/(films|series|cartoons|animation)\/.+/	
 			)
 		) {
 			presenceData.details = `Смотрит ${currentType}`;
@@ -60,5 +60,5 @@ presence.on("UpdateData", async () => {
 				"https://cdn.rcd.gg/PreMiD/websites/H/HDrezka/assets/0.png";
 		}
 	}
-	presence.setActivity(presenceData);
-});
+	presence.setActivity(presenceData); 
+}); //
