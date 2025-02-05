@@ -1,19 +1,16 @@
-import { Buffer } from 'node:buffer'
 import { existsSync } from 'node:fs'
 import { cp, readFile, rm } from 'node:fs/promises'
 import { basename, dirname, resolve } from 'node:path'
 import chalk from 'chalk'
 import { watch } from 'chokidar'
 import { build } from 'esbuild'
-import { globby } from 'globby'
-import ky from 'ky'
 import ora from 'ora'
 import { compare, inc } from 'semver'
-import sharp from 'sharp'
-import { getLine } from '../util/getJsonPosition.js'
+import { getJsonPosition } from '../util/getJsonPosition.js'
 import { error, exit, prefix } from '../util/log.js'
 import { sanitazeFolderName } from '../util/sanitazeFolderName.js'
 import { addSarifLog, SarifRuleId } from '../util/sarif.js'
+import { AssetsManager } from './AssetsManager.js'
 import { DependenciesManager } from './DependenciesManager.js'
 import { TypescriptCompiler } from './TypescriptCompiler.js'
 import { WebSocketServer } from './WebSocketServer.js'
@@ -23,6 +20,7 @@ export interface ActivityMetadata {
   apiVersion: number
   version: string
   logo: string
+  thumbnail: string
   iframe?: boolean
   iFrameRegExp?: string
   description: Record<string, string>
@@ -32,6 +30,7 @@ export class ActivityCompiler {
   dependencies: DependenciesManager
   ts: TypescriptCompiler
   ws: WebSocketServer | undefined
+  assetsManager: AssetsManager
 
   constructor(
     public readonly cwd: string,
@@ -40,6 +39,7 @@ export class ActivityCompiler {
   ) {
     this.dependencies = new DependenciesManager(cwd, activity)
     this.ts = new TypescriptCompiler(cwd, activity)
+    this.assetsManager = new AssetsManager(cwd, activity, versionized)
   }
 
   async compile({ kill, validate, preCheck = true }: { kill: boolean, validate: boolean, preCheck?: boolean }): Promise<boolean> {
@@ -162,10 +162,7 @@ export class ActivityCompiler {
         path: resolve(this.cwd, 'metadata.json'),
         message,
         ruleId: SarifRuleId.serviceFolderCheck,
-        position: {
-          line: await getLine(resolve(this.cwd, 'metadata.json'), 'service'),
-          column: 0,
-        },
+        position: await getJsonPosition(resolve(this.cwd, 'metadata.json'), 'service'),
       })
       valid = false
     }
@@ -185,10 +182,7 @@ export class ActivityCompiler {
           path: resolve(this.cwd, 'metadata.json'),
           message,
           ruleId: SarifRuleId.bumpCheck,
-          position: {
-            line: await getLine(resolve(this.cwd, 'metadata.json'), 'version'),
-            column: 0,
-          },
+          position: await getJsonPosition(resolve(this.cwd, 'metadata.json'), 'version'),
         })
         valid = false
       }
@@ -210,10 +204,7 @@ export class ActivityCompiler {
         path: resolve(this.cwd, 'metadata.json'),
         message,
         ruleId: SarifRuleId.bumpCheck,
-        position: {
-          line: await getLine(resolve(this.cwd, 'metadata.json'), 'version'),
-          column: 0,
-        },
+        position: await getJsonPosition(resolve(this.cwd, 'metadata.json'), 'version'),
       })
       valid = false
     }
@@ -229,10 +220,7 @@ export class ActivityCompiler {
         path: resolve(this.cwd, 'metadata.json'),
         message,
         ruleId: SarifRuleId.iframeCheck,
-        position: {
-          line: await getLine(resolve(this.cwd, 'metadata.json'), 'iframe'),
-          column: 0,
-        },
+        position: await getJsonPosition(resolve(this.cwd, 'metadata.json'), 'iframe'),
       })
       valid = false
     }
@@ -248,10 +236,7 @@ export class ActivityCompiler {
         path: resolve(this.cwd, 'metadata.json'),
         message,
         ruleId: SarifRuleId.iframeCheck,
-        position: {
-          line: await getLine(resolve(this.cwd, 'metadata.json'), 'iframe'),
-          column: 0,
-        },
+        position: await getJsonPosition(resolve(this.cwd, 'metadata.json'), 'iframe'),
       })
       valid = false
     }
@@ -267,10 +252,7 @@ export class ActivityCompiler {
         path: resolve(this.cwd, 'metadata.json'),
         message,
         ruleId: SarifRuleId.iframeRegexpCheck,
-        position: {
-          line: await getLine(resolve(this.cwd, 'metadata.json'), 'iFrameRegExp'),
-          column: 0,
-        },
+        position: await getJsonPosition(resolve(this.cwd, 'metadata.json'), 'iFrameRegExp'),
       })
       valid = false
     }
@@ -288,100 +270,16 @@ export class ActivityCompiler {
           path: resolve(this.cwd, 'metadata.json'),
           message,
           ruleId: SarifRuleId.languageCheck,
-          position: {
-            line: await getLine(resolve(this.cwd, 'metadata.json'), 'description', language),
-            column: 0,
-          },
+          position: await getJsonPosition(resolve(this.cwd, 'metadata.json'), 'description', language),
         })
         valid = false
       }
     }
 
-    const imageCache = new Map<string, { width: number | null, height: number | null }>()
-
-    //* Helper function to validate image dimensions
-    const validateImage = async (url: string, filePath: string, line: number, column: number) => {
-      let dimensions = imageCache.get(url)
-
-      if (!dimensions) {
-        try {
-          const response = await ky.get(url.replaceAll(/\\/g, '')).arrayBuffer()
-          const metadata = await sharp(Buffer.from(response)).metadata()
-          dimensions = { width: metadata.width ?? null, height: metadata.height ?? null }
-          imageCache.set(url, dimensions)
-        }
-        catch (err: unknown) {
-          const message = `Failed to validate image URL (${url}): ${err instanceof Error ? err.message : String(err)}`
-          if (kill) {
-            exit(message)
-          }
-
-          error(message)
-          addSarifLog({
-            path: filePath,
-            message,
-            ruleId: SarifRuleId.imageCheck,
-            position: {
-              line,
-              column,
-            },
-          })
-          return false
-        }
-      }
-
-      if (dimensions.width !== 512 || dimensions.height !== 512) {
-        const message = `Image URL dimensions must be exactly 512x512 pixels, got ${dimensions.width}x${dimensions.height} for URL: ${url}`
-        if (kill) {
-          exit(message)
-        }
-
-        error(message)
-        addSarifLog({
-          path: filePath,
-          message,
-          ruleId: SarifRuleId.imageCheck,
-          position: {
-            line,
-            column,
-          },
-        })
-        return false
-      }
-
-      return true
-    }
-
-    //* Check logo URL
-    const logoLine = await getLine(resolve(this.cwd, 'metadata.json'), 'logo')
-    if (!(await validateImage(metadata.logo, resolve(this.cwd, 'metadata.json'), logoLine, 0))) {
-      valid = false
-    }
-
-    //* Check image URLs in TypeScript files
-    const tsFiles = await globby('**/*.ts', { cwd: this.cwd, absolute: true })
-
-    for (const file of tsFiles) {
-      const content = await readFile(file, 'utf-8')
-      const imageUrlRegex = /(?<=["'`])(https?:\/\/.*?\.(?:png|jpg|jpeg|gif|webp)(?:\?[^'"`]+)?)(?=["'`])/g
-      const matches = content.matchAll(imageUrlRegex)
-
-      for (const match of matches) {
-        //* If the url contains a template literal, skip it
-        if (match[1].includes(`\${`))
-          continue
-
-        //* Regex to check if the url contains + " or + ' or + `
-        if (/(?<=\+ )["'`].*?["'`]/.test(match[1]))
-          continue
-
-        const url = match[1]
-        const line = content.substring(0, match.index).split('\n').length
-        const column = match.index - content.lastIndexOf('\n', match.index) - 1
-
-        if (!(await validateImage(url, file, line, column))) {
-          valid = false
-        }
+    const assets = await this.assetsManager.getAssets()
+    for (const asset of assets) {
+      if (!(await this.assetsManager.validateImage({ asset, kill }))) {
+        valid = false
       }
     }
 

@@ -10,7 +10,7 @@ import jsonAst from 'json-to-ast'
 
 type ValueNode = ObjectNode | ArrayNode | LiteralNode | PropertyNode
 
-export async function getLine(filePath: string, ...path: string[]): Promise<number> {
+export async function getJsonPosition(filePath: string, ...path: string[]): Promise<{ line: number, column: number }> {
   const AST = jsonAst(
     await readFile(resolve(filePath), 'utf-8'),
     {
@@ -30,11 +30,14 @@ export async function getLine(filePath: string, ...path: string[]): Promise<numb
     }
 
     if (!currentNode)
-      return 0
+      return { line: 0, column: 0 }
     else currentNode = findNodeLine(currentNode, value) as PropertyNode
   }
 
-  return currentNode?.loc?.start.line ?? 0
+  return {
+    line: currentNode?.loc?.start.line ?? 0,
+    column: currentNode?.loc?.start.column ?? 0,
+  }
 }
 
 function findNodeLine(

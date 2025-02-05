@@ -34,3 +34,6 @@ lerna-debug.log*
 
 # SARIF files
 pmd-results.sarif
+
+# Coverage files
+coverage

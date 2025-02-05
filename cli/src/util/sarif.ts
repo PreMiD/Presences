@@ -11,7 +11,8 @@ export enum SarifRuleId {
   iframeRegexpCheck = 'iframe-regexp-check',
   languageCheck = 'language-check',
   serviceFolderCheck = 'service-folder-check',
-  imageCheck = 'image-check',
+  imageSizeCheck = 'image-size-check',
+  imageMimeTypeCheck = 'image-mime-type-check',
 }
 
 const sarifRules: Record<SarifRuleId, ReportingDescriptor> = {
@@ -57,11 +58,18 @@ const sarifRules: Record<SarifRuleId, ReportingDescriptor> = {
       text: 'Makes sure the service folder is correct',
     },
   },
-  [SarifRuleId.imageCheck]: {
-    id: SarifRuleId.imageCheck,
+  [SarifRuleId.imageSizeCheck]: {
+    id: SarifRuleId.imageSizeCheck,
     name: 'Image Check',
     shortDescription: {
       text: 'Makes sure all images (logo and URLs) are exactly 512x512 pixels',
+    },
+  },
+  [SarifRuleId.imageMimeTypeCheck]: {
+    id: SarifRuleId.imageMimeTypeCheck,
+    name: 'Image MIME Type Check',
+    shortDescription: {
+      text: 'Makes sure all images (logo and URLs) have the correct MIME type',
     },
   },
 }
