@@ -1,6 +1,6 @@
 import type { ActivityMetadata } from './ActivityCompiler.js'
 import { Buffer } from 'node:buffer'
-import { readFile } from 'node:fs/promises'
+import { readFile, writeFile } from 'node:fs/promises'
 import { extname, resolve } from 'node:path'
 import process from 'node:process'
 import FormData from 'form-data'
@@ -361,7 +361,7 @@ export class AssetsManager {
     for (const { url } of activityAssets) {
       if (url === logo?.url)
         continue
-      if (!url.startsWith(CDN_BASE_URL)) {
+      if (new URL(url).origin !== CDN_BASE_URL) {
         newAssets.add(url)
       }
     }
@@ -399,7 +399,7 @@ export class AssetsManager {
     return asset.type === AssetType.ActivityAsset
   }
 
-  async updateCdnAssets() {
+  async updateCdnAssets(): Promise<number> {
     const toBeUploaded = new Map<string, { url: string, method: 'POST' | 'PUT' }>()
     const toBeDeleted = new Set<string>()
     const toBeMoved = new Map<string, { url: string, method: 'POST' }>()
@@ -427,11 +427,18 @@ export class AssetsManager {
     if (toBeMoved.size) {
       await this.uploadAssets(toBeMoved)
       await this.deleteAssets([...toBeMoved.keys()])
+
+      await this.replaceInFiles(toBeMoved)
     }
 
     if (toBeUploaded.size) {
       await this.uploadAssets(toBeUploaded)
+
+      await this.replaceInFiles(toBeUploaded)
     }
+
+    //* Return the number of assets updated
+    return toBeUploaded.size + toBeMoved.size + toBeDeleted.size
   }
 
   private async deleteAssets(urls: string[] | Set<string>) {
@@ -466,5 +473,37 @@ export class AssetsManager {
         })
       }),
     )
+  }
+
+  private async replaceInFiles(assets: Map<string, { url: string }>) {
+    const replacements = new Map<string, string>(
+      Array.from(assets).map(([url, { url: newUrl }]) => [url, newUrl]),
+    )
+
+    for (const file of await globby('**/*.ts', { cwd: this.cwd, absolute: true })) {
+      let content = await readFile(file, 'utf-8')
+      let changed = false
+      for (const [oldUrl, newUrl] of replacements) {
+        if (!content.includes(oldUrl))
+          continue
+        content = content.replaceAll(oldUrl, newUrl)
+        changed = true
+      }
+
+      if (changed)
+        await writeFile(file, content, 'utf-8')
+    }
+
+    let metadata = await readFile(resolve(this.cwd, 'metadata.json'), 'utf-8')
+    let changed = false
+    for (const [oldUrl, newUrl] of replacements) {
+      if (!metadata.includes(oldUrl))
+        continue
+      metadata = metadata.replaceAll(oldUrl, newUrl)
+      changed = true
+    }
+
+    if (changed)
+      await writeFile(resolve(this.cwd, 'metadata.json'), metadata, 'utf-8')
   }
 }

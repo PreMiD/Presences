@@ -1,5 +1,4 @@
 import process from 'node:process'
-import multimatch from 'multimatch'
 import { getActivities } from '../../util/getActivities.js'
 import { info } from '../../util/log.js'
 import { writeSarifLog } from '../../util/sarif.js'
@@ -20,9 +19,7 @@ export async function buildAll({
 
   let success = true
   for (const activity of activities) {
-    const versionized = multimatch(activity.folder, '**/websites/*/*/v*').length > 0
-
-    const isSuccess = await buildActivity({ path: activity.folder, activity: activity.metadata, versionized, watch: false, kill, validate })
+    const isSuccess = await buildActivity({ path: activity.folder, activity: activity.metadata, versionized: activity.versionized, watch: false, kill, validate })
     success = success && isSuccess
   }
 

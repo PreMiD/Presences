@@ -5,6 +5,7 @@ import { cac } from 'cac'
 import { build } from './commands/build.js'
 import { bump } from './commands/bump.js'
 import { newActivity } from './commands/new.js'
+import { updateAssets } from './commands/updateAssets.js'
 import { getPackageJson } from './util/getPackageJson.js'
 import { exit } from './util/log.js'
 
@@ -35,13 +36,17 @@ cli
   .option('--kill', 'Kill the process on error', { default: true })
   .option('--validate', 'Check if the activity is valid (metadata, images, etc.)')
   .option('--sarif', 'Output the result in SARIF format (Doesn\'t work with --kill)')
-  .action((service, options) => build(service, options))
+  .action(build)
 
 cli
   .command('bump [activity] [version]', 'Bump an activity')
   .option('-all', 'Bump all activities')
   .option('-changed', 'Bump only changed activities')
-  .action((service, version, options) => bump(service, version, options))
+  .action(bump)
+
+cli
+  .command('update-assets', 'Update assets for all activities in CI')
+  .action(updateAssets)
 
 cli.help()
 cli.version(cliPackageJson.version)

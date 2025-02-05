@@ -6,6 +6,7 @@ import { AssetsManager, AssetType, MimeType } from './AssetsManager.js'
 const mocks = vi.hoisted(() => ({
   globby: vi.fn(),
   readFile: vi.fn(),
+  writeFile: vi.fn(),
   ky: Object.assign(
     vi.fn(),
     {
@@ -42,6 +43,7 @@ vi.mock('globby', () => ({
 
 vi.mock('node:fs/promises', () => ({
   readFile: mocks.readFile,
+  writeFile: mocks.writeFile,
 }))
 
 vi.mock('form-data', () => {
@@ -394,9 +396,12 @@ describe('assetsManager', () => {
       mocks.ky.get.mockImplementation(() => ({
         arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
       }))
+
+      //* Mock globby to return some TypeScript files
+      mocks.globby.mockResolvedValue(['test.ts', 'metadata.json'])
     })
 
-    it('should handle new logo and thumbnail upload', async () => {
+    it('should handle new logo and thumbnail upload and update files', async () => {
       const mockAssets = [
         {
           type: AssetType.Logo,
@@ -420,7 +425,27 @@ describe('assetsManager', () => {
         arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
       } as any)
 
-      await assetsManager.updateCdnAssets()
+      //* Mock file content with URLs that need to be replaced
+      mocks.readFile.mockImplementation((filePath: string) => {
+        if (filePath.endsWith('test.ts')) {
+          return Promise.resolve(`
+            const logo = "https://example.com/new-logo.png"
+            const thumbnail = 'https://example.com/new-thumbnail.jpg'
+          `)
+        }
+        if (filePath.endsWith('metadata.json')) {
+          return Promise.resolve(`{
+            "logo": "https://example.com/new-logo.png",
+            "thumbnail": "https://example.com/new-thumbnail.jpg"
+          }`)
+        }
+        return Promise.resolve('')
+      })
+
+      const result = await assetsManager.updateCdnAssets()
+
+      //* Verify number of changed assets (2 new uploads)
+      expect(result).toBe(2)
 
       //* Verify upload calls were made for both assets
       expect(mocks.ky).toHaveBeenCalledWith(
@@ -445,9 +470,27 @@ describe('assetsManager', () => {
         expect.any(Blob),
         { contentType: MimeType.JPG },
       ])
+
+      //* Verify file content updates
+      expect(mocks.writeFile).toHaveBeenCalledWith(
+        expect.stringMatching(/test\.ts$/),
+        `
+            const logo = "${assetsManager.baseUrl}/logo.png"
+            const thumbnail = '${assetsManager.baseUrl}/thumbnail.jpg'
+          `,
+        'utf-8',
+      )
+      expect(mocks.writeFile).toHaveBeenCalledWith(
+        expect.stringMatching(/metadata\.json$/),
+        `{
+            "logo": "${assetsManager.baseUrl}/logo.png",
+            "thumbnail": "${assetsManager.baseUrl}/thumbnail.jpg"
+          }`,
+        'utf-8',
+      )
     })
 
-    it('should handle updating existing assets with different extensions', async () => {
+    it('should handle updating existing assets with different extensions and update files', async () => {
       const mockAssets = [
         {
           type: AssetType.Logo,
@@ -469,7 +512,21 @@ describe('assetsManager', () => {
         arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
       } as any)
 
-      await assetsManager.updateCdnAssets()
+      //* Mock file content with URLs that need to be replaced
+      mocks.readFile.mockImplementation((filePath: string) => {
+        if (filePath.endsWith('test.ts')) {
+          return Promise.resolve(`const logo = "https://example.com/logo.jpg"`)
+        }
+        if (filePath.endsWith('metadata.json')) {
+          return Promise.resolve(`{"logo": "https://example.com/logo.jpg"}`)
+        }
+        return Promise.resolve('')
+      })
+
+      const result = await assetsManager.updateCdnAssets()
+
+      //* Verify number of changed assets (1 deletion + 1 upload)
+      expect(result).toBe(2)
 
       //* Verify old asset is deleted and new one is uploaded
       expect(mocks.ky.delete).toHaveBeenCalledWith(
@@ -480,9 +537,21 @@ describe('assetsManager', () => {
         `${assetsManager.baseUrl}/logo.jpg`,
         expect.objectContaining({ method: 'POST' }),
       )
+
+      //* Verify file content updates
+      expect(mocks.writeFile).toHaveBeenCalledWith(
+        expect.stringMatching(/test\.ts$/),
+        `const logo = "${assetsManager.baseUrl}/logo.jpg"`,
+        'utf-8',
+      )
+      expect(mocks.writeFile).toHaveBeenCalledWith(
+        expect.stringMatching(/metadata\.json$/),
+        `{"logo": "${assetsManager.baseUrl}/logo.jpg"}`,
+        'utf-8',
+      )
     })
 
-    it('should handle activity assets with gaps in indices', async () => {
+    it('should handle activity assets with gaps in indices and update files', async () => {
       const mockAssets = [
         {
           type: AssetType.ActivityAsset,
@@ -518,7 +587,29 @@ describe('assetsManager', () => {
         arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
       } as any)
 
-      await assetsManager.updateCdnAssets()
+      //* Mock file content with URLs that need to be replaced
+      mocks.readFile.mockImplementation((filePath: string) => {
+        if (filePath.endsWith('test.ts')) {
+          return Promise.resolve(`
+            const img1 = "${assetsManager.baseUrl}/0.png"
+            const img2 = "${assetsManager.baseUrl}/2.png"
+          `)
+        }
+        if (filePath.endsWith('metadata.json')) {
+          return Promise.resolve(`{
+            "images": [
+              "${assetsManager.baseUrl}/0.png",
+              "${assetsManager.baseUrl}/2.png"
+            ]
+          }`)
+        }
+        return Promise.resolve('')
+      })
+
+      const result = await assetsManager.updateCdnAssets()
+
+      //* Verify number of changed assets (1 move operation)
+      expect(result).toBe(1)
 
       //* Verify asset at index 2 is moved to index 1
       expect(mocks.ky).toHaveBeenCalledWith(
@@ -529,13 +620,33 @@ describe('assetsManager', () => {
         `${assetsManager.baseUrl}/2.png`,
         expect.any(Object),
       )
+
+      //* Verify file content updates
+      expect(mocks.writeFile).toHaveBeenCalledWith(
+        expect.stringMatching(/test\.ts$/),
+        `
+            const img1 = "${assetsManager.baseUrl}/0.png"
+            const img2 = "${assetsManager.baseUrl}/1.png"
+          `,
+        'utf-8',
+      )
+      expect(mocks.writeFile).toHaveBeenCalledWith(
+        expect.stringMatching(/metadata\.json$/),
+        `{
+            "images": [
+              "${assetsManager.baseUrl}/0.png",
+              "${assetsManager.baseUrl}/1.png"
+            ]
+          }`,
+        'utf-8',
+      )
     })
 
-    it('should handle deletion of unused assets', async () => {
+    it('should handle deletion of unused assets and update files', async () => {
       const mockAssets = [
         {
           type: AssetType.Logo,
-          url: 'https://example.com/logo.png',
+          url: `${assetsManager.baseUrl}/logo.png`,
           location: { filePath: 'test.json', line: 1, column: 1 },
         },
       ]
@@ -566,7 +677,29 @@ describe('assetsManager', () => {
         arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
       } as any)
 
-      await assetsManager.updateCdnAssets()
+      //* Mock file content with URLs that need to be replaced
+      mocks.readFile.mockImplementation((filePath: string) => {
+        if (filePath.endsWith('test.ts')) {
+          return Promise.resolve(`
+            const logo = "${assetsManager.baseUrl}/logo.png"
+            const thumbnail = "${assetsManager.baseUrl}/thumbnail.png"
+            const img = "${assetsManager.baseUrl}/0.png"
+          `)
+        }
+        if (filePath.endsWith('metadata.json')) {
+          return Promise.resolve(`{
+            "logo": "${assetsManager.baseUrl}/logo.png",
+            "thumbnail": "${assetsManager.baseUrl}/thumbnail.png",
+            "images": ["${assetsManager.baseUrl}/0.png"]
+          }`)
+        }
+        return Promise.resolve('')
+      })
+
+      const result = await assetsManager.updateCdnAssets()
+
+      //* Verify number of changed assets (2 deletions)
+      expect(result).toBe(2)
 
       //* Verify unused assets are deleted
       expect(mocks.ky.delete).toHaveBeenCalledWith(
@@ -577,9 +710,12 @@ describe('assetsManager', () => {
         `${assetsManager.baseUrl}/0.png`,
         expect.any(Object),
       )
+
+      //* No file updates should occur since we're only deleting
+      expect(mocks.writeFile).not.toHaveBeenCalled()
     })
 
-    it('should handle new activity assets upload', async () => {
+    it('should handle new activity assets upload and update files', async () => {
       const mockAssets = [
         {
           type: AssetType.ActivityAsset,
@@ -595,16 +731,42 @@ describe('assetsManager', () => {
         arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
       } as any)
 
-      await assetsManager.updateCdnAssets()
+      //* Mock file content with URLs that need to be replaced
+      mocks.readFile.mockImplementation((filePath: string) => {
+        if (filePath.endsWith('test.ts')) {
+          return Promise.resolve(`const img = "https://example.com/new-asset.png"`)
+        }
+        if (filePath.endsWith('metadata.json')) {
+          return Promise.resolve(`{"image": "https://example.com/new-asset.png"}`)
+        }
+        return Promise.resolve('')
+      })
+
+      const result = await assetsManager.updateCdnAssets()
+
+      //* Verify number of changed assets (1 new upload)
+      expect(result).toBe(1)
 
       //* Verify new activity asset is uploaded with index 0
       expect(mocks.ky).toHaveBeenCalledWith(
         `${assetsManager.baseUrl}/0.png`,
         expect.objectContaining({ method: 'POST' }),
       )
+
+      //* Verify file content updates
+      expect(mocks.writeFile).toHaveBeenCalledWith(
+        expect.stringMatching(/test\.ts$/),
+        `const img = "${assetsManager.baseUrl}/0.png"`,
+        'utf-8',
+      )
+      expect(mocks.writeFile).toHaveBeenCalledWith(
+        expect.stringMatching(/metadata\.json$/),
+        `{"image": "${assetsManager.baseUrl}/0.png"}`,
+        'utf-8',
+      )
     })
 
-    it('should not perform any uploads when assets have not changed', async () => {
+    it('should not perform any uploads or file updates when assets have not changed', async () => {
       const mockAssets = [
         {
           type: AssetType.Logo,
@@ -645,12 +807,35 @@ describe('assetsManager', () => {
       vi.spyOn(assetsManager, 'getAssets').mockResolvedValue(mockAssets)
       vi.spyOn(assetsManager, 'getCdnAssets').mockResolvedValue(mockCdnAssets)
 
-      await assetsManager.updateCdnAssets()
+      //* Mock file content with existing CDN URLs
+      mocks.readFile.mockImplementation((filePath: string) => {
+        if (filePath.endsWith('test.ts')) {
+          return Promise.resolve(`
+            const logo = "${assetsManager.baseUrl}/logo.png"
+            const thumbnail = "${assetsManager.baseUrl}/thumbnail.jpg"
+            const img = "${assetsManager.baseUrl}/0.webp"
+          `)
+        }
+        if (filePath.endsWith('metadata.json')) {
+          return Promise.resolve(`{
+            "logo": "${assetsManager.baseUrl}/logo.png",
+            "thumbnail": "${assetsManager.baseUrl}/thumbnail.jpg",
+            "image": "${assetsManager.baseUrl}/0.webp"
+          }`)
+        }
+        return Promise.resolve('')
+      })
 
-      //* Verify no uploads or deletions occurred
+      const result = await assetsManager.updateCdnAssets()
+
+      //* Verify number of changed assets (no changes)
+      expect(result).toBe(0)
+
+      //* Verify no uploads, deletions, or file updates occurred
       expect(mocks.ky).not.toHaveBeenCalled()
       expect(mocks.ky.delete).not.toHaveBeenCalled()
       expect(mocks.formData).not.toHaveBeenCalled()
+      expect(mocks.writeFile).not.toHaveBeenCalled()
     })
   })
 })

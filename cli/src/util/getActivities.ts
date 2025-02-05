@@ -8,11 +8,13 @@ import { context } from '@actions/github'
 import gitDiffParser from 'gitdiff-parser'
 import { globby } from 'globby'
 import isCI from 'is-ci'
+import multimatch from 'multimatch'
 import { exit, info } from './log.js'
 
 export interface ActivityMetadataAndFolder {
   metadata: ActivityMetadata
   folder: string
+  versionized: boolean
 }
 
 export async function getActivities(): Promise<ActivityMetadataAndFolder[]> {
@@ -22,6 +24,7 @@ export async function getActivities(): Promise<ActivityMetadataAndFolder[]> {
     ).map(async (file): Promise<ActivityMetadataAndFolder> => ({
       metadata: JSON.parse(await readFile(file, 'utf-8')),
       folder: dirname(file),
+      versionized: multimatch(dirname(file), '**/websites/*/*/v*').length > 0,
     })),
   )).sort(({ metadata: a }, { metadata: b }) => {
     if (a.service !== b.service)
@@ -59,6 +62,7 @@ export async function getChangedActivities(): Promise<ActivityMetadataAndFolder[
   return (await Promise.all(Array.from(activityPaths).map(async (folder): Promise<ActivityMetadataAndFolder> => ({
     metadata: JSON.parse(await readFile(resolve(folder, 'metadata.json'), 'utf-8')),
     folder,
+    versionized: multimatch(folder, '**/websites/*/*/v*').length > 0,
   }))))
 }
 
