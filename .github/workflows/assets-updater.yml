@@ -1,4 +1,4 @@
-name: PR Assets Check
+name: pmd
 
 on:
   pull_request:
@@ -8,6 +8,7 @@ on:
 
 jobs:
   check-and-run:
+    name: Update Assets
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
