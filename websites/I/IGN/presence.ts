@@ -163,7 +163,7 @@ presence.on("UpdateData", async () => {
 				presenceData.largeImageKey =
 					document.querySelector<HTMLImageElement>(".aspect-ratio-3-2")?.src ??
 					Assets.Logo;
-			} else presenceData.details = strings.playlists;
+			} else presenceData.details = strings.viewPlaylists;
 			break;
 		}
 		case "rewards": {
