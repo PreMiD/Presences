@@ -10,7 +10,7 @@ async function getStrings() {
 	return presence.getStrings(
 		{
 			viewHome: "general.viewHome",
-			viewing: "general.viewing",
+			view: "general.view",
 			search: "general.search",
 			searchFor: "general.searchFor",
 			play: "general.watchingVid",
@@ -87,30 +87,30 @@ presence.on("UpdateData", async () => {
 		case "top-imdb":
 		case "platforms":
 		case "platform":
-			presenceData.details = strings.viewing;
+			presenceData.details = strings.view;
 			presenceData.state = textContent("li.breadcrumb-item.active");
 			presenceData.smallImageKey = Assets.Viewing;
-			presenceData.smallImageText = strings.viewing;
+			presenceData.smallImageText = strings.view;
 			break;
 
 		case "comunidad":
-			presenceData.details = strings.viewing;
+			presenceData.details = strings.view;
 			presenceData.state = `${textContent(
 				"li.breadcrumb-item.active"
 			)} / ${textContent("a.fs-sm.text-white")}`;
 			presenceData.smallImageKey = Assets.Viewing;
-			presenceData.smallImageText = strings.viewing;
+			presenceData.smallImageText = strings.view;
 			break;
 
 		case "collection":
-			presenceData.details = `${strings.viewing} ${textContent(
+			presenceData.details = `${strings.view} ${textContent(
 				".breadcrumb-item a"
 			)}`;
 			presenceData.state = textContent(
 				".layout-section > div > div:nth-child(2) > h1"
 			);
 			presenceData.smallImageKey = Assets.Viewing;
-			presenceData.smallImageText = strings.viewing;
+			presenceData.smallImageText = strings.view;
 			break;
 
 		case "usuario":
@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
 					?.style?.backgroundImage?.slice(4, -1)
 					?.replace(/"/g, "") || Assets.Logo;
 			presenceData.smallImageKey = Assets.Viewing;
-			presenceData.smallImageText = strings.viewing;
+			presenceData.smallImageText = strings.view;
 			break;
 
 		case "serie":
@@ -136,7 +136,7 @@ presence.on("UpdateData", async () => {
 				);
 			presenceData.largeImageKey = getImage("picture > img");
 			presenceData.smallImageKey = Assets.Logo;
-			presenceData.smallImageText = strings.viewing;
+			presenceData.smallImageText = strings.view;
 
 			if (!privacy && video.currentTime > 0) {
 				presenceData.details = presenceData.state;
@@ -154,7 +154,7 @@ presence.on("UpdateData", async () => {
 			);
 			presenceData.largeImageKey = getImage("picture > img");
 			presenceData.smallImageKey = Assets.Logo;
-			presenceData.smallImageText = strings.viewing;
+			presenceData.smallImageText = strings.view;
 
 			if (video.currentTime > 0) {
 				if (privacy) presenceData.details = strings.watchingMovie;

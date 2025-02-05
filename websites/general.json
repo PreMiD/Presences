@@ -295,25 +295,25 @@
 		"description": "A page name of statuspages.",
 		"message": "Uptime history"
 	},
-	"general.viewAnAnime": {
-		"description": "Viewing a not specfied anime.",
-		"message": "Viewing an anime"
+	"general.view": {
+		"description": "",
+		"message": "Viewing:"
 	},
-		"general.viewAGame": {
-		"description": "Displayed when viewing a game.",
-		"message": "Viewing a game"
-	},
-		"general.viewAList": {
-		"description": "Viewing a not specfied list.",
-		"message": "Viewing a list"
-	},
-		"general.viewAChannel": {
+	"general.viewAChannel": {
 		"description": "Viewing a not specfied channel.",
 		"message": "Viewing a channel"
 	},
-		"general.viewAGenre": {
+	"general.viewAGame": {
+		"description": "Viewing a not specfied game.",
+		"message": "Viewing a game"
+	},
+	"general.viewAGenre": {
 		"description": "Viewing a not specfied genre.",
 		"message": "Viewing a genre"
+	},
+	"general.viewAList": {
+		"description": "Viewing a not specfied list.",
+		"message": "Viewing a list"
 	},
 	"general.viewAManga": {
 		"description": "Viewing a not specfied manga.",
@@ -355,9 +355,17 @@
 		"description": "Viewing a not specfied thread.",
 		"message": "Viewing a thread"
 	},
+	"general.viewAWishlist": {
+		"description": "Viewing a not specfied wishlist.",
+		"message": "Viewing a wishlist"
+	},
 	"general.viewAccount": {
 		"description": "",
 		"message": "Viewing their account"
+	},
+	"general.viewAnAnime": {
+		"description": "Viewing a not specfied anime.",
+		"message": "Viewing an anime"
 	},
 	"general.viewAnIncident": {
 		"description": "Viewing a not specfied incident.",
@@ -423,6 +431,10 @@
 		"description": "",
 		"message": "Viewing playlist:"
 	},
+	"general.viewPlaylists": {
+		"description": "Displayed when viewing playlists.",
+		"message": "Viewing Playlists"
+	},
 	"general.viewProduct": {
 		"description": "",
 		"message": "Viewing product:"
@@ -446,18 +458,6 @@
 	"general.viewUser": {
 		"description": "",
 		"message": "Viewing user:"
-	},
-	"general.view": {
-		"description": "",
-		"message": "Viewing:"
-	},
-	"general.viewAWishlist": {
-		"description": "Viewing a not specfied wishlist.",
-		"message": "Viewing a wishlist"
-	},
-	"general.viewPlaylists": {
-		"description": "Displayed when viewing playlists.",
-		"message": "Viewing Playlists"
 	},
 	"general.viewWishlist": {
 		"description": "",

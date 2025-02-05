@@ -35,7 +35,7 @@ async function getStrings() {
 			presenceDev: "premid.pagePresenceDev",
 			presenceGuide: "premid.pagePresenceGuide",
 			partners: "premid.partners",
-			viewing: "general.viewing",
+			view: "general.view",
 			incident: "general.incidentHistory",
 			uptime: "general.uptimeHistory",
 			class: "premid.pagePresenceClass",
@@ -250,13 +250,13 @@ presence.on("UpdateData", async () => {
 			break;
 		}
 		case "status.premid.app": {
-			presenceData.details = `Status page | ${strings.viewing}`;
+			presenceData.details = `Status page | ${strings.view}`;
 			presenceData.smallImageKey = Assets.Search;
 			presenceData.smallImageText = strings.browsing;
 
 			switch (true) {
 				case pathIncludes("/incidents"):
-					presenceData.details = `${strings.viewing} ${document.title.replace(
+					presenceData.details = `${strings.view} ${document.title.replace(
 						"PreMiD Status - ",
 						""
 					)}`;

@@ -30,7 +30,7 @@ async function getStrings() {
 			playlist: "spotify.playlists",
 			viewPlaylist: "general.viewPlaylist",
 			download: "spotify.download",
-			viewing: "general.viewing",
+			view: "general.view",
 			account: "general.viewAccount",
 			search: "general.search",
 			searchFor: "general.searchFor",
@@ -324,7 +324,7 @@ presence.on("UpdateData", async () => {
 			}
 			case "www.spotify.com": {
 				if (pathname.includes("/premium")) {
-					presenceData.details = strings.viewing;
+					presenceData.details = strings.view;
 					presenceData.state = "Spotify Premium";
 					delete presenceData.smallImageKey;
 				} else if (pathname.includes("/download")) {

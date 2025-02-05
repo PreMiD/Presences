@@ -10,7 +10,7 @@ const enum Assets {
 async function getStrings() {
 	return presence.getStrings(
 		{
-			viewing: "general.viewing",
+			view: "general.view",
 			play: "general.playing",
 			pause: "general.paused",
 			viewHome: "general.viewHome",
@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
 
 	switch (pathname.split("/")[1]) {
 		case "watch": {
-			presenceData.details = strings.viewing;
+			presenceData.details = strings.view;
 			presenceData.smallImageKey = Assets.Reading;
 			presenceData.largeImageKey =
 				document.querySelector<HTMLImageElement>("img.c-content-image")?.src ??

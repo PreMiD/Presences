@@ -15,7 +15,7 @@ async function getStrings() {
 			episode: "general.episode",
 			watching: "general.watching",
 			watchingMovie: "general.watchingMovie",
-			viewing: "general.viewing",
+			view: "general.view",
 			viewGenre: "general.viewGenre",
 			viewCategory: "general.viewCategory",
 			viewPage: "general.viewPage",
