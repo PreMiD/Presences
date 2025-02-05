@@ -1,4 +1,5 @@
 import process from 'node:process'
+import * as core from '@actions/core'
 import * as github from '@actions/github'
 import isCI from 'is-ci'
 import { AssetsManager } from '../classes/AssetsManager.js'
@@ -59,12 +60,47 @@ export async function updateAssets() {
   }
 
   //* If we have less than 2 approvals, return success (but pending)
-  const approvals = await octokit.rest.pulls.listReviews({
+  const reviews = await octokit.rest.pulls.listReviews({
     ...context.repo,
     pull_number: pullRequest.number,
   })
 
-  if (approvals.data.length < 2) {
+  core.info(`Found ${reviews.data.length} reviews for PR #${pullRequest.number}`)
+
+  //* Count only approved reviews from reviewers with write access (excluding PR author)
+  const uniqueApprovers = new Set(
+    reviews.data
+      .filter(review =>
+        review.state === 'APPROVED'
+        && review.user?.login !== pullRequest.user.login,
+      )
+      .map(review => review.user?.login)
+      .filter((login): login is string => login !== undefined),
+  )
+
+  core.debug(`Found ${uniqueApprovers.size} unique approvers`)
+
+  let approvalCount = 0
+  for (const reviewer of uniqueApprovers) {
+    try {
+      const { data: permission } = await octokit.rest.repos.getCollaboratorPermissionLevel({
+        ...context.repo,
+        username: reviewer,
+      })
+
+      if (['admin', 'write'].includes(permission.permission)) {
+        approvalCount++
+      }
+    }
+    catch {
+      //* Skip if we can't get permissions (user no longer has access, etc.)
+      continue
+    }
+  }
+
+  core.info(`Approval count: ${approvalCount}`)
+
+  if (approvalCount < 2) {
     await octokit.rest.repos.createCommitStatus({
       ...context.repo,
       sha: pullRequest.head.sha,
@@ -75,6 +111,8 @@ export async function updateAssets() {
 
     return success(MESSAGES.waitingForApprovals)
   }
+
+  core.info('Approvals found, checking and updating assets...')
 
   try {
     //* Create pending status while we process
@@ -110,6 +148,8 @@ export async function updateAssets() {
       return exit(MESSAGES.someInvalidAssets)
     }
 
+    core.info('Assets validated, updating assets...')
+
     //* Update assets for each activity
     let count = 0
     for (const activity of activities) {
@@ -117,6 +157,8 @@ export async function updateAssets() {
 
       count += await assetsManager.updateCdnAssets()
     }
+
+    core.info(`Updated ${count} assets`)
 
     await octokit.rest.repos.createCommitStatus({
       ...context.repo,
