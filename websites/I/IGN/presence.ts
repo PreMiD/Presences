@@ -130,7 +130,7 @@ presence.on("UpdateData", async () => {
 						presenceData.details = strings.viewList;
 						presenceData.state =
 							document.querySelector(".display-title").textContent;
-					} else presenceData.details = strings.playlists;
+					} else presenceData.details = strings.viewPlaylists;
 					break;
 				}
 				case "following": {
