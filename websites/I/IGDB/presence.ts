@@ -166,9 +166,8 @@ presence.on("UpdateData", async () => {
 			} else presenceData.details = strings.browseCategories;
 			break;
 		case "companies":
-			if (pathTwo === "new") {
-				presenceData.details = strings.newCompany;
-			} else if (pathTwo) {
+			if (pathTwo === "new") presenceData.details = strings.newCompany;
+			else if (pathTwo) {
 				presenceData.details = strings.viewCompany;
 				presenceData.state = document.title;
 				presenceData.largeImageKey =
