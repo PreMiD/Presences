@@ -1,12 +1,12 @@
-const iframe = new iFrame();
+const iframe = new iFrame()
 
-iframe.on("UpdateData", () => {
-	const vidyo: HTMLVideoElement = document.querySelector("video");
-	if (vidyo && !isNaN(vidyo.duration) && !isNaN(vidyo.currentTime)) {
-		return iframe.send({
-			duration: vidyo.duration,
-			currentTime: vidyo.currentTime,
-			paused: vidyo.paused,
-		});
-	}
-});
+iframe.on('UpdateData', () => {
+  const vidyo = document.querySelector<HTMLVideoElement>('video')
+  if (vidyo && !Number.isNaN(vidyo.duration) && !Number.isNaN(vidyo.currentTime)) {
+    return iframe.send({
+      duration: vidyo.duration,
+      currentTime: vidyo.currentTime,
+      paused: vidyo.paused,
+    })
+  }
+})
