@@ -47,6 +47,10 @@
 		"description": "Used as the title for the button in Discord.",
 		"message": "Watch Episode"
 	},
+	"general.buttonViewGame": {
+		"description": "Used as the title for the button in Discord.",
+		"message": "View Game"
+	},
 	"general.buttonViewMovie": {
 		"description": "Used as the title for the button in Discord.",
 		"message": "View Movie"
@@ -78,6 +82,10 @@
 	"general.buttonViewSong": {
 		"description": "Used as the title for the button in Discord.",
 		"message": "View Song"
+	},
+	"general.buttonViewWiki": {
+		"description": "Used as the title for the button in Discord.",
+		"message": "View Wiki"
 	},
 	"general.buttonWatchAnime": {
 		"description": "Used as the title for the button in Discord.",
@@ -363,6 +371,10 @@
 		"description": "",
 		"message": "Viewing episode:"
 	},
+	"general.viewGame": {
+		"description": "Displayed when viewing a specific game.",
+		"message": "Viewing game:"
+	},
 	"general.viewGenre": {
 		"description": "",
 		"message": "Viewing genre:"
@@ -430,6 +442,10 @@
 	"general.viewingAWishlist": {
 		"description": "",
 		"message": "Viewing a wishlist"
+	},
+	"general.viewingPlaylists": {
+		"description": "Displayed when viewing playlists.",
+		"message": "Viewing Playlists"
 	},
 	"general.viewingWishlist": {
 		"description": "",
