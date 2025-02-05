@@ -180,7 +180,7 @@ presence.on("UpdateData", async () => {
 		strings = await getStrings();
 	}
 
-	const viewing = strings.viewing.slice(0, -1);
+	const viewing = strings.view.slice(0, -1);
 	let playback = false;
 
 	switch (path[0]) {

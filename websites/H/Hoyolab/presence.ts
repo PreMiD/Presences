@@ -84,9 +84,8 @@ presence.on("UpdateData", async () => {
 	switch (pathList[0]) {
 		case "home": {
 			if (!pathList[1]) presenceData.details = `${strings.viewingHomepage}`;
-			else {
+			else
 				presenceData.details = `${strings.view} ${homepageName[pathList[1]]}`;
-			}
 			homepageName;
 			break;
 		}
