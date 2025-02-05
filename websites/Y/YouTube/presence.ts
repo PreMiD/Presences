@@ -6,6 +6,8 @@ import youtubeTVResolver from "./video_sources/tv";
 import youtubeResolver from "./video_sources/default";
 import youtubeMiniplayerResolver from "./video_sources/miniplayer";
 import youtubeApiResolver from "./video_sources/api";
+import youtubeMobileResolver from "./video_sources/mobile_default";
+import youtubeMobileShortsResolver from "./video_sources/mobile_shorts";
 import {
 	Resolver,
 	presence,
@@ -13,6 +15,7 @@ import {
 	getSetting,
 	checkStringLanguage,
 	getThumbnail,
+	getQuerySelectors,
 } from "./util";
 import { pvPrivacyUI } from "./util/pvPrivacyUI";
 
@@ -66,7 +69,9 @@ presence.on("UpdateData", async () => {
 			getSetting<boolean>("hideHome", false),
 			getSetting<boolean>("hidePaused", true),
 		],
-		{ pathname, hostname, search, href } = document.location;
+		{ pathname, hostname, search, href } = document.location,
+		isMobile = hostname === "m.youtube.com",
+		selectors = getQuerySelectors(isMobile);
 
 	// Update strings if user selected another language.
 	if (!checkStringLanguage(newLang)) return;
@@ -89,6 +94,8 @@ presence.on("UpdateData", async () => {
 				youtubeResolver,
 				youtubeMiniplayerResolver,
 				youtubeMoviesResolver,
+				youtubeMobileResolver,
+				youtubeMobileShortsResolver,
 				youtubeApiResolver,
 				nullResolver,
 			].find(resolver => resolver.isActive()),
@@ -97,16 +104,14 @@ presence.on("UpdateData", async () => {
 
 		let pfp: string;
 
-		const live = !!document.querySelector(".ytp-live"),
+		const live = !!document.querySelector(selectors.videoLive),
 			isPlaylistLoop =
 				document
 					.querySelector("#playlist-actions .yt-icon-button#button")
 					?.getAttribute("aria-pressed") === "true",
 			playlistTitle =
 				document
-					.querySelector(
-						"#content #header-description > h3:nth-child(1) > yt-formatted-string > a"
-					)
+					.querySelector(selectors.videoPlaylistTitle)
 					?.textContent.trim() ?? "",
 			playlistQueueElements = document.querySelectorAll<HTMLSpanElement>(
 				"#content #publisher-container > div > yt-formatted-string > span"
@@ -115,10 +120,14 @@ presence.on("UpdateData", async () => {
 		if (playlistTitle) {
 			if (playlistQueueElements.length > 1)
 				playlistQueue = `${playlistQueueElements[0].textContent} / ${playlistQueueElements[2].textContent}`;
-			else {
+			else if (isMobile) {
+				playlistQueue = document
+					.querySelector(selectors.videoPlaylistTitle)
+					?.nextSibling?.textContent.replace(/^ • /, "");
+			} else {
 				playlistQueue = document.querySelector<HTMLSpanElement>(
 					"#content #publisher-container > div > span"
-				).textContent;
+				)?.textContent;
 			}
 		}
 
@@ -127,9 +136,7 @@ presence.on("UpdateData", async () => {
 				resolver === youtubeMiniplayerResolver
 					? ""
 					: document
-							.querySelector<HTMLImageElement>(
-								"#avatar.ytd-video-owner-renderer > img"
-							)
+							.querySelector<HTMLImageElement>(selectors.videoChannelImage)
 							?.src.replace(/=s\d+/, "=s512");
 		}
 		const unlistedPathElement = document.querySelector<SVGPathElement>(
@@ -151,12 +158,12 @@ presence.on("UpdateData", async () => {
 					.replace("%title%", title.trim())
 					.replace("%uploader%", uploaderName.trim())
 					.replace("%playlistTitle%", playlistTitle.trim())
-					.replace("%playlistQueue%", playlistQueue.trim()),
+					.replace("%playlistQueue%", playlistQueue?.trim() ?? ""),
 				state: vidState
 					.replace("%title%", title.trim())
 					.replace("%uploader%", uploaderName.trim())
 					.replace("%playlistTitle%", playlistTitle.trim())
-					.replace("%playlistQueue%", playlistQueue.trim()),
+					.replace("%playlistQueue%", playlistQueue?.trim() ?? ""),
 				largeImageKey:
 					unlistedVideo || logo === LogoMode.YouTubeLogo || pfp === ""
 						? YouTubeAssets.Logo
@@ -195,7 +202,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		let perVideoPrivacy = privacy;
-		if (resolver === youtubeResolver) {
+		if (resolver === youtubeResolver || resolver === youtubeMobileResolver) {
 			if (privacyButtonShown) {
 				perVideoPrivacy = pvPrivacyUI(
 					privacy,
@@ -253,7 +260,11 @@ presence.on("UpdateData", async () => {
 
 		if (!presenceData.details) presence.setActivity();
 		else presence.setActivity(presenceData);
-	} else if (hostname === "www.youtube.com" || hostname === "youtube.com") {
+	} else if (
+		hostname === "www.youtube.com" ||
+		hostname === "youtube.com" ||
+		hostname === "m.youtube.com"
+	) {
 		const presenceData: PresenceData = {
 			largeImageKey: YouTubeAssets.Logo,
 			startTimestamp: browsingTimestamp,
@@ -280,19 +291,15 @@ presence.on("UpdateData", async () => {
 					);
 				} else if (hideHome) return presence.clearActivity();
 				else presenceData.details = strings.viewHome;
-
 				break;
 			}
 			case pathname.includes("/results"): {
 				searching = true;
-				const search =
-					document.querySelector<HTMLInputElement>(
-						"#search-input > div > div:nth-child(2) > input"
-					) ??
-					document.querySelector<HTMLInputElement>("#search-input > input");
 
 				presenceData.details = strings.search;
-				presenceData.state = search.value;
+				presenceData.state = document.querySelector<HTMLInputElement>(
+					selectors.searchInput
+				).value;
 				presenceData.smallImageKey = Assets.Search;
 				break;
 			}
@@ -300,36 +307,27 @@ presence.on("UpdateData", async () => {
 			case pathname.includes("/channel"):
 			case pathname.includes("/c"):
 			case pathname.includes("/user"): {
-				const tabSelected = document
-						.querySelector(
-							'[class="style-scope ytd-feed-filter-chip-bar-renderer iron-selected"]'
-						)
-						?.textContent.trim(),
-					documentTitle = document.title.substring(
-						0,
-						document.title.lastIndexOf(" - YouTube")
-					);
+				const documentTitle = document.title.substring(
+					0,
+					document.title.lastIndexOf(" - YouTube")
+				);
 
 				let user: string;
 				// Get channel name when viewing a community post
 				if (
 					documentTitle.includes(
-						document
-							.querySelector("#author-text.ytd-backstage-post-renderer")
-							?.textContent.trim()
+						document.querySelector(selectors.userName)?.textContent.trim()
 					)
-				) {
-					user = document.querySelector(
-						"#author-text.ytd-backstage-post-renderer"
-					).textContent;
-					// Get channel name when viewing a channel
-				} else if (
-					documentTitle.includes(
-						document.querySelector("#text.ytd-channel-name")?.textContent
-					) &&
-					document.querySelector("#text.ytd-channel-name")?.textContent
 				)
-					user = document.querySelector("#text.ytd-channel-name").textContent;
+					user = document.querySelector(selectors.userName).textContent;
+				// Get channel name when viewing a channel
+				else if (
+					documentTitle.includes(
+						document.querySelector(selectors.userName2)?.textContent
+					) &&
+					document.querySelector(selectors.userName2)?.textContent
+				)
+					user = document.querySelector(selectors.userName2).textContent;
 				// Get channel name from website's title
 				else if (/\(([^)]+)\)/.test(documentTitle))
 					user = documentTitle.replace(/\(([^)]+)\)/, "");
@@ -342,12 +340,10 @@ presence.on("UpdateData", async () => {
 					user = "null";
 
 				if (pathname.includes("/videos")) {
-					presenceData.details = `${
-						strings.browsingThrough
-					} ${tabSelected} ${document
-						.querySelector(
-							'[class="style-scope ytd-tabbed-page-header"] [aria-selected="true"]'
-						)
+					presenceData.details = `${strings.browsingThrough} ${document
+						.querySelector(selectors.userVideoTab)
+						?.textContent.trim()} ${document
+						.querySelector(selectors.userTab)
 						?.textContent.trim()
 						.toLowerCase()}`;
 					presenceData.state = `${strings.ofChannel} ${user}`;
@@ -362,11 +358,13 @@ presence.on("UpdateData", async () => {
 					presenceData.state = `${strings.ofChannel} ${user}`;
 					presenceData.largeImageKey =
 						logo === LogoMode.Thumbnail
-							? document
-									.querySelector('[id="post"]')
-									?.querySelectorAll("img")[1]?.src
+							? document.querySelector<HTMLImageElement>(
+									selectors.postThumbnail
+							  )?.src
 							: logo === LogoMode.Channel
-							? document.querySelector('[id="post"]')?.querySelector("img")?.src
+							? document.querySelector<HTMLImageElement>(
+									selectors.postChannelImage
+							  )?.src
 							: YouTubeAssets.Logo;
 				} else if (pathname.includes("/about")) {
 					presenceData.details = strings.readChannel;
@@ -394,12 +392,10 @@ presence.on("UpdateData", async () => {
 							) ??
 							// When viewing a community post
 							document.querySelector<HTMLImageElement>(
-								"#author-thumbnail > a > yt-img-shadow > img"
+								selectors.postChannelImage
 							) ??
 							// When viewing a channel on the normal channel page
-							document
-								.querySelector(".yt-spec-avatar-shape")
-								?.querySelector("img")
+							document.querySelector<HTMLImageElement>(selectors.channelImage)
 						)?.src.replace(/=s[0-9]+/, "=s512") ?? YouTubeAssets.Logo;
 					if (channelImg) presenceData.largeImageKey = channelImg;
 				}
@@ -407,7 +403,7 @@ presence.on("UpdateData", async () => {
 			}
 			case pathname.includes("/post"): {
 				presenceData.details = strings.viewCPost;
-				const selector = document.querySelector("#author-text");
+				const selector = document.querySelector(selectors.postAuthor);
 				if (selector)
 					presenceData.state = `${strings.ofChannel} ${selector.textContent}`;
 				break;
@@ -438,13 +434,9 @@ presence.on("UpdateData", async () => {
 			}
 			case pathname.includes("/playlist"): {
 				presenceData.details = strings.viewPlaylist;
-				const title =
-					document.querySelector("#text-displayed") ??
-					document.querySelector(
-						"ytd-playlist-header-renderer yt-dynamic-sizing-formatted-string.ytd-playlist-header-renderer"
-					) ??
-					document.querySelector("#title > yt-formatted-string > a");
-				presenceData.state = title.textContent.trim();
+				presenceData.state = document
+					.querySelector(selectors.playlistTitle)
+					.textContent.trim();
 				break;
 			}
 			case pathname.includes("/premium"): {

@@ -114,7 +114,7 @@ presence.on("UpdateData", async () => {
 		presenceData = {
 			...presenceData,
 			...siteData.process(),
-		};
+		} as PresenceData;
 	}
 
 	presence.setActivity(presenceData);

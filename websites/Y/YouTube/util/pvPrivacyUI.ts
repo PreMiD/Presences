@@ -1,6 +1,7 @@
 type VPArray = { videoId: string; ttl: number }[];
 
-import { presence, strings } from "./";
+import { presence, strings, getQuerySelectors } from "./";
+
 const removeExpiredPrivacyOverwrites = (array: VPArray) => {
 	if (!array) return [];
 	return array.filter(entry => entry.ttl > Date.now());
@@ -25,17 +26,17 @@ export function pvPrivacyUI(
 ): boolean {
 	let perVideoPrivacy = true;
 	const isVideoInArray = (videoId: string, array: VPArray) => {
-		return array.some(entry => entry.videoId === videoId);
-	};
+			return array.some(entry => entry.videoId === videoId);
+		},
+		isMobile = document.location.hostname === "m.youtube.com",
+		selectors = getQuerySelectors(isMobile);
 
 	try {
 		perVideoPrivacy = isVideoInArray(videoId, perVideoPrivacyArray);
 
 		if (!document.querySelector("#pmdEnablePrivacy")) {
 			const button = document.createElement("button"),
-				parent = document.querySelector(
-					".ytp-chrome-controls .ytp-right-controls"
-				);
+				parent = document.querySelector(selectors.privacyParentBox);
 
 			button.id = "pmdEnablePrivacy";
 			button.title = `${strings.perVideoPrivacyToolTip1}\n${strings.perVideoPrivacyToolTip2}`;
@@ -65,6 +66,14 @@ export function pvPrivacyUI(
 					);
 				}
 			});
+
+			if (isMobile) {
+				button.style.height = "4rem";
+				button.style.display = "flex";
+				button.style.flex = "0 0 auto";
+				button.style.justifyContent = "center";
+				button.style.marginRight = "1rem";
+			}
 
 			button.innerHTML = `
    		

@@ -40,8 +40,7 @@ presence.on("UpdateData", async () => {
 		repeatMode = document
 			.querySelector('ytmusic-player-bar[slot="player-bar"]')
 			?.getAttribute("repeat-mode"),
-		videoElement =
-			document.querySelector<HTMLVideoElement>("video.video-stream");
+		videoElement = document.querySelector<HTMLMediaElement>(".video-stream");
 
 	if (useTimeLeftChanged !== useTimeLeft && !privacyMode) {
 		useTimeLeftChanged = useTimeLeft;
@@ -129,8 +128,11 @@ presence.on("UpdateData", async () => {
 				? mediaSession?.metadata?.artwork?.at(-1)?.src ??
 				  "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/1.png"
 				: "https://cdn.rcd.gg/PreMiD/websites/Y/YouTube%20Music/assets/1.png",
-			details: mediaSession.metadata.album,
+			details: mediaSession.metadata.title,
 			state: mediaSession.metadata.artist,
+			...(mediaSession.metadata.album && {
+				largeImageText: mediaSession.metadata.album,
+			}),
 			...(showButtons && {
 				buttons,
 			}),

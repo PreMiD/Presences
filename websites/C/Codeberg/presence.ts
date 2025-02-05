@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
 		if (
 			`/${path}` === document.querySelector(".active.item").getAttribute("href")
 		)
-			presenceData = { ...presenceData, ...data };
+			presenceData = { ...presenceData, ...data } as PresenceData;
 	}
 
 	// Handle users
@@ -201,7 +201,7 @@ presence.on("UpdateData", async () => {
 				presenceData = {
 					...data,
 					...presenceData,
-				};
+				} as PresenceData;
 			}
 		}
 	}

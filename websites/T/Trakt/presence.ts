@@ -80,8 +80,10 @@ presence.on("UpdateData", async () => {
 		},
 		imagePath = document.querySelector("img.real")?.getAttribute("src");
 
-	for (const [path, data] of Object.entries(pages))
-		if (pathname.includes(path)) presenceData = { ...presenceData, ...data };
+	for (const [path, data] of Object.entries(pages)) {
+		if (pathname.includes(path))
+			presenceData = { ...presenceData, ...data } as PresenceData;
+	}
 
 	if (pathname.includes("/users")) {
 		const username = document.querySelector(

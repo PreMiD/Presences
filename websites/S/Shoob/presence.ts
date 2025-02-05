@@ -107,8 +107,10 @@ presence.on("UpdateData", async () => {
 		}
 	}
 
-	for (const [path, data] of Object.entries(staticPages))
-		if (pathname.startsWith(path)) presenceData = { ...presenceData, ...data };
+	for (const [path, data] of Object.entries(staticPages)) {
+		if (pathname.startsWith(path))
+			presenceData = { ...presenceData, ...data } as PresenceData;
+	}
 
 	switch (pathSplit[0]) {
 		case "articles":

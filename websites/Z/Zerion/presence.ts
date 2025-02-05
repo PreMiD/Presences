@@ -47,7 +47,7 @@ presence.on(
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey: Assets.Logo,
-		},
+		} as PresenceData,
 		[newLang, privacy, logo, time, buttons] = await Promise.all([
 			presence.getSetting<string>("lang").catch(() => "pl"),
 			presence.getSetting<boolean>("privacy"),

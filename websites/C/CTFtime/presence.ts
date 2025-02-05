@@ -2,7 +2,7 @@ type Functionlize<T> = {
 	[P in keyof T]: () => T[P];
 };
 
-interface Route extends Functionlize<Partial<PresenceData>> {
+interface Route extends Functionlize<Partial<PresenceDataFull>> {
 	path: RegExp;
 }
 
@@ -217,7 +217,8 @@ presence.on("UpdateData", async () => {
 	if (!route) return presence.setActivity(presenceData);
 	if (route.state) presenceData.state = route.state();
 	if (route.details) presenceData.details = route.details();
-	if (showButtons && route.buttons) presenceData.buttons = route.buttons();
+	if (showButtons && route.buttons)
+		presenceData.buttons = route.buttons() as [ButtonData, ButtonData?];
 	if (route.largeImageKey && showCovers)
 		presenceData.largeImageKey = route.largeImageKey();
 	if (route.smallImageKey) presenceData.smallImageKey = route.smallImageKey();
