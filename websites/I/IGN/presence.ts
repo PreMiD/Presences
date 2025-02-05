@@ -17,7 +17,7 @@ async function getStrings() {
 		viewMember: "general.viewMember",
 		watching: "general.watching",
 		wiki: "IGN.wiki",
-		buttonViewWiki: "IGN.buttonViewWiki",
+		buttonViewWiki: "general.buttonViewWiki",
 		viewAccount: "general.viewAccount",
 		viewList: "general.viewList",
 		viewPlaylists: "general.viewingPlaylists",
