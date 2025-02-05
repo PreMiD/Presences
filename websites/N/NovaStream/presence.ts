@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
 	// Watchlist modal
 	const watchListElements = document.querySelector<HTMLInputElement>(
 		'[x-for*="item in watchLaterItems"]'
-	);
+	).parentElement;
 	if (
 		watchListElements &&
 		window.getComputedStyle(
