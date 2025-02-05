@@ -116,8 +116,8 @@ presence.on("UpdateData", async () => {
 				const output = await data(document.querySelector("video"));
 
 				if (output.largeImageKey) presenceData = output;
-				else presenceData = { ...presenceData, ...output };
-			} else presenceData = { ...presenceData, ...data };
+				else presenceData = { ...presenceData, ...output } as PresenceData;
+			} else presenceData = { ...presenceData, ...data } as PresenceData;
 		}
 	}
 

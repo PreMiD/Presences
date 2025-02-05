@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 			largeImageKey:
 				"https://cdn.rcd.gg/PreMiD/websites/A/Apple%20Music/assets/logo.png",
-		},
+		} as PresenceData,
 		[timestamps, cover, listening] = await Promise.all([
 			presence.getSetting<boolean>("timestamps"),
 			presence.getSetting<boolean>("cover"),
