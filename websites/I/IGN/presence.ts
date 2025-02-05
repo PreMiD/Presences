@@ -33,7 +33,7 @@ async function getStrings() {
 		rewards: "IGN.rewards",
 		viewCategory: "general.viewCategory",
 		viewPage: "general.viewPage",
-		viewGame: "IGN.viewGame",
+		viewGame: "general.viewGame",
 		buttonViewGame: "general.buttonViewGame",
 		viewComics: "IGN.viewComics",
 		buttonViewComics: "IGN.buttonViewComics",
