@@ -292,55 +292,67 @@
 		"message": "Typing in DMs"
 	},
 	"general.uptimeHistory": {
-		"description": "A page name of statuspages",
+		"description": "A page name of statuspages.",
 		"message": "Uptime history"
 	},
-	"general.viewAAnime": {
-		"description": "",
-		"message": "Viewing a anime"
+	"general.viewAnAnime": {
+		"description": "Viewing a not specfied anime.",
+		"message": "Viewing an anime"
 	},
-	"general.viewAList": {
-		"description": "",
+		"general.viewAGame": {
+		"description": "Displayed when viewing a game.",
+		"message": "Viewing a game"
+	},
+		"general.viewAList": {
+		"description": "Viewing a not specfied list.",
 		"message": "Viewing a list"
 	},
+		"general.viewAChannel": {
+		"description": "Viewing a not specfied channel.",
+		"message": "Viewing a channel"
+	},
+		"general.viewAGenre": {
+		"description": "Viewing a not specfied genre.",
+		"message": "Viewing a genre"
+	},
 	"general.viewAManga": {
-		"description": "",
+		"description": "Viewing a not specfied manga.",
 		"message": "Viewing a manga"
 	},
 	"general.viewAMember": {
-		"description": "",
+		"description": "Viewing a not specfied member.",
 		"message": "Viewing a member"
 	},
 	"general.viewAMovie": {
-		"description": "",
+		"description": "Viewing a non specified movie.",
 		"message": "Viewing a movie"
 	},
 	"general.viewAPage": {
-		"description": "",
+		"description": "Viewing a not specfied page.",
 		"message": "Viewing a page"
 	},
 	"general.viewAPlaylist": {
-		"description": "",
+		"description": "Viewing a not specfied playlist.",
 		"message": "Viewing a playlist"
 	},
 	"general.viewAProduct": {
-		"description": "",
+		"description": "Viewing a not specfied product.",
 		"message": "Viewing a product"
 	},
 	"general.viewAProfile": {
-		"description": "",
+		"description": "Viewing a not specfied profile.",
 		"message": "Viewing a profile"
 	},
 	"general.viewASeries": {
-		"description": "",
+		"description": "Viewing a not specfied serie.",
 		"message": "Viewing a serie"
 	},
 	"general.viewAShow": {
-		"description": "",
+		"description": "Viewing a not specfied show.",
 		"message": "Viewing a show"
 	},
 	"general.viewAThread": {
-		"description": "",
+		"description": "Viewing a not specfied thread.",
 		"message": "Viewing a thread"
 	},
 	"general.viewAccount": {
@@ -348,19 +360,19 @@
 		"message": "Viewing their account"
 	},
 	"general.viewAnIncident": {
-		"description": "A page name of statuspages",
+		"description": "Viewing a not specfied incident.",
 		"message": "Viewing an incident"
 	},
 	"general.viewAnUser": {
-		"description": "",
+		"description": "Viewing a not specfied user.",
 		"message": "Viewing an user"
 	},
 	"general.viewAnime": {
-		"description": "",
+		"description": "Viewing a not specfied anime.",
 		"message": "Viewing anime:"
 	},
 	"general.viewCategory": {
-		"description": "",
+		"description": "Viewing a not specfied category.",
 		"message": "Viewing category:"
 	},
 	"general.viewChannel": {
@@ -435,19 +447,19 @@
 		"description": "",
 		"message": "Viewing user:"
 	},
-	"general.viewing": {
+	"general.view": {
 		"description": "",
 		"message": "Viewing:"
 	},
-	"general.viewingAWishlist": {
-		"description": "",
+	"general.viewAWishlist": {
+		"description": "Viewing a not specfied wishlist.",
 		"message": "Viewing a wishlist"
 	},
-	"general.viewingPlaylists": {
+	"general.viewPlaylists": {
 		"description": "Displayed when viewing playlists.",
 		"message": "Viewing Playlists"
 	},
-	"general.viewingWishlist": {
+	"general.viewWishlist": {
 		"description": "",
 		"message": "Viewing wishlist of:"
 	},
