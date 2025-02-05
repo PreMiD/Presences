@@ -1,0 +1,130 @@
+{
+  "IGDB.discover": {
+    "description": "",
+    "message": "Browsing games"
+  },
+  "IGDB.comingSoon": {
+    "description": "",
+    "message": "Viewing future games"
+  }, 
+  "IGDB.recentlyReleased": {
+    "description": "",
+    "message": "Viewing recently released games"
+  },
+  "IGDB.newGame": {
+    "description": "",
+    "message": "Adding a new game"
+  },
+  "IGDB.newCompany": {
+    "description": "",
+    "message": "Adding a new company"
+  },
+  "IGDB.browseGenres": {
+    "description": "",
+    "message": "Browsing genres"
+  },
+  "IGDB.browsePlatforms": {
+    "description": "",
+    "message": "Browsing platforms"
+  },
+  "IGDB.viewPlatform": {
+    "description": "",
+    "message": "Viewing platform:"
+  },
+  "IGDB.top100": {
+    "description": "",
+    "message": "Viewing Top 100"
+  },
+  "IGDB.reviews": {
+    "description": "",
+    "message": "Finding game reviews"
+  },
+  "IGDB.browseThemes": {
+    "description": "",
+    "message": "Browsing themes"
+  },
+  "IGDB.viewTheme": {
+    "description": "",
+    "message": "Viewing theme:"
+  },
+  "IGDB.browseCollections": {
+    "description": "",
+    "message": "Browsing collections"
+  },
+  "IGDB.viewCollection": {
+    "description": "",
+    "message": "Viewing collection:"
+  },
+  "IGDB.browsePlayerPerspectives": {
+    "description": "",
+    "message": "Browsing player perspectives"
+  },
+  "IGDB.viewPlayerPerspectives": {
+    "description": "",
+    "message": "Viewing player perspective's games:"
+  },
+  "IGDB.browseCharacters": {
+    "description": "",
+    "message": "Browsing player perspectives"
+  },
+  "IGDB.viewCharacter": {
+    "description": "",
+    "message": "Viewing player perspective's games:"
+  },
+  "IGDB.browseEvents": {
+    "description": "",
+    "message": "Browsing events"
+  },
+  "IGDB.viewEvent": {
+    "description": "",
+    "message": "Viewing event:"
+  },
+  "IGDB.browseFranchises": {
+    "description": "",
+    "message": "Browsing franchises"
+  },
+  "IGDB.viewFranchises": {
+    "description": "",
+    "message": "Viewing franchise:"
+  },
+  "IGDB.browseCategories": {
+    "description": "",
+    "message": "Browsing categories"
+  },
+  "IGDB.browseCompanies": {
+    "description": "",
+    "message": "Browsing companies"
+  },
+  "IGDB.viewCompany": {
+    "description": "",
+    "message": "Viewing company:"
+  },
+  "IGDB.browseGameEngines": {
+    "description": "",
+    "message": "Browsing game engines"
+  },
+  "IGDB.viewGameEngine": {
+    "description": "",
+    "message": "Viewing game engine:"
+  },
+  "IGDB.settings": {
+    "description": "",
+    "message": "Viewing Settings"
+  },
+	"IGDB.karmaHunters": {
+    "description": "",
+    "message": "Viewing Karma Hunters"
+  },
+	"IGDB.about": {
+    "description": "",
+    "message": "Viewing About"
+  },
+	"IGDB.contact": {
+    "description": "",
+    "message": "Viewing Contact"
+  },
+	"IGDB.API": {
+    "description": "",
+    "message": "Viewing API"
+  }
+}
