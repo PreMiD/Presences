@@ -12,9 +12,10 @@
 	},
 	"url": [
 		"rezka.ag",
-		"hdrezka.ag"
+		"hdrezka.ag",
+		"rezka-ua.org"
 	],
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/H/HDrezka/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/H/HDrezka/assets/thumbnail.jpeg",
 	"color": "#DA3D36",
