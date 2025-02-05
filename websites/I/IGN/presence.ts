@@ -138,14 +138,34 @@ presence.on("UpdateData", async () => {
 					break;
 				}
 				case "playlist": {
-					if (pathFour === "wishlist")
-						presenceData.details = strings.viewingAWishlist;
-					if (pathFour === "backlog") presenceData.details = strings.backlog;
-					if (pathFour === "playing") presenceData.details = strings.playing;
-					if (pathFour === "paused") presenceData.details = strings.paused;
-					if (pathFour === "beat") presenceData.details = strings.beat;
-					if (pathFour === "quit") presenceData.details = strings.quit;
-					else presenceData.details = strings.library;
+					switch (pathFour) {
+						case "wishlist": {
+							presenceData.details = strings.viewingAWishlist;
+							break;
+						}
+						case "backlog": {
+							presenceData.details = strings.backlog;
+							break;
+						}
+						case "playing": {
+							presenceData.details = strings.playing;
+							break;
+						}
+						case "paused": {
+							presenceData.details = strings.paused;
+							break;
+						}
+						case "beat": {
+							presenceData.details = strings.beat;
+							break;
+						}
+						case "quit": {
+							presenceData.details = strings.quit;
+							break;
+						}
+						default:
+							presenceData.details = strings.library;
+					}
 					break;
 				}
 				default: {
