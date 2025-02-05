@@ -78,7 +78,8 @@ presence.on("UpdateData", async () => {
 					presenceData.details = strings.newGame;
 					break;
 				default:
-					if (pathname.split("/")[3] === "reviews") presenceData.details = strings.reviews;
+					if (pathname.split("/")[3] === "reviews")
+						presenceData.details = strings.reviews;
 					else {
 						presenceData.details = strings.viewGame;
 						presenceData.state = document.querySelector("h1").textContent;
