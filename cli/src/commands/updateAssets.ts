@@ -46,6 +46,8 @@ export async function updateAssets() {
 
   const activities = await getChangedActivities()
 
+  core.info(`Found ${activities.length} changed activities`)
+
   //* If no activities changed, return success
   if (activities.length === 0) {
     await octokit.rest.repos.createCommitStatus({
