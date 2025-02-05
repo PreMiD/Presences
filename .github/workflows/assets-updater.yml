@@ -34,6 +34,7 @@ jobs:
         env:
           CDN_TOKEN: ${{ secrets.CDN_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_REF: ${{ github.head_ref }}
         run: |
           # Configure git
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -50,5 +51,5 @@ jobs:
             # Commit the changes
             git add .
             git commit -m "chore: update assets"
-            git push origin HEAD:${{ github.head_ref }}
+            git push origin HEAD:"$HEAD_REF"
           fi
