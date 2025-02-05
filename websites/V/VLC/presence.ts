@@ -21,6 +21,7 @@ const presence = new Presence({
 		showName: null,
 		seasonNumber: null,
 		episodeNumber: null,
+		Type: null,
 	};
 let isShow = false,
 	isSong = false,
@@ -52,12 +53,16 @@ presence.on("UpdateData", async () => {
 	) {
 		const presenceData: PresenceData = {
 			largeImageKey: "https://cdn.rcd.gg/PreMiD/websites/V/VLC/assets/logo.png",
+			type: ActivityType.Watching,
 		};
 
 		if (media.state !== prev) {
 			prev = media.state;
 			elapsed = Math.floor(Date.now() / 1000);
 		}
+
+		if (media.Type === "Audio") presenceData.type = ActivityType.Listening;
+		else if (media.Type === "Video") presenceData.type = ActivityType.Watching;
 
 		if (media.state === "playing" || media.state === "paused") {
 			if (isSong) {
@@ -197,6 +202,9 @@ const getStatus = setLoop(function () {
 						getTag(collection, "showName")
 							? (media.showName = decodeReq(getTag(collection, "showName")))
 							: (media.showName = null);
+						getTag(collection, "Type")
+							? (media.Type = decodeReq(getTag(collection, "Type")))
+							: (media.Type = null);
 
 						if (getTag(collection, "artist") || getTag(collection, "album")) {
 							isSong = true;
@@ -250,6 +258,11 @@ const getStatus = setLoop(function () {
 									req.responseXML.getElementsByName("showName")[0]
 							  ))
 							: (media.showName = null);
+						req.responseXML.getElementsByName("Type")[0]
+							? (media.Type = decodeReq(
+									req.responseXML.getElementsByName("Type")[0]
+							  ))
+							: (media.Type = null);
 
 						if (
 							req.responseXML.getElementsByName("artist")[0] ||
@@ -341,5 +354,6 @@ interface MediaObj {
 	showName?: string;
 	seasonNumber?: string;
 	episodeNumber?: string;
+	Type?: string;
 	[key: string]: string;
 }
