@@ -22,9 +22,7 @@ presence.on("UpdateData", async () => {
 			letterCount = `${
 				currentLetterValueElement ? currentLetterValueElement.textContent : "0"
 			}/${maxLetterValueElement ? maxLetterValueElement.textContent : "5"}`;
-		presenceData.state = `Viewing letters${
-			letterCount ? ` (${letterCount})` : ""
-		}`;
+		presenceData.state = `Viewing letters (${letterCount})`;
 
 		if (isModalOpen()) presenceData.state = "Creating a new letter";
 	} else if (document.location.pathname.includes("/letter/")) {
