@@ -10,7 +10,7 @@ function isModalOpen(): boolean {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "https://i.imgur.com/WCHQje8.png",
+		largeImageKey: "https://envolya.com/envolya-logo.png",
 		startTimestamp: browsingTimestamp,
 	};
 
