@@ -172,6 +172,7 @@ presence.on("UpdateData", async () => {
 			largeImageKey: Assets.Logo,
 			details: "loading",
 			startTimestamp: Math.floor(Date.now() / 1000),
+			type: ActivityType.Watching,
 		},
 		newLang = await presence.getSetting<string>("lang").catch(() => "en");
 
@@ -340,9 +341,9 @@ presence.on("UpdateData", async () => {
 					.querySelector<HTMLImageElement>(".anime-poster")
 					.src.replace(".th", "");
 
-				presenceData.smallImageKey = `presence_playback_${
-					iframeResponse.paused ? "paused" : "playing"
-				}`;
+				presenceData.smallImageKey = iframeResponse.paused
+					? Assets.Pause
+					: Assets.Play;
 
 				presenceData.smallImageText = iframeResponse.paused
 					? strings.pause
@@ -355,7 +356,6 @@ presence.on("UpdateData", async () => {
 							Math.floor(iframeResponse.duration)
 						);
 				} else {
-					presenceData.startTimestamp = null;
 					presenceData.smallImageText += ` - ${getTimestamp(
 						iframeResponse.currentTime
 					)}`;
