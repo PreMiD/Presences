@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.includes("/login"))
 		presenceData.state = "Logging in";
 	else if (document.location.pathname.includes("/upgrade"))
-		presenceData.state = "Buying prenium";
+		presenceData.state = "Buying premium";
 	else if (document.location.pathname.includes("/settings"))
 		presenceData.state = "Account settings";
 
