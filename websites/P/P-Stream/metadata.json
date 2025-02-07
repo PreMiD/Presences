@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.13",
+	"apiVersion": 1,
+	"author": {
+		"id": "529707020937461760",
+		"name": "creeper78"
+	},
+	"service": "P-Stream",
+	"altnames": [
+		"PStream"
+	],
+	"description": {
+		"en": "Watch your favorite shows and movies for free with no ads ever!"
+	},
+	"url": "pstream.org",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/vnX1akB.png",
+	"thumbnail": "https://i.imgur.com/nQgvTaq.png",
+	"color": "#8652bb",
+	"category": "videos",
+	"tags": [
+		"movie",
+		"tv",
+		"watch",
+		"stream",
+		"pstream",
+		"p-stream"
+	],
+	"iframe": true,
+	"iFrameRegExp": ".*"
+}
