@@ -3,8 +3,38 @@ const presence = new Presence({
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
 
-const enum Assets { // Other default assets can be found at index.d.ts
+const enum Assets {
 	Logo = "https://i.imgur.com/vnX1akB.png",
+}
+
+const cache = new Map<string, object>();
+
+interface TMDBResponse {
+	backdrop_path?: string;
+	[key: string]: unknown; // Allow additional properties
+}
+
+async function fetchWithCache(url: string): Promise<TMDBResponse | null> {
+	if (cache.has(url)) return cache.get(url) as TMDBResponse; // Type assertion
+
+	try {
+		const res = await fetch(url, {
+			method: "GET",
+			headers: {
+				accept: "application/json",
+				Authorization:
+					"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNTAwMDQ5ZjNlMDYxMDlmZTNlODI4OWIwNmNmNTY4NSIsInN1YiI6IjY1ZTEyNDAyMmQ1MzFhMDE4NWMwZjJmNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1J3EfnfmpJyZ4MV66eadk3h929zdeZfvjTO2JXhboWw",
+			},
+		});
+
+		if (!res.ok) return null;
+
+		const data: TMDBResponse = await res.json(); // Explicit type
+		cache.set(url, data); // Store the response for this session
+		return data;
+	} catch (error) {
+		return null;
+	}
 }
 
 presence.on("UpdateData", async () => {
@@ -15,48 +45,31 @@ presence.on("UpdateData", async () => {
 	};
 
 	switch (document.location.pathname) {
-		case "/": {
+		case "/":
 			presenceData.details = "Browsing...";
-
 			break;
-		}
-		case "/settings": {
+		case "/settings":
 			presenceData.details = "Configuring Settings";
-
 			break;
-		}
-		case "/discover": {
+		case "/discover":
 			presenceData.details = "Discovering what's new";
-
 			break;
-		}
-		case "/about": {
+		case "/about":
 			presenceData.details = "Reading about P-Stream";
-
 			break;
-		}
-		case "/support": {
+		case "/support":
 			presenceData.details = "Getting support";
-
 			break;
-		}
 		default:
 			if (document.location.pathname.startsWith("/media/tmdb-tv-")) {
 				const showId = window.location.href
 					.replace("https://pstream.org/media/tmdb-tv-", "")
 					.split("-")[0];
 				if (showId) {
-					const res = await fetch(`https://api.themoviedb.org/3/tv/${showId}`, {
-							method: "GET",
-							headers: {
-								accept: "application/json",
-								Authorization:
-									"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNTAwMDQ5ZjNlMDYxMDlmZTNlODI4OWIwNmNmNTY4NSIsInN1YiI6IjY1ZTEyNDAyMmQ1MzFhMDE4NWMwZjJmNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1J3EfnfmpJyZ4MV66eadk3h929zdeZfvjTO2JXhboWw",
-							},
-						}),
-						data = await res.json();
-
-					if (data.backdrop_path)
+					const data = await fetchWithCache(
+						`https://api.themoviedb.org/3/tv/${showId}`
+					);
+					if (data?.backdrop_path)
 						presenceData.largeImageKey = `https://image.tmdb.org/t/p/original${data.backdrop_path}`;
 				}
 				presenceData.details =
@@ -72,24 +85,24 @@ presence.on("UpdateData", async () => {
 					.replace("https://pstream.org/media/tmdb-movie-", "")
 					.split("-")[0];
 				if (movieId) {
-					const res = await fetch(
-							`https://api.themoviedb.org/3/movie/${movieId}`,
-							{
-								method: "GET",
-								headers: {
-									accept: "application/json",
-									Authorization:
-										"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNTAwMDQ5ZjNlMDYxMDlmZTNlODI4OWIwNmNmNTY4NSIsInN1YiI6IjY1ZTEyNDAyMmQ1MzFhMDE4NWMwZjJmNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1J3EfnfmpJyZ4MV66eadk3h929zdeZfvjTO2JXhboWw",
-								},
-							}
-						),
-						data = await res.json();
-
-					if (data.backdrop_path)
+					const data = await fetchWithCache(
+						`https://api.themoviedb.org/3/movie/${movieId}`
+					);
+					if (data?.backdrop_path)
 						presenceData.largeImageKey = `https://image.tmdb.org/t/p/original${data.backdrop_path}`;
 				}
 				presenceData.details = document.querySelector("title")?.textContent;
 			}
 	}
+
+	const video = document.querySelector("video");
+	if (video) {
+		if (!video.paused) {
+			[presenceData.startTimestamp, presenceData.endTimestamp] =
+				presence.getTimestampsfromMedia(video);
+			presenceData.smallImageKey = Assets.Play;
+		} else presenceData.smallImageKey = Assets.Pause;
+	}
+
 	presence.setActivity(presenceData);
 });
