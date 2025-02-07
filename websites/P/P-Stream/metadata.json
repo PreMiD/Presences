@@ -25,7 +25,5 @@
 		"stream",
 		"pstream",
 		"p-stream"
-	],
-	"iframe": true,
-	"iFrameRegExp": ".*"
+	]
 }
