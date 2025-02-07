@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 			break;
 		default:
 			if (document.location.pathname.startsWith("/media/tmdb-tv-")) {
-				const showId = window.location.href
+				const showId = document.location.href
 					.replace("https://pstream.org/media/tmdb-tv-", "")
 					.split("-")[0];
 				if (showId) {
@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
 						.slice(1)
 						.join(" - ") ?? "";
 			} else if (document.location.pathname.startsWith("/media/tmdb-movie-")) {
-				const movieId = window.location.href
+				const movieId = document.location.href
 					.replace("https://pstream.org/media/tmdb-movie-", "")
 					.split("-")[0];
 				if (movieId) {
