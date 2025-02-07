@@ -7,15 +7,15 @@ const enum Assets {
 	Logo = "https://i.imgur.com/vnX1akB.png",
 }
 
-const cache = new Map<string, object>();
+const cache = new Map<string, Record<string, unknown>>();
 
 interface TMDBResponse {
-	backdrop_path?: string;
-	[key: string]: unknown; // Allow additional properties
+	backdropPath?: string;
+	[key: string]: unknown;
 }
 
 async function fetchWithCache(url: string): Promise<TMDBResponse | null> {
-	if (cache.has(url)) return cache.get(url) as TMDBResponse; // Type assertion
+	if (cache.has(url)) return cache.get(url) as TMDBResponse;
 
 	try {
 		const res = await fetch(url, {
@@ -29,9 +29,14 @@ async function fetchWithCache(url: string): Promise<TMDBResponse | null> {
 
 		if (!res.ok) return null;
 
-		const data: TMDBResponse = await res.json(); // Explicit type
-		cache.set(url, data); // Store the response for this session
-		return data;
+		const data = (await res.json()) as Record<string, unknown>,
+			formattedData: TMDBResponse = {
+				backdropPath:
+					typeof data.backdrop_path === "string" ? data.backdrop_path : null,
+			};
+
+		cache.set(url, formattedData);
+		return formattedData;
 	} catch (error) {
 		return null;
 	}
@@ -69,8 +74,8 @@ presence.on("UpdateData", async () => {
 					const data = await fetchWithCache(
 						`https://api.themoviedb.org/3/tv/${showId}`
 					);
-					if (data?.backdrop_path)
-						presenceData.largeImageKey = `https://image.tmdb.org/t/p/original${data.backdrop_path}`;
+					if (data?.backdropPath)
+						presenceData.largeImageKey = `https://image.tmdb.org/t/p/original${data.backdropPath}`;
 				}
 				presenceData.details =
 					document.querySelector("title")?.textContent?.split(" - ")[0] ?? "";
@@ -88,8 +93,8 @@ presence.on("UpdateData", async () => {
 					const data = await fetchWithCache(
 						`https://api.themoviedb.org/3/movie/${movieId}`
 					);
-					if (data?.backdrop_path)
-						presenceData.largeImageKey = `https://image.tmdb.org/t/p/original${data.backdrop_path}`;
+					if (data?.backdropPath)
+						presenceData.largeImageKey = `https://image.tmdb.org/t/p/original${data.backdropPath}`;
 				}
 				presenceData.details = document.querySelector("title")?.textContent;
 			}
