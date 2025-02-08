@@ -8,6 +8,7 @@ on:
 
 jobs:
   check-and-run:
+    if: github.repository_owner == 'PreMiD'
     name: Update Assets
     runs-on: ubuntu-latest
     permissions:
