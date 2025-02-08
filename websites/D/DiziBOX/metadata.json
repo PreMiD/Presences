@@ -11,11 +11,8 @@
 		"tr": "DiziBOX, son çıkan, güncel ve bir çok yabancı diziyi izleyebileceğiniz bir yabancı dizi sitesidir.",
 		"nl": "DiziBOX is een van de grootste aanbieders van Turkse buitenlandse TV-programma's op internet."
 	},
-	"url": [
-		"www.dizibox.tv",
-		"diziboxx.com"
-	],
-	"version": "1.1.31",
+	"url": "www.dizibox.plus",
+	"version": "1.1.32",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/DiziBOX/assets/thumbnail.png",
 	"color": "#212426",

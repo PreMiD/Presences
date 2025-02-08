@@ -7,10 +7,10 @@
 	},
 	"service": "DistroKid",
 	"description": {
-		"en": "DistroKid"
+		"en": "DistroKid is the easiest way for musicians to get their music into Spotify, Apple, Apple Music, Amazon, TikTok, YouTube Music, and more"
 	},
 	"url": "distrokid.com",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/D/Distrokid/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Distrokid/assets/thumbnail.png",
 	"color": "#FFFF00",
