@@ -20,7 +20,7 @@ export async function bump(service?: string, version?: string, {
   if (all)
     activities = await getActivities()
   else if (changed)
-    activities = await getChangedActivities()
+    ({ changed: activities } = await getChangedActivities())
   else
     activities = [await getSingleActivity(`Select or search for an activity to bump`, service)]
 

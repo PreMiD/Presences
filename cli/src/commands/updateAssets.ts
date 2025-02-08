@@ -50,12 +50,12 @@ export async function updateAssets() {
   const octokit = github.getOctokit(token)
   const context = github.context
 
-  const activities = await getChangedActivities()
+  const { changed, deleted } = await getChangedActivities()
 
-  core.info(`Found ${activities.length} changed activities`)
+  core.info(`Found ${changed.length} changed activities, ${deleted.length} deleted activities`)
 
   //* If no activities changed, return success
-  if (activities.length === 0) {
+  if (changed.length === 0 && deleted.length === 0) {
     await octokit.rest.repos.createCommitStatus({
       ...context.repo,
       sha: pullRequest.head.sha,
@@ -133,7 +133,7 @@ export async function updateAssets() {
     })
 
     let valid = true
-    for (const activity of activities) {
+    for (const activity of changed) {
       const assetsManager = new AssetsManager(activity.folder, activity.metadata, activity.versionized)
 
       const assets = await assetsManager.getAssets()
@@ -158,9 +158,17 @@ export async function updateAssets() {
 
     core.info('Assets validated, updating assets...')
 
-    //* Update assets for each activity
     let count = 0
-    for (const activity of activities) {
+
+    //* Delete assets for each deleted activity
+    for (const activity of deleted) {
+      const assetsManager = new AssetsManager(activity.folder, activity.metadata, activity.versionized)
+
+      count += await assetsManager.deleteCdnAssets()
+    }
+
+    //* Update assets for each activity
+    for (const activity of changed) {
       const assetsManager = new AssetsManager(activity.folder, activity.metadata, activity.versionized)
 
       count += await assetsManager.updateCdnAssets()

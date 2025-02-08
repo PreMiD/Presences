@@ -506,4 +506,10 @@ export class AssetsManager {
     if (changed)
       await writeFile(resolve(this.cwd, 'metadata.json'), metadata, 'utf-8')
   }
+
+  async deleteCdnAssets(): Promise<number> {
+    const cdnAssets = await this.getCdnAssets()
+    await this.deleteAssets(cdnAssets.map(asset => asset.url))
+    return cdnAssets.length
+  }
 }

@@ -33,8 +33,15 @@ export async function getActivities(): Promise<ActivityMetadataAndFolder[]> {
   })
 }
 
-export async function getChangedActivities(): Promise<ActivityMetadataAndFolder[]> {
-  const changedFiles = (isCI ? await getChangedFilesCi() : await getChangedFilesLocal()).map(file => resolve(process.cwd(), decodeUtf8Escapes(file)))
+export async function getChangedActivities(): Promise<{
+  changed: ActivityMetadataAndFolder[]
+  deleted: ActivityMetadataAndFolder[]
+}> {
+  const changedFiles = (isCI ? await getChangedFilesCi() : await getChangedFilesLocal())
+    .map(file => ({
+      ...file,
+      path: resolve(process.cwd(), decodeUtf8Escapes(file.path)),
+    }))
   const activityPaths = new Set<string>()
 
   const endAt = [
@@ -43,8 +50,9 @@ export async function getChangedActivities(): Promise<ActivityMetadataAndFolder[
     `${process.cwd()}/websites`,
   ]
 
-  for (const file of changedFiles) {
-    let path = file
+  const modifiedAddedFiles = changedFiles.filter(file => !file.deleted)
+  for (const file of modifiedAddedFiles) {
+    let path = file.path
     while (!existsSync(resolve(path, 'metadata.json'))) {
       path = dirname(path)
       if (endAt.includes(path)) {
@@ -59,11 +67,48 @@ export async function getChangedActivities(): Promise<ActivityMetadataAndFolder[
     activityPaths.add(path)
   }
 
-  return (await Promise.all(Array.from(activityPaths).map(async (folder): Promise<ActivityMetadataAndFolder> => ({
-    metadata: JSON.parse(await readFile(resolve(folder, 'metadata.json'), 'utf-8')),
-    folder,
-    versionized: multimatch(folder, '**/websites/*/*/v*').length > 0,
-  }))))
+  const deletedFolders = new Set<string>(
+    changedFiles
+      //* Make sure the file is deleted
+      .filter(file => file.deleted)
+      //* Get the folder of the deleted file
+      .map(file => dirname(file.path))
+      //* Make sure the file is in the websites folder
+      .filter(folder => multimatch(folder, ['**/websites/*/*/v*', '**/websites/*/*']).length > 0)
+      //* Make sure the folder is not in the activityPaths set
+      .filter(folder => !Array.from(activityPaths).some(activityPath => activityPath.startsWith(folder))),
+  )
+
+  return {
+    changed: (
+      await Promise.all(
+        Array.from(activityPaths)
+          .map(async (folder): Promise<ActivityMetadataAndFolder> => ({
+            metadata: JSON.parse(await readFile(resolve(folder, 'metadata.json'), 'utf-8')),
+            folder,
+            versionized: multimatch(folder, '**/websites/*/*/v*').length > 0,
+          })),
+      )
+    ),
+    deleted: Array.from(deletedFolders).map((folder) => {
+      const versionized = multimatch(folder, '**/websites/*/*/v*').length > 0
+      const [, service, apiVersion] = /websites\/[^/]+\/([^/]+)(?:\/v(\d+))?$/.exec(folder) || []
+      return {
+        metadata: {
+          service,
+          apiVersion: versionized ? Number(apiVersion) : 1,
+          description: {
+            en: 'No description available',
+          },
+          logo: '',
+          thumbnail: '',
+          version: '1.0.0',
+        },
+        folder,
+        versionized,
+      }
+    }),
+  }
 }
 
 async function getChangedFilesCi() {
@@ -98,14 +143,21 @@ async function getChangedFilesCi() {
   })
 
   const files = gitDiffParser.parse(await response.text())
-  return files.map(file => file.newPath)
+  return files.map(file => ({ path: file.newPath || file.oldPath, deleted: file.type === 'delete' }))
 }
 
 async function getChangedFilesLocal() {
   const base = execSync('git merge-base main HEAD').toString().trim()
   const head = execSync('git rev-parse HEAD').toString().trim()
-  const changedFiles = execSync(`git diff --name-only ${base} ${head}`).toString().trim().split('\n')
-  return changedFiles
+  const diffOutput = execSync(`git diff --name-status ${base} ${head}`).toString().trim()
+
+  return diffOutput.split('\n').map((line) => {
+    const [status, path] = line.split('\t')
+    return {
+      path,
+      deleted: status === 'D',
+    }
+  })
 }
 
 function decodeUtf8Escapes(filePath: string) {

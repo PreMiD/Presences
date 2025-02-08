@@ -13,20 +13,20 @@ export async function buildChanged({
   validate: boolean
   sarif: boolean
 }) {
-  const changedActivities = await getChangedActivities()
-  if (changedActivities.length === 0) {
+  const { changed } = await getChangedActivities()
+  if (changed.length === 0) {
     success('No changed activities found')
   }
 
-  info(`Building ${changedActivities.length} activities...`)
+  info(`Building ${changed.length} activities...`)
 
   let successful = true
-  for (const activity of changedActivities) {
+  for (const activity of changed) {
     const isSuccess = await buildActivity({ path: activity.folder, activity: activity.metadata, versionized: activity.versionized, kill, validate, watch: false })
     successful = successful && isSuccess
   }
 
-  info(`${changedActivities.length} activities built ${successful ? 'successfully' : 'with errors'}`)
+  info(`${changed.length} activities built ${successful ? 'successfully' : 'with errors'}`)
 
   if (sarif) {
     await writeSarifLog()
