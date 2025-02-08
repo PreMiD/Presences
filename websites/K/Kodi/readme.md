@@ -16,4 +16,4 @@ Needed for the Kodi activity to work.
 
 ![image](https://i.imgur.com/HRqK5MV.png)
 
-\_This MD file is an edit of [the PreMiD VLC activity MD file](https://github.com/PreMiD/Activities/blob/master/websites/V/VLC/readme.md) originally meant for VLC, but was modified to work for Kodi. Thanks to them though, as well as the [original modified MD file.](https://github.com/azrafe7/vlc4youtube/blob/master/instructions/how-to-enable-vlc-web-interface.md)
+\_This MD file is an edit of [the PreMiD VLC activity MD file](https://github.com/PreMiD/Presences/blob/main/websites/V/VLC/readme.md) originally meant for VLC, but was modified to work for Kodi. Thanks to them though, as well as the [original modified MD file.](https://github.com/azrafe7/vlc4youtube/blob/master/instructions/how-to-enable-vlc-web-interface.md)
