@@ -3,14 +3,13 @@
 const iframe = new iFrame();
 
 iframe.on("UpdateData", async () => {
-  const video = document.querySelector<HTMLVideoElement>("video");
+	const video: HTMLVideoElement = document.querySelector("video");
 
-  if (video) {
-    iframe.send({
-      current: video.currentTime,
-      duration: video.duration,
-      paused: video.paused,
-      isLive: false
-    });
-  }
+	if (video) {
+		iframe.send({
+			paused: video.paused,
+			duration: video.duration,
+			currentTime: video.currentTime,
+		});
+	}
 });
