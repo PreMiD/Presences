@@ -48,7 +48,6 @@ presence.on("iFrameData", async (data: IFrameData) => {
 
 async function getAnimeData(animeId: string): Promise<AnimeData> {
     try {
-        // Sayfa içindeki başlığı almayı deneyelim
         const titleElement = document.querySelector(".anime-title");
         if (titleElement && titleElement.textContent) {
             return {
@@ -56,7 +55,6 @@ async function getAnimeData(animeId: string): Promise<AnimeData> {
             };
         }
 
-        // Başlık bulunamadıysa API'den almayı deneyelim
         const response = await fetch(`https://backend.anitilky.xyz/api/anime/${animeId}`);
         if (!response.ok) throw new Error('API error');
         const data = await response.json();
