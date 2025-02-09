@@ -177,12 +177,17 @@ export class AssetsManager {
 
       for (const match of matches) {
         //* If the url contains a template literal, skip it
-        if (match[1].includes(`\${`))
+        if (match[1].includes('${'))
           continue
 
-        //* Regex to check if the url contains + " or + ' or + `
+        //* Skip URLs that are concatenated with strings (e.g., "https://" + "example.com/image.png")
         if (/(?<=\+ )["'`].*?["'`]/.test(match[1]))
           continue
+
+        //* Skip URLs that are followed by string methods (e.g., "https://example.com/image.png").toLowerCase())
+        if (/(?<!\\)["'`]\)?\./.test(match[1])) {
+          continue
+        }
 
         const url = match[1]
         const line = content.substring(0, match.index).split('\n').length
