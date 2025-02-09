@@ -1,3 +1,5 @@
+/// <reference types="premid" />
+
 declare class Presence {
     constructor(presenceOptions: { clientId: string });
     getTimestamps(start: number, end: number): [number, number];
