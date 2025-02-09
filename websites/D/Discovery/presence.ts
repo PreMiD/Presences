@@ -24,7 +24,7 @@ async function capitalizeFirstLetter(string: string) {
   return stringTrimmed.charAt(0).toUpperCase() + stringTrimmed.slice(1)
 }
 enum ActivityAssets {
-  Loading = 'https://cdn.rcd.gg/PreMiD/websites/D/Discovery/assets/0.gif',
+  Loading = 'https://i.imgur.com/7M0c8bI.gif',
   LogoDiscoveryPlus = 'https://cdn.rcd.gg/PreMiD/websites/D/Discovery/assets/1.png',
   LogoDiscovery = 'https://cdn.rcd.gg/PreMiD/websites/D/Discovery/assets/logo.png',
 }

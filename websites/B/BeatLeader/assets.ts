@@ -170,8 +170,8 @@ export const logoArr = [
   'https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/79.png', // Poodleader
   'https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/80.png', // GladdePaling
   'https://cdn.rcd.gg/PreMiD/websites/B/BeatLeader/assets/81.gif', // EarthDay
-  `https://i.imgur.com${'/Kf8bXNc.gif'}`, // Christmas 2022
-  `https://i.imgur.com${'/4dpoXYa.gif'}`, // Christmas 2023
+  'https://i.imgur.com/Kf8bXNc.gif', // Christmas 2022
+  'https://i.imgur.com/4dpoXYa.gif', // Christmas 2023
 ] as const
 
 export const contexts: Record<string, string> = {

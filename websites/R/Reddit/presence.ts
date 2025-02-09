@@ -10,7 +10,7 @@ let oldLang: string | null = null
 
 enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/R/Reddit/assets/logo.png',
-  NetflixLogo = 'https://i.imgur.com/Aw5rIOI\u002Egif',
+  NetflixLogo = 'https://i.imgur.com/Aw5rIOI.gif',
 }
 
 async function getStrings() {
