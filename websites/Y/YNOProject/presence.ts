@@ -75,7 +75,7 @@ async function fetchCharacterFace(): Promise<string | undefined> {
  * (Surprisingly Discord supports GIFs in small image so it's no need to resample)
  *
  * @example 'url("star-transparent.gif")'.match(it)?.[2] // star-transparent.gif
- * @example "url('https://cdn.rcd.gg/PreMiD/websites/Y/YNOProject/assets/0.png')".match(it)?.[2] // https://cdn.rcd.gg/PreMiD/websites/Y/YNOProject/assets/0.png
+ * @example "url('https://image_url')".match(it)?.[2] // image_url
  * @returns Entire URL or nothing for guest player
  */
 async function fetchBadge(): Promise<string | undefined> {
