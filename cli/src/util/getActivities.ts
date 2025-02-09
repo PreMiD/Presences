@@ -20,7 +20,9 @@ export interface ActivityMetadataAndFolder {
 export async function getActivities(): Promise<ActivityMetadataAndFolder[]> {
   return (await Promise.all(
     (
-      await globby([`${process.cwd()}/websites/*/*/metadata.json`, `${process.cwd()}/websites/*/*/v*/metadata.json`])
+      await globby([`websites/*/*/metadata.json`, `websites/*/*/v*/metadata.json`], {
+        absolute: true,
+      })
     ).map(async (file): Promise<ActivityMetadataAndFolder> => ({
       metadata: JSON.parse(await readFile(file, 'utf-8')),
       folder: dirname(file),
@@ -47,7 +49,7 @@ export async function getChangedActivities(): Promise<{
   const endAt = [
     '/',
     process.cwd(),
-    `${process.cwd()}/websites`,
+    resolve(process.cwd(), 'websites'),
   ]
 
   const modifiedAddedFiles = changedFiles.filter(file => !file.deleted)
