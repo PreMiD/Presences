@@ -4,16 +4,17 @@ const presence = new Presence({
 		clientId: "1124065204200820786",
 	}),
 	strings = presence.getStrings({
-		playing: "general.playing",
-		paused: "general.paused",
-		browsing: "general.browsing",
+		play: "general.playing",
+		pause: "general.paused",
+		browse: "general.browsing",
 	}),
 	startTimestamp = Math.floor(Date.now() / 1000);
 
 let video = {
-	currentTime: 0,
+	current: 0,
 	duration: 0,
 	paused: true,
+	isLive: false
 };
 
 type AnimeData = {
@@ -30,7 +31,7 @@ type UserData = {
 	avatar?: string;
 };
 
-presence.on("iFrameData", async (data: { currentTime: number; duration: number; paused: boolean }) => {
+presence.on("iFrameData", async (data: { current: number; duration: number; paused: boolean; isLive: boolean }) => {
 	if (!data) return;
 	video = data;
 });
@@ -96,41 +97,24 @@ presence.on("UpdateData", async () => {
 
 	// Ana sayfa kontrolü
 	if (document.location.pathname === "/") {
-		presenceData.details = (await strings).browsing;
+		presenceData.details = (await strings).browse;
 		presenceData.startTimestamp = startTimestamp;
 	}
 	// Kendi profil sayfası kontrolü
 	else if (document.location.pathname === "/profile") {
 		const username = document.querySelector(".profile-username")?.textContent?.trim();
-		if (username && username !== lastUsername) {
-			lastUsername = username;
-			lastUserData = await getUserData(username);
-		}
 		
 		presenceData.details = "Kendi profiline bakıyor";
-		presenceData.state = lastUserData?.username || username || "Profil";
+		presenceData.state = username || "Profil";
 		presenceData.startTimestamp = startTimestamp;
-		
-		if (lastUserData?.avatar && /^https?:\/\/.+\.(png|jpe?g|gif|webp)$/.test(lastUserData.avatar)) {
-			presenceData.largeImageKey = lastUserData.avatar;
-		}
 	}
 	// Başka kullanıcı profili kontrolü
 	else if (document.location.pathname.startsWith("/u/")) {
 		const username = document.location.pathname.split('/').pop() || '';
-		
-		if (username !== lastUsername) {
-			lastUsername = username;
-			lastUserData = await getUserData(username);
-		}
 
 		presenceData.details = "Kullanıcı profiline bakıyor";
-		presenceData.state = lastUserData?.username || username;
+		presenceData.state = username;
 		presenceData.startTimestamp = startTimestamp;
-		
-		if (lastUserData?.avatar && /^https?:\/\/.+\.(png|jpe?g|gif|webp)$/.test(lastUserData.avatar)) {
-			presenceData.largeImageKey = lastUserData.avatar;
-		}
 		
 		presenceData.buttons = [
 			{
@@ -142,19 +126,11 @@ presence.on("UpdateData", async () => {
 	// Anime detay sayfası kontrolü
 	else if (/^\/anime\/[0-9a-f]{24}$/.test(document.location.pathname)) {
 		const animeId = document.location.pathname.split('/').pop() || '';
+		const titleElement = document.querySelector(".anime-title");
 		
-		if (animeId !== lastAnimeId) {
-			lastAnimeId = animeId;
-			lastAnimeData = await getAnimeData(animeId);
-		}
-
 		presenceData.details = "Anime detayına bakıyor";
-		presenceData.state = lastAnimeData?.title?.tr || lastAnimeData?.title?.romaji || lastAnimeData?.title?.english || "Bilinmeyen Anime";
+		presenceData.state = titleElement?.textContent?.trim() || "Bilinmeyen Anime";
 		presenceData.startTimestamp = startTimestamp;
-		
-		if (lastAnimeData?.coverImage && /^https?:\/\/.+\.(png|jpe?g|gif|webp)$/.test(lastAnimeData.coverImage)) {
-			presenceData.largeImageKey = lastAnimeData.coverImage;
-		}
 		
 		presenceData.buttons = [
 			{
@@ -169,29 +145,21 @@ presence.on("UpdateData", async () => {
 		const urlParams = new URLSearchParams(window.location.search);
 		const season = urlParams.get('season') || '1';
 		const episode = urlParams.get('episode') || '1';
-		
-		if (animeId !== lastAnimeId) {
-			lastAnimeId = animeId;
-			lastAnimeData = await getAnimeData(animeId);
-		}
+		const titleElement = document.querySelector(".anime-title");
 
-		presenceData.details = lastAnimeData?.title?.tr || lastAnimeData?.title?.romaji || lastAnimeData?.title?.english || "Bilinmeyen Anime";
+		presenceData.details = titleElement?.textContent?.trim() || "Bilinmeyen Anime";
 		presenceData.state = `Sezon ${season} Bölüm ${episode}`;
-		
-		if (lastAnimeData?.coverImage && /^https?:\/\/.+\.(png|jpe?g|gif|webp)$/.test(lastAnimeData.coverImage)) {
-			presenceData.largeImageKey = lastAnimeData.coverImage;
-		}
 		
 		if (video) {
 			presenceData.smallImageKey = video.paused ? "pause" : "play";
 			presenceData.smallImageText = video.paused 
-				? (await strings).paused 
-				: (await strings).playing;
+				? (await strings).pause
+				: (await strings).play;
 
 			if (!video.paused && video.duration) {
 				[presenceData.startTimestamp, presenceData.endTimestamp] = 
 					presence.getTimestamps(
-						Math.floor(video.currentTime),
+						Math.floor(video.current),
 						Math.floor(video.duration)
 					);
 			}
