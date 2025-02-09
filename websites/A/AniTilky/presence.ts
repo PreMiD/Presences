@@ -1,38 +1,38 @@
 /// <reference types="premid" />
 
 interface AnimeData {
-    title: {
-        tr?: string;
-        romaji?: string;
-        english?: string;
-    };
-    coverImage?: string;
+  title: {
+    tr?: string;
+    romaji?: string;
+    english?: string;
+  };
+  coverImage?: string;
 }
 
 interface UserData {
-    username: string;
-    avatar?: string;
+  username: string;
+  avatar?: string;
 }
 
 interface IFrameData {
-    duration: number;
-    currentTime: number;
-    paused: boolean;
+  duration: number;
+  currentTime: number;
+  paused: boolean;
 }
 
 const presence = new Presence({
     clientId: "1124065204200820786"
-}),
-strings = presence.getStrings({
+  }),
+  strings = presence.getStrings({
     playing: "general.playing",
     paused: "general.paused",
     browsing: "general.browsing"
-}),
-startTimestamp = Math.floor(Date.now() / 1000);
+  }),
+  startTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
-    Logo = "logo",
-    DefaultAvatar = "logo"
+  Logo = "logo",
+  DefaultAvatar = "logo"
 }
 
 let video: IFrameData,
