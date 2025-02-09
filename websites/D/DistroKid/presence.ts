@@ -14,7 +14,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/D/Distrokid/assets/logo.png',
+    largeImageKey: 'https://i.imgur.com/HECWWks.png',
     startTimestamp: browsingTimestamp,
   }
   const { pathname } = document.location
