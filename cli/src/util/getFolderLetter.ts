@@ -1,5 +1,5 @@
-export function getFolderLetter(activity: string) {
-  const firstLetter = activity.trim().charAt(0).toUpperCase()
+export function getFolderLetter(service: string) {
+  const firstLetter = service.trim().charAt(0).toUpperCase()
 
   if (/[A-Z]/.test(firstLetter))
     return firstLetter
