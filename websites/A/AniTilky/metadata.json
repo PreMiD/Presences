@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.10",
+    "author": {
+        "name": "hakanxd",
+        "id": "725520758117498881"
+    },
+    "service": "AniTilky",
+
+    "description": {
+        "en": "Watch Turkish dubbed and subtitled anime, track your progress, and discover new series.",
+        "tr": "Türkçe dublajlı ve altyazılı anime izle, ilerlemenizi takip edin ve yeni seriler keşfedin."
+    },
+    "url": "anitilky.xyz",
+    "version": "1.0.0",
+    "logo": "https://imgur.com/a/OD1bF6h",
+    "thumbnail": "https://imgur.com/a/VBzteMx",
+    "color": "#FF6B6B",
+    "category": "anime",
+    "tags": [
+        "anime",
+        "video",
+        "streaming",
+        "turkish"
+    ],
+    "iframe": true,
+    "iFrameRegExp": "anitilky\\.xyz",
+    "apiVersion": "3.1.0"
+} 
