@@ -838,4 +838,104 @@ describe('assetsManager', () => {
       expect(mocks.writeFile).not.toHaveBeenCalled()
     })
   })
+
+  describe('deleteCdnAssets', () => {
+    beforeEach(() => {
+      vi.clearAllMocks()
+      process.env.CDN_TOKEN = 'test-token'
+    })
+
+    it('should delete all CDN assets and return the count', async () => {
+      const mockCdnAssets: CdnAsset[] = [
+        {
+          type: AssetType.Logo,
+          url: `${assetsManager.baseUrl}/logo.png`,
+          mimeType: MimeType.PNG,
+        },
+        {
+          type: AssetType.Thumbnail,
+          url: `${assetsManager.baseUrl}/thumbnail.jpg`,
+          mimeType: MimeType.JPG,
+        },
+        {
+          type: AssetType.ActivityAsset,
+          url: `${assetsManager.baseUrl}/0.webp`,
+          mimeType: MimeType.WEBP,
+          index: 0,
+        },
+      ]
+
+      //* Mock getCdnAssets to return our test assets
+      vi.spyOn(assetsManager, 'getCdnAssets').mockResolvedValue(mockCdnAssets)
+
+      const result = await assetsManager.deleteCdnAssets()
+
+      //* Verify all assets were deleted
+      expect(result).toBe(3)
+      expect(mocks.ky.delete).toHaveBeenCalledTimes(3)
+      expect(mocks.ky.delete).toHaveBeenCalledWith(
+        `${assetsManager.baseUrl}/logo.png`,
+        expect.any(Object),
+      )
+      expect(mocks.ky.delete).toHaveBeenCalledWith(
+        `${assetsManager.baseUrl}/thumbnail.jpg`,
+        expect.any(Object),
+      )
+      expect(mocks.ky.delete).toHaveBeenCalledWith(
+        `${assetsManager.baseUrl}/0.webp`,
+        expect.any(Object),
+      )
+    })
+
+    it('should return 0 when no CDN assets exist', async () => {
+      //* Mock getCdnAssets to return empty array
+      vi.spyOn(assetsManager, 'getCdnAssets').mockResolvedValue([])
+
+      const result = await assetsManager.deleteCdnAssets()
+
+      //* Verify no delete calls were made
+      expect(result).toBe(0)
+      expect(mocks.ky.delete).not.toHaveBeenCalled()
+    })
+
+    it('should handle failed deletions gracefully', async () => {
+      const mockCdnAssets: CdnAsset[] = [
+        {
+          type: AssetType.Logo,
+          url: `${assetsManager.baseUrl}/logo.png`,
+          mimeType: MimeType.PNG,
+        },
+        {
+          type: AssetType.Thumbnail,
+          url: `${assetsManager.baseUrl}/thumbnail.jpg`,
+          mimeType: MimeType.JPG,
+        },
+      ]
+
+      //* Mock getCdnAssets to return our test assets
+      vi.spyOn(assetsManager, 'getCdnAssets').mockResolvedValue(mockCdnAssets)
+
+      //* Mock one deletion to fail
+      mocks.ky.delete.mockImplementation((url) => {
+        if (url.toString().includes('thumbnail.jpg')) {
+          return Promise.reject(new Error('Failed to delete'))
+        }
+        return Promise.resolve()
+      })
+
+      const result = await assetsManager.deleteCdnAssets()
+
+      //* Verify all assets were attempted to be deleted
+      expect(result).toBe(2)
+      expect(mocks.ky.delete).toHaveBeenCalledTimes(2)
+      expect(mocks.ky.delete).toHaveBeenCalledWith(
+        `${assetsManager.baseUrl}/logo.png`,
+        expect.any(Object),
+      )
+      expect(mocks.ky.delete).toHaveBeenCalledWith(
+        `${assetsManager.baseUrl}/thumbnail.jpg`,
+        expect.any(Object),
+      )
+    })
+  })
 })
