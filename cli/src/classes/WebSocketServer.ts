@@ -14,8 +14,8 @@ export class WebSocketServer {
     this.server = new WSServer({ port: 3021 })
 
     this.server.on('connection', (socket) => {
-      info('Connected to the extension!')
-      if (this.resendOnConnect) {
+      if (this.resendOnConnect && !this.isSending) {
+        info('Connected to the extension!')
         this.send()
       }
 
@@ -26,11 +26,18 @@ export class WebSocketServer {
   }
 
   private resendOnConnect = false
+  private isSending = false
   async send() {
     this.resendOnConnect = true
     if (this.server.clients.size === 0 || [...this.server.clients.values()].every(client => client.readyState !== WebSocket.OPEN)) {
       return
     }
+
+    if (this.isSending) {
+      return
+    }
+
+    this.isSending = true
 
     const distPath = resolve(this.cwd, 'dist')
     if (!existsSync(distPath))
@@ -50,14 +57,30 @@ export class WebSocketServer {
 
       expectedCount++
 
+      const timeout = setTimeout(removeExpectedCount, 3000)
+
+      function removeExpectedCount() {
+        expectedCount--
+        finish()
+      }
+
+      function finish() {
+        clearTimeout(timeout)
+
+        client.off('message', onMessage)
+        client.off('close', removeExpectedCount)
+      }
+
       function onMessage(message: RawData) {
         if (message.toString() === 'received') {
           receivedCount++
-          client.off('message', onMessage)
+          finish()
         }
       }
 
       client.on('message', onMessage)
+
+      client.on('close', removeExpectedCount)
 
       client.send(JSON.stringify({
         type: 'localPresence',
@@ -86,5 +109,7 @@ export class WebSocketServer {
     }
 
     spinner.succeed(prefix + chalk.greenBright(' Activity sent to the extension!'))
+
+    this.isSending = false
   }
 }
