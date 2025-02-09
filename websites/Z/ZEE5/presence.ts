@@ -6,7 +6,7 @@ const presence = new Presence({
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 enum ActivityAssets {
-  Logo = 'https://cdn.rcd.gg/PreMiD/websites/Z/Zee5/assets/logo.jpg',
+  Logo = 'https://i.imgur.com/DLO2Xdw.jpeg',
 }
 function getVideoStatus(presenceData: PresenceData, video: HTMLVideoElement) {
   if (video.paused) {
