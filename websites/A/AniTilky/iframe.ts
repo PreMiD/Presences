@@ -1,6 +1,6 @@
 declare class iFrame {
-	on(event: string, callback: Function): void;
-	send(data: any): void;
+	on(event: string, callback: (data?: unknown) => void): void;
+	send(data: Record<string, unknown>): void;
 }
 
 const iframe = new iFrame();

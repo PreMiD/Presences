@@ -2,7 +2,7 @@ declare class Presence {
     constructor(presenceOptions: { clientId: string });
     getTimestamps(start: number, end: number): [number, number];
     setActivity(data?: PresenceData): void;
-    on(event: string, callback: Function): void;
+    on(event: string, callback: (data?: unknown) => void): void;
     getStrings(strings: { playing: string; paused: string; browsing: string }): Promise<{ playing: string; paused: string; browsing: string }>;
 }
 
@@ -14,10 +14,7 @@ interface PresenceData {
     largeImageKey?: string;
     smallImageKey?: string;
     smallImageText?: string;
-    buttons?: Array<{
-        label: string;
-        url: string;
-    }>;
+    buttons?: { label: string; url: string }[];
 }
 
 interface AnimeData {
@@ -92,29 +89,20 @@ async function getAnimeData(animeId: string): Promise<AnimeData> {
 async function getUserData(username: string): Promise<UserData> {
     try {
         const response = await fetch(`https://backend.anitilky.xyz/api/user/profile/${username}`);
-        if (!response.ok) throw new Error('API error');
+        if (!response.ok) throw new Error("API error");
         const data = await response.json();
-        console.log("API Response:", data); // Debug için
 
-        // API'den gelen profil resmini doğrudan kullan
         const profileImage = data.profileImage || Assets.DefaultAvatar;
-        console.log("Profile Image:", profileImage); // Debug için
 
         return {
             username: data.username || username,
             avatar: profileImage
         };
     } catch (error) {
-        console.error("Kullanıcı verisi alınamadı:", error);
-        // Sayfa içinden kullanıcı bilgilerini almayı deneyelim
         const usernameElement = document.querySelector(".profile-username");
         const avatarElement = document.querySelector(".profile-avatar");
         
-        let avatar = null;
-        if (avatarElement) {
-            avatar = avatarElement.getAttribute("src");
-            console.log("DOM Avatar:", avatar); // Debug için
-        }
+        const avatar = avatarElement ? avatarElement.getAttribute("src") : null;
 
         if (usernameElement?.textContent) {
             return {
@@ -122,10 +110,8 @@ async function getUserData(username: string): Promise<UserData> {
                 avatar: avatar || Assets.DefaultAvatar
             };
         }
-        return {
-            username: username,
-            avatar: Assets.DefaultAvatar
-        };
+        
+        return { username, avatar: Assets.DefaultAvatar };
     }
 }
 
