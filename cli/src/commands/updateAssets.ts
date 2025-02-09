@@ -4,22 +4,9 @@ import * as github from '@actions/github'
 import isCI from 'is-ci'
 import { AssetsManager } from '../classes/AssetsManager.js'
 import { getChangedActivities } from '../util/getActivities.js'
-import { exit, success } from '../util/log.js'
+import { exit, MESSAGES, success } from '../util/log.js'
 
 const NAME = 'pmd/assets-updater'
-const MESSAGES = {
-  ciOnly: 'This command can only be run in a CI environment',
-  noPullRequest: 'This command can only be run in a pull request',
-  noToken: 'GITHUB_TOKEN environment variable is required',
-  noCdnToken: 'CDN_TOKEN environment variable is required',
-  noActivities: 'No activities changed',
-  waitingForApprovals: 'Waiting for 2 approvals...',
-  checkingAndUpdatingAssets: 'Checking and updating assets...',
-  someInvalidAssets: 'Some invalid assets were found, check the logs for more details',
-  assetsUpdated: 'Assets have been updated successfully',
-  error: 'An error occurred',
-  assetsUpdatedCount: (count: number) => count === 0 ? 'No assets updated' : `${count} assets updated successfully`,
-}
 
 //* Command to update assets and manage GitHub status checks in PRs
 export async function updateAssets() {
@@ -34,8 +21,7 @@ export async function updateAssets() {
 
   //* Only run for PreMiD/Presences repository
   if (github.context.repo.owner !== 'PreMiD' || github.context.repo.repo !== 'Presences') {
-    core.info('Skipping assets update - not in PreMiD/Presences repository')
-    return success('Skipping - not in PreMiD/Presences repository')
+    return success(MESSAGES.wrongRepository)
   }
 
   const token = process.env.GITHUB_TOKEN
