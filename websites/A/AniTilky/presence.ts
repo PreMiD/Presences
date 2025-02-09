@@ -14,36 +14,42 @@ interface UserData {
   avatar?: string;
 }
 
-interface IFrameData {
+interface VideoData {
+  current: number;
   duration: number;
-  currentTime: number;
   paused: boolean;
+  isLive: boolean;
 }
 
 const presence = new Presence({
     clientId: "1124065204200820786"
   }),
   strings = presence.getStrings({
-    playing: "general.playing",
-    paused: "general.paused",
-    browsing: "general.browsing"
+    play: "general.playing",
+    pause: "general.paused",
+    browse: "general.browsing"
   }),
   startTimestamp = Math.floor(Date.now() / 1000);
 
 const enum Assets {
   Logo = "logo",
-  DefaultAvatar = "logo"
+  DefaultAvatar = "default_avatar"
 }
 
-let video: IFrameData,
-    lastAnimeId: string | null = null,
-    lastAnimeData: AnimeData | null = null,
-    lastUsername: string | null = null,
-    lastUserData: UserData | null = null;
+let videoData: VideoData = {
+    current: 0,
+    duration: 0,
+    paused: true,
+    isLive: false
+  },
+  lastAnimeId: string | null = null,
+  lastAnimeData: AnimeData | null = null,
+  lastUsername: string | null = null,
+  lastUserData: UserData | null = null;
 
-presence.on("iFrameData", async (data: IFrameData) => {
-    if (!data) return;
-    video = data;
+presence.on("iFrameData", async (data: VideoData) => {
+  if (!data) return;
+  videoData = data;
 });
 
 async function getAnimeData(animeId: string): Promise<AnimeData> {
@@ -105,7 +111,7 @@ presence.on("UpdateData", async () => {
 
     // Ana sayfa kontrolü
     if (document.location.pathname === "/") {
-        presenceData.details = (await strings).browsing;
+        presenceData.details = (await strings).browse;
         presenceData.startTimestamp = startTimestamp;
     }
     // Kendi profil sayfası kontrolü
@@ -206,17 +212,17 @@ presence.on("UpdateData", async () => {
             presenceData.largeImageKey = Assets.Logo;
         }
         
-        if (video) {
-            presenceData.smallImageKey = video.paused ? "pause" : "play";
-            presenceData.smallImageText = video.paused 
-                ? (await strings).paused 
-                : (await strings).playing;
+        if (videoData) {
+            presenceData.smallImageKey = videoData.paused ? "pause" : "play";
+            presenceData.smallImageText = videoData.paused 
+                ? (await strings).pause
+                : (await strings).play;
 
-            if (!video.paused && video.duration) {
+            if (!videoData.paused && videoData.duration) {
                 [presenceData.startTimestamp, presenceData.endTimestamp] = 
                     presence.getTimestamps(
-                        Math.floor(video.currentTime),
-                        Math.floor(video.duration)
+                        Math.floor(videoData.current),
+                        Math.floor(videoData.duration)
                     );
             }
         }
