@@ -40,7 +40,7 @@ const presencePages: { [k: string]: string } = {
 presence.on('UpdateData', async () => {
   const path = document.location.pathname
   const presenceData: PresenceData = {
-    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/G/GAIN/assets/logo.jpg',
+    largeImageKey: 'https://i.imgur.com/r3OZ52D.jpeg',
     startTimestamp: Math.floor(Date.now() / 1000),
   }
   const settings = await presenceSettings()
