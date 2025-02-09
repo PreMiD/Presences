@@ -5,6 +5,7 @@ import { cac } from 'cac'
 import { build } from './commands/build.js'
 import { bump } from './commands/bump.js'
 import { newActivity } from './commands/new.js'
+import { release } from './commands/release.js'
 import { updateAssets } from './commands/updateAssets.js'
 import { getPackageJson } from './util/getPackageJson.js'
 import { exit } from './util/log.js'
@@ -47,6 +48,10 @@ cli
 cli
   .command('update-assets', 'Update assets for all activities in CI')
   .action(updateAssets)
+
+cli
+  .command('release', 'Release all activities in CI')
+  .action(release)
 
 cli.help()
 cli.version(cliPackageJson.version)

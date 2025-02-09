@@ -1,0 +1,33 @@
+name: pmd
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.ts'
+      - '**.json'
+jobs:
+  update:
+    if: github.repository_owner == 'PreMiD'
+    name: Update Activities
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: npm
+
+      - name: Install PMD
+        run: HUSKY=0 npm ci
+
+      - name: Update Activities
+        run: npx pmd release
+        env:
+          MONGO_URL: ${{ secrets.MONGO_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
