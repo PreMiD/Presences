@@ -1,24 +1,5 @@
 /// <reference types="premid" />
 
-declare class Presence {
-    constructor(presenceOptions: { clientId: string });
-    getTimestamps(start: number, end: number): [number, number];
-    setActivity(data?: PresenceData): void;
-    on(event: string, callback: (data?: unknown) => void): void;
-    getStrings(strings: { playing: string; paused: string; browsing: string }): Promise<{ playing: string; paused: string; browsing: string }>;
-}
-
-interface PresenceData {
-    details?: string;
-    state?: string;
-    startTimestamp?: number;
-    endTimestamp?: number;
-    largeImageKey?: string;
-    smallImageKey?: string;
-    smallImageText?: string;
-    buttons?: { label: string; url: string }[];
-}
-
 interface AnimeData {
     title: {
         tr?: string;
@@ -31,6 +12,12 @@ interface AnimeData {
 interface UserData {
     username: string;
     avatar?: string;
+}
+
+interface IFrameData {
+    duration: number;
+    currentTime: number;
+    paused: boolean;
 }
 
 const presence = new Presence({
@@ -46,12 +33,6 @@ startTimestamp = Math.floor(Date.now() / 1000);
 const enum Assets {
     Logo = "logo",
     DefaultAvatar = "logo"
-}
-
-interface IFrameData {
-    duration: number;
-    currentTime: number;
-    paused: boolean;
 }
 
 let video: IFrameData,

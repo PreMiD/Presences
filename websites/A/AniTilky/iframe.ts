@@ -1,10 +1,5 @@
 /// <reference types="premid" />
 
-declare class iFrame {
-	on(event: string, callback: (data?: unknown) => void): void;
-	send(data: Record<string, unknown>): void;
-}
-
 const iframe = new iFrame();
 
 iframe.on("UpdateData", async () => {
