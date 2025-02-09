@@ -52,11 +52,11 @@ interface IFrameData {
     paused: boolean;
 }
 
-let video: IFrameData;
-let lastAnimeId: string | null = null;
-let lastAnimeData: AnimeData | null = null;
-let lastUsername: string | null = null;
-let lastUserData: UserData | null = null;
+let video: IFrameData,
+    lastAnimeId: string | null = null,
+    lastAnimeData: AnimeData | null = null,
+    lastUsername: string | null = null,
+    lastUserData: UserData | null = null;
 
 presence.on("iFrameData", async (data: IFrameData) => {
     if (!data) return;
