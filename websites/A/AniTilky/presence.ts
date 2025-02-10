@@ -110,11 +110,13 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Kendi profiline bakıyor";
 			presenceData.state = userInfo?.username || username;
 			presenceData.largeImageKey = userInfo?.avatar;
-		} else presenceData.details = "Profiline bakıyor";
+		} else {
+			presenceData.details = "Profiline bakıyor";
+		}
 		presenceData.startTimestamp = time;
 	} else if (path.startsWith("/u/")) {
-		const username = path.split("/").pop() || "",
-			userInfo = await getUserInfo(username);
+		const username = path.split("/").pop() || "";
+		const userInfo = await getUserInfo(username);
 
 		presenceData.details = "Kullanıcı profiline bakıyor";
 		presenceData.state = userInfo?.username || username;
@@ -151,11 +153,11 @@ presence.on("UpdateData", async () => {
 			},
 		];
 	} else if (/^\/watch\/([0-9a-f]{24})$/.test(path)) {
-		const animeId = path.split("/").pop() || "",
-			urlParams = new URLSearchParams(window.location.search),
-			season = urlParams.get("season") || "1",
-			episode = urlParams.get("episode") || "1",
-			animeInfo = await getAnimeInfo(animeId);
+		const animeId = path.split("/").pop() || "";
+		const urlParams = new URLSearchParams(window.location.search);
+		const season = urlParams.get("season") || "1";
+		const episode = urlParams.get("episode") || "1";
+		const animeInfo = await getAnimeInfo(animeId);
 
 		presenceData.details =
 			animeInfo?.title.romaji ||
@@ -172,7 +174,9 @@ presence.on("UpdateData", async () => {
 
 		if (typeof videoData.paused === "boolean") {
 			presenceData.smallImageKey = videoData.paused ? "pause" : "play";
-			presenceData.smallImageText = videoData.paused ? "Duraklatıldı" : "Oynatılıyor";
+			presenceData.smallImageText = videoData.paused
+				? "Duraklatıldı"
+				: "Oynatılıyor";
 
 			if (!videoData.paused && videoData.duration > 0) {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
@@ -198,6 +202,9 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = time;
 	}
 
-	if (presenceData.details) presence.setActivity(presenceData);
-	else presence.setActivity();
+	if (presenceData.details) {
+		presence.setActivity(presenceData);
+	} else {
+		presence.setActivity();
+	}
 });
