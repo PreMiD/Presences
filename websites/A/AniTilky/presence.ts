@@ -1,10 +1,8 @@
 /// <reference types="premid" />
 
-declare const presence: Presence;
-
-const presenceData: PresenceData = {
-	largeImageKey: "logo"
-};
+const presence = new Presence({
+	clientId: "1124065204200820786"
+});
 
 const strings = presence.getStrings({
 	playing: "general.playing",
@@ -101,7 +99,7 @@ presence.on("UpdateData", async () => {
 
 	// Ana sayfa kontrolü
 	if (document.location.pathname === "/") {
-		presenceData.details = (await strings).browsing;
+		presenceData.details = "Ana sayfaya göz atıyor";
 		presenceData.startTimestamp = startTimestamp;
 	}
 	// Kendi profil sayfası kontrolü
@@ -157,8 +155,8 @@ presence.on("UpdateData", async () => {
 		if (video) {
 			presenceData.smallImageKey = video.paused ? "pause" : "play";
 			presenceData.smallImageText = video.paused 
-				? (await strings).paused 
-				: (await strings).playing;
+				? "Duraklatıldı" 
+				: "Oynatılıyor";
 
 			if (!video.paused && video.duration) {
 				[presenceData.startTimestamp, presenceData.endTimestamp] = 
