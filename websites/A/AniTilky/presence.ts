@@ -1,15 +1,15 @@
 /// <reference types="premid" />
 
 export const presence = new Presence({
-	clientId: "1124065204200820786"
-}),
+		clientId: "1124065204200820786",
+	}),
 	time = Math.floor(Date.now() / 1000),
 	path = document.location.pathname,
 	videoData = {
 		current: 0,
 		duration: 0,
 		paused: true,
-		isLive: false
+		isLive: false,
 	},
 	baseUrl = "https://anitilky.xyz",
 	apiUrl = "https://backend.anitilky.xyz/api";
@@ -74,7 +74,9 @@ async function getAnimeInfo(animeId: string): Promise<AnimeResponse | null> {
 }
 
 // Kullanıcı bilgilerini çekmek için fonksiyon
-async function getUserInfo(username: string): Promise<UserResponse["data"] | null> {
+async function getUserInfo(
+	username: string
+): Promise<UserResponse["data"] | null> {
 	try {
 		const response = await fetch(`${apiUrl}/user/profile/${username}`);
 		if (!response.ok) throw new Error("Kullanıcı bilgisi alınamadı");
@@ -82,7 +84,7 @@ async function getUserInfo(username: string): Promise<UserResponse["data"] | nul
 		if (!data.success || !data.data) return null;
 		return {
 			...data.data,
-			avatar: data.data.avatar || "logo"
+			avatar: data.data.avatar || "logo",
 		};
 	} catch {
 		return null;
@@ -96,14 +98,16 @@ presence.on("iFrameData", async (data: VideoData) => {
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	if (path === "/") {
 		presenceData.details = "Ana sayfaya göz atıyor";
 		presenceData.startTimestamp = time;
 	} else if (path === "/profile") {
-		const username = document.querySelector(".profile-username")?.textContent?.trim(),
+		const username = document
+				.querySelector(".profile-username")
+				?.textContent?.trim(),
 			userInfo = username ? await getUserInfo(username) : null;
 
 		if (username) {
@@ -124,8 +128,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Profile Bak",
-				url: `${baseUrl}/u/${username}`
-			}
+				url: `${baseUrl}/u/${username}`,
+			},
 		];
 	} else if (/^\/anime\/([0-9a-f]{24})$/.test(path)) {
 		const animeInfo = await getAnimeInfo(path.split("/").pop() || "");
@@ -147,8 +151,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Anime Sayfasına Git",
-				url: `${baseUrl}${path}`
-			}
+				url: `${baseUrl}${path}`,
+			},
 		];
 	} else if (/^\/watch\/([0-9a-f]{24})$/.test(path)) {
 		const animeId = path.split("/").pop() || "",
@@ -172,34 +176,34 @@ presence.on("UpdateData", async () => {
 
 		if (typeof videoData.paused === "boolean") {
 			presenceData.smallImageKey = videoData.paused ? "pause" : "play";
-			presenceData.smallImageText = videoData.paused ? "Duraklatıldı" : "Oynatılıyor";
+			presenceData.smallImageText = videoData.paused
+				? "Duraklatıldı"
+				: "Oynatılıyor";
 
 			if (!videoData.paused && videoData.duration > 0) {
-				[presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(
-					Math.floor(videoData.current),
-					Math.floor(videoData.duration)
-				);
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(
+						Math.floor(videoData.current),
+						Math.floor(videoData.duration)
+					);
 			}
 		}
 
 		presenceData.buttons = [
 			{
 				label: "Anime Sayfasına Git",
-				url: `${baseUrl}/anime/${animeId}`
+				url: `${baseUrl}/anime/${animeId}`,
 			},
 			{
 				label: "Bölüme Git",
-				url: `${baseUrl}${path}?season=${season}&episode=${episode}`
-			}
+				url: `${baseUrl}${path}?season=${season}&episode=${episode}`,
+			},
 		];
 	} else if (path.includes("/anime")) {
 		presenceData.details = "Anime listesine göz atıyor";
 		presenceData.startTimestamp = time;
 	}
 
-	if (presenceData.details) {
-		presence.setActivity(presenceData);
-	} else {
-		presence.setActivity();
-	}
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
