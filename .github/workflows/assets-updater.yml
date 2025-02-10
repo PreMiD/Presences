@@ -35,7 +35,7 @@ jobs:
         env:
           CDN_TOKEN: ${{ secrets.CDN_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          HEAD_REF: ${{ github.head_ref }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
         run: |
           # Configure git
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
