@@ -1,8 +1,8 @@
 /// <reference types="premid" />
 
 export const presence = new Presence({
-		clientId: "1124065204200820786",
-	}),
+	clientId: "1124065204200820786",
+}),
 	time = Math.floor(Date.now() / 1000),
 	path = document.location.pathname,
 	videoData = {
@@ -128,8 +128,7 @@ presence.on("UpdateData", async () => {
 			},
 		];
 	} else if (/^\/anime\/([0-9a-f]{24})$/.test(path)) {
-		const animeId = path.split("/").pop() || "",
-			animeInfo = await getAnimeInfo(animeId);
+		const animeInfo = await getAnimeInfo(path.split("/").pop() || "");
 
 		presenceData.details = "Anime detayına bakıyor";
 		presenceData.state =
@@ -138,10 +137,11 @@ presence.on("UpdateData", async () => {
 			animeInfo?.title.native ||
 			"Yükleniyor...";
 		presenceData.largeImageKey = animeInfo?.coverImage || "logo";
-		if (animeInfo)
+		if (animeInfo) {
 			presenceData.smallImageText = `${animeInfo.type || "TV"} • ${
 				animeInfo.status || "Devam Ediyor"
 			}`;
+		}
 		presenceData.startTimestamp = time;
 
 		presenceData.buttons = [
@@ -164,10 +164,11 @@ presence.on("UpdateData", async () => {
 			"Yükleniyor...";
 		presenceData.state = `Sezon ${season} Bölüm ${episode}`;
 		presenceData.largeImageKey = animeInfo?.coverImage || "logo";
-		if (animeInfo)
+		if (animeInfo) {
 			presenceData.smallImageText = `${animeInfo.type || "TV"} • ${
 				animeInfo.status || "Devam Ediyor"
 			}`;
+		}
 
 		if (typeof videoData.paused === "boolean") {
 			presenceData.smallImageKey = videoData.paused ? "pause" : "play";
