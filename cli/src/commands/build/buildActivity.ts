@@ -37,13 +37,10 @@ export async function buildActivity({
     }
   }
 
-  // Check if tsconfig.json exists, if not, create it
-  if (!existsSync(resolve(path, 'tsconfig.json'))) {
-    await cp(
-      resolve(process.cwd(), `cli/templates/tsconfig${versionized ? '.versionized' : ''}.json`),
-      resolve(path, 'tsconfig.json'),
-    )
-  }
+  await cp(
+    resolve(process.cwd(), `cli/templates/tsconfig${versionized ? '.versionized' : ''}.json`),
+    resolve(path, 'tsconfig.json'),
+  )
 
   const compiler = new ActivityCompiler(path, activity, versionized)
   if (watch) {
