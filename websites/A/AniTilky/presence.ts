@@ -10,7 +10,11 @@ videoData = {
 	duration: 0,
 	paused: true,
 	isLive: false
-};
+},
+baseUrl = "https://anitilky.xyz",
+Assets = {
+	Logo: "logo"
+} as const;
 
 const strings = presence.getStrings({
 	playing: "general.playing",
@@ -37,29 +41,20 @@ presence.on("iFrameData", async (data: { current: number; duration: number; paus
 	Object.assign(videoData, data);
 });
 
-const enum Assets {
-	Logo = "logo"
-}
-
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: Assets.Logo
-	},
-	baseUrl = "https://anitilky.xyz";
+	};
 
 	// Ana sayfa kontrolü
 	if (path === "/") {
 		presenceData.details = "Ana sayfaya göz atıyor";
 		presenceData.startTimestamp = time;
-	}
-	// Kendi profil sayfası kontrolü
-	else if (path === "/profile") {
+	} else if (path === "/profile") { // Kendi profil sayfası kontrolü
 		presenceData.details = "Kendi profiline bakıyor";
 		presenceData.state = document.querySelector(".profile-username")?.textContent?.trim() || "Profil";
 		presenceData.startTimestamp = time;
-	}
-	// Başka kullanıcı profili kontrolü
-	else if (path.startsWith("/u/")) {
+	} else if (path.startsWith("/u/")) { // Başka kullanıcı profili kontrolü
 		const username = path.split("/").pop() || "";
 
 		presenceData.details = "Kullanıcı profiline bakıyor";
@@ -72,9 +67,7 @@ presence.on("UpdateData", async () => {
 				url: `${baseUrl}/u/${username}`
 			}
 		];
-	}
-	// Anime detay sayfası kontrolü
-	else if (/^\/anime\/[0-9a-f]{24}$/.test(path)) {
+	} else if (/^\/anime\/[0-9a-f]{24}$/.test(path)) { // Anime detay sayfası kontrolü
 		const animeId = path.split("/").pop() || "",
 		titleElement = document.querySelector(".anime-title");
 		
@@ -88,9 +81,7 @@ presence.on("UpdateData", async () => {
 				url: `${baseUrl}/anime/${animeId}`
 			}
 		];
-	}
-	// Anime izleme sayfası kontrolü
-	else if (/^\/watch\/[0-9a-f]{24}$/.test(path)) {
+	} else if (/^\/watch\/[0-9a-f]{24}$/.test(path)) { // Anime izleme sayfası kontrolü
 		const animeId = path.split("/").pop() || "",
 		urlParams = new URLSearchParams(window.location.search),
 		season = urlParams.get('season') || '1',
@@ -125,9 +116,7 @@ presence.on("UpdateData", async () => {
 				url: `${baseUrl}/watch/${animeId}?season=${season}&episode=${episode}`
 			}
 		];
-	}
-	// Anime liste sayfası kontrolü
-	else if (path.includes("/anime")) {
+	} else if (path.includes("/anime")) { // Anime liste sayfası kontrolü
 		presenceData.details = "Anime listesine göz atıyor";
 		presenceData.startTimestamp = time;
 	}
