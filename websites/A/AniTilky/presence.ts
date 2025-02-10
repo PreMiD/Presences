@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 		
 		presenceData.buttons = [{
 			label: "Profile Bak",
-			url: `${baseUrl}/u/${presenceData.state}`
+			url: `${baseUrl}/u/${presenceData.state}`,
 		}];
 	} else if (/^\/anime\/[0-9a-f]{24}$/.test(path)) { // Anime detay sayfası kontrolü
 		presenceData.details = "Anime detayına bakıyor";
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
 		
 		presenceData.buttons = [{
 			label: "Anime Sayfasına Git",
-			url: `${baseUrl}${path}`
+			url: `${baseUrl}${path}`,
 		}];
 	} else if (/^\/watch\/[0-9a-f]{24}$/.test(path)) { // Anime izleme sayfası kontrolü
 		const urlParams = new URLSearchParams(window.location.search),
@@ -93,17 +93,17 @@ presence.on("UpdateData", async () => {
 				[presenceData.startTimestamp, presenceData.endTimestamp] = 
 					presence.getTimestamps(
 						Math.floor(videoData.current),
-						Math.floor(videoData.duration)
+						Math.floor(videoData.duration),
 					);
 			}
 		}
 		
 		presenceData.buttons = [{
 			label: "Anime Sayfasına Git",
-			url: `${baseUrl}/anime/${path.split("/").pop()}`
+			url: `${baseUrl}/anime/${path.split("/").pop()}`,
 		}, {
 			label: "Bölüme Git",
-			url: `${baseUrl}${path}?season=${season}&episode=${episode}`
+			url: `${baseUrl}${path}?season=${season}&episode=${episode}`,
 		}];
 	} else if (path.includes("/anime")) { // Anime liste sayfası kontrolü
 		presenceData.details = "Anime listesine göz atıyor";
