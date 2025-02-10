@@ -11,10 +11,13 @@ videoData = {
 	paused: true,
 	isLive: false
 },
-baseUrl = "https://anitilky.xyz",
-Assets = {
-	Logo: "logo"
-} as const;
+baseUrl = "https://anitilky.xyz";
+
+namespace PreMiD {
+	export enum Assets {
+		Logo = "logo"
+	}
+}
 
 const strings = presence.getStrings({
 	playing: "general.playing",
@@ -43,7 +46,7 @@ presence.on("iFrameData", async (data: { current: number; duration: number; paus
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: Assets.Logo
+		largeImageKey: "logo"
 	};
 
 	// Ana sayfa kontrolü
@@ -55,40 +58,29 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.querySelector(".profile-username")?.textContent?.trim() || "Profil";
 		presenceData.startTimestamp = time;
 	} else if (path.startsWith("/u/")) { // Başka kullanıcı profili kontrolü
-		const username = path.split("/").pop() || "";
-
 		presenceData.details = "Kullanıcı profiline bakıyor";
-		presenceData.state = username;
+		presenceData.state = path.split("/").pop() || "";
 		presenceData.startTimestamp = time;
 		
-		presenceData.buttons = [
-			{
-				label: "Profile Bak",
-				url: `${baseUrl}/u/${username}`
-			}
-		];
+		presenceData.buttons = [{
+			label: "Profile Bak",
+			url: `${baseUrl}/u/${presenceData.state}`
+		}];
 	} else if (/^\/anime\/[0-9a-f]{24}$/.test(path)) { // Anime detay sayfası kontrolü
-		const animeId = path.split("/").pop() || "",
-		titleElement = document.querySelector(".anime-title");
-		
 		presenceData.details = "Anime detayına bakıyor";
-		presenceData.state = titleElement?.textContent?.trim() || "Bilinmeyen Anime";
+		presenceData.state = document.querySelector(".anime-title")?.textContent?.trim() || "Bilinmeyen Anime";
 		presenceData.startTimestamp = time;
 		
-		presenceData.buttons = [
-			{
-				label: "Anime Sayfasına Git",
-				url: `${baseUrl}/anime/${animeId}`
-			}
-		];
+		presenceData.buttons = [{
+			label: "Anime Sayfasına Git",
+			url: `${baseUrl}${path}`
+		}];
 	} else if (/^\/watch\/[0-9a-f]{24}$/.test(path)) { // Anime izleme sayfası kontrolü
-		const animeId = path.split("/").pop() || "",
-		urlParams = new URLSearchParams(window.location.search),
-		season = urlParams.get('season') || '1',
-		episode = urlParams.get('episode') || '1',
-		titleElement = document.querySelector(".anime-title");
+		const urlParams = new URLSearchParams(window.location.search),
+			season = urlParams.get("season") || "1",
+			episode = urlParams.get("episode") || "1";
 
-		presenceData.details = titleElement?.textContent?.trim() || "Bilinmeyen Anime";
+		presenceData.details = document.querySelector(".anime-title")?.textContent?.trim() || "Bilinmeyen Anime";
 		presenceData.state = `Sezon ${season} Bölüm ${episode}`;
 		
 		if (videoData) {
@@ -106,23 +98,18 @@ presence.on("UpdateData", async () => {
 			}
 		}
 		
-		presenceData.buttons = [
-			{
-				label: "Anime Sayfasına Git",
-				url: `${baseUrl}/anime/${animeId}`
-			},
-			{
-				label: "Bölüme Git",
-				url: `${baseUrl}/watch/${animeId}?season=${season}&episode=${episode}`
-			}
-		];
+		presenceData.buttons = [{
+			label: "Anime Sayfasına Git",
+			url: `${baseUrl}/anime/${path.split("/").pop()}`
+		}, {
+			label: "Bölüme Git",
+			url: `${baseUrl}${path}?season=${season}&episode=${episode}`
+		}];
 	} else if (path.includes("/anime")) { // Anime liste sayfası kontrolü
 		presenceData.details = "Anime listesine göz atıyor";
 		presenceData.startTimestamp = time;
 	}
 
-	if (presenceData.details) 
-		presence.setActivity(presenceData);
-	else
-		presence.setActivity();
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 }); 
