@@ -14,6 +14,13 @@ export const presence = new Presence({
 	baseUrl = "https://anitilky.xyz",
 	apiUrl = "https://backend.anitilky.xyz/api";
 
+interface VideoData {
+	current: number;
+	duration: number;
+	paused: boolean;
+	isLive: boolean;
+}
+
 interface AnimeResponse {
 	title: {
 		romaji: string;
@@ -34,14 +41,14 @@ interface AnimeResponse {
 	endDate: string;
 	rating: number;
 	genres: string[];
-	seasons: {
+	seasons: Array<{
 		seasonNumber: number;
 		title: string;
-		episodes: {
+		episodes: Array<{
 			episodeNumber: number;
 			title: string;
-		}[];
-	}[];
+		}>;
+	}>;
 }
 
 interface UserResponse {
@@ -61,7 +68,7 @@ async function getAnimeInfo(animeId: string): Promise<AnimeResponse | null> {
 		const data: AnimeResponse = await response.json();
 		if (!data) return null;
 		return data;
-	} catch (error) {
+	} catch {
 		return null;
 	}
 }
@@ -77,12 +84,12 @@ async function getUserInfo(username: string): Promise<UserResponse["data"] | nul
 			...data.data,
 			avatar: data.data.avatar || "logo"
 		};
-	} catch (error) {
+	} catch {
 		return null;
 	}
 }
 
-presence.on("iFrameData", async data => {
+presence.on("iFrameData", async (data: VideoData) => {
 	if (!data) return;
 	Object.assign(videoData, data);
 });
@@ -103,7 +110,9 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Kendi profiline bakıyor";
 			presenceData.state = userInfo?.username || username;
 			presenceData.largeImageKey = userInfo?.avatar;
-		} else presenceData.details = "Profiline bakıyor";
+		} else {
+			presenceData.details = "Profiline bakıyor";
+		}
 		presenceData.startTimestamp = time;
 	} else if (path.startsWith("/u/")) {
 		const username = path.split("/").pop() || "",
@@ -193,6 +202,9 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = time;
 	}
 
-	if (presenceData.details) presence.setActivity(presenceData);
-	else presence.setActivity();
+	if (presenceData.details) {
+		presence.setActivity(presenceData);
+	} else {
+		presence.setActivity();
+	}
 });
