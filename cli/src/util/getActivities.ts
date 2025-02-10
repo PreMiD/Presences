@@ -123,6 +123,7 @@ async function getChangedFilesCi() {
 
   switch (context.eventName) {
     case 'pull_request':
+    case 'pull_request_review':
       base = context.payload.pull_request?.base?.sha
       head = context.payload.pull_request?.head?.sha
       break
