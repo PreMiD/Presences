@@ -41,14 +41,14 @@ interface AnimeResponse {
 	endDate: string;
 	rating: number;
 	genres: string[];
-	seasons: Array<{
+	seasons: {
 		seasonNumber: number;
 		title: string;
-		episodes: Array<{
+		episodes: {
 			episodeNumber: number;
 			title: string;
-		}>;
-	}>;
+		}[];
+	}[];
 }
 
 interface UserResponse {
