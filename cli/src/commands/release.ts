@@ -68,7 +68,9 @@ export async function release() {
     exit(MESSAGES.noMongoConnection)
   }
 
-  const collection = client.db('PreMiD').collection<DbData>('presences')
+  const connectToDev = process.env.CONNECT_TO_DEV === 'true'
+  const database = client.db(connectToDev ? 'PreMiD-DEV' : 'PreMiD')
+  const collection = database.collection<DbData>('presences')
 
   if (deleted.length) {
     await collection.deleteMany({
