@@ -1,3 +1,4 @@
+import { execSync } from 'node:child_process'
 import process from 'node:process'
 import * as core from '@actions/core'
 import * as github from '@actions/github'
@@ -7,6 +8,12 @@ import { getChangedActivities } from '../util/getActivities.js'
 import { exit, MESSAGES, success } from '../util/log.js'
 
 const NAME = 'pmd/assets-updater'
+
+//* Checks if there are any git changes in the working directory
+function hasGitChanges(): boolean {
+  const output = execSync('git status --porcelain').toString()
+  return output.length > 0
+}
 
 //* Command to update assets and manage GitHub status checks in PRs
 export async function updateAssets() {
@@ -31,6 +38,11 @@ export async function updateAssets() {
 
   if (!process.env.CDN_TOKEN) {
     return exit(MESSAGES.noCdnToken)
+  }
+
+  const headRef = process.env.HEAD_REF
+  if (!headRef) {
+    return exit(MESSAGES.noHeadRef)
   }
 
   const octokit = github.getOctokit(token)
@@ -162,11 +174,52 @@ export async function updateAssets() {
 
     core.info(`Updated ${count} assets`)
 
+    //* Check if there are any changes to commit
+    if (!hasGitChanges()) {
+      core.info('No changes to commit')
+      await octokit.rest.repos.createCommitStatus({
+        ...context.repo,
+        sha: pullRequest.head.sha,
+        state: 'success',
+        description: MESSAGES.assetsUpdatedCount(count),
+        context: NAME,
+      })
+      return
+    }
+
+    //* Run ESLint on changed files
+    const changedFiles = execSync('git diff --name-only HEAD').toString().trim()
+    const tsAndJsonFiles = changedFiles.split('\n').filter(file => file.endsWith('.ts') || file.endsWith('.json'))
+
+    if (tsAndJsonFiles.length > 0) {
+      core.info('Running ESLint on changed files')
+      execSync(`npx eslint --fix ${tsAndJsonFiles.join(' ')}`)
+    }
+
+    //* Eslint may have changed the files back to the original state, so we need to check again
+    if (!hasGitChanges()) {
+      core.info('No changes to commit')
+      await octokit.rest.repos.createCommitStatus({
+        ...context.repo,
+        sha: pullRequest.head.sha,
+        state: 'success',
+        description: MESSAGES.assetsUpdatedCount(count),
+        context: NAME,
+      })
+      return
+    }
+
+    //* Commit and push changes
+    core.info('Committing and pushing changes')
+    execSync('git add .')
+    execSync('git commit -m "chore: update assets"')
+    execSync(`git push origin HEAD:"${headRef}"`)
+
     await octokit.rest.repos.createCommitStatus({
       ...context.repo,
       sha: pullRequest.head.sha,
-      state: 'success',
-      description: MESSAGES.assetsUpdatedCount(count),
+      state: 'pending',
+      description: MESSAGES.assetsUpdatedCount(count, true),
       context: NAME,
     })
   }

@@ -27,6 +27,7 @@ export const MESSAGES = {
   noToken: 'GITHUB_TOKEN environment variable is required',
   noCdnToken: 'CDN_TOKEN environment variable is required',
   noMongoUrl: 'MONGO_URL environment variable is required',
+  noHeadRef: 'HEAD_REF environment variable is required',
   noMongoConnection: 'Failed to connect to MongoDB',
   noActivities: 'No activities changed',
   waitingForApprovals: 'Waiting for 2 approvals...',
@@ -35,5 +36,5 @@ export const MESSAGES = {
   assetsUpdated: 'Assets have been updated successfully',
   error: 'An error occurred',
   wrongRepository: 'This command can only be run in PreMiD/Presences repository',
-  assetsUpdatedCount: (count: number) => count === 0 ? 'No assets updated' : `${count} assets updated successfully`,
+  assetsUpdatedCount: (count: number, committing = false) => count === 0 ? 'No assets updated' : `${count} assets updated successfully${committing ? ' and pushed to GitHub' : ''}`,
 }

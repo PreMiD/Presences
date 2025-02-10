@@ -43,14 +43,3 @@ jobs:
 
           # Run PMD update-assets command
           npx pmd update-assets
-
-          # Check if there are changes
-          if [[ -n $(git status --porcelain) ]]; then
-            # Run ESLint on changed files
-            npx eslint --fix $(git diff --name-only HEAD | grep -E '\.(ts|json)$' | xargs)
-
-            # Commit the changes
-            git add .
-            git commit -m "chore: update assets"
-            git push origin HEAD:"$HEAD_REF"
-          fi
