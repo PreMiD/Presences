@@ -12,7 +12,7 @@ export const presence = new Presence({
 		isLive: false,
 	},
 	baseUrl = "https://anitilky.xyz",
-	apiUrl = "https://backend.anitilky.xyz/api"; // API versiyonu eklendi
+	apiUrl = "https://backend.anitilky.xyz/api";
 
 interface AnimeResponse {
 	title: {
@@ -34,14 +34,14 @@ interface AnimeResponse {
 	endDate: string;
 	rating: number;
 	genres: string[];
-	seasons: Array<{
+	seasons: {
 		seasonNumber: number;
 		title: string;
-		episodes: Array<{
+		episodes: {
 			episodeNumber: number;
 			title: string;
-		}>;
-	}>;
+		}[];
+	}[];
 }
 
 interface UserResponse {
@@ -62,13 +62,14 @@ async function getAnimeInfo(animeId: string): Promise<AnimeResponse | null> {
 		if (!data) return null;
 		return data;
 	} catch (error) {
-		console.error("Anime bilgisi alınamadı:", error);
 		return null;
 	}
 }
 
 // Kullanıcı bilgilerini çekmek için fonksiyon
-async function getUserInfo(username: string): Promise<UserResponse["data"] | null> {
+async function getUserInfo(
+	username: string
+): Promise<UserResponse["data"] | null> {
 	try {
 		const response = await fetch(`${apiUrl}/user/profile/${username}`);
 		if (!response.ok) throw new Error("Kullanıcı bilgisi alınamadı");
@@ -79,7 +80,6 @@ async function getUserInfo(username: string): Promise<UserResponse["data"] | nul
 			avatar: data.data.avatar || "logo",
 		};
 	} catch (error) {
-		console.error("Kullanıcı bilgisi alınamadı:", error);
 		return null;
 	}
 }
@@ -108,20 +108,20 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = time;
 	} else if (path === "/profile") {
 		// Kendi profil sayfası kontrolü
-		const username = document.querySelector(".profile-username")?.textContent?.trim();
+		const username = document
+			.querySelector(".profile-username")
+			?.textContent?.trim();
 		if (username) {
 			const userInfo = await getUserInfo(username);
 			presenceData.details = "Kendi profiline bakıyor";
 			presenceData.state = userInfo?.username || username;
 			presenceData.largeImageKey = userInfo?.avatar;
-		} else {
-			presenceData.details = "Profiline bakıyor";
-		}
+		} else presenceData.details = "Profiline bakıyor";
 		presenceData.startTimestamp = time;
 	} else if (path.startsWith("/u/")) {
 		// Başka kullanıcı profili kontrolü
-		const username = path.split("/").pop() || "";
-		const userInfo = await getUserInfo(username);
+		const username = path.split("/").pop() || "",
+			userInfo = await getUserInfo(username);
 
 		presenceData.details = "Kullanıcı profiline bakıyor";
 		presenceData.state = userInfo?.username || username;
@@ -136,15 +136,17 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (/^\/anime\/([0-9a-f]{24})$/.test(path)) {
 		// Anime detay sayfası kontrolü
-		const animeId = path.split("/").pop();
-		const animeInfo = await getAnimeInfo(animeId);
+		const animeId = path.split("/").pop() || "",
+			animeInfo = await getAnimeInfo(animeId);
 
 		presenceData.details = "Anime detayına bakıyor";
-		presenceData.state = animeInfo?.title.romaji || animeInfo?.title.english || animeInfo?.title.native || "Yükleniyor...";
+		presenceData.state =
+			animeInfo?.title.romaji ||
+			animeInfo?.title.english ||
+			animeInfo?.title.native ||
+			"Yükleniyor...";
 		presenceData.largeImageKey = animeInfo?.coverImage || "logo";
-		if (animeInfo) {
-			presenceData.smallImageText = `${animeInfo.type || "TV"} • ${animeInfo.status || "Devam Ediyor"}`;
-		}
+		if (animeInfo) presenceData.smallImageText = `${animeInfo.type || "TV"} • ${animeInfo.status || "Devam Ediyor"}`;
 		presenceData.startTimestamp = time;
 
 		presenceData.buttons = [
@@ -155,18 +157,20 @@ presence.on("UpdateData", async () => {
 		];
 	} else if (/^\/watch\/([0-9a-f]{24})$/.test(path)) {
 		// Anime izleme sayfası kontrolü
-		const animeId = path.split("/").pop();
-		const urlParams = new URLSearchParams(window.location.search);
-		const season = urlParams.get("season") || "1";
-		const episode = urlParams.get("episode") || "1";
-		const animeInfo = await getAnimeInfo(animeId);
+		const animeId = path.split("/").pop() || "",
+			urlParams = new URLSearchParams(window.location.search),
+			season = urlParams.get("season") || "1",
+			episode = urlParams.get("episode") || "1",
+			animeInfo = await getAnimeInfo(animeId);
 
-		presenceData.details = animeInfo?.title.romaji || animeInfo?.title.english || animeInfo?.title.native || "Yükleniyor...";
+		presenceData.details =
+			animeInfo?.title.romaji ||
+			animeInfo?.title.english ||
+			animeInfo?.title.native ||
+			"Yükleniyor...";
 		presenceData.state = `Sezon ${season} Bölüm ${episode}`;
 		presenceData.largeImageKey = animeInfo?.coverImage || "logo";
-		if (animeInfo) {
-			presenceData.smallImageText = `${animeInfo.type || "TV"} • ${animeInfo.status || "Devam Ediyor"}`;
-		}
+		if (animeInfo) presenceData.smallImageText = `${animeInfo.type || "TV"} • ${animeInfo.status || "Devam Ediyor"}`;
 
 		if (typeof videoData.paused === "boolean") {
 			presenceData.smallImageKey = videoData.paused ? "pause" : "play";
