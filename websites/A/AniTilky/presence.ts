@@ -104,9 +104,10 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Ana sayfaya göz atıyor";
 		presenceData.startTimestamp = time;
 	} else if (path === "/profile") {
-		const username = document.querySelector(".profile-username")?.textContent?.trim();
+		const username = document.querySelector(".profile-username")?.textContent?.trim(),
+			userInfo = username ? await getUserInfo(username) : null;
+
 		if (username) {
-			const userInfo = await getUserInfo(username);
 			presenceData.details = "Kendi profiline bakıyor";
 			presenceData.state = userInfo?.username || username;
 			presenceData.largeImageKey = userInfo?.avatar;
