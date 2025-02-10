@@ -138,10 +138,11 @@ presence.on("UpdateData", async () => {
 			animeInfo?.title.native ||
 			"Yükleniyor...";
 		presenceData.largeImageKey = animeInfo?.coverImage || "logo";
-		if (animeInfo)
+		if (animeInfo) {
 			presenceData.smallImageText = `${animeInfo.type || "TV"} • ${
 				animeInfo.status || "Devam Ediyor"
 			}`;
+		}
 		presenceData.startTimestamp = time;
 
 		presenceData.buttons = [
@@ -164,10 +165,11 @@ presence.on("UpdateData", async () => {
 			"Yükleniyor...";
 		presenceData.state = `Sezon ${season} Bölüm ${episode}`;
 		presenceData.largeImageKey = animeInfo?.coverImage || "logo";
-		if (animeInfo)
+		if (animeInfo) {
 			presenceData.smallImageText = `${animeInfo.type || "TV"} • ${
 				animeInfo.status || "Devam Ediyor"
 			}`;
+		}
 
 		if (typeof videoData.paused === "boolean") {
 			presenceData.smallImageKey = videoData.paused ? "pause" : "play";
@@ -175,12 +177,13 @@ presence.on("UpdateData", async () => {
 				? "Duraklatıldı"
 				: "Oynatılıyor";
 
-			if (!videoData.paused && videoData.duration > 0)
+			if (!videoData.paused && videoData.duration > 0) {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestamps(
 						Math.floor(videoData.current),
 						Math.floor(videoData.duration)
 					);
+			}
 		}
 
 		presenceData.buttons = [
