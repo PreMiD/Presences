@@ -67,9 +67,7 @@ async function getAnimeInfo(animeId: string): Promise<AnimeResponse | null> {
 }
 
 // Kullanıcı bilgilerini çekmek için fonksiyon
-async function getUserInfo(
-	username: string
-): Promise<UserResponse["data"] | null> {
+async function getUserInfo(username: string): Promise<UserResponse["data"] | null> {
 	try {
 		const response = await fetch(`${apiUrl}/user/profile/${username}`);
 		if (!response.ok) throw new Error("Kullanıcı bilgisi alınamadı");
@@ -86,12 +84,7 @@ async function getUserInfo(
 
 presence.on(
 	"iFrameData",
-	async (data: {
-		current: number;
-		duration: number;
-		paused: boolean;
-		isLive: boolean;
-	}) => {
+	async (data: { current: number; duration: number; paused: boolean; isLive: boolean }) => {
 		if (!data) return;
 		Object.assign(videoData, data);
 	}
@@ -108,9 +101,7 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = time;
 	} else if (path === "/profile") {
 		// Kendi profil sayfası kontrolü
-		const username = document
-			.querySelector(".profile-username")
-			?.textContent?.trim();
+		const username = document.querySelector(".profile-username")?.textContent?.trim();
 		if (username) {
 			const userInfo = await getUserInfo(username);
 			presenceData.details = "Kendi profiline bakıyor";
@@ -176,16 +167,13 @@ presence.on("UpdateData", async () => {
 
 		if (typeof videoData.paused === "boolean") {
 			presenceData.smallImageKey = videoData.paused ? "pause" : "play";
-			presenceData.smallImageText = videoData.paused
-				? "Duraklatıldı"
-				: "Oynatılıyor";
+			presenceData.smallImageText = videoData.paused ? "Duraklatıldı" : "Oynatılıyor";
 
 			if (!videoData.paused && videoData.duration > 0) {
-				[presenceData.startTimestamp, presenceData.endTimestamp] =
-					presence.getTimestamps(
-						Math.floor(videoData.current),
-						Math.floor(videoData.duration)
-					);
+				[presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(
+					Math.floor(videoData.current),
+					Math.floor(videoData.duration)
+				);
 			}
 		}
 
