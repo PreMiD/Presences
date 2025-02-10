@@ -110,9 +110,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Kendi profiline bakıyor";
 			presenceData.state = userInfo?.username || username;
 			presenceData.largeImageKey = userInfo?.avatar;
-		} else {
-			presenceData.details = "Profiline bakıyor";
-		}
+		} else presenceData.details = "Profiline bakıyor";
 		presenceData.startTimestamp = time;
 	} else if (path.startsWith("/u/")) {
 		const username = path.split("/").pop() || "",
@@ -202,9 +200,6 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = time;
 	}
 
-	if (presenceData.details) {
-		presence.setActivity(presenceData);
-	} else {
-		presence.setActivity();
-	}
+	if (presenceData.details) presence.setActivity(presenceData);
+	else presence.setActivity();
 });
