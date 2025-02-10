@@ -201,6 +201,9 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = time;
 	}
 
-	if (presenceData.details) presence.setActivity(presenceData);
-	else presence.setActivity();
+	if (presenceData.details) {
+		presence.setActivity(presenceData);
+	} else {
+		presence.setActivity();
+	}
 });
