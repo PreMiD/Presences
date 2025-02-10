@@ -1,15 +1,15 @@
 /// <reference types="premid" />
 
-const iframe = new iFrame();
+const iframeProvider = new iFrame();
 
-iframe.on("UpdateData", async () => {
+iframeProvider.on("UpdateData", async () => {
 	const video: HTMLVideoElement = document.querySelector("video");
 
 	if (video) {
-		iframe.send({
+		iframeProvider.send({
 			current: video.currentTime,
 			duration: video.duration,
-			paused: video.paused,
+			paused: video.paused
 		});
 	}
 });
