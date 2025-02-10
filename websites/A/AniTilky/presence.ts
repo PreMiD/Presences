@@ -1,7 +1,7 @@
 /// <reference types="premid" />
 
 export const presence = new Presence({
-	clientId: "1124065204200820786"
+	clientId: "1124065204200820786",
 }),
 	time = Math.floor(Date.now() / 1000),
 	path = document.location.pathname,
