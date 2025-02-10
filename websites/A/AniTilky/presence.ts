@@ -3,15 +3,15 @@
 const presence = new Presence({
 	clientId: "1124065204200820786"
 }),
-time = Math.floor(Date.now() / 1000),
-path = document.location.pathname,
-videoData = {
-	current: 0,
-	duration: 0,
-	paused: true,
-	isLive: false
-},
-baseUrl = "https://anitilky.xyz";
+	time = Math.floor(Date.now() / 1000),
+	path = document.location.pathname,
+	videoData = {
+		current: 0,
+		duration: 0,
+		paused: true,
+		isLive: false
+	},
+	baseUrl = "https://anitilky.xyz";
 
 presence.on("iFrameData", async (data: { current: number; duration: number; paused: boolean; isLive: boolean }) => {
 	if (!data) return;
