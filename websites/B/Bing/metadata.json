@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "Cairo",
@@ -9,10 +9,10 @@
 	"description": {
 		"en": "Bing is a search engine that finds and organizes the answers you need so you can make faster, more informed decisions.",
 		"nl": "Bing is een zoekmachine die de antwoorden vindt en organiseert die u nodig heeft, zodat u snellere en beter geïnformeerde beslissingen kunt nemen.",
-		"vi_VN": "Bing là công cụ tìm kiếm nơi bạn có thể đưa ra các quyết định sáng suốt hơn từ các câu trả lời đã được chọn lọc."
+		"vi": "Bing là công cụ tìm kiếm nơi bạn có thể đưa ra các quyết định sáng suốt hơn từ các câu trả lời đã được chọn lọc."
 	},
 	"url": "www.bing.com",
-	"version": "1.2.27",
+	"version": "1.2.28",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/B/Bing/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/Bing/assets/thumbnail.png",
 	"color": "#00809D",

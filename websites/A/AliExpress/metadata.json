@@ -1,5 +1,5 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.12",
+	"$schema": "https://schemas.premid.app/metadata/1.13",
 	"apiVersion": 1,
 	"author": {
 		"name": "Bas950",
@@ -9,10 +9,10 @@
 	"description": {
 		"en": "Online shopping for the latest electronics, fashion, phone accessories, computer electronics, toys, home&garden, home appliances, tools, home improvement and more.",
 		"nl": "Online winkelen voor de nieuwste elektronica, mode, telefoonaccessoires, computerelektronica, speelgoed, huis & tuin, huishoudelijke apparaten, gereedschappen, huisverbetering en meer.",
-		"zh_CN": "全球速卖通是一个面向全球市场的网络购物平台。",
-		"zh_TW": "全球速賣通是一個面向全球市場的網絡購物平台。",
-		"ga_IE": "Siopadóireacht ar líne le haghaidh na leictreonaice is déanaí, faisean, oiriúintí teileafóin, leictreonaic ríomhaire, bréagáin, baile & gairdín, fearais tí, uirlisí, feabhsú tí agus go leor eile.",
-		"vi_VN": "Mua sắm trực tuyến các thiết bị điện tử mới nhất, thời trang, phụ kiện điện thoại, điện tử vi tính, đồ chơi, đồ gia dụng, công cụ, cải tiến nhà và hơn nữa."
+		"zh": "全球速卖通是一个面向全球市场的网络购物平台。",
+		"zh-tw": "全球速賣通是一個面向全球市場的網絡購物平台。",
+		"ga": "Siopadóireacht ar líne le haghaidh na leictreonaice is déanaí, faisean, oiriúintí teileafóin, leictreonaic ríomhaire, bréagáin, baile & gairdín, fearais tí, uirlisí, feabhsú tí agus go leor eile.",
+		"vi": "Mua sắm trực tuyến các thiết bị điện tử mới nhất, thời trang, phụ kiện điện thoại, điện tử vi tính, đồ chơi, đồ gia dụng, công cụ, cải tiến nhà và hơn nữa."
 	},
 	"url": [
 		"ru.aliexpress.com",
@@ -47,7 +47,7 @@
 		"star.aliexpress.com",
 		"home.aliexpress.com"
 	],
-	"version": "1.2.24",
+	"version": "1.2.25",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/A/AliExpress/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AliExpress/assets/thumbnail.png",
 	"color": "#e62e04",
