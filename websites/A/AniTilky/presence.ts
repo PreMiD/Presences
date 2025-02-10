@@ -1,17 +1,22 @@
 /// <reference types="premid" />
 
-declare const presence: Presence;
-declare const strings: Promise<{
-	playing: string;
-	paused: string;
-	browsing: string;
-}>;
-declare const startTimestamp: number;
-declare const video: {
-	current: number;
-	duration: number;
-	paused: boolean;
-	isLive: boolean;
+const presence = new Presence({
+	clientId: "1124065204200820786"
+});
+
+const strings = presence.getStrings({
+	playing: "general.playing",
+	paused: "general.paused",
+	browsing: "general.browsing"
+});
+
+const startTimestamp = Math.floor(Date.now() / 1000);
+
+let video = {
+	current: 0,
+	duration: 0,
+	paused: true,
+	isLive: false
 };
 
 type AnimeData = {
