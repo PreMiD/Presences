@@ -1,4 +1,4 @@
-export const presence = new Presence({
+const presence = new Presence({
 		clientId: "1050466196220289104",
 	}),
 	browsingTimestamp = Math.floor(Date.now() / 1000);
