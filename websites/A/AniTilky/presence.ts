@@ -1,21 +1,26 @@
 /// <reference types="premid" />
 
 export const presence = new Presence({
-	clientId: "1124065204200820786",
-}),
+		clientId: "1124065204200820786",
+	}),
 	time = Math.floor(Date.now() / 1000),
 	path = document.location.pathname,
 	videoData = {
 		current: 0,
 		duration: 0,
 		paused: true,
-		isLive: false
+		isLive: false,
 	},
 	baseUrl = "https://anitilky.xyz";
 
 presence.on(
 	"iFrameData",
-	async (data: { current: number; duration: number; paused: boolean; isLive: boolean }) => {
+	async (data: {
+		current: number;
+		duration: number;
+		paused: boolean;
+		isLive: boolean;
+	}) => {
 		if (!data) return;
 		Object.assign(videoData, data);
 	}
@@ -23,7 +28,7 @@ presence.on(
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	// Ana sayfa kontrolü
@@ -47,7 +52,7 @@ presence.on("UpdateData", async () => {
 			{
 				label: "Profile Bak",
 				url: `${baseUrl}/u/${presenceData.state}`,
-			}
+			},
 		];
 	} else if (/^\/anime\/[0-9a-f]{24}$/.test(path)) {
 		// Anime detay sayfası kontrolü
@@ -61,7 +66,7 @@ presence.on("UpdateData", async () => {
 			{
 				label: "Anime Sayfasına Git",
 				url: `${baseUrl}${path}`,
-			}
+			},
 		];
 	} else if (/^\/watch\/[0-9a-f]{24}$/.test(path)) {
 		// Anime izleme sayfası kontrolü
@@ -97,7 +102,7 @@ presence.on("UpdateData", async () => {
 			{
 				label: "Bölüme Git",
 				url: `${baseUrl}${path}?season=${season}&episode=${episode}`,
-			}
+			},
 		];
 	} else if (path.includes("/anime")) {
 		// Anime liste sayfası kontrolü
