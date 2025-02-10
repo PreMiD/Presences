@@ -1,7 +1,7 @@
 /// <reference types="premid" />
 
 export const presence = new Presence({
-		clientId: "1124065204200820786"
+		clientId: "1124065204200820786",
 	}),
 	time = Math.floor(Date.now() / 1000),
 	path = document.location.pathname,
@@ -9,7 +9,7 @@ export const presence = new Presence({
 		current: 0,
 		duration: 0,
 		paused: true,
-		isLive: false
+		isLive: false,
 	},
 	baseUrl = "https://anitilky.xyz",
 	apiUrl = "https://backend.anitilky.xyz/api";
@@ -75,21 +75,29 @@ async function getUserInfo(username: string): Promise<UserResponse["data"] | nul
 		if (!data.success || !data.data) return null;
 		return {
 			...data.data,
-			avatar: data.data.avatar || "logo"
+			avatar: data.data.avatar || "logo",
 		};
 	} catch (error) {
 		return null;
 	}
 }
 
-presence.on("iFrameData", async (data: { current: number; duration: number; paused: boolean; isLive: boolean }) => {
-	if (!data) return;
-	Object.assign(videoData, data);
-});
+presence.on(
+	"iFrameData",
+	async (data: {
+		current: number;
+		duration: number;
+		paused: boolean;
+		isLive: boolean;
+	}) => {
+		if (!data) return;
+		Object.assign(videoData, data);
+	}
+);
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-		largeImageKey: "logo"
+		largeImageKey: "logo",
 	};
 
 	if (path === "/") {
@@ -116,8 +124,8 @@ presence.on("UpdateData", async () => {
 		presenceData.buttons = [
 			{
 				label: "Profile Bak",
-				url: `${baseUrl}/u/${username}`
-			}
+				url: `${baseUrl}/u/${username}`,
+			},
 		];
 	} else if (/^\/anime\/([0-9a-f]{24})$/.test(path)) {
 		const animeId = path.split("/").pop() || "",
@@ -131,14 +139,16 @@ presence.on("UpdateData", async () => {
 			"Yükleniyor...";
 		presenceData.largeImageKey = animeInfo?.coverImage || "logo";
 		if (animeInfo)
-			presenceData.smallImageText = `${animeInfo.type || "TV"} • ${animeInfo.status || "Devam Ediyor"}`;
+			presenceData.smallImageText = `${animeInfo.type || "TV"} • ${
+				animeInfo.status || "Devam Ediyor"
+			}`;
 		presenceData.startTimestamp = time;
 
 		presenceData.buttons = [
 			{
 				label: "Anime Sayfasına Git",
-				url: `${baseUrl}${path}`
-			}
+				url: `${baseUrl}${path}`,
+			},
 		];
 	} else if (/^\/watch\/([0-9a-f]{24})$/.test(path)) {
 		const animeId = path.split("/").pop() || "",
@@ -155,29 +165,32 @@ presence.on("UpdateData", async () => {
 		presenceData.state = `Sezon ${season} Bölüm ${episode}`;
 		presenceData.largeImageKey = animeInfo?.coverImage || "logo";
 		if (animeInfo)
-			presenceData.smallImageText = `${animeInfo.type || "TV"} • ${animeInfo.status || "Devam Ediyor"}`;
+			presenceData.smallImageText = `${animeInfo.type || "TV"} • ${
+				animeInfo.status || "Devam Ediyor"
+			}`;
 
 		if (typeof videoData.paused === "boolean") {
 			presenceData.smallImageKey = videoData.paused ? "pause" : "play";
 			presenceData.smallImageText = videoData.paused ? "Duraklatıldı" : "Oynatılıyor";
 
 			if (!videoData.paused && videoData.duration > 0) {
-				[presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(
-					Math.floor(videoData.current),
-					Math.floor(videoData.duration)
-				);
+				[presenceData.startTimestamp, presenceData.endTimestamp] =
+					presence.getTimestamps(
+						Math.floor(videoData.current),
+						Math.floor(videoData.duration)
+					);
 			}
 		}
 
 		presenceData.buttons = [
 			{
 				label: "Anime Sayfasına Git",
-				url: `${baseUrl}/anime/${animeId}`
+				url: `${baseUrl}/anime/${animeId}`,
 			},
 			{
 				label: "Bölüme Git",
-				url: `${baseUrl}${path}?season=${season}&episode=${episode}`
-			}
+				url: `${baseUrl}${path}?season=${season}&episode=${episode}`,
+			},
 		];
 	} else if (path.includes("/anime")) {
 		presenceData.details = "Anime listesine göz atıyor";
