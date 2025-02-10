@@ -146,7 +146,8 @@ presence.on("UpdateData", async () => {
 			animeInfo?.title.native ||
 			"Yükleniyor...";
 		presenceData.largeImageKey = animeInfo?.coverImage || "logo";
-		if (animeInfo) presenceData.smallImageText = `${animeInfo.type || "TV"} • ${animeInfo.status || "Devam Ediyor"}`;
+		if (animeInfo)
+			presenceData.smallImageText = `${animeInfo.type || "TV"} • ${animeInfo.status || "Devam Ediyor"}`;
 		presenceData.startTimestamp = time;
 
 		presenceData.buttons = [
@@ -170,7 +171,8 @@ presence.on("UpdateData", async () => {
 			"Yükleniyor...";
 		presenceData.state = `Sezon ${season} Bölüm ${episode}`;
 		presenceData.largeImageKey = animeInfo?.coverImage || "logo";
-		if (animeInfo) presenceData.smallImageText = `${animeInfo.type || "TV"} • ${animeInfo.status || "Devam Ediyor"}`;
+		if (animeInfo)
+			presenceData.smallImageText = `${animeInfo.type || "TV"} • ${animeInfo.status || "Devam Ediyor"}`;
 
 		if (typeof videoData.paused === "boolean") {
 			presenceData.smallImageKey = videoData.paused ? "pause" : "play";
