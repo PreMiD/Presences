@@ -31,5 +31,6 @@ jobs:
       - name: Update Activities
         run: npx pmd release
         env:
+          CONNECT_TO_DEV: ${{ vars.CONNECT_TO_DEV}}
           MONGO_URL: ${{ secrets.MONGO_URL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
