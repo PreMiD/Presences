@@ -1,14 +1,18 @@
 /// <reference types="premid" />
 
-const presence = new Presence({
-		clientId: "1124065204200820786",
-	}),
-	strings = presence.getStrings({
-		play: "general.playing",
-		pause: "general.paused",
-		browse: "general.browsing",
-	}),
-	startTimestamp = Math.floor(Date.now() / 1000);
+declare const presence: Presence;
+
+const presenceData: PresenceData = {
+	largeImageKey: "logo"
+};
+
+const strings = presence.getStrings({
+	playing: "general.playing",
+	paused: "general.paused",
+	browsing: "general.browsing"
+});
+
+const startTimestamp = Math.floor(Date.now() / 1000);
 
 let video = {
 	current: 0,
@@ -26,7 +30,7 @@ type AnimeData = {
 	coverImage?: string;
 };
 
-type UserData = {
+type UserProfile = {
 	username: string;
 	avatar?: string;
 };
@@ -57,7 +61,7 @@ async function getAnimeData(animeId: string): Promise<AnimeData> {
 	}
 }
 
-async function getUserData(username: string): Promise<UserData> {
+async function getUserData(username: string): Promise<UserProfile> {
 	try {
 		const response = await fetch(`https://backend.anitilky.xyz/api/user/profile/${username}`);
 		if (!response.ok) throw new Error("API error");
@@ -86,7 +90,7 @@ async function getUserData(username: string): Promise<UserData> {
 let lastAnimeId: string | null = null,
 	lastAnimeData: AnimeData | null = null,
 	lastUsername: string | null = null,
-	lastUserData: UserData | null = null;
+	lastUserData: UserProfile | null = null;
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
@@ -97,7 +101,7 @@ presence.on("UpdateData", async () => {
 
 	// Ana sayfa kontrolü
 	if (document.location.pathname === "/") {
-		presenceData.details = (await strings).browse;
+		presenceData.details = (await strings).browsing;
 		presenceData.startTimestamp = startTimestamp;
 	}
 	// Kendi profil sayfası kontrolü
@@ -153,8 +157,8 @@ presence.on("UpdateData", async () => {
 		if (video) {
 			presenceData.smallImageKey = video.paused ? "pause" : "play";
 			presenceData.smallImageText = video.paused 
-				? (await strings).pause
-				: (await strings).play;
+				? (await strings).paused 
+				: (await strings).playing;
 
 			if (!video.paused && video.duration) {
 				[presenceData.startTimestamp, presenceData.endTimestamp] = 
