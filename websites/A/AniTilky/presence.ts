@@ -74,13 +74,13 @@ presence.on("UpdateData", async () => {
 			"Bilinmeyen Anime";
 		presenceData.state = `Sezon ${season} Bölüm ${episode}`;
 
-		if (videoData) {
+		if (typeof videoData.paused === "boolean") {
 			presenceData.smallImageKey = videoData.paused ? "pause" : "play";
 			presenceData.smallImageText = videoData.paused
 				? "Duraklatıldı"
 				: "Oynatılıyor";
 
-			if (!videoData.paused && videoData.duration) {
+			if (!videoData.paused && videoData.duration > 0) {
 				[presenceData.startTimestamp, presenceData.endTimestamp] =
 					presence.getTimestamps(
 						Math.floor(videoData.current),
