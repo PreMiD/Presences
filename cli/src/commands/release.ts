@@ -93,6 +93,7 @@ export async function release() {
       kill: true,
       validate: false,
       watch: false,
+      zip: false,
     })
 
     const folderLetter = encodeURIComponent(getFolderLetter(activity.metadata.service))

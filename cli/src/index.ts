@@ -27,7 +27,10 @@ cli
 
 cli
   .command('dev [activity]', 'Run an activity in dev mode')
-  .action(service => build(service, { watch: true }))
+  .option('--validate', 'Check if the activity is valid (metadata, images, etc.)')
+  .option('--sarif', 'Output the result in SARIF format')
+  .option('--zip', 'Zip the activity')
+  .action((service, options) => build(service, { ...options, watch: true }))
 
 cli
   .command('build [activity]', 'Build an activity')
@@ -37,6 +40,7 @@ cli
   .option('--kill', 'Kill the process on error', { default: true })
   .option('--validate', 'Check if the activity is valid (metadata, images, etc.)')
   .option('--sarif', 'Output the result in SARIF format (Doesn\'t work with --kill)')
+  .option('--zip', 'Zip the activity')
   .action(build)
 
 cli

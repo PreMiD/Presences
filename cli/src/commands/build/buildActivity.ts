@@ -14,6 +14,8 @@ export async function buildActivity({
   watch,
   kill,
   validate,
+  zip,
+  sarif = false,
 }: {
   path: string
   activity: ActivityMetadata
@@ -21,6 +23,8 @@ export async function buildActivity({
   watch: boolean
   kill: boolean
   validate: boolean
+  zip: boolean
+  sarif?: boolean
 }): Promise<boolean> {
   if (isCI)
     startGroup(activity.service)
@@ -44,7 +48,7 @@ export async function buildActivity({
 
   const compiler = new ActivityCompiler(path, activity, versionized)
   if (watch) {
-    await compiler.watch({ validate })
+    await compiler.watch({ validate, zip, sarif })
 
     if (isCI)
       endGroup()
@@ -52,7 +56,7 @@ export async function buildActivity({
     return true
   }
   else {
-    const success = await compiler.compile({ kill, validate, preCheck: true })
+    const success = await compiler.compile({ kill, validate, zip, preCheck: true })
 
     if (isCI)
       endGroup()

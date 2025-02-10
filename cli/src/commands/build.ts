@@ -9,6 +9,7 @@ export async function build(service?: string, {
   kill = true,
   validate = false,
   sarif = false,
+  zip = false,
 }: {
   watch?: boolean
   all?: boolean
@@ -16,11 +17,12 @@ export async function build(service?: string, {
   kill?: boolean
   validate?: boolean
   sarif?: boolean
+  zip?: boolean
 } = {}) {
   if (changed)
-    return buildChanged({ kill, validate, sarif })
+    return buildChanged({ kill, validate, sarif, zip })
   if (all)
-    return buildAll({ kill, validate, sarif })
+    return buildAll({ kill, validate, sarif, zip })
 
-  return buildSingle(service, { watch, validate, sarif, kill })
+  return buildSingle(service, { watch, validate, sarif, kill, zip })
 }

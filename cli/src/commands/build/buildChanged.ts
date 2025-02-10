@@ -8,10 +8,12 @@ export async function buildChanged({
   kill,
   validate,
   sarif,
+  zip,
 }: {
   kill: boolean
   validate: boolean
   sarif: boolean
+  zip: boolean
 }) {
   const { changed } = await getChangedActivities()
   if (changed.length === 0) {
@@ -22,7 +24,15 @@ export async function buildChanged({
 
   let successful = true
   for (const activity of changed) {
-    const isSuccess = await buildActivity({ path: activity.folder, activity: activity.metadata, versionized: activity.versionized, kill, validate, watch: false })
+    const isSuccess = await buildActivity({
+      path: activity.folder,
+      activity: activity.metadata,
+      versionized: activity.versionized,
+      kill,
+      validate,
+      watch: false,
+      zip,
+    })
     successful = successful && isSuccess
   }
 

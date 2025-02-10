@@ -1,6 +1,7 @@
 import { existsSync } from 'node:fs'
-import { cp, readFile, rm } from 'node:fs/promises'
-import { basename, dirname, resolve } from 'node:path'
+import { cp, readdir, readFile, rm } from 'node:fs/promises'
+import { basename, dirname, join, resolve } from 'node:path'
+import AdmZip from 'adm-zip'
 import chalk from 'chalk'
 import { watch } from 'chokidar'
 import { build } from 'esbuild'
@@ -9,7 +10,7 @@ import { compare, inc } from 'semver'
 import { getJsonPosition } from '../util/getJsonPosition.js'
 import { error, exit, prefix } from '../util/log.js'
 import { sanitazeFolderName } from '../util/sanitazeFolderName.js'
-import { addSarifLog, SarifRuleId } from '../util/sarif.js'
+import { addSarifLog, SarifRuleId, writeSarifLog } from '../util/sarif.js'
 import { AssetsManager } from './AssetsManager.js'
 import { DependenciesManager } from './DependenciesManager.js'
 import { TypescriptCompiler } from './TypescriptCompiler.js'
@@ -42,7 +43,17 @@ export class ActivityCompiler {
     this.assetsManager = new AssetsManager(cwd, activity, versionized)
   }
 
-  async compile({ kill, validate, preCheck = true }: { kill: boolean, validate: boolean, preCheck?: boolean }): Promise<boolean> {
+  async compile({
+    kill,
+    validate,
+    preCheck = true,
+    zip,
+  }: {
+    kill: boolean
+    validate: boolean
+    preCheck?: boolean
+    zip: boolean
+  }): Promise<boolean> {
     if (preCheck) {
       await this.dependencies.installDependencies()
       const success = await this.ts.typecheck(kill)
@@ -86,10 +97,15 @@ export class ActivityCompiler {
     }
 
     spinner.succeed(prefix + chalk.greenBright(` Compiled ${this.activity.service}!`))
+
+    if (zip) {
+      await zipDir(resolve(this.cwd, 'dist'), `${this.activity.service}.zip`)
+    }
+
     return true
   }
 
-  async watch({ validate }: { validate: boolean }) {
+  async watch({ validate, zip, sarif }: { validate: boolean, zip: boolean, sarif: boolean }) {
     await this.dependencies.installDependencies()
 
     this.ws = new WebSocketServer(this.cwd)
@@ -101,7 +117,7 @@ export class ActivityCompiler {
       persistent: true,
     }).on('all', async (event, path) => {
       if (['add', 'unlink'].includes(event) && basename(path) === 'iframe.ts') {
-        return this.ts.restart(this.compileAndSend.bind(this, { validate }))
+        return this.ts.restart(this.compileAndSend.bind(this, { validate, zip, sarif }))
       }
 
       if (basename(path) === 'package.json') {
@@ -125,15 +141,18 @@ export class ActivityCompiler {
           }
         }
 
-        await this.ts.restart(this.compileAndSend.bind(this, { validate }))
+        await this.ts.restart(this.compileAndSend.bind(this, { validate, zip, sarif }))
       }
     })
 
-    this.ts.watch(this.compileAndSend.bind(this, { validate }))
+    this.ts.watch(this.compileAndSend.bind(this, { validate, zip, sarif }))
   }
 
-  private async compileAndSend({ validate }: { validate: boolean }) {
-    await this.compile({ validate, preCheck: false, kill: false })
+  private async compileAndSend({ validate, zip, sarif }: { validate: boolean, zip: boolean, sarif: boolean }) {
+    await this.compile({ validate, zip, preCheck: false, kill: false })
+    if (sarif) {
+      await writeSarifLog()
+    }
     await this.ws?.send()
   }
 
@@ -285,4 +304,19 @@ export class ActivityCompiler {
 
     return valid
   }
+}
+
+async function zipDir(dir: string, filename: string) {
+  const zip = new AdmZip()
+  const zipPathInDir = resolve(dir, filename)
+
+  //* Read all files in the directory and add them to the zip
+  const files = await readdir(dir, { recursive: true })
+
+  for (const file of files) {
+    const filePath = join(dir, file)
+    zip.addLocalFile(filePath)
+  }
+
+  zip.writeZip(zipPathInDir)
 }
