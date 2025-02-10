@@ -65,17 +65,17 @@ export async function updateAssets() {
     return success(MESSAGES.noActivities)
   }
 
-  //* If we have less than 2 approvals, return success (but pending)
-  const reviews = await octokit.rest.pulls.listReviews({
+  //* Fetch all pages of reviews
+  const reviews = await octokit.paginate(octokit.rest.pulls.listReviews, {
     ...context.repo,
     pull_number: pullRequest.number,
   })
 
-  core.info(`Found ${reviews.data.length} reviews for PR #${pullRequest.number}`)
+  core.info(`Found ${reviews.length} reviews for PR #${pullRequest.number}`)
 
   //* Count only approved reviews from reviewers with write access (excluding PR author)
   const uniqueApprovers = new Set(
-    reviews.data
+    reviews
       .filter(review =>
         review.state === 'APPROVED'
         && review.user?.login !== pullRequest.user.login,
