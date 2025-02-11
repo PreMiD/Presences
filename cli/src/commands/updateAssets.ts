@@ -131,7 +131,7 @@ export async function updateAssets() {
     })
 
     let valid = true
-    for (const activity of changed) {
+    for (const [index, activity] of changed.entries()) {
       const assetsManager = new AssetsManager(activity.folder, activity.metadata, activity.versionized)
 
       const assets = await assetsManager.getAssets()
@@ -140,6 +140,8 @@ export async function updateAssets() {
           valid = false
         }
       }
+
+      core.debug(`Validated ${assets.length} assets for ${activity.metadata.service} (${index + 1}/${changed.length})`)
     }
 
     if (!valid) {
@@ -159,17 +161,23 @@ export async function updateAssets() {
     let count = 0
 
     //* Delete assets for each deleted activity
-    for (const activity of deleted) {
+    for (const [index, activity] of deleted.entries()) {
       const assetsManager = new AssetsManager(activity.folder, activity.metadata, activity.versionized)
 
-      count += await assetsManager.deleteCdnAssets()
+      const deletedCount = await assetsManager.deleteCdnAssets()
+      count += deletedCount
+
+      core.debug(`Deleted ${deletedCount} assets for ${activity.metadata.service} (${index + 1}/${deleted.length})`)
     }
 
     //* Update assets for each activity
-    for (const activity of changed) {
+    for (const [index, activity] of changed.entries()) {
       const assetsManager = new AssetsManager(activity.folder, activity.metadata, activity.versionized)
 
-      count += await assetsManager.updateCdnAssets()
+      const updatedCount = await assetsManager.updateCdnAssets()
+      count += updatedCount
+
+      core.debug(`Updated ${updatedCount} assets for ${activity.metadata.service} (${index + 1}/${changed.length})`)
     }
 
     core.info(`Updated ${count} assets`)

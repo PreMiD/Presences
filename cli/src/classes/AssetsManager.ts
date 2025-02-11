@@ -464,7 +464,7 @@ export class AssetsManager {
       Array.from(urls).map(async ([url, { url: newUrl, method }]) => {
         const response = await ky.get(url).arrayBuffer()
         const form = new FormData()
-        form.append('file', new Blob([response]), {
+        form.append('file', Buffer.from(response), {
           contentType: this.getMimeTypeFromExtension(this.getExtensionFromUrl(url).slice(1)),
         })
 
