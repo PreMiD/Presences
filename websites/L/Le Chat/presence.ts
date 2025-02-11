@@ -25,28 +25,23 @@ presence.on("UpdateData", async () => {
 
 	const strings = await getStrings();
 
-	if (pathname === "/chat") {
-		presenceDetail = strings.newPrompt;
-	} else if (pathname.includes("/chat/")) {
+	if (pathname === "/chat") presenceDetail = strings.newPrompt;
+	else if (pathname.includes("/chat/")) {
 		presenceDetail = showTitle
 			? document.querySelector('a[aria-label="Open chat"]>div').textContent
 			: strings.talkingWithAi;
-	} else {
-		presenceDetail = strings.talkingWithAi;
-	}
+	} else presenceDetail = strings.talkingWithAi;
 
 	// Checking if the user is currently typing a question
-	if (document.querySelector("textarea").textContent !== "") {
+	if (document.querySelector("textarea").textContent !== "")
 		presenceState = strings.askingQuestion;
-	} else if (
+	else if (
 		document.querySelector(
 			"div[class='flex h-fit w-full flex-col'] > div:last-child[style*='transform:none']"
 		)
-	) {
+	)
 		presenceState = strings.readingResponse;
-	} else {
-		presenceState = null;
-	}
+	else presenceState = null;
 
 	presence.setActivity({
 		largeImageKey: Assets.Logo,
