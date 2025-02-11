@@ -23,10 +23,10 @@ jobs:
           node-version-file: package.json
           cache: npm
 
-      - name: Install PMD
+      - name: Install pmd
         run: HUSKY=0 npm ci
 
-      - name: Run PMD
+      - name: Validate metadata and build
         run: npx pmd build --changed --no-kill --validate --sarif
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

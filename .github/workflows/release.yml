@@ -9,7 +9,7 @@ on:
 jobs:
   update:
     if: github.repository_owner == 'PreMiD'
-    name: Update Activities
+    name: Update activities
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -25,10 +25,10 @@ jobs:
           node-version-file: package.json
           cache: npm
 
-      - name: Install PMD
+      - name: Install pmd
         run: HUSKY=0 npm ci
 
-      - name: Update Activities
+      - name: Update activities
         run: npx pmd release
         env:
           CONNECT_TO_DEV: ${{ vars.CONNECT_TO_DEV}}

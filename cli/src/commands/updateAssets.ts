@@ -7,7 +7,7 @@ import { AssetsManager } from '../classes/AssetsManager.js'
 import { getChangedActivities } from '../util/getActivities.js'
 import { exit, MESSAGES, success } from '../util/log.js'
 
-const NAME = 'pmd/assets-updater'
+const NAME = 'Assets updater / pmd'
 
 //* Checks if there are any git changes in the working directory
 function hasGitChanges(): boolean {
