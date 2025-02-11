@@ -80,10 +80,17 @@ export class AssetsManager {
   private readonly imageCache = new Map<string, { width: number, height: number, mimeType: string }>()
 
   get baseUrl() {
-    const service = encodeURIComponent(sanitazeFolderName(this.activity.service))
+    const service = this.encodeURIComponentAndQuotes(sanitazeFolderName(this.activity.service))
     const folderLetter = encodeURIComponent(getFolderLetter(this.activity.service))
     const version = this.versionized ? `/v${this.activity.apiVersion}` : ''
     return `${CDN_BASE_URL}/PreMiD/websites/${folderLetter}/${service}${version}/assets`
+  }
+
+  private encodeURIComponentAndQuotes(str: string) {
+    return encodeURIComponent(str)
+      .replace(/'/g, '%27')
+      .replace(/"/g, '%22')
+      .replace(/`/g, '%60')
   }
 
   private async validateImageDimensions(dimensionAndType: { width: number, height: number }, asset: Asset, kill: boolean): Promise<boolean> {
