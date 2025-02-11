@@ -1,11 +1,13 @@
 import type { ActivityMetadata } from './ActivityCompiler.js'
-import { Buffer } from 'node:buffer'
+import { createReadStream, createWriteStream } from 'node:fs'
 import { readFile, writeFile } from 'node:fs/promises'
-import { extname, resolve } from 'node:path'
+import { tmpdir } from 'node:os'
+import { extname, join, resolve } from 'node:path'
 import process from 'node:process'
+import { pipeline } from 'node:stream/promises'
 import FormData from 'form-data'
 import { globby } from 'globby'
-import ky from 'ky'
+import got from 'got'
 import sharp from 'sharp'
 import { getFolderLetter } from '../util/getFolderLetter.js'
 import { getJsonPosition } from '../util/getJsonPosition.js'
@@ -126,8 +128,8 @@ export class AssetsManager {
 
     if (!dimensionAndType) {
       try {
-        const response = await ky.get(asset.url.replaceAll(/\\/g, '')).arrayBuffer()
-        const metadata = await sharp(Buffer.from(response)).metadata()
+        const response = await got.get(asset.url.replaceAll(/\\/g, '')).buffer()
+        const metadata = await sharp(response).metadata()
         if (!metadata.width || !metadata.height || !metadata.format) {
           throw new Error('Could not get image metadata')
         }
@@ -253,7 +255,7 @@ export class AssetsManager {
   }
 
   private async doesAssetExist(url: string): Promise<boolean> {
-    return await ky.head(url).then(response => response.ok).catch(() => false)
+    return await got.head(url).then(response => response.ok).catch(() => false)
   }
 
   private async doesExistAnyExtension(url: string): Promise<{
@@ -448,7 +450,7 @@ export class AssetsManager {
 
   private async deleteAssets(urls: string[] | Set<string>) {
     await Promise.all(
-      Array.from(urls).map(url => ky.delete(url, {
+      Array.from(urls).map(url => got.delete(url, {
         headers: {
           Authorization: process.env.CDN_TOKEN,
         },
@@ -462,19 +464,22 @@ export class AssetsManager {
   }>) {
     await Promise.all(
       Array.from(urls).map(async ([url, { url: newUrl, method }]) => {
-        const response = await ky.get(url).arrayBuffer()
+        const tempFile = join(tmpdir(), `premid-assetmanager-${Math.random().toString(36).substring(2, 15)}${this.getExtensionFromUrl(url)}`)
+
+        await pipeline(got.stream(url), createWriteStream(tempFile))
+
         const form = new FormData()
-        form.append('file', Buffer.from(response), {
+        form.append('file', createReadStream(tempFile), {
           contentType: this.getMimeTypeFromExtension(this.getExtensionFromUrl(url).slice(1)),
         })
 
-        await ky(newUrl, {
+        await got(newUrl, {
           method,
           headers: {
             Authorization: process.env.CDN_TOKEN,
             ...form.getHeaders(),
           },
-          body: form.getBuffer(),
+          body: form,
         })
       }),
     )

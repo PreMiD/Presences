@@ -1,5 +1,7 @@
 import type { CdnAsset } from './AssetsManager.js'
 import { Buffer } from 'node:buffer'
+import { ReadStream } from 'node:fs'
+import { Readable } from 'node:stream'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { AssetsManager, AssetType, MimeType } from './AssetsManager.js'
 
@@ -7,12 +9,13 @@ const mocks = vi.hoisted(() => ({
   globby: vi.fn(),
   readFile: vi.fn(),
   writeFile: vi.fn(),
-  ky: Object.assign(
+  got: Object.assign(
     vi.fn(),
     {
       get: vi.fn(),
       head: vi.fn(),
       delete: vi.fn().mockImplementation(() => Promise.resolve()),
+      stream: vi.fn(),
     },
   ),
   sharp: vi.fn(),
@@ -29,8 +32,8 @@ const mocks = vi.hoisted(() => ({
 }))
 
 //* Mock external dependencies
-vi.mock('ky', () => ({
-  default: mocks.ky,
+vi.mock('got', () => ({
+  default: mocks.got,
 }))
 
 vi.mock('sharp', () => ({
@@ -94,8 +97,8 @@ describe('assetsManager', () => {
       }
 
       //* Mock image validation responses
-      mocks.ky.get.mockReturnValue({
-        arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+      mocks.got.get.mockReturnValue({
+        buffer: () => Promise.resolve(Buffer.from('mock-buffer')),
       } as any)
 
       mocks.sharp.mockReturnValue({
@@ -117,8 +120,8 @@ describe('assetsManager', () => {
         location: { filePath: 'test.json', line: 1, column: 1 },
       }
 
-      mocks.ky.get.mockReturnValue({
-        arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+      mocks.got.get.mockReturnValue({
+        buffer: () => Promise.resolve(Buffer.from('mock-buffer')),
       } as any)
 
       mocks.sharp.mockReturnValue({
@@ -147,8 +150,8 @@ describe('assetsManager', () => {
         location: { filePath: 'test.json', line: 1, column: 1 },
       }
 
-      mocks.ky.get.mockReturnValue({
-        arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+      mocks.got.get.mockReturnValue({
+        buffer: () => Promise.resolve(Buffer.from('mock-buffer')),
       } as any)
 
       mocks.sharp.mockReturnValue({
@@ -262,7 +265,7 @@ describe('assetsManager', () => {
 
     it('should return empty array when no assets exist on CDN', async () => {
       //* Mock head requests to return 404
-      mocks.ky.head.mockRejectedValue(new Error('Not found'))
+      mocks.got.head.mockRejectedValue(new Error('Not found'))
 
       const assets = await assetsManager.getCdnAssets()
       expect(assets).toHaveLength(0)
@@ -270,10 +273,10 @@ describe('assetsManager', () => {
 
     it('should return logo and thumbnail when they exist', async () => {
       //* Mock successful head requests for logo and thumbnail
-      mocks.ky.head.mockImplementation((url) => {
+      mocks.got.head.mockImplementation((url) => {
         const urlStr = url.toString()
         if (urlStr.includes('logo.png') || urlStr.includes('thumbnail.png')) {
-          return Promise.resolve({ ok: true })
+          return Promise.resolve({ statusCode: 200, ok: true })
         }
         return Promise.reject(new Error('Not found'))
       })
@@ -294,10 +297,10 @@ describe('assetsManager', () => {
 
     it('should return activity assets with sequential indices', async () => {
       //* Mock head requests to return success for first 3 activity assets and fail for the 4th
-      mocks.ky.head.mockImplementation((url) => {
+      mocks.got.head.mockImplementation((url) => {
         const urlStr = url.toString()
         if (urlStr.includes('0.png') || urlStr.includes('1.jpg') || urlStr.includes('2.gif')) {
-          return Promise.resolve({ ok: true })
+          return Promise.resolve({ statusCode: 200, ok: true })
         }
         return Promise.reject(new Error('Not found'))
       })
@@ -328,7 +331,7 @@ describe('assetsManager', () => {
 
     it('should return both static and activity assets', async () => {
       //* Mock head requests to return success for first 3 activity assets and fail for the 4th
-      mocks.ky.head.mockImplementation((url) => {
+      mocks.got.head.mockImplementation((url) => {
         const urlStr = url.toString()
         if (
           urlStr.includes('0.png')
@@ -337,7 +340,7 @@ describe('assetsManager', () => {
           || urlStr.includes('logo.webp')
           || urlStr.includes('thumbnail.jpeg')
         ) {
-          return Promise.resolve({ ok: true })
+          return Promise.resolve({ statusCode: 200, ok: true })
         }
         return Promise.reject(new Error('Not found'))
       })
@@ -382,19 +385,24 @@ describe('assetsManager', () => {
       vi.clearAllMocks()
       process.env.CDN_TOKEN = 'test-token'
 
-      //* Mock ky direct calls for file uploads
-      mocks.ky.mockImplementation((url, options) => {
+      //* Mock got direct calls for file uploads
+      mocks.got.mockImplementation((url, options) => {
         if (options?.method === 'POST' || options?.method === 'PUT') {
-          return Promise.resolve()
+          return Promise.resolve({ statusCode: 200, ok: true })
         }
-        return Promise.reject(new Error('Unexpected ky call'))
+        return Promise.reject(new Error('Unexpected got call'))
       })
 
-      //* Ensure all ky methods return promises
-      mocks.ky.delete.mockImplementation(() => Promise.resolve())
-      mocks.ky.head.mockImplementation(() => Promise.resolve({ ok: true }))
-      mocks.ky.get.mockImplementation(() => ({
-        arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+      //* Ensure all got methods return promises
+      mocks.got.delete.mockImplementation(() => Promise.resolve({ statusCode: 200, ok: true }))
+      mocks.got.head.mockImplementation(() => Promise.resolve({ statusCode: 200, ok: true }))
+      mocks.got.get.mockImplementation(() => ({
+        buffer: () => Promise.resolve(Buffer.from('mock-buffer')),
+      }))
+      mocks.got.stream.mockReturnValue(new Readable({
+        read() {
+          this.push(null)
+        },
       }))
 
       //* Mock globby to return some TypeScript files
@@ -421,8 +429,8 @@ describe('assetsManager', () => {
       vi.spyOn(assetsManager, 'getCdnAssets').mockResolvedValue([])
 
       //* Mock successful image downloads
-      mocks.ky.get.mockReturnValue({
-        arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+      mocks.got.get.mockReturnValue({
+        buffer: () => Promise.resolve(Buffer.from('mock-buffer')),
       } as any)
 
       //* Mock file content with URLs that need to be replaced
@@ -448,11 +456,11 @@ describe('assetsManager', () => {
       expect(result).toBe(2)
 
       //* Verify upload calls were made for both assets
-      expect(mocks.ky).toHaveBeenCalledWith(
+      expect(mocks.got).toHaveBeenCalledWith(
         `${assetsManager.baseUrl}/logo.png`,
         expect.objectContaining({ method: 'POST' }),
       )
-      expect(mocks.ky).toHaveBeenCalledWith(
+      expect(mocks.got).toHaveBeenCalledWith(
         `${assetsManager.baseUrl}/thumbnail.jpg`,
         expect.objectContaining({ method: 'POST' }),
       )
@@ -462,12 +470,12 @@ describe('assetsManager', () => {
       const formInstances = mocks.formData.mock.results
       expect(formInstances[0].value._lastAppended()).toEqual([
         'file',
-        expect.any(Blob),
+        expect.any(ReadStream),
         { contentType: MimeType.PNG },
       ])
       expect(formInstances[1].value._lastAppended()).toEqual([
         'file',
-        expect.any(Blob),
+        expect.any(ReadStream),
         { contentType: MimeType.JPG },
       ])
 
@@ -508,8 +516,8 @@ describe('assetsManager', () => {
       vi.spyOn(assetsManager, 'getAssets').mockResolvedValue(mockAssets)
       vi.spyOn(assetsManager, 'getCdnAssets').mockResolvedValue(mockCdnAssets)
 
-      mocks.ky.get.mockReturnValue({
-        arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+      mocks.got.get.mockReturnValue({
+        buffer: () => Promise.resolve(Buffer.from('mock-buffer')),
       } as any)
 
       //* Mock file content with URLs that need to be replaced
@@ -529,11 +537,11 @@ describe('assetsManager', () => {
       expect(result).toBe(2)
 
       //* Verify old asset is deleted and new one is uploaded
-      expect(mocks.ky.delete).toHaveBeenCalledWith(
+      expect(mocks.got.delete).toHaveBeenCalledWith(
         `${assetsManager.baseUrl}/logo.png`,
         expect.any(Object),
       )
-      expect(mocks.ky).toHaveBeenCalledWith(
+      expect(mocks.got).toHaveBeenCalledWith(
         `${assetsManager.baseUrl}/logo.jpg`,
         expect.objectContaining({ method: 'POST' }),
       )
@@ -583,8 +591,8 @@ describe('assetsManager', () => {
       vi.spyOn(assetsManager, 'getAssets').mockResolvedValue(mockAssets)
       vi.spyOn(assetsManager, 'getCdnAssets').mockResolvedValue(mockCdnAssets)
 
-      mocks.ky.get.mockReturnValue({
-        arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+      mocks.got.get.mockReturnValue({
+        buffer: () => Promise.resolve(Buffer.from('mock-buffer')),
       } as any)
 
       //* Mock file content with URLs that need to be replaced
@@ -612,11 +620,11 @@ describe('assetsManager', () => {
       expect(result).toBe(1)
 
       //* Verify asset at index 2 is moved to index 1
-      expect(mocks.ky).toHaveBeenCalledWith(
+      expect(mocks.got).toHaveBeenCalledWith(
         `${assetsManager.baseUrl}/1.png`,
         expect.objectContaining({ method: 'POST' }),
       )
-      expect(mocks.ky.delete).toHaveBeenCalledWith(
+      expect(mocks.got.delete).toHaveBeenCalledWith(
         `${assetsManager.baseUrl}/2.png`,
         expect.any(Object),
       )
@@ -673,8 +681,8 @@ describe('assetsManager', () => {
       vi.spyOn(assetsManager, 'getAssets').mockResolvedValue(mockAssets)
       vi.spyOn(assetsManager, 'getCdnAssets').mockResolvedValue(mockCdnAssets)
 
-      mocks.ky.get.mockReturnValue({
-        arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+      mocks.got.get.mockReturnValue({
+        buffer: () => Promise.resolve(Buffer.from('mock-buffer')),
       } as any)
 
       //* Mock file content with URLs that need to be replaced
@@ -702,11 +710,11 @@ describe('assetsManager', () => {
       expect(result).toBe(2)
 
       //* Verify unused assets are deleted
-      expect(mocks.ky.delete).toHaveBeenCalledWith(
+      expect(mocks.got.delete).toHaveBeenCalledWith(
         `${assetsManager.baseUrl}/thumbnail.png`,
         expect.any(Object),
       )
-      expect(mocks.ky.delete).toHaveBeenCalledWith(
+      expect(mocks.got.delete).toHaveBeenCalledWith(
         `${assetsManager.baseUrl}/0.png`,
         expect.any(Object),
       )
@@ -727,8 +735,8 @@ describe('assetsManager', () => {
       vi.spyOn(assetsManager, 'getAssets').mockResolvedValue(mockAssets)
       vi.spyOn(assetsManager, 'getCdnAssets').mockResolvedValue([])
 
-      mocks.ky.get.mockReturnValue({
-        arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+      mocks.got.get.mockReturnValue({
+        buffer: () => Promise.resolve(Buffer.from('mock-buffer')),
       } as any)
 
       //* Mock file content with URLs that need to be replaced
@@ -748,7 +756,7 @@ describe('assetsManager', () => {
       expect(result).toBe(1)
 
       //* Verify new activity asset is uploaded with index 0
-      expect(mocks.ky).toHaveBeenCalledWith(
+      expect(mocks.got).toHaveBeenCalledWith(
         `${assetsManager.baseUrl}/0.png`,
         expect.objectContaining({ method: 'POST' }),
       )
@@ -832,8 +840,8 @@ describe('assetsManager', () => {
       expect(result).toBe(0)
 
       //* Verify no uploads, deletions, or file updates occurred
-      expect(mocks.ky).not.toHaveBeenCalled()
-      expect(mocks.ky.delete).not.toHaveBeenCalled()
+      expect(mocks.got).not.toHaveBeenCalled()
+      expect(mocks.got.delete).not.toHaveBeenCalled()
       expect(mocks.formData).not.toHaveBeenCalled()
       expect(mocks.writeFile).not.toHaveBeenCalled()
     })
@@ -872,16 +880,16 @@ describe('assetsManager', () => {
 
       //* Verify all assets were deleted
       expect(result).toBe(3)
-      expect(mocks.ky.delete).toHaveBeenCalledTimes(3)
-      expect(mocks.ky.delete).toHaveBeenCalledWith(
+      expect(mocks.got.delete).toHaveBeenCalledTimes(3)
+      expect(mocks.got.delete).toHaveBeenCalledWith(
         `${assetsManager.baseUrl}/logo.png`,
         expect.any(Object),
       )
-      expect(mocks.ky.delete).toHaveBeenCalledWith(
+      expect(mocks.got.delete).toHaveBeenCalledWith(
         `${assetsManager.baseUrl}/thumbnail.jpg`,
         expect.any(Object),
       )
-      expect(mocks.ky.delete).toHaveBeenCalledWith(
+      expect(mocks.got.delete).toHaveBeenCalledWith(
         `${assetsManager.baseUrl}/0.webp`,
         expect.any(Object),
       )
@@ -895,7 +903,7 @@ describe('assetsManager', () => {
 
       //* Verify no delete calls were made
       expect(result).toBe(0)
-      expect(mocks.ky.delete).not.toHaveBeenCalled()
+      expect(mocks.got.delete).not.toHaveBeenCalled()
     })
 
     it('should handle failed deletions gracefully', async () => {
@@ -916,7 +924,7 @@ describe('assetsManager', () => {
       vi.spyOn(assetsManager, 'getCdnAssets').mockResolvedValue(mockCdnAssets)
 
       //* Mock one deletion to fail
-      mocks.ky.delete.mockImplementation((url) => {
+      mocks.got.delete.mockImplementation((url) => {
         if (url.toString().includes('thumbnail.jpg')) {
           return Promise.reject(new Error('Failed to delete'))
         }
@@ -927,12 +935,12 @@ describe('assetsManager', () => {
 
       //* Verify all assets were attempted to be deleted
       expect(result).toBe(2)
-      expect(mocks.ky.delete).toHaveBeenCalledTimes(2)
-      expect(mocks.ky.delete).toHaveBeenCalledWith(
+      expect(mocks.got.delete).toHaveBeenCalledTimes(2)
+      expect(mocks.got.delete).toHaveBeenCalledWith(
         `${assetsManager.baseUrl}/logo.png`,
         expect.any(Object),
       )
-      expect(mocks.ky.delete).toHaveBeenCalledWith(
+      expect(mocks.got.delete).toHaveBeenCalledWith(
         `${assetsManager.baseUrl}/thumbnail.jpg`,
         expect.any(Object),
       )
