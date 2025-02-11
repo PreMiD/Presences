@@ -230,7 +230,7 @@ presence.on("UpdateData", async () => {
 							art
 								.replace(/width=[0-9]{1,3}/, "width=1024")
 								.replace(/height=[0-9]{1,3}/, "height=1024")
-					  );
+						);
 			}
 
 			presenceData.smallImageKey = media.paused ? Assets.Pause : Assets.Play;
@@ -251,11 +251,11 @@ presence.on("UpdateData", async () => {
 			else presenceData.name = title;
 
 			presenceData.state = subTitle;
-
 			if (
-				(!navigator.mediaSession.metadata.artist &&
-					!navigator.mediaSession.metadata.album) ||
-				!!document.querySelector(".application.show-video-player")
+				(!navigator.mediaSession.metadata?.artist &&
+					!navigator.mediaSession.metadata?.album) ||
+				!!document.querySelector(".application.show-video-player") ||
+				!!document.querySelector("video")
 			)
 				presenceData.type = ActivityType.Watching;
 			else presenceData.type = ActivityType.Listening;
