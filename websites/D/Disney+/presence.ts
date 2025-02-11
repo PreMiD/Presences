@@ -60,7 +60,7 @@ presence.on('UpdateData', async () => {
 
   switch (true) {
     case /(?:www\.)?disneyplus\.com/.test(hostname): {
-      presenceData.largeImageKey = 'https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/logo.png'
+      presenceData.largeImageKey = 'https://i.imgur.com/KIZSYhc.png'
       switch (true) {
         case pathname.includes('play'): {
           const video = document.querySelector<HTMLVideoElement>('video#hivePlayer')
@@ -235,7 +235,7 @@ presence.on('UpdateData', async () => {
     }
     case /(?:www\.)?hotstar\.com/.test(hostname): {
       const video = document.querySelector<HTMLVideoElement>('video')
-      presenceData.largeImageKey = 'https://cdn.rcd.gg/PreMiD/websites/D/Disney+/assets/0.png'
+      presenceData.largeImageKey = 'https://i.imgur.com/717snoF.png'
 
       if (video && !Number.isNaN(video.duration)) {
         [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video)

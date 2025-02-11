@@ -15,7 +15,7 @@ async function getStrings() {
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 enum ActivityAssets {
-  Logo = 'https://cdn.rcd.gg/PreMiD/websites/R/RTL+/assets/0.jpg',
+  Logo = 'https://i.imgur.com/fMMsZfV.jpg',
 }
 
 let video: HTMLVideoElement | null = null

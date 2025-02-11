@@ -24,14 +24,14 @@ const timeElapsed: number = ~~(Date.now() / 1000)
 setPresence()
 
 enum ActivityAssets {
-  Kickstart = 'https://cdn.rcd.gg/PreMiD/websites/G/Google\'s%20Coding%20Competitions/assets/0.png',
-  Codejam = 'https://cdn.rcd.gg/PreMiD/websites/G/Google\'s%20Coding%20Competitions/assets/1.png',
-  Hashcode = 'https://cdn.rcd.gg/PreMiD/websites/G/Google\'s%20Coding%20Competitions/assets/2.png',
+  Kickstart = 'https://i.imgur.com/tdiVQNk.png',
+  Codejam = 'https://i.imgur.com/1gfFzz9.png',
+  Hashcode = 'https://i.imgur.com/PQDiml1.png',
 }
 
 presence?.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/G/Google\'s%20Coding%20Competitions/assets/logo.png',
+    largeImageKey: 'https://i.imgur.com/TQRWLav.png',
     details: 'Home page',
     startTimestamp: timeElapsed,
   }
