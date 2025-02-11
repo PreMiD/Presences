@@ -5,6 +5,12 @@
 		"id": "858743749240684564",
 		"name": "swesia"
 	},
+	"contributors": [
+        {
+            "name": "creeper",
+            "id": "529707020937461760"
+        }
+    ],
 	"service": "AnimeciX",
 	"description": {
 		"en": "Best Turkish anime watching website"
