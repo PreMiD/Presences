@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os'
 import { extname, join, resolve } from 'node:path'
 import process from 'node:process'
 import { pipeline } from 'node:stream/promises'
+import * as core from '@actions/core'
 import FormData from 'form-data'
 import { globby } from 'globby'
 import got from 'got'
@@ -449,6 +450,9 @@ export class AssetsManager {
   }
 
   private async deleteAssets(urls: string[] | Set<string>) {
+    for (const url of urls) {
+      core.info(`Deleting ${url}`)
+    }
     await Promise.all(
       Array.from(urls).map(url => got.delete(url, {
         headers: {
@@ -462,6 +466,9 @@ export class AssetsManager {
     url: string
     method: 'POST' | 'PUT'
   }>) {
+    for (const [url, { url: newUrl, method }] of urls) {
+      core.info(`Uploading ${url} to ${newUrl}, method: ${method}`)
+    }
     await Promise.all(
       Array.from(urls).map(async ([url, { url: newUrl, method }]) => {
         const tempFile = join(tmpdir(), `premid-assetmanager-${Math.random().toString(36).substring(2, 15)}${this.getExtensionFromUrl(url)}`)

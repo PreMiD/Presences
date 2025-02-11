@@ -141,7 +141,7 @@ export async function updateAssets() {
         }
       }
 
-      core.debug(`Validated ${assets.length} assets for ${activity.metadata.service} (${index + 1}/${changed.length})`)
+      core.info(`Validated ${assets.length} assets for ${activity.metadata.service} (${index + 1}/${changed.length})`)
     }
 
     if (!valid) {
@@ -167,7 +167,7 @@ export async function updateAssets() {
       const deletedCount = await assetsManager.deleteCdnAssets()
       count += deletedCount
 
-      core.debug(`Deleted ${deletedCount} assets for ${activity.metadata.service} (${index + 1}/${deleted.length})`)
+      core.info(`Deleted ${deletedCount} assets for ${activity.metadata.service} (${index + 1}/${deleted.length})`)
     }
 
     //* Update assets for each activity
@@ -177,7 +177,7 @@ export async function updateAssets() {
       const updatedCount = await assetsManager.updateCdnAssets()
       count += updatedCount
 
-      core.debug(`Updated ${updatedCount} assets for ${activity.metadata.service} (${index + 1}/${changed.length})`)
+      core.info(`Updated ${updatedCount} assets for ${activity.metadata.service} (${index + 1}/${changed.length})`)
     }
 
     core.info(`Updated ${count} assets`)
