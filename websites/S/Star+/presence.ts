@@ -46,7 +46,7 @@ presence.on('UpdateData', async () => {
   }
 
   if (isHostSP) {
-    presenceData.largeImageKey = 'https://cdn.rcd.gg/PreMiD/websites/S/Star+/assets/logo.png'
+    presenceData.largeImageKey = 'https://cdn.rcd.gg/PreMiD/websites/S/Star%2B/assets/logo.png'
   }
 
   // Star+ videos

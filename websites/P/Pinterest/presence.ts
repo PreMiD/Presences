@@ -8,7 +8,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000)
 enum ActivityAssets {
   Likes = 'https://cdn.rcd.gg/PreMiD/websites/P/Pinterest/assets/0.png',
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/P/Pinterest/assets/logo.png',
-  Loading = 'https://i.imgur.com/6s5f2TA.gif',
+  Loading = 'https://cdn.rcd.gg/PreMiD/websites/P/Pinterest/assets/1.gif',
 }
 
 presence.on('UpdateData', async () => {

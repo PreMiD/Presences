@@ -3,7 +3,7 @@ const presence = new Presence({ clientId: '778648674699706410' })
 presence.on('UpdateData', async () => {
   const path: string = document.location.pathname
   const presenceData: PresenceData = {
-    largeImageKey: 'https://i.imgur.com/pQxkvj6.jpeg',
+    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/E/Ekrem%20%C4%B0mamo%C4%9Flu/assets/logo.jpeg',
     startTimestamp: Date.now(),
   }
   const baslik = document.querySelector('h1.title')

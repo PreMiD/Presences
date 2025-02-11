@@ -8,7 +8,7 @@ const startTimestamp = Math.floor(Date.now() / 1000)
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     type: ActivityType.Watching,
-    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/A/Apple%20TV+/assets/logo.png',
+    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/A/Apple%20TV%2B/assets/logo.png',
     details: 'Browsing...',
     smallImageKey: Assets.Search,
     startTimestamp,

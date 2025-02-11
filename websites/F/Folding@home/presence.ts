@@ -9,7 +9,7 @@ presence.on('iFrameData', (data: unknown) => {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/F/Folding@home/assets/logo.png',
+    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/F/Folding%40home/assets/logo.png',
   }
 
   presenceData.details = `Contributing to: ${points}`

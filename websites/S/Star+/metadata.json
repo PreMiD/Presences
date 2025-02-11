@@ -27,8 +27,8 @@
   "url": "www.starplus.com",
   "regExp": "([a-z0-9-]+[.])*starplus[.]com[/]",
   "version": "1.0.21",
-  "logo": "https://cdn.rcd.gg/PreMiD/websites/S/Star+/assets/logo.png",
-  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Star+/assets/thumbnail.png",
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/S/Star%2B/assets/logo.png",
+  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Star%2B/assets/thumbnail.png",
   "color": "#271f44",
   "category": "videos",
   "tags": [

@@ -16,7 +16,7 @@ presence.on('UpdateData', async () => {
   const video = document.querySelector<HTMLVideoElement>('video')
   const { href } = window.location
   const presenceData: PresenceData = {
-    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/A/AMC+/assets/logo.png',
+    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/A/AMC%2B/assets/logo.png',
   }
 
   if (href !== oldUrl) {
