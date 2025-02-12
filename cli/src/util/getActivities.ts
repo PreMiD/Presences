@@ -157,7 +157,7 @@ async function getChangedFilesLocal() {
   const head = execSync('git rev-parse HEAD').toString().trim()
   const diffOutput = execSync(`git diff --name-status ${base} ${head}`).toString().trim()
 
-  return diffOutput.split('\n').map((line) => {
+  return diffOutput.split('\n').filter(line => line.length > 0).map((line) => {
     const [status, path] = line.split('\t')
     return {
       path,
