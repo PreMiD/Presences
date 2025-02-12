@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.13",
+	"apiVersion": 1,
+	"author": {
+		"id": "332840377763758082",
+		"name": "6r33n"
+	},
+	"service": "Baekjoon Online Judge",
+	"altnames": ["BOJ", "백준"],
+	"description": {
+		"en": "Baekjoon Online Judge is a website that hosts competitive programming contests."
+	},
+	"url": "www.acmicpc.net",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/w23kTtd.png",
+	"thumbnail": "https://onlinejudgeimages.s3-ap-northeast-1.amazonaws.com/images/boj-og.png",
+	"color": "#1a75bc",
+	"category": "other",
+	"tags": [
+		"coding",
+		"competition",
+		"edutation",
+		"technology",
+		"programming",
+		"contest",
+		"algorithm"
+	]
+}
