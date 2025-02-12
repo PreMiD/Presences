@@ -1,16 +1,18 @@
-const iframe = new iFrame();
+const iframe = new iFrame()
 
-iframe.on("UpdateData", async () => {
-	const video: HTMLVideoElement =
-		document.querySelector(".jw-video.jw-reset") ||
-		document.querySelector(".video") ||
-		document.querySelector(".plyr__video-wrapper > video") ||
-		document.querySelector("video");
-	if (video && !isNaN(video.duration)) {
-		iframe.send({
-			duration: video.duration,
-			currentTime: video.currentTime,
-			paused: video.paused,
-		});
-	} else iframe.send(null);
-});
+iframe.on('UpdateData', async () => {
+  const video = document.querySelector<HTMLVideoElement>('.jw-video.jw-reset')
+    || document.querySelector<HTMLVideoElement>('.video')
+    || document.querySelector<HTMLVideoElement>('.plyr__video-wrapper > video')
+    || document.querySelector<HTMLVideoElement>('video')
+  if (video && !Number.isNaN(video.duration)) {
+    iframe.send({
+      duration: video.duration,
+      currentTime: video.currentTime,
+      paused: video.paused,
+    })
+  }
+  else {
+    iframe.send(null)
+  }
+})
