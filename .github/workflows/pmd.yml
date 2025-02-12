@@ -24,7 +24,7 @@ jobs:
           cache: npm
 
       - name: Install pmd
-        run: HUSKY=0 npm ci
+        run: npm ci
 
       - name: Validate metadata and build
         run: npx pmd build --changed --no-kill --validate --sarif
