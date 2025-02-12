@@ -146,7 +146,10 @@ async function getChangedFilesCi() {
   })
 
   const files = gitDiffParser.parse(await response.text())
-  return files.map(file => ({ path: file.newPath || file.oldPath, deleted: file.type === 'delete' }))
+  return files.map(file => ({
+    path: file.type === 'delete' ? file.oldPath : file.newPath,
+    deleted: file.type === 'delete',
+  }))
 }
 
 async function getChangedFilesLocal() {
