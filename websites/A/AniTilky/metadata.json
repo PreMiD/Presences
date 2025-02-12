@@ -15,7 +15,12 @@
   "thumbnail": "https://i.imgur.com/GAw2LbQ.png",
   "color": "#FF6B6B",
   "category": "anime",
-  "tags": ["anime", "video", "streaming", "turkish"],
+  "tags": [
+    "anime",
+    "video",
+    "streaming",
+    "turkish"
+  ],
   "iframe": true,
   "iFrameRegExp": "anitilky\\.xyz",
   "regExp": "anitilky\\.xyz",
