@@ -13,7 +13,7 @@ presence.on('UpdateData', async () => {
 
   if (pathname.includes('/rooms')) {
     if (privacy) {
-      presenceData.details = 'Viewing a room'
+      presenceData.details = 'Viewing a room '
     }
     else {
       presenceData.details = 'Viewing a room'
