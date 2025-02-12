@@ -39,11 +39,15 @@ const tierImage: Record<number, string> = {
 	28: "https://drive.google.com/uc?id=1sV_m0fNOyokHKku1XCNl6K-mNWCGrfPT",
 	29: "https://drive.google.com/uc?id=1dhgZDJTuY_meoBblWnhcOGBfTNWoZU0z",
 	30: "https://drive.google.com/uc?id=1K_p1RbQVjEjBIE5MG9S_P2jX0QuFt2VO",
-	31: "https://drive.google.com/uc?id=1lBsfcOoySY5WgRwtREhjyD7DzLLI7Fqv"
+	31: "https://drive.google.com/uc?id=1lBsfcOoySY5WgRwtREhjyD7DzLLI7Fqv",
 };
 
 function getTierName(tierNumber: number): string {
-	return `${["루비", "다이아몬드", "플래티넘", "골드", "실버", "브론즈"][6 - Math.ceil(tierNumber / 5)]} ${5 - ((tierNumber - 1) % 5)}`;
+	return `${
+		["루비", "다이아몬드", "플래티넘", "골드", "실버", "브론즈"][
+			6 - Math.ceil(tierNumber / 5)
+		]
+	} ${5 - ((tierNumber - 1) % 5)}`;
 }
 
 presence.on("UpdateData", async () => {
@@ -82,7 +86,15 @@ presence.on("UpdateData", async () => {
 		case "workbook": {
 			if (path.includes("view")) {
 				presenceData.details = "문제집 보는 중";
-				presenceData.state = `${document.querySelector("body > div.wrapper > div.container.content > div.row > div:nth-child(2) > div > h1 > span:nth-child(1)").textContent} - ${document.querySelector("body > div.wrapper > div.container.content > div.row > div:nth-child(2) > div > blockquote > a").textContent}`;
+				presenceData.state = `${
+					document.querySelector(
+						"body > div.wrapper > div.container.content > div.row > div:nth-child(2) > div > h1 > span:nth-child(1)"
+					).textContent
+				} - ${
+					document.querySelector(
+						"body > div.wrapper > div.container.content > div.row > div:nth-child(2) > div > blockquote > a"
+					).textContent
+				}`;
 			} else {
 				presenceData.details = "페이지 보는 중";
 				presenceData.state = "문제집";
@@ -93,10 +105,14 @@ presence.on("UpdateData", async () => {
 		case "contest": {
 			if (path.includes("view")) {
 				presenceData.details = "대회 보는 중";
-				presenceData.state = document.querySelector("body > div.wrapper > div.container.content > div > div.col-md-12 > div > h1").textContent;
+				presenceData.state = document.querySelector(
+					"body > div.wrapper > div.container.content > div > div.col-md-12 > div > h1"
+				).textContent;
 			} else if (path.includes("board")) {
 				presenceData.details = "스코어보드 보는 중";
-				presenceData.state = document.querySelector("#page-wrapper > div.row.border-bottom.white-bg > nav > div.navbar-header > a").textContent;
+				presenceData.state = document.querySelector(
+					"#page-wrapper > div.row.border-bottom.white-bg > nav > div.navbar-header > a"
+				).textContent;
 			} else {
 				presenceData.details = "페이지 보는 중";
 				presenceData.state = "대회";
@@ -122,9 +138,15 @@ presence.on("UpdateData", async () => {
 				presenceData.state = "맞힌 사람";
 			} else {
 				presenceData.details = "문제 푸는 중";
-				presenceData.state = `${document.querySelector("body > div.wrapper > div.container.content > div.row > div:nth-child(3) > ul > li.active").textContent} - ${document.querySelector("#problem_title").textContent}`;
-				
-				const isTier = document.querySelector("body > div.wrapper > div.container.content > div.row > div:nth-child(3) > ul > li.active > a > img") as HTMLImageElement;
+				presenceData.state = `${
+					document.querySelector(
+						"body > div.wrapper > div.container.content > div.row > div:nth-child(3) > ul > li.active"
+					).textContent
+				} - ${document.querySelector("#problem_title").textContent}`;
+
+				const isTier = document.querySelector(
+					"body > div.wrapper > div.container.content > div.row > div:nth-child(3) > ul > li.active > a > img"
+				) as HTMLImageElement;
 				if (isTier) {
 					const tier = Number(isTier.src.split("/").pop().replace(".svg", ""));
 					presenceData.smallImageKey = tierImage[tier];
@@ -144,7 +166,9 @@ presence.on("UpdateData", async () => {
 
 		case "user": {
 			presenceData.details = "유저 보는 중";
-			presenceData.state = document.querySelector("body > div.wrapper > div.container.content > div.row > div:nth-child(1) > div > h1").textContent;
+			presenceData.state = document.querySelector(
+				"body > div.wrapper > div.container.content > div.row > div:nth-child(1) > div > h1"
+			).textContent;
 			break;
 		}
 
