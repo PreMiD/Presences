@@ -1,13 +1,12 @@
 #! /usr/bin/env node
 
-import { readFile } from 'node:fs/promises'
 import { cac } from 'cac'
 import { build } from './commands/build.js'
 import { bump } from './commands/bump.js'
 import { newActivity } from './commands/new.js'
 import { release } from './commands/release.js'
 import { updateAssets } from './commands/updateAssets.js'
-import { getPackageJson } from './util/getPackageJson.js'
+import { getCliPackageJson, getPackageJson } from './util/getPackageJson.js'
 import { exit } from './util/log.js'
 
 const cli = cac('pmd')
@@ -17,9 +16,7 @@ if (localPackageJson.name !== 'activities') {
   exit('This CLI is only available in the activities repository')
 }
 
-const cliPackageJson = JSON.parse(await readFile('./cli/package.json', 'utf-8').catch(() => {
-  exit('This CLI is only available in the activities repository')
-}))
+const cliPackageJson = await getCliPackageJson()
 
 cli
   .command('new [activity]', 'Create a new activity')

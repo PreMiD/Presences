@@ -17,6 +17,10 @@ export async function buildChanged({
 }) {
   const { changed } = await getChangedActivities()
   if (changed.length === 0) {
+    // If no activities are changed, we still want to write the sarif log
+    if (sarif) {
+      await writeSarifLog()
+    }
     success('No changed activities found')
   }
 
