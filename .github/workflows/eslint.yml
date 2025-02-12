@@ -25,7 +25,7 @@ jobs:
 
       - name: Install ESLint
         run: |
-          HUSKY=0 npm ci
+          npm ci
           npm install @microsoft/eslint-formatter-sarif@3.1.0
 
       - name: Run ESLint
