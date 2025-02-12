@@ -11,18 +11,18 @@ window.addEventListener('message', (e) => {
 const script = document.createElement('script')
 script.textContent = `
 setInterval(() => {
-	const images = document.querySelector("disney-web-player")?.mediaPlayer?.mediaPlaybackCriteria?.metadata?.images_experience?.standard?.tile
-	ratios = Object.keys(images),
-	goal = 100;
+const images = document.querySelector("disney-web-player")?.mediaPlayer?.mediaPlaybackCriteria?.metadata?.images_experience?.standard?.tile
+ratios = Object.keys(images),
+goal = 100;
 
-	const closest = ratios.reduce(function(prev, curr) {
-	return (Math.abs((100 / curr) - goal) < Math.abs((100 / prev) - goal) ? curr : prev);
-	});
+const closest = ratios.reduce(function(prev, curr) {
+return (Math.abs((100 / curr) - goal) < Math.abs((100 / prev) - goal) ? curr : prev);
+});
 
-	window.postMessage({ type: "pmd-receive-image-id", imageId: images?.[closest]?.imageId }, "*");
-	}, 100);
-`;
-document.head.appendChild(script);
+window.postMessage({ type: "pmd-receive-image-id", imageId: images?.[closest]?.imageId }, "*");
+}, 100);
+`
+document.head.appendChild(script)
 
 const presence: Presence = new Presence({
   clientId: '630236276829716483',
@@ -73,9 +73,10 @@ presence.on('UpdateData', async () => {
         case pathname.includes('play'): {
           const video = document.querySelector<HTMLVideoElement>('video#hivePlayer')
 
-					//* Wait for elements to load to prevent setactivity spam
-					if (!video || !imageId) return;
-					presenceData.largeImageKey = `https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/${imageId}/compose?format=png&width=512`;
+          //* Wait for elements to load to prevent setactivity spam
+          if (!video || !imageId)
+            return
+          presenceData.largeImageKey = `https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/${imageId}/compose?format=png&width=512`
 
           if (!privacy) {
             if (presenceData.startTimestamp)
