@@ -2,7 +2,7 @@ import { writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import process from 'node:process'
 import { pathToFileURL } from 'node:url'
-import { getPackageJson } from './getPackageJson.js'
+import { getCliPackageJson } from './getPackageJson.js'
 
 export enum SarifRuleId {
   bumpCheck = 'bump-check',
@@ -108,11 +108,6 @@ export function addSarifLog(log: {
   }
 }) {
   log.path = log.path.replace(process.cwd(), '')
-  if (!sarifLog.runs[0].tool.driver.semanticVersion) {
-    getPackageJson().then((packageJson) => {
-      sarifLog.runs[0].tool.driver.semanticVersion = packageJson.version
-    })
-  }
 
   if (typeof sarifArtifactIndices[log.path] === 'undefined') {
     sarifArtifactIndices[log.path] = nextArtifactIndex++
@@ -161,6 +156,10 @@ export function addSarifLog(log: {
 }
 
 export async function writeSarifLog() {
+  await getCliPackageJson().then((packageJson) => {
+    sarifLog.runs[0].tool.driver.semanticVersion = packageJson.version
+  })
+
   if (Object.keys(sarifFiles).length > 0) {
     sarifLog.runs[0].artifacts = []
 

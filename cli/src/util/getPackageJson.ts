@@ -12,3 +12,15 @@ export async function getPackageJson(): Promise<Record<string, any>> {
 
   return packageJson = localPackageJson
 }
+
+let cliPackageJson: Record<string, any> | undefined
+export async function getCliPackageJson(): Promise<Record<string, any>> {
+  if (cliPackageJson)
+    return cliPackageJson
+
+  const localCliPackageJson = JSON.parse(await readFile('./cli/package.json', 'utf-8').catch(() => {
+    exit('This CLI is only available in the activities repository')
+  }))
+
+  return cliPackageJson = localCliPackageJson
+}
