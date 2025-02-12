@@ -1,28 +1,28 @@
 const presence = new Presence({
-		clientId: "682593223948238849",
-	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+  clientId: '682593223948238849',
+})
+const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 function getRow(row: number) {
-	const metas = document.querySelectorAll("meta");
-	for (const meta of metas) {
-		if (meta.getAttribute("property") === `premid:row${row}`)
-			return meta.getAttribute("content");
-	}
-	return;
+  const metas = document.querySelectorAll('meta')
+  for (const meta of metas) {
+    if (meta.getAttribute('property') === `premid:row${row}`)
+      return meta.getAttribute('content')
+  }
 }
 
-presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-		largeImageKey:
-			"https://cdn.rcd.gg/PreMiD/websites/T/taiga%20Bot/assets/logo.png",
-		startTimestamp: browsingTimestamp,
-	};
-	presenceData.details = getRow(1);
-	presenceData.state = getRow(2);
+presence.on('UpdateData', async () => {
+  const presenceData: PresenceData = {
+    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/T/taiga%20Bot/assets/logo.png',
+    startTimestamp: browsingTimestamp,
+  }
+  presenceData.details = getRow(1)
+  presenceData.state = getRow(2)
 
-	if (!presenceData.details) delete presenceData.details;
-	if (!presenceData.state) delete presenceData.state;
+  if (!presenceData.details)
+    delete presenceData.details
+  if (!presenceData.state)
+    delete presenceData.state
 
-	presence.setActivity(presenceData);
-});
+  presence.setActivity(presenceData)
+})
