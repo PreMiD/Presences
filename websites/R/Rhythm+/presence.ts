@@ -1,3 +1,5 @@
+import {  Assets } from 'premid'
+
 window.addEventListener("message", e => {
 	if (e.data.type === "pmd-receive-info") ({ songInfo, sheetInfo } = e.data);
 });
