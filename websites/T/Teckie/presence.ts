@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 
 enum ActivityAssets { // Other default assets can be found at index.d.ts
-  Logo = 'https://i.imgur.com/Gagky0u.png',
+  Logo = 'https://i.postimg.cc/FHdK56R2/my-ONfuy-waifu2x-art-noise1-scale-waifu2x-art-noise1-scale-waifu2x-art-noise1-scale.png',
 }
 
 presence.on('UpdateData', async () => {
