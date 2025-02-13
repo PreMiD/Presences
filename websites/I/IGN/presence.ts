@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-const enum Assets {
+enum ActivityAssets {
   Logo = 'https://i.imgur.com/PPpmg7Q.png',
 }
 
@@ -53,7 +53,7 @@ async function getStrings() {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: Assets.Logo,
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
   const { pathname, href, search } = document.location
@@ -84,7 +84,7 @@ presence.on('UpdateData', async () => {
             url: href,
           },
         ]
-        presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? Assets.Logo
+        presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? ActivityAssets.Logo
       }
       else {
         presenceData.details = strings.viewCategory
@@ -101,7 +101,7 @@ presence.on('UpdateData', async () => {
           url: href,
         },
       ]
-      presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? Assets.Logo
+      presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? ActivityAssets.Logo
       break
     }
     case 'person': {
@@ -177,7 +177,7 @@ presence.on('UpdateData', async () => {
       if (pathThree) {
         presenceData.details = strings.viewList
         presenceData.state = document.querySelector('.display-title').textContent
-        presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.aspect-ratio-3-2')?.src ?? Assets.Logo
+        presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.aspect-ratio-3-2')?.src ?? ActivityAssets.Logo
       }
       else {
         presenceData.details = strings.viewPlaylists
@@ -274,7 +274,7 @@ presence.on('UpdateData', async () => {
         default: {
           presenceData.details = strings.viewGame
           presenceData.state = document.querySelector('.display-title').textContent
-          presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? Assets.Logo
+          presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? ActivityAssets.Logo
           presenceData.buttons = [
             {
               label: strings.buttonViewGame,
@@ -301,7 +301,7 @@ presence.on('UpdateData', async () => {
           default: {
             presenceData.details = strings.viewMovie
             presenceData.state = document.querySelector('.display-title').textContent
-            presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? Assets.Logo
+            presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? ActivityAssets.Logo
             presenceData.buttons = [
               {
                 label: strings.buttonViewMovie,
@@ -333,7 +333,7 @@ presence.on('UpdateData', async () => {
           default: {
             presenceData.details = strings.viewTV
             presenceData.state = document.querySelector('.display-title').textContent
-            presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? Assets.Logo
+            presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? ActivityAssets.Logo
             presenceData.buttons = [
               {
                 label: strings.buttonViewTV,
@@ -365,7 +365,7 @@ presence.on('UpdateData', async () => {
           default: {
             presenceData.details = strings.viewComics
             presenceData.state = document.querySelector('.display-title').textContent
-            presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? Assets.Logo
+            presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? ActivityAssets.Logo
             presenceData.buttons = [
               {
                 label: strings.buttonViewComics,
@@ -397,7 +397,7 @@ presence.on('UpdateData', async () => {
           default: {
             presenceData.details = strings.viewTech
             presenceData.state = document.querySelector('.display-title').textContent
-            presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? Assets.Logo
+            presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? ActivityAssets.Logo
             presenceData.buttons = [
               {
                 label: strings.buttonViewTech,
@@ -445,7 +445,7 @@ presence.on('UpdateData', async () => {
         if (gameTab) {
           presenceData.details = strings.viewGame
           presenceData.state = gameTab
-          presenceData.largeImageKey = document.querySelector<HTMLImageElement>('img_cover')?.src ?? Assets.Logo
+          presenceData.largeImageKey = document.querySelector<HTMLImageElement>('img_cover')?.src ?? ActivityAssets.Logo
           presenceData.buttons = [
             {
               label: strings.buttonViewGame,
