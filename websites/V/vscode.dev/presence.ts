@@ -687,8 +687,8 @@ presence.on("UpdateData", async () => {
 		status: Stauts = {
 			file: document.querySelector(".tab.active a")?.textContent,
 			workspace: document
-				.querySelector("div.pane-header[aria-label='Folders Section'] h3")
-				?.getAttribute("title"),
+				.querySelector(".pane-header > .codicon-explorer-view-icon")
+				?.getAttribute("aria-label"),
 			editor: {
 				lang: document.querySelector("#status\\.editor\\.mode")?.textContent,
 			},
@@ -736,19 +736,26 @@ function Replace(value: string, empty: string) {
 	for (const [string, selector] of Object.entries({
 		"%file%": [".tab.active a"],
 		"%branch%": ["#status\\.scm\\.0"],
-		"%error%": ["#status\\.problems > a > span.codiconcodicon-error"],
-		"%problems%": ["#status\\.problems > a > span.codicon.codicon-warning"],
-		"%workspace%": [
-			"div.pane-header[aria-label='Folders Section'] h3",
-			"title",
+		"%error%": [
+			"#status\\.problems > a > span.codicon.codicon-error",
+			"nextSibling",
 		],
+		"%problems%": [
+			"#status\\.problems > a > span.codicon.codicon-warning",
+			"nextSibling",
+		],
+		"%workspace%": [".pane-header > .codicon-explorer-view-icon", "aria-label"],
 		"%lang%": ["#status\\.editor\\.mode"],
 		"%encoding%": ["#status\\.editor\\.encoding"],
 		"%selection%": ["#status\\.editor\\.selection"],
 	})) {
 		value = value.replace(
 			string,
-			selector[1]
+			selector[1] === "nextSibling"
+				? document
+						.querySelector(selector[0])
+						?.nextSibling?.textContent?.trim() || empty
+				: selector[1]
 				? document
 						.querySelector(selector[0])
 						?.getAttribute(selector[1])

@@ -5,12 +5,19 @@
 		"name": "Faelayis",
 		"id": "328731868096888833"
 	},
+	"contributors": [
+		{
+			"name": "Atom Skully",
+			"id": "671037171611729920"
+		}
+	],
 	"service": "vscode.dev",
 	"description": {
-		"en": "Visual Studio Code for the Web Anywhere anytime, entirely in your browser [Parameters for Customisation](https://github.com/PreMiD/Presences/blob/master/websites/V/vscode.dev/README.md)"
+		"en": "Visual Studio Code for the Web Anywhere anytime, entirely in your browser [Parameters for Customisation](https://github.com/PreMiD/Presences/blob/master/websites/V/vscode.dev/README.md)",
+		"fr": "Visual Studio Code pour le Web n'importe où, n'importe quand, entièrement dans votre navigateur [Paramètres de personnalisation](https://github.com/PreMiD/Presences/blob/master/websites/V/vscode.dev/README.md)"
 	},
 	"url": "vscode.dev",
-	"version": "1.0.13",
+	"version": "1.1.0",
 	"logo": "https://cdn.rcd.gg/PreMiD/websites/V/vscode.dev/assets/logo.png",
 	"thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/vscode.dev/assets/thumbnail.png",
 	"color": "#3eaaf2",
