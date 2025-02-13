@@ -1,60 +1,60 @@
-import { Assets } from "premid";
+import { Assets } from 'premid';
 
 const presence = new Presence({
-  clientId: "1334576902081351761",
+  clientId: '1334576902081351761'
 });
 const browsingTimestamp = Math.floor(Date.now() / 1000);
 const adressedToTable: { [key: string]: string } = {}; // Table to store AdressedTo by letter ID
 
 function isModalOpen(): boolean {
-  return !!document.querySelector("#modalCreateLetter");
+  return !!document.querySelector('#modalCreateLetter');
 }
 
-presence.on("UpdateData", async () => {
+presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "https://envolya.com/envolya-logo.png",
+    largeImageKey: 'https://envolya.com/envolya-logo.png',
     startTimestamp: browsingTimestamp,
   };
 
-  if (document.location.pathname.includes("/letters")) {
+  if (document.location.pathname.includes('/letters')) {
     const currentLetterValueElement = document.querySelector(
-      "#currentLetterValue"
+      '#currentLetterValue'
     );
-    const maxLetterValueElement = document.querySelector("#maxLetterValue");
+    const maxLetterValueElement = document.querySelector('#maxLetterValue');
     const letterCount = `${
-      currentLetterValueElement ? currentLetterValueElement.textContent : "0"
-    }/${maxLetterValueElement ? maxLetterValueElement.textContent : "5"}`;
+      currentLetterValueElement ? currentLetterValueElement.textContent : '0'
+    }/${maxLetterValueElement ? maxLetterValueElement.textContent : '5'}`;
     presenceData.state = `Viewing letters (${letterCount})`;
 
     if (isModalOpen())
-      presenceData.state = "Creating a new letter";
-  } else if (document.location.pathname.includes("/letter/")) {
+      presenceData.state = 'Creating a new letter';
+  } else if (document.location.pathname.includes('/letter/')) {
     const letterTitle = document.querySelector(
-      "#letterEditPageTitle"
+      '#letterEditPageTitle'
     )?.textContent;
     presenceData.state = `Writing a letter${
-      letterTitle ? `: “${letterTitle}”` : ""
+      letterTitle ? `: “${letterTitle}”` : ''
     }`;
     presenceData.smallImageKey = Assets.Writing;
 
     if (isModalOpen())
-      presenceData.state = "Creating a new letter";
-  } else if (document.location.pathname.includes("/l/")) {
-    const letterId = document.location.pathname.split("/l/")[1];
+      presenceData.state = 'Creating a new letter';
+  } else if (document.location.pathname.includes('/l/')) {
+    const letterId = document.location.pathname.split('/l/')[1];
     const letterAuthor = document.title
-      .split(" - ")[1]
-      ?.split(" sent you a letter!")[0];
-    const AdressedToElement = document.querySelector("#letterAdressedTo");
+      .split(' - ')[1]
+      ?.split(' sent you a letter!')[0];
+    const AdressedToElement = document.querySelector('#letterAdressedTo');
     const AdressedTo = AdressedToElement
       ? AdressedToElement.textContent
       : letterId
         ? adressedToTable[letterId]
-        : "";
+        : '';
     presenceData.smallImageKey = Assets.Reading;
 
     if (AdressedToElement)
       if (letterId) {
-        adressedToTable[letterId] = AdressedToElement.textContent || "";
+        adressedToTable[letterId] = AdressedToElement.textContent || '';
       }
 
     if (letterAuthor && AdressedTo)
@@ -63,17 +63,17 @@ presence.on("UpdateData", async () => {
       presenceData.state = `Reading a letter from ${letterAuthor}`;
     else if (AdressedTo)
       presenceData.state = `Reading a letter: “For: ${AdressedTo}”`;
-    else presenceData.state = "Reading a letter";
-  } else if (document.location.pathname === "/")
-    presenceData.state = "Viewing the homepage";
-  else if (document.location.pathname.includes("/register"))
-    presenceData.state = "Registering";
-  else if (document.location.pathname.includes("/login"))
-    presenceData.state = "Logging in";
-  else if (document.location.pathname.includes("/upgrade"))
-    presenceData.state = "Buying premium";
-  else if (document.location.pathname.includes("/settings"))
-    presenceData.state = "Account settings";
+    else presenceData.state = 'Reading a letter';
+  } else if (document.location.pathname === '/')
+    presenceData.state = 'Viewing the homepage';
+  else if (document.location.pathname.includes('/register'))
+    presenceData.state = 'Registering';
+  else if (document.location.pathname.includes('/login'))
+    presenceData.state = 'Logging in';
+  else if (document.location.pathname.includes('/upgrade'))
+    presenceData.state = 'Buying premium';
+  else if (document.location.pathname.includes('/settings'))
+    presenceData.state = 'Account settings';
 
   if (presenceData.state) presence.setActivity(presenceData);
 });
