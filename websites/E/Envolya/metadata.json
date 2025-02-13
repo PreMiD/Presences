@@ -1,24 +1,19 @@
 {
-	"$schema": "https://schemas.premid.app/metadata/1.13",
-	"apiVersion": 1,
-	"author": {
-		"id": "390265556357611521",
-		"name": "lenoch"
-	},
-	"service": "Envolya",
-	"description": {
-		"en": "Send a personalized virtual letter to friends, loved ones, or your partner, making each message truly special."
-	},
-	"url": "envolya.com",
-	"version": "1.0.0",
-	"logo": "https://envolya.com/envolya-logo.png",
-	"thumbnail": "https://i.imgur.com/59hxy8z.png",
-	"color": "#5e92c1",
-	"category": "socials",
-	"tags": [
-		"social",
-		"friends",
-		"letters",
-		"message"
-	]
+  "$schema": "https://schemas.premid.app/metadata/1.13",
+  "apiVersion": 1,
+  "author": {
+    "id": "390265556357611521",
+    "name": "lenoch"
+  },
+  "service": "Envolya",
+  "description": {
+    "en": "Send a personalized virtual letter to friends, loved ones, or your partner, making each message truly special."
+  },
+  "url": "envolya.com",
+  "version": "1.0.0",
+  "logo": "https://envolya.com/envolya-logo.png",
+  "thumbnail": "https://i.imgur.com/59hxy8z.png",
+  "color": "#5e92c1",
+  "category": "socials",
+  "tags": ["social", "friends", "letters", "message"]
 }

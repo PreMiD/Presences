@@ -1,10 +1,10 @@
 import { Assets } from "premid";
 
 const presence = new Presence({
-    clientId: "1334576902081351761",
-  }),
-  browsingTimestamp = Math.floor(Date.now() / 1000),
-  adressedToTable: { [key: string]: string } = {}; // Table to store AdressedTo by letter ID
+  clientId: "1334576902081351761",
+});
+const browsingTimestamp = Math.floor(Date.now() / 1000);
+const adressedToTable: { [key: string]: string } = {}; // Table to store AdressedTo by letter ID
 
 function isModalOpen(): boolean {
   return !!document.querySelector("#modalCreateLetter");
@@ -18,15 +18,16 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname.includes("/letters")) {
     const currentLetterValueElement = document.querySelector(
-        "#currentLetterValue"
-      ),
-      maxLetterValueElement = document.querySelector("#maxLetterValue"),
-      letterCount = `${
-        currentLetterValueElement ? currentLetterValueElement.textContent : "0"
-      }/${maxLetterValueElement ? maxLetterValueElement.textContent : "5"}`;
+      "#currentLetterValue"
+    );
+    const maxLetterValueElement = document.querySelector("#maxLetterValue");
+    const letterCount = `${
+      currentLetterValueElement ? currentLetterValueElement.textContent : "0"
+    }/${maxLetterValueElement ? maxLetterValueElement.textContent : "5"}`;
     presenceData.state = `Viewing letters (${letterCount})`;
 
-    if (isModalOpen()) presenceData.state = "Creating a new letter";
+    if (isModalOpen())
+      presenceData.state = "Creating a new letter";
   } else if (document.location.pathname.includes("/letter/")) {
     const letterTitle = document.querySelector(
       "#letterEditPageTitle"
@@ -36,18 +37,19 @@ presence.on("UpdateData", async () => {
     }`;
     presenceData.smallImageKey = Assets.Writing;
 
-    if (isModalOpen()) presenceData.state = "Creating a new letter";
+    if (isModalOpen())
+      presenceData.state = "Creating a new letter";
   } else if (document.location.pathname.includes("/l/")) {
-    const letterId = document.location.pathname.split("/l/")[1],
-      letterAuthor = document.title
-        .split(" - ")[1]
-        ?.split(" sent you a letter!")[0],
-      AdressedToElement = document.querySelector("#letterAdressedTo"),
-      AdressedTo = AdressedToElement
-        ? AdressedToElement.textContent
-        : letterId
-          ? adressedToTable[letterId]
-          : "";
+    const letterId = document.location.pathname.split("/l/")[1];
+    const letterAuthor = document.title
+      .split(" - ")[1]
+      ?.split(" sent you a letter!")[0];
+    const AdressedToElement = document.querySelector("#letterAdressedTo");
+    const AdressedTo = AdressedToElement
+      ? AdressedToElement.textContent
+      : letterId
+        ? adressedToTable[letterId]
+        : "";
     presenceData.smallImageKey = Assets.Reading;
 
     if (AdressedToElement)
