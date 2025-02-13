@@ -1,4 +1,4 @@
-import { Assets } from 'premid'
+import { ActivityType, Assets } from 'premid'
 
 const presence = new Presence({
   clientId: '721748388143562852',
@@ -23,12 +23,15 @@ const media: MediaObj = {
   showName: undefined,
   seasonNumber: undefined,
   episodeNumber: undefined,
+  Type: undefined,
 }
 let isShow = false
 let isSong = false
 let prev: string | undefined
 let elapsed: number
 let i: number
+let oldArt = ''
+let dataURL = ''
 
 function setLoop(f: () => void, ms: number): number {
   f()
@@ -63,7 +66,31 @@ presence.on('UpdateData', async () => {
       elapsed = Math.floor(Date.now() / 1000)
     }
 
+    if (media.Type === 'Audio')
+      presenceData.type = ActivityType.Listening
+    else if (media.Type === 'Video')
+      presenceData.type = ActivityType.Watching
+
     if (media.state === 'playing' || media.state === 'paused') {
+      const img = document.querySelector<HTMLImageElement>('#albumArt')
+      if (!img)
+        return
+      if (img.src !== oldArt) {
+        const artCanvas = document.createElement('canvas')
+        const ctx = artCanvas.getContext('2d')
+        if (!ctx)
+          return
+        artCanvas.height = 256
+        artCanvas.width = 256
+
+        ctx.drawImage(img, 0, 0, artCanvas.width, artCanvas.height)
+        dataURL = artCanvas.toDataURL()
+        oldArt = img.src
+      }
+
+      if (!img.src.includes('/images/') && dataURL.includes('image'))
+        presenceData.largeImageKey = dataURL
+
       if (isSong) {
         if (media.title && media.album && media.title === media.album)
           media.album = undefined
@@ -200,6 +227,9 @@ const getStatus = setLoop(() => {
             getTag(collection, 'showName')
               ? (media.showName = decodeReq(getTag(collection, 'showName')!) ?? undefined)
               : (media.showName = undefined)
+            getTag(collection, 'Type')
+              ? (media.Type = decodeReq(getTag(collection, 'Type')!) ?? undefined)
+              : (media.Type = undefined)
 
             if (getTag(collection, 'artist') || getTag(collection, 'album')) {
               isSong = true
@@ -256,6 +286,11 @@ const getStatus = setLoop(() => {
                   req.responseXML!.getElementsByName('showName')[0]!,
                 ) ?? undefined)
               : (media.showName = undefined)
+            req.responseXML!.getElementsByName('showName')[0]
+              ? (media.Type = decodeReq(
+                  req.responseXML!.getElementsByName('Type')[0]!,
+                ) ?? undefined)
+              : (media.Type = undefined)
 
             if (
               req.responseXML!.getElementsByName('artist')[0]
@@ -350,5 +385,6 @@ interface MediaObj {
   showName?: string
   seasonNumber?: string
   episodeNumber?: string
+  Type?: string
   [key: string]: string | undefined
 }
