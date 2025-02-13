@@ -87,5 +87,6 @@ presence.on('UpdateData', async () => {
     presenceData.state = 'Account settings'
   }
 
-  if (presenceData.state) presence.setActivity(presenceData)
+  if (presenceData.state)
+    presence.setActivity(presenceData)
 })
