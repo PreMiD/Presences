@@ -1,6 +1,6 @@
 const presence = new Presence({
-		clientId: "1338891034310213683"
-	})
+	clientId: "1338891034310213683"
+})
 const enum Assets { // Other default assets can be found at index.d.ts
 	Logo = "",
 }
@@ -9,42 +9,42 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "https://81dojo.com/dojo/images/avatars/study_black.jpg"
 	};
-	switch (document.location.hostname){
+	switch (document.location.hostname) {
 		case "81dojo.com":
 			if (document.location.pathname == "/")
 				presenceData.details = "Viewing home page"; // todo: statuses for more pages
-			else if (document.location.pathname.includes("/client/")){
+			else if (document.location.pathname.includes("/client/")) {
 				if (parseFloat(document.getElementById("layerLogin").style.opacity) > 0)
 					presenceData.details = "Logging in to client";
-				else{ 
-					let server = document.getElementById("header-serverName").innerText.slice(0,-3)
-					let username = document.getElementById("header-playerName").innerText.slice(0,-3)
+				else {
+					let server = document.getElementById("header-serverName").innerText.slice(0, -3)
+					let username = document.getElementById("header-playerName").innerText.slice(0, -3)
 					if (document.getElementById("layerLobby").style.display == "block")
 						presenceData.details = "In " + server + " lobby"
-					else{
+					else {
 						let playerElements = document.querySelectorAll("[id='player-info-name']")
 						let playerElementIndex = 0;
 						const players = [];
 						const ratings = [];
-						for (let i = 0; i < playerElements.length; i++){
+						for (let i = 0; i < playerElements.length; i++) {
 							players.push(playerElements[i].innerHTML)
-							ratings.push(playerElements[i].parentElement.children.item(4).innerHTML.slice(3,7))
+							ratings.push(playerElements[i].parentElement.children.item(4).innerHTML.slice(3, 7))
 						}
-						if (username in players){
-							for (let i = 0; i < playerElements.length; i++){
+						if (username in players) {
+							for (let i = 0; i < playerElements.length; i++) {
 								if (playerElements[i].innerHTML == username)
 									playerElementIndex = i;
 							}
-							const opponentName = players[1-players.indexOf(username)]
-							const opponentRate = playerElements[1-playerElementIndex].parentNode.children.item(4).innerHTML.slice(3,7)
+							const opponentName = players[1 - players.indexOf(username)]
+							const opponentRate = playerElements[1 - playerElementIndex].parentNode.children.item(4).innerHTML.slice(3, 7)
 							if (playerElements[0].classList.contains("name-winner"))
 								presenceData.details = "In post-game analysis"
-							else{
+							else {
 								presenceData.details = "In a game"
 							}
 							presenceData.state = "vs. " + opponentName + "(" + opponentRate + ")"
 						}
-						else{
+						else {
 							presenceData.details = "Spectating"
 							presenceData.state = players[0] + " (" + ratings[0] + ") vs. " + players[1] + " (" + ratings[1] + ")"
 						}
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
 			}
 			else if (document.location.pathname.includes("/documents"))
 				presenceData.details = "Reading the docs: " + document.getElementById("firstHeading").innerText
-			else if (document.location.pathname.includes("/ja") || document.location.pathname.includes("/en") || document.location.pathname.includes("/cn")){
+			else if (document.location.pathname.includes("/ja") || document.location.pathname.includes("/en") || document.location.pathname.includes("/cn")) {
 				if (document.location.pathname.includes("/ja"))
 					presenceData.details = "On Japanese homepage"
 				else if (document.location.pathname.includes("/en"))
@@ -68,24 +68,24 @@ presence.on("UpdateData", async () => {
 			else if (document.location.pathname.includes("/ranking"))
 				presenceData.details = "WebSystem: Viewing rankings"
 			else if (document.location.pathname.includes("/tournaments"))
-				if (Number.isInteger(parseInt(document.location.pathname.substr(-1)))){
+				if (Number.isInteger(parseInt(document.location.pathname.substr(-1)))) {
 					presenceData.details = "WebSystem: Viewing tournament: " + document.getElementById("main").children[2].innerHTML
 				}
-				else{
+				else {
 					presenceData.details = "WebSystem: Browsing tournaments"
 				}
 			else if (document.location.pathname.includes("/titles"))
-				if (Number.isInteger(parseInt(document.location.pathname.substr(-1)))){
+				if (Number.isInteger(parseInt(document.location.pathname.substr(-1)))) {
 					presenceData.details = "WebSystem: Viewing title: " + document.getElementById("main").children[1].children[0].innerHTML
 				}
-				else{
+				else {
 					presenceData.details = "WebSystem: Browsing titles"
 				}
 			else if (document.location.pathname.includes("/circles"))
-				if (Number.isInteger(parseInt(document.location.pathname.substr(-1)))){
+				if (Number.isInteger(parseInt(document.location.pathname.substr(-1)))) {
 					presenceData.details = "WebSystem: Viewing club: " + document.getElementById("main").children[2].children[0].innerHTML
 				}
-				else{
+				else {
 					presenceData.details = "WebSystem: Browsing clubs"
 				}
 			else if (document.location.pathname.includes("/players/search"))
@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
 			break
 		case "wsl.81dojo.com":
 			if (document.location.pathname == "/index.php")
-				switch(new URL(document.URL).searchParams.get("mid")){
+				switch (new URL(document.URL).searchParams.get("mid")) {
 					case "0":
 						presenceData.details = "WSL: Viewing homepage";
 						break
