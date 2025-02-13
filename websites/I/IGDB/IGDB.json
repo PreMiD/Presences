@@ -6,7 +6,7 @@
   "IGDB.comingSoon": {
     "description": "",
     "message": "Viewing future games"
-  }, 
+  },
   "IGDB.recentlyReleased": {
     "description": "",
     "message": "Viewing recently released games"
@@ -111,19 +111,19 @@
     "description": "",
     "message": "Viewing Settings"
   },
-	"IGDB.karmaHunters": {
+  "IGDB.karmaHunters": {
     "description": "",
     "message": "Viewing Karma Hunters"
   },
-	"IGDB.about": {
+  "IGDB.about": {
     "description": "",
     "message": "Viewing About"
   },
-	"IGDB.contact": {
+  "IGDB.contact": {
     "description": "",
     "message": "Viewing Contact"
   },
-	"IGDB.API": {
+  "IGDB.API": {
     "description": "",
     "message": "Viewing API"
   }
