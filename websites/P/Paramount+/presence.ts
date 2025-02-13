@@ -1,187 +1,214 @@
-const presence = new Presence({
-		clientId: "821433038335377418",
-	}),
-	browsingTimestamp = Math.floor(Date.now() / 1000);
+import { ActivityType, Assets } from 'premid'
 
-let title: string, seasonEpisode: string, liveTitle: string;
+const presence = new Presence({
+  clientId: '821433038335377418',
+})
 
 function pathIncludes(path: string, str: string) {
-	return path.includes(str);
+  return path.includes(str)
 }
 
-const enum Logos {
-	Paramount = "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/logo.jpg",
-	CBS = "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/0.png",
-	BET = "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/1.png",
-	ComedyCentral = "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/2.png",
-	MTV = "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/3.png",
-	Nickelodeon = "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/4.jpg",
-	Smithsonian = "https://cdn.rcd.gg/PreMiD/websites/P/Paramount+/assets/5.png",
+enum Logos {
+  Paramount = 'https://cdn.rcd.gg/PreMiD/websites/P/Paramount%2B/assets/logo.jpg',
+  CBS = 'https://cdn.rcd.gg/PreMiD/websites/P/Paramount%2B/assets/0.png',
+  BET = 'https://cdn.rcd.gg/PreMiD/websites/P/Paramount%2B/assets/1.png',
+  ComedyCentral = 'https://cdn.rcd.gg/PreMiD/websites/P/Paramount%2B/assets/2.png',
+  MTV = 'https://cdn.rcd.gg/PreMiD/websites/P/Paramount%2B/assets/3.png',
+  Nickelodeon = 'https://cdn.rcd.gg/PreMiD/websites/P/Paramount%2B/assets/4.jpg',
+  Smithsonian = 'https://cdn.rcd.gg/PreMiD/websites/P/Paramount%2B/assets/5.png',
 }
 
-presence.on("UpdateData", async () => {
-	const strings = await presence.getStrings({
-		play: "general.playing",
-		pause: "general.paused",
-		live: "general.live",
-	});
-	let video: HTMLVideoElement = null;
-	const vidArea = document.querySelector(".video__player-area"),
-		presenceData: PresenceData = {
-			largeImageKey: Logos.Paramount,
-			startTimestamp: browsingTimestamp,
-		},
-		{ pathname: path } = document.location;
+presence.on('UpdateData', async () => {
+  const strings = await presence.getStrings({
+    play: 'general.playing',
+    pause: 'general.paused',
+    live: 'general.live',
+  })
+  let video: HTMLVideoElement | null = null
+  let presenceData: PresenceData = {
+    name: 'Paramount+',
+    largeImageKey: Logos.Paramount,
+    type: ActivityType.Watching,
+  }
+  const { pathname } = document.location
+  const vidArea = document.querySelector('.video__player-area')
 
-	switch (true) {
-		case pathIncludes(path, "/home"):
-			presenceData.details = "Browsing";
-			presenceData.state = "Viewing home page";
-			break;
+  switch (true) {
+    case pathIncludes(pathname, '/home'):
+      presenceData.details = 'Browsing'
+      presenceData.state = 'Viewing home page'
+      break
 
-		case pathIncludes(path, "/search"):
-			presenceData.details = "Searching";
-			presenceData.smallImageKey = Assets.Search;
-			presenceData.smallImageText = "Searching";
-			break;
+    case pathIncludes(pathname, '/search'):
+      presenceData.details = 'Searching'
+      presenceData.smallImageKey = Assets.Search
+      presenceData.smallImageText = 'Searching'
+      break
 
-		case pathIncludes(path, "/shows"): {
-			if (vidArea && pathIncludes(path, "/video")) {
-				const data = JSON.parse(
-					document.querySelector('[type="application/ld+json"]').textContent
-				);
+    case pathIncludes(pathname, '/shows'): {
+      const showData = JSON.parse(
+        document.querySelector('[type="application/ld+json"]')?.textContent ?? '{}',
+      )
 
-				video = document.querySelector("video");
+      if (vidArea && pathIncludes(pathname, '/video')) {
+        video = document.querySelector('video')
 
-				title = data.partOfSeries.name;
+        presenceData = {
+          ...presenceData,
+          name: showData.partOfSeries.name,
+          details: showData.partOfSeries.name,
+          state: `S${showData.partOfSeason.seasonNumber}:E${showData.episodeNumber} - ${showData.name}`,
+          smallImageKey: video && video.paused ? Assets.Pause : Assets.Play,
+          smallImageText: video && video.paused ? strings.pause : strings.play,
+          largeImageKey: showData.image || Logos.Paramount,
+        }
 
-				seasonEpisode = `S${data.partOfSeason.seasonNumber}:E${data.episodeNumber} - ${data.name}`;
+        if (video) {
+          [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestampsfromMedia(video)
+        }
+        if (video && video.paused) {
+          delete presenceData.startTimestamp
+          delete presenceData.endTimestamp
+        }
+      }
+      else if (
+        !vidArea
+        && document.querySelector('[type="application/ld+json"]') !== null
+      ) {
+        const showThumb = document.querySelector<HTMLImageElement>(
+          '#hero-slider > div > li > div > picture > img',
+        )?.src ?? Logos.Paramount
 
-				if (title) presenceData.details = title;
+        presenceData = {
+          ...presenceData,
+          name: showData.name,
+          largeImageKey: showThumb,
+          largeImageText: showData.name,
+          details: 'Viewing series details',
+          buttons: [
+            {
+              label: 'View Series',
+              url: showData.url,
+            },
+          ],
+          state: showData.name,
+        }
+      }
+      else {
+        presenceData.details = 'Browsing'
+        presenceData.state = 'Viewing Shows'
+      }
+      break
+    }
 
-				if (seasonEpisode) presenceData.state = seasonEpisode;
+    case pathIncludes(pathname, '/movies'):
+      if (
+        vidArea
+        && document.querySelector('video.marqueeVideo')
+        && !vidArea.querySelector('video')
+      ) {
+        const movieData = JSON.parse(
+          document.querySelector('[type="application/ld+json"]')?.textContent ?? '{}',
+        )
+        presenceData = {
+          ...presenceData,
+          largeImageKey: movieData.image,
+          largeImageText: movieData.name,
+          details: 'Viewing movie details',
+          state: movieData.name,
+          name: movieData.name,
+        }
+      }
+      else if (vidArea && vidArea.querySelector('video')) {
+        video = vidArea.querySelector('video')!
+        const movieData = JSON.parse(
+          document.querySelector('[type="application/ld+json"]')?.textContent ?? '{}',
+        )
+        const timestamps = presence.getTimestampsfromMedia(video)
 
-				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
-				presenceData.smallImageText = video.paused
-					? strings.pause
-					: strings.play;
-				presenceData.largeImageKey = data.image || Logos.Paramount;
+        presenceData = {
+          ...presenceData,
+          largeImageKey: movieData.image,
+          largeImageText: movieData.name,
+          smallImageKey: video.paused ? Assets.Pause : Assets.Play,
+          smallImageText: video.paused ? strings.pause : strings.play,
+          startTimestamp: timestamps[0],
+          endTimestamp: timestamps[1],
+          name: movieData.name,
+        }
 
-				[presenceData.startTimestamp, presenceData.endTimestamp] =
-					presence.getTimestampsfromMedia(video);
+        if (video.paused) {
+          delete presenceData.startTimestamp
+          delete presenceData.endTimestamp
+        }
+      }
+      else {
+        presenceData.details = 'Browsing'
+        presenceData.state = 'Viewing Movies'
+      }
+      break
 
-				if (video.paused) {
-					delete presenceData.startTimestamp;
-					delete presenceData.endTimestamp;
-				}
-			} else if (
-				!vidArea &&
-				document.querySelector('[type="application/ld+json"]') !== null
-			) {
-				presenceData.details = "Viewing series";
-				presenceData.state = JSON.parse(
-					document.querySelector('[type="application/ld+json"]').textContent
-				).name;
-			} else {
-				presenceData.details = "Browsing";
-				presenceData.state = "Viewing Shows";
-			}
-			break;
-		}
+    case pathIncludes(pathname, '/live'): {
+      const liveTitle = document.querySelector(
+        '.video__metadata.padded-container > p',
+      )?.textContent
 
-		case pathIncludes(path, "/movies"):
-			if (
-				vidArea &&
-				document.querySelector("video.marqueeVideo") &&
-				!vidArea.querySelector("video")
-			) {
-				presenceData.details = "Previewing a movie";
-				presenceData.state = JSON.parse(
-					document.querySelector('[type="application/ld+json"]').textContent
-				).name;
-			} else if (vidArea && vidArea.querySelector("video")) {
-				const movData = JSON.parse(
-					document.querySelector('[type="application/ld+json"]').textContent
-				);
+      presenceData.details = 'Watching Live TV'
+      presenceData.state = liveTitle
+      presenceData.smallImageKey = Assets.Live
+      presenceData.smallImageText = strings.live
+      break
+    }
 
-				video = vidArea.querySelector("video");
+    case pathIncludes(pathname, '/brands'):
+      presenceData.details = 'Browsing Brands'
+      presenceData.state = 'Viewing Brands'
 
-				if (movData.name) presenceData.state = movData.name;
-				presenceData.details = "Watching a movie";
+      if (pathIncludes(pathname, '/cbs/')) {
+        presenceData.details = 'Browsing Brand'
+        presenceData.state = 'CBS'
+        presenceData.largeImageKey = Logos.CBS
+      }
+      else if (pathIncludes(pathname, '/bet/')) {
+        presenceData.details = 'Browsing Brand'
+        presenceData.state = 'BET'
+        presenceData.largeImageKey = Logos.BET
+      }
+      else if (pathIncludes(pathname, '/comedy-central/')) {
+        presenceData.details = 'Browsing Brand'
+        presenceData.state = 'Comedy Central'
+        presenceData.largeImageKey = Logos.ComedyCentral
+      }
+      else if (pathIncludes(pathname, '/mtv/')) {
+        presenceData.details = 'Browsing Brand'
+        presenceData.state = 'MTV'
+        presenceData.largeImageKey = Logos.MTV
+      }
+      else if (pathIncludes(pathname, '/nickelodeon/')) {
+        presenceData.details = 'Browsing Brand'
+        presenceData.state = 'Nickelodeon'
+        presenceData.largeImageKey = Logos.Nickelodeon
+      }
+      else if (pathIncludes(pathname, '/smithsonian-channel/')) {
+        presenceData.details = 'Browsing Brand'
+        presenceData.state = 'Smithsonian Channel'
+        presenceData.largeImageKey = Logos.Smithsonian
+      }
 
-				presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play;
-				presenceData.smallImageText = video.paused
-					? strings.pause
-					: strings.play;
+      break
 
-				[presenceData.startTimestamp, presenceData.endTimestamp] =
-					presence.getTimestampsfromMedia(video);
+    case pathIncludes(pathname, '/my-list'):
+      presenceData.details = 'Browsing My List'
+      break
 
-				if (video.paused) {
-					delete presenceData.startTimestamp;
-					delete presenceData.endTimestamp;
-				}
-			} else {
-				presenceData.details = "Browsing";
-				presenceData.state = "Viewing Movies";
-			}
-			break;
+    case pathIncludes(pathname, '/news'):
+      presenceData.details = 'Browsing News'
+      break
 
-		case pathIncludes(path, "/live"):
-			liveTitle = document.querySelector(
-				".video__metadata.padded-container > p"
-			).textContent;
+    case pathIncludes(pathname, '/collections/sports-hub/'):
+      presenceData.details = 'Browsing Sports Hub'
+      break
+  }
 
-			presenceData.details = "Watching Live TV";
-			presenceData.state = liveTitle;
-			presenceData.smallImageKey = Assets.Live;
-			presenceData.smallImageText = strings.live;
-			break;
-
-		case pathIncludes(path, "/brands"):
-			presenceData.details = "Browsing Brands";
-			presenceData.state = "Viewing Brands";
-
-			if (pathIncludes(path, "/cbs/")) {
-				presenceData.details = "Browsing Brand";
-				presenceData.state = "CBS";
-				presenceData.largeImageKey = Logos.CBS;
-			} else if (pathIncludes(path, "/bet/")) {
-				presenceData.details = "Browsing Brand";
-				presenceData.state = "BET";
-				presenceData.largeImageKey = Logos.BET;
-			} else if (pathIncludes(path, "/comedy-central/")) {
-				presenceData.details = "Browsing Brand";
-				presenceData.state = "Comedy Central";
-				presenceData.largeImageKey = Logos.ComedyCentral;
-			} else if (pathIncludes(path, "/mtv/")) {
-				presenceData.details = "Browsing Brand";
-				presenceData.state = "MTV";
-				presenceData.largeImageKey = Logos.MTV;
-			} else if (pathIncludes(path, "/nickelodeon/")) {
-				presenceData.details = "Browsing Brand";
-				presenceData.state = "Nickelodeon";
-				presenceData.largeImageKey = Logos.Nickelodeon;
-			} else if (pathIncludes(path, "/smithsonian-channel/")) {
-				presenceData.details = "Browsing Brand";
-				presenceData.state = "Smithsonian Channel";
-				presenceData.largeImageKey = Logos.Smithsonian;
-			}
-
-			break;
-
-		case pathIncludes(path, "/my-list"):
-			presenceData.details = "Browsing My List";
-			break;
-
-		case pathIncludes(path, "/news"):
-			presenceData.details = "Browsing News";
-			break;
-
-		case pathIncludes(path, "/collections/sports-hub/"):
-			presenceData.details = "Browsing Sports Hub";
-			break;
-	}
-
-	presence.setActivity(presenceData);
-});
+  presence.setActivity(presenceData)
+})
