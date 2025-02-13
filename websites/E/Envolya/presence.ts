@@ -1,3 +1,5 @@
+import { Assets } from 'premid'
+
 const presence = new Presence({
 		clientId: "1334576902081351761",
 	}),
@@ -43,11 +45,13 @@ presence.on("UpdateData", async () => {
 			AdressedToElement = document.querySelector("#letterAdressedTo"),
 			AdressedTo = AdressedToElement
 				? AdressedToElement.textContent
-				: adressedToTable[letterId];
+				: letterId ? adressedToTable[letterId] : "";
 		presenceData.smallImageKey = Assets.Reading;
 
 		if (AdressedToElement)
-			adressedToTable[letterId] = AdressedToElement.textContent || "";
+			if (letterId) {
+				adressedToTable[letterId] = AdressedToElement.textContent || "";
+			}
 
 		if (letterAuthor && AdressedTo)
 			presenceData.state = `Reading a letter from ${letterAuthor}: “${AdressedTo}”`;
