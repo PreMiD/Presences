@@ -51,10 +51,79 @@ presence.on("UpdateData", async () => {
 					}
 				}
 			}
+			else if (document.location.pathname.includes("/documents"))
+				presenceData.details = "Reading the docs: " + document.getElementById("firstHeading").innerText
+			else if (document.location.pathname.includes("/ja") || document.location.pathname.includes("/en") || document.location.pathname.includes("/cn")){
+				if (document.location.pathname.includes("/ja"))
+					presenceData.details = "On Japanese homepage"
+				else if (document.location.pathname.includes("/en"))
+					presenceData.details = "On English homepage"
+				else if (document.location.pathname.includes("/cn"))
+					presenceData.details = "On Chinese homepage"
+			}
 			break
 		case "system.81dojo.com":
-			presenceData.details = "Viewing WebSystem"; //todo: status for individual pages
-			
+			if (document.location.pathname == "/")
+				presenceData.details = "Viewing WebSystem";
+			else if (document.location.pathname.includes("/ranking"))
+				presenceData.details = "WebSystem: Viewing rankings"
+			else if (document.location.pathname.includes("/tournaments"))
+				if (Number.isInteger(parseInt(document.location.pathname.substr(-1)))){
+					presenceData.details = "WebSystem: Viewing tournament: " + document.getElementById("main").children[2].innerHTML
+				}
+				else{
+					presenceData.details = "WebSystem: Browsing tournaments"
+				}
+			else if (document.location.pathname.includes("/titles"))
+				if (Number.isInteger(parseInt(document.location.pathname.substr(-1)))){
+					presenceData.details = "WebSystem: Viewing title: " + document.getElementById("main").children[1].children[0].innerHTML
+				}
+				else{
+					presenceData.details = "WebSystem: Browsing titles"
+				}
+			else if (document.location.pathname.includes("/circles"))
+				if (Number.isInteger(parseInt(document.location.pathname.substr(-1)))){
+					presenceData.details = "WebSystem: Viewing club: " + document.getElementById("main").children[2].children[0].innerHTML
+				}
+				else{
+					presenceData.details = "WebSystem: Browsing clubs"
+				}
+			else if (document.location.pathname.includes("/players/search"))
+				presenceData.details = "WebSystem: Searching for a player"
+			else if (document.location.pathname.includes("/kifus/search"))
+				presenceData.details = "WebSystem: Searching for a kifu"
+			else if (document.location.pathname.includes("/players/show"))
+				presenceData.details = "WebSystem: Viewing player: " + document.getElementById("main").children[0].children[0].innerHTML
+			else if (document.location.pathname.includes("/players/edit"))
+				presenceData.details = "WebSystem: Editing player info"
+			else if (document.location.pathname.includes("/players/upload_avatar"))
+				presenceData.details = "WebSystem: Choosing avatar"
+			else if (document.location.pathname.includes("/players/favorites"))
+				presenceData.details = "WebSystem: Viewing favorited players"
+			else if (document.location.pathname.includes("/inquiries"))
+				presenceData.details = "WebSystem: Viewing inquiries"
+			else if (document.location.pathname.includes("/inbox"))
+				presenceData.details = "WebSystem: Reading DMs"
+			else if (document.location.pathname.includes("/mileage_transfers"))
+				presenceData.details = "WebSystem: Transferring DMiles"
+			else if (document.location.pathname.includes("/certificate"))
+				presenceData.details = "WebSystem: Applying for certificate"
+			break
+		case "wsl.81dojo.com":
+			if (document.location.pathname == "/index.php")
+				switch(new URL(document.URL).searchParams.get("mid")){
+					case "0":
+						presenceData.details = "WSL: Viewing homepage";
+						break
+					case "1":
+						presenceData.details = "WSL: Viewing tables for " + document.getElementsByTagName("td")[0].children[0].innerHTML;
+						break
+					case "2":
+						presenceData.details = "WSL: Viewing team: " + document.getElementById("content").children.item(2).innerHTML;
+						break
+					case "4":
+						presenceData.details = "WSL: Reading the rules"
+				}
 	}
 	presence.setActivity(presenceData);
 });
