@@ -16,15 +16,15 @@
     "fr": "Retrouvez toute l'actualité du jeux vidéo et high-tech sur IGN France.",
     "he": "כל מה שחם בגיימינג סרטים סדרות טלויזיה ובידור, באתר תוכלו למצוא ביקורות מאמרים חדשות הצצות מקדימות ועוד הרבה יותר",
     "hu": "[IGN Hungary - Magyarország]",
-    "nl": "IGN Benelux is dé plek voor alles over games, films, series en gadgets. Check de nieuwste reviews en het nieuws over PS5, Xbox Series, Switch, PC en meer.",
-    "pt": "O IGN é o teu site português para as últimas notícias, análises, vídeos e muito mais sobre videojogos, cinema e tecnologia.",
-    "zh": "提供给谷歌的网站描述",
-    "pt-br": "IGN Brasil é o maior site de games para Xbox, PS3, PS4, PC, Wii U, Nintendo 3DS, PS Vita, iPhone e Android, com reviews, notícias, previews e vídeos.",
     "it": "IGN, il sito per i videogiocatori PC, PS4, Xbox One, Switch, PS5, Xbox Series X, Mobile. Recensioni, notizie, anteprime, video, commenti e tutto ciò che ruota intorno al mondo dei videogiochi.",
     "ja": "ゲームを愛するすべての人のために。映画、テレビ、サブカルチャーも充実したIGNの日本版です。",
     "ko": "IGN은 게임, 엔터테인먼트 및 팬 문화를 위한 글로벌 #1 미디어 브랜드입니다",
+    "nl": "IGN Benelux is dé plek voor alles over games, films, series en gadgets. Check de nieuwste reviews en het nieuws over PS5, Xbox Series, Switch, PC en meer.",
     "pl": "IGN jest stroną dla gier na Xbox One, PS4, PC, Wii-U, Xbox 360, PS3, Wii, 3DS, PS Vita & iPhone z profesjonalnymi  recenzjami, wiadomościami, zapowiedziami, trailerami, kodami, wiki ...",
-    "tr": "IGN Türkiye; PlayStation 4, Xbox One, PC, PlayStation 3, Xbox 360 ve Vita oyunları hakkında haber ve inceleme bulabileceğiniz muhteşem bir kaynak. Ayrıca sinema, dizi haber ve eleştirileri de burada"
+    "pt": "O IGN é o teu site português para as últimas notícias, análises, vídeos e muito mais sobre videojogos, cinema e tecnologia.",
+    "pt-br": "IGN Brasil é o maior site de games para Xbox, PS3, PS4, PC, Wii U, Nintendo 3DS, PS Vita, iPhone e Android, com reviews, notícias, previews e vídeos.",
+    "tr": "IGN Türkiye; PlayStation 4, Xbox One, PC, PlayStation 3, Xbox 360 ve Vita oyunları hakkında haber ve inceleme bulabileceğiniz muhteşem bir kaynak. Ayrıca sinema, dizi haber ve eleştirileri de burada",
+    "zh": "提供给谷歌的网站描述"
   },
   "url": [
     "ign.com",
@@ -58,7 +58,10 @@
   "thumbnail": "https://i.imgur.com/qrPggue.jpeg",
   "color": "#bf1313",
   "category": "games",
-  "tags": ["news", "gaming"],
+  "tags": [
+    "news",
+    "gaming"
+  ],
   "settings": [
     {
       "id": "lang",
