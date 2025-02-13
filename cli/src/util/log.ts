@@ -28,7 +28,6 @@ export const MESSAGES = {
   noMongoUrl: 'MONGO_URL environment variable is required',
   noMongoConnection: 'Failed to connect to MongoDB',
   noActivities: 'No activities changed',
-  waitingForApprovals: 'Waiting for 2 approvals...',
   checkingAndUpdatingAssets: 'Checking and updating assets...',
   someInvalidAssets: 'Some invalid assets were found, check the logs for more details',
   assetsUpdated: 'Assets have been updated successfully',
