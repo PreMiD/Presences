@@ -9,6 +9,7 @@ const enum Assets {
 }
 
 const tierImage: Record<number, string> = {
+	0: "https://drive.google.com/uc?id=19R9Jb3DwZu74rwe7CZJLK09VQJsNsE1i",
 	1: "https://drive.google.com/uc?id=1fQIBGRjgsvLKIn9zm688qi78-bjUSemy",
 	2: "https://drive.google.com/uc?id=1YWQ1oraHwIhW_v4ysGuoSaiSkGUrigYl",
 	3: "https://drive.google.com/uc?id=1JotKsaaej8afpaVO6od8ZmKosN0OGitB",
@@ -150,7 +151,7 @@ presence.on("UpdateData", async () => {
 				if (isTier) {
 					const tier = Number(isTier.src.split("/").pop().replace(".svg", ""));
 					presenceData.smallImageKey = tierImage[tier];
-					presenceData.smallImageText = getTierName(tier);
+					presenceData.smallImageText = tier !== 0 ? getTierName(tier) : "Unrated";
 				} else {
 					presenceData.smallImageKey = Assets.Reading;
 					presenceData.smallImageText = "(티어 숨김)";
