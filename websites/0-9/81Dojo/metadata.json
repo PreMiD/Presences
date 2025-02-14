@@ -9,10 +9,10 @@
 	"description": {
 		"en": "81Dojo is an online Shogi platform sponsored by the Japan Shogi Association."
 	},
-	"url": ["81dojo.com", "system.81dojo.com"],
+	"url": ["81dojo.com", "system.81dojo.com", "wsl.81dojo.com"],
 	"version": "1.0.0",
-	"logo": "https://81dojo.com/dojo/images/avatars/study_black.jpg",
-	"thumbnail": "https://81dojo.com/dojo/images/avatars/study_black.jpg",
+	"logo": "https://81dojo.com/images/81DojoLogo_Big.png",
+	"thumbnail": "https://i.vgy.me/0hFKjk.png",
 	"color": "#00cc00",
 	"category": "games",
 	"tags": [
