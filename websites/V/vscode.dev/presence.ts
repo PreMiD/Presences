@@ -660,8 +660,8 @@ presence.on('UpdateData', async () => {
   const status: Stauts = {
     file: document.querySelector('.tab.active a')?.textContent ?? undefined,
     workspace: document
-      .querySelector('div.pane-header[aria-label=\'Folders Section\'] h3')
-      ?.getAttribute('title') ?? undefined,
+      .querySelector('.pane-header > .codicon-explorer-view-icon')
+      ?.getAttribute('aria-label') ?? undefined,
     editor: {
       lang: document.querySelector('#status\\.editor\\.mode')?.textContent ?? undefined,
     },
@@ -715,11 +715,11 @@ function Replace(value: string, empty: string) {
   for (const [string, selector] of Object.entries({
     '%file%': ['.tab.active a'],
     '%branch%': ['#status\\.scm\\.0'],
-    '%error%': ['#status\\.problems > a > span.codiconcodicon-error'],
-    '%problems%': ['#status\\.problems > a > span.codicon.codicon-warning'],
+    '%error%': ['#status\\.problems > a > span.codicon.codicon-error', 'nextSibling'],
+    '%problems%': ['#status\\.problems > a > span.codicon.codicon-warning', 'nextSibling'],
     '%workspace%': [
-      'div.pane-header[aria-label=\'Folders Section\'] h3',
-      'title',
+      '.pane-header > .codicon-explorer-view-icon',
+      'aria-label',
     ],
     '%lang%': ['#status\\.editor\\.mode'],
     '%encoding%': ['#status\\.editor\\.encoding'],
@@ -727,12 +727,18 @@ function Replace(value: string, empty: string) {
   })) {
     value = value.replace(
       string,
-      selector[1]
+      selector[1] === 'nextSibling'
         ? document
           .querySelector(selector[0]!)
-          ?.getAttribute(selector[1])
+          ?.nextSibling
+          ?.textContent
           ?.trim() || empty
-        : document.querySelector(selector[0]!)?.textContent?.trim() || empty,
+        : selector[1]
+          ? document
+            .querySelector(selector[0]!)
+            ?.getAttribute(selector[1])
+            ?.trim() || empty
+          : document.querySelector(selector[0]!)?.textContent?.trim() || empty,
     )
   }
   return value
