@@ -149,8 +149,7 @@ presence.on('UpdateData', async () => {
     const animeInfo = await getAnimeInfo(path.split('/').pop() || '')
 
     presenceData.details = 'Anime detayına bakıyor'
-    presenceData.state
-      = animeInfo?.title.romaji || animeInfo?.title.english || animeInfo?.title.native || 'Yükleniyor...'
+    presenceData.state = animeInfo?.title.romaji || animeInfo?.title.english || animeInfo?.title.native || 'Yükleniyor...'
     presenceData.largeImageKey = animeInfo?.coverImage || 'logo'
     if (animeInfo) {
       presenceData.smallImageText = `${animeInfo.type || 'TV'} • ${animeInfo.status || 'Devam Ediyor'}`
@@ -174,7 +173,6 @@ presence.on('UpdateData', async () => {
     presenceData.details = animeInfo?.title.romaji || animeInfo?.title.english || animeInfo?.title.native || 'Yükleniyor...'
     presenceData.state = `Sezon ${season} Bölüm ${episode}`
     presenceData.largeImageKey = animeInfo?.coverImage || 'logo'
-    
     if (animeInfo) {
       presenceData.smallImageText = `${animeInfo.type || 'TV'} • ${animeInfo.status || 'Devam Ediyor'}`
     }
