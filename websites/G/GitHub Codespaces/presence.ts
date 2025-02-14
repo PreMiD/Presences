@@ -598,7 +598,7 @@ presence.on('UpdateData', async () => {
   const activeTab = document.querySelector('.tab.active')
   const editorMode = document.querySelector('#status\\.editor\\.mode')
   const scmTab = document.querySelector('#status\\.scm\\.0')
-  const problems = document.querySelector('#status\\.problems')?.textContent.trim()
+  const problems = document.querySelector('#status\\.problems')?.textContent!.trim()
 
   // Preparing Screen
   if (document.querySelector('.cs-splash-screen')) {
@@ -612,13 +612,13 @@ presence.on('UpdateData', async () => {
   }
   else if (activeTab && editorMode) {
     const branch = scmTab?.textContent?.trim()
-    const workspace = scmTab?.getAttribute('aria-label').split('(Git)')[0]
+    const workspace = scmTab!.getAttribute('aria-label')!.split('(Git)')[0]
     const filename = activeTab.getAttribute('data-resource-name')
     const filepath = document.querySelector('div.breadcrumbs-below-tabs div.file > div.monaco-icon-label')?.getAttribute('aria-label')?.split(' • ')[0]
     const syntaxMode = editorMode.getAttribute('aria-label')!.toLowerCase()
-    const error = problems.split('  ')[0]
-    const warning = problems.split('  ')[1]
-    const selection = document.querySelector('#status\\.editor\\.selection')?.textContent.trim()
+    const error = problems!.split('  ')[0]
+    const warning = problems!.split('  ')[1]
+    const selection = document.querySelector('#status\\.editor\\.selection')?.textContent!.trim()
     const encoding = document.querySelector('#status\\.editor\\.encoding')?.textContent
     const largeImageKey = knownExtensions[
       Object.keys(knownExtensions).find((key) => {
@@ -632,7 +632,7 @@ presence.on('UpdateData', async () => {
     ] ?? (syntaxMode in langMap ? langMap[syntaxMode] : null)
 
     if (lastFile !== filepath) {
-      lastFile = filepath
+      lastFile = filepath!
       lastFileChange = Date.now()
     }
 
@@ -654,10 +654,10 @@ presence.on('UpdateData', async () => {
         workspace || filepath?.split('/').reverse()[1] || '',
       )
       .replaceAll('%branch%', branch || 'N/A')
-			.replaceAll('%error%', error || 'N/A')
-			.replaceAll('%warning%', warning || 'N/A')
-			.replaceAll('%selection%', selection || 'N/A')
-			.replaceAll('%encoding%', encoding || 'N/A')
+      .replaceAll('%error%', error || 'N/A')
+      .replaceAll('%warning%', warning || 'N/A')
+      .replaceAll('%selection%', selection || 'N/A')
+      .replaceAll('%encoding%', encoding || 'N/A')
     presenceData.state = (await presence.getSetting<string>('state'))
       .replaceAll('%file%', filename ?? '')
       .replaceAll('%path%', filepath ?? '')
@@ -672,10 +672,10 @@ presence.on('UpdateData', async () => {
         workspace || filepath?.split('/').reverse()[1] || '',
       )
       .replaceAll('%branch%', branch || 'N/A')
-			.replaceAll('%error%', error || 'N/A')
-			.replaceAll('%warning%', warning || 'N/A')
-			.replaceAll('%selection%', selection || 'N/A')
-			.replaceAll('%encoding%', encoding || 'N/A')
+      .replaceAll('%error%', error || 'N/A')
+      .replaceAll('%warning%', warning || 'N/A')
+      .replaceAll('%selection%', selection || 'N/A')
+      .replaceAll('%encoding%', encoding || 'N/A')
   }
   else if (!editorMode) {
     presenceData.largeImageKey = ActivityAssets.Idle

@@ -715,8 +715,8 @@ function Replace(value: string, empty: string) {
   for (const [string, selector] of Object.entries({
     '%file%': ['.tab.active a'],
     '%branch%': ['#status\\.scm\\.0'],
-    '%error%': ['#status\\.problems > a > span.codicon.codicon-error','nextSibling'],
-    '%problems%': ['#status\\.problems > a > span.codicon.codicon-warning','nextSibling'],
+    '%error%': ['#status\\.problems > a > span.codicon.codicon-error', 'nextSibling'],
+    '%problems%': ['#status\\.problems > a > span.codicon.codicon-warning', 'nextSibling'],
     '%workspace%': [
       '.pane-header > .codicon-explorer-view-icon',
       'aria-label',
@@ -729,14 +729,16 @@ function Replace(value: string, empty: string) {
       string,
       selector[1] === 'nextSibling'
         ? document
-          .querySelector(selector[0])
-          ?.nextSibling?.textContent?.trim() || empty
-        : selector[1]
-        ? document
           .querySelector(selector[0]!)
-          ?.getAttribute(selector[1])
+          ?.nextSibling
+          ?.textContent
           ?.trim() || empty
-        : document.querySelector(selector[0]!)?.textContent?.trim() || empty,
+        : selector[1]
+          ? document
+            .querySelector(selector[0]!)
+            ?.getAttribute(selector[1])
+            ?.trim() || empty
+          : document.querySelector(selector[0]!)?.textContent?.trim() || empty,
     )
   }
   return value

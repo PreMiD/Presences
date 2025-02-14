@@ -6,11 +6,11 @@
     "id": "328731868096888833"
   },
   "contributors": [
-		{
-			"name": "Atom Skully",
-			"id": "671037171611729920"
-		}
-	],
+    {
+      "name": "Atom Skully",
+      "id": "671037171611729920"
+    }
+  ],
   "service": "vscode.dev",
   "description": {
     "en": "Visual Studio Code for the Web Anywhere anytime, entirely in your browser [Parameters for Customisation](https://github.com/PreMiD/Presences/blob/master/websites/V/vscode.dev/README.md)",
