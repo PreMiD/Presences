@@ -1,13 +1,13 @@
 const presence = new Presence({
 	clientId: "1338891034310213683",
 });
-const enum Assets { // Other default assets can be found at index.d.ts
-	Logo = "",
+const enum Assets {
+	Logo = "https://81dojo.com/images/81DojoLogo_Big.png",
 }
 
 presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
-			largeImageKey: "https://81dojo.com/dojo/images/avatars/study_black.jpg",
+			largeImageKey: Assets.Logo,
 	};
 	switch (document.location.hostname) {
 			case "81dojo.com":
