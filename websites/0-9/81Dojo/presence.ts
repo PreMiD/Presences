@@ -20,7 +20,7 @@ presence.on('UpdateData', async () => {
         else {
           const server = document.getElementById('header-serverName').textContent.slice(0, -3)
           const username = document.getElementById('header-playerName').textContent.slice(0, -3)
-          if (document.getElementById('layerLobby').style.display === 'block'){
+          if (document.getElementById('layerLobby').style.display === 'block') {
             presenceData.details = `In ${server} lobby`
           }
           else {
@@ -80,10 +80,10 @@ presence.on('UpdateData', async () => {
       if (document.location.pathname === '/'){
         presenceData.details = 'Viewing WebSystem'
       }
-      else if (document.location.pathname.includes('/ranking')){
+      else if (document.location.pathname.includes('/ranking')) {
         presenceData.details = 'WebSystem: Viewing rankings'
       }
-      else if (document.location.pathname.includes('/tournaments')){
+      else if (document.location.pathname.includes('/tournaments')) {
         if (Number.isInteger(Number.parseInt(document.location.pathname.substr(-1)))) {
           presenceData.details = `WebSystem: Viewing tournament:  + ${document.getElementById('main').children[2].innerHTML}`
         }
@@ -91,7 +91,7 @@ presence.on('UpdateData', async () => {
           presenceData.details = 'WebSystem: Browsing tournaments'
         }
       }
-      else if (document.location.pathname.includes('/titles')){
+      else if (document.location.pathname.includes('/titles')) {
         if (Number.isInteger(Number.parseInt(document.location.pathname.substr(-1)))) {
           presenceData.details = `WebSystem: Viewing title: ${document.getElementById('main').children[1].children[0].innerHTML}`
         }
@@ -99,43 +99,46 @@ presence.on('UpdateData', async () => {
           presenceData.details = 'WebSystem: Browsing titles'
         }
       }
-      else if (document.location.pathname.includes('/circles')){
+      else if (document.location.pathname.includes('/circles')) {
         if (Number.isInteger(Number.parseInt(document.location.pathname.substr(-1)))) {
           presenceData.details = `WebSystem: Viewing club: ${document.getElementById('main').children[2].children[0].innerHTML}`
-        } else {
+        }
+        else {
           presenceData.details = 'WebSystem: Browsing clubs'
         }
       }
       else if (document.location.pathname.includes('/players/search'))
         presenceData.details = 'WebSystem: Searching for a player'
-      else if (document.location.pathname.includes('/kifus/search')){
+      else if (document.location.pathname.includes('/kifus/search')) {
         presenceData.details = 'WebSystem: Searching for a kifu'
       }
-      else if (document.location.pathname.includes('/players/show')){
+      else if (document.location.pathname.includes('/players/show')) {
         presenceData.details = `WebSystem: Viewing player: ${document.getElementById('main').children[0].children[0].innerHTML}`
       }
-      else if (document.location.pathname.includes('/players/edit')){
+      else if (document.location.pathname.includes('/players/edit')) {
         presenceData.details = 'WebSystem: Editing player info'
       }
-      else if (document.location.pathname.includes('/players/upload_avatar'))
+      else if (document.location.pathname.includes('/players/upload_avatar')){
         presenceData.details = 'WebSystem: Choosing avatar'
-      else if (document.location.pathname.includes('/players/favorites'))
+      }
+      else if (document.location.pathname.includes('/players/favorites')){
         presenceData.details = 'WebSystem: Viewing favorited players'
-      else if (document.location.pathname.includes('/inquiries')){
+      }
+      else if (document.location.pathname.includes('/inquiries')) {
         presenceData.details = 'WebSystem: Viewing inquiries'
       }
-      else if (document.location.pathname.includes('/inbox')){
+      else if (document.location.pathname.includes('/inbox')) {
         presenceData.details = 'WebSystem: Reading DMs'
       }
-      else if (document.location.pathname.includes('/mileage_transfers')){
+      else if (document.location.pathname.includes('/mileage_transfers')) {
         presenceData.details = 'WebSystem: Transferring DMiles'
       }
-      else if (document.location.pathname.includes('/certificate')){
+      else if (document.location.pathname.includes('/certificate')) {
         presenceData.details = 'WebSystem: Applying for certificate'
       }
       break
     case 'wsl.81dojo.com':
-      if (document.location.pathname === '/index.php'){
+      if (document.location.pathname === '/index.php') {
         switch (new URL(document.URL).searchParams.get('mid')) {
           case '0':
             presenceData.details = 'WSL: Viewing homepage'
