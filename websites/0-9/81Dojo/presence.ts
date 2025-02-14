@@ -21,7 +21,7 @@ presence.on('UpdateData', async () => {
           const server = document.getElementById('header-serverName').textContent.slice(0, -3)
           const username = document.getElementById('header-playerName').innerText.slice(0, -3)
           if (document.getElementById('layerLobby').style.display === 'block')
-            presenceData.details = 'In ' + server + ' lobby'
+            presenceData.details = `In ${server} lobby`
           else {
             const playerElements = document.querySelectorAll(
               "[id='player-info-name']"
@@ -39,7 +39,7 @@ presence.on('UpdateData', async () => {
             }
             if (username in players) {
               for (let i = 0; i < playerElements.length; i++) {
-                if (playerElements[i].innerHTML == username)
+                if (playerElements[i].innerHTML === username)
                   playerElementIndex = i
               }
               const opponentName = players[1 - players.indexOf(username)]
@@ -50,8 +50,9 @@ presence.on('UpdateData', async () => {
                 presenceData.details = 'In a game'
               }
               presenceData.state =
-                'vs. ' + opponentName + '(' + opponentRate + ')'
-            } else {
+                `vs. ${opponentName} (${opponentRate})`
+            }
+            else {
               presenceData.details = 'Spectating'
               presenceData.state = `${players[0]} (${ratings[0]}) vs. ${players[1]} (${ratings[1]})`
             }
@@ -59,13 +60,13 @@ presence.on('UpdateData', async () => {
         }
       }
       else if (document.location.pathname.includes('/documents'))
-        presenceData.details =
-          'Reading the docs: ' +
+        presenceData.details
+          = 'Reading the docs: ' +
           document.getElementById('firstHeading').textContent
       else if (
-        document.location.pathname.includes('/ja') ||
-        document.location.pathname.includes('/en') ||
-        document.location.pathname.includes('/cn')
+        document.location.pathname.includes('/ja')
+        || document.location.pathname.includes('/en')
+        || document.location.pathname.includes('/cn')
       ) {
         if (document.location.pathname.includes('/ja'))
           presenceData.details = 'On Japanese homepage'
@@ -81,26 +82,21 @@ presence.on('UpdateData', async () => {
       else if (document.location.pathname.includes('/ranking'))
         presenceData.details = 'WebSystem: Viewing rankings'
       else if (document.location.pathname.includes('/tournaments'))
-        if (Number.isInteger(parseInt(document.location.pathname.substr(-1)))) {
-          presenceData.details =
-            'WebSystem: Viewing tournament: ' +
-            document.getElementById('main').children[2].innerHTML
-        } else {
+        if (Number.isInteger(Number.parseInt(document.location.pathname.substr(-1)))) {
+          presenceData.details = `WebSystem: Viewing tournament:  + ${document.getElementById('main').children[2].innerHTML}`
+        }
+        else {
           presenceData.details = 'WebSystem: Browsing tournaments'
         }
       else if (document.location.pathname.includes('/titles'))
-        if (Number.isInteger(parseInt(document.location.pathname.substr(-1)))) {
-          presenceData.details =
-            'WebSystem: Viewing title: ' +
-            document.getElementById('main').children[1].children[0].innerHTML
+        if (Number.isInteger(Number.parseInt(document.location.pathname.substr(-1)))) {
+          presenceData.details = `WebSystem: Viewing title: ${document.getElementById('main').children[1].children[0].innerHTML}`
         } else {
           presenceData.details = 'WebSystem: Browsing titles'
         }
       else if (document.location.pathname.includes('/circles'))
-        if (Number.isInteger(parseInt(document.location.pathname.substr(-1)))) {
-          presenceData.details =
-            'WebSystem: Viewing club: ' +
-            document.getElementById('main').children[2].children[0].innerHTML
+        if (Number.isInteger(Number.parseInt(document.location.pathname.substr(-1)))) {
+          presenceData.details = `WebSystem: Viewing club: ${document.getElementById('main').children[2].children[0].innerHTML}`
         } else {
           presenceData.details = 'WebSystem: Browsing clubs'
         }
@@ -109,9 +105,7 @@ presence.on('UpdateData', async () => {
       else if (document.location.pathname.includes('/kifus/search'))
         presenceData.details = 'WebSystem: Searching for a kifu'
       else if (document.location.pathname.includes('/players/show'))
-        presenceData.details =
-          'WebSystem: Viewing player: ' +
-          document.getElementById('main').children[0].children[0].innerHTML
+        presenceData.details = `WebSystem: Viewing player: ${document.getElementById('main').children[0].children[0].innerHTML}`
       else if (document.location.pathname.includes('/players/edit'))
         presenceData.details = 'WebSystem: Editing player info'
       else if (document.location.pathname.includes('/players/upload_avatar'))
@@ -134,14 +128,10 @@ presence.on('UpdateData', async () => {
             presenceData.details = 'WSL: Viewing homepage'
             break
           case '1':
-            presenceData.details =
-              'WSL: Viewing tables for ' +
-              document.getElementsByTagName('td')[0].children[0].innerHTML
+            presenceData.details = `WSL: Viewing tables for ${document.getElementsByTagName('td')[0].children[0].innerHTML}`
             break
           case '2':
-            presenceData.details =
-              'WSL: Viewing team: ' +
-              document.getElementById('content').children.item(2).innerHTML
+            presenceData.details = `WSL: Viewing team: ${document.getElementById('content').children.item(2).innerHTML}`
             break
           case '4':
             presenceData.details = 'WSL: Reading the rules'
