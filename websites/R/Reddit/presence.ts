@@ -66,7 +66,7 @@ presence.on('UpdateData', async () => {
     largeImageKey: !pathname.includes('/r/netflix')
       ? ActivityAssets.Logo
       : ActivityAssets.NetflixLogo,
-    smallImageKey: pathname.includes('/r/netflix') ? ActivityAssets.Logo : '',
+    smallImageKey: pathname.includes('/r/netflix') ? ActivityAssets.Logo : null,
     startTimestamp,
   }
 
