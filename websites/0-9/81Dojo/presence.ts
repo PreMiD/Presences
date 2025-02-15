@@ -85,7 +85,7 @@ presence.on('UpdateData', async () => {
       }
       else if (document.location.pathname.includes('/tournaments')) {
         if (Number.isInteger(Number.parseInt(document.location.pathname.substr(-1)))) {
-          presenceData.details = `WebSystem: Viewing tournament:  + ${document.getElementById('main').children[2].innerHTML}`
+          presenceData.details = `WebSystem: Viewing tournament: ${document.getElementById('main').children[2].innerHTML}`
         }
         else {
           presenceData.details = 'WebSystem: Browsing tournaments'
