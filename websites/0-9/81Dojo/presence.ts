@@ -38,7 +38,7 @@ presence.on('UpdateData', async () => {
                   .innerHTML.slice(3, 7)
               )
             }
-            if (username in players) {
+            if (players.includes(username)) {
               for (let i = 0; i < playerElements.length; i++) {
                 if (playerElements[i].innerHTML === username)
                   playerElementIndex = i
