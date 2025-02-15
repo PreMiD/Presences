@@ -5,12 +5,6 @@
     "id": "705490775932403795",
     "name": "jordaar"
   },
-  "contributors": [
-    {
-      "name": "Pasithea",
-      "id": "553051930075725834"
-    }
-  ],
   "service": "movie-web",
   "description": {
     "en": "The place for your favorite movies & shows"
