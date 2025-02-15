@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.13",
+  "apiVersion": 1,
+  "author": {
+    "id": "1199685911013769319",
+    "name": "amit.thixd"
+  },
+  "service": "Framer",
+  "description": {
+    "en": "Design, scale, and publish your website—no code needed. Start for free today."
+  },
+  "url": "framer.com",
+  "version": "1.0.12",
+  "logo": "https://iili.io/2mZgC0P.jpg",
+  "thumbnail": "https://iili.io/2mZgng1.md.jpg",
+  "color": "#E89020",
+  "category": "other",
+  "tags": ["design", "ui-ux", "website"]
+}
