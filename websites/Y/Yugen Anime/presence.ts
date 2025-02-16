@@ -37,7 +37,7 @@ async function getStrings() {
       buttonWatchMovie: 'general.buttonWatchMovie',
       watchingMovie: 'general.watchingMovie',
       buttonViewPage: 'general.buttonViewPage',
-      viewing: 'general.viewing',
+      view: 'general.view',
       searchFor: 'general.searchFor',
     },
     await presence.getSetting<string>('lang').catch(() => 'en'),
@@ -140,7 +140,7 @@ presence.on('UpdateData', async () => {
   else if (pageNav && !pathname.includes('/watch') && !pathname.includes('/anime')) {
     presenceData.details = discoverPage
       ? 'Discovering anime'
-      : `${strings.viewing} ${pathname.replaceAll('/', '')} anime`
+      : `${strings.view} ${pathname.replaceAll('/', '')} anime`
     presenceData.state = `Page ${pageNav.textContent}`
     presenceData.buttons = [
       {

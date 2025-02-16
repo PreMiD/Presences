@@ -15,7 +15,7 @@ async function getStrings() {
       viewSeries: 'general.buttonViewSeries',
       viewMovie: 'general.buttonViewMovie',
       watchEpisode: 'general.buttonViewEpisode',
-      viewing: 'general.viewing',
+      view: 'general.view',
       searching: 'general.searchFor',
       episode: 'general.episode',
       browse: 'general.browsing',
@@ -115,27 +115,27 @@ presence.on('UpdateData', async () => {
       break
     }
     case pathname.includes('schedule'): {
-      presenceData.details = strings.viewing
+      presenceData.details = strings.view
       presenceData.state = 'The schedule'
       break
     }
     case pathname.includes('recent'): {
-      presenceData.details = strings.viewing
+      presenceData.details = strings.view
       presenceData.state = 'Recently added anime'
       break
     }
     case pathname.includes('popular'): {
-      presenceData.details = strings.viewing
+      presenceData.details = strings.view
       presenceData.state = 'Popular anime'
       break
     }
     case pathname.includes('anime'): {
-      presenceData.details = strings.viewing
+      presenceData.details = strings.view
       presenceData.state = 'All anime'
       break
     }
     case pathname.includes('trending'): {
-      presenceData.details = strings.viewing
+      presenceData.details = strings.view
       presenceData.state = 'Trending anime'
       break
     }

@@ -73,7 +73,7 @@ async function getStrings() {
       browsing: 'general.browsing',
       search: 'general.searchFor',
       searchSomething: 'general.searchSomething',
-      viewing: 'general.viewing',
+      view: 'general.view',
       profile: 'general.viewProfile',
     },
     await presence.getSetting<string>('lang').catch(() => 'en'),
