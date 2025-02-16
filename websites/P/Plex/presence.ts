@@ -229,7 +229,7 @@ presence.on('UpdateData', async () => {
         )
       }
 
-      if (cover && navigator.mediaSession.metadata?.artwork[0]?.src) {
+      if (cover && navigator.mediaSession.metadata?.artwork?.[0]?.src) {
         const art = navigator.mediaSession.metadata.artwork?.[0]?.src
         presenceData.largeImageKey = art?.match(
           /(\d+)(?<!10)-(\d+)(192-168)?(?<!172-(1[6-9]|2\d|3[01]))-(\d+)\.(\d+)/g,
@@ -261,11 +261,11 @@ presence.on('UpdateData', async () => {
       else presenceData.name = title ?? ''
 
       presenceData.state = subTitle
-
       if (
         (!navigator.mediaSession.metadata?.artist
           && !navigator.mediaSession.metadata?.album)
         || !!document.querySelector('.application.show-video-player')
+        || !!document.querySelector('video')
       ) {
         presenceData.type = ActivityType.Watching
       }
