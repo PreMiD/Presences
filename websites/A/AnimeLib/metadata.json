@@ -14,7 +14,7 @@
     "ru": "Смотрите аниме онлайн на русском"
   },
   "url": "anilib.me",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeLib/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeLib/assets/thumbnail.png",
   "color": "#A020F0",
@@ -29,19 +29,19 @@
   "settings": [
     {
       "id": "privacy",
-      "title": "Privacy Mode",
+      "title": "Приватный режим",
       "icon": "fad fa-shield-alt",
       "value": false
     },
     {
       "id": "buttons",
-      "title": "Show Buttons",
+      "title": "Показывать кнопки",
       "icon": "fas fa-compress-arrows-alt",
       "value": true
     },
     {
       "id": "titleAsPresence",
-      "title": "Show Anime Title As Presence",
+      "title": "Отображать название аниме как название Презенса",
       "icon": "fad fa-user-edit",
       "value": false
     }
