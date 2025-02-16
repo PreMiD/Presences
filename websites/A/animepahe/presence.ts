@@ -355,9 +355,9 @@ presence.on('UpdateData', async () => {
           ?.src
           ?.replace('.th', '') ?? ''
 
-        presenceData.smallImageKey = `presence_playback_${
-          iframeResponse.paused ? 'paused' : 'playing'
-        }`
+        presenceData.smallImageKey = iframeResponse.paused
+          ? Assets.Pause
+          : Assets.Play
 
         presenceData.smallImageText = iframeResponse.paused
           ? strings.pause
@@ -370,7 +370,6 @@ presence.on('UpdateData', async () => {
           )
         }
         else {
-          presenceData.startTimestamp = null
           presenceData.smallImageText += ` - ${getTimestamp(
             iframeResponse.currentTime,
           )}`
