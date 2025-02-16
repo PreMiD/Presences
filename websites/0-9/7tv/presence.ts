@@ -90,7 +90,7 @@ presence.on('UpdateData', async () => {
             if (!privacy) {
               presenceData.details = strings.viewPage
               presenceData.state = textContent('.emote-name p')
-              presenceData.smallImageKey = Assets.view
+              presenceData.smallImageKey = Assets.Viewing
               presenceData.smallImageText = strings.view
 
               if (showEmotes) {
@@ -109,7 +109,7 @@ presence.on('UpdateData', async () => {
     case 'users':
       presenceData.details = privacy ? strings.viewAnUser : strings.viewProfile
       presenceData.state = textContent('.user-card .username')
-      presenceData.smallImageKey = Assets.view
+      presenceData.smallImageKey = Assets.Viewing
       presenceData.smallImageText = strings.view
 
       if (!privacy) {
@@ -121,7 +121,7 @@ presence.on('UpdateData', async () => {
     case 'emote-sets':
       presenceData.details = strings.viewList
       presenceData.state = textContent('.emote-set-wrapper > div > div > h3')
-      presenceData.smallImageKey = Assets.view
+      presenceData.smallImageKey = Assets.Viewing
       presenceData.smallImageText = strings.view
       break
 
@@ -134,7 +134,7 @@ presence.on('UpdateData', async () => {
     case 'store':
       presenceData.details = strings.viewPage
       presenceData.state = strings.store
-      presenceData.smallImageKey = Assets.view
+      presenceData.smallImageKey = Assets.Viewing
       presenceData.smallImageText = strings.view
       break
 

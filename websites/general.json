@@ -195,6 +195,10 @@
 		"description": "",
 		"message": "Reading"
 	},
+	"general.readingAbout": {
+		"description": "",
+		"message": "Reading about:"
+	},
 	"general.readingAChannel": {
 		"description": "",
 		"message": "Reading in a channel"
@@ -203,25 +207,21 @@
 		"description": "",
 		"message": "Reading a DM"
 	},
-	"general.readingAPost": {
-		"description": "",
-		"message": "Reading a post"
-	},
-	"general.readingAThread": {
-		"description": "",
-		"message": "Reading a thread"
-	},
-	"general.readingAbout": {
-		"description": "",
-		"message": "Reading about:"
-	},
 	"general.readingAnArticle": {
 		"description": "",
 		"message": "Reading an article"
 	},
+	"general.readingAPost": {
+		"description": "",
+		"message": "Reading a post"
+	},
 	"general.readingArticle": {
 		"description": "",
 		"message": "Reading article:"
+	},
+	"general.readingAThread": {
+		"description": "",
+		"message": "Reading a thread"
 	},
 	"general.readingChannel": {
 		"description": "",
@@ -299,6 +299,10 @@
 		"description": "",
 		"message": "Viewing:"
 	},
+	"general.viewAccount": {
+		"description": "",
+		"message": "Viewing their account"
+	},
 	"general.viewAChannel": {
 		"description": "Viewing a not specfied channel.",
 		"message": "Viewing a channel"
@@ -326,6 +330,22 @@
 	"general.viewAMovie": {
 		"description": "Viewing a non specified movie.",
 		"message": "Viewing a movie"
+	},
+	"general.viewAnAnime": {
+		"description": "Viewing a not specfied anime.",
+		"message": "Viewing an anime"
+	},
+	"general.viewAnime": {
+		"description": "Viewing a not specfied anime.",
+		"message": "Viewing anime:"
+	},
+	"general.viewAnIncident": {
+		"description": "Viewing a not specfied incident.",
+		"message": "Viewing an incident"
+	},
+	"general.viewAnUser": {
+		"description": "Viewing a not specfied user.",
+		"message": "Viewing an user"
 	},
 	"general.viewAPage": {
 		"description": "Viewing a not specfied page.",
@@ -358,26 +378,6 @@
 	"general.viewAWishlist": {
 		"description": "Viewing a not specfied wishlist.",
 		"message": "Viewing a wishlist"
-	},
-	"general.viewAccount": {
-		"description": "",
-		"message": "Viewing their account"
-	},
-	"general.viewAnAnime": {
-		"description": "Viewing a not specfied anime.",
-		"message": "Viewing an anime"
-	},
-	"general.viewAnIncident": {
-		"description": "Viewing a not specfied incident.",
-		"message": "Viewing an incident"
-	},
-	"general.viewAnUser": {
-		"description": "Viewing a not specfied user.",
-		"message": "Viewing an user"
-	},
-	"general.viewAnime": {
-		"description": "Viewing a not specfied anime.",
-		"message": "Viewing anime:"
 	},
 	"general.viewCategory": {
 		"description": "Viewing a not specfied category.",
