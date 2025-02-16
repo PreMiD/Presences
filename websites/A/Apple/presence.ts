@@ -14,7 +14,7 @@ async function getStrings() {
     {
       viewHome: 'general.viewHome',
       viewProduct: 'general.viewProduct',
-      viewing: 'general.viewing',
+      view: 'general.view',
       viewProfile: 'general.viewProfile',
       readingArticle: 'general.readingArticle',
       comparing: 'apple.comparing',
@@ -352,7 +352,7 @@ presence.on('UpdateData', async () => {
           'h1.typography-hero-eyebrow.hero-eyebrow.hero-copy-item',
         )
 
-      presenceData.details = strings.viewing
+      presenceData.details = strings.view
       presenceData.state = OS?.textContent || 'Unknown'
 
       if (buttons && OS) {

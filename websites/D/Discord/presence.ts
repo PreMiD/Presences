@@ -54,7 +54,7 @@ async function getStrings() {
       serversEdit: 'discord.devs.serversEdit',
       docs: 'discord.devs.docs',
       status: 'discord.status',
-      viewing: 'general.viewing',
+      view: 'general.view',
       uptime: 'general.uptimeHistory',
       incident: 'general.incidentHistory',
       viewAnIncident: 'general.viewAnIncident',
@@ -532,11 +532,11 @@ presence.on('UpdateData', async () => {
         },
         '/uptime/': {
           details: strings.status,
-          state: `${strings.viewing} ${strings.uptime}`,
+          state: `${strings.view} ${strings.uptime}`,
         },
         '/history/': {
           details: strings.status,
-          state: `${strings.viewing} ${strings.incident}`,
+          state: `${strings.view} ${strings.incident}`,
         },
         '/incidents/': {
           details: strings.status,
@@ -723,7 +723,7 @@ presence.on('UpdateData', async () => {
         },
         '/cart/': {
           details: strings.merch,
-          state: `${strings.viewing} ${strings.shopCart}`,
+          state: `${strings.view} ${strings.shopCart}`,
         },
         '/search/': {
           details: strings.merch,

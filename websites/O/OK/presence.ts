@@ -35,7 +35,7 @@ async function getStrings() {
     playVideo: 'general.watchingVid',
     playMusic: 'general.playing',
     pause: 'general.paused',
-    viewing: 'general.viewing',
+    view: 'general.view',
     reading: 'general.reading',
   })
 }
@@ -117,7 +117,7 @@ presence.on('UpdateData', async () => {
       case 'video':
         presenceData.details = 'Смотрит видео'
         presenceData.smallImageKey = Assets.Viewing
-        presenceData.smallImageText = strings.viewing
+        presenceData.smallImageText = strings.view
 
         if (document.querySelector('.vp-layer')) {
           presenceData.state = textContent('.vp-layer-info_h')
@@ -139,7 +139,7 @@ presence.on('UpdateData', async () => {
           '.__user-profile-name-decorator',
         )}`
         presenceData.smallImageKey = Assets.Viewing
-        presenceData.smallImageText = strings.viewing
+        presenceData.smallImageText = strings.view
 
         if (pathname.split('/')[3]) {
           if (document.querySelector('.compact-profile')) {
@@ -173,7 +173,7 @@ presence.on('UpdateData', async () => {
       case 'online':
         presenceData.details = `Смотрит ${typeContent(pathname.split('/')[1]!)}`
         presenceData.smallImageKey = Assets.Viewing
-        presenceData.smallImageText = strings.viewing
+        presenceData.smallImageText = strings.view
         break
 
       case 'feed':
@@ -200,7 +200,7 @@ presence.on('UpdateData', async () => {
         presenceData.details = 'Смотрит закладки'
         presenceData.state = textContent('.nav-side_i.__ac div')
         presenceData.smallImageKey = Assets.Viewing
-        presenceData.smallImageText = strings.viewing
+        presenceData.smallImageText = strings.view
         break
 
       case 'settings':

@@ -26,7 +26,7 @@ async function getStrings() {
       viewSkins: 'namemc.viewSkins',
       viewEmoji: 'namemc.viewEmojis',
       viewProfile: 'general.viewProfile',
-      viewing: 'general.viewing',
+      view: 'general.view',
       privacy: 'general.privacy',
       search: 'general.searchFor',
       buttonViewServer: 'namemc.buttonViewServer',
@@ -145,7 +145,7 @@ presence.on('UpdateData', async () => {
       ],
     },
     '/privacy/': {
-      details: strings.viewing,
+      details: strings.view,
       state: strings.privacy,
     },
     '/search': {
