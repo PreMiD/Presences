@@ -355,7 +355,7 @@ presence.on('UpdateData', async () => {
           ?.src
           ?.replace('.th', '') ?? ''
 
-        presenceData.smallImageKey = iframeResponse.paused 
+        presenceData.smallImageKey = iframeResponse.paused
           ? Assets.Pause
           : Assets.Play
 
