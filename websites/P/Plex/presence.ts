@@ -229,18 +229,18 @@ presence.on('UpdateData', async () => {
         )
       }
 
-			if (cover && navigator.mediaSession.metadata?.artwork[0].src) {
-				const art = navigator.mediaSession.metadata.artwork?.[0]?.src;
-				presenceData.largeImageKey = art?.match(
-					/(\d+)(?<!10)-(\d+)(192-168)?(?<!172-(1[6-9]|2\d|3[0-1]))-(\d+)\.(\d+)/gm
-				)?.[0] // Checks if it's a private ip, since u can't access that to use as a large/smallimagekey.
-					? ActivityAssets.Logo // If it's a private ip, just use the logo.
-					: await getShortURL(
-							art
-								.replace(/width=[0-9]{1,3}/, "width=1024")
-								.replace(/height=[0-9]{1,3}/, "height=1024")
-						);
-			}
+      if (cover && navigator.mediaSession.metadata?.artwork?.[0]?.src) {
+        const art = navigator.mediaSession.metadata.artwork?.[0]?.src
+        presenceData.largeImageKey = art?.match(
+          /(\d+)(?<!10)-(\d+)(192-168)?(?<!172-(1[6-9]|2\d|3[01]))-(\d+)\.(\d+)/g,
+        )?.[0] // Checks if it's a private ip, since u can't access that to use as a large/smallimagekey.
+          ? ActivityAssets.Logo // If it's a private ip, just use the logo.
+          : await getShortURL(
+            art
+              .replace(/width=\d{1,3}/, 'width=1024')
+              .replace(/height=\d{1,3}/, 'height=1024'),
+          )
+      }
 
       presenceData.smallImageKey = media?.paused ? Assets.Pause : Assets.Play
       presenceData.smallImageText = media?.paused ? 'Paused' : 'Playing'
@@ -260,15 +260,18 @@ presence.on('UpdateData', async () => {
         presenceData.details = title
       else presenceData.name = title ?? ''
 
-			presenceData.state = subTitle;
-			if (
-				(!navigator.mediaSession.metadata?.artist &&
-					!navigator.mediaSession.metadata?.album) ||
-				!!document.querySelector(".application.show-video-player") ||
-				!!document.querySelector("video")
-			)
-				presenceData.type = ActivityType.Watching;
-			else presenceData.type = ActivityType.Listening;
+      presenceData.state = subTitle
+      if (
+        (!navigator.mediaSession.metadata?.artist
+          && !navigator.mediaSession.metadata?.album)
+        || !!document.querySelector('.application.show-video-player')
+        || !!document.querySelector('video')
+      ) {
+        presenceData.type = ActivityType.Watching
+      }
+      else {
+        presenceData.type = ActivityType.Listening
+      }
 
       if (media?.paused) {
         delete presenceData.startTimestamp
