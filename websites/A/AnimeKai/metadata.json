@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.13",
+  "apiVersion": 1,
+  "author": {
+    "id": "357878026429792258",
+    "name": ".waterboii"
+  },
+  "service": "AnimeKai",
+  "description": {
+    "en": "AnimeKai.to - A site to watch anime online for Free"
+  },
+  "url": "animekai.to",
+  "version": "2.0.0",
+  "logo": "https://animekai.to/assets/uploads/37585a39fe8c8d8fafaa2c7bfbf5374ecac859ea6a0288a6da2c61f5.png",
+  "thumbnail": "https://animekai.to/assets/uploads/37585a39fe8c8d8fafaa2c7bfbf5374ecac859ea6a0886b7dc.png",
+  "color": "#40b15d",
+  "category": "anime",
+  "tags": [
+    "anime"
+  ],
+  "iframe": true,
+  "iFrameRegExp": ".*",
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}
