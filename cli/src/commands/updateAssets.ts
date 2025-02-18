@@ -159,7 +159,7 @@ export async function updateAssets() {
     core.info('Committing and pushing changes')
     execSync('git add .')
     execSync('git commit -m "chore: update assets"')
-    execSync('git push')
+    execSync('git push --force-with-lease')
 
     await octokit.rest.repos.createCommitStatus({
       ...context.repo,
@@ -175,7 +175,7 @@ export async function updateAssets() {
       ...context.repo,
       sha,
       state: 'failure',
-      description: error instanceof Error ? error.message : MESSAGES.error,
+      description: MESSAGES.error,
       context: NAME,
     })
 
