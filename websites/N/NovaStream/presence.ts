@@ -7,7 +7,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: 'https://i.imgur.com/sASc3GV.png',
+    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/N/NovaStream/assets/logo.png',
     smallImageKey: Assets.Play,
     smallImageText: 'Watching free content',
     startTimestamp: browsingTimestamp,
