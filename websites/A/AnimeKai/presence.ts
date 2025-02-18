@@ -1,4 +1,4 @@
-import { ActivityType, Assets } from 'premid'
+import { ActivityType, Assets, getTimestamps } from 'premid'
 
 const presence = new Presence({
   clientId: '1264754447276310599',
@@ -95,7 +95,7 @@ presence.on('UpdateData', async () => {
       if (filmName)
         presenceData.state = `${filmName.textContent}`
       if (data && !data.paused) {
-        [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(data.currTime, data.duration)
+        [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(data.currTime, data.duration)
       }
       if (buttons) {
         presenceData.buttons = [
@@ -127,7 +127,7 @@ presence.on('UpdateData', async () => {
     if (data) {
       presenceData.type = ActivityType.Watching
       if (!data.paused) {
-        [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(data.currTime, data.duration)
+        [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(data.currTime, data.duration)
         presenceData.smallImageKey = Assets.Play
         presenceData.smallImageText = (await strings).play
       }
