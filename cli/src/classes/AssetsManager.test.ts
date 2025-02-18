@@ -745,7 +745,7 @@ describe('assetsManager', () => {
           return Promise.resolve(`const img = "https://example.com/new-asset.png"`)
         }
         if (filePath.endsWith('metadata.json')) {
-          return Promise.resolve(`{"image": "https://example.com/new-asset.png"}`)
+          return Promise.resolve(`{"image": "https://example.com/new-asset.png", "version": "1.0.0"}`)
         }
         return Promise.resolve('')
       })
@@ -769,7 +769,14 @@ describe('assetsManager', () => {
       )
       expect(mocks.writeFile).toHaveBeenCalledWith(
         expect.stringMatching(/metadata\.json$/),
-        `{"image": "${assetsManager.baseUrl}/0.png"}`,
+        `{"image": "${assetsManager.baseUrl}/0.png", "version": "1.0.0"}`,
+        'utf-8',
+      )
+
+      //* With old image as we didn't actually write it due to the mocking
+      expect(mocks.writeFile).toHaveBeenCalledWith(
+        expect.stringMatching(/metadata\.json$/),
+        `{\n  "image": "https://example.com/new-asset.png",\n  "version": "1.0.1"\n}`,
         'utf-8',
       )
     })
