@@ -56,4 +56,16 @@ export default antfu(
       'json-schema-validator/no-invalid': 'error',
     },
   },
+  {
+    files: ['websites/**/*.ts'],
+    languageOptions: {
+      parser: await import('@typescript-eslint/parser'),
+      parserOptions: {
+        project: './tsconfig.base.json',
+      },
+    },
+    rules: {
+      'ts/no-deprecated': 'error',
+    },
+  },
 )
