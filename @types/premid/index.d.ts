@@ -554,17 +554,20 @@ declare class Presence {
   /**
    * Similar to `getTimestamps` but takes in a media element and returns snowflake timestamps
    * @param media Media object
+   * @deprecated since 2.7.5 - Use the standalone `getTimestampsFromMedia` function instead: import { getTimestampsFromMedia } from 'premid'
    */
   getTimestampsfromMedia(media: HTMLMediaElement): [number, number]
   /**
    * Converts time and duration integers into snowflake timestamps
    * @param {number} elementTime Current element time seconds
    * @param {number} elementDuration Element duration seconds
+   * @deprecated since 2.7.5 - Use the standalone `getTimestamps` function instead: import { getTimestamps } from 'premid'
    */
   getTimestamps(elementTime: number, elementDuration: number): [number, number]
   /**
    * Converts a string with format `HH:MM:SS` or `MM:SS` or `SS` into an integer (Does not return snowflake timestamp)
    * @param format The formatted string
+   * @deprecated since 2.7.5 - Use the standalone `timestampFromFormat` function instead: import { timestampFromFormat } from 'premid'
    */
   timestampFromFormat(format: string): number
   /**
