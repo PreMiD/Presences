@@ -9,6 +9,7 @@ import * as core from '@actions/core'
 import FormData from 'form-data'
 import { globby } from 'globby'
 import got from 'got'
+import { inc } from 'semver'
 import sharp from 'sharp'
 import { getFolderLetter } from '../util/getFolderLetter.js'
 import { getJsonPosition } from '../util/getJsonPosition.js'
@@ -439,17 +440,25 @@ export class AssetsManager {
       await this.deleteAssets(toBeDeleted)
     }
 
+    let replacedAny = false
     if (toBeMoved.size) {
       await this.uploadAssets(toBeMoved)
       await this.deleteAssets([...toBeMoved.keys()])
 
-      await this.replaceInFiles(toBeMoved)
+      replacedAny = await this.replaceInFiles(toBeMoved)
     }
 
     if (toBeUploaded.size) {
       await this.uploadAssets(toBeUploaded)
 
-      await this.replaceInFiles(toBeUploaded)
+      replacedAny ||= await this.replaceInFiles(toBeUploaded)
+    }
+
+    if (replacedAny) {
+      const metadata: ActivityMetadata = JSON.parse(await readFile(resolve(this.cwd, 'metadata.json'), 'utf-8'))
+
+      metadata.version = inc(metadata.version, 'patch') ?? metadata.version
+      await writeFile(resolve(this.cwd, 'metadata.json'), JSON.stringify(metadata, null, 2), 'utf-8')
     }
 
     //* Return the number of assets updated
@@ -504,6 +513,7 @@ export class AssetsManager {
       Array.from(assets).map(([url, { url: newUrl }]) => [url, newUrl]),
     )
 
+    let changedAny = false
     for (const file of await globby('**/*.ts', { cwd: this.cwd, absolute: true })) {
       let content = await readFile(file, 'utf-8')
       let changed = false
@@ -512,6 +522,7 @@ export class AssetsManager {
           continue
         content = content.replaceAll(oldUrl, newUrl)
         changed = true
+        changedAny = true
       }
 
       if (changed)
@@ -525,10 +536,13 @@ export class AssetsManager {
         continue
       metadata = metadata.replaceAll(oldUrl, newUrl)
       changed = true
+      changedAny = true
     }
 
     if (changed)
       await writeFile(resolve(this.cwd, 'metadata.json'), metadata, 'utf-8')
+
+    return changedAny
   }
 
   async deleteCdnAssets(): Promise<number> {
