@@ -44,57 +44,20 @@ presence.on('UpdateData', async () => {
 	if (pathname === "/" || pathname === "/home")
 		presenceData.details = "Exploring AnimeKai.to";
 	else if (
-		/\/(most-favorite|most-popular|movie|recently-added|recently-updated|tv|top-airing|top-upcoming|ona|ova|special|(genre\/.*)|(genres\/.*))/.test(
+		/\/(ongoing|recent|movie|new-releases|updates|tv|completed|top-upcoming|ona|ova|special|(genre\/.*)|(genres\/.*))/.test(
 			pathname
 		)
 	) {
 		const heading = document.querySelector<HTMLSpanElement>(".shead .stitle.text-uppercase");
 		if (heading) presenceData.details = `Looking at ${heading.textContent}`;
-	} else if (pathname.startsWith("/news")) {
-		presenceData.details = "Looking at Anime news";
-		if (pathname !== "/news") {
-			const title = document.querySelector<HTMLHeadingElement>("h2.news-title");
-			if (title) presenceData.state = title.textContent;
-		}
-	} else if (pathname.startsWith("/community/user")) {
-		const profile = document.querySelector<HTMLSpanElement>(
-			"#main-wrapper > div.container > div > div.ai_-welcome.text-center > span"
-		);
-		if (profile) presenceData.details = `Viewing User: ${profile.textContent}`;
-		presenceData.smallImageKey = Assets.Viewing;
-	} else if (pathname.startsWith("/producer")) {
-		const name = document.querySelector(
-			"#main-content > section > div.block_area-header.block_area-header-tabs > div.float-left.bah-heading.mr-4 > h2"
-		)?.textContent;
+	} else if (pathname.startsWith("/producers")) {
+		const name = document.querySelector<HTMLSpanElement>(".shead .stitle.text-uppercase")?.textContent;
 
 		presenceData.details = name;
 		if (buttons) {
 			presenceData.buttons = [
 				{
 					label: "Go to Production Page",
-					url: href,
-				},
-			];
-		}
-	} else if (
-		pathname.startsWith("/people") ||
-		pathname.startsWith("/character")
-	) {
-		const name = document.querySelector<HTMLHeadingElement>("h4.name"),
-			isCharacterPage = pathname.startsWith("/character");
-		if (name) {
-			presenceData.details = `Looking at ${
-				!isCharacterPage ? "people" : "characters"
-			}`;
-			presenceData.state = name.textContent;
-		}
-		presenceData.smallImageKey = Assets.Viewing;
-		if (buttons) {
-			presenceData.buttons = [
-				{
-					label: `Go to ${
-						name || isCharacterPage ? "Character" : "People"
-					} Page`,
 					url: href,
 				},
 			];
@@ -109,15 +72,17 @@ presence.on('UpdateData', async () => {
 			}`;
 		}
 		presenceData.smallImageKey = Assets.Search;
-	} else if (pathname.startsWith("/watch2gether/")) {
-		if (pathname === "/watch2gether/")
+	} else if (pathname.startsWith("/watch2gether")) {
+		if (pathname === "/watch2gether")
 			presenceData.details = "Looking for anime rooms";
 		else {
 			const filmName =
-					document.querySelector<HTMLHeadingElement>("h2.film-name"),
-				thumbnail = document.querySelector<HTMLImageElement>(
-					".anis-watch-detail > .anis-content > .anisc-poster > .film-poster > img.film-poster-img"
-				)?.src;
+			document.querySelector<HTMLLIElement>(
+				"li.breadcrumb-item.active"
+			),
+					thumbnail = document.querySelector<HTMLImageElement>(
+						".poster > div > img"
+					)?.src;
 
 			presenceData.largeImageKey = thumbnail;
 			presenceData.details = "In a room";
@@ -174,15 +139,6 @@ presence.on('UpdateData', async () => {
 				},
 			];
 		}
-	} else if (pathname.startsWith("/event/")) {
-		const title = document.querySelector<HTMLDivElement>("div.title"),
-			description = document.querySelector<HTMLDivElement>("div.description");
-		if (title) presenceData.details = `Event: ${title.textContent}`;
-		if (description) presenceData.state = description.textContent;
-	} else if (pathname.startsWith("/community")) {
-		presenceData.details = "Community Post";
-		presenceData.state = document.title;
-		presenceData.smallImageKey = Assets.Question;
 	} else {
 		switch (pathname) {
 			case "/browser": {
@@ -195,20 +151,13 @@ presence.on('UpdateData', async () => {
 				presenceData.smallImageKey = Assets.Search;
 				break;
 			}
-			case "/events": {
-				presenceData.details = "Looking at events";
-				break;
-			}
 			case "/contact": {
 				presenceData.details = "Contact Us";
 				break;
 			}
-			case "/dmca": {
-				presenceData.details = "DMCA";
-				break;
-			}
-			case "/terms": {
-				presenceData.details = "Terms of Service";
+			case "/user/profile": {
+				presenceData.details = "Checking User Profile";
+				presenceData.smallImageKey = ActivityAssets.Settings;
 				break;
 			}
 			case "/user/settings": {
@@ -221,12 +170,12 @@ presence.on('UpdateData', async () => {
 				presenceData.smallImageKey = ActivityAssets.Notifications;
 				break;
 			}
-			case "/user/continue-watching": {
+			case "/user/watching": {
 				presenceData.details = "Continue Watching";
 				presenceData.smallImageKey = Assets.Reading;
 				break;
 			}
-			case "/user/mal": {
+			case "/user/import": {
 				presenceData.details = "MAL Import/Export";
 				presenceData.smallImageKey = Assets.Downloading;
 				break;
