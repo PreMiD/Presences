@@ -1,4 +1,4 @@
-# Resouces for Presences
+# Resouces for Activities
 
 In this folder you can find resource images which you can use to display the status of what the user is doing.
 
