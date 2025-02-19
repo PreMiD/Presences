@@ -31,7 +31,7 @@ export const MESSAGES = {
   checkingAndUpdatingAssets: 'Checking and updating assets...',
   someInvalidAssets: 'Some invalid assets were found, check the logs for more details',
   assetsUpdated: 'Assets have been updated successfully',
-  error: 'An error occurred',
+  error: 'An error occurred - please check the logs for details',
   wrongRepository: 'This command can only be run in PreMiD/Presences repository',
   assetsUpdatedCount: (count: number) => count === 0 ? 'No assets updated' : `${count} assets updated successfully`,
 }
