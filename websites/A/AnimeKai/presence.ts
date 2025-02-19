@@ -3,10 +3,7 @@ import { ActivityType, Assets, getTimestamps } from 'premid'
 const presence = new Presence({
   clientId: '1264754447276310599',
 })
-const strings = presence.getStrings({
-  play: 'general.playing',
-  pause: 'general.paused',
-})
+
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 let data: {
@@ -129,11 +126,11 @@ presence.on('UpdateData', async () => {
       if (!data.paused) {
         [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(data.currTime, data.duration)
         presenceData.smallImageKey = Assets.Play
-        presenceData.smallImageText = (await strings).play
+        presenceData.smallImageText = 'Playing'
       }
       else {
         presenceData.smallImageKey = Assets.Pause
-        presenceData.smallImageText = (await strings).pause
+        presenceData.smallImageText = 'Paused'
         delete presenceData.startTimestamp
         delete presenceData.endTimestamp
       }
