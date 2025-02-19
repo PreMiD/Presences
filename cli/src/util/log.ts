@@ -23,18 +23,15 @@ export function info(message: string) {
 
 export const MESSAGES = {
   ciOnly: 'This command can only be run in a CI environment',
-  noPullRequest: 'This command can only be run in a pull request',
   noToken: 'GITHUB_TOKEN environment variable is required',
   noCdnToken: 'CDN_TOKEN environment variable is required',
   noMongoUrl: 'MONGO_URL environment variable is required',
-  noHeadRef: 'HEAD_REF environment variable is required',
   noMongoConnection: 'Failed to connect to MongoDB',
   noActivities: 'No activities changed',
-  waitingForApprovals: 'Waiting for 2 approvals...',
   checkingAndUpdatingAssets: 'Checking and updating assets...',
   someInvalidAssets: 'Some invalid assets were found, check the logs for more details',
   assetsUpdated: 'Assets have been updated successfully',
-  error: 'An error occurred',
+  error: 'An error occurred - please check the logs for details',
   wrongRepository: 'This command can only be run in PreMiD/Presences repository',
-  assetsUpdatedCount: (count: number, committing = false) => count === 0 ? 'No assets updated' : `${count} assets updated successfully${committing ? ' and pushed to GitHub' : ''}`,
+  assetsUpdatedCount: (count: number) => count === 0 ? 'No assets updated' : `${count} assets updated successfully`,
 }
