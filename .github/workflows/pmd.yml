@@ -37,3 +37,4 @@ jobs:
         with:
           sarif_file: pmd-results.sarif
           wait-for-processing: true
+          category: pmd

@@ -39,3 +39,4 @@ jobs:
         with:
           sarif_file: eslint-results.sarif
           wait-for-processing: true
+          category: linting
