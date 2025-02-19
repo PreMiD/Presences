@@ -12,7 +12,7 @@ if (!startTime) {
 presence.on('UpdateData', async () => {
   const presenceData: any = {
     details: 'Browsing Framer',
-    largeImageKey: 'https://iili.io/2mZgC0P.jpg',
+    largeImageKey: 'https://iili.io/2yPc6cF.md.jpg',
     startTimestamp: Number(startTime),
   }
 
