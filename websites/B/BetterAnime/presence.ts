@@ -1,4 +1,4 @@
-import { ActivityType, Assets } from 'premid'
+import { ActivityType, Assets, getTimestamps } from 'premid'
 
 const presence = new Presence({
   clientId: '839409255979155516',
@@ -138,7 +138,7 @@ presence.on('UpdateData', async () => {
             ? strings.pause
             : strings.play;
 
-          [data.presenceData.startTimestamp, data.presenceData.endTimestamp] = presence.getTimestamps(video.currentTime, video.duration)
+          [data.presenceData.startTimestamp, data.presenceData.endTimestamp] = getTimestamps(video.currentTime, video.duration)
           const seriesURL = document.querySelector<HTMLAnchorElement>(
             'div.anime-title > h2 > a',
           )?.href
@@ -206,7 +206,7 @@ presence.on('UpdateData', async () => {
             ? strings.pause
             : strings.play;
 
-          [data.presenceData.startTimestamp, data.presenceData.endTimestamp] = presence.getTimestamps(video.currentTime, video.duration)
+          [data.presenceData.startTimestamp, data.presenceData.endTimestamp] = getTimestamps(video.currentTime, video.duration)
 
           data.presenceData.buttons = [
             {
