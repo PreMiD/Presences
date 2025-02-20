@@ -13,13 +13,12 @@
     "uktvplay.uktv.co.uk",
     "uktvplay.co.uk"
   ],
-  "version": "1.0.14",
+  "version": "1.0.15",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/U/UKTV/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/U/UKTV/assets/thumbnail.png",
   "color": "#00BAC6",
   "category": "videos",
   "tags": [
-    "uktv",
     "streaming",
     "tv",
     "series"

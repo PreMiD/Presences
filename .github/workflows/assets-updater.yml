@@ -1,4 +1,4 @@
-name: pmd
+name: Assets Updater
 
 on:
   push:
