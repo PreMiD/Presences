@@ -52,7 +52,7 @@ async function getStrings() {
       viewTeam: 'twitch.viewTeam',
       viewDropsInv: 'twitch.viewDropsInv',
       viewDropsComp: 'twitch.viewDropsComp',
-      viewing: 'general.viewing',
+      view: 'general.view',
       searchingFor: 'general.searchFor',
       searchingSomething: 'general.searchSomething',
       viewSettings: 'twitch.viewSettings',
@@ -817,15 +817,15 @@ presence.on('UpdateData', async () => {
             details: `${strings.dev} | ${strings.browse}`,
           },
           '/products/': {
-            details: `${strings.dev} | ${strings.viewing}`,
+            details: `${strings.dev} | ${strings.view}`,
             state: strings.devProduct,
           },
           '/showcase/': {
-            details: `${strings.dev} | ${strings.viewing}`,
+            details: `${strings.dev} | ${strings.view}`,
             state: strings.devShowcase,
           },
           '/support/': {
-            details: `${strings.dev} | ${strings.viewing}`,
+            details: `${strings.dev} | ${strings.view}`,
             state: strings.devSupport,
           },
           '/docs/': {
@@ -905,15 +905,15 @@ presence.on('UpdateData', async () => {
             details: `Status page | ${strings.browse}`,
           },
           '/incidents/': {
-            details: `Status page | ${strings.viewing}`,
+            details: `Status page | ${strings.view}`,
             state: document.querySelector('.page-title > div')?.textContent,
           },
           '/history/': {
-            details: `Status page | ${strings.viewing}`,
+            details: `Status page | ${strings.view}`,
             state: strings.incident,
           },
           '/uptime/': {
-            details: `Status page | ${strings.viewing}`,
+            details: `Status page | ${strings.view}`,
             state: strings.uptime,
           },
         }
