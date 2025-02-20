@@ -65,7 +65,7 @@ presence.on('UpdateData', async () => {
   switch (pathOne) {
     case 'articles': {
       presenceData.details = strings.readingArticle
-      presenceData.state = document.querySelector('.display-title').textContent
+      presenceData.state = document.querySelector('.display-title')?.textContent
       presenceData.buttons = [
         {
           label: strings.buttonReadArticle,
@@ -77,7 +77,7 @@ presence.on('UpdateData', async () => {
     case 'videos': {
       if (pathTwo) {
         presenceData.details = strings.watching
-        presenceData.state = document.querySelector('.title2').textContent
+        presenceData.state = document.querySelector('.title2')?.textContent
         presenceData.buttons = [
           {
             label: strings.buttonWatchVideo,
@@ -88,13 +88,13 @@ presence.on('UpdateData', async () => {
       }
       else {
         presenceData.details = strings.viewCategory
-        presenceData.state = document.querySelector('.title1').textContent
+        presenceData.state = document.querySelector('.title1')?.textContent
       }
       break
     }
     case 'wikis': {
       presenceData.details = strings.wiki
-      presenceData.state = document.querySelector('.display-title').textContent
+      presenceData.state = document.querySelector('.display-title')?.textContent
       presenceData.buttons = [
         {
           label: strings.buttonViewWiki,
@@ -106,12 +106,12 @@ presence.on('UpdateData', async () => {
     }
     case 'person': {
       presenceData.details = strings.viewMember
-      presenceData.state = document.querySelector('h1.display-title').textContent
+      presenceData.state = document.querySelector('h1.display-title')?.textContent
       break
     }
     case 'u': {
       presenceData.details = strings.viewMember
-      presenceData.state = document.querySelector('.user-name').textContent
+      presenceData.state = document.querySelector('.user-name')?.textContent
       break
     }
     case 'maps': {
@@ -124,7 +124,7 @@ presence.on('UpdateData', async () => {
         case 'lists': {
           if (pathFour) {
             presenceData.details = strings.viewList
-            presenceData.state = document.querySelector('.display-title').textContent
+            presenceData.state = document.querySelector('.display-title')?.textContent
           }
           else {
             presenceData.details = strings.viewPlaylists
@@ -176,7 +176,7 @@ presence.on('UpdateData', async () => {
     case 'playlist': {
       if (pathThree) {
         presenceData.details = strings.viewList
-        presenceData.state = document.querySelector('.display-title').textContent
+        presenceData.state = document.querySelector('.display-title')?.textContent
         presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.aspect-ratio-3-2')?.src ?? ActivityAssets.Logo
       }
       else {
@@ -203,10 +203,10 @@ presence.on('UpdateData', async () => {
     case 'tabletop': {
       presenceData.details = strings.viewCategory
       presenceData.state = pathOne === 'columns'
-        ? document.querySelector('.display-title').textContent
+        ? document.querySelector('.display-title')?.textContent
         : pathOne === 'article' || pathOne === 'tabletop'
-          ? document.querySelector('.herotitle').textContent
-          : document.querySelector('.title1').textContent
+          ? document.querySelector('.herotitle')?.textContent
+          : document.querySelector('.title1')?.textContent
       break
     }
     case 'ps5': {
@@ -242,12 +242,12 @@ presence.on('UpdateData', async () => {
     }
     case 'events': {
       presenceData.details = strings.viewCategory
-      presenceData.state = document.querySelector('a.selected.bold').textContent
+      presenceData.state = document.querySelector('a.selected.bold')?.textContent
       break
     }
     case 'upcoming': {
       presenceData.details = strings.viewPage
-      presenceData.state = document.querySelector('.title5').textContent
+      presenceData.state = document.querySelector('.title5')?.textContent
       break
     }
     case 'special': {
@@ -256,7 +256,7 @@ presence.on('UpdateData', async () => {
     }
     case 'icons': {
       presenceData.details = strings.viewPage
-      presenceData.state = document.querySelector('.display-title').textContent
+      presenceData.state = document.querySelector('.display-title')?.textContent
       break
     }
     case 'games': {
@@ -268,12 +268,12 @@ presence.on('UpdateData', async () => {
         case 'genre':
         case 'platform': {
           presenceData.details = strings.viewPage
-          presenceData.state = document.querySelector('.title5').textContent
+          presenceData.state = document.querySelector('.title5')?.textContent
           break
         }
         default: {
           presenceData.details = strings.viewGame
-          presenceData.state = document.querySelector('.display-title').textContent
+          presenceData.state = document.querySelector('.display-title')?.textContent
           presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? ActivityAssets.Logo
           presenceData.buttons = [
             {
@@ -295,12 +295,12 @@ presence.on('UpdateData', async () => {
           case 'genre':
           case 'platform': {
             presenceData.details = strings.viewPage
-            presenceData.state = document.querySelector('.title5').textContent
+            presenceData.state = document.querySelector('.title5')?.textContent
             break
           }
           default: {
             presenceData.details = strings.viewMovie
-            presenceData.state = document.querySelector('.display-title').textContent
+            presenceData.state = document.querySelector('.display-title')?.textContent
             presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? ActivityAssets.Logo
             presenceData.buttons = [
               {
@@ -314,7 +314,7 @@ presence.on('UpdateData', async () => {
       }
       else {
         presenceData.details = strings.viewCategory
-        presenceData.state = document.querySelector('.title1').textContent
+        presenceData.state = document.querySelector('.title1')?.textContent
       }
       break
     }
@@ -327,12 +327,12 @@ presence.on('UpdateData', async () => {
           case 'genre':
           case 'platform': {
             presenceData.details = strings.viewPage
-            presenceData.state = document.querySelector('.title5').textContent
+            presenceData.state = document.querySelector('.title5')?.textContent
             break
           }
           default: {
             presenceData.details = strings.viewTV
-            presenceData.state = document.querySelector('.display-title').textContent
+            presenceData.state = document.querySelector('.display-title')?.textContent
             presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? ActivityAssets.Logo
             presenceData.buttons = [
               {
@@ -346,7 +346,7 @@ presence.on('UpdateData', async () => {
       }
       else {
         presenceData.details = strings.viewCategory
-        presenceData.state = document.querySelector('.title1').textContent
+        presenceData.state = document.querySelector('.title1')?.textContent
       }
       break
     }
@@ -359,12 +359,12 @@ presence.on('UpdateData', async () => {
           case 'genre':
           case 'platform': {
             presenceData.details = strings.viewPage
-            presenceData.state = document.querySelector('.title5').textContent
+            presenceData.state = document.querySelector('.title5')?.textContent
             break
           }
           default: {
             presenceData.details = strings.viewComics
-            presenceData.state = document.querySelector('.display-title').textContent
+            presenceData.state = document.querySelector('.display-title')?.textContent
             presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? ActivityAssets.Logo
             presenceData.buttons = [
               {
@@ -378,7 +378,7 @@ presence.on('UpdateData', async () => {
       }
       else {
         presenceData.details = strings.viewCategory
-        presenceData.state = document.querySelector('.title1').textContent
+        presenceData.state = document.querySelector('.title1')?.textContent
       }
       break
     }
@@ -391,12 +391,12 @@ presence.on('UpdateData', async () => {
           case 'genre':
           case 'platform': {
             presenceData.details = strings.viewPage
-            presenceData.state = document.querySelector('.title5').textContent
+            presenceData.state = document.querySelector('.title5')?.textContent
             break
           }
           default: {
             presenceData.details = strings.viewTech
-            presenceData.state = document.querySelector('.display-title').textContent
+            presenceData.state = document.querySelector('.display-title')?.textContent
             presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.object-image')?.src ?? ActivityAssets.Logo
             presenceData.buttons = [
               {
@@ -410,14 +410,14 @@ presence.on('UpdateData', async () => {
       }
       else {
         presenceData.details = strings.viewCategory
-        presenceData.state = document.querySelector('.title1').textContent
+        presenceData.state = document.querySelector('.title1')?.textContent
       }
       break
     }
     case 'se': {
       presenceData.details = strings.search
       presenceData.state = decodeURIComponent(
-        search.split('=')[2].replaceAll('+', ' '),
+        search?.split('=')[2]?.replaceAll('+', ' ') ?? '',
       )
       break
     }
@@ -431,7 +431,7 @@ presence.on('UpdateData', async () => {
         || pathThree === 'preview'
       ) {
         presenceData.details = pathThree === 'video' ? strings.watching : strings.readingArticle
-        presenceData.state = document.querySelector('#id_title').textContent
+        presenceData.state = document.querySelector('#id_title')?.textContent
         presenceData.buttons = [
           {
             label: pathThree === 'video' ? strings.buttonWatchVideo : strings.buttonReadArticle,
@@ -441,7 +441,7 @@ presence.on('UpdateData', async () => {
         break
       }
       else if (pathOne) {
-        const gameTab = document.querySelector('.title').textContent
+        const gameTab = document.querySelector('.title')?.textContent
         if (gameTab) {
           presenceData.details = strings.viewGame
           presenceData.state = gameTab
