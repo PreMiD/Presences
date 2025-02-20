@@ -5,10 +5,12 @@
     "name": "TheDrop.",
     "id": "293828021134295040"
   },
-  "contributors": [{
-    "name": "Atom Skully",
-    "id": "671037171611729920"
-  }],
+  "contributors": [
+    {
+      "name": "Atom Skully",
+      "id": "671037171611729920"
+    }
+  ],
   "service": "Google",
   "description": {
     "en": "Google is a search engine that can be employed to find a variety of information such as websites, pictures, maps.",
@@ -20,7 +22,7 @@
   },
   "url": "www.google.com",
   "regExp": "www[.]google([.][a-z]+)+[/]",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google/assets/thumbnail.png",
   "color": "#ffffff",
