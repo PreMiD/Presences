@@ -1,7 +1,6 @@
 import { writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import process from 'node:process'
-import { pathToFileURL } from 'node:url'
 import { getCliPackageJson } from './getPackageJson.js'
 
 export enum SarifRuleId {
@@ -13,6 +12,7 @@ export enum SarifRuleId {
   serviceFolderCheck = 'service-folder-check',
   imageSizeCheck = 'image-size-check',
   imageMimeTypeCheck = 'image-mime-type-check',
+  tagsCheck = 'tags-check',
 }
 
 const sarifRules: Record<SarifRuleId, ReportingDescriptor> = {
@@ -72,6 +72,13 @@ const sarifRules: Record<SarifRuleId, ReportingDescriptor> = {
       text: 'Makes sure all images (logo and URLs) have the correct MIME type',
     },
   },
+  [SarifRuleId.tagsCheck]: {
+    id: SarifRuleId.tagsCheck,
+    name: 'Tags Check',
+    shortDescription: {
+      text: 'Makes sure the `tags` metadata property is unique',
+    },
+  },
 }
 
 const sarifLog: SARIF = {
@@ -107,7 +114,8 @@ export function addSarifLog(log: {
     column: number
   }
 }) {
-  log.path = log.path.replace(process.cwd(), '')
+  // Remove the cwd from the path. And remove the leading slash.
+  log.path = log.path.replace(process.cwd(), '').slice(1)
 
   if (typeof sarifArtifactIndices[log.path] === 'undefined') {
     sarifArtifactIndices[log.path] = nextArtifactIndex++
@@ -115,7 +123,7 @@ export function addSarifLog(log: {
     // Create a new entry in the files dictionary.
     sarifFiles[log.path] = {
       location: {
-        uri: pathToFileURL(log.path).toString(),
+        uri: log.path,
       },
     }
   }
@@ -133,7 +141,7 @@ export function addSarifLog(log: {
       {
         physicalLocation: {
           artifactLocation: {
-            uri: pathToFileURL(log.path),
+            uri: log.path,
             index: sarifArtifactIndices[log.path],
           },
           ...(log.position && log.position.line > 0
