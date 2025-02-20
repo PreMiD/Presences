@@ -35,10 +35,19 @@ export async function getActivities(): Promise<ActivityMetadataAndFolder[]> {
   })
 }
 
+let cache: {
+  changed: ActivityMetadataAndFolder[]
+  deleted: ActivityMetadataAndFolder[]
+} | null = null
+
 export async function getChangedActivities(): Promise<{
   changed: ActivityMetadataAndFolder[]
   deleted: ActivityMetadataAndFolder[]
 }> {
+  if (cache) {
+    return cache
+  }
+
   const changedFiles = (isCI ? await getChangedFilesCi() : await getChangedFilesLocal())
     .map(file => ({
       ...file,
@@ -81,7 +90,7 @@ export async function getChangedActivities(): Promise<{
       .filter(folder => !Array.from(activityPaths).some(activityPath => activityPath.startsWith(folder))),
   )
 
-  return {
+  return cache = {
     changed: (
       await Promise.all(
         Array.from(activityPaths)

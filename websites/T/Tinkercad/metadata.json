@@ -10,13 +10,12 @@
     "en": "Tinkercad is a free, easy-to-use app for 3D design, electronics, and coding"
   },
   "url": "www.tinkercad.com",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/T/Tinkercad/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Tinkercad/assets/thumbnail.png",
   "color": "#0060df",
   "category": "other",
   "tags": [
-    "tinkercad",
     "autodesk",
     "cad",
     "3d",
