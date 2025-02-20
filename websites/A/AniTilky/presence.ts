@@ -1,6 +1,3 @@
-/// <reference types="premid" />
-/// <reference path="../../../@types/premid/index.d.ts" />
-
 const presence = new Presence({
   clientId: '1124065204200820786',
 })
@@ -15,6 +12,7 @@ const videoData = {
 }
 const baseUrl = 'https://anitilky.xyz'
 const apiUrl = 'https://api.anitilky.xyz/api'
+const logoUrl = 'https://i.imgur.com/5ZwoLGq.png'
 
 interface VideoData {
   current: number
@@ -93,7 +91,7 @@ async function getUserInfo(username: string): Promise<UserResponse['data'] | nul
     }
     return {
       ...data.data,
-      avatar: data.data.avatar || 'logo',
+      avatar: data.data.avatar || logoUrl,
     }
   }
   catch {
@@ -110,7 +108,7 @@ presence.on('iFrameData', async (data: VideoData) => {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: 'logo',
+    largeImageKey: logoUrl,
   }
 
   if (path === '/') {
@@ -152,7 +150,7 @@ presence.on('UpdateData', async () => {
 
     presenceData.details = 'Anime detayına bakıyor'
     presenceData.state = animeInfo?.title.romaji || animeInfo?.title.english || animeInfo?.title.native || 'Yükleniyor...'
-    presenceData.largeImageKey = animeInfo?.coverImage || 'logo'
+    presenceData.largeImageKey = animeInfo?.coverImage || logoUrl
     if (animeInfo) {
       presenceData.smallImageText = `${animeInfo.type || 'TV'} • ${animeInfo.status || 'Devam Ediyor'}`
     }
@@ -174,7 +172,7 @@ presence.on('UpdateData', async () => {
 
     presenceData.details = animeInfo?.title.romaji || animeInfo?.title.english || animeInfo?.title.native || 'Yükleniyor...'
     presenceData.state = `Sezon ${season} Bölüm ${episode}`
-    presenceData.largeImageKey = animeInfo?.coverImage || 'logo'
+    presenceData.largeImageKey = animeInfo?.coverImage || logoUrl
     if (animeInfo) {
       presenceData.smallImageText = `${animeInfo.type || 'TV'} • ${animeInfo.status || 'Devam Ediyor'}`
     }
