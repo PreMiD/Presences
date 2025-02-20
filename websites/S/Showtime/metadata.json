@@ -21,7 +21,7 @@
     "www.sho.com",
     "www.showtime.com"
   ],
-  "version": "1.4.12",
+  "version": "1.4.13",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/S/Showtime/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Showtime/assets/thumbnail.png",
   "color": "#B20000",
@@ -31,8 +31,7 @@
     "media",
     "sky",
     "skyshowtime",
-    "sho",
-    "showtime"
+    "sho"
   ],
   "settings": [
     {
