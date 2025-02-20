@@ -123,7 +123,7 @@ export function addSarifLog(log: {
   }
 }) {
   // Remove the cwd from the path. And remove the leading slash.
-  log.path = log.path.replace(process.cwd(), '').slice(1)
+  log.path = encodeURIComponent(log.path.replace(process.cwd(), '').slice(1))
 
   if (typeof sarifArtifactIndices[log.path] === 'undefined') {
     sarifArtifactIndices[log.path] = nextArtifactIndex++
