@@ -16,14 +16,13 @@
     "www.rey.fm",
     "status.rey.fm"
   ],
-  "version": "1.4.14",
+  "version": "1.4.15",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/REYFM/assets/thumbnail.png",
   "color": "#cd6ef4",
   "category": "music",
   "tags": [
     "radio",
-    "reyfm",
     "music"
   ],
   "settings": [

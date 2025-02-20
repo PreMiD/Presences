@@ -11,13 +11,12 @@
     "nl": "Een community-site voor tieners en jongvolwassenen met focus op creativiteit!"
   },
   "url": "everskies.com",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/E/Everskies/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/Everskies/assets/thumbnail.png",
   "color": "#c9bfff",
   "category": "socials",
   "tags": [
-    "everskies",
     "forums"
   ],
   "settings": [

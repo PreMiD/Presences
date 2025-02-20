@@ -10,7 +10,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000)
  * @param input Input replacing "-" with " "; First letter always uppercase
  * @param everyFirstLetterUppercase If true, first letter of each word is capitalized
  * @returns {string} The input with "-" replaced with " " and the first letter of each word capitalized
- * @example // (false) "terms-of-service" -> "Terms of service"; (true) "rift-s" -> "Rift S"
+// (false) "terms-of-service" -> "Terms of service"; (true) "rift-s" -> "Rift S"
  */
 function splitOnDashes(input: string, everyFirstLetterUppercase = false): string {
   return input

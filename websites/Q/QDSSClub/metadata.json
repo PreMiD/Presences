@@ -22,7 +22,7 @@
     "qdssclub.com",
     "www.qdssclub.com"
   ],
-  "version": "1.2.26",
+  "version": "1.2.27",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/Q/QDSSClub/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Q/QDSSClub/assets/thumbnail.png",
   "color": "#9A12D6",
@@ -30,7 +30,6 @@
   "tags": [
     "qdss",
     "quei-due-sul-server",
-    "qdssclub",
     "forum"
   ]
 }
