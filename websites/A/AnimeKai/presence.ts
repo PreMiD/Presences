@@ -13,7 +13,7 @@ let data: {
 } = null as any
 
 enum ActivityAssets { // Other default assets can be found at index.d.ts
-  Logo = 'https://i.imgur.com/cBDeiXA.png',
+  Logo = 'https://i.imgur.com/W8xdGr1.png',
   Settings = 'https://i.imgur.com/uERKN5k.png',
   Notifications = 'https://i.imgur.com/FrWu91B.png',
 }
