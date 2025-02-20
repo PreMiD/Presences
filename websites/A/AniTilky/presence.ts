@@ -1,18 +1,20 @@
 /// <reference types="premid" />
+/// <reference path="../../../@types/premid/index.d.ts" />
 
-export const presence = new Presence({
+const presence = new Presence({
   clientId: '1124065204200820786',
 })
-export const time = Math.floor(Date.now() / 1000)
-export const path = document.location.pathname
-export const videoData = {
+
+const time = Math.floor(Date.now() / 1000)
+const path = document.location.pathname
+const videoData = {
   current: 0,
   duration: 0,
   isLive: false,
   paused: true,
 }
-export const baseUrl = 'https://anitilky.xyz'
-export const apiUrl = 'https://backend.anitilky.xyz/api'
+const baseUrl = 'https://anitilky.xyz'
+const apiUrl = 'https://backend.anitilky.xyz/api'
 
 interface VideoData {
   current: number

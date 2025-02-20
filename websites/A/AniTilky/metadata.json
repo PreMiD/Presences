@@ -18,7 +18,5 @@
   "color": "#FF6B6B",
   "category": "anime",
   "tags": ["anime", "video", "streaming", "turkish"],
-  "iframe": true,
-  "iFrameRegExp": "anitilky\\.xyz",
-  "readLogs": false
+  "iframe": false
 }
