@@ -13,13 +13,12 @@
   },
   "url": "medium.com",
   "regExp": "([a-z0-9|-]+[.])*medium[.]com[/]",
-  "version": "1.2.18",
+  "version": "1.2.19",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/M/Medium/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Medium/assets/thumbnail.png",
   "color": "#141210",
   "category": "socials",
   "tags": [
-    "medium",
     "social",
     "stories"
   ]
