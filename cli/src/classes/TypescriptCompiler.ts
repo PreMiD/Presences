@@ -64,8 +64,8 @@ export class TypescriptCompiler {
             message: ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n'),
             ruleId: SarifRuleId.typeCheck,
             position: {
-              line,
-              column: character,
+              line: line + 1,
+              column: character + 1,
             },
           })
         }
