@@ -13,7 +13,7 @@
     "3388.to",
     "www.3388.to"
   ],
-  "version": "1.0.11",
+  "version": "1.0.12",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/0-9/3388/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/0-9/3388/assets/thumbnail.png",
   "color": "#c13f34",
@@ -21,7 +21,6 @@
   "tags": [
     "streaming",
     "movies",
-    "tv",
-    "3388"
+    "tv"
   ]
 }
