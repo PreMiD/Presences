@@ -93,13 +93,13 @@ const knownExtensions: ImageKeyMap = {
   '.asmx': { image: 'asp' },
   '.aspx': { image: 'asp' },
   '.axd': { image: 'asp' },
-  '/\\.setTrayTitle(l?a|[ls]?o|out|s|a51|asm|axf|elf|prx|puff|z80)$/i': {
+  '/\\.(l?a|[ls]?o|out|s|a51|asm|axf|elf|prx|puff|z80)$/i': {
     image: 'assembly',
   },
   '.agc': { image: 'assembly' },
   '.ko': { image: 'assembly' },
   '.lst': { image: 'assembly' },
-  '/\\.setTrayTitle((c([+px]{2}?)?-?)?objdump|bsdiff|bin|dat|pak|pdb)$/i': {
+  '/\\.((c([+px]{2}?)?-?)?objdump|bsdiff|bin|dat|pak|pdb)$/i': {
     image: 'assembly',
   },
   '.d-objdump': { image: 'assembly' },
@@ -114,7 +114,7 @@ const knownExtensions: ImageKeyMap = {
   '.bat': { image: 'bat' },
   '.batch': { image: 'bat' },
   '.cmd': { image: 'bat' },
-  '/\\.setTrayTitle(exe|com|msi)$/i': { image: 'bat' },
+  '/\\.(exe|com|msi)$/i': { image: 'bat' },
   '.reg': { image: 'bat' },
   '/^(\\.bowerrc|bower\\.json|Bowerfile)$/i': { image: 'bower' },
   '/\\.bf?$/i': { image: 'brainfuck' },
@@ -129,7 +129,7 @@ const knownExtensions: ImageKeyMap = {
   '/\\.cljs(cm)?$/i': { image: 'clojure' },
   '.cmake': { image: 'cmake' },
   '/^CMakeLists\\.txt$/': { image: 'cmake' },
-  '/\\.codeclimate\\.setTrayTitle(yml|json)/i': { image: 'codeclimate' },
+  '/\\.codeclimate\\.(yml|json)/i': { image: 'codeclimate' },
   '.coffee': { image: 'coffee' },
   '.cjsx': { image: 'coffee' },
   '.coffee.ecr': { image: 'coffee' },
@@ -139,7 +139,7 @@ const knownExtensions: ImageKeyMap = {
   '/\\.c[+px]{2}$|\\.cc$/i': { image: 'cpp' },
   '/\\.h[+px]{2}$/i': { image: 'cpp' },
   '/\\.[it]pp$/i': { image: 'cpp' },
-  '/\\.setTrayTitle(tcc|inl)$/i': { image: 'cpp' },
+  '/\\.(tcc|inl)$/i': { image: 'cpp' },
   '.cats': { image: 'cpp' },
   '.idc': { image: 'cpp' },
   '.w': { image: 'cpp' },
@@ -150,7 +150,7 @@ const knownExtensions: ImageKeyMap = {
   '.cs': { image: 'csharp' },
   '.csx': { image: 'csharp' },
   '.cshtml': { image: 'cshtml' },
-  //    ".css": { "image": "css" },
+  '.css': { image: 'css' },
   '.css.map': { image: 'cssmap' },
   '.cu': { image: 'cuda' },
   '/\\.di?$/i': { image: 'd' },
@@ -168,8 +168,8 @@ const knownExtensions: ImageKeyMap = {
   '.editorconfig': { image: 'editorconfig' },
   '.ejs': { image: 'ejs' },
   '.ex': { image: 'elixir' },
-  '/\\.setTrayTitle(exs|l?eex)$/i': { image: 'elixir' },
-  '/^mix\\.setTrayTitle(exs?|lock)$/i': { image: 'elixir' },
+  '/\\.(exs|l?eex)$/i': { image: 'elixir' },
+  '/^mix\\.(exs?|lock)$/i': { image: 'elixir' },
   '.elm': { image: 'elm' },
   '.env': { image: 'env' },
   '.erl': { image: 'erlang' },
@@ -180,7 +180,7 @@ const knownExtensions: ImageKeyMap = {
   '.app.src': { image: 'erlang' },
   '/^Emakefile$/': { image: 'erlang' },
   '/^rebar(\\.config)?\\.lock$/i': { image: 'erlang' },
-  '/\\.setTrayTitle(eslintrc|eslintignore)/i': { image: 'eslint' },
+  '/\\.(eslintrc|eslintignore)/i': { image: 'eslint' },
   '/(\\.firebaserc|firebase\\.json)/i': { image: 'firebase' },
   '.flowconfig': { image: 'flowconfig' },
   '.fs': { image: 'fsharp' },
@@ -200,9 +200,9 @@ const knownExtensions: ImageKeyMap = {
   '.gvy': { image: 'groovy' },
   '.gy': { image: 'groovy' },
   '.gsh': { image: 'groovy' },
-  '/gruntfile\\.setTrayTitle(js|coffee)/i': { image: 'gruntfile' },
+  '/gruntfile\\.(js|coffee)/i': { image: 'gruntfile' },
   'gulpfile.js': { image: 'gulp' },
-  '/\\.setTrayTitle(hbs|handlebars|(mu)?stache)$/i': { image: 'handlebars' },
+  '/\\.(hbs|handlebars|(mu)?stache)$/i': { image: 'handlebars' },
   '.prg': { image: 'harbour' },
   '.hbp': { image: 'harbour' },
   '.hbc': { image: 'harbour' },
@@ -223,15 +223,15 @@ const knownExtensions: ImageKeyMap = {
   '.jar': { image: 'java' },
   '.java': { image: 'java' },
   'jest.config.js': { image: 'jest' },
-  //    ".js": { "image": "js" },
+  '.js': { image: 'js' },
   '.es6': { image: 'js' },
   '.es': { image: 'js' },
   '.mjs': { image: 'js' },
   '.js.map': { image: 'jsmap' },
-  //    ".json": { "image": "json" },
+  '.json': { image: 'json' },
   '.jsonc': { image: 'json' },
   '.jsx': { image: 'jsx' },
-  '/\\.setTrayTitle(jil|jl)/i': { image: 'julia' },
+  '/\\.(jil|jl)/i': { image: 'julia' },
   '.ipynb': { image: 'jupyter' },
   '.kt': { image: 'kotlin' },
   '.ktm': { image: 'kotlin' },
@@ -252,7 +252,7 @@ const knownExtensions: ImageKeyMap = {
   '.wlua': { image: 'lua' },
   '/^Makefile/': { image: 'makefile' },
   '/^mk\\.config$/': { image: 'makefile' },
-  '/\\.setTrayTitle(mk|mak|make)$/i': { image: 'makefile' },
+  '/\\.(mk|mak|make)$/i': { image: 'makefile' },
   '/^BSDmakefile$/i': { image: 'makefile' },
   '/^GNUmakefile$/i': { image: 'makefile' },
   '/^makefile\\.sco$/i': { image: 'makefile' },
@@ -260,7 +260,7 @@ const knownExtensions: ImageKeyMap = {
   '/^makefile$/': { image: 'makefile' },
   '/^mkfile$/i': { image: 'makefile' },
   '/^\\.?qmake$/i': { image: 'makefile' },
-  '/\\.setTrayTitle(h|geo|topo)$/i': { image: 'manifest' },
+  '/\\.(h|geo|topo)$/i': { image: 'manifest' },
   '.cson': { image: 'manifest' },
   '.json5': { image: 'manifest' },
   '.ndjson': { image: 'manifest' },
@@ -287,7 +287,7 @@ const knownExtensions: ImageKeyMap = {
   '/(\\\\|\\/)dev[-\\w]+\\1(?:[^\\\\\\/]+\\1)*(?!DESC|NOTES)(?:[A-Z][-A-Z]*)(?:\\.in)?$/': { image: 'manifest' },
   'lib/icons/.icondb.js': { image: 'manifest' },
   '/\\.git[\\/\\\\](.*[\\/\\\\])?(HEAD|ORIG_HEAD|packed-refs|logs[\\/\\\\](.+[\\/\\\\])?[^\\/\\\\]+)$/': { image: 'manifest' },
-  '/\\.setTrayTitle(md|mdown|markdown|mkd|mkdown|mdwn|mkdn|rmd|ron|pmd)$/i': { image: 'markdown' },
+  '/\\.(md|mdown|markdown|mkd|mkdown|mdwn|mkdn|rmd|ron|pmd)$/i': { image: 'markdown' },
   '.mdx': { image: 'markdownx' },
   '.marko': { image: 'marko' },
   '.nim': { image: 'nim' },
@@ -318,10 +318,10 @@ const knownExtensions: ImageKeyMap = {
   '.ph': { image: 'perl' },
   '.plx': { image: 'perl' },
   '.pm': { image: 'perl' },
-  '/\\.setTrayTitle(psgi|xs)$/i': { image: 'perl' },
+  '/\\.(psgi|xs)$/i': { image: 'perl' },
   '.pl6': { image: 'perl' },
   '/\\.[tp]6$|\\.6pl$/i': { image: 'perl' },
-  '/\\.setTrayTitle(pm6|p6m)$/i': { image: 'perl' },
+  '/\\.(pm6|p6m)$/i': { image: 'perl' },
   '.6pm': { image: 'perl' },
   '.nqp': { image: 'perl' },
   '.p6l': { image: 'perl' },
@@ -336,7 +336,7 @@ const knownExtensions: ImageKeyMap = {
   '.psm1': { image: 'powershell' },
   '.ps1xml': { image: 'powershell' },
   '.prettierignore': { image: 'prettier' },
-  '/\\.prettier((rc)|(\\.setTrayTitle(toml|yml|yaml|json|js))?$){2}/i': { image: 'prettier' },
+  '/\\.prettier((rc)|(\\.(toml|yml|yaml|json|js))?$){2}/i': { image: 'prettier' },
   'prettier.config.js': { image: 'prettier' },
   'prisma.yml': { image: 'prisma' },
   '.pde': { image: 'processing' },
@@ -363,35 +363,35 @@ const knownExtensions: ImageKeyMap = {
   '/^(SConstruct|SConscript)$/': { image: 'python' },
   '/^(Snakefile|WATCHLISTS)$/': { image: 'python' },
   '/^wscript$/': { image: 'python' },
-  '/\\.setTrayTitle(r|Rprofile|rsx|rd)$/i': { image: 'r' },
+  '/\\.(r|Rprofile|rsx|rd)$/i': { image: 'r' },
   '.re': { image: 'reasonml' },
-  '/\\.setTrayTitle(rb|ru|ruby|erb|gemspec|god|mspec|pluginspec|podspec|rabl|rake|opal)$/i': { image: 'ruby' },
+  '/\\.(rb|ru|ruby|erb|gemspec|god|mspec|pluginspec|podspec|rabl|rake|opal)$/i': { image: 'ruby' },
   '/^\\.?(irbrc|gemrc|pryrc|ruby-(gemset|version))$/i': { image: 'ruby' },
   '/^(Appraisals|(Rake|[bB]uild|Cap|Danger|Deliver|Fast|Guard|Jar|Maven|Pod|Puppet|Snap)file(\\.lock)?)$/': { image: 'ruby' },
-  '/\\.setTrayTitle(jbuilder|rbuild|rb[wx]|builder)$/i': { image: 'ruby' },
+  '/\\.(jbuilder|rbuild|rb[wx]|builder)$/i': { image: 'ruby' },
   '/^rails$/': { image: 'ruby' },
   '.watchr': { image: 'ruby' },
   '.rs': { image: 'rust' },
-  '/\\.setTrayTitle(sc|scala)$/i': { image: 'scala' },
+  '/\\.(sc|scala)$/i': { image: 'scala' },
   '.scss': { image: 'scss' },
   '.sass': { image: 'scss' },
-  '/\\.setTrayTitle(sh|rc|bats|bash|tool|install|command)$/i': { image: 'shell' },
+  '/\\.(sh|rc|bats|bash|tool|install|command)$/i': { image: 'shell' },
   '/^(\\.?bash(rc|[-_]?(profile|login|logout|history|prompt))|_osc|config|install-sh|PKGBUILD)$/i': { image: 'shell' },
-  '/\\.setTrayTitle(ksh|mksh|pdksh)$/i': { image: 'shell' },
+  '/\\.(ksh|mksh|pdksh)$/i': { image: 'shell' },
   '.sh-session': { image: 'shell' },
   '/\\.zsh(-theme|_history)?$|^\\.?(antigen|zpreztorc|zlogin|zlogout|zprofile|zshenv|zshrc)$/i': { image: 'shell' },
   '/\\.fish$|^\\.fishrc$/i': { image: 'shell' },
   '/^\\.?(login|profile)$/': { image: 'shell' },
   '.inputrc': { image: 'shell' },
   '.tmux': { image: 'shell' },
-  '/^(configure|config\\.setTrayTitle(guess|rpath|status|sub)|depcomp|libtool|compile)$/': { image: 'shell' },
+  '/^(configure|config\\.(guess|rpath|status|sub)|depcomp|libtool|compile)$/': { image: 'shell' },
   '/^\\/(private\\/)?etc\\/([^\\/]+\\/)*(profile$|nanorc$|rc\\.|csh\\.)/i': { image: 'shell' },
   '/^\\.?cshrc$/i': { image: 'shell' },
   '.profile': { image: 'shell' },
   '.tcsh': { image: 'shell' },
   '.csh': { image: 'shell' },
   '.sqf': { image: 'sqf' },
-  '/\\.setTrayTitle(my)?sql$/i': { image: 'sql' },
+  '/\\.(my)?sql$/i': { image: 'sql' },
   '.ddl': { image: 'sql' },
   '.udf': { image: 'sql' },
   '.hql': { image: 'sql' },
@@ -399,7 +399,7 @@ const knownExtensions: ImageKeyMap = {
   '.prc': { image: 'sql' },
   '.cql': { image: 'sql' },
   '.db2': { image: 'sql' },
-  '/\\.setTrayTitle(styl|stylus)$/i': { image: 'stylus' },
+  '/\\.(styl|stylus)$/i': { image: 'stylus' },
   '.svelte': { image: 'svelte' },
   '.svg': { image: 'svg' },
   '.swift': { image: 'swift' },
@@ -415,12 +415,12 @@ const knownExtensions: ImageKeyMap = {
   '.mkvi': { image: 'tex' },
   '.mkii': { image: 'tex' },
   '.texi': { image: 'tex' },
-  '/^hyphen(ex)?\\.setTrayTitle(cs|den|det|fr|sv|us)$/': { image: 'tex' },
+  '/^hyphen(ex)?\\.(cs|den|det|fr|sv|us)$/': { image: 'tex' },
   '/\\.te?xt$/i': { image: 'text' },
   '.rtf': { image: 'text' },
   '/\\.i?nfo$/i': { image: 'text' },
   '.msg': { image: 'text' },
-  '/\\.setTrayTitle(utxt|utf8)$/i': { image: 'text' },
+  '/\\.(utxt|utf8)$/i': { image: 'text' },
   '.toml': { image: 'toml' },
   '.travis.yml': { image: 'travis' },
   '.ts': { image: 'ts' },
@@ -441,15 +441,12 @@ const knownExtensions: ImageKeyMap = {
   '.wat': { image: 'wasm' },
   '.wast': { image: 'wasm' },
   '.wasm': { image: 'wasm' },
-  '/webpack(\\.dev|\\.development|\\.prod|\\.production)?\\.config(\\.babel)?\\.setTrayTitle(js|jsx|coffee|ts|json|json5|yaml|yml)/i': { image: 'webpack' },
+  '/webpack(\\.dev|\\.development|\\.prod|\\.production)?\\.config(\\.babel)?\\.(js|jsx|coffee|ts|json|json5|yaml|yml)/i': { image: 'webpack' },
   '.xml': { image: 'xml' },
   '/\\.ya?ml$/i': { image: 'yaml' },
   '/^yarn(\\.lock)?$/i': { image: 'yarn' },
   '.yarnrc': { image: 'yarn' },
   '.zig': { image: 'zig' },
-  '.json': { image: 'json' },
-  '.js': { image: 'js' },
-  '.css': { image: 'css' },
 }
 const assets = {
   arduino: 'https://cdn.rcd.gg/PreMiD/websites/G/GitHub%20Codespaces/assets/0.png',
@@ -599,28 +596,30 @@ presence.on('UpdateData', async () => {
     smallImageText: 'GitHub Codespaces',
   }
   const activeTab = document.querySelector('.tab.active')
-  const editorMode = document.querySelector('#status.editor.mode')
+  const editorMode = document.querySelector('#status\\.editor\\.mode')
+  const scmTab = document.querySelector('#status\\.scm\\.0')
+  const problems = document.querySelector('#status\\.problems')?.textContent!.trim()
 
   // Preparing Screen
-  if (document.querySelector('.vscs-splash-screen-steps-pane')) {
+  if (document.querySelector('.cs-splash-screen')) {
     presenceData.largeImageKey = ActivityAssets.Logo2
     presenceData.details = 'Preparing a codespace...'
     delete presenceData.smallImageKey
 
-    if (document.querySelector('.vso-splash-screen__button'))
+    if (document.querySelector('.cs-splash-screen button.button-link'))
       presenceData.details = 'Inactive Codespace'
     // Idle/Start Screen
   }
   else if (activeTab && editorMode) {
-    const scmTab = Array.from(document.querySelectorAll('#status\\.scm'))
-      .reverse()
-      .find(scmTab => scmTab && scmTab.hasAttribute('aria-label'))
-    const workspace = scmTab
-      ? scmTab.getAttribute('aria-label')?.split('(Git)')[0]
-      : null
+    const branch = scmTab?.textContent?.trim()
+    const workspace = scmTab!.getAttribute('aria-label')!.split('(Git)')[0]
     const filename = activeTab.getAttribute('data-resource-name')
-    const filepath = activeTab.getAttribute('title')
+    const filepath = document.querySelector('div.breadcrumbs-below-tabs div.file > div.monaco-icon-label')?.getAttribute('aria-label')?.split(' • ')[0]
     const syntaxMode = editorMode.getAttribute('aria-label')!.toLowerCase()
+    const error = problems!.split('  ')[0]
+    const warning = problems!.split('  ')[1]
+    const selection = document.querySelector('#status\\.editor\\.selection')?.textContent!.trim()
+    const encoding = document.querySelector('#status\\.editor\\.encoding')?.textContent
     const largeImageKey = knownExtensions[
       Object.keys(knownExtensions).find((key) => {
         if (filename?.endsWith(key))
@@ -633,7 +632,7 @@ presence.on('UpdateData', async () => {
     ] ?? (syntaxMode in langMap ? langMap[syntaxMode] : null)
 
     if (lastFile !== filepath) {
-      lastFile = filepath
+      lastFile = filepath!
       lastFileChange = Date.now()
     }
 
@@ -654,6 +653,11 @@ presence.on('UpdateData', async () => {
         '%workspaceOrFolder%',
         workspace || filepath?.split('/').reverse()[1] || '',
       )
+      .replaceAll('%branch%', branch || 'N/A')
+      .replaceAll('%error%', error || 'N/A')
+      .replaceAll('%warning%', warning || 'N/A')
+      .replaceAll('%selection%', selection || 'N/A')
+      .replaceAll('%encoding%', encoding || 'N/A')
     presenceData.state = (await presence.getSetting<string>('state'))
       .replaceAll('%file%', filename ?? '')
       .replaceAll('%path%', filepath ?? '')
@@ -667,6 +671,11 @@ presence.on('UpdateData', async () => {
         '%workspaceOrFolder%',
         workspace || filepath?.split('/').reverse()[1] || '',
       )
+      .replaceAll('%branch%', branch || 'N/A')
+      .replaceAll('%error%', error || 'N/A')
+      .replaceAll('%warning%', warning || 'N/A')
+      .replaceAll('%selection%', selection || 'N/A')
+      .replaceAll('%encoding%', encoding || 'N/A')
   }
   else if (!editorMode) {
     presenceData.largeImageKey = ActivityAssets.Idle
