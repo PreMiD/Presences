@@ -1,46 +1,46 @@
 {
   "IGN.wiki": {
-    "description": "",
+    "description": "View the game wiki page.",
     "message": "Viewing Wiki:"
   },
   "IGN.followedPlaylists": {
-    "description": "Followed Playlists are lists with games.",
+    "description": "View your followed game playlists.",
     "message": "Viewing Followed Playlists"
   },
   "IGN.library": {
-    "description": "",
+    "description": "Browse your game library.",
     "message": "Viewing Library"
   },
   "IGN.playing": {
-    "description": "",
-    "message": "Viewing Playling Games"
+    "description": "View games you are currently playing.",
+    "message": "Viewing Playing Games"
   },
   "IGN.backlog": {
-    "description": "",
+    "description": "View games in your backlog.",
     "message": "Viewing Backlogged Games"
   },
   "IGN.paused": {
-    "description": "",
+    "description": "View games you have paused.",
     "message": "Viewing Paused Games"
   },
   "IGN.beat": {
-    "description": "",
-    "message": "Viewing Beated Games"
+    "description": "View games you have completed.",
+    "message": "Viewing Beaten Games"
   },
   "IGN.quit": {
-    "description": "",
-    "message": "Viewing Quitted Games"
+    "description": "View games you have quit playing.",
+    "message": "Viewing Quit Games"
   },
   "IGN.exploringMaps": {
-    "description": "",
+    "description": "Explore in-game maps.",
     "message": "Exploring Maps"
   },
   "IGN.rewards": {
-    "description": "",
+    "description": "View earned rewards.",
     "message": "Viewing Rewards"
   },
   "IGN.viewComics": {
-    "description": "",
+    "description": "View a specific comic.",
     "message": "Viewing comic:"
   },
   "IGN.buttonViewComics": {
@@ -48,7 +48,7 @@
     "message": "View Comic"
   },
   "IGN.viewTV": {
-    "description": "",
+    "description": "View a specific TV show.",
     "message": "Viewing TV Show:"
   },
   "IGN.buttonViewTV": {
@@ -56,7 +56,7 @@
     "message": "View TV Show"
   },
   "IGN.viewTech": {
-    "description": "",
+    "description": "View a specific tech gadget.",
     "message": "Viewing tech gadget:"
   },
   "IGN.buttonViewTech": {
@@ -64,11 +64,11 @@
     "message": "View Tech Gadget"
   },
   "IGN.video": {
-    "description": "",
+    "description": "Browse IGN videos.",
     "message": "Videos"
   },
   "IGN.cinema": {
-    "description": "",
+    "description": "Explore movies and cinema-related content.",
     "message": "Cinema"
   }
 }
