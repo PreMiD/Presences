@@ -15,7 +15,9 @@
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Podurama/assets/thumbnail.png",
   "color": "#4B5458",
   "category": "other",
-  "tags": [],
+  "tags": [
+    "podcast"
+  ],
   "settings": [
     {
       "id": "usetimeleft",
