@@ -13,13 +13,12 @@
   },
   "url": "www.overleaf.com",
   "regExp": "([a-z0-9-]+[.])*overleaf[.]com[/]",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/O/Overleaf/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/O/Overleaf/assets/thumbnail.png",
   "color": "#138A07",
   "category": "other",
   "tags": [
-    "overleaf",
     "latex"
   ]
 }

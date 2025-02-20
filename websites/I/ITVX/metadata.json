@@ -14,7 +14,7 @@
     "www.itv.com",
     "itv.com"
   ],
-  "version": "1.0.15",
+  "version": "1.0.16",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/I/ITVX/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/ITVX/assets/thumbnail.jpg",
   "color": "#102C3D",
@@ -23,7 +23,6 @@
     "itv",
     "itv-hub",
     "itv-player",
-    "itvx",
     "itv-x"
   ],
   "settings": [
