@@ -12,7 +12,7 @@ function isModalOpen(): boolean {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: 'https://envolya.com/envolya-logo.png',
+    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/E/Envolya/assets/logo.png',
     startTimestamp: browsingTimestamp,
   }
 
