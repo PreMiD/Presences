@@ -11,7 +11,15 @@ window.addEventListener('message', (e) => {
 const script = document.createElement('script')
 script.textContent = `
 setInterval(() => {
-  window.postMessage({ type: "pmd-receive-image-id", imageId: document.querySelector("disney-web-player")?.mediaPlayer?.mediaPlaybackCriteria?.metadata?.images_experience?.standard?.tile["1.00"]?.imageId }, "*");
+const images = document.querySelector("disney-web-player")?.mediaPlayer?.mediaPlaybackCriteria?.metadata?.images_experience?.standard?.tile
+ratios = Object.keys(images),
+goal = 100;
+
+const closest = ratios.reduce(function(prev, curr) {
+return (Math.abs((100 / curr) - goal) < Math.abs((100 / prev) - goal) ? curr : prev);
+});
+
+window.postMessage({ type: "pmd-receive-image-id", imageId: images?.[closest]?.imageId }, "*");
 }, 100);
 `
 document.head.appendChild(script)
@@ -66,9 +74,8 @@ presence.on('UpdateData', async () => {
           const video = document.querySelector<HTMLVideoElement>('video#hivePlayer')
 
           //* Wait for elements to load to prevent setactivity spam
-          if (!imageId || !video)
+          if (!video || !imageId)
             return
-
           presenceData.largeImageKey = `https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/${imageId}/compose?format=png&width=512`
 
           if (!privacy) {
