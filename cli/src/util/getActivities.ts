@@ -105,10 +105,11 @@ export async function getChangedActivities(): Promise<{
           logo: '',
           thumbnail: '',
           version: '1.0.0',
+          tags: [],
         },
         folder,
         versionized,
-      }
+      } satisfies ActivityMetadataAndFolder
     }),
   }
 }

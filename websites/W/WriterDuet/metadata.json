@@ -13,14 +13,13 @@
     "www.writerduet.com",
     "writerduet.helpscoutdocs.com"
   ],
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/W/WriterDuet/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/WriterDuet/assets/thumbnail.png",
   "color": "#4598d4",
   "category": "other",
   "tags": [
     "writer",
-    "writerduet",
     "writerduet"
   ]
 }
