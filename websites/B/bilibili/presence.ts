@@ -103,38 +103,25 @@ presence.on('UpdateData', async () => {
             presenceData.details = 'Viewing a tweet'
             break
           }
-          presenceData.details = `Viewing ${document
-            .querySelector('.opus-module-author__name')
+          const type
+            = document.querySelector('.opus-module-title') === null
+              ? 'tweet'
+              : 'article'
+          presenceData.details
+            = type === 'tweet'
+              ? null
+              : document.querySelector('.opus-module-title')?.textContent?.trim()
+          presenceData.state = `Viewing ${document
+            ?.querySelector('.opus-module-author__name')
             ?.textContent
-            ?.trim()}'s tweet`
+            ?.trim()}'s ${type}`
           presenceData.buttons = [
             {
-              label: 'View Tweet',
+              label: `View ${type}`,
               url: `https://www.bilibili.com/opus/${urlpath[2]}`,
             },
           ]
           presenceData.startTimestamp = browsingTimestamp
-          break
-        }
-        case 'read': {
-          if (privacy) {
-            presenceData.details = 'Reading an article'
-            break
-          }
-          presenceData.details = document
-            .querySelector('.title')
-            ?.textContent
-            ?.trim()
-          presenceData.state = document
-            .querySelector('.up-name')
-            ?.textContent
-            ?.trim()
-          presenceData.buttons = [
-            {
-              label: 'Read Article',
-              url: `https://www.bilibili.com/read/${urlpath[2]}`,
-            },
-          ]
           break
         }
         case 'list': {
@@ -148,11 +135,11 @@ presence.on('UpdateData', async () => {
           }
           getTimestamps()
           presenceData.details = document
-            .querySelector('.list-title')
+            ?.querySelector('.list-title')
             ?.textContent
             ?.trim()
           presenceData.state = document
-            .querySelector('.video-title')
+            ?.querySelector('.video-title')
             ?.textContent
             ?.trim()
           presenceData.buttons = [
@@ -163,8 +150,30 @@ presence.on('UpdateData', async () => {
             {
               label: 'Watch Video',
               url: `https:${document
-                .querySelector('.video-title-href')
+                ?.querySelector('.video-title-href')
                 ?.getAttribute('href')}`,
+            },
+          ]
+          break
+        }
+        case 'bangumi': {
+          if (privacy) {
+            presenceData.details = 'Watching an episode'
+            break
+          }
+          getTimestamps()
+          presenceData.details = document
+            ?.querySelector('.mediainfo_mediaTitle__Zyiqh')
+            ?.textContent
+            ?.trim()
+          presenceData.state = `Watching Episode ${document
+            ?.querySelector('.numberListItem_select__WgCVr')
+            ?.getAttribute('title')
+            ?.trim()} now`
+          presenceData.buttons = [
+            {
+              label: 'Watch Episode',
+              url: `https://www.bilibili.com/bangumi/play/${urlpath[3]}`,
             },
           ]
           break
