@@ -8,10 +8,17 @@ let uploader: HTMLElement | null,
   uploaderName: string,
   uploaderLink: string,
   title: HTMLElement | null,
+  iFrameTitle: string,
+  iFrameRoomOwnerName: string,
   videoPaused: boolean,
   currentTime: number,
   duration: number,
   timestamps: number[]
+
+presence.on('iFrameData', (data: any) => {
+  iFrameTitle = data.details
+  iFrameRoomOwnerName = data.state
+})
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
@@ -90,7 +97,6 @@ presence.on('UpdateData', async () => {
       },
     ]
   }
-
   switch (document.location.hostname) {
     case 'www.bilibili.com': {
       switch (urlpath[1]) {
@@ -210,22 +216,34 @@ presence.on('UpdateData', async () => {
       break
     }
     case 'live.bilibili.com': {
-      if (document.querySelector('.small-title') === null) {
-        presenceData.details = document
+      if (privacy) {
+        presenceData.details = 'Watching a live stream'
+        break
+      }
+      const presenceDetails = document.querySelector('.small-title') === null
+        ? presenceData.details = document
           .querySelector('.smaller-title')
           ?.textContent
           ?.trim()
-      }
-      else if (document.querySelector('.smaller-title') === null) {
-        presenceData.details = document
+        : presenceData.details = document
           .querySelector('.small-title')
           ?.textContent
           ?.trim()
-      }
-      presenceData.state = document
-        .querySelector('.room-owner-username')
+      const presenceState = document.querySelector('.room-owner-username')
         ?.textContent
         ?.trim()
+      const isCompetition = presenceDetails === undefined && presenceState === undefined
+      if (isCompetition === true) {
+        if (iFrameTitle === undefined || iFrameRoomOwnerName === undefined) {
+          return
+        }
+        presenceData.details = iFrameTitle
+        presenceData.state = iFrameRoomOwnerName
+      }
+      else {
+        presenceData.details = presenceDetails
+        presenceData.state = presenceState
+      }
       presenceData.buttons = [
         {
           label: 'Watch Stream',
