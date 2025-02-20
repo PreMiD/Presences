@@ -51,7 +51,7 @@ function getTierName(tierNumber: number): string {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: 'https://drive.google.com/uc?id=1gGW1VHbVoPvgoOWPTWRs7goQqVk4RAJN',
+    largeImageKey: 'https://i.imgur.com/syA7WiF.png',
     startTimestamp: browsingTimestamp,
   }
 
