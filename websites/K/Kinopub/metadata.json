@@ -11,13 +11,12 @@
     "ru": "Сайт для онлайн просмотра фильмов, сериалов, спортивных трансляций и концертов"
   },
   "url": "kino.pub",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kinopub/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kinopub/assets/thumbnail.png",
   "color": "#1c202b",
   "category": "videos",
   "tags": [
-    "kinopub",
     "movie",
     "video",
     "media"
