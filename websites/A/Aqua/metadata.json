@@ -13,14 +13,13 @@
     "vi": "Đài radio trực tuyến được dựng bởi cộng đồng và dành cho cộng đồng."
   },
   "url": "itsaqua.net",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/A/Aqua/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Aqua/assets/thumbnail.png",
   "color": "#2980b9",
   "category": "music",
   "tags": [
     "radio",
-    "aqua",
     "audio",
     "stream",
     "music",

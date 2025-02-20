@@ -15,13 +15,12 @@
     "preview.presencedb.com"
   ],
   "regExp": "(www|preview)[.]presencedb[.]com[/]",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/P/PresenceDB/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/PresenceDB/assets/thumbnail.png",
   "color": "#fff",
   "category": "other",
   "tags": [
-    "presencedb",
     "database"
   ],
   "settings": [
