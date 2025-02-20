@@ -14,8 +14,8 @@ let data: {
 
 enum ActivityAssets { // Other default assets can be found at index.d.ts
   Logo = 'https://i.imgur.com/cBDeiXA.png',
-  Settings = 'https://cdn.rcd.gg/PreMiD/websites/A/AniWatch/assets/1.png',
-  Notifications = 'https://cdn.rcd.gg/PreMiD/websites/A/AniWatch/assets/2.png',
+  Settings = 'https://i.imgur.com/uERKN5k.png',
+  Notifications = 'https://i.imgur.com/FrWu91B.png',
 }
 
 presence.on(
