@@ -11,13 +11,12 @@
     "nl": "Krunker.io is een gratis io Multiplayer First Person Shooter. Geen download browser FPS! Vrij!"
   },
   "url": "krunker.io",
-  "version": "1.2.24",
+  "version": "1.2.25",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/K/Krunker/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Krunker/assets/thumbnail.png",
   "color": "#ffc147",
   "category": "games",
   "tags": [
-    "krunker",
     "game",
     "multiplayer",
     "fps",

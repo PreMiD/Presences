@@ -13,6 +13,7 @@ export enum SarifRuleId {
   imageSizeCheck = 'image-size-check',
   imageMimeTypeCheck = 'image-mime-type-check',
   tagsCheck = 'tags-check',
+  tagsServiceCheck = 'tags-service-check',
 }
 
 const sarifRules: Record<SarifRuleId, ReportingDescriptor> = {
@@ -79,6 +80,13 @@ const sarifRules: Record<SarifRuleId, ReportingDescriptor> = {
       text: 'Makes sure the `tags` metadata property is unique',
     },
   },
+  [SarifRuleId.tagsServiceCheck]: {
+    id: SarifRuleId.tagsServiceCheck,
+    name: 'Tags Service Check',
+    shortDescription: {
+      text: 'Makes sure the `tags` don\'t contain the service name',
+    },
+  },
 }
 
 const sarifLog: SARIF = {
@@ -115,7 +123,7 @@ export function addSarifLog(log: {
   }
 }) {
   // Remove the cwd from the path. And remove the leading slash.
-  log.path = log.path.replace(process.cwd(), '').slice(1)
+  log.path = encodeURI(log.path.replace(process.cwd(), '').slice(1))
 
   if (typeof sarifArtifactIndices[log.path] === 'undefined') {
     sarifArtifactIndices[log.path] = nextArtifactIndex++
