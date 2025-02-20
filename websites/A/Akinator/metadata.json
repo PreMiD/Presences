@@ -22,13 +22,12 @@
   },
   "url": "en.akinator.com",
   "regExp": "([a-z0-9-]+[.])*akinator[.]com[/]",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/A/Akinator/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/Akinator/assets/thumbnail.png",
   "color": "#0000ff",
   "category": "games",
   "tags": [
-    "akinator",
     "guessing",
     "game",
     "fun"

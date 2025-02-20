@@ -12,13 +12,12 @@
     "tr": "Lichess, ücretsiz çevrimiçi satranç sitesi ve uygulaması. Kişilerin ücret ödemeden satranç oynamasını amaçlamaktadır."
   },
   "url": "lichess.org",
-  "version": "1.2.23",
+  "version": "1.2.24",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/L/Lichess/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/L/Lichess/assets/thumbnail.png",
   "color": "#c5c5c5",
   "category": "games",
   "tags": [
-    "lichess",
     "games",
     "chess"
   ]
