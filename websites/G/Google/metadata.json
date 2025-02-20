@@ -5,9 +5,16 @@
     "name": "TheDrop.",
     "id": "293828021134295040"
   },
+  "contributors": [
+    {
+      "name": "Atom Skully",
+      "id": "671037171611729920"
+    }
+  ],
   "service": "Google",
   "description": {
     "en": "Google is a search engine that can be employed to find a variety of information such as websites, pictures, maps.",
+    "fr": "Google est un moteur de recherche qui peut être utilisé pour trouver une variété d'informations telles que des sites web, des images, des cartes.",
     "nl": "Google is een zoekmachine waarmee gebruikers een breed scala aan informatie zoals websites, afbeeldingen en kaarten kunnen vinden.",
     "ro": "Google este un motor de căutare care poate fi folosit pentru a găsi o varietate de informații precum site-uri web, imagini și hărți.",
     "vi": "Google là công cụ tìm kiếm có thể được sử dụng để tìm vô vàn thông tin như các trang web, bức ảnh, bản đồ.",
@@ -15,7 +22,7 @@
   },
   "url": "www.google.com",
   "regExp": "www[.]google([.][a-z]+)+[/]",
-  "version": "2.4.12",
+  "version": "2.5.1",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/G/Google/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Google/assets/thumbnail.png",
   "color": "#ffffff",
@@ -30,6 +37,12 @@
       "title": "Privacy Mode",
       "icon": "fad fa-user-secret",
       "value": false
+    },
+    {
+      "id": "showSmallImages",
+      "title": "Show Small Images",
+      "icon": "fad fa-pause",
+      "value": true
     }
   ]
 }
