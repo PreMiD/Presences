@@ -49,7 +49,7 @@ presence.on('UpdateData', async () => {
     presenceState = strings.readingResponse
   }
   else {
-    presenceState = ""
+    presenceState = ''
   }
 
   presence.setActivity({
