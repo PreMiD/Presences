@@ -25,6 +25,7 @@ export interface ActivityMetadata {
   iframe?: boolean
   iFrameRegExp?: string
   description: Record<string, string>
+  tags: string[]
 }
 
 export class ActivityCompiler {
@@ -303,6 +304,22 @@ export class ActivityCompiler {
       if (!(await this.assetsManager.validateImage({ asset, kill }))) {
         valid = false
       }
+    }
+
+    if (new Set(metadata.tags).size !== metadata.tags.length) {
+      const message = `Tags must be unique`
+      if (kill) {
+        exit(message)
+      }
+
+      error(message)
+      addSarifLog({
+        path: resolve(this.cwd, 'metadata.json'),
+        message,
+        ruleId: SarifRuleId.tagsCheck,
+        position: await getJsonPosition(resolve(this.cwd, 'metadata.json'), 'tags'),
+      })
+      valid = false
     }
 
     return valid
