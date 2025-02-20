@@ -187,9 +187,8 @@ presence.on('UpdateData', async () => {
       break
     }
     case 'space.bilibili.com': {
-      uploader = document.querySelector('#h-name')
-
-      presenceData.details = 'User\'s space'
+      uploader = document.querySelector('.nickname')
+      presenceData.details = 'Viewing user\'s space'
       presenceData.state = `${uploader?.textContent} | UID:${urlpath[1]}`
       presenceData.buttons = [
         {
