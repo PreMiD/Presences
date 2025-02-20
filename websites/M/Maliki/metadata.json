@@ -15,13 +15,12 @@
     "maliki.com",
     "malimode.maliki.com"
   ],
-  "version": "1.0.17",
+  "version": "1.0.18",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/M/Maliki/assets/logo.jpg",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/Maliki/assets/thumbnail.jpg",
   "color": "#f576ab",
   "category": "other",
   "tags": [
-    "maliki",
     "dessin"
   ],
   "iframe": true,

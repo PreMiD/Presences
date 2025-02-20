@@ -19,13 +19,14 @@
   },
   "url": "www.pinterest.com",
   "regExp": "([a-z0-9-]+[.])*pinterest([.][a-z]+)+[/]",
-  "version": "1.4.7",
+  "version": "1.4.8",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/P/Pinterest/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/P/Pinterest/assets/thumbnail.jpg",
   "color": "#cc2127",
   "category": "other",
   "tags": [
-    "pinterest"
+    "social",
+    "imageboard"
   ],
   "settings": [
     {
