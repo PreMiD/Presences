@@ -12,7 +12,7 @@
   },
   "url": "nexusmods.com",
   "regExp": "([a-z0-9-]+[.])*nexusmods([.][a-z]+)+[/]",
-  "version": "1.2.26",
+  "version": "1.2.27",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/N/Nexus%20Mods/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Nexus%20Mods/assets/thumbnail.png",
   "color": "#DA8E35",
@@ -21,7 +21,6 @@
     "nexus",
     "mods",
     "modding",
-    "nexusmods",
     "vortex",
     "modmanager",
     "nexusmodmanager"
