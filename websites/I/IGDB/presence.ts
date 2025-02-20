@@ -83,8 +83,8 @@ presence.on('UpdateData', async () => {
           }
           else {
             presenceData.details = strings.viewGame
-            presenceData.state = document.querySelector('h1').textContent
-            presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.mui-image-img').src
+            presenceData.state = document.querySelector('h1')?.textContent
+            presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.mui-image-img')?.src
             presenceData.buttons = [
               {
                 label: strings.buttonViewGame,
@@ -100,7 +100,7 @@ presence.on('UpdateData', async () => {
           presenceData.details = strings.viewList
           presenceData.state = document.querySelector(
             '.breadcrumb > .active > span',
-          ).textContent
+          )?.textContent
           break
         case 'edit':
         case 'social_media':
@@ -113,7 +113,7 @@ presence.on('UpdateData', async () => {
         default:
           presenceData.details = strings.viewUser
           presenceData.state = pathTwo
-          presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.mui-image-img').src
+          presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.mui-image-img')?.src
       }
       break
     case 'genres':
@@ -129,7 +129,7 @@ presence.on('UpdateData', async () => {
       if (pathTwo) {
         presenceData.details = strings.viewPlatform
         presenceData.state = document.title
-        presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.logo_med').src
+        presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.logo_med')?.src
       }
       else {
         presenceData.details = strings.browsePlatforms
@@ -191,7 +191,7 @@ presence.on('UpdateData', async () => {
       else if (pathTwo) {
         presenceData.details = strings.viewCompany
         presenceData.state = document.title
-        presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.logo_med').src
+        presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.logo_med')?.src
       }
       else {
         presenceData.details = strings.browseCompanies
@@ -201,7 +201,7 @@ presence.on('UpdateData', async () => {
       if (pathTwo) {
         presenceData.details = strings.viewGameEngine
         presenceData.state = document.title
-        presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.img-responsive').src
+        presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.img-responsive')?.src
       }
       else {
         presenceData.details = strings.browseGameEngines
@@ -211,7 +211,7 @@ presence.on('UpdateData', async () => {
       if (pathTwo) {
         presenceData.details = strings.viewCharacter
         presenceData.state = document.title
-        presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.cover_big').src
+        presenceData.largeImageKey = document.querySelector<HTMLImageElement>('.cover_big')?.src
       }
       else {
         presenceData.details = strings.browseCharacters
@@ -223,7 +223,7 @@ presence.on('UpdateData', async () => {
         presenceData.state = document.title
         presenceData.largeImageKey = document.querySelector<HTMLImageElement>(
           '.MuiGrid2-root > .mui-image-wrapper > .mui-image-img',
-        ).src
+        )?.src
       }
       else {
         presenceData.details = strings.viewEvent
@@ -231,7 +231,7 @@ presence.on('UpdateData', async () => {
       break
     case 'seach':
       presenceData.details = strings.searchFor
-      presenceData.state = decodeURI(search.split('=')[1])
+      presenceData.state = decodeURI(search?.split('=')[1])
       break
     case 'advanced_search':
       presenceData.details = strings.search
