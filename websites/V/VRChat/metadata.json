@@ -16,13 +16,12 @@
     "hello.vrchat.com",
     "feedback.vrchat.com"
   ],
-  "version": "1.0.28",
+  "version": "1.0.29",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/V/VRChat/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/V/VRChat/assets/thumbnail.png",
   "color": "#0B5286",
   "category": "games",
   "tags": [
-    "vrchat",
     "vr",
     "social",
     "games",

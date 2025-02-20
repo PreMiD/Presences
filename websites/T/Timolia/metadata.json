@@ -12,13 +12,12 @@
   },
   "url": "timolia.de",
   "regExp": "([a-z0-9-]+[.])*timolia[.]de[/]",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/T/Timolia/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Timolia/assets/thumbnail.png",
   "color": "#6b6b6b",
   "category": "games",
   "tags": [
-    "timolia",
     "minecraft",
     "timolia-de",
     "minecraft-server"
