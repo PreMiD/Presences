@@ -1,4 +1,4 @@
-name: pmd
+name: Validate
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
       - name: Install pmd
         run: npm ci
 
-      - name: Validate metadata and build
+      - name: Validate metadata and build (changed files)
         run: npx pmd build --changed --no-kill --validate --sarif
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

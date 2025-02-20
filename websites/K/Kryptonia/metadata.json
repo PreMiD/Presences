@@ -15,13 +15,12 @@
     "kryptonia.fr",
     "forum.kryptonia.fr"
   ],
-  "version": "1.0.20",
+  "version": "1.0.21",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/K/Kryptonia/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/K/Kryptonia/assets/thumbnail.png",
   "color": "#12d968",
   "category": "games",
   "tags": [
-    "kryptonia",
     "minecraft"
   ]
 }
