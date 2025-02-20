@@ -7,38 +7,38 @@ const path = location.pathname
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 const tierImage: Record<number, string> = {
-  0: 'https://drive.google.com/uc?id=19R9Jb3DwZu74rwe7CZJLK09VQJsNsE1i',
-  1: 'https://drive.google.com/uc?id=1fQIBGRjgsvLKIn9zm688qi78-bjUSemy',
-  2: 'https://drive.google.com/uc?id=1YWQ1oraHwIhW_v4ysGuoSaiSkGUrigYl',
-  3: 'https://drive.google.com/uc?id=1JotKsaaej8afpaVO6od8ZmKosN0OGitB',
-  4: 'https://drive.google.com/uc?id=1aZB52e51-Y6swkwG1JAhePLhcaFuMULW',
-  5: 'https://drive.google.com/uc?id=1raJa0QoXwoIujRbw4N4GyAabHDJHfo-i',
-  6: 'https://drive.google.com/uc?id=1qzQze622CWAZR9rKNYj4JJd8S7v4wO3_',
-  7: 'https://drive.google.com/uc?id=1tqidI0vaJNN-kzzbCdhN8C9wcEBu8pjJ',
-  8: 'https://drive.google.com/uc?id=1Z-aCS8hjd--gyNaJPBCG4BEPVXjk2mU3',
-  9: 'https://drive.google.com/uc?id=1VdeNcbbtPTLF3Vptgnt5p1BAyzv3q0q7',
-  10: 'https://drive.google.com/uc?id=13uHy00XBoO4YSsoc86bzCggtbnbgMtPr',
-  11: 'https://drive.google.com/uc?id=1jHDRp5c0yP7LP3cSSojZOjLRn8TNgEFh',
-  12: 'https://drive.google.com/uc?id=1lPKtPILQQXkZnAMq8bIVo4L5ywH6zN7A',
-  13: 'https://drive.google.com/uc?id=1mGurDmLTqCpszWSUKHW5uGa4nNswL9id',
-  14: 'https://drive.google.com/uc?id=17x9bGA-L9f-tfuOKczF5HZWwJ7ITXQSX',
-  15: 'https://drive.google.com/uc?id=1ANOQwNc0-vXWkWAJUPeprWkNuk8428MZ',
-  16: 'https://drive.google.com/uc?id=1LYiOfmh5nZrpJ7_YqE8_pD-hzYmAt_R3',
-  17: 'https://drive.google.com/uc?id=1G-LKE9svVCkjX4Xv3Oe9PAadWI8up9hH',
-  18: 'https://drive.google.com/uc?id=1sYsX6QR5tCvN5sVKB1lXWeuBrtW3aDHk',
-  19: 'https://drive.google.com/uc?id=1JF9YC6CZX5g_5fSrVKq0y737vgOBhezO',
-  20: 'https://drive.google.com/uc?id=1XFltKkHSroNKD0R22G1Ix1t2LL1HHnv0',
-  21: 'https://drive.google.com/uc?id=1ggLXwx7ngKAhYUYiajDUtmX0LgmICAqu',
-  22: 'https://drive.google.com/uc?id=1qCR3t-SWckM4DTEj8WmSmtamibxI3tgH',
-  23: 'https://drive.google.com/uc?id=1U2o5cBW89VY2_yWpaWNn98h3bVHi4KCS',
-  24: 'https://drive.google.com/uc?id=1f_xrWfG-Lph0WOvtpnmzrI3DOYS_5E_T',
-  25: 'https://drive.google.com/uc?id=1E1Be1qqFi_6w8-7aGiZ0JQ6Dyktaxn8S',
-  26: 'https://drive.google.com/uc?id=1Ri7EQQKuiq6mOhIgt3K6AV1tgQJEp5v6',
-  27: 'https://drive.google.com/uc?id=1ZpIsjBeahqd_irivZGYQDmt6zs35li4m',
-  28: 'https://drive.google.com/uc?id=1sV_m0fNOyokHKku1XCNl6K-mNWCGrfPT',
-  29: 'https://drive.google.com/uc?id=1dhgZDJTuY_meoBblWnhcOGBfTNWoZU0z',
-  30: 'https://drive.google.com/uc?id=1K_p1RbQVjEjBIE5MG9S_P2jX0QuFt2VO',
-  31: 'https://drive.google.com/uc?id=1lBsfcOoySY5WgRwtREhjyD7DzLLI7Fqv',
+  0: 'https://i.imgur.com/SzVwUjO.png',
+  1: 'https://i.imgur.com/nERRbbu.png',
+  2: 'https://i.imgur.com/PNuzLVw.png',
+  3: 'https://i.imgur.com/tD8KSiM.png',
+  4: 'https://i.imgur.com/Lo9QflI.png',
+  5: 'https://i.imgur.com/fLD2Joe.png',
+  6: 'https://i.imgur.com/XR2UQxh.png',
+  7: 'https://i.imgur.com/N5Thmv8.png',
+  8: 'https://i.imgur.com/7Sywnbb.png',
+  9: 'https://i.imgur.com/UEeSBvO.png',
+  10: 'https://i.imgur.com/iEITzPo.png',
+  11: 'https://i.imgur.com/Za70mKj.png',
+  12: 'https://i.imgur.com/n6H3ZUi.png',
+  13: 'https://i.imgur.com/C0BjyeL.png',
+  14: 'https://i.imgur.com/E5FqPeg.png',
+  15: 'https://i.imgur.com/LXtsQZq.png',
+  16: 'https://i.imgur.com/zizNXK1.png',
+  17: 'https://i.imgur.com/rj7R8pS.png',
+  18: 'https://i.imgur.com/O9h6YMv.png',
+  19: 'https://i.imgur.com/wuikuyW.png',
+  20: 'https://i.imgur.com/aqGZa6z.png',
+  21: 'https://i.imgur.com/A3PKrqs.png',
+  22: 'https://i.imgur.com/SyQISef.png',
+  23: 'https://i.imgur.com/VonDo8J.png',
+  24: 'https://i.imgur.com/oHF3MfP.png',
+  25: 'https://i.imgur.com/9SfSsAs.png',
+  26: 'https://i.imgur.com/5OF66pZ.png',
+  27: 'https://i.imgur.com/FlNSYJB.png',
+  28: 'https://i.imgur.com/iuhuqS3.png',
+  29: 'https://i.imgur.com/1wTiJeW.png',
+  30: 'https://i.imgur.com/aypOXl6.png',
+  31: 'https://i.imgur.com/aTmDBip.png',
 }
 
 function getTierName(tierNumber: number): string {
@@ -151,9 +151,9 @@ presence.on('UpdateData', async () => {
           )!.textContent
         } - ${document.querySelector('#problem_title')!.textContent}`
 
-        const isTier = document.querySelector(
+        const isTier = document.querySelector<HTMLImageElement>(
           'body > div.wrapper > div.container.content > div.row > div:nth-child(3) > ul > li.active > a > img',
-        ) as HTMLImageElement
+        )
         if (isTier) {
           const tier = Number(isTier.src.split('/').pop()!.replace('.svg', ''))
           presenceData.smallImageKey = tierImage[tier]
