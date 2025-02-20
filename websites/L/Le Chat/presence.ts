@@ -38,7 +38,7 @@ presence.on('UpdateData', async () => {
   }
 
   // Checking if the user is currently typing a question
-  if (document.querySelector('textarea').textContent !== '') {
+  if (document.querySelector('textarea')?.textContent !== '') {
     presenceState = strings.askingQuestion
   }
   else if (
