@@ -21,7 +21,7 @@ window.addEventListener('message', (e) => {
 })
 
 enum ActivityAssets {
-  Logo = 'https://i.imgur.com/9UpfGFw.png',
+  Logo = 'https://cdn.rcd.gg/PreMiD/websites/R/Rhythm%2B/assets/logo.png',
 }
 
 interface SheetInfo {
