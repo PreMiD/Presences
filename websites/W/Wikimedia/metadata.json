@@ -47,7 +47,7 @@
     "donate.wikimedia.org",
     "wikispore.wmflabs.org"
   ],
-  "version": "1.0.21",
+  "version": "1.0.22",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/W/Wikimedia/assets/thumbnail.png",
   "color": "#000000",
@@ -56,7 +56,6 @@
     "encyclopedia",
     "wiki",
     "wikimedia-foundation",
-    "wikimedia",
     "wmf"
   ]
 }
