@@ -13,13 +13,12 @@
     "sflix2.to",
     "enorme.tv"
   ],
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/S/Sflix/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/S/Sflix/assets/thumbnail.jpeg",
   "color": "#03abb8",
   "category": "videos",
   "tags": [
-    "sflix",
     "video",
     "media",
     "movies",

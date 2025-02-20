@@ -13,13 +13,12 @@
     "territorial.io",
     "www.territorial.io"
   ],
-  "version": "1.0.11",
+  "version": "1.0.12",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/T/Territorial/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Territorial/assets/thumbnail.jpg",
   "color": "#07283C",
   "category": "games",
   "tags": [
-    "territorial",
     "games"
   ],
   "settings": [
