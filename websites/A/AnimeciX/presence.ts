@@ -7,7 +7,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 enum Images {
   Logo = 'https://i.imgur.com/ExLxNbB.png',
-  SettingsICO = 'https://i.imgur.com/pUucFeP.png',
+  SettingsICO = 'https://i.imgur.com/KmeTotF.png',
 }
 
 function observeDOMChanges(callback: () => void) {
@@ -18,7 +18,7 @@ function observeDOMChanges(callback: () => void) {
 function updatePresence() {
   const presenceData: PresenceData = {
     largeImageKey: Images.Logo,
-  } as PresenceData
+  }
 
   presenceData.startTimestamp = browsingTimestamp
   presenceData.type = ActivityType.Watching
@@ -33,7 +33,6 @@ function updatePresence() {
     && document.location.pathname.includes('/episode/')
   ) {
     // Thumbnail
-    // const animeImgElement = document.querySelector("img.media-image-el");
     const animeImg = document
       .querySelector<HTMLElement>('media-item-header')
       ?.style
@@ -52,7 +51,6 @@ function updatePresence() {
     && !document.location.pathname.includes('/episode/')
   ) {
     // Thumbnail
-    // const animeImgElement = document.querySelector("img.media-image-el");
     const animeImg = document
       .querySelector<HTMLElement>('media-item-header')
       ?.style
@@ -103,7 +101,6 @@ function updatePresence() {
         presenceData.smallImageText = 'Watchlist'
         presenceData.details = 'AnimeciX'
         presenceData.state = 'İzlenenler görüntüleniyor..'
-
         break
       }
       case '/lists': {
@@ -112,7 +109,6 @@ function updatePresence() {
         presenceData.smallImageText = 'İzlenecek Listesi'
         presenceData.details = 'AnimeciX'
         presenceData.state = 'İzleme listeleri görüntüleniyor..'
-
         break
       }
       case '/lists/liked': {
@@ -121,7 +117,6 @@ function updatePresence() {
         presenceData.smallImageText = 'Favoriler'
         presenceData.details = 'AnimeciX'
         presenceData.state = 'Favoriler görüntüleniyor..'
-
         break
       }
       case '/lists/browse': {
@@ -130,7 +125,6 @@ function updatePresence() {
         presenceData.smallImageText = 'Browsing..'
         presenceData.details = 'AnimeciX'
         presenceData.state = 'Oynatma listeleri görüntüleniyor..'
-
         break
       }
       default:
@@ -153,7 +147,6 @@ function updatePresence() {
               presenceData.smallImageText = 'Ayarlar'
               presenceData.details = 'AnimeciX'
               presenceData.state = 'Ayarlar'
-
               break
             }
             case '/gw-rooms': {
@@ -162,7 +155,6 @@ function updatePresence() {
               presenceData.smallImageText = 'Group Watch'
               presenceData.details = 'AnimeciX'
               presenceData.state = 'İzleme odaları görüntüleniyor..'
-
               break
             }
             case '/search': {
@@ -171,7 +163,6 @@ function updatePresence() {
               presenceData.smallImageText = 'Aranıyor'
               presenceData.details = 'Aranıyor:'
               presenceData.state = document.querySelector('.query')?.textContent
-
               break
             }
             default: {
