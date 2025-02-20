@@ -13,6 +13,7 @@ export enum SarifRuleId {
   imageSizeCheck = 'image-size-check',
   imageMimeTypeCheck = 'image-mime-type-check',
   tagsCheck = 'tags-check',
+  tagsServiceCheck = 'tags-service-check',
 }
 
 const sarifRules: Record<SarifRuleId, ReportingDescriptor> = {
@@ -77,6 +78,13 @@ const sarifRules: Record<SarifRuleId, ReportingDescriptor> = {
     name: 'Tags Check',
     shortDescription: {
       text: 'Makes sure the `tags` metadata property is unique',
+    },
+  },
+  [SarifRuleId.tagsServiceCheck]: {
+    id: SarifRuleId.tagsServiceCheck,
+    name: 'Tags Service Check',
+    shortDescription: {
+      text: 'Makes sure the `tags` don\'t contain the service name',
     },
   },
 }

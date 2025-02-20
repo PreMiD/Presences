@@ -19,8 +19,7 @@
   "color": "#ffffff",
   "category": "anime",
   "tags": [
-    "anime",
-    "betteranime"
+    "anime"
   ],
   "iframe": true,
   "iFrameRegExp": ".*",

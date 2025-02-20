@@ -17,8 +17,7 @@
   "category": "anime",
   "tags": [
     "anime",
-    "video",
-    "kayoanime"
+    "video"
   ],
   "iframe": true,
   "iFrameRegExp": ".*"

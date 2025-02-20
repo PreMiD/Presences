@@ -34,7 +34,6 @@
     "ats",
     "fs19",
     "radio",
-    "simulator",
-    "simulatorhits"
+    "simulator"
   ]
 }

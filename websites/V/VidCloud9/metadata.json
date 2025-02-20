@@ -18,8 +18,7 @@
   "color": "#00050C",
   "category": "videos",
   "tags": [
-    "watch-movies",
-    "vidcloud9"
+    "watch-movies"
   ],
   "iframe": true,
   "iFrameRegExp": ".*",

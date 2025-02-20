@@ -21,8 +21,7 @@
   "tags": [
     "anime",
     "streaming",
-    "anicloud",
-    "aniworld"
+    "anicloud"
   ],
   "iframe": true,
   "iFrameRegExp": ".*"
