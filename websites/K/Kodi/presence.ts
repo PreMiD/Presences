@@ -1,7 +1,7 @@
 import { Assets } from 'premid'
 
 const presence = new Presence({
-  clientId: '706585201479909476',
+  clientId: '1337578852888608838',
 })
 
 presence.on('UpdateData', async () => {
@@ -251,7 +251,6 @@ presence.on('UpdateData', async () => {
     const timeDuration = document.querySelector('div.playing-time-duration')
     presenceData.smallImageKey = Assets.RepeatOne
     presenceData.smallImageText = 'Repeating'
-
     presenceData.details = `Watching: ${Name?.textContent}`
     presenceData.state = `${timeElapsed?.textContent}/${timeDuration?.textContent}`
   }
