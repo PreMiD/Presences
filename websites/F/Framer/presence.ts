@@ -17,10 +17,7 @@ presence.on('UpdateData', async () => {
   }
 
   const rawTitle = document.title
-  console.warn('Raw Document Title:', rawTitle)
-
   const projectName = rawTitle.replace(/\s*- Framer\s*$/, '').trim()
-  console.warn('Extracted Project Name:', projectName)
 
   const pathSegments = document.location.pathname.split('/').filter(Boolean)
 
