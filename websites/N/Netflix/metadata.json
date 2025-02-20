@@ -56,13 +56,12 @@
     "www.netflix.com",
     "netflix.com"
   ],
-  "version": "6.2.2",
+  "version": "6.2.3",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/N/Netflix/assets/thumbnail.jpg",
   "color": "#db0000",
   "category": "videos",
   "tags": [
-    "netflix",
     "video",
     "media"
   ],
