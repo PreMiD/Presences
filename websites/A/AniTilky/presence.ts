@@ -14,7 +14,7 @@ const videoData = {
   paused: true,
 }
 const baseUrl = 'https://anitilky.xyz'
-const apiUrl = 'https://backend.anitilky.xyz/api'
+const apiUrl = 'https://api.anitilky.xyz/api'
 
 interface VideoData {
   current: number
