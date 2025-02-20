@@ -231,7 +231,7 @@ presence.on('UpdateData', async () => {
       break
     case 'seach':
       presenceData.details = strings.searchFor
-      presenceData.state = decodeURI(search?.split('=')[1])
+      presenceData.state = decodeURI(search?.split('=')[1] ?? '')
       break
     case 'advanced_search':
       presenceData.details = strings.search
