@@ -11,13 +11,12 @@
     "ru": "AniLibria.top — это русский сайт с аниме"
   },
   "url": "anilibria.top",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/A/AniLibria/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AniLibria/assets/thumbnail.png",
   "color": "#fe3635",
   "category": "anime",
   "tags": [
-    "anilibria",
     "libria",
     "anime"
   ]

@@ -14,7 +14,7 @@
     "dsc.gg",
     "docs.dsc.gg"
   ],
-  "version": "1.1.12",
+  "version": "1.1.13",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/D/Dsc.gg/assets/logo.jpeg",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Dsc.gg/assets/thumbnail.png",
   "color": "#738adb",
@@ -22,8 +22,7 @@
   "tags": [
     "link-shortener",
     "discord-link-shortener",
-    "vanity-urls",
-    "dscgg"
+    "vanity-urls"
   ],
   "settings": [
     {

@@ -7,6 +7,7 @@ import { watch } from 'chokidar'
 import { build } from 'esbuild'
 import ora from 'ora'
 import { inc } from 'semver'
+import { getChangedActivities } from '../util/getActivities.js'
 import { getJsonPosition } from '../util/getJsonPosition.js'
 import { error, exit, prefix } from '../util/log.js'
 import { sanitazeFolderName } from '../util/sanitazeFolderName.js'
@@ -215,7 +216,11 @@ export class ActivityCompiler {
         inc(libraryVersion.version, 'major'),
       ]
 
-      if (!expectedVersions.includes(metadata.version)) {
+      const { changed } = await getChangedActivities()
+      if (
+        changed.some(activity => activity.folder === this.cwd)
+        && !expectedVersions.includes(metadata.version)
+      ) {
         const message = `Expected version of activity ${metadata.service} to be bumped to one of the following: ${expectedVersions.join(', ')}`
         if (kill) {
           exit(message)
@@ -317,6 +322,22 @@ export class ActivityCompiler {
         path: resolve(this.cwd, 'metadata.json'),
         message,
         ruleId: SarifRuleId.tagsCheck,
+        position: await getJsonPosition(resolve(this.cwd, 'metadata.json'), 'tags'),
+      })
+      valid = false
+    }
+
+    if (metadata.tags.includes(metadata.service.toLowerCase().replace(/[A-Z\s!"#$%&'()*+,./:;<=>?@[\\\]^_`{|}~]/g, ''))) {
+      const message = `Tags must not contain the service name`
+      if (kill) {
+        exit(message)
+      }
+
+      error(message)
+      addSarifLog({
+        path: resolve(this.cwd, 'metadata.json'),
+        message,
+        ruleId: SarifRuleId.tagsServiceCheck,
         position: await getJsonPosition(resolve(this.cwd, 'metadata.json'), 'tags'),
       })
       valid = false

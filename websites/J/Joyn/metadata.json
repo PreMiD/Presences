@@ -15,14 +15,13 @@
     "www.joyn.de",
     "joyn.de"
   ],
-  "version": "1.2.27",
+  "version": "1.2.28",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/J/Joyn/assets/logo.jpg",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/Joyn/assets/thumbnail.png",
   "color": "#000",
   "category": "videos",
   "tags": [
-    "streaming",
-    "joyn"
+    "streaming"
   ],
   "settings": [
     {
