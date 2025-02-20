@@ -15,13 +15,12 @@
     "diziroll.com",
     "www.diziroll.com"
   ],
-  "version": "1.0.28",
+  "version": "1.0.29",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/D/Diziroll/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Diziroll/assets/thumbnail.jpg",
   "color": "#1a1d30",
   "category": "videos",
   "tags": [
-    "diziroll",
     "video",
     "tv-series",
     "turkish"

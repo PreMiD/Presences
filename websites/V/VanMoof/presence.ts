@@ -306,7 +306,7 @@ presence.on('UpdateData', async () => {
         case 'recruitment-statement':
           presenceData.details = `Viewing ${urlpath[2]
             .replaceAll(/-/g, ' ')
-            .split(/ /g)
+            .split(/ /)
             .map(word => `${word[0]?.toUpperCase()}${word.slice(1)}`)
             .join(' ')}`
 

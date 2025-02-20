@@ -16,14 +16,13 @@
     "en": "Gemini gives you direct access to Google AI. Get help with writing, planning, learning, and more."
   },
   "url": "gemini.google.com",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/G/Gemini/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Gemini/assets/thumbnail.png",
   "color": "#5286d2",
   "category": "other",
   "tags": [
     "ai",
-    "gemini",
     "llm",
     "chatbot",
     "model"

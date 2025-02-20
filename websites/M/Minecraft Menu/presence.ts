@@ -75,7 +75,7 @@ presence.on('UpdateData', async () => {
     ]
     presenceData.details = 'Sponsored'
   }
-  else if (pathname.search(/Minecraft .* Servers/g)) {
+  else if (pathname.search(/Minecraft .* Servers/)) {
     presenceData.buttons = [
       {
         label: 'View Category',
