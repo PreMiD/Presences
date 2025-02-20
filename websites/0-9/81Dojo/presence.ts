@@ -143,9 +143,9 @@ presence.on('UpdateData', async () => {
         if (document.getElementsByClassName("title") == null) {
           presenceData.details = 'WebSystem: Viewing World Shogi Forum'
         }
-        else {
+      }
+      else if (document.location.pathname.includes('/topics')) {
           presenceData.details = `WebSystem: Viewing forum topic: ${document.getElementsByClassName("title")[0].textContent}`
-        }
       }
       break
     case 'wsl.81dojo.com':
