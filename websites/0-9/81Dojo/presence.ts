@@ -31,20 +31,20 @@ presence.on('UpdateData', async () => {
             const players = []
             const ratings = []
             for (let i = 0; i < playerElements.length; i++) {
-              players.push(playerElements[i].innerHTML)
+              players.push(playerElements[i].textContent)
               ratings.push(
                 playerElements[i].parentElement.children
                   .item(4)
-                  .innerHTML.slice(3, 7)
+                  .textContent.slice(3, 7)
               )
             }
             if (players.includes(username)) {
               for (let i = 0; i < playerElements.length; i++) {
-                if (playerElements[i].innerHTML === username)
+                if (playerElements[i].textContent === username)
                   playerElementIndex = i
               }
               const opponentName = players[1 - players.indexOf(username)]
-              const opponentRate = playerElements[1 - playerElementIndex].parentNode.children.item(4).innerHTML.slice(3, 7)
+              const opponentRate = playerElements[1 - playerElementIndex].parentNode.children.item(4).textContent.slice(3, 7)
               if (playerElements[0].classList.contains('name-winner')){
                 presenceData.details = 'In post-game analysis'
               }
@@ -85,7 +85,7 @@ presence.on('UpdateData', async () => {
       }
       else if (document.location.pathname.includes('/tournaments')) {
         if (Number.isInteger(Number.parseInt(document.location.pathname.substr(-1)))) {
-          presenceData.details = `WebSystem: Viewing tournament: ${document.getElementById('main').children[2].innerHTML}`
+          presenceData.details = `WebSystem: Viewing tournament: ${document.getElementById('main').children[2].textContent}`
         }
         else {
           presenceData.details = 'WebSystem: Browsing tournaments'
@@ -93,7 +93,7 @@ presence.on('UpdateData', async () => {
       }
       else if (document.location.pathname.includes('/titles')) {
         if (Number.isInteger(Number.parseInt(document.location.pathname.substr(-1)))) {
-          presenceData.details = `WebSystem: Viewing title: ${document.getElementById('main').children[1].children[0].innerHTML}`
+          presenceData.details = `WebSystem: Viewing title: ${document.getElementById('main').children[1].children[0].textContent}`
         }
         else {
           presenceData.details = 'WebSystem: Browsing titles'
@@ -101,7 +101,7 @@ presence.on('UpdateData', async () => {
       }
       else if (document.location.pathname.includes('/circles')) {
         if (Number.isInteger(Number.parseInt(document.location.pathname.substr(-1)))) {
-          presenceData.details = `WebSystem: Viewing club: ${document.getElementById('main').children[2].children[0].innerHTML}`
+          presenceData.details = `WebSystem: Viewing club: ${document.getElementById('main').children[2].children[0].textContent}`
         }
         else {
           presenceData.details = 'WebSystem: Browsing clubs'
@@ -113,7 +113,7 @@ presence.on('UpdateData', async () => {
         presenceData.details = 'WebSystem: Searching for a kifu'
       }
       else if (document.location.pathname.includes('/players/show')) {
-        presenceData.details = `WebSystem: Viewing player: ${document.getElementById('main').children[0].children[0].innerHTML}`
+        presenceData.details = `WebSystem: Viewing player: ${document.getElementById('main').children[0].children[0].textContent}`
       }
       else if (document.location.pathname.includes('/players/edit')) {
         presenceData.details = 'WebSystem: Editing player info'
@@ -136,6 +136,17 @@ presence.on('UpdateData', async () => {
       else if (document.location.pathname.includes('/certificate')) {
         presenceData.details = 'WebSystem: Applying for certificate'
       }
+      else if (document.location.pathname.includes('/kifu')) {
+        presenceData.details = `WebSystem: Viewing kifu: ${document.getElementById("kifu_viewer").children.item(1).getElementsByTagName("b")[0]} vs. ${document.getElementById("kifu_viewer").children.item(1).getElementsByTagName("b")[1]}`
+      }
+      else if (document.location.pathname.includes('/forums')) {
+        if (document.getElementsByClassName("title") == null) {
+          presenceData.details = 'WebSystem: Viewing World Shogi Forum'
+        }
+        else {
+          presenceData.details = `WebSystem: Viewing forum topic: ${document.getElementsByClassName("title")[0].textContent}`
+        }
+      }
       break
     case 'wsl.81dojo.com':
       if (document.location.pathname === '/index.php') {
@@ -144,10 +155,10 @@ presence.on('UpdateData', async () => {
             presenceData.details = 'WSL: Viewing homepage'
             break
           case '1':
-            presenceData.details = `WSL: Viewing tables for ${document.getElementsByTagName('td')[0].children[0].innerHTML}`
+            presenceData.details = `WSL: Viewing tables for ${document.getElementsByTagName('td')[0].children[0].textContent}`
             break
           case '2':
-            presenceData.details = `WSL: Viewing team: ${document.getElementById('content').children.item(2).innerHTML}`
+            presenceData.details = `WSL: Viewing team: ${document.getElementById('content').children.item(2).textContent}`
             break
           case '4':
             presenceData.details = 'WSL: Reading the rules'
