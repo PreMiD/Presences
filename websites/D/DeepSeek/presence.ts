@@ -27,27 +27,27 @@ presence.on('UpdateData', async () => {
   const strings = await getStrings()
 
   if (pathname === '/') {
-    presenceDetail = strings.newPrompt
+    presenceDetail = strings?.newPrompt ?? ''
   }
   else if (pathname.includes('/a/chat/s')) {
     presenceDetail = (showTitle
-      ? document.querySelector('div.d8ed659a').textContent
-      : strings.talkingWithAi) ?? ''
+      ? document.querySelector('div.d8ed659a')?.textContent
+      : strings?.talkingWithAi) ?? ''
   }
   else {
-    presenceDetail = strings.talkingWithAi
+    presenceDetail = strings?.talkingWithAi ?? ''
   }
 
   // Used for checking if the AI is currently responding
 
   // Checking if the user is currently typing a question
-  if (document.querySelector('#chat-input').textContent !== '')
-    presenceState = strings.askingQuestion
+  if (document.querySelector('#chat-input')?.textContent !== '')
+    presenceState = strings?.askingQuestion ?? ''
   else if (document.querySelector('div[class=\'f9bf7997 d7dc56a8\']'))
-    presenceState = strings.aiTalking
+    presenceState = strings?.aiTalking ?? ''
   else if (document.querySelector('div.f9bf7997.d7dc56a8.c05b5566'))
-    presenceState = strings.readingResponse
-  else presenceState = null
+    presenceState = strings?.readingResponse ?? ''
+  else presenceState = ''
 
   presence.setActivity({
     largeImageKey: Assets.Logo,
