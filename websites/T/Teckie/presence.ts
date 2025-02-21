@@ -30,10 +30,7 @@ presenceData.state = document.querySelector('.shopify-policy__title')?.textConte
     }
     case 'blogs': {
       presenceData.details = `Bekijkt een ${document.location.pathname.split('/')[2]} blog`
-      const blogTitle = document.getElementsByClassName('article-template__title')[0]
-      if (blogTitle) {
-        presenceData.state = `Blog: ${blogTitle.textContent}`
-      }
+presenceData.state = document.querySelector('[itemprop="headline"]')?.textContent.replace(/\n          /gm, "") ?? ""
       break
     }
   }
