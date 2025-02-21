@@ -14,10 +14,8 @@ presence.on('UpdateData', async () => {
 
   switch (document.location.pathname.split('/')[1]) {
     case 'pages': {
-      let page = document.location.pathname.substring(7).replaceAll('-', ' ')
-      page = page.charAt(0).toUpperCase() + page.slice(1)
       presenceData.details = 'Bekijkt een pagina'
-      presenceData.state = `Pagina: ${page}`
+      presenceData.state = `Pagina: ${document.title.split('– Teckie')?.[0]}`
       break
     }
     case 'products': {
