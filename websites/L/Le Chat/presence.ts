@@ -26,12 +26,12 @@ presence.on('UpdateData', async () => {
   const strings = await getStrings()
 
   if (pathname === '/chat') {
-    presenceDetail = strings.newPrompt
+    presenceDetail = strings?.newPrompt ?? ''
   }
   else if (pathname.includes('/chat/')) {
     presenceDetail = showTitle
       ? document.querySelector('a[aria-label="Open chat"]>div')?.textContent
-      : strings.talkingWithAi ?? ''
+      : strings?.talkingWithAi ?? ''
   }
   else {
     presenceDetail = strings.talkingWithAi
