@@ -44,8 +44,8 @@ presence.on('UpdateData', async () => {
     presence.getSetting<boolean>('cover'),
   ])
 
-  if (pathArr[1] && Object.keys(staticPages).includes(pathArr[1]) && pathArr.length <= 3) {
-    presenceData.details = staticPages[pathArr[1]]
+  if (Object.keys(staticPages).includes(pathArr[1]!) && pathArr.length <= 3) {
+    presenceData.details = staticPages[pathArr[1]!]
     if (privacyMode)
       presenceData.details = 'Navigue...'
   }
@@ -104,7 +104,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Regarde un anime'
     }
   }
-  else {
+  else if (document.querySelector<HTMLSelectElement>('#selectChapitres')) {
     const selectChapitres = document.querySelector<HTMLSelectElement>('#selectChapitres')
     presenceData.details = `Lit ${
       document.querySelector('#titreOeuvre')?.textContent ?? ''
@@ -121,6 +121,9 @@ presence.on('UpdateData', async () => {
       delete presenceData.smallImageKey
       presenceData.details = 'Lit un manga'
     }
+  }
+  else {
+    presenceData.details = !privacyMode ? 'Page inconnue' : 'Navigue...'
   }
 
   if (!showButtons || privacyMode)
