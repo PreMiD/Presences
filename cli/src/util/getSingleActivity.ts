@@ -1,8 +1,9 @@
 import type { ActivityMetadata } from '../classes/ActivityCompiler.js'
+import type { ActivityMetadataAndFolder } from './getActivities.js'
 import autocomplete from 'inquirer-autocomplete-standalone'
 import { exit } from '../util/log.js'
 import { mapActivityToChoice } from '../util/mapActivityToChoice.js'
-import { type ActivityMetadataAndFolder, getActivities } from './getActivities.js'
+import { getActivities } from './getActivities.js'
 
 export async function getSingleActivity(searchMessage: string, service?: string): Promise<ActivityMetadataAndFolder> {
   const activities = await getActivities()
