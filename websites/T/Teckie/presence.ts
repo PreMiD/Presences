@@ -20,13 +20,7 @@ presence.on('UpdateData', async () => {
     }
     case 'products': {
       presenceData.details = 'Bekijkt een product'
-      let productTitle = document.getElementsByClassName('product__title')[0]
-      if (productTitle) {
-        productTitle = productTitle.getElementsByTagName('h1')[0]
-        if (productTitle) {
-          presenceData.state = `Product: ${productTitle.textContent}`
-        }
-      }
+presenceData.state = document.querySelector('.product__title')?.textContent?.trim()?.replace("\n     ", "") ?? ""
       break
     }
     case 'policies': {
