@@ -1,4 +1,5 @@
-import { Client, type User } from 'discord-rpc'
+import type { User } from 'discord-rpc'
+import { Client } from 'discord-rpc'
 
 export async function getDiscordUser(): Promise<User | undefined> {
   try {
