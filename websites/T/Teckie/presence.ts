@@ -10,30 +10,30 @@ presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     largeImageKey: ActivityAssets.Logo,
     details: 'Bezoekt Teckie',
-  },
-  { pathname } = document.location;
-  
-  let path = 0;
+  }
+  const { pathname } = document.location
+
+  let path = 0
 
   switch (pathname.split('/')[1]) {
     case 'pages': {
       presenceData.details = 'Bekijkt een pagina'
-      path = 1;
+      path = 1
       break
     }
     case 'products': {
       presenceData.details = 'Bekijkt een product'
-      path = 2;
+      path = 2
       break
     }
     case 'policies': {
       presenceData.details = 'Bekijkt een policy'
-      path = 2;
+      path = 2
       break
     }
     case 'blogs': {
       presenceData.details = `Bekijkt een ${pathname.split('/')[2]} blog`
-      path = 2;
+      path = 2
       break
     }
   }
