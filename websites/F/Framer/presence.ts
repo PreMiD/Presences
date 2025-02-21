@@ -12,7 +12,7 @@ if (!startTime) {
 presence.on('UpdateData', async () => {
   const presenceData: any = {
     details: 'Browsing Framer',
-    largeImageKey: 'https://imagizer.imageshack.com/img922/534/qaQuBn.jpg',
+    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/F/Framer/assets/logo.jpg',
     startTimestamp: Number(startTime),
   }
 

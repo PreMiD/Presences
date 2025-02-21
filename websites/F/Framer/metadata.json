@@ -10,10 +10,14 @@
     "en": "Design, scale, and publish your website—no code needed. Start for free today."
   },
   "url": "framer.com",
-  "version": "1.0.0",
-  "logo": "https://imagizer.imageshack.com/img922/534/qaQuBn.jpg",
-  "thumbnail": "https://iili.io/2mZgng1.md.jpg",
+  "version": "1.0.1",
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/F/Framer/assets/logo.jpg",
+  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/Framer/assets/thumbnail.jpg",
   "color": "#E89020",
   "category": "other",
-  "tags": ["design", "ui-ux", "website"]
+  "tags": [
+    "design",
+    "ui-ux",
+    "website"
+  ]
 }
