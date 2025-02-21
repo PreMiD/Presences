@@ -6,8 +6,8 @@ const presence = new Presence({
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 enum Images {
-  Logo = 'https://i.imgur.com/ExLxNbB.png',
-  SettingsICO = 'https://i.imgur.com/KmeTotF.png',
+  Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeciX/assets/logo.png',
+  SettingsICO = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeciX/assets/0.png',
 }
 
 function observeDOMChanges(callback: () => void) {
