@@ -25,13 +25,7 @@ presenceData.state = document.querySelector('.product__title')?.textContent?.tri
     }
     case 'policies': {
       presenceData.details = 'Bekijkt een policy'
-      let policyTitle = document.getElementsByClassName('shopify-policy__title')[0]
-      if (policyTitle) {
-        policyTitle = policyTitle.getElementsByTagName('h1')[0]
-        if (policyTitle) {
-          presenceData.state = `Policy: ${policyTitle.textContent}`
-        }
-      }
+presenceData.state = document.querySelector('.shopify-policy__title')?.textContent ?? ""
       break
     }
     case 'blogs': {
