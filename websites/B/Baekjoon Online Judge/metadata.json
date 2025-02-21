@@ -20,7 +20,7 @@
     "en": "Baekjoon Online Judge is a website that hosts competitive programming contests."
   },
   "url": "www.acmicpc.net",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/syA7WiF.png",
   "thumbnail": "https://onlinejudgeimages.s3-ap-northeast-1.amazonaws.com/images/boj-og.png",
   "color": "#1a75bc",
