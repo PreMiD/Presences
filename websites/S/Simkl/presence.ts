@@ -1,10 +1,6 @@
 const presence = new Presence({
   clientId: '1290874564582051855',
 })
-const strings = presence.getStrings({
-  play: 'presence.playback.playing',
-  pause: 'presence.playback.paused',
-})
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 function textContent(tags: string) {
