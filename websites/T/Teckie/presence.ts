@@ -10,29 +10,36 @@ presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     largeImageKey: ActivityAssets.Logo,
     details: 'Bezoekt Teckie',
-  }
+  },
+  { pathname } = document.location;
+  
+  let path = 0;
 
-  switch (document.location.pathname.split('/')[1]) {
+  switch (pathname.split('/')[1]) {
     case 'pages': {
       presenceData.details = 'Bekijkt een pagina'
-      presenceData.state = `Pagina: ${document.title.split('– Teckie')?.[0]}`
+      path = 1;
       break
     }
     case 'products': {
       presenceData.details = 'Bekijkt een product'
-presenceData.state = document.querySelector('.product__title')?.textContent?.trim()?.replace("\n     ", "") ?? ""
+      path = 2;
       break
     }
     case 'policies': {
       presenceData.details = 'Bekijkt een policy'
-presenceData.state = document.querySelector('.shopify-policy__title')?.textContent ?? ""
+      path = 2;
       break
     }
     case 'blogs': {
-      presenceData.details = `Bekijkt een ${document.location.pathname.split('/')[2]} blog`
-presenceData.state = document.querySelector('[itemprop="headline"]')?.textContent.replace(/\n          /gm, "") ?? ""
+      presenceData.details = `Bekijkt een ${pathname.split('/')[2]} blog`
+      path = 2;
       break
     }
+  }
+
+  if (path !== 0) {
+    presenceData.state = `${path === 1 ? 'Pagina: ' : ''}${document.title.split('– Teckie')?.[0]}`
   }
 
   presence.setActivity(presenceData)
