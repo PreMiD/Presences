@@ -31,7 +31,7 @@ presence.on('UpdateData', async () => {
   else if (pathname.includes('/chat/')) {
     presenceDetail = showTitle
       ? document.querySelector('a[aria-label="Open chat"]>div')?.textContent
-      : strings.talkingWithAi
+      : strings.talkingWithAi??''
   }
   else {
     presenceDetail = strings.talkingWithAi
