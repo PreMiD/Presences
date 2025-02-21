@@ -7,13 +7,13 @@ const strings = presence.getStrings({
   play: 'general.playing',
   pause: 'general.paused',
 })
-const truncateBefore = function (str: string, pattern: string): string {
+function truncateBefore(str: string, pattern: string): string {
   return str.slice(str.indexOf(pattern) + pattern.length)
 }
-const truncateAfter = function (str: string, pattern: string): string {
+function truncateAfter(str: string, pattern: string): string {
   return str.slice(0, str.indexOf(pattern))
 }
-const getSeconds = function (minutes: number, seconds: number): number {
+function getSeconds(minutes: number, seconds: number): number {
   return Number(Math.floor(minutes * 60)) + Number(seconds)
 }
 const pattern = ':'
