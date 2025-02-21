@@ -25,13 +25,12 @@
     "www.bbc.co.uk",
     "www.bbc.com"
   ],
-  "version": "2.2.7",
+  "version": "2.2.8",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BBC/assets/thumbnail.png",
   "color": "#000000",
   "category": "other",
   "tags": [
-    "bbc",
     "bbc-iplayer",
     "bbc-sounds",
     "series",

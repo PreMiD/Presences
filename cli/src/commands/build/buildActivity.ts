@@ -1,10 +1,11 @@
+import type { ActivityMetadata } from '../../classes/ActivityCompiler.js'
 import { existsSync } from 'node:fs'
 import { cp } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import process from 'node:process'
 import { endGroup, startGroup } from '@actions/core'
 import isCI from 'is-ci'
-import { ActivityCompiler, type ActivityMetadata } from '../../classes/ActivityCompiler.js'
+import { ActivityCompiler } from '../../classes/ActivityCompiler.js'
 import { exit } from '../../util/log.js'
 
 export async function buildActivity({

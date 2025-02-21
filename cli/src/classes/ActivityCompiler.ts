@@ -6,7 +6,8 @@ import chalk from 'chalk'
 import { watch } from 'chokidar'
 import { build } from 'esbuild'
 import ora from 'ora'
-import { compare, inc } from 'semver'
+import { inc } from 'semver'
+import { getChangedActivities } from '../util/getActivities.js'
 import { getJsonPosition } from '../util/getJsonPosition.js'
 import { error, exit, prefix } from '../util/log.js'
 import { sanitazeFolderName } from '../util/sanitazeFolderName.js'
@@ -25,6 +26,7 @@ export interface ActivityMetadata {
   iframe?: boolean
   iFrameRegExp?: string
   description: Record<string, string>
+  tags: string[]
 }
 
 export class ActivityCompiler {
@@ -54,19 +56,24 @@ export class ActivityCompiler {
     preCheck?: boolean
     zip: boolean
   }): Promise<boolean> {
+    let checksSucceeded = true
     if (preCheck) {
       await this.dependencies.installDependencies()
       const success = await this.ts.typecheck(kill)
       if (!success) {
-        return false
+        checksSucceeded = false
       }
     }
 
     if (validate) {
       const success = await this.validate({ kill })
       if (!success) {
-        return false
+        checksSucceeded = false
       }
+    }
+
+    if (!checksSucceeded) {
+      return false
     }
 
     const spinner = ora(prefix + chalk.greenBright(` Compiling ${this.activity.service}...`))
@@ -186,12 +193,35 @@ export class ActivityCompiler {
       valid = false
     }
 
-    if (!libraryVersion) {
-      if (metadata.version === '1.0.0') {
-        return true
+    if (!libraryVersion && metadata.version !== '1.0.0') {
+      const message = `Expected initial version of activity ${metadata.service} to be 1.0.0`
+      if (kill) {
+        exit(message)
       }
-      else {
-        const message = `Expected initial version of activity ${metadata.service} to be 1.0.0`
+
+      error(message)
+      addSarifLog({
+        path: resolve(this.cwd, 'metadata.json'),
+        message,
+        ruleId: SarifRuleId.bumpCheck,
+        position: await getJsonPosition(resolve(this.cwd, 'metadata.json'), 'version'),
+      })
+      valid = false
+    }
+
+    if (libraryVersion) {
+      const expectedVersions = [
+        inc(libraryVersion.version, 'patch'),
+        inc(libraryVersion.version, 'minor'),
+        inc(libraryVersion.version, 'major'),
+      ]
+
+      const { changed } = await getChangedActivities()
+      if (
+        changed.some(activity => activity.folder === this.cwd)
+        && !expectedVersions.includes(metadata.version)
+      ) {
+        const message = `Expected version of activity ${metadata.service} to be bumped to one of the following: ${expectedVersions.join(', ')}`
         if (kill) {
           exit(message)
         }
@@ -205,27 +235,6 @@ export class ActivityCompiler {
         })
         valid = false
       }
-    }
-
-    if (libraryVersion && compare(metadata.version, libraryVersion.version) === -1) {
-      const expectedVersions = [
-        inc(libraryVersion.version, 'patch'),
-        inc(libraryVersion.version, 'minor'),
-        inc(libraryVersion.version, 'major'),
-      ]
-      const message = `Expected version of activity ${metadata.service} to be bumped to one of the following: ${expectedVersions.join(', ')}`
-      if (kill) {
-        exit(message)
-      }
-
-      error(message)
-      addSarifLog({
-        path: resolve(this.cwd, 'metadata.json'),
-        message,
-        ruleId: SarifRuleId.bumpCheck,
-        position: await getJsonPosition(resolve(this.cwd, 'metadata.json'), 'version'),
-      })
-      valid = false
     }
 
     if (metadata.iframe && !existsSync(resolve(this.cwd, 'iframe.ts'))) {
@@ -300,6 +309,38 @@ export class ActivityCompiler {
       if (!(await this.assetsManager.validateImage({ asset, kill }))) {
         valid = false
       }
+    }
+
+    if (new Set(metadata.tags).size !== metadata.tags.length) {
+      const message = `Tags must be unique`
+      if (kill) {
+        exit(message)
+      }
+
+      error(message)
+      addSarifLog({
+        path: resolve(this.cwd, 'metadata.json'),
+        message,
+        ruleId: SarifRuleId.tagsCheck,
+        position: await getJsonPosition(resolve(this.cwd, 'metadata.json'), 'tags'),
+      })
+      valid = false
+    }
+
+    if (metadata.tags.includes(metadata.service.toLowerCase().replace(/[A-Z\s!"#$%&'()*+,./:;<=>?@[\\\]^_`{|}~]/g, ''))) {
+      const message = `Tags must not contain the service name`
+      if (kill) {
+        exit(message)
+      }
+
+      error(message)
+      addSarifLog({
+        path: resolve(this.cwd, 'metadata.json'),
+        message,
+        ruleId: SarifRuleId.tagsServiceCheck,
+        position: await getJsonPosition(resolve(this.cwd, 'metadata.json'), 'tags'),
+      })
+      valid = false
     }
 
     return valid
