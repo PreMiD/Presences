@@ -12,7 +12,7 @@ let data: {
   paused: boolean
 } = null as any
 
-enum ActivityAssets { // Other default assets can be found at index.d.ts
+enum ActivityAssets {
   Logo = 'https://i.imgur.com/W8xdGr1.png',
   Settings = 'https://i.imgur.com/uERKN5k.png',
   Notifications = 'https://i.imgur.com/FrWu91B.png',
