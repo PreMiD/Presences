@@ -53,9 +53,9 @@
     "es.ign.com",
     "tr.ign.com"
   ],
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/PPpmg7Q.png",
-  "thumbnail": "https://i.imgur.com/qrPggue.jpeg",
+  "version": "1.0.1",
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/I/IGN/assets/logo.png",
+  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/I/IGN/assets/thumbnail.jpeg",
   "color": "#bf1313",
   "category": "games",
   "tags": [
