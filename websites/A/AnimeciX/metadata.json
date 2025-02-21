@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.13",
+  "apiVersion": 1,
+  "author": {
+    "id": "858743749240684564",
+    "name": "swesia"
+  },
+  "contributors": [
+    {
+      "name": "creeper",
+      "id": "529707020937461760"
+    }
+  ],
+  "service": "AnimeciX",
+  "description": {
+    "en": "Best Turkish anime watching website"
+  },
+  "url": "animecix.net",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/ExLxNbB.png",
+  "thumbnail": "https://i.imgur.com/Un2BNxc.jpeg",
+  "color": "#b6eafd",
+  "category": "anime",
+  "tags": [
+    "anime"
+  ]
+}
