@@ -109,7 +109,8 @@ async function getPresenceData() {
 
         if (playingNotifyText?.includes('Replay')) {
           presenceData.state = 'リプレイ視聴中'
-        } else {
+        }
+        else {
           presenceData.state = `打鍵数:${typeCount} kpm:${kpm}`
         }
       }
