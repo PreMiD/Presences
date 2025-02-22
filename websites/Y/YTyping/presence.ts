@@ -1,5 +1,5 @@
 import { ActivityType, Assets } from 'premid'
-
+import { getTimestamps } from 'premid'
 const presence = new Presence({
   clientId: '1338529406905352212',
 })
@@ -83,7 +83,7 @@ async function getPresenceData() {
       }
 
       if (showTimestamp) {
-        const [startTimestamp, endTimestamp] = presence.getTimestamps(
+        const [startTimestamp, endTimestamp] = getTimestamps(
           Math.floor(_video.currentTime),
           Math.floor(_video.duration),
         )
@@ -132,7 +132,7 @@ async function getPresenceData() {
       }
 
       if (showTimestamp) {
-        const [startTimestamp, endTimestamp] = presence.getTimestamps(
+        const [startTimestamp, endTimestamp] = getTimestamps(
           Math.floor(_video.currentTime),
           Math.floor(_video.duration),
         )
