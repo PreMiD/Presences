@@ -7,69 +7,58 @@ const presence = new Presence({
 async function getStrings() {
   return presence.getStrings(
     {
-      accountSettings: 'osu!ppy.accountSettings',
-      beatMapListing: 'osu!ppy.beatMapListing',
-      beatMapLooking: 'osu!ppy.beatMapLooking',
-      beatMapPacks: 'osu!ppy.beatMapPacks',
+      accountSettings: 'osu ppy.accountSettings',
+      beatMapListing: 'osu ppy.beatMapListing',
+      beatMapLooking: 'osu ppy.beatMapLooking',
+      beatMapPacks: 'osu ppy.beatMapPacks',
       browsing: 'general.browsing',
       buttonReadArticle: 'general.buttonReadArticle',
-      buttonViewBeatmap: 'osu!ppy.buttonViewBeatmap',
+      buttonViewBeatmap: 'osu ppy.buttonViewBeatmap',
       buttonViewProfile: 'general.buttonViewProfile',
-      changelog: 'osu!ppy.changelog',
-      chatting: 'osu!ppy.chatting',
-      contests: 'osu!ppy.contests',
-      countryRankings: 'osu!ppy.countryRankings',
+      changelog: 'osu ppy.changelog',
+      chatting: 'osu ppy.chatting',
+      contests: 'osu ppy.contests',
+      countryRankings: 'osu ppy.countryRankings',
       downloads: 'premid.pageDownloads',
-      featuredArtists: 'osu!ppy.featuredArtists',
-      for: 'osu!ppy.for',
-      forums: 'osu!ppy.forums',
-      friendList: 'osu!ppy.friendList',
-      kudosuRankings: 'osu!ppy.kudosuRankings',
-      livestreams: 'osu!ppy.livestreams',
-      osuStore: 'osu!ppy.osuStore',
-      otherProfile: 'osu!ppy.otherProfile',
-      performanceRankings: 'osu!ppy.performanceRankings',
-      rank: 'osu!ppy.rank',
+      featuredArtists: 'osu ppy.featuredArtists',
+      for: 'osu ppy.for',
+      forums: 'osu ppy.forums',
+      friendList: 'osu ppy.friendList',
+      kudosuRankings: 'osu ppy.kudosuRankings',
+      livestreams: 'osu ppy.livestreams',
+      osuStore: 'osu ppy.osuStore',
+      otherProfile: 'osu ppy.otherProfile',
+      performanceRankings: 'osu ppy.performanceRankings',
+      rank: 'osu ppy.rank',
       reading: 'general.reading',
       readingAnArticle: 'general.readingAnArticle',
       readingArticle: 'general.readingArticle',
-      readingForum: 'osu!ppy.readingForum',
+      readingForum: 'osu ppy.readingForum',
       readingNews: 'general.readingNews',
-      scoreRankings: 'osu!ppy.scoreRankings',
+      scoreRankings: 'osu ppy.scoreRankings',
       search: 'general.search',
       searchFor: 'general.searchFor',
-      spotlights: 'osu!ppy.spotlights',
-      support: 'osu!ppy.support',
-      theirProfile: 'osu!ppy.theirProfile',
-      tournaments: 'osu!ppy.tournaments',
-      unsupportedPage: 'osu!ppy.unsupportedPage',
+      spotlights: 'osu ppy.spotlights',
+      support: 'osu ppy.support',
+      theirProfile: 'osu ppy.theirProfile',
+      tournaments: 'osu ppy.tournaments',
+      unsupportedPage: 'osu ppy.unsupportedPage',
       viewing: 'general.viewing',
-      viewingForum: 'osu!ppy.viewingForum',
+      viewingForum: 'osu ppy.viewingForum',
       viewingHome: 'general.viewHome',
-      watchLists: 'osu!ppy.watchLists',
+      watchLists: 'osu ppy.watchLists',
       wikiMainPage: 'general.wikiMainPage',
     },
-    await presence.getSetting<string>('lang').catch(() => 'en'),
   )
 }
-
-let strings: Awaited<ReturnType<typeof getStrings>>
-let oldLang: string | null = null
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/O/osu%20ppy/assets/logo.png',
   }
-  const [buttons, newLang] = await Promise.all([
-    presence.getSetting<boolean>('buttons'),
-    presence.getSetting<string>('lang'),
-  ])
+  const buttons = await presence.getSetting<boolean>('buttons')
+  const strings = await getStrings()
   const { pathname, href } = document.location
-
-  if (oldLang !== newLang) {
-    oldLang = newLang
-    strings = await getStrings()
-  }
 
   if (pathname === '/home') {
     const inputSelected = document.querySelector<HTMLInputElement>('[type="search"]')
