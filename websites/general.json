@@ -380,7 +380,7 @@
     "message": "Viewing a wishlist"
   },
   "general.viewCategory": {
-    "description": "Viewing a not specfied category.",
+    "description": "Viewing a category.",
     "message": "Viewing category:"
   },
   "general.viewChannel": {
