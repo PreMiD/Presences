@@ -103,9 +103,16 @@ async function getPresenceData() {
       }
 
       if (showTypingState) {
+        const playingNotifyText = document.querySelector("#playing_notify")?.textContent
         const typeCount = document.querySelector('[label=\'type\']')?.textContent ?? 0
         const kpm = document.querySelector('[label=\'kpm\']')?.textContent ?? 0
-        presenceData.state = `打鍵数:${typeCount} kpm:${kpm}`
+
+        if(playingNotifyText?.includes('Replay')) {
+          presenceData.state = 'リプレイ視聴中'
+        } else {
+          presenceData.state = `打鍵数:${typeCount} kpm:${kpm}`
+        }
+
       }
 
       return presenceData
