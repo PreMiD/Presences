@@ -41,7 +41,7 @@
   },
   "osu ppy.support": {
     "description": "Displayed when viewing the support page.",
-    "message": "Ways to support osu ppy"
+    "message": "Ways to support osu!ppy"
   },
   "osu ppy.wikiMainPage": {
     "description": "Displayed when viewing the wiki main page.",
