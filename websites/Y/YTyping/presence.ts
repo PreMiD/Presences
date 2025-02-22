@@ -5,11 +5,7 @@ const presence = new Presence({
 })
 
 presence.on('UpdateData', async () => {
-  const [
-    privacy,
-  ] = await Promise.all([
-    presence.getSetting<boolean>('privacy'),
-  ])
+  const privacy = await presence.getSetting<boolean>("privacy")
 
   if (privacy) {
     return presence.clearActivity()
