@@ -11,11 +11,11 @@ presence.on('UpdateData', async () => {
     presence.getSetting<boolean>('privacy'),
   ])
 
-  if(privacy){
+  if (privacy) {
     return presence.clearActivity()
   }
 
-  const presenceData = await getPresenceData();
+  const presenceData = await getPresenceData()
 
   presence.setActivity(presenceData)
 })
@@ -46,7 +46,6 @@ function getTypePageInfo() {
   return { title, artist, image }
 }
 
-
 const largeImageKey = 'https://i.imgur.com/nnZqkNo.png'
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
@@ -75,10 +74,10 @@ async function getPresenceData() {
 
       const presenceData: PresenceData = {
         type: isPaused ? ActivityType.Playing : ActivityType.Listening,
-        largeImageKey: showCover ?  map.image : largeImageKey
+        largeImageKey: showCover ? map.image : largeImageKey,
       }
 
-      if(showMediaState){
+      if (showMediaState) {
         presenceData.smallImageKey = isPaused ? Assets.Pause : Assets.Play
         presenceData.smallImageText = isPaused ? '停止中' : 'プレイ中'
       }
@@ -92,29 +91,29 @@ async function getPresenceData() {
         presenceData.endTimestamp = endTimestamp
       }
 
-      if(showButtons){
+      if (showButtons) {
         presenceData.buttons = [{
           url: href,
           label: '譜面ページに移動',
         }]
       }
 
-      if(showCurrentSong){
+      if (showCurrentSong) {
         presenceData.details = `${map.title} - ${map.artist}`
       }
 
-      if(showTypingState){
-        const typeCount = document.querySelector("[label='type']")?.textContent ?? 0
-        const kpm = document.querySelector("[label='kpm']")?.textContent ?? 0
+      if (showTypingState) {
+        const typeCount = document.querySelector('[label=\'type\']')?.textContent ?? 0
+        const kpm = document.querySelector('[label=\'kpm\']')?.textContent ?? 0
         presenceData.state = `打鍵数:${typeCount} kpm:${kpm}`
       }
 
       return presenceData
     }
     case pathname.includes('/edit'):{
-      const iframeElement = document.querySelector("iframe")
+      const iframeElement = document.querySelector('iframe')
 
-      const videoId = iframeElement?.src.split('/embed/')[1]?.split('?')[0] || ""
+      const videoId = iframeElement?.src.split('/embed/')[1]?.split('?')[0] || ''
       const videoThubnail = `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`
       const isPaused = _video.paused
 
@@ -123,11 +122,11 @@ async function getPresenceData() {
         type: isPaused ? ActivityType.Playing : ActivityType.Listening,
       }
 
-      if(showTypingState){
-        presenceData.state = "譜面編集中"
+      if (showTypingState) {
+        presenceData.state = '譜面編集中'
       }
 
-      if(showMediaState){
+      if (showMediaState) {
         presenceData.smallImageKey = isPaused ? Assets.Pause : Assets.Play
         presenceData.smallImageText = isPaused ? '停止中' : 'プレイ中'
       }
@@ -141,8 +140,8 @@ async function getPresenceData() {
         presenceData.endTimestamp = endTimestamp
       }
 
-      if(showCurrentSong){
-        presenceData.details = iframeElement?.title ?? ""
+      if (showCurrentSong) {
+        presenceData.details = iframeElement?.title ?? ''
       }
 
       return presenceData
@@ -150,20 +149,20 @@ async function getPresenceData() {
 
     case pathname.includes('/timeline'):{
       const presenceData: PresenceData = {
-        details: "タイムライン",
+        details: 'タイムライン',
         largeImageKey,
         type: ActivityType.Playing,
-        startTimestamp: browsingTimestamp
+        startTimestamp: browsingTimestamp,
       }
 
       return presenceData
     }
     case pathname.includes('/user'):{
       const presenceData: PresenceData = {
-        details: "ユーザーページ",
+        details: 'ユーザーページ',
         largeImageKey,
         type: ActivityType.Playing,
-        startTimestamp: browsingTimestamp
+        startTimestamp: browsingTimestamp,
       }
 
       return presenceData
