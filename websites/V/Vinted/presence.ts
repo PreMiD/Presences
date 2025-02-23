@@ -161,7 +161,7 @@ presence.on('UpdateData', async () => {
     presenceData.state = 'Creating a bundle'
     const bundlePrice = document.querySelector<HTMLSpanElement>('div.web_ui__Cell__image span.web_ui__Text__text')?.textContent // Price of the bundle all taxes included
     if (bundlePrice) {
-      presenceData.details = `Creating a bundle (${bundlePrice})`
+      presenceData.state = `Creating a bundle (${bundlePrice})`
     }
   }
   else if (document.location.pathname.includes('/items/new')) {
