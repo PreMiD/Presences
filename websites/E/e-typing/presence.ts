@@ -1,4 +1,4 @@
-import { ActivityType, Assets } from 'premid'
+import { ActivityType } from 'premid'
 
 const presence = new Presence({
   clientId: '1343107487477399592',
@@ -21,6 +21,18 @@ presence.on('UpdateData', async () => {
 })
 
 function getMode() {
+  const { search } = location
+
+  if (search.includes('.2')) {
+    return 'english'
+  }
+  else if (search.includes('kana.1')) {
+    return 'kana'
+  }
+  else if (search.includes('kana.1')) {
+    return 'roma'
+  }
+
   const headerImgSrc = document.querySelector<HTMLImageElement>('#etyping img')?.src ?? ''
   const paths = headerImgSrc.split('/').filter(i => i !== '')
   const mode = paths[3]
@@ -37,30 +49,44 @@ function getMode() {
 }
 
 function getTypingContentWindowInfo() {
-  const iframeWindowTitle = document.evaluate(
-    '//p[contains(@class, \'pp_description\')]',
-    document,
-    null,
-    XPathResult.FIRST_ORDERED_NODE_TYPE,
-    null,
-  ).singleNodeValue?.textContent ?? ''
+  const typingContent = document.querySelector<HTMLIFrameElement>('#typing_content')
+  const appElement = typingContent?.contentDocument?.querySelector<HTMLDivElement>('#start_view > .title') ?? document.getElementById('app')
 
-  const wordTitle = document.querySelector<HTMLIFrameElement>('#typing_content')?.contentDocument?.querySelector('.title')?.textContent ?? ''
+  if (typingContent || appElement) {
+    let result = { windowTitle: '', wordTitle: '' }
+    const windowTitleElement = document.querySelector<HTMLParagraphElement>('.pp_description') ?? window.parent.document.querySelector<HTMLParagraphElement>('.pp_description')
+    const windowTitle = windowTitleElement?.textContent ?? ''
 
-  return { iframeWindowTitle: iframeWindowTitle.replace(wordTitle, ''), wordTitle }
+    const wordTitleElement = typingContent?.contentDocument?.querySelector<HTMLDivElement>('#start_view > .title') ?? document.querySelector<HTMLDivElement>('#start_view > .title')
+    const wordTitle = wordTitleElement?.textContent ?? ''
+    const sessionStorageWordTitle = sessionStorage.getItem('presence:wordTitle') ?? ''
+
+    if (!sessionStorageWordTitle) {
+      console.log(sessionStorageWordTitle)
+      sessionStorage.setItem('presence:wordTitle', wordTitle)
+      result = { windowTitle, wordTitle: `お題: ${wordTitle}` }
+    }
+    else {
+      const replacedWindowTitle = location.search.includes('trysc.trysc.trysc') ? '腕試しレベルチェック' : windowTitle.replace(sessionStorageWordTitle, '')
+
+      result = { windowTitle: replacedWindowTitle, wordTitle: `お題: ${sessionStorageWordTitle}` }
+    }
+
+    return result
+  }
+
+  sessionStorage.setItem('presence:wordTitle', '')
+  return { windowTitle: '', wordTitle: '' }
 }
 
 function generatePresenceData() {
   const mode = getMode()
 
-  const { iframeWindowTitle, wordTitle } = getTypingContentWindowInfo()
+  const { windowTitle: categoryTitle, wordTitle } = getTypingContentWindowInfo()
 
   const presenceData: PresenceData = {
-    details: iframeWindowTitle,
     state: wordTitle,
     startTimestamp: browsingTimestamp,
-    largeImageKey: romaLargeImageKey,
-    smallImageKey: Assets.Play,
     type: ActivityType.Playing,
     buttons: [
       {
@@ -72,15 +98,22 @@ function generatePresenceData() {
 
   if (mode === 'english') {
     presenceData.largeImageKey = englishLargeImageKey
-    presenceData.smallImageText = '英語タイピング'
+
+    if (categoryTitle) {
+      presenceData.details = `${categoryTitle} (英語)`
+    }
   }
   else if (mode === 'kana') {
     presenceData.largeImageKey = kanaLargeImageKey
-    presenceData.smallImageText = 'かな入力タイピング'
+    if (categoryTitle) {
+      presenceData.details = `${categoryTitle} (かな)`
+    }
   }
   else {
     presenceData.largeImageKey = romaLargeImageKey
-    presenceData.smallImageText = 'ローマ字タイピング'
+    if (categoryTitle) {
+      presenceData.details = `${categoryTitle} (ローマ字)`
+    }
   }
 
   return presenceData
