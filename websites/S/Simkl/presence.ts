@@ -3,6 +3,10 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
+enum ActivityAssets {
+  Logo = 'https://cdn.rcd.gg/PreMiD/websites/S/Simkl/assets/logo.png',
+}
+
 function textContent(tags: string) {
   return document.querySelector(tags)?.textContent?.trim()
 }
