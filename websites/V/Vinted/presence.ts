@@ -36,7 +36,8 @@ presence.on('UpdateData', async () => {
 
     if (document.location.search.includes('?tab=designer')) {
       presenceData.state = 'Browsing designer items'
-    } else if (document.location.search.includes('?tab=electronics')) {
+    }
+    else if (document.location.search.includes('?tab=electronics')) {
       presenceData.state = 'Browsing electronics'
     }
   }
@@ -73,7 +74,6 @@ presence.on('UpdateData', async () => {
         tags.shift()
         presenceData.state = `Tags: ${tags.join(', ')}`
       }
-      
     }
   }
   else if (document.location.search.includes('?search_text') || document.location.pathname.includes('/search')) {
@@ -90,10 +90,11 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Searching for an item'
       presence.setActivity(presenceData)
       presenceData.state = `Tags: ${getTags().join(', ')}`
-
-    } else if (searchType === 'search-user') {
+    }
+    else if (searchType === 'search-user') {
       presenceData.state = 'Searching for a user'
-    } else if (searchType === 'search-faq') {
+    }
+    else if (searchType === 'search-faq') {
       presenceData.state = 'Searching for an answer in the FAQ'
     }
   }
@@ -201,7 +202,6 @@ presence.on('UpdateData', async () => {
     presenceData.state = 'Viewing wallet balance and transactions'
   }
 
-  console.log(presenceData)
   if (!presenceData.state && !presenceData.details) {
     presenceData.state = 'Shopping'
   }
