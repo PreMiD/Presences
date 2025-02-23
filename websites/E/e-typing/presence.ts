@@ -61,7 +61,6 @@ function getTypingContentWindowInfo() {
     const sessionStorageWordTitle = sessionStorage.getItem('presence:wordTitle') ?? ''
 
     if (!sessionStorageWordTitle) {
-      console.log(sessionStorageWordTitle)
       sessionStorage.setItem('presence:wordTitle', wordTitle)
       return { windowTitle, wordTitle: `お題: ${wordTitle}` }
     }
@@ -70,7 +69,6 @@ function getTypingContentWindowInfo() {
 
       return { windowTitle: replacedWindowTitle, wordTitle: `お題: ${sessionStorageWordTitle}` }
     }
-
   }
 
   sessionStorage.setItem('presence:wordTitle', '')
