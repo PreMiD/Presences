@@ -6,7 +6,8 @@
   },
   "service": "e-typing",
   "description": {
-    "en": "e-typing"
+    "en": "Japanese typing practice service. Improving your typing skills even a little can expand your possibilities.",
+    "ja": "タイピングが少しうまくなると可能性が広がる。"
   },
   "url": "www.e-typing.ne.jp",
   "version": "1.0.0",
