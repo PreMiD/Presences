@@ -11,7 +11,7 @@ presence.on('UpdateData', async () => {
     return presence.clearActivity()
   }
 
-  const presenceData = await getPresenceData()
+  const presenceData = await generatePresenceData()
 
   presence.setActivity(presenceData)
 })
@@ -45,7 +45,7 @@ function getTypePageInfo() {
 const largeImageKey = 'https://i.imgur.com/nnZqkNo.png'
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-async function getPresenceData() {
+async function generatePresenceData() {
   const { pathname, href } = document.location
   const [
     showCurrentSong,
