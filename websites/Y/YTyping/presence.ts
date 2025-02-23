@@ -159,47 +159,25 @@ async function generatePresenceData() {
       return presenceData
     }
 
-    case pathname.includes('/timeline'):{
-      const presenceData: PresenceData = {
-        details: 'タイムライン',
-        largeImageKey,
-        type: ActivityType.Playing,
-        startTimestamp: browsingTimestamp,
-      }
-
-      if (showButtons) {
-        presenceData.buttons = [{
-          url: BASE_URL,
-          label: 'YTypingを開く',
-        }]
-      }
-
-      return presenceData
-    }
-    case pathname.includes('/user'):{
-      const presenceData: PresenceData = {
-        details: 'ユーザーページ',
-        largeImageKey,
-        type: ActivityType.Playing,
-        startTimestamp: browsingTimestamp,
-      }
-
-      if (showButtons) {
-        presenceData.buttons = [{
-          url: BASE_URL,
-          label: 'YTypingを開く',
-        }]
-      }
-
-      return presenceData
-    }
-
     default: {
       const presenceData: PresenceData = {
-        state: '待機中',
         startTimestamp: browsingTimestamp,
         largeImageKey,
         type: ActivityType.Playing,
+      }
+
+      switch(true) {
+        case pathname.includes('/timeline'):
+          presenceData.state = "タイムライン"
+        break;
+
+        case pathname.includes('/user'):
+          presenceData.state = "ユーザーページ"
+        break;
+
+        default:
+          presenceData.state = "待機中"
+        break;
       }
 
       if (showButtons) {
