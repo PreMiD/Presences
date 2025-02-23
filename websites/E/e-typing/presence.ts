@@ -53,7 +53,6 @@ function getTypingContentWindowInfo() {
   const appElement = typingContent?.contentDocument?.querySelector<HTMLDivElement>('#start_view > .title') ?? document.getElementById('app')
 
   if (typingContent || appElement) {
-    let result = { windowTitle: '', wordTitle: '' }
     const windowTitleElement = document.querySelector<HTMLParagraphElement>('.pp_description') ?? window.parent.document.querySelector<HTMLParagraphElement>('.pp_description')
     const windowTitle = windowTitleElement?.textContent ?? ''
 
@@ -64,15 +63,14 @@ function getTypingContentWindowInfo() {
     if (!sessionStorageWordTitle) {
       console.log(sessionStorageWordTitle)
       sessionStorage.setItem('presence:wordTitle', wordTitle)
-      result = { windowTitle, wordTitle: `お題: ${wordTitle}` }
+      return { windowTitle, wordTitle: `お題: ${wordTitle}` }
     }
     else {
       const replacedWindowTitle = location.search.includes('trysc.trysc.trysc') ? '腕試しレベルチェック' : windowTitle.replace(sessionStorageWordTitle, '')
 
-      result = { windowTitle: replacedWindowTitle, wordTitle: `お題: ${sessionStorageWordTitle}` }
+      return { windowTitle: replacedWindowTitle, wordTitle: `お題: ${sessionStorageWordTitle}` }
     }
 
-    return result
   }
 
   sessionStorage.setItem('presence:wordTitle', '')
