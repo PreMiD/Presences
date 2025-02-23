@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "author": {
+    "name": "Toshi",
+    "id": "548698164874575875"
+  },
+  "service": "e-typing",
+  "description": {
+    "en": "e-typing"
+  },
+  "url": "www.e-typing.ne.jp",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/gvzttMh.png",
+  "thumbnail": "https://i.imgur.com/ynvp2J1.png",
+  "color": "#fb9d2c",
+  "category": "games",
+  "tags": ["game", "typing"],
+  "iframe": true,
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    }
+  ]
+}
