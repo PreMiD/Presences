@@ -44,7 +44,7 @@ function getTypePageInfo() {
 
 const largeImageKey = 'https://i.imgur.com/nnZqkNo.png'
 const browsingTimestamp = Math.floor(Date.now() / 1000)
-const BASE_URL = "https://ytyping.net"
+const BASE_URL = 'https://ytyping.net'
 
 async function generatePresenceData() {
   const { pathname, href } = document.location
@@ -91,7 +91,7 @@ async function generatePresenceData() {
       if (showButtons) {
         presenceData.buttons = [{
           url: href,
-          label: '譜面ページに移動',
+          label: '譜面ページを開く',
         }]
       }
 
@@ -168,15 +168,15 @@ async function generatePresenceData() {
 
       switch(true) {
         case pathname.includes('/timeline'):
-          presenceData.state = "タイムライン"
+          presenceData.state = 'タイムライン'
         break;
 
         case pathname.includes('/user'):
-          presenceData.state = "ユーザーページ"
+          presenceData.state = 'ユーザーページ'
         break;
 
         default:
-          presenceData.state = "待機中"
+          presenceData.state = '待機中'
         break;
       }
 
