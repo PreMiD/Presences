@@ -44,6 +44,7 @@ function getTypePageInfo() {
 
 const largeImageKey = 'https://i.imgur.com/nnZqkNo.png'
 const browsingTimestamp = Math.floor(Date.now() / 1000)
+const BASE_URL = "https://ytyping.net"
 
 async function generatePresenceData() {
   const { pathname, href } = document.location
@@ -148,6 +149,13 @@ async function generatePresenceData() {
         presenceData.details = iframeElement?.title ?? ''
       }
 
+      if (showButtons) {
+        presenceData.buttons = [{
+          url: BASE_URL,
+          label: 'YTypingを開く',
+        }]
+      }
+
       return presenceData
     }
 
@@ -157,6 +165,13 @@ async function generatePresenceData() {
         largeImageKey,
         type: ActivityType.Playing,
         startTimestamp: browsingTimestamp,
+      }
+
+      if (showButtons) {
+        presenceData.buttons = [{
+          url: BASE_URL,
+          label: 'YTypingを開く',
+        }]
       }
 
       return presenceData
@@ -169,6 +184,13 @@ async function generatePresenceData() {
         startTimestamp: browsingTimestamp,
       }
 
+      if (showButtons) {
+        presenceData.buttons = [{
+          url: BASE_URL,
+          label: 'YTypingを開く',
+        }]
+      }
+
       return presenceData
     }
 
@@ -178,6 +200,13 @@ async function generatePresenceData() {
         startTimestamp: browsingTimestamp,
         largeImageKey,
         type: ActivityType.Playing,
+      }
+
+      if (showButtons) {
+        presenceData.buttons = [{
+          url: BASE_URL,
+          label: 'YTypingを開く',
+        }]
       }
 
       return presenceData
