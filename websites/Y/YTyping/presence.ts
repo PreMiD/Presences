@@ -166,8 +166,7 @@ async function generatePresenceData() {
         type: ActivityType.Playing,
       }
 
-      switch(true) {
-
+      switch (true) {
         case pathname.includes('/timeline'):
           presenceData.state = 'タイムライン'
         break
