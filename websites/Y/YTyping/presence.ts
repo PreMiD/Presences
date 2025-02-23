@@ -169,15 +169,15 @@ async function generatePresenceData() {
       switch (true) {
         case pathname.includes('/timeline'):
           presenceData.state = 'タイムライン'
-        break
+          break
 
         case pathname.includes('/user'):
           presenceData.state = 'ユーザーページ'
-        break
+          break
 
         default:
           presenceData.state = '待機中'
-        break
+          break
       }
 
       if (showButtons) {
