@@ -29,7 +29,7 @@ function getMode() {
   else if (search.includes('kana.1')) {
     return 'kana'
   }
-  else if (search.includes('kana.1')) {
+  else if (search.includes('.0')) {
     return 'roma'
   }
 
