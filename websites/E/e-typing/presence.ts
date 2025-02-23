@@ -4,9 +4,9 @@ const presence = new Presence({
   clientId: '1343107487477399592',
 })
 
-const romaLargeImageKey = 'https://i.imgur.com/gvzttMh.png'
-const englishLargeImageKey = 'https://i.imgur.com/gUcYoFW.png'
-const kanaLargeImageKey = 'https://i.imgur.com/Ulg95rP.png'
+const romaLargeImageKey = 'https://i.imgur.com/FbaFi9M.png'
+const englishLargeImageKey = 'https://i.imgur.com/55iKGjg.png'
+const kanaLargeImageKey = 'https://i.imgur.com/gJwNzqB.png'
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 presence.on('UpdateData', async () => {
