@@ -2,7 +2,7 @@
   "$schema": "https://schemas.premid.app/metadata/1.13",
   "apiVersion": 1,
   "author": {
-    "name": "SlowLife",
+    "name": "slowlife.",
     "id": "374905512661221377"
   },
   "service": "BetterAnime",
@@ -13,17 +13,16 @@
     "vi": "Xem các tập anime và phim mới nhất với chất lượng lên tới FullHD! Xem nhiều anime trực tuyến miễn phí trên BetterAnime!"
   },
   "url": "betteranime.net",
-  "version": "1.0.17",
+  "version": "2.0.0",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/B/BetterAnime/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/B/BetterAnime/assets/thumbnail.png",
   "color": "#ffffff",
   "category": "anime",
   "tags": [
-    "anime",
-    "betteranime"
+    "anime"
   ],
   "iframe": true,
-  "iFrameRegExp": ".*",
+  "iFrameRegExp": "betteranime[.]net[/]player",
   "settings": [
     {
       "id": "lang",
@@ -36,67 +35,15 @@
       "value": false
     },
     {
+      "id": "useActivtyName",
+      "title": "Show Title as Activity",
+      "icon": "fad fa-user-edit",
+      "value": true
+    },
+    {
       "id": "browse",
       "title": "Show Browsing Status",
       "icon": "fad fa-book-reader",
-      "value": true
-    },
-    {
-      "id": "anime",
-      "title": "Show Anime",
-      "icon": "fad fa-film",
-      "value": true
-    },
-    {
-      "id": "AnimeDetails",
-      "if": {
-        "privacy": false
-      },
-      "title": "Anime Details Row 1",
-      "icon": "fas fa-comment-alt-edit",
-      "value": "%title%",
-      "placeholder": "Use %title% or %episode%"
-    },
-    {
-      "id": "AnimeState",
-      "if": {
-        "privacy": false
-      },
-      "title": "Anime Details Row 2",
-      "icon": "fas fa-comment-alt-edit",
-      "value": "%episode%",
-      "placeholder": "Use %title% or %episode% or {0} to delete the row completely"
-    },
-    {
-      "id": "movie",
-      "title": "Show Movies",
-      "icon": "fad fa-camera-movie",
-      "value": true
-    },
-    {
-      "id": "MovieDetails",
-      "if": {
-        "privacy": false
-      },
-      "title": "Movie Details Row 1",
-      "icon": "fas fa-comment-alt-edit",
-      "value": "%title%",
-      "placeholder": "Use %title%"
-    },
-    {
-      "id": "MovieState",
-      "if": {
-        "privacy": false
-      },
-      "title": "Movie Details Row 2",
-      "icon": "fas fa-comment-alt-edit",
-      "value": "Movie",
-      "placeholder": "Use %title% or {0} to delete the row completely"
-    },
-    {
-      "id": "timestamp",
-      "title": "Show Timestamps",
-      "icon": "fad fa-stopwatch",
       "value": true
     },
     {

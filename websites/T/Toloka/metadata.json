@@ -16,14 +16,13 @@
     "uk": "Toloka.to — найбільший BitTorrent-трекер УКРнету, що спеціалізується на поширенні контенту виключно українською мовою."
   },
   "url": "toloka.to",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/Toloka/assets/thumbnail.png",
   "color": "#9FB820",
   "category": "other",
   "tags": [
     "torrent",
-    "toloka",
     "ua",
     "ukranian",
     "ukraine"

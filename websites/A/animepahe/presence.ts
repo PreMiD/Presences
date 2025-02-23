@@ -1,6 +1,8 @@
 // Note: Developer has been working on a new website design for ages,
 //       maybe at some point he'll finish it and this will need updating.
 
+import { Assets, getTimestamps } from 'premid'
+
 const presence = new Presence({
   clientId: '629355416714739732',
 })
@@ -28,7 +30,6 @@ async function getStrings() {
       viewOn: 'animepahe.view',
       timeSeason: 'animepahe.timeSeason',
     },
-    await presence.getSetting<string>('lang').catch(() => 'en'),
   )
 }
 
@@ -193,7 +194,6 @@ presence.on('UpdateData', async () => {
   }
 
   const viewing = strings.viewing.slice(0, -1)
-  let playback = false
 
   switch (path[0]) {
     // homepage / browsing new releases
@@ -355,22 +355,21 @@ presence.on('UpdateData', async () => {
           ?.src
           ?.replace('.th', '') ?? ''
 
-        presenceData.smallImageKey = `presence_playback_${
-          iframeResponse.paused ? 'paused' : 'playing'
-        }`
+        presenceData.smallImageKey = iframeResponse.paused
+          ? Assets.Pause
+          : Assets.Play
 
         presenceData.smallImageText = iframeResponse.paused
           ? strings.pause
           : strings.play
 
         if (!iframeResponse.paused) {
-          [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(
+          [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(
             Math.floor(iframeResponse.currentTime),
             Math.floor(iframeResponse.duration),
           )
         }
         else {
-          presenceData.startTimestamp = null
           presenceData.smallImageText += ` - ${getTimestamp(
             iframeResponse.currentTime,
           )}`
@@ -390,8 +389,6 @@ presence.on('UpdateData', async () => {
             },
           ]
         }
-
-        playback = true
       }
       break
     default: {
@@ -399,5 +396,6 @@ presence.on('UpdateData', async () => {
       presenceData.state = document.querySelectorAll('h1')[0]?.textContent
     }
   }
-  presence.setActivity(presenceData, playback)
+
+  presence.setActivity(presenceData)
 })

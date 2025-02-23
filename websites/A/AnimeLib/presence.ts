@@ -23,6 +23,25 @@ enum ActivityAssets {
   Pause = 'https://cdn.rcd.gg/PreMiD/resources/pause.png',
 }
 
+type RouteName =
+  | ''
+  | 'anime'
+  | 'characters'
+  | 'people'
+  | 'catalog'
+  | 'user'
+  | 'top-views'
+  | 'collections'
+  | 'reviews'
+  | 'team'
+  | 'franchise'
+  | 'publisher'
+  | 'media'
+  | 'news'
+  | 'faq'
+  | 'messages'
+  | 'downloads'
+
 interface IFrameVideo {
   duration: number
   currentTime: number
@@ -61,6 +80,7 @@ presence.on('UpdateData', async () => {
     presence.getSetting<boolean>('titleAsPresence'),
   ])
   const path = document.location.pathname
+  const route = <RouteName>`${path}/`.split('/')[2]
 
   let animeData: AnimeData,
     userData: UserData,
@@ -71,7 +91,7 @@ presence.on('UpdateData', async () => {
     teamData: TeamData,
     publisherData: PublisherData
 
-  switch (`${path}/`.split('/')[2]) {
+  switch (route) {
     case '':
       presenceData.details = 'Главная страница'
       presenceData.state = 'Так внимательно изучает...'
