@@ -15,7 +15,7 @@
   "color": "#fb9d2c",
   "category": "games",
   "tags": ["game", "typing"],
-  "iframe": true,
+  "iframe": false,
   "settings": [
     {
       "id": "privacy",
