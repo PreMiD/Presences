@@ -29,6 +29,9 @@ presence.on(
 )
 
 function getTypePageInfo() {
+  const videoId = document
+    ?.querySelector<HTMLMetaElement>('[name="article:youtube_id"]')
+    ?.content ?? ''
   const title = document
     ?.querySelector<HTMLMetaElement>('[name="article:title"]')
     ?.content ?? ''
@@ -39,7 +42,7 @@ function getTypePageInfo() {
     ?.querySelector<HTMLMetaElement>('[property="og:image"]')
     ?.content ?? ''
 
-  return { title, artist, image }
+  return { title, artist, image, videoId }
 }
 
 const largeImageKey = 'https://i.imgur.com/nnZqkNo.png'
@@ -91,7 +94,10 @@ async function generatePresenceData() {
       if (showButtons) {
         presenceData.buttons = [{
           url: href,
-          label: '譜面ページを開く',
+          label: 'YTypingを開く',
+        }, {
+          url: `https://youtu.be/${map.videoId}`,
+          label: 'YouTubeで聴く',
         }]
       }
 
@@ -153,6 +159,9 @@ async function generatePresenceData() {
         presenceData.buttons = [{
           url: BASE_URL,
           label: 'YTypingを開く',
+        }, {
+          url: `https://youtu.be/${videoId}`,
+          label: 'YouTubeで聴く',
         }]
       }
 
