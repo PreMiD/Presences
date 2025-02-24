@@ -17,16 +17,13 @@
     "nl": "Deno is een runtime voor JavaScript en TypeScript die gebaseerd is op de V8 JavaScript-engine en de programmeertaal Rust. Het is gemaakt door Ryan Dahl, de oorspronkelijke bedenker van Node.js, en is gericht op productiviteit."
   },
   "url": [
-    "deno.land",
-    "doc.deno.land",
     "deno.com",
-    "merch.deno.com",
-    "denostatus.com",
-    "deno.news"
+    "docs.deno.com",
+    "denostatus.com"
   ],
   "version": "1.1.11",
-  "logo": "https://cdn.rcd.gg/PreMiD/websites/D/Deno/assets/logo.png",
-  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Deno/assets/thumbnail.png",
+  "logo": "https://litomore.me/images/deno-512.png",
+  "thumbnail": "https://litomore.me/images/deno-cover.webp",
   "color": "#f9f9f9",
   "category": "other",
   "tags": [
