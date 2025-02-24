@@ -7,10 +7,14 @@
   },
   "service": "Anizium",
   "description": {
-    "en": "A Turkish premium anime watching website with resolution boost, spesific subtitle placement and other features."
+    "en": "A Turkish premium anime watching website with resolution boost, spesific subtitle placement and other features.",
+    "tr": "4k yüksek çözünürlük artırma, özel altyazı yerleştirme ve diğer özelliklere sahip, Türkçe premium anime izleme sitesi."
   },
-  "url": "anizium.com",
-  "version": "1.0.1",
+  "url": [
+    "anizium.com",
+    "www.anizium.com"
+  ],
+  "version": "1.0.0",
   "logo": "https://i.imgur.com/RqiIIX3.png",
   "thumbnail": "https://i.imgur.com/RrJKmCK.png",
   "color": "#b6eafd",
@@ -21,6 +25,5 @@
     "dizi",
     "video"
   ],
-  "iframe": true,
-  "iFrameRegExp": ".*"
+  "iframe": true
 }
