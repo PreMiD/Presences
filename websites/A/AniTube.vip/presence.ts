@@ -1,3 +1,5 @@
+import { getTimestampsFromMedia } from 'premid'
+
 const presence = new Presence({
   clientId: '853327058054545438',
 })
@@ -96,7 +98,7 @@ presence.on('UpdateData', async () => {
             },
           ]
           if (!videoElement.paused) {
-            [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestampsfromMedia(videoElement)
+            [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestampsFromMedia(videoElement)
           }
         }
         else if (pathname === '/contato.php') {
