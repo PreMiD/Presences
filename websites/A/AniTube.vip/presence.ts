@@ -5,7 +5,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/A/AniTube.in/assets/logo.png',
+    largeImageKey: 'https://i.imgur.com/BYjlGDF.png',
     startTimestamp: browsingTimestamp,
   }
   const search = document.querySelector<HTMLInputElement>(
