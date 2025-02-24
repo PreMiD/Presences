@@ -25,5 +25,6 @@
     "dizi",
     "video"
   ],
-  "iframe": true
+  "iframe": true,
+  "iFrameRegExp": "^.*$"
 }
