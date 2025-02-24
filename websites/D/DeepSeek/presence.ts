@@ -15,7 +15,7 @@ async function getStrings() {
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 enum Assets {
-  Logo = 'https://i.imgur.com/QfuHG4T.png',
+  Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/DeepSeek/assets/logo.png',
 }
 
 presence.on('UpdateData', async () => {
