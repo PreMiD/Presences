@@ -7,7 +7,7 @@ async function getStrings() {
   return presence.getStrings(
     {
       readingArticle: 'general.readingArticle',
-      viewing: 'general.viewing',
+      view: 'general.view',
       viewingList: 'general.viewList',
       viewingUser: 'general.viewUser',
       viewingHomepage: 'general.viewHome',
@@ -86,7 +86,7 @@ presence.on('UpdateData', async () => {
         presenceData.details = `${strings.viewingHomepage}`
       }
       else {
-        presenceData.details = `${strings.viewing} ${
+        presenceData.details = `${strings.view} ${
           homepageName[pathList[1]]
         }`
       }
@@ -118,7 +118,7 @@ presence.on('UpdateData', async () => {
       break
     }
     case 'setting': {
-      presenceData.details = `${strings.viewing} Account settings`
+      presenceData.details = `${strings.view} Account settings`
       break
     }
     case 'search': {

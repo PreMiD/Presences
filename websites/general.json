@@ -47,6 +47,10 @@
     "description": "Used as the title for the button in Discord.",
     "message": "Watch Episode"
   },
+  "general.buttonViewGame": {
+    "description": "Used as the title for the button in Discord.",
+    "message": "View Game"
+  },
   "general.buttonViewMovie": {
     "description": "Used as the title for the button in Discord.",
     "message": "View Movie"
@@ -78,6 +82,10 @@
   "general.buttonViewSong": {
     "description": "Used as the title for the button in Discord.",
     "message": "View Song"
+  },
+  "general.buttonViewWiki": {
+    "description": "Used as the title for the button in Discord.",
+    "message": "View Wiki"
   },
   "general.buttonWatchAnime": {
     "description": "Used as the title for the button in Discord.",
@@ -187,6 +195,10 @@
     "description": "",
     "message": "Reading"
   },
+  "general.readingAbout": {
+    "description": "",
+    "message": "Reading about:"
+  },
   "general.readingAChannel": {
     "description": "",
     "message": "Reading in a channel"
@@ -195,25 +207,21 @@
     "description": "",
     "message": "Reading a DM"
   },
-  "general.readingAPost": {
-    "description": "",
-    "message": "Reading a post"
-  },
-  "general.readingAThread": {
-    "description": "",
-    "message": "Reading a thread"
-  },
-  "general.readingAbout": {
-    "description": "",
-    "message": "Reading about:"
-  },
   "general.readingAnArticle": {
     "description": "",
     "message": "Reading an article"
   },
+  "general.readingAPost": {
+    "description": "",
+    "message": "Reading a post"
+  },
   "general.readingArticle": {
     "description": "",
     "message": "Reading article:"
+  },
+  "general.readingAThread": {
+    "description": "",
+    "message": "Reading a thread"
   },
   "general.readingChannel": {
     "description": "",
@@ -284,75 +292,95 @@
     "message": "Typing in DMs"
   },
   "general.uptimeHistory": {
-    "description": "A page name of statuspages",
+    "description": "A page name of statuspages.",
     "message": "Uptime history"
   },
-  "general.viewAAnime": {
+  "general.view": {
     "description": "",
-    "message": "Viewing a anime"
-  },
-  "general.viewAList": {
-    "description": "",
-    "message": "Viewing a list"
-  },
-  "general.viewAManga": {
-    "description": "",
-    "message": "Viewing a manga"
-  },
-  "general.viewAMember": {
-    "description": "",
-    "message": "Viewing a member"
-  },
-  "general.viewAMovie": {
-    "description": "",
-    "message": "Viewing a movie"
-  },
-  "general.viewAPage": {
-    "description": "",
-    "message": "Viewing a page"
-  },
-  "general.viewAPlaylist": {
-    "description": "",
-    "message": "Viewing a playlist"
-  },
-  "general.viewAProduct": {
-    "description": "",
-    "message": "Viewing a product"
-  },
-  "general.viewAProfile": {
-    "description": "",
-    "message": "Viewing a profile"
-  },
-  "general.viewASeries": {
-    "description": "",
-    "message": "Viewing a serie"
-  },
-  "general.viewAShow": {
-    "description": "",
-    "message": "Viewing a show"
-  },
-  "general.viewAThread": {
-    "description": "",
-    "message": "Viewing a thread"
+    "message": "Viewing:"
   },
   "general.viewAccount": {
     "description": "",
     "message": "Viewing their account"
   },
+  "general.viewAChannel": {
+    "description": "Viewing a not specfied channel.",
+    "message": "Viewing a channel"
+  },
+  "general.viewAGame": {
+    "description": "Viewing a not specfied game.",
+    "message": "Viewing a game"
+  },
+  "general.viewAGenre": {
+    "description": "Viewing a not specfied genre.",
+    "message": "Viewing a genre"
+  },
+  "general.viewAList": {
+    "description": "Viewing a not specfied list.",
+    "message": "Viewing a list"
+  },
+  "general.viewAManga": {
+    "description": "Viewing a not specfied manga.",
+    "message": "Viewing a manga"
+  },
+  "general.viewAMember": {
+    "description": "Viewing a not specfied member.",
+    "message": "Viewing a member"
+  },
+  "general.viewAMovie": {
+    "description": "Viewing a non specified movie.",
+    "message": "Viewing a movie"
+  },
+  "general.viewAnAnime": {
+    "description": "Viewing a not specfied anime.",
+    "message": "Viewing an anime"
+  },
+  "general.viewAnime": {
+    "description": "Viewing a not specfied anime.",
+    "message": "Viewing anime:"
+  },
   "general.viewAnIncident": {
-    "description": "A page name of statuspages",
+    "description": "Viewing a not specfied incident.",
     "message": "Viewing an incident"
   },
   "general.viewAnUser": {
-    "description": "",
+    "description": "Viewing a not specfied user.",
     "message": "Viewing an user"
   },
-  "general.viewAnime": {
-    "description": "",
-    "message": "Viewing anime:"
+  "general.viewAPage": {
+    "description": "Viewing a not specfied page.",
+    "message": "Viewing a page"
+  },
+  "general.viewAPlaylist": {
+    "description": "Viewing a not specfied playlist.",
+    "message": "Viewing a playlist"
+  },
+  "general.viewAProduct": {
+    "description": "Viewing a not specfied product.",
+    "message": "Viewing a product"
+  },
+  "general.viewAProfile": {
+    "description": "Viewing a not specfied profile.",
+    "message": "Viewing a profile"
+  },
+  "general.viewASeries": {
+    "description": "Viewing a not specfied serie.",
+    "message": "Viewing a serie"
+  },
+  "general.viewAShow": {
+    "description": "Viewing a not specfied show.",
+    "message": "Viewing a show"
+  },
+  "general.viewAThread": {
+    "description": "Viewing a not specfied thread.",
+    "message": "Viewing a thread"
+  },
+  "general.viewAWishlist": {
+    "description": "Viewing a not specfied wishlist.",
+    "message": "Viewing a wishlist"
   },
   "general.viewCategory": {
-    "description": "",
+    "description": "Viewing a category.",
     "message": "Viewing category:"
   },
   "general.viewChannel": {
@@ -362,6 +390,10 @@
   "general.viewEpisode": {
     "description": "",
     "message": "Viewing episode:"
+  },
+  "general.viewGame": {
+    "description": "Displayed when viewing a specific game.",
+    "message": "Viewing game:"
   },
   "general.viewGenre": {
     "description": "",
@@ -399,6 +431,10 @@
     "description": "",
     "message": "Viewing playlist:"
   },
+  "general.viewPlaylists": {
+    "description": "Displayed when viewing playlists.",
+    "message": "Viewing Playlists"
+  },
   "general.viewProduct": {
     "description": "",
     "message": "Viewing product:"
@@ -423,15 +459,7 @@
     "description": "",
     "message": "Viewing user:"
   },
-  "general.viewing": {
-    "description": "",
-    "message": "Viewing:"
-  },
-  "general.viewingAWishlist": {
-    "description": "",
-    "message": "Viewing a wishlist"
-  },
-  "general.viewingWishlist": {
+  "general.viewWishlist": {
     "description": "",
     "message": "Viewing wishlist of:"
   },
