@@ -16,6 +16,7 @@
   "category": "games",
   "tags": ["game", "music", "typing"],
   "iframe": true,
+  "iFrameRegExp": "www[.]youtube[.]com[/]",
   "settings": [
     {
       "id": "privacy",
