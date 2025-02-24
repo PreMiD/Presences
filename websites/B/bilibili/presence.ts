@@ -1,4 +1,4 @@
-import { Assets } from 'premid'
+import { Assets, getTimestamps, getTimestampsFromMedia, timestampFromFormat } from 'premid'
 
 const presence = new Presence({ clientId: '639591760791732224' })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
@@ -26,22 +26,22 @@ presence.on('UpdateData', async () => {
   }
   const privacy = await presence.getSetting<boolean>('privacy')
 
-  async function getTimestamps() {
+  async function internalGetTimestamps() {
     let video = document.querySelector<HTMLVideoElement>('bpx-player-container')
     if (!video) {
       video = document.querySelector<HTMLVideoElement>('video')!
       videoPaused = video.paused
-      timestamps = presence.getTimestampsfromMedia(video)
+      timestamps = getTimestampsFromMedia(video)
     }
     else {
       videoPaused = document.querySelector('.bpx-state-paused') === null
-      currentTime = presence.timestampFromFormat(
+      currentTime = timestampFromFormat(
         document.querySelector('.bpx-player-ctrl-time-current')?.textContent ?? '',
       )
-      duration = presence.timestampFromFormat(
+      duration = timestampFromFormat(
         document.querySelector('.bpx-player-ctrl-time-duration')?.textContent ?? '',
       )
-      timestamps = presence.getTimestamps(currentTime, duration)
+      timestamps = getTimestamps(currentTime, duration)
     }
 
     [presenceData.startTimestamp, presenceData.endTimestamp] = timestamps
@@ -60,7 +60,7 @@ presence.on('UpdateData', async () => {
       return
     }
 
-    getTimestamps()
+    internalGetTimestamps()
 
     if (document.querySelector('div.membersinfo-normal')) {
       uploader = document.querySelector('.staff-name')
@@ -139,7 +139,7 @@ presence.on('UpdateData', async () => {
             setVideoStatus()
             break
           }
-          getTimestamps()
+          internalGetTimestamps()
           presenceData.details = document
             ?.querySelector('.list-title')
             ?.textContent
@@ -167,7 +167,7 @@ presence.on('UpdateData', async () => {
             presenceData.details = 'Watching an episode'
             break
           }
-          getTimestamps()
+          internalGetTimestamps()
           presenceData.details = document
             ?.querySelector('.mediainfo_mediaTitle__Zyiqh')
             ?.textContent
