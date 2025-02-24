@@ -1,14 +1,15 @@
-const ytplrIframe = new iFrame()
-ytplrIframe.on('UpdateData', async () => {
-  const video = document.querySelector<HTMLVideoElement>('.video-stream')
+const iframe = new iFrame()
 
-  if (video) {
-    const result = {
-      currentTime: video.currentTime,
-      duration: video.duration,
-      paused: video.paused,
-    }
+if (document.location.hostname === 'www.youtube.com') {
+  iframe.on('UpdateData', async () => {
+    const { currentTime, duration, paused } = document.querySelector<HTMLVideoElement>(
+      'video.video-stream.html5-main-video',
+    )!
 
-    ytplrIframe.send(result)
-  }
-})
+    iframe.send({
+      currentTime,
+      duration,
+      paused,
+    })
+  })
+}
