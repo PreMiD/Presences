@@ -6,7 +6,7 @@ const presence = new Presence({
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 enum ActivityAssets {
-  Logo = 'https://litomore.me/images/deno-512.png',
+  Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/Deno/assets/logo.png',
   NewsLogo = 'https://cdn.rcd.gg/PreMiD/websites/D/Deno/assets/0.png',
   MerchLogo = 'https://cdn.rcd.gg/PreMiD/websites/D/Deno/assets/1.png',
 }

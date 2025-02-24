@@ -21,9 +21,9 @@
     "docs.deno.com",
     "denostatus.com"
   ],
-  "version": "1.1.11",
-  "logo": "https://litomore.me/images/deno-512.png",
-  "thumbnail": "https://litomore.me/images/deno-cover.webp",
+  "version": "1.1.12",
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/D/Deno/assets/logo.png",
+  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/Deno/assets/thumbnail.webp",
   "color": "#f9f9f9",
   "category": "other",
   "tags": [
