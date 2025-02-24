@@ -19,6 +19,7 @@ presence.on('UpdateData', async () => {
   const { pathname, search } = document.location
   const path = pathname.split('/')
   const presenceData: PresenceData = {
+    largeImageKey: ActivityAssets.Logo,
     startTimestamp: browsingTimestamp,
   }
 
