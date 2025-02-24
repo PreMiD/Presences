@@ -37,6 +37,8 @@
     "video",
     "anime"
   ],
+  "iframe": true,
+  "iFrameRegExp": "live[.]bilibili[.]com",
   "settings": [
     {
       "id": "privacy",

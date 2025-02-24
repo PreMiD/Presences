@@ -21,13 +21,12 @@
     "mangaworld.ac",
     "www.mangaworld.ac"
   ],
-  "version": "3.0.25",
+  "version": "3.0.26",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MangaWorld/assets/thumbnail.png",
   "color": "#EE6C4D",
   "category": "other",
   "tags": [
-    "mangaworld",
     "manga",
     "reading"
   ]

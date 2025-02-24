@@ -18,13 +18,9 @@
     "es": "Ver series y películas de anime con subtítulos y doblaje en inglés. Descarga anime de alta calidad gratis.",
     "nl": "Bekijk anime series en films met Engelse sub & dub opties. Download gratis anime van hoge kwaliteit."
   },
-  "url": [
-    "gogotaku.info",
-    "gogoanime.pe",
-    "anitaku.so"
-  ],
+  "url": "anitaku.bz",
   "regExp": "(ww(w*|[0-9]*)\\.)?(anitaku|gogoanime|gogotaku)([0-9]+)?\\..*",
-  "version": "2.1.20",
+  "version": "2.1.21",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/G/Gogoanime/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/Gogoanime/assets/thumbnail.png",
   "color": "#FFC119",
