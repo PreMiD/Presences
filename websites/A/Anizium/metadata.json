@@ -26,5 +26,5 @@
     "video"
   ],
   "iframe": true,
-  "iFrameRegExp": "^.*$"
+  "iFrameRegExp": "^https://player\\.zenithstudiot\\.net/embed/.*$"
 }
