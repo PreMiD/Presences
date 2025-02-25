@@ -32,5 +32,5 @@
     "movie"
   ],
   "iframe": true,
-  "iFrameRegExp": "^https://(anm\\.cx/secure/best-video\\?|tau-video\\.xyz/embed/|doodstream\\.com/e/|uqload\\.io/embed-).*"
+  "iFrameRegExp": "https?:\\/\\/anm\\.cx\\/secure\\/best-video\\?.*|https?:\\/\\/tau-video\\.xyz\\/embed\\/.*|https?:\\/\\/ok\\.ru\\/videoembed\\/.*|https?:\\/\\/drive\\.google\\.com\\/file\\/d\\/.*|https?:\\/\\/uqload\\.io\\/.*|https?:\\/\\/doodstream\\.com\\/e\\/.*"
 }
