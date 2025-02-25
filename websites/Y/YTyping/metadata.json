@@ -19,12 +19,6 @@
   "iFrameRegExp": "www[.]youtube[.]com[/]",
   "settings": [
     {
-      "id": "privacy",
-      "title": "Privacy Mode",
-      "icon": "fad fa-user-secret",
-      "value": false
-    },
-    {
       "id": "showCurrentSong",
       "title": "Show Current Song",
       "icon": "fas fa-music",
