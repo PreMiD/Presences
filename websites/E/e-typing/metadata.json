@@ -15,13 +15,5 @@
   "thumbnail": "https://i.imgur.com/ynvp2J1.png",
   "color": "#fb9d2c",
   "category": "games",
-  "tags": ["game", "typing"],
-  "settings": [
-    {
-      "id": "privacy",
-      "title": "Privacy Mode",
-      "icon": "fad fa-user-secret",
-      "value": false
-    }
-  ]
+  "tags": ["game", "typing"]
 }

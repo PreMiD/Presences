@@ -10,11 +10,6 @@ const kanaLargeImageKey = 'https://i.imgur.com/gJwNzqB.png'
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 presence.on('UpdateData', async () => {
-  const privacy = await presence.getSetting<boolean>('privacy')
-  if (privacy) {
-    return presence.clearActivity()
-  }
-
   const presenceData = generatePresenceData()
 
   presence.setActivity(presenceData)
