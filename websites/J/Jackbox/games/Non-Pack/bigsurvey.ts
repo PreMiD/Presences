@@ -2,7 +2,7 @@ import type { GameCallbackParams } from '../../types.js'
 import { Assets } from 'premid'
 
 export const name = 'The Jackbox Survey Scramble'
-export const logo = 'https://cdn.rcd.gg/PreMiD/websites/J/Jackbox/assets/0.png'
+export const logo = 'https://i.imgur.com/Uq3wXdV.png'
 
 function getGoalString(goal: string) {
   switch (goal) {
