@@ -149,16 +149,6 @@ async function generatePresenceData() {
         presenceData.details = iframeElement?.title ?? ''
       }
 
-      if (showButtons) {
-        presenceData.buttons = [{
-          url: BASE_URL,
-          label: 'YTypingを開く',
-        }, {
-          url: `https://youtu.be/${videoId}`,
-          label: 'YouTubeで聴く',
-        }]
-      }
-
       return presenceData
     }
 
@@ -181,13 +171,6 @@ async function generatePresenceData() {
         default:
           presenceData.state = '待機中'
           break
-      }
-
-      if (showButtons) {
-        presenceData.buttons = [{
-          url: BASE_URL,
-          label: 'YTypingを開く',
-        }]
       }
 
       return presenceData
