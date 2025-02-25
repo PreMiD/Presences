@@ -6,8 +6,8 @@ const presence = new Presence({
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 enum Images {
-  Logo = 'https://i.imgur.com/RqiIIX3.png',
-  SettingsICO = 'https://i.imgur.com/KmeTotF.png',
+  Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/Anizium/assets/logo.png',
+  SettingsICO = 'https://cdn.rcd.gg/PreMiD/websites/A/Anizium/assets/0.png',
 }
 
 interface iframeData {
