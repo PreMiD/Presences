@@ -1,4 +1,5 @@
 import type { Game } from '../types.js'
+import * as bigsurvey from './Non-Pack/bigsurvey.js'
 import * as drawful2 from './Party Pack 1/drawful2.js'
 import * as drawful2international from './Party Pack 1/drawful2international.js'
 import * as drawful from './Party Pack 1/drawful.js'
@@ -52,7 +53,6 @@ import * as nopusopus from './Party Pack 10/nopus-opus.js'
 import * as riskytext from './Party Pack 10/risky-text.js'
 import * as timetrivia from './Party Pack 10/time-trivia.js'
 import * as usthem from './Party Pack 10/us-them.js'
-import * as bigsurvey from "./Non-Pack/bigsurvey";
 import * as unknown from './unknown.js'
 
 export default {
@@ -110,5 +110,5 @@ export default {
   'risky-text': riskytext,
   'time-trivia': timetrivia,
   'us-them': usthem,
-	bigsurvey,
+  bigsurvey,
 } as Record<string, Game>
