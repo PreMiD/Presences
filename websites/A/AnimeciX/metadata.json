@@ -32,5 +32,5 @@
     "movie"
   ],
   "iframe": true,
-  "iFrameRegExp": "^.*$"
+  "iFrameRegExp": "^https://(anm\\.cx/secure/best-video\\?|tau-video\\.xyz/embed/|doodstream\\.com/e/|uqload\\.io/embed-).*"
 }
