@@ -166,8 +166,8 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname.includes('/items/new')) {
     presenceData.details = 'Selling an item'
-    const articleTitle = (document.getElementById('title') as HTMLInputElement)?.value
-    const articlePrice = (document.getElementById('price') as HTMLInputElement)?.value
+    const articleTitle = document.querySelector<HTMLInputElement>('#title')?.value
+    const articlePrice = document.querySelector<HTMLInputElement>('#price')?.value
     if (articlePrice && articleTitle) {
       presenceData.state = `${articleTitle} (${articlePrice})`
     }
@@ -180,8 +180,8 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname.includes('/items') && document.location.pathname.includes('/edit')) {
     presenceData.details = 'Editing an item'
-    const itemTitle = (document.getElementById('title') as HTMLInputElement)?.value
-    const itemPrice = (document.getElementById('price') as HTMLInputElement)?.value
+    const itemTitle = document.querySelector<HTMLInputElement>('#title')?.value
+    const itemPrice = document.querySelector<HTMLInputElement>('#price')?.value
     if (itemPrice && itemTitle) {
       presenceData.state = `${itemTitle} (${itemPrice})`
     }
