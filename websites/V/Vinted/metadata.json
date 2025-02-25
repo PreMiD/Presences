@@ -24,11 +24,5 @@
     "ads",
     "marketplace",
     "shopping"
-  ],
-  "settings": [
-    {
-      "id": "lang",
-      "multiLanguage": true
-    }
   ]
 }
