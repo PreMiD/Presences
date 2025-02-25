@@ -24,7 +24,6 @@ if (document.location.hostname === 'jackbox.tv') {
     const playerStateLogs = await presence.getLogs(
       /recv <- .*?("key": "(bc:customer|player|info):[a-z0-9-]+",|"opcode":\s*"client\/welcome")/s,
     )
-    console.warn(playerStateLogs)
     if (playerStateLogs.length > 0) {
       let updatedMainState = false
       let updatedInfoState = false
