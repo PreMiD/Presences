@@ -10,10 +10,13 @@
     "ja": "タイピングが少しうまくなると可能性が広がる。"
   },
   "url": "www.e-typing.ne.jp",
-  "version": "1.0.1",
-  "logo": "https://i.imgur.com/FbaFi9M.png",
-  "thumbnail": "https://i.imgur.com/ynvp2J1.png",
+  "version": "1.0.2",
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/E/e-typing/assets/logo.png",
+  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/E/e-typing/assets/thumbnail.png",
   "color": "#fb9d2c",
   "category": "games",
-  "tags": ["game", "typing"]
+  "tags": [
+    "game",
+    "typing"
+  ]
 }
