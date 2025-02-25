@@ -5,17 +5,6 @@ interface ButtonData {
   url: string
 }
 
-interface PresenceData {
-  type?: ActivityType
-  details?: string
-  state?: string
-  startTimestamp?: number
-  endTimestamp?: number
-  smallImageKey?: string
-  smallImageText?: string
-  buttons?: [ButtonData] | [ButtonData, ButtonData]
-}
-
 // Initialize presence client
 const PRESENCE = new Presence({ clientId: '1343650415555776563' })
 const STRINGS = PRESENCE.getStrings({ play: 'general.playing', pause: 'general.paused' })
@@ -81,7 +70,7 @@ async function buildLessonPresence(): Promise<PresenceData> {
   const courseLink = document.querySelector('a.text-base.font-medium.text-gray-900')
   const courseName = courseLink?.textContent?.trim() || 'Unknown'
   const courseUrl = courseLink?.getAttribute('href') || ''
-  const fullCourseUrl = courseUrl ? new URL(courseUrl, window.location.origin).href : ''
+  const fullCourseUrl = courseUrl ? new URL(courseUrl, document.location.origin).href : ''
 
   // Media state detection
   const media = document.querySelector('media-controller')
@@ -118,7 +107,7 @@ async function buildLessonPresence(): Promise<PresenceData> {
   // Only add course button if we have a valid URL
   if (fullCourseUrl) {
     const courseButton: ButtonData = { label: 'View Course', url: fullCourseUrl }
-    presence.buttons = presence.buttons ? [...presence.buttons, courseButton] as [ButtonData, ButtonData] : [courseButton]
+    presence.buttons = presence.buttons ? [presence.buttons[0], courseButton] : [courseButton]
   }
 
   if (video) {
@@ -150,7 +139,7 @@ PRESENCE.on('UpdateData', async () => {
   // Pattern matching for different pages
   switch (true) {
     case ROUTES.SEARCH.test(path): {
-      const params = new URLSearchParams(location.search)
+      const params = new URLSearchParams(document.location.search)
       let query = 'Something'
 
       if (params.has('q')) {
