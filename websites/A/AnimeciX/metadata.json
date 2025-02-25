@@ -20,7 +20,7 @@
     "animecix.net",
     "anm.cx"
   ],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeciX/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AnimeciX/assets/thumbnail.jpeg",
   "color": "#b6eafd",
@@ -30,5 +30,7 @@
     "dizi",
     "turkish",
     "movie"
-  ]
+  ],
+  "iframe": true,
+  "iFrameRegExp": "https?:\\/\\/anm\\.cx\\/secure\\/best-video\\?.*|https?:\\/\\/tau-video\\.xyz\\/embed\\/.*|https?:\\/\\/ok\\.ru\\/videoembed\\/.*|https?:\\/\\/drive\\.google\\.com\\/file\\/d\\/.*|https?:\\/\\/uqload\\.io\\/.*|https?:\\/\\/doodstream\\.com\\/e\\/.*"
 }
