@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.7",
+  "author": {
+    "name": "Toshi",
+    "id": "548698164874575875"
+  },
+  "service": "e-typing",
+  "description": {
+    "en": "Japanese typing practice service. Improving your typing skills even a little can expand your possibilities.",
+    "ja": "タイピングが少しうまくなると可能性が広がる。"
+  },
+  "url": "www.e-typing.ne.jp",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/FbaFi9M.png",
+  "thumbnail": "https://i.imgur.com/ynvp2J1.png",
+  "color": "#fb9d2c",
+  "category": "games",
+  "tags": ["game", "typing"]
+}
