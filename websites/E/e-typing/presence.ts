@@ -79,12 +79,6 @@ function generatePresenceData() {
     state: wordTitle,
     startTimestamp: browsingTimestamp,
     type: ActivityType.Playing,
-    buttons: [
-      {
-        url: 'https://www.e-typing.ne.jp',
-        label: 'e-typingを開く',
-      },
-    ],
   }
 
   if (mode === 'english') {
