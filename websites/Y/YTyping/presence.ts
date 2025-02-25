@@ -149,6 +149,13 @@ async function generatePresenceData() {
         presenceData.details = iframeElement?.title ?? ''
       }
 
+      if (showButtons) {
+        presenceData.buttons = [{
+          url: `https://youtu.be/${videoId}`,
+          label: 'YouTubeで聴く',
+        }]
+      }
+
       return presenceData
     }
 
