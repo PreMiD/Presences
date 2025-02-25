@@ -26,6 +26,12 @@ export interface GamePlayerState {
   placeholder?: string
   choiceType?: string
   classes?: string[]
+  instructions?: string
+  goal?: string
+  options?: string[]
+  textEntry?: {
+    prompt: string
+  }
   [x: string]: unknown
 }
 
