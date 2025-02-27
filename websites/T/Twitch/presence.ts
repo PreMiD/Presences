@@ -310,7 +310,8 @@ presence.on('UpdateData', async () => {
         }
 
         // Chat popout. Breaks the activity so we early return to prevent update.
-        if (path.includes("popout")) return;
+        if (path.includes('popout'))
+          return
 
         let user = getElement('.home-header-sticky .tw-title')
         if (user) {
