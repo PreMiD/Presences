@@ -3,7 +3,7 @@
     <h1>PreMiD Activities</h1>
 </div>
 
-This repository contains the source code of all Activities that are available in [PreMiD's Store](https://premid.app/store). Activities enhance your Discord presence by showing what you're doing on various websites and applications.
+This repository contains the source code of all Activities that are available in [PreMiD's Store](https://premid.app/store). Activities enhance your Discord presence by showing what you're doing on various websites.
 
 <div align="left">
     <a target="_blank" href="https://discord.premid.app/" title="Join our Discord!">
