@@ -1,4 +1,4 @@
-import { ActivityType, Assets } from 'premid'
+import { ActivityType, Assets, getTimestamps } from 'premid'
 
 const presence = new Presence({
   clientId: '658230518520741915',
@@ -15,7 +15,7 @@ enum LogoAssets {
 }
 
 const browsingTimestamp = Math.floor(Date.now() / 1000)
-function getStrings(lang: string) {
+function getStrings() {
   return presence.getStrings(
     {
       play: 'general.playing',
@@ -35,7 +35,6 @@ function getStrings(lang: string) {
       buttonListenAlong: 'general.buttonListenAlong',
       buttonReadArticle: 'general.buttonReadArticle',
     },
-    lang,
   )
 }
 const serviceName = (() => {
@@ -57,7 +56,6 @@ const serviceName = (() => {
   }
 })()
 
-let oldLang: string | null = null
 let strings: Awaited<ReturnType<typeof getStrings>>
 let VideoMedia: MediaData = {
   duration: 0,
@@ -81,6 +79,10 @@ presence.on('iFrameData', (data: IFrameData) => {
 })
 
 presence.on('UpdateData', async () => {
+  if (!strings) {
+    strings = await getStrings()
+  }
+
   let presenceData: PresenceData = {
     name: `BBC ${serviceName}`,
     largeImageKey: LogoAssets[`Bbc${serviceName}`],
@@ -89,8 +91,7 @@ presence.on('UpdateData', async () => {
   } as PresenceData
 
   const path = document.location.pathname
-  const [newLang, buttons, showCover, usePresenceName] = await Promise.all([
-    presence.getSetting<string>('lang').catch(() => 'en'),
+  const [buttons, showCover, usePresenceName] = await Promise.all([
     presence.getSetting<boolean>('buttons'),
     presence.getSetting<boolean>('cover'),
     presence.getSetting<boolean>('usePresenceName'),
@@ -106,7 +107,7 @@ presence.on('UpdateData', async () => {
   }
   const handleVideo = () => {
     presenceData.type = ActivityType.Watching;
-    [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(VideoMedia.currentTime, VideoMedia.duration)
+    [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(VideoMedia.currentTime, VideoMedia.duration)
 
     presenceData.smallImageKey = VideoMedia.paused
       ? Assets.Pause
@@ -119,11 +120,6 @@ presence.on('UpdateData', async () => {
       delete presenceData.startTimestamp
       delete presenceData.endTimestamp
     }
-  }
-
-  if (oldLang !== newLang || !strings) {
-    oldLang = newLang
-    strings = await getStrings(oldLang)
   }
 
   if (path.includes('/iplayer')) {
@@ -178,13 +174,11 @@ presence.on('UpdateData', async () => {
 
           if (/Series \d{1,2}: (?:Episode )?\d{1,2}.?/i.test(subtitle)) {
             if (usePresenceName) {
-              subtitle = `Season ${episodeNumber[0]}, Episode ${
-                episodeNumber[1] || 1
+              subtitle = `Season ${episodeNumber[0]}, Episode ${episodeNumber[1] || 1
               }`
             }
             else {
-              subtitle = `S${episodeNumber[0]}${
-                episodeNumber[1] ? `:E${episodeNumber[1]}` : ''
+              subtitle = `S${episodeNumber[0]}${episodeNumber[1] ? `:E${episodeNumber[1]}` : ''
               }${episodeTitle ? ` ${episodeTitle}` : ''}`
             }
           }
@@ -201,7 +195,7 @@ presence.on('UpdateData', async () => {
 
         setCover(iPlayer.episode?.images?.promotional);
 
-        [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(
+        [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(
           iPlayerVideo.currentTime,
           iPlayerVideo.duration,
         )
@@ -272,7 +266,7 @@ presence.on('UpdateData', async () => {
           : strings.pause
         : strings.play;
 
-      [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(SoundMedia.currentTime, SoundMedia.duration)
+      [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(SoundMedia.currentTime, SoundMedia.duration)
 
       presenceData.buttons = [
         {
@@ -418,14 +412,12 @@ presence.on('UpdateData', async () => {
       else if (path.includes('/scorecard/')) {
         presenceData.details = 'Viewing scoredcard of:'
 
-        presenceData.state = `${
-          document.querySelector(
-            'span.sp-c-fixture__team.sp-c-fixture__team--time.sp-c-fixture__team--time-home.gel-long-primer > span > span',
-          )?.textContent
-        } & ${
-          document.querySelector(
-            'div.sp-c-fixture__wrapper > span.sp-c-fixture__team.sp-c-fixture__team--time.sp-c-fixture__team--time-away.gel-long-primer > span > span',
-          )?.textContent
+        presenceData.state = `${document.querySelector(
+          'span.sp-c-fixture__team.sp-c-fixture__team--time.sp-c-fixture__team--time-home.gel-long-primer > span > span',
+        )?.textContent
+        } & ${document.querySelector(
+          'div.sp-c-fixture__wrapper > span.sp-c-fixture__team.sp-c-fixture__team--time.sp-c-fixture__team--time-away.gel-long-primer > span > span',
+        )?.textContent
         }`
       }
       else if (path.includes('/sport/cricket/')) {

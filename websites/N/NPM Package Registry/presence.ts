@@ -15,6 +15,9 @@ presence.on('UpdateData', async () => {
   }
   else if (document.location.pathname.startsWith('/package/')) {
     presenceData.details = 'Viewing a package'
+    if (document.querySelector('img[alt*="Missing"]')) {
+      presenceData.details = 'Viewing a non-exist package'
+    }
     presenceData.state = 'Fetching...'
     if (document.location.pathname.split('/').length === 4) {
       presenceData.state = `${document.location.pathname.split('/')[2]}/${
