@@ -1,4 +1,4 @@
-import { ActivityType, Assets } from 'premid'
+import { ActivityType, Assets, getTimestamps } from 'premid'
 
 const presence = new Presence({
   clientId: '721748388143562852',
@@ -41,8 +41,8 @@ function setLoop(f: () => void, ms: number): number {
 function decodeReq(entity: Element) {
   // decoding HTML entities the stackoverflow way
   const txt = document.createElement('textarea')
-  txt.textContent = entity.textContent
-  return txt.textContent
+  txt.innerHTML = entity.textContent ?? ''
+  return txt.value
 }
 
 function getTag(collection: NodeListOf<Element>, tagName: string) {
@@ -158,15 +158,15 @@ presence.on('UpdateData', async () => {
               ? (await strings).play
               : (await strings).pause;
 
-      [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(Number(media.time), Number(media.length))
+      [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(Number(media.time), Number(media.length))
 
       if (media.state === 'playing') {
-        presence.setActivity(presenceData, true)
+        presence.setActivity(presenceData)
       }
       else {
         delete presenceData.startTimestamp
         delete presenceData.endTimestamp
-        presence.setActivity(presenceData, false)
+        presence.setActivity(presenceData)
       }
     }
     else if (media.state === 'stopped') {
@@ -177,7 +177,7 @@ presence.on('UpdateData', async () => {
       presenceData.startTimestamp = elapsed
       delete presenceData.endTimestamp
 
-      presence.setActivity(presenceData, false)
+      presence.setActivity(presenceData)
     }
   }
 })
@@ -286,7 +286,7 @@ const getStatus = setLoop(() => {
                   req.responseXML!.getElementsByName('showName')[0]!,
                 ) ?? undefined)
               : (media.showName = undefined)
-            req.responseXML!.getElementsByName('showName')[0]
+            req.responseXML!.getElementsByName('Type')[0]
               ? (media.Type = decodeReq(
                   req.responseXML!.getElementsByName('Type')[0]!,
                 ) ?? undefined)
