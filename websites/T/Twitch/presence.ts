@@ -309,6 +309,9 @@ presence.on('UpdateData', async () => {
           presenceData.state = strings.home
         }
 
+        // Chat popout. Breaks the activity so we early return to prevent update.
+        if (path.includes("popout")) return;
+
         let user = getElement('.home-header-sticky .tw-title')
         if (user) {
           const tab = getElement('a[aria-selected="true"] > div > div > p')
