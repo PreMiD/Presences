@@ -9,12 +9,16 @@
     "en": "A website where you can practice typing with YouTube music."
   },
   "url": "ytyping.net",
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/nnZqkNo.png",
-  "thumbnail": "https://i.imgur.com/ULpnvtt.png",
+  "version": "1.0.1",
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/Y/YTyping/assets/logo.png",
+  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/Y/YTyping/assets/thumbnail.png",
   "color": "#3b5a7d",
   "category": "games",
-  "tags": ["game", "music", "typing"],
+  "tags": [
+    "game",
+    "music",
+    "typing"
+  ],
   "iframe": true,
   "iFrameRegExp": "www[.]youtube[.]com[/]",
   "settings": [
