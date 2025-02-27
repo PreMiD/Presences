@@ -139,7 +139,10 @@ export async function updateAssets() {
 
     if (tsAndJsonFiles.length > 0) {
       core.info('Running ESLint on changed files')
-      execSync(`npx eslint --fix ${tsAndJsonFiles.map(file => `"${file}"`).join(' ')}`)
+      try {
+        execSync(`npx eslint --fix ${tsAndJsonFiles.map(file => `"${file}"`).join(' ')}`)
+      }
+      catch {}
     }
 
     //* Eslint may have changed the files back to the original state, so we need to check again
