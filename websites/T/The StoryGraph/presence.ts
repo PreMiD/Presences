@@ -41,7 +41,7 @@ async function getStrings() {
     viewProfile: 'thestorygraph.viewProfile',
     buttonViewProfile: 'thestoryGraph.buttonViewProfile',
     editProfile: 'thestorygraph.editProfile',
-    viewReadingJournal: 'thestorygraph.viewReadingJournal'
+    viewReadingJournal: 'thestorygraph.viewReadingJournal',
   })
 }
 
@@ -173,11 +173,11 @@ presence.on('UpdateData', async () => {
     }
     case 'stats': {
       presenceData.details = strings.viewStats
-      break;
+      break
     }
     case 'reading_challenges': {
       presenceData.details = strings.viewReadingChallenges
-      break;
+      break
     }
     case 'giveaways': {
       presenceData.details = strings.viewGiveaways
@@ -192,7 +192,7 @@ presence.on('UpdateData', async () => {
         ]
         presenceData.largeImageKey = document.querySelector<HTMLImageElement>('img.rounded-sm')?.src ?? ActivityAssets.Logo
       }
-      break;
+      break
     }
     case 'profile': {
       presenceData.details = strings.viewProfile
@@ -204,30 +204,31 @@ presence.on('UpdateData', async () => {
       ]
       presenceData.state = document.querySelector('div.w-max')?.textContent?.replace('Edit your profile', '')
       presenceData.largeImageKey = document.querySelector<HTMLImageElement>('img.object-cover')?.src ?? ActivityAssets.Logo
-      if (pathname.split('/')[2] === "edit") {
+      if (pathname.split('/')[2] === 'edit') {
         presenceData.details = strings.editProfile
       }
-      break;
+      break
     }
     case 'currently-reading':
     case 'books-read':
     case 'to-read':
     case 'five_star_reads': {
       presenceData.details = strings.viewPage
-      presenceData.state = document.querySelector<HTMLHeadingElement>('.page-heading')?.innerText?.trim() ?? null;
-      break;
+      // eslint-disable-next-line unicorn/prefer-dom-node-text-content
+      presenceData.state = document.querySelector<HTMLHeadingElement>('.page-heading')?.innerText?.trim() ?? null
+      break
     }
     case 'journal': {
       presenceData.details = strings.viewReadingJournal
-      break;
+      break
     }
-    case "notifications": {
+    case 'notifications': {
       presenceData.details = strings.viewNotifications
-      break;
+      break
     }
-    case "preferences": {
+    case 'preferences': {
       presenceData.details = strings.viewPreferences
-      break;
+      break
     }
     default: {
       if (pathname.split('/')[1]) {
