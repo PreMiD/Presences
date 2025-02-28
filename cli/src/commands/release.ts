@@ -32,8 +32,8 @@ export async function release() {
     return exit(MESSAGES.ciOnly)
   }
 
-  //* Only run for PreMiD/Presences repository
-  if (github.context.repo.owner !== 'PreMiD' || github.context.repo.repo !== 'Presences') {
+  //* Only run for PreMiD/Activities repository
+  if (github.context.repo.owner !== 'PreMiD' || github.context.repo.repo !== 'Activities') {
     return success(MESSAGES.wrongRepository)
   }
 
@@ -106,7 +106,7 @@ export async function release() {
       apiVersion: activity.versionized ? activity.metadata.apiVersion : undefined,
       metadata: activity.metadata,
       folderName,
-      githubUrl: `https://github.com/PreMiD/Presences/tree/main/websites/${folderLetter}/${folderNameEncoded}${apiVersion}`,
+      githubUrl: `https://github.com/PreMiD/Activities/tree/main/websites/${folderLetter}/${folderNameEncoded}${apiVersion}`,
       url: `https://api.premid.app/v6/activities${apiVersion}/${folderNameEncoded}`,
       presenceJs: await readFile(resolve(activity.folder, 'dist', 'presence.js'), 'utf8'),
       ...(existsSync(resolve(activity.folder, 'dist', 'iframe.js')) && {

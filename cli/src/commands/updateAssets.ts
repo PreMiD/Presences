@@ -21,8 +21,8 @@ export async function updateAssets() {
     return exit(MESSAGES.ciOnly)
   }
 
-  //* Only run for PreMiD/Presences repository
-  if (github.context.repo.owner !== 'PreMiD' || github.context.repo.repo !== 'Presences') {
+  //* Only run for PreMiD/Activities repository
+  if (github.context.repo.owner !== 'PreMiD' || github.context.repo.repo !== 'Activities') {
     return success(MESSAGES.wrongRepository)
   }
 
