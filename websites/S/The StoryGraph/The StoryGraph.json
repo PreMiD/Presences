@@ -1,0 +1,110 @@
+{
+  "thestorygraph.buttonViewBook": {
+    "description": "Used as the title for the button in Discord.",
+    "message": "View Book"
+  },
+  "thestorygraph.viewBook": {
+    "description": "",
+    "message": "Viewing book:"
+  },
+  "thestorygraph.viewSimilarBook": {
+    "description": "",
+    "message": "Viewing similar books of:"
+  },
+  "thestorygraph.viewEdition": {
+    "description": "",
+    "message": "Viewing editions of:"
+  },
+  "thestorygraph.viewContentWarnings": {
+    "description": "",
+    "message": "Viewing content warnings of:"
+  },
+  "thestorygraph.readBookClubQuestions": {
+    "description": "",
+    "message": "Reading Book Club Questions of:"
+  },
+  "thestorygraph.readReviews": {
+    "description": "",
+    "message": "Reading reviews of:"
+  },
+  "thestorygraph.readReview": {
+    "description": "",
+    "message": "Reading review of:"
+  },
+  "thestorygraph.buttonReadReview": {
+    "description": "Used as the title for the button in Discord.",
+    "message": "Read Review"
+  },
+  "thestorygraph.readalongs": {
+    "description": "",
+    "message": "Viewing readalongs"
+  },
+  "thestorygraph.buddyReads": {
+    "description": "",
+    "message": "Viewing Buddy Reads"
+  },
+  "thestorygraph.bookTickets": {
+    "description": "",
+    "message": "Reporting a Book"
+  },
+  "thestorygraph.viewStats": {
+    "description": "",
+    "message": "Viewing Stats"
+  },
+  "thestorygraph.viewReadingChallenges": {
+    "description": "",
+    "message": "Viewing Reading Challenges"
+  },
+  "thestorygraph.viewCommunity": {
+    "description": "",
+    "message": "Viewing Community"
+  },
+  "thestorygraph.viewBookClubs": {
+    "description": "",
+    "message": "Viewing Book Clubs"
+  },
+  "thestorygraph.viewSimilarUsers": {
+    "description": "",
+    "message": "Viewing Similar Users"
+  },
+  "thestorygraph.viewGiveaways": {
+    "description": "",
+    "message": "Viewing Giveaways"
+  },
+  "thestorygraph.viewGiveaway": {
+    "description": "",
+    "message": "Viewing Giveaway:"
+  },
+  "thestorygraph.buttonViewGiveaway": {
+    "description": "Used as the title for the button in Discord.",
+    "message": "View Giveaway"
+  },
+  "thestorygraph.viewEnteredGiveaways": {
+    "description": "",
+    "message": "Viewing Entered Giveaways"
+  },
+  "thestorygraph.viewNotifications": {
+    "description": "",
+    "message": "Viewing notifications"
+  },
+  "thestorygraph.viewPreferences": {
+    "description": "",
+    "messsage": "Viewing Preferences"
+  },
+  "thestorygraph.viewProfile": {
+    "description": "",
+    "messsage": "Viewing Profile of:"
+  },
+  "thestorygraph.buttonViewProfile": {
+    "description": "Used as the title for the button in Discord.",
+    "message": "View Profile"
+  },
+  "thestorygraph.editProfile": {
+    "description": "",
+    "message": "Editing Profile"
+  },
+  "thestorygraph.viewReadingJournal": {
+    "description": "",
+    "message": "Viewing Reading Journal"
+  }
+}
