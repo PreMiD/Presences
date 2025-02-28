@@ -58,3 +58,7 @@ cli.help()
 cli.version(cliPackageJson.version)
 
 cli.parse()
+
+if (!cli.matchedCommand && !cli.options.help && !cli.options.version) {
+  cli.outputHelp()
+}
