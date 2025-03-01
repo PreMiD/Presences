@@ -13,10 +13,10 @@
     "sk": "Internetová televízia MALL.TV ponúka vlastné seriály, relácie a kopec známých tvárí na jednom mieste. Sledujte nás. MALL.TV. Vždy je čo objavovať."
   },
   "url": [
-    "www.mall.tv",
-    "sk.mall.tv"
+    "www.fameplay.tv",
+    "fameplay.tv"
   ],
-  "version": "1.0.22",
+  "version": "1.0.23",
   "logo": "https://cdn.rcd.gg/PreMiD/websites/M/MALL.TV/assets/logo.png",
   "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/MALL.TV/assets/thumbnail.png",
   "color": "#C70716",

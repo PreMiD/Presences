@@ -49,27 +49,16 @@ async function getStrings() {
       watchLists: 'osu!ppy.watchLists',
       wikiMainPage: 'general.wikiMainPage',
     },
-    await presence.getSetting<string>('lang').catch(() => 'en'),
   )
 }
-
-let strings: Awaited<ReturnType<typeof getStrings>>
-let oldLang: string | null = null
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/O/osu%20ppy/assets/logo.png',
   }
-  const [buttons, newLang] = await Promise.all([
-    presence.getSetting<boolean>('buttons'),
-    presence.getSetting<string>('lang'),
-  ])
+  const buttons = presence.getSetting<boolean>('buttons')
   const { pathname, href } = document.location
-
-  if (oldLang !== newLang) {
-    oldLang = newLang
-    strings = await getStrings()
-  }
+  const strings = await getStrings()
 
   if (pathname === '/home') {
     const inputSelected = document.querySelector<HTMLInputElement>('[type="search"]')
@@ -273,7 +262,7 @@ presence.on('UpdateData', async () => {
       presenceData.state = selected.textContent
       presenceData.smallImageKey = Assets.Reading
     }
-    else if (pathname.includes('/Main_Page')) {
+    else if (pathname.includes('/Main_page')) {
       presenceData.details = strings.reading
       presenceData.state = strings.wikiMainPage
       presenceData.smallImageKey = Assets.Reading

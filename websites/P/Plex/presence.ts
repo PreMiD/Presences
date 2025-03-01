@@ -1,4 +1,4 @@
-import { ActivityType, Assets } from 'premid'
+import { ActivityType, Assets, getTimestamps, getTimestampsFromMedia, timestampFromFormat } from 'premid'
 
 const presence = new Presence({
   clientId: '645028677033132033',
@@ -144,7 +144,7 @@ enum ActivityAssets {
 const uploadedImages: Record<string, string> = {}
 async function uploadImage(urlToUpload: string): Promise<string> {
   if (isUploading)
-    return 'plex'
+    return ActivityAssets.Logo
 
   if (uploadedImages[urlToUpload])
     return uploadedImages[urlToUpload]
@@ -215,7 +215,7 @@ presence.on('UpdateData', async () => {
           .children
           .length > 1
       ) {
-        [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestampsfromMedia(media!)
+        [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestampsFromMedia(media!)
       }
       else {
         const formatTimestamps = document
@@ -223,23 +223,19 @@ presence.on('UpdateData', async () => {
           ?.textContent
           ?.split(' ');
 
-        [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(
-          presence.timestampFromFormat(formatTimestamps?.[0] ?? ''),
-          presence.timestampFromFormat(formatTimestamps?.[1] ?? ''),
+        [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(
+          timestampFromFormat(formatTimestamps?.[0] ?? ''),
+          timestampFromFormat(formatTimestamps?.[1] ?? ''),
         )
       }
 
       if (cover && navigator.mediaSession.metadata?.artwork?.[0]?.src) {
         const art = navigator.mediaSession.metadata.artwork?.[0]?.src
-        presenceData.largeImageKey = art?.match(
-          /(\d+)(?<!10)-(\d+)(192-168)?(?<!172-(1[6-9]|2\d|3[01]))-(\d+)\.(\d+)/g,
-        )?.[0] // Checks if it's a private ip, since u can't access that to use as a large/smallimagekey.
-          ? ActivityAssets.Logo // If it's a private ip, just use the logo.
-          : await getShortURL(
-            art
-              .replace(/width=\d{1,3}/, 'width=1024')
-              .replace(/height=\d{1,3}/, 'height=1024'),
-          )
+        presenceData.largeImageKey = await getShortURL(
+          art
+            .replace(/width=\d{1,3}/, 'width=1024')
+            .replace(/height=\d{1,3}/, 'height=1024'),
+        )
       }
 
       presenceData.smallImageKey = media?.paused ? Assets.Pause : Assets.Play
