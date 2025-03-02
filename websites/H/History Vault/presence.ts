@@ -20,7 +20,7 @@ async function getStrings() {
       search: 'general.searchFor',
       viewShow: 'general.viewShow',
     },
-    
+
   )
 }
 async function imgPath(path: string) {

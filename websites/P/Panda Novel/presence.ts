@@ -23,7 +23,7 @@ async function getStrings() {
       manga: 'general.manga',
       viewAccount: 'general.viewAccount',
     },
-    
+
   )
 }
 

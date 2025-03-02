@@ -18,7 +18,7 @@ async function getStrings() {
       watchMovie: 'general.buttonViewMovie',
       watchSeries: 'general.buttonViewSeries',
     },
-    
+
   )
 }
 

@@ -21,7 +21,7 @@ async function getStrings() {
       browsingPresentation: 'googledocs.browsingPresentation',
       vieiwngPresentation: 'googledocs.viewingPresentation',
     },
-    
+
   )
 }
 

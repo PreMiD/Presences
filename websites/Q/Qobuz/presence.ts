@@ -12,7 +12,7 @@ async function getStrings() {
       viewAlbum: 'general.buttonViewAlbum',
       viewPlaylist: 'general.buttonViewPlaylist',
     },
-    
+
   )
 }
 

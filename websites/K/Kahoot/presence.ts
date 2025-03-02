@@ -52,7 +52,7 @@ async function getStrings() {
       liveCourse: 'kahoot.liveCourse',
       liveCourseActivity: 'kahoot.liveCourseActivity',
     },
-    
+
   )
 }
 
@@ -80,7 +80,7 @@ presence.on('UpdateData', async () => {
   }
   const [buttons, newLang] = await Promise.all([
     await presence.getSetting<boolean>('buttons'),
-    
+
   ])
 
   oldLang ??= newLang

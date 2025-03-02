@@ -9,7 +9,7 @@ async function getStrings() {
       play: 'general.playing',
       pause: 'general.paused',
     },
-    
+
   )
 }
 const browsingTimestamp = Math.floor(Date.now() / 1000)

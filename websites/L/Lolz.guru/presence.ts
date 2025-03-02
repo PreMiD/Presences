@@ -20,7 +20,7 @@ async function getStrings() {
       viewPage: 'general.viewPage',
       viewHome: 'general.viewHome',
     },
-    
+
   )
 }
 

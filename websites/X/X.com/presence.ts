@@ -76,7 +76,7 @@ async function getStrings() {
       viewing: 'general.viewing',
       profile: 'general.viewProfile',
     },
-    
+
   )
 }
 

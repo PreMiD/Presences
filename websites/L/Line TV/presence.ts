@@ -13,7 +13,7 @@ async function getStrings() {
       searchSomething: 'general.searchSomething',
       buttonViewEpisode: 'general.buttonViewEpisode',
     },
-    
+
   )
 }
 const browsingTimestamp = Math.floor(Date.now() / 1000)

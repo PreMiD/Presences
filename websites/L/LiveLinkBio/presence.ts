@@ -12,7 +12,7 @@ async function getStrings() {
     {
       browse: 'general.browsing',
     },
-    
+
   )
 }
 

@@ -15,7 +15,7 @@ async function getStrings() {
       viewSeries: 'general.buttonViewSeries',
       watchEpisode: 'general.buttonViewEpisode',
     },
-    
+
   )
 }
 

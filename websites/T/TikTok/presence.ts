@@ -31,7 +31,7 @@ async function getStrings() {
       viewAPlaylist: 'general.viewAPlaylist',
       buttonWatchStream: 'general.buttonWatchStream',
     },
-    
+
   )
 }
 

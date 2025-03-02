@@ -11,7 +11,7 @@ async function getStrings() {
       search: 'general.searchSomething',
       listen: 'general.buttonListenAlong',
     },
-    
+
   )
 }
 function getElement(query: string): string | undefined {

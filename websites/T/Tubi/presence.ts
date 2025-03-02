@@ -16,7 +16,7 @@ async function getStrings() {
       viewCategory: 'general.viewCategory',
       search: 'general.searchFor',
     },
-    
+
   )
 }
 enum ActivityAssets {

@@ -18,7 +18,7 @@ async function getStrings() {
       classmembers: 'googleclassroom.classmembers',
       settings: 'googleclassroom.settings',
     },
-    
+
   )
 }
 

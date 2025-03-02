@@ -19,7 +19,7 @@ async function getStrings() {
       buttonViewPage: 'general.buttonViewPage',
       buttonViewProfile: 'general.buttonViewProfile',
     },
-    
+
   )
 }
 

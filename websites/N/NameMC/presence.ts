@@ -33,7 +33,7 @@ async function getStrings() {
       buttonViewProfile: 'general.buttonViewProfile',
       viewSkin: 'namemc.viewSkin',
     },
-    
+
   )
 }
 

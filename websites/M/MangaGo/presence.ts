@@ -21,7 +21,7 @@ async function getStrings() {
       reading: 'general.reading',
       viewGenre: 'general.viewGenre',
     },
-    
+
   )
 }
 

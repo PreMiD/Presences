@@ -10,7 +10,7 @@ async function getStrings() {
       pause: 'general.paused',
       browsing: 'general.browsing',
     },
-    
+
   )
 }
 let strings: Awaited<ReturnType<typeof getStrings>>

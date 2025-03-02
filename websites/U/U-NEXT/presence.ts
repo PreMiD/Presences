@@ -32,7 +32,7 @@ async function getStrings() {
       movieDisplay: 'u-next.movieDisplay',
       liveDisplay: 'u-next.liveDisplay',
     },
-    
+
   )
 }
 let oldLang: string | null = null

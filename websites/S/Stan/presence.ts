@@ -16,7 +16,7 @@ async function getStrings() {
       watchVideo: 'general.buttonWatchVideo',
       viewList: 'netflix.viewList',
     },
-    
+
   )
 }
 const data: {

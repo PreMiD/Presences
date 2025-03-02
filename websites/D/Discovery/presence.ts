@@ -16,7 +16,7 @@ async function getStrings() {
       viewHome: 'general.viewHome',
       viewShow: 'general.viewShow',
     },
-    
+
   )
 }
 async function capitalizeFirstLetter(string: string) {

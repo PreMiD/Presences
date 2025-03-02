@@ -25,7 +25,7 @@ async function getStrings() {
       buttonWatchVideo: 'general.buttonWatchVideo',
       buttonPlayTrivia: 'watchmojo.buttonPlayTrivia',
     },
-    
+
   )
 }
 function capitalize(s: string) {

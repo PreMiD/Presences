@@ -22,7 +22,7 @@ async function getStrings() {
       viewAlbum: 'genius.viewAlbum',
       buttonAlbum: 'general.buttonViewAlbum',
     },
-    
+
   )
 }
 

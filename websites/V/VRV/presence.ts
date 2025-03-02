@@ -22,7 +22,7 @@ async function getStrings() {
       searchFor: 'general.searchFor',
       search: 'general.search',
     },
-    
+
   )
 }
 

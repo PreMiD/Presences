@@ -42,7 +42,7 @@ async function getStrings() {
       searchFor: 'general.searchFor',
       searchSomething: 'general.searchSomething',
     },
-    
+
   )
 }
 let strings: Awaited<ReturnType<typeof getStrings>>

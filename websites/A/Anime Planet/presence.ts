@@ -22,7 +22,7 @@ async function getStrings() {
       viewManga: 'general.viewManga',
       buttonViewProfile: 'general.buttonViewProfile',
     },
-    
+
   )
 }
 const startsTime = Math.floor(Date.now() / 1000)

@@ -16,7 +16,7 @@ async function getStrings() {
       buttonViewPage: 'general.buttonViewPage',
       buttonViewProfile: 'general.buttonViewProfile',
     },
-    
+
   )
 }
 function imgPath(path: string, hostname: string) {

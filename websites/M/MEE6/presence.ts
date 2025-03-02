@@ -14,7 +14,7 @@ async function getStrings() {
       buttonViewPage: 'general.buttonViewPage',
       viewHome: 'general.viewHome',
     },
-    
+
   )
 }
 

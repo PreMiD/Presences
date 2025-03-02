@@ -12,7 +12,7 @@ async function getStrings() {
       startNewConversation: 'claude.startNewConversation',
       thinkingOfPrompt: 'claude.thinkingOfPrompt',
     },
-    
+
   )
 }
 const browsingTimestamp = Math.floor(Date.now() / 1000)

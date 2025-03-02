@@ -31,7 +31,7 @@ async function getStrings() {
       seriesDisplayShort: 'netflix.seriesDisplay.short',
       movieDisplay: 'netflix.movieDisplay',
     },
-    
+
   )
 }
 let oldLang: string | null = null

@@ -17,7 +17,7 @@ async function getStrings() {
       readDm: 'general.readingDM',
       typeDm: 'general.typeDM',
     },
-    
+
   )
 }
 let strings: Awaited<ReturnType<typeof getStrings>>

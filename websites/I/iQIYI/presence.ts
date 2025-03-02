@@ -21,7 +21,7 @@ async function getStrings() {
       viewAccount: 'general.viewAccount',
       viewPage: 'general.viewPage',
     },
-    
+
   )
 }
 const browsingTimestamp = Math.floor(Date.now() / 1000)

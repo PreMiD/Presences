@@ -19,7 +19,7 @@ async function getStrings() {
       viewHome: 'general.viewHome',
       buttonViewPage: 'general.buttonViewPage',
     },
-    
+
   )
 }
 let strings: Awaited<ReturnType<typeof getStrings>>

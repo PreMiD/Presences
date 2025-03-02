@@ -22,7 +22,7 @@ async function getStrings() {
       buttonWatchVideo: 'general.buttonWatchVideo',
       buttonViewEpisode: 'general.buttonViewEpisode',
     },
-    
+
   )
 }
 let strings: Awaited<ReturnType<typeof getStrings>>

@@ -10,7 +10,7 @@ async function getStrings() {
       live: 'general.live',
       viewPage: 'general.viewPage',
     },
-    
+
   )
 }
 

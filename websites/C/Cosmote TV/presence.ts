@@ -11,7 +11,7 @@ async function getStrings() {
       pause: 'general.paused',
       live: 'general.live',
     },
-    
+
   )
 }
 

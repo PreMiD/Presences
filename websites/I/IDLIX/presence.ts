@@ -18,7 +18,7 @@ async function getStrings() {
       viewHome: 'general.viewHome',
       viewShow: 'general.viewShow',
     },
-    
+
   )
 }
 enum ActivityAssets {
