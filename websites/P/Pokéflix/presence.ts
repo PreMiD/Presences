@@ -1,4 +1,4 @@
-import { Assets } from 'premid'
+import { Assets, getTimestamps } from 'premid'
 
 const presence = new Presence({
   clientId: '1055612773419196476',
@@ -20,7 +20,6 @@ async function getStrings() {
       searchSomething: 'general.searchSomething',
       watchVideoButton: 'general.buttonWatchVideo',
     },
-    await presence.getSetting<string>('lang').catch(() => 'en'),
   )
 }
 
@@ -63,7 +62,7 @@ presence.on('UpdateData', async () => {
     strings = await getStrings()
 
   switch (path) {
-    case '':
+    case 'index':
       presenceData.details = strings.viewHome
       break
 
@@ -109,7 +108,7 @@ presence.on('UpdateData', async () => {
           delete presenceData.endTimestamp
         }
         else {
-          [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(video.currentTime, video.duration)
+          [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(video.currentTime, video.duration)
         }
       }
       break
