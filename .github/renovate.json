@@ -3,5 +3,6 @@
   "extends": [
     "github>Recodive/Recodive:renovate-config"
   ],
-  "automerge": false
+  "automerge": false,
+  "reviewers": ["theusaf", "Timeraa"]
 }
