@@ -1,4 +1,4 @@
-import { ActivityType, Assets } from 'premid'
+import { ActivityType, Assets, getTimestamps } from 'premid'
 
 const presence = new Presence({
   clientId: '1336362292622655569',
@@ -9,6 +9,20 @@ enum Images {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeciX/assets/logo.png',
   SettingsICO = 'https://cdn.rcd.gg/PreMiD/websites/A/AnimeciX/assets/0.png',
 }
+
+interface iframeData {
+  duration: number
+  currentTime: number
+  paused: boolean
+}
+let video: iframeData | null = null
+
+presence.on('iFrameData', (data: unknown) => {
+  if (data) {
+    video = data as iframeData
+    updatePresence()
+  }
+})
 
 function observeDOMChanges(callback: () => void) {
   new MutationObserver(() => {
@@ -43,6 +57,18 @@ function updatePresence() {
     presenceData.details = document.querySelectorAll('.t-title > .ng-star-inserted')[1]
       ?.textContent || 'Loading'
     presenceData.state = document.querySelector('.episode-number')?.textContent || 'Loading'
+
+    if (video) {
+      presenceData.smallImageKey = video.paused
+        ? Assets.Pause
+        : Assets.Play
+      presenceData.smallImageText = video.paused ? 'Duraklatıldı' : 'Oynatılıyor';
+
+      [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(video.currentTime, video.duration)
+
+      if (video.paused)
+        delete presenceData.endTimestamp
+    }
 
     // EPİSODES PAGE
   }
