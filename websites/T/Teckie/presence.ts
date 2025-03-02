@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 
 enum ActivityAssets {
-  Logo = 'https://i.imgur.com/KKFlQ9m.png',
+  Logo = 'https://i.imgur.com/DGq6NNv.png',
 }
 
 presence.on('UpdateData', async () => {
