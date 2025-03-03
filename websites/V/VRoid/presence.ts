@@ -97,7 +97,7 @@ function fetchStrings() {
         viewCategory: 'general.viewCategory',
         viewHome: 'general.viewHome',
         viewList: 'general.viewList',
-        viewing: 'general.viewing',
+        view: 'general.view',
       },
     )
     .then((result) => {
