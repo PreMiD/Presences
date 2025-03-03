@@ -1,4 +1,4 @@
-import { Assets, ActivityType } from 'premid'
+import { ActivityType, Assets } from 'premid'
 
 const presence = new Presence({
   clientId: '1346148451645264018',
@@ -192,7 +192,7 @@ presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/T/TheSite/assets/logo.png',
     type: ActivityType.Watching,
-    name: "Inlx"
+    name: 'Inlx',
   }
 
   if (oldUrl !== path) {
@@ -207,31 +207,32 @@ presence.on('UpdateData', async () => {
     if (video) {
       const status = videoStatus(video)
       presenceData.smallImageKey = status
-      
+
       // Format the current time and duration
       const formatTime = (seconds: number): string => {
         const hrs = Math.floor(seconds / 3600)
         const mins = Math.floor((seconds % 3600) / 60)
         const secs = Math.floor(seconds % 60)
-        
+
         if (hrs > 0) {
           return `${hrs}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
         }
         return `${mins}:${secs.toString().padStart(2, '0')}`
       }
-      
-      const progressHolder = document.querySelector<HTMLElement>(".vjs-progress-holder")
+
+      const progressHolder = document.querySelector<HTMLElement>('.vjs-progress-holder')
       if (progressHolder) {
         const progressText = progressHolder.getAttribute('aria-valuetext')
         if (progressText) {
           presenceData.state = `${presenceData.state} (${progressText})`
-        } else {
+        }
+        else {
           const currentTime = formatTime(video.currentTime)
           const duration = formatTime(video.duration)
           presenceData.state = `${presenceData.state} (${currentTime}/${duration})`
         }
       }
-      
+
       if (status === Assets.Play) {
         const [startTimestamp, endTimestamp] = presence.getTimestamps(
           video.currentTime,
@@ -241,14 +242,14 @@ presence.on('UpdateData', async () => {
           startTimestamp,
           endTimestamp,
         ]
-        
-        const posterElement = document.querySelector('.movie-poster') || 
-                             document.querySelector('.vjs-poster');
+
+        const posterElement = document.querySelector('.movie-poster')
+          || document.querySelector('.vjs-poster')
         if (posterElement) {
-          const posterUrl = posterElement.getAttribute('src');
+          const posterUrl = posterElement.getAttribute('src')
           if (posterUrl) {
-            const fullPosterUrl = posterUrl.startsWith('//') ? `https:${posterUrl}` : posterUrl;
-            presenceData.largeImageKey = fullPosterUrl;
+            const fullPosterUrl = posterUrl.startsWith('//') ? `https:${posterUrl}` : posterUrl
+            presenceData.largeImageKey = fullPosterUrl
           }
         }
       }
@@ -271,11 +272,11 @@ presence.on('UpdateData', async () => {
     }
     else if (path.includes('/latest')) {
       presenceData.details = 'Browsing Latest'
-      presenceData.state =  'Finding something new...'
+      presenceData.state = 'Finding something new...'
     }
     else if (path.includes('/collections')) {
       const title = getElement('.page-videolist > h1')
-  
+
       presenceData.details = 'Browsing'
       presenceData.state = 'Collections'
       if (title !== 'Loading...') {
@@ -285,11 +286,12 @@ presence.on('UpdateData', async () => {
     }
     else {
       const detailsObj = setObject(path)
-      
+
       if (detailsObj) {
         presenceData.details = detailsObj.details
         presenceData.state = detailsObj.state
-      } else {
+      }
+      else {
         presenceData.details = 'Browsing'
         presenceData.state = 'Unknown Page'
       }
@@ -303,34 +305,34 @@ presence.on('UpdateData', async () => {
 
     // Movies handling
     if (path.includes('/movies')) {
-      presenceData.name = "Movies on Inlx"
+      presenceData.name = 'Movies on Inlx'
       const menu = document.querySelector<HTMLElement>('.mv-movie-info')
-      
-      const titleElement = document.querySelector('.vjs-movie-title.full .full-title .content .title') ||
-                          document.querySelector('.mv-movie-title > span')
-      
+
+      const titleElement = document.querySelector('.vjs-movie-title.full .full-title .content .title')
+        || document.querySelector('.mv-movie-title > span')
+
       const posterElement = document.querySelector('.movie-poster')
       let posterUrl = null
-      
+
       if (posterElement) {
         posterUrl = posterElement.getAttribute('src')
-        
+
         if (posterUrl) {
           const fullPosterUrl = posterUrl.startsWith('//') ? `https:${posterUrl}` : posterUrl
           presenceData.largeImageKey = fullPosterUrl
         }
       }
-      
-      const title = titleElement?.textContent?.trim() ?? "Browsing"
-      const yearMatch = title.match(/\((\d{4})\)$/);
-      let movieTitle = title;
-      let year = '';
-      
+
+      const title = titleElement?.textContent?.trim() ?? 'Browsing'
+      const yearMatch = title.match(/\((\d{4})\)$/)
+      let movieTitle = title
+      let year = ''
+
       if (yearMatch) {
-        movieTitle = title.replace(/\s*\(\d{4}\)$/, '').trim();
-        year = yearMatch[1] ?? "Unknown Year";
+        movieTitle = title.replace(/\s*\(\d{4}\)$/, '').trim()
+        year = yearMatch[1] ?? 'Unknown Year'
       }
-      
+
       if (menu) {
         if (menu.style.display === 'none') {
           await parseVideo()
@@ -341,27 +343,28 @@ presence.on('UpdateData', async () => {
           presenceData.details = `Viewing ${movieTitle}`
           presenceData.state = year
         }
-      } else {
+      }
+      else {
         await parseVideo()
         presenceData.details = movieTitle
         presenceData.state = year
       }
 
-      if (title == "Browsing") {
-        presenceData.details = "Browsing Movies"
-        presenceData.state = "Finding something worthy..."
+      if (title === 'Browsing') {
+        presenceData.details = 'Browsing Movies'
+        presenceData.state = 'Finding something worthy...'
       }
     }
-    
+
     // TV Shows handling
     else if (path.includes('/shows')) {
-      presenceData.name = "TV on Inlx"
+      presenceData.name = 'TV on Inlx'
       const menu = document.querySelector<HTMLElement>('.mv-movie-info')
 
-      const titleElement = document.querySelector('.vjs-movie-title .full-title .content .title') ||
-                          document.querySelector('.mv-movie-title > span > a')
-      const episodeElement = document.querySelector('.vjs-movie-title .full-title .content .seq em') ||
-                            document.querySelector('.mv-movie-title > span > span > strong')
+      const titleElement = document.querySelector('.vjs-movie-title .full-title .content .title')
+        || document.querySelector('.mv-movie-title > span > a')
+      const episodeElement = document.querySelector('.vjs-movie-title .full-title .content .seq em')
+        || document.querySelector('.mv-movie-title > span > span > strong')
       const episodeTitleElement = document.querySelector('.vjs-movie-title .full-title .content .episode-title')
 
       const posterElement = document.querySelector('.movie-poster')
@@ -395,33 +398,34 @@ presence.on('UpdateData', async () => {
           presenceData.details = `Viewing ${title}`
           presenceData.state = `S${season || '?'}:E${episode || '?'}${episodeTitle ? ` - ${episodeTitle}` : ''}`
         }
-      } else {
+      }
+      else {
         await parseVideo()
         presenceData.details = title
         presenceData.state = `S${season || '?'}:E${episode || '?'}${episodeTitle ? ` - ${episodeTitle}` : ''}`
       }
 
-      if (title == "Browsing") {
-        presenceData.details = "Browsing Shows"
-        presenceData.state = "Searching for my next binge..."
+      if (title === 'Browsing') {
+        presenceData.details = 'Browsing Shows'
+        presenceData.state = 'Searching for my next binge...'
       }
     }
-    
+
     /* Watch Later */
     if (wl && !wlMovie) {
-      presenceData.name = "TV on Inlx"
+      presenceData.name = 'TV on Inlx'
       const menu = document.querySelector<HTMLElement>('.mv-movie-info')
       const regex = getElement(
         '.full-title > .content > .seq > em',
       ).match(/S(?<season>\d{1,4})E(?<episode>\d{1,4})/)
       const title: string = getElement('.full-title > .content > .title')
-      
+
       if (title !== 'Loading...') {
         const { season } = regex?.groups ?? {}
         const { episode } = regex?.groups ?? {}
-        
-        const episodeTitle = getElement('.full-title > .content > .episode-title') || '';
-        
+
+        const episodeTitle = getElement('.full-title > .content > .episode-title') || ''
+
         if (menu) {
           if (menu.style.display === 'none') {
             await parseVideo()
@@ -433,9 +437,9 @@ presence.on('UpdateData', async () => {
             presenceData.state = `S${season || '?'}:E${episode || '?'}${episodeTitle ? ` - ${episodeTitle}` : ''}`
           }
         }
-        if (title == "Browsing") {
-          presenceData.details = "Browsing Shows"
-          presenceData.state = "Searching for my next binge..."
+        if (title === 'Browsing') {
+          presenceData.details = 'Browsing Shows'
+          presenceData.state = 'Searching for my next binge...'
         }
       }
       else {
