@@ -5,7 +5,6 @@ const presence = new Presence({
 })
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
-
 enum ActivityAssets {
   Logo = 'https://i.imgur.com/hhoRf5s.png',
   Loading = 'https://i.imgur.com/8sjGYb7.gif',
@@ -65,8 +64,8 @@ presence.on('UpdateData', async () => {
           },
           {
             label: 'View Creator',
-            url: document.querySelector<HTMLAnchorElement>(`a[href^='/@']`), 
-          }
+            url: document.querySelector<HTMLAnchorElement>(`a[href^='/@']`),
+          },
         ]
         break
       }
@@ -82,8 +81,8 @@ presence.on('UpdateData', async () => {
           },
           {
             label: 'View Creator',
-            url: document.querySelector<HTMLAnchorElement>(`a[href^='/@']`), 
-          }
+            url: document.querySelector<HTMLAnchorElement>(`a[href^='/@']`),
+          },
         ]
         break
       }
@@ -99,8 +98,8 @@ presence.on('UpdateData', async () => {
           },
           {
             label: 'View Creator',
-            url: document.querySelector<HTMLAnchorElement>(`#main-container a[href^='/@']`)?.href ?? href, 
-          }
+            url: document.querySelector<HTMLAnchorElement>(`#main-container a[href^='/@']`)?.href ?? href,
+          },
         ]
         break
       }
@@ -114,10 +113,11 @@ presence.on('UpdateData', async () => {
             {
               label: 'View Page',
               url: href,
-            }
+            },
           ]
         }
-    }}
+      }
+    }
   }
 
   if (navigator.mediaSession.metadata && song && !song.paused && song) {
