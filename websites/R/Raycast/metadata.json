@@ -9,10 +9,13 @@
   "description": {
     "en": "Your shortcut to everything."
   },
-  "url": ["www.raycast.com", "developers.raycast.com"],
-  "version": "1.0.0",
-  "logo": "https://litomore.me/images/raycast-512.png",
-  "thumbnail": "https://www.raycast.com/opengraph-image-pwu6ef.png",
+  "url": [
+    "www.raycast.com",
+    "developers.raycast.com"
+  ],
+  "version": "1.0.1",
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/R/Raycast/assets/logo.png",
+  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Raycast/assets/thumbnail.png",
   "color": "#FF6363",
   "category": "other",
   "tags": [
