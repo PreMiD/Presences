@@ -1,4 +1,4 @@
-import { ActivityType, Assets } from 'premid'
+import { ActivityType, Assets, getTimestamps } from 'premid'
 
 const presence = new Presence({
   clientId: '1346148451645264018',
@@ -234,14 +234,12 @@ presence.on('UpdateData', async () => {
       }
 
       if (status === Assets.Play) {
-        const [startTimestamp, endTimestamp] = presence.getTimestamps(
+        const [startTimestamp, endTimestamp] = getTimestamps(
           video.currentTime,
           video.duration,
-        );
-        [presenceData.startTimestamp, presenceData.endTimestamp] = [
-          startTimestamp,
-          endTimestamp,
-        ]
+        )
+        presenceData.startTimestamp = startTimestamp
+        presenceData.endTimestamp = endTimestamp
 
         const posterElement = document.querySelector('.movie-poster')
           || document.querySelector('.vjs-poster')
