@@ -49,9 +49,9 @@ presence.on("UpdateData", async () => {
   const [showUsername] = await Promise.all([
     presence.getSetting<boolean>('username')
   ])
-  let urlData = window.location.pathname.split('/').filter(part => part);
-  let urlParams = new URLSearchParams(window.location.search);
-  let pageTitle = document.title;
+  const urlData = window.location.pathname.split('/').filter(part => part);
+  const urlParams = new URLSearchParams(window.location.search);
+  const pageTitle = document.title;
 
   if (urlData.length === 0) {
     presenceData.details = "Page d'accueil";
@@ -67,11 +67,9 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Duels en attente";
         if (showUsername) presenceData.state = getUsername();
       } else if (urlData[1] === "termines") {
-        if (urlParams.has("u")) {
-          presenceData.details = `Bilan contre @${urlParams.get("u")}`;
-        } else {
-          presenceData.details = "Duels terminés";
-        }
+        presenceData.details = urlParams.has("u")
+          ? `Bilan contre @${urlParams.get("u")}`
+          : "Duels terminés";
         if (showUsername) presenceData.state = getUsername();
       } else if (urlData[1] === "nouveaux-messages") {
         presenceData.details = "Boîte de réception";
@@ -79,7 +77,7 @@ presence.on("UpdateData", async () => {
       } else {
         presenceData.details = "Dans un duel";
         if (document.querySelector("#userBtn2")) {
-          var duelTitle = document.querySelector('.duel_title')?.innerHTML.replace("Duel : ", '');
+          const duelTitle = document.querySelector('.duel_title')?.innerHTML?.replace("Duel : ", '');
           let qNum, qTotal;
           if (!document.querySelector('.resultContainer')) {
             qNum = document.querySelector('#currentQuestionIndex')?.innerHTML;
@@ -92,11 +90,11 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Duel terminé";
             qNum = 0;
             qTotal = 10;
-            let name_p1 = document.querySelector('#p1TopRow')?.innerHTML.trim();
-            let name_p2 = document.querySelector('#p2TopRow')?.innerHTML.trim();
-            let score_p1 = document.querySelector('#p1GR')?.innerHTML.trim();
-            let score_p2 = document.querySelector('#p2GR')?.innerHTML.trim();
-            let username = document.querySelector("#userBtn2")?.innerHTML.trim();
+            let name_p1 = document.querySelector('#p1TopRow')?.innerHTML?.trim();
+            let name_p2 = document.querySelector('#p2TopRow')?.innerHTML?.trim();
+            let score_p1 = document.querySelector('#p1GR')?.innerHTML?.trim();
+            let score_p2 = document.querySelector('#p2GR')?.innerHTML?.trim();
+            let username = document.querySelector("#userBtn2")?.innerHTML?.trim();
             if (name_p1 === username) {
               qNum = score_p1;
               presenceData.state = `${duelTitle} | Score : ${qNum}/${qTotal}`;
@@ -166,8 +164,8 @@ presence.on("UpdateData", async () => {
         if (document.querySelector("#userBtn2")) {
           if (!document.querySelector('.resultContainer')) {
             let qNum, qTotal;
-            var duelColor = document.querySelector('.question_icon')?.classList[1];
-            var duelTitle = duelColor ? themeColors[duelColor] : "";
+            const duelColor = document.querySelector('.question_icon')?.classList[1];
+            const duelTitle = duelColor ? themeColors[duelColor] : "";
             qNum = document.querySelector('#currentQuestionIndex')?.innerHTML;
             qTotal = 20;
             if (qNum && qTotal)
@@ -176,8 +174,8 @@ presence.on("UpdateData", async () => {
               presenceData.state = `${duelTitle}`;
           } else {
             presenceData.details = "Entraînement terminé";
-            var duelColor = document.querySelector('.question_icon')?.classList[1];
-            var duelTitle = duelColor ? themeColors[duelColor] : "";
+            const duelColor = document.querySelector('.question_icon')?.classList[1];
+            const duelTitle = duelColor ? themeColors[duelColor] : "";
             let scoreElem = document.querySelector('.resultContainer')?.querySelector('.res_main_msg');
             let score = scoreElem ? Array.from(scoreElem.childNodes).reduce((acc: string, node: Node) => acc + (node.nodeType === Node.TEXT_NODE ? node.textContent || '' : ''), '').replace(/\s+/g, '') : "";
             score = score.replace('Résultat', '').replace(':', '').replace(' ', '');
@@ -216,19 +214,20 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (urlData[0] === "masterQuiz") {
-    presenceData.details = "MasterQuiz";
+    presenceData.details = "Master Quiz";
     if (document.querySelector("#userBtn2")) {
+      if (showUsername) presenceData.state = getUsername();
       if (!document.querySelector('.resultContainer')) {
-        var themeColor = document.querySelector('.question_icon')?.classList[1];
-        var themeTitle = themeColor ? themeColors[themeColor] : "";
+        const themeColor = document.querySelector('.question_icon')?.classList[1];
+        const themeTitle = themeColor ? themeColors[themeColor] : "";
         let qNum = document.querySelector('#currentQuestionIndex')?.innerHTML;
         if (qNum) presenceData.state = `${themeTitle} | Q. ${qNum}`;
         else if (themeTitle)
           presenceData.state = `${themeTitle}`;
       } else {
-        presenceData.details = "MasterQuiz - Terminé";
-        var themeColor = document.querySelector('.question_icon')?.classList[1];
-        var themeTitle = themeColor ? themeColors[themeColor] : "";
+        presenceData.details = "Master Quiz - Terminé";
+        const themeColor = document.querySelector('.question_icon')?.classList[1];
+        const themeTitle = themeColor ? themeColors[themeColor] : "";
         let scoreElem = document.querySelector('.resultContainer .res_main_msg');
         let score = "";
         if (scoreElem instanceof HTMLElement) {
