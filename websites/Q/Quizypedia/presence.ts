@@ -41,38 +41,41 @@ function getUsername() {
   }
 }
 
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "https://i.imgur.com/hXqpJFa.png",
     startTimestamp: browsingTimestamp,
   };
+  const [showUsername] = await Promise.all([
+    presence.getSetting<boolean>('username')
+  ])
   let urlData = window.location.pathname.split('/').filter(part => part);
   let urlParams = new URLSearchParams(window.location.search);
   let pageTitle = document.title;
 
   if (urlData.length === 0) {
     presenceData.details = "Page d'accueil";
-    presenceData.state = getUsername();
+    if (showUsername) presenceData.state = getUsername();
   } else if (urlData[0] && singlePageTitles.hasOwnProperty(urlData[0])) {
     presenceData.details = singlePageTitles[urlData[0]];
   } else if (urlData[0] === "duels") {
     if (urlData.length > 1) {
       if (urlData[1] === "a-relever") {
         presenceData.details = "Duels à relever";
-        presenceData.state = getUsername();
+        if (showUsername) presenceData.state = getUsername();
       } else if (urlData[1] === "en-attente") {
         presenceData.details = "Duels en attente";
-        presenceData.state = getUsername();
+        if (showUsername) presenceData.state = getUsername();
       } else if (urlData[1] === "termines") {
         if (urlParams.has("u")) {
           presenceData.details = `Bilan contre @${urlParams.get("u")}`;
         } else {
           presenceData.details = "Duels terminés";
         }
-        presenceData.state = getUsername();
+        if (showUsername) presenceData.state = getUsername();
       } else if (urlData[1] === "nouveaux-messages") {
         presenceData.details = "Boîte de réception";
-        presenceData.state = getUsername();
+        if (showUsername) presenceData.state = getUsername();
       } else {
         presenceData.details = "Dans un duel";
         if (document.querySelector("#userBtn2")) {
@@ -126,7 +129,7 @@ presence.on("UpdateData", () => {
         if (!rankInfo[0] || !rankInfo[1]) {
           return presence.setActivity(presenceData);
         }
-        presenceData.state = `${getUsername()}  |  ${rankInfo[0]}e  |  ${rankInfo[1]} pts`;
+        if (showUsername) presenceData.state = `${getUsername()}  |  ${rankInfo[0]}e  |  ${rankInfo[1]} pts`;
       } else if (document.querySelector("#userBtn3")) {
         presenceData.state = "Non connecté";
       }
