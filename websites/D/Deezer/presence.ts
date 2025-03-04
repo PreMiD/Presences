@@ -1,4 +1,4 @@
-import { Assets } from 'premid'
+import { ActivityType, Assets } from 'premid'
 
 const presence = new Presence({
   clientId: '607651992567021580',
@@ -35,6 +35,7 @@ async function getStrings() {
 
 presence.on('UpdateData', async () => {
   let presenceData: PresenceData = {
+    type: ActivityType.Listening,
     largeImageKey: ActivityAssets.Logo,
   }
   let strings = await getStrings()
