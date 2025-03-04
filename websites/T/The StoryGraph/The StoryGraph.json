@@ -4,31 +4,31 @@
     "message": "View Book"
   },
   "thestorygraph.viewBook": {
-    "description": "",
+    "description": "Used to display the details of a selected book.",
     "message": "Viewing book:"
   },
   "thestorygraph.viewSimilarBook": {
-    "description": "",
+    "description": "Used to show books that are similar to the selected book.",
     "message": "Viewing similar books of:"
   },
   "thestorygraph.viewEdition": {
-    "description": "",
+    "description": "Used to view different editions of the selected book.",
     "message": "Viewing editions of:"
   },
   "thestorygraph.viewContentWarnings": {
-    "description": "",
+    "description": "Used to display content warnings related to the selected book.",
     "message": "Viewing content warnings of:"
   },
   "thestorygraph.readBookClubQuestions": {
-    "description": "",
+    "description": "Used to access questions for book club discussions.",
     "message": "Reading Book Club Questions of:"
   },
   "thestorygraph.readReviews": {
-    "description": "",
+    "description": "Used to read reviews written about the selected book.",
     "message": "Reading reviews of:"
   },
   "thestorygraph.readReview": {
-    "description": "",
+    "description": "Used to read a specific review of the selected book.",
     "message": "Reading review of:"
   },
   "thestorygraph.buttonReadReview": {
@@ -36,43 +36,43 @@
     "message": "Read Review"
   },
   "thestorygraph.readalongs": {
-    "description": "",
+    "description": "Used to view readalongs available for the selected book.",
     "message": "Viewing readalongs"
   },
   "thestorygraph.buddyReads": {
-    "description": "",
+    "description": "Used to show buddy reads in progress.",
     "message": "Viewing Buddy Reads"
   },
   "thestorygraph.bookTickets": {
-    "description": "",
+    "description": "Used to report a book issue or concern.",
     "message": "Reporting a Book"
   },
   "thestorygraph.viewStats": {
-    "description": "",
+    "description": "Used to view reading statistics.",
     "message": "Viewing Stats"
   },
   "thestorygraph.viewReadingChallenges": {
-    "description": "",
+    "description": "Used to view challenges related to reading.",
     "message": "Viewing Reading Challenges"
   },
   "thestorygraph.viewCommunity": {
-    "description": "",
+    "description": "Used to view community interactions and discussions.",
     "message": "Viewing Community"
   },
   "thestorygraph.viewBookClubs": {
-    "description": "",
+    "description": "Used to view available book clubs.",
     "message": "Viewing Book Clubs"
   },
   "thestorygraph.viewSimilarUsers": {
-    "description": "",
+    "description": "Used to view users with similar reading interests.",
     "message": "Viewing Similar Users"
   },
   "thestorygraph.viewGiveaways": {
-    "description": "",
+    "description": "Used to view available book giveaways.",
     "message": "Viewing Giveaways"
   },
   "thestorygraph.viewGiveaway": {
-    "description": "",
+    "description": "Used to view a specific book giveaway.",
     "message": "Viewing Giveaway:"
   },
   "thestorygraph.buttonViewGiveaway": {
@@ -80,31 +80,31 @@
     "message": "View Giveaway"
   },
   "thestorygraph.viewEnteredGiveaways": {
-    "description": "",
+    "description": "Used to view giveaways that the user has entered.",
     "message": "Viewing Entered Giveaways"
   },
   "thestorygraph.viewNotifications": {
-    "description": "",
+    "description": "Used to view notifications related to user activities.",
     "message": "Viewing notifications"
   },
   "thestorygraph.viewPreferences": {
-    "description": "",
-    "messsage": "Viewing Preferences"
+    "description": "Used to view user preferences.",
+    "message": "Viewing Preferences"
   },
   "thestorygraph.viewProfile": {
-    "description": "",
-    "messsage": "Viewing Profile of:"
+    "description": "Used to view the profile of a specific user.",
+    "message": "Viewing Profile of:"
   },
   "thestorygraph.buttonViewProfile": {
     "description": "Used as the title for the button in Discord.",
     "message": "View Profile"
   },
   "thestorygraph.editProfile": {
-    "description": "",
+    "description": "Used to edit the user's profile information.",
     "message": "Editing Profile"
   },
   "thestorygraph.viewReadingJournal": {
-    "description": "",
+    "description": "Used to view the user's reading journal.",
     "message": "Viewing Reading Journal"
   }
 }
