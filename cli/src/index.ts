@@ -42,8 +42,8 @@ cli
 
 cli
   .command('bump [activity] [version]', 'Bump an activity')
-  .option('-all', 'Bump all activities')
-  .option('-changed', 'Bump only changed activities')
+  .option('--all', 'Bump all activities (Usage: bump "" [version] --all)')
+  .option('--changed', 'Bump only changed activities (Usage: bump "" [version] --changed)')
   .action(bump)
 
 cli
