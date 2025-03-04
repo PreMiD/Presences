@@ -43,7 +43,7 @@ function getUsername() {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "https://i.imgur.com/hXqpJFa.png",
+    largeImageKey: "https://i.imgur.com/rnJFBnZ.png",
     startTimestamp: browsingTimestamp,
   };
   const [showUsername] = await Promise.all([
