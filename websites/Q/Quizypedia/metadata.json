@@ -7,8 +7,8 @@
   },
   "service": "Quizypedia",
   "description": {
-    "fr": "Quizypedia est une encyclopédie du quiz. Les utilisateurs peuvent y jouer et créer des quiz, aussi bien dans un but ludique qu'éducatif.",
-    "en": "Quizypedia is a french-language quiz encyclopedia. Users can play and create quizzes, both for fun and educational purposes."
+    "en": "Quizypedia is a french-language quiz encyclopedia. Users can play and create quizzes, both for fun and educational purposes.",
+    "fr": "Quizypedia est une encyclopédie du quiz. Les utilisateurs peuvent y jouer et créer des quiz, aussi bien dans un but ludique qu'éducatif."
   },
   "url": [
     "quizypedia.fr",
