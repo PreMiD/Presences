@@ -190,7 +190,7 @@ presence.on('UpdateData', async () => {
     presence.getSetting<boolean>('video'),
   ])
   const presenceData: PresenceData = {
-    largeImageKey: 'https://i.imgur.com/t7t4rGb.png',
+    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/I/Inlx/assets/logo.png',
     type: ActivityType.Watching,
     name: 'Inlx',
   }
