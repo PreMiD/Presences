@@ -30,7 +30,7 @@ const themeColors: { [key: string]: string } = {
 
 function getUsername() {
   if (document.querySelector('#userBtn2')) {
-    const username = document.querySelector('#userBtn2')?.innerHTML.trim()
+    const username = document.querySelector('#userBtn2')?.textContent?.trim()
     return `@${username}`
   }
   else if (document.querySelector('#userBtn3')) {
@@ -46,8 +46,8 @@ presence.on('UpdateData', async () => {
   const [showUsername] = await Promise.all([
     presence.getSetting<boolean>('username'),
   ])
-  const urlData = window.location.pathname.split('/').filter(part => part)
-  const urlParams = new URLSearchParams(window.location.search)
+  const urlData = document.location.pathname.split('/').filter(part => part)
+  const urlParams = new URLSearchParams(document.location.search)
   const pageTitle = document.title
 
   if (urlData.length === 0) {
@@ -85,10 +85,10 @@ presence.on('UpdateData', async () => {
       else {
         presenceData.details = 'Dans un duel'
         if (document.querySelector('#userBtn2')) {
-          const duelTitle = document.querySelector('.duel_title')?.innerHTML?.replace('Duel : ', '')
+          const duelTitle = document.querySelector('.duel_title')?.textContent?.replace('Duel : ', '')
           let qNum, qTotal
           if (!document.querySelector('.resultContainer')) {
-            qNum = document.querySelector('#currentQuestionIndex')?.innerHTML
+            qNum = document.querySelector('#currentQuestionIndex')?.textContent
             qTotal = 10
             if (qNum && qTotal)
               presenceData.state = `${duelTitle} | Q. ${qNum}/${qTotal}`
@@ -99,11 +99,11 @@ presence.on('UpdateData', async () => {
             presenceData.details = 'Duel terminé'
             qNum = 0
             qTotal = 10
-            const name_p1 = document.querySelector('#p1TopRow')?.innerHTML?.trim()
-            const name_p2 = document.querySelector('#p2TopRow')?.innerHTML?.trim()
-            const score_p1 = document.querySelector('#p1GR')?.innerHTML?.trim()
-            const score_p2 = document.querySelector('#p2GR')?.innerHTML?.trim()
-            const username = document.querySelector('#userBtn2')?.innerHTML?.trim()
+            const name_p1 = document.querySelector('#p1TopRow')?.textContent?.trim()
+            const name_p2 = document.querySelector('#p2TopRow')?.textContent?.trim()
+            const score_p1 = document.querySelector('#p1GR')?.textContent?.trim()
+            const score_p2 = document.querySelector('#p2GR')?.textContent?.trim()
+            const username = document.querySelector('#userBtn2')?.textContent?.trim()
             if (name_p1 === username) {
               qNum = score_p1
               presenceData.state = `${duelTitle} | Score : ${qNum}/${qTotal}`
@@ -182,7 +182,7 @@ presence.on('UpdateData', async () => {
           if (!document.querySelector('.resultContainer')) {
             const duelColor = document.querySelector('.question_icon')?.classList[1]
             const duelTitle = duelColor ? themeColors[duelColor] : ''
-            const qNum = document.querySelector('#currentQuestionIndex')?.innerHTML
+            const qNum = document.querySelector('#currentQuestionIndex')?.textContent
             const qTotal = 20
             if (qNum && qTotal)
               presenceData.state = `${duelTitle} | Q. ${qNum}/${qTotal}`
@@ -206,7 +206,7 @@ presence.on('UpdateData', async () => {
     }
     else {
       if (!document.querySelector('.resultContainer')) {
-        const qNum = document.querySelector('#currentQuestionIndex')?.innerHTML
+        const qNum = document.querySelector('#currentQuestionIndex')?.textContent
         const qTotal = 20
         if (qNum && qTotal)
           presenceData.state = `Q. ${qNum}/${qTotal}`
@@ -242,7 +242,7 @@ presence.on('UpdateData', async () => {
       if (!document.querySelector('.resultContainer')) {
         const themeColor = document.querySelector('.question_icon')?.classList[1]
         const themeTitle = themeColor ? themeColors[themeColor] : ''
-        const qNum = document.querySelector('#currentQuestionIndex')?.innerHTML
+        const qNum = document.querySelector('#currentQuestionIndex')?.textContent
         if (qNum)
           presenceData.state = `${themeTitle} | Q. ${qNum}`
         else if (themeTitle)
