@@ -19,7 +19,7 @@ async function getStrings() {
       pause: 'general.paused',
       searchSomething: 'general.searchSomething',
       watchVideoButton: 'general.buttonWatchVideo',
-    }
+    },
   )
 }
 
