@@ -3,57 +3,54 @@ const presence = new Presence({
 })
 
 async function getStrings() {
-  return presence.getStrings(
-    {
-      buttonJoinGame: 'kahoot.buttonJoinGame',
-      joiningGame: 'kahoot.joiningGame',
-      waiting: 'kahoot.waiting',
-      gameStarting: 'kahoot.gameStarting',
-      playing: 'kahoot.playing',
-      questionLoading: 'kahoot.questionLoading',
-      incorrectAnswer: 'kahoot.incorrectAnswer',
-      correctAnswer: 'kahoot.correctAnswer',
-      resultsQuestion: 'kahoot.resultsQuestion',
-      slideViewing: 'kahoot.slideViewing',
-      gameOver: 'kahoot.gameOver',
-      gameCreate: 'kahoot.gameCreate',
-      loadingPage: 'kahoot.loadingPage',
-      firstPlace: 'kahoot.firstPlace',
-      points: 'kahoot.points',
-      questionsCorrect: 'kahoot.questionsCorrect',
-      slideShowing: 'kahoot.slideShowing',
-      questionShowing: 'kahoot.questionShowing',
-      stString: 'kahoot.stString',
-      ndString: 'kahoot.ndString',
-      rdString: 'kahoot.rdString',
-      topX: 'kahoot.topX',
-      onPodium: 'kahoot.onPodium',
-      of: 'kahoot.of',
-      questionNumber: 'kahoot.questionNumber',
-      feedback: 'kahoot.feedback',
-      waitingAnswer: 'kahoot.waitingAnswer',
-      drumRoll: 'kahoot.drumRoll',
-      position: 'kahoot.position',
-      teamTalk: 'kahoot.teamTalk',
-      gameSummary: 'kahoot.gameSummary',
-      login: 'kahoot.login',
-      createHome: 'kahoot.createHome',
-      discover: 'kahoot.discover',
-      searchKahoots: 'kahoot.searchKahoots',
-      kahootDetails: 'kahoot.kahootDetails',
-      kahootProfile: 'kahoot.kahootProfile',
-      myKahoots: 'kahoot.myKahoots',
-      userReports: 'kahoot.userReports',
-      myCourses: 'kahoot.myCourses',
-      editingCourse: 'kahoot.editingCourse',
-      viewingCourse: 'kahoot.viewingCourse',
-      editingKahoot: 'kahoot.editingKahoot',
-      previewingKahoot: 'kahoot.previewingKahoot',
-      liveCourse: 'kahoot.liveCourse',
-      liveCourseActivity: 'kahoot.liveCourseActivity',
-    },
-
-  )
+  return presence.getStrings({
+    buttonJoinGame: 'kahoot.buttonJoinGame',
+    joiningGame: 'kahoot.joiningGame',
+    waiting: 'kahoot.waiting',
+    gameStarting: 'kahoot.gameStarting',
+    playing: 'kahoot.playing',
+    questionLoading: 'kahoot.questionLoading',
+    incorrectAnswer: 'kahoot.incorrectAnswer',
+    correctAnswer: 'kahoot.correctAnswer',
+    resultsQuestion: 'kahoot.resultsQuestion',
+    slideViewing: 'kahoot.slideViewing',
+    gameOver: 'kahoot.gameOver',
+    gameCreate: 'kahoot.gameCreate',
+    loadingPage: 'kahoot.loadingPage',
+    firstPlace: 'kahoot.firstPlace',
+    points: 'kahoot.points',
+    questionsCorrect: 'kahoot.questionsCorrect',
+    slideShowing: 'kahoot.slideShowing',
+    questionShowing: 'kahoot.questionShowing',
+    stString: 'kahoot.stString',
+    ndString: 'kahoot.ndString',
+    rdString: 'kahoot.rdString',
+    topX: 'kahoot.topX',
+    onPodium: 'kahoot.onPodium',
+    of: 'kahoot.of',
+    questionNumber: 'kahoot.questionNumber',
+    feedback: 'kahoot.feedback',
+    waitingAnswer: 'kahoot.waitingAnswer',
+    drumRoll: 'kahoot.drumRoll',
+    position: 'kahoot.position',
+    teamTalk: 'kahoot.teamTalk',
+    gameSummary: 'kahoot.gameSummary',
+    login: 'kahoot.login',
+    createHome: 'kahoot.createHome',
+    discover: 'kahoot.discover',
+    searchKahoots: 'kahoot.searchKahoots',
+    kahootDetails: 'kahoot.kahootDetails',
+    kahootProfile: 'kahoot.kahootProfile',
+    myKahoots: 'kahoot.myKahoots',
+    userReports: 'kahoot.userReports',
+    myCourses: 'kahoot.myCourses',
+    editingCourse: 'kahoot.editingCourse',
+    viewingCourse: 'kahoot.viewingCourse',
+    editingKahoot: 'kahoot.editingKahoot',
+    previewingKahoot: 'kahoot.previewingKahoot',
+    liveCourse: 'kahoot.liveCourse',
+    liveCourseActivity: 'kahoot.liveCourseActivity',
+  })
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>
@@ -75,12 +72,13 @@ function findRanking(rankingSelector: Element) {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/K/Kahoot/assets/logo.png',
+    largeImageKey:
+			'https://cdn.rcd.gg/PreMiD/websites/K/Kahoot/assets/logo.png',
     startTimestamp: browsingTimestamp,
   }
   const [buttons, newLang] = await Promise.all([
     await presence.getSetting<boolean>('buttons'),
-
+    await presence.getSetting<string>('lang').catch(() => 'en'),
   ])
 
   oldLang ??= newLang
@@ -119,10 +117,13 @@ presence.on('UpdateData', async () => {
       }
       else if (pathname.includes('/gameblock')) {
         // Playing/Answering a question
-        const [currentQuestion, totalQuestions] = document
-          .querySelector('[data-functional-selector="question-index-counter"]')
-          ?.textContent
-          ?.match(/\d+/g) ?? []
+        const [currentQuestion, totalQuestions]
+					= document
+					  .querySelector(
+					    '[data-functional-selector="question-index-counter"]',
+					  )
+					  ?.textContent
+					  ?.match(/\d+/g) ?? []
         presenceData.details = strings.playing
         presenceData.state = `${strings.questionNumber.replace(
           '{0}',
@@ -138,10 +139,13 @@ presence.on('UpdateData', async () => {
       }
       else if (pathname.includes('/getready')) {
         // Next question is loading
-        const [currentQuestion, totalQuestions] = document
-          .querySelector('[data-functional-selector="question-index-counter"]')
-          ?.textContent
-          ?.match(/\d+/g) ?? []
+        const [currentQuestion, totalQuestions]
+					= document
+					  .querySelector(
+					    '[data-functional-selector="question-index-counter"]',
+					  )
+					  ?.textContent
+					  ?.match(/\d+/g) ?? []
         presenceData.details = strings.questionLoading
         presenceData.state = `${strings.questionNumber.replace(
           '{0}',
@@ -282,10 +286,13 @@ presence.on('UpdateData', async () => {
             '[data-functional-selector="correct-count-gold"]',
           )
           if (correctCount) {
-            const [correct, total] = correctCount.textContent?.match(/\d+/g) ?? []
+            const [correct, total]
+							= correctCount.textContent?.match(/\d+/g) ?? []
             presenceData.state = strings.questionsCorrect.replace(
               '{0}',
-              strings.of.replace('{0}', correct ?? '').replace('{1}', total ?? ''),
+              strings.of
+                .replace('{0}', correct ?? '')
+                .replace('{1}', total ?? ''),
             )
           }
           else {
@@ -313,14 +320,14 @@ presence.on('UpdateData', async () => {
             }
             else {
               // Question is in progress
-              const [currentQuestion, totalQuestions] = questionCounter.textContent?.split('/') ?? []
+              const [currentQuestion, totalQuestions]
+								= questionCounter.textContent?.split('/') ?? []
               presenceData.details = strings.questionShowing
               presenceData.state = `${strings.questionNumber.replace(
                 '{0}',
                 `${strings.of
                   .replace('{0}', currentQuestion ?? '')
-                  .replace('{1}', totalQuestions ?? '')
-                }`,
+                  .replace('{1}', totalQuestions ?? '')}`,
               )}`
             }
           }
@@ -443,7 +450,8 @@ presence.on('UpdateData', async () => {
                 .replace('{0}', number ?? '')
                 .replace(
                   '{1}',
-                  course?.textContent?.substring((number?.length ?? 0) + 2) ?? '',
+                  course?.textContent?.substring((number?.length ?? 0) + 2)
+                  ?? '',
                 )
             }
           }
