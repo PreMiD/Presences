@@ -40,7 +40,7 @@ function getUsername() {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: 'https://i.imgur.com/rnJFBnZ.png',
+    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/Q/Quizypedia/assets/logo.png',
     startTimestamp: browsingTimestamp,
   }
   const [showUsername] = await Promise.all([
