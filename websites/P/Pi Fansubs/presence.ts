@@ -126,8 +126,7 @@ presence.on('UpdateData', async () => {
           '.mark-1 > div:nth-child(1) > img:nth-child(1)',
         )
         presenceData.details = 'No Pi Fansubs'
-        // eslint-disable-next-line regexp/no-unused-capturing-group
-        presenceData.name = textContent('.epih1')?.replace(/: (\d+)x(\d+)/, '')
+        presenceData.name = textContent('.epih1')?.replace(/: \d+x\d+/, '')
         presenceData.largeImageText = match
           ? `Season ${match[1]}, Episode ${match[2]}`
           : textContent('.epih1')
