@@ -1,13 +1,12 @@
-import {ActivityType, Assets } from "premid";
+import { ActivityType, Assets } from "premid";
 
 const presence = new Presence({
   clientId: "1348031159640129617" 
 });
 
 function formatTitleFromURL(url: string): string {
-
   const segments = url.toLowerCase()
-    .replace(/^https?:\/\/[^/]+/, '') // Remove domain
+    .replace(/^https?:\/\/[^/]+/, '') 
     .replace(/\/(watch|movie|series|episode|music-video|shortfilm|original|buy-ticket)/g, '/')
     .split('/')
     .filter(p => p && p !== 'watch' && p !== 'episode');
@@ -43,21 +42,40 @@ presence.on("UpdateData", async () => {
 
   if (pathname === '/') {
     presenceData.details = "Browsing Home";
-  } else if(pathname.includes('/original')){
+  } else if (pathname.includes('/original')) {
     presenceData.details = "Browsing Chorki Originals";
   } else if (pathname.includes('/watch/movie/')) {
     presenceData.details = "Watching Movie";
     presenceData.state = rawTitle;
-  } else if(pathname === '/movie') {
+  } else if (pathname === '/movie') {
     presenceData.details = "Looking for Movies";
   } else if (pathname.includes('/movie/')) {
     presenceData.details = `Viewing Movie`
     presenceData.state = rawTitle;
   } else if (pathname.includes('/watch/series/')) {
     presenceData.details = "Watching Series";
+
+    // Extract series name and episode name separately
+    const pathParts = pathname.split('/').filter(Boolean);
+    const seriesIndex = pathParts.indexOf("series");
+    
+    if (seriesIndex !== -1 && seriesIndex + 1 < pathParts.length) {
+      const seriesName = seriesIndex + 1 < pathParts.length 
+            ? formatTitleFromURL(pathParts[seriesIndex + 1] || "")
+            : "";
+
+    const episodeName = seriesIndex + 3 < pathParts.length 
+          ? formatTitleFromURL(pathParts[seriesIndex + 3] || "")
+          : null;
+
     presenceData.state = episodeNumber 
-      ? `${rawTitle.replace(/ Episode \d+$/, '')}: Episode ${episodeNumber}`
-      : rawTitle;
+                ? `${seriesName}: Episode ${episodeNumber}`
+                : episodeName 
+                  ? `${seriesName}: ${episodeName}`
+                  : seriesName;
+    } else {
+      presenceData.state = rawTitle;
+    }
   } else if (pathname === '/series') {
     presenceData.details = "Exploring Series";
   } else if (pathname.includes('/series/')) {
@@ -68,16 +86,16 @@ presence.on("UpdateData", async () => {
     presenceData.state = rawTitle;
   } else if (pathname.includes('/original')) {
     presenceData.details = "Browsing Chorki Originals";
-  } else if(pathname === '/shortfilm') {
+  } else if (pathname === '/shortfilm') {
     presenceData.details = "Browsing Short Films";
   } else if (pathname.includes('/shortfilm/')) {
     presenceData.details = "Viewing Short-Film";
     presenceData.state = rawTitle;
   } else if (pathname.includes('/buy-ticket')) {
     presenceData.details = "Looking for Tickets";
-  } else if(pathname.includes('/bytes/')){
+  } else if (pathname.includes('/bytes/')) {
     presenceData.details = "Browsing Bytes";
-  }else {
+  } else {
     presenceData.details = "Browsing Chorki";
   }
 
