@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.13",
+  "apiVersion": 1,
+  "author": {
+    "id": "1348031159640129617",
+    "name": "n00fany"
+  },
+  "service": "Chorki",
+  "description": {
+    "en": "Chorki - Bangladeshi streaming platform for original shows and movies",
+      "bn": "চরকি - বাংলাদেশী ওয়েব সিরিজ এবং সিনেমার স্ট্রিমিং প্ল্যাটফর্ম"
+  },
+  "url": "www.chorki.com",
+  "version": "1.0.0",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Chorki_Logo.png",
+  "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQZjGwIpABgVeSmsK7l9MK5JeiA1bA_ut1PQ&s",
+  "color": "#E50914",
+  "category": "videos",
+  "tags": [
+    "video",
+    "media",
+    "entertainment",
+    "streaming"
+  ]
+}
