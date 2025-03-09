@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
   } else if (pathname.includes("/buy-ticket")) {
     presenceData.details = "Looking for Tickets";
   } else if (pathname.includes("/bytes/")) {
-    presenceData.details = "Browsing Bytes";
+    presenceData.details = "Scrolling Bytes";
   } else {
     presenceData.details = "Browsing Chorki";
   }
