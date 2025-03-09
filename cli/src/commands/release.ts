@@ -126,7 +126,6 @@ export async function release() {
         successCount++
       }
       else {
-        console.log(await response.text(), activityData)
         core.warning(`Failed to update activity ${activity.metadata.service}: ${response.statusText}`)
       }
     }
