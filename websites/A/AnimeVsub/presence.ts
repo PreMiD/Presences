@@ -101,7 +101,7 @@ async function updatePresence() {
               presenceData.endTimestamp = endTimestamp
             }
             else {
-              delete presenceData.endTimestamp 
+              delete presenceData.endTimestamp
             }
           }
         }
