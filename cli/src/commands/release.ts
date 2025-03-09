@@ -39,9 +39,9 @@ export async function release() {
     return exit(MESSAGES.noToken)
   }
 
-  const apiKey = process.env.API_KEY
+  const apiKey = process.env.ADMIN_API_KEY
   if (!apiKey) {
-    return exit('No API key provided')
+    return exit('No Admin API key provided')
   }
 
   const apiUrl = process.env.API_URL || 'https://api.premid.app/v6'
