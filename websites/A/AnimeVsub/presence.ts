@@ -1,4 +1,4 @@
-import { ActivityType, Assets, getTimestamps } from 'premid';
+import { ActivityType, Assets, getTimestamps} from 'premid';
 
 const presence = new Presence({
   clientId: '1348239315767132160',
@@ -71,7 +71,7 @@ async function updatePresence() {
       const currentURL = window.location.pathname;
       const episodeElements = document.querySelectorAll('.q-btn-item');
 
-      const episodes = [...episodeElements]
+      const episodes = Array.from(episodeElements)
         .map((ep) => {
           const href = ep.getAttribute('href');
           const numMatch = (ep as HTMLElement).innerText
