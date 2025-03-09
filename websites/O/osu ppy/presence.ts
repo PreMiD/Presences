@@ -43,7 +43,8 @@ async function getStrings() {
       theirProfile: 'osu!ppy.theirProfile',
       tournaments: 'osu!ppy.tournaments',
       unsupportedPage: 'osu!ppy.unsupportedPage',
-      viewing: 'general.viewing',
+      view: 'general.view',
+      viewingForum: 'osu!ppy.viewingForum',
       viewingHome: 'general.viewHome',
       watchLists: 'osu!ppy.watchLists',
       wikiMainPage: 'general.wikiMainPage',
@@ -72,7 +73,7 @@ presence.on('UpdateData', async () => {
     }
   }
   else if (pathname.startsWith('/home/download')) {
-    presenceData.details = strings.viewing
+    presenceData.details = strings.view
     presenceData.state = strings.downloads
     presenceData.smallImageKey = Assets.Search
   }
@@ -97,7 +98,7 @@ presence.on('UpdateData', async () => {
     }
   }
   else if (pathname.startsWith('/home/support')) {
-    presenceData.details = strings.viewing
+    presenceData.details = strings.view
     presenceData.state = strings.support
     presenceData.smallImageKey = Assets.Search
   }
@@ -276,17 +277,17 @@ presence.on('UpdateData', async () => {
     }
   }
   else if (pathname.startsWith('/home/changelog')) {
-    presenceData.details = strings.viewing
+    presenceData.details = strings.view
     presenceData.state = strings.changelog
     presenceData.smallImageKey = Assets.Reading
   }
   else if (pathname.startsWith('/home/friends')) {
-    presenceData.details = strings.viewing
+    presenceData.details = strings.view
     presenceData.state = strings.friendList
     presenceData.smallImageKey = Assets.Reading
   }
   else if (pathname.startsWith('/home/follows')) {
-    presenceData.details = strings.viewing
+    presenceData.details = strings.view
     presenceData.state = strings.watchLists
     presenceData.smallImageKey = Assets.Reading
   }
@@ -315,7 +316,7 @@ presence.on('UpdateData', async () => {
     ]
   }
   else {
-    presenceData.details = strings.viewing
+    presenceData.details = strings.view
     presenceData.state = strings.unsupportedPage
   }
 
