@@ -1,9 +1,10 @@
 import { ActivityType, Assets } from "premid";
 
 const presence = new Presence({
-  clientId: "1348031159640129617" 
+  clientId: "1348031159640129617"
 });
 
+// Getting title, episode number, and state from URL
 function formatTitleFromURL(url: string): string {
   const segments = url.toLowerCase()
     .replace(/^https?:\/\/[^/]+/, '') 
@@ -11,7 +12,7 @@ function formatTitleFromURL(url: string): string {
     .split('/')
     .filter(p => p && p !== 'watch' && p !== 'episode');
 
-  // Extract main content identifier
+  // Extract main content identifier from the URL
   const contentSegments = segments.filter(s => 
     !['movie', 'series', 'music-video', 'shortfilm', 'original', 'buy-ticket'].includes(s)
   );
@@ -20,10 +21,10 @@ function formatTitleFromURL(url: string): string {
   return contentSegments.join('-')
     .split('-')
     .map(word => 
-      word === 'ep' ? '' : // Remove episode indicator
+      word === 'ep' ? '' :
       word.charAt(0).toUpperCase() + word.slice(1)
     )
-    .filter(word => word) // Remove empty strings
+    .filter(word => word) 
     .join(' ');
 }
 
@@ -99,7 +100,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Browsing Chorki";
   }
 
-  // Add video status if available
   const video = isWatchPage ? document.querySelector("video") : null;
 
   if (video) {
@@ -111,7 +111,6 @@ presence.on("UpdateData", async () => {
         presence.getTimestamps(video.currentTime, video.duration);
     }
   } else {
-    // Clear media controls for non-watch pages
     delete presenceData.smallImageKey;
     delete presenceData.smallImageText;
     delete presenceData.startTimestamp;
