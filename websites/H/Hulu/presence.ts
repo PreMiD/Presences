@@ -35,7 +35,7 @@ presence.on('UpdateData', async () => {
   let video: HTMLVideoElement | null = null
   let details
   let state
-  let name: string | undefined;
+  let name: string | undefined
   let smallImageKey
   let smallImageText
   let startTimestamp
@@ -164,7 +164,7 @@ presence.on('UpdateData', async () => {
       details = (await strings).watching
       if (title) {
         details = (await strings).onHulu
-        name = title?.textContent
+        name = title?.textContent as string | undefined
       }
 
       if (content?.textContent && content.textContent.length > 0)
@@ -204,7 +204,7 @@ presence.on('UpdateData', async () => {
         details = (await strings).watching
         if (title) {
           details = (await strings).onHulu
-          name = title?.textContent
+          name = title?.textContent as string | undefined
         }
 
         if (content?.textContent && content.textContent.length > 0)
