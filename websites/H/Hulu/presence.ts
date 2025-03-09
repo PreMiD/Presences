@@ -35,7 +35,7 @@ presence.on('UpdateData', async () => {
   let video: HTMLVideoElement | null = null
   let details
   let state
-  let name
+  let name: string | undefined;
   let smallImageKey
   let smallImageText
   let startTimestamp
@@ -47,13 +47,13 @@ presence.on('UpdateData', async () => {
     elapsed = Math.floor(Date.now() / 1000)
   }
 
-  details = await (strings.browsing)
+  details = (await strings).browsing
   startTimestamp = elapsed
 
   if (path.includes('/hub')) {
     header = document.querySelector('.Hub__title')
     title = document.querySelector('.SimpleModalNav__title')
-    details = await (strings.viewCategory)
+    details = (await strings).viewCategory
     if (header) {
       state = header.textContent
       if (title)
@@ -63,7 +63,7 @@ presence.on('UpdateData', async () => {
   else if (path.includes('/genre')) {
     header = document.querySelector('.Hub__title')
     title = document.querySelector('.SimpleModalNav__title')
-    details = await (strings.viewGenre)
+    details = (await strings).viewGenre
     if (header) {
       state = header.textContent
       if (title)
@@ -73,7 +73,7 @@ presence.on('UpdateData', async () => {
   else if (path.includes('/series')) {
     title = document.querySelector('.Masthead__title')
     item = document.querySelector('.Subnav__item.active')
-    details = await (strings.viewSeries)
+    details = (await strings).viewSeries
     if (title) {
       state = title.textContent
       if (item)
@@ -83,7 +83,7 @@ presence.on('UpdateData', async () => {
   else if (path.includes('/movie')) {
     title = document.querySelector('.Masthead__title')
     item = document.querySelector('.Subnav__item.active')
-    details = await (strings.viewMovie)
+    details = (await strings).viewMovie
     if (title) {
       state = title.textContent
       if (item)
@@ -95,7 +95,7 @@ presence.on('UpdateData', async () => {
       '.SimpleModalNav__brandImage',
     )
     item = document.querySelector('.Subnav__item.active')
-    details = await (strings.viewNetwork)
+    details = (await strings).viewNetwork
     if (brand) {
       state = brand.alt
       if (item)
@@ -105,7 +105,7 @@ presence.on('UpdateData', async () => {
   else if (path.includes('/sports_episode')) {
     title = document.querySelector('.Masthead__title')
     item = document.querySelector('.Subnav__item.active')
-    details = await (strings.viewSportEpisode)
+    details = (await strings).viewSportEpisode
     if (title) {
       state = title.textContent
       if (item)
@@ -115,7 +115,7 @@ presence.on('UpdateData', async () => {
   else if (path.includes('/sports_team')) {
     title = document.querySelector('.Masthead__title')
     item = document.querySelector('.Subnav__item.active')
-    details = await (strings.viewSportTeam)
+    details = (await strings).viewSportTeam
     if (title) {
       state = title.textContent
       if (item)
@@ -135,7 +135,7 @@ presence.on('UpdateData', async () => {
       '.LiveGuide__filter-item--selected',
     )
     title = document.querySelector('.ModalHeader__showname')
-    details = await (strings.watchingLive)
+    details = (await strings).watchingLive
     if (category) {
       state = capitalize(category.textContent!)
       if (title)
@@ -143,11 +143,11 @@ presence.on('UpdateData', async () => {
     }
   }
   else if (path.includes('/my-stuff')) {
-    details = await (strings.viewMyStuff)
+    details = (await strings).viewMyStuff
   }
   else if (path.includes('/manage-dvr')) {
     item = document.querySelector('.Subnav__item.active')
-    details = await (strings.viewMyDVR)
+    details = (await strings).viewMyDVR
     if (item)
       state = capitalize(item.textContent!)
   }
@@ -161,9 +161,9 @@ presence.on('UpdateData', async () => {
         Math.floor(video.duration),
       )
       const live = timestamps[1] === Infinity
-      details = await (strings.watching)
+      details = (await strings).watching
       if (title) {
-        details = await (strings.onHulu)
+        details = (await strings).onHulu
         name = title.textContent
       }
 
@@ -188,7 +188,7 @@ presence.on('UpdateData', async () => {
     }
     else {
       video = document.querySelector('video#content-video-player')
-      details = await (strings.viewWatchHistory)
+      details = (await strings).viewWatchHistory
       if (video) {
         title = document.querySelector(
           '#web-player-app div.PlayerMetadata__titleText',
@@ -201,9 +201,9 @@ presence.on('UpdateData', async () => {
           Math.floor(video.duration),
         )
         const live = timestamps[1] === Infinity
-        details = await (strings.watching)
+        details = (await strings).watching
         if (title) {
-          details = await (strings.onHulu)
+          details = (await strings).onHulu
           name = title.textContent
         }
 
