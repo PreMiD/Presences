@@ -164,7 +164,7 @@ presence.on('UpdateData', async () => {
       details = (await strings).watching
       if (title) {
         details = (await strings).onHulu
-        name = title.textContent
+        name = title?.textContent
       }
 
       if (content?.textContent && content.textContent.length > 0)
@@ -204,7 +204,7 @@ presence.on('UpdateData', async () => {
         details = (await strings).watching
         if (title) {
           details = (await strings).onHulu
-          name = title.textContent
+          name = title?.textContent
         }
 
         if (content?.textContent && content.textContent.length > 0)
