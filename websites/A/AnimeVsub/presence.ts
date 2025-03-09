@@ -5,6 +5,7 @@ const presence = new Presence({
 })
 
 const browsingTimestamp = Math.floor(Date.now() / 1000)
+
 let strings: { pause: string, play: string } | null = null
 let oldLang: string | null = null
 
@@ -100,7 +101,7 @@ async function updatePresence() {
               presenceData.endTimestamp = endTimestamp
             }
             else {
-              delete presenceData.endTimestamp // Xóa timestamp khi pause
+              delete presenceData.endTimestamp 
             }
           }
         }
@@ -117,24 +118,4 @@ async function updatePresence() {
   presence.setActivity(presenceData)
 }
 
-// Lắng nghe sự kiện từ video để cập nhật nhanh hơn
-function listenVideoEvents() {
-  const video = document.querySelector('video')
-  if (video) {
-    video.addEventListener('timeupdate', updatePresence)
-    video.addEventListener('pause', updatePresence)
-    video.addEventListener('play', updatePresence)
-  }
-}
-
-// Chạy cập nhật mỗi giây để đảm bảo không bị delay
-setInterval(updatePresence, 1000)
-
-// Lắng nghe sự kiện cập nhật dữ liệu
 presence.on('UpdateData', updatePresence)
-
-// Gọi khi trang web load xong
-window.addEventListener('load', () => {
-  updatePresence()
-  listenVideoEvents()
-})
