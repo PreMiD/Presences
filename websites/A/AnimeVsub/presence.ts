@@ -106,7 +106,7 @@ async function updatePresence() {
           }
         }
 
-        presenceData.details = titleElement?.textContent || '...'
+        presenceData.details = titleElement?.textContent || 'Đang xem...'
         presenceData.state = `Tập: ${animeEpisode ?? 1}`
         presenceData.largeImageKey = video?.poster || ActivityAssets.Logo
       }
