@@ -1,4 +1,4 @@
-import { ActivityType, Assets } from 'premid'
+import { ActivityType, Assets, getTimestamps } from 'premid'
 
 const presence = new Presence({
   clientId: '1348031159640129617',
@@ -9,7 +9,7 @@ function formatTitleFromURL(url: string): string {
   const segments = url
     .toLowerCase()
     .replace(/^https?:\/\/[^/]+/, '')
-    .replace(/\/(watch|movie|series|episode|music-video|shortfilm|original|buy-ticket)/g, '/')
+    .replace(/\/(?:watch|movie|series|episode|music-video|shortfilm|original|buy-ticket)/g, '/')
     .split('/')
     .filter(p => p && p !== 'watch' && p !== 'episode')
 
@@ -116,8 +116,8 @@ presence.on('UpdateData', async () => {
     presenceData.smallImageKey = video.paused ? Assets.Pause : Assets.Play
     presenceData.smallImageText = video.paused ? 'Paused' : 'Watching'
 
-    if (!video.paused && !isNaN(video.duration)) {
-      [presenceData.startTimestamp, presenceData.endTimestamp] = presence.getTimestamps(
+    if (!video.paused && Number.isNaN(video.duration)) {
+      [presenceData.startTimestamp, presenceData.endTimestamp] = getTimestamps(
         video.currentTime,
         video.duration,
       )
