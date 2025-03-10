@@ -72,8 +72,7 @@ function findRanking(rankingSelector: Element) {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey:
-			'https://cdn.rcd.gg/PreMiD/websites/K/Kahoot/assets/logo.png',
+    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/K/Kahoot/assets/logo.png',
     startTimestamp: browsingTimestamp,
   }
   const [buttons, newLang] = await Promise.all([
@@ -117,13 +116,12 @@ presence.on('UpdateData', async () => {
       }
       else if (pathname.includes('/gameblock')) {
         // Playing/Answering a question
-        const [currentQuestion, totalQuestions]
-					= document
-					  .querySelector(
-					    '[data-functional-selector="question-index-counter"]',
-					  )
-					  ?.textContent
-					  ?.match(/\d+/g) ?? []
+        const [currentQuestion, totalQuestions] = document
+          .querySelector(
+            '[data-functional-selector="question-index-counter"]',
+          )
+          ?.textContent
+          ?.match(/\d+/g) ?? []
         presenceData.details = strings.playing
         presenceData.state = `${strings.questionNumber.replace(
           '{0}',
@@ -139,13 +137,12 @@ presence.on('UpdateData', async () => {
       }
       else if (pathname.includes('/getready')) {
         // Next question is loading
-        const [currentQuestion, totalQuestions]
-					= document
-					  .querySelector(
-					    '[data-functional-selector="question-index-counter"]',
-					  )
-					  ?.textContent
-					  ?.match(/\d+/g) ?? []
+        const [currentQuestion, totalQuestions] = document
+          .querySelector(
+            '[data-functional-selector="question-index-counter"]',
+          )
+          ?.textContent
+          ?.match(/\d+/g) ?? []
         presenceData.details = strings.questionLoading
         presenceData.state = `${strings.questionNumber.replace(
           '{0}',
@@ -286,8 +283,7 @@ presence.on('UpdateData', async () => {
             '[data-functional-selector="correct-count-gold"]',
           )
           if (correctCount) {
-            const [correct, total]
-							= correctCount.textContent?.match(/\d+/g) ?? []
+            const [correct, total] = correctCount.textContent?.match(/\d+/g) ?? []
             presenceData.state = strings.questionsCorrect.replace(
               '{0}',
               strings.of
@@ -320,8 +316,7 @@ presence.on('UpdateData', async () => {
             }
             else {
               // Question is in progress
-              const [currentQuestion, totalQuestions]
-								= questionCounter.textContent?.split('/') ?? []
+              const [currentQuestion, totalQuestions] = questionCounter.textContent?.split('/') ?? []
               presenceData.details = strings.questionShowing
               presenceData.state = `${strings.questionNumber.replace(
                 '{0}',
