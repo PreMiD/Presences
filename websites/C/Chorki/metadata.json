@@ -7,8 +7,8 @@
   },
   "service": "Chorki",
   "description": {
-    "en": "Chorki - Bangladeshi streaming platform for original shows and movies",
-    "bn": "চরকি - বাংলাদেশী ওয়েব সিরিজ এবং সিনেমার স্ট্রিমিং প্ল্যাটফর্ম"
+    "bn": "চরকি - বাংলাদেশী ওয়েব সিরিজ এবং সিনেমার স্ট্রিমিং প্ল্যাটফর্ম",
+    "en": "Chorki - Bangladeshi streaming platform for original shows and movies"
   },
   "url": "www.chorki.com",
   "version": "1.0.0",
